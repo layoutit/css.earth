@@ -41,8 +41,6 @@ test("generates all shared title assets once from checked source vectors", async
     assert.deepEqual(await readFile(resolve(publicRoot, descriptor.file)), source);
     const prepared = requireRecord(Reflect.get(PREPARED_SHELL_TITLES, descriptor.key), 'prepared shell title');
     assert.equal(prepared.inputSha256, sha256(source));
-    assert.equal(prepared.sourceSha256,
-      SHELL_TITLE_SOURCES.font.sourceSha256);
     assert.equal(prepared.fontSize, 17);
   }
 });
@@ -72,7 +70,6 @@ test("normalizes every implemented planet title to the complete Saturn standard"
       "letterSpacing",
       "baseline",
       "xOrigin",
-      "sourceSha256",
       "sourceGenerator",
     ] as const) {
       assert.equal(prepared[field], PLANET_TITLE_RECIPE[field],

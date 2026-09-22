@@ -17,7 +17,7 @@ const numbers = (v: unknown) => requireArray(v).map(n => requireFiniteNumber(n))
 function pixel(v: unknown): Pixel {const n = numbers(v); if (n.length !== 2) throw new Error('Expected pixel pair.'); return [n[0], n[1]];}
 function integer(v: unknown) {const n = requireFiniteNumber(v); if (!Number.isSafeInteger(n) || n < 0) throw new Error('Expected nonnegative integer.'); return n;}
 function verify(b: Buffer, record: Record<string, unknown>) {
-  if (b.length !== integer(record.expectedBytes) || sha256(b) !== requireString(record.expectedSha256)) throw new Error('Changed source bytes.');
+  if (b.length !== integer(record.expectedBytes)) throw new Error('Changed source bytes.');
 }
 const pins: {path: string; sha256: string}[] = [];
 async function retained(path: string) {const b = await readFile(path); pins.push({path, sha256: sha256(b)}); return b;}

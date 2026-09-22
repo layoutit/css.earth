@@ -26,7 +26,6 @@
   "name": "sun_reference_stis_002.fits",
   "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/sun_reference_stis_002.fits",
   "bytes": 37440,
-  "sha256": "20133cdf2a402655e3726de6b334bf09d05c9429ebd27ebf5492dc37fc89cfd8",
   "wavelengthColumn": "WAVELENGTH",
   "fluxColumn": "FLUX",
   "note": "CALSPEC sun_reference_stis_002, Colina, Bohlin & Castelli (1996), AJ 112, 307, with Bohlin, Dickinson & Calzetti (2001), AJ 122, 2118; 4100-8700 A from Neckel & Labs (1984) and 1195-4100 A from Woods et al. (1996). Sampled every 10.0 A through the visible, close to the 9 A this grating resolves. The paper divided by ASTM E-490, which this repository does not hold; this is this repository's choice of solar reference and any mismatch between it and the true solar spectrum is the same in every row, so it moves the whole map by one amount rather than changing its shape."
@@ -160,7 +159,6 @@
    "name": "od9l12010_x2d.fits",
    "uri": "mast:HST/product/od9l12010_x2d.fits",
    "bytes": 3139200,
-   "sha256": "7bc15b70d112056c4c063a9890be87be0a060232e65a2ebf674bf12963fa2e20",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -168,7 +166,6 @@
    "name": "od9l12020_x2d.fits",
    "uri": "mast:HST/product/od9l12020_x2d.fits",
    "bytes": 3139200,
-   "sha256": "3398af1150591842bd3672dbfd09245f5e929fe875db15b783fbf07e7da63f3c",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -176,7 +173,6 @@
    "name": "od9l12030_x2d.fits",
    "uri": "mast:HST/product/od9l12030_x2d.fits",
    "bytes": 3139200,
-   "sha256": "29b1d0e2056fa2a198cd72f1143376cd4592c051dbdc5e4e07aadd4516a9ae63",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -184,7 +180,6 @@
    "name": "od9l12040_x2d.fits",
    "uri": "mast:HST/product/od9l12040_x2d.fits",
    "bytes": 3139200,
-   "sha256": "9b69692069d2647d2e5adb6948e21c8a045117502cb6344ffc1f1e2027617012",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -192,7 +187,6 @@
    "name": "od9l12050_x2d.fits",
    "uri": "mast:HST/product/od9l12050_x2d.fits",
    "bytes": 3139200,
-   "sha256": "88d5d5c6c273b1dca004a1271087126261e11439643e33eb327d7e3fb3e42f82",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -200,7 +194,6 @@
    "name": "od9l12060_x2d.fits",
    "uri": "mast:HST/product/od9l12060_x2d.fits",
    "bytes": 3139200,
-   "sha256": "f18d4d64f7fd1be3ee7a9f5c5deb7e31869fd18a77e0a89ca0ae39d0f5d9ef16",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -208,7 +201,6 @@
    "name": "od9l12070_x2d.fits",
    "uri": "mast:HST/product/od9l12070_x2d.fits",
    "bytes": 3139200,
-   "sha256": "db84c6378933c88bafe80322ab300ef5ea2904c1b953b4415048918462d8f60b",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -216,7 +208,6 @@
    "name": "od9l12080_x2d.fits",
    "uri": "mast:HST/product/od9l12080_x2d.fits",
    "bytes": 3139200,
-   "sha256": "594f09ed1a1b2d03dc9a0cde9b156ffb1bb1bf9b6a9c1be3ac11bbfcecda05bd",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -224,7 +215,6 @@
    "name": "od9l12090_x2d.fits",
    "uri": "mast:HST/product/od9l12090_x2d.fits",
    "bytes": 3139200,
-   "sha256": "4c439f69b8a0dcdc82e1435c78f7e353296afc6df08b594bda62c192b2743be4",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -232,7 +222,6 @@
    "name": "od9l120a0_x2d.fits",
    "uri": "mast:HST/product/od9l120a0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "2adbdcbcf0ea75009460030c27af7170f703b8336a210dfca806e35547d90e73",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -240,7 +229,6 @@
    "name": "od9l120b0_x2d.fits",
    "uri": "mast:HST/product/od9l120b0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "5d0ff3cb0aee8c16d56ea72ec8c12f48c7fe605979551a6790c3369132c2e67b",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -248,7 +236,6 @@
    "name": "od9l120c0_x2d.fits",
    "uri": "mast:HST/product/od9l120c0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "06b90b9626d0cee0952fe4eb0a3a1d449ed31396902c440b1102c2c691650f1e",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -256,7 +243,6 @@
    "name": "od9l120d0_x2d.fits",
    "uri": "mast:HST/product/od9l120d0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "ae11a17efc0d35b3a01b33bd385ec5eba05f92ab420a9fb8e23764bf49581df3",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -264,7 +250,6 @@
    "name": "od9l120e0_x2d.fits",
    "uri": "mast:HST/product/od9l120e0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "8713422f3da8d5b1e51d21d9c7f8956eea3a48bbcdec0dac7eb255610c5cb9e4",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -272,7 +257,6 @@
    "name": "od9l120f0_x2d.fits",
    "uri": "mast:HST/product/od9l120f0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "0ea53c163f6570577731f7fb14e3a6ef25fb23f4e4d7f3974889e1df3062e540",
    "programme": "14650",
    "targetName": "EUROPA-45"
   },
@@ -280,7 +264,6 @@
    "name": "od9l13010_x2d.fits",
    "uri": "mast:HST/product/od9l13010_x2d.fits",
    "bytes": 3139200,
-   "sha256": "ecc07239c368429e68044ad50d63bb17b40ed2f23831d0bf4ec172f569d4ea08",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -288,7 +271,6 @@
    "name": "od9l13020_x2d.fits",
    "uri": "mast:HST/product/od9l13020_x2d.fits",
    "bytes": 3139200,
-   "sha256": "21b8d94a046e1f59619d1e58b374e252c0a6f8fb470631c555d8585b8a741dd7",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -296,7 +278,6 @@
    "name": "od9l13030_x2d.fits",
    "uri": "mast:HST/product/od9l13030_x2d.fits",
    "bytes": 3139200,
-   "sha256": "5d71d8282f477e706fe9fec1b56dec9958e3b13bd2ba1fc967daf90e5b5542d6",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -304,7 +285,6 @@
    "name": "od9l13040_x2d.fits",
    "uri": "mast:HST/product/od9l13040_x2d.fits",
    "bytes": 3139200,
-   "sha256": "1eecb5b925c06c58e3345034832495a3dc075262f344c1e67d887fcf3b7f3afb",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -312,7 +292,6 @@
    "name": "od9l13050_x2d.fits",
    "uri": "mast:HST/product/od9l13050_x2d.fits",
    "bytes": 3139200,
-   "sha256": "7c7ca43137682b17b5bbe180cd0474642994a38a11eb5c9027b9f1c1e893b4bb",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -320,7 +299,6 @@
    "name": "od9l13060_x2d.fits",
    "uri": "mast:HST/product/od9l13060_x2d.fits",
    "bytes": 3139200,
-   "sha256": "6d9e437d5b4124ce6eb5d2eeae179527a43f9b29265f11f7b410a623169ead0b",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -328,7 +306,6 @@
    "name": "od9l13070_x2d.fits",
    "uri": "mast:HST/product/od9l13070_x2d.fits",
    "bytes": 3139200,
-   "sha256": "6e187373e1656b19cc837853a682847793afb0ffe8f82b645c9a4769658605b1",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -336,7 +313,6 @@
    "name": "od9l13080_x2d.fits",
    "uri": "mast:HST/product/od9l13080_x2d.fits",
    "bytes": 3139200,
-   "sha256": "981c72d9075ed54cd8fb96b870077e336b32859fb7dce77165d6cbea3446785a",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -344,7 +320,6 @@
    "name": "od9l13090_x2d.fits",
    "uri": "mast:HST/product/od9l13090_x2d.fits",
    "bytes": 3139200,
-   "sha256": "a0d190a5a45d812262951a1f501550e867bdb2b5afe17e79870143703097dfc8",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -352,7 +327,6 @@
    "name": "od9l130a0_x2d.fits",
    "uri": "mast:HST/product/od9l130a0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "386b2f936f62d1ebf47d8289c5d6568f30865f54458517ff71a301e756c39fd3",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -360,7 +334,6 @@
    "name": "od9l130b0_x2d.fits",
    "uri": "mast:HST/product/od9l130b0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "fe469fc4159f8d5f485bb6693e782e5c272d302f6f5be2ea8c3d0652fc093ec4",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -368,7 +341,6 @@
    "name": "od9l130c0_x2d.fits",
    "uri": "mast:HST/product/od9l130c0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "d227aa1289ff10219304af16d4d6382f198fd3258b89c2a29c8d366e253eb0c8",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -376,7 +348,6 @@
    "name": "od9l130d0_x2d.fits",
    "uri": "mast:HST/product/od9l130d0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "d6ff414046db37db746a956472d5e1ca6e8b7eaed00d95ed24c84f6b0c9e4132",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -384,7 +355,6 @@
    "name": "od9l130e0_x2d.fits",
    "uri": "mast:HST/product/od9l130e0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "44846b9e9a074af0a358513eee0ee876f1864b2614706bea5f7493e7925b09f2",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -392,7 +362,6 @@
    "name": "od9l130f0_x2d.fits",
    "uri": "mast:HST/product/od9l130f0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "3fc0beba7b51ed0b0ef0e5715fa85390bdfe3baabf61656bb210790de120648d",
    "programme": "14650",
    "targetName": "EUROPA-135"
   },
@@ -400,7 +369,6 @@
    "name": "od9l14010_x2d.fits",
    "uri": "mast:HST/product/od9l14010_x2d.fits",
    "bytes": 3139200,
-   "sha256": "2524cd2432eaccadfb7eca27f8972a1676c7b66fe40295ab78bf09f8c0c7ca3a",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -408,7 +376,6 @@
    "name": "od9l14020_x2d.fits",
    "uri": "mast:HST/product/od9l14020_x2d.fits",
    "bytes": 3139200,
-   "sha256": "0b2402848f61cf5ed89c935d927410f23efdf1e5ca1e3bbee7ee648cd2e7e02d",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -416,7 +383,6 @@
    "name": "od9l14030_x2d.fits",
    "uri": "mast:HST/product/od9l14030_x2d.fits",
    "bytes": 3139200,
-   "sha256": "58adde5eeaa8373c175e71a98bfbfc696f043ceef1f410782d09711d34afb54d",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -424,7 +390,6 @@
    "name": "od9l14040_x2d.fits",
    "uri": "mast:HST/product/od9l14040_x2d.fits",
    "bytes": 3139200,
-   "sha256": "538f01496c3a26fdaacd6f35559b528f231ea8f7aa49f888dbf089f20c75b18e",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -432,7 +397,6 @@
    "name": "od9l14050_x2d.fits",
    "uri": "mast:HST/product/od9l14050_x2d.fits",
    "bytes": 3139200,
-   "sha256": "f248f8a8e6887531d0a4cfff9ccace275986f2db5d48ed0d91cc4bcd6282063f",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -440,7 +404,6 @@
    "name": "od9l14060_x2d.fits",
    "uri": "mast:HST/product/od9l14060_x2d.fits",
    "bytes": 3139200,
-   "sha256": "7978bf09eefc80ed32b8f64bb1a4e64d8d117428c5d768148577d79e418136e0",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -448,7 +411,6 @@
    "name": "od9l14070_x2d.fits",
    "uri": "mast:HST/product/od9l14070_x2d.fits",
    "bytes": 3139200,
-   "sha256": "4658c721e32df088c361ccafb0a98cc09f0f33d1e29671db80fd900ccbd9cc88",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -456,7 +418,6 @@
    "name": "od9l14080_x2d.fits",
    "uri": "mast:HST/product/od9l14080_x2d.fits",
    "bytes": 3139200,
-   "sha256": "ef7f3b79431d1a6fea4fc7e91466c8bac3786ed5afe9cde3519cd8946cbb3a01",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -464,7 +425,6 @@
    "name": "od9l14090_x2d.fits",
    "uri": "mast:HST/product/od9l14090_x2d.fits",
    "bytes": 3139200,
-   "sha256": "437059d1cfe5e71387b201b41a88a66cd7fa18749e243a23f5d75150dc0736f7",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -472,7 +432,6 @@
    "name": "od9l140a0_x2d.fits",
    "uri": "mast:HST/product/od9l140a0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "d181b646db3587584608a5393e7e2d36ea1c7ac31854c09375946da03ffc0b78",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -480,7 +439,6 @@
    "name": "od9l140b0_x2d.fits",
    "uri": "mast:HST/product/od9l140b0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "488ef2eed325332775a65a03ef52580b166cb337711cdb194ca215d15382e2f0",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -488,7 +446,6 @@
    "name": "od9l140c0_x2d.fits",
    "uri": "mast:HST/product/od9l140c0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "da679493b85a1252d0ed878357cb1a8031508bc6af8ef6315e45b4e6bd452f4a",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -496,7 +453,6 @@
    "name": "od9l140d0_x2d.fits",
    "uri": "mast:HST/product/od9l140d0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "3f82ccce2be0ff7fe05eee9fdff68d224570cb48b99c3a23d24fab07729349d2",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -504,7 +460,6 @@
    "name": "od9l140e0_x2d.fits",
    "uri": "mast:HST/product/od9l140e0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "f4d98cbd9ed190539e846b2710f64e9f190c785db3492423eafbffe433201cd5",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -512,7 +467,6 @@
    "name": "od9l140f0_x2d.fits",
    "uri": "mast:HST/product/od9l140f0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "b72e7b78f8176a5623e411d288195bf3695f528926f8e789b026e2ff349e387e",
    "programme": "14650",
    "targetName": "EUROPA-225"
   },
@@ -520,7 +474,6 @@
    "name": "od9l15010_x2d.fits",
    "uri": "mast:HST/product/od9l15010_x2d.fits",
    "bytes": 3139200,
-   "sha256": "217e2dd1488f4d32d33c614a8af43d188e41a0040aebcf575d7e6fef27912a7f",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -528,7 +481,6 @@
    "name": "od9l15020_x2d.fits",
    "uri": "mast:HST/product/od9l15020_x2d.fits",
    "bytes": 3139200,
-   "sha256": "839bec5cd4d39285531ad333b670ca84c5b7c2c3e2234bbb16d0500e27fa1b23",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -536,7 +488,6 @@
    "name": "od9l15030_x2d.fits",
    "uri": "mast:HST/product/od9l15030_x2d.fits",
    "bytes": 3139200,
-   "sha256": "9f0d0698aa010f4715456e1728a303a60f5a154c7c6887c4753661dfa1a618b1",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -544,7 +495,6 @@
    "name": "od9l15040_x2d.fits",
    "uri": "mast:HST/product/od9l15040_x2d.fits",
    "bytes": 3139200,
-   "sha256": "e15a3faa0332bb3b2967bc82fd5c4ca34be9384923a92538123a43f40335e1e0",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -552,7 +502,6 @@
    "name": "od9l15050_x2d.fits",
    "uri": "mast:HST/product/od9l15050_x2d.fits",
    "bytes": 3139200,
-   "sha256": "4a75f6e58525ec44f7d32af7e01055c27fd5bee53e067f0f9318278930b45e2d",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -560,7 +509,6 @@
    "name": "od9l15060_x2d.fits",
    "uri": "mast:HST/product/od9l15060_x2d.fits",
    "bytes": 3139200,
-   "sha256": "250608389f709852239b90916f57950545da78d15e48565f1fa640d0cfc79b17",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -568,7 +516,6 @@
    "name": "od9l15070_x2d.fits",
    "uri": "mast:HST/product/od9l15070_x2d.fits",
    "bytes": 3139200,
-   "sha256": "f4aa65dd4b634829e405c866a3b295b75ea0c42c97af811b5c4c2c2f2cb55bde",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -576,7 +523,6 @@
    "name": "od9l15080_x2d.fits",
    "uri": "mast:HST/product/od9l15080_x2d.fits",
    "bytes": 3139200,
-   "sha256": "78a5d3a9ee6046e1dc7e5b4574fae806317f481d1301991bbb9c4ec322d0ebda",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -584,7 +530,6 @@
    "name": "od9l15090_x2d.fits",
    "uri": "mast:HST/product/od9l15090_x2d.fits",
    "bytes": 3139200,
-   "sha256": "ec2b847a154795ba3935e1d25e3c8836d13f020661e34a407c0af189f1d0d218",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -592,7 +537,6 @@
    "name": "od9l150a0_x2d.fits",
    "uri": "mast:HST/product/od9l150a0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "baa77f20274c97331fc816876e881fa81190870ee208d6e7b6468e2c5d3e474e",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -600,7 +544,6 @@
    "name": "od9l150b0_x2d.fits",
    "uri": "mast:HST/product/od9l150b0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "b58a125f863e1f29be5b38672f0bf1689c13c60a15cc96936a47a07679ae8ebf",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -608,7 +551,6 @@
    "name": "od9l150c0_x2d.fits",
    "uri": "mast:HST/product/od9l150c0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "38b84fbddef1807e379caf9af6c1e7742fe547ea76e1c7647a66d9c120d1140c",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -616,7 +558,6 @@
    "name": "od9l150d0_x2d.fits",
    "uri": "mast:HST/product/od9l150d0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "2788943d1a9fc0f1c262d8fa5e0d647ff3094b52153ea06c83d9d370cbe2f8e3",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -624,7 +565,6 @@
    "name": "od9l150e0_x2d.fits",
    "uri": "mast:HST/product/od9l150e0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "3eaa3d94209246a23130a3d7abe640703dbd1467a1988a72b3ed1c258ae44476",
    "programme": "14650",
    "targetName": "EUROPA-315"
   },
@@ -632,7 +572,6 @@
    "name": "od9l150f0_x2d.fits",
    "uri": "mast:HST/product/od9l150f0_x2d.fits",
    "bytes": 3139200,
-   "sha256": "b24887305cb47a5e8edf163ed51209f897bb33b9d86e1406d5454145a35c0b3b",
    "programme": "14650",
    "targetName": "EUROPA-315"
   }

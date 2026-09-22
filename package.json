@@ -13,6 +13,7 @@
     "build:deploy": "pnpm build:tools && pnpm setup:asset-data && node tools/assets/restore-object-json.mts && node tools/prepare/prepare-factsheets.mts --quiet && node tools/prepare/prepare-provenance.mts --objects-only && node tools/prepare/prepare-feature-index.mts && pnpm prepare:environment-images && node tools/nebula/prepare.mts --if-missing && pnpm prepare:minimap && node tools/prepare/prepare-facilities.mts --catalog-only && astro build && node tools/prepare/build-catalogue-fragment.mts && pnpm assemble:planets",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
+    "build:objects": "pnpm --filter @cssearth/objects build",
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
     "build:preparation:bundle": "pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
     "build:renderer": "pnpm --filter @cssearth/engine exec tsup --config ../../src/renderers/css/tsup.config.ts",

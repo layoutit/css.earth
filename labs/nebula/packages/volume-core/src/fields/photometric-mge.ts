@@ -17,8 +17,8 @@ export interface PhotometricMgeRecipe {
   lineOfSightTiltSign: 1 | -1;
   cutoffSigma: number;
   gaussians: PhotometricGaussian[];
-  evidence: { path: string; sha256: string };
-  source: { url: string; sha256: string; locator: string };
+  evidence: { path: string };
+  source: { url: string; locator: string };
   interpretation: string;
   envelope?: SimulationEnvelopeSettings;
   /** Authored finite residual fit budget; omitted retains the historical compiler control. */
@@ -37,12 +37,10 @@ export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
       typeof value.lineOfSightTiltSign !== 'number' || !between(value.cutoffSigma, 4, 8) ||
       !Array.isArray(value.gaussians) || value.gaussians.length < 1 || value.gaussians.length > 128 ||
       !jointRecord(value.evidence) || !jointPath(value.evidence.path) ||
-      typeof value.evidence.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.evidence.sha256) ||
       !jointRecord(value.source) || typeof value.source.url !== 'string' || !value.source.url.startsWith('https://') ||
-      typeof value.source.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.source.sha256) ||
       typeof value.source.locator !== 'string' || !value.source.locator.trim() ||
       typeof value.interpretation !== 'string' || !value.interpretation.trim())
-    throw new TypeError('Invalid pinned photometric MGE recipe.');
+    throw new TypeError('Invalid photometric MGE recipe.');
   if (value.residualMaximumComponents !== undefined && (!between(value.residualMaximumComponents, 16, 8192) || !Number.isInteger(value.residualMaximumComponents)))
     throw new TypeError('Invalid photometric residual component budget.');
   const cosSquared = Math.cos(value.inclinationDegrees * Math.PI / 180) ** 2;
@@ -56,8 +54,8 @@ export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
   return { schema: value.schema, id: value.id, centerIcrsDegrees: [value.centerIcrsDegrees[0], value.centerIcrsDegrees[1]],
     distancePc: value.distancePc, positionAngleEastOfNorthDegrees: value.positionAngleEastOfNorthDegrees,
     inclinationDegrees: value.inclinationDegrees, lineOfSightTiltSign: value.lineOfSightTiltSign === 1 ? 1 : -1,
-    cutoffSigma: value.cutoffSigma, gaussians, evidence: { path: value.evidence.path, sha256: value.evidence.sha256 },
-    source: { url: value.source.url, sha256: value.source.sha256, locator: value.source.locator }, interpretation: value.interpretation,
+    cutoffSigma: value.cutoffSigma, gaussians, evidence: { path: value.evidence.path },
+    source: { url: value.source.url, locator: value.source.locator }, interpretation: value.interpretation,
     ...(value.envelope === undefined ? {} : { envelope: validateEnvelopeSettings(value.envelope) }),
     ...(value.residualMaximumComponents === undefined ? {} : { residualMaximumComponents: value.residualMaximumComponents }) };
 }

@@ -1,21 +1,17 @@
-import { sha256 } from './sha256.mts';
 import { isArray } from './is-array.mts';
 import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
 /** One byte range of a remote member, for archive files too large to keep whole. The pin covers exactly the kept bytes. */
 export interface SourceRange { offset: number; length: number; }
-/** A pin identifies bytes git does not hold: a download, or an archive member. A file authored in this repository carries none; git is its record. */
-export interface SourceEntry { path: string; expectedBytes?: number; expectedSha256?: string; range?: SourceRange; sourceBinding?: SourceBinding; }
+/** A declared source file. Git holds authored files; a download is fetched by its origin. Nothing here carries a hash. */
+export interface SourceEntry { path: string; range?: SourceRange; sourceBinding?: SourceBinding; }
 export interface SourceInput extends SourceEntry { id: string; origin: string; credit: string; license: string; acquisition: string; redistribution: string; consumers: readonly string[]; licenseEvidence?: readonly string[]; sourceBinding: SourceBinding; }
 export interface SourceManifest { schema: string; inputs: readonly SourceInput[]; generatedIntermediates: readonly (SourceEntry & { generator: string })[]; documents: readonly (SourceEntry & { purpose?: string })[]; }
 export interface SourceManifestLocation { planetId: string; planetName: string; sourceRoot: string; }
 export interface SourceVerification { entry: SourceEntry; planetName: string; sourceRoot: string; }
-import { createHash } from "node:crypto";
-import { createReadStream } from "node:fs";
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import { posix, relative, resolve, win32 } from "node:path";
 
-const SHA256 = /^[0-9a-f]{64}$/u;
 const COLLECTIONS = Object.freeze([
   "inputs",
   "generatedIntermediates",
@@ -47,9 +43,7 @@ export async function createSourceManifest({ planetId, planetName, sourceRoot }:
     },
     async validateGroup(consumer: string) {
       const entries = this.inputsFor(consumer);
-      for (const entry of entries) {
-        await validateSourceEntry({ entry, planetName, sourceRoot });
-      }
+      for (const entry of entries) await validateSourceEntry({ entry, planetName, sourceRoot });
       return entries;
     },
     async validatePath(sourcePath: string) {
@@ -66,12 +60,7 @@ export async function createSourceManifest({ planetId, planetName, sourceRoot }:
       if (normalized.startsWith("/") || normalized.split("/").includes("..")) throw new Error(`${planetName} source path escapes the package: ${normalized}.`);
       const entry = inputsByPath.get(normalized);
       if (!entry) throw new Error(`${planetName} source is not declared: ${normalized}.`);
-      const bytes = await readFile(resolve(sourceRoot, normalized));
-      assertSourceBytes({ entry, bytes, planetName });
-      return bytes;
-    },
-    assertBytes(entry: SourceEntry, bytes: Uint8Array) {
-      return assertSourceBytes({ entry, bytes, planetName });
+      return readFile(resolve(sourceRoot, normalized));
     },
     verify() {
       return verifySourceManifest({ manifest, planetName, sourceRoot });
@@ -156,22 +145,13 @@ export async function verifySourceManifest({ manifest, planetName, sourceRoot }:
   const actual = new Set((await walk(sourceRoot))
     .map((filePath) => relative(sourceRoot, filePath).replaceAll("\\", "/"))
     .filter((sourcePath) => sourcePath !== "manifest.json"));
-  const placeholders = new Set(manifest.generatedIntermediates.filter((entry) => isPlaceholderDigest(entry.expectedSha256)).map((entry) => entry.path));
   const undeclared = [...actual].filter((sourcePath) => !declared.has(sourcePath));
-  const missing = [...declared].filter((sourcePath) => !actual.has(sourcePath) && !placeholders.has(sourcePath));
+  const missing = [...declared].filter((sourcePath) => !actual.has(sourcePath));
   if (undeclared.length > 0 || missing.length > 0) {
     throw new Error(
       `${planetName} source manifest coverage failed. Undeclared: ${
         undeclared.join(", ") || "none"}. Missing: ${missing.join(", ") || "none"}.`,
     );
-  }
-  for (const collection of COLLECTIONS) {
-    for (const entry of manifest[collection]) {
-      // A generated intermediate pinned with an all-zero digest is declared but not yet produced: preparation writes it and
-      // reports the pin to record. Nothing else may carry a placeholder.
-      if (collection === "generatedIntermediates" && isPlaceholderDigest(entry.expectedSha256)) continue;
-      await validateSourceEntry({ entry, planetName, sourceRoot });
-    }
   }
   return Object.freeze({
     inputCount: manifest.inputs.length,
@@ -179,31 +159,6 @@ export async function verifySourceManifest({ manifest, planetName, sourceRoot }:
     documentCount: manifest.documents.length,
   });
 }
-
-export function assertSourceBytes({ entry, bytes, planetName }: { entry: SourceEntry; bytes: Uint8Array; planetName: string }) {
-  return assertSourceDigest({ entry, size: bytes.byteLength,
-    actual: sha256(bytes), planetName });
-}
-
-function assertSourceDigest({ entry, size, actual, planetName }: { entry: SourceEntry; size: number; actual: string; planetName: string }) {
-  // A file authored in this repository has no pin; its bytes on disk are the record.
-  if (entry.expectedSha256 === undefined) return actual;
-  if (size !== entry.expectedBytes) {
-    throw new Error(
-      `${planetName} source size drifted for ${entry.path}: expected ${
-        entry.expectedBytes}, received ${size}.`,
-    );
-  }
-  if (actual !== entry.expectedSha256) {
-    throw new Error(
-      `${planetName} source hash drifted for ${entry.path}: expected ${
-        entry.expectedSha256}, received ${actual}.`,
-    );
-  }
-  return actual;
-}
-
-export const isPlaceholderDigest = (digest: string | undefined) => digest !== undefined && /^0{64}$/u.test(digest);
 
 /** A ranged input asks for exactly its pinned bytes. Acquisition owns the request; this owns what the request must say. */
 export const rangeRequestHeader = (range: SourceRange) => `bytes=${range.offset}-${range.offset + range.length - 1}`;
@@ -231,22 +186,12 @@ export function assertRangeResponse(
 }
 
 async function validateSourceEntry({ entry, planetName, sourceRoot }: SourceVerification) {
-  // Original scientific rasters can be hundreds of MB. Verification requires
-  // their bytes and digest, not a resident copy of every source file.
-  const digest = createHash("sha256");
-  let size = 0;
-  for await (const chunk of createReadStream(resolve(sourceRoot, entry.path))) {
-    size += chunk.length;
-    digest.update(chunk);
-  }
-  assertSourceDigest({ entry, size, actual: digest.digest("hex"), planetName });
+  await access(resolve(sourceRoot, entry.path)).catch(() => { throw new Error(`${planetName} source is missing: ${entry.path}.`); });
 }
 
 function validateEntryBase(planetId: string, entry: SourceEntry, kind: string, paths: Set<string>) {
   if (!entry || typeof entry !== "object" || isArray(entry) ||
-      !safeRelativePath(entry.path) || (entry.expectedBytes === undefined) !== (entry.expectedSha256 === undefined) ||
-      entry.expectedBytes !== undefined && (!Number.isSafeInteger(entry.expectedBytes) || entry.expectedBytes <= 0) ||
-      entry.expectedSha256 !== undefined && !SHA256.test(entry.expectedSha256)) {
+      !safeRelativePath(entry.path)) {
     throw new TypeError(`Planet ${planetId} has an invalid source ${kind}.`);
   }
   if (paths.has(entry.path)) {
@@ -260,15 +205,14 @@ function validateEntryBase(planetId: string, entry: SourceEntry, kind: string, p
  * An input may pin one byte range of a remote member instead of the whole file: acquisition asks for exactly those
  * bytes and the pin covers exactly those bytes, so local verification keeps streaming the local file unchanged.
  */
-export function assertSourceRange(entry: { path: string; expectedBytes?: number; range?: SourceRange; origin?: string }, label: string) {
+export function assertSourceRange(entry: { path: string; range?: SourceRange; origin?: string }, label: string) {
   const range = entry.range;
   if (range === undefined) return;
   if (!range || typeof range !== "object" || isArray(range) ||
       Object.keys(range).some((key) => !["offset", "length"].includes(key)) ||
       !Number.isSafeInteger(range.offset) || range.offset < 0 ||
       !Number.isSafeInteger(range.length) || range.length <= 0 ||
-      !Number.isSafeInteger(range.offset + range.length) ||
-      range.length !== entry.expectedBytes) {
+      !Number.isSafeInteger(range.offset + range.length)) {
     throw new TypeError(`${label} has an invalid byte range.`);
   }
   if (!nonEmpty(entry.origin) || !/^https?:\/\//u.test(entry.origin)) {

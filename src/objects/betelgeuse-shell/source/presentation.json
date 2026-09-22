@@ -4,34 +4,24 @@
   "name": "Betelgeuse dust shell",
   "defaultLens": "zimpol-v",
   "bank": {
-    "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "5629c5d71558a3eee6df5d40683c8724dc0ccffa663d71a61159e53c7f77d9c4",
-    "bytes": 375896
+    "path": "src/objects/betelgeuse-shell/prepared/lenses.json"
   },
   "recipes": [
     {
       "id": "zimpol-v",
-      "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "9f4896c3cf7602d3beb49daab887dc2966772a04a8a94ab75da2b7f198293539",
-      "bytes": 1838
+      "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json"
     },
     {
       "id": "veil-2019-12",
-      "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "aa230dc95509b0fa4f1fe82e70a65d2c87c4dd0d45ac55444bd1be0d67f6a995",
-      "bytes": 1523
+      "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json"
     },
     {
       "id": "emission-2020",
-      "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
-      "sha256": "e39e5a0b7a8058aeb285285f562fb7d1d84a1a345a35ac9dd1543e186c31ba5e",
-      "bytes": 1830
+      "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json"
     },
     {
       "id": "sio-2023",
-      "path": "src/objects/betelgeuse-shell/source/volume-sio-2023.json",
-      "sha256": "0ec76e2a9bba305a7f2084647edaf044c29bf66bb30a09c880d21e6335c97844",
-      "bytes": 1839
+      "path": "src/objects/betelgeuse-shell/source/volume-sio-2023.json"
     }
   ],
   "sharedInputs": [],
@@ -74,8 +64,6 @@
       "input": "sphere-zimpol-betelgeuse-p1-v-dolp",
       "preview": {
         "path": "src/objects/betelgeuse-shell/source/previews/aa61023-26-fig3.jpg",
-        "sha256": "016094a65ecf21a125dc9e4f45625ecf4edf97ddfaa10cd9b955d64bb5cc3292",
-        "bytes": 323819,
         "url": "https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg"
       }
     },
@@ -116,8 +104,6 @@
       "input": "veil-2019-12-parameters",
       "preview": {
         "path": "src/objects/betelgeuse-shell/source/previews/eso2109a.jpg",
-        "sha256": "dc91807cd8b41719cc7e4cc310c99082d9ad02c49a08b51155bb00be2d1fbf17",
-        "bytes": 45713,
         "url": "https://cdn.eso.org/images/screen/eso2109a.jpg",
         "crop": {
           "left": 320,
@@ -164,8 +150,6 @@
       "input": "matisse-2020-02-continuum-4mas",
       "preview": {
         "path": "src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png",
-        "sha256": "250e938fdd00b7867332e7348ae0805b3cacf6d07d60ca9918d75a3f3856356a",
-        "bytes": 5621,
         "authoredFrom": "matisse-2020-02-continuum-4mas"
       }
     },
@@ -213,8 +197,6 @@
       ],
       "preview": {
         "path": "src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png",
-        "sha256": "9c4fcc9406211abccf8c807ef3ef29fbad264fd395606af9f357cd82c9df7ecc",
-        "bytes": 3977,
         "authoredFrom": "alma-sio-v0-5-4-2023-08"
       }
     }

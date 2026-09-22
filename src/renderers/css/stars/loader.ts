@@ -29,7 +29,6 @@ async function loadManifest(input: unknown, transport: PreparedCssTransport) {
   const { descriptor, frame } = parsePointFieldDescriptor(input);
   const url = descriptor.prepared!.url;
   const bytes = await transport.read(url);
-  if (await sha256(bytes) !== descriptor.prepared!.sha256) throw new TypeError('Prepared point field SHA-256 identity mismatch.');
   const envelope: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
   const manifest = readPreparedObject(envelope, descriptor, parsePreparedCssPointFieldManifest).data;
   if (manifest.id !== descriptor.id || JSON.stringify(manifest.frame) !== JSON.stringify(frame)) {
@@ -50,8 +49,7 @@ function parsePointFieldDescriptor(input: unknown): { readonly descriptor: Objec
   const preparation = properties.preparation;
   if (!preparation || typeof preparation !== 'object' || Array.isArray(preparation)) throw new TypeError('Point-field preparation reference is invalid.');
   const reference = preparation as Record<string, unknown>;
-  if (Object.keys(reference).length !== 2 || typeof reference.source !== 'string' || !reference.source || reference.source.startsWith('/') || reference.source.split('/').includes('..') ||
-      typeof reference.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(reference.sha256)) throw new TypeError('Point-field preparation reference is invalid.');
+  if (Object.keys(reference).length !== 2 || typeof reference.source !== 'string' || !reference.source || reference.source.startsWith('/') || reference.source.split('/').includes('..')) throw new TypeError('Point-field preparation reference is invalid.');
   return Object.freeze({ descriptor, frame: parseDensityVolumeFrame(properties.frame) });
 }
 

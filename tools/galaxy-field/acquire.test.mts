@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -17,7 +16,6 @@ function pinnedUrl(query: string): string {
 
 const QUERY = 'SELECT PGC FROM "fixture"';
 const TSV = 'PGC\tVal\n1\t2\n'; // header + 1 data row
-const SHA256 = createHash('sha256').update(TSV).digest('hex');
 const BYTES = Buffer.byteLength(TSV);
 
 async function fixtureRoot() {
@@ -28,7 +26,7 @@ async function fixtureRoot() {
     sources: [{
       id: 'fixture-catalogue', catalogue: 'fixture/table', citation: 'Fixture et al.', doi: 'https://doi.org/fixture',
       query: QUERY, path: '.local/galaxy-field/sources/fixture-catalogue.tsv', url: pinnedUrl(QUERY),
-      sha256: SHA256, bytes: BYTES, rows: 1,
+      bytes: BYTES, rows: 1,
     }],
   }));
   return root;
@@ -69,7 +67,7 @@ test('with a mirror origin, the mirror is tried first and VizieR is never contac
     if (String(url).includes('tapvizier')) throw new Error('must not reach VizieR when the mirror hits');
     return new Response(TSV, { status: 200 });
   } });
-  assert.deepEqual(requested, [sourceCacheUrl(MIRROR_ORIGIN, SHA256, 'fixture-catalogue.tsv')]);
+  assert.deepEqual(requested, [sourceCacheUrl(MIRROR_ORIGIN, 'galaxy-field', 'fixture-catalogue.tsv')]);
   assert.equal(await readFile(resolve(root, '.local/galaxy-field/sources/fixture-catalogue.tsv'), 'utf8'), TSV);
 });
 
@@ -82,7 +80,7 @@ test('a mirror miss (404) falls back to VizieR, which stays the recorded provena
     if (String(url).includes('tapvizier')) return new Response(TSV, { status: 200 });
     return new Response(null, { status: 404 });
   } });
-  assert.deepEqual(requested, [sourceCacheUrl(MIRROR_ORIGIN, SHA256, 'fixture-catalogue.tsv'), pinnedUrl(QUERY)]);
+  assert.deepEqual(requested, [sourceCacheUrl(MIRROR_ORIGIN, 'galaxy-field', 'fixture-catalogue.tsv'), pinnedUrl(QUERY)]);
   assert.equal(await readFile(resolve(root, '.local/galaxy-field/sources/fixture-catalogue.tsv'), 'utf8'), TSV);
 });
 
@@ -95,7 +93,7 @@ test('a mirror byte mismatch is never trusted and falls back to VizieR', async t
     if (String(url).includes('tapvizier')) return new Response(TSV, { status: 200 });
     return new Response('corrupted-mirror-bytes', { status: 200 });
   } });
-  assert.deepEqual(requested, [sourceCacheUrl(MIRROR_ORIGIN, SHA256, 'fixture-catalogue.tsv'), pinnedUrl(QUERY)]);
+  assert.deepEqual(requested, [sourceCacheUrl(MIRROR_ORIGIN, 'galaxy-field', 'fixture-catalogue.tsv'), pinnedUrl(QUERY)]);
   assert.equal(await readFile(resolve(root, '.local/galaxy-field/sources/fixture-catalogue.tsv'), 'utf8'), TSV);
 });
 

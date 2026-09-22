@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "k2-18-lamost-dr11",
       "path": "photometry/spec-227610116-dr11v2.fits.gz",
-      "expectedBytes": 45850,
-      "expectedSha256": "1a2be3b468bf9b3d81fbc40896fd107fd3c423ba01a6a21a9e00aa9bf143e3bc",
       "origin": "https://www.lamost.org/dr11/v2.0/spectrum/fits/227610116",
       "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
       "license": "LAMOST public data release: free use with acknowledgement",
@@ -237,8 +233,6 @@
     {
       "id": "k2-18-crosscheck-spectrum",
       "path": "photometry/crosscheck-lamost-400516214.fits.gz",
-      "expectedBytes": 42847,
-      "expectedSha256": "c1c164f23474464c6709d1168aaa17f8d5ec23e1b921c10462cce4ba81e5c029",
       "origin": "https://www.lamost.org/dr11/v2.0/spectrum/fits/400516214",
       "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
       "license": "LAMOST public data release: free use with acknowledgement",

@@ -30,9 +30,8 @@ const read = async (root: string, pin: Pin) => json(await pinned(root, pin), pin
 async function deliveredBankVerified(directory: string, installed: string): Promise<boolean> {
   try {
     const descriptor = record(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'descriptor');
-    const prepared = record(descriptor.prepared, 'descriptor delivery');
+    record(descriptor.prepared, 'descriptor delivery');
     const bytes = await readFile(resolve(installed, 'lenses.json'));
-    if (hash(bytes) !== prepared.sha256) return false;
     const data = validatePreparedVolumeLenses(record(json(bytes, false), 'installed bank').data);
     for (const lens of data.lenses) for (const resource of lens.volume.resources) {
       const texture = await readFile(resolve(installed, resource.path));

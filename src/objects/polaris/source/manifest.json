@@ -26,8 +26,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -135,8 +133,6 @@
     {
       "id": "polaris-stis-ngsl",
       "path": "photometry/h_stis_ngsl_hd008890_v2.fits",
-      "expectedBytes": 54720,
-      "expectedSha256": "61f674306190c2b7f7425d6f56de46a726c6dac1da555a6848d83ca8139f5f22",
       "origin": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd008890/h_stis_ngsl_hd008890_v2.fits",
       "credit": "NASA/STScI; STIS Next Generation Spectral Library v2 (Heap & Lindler), MAST",
       "license": "HST archive data: public, with acknowledgement",
@@ -243,8 +239,6 @@
     {
       "id": "polaris-crosscheck-spectrum",
       "path": "photometry/crosscheck-kharitonov-catalog.dat",
-      "expectedBytes": 798312,
-      "expectedSha256": "e7cc5be688f5e901665debb10a296230ab8ff59b6288c7ed5965821217b0c28d",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
       "credit": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars, Alma-Ata; VizieR III/202 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

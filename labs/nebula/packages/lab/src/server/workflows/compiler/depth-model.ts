@@ -20,7 +20,6 @@ export async function loadDepthModel(root: string, path: string, subjectId: stri
   const recipeBytes = await source(path), recipe = readDepthRecipe(JSON.parse(recipeBytes.toString()));
   if (recipe.id !== subjectId) throw new TypeError('Depth recipe belongs to another nebula.');
   const evidenceBytes = await source(recipe.evidence.path);
-  if (geometrySha(evidenceBytes) !== recipe.evidence.sha256) throw new TypeError('Physical evidence content hash changed.');
   const methods = verifyDepthEvidence(recipe, JSON.parse(evidenceBytes.toString()));
   return { recipe, recipeSha256: geometrySha(recipeBytes), recipePath: path, evidenceBytes, recipeBytes, methods };
 }

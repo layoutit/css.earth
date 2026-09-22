@@ -25,8 +25,6 @@
         "referenceRadiusMeters": 255000
       },
       "coverage": "Published crop and exactly black RGB fill; no authoritative per-pixel validity mask. Channel fringes and uncertain dark terrain are retained.",
-      "expectedBytes": 374574072,
-      "expectedSha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca",
       "capture": {
         "attributions": [
           {
@@ -70,8 +68,6 @@
         "units": "meters from body center"
       },
       "coverage": "Stereo-derived model with publisher-interpolated polar regions. No mask separates interpolated areas.",
-      "expectedBytes": 457291404,
-      "expectedSha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
       "lensId": "elevation",
       "capture": {
         "attributions": [
@@ -117,8 +113,6 @@
         "referenceRadiusMeters": 255000
       },
       "coverage": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
-      "expectedBytes": 446346023,
-      "expectedSha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
       "capture": {
         "attributions": [
           {
@@ -234,8 +228,6 @@
         "referenceRadiusMeters": 255000
       },
       "coverage": "Published high-altitude mosaic at 60 m/pixel with original illumination. HAMO-2 reaches the north pole under low northern-spring sun, so the northernmost band is dim but photographed; exact black is treated as fill.",
-      "expectedBytes": 98995479,
-      "expectedSha256": "d812c3a831f68ce27c5bc3f890e17fbe1ba28fa6b06436f1f87e23443c6c5b89",
       "capture": {
         "attributions": [
           {
@@ -281,8 +273,6 @@
         "referenceRadiusMeters": 255000
       },
       "coverage": "Published low-altitude mosaic with original illumination, seams and missing northern coverage. Exact black is treated as likely fill; no independent validity mask is supplied, so photographic black can also be withheld. Prepared display resolution is lower than the 20 m/pixel source.",
-      "expectedBytes": 878609842,
-      "expectedSha256": "1a135e6111e0e4f69596583c8ff1662a0a01b8ccc66226b31040a8497e5b9c5a",
       "capture": {
         "attributions": [
           {
@@ -372,8 +362,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:41:53.277 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "7dc1c6015fd51dc75d888a923f9e4c2495a4466d5e3ca09ee3030865886f56c9",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -410,8 +398,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:43:24.436 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "cad32f1ffe26353f86ae0792138148ff5da03b6b019803dc63f1c45848ff5653",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -448,8 +434,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:44:56.338 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "7caa2786ab33229dc07511c01e543298253eb3d88cfaa0adc21834ea1b767bb6",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -486,8 +470,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:46:25.530 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "9465c2de281dc8296239531dfb594741ba21e2f238c477eabe1fffe8949a6387",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -524,8 +506,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:47:56.001 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "6b75e3c5c858edcc3695e1b55ad7c047df7adeaa34afd515afa25d43db9b0a4c",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -562,8 +542,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:27:05.809 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "d3926eab4038fdc116c4afb674bcf892fc563c12bd9c47ecadcd303361231df0",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -600,8 +578,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:28:36.976 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "62cfb75844405fc354f511b85770b4a323fd060e04cdae467932a66147deb776",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -638,8 +614,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:30:08.079 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "414c2322708baecc16c9344a0e4069d64844a3ed899004072e805cc8a83f7866",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -676,8 +650,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:31:38.064 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "3c43aee90acafd65109213bbee89ee6e7494a31dd3d2e8142a024801f62db6ca",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -714,8 +686,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:33:07.995 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "94d33a629905f6f8e68757718366ce13211d3dd0c457454256462cf10ef5ec06",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -752,8 +722,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:14:40.731 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "e7a48b2db0eae1f45745a21e06c0a757feb2e6c358c53ed94c08a67db335bcc9",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -790,8 +758,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:16:10.986 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "6b3ca6d9c94482d98ea5bd1c63bab11aa9a18e5f290c1532375eb26ea1f4f0c4",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -828,8 +794,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:17:42.127 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "efdce0a3f229e14a257328f5aa9d75adbd2ce951d9067dd65332b68c6f43ea5e",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -866,8 +830,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:19:12.088 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "6fb2111cdaebced30b11ad9dae27660a401e51e62f2fab2a68d5cbc821560c5a",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -904,8 +866,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:20:41.273 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "cfe5c05173ba2953ce7b09c5c9122325571933ce0709bb1aedf045dd882ae0dd",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -942,8 +902,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:58:51.472 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "1bd94504ba1e42c55c42cc6217a56e0cbae937ee4b33b210f3e6e31fda1add64",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -980,8 +938,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:00:22.853 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "e86c152e8ed68f4ffa6e2ba905a4d8800e8ad671c74ffdc2f0c2f5fd32fdcd9c",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1018,8 +974,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:01:51.978 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "eee4846e17547f776456dcc1c4f7cac19dbe88c09daef9b8dff7136dddc1a25e",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1056,8 +1010,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:03:21.885 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "0bc3d97f7c4e4c9c6ca9db1514a91218edc54d4c0b87dd479aee3ac998e2760d",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1094,8 +1046,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:04:52.060 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "22b9a6df25631905b1e0cc3708ddb90fd9bf139d86e9f5965ff10f21de60780a",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1132,8 +1082,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 01:59:52.994 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "673ce9cc2362ad43deb4b5316433fc75c0e57051ede2ab0df13de53e971a4d58",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1170,8 +1118,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:01:24.552 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "a44a287c31152413460dbbaea6f6cd40f8d2be56d0c511ddd781b09d71f31007",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1208,8 +1154,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:02:56.662 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "f6fae3cfbd5b3231ce8b14f68c69cfdc212988baad83499b08c18778041174f4",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1246,8 +1190,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:04:25.643 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "01d4edd0dc557c63013ee59944e68c3feb3c6fe8b7972b17ddc87732dc8bc1ce",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1284,8 +1226,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:05:56.594 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "73c26e8848452232f5921f0fb6f735f7d1afdd9f3cc9f2baf702999f3045fd20",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1322,8 +1262,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:16:38.723 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "0048a40885711cbb5b94973498bd742394e5c59224ac030c9f5ff6dc5916916e",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1360,8 +1298,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:18:09.886 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "d59c508e7684487106a11af7255cdffd644ca57d1fbe086d94e83cd9f7d96551",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1398,8 +1334,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:19:39.987 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "4813c63e3537b42274ad97d9b81e7054dab6022244b980dfe69442a8798e8e06",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1436,8 +1370,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:21:09.940 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "ff7aa9b2baffdfd3789f5cb0e75da2b290ea3566d13b96f0ffb78af74774df6b",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",
@@ -1474,8 +1406,6 @@
         "sphere-registration"
       ],
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:22:39.063 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
-      "expectedBytes": 593280,
-      "expectedSha256": "1b122e0bdd352bd2fa05c07199ba64e5beb10d1fe76839e5e614986e8b219ca5",
       "width": 256,
       "height": 256,
       "label": "Deconvolved ZIMPOL frame",

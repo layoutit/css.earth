@@ -6,26 +6,22 @@
     {
       "role": "label",
       "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_teleobs-v1.0/data_ldtcal/ldt_20201217/lmi_20201217_0048_cal_v1.xml",
-      "bytes": 11198,
-      "sha256": "007cf82a8653720393ae629e6f4381282a5ac48c7a1c6c12cdb979a84ed94e77"
+      "bytes": 11198
     },
     {
       "role": "science",
       "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_teleobs-v1.0/data_ldtcal/ldt_20201217/lmi_20201217_0048_cal_v1.fits",
-      "bytes": 33528960,
-      "sha256": "8b8f37ae7d5987a165d2fe09bf77f61615da1af7a7c43dd0f6203dbaaac988c5"
+      "bytes": 33528960
     },
     {
       "role": "supplemental",
       "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_teleobs-v1.0/data_ldtcal/ldt_20201217/lmi_20201217_0048_cal_v1.fits_astro_v1.png",
-      "bytes": 680178,
-      "sha256": "df4639090f149a3336f2b5e3f1b9000e762e0e5bfa9c292389b9d108c32de713"
+      "bytes": 680178
     },
     {
       "role": "supplemental",
       "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_teleobs-v1.0/data_ldtcal/ldt_20201217/lmi_20201217_0048_cal_v1.fits_photo_v1.png",
-      "bytes": 684754,
-      "sha256": "b471cf3da974de6e4fc72309d7cc52faeac61336dda7f3937e74aef2db0188e9"
+      "bytes": 684754
     }
   ],
   "parameters": {
@@ -104,13 +100,11 @@
   "outputs": [
     {
       "path": "lmi_20201217_0048_cal_v1.xml",
-      "bytes": 11198,
-      "sha256": "007cf82a8653720393ae629e6f4381282a5ac48c7a1c6c12cdb979a84ed94e77"
+      "bytes": 11198
     },
     {
       "path": "lmi_20201217_0048_cal_v1.fits",
       "bytes": 33528960,
-      "sha256": "8b8f37ae7d5987a165d2fe09bf77f61615da1af7a7c43dd0f6203dbaaac988c5",
       "units": "DN",
       "conventions": {
         "filter": "VR; 0.520975 to 0.697365 micrometres from the PDS label",
@@ -120,13 +114,11 @@
     },
     {
       "path": "lmi_20201217_0048_cal_v1.fits_astro_v1.png",
-      "bytes": 680178,
-      "sha256": "df4639090f149a3336f2b5e3f1b9000e762e0e5bfa9c292389b9d108c32de713"
+      "bytes": 680178
     },
     {
       "path": "lmi_20201217_0048_cal_v1.fits_photo_v1.png",
-      "bytes": 684754,
-      "sha256": "b471cf3da974de6e4fc72309d7cc52faeac61336dda7f3937e74aef2db0188e9"
+      "bytes": 684754
     }
   ],
   "evidence": [

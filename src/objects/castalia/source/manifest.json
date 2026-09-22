@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 542.2379999999999
       },
       "coverage": "The 1997 optical analysis statistically prefers the northern spin solution used here: period 4.089 h and ecliptic pole (253°, 56°). The alternative southern solution, period 4.094 h and pole (242°, 7°), was not absolutely excluded. This is the archived JPL shape, not a newly fitted model.",
-      "expectedBytes": 148112,
-      "expectedSha256": "5301e6ebc10bf771c2cd563b736190903d23ccb1ddcfcc7c494a39ab4cfc8fe8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 649007,
-      "expectedSha256": "feccc6b31f852138a3fb4127a7030f2995309131fdd5d73b78471ef49278d467",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -130,8 +124,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1905009,
-      "expectedSha256": "8925537fe103b11fdaf30727ec0e72d0ecc0bf1be2eb73a53f906a14aaafc9e5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -5,12 +5,10 @@
     "directory": "src/objects/lmc",
     "method": "finite-emission",
     "compactInputs": {
-      "path": "src/objects/lmc/source/compact/inputs.json",
-      "sha256": "7627b7f10909b4733c96d2edb4889518a562f1d0e9ee65608747b157312ef15d"
+      "path": "src/objects/lmc/source/compact/inputs.json"
     }
   },
   "researchRecipe": {
-    "path": "labs/nebula/models/lmc/envelope/app-lenses.json",
-    "sha256": "38ac1f1e4579d471ac963c8e0a5ddbaa8abd8aacc5a30e828588b3cd77b0943e"
+    "path": "labs/nebula/models/lmc/envelope/app-lenses.json"
   }
 }

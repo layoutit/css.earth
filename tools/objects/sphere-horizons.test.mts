@@ -56,15 +56,15 @@ test('a row that is not at its exposure start is refused, as the derivation woul
   assert.throws(() => joinResponses(['no data here']), /no data block/);
 });
 
-test('writing pins a table the manifest names and declares one it does not', async () => {
+test('writing keeps a table the manifest names and declares one it does not', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'sphere-horizons-'));
-  await writeFile(join(directory, 'manifest.json'), JSON.stringify({ schema: 'x', inputs: [{ id: 'iris-horizons-sphere-observer', path: 'observer.txt', expectedBytes: 1, expectedSha256: '0'.repeat(64) }] }));
+  await writeFile(join(directory, 'manifest.json'), JSON.stringify({ schema: 'x', inputs: [{ id: 'iris-horizons-sphere-observer', path: 'observer.txt' }] }));
   const declared = await writeHorizonsTables('iris', directory, { observer: 'observer.txt', heliocentric: 'heliocentric.txt' }, { observer: 'OBS', heliocentric: 'HELIO' });
   const manifest = JSON.parse(await readFile(join(directory, 'manifest.json'), 'utf8'));
   assert.deepEqual(declared, ['heliocentric.txt']);
-  assert.equal(manifest.inputs[0].expectedSha256, sha256('OBS'));
+  assert.equal(await readFile(join(directory, 'observer.txt'), 'utf8'), 'OBS');
   assert.equal(manifest.inputs[1].id, 'iris-horizons-sphere-heliocentric');
-  assert.equal(manifest.inputs[1].expectedBytes, 5);
+  assert.equal(await readFile(join(directory, 'heliocentric.txt'), 'utf8'), 'HELIO');
   assert.equal(manifest.inputs[1].sourceBinding, undefined, 'binding is author:sources’ job');
   assert.equal(await readFile(join(directory, 'heliocentric.txt'), 'utf8'), 'HELIO');
 });

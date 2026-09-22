@@ -10,8 +10,6 @@
       "title": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94",
       "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; distributed by CDS/VizieR",
       "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
-      "expectedSha256": "8e92211df1993985472fc0109fe8cf62585adf85b09f46c8030b8b0176c50950",
-      "expectedBytes": 2001726,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -33,8 +31,6 @@
       "title": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45",
       "credit": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45; distributed by CDS/VizieR",
       "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
-      "expectedSha256": "bc6927d3c542df539063f43fb1ee04fab460aa0f16c66568f0bf202bec250e7b",
-      "expectedBytes": 2656024,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -56,8 +52,6 @@
       "title": "Paturel et al. (2003), HYPERLEDA II, A&A 412, 57",
       "credit": "Paturel et al. (2003), HYPERLEDA II, A&A 412, 57; distributed by CDS/VizieR",
       "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
-      "expectedSha256": "ce39ddb475713a9c917bf147ae4d3f348689feb6d5c257398f22cfb5ae885d85",
-      "expectedBytes": 218461,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -4,12 +4,9 @@
     {
       "id": "schenk-2020-oberon-normal",
       "path": "observations/oumap-cyl-180180.cub.gz",
-      "expectedBytes": 687286,
-      "expectedSha256": "31699c5761b5b57e6e7e8eb7ff3da85293c5ffb2ea8aa6b60f3a795d8dbcc7e1",
       "origin": "https://repository.hou.usra.edu/bitstreams/33526bf8-69e4-4246-b995-0b238a8b31d0/download",
       "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
       "mirror": "https://earth-assets.lowpoly.cc/source-assets/31699c5761b5b57e6e7e8eb7ff3da85293c5ffb2ea8aa6b60f3a795d8dbcc7e1/oumap-cyl-180180.cub.gz",
-      "upstreamSha256": "4eaa0d4c9a04eed1185d06b54d17229a9ea30ff130fe5b36e49c5b39a01646ee",
       "upstreamBytes": 1926319,
       "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
       "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
@@ -67,8 +64,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

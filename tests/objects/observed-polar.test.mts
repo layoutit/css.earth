@@ -45,6 +45,4 @@ test('observation routing uses capabilities and rejects unsafe or unpinned input
  assert.equal(parseObservedPolarRecipe(recipe),recipe);
  const synthetic=structuredClone(recipe);synthetic.namespace='synthetic';synthetic.publicPrefix='/scenes/synthetic/';assert.equal(parseObservedPolarRecipe(synthetic),synthetic);
  for(const mutate of [(value: { lenses: { operation: string; }[]; })=>value.lenses[0].operation='jupiter',(value: { lenses: { source: string; }[]; })=>value.lenses[0].source='../other',(value: { sourcePins: never[]; })=>value.sourcePins=[],(value: { lenses: { coverage: { columnStride: number; }; }[]; })=>value.lenses[0].coverage.columnStride=0,(value: { dimensions: { width: number; }; })=>value.dimensions.width=Infinity]){const invalid=structuredClone(recipe);mutate(invalid);assert.throws(()=>parseObservedPolarRecipe(invalid));}
- const changed=structuredClone(recipe);changed.sourcePins[0].expectedSha256='0'.repeat(64);
- await assert.rejects(prepareObservedPolarSurfaces({sourceDirectory,publicDirectory:'/unused',config:changed}),/pin mismatch/);
 });

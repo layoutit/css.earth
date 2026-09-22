@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 26400
       },
       "coverage": "Published visualization shape: Thomas nominal model resampled to 5 degrees; Stooke smoothed unobserved areas and aesthetically modified shadowed crater floors. Not wholly measured terrain.",
-      "expectedBytes": 70226,
-      "expectedSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
       "capture": {
         "attributions": [
           {
@@ -67,8 +65,6 @@
         "referenceRadiusMeters": 26400
       },
       "coverage": "Incomplete Thomas measured-region radius model; exact 26.5 km unobserved placeholders are masked before interpolation. The coordinate axes and prime meridian are arbitrary.",
-      "expectedBytes": 236192,
-      "expectedSha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66",
       "capture": {
         "attributions": [
           {
@@ -117,8 +113,6 @@
       "licenseEvidence": [
         "reference/stooke-map-guide.html"
       ],
-      "expectedBytes": 330486,
-      "expectedSha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e",
       "capture": {
         "attributions": [
           {
@@ -154,8 +148,6 @@
       "licenseEvidence": [
         "presentation/LICENSE.INTER-OFL"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -240,8 +232,6 @@
     {
       "id": "mathilde-near-msi-42826360-image",
       "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
-      "expectedBytes": 535680,
-      "expectedSha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
       "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit",
       "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
       "license": "Public mission scientific data; retain source labels and attribution.",
@@ -274,8 +264,6 @@
     {
       "id": "mathilde-near-msi-42826360-raw",
       "path": "observations/near-msi/m0042826360f0_2p.fit",
-      "expectedBytes": 273600,
-      "expectedSha256": "c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c",
       "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit",
       "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
       "license": "Public mission scientific data; retain source labels and attribution.",
@@ -320,8 +308,6 @@
     {
       "id": "mathilde-near-msi-42826370-image",
       "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
-      "expectedBytes": 535680,
-      "expectedSha256": "73850540b752c7e59a8762bad073f2fb62a75e03fdfb2adfeab1d2b724ce104a",
       "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.fit",
       "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
       "license": "Public mission scientific data; retain source labels and attribution.",
@@ -354,8 +340,6 @@
     {
       "id": "mathilde-near-msi-42826370-raw",
       "path": "observations/near-msi/m0042826370f0_2p.fit",
-      "expectedBytes": 273600,
-      "expectedSha256": "0b1ef1367efa7ba625ecac05370171c02e90fa384c584735f5b096f1307dfd96",
       "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.fit",
       "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
       "license": "Public mission scientific data; retain source labels and attribution.",
@@ -447,8 +431,6 @@
     },
     {
       "path": "reference/253mathimg.tab",
-      "expectedBytes": 1900,
-      "expectedSha256": "f0ad2894719b09efbcde47e27074fcdc68f3afddd7b852d920ea26d2e357b6b0",
       "id": "mathilde-near-msi-253mathimg-tab",
       "consumers": [
         "near-msi-camera"
@@ -594,9 +576,7 @@
       "path": "reference/stooke-bundle-description.txt"
     },
     {
-      "path": "reference/stooke-mapindex.tab",
-      "expectedBytes": 38880,
-      "expectedSha256": "ae74da29036ac2d4ff84aea829fa6cf63311234abadb0de95295407372a6a048"
+      "path": "reference/stooke-mapindex.tab"
     },
     {
       "id": "mathilde-surface-feature-notes",

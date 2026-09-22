@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 500
       },
       "coverage": "This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied.",
-      "expectedBytes": 29083,
-      "expectedSha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1193012,
-      "expectedSha256": "2833d983fef4e8425134ce588f800f6ee9cebd8cf4ef050b65bec8af0dff2324",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -120,8 +114,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1821019,
-      "expectedSha256": "f8b7a3d1890e36fb852d49ddd807ba1c24bcc2c0119078dfaa01ad9469d78b6b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

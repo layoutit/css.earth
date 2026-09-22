@@ -7,13 +7,9 @@ function record(v: unknown): Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Invalid point manifest');
   return v as Record<string, unknown>;
 }
-export async function mountGalaxyPoints({host, manifestUrl, cloudUrl, sha256}: {host: HTMLElement; manifestUrl: string; cloudUrl?: string; sha256?: string}): Promise<PreparedVolumeRuntime> {
+export async function mountGalaxyPoints({host, manifestUrl, cloudUrl}: {host: HTMLElement; manifestUrl: string; cloudUrl?: string}): Promise<PreparedVolumeRuntime> {
   const response = await fetch(manifestUrl); if (!response.ok) throw new Error('Point manifest unavailable');
   const bytes=await response.arrayBuffer();
-  if(sha256){
-    const actual=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');
-    if(actual!==sha256)throw new TypeError('Galaxy field prepared digest mismatch');
-  }
   const data = record(JSON.parse(new TextDecoder().decode(bytes)));
   if (data.schema !== 'cssearth-galaxy-points@1' || !Array.isArray(data.points) || data.points.length > 1800) throw new TypeError('Invalid prepared points');
   const frame = parseDensityVolumeFrame(data.frame);

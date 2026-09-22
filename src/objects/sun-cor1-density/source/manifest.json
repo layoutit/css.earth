@@ -23,16 +23,13 @@
       "credit": "NASA STEREO Science Center; Wang, Arge, and Jones (2025)",
       "displayCredit": "NASA STEREO Science Center",
       "acquisition": "Exact archive FITS for Carrington Rotation 2053 P1, regularization μ=10; the F16 owner validates and resamples it.",
-      "license": "NASA scientific data; credit the NASA STEREO Science Center and cite Wang, Arge, and Jones (2025), Solar Physics 300:46.",
-      "expectedSha256": "16b2cb6894f9a72bfb13cfbb43d8c0f4f056b8f6311cc924c6bba04242a4a7ca",
-      "expectedBytes": 13337280
+      "license": "NASA scientific data; credit the NASA STEREO Science Center and cite Wang, Arge, and Jones (2025), Solar Physics 300:46."
     }
   ],
   "documents": [
     {
       "id": "delivery-json",
       "path": "src/objects/sun-cor1-density/source/delivery.json",
-      "sha256": "aa799069fba9138c0a64238de21bfafff440cb73eb20ae535a9f9e28b4acd6da",
       "bytes": 16444,
       "sourceBinding": {
         "kind": "local",
@@ -42,7 +39,6 @@
     {
       "id": "presentation-json",
       "path": "src/objects/sun-cor1-density/source/presentation.json",
-      "sha256": "5fd97808fce9b16f804e01f7b88cf6d468b77bd2fb643b6aa95d15db3f56ea79",
       "bytes": 2768,
       "sourceBinding": {
         "kind": "local",
@@ -52,7 +48,6 @@
     {
       "id": "preview-10",
       "path": "src/objects/sun-cor1-density/source/previews/cor1-density.png",
-      "sha256": "0a06851301a77ca8774d10cf580fe39f30fddea7eca34667e5f13c65d276bf0c",
       "bytes": 2239,
       "sourceBinding": {
         "kind": "local",

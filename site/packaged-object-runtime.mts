@@ -32,14 +32,13 @@ export async function loadPackagedObject(input: unknown) {
   const descriptorInput = parseObjectDescriptor(input);
   return createNavigableObjectMount(descriptorInput, {
     async read(reference, signal) {
-      // Static endpoints copy the pinned transport bytes during the build.
+      // Static endpoints copy the transport bytes during the build.
       // The bundler never needs to retain every scene as an eager URL asset.
       if (reference !== 'prepared/object.json' || reference !== descriptorInput.prepared?.url ||
-          !/^[a-z][a-z0-9-]*$/u.test(descriptorInput.id) ||
-          !/^[0-9a-f]{64}$/u.test(descriptorInput.prepared.sha256)) {
+          !/^[a-z][a-z0-9-]*$/u.test(descriptorInput.id)) {
         throw new Error(`Prepared object asset is not available: ${reference}.`);
       }
-      const url = `/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`;
+      const url = `/objects/${descriptorInput.id}/object.json`;
       const response = await fetch(url, { signal });
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();

@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "hd-189733-companion-gaia-dr3-source",
       "path": "photometry/gaia-dr3-source.csv",
-      "expectedBytes": 339,
-      "expectedSha256": "555666399eb8fece2444319e925a641c74c8a1893fb5bcbbf7565c84104da07c",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
       "license": "Gaia data terms: free use with acknowledgement",
@@ -156,8 +152,6 @@
     {
       "id": "hd-189733-companion-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10178,
-      "expectedSha256": "4a5d1e92df33c06e79dd14dd7bc790eb87c280f81a28edfc1319ddcacd7ef6df",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816176111360&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",

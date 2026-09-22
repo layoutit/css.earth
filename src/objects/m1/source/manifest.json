@@ -11,8 +11,6 @@
       "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "displayCredit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
-      "expectedBytes": 30692506,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -45,8 +43,6 @@
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "bb1b9a0023eb5424bb75a7c29e9c8a83a7e3c06601bb3019ab58c24beb02f8dd",
-      "expectedBytes": 27148280,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -79,8 +75,6 @@
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "1ec85e2b0cf6a35d176af48a48e1f37c8922abadb60dc53866ee282855808a36",
-      "expectedBytes": 13141722,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -113,8 +107,6 @@
       "credit": "JPL/Caltech",
       "displayCredit": "JPL/Caltech",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "0df6c12a08d63852a11e966495ad79660edd79978767072ffdf2552bceee75c8",
-      "expectedBytes": 9291804,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -147,8 +139,6 @@
       "credit": "NRAO/AUI/NSF",
       "displayCredit": "NRAO/AUI/NSF",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "64eccbc054b905c11d1ebfd34cacc42a1dbb6a39ea48d67dd417875929cd451b",
-      "expectedBytes": 8402348,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -181,8 +171,6 @@
       "credit": "CXC",
       "displayCredit": "CXC",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "8647bce741a6eeb5c8595ec179cf75eaa0e43a026045057c1ce5f02362a19350",
-      "expectedBytes": 8125068,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -215,8 +203,6 @@
       "credit": "NASA, ESA, and J. Hester (Arizona State University)",
       "displayCredit": "NASA, ESA, and J. Hester (Arizona State University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "8d1201151df2bd95825eba62049175dd5f1d764090d3aa2e22abf767ca7b3a1a",
-      "expectedBytes": 15801158,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -287,8 +273,6 @@
       "title": "Crab SITELLE · 3dmap_XYZflux.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
-      "expectedSha256": "da365348b258952cd9ea00292f5915c45785e1cb939ff580ad0b43ccf38d0f4e",
-      "expectedBytes": 6670080,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -319,8 +303,6 @@
       "title": "Crab SITELLE · 3dmap_XYZvel.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
-      "expectedSha256": "0d7fbdcda2da31ce39b6ef3880e5a107d04101cd46100695c45abebd56a9c605",
-      "expectedBytes": 6670080,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -351,8 +333,6 @@
       "title": "Crab SITELLE · m1.deep_frame.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
-      "expectedSha256": "b1515f62eb6d9e402e93a756609848de86a193b9156fa1a2e47794ca569946c7",
-      "expectedBytes": 16917120,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

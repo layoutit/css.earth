@@ -18,7 +18,7 @@ export async function validateJointResult(root: string, value: unknown) {
   for (const candidate of result.candidates) {
     const bank = validatePreparedCssVolume(JSON.parse((await readGeometryPin(root, candidate.volume.volume)).toString()));
     const directory = candidate.volume.volume.path.slice(0, candidate.volume.volume.path.lastIndexOf('/') + 1);
-    for (const resource of bank.resources) await readGeometryPin(root, { path: `${directory}${resource.path}`, sha256: resource.sha256 });
+    for (const resource of bank.resources) await readGeometryPin(root, { path: `${directory}${resource.path}` });
   }
   return result;
 }

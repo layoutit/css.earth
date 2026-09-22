@@ -4,7 +4,6 @@
   "naifBodyId": 902,
   "mesh": {
     "path": "shape/nix_nrf1d3_hipoly.stl.gz",
-    "sha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
     "compression": "gzip",
     "metersPerUnit": 500,
     "expectedVertices": 40002,
@@ -12,7 +11,6 @@
   },
   "pck": {
     "path": "geometry/nh_pcnh_010.tpc",
-    "sha256": "cf79342b3cc13d8dab485ce87ebfb2d74d12e3f79039de260e730aaaefffce01",
     "timeMode": "receive-minus-range-light-time"
   },
   "frames": [
@@ -39,7 +37,6 @@
         {
           "id": "separate-view",
           "imagePath": "observations/lor_0299167039_0x630_sci.fit",
-          "sha256": "1bfd0717f88d865097cf9591e61e04a44e8926595eb535f28078a67a9eaa9353",
           "crop": {
             "left": 239,
             "top": 602,

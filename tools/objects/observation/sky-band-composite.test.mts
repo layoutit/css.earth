@@ -7,7 +7,7 @@ import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '../../../src/platform/sha256.mts';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '../color-transfer.mts';
-import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandCompositeFile, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
+import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
 import { gridWcs } from './wise-atlas-mosaic.mts';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };
@@ -108,18 +108,13 @@ test('WISE bands mosaic pinned atlas tiles through a pinned tile list', async ()
 test('recipe verification reads the recipe and every tile list, and composites are cached under their own hash', async () => {
   const list = Buffer.from(JSON.stringify({ schema: 'cssearth-wise-atlas-tiles@1', band: 'W4', tiles: [{ coaddId: '0564p242_ac51', sha256: 'c'.repeat(64), bytes: 10 }] }));
   const recipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-band-composite@1', grid, backgroundPercentile: 1, peakPercentile: 99.9,
-    bands: [{ band: 'W4', tiles: { path: 'src/objects/x/w4.json', sha256: sha(list) } }], display: { minimum: 0, stretch: 1, softening: 8 } }));
+    bands: [{ band: 'W4', tiles: { path: 'src/objects/x/w4.json' } }], display: { minimum: 0, stretch: 1, softening: 8 } }));
   const files = new Map([['src/objects/x/recipe.json', recipe], ['src/objects/x/w4.json', list]]);
   const input = async (path: string) => { const bytes = files.get(path); if (!bytes) throw new Error(`missing ${path}`); return bytes; };
-  const pin = { path: 'src/objects/x/recipe.json', sha256: sha(recipe) };
+  const pin = { path: 'src/objects/x/recipe.json' };
   assert.deepEqual((await verifySkyBandRecipe(pin, input)).files.map(file => file.path), ['src/objects/x/recipe.json', 'src/objects/x/w4.json']);
-  await assert.rejects(verifySkyBandRecipe({ ...pin, sha256: 'd'.repeat(64) }, input), /Changed sky band recipe/);
-  files.set('src/objects/x/w4.json', Buffer.from('{}'));
-  await assert.rejects(verifySkyBandRecipe(pin, input), /Changed WISE atlas tile list/);
   files.delete('src/objects/x/w4.json');
   await assert.rejects(verifySkyBandRecipe(pin, input), /missing/);
-  assert.equal(skyBandCompositeFile('spitzer-mid-infrared', 'e'.repeat(64)), `spitzer-mid-infrared.${'e'.repeat(64)}.png`);
-  assert.throws(() => skyBandCompositeFile('../x', 'e'.repeat(64)), /identity/);
 });
 
 test('uncalibrated plate and Herschel routes keep relative units, two bands take a mean green, and no-coverage NaN stays missing', () => withCache(async (cache, place) => {

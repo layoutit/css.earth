@@ -6,7 +6,6 @@
       "id": "ring-spectral-response",
       "path": "lenses/manifest.json",
       "expectedBytes": 2316,
-      "expectedSha256": "4fe757b1e66df8328b15951f8488accac0717f0208da155a2b05cbc2365a3403",
       "origin": "Pinned Hubble program 17843 and Cassini VIMS/CIRS interpretation",
       "credit": "NASA, ESA, STScI, and NASA/JPL-Caltech",
       "license": "project-authored source specification with institutional credits"
@@ -15,7 +14,6 @@
       "id": "cassini-uvis-alpvir-2006-285-occultation",
       "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
       "expectedBytes": 10591493,
-      "expectedSha256": "65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341",
       "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
       "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
       "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"
@@ -24,7 +22,6 @@
       "id": "cassini-uvis-alpvir-2006-285-occultation-label",
       "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
       "expectedBytes": 12013,
-      "expectedSha256": "64858a36470a3d52df1056bb07df5f5aa4396b78924fa07c9861c9a67500b49c",
       "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
       "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
       "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"

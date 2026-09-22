@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -118,9 +116,7 @@
       "path": "reference/167-IAUspin.txt"
     },
     {
-      "path": "reference/167-occ_2005-12-13.pdf",
-      "expectedBytes": 5248,
-      "expectedSha256": "2efd4a2730a3b0da724e8c0c908d24479ce5c3671e0da7c21a198956489397c0"
+      "path": "reference/167-occ_2005-12-13.pdf"
     },
     {
       "path": "reference/calibration.json"

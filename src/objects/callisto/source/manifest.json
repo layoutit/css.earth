@@ -4,8 +4,6 @@
     {
       "id": "usgs-voyager-galileo-global-1km",
       "path": "callisto-global-1km.tif",
-      "expectedBytes": 114640717,
-      "expectedSha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
       "credit": "NASA/JPL/USGS",
       "license": "Public USGS scientific imagery; see NOTICE.md",
@@ -74,8 +72,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -126,8 +122,6 @@
       "redistribution": "Original public-domain published image retained with complete credit; geometric derivative identified separately.",
       "id": "galileo-pia03456-original",
       "path": "observations/PIA03456-usgs.png",
-      "expectedBytes": 821031,
-      "expectedSha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638",
       "consumers": [
         "registration-source"
       ],
@@ -261,8 +255,6 @@
     },
     {
       "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
-      "expectedBytes": 11242203,
-      "expectedSha256": "1b9680f47a051a20f4728bbd8b28e7437597254f10678044f969891bbe9e4a09",
       "id": "mapped-science-nims-g8cnadlind01a-minn-mv03-ciof-72-gcp-adjust-export-from-gdal-tif",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
       "credit": "NASA/JPL; Malaska et al., USGS/PDS registered archive",
@@ -288,8 +280,6 @@
     },
     {
       "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
-      "expectedBytes": 6577877,
-      "expectedSha256": "65db2ae482bc63299bcca1848a18af7aa32d6a976310877e2ccd5ce297b7e854",
       "id": "mapped-science-nims-g8cnglobal02a-minn-mv03-ciof-67-gcp-adjust-export-from-gdal-tif",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
       "credit": "NASA/JPL; Malaska et al., USGS/PDS registered archive",

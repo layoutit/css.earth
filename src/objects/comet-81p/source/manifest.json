@@ -4,8 +4,6 @@
     {
       "id": "pds-shape",
       "path": "shape/wild2_cart_full.tab",
-      "expectedBytes": 1392840,
-      "expectedSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
       "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
       "license": "PDS public scientific archive",
@@ -32,8 +30,6 @@
     {
       "id": "pds-observed-reference",
       "path": "shape/wild2_cart_vis.tab",
-      "expectedBytes": 890509,
-      "expectedSha256": "6937d2ae98e3a21594aa27fbff57567332e146dccfa0dcbef1fac4a1ec371820",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab",
       "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
       "license": "PDS public scientific archive",
@@ -96,8 +92,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -123,8 +117,6 @@
     {
       "id": "n2073we02-rr-path",
       "path": "photography/navcam/n2073we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "f6944a7e778a556afd929e365585bbd0919ccdd573e1422b4b2c0379b33c035f",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.fit",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -196,8 +188,6 @@
     {
       "id": "n2075we02-rr-path",
       "path": "photography/navcam/n2075we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "49729e94642129eccf402c03241a21717c31150725cc48826ecf31afa03d6fb0",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2075we02_rr.fit",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -267,8 +257,6 @@
     {
       "id": "n2077we02-rr-path",
       "path": "photography/navcam/n2077we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2077we02_rr.fit",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -338,8 +326,6 @@
     {
       "id": "stereo-trajectory-fit",
       "path": "reference/n2069we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "6fa36047b1f56f219417cc86fafb39c507c9ee83318b428942228e6f84448f62",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2069we02_rr.fit",
       "credit": "NASA/JPL-Caltech, Stardust team; NASA PDS",
       "license": "PDS public scientific archive",
@@ -390,8 +376,6 @@
     {
       "id": "n2079we02-rr-path",
       "path": "photography/navcam/n2079we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.fit",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -573,8 +557,6 @@
     {
       "id": "comet-81p-features-PIA06285-jpg",
       "path": "features/PIA06285.jpg",
-      "expectedBytes": 80948,
-      "expectedSha256": "af3ffcc32ea0b7aae918a7098cda99aea3157483789401b256f9551a4fd2f757",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/PIA06285.jpg?w=1159&h=1172&fit=clip&crop=faces%2Cfocalpoint",
       "credit": "Courtesy NASA/JPL-Caltech",
       "license": "JPL image-use policy",
@@ -600,8 +582,6 @@
     {
       "id": "comet-81p-features-PIA06285_fig1-jpg",
       "path": "features/PIA06285_fig1.jpg",
-      "expectedBytes": 129708,
-      "expectedSha256": "334808909722bbaeb4695b274c3294859dc796eee4ed1fe5e374bcc57501efb5",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/figures/PIA06285_fig1.jpg",
       "credit": "Courtesy NASA/JPL-Caltech",
       "license": "JPL image-use policy",

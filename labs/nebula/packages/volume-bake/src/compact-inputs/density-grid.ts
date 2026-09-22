@@ -15,10 +15,8 @@ export function containedPath(root: string, path: string): string {
   if (isAbsolute(offset) || offset === '..' || offset.startsWith('../') || offset.startsWith('..\\')) throw new TypeError('Source escapes its object directory.');
   return resolved;
 }
-export async function verifiedBytes(root: string, reference: { path: string; sha256: string }): Promise<Buffer> {
-  const bytes = await readFile(containedPath(root, reference.path));
-  if (sha256(bytes) !== reference.sha256) throw new TypeError(`Source digest mismatch: ${reference.path}`);
-  return bytes;
+export async function sourceBytes(root: string, reference: { path: string }): Promise<Buffer> {
+  return readFile(containedPath(root, reference.path));
 }
 export function decodeDensityKtx2(bytes: Buffer): DecodedGrid {
   const identifier = Buffer.from('ab4b5458203230bb0d0a1a0a', 'hex');
@@ -38,12 +36,11 @@ export function decodeDensityKtx2(bytes: Buffer): DecodedGrid {
   return { width, height, depth, encodedRgba };
 }
 export async function loadVolumeSource(sourceDirectory: string, recipe: VolumeRecipe): Promise<VolumeSource> {
-  const bytes = await verifiedBytes(sourceDirectory, recipe.grid);
+  const bytes = await sourceBytes(sourceDirectory, recipe.grid);
   const decoded = decodeDensityKtx2(bytes);
   const [width, height, depth] = recipe.grid.dimensions;
   if (decoded.width !== width || decoded.height !== height || decoded.depth !== depth) throw new TypeError('KTX2 dimensions disagree with the source recipe.');
-  if (sha256(decoded.encodedRgba) !== recipe.grid.decodedSha256) throw new TypeError('Decoded grid digest mismatch.');
-  const provenanceBytes = await verifiedBytes(sourceDirectory, recipe.provenance);
+  const provenanceBytes = await sourceBytes(sourceDirectory, recipe.provenance);
   const provenance: unknown = JSON.parse(provenanceBytes.toString('utf8'));
   return { ...decoded, recipe, provenance };
 }

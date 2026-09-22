@@ -52,17 +52,14 @@ function properties(value: unknown): JsonRecord {
 }
 function preparedReference(value: unknown): PreparedAssetReference {
   const input = record(value, 'object.prepared');
-  allowedKeys(input, ['format', 'url', 'sha256'], 'object.prepared');
+  allowedKeys(input, ['format', 'url'], 'object.prepared');
   if (typeof input.format !== 'string' || !/^[a-z][a-z0-9.-]*@[1-9][0-9]*$/.test(input.format)) {
     throw new TypeError('object.prepared.format must identify a versioned prepared format.');
   }
   if (typeof input.url !== 'string' || !input.url.trim() || /[\u0000-\u0020]/.test(input.url)) {
     throw new TypeError('object.prepared.url must be a nonempty asset reference.');
   }
-  if (typeof input.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(input.sha256)) {
-    throw new TypeError('object.prepared.sha256 must be a lowercase SHA-256 digest.');
-  }
-  return Object.freeze({ format: input.format, url: input.url, sha256: input.sha256 });
+  return Object.freeze({ format: input.format, url: input.url });
 }
 
 /** Parse once at the configuration boundary; returns a validated immutable copy. */

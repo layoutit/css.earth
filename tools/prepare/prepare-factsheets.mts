@@ -3,7 +3,7 @@ import {requireRecord,requireArray,hasErrorCode} from '../sources/source-values.
 import {shape,text,number,array,optional} from '../objects/terrestrial-layers/source-records.mts';
 const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
-const entry_=shape({path:text,expectedBytes:optional(number),expectedSha256:optional(text)});
+const entry_=shape({path:text});
 const parseManifest=shape({inputs:array(entry_),documents:array(entry_),generatedIntermediates:array(entry_)});
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';

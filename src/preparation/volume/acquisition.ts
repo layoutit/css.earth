@@ -5,12 +5,12 @@ import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { resolve } from 'node:path';
 import { zstdCompressSync, constants } from 'node:zlib';
-import { containedPath, sha256, verifiedBytes, type DecodedGrid } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath, sha256, sourceBytes, type DecodedGrid } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { record, triple, type Vector3, type VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 
 export interface VolumeAcquisition {
   schema: 'cssearth-raw-volume-acquisition@1';
-  source: { url: string; sha256: string; bytes: number; dimensions: Vector3; layout: 'x-fastest-rgba8'; invertZ: false };
+  source: { url: string; bytes: number; dimensions: Vector3; layout: 'x-fastest-rgba8'; invertZ: false };
   reduction: { method: 'encoded-box-average-round-half-up'; factor: number };
   compression: { format: 'ktx2-rgba8-zstd'; level: number };
 }
@@ -20,20 +20,19 @@ export function parseVolumeAcquisition(value: unknown): VolumeAcquisition {
   const dimensions = triple(source.dimensions, 'raw dimensions');
   if (data.schema !== 'cssearth-raw-volume-acquisition@1' || source.layout !== 'x-fastest-rgba8' || source.invertZ !== false ||
     reduction.method !== 'encoded-box-average-round-half-up' || compression.format !== 'ktx2-rgba8-zstd') throw new TypeError('Unsupported raw volume acquisition.');
-  if (typeof source.url !== 'string' || new URL(source.url).protocol !== 'https:' ||
-    typeof source.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(source.sha256)) throw new TypeError('Raw source requires HTTPS and SHA256.');
+  if (typeof source.url !== 'string' || new URL(source.url).protocol !== 'https:') throw new TypeError('Raw source requires HTTPS.');
   if (dimensions.some(n => !Number.isSafeInteger(n) || n < 1) || source.bytes !== dimensions[0] * dimensions[1] * dimensions[2] * 4) throw new TypeError('Invalid raw volume dimensions/bytes.');
   const factor = reduction.factor;
   if (typeof factor !== 'number' || !Number.isSafeInteger(factor) || factor < 1 ||
     dimensions.some(n => n % factor !== 0)) throw new TypeError('Reduction factor must divide each raw dimension.');
   if (typeof compression.level !== 'number' || !Number.isInteger(compression.level) || compression.level < 1 || compression.level > 19) throw new TypeError('Invalid Zstd level.');
-  return { schema: data.schema, source: { url: source.url, sha256: source.sha256, bytes: source.bytes as number,
+  return { schema: data.schema, source: { url: source.url, bytes: source.bytes as number,
     dimensions, layout: source.layout, invertZ: false }, reduction: { method: reduction.method, factor },
     compression: { format: compression.format, level: compression.level } };
 }
 /** Average encoded values before their nonlinear transfer, matching a coarse trilinear texel center. */
 export function reduceRawVolume(raw: Uint8Array, acquisition: VolumeAcquisition): DecodedGrid {
-  if (raw.length !== acquisition.source.bytes || sha256(raw) !== acquisition.source.sha256) throw new TypeError('Raw volume source digest/length mismatch.');
+  if (raw.length !== acquisition.source.bytes) throw new TypeError('Raw volume source length mismatch.');
   const [sourceWidth, sourceHeight, sourceDepth] = acquisition.source.dimensions, factor = acquisition.reduction.factor;
   const width = sourceWidth / factor, height = sourceHeight / factor, depth = sourceDepth / factor;
   if (factor === 1) return { width, height, depth, encodedRgba: raw };
@@ -70,10 +69,10 @@ export function encodeDensityKtx2(grid: DecodedGrid, level: number): Buffer {
   return Buffer.concat([prefix, compressed]);
 }
 export async function acquireVolumeSource(sourceDirectory: string, recipe: VolumeRecipe, cacheDirectory: string): Promise<void> {
-  if (!recipe.grid.acquisition) throw new TypeError('Volume has no pinned acquisition recipe.');
-  const acquisition = parseVolumeAcquisition(JSON.parse((await verifiedBytes(sourceDirectory, recipe.grid.acquisition)).toString('utf8')));
+  if (!recipe.grid.acquisition) throw new TypeError('Volume has no acquisition recipe.');
+  const acquisition = parseVolumeAcquisition(JSON.parse((await sourceBytes(sourceDirectory, recipe.grid.acquisition)).toString('utf8')));
   await mkdir(cacheDirectory, { recursive: true });
-  const cache = resolve(cacheDirectory, `${acquisition.source.sha256}.raw`);
+  const cache = resolve(cacheDirectory, `${sha256(Buffer.from(acquisition.source.url))}.raw`);
   let raw: Buffer | undefined;
   try { raw = await readFile(cache); } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
   if (!raw) {
@@ -82,22 +81,20 @@ export async function acquireVolumeSource(sourceDirectory: string, recipe: Volum
     let received = 0, announced = 0;
     const progress = new Transform({ transform(chunk: Buffer, _encoding, callback) {
       received += chunk.length;
-      if (received > acquisition.source.bytes) { callback(new Error('Volume download exceeds pinned length.')); return; }
+      if (received > acquisition.source.bytes) { callback(new Error('Volume download exceeds the recorded length.')); return; }
       if (received - announced >= 32 * 1024 * 1024) { announced = received; console.log(`Volume source: ${received}/${acquisition.source.bytes} bytes`); }
       callback(null, chunk);
     } });
     try {
       await pipeline(Readable.fromWeb(response.body as Parameters<typeof Readable.fromWeb>[0]), progress, createWriteStream(`${cache}.partial`));
       raw = await readFile(`${cache}.partial`);
-      if (raw.length !== acquisition.source.bytes || sha256(raw) !== acquisition.source.sha256) throw new TypeError('Downloaded volume digest/length mismatch.');
+      if (raw.length !== acquisition.source.bytes) throw new TypeError('Downloaded volume length mismatch.');
       await rename(`${cache}.partial`, cache);
     } finally { await rm(`${cache}.partial`, { force: true }); }
   }
   const reduced = reduceRawVolume(raw, acquisition);
-  if ([reduced.width, reduced.height, reduced.depth].some((n, i) => n !== recipe.grid.dimensions[i]) ||
-    sha256(reduced.encodedRgba) !== recipe.grid.decodedSha256) throw new TypeError('Imported volume differs from pinned decoded source.');
+  if ([reduced.width, reduced.height, reduced.depth].some((n, i) => n !== recipe.grid.dimensions[i])) throw new TypeError('Imported volume differs from the recorded source dimensions.');
   const bytes = encodeDensityKtx2(reduced, acquisition.compression.level);
-  if (sha256(bytes) !== recipe.grid.sha256) throw new TypeError('Imported KTX2 differs from pinned source; use the recorded Node/Zstd version.');
   await writeFile(containedPath(sourceDirectory, recipe.grid.path), bytes);
-  console.log(`VERIFIED volume import: ${bytes.length} bytes, SHA256 ${recipe.grid.sha256}`);
+  console.log(`Volume import: ${bytes.length} bytes.`);
 }

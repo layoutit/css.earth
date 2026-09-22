@@ -58,7 +58,7 @@ test('cited local evidence must match one manifest pin and stay inside the packa
   const file = resolve(objectDirectory, 'source/review.json');
   const bytes = Buffer.from('{"references":[{"radiusKm":10},{"rotationHours":8}]}');
   await writeFile(file, bytes);
-  const entry = { path: 'review.json', expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') };
+  const entry = { path: 'review.json' };
   const manifest = { documents: [entry] };
   let reads = 0;
   const read = async (path: string) => { reads++; return readFile(resolve(objectDirectory, path)); };
@@ -77,8 +77,7 @@ test('cited local evidence must match one manifest pin and stay inside the packa
 });
 
 
-const pin = (path: string, bytes: Uint8Array) => ({ path, expectedBytes: bytes.length,
-  expectedSha256: createHash('sha256').update(bytes).digest('hex') });
+const pin = (path: string, _bytes: Uint8Array) => ({ path });
 async function restorationFixture(t: TestContext, url: string, path = 'review.json') {
   const objectDirectory = await mkdtemp(resolve(tmpdir(), 'cssearth-fact-restoration-'));
   t.after(() => rm(objectDirectory, { recursive: true, force: true }));

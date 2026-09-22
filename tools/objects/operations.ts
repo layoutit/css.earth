@@ -15,7 +15,7 @@ import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { dirname, posix, resolve, relative, win32, basename } from 'node:path';
 /** A pin identifies bytes git does not hold. A file authored in this repository carries none; git is its record. */
-export interface SourceEntry { path:string;expectedBytes?:number;expectedSha256?:string;id?:string;origin?:string;consumers?:string[];range?:SourceRange;sourceBinding?:SourceBinding; }
+export interface SourceEntry { path:string;id?:string;origin?:string;consumers?:string[];range?:SourceRange;sourceBinding?:SourceBinding; }
 export interface SourceManifest { schema:string;inputs:SourceEntry[];generatedIntermediates:SourceEntry[];documents:SourceEntry[]; }
 export interface RuntimeAsset { filename:string;bytes:number;sha256:string; }
 /** The public scene textures an object ships: the `public` entries of its inventory. */
@@ -35,8 +35,6 @@ export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
   const entries=manifest[collection];if(!Array.isArray(entries)||(collection==='inputs'&&!entries.length))throw new TypeError(`Source manifest ${collection} is missing or empty.`);
   for(const value of entries){const entry=object(value);if(typeof entry.path!=='string')throw new TypeError('Source path is missing.');containedPath('.',entry.path);
    if(paths.has(entry.path))throw new TypeError(`Duplicate source path ${entry.path}.`);paths.add(entry.path);
-   const pinned=entry.expectedBytes!==undefined||entry.expectedSha256!==undefined;
-   if(pinned&&(typeof entry.expectedBytes!=='number'||!Number.isSafeInteger(entry.expectedBytes)||entry.expectedBytes<=0||typeof entry.expectedSha256!=='string'||!/^[0-9a-f]{64}$/.test(entry.expectedSha256)))throw new TypeError(`Invalid source integrity record: ${entry.path}.`);
    if(entry.range!==undefined)assertSourceRange(entry as unknown as SourceEntry,`Source ${entry.path}`);
    if(collection==='inputs'||entry.sourceBinding!==undefined)parseSourceBinding(entry.sourceBinding);
    if(collection==='inputs'){
@@ -50,20 +48,8 @@ export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
  }
  return manifest as unknown as SourceManifest;
 }
-function assertSourceSize(entry:SourceEntry,size:number):void {
- if(entry.expectedBytes!==undefined&&size!==entry.expectedBytes)throw new Error(`Source size drifted for ${entry.path}: expected ${entry.expectedBytes}, received ${size}.`);
-}
-function assertSourceHash(entry:SourceEntry,hash:string):string {
- if(entry.expectedSha256!==undefined&&hash!==entry.expectedSha256)throw new Error(`Source hash drifted for ${entry.path}: expected ${entry.expectedSha256}, received ${hash}.`);return hash;
-}
-export function assertSourceBytes(entry:SourceEntry,bytes:Uint8Array):string {
- assertSourceSize(entry,bytes.byteLength);return assertSourceHash(entry,sha256(bytes));
-}
-export async function assertSourceFile(entry:SourceEntry,path:string):Promise<string> {
- const info=await lstat(path);if(!info.isFile())throw new Error(`Source is not a regular file: ${entry.path}.`);assertSourceSize(entry,info.size);
- const hash=createHash('sha256');let size=0;
- for await(const chunk of createReadStream(path)){size+=chunk.length;if(entry.expectedBytes!==undefined&&size>entry.expectedBytes)assertSourceSize(entry,size);hash.update(chunk);}
- assertSourceSize(entry,size);return assertSourceHash(entry,hash.digest('hex'));
+export async function assertSourceFile(entry:SourceEntry,path:string):Promise<void> {
+ const info=await lstat(path);if(!info.isFile())throw new Error(`Source is not a regular file: ${entry.path}.`);
 }
 async function walk(root:string):Promise<string[]>{const files:string[]=[];for(const entry of await readdir(root,{withFileTypes:true})){const path=resolve(root,entry.name);if(entry.isDirectory())files.push(...await walk(path));else if(entry.isFile())files.push(path);else throw new Error(`Unsupported filesystem entry: ${path}.`);}return files;}
 export async function verifySources({sourceRoot,manifest,consumer}:{sourceRoot:string;manifest:SourceManifest;consumer?:string}) {
@@ -78,27 +64,17 @@ export async function verifySources({sourceRoot,manifest,consumer}:{sourceRoot:s
  return {inputCount:manifest.inputs.length,generatedIntermediateCount:manifest.generatedIntermediates.length,documentCount:manifest.documents.length,verifiedCount:entries.length};
 }
 export async function publishPinnedSource({sourceRoot,entry,bytes}:{sourceRoot:string;entry:SourceEntry;bytes:Uint8Array}) {
- assertSourceBytes(entry,bytes);const path=containedPath(sourceRoot,entry.path);await mkdir(dirname(path),{recursive:true});
+ const path=containedPath(sourceRoot,entry.path);await mkdir(dirname(path),{recursive:true});
  const temporary=`${path}.partial-${process.pid}-${randomUUID()}`;
  try{await writeFile(temporary,bytes,{flag:'wx'});await rename(temporary,path);}finally{await rm(temporary,{force:true});}
  return entry;
 }
-/** Stream a raw source into a sibling temporary file; only verified pins replace the destination. */
+/** Stream a raw source into a sibling temporary file; only a complete download replaces the destination. */
 export async function publishPinnedSourceStream({sourceRoot,entry,stream}:{sourceRoot:string;entry:SourceEntry;stream:Readable}) {
- // Bytes that arrive over the network are exactly the bytes a pin exists for.
- const expectedBytes=entry.expectedBytes;
- if(expectedBytes===undefined||entry.expectedSha256===undefined)throw new TypeError(`A downloaded source must be pinned: ${entry.path}.`);
  const path=containedPath(sourceRoot,entry.path),temporary=`${path}.partial-${process.pid}-${randomUUID()}`;
- const hash=createHash('sha256');let size=0;
- const verify=new Transform({transform(chunk:Buffer,_encoding,callback){
-  size+=chunk.length;
-  if(size>expectedBytes){try{assertSourceSize(entry,size);}catch(error){callback(error as Error);return;}}
-  hash.update(chunk);callback(null,chunk);
- }});
  try{
   await mkdir(dirname(path),{recursive:true});
-  await pipeline(stream,verify,createWriteStream(temporary,{flags:'wx'}));
-  assertSourceSize(entry,size);assertSourceHash(entry,hash.digest('hex'));
+  await pipeline(stream,createWriteStream(temporary,{flags:'wx'}));
   await rename(temporary,path);
  }finally{stream.destroy();await rm(temporary,{force:true});}
  return entry;

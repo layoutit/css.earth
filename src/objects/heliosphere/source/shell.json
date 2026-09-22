@@ -31,7 +31,6 @@
   "shape": {
     "kind": "gridded-surface",
     "path": "ibex/heliopause-grid.json",
-    "sha256": "dbae182236b56654eff4552d5f3530af5e556db4853a312c6dc87ba5704e5bb9",
     "displaySubdivision": {
       "method": "radial-linear",
       "segmentsPerEdge": 4
@@ -83,7 +82,6 @@
   },
   "unitScale": 50,
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "0ecb20e66908b0f576b2dd2aac7560b7de23902cbf13a1364bab0f82b07a9fd4"
+    "path": "provenance.json"
   }
 }

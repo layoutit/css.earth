@@ -4,8 +4,6 @@
     {
       "id": "n1716192103_1",
       "path": "observations/N1716192103_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "cd7c3ead82f5629f515008dfad648f931cb52ed48b74b25482397c822f96f677",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103",
       "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -85,8 +83,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

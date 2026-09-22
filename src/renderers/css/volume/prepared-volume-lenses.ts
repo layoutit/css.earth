@@ -55,7 +55,7 @@ export interface PreparedVolumeLensState {
   readonly lenses: readonly Pick<PreparedVolumeLens, 'id' | 'label' | 'title' | 'description' | 'sourceUrl'>[];
 }
 
-/** Decode and verify the authored generic bank; preparation is never a runtime fallback. */
+/** Decode the authored generic bank; preparation is never a runtime fallback. */
 export async function loadPreparedVolumeLenses(input: unknown, transport: PreparedCssTransport): Promise<PreparedVolumeLenses> {
   const descriptor = parseObjectDescriptor(input);
   if (descriptor.type !== 'volume-lens-bank' || descriptor.prepared?.format !== 'cssearth-volume-lenses@1') {
@@ -63,9 +63,6 @@ export async function loadPreparedVolumeLenses(input: unknown, transport: Prepar
   }
   const frame = parseDensityVolumeFrame(descriptor.properties.frame);
   const bytes = await transport.read(descriptor.prepared.url);
-  const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', bytes));
-  const digest = [...hash].map(value => value.toString(16).padStart(2, '0')).join('');
-  if (digest !== descriptor.prepared.sha256) throw new TypeError('Prepared volume lens SHA-256 identity mismatch.');
   const value: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
   const payload = readPreparedObject(value, descriptor, validatePreparedVolumeLenses).data;
   if (payload.id !== descriptor.id || payload.lenses.some(lens => JSON.stringify(lens.volume.frame) !== JSON.stringify(frame))) {

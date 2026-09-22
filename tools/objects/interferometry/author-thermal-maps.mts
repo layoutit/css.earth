@@ -128,7 +128,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
     const definitionAt = (frequencyHz: number): MeasurementDefinition => { const wavelength = 299_792_458 / frequencyHz * 1e6; return ({ quantity, units, timeDependence: 'instantaneous-state',
       wavelengthIntervalsMicrometres: [[wavelength, wavelength]], source: requireString(entry.source, 'source'),
       method: { kind: 'brightness-temperature', frequencyGHz: Math.round(frequencyHz / 1e8) / 10, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } }); };
-    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(rotationBytes), bodyCode: requireFiniteNumber(rotation.body) } };
+    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), bodyCode: requireFiniteNumber(rotation.body) } };
     const policy: CombinationPolicy = { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } };
     const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition: definitionAt(frequencies[index]!), frame, observation: observations[index]! })), policy, limit);
     const output = requireString(entry.output, 'output'), fits = bodyMapFits(map, { TELESCOP: 'ALMA', OBJECT: requireString(entry.target), QUANTITY: quantity, NSESSION: String(placed.length) },
@@ -136,7 +136,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
     written.set(resolve(source, output), fits);
     const unqualifiedMap = { schema: 'cssearth-body-map@1',
       definition: definitionAt(frequencies[0]!), frame,
-      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
+      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, value: quantity, uncertainty: `${quantity} ERROR` },
       mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
     const resolution = bindMapResolution(unqualifiedMap, 'calibrated', 'applied-restoring-beam', sessions), mapProduct = resolution.product;
     const metadata = Buffer.from(formatBodyMapProduct(mapProduct));

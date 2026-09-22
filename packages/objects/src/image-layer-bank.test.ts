@@ -5,7 +5,7 @@ function descriptor() {
   return { schema: 'cssearth-object@1', id: 'cloud', type: 'image-layer-bank', properties: {
     frame: { referenceFrame: 'icrf', epochJdTt: 1, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
       metersPerUnit: 100, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
-    preparation: { source: 'source/recipe.json', sha256: 'a'.repeat(64) } } };
+    preparation: { source: 'source/recipe.json' } } };
 }
 test('parses a renderer-independent spatial image model without assigning measured density', () => {
   expect(parseImageLayerBankDescriptor(descriptor())).toMatchObject({ type: 'image-layer-bank', frame: { metersPerUnit: 100 } });

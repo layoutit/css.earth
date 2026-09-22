@@ -23,8 +23,6 @@
         "referenceRadiusMeters": 170
       },
       "coverage": "The weak 2012–2013 radar data admit multiple shapes; the 2026 PDS release preserves the 2018 Model B rather than a new reconstruction. Apophis tumbles: the archived precession and rotation periods are 27.45 and 265.7 hours. This view uses a fixed illustrative frame, without propagating its tumbling attitude. No optical surface map is supplied.",
-      "expectedBytes": 197868,
-      "expectedSha256": "226c330bafda3a773533779228a01cf2a009e8d611f209329e872433fc00e266",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -50,8 +48,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -75,8 +71,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 2680618,
-      "expectedSha256": "3f95993fcc37d0e6da5cc52eea19084e3c0905a09e4eebca87db52a2c12ee585",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

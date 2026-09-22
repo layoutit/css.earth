@@ -21,7 +21,6 @@ const outputPath = resolve(
 export const WORDMARK_RAIL_RECIPE = Object.freeze({
   source: PLANET_TITLE_RECIPE.source,
   sourceUrl: PLANET_TITLE_RECIPE.sourceUrl,
-  sourceSha256: PLANET_TITLE_RECIPE.sourceSha256,
   checkedFontPath: PLANET_TITLE_RECIPE.checkedFontPath,
   fontSize: 22,
   opticalSize: 22,
@@ -44,9 +43,6 @@ export async function prepareWordmarkRail({
   writeSource = (moduleSource: string) => writeFile(outputPath, moduleSource),
 }: {fontPath?: string; writeSource?: (moduleSource: string) => Promise<void>} = {}) {
   const fontBytes = await readFile(fontPath);
-  if (sha256(fontBytes) !== WORDMARK_RAIL_RECIPE.sourceSha256) {
-    throw new Error("The checked Inter wordmark font does not match its pinned hash.");
-  }
 
   const baseFont = fontkit.openSync(fontPath);
   if (!("getVariation" in baseFont)) throw new TypeError("The pinned wordmark font must be one font face.");
@@ -123,7 +119,6 @@ export function createWordmarkSegment({
     viewBox: `0 ${stableNumber(minY)} ${width} ${height}`,
     path: paths.map((path) => path.translate(-minX, 0).toSVG()).join(""),
     source: WORDMARK_RAIL_RECIPE.source,
-    sourceSha256: WORDMARK_RAIL_RECIPE.sourceSha256,
     sourceGenerator: "tools/prepare/prepare-wordmark-rail.mts",
   });
 }

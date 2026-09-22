@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "5e70c29deb7767814f9f8d36d8c0d19392eca5ad65b1df7fd8bce1e8a1235cbe",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -135,9 +132,7 @@
       "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/masiero-2011.pdf",
-      "expectedBytes": 2276528,
-      "expectedSha256": "cdcbc1bf321e943d01cfe8b46dcf6729a2c100bf67104e85d6aec8d8efbb8f7f"
+      "path": "reference/masiero-2011.pdf"
     },
     {
       "path": "reference/model-properties.json"

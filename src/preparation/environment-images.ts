@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { parseImageLayerRecipe } from './image-layers/config.js';
 import { prepareImageLayers } from './image-layers/prepare.js';
-import { containedPath, sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath, sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { prepareSurfaceShellObject } from './shell/prepare.js';
 import { prepareDensityVolumeObject } from './volume/prepare.js';
 import { prepareStarsObject } from './stars/prepare.js';
@@ -13,8 +13,8 @@ import { prepareStarsObject } from './stars/prepare.js';
 interface Resource { path: string; sha256: string; bytes: number }
 interface Descriptor {
   id: string; type: string;
-  properties: { preparation: { source: string; sha256: string } };
-  prepared: { url: string; sha256: string };
+  properties: { preparation: { source: string } };
+  prepared: { url: string };
 }
 const raster = /\.(?:webp|png|jpe?g|avif)$/i;
 
@@ -52,7 +52,7 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
   const descriptor: Descriptor = JSON.parse(await readFile(join(objectDirectory, 'object.json'), 'utf8'));
   // These resources have their own preparation steps later in the build.
   if (descriptor.type === 'volume-lens-bank' || descriptor.type === 'galaxy-point-field') return;
-  const preparedBytes = await verifiedBytes(objectDirectory, { path: descriptor.prepared.url, sha256: descriptor.prepared.sha256 });
+  const preparedBytes = await readFile(containedPath(objectDirectory, descriptor.prepared.url));
   const expected = JSON.parse(preparedBytes.toString());
   const data = expected.data ?? expected;
   const resources: Resource[] = (data.resources ?? []).filter((resource: Resource) => raster.test(resource.path));
@@ -68,7 +68,7 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
   if (!resources.length) return;
   let missing = false;
   for (const resource of resources) {
-    try { await verifiedBytes(preparedDirectory, resource); }
+    try { await sourceBytes(preparedDirectory, resource); }
     catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; missing = true; }
   }
   if (!missing && !verifyReplay) {
@@ -81,7 +81,7 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
     switch (descriptor.type) {
       case 'image-layer-bank': {
         const ref = descriptor.properties.preparation;
-        const recipe = parseImageLayerRecipe(JSON.parse((await verifiedBytes(objectDirectory, { path: ref.source, sha256: ref.sha256 })).toString()));
+        const recipe = parseImageLayerRecipe(JSON.parse((await readFile(containedPath(objectDirectory, ref.source))).toString()));
         const baked = await prepareImageLayers({ sourceDirectory: dirname(containedPath(objectDirectory, ref.source)), outputDirectory: temporary, recipe });
         assertImageLayerReplay(JSON.parse(JSON.stringify(baked)), data);
         break;
@@ -93,15 +93,14 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
     }
     // Verify the entire accepted bank before copying anything. Never replace scientific metadata.
     for (const resource of resources) {
-      const bytes = await verifiedBytes(temporary, resource);
+      const bytes = await sourceBytes(temporary, resource);
       assert.equal(bytes.length, resource.bytes, `Image byte length changed: ${resource.path}`);
     }
-    assert.equal(sha256(await readFile(containedPath(objectDirectory, descriptor.prepared.url))), descriptor.prepared.sha256);
     for (const resource of resources) {
       const destination = containedPath(preparedDirectory, resource.path);
       await mkdir(dirname(destination), { recursive: true });
       const pending = `${destination}.${process.pid}.tmp`;
-      await writeFile(pending, await verifiedBytes(temporary, resource));
+      await writeFile(pending, await sourceBytes(temporary, resource));
       await rename(pending, destination);
     }
     console.log(`ENVIRONMENT_READY ${descriptor.id}: ${resources.length} byte-identical images`);

@@ -33,7 +33,6 @@
         "pointsRetained": 326,
         "license": null,
         "archiveMd5": null,
-        "archiveSha256": null,
         "countQualification": null
       },
       "metadataFields": {
@@ -43,7 +42,6 @@
         "perCellStatistic": "aggregation.perCellStatistic",
         "license": "source.license",
         "archiveMd5": "source.archiveMd5",
-        "archiveSha256": "source.archiveSha256",
         "countQualification": "aggregation.archiveCountQualification"
       }
     },
@@ -63,7 +61,6 @@
           "journal": "Astronomy and Computing",
           "arxiv": "1808.01973",
           "url": "https://arxiv.org/abs/1808.01973",
-          "sourcePdfSha256": "805e53ab8f921c55e1c5e3dd64bbd567f806cdba56148625afcddfc650b6f9a7",
           "retrievedAt": "2026-09-01",
           "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
         },
@@ -83,9 +80,9 @@
             -0.613,
             0.06328,
             -0.0016336,
-            3.3644e-05,
-            -3.4265e-07,
-            1.6893e-09,
+            0.000033644,
+            -3.4265e-7,
+            1.6893e-9,
             -3.0334e-12
           ]
         }

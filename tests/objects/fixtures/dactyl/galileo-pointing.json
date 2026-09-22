@@ -8,18 +8,15 @@
   "inputs": [
     {
       "path": "src/objects/dactyl/evidence/registration/native/naif0008.tls",
-      "expectedBytes": 4542,
-      "expectedSha256": "bbf419803aa31b787d681bd9b807930f60c7504695df3ad016bd47ca1bb89f42"
+      "expectedBytes": 4542
     },
     {
       "path": "src/objects/dactyl/evidence/registration/native/mk00062a.tsc",
-      "expectedBytes": 10127,
-      "expectedSha256": "cea5234f9769f83aa6da65f360c6940a70b72461ed2c577cb531448e7498295c"
+      "expectedBytes": 10127
     },
     {
       "path": "src/objects/dactyl/evidence/galileo/native/gll_plt_rec_1993_tav_v00.bc",
-      "expectedBytes": 342016,
-      "expectedSha256": "0c0c50f8358fe1826e4147a45ec7c6663db92e89df2ebab7bc7e19554a219e86"
+      "expectedBytes": 342016
     }
   ],
   "calls": [

@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 310
       },
       "coverage": "The archive explicitly identifies this mesh as Alpha, the primary; Beta and Gamma are not modeled here. The adopted nominal solution is model 17, with ecliptic pole (336°, 22°). Many radar pole solutions remain plausible, so the nominal orientation does not establish a unique spin pole.",
-      "expectedBytes": 120595,
-      "expectedSha256": "8df685e9f555ba71a07ba4364af3ea59e485fcb5afa43fb54e5a12f645fca78b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -107,8 +103,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 2322959,
-      "expectedSha256": "e3840904a1d5e785a5292887c5eb88b86e06e2d5574a470f3a35702ab6f71ff0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

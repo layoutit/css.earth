@@ -41,8 +41,7 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
     return response.arrayBuffer();
   };
   const definition = await loadPreparedCssObject(descriptor, {
-    // The decoder authenticates the descriptor, then verifies every byte and bank.
-    read: () => read(`/objects/${objectId}/${descriptor.prepared!.sha256}.json`),
+    read: () => read(`/objects/${objectId}/object.json`),
   });
   if (definition.id !== objectId) throw new Error('Prepared dataset object identity drifted.');
   const feature = featureIds.length && definition.features ? await loadPreparedSurfaceFeature(definition.features, objectId, featureIds[0]!,
@@ -65,9 +64,9 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   const activeLens = lensId ?? definition.controls.lenses?.defaultLens;
   const scene = region(html, 'prepared-scene');
   const stage = requiredElement<HTMLElement>(scene.document, '.planet-stage');
-  if (stage.dataset.objectId !== objectId || stage.dataset.preparedObject !== objectId || stage.dataset.preparedSha256 !== descriptor.prepared.sha256) throw new Error('Prepared scene identity drifted.');
+  if (stage.dataset.objectId !== objectId || stage.dataset.preparedObject !== objectId) throw new Error('Prepared scene identity drifted.');
   for (const name of stage.getAttributeNames()) {
-    if (!['aria-label', 'data-object-id', 'data-prepared-object', 'data-prepared-sha256'].includes(name)) stage.removeAttribute(name);
+    if (!['aria-label', 'data-object-id', 'data-prepared-object'].includes(name)) stage.removeAttribute(name);
   }
   stage.className = ['planet-stage', 'example-stage', ...selected.classes].join(' ');
   for (const [name, value] of Object.entries(selected.attributes)) stage.setAttribute(name, value);

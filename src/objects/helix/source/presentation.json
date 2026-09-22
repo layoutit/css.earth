@@ -4,52 +4,36 @@
   "name": "Helix Nebula",
   "defaultLens": "eso-wfi",
   "bank": {
-    "path": "src/objects/helix/prepared/lenses.json",
-    "sha256": "45f7598a6c8d9140140d389c045e555dd71d08996ec8cba3421cff5f73da21c4",
-    "bytes": 2957572
+    "path": "src/objects/helix/prepared/lenses.json"
   },
   "recipes": [
     {
       "id": "recipe-1",
-      "path": "src/objects/helix/source/delivery.json",
-      "sha256": "63902a14bdd0490529f5651d5378f4fdf26c4dbc4985856443385371925c0274",
-      "bytes": 2073
+      "path": "src/objects/helix/source/delivery.json"
     },
     {
       "id": "recipe-2",
-      "path": "src/objects/helix/source/request.json",
-      "sha256": "8a6057d0d9719ab5d48569921bd1a79238bc4c59b4bf2f90d17bcb738446223c",
-      "bytes": 350
+      "path": "src/objects/helix/source/request.json"
     },
     {
       "id": "recipe-3",
-      "path": "src/objects/helix/source/bake-inputs/references/01-compiler.json",
-      "sha256": "ce2aa4f55bc2569784b50cae163ecc98502fc3f76add6c07b0a4fd64b6a3ff85",
-      "bytes": 1329
+      "path": "src/objects/helix/source/bake-inputs/references/01-compiler.json"
     },
     {
       "id": "recipe-4",
-      "path": "src/objects/helix/source/bake-inputs/references/02-observations.json",
-      "sha256": "94c86a73e965bf38c4df792047cdbeb2321cccecb2bfd3a4d0340b84c4af38ea",
-      "bytes": 4470
+      "path": "src/objects/helix/source/bake-inputs/references/02-observations.json"
     },
     {
       "id": "recipe-5",
-      "path": "src/objects/helix/source/bake-inputs/references/03-observation-structures.json",
-      "sha256": "31906fc965cd98acce4d3d8b6589135311f48a14ecfd94c20abbe2e298434156",
-      "bytes": 405
+      "path": "src/objects/helix/source/bake-inputs/references/03-observation-structures.json"
     },
     {
       "id": "recipe-6",
-      "path": "src/objects/helix/source/bake-inputs/references/04-joint-fit.json",
-      "sha256": "5380e28a8c39c629c586a701c8dda36e4a7f5dd643c3c1adda552359549f2065",
-      "bytes": 1020
+      "path": "src/objects/helix/source/bake-inputs/references/04-joint-fit.json"
     },
     {
       "id": "molecular-evidence",
-      "path": "src/objects/helix/source/evidence/helix/kinematics-hco.json",
-      "sha256": "f6fec28e77fb4e87bbcee87941f57c6d1463910cafb9f113c60e6e02fe8db125",
-      "bytes": 7355
+      "path": "src/objects/helix/source/evidence/helix/kinematics-hco.json"
     }
   ],
   "sharedInputs": [
@@ -63,97 +47,91 @@
   "lenses": [
     {
       "id": "eso-vista",
-      "label": "ESO VISTA \u00b7 infrared",
+      "label": "ESO VISTA · infrared",
       "title": "Helix in near infrared",
       "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Near-infrared false color on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
-      "detail": "6592 \u00d7 6592 px",
+      "detail": "6592 × 6592 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared \u00b7 Y / J / K"
+          "value": "Near-infrared · Y / J / K"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6592 \u00d7 6592"
+          "value": "6592 × 6592"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "37.51 \u00d7 37.51 arcmin"
+          "value": "37.51 × 37.51 arcmin"
         }
       ],
       "input": "eso-vista",
       "preview": {
         "path": ".local/nebula-presentation/helix-eso-vista.jpg",
-        "sha256": "87ebde189ea4bc44ad19e01555cf18d4981a0fbda468d86d618d3beee9933425",
-        "bytes": 503330,
         "url": "https://cdn.eso.org/images/screen/eso1205a.jpg"
       }
     },
     {
       "id": "eso-wfi",
-      "label": "ESO WFI \u00b7 optical detail",
+      "label": "ESO WFI · optical detail",
       "title": "Helix in visible light",
       "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
-      "detail": "7059 \u00d7 6535 px",
+      "detail": "7059 × 6535 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical \u00b7 B / V / R"
+          "value": "Optical · B / V / R"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "7059 \u00d7 6535"
+          "value": "7059 × 6535"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "28.02 \u00d7 25.94 arcmin"
+          "value": "28.02 × 25.94 arcmin"
         }
       ],
       "input": "eso-wfi",
       "preview": {
         "path": ".local/nebula-presentation/helix-eso-wfi.jpg",
-        "sha256": "f67b522d9eb7f93fc308e96155f9b09385d53116c1e0f3174749a6dbcaa9f6d8",
-        "bytes": 152243,
         "url": "https://cdn.eso.org/images/screen/eso0907a.jpg"
       }
     },
     {
       "id": "eso-wide",
-      "label": "ESO \u00b7 wider field",
+      "label": "ESO · wider field",
       "title": "The wider Helix field",
       "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Wide optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
-      "detail": "6850 \u00d7 4759 px",
+      "detail": "6850 × 4759 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "ESO 3.6 m \u00b7 filters not listed"
+          "value": "ESO 3.6 m · filters not listed"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6850 \u00d7 4759"
+          "value": "6850 × 4759"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "48.82 \u00d7 33.92 arcmin"
+          "value": "48.82 × 33.92 arcmin"
         }
       ],
       "input": "eso-wide",
       "preview": {
         "path": ".local/nebula-presentation/helix-eso-wide.jpg",
-        "sha256": "6ef9e0f9059a6deebda52f72a50fbec8c4aaa452919756cdf8866000d34ddf79",
-        "bytes": 135541,
         "url": "https://cdn.eso.org/images/screen/helix.jpg"
       }
     }

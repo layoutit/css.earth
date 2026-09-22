@@ -99,7 +99,7 @@ watch('.').close();
 test('the trace keeps each owner view of an object descriptor as first read', async () => {
   const descriptor = JSON.stringify({ schema: 'cssearth-object@1', id: 'moon', type: 'moon',
     properties: { catalog: { name: 'Moon', description: 'Card' }, recipe: { schema: 'recipe' }, page: { metadata: { sha256: 'a' } }, worldFrame: { radius: 1 } },
-    prepared: { sha256: 'b' } });
+    prepared: { url: 'prepared/b.json' } });
   const { files } = await traced(`import { readFileSync } from 'node:fs'; readFileSync('src/objects/moon/object.json');`, { 'src/objects/moon/object.json': descriptor });
   assert.deepEqual(files.get('src/objects/moon/object.json')?.first.views, {
     registry: descriptorDigest(descriptor, 'registry'), recipe: descriptorDigest(descriptor, 'recipe'), pins: descriptorDigest(descriptor, 'pins') });
@@ -108,12 +108,12 @@ test('the trace keeps each owner view of an object descriptor as first read', as
 test('descriptor views leave the card out and keep each owner apart', () => {
   const base = { schema: 'cssearth-object@1', id: 'moon', type: 'moon',
     properties: { catalog: { name: 'Moon', description: 'Card' }, recipe: { radius: 1 }, page: { stylesheets: ['a.css'], metadata: { sha256: 'a' } }, worldFrame: { radius: 1 } },
-    prepared: { sha256: 'b' } };
+    prepared: { url: 'prepared/b.json' } };
   const digest = (value: unknown, view: 'registry' | 'recipe' | 'pins') => descriptorDigest(JSON.stringify(value), view);
   const edit = (change: (value: typeof base) => void) => { const value = structuredClone(base); change(value); return value; };
   const card = edit(value => { value.properties.catalog.description = 'New card'; });
   const recipe = edit(value => { value.properties.recipe.radius = 2; });
-  const pins = edit(value => { value.prepared.sha256 = 'c'; });
+  const pins = edit(value => { value.prepared.url = 'prepared/c.json'; });
   const frame = edit(value => { value.properties.worldFrame.radius = 2; });
   const name = edit(value => { value.properties.catalog.name = 'Luna'; });
   for (const view of ['registry', 'recipe', 'pins'] as const) assert.equal(digest(card, view), digest(base, view), `${view} ignores the card`);

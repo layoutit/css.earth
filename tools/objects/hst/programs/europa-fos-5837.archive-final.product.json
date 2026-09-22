@@ -6,26 +6,22 @@
     {
       "role": "coordinates",
       "identity": "mast:HST/product/y2p60503t_c0f.fits",
-      "bytes": 43200,
-      "sha256": "40ef2f74f7261397e2ed5a8a182879d084a68cc15316de40221b76cd42a4f043"
+      "bytes": 43200
     },
     {
       "role": "science",
       "identity": "mast:HST/product/y2p60503t_c1f.fits",
-      "bytes": 43200,
-      "sha256": "aabd9708b5d9fc7b34d504a85b23fcdbc1d7593749a5172c95ee90a2ae33d718"
+      "bytes": 43200
     },
     {
       "role": "uncertainty",
       "identity": "mast:HST/product/y2p60503t_c2f.fits",
-      "bytes": 43200,
-      "sha256": "d527b80986f0e626298e2ab64290b5f9ee907159c31c63daaa01766c97607560"
+      "bytes": 43200
     },
     {
       "role": "quality",
       "identity": "mast:HST/product/y2p60503t_cqf.fits",
-      "bytes": 43200,
-      "sha256": "5545af32a82c43f8076e91583e39c0836fede1684ca15a31612441abbe4d9035"
+      "bytes": 43200
     }
   ],
   "parameters": {
@@ -208,25 +204,21 @@
     {
       "path": "y2p60503t_c0f.fits",
       "bytes": 43200,
-      "sha256": "40ef2f74f7261397e2ed5a8a182879d084a68cc15316de40221b76cd42a4f043",
       "units": "ANGSTROMS"
     },
     {
       "path": "y2p60503t_c1f.fits",
       "bytes": 43200,
-      "sha256": "aabd9708b5d9fc7b34d504a85b23fcdbc1d7593749a5172c95ee90a2ae33d718",
       "units": "ERGS/CM**2/S/A"
     },
     {
       "path": "y2p60503t_c2f.fits",
       "bytes": 43200,
-      "sha256": "d527b80986f0e626298e2ab64290b5f9ee907159c31c63daaa01766c97607560",
       "units": "ERGS/CM**2/S/A"
     },
     {
       "path": "y2p60503t_cqf.fits",
-      "bytes": 43200,
-      "sha256": "5545af32a82c43f8076e91583e39c0836fede1684ca15a31612441abbe4d9035"
+      "bytes": 43200
     }
   ],
   "evidence": [

@@ -34,7 +34,6 @@ test('executes every pinned Saturn acquisition verifier',async()=>{
 test('prepares the Saturn shell title from its owned source',async()=>{
  const {title}=await readPreparedFixture('saturn','content');
  assert.equal(title.label,'Saturn');
- assert.equal(title.sourceSha256,'746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c');
  const descriptor=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/object.json',import.meta.url),'utf8'));
  assert.equal(descriptor.properties.recipe.sources.find((source: { id: string; })=>source.id==='title').path,'source/presentation/title-mark.json');
  assert.doesNotMatch(title.path,/<text|font-family/i);

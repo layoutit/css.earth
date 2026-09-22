@@ -587,7 +587,6 @@ test('one Wild 2 query sees source-pinned Stardust PDS3 observations without a d
   assert.equal(navcam.observations?.count, 5);
   assert.deepEqual(navcam.observations?.records?.map(record => record.id), ['n2069we02_rr', 'n2073we02_rr', 'n2075we02_rr', 'n2077we02_rr', 'n2079we02_rr']);
   assert.equal(navcam.observations?.records?.[0]?.centralWavelengthMicrometres, 0.6988);
-  assert.equal(navcam.observations?.records?.[0]?.sourceFiles?.[1]?.sha256, '6fa36047b1f56f219417cc86fafb39c507c9ee83318b428942228e6f84448f62');
   assert.deepEqual([navcam.meetsConstraints.wavelength?.answer, navcam.meetsConstraints.time?.answer, navcam.meetsConstraints.kind?.answer], ['unknown', 'yes', 'yes']);
   assert.equal(navcam.toolkitSupport.tool, 'tools/objects/telescopes/qualify-source.mts');
   assert.ok(navcam.selectionAssessment.blockers.some(blocker => blocker.code === 'body-map-author-missing'));

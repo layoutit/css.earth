@@ -120,9 +120,9 @@ test('every pinned program has a receipt for exactly its images, from its kernel
     assert.deepEqual(receipt.images.map((image: { productId: string }) => image.productId), program.images.map(image => image.productId));
     assert.ok(program.images.every(image => image.sha256 && image.labelSha256), 'a measured program carries every digest');
     assert.deepEqual(receipt.kernels.map((kernel: { path: string }) => kernel.path), program.kernels);
-    // The kernels the receipt names are the bank's pins.
-    const bank = JSON.parse(await readFile(resolve(kernelBankRoot(program.kernelSet), 'manifest.json'), 'utf8')) as { inputs: { path: string; expectedSha256: string }[] };
-    for (const kernel of receipt.kernels) assert.equal(bank.inputs.find(input => input.path === kernel.path)?.expectedSha256, kernel.sha256, kernel.path);
+    // The kernels the receipt names are the bank's inputs.
+    const bank = JSON.parse(await readFile(resolve(kernelBankRoot(program.kernelSet), 'manifest.json'), 'utf8')) as { inputs: { path: string }[] };
+    for (const kernel of receipt.kernels) assert.ok(bank.inputs.some(input => input.path === kernel.path), kernel.path);
     for (const image of receipt.images) {
       assert.ok(Math.abs(image.offsets.pointingSeconds) <= POLICY.maximumPointingSeconds && Math.abs(image.offsets.ephemerisSeconds) <= POLICY.maximumEphemerisSeconds, image.productId);
       assert.ok(image.holdoutResidualPixels.after <= POLICY.maximumResidualPixels && image.holdoutResidualPixels.after < image.holdoutResidualPixels.before && image.holdoutResidualPixels.points >= POLICY.minimumControls, image.productId);

@@ -54,7 +54,6 @@
         "center": 10,
         "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920090482&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
         "sourcePath": "src/objects/vanth/source/orbit/orcus-epoch.txt",
-        "sha256": "f7c9c8e3501f220dc4df48e096d4917123a072e47c94615b87eec44c84c0d20d",
         "solution": "tnosat_v001_20090482_jpl043_20220908",
         "limitations": [
           "The Horizons satellite solution tnosat_v001_20090482_jpl043_20220908 uses 12 observations from 2005 to 2015 and states a 67 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
@@ -71,7 +70,6 @@
       "center": 920090482,
       "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120090482&CENTER=500%40920090482&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
       "sourcePath": "src/objects/vanth/source/orbit/vanth-epoch.txt",
-      "sha256": "c4a216452a805fd18c3d3b5a3f77286074cdb3d89b7e835af84673ff16e0a1d5",
       "solution": "tnosat_v001_20090482_jpl043_20220908",
       "limitations": [
         "The Horizons satellite solution tnosat_v001_20090482_jpl043_20220908 uses 12 observations from 2005 to 2015 and states a 67 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",

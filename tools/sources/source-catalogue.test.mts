@@ -167,18 +167,16 @@ test('refreshing document pins retains bindings and native source metadata', asy
   const before = sourceInventory(manifest, path, prepared.sources, used);
   const documents = sourceArray(manifest.documents, sourceObject);
   const refreshed = documents.map(row => refreshSourceRecord(documents, {
-    path: sourceText(row.path), expectedBytes: row.expectedBytes, expectedSha256: row.expectedSha256,
-    purpose: 'Fallback for a newly authored record.',
+    path: sourceText(row.path), purpose: 'Fallback for a newly authored record.',
   }));
   assert.deepEqual(sourceInventory({...manifest, documents: refreshed}, path, prepared.sources, used), before);
   const native = {path:'native.xml',kind:'source-document',origin:'https://example.org/native.xml',credit:'Provider',
     sourceBinding:{kind:'catalogued',references:[{catalogueId:'native',role:'material',evidence:'Original label'}]},
     capture:{attributions:[{kind:'mission',missionId:'test-mission',evidence:'Native label'}]},
-    purpose:'Original product label.',expectedBytes:10,expectedSha256:'a'.repeat(64)};
-  const result = refreshSourceRecord([native],{path:'native.xml',expectedBytes:20,expectedSha256:'b'.repeat(64),purpose:'Fallback.'});
-  assert.deepEqual(result,{...native,expectedBytes:20,expectedSha256:'b'.repeat(64)});
-  assert.equal(native.expectedBytes,10);
-  assert.equal(refreshSourceRecord([],{path:'new.json',expectedBytes:1}).sourceBinding,undefined,'refresh must not invent a binding');
+    purpose:'Original product label.'};
+  const result = refreshSourceRecord([native],{path:'native.xml',purpose:'Fallback.'});
+  assert.deepEqual(result,native);
+  assert.equal(refreshSourceRecord([],{path:'new.json'}).sourceBinding,undefined,'refresh must not invent a binding');
 });
 test(`both catalogues prepare deterministically from ${sourceCheckMode()} package inputs before publication`, async () => {
   const result=await prepareFacilities({publish:false});
@@ -315,7 +313,6 @@ test('numerical extraction uses current package records and preserves reviewed s
     for (const previous of previousInputs) {
       const next = nextInputs.find(row => row.id === previous.id)!;
       assert.deepEqual(next.sourceBinding,previous.sourceBinding);
-      assert.equal(next.expectedSha256,previous.expectedSha256);
     }
     assert.deepEqual(after.documents,before.documents);
     assert.deepEqual(after.generatedIntermediates,before.generatedIntermediates);

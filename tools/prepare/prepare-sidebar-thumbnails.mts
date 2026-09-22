@@ -10,12 +10,10 @@ import { hasErrorCode } from '../sources/source-values.mts';
 const root = process.cwd();
 const check = process.argv.includes('--check');
 
-const inputs = new Map<string, { path: string; sha256: string; bytes: number }>();
-const read = async (path: string, expected?: string) => {
+const inputs = new Map<string, { path: string; bytes: number }>();
+const read = async (path: string) => {
   const bytes = await readFile(resolve(root, path));
-  const digest = sha256(bytes);
-  if (expected && digest !== expected) throw new Error(`Changed sidebar image input: ${path}`);
-  inputs.set(path, { path, sha256: digest, bytes: bytes.length });
+  inputs.set(path, { path, bytes: bytes.length });
   return bytes;
 };
 const json = async (path: string): Promise<unknown> => JSON.parse((await read(path)).toString());
@@ -26,7 +24,7 @@ const output = async (path: string, bytes: Uint8Array | string) => {
   } else await writeFile(resolve(root, path), data);
 };
 
-interface Thumbnail { url: string; url2x: string; sha256: string; sha2562x: string; inputs: string[]; credit: string; sourceUrl: string; }
+interface Thumbnail { url: string; url2x: string; inputs: string[]; credit: string; sourceUrl: string; }
 const images: Record<string, Thumbnail> = {}, defaults: Record<string, string> = {};
 const makeThumbnail = async (id: string, lens: string, bytes: Buffer, evidence: Pick<Thumbnail, 'inputs' | 'credit' | 'sourceUrl'>) => {
   const generated = [];
@@ -38,10 +36,9 @@ const makeThumbnail = async (id: string, lens: string, bytes: Buffer, evidence: 
       .webp({ lossless: true, effort: 6 }).toBuffer();
     const url = `/navigation/focus-${id}-${lens}${density === 2 ? '@2x' : ''}.webp`;
     await output(`public${url}`, tile);
-    generated.push({ url, sha256: sha256(tile) });
+    generated.push({ url });
   }
-  images[`${id}/${lens}`] = { url: generated[0].url, url2x: generated[1].url,
-    sha256: generated[0].sha256, sha2562x: generated[1].sha256, ...evidence };
+  images[`${id}/${lens}`] = { url: generated[0].url, url2x: generated[1].url, ...evidence };
 };
 
 if (!check) await mkdir(resolve(root, 'public/navigation'), { recursive: true });
@@ -59,7 +56,7 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
     const match = lens.texture?.url.match(/^\/scenes\/([a-z0-9-]+)\/datasets\/([a-f0-9]{64})\.webp$/u);
     if (!match || match[1] !== id || !lens.texture) throw new Error(`Unpinned sidebar image: ${id}/${lens.id}`);
     const previewPath = `public${lens.texture.url}`;
-    await makeThumbnail(id, lens.id, await read(previewPath, match[2]), { inputs: [path, previewPath],
+    await makeThumbnail(id, lens.id, await read(previewPath), { inputs: [path, previewPath],
       credit: lens.texture.attribution?.label ?? '', sourceUrl: lens.texture.attribution?.url ?? '' });
   }
   if (!images[`${id}/${defaultLens}`]) throw new Error(`Missing default sidebar image: ${id}`);
@@ -86,7 +83,7 @@ for (const raw of sourceArray(volume.quads, sourceObject)) {
   const width = x(lowerRight[0]) - left, height = y(lowerRight[1]) - top;
   if (width <= 0 || height <= 0) continue;
   const path = `src/objects/milky-way/prepared/${sourcePath(raw.texturePath)}`;
-  const bytes = await read(path, sourceDigest(raw.sha256)); slabInputs.push(path);
+  const bytes = await read(path); slabInputs.push(path);
   layers.push({ input: await sharp(bytes).resize(width, height).png().toBuffer(), left, top });
 }
 const milkyWay = await sharp({ create: { width: size, height: size, channels: 4, background: '#00000000' } })

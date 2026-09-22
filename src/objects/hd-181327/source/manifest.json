@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "hd-181327-gaia-dr3-source",
       "path": "photometry/gaia-dr3-source.csv",
-      "expectedBytes": 338,
-      "expectedSha256": "690ee37a81a6c5e3afcb831733138df1973accc958635cbe8d23f0074f997eb0",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
       "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
@@ -156,8 +152,6 @@
     {
       "id": "hd-181327-gaia-dr3-astrophysical-parameters",
       "path": "photometry/gaia-dr3-astrophysical-parameters.csv",
-      "expectedBytes": 361,
-      "expectedSha256": "6e05174338cfb87089eef93342e05fbb6d2f901dd85b892434b8864450b702eb",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
       "credit": "ESA/Gaia/DPAC; Creevey et al. (2023), A&A 674, A26; Fouesneau et al. (2023), A&A 674, A28",
       "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
@@ -183,8 +177,6 @@
     {
       "id": "hd-181327-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10170,
-      "expectedSha256": "448f93eb7989df89a9830f6624366abff72ffc071d243484e26fa0e589c89332",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6643589352010758400&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",

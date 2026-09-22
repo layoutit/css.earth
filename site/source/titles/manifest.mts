@@ -3,7 +3,6 @@ export const SHELL_TITLE_SOURCES = Object.freeze({
   font: Object.freeze({
     source: "Inter Variable 4.001 git-9221beed3",
     sourceUrl: "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-    sourceSha256: "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
   }),
   recipe: Object.freeze({
     weight: 500,

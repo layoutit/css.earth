@@ -3101,24 +3101,18 @@
       "reason": "sampled fitted-offset sensitivity leaves physical region"
     }
   ],
-  "fitReceiptSha256": "e7e8d9b030135adc5e802c28daa9092bc77e37246bb2d50b59d36bdbb8d9b26a",
-  "terrainSha256": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
-  "cameraModuleSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
-  "sunTableSha256": "8782f309aa719c988df6c4441e96c02e88bca8ffdb2d82ea02c37407a298205b",
   "sourcePins": [
     {
       "file": "C1465671822_1_ir.cub",
       "url": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
       "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
-      "bytes": 1090377,
-      "sha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee"
+      "bytes": 1090377
     },
     {
       "file": "N1465671822_1_ir.cub",
       "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
       "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
-      "bytes": 226310,
-      "sha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3"
+      "bytes": 226310
     }
   ],
   "maximumSampledFullExposureGroundMotionKm": 0.22989018957137655,

@@ -6,7 +6,7 @@ import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { cataloguePosition, METERS_PER_KPC } from '@cssearth/volume-core/coordinates/catalogue-position';
 import type { Vector3, VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
-import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
@@ -40,7 +40,7 @@ export async function prepareCatalogueDensity(configPath: string) {
     const particleMode = config.particles !== undefined;
     const catalogue = pin(particleMode ? config.particles : config.catalogue), receipt = pin(config.receipt), framePin = pin(config.frameObject);
     const [tableBytes, receiptBytes, frameBytes] = await Promise.all([
-        verifiedBytes(root, catalogue), verifiedBytes(root, receipt), verifiedBytes(root, framePin)
+        sourceBytes(root, catalogue), sourceBytes(root, receipt), sourceBytes(root, framePin)
     ]);
     const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(frameBytes.toString('utf8')) as unknown);
     if (Math.abs(descriptor.volume.metersPerUnit / METERS_PER_KPC - 1) > 1e-12)

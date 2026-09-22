@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 1284.042
       },
       "coverage": "The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied.",
-      "expectedBytes": 148206,
-      "expectedSha256": "fea2d6afa17abbcf0f5db3f85223bf6bd9f295a177c98f62389feb7fdbcb28d5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 919739,
-      "expectedSha256": "d410e0781f8ddd984c8508b504d480f1f9e94da2a4df5158c56116dc1a125f43",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

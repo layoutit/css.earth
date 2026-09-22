@@ -12,12 +12,10 @@
  "references": [
   {
    "url": "https://raw.githubusercontent.com/astropy/astropy/7c5a9c124ce84c76992016e89631566ad398aff7/astropy/modeling/physical_models.py",
-   "sha256": "add7f6bce2c0f764b3a0d333b4e1cfa4083a676894c61823dfdde39dc2d88518",
    "bytes": 26301
   },
   {
    "url": "https://raw.githubusercontent.com/astropy/astropy/7c5a9c124ce84c76992016e89631566ad398aff7/astropy/units/astrophys.py",
-   "sha256": "a915aa2901518d91d7c2407d2d400b802624f8c92965f57b82984e7d8a9115a7",
    "bytes": 5302
   }
  ],

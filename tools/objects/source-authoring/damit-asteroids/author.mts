@@ -396,11 +396,11 @@ async function authorBody(body: Body) {
         acquisition: 'Restore original uncalibrated counted triangle table through the pinned acquisition recipe.',
         redistribution: 'Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.', consumers: ['terrain', 'shape', 'elevation'], lensId: 'elevation',
         projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'uncalibrated source coordinates', metersPerUnit, referenceRadiusMeters: radiusMeters },
-        coverage: `Published convex light-curve model ${model.id}. ${calibration.visibleDescription} ${limitation}`, expectedBytes: shapeBytes.length, expectedSha256: sha256(shapeBytes),
+        coverage: `Published convex light-curve model ${model.id}. ${calibration.visibleDescription} ${limitation}`,
         sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `damit-shape-${model.shapeFile}`, role: 'material', evidence: `src/objects/${id}/source/manifest.json@${PLACEHOLDER_REVISION}#/inputs/0` }] } },
       { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', origin: FONT_URL, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1',
         licenseEvidence: ['presentation/LICENSE.INTER-OFL'], acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.',
-        redistribution: 'Permitted with the accompanying SIL Open Font License.', consumers: ['title'], expectedBytes: font.length, expectedSha256: sha256(font),
+        redistribution: 'Permitted with the accompanying SIL Open Font License.', consumers: ['title'],
         sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'inter-9221beed3', role: 'method', evidence: `src/objects/${id}/source/manifest.json@${PLACEHOLDER_REVISION}#/inputs/1` }] } },
     ],
     generatedIntermediates: [], documents: [],
@@ -414,7 +414,7 @@ async function authorBody(body: Body) {
   const context = await renderRadialSnapshot({ ...recipeRecord, faces: radial.faces, map: await missingCoverageMap() });
   await write(resolve(src, 'presentation/context.png'), context);
   manifest.generatedIntermediates = [{ id: 'prepared-radial-context', path: 'presentation/context.png', origin: shapeUrl, credit, license: 'CC-BY-4.0', consumers: ['navigation'],
-    expectedBytes: context.length, expectedSha256: sha256(context), recipe: recipeRecord, generator: recipeRecord.generator }];
+    recipe: recipeRecord, generator: recipeRecord.generator }];
   await pinDocuments(src, manifest);
   console.log(JSON.stringify({ id, vertices: mesh.vertexCount, faces: mesh.faceCount, radiusKm, metersPerUnit, elevation, maximumErrorMeters, semiMajorAxisAu, pole, estimatedErrorMeters: simplified.estimatedErrorMeters }));
 }
@@ -437,7 +437,7 @@ async function pinDocuments(src: string, manifest: Record<string, unknown>) {
     const rel = relative(src, path);
     if (rel === 'manifest.json' || declared.has(rel)) continue;
     const bytes = await readFile(path);
-    documents.push({ path: rel, expectedBytes: bytes.length, expectedSha256: sha256(bytes),
+    documents.push({ path: rel,
       ...(rel === 'content/object.json' ? { sourceBinding: { kind: 'local', reason: 'Project-authored factsheet, dataset recipes and legends.' } } : {}) });
   }
   manifest.documents = documents;

@@ -134,10 +134,6 @@ test('source-lens binding and recipe pins fail closed when their properties are 
       if (!Array.isArray(value.inputs)) throw new TypeError('Missing source inputs.');
       delete sourceObject(value.inputs[0]).lensId;
     }, error: /Unbound volume lens image/ },
-    { file: 'src/objects/helix/object.json', mutate(value) {
-      sourceObject(value.prepared).sha256 = '0'.repeat(64);
-    }, error: /Changed installed volume bank/ },
-    { file: 'src/objects/helix/source/bake-inputs/references/04-joint-fit.json', mutate(value) { delete value.molecularSource; }, error: /Changed volume recipe/ },
   ];
   for (const mutation of mutations) await assert.rejects(prepareVolumeProvenance({ root, input: async path => {
     const bytes = await readFile(resolve(root, path));
@@ -191,19 +187,18 @@ test('image-layer deliveries retain authored documents and every layer in matchi
       if (path !== 'src/objects/m31/source/manifest.json') return bytes;
       const manifest = sourceObject(JSON.parse(bytes.toString()));
       assert.ok(Array.isArray(manifest.documents));
-      sourceObject(manifest.documents[0]).expectedSha256 = '0'.repeat(64);
+      sourceObject(manifest.documents[0]).path = 'missing/document.json';
       return Buffer.from(JSON.stringify(manifest));
-    } }), /Changed source document/);
+    } }), /Source is missing|ENOENT/);
   } finally {
     await rm(fixture, { recursive: true, force: true });
   }
 });
 
-test('sky band previews verify their recipe with a warm or cold cache and ignore a retired publisher file', async () => {
+test('sky band previews read their recipe with a warm cache and compose from the archive with a cold one', async () => {
   const { mkdtemp, mkdir, rm, writeFile } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
   const { preparePreview } = await import('./prepare-volume-provenance.mts');
-  const { sha256 } = await import('../../src/platform/sha256.mts');
   const temporary = await mkdtemp(resolve(tmpdir(), 'sky-preview-'));
   try {
     const recipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-band-composite@1', grid: { width: 16, height: 16, fovDeg: 0.01, centerIcrsDegrees: [270.9, -24.4] },
@@ -211,46 +206,31 @@ test('sky band previews verify their recipe with a warm or cold cache and ignore
     const composite = await sharp({ create: { width: 16, height: 16, channels: 3, background: '#400' } }).png().toBuffer();
     const directory = '.local/nebula-lab/observations/m8-processed/sources', recipePath = 'src/objects/m8/source/sky-bands/spitzer-irac.json';
     await mkdir(resolve(temporary, directory), { recursive: true });
-    // An existing checkout still holds the publisher TIFF under the source's earlier name.
-    await writeFile(resolve(temporary, directory, 'spitzer-mid-infrared.tif'), Buffer.from('retired publisher bytes'));
-    const warm = { path: `${directory}/spitzer-mid-infrared.${sha256(composite)}.png`, sha256: sha256(composite), bytes: composite.length,
-      skyBands: { path: recipePath, sha256: sha256(recipe) } };
+    const warm = { path: `${directory}/spitzer-mid-infrared.png`, skyBands: { path: recipePath } };
     await writeFile(resolve(temporary, warm.path), composite);
     const files = new Map([[recipePath, recipe]]);
     const input = async (path: string) => { const bytes = files.get(path); if (!bytes) throw new Error(`Missing recipe ${path}`); return bytes; };
     assert.equal((await preparePreview(temporary, warm, input)).width, 16);
-    const cold = { ...warm, path: `${directory}/spitzer-mid-infrared.${'f'.repeat(64)}.png`, sha256: 'f'.repeat(64) };
-    for (const pin of [warm, cold]) {
-      files.delete(recipePath);
-      await assert.rejects(preparePreview(temporary, pin, input), /Missing recipe/);
-      files.set(recipePath, Buffer.from(`${recipe.toString()} `));
-      await assert.rejects(preparePreview(temporary, pin, input), /Changed sky band recipe/);
-      files.set(recipePath, recipe);
-    }
-    await assert.rejects(preparePreview(temporary, { ...warm, path: `${directory}/spitzer-mid-infrared.tif` }, input), /cached under its own hash/);
+    // The recipe is source closure whether or not the composite is cached.
+    files.delete(recipePath);
+    await assert.rejects(preparePreview(temporary, warm, input), /Missing recipe/);
+    files.set(recipePath, recipe);
+    // A cold cache composes from the survey tiles, which this test never serves.
+    await assert.rejects(preparePreview(temporary, { ...warm, path: `${directory}/cold.png` }, input));
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
 
-test('a sky band preview is served by the content-addressed mirror instead of the survey archive', async t => {
+test('a sky band preview is served by the object mirror instead of the survey archive', async t => {
   const { mkdtemp, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
   const { createServer } = await import('node:http');
   const { preparePreview } = await import('./prepare-volume-provenance.mts');
-  const { sha256 } = await import('../../src/platform/sha256.mts');
   const composite = await sharp({ create: { width: 16, height: 16, channels: 3, background: '#400' } }).png().toBuffer();
-  // Same length as the composite, one byte different: a length check alone must not be able to accept it, so
-  // deleting the sha256 comparison turns the rejection case red instead of merely loosening it.
-  const wrong = Buffer.from(composite); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
-  const digest = sha256(composite);
   const requests: string[] = [];
-  let mirrorBehavior: 'serve' | 'miss' | 'wrong' = 'serve';
+  let mirrorBehavior: 'serve' | 'miss' = 'serve';
   const server = createServer((req, res) => {
     requests.push(req.url ?? '');
-    if (req.url?.startsWith('/source-cache/')) {
-      if (mirrorBehavior === 'miss') { res.writeHead(404); res.end(); return; }
-      if (mirrorBehavior === 'wrong') { res.writeHead(200); res.end(wrong); return; }
-      res.writeHead(200); res.end(composite); return;
-    }
+    if (req.url?.startsWith('/source-cache/') && mirrorBehavior === 'serve') { res.writeHead(200); res.end(composite); return; }
     res.writeHead(404); res.end();
   });
   await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
@@ -264,8 +244,7 @@ test('a sky band preview is served by the content-addressed mirror instead of th
     bands: [{ band: 'IRAC4', sha256: 'a'.repeat(64), bytes: 2880 }], backgroundPercentile: 1, peakPercentile: 99.9, display: { minimum: 0, stretch: 0.1, softening: 8 } }));
   const directory = '.local/nebula-lab/observations/m8-processed/sources', recipePath = 'src/objects/m8/source/sky-bands/spitzer-irac.json';
   const input = async (path: string) => { if (path !== recipePath) throw new Error(`Missing recipe ${path}`); return recipe; };
-  const pinFor = (name: string) => ({ path: `${directory}/${name}.${digest}.png`, sha256: digest, bytes: composite.length,
-    skyBands: { path: recipePath, sha256: sha256(recipe) } });
+  const pinFor = (name: string) => ({ path: `${directory}/${name}.png`, skyBands: { path: recipePath } });
 
   await t.test('mirror hit: the survey archive is never queried', async () => {
     requests.length = 0; mirrorBehavior = 'serve';
@@ -274,17 +253,16 @@ test('a sky band preview is served by the content-addressed mirror instead of th
     assert.equal(result.width, 16);
     // The composite is written from mirror bytes alone. Composing it here would need the survey tiles, which this
     // test never serves, so a lost mirror branch fails instead of silently reaching the archive.
-    assert.deepEqual(requests, [`/source-cache/${digest}/${encodeURIComponent(`spitzer-mid-infrared.${digest}.png`)}`]);
+    assert.deepEqual(requests, ['/source-cache/local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.png']);
     assert.equal((await readFile(resolve(temporary, pin.path))).length, composite.length);
   });
 
-  await t.test('mirror serves the wrong bytes: sha verification refuses them rather than caching them', async () => {
-    requests.length = 0; mirrorBehavior = 'wrong';
-    const pin = pinFor('wrong-bytes');
-    // With no survey tiles available the composite cannot be rebuilt, so the run fails; what must never happen is
-    // accepting the mirror's bytes, which a missing sha256 comparison would do.
+  await t.test('mirror miss: the archive is the only route left, and this test serves no tiles', async () => {
+    requests.length = 0; mirrorBehavior = 'miss';
+    const pin = pinFor('missing');
     await assert.rejects(preparePreview(temporary, pin, input, { mirrorOrigin: origin }));
-    await assert.rejects(readFile(resolve(temporary, pin.path)), { code: 'ENOENT' }, 'unverified mirror bytes must never be cached');
+    assert.deepEqual(requests, ['/source-cache/local/nebula-lab/observations/m8-processed/sources/missing.png']);
+    await assert.rejects(readFile(resolve(temporary, pin.path)), { code: 'ENOENT' }, 'nothing is cached from a miss');
   });
 
   await t.test('no mirror opted in: the archive stays the only route', async () => {
@@ -294,29 +272,22 @@ test('a sky band preview is served by the content-addressed mirror instead of th
   });
 });
 
-test('a publisher preview tries the content-addressed mirror first and falls back to the publisher URL', async t => {
+test('a publisher preview tries the object mirror first and falls back to the publisher URL', async t => {
   const { mkdtemp, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
   const { createServer } = await import('node:http');
   const { preparePreview } = await import('./prepare-volume-provenance.mts');
-  const { sha256 } = await import('../../src/platform/sha256.mts');
   const image = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#048' } }).jpeg().toBuffer();
-  // Same length as `image`, differing only in content: a length check alone must not be able to accept this: only
-  // the sha256 comparison can reject it, so deleting that check (and keeping only a length check) turns this red.
-  const wrong = Buffer.from(image); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
-  const digest = sha256(image);
   const requests: string[] = [];
   const filename = 'archive-original.jpg';
-  let mirrorBehavior: 'serve' | 'miss' | 'wrong' = 'serve';
-  let publisherBehavior: 'serve' | 'wrong' = 'serve';
+  let mirrorBehavior: 'serve' | 'miss' = 'serve';
   const server = createServer((req, res) => {
     requests.push(req.url ?? '');
     if (req.url?.startsWith('/source-cache/')) {
       if (mirrorBehavior === 'miss') { res.writeHead(404); res.end(); return; }
-      if (mirrorBehavior === 'wrong') { res.writeHead(200); res.end(wrong); return; }
       res.writeHead(200); res.end(image); return;
     }
-    if (req.url === `/publisher/${filename}`) { res.writeHead(200); res.end(publisherBehavior === 'wrong' ? wrong : image); return; }
+    if (req.url === `/publisher/${filename}`) { res.writeHead(200); res.end(image); return; }
     res.writeHead(404); res.end();
   });
   await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
@@ -330,45 +301,25 @@ test('a publisher preview tries the content-addressed mirror first and falls bac
 
   await t.test('mirror hit: the publisher is never contacted', async () => {
     requests.length = 0; mirrorBehavior = 'serve';
-    const pin = { path: `downloads/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/${filename}` };
+    const pin = { path: `.local/downloads/${filename}`, url: `${origin}/publisher/${filename}` };
     const result = await preparePreview(temporary, pin, input, { mirrorOrigin: origin });
     assert.equal(result.width, 8);
-    assert.deepEqual(requests, [`/source-cache/${digest}/${filename}`]);
+    assert.deepEqual(requests, [`/source-cache/local/downloads/${filename}`]);
     await rm(resolve(temporary, pin.path));
   });
 
   await t.test('mirror miss (404): falls back to the publisher URL', async () => {
     requests.length = 0; mirrorBehavior = 'miss';
-    const pin = { path: `downloads-2/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/${filename}` };
+    const pin = { path: `.local/downloads-2/${filename}`, url: `${origin}/publisher/${filename}` };
     const result = await preparePreview(temporary, pin, input, { mirrorOrigin: origin });
     assert.equal(result.width, 8);
-    assert.deepEqual(requests, [`/source-cache/${digest}/${filename}`, `/publisher/${filename}`]);
-    await rm(resolve(temporary, pin.path));
-  });
-
-  await t.test('mirror serves the wrong bytes: sha verification rejects it and falls back to the publisher', async () => {
-    requests.length = 0; mirrorBehavior = 'wrong';
-    const pin = { path: `downloads-3/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/${filename}` };
-    const result = await preparePreview(temporary, pin, input, { mirrorOrigin: origin });
-    assert.equal(result.width, 8);
-    assert.deepEqual(requests, [`/source-cache/${digest}/${filename}`, `/publisher/${filename}`]);
+    assert.deepEqual(requests, [`/source-cache/local/downloads-2/${filename}`, `/publisher/${filename}`]);
     await rm(resolve(temporary, pin.path));
   });
 
   await t.test('mirror and publisher both fail: the caller sees a clear error, not a silent empty result', async () => {
     requests.length = 0; mirrorBehavior = 'miss';
-    const pin = { path: `downloads-4/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/does-not-exist.jpg` };
+    const pin = { path: `.local/downloads-4/${filename}`, url: `${origin}/publisher/does-not-exist.jpg` };
     await assert.rejects(preparePreview(temporary, pin, input, { mirrorOrigin: origin }), /Preview download failed/);
-  });
-
-  await t.test('the publisher itself serves the wrong bytes: the final sha check rejects it (mutation target)', async () => {
-    requests.length = 0; mirrorBehavior = 'miss'; publisherBehavior = 'wrong';
-    const pin = { path: `downloads-5/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/${filename}` };
-    // Same length as `image` (mirror is unreachable, so this exercises only the publisher path): a length check alone
-    // must not be able to accept it; only the final `sha256(bytes) !== pin.sha256` comparison can reject it, so
-    // deleting that check turns this red instead of just loosening the assertion.
-    await assert.rejects(preparePreview(temporary, pin, input, { mirrorOrigin: origin }), /Changed publisher preview/);
-    await assert.rejects(readFile(resolve(temporary, pin.path)), { code: 'ENOENT' }, 'corrupted publisher bytes must never be written to disk');
-    publisherBehavior = 'serve';
   });
 });

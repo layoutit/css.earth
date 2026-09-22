@@ -16,7 +16,6 @@
     "path": "primary/acisf00210N003_evt2.fits.gz",
     "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/0/210/primary/acisf00210N003_evt2.fits.gz",
     "bytes": 26626704,
-    "sha256": "aca2858b4e7fc1552929799429fd796204346d0e1e9c0904a131790db77377a0",
     "CREATOR": "cxc - Version DS10.12",
     "ASCDSVER": "10.12.6",
     "REVISION": 3,
@@ -42,7 +41,6 @@
   "local": {
     "name": "acisf00210_repro_evt2.fits",
     "bytes": 68981760,
-    "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9",
     "CREATOR": "acis_process_events - CIAO 4.18.0",
     "ASCDSVER": "CIAO 4.18.0",
     "REVISION": 4,

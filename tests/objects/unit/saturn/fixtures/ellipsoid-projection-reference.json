@@ -4,20 +4,16 @@
   "sourceIdentity": "eb00da8f48f78e356c8b3389eec96d7c3c33d39f10820860ec11040c6ec08a84",
   "sources": [
     {
-      "path": "src/objects/saturn/runtime/ellipsoid-material.mjs",
-      "sha256": "5ffc3d2e42eccd2d43c90ea62572ee7d58c655b818aab7d6154adecfe4f19e29"
+      "path": "src/objects/saturn/runtime/ellipsoid-material.mjs"
     },
     {
-      "path": "src/objects/saturn/runtime/preparedSceneRuntime.mjs",
-      "sha256": "905e62206128ed9a2daae9fa6c165cf3a5bfe5d668ce538aa6708edc49f67818"
+      "path": "src/objects/saturn/runtime/preparedSceneRuntime.mjs"
     },
     {
-      "path": "src/objects/saturn/runtime/camera-plan.mjs",
-      "sha256": "deebc1e661ce02bbb4a8352a3c8e91b94afd6d5740866183905c6ced137a4aa6"
+      "path": "src/objects/saturn/runtime/camera-plan.mjs"
     },
     {
-      "path": "src/platform/cubic-sky-runtime.mjs",
-      "sha256": "29c02ddd36180c99025fab13b0b0eb579e1da88e6db82d7543d6612ad6dc0b05"
+      "path": "src/platform/cubic-sky-runtime.mjs"
     }
   ],
   "samples": [
@@ -1079,7 +1075,6 @@
     }
   ],
   "serverIdentity": {
-    "sha256": "eb00da8f48f78e356c8b3389eec96d7c3c33d39f10820860ec11040c6ec08a84",
     "session": "12b879b7-b422-40fb-a328-0443097ec3cd"
   },
   "modules": [

@@ -10,8 +10,7 @@
         "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL"
       ],
       "inspectedRaster": {
-        "expectedBytes": 4202496,
-        "expectedSha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1"
+        "expectedBytes": 4202496
       }
     },
     {
@@ -23,10 +22,7 @@
         "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2097/data/1813121971_1813169961/N1813127275_1_CALIB.IMG",
         "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2097/data/1813121971_1813169961/N1813127275_1_CALIB.LBL"
       ],
-      "inspectedRaster": {
-        "expectedBytes": 4202496,
-        "expectedSha256": "7f7d9a673f0c5d301c8c077fc540ac0226ee35ab5cf4c4ab021691774b181a18"
-      }
+      "inspectedRaster": {}
     }
   ],
   "decision": "Include the low-phase 2006 CL1/IR1 image, about 9 by 7 native pixels across, with Table 7 geometry. The raw 12-bit frame has maximum DN 1255 in the moon crop, without saturation. Exclude the 2015 high-phase crescent: Saturnshine and direct sunlight cannot share a single-light normalization."

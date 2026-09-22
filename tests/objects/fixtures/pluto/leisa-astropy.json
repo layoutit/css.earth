@@ -6,13 +6,11 @@
   "inputs": [
     {
       "path": "src/objects/pluto/source/science/leisa/params_ls.fits",
-      "bytes": 22841280,
-      "sha256": "eb8a44c51dcd0e2abd55aa8e85cae1814b2f0c1de840ea193ea28fcb9647ac95"
+      "bytes": 22841280
     },
     {
       "path": "src/objects/pluto/source/science/leisa/params_ls_errors.fits",
-      "bytes": 22841280,
-      "sha256": "c50ee685c0ed18da5f4c12cc5df3ceb842cd0aeb6c86ce4d424697a686a162a1"
+      "bytes": 22841280
     }
   ],
   "cases": [

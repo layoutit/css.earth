@@ -31,7 +31,6 @@
       "id": "zimpol-v-intensity",
       "dpId": "ADP.2026-08-19T13:19:07.655",
       "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655",
-      "sha256": "b40cfcb32103c99c5de9f77588519bbb6c9322eb250d7bc9756339fee8abd8eb",
       "bytes": 8458560,
       "role": "star centre and intensity floor"
     },
@@ -39,7 +38,6 @@
       "id": "zimpol-v-dolp",
       "dpId": "ADP.2026-08-19T13:19:07.656",
       "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.656",
-      "sha256": "0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687",
       "bytes": 8455680,
       "role": "degree of linear polarisation, the quantity the 2024 leaves carry"
     },
@@ -47,7 +45,6 @@
       "id": "matisse-2020-02-continuum-4mas",
       "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
       "paper": "https://doi.org/10.1051/0004-6361/202347719",
-      "sha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
       "bytes": 135360,
       "role": "the 4 micrometre light outside the photosphere that the emission-2020 leaves carry: this repository’s SQUEEZE reconstruction of the ESO/VLTI/MATISSE visibilities of February 2020 (Drevon et al. 2024), the image Betelgeuse’s own sphere is painted from"
     },
@@ -55,7 +52,6 @@
       "id": "alma-sio-v0-5-4-2023-08",
       "url": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits&CIRCLE=88.79312208+7.40713833+0.00025",
       "landing": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
-      "sha256": "fd94c4ff071920e8222cb9780b04f8ef9f71d459a9c3751f6e21932ea604c151",
       "bytes": 1428480,
       "role": "the SiO v=0 J=5-4 line cube the sio-2023 leaves carry: ALMA (ESO/NAOJ/NRAO) project 2022.A.00026.S, member uid://A001/X360d/Xae, observed 3 to 27 August 2023, boxed and windowed by reduce-alma-sio.mts"
     },
@@ -63,7 +59,6 @@
       "id": "alma-continuum-2023-08",
       "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits",
       "landing": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
-      "sha256": "28b7cfb6075b5cdb5dcfac176f94f3e116e1ce986903393314f26c8cf887bd68",
       "bytes": 40320,
       "role": "the same observation's continuum image, which locates the star the SiO is read about"
     },

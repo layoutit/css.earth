@@ -18,8 +18,7 @@
     "pixelAngleMicroradians": 5.9896977199
   },
   "mesh": {
-    "path": "shape/hyperion_30k_plt.tab",
-    "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"
+    "path": "shape/hyperion_30k_plt.tab"
   },
   "settings": {
     "patchRadiusPixels": 13,
@@ -95,10 +94,8 @@
         "maximumPixels": 1.9627669819398723
       },
       "reference": {
-        "id": "n1506388174",
-        "sha256": "b255f7921c6a03784e0de245bca7b36477058ad6d4b57f3e82ff5c7121c83002"
+        "id": "n1506388174"
       },
-      "targetSha256": "a61fdaa3c60e0f2517036bf7c29626bc165db8eac8f8cfc11f8c8034d371bfc1",
       "controls": [
         {
           "partition": "fit",

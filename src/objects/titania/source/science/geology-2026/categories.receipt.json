@@ -2,60 +2,49 @@
   "schema": "cssearth-geologic-conversion-receipt@1",
   "sourceArchive": {
     "path": "science/geology-2026/Titania Map 2.gdb.zip",
-    "bytes": 126593,
-    "sha256": "6a2a2020440a3def8b9d014b95588badf9ac26d16a45251e4a93fd2da8632bbf"
+    "bytes": 126593
   },
   "registration": {
     "path": "science/geology-2026/registration.json",
-    "bytes": 4004,
-    "sha256": "49de4d090ca39167189fd4e9f74f2553a53b1030f0b2bf8968358dcadd3e4d07"
+    "bytes": 4004
   },
   "supportingInputs": [
     {
       "path": "science/geology-2026/Additional Tectonic symbols.lyrx",
-      "bytes": 15530,
-      "sha256": "17e64bfef68ce942aafdda19c0636b291ef84e28c26111eaa2d1ddce25173028"
+      "bytes": 15530
     },
     {
       "path": "science/geology-2026/Crater Materials .lyrx",
-      "bytes": 149715,
-      "sha256": "b3fa92f23f03b61629cbbacf9632fddef4cad3c651fc1f63475ba5936e19f9e2"
+      "bytes": 149715
     },
     {
       "path": "science/geology-2026/Plains Materials .lyrx",
-      "bytes": 74125,
-      "sha256": "6abdeb1388377c3c858c604c935c802cd13d17c5d6c78fd70968953f3241b597"
+      "bytes": 74125
     },
     {
       "path": "science/geology-2026/Screenshot 2026-06-23 151155.png",
-      "bytes": 383332,
-      "sha256": "a98427ba99cd0e55440512f527daca2e7f1745229e22f7aca7f31f8b78a65319"
+      "bytes": 383332
     },
     {
       "path": "science/geology-2026/Titania Linework.lyrx",
-      "bytes": 11867,
-      "sha256": "43073f18b71601f52ba8c83e988f47bf985c45abe1b64b167139e5f6142cbae0"
+      "bytes": 11867
     },
     {
       "path": "science/geology-2026/Titania geologic map .lyrx",
-      "bytes": 33323,
-      "sha256": "bd57952e22b1f479d8aa50c4f6060e6653ffbcc970b9648cd6cb37123969b5af"
+      "bytes": 33323
     },
     {
       "path": "science/geology-2026/Titania surface.lyrx",
-      "bytes": 32660,
-      "sha256": "95c0a72b009403ee138407c775c4adcd33931a40d24b9d9ea2bd53f8697a749e"
+      "bytes": 32660
     },
     {
       "path": "science/geology-2026/preview-overlap-evidence.json",
-      "bytes": 2440,
-      "sha256": "e18502516f75a95b1013419a128370eb11c2d13cd1f995475205e0059b84e8e4"
+      "bytes": 2440
     }
   ],
   "output": {
     "path": "science/geology-2026/categories.tif",
-    "bytes": 25962,
-    "sha256": "fae52df10d453d09be1c98f7d000ff12ae56d0ffa3304190cb45f4fb838f038e"
+    "bytes": 25962
   },
   "sourcePlanarPixelCounts": {
     "darkalbedopatches": 3634,

@@ -12,7 +12,7 @@ import { requireArray, requireRecord, requireString } from '../sources/source-va
 
 type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
 type FixtureContext = PreparationContext & { source: string; outputDirectory: string; publicDirectory: string };
-type FixturePin = { id: string; path: string; expectedSha256: string; expectedBytes: number; origin: string; sourceBinding: {kind: 'local'; reason: string}; credit: string; license: string; acquisition: string; consumers: string[] };
+type FixturePin = { id: string; path: string; origin: string; sourceBinding: {kind: 'local'; reason: string}; credit: string; license: string; acquisition: string; consumers: string[] };
 
 const hash = (bytes: string | Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 const read = async (path: string): Promise<Record<string, unknown>> => requireRecord(JSON.parse(await readFile(path, 'utf8')), path);
@@ -38,7 +38,7 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
   const input = Buffer.from('original observation bytes'), output = Buffer.from('prepared texture bytes');
   const recipe = JSON.stringify({ schema: 'cssearth-raster-recipe@1', polesCombined: true, polesOutput: 'poles.webp',
     surfaces: [{ id: 'surface', source: 'observation.dat', output: 'surface{suffix}.webp', thumbnail: 'surface-thumbnail.webp', falseColor: false, science: { coverage: { kind: 'black-fill', southConnected: false } } }] });
-  const pin = (id: string, path: string, bytes: Uint8Array): FixturePin => ({ id, path, expectedSha256: hash(bytes), expectedBytes: bytes.length,
+  const pin = (id: string, path: string, _bytes: Uint8Array): FixturePin => ({ id, path,
     origin: `https://example.org/${path}`, sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, credit: 'Fixture archive', license: 'CC0', acquisition: 'Exact fixture input', consumers: ['surfaces'] });
   await Promise.all([
     writeFile(resolve(source, 'observation.dat'), input), writeFile(resolve(source, 'unused.dat'), 'unused'),
@@ -72,7 +72,6 @@ test('controlled photographic inserts bind every consumed photograph alongside t
   await writeFile(recipePath, bytes);
   // The manifest owns the recipe pin; the descriptor only names the recipe.
   const manifestPath = resolve(context.source, 'manifest.json'), manifest = await read(manifestPath);
-  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(bytes), expectedBytes: Buffer.byteLength(bytes) });
   await writeFile(manifestPath, JSON.stringify(manifest));
   const document = await prepareObjectProvenance(context);
   assert.deepEqual(productSourceIds(document, 'surface').sort(), ['observation', 'unused']);
@@ -113,7 +112,7 @@ test('composition lineage follows the pinned conversion recipe to the native arc
     selections: [{id: 'surface', kind: 'posterior', field: 'ice', statistic: 'median'}]});
   await writeFile(resolve(context.source, 'conversion.json'), recipe);
   const manifest = await read(manifestPath);
-  manifest.documents = [...requireArray(manifest.documents), {id: 'conversion', path: 'conversion.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe),
+  manifest.documents = [...requireArray(manifest.documents), {id: 'conversion', path: 'conversion.json',
     sourceBinding: {kind: 'local', reason: 'Authored conversion fixture'}, consumers: ['surfaces']}];
   await writeFile(manifestPath, JSON.stringify(manifest));
   await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({operations: [

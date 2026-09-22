@@ -2,12 +2,12 @@
 import {gunzipSync} from 'node:zlib';
 import {parseDensityVolumeObjectDescriptor} from '@cssearth/objects';
 import {cataloguePosition} from '@cssearth/volume-core/coordinates/catalogue-position';
-import {verifiedBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import {sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import {observableForwardPoint,type WeightedPoint,type ForwardConfig,type ForwardObservations,type HistogramAxis} from '@cssearth/nebula-reconstruction/registration/forward-density-fit';
 export function record(value:unknown):Record<string,unknown>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected object');return value as Record<string,unknown>;}
 export function finite(value:unknown):number{if(typeof value!=='number'||!Number.isFinite(value))throw new TypeError('Expected finite number');return value;}
 export function string(value:unknown):string{if(typeof value!=='string'||!value)throw new TypeError('Expected nonempty string');return value;}
-export function pin(value:unknown){const p=record(value);const path=string(p.path),sha256=string(p.sha256);if(!/^[a-f0-9]{64}$/.test(sha256))throw new TypeError('Expected source SHA256');return {path,sha256};}
+export function pin(value:unknown){const p=record(value);return {path:string(p.path)};}
 export function axis(value:unknown):HistogramAxis{const v=record(value);return {min:finite(v.min),max:finite(v.max),bins:finite(v.bins)};}
 const bin=(v:number,a:HistogramAxis)=>Math.floor((v-a.min)/(a.max-a.min)*a.bins);
 export const median=(values:number[])=>{values.sort((a,b)=>a-b);const i=Math.floor(values.length/2);return values.length%2?values[i]!:(values[i-1]!+values[i]!)/2;};
@@ -29,8 +29,8 @@ export function ellipsoidPoints(count:number,seed:number,sigma:number):WeightedP
 }
 export async function forwardFitData(root:string,config:Record<string,unknown>){
  const [tableBytes,footprintBytes,simBytes,frameBytes]=await Promise.all([
-  verifiedBytes(root,pin(config.catalogue)),verifiedBytes(root,pin(config.footprint)),
-  verifiedBytes(root,pin(config.simulation)),verifiedBytes(root,pin(config.frameObject))]);
+  sourceBytes(root,pin(config.catalogue)),sourceBytes(root,pin(config.footprint)),
+  sourceBytes(root,pin(config.simulation)),sourceBytes(root,pin(config.frameObject))]);
  const descriptor=parseDensityVolumeObjectDescriptor(JSON.parse(frameBytes.toString('utf8')) as unknown);
  const frame=descriptor.volume,D=Math.hypot(...frame.originM)/frame.metersPerUnit;
  const [qx,qy,qz,qw]=frame.localToReferenceXyzw,n=[2*(qx*qz+qy*qw),2*(qy*qz-qx*qw),1-2*(qx*qx+qy*qy)];

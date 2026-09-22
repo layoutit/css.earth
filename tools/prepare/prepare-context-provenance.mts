@@ -30,10 +30,8 @@ export async function prepareContextProvenance({ root = process.cwd(), input = (
     const descriptorBytes = await readFile(resolve(root, descriptorPath)).catch((error: unknown) => { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });
     if (descriptorBytes) {
       const descriptor = sourceObject(JSON.parse((await input(descriptorPath)).toString()));
-      const prepared = sourceObject(descriptor.prepared);
-      const bankPath = sourcePath(prepared.url);
-      const bankPin = pins.find(pin => pin.path === bankPath || pin.path === bankPath.replace(/^prepared\//u, ''));
-      if (!bankPin || bankPin.sha256 !== prepared.sha256) throw new Error(`Changed prepared descriptor bank: ${id}`);
+      const bankPath = sourcePath(sourceObject(descriptor.prepared).url);
+      if (!pins.some(pin => pin.path === bankPath || pin.path === bankPath.replace(/^prepared\//u, ''))) throw new Error(`Uninventoried prepared descriptor bank: ${id}`);
     }
     const recipes = [], products = [], runtimeAssets = [];
     for (const [index, value] of sourceArray(presentation.products, sourceObject).entries()) {

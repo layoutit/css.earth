@@ -23,7 +23,7 @@ test('shape views share neutral color while retaining absent-imagery and source 
     assert.equal(surfaces.length, 2);
     for (const surface of surfaces) {
       assert.equal(surface.missingPixels, 64 * 32, 'Neutral display must not claim photographic coverage');
-      assert.deepEqual(surface.source, { id: 'shape', sha256: source.manifest.inputs[0].expectedSha256 });
+      assert.deepEqual(surface.source, { id: 'shape' });
       for (const asset of [surface.map, surface.surface, surface.thumbnail]) {
         const bytes = await sharp(await readFile(join(root, basename(asset.url)))).ensureAlpha().raw().toBuffer();
         for (let i = 0; i < bytes.length; i += 4) if (bytes[i + 3])

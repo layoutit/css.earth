@@ -11,22 +11,18 @@
  "references": [
   {
    "url": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/1638a583e95be76d50e16cbe70f2c8e237528132/isis/src/base/objs/Hapke/Hapke.truth",
-   "sha256": "3de375101a1bc7d7bc8807108ecb106ae0633aafd548fd04527f5f428e302c1a",
    "bytes": 2564
   },
   {
    "url": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/1638a583e95be76d50e16cbe70f2c8e237528132/isis/src/base/objs/LunarLambert/LunarLambert.truth",
-   "sha256": "6a36c86ce44cf9939ca1e34daa9f2b1985cd0b497e53decfc15a5b01ea1d491f",
    "bytes": 960
   },
   {
    "url": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/1638a583e95be76d50e16cbe70f2c8e237528132/isis/src/base/objs/Minnaert/Minnaert.truth",
-   "sha256": "90d1380dc2656ffe80ce36d29b974f1d75a8c838b34344a273f0fd8924027750",
    "bytes": 951
   },
   {
    "url": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/1638a583e95be76d50e16cbe70f2c8e237528132/isis/src/base/objs/LommelSeeliger/LommelSeeliger.truth",
-   "sha256": "dd8510098b36bb3265e4d29b1aa74188b7d83e258c276636f377e4ecb010f4ba",
    "bytes": 345
   }
  ],

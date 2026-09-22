@@ -4,9 +4,7 @@
   "name": "Solar-corona electron density",
   "defaultLens": "electron-density",
   "bank": {
-    "path": "src/objects/sun-cor1-density/prepared/lenses.json",
-    "sha256": "b148cf5e7c21cedfec4c92c99de21c48ba0b879729710329bb0951614200b123",
-    "bytes": 137511
+    "path": "src/objects/sun-cor1-density/prepared/lenses.json"
   },
   "recipes": [],
   "sharedInputs": [],
@@ -65,8 +63,6 @@
       "inputEvidence": [],
       "preview": {
         "path": "src/objects/sun-cor1-density/source/previews/cor1-density.png",
-        "sha256": "0a06851301a77ca8774d10cf580fe39f30fddea7eca34667e5f13c65d276bf0c",
-        "bytes": 2239,
         "authoredFrom": "stereo-cor1b-n3d-cr2053p1-m10"
       }
     }
