@@ -1,13 +1,10 @@
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { record, requiredElement } from './browser-types.mts';
-export interface DestinationPlace extends Readonly<Record<string, unknown>> { name: string; names: readonly string[]; context: string; searchContext: string; coverage: string; }
-interface DestinationCatalog { places: readonly DestinationPlace[]; }
-function destinationCatalog(input: unknown): DestinationCatalog {
-  if (!record(input) || !Array.isArray(input.places)) throw new TypeError('Destination catalog requires places.');
-  for (const place of input.places as unknown[]) {
-    if (!record(place) || !['name', 'context', 'searchContext', 'coverage'].every(key => typeof place[key] === 'string') || !Array.isArray(place.names) || !place.names.every(name => typeof name === 'string')) throw new TypeError('Destination place requires prepared search labels.');
-  }
-  return input as unknown as DestinationCatalog;
+import { FIND_PATH } from './find-protocol.mts';
+export interface DestinationPlace extends Readonly<Record<string, unknown>> { name: string; context: string; coverage: string; }
+function destinationPlace(input: unknown): DestinationPlace {
+  if (!record(input) || !record(input.place) || !['name', 'context', 'coverage'].every(key => typeof (input.place as Record<string, unknown>)[key] === 'string')) throw new TypeError('Destination place requires its prepared record.');
+  return input.place as DestinationPlace;
 }
 function destinationResult(input: unknown): { status: string; arrival?: Promise<{ completed: boolean }> } {
   if (!record(input) || typeof input.status !== 'string') throw new TypeError('Destination selection requires a status.');
@@ -17,67 +14,25 @@ function destinationResult(input: unknown): { status: string; arrival?: Promise<
     return { completed: result.completed };
   }) };
 }
-import { searchDestinations } from "./destination-search.mts";
 
-export function createDestinationBrowser({ documentTarget, onSelected, onReset, onResults }: { documentTarget: Document; onSelected(place: DestinationPlace): void; onReset(): void; onResults(count: number): void }) {
-  const candidate = documentTarget.querySelector<HTMLElement>(".planet-destination-results");
+/** The selected-city panel. Cities are found by the shared feature search; opening one asks the search function for that
+ * one place's record, so no page downloads the body's places catalogue (Earth's is 14.8 MB). */
+export function createDestinationBrowser({ documentTarget, onSelected, onReset }: { documentTarget: Document; onSelected(place: DestinationPlace): void; onReset(): void }) {
+  const candidate = documentTarget.querySelector<HTMLElement>(".planet-destination-panel");
   if (!candidate) return null;
-  const root = candidate;
-  const list = requiredElement(root, ".planet-destination-list");
-  const hint = requiredElement(root, ".planet-destination-hint");
-  const panel = requiredElement(documentTarget, ".planet-destination-panel");
+  const panel = candidate;
   const heading = requiredElement(panel, ".planet-destination-name");
   const context = requiredElement(panel, ".planet-destination-context");
   const status = requiredElement(panel, ".planet-destination-status");
-  const buttons = [...list.querySelectorAll("button")];
+  const back = requiredElement(panel, ".planet-destination-back");
   const events = new AbortController();
-  let provider: PreparedDestinationRuntime | null = null, catalog: DestinationCatalog | null = null, pending: Promise<DestinationCatalog> | null = null, matches: DestinationPlace[] = [], selection: DestinationPlace | null = null;
-  let query = "", revision = 0, destroyed = false, selecting = false;
-  let selectionRevision = 0;
+  let provider: PreparedDestinationRuntime | null = null, bodyId: string | null = null, selection: DestinationPlace | null = null;
+  let destroyed = false, selecting = false, selectionRevision = 0;
 
-  function clearRows() {
-    matches = [];
-    for (const button of buttons) button.parentElement!.hidden = true;
-  }
-
-  async function search(value: string) {
-    if (destroyed) return;
-    query = value;
-    const request = ++revision;
-    clearRows();
-    root.hidden = !value.trim();
-    if (root.hidden) { onResults(0); return; }
-    if (!provider) { hint.textContent = "City search will be ready when Earth finishes loading."; onResults(1); return; }
-    hint.textContent = "Loading city names…";
-    onResults(1);
-    try {
-      pending ??= provider.load(events.signal).then(destinationCatalog).catch(error => { pending = null; throw error; });
-      catalog ??= await pending;
-      if (destroyed || request !== revision) return;
-      matches = searchDestinations(catalog.places, value, buttons.length);
-      for (const [index, button] of buttons.entries()) {
-        const place = matches[index];
-        button.parentElement!.hidden = !place;
-        if (!place) continue;
-        requiredElement(button, ".planet-destination-result-name").textContent = place.name;
-        requiredElement(button, ".planet-destination-result-context").textContent = place.context;
-        button.ariaLabel = `${place.name}, ${place.context}`;
-      }
-      hint.textContent = matches.length ? "Cities · GeoNames" : "No matching cities. Try a city name and country.";
-      onResults(matches.length || 1);
-    } catch (error) {
-      if (destroyed || request !== revision) return;
-      hint.textContent = "City names could not load. Change your search to retry.";
-      onResults(1);
-    }
-  }
-
-  async function select(place: DestinationPlace | undefined) {
-    if (destroyed || !provider || selecting || !place) return;
+  async function select(place: DestinationPlace) {
+    if (destroyed || !provider || selecting) return;
     const request = ++selectionRevision;
     selecting = true;
-    for (const button of buttons) button.disabled = true;
-    hint.textContent = `Opening ${place.name}…`;
     try {
       const result = destinationResult(await provider.select(place));
       if (destroyed) return;
@@ -94,15 +49,11 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
         panel.ariaBusy = "false";
         status.textContent = completed ? result.status : "Flight stopped. Select the city again to continue.";
       });
-    } catch (error) {
-      if (!destroyed) hint.textContent = "This city could not open. Select it to retry.";
     } finally {
       selecting = false;
-      if (!destroyed) for (const button of buttons) button.disabled = false;
     }
   }
-  buttons.forEach((button, index) => button.addEventListener("click", () => void select(matches[index]), { signal: events.signal }));
-  requiredElement(panel, ".planet-destination-back").addEventListener("click", () => {
+  back.addEventListener("click", () => {
     provider?.reset();
     selectionRevision++;
     selection = null;
@@ -110,10 +61,26 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
     panel.hidden = true;
     onReset();
   }, { signal: events.signal });
+  /** Opens a place by its catalogue id: a search result, or a `?feature=city-<id>` link. */
+  async function selectById(id: string) {
+    if (destroyed || !provider || !bodyId || !/^[0-9]+$/u.test(id)) return;
+    const url = new URL(FIND_PATH, documentTarget.location?.href ?? 'http://localhost/');
+    url.searchParams.set('object', bodyId);
+    url.searchParams.set('place', id);
+    const response = await fetch(url, { signal: events.signal });
+    if (!response.ok) throw new Error(`City ${id} could not load.`);
+    await select(destinationPlace(await response.json()));
+  }
   return Object.freeze({
-    bind(next: PreparedDestinationRuntime | null | undefined) { if (destroyed) return; provider = next ?? null; if (query) void search(query); },
-    search,
+    /** Binds the mounted body's places; the Back label names that body, which differs from the page's first body after a flight. */
+    bind(next: PreparedDestinationRuntime | null | undefined, body?: { id: string; name: string }) {
+      if (destroyed) return;
+      provider = next ?? null;
+      bodyId = provider && body ? body.id : null;
+      if (provider && body) back.textContent = `← Back to ${body.name}`;
+    },
+    selectById,
     setOpen(open: boolean) { if (destroyed) return; panel.hidden = open || !selection; },
-    destroy() { if (destroyed) return; destroyed = true; revision++; selection = null; events.abort(); clearRows(); panel.hidden = true; },
+    destroy() { if (destroyed) return; destroyed = true; selection = null; events.abort(); panel.hidden = true; },
   });
 }

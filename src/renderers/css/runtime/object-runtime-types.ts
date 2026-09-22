@@ -30,7 +30,6 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
 export interface PreparedDestinationRuntime {
-  load(signal?: AbortSignal): Promise<unknown>;
   select(place: unknown): Promise<unknown>;
   reset(): unknown;
 }
@@ -38,7 +37,6 @@ export interface ObjectRuntimeCapabilities {
   createDestinations?(options: { plan: unknown; ready: Promise<void>; lifetime: SceneLifetime;
     selectLens(id: string): Promise<boolean>; navigate(camera: Parameters<RetainedCubicSkyOrbit["flyToState"]>[0]): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
     reset(): ReturnType<RetainedCubicSkyOrbit["flyToState"]> | undefined;
-    assetOrigin?: PreparedAssetOrigin;
   }): PreparedDestinationRuntime;
   /** Prepared nomenclature labels anchored to the body mesh; the catalogue is fetched and byte-verified by the layer. */
   mountSurfaceFeatures?(options: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime;

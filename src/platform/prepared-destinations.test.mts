@@ -1,4 +1,4 @@
-import { requireRecord, requireArray } from "../../tools/sources/source-values.mts";
+import { requireRecord } from "../../tools/sources/source-values.mts";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from "node:assert/strict";
@@ -22,11 +22,10 @@ function fixture(options: Partial<PreparedDestinationOptions> = {}, catalog: unk
   return { bytes, lifetime, calls, destinations };
 }
 
-test("destination catalogue verifies exact prepared bytes before selection", async t => {
+test("a selected place flies to its prepared camera in the default lens; the catalogue never loads in the page", async t => {
   const f = fixture();
-  t.mock.method(globalThis, "fetch", async () => new Response(f.bytes));
-  const loaded = requireRecord(await f.destinations.load());
-  assert.equal(requireRecord(requireArray(loaded.places)[0]).id, "a");
+  t.mock.method(globalThis, "fetch", async () => { throw new Error("The page must not fetch the places catalogue."); });
+  assert.equal("load" in f.destinations, false);
   const camera = { controlPitch: 12, controlYaw: 24, zoom: 8 };
   const selected = requireRecord(await f.destinations.select({ camera, coverage: "detail" }));
   assert.deepEqual(f.calls, ["normal", camera]);
@@ -36,36 +35,8 @@ test("destination catalogue verifies exact prepared bytes before selection", asy
   assert.equal(f.calls.length, 2);
 });
 
-test("catalogue rejects same-size corruption and lifetime aborts pending transport", async t => {
-  const f = fixture();
-  t.mock.method(globalThis, "fetch", async () => new Response(f.bytes.replace('"a"', '"b"')));
-  await assert.rejects(f.destinations.load(), /identity drifted/);
-  let signal: AbortSignal | undefined;
-  globalThis.fetch = async (_url, options) => {
-    const pendingSignal = options?.signal;
-    assert.ok(pendingSignal);
-    signal = pendingSignal;
-    return new Promise<Response>((_resolve, reject) => pendingSignal.addEventListener("abort", () => reject(new Error("aborted"))));
-  };
-  const pending = f.destinations.load();
-  f.lifetime.destroy();
-  await assert.rejects(pending, /aborted/);
-  assert.ok(signal);
-  assert.equal(signal.aborted, true);
-});
-
 test("a superseded selection cannot start a stale destination flight", async () => {
   const f = fixture({ selectLens: async () => false });
   await assert.rejects(Reflect.apply(f.destinations.select, undefined, [{ camera: {} }]), /superseded/);
   assert.deepEqual(f.calls, []); f.lifetime.destroy();
-});
-
-test("matching catalogue pins cannot make a non-array places payload compatible", async t => {
-  for (const catalog of [null, { schema: "cssearth-prepared-destinations@1", places: { length: 1 } }]) {
-    const f = fixture({}, catalog);
-    t.mock.method(globalThis, "fetch", async () => new Response(f.bytes));
-    await assert.rejects(f.destinations.load(), /incompatible|Invalid prepared destination catalog/);
-    f.lifetime.destroy();
-    t.mock.restoreAll();
-  }
 });
