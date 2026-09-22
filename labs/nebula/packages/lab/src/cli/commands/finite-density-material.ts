@@ -91,7 +91,7 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(s=>({...s,leaves:s.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};
   const inspectionSha=await json(resolve(output,'prepared/inspection.json'),inspection);
   const partsSha=await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id,parts:[{id:'all-light',label:'Finite-region material experiment',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:'Unchanged density and alpha; authored finite XYZ material regions.'});
-  await json(resolve(output,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json',sha256:partsSha}},prepared:{format:prepared.format,url:'prepared/inspection.json',sha256:inspectionSha}});
+  await json(resolve(output,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
   const local=relative(root,output),oldLocal=relative(root,baseline);
   const subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(oldLocal,local));subject.id=id;subject.name+=' · finite regions';subject.directory=local;subject.reconstructionImage={...subject.reconstructionImage,label:subject.reconstructionImage.label+' · finite regions',note:receipt.qualification.reason};
   await json(resolve(output,'result.json'),{...oldResult,resultId,subject});

@@ -54,7 +54,7 @@ export async function preparePlacedDensity(root: string, options: PlacedDensityO
     const slicesBytes = Buffer.from(JSON.stringify(slices, null, 2) + '\n');
     await writeFile(resolve(temporary, 'prepared/volume-slices.json'), slicesBytes);
     await writeFile(resolve(temporary, 'object.json'), JSON.stringify({ ...descriptor, id, properties: { ...descriptor.properties, volume: frame },
-      prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json', sha256: sha256(prepared) } }, null, 2) + '\n');
+      prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } }, null, 2) + '\n');
     await writeFile(resolve(temporary, 'placement-receipt.json'), JSON.stringify({ id, ...identity, slicesSha256: sha256(slicesBytes), reusedAlpha: true, reusedGrid: true }, null, 2) + '\n');
     // This directory owns only generated placement products; its source assets remain at their original paths.
     await rm(output, { recursive: true, force: true }); await rename(temporary, output);
