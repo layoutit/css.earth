@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { visibilityComponents } from './prepared-visibility-order.mts';
 import { partitionSurface } from './prepared-depth-partitions.mts';
 import { verifyRayOrder } from './prepared-visibility-oracle.mts';

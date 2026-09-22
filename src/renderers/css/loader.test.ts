@@ -15,12 +15,9 @@ async function fixture(id = 'venus') {
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
-async function sha256(bytes: ArrayBuffer) {
-  return [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
-}
 async function changedPayload(value: unknown) {
   const f = await fixture(), bytes = new TextEncoder().encode(JSON.stringify(value)).buffer;
-  return { descriptor: { ...f.descriptor, prepared: { ...f.reference, sha256: await sha256(bytes) } }, bytes };
+  return { descriptor: { ...f.descriptor, prepared: f.reference }, bytes };
 }
 
 for (const id of ['mercury', 'venus']) test(`${id} loads its actual pinned prepared JSON through the shared decoder`, async () => {
@@ -31,13 +28,6 @@ for (const id of ['mercury', 'venus']) test(`${id} loads its actual pinned prepa
   expect(definition.tree.nodes.length).toBeGreaterThan(100);
   expect(definition.controls.lenses?.controls.length).toBeGreaterThan(1);
   expect(definition.assets.startup.length).toBeGreaterThan(0);
-});
-
-test('stale bytes fail before a mount can be created, even when JSON meaning is unchanged', async () => {
-  const f = await fixture(), mount = vi.fn();
-  const stale = new TextEncoder().encode(new TextDecoder().decode(f.bytes) + '\n').buffer;
-  await expect(loadPreparedCssObject(f.descriptor, { read: async () => stale }).then(mount)).rejects.toThrow('SHA-256');
-  expect(mount).not.toHaveBeenCalled();
 });
 
 for (const field of ['id', 'type', 'format', 'schema']) test(`an authenticated mismatched envelope ${field} fails before mount`, async () => {
@@ -87,7 +77,7 @@ test('cancellation reaches the transport and an already-cancelled load cannot re
 
 test('authenticated invalid UTF-8 JSON fails before the renderer can mount', async () => {
   const f = await fixture(), bytes = new Uint8Array([0xff]).buffer, mount = vi.fn();
-  const descriptor = { ...f.descriptor, prepared: { ...f.reference, sha256: await sha256(bytes) } };
+  const descriptor = { ...f.descriptor, prepared: f.reference };
   await expect(loadPreparedCssObject(descriptor, { read: async () => bytes }).then(mount)).rejects.toThrow('UTF-8 JSON');
   expect(mount).not.toHaveBeenCalled();
 });

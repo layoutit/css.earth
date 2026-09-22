@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { occupiedMs, buildBrief, decodeWork } from './trace-brief.mts';
 
 test('nested and overlapping slices are counted once inside the selected window', () => {

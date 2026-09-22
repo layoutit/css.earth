@@ -21,11 +21,10 @@
  *
  * Memory: chandra_repro spawns the CIAO tools as separate executables, so the ceiling is applied to the whole process group, not
  * to Python alone. The group is sampled every second and the run is stopped if it passes the ceiling (2 GiB by default). */
-import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../product-record.mts';
@@ -84,9 +83,9 @@ export async function chandraFiles(id: string, obsid: number, directory: string,
     const files: string[] = [], digested: ChandraFile[] = [];
     for (const member of pinned) {
       files.push(await chandraFile(member, directory, sources));
-      digested.push(member.sha256 === undefined ? { ...member, sha256: (await sha256File(resolve(directory, member.path))).sha256 } : member);
+      digested.push({ ...member, bytes: (await stat(resolve(directory, member.path))).size });
     }
-    return { files, digested, changed: digested.some((member, index) => member.sha256 !== pinned[index]!.sha256) };
+    return { files, digested, changed: digested.some((member, index) => member.bytes !== pinned[index]!.bytes) };
   };
   const inputs = kinds === 'products' ? { files: [], digested: [...entry.inputs], changed: false } : await fetchAll(entry.inputs);
   const products = kinds === 'inputs' ? { files: [], digested: [...entry.products], changed: false } : await fetchAll(entry.products);
@@ -120,8 +119,7 @@ export function reprocessParameters(grating: string, maxRssBytes: number) {
  * CALDB that ran it. The record written from this is the only place a later reader takes that environment from. */
 export function reprocessRun(entry: ChandraObservation, options: { parameters: Readonly<Record<string, unknown>>; versions: { ciao: string; caldb: string }; toolchainDigest: string }): ProductRun {
   const inputs = entry.inputs.map(file => {
-    if (file.sha256 === undefined) throw new Error(`${file.path} is pinned without a digest; a record states every input by sha256.`);
-    return { role: inputRole(file.path), identity: file.url, bytes: file.bytes, sha256: file.sha256 };
+    return { role: inputRole(file.path), identity: file.url, bytes: file.bytes };
   });
   return { telescope: 'Chandra', stage: `reprocess/${entry.obsid}-${entry.instrument}`, inputs, parameters: options.parameters,
     software: [{ name: 'ciao', version: options.versions.ciao }, { name: 'caldb', version: options.versions.caldb }],

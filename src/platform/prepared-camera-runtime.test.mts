@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { orbitFixture } from "./test/orbit-fixture.mts";
 import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mts";
 import { selectPreparedResponsiveZoom } from "../renderers/css/dist/platform/camera-layout.js";

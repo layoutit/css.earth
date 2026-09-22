@@ -1,7 +1,8 @@
 import { fixtureRecord } from '../../contract/test-values.mts';
 import { required } from '../../contract/test-values.mts';
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from './levels.mts';
 import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
 import { namedLevelRefusal } from './surface.mts';

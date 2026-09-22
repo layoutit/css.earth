@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
+import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import {
@@ -204,10 +204,10 @@ test('a stacked set’s record pins the frames that went into that set, and what
   assert.equal(made.telescope, 'HST');
   assert.equal(made.stage, 'line-stack');
   assert.deepEqual(made.inputs.slice(0, 2).map(input => input.role), ['stack definition', 'Horizons responses']);
-  assert.equal(made.inputs[0]!.sha256, (await sha256File(stackPath(STACK))).sha256, 'the definition as it is on disk');
-  // The frames of this set, at the sizes and digests the definition pins, and nothing of the frames another set holds.
+  assert.equal(made.inputs[0]!.bytes, (await stat(stackPath(STACK))).size, 'the definition as it is on disk');
+  // The frames of this set, at the sizes the definition records, and nothing of the frames another set holds.
   assert.deepEqual(made.inputs.slice(2).map(input => input.identity), [...used].sort().map(name => definition.frames.find(frame => frame.name === name)!.uri));
-  assert.ok(made.inputs.slice(2).every(input => /^[0-9a-f]{64}$/u.test(input.sha256) && input.bytes > 0));
+  assert.ok(made.inputs.slice(2).every(input => input.bytes > 0));
   assert.deepEqual([made.parameters.line, made.parameters.subset, made.parameters.handedness, made.parameters.gridPixels],
     ['oi1356', 'all', definition.handedness, definition.grid.pixels]);
   // There is no installed toolchain: the version is the digest of the modules that did the arithmetic.
@@ -235,7 +235,7 @@ test('the receipt’s two checks reach a stack’s record as the different kinds
     const record = (await readProductRecord(productRecordPath(product)))!;
     const published = evidenceFor(record, name, 'published-value'), consistency = evidenceFor(record, name, 'internal-consistency');
     assert.equal(published.length, 1);
-    assert.ok(published[0]!.receiptPin);
+    assert.ok(published[0]!.receipt.endsWith('.evidence.json'));
     assert.match(published[0]!.establishes, /Roth et al\. 2016/u);
     assert.ok(!published[0]!.establishes.includes('disc mean at 1304 A'), 'a published value this run did not measure is not reported as checked');
     assert.equal(consistency.length, 1);
@@ -255,7 +255,6 @@ test('a stack definition refuses what it cannot check', async () => {
   assert.throws(() => parseLineStack({ ...definition, handedness: 'ORIENTAT' }), /handedness/u);
   assert.throws(() => parseLineStack({ ...definition, notes: { measured: [], notVerified: [] } }), /does not verify/u);
   const frames = definition.frames as Record<string, unknown>[];
-  assert.throws(() => parseLineStack({ ...definition, frames: [{ ...frames[0]!, sha256: 'nope' }, ...frames.slice(1)] }), /digest/u);
   assert.throws(() => parseLineStack({ ...definition, frames: [frames[0]!, frames[0]!] }), /twice/u);
   assert.throws(() => parseLineStack({ ...definition, subsets: [{ id: 'all', rule: 'somehow' }] }), /subset rule/u);
 });

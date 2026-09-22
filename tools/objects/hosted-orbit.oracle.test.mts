@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { bodyFixedToIcrf, hostSkyFrame, hostedOrbitPhase, hostedOrbitStateRelativeKm, type HostedOrbit } from '@cssearth/astronomy';
 import { readOracleFixture } from '../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';

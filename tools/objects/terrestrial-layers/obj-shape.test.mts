@@ -1,5 +1,6 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler } from './obj-shape.mts';
 import { parsePdsPlateShape } from './obj-shape.mts';

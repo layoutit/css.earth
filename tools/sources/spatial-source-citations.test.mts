@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { resolve } from 'node:path';
 import { readSourceCatalog } from './read-source-catalogue.mts';
 import { sourceResolver } from '../../src/platform/source-catalog.mts';

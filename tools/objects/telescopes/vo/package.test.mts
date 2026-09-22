@@ -3,7 +3,8 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { extractVoPackage } from './package.mts';
 
 const PYTHON = String.raw`

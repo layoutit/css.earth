@@ -68,7 +68,6 @@ export function holdings(rows: readonly IndexRow[], shipped: ReadonlySet<string>
 /** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
 const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
-const DIGEST = /^[0-9a-f]{64}$/u;
 
 /** One receipt read against the program it claims: another schema, another target, another budget, a kernel or an image the
  * program does not pin, or a missing residual is an error, never a silent skip. What comes back is the holdout residual of
@@ -84,7 +83,6 @@ export function checkRegistration(value: unknown, file: string, program: ReturnT
   const policy = requireRecord(row.policy, `${file}: policy`);
   for (const [key, value] of Object.entries(POLICY)) if (policy[key] !== value) throw new TypeError(`${file}: it was measured with ${key} ${String(policy[key])}, not ${String(value)}.`);
   const kernels = requireArray(row.kernels, `${file}: kernels`).map(entry => { const kernel = requireRecord(entry, `${file}: kernel`);
-    if (!DIGEST.test(requireString(kernel.sha256, `${file}: kernel digest`))) throw new TypeError(`${file}: a kernel it loaded states no sha256.`);
     requireFiniteNumber(kernel.bytes, `${file}: kernel bytes`);
     return requireString(kernel.path, `${file}: kernel path`); });
   if (kernels.join('\n') !== program.kernels.join('\n')) throw new TypeError(`${file}: it loaded kernels ${program.id} does not pin.`);

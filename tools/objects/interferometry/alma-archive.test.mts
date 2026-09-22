@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { continuumImage, memberProducts, type DatalinkRow } from './alma-archive.mts';
 
 const row = (url: string, bytes: number | null, semantics = '#this', contentType = 'application/x-tar'): DatalinkRow =>

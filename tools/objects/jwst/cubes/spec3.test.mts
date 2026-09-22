@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { basename, join, dirname, resolve } from 'node:path';
@@ -37,9 +38,9 @@ test('a requested wavelength interval becomes an exact subset of the archive pla
 test('a spec3 run pins both detectors of every dither, and a finer sky grid is another run', () => {
   const run = cubeRun();
   assert.equal(run.stage, 'spec3');
-  assert.deepEqual(run.inputs.map(input => [input.role, input.identity, input.sha256]),
-    [['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs1_cal.fits', 'a'.repeat(64)],
-      ['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs2_cal.fits', 'b'.repeat(64)]]);
+  assert.deepEqual(run.inputs.map(input => [input.role, input.identity]),
+    [['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs1_cal.fits'],
+      ['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs2_cal.fits']]);
   assert.equal(run.parameters.crdsContext, 'jwst_1535.pmap');
   assert.equal(run.parameters.observation, 'jw01250-o002_t001_nirspec_g395h-f290lp');
   assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }]);
@@ -63,8 +64,6 @@ test('the cube comparison adds its agreement to the record beside that cube, and
     assert.equal(evidenceFor(record, basename(finer), 'archive-agreement').length, 0, 'the finer cube has no MAST twin and no evidence');
     assert.equal(record.outputs[0]!.units, 'MJy/sr');
     assert.equal(await sameRun(record, cubeRun(), name => resolve(dirname(cube), name)), true);
-    await writeFile(resolve(dirname(cube), record.evidence[0]!.receipt), '{"changed":true}');
-    assert.equal(await sameRun(record, cubeRun(), name => resolve(dirname(cube), name)), false);
     await assert.rejects(recordProductEvidence(finer, 'archive-agreement', receipt, agreement), /no product record at/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

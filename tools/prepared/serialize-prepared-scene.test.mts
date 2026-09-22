@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { loadPreparedCssObject } from '../../src/renderers/css/dist/index.js';
 import { readPreparedObjectBytes } from '../../site/object-page-data.mts';
 import { serializePreparedScene } from './serialize-prepared-scene.mts';

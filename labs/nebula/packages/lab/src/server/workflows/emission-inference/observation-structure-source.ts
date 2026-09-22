@@ -68,5 +68,5 @@ export async function loadObservationDiffuse(recipe: ObservationRecipe, image: O
   if (width * height > 1_000_000) throw new Error('Lower workingWidth for this tall source; analysis is bounded to one million pixels.');
   const rgb = await sharp(native.pixels, { raw: { width: source.width, height: source.height, channels: 3 } })
     .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).raw().toBuffer();
-  return { rgb, width, height, source, native: native.provenance, sourcePath: relative(process.cwd(), sourcePath) };
+  return { rgb, width, height, source, native: native.provenance, sourcePath: relative(process.cwd(), sourcePath), sourceSha256: createHash('sha256').update(sourceBytes).digest('hex') };
 }

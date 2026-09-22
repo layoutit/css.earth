@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { OBJECTS } from '../objects.mts';
 import { defineObjects } from '../object-schema.mts';
 import { definePreparedFocus } from '../prepared-focus-object.mts';

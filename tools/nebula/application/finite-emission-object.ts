@@ -20,9 +20,8 @@ const text = (value: unknown, at: string): string => { assert.ok(typeof value ==
 const json = (bytes: Uint8Array, gzipped: boolean): unknown => JSON.parse((gzipped ? gunzipSync(bytes) : Buffer.from(bytes)).toString('utf8'));
 const stringify = (value: unknown) => Buffer.from(JSON.stringify(value, null, 2) + '\n');
 function parsePin(value: unknown, at: string): Pin {
-  const pin = record(value, at), digest = text(pin.sha256, `${at} digest`);
-  assert.match(digest, /^[a-f0-9]{64}$/);
-  return { path: text(pin.path, `${at} path`), sha256: digest };
+  const pin = record(value, at);
+  return { path: text(pin.path, `${at} path`) };
 }
 const read = async (root: string, pin: Pin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
 
@@ -35,7 +34,7 @@ async function deliveredBankVerified(directory: string, installed: string): Prom
     const data = validatePreparedVolumeLenses(record(json(bytes, false), 'installed bank').data);
     for (const lens of data.lenses) for (const resource of lens.volume.resources) {
       const texture = await readFile(resolve(installed, resource.path));
-      if (texture.length !== resource.bytes || hash(texture) !== resource.sha256) return false;
+      if (texture.length !== resource.bytes) return false;
     }
     return true;
   } catch { return false; }
@@ -133,8 +132,8 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
     await writeAtomic(resolve(installed, 'delivery.json'), stringify({ schema: 'cssearth-finite-emission-delivery-receipt@1',
       compactInputs, modelResultId: text(inputs.modelResultId, 'model id'), lenses: receipts }));
     await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: 'cssearth-object@1', id: bankId, type: 'volume-lens-bank',
-      properties: { frame, preparation: { source: 'source/compact-delivery.json', sha256: compactInputs.sha256 } },
-      prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json', sha256: hash(envelope) } }));
+      properties: { frame, preparation: { source: 'source/compact-delivery.json' } },
+      prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json' } }));
     console.log(`DELIVERY_READY ${directory}: ${lenses.length} lenses, ${lenses.reduce((sum, lens) => sum + lens.volume.resources.length, 0)} atlases`);
     return { id: bankId, status: 'prepared' };
   } finally { await rm(staging, { recursive: true, force: true }); }

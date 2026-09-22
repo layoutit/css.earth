@@ -4,7 +4,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { inspectFits } from '../qualify-source.mts';
 import { readProductScience } from '../product-science.mts';
 import { rememberQualification, type QualifiedObservation } from '../qualified-observations.mts';
-import { readProductRecord, pinFile, writeProductRecord, type ProductRun } from '../../product-record.mts';
+import { readProductRecord, fileSize, writeProductRecord, type ProductRun } from '../../product-record.mts';
 import { digest } from './contracts.mts';
 import { acquireVoProduct, type AcquisitionSpec } from './access.mts';
 
@@ -22,8 +22,8 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Pro
     throw new Error(`The retained archive product is discoverable but not qualifiable by the legacy raster route.${reasons.length ? ` ${reasons.join(' ')}` : ''}`);
   }
   if (!acquisition.outputs.some(output => output.path === 'science.fits')) throw new Error('Legacy raster content has no pinned science FITS output.');
-  const pin = await pinFile(acquired.file);
-  if (!acquisition.outputs.some(p => p.path === 'science.fits' && p.bytes === pin.bytes && p.sha256 === pin.sha256)) throw new Error('Acquired bytes changed.');
+  const pin = await fileSize(acquired.file);
+  if (!acquisition.outputs.some(p => p.path === 'science.fits' && p.bytes === pin.bytes)) throw new Error('Acquired bytes changed.');
   const decoded = inspectFits(await readFile(acquired.file), { OBJECT: spec.observation.rawTarget }, spec.kind);
   const archiveId = spec.operation.parameters.ID ?? spec.observation.identities.obs_publisher_did;
   if (typeof archiveId === 'string' && archiveId.startsWith('ivo://eso.org/ID?') && decoded.header.ARCFILE !== `${archiveId.slice('ivo://eso.org/ID?'.length)}.fits`)
@@ -35,8 +35,8 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Pro
     identity: { target: spec.observation.target, headerObject: decoded.header.OBJECT, parent: spec.observation.identities },
     acceptance: 'Pinned archive response, matching FITS OBJECT, supported native arrays and qualified product metadata. No local recalibration, full-parent equivalence or request fulfillment is implied.' }, null, 2)}\n`);
   const run: ProductRun = { telescope: spec.observation.service, stage: 'native-product-qualification',
-    inputs: [...acquisition.outputs.map(p => ({ role: 'acquired product and metadata', identity: p.path, bytes: p.bytes, sha256: p.sha256 })),
-      { role: 'acquisition record', identity: 'acquisition.json', ...await pinFile(acquired.record) }],
+    inputs: [...acquisition.outputs.map(p => ({ role: 'acquired product and metadata', identity: p.path, bytes: p.bytes })),
+      { role: 'acquisition record', identity: 'acquisition.json', ...await fileSize(acquired.record) }],
     parameters: { acquisition: spec.key, observation: { decoder: spec.decoder, kind: spec.kind, target: spec.request.target }, operation: spec.operation },
     software: [...acquisition.software, { name: 'cssEarth native product qualification', version: digest(await Promise.all(['./qualify.mts', '../product-science.mts', '../native-metadata.mts', '../calibration-dependencies.mts', '../../astronomy-packages/science.mts', '../../astronomy-packages/requirements.lock'].map(path => readFile(new URL(path, import.meta.url), 'utf8')))) }] };
   await writeProductRecord(productRecord, run, [...acquisition.outputs.map(p => ({ path: p.path, file: resolve(outputRoot, p.path) })),

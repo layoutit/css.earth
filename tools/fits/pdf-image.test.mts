@@ -1,4 +1,5 @@
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { deflateSync } from 'node:zlib';
 import { existsSync, readFileSync } from 'node:fs';

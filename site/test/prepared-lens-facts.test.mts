@@ -1,6 +1,7 @@
 import {parseObjectContentFixture} from './object-content-fixture.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { loadObjectContent } from './load-object-content.mts';
 import { prepareObjectContent } from '../../tools/objects/dist/content/prepare.js';
 import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';

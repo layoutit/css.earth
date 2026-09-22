@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { datasetDestination, parseDatasetDestination } from './dataset-destination.mts';
 import { compileContributions, parseContributionGraph } from './exploration-contributions.mts';
 import { compileSourceUsage, parseSourceUsage } from './source-usage.mts';

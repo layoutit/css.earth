@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createPreparedImageStore, decodePreparedImage, releasePreparedImage } from '../renderers/css/dist/testing.js';
 
 type PreparedImage = Parameters<typeof decodePreparedImage>[0];

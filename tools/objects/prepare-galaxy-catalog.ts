@@ -27,7 +27,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     if (bytes.length !== s.bytes) throw new TypeError(`Source byte-count mismatch: ${path}`);
     const references = path.endsWith('.bib') ? [...readBibliography(bytes.toString('utf8')).values()] : s.references;
     if (references !== undefined && !Array.isArray(references)) throw new TypeError('Source references must be an array.');
-    sources.push({ id: text(s.id, 'Source id'), path, sha256: sha256(bytes), bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
+    sources.push({ id: text(s.id, 'Source id'), path, bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
       ...(references ? { references: references.map(value => { const r = record(value, 'Source reference'); return { id: text(r.id, 'Reference id'), catalogueId: spatialPublicationId(text(r.id, 'Reference id')), url: text(r.url, 'Reference URL'), citation: text(r.citation, 'Reference citation') }; }) } : {}) });
   }
   const read = async (pin: { path: string; bytes: number }) => {
@@ -48,9 +48,8 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
   await writeFile(`${path}.tmp`, bytes); await rename(`${path}.tmp`, path);
   const displayBytes = Buffer.from(JSON.stringify(prepareGalaxyDisplaySample(data, sampling), null, 2) + '\n');
   await writeFile(resolve(outputDirectory, 'display-sample.json'), displayBytes);
-  const receipt = { schema: data.schema, path: 'catalogue.json', sha256: sha256(bytes), bytes: bytes.length,
-    outputs: [{ path: 'catalogue.json', sha256: sha256(bytes), bytes: bytes.length },
-      { path: 'display-sample.json', sha256: sha256(displayBytes), bytes: displayBytes.length }],
+  const receipt = { schema: data.schema, path: 'catalogue.json', bytes: bytes.length,
+    outputs: [{ path: 'catalogue.json', bytes: bytes.length }, { path: 'display-sample.json', bytes: displayBytes.length }],
     sourceRows: rows.length, objects: data.objects.length, exclusions: data.exclusions.length,
     localGroup: data.objects.filter(row => row.membership.group === 'local-group').length,
     confirmedLocalGroup: data.objects.filter(row => row.membership.group === 'local-group' && row.status === 'confirmed').length };
@@ -59,10 +58,10 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     const current = await readInventory(basename(objectDirectory), objectDirectory);
     const kept = current?.assets.filter(asset => asset.location === 'prepared' && !receipt.outputs.some(output => output.path === asset.filename)) ?? [];
     await updateInventory({ planetId: basename(objectDirectory), objectDirectory, location: 'prepared',
-      assets: [...kept, ...receipt.outputs.map(output => ({ filename: output.path, bytes: output.bytes, sha256: output.sha256 }))] });
+      assets: [...kept, { filename: 'catalogue.json', bytes: bytes.length, sha256: sha256(bytes) }, { filename: 'display-sample.json', bytes: displayBytes.length, sha256: sha256(displayBytes) }] });
     const descriptor = { schema: 'cssearth-object@1', id: basename(objectDirectory), type: 'galaxy-catalog',
-      properties: { preparation: { source: 'source/catalogue.json', sha256: sha256(recipeBytes) } },
-      prepared: { format: data.schema, url: 'prepared/catalogue.json', sha256: sha256(bytes) } };
+      properties: { preparation: { source: 'source/catalogue.json' } },
+      prepared: { format: data.schema, url: 'prepared/catalogue.json' } };
     await writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify(descriptor, null, 2) + '\n');
   }
   console.log(`PREPARED GALAXY CATALOGUE: ${JSON.stringify(receipt)}`);

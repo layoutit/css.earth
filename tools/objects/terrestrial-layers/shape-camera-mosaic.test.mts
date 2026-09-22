@@ -1,5 +1,6 @@
 import { required } from '../../contract/test-values.mts';
-import {test} from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {decodeCalibratedCamera,controlledShapeCamera,insetCoverage} from './shape-camera-mosaic.mts';
 import {parsePdsPlateShape} from './obj-shape.mts';

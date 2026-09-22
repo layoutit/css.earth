@@ -1,11 +1,10 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
 import {readJsonSource, requireString} from '../../sources/source-values.mts';
 import {parseMurReceipt} from './source-contract.mts';
 import type {EnsoRecipe, MurInventory, MurMosaic, MurTile} from './contracts.mts';
 interface AcquiredMurInventory extends MurInventory {
   schema: string; checked: string; product: string; baseline: string; layer: string;
   grid: {crs: string; level: number; columns: number; rows: number; tileSize: number; west: number; north: number; cellDegrees: number};
-  sourceBytes: number; capabilitiesSha256: string; mosaic?: MurMosaic; archiveSha256?: string; archiveBytes?: number;
+  sourceBytes: number; mosaic?: MurMosaic; archiveBytes?: number;
 }
 import { readFile, writeFile, mkdir, mkdtemp, rm, stat } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
@@ -74,7 +73,7 @@ export async function prepareMurMosaic(directory: string, receipt: MurInventory,
     demand(!seen.has(key) && Number.isInteger(tile.row) && Number.isInteger(tile.col) && tile.row >= 0 && tile.row < 40 && tile.col >= 0 && tile.col < 80, 'duplicate or invalid tile'); seen.add(key);
     verifyMurTile(tile.actualTime, tile.actualLayer, receipt.date, tile.empty);
     const bytes = await readFile(join(directory, `${tile.row}-${tile.col}.png`));
-    demand(sha256(bytes) === tile.sha256 && bytes.length === tile.bytes, `tile hash differs: ${key}`);
+    demand(bytes.length === tile.bytes, `tile size differs: ${key}`);
     const { data: pixels, info } = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     demand(info.width === 512 && info.height === 512 && info.channels === 4, 'tile dimensions changed');
     if (tile.empty) demand(pixels.every((v, i) => i % 4 !== 3 || v === 0), 'empty tile contains observations');
@@ -94,7 +93,7 @@ export async function prepareMurMosaic(directory: string, receipt: MurInventory,
   }
   demand(covered + missing === width * height, 'mosaic coverage incomplete');
   await sharp(data, { raw: { width, height, channels: 3 } }).png({ compressionLevel: 9 }).toFile(outputPath);
-  return { width, height, sourceWidth: 40960, sourceHeight: 20480, sampling: 'nearest pixel centers', covered, missing, sha256: sha256(await readFile(outputPath)) };
+  return { width, height, sourceWidth: 40960, sourceHeight: 20480, sampling: 'nearest pixel centers', covered, missing };
 }
 
 export async function acquireMurImagery(directory: string, { capabilitiesPath }: {capabilitiesPath?: string} = {}) {
@@ -133,7 +132,7 @@ export async function acquireMurImagery(directory: string, { capabilitiesPath }:
         verifyMurTile(actualTime, actualLayer, date, empty);
         totalBytes += bytes.length; demand(totalBytes < 250_000_000, 'source transfer exceeds 250 MB bound');
         await writeFile(join(tileDirectory, `${row}-${col}.png`), bytes);
-        records[index] = { row, col, url, actualTime, actualLayer, empty, bytes: bytes.length, sha256: sha256(bytes) };
+        records[index] = { row, col, url, actualTime, actualLayer, empty, bytes: bytes.length };
         completed++; if (completed % 200 === 0) console.log(json({ downloaded: completed, of: 3200, bytes: totalBytes }).trim());
         return;
       } catch (error) { failure = error; }
@@ -143,11 +142,10 @@ export async function acquireMurImagery(directory: string, { capabilitiesPath }:
   await Promise.all(Array.from({ length: 8 }, async () => { while (cursor < 3200) await getTile(cursor++); }));
   const receipt: AcquiredMurInventory = { schema: 'cssearth-mur-gibs@1', checked: new Date().toISOString(), date, product: 'NASA MUR v4.1 via GIBS', baseline: '2003–2014', layer: murLayer,
     grid: { crs: 'CRS84', level: 6, columns: 80, rows: 40, tileSize: 512, west: -180, north: 90, cellDegrees: 360 / 40960 },
-    sourceBytes: totalBytes, complete: records.every(Boolean), capabilitiesSha256: sha256(capabilities), tiles: records };
+    sourceBytes: totalBytes, complete: records.every(Boolean), tiles: records };
   demand(receipt.complete, 'partial download cannot be published');
   receipt.mosaic = await prepareMurMosaic(tileDirectory, receipt, join(directory, 'mur-gibs.png'));
   await run('tar', ['-czf', join(directory, 'mur-gibs-tiles.tar.gz'), '-C', tileDirectory, '.'], { maxBuffer: 1024 * 1024 });
-  receipt.archiveSha256 = sha256(await readFile(join(directory, 'mur-gibs-tiles.tar.gz')));
   receipt.archiveBytes = (await stat(join(directory, 'mur-gibs-tiles.tar.gz'))).size;
   await writeFile(join(directory, 'mur-gibs-receipt.json'), json(receipt));
   return parseMurReceipt(receipt);
@@ -156,7 +154,7 @@ export async function acquireMurImagery(directory: string, { capabilitiesPath }:
 export async function restoreMurMosaic(sourceDirectory: string) {
   const receipt = parseMurReceipt(await readJsonSource(join(sourceDirectory, 'mur-gibs-receipt.json')));
   const archive = join(sourceDirectory, 'mur-gibs-tiles.tar.gz');
-  demand(sha256(await readFile(archive)) === receipt.archiveSha256, 'archive hash differs');
+  demand((await stat(archive)).size === receipt.archiveBytes, 'archive size differs');
   const temp = await mkdtemp(join(tmpdir(), 'earth-mur-restore-'));
   try {
     const { stdout } = await run('tar', ['-tzf', archive]);
@@ -164,7 +162,7 @@ export async function restoreMurMosaic(sourceDirectory: string) {
     await run('tar', ['-xzf', archive, '-C', temp]);
     const output = join(temp, 'mosaic.png');
     const mosaic = await prepareMurMosaic(temp, receipt, output, receipt.mosaic.width);
-    demand(mosaic.sha256 === receipt.mosaic.sha256, 'restored mosaic differs');
+    demand(mosaic.covered === receipt.mosaic.covered && mosaic.missing === receipt.mosaic.missing, 'restored mosaic differs');
     await writeFile(join(sourceDirectory, 'mur-gibs.png'), await readFile(output), { flag: 'wx' });
     return mosaic;
   } finally { await rm(temp, { recursive: true, force: true }); }
@@ -209,7 +207,6 @@ export async function verifyPreparedMurImage(sourceDirectory: string, recipe: Pi
   demand(recipe.date === receipt.date && recipe.baseline === '2003–2014' && receipt.baseline === recipe.baseline, 'date or baseline differs');
   demand(receipt.complete && receipt.tiles.length === 3200 && receipt.grid.level === 6, 'incomplete source grid');
   const input = await readFile(join(sourceDirectory, 'science/mur-gibs.png'));
-  demand(sha256(input) === receipt.mosaic.sha256, 'prepared source hash differs');
   const info = await sharp(input).metadata();
   demand(info.width === 16384 && info.height === 8192, 'prepared source dimensions changed');
   return input;

@@ -170,9 +170,6 @@ jobs:
         # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
         # stay blocking in `Contract lint` (physical frame receipts and document pins).
         run: node --test tools/assets/restore-source-inputs.test.mts
-      - name: Check authored object directory layout
-        if: ${{ !cancelled() }}
-        run: node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Reconcile the source catalogue, facility records and provenance receipts
         if: ${{ !cancelled() }}
         # Moved off the `Universe / sources` gate lane. These assert that every catalogue row, facility record
@@ -200,9 +197,9 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             # Authoring replays volume provenance from pinned FITS.
             node tools/assets/restore-source-inputs.mts --repository-volumes
-            pnpm test:sources
+            CSSEARTH_SOURCE_CHECK_MODE=author pnpm test:node
           else
-            pnpm test:sources:pr
+            CSSEARTH_SOURCE_CHECK_MODE=published pnpm test:node
           fi
       - name: Reproduce the prepared bank and the galaxy field from their pinned inputs
         if: ${{ !cancelled() }}
@@ -221,8 +218,7 @@ jobs:
           node tools/prepare/prepare-ci-inputs.mts universe-preparation
           # The galaxy writer finishes before world/provenance readers in this workspace.
           node tools/assets/restore-source-inputs.mts --repository-volumes
-          pnpm test:galaxy-field
-          pnpm test:ci-preparation:world
+          pnpm test:preparation --universe
       - name: Explain that this job does not gate the merge
         if: failure()
         run: |

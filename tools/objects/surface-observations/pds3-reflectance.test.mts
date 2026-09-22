@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { pds3LabelHasReflectance } from './formats/pds3-reflectance.mts';
 
 const label = readFileSync(new URL('../../../src/objects/tethys/source/observations/N1807429484_1_CALIB.LBL', import.meta.url), 'utf8');

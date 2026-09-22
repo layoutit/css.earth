@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { cp,mkdtemp,writeFile,readFile,rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
-import { pinFile,writeProductRecord } from '../product-record.mts';
+import { fileSize,writeProductRecord } from '../product-record.mts';
 import { exportOutput,listOutputs } from './outputs.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
 import { parseCli } from './cli.mts';
@@ -23,7 +24,7 @@ test('PDS arrays retain integer flags, special constants and associated uncertai
     const decoded=await pdsPackages({operation:'decode-product',labelPath:label,arrayDirectory:resolve(root,'arrays')});
     assert.equal(decoded.decoded?.structures.find(s=>s.name==='QUALITY_MAP_IMAGE')?.dtype,'uint8');
     await writeProductRecord(record,{telescope:'Fixture',stage:'fixture',inputs:[],parameters:{observation:{decoder:'pds-product',labelPath:'label.xml'}},software:[]},[{path:'data.bin',file:data},{path:'label.xml',file:label}]);
-    const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@2',product:'data.bin',record:'input.json',receipt:'input.json',facts:{target:'fixture',verified:true},context,files:await Promise.all(['data.bin','label.xml','input.json'].map(async path=>({path,...await pinFile(resolve(root,path))})))}));
+    const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@2',product:'data.bin',record:'input.json',receipt:'input.json',facts:{target:'fixture',verified:true},context,files:await Promise.all(['data.bin','label.xml','input.json'].map(async path=>({path,...await fileSize(resolve(root,path))})))}));
     const choices=await listOutputs(result),image=choices.outputs.find(o=>o.kind==='image'&&o.available);assert.ok(image);assert.deepEqual(choices.sourceContext,context);assert.equal(image.unit?.value,'W m-2');assert.ok(image.limitations?.length);
     const output=await exportOutput(result,{kind:'image',hdu:0,structure:'IMAGE'},resolve(root,'export'));
     const tc=await astroqueryToolchain();

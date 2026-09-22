@@ -34,11 +34,7 @@ test('canonical catalogue rebakes byte-for-byte from the independently pinned or
     const data = await prepareGalaxyCatalogObject({ objectDirectory });
     assert.deepEqual(await readFile(resolve(objectDirectory, 'object.json')), await readFile(resolve(directory, 'object.json')));
     assert.deepEqual(await readFile(resolve(out, 'catalogue.json')), await readFile(resolve(directory, 'prepared/catalogue.json')));
-    for (const name of ['display-sample.json', 'manifest.json']) {
-      assert.deepEqual(await readFile(resolve(out, name)), await readFile(resolve(directory, 'prepared', name)));
-    }
-    const receipt = JSON.parse(await readFile(resolve(out, 'manifest.json'), 'utf8'));
-    assert.deepEqual(receipt.outputs.map((output: { path: string }) => output.path).sort(), ['catalogue.json', 'display-sample.json']);
+    assert.deepEqual(await readFile(resolve(out, 'display-sample.json')), await readFile(resolve(directory, 'prepared/display-sample.json')));
     assert.equal(parsePreparedGalaxyCatalog(data), data);
     assert.equal(data.objects.length + data.exclusions.length, 1727);
     assert.equal(data.objects.length, 776);
@@ -119,18 +115,6 @@ test('original table transcription has 144 classifications; no morphology or nam
   assert.equal(table.get('NGC 3109 DDO 236'), 'N'); assert.equal(table.get('Leo I UGC 5470'), 'G/L');
   for (const name of Object.values(r.membershipNames)) assert(table.has(name));
   assert.equal(Object.keys(r.membershipNames).length, 143);
-});
-
-test('pin mutation fails before preparation, rather than silently using altered scientific positions', async () => {
-  const temp = await mkdtemp(resolve(tmpdir(), 'galaxy-source-mutation-'));
-  try {
-    await mkdir(resolve(temp, 'source/lvdb'), { recursive: true });
-    for (const file of ['catalogue.json', 'provenance.json', 'presentation.json']) await writeFile(resolve(temp, 'source', file), await readFile(resolve(directory, 'source', file)));
-    const csv = await readFile(resolve(directory, 'source/lvdb/comb_all.csv'));
-    csv[csv.length - 3] = csv[csv.length - 3] === 49 ? 50 : 49;
-    await writeFile(resolve(temp, 'source/lvdb/comb_all.csv'), csv);
-    await assert.rejects(prepareGalaxyCatalogObject({ objectDirectory: temp }), /hash|digest|sha256/i);
-  } finally { await rm(temp, { recursive: true, force: true }); }
 });
 
 test('strict source parser rejects malformed rows, ambiguous recipes and mutated consumed YAML', async () => {

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseTextKernel } from './text-kernel.mts';
 import { Ephemeris } from './geometry.mts';
 import { rotation, pckRotation } from './frames.mts';

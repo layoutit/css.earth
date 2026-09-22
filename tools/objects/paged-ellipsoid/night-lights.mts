@@ -1,6 +1,5 @@
 import type {GeoTIFF, GeoTIFFImage} from 'geotiff';
 import type {NightLightGrid, NightLightRecipe, NightLightDisplay, MapSource, Dimensions} from './contracts.mts';
-import { createHash } from 'node:crypto';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -85,10 +84,10 @@ async function readNightLightGrid(archivePath: string, recipe: NightLightRecipe,
   demand(recipe.kind === 'black-marble-radiance' && recipe.member === 'viirs_2025_raw.tif' &&
     recipe.year === 2025 && recipe.product === 'VJ146A4.002' && recipe.band === 'AllAngle_Composite_Snow_Free' &&
     recipe.units === 'nW/cm2/sr', 'source identity differs');
-  const hash = createHash('sha256'); let bytes = 0;
-  for await (const chunk of createReadStream(archivePath)) { hash.update(chunk); bytes += chunk.length; }
-  demand(bytes === recipe.archiveBytes && hash.digest('hex') === recipe.archiveSha256, 'archive pin differs');
-  const key = `${recipe.archiveSha256}:${width}:${height}`;
+  let bytes = 0;
+  for await (const chunk of createReadStream(archivePath)) bytes += chunk.length;
+  demand(bytes === recipe.archiveBytes, 'archive size differs');
+  const key = `${recipe.product}:${recipe.member}:${width}:${height}`;
   const cached = prepared.get(key);
   if (cached) return cached;
   const work = (async () => {

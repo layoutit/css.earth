@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { sha256 } from '../../src/platform/sha256.mts';
 import { ciPreparationInputs, ciUniverseInputs, requireCiInputMode, restoreCiPreparationInputs, restoreCiUniverseInputs } from './prepare-ci-inputs.mts';
 

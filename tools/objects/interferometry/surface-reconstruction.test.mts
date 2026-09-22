@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseSurfaceSummary, surfaceArguments } from './surface-reconstruction.mts';
 
 test('a surface run is described by fixed arguments: the star with no measured axis has its pole North in the sky plane', () => {
