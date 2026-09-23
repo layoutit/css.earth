@@ -124,23 +124,15 @@ Choose checks for the changed behavior after building and preparing its inputs:
 ```sh
 node --test tools/prepared/prepared-activation-registry.test.mts
 node --test tools/prepared/prepared-activation-transport.test.mts
-HOPS=30 ORIGIN=http://127.0.0.1:4221 `pnpm test:node` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
-ORIGIN=http://127.0.0.1:4221 `pnpm test:node` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
-DPR=2 ORIGIN=http://127.0.0.1:4221 `pnpm test:node` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
-ORIGIN=http://127.0.0.1:4221 node `site/test/rendered-page.test.mts`
-ORIGIN=http://127.0.0.1:4221 node `site/test/rendered-page.test.mts`
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4221 mars
-DPR=2 node `site/test/rendered-page.test.mts` http://127.0.0.1:4221 saturn
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
-DPR=2 node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
+node --test site/test/navigation-lifecycle.test.mts
+node --test site/test/scene-session.test.mts
+node --test site/test/rendered-page.test.mts
 ```
 
-The registry browser suite covers every object at DPR 1 and 2. The interruption
-suite covers arrival, cancellation during activation, superseding selection, and
-reduced motion. These prove lifecycle behavior, not a guaranteed frame rate.
+The rendered-page test parses built HTML for Saturn, Earth and Mercury; it does
+not use the preview server, exercise flights or compare DPRs. The lifecycle and
+activation tests cover their named state transitions. These checks do not prove
+browser interaction behavior or a guaranteed frame rate.
 Frame-rate claims additionally require matched scene bytes, camera path,
 viewport, browser, and full-presentation timing; JavaScript duration alone does
 not measure compositor stalls. Development recordings attach an ID to navigation

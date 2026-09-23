@@ -37,7 +37,7 @@
         "command": "node tools/objects/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-<band> output/jwst-imaging/<band>-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json",
         "definition": "tools/objects/jwst/imaging/programs/ngc-3132-2733.json"
       },
-      "note": "Representative colour, not what an eye would see: three infrared filters put into red, green and blue. All three mosaics were re-run onto one grid, so no channel is resampled. F187N and F405N are narrow filters on hydrogen lines, which is why the shells stand out."
+      "note": "Representative colour, not what an eye would see: three infrared filters put into red, green and blue. All three mosaics were re-run onto one grid, so no channel is resampled. F187N and F405N are narrow filters on hydrogen lines, which is why the shells stand out. The product command records the historical run; its NGC 3132 shared-grid recipe is absent from this checkout, so it cannot currently be rerun here."
     },
     {
       "id": "jwst-nirspec-sn1987a",
