@@ -7,6 +7,24 @@ import { resolve } from 'node:path';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 const label=(pointer:string)=>`PDS_VERSION_ID = PDS3\nPRODUCT_ID = "TEST"\nDATA_SET_ID = "DATA"\nTARGET_NAME = "TEST"\nINSTRUMENT_HOST_NAME = "TEST OBSERVATORY"\nINSTRUMENT_ID = "CAM"\n${pointer}\nEND\n`;
+test('source discovery reports missing headers without fetching every manifest URL', async () => {
+ const root=await mkdtemp(resolve(tmpdir(),'source-intake-local-')),source=resolve(root,'src/objects/test/source');
+ const originalFetch=globalThis.fetch;let fetches=0;
+ try {
+  await mkdir(source,{recursive:true});
+  await writeFile(resolve(source,'local.img'),label('^IMAGE = 32'));
+  await writeFile(resolve(source,'manifest.json'),JSON.stringify({inputs:[
+   {path:'local.img',origin:'https://example.org/local.img'},
+   ...Array.from({length:12},(_,index)=>({path:`missing-${index}.img`,origin:`https://example.org/missing-${index}.img`}))
+  ]}));
+  globalThis.fetch=(async()=>{fetches++;throw new Error('Unexpected remote header fetch.');}) as typeof fetch;
+  const issues:SourceIntakeIssue[]=[],products=await intakeSources(root,'test',[],issues,{fetchRemote:false});
+  assert.equal(fetches,0);
+  assert.equal(products.length,1);
+  assert.equal(issues.length,12);
+  assert.ok(issues.every(issue=>issue.state==='unavailable'&&/local source file or a previously cached header/u.test(issue.reason)));
+ } finally {globalThis.fetch=originalFetch;await rm(root,{recursive:true,force:true});}
+});
 test('attached labels and detached tables become complete pinned products; unpinned dependencies remain explicit',async()=>{
  const root=await mkdtemp(resolve(tmpdir(),'source-intake-')),source=resolve(root,'src/objects/test/source');await mkdir(source,{recursive:true});
  try{

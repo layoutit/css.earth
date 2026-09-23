@@ -33,6 +33,17 @@ test('wavelength-only exploration remains exploratory rather than becoming a str
   assert.equal(answer.target, 'eris'); assert.deepEqual(answer.request, request); assert.deepEqual(answer.choices, []);
 });
 
+test('unread source headers mark exploration coverage as incomplete', () => {
+  const answer = explorationAnswer({ target: 'eris' }, { ledgers: [], capabilities: [], targetCatalogue: [{ id: 'eris', name: 'Eris', aliases: [] }], targetAssociations: [], bodyMaps: [],
+    sourceIntakeIssues: [
+      { path: 'a.fits', state: 'unavailable', reason: 'Header retrieval requires a local source file or a previously cached header.' },
+      { path: 'b.fits', state: 'unavailable', reason: 'Header retrieval requires a local source file or a previously cached header.' },
+    ] });
+  assert.deepEqual(answer.choices, []);
+  assert.deepEqual(answer.issues.filter(issue => issue.identity === 'source manifest').map(issue => issue.reason),
+    ['2 declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.']);
+});
+
 test('exploration choices are deterministic and ready products appear first while service limits remain visible', () => {
   const source = (id: string) => ({ id, target: 'eris', telescope: 'Fixture', mode: 'camera', kind: 'image' as const, archiveProductId: `archive-${id}`,
     decoder: 'fits-image' as const, files: [], identity: { OBJECT: 'ERIS' }, units: 'counts', meaning: 'fixture', citation: 'https://example.test/', limitations: ['fixture limitation'],
