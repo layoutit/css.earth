@@ -4,8 +4,9 @@
  *
  * - a star: the photosphere colour of its colour lens, dimmed toward the limb by the lens's limb-darkening law (a uniform disc
  *   when it has none);
- * - a hosted planet: its default lens map seen from its host star, an orthographic view centred on the substellar point, north
- *   up and east to the right, in the lens's palette and range, with any borders the lens draws.
+ * - a body whose default lens is a map (a hosted planet, or a brown dwarf with a surface map): that map in an orthographic view
+ *   centred on longitude 0 (a hosted planet's substellar point, as seen from its star), north up and east to the right, in the
+ *   lens's palette and range, with any borders the lens draws.
  *
  * Both are deterministic functions of pinned package inputs.
  *
@@ -82,10 +83,11 @@ export async function planetMarker(id: string) {
   });
 }
 
-/** Stars carry a `star` astronomy record; everything else here is a hosted planet. */
+/** A body whose default lens is a photosphere colour is drawn as a star; a body whose default lens is a map (a hosted planet, or a
+ * brown dwarf with a surface map) is drawn as that map. */
 async function markerFor(id: string) {
-  const record = requireRecord(await readJson(resolve(objects, '../../packages/astronomy/data/bodies', `${id}.json`)));
-  return record.classification === 'star' ? starMarker(id) : planetMarker(id);
+  const { science } = await defaultSurface(id);
+  return science.kind === 'stellar-photometric-color' ? starMarker(id) : planetMarker(id);
 }
 
 export async function authorContextMarkers(ids: readonly string[], { check = false } = {}) {

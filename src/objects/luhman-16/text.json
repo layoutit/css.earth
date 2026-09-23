@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "luhman-16",
+  "card": {
+    "text": "The brighter of the two nearest brown dwarfs, 2 parsecs away: a failed star 35 times the mass of Jupiter.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2403-08865",
+        "url": "https://arxiv.org/abs/2403.08865",
+        "label": "Bedin et al. 2024",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "individual component masses 35.4 ±0.2 Mj and 29.4±0.2 Mj"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Luhman 16 A and B are the nearest brown dwarfs, found in 2013 only 2 parsecs away. They circle each other every 27 years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2403-08865",
+        "url": "https://arxiv.org/abs/2403.08865",
+        "label": "Bedin et al. 2024",
+        "checked": "2026-09-23",
+        "locator": "Table 2",
+        "quote": "P [yr] 26.55 (±0.08)"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the measured radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}

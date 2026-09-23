@@ -1,0 +1,204 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "luhman-16b",
+  "displayName": "Luhman 16 B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.02 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-1508-01767",
+          "url": "https://arxiv.org/abs/1508.01767",
+          "label": "Filippazzo et al. 2015",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "29.4 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2403-08865",
+          "url": "https://arxiv.org/abs/2403.08865",
+          "label": "Bedin et al. 2024, Table 2",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Orbit around A",
+        "value": "26.6 years",
+        "source": {
+          "catalogueId": "arxiv-2403-08865",
+          "url": "https://arxiv.org/abs/2403.08865",
+          "label": "Bedin et al. 2024, Table 2",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "brightness",
+    "controls": [
+      {
+        "id": "brightness",
+        "label": "Brightness",
+        "qualification": "Published map · Ureshino et al. 2026 · VLT CRIRES 2.30–2.32 µm",
+        "thumbnail": "luhman-16b-lens-brightness.webp",
+        "surface": "luhman-16b-surface-brightness@2x.webp",
+        "poles": "luhman-16b-poles-brightness@2x.webp",
+        "source": {
+          "id": "luhman-16b-posterior-mean",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/20024778"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Relative brightness",
+          "labels": [
+            "0.00642",
+            "0.00772",
+            "0.00902"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0.00642",
+              "0.00772",
+              "0.00902"
+            ]
+          },
+          "meta": "relative intensity",
+          "sourceUrl": "https://zenodo.org/records/20024778"
+        },
+        "notes": "The mean of many maps that fit the spectra: dark and bright patches of cloud, drawn pixel by pixel as the paper draws them.",
+        "legendNote": "Features are only one to two uncertainties deep; see Uncertainty."
+      },
+      {
+        "id": "uncertainty",
+        "label": "Uncertainty",
+        "qualification": "Published map · Ureshino et al. 2026 · VLT CRIRES 2.30–2.32 µm",
+        "thumbnail": "luhman-16b-lens-uncertainty.webp",
+        "surface": "luhman-16b-surface-uncertainty@2x.webp",
+        "poles": "luhman-16b-poles-uncertainty@2x.webp",
+        "source": {
+          "id": "luhman-16b-posterior-variance",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/20024778"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness uncertainty",
+          "labels": [
+            "0.00123",
+            "0.00142",
+            "0.00161"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0.00123",
+              "0.00142",
+              "0.00161"
+            ]
+          },
+          "meta": "relative intensity, one standard deviation",
+          "sourceUrl": "https://zenodo.org/records/20024778"
+        },
+        "notes": "How far each point of the Brightness map could be off: largest where the star was seen least.",
+        "legendNote": "Same units as Brightness."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ureshino et al. (2026)",
+      "href": "https://arxiv.org/abs/2605.08544"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2605.08544",
+      "credit": "Ureshino et al. (2026)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/luhman-16b.json",
+      "credit": "Radius from Filippazzo et al. (2015); mass and orbit around A from Bedin et al. (2024); spin tilt from Ureshino et al. (2026)"
+    }
+  }
+}

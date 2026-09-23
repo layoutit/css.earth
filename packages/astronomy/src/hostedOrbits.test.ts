@@ -201,6 +201,30 @@ describe('hosted orbits', () => {
     // A circular display orbit at the published semi-major axis, node and inclination, phased to the six epochs: chi-squared 12.5 for 11 degrees of freedom.
     expect(chi2).toBeLessThan(14)
   })
+  it('places Luhman 16 B where Garcia et al. measured it from A, and moves it at their relative radial velocities', () => {
+    // Garcia et al. (2017, ApJ 846, 97; arXiv:1708.02714), Table 3: GeMS orbital astrometry of B from A, (dRA, dDec) in mas at MJD, with
+    // 0.26 and 0.28 mas errors; Table 4: CRIRES relative radial velocities v_A - v_B in m/s, +/- 200. The record carries Bedin et al.'s
+    // (2024) HST orbit, which used none of these points, with its angles mapped from their mirrored sky frame (i' = 180 - i, Omega' = 270 - Omega).
+    const star = starAstrometry('luhman-16'), radiusKm = BODIES['luhman-16'].meanRadiusKm
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+    const distanceKm = star.distanceParsecs * PARSEC_KM, toward = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+    const gems = [[56701.22, -871.33, 741.46], [56759.18, -833.18, 686.77], [56760.17, -832.71, 685.66], [56804.07, -802.82, 643.57], [57000.34, -655.87, 444.92], [57086.32, -585.38, 353.41]] as const
+    let sum = 0
+    for (const [mjd, dra, ddec] of gems) {
+      const p = hostedOrbitStateRelativeKm(hostedOrbit('luhman-16b'), star, radiusKm, mjd + 2400000.5).positionKm
+      const [x, y] = [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000)
+      sum += (x! - dra) ** 2 + (y! - ddec) ** 2
+    }
+    // Measured 2026-09-23: 2.6 mas rms against a separation of about 1,100 mas; the unmapped angles miss by 248 mas.
+    expect(Math.sqrt(sum / gems.length)).toBeLessThan(4)
+    for (const [mjd, deltaV] of [[56417.5, 2740], [56779.5, 1940], [56797.5, 1850]] as const) {
+      // v_A - v_B is minus B's recession relative to A. Measured 2026-09-23: 2448, 1752 and 1707 m/s, within 1.5 sigma of each; the
+      // mirror-image orbit that fits the positions as well gives the opposite sign.
+      const v = hostedOrbitStateRelativeKm(hostedOrbit('luhman-16b'), star, radiusKm, mjd + 2400000.5).velocityKmPerDay
+      const recession = dot(v, toward) / 86400 * 1000
+      expect(Math.abs(-recession - deltaV), `${mjd}`).toBeLessThan(1.5 * 200)
+    }
+  })
   it('places the four planets of HR 8799 where JWST measured them after the fit', () => {
     // Balmer et al. (2025, AJ; arXiv:2503.13608), Table 2: astrometry combined over the NIRCam LWB filters of GTO 1194 on MJD 60253.39,
     // (dRA, dDec, sigma dRA, sigma dDec) in mas. Zurlo et al. (2022) fitted astrometry up to 2021, so these points are not in that fit.

@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2403-08865",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bedin et al. (2024): HST astrometry of the closest brown dwarfs - II. Improved parameters and constraints on a third body",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2403.08865"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1002/asna.20230158"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2403.08865",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/asna.20230158",
+      "label": "Astronomische Nachrichten 345, e20230158"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2403.08865",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1: barycentre astrometry; Table 2: orbit and masses (data-fit column)"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomische Nachrichten 345, e20230158",
+  "creators": [
+    "L. R. Bedin",
+    "J. Dietrich",
+    "A. J. Burgasser",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

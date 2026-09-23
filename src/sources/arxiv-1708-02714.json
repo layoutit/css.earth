@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-1708-02714",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Garcia et al. (2017): Individual, Model-independent Masses of the Closest Known Brown Dwarf Binary to the Sun",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1708.02714"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/aa844f"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1708.02714",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/aa844f",
+      "label": "The Astrophysical Journal 846, 97"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1708.02714",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 3: GeMS orbital astrometry; Table 4: CRIRES relative radial velocities"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 846, 97",
+  "creators": [
+    "E. V. Garcia",
+    "S. M. Ammons",
+    "M. Salama",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}
