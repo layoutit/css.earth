@@ -105,7 +105,7 @@ test("rejects a declared file missing from the source tree", async (t) => {
 
 function sourceManifest(files: Record<string, Buffer>, overrides: Partial<Record<"input" | "generated" | "document", Record<string, unknown>>> = {}) {
   return {
-    schema: "cssfixture-authoritative-sources@2",
+    schema: "cssearth-authoritative-sources@2",
     inputs: [{
       id: "source",
       path: "input/source.txt",

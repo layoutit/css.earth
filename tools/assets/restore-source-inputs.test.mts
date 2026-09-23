@@ -109,7 +109,7 @@ test('checkout restores a missing compressed observation without refreshing exis
     records.map(entry => ({ kind: 'download', groups: ['refresh'], path: entry.path, url: entry.origin })) }));
   await writeFile(resolve(source, 'existing.png'), existing);
   await writeFile(resolve(source, 'preparation/acquisition.json'), plan);
-  await json(resolve(source, 'manifest.json'), { schema: 'csstitan-authoritative-sources@2', inputs: records,
+  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@2', inputs: records,
     documents: [{ ...pin('preparation/acquisition.json', plan), purpose: 'Acquisition plan' }], generatedIntermediates: [] });
   await run(root, ['tools/assets/restore-source-inputs.mts', '--object=titan']);
   assert.deepEqual(requests, ['/observation.IMG.gz']);

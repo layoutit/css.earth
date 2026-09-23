@@ -2,7 +2,7 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import {inventoryPublicAssets,requireInventory} from '../../src/platform/runtime-asset-closure.mts';
 import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
 import type { SourceBinding } from '../../src/platform/source-catalog.mts';
-import { assertRangeResponse, assertSourceRange, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
+import { assertRangeResponse, assertSourceRange, rangeRequestHeader, SOURCE_MANIFEST_SCHEMA } from '../../src/platform/source-manifest.mts';
 import type { SourceRange } from '../../src/platform/source-manifest.mts';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
@@ -29,7 +29,7 @@ export function containedPath(root:string,path:string):string {
 }
 export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
  const manifest=object(value);
- if(typeof manifest.schema!=='string'||!/^css[a-z][a-z0-9-]*-authoritative-sources@2$/.test(manifest.schema)||(id!==undefined&&manifest.schema!==`css${id}-authoritative-sources@2`&&manifest.schema!=='cssearth-authoritative-sources@2'))throw new TypeError('Unsupported source manifest schema.');
+ if(manifest.schema!==SOURCE_MANIFEST_SCHEMA)throw new TypeError('Unsupported source manifest schema.');
  const paths=new Set<string>(),ids=new Set<string>();
  for(const collection of ['inputs','generatedIntermediates','documents'] as const){
   const entries=manifest[collection];if(!Array.isArray(entries)||(collection==='inputs'&&!entries.length))throw new TypeError(`Source manifest ${collection} is missing or empty.`);

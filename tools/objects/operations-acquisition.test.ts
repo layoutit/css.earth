@@ -226,7 +226,7 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
     cache = resolve('.local/source-archives', `${digest(Buffer.from('https://example.test/archive.zip'))}.zip`);
     const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip', member:'source.bin', groups:['restore']};
     const plan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1', operations:[step]});
-    const manifest = {schema:'cssfixture-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin'}], generatedIntermediates:[],documents:[]};
+    const manifest = {schema:'cssearth-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin'}], generatedIntermediates:[],documents:[]};
     await executeAcquisition({sourceRoot:directory,manifest,plan,group:'restore',
       transport:{fetch:async()=>new Response(archive)}});
     assert.deepEqual(await readFile(join(directory,'restored.bin')), content);
