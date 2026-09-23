@@ -35,8 +35,10 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);b.append(system,body);
   for(const leaf of plan.body.leaves)b.append(body,b.leaf(leaf));
   // A ring hangs beside the body under the system node, so the body's orientation carries it.
+  const planeNodes = new Map<string, PreparedNode>();
   for(const entry of planes){
     const mesh=b.mesh(`${entry.className}`,"",{style:""});
+    planeNodes.set(entry.id, mesh);
     b.append(system,mesh);
     for(const leaf of entry.leaves){
       const node=b.leaf(leaf);
@@ -72,12 +74,15 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       zeroAtPole:false,property:`--${ns}-light-roll`},frameAttribute:null,modeAttribute:null,quoted:true};
   const variants: PreparedVariant[]=[];
   const atmospheres: (boolean|null)[]=atmospheric?[false,true]:[null];
-  for(const lens of lenses.controls)for(const atmosphere of atmospheres)for(const shadows of [false,true]){
+  const ringNode = planeNodes.get('rings');
+  const ringStates: (boolean|null)[] = ringNode ? [false,true] : [null];
+  for(const lens of lenses.controls)for(const atmosphere of atmospheres)for(const shadows of [false,true])for(const rings of ringStates){
     const focus=input.lensFocus?.[lens.id];
-    variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),shadows},required:required(lens.id),writes:[
+    variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),shadows,...(rings===null?{}:{rings})},required:required(lens.id),writes:[
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},{kind:"attribute",target:-1,name:"data-view",value:null},
       ...(atmosphere===null?[]:[{kind:"class",target:-1,name:`${ns}-hide-atmosphere`,value:!atmosphere} as PreparedWrite]),
       ...(atmospheric?[]:[{kind:"class",target:-1,name:`${ns}-hide-shadows`,value:!shadows} as PreparedWrite]),
+      ...(ringNode && rings!==null?[{kind:"style",target:index(ringNode),name:"display",value:rings?"block":"none"} as PreparedWrite]:[]),
     ],materials:[atmospheric?{track:"lighting",bank:"lighting",mode:"frames",enabled:true,rotationEnabled:shadows,
       frameOverride:shadows?null:material.frameCount-1,clearWhenHidden:false,fixedMode:"shadowless"}
       :{track:"lighting",bank:"rows",mode:shadows?"frames":"fixed",enabled:true,rotationEnabled:shadows,
