@@ -1,0 +1,29 @@
+{
+  "id": "kelt-9",
+  "classification": "star",
+  "order": 1720,
+  "physical": {
+    "name": "KELT-9",
+    "horizonsCode": null,
+    "meanRadiusKm": 1616133.7,
+    "gravitationalParameterKm3PerS2": 334435348905.68726,
+    "parent": null
+  },
+  "physicalNotes": "Radius: KELT-9 is a rapid rotator. Ahlers et al. (2020, AJ 160, 4; arXiv:2004.14812) fit its TESS transit with a gravity-darkened oblate star: equatorial radius 2.39 +/- 0.03 solar radii (Table 2) and an equatorial radius 1.089 +/- 0.017 times the polar radius (abstract), so a polar radius of 2.1947. The record's radius is the volume-equivalent sphere of those two, (2.39^2 x 2.1947)^(1/3) = 2.3230 solar radii at 695700 km per solar radius; the scene draws the flattening, with the equatorial radius on the outline. GM from the stellar mass 2.52 +0.25/-0.20 solar masses (Gaudi et al. 2017, Nature 546, 514, Extended Data Table 3, adopted Model 1, which Ahlers et al. adopt) times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis, the spin axis measured against KELT-9b's orbit, is up.",
+  "star": {
+    "rightAscensionDegrees": 307.8599027970418,
+    "declinationDegrees": 39.93891900336815,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 207.21797818658283,
+    "properMotionRaMasPerYear": 16.716578051403854,
+    "properMotionDecMasPerYear": 20.96090596020299,
+    "radialVelocityKmPerS": -20.228071,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "Gaia DR3 source 2064327278651198336 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kelt-9/source/photometry/gaia-dr3-source.csv; cross-identification HD 195689: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD%20195689",
+      "distance": "Gaia DR3 parallax 4.8258 +/- 0.0248 mas (same row): 1000/4.8258 = 207.22 pc, no zero-point correction",
+      "properMotion": "Gaia DR3 (same row): 16.717, 20.961 mas/yr",
+      "radialVelocity": "Gaia DR3 (same row): -20.23 +/- 0.49 km/s. Gaudi et al. (2017) measure -20.567 +/- 0.1 km/s with TRES."
+    }
+  }
+}

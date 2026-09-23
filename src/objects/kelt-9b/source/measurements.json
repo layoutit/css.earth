@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kelt-9b",
+  "radiusKm": 131545.28,
+  "radiusSource": "Radius: 1.84 +/- 0.04 Jupiter radii (Ahlers et al. 2020, AJ 160, 4, Table 2, gravity-darkened fit) at Jupiter's equatorial radius 71,492 km. The same table's radius ratio 0.081 times its 2.39 solar-radius equator gives 1.88 Jupiter radii; the printed radius is used. A sphere: tidal and rotational flattening are not modelled. GM from the planet mass 2.88 +/- 0.84 Jupiter masses (Gaudi et al. 2017, Nature 546, 514, Extended Data Table 3, Model 1) times Jupiter's GM 126,686,534 km^3/s^2 (JPL).",
+  "orbitalPeriodDays": 1.4811235,
+  "orbitalPeriodSource": "Gaudi et al. (2017), Extended Data Table 3, Model 1 (adopted): P = 1.4811235 +/- 0.0000011 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius, coloured by the brightness temperature of Mansfield et al. (2020)'s phase-curve fit (preparation/raster.json). Its tidal and rotational flattening are not modelled."
+  },
+  "effectiveTemperatureK": 4566,
+  "effectiveTemperatureSource": "Mansfield et al. (2020), ApJL 888, L15, Table 1: day side brightness temperature 4566 +140/-136 K at 4.5 um (https://arxiv.org/abs/1910.01567)",
+  "temperature": {
+    "daysideK": 4566,
+    "nightsideK": 2556,
+    "source": "Mansfield et al. (2020), ApJL 888, L15, Table 1: day side 4566 +140/-136 K and night side 2556 +101/-97 K, brightness temperatures at 4.5 um from the Spitzer phase curve (PHOENIX stellar model)."
+  }
+}

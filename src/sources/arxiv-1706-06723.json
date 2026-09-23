@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-1706-06723",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gaudi et al. (2017): A giant planet undergoing extreme-ultraviolet irradiation by its hot massive-star host",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1706.06723"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/nature22392"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1706.06723",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/nature22392",
+      "label": "Nature 546, 514"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1706.06723",
+      "checkedOn": "2026-09-23",
+      "locator": "Extended Data Table 3, Model 1: stellar and planetary parameters and the transit ephemeris"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Nature 546, 514",
+  "creators": [
+    "B. S. Gaudi",
+    "K. G. Stassun",
+    "K. A. Collins",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

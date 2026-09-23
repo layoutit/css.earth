@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Mansfield et al. (2020), ApJL 888, L15, 'Evidence for H2 Dissociation and Recombination Heat Transport in the Atmosphere of KELT-9b' (doi:10.3847/2041-8213/ab5b09; arXiv:1910.01567v2). Spitzer IRAC 4.5 um phase curve, program 14059, two AORs from BJD 2458414.2 to 2458416.3. Values read from the authors' LaTeX source: equation 1 and Table 1 (tab:params).",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.08004,
+    "cell": "0.08004(41)",
+    "where": "Table 1, R_p/R_s"
+  },
+  "eclipseDepth": {
+    "value": 0.003131,
+    "cell": "0.3131(62) %",
+    "where": "Table 1, Eclipse Depth D"
+  },
+  "model": {
+    "kind": "two-term-sinusoid",
+    "equation": "F_p = A1 cos[2 pi (t - t1)/p] + A2 cos[4 pi (t - t2)/p] (equation 1). The paper does not print the constant term; the planet's flux at mid-eclipse is taken to be the eclipse depth, which reproduces the paper's amplitude, hottest-hemisphere and nightside temperatures (see the report).",
+    "periodDays": {
+      "value": 1.4811,
+      "cell": "p = 1.4811 d",
+      "where": "text after equation 1"
+    },
+    "a1": {
+      "value": 0.000975,
+      "cell": "975(32) ppm",
+      "where": "Table 1, A1"
+    },
+    "t1": {
+      "value": 2458414.5544,
+      "cell": "2458414.5544(90) BJD_TDB",
+      "where": "Table 1, t1"
+    },
+    "a2": {
+      "value": 8.9e-05,
+      "cell": "89(22) ppm",
+      "where": "Table 1, A2"
+    },
+    "t2": {
+      "value": 2458414.555,
+      "cell": "2458414.555(33) BJD_TDB",
+      "where": "Table 1, t2"
+    },
+    "eclipseTime": {
+      "value": 2458414.62237,
+      "cell": "2458414.62237(32) BJD_TDB",
+      "where": "Table 1, Eclipse 1 Midpoint"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 4566,
+      "cell": "4566 +140/-136 K",
+      "where": "Table 1, Dayside Brightness Temperature (PHOENIX stellar model)"
+    },
+    "nightsideK": {
+      "value": 2556,
+      "cell": "2556 +101/-97 K",
+      "where": "Table 1, Nightside Brightness Temperature"
+    },
+    "hottestHemisphereK": {
+      "value": 4636,
+      "cell": "4636 +145/-138 K",
+      "where": "Table 1"
+    },
+    "offsetDegrees": {
+      "value": 18.7,
+      "cell": "18.7 +2.1/-2.3 degrees",
+      "where": "Table 1, Phase Offset"
+    },
+    "amplitude": {
+      "value": 0.609,
+      "cell": "0.609 +/- 0.020, A = (F_max - F_min)/F_max",
+      "where": "Table 1 and section 3"
+    }
+  },
+  "notStated": [
+    "The stellar brightness temperature used for the day and night temperatures (section 3 says PHOENIX models; section 5 uses 8287 K at 4.5 um for Teff 10200 K in the energy-balance model, which would give a 4739 K day side from this eclipse depth)."
+  ]
+}

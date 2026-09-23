@@ -1,0 +1,27 @@
+{
+  "id": "wasp-76b",
+  "classification": "exoplanet",
+  "order": 1731,
+  "physical": {
+    "name": "WASP-76b",
+    "horizonsCode": null,
+    "meanRadiusKm": 132573.37,
+    "gravitationalParameterKm3PerS2": 113257761.396,
+    "parent": "wasp-76"
+  },
+  "physicalNotes": "Radius: Rp/R* 0.10852 (Ehrenreich et al. 2020, Nature 580, 597, Extended Data Table 1, transit photometry) times the host record's 1,221,649.2 km, 1.854 Jupiter radii as the same table prints. A sphere: tidal and rotational flattening are not modelled. GM from the planet mass 0.894 Jupiter masses (same table, from the ESPRESSO radial velocities) times Jupiter's GM 126,686,534 km^3/s^2 (JPL).",
+  "hostedOrbit": {
+    "periodDays": 1.80988198,
+    "semiMajorAxisStellarRadii": 4.08,
+    "inclinationDegrees": 89.623,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 58080.126165,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Ehrenreich et al. (2020), Extended Data Table 1: P = 1.80988198 d",
+      "shape": "Ehrenreich et al. (2020), Extended Data Table 1: system scale a/R* 4.08 and inclination 89.623 degrees from transit photometry; eccentricity 0 fixed",
+      "phase": "Ehrenreich et al. (2020), Extended Data Table 1: mid-transit time 58080.626165 in BJD - 2,400,000, which is 2458080.626165 BJD = 58080.126165 BMJD. The reading is checked against May et al. (2021): their 4.5 um transit, 2457859.81968 BJD_TDB, lies 122 of these periods earlier to within 76 s. The table does not name the time scale; TDB is assumed, as for May et al.",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
+  }
+}

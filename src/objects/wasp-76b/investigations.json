@@ -1,0 +1,86 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-76b",
+  "entries": [
+    {
+      "id": "spiderman-dipole-map",
+      "subject": "May et al. (2021) SPIDERMAN spherical-harmonic fit to the Spitzer 4.5 um phase curve",
+      "status": "included",
+      "finding": "Shown as the temperature lens, evaluated by SPIDERMAN 1.0.3. With the paper's dilution correction it gives a 3,704 ppm day side (paper 3,729 +/- 52) and 2,688 K (paper 2,699 +/- 32); its night side is 1,185 K against the paper's 1,259 +/- 44 K. About 3.4 percent of the surface, around midnight, has a negative fitted brightness and shows no data.",
+      "evidence": [
+        "https://arxiv.org/abs/2107.03349"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "spiderman-offset-slot",
+      "subject": "Which way SPIDERMAN 1.0.3 moves a spherical map for lo0",
+      "status": "unresolved",
+      "finding": "In spiderman-package 1.0.3 the Python layer packs [degree, la0, lo0] and the C model adds the la0 slot to longitude and the lo0 slot to latitude. May et al. report their 0.67 degree lo0 as a longitude offset; run through SPIDERMAN it moves the dipole 0.67 degrees in latitude and leaves the curve's peak at eclipse. The table's lo0 is read in degrees because read as radians it misses the paper's day side and amplitude.",
+      "revisitWhen": "SPIDERMAN's authors or May et al. state how the parameter was applied.",
+      "evidence": [
+        "https://pypi.org/project/spiderman-package/1.0.3/",
+        "https://arxiv.org/abs/2107.03349"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "spitzer-3-6um",
+      "subject": "May et al. (2021) joint fit of the two 3.6 um phase curves",
+      "status": "deferred",
+      "finding": "Same model (sph0 0.00048, sph3 0.00022, lo0 0.68) in another band. One lens is shown so that both planets of this route share 4.5 um.",
+      "revisitWhen": "A second lens per planet is wanted.",
+      "evidence": [
+        "https://arxiv.org/abs/2107.03349"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "jwst-nirspec-phase-curve",
+      "subject": "JWST program 5268 (PI J. Wardenier), a NIRSpec/G395H phase curve of WASP-76b",
+      "status": "unresolved",
+      "finding": "Public in MAST since January 2026 (one 14.8-hour time series listed); no paper yet. A map would need this project's own reduction and fit, second-class next to a published one.",
+      "revisitWhen": "Its paper publishes a map, or the user asks for our own reduction.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024jwst.prop.5268W/abstract"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "iron-condensation",
+      "subject": "ESPRESSO iron absorption on the evening terminator and not the morning (Ehrenreich et al. 2020)",
+      "status": "excluded",
+      "finding": "A transmission measurement at the terminators during transit, not a map of the surface: it says iron condenses somewhere on the night side, not where. Told in the text; nothing is drawn from it.",
+      "revisitWhen": "A paper maps where the iron condenses.",
+      "evidence": [
+        "https://arxiv.org/abs/2003.05528"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    }
+  ]
+}
