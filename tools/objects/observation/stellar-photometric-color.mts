@@ -366,8 +366,8 @@ export type LimbDarkeningRecipe = {
   /** Fitted here to the planet's transits in pinned TESS light curves (tools/objects/eclipse-map/transit-limb-darkening.mts). */
   readonly law: 'quadratic'; readonly source: 'tess-transits'; readonly planet: string; readonly lightCurves: readonly string[];
 } | {
-  /** Coefficients a paper fitted to its own data but published only in its text (no machine-readable table): a transcription
-   * record at `path` holds each value with its uncertainty and the quoted table cell. */
+  /** Coefficients published in a paper's text or table (no machine-readable input): a transcription record at `path`
+   * holds each value, uncertainty, quoted cell and whether it is a fit or a theoretical model prior. */
   readonly law: 'quadratic'; readonly source: 'published'; readonly path: string;
 } | {
   /** A theoretical grid by effective temperature and surface gravity (a VizieR table of model-atmosphere coefficients), for a
@@ -376,7 +376,7 @@ export type LimbDarkeningRecipe = {
   readonly law: 'quadratic'; readonly source: 'grid'; readonly path: string; readonly teffK: number; readonly logg: number;
   readonly models: Readonly<Record<string, string>>; readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string };
 };
-export interface QuadraticLimbDarkening { readonly u1: number; readonly u2: number; readonly u1Bounds: readonly [number, number]; readonly u2Bounds: readonly [number, number] }
+export interface QuadraticLimbDarkening { readonly u1: number; readonly u2: number; readonly u1Bounds: readonly [number, number]; readonly u2Bounds: readonly [number, number]; readonly basis?: 'transit-fit' | 'model-prior' }
 
 export function parseLimbDarkeningRecipe(value: unknown): LimbDarkeningRecipe {
   const input = requireRecord(value, 'limbDarkening');
@@ -450,6 +450,7 @@ export function readPublishedLimbDarkening(value: unknown): QuadraticLimbDarkeni
   const record = requireRecord(value, 'published limb darkening');
   if (record.schema !== 'cssearth-published-limb-darkening@1') throw new TypeError('Published limb darkening must use cssearth-published-limb-darkening@1.');
   requireString(record.source, 'source'); requireString(record.band, 'band');
+  if (record.basis !== undefined && record.basis !== 'transit-fit' && record.basis !== 'model-prior') throw new TypeError('Published limb-darkening basis must be transit-fit or model-prior.');
   const coefficient = (key: 'u1' | 'u2') => {
     const entry = requireRecord(record[key], key), value = requireFiniteNumber(entry.value, `${key}.value`);
     if (entry.fixed !== undefined) { requireString(entry.fixed, `${key}.fixed`); return { value, bounds: [value, value] as const }; }
@@ -458,7 +459,8 @@ export function readPublishedLimbDarkening(value: unknown): QuadraticLimbDarkeni
   };
   const u1 = coefficient('u1'), u2 = coefficient('u2');
   checkLimb(u1.value, u2.value);
-  return { u1: u1.value, u2: u2.value, u1Bounds: u1.bounds, u2Bounds: u2.bounds };
+  return { u1: u1.value, u2: u2.value, u1Bounds: u1.bounds, u2Bounds: u2.bounds,
+    ...(record.basis === undefined ? {} : { basis: record.basis }) };
 }
 
 function checkLimb(u1: number, u2: number) {

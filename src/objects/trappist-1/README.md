@@ -25,6 +25,13 @@ below zero. A sample that is not positive but lies within three times its own er
 wavelength; anything more negative would fail the build. Moving every sample one standard error down and up moves the blue channel
 from 34 to 156, which is the honest width of this colour.
 
+**Limb layer.** [Gillon et al. (2016), Extended Data Table 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/) gives TRAPPIST-1's
+I+z quadratic limb-darkening coefficients `u1 = 0.65 ± 0.10` and `u2 = 0.28 ± 0.12` (effective wavelength 885 ± 5 nm). The authors
+inferred them from theoretical atmosphere tables and used them as transit priors. The prepared black-alpha plate applies
+`I(μ)/I(1) = 1 - u1(1 - μ) - u2(1 - μ)²` to the Gaia-coloured sphere, with transparent pixels outside it. At the modeled edge,
+the intensity is 7% of the centre. This is a **red-band model**, not a resolved image, a measured spatial profile or a visible-light
+broadband measurement. The plate changes brightness without claiming a new hue or off-limb glow.
+
 **Axis.** No rotation axis is measured. The period is known from spot modulation — 3.295 days (Luger et al. 2017) — but not the
 direction of the axis on the sky, so the display axis is celestial north at the star, a convention.
 
@@ -42,7 +49,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 ## Evidence
 
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) covers the colour
-  path, including the rule for samples consistent with zero.
+  path, including the rule for samples consistent with zero and the quadratic limb plate.
 - [`source.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1/source.test.mts) checks every package's source pins, and that each planet turns
   synchronously with longitude 0 on the star and orbits it.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the system holds all seven planets.
