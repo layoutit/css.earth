@@ -8,9 +8,10 @@ export function requireTextureLevels(value: unknown, variants: readonly Pick<Pre
     if (!value || typeof value !== 'object' || Array.isArray(value) || fields && Object.keys(value).some(key => !fields.includes(key))) throw new TypeError('Invalid prepared texture levels.');
     return value as Record<string, unknown>;
   };
-  const plan = record(value, ['hysteresis', 'levels']);
+  const plan = record(value, ['hysteresis', 'fixedLevel', 'levels']);
   if (typeof plan.hysteresis !== 'number' || !Number.isFinite(plan.hysteresis) || plan.hysteresis < 0 || plan.hysteresis >= 1 ||
       !isArray(plan.levels) || plan.levels.length < 2 || plan.levels.length > 8) throw new TypeError('Invalid prepared texture levels.');
+  if (plan.fixedLevel !== undefined && (typeof plan.fixedLevel !== 'number' || !Number.isInteger(plan.fixedLevel) || plan.fixedLevel < 0 || plan.fixedLevel >= plan.levels.length)) fail();
   const textures = new Set(variants.flatMap(variant => variant.writes.filter(write => write.kind === 'texture').map(write => write.resource)));
   let previous = -1; let addresses: string[] | undefined;
   for (const [i, input] of plan.levels.entries()) {

@@ -28,6 +28,8 @@ import { surfaceBankInventory } from "./surface-banks.mts";
 
 export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, textureLevels, controls }: PagedPresentationInput) {
   if (Boolean(config.textureLevels) !== Boolean(textureLevels)) throw new TypeError('Prepared texture levels must match the authored recipe.');
+  const fixedTextureLevel = config.textureLevels?.fixedWidth === undefined ? undefined : config.textureLevels.widths.indexOf(config.textureLevels.fixedWidth);
+  if (fixedTextureLevel === -1) throw new TypeError('Fixed texture width must be a prepared level.');
  const cameraPlan=config.camera;
   const bodyFrame=requireRecord(plan[config.sceneBodyKey], 'paged body frame');
   const systemTransform=requireString(bodyFrame.systemTransform, 'paged system transform');
@@ -154,7 +156,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));
   const prepared = {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,
-    ...(textureLevels?{textureLevels:textureLevels.textureLevels}:{}),
+    ...(textureLevels?{textureLevels:{...textureLevels.textureLevels,...(fixedTextureLevel===undefined?{}:{fixedLevel:fixedTextureLevel})}}:{}),
     ...(catalog?{destinations:{catalog,defaultLens:"normal",statuses:config.destinations.statuses}}:{}),
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2*(textureLevels?.textureLevels.levels.length??1),eviction:"capacity",
