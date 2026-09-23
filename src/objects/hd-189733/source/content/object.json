@@ -62,7 +62,7 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "color",
+    "defaultLens": "activity-model",
     "controls": [
       {
         "id": "color",
@@ -77,7 +77,37 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum. The edge darkening is fitted to 30 TESS transits (600–1000 nm): the edge is about a third as bright as the centre. The axis is tilted about 14° from the planet's orbit, as measured; the star is spotted, but no map of the spots exists."
+        "notes": "The colour of Gaia DR3's measured spectrum. The edge darkening is fitted to 30 TESS transits (600–1000 nm): the edge is about a third as bright as the centre. The axis is tilted about 14° from the planet's orbit, as measured. Two separate spot interpretations are available: one published hypothetical activity pattern and one dated transit-chord candidate. No measured global map exists."
+      },
+      {
+        "id": "activity-model",
+        "label": "Spot model",
+        "qualification": "A published hypothetical dense-spot-band layout from Narrett, Rackham & de Wit (2024), Figure 7 left. Their HST spectral model gives 42% mean spot coverage, and their TESS-band spot/photosphere intensity ratio is 0.099. This is an illustrative arrangement, not an observed surface map; the pattern is stationary.",
+        "thumbnail": "hd-189733-lens-activity-model.webp",
+        "surface": "hd-189733-surface-activity-model@2x.webp",
+        "poles": "hd-189733-poles-activity-model@2x.webp",
+        "source": {
+          "id": "hd-189733-narrett-2024-band-model",
+          "path": "../manifest.json",
+          "url": "https://www.astroexplorer.org/details/ajad1f6cf7"
+        },
+        "falseColor": false,
+        "notes": "Narrett, Rackham & de Wit (2024), Figure 7 left, illustrates one possible dense latitudinal spot distribution for HD 189733 A. The paper estimates 42 ± 4% mean spot coverage from HST spectra and a 0.099 TESS-band spot/photosphere intensity ratio. Its figure is a hypothetical model, not a resolved stellar image. The white transit-guide lines are omitted. Spot contrast is applied achromatically to Gaia's measured colour, and the limb plate does not rotate."
+      },
+      {
+        "id": "spot-2021",
+        "label": "2021 spot",
+        "qualification": "Static reconstruction of one TESS spot-crossing candidate in HD 189733b transit 2165. The paper gives a minimum 5° angular radius and 7.6% TESS-band contrast; position along the transit chord comes from its timing and the hosted orbit. Shape, sky orientation and Gaia-colour application are display assumptions.",
+        "thumbnail": "hd-189733-lens-spot-2021.webp",
+        "surface": "hd-189733-surface-spot-2021@2x.webp",
+        "poles": "hd-189733-poles-spot-2021@2x.webp",
+        "source": {
+          "id": "hd-189733-haris-2025-spot-occultation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202452633"
+        },
+        "falseColor": false,
+        "notes": "Haris et al. (2025), Table 3, transit 2165 at BJD-2450000 9435.46: event midpoint +1890 s, minimum angular radius 5.0°, contrast 0.076. This is a single candidate dark region along the planet’s path, shown on a fixed camera-facing limb plate. It is not a resolved surface image, global map or time-varying rotation. TESS-band darkness is displayed achromatically over the Gaia-colour photosphere."
       }
     ]
   },
@@ -90,6 +120,12 @@
     {
       "label": "Research",
       "role": "facts",
+      "description": "Narrett, Rackham & de Wit (2024), AJ 167, 107, Figure 7",
+      "href": "https://www.astroexplorer.org/details/ajad1f6cf7"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
       "description": "Cristo et al. (2024), A&A 682, A28",
       "href": "https://arxiv.org/abs/2310.06681"
     },
@@ -98,6 +134,12 @@
       "role": "facts",
       "description": "Lally et al. (2025), arXiv:2503.20895",
       "href": "https://arxiv.org/abs/2503.20895"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Haris, Tuomi & Hackman (2025), A&A 704, A102, Table 3",
+      "href": "https://doi.org/10.1051/0004-6361/202452633"
     }
   ],
   "provenance": {

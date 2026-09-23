@@ -1,0 +1,54 @@
+{
+  "id": "doi-10-1051-0004-6361-202452633",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Homogeneous search for spot transits in Kepler and TESS photometry of K–M-type main-sequence stars",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/202452633"
+    },
+    {
+      "type": "arxiv",
+      "value": "2502.18129"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202452633",
+      "label": "Astronomy & Astrophysics"
+    },
+    {
+      "role": "original",
+      "url": "https://arxiv.org/html/2502.18129v1",
+      "label": "Full text and Table 3"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-189733/source/photometry/haris-2025-spot-occultation.json",
+      "locator": "/event, transcribed from Table 3, transit 2165"
+    },
+    {
+      "path": "src/objects/hd-189733/text.json",
+      "locator": "/datasets/spot-2021"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. Haris, M. Tuomi and T. Hackman (2025), A&A 704, A102",
+      "scope": "HD 189733b transit 2165 spot-occultation candidate",
+      "evidence": "src/objects/hd-189733/source/photometry/haris-2025-spot-occultation.json#/event"
+    },
+    {
+      "kind": "limitation",
+      "text": "The reported radius is a minimum angular radius; a transit chord does not provide a global stellar spot map or uniquely determine the region shape.",
+      "scope": "Static spot reconstruction",
+      "evidence": "src/objects/hd-189733/source/photometry/haris-2025-spot-occultation.json#/method"
+    }
+  ],
+  "publisher": "EDP Sciences"
+}

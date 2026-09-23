@@ -67,6 +67,9 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             path(surface[key], `surface.${key}`);
         if (typeof surface.falseColor !== 'boolean')
             throw new TypeError('falseColor must be boolean.');
+        if (surface.thumbnailFromLimbPlate !== undefined && (surface.thumbnailFromLimbPlate !== true || recipe.emission === undefined ||
+            record(surface.science, 'surface.science').kind !== 'stellar-photometric-color'))
+            throw new TypeError('thumbnailFromLimbPlate requires an emissive stellar-photometric-color surface.');
         if (surface.resolutionScale !== undefined) {
             finite(surface.resolutionScale, 'surface.resolutionScale', true);
             const width = Number(recipe.width) * surface.resolutionScale;

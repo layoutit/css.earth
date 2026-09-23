@@ -3,6 +3,12 @@
   "operations": [
     {
       "kind": "download",
+      "groups": ["restore", "refresh"],
+      "path": "photometry/narrett-2024-figure-7.jpg",
+      "url": "https://s3.amazonaws.com/aasie/images/0004-6256/167/3/null/ajad1f6cf7_hr.jpg"
+    },
+    {
+      "kind": "download",
       "groups": [
         "restore",
         "refresh"

@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-stellar-spot-figure@1",
+  "source": "Narrett, Rackham & de Wit (2024), AJ 167, 107, Figure 7 left panel; doi:10.3847/1538-3881/ad1f6c",
+  "figure": "photometry/narrett-2024-figure-7.jpg",
+  "figureUrl": "https://www.astroexplorer.org/details/ajad1f6cf7",
+  "panel": { "x": 0, "y": 0, "size": 488 },
+  "darkThresholdRgb": [50, 50, 60],
+  "transitGuideRows": [290, 365],
+  "spotToPhotosphereTessIntensityRatio": 0.099,
+  "reportedMeanCoveringFraction": 0.42,
+  "reportedPhotosphereTemperatureK": 5295,
+  "reportedSpotTemperatureK": 3222,
+  "method": "Extract the dark spot pattern from the paper's hypothetical dense-latitudinal-bands example in Figure 7, left. Omit the two white dotted transit-guide lines. Multiply the limb-darkened photosphere's linear-light intensity by the paper's TESS-band spot-to-photosphere ratio, then encode the result as black-plate sRGB alpha over the Gaia-colour photosphere.",
+  "limits": "The paper's figure illustrates one possible distribution, not an observed map. The 42% covering fraction is a two-component HST spectral-model inference, not a measured spatial pattern. TESS intensity ratio is displayed achromatically and the pattern does not rotate."
+}

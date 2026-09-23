@@ -16,6 +16,8 @@ export interface SurfaceRasterRecipe {
     output: string;
     encoding?: SurfaceEncoding;
     thumbnail: string;
+    /** For an unresolved star, make the picker thumbnail from its prepared camera-facing limb plate. */
+    thumbnailFromLimbPlate?: boolean;
     /** Offline surface resolution relative to the shared layout; does not change geometry or lighting. */
     resolutionScale?: number;
     sharpen?: number;
