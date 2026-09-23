@@ -4,15 +4,12 @@ import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-n
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
 import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 import { record } from './browser-types.mts';
-import { withPreparedFocus } from './navigation-scope.mts';
+import { readPreparedFocusSelection, withPreparedFocus } from './navigation-scope.mts';
 import { acquirePreparedFocusTarget } from './prepared-focus-target.mts';
-import type { PreparedFocusTarget, PreparedFocusPolicy } from './prepared-focus-target.mts';
-import type { PreparedFocusDatasets } from '../src/renderers/css/universe/prepared-focus-bank.js';
+import type { PreparedFocusTarget } from './prepared-focus-target.mts';
+import type { PreparedFocusPolicy, PreparedFocusPresentation } from './prepared-focus.mts';
 
 type PreparedContextLayer = Pick<ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>, 'resolveGalaxy' | 'focusBank' | 'selectGalaxy'>;
-export type PreparedFocusPresentation = PreparedFocusDatasets & {
-  selectLens(lensId: string): void;
-};
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
   onFlightStart?(): void;
@@ -121,6 +118,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
       const current = () => navigation === owner && flight === controller && !controller.signal.aborted;
       ready = false;
       const query = new URL(url, windowTarget.location.href).searchParams;
+      let selection: ReturnType<typeof readPreparedFocusSelection> = null;
       const finish = () => { if (current()) { ready = true; flight = null; } };
       const fail = (error: unknown) => {
         if (!current()) return;
@@ -131,8 +129,8 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
       };
       const apply = () => {
         if (!current()) return;
-        const id = query.get('focus'), focus = target?.focus ?? null, state = target?.datasets;
-        const lens = target?.resolveLens(query.get('focusLens'));
+        const id = selection?.id ?? null, focus = target?.focus ?? null, state = target?.datasets;
+        const lens = target?.resolveLens(selection?.lens ?? null);
         owner.setPreparedFocus!(focus);
         if (lens !== undefined) target!.selectLens(lens);
         selected = id; layer.selectGalaxy(id, focus);
@@ -149,9 +147,8 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         }
       };
       try {
-        if (query.getAll('focus').length > 1) throw new TypeError('A saved view may have only one prepared focus.');
-        if (query.getAll('focusLens').length > 1) throw new TypeError('A saved view may have only one prepared focus lens.');
-        const loading = useTarget(query.get('focus'))?.prepare();
+        selection = readPreparedFocusSelection(query);
+        const loading = useTarget(selection?.id ?? null)?.prepare();
         if (loading) return loading.then(apply).catch(fail).finally(finish);
         const flying = apply();
         if (flying) return flying.catch(fail).finally(finish);

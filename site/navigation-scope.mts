@@ -7,6 +7,16 @@
  * names the focus over the overview. */
 const PREPARED_FOCUS_KEYS = ['focus', 'focusLens'] as const;
 
+/** Parse a selection at either entry point. An orphan lens does not select a focus. */
+export function readPreparedFocusSelection(query: URLSearchParams): { id: string; lens: string | null } | null {
+  const ids = query.getAll('focus'), lenses = query.getAll('focusLens');
+  if (ids.length > 1) throw new RangeError('A saved view may have only one prepared focus.');
+  if (lenses.length > 1) throw new RangeError('A saved view may have only one prepared focus lens.');
+  if (!ids.length) return null;
+  if (!/^[a-z0-9][a-z0-9:._+-]{0,127}$/iu.test(ids[0]!)) throw new RangeError('Invalid prepared focus.');
+  return { id: ids[0]!, lens: lenses[0] ?? null };
+}
+
 /** The catalogue focus a URL names. A focus whose prepared bank is still loading
  * has not reached the runtime yet, so the runtime cannot answer this: the URL is
  * the selection, and it is a selection from the moment it is named. */
