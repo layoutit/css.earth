@@ -25,7 +25,7 @@ Observation, publisher/dataset, selected file, acquisition operation and receive
 
 DataLink previews are not science choices. Multiple science links remain separate. Both direct links and advertised DataLink service descriptors can lead to nested responses. Dispatch follows the advertised standard; a DataLink descriptor is not treated as SODA. PyVO resolves fixed and referenced parameters, and the public query forwards them unchanged. The visited identity includes the endpoint and bound parameters, so two datasets at one endpoint remain distinct; nesting and request bounds still apply.
 
-Archive-advertised access and DataLink URLs must use HTTP(S) without credentials. Private, loopback, link-local and other non-public IP destinations are refused during access planning. The Python transport checks resolved addresses at connection time and checks every redirect. Local fixture tests pass an explicit host allowlist; the CLI has no such override. A direct FITS table with an archive-confirmed target can enter `get` when its primary `OBJECT` matches the archive target and it contains exactly one binary-table extension. Its descriptor offers the existing F08 table operations through `telescope outputs` and `telescope family-run`; no image export or calibration level is inferred. In-field tables, packaged tables, spectrum, photometry, event and strip products remain visible as archive metadata without a `get` qualification choice.
+Archive-advertised access and DataLink URLs must use HTTP(S) without credentials. Private, loopback, link-local and other non-public IP destinations are refused during access planning. The Python transport checks resolved addresses at connection time and checks every redirect. Local fixture tests pass an explicit host allowlist; the CLI has no such override. A direct FITS table with an archive-confirmed target can enter `get` when its primary `OBJECT` matches the archive target and it contains exactly one binary-table extension. Its descriptor offers the existing F08 table operations through `telescope outputs` and `telescope family-run`; no image export or calibration level is inferred. Confirmed direct FITS spectra can enter the narrow ESO SDP profile below. In-field or packaged tables/spectra, photometry, event and strip products remain visible as archive metadata without a `get` qualification choice.
 
 SODA parameter validation uses the standard name/UCD/unit declarations, including `meta.ref.url;meta.curation` for ID and `em.wl;stat.interval` for BAND. The separate ESO compatibility rule accepts its captured fixed-ID `meta.id;meta.dataset` declaration only for its advertised service. ALMA's captured malformed nine-character MIME field is retained and refused; correcting nested dispatch does not qualify that separate route or justify guessing a protocol from its hostname.
 
@@ -42,6 +42,29 @@ Acquisition records, original responses, the discovery snapshot, science file an
 The legacy `loadQueryInputs(root, targetString)` overload keeps its earlier archive-loading behavior. Callers supplying a full scientific request receive VO discovery and access planning too. Existing saved choice keys are preserved; VO choices use an explicit acquisition-key variant.
 
 Protocol fixtures and their limits are documented in [the fixture inventory](../tests/fixtures/telescope-vo/README.md). Fixture tests do not replace live acquisition/delivery evidence. Primary contracts: [ObsCore 1.1](https://www.ivoa.net/documents/ObsCore/20170509/REC-ObsCore-v1.1-20170509.pdf), [EPN-TAP 2.0](https://www.ivoa.net/documents/EPNTAP/20220822/REC-EPNTAP-2.0.html), [SODA 1.0](https://www.ivoa.net/documents/SODA/20170517/REC-SODA-1.0.html), [DataLink](https://www.ivoa.net/documents/DataLink/) and [the pinned PyVO implementation](https://github.com/astropy/pyvo/tree/v1.9.1).
+
+## ESO SDP spectra
+
+`application/x-fits-bintable` is accepted alongside the standard FITS media types. Spectrum qualification requires `PRODCATG=SCIENCE.SPECTRUM`, a single one-row binary table, `VOCLASS=SPECTRUM V1.0` or `V2.0`, and fixed WAVE/FLUX/ERR vectors of length NELEM with their spectral-data-model UTYPEs. Wavelengths must increase, with units angstrom, nm, um or m. ERR must share the stated FLUX unit. The primary OBJECT must match the archive target; ESO publisher IDs must also match ARCFILE. Other layouts fail qualification.
+
+F03 excludes nonzero QUAL, nonfinite FLUX and nonpositive/nonfinite ERR. Negative finite flux remains a measurement. Original sample indices and segment breaks identify exclusions; the delivery retains every original FITS byte. Exports do not normalize, interpolate or resample. FLUXCAL and SPECSYS remain provider declarations. Sample centres do not establish bin widths, continuous wavelength coverage or achieved angular resolution.
+
+```sh
+telescope explore 'HD 110067' --kind spectrum --max-science-bytes 20971520 --out runs/hd-110067
+telescope get runs/hd-110067 --pick N
+telescope outputs runs/hd-110067/pick-N/result.json
+# Use the descriptor path returned as source by outputs:
+telescope family-run <descriptor.json> spectrum-export --out figures/hd-110067-data
+telescope family-run <descriptor.json> spectrum-preview --out figures/hd-110067-preview
+```
+
+The shared F03 preview draws at most 1,600 uniformly selected usable samples, preserves segment identities, and records the selection in `preview-sampling.json`. A reduced preview labels its drawn and source counts. It can miss narrow features; use the full numeric export or select a smaller range for inspection. Numeric export and chart-data operations retain all usable samples.
+
+The [ESO SDP standard, version 8, section 8](https://www.eso.org/sci/observing/phase3/p3sdpstd.pdf) defines the source layout. A [compact real ESPRESSO excerpt](../tests/fixtures/telescope-vo/eso-spectrum/README.md) supplies an independent Astropy comparison; a saved-session test covers acquisition, descriptor discovery, export and identity refusals.
+
+On 2026-09-23 the public commands above acquired the 17,841,600-byte ESPRESSO product `ADP.2024-03-08T10:41:06.519` under a 20 MiB transfer limit. F03 exported 440,029 usable samples, excluding 3,233 with zero ERR. Astropy 8.0.1 independently reproduced those counts. The preview below draws 1,600 samples; its local command took 1.25 seconds and reported 376 MiB maximum resident set size with a 384 MiB Node heap cap. These are one-run figures, not a general performance bound.
+
+![HD 110067 ESPRESSO spectrum: 1,600 of 440,029 usable samples, with native wavelength and flux units](images/telescopes/vo-hd-110067-spectrum.png)
 
 ## Live evidence and validation
 
