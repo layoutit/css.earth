@@ -4,8 +4,8 @@
     {
       "id": "k2-18b-observational-measurements",
       "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/1805.00830",
-      "credit": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
+      "origin": "https://arxiv.org/abs/1909.04642",
+      "credit": "Benneke et al. (2019), ApJL 887, L14, Table 2 (radius and transit fit); Sarkis et al. (2018), AJ 155, 257, Table 3 (eccentricity and argument of periastron)",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -130,7 +130,7 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://arxiv.org/abs/1805.00830",
+      "origin": "https://arxiv.org/abs/1909.04642",
       "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
