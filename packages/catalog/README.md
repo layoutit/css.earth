@@ -19,7 +19,12 @@ stars.numeric('posPc')      // Float32Array, 3 components per row, no copy
 stars.strings('name')[42]   // decoded lazily
 ```
 
-The byte-level spec is in [FORMAT.md](./FORMAT.md). The Python writer lives in the external catalogue pipeline (not part of this repository); `pnpm check:parity` proves the two implementations agree.
+The byte-level spec is in [FORMAT.md](./FORMAT.md). The Python writer lives in the
+external catalogue pipeline. Run `pnpm --filter @cssearth/catalog test` from the
+repository root for the TypeScript reader/writer tests. Cross-language parity
+needs separate evidence: the retained `scripts/check-parity.mts` runner references
+a missing `gen_fixture.py` and cannot currently establish it. See the
+[operator notes](AGENTS.md) before changing the format.
 
 `parsePreparedGalaxyCatalog` validates the separate `cssearth-galaxy-catalog@1`
 scientific JSON interchange in place. It retains measured distances and errors,

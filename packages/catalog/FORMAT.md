@@ -10,8 +10,10 @@ buffer with no copy and no decode.
 
 **Two implementations must agree**: the TypeScript reader/writer in this
 package, and the Python writer in `formats/catalog.py` of the external catalogue pipeline (not part of this repository)
-that builds the shipped data. `pnpm check:parity` generates a file with one and
-reads it with the other. Changing this document without changing both is a bug.
+that builds the shipped data. Changing this document without changing both is a
+bug. The retained `scripts/check-parity.mts` runner currently references a missing
+Python fixture generator; it is not usable parity evidence. Follow the
+[operator notes](AGENTS.md) when changing the format.
 
 ## Layout
 

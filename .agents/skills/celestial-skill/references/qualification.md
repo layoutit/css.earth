@@ -16,7 +16,7 @@ establishes; a valid manifest does not prove that its dates or units match the d
 | --- | --- |
 | Documentation only | Links and affected instructions; no surface bake or browser suite unless the documented behavior also changed. |
 | Research or a source diagnostic | Input interpretation and the focused numerical/tool checks supporting the finding; no delivery or browser qualification for unchanged runtime assets. |
-| Source metadata or bindings | `pnpm test:sources`; add body/scientific checks when the interpretation changes. |
+| Source metadata or bindings | Affected tests in `src/platform/source-*.test.mts` and `tools/sources/*.test.mts`; add body/scientific checks when the interpretation changes. |
 | New/changed source or preparation | Body/preparer tests, source validity and coordinate interpretation, prepared asset closure, source-to-result visual inspection. |
 | New acquisition path or missing restoration evidence | Restore its required ignored inputs into an empty temporary destination using the documented acquisition path. Preserve working inputs; cached verification does not prove restoration. |
 | Body registration/content | Package contract, reachable route/search/parent context, supported controls and correct attribution. |
@@ -35,9 +35,10 @@ behavior justifies them; missing features do not need invented test scenarios.
 Use the [body commands](../../../../src/objects/README.md) for the selected package.
 Follow the contract's [PR check rules](../../../../docs/provenance/CONTRACT.md#pull-requests)
 for reuse, broader checks and unrelated failures. Inspect runner arguments before
-launching a suite: `pnpm test:planets` runs every body, and `pnpm test:preparation`
-only offers an `--universe` subset. Neither has a body filter. Use direct test
-files when checking one preparer. Run expensive source restoration, preparation
+launching a suite: `pnpm test:node` is the broad native suite, while
+`pnpm test:preparation --universe` selects the preparation subset. Use direct
+test files for focused work; the old per-body test directories and planet runner
+are retired. Do not infer body qualification from source-dependent skips. Run expensive source restoration, preparation
 and browser work in sequence so they do not compete for memory.
 
 ## Inspect actual browser output

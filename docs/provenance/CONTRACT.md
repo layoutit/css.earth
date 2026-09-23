@@ -43,11 +43,12 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | Body `README.md` | The single account of sources and evidence described below |
 | Body `NOTICE.md` and supplied license files | Required acknowledgments and reuse terms; link here instead of duplicating credits |
 | [Source records](../../src/sources/) (`<id>.json`) | One shared published identity per file, with versions, citation links and evidence |
-| `source/manifest.json` | Local input identities, canonical bindings, byte pins, acquisition and per-input credits |
+| `source/manifest.json` | Local input paths, canonical bindings, acquisition and per-input credits; tracked source records do not carry file-stability hashes |
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
-| Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `pnpm prepare:text` publishes `prepared/text.json` |
-| `prepared/provenance.json` | Generated connections between inputs, processing and outputs; a build output, not committed |
-| `prepared/*` (everything else) | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed |
+| Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `node tools/prepare/prepare-text.mts` publishes `prepared/text.json` |
+| `prepared/object.json`, `prepared/page.json` | Transport and page metadata regenerated from the installed runtime; not inventoried or committed |
+| `prepared/provenance.json` | Generated lineage, never committed. Layered bodies regenerate it; volumes, image layers and catalogues inventory and publish it with their baked outputs |
+| Other delivery files under `prepared/` | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed; audit-only terrain reports and source-index rasters are excluded |
 | `inventory.json` at the body root | Generated inventory of every baked file (public textures and `prepared/*`) used by installation and publication |
 | `site/prepared-sources.json` and `site/prepared-facilities.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
@@ -105,7 +106,7 @@ status, its own evidence and when it was checked, and may override the subject
 or reopen condition. A shared record names no single body's files. A test
 refuses a finding repeated across three bodies and a record no longer quoted.
 
-The README links the ledger instead of repeating a source survey. Read the
+The README links the ledger instead of repeating a source survey.
 An entry that is not included names, among its evidence, the source outside this
 repository that it examined: the archive, deposit or paper where the evidence
 that would reopen it appears. That is what makes a decision reopenable rather
@@ -140,13 +141,18 @@ and [Rhea](../../src/objects/rhea/README.md).
 
 ## Identify and explain the sources
 
-For each new or changed input, record provider, product/release, URL, byte count,
-hash, credits and terms in the existing manifest and acquisition recipe. Follow
+For each new or changed input, record its path, provider, product/release, origin
+URL, credits and terms in the existing manifest and acquisition recipe. Follow
 [Sources authoring](../sources-catalogue.md#add-or-update-a-source) to reuse or
 establish its published identity and bind the input. Preserve
 native identifiers: PDS4 LIDVID, PDS3 dataset/product ID, DOI or other published
 release ID. Do not invent PDS identifiers. A hash identifies bytes, not the
-provider's version or our code revision.
+provider's version or our code revision. Git identifies tracked source bytes;
+manifests and descriptors do not carry file-stability hashes. Missing downloads
+are restored by path from the source cache or origin, without a manifest digest
+comparison. Runtime inventories retain byte counts and SHA-256 for published
+assets. Historical evidence, toolchain locks and untracked processing or telescope
+delivery receipts retain the identities their own verification requires.
 
 Bodies may combine PDS3, PDS4, Earth-observation, solar and other published data.
 Required inputs must be checked in or downloadable through their recipe. Keep
@@ -170,14 +176,16 @@ Keep exact values consumed by preparation in its existing data records and recip
 link them instead of copying long tables into Markdown.
 
 Keep original scientific inputs and native labels needed to decode them, either
-in Git or through a tested restoration recipe with byte counts and hashes.
+in Git or through a tested restoration recipe with its origin and product identity.
+If an evidence claim depends on exact bytes outside Git, retain their measured
+identity with that evidence; do not turn it into a pin on an authored source file.
 An acquisition parser may read HTML temporarily. Save its selected data and source
 identity; the downloaded webpage does not become a permanent evidence file.
 “Reference evidence” and “the website might change” are not reasons to commit a page.
 
 Before removing a page, check code, acquisition recipes, manifests, tests and
 provenance references. Preserve used numerical extracts, source identity and
-extraction method. Update active references and generated pins together. Original
+extraction method. Update active references and affected delivery inventories together. Original
 reports remain unchanged at their recorded Git revision. Do not replace duplicated
 pages with a shared webpage archive or a blanket ignore rule.
 GitHub language classification does not determine what belongs in Git.
@@ -223,7 +231,8 @@ Record:
 
 - **Tested inputs:** bodies/views, code revision and relevant manifests. Identify
   uncommitted changes, ignored inputs and files actually served to the browser;
-  pin anything not fixed by Git or a manifest with byte counts and hashes.
+  record byte counts and hashes for evidence inputs not fixed by Git or a delivery
+  inventory. A path-only source manifest does not establish byte identity.
 - **Method and result:** command, cases, outcomes, failures and omitted checks.
   Include environment details that affect the result. Browser evidence needs
   browser version, viewport, DPR, camera, dataset and settings.
@@ -338,8 +347,8 @@ legibility, view and revision, and follow every link. File existence or HTTP
 success alone is insufficient. Fix broken embeds and links; if required images
 are unavailable, keep the PR in draft and identify what is missing.
 
-**PROVENANCE DOCUMENTATION** maintains shared guidance. Contributors update rules
-affected by their changes without an extra approval step. Add a shared rule only
+Contributors maintain the shared guidance and update rules affected by their
+changes without an extra approval step. Add a shared rule only
 for a demonstrated gap, identifying its standard/section or its cssEarth purpose.
 Use existing source records, preparation tools and checks.
 

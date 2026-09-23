@@ -37,7 +37,7 @@ The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration 
 
 `pnpm prepare:nebulae` uses the application entrypoint and prepares source cards through the existing app command. It needs no lab server, native observation downloads, Python, NOX or scientific fitting. The [app guide](../../../docs/nebulae/README.md) gives the complete installation sequence.
 
-`node --experimental-strip-types labs/nebula/run.mts bake-nebula --research` selects the saved native LMC processing workflow. Lab startup and `pnpm test:lab:nebula` first run the assets stage, which can acquire missing original images. Those commands are therefore separate from the cache-independent CI job. See [baking](baking.md) for native prerequisites and [workflows](workflows.md) for the interactive app.
+`node --experimental-strip-types labs/nebula/run.mts bake-nebula --research` selects the saved native LMC processing workflow. Lab startup and `pnpm test:lab` first run the assets stage, which can acquire missing original images. Those commands are therefore separate from the cache-independent CI job. See [baking](baking.md) for native prerequisites and [workflows](workflows.md) for the interactive app.
 
 ## Application dependency boundary
 
@@ -83,7 +83,7 @@ The local runner reads the workflow; it does not maintain a second unit-test sel
 
 ## Artifact-dependent checks
 
-The complete lab suite includes real density geometry, prepared imagery, source registrations and saved native caches. `pnpm test:lab:nebula` restores the assets stage first. Some tests additionally require the specific completed research fixtures named in their source; missing fixtures must be reported rather than replaced with fabricated results.
+The complete lab suite includes real density geometry, prepared imagery, source registrations and saved native caches. `pnpm test:lab` restores the assets stage first. Some tests additionally require the specific completed research fixtures named in their source; missing fixtures must be reported rather than replaced with fabricated results.
 
 The saved-output `browser-candidate-published` command checks real M42/M45 lens switching, actual retained scene nodes, delayed bitmap decoding, source races and camera/lens/toggle settings after refresh. It installs its write guard before navigation and uses a fresh browser context. Screenshots are evidence for inspection, not an automatic visual-acceptance assertion. Other browser commands may deliberately process data; inspect their prerequisites and authorization before running them.
 
