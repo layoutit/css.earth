@@ -17,6 +17,6 @@ Chromium headless, 1280 × 900 CSS pixels, dev server with `ASSET_ORIGIN=https:/
 
 - [Star](star.png): the Gaia colour on a uniform disc. The vertical line is the planet's orbit seen almost edge-on from the default camera.
 - [Planet](planet.png): the gray sphere at its measured radius, lit by its white dwarf.
-- [System](system.png): one orbit track, both labels, the planet on its orbit. The star's marker sits above the ellipse's centre. The orbit and the star come from the same Kepler elements, so this is perspective on a nearly edge-on view, not an offset in the data.
+- [System](system.png): one orbit track, both labels, the planet on its orbit. The planet is a locator circle with its dot inside, like every planet of another star in a system overview. The star's marker sits above the ellipse's centre. The orbit and the star come from the same Kepler elements, so this is perspective on a nearly edge-on view, not an offset in the data.
 
 These are appearance and delivery checks, not a photographic comparison: no image of either body exists.
