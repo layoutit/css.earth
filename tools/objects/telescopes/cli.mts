@@ -243,6 +243,20 @@ export function formatExploration(session:ExplorationSession & {readonly directo
     for(const lead of service.instruments)lines.push(`  ${lead.telescope} / ${lead.instrument} · ${lead.records} record(s) · example ${lead.sample}`);
     lines.push('  Discovery only; no exact acquisition or qualification route is implied.');
   }
+  const wwt=answer.curatedImagery;
+  if(wwt?.state==='indexed'&&wwt.total){
+    lines.push('',`WWT curated imagery (${wwt.total} title/frame match${wwt.total===1?'':'es'}; pinned catalog ${wwt.revision.slice(0,12)}):`);
+    const displayed=verbose?wwt.matches:wwt.matches.slice(0,5);
+    const catalogText=(value:string)=>value.replace(/[\p{Cc}\p{Cf}]+/gu,' ').replace(/\s+/gu,' ').trim();
+    for(const image of displayed){
+      lines.push(`  ${briefDiagnostic(catalogText(image.name))} · ${catalogText(image.bandPass)} · ${catalogText(image.projection)} · ${image.matchBasis} match`,
+        `    Credit: ${briefDiagnostic(catalogText(image.credits))||'not supplied by WWT'} · ${image.catalogUrl}`);
+      if(verbose&&image.dataSetType==='Sky')lines.push(`    WWT projection origin: RA ${image.position.centerXDegrees}°, Dec ${image.position.centerYDegrees}° (not a verified footprint)`);
+    }
+    if(wwt.matches.length>displayed.length)lines.push(`  ${wwt.matches.length-displayed.length} more match(es) in the saved result.`);
+    if(wwt.total>wwt.matches.length)lines.push(`  ${wwt.total-wwt.matches.length} additional match(es) omitted by the ${wwt.limit}-entry cap.`);
+    lines.push('  Display imagery only; these are not selectable observations or qualified science products.');
+  }else if(wwt?.state==='unavailable')lines.push('',`WWT curated imagery unavailable: ${wwt.reason}`);
   const appendIssues=(heading:string,issues:readonly {readonly identity?:string;readonly scope:string;readonly reason:string}[],total=issues.length)=>{
     if(!issues.length)return;
     lines.push('',`${heading} (${total}):`);
