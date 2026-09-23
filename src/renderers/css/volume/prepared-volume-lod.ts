@@ -9,6 +9,9 @@ const AXES = ['x', 'y', 'z'] as const;
 export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
   /** Replace prepared pixels and atlas sampling on one retained spatial topology. */
   setPresentation(payload: PreparedVolumeMountOptions['payload']): void;
+  /** Whether the slice stack may present at all. Denied, the billboard views carry the cloud at every size; the
+   * universe denies its unselected galaxy, whose slices are for the observer who selected it. */
+  setDetail(allowed: boolean): void;
 }
 
 /** Geometry equality excludes resource identity and atlas sampling, which are presentation material. */
@@ -59,6 +62,8 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
       if (!samePreparedVolumeTopology(initial, next)) throw new TypeError('Prepared volume presentation has a different topology.');
       current = next;
       runtime?.setMaterials(materials(next));
+    }, setDetail(allowed: boolean) {
+      if (!allowed) throw new TypeError('A volume without impostor views has only its slices to show.');
     }, destroy() { if (destroyed) return; destroyed = true; runtime?.destroy(); } });
   }
   const document = options.host.ownerDocument;
@@ -114,7 +119,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     distant.append(node);
     return [view.id, node] as const;
   }));
-  let destroyed = false, active: readonly string[] = [...views.keys()];
+  let destroyed = false, active: readonly string[] = [...views.keys()], detailAllowed = true;
   const publish = (publication: VolumeCameraPublication) => {
     if (destroyed) return;
     const projection = projectVolumeImpostors(publication, options.payload.frame, bank, options.nativeFocalCss !== undefined);
@@ -130,7 +135,9 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const nativeMix = responsive ? nativeProjectedMix(diameterPixels, publication.viewport.focalPixels,
       resolveFocalPixels(publication.viewport), bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : Number.NaN;
     const mix = Number.isFinite(nativeMix) ? nativeMix : responsive ? Number.NaN : volumeMix;
-    const detailVisible = visible && (Number.isNaN(mix) || mix > 0), impostorsVisible = visible && (Number.isNaN(mix) || mix < 1);
+    // With detail denied the billboard is the whole presentation, at full weight, whatever the projected size.
+    const detailVisible = detailAllowed && visible && (Number.isNaN(mix) || mix > 0);
+    const impostorsVisible = visible && (!detailAllowed || Number.isNaN(mix) || mix < 1);
     full.style.display = detailVisible ? 'block' : 'none';
     distant.style.display = impostorsVisible ? 'block' : 'none';
     if (responsive) options.host.style.setProperty('--native-volume-mix', nativeProjectedFade(diameterPixels,
@@ -140,7 +147,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
       volume.publish(publication);
       full.style.opacity = responsive ? `calc(var(--native-volume-mix) * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume));
     }
-    distant.style.opacity = responsive ? 'calc(1 - var(--native-volume-mix))' : String(1 - volumeMix);
+    distant.style.opacity = !detailAllowed ? '' : responsive ? 'calc(1 - var(--native-volume-mix))' : String(1 - volumeMix);
     const next = projection.views.map(view => view.id);
     for (const id of active) if (!next.includes(id)) views.get(id)!.style.display = 'none';
     // Only the few contributing projections receive screen transforms. Textures and cloud geometry stay fixed.
@@ -159,7 +166,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     active = next;
     if (distant.dataset.activeViews !== String(next.length)) distant.dataset.activeViews = String(next.length);
   };
-  return Object.freeze({ roots, publish, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
+  return Object.freeze({ roots, publish, setDetail(allowed: boolean) { detailAllowed = allowed; }, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
     const next = validatePreparedCssVolume(payload);
     if (!samePreparedVolumeTopology(initial, next)) throw new TypeError('Prepared volume presentation has a different topology.');
     presentation = next;

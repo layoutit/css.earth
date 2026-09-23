@@ -2,6 +2,7 @@ import { afterEach, expect, test, vi } from 'vitest';
 import { parseObjectDescriptor, prepareObject } from '@cssearth/objects';
 import { createPreparedVolumeLenses, loadPreparedVolumeLenses, validatePreparedVolumeLenses,
   volumeLensCompositeOpacity } from './prepared-volume-lenses.js';
+import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 import type { PreparedVolumeLenses } from './prepared-volume-lenses.js';
 import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from './types.js';
 import { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
@@ -440,4 +441,37 @@ test('a phone hands an impostor-sized cloud to its billboards instead of fading 
   expect(reads.length).toBe(resolved);
   expect(detail.style.display).toBe('none');
   runtime.destroy();
+});
+
+test('a cloud denied its detail is carried by its billboards at every size, until it is allowed again', () => {
+  const f = dom();
+  const directions = [
+    { id: 'front', back: [0, 0, 1] as const, right: [1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'back', back: [0, 0, -1] as const, right: [-1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'right', back: [1, 0, 0] as const, right: [0, 0, -1] as const, down: [0, -1, 0] as const },
+    { id: 'left', back: [-1, 0, 0] as const, right: [0, 0, 1] as const, down: [0, -1, 0] as const },
+  ];
+  const impostors = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: 1,
+    fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32,
+    views: directions.map(view => ({ ...view, texturePath: `${view.id}.png` })) };
+  const base = volume('galaxy');
+  const cloud = { ...base, impostors, resources: [...base.resources,
+    ...impostors.views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))] };
+  const lod = mountPreparedVolumeLod({ ...f.options, payload: cloud, resolveResource: path => `/prepared/${path}` }, () => 1);
+  const detail = f.host.children.find(node => node.className === 'css-volume-detail')!;
+  const distant = f.host.children.find(node => node.className === 'css-volume-impostors')!;
+  // Close enough for the full volume: allowed, the slices present and the billboard leaves rendering.
+  lod.publish(publication(4));
+  expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('none');
+  // The unselected galaxy: denied, only the billboard presents, at full weight, at the same distance.
+  lod.setDetail(false);
+  lod.publish(publication(4.01));
+  expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block'); expect(distant.style.opacity).toBe('');
+  lod.setDetail(true);
+  lod.publish(publication(4));
+  expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('none');
+  // Without impostor views there is nothing but slices, so denying them is refused.
+  const plain = mountPreparedVolumeLod({ ...f.options, payload: base, resolveResource: path => `/prepared/${path}` }, () => 1);
+  expect(() => plain.setDetail(false)).toThrow();
+  lod.destroy(); plain.destroy();
 });
