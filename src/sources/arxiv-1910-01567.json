@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-1910-01567",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mansfield et al. (2020): Evidence for H2 Dissociation and Recombination Heat Transport in the Atmosphere of KELT-9b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1910.01567"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ab5b09"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1910.01567",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ab5b09",
+      "label": "The Astrophysical Journal Letters 888, L15"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1910.01567",
+      "checkedOn": "2026-09-23",
+      "locator": "Equation 1 and Table 1: two-term sinusoid phase-curve fit, eclipse depth, radius ratio, day and night brightness temperatures"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters 888, L15",
+  "creators": [
+    "M. Mansfield",
+    "J. L. Bean",
+    "K. B. Stevenson",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

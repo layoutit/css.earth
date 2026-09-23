@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-9",
+  "card": {
+    "text": "Hot A star spinning so fast it is flattened, with hot bright poles and a cooler equator.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2004-14812",
+        "url": "https://arxiv.org/abs/2004.14812",
+        "label": "Ahlers et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "its local surface brightness to vary by ~38% between its hot poles and cooler equator"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "KELT-9 is a hot A star about 2.5 times the mass of the Sun. It spins in about 16 hours; its planet KELT-9b crosses over its poles.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1706-06723",
+        "url": "https://arxiv.org/abs/1706.06723",
+        "label": "Gaudi et al. 2017",
+        "checked": "2026-09-23",
+        "locator": "Extended Data Table 3, Model 1",
+        "quote": "Mass 2.52"
+      },
+      {
+        "catalogueId": "arxiv-2004-14812",
+        "url": "https://arxiv.org/abs/2004.14812",
+        "label": "Ahlers et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Table 2 and abstract",
+        "quote": "agreeing with Gaudi et al. (2017) that KELT-9 b is in a nearly polar orbit"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "Spectrum and spin",
+      "summary": "Gaia's colour of the star, brighter and bluer at the poles where its fast spin makes it hotter."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-76",
+  "angularDiameterMas": 0.086,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,221,649.2 km at 189.04 pc = 0.086 mas. No interferometric diameter of this star is published; the disc is far too small to resolve.",
+  "distanceParsecs": 189.0386875477855,
+  "distanceSource": "Gaia DR3 parallax 5.2899 +/- 0.0826 mas (photometry/gaia-dr3-source.csv), no zero-point correction",
+  "radiusKm": 1221649.2,
+  "radiusSource": "Radius: 1.756 +/- 0.071 solar radii at 695700 km per solar radius (Ehrenreich et al. 2020, Nature 580, 597; arXiv:2003.05528, Extended Data Table 1, from their ESPRESSO spectra and the Gaia DR2 parallax). GM from their stellar mass 1.458 +/- 0.021 solar masses (same table) times the JPL solar GM 132712440041.93938 km^3/s^2. The star has a bound companion, WASP-76 B, 0.44 arcsec away and about ten times fainter (same paper, Methods); it is not placed. presentationUp: the display axis is a sky-plane convention; the star's spin axis is not measured in three dimensions (Ehrenreich et al. 2020 measure only its sky-projected angle to the orbit, 61 degrees).",
+  "effectiveTemperatureK": 6329,
+  "effectiveTemperatureSource": "Ehrenreich et al. (2020), Nature 580, 597, Extended Data Table 1: 6,329 +/- 65 K from their ESPRESSO spectra (https://arxiv.org/abs/2003.05528)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
+  }
+}

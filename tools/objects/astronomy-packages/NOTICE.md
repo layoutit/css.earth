@@ -82,3 +82,13 @@ cssEarth uses [pyuvdata 3.2.4](https://github.com/RadioAstronomySoftwareGroup/py
 # astropy-healpix
 
 cssEarth uses [astropy-healpix 1.1.3](https://github.com/astropy/astropy-healpix) for the F14 HEALPix baseline. astropy-healpix owns native RING/NESTED indexing and equal-area pixel geometry; cssEarth retains the FITS pin, quantity semantics, component selection and product record. It is copyright 2016–2018 Astropy Developers and distributed under BSD-3-Clause, reproduced in [ASTROPY-HEALPIX-LICENSE.md](ASTROPY-HEALPIX-LICENSE.md). The package is installed unmodified from the hash-locked environment.
+
+# SPIDERMAN
+
+cssEarth uses [spiderman-package 1.0.3](https://pypi.org/project/spiderman-package/1.0.3/) (Louden & Kreidberg 2018, MNRAS 477, 2613,
+[doi:10.1093/mnras/sty558](https://doi.org/10.1093/mnras/sty558)) to evaluate spherical-harmonic brightness maps that published
+phase-curve fits made with it, and the light curves those maps give. It is installed from the hash-pinned PyPI source release into
+its own ignored environment ([spiderman-toolchain.json](spiderman-toolchain.json) says why), with batman-package 2.5.3, which it
+imports. cssEarth does not copy or modify SPIDERMAN source code; the runner registers an empty `matplotlib._png` module in place of
+one its plotting code imports and Matplotlib 3.3 removed. SPIDERMAN is copyright 2016 Tom Louden and distributed under the MIT
+license of its repository, reproduced in [SPIDERMAN-LICENSE.txt](SPIDERMAN-LICENSE.txt); its PyPI metadata names GNU GPLv3.

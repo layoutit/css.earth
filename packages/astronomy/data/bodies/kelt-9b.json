@@ -1,0 +1,27 @@
+{
+  "id": "kelt-9b",
+  "classification": "exoplanet",
+  "order": 1721,
+  "physical": {
+    "name": "KELT-9b",
+    "horizonsCode": null,
+    "meanRadiusKm": 131545.28,
+    "gravitationalParameterKm3PerS2": 364857217.92,
+    "parent": "kelt-9"
+  },
+  "physicalNotes": "Radius: 1.84 +/- 0.04 Jupiter radii (Ahlers et al. 2020, AJ 160, 4, Table 2, gravity-darkened fit) at Jupiter's equatorial radius 71,492 km. The same table's radius ratio 0.081 times its 2.39 solar-radius equator gives 1.88 Jupiter radii; the printed radius is used. A sphere: tidal and rotational flattening are not modelled. GM from the planet mass 2.88 +/- 0.84 Jupiter masses (Gaudi et al. 2017, Nature 546, 514, Extended Data Table 3, Model 1) times Jupiter's GM 126,686,534 km^3/s^2 (JPL).",
+  "hostedOrbit": {
+    "periodDays": 1.4811235,
+    "semiMajorAxisStellarRadii": 3.2046101,
+    "inclinationDegrees": 86.79,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 57095.18572,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Gaudi et al. (2017), Extended Data Table 3, Model 1 (adopted): P = 1.4811235 +/- 0.0000011 d",
+      "shape": "Gaudi et al. (2017), Extended Data Table 3, Model 1: semi-major axis 0.03462 +0.00110/-0.00093 au and inclination 86.79 +/- 0.25 degrees; eccentricity 0 fixed. Converted to the host record's volume-equivalent radius: 0.03462 au x 149,597,870.7 km/au / 1,616,133.7 km = 3.2046. The paper's own ratio, 3.153, refers to its spherical 2.362 solar-radius star.",
+      "phase": "Gaudi et al. (2017), Extended Data Table 3, Model 1: primary transit 2457095.68572 +/- 0.00014 BJD_TDB = 57095.18572 BMJD_TDB",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north). The star's spin axis is placed relative to this orbit (source/preparation/rotation.json of kelt-9)."
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kelt-9b",
+  "displayName": "KELT-9b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.84 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-2004-14812",
+          "url": "https://arxiv.org/abs/2004.14812",
+          "label": "Ahlers et al. (2020), Table 2",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "35.5 hours",
+        "source": {
+          "catalogueId": "arxiv-1706-06723",
+          "url": "https://arxiv.org/abs/1706.06723",
+          "label": "Gaudi et al. (2017), Extended Data Table 3",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "day-side",
+        "label": "Day side",
+        "value": "About 4,600 K",
+        "source": {
+          "catalogueId": "arxiv-1910-01567",
+          "url": "https://arxiv.org/abs/1910.01567",
+          "label": "Mansfield et al. (2020), Table 1",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "temperature.daysideK"
+        }
+      },
+      {
+        "id": "night-side",
+        "label": "Night side",
+        "value": "About 2,600 K",
+        "source": {
+          "catalogueId": "arxiv-1910-01567",
+          "url": "https://arxiv.org/abs/1910.01567",
+          "label": "Mansfield et al. (2020), Table 1",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "temperature.nightsideK"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "temperature",
+    "controls": [
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Mansfield et al. 2020 · Spitzer 4.5 µm, 2018 · longitude only",
+        "thumbnail": "kelt-9b-lens-temperature.webp",
+        "surface": "kelt-9b-surface-temperature@2x.webp",
+        "poles": "kelt-9b-poles-temperature@2x.webp",
+        "source": {
+          "id": "kelt-9b-mansfield-2020-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1910.01567"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "2400",
+            "3750",
+            "5100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "2400",
+              "3750",
+              "5100"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1910.01567"
+        },
+        "notes": "Brightness temperature at 4.5 µm from Mansfield et al. (2020)'s published fit to a Spitzer phase curve of October 2018. Their two sinusoids become a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 16.5° east of noon. The false colour runs from 2,400 to 5,100 K."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mansfield et al. (2020), ApJL 888, L15",
+      "href": "https://arxiv.org/abs/1910.01567"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gaudi et al. (2017), Nature 546, 514",
+      "href": "https://arxiv.org/abs/1706.06723"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1910.01567",
+      "credit": "Mansfield et al. (2020), ApJL 888, L15"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kelt-9b.json",
+      "credit": "Radius from Ahlers et al. (2020), mass and orbit from Gaudi et al. (2017); assumed synchronous rotation"
+    }
+  }
+}
