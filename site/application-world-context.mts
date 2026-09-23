@@ -3,7 +3,7 @@ import { labelOcclusionFor } from '../src/renderers/css/dist/index.js';
 import { prepareObjectResources, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
-import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
+import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
@@ -51,7 +51,7 @@ export function createApplicationWorldContext() {
         const updateOcclusion = () => { if (!lifetime.disposed) layer.setLabelBlockers(occlusion.read()); };
         updateOcclusion();
         lifetime.onDispose(occlusion.subscribe(updateOcclusion));
-        const contextNavigation = own(createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
+        const contextNavigation = own(createPreparedContextNavigation({ layer, presentation: PREPARED_WORLD_PRESENTATION.galaxies,
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: prepared.catalogSources, windowTarget }));
         navigation = contextNavigation;

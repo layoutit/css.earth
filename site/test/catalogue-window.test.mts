@@ -73,3 +73,33 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
   assert.equal(list.style.height, '0px');
   catalogue.destroy();
 });
+
+test('a filter change reads the layout before writing rows, and rows keep their nodes until they show another entry', () => {
+  const { document, window } = parseHTML('<div id="scroll"><ul id="list"></ul></div>');
+  const scroll = document.querySelector<HTMLElement>('#scroll')!;
+  const list = document.querySelector<HTMLUListElement>('#list')!;
+  const heightsAtRead: string[] = [];
+  Object.defineProperty(scroll, 'clientHeight', { value: 420 });
+  Object.defineProperty(list, 'offsetTop', { get() { heightsAtRead.push(list.style.height); return 0; } });
+  Object.assign(window, { requestAnimationFrame: () => 1, cancelAnimationFrame() {} });
+  const catalogue = createCatalogueWindow({ documentTarget: document, windowTarget: window as unknown as BrowserWindow,
+    list, scrollTarget: scroll });
+  catalogue.setEntries(Array.from({ length: 100 }, (_, index) => entry(index)));
+  heightsAtRead.length = 0;
+  const entries = Array.from({ length: 50 }, (_, index) => entry(index));
+  catalogue.setEntries(entries);
+  assert.deepEqual(heightsAtRead, ['5592px'], 'the one layout read happens before the list is resized');
+
+  const subtitle = () => list.querySelector('[data-catalogue-index="0"] .object-kind');
+  const marker = () => list.querySelector('[data-catalogue-index="0"] .object-lens-icon')?.firstElementChild;
+  const [kind, icon] = [subtitle(), marker()];
+  catalogue.setSelection({ kind: 'scene', id: 'earth-0' });
+  catalogue.setEntries(entries);
+  assert.equal(subtitle(), kind, 'selecting or refiltering to the same entry keeps the subtitle nodes');
+  assert.equal(marker(), icon);
+
+  catalogue.setEntries([{ ...entry(7), classificationName: 'moon' }, ...entries.slice(1)]);
+  assert.equal(subtitle(), kind, 'another entry reuses the same subtitle node');
+  assert.equal(subtitle()?.textContent, 'Moon · ');
+  assert.equal(list.querySelector('[data-catalogue-index="0"] .object-name')?.textContent, 'Earth 7');
+});

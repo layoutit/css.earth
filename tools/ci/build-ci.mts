@@ -56,6 +56,7 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
     node('navigation', 'tools/prepare/prepare-navigation.mts', ['solar'], ['--catalog-only']),
     node('world', 'tools/objects/dist/prepare-spatial-context.js', ['preparation', 'navigation'], ['src/objects/sun/source/navigation/universe.json', 'src/objects/sun/prepared/world-context.json']),
     node('moon-labels', 'tools/prepare/prepare-moon-labels.mts', ['world']),
+    node('world-presentation', 'tools/prepare/prepare-world-presentation.mts', ['world']),
     node('wordmark', 'tools/prepare/prepare-wordmark-rail.mts', ['font']),
     // The title generator imports planet title preparation, whose shell imports the real world context.
     node('overview-titles', 'tools/prepare/prepare-overview-titles.mts', ['font', 'world']),

@@ -3,8 +3,6 @@ import { LENS_VISIBILITY } from './runtime-policy.mts';
 import lensBillboardText from './prepared-lens-billboards.json?raw';
 import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
-import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
-import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createPreparedUniverse, parseLensBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses } from '../src/renderers/css/dist/universe.js';
@@ -13,7 +11,7 @@ import { contextMarkerSprite } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
-import { majorMoonIds } from './moon-orbit-policy.mts';
+import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
@@ -95,15 +93,16 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // The worker reads its own prepared context. The bounded spatial-star sample is
     // already inside pointAppearance; the complete binary catalogue stays out of the app.
     const plannerSource = APPLICATION_WORLD_PLANNER_SOURCE;
-    const catalogBank = { fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM, fullDistanceM: galaxyPresentation.fullDistanceM,
-      clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
+    const fades = PREPARED_WORLD_PRESENTATION;
+    const catalogBank = { fadeStartDistanceM: fades.galaxies.fadeStartDistanceM, fullDistanceM: fades.galaxies.fullDistanceM,
+      clusters: { fadeStartDistanceM: fades.clusters.fadeStartDistanceM, fullDistanceM: fades.clusters.fullDistanceM } };
     const universe = createPreparedUniverse({
       environmentLinks: { 'milky-way': '/sun/?overview=milky-way' },
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
       backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'),
       backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'),
-      annotationPriorities, annotationLandmarks: majorMoonIds(), annotationOpacities, plannerSource, catalogBank,
+      annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       lensVisibility: LENS_VISIBILITY, lensBillboards,
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
