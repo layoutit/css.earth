@@ -175,12 +175,12 @@ export async function inventoryPublicAssets({ objectId, objectDirectory, urls, p
 
 /**
  * Files under a body's `prepared/` that a checkout regenerates itself, so they are never inventoried or published:
- * the JSON transport and page written from the restored runtime, the provenance record `prepare-provenance` generates
+ * the staging-only inventory, JSON transport and page written from the restored runtime, the provenance record `prepare-provenance` generates
  * from the manifest (for scene bodies only), and the radial-terrain reports and source-index rasters that only the
  * audits read.
  */
 export function isRegeneratedPreparedFile(filename: string, provenanceRegenerated = true): boolean {
-  return ['object.json', 'page.json'].includes(filename) || (provenanceRegenerated && filename === 'provenance.json') ||
+  return ['inventory.json', 'object.json', 'page.json'].includes(filename) || (provenanceRegenerated && filename === 'provenance.json') ||
     /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
 }
 

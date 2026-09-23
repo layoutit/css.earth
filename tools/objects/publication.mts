@@ -59,6 +59,8 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
   const { parseRuntimeManifest } = await import('#preparation/operations');
   const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'inventory.json')), id);
   const current = await readInventory(id, objectDirectory);
+  const stagedPrepared = await readInventory(id, stage);
+  if (!stagedPrepared) throw new Error(`Prepared publication inventory is missing: ${id}.`);
   const previous = current === null ? null : parseRuntimeManifest(current, id);
   const writes = await preparedAssetWrites({ id, stage: resolve(stage, 'public'), destination: publicDirectory, previous, manifest });
   const minimaps = minimapPaths(await optionalJson(resolve(data, 'minimaps.json')));
@@ -67,7 +69,9 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
     ...oldMinimaps.filter(path => !minimaps.includes(path)).map(path => ({ path: resolve(outputDirectory, path), remove: true as const })),
     // The staged inventory is published once, at the body root; prepared/ never carries a copy.
     ...outputs.filter(entry => entry.filename !== 'inventory.json').map(entry => ({ path: resolve(outputDirectory, entry.filename), source: entry.path })),
-    { path: resolve(objectDirectory, 'inventory.json'), text: inventoryText(mergeInventory(current, 'public', manifest.assets)) },
+    { path: resolve(objectDirectory, 'inventory.json'), text: inventoryText(mergeInventory(
+      mergeInventory(current, 'prepared', stagedPrepared.assets.filter(asset => asset.location === 'prepared')),
+      'public', manifest.assets)) },
     { path: resolve(objectDirectory, 'object.json'), source: resolve(stage, 'object.json') });
   JSON.parse(await readFile(resolve(stage, 'object.json'), 'utf8'));
   await writePreparedSet(writes);

@@ -28,6 +28,15 @@ test('zoom hysteresis retains detail at a boundary and downgrades outside it', (
   expect(selectPreparedTextureLevel(textureLevels, null, 0)).toBe(1);
 });
 
+test('a fixed level keeps the same texture through zoom and initial publication', () => {
+  const fixed = { ...textureLevels, fixedLevel: 0 };
+  expect(selectPreparedTextureLevel(fixed, 900, undefined, true)).toBe(0);
+  expect(selectPreparedTextureLevel(fixed, 900, 0)).toBe(0);
+  expect(selectPreparedTextureLevel(fixed, null, 0)).toBe(0);
+  expect(() => requireTextureLevels(fixed, variants, new Set(['a', 'b', 'a-small', 'b-small']))).not.toThrow();
+  expect(() => requireTextureLevels({ ...fixed, fixedLevel: 2 }, variants, new Set(['a', 'b', 'a-small', 'b-small']))).toThrow();
+});
+
 test('external texture plans reject undeclared, incomplete or reordered levels', () => {
   const resources = new Set(['a', 'b', 'a-small', 'b-small']);
   expect(() => requireTextureLevels(textureLevels, variants, resources)).not.toThrow();
