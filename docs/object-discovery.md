@@ -115,11 +115,19 @@ Selecting a body with a prepared photograph uses the body's default camera
 angle, so visitors arrive facing the photographed side. Preparation derives
 that angle ([`src/platform/default-camera.mts`](../src/platform/default-camera.mts));
 no package states it. A body whose default lens has observation frames opens
-on the mean of their sub-observer points. A placed star or a planet shown by
-its own emission opens facing the Sun, where Earth observes it from. Every
-other body opens on the ecliptic presentation frame's design pose: ecliptic
-north up, the Sun exactly to the left, the camera 40 degrees above the ecliptic
-plane on its north side. Catalogue
+on the mean of their sub-observer points. A flyby body with an `approach`
+recipe, such as Pluto and Charon, opens facing the side its spacecraft
+approached, computed from a shared SPICE kernel bank
+([`tools/spice/approach.mts`](../tools/spice/approach.mts)). A placed star or a
+planet shown by its own emission opens facing the Sun, where Earth observes it
+from. Every other body opens on the ecliptic presentation frame's design pose:
+ecliptic north up, the Sun exactly to the left, the camera 40 degrees above the
+ecliptic plane on its north side. When that body's default map covers mostly one
+side, the camera keeps the 40-degree tilt and turns to face the centre of the
+map's data, taking the tilt on the ecliptic's south side when the data lies
+south. Preparation finds the gaps in the prepared minimap by the gray fill's
+graticule ([`tools/objects/default-lens-coverage.mts`](../tools/objects/default-lens-coverage.mts)).
+Complete maps keep the design pose. Catalogue
 preparation stores the angle for exposed, non-modeled `observations` and
 `surfaceObservations` lenses. The shared flight approaches this pose; it does
 not analyze coverage in the browser or create missing imagery.

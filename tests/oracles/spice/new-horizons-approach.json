@@ -1,0 +1,59 @@
+{
+ "schema": "cssearth-oracle-fixture@1",
+ "oracle": "spiceypy",
+ "generatedBy": "tools/oracles/spice/new-horizons-approach.py",
+ "tool": {
+  "spiceypy": "8.2.0",
+  "cspice": "CSPICE_N0067",
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+ },
+ "inputs": [
+  {
+   "path": "src/spice/new-horizons/lsk/naif0012.tls",
+   "sha256": "3dbf5979ab6465488e9b1fd838f77ffff0497682098d8467b238bc76f036e746",
+   "bytes": 6625
+  },
+  {
+   "path": "src/spice/new-horizons/pck/pck00011.tpc",
+   "sha256": "43001740fc8337500fd477cdebe3d475d3611721d980eaa91ede865f2d287007",
+   "bytes": 132602
+  },
+  {
+   "path": "src/spice/new-horizons/spk/nh_plu047_od122.bsp",
+   "sha256": "259a83f892d7e98b2728c955cc13b9becc7e06ec594bb27ed5f69aa487d4caab",
+   "bytes": 2158592
+  },
+  {
+   "path": "src/spice/new-horizons/spk/nh_recon_pluto_od122_v01.bsp",
+   "sha256": "9c4186d6e444a55ebad769569ebe3640fc8bf5e1eb3f1766c249ae0379ecc434",
+   "bytes": 1724416
+  }
+ ],
+ "cases": {
+  "pluto": {
+   "closestApproachEt": 490146576.96262693,
+   "closestApproachUtc": "2015-07-14T11:48:28.779Z",
+   "rangeKm": 13673.771161999985,
+   "direction": [
+    -0.6081609486233582,
+    0.4022110313867867,
+    0.6843731049656424
+   ],
+   "longitudeDeg": 146.52109454769376,
+   "latitudeDeg": 43.18632533218384
+  },
+  "charon": {
+   "closestApproachEt": 490147410.25534153,
+   "closestApproachUtc": "2015-07-14T12:02:22.072Z",
+   "rangeKm": 29428.33612894977,
+   "direction": [
+    0.5960504495367002,
+    -0.42172677017052446,
+    0.6832791471489783
+   ],
+   "longitudeDeg": -35.28075693030643,
+   "latitudeDeg": 43.100421657100085
+  }
+ }
+}

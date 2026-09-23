@@ -49,6 +49,14 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
       verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
       continue;
     }
+    const kernel = /^src\/spice\/([a-z][a-z0-9-]*)\/(.+)$/u.exec(input.path);
+    if (kernel) {
+      // A shared kernel bank verifies its own pins (tools/spice/kernel-bank.mts).
+      const { kernelBankPaths } = await import('../spice/kernel-bank.mts');
+      await kernelBankPaths(kernel[1]!, [kernel[2]!]);
+      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      continue;
+    }
     const match = /^src\/objects\/([^/]+)\/source\/(.+)$/u.exec(input.path);
     if (!match) throw new Error(`Oracle input outside a body's sources: ${input.path}`);
     const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', match[1], 'source/manifest.json'), 'utf8')));

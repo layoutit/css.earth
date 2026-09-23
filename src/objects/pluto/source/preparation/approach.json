@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-spacecraft-approach@1",
+  "kernelSet": "new-horizons",
+  "kernels": ["lsk/naif0012.tls", "pck/pck00011.tpc", "spk/nh_plu047_od122.bsp", "spk/nh_recon_pluto_od122_v01.bsp"],
+  "spacecraft": -98,
+  "body": 999,
+  "frame": "IAU_PLUTO",
+  "searchWindowUtc": ["2015-07-14T08:00:00Z", "2015-07-14T16:00:00Z"],
+  "inboundHours": 12
+}

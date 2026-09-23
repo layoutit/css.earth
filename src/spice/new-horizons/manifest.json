@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "new-horizons-naif0012-tls",
+      "path": "lsk/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/lsk/naif0012.tls",
+      "credit": "NASA/JPL NAIF; New Horizons project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and New Horizons project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire new-horizons.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/new-horizons/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "new-horizons-pck00011-tpc",
+      "path": "pck/pck00011.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/pck/pck00011.tpc",
+      "credit": "NASA/JPL NAIF; New Horizons project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and New Horizons project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire new-horizons.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/new-horizons/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "new-horizons-nh-plu047-od122-bsp",
+      "path": "spk/nh_plu047_od122.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_plu047_od122.bsp",
+      "credit": "NASA/JPL NAIF; New Horizons project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and New Horizons project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire new-horizons.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/new-horizons/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "new-horizons-nh-recon-pluto-od122-v01-bsp",
+      "path": "spk/nh_recon_pluto_od122_v01.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_recon_pluto_od122_v01.bsp",
+      "credit": "NASA/JPL NAIF; New Horizons project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and New Horizons project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire new-horizons.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/new-horizons/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": []
+}
