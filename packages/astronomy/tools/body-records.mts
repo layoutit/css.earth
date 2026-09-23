@@ -89,6 +89,18 @@ export async function readBodyRecords(root = packageRoot) {
     if (record.physical.parent !== null && !ids.has(record.physical.parent)) throw new TypeError(`Missing astronomy parent: ${record.id}.`);
     if (record.hostedOrbit !== undefined && records.find(parent => parent.id === record.physical.parent)?.star === undefined) throw new TypeError(`A hosted orbit's parent must be a placed star or black hole: ${record.id}.`);
     if (record.star?.boundTo !== undefined && records.find(host => host.id === record.star!.boundTo)?.star === undefined) throw new TypeError(`A bound star's companion must be a placed star: ${record.id}.`);
+    // A circumbinary orbit is fitted about the centre of mass of its parent and a companion hosted on the same parent; the
+    // published masses of both weight that centre.
+    const companionId = record.hostedOrbit?.barycentreCompanion;
+    if (companionId !== undefined) {
+      const companion = records.find(other => other.id === companionId), parent = records.find(other => other.id === record.physical.parent);
+      if (!companion?.hostedOrbit || companion.hostedOrbit.barycentreCompanion !== undefined || companion.physical.parent !== record.physical.parent || companion.id === record.id) {
+        throw new TypeError(`${record.id}: hostedOrbit.barycentreCompanion ${companionId} must be another body on a plain hosted orbit around ${record.physical.parent}.`);
+      }
+      if (!(companion.physical.gravitationalParameterKm3PerS2 > 0) || !(parent!.physical.gravitationalParameterKm3PerS2 > 0)) {
+        throw new TypeError(`${record.id}: the barycentre of ${record.physical.parent} and ${companionId} needs both masses; gravitationalParameterKm3PerS2 is ${parent!.physical.gravitationalParameterKm3PerS2} and ${companion.physical.gravitationalParameterKm3PerS2}.`);
+      }
+    }
   }
   return records.sort(order);
 }

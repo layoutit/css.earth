@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-16-a",
+  "angularDiameterMas": 0.08,
+  "angularDiameterSource": "Not measured: no interferometric diameter of Kepler-16 A exists. 0.08 mas is Doyle et al. (2011, Table 1)'s radius, 0.6489 solar radii, at the Gaia EDR3 distance of 75.30 pc.",
+  "distanceParsecs": 75.2978,
+  "distanceSource": "Gaia EDR3 parallax 13.2806 +/- 0.0284 mas via SIMBAD (2020yCat.1350....0G): 75.30 pc, no zero-point correction",
+  "radiusKm": 451439.73,
+  "radiusSource": "Radius 0.6489 +/- 0.0013 solar radii, mass 0.6897 (+0.0035/-0.0034) solar masses and effective temperature 4450 +/- 150 K from Doyle et al. (2011, Science 333, 1602; arXiv:1109.3432), Table 1, the photometric-dynamical model of the Kepler light curve and the radial velocities of star A: 451,439.73 km at 695,700 km per solar radius; GM is the mass times the JPL solar GM 132712440041.93938 km^3/s^2. Sebastian et al. (2025, MNRAS; arXiv:2505.19718) measure dynamical masses 2-7% higher with SOPHIE; they are not mixed into this record because Doyle's orbits were fitted with Doyle's masses. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+  "effectiveTemperatureK": 4450,
+  "effectiveTemperatureSource": "Doyle et al. (2011, Science 333, 1602; arXiv:1109.3432), Table 1: effective temperature 4450 +/- 150 K from spectroscopy of star A, https://arxiv.org/abs/1109.3432",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp."
+  }
+}

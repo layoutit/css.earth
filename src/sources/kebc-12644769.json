@@ -1,0 +1,30 @@
+{
+  "id": "kebc-12644769",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Villanova Kepler Eclipsing Binary Catalogue entry for KIC 12644769 (Kepler-16)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://keplerebs.villanova.edu/overview/?k=12644769",
+      "label": "Villanova Kepler Eclipsing Binary Catalogue"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kepler-16ab-b/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "B. Kirk, K. Conroy, A. Prša et al., Kepler Eclipsing Binary Stars. VII (AJ 151, 68, 2016)",
+      "scope": "citation",
+      "evidence": "src/objects/kepler-16ab-b/source/content/object.json#/panel/facts/1/source"
+    }
+  ],
+  "publisher": "Villanova University"
+}

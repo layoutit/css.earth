@@ -141,6 +141,9 @@ ${s} .polycss-scene s {
 `;
 }
 
+/** A radius in solar radii for the panel: whole numbers for giants, two significant figures below ten (0.65 for a K dwarf, not 1). */
+export const solarRadii = (value: number): string => value >= 10 ? String(Math.round(value)) : String(Number(value.toPrecision(2)));
+
 /** Every file of a new shape-only placed star, keyed by repository path. Pure: the caller writes them. */
 export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epochJdTt: number): Map<string, string> {
   if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A star needs a lowercase id.');
@@ -211,11 +214,11 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     effectiveTemperatureK: temperature!.kelvin, effectiveTemperatureSource: temperature!.source,
-    shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp.' } });
+    shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp.' } });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@1', version: 1, id, displayName: name,
     // A published fact names its source: the author replaces each TODO catalogue id with the entry the measurement record cites.
     panel: { facts: [
-      { id: 'radius', label: 'Radius', value: `${Math.round(radiusKm / SOLAR_RADIUS_KM)} solar radii`,
+      { id: 'radius', label: 'Radius', value: `${solarRadii(radiusKm / SOLAR_RADIUS_KM)} solar radii`,
         source: { catalogueId: `${TODO}-radius-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'radiusKm; radiusSource' } },
       { id: 'distance', label: 'Distance from the Sun', value: `${Math.round(astrometry.distanceParsecs)} parsecs`,
         source: { catalogueId: `${TODO}-distance-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'distanceParsecs; distanceSource' } },
