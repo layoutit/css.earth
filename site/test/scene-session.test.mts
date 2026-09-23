@@ -93,8 +93,8 @@ test('cancellation before handoff releases a late bank and forbids transfer', ()
 test('URL replacement stays bounded and flush failures cannot skip native or binding cleanup', async () => {
   const h = fixture(); let oldReleased = 0, currentReleased = 0;
   await h.session.activate(() => h.native(), h.stage, {}); h.session.commit();
-  h.session.setViewUrl({ async restore() {}, capture: () => null, schedule() {}, flush() {}, destroy() { oldReleased++; } });
-  h.session.setViewUrl({ async restore() {}, capture: () => null, schedule() {},
+  h.session.setViewUrl({ start() {}, capture: () => null, schedule() {}, flush() {}, destroy() { oldReleased++; } });
+  h.session.setViewUrl({ start() {}, capture: () => null, schedule() {},
     flush() { assert.equal(h.scenes.current, null); throw new Error('flush failed'); },
     destroy() { currentReleased++; throw new Error('binding cleanup failed'); },
   });
