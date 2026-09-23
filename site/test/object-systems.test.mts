@@ -9,11 +9,13 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   assert.deepEqual(systems.map(system => [system.id, system.name, system.route]),
     [[SOLAR_SYSTEM_ID, 'Solar System', '/sun/'], ['wasp-43', 'WASP-43 system', '/wasp-43/'], ['hd-189733', 'HD 189733 system', '/hd-189733/'],
       ['hd-209458', 'HD 209458 system', '/hd-209458/'], ['k2-18', 'K2-18 system', '/k2-18/'], ['kepler-186', 'Kepler-186 system', '/kepler-186/'],
-      ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'], ['wasp-39', 'WASP-39 system', '/wasp-39/']]);
+      ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'],
+      ['wasp-39', 'WASP-39 system', '/wasp-39/'], ['beta-pictoris', 'Beta Pictoris system', '/beta-pictoris/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the candidate orbits its measurements allow.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
     ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],
-    ['trappist-1e', 'trappist-1'], ['trappist-1h', 'trappist-1'], ['trappist-1', 'trappist-1']] as const) {
+    ['trappist-1e', 'trappist-1'], ['trappist-1h', 'trappist-1'], ['trappist-1', 'trappist-1'],
+    ['beta-pictoris-b', 'beta-pictoris'], ['beta-pictoris-d', 'beta-pictoris']] as const) {
     assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
   }
   assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');
@@ -23,6 +25,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   // Seven planets around one star: the largest system this application holds after the Solar System.
   assert.deepEqual(systemById(SCENE_OBJECTS, 'trappist-1')!.memberIds,
     ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'beta-pictoris')!.memberIds,
+    ['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d']);
 });
 
 test("a system's exit distance scales the Sun's 100 AU by the prepared framing radius", () => {
