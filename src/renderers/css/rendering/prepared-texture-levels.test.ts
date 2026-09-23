@@ -28,9 +28,12 @@ test('zoom hysteresis retains detail at a boundary and downgrades outside it', (
   expect(selectPreparedTextureLevel(textureLevels, null, 0)).toBe(1);
 });
 
-test('a fixed level keeps the same texture through zoom and initial publication', () => {
+test('a fixed level keeps the same texture through zoom once the prepared first pass is shown', () => {
   const fixed = { ...textureLevels, fixedLevel: 0 };
   expect(selectPreparedTextureLevel(fixed, 900, undefined, true)).toBe(0);
+  // The first pass is the small prepared bank the page already shows; the fixed level follows it and never swaps on zoom.
+  expect(selectPreparedTextureLevel({ ...textureLevels, fixedLevel: 1 }, 900, undefined, true)).toBe(0);
+  expect(selectPreparedTextureLevel({ ...textureLevels, fixedLevel: 1 }, 10, 0)).toBe(1);
   expect(selectPreparedTextureLevel(fixed, 900, 0)).toBe(0);
   expect(selectPreparedTextureLevel(fixed, null, 0)).toBe(0);
   expect(() => requireTextureLevels(fixed, variants, new Set(['a', 'b', 'a-small', 'b-small']))).not.toThrow();

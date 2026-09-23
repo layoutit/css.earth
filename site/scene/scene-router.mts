@@ -189,6 +189,11 @@ export function createSceneRouter({
         const contextual = await session.wait(Promise.all([world.ensure(), loadSystemViews()]));
         if (contextual.cancelled || !scenes.isCurrent(session)) return;
       }
+      // Start the world and system views beside the body's activation, which can wait on its surface textures;
+      // they connect once the body has mounted.
+      const worldLoading = persistentWorldContext && !world.current ? world.ensure() : null;
+      worldLoading?.catch(() => {});
+      if (!systemViewsLoaded()) void loadSystemViews().catch(report);
       const framePresenter = world.createFramePresenter();
       session.framePresenter = framePresenter;
       if (framePresenter) session.own(() => framePresenter.destroy());
@@ -202,9 +207,8 @@ export function createSceneRouter({
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
-      if (!systemViewsLoaded()) void loadSystemViews().catch(report);
       if (world.current) world.connect(session);
-      else if (persistentWorldContext) void world.ensure().then(() => {
+      else if (worldLoading) void worldLoading.then(() => {
         if (scenes.isCurrent(session)) { world.connect(session); publishSelection(); }
       }).catch(error => { if (!(error instanceof Error && error.name === 'AbortError')) report(error); });
       publishSelection();
