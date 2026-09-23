@@ -174,12 +174,17 @@
     {
       "mechanic": "SPICE kernel evaluation",
       "implementation": "tools/spice",
-      "reason": "Existing preparation consumers retain their CSPICE-checked evaluator. PlanetMapper exclusively owns SPICE geometry inside the new telescope project route; results are not mixed between evaluators."
+      "reason": "Existing preparation consumers retain their CSPICE-checked evaluator until their pinned kernel and output receipts can migrate together. The tracked LSK/PCK time and frame oracle runs without the larger ignored DART kernel bank; the full DART oracle remains the geometry qualification. PlanetMapper exclusively owns SPICE geometry inside the telescope project route; results are not mixed between evaluators."
     },
     {
       "mechanic": "streaming FITS and in-process WCS reads",
       "implementation": "tools/fits/fits.mts and tools/objects/interferometry/fits-table.mts",
-      "reason": "Existing in-process consumers retain subregion streaming. Astropy owns scientific metadata qualification through science.mts; those consumers do not implement that qualification contract."
+      "reason": "Existing in-process consumers retain subregion streaming, including repeated reads through an already open file handle. A tracked STIS image region agrees byte for byte with Astropy 8.0.1's memmap section; that one small fixture does not establish large-file memory or throughput superiority. Astropy owns scientific metadata qualification through science.mts; these consumers do not implement that qualification contract."
+    },
+    {
+      "mechanic": "eclipse-map eigensolver and small positive-definite linear systems",
+      "implementation": "tools/objects/eclipse-map/eigenmap-fit.mts",
+      "reason": "The synchronous TypeScript fit and posterior sampler keep their small linear-algebra routines. The posterior now samples directly from the existing normal-matrix Cholesky factor instead of constructing and refactoring a full inverse. NumPy oracle fixtures check eigencurves, fitted coefficients and posterior covariance. A SciPy bridge would require a measured end-to-end gain and reproduction of the same deterministic and positivity behavior before replacing this route."
     },
     {
       "mechanic": "Spitzer archive discovery and byte retrieval",
