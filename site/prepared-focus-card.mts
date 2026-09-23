@@ -30,6 +30,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')].map(bank => ({ root: bank,
     buttons: [...bank.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
     details: [...bank.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
+    contexts: [...bank.querySelectorAll<HTMLElement>('[data-dataset-context]')],
   }));
   for (const bank of banks) {
     for (const button of bank.buttons) button.addEventListener('click', event => {
@@ -58,6 +59,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
+      for (const context of bank.contexts) context.hidden = context.dataset.datasetContext !== currentPresentation.selectedLens;
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
