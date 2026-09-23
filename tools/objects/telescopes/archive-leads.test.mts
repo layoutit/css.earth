@@ -23,6 +23,22 @@ test('Keck reports live instrument counts as leads without claiming a retrievabl
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('Keck keeps searching other instrument tables after an incomplete empty response', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'koa-partial-'));
+  const queries: string[] = [];
+  try {
+    const result = await searchKeckLeads(root, target, async query => {
+      queries.push(query);
+      if (query.includes('koa_deimos') || query.includes('koa_esi')) throw new Error('TAP query was incomplete (OVERFLOW)');
+      return query.includes('koa_nirc2') ? [{ targname: 'HR8799', frames: '3' }] : [];
+    });
+    assert.equal(queries.length, 14);
+    assert.equal(result.state, 'overflow');
+    assert.deepEqual(result.instruments.map(item => [item.instrument, item.records]), [['NIRC2', 3]]);
+    assert.match(result.reason, /koa_deimos.*OVERFLOW/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('Gemini counts exact public science labels, deduplicates spelling variants, and treats HTTP rejection as unavailable', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'gemini-leads-'));
   try {
