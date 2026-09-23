@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-121-claret-2017-limb-darkening",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-121 · wasp 121 claret 2017 limb darkening",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6250..6500&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-121/source/manifest.json",
+      "locator": "/inputs/11"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Claret, A. (2017), A&A 600, A30: limb and gravity-darkening coefficients for the TESS satellite (VizieR J/A+A/600/A30, table ab)",
+      "scope": "The wasp 121 claret 2017 limb darkening input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "VizieR catalogue data, public with citation of the paper and CDS",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

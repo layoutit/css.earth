@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-121",
+  "card": {
+    "text": "F6 star in Puppis, 263 parsecs away, circled every 31 hours by a giant planet passing over its poles.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2001-06836",
+        "url": "https://arxiv.org/abs/2001.06836",
+        "label": "Bourrier et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Table 1",
+        "quote": "3D obliquity ψ North 88.1±0.25 deg"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WASP-121 is an F-type star a little larger and hotter than the Sun. Its planet WASP-121b orbits so close that it circles in 31 hours.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2506-01771",
+        "url": "https://arxiv.org/abs/2506.01771",
+        "label": "Evans-Soma et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Supplementary Tables 1 and 9",
+        "quote": "Effective temperature 6481 K; R⋆ 1.434 R⊙"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}

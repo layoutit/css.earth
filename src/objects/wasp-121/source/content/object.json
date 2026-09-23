@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-121",
+  "displayName": "WASP-121",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.43 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2506-01771",
+          "url": "https://arxiv.org/abs/2506.01771",
+          "label": "Evans-Soma et al. 2025, white phase-curve fit",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "263 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-wasp-121",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "wasp-121-lens-color.webp",
+        "surface": "wasp-121-surface-color@2x.webp",
+        "poles": "wasp-121-poles-color@2x.webp",
+        "source": {
+          "id": "wasp-121-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of the star, an F6 dwarf. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at 6,481 K and log g 4.23 (Evans-Soma et al. 2025): a model. The spin axis is not placed on the sky; the display axis is celestial north."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Evans-Soma et al. (2025), Nature Astronomy",
+      "href": "https://arxiv.org/abs/2506.01771"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2506.01771",
+      "credit": "Evans-Soma et al. (2025), Nature Astronomy"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-121.json",
+      "credit": "Radius and mass from the white phase-curve fit of Evans-Soma et al. (2025); Gaia DR3 astrometry; no placed rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2001-06836",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bourrier et al. (2020): Hot Exoplanet Atmospheres Resolved with Transit Spectroscopy (HEARTS) III. Atmospheric structure of the misaligned ultra-hot Jupiter WASP-121b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2001.06836"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201936640"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2001.06836",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201936640",
+      "label": "Astronomy & Astrophysics 635, A205"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2001.06836",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1: orbital period, inclination, eccentricity, stellar inclination and 3D obliquity"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 635, A205",
+  "creators": [
+    "V. Bourrier",
+    "D. Ehrenreich",
+    "M. Lendl",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

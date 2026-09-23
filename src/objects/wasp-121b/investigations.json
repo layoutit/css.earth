@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-121b",
+  "entries": [
+    {
+      "id": "spectroscopic-maps",
+      "subject": "Per-channel maps from the 349 spectroscopic phase curves",
+      "status": "unresolved",
+      "finding": "Evans-Soma et al. (2025) fit a starry dipole to each spectroscopic channel, but the deposit holds the phase-binned ratios and temperatures, not each channel's map coefficients. Refitting maps to them would be our own fit, second to the paper's values.",
+      "revisitWhen": "The per-channel amplitudes, Y(1,0) coefficients and offsets are published or deposited.",
+      "evidence": [
+        "https://zenodo.org/records/20651891"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "72355783b1a78142b1139fd9233507fdcd6695a3"
+        }
+      ]
+    },
+    {
+      "id": "eclipse-map",
+      "subject": "The MIRI eclipse map of Kahle et al. (submitted)",
+      "status": "unresolved",
+      "finding": "Kahle et al. (arXiv:2606.21855) report a MIRI/LRS eclipse map with a 4.8 degree eastward hotspot; the paper is submitted and its map is not in the deposit (Zenodo 20767846 holds light curves and spectra).",
+      "revisitWhen": "The paper is accepted and its map is deposited.",
+      "evidence": [
+        "https://arxiv.org/abs/2606.21855",
+        "https://zenodo.org/records/20767846"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "72355783b1a78142b1139fd9233507fdcd6695a3"
+        }
+      ]
+    },
+    {
+      "id": "wind-layers",
+      "subject": "ESPRESSO wind layers (Seidel et al. 2025, Nature)",
+      "status": "excluded",
+      "finding": "The measured winds at three heights, including an iron and sodium jet stream, are velocities along the terminator, not a surface map; a sphere cannot show them without a renderer extension.",
+      "revisitWhen": "The renderer can draw atmospheric flow over a planet.",
+      "evidence": [
+        "https://doi.org/10.1038/s41586-025-08664-1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "72355783b1a78142b1139fd9233507fdcd6695a3"
+        }
+      ]
+    },
+    {
+      "id": "tidal-shape",
+      "subject": "The tidally stretched shape of WASP-121b",
+      "status": "unresolved",
+      "finding": "The planet is expected to be stretched toward its star; Mikal-Evans et al. (2023) tried an oblate shape in their fits and found it changed nothing, and no shape is measured. It is drawn as a sphere.",
+      "revisitWhen": "A fit measures its ellipsoidal shape.",
+      "evidence": [
+        "https://arxiv.org/abs/2301.03209"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "72355783b1a78142b1139fd9233507fdcd6695a3"
+        }
+      ]
+    }
+  ]
+}

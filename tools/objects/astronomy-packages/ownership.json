@@ -177,6 +177,15 @@
       "consumers": [
         "published-phase-curve-map: WASP-76b (May et al. 2021)"
       ]
+    },
+    {
+      "mechanic": "Spherical-harmonic brightness maps, their intensities and the star-planet light curves they make, as published fits made with starry parameterise them",
+      "package": "starry",
+      "version": "1.2.0",
+      "operation": "starry.mts: starryMapGrid (Map.intensity), starrySystemFlux (System.flux), in its own environment (starry-toolchain.json)",
+      "consumers": [
+        "published-phase-curve-map: WASP-121b (Evans-Soma et al. 2025)"
+      ]
     }
   ],
   "retained": [

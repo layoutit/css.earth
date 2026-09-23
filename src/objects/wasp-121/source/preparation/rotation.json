@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 107.60023051114592,
+  "declinationDegrees": 50.90273315344043,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No rotation axis placed on the sky. Bourrier et al. (2020, A&A 635, A205, Table 1) measure the star's inclination (8.1 +3.0/-2.6 degrees if its north pole is visible) and the planet's nearly polar 3D obliquity (88.1 +/- 0.25 degrees), but not the orbit's position angle on the sky, so the spin axis has no sky direction. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement. The star's spin axis lies about 8 degrees from the line of sight (Bourrier et al. 2020), but its sky direction, spin phase and prime meridian are unmeasured; the axis shown is where celestial north lies on the sky."
+}

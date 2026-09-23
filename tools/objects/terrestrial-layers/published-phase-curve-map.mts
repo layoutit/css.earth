@@ -1,24 +1,34 @@
 /** A planet's brightness-temperature map drawn from a published phase-curve fit: the paper's own model and table values, no refit.
  *
- * Two published model forms are read:
+ * Three published model forms are read:
  * - `two-term-sinusoid`: F_p(t) = A1 cos[2 pi (t - t1)/p] + A2 cos[4 pi (t - t2)/p] + c, with c set so that F_p at mid-eclipse is the
  *   eclipse depth (the planet's whole day side). Cowan & Agol (2008, ApJ 678, L129, eq. 5) give the unique longitudinal map of such a
  *   curve for an edge-on orbit: each map sinusoid of order j makes a light-curve sinusoid of the same order and phase, scaled by
  *   2 (j = 0), pi/2 (j = 1) and 2/3 (j = 2). The map carries no latitude information and is drawn the same at every latitude.
  * - `spiderman-spherical`: the fit's SPIDERMAN spherical-harmonic coefficients, evaluated by SPIDERMAN itself
  *   (`astronomy-packages/spiderman.mts`).
+ * - `starry`: the fit's starry map (amplitude, spherical-harmonic coefficients and phase offset), evaluated by starry itself
+ *   (`astronomy-packages/starry.mts`). The offset turns the map east: starry's own frame puts the brightest point of a Y(1,0)
+ *   dipole at its longitude 0, so the map here is starry's intensity at longitude - offset.
  *
  * Both give the planet's intensity relative to the star's disc-averaged intensity, r. A uniform planet of intensity ratio r shows the
  * star a flux ratio rp^2 r, so the sinusoid map is r = 2 J / rp^2 in Cowan & Agol's units and the SPIDERMAN map r = pi v (1 + dilution) /
  * rp^2 (the same relation Rauscher et al. 2018 give, eq. 8). Brightness temperature is the Planck temperature at the band's wavelength
  * whose ratio to the star's band brightness temperature is r. The star's band temperature is the one the paper's own conversion
  * implies: the value at which its eclipse depth and radius ratio give its dayside temperature. The paper's nightside temperature,
- * converted the same way from the model's flux at mid-transit, is then an independent check, and the report carries both. */
+ * converted the same way from the model's flux at mid-transit, is then an independent check, and the report carries both.
+ *
+ * A starry fit to a white light curve is converted through the authors' own deposited spectra instead (`deposited-channels`): at
+ * each spectroscopic channel their planet-to-star ratio and brightness temperature give rp^2 / I_star = (Fp/Fs) / B(T_b), the
+ * term their own conversion used, and the star's detected counts per channel weight the channels as the white light curve sums
+ * them. A cell of starry intensity I shows the flux pi I of a uniform planet, so its brightness temperature T solves
+ * pi I = sum_c counts_c K_c B_c(T) / sum_c counts_c. A cell whose fitted intensity is not positive has no temperature. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
 import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap } from '../astronomy-packages/spiderman.mts';
+import { starryMapGrid, type StarryMap, type StarrySystem } from '../astronomy-packages/starry.mts';
 
 const cell = (value: unknown, label: string) => requireFiniteNumber(requireRecord(value, label).value, `${label}.value`);
 
@@ -29,6 +39,45 @@ export interface PublishedPhaseCurve {
   readonly source: string; readonly wavelengthMicrons: number; readonly eclipseDepth: number; readonly radiusRatio: number;
   readonly model: TwoTermSinusoid | SpidermanModel;
   readonly reported: { readonly daysideK: number; readonly nightsideK: number; readonly offsetDegrees: number; readonly amplitude?: number; readonly semiAmplitude?: number };
+}
+/** The authors' deposited spectra that convert a white-light starry map to brightness temperature (see the header). */
+export interface DepositedChannels {
+  readonly kind: 'deposited-channels'; readonly channelEdges: string; readonly planetToStarPpm: string; readonly brightnessTemperatureK: string;
+  readonly stellarSpectrumWavelengths: string; readonly stellarSpectrumCounts: string;
+}
+export interface StarryPhaseCurve {
+  readonly source: string; readonly band: string; readonly radiusRatio: number;
+  readonly model: { readonly kind: 'starry'; readonly map: StarryMap; readonly offsetDegrees: number; readonly system: StarrySystem };
+  readonly conversion: DepositedChannels;
+}
+
+const insideSource = (path: string, label: string) => {
+  if (!path || path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError(`${label} ${path} must be inside the source directory.`);
+  return path;
+};
+
+/** Reads a `cssearth-published-phase-curve@1` record whose model is a starry fit. */
+export function parseStarryPhaseCurve(value: unknown): StarryPhaseCurve {
+  const input = requireRecord(value, 'published phase curve'), model = requireRecord(input.model, 'model');
+  if (input.schema !== 'cssearth-published-phase-curve@1' || model.kind !== 'starry') throw new TypeError('A starry phase curve is a cssearth-published-phase-curve@1 record with a starry model.');
+  const map = requireRecord(model.map, 'model.map'), system = requireRecord(model.system, 'model.system');
+  const star = requireRecord(system.star, 'model.system.star'), orbit = requireRecord(system.orbit, 'model.system.orbit');
+  const conversion = requireRecord(input.conversion, 'conversion');
+  if (conversion.kind !== 'deposited-channels') throw new TypeError(`Unknown phase-curve conversion ${String(conversion.kind)}.`);
+  const path = (key: string) => insideSource(requireString(conversion[key], `conversion.${key}`), `conversion.${key}`);
+  const offsetDegrees = cell(model.offsetDegrees, 'model.offsetDegrees');
+  return { source: requireString(input.source, 'source'), band: requireString(input.band, 'band'), radiusRatio: cell(input.radiusRatio, 'radiusRatio'),
+    model: { kind: 'starry', offsetDegrees,
+      map: { ydeg: requireFiniteNumber(map.ydeg, 'model.map.ydeg'), amp: cell(map.amp, 'model.map.amp'), y: requireArray(map.y, 'model.map.y').map((entry, i) => cell(entry, `model.map.y[${i}]`)) },
+      system: {
+        star: { massSolar: cell(star.massSolar, 'star.massSolar'), radiusSolar: 10 ** cell(star.log10RadiusSolar, 'star.log10RadiusSolar'), u1: cell(star.u1, 'star.u1'), u2: cell(star.u2, 'star.u2') },
+        orbit: { planetMassSolar: cell(orbit.planetMassJupiter, 'orbit.planetMassJupiter') * cell(orbit.jupiterToSunMass, 'orbit.jupiterToSunMass'),
+          planetRadiusSolar: cell(input.radiusRatio, 'radiusRatio') * 10 ** cell(star.log10RadiusSolar, 'star.log10RadiusSolar'), periodDays: cell(orbit.periodDays, 'orbit.periodDays'),
+          transitTime: cell(orbit.transitTimeBjdTdb, 'orbit.transitTimeBjdTdb'), inclinationDegrees: cell(orbit.inclinationDegrees, 'orbit.inclinationDegrees'),
+          // starry's secondary faces the star with its map's longitude 0 at theta0 = 180 degrees; the fit's offset adds to it.
+          theta0Degrees: 180 + offsetDegrees } } },
+    conversion: { kind: 'deposited-channels', channelEdges: path('channelEdges'), planetToStarPpm: path('planetToStarPpm'), brightnessTemperatureK: path('brightnessTemperatureK'),
+      stellarSpectrumWavelengths: path('stellarSpectrumWavelengths'), stellarSpectrumCounts: path('stellarSpectrumCounts') } };
 }
 
 /** Reads `cssearth-published-phase-curve@1`: every number is a table cell `{ value, cell }` whose source the record names. */
@@ -93,7 +142,9 @@ function extremes(flux: (xi: number) => number, steps = 72000) {
 export async function loadPublishedPhaseCurveMap(root: string, value: unknown) {
   const lens = requireRecord(value, 'published phase-curve lens'), path = requireString(lens.path, 'path');
   if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('A published phase curve must be inside the source directory.');
-  const record = parsePublishedPhaseCurve(JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown);
+  const json = JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
+  if (requireRecord(requireRecord(json, 'published phase curve').model, 'model').kind === 'starry') return loadStarryPhaseCurveMap(root, parseStarryPhaseCurve(json));
+  const record = parsePublishedPhaseCurve(json);
   const { wavelengthMicrons: wavelength, radiusRatio: k, eclipseDepth } = record;
   const starK = impliedStellarTemperature(eclipseDepth, k, record.reported.daysideK, wavelength);
   const toK = (ratio: number) => brightnessTemperature(ratio, starK, wavelength);
@@ -143,6 +194,98 @@ export async function loadPublishedPhaseCurveMap(root: string, value: unknown) {
       derived: { daysideFlux: c + semi, nightsideFlux: c - semi, semiAmplitude: semi, peakDegreesAfterEclipse: Math.atan2(b, a) * 180 / Math.PI,
         daysideK: toK((c + semi) / k ** 2), nightsideK: toK((c - semi) / k ** 2), nonPositiveAreaFraction: negative / cells },
       reported: record.reported },
+  };
+}
+
+/** A deposited plain-text table: '#' header lines, then rows of whitespace-separated numbers. `row` sees each row in order. */
+async function readDepositedRows(root: string, path: string, row: (values: number[], index: number) => void) {
+  const text = await readFile(resolve(root, path), 'utf8');
+  let index = 0, start = 0;
+  while (start < text.length) {
+    let end = text.indexOf('\n', start); if (end < 0) end = text.length;
+    const line = text.slice(start, end).trim(); start = end + 1;
+    if (!line || line.startsWith('#')) continue;
+    const values = line.split(/\s+/u).map(Number);
+    if (values.some(value => !Number.isFinite(value))) throw new TypeError(`${path}: row ${index + 1} is not all numbers.`);
+    row(values, index++);
+  }
+  return index;
+}
+
+/** Each channel's rp^2 / I_star from the authors' ratio and brightness temperature at every phase bin, and the star's mean detected
+ * counts in each channel from its 1D spectra. Channels the detector does not cover have no counts. */
+export async function depositedChannelWeights(root: string, conversion: DepositedChannels) {
+  const edges: [number, number][] = [];
+  await readDepositedRows(root, conversion.channelEdges, values => { if (values.length !== 2) throw new TypeError(`${conversion.channelEdges}: a channel has a lower and an upper edge.`); edges.push([values[0]!, values[1]!]); });
+  const ratio: number[][] = [], temperature: number[][] = [];
+  await readDepositedRows(root, conversion.planetToStarPpm, values => ratio.push(values));
+  await readDepositedRows(root, conversion.brightnessTemperatureK, values => temperature.push(values));
+  // The deposited arrays hold one row per phase bin and one column per channel.
+  if (ratio.length !== temperature.length || ratio.some((row, i) => row.length !== edges.length || temperature[i]!.length !== edges.length)) {
+    throw new TypeError(`${conversion.planetToStarPpm} and ${conversion.brightnessTemperatureK} must be phase bins by ${edges.length} channels.`);
+  }
+  const centre = edges.map(([low, high]) => (low + high) / 2);
+  const term = edges.map((_, c) => {
+    const samples = ratio.map((row, k) => row[c]! > 0 && temperature[k]![c]! > 0 ? row[c]! * 1e-6 / planckRadiance(centre[c]!, temperature[k]![c]!) : NaN).filter(Number.isFinite).sort((a, b) => a - b);
+    if (!samples.length) throw new TypeError(`${conversion.planetToStarPpm}: channel ${c} has no positive ratio and temperature.`);
+    return { median: samples[samples.length >> 1]!, spread: (samples.at(-1)! - samples[0]!) / samples[samples.length >> 1]! };
+  });
+  const wavelengths: number[] = [];
+  await readDepositedRows(root, conversion.stellarSpectrumWavelengths, values => wavelengths.push(values[0]!));
+  const sums = new Float64Array(wavelengths.length);
+  const integrations = await readDepositedRows(root, conversion.stellarSpectrumCounts, values => {
+    if (values.length !== wavelengths.length) throw new TypeError(`${conversion.stellarSpectrumCounts}: a spectrum has ${values.length} columns, not ${wavelengths.length}.`);
+    values.forEach((value, i) => { sums[i] += value; });
+  });
+  const counts = edges.map(([low, high]) => wavelengths.reduce((sum, w, i) => w >= low && w < high ? sum + sums[i]! / integrations : sum, 0));
+  const channels = edges.map((edge, c) => ({ edge, centre: centre[c]!, term: term[c]!.median, spread: term[c]!.spread, counts: counts[c]! })).filter(channel => channel.counts > 0);
+  if (!channels.length) throw new TypeError(`${conversion.stellarSpectrumCounts} covers none of the channels.`);
+  return { channels, integrations, phaseBins: ratio.length };
+}
+
+/** Brightness temperature from the flux of a uniform planet, pi I, through the channel weights: a table in temperature, inverted. */
+function channelTemperature(channels: Awaited<ReturnType<typeof depositedChannelWeights>>['channels']) {
+  const total = channels.reduce((sum, channel) => sum + channel.counts, 0);
+  const flux = (kelvin: number) => channels.reduce((sum, channel) => sum + channel.counts * channel.term * planckRadiance(channel.centre, kelvin), 0) / total;
+  const step = 0.25, table = Float64Array.from({ length: 24000 }, (_, i) => flux(1 + i * step));
+  return (piIntensity: number) => {
+    if (!(piIntensity > 0)) return null;
+    if (piIntensity >= table.at(-1)!) throw new RangeError(`A planet flux of ${piIntensity} is hotter than the ${1 + (table.length - 1) * step} K table.`);
+    let low = 0, high = table.length - 1;
+    while (high - low > 1) { const mid = (low + high) >> 1; if (table[mid]! < piIntensity) low = mid; else high = mid; }
+    if (piIntensity <= table[0]!) return 1;
+    return 1 + (low + (piIntensity - table[low]!) / (table[high]! - table[low]!)) * step;
+  };
+}
+
+async function loadStarryPhaseCurveMap(root: string, record: StarryPhaseCurve) {
+  const { map, offsetDegrees } = record.model, step = 1, latitudes: number[] = [], longitudes: number[] = [];
+  for (let lat = -90; lat <= 90; lat += step) latitudes.push(lat);
+  for (let lon = -180; lon <= 180; lon += step) longitudes.push(lon);
+  // Longitude here is east of the substellar point; starry's own frame has the dipole's peak at its longitude 0 (see the header).
+  const grid = starryMapGrid(map, latitudes, longitudes.map(lon => lon - offsetDegrees));
+  const weights = await depositedChannelWeights(root, record.conversion), toK = channelTemperature(weights.channels);
+  const intensity = (longitude: number, latitude: number) => {
+    const x = (((longitude + 180) % 360 + 360) % 360) / step, yy = (latitude + 90) / step;
+    const x0 = Math.min(longitudes.length - 2, Math.floor(x)), y0 = Math.min(latitudes.length - 2, Math.floor(yy)), dx = x - x0, dy = yy - y0;
+    return grid.values[y0]![x0]! * (1 - dx) * (1 - dy) + grid.values[y0]![x0 + 1]! * dx * (1 - dy) + grid.values[y0 + 1]![x0]! * (1 - dx) * dy + grid.values[y0 + 1]![x0 + 1]! * dx * dy;
+  };
+  let hottest = { kelvin: -Infinity, latitude: 0, longitude: 0 }, negative = 0, cells = 0;
+  for (let row = 0; row < latitudes.length; row++) for (let column = 0; column < longitudes.length - 1; column++) {
+    const value = grid.values[row]![column]!, weight = Math.cos(latitudes[row]! * Math.PI / 180);
+    cells += weight; if (value <= 0) negative += weight;
+    const kelvin = toK(Math.PI * value);
+    if (kelvin !== null && kelvin > hottest.kelvin) hottest = { kelvin, latitude: latitudes[row]!, longitude: longitudes[column]! };
+  }
+  return {
+    sample(longitude: number, latitude: number) {
+      if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
+      return toK(Math.PI * intensity(longitude, latitude));
+    },
+    report: { format: 'published-phase-curve-map', units: 'K', source: record.source, band: record.band, model: 'starry', starry: grid.starry, numpy: grid.numpy,
+      starryMap: map, offsetDegrees, conversion: { kind: 'deposited-channels', channels: weights.channels.length, integrations: weights.integrations, phaseBins: weights.phaseBins,
+        wavelengthsMicrons: [weights.channels[0]!.edge[0], weights.channels.at(-1)!.edge[1]], largestTermSpread: Math.max(...weights.channels.map(channel => channel.spread)) },
+      derived: { hottest, substellarK: toK(Math.PI * intensity(0, 0)), nonPositiveAreaFraction: negative / cells } },
   };
 }
 

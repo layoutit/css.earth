@@ -1,0 +1,537 @@
+{
+  "schema": "cssearth-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "wasp-121b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/2506.01771",
+      "credit": "Evans-Soma et al. (2025), Nature Astronomy",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-121b-inter-title-font",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, self-luminous with transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "wasp-121b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-121b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the hosted planet, no directional light",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "wasp-121b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-121b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "wasp-121b-phase-curve-nrs1",
+      "path": "science/evans-soma-2025/phase-curve-nrs1.json",
+      "origin": "https://arxiv.org/abs/2506.01771",
+      "credit": "Evans-Soma et al. (2025), Nature Astronomy 9, 845",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from Supplementary Table 1 (white phase-curve fit, best-fit column, NRS1, 2.7 to 3.7 um) of the arXiv version, with the paths of the deposited spectra that convert the map to temperature",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Table values transcribed in this package with their cells; repinned when edited."
+      }
+    },
+    {
+      "id": "wasp-121b-phase-curve-nrs2",
+      "path": "science/evans-soma-2025/phase-curve-nrs2.json",
+      "origin": "https://arxiv.org/abs/2506.01771",
+      "credit": "Evans-Soma et al. (2025), Nature Astronomy 9, 845",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from Supplementary Table 1 (white phase-curve fit, best-fit column, NRS2, 3.8 to 5.2 um) of the arXiv version, with the paths of the deposited spectra that convert the map to temperature",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Table values transcribed in this package with their cells; repinned when edited."
+      }
+    },
+    {
+      "id": "wasp-121b-emspec-wav",
+      "path": "science/evans-soma-2025/emspec_wav.txt",
+      "origin": "https://zenodo.org/records/20651891/files/emspec_wav.txt?download=1",
+      "productId": "emspec_wav.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "Wavelength channel edges of the phase-binned spectra: 349 channels, 2.73 to 5.17 um",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file emspec_wav.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-emspec-fpfs-vals",
+      "path": "science/evans-soma-2025/emspec_fpfs_vals.txt",
+      "origin": "https://zenodo.org/records/20651891/files/emspec_fpfs_vals.txt?download=1",
+      "productId": "emspec_fpfs_vals.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "Planet-to-star flux ratio spectra in 36 phase bins, ppm",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file emspec_fpfs_vals.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-emspec-tbright-vals",
+      "path": "science/evans-soma-2025/emspec_tbright_vals.txt",
+      "origin": "https://zenodo.org/records/20651891/files/emspec_tbright_vals.txt?download=1",
+      "productId": "emspec_tbright_vals.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "Brightness temperature spectra in 36 phase bins, K",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file emspec_tbright_vals.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-spectra1d-wav-nrs1",
+      "path": "science/evans-soma-2025/spectra1d_wav_nrs1.txt",
+      "origin": "https://zenodo.org/records/20651891/files/spectra1d_wav_nrs1.txt?download=1",
+      "productId": "spectra1d_wav_nrs1.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "Wavelengths of the NRS1 1D stellar spectra, um",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file spectra1d_wav_nrs1.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-spectra1d-vals-nrs1",
+      "path": "science/evans-soma-2025/spectra1d_vals_nrs1.txt",
+      "origin": "https://zenodo.org/records/20651891/files/spectra1d_vals_nrs1.txt?download=1",
+      "productId": "spectra1d_vals_nrs1.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "NRS1 1D spectra of every integration, electrons per second",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file spectra1d_vals_nrs1.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-spectra1d-wav-nrs2",
+      "path": "science/evans-soma-2025/spectra1d_wav_nrs2.txt",
+      "origin": "https://zenodo.org/records/20651891/files/spectra1d_wav_nrs2.txt?download=1",
+      "productId": "spectra1d_wav_nrs2.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "Wavelengths of the NRS2 1D stellar spectra, um",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file spectra1d_wav_nrs2.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-spectra1d-vals-nrs2",
+      "path": "science/evans-soma-2025/spectra1d_vals_nrs2.txt",
+      "origin": "https://zenodo.org/records/20651891/files/spectra1d_vals_nrs2.txt?download=1",
+      "productId": "spectra1d_vals_nrs2.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "NRS2 1D spectra of every integration, electrons per second",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file spectra1d_vals_nrs2.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-starry-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-whitelc-model-nrs1",
+      "path": "science/evans-soma-2025/whitelc_model_nrs1.txt",
+      "origin": "https://zenodo.org/records/20651891/files/whitelc_model_nrs1.txt?download=1",
+      "productId": "whitelc_model_nrs1.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "NRS1 white light curve best-fit models: systematics and starry physical components",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file whitelc_model_nrs1.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-orientation-check"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-121b-whitelc-model-nrs2",
+      "path": "science/evans-soma-2025/whitelc_model_nrs2.txt",
+      "origin": "https://zenodo.org/records/20651891/files/whitelc_model_nrs2.txt?download=1",
+      "productId": "whitelc_model_nrs2.txt",
+      "version": "10.5281/zenodo.20651891",
+      "title": "NRS2 white light curve best-fit models: systematics and starry physical components",
+      "sourceUrl": "https://zenodo.org/records/20651891",
+      "credit": "T. M. Evans-Soma et al. (2025); JWST NIRSpec G395H, GO program 1729",
+      "displayCredit": "Evans-Soma et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/20651891",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "The Zenodo file whitelc_model_nrs2.txt, downloaded unchanged by source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "evans-soma-2025-orientation-check"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-20651891",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/20651891"
+          },
+          {
+            "catalogueId": "arxiv-2506-01771",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2506.01771"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "map-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/2506.01771",
+      "credit": "The Evans-Soma et al. (2025) NRS1 brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "inputs": [
+          "wasp-121b-phase-curve-nrs1",
+          "wasp-121b-emspec-wav",
+          "wasp-121b-emspec-fpfs-vals",
+          "wasp-121b-emspec-tbright-vals",
+          "wasp-121b-spectra1d-wav-nrs1",
+          "wasp-121b-spectra1d-vals-nrs1",
+          "wasp-121b-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default lens rendered as the dayside disc; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL"
+    },
+    {
+      "path": "presentation/title-mark.json"
+    }
+  ]
+}

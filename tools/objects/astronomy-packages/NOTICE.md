@@ -92,3 +92,13 @@ its own ignored environment ([spiderman-toolchain.json](spiderman-toolchain.json
 imports. cssEarth does not copy or modify SPIDERMAN source code; the runner registers an empty `matplotlib._png` module in place of
 one its plotting code imports and Matplotlib 3.3 removed. SPIDERMAN is copyright 2016 Tom Louden and distributed under the MIT
 license of its repository, reproduced in [SPIDERMAN-LICENSE.txt](SPIDERMAN-LICENSE.txt); its PyPI metadata names GNU GPLv3.
+
+# starry
+
+cssEarth uses [starry 1.2.0](https://pypi.org/project/starry/1.2.0/) (Luger et al. 2019, AJ 157, 64,
+[doi:10.3847/1538-3881/aae8e5](https://doi.org/10.3847/1538-3881/aae8e5)) to evaluate spherical-harmonic brightness maps that published
+phase-curve fits made with it, and the star-planet light curves those maps give. It is installed from hash-pinned PyPI releases into
+its own ignored environment ([starry-toolchain.json](starry-toolchain.json) says why), with Theano-PyMC 1.1.2, PyMC3 3.11.5 and exoplanet
+0.5.3, which it imports. cssEarth does not copy or modify starry source code; the runner removes the `-fno-exceptions` compiler flag
+that PyMC3 adds, because starry's compiled operators throw C++ exceptions. starry is copyright 2019–2021 Rodrigo Luger and distributed
+under the MIT license, reproduced in [STARRY-LICENSE.txt](STARRY-LICENSE.txt).
