@@ -1,15 +1,12 @@
 import { createObjectBrowserController } from './object-browser.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { SCENE_OBJECTS } from './objects.mts';
-import type { OverviewScope } from './overview-context.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { selectionKey } from './scene-selection.mts';
-import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import type { ShellCamera, PlaybackState } from './browser-types.mts';
 import { errorMessage, requiredElement } from './browser-types.mts';
-import type { ObjectEntry } from './object-schema.mts';
 import type { NavigationContent } from './navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
@@ -25,13 +22,6 @@ import { createSheetController } from './shell-sheet.mts';
 import { createSettingsController } from './shell-settings.mts';
 import { mountInformationCard, createInformationTabsController, createTabsController, restoreInformationPanels, objectCardPreview } from './information-card.mts';
 import type { ObjectShell, ShellOptions, ShellNavigationTarget, ShellNavigationTransition } from './object-shell-types.mts';
-
-interface SelectionPreview {
-  id: string | null;
-  frame?: PreparedWorldCameraFrame | null;
-  commit(): void;
-  restore(): void;
-}
 
 export function mountObjectShell({
   objectId,
@@ -65,9 +55,7 @@ export function mountObjectShell({
   let contentLifetime: SceneLifetime | null = null;
   let minimapController: ReturnType<typeof createSurfaceMinimap>;
   let viewReadout: ReturnType<typeof createViewReadout>;
-  let selectionPreview: SelectionPreview | null = null;
-  let navigationTransition: ShellNavigationTransition | null = null;
-  let cardNavigation: { view: 'detail' | 'overview' } | null = null;
+  let navigationTransition: (ShellNavigationTransition & { cardView: 'detail' | 'overview' | null }) | null = null;
   let camera: ShellCamera | null = null;
   let unsubscribeCamera: (() => void) | null = null;
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
@@ -80,8 +68,8 @@ export function mountObjectShell({
   function updateBodyCard(world = camera?.navigation?.capture()) {
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
     const previous = information?.dataset.cardView;
-    const view = cardNavigation?.view ?? bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
-      camera?.navigation?.optics?.(), selectionPreview?.id ?? objectId,
+    const view = navigationTransition?.cardView ?? bodyCardViewAtCamera(world, camera?.navigation?.frame,
+      camera?.navigation?.optics?.(), objectId,
       previous === 'detail' || previous === 'overview' ? previous : undefined);
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
   }
@@ -156,134 +144,92 @@ export function mountObjectShell({
   function beginNavigation(target: ShellNavigationTarget): ShellNavigationTransition | null {
     if (lifetime.disposed) return null;
     navigationTransition?.dispose();
-    let preview: SelectionPreview | null = null;
-    let releaseCard: (() => void) | undefined;
-    try {
-      if (target.kind === 'object') {
-        releaseCard = beginCardNavigation(target.object, target.targetWorldCamera);
-        preview = beginObjectSelection(target.object);
-      } else if (target.preview) {
-        preview = beginOverviewSelection(target.overview.scope, target.overview.systemId);
-      }
-    } catch (error) {
-      releaseCard?.();
-      throw error;
-    }
+    const previewLifetime = createSceneLifetime();
     let arrived = false;
-    const transition: ShellNavigationTransition = {
+    let restoreBrowser = () => {};
+    let settleCard = (_keep: boolean) => {};
+    const settlePreview = (keep: boolean) => {
+      previewLifetime.destroy();
+      settleCard(keep);
+      if (!keep) restoreBrowser();
+    };
+    const transition: NonNullable<typeof navigationTransition> = {
+      // Classify the endpoint once; intermediate flight poses must not toggle
+      // the destination's retained overview/detail card.
+      cardView: target.kind === 'object' ? (target.targetWorldCamera
+        ? bodyCardViewAtCamera(target.targetWorldCamera, target.object.worldFrame, camera?.navigation?.optics?.(), target.object.id)
+        : 'detail') : null,
       arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;
-        const preserveSidebar = content !== undefined && preview?.id === content.id;
-        // A content handoff can retain its previewed card. An in-place arrival
-        // commits the requested subject without replacing the mounted body.
-        const acceptsPreview = content ? preserveSidebar : (subject.kind === 'overview') === (target.kind === 'overview');
-        if (acceptsPreview) preview?.commit();
-        else preview?.restore();
+        const preserveSidebar = content !== undefined && target.kind === 'object' && target.object.id === content.id;
+        const keep = content ? preserveSidebar : (subject.kind === 'overview') === (target.kind === 'overview');
+        // Invalidate pending fragment callbacks before committing or restoring DOM.
+        arrived = true;
+        settlePreview(keep);
         if (content) setObject(content, { preserveSidebar });
         presentSelection();
-        arrived = true;
       },
       dispose() {
         if (navigationTransition !== transition) return;
         navigationTransition = null;
-        try { if (!arrived) preview?.restore(); }
-        finally { releaseCard?.(); }
+        try { if (!arrived) settlePreview(false); }
+        finally { updateBodyCard(); }
       },
     };
     navigationTransition = transition;
-    return transition;
-  }
-
-  function beginCardNavigation(object: ObjectEntry, targetWorldCamera?: WorldCameraPose) {
-    // Classify the endpoint once. Intermediate flight poses and the camera
-    // handoff must not toggle the destination's retained overview/detail card.
-    const transition: { view: 'detail' | 'overview' } = { view: targetWorldCamera
-      ? bodyCardViewAtCamera(targetWorldCamera, object.worldFrame, camera?.navigation?.optics?.(), object.id)
-      : 'detail' };
-    cardNavigation = transition;
-    return () => {
-      if (cardNavigation !== transition) return;
-      cardNavigation = null;
-      updateBodyCard();
-    };
-  }
-  function beginOverviewSelection(scope: OverviewScope, systemId: string) {
-    const restoreBrowser = objectBrowser.previewOverview(scope, systemId);
-    const preview = { id: null, commit() { selectionPreview = null; }, restore() {
-      if (selectionPreview !== preview) return;
-      selectionPreview = null;
-      restoreBrowser();
-    } };
-    selectionPreview = preview;
-    return preview;
-  }
-  function beginObjectSelection(object: ObjectEntry) {
-    sheet.showSelection();
-    if (object.id === objectId) {
-      const restoreBrowser = objectBrowser.previewObject(object.id);
-      const preview = { id: object.id, commit() { selectionPreview = null; }, restore() {
-        if (selectionPreview !== preview) return;
-        selectionPreview = null; restoreBrowser();
-      } };
-      selectionPreview = preview;
-      updateBodyCard();
-      return preview;
-    }
-    const information = requiredElement(drawer, '.object-information-panel');
-    const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.id);
-    const previousBusy = information.ariaBusy;
-    const previewLifetime = createSceneLifetime();
-    let pendingControls: (readonly [HTMLElement, boolean])[] = [];
-    const showCard = (card: Element) => {
-      information.replaceChildren(...[...card.childNodes].map(node => documentTarget.importNode(node, true)));
-      restoreInformationPanels(information, object.id, windowTarget);
-      for (const map of information.querySelectorAll<HTMLElement>('.object-surface-minimap')) {
-        if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
+    try {
+      if (target.kind === 'overview') {
+        if (target.preview) restoreBrowser = objectBrowser.previewSelection({ kind: 'overview', overview: target.overview });
+      } else {
+        const object = target.object;
+        sheet.showSelection();
+        restoreBrowser = objectBrowser.previewSelection({ kind: 'object', objectId: object.id });
+        if (object.id !== objectId) {
+          const panel = requiredElement(drawer, '.object-information-panel');
+          const previous = [...panel.childNodes], previousBusy = panel.ariaBusy;
+          let pendingControls: (readonly [HTMLElement, boolean])[] = [];
+          settleCard = keep => {
+            if (keep) { for (const [node, inert] of pendingControls) node.inert = inert; }
+            else panel.replaceChildren(...previous);
+            panel.ariaBusy = previousBusy;
+          };
+          const showCard = (card: Element) => {
+            panel.replaceChildren(...[...card.childNodes].map(node => documentTarget.importNode(node, true)));
+            restoreInformationPanels(panel, object.id, windowTarget);
+            for (const map of panel.querySelectorAll<HTMLElement>('.object-surface-minimap')) {
+              if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
+            }
+            // Detail controls wait for their renderer; navigation stays usable
+            // so another destination can supersede this request.
+            pendingControls = [...panel.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]')]
+              .filter(node => node.dataset.informationGroup !== 'overview')
+              .map(node => [node, node.inert] as const);
+            for (const [node] of pendingControls) node.inert = true;
+            createInformationTabsController(drawer, previewLifetime, 'overview');
+          };
+          const cached = fragments.peek(object.id);
+          const card = cached?.document.querySelector('.object-information-panel');
+          if (cached && card) {
+            try { showCard(card); } finally { cached.release(); }
+          } else {
+            cached?.release();
+            panel.replaceChildren(objectCardPreview(documentTarget, object));
+            fragments.get(object.id).then(fragment => {
+              try {
+                const card = fragment.document.querySelector('.object-information-panel');
+                if (card && navigationTransition === transition && !arrived) { showCard(card); updateBodyCard(); }
+              } finally { fragment.release(); }
+            }, () => {});
+          }
+          panel.ariaBusy = 'true';
+        }
+        updateBodyCard();
       }
-      // Detail controls wait for their renderer; navigation anchors stay usable
-      // so another breadcrumb or moon can replace an in-progress selection.
-      pendingControls = [...information.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]')]
-        .filter(node => node.dataset.informationGroup !== 'overview')
-        .map(node => [node, node.inert] as const);
-      for (const [node] of pendingControls) node.inert = true;
-      createInformationTabsController(drawer, previewLifetime, 'overview');
-    };
-    // The destination's static fragment is its card; intent usually fetched it.
-    const cached = fragments.peek(object.id);
-    const card = cached?.document.querySelector('.object-information-panel');
-    if (cached && card) {
-      try { showCard(card); } finally { cached.release(); }
+      return transition;
+    } catch (error) {
+      transition.dispose();
+      throw error;
     }
-    else {
-      cached?.release();
-      // Registry facts show at once; the card follows its fragment without
-      // blocking the flight. A failed fragment fails the destination load.
-      information.replaceChildren(objectCardPreview(documentTarget, object));
-      fragments.get(object.id).then(fragment => {
-        try {
-          const arrived = fragment.document.querySelector('.object-information-panel');
-          if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
-        } finally { fragment.release(); }
-      }, () => {});
-    }
-    information.ariaBusy = 'true';
-    const preview = { id: object.id, frame: object.worldFrame, commit() {
-      previewLifetime.destroy();
-      selectionPreview = null;
-      information.ariaBusy = previousBusy;
-      for (const [node, inert] of pendingControls) node.inert = inert;
-    }, restore() {
-      if (selectionPreview !== preview) return;
-      previewLifetime.destroy();
-      selectionPreview = null;
-      information.replaceChildren(...previous);
-      information.ariaBusy = previousBusy;
-      restoreBrowser();
-      updateBodyCard();
-    } };
-    selectionPreview = preview;
-    updateBodyCard();
-    return preview;
   }
 
   function setObject(content: NavigationContent, { preserveSidebar = false } = {}) {
