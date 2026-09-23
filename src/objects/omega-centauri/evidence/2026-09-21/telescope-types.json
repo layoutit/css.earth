@@ -6,7 +6,7 @@
   "incoming": "3aebc31094dff8332755b394b88c708b7c3f1062",
   "files": [
     {
-      "path": "tools/objects/telescopes/families/f16/f16-spatial-physical.mts",
+      "path": "tools/objects/telescopes/families/f16-spatial-physical.mts",
       "incomingSha256": "d217fdf190150c814c0a214ebd868a939cf0db04385ab0ee49485d17b0564427",
       "stagedEqualsIncoming": true,
       "modifiedSha256": "635e1b6e6bea9e3753267aebee52c1a30e5d66f08a12caf2fd7600a727508fb0",
@@ -69,7 +69,7 @@
       "typedFiles": 1758
     },
     {
-      "command": "node --test tools/objects/telescopes/families/f16/f16-spatial-physical.test.mts tools/objects/telescopes/families/f14-healpix.test.mts tools/objects/telescopes/family-request.test.mts tools/objects/telescopes/family-request-session.test.mts tools/objects/telescopes/local-import.test.mts tools/objects/telescopes/session.test.mts tools/objects/telescopes/vo/session.test.mts",
+      "command": "node --test tools/objects/telescopes/families/f16-spatial-physical.test.mts tools/objects/telescopes/families/f14-healpix.test.mts tools/objects/telescopes/family-request.test.mts tools/objects/telescopes/family-request-session.test.mts tools/objects/telescopes/local-import.test.mts tools/objects/telescopes/session.test.mts tools/objects/telescopes/vo/session.test.mts",
       "exitCode": 1,
       "tests": 26,
       "passed": 21,
