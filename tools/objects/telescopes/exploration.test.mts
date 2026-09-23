@@ -74,6 +74,21 @@ test('an OPUS service joins the provider list and a target unknown to OPUS stays
   assert.deepEqual(answer.issues.map(issue=>[issue.code,issue.identity]),[['provider-target-unknown',opus.service]]);
 });
 
+test('source intake failures remain actionable in exploration without hiding selectable products', () => {
+  const source = { id: 'image', target: 'sun', telescope: 'Fixture', mode: 'camera', kind: 'image' as const,
+    archiveProductId: 'archive-image', decoder: 'fits-image' as const, files: [], identity: { OBJECT: 'SUN' },
+    units: 'counts', meaning: 'fixture', citation: 'https://example.test/', limitations: [], qualified: false, receipt: 'image.receipt' };
+  const answer = explorationAnswer({ target: 'sun' }, { ledgers: [], capabilities: [], targetCatalogue: [{ id: 'sun', name: 'Sun', aliases: [] }],
+    targetAssociations: [], bodyMaps: [], sourceProducts: [source], qualifiedProducts: [], sourceIntakeIssues: [
+      { path: 'broken.lbl', state: 'incomplete', reason: 'PDS product identity is absent.' },
+      { path: 'extensions.fits', state: 'unsupported', reason: 'Extension-only products need an explicit observation declaration.' },
+    ] });
+  assert.equal(answer.choices.length, 1);
+  assert.equal(answer.choices[0]!.state, 'qualify');
+  assert.deepEqual(answer.unresolved, [{ scope: 'indexed-source', code: 'coverage', identity: 'broken.lbl', reason: 'PDS product identity is absent.' }]);
+  assert.deepEqual(answer.unsupported, [{ scope: 'indexed-source', code: 'unsupported-observation', identity: 'extensions.fits', reason: 'Extension-only products need an explicit observation declaration.' }]);
+});
+
 test('explicit family filters separate known mismatches from selectable choices',()=>{
   const source={id:'image',target:'sun',telescope:'Fixture',mode:'camera',kind:'image' as const,archiveProductId:'archive-image',decoder:'fits-image' as const,files:[],identity:{OBJECT:'SUN'},units:'counts',meaning:'fixture',citation:'https://example.test/',limitations:[],qualified:false,receipt:'image.receipt'};
   const answer=explorationAnswer({target:'sun',family:'F16'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'sun',name:'Sun',aliases:[]}],targetAssociations:[],bodyMaps:[],sourceProducts:[source],qualifiedProducts:[]});
