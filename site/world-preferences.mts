@@ -1,5 +1,3 @@
-import type { ShellOptions } from './object-shell-types.mts';
-
 interface WorldPreferencesTarget {
   setHeliosphereEnabled?(enabled: boolean): void;
   setIllustrationModelsEnabled?(enabled: boolean): void;
@@ -8,14 +6,34 @@ interface WorldPreferencesTarget {
   setHighlightedClassification?(classification: string | null): void;
 }
 
-/** Display intent survives detail replacement and is replayed when the retained world mounts. */
-export function createWorldPreferences() {
-  const state = {
-    heliosphereEnabled: false, illustrationModelsEnabled: false,
+export interface WorldPreferencesState {
+  motionEnabled: boolean;
+  heliosphereEnabled: boolean;
+  illustrationModelsEnabled: boolean;
+  surfaceLabelsEnabled: boolean;
+  minimapEnabled: boolean;
+  threeDStarsEnabled: boolean;
+  highlightedClassification: string | null;
+}
+export interface WorldPreferences {
+  readonly state: Readonly<WorldPreferencesState>;
+  set<K extends keyof WorldPreferencesState>(key: K, value: WorldPreferencesState[K]): void;
+  subscribe(listener: (key: keyof WorldPreferencesState) => void): () => void;
+}
+
+/** Application intent survives scene and card replacement. Controls and the world only project it. */
+export function createWorldPreferences({ getWorld, onMotionChange }: {
+  getWorld(): WorldPreferencesTarget | null;
+  onMotionChange(): void;
+}) {
+  let state: Readonly<WorldPreferencesState> = Object.freeze({
+    motionEnabled: false, heliosphereEnabled: false, illustrationModelsEnabled: false,
     surfaceLabelsEnabled: false, minimapEnabled: false, threeDStarsEnabled: false,
-    highlightedClassification: null as string | null,
-  };
-  const setters: { [K in keyof typeof state]: (world: WorldPreferencesTarget, value: typeof state[K]) => void } = {
+    highlightedClassification: null,
+  });
+  const listeners = new Set<(key: keyof WorldPreferencesState) => void>();
+  const setters: { [K in keyof WorldPreferencesState]: (world: WorldPreferencesTarget, value: WorldPreferencesState[K]) => void } = {
+    motionEnabled: () => {},
     heliosphereEnabled: (world, value) => world.setHeliosphereEnabled?.(value),
     illustrationModelsEnabled: (world, value) => world.setIllustrationModelsEnabled?.(value),
     surfaceLabelsEnabled: () => {},
@@ -23,27 +41,28 @@ export function createWorldPreferences() {
     threeDStarsEnabled: (world, value) => world.setThreeDStarsEnabled?.(value),
     highlightedClassification: (world, value) => world.setHighlightedClassification?.(value),
   };
+  function set<K extends keyof WorldPreferencesState>(key: K, value: WorldPreferencesState[K]) {
+    if (state[key] === value) return;
+    state = Object.freeze({ ...state, [key]: value });
+    const world = getWorld();
+    if (world) setters[key](world, value);
+    for (const listener of listeners) listener(key);
+    if (key === 'motionEnabled') onMotionChange();
+  }
+  const subscribe: WorldPreferences['subscribe'] = listener => {
+    listeners.add(listener);
+    return () => { listeners.delete(listener); };
+  };
   return {
+    get state() { return state; }, set, subscribe,
     apply(world: WorldPreferencesTarget) {
-      function apply<K extends keyof typeof state>(key: K) { setters[key](world, state[key]); }
-      for (const key of Object.keys(setters) as (keyof typeof state)[]) apply(key);
+      function apply<K extends keyof WorldPreferencesState>(key: K) { setters[key](world, state[key]); }
+      for (const key of Object.keys(setters) as (keyof WorldPreferencesState)[]) apply(key);
     },
-    bind(isCurrent: () => boolean, getWorld: () => WorldPreferencesTarget | null) {
-      function update<K extends keyof typeof state>(key: K, value: typeof state[K]) {
-        if (!isCurrent()) return;
-        state[key] = value;
-        const world = getWorld();
-        if (world) setters[key](world, value);
-      }
-      return {
-        ...state,
-        onHeliosphereChange: value => update('heliosphereEnabled', value === true),
-        onIllustrationModelsChange: value => update('illustrationModelsEnabled', value === true),
-        onSurfaceLabelsChange: value => update('surfaceLabelsEnabled', value === true),
-        onMinimapChange: value => update('minimapEnabled', value === true),
-        onThreeDStarsChange: value => update('threeDStarsEnabled', value === true),
-        onCategoryChange: value => update('highlightedClassification', value),
-      } satisfies Partial<ShellOptions>;
+    bind(isCurrent: () => boolean): WorldPreferences {
+      return { get state() { return state; }, subscribe,
+        set(key, value) { if (isCurrent()) set(key, value); },
+      };
     },
   };
 }

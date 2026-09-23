@@ -12,7 +12,7 @@ export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-plan
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
   color: string; distance: NavigationDistance; route: string; description: string;
-  loadScene(): Promise<SceneFactory>; worldFrame?: unknown; discovery?: ObjectDiscovery;
+  loadScene(signal?: AbortSignal): Promise<SceneFactory>; worldFrame?: unknown; discovery?: ObjectDiscovery;
 }
 export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: PreparedWorldCameraFrame | null }>;
 

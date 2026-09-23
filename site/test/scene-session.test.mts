@@ -4,7 +4,7 @@ const test = sourceTest();
 import { createSceneSessions } from '../scene/scene-session.mts';
 import { createPreparedSceneOwnership } from '../prepared-scene-ownership.mts';
 import type { SceneFactory } from '../browser-types.mts';
-import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/deferred-object-mount.js';
+import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/object-scene.js';
 import { unusedSharedView } from './navigation-test-values.mts';
 
 function deferred<T>() {

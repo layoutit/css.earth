@@ -123,7 +123,6 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
           if (applied.cancelled || !current()) return false;
           if (applied.value) {
             incoming = token;
-            session.shell?.setMotionEnabled?.(saved.playback.motionRequested);
             setMotion(saved.playback.motionRequested);
           }
         }

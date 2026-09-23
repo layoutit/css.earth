@@ -9,11 +9,12 @@ import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
 
 /** Arrival restores prepared state before the session becomes ready; every binding belongs to that session. */
-export function createSceneActivation({ windowTarget, navigation, view, isCurrent, onError }: {
+export function createSceneActivation({ windowTarget, navigation, view, isCurrent, requestMotion, onError }: {
   windowTarget: BrowserWindow;
   navigation: ReturnType<typeof createPreparedWorldNavigation> | null;
   view: SceneView;
   isCurrent(session: SceneSession): boolean;
+  requestMotion(session: SceneSession, enabled: boolean): void;
   onError(error: unknown): void;
 }) {
   async function restore(session: SceneSession, handoff?: WorldHandoff) {
@@ -92,7 +93,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     if (mount.destinations) shell.setDestinations?.({
       ...mount.destinations,
       async select(place) {
-        shell.setMotionEnabled?.(false);
+        requestMotion(session, false);
         return mount.destinations!.select(place);
       },
     });
@@ -107,10 +108,10 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       const place = /^city-([0-9]+)$/u.exec(featureId);
       const reportSelectionError = (error: unknown) => { if (isCurrent(session)) onError(error); };
       if (place && mount.destinations) {
-        shell.setMotionEnabled?.(false);
+        requestMotion(session, false);
         session.wait(shell.selectPlace?.(place[1]!) ?? Promise.resolve()).catch(reportSelectionError);
       } else if (mount.features && /^[0-9]+$/u.test(featureId)) {
-        shell.setMotionEnabled?.(false);
+        requestMotion(session, false);
         session.wait(mount.features.select(featureId)).catch(reportSelectionError);
       }
     }

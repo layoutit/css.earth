@@ -113,6 +113,7 @@ class FixtureDocument {
     readyState: DocumentReadyState = "complete";
     defaultView: Record<string, unknown> = { addEventListener() {}, removeEventListener() {}, requestAnimationFrame() { return 1; }, cancelAnimationFrame() {} };
     head!: FixtureElement;
+    readonly body = new FixtureElement(this, "body");
     stage: FixtureElement | null = null;
     readonly animations: FixtureAnimation[] = [];
     failAtElement: number | null = null;

@@ -29,19 +29,7 @@ export function mountObjectShell({
   readSelection,
   documentTarget = document,
   windowTarget = window,
-  motionEnabled = false,
-  onMotionChange = () => {},
-  heliosphereEnabled = false,
-  onHeliosphereChange = () => {},
-  illustrationModelsEnabled = false,
-  onIllustrationModelsChange = () => {},
-  surfaceLabelsEnabled = false,
-  onSurfaceLabelsChange = () => {},
-  minimapEnabled = false,
-  onMinimapChange = () => {},
-  threeDStarsEnabled = false,
-  onThreeDStarsChange = () => {},
-  onCategoryChange = () => {},
+  preferences,
 }: ShellOptions): ObjectShell {
   const drawer = requiredElement(documentTarget, ".object-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -103,7 +91,12 @@ export function mountObjectShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
-    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId, onCategoryChange, illustrationModelsEnabled }));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId,
+      onCategoryChange: value => preferences.set('highlightedClassification', value),
+      readIllustrationModels: () => preferences.state.illustrationModelsEnabled }));
+    lifetime.onDispose(preferences.subscribe(key => {
+      if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();
+    }));
     // Hover, focus or press on another body fetches its card before the click.
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === objectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime,
@@ -113,7 +106,7 @@ export function mountObjectShell({
     }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => navigationTransition?.dispose());
-    mountContent(objectId, motionEnabled);
+    mountContent(objectId);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
     if (cleanupErrors.length) {
@@ -141,7 +134,6 @@ export function mountObjectShell({
         updateBodyCard();
       }
     },
-    setMotionEnabled(enabled: boolean) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state: PlaybackState) {
       if (!lifetime.disposed) {
         settingsController.setPlaybackState(state);
@@ -249,13 +241,12 @@ export function mountObjectShell({
 
   function setObject(content: NavigationContent, { preserveSidebar = false } = {}) {
     if (lifetime.disposed) return;
-    const motion = requiredElement<HTMLInputElement>(documentTarget, '.object-motion-setting').checked;
     disposeContent();
     content.apply({ preserveSidebar });
     objectId = content.id;
     focusCard.set(null);
     objectBrowser.bindObject(content.id);
-    mountContent(content.id, motion);
+    mountContent(content.id);
   }
 
   function disposeContent() {
@@ -263,25 +254,14 @@ export function mountObjectShell({
     contentLifetime = null;
     if (errors.length) throw new AggregateError(errors, 'Object shell content cleanup failed.');
   }
-  function mountContent(id: string, motionEnabled: boolean) {
+  function mountContent(id: string) {
     const owner = contentLifetime = createSceneLifetime();
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
     informationCard = mountInformationCard(drawer, id, windowTarget, owner);
-    settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, heliosphereEnabled, illustrationModelsEnabled, surfaceLabelsEnabled, minimapEnabled, threeDStarsEnabled,
-        onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
-        onIllustrationModelsChange(enabled) {
-          illustrationModelsEnabled = enabled;
-          objectBrowser.setIllustrationModelsEnabled(enabled);
-          onIllustrationModelsChange(enabled);
-        },
-        onSurfaceLabelsChange(enabled) { surfaceLabelsEnabled = enabled; onSurfaceLabelsChange(enabled); },
-        onMinimapChange(enabled) { minimapEnabled = enabled; onMinimapChange(enabled); },
-        onThreeDStarsChange(enabled) { threeDStarsEnabled = enabled; onThreeDStarsChange(enabled); },
-      }, owner));
+    settingsController = retain(createSettingsController(documentTarget, windowTarget, preferences, owner));
     const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
-      onInteraction() { settingsController.setMotionEnabled(false); },
+      onInteraction() { preferences.set('motionEnabled', false); },
     }));
     viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }));
     const subject = readSelection();

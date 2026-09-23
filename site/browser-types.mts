@@ -1,4 +1,4 @@
-import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred-object-mount.js';
+import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/object-scene.js';
 import type { ObjectMountOptions } from '../src/renderers/css/runtime/object-runtime-types.js';
 import type { createPreparedObjectNavigation } from '../src/renderers/css/runtime/prepared-object-navigation.js';
 export type BrowserWindow = Window & typeof globalThis;

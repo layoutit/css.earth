@@ -3,16 +3,22 @@ import type { createPreparedUniverse } from '../src/renderers/css/universe/prepa
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
 import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
-import { readPreparedFocusSelection, withPreparedFocus } from './navigation/navigation-scope.mts';
+import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
 import { acquirePreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusPolicy, PreparedFocusPresentation } from './prepared-focus.mts';
 
 type PreparedContextLayer = Pick<ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>, 'resolveGalaxy' | 'ensureGalaxyCatalog' | 'focusBank' | 'selectGalaxy'>;
+export interface FocusPublication {
+  record: PreparedCatalogObject | null;
+  sources: readonly SpatialCitation[];
+  presentation: PreparedFocusPresentation | null;
+  url: 'preserve' | 'selection' | 'reframe';
+}
 export interface FocusCallbacks {
-  onFocusChange?(url: string): void;
+  readFocus(): string | null;
+  onFocusChange(publication: FocusPublication): void;
   canPublish(): boolean;
-  onFocusContentChange?(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void;
 }
 export interface FocusOperation {
   readonly signal: AbortSignal;
@@ -54,10 +60,9 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   let navigation: ObjectWorldNavigation | null = null;
   let unsubscribe: (() => void) | null = null;
   let target: PreparedFocusTarget | null = null;
-  let selected: string | null = null;
   let canPublish = () => false;
   let notify: NonNullable<FocusCallbacks['onFocusChange']> = () => {};
-  let notifyContent: NonNullable<FocusCallbacks['onFocusContentChange']> = () => {};
+  let readFocus: FocusCallbacks['readFocus'] = () => null;
   const currentSources = () => typeof sources === 'function' ? sources() : sources;
   const useTarget = (id: string | null) => {
     if (id === (target?.id ?? null)) return target;
@@ -68,39 +73,26 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     previous?.release();
     return target;
   };
-  const writeSelectionUrl = (id: string | null) => {
-    const url = withPreparedFocus(new URL(windowTarget.location.href), id, target?.datasets?.selectedLens ?? null);
-    if (url.href === windowTarget.location.href) return;
-    notify(url.href);
-  };
-  const clearSavedCameraUrl = () => {
-    const url = new URL(windowTarget.location.href);
-    if (!url.searchParams.has('v')) return;
-    url.searchParams.delete('v');
-    notify(url.href);
-  };
-  const publishContent = () => {
+  const publishContent = (url: FocusPublication['url'] = 'selection') => {
     const active = target, state = active?.datasets;
     const controls = active && state ? { ...state,
       selectLens(lens: string) {
-        if (canPublish() && target === active && navigation?.preparedFocus?.()?.id === active.id && selected === active.id) active.selectLens(lens);
+        if (canPublish() && target === active && navigation?.preparedFocus?.()?.id === active.id && readFocus() === active.id) active.selectLens(lens);
       },
     } : null;
-    notifyContent(active?.record ?? null, active?.citations ?? [], controls);
+    notify({ record: active?.record ?? null, sources: active?.citations ?? [], presentation: controls, url });
   };
   const publishLens = () => {
-    if (!canPublish() || !selected || target?.id !== selected) return;
+    if (!canPublish() || !target || target.id !== readFocus() || navigation?.preparedFocus()?.id !== target.id) return;
     publishContent();
-    writeSelectionUrl(selected);
   };
   const publishSelection = (force = false) => {
     if (!navigation) return;
     const focus = navigation.preparedFocus?.() ?? null, next = focus?.id ?? null;
     layer.selectGalaxy(next, focus);
-    if (!force && next === selected) return;
-    selected = next; useTarget(next);
+    if (!force && next === readFocus()) return;
+    useTarget(next);
     publishContent();
-    writeSelectionUrl(next);
   };
   /** The application request/session owns cancellation; this executor owns only the prepared target. */
   function apply(url: string | URL, operation: FocusOperation): void | Promise<void> {
@@ -111,8 +103,8 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     const recover = (error: unknown): never => {
       if (current()) {
         const focus = owner.preparedFocus();
-        selected = focus?.id ?? null;
-        layer.selectGalaxy(selected, focus); useTarget(selected); publishContent();
+        const id = focus?.id ?? null;
+        layer.selectGalaxy(id, focus); useTarget(id); publishContent('preserve');
       }
       throw error;
     };
@@ -126,11 +118,12 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         const lens = target?.resolveLens(selection?.lens ?? null);
         owner.setPreparedFocus(focus);
         if (lens !== undefined) target!.selectLens(lens);
-        selected = id; layer.selectGalaxy(id, focus); publishContent();
-        if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
+        layer.selectGalaxy(id, focus);
         // Preserve an incoming composition while it still contains its named focus.
-        if (!focus || (query.has('v') && savedCameraShowsFocus(owner, focus))) return;
-        if (query.has('v')) clearSavedCameraUrl();
+        const reframe = focus !== null && !(query.has('v') && savedCameraShowsFocus(owner, focus));
+        publishContent(reframe && query.has('v') ? 'reframe'
+          : !id || (state && !query.has('focusLens')) ? 'selection' : 'preserve');
+        if (!reframe) return;
       }
       if (!focus) return;
       const flight = owner.flyToPreparedFocus(focus, { signal: operation.signal, reducedMotion: operation.reducedMotion });
@@ -149,9 +142,9 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   }
 
   return Object.freeze({
-    connect(owner: ObjectWorldNavigation, { onFocusChange = () => {}, canPublish: available, onFocusContentChange = () => {} }: FocusCallbacks) {
-      unsubscribe?.(); useTarget(null); selected = null;
-      navigation = owner; notify = onFocusChange; canPublish = available; notifyContent = onFocusContentChange;
+    connect(owner: ObjectWorldNavigation, { onFocusChange, canPublish: available, readFocus: readCommittedFocus }: FocusCallbacks) {
+      unsubscribe?.(); useTarget(null);
+      navigation = owner; notify = onFocusChange; canPublish = available; readFocus = readCommittedFocus;
       unsubscribe = owner.subscribe(() => { if (canPublish()) publishSelection(); });
       return () => {
         if (navigation !== owner) return;
