@@ -10,11 +10,21 @@ import { writePreparedSet, type PreparedOutput } from '../prepared/write-prepare
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);
 
 /** Validate consumer JSON before publication; private preparation folders stay staged. */
+/** Binary files a prepared set may carry, each beside the JSON that owns it: the world orbit bank the spatial-context step
+ * writes next to `world-context.json` (tools/objects/prepare-spatial-context.ts). */
+const PREPARED_BINARIES: Readonly<Record<string, string>> = { 'world-orbits.bin': 'world-context.json' };
+export async function readPreparedBinaryOutputs(directory: string) {
+  const names = new Set((await readdir(directory, { withFileTypes: true })).filter(entry => entry.isFile()).map(entry => entry.name));
+  return Object.entries(PREPARED_BINARIES).filter(([binary, owner]) => names.has(binary) && names.has(owner))
+    .map(([filename]) => ({ filename, path: resolve(directory, filename) }));
+}
 export async function readPreparedJsonOutputs(directory: string) {
   const outputs = [];
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
+  const entries = await readdir(directory, { withFileTypes: true }), names = new Set(entries.map(entry => entry.name));
+  for (const entry of entries) {
     if (entry.isDirectory()) continue;
-    if (!entry.isFile() || !entry.name.endsWith('.json')) throw new TypeError('Prepared object output must contain only regular JSON files.');
+    if (entry.isFile() && PREPARED_BINARIES[entry.name] && names.has(PREPARED_BINARIES[entry.name]!)) continue;
+    if (!entry.isFile() || !entry.name.endsWith('.json')) throw new TypeError(`Prepared object output must contain only regular JSON files; found ${entry.name} in ${directory}.`);
     const path = resolve(directory, entry.name);
     JSON.parse(await readFile(path, 'utf8'));
     outputs.push({ filename: entry.name, path });
@@ -55,7 +65,7 @@ function minimapPaths(value: unknown): string[] {
 export async function publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot }: {
   id: string; stage: string; objectDirectory: string; publicDirectory: string; outputDirectory: string; projectRoot: string;
 }) {
-  const data = resolve(stage, 'prepared'), outputs = await readPreparedJsonOutputs(data);
+  const data = resolve(stage, 'prepared'), outputs = [...await readPreparedJsonOutputs(data), ...await readPreparedBinaryOutputs(data)];
   const { parseRuntimeManifest } = await import('#preparation/operations');
   const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'inventory.json')), id);
   const current = await readInventory(id, objectDirectory);

@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "sun-corona-chromosphere@2x.webp",
-      "bytes": 119046,
-      "sha256": "65addc3c000317f4987237a1164b54198be49235c0c251180bbb0d421c9a1f69"
+      "bytes": 104208,
+      "sha256": "896d153a5458c725dc77d1cf9bf9795e95e8150f1745fe07a96df3625bb01590"
     },
     {
       "location": "public",
       "filename": "sun-corona-corona@2x.webp",
-      "bytes": 160858,
-      "sha256": "33aae3690573b31b09b486780e2a3065e91edaec425ae8ba1015ac6e3cdd9d89"
+      "bytes": 138428,
+      "sha256": "8388ebbcd01f9b39e87909c0dee50cd15c7bee6acd8c6ea8733e8263959c6c37"
     },
     {
       "location": "public",
@@ -28,26 +28,26 @@
     {
       "location": "public",
       "filename": "sun-lens-chromosphere.webp",
-      "bytes": 1934,
-      "sha256": "5a7ed134f277de371a8fc517f53374322c44c1a29c91994f89857fee17605d24"
+      "bytes": 1552,
+      "sha256": "5e69f1ca20c1ad172ffe5a6843d2697aecae302050ba29deac122cb646c94050"
     },
     {
       "location": "public",
       "filename": "sun-lens-corona.webp",
-      "bytes": 2246,
-      "sha256": "bb5b79aa8be35b2018a34f5f4cb95d65edfb6ea0ac5e8f6e3299f1e84e15f7df"
+      "bytes": 1834,
+      "sha256": "1debfaa6013b218b348acaa3ba942bdb69e37170d6337133d9141a425d949736"
     },
     {
       "location": "public",
       "filename": "sun-lens-magnetic.webp",
-      "bytes": 1526,
-      "sha256": "2e0f8a81190ffad3aed1665bbe36c9b8541660b2eaf891413a340e769e812de0"
+      "bytes": 1234,
+      "sha256": "886e8b7ee1b607ca96e0399306e853ce1eb39d30f3d52b8818f415aeee66094a"
     },
     {
       "location": "public",
       "filename": "sun-lens-photosphere.webp",
-      "bytes": 146,
-      "sha256": "967c45ae8bfd17a478346536ba736f296af53e472fb25922facd59b97cc45d34"
+      "bytes": 128,
+      "sha256": "16cd0fe9e0cbee0f30199034275c3e395e0209bb664a478b9745dcad981bb3c0"
     },
     {
       "location": "public",
@@ -100,38 +100,38 @@
     {
       "location": "public",
       "filename": "sun-surface-chromosphere@2x.webp",
-      "bytes": 614072,
-      "sha256": "8f2703f90baae009be9ba20ca3b2c956f202dbe560f1f33b44d18b4e892d9ca4"
+      "bytes": 353392,
+      "sha256": "0a4f13f7b5207ab02a12ae4b82dd011040877737219083253ceecb692f157e54"
     },
     {
       "location": "public",
       "filename": "sun-surface-corona@2x.webp",
-      "bytes": 479798,
-      "sha256": "1a390b2da5bc3bf1c9e907ce83c1348c3284b6f78dce3d10c62539b6f6051c17"
+      "bytes": 292712,
+      "sha256": "443c8a00e920524234e007b80ea3745a20adc0773cc204e73037e58a7fd5dcf1"
     },
     {
       "location": "public",
       "filename": "sun-surface-magnetic@2x.webp",
-      "bytes": 769580,
-      "sha256": "2bff56495411dbe42f17bfe095d1ec5f143f457020f8a8abded3ae62586b7b7a"
+      "bytes": 536210,
+      "sha256": "7da4b2b6c8e8518901cbbdc19f5f5b4480d9498a12615aca23b6af23edad9d4d"
     },
     {
       "location": "public",
       "filename": "sun-surface-photosphere@2x.webp",
-      "bytes": 24444,
-      "sha256": "815e2f90a9e19b3dea684a1f074864810061eb276844702100fd5c6e9bba257a"
+      "bytes": 12996,
+      "sha256": "bcf7cebd894552c68861fdd879f292ef17b023e2f84bcdd6f5996090e63a7773"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
       "bytes": 4908,
-      "sha256": "f254ab6599617b75fbdefdbf5e3b6bf4b16d7122ce3a8aab4e6901e9961dbfd9"
+      "sha256": "14fdcc64a36ba1936746a8046c528e5fb72b4c84feaaae9859e3580e268bfde9"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1542,
-      "sha256": "9dd067c18085cf6b93df1c0bf9d5ed7d47ad789885d7d4508f2939fdc0b03575"
+      "sha256": "9cd08f9523a99741c81f2b1d56e332d8386948c14a71cdac156b78bd156d615b"
     },
     {
       "location": "prepared",
@@ -190,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 361533,
-      "sha256": "f0a58818e25b0e3bd3aabfb22f67d60ff0fc99ca6b3a5994e0075cf8f56ca652"
+      "bytes": 360791,
+      "sha256": "369d830387e4bf930769c3c5e47a8cfebe6ad838ec5e15662788c29823c1300a"
     },
     {
       "location": "prepared",
@@ -226,14 +226,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 310021,
-      "sha256": "bcdc15834752788330e1aeab77f15a8467f7b1fb8a3c388450fc7a8145e44098"
+      "bytes": 313001,
+      "sha256": "1666bc64a68f89900d893c5ba89b74b59b5b7d2433050dd63df224b96bfc8344"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 10384389,
-      "sha256": "2c336994beefa09386f9b74e35e04d3a39aec86cdc08b1d1e255eb6c4bb43f52"
+      "bytes": 10582244,
+      "sha256": "439982a037d5908074c3db4f4bf0f7b503aad53206d3365542b8138152ce8d77"
     },
     {
       "location": "prepared",
@@ -244,8 +244,14 @@
     {
       "location": "prepared",
       "filename": "world-orbits.bin",
-      "bytes": 3999480,
-      "sha256": "1717b3466ef3fc0fa1ae5c3ddd8300743cf00a231d4dcebb36d0ae2181ee4d83"
+      "bytes": 4027304,
+      "sha256": "214ffbdbb1c782451f5282c269bd8149f620b4a1b31cc9fa7418aa66853c895b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-system-views.json",
+      "bytes": 1669981,
+      "sha256": "17baf714f288c9cb403fa9258182f318df7efbe272747e9bb77c8b1bc196afc0"
     }
   ]
 }

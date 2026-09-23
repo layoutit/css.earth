@@ -1,0 +1,31 @@
+{
+ "id": "af-lep",
+ "classification": "star",
+ "order": 1752,
+ "physical": {
+  "name": "AF Lep",
+  "horizonsCode": null,
+  "meanRadiusKm": 869625.0,
+  "gravitationalParameterKm3PerS2": 159254928050.33,
+  "parent": null,
+  "effectiveTemperatureK": 6076
+ },
+ "physicalNotes": "Temperature 6076 +180/-92 K from the high-resolution spectroscopic analysis of Baburaj et al. (2026, arXiv:2608.15912), and stellar mass 1.20 +/- 0.06 solar masses from their Table 1. Radius 1.25 +/- 0.06 solar radii from Kervella et al. (2004), the value Franson et al. (2023, arXiv:2302.05420) adopt: 869,625 km at 695,700 km per solar radius. GM from 1.20 solar masses times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 81.769924030883,
+  "declinationDegrees": -11.901181972232846,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 26.842861,
+  "properMotionRaMasPerYear": 16.91501447341464,
+  "properMotionDecMasPerYear": -49.31799111646447,
+  "radialVelocityKmPerS": 21.099588,
+  "sources": {
+   "position": "Gaia DR3 source 3009908378049913216 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 3009908378049913216: parallax 37.2539 +/- 0.0195 mas (RUWE 0.92), inverted to 26.8429 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 3009908378049913216: pmRA* 16.9150 mas/yr, pmDec -49.3180 mas/yr.",
+   "radialVelocity": "Gaia DR3 source 3009908378049913216: 21.10 +/- 0.37 km/s."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 25486
+ }
+}

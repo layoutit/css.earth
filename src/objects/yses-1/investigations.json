@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "yses-1",
+  "entries": [
+    {
+      "id": "yses-1-c",
+      "subject": "The second planet, YSES 1 c",
+      "status": "unresolved",
+      "finding": "YSES 1 c (Bohn et al. 2020; about 6 Jupiter masses, 1.1 Jupiter radii and 1240 K as Zhang et al. 2024 tabulate) is not built: Roberts et al. (2025, section 5) find that its astrometry is insufficient to constrain its orbit, and a planet in this catalogue is placed by its orbit.",
+      "revisitWhen": "An orbit of YSES 1 c is published, or GRAVITY astrometry of it is.",
+      "evidence": [
+        "https://arxiv.org/abs/2509.14321",
+        "https://arxiv.org/abs/2007.10991"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

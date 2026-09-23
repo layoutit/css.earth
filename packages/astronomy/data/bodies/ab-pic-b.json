@@ -1,0 +1,31 @@
+{
+ "id": "ab-pic-b",
+ "classification": "exoplanet",
+ "order": 1755,
+ "physical": {
+  "name": "AB Pic b",
+  "horizonsCode": null,
+  "meanRadiusKm": 128685.6,
+  "gravitationalParameterKm3PerS2": 1266865319.0,
+  "parent": "ab-pic"
+ },
+ "physicalNotes": "Radius 1.8 +/- 0.2 Jupiter radii and temperature 1800 +/- 20 K: the BT-SETTL13 column of Palma-Bifani et al. (2023, A&A 670, A90), Table 4, fitted to the full spectral energy distribution: 128,685.6 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. Their Exo-REM fit gives 1700 +/- 50 K; evolutionary models give 1.50 to 1.57 Jupiter radii (their Table 3). GM from the mass 10 +/- 1 Jupiter masses they report, times Jupiter's GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1026616.5,
+  "semiMajorAxisStellarRadii": 42760.97,
+  "inclinationDegrees": 91.8514,
+  "eccentricity": 0.52153,
+  "argumentOfPeriapsisDegrees": 178.1553,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 380936.2,
+  "ascendingNodePositionAngleDegrees": 356.0899,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 217.367 au and total mass 1.3000 solar masses, 2,810.7 years of 365.25 d. Palma-Bifani et al. (2023, A&A 670, A90; doi:10.1051/0004-6361/202244294): the orbitize! OFTI fit to NaCo and SPHERE astrometry (Table 1) at a fixed total mass of 1.3 solar masses, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_abpicb.hdf5), whose likelihood column is zero throughout. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/ab-pic-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 4 measured positions (0.67).",
+   "shape": "Palma-Bifani et al. (2023, A&A 670, A90; doi:10.1051/0004-6361/202244294): the orbitize! OFTI fit to NaCo and SPHERE astrometry (Table 1) at a fixed total mass of 1.3 solar masses, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_abpicb.hdf5), whose likelihood column is zero throughout. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/ab-pic-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 4 measured positions (0.67). a 217.367 au at the sample's parallax 19.9521 mas, kept as the angular size 4336.9 mas and placed at the Gaia DR3 distance: 42760.97 radii of the host's 760,712 km; inclination 91.8514 degrees.",
+   "eccentricity": "Palma-Bifani et al. (2023, A&A 670, A90; doi:10.1051/0004-6361/202244294): the orbitize! OFTI fit to NaCo and SPHERE astrometry (Table 1) at a fixed total mass of 1.3 solar masses, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_abpicb.hdf5), whose likelihood column is zero throughout. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/ab-pic-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 4 measured positions (0.67). e 0.52153.",
+   "argumentOfPeriapsis": "Palma-Bifani et al. (2023, A&A 670, A90; doi:10.1051/0004-6361/202244294): the orbitize! OFTI fit to NaCo and SPHERE astrometry (Table 1) at a fixed total mass of 1.3 solar masses, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_abpicb.hdf5), whose likelihood column is zero throughout. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/ab-pic-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 4 measured positions (0.67). omega 358.1553 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 178.1553 degrees.",
+   "phase": "Palma-Bifani et al. (2023, A&A 670, A90; doi:10.1051/0004-6361/202244294): the orbitize! OFTI fit to NaCo and SPHERE astrometry (Table 1) at a fixed total mass of 1.3 solar masses, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_abpicb.hdf5), whose likelihood column is zero throughout. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/ab-pic-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 4 measured positions (0.67). tau 0.31374 of a period after MJD 58849; the periastron passage nearest that epoch is MJD 380936.2, taken as BMJD_TDB.",
+   "orientation": "Palma-Bifani et al. (2023, A&A 670, A90; doi:10.1051/0004-6361/202244294): the orbitize! OFTI fit to NaCo and SPHERE astrometry (Table 1) at a fixed total mass of 1.3 solar masses, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_abpicb.hdf5), whose likelihood column is zero throughout. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/ab-pic-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 4 measured positions (0.67). Ascending node 356.0899 degrees east of north."
+  }
+ }
+}

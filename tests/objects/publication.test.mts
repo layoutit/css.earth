@@ -6,7 +6,7 @@ import { syncBuiltinESMExports } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
+import { preparedAssetWrites, publishPreparedObject, readPreparedBinaryOutputs, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 import { writePreparedSet } from '../../tools/prepared/write-prepared-set.mts';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
@@ -27,6 +27,13 @@ test('private material masters stay staged while all consumer JSON is preflighte
   await writeFile(join(root,'unexpected.mjs'),'export default null;');
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
   await rm(join(root,'unexpected.mjs'));
+  // The world orbit bank is published beside the world context that owns it, and refused without it.
+  await writeFile(join(root,'world-orbits.bin'),'orbits');
+  await assert.rejects(readPreparedJsonOutputs(root),/world-orbits\.bin/);
+  await writeFile(join(root,'world-context.json'),'{}\n');
+  assert.deepEqual((await readPreparedJsonOutputs(root)).map(output=>output.filename),['content.json','runtime.json','world-context.json']);
+  assert.deepEqual(await readPreparedBinaryOutputs(root),[{filename:'world-orbits.bin',path:join(root,'world-orbits.bin')}]);
+  await rm(join(root,'world-orbits.bin')); await rm(join(root,'world-context.json'));
   await symlink(join(root,'runtime.json'),join(root,'linked.json'));
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
  }finally{await rm(root,{recursive:true,force:true});}

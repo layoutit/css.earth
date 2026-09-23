@@ -1,0 +1,31 @@
+{
+ "id": "hip-65426-b",
+ "classification": "exoplanet",
+ "order": 1751,
+ "physical": {
+  "name": "HIP 65426 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 75781.5,
+  "gravitationalParameterKm3PerS2": 899474376.49,
+  "parent": "hip-65426"
+ },
+ "physicalNotes": "Radius 1.06 +/- 0.05 Jupiter radii and temperature 1624 +16/-15 K: the BT-Settl fit of Carter et al. (2023, ApJL; doi:10.3847/2041-8213/acd93e; arXiv:2208.14990) to the JWST/NIRCam and MIRI photometry with the SPHERE and NaCo data, section 5.5: 75,781.5 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. Their hot-start evolutionary estimate is 1.44 +/- 0.03 Jupiter radii and 1283 K. GM from their hot-start mass 7.1 +/- 1.2 Jupiter masses times Jupiter's GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 213931.9,
+  "semiMajorAxisStellarRadii": 10624.28,
+  "inclinationDegrees": 103.5706,
+  "eccentricity": 0.19858,
+  "argumentOfPeriapsisDegrees": 70.3177,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": -11418.4,
+  "ascendingNodePositionAngleDegrees": 156.3187,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 87.640 au and total mass 1.9622 solar masses, 585.7 years of 365.25 d. Blunt et al. (2023, arXiv:2310.00148): the orbitize! MCMC fit to VLTI/GRAVITY and literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hip65426b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hip-65426-b/source/orbits/pick.json): highest stored likelihood (ln L -15.55).",
+   "shape": "Blunt et al. (2023, arXiv:2310.00148): the orbitize! MCMC fit to VLTI/GRAVITY and literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hip65426b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hip-65426-b/source/orbits/pick.json): highest stored likelihood (ln L -15.55). a 87.640 au at the sample's parallax 9.2831 mas, kept as the angular size 813.6 mas and placed at the Gaia DR3 distance: 10624.28 radii of the host's 1,231,389 km; inclination 103.5706 degrees.",
+   "eccentricity": "Blunt et al. (2023, arXiv:2310.00148): the orbitize! MCMC fit to VLTI/GRAVITY and literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hip65426b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hip-65426-b/source/orbits/pick.json): highest stored likelihood (ln L -15.55). e 0.19858.",
+   "argumentOfPeriapsis": "Blunt et al. (2023, arXiv:2310.00148): the orbitize! MCMC fit to VLTI/GRAVITY and literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hip65426b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hip-65426-b/source/orbits/pick.json): highest stored likelihood (ln L -15.55). omega 250.3177 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 70.3177 degrees.",
+   "phase": "Blunt et al. (2023, arXiv:2310.00148): the orbitize! MCMC fit to VLTI/GRAVITY and literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hip65426b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hip-65426-b/source/orbits/pick.json): highest stored likelihood (ln L -15.55). tau 0.67154 of a period after MJD 58849; the periastron passage nearest that epoch is MJD -11418.4, taken as BMJD_TDB.",
+   "orientation": "Blunt et al. (2023, arXiv:2310.00148): the orbitize! MCMC fit to VLTI/GRAVITY and literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hip65426b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hip-65426-b/source/orbits/pick.json): highest stored likelihood (ln L -15.55). Ascending node 156.3187 degrees east of north."
+  }
+ }
+}

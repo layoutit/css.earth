@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ab-pic",
+  "angularDiameterMas": 0.2,
+  "angularDiameterSource": "No angular diameter is measured: this is the record's radius at the Gaia distance.",
+  "distanceParsecs": 50.137294,
+  "distanceSource": "Gaia DR3 source 5495052596695570816: parallax 19.9452 +/- 0.0124 mas (RUWE 0.92), inverted to 50.1373 pc with no zero-point correction.",
+  "radiusKm": 760712.4,
+  "radiusSource": "No paper tabulates this K1V star's size or temperature in the work used here (Palma-Bifani et al. 2023 give only its spectral type and Gaia distance), so they are Gaia DR3's: the FLAME radius 1.0934 solar radii and mass 0.842 solar masses, and the GSP-Phot temperature 4878 K (4876 to 4881 K), catalogue model values from Gaia's photometry and parallax (Andrae et al. 2023; Creevey et al. 2023). 760,702 km at 695,700 km per solar radius; GM from 0.842 solar masses times the JPL solar GM. The orbit of AB Pic b placed here was fitted with a fixed total mass of 1.3 solar masses (Palma-Bifani et al. 2023). presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 4878,
+  "effectiveTemperatureSource": "4878 K (4876 to 4881 K), Gaia DR3 GSP-Phot, source 5495052596695570816, https://gea.esac.esa.int/archive/",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "af-lep-b",
+  "card": {
+    "text": "A young planet of about four Jupiter masses on a nearly circular orbit around AF Lep.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2411-05917",
+        "url": "https://arxiv.org/abs/2411.05917",
+        "label": "Balmer et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "we infer an effectively circular orbit"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "AF Lep b is the lowest-mass imaged planet whose mass was weighed through its orbit. It circles its star at about 8 au, in line with the star's spin.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2302-05420",
+        "url": "https://arxiv.org/abs/2302.05420",
+        "label": "Franson et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "AF Lep b is the lowest-mass imaged planet with a dynamical mass measurement"
+      },
+      {
+        "catalogueId": "arxiv-2411-05917",
+        "url": "https://arxiv.org/abs/2411.05917",
+        "label": "Balmer et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "in spin-orbit alignment with the host"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

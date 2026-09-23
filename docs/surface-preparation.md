@@ -390,9 +390,8 @@ These still set their own encoding:
 - Mercury's JPEG maps keep their recipe quality (85). Chrome decodes them about
   three times faster than lossy WebP, which costs about 30 % more bytes.
 - Saturn's layered and spectral materials keep their encodings.
-- Image-layer galaxies (LMC, SMC, M31, M33) and the Milky Way sky keep their
-  recipe qualities; their recipes cannot be rebaked until their stored recipe
-  digests are corrected.
+- Image-layer galaxies (M31, M33), the LMC and SMC volume banks and the Milky
+  Way sky keep their recipe qualities.
 - Volume atlases (density in alpha, seen as stacked slices) and the
   staging-only sphere-photograph refresh tool keep their encodings.
 

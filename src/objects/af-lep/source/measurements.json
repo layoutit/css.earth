@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "af-lep",
+  "angularDiameterMas": 0.43,
+  "angularDiameterSource": "No angular diameter is measured: this is the record's radius at the Gaia distance.",
+  "distanceParsecs": 26.842861,
+  "distanceSource": "Gaia DR3 source 3009908378049913216: parallax 37.2539 +/- 0.0195 mas (RUWE 0.92), inverted to 26.8429 pc with no zero-point correction.",
+  "radiusKm": 869625,
+  "radiusSource": "Temperature 6076 +180/-92 K from the high-resolution spectroscopic analysis of Baburaj et al. (2026, arXiv:2608.15912), and stellar mass 1.20 +/- 0.06 solar masses from their Table 1. Radius 1.25 +/- 0.06 solar radii from Kervella et al. (2004), the value Franson et al. (2023, arXiv:2302.05420) adopt: 869,625 km at 695,700 km per solar radius. GM from 1.20 solar masses times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 6076,
+  "effectiveTemperatureSource": "6076 +180/-92 K, Baburaj et al. (2026), section 5.1, https://arxiv.org/abs/2608.15912",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+  }
+}
