@@ -105,8 +105,9 @@ separate **OPUS source** numbers. `telescope fetch RUN/explore.json --archive op
 bounded source. For a pinned `.IMG` and unambiguous `.LBL` or `.XML`, `telescope outputs` and
 `telescope export` use the same `pdr` native-array reader as qualified deliveries. This preserves
 native units, special-value masks and associated uncertainty when the label supplies them;
-source results remain scientifically unresolved. OPUS geometry does not become a qualified measurement or a
-numbered choice for `get`. A failed request, including the
+source results remain scientifically unresolved. OPUS geometry does not become a qualified
+measurement or a numbered choice for `get`. Native decoding caps the combined source files at
+64 MiB; larger originals remain available as pinned sources. A failed request, including the
 HTML error page OPUS returns for an invalid query, is reported as `unavailable`, never as an
 empty result. The entry sits in `services` with the ESO, ALMA, PSA, and MAST JWST/HST searches:
 

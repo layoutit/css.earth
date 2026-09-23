@@ -27,6 +27,10 @@ export async function openPdsSource(path: string) {
 
 /** Keep the archive tree, then provide same-directory names used by PDS3 ^STRUCTURE pointers. */
 export async function preparePdsSource(source: NonNullable<Awaited<ReturnType<typeof openPdsSource>>>, directory: string) {
+  // pdr materializes native arrays while decoding. Keep the handoff below a
+  // conservative input budget even when source acquisition allowed a larger file.
+  if (source.files.reduce((bytes, file) => bytes + file.bytes, 0) > 64 * 1024 * 1024)
+    throw new RangeError('OPUS native decode exceeds the 64 MiB source budget; the original files remain pinned.');
   const root = resolve(directory), targets = new Set<string>();
   for (const file of source.files) {
     const destination = localOutput(root, file.path);
