@@ -1,21 +1,17 @@
 import { createSceneLifetime, type SceneLifetime } from '@cssearth/engine';
-import type { NavigationOptions } from './navigation-history.mts';
+import type { ResolvedNavigation } from './navigation-request.mts';
 import type { createNavigationTiming } from './navigation-timing.mts';
 
 type RunningPhase = 'preparing' | 'flying' | 'committing';
 type Outcome = 'finished' | 'interrupted' | 'cancelled' | 'failed';
-export interface NavigationRequest {
-  readonly id: string;
-  readonly cancelledFlight: boolean;
+export interface NavigationRequest extends ResolvedNavigation {
   readonly signal: AbortSignal;
   readonly lifetime: Pick<SceneLifetime, 'wait'>;
   readonly phase: RunningPhase | Outcome;
-  readonly options: NavigationOptions;
   readonly timing: ReturnType<typeof createNavigationTiming>;
-  url: string;
   own(cleanup: () => void): void;
 }
-type RequestOptions = Pick<NavigationRequest, 'id' | 'cancelledFlight' | 'url' | 'options' | 'timing'>;
+type RequestOptions = ResolvedNavigation & Pick<NavigationRequest, 'timing'>;
 export type NavigationLifecycle = ReturnType<typeof createNavigationLifecycle>;
 
 /** One authority for in-flight work. A settled request can never publish or dispose its successor. */
