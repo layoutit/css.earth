@@ -30,7 +30,7 @@ test('native radial fallback preserves numeric/missing cells through actual loss
   for(const nearest of [true,false]){
    const id=nearest?'numeric':'photographic';
    const surface: RadialMaterialSurface={id,map:{url:'/scenes/fixture/source.webp'},...(nearest?{displaySampling:'nearest'}:{})};
-   const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[],surfaceQuality:90}};
+   const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[]}};
    await prepareRadialMaterials({radial:radialFixture(),surfaces:[surface],config,source:await fixtureSource(root,[{path:'source.webp',consumers:['texture']}]),publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
    outputs[id]=[];
    for(const asset of [surface.surface,surface.shadowSurface]){

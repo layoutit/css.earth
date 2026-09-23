@@ -10,7 +10,6 @@
     "bandCount": 16,
     "gutter": 64,
     "poleSize": 512,
-    "surfaceQuality": 95,
     "reportMissingPixels": true,
     "observations": [
       {
@@ -32,8 +31,7 @@
           "specialValueMagnitude": 1e+30
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       }
     ],

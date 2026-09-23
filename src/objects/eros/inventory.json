@@ -10,14 +10,14 @@
     {
       "location": "public",
       "filename": "eros-elevation-shadow@2x.webp",
-      "bytes": 786058,
-      "sha256": "56e285708f0f40f3a97e564a1f3e02fe8def3a30e296f62f0b12c61fa53cb3b4"
+      "bytes": 477366,
+      "sha256": "28ebe983a926992d445ec8a6bd6c5f630ff75c831ffc08dc852150744cb3db7f"
     },
     {
       "location": "public",
       "filename": "eros-elevation-surface@2x.webp",
-      "bytes": 755994,
-      "sha256": "8be7b7c029fc1ed224299826f1c2f67c8145319d927dabd256bce14b37234986"
+      "bytes": 451840,
+      "sha256": "3e9a2ff7b5a26dea4855a4cd0cb6d3a31bbeaa7ea5704a468187c548804fea1d"
     },
     {
       "location": "public",
@@ -28,20 +28,20 @@
     {
       "location": "public",
       "filename": "eros-features.json",
-      "bytes": 30631,
-      "sha256": "d1e44142941619effde97f03cb71670e8491f93f1c9e5eee4a50b25c637d694a"
+      "bytes": 30632,
+      "sha256": "a5d12a5ebc31a96b4d35b732c65a556f1ce5c8975318459bb67901cdf9c5eb7b"
     },
     {
       "location": "public",
       "filename": "eros-infrared-shadow@2x.webp",
-      "bytes": 2674844,
-      "sha256": "eb447f3181182b2be753e33ebc3dea08177270bc0b8255cc097774cbc9bf09c6"
+      "bytes": 892246,
+      "sha256": "e38349f39c29610c13140063ce9916cdb578e11949fa01bb618849f871885f1f"
     },
     {
       "location": "public",
       "filename": "eros-infrared-surface@2x.webp",
-      "bytes": 5220554,
-      "sha256": "e0b88a2ebb451ca01e311fea08059e0bda9c0a56bdf1fdd250c6a699d836a344"
+      "bytes": 2714020,
+      "sha256": "1a2f87cedfa3419fa3b4d4197c1289ff310a61da5e93b1f42a6705a8da8c9c05"
     },
     {
       "location": "public",
@@ -52,14 +52,14 @@
     {
       "location": "public",
       "filename": "eros-normal-shadow@2x.webp",
-      "bytes": 1679784,
-      "sha256": "2c8919ab76026d86bdc0037f28b3981f76e8ab47f5284b5ad10e05ff906cce33"
+      "bytes": 526132,
+      "sha256": "0e6f3f4f516565668e3a17fdef725d459a17a1bde82b3bede7be2c3eb1ff0f4c"
     },
     {
       "location": "public",
       "filename": "eros-normal-surface@2x.webp",
-      "bytes": 3771308,
-      "sha256": "df1815a9422e87df064003986dede9cf236def64230c59c5ace2e678baebe51b"
+      "bytes": 1551466,
+      "sha256": "8870de9e138f4c10cc39da252f5084078a31b9affd56ca5892ab9ddfab783add"
     },
     {
       "location": "public",
@@ -89,7 +89,7 @@
       "location": "prepared",
       "filename": "features.json",
       "bytes": 669,
-      "sha256": "7d389a83e4824314f1d9e954be22f281dc7742ffdeebdb57f798876b59b150a9"
+      "sha256": "5ab1bdfcf41b5063ee92e142bedb49e37b1b6901ad092d0a497dab665a4f093b"
     },
     {
       "location": "prepared",
@@ -100,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 5740,
-      "sha256": "ac442f97f7dc0d93bfe62963a630af94896f81457ba180c0547883447f9bf448"
+      "bytes": 5484,
+      "sha256": "c4e22d4f46edf893a9000b0f5ba2dc82ef04350565bd4ef5699837d391e42ea1"
     },
     {
       "location": "prepared",
@@ -130,14 +130,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 746734,
-      "sha256": "004086f377f0a48a2d6163a92d591b789257e228370205863ff6294a7db8f45c"
+      "bytes": 745992,
+      "sha256": "122ec48fa9d807f53a7424cc3c509a0565704c2310dc6e1c1d1ba6c020d5ebed"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 616056,
-      "sha256": "425199049053740a714a81383bd7156e48e7ce33b2d51bc03bb070ededbb8834"
+      "bytes": 616055,
+      "sha256": "dbb51a8ac857a5d439ccb9c3ffbfc1128d47408c69cc96ab1b67a170bc840d2a"
     },
     {
       "location": "prepared",
@@ -154,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 5742,
-      "sha256": "e47be98579ab4f9b2164d41e68180e6aa82cec09be5ae30fdd6aeb1b773eb716"
+      "bytes": 5486,
+      "sha256": "88b9fee3554f165d8ce228b025dcbf8c29e819adb0f9cb8b27bd02052cc5b81d"
     },
     {
       "location": "prepared",

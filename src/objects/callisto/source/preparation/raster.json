@@ -15,8 +15,7 @@
     "schema": "csscallisto-prepared-assets@1"
   },
   "thumbnail": {
-    "size": 64,
-    "quality": 88
+    "size": 64
   },
   "surfaces": [
     {
@@ -35,8 +34,7 @@
           "centerLongitude": 180
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       }
     },
@@ -60,8 +58,7 @@
           "wrapLongitude": true
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       }
     },
@@ -95,8 +92,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "callisto-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "callisto-lighting-{density}x-billboard.webp",
+    "rowOutput": "lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "lighting-{density}x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

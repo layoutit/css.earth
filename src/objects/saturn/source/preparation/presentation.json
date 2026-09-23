@@ -39,7 +39,6 @@
   },
   "stylesheet": {
     "path": "src/renderers/css/styles/saturn-surfaces.css",
-    "bytes": 8576,
     "scope": ":where(.object-stage[data-object-id=\"saturn\"]) "
   }
 }

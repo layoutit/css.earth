@@ -15,8 +15,7 @@
     "schema": "cssmiranda-prepared-assets@1"
   },
   "thumbnail": {
-    "size": 64,
-    "quality": 88
+    "size": 64
   },
   "surfaces": [
     {
@@ -55,8 +54,7 @@
           ]
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       }
     },
@@ -349,8 +347,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "miranda-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "miranda-lighting-{density}x-billboard.webp",
+    "rowOutput": "lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "lighting-{density}x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

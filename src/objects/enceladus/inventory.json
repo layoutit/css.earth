@@ -10,14 +10,14 @@
     {
       "location": "public",
       "filename": "enceladus-elevation-shadow@2x.webp",
-      "bytes": 2528570,
-      "sha256": "056dd031217b7c1bbf2aedcb734d3fcf7e42af48c03f647585226e00b5d76ca4"
+      "bytes": 1502180,
+      "sha256": "2799bf94aad395d58ac927d8be54269136aefdf7a296eece7b06469f6d9579ce"
     },
     {
       "location": "public",
       "filename": "enceladus-elevation-surface@2x.webp",
-      "bytes": 6218274,
-      "sha256": "7dc11d2117cd63d8ff391f5078aeecbc6d6857c888dbac276897b9330a7e3588"
+      "bytes": 4383018,
+      "sha256": "846878b5b8d6558cbdf0628f470649b87926622cf190b5187b89c7f9dc7920f2"
     },
     {
       "location": "public",
@@ -40,20 +40,20 @@
     {
       "location": "public",
       "filename": "enceladus-ice-absorption-shadow@2x.webp",
-      "bytes": 138368,
-      "sha256": "a228473d1fb8d2c296f64eef965395e8cd42fed67e3a0e1d9c4a959b7e084c76"
+      "bytes": 138552,
+      "sha256": "4a03214c7977622c2061c8c3a9c94ce0229d0645ffe7987550076d5c1cbc1073"
     },
     {
       "location": "public",
       "filename": "enceladus-ice-absorption-surface@2x.webp",
-      "bytes": 56084,
-      "sha256": "36a47d016a61ff5e1352b5163772f8f72fc88fbd59e387dd88d7206620db2d03"
+      "bytes": 53450,
+      "sha256": "373e3dbcc3f17b935ccbf25c278ceb174ff00f67d38e2855726666a0a204316d"
     },
     {
       "location": "public",
       "filename": "enceladus-ice-absorption-thumbnail.webp",
-      "bytes": 1520,
-      "sha256": "12fff2fb2f5df848aedc72db8598c2192a5b75521ac4c6e9b286805d743b10cc"
+      "bytes": 1426,
+      "sha256": "8818d80b85217992d4ebb3cde3844529bae7c12caaf86972a348773c1bbbc7e5"
     },
     {
       "location": "public",
@@ -64,32 +64,32 @@
     {
       "location": "public",
       "filename": "enceladus-infrared-ratio-shadow@2x.webp",
-      "bytes": 155290,
-      "sha256": "1ee2e6607e4d64fcb89ab52123b2f5c4e69413425156b8e86fa4c5d9ad2df9d9"
+      "bytes": 155720,
+      "sha256": "161d3277b1007a6d0a3e58c4c945da114eab3fa835e4882f93729e89410aedd3"
     },
     {
       "location": "public",
       "filename": "enceladus-infrared-ratio-surface@2x.webp",
-      "bytes": 56922,
-      "sha256": "3161a66f24db324330b1a63ed06363c9eabb3251a6111f146c8bd675795f2984"
+      "bytes": 55138,
+      "sha256": "fa3316a7282d6719a97a52cd9239c2ec0c4c6a9fef487da9a4ed982d23291a8a"
     },
     {
       "location": "public",
       "filename": "enceladus-infrared-ratio-thumbnail.webp",
-      "bytes": 2166,
-      "sha256": "7ce993b429aa895f5d6f306b27ca52b08e5b53d4e8c7ceb99ba1eebf76301ae2"
+      "bytes": 1486,
+      "sha256": "43bdc523afd208bcb6088bb52f5227a5990eb980d607d56e6a53f7db9b78288c"
     },
     {
       "location": "public",
       "filename": "enceladus-normal-shadow@2x.webp",
-      "bytes": 3055254,
-      "sha256": "dbcff43d13b4566a55e47e13a6aee38605c7ab90b79e039d0735878cb8e9c0f6"
+      "bytes": 902544,
+      "sha256": "75ec537fc6c3d056625e7ba75d7af19c9fb9e3f4a2d8d79a37da5de2a78d84ea"
     },
     {
       "location": "public",
       "filename": "enceladus-normal-surface@2x.webp",
-      "bytes": 8603770,
-      "sha256": "0edb35e9d874d36e5dca4d3bdbaf4254dcccd0c5e05a60d6be6259ada35f4c95"
+      "bytes": 3541196,
+      "sha256": "7c7443e1bebf517c496200f8c0daa1f6b739ddcd5b1eb9d336002839d7b49c3e"
     },
     {
       "location": "public",
@@ -100,14 +100,14 @@
     {
       "location": "public",
       "filename": "enceladus-shape-shadow@2x.webp",
-      "bytes": 159970,
-      "sha256": "869ce93c0873674f8feb4519b1dcc661a39085bcf3b6a9fdc56d646988517fdb"
+      "bytes": 109578,
+      "sha256": "e137fd6552e626972622a3d569c8ff2d800a8653ef60505339f69dbef85f8ac0"
     },
     {
       "location": "public",
       "filename": "enceladus-shape-surface@2x.webp",
-      "bytes": 129790,
-      "sha256": "e8fbd637703c18c5882a7ff990c43e1eb8b1b65f70ddb09a68fcdd3cb4dc2993"
+      "bytes": 101234,
+      "sha256": "084e4efd6c44d4237fc5d46cad06d729bd48cceed2ac2ad5332943b07e21bd63"
     },
     {
       "location": "public",
@@ -148,8 +148,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 8496,
-      "sha256": "cd9aaff844187f4601f22bfc69cd2ac861e606c3e4b6360c0fc563d221da751c"
+      "bytes": 8102,
+      "sha256": "d761cfccc281a49355de78639d7512353ff1f74a1081030a14885ba7ea375e2f"
     },
     {
       "location": "prepared",
@@ -166,14 +166,14 @@
     {
       "location": "prepared",
       "filename": "minimaps/ice-absorption.webp",
-      "bytes": 29940,
-      "sha256": "36c8618c34b000bf074c9a5543c37be10c05860149c145f29c2a191e378de254"
+      "bytes": 29834,
+      "sha256": "ef5a1f1baa35dafd37645f98bff6610a82730599597a266fc854b1036f9a1cea"
     },
     {
       "location": "prepared",
       "filename": "minimaps/infrared-ratio.webp",
-      "bytes": 32790,
-      "sha256": "8dd3c1d8da565fb70231d6ee441b18f86f769f998e32714d20c6a5a7818032dc"
+      "bytes": 32556,
+      "sha256": "c903a432db35335c536eecceb6090ea87cdf4bf4634e6b1c635754d4687aaa94"
     },
     {
       "location": "prepared",
@@ -190,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1593255,
-      "sha256": "8bbe8a2a28537d91ffeceadf1750bc15945014758e1f7cf6f5d0613335310280"
+      "bytes": 1592513,
+      "sha256": "0098bd46328e53bb587c0cefb03e8ee449f6153fb37ea6ed2154e9fa949db43a"
     },
     {
       "location": "prepared",
@@ -202,8 +202,8 @@
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1033,
-      "sha256": "f554e2040d0681a9334a0bfb78b7e233941a6097d218b91fd234174fd421a70c"
+      "bytes": 1183,
+      "sha256": "83f9fe5e509a076043f8dabcbe2a83c119c5f75dbf0a5b49d14b780dfd129a6e"
     },
     {
       "location": "prepared",
@@ -214,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 8503,
-      "sha256": "6b7e2dbde5872d4ee17023a954d47a861abc455165ee8a2a2b43b70a3b576fde"
+      "bytes": 8109,
+      "sha256": "9ea67fbf8d8c2492f04e268b9def408f55b19b89346e971c51beb2c402f22d57"
     },
     {
       "location": "prepared",

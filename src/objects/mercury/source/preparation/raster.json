@@ -23,8 +23,7 @@
       "top": 726,
       "width": 596,
       "height": 596
-    },
-    "quality": 90
+    }
   },
   "surfaces": [
     {
@@ -36,7 +35,7 @@
         "format": "jpeg",
         "encoder": "libjpeg",
         "progressive": false,
-        "quality": 90,
+        "quality": 85,
         "grayscale": true
       },
       "thumbnail": "mercury-lens-{id}.webp"
@@ -50,7 +49,7 @@
         "format": "jpeg",
         "encoder": "libjpeg",
         "progressive": false,
-        "quality": 90,
+        "quality": 85,
         "chromaSubsampling": "4:2:0"
       },
       "thumbnail": "mercury-lens-{id}.webp",
@@ -72,7 +71,7 @@
         "format": "jpeg",
         "encoder": "libjpeg",
         "progressive": false,
-        "quality": 90,
+        "quality": 85,
         "chromaSubsampling": "4:2:0"
       },
       "thumbnail": "mercury-lens-{id}.webp"
@@ -85,8 +84,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "mercury-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "mercury-lighting-{density}x-billboard.webp",
+    "rowOutput": "lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "lighting-{density}x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

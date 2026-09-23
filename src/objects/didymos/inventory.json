@@ -10,14 +10,14 @@
     {
       "location": "public",
       "filename": "didymos-albedo-shadow@2x.webp",
-      "bytes": 159802,
-      "sha256": "604020acd8f661935e9f1a0784ab3a41a326db07cfdf8a3be41f0c51008792c4"
+      "bytes": 101232,
+      "sha256": "c565317724b769c7920ea15d2de4880a6c912c7012584b6771a13469675a97a8"
     },
     {
       "location": "public",
       "filename": "didymos-albedo-surface@2x.webp",
-      "bytes": 201266,
-      "sha256": "cb654827d238fad774031aa91835981324a289a42e7ea5351f7a52ac50ab1e20"
+      "bytes": 130666,
+      "sha256": "538a78eac40902110b62959eb28f151ae2e45fb89d606c4d171c45395f3d5cc4"
     },
     {
       "location": "public",
@@ -28,14 +28,14 @@
     {
       "location": "public",
       "filename": "didymos-draco-shadow@2x.webp",
-      "bytes": 221690,
-      "sha256": "1ee6adc8a860717312d286b531828cc42b601f8d9eee6f72c7cd66199ecb3359"
+      "bytes": 142688,
+      "sha256": "846320e12ce18f6fa7f6875f04c3b9402bc6385ba2d3841b2646bc2c13a5195a"
     },
     {
       "location": "public",
       "filename": "didymos-draco-surface@2x.webp",
-      "bytes": 228286,
-      "sha256": "25d699259714bf30319a6a8c70d415683ea5c5aed21d5bd60ab20bd24b0d93ff"
+      "bytes": 153886,
+      "sha256": "5167229cfb9ddcfaf50868e0872ed91607f01f486e58e43260560f4239a9fdbb"
     },
     {
       "location": "public",
@@ -52,14 +52,14 @@
     {
       "location": "public",
       "filename": "didymos-elevation-shadow@2x.webp",
-      "bytes": 188250,
-      "sha256": "9d5a3246abd5bd0269c3941c0788a32cd144d46f46cf31464d1f3b0d61e3f1b8"
+      "bytes": 136264,
+      "sha256": "f7aad5216e7ed2367096b93fc5fb08329f65e7146f83ab2e8510a1ee25605cd6"
     },
     {
       "location": "public",
       "filename": "didymos-elevation-surface@2x.webp",
-      "bytes": 284730,
-      "sha256": "a38cf5878f35c3a2c2ca996f47403943207338e68e1696167440e27ae2559f4c"
+      "bytes": 198382,
+      "sha256": "c9d2f76a9f061272ca250c3a88f1ef128b2462779fce9420f7cfe26563e0aa9f"
     },
     {
       "location": "public",
@@ -76,8 +76,8 @@
     {
       "location": "public",
       "filename": "didymos-luke-surface@2x.webp",
-      "bytes": 326124,
-      "sha256": "ba83b8edf0f86255ade7759848a27d97d16004aa09d8c765c82ec3bd4d7f3782"
+      "bytes": 212628,
+      "sha256": "08e5bdb5b3810ba91272889f61ffeb6bac88077bef9c660305b1a3a1857d52a2"
     },
     {
       "location": "public",
@@ -88,14 +88,14 @@
     {
       "location": "public",
       "filename": "didymos-shape-shadow@2x.webp",
-      "bytes": 91932,
-      "sha256": "b49ad3f136640dca7db7d40d5ae7be3c4860940e7db7459ed26da78efdc07978"
+      "bytes": 63042,
+      "sha256": "7418fff8c943b37670b7d55ac538dfbe1b6022b27f3cb8e0ba8e0c59a36880b7"
     },
     {
       "location": "public",
       "filename": "didymos-shape-surface@2x.webp",
-      "bytes": 77528,
-      "sha256": "85402e9e3de98dfdca758974700e378494b016cc350ec9d97ba15560e125a8be"
+      "bytes": 54310,
+      "sha256": "bca48b2156334ff3510f08258df406d2af5e58a5c555478d917f5d31756d7ef3"
     },
     {
       "location": "public",
@@ -136,8 +136,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 69032,
-      "sha256": "ba83b1c987b20a3608bed2e860ba6d500614f44afbaa6347d0f75d9a656a9842"
+      "bytes": 67892,
+      "sha256": "8c134aa610534d2368b4b30f2e0050d7fd9ac1a97b90b805accebcfa32afcce9"
     },
     {
       "location": "prepared",
@@ -178,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 756382,
-      "sha256": "6030d970dcab807cb20a6bc51d46df5afd902f5d0cd4dd318f122c6c3366235e"
+      "bytes": 755640,
+      "sha256": "04499e9fa02772d4075ff39f12848421145f98603f2909d9ebbee7ef7d11d90e"
     },
     {
       "location": "prepared",
@@ -190,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1041,
-      "sha256": "1683592f09efce170de96556c8d0c9aa71f2db453bd44dc6a6ee4da19859e5e7"
+      "bytes": 1185,
+      "sha256": "1c8cdfcac22d72b61509af52a06dd4e55db103ffe6a139e16047b3074058051c"
     },
     {
       "location": "prepared",
@@ -202,8 +202,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 69037,
-      "sha256": "b1a4bf0f82e79ae31d65717cb8edceb7c48c2b7358ce9e2e751e45d90e3b240c"
+      "bytes": 67897,
+      "sha256": "1eee14fd22d826428b3b7c6fd6eca42a06247f0c4fb198403f49b88419717130"
     },
     {
       "location": "prepared",

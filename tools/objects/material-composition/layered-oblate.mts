@@ -51,8 +51,8 @@ import { validateMaterialRecipe } from './recipe.mts';
 export async function createLayeredOblatePreparation({ sourceDirectory, publicDirectory, stagingDirectory, config:input, preparedInputs }: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown;preparedInputs:LayeredInputs}) {
   const config=parse(input,layeredRecipe,'layered oblate recipe');
   validateMaterialRecipe(config, 'cssearth-layered-oblate-preparation@1');
-  if(!isArray(config.sourcePins) || Object.values(config.sources).some(path=>!config.sourcePins.some(pin=>pin.path===path))) throw new TypeError('Every material input must be pinned.');
-  await verifyObservationSources(sourceDirectory, config.sourcePins);
+  // The recipe names its inputs by path (sources); git and the source cache hold their bytes, so nothing else is pinned.
+  await verifyObservationSources(sourceDirectory, Object.values(config.sources).map(path => ({ path })));
   const readSourceJson = async (path:string): Promise<unknown> => JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8'));
   const PREPARED_RING_SOURCE = preparedInputs.ringSource;
   const PREPARED_RING_GROUPS = preparedInputs.ringGroups;

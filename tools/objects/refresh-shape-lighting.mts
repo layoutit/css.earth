@@ -46,7 +46,7 @@ async function stageShapeLighting(id: string) {
     const { flood } = neutralShapeAtlas(atlas, requireBodyFixedSunDirection(id));
     const filename = basename(requireString(prior.url));
     const surface = await emit(filename, sharp(flood, { raw: { width: atlas.width, height: atlas.height, channels: 4 } }),
-      { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 });
+      { alphaQuality: 100, effort: 4 });
     if (surface.url !== prior.url) throw new Error(`${id}: atlas address changed.`);
     replacements.set(view.id, { ...old, appearance: SHAPE_MATERIAL.appearance, surface });
     changed.set(filename, { filename, bytes: surface.bytes, sha256: surface.sha256 });
