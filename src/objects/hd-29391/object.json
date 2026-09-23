@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -105,7 +105,7 @@
     "catalog": {
       "name": "51 Eridani",
       "classification": "star",
-      "color": "#e7ecff",
+      "color": "#d5deff",
       "distanceAu": 6168412.7,
       "description": "Young F0 star 30 parsecs away in Eridanus, orbited by a giant planet photographed directly.",
       "systemName": "51 Eridani system",
