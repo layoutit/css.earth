@@ -5,6 +5,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 import { acquireWwtFits } from './wwt-fits.mts';
+import { listArtifactOutputs } from '../artifact-outputs.mts';
+import { exportOutput } from '../outputs.mts';
 
 const test = sourceTest();
 const sha = (value: Uint8Array): string => createHash('sha256').update(value).digest('hex');
@@ -39,6 +41,21 @@ test('WWT FITS keeps original numeric bytes and reports missing scientific metad
     const receipt = JSON.parse(await readFile(result.receipt, 'utf8')) as { inputs: { identity: string; sha256: string }[]; outputs: { path: string; sha256: string }[] };
     assert.equal(receipt.inputs.find(item => item.identity.endsWith('.fits'))?.sha256, sha(bytes));
     assert.equal(receipt.outputs.find(item => item.path === 'source.fits')?.sha256, sha(bytes));
+    const offered=await listArtifactOutputs(result.receipt);
+    assert.equal(offered.artifact,'telescope-wwt-fits');
+    assert.ok(offered.outputs.some(choice=>choice.kind==='image'&&choice.hdu===0&&choice.available));
+    assert.ok(offered.issues?.some(issue=>issue.includes('celestial WCS')));
+    const exported=await exportOutput(result.receipt,{kind:'image',hdu:0},resolve(root,'exported'));
+    const produced=JSON.parse(await readFile(exported.receipt,'utf8')) as {stage:string;inputs:{role:string;sha256:string}[]};
+    assert.equal(produced.stage,'telescope-source-output');
+    assert.equal(produced.inputs.find(input=>input.role==='FITS source')?.sha256,sha(bytes));
+    assert.equal((await listArtifactOutputs(exported.receipt)).terminal,true);
+    // Saved WWT receipts from before the shared FITS handoff retain the same route.
+    const old=JSON.parse(await readFile(result.receipt,'utf8')) as {parameters:{fitsSource?:unknown}};
+    delete old.parameters.fitsSource;await writeFile(result.receipt,JSON.stringify(old));
+    assert.ok((await listArtifactOutputs(result.receipt)).outputs.some(choice=>choice.kind==='image'&&choice.available));
+    await writeFile(result.source,'changed');
+    await assert.rejects(listArtifactOutputs(result.receipt),/pins changed/u);
     await assert.rejects(acquireWwtFits(snapshot, 'Science', 1, 2, 0, resolve(root, 'outside'), async () => new Response(new Uint8Array(bytes))), /outside this level/u);
     await writeFile(resolve(root, 'collection.wtml'), 'changed');
     await assert.rejects(acquireWwtFits(snapshot, 'Science', 0, 0, 0, resolve(root, 'changed'), async () => new Response(new Uint8Array(bytes))), /differs from the pinned catalog/u);
