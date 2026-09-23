@@ -15,6 +15,7 @@ export const HELP = `Telescope — explore observations or continue from an exis
 Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
+  telescope wwt-image EXPLORE.json --pick N --level 0..3 --out DIRECTORY [--json]
   telescope import SPEC.json --out DIRECTORY
   telescope families [--json]
   telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY [--json]
@@ -36,6 +37,9 @@ Papers lists up to 20 OpenAlex works that name the target (and instrument) in th
 using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
 open access first. It tries one plain GET per open copy, marks browser challenges as blocked, and prints
 HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
+WWT image export selects a separately numbered curated TAN sky image from a saved exploration,
+downloads at most 64 pinned-catalog tiles, and assembles one static PNG plus a source receipt.
+It is a display-image input for offline preparation, not a scientific observation or a runtime tile service.
 Family-run executes one operation from a verified product descriptor through the static owner allowlist.
 Its params file is optional only when that operation has no required parameters. The output directory
 must be new; reusable data and a pinned product record are reopened before success is reported.
