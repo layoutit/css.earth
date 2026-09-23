@@ -12,7 +12,7 @@
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its 800 K glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray. JWST detects the planet in only one band, F410M (Balmer et al. 2025); three measured bands are needed for a colour like HR 8799's planets have, so none is cast.
+**Shape lens.** A sphere of the model radius in the shared neutral gray. JWST detects the planet in only one band, F410M (Balmer et al. 2025); three measured bands are needed for a colour like HR 8799's planets have, so none is cast. Rajan et al. (2017, [arXiv:1705.03887](https://arxiv.org/abs/1705.03887), Table 2) do measure it in five ground-based bands from 1.2 to 4.7 µm, and a false colour from H, K and L′ was baked and set aside on 2026-09-23: those bands differ from HR 8799's, so the two systems' colours would not compare. Any three of the five would be a choice of bands, and J (± 0.40 mag) and M_S (± 0.5) are too uncertain to carry a channel.
 
 **Rotation.** None measured; Denis et al. measure a projected spin velocity, but no period or axis. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
