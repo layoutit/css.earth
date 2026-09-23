@@ -4,17 +4,21 @@ Object pages and navigation fragments come from `ObjectPage.astro` and the same
 shared shell components. `OBJECTS` supplies all static route identities; `/` is
 an Earth alias. Object packages declare their authored stylesheet order in
 `object.json` → `properties.page.stylesheets`. Astro emits only that package's
-CSS, followed by the shared planet shell CSS. The offline presentation compiler
+CSS, followed by the shared object shell CSS. The offline presentation compiler
 consumes the same list. There is no page-source regex or second object registry.
 
-Preparation writes `prepared/page.json` from the finalized scene definition.
-Its descriptor pin validates the small metadata file and its `sceneSha256`
-binds controls/preloads to the full scene transport. A first-load page also
-decodes the authenticated scene during the build and serializes its prepared
-tree into the existing `.object-stage`. Navigation fragments use the small page
-metadata without including another scene. The `/objects/<id>/<sha256>.json` endpoint still
-verifies the complete transport's hash independently. Changing prepared scenes
-must update both outputs through `writeObjectJson`.
+`tools/assets/restore-object-json.mts` writes `prepared/object.json` and
+`prepared/page.json` from the installed runtime. The descriptor names the
+transport's format and URL; it has no digest pin, and page metadata has no
+`sceneSha256`. The first-load build serializes the decoded prepared tree into
+`.object-stage`. Navigation fragments use page metadata without including another
+scene. `/objects/<id>/object.json` serves the transport with
+`Cache-Control: public, max-age=0, must-revalidate`.
+
+Runtime validates the prepared structure, but does not authenticate this transport
+against a descriptor hash. R2 delivery inventories own byte counts and SHA-256
+for installed baked assets. Keep transport/page regeneration and inventory
+publication at those owners when changing a prepared scene.
 
 Navigation fetches `/navigation/<id>/`: the same panels, attribution, metadata
 and styles, without a repeated object catalog. The existing shell, card selection

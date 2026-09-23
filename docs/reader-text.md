@@ -2,7 +2,8 @@
 
 A body's card line, introduction and dataset text live in its `text.json`,
 next to `object.json`. The file is outside `source/`, so changing words never
-changes recipes, source pins, preparation receipts or provenance.
+changes the source recipes or adds source-manifest pins. Publishing text still
+updates its prepared output and delivery inventory.
 
 ## The file
 
@@ -33,11 +34,13 @@ lists those.
 
 ## Publish and check
 
-`pnpm prepare:text` checks every body, then writes `prepared/text.json` and the
-card into `object.json`. If any body fails, it writes nothing. A changed card
-changes `object.json`, which the sources catalogue pins, so run
-`pnpm prepare:sources` afterwards.
-`pnpm prepare:text -- --check` verifies without writing.
+`node tools/prepare/prepare-text.mts` checks every body, then writes `prepared/text.json` and the
+card into `object.json`. If any body fails validation, it writes nothing. Supply
+object IDs to limit publication after the shared validation. A changed card
+changes catalogue text; regenerate catalogue/provenance with
+`node tools/prepare/prepare-provenance.mts`. Changed prepared text refreshes the
+body inventory and must be published through the usual asset workflow.
+`node tools/prepare/prepare-text.mts --check` verifies without writing.
 
 These errors block publication:
 
@@ -55,8 +58,10 @@ Warnings are for the reviewer and never block:
 - a card or introduction that another body shares;
 - repetition between blocks shown together: the introduction, one dataset
   summary and the mission, facility and note cards beside it. This check reads
-  `site/prepared-facilities.json`, so run `pnpm prepare:facilities` first.
+  `site/prepared-facilities.json`, so run
+  `node tools/prepare/prepare-facilities.mts --catalog-only` first.
 
 `tools/prepare/prepare-text.test.mts` runs the check on every registered body.
-`site/test/rendered-page.test.mts` measures the rendered lines at desktop and
-phone widths.
+`site/test/rendered-page.test.mts` checks scene invariants in built HTML; it does
+not measure line wrapping. Inspect affected desktop and phone layouts in a browser
+when text or typography changes.

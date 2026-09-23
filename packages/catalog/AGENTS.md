@@ -14,11 +14,17 @@ prove only that each is self-consistent.
 1. `FORMAT.md` — the spec is the source of truth, not either implementation
 2. `src/format.ts` + `src/read.ts` + `src/write.ts`
 3. `formats/catalog.py` of the external catalogue pipeline (not part of this repository)
-4. `pnpm check:parity` — must pass before the change is done
+4. Cross-language parity evidence for the changed layout — required before the change is done
 
 Skipping (3) produces data the browser reads as garbage with no error, because
 every field still parses. That is the failure mode this package exists to
 prevent.
+
+Run package tests with `pnpm --filter @cssearth/catalog test` from the repository
+root. They do not replace cross-language evidence. The retained
+`scripts/check-parity.mts` runner references a missing `gen_fixture.py`; repair
+that fixture path or supply an independently generated Python fixture before
+claiming parity. There is no current package-script alias for the old runner.
 
 ## Invariants
 

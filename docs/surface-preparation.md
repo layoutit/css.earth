@@ -209,33 +209,35 @@ finite floats: `BLANK` applies only to integer arrays; floating gaps are `NaN`.
 This is a tested product subset, not arbitrary FITS support. Compressed images,
 random groups, int64 image decoding, variable-length/general tables, complex
 values, non-ESO/generalized `HIERARCH` names, `CONTINUE` and general WCS interpretation are unsupported.
-FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums; source
-integrity is enforced through the archive's pinned SHA-256 and byte count.
+FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums. The current
+source manifest does not supply a SHA-256 integrity check. Oracle fixtures can
+check recorded byte counts; exact-byte evidence needs its own retained identity.
 
 ### FITS checks
 
-`pnpm test:fits` runs the focused tests, Nebula Lab transport checks and real
-archive comparisons. Each restored comparison input is verified against its
-manifest hash and size. Astropy and NASA's PDS4 reader provide independent
-reference values; neither runs in the application. The Charon test also
-regenerates spectral maps and compares their exact pinned bytes.
+The focused tests compare decoder results with Astropy and NASA's PDS4 reader;
+neither runs in the application. The shared oracle reader checks declared paths
+and recorded byte counts, not manifest hashes. The Charon spectral-map test
+also compares regenerated maps with its retained reference outputs.
 The [test-only Pallas acquisition record](../tests/fixtures/fits/archive-inputs.json)
-pins the four native files and their source URLs independently of production
+names the four native files, sizes and source URLs independently of production
 body acquisition. They are restored under ignored `.local/fits-reference/`;
 no Pallas body recipe or surface output changes here.
 
-`pnpm test:fits --unit` runs the offline subset, including small checked-in
+`node tools/oracles/test-fits.mts --unit` runs the offline subset, including small checked-in
 Astropy-generated FITS files. CI runs this subset. It does not prove that the
 large archive files are available or that complete body preparation passed.
 Regenerate the small reference fixtures with `node tools/oracles/setup.mts`, then
 `node tools/oracles/run.mts fits/core`; normal tests need no Python environment.
 
-For missing real inputs, run `pnpm build:preparation`, then
-`pnpm test:fits --restore`. Restoration is sequential and limited to the suite's
-pinned source files (about 1.2 GiB on an empty checkout); existing mismatched
-bytes fail instead of being overwritten. An archive download can still fail:
-in particular the pinned Zenodo Pluto endpoint has returned HTTP 403. An exact,
-hash-verified local copy is valid; substituting a different release is not.
+The retained runner's full and `--restore` paths still name four removed per-body
+test files under `tests/objects/unit/`. They are not a working complete gate.
+Until that runner is repaired, restore the affected body's inputs with
+`node tools/assets/restore-source-inputs.mts --object=<id>` and select the existing
+tests beside `tools/fits/` and the affected preparation owner. Report missing
+archive inputs and source-dependent skips; do not claim a full FITS pass from
+the offline subset. A retained local copy must match the intended provider
+product and version, not merely its filename.
 
 ## Map a surface point to source pixels
 
@@ -398,7 +400,7 @@ node --experimental-strip-types tools/objects/refresh-surface-observations.mts i
 node --experimental-strip-types tools/objects/refresh-surface-observations.mts lutetia osiris
 ```
 
-Pin the recipe and source inputs first. This command checks the retained atlas's
+Update the recipe and declare its source inputs first. This command checks the retained atlas's
 layout and transform matrices, prepares only the selected lenses, and updates
 their photographs, thumbnails, minimaps, source indices and delivery pins.
 It records each refreshed surface's billboard colour and the lens catalogue's
@@ -415,10 +417,10 @@ size at both prepared densities. Gutters scale with the map, preserving normaliz
 atlas coordinates; polar sprite dimensions, lighting and scene geometry stay fixed.
 This setting does not change runtime texture selection or add a renderer feature.
 
-After pinning the changed recipe and content, use the shared preparer:
+After updating the changed recipe and content, use the shared preparer:
 
 ```sh
-pnpm build:preparation
+pnpm build:tools
 node tools/objects/dist/refresh-photographs.js moon surface
 node tools/objects/dist/refresh-photographs.js europa normal enhanced
 node tools/objects/dist/refresh-photographs.js io normal enhanced
@@ -497,6 +499,6 @@ surface geometry.
 The common compiler prepares this during normal object finalization. To refresh
 only this metadata from existing local assets, run
 `node tools/prepare/prepare-interior-fills.mts --all` (or supply object ids). The command
-preserves surface assets, motion, lighting and depth partitions, and re-pins the
+preserves surface assets, motion, lighting and depth partitions, and regenerates
 scene and page metadata. Source graphs are retained only after checking that
 their inputs changed solely in those scene references.

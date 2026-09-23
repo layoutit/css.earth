@@ -8,9 +8,12 @@ several products and published sources.
 
 Every registered scene package uses the same `prepared/provenance.json` contract,
 `cssearth-object-provenance@3`. It connects local inputs to prepared outputs.
-The file is a build output. `tools/prepare/prepare-provenance.mts` generates it from the
-source manifest, the recipes and the prepared inventory during `predev` and
-`prebuild`, and it is not committed. To change what it says, change those files.
+The file is generated and never committed. For layered scene bodies,
+`tools/prepare/prepare-provenance.mts` regenerates it from the source manifest,
+recipes and inventory during development and builds. Volume, image-layer and
+catalogue packages publish their baked provenance through `inventory.json`;
+asset setup restores it. To change the lineage, change its source records and
+use the owning preparation path.
 The [Sources catalogue](sources-catalogue.md) supplies the published identities
 and combines usage across bodies. Neither infers dependencies from labels or URLs.
 
@@ -30,7 +33,10 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
    documented. Dataset cards use contribution edges to identify their missions
    and observing equipment.
 
-Each source has its exact path, byte count and SHA-256. Each product records its
+Each source has its declared path. The generator measures byte count and SHA-256
+when the file is present; absent downloads are marked `download-not-present`.
+These measurements in generated lineage are not manifest pins or proof that a
+download matches earlier bytes. Each product records its
 recipe, a JSON Pointer to the operation, any additional contributing recipes,
 input IDs, parent products, output identities, interpretation and limitations.
 Acquisition operations retain configuration-file dependencies recursively;
@@ -54,35 +60,30 @@ dependency binding and a behavioral test, not a body-specific UI condition.
 
 ## Existing assets versus a new preparation run
 
-`pnpm prepare:provenance` brings the records for `OBJECTS` up to date from
-checked recipes, source manifests and prepared asset receipts, and never weakens
-one. Development/build preparation also runs it. Catalogue preparation restores
-missing cited factsheet documents from their pinned acquisition recipes before
-validating the citations. It does not download or rebuild body rendering assets.
+From the repository root, run:
 
-- A body whose identity (pins, recipes, outputs, bindings) is unchanged keeps
-  its record.
-- A body whose identity changed is byte-verified: when every pinned input and
-  output is on disk and matches, the new record is `basis: prepared`.
-- When a pinned file is not on this checkout, a `prepared` record stays as it
-  is, the body is named and the command exits 1; prepare it where its sources
-  are. `--recover` writes a `basis: recovered` record instead, which binds the
-  declared pins without proving the bytes were present. A record that was never
-  prepared is recovered without the flag.
-- `basis: prepared` is also emitted by the preparation pipeline itself after
-  checking the bound source and output bytes.
+```sh
+node tools/prepare/prepare-provenance.mts <object-id>
+```
 
-`lastPreparation` separately retains the fingerprint of the last byte-verified
-preparation and the lineage verifier's identity. It covers object identity,
-source pins and dependencies, recipe pins, product bindings and output pins.
-Metadata recovery carries it forward even when the compiler or credits change.
-The preparation summary reports `material-matches`, `material-changed`, or
-`not-recorded`; a retained fingerprint never grants verification to new bytes.
-A new verified preparation replaces this snapshot. Git retains prior full records;
-this is not an execution log or scientific acceptance certificate.
+Omit the ID to regenerate all registered scene-body records. By default the
+command validates and publishes their prospective lineage and both shared
+catalogues together. `--objects-only` writes only the scene-body records; the
+startup/build chains use it before preparing the catalogues. The command does
+not rebake surface assets or regenerate volume/catalogue provenance.
 
-The 36 historical records recovered from before PR #208 include an exact Git
-revision, path and file hash. Missing historical evidence is left unrecorded.
+Each invocation builds current lineage with `basis: recovered` and `verify: false`.
+It does not retain an earlier record, accept `--recover`, or compare an authored
+recipe with a stored manifest digest. Present sources and recipes are measured;
+missing downloads remain explicit. Output identities come from the runtime
+inventory or available prepared outputs. This establishes the recorded source
+chain, not a fresh acquisition or a reproduced bake.
+
+The authored preparation path can produce `basis: prepared` after checking its
+bound outputs and records `lastPreparation` for that run. A later metadata
+regeneration does not carry that snapshot forward as proof of a new run.
+Preserve original execution reports under their owning evidence directory and
+identify the revision and bytes they actually tested.
 
 An acquisition operation records the declared request and processing policy,
 when available. It is not a retrospectively invented execution receipt. Some
@@ -97,8 +98,9 @@ This is not a claim of provenance for every scientific statement, every runtime
 byte, the shared sky, or remote geographic delivery. Authored information is
 recorded as authored content. The Sources compiler separately reads the
 [citations on individual facts](factsheets.md); that records attribution, not
-independent verification of the quantity. The `generator` hash identifies the
-lineage compiler, not the implementation that originally made a recovered asset.
+independent verification of the quantity. `generator.path` names the current
+lineage compiler; it does not identify the implementation that originally made
+an installed asset. Git revisions and original run evidence establish that history.
 Shared scene credits retain their existing
 separate owner. The compiler also supports Earth noise page records, but those
 geographic views are absent from Earth's current descriptor. That binding does
@@ -122,9 +124,9 @@ not overlap another writer for the same object. It does not provide an
 instantaneous multi-file switch for live readers or recovery from process
 termination or power loss.
 
-The publication and prepared-set tests inject failures after image replacement,
-retirement and metadata writes. The Mimas finalization test checks that the real
-CSS compiler reproduces its finalized runtime without changing canonical files.
+The publication and prepared-set tests exercise staging, replacement and rollback.
+Use the current tests beside `tools/objects/publication.mts` and
+`tools/prepared/write-prepared-set.mts`, with their required inputs installed.
 These checks do not replace a visual or scientific oracle.
 
 ## Source and mission presentation
@@ -156,11 +158,11 @@ For source bindings or product-lineage changes, run:
 ```sh
 pnpm test:node
 ```
-The suite checks tampered inputs/outputs/recipes, recovery semantics, compound
-Mercury coverage, Saturn material dependencies, Earth noise identity, preview
-inheritance, and preservation of source entries across the full registry.
-Those checks qualify this contract; they do not replace complete object or
-scientific qualification.
+This is the broad native suite. For a focused change, select the relevant tests
+under `src/platform/`, `tools/contract/`, `tools/sources/` and the affected preparer.
+Report source-dependent skips separately. The suite does not reinstate the
+removed manifest-pin or provenance-retention checks, and a pass does not replace
+independent scientific qualification.
 
 ## Prepared context resources
 
@@ -173,7 +175,7 @@ Their root `inventory.json` lists every baked file with its location. A
 resolves below the object's `prepared/` directory; a `public` entry resolves
 below `public/scenes/<id>/`, for shared dataset previews. Absolute paths,
 parent traversal and symlink installation paths are rejected. Inventories list
-byte counts and SHA-256 values for both locations; the prepared mirror must
+byte counts and SHA-256 values for both locations; restored bytes must
 match the root inventory. Prepared-directory verification preserves the root metadata receipts and
 requires an explicit public root when public assets are listed, checking both
 locations. The public-scene assembler rejects prepared resources before writes;
@@ -182,9 +184,8 @@ it must never prune object preparation records.
 An explicit `--object=<id>` can select an inventoried context resource for
 shared asset setup. Default scene selection is unchanged. An inventory does
 not claim its files have been published to the runtime asset mirror. The Nearby
-Universe's `prepare:galaxy-field` command reproduces its assets from pinned
-catalogue downloads and regenerates provenance; source and generated-image
-caches remain ignored. `prepare:sources` recovers lineage from retained metadata receipts without
-requiring downloads or prepared imagery. Available output bytes are checked,
-but recovered records retain manifest-pin verification independently of the
-local cache.
+Universe's `pnpm prepare:galaxy-field` command acquires its configured catalogue
+inputs, prepares its fields and refreshes shared lineage/catalogues; source and
+generated-image caches remain ignored. Volume, image-layer and catalogue
+`prepared/provenance.json` files are baked assets in their inventories. The
+scene-body provenance generator does not reconstruct a missing record for them.

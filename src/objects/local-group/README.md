@@ -115,7 +115,7 @@ lost candidates, and a changed canonical rebake.
 
 ### Sparse context display
 
-`pnpm prepare:galaxy-catalog` also writes `prepared/display-sample.json`.
+`node tools/objects/dist/prepare-galaxy-catalog.js src/objects/local-group` also writes `prepared/display-sample.json`.
 The [sampling recipe](source/presentation.json) selects 48 catalogue-only Local Group galaxies using 150 kpc spatial cells,
 weighted by square-root galaxy counts. This balances dense and sparse cells but
 does not guarantee representation of every occupied cell. Positions and scientific source references

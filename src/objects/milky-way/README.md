@@ -23,17 +23,20 @@ milky-way/
 
 App startup restores missing images from the pinned sources via `pnpm prepare:environment-images`, preserving the accepted metadata. See the [shared bake commands](../../../labs/nebula/docs/baking.md).
 
-From the repository root, with Node 22.15+ and pnpm 10.33.0:
+From the repository root, with Node 24 (or 22.18+) and pnpm 10.33.0:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
-pnpm prepare:universe
+pnpm build:tools
+pnpm prepare:volume src/objects/milky-way
+node tools/objects/dist/prepare-stars.js src/objects/stellar-neighbourhood
+node tools/objects/dist/prepare-shell.js src/objects/heliosphere
+pnpm prepare:world-context
 pnpm test:preparation --universe
 ```
 
 This builds preparation tools, reproduces the Milky Way assets and the Sun's
-world context, and checks source hashes, prepared resource closure, physical
+world context, and checks the available preparation cases for prepared resource closure, physical
 orbit alignment, and PolyCSS pixel-to-world mapping. The normal
 `pnpm test:preparation` also includes these tests. To prepare another compatible
 volume after building tools, use `pnpm prepare:volume <object-directory>`.

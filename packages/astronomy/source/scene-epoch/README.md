@@ -30,7 +30,7 @@ not supplied: Horizons' available solution ends in January 2018; its displayed
 
 Normal preparation is offline. To deliberately refresh the same nineteen requests,
 run `node packages/astronomy/tools/acquire-scene-ephemeris.mts`, review the changed
-raw responses and manifest, then run `pnpm prepare:solar-geometry` and regenerate
+raw responses and manifest, then run `node tools/prepare/prepare-solar-geometry.mts` and regenerate
 the affected prepared world frames and world context with
 `node tools/prepare/refresh-scene-ephemeris.mts`. This also updates the retained surface
 carrier and sky/Sun registration using the same numeric preparation owner;
