@@ -84,8 +84,8 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           # Body source and evidence data (images, archives, cubes, video: about 790 of 1,070 MB) is never read by
-          # these jobs, so fetch only the blobs the sparse tree needs. Nebula keeps the full tree: it verifies
-          # volume packages' tracked previews.
+          # these jobs, so fetch only the blobs the sparse tree needs. Nebula adds its volume packages below
+          # for tracked previews and compact inputs.
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: &code-and-text |
@@ -557,6 +557,19 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
+      - name: Include tracked volume package inputs
+        # Source manifests own the package list; retain their previews and compact inputs without planetary binaries.
+        run: |
+          if [ "${GITHUB_ACTIONS:-}" = true ]; then
+            git grep -l 'cssearth-volume-source-manifest@1' -- 'src/objects/*/source/manifest.json' |
+              while IFS= read -r manifest; do
+                printf '/%s/**\n' "${manifest%/source/manifest.json}"
+              done | git sparse-checkout add --stdin
+          fi
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:

@@ -73,16 +73,18 @@ group and can supersede an older deployment.
 - Do not hide a failing check with `continue-on-error`, a wider tolerance, skipped
   cases or a larger timeout. Fix the owning defect and retain a regression test.
 - The heavy universe jobs use a partial clone and the shared `code-and-text`
-  sparse-checkout pattern. Nebula keeps a full tree because its restoration reads
-  tracked preview images. Validate any pattern change against the actual selected
-  consumers, including their source/label dependencies and cache keys.
+  sparse-checkout pattern. Nebula extends that tree with the complete volume
+  packages identified by their source manifests, retaining tracked previews and
+  compact inputs without unrelated planetary binaries. Validate any pattern change
+  against the actual selected consumers, including their source/label dependencies
+  and cache keys.
 
 An earlier checkout experiment, recorded in [PR #475](https://github.com/layoutit/css.earth/pull/475)
 and run [35621432602](https://github.com/layoutit/css.earth/actions/runs/35621432602),
 measured 22.4 s mean for narrowed jobs versus 25.8 s for untouched jobs, inside
 that run's normal spread. [PR #549](https://github.com/layoutit/css.earth/pull/549)
 later introduced the current pattern and documented its checked consumers and
-nebula exception. Neither an older timing nor the smaller checkout alone proves
+original nebula exception. Neither an older timing nor the smaller checkout alone proves
 that today's required feedback meets the budget; measure the current workflow.
 
 ## Adding tests

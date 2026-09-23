@@ -76,7 +76,6 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
       end.remove();
       presentation = { ...runtime.state(), selectLens() {} };
     }
-    for (const context of bank.querySelectorAll<HTMLElement>('[data-dataset-context]')) context.hidden = context.dataset.datasetContext !== presentation.selectedLens;
   } else resolvePreparedFocusLens(selection.lens, null, unavailable);
   const card = createPreparedFocusCard(root, id => {
     for (const radio of root.querySelectorAll<HTMLInputElement>(':scope > .object-native-tabs > input')) radio.toggleAttribute('checked', radio.value === id);

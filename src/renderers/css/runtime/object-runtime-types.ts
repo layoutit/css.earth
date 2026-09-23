@@ -1,4 +1,4 @@
-import type { ObjectControls, ObjectSelection } from "./object-contract.js";
+import type { ObjectControls, ObjectSelection, LensVolume } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
 import type { CameraPlan } from "../navigation/types.js";
 import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
@@ -43,6 +43,12 @@ export interface ObjectRuntimeCapabilities {
 }
 export interface ObjectMountOptions {
   onError(error: unknown): void; onMotionRequest?(requested: boolean): void;
+  /** The application owns the world companions required by a body dataset. */
+  datasetEffects?: {
+    prepare(volume: LensVolume | null, signal: AbortSignal): void | Promise<void>;
+    commit(volume: LensVolume | null): void;
+    error(error: unknown): void;
+  };
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
   worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;

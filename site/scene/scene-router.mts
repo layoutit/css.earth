@@ -3,7 +3,6 @@ import { createSceneView } from './scene-view.mts';
 import { createSceneActivation } from './scene-activation.mts';
 import { createScenePublication } from './scene-publication.mts';
 import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
-import { withDataset } from '../dataset-url.mts';
 import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
 import { errorMessage, record } from '../browser-types.mts';
 import type { ObjectEntry } from '../object-schema.mts';
@@ -28,7 +27,7 @@ import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import { createWorldPreferences } from '../world-preferences.mts';
-import { syncCompanionClouds } from './scene-datasets.mts';
+import { createDatasetEffects } from './scene-datasets.mts';
 import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
 import { readPreparedDescriptor } from '../prepared-descriptor.mts';
 
@@ -82,8 +81,6 @@ export function createSceneRouter({
 
   const world = createSceneWorld({ owner: persistentWorldContext, stage, windowTarget, isCurrent: scenes.isCurrent,
     onMount(value) {
-      // Replay display intent and any dataset cloud selected before the world was ready.
-      if (scenes.current?.mount?.datasets) syncCompanionClouds(scenes.current.mount.datasets, value);
       preferences.apply(value);
     },
     onSelectFocus(id) { void navigate(objectId, { kind: 'focus', id }).catch(report); },
@@ -198,6 +195,7 @@ export function createSceneRouter({
         ...(world.current ? { viewport: world.current.viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
+        datasetEffects: createDatasetEffects(session, world.current),
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
@@ -212,10 +210,8 @@ export function createSceneRouter({
       activation.connectControls(session, arrival.feature);
       if (!session.commit()) return false;
       if (mount.datasets) {
-        syncCompanionClouds(mount.datasets, world.current);
         session.own(mount.datasets.subscribe(() => {
           if (!scenes.isCurrent(session) || requests.current || scenes.state.kind !== 'ready') return;
-          syncCompanionClouds(mount.datasets!, world.current);
           view.syncDataset(session);
         }));
       }
@@ -424,7 +420,7 @@ export function createSceneRouter({
           selection.commit(next.overview ? { kind: 'overview', overview: { scope: 'system', systemId: objectId } }
             : { kind: 'object', objectId }, objectId);
           if (next.overview) aimAtSystemCenter();
-          view.replace(session, selection.url(withDataset(new URL(windowTarget.location.href), null)));
+          view.replace(session, selection.url(windowTarget.location.href));
           session.viewUrl?.flush();
           return;
         }
