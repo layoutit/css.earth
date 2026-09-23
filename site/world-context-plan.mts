@@ -1,4 +1,4 @@
-import { parsePreparedSystemViews, parsePreparedWorldContextSummary } from '../src/renderers/css/dist/index.js';
+import { parsePreparedWorldContextSummary } from '../src/renderers/css/dist/index.js';
 
 // The application's prepared world context, validated once. Startup, framing and
 // every detail mount share this immutable plan. The browser fetches the prepared
@@ -25,21 +25,14 @@ const source = new URL('../src/objects/sun/prepared/world-context-summary.json',
 /** What the world planner worker reads itself: this summary, and the binary orbit bank it pins. */
 export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ summaryUrl: source.href,
   orbitsUrl: new URL('../src/objects/sun/prepared/world-orbits.bin', import.meta.url).href });
-async function readPrepared(url: URL, file: string): Promise<unknown> {
+async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
-  if (url.protocol === 'file:') {
+  if (source.protocol === 'file:') {
     const { nodeProjectFileUrl } = await import('../tools/prepared/prepared-world-context-node-source.mts');
-    return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, `src/objects/sun/prepared/${file}`), { with: { type: 'json' } })).default;
+    return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, 'src/objects/sun/prepared/world-context-summary.json'), { with: { type: 'json' } })).default;
   }
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Prepared ${file} request failed: ${response.status}.`);
+  const response = await fetch(source);
+  if (!response.ok) throw new Error(`Prepared world context request failed: ${response.status}.`);
   return response.json();
 }
-export const APPLICATION_WORLD_CONTEXT = parsePreparedWorldContextSummary(await readPrepared(source, 'world-context-summary.json'));
-
-// System framing's camera candidates, about three quarters of the world context by size, stay out of the summary
-// every page waits for. The first system overview or navigation reads them (`site/system-framing.mts`).
-const systemViewsSource = new URL('../src/objects/sun/prepared/world-system-views.json', import.meta.url);
-export async function readApplicationSystemViews() {
-  return parsePreparedSystemViews(await readPrepared(systemViewsSource, 'world-system-views.json'), APPLICATION_WORLD_CONTEXT);
-}
+export const APPLICATION_WORLD_CONTEXT = parsePreparedWorldContextSummary(await readPreparedWorldContext());

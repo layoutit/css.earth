@@ -13,7 +13,7 @@ import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { labelImportance } from '../labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, loadSystemViews, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await loadSystemViews();
+await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../../objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];

@@ -17,7 +17,7 @@ import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await loadSystemViews();
+await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../src/objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
 const context = parsePreparedWorldContext(contextInput);
 // Target calculation never requests native frames or queries absent shell nodes.
 const windowTarget = {} as Window;

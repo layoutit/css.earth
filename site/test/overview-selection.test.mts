@@ -12,7 +12,7 @@ import type { ObjectWorldNavigationListener } from '../../src/renderers/css/runt
 import type { OverviewSelection } from '../overview-selection.mts';
 import { loadSystemViews } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await loadSystemViews();
+await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../src/objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
 /** CSS presentation to a right-handed reference: a reflection. */
 const reflection = [1, 0, 0, 0, -1, 0, 0, 0, 1] as const;

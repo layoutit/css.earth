@@ -18,7 +18,7 @@ import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import type { PreparedArrivalView } from '../arrival-view.mts';
 import { loadSystemViews } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await loadSystemViews();
+await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../src/objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };
