@@ -46,11 +46,11 @@ export function createObjectSelectionRuntime({
       return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan, initial: !committed || !textureRefinement });
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
-  function frame(nextSelection: ObjectSelection | null = committed, nextPlan: PreparedPresentationPlan | null = committedPlan) {
+  function frame(nextSelection: ObjectSelection | null = committed) {
     if (!live() || !nextSelection || !view) return;
     residency.beginFrame();
     try {
-      presentation.publishFrame({ selection: nextSelection, view, plan: nextPlan, resources: residency.resources });
+      presentation.publishFrame({ selection: nextSelection, view, resources: residency.resources });
       framePublications++;
     } finally { residency.endFrame(); }
   }
@@ -148,7 +148,7 @@ export function createObjectSelectionRuntime({
           if (!current()) { discard(request); return false; }
           residency.commit(ticket);
           request.ticket = null;
-          frame(selection, plan);
+          frame(selection);
           if (!current()) return false;
           onCommit(selection, plan, { kind, frameCamera });
           if (!current()) return false;
@@ -198,7 +198,7 @@ export function createObjectSelectionRuntime({
         const plan = committed ? resolve(committed) : null;
         const prepared = plan && committedPlan && sameKeys(plan.required, committedPlan.required) &&
           sameKeys(plan.prewarm, committedPlan.prewarm) && plan.required.every(key => residency.resources.has(key));
-        frame(committed, prepared ? plan : committedPlan);
+        frame(committed);
         // Pure view facts can change within the same prepared resource set.
         // Remember the plan actually published, without a decode transaction
         // or an object-local cursor for those facts.

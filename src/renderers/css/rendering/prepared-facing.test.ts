@@ -23,7 +23,7 @@ test('retained facing writes only transitions, preserves layout and restores vis
   expect(node.style.display).toBeUndefined();
   publish(projection(-5)); publish(projection(-5));
   expect(writes).toEqual(['hidden', '']);
-  publish(projection(5)); publish(undefined);
+  publish(projection(5)); publish(projection(-5));
   expect(writes).toEqual(['hidden', '', 'hidden', '']);
 });
 

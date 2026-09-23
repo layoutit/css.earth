@@ -16,7 +16,12 @@ test('surface labels keep no frame loop while they are off, the default', () => 
   const run = () => { const pending = [...frames.values()]; frames.clear(); for (const callback of pending) callback(); };
   const lifetime = createSceneLifetime();
   const plan = { outline: { pieces: 0 }, catalog: { count: 0 }, policy: { minimumZoomShare: 0 } } as unknown as Parameters<typeof mountSurfaceFeatureLabels>[0]['plan'];
+  const host = document.getElementById('host')!;
+  const unused = (): never => { throw new Error('The label-loop fixture must not navigate.'); };
   const labels = mountSurfaceFeatureLabels({ host: document.getElementById('host')!, plan, objectId: 'moon', target: document.getElementById('mesh')!,
+    pickingHost: host, inputSurface: host, flightLimits: unused,
+    navigation: { frame: { referenceFrame:'test',epochJdTt:1,originM:[0,0,0],presentationToReference:[1,0,0,0,1,0,0,0,1],metersPerUnit:1,bodyRadiusM:1 },
+      capture:unused,apply:unused,preparedFocus:unused,setPreparedFocus:unused,flyToPreparedFocus:unused,optics:unused,subscribe:unused },
     scene: document.getElementById('scene')!, zoomRange: () => ({ minimum: 1, maximum: 2 }), lifetime, onError() {},
     // The catalogue never arrives: this test is about the frame loop, not the labels it would place.
     transport: () => new Promise<Response>(() => {}) });

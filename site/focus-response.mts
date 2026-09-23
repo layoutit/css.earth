@@ -55,8 +55,7 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
       const lensId = resolvePreparedFocusLens(selection.lens, payload)!;
       const focus = resolvePreparedFocus(selected, payload.framingRadiusUnits * payload.lenses[0].volume.frame.metersPerUnit,
         PREPARED_WORLD_PRESENTATION.galaxies);
-      const focalCss = definition.camera.projection?.cssPerspective;
-      if (!focalCss) throw new TypeError('Prepared focus requires the shared physical camera.');
+      const focalCss = definition.camera.projection.cssPerspective;
       const viewport = { focalPixels: 1000, widthPixels: 1e9, heightPixels: 1e9, principalOffsetPixels: [0, 0] as const };
       const world = saved ? savedWorldCamera(saved, frame, viewport) : createWorldSelectionTarget(
         worldCameraFromCenteredPresentation({ rotation: [1, 0, 0, 0, 1, 0, 0, 0, 1], distanceUnits: frame.bodyRadiusM / frame.metersPerUnit * 4 }, frame, viewport),

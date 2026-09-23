@@ -1,6 +1,6 @@
 import type { ObjectControls, ObjectSelection, LensVolume } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
-import type { CameraPlan } from "../navigation/types.js";
+import type { PerspectiveCameraPlan } from "../navigation/types.js";
 import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 import type { PreparedAssets } from "../rendering/prepared-residency.js";
@@ -19,7 +19,7 @@ export type { PreparedAssetOrigin };
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
-  readonly camera: CameraPlan; readonly assets: PreparedAssets; readonly sky: CubicSkyPlan;
+  readonly camera: PerspectiveCameraPlan; readonly assets: PreparedAssets; readonly sky: CubicSkyPlan;
   readonly sun?: DirectionalSunPlan | null;
   readonly destinations?: unknown;
   readonly surfaceHit?: PreparedSurfaceHit;

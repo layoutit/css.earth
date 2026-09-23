@@ -38,9 +38,9 @@ export function materialOrbitFixture(id: string) {
       shared.callbacks.drag = options; shared.owners.add('drag');
       return { update() {}, stop() {}, invalidateTrackball() {}, stats() { return {}; }, destroy() { shared.owners.delete('drag'); } };
     },
-    createCubicSkyCameraOrientation: () => ({ scene: () => identity, sceneMatrix: () => ({ m11: 1, m22: 1, m33: 1, m12: 0, m13: 0, m21: 0, m23: 0, m31: 0, m32: 0 }),
-      skybox: () => ({ matrix: identity, sunViewDirection: [0, 0, 1] }),
-      counterRotation: () => identity, captureCounterRotation: () => () => identity, setSceneRotation() {},
+    createCameraOrientation: () => ({ scene: () => identity, sceneMatrix: () => ({ m11: 1, m22: 1, m33: 1, m12: 0, m13: 0, m21: 0, m23: 0, m31: 0, m32: 0 }),
+      sunViewDirection: () => [0, 0, 1],
+      captureCounterRotation: () => () => identity, setSceneRotation() {},
       reset() {}, rotate() {}, snapshot: () => ({}) }) };
   const shared = orbitFixture(null, false, sharedDependencies as unknown as Partial<import('../../renderers/css/dist/platform/object-orbit.js').OrbitServices>);
   const f = { ...shared, stage: nativeStage, errors: [], writes: 0, fail: false, create: async () => undefined, event: () => undefined, restore() {} } as unknown as MaterialFixture;

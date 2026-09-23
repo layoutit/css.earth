@@ -17,7 +17,6 @@ export interface PerspectiveWorldContext {
   /** Optional authored alias calibration for legacy retained Sun framing. */
   readonly framingReferenceZoom?: number;
   /** Optional authored cubic-sky registration for a physical observer. */
-  readonly sceneRegistration?: string;
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
 export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; worldContext: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; stage: HTMLElement; viewport: CameraViewport;
@@ -151,7 +150,6 @@ export function createPerspectiveDolly({
 }: PerspectiveDollyOptions) {
   const cameraPlan = validatePerspectiveCameraPlan(unvalidatedCameraPlan);
   // The shell's shared viewport; publication shadows the name with its own optics below.
-  const sharedViewport = viewport;
   if (!worldContext) throw new TypeError("Perspective dolly requires a prepared physical camera context.");
   const bodyRadius = worldContext.bodyRadiusUnits;
   const kilometersPerUnit = worldContext.kilometersPerUnit;
@@ -337,19 +335,16 @@ export function createPerspectiveDolly({
     bodyCenter: bodyCenter === null ? null : [...bodyCenter] as PositionM,
     focal, viewportWidth, viewportHeight, principalOffset, stageViewport,
   });
-  function publishPresentation(snapshot: ReturnType<typeof capturePresentation>, publishedWorld: WorldCameraPose | null) {
+  function publishPresentation(snapshot: ReturnType<typeof capturePresentation>, publishedWorld: WorldCameraPose) {
       const { distance, rotation, focal, viewportWidth, viewportHeight,
         principalOffset, stageViewport, scenePresentation } = snapshot;
       const viewport = { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
-      const genericPresentation = publishedWorld ? presentWorldCamera(publishedWorld, worldContext.frame, viewport) : null;
-      const [bodyX, bodyY, bodyZ] = genericPresentation?.translateCssPixels ?? [0, 0, focal - distance];
-      if (publishedWorld) worldContext.onWorldPublish?.(publishedWorld, sharedViewport
-        ? { focalPixels: focal, principalOffsetPixels: stageViewport.principalOffsetPixels } : viewport);
-      const genericBody = genericPresentation === null ? undefined : genericBodyProjection(
-        genericPresentation, bodyRadius, focal,
-      );
-      projectedBody = genericBody ?? null;
-      if (projectedBody) lod = levelOfDetailFor(levelOfDetail, projectedBody.silhouetteDiameter);
+      const genericPresentation = presentWorldCamera(publishedWorld, worldContext.frame, viewport);
+      const [bodyX, bodyY, bodyZ] = genericPresentation.translateCssPixels;
+      worldContext.onWorldPublish?.(publishedWorld, { focalPixels: focal, principalOffsetPixels: stageViewport.principalOffsetPixels });
+      const genericBody = genericBodyProjection(genericPresentation, bodyRadius, focal);
+      projectedBody = genericBody;
+      lod = levelOfDetailFor(levelOfDetail, genericBody.silhouetteDiameter);
       // A marker-stage body is its proxy (see the presentation policy above).
       // An undrawn mesh publishes no material, so it also waits for the one its
       // resolving camera commits instead of revealing an untextured globe.
@@ -390,7 +385,7 @@ export function createPerspectiveDolly({
         viewportWidth,
         viewportHeight,
         principalOffset,
-        ...(genericBody === undefined ? {} : { body: genericBody, levelOfDetail: lod }),
+        body: genericBody, levelOfDetail: lod,
       });
   }
   function preparePresentation(sceneMatrix: Matrix3dLike, scenePresentation: string) {

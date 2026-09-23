@@ -17,14 +17,14 @@ export interface DepthPartitionNode { hidden: boolean; style: Pick<CSSStyleDecla
  * style discovery, mesh construction or node replacement enters a frame. */
 export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | undefined,
   nodes: readonly DepthPartitionNode[], scene: DepthPartitionNode) {
-  if (!plan) return (_projection: PhysicalProjection | undefined) => {};
+  if (!plan) return (_projection: PhysicalProjection) => {};
   const groups = plan.groups.map(group => ({ root: nodes[group.root], scene: nodes[group.scene], rank: -1 }));
   const dependsOnEye = (order: PreparedDepthOrder): boolean => 'plane' in order ||
     'sequence' in order && order.sequence.some(dependsOnEye);
   const changingOrder = dependsOnEye(plan.order);
   let ordered = false;
   let transform: string | null = null, hidden: boolean | null = null;
-  return (projection: PhysicalProjection | undefined) => {
+  return (projection: PhysicalProjection) => {
     const nextTransform = scene.style.transform, nextHidden = scene.hidden;
     if (transform !== nextTransform || hidden !== nextHidden) {
       for (const group of groups) {
@@ -34,7 +34,7 @@ export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | un
       transform = nextTransform; hidden = nextHidden;
     }
     if (ordered && !changingOrder) return;
-    const eye = projection ? sceneEye(projection) : null;
+    const eye = sceneEye(projection);
     if (!eye) return;
     let rank = 0;
     function visit(node: PreparedDepthOrder) {

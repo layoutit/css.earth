@@ -92,6 +92,9 @@ test('physical silhouette fitting replaces shell scale and keeps the prepared ce
   mounted.publishFrame({ selection: {} as never, resources: {} as never, view: {
     controlPitch: 0, controlYaw: 0, zoom: 1, sceneMatrix: '', sunViewDirection: null,
     counterRotation: '', counterRotationFor: () => '',
+    projection: {focalPixels:1000, principalOffsetPixels:[0,0], eyeFromScene:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,-1000,1]},
+    principalOffset:[0,0], stageViewport:{principalOffsetPixels:[0,0]},
+    levelOfDetail:{stage:'geometry',silhouetteDiameter:1012,billboardOpacity:0,markerOpacity:0},
     body: { visible: true, silhouette: { centre: [70, -40], radial: [0, 1], radialSemiAxis: 506, tangentialSemiAxis: 253 } },
   } });
   expect(overlay.style.scale).toBe('1');
