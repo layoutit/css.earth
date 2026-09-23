@@ -196,12 +196,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           },
           resolveGalaxy(id: string) { return catalogBanks.catalog?.resolve(id) ?? null; },
           ensureGalaxyCatalog: catalogBanks.ensureCatalog,
-          ensureImageLayer: catalogBanks.ensureImageLayer,
-          ensureVolumeLens: lenses.ensure,
-          imageLayerFrames: catalogBanks.imageLayerFrames,
-          // Descriptor bounds become authored framing as each bank loads.
-          get volumeLensFrames() { return lenses.frames(); },
-          volumeLensState: lenses.state,
+          focusBank(id: string) { return lenses.focusBank(id) ?? catalogBanks.focusBank(id); },
           setVolumeLensEnabled: lenses.setEnabled,
           selectVolumeLens: lenses.select,
           setStellarPointsEnabled(enabled: boolean) {
@@ -209,7 +204,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             lenses.setStarsVisible(enabled === true);
             background.publishStellarPoints();
           },
-          subscribeVolumeLens: lenses.subscribe,
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             return spatial.captureFrame(world, viewport);
           },

@@ -1,3 +1,4 @@
+import { createImageFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -107,11 +108,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       for (const bank of images) if (initialImages.has(bank.id)) void ensureImage(bank);
     },
     mountInitialCatalog() { if (catalogPayload) mountCatalog(catalogPayload); },
-    ensureImageLayer(id: string) {
+    focusBank(id: string) {
       const bank = byId.get(id);
-      return bank ? ensureImage(bank) : Promise.resolve();
+      return bank ? createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank)) : null;
     },
-    imageLayerFrames: Object.freeze(Object.fromEntries(declarations.map(bank => [bank.id, bank.frame]))),
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string) {
       if (lifetime.disposed) return;
       for (const bank of images) {

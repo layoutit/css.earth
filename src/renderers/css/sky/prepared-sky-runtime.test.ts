@@ -96,10 +96,10 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
   expect(loadImageLayer).not.toHaveBeenCalled(); expect(loadCatalog).not.toHaveBeenCalled();
   expect(root.dataset).toMatchObject({ imageLayerDeclaredBankCount: '1', imageLayerResidentBankCount: '0', catalogResident: 'false' });
-  await Promise.all([mounted.ensureGalaxyCatalog(), mounted.ensureGalaxyCatalog(), mounted.ensureImageLayer(image.id), mounted.ensureImageLayer(image.id)]);
+  await Promise.all([mounted.ensureGalaxyCatalog(), mounted.ensureGalaxyCatalog(), mounted.focusBank(image.id)!.load(), mounted.focusBank(image.id)!.load()]);
   expect(loadCatalog).toHaveBeenCalledTimes(1); expect(loadImageLayer).toHaveBeenCalledTimes(1); expect(catalogMount).toHaveBeenCalledTimes(1);
   expect(root.dataset).toMatchObject({ imageLayerResidentBankCount: '1', imageLayerLoadingBankCount: '0', catalogResident: 'true', catalogLoading: 'false' });
-  await mounted.ensureGalaxyCatalog(); await mounted.ensureImageLayer(image.id);
+  await mounted.ensureGalaxyCatalog(); await mounted.focusBank(image.id)!.load();
   expect(loadCatalog).toHaveBeenCalledTimes(1); expect(loadImageLayer).toHaveBeenCalledTimes(1);
   mounted.destroy(); expect(catalogRuntime.destroy).toHaveBeenCalledTimes(1);
 });
@@ -447,24 +447,24 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2]], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(far, viewport);
     expect(loadVolumeLens).not.toHaveBeenCalled();
-    expect(mounted.volumeLensState(bank.id)).toBeNull();
-    expect(mounted.volumeLensFrames[bank.id]!.framingRadiusUnits).toBe(Math.hypot(1, 1, 1));
+    expect(mounted.focusBank(bank.id)!.state()).toBeNull();
+    expect(mounted.focusBank(bank.id)!.framingRadiusM()).toBe(Math.hypot(1, 1, 1) * frame.metersPerUnit);
     // Focus readiness and dataset selection share the same real loader work.
-    const readiness = mounted.ensureVolumeLens(bank.id);
+    const readiness = mounted.focusBank(bank.id)!.load();
     mounted.selectVolumeLens(bank.id, 'optical');
     expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
     await readiness;
-    expect(mounted.volumeLensState(bank.id)).not.toBeNull();
-    expect(mounted.volumeLensFrames[bank.id]!.framingRadiusUnits).toBe(.25);
-    expect(mounted.volumeLensState(bank.id)!.selectedLens).toBe('optical');
+    expect(mounted.focusBank(bank.id)!.state()).not.toBeNull();
+    expect(mounted.focusBank(bank.id)!.framingRadiusM()).toBe(.25 * frame.metersPerUnit);
+    expect(mounted.focusBank(bank.id)!.state()!.selectedLens).toBe('optical');
     const failure = new Error('Bank download failed');
     const failed = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
       resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
       ...lensBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeLens: () => Promise.reject(failure) }).mount(document.createElement() as unknown as HTMLElement);
     try {
-      await expect(failed.ensureVolumeLens(bank.id)).rejects.toBe(failure);
-      expect(failed.volumeLensState(bank.id)).toBeNull();
-      await expect(failed.ensureVolumeLens('unknown')).rejects.toThrow('Unknown prepared volume lens bank');
+      await expect(failed.focusBank(bank.id)!.load()).rejects.toBe(failure);
+      expect(failed.focusBank(bank.id)!.state()).toBeNull();
+      expect(failed.focusBank('unknown')).toBeNull();
     } finally { failed.destroy(); }
   } finally { mounted.destroy(); }
 });
@@ -502,35 +502,35 @@ test('hidden lens banks are bounded, active subscriptions pin them, and eviction
   try {
     mounted.selectVolumeLens('near-bank', 'infrared');
     mounted.setStellarPointsEnabled(false);
-    const releaseNear = mounted.subscribeVolumeLens('near-bank', () => {});
-    await vi.waitFor(() => expect(mounted.volumeLensState('near-bank')).not.toBeNull());
+    const releaseNear = mounted.focusBank('near-bank')!.subscribe(() => {});
+    await vi.waitFor(() => expect(mounted.focusBank('near-bank')!.state()).not.toBeNull());
     const camera = (distancePc: number): WorldCameraPose => ({ referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
         orientationXyzw: [0, 0, 0, 1] } });
     mounted.publish(camera(52), viewport);
     mounted.publish(camera(102), viewport);
-    await vi.waitFor(() => expect(mounted.volumeLensState('far-bank')).not.toBeNull());
+    await vi.waitFor(() => expect(mounted.focusBank('far-bank')!.state()).not.toBeNull());
     mounted.publish(camera(102), viewport);
-    expect(mounted.volumeLensState('near-bank')).not.toBeNull();
+    expect(mounted.focusBank('near-bank')!.state()).not.toBeNull();
     expect((mounted.root as unknown as FakeElement).dataset).toMatchObject({ volumeLensPinnedBankCount: '1', volumeLensWarmDomNodeBudget: '0' });
 
     releaseNear();
-    expect(mounted.volumeLensState('near-bank')).toBeNull();
+    expect(mounted.focusBank('near-bank')!.state()).toBeNull();
     expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
 
-    const releaseReloaded = mounted.subscribeVolumeLens('near-bank', () => {});
-    await vi.waitFor(() => expect(mounted.volumeLensState('near-bank')).not.toBeNull());
-    expect(mounted.volumeLensState('near-bank')).toMatchObject({ selectedLens: 'infrared', starsVisible: false });
+    const releaseReloaded = mounted.focusBank('near-bank')!.subscribe(() => {});
+    await vi.waitFor(() => expect(mounted.focusBank('near-bank')!.state()).not.toBeNull());
+    expect(mounted.focusBank('near-bank')!.state()).toMatchObject({ selectedLens: 'infrared', starsVisible: false });
     expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(2);
     releaseReloaded();
-    expect(mounted.volumeLensState('near-bank')).toBeNull();
+    expect(mounted.focusBank('near-bank')!.state()).toBeNull();
 
     // A hidden, unpinned explicit load is trimmed when it settles; eviction does
     // not need another camera publication to enforce the warm budget.
     mounted.selectVolumeLens('near-bank', 'optical');
     await vi.waitFor(() => expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(3));
     await loadVolumeLens.mock.results.at(-1)!.value; await Promise.resolve(); await Promise.resolve();
-    expect(mounted.volumeLensState('near-bank')).toBeNull();
+    expect(mounted.focusBank('near-bank')!.state()).toBeNull();
     expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
   } finally { mounted.destroy(); }
 });
@@ -620,7 +620,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const camera = (radii: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
     pose: { positionM: [frame.originM[0], frame.originM[1], frame.originM[2] + radii * frame.metersPerUnit], orientationXyzw: [0, 0, 0, 1] } });
   try {
-    await mounted.ensureVolumeLens('focus-bank'); await mounted.ensureVolumeLens('warm-bank');
+    await mounted.focusBank('focus-bank')!.load(); await mounted.focusBank('warm-bank')!.load();
     mounted.selectGalaxy('catalogue:focus-bank', focus());
     const near = camera(6.1), savedPose = structuredClone(near);
     mounted.publish(near, viewport);
@@ -633,7 +633,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     expect(all(findBank('warm-bank')).some(node => node.style.backgroundImage)).toBe(false);
     for (const [radii, multiplier] of [[6.1, 0], [20, .5], [32, 1]] as const) {
       mounted.publish(camera(radii), viewport);
-      if (radii > 8) { await mounted.ensureVolumeLens('cold-bank'); await mounted.ensureImageLayer(image.id); mounted.publish(camera(radii), viewport); }
+      if (radii > 8) { await mounted.focusBank('cold-bank')!.load(); await mounted.focusBank(image.id)!.load(); mounted.publish(camera(radii), viewport); }
       const originalOpacity = Number(mw.dataset.volumeOpacity), alpha = Number(mw.style.opacity);
       expect(originalOpacity).toBeGreaterThan(0); expect(originalOpacity).toBeLessThan(1);
       const completedContribution = originalOpacity * Number(mw.children[0]!.dataset.volumeBrightness);
