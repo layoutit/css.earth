@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wd-1856-534b",
+  "displayName": "WD 1856+534 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.946 Jupiter radii, about 8 times its star's",
+        "source": {
+          "catalogueId": "arxiv-2504-16982",
+          "url": "https://arxiv.org/abs/2504.16982",
+          "label": "Limbach et al. (2025)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "1.408 days (33.8 hours)",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae8c30",
+          "url": "https://doi.org/10.3847/1538-3881/ae8c30",
+          "label": "Gendreau-Distler et al. (2026), AJ 172, 141",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Heat seen by JWST",
+        "value": "186 K (−87 °C)",
+        "source": {
+          "catalogueId": "arxiv-2504-16982",
+          "url": "https://arxiv.org/abs/2504.16982",
+          "label": "Limbach et al. (2025)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "temperatureK; temperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by WD 1856+534; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "wd-1856-534b-lens-shape.webp",
+        "surface": "wd-1856-534b-surface-shape@2x.webp",
+        "poles": "wd-1856-534b-poles-shape@2x.webp",
+        "source": {
+          "id": "wd-1856-534b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2504.16982"
+        },
+        "falseColor": false,
+        "notes": "No image or visible colour of this planet exists: JWST sees its heat only as extra mid-infrared light blended with the white dwarf's, and the transit spectrum measures its atmosphere, not a colour. The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit. The orbit is circular with a fixed period."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Limbach et al. (2025), Thermal Emission and Confirmation of the Frigid White Dwarf Exoplanet WD 1856+534 b",
+      "href": "https://arxiv.org/abs/2504.16982"
+    },
+    {
+      "label": "Discovery",
+      "role": "facts",
+      "description": "Vanderburg et al. (2020), A giant planet candidate transiting a white dwarf, Nature 585, 363",
+      "href": "https://doi.org/10.1038/s41586-020-2713-y"
+    },
+    {
+      "label": "Atmosphere",
+      "role": "facts",
+      "description": "MacDonald et al. (2026), JWST transmission spectrum, Nature 655, 76",
+      "href": "https://doi.org/10.1038/s41586-026-10514-7"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2504.16982",
+      "credit": "Limbach et al. (2025), Thermal Emission and Confirmation of the Frigid White Dwarf Exoplanet WD 1856+534 b"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wd-1856-534b.json",
+      "credit": "Limbach et al. (2025): radius; Vanderburg et al. (2020): orbit shape; Gendreau-Distler et al. (2026): period and transit time. No mass adopted: only bounds are published."
+    }
+  }
+}

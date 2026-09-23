@@ -1,0 +1,30 @@
+{
+  "id": "wd-1856-534",
+  "classification": "star",
+  "order": 1710,
+  "physical": {
+    "name": "WD 1856+534",
+    "horizonsCode": null,
+    "meanRadiusKm": 8417.97,
+    "gravitationalParameterKm3PerS2": 80291026225.37332,
+    "effectiveTemperatureK": 4920,
+    "parent": null
+  },
+  "physicalNotes": "Limbach et al. (2025), Thermal Emission and Confirmation of the Frigid White Dwarf Exoplanet WD 1856+534 b, ApJL (arXiv:2504.16982), Table 1: radius 0.0121 +/- 0.0002 solar radii, mass 0.605 +/- 0.013 solar masses, effective temperature 4920 +/- 50 K. Vanderburg et al. (2020), Nature 585, 363 (arXiv:2009.07282), Table 1, gave 0.0131 +/- 0.00054 solar radii, 0.518 +/- 0.055 solar masses and 4710 +/- 60 K. Conversion uses 695700 km per solar radius and solar GM 132712440041.93938 km^3/s^2. The display axis is sky north, not a measured stellar pole.",
+  "star": {
+    "rightAscensionDegrees": 284.41393195972,
+    "declinationDegrees": 53.50925028914,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 24.756703496389235,
+    "properMotionRaMasPerYear": 240.749,
+    "properMotionDecMasPerYear": -52.47,
+    "radialVelocityKmPerS": 17.288,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "SIMBAD WD 1856+534 (LP 141-14) basic record, checked 2026-09-23: ICRS position at J2000, reference 2020yCat.1350....0G; Gaia DR3 source 2146576589564898688. https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WD+1856%2B534",
+      "distance": "SIMBAD Gaia EDR3 parallax 40.3931 +/- 0.0506 mas; inverse parallax, without zero-point correction.",
+      "properMotion": "SIMBAD, Gaia EDR3 (2020yCat.1350....0G): mu_alpha*cos(delta) = 240.749, mu_delta = -52.470 mas/yr.",
+      "radialVelocity": "DERIVED: the white dwarf's featureless spectrum gives no radial velocity. This is the mean of Gaia DR3's values for its co-moving wide companions G 229-20 A (source 2146576757065535360, 17.19 +/- 0.33 km/s) and G 229-20 B (source 2146576761360909056, 17.38 +/- 0.35 km/s), queried from the Gaia archive 2026-09-23. Vanderburg et al. (2020) identify the three stars as one bound triple; the white dwarf's orbital motion around the pair is not included."
+    }
+  }
+}

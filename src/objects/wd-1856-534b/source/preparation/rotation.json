@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "wd-1856-534",
+  "source": "Assumed synchronous rotation: a planet 336 stellar radii from its star is expected to be tidally locked, and no rotation period of WD 1856+534 b is measured (Limbach et al. 2025, section 5, expect it to be tidally synchronized; none of Vanderburg et al. 2020, Limbach et al. 2025 or Gendreau-Distler et al. 2026 measures a spin). Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/wd-1856-534b.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of WD 1856+534 b is measured."
+}

@@ -8,10 +8,10 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   const systems = allPlanetarySystems(SCENE_OBJECTS);
   assert.deepEqual(systems.map(system => [system.id, system.name, system.route]),
     [[SOLAR_SYSTEM_ID, 'Solar System', '/sun/'], ['wasp-43', 'WASP-43 system', '/wasp-43/'], ['hd-189733', 'HD 189733 system', '/hd-189733/'],
-      ['hd-209458', 'HD 209458 system', '/hd-209458/'], ['hr-8799', 'HR 8799 system', '/hr-8799/'], ['k2-18', 'K2-18 system', '/k2-18/'], ['kepler-186', 'Kepler-186 system', '/kepler-186/'],
+      ['hd-209458', 'HD 209458 system', '/hd-209458/'], ['k2-18', 'K2-18 system', '/k2-18/'], ['kepler-186', 'Kepler-186 system', '/kepler-186/'],
       ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'],
-      ['wasp-39', 'WASP-39 system', '/wasp-39/'], ['beta-pictoris', 'Beta Pictoris system', '/beta-pictoris/'],
-      ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/'], ['hd-110067', 'HD 110067 system', '/hd-110067/']]);
+      ['wasp-39', 'WASP-39 system', '/wasp-39/'], ['beta-pictoris', 'Beta Pictoris system', '/beta-pictoris/'], ['hr-8799', 'HR 8799 system', '/hr-8799/'],
+      ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/'], ['hd-110067', 'HD 110067 system', '/hd-110067/'], ['wd-1856-534', 'WD 1856+534 system', '/wd-1856-534/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the candidate orbits its measurements allow.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
     ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],
@@ -30,6 +30,7 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     ['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'hd-110067')!.memberIds,
     ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'wd-1856-534')!.memberIds, ['wd-1856-534b']);
 });
 
 test("a system's exit distance scales the Sun's 100 AU by the prepared framing radius", () => {

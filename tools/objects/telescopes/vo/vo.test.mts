@@ -77,6 +77,8 @@ test('a region query adds the footprint clause to the name search on ObsCore onl
   const epn = SERVICES.find(service => service.model === 'epn-tap-2.0')!;
   assert.doesNotMatch(targetQuery(epn, ['Betelgeuse'], 50, region), /INTERSECTS/u);
   assert.doesNotMatch(targetQuery(profile, ['Betelgeuse'], 50, { target: 'betelgeuse' }), /INTERSECTS/u);
+  const mast = SERVICES.find(service => service.label === 'MAST JWST')!;
+  assert.doesNotMatch(targetQuery(mast, ['Betelgeuse'], 50, region), /INTERSECTS|CONTAINS/u, 'MAST cannot select footprints, so it searches by name');
 });
 test('only an unmatched record selected by a region is in the field, and it is never confirmed', () => {
   const unmatched = associateTarget('GC_IRS7', null, target, [target]), confirmed = associateTarget('Betelgeuse', 'star', target, [target]);

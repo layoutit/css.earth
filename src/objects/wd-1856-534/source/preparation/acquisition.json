@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-source.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT source_id, ra, dec, ref_epoch, parallax, parallax_error, pmra, pmra_error, pmdec, pmdec_error, phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag, ruwe, has_xp_continuous FROM gaiadr3.gaia_source WHERE source_id = 2146576589564898688"
+      },
+      "requiredPrefix": "source_id,"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-xp-continuous.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2146576589564898688&format=csv&DATA_STRUCTURE=RAW"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "url": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv"
+    }
+  ]
+}
