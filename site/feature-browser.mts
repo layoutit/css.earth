@@ -12,7 +12,8 @@ export type { FindResult } from './find-protocol.mts';
  * never downloads the index or a places catalogue. Selecting a feature of the mounted body asks its runtime to fly there
  * (a place opens through the body's destinations); another body's feature navigates first, carrying the feature in the
  * URL so the router selects it once that body mounts. */
-export function createFeatureBrowser({ documentTarget, objectId, onSelected, onResults, selectOwnPlace }: { documentTarget: Document; objectId: string; onSelected(result: FindResult): void; onResults(count: number): void;
+export function createFeatureBrowser({ documentTarget, objectId, onSelected, onResults, onSelectionError, selectOwnPlace }: { documentTarget: Document; objectId: string; onSelected(result: FindResult): void; onResults(count: number): void;
+  onSelectionError?(error: unknown): void;
   /** Opens a place of the current body (its id without the `city-` prefix). */
   selectOwnPlace?(id: string): Promise<unknown> }) {
   const candidate = documentTarget.querySelector<HTMLElement>('.object-feature-results');
@@ -98,7 +99,11 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   buttons.forEach((button, row) => button.addEventListener('click', event => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !matches[row]) return;
     event.preventDefault();
-    void select(matches[row]);
+    void select(matches[row]).catch(error => {
+      if (destroyed) return;
+      presentFeatureResults(root, matches.length, 'Could not open this result. Select it again to retry.');
+      onSelectionError?.(error);
+    });
   }, { signal: events.signal }));
   return Object.freeze({
     bind(next: SurfaceFeatureNavigationRuntime | null | undefined) { if (destroyed) return; provider = next ?? null; if (query) void search(query); },
