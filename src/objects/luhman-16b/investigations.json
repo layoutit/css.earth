@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "luhman-16b",
+  "entries": [
+    {
+      "id": "jwst-rotational-maps",
+      "subject": "JWST NIRSpec rotational maps of Luhman 16 B (Wang et al. 2026)",
+      "status": "unresolved",
+      "finding": "Wang et al. (arXiv:2609.22026) map Luhman 16 B from the JWST NIRSpec monitoring of GO 2965 (Biller et al. 2024), but say their maps and code 'will be publicly released upon' publication.",
+      "revisitWhen": "The maps are released.",
+      "evidence": [
+        "https://arxiv.org/abs/2609.22026"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+        }
+      ]
+    },
+    {
+      "id": "crossfield-2014",
+      "subject": "The first Doppler map of Luhman 16 B (Crossfield et al. 2014)",
+      "status": "excluded",
+      "finding": "The Nature map was published as a figure only. Ureshino et al. (2026) refit the same CRIRES spectra and deposit their map with its uncertainty, which is shown instead.",
+      "revisitWhen": "The 2014 map is deposited.",
+      "evidence": [
+        "https://doi.org/10.1038/nature12955"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+        }
+      ]
+    },
+    {
+      "id": "other-chips",
+      "subject": "Maps from the other CRIRES detector chips",
+      "status": "unresolved",
+      "finding": "Ureshino et al. fit chip 2 (2.304 to 2.316 um, the CO band head) only; the deposit holds that map.",
+      "revisitWhen": "Maps from the other chips or a joint fit are deposited.",
+      "evidence": [
+        "https://zenodo.org/records/20024778"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+        }
+      ]
+    },
+    {
+      "id": "spin-direction",
+      "subject": "The direction of B's spin axis on the sky",
+      "status": "unresolved",
+      "finding": "Doppler imaging measures the axis's tilt to the line of sight (61 degrees) but not its position angle, which is set toward celestial north.",
+      "revisitWhen": "Interferometry or polarimetry measures the axis's position angle.",
+      "evidence": [
+        "https://arxiv.org/abs/2605.08544"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+        }
+      ]
+    }
+  ]
+}
