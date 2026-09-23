@@ -2,6 +2,7 @@ import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { errorMessage, type BrowserWindow } from './browser-types.mts';
 import { withDataset } from './dataset-url.mts';
 import type { createNavigationHistory, NavigationOptions } from './navigation-history.mts';
+import { replaceNavigationUrl } from './navigation-history.mts';
 import type { NavigationLifecycle, NavigationRequest } from './navigation-lifecycle.mts';
 import type { SceneSession, SceneSessions } from './scene-session.mts';
 import type { WorldContextMount } from './scene-world.mts';
@@ -26,9 +27,22 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
   function capture() {
     if (!windowTarget.location?.href) return null;
     const url = new URL(scenes.current?.url ?? windowTarget.location.href);
-    const saved = scenes.current?.mount?.sharedView?.capture(getMotion());
-    if (saved) url.searchParams.set('v', new URLSearchParams(formatSharedView(saved)).get('v')!);
+    const session = scenes.current;
+    const saved = session?.viewUrl ? null : session?.mount?.sharedView?.capture(getMotion());
+    const token = session?.viewUrl?.capture() ?? (saved ? new URLSearchParams(formatSharedView(saved)).get('v') : null);
+    if (token) url.searchParams.set('v', token);
     return url.pathname + url.search + url.hash;
+  }
+
+  function publish(session: SceneSession, url: string) {
+    session.url = url;
+    const history = getHistory();
+    if (history) history.commit(url, { history: 'replace' });
+    else replaceNavigationUrl(windowTarget, url);
+  }
+
+  function replace(session: SceneSession, url: string) {
+    if (scenes.isCurrent(session)) publish(session, url);
   }
 
   function commit(request: NavigationRequest, session: SceneSession, options: NavigationOptions = request.options) {
@@ -44,8 +58,7 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     const id = datasets.current();
     if (id === null) return;
     const url = withDataset(new URL(capture() ?? session.url, windowTarget.location.href), id === datasets.defaultId ? null : id);
-    session.url = url.href;
-    getHistory()?.commit(url.href, { history: 'replace' });
+    replace(session, url.href);
     session.shell?.setDatasetNotice?.(null);
   }
 
@@ -53,6 +66,12 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     const view = session.mount?.sharedView;
     if (!view) return null;
     const owner = bindViewUrl({ windowTarget, view, listenToPopState, getMotion,
+      // The installed owner may flush once during disposal, after the session
+      // stops accepting focus changes and before its bindings are destroyed.
+      replace: url => { if (session.viewUrl === owner) publish(session, url); },
+      restoreFocus: url => {
+        if (scenes.isCurrent(session)) return getWorld()?.restoreFocus?.(url);
+      },
       setMotion(next) {
         session.shell?.setMotionEnabled?.(next);
         if (initial && !scenes.isCurrent(session)) return;
@@ -71,7 +90,7 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
       if (restore) await session.wait(owner.restore());
       if (!scenes.isCurrent(session)) return;
     }
-    getWorld()?.restoreFocus?.(session.url ?? windowTarget.location.href);
+    if (!restore || !session.mount?.sharedView) await getWorld()?.restoreFocus?.(session.url ?? windowTarget.location.href);
   }
 
   async function bind(session: SceneSession, { restore = true, request }: { restore?: boolean; request?: NavigationRequest } = {}) {
@@ -82,8 +101,8 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     getWorld()?.suspendFocus?.();
     const owner = install(session, false)!;
     if (restore) await (request?.lifetime.wait ?? session.wait)(owner.restore());
-    if ((!request || requests.owns(request)) && scenes.isCurrent(session)) getWorld()?.restoreFocus?.(session.url);
+    if (!restore && (!request || requests.owns(request)) && scenes.isCurrent(session)) await getWorld()?.restoreFocus?.(session.url);
   }
 
-  return { capture, commit, syncDataset, bindInitial, bind };
+  return { capture, commit, replace, syncDataset, bindInitial, bind };
 }

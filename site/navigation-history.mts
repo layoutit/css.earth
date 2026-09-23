@@ -17,6 +17,11 @@ const navigationId = (event: Event): unknown => 'detail' in event && record(even
 const navigationFeature = (event: Event): string | undefined => 'detail' in event && record(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 
+/** Standalone scenes replace the current URL without creating application history entries. */
+export function replaceNavigationUrl(windowTarget: Window, url: string) {
+  windowTarget.history.replaceState(windowTarget.history.state, '', url);
+}
+
 /** Preserve exact departed views while object selections create history entries. */
 export function createNavigationHistory({ windowTarget, objects, capture, navigate, navigating = () => false, embedded = false, onError = () => {} }: { windowTarget: Window; objects: readonly ObjectEntry[]; capture(): string | null; navigate: Navigate; navigating?(): boolean; embedded?: boolean; onError?(error: unknown): void }) {
   const snapshots = new Map<string, string>();

@@ -88,22 +88,8 @@ export function createApplicationWorldContext() {
           setNavigationInFlight: frames.setNavigationInFlight,
           connectNavigation: contextNavigation.connect,
           suspendFocus: contextNavigation.suspend,
-          restoreFocus(url: string | URL) {
-            if (lifetime.disposed) return;
-            const focus = new URL(url, windowTarget.location.href).searchParams.get('focus');
-            if (!focus) return contextNavigation.restore(url);
-            return layer.ensureGalaxyCatalog().then(() => {
-              if (!lifetime.disposed) return contextNavigation.restore(url);
-            }).catch(reportError);
-          },
-          async selectPreparedFocus(id: string) {
-            if (lifetime.disposed) return;
-            await layer.ensureGalaxyCatalog();
-            if (lifetime.disposed) return;
-            const object = layer.resolveGalaxy(id);
-            if (!object) return;
-            await contextNavigation.select(object);
-          },
+          restoreFocus: contextNavigation.restore,
+          selectPreparedFocus: (id: string) => contextNavigation.select({ id }),
           previewSelection(id?: string | null) {
             if (!lifetime.disposed) layer.previewSelection(id);
           },
