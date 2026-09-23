@@ -37,6 +37,11 @@ export interface HostedOrbit {
     readonly planet: string
     readonly reference: string
   }
+  /**
+   * Set when the orbit's own publication judges it too weakly measured to constrain the central mass: a fit to a short arc
+   * of the orbit. The body is placed by it; its path is not drawn. `sources.constraint` quotes the criterion.
+   */
+  readonly weaklyConstrained?: true
   readonly sources: {
     readonly period: string
     readonly shape: string
@@ -44,6 +49,7 @@ export interface HostedOrbit {
     readonly orientation: string
     readonly eccentricity?: string
     readonly argumentOfPeriapsis?: string
+    readonly constraint?: string
   }
 }
 export type HostedPlanetId = keyof typeof HOSTED_ORBITS

@@ -37,7 +37,7 @@ const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification
 const ASTRONOMICAL_UNIT_M = 149_597_870_700;
 const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
 const orbitCenters = new Map(applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []));
-const placedStarIds = new Set(SCENE_OBJECTS.filter(object => object.classification === 'star' && object.id !== applicationContext.focus.id).map(object => object.id));
+const placedStarIds = new Set(SCENE_OBJECTS.filter(object => (object.classification === 'star' || object.classification === 'black-hole') && object.id !== applicationContext.focus.id).map(object => object.id));
 /** The placed star an object belongs to, with every body orbiting that star; empty inside the Solar System. */
 function placedSystemOf(id: string): ReadonlySet<string> {
   const rootOf = (start: string) => { let current = start; for (let steps = 0; steps <= orbitCenters.size; steps++) { const center = orbitCenters.get(current); if (!center) return current; current = center; } return current; };
@@ -49,8 +49,11 @@ const hiddenOrbitIds = [
   ...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id),
   ...minorMoonIds,
 ];
-const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, isDefaultContextFeature(object) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]));
+const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
+  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, isDefaultContextFeature(object) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]),
+  // A body drawn from its astronomy record is a star or planet hosted by a placed star; its tier is that role in its host's
+  // system, the one a catalogued planet of that system has.
+  ...applicationContext.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body => [body.id, labelImportance('planet')])]);
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {

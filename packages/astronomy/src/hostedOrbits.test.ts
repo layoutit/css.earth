@@ -25,7 +25,7 @@ describe('hosted orbits', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hd-189733b', 'hd-209458b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b'])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b'])
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
     expect(BODIES['hd-189733b'].parent).toBe('hd-189733')

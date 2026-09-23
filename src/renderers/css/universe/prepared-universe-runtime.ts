@@ -590,8 +590,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             additionalPoints.publish({world, viewport}, distanceM);
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             starsHandoff = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
-            volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
-            volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
+            // The volume is the galaxy seen from outside, and every placed body sits inside it: it fades in with distance from
+            // the selected body, so the Galactic Centre starts as dark as the Sun does.
+            const volumeDistanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]));
+            volumeOpacity = preparedVolumeOpacity(volumeDistanceM, plan.volume.opacityProfile);
+            volumeBrightness = preparedVolumeOpacity(volumeDistanceM, plan.volume.brightnessProfile);
             volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
             const volumeVisible = volumeOpacity * detailContextOpacity > 0;
             if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }

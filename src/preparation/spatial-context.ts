@@ -48,7 +48,9 @@ export interface WorldContextSource {
   readonly sky: SkyBaseline;
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus;
-  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate' }[];
+  /** `unpackaged`: drawn from its astronomy record around a packaged host, with no object page (the S-stars around Sgr A*).
+   * `orbitsWithinM`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
+  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number }[];
   /** Preparation resolves catalogue membership before computing the context. */
   readonly bodySelection?: "catalog";
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
@@ -88,6 +90,8 @@ export interface PreparedWorldContext {
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly systemView?: PreparedSystemView;
     readonly placement?: 'approximate';
+    readonly unpackaged?: true;
+    readonly orbitsWithinM?: number;
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
@@ -114,9 +118,10 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement'], `world context body ${index}`);
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM'], `world context body ${index}`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
-    return freeze({ ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
+    if (body.unpackaged !== undefined && body.unpackaged !== true) throw new TypeError('World context unpackaged is true or absent.');
+    return freeze({ ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
   });
   if (new Set(bodies.map(body => body.id)).size !== bodies.length || bodies.some(body => body.id === focus.id)) throw new TypeError('World context body ids must be unique and exclude the focus.');
   const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'trail'], 'world context orbit');
@@ -170,7 +175,9 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
   }
   const bodies = source.bodies.map(body => {
     const fact = facts[body.id], state = states[body.id];
-    if (!fact || !state || !positive(fact.radiusM, `${body.id} radius`)) throw new TypeError(`Missing physical facts for ${body.id}.`);
+    // A body drawn from its record may have no measured radius (0): it is drawn as its circle only.
+    const sized = body.unpackaged === true ? Number.isFinite(fact?.radiusM) && fact!.radiusM >= 0 : fact !== undefined && positive(fact.radiusM, `${body.id} radius`);
+    if (!fact || !state || !sized) throw new TypeError(`Missing physical facts for ${body.id}: radius ${String(fact?.radiusM)}.`);
     validateState(state, body.id);
     if (fact.boundTo) {
       const hostPositionM = fact.boundTo.hostId === source.focus.id ? source.frame.originM : states[fact.boundTo.hostId]?.positionM;

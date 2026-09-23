@@ -59,6 +59,10 @@ export interface PreparedContextFocus extends PreparedContextPoint {
 }
 export interface PreparedContextBody extends PreparedContextPoint {
   readonly placement?: 'approximate';
+  /** Drawn from its astronomy record around a packaged host; it has no object page to open. */
+  readonly unpackaged?: true;
+  /** A host's authored presentation range: the camera distance up to which its system draws every member's orbit. */
+  readonly orbitsWithinM?: number;
   /** A placed star measured to be bound to another with no measured orbit: its host and the pair's centre of mass. */
   readonly boundTo?: { readonly hostId: string; readonly centerM: PositionM };
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
@@ -146,7 +150,8 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
   const id = text(input.id, 'point identity'), color = text(input.color, 'point color');
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !/^#[a-f0-9]{6}$/i.test(color)) throw new TypeError('Invalid context point identity or color.');
   return Object.freeze({ id, color, name: text(input.name, 'point name'),
-    positionM: vector(input.positionM, 'point position'), radiusM: positive(input.radiusM, 'point radius') });
+    // A body drawn from its astronomy record may have no measured radius: 0, drawn as its circle only.
+    positionM: vector(input.positionM, 'point position'), radiusM: input.unpackaged === true && input.radiusM === 0 ? 0 : positive(input.radiusM, `point ${id} radius`) });
 }
 function parseSystemView(value: unknown): PreparedContextBody['systemView'] {
   if (value === undefined) return undefined;
@@ -154,7 +159,8 @@ function parseSystemView(value: unknown): PreparedContextBody['systemView'] {
   const memberIds = array(view.memberIds, 'system members').map(id => text(id, 'system member id'));
   if (!memberIds.length) throw new TypeError('System view must include members.');
   unique(memberIds, 'system member ids');
-  const memberRadiiM = array(view.memberRadiiM, 'system member radii').map(value => positive(value, 'system member radius'));
+  // Zero is a member drawn from its record with no measured radius; each radius is checked against its body below.
+  const memberRadiiM = array(view.memberRadiiM, 'system member radii').map((value, index) => value === 0 ? 0 : positive(value, `system member ${memberIds[index]} radius`));
   if (memberRadiiM.length !== memberIds.length) throw new TypeError('System view needs one radius per member.');
   const candidates = array(view.candidates, 'system view candidates').map(value => {
     const candidate = record(value, 'system view candidate', ['cameraToReference', 'minimumM', 'maximumM', 'memberPositionsM']);
@@ -482,18 +488,20 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
-    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo'];
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView);
     if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
+    if (input.unpackaged !== undefined && input.unpackaged !== true) throw new TypeError('A context body is unpackaged or not.');
     // A placed star can name the star it is measured to be bound to, with the pair's centre of mass.
     const bound = input.boundTo === undefined ? undefined : (() => {
       const pair = record(input.boundTo, 'bound companion', ['hostId', 'centerM']);
       return { hostId: text(pair.hostId, 'bound companion host'), centerM: vector(pair.centerM, 'bound companion centre') };
     })();
     const body = { ...rawBody, ...(systemView ? { systemView } : {}), ...(bound ? { boundTo: bound } : {}),
-      ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
+      ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(input.unpackaged === true ? { unpackaged: true as const } : {}),
+      ...(input.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(input.orbitsWithinM, `context body ${String(input.id)} orbit range`) }) };
     if (input.orbit === undefined) return Object.freeze(body);
     if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit) });
     return Object.freeze({ ...body, orbit: validateOrbitGeometry(jsonOrbitGeometry(input.orbit), body.positionM, focus.id, renderedIds, body.id) });
@@ -596,8 +604,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const orbitRenderer: OrbitRenderer = initialOrbitRenderer;
   let publishCount = 0;
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
+    // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
+    // name and orbit and is never a navigation target.
+    const unpackaged = 'unpackaged' in body && body.unpackaged === true;
     const sprite = sprites[body.id];
-    if (!sprite) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
+    if (!sprite && !unpackaged) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
     const marker = host.ownerDocument.createElement('s');
     marker.dataset.contextGroup = body.id;
     marker.dataset.contextBody = body.id;
@@ -612,8 +623,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // custom property, which re-resolved the marker and both pseudos for every moving body on every frame.
     const spriteLeaf = host.ownerDocument.createElement('i');
     spriteLeaf.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;background-repeat:no-repeat;transform-origin:50% 50%;pointer-events:none`;
-    applySpriteImage(spriteLeaf, sprite);
+    if (sprite) applySpriteImage(spriteLeaf, sprite);
     marker.appendChild(spriteLeaf);
+    // A packaged body's colour is its swatch stylesheet; a body drawn from its record carries its prepared colour.
+    if (unpackaged) marker.style.color = body.color;
     const approximate = 'placement' in body && body.placement === 'approximate';
     if (approximate) {
       marker.dataset.contextPlacement = 'approximate';
@@ -645,13 +658,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id });
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
+      ...(unpackaged ? { color: body.color } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
-    return { index, body, sprite, marker, spriteLeaf, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
+    return { index, body, sprite, unpackaged, marker, spriteLeaf, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
       closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       indicatorHovered: false,
@@ -1067,7 +1081,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
           lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
         const { body, marker } = entry;
-        const navigationSuppressed = distantNavigationActive && distantNonNavigableIds.has(body.id);
+        const navigationSuppressed = entry.unpackaged || (distantNavigationActive && distantNonNavigableIds.has(body.id));
         if (mask === 0) continue;
         const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) *
           (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1);
@@ -1081,7 +1095,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        const markerDiameter = Math.round(Math.max(entry.sprite.minimumDiameterPixels ?? 2.4, diameter) * 20) / 20;
+        const markerDiameter = Math.round(Math.max(entry.sprite?.minimumDiameterPixels ?? 2.4, diameter) * 20) / 20;
         const wasShown = entry.billboardShown === true;
         const hoverChanged = entry.indicatorHovered !== entry.hovered;
         const animateHover = interactiveHover && hoverChanged && wasShown && billboardShown;
@@ -1109,11 +1123,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           // owners catch up here before reveal, without global restyling.
           // A marker wider than its small prepared tile resolves shows the large
           // prepared image; only then is that image loaded and decoded.
-          const detail = entry.sprite.detail;
+          const detail = entry.sprite?.detail;
           if (detail) {
             const spriteDetail = markerDiameter >= detail.fromDiameterPixels ||
               (entry.spriteDetail && markerDiameter >= detail.fromDiameterPixels * SPRITE_DETAIL_RETURN);
-            if (spriteDetail !== entry.spriteDetail) { entry.spriteDetail = spriteDetail; applySpriteImage(entry.spriteLeaf, spriteDetail ? detail : entry.sprite); }
+            if (spriteDetail !== entry.spriteDetail) { entry.spriteDetail = spriteDetail; applySpriteImage(entry.spriteLeaf, spriteDetail ? detail : entry.sprite!); }
           }
           if (entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
           if (marker.dataset.contextSelected !== selection) marker.dataset.contextSelected = selection;

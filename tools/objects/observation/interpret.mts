@@ -12,7 +12,7 @@ import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-syn
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '../material-composition/data-schema.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
-import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
 import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-terrain.mts';
 import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
@@ -94,6 +94,15 @@ function parseSurfaceObservationScience(value: Record<string, unknown>): Surface
   const offLimb = value.offLimb === undefined ? undefined : requireRecord(value.offLimb, 'surface-observation offLimb') as Record<string, never>;
   if (offLimb && Object.keys(offLimb).length) throw new TypeError('A surface-observation offLimb block is empty: its turn is derived from the default camera, not authored.');
   return { shape: parsed, lens: lens as SurfaceObservationScience['lens'], ...(offLimb ? { offLimb } : {}) };
+}
+/** An opaque black disc filling a square plate, its edge antialiased over one pixel. */
+function blackDisc(size: number): Uint8Array {
+  const data = new Uint8Array(size * size * 4), radius = size / 2;
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const coverage = Math.max(0, Math.min(1, radius - Math.hypot(x + 0.5 - radius, y + 0.5 - radius) + 0.5));
+    if (coverage > 0) data[(y * size + x) * 4 + 3] = Math.round(255 * coverage);
+  }
+  return data;
 }
 const transparentPlates = (offLimb: number, limb: number) => ({
   offLimb: { data: new Uint8Array(offLimb * offLimb * 4), size: offLimb, lossless: true }, limb: { data: new Uint8Array(limb * limb * 4), size: limb, lossless: true } });
@@ -402,6 +411,46 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         // An emissive body (a star with no observation) still owes the presentation its off-limb and limb plates: both transparent.
         if (recipe.emission) return { data, channels: 4, nearest: true, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) };
         return { data, channels: 4, nearest: true };
+      }
+      case 'black-shadow': {
+        // A black hole's measured shadow, drawn as a black disc that always faces the viewer: the limb plate, which the runtime fits to
+        // the silhouette. The sphere itself is not drawn; its texture is plain black for the lens thumbnail. Not a surface.
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) data[offset + 3] = 255;
+        if (!recipe.emission) return { data, channels: 4, nearest: true };
+        const plates = { ...transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density),
+          limb: { data: blackDisc(recipe.emission.limbSize * density), size: recipe.emission.limbSize * density, lossless: true } };
+        if (surface.science.offLimb === undefined) return { data, channels: 4, nearest: true, plates };
+        // The light around the shadow, as an interferometric image of it shows: the image's own pixels on the off-limb plate,
+        // registered by the image's pixel scale to the measured shadow diameter, on the palette and stretch the interferometric
+        // star lenses use. The sphere hides the plate inside the silhouette.
+        const offLimbRecord = requireRecord(surface.science.offLimb, `${objectId}/${surface.id} black-shadow offLimb`);
+        const unknownKeys = Object.keys(offLimbRecord).filter(key => !['path', 'encoding', 'percentiles', 'palette'].includes(key));
+        if (unknownKeys.length || offLimbRecord.encoding !== 'fits-oi-reconstruction') throw new TypeError(`${objectId}/${surface.id}: a shadow's offLimb names a fits-oi-reconstruction path, percentiles and palette, not ${unknownKeys.join(', ') || String(offLimbRecord.encoding)}.`);
+        const image = readReconstruction(await readFile(resolve(sourceDirectory, requireString(offLimbRecord.path))));
+        const [scaleX, scaleY] = image.axes.scale;
+        if ((image.axes.unit ?? 'deg') !== 'deg' || Math.abs(scaleX! - scaleY!) > 1e-9 * scaleY!) throw new TypeError(`${objectId}/${surface.id}: the shadow's image needs square pixels in degrees, not ${scaleX} by ${scaleY} ${image.axes.unit ?? 'deg'}.`);
+        // The image is phased on the black hole: its reference pixel is the frame's centre, and the shadow is centred on it.
+        const crpix = [Number(image.header.CRPIX1), Number(image.header.CRPIX2)];
+        if (crpix[0] !== (image.width + 1) / 2 || crpix[1] !== (image.height + 1) / 2) throw new TypeError(`${objectId}/${surface.id}: the shadow's image is referenced at pixel ${crpix.join(', ')}, not its centre.`);
+        const measured = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, surface.source), 'utf8')), `${objectId} measurements`);
+        const discRadiusPx = requireFiniteNumber(measured.angularDiameterMas, 'angularDiameterMas') / 2 / (scaleY! * 3.6e6);
+        const topDown = skyDisplayRaster(image.values, image.width, image.height, image.axes);
+        const lit = Array.from(topDown).filter(value => value > 0).sort((a, b) => a - b);
+        const percentiles = requireArray(offLimbRecord.percentiles, 'offLimb percentiles').map(value => requireFiniteNumber(value, 'offLimb percentile'));
+        if (percentiles.length !== 2 || !(percentiles[0]! < percentiles[1]!)) throw new TypeError(`${objectId}/${surface.id}: offLimb percentiles are a rising pair, not ${percentiles.join(', ')}.`);
+        const at = (percent: number) => lit[Math.min(lit.length - 1, Math.max(0, Math.round(percent / 100 * (lit.length - 1))))]!;
+        const low = at(percentiles[0]!), high = at(percentiles[1]!);
+        const rotationDegrees = prepareSkyNorthScreenAngleDegrees(objectId, prepareDefaultCameraAngles(objectId, { light: 'self' })) - 90;
+        const plateSize = recipe.emission.offLimbSize * density;
+        const offLimb = offLimbPlate({ width: image.width, height: image.height, values: topDown, center: [image.width / 2, image.height / 2], discRadiusPx, backgroundMaximum: 0 },
+          // Opacity follows the light linearly to the stretch top, as a linear brightness image shows it: faint light fades to the black behind.
+          // The reconstruction's light reaches its square field's edge; the outer tenth of the field fades out (presentation).
+          { low, high, palette: requireArray(offLimbRecord.palette, 'offLimb palette').map(value => requireString(value)), rotationDegrees, opaqueAt: high,
+            edgeFeatherPixels: image.width / 10 }, plateSize, recipe.emission.bodyDiameter * density);
+        return { data, channels: 4, nearest: true, plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
+          report: { offLimb: { source: requireString(offLimbRecord.path), discRadiusPx, rotationDegrees, stretch: { low, high, percentiles },
+            meaning: 'The image\'s light around the shadow on the display stretch; alpha is the light as a fraction of the stretch top, as a linear brightness image shows it. Inside the silhouette the plate is hidden by the sphere.' } } };
       }
       case 'disc-integrated-color': {
         // An unresolved surface painted with its published whole-disc colour and geometric albedo: one measured mean, no map.

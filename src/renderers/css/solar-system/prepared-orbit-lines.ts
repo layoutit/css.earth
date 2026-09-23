@@ -26,10 +26,12 @@ export interface PreparedOrbitLines {
   stats(): Record<string, number>;
   destroy(): void;
 }
-export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', dashed = false, capacity = 0, id }:
-  { renderer?: OrbitRenderer; dashed?: boolean; capacity?: number; id?: string } = {}): PreparedOrbitLines {
+/** `color`: an orbit's own colour, for a body no swatch stylesheet colours (one drawn from its astronomy record). */
+export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', dashed = false, capacity = 0, id, color }:
+  { renderer?: OrbitRenderer; dashed?: boolean; capacity?: number; id?: string; color?: string } = {}): PreparedOrbitLines {
   // An orbit-less body's root is never inserted; it has nothing to share.
-  return renderer === 'strokes' && host.parentElement ? mountOrbitStrokes(host, dashed, id) : mountOrbitBars(host, capacity);
+  if (color) host.style.color = color;
+  return renderer === 'strokes' && host.parentElement ? mountOrbitStrokes(host, dashed, id, color) : mountOrbitBars(host, capacity);
 }
 
 /** Fixed unit-line instances, bound once; each publication writes only the slots
@@ -85,9 +87,10 @@ function sharedSvg(host: HTMLElement): SVGSVGElement {
  * invalidates layout and paint only, never style. Only a run whose points changed
  * is written. The group carries the orbit id, so the published swatch rules colour
  * it like its marker, and an approximate placement dashes it by stylesheet. */
-function mountOrbitStrokes(host: HTMLElement, dashed: boolean, id?: string): PreparedOrbitLines {
+function mountOrbitStrokes(host: HTMLElement, dashed: boolean, id?: string, color?: string): PreparedOrbitLines {
   const document = host.ownerDocument, group = document.createElementNS(SVG, 'g');
   if (id) group.dataset.contextOrbit = id;
+  if (color) group.style.color = color;
   if (dashed) group.dataset.contextPlacement = 'approximate';
   group.style.display = 'none';
   sharedSvg(host).appendChild(group);

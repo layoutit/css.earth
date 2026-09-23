@@ -65,7 +65,7 @@ export function createPlanetTitleSource(label: string, font: Pick<fontkit.Font, 
   if (!font || typeof font.layout !== "function") {
     throw new TypeError("Planet title generation requires a loaded font.");
   }
-  if (typeof label !== "string" || !/^[\p{L}\p{N}]+(?:\.?[ /–-][\p{L}\p{N}]+)*$/u.test(label)) {
+  if (typeof label !== "string" || !/^[\p{L}\p{N}]+\*?(?:\.?[ /–-][\p{L}\p{N}]+\*?)*$/u.test(label)) {
     throw new TypeError("Planet title label is invalid.");
   }
 
