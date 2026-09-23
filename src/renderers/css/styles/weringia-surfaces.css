@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="weringia"]) > :is(.weringia-sun-camera, .weringia-camera, .weringia-material-root) {
+.object-stage:where([data-object-id="weringia"]) > :is(.weringia-sun-camera, .weringia-camera, .weringia-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-sun-camera, :where(.planet-stage[data-object-id="weringia"]) .weringia-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-body > u {
+:where(.object-stage[data-object-id="weringia"]) .weringia-sun-camera, :where(.object-stage[data-object-id="weringia"]) .weringia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="weringia"]) .weringia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="weringia"]) .weringia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="weringia"]) .weringia-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--weringia-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-body > .weringia-polar { background-image: var(--weringia-poles-image); }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-material-root { z-index: 3; --weringia-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-material, :where(.planet-stage[data-object-id="weringia"]) .weringia-billboard {
+:where(.object-stage[data-object-id="weringia"]) .weringia-body > .weringia-polar { background-image: var(--weringia-poles-image); }
+:where(.object-stage[data-object-id="weringia"]) .weringia-material-root { z-index: 3; --weringia-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="weringia"]) .weringia-material, :where(.object-stage[data-object-id="weringia"]) .weringia-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-material { background-repeat: no-repeat; transform: rotate(var(--weringia-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="weringia"]) .weringia-billboard { border-radius: 50%; background-color: var(--weringia-billboard-color); opacity: var(--weringia-billboard-opacity); }
-.planet-stage:where([data-object-id="weringia"])[data-lod="billboard"] .weringia-scene, .planet-stage:where([data-object-id="weringia"])[data-lod="marker"] .weringia-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="weringia"])[data-lod="marker"] .weringia-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="weringia"]) .weringia-material { background-repeat: no-repeat; transform: rotate(var(--weringia-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="weringia"]) .weringia-billboard { border-radius: 50%; background-color: var(--weringia-billboard-color); opacity: var(--weringia-billboard-opacity); }
+.object-stage:where([data-object-id="weringia"])[data-lod="billboard"] .weringia-scene, .object-stage:where([data-object-id="weringia"])[data-lod="marker"] .weringia-scene { visibility: hidden; }
+.object-stage:where([data-object-id="weringia"])[data-lod="marker"] .weringia-billboard { opacity: 0; }
 

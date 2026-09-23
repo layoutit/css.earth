@@ -31,7 +31,7 @@ export function kernelBankRoot(set: string) {
 
 /** A bank's manifest, validated and verifiable like a body's source manifest. */
 export const openKernelBank = (set: string) =>
-  createSourceManifest({ planetId: `spice-${set}`, planetName: `${set} SPICE kernel bank`, sourceRoot: kernelBankRoot(set) });
+  createSourceManifest({ objectId: `spice-${set}`, objectName: `${set} SPICE kernel bank`, sourceRoot: kernelBankRoot(set) });
 
 /** Check that each kernel is a pinned bank input with matching bytes, and return absolute paths in load order. */
 export async function kernelBankPaths(set: string, kernels: readonly string[]) {

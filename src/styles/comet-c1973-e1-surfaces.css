@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="comet-c1973-e1"]) > :is(.comet-c1973-e1-sun-camera, .comet-c1973-e1-camera, .comet-c1973-e1-material-root) {
+.object-stage:where([data-object-id="comet-c1973-e1"]) > :is(.comet-c1973-e1-sun-camera, .comet-c1973-e1-camera, .comet-c1973-e1-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-sun-camera, :where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-body > u {
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-sun-camera, :where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--comet-c1973-e1-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-body > .comet-c1973-e1-polar { background-image: var(--comet-c1973-e1-poles-image); }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-material-root { z-index: 3; --comet-c1973-e1-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-material, :where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-billboard {
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-body > .comet-c1973-e1-polar { background-image: var(--comet-c1973-e1-poles-image); }
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-material-root { z-index: 3; --comet-c1973-e1-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-material, :where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-material { background-repeat: no-repeat; transform: rotate(var(--comet-c1973-e1-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-billboard { border-radius: 50%; background-color: var(--comet-c1973-e1-billboard-color); opacity: var(--comet-c1973-e1-billboard-opacity); }
-.planet-stage:where([data-object-id="comet-c1973-e1"])[data-lod="billboard"] .comet-c1973-e1-scene, .planet-stage:where([data-object-id="comet-c1973-e1"])[data-lod="marker"] .comet-c1973-e1-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="comet-c1973-e1"])[data-lod="marker"] .comet-c1973-e1-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-material { background-repeat: no-repeat; transform: rotate(var(--comet-c1973-e1-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="comet-c1973-e1"]) .comet-c1973-e1-billboard { border-radius: 50%; background-color: var(--comet-c1973-e1-billboard-color); opacity: var(--comet-c1973-e1-billboard-opacity); }
+.object-stage:where([data-object-id="comet-c1973-e1"])[data-lod="billboard"] .comet-c1973-e1-scene, .object-stage:where([data-object-id="comet-c1973-e1"])[data-lod="marker"] .comet-c1973-e1-scene { visibility: hidden; }
+.object-stage:where([data-object-id="comet-c1973-e1"])[data-lod="marker"] .comet-c1973-e1-billboard { opacity: 0; }
 

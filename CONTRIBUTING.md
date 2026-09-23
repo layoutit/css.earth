@@ -50,7 +50,7 @@ directory? Then the baked bytes must reach R2 **before the pull request can
 merge**, and the tracked inventory must be part of the diff. Git holds the
 inventory; R2 holds the bytes.
 
-1. Bake the object. `pnpm prepare:planets --object=<id>` for a body,
+1. Bake the object. `pnpm prepare:objects --object=<id>` for a body,
    `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, `pnpm prepare:checkout` restores the pinned source downloads first.
 2. Publish the bytes: `node tools/assets/publish-runtime-assets.mts --object=<id>`.

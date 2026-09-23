@@ -3,9 +3,9 @@ import type { BrowserWindow } from './browser-types.mts';
 
 /** Adopt the existing cards. CSS owns placement, tabs and the native visibility toggle. */
 export function createDatasetContextController(drawer: HTMLElement, _document: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
-  const hosts = [...drawer.querySelectorAll<HTMLElement>('.planet-information-panel, [data-focus-lens-bank]')]
+  const hosts = [...drawer.querySelectorAll<HTMLElement>('.object-information-panel, [data-focus-lens-bank]')]
     .flatMap(host => {
-      const rail = host.querySelector<HTMLElement>(':scope > .planet-dataset-context-rail');
+      const rail = host.querySelector<HTMLElement>(':scope > .object-dataset-context-rail');
       return rail ? [{ host, contexts: [...rail.querySelectorAll<HTMLElement>('[data-dataset-context]')] }] : [];
     });
   const render = () => {

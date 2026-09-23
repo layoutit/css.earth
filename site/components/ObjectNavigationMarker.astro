@@ -1,0 +1,22 @@
+---
+import "../object-navigation-marker.css";
+import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
+import { markerStyle } from "../../src/navigation/marker-presentation.mts";
+
+interface Props {
+  objectId: string;
+  color: string;
+  scale?: number;
+  minSize?: number;
+}
+
+const { objectId, color, scale = 1, minSize = 0 } = Astro.props;
+const marker = PREPARED_NAVIGATION_MARKERS[objectId];
+const effectiveScale = Math.max(scale, minSize / marker.presentation.size);
+const { ringed, style, innerStyle, ringStyle } = markerStyle(marker, { color, scale: effectiveScale });
+---
+
+<span class:list={["object-navigation-marker", objectId, { ringed }]} style={style} aria-hidden="true">
+  <i style={innerStyle}></i>
+  {ringed && <b class="object-navigation-ring" style={ringStyle}></b>}
+</span>

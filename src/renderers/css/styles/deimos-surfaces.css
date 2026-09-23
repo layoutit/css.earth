@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="deimos"]) > :is(.deimos-sun-camera, .deimos-camera, .deimos-material-root) {
+.object-stage:where([data-object-id="deimos"]) > :is(.deimos-sun-camera, .deimos-camera, .deimos-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-sun-camera, :where(.planet-stage[data-object-id="deimos"]) .deimos-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-body > u {
+:where(.object-stage[data-object-id="deimos"]) .deimos-sun-camera, :where(.object-stage[data-object-id="deimos"]) .deimos-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="deimos"]) .deimos-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="deimos"]) .deimos-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="deimos"]) .deimos-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: visible;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--deimos-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-body > .deimos-polar { background-image: var(--deimos-poles-image); }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-material-root { z-index: 3; --deimos-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-material, :where(.planet-stage[data-object-id="deimos"]) .deimos-billboard {
+:where(.object-stage[data-object-id="deimos"]) .deimos-body > .deimos-polar { background-image: var(--deimos-poles-image); }
+:where(.object-stage[data-object-id="deimos"]) .deimos-material-root { z-index: 3; --deimos-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="deimos"]) .deimos-material, :where(.object-stage[data-object-id="deimos"]) .deimos-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-material { background-repeat: no-repeat; transform: rotate(var(--deimos-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="deimos"]) .deimos-billboard { border-radius: 50%; background-color: var(--deimos-billboard-color); opacity: var(--deimos-billboard-opacity); }
-.planet-stage:where([data-object-id="deimos"])[data-lod="billboard"] .deimos-scene, .planet-stage:where([data-object-id="deimos"])[data-lod="marker"] .deimos-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="deimos"])[data-lod="marker"] .deimos-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="deimos"]) .deimos-material { background-repeat: no-repeat; transform: rotate(var(--deimos-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="deimos"]) .deimos-billboard { border-radius: 50%; background-color: var(--deimos-billboard-color); opacity: var(--deimos-billboard-opacity); }
+.object-stage:where([data-object-id="deimos"])[data-lod="billboard"] .deimos-scene, .object-stage:where([data-object-id="deimos"])[data-lod="marker"] .deimos-scene { visibility: hidden; }
+.object-stage:where([data-object-id="deimos"])[data-lod="marker"] .deimos-billboard { opacity: 0; }
 

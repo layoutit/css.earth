@@ -29,7 +29,7 @@ object renders blank in production — the deploy ships no same-origin copy to f
 Full steps: CONTRIBUTING.md, "Checklist: a change that bakes or rebakes assets".
 -->
 
-- [ ] Baked the object (`pnpm prepare:planets --object=<id>`, or `pnpm prepare:volume src/objects/<id>`).
+- [ ] Baked the object (`pnpm prepare:objects --object=<id>`, or `pnpm prepare:volume src/objects/<id>`).
 - [ ] Published the bytes (`node tools/assets/publish-runtime-assets.mts --object=<id>`).
 - [ ] Committed the refreshed `inventory.json`, and no baked files.
 - [ ] No R2 credentials — say so here so a maintainer publishes for you: [ ]

@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="eos"]) > :is(.eos-sun-camera, .eos-camera, .eos-material-root) {
+.object-stage:where([data-object-id="eos"]) > :is(.eos-sun-camera, .eos-camera, .eos-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="eos"]) .eos-sun-camera, :where(.planet-stage[data-object-id="eos"]) .eos-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="eos"]) .eos-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="eos"]) .eos-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="eos"]) .eos-body > u {
+:where(.object-stage[data-object-id="eos"]) .eos-sun-camera, :where(.object-stage[data-object-id="eos"]) .eos-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="eos"]) .eos-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="eos"]) .eos-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="eos"]) .eos-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--eos-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="eos"]) .eos-body > .eos-polar { background-image: var(--eos-poles-image); }
-:where(.planet-stage[data-object-id="eos"]) .eos-material-root { z-index: 3; --eos-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="eos"]) .eos-material, :where(.planet-stage[data-object-id="eos"]) .eos-billboard {
+:where(.object-stage[data-object-id="eos"]) .eos-body > .eos-polar { background-image: var(--eos-poles-image); }
+:where(.object-stage[data-object-id="eos"]) .eos-material-root { z-index: 3; --eos-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="eos"]) .eos-material, :where(.object-stage[data-object-id="eos"]) .eos-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="eos"]) .eos-material { background-repeat: no-repeat; transform: rotate(var(--eos-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="eos"]) .eos-billboard { border-radius: 50%; background-color: var(--eos-billboard-color); opacity: var(--eos-billboard-opacity); }
-.planet-stage:where([data-object-id="eos"])[data-lod="billboard"] .eos-scene, .planet-stage:where([data-object-id="eos"])[data-lod="marker"] .eos-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="eos"])[data-lod="marker"] .eos-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="eos"]) .eos-material { background-repeat: no-repeat; transform: rotate(var(--eos-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="eos"]) .eos-billboard { border-radius: 50%; background-color: var(--eos-billboard-color); opacity: var(--eos-billboard-opacity); }
+.object-stage:where([data-object-id="eos"])[data-lod="billboard"] .eos-scene, .object-stage:where([data-object-id="eos"])[data-lod="marker"] .eos-scene { visibility: hidden; }
+.object-stage:where([data-object-id="eos"])[data-lod="marker"] .eos-billboard { opacity: 0; }
 

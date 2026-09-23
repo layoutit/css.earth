@@ -8,11 +8,11 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { buildCatalogueFragment } from './build-catalogue-fragment.mts';
 
-const FRAGMENT_HTML = '<ul class="planet-object-list"><li class="planet-object-item">Saturn</li></ul>';
+const FRAGMENT_HTML = '<ul class="object-list"><li class="object-item">Saturn</li></ul>';
 const PAGE_HTML = (id: string) => `<!doctype html><html><body data-object-shell="${id}">
   <div id="object-category-results" data-catalogue-src="/catalogue/__CATALOGUE_FRAGMENT_SHA__.html"
     data-catalogue-sha256="__CATALOGUE_FRAGMENT_SHA__" data-catalogue-bytes="__CATALOGUE_FRAGMENT_BYTES__">
-    <ul class="planet-object-list" data-catalogue-list></ul>
+    <ul class="object-list" data-catalogue-list></ul>
   </div>
 </body></html>`;
 
@@ -53,8 +53,8 @@ test('buildCatalogueFragment republishes the fragment by hash and rewires every 
       assert.ok(html.includes(`data-catalogue-sha256="${expectedSha}"`));
       assert.ok(html.includes(`data-catalogue-bytes="${Buffer.byteLength(FRAGMENT_HTML)}"`));
       // Object pages ship the placeholder list empty; the rows only exist once, in dist/catalogue.
-      assert.ok(html.includes('<ul class="planet-object-list" data-catalogue-list></ul>'));
-      assert.ok(!html.includes('planet-object-item'));
+      assert.ok(html.includes('<ul class="object-list" data-catalogue-list></ul>'));
+      assert.ok(!html.includes('object-item'));
     }
     const navigation = await readFile(join(dist, 'navigation', 'saturn', 'index.html'), 'utf8');
     assert.equal(navigation, '<p>no catalogue here</p>');

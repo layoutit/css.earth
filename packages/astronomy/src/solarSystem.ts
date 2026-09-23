@@ -153,7 +153,7 @@ export const planetOffsetFromSystemBarycentreKm = (planet: PlanetId, epochJdTt: 
   let z = 0
   for (const moon of moons) {
     const weight = bodyData(moon).gravitationalParameterKm3PerS2 / systemGm
-    const position = moonPositionRelativeToPlanetKm(moon, epochJdTt)
+    const position = moonPositionRelativeToParentKm(moon, epochJdTt)
     x -= weight * position[0]
     y -= weight * position[1]
     z -= weight * position[2]
@@ -161,12 +161,12 @@ export const planetOffsetFromSystemBarycentreKm = (planet: PlanetId, epochJdTt: 
   return [x, y, z]
 }
 
-/** Position of a moon relative to its planet's centre, km, ICRF. */
-export const moonPositionRelativeToPlanetKm = (moon: BodyId, epochJdTt: number): Vec3 =>
+/** Position of a moon relative to its parent's centre, km, ICRF. */
+export const moonPositionRelativeToParentKm = (moon: BodyId, epochJdTt: number): Vec3 =>
   moon === 'moon' ? moonGeocentricKm(epochJdTt) : isSceneSatellite(moon)
     ? sceneSatelliteStateKm(moon, epochJdTt).positionKm : satellitePositionKm(moon as SatelliteId, epochJdTt)
 
-/** Bound on `|moonPositionRelativeToPlanetKm|`, km. Exact for the Kepler moons; declared for the Moon. */
+/** Bound on `|moonPositionRelativeToParentKm|`, km. Exact for the Kepler moons; declared for the Moon. */
 export const moonApoapsisKm = (moon: BodyId): number =>
   moon === 'moon' ? MOON_MAX_GEOCENTRIC_KM : isSceneSatellite(moon)
     ? Math.hypot(...SCENE_SATELLITE_STATES[moon].positionKm) : satelliteApoapsisKm(moon as SatelliteId)
@@ -341,7 +341,7 @@ export const solarSystemFrameSpecs = (parentFrameId: string | null = null): read
           radiusM: bodyData(moon).meanRadiusKm * M_PER_KM,
           maxOffsetInParent: moonApoapsisKm(moon) * kmPerPlanetUnit,
           originInParent: (epochJdTt) => {
-            const km = moonPositionRelativeToPlanetKm(moon, epochJdTt)
+            const km = moonPositionRelativeToParentKm(moon, epochJdTt)
             return [km[0] * kmPerPlanetUnit, km[1] * kmPerPlanetUnit, km[2] * kmPerPlanetUnit]
           },
         },

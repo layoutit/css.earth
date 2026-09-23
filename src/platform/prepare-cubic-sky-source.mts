@@ -10,7 +10,7 @@ export interface CubicSkyPreparationOptions {
  * what its camera reads: the camera responses and presentation offsets, and the camera contract and projection its
  * perspective camera shares. It bakes no images and no stars.
  */
-export function preparePlanetCubicSky({ objectId, cameraContract = null }: CubicSkyPreparationOptions) {
+export function prepareCubicSky({ objectId, cameraContract = null }: CubicSkyPreparationOptions) {
   if (!/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new TypeError("Cubic sky preparation requires an object id.");
   if (cameraContract !== null && ![cameraContract.rotationResponse, cameraContract.zoomResponse,
     cameraContract.horizontalFovDegrees, cameraContract.focalLengthOverViewportWidth].every(Number.isFinite)) {

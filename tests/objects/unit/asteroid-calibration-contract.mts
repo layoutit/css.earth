@@ -92,7 +92,7 @@ export async function assertCalibratedAsteroidSource(id: string, independentExpe
   const read = async (path: string): Promise<Record<string, unknown>> => requireRecord(
     await readJsonSource(resolve(directory, path)), `${id} ${path}`,
   );
-  const source = await createSourceManifest({planetId: id, planetName: expected.name ?? id, sourceRoot});
+  const source = await createSourceManifest({objectId: id, objectName: expected.name ?? id, sourceRoot});
   await source.verify();
   const [config, calibration, model, properties, rotation, acquisition, content, sourceManifest] = await Promise.all([
     'preparation/terrestrial.json', 'reference/calibration.json', 'reference/damit-model.json',

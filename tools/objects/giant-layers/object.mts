@@ -15,8 +15,8 @@ import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {mkdir,readFile,writeFile,realpath} from 'node:fs/promises';
 import {resolve,relative,sep} from 'node:path';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
-import {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
-import {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
+import {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
+import {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
 import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
 import {prepareGiantLayers,parseRadialLayerRecipe,rasterAnnularField} from './index.mts';
@@ -49,7 +49,7 @@ export function assertLayeredGiantFrameBank(descriptor:Pick<ReturnType<typeof pa
 
 /** A giant's sky orientation and directional Sun; the shared universe draws the visible sky and Sun. */
 export function prepareSharedCelestial(namespace:string) {
-  return {sky:preparePlanetCubicSky({objectId:namespace,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD}),sun:preparePlanetDirectionalSun()};
+  return {sky:prepareCubicSky({objectId:namespace,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD}),sun:prepareDirectionalSun()};
 }
 
 /** Full source regeneration. publicDirectory/outputDirectory are explicitly
@@ -74,7 +74,7 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   const materialPolar=normalizedDisc?Number(geometryConfig.shape.polarRadius.toFixed(materialConfig.shapePrecisionDigits)):geometryConfig.shape.polarRadius;
   if(descriptor.recipe.shape.kind!=='ellipsoid'||descriptor.recipe.shape.polarRadiusKm===undefined||geometryConfig.shape.equatorialRadius!==materialShape.equatorialRadius||materialPolar!==materialShape.polarRadius||geometryConfig.shape.polarRadius!==geometryConfig.shape.equatorialRadius*descriptor.recipe.shape.polarRadiusKm/descriptor.recipe.shape.radiusKm)throw new TypeError('Authored physical shape differs between source capabilities.');
   assertLayeredGiantFrameBank(descriptor,materialConfig,presentationConfig);
-  const sourceManifest=await createSourceManifest({planetId:descriptor.id,planetName:contentConfig.displayName,sourceRoot:sourceDirectory});await sourceManifest.verify();
+  const sourceManifest=await createSourceManifest({objectId:descriptor.id,objectName:contentConfig.displayName,sourceRoot:sourceDirectory});await sourceManifest.verify();
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(outputDirectory,{recursive:true})]);
   const geometry=prepareBandedEllipsoid(geometryConfig);
   const observed=await (observationConfig.schema==='cssearth-observed-polar-surfaces@1'?prepareObservedPolarSurfaces:prepareObservedSurfaces)({sourceDirectory,publicDirectory,config:observationConfig,write:true});

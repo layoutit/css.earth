@@ -16,5 +16,5 @@ export async function fixtureSource(sourceRoot: string, entries: readonly {
   await writeFile(resolve(sourceRoot, 'manifest.json'), JSON.stringify({
     schema: 'cssfixture-authoritative-sources@2', inputs, documents: [], generatedIntermediates: [],
   }));
-  return createSourceManifest({ planetId: 'fixture', planetName: 'Fixture', sourceRoot });
+  return createSourceManifest({ objectId: 'fixture', objectName: 'Fixture', sourceRoot });
 }

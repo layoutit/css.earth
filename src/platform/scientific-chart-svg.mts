@@ -49,7 +49,7 @@ export function renderReflectanceChart({
   const labelX = (wavelength: number) =>
     (wavelength - 0.35) / 0.65 * PLOT_RIGHT;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="planet-reflectance-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-reflectance-title ${id}-reflectance-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="object-reflectance-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-reflectance-title ${id}-reflectance-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
   <title id="${id}-reflectance-title">${escapeXmlText(title)}</title>
   <desc id="${id}-reflectance-description">${escapeXmlText(description)}</desc>
   <metadata>${serializeMetadata(metadata)}</metadata>
@@ -76,7 +76,7 @@ export function renderReflectanceChart({
     <text x="${labelX(0.75)}" y="141" text-anchor="middle">750</text>
     <text x="${PLOT_RIGHT}" y="141" text-anchor="end">1000</text>
   </g>
-  <path class="planet-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+  <path class="object-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
   <rect x="0" y="114" width="${visibleStart}" height="6" fill="#261735"/>
   <rect x="${visibleStart}" y="114" width="${visibleWidth}" height="6" fill="url(#${id}-visible-spectrum)"/>
   <rect x="${visibleEnd}" y="114" width="${infraredWidth}" height="6" fill="#32191d"/>
@@ -128,7 +128,7 @@ export function renderTemperaturePressureChart({
   const temperatureMidpoint =
     (temperatureMinimum + temperatureMaximum) / 2;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="planet-temperature-pressure-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-temperature-pressure-title ${id}-temperature-pressure-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="object-temperature-pressure-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-temperature-pressure-title ${id}-temperature-pressure-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
   <title id="${id}-temperature-pressure-title">${escapeXmlText(title)}</title>
   <desc id="${id}-temperature-pressure-description">${escapeXmlText(description)}</desc>
   <metadata>${serializeMetadata(metadata)}</metadata>
@@ -139,7 +139,7 @@ export function renderTemperaturePressureChart({
     <text x="${PLOT_RIGHT / 2}" y="141" text-anchor="middle">${temperatureMidpoint}</text>
     <text x="${PLOT_RIGHT}" y="141" text-anchor="end">${temperatureMaximum}</text>
   </g>
-  <path class="planet-chart-line" d="${profilePath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+  <path class="object-chart-line" d="${profilePath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
   </g>
 </svg>
 `;
@@ -175,7 +175,7 @@ export function renderPhotometricPhaseChart({
   }).join(" ");
   const midpoint = Math.round(lastAngle / 2);
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="planet-photometric-phase-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-photometric-phase-title ${id}-photometric-phase-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="object-photometric-phase-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-photometric-phase-title ${id}-photometric-phase-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
   <title id="${id}-photometric-phase-title">${escapeXmlText(title)}</title>
   <desc id="${id}-photometric-phase-description">${escapeXmlText(description)}</desc>
   <metadata>${serializeMetadata(metadata)}</metadata>
@@ -189,7 +189,7 @@ export function renderPhotometricPhaseChart({
     <text x="${PLOT_RIGHT / 2}" y="141" text-anchor="middle">${midpoint}</text>
     <text x="${PLOT_RIGHT}" y="141" text-anchor="end">${lastAngle}</text>
   </g>
-  <path class="planet-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+  <path class="object-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
   </g>
 </svg>
 `;

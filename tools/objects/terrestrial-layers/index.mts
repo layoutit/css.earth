@@ -21,9 +21,9 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
-import { preparePlanetCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
+import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '../../../src/platform/directional-sun-contract.mts';
-import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
+import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mts';
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mts';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
@@ -254,7 +254,7 @@ export function parseTerrestrialProfile(input:unknown) {
 }
 
 export async function prepareTerrestrialCelestial({ outputDirectory, config }:TerrestrialContext) {
-  const sky = preparePlanetCubicSky({ objectId: config.namespace, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
+  const sky = prepareCubicSky({ objectId: config.namespace, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const sun = prepareTerrestrialSun({ config, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')) });
   await Promise.all([writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(sky)}\n`),
     writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(sun)}\n`)]);
@@ -273,14 +273,14 @@ export function prepareTerrestrialSun({ config, surfacesReport }:{config:SolidCo
     localDirection: sceneDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: config.namespace, ...solidCameraAngles(config, surfacesReport), sceneDirection }),
   };
-  return preparePlanetDirectionalSun({ presentation });
+  return prepareDirectionalSun({ presentation });
 }
 
 /** Source inputs feed reusable raster, geometry, celestial and presentation operations. */
 export async function prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory, config: input, prepareContent, replaceReviewedImages = false }:Directories & {config:unknown;prepareContent:typeof prepareObjectContentAssets;replaceReviewedImages?:boolean}) {
   const config = parseTerrestrialProfile(input);
   if (typeof prepareContent !== 'function') throw new TypeError('Terrestrial preparation requires the shared content preparer.');
-  const source = await createSourceManifest({ planetId: config.namespace, planetName: config.displayName, sourceRoot: sourceDirectory });
+  const source = await createSourceManifest({ objectId: config.namespace, objectName: config.displayName, sourceRoot: sourceDirectory });
   await source.verify();
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const context = { sourceDirectory, publicDirectory, outputDirectory, config, source };

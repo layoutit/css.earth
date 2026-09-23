@@ -33,7 +33,7 @@ for (const [url, identity] of Object.entries(requireRecord(baseline.loadedFiles,
   assert.equal(sha256(bytes), requireRecord(identity, `Baseline identity ${url}`).sha256, `Exact baseline bytes missing: ${url}`);
   bundles.set(url, bytes);
 }
-const oldMain = [...bundles.keys()].find(url => /PlanetLayout.*\.js$/.test(url));
+const oldMain = [...bundles.keys()].find(url => /ObjectLayout.*\.js$/.test(url));
 const oldCss = [...bundles.keys()].filter(url => url.endsWith('.css'));
 const server = await previewSite({ port: 4241 });
 const browser = await chromium.launch({ headless: true,
@@ -52,9 +52,9 @@ try {
       if (!url.pathname.endsWith('/')) return route.continue();
       const response = await route.fetch();
       let html = await response.text();
-      html = html.replace('<div class="planet-world-stage">', '').replace(/(<\/main>)\s*<\/div>/, '$1');
+      html = html.replace('<div class="object-world-stage">', '').replace(/(<\/main>)\s*<\/div>/, '$1');
       // String#replace converts a missing baseline bundle exactly as String() does.
-      html = html.replace(/\/_astro\/PlanetLayout[^"\s]*\.js/g, String(oldMain));
+      html = html.replace(/\/_astro\/ObjectLayout[^"\s]*\.js/g, String(oldMain));
       html = html.replace(/\/_astro\/[^"\s]*\.css/g, url => oldCss.find(old => basename(old).split('.')[0] === basename(url).split('.')[0]) ?? url);
       return route.fulfill({ response, body: html });
     });
@@ -77,7 +77,7 @@ try {
           if (typeof method !== 'function') throw new TypeError(`${String(key)} is not a function`);
           return Reflect.apply(method, target, []);
         };
-        const stage = document.querySelector('.planet-stage');
+        const stage = document.querySelector('.object-stage');
         if (!stage) throw new TypeError("Cannot read properties of null (reading 'querySelector')");
         const camera = stage.querySelector('.polycss-camera');
         if (!camera) throw new TypeError("Cannot read properties of null (reading 'getBoundingClientRect')");
@@ -124,8 +124,8 @@ try {
     await save('sun');
     await setCamera(milestoneCamera('cold-zoom-for-mars-end'));
     await overview(true); await ready('sun'); await save('overview');
-    await page.locator('.planet-sidebar-search').fill('earth'); await page.waitForTimeout(400); await save('search');
-    await page.locator('.planet-object-item:not([hidden]) .planet-object-link[data-object-id="earth"]').click();
+    await page.locator('.object-sidebar-search').fill('earth'); await page.waitForTimeout(400); await save('search');
+    await page.locator('.object-item:not([hidden]) .object-link[data-object-id="earth"]').click();
     await ready('earth'); await save('earth');
     await page.setViewportSize({ width: 700, height: 1000 }); await page.waitForTimeout(600); await save('portrait');
     await page.setViewportSize(viewport);

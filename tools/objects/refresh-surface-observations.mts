@@ -42,7 +42,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   const previousSurfaces = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8')));
   if (lensIds.some(id => !records(previousSurfaces.surfaces).some(surface => surface.id === id))) throw new Error('Refresh cannot add a lens.');
   sharp.concurrency(1); sharp.cache(false);
-  const source = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: sourceDirectory });
+  const source = await createSourceManifest({ objectId: id, objectName: id, sourceRoot: sourceDirectory });
   const radial = await loadRadialTerrain({ config, sourceDirectory, source });
   if (!radial) throw new Error('Observation refresh requires source terrain.');
   const retained = retainedPhotographicAtlas(requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8'))));

@@ -1,6 +1,6 @@
 ---
 import fontUrl from '../../src/objects/earth/source/presentation/InterVariable.ttf?url';
-import { PLANET_TITLE_RECIPE as recipe } from '../../src/platform/planet-title-recipe.mts';
+import { OBJECT_TITLE_RECIPE as recipe } from '../../src/platform/object-title-recipe.mts';
 
 // Text titles use the same pinned font, optical size and scale as the prepared
 // title artwork. Existing SVG headings retain their exact desktop appearance.
@@ -13,7 +13,7 @@ const styles = `
   font-weight: ${recipe.weight};
   font-display: swap;
 }
-.planet-title-text {
+.object-title-text {
   font-family: "cssEarth title", var(--shell-ui-font);
   font-size: ${recipe.fontSize * scale}px;
   font-weight: ${recipe.weight};

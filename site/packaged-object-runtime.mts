@@ -16,8 +16,8 @@ export function bindPackagedObject(definition: ObjectRuntimeDefinition, mount = 
     ...options,
     runtimePolicy,
     capabilities: preparedObjectCapabilities,
-    inputSurface: requiredElement(stage.ownerDocument, '.planet-input-surface'),
-    mobilePreviewElement: stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'),
+    inputSurface: requiredElement(stage.ownerDocument, '.object-input-surface'),
+    mobilePreviewElement: stage.ownerDocument.querySelector<HTMLElement>('.object-sidebar'),
     diagnostics: DIAGNOSTICS_ENABLED,
   });
 }

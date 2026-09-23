@@ -5,17 +5,17 @@ import { errorMessage, record } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { NavigationOptions } from './navigation-history.mts';
-import type { NavigationContent } from './planet-shell-client.mts';
+import type { NavigationContent } from './object-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
-type Shell = ReturnType<typeof mountPlanetShell>;
+type Shell = ReturnType<typeof mountObjectShell>;
 export type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
 export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
-export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
+export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountObjectShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { readObjectDiagnostics } from '../src/renderers/css/dist/index.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { objectAdapter } from "./object-adapter.mts";
-import { mountPlanetShell } from "./planet-shell-client.mts";
+import { mountObjectShell } from "./object-shell-client.mts";
 import { automaticPlaybackPolicy } from "./runtime-policy.mts";
 import { bindViewUrl } from "./view-url-runtime.mts";
 import { SCENE_OBJECTS } from './objects.mts';
@@ -43,7 +43,7 @@ export function createSceneRouter({
   loadObject = objectAdapter.load,
   documentTarget = document,
   windowTarget = window,
-  mountShell = mountPlanetShell,
+  mountShell = mountObjectShell,
   reportError = (error) => console.error(error),
   navigation = null,
   objects = SCENE_OBJECTS,
@@ -769,7 +769,7 @@ function createWorldContextOwner({ objects, objectId, navigation }: { objects: r
 }
 
 if (typeof document !== "undefined") {
-  const stage = document.querySelector(".planet-stage");
+  const stage = document.querySelector(".object-stage");
   if (!(stage instanceof HTMLElement)) throw new Error("Missing cssEarth planet stage.");
   const objectId = stage.dataset.objectId;
   if (!objectId) throw new Error("Missing cssEarth object identity.");

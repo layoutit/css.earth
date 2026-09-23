@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="baucis"]) > :is(.baucis-sun-camera, .baucis-camera, .baucis-material-root) {
+.object-stage:where([data-object-id="baucis"]) > :is(.baucis-sun-camera, .baucis-camera, .baucis-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-sun-camera, :where(.planet-stage[data-object-id="baucis"]) .baucis-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-body > u {
+:where(.object-stage[data-object-id="baucis"]) .baucis-sun-camera, :where(.object-stage[data-object-id="baucis"]) .baucis-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="baucis"]) .baucis-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="baucis"]) .baucis-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="baucis"]) .baucis-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--baucis-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-body > .baucis-polar { background-image: var(--baucis-poles-image); }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-material-root { z-index: 3; --baucis-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-material, :where(.planet-stage[data-object-id="baucis"]) .baucis-billboard {
+:where(.object-stage[data-object-id="baucis"]) .baucis-body > .baucis-polar { background-image: var(--baucis-poles-image); }
+:where(.object-stage[data-object-id="baucis"]) .baucis-material-root { z-index: 3; --baucis-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="baucis"]) .baucis-material, :where(.object-stage[data-object-id="baucis"]) .baucis-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-material { background-repeat: no-repeat; transform: rotate(var(--baucis-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="baucis"]) .baucis-billboard { border-radius: 50%; background-color: var(--baucis-billboard-color); opacity: var(--baucis-billboard-opacity); }
-.planet-stage:where([data-object-id="baucis"])[data-lod="billboard"] .baucis-scene, .planet-stage:where([data-object-id="baucis"])[data-lod="marker"] .baucis-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="baucis"])[data-lod="marker"] .baucis-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="baucis"]) .baucis-material { background-repeat: no-repeat; transform: rotate(var(--baucis-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="baucis"]) .baucis-billboard { border-radius: 50%; background-color: var(--baucis-billboard-color); opacity: var(--baucis-billboard-opacity); }
+.object-stage:where([data-object-id="baucis"])[data-lod="billboard"] .baucis-scene, .object-stage:where([data-object-id="baucis"])[data-lod="marker"] .baucis-scene { visibility: hidden; }
+.object-stage:where([data-object-id="baucis"])[data-lod="marker"] .baucis-billboard { opacity: 0; }
 

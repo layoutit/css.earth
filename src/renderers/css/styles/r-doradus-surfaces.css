@@ -1,7 +1,7 @@
-/* R Doradus: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   planet-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. The off-limb plate carries the ALMA image's light outside the disc,
+/* R Doradus: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. The off-limb plate carries the ALMA image's light outside the disc,
    1037 px across the 125 mas frame; the limb plate is transparent, because the sphere's own silhouette is the limb. */
-.planet-stage[data-object-id="r-doradus"] > :is(.polycss-camera, .r-doradus-corona-layer, .r-doradus-limb-layer) {
+.object-stage[data-object-id="r-doradus"] > :is(.polycss-camera, .r-doradus-corona-layer, .r-doradus-limb-layer) {
   --r-doradus-scene-side-padding: 16px;
   --r-doradus-reference-width: 1920px;
   --r-doradus-reference-height: 1080px;
@@ -15,8 +15,8 @@
   );
 }
 
-/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
-.planet-stage[data-object-id="r-doradus"] > :is(.r-doradus-corona-layer, .r-doradus-limb-layer) {
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="r-doradus"] > :is(.r-doradus-corona-layer, .r-doradus-limb-layer) {
   position: absolute;
   inset: 0;
   transform-origin: 50% 50%;
@@ -24,23 +24,23 @@
 }
 
 /* Paint order: off-limb context behind the sphere, limb plate above it. */
-.planet-stage[data-object-id="r-doradus"] .r-doradus-corona-layer {
+.object-stage[data-object-id="r-doradus"] .r-doradus-corona-layer {
   z-index: 0;
 }
 
-.planet-stage[data-object-id="r-doradus"] .polycss-camera {
+.object-stage[data-object-id="r-doradus"] .polycss-camera {
   z-index: 1;
 }
 
-.planet-stage[data-object-id="r-doradus"] .r-doradus-limb-layer {
+.object-stage[data-object-id="r-doradus"] .r-doradus-limb-layer {
   z-index: 2;
 }
 
-.planet-stage[data-object-id="r-doradus"] .r-doradus-body {
+.object-stage[data-object-id="r-doradus"] .r-doradus-body {
   transform-style: preserve-3d;
 }
 
-.planet-stage[data-object-id="r-doradus"] .polycss-scene s {
+.object-stage[data-object-id="r-doradus"] .polycss-scene s {
   position: absolute;
   display: block;
   transform-origin: 0 0;
@@ -54,19 +54,19 @@
 
 /* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
    hide their back faces. */
-.planet-stage[data-object-id="r-doradus"] .polycss-scene s:not(.r-doradus-polar) {
+.object-stage[data-object-id="r-doradus"] .polycss-scene s:not(.r-doradus-polar) {
   backface-visibility: visible;
   background-image: var(--r-doradus-surface-image) !important;
 }
 
-.planet-stage[data-object-id="r-doradus"] .polycss-scene s.r-doradus-polar {
+.object-stage[data-object-id="r-doradus"] .polycss-scene s.r-doradus-polar {
   backface-visibility: hidden;
   background-image: var(--r-doradus-poles-image) !important;
 }
 
 /* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
    solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
-.planet-stage[data-object-id="r-doradus"] .r-doradus-corona-layer {
+.object-stage[data-object-id="r-doradus"] .r-doradus-corona-layer {
   background-image: var(--r-doradus-corona-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -77,7 +77,7 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
    sphere is drawn at, so the plate's edge is the sphere's outline. */
-.planet-stage[data-object-id="r-doradus"] .r-doradus-limb-layer {
+.object-stage[data-object-id="r-doradus"] .r-doradus-limb-layer {
   background-image: var(--r-doradus-limb-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -86,17 +86,17 @@
     calc(496px * 1.25 * var(--r-doradus-camera-zoom, 1));
 }
 
-.planet-stage[data-object-id="r-doradus"] .polycss-camera {
+.object-stage[data-object-id="r-doradus"] .polycss-camera {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.planet-stage[data-object-id="r-doradus"] .polycss-scene {
+.object-stage[data-object-id="r-doradus"] .polycss-scene {
   will-change: transform;
 }
 
-.planet-stage[data-object-id="r-doradus"] .polycss-scene s {
+.object-stage[data-object-id="r-doradus"] .polycss-scene s {
   width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;

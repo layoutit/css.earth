@@ -40,7 +40,7 @@ test('currentlyInventoriedKeys reads real inventory.json keys from a fixture obj
   await mkdir(preparedDirectory, { recursive: true });
   await writeFile(resolve(preparedDirectory, 'runtime.json'), 'runtime-bytes');
   await writeFile(resolve(preparedDirectory, 'scene.json'), 'scene-bytes');
-  await inventoryPreparedAssets({ planetId: 'fixture-body', objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory, filenames: ['runtime.json', 'scene.json'], gitTrackedPaths: async () => new Set() });
+  await inventoryPreparedAssets({ objectId: 'fixture-body', objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory, filenames: ['runtime.json', 'scene.json'], gitTrackedPaths: async () => new Set() });
   const keys = await currentlyInventoriedKeys(root);
   assert.equal(keys.size, 2);
   for (const key of keys) assert.match(key, /^runtime-assets\/[0-9a-f]{64}\/(runtime|scene)\.json$/);

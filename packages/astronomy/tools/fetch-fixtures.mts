@@ -121,7 +121,7 @@ for (const [id, command, center, range] of SATELLITES.filter(([id]) => !selected
       : range === 'source-limited'
         ? SOURCE_LIMITED_SATELLITE_EPOCHS
         : SATELLITE_EPOCHS
-  blocks.push(await collect(`${id}FromPlanet`, `${id} (${command}) relative to its planet`, command, center, epochs))
+  blocks.push(await collect(`${id}FromParent`, `${id} (${command}) relative to its parent`, command, center, epochs))
 }
 for (const [id, command] of selected.size ? [] : DWARF_PLANETS) {
   blocks.push(await collect(`${id}Heliocentric`, `${id} (${command}) relative to the Sun`, command, '500@10', DWARF_EPOCHS))

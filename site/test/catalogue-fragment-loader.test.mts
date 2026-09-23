@@ -10,7 +10,7 @@ class FakeDocument {
   html: string;
   constructor(html: string) { this.html = html; }
   querySelector(selector: string) {
-    return selector === 'ul.planet-object-list' && this.html.includes('planet-object-list') ? new FakeUListElement(this.html) : null;
+    return selector === 'ul.object-list' && this.html.includes('object-list') ? new FakeUListElement(this.html) : null;
   }
 }
 class FakeParser { parseFromString(html: string) { return new FakeDocument(html); } }
@@ -29,7 +29,7 @@ function fixtureWindow(fetchImpl: typeof fetch, { requestIdleCallback = false }:
   return { windowTarget, flush: () => { const pending = [...timers]; timers.length = 0; for (const callback of pending) callback(); } };
 }
 
-const rowsHtml = '<ul class="planet-object-list"><li class="planet-object-item">Saturn</li></ul>';
+const rowsHtml = '<ul class="object-list"><li class="object-item">Saturn</li></ul>';
 const indexJson = JSON.stringify({ schema: 'cssearth-catalogue-index@1', entries: [{
   kind: 'scene', id: 'saturn', name: 'Saturn', searchNames: [], classification: 'planet',
   classificationName: 'planet', systemName: 'solar system', route: '/saturn/', illustration: false,

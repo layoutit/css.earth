@@ -46,7 +46,7 @@ Feature notes: 112 of the labelled names carry a caption note, the lead summary 
 ## Planet facts and presentation
 
 The user-facing facts come from the checked NASA Science snapshot in
-`data/planets/venus.json`. The snapshot records its source URL, source ID,
+`data/object-information/venus.json`. The snapshot records its source URL, source ID,
 publication modification time, retrieval date, and NASA credit. It supplies the
 planet's 108 million km average distance, 12,104 km diameter, 225-Earth-day
 year, 243-Earth-day retrograde rotation, approximately 3-degree tilt, 467 °C

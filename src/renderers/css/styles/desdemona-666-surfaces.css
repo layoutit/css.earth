@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="desdemona-666"]) > :is(.desdemona-666-sun-camera, .desdemona-666-camera, .desdemona-666-material-root) {
+.object-stage:where([data-object-id="desdemona-666"]) > :is(.desdemona-666-sun-camera, .desdemona-666-camera, .desdemona-666-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-sun-camera, :where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-body > u {
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-sun-camera, :where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--desdemona-666-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-body > .desdemona-666-polar { background-image: var(--desdemona-666-poles-image); }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-material-root { z-index: 3; --desdemona-666-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-material, :where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-billboard {
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-body > .desdemona-666-polar { background-image: var(--desdemona-666-poles-image); }
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-material-root { z-index: 3; --desdemona-666-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-material, :where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-material { background-repeat: no-repeat; transform: rotate(var(--desdemona-666-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="desdemona-666"]) .desdemona-666-billboard { border-radius: 50%; background-color: var(--desdemona-666-billboard-color); opacity: var(--desdemona-666-billboard-opacity); }
-.planet-stage:where([data-object-id="desdemona-666"])[data-lod="billboard"] .desdemona-666-scene, .planet-stage:where([data-object-id="desdemona-666"])[data-lod="marker"] .desdemona-666-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="desdemona-666"])[data-lod="marker"] .desdemona-666-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-material { background-repeat: no-repeat; transform: rotate(var(--desdemona-666-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="desdemona-666"]) .desdemona-666-billboard { border-radius: 50%; background-color: var(--desdemona-666-billboard-color); opacity: var(--desdemona-666-billboard-opacity); }
+.object-stage:where([data-object-id="desdemona-666"])[data-lod="billboard"] .desdemona-666-scene, .object-stage:where([data-object-id="desdemona-666"])[data-lod="marker"] .desdemona-666-scene { visibility: hidden; }
+.object-stage:where([data-object-id="desdemona-666"])[data-lod="marker"] .desdemona-666-billboard { opacity: 0; }
 

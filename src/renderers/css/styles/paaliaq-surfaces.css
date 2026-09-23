@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="paaliaq"]) > :is(.paaliaq-sun-camera, .paaliaq-camera, .paaliaq-material-root) {
+.object-stage:where([data-object-id="paaliaq"]) > :is(.paaliaq-sun-camera, .paaliaq-camera, .paaliaq-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-sun-camera, :where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-body > u {
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-sun-camera, :where(.object-stage[data-object-id="paaliaq"]) .paaliaq-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--paaliaq-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-body > .paaliaq-polar { background-image: var(--paaliaq-poles-image); }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-material-root { z-index: 3; --paaliaq-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-material, :where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-billboard {
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-body > .paaliaq-polar { background-image: var(--paaliaq-poles-image); }
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-material-root { z-index: 3; --paaliaq-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-material, :where(.object-stage[data-object-id="paaliaq"]) .paaliaq-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-material { background-repeat: no-repeat; transform: rotate(var(--paaliaq-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="paaliaq"]) .paaliaq-billboard { border-radius: 50%; background-color: var(--paaliaq-billboard-color); opacity: var(--paaliaq-billboard-opacity); }
-.planet-stage:where([data-object-id="paaliaq"])[data-lod="billboard"] .paaliaq-scene, .planet-stage:where([data-object-id="paaliaq"])[data-lod="marker"] .paaliaq-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="paaliaq"])[data-lod="marker"] .paaliaq-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-material { background-repeat: no-repeat; transform: rotate(var(--paaliaq-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="paaliaq"]) .paaliaq-billboard { border-radius: 50%; background-color: var(--paaliaq-billboard-color); opacity: var(--paaliaq-billboard-opacity); }
+.object-stage:where([data-object-id="paaliaq"])[data-lod="billboard"] .paaliaq-scene, .object-stage:where([data-object-id="paaliaq"])[data-lod="marker"] .paaliaq-scene { visibility: hidden; }
+.object-stage:where([data-object-id="paaliaq"])[data-lod="marker"] .paaliaq-billboard { opacity: 0; }
 

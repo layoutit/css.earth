@@ -32,7 +32,7 @@ test("Ida's published camera photometry resolves against its model record and th
   const lens = requireArray(requireRecord(profile.raster).surfaceObservations).map(value => requireRecord(value)).find(value => value.id === 'calibrated');
   const block = parseControlledCameraLens(lens).photometry;
   if (!('referenceDegrees' in block)) throw new Error("Ida's calibrated lens does not name a published photometric model.");
-  const source = await createSourceManifest({ planetId: 'ida', planetName: 'Ida', sourceRoot });
+  const source = await createSourceManifest({ objectId: 'ida', objectName: 'Ida', sourceRoot });
   const photometry = await publishedPhotometry(sourceRoot, source.manifest, block);
   assert.equal(photometry.report.model, 'helfenstein-1996-hapke');
   assert.deepEqual(photometry.report.citations, ['doi-10-1006-icar-1996-0036']);

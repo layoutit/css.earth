@@ -69,12 +69,12 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   const root = requiredElement<HTMLElement>(shell, '[data-prepared-focus-card]');
   const refs = [selected.skyPosition.sourceRef, selected.distance.sourceRef, (isPreparedCluster(selected) || isPreparedNebula(selected) ? selected.classification.sourceRef : selected.membership.sourceRef)];
   const card = createPreparedFocusCard(root, id => {
-    for (const radio of root.querySelectorAll<HTMLInputElement>(':scope > .planet-native-tabs > input')) radio.toggleAttribute('checked', radio.value === id);
+    for (const radio of root.querySelectorAll<HTMLInputElement>(':scope > .object-native-tabs > input')) radio.toggleAttribute('checked', radio.value === id);
   });
   card.set(selected, catalog.sources.filter(source => refs.some(ref => ref === source.id || ref?.startsWith(`${source.id}:`))), presentation);
   card.destroy(); root.hidden = false;
   const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;
   initial.textContent = JSON.stringify(initialFocusCatalog(catalog, selected)).replace(/</gu, '\\u003c'); root.append(initial);
-  requiredElement(shell, '.planet-sheet-handle').setAttribute('checked', '');
+  requiredElement(shell, '.object-sheet-handle').setAttribute('checked', '');
   return saved;
 }

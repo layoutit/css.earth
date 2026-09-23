@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="epimetheus"]) > :is(.epimetheus-sun-camera, .epimetheus-camera, .epimetheus-material-root) {
+.object-stage:where([data-object-id="epimetheus"]) > :is(.epimetheus-sun-camera, .epimetheus-camera, .epimetheus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-sun-camera, :where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-body > u {
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-sun-camera, :where(.object-stage[data-object-id="epimetheus"]) .epimetheus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--epimetheus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-body > .epimetheus-polar { background-image: var(--epimetheus-poles-image); }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-material-root { z-index: 3; --epimetheus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-material, :where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-billboard {
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-body > .epimetheus-polar { background-image: var(--epimetheus-poles-image); }
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-material-root { z-index: 3; --epimetheus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-material, :where(.object-stage[data-object-id="epimetheus"]) .epimetheus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-material { background-repeat: no-repeat; transform: rotate(var(--epimetheus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="epimetheus"]) .epimetheus-billboard { border-radius: 50%; background-color: var(--epimetheus-billboard-color); opacity: var(--epimetheus-billboard-opacity); }
-.planet-stage:where([data-object-id="epimetheus"])[data-lod="billboard"] .epimetheus-scene, .planet-stage:where([data-object-id="epimetheus"])[data-lod="marker"] .epimetheus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="epimetheus"])[data-lod="marker"] .epimetheus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-material { background-repeat: no-repeat; transform: rotate(var(--epimetheus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="epimetheus"]) .epimetheus-billboard { border-radius: 50%; background-color: var(--epimetheus-billboard-color); opacity: var(--epimetheus-billboard-opacity); }
+.object-stage:where([data-object-id="epimetheus"])[data-lod="billboard"] .epimetheus-scene, .object-stage:where([data-object-id="epimetheus"])[data-lod="marker"] .epimetheus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="epimetheus"])[data-lod="marker"] .epimetheus-billboard { opacity: 0; }
 

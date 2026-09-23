@@ -24,13 +24,13 @@ function fixture({ mobile = false } = {}) {
     about: { selector: '.explorer-rail-about', node: new Button() },
     explore: { selector: '.explorer-rail-explore', node: new Button() },
     panel: { selector: '.explorer-about-panel', node: new Element() },
-    drawer: { selector: '.planet-drawer-content', node: new Element() },
-    search: { selector: '.planet-sidebar-search-card', node: new Element() },
-    searchInput: { selector: '.planet-sidebar-search', node: new Input() },
-    settings: { selector: '.planet-settings-action', node: new Button() },
-    settingsPanel: { selector: '.planet-settings-panel', node: new Element() },
-    aside: { selector: '.planet-sidebar', node: new Element() },
-    facilityToggle: { selector: '.planet-facility-toggle', node: new Button() },
+    drawer: { selector: '.object-drawer-content', node: new Element() },
+    search: { selector: '.object-sidebar-search-card', node: new Element() },
+    searchInput: { selector: '.object-sidebar-search', node: new Input() },
+    settings: { selector: '.object-settings-action', node: new Button() },
+    settingsPanel: { selector: '.object-settings-panel', node: new Element() },
+    aside: { selector: '.object-sidebar', node: new Element() },
+    facilityToggle: { selector: '.object-facility-toggle', node: new Button() },
   };
   documentTarget.querySelector = (selector: string) =>
     Object.values(nodes).find((entry) => entry.selector === selector)?.node ?? null;
