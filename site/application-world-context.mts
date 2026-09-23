@@ -18,7 +18,15 @@ import type { ApplicationWorldLayer } from './application-world-types.mts';
 
 export function createApplicationWorldContext() {
   return {
-    async mount({ stage, signal, onSelectFocus, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; signal?: AbortSignal; onSelectFocus(id: string): void; windowTarget?: Window | null }) {
+    /** The shell's camera viewport. It is pure layout, so a detail can mount on it before the world's data loads.
+     * On phones, centre the focus between the floating header and drawer readout. */
+    createViewport(stage: HTMLElement) {
+      const document = stage.ownerDocument;
+      return createCameraViewport(stage, document.querySelector<HTMLElement>('.object-sidebar'), worldVisibilityPolicy.compact ? {
+        above: document.querySelector<HTMLElement>('.explorer-shell-header'),
+        below: document.querySelector<HTMLElement>('.object-view-readout') } : null);
+    },
+    async mount({ stage, viewport, signal, onSelectFocus, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; viewport: ReturnType<typeof createCameraViewport>; signal?: AbortSignal; onSelectFocus(id: string): void; windowTarget?: Window | null }) {
       const target = stage.ownerDocument.defaultView;
       if (!target || !windowTarget) throw new Error('World context requires a window.');
       const lifetime = createSceneLifetime();
@@ -55,10 +63,6 @@ export function createApplicationWorldContext() {
           sources: prepared.catalogSources, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
-        // On phones, centre the focus between the floating header and drawer readout.
-        const viewport = own(createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.object-sidebar'), worldVisibilityPolicy.compact ? {
-          above: stage.ownerDocument.querySelector<HTMLElement>('.explorer-shell-header'),
-          below: stage.ownerDocument.querySelector<HTMLElement>('.object-view-readout') } : null));
         const minimap = own(createSpaceMinimapSetting(stage.ownerDocument, reportError));
         const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock));
         let heliosphereEnabled = false, shellsMounted = false;

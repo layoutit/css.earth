@@ -67,9 +67,10 @@ export interface PreparedContextBody extends PreparedContextPoint {
   readonly labelPlacement?: 'centre';
   /** A placed star measured to be bound to another with no measured orbit: its host and the pair's centre of mass. */
   readonly boundTo?: { readonly hostId: string; readonly centerM: PositionM };
+  /** The members a system overview frames. The full context also carries its camera candidates; the browser's summary
+   * does not, and reads them from `world-system-views.json` (`parsePreparedSystemViews`) when navigation needs them. */
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
-    readonly candidates: readonly { readonly cameraToReference: readonly number[];
-      readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }[] };
+    readonly candidates?: readonly PreparedSystemViewCandidate[] };
   readonly orbit?: PreparedContextOrbit;
 }
 /** What the main thread knows about an orbit: its parent, extent and size. The
@@ -155,27 +156,46 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
     // A body drawn from its astronomy record may have no measured radius: 0, drawn as its circle only.
     positionM: vector(input.positionM, 'point position'), radiusM: input.unpackaged === true && input.radiusM === 0 ? 0 : positive(input.radiusM, `point ${id} radius`) });
 }
-function parseSystemView(value: unknown): PreparedContextBody['systemView'] {
+export interface PreparedSystemViewCandidate { readonly cameraToReference: readonly number[];
+  readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }
+function parseSystemViewCandidates(value: unknown, memberCount: number, id: string): readonly PreparedSystemViewCandidate[] {
+  const candidates = array(value, `system view ${id} candidates`).map(value => {
+    const candidate = record(value, 'system view candidate', ['cameraToReference', 'minimumM', 'maximumM', 'memberPositionsM']);
+    const cameraToReference = numbers(candidate.cameraToReference, 'system view rotation');
+    validateWorldRotation(cameraToReference);
+    const minimumM = vector(candidate.minimumM, 'system view minimum'), maximumM = vector(candidate.maximumM, 'system view maximum');
+    if (minimumM.some((value, axis) => value >= maximumM[axis]!)) throw new TypeError(`System view ${id} bounds must have positive extent.`);
+    const memberPositionsM = array(candidate.memberPositionsM, 'system member positions').map(value => vector(value, 'system member position'));
+    if (memberPositionsM.length !== memberCount) throw new TypeError(`System view ${id} has ${memberPositionsM.length} member positions for ${memberCount} members.`);
+    return Object.freeze({ cameraToReference: Object.freeze(cameraToReference), minimumM, maximumM, memberPositionsM: Object.freeze(memberPositionsM) });
+  });
+  if (!candidates.length) throw new TypeError(`System view ${id} must include candidate views.`);
+  return Object.freeze(candidates);
+}
+/** The full context's views carry their camera candidates; the summary's name their members only. */
+function parseSystemView(value: unknown, withCandidates = true): PreparedContextBody['systemView'] {
   if (value === undefined) return undefined;
-  const view = record(value, 'system view', ['memberIds', 'memberRadiiM', 'candidates']);
+  const view = record(value, 'system view', withCandidates ? ['memberIds', 'memberRadiiM', 'candidates'] : ['memberIds', 'memberRadiiM']);
   const memberIds = array(view.memberIds, 'system members').map(id => text(id, 'system member id'));
   if (!memberIds.length) throw new TypeError('System view must include members.');
   unique(memberIds, 'system member ids');
   // Zero is a member drawn from its record with no measured radius; each radius is checked against its body below.
   const memberRadiiM = array(view.memberRadiiM, 'system member radii').map((value, index) => value === 0 ? 0 : positive(value, `system member ${memberIds[index]} radius`));
   if (memberRadiiM.length !== memberIds.length) throw new TypeError('System view needs one radius per member.');
-  const candidates = array(view.candidates, 'system view candidates').map(value => {
-    const candidate = record(value, 'system view candidate', ['cameraToReference', 'minimumM', 'maximumM', 'memberPositionsM']);
-    const cameraToReference = numbers(candidate.cameraToReference, 'system view rotation');
-    validateWorldRotation(cameraToReference);
-    const minimumM = vector(candidate.minimumM, 'system view minimum'), maximumM = vector(candidate.maximumM, 'system view maximum');
-    if (minimumM.some((value, axis) => value >= maximumM[axis]!)) throw new TypeError('System view bounds must have positive extent.');
-    const memberPositionsM = array(candidate.memberPositionsM, 'system member positions').map(value => vector(value, 'system member position'));
-    if (memberPositionsM.length !== memberIds.length) throw new TypeError('System view needs one position per member.');
-    return Object.freeze({ cameraToReference: Object.freeze(cameraToReference), minimumM, maximumM, memberPositionsM: Object.freeze(memberPositionsM) });
-  });
-  if (!candidates.length) throw new TypeError('System view must include candidate views.');
-  return Object.freeze({ memberIds: Object.freeze(memberIds), memberRadiiM: Object.freeze(memberRadiiM), candidates: Object.freeze(candidates) });
+  const members = { memberIds: Object.freeze(memberIds), memberRadiiM: Object.freeze(memberRadiiM) };
+  return Object.freeze(withCandidates ? { ...members, candidates: parseSystemViewCandidates(view.candidates, memberIds.length, memberIds.join(',')) } : members);
+}
+/** `world-system-views.json`: each summary system view's camera candidates, by host id. */
+export function parsePreparedSystemViews(value: unknown, plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>): ReadonlyMap<string, { readonly candidates: readonly PreparedSystemViewCandidate[] }> {
+  const input = record(value, 'system views', ['schema', 'views']);
+  if (input.schema !== 'cssearth-world-system-views@1') throw new TypeError(`Unsupported prepared system views: ${String(input.schema)}.`);
+  const views = record(input.views, 'system views by host');
+  const hosts = new Map([plan.focus, ...plan.bodies].flatMap(body => body.systemView ? [[body.id, body.systemView] as const] : []));
+  if (Object.keys(views).length !== hosts.size) throw new TypeError(`Prepared system views name ${Object.keys(views).length} hosts; the world context has ${hosts.size}.`);
+  return new Map([...hosts].map(([id, view]) => {
+    if (!Object.hasOwn(views, id)) throw new TypeError(`Prepared system views lack ${id}.`);
+    return [id, Object.freeze({ candidates: parseSystemViewCandidates(views[id], view.memberIds.length, id) })] as const;
+  }));
 }
 /** Classification views frame prepared bodies by position; members must match those bodies. */
 function parseClassificationViews(value: unknown, bodies: readonly PreparedContextBody[]) {
@@ -193,10 +213,10 @@ function parseClassificationViews(value: unknown, bodies: readonly PreparedConte
   if (!entries.length) throw new TypeError('Classification views must name a classification.');
   return Object.freeze(Object.fromEntries(entries));
 }
-function focusPoint(value: unknown): PreparedContextFocus {
+function focusPoint(value: unknown, withCandidates: boolean): PreparedContextFocus {
   const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
   const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
-  const systemView = parseSystemView(input.systemView);
+  const systemView = parseSystemView(input.systemView, withCandidates);
   const base = systemView ? Object.freeze({ ...raw, systemView }) : raw;
   if (input.pointSource === undefined) return base;
   const pointSource = record(input.pointSource, 'context focus point source', ['absoluteMagnitude', 'color', 'proximityEnhancement']);
@@ -485,14 +505,14 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   })();
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
-  const focus = focusPoint(input.focus);
+  const focus = focusPoint(input.focus, geometry);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
     const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
-    const systemView = parseSystemView(input.systemView);
+    const systemView = parseSystemView(input.systemView, geometry);
     if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (input.unpackaged !== undefined && input.unpackaged !== true) throw new TypeError('A context body is unpackaged or not.');
     if (input.labelPlacement !== undefined && input.labelPlacement !== 'centre') throw new TypeError(`Context body ${String(input.id)} label placement is ${String(input.labelPlacement)}, not centre.`);

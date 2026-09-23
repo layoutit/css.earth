@@ -270,12 +270,24 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
  * size. Classification views are build-time only. */
 export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank: { readonly byteLength: number }) {
   const { classificationViews: _views, ...rest } = prepared;
-  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBank: freeze({ ...orbitBank }), bodies: freeze(prepared.bodies.map(body => {
+  // System views keep their members; their camera candidates are `worldSystemViews`, loaded after the first body mounts.
+  const members = <T extends { readonly systemView?: PreparedSystemView }>(body: T): T => {
+    if (!body.systemView) return body;
+    const { candidates: _candidates, ...view } = body.systemView;
+    return freeze({ ...body, systemView: freeze(view) });
+  };
+  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBank: freeze({ ...orbitBank }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
     return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
       bounds, lod: freeze({ bounds: lod.bounds }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
   })) });
+}
+
+/** Each system view's camera candidates by host id: what system framing needs, kept out of the summary the page waits for. */
+export function worldSystemViews(prepared: PreparedWorldContext) {
+  return freeze({ schema: 'cssearth-world-system-views@1' as const, views: freeze(Object.fromEntries([prepared.focus, ...prepared.bodies]
+    .flatMap(body => body.systemView ? [[body.id, body.systemView.candidates] as const] : []))) });
 }
 
 /** The orbit bank's layout: `CSWO`, format version, header byte length (little-endian u32s), the UTF-8 JSON

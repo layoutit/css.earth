@@ -12,17 +12,17 @@ interface CompanionClouds {
 }
 
 /** Companion readiness and visibility belong to the same selection as the body material. */
-export function createDatasetEffects(session: SceneSession, world: CompanionClouds | null): NonNullable<ObjectMountOptions['datasetEffects']> {
+export function createDatasetEffects(session: SceneSession, getWorld: () => CompanionClouds | null): NonNullable<ObjectMountOptions['datasetEffects']> {
   let active: { volume: LensVolume; release(): void } | null = null;
   let prepared: { volume: LensVolume; signal: AbortSignal; release(): void } | null = null;
   session.own(() => {
-    if (active) { world?.setVolumeLensEnabled?.(active.volume.objectId, false); active.release(); }
+    if (active) { getWorld()?.setVolumeLensEnabled?.(active.volume.objectId, false); active.release(); }
     prepared?.release(); active = null; prepared = null;
   });
   return {
     async prepare(volume, signal) {
       if (!volume || signal.aborted || session.signal.aborted) return;
-      const bank = world?.focusBank(volume.objectId);
+      const bank = getWorld()?.focusBank(volume.objectId);
       if (!bank) throw new RangeError(`Dataset cloud “${volume.objectId}” is unavailable.`);
       // Pin through native commitment; cancellation releases the pin while shared loading may continue.
       const unpin = bank.subscribe(() => {});
@@ -45,10 +45,10 @@ export function createDatasetEffects(session: SceneSession, world: CompanionClou
       if (session.signal.aborted) return;
       const pin = prepared;
       if (volume && (!pin || pin.volume !== volume)) throw new Error('Dataset companion was not prepared.');
-      if (active && active.volume.objectId !== volume?.objectId) world?.setVolumeLensEnabled?.(active.volume.objectId, false);
+      if (active && active.volume.objectId !== volume?.objectId) getWorld()?.setVolumeLensEnabled?.(active.volume.objectId, false);
       if (volume) {
-        world?.selectVolumeLens?.(volume.objectId, volume.lensId);
-        world?.setVolumeLensEnabled?.(volume.objectId, true);
+        getWorld()?.selectVolumeLens?.(volume.objectId, volume.lensId);
+        getWorld()?.setVolumeLensEnabled?.(volume.objectId, true);
       }
       active?.release();
       if (pin) pin.signal.removeEventListener('abort', pin.release);

@@ -6,6 +6,9 @@ import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-c
 
 export type WorldContextOwner = ReturnType<typeof createApplicationWorldContext>;
 export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
+type WorldFramePresenter = ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>;
+/** A detail's frame presenter. One mounted before the world commits its own frames until `attach`. */
+export type SceneFramePresenter = WorldFramePresenter & { attach?(world: WorldContextMount): void };
 
 interface SceneWorldOptions {
   owner: WorldContextOwner | null;
@@ -26,6 +29,9 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
   let current: WorldContextMount | null = null;
   let task: Promise<WorldContextMount> | null = null;
   let pending: AbortController | null = null;
+  // One viewport for the detail and the world, so a detail mounted first frames exactly as the world will.
+  let viewport: ReturnType<WorldContextOwner['createViewport']> | null = null;
+  const sharedViewport = () => owner ? viewport ??= owner.createViewport(stage) : null;
 
   function ensure() {
     if (!owner) return Promise.resolve(null);
@@ -33,7 +39,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     if (!task) {
       const controller = new AbortController();
       pending = controller;
-      task = Promise.resolve(owner.mount({ stage, signal: controller.signal, windowTarget, onSelectFocus })).then(value => {
+      task = Promise.resolve(owner.mount({ stage, viewport: sharedViewport()!, signal: controller.signal, windowTarget, onSelectFocus })).then(value => {
         if (controller.signal.aborted) {
           value?.destroy?.();
           throw controller.signal.reason ?? new DOMException('World context mount was cancelled.', 'AbortError');
@@ -55,9 +61,37 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     return task;
   }
 
+  /** The world's presenter, or, before the world has loaded, one that commits the detail's frames directly and
+   * hands over to the world's presenter when `connect` attaches it. */
+  function createFramePresenter(): SceneFramePresenter | undefined {
+    if (current) return current.createFramePresenter?.();
+    if (!owner) return undefined;
+    let inner: WorldFramePresenter | undefined, enabled = false, disposed = false;
+    let last: Parameters<WorldFramePresenter['present']>[0] | null = null;
+    return {
+      present(request, signal) {
+        if (inner) return inner.present(request, signal);
+        if (disposed || signal?.aborted || !request.current()) return signal ? Promise.resolve(false) : undefined;
+        last = request; request.commit();
+        return signal ? Promise.resolve(true) : undefined;
+      },
+      attach(world) {
+        if (inner || disposed) return;
+        inner = world.createFramePresenter?.();
+        // The world starts from the frame the detail is already showing.
+        if (last?.current()) inner?.present(last);
+        last = null;
+        if (enabled) inner?.enable();
+      },
+      enable() { enabled = true; inner?.enable(); },
+      destroy() { disposed = true; last = null; inner?.destroy(); },
+    };
+  }
+
   function connect(session: SceneSession) {
     const world = current, navigation = session.mount?.navigation;
     if (!world || !navigation || typeof navigation.subscribe !== 'function') return;
+    session.framePresenter?.attach?.(world);
     world.selectObject?.(session.objectId, navigation.frame);
     const disconnectFocus = world.connectNavigation?.(navigation, {
       readFocus,
@@ -80,7 +114,9 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     if (world) {
       try { world.destroy(); } catch (error) { onError(error); }
     }
+    viewport?.destroy();
+    viewport = null;
   }
 
-  return { get current() { return current; }, ensure, connect, destroy };
+  return { get current() { return current; }, get viewport() { return sharedViewport(); }, ensure, connect, createFramePresenter, destroy };
 }

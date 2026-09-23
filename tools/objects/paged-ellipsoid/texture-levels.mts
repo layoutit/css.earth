@@ -7,6 +7,18 @@ import sharp from 'sharp';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { requireSurfacePages, surfaceBankInventory } from './surface-banks.mts';
+import { encodeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
+
+/** Whether a WebP file is lossless: its image data is a VP8L chunk. */
+function losslessWebp(bytes: Buffer): boolean {
+  if (bytes.toString('ascii', 0, 4) !== 'RIFF' || bytes.toString('ascii', 8, 12) !== 'WEBP') throw new TypeError('A texture level source is not WebP.');
+  for (let offset = 12; offset + 8 <= bytes.length; offset += 8 + bytes.readUInt32LE(offset + 4) + (bytes.readUInt32LE(offset + 4) & 1)) {
+    const chunk = bytes.toString('ascii', offset, offset + 4);
+    if (chunk === 'VP8L') return true;
+    if (chunk === 'VP8 ') return false;
+  }
+  throw new TypeError('A texture level source has no WebP image data.');
+}
 
 export interface TextureLevelBank {id: string; urls: readonly string[]}
 
@@ -46,12 +58,15 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
         if (!Number.isInteger(targetWidth)) throw new TypeError(`Atlas level dimensions differ: ${url}`);
         const divisor = width / targetWidth, padding = (divisor - height % divisor) % divisor;
         const targetUrl = targetWidth === width ? url : `${config.publicBase}${basename(url, '.webp')}-level-${targetWidth}.webp`;
-        let output = source, outputHeight = height;
+        let output: Buffer = source, outputHeight = height;
         if (targetWidth !== width) {
           // Raw intermediate forces extension to happen before resize in sharp.
           const padded = await sharp(source).ensureAlpha().extend({ bottom: padding, background: '#00000000' }).raw().toBuffer({ resolveWithObject: true });
           outputHeight = (height + padding) / divisor;
-          output = await sharp(padded.data, { raw: padded.info }).resize(targetWidth, outputHeight, { kernel: 'lanczos3' }).webp({ lossless: true, effort: 4 }).toBuffer();
+          // A level is encoded the way its page is: a lossless page's levels stay lossless, a lossy page's go through
+          // the lossy lane (lossy-lane.ts), so a smaller level never costs more per texel than the full page.
+          const reduced = sharp(padded.data, { raw: padded.info }).resize(targetWidth, outputHeight, { kernel: 'lanczos3' });
+          output = losslessWebp(source) ? await reduced.webp({ lossless: true, effort: 4 }).toBuffer() : await encodeLossyWebp(reduced, { alphaQuality: 100, effort: 4 });
           await writeFile(resolve(publicDirectory, targetUrl.slice(config.publicBase.length)), output);
         }
         prepared.push({ url: targetUrl, decodedBytes: targetWidth * outputHeight * 4 });
@@ -70,5 +85,5 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
   const maximumDecodedBytes = 2 * Math.max(...banks.map(bank => entries.filter(entry =>
     entry.key.startsWith(`page:${bank.id}:`) && !entry.key.includes(':level:')).reduce((sum, entry) => sum + entry.decodedBytes, 0)));
   return { textureLevels: { hysteresis, levels }, entries, maximumDecodedBytes,
-    provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'lossless-webp', texelsPerCssPixel, receipts } };
+    provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'source-webp-encoding', texelsPerCssPixel, receipts } };
 }

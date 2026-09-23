@@ -85,10 +85,10 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
                 {entry.image && <a class:list={['object-facility-image-link', entry.image.subject && 'object-facility-image-crop']}
                   style={entry.image.subject && `--frame-w:${entry.image.width};--frame-h:${entry.image.height};--subject-x:${entry.image.subject.left};--subject-y:${entry.image.subject.top};--subject-w:${entry.image.subject.width};--subject-h:${entry.image.subject.height}`}
                   href={entry.image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} artwork — ${entry.image.credit}`}>
-                  <img class="object-facility-image" src={entry.image.src} width={entry.image.width} height={entry.image.height} alt={`${entry.title} illustration`} loading="lazy" decoding="async" />
+                  <img class="object-facility-image" src={entry.image.src} width={entry.image.width} height={entry.image.height} alt={`${entry.title} illustration`} loading="lazy" decoding="async" fetchpriority="low" />
                 </a>}
                 {entry.emblem && <a class={entry.image ? 'object-facility-emblem' : 'object-facility-image-link'} href={entry.emblem.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} emblem — ${entry.emblem.credit}`}>
-                  <img class="object-facility-image" src={entry.emblem.src} width={entry.emblem.width} height={entry.emblem.height} alt={`${entry.title} emblem`} loading="lazy" decoding="async" />
+                  <img class="object-facility-image" src={entry.emblem.src} width={entry.emblem.width} height={entry.emblem.height} alt={`${entry.title} emblem`} loading="lazy" decoding="async" fetchpriority="low" />
                 </a>}
               </div>
             </SelectedContent>

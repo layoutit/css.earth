@@ -20,7 +20,7 @@ import { createNavigationHistory, bindNavigationLinks } from '../navigation/navi
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import * as applicationWorldContext from '../application-world-context.mts';
 import { watchOverviewSelection } from '../overview-selection.mts';
-import { SYSTEM_CENTERS } from '../system-framing.mts';
+import { SYSTEM_CENTERS, loadSystemViews, systemViewsLoaded } from '../system-framing.mts';
 import { createSceneSelection, selectionTargetFromUrl } from './scene-selection.mts';
 import { readInitialFocus } from '../focus-catalog.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
@@ -188,23 +188,34 @@ export function createSceneRouter({
         if (rendered.cancelled || !scenes.isCurrent(session)) return;
       }
       publication.publish();
-      if (persistentWorldContext) {
-        const contextual = await session.wait(world.ensure());
+      // The body comes first: on a cold page the world's layers (sky, stars, volume, markers) load after the
+      // detail mounts and connect to it. Only an arrival the world owns, a focus or overview, waits for them.
+      if (persistentWorldContext && (handoff || worldOwnsArrival(request))) {
+        const contextual = await session.wait(Promise.all([world.ensure(), loadSystemViews()]));
         if (contextual.cancelled || !scenes.isCurrent(session)) return;
       }
-      const framePresenter = world.current?.createFramePresenter?.();
+      // Start the world and system views beside the body's activation, which can wait on its surface textures;
+      // they connect once the body has mounted.
+      const worldLoading = persistentWorldContext && !world.current ? world.ensure() : null;
+      worldLoading?.catch(() => {});
+      if (!systemViewsLoaded()) void loadSystemViews().catch(report);
+      const framePresenter = world.createFramePresenter();
       session.framePresenter = framePresenter;
       if (framePresenter) session.own(() => framePresenter.destroy());
+      const viewport = world.viewport;
       if (!await session.activate(factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId), session.signal), stage, {
         deferTextureRefinement: true,
-        ...(world.current ? { viewport: world.current.viewport } : {}),
+        ...(viewport ? { viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
-        datasetEffects: createDatasetEffects(session, world.current),
+        datasetEffects: createDatasetEffects(session, () => world.current),
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
-      world.connect(session);
+      if (world.current) world.connect(session);
+      else if (worldLoading) void worldLoading.then(() => {
+        if (scenes.isCurrent(session)) { world.connect(session); publishSelection(); }
+      }).catch(error => { if (!(error instanceof Error && error.name === 'AbortError')) report(error); });
       publishSelection();
       const arrival = await activation.restore(session, handoff);
       if (!arrival) return arrival;
@@ -230,6 +241,8 @@ export function createSceneRouter({
   }
 
   function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
+    // System framing reads its prepared candidates; they load after the first body, so a very early click waits for them.
+    if (!destroyed && !systemViewsLoaded()) return loadSystemViews().then(() => navigate(id, intent));
     if (intent.kind === 'focus' && scenes.current) id = objectId;
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
@@ -366,6 +379,12 @@ export function createSceneRouter({
     for (const failure of cleanupErrors) report(failure);
   }
 
+  /** A focus or overview arrival is placed by the world, so it cannot start before the world has loaded. */
+  function worldOwnsArrival(request?: NavigationRequest) {
+    if (request) return request.subject.kind === 'focus' || request.subject.kind === 'overview';
+    const params = new URL(windowTarget.location.href).searchParams;
+    return ['focus', 'focusLens', 'overview'].some(name => params.has(name));
+  }
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }
   }

@@ -4,7 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { encodeWorldOrbits, parseWorldContextSource, prepareWorldContext, summarizeWorldContext } from '../../src/preparation/spatial-context.js';
+import { encodeWorldOrbits, parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; readonly centerParentBodyId?: string; }
@@ -160,6 +160,13 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await writeIfChanged(worldOrbitsPath(options.outputPath), orbits);
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
     { byteLength: orbits.byteLength }))}\n`);
+  // System framing's camera candidates, read after the first body mounts instead of with the summary.
+  await writeIfChanged(worldSystemViewsPath(options.outputPath), `${JSON.stringify(worldSystemViews(prepared))}\n`);
+}
+
+/** `world-context.json` → `world-system-views.json`, beside it. */
+export function worldSystemViewsPath(outputPath: string): string {
+  return resolve(dirname(outputPath), 'world-system-views.json');
 }
 
 /** `world-context.json` → `world-orbits.bin`, beside it. */
