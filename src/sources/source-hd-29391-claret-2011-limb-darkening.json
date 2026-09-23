@@ -1,0 +1,35 @@
+{
+  "id": "source-hd-29391-claret-2011-limb-darkening",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "51 Eridani · hd 29391 claret 2011 limb darkening",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/529/A75/table-af&-out.max=500&Teff=7250..7500&logg=4.0..4.5&Z==0&xi==2&Filt=V&Met=L&Mod=A&-out=logg,Teff,Z,xi,a,b,Filt,Met,Mod",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-29391/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. Claret and S. Bloemen, A&A 529, A75 (2011), doi:10.1051/0004-6361/201116451, via VizieR J/A+A/529/A75",
+      "scope": "The hd 29391 claret 2011 limb darkening input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "VizieR catalogue data, free for scientific use with the reference cited",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -48,7 +48,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 
 ## Evidence
 
-- [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) covers the colour
+- [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar/stellar-photometric-color.test.mts) covers the colour
   path, including the rule for samples consistent with zero and the quadratic limb plate.
 - [`source.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1/source.test.mts) checks every package's source pins, and that each planet turns
   synchronously with longitude 0 on the star and orbits it.

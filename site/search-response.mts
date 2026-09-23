@@ -8,7 +8,7 @@ import { renderDatasetResponse } from './dataset-response.mts';
 import { renderSourceLink } from './source-link.mts';
 import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
-import { overviewScopeFromUrl, withOverviewScope } from './navigation-scope.mts';
+import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
 
 export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {

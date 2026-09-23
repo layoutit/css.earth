@@ -2,7 +2,7 @@ import type { ObjectDiscovery } from './object-discovery.mts';
 import { record } from './browser-types.mts';
 import { defineObject } from './object-schema.mts';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.mts';
-import type { NavigationDistance } from './navigation-distance.mts';
+import type { NavigationDistance } from './navigation/navigation-distance.mts';
 
 /** `orbitsWithinAu`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
 /** `labelPlacement: 'centre'` captions the body over its middle instead of below it (Sgr A*'s black shadow). */

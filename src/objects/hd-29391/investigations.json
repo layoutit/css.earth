@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-29391",
+  "entries": [
+    {
+      "id": "jwst-nircam-system-image",
+      "subject": "A JWST/NIRCam picture of the 51 Eridani system for its system card, reproducing Balmer et al. (2025)",
+      "status": "unresolved",
+      "finding": "The raw F410M frames of GTO 1412 (observations 12 and 15, reference HD 30562 in observation 14) were reduced with the spaceKLIP toolkit on the pipeline version, CRDS context and settings the paper states (tools/objects/jwst/klip/programs/hd-29391-1412.json). The planet appears where Balmer et al. measured it, but at 2.7 to 3.1 times the scatter at its separation against their 4.7, beside a four-lobed starlight residual. Restricting the first of the eight annuli to the inner 0.5 arcseconds, as the paper describes, left only noise at 50 KL modes and no value at 150, since each small zone then has fewer pixels than modes. The paper states 50 KL modes in its text and 150 in its Figure 4, and our 90 reference frames cannot supply 150; its reference library or settings evidently differ from what it states. No picture is shown.",
+      "revisitWhen": "The reduced image is deposited, the reduction script is published, or a larger reference library (other HD 30562 observations) reproduces the paper’s 4.7 sigma detection.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.13608",
+        "https://dx.doi.org/10.17909/e4x8-ft26"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

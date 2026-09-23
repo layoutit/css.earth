@@ -15,7 +15,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { linearToSrgb } from '../../color-transfer.mts';
-import { loadStellarPhotometricColor, quadraticIntensity } from '../../observation/stellar-photometric-color.mts';
+import { loadStellarPhotometricColor, quadraticIntensity } from '../../observation/stellar/stellar-photometric-color.mts';
 import { loadNpyDictionaryMap } from '../../terrestrial-layers/npy-dictionary-map.mts';
 import { colorForValue } from '../../terrestrial-layers/scientific-raster.mts';
 import { requireArray, requireRecord } from '../../../sources/source-values.mts';

@@ -1,0 +1,62 @@
+{
+  "id": "arxiv-2401-01468",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Elliott et al. (2024): Measuring the Stellar and Planetary Properties of the 51 Eridani System",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2401.01468"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1017/pasa.2024.40"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2401.01468",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1017/pasa.2024.40",
+      "label": "Publications of the Astronomical Society of Australia 41, e056"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2401.01468",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: CHARA limb-darkened diameter 0.450 +/- 0.006 mas, radius 1.45 +/- 0.02 solar radii, Teff 7422 +/- 58 K, mass 1.550 +0.006/-0.005 solar masses; planet mass 4.1 +/- 0.4 Jupiter masses from Sonora Bobcat"
+    },
+    {
+      "path": "src/objects/hd-29391/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/hd-29391/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/hd-29391/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    },
+    {
+      "path": "src/objects/hd-29391-b/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "Ashley Elliott",
+    "Tabetha Boyajian",
+    "Tyler Ellis",
+    "Kaspar von Braun",
+    "Andrew W. Mann",
+    "Gail Schaefer"
+  ]
+}
