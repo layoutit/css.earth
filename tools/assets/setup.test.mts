@@ -126,7 +126,28 @@ test("a dropped connection and a 5xx are retried; a 404 is a verdict and is not"
     // Retries are bounded: a permanently broken network still fails rather than hanging forever.
     let attempts = 0;
     const broken = async () => { attempts++; throw new TypeError("fetch failed"); };
-    await assert.rejects(installRuntimeAssets([asset], { fetcher: broken }), /fetch failed/);
+    await assert.rejects(installRuntimeAssets([asset], { fetcher: broken }), /earth\/image\.webp \(https:\/\/example\.invalid\/image\.webp\): fetch failed/);
     assert.equal(attempts, 4);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("a connection that drops while the body streams is retried, and a failure names its file", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cssearth-setup-stream-"));
+  const bytes = Buffer.from("prepared image");
+  const asset = { id: "pluto", key: "pluto/runtime.json", location: "prepared" as const, filename: "runtime.json", file: join(root, "runtime.json"),
+    url: "https://example.invalid/runtime.json", bytes: bytes.length,
+    sha256: createHash("sha256").update(bytes).digest("hex") };
+  // A 200 whose body errors after its first chunk: undici reports this as "terminated".
+  const dropped = () => new Response(new ReadableStream({ start(controller) { controller.enqueue(bytes.subarray(0, 4)); controller.error(new TypeError("terminated")); } }));
+  try {
+    let requests = 0;
+    const once = async () => (++requests === 1 ? dropped() : new Response(bytes));
+    assert.deepEqual(await installRuntimeAssets([asset], { fetcher: once }), { installed: 1, reused: 0, skipped: 0 });
+    assert.equal(requests, 2);
+    await rm(asset.file);
+    let drops = 0;
+    const always = async () => { drops++; return dropped(); };
+    await assert.rejects(installRuntimeAssets([asset], { fetcher: always }), /pluto\/runtime\.json \(https:\/\/example\.invalid\/runtime\.json\): terminated/);
+    assert.equal(drops, 4);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
