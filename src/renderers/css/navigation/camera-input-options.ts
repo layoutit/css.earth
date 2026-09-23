@@ -1,9 +1,9 @@
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { TrackballMetrics, CameraDelta } from './types.js';
-export interface MatrixDragControlsOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; trackballMetrics(): TrackballMetrics; flyToTrackballMetrics?: () => TrackballMetrics; rotate(delta: CameraDelta): void; surfaceFlyToState?: (() => { zoom: number; minimumZoom: number; maximumZoom: number }) | null; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onPointerStart?: () => void; onStart?: () => void; onEnd?: () => void; onError?: ((error: unknown) => void) | null; }
-export function validateDragControlsOptions({ inputSurface, trackballMetrics, flyToTrackballMetrics,
+export interface MatrixDragControlsOptions { inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; trackballMetrics(): TrackballMetrics; flyToTrackballMetrics?: () => TrackballMetrics; rotate(delta: CameraDelta): void; surfaceFlyToState?: (() => { zoom: number; minimumZoom: number; maximumZoom: number }) | null; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onPointerStart?: () => void; onStart?: () => void; onEnd?: () => void; onError?: ((error: unknown) => void) | null; }
+export function validateDragControlsOptions({ inputSurface, cameraMotion, trackballMetrics, flyToTrackballMetrics,
   rotate, surfaceFlyToState, surfaceFlyToHitTest, onPointerStart, onStart, onEnd, onError }: MatrixDragControlsOptions): void {
-  if (!(inputSurface instanceof HTMLElement) ||
+  if (!cameraMotion || !(inputSurface instanceof HTMLElement) ||
       typeof trackballMetrics !== "function" ||
       typeof flyToTrackballMetrics !== "function" ||
       typeof rotate !== "function" ||

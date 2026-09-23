@@ -132,6 +132,7 @@ export function createSceneRouter({
       if (destroyed) return;
       destroyed = true;
       destroyActiveScene();
+      navigation.motion.cancel();
       world.destroy();
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
       windowTarget.removeEventListener("pageshow", restoreCachedScene);
@@ -202,6 +203,7 @@ export function createSceneRouter({
         deferTextureRefinement: true,
         viewport,
         framePresenter,
+        cameraMotion: navigation.motion,
         onMotionRequest: requestMotion,
         onFeatureSelect: id => { void navigate(objectId, { kind: 'feature', id }).catch(report); },
         datasetEffects: createDatasetEffects(session, () => world.current),

@@ -1,3 +1,4 @@
+import { createCameraMotion } from '../../src/renderers/css/dist/navigation.js';
 import assert from 'node:assert/strict';
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '../../src/renderers/css/navigation/world-camera.ts';
@@ -20,7 +21,7 @@ export function quaternion(values: readonly number[]): WorldCameraPose['pose']['
 }
 export function navigationFixture(frame: PreparedWorldCameraFrame, capture: () => WorldCameraPose,
   optics: ObjectWorldNavigation['optics']): ObjectWorldNavigation {
-  return { frame, capture, optics, apply() { throw new Error('This fixture only samples the camera.'); },
+  return { motion: createCameraMotion(), frame, capture, optics, apply() { throw new Error('This fixture only samples the camera.'); },
     preparedFocus: () => null, setPreparedFocus() {},
     async flyToPreparedFocus() { throw new Error('This fixture does not fly the camera.'); },
     subscribe() { throw new Error('This fixture does not subscribe to camera changes.'); } };
@@ -40,7 +41,8 @@ export const unusedSharedView: import('../../src/renderers/css/runtime/object-sc
 export const testDistance = (value: number) => ({ meters: value * 149597870700, value, unit: 'AU' as const, quantity: 'geometric' as const, referencePoint: 'heliocentre' as const, epochJdTt: 2461286.5 });
 
 /** Session-only fixtures never measure or present a native frame. */
-export const unusedMountOptions: Pick<import('../browser-types.mts').MountOptions, 'viewport' | 'framePresenter'> = {
+export const unusedMountOptions: Pick<import('../browser-types.mts').MountOptions, 'viewport' | 'framePresenter' | 'cameraMotion'> = {
+  cameraMotion: createCameraMotion(),
   viewport: { read() { throw new Error('No native measurement in this fixture.'); }, subscribe: () => () => {}, destroy() {} },
   framePresenter: { present() { throw new Error('No native publication in this fixture.'); } },
 };

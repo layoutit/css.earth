@@ -1,3 +1,4 @@
+import { createCameraMotion } from './camera-motion.js';
 import { expect, it } from 'vitest';
 import { getEventListeners } from 'node:events';
 import scene from '../../../objects/mercury/prepared/scene.json';
@@ -40,7 +41,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
       resolveMotion = resolve; motion.signal?.addEventListener('abort', stop, { once: true });
       if (motion.signal?.aborted) stop();
     }); } };
-  const orbit = createRetainedCubicSkyOrbit({ stage, inputSurface: stage, cameraElement, sceneElement,
+  const orbit = createRetainedCubicSkyOrbit({ cameraMotion: createCameraMotion(), stage, inputSurface: stage, cameraElement, sceneElement,
     viewport: { read: () => ({ bounds: stage.getBoundingClientRect(), focalPixels: 1000, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} },
     framePresenter: { present(request: any, signal?: AbortSignal) { request.commit(); return signal ? Promise.resolve(true) : undefined; } },
     worldContext: { frame, bodyRadiusUnits: 100, kilometersPerUnit: .002, maximumExtentUnits: 1e8 },

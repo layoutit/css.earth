@@ -72,7 +72,7 @@ export function materialOrbitFixture(id: string) {
     createOrbit(options: unknown) { f.orbit = shared.create(options as import('../../renderers/css/dist/platform/object-orbit.js').RetainedOrbitOptions); return f.orbit; },
   };
   const mount = createObjectRuntime(definition, services as unknown as Partial<ObjectRuntimeServices>);
-  f.create = async () => { f.runtime = mount(nativeStage, { worldContext: shared.arguments.worldContext, viewport: shared.arguments.viewport, framePresenter: shared.arguments.framePresenter, inputSurface: nativeStage, runtimePolicy: shared.arguments.runtimePolicy, onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };
+  f.create = async () => { f.runtime = mount(nativeStage, { cameraMotion: shared.arguments.cameraMotion, worldContext: shared.arguments.worldContext, viewport: shared.arguments.viewport, framePresenter: shared.arguments.framePresenter, inputSurface: nativeStage, runtimePolicy: shared.arguments.runtimePolicy, onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };
   f.event = (name: string, orbit: RetainedCubicSkyOrbit) => {
     if (name === 'wheel') return () => {
       const wheel = f.callbacks.wheel; if (!wheel) throw new Error('Wheel fixture was not created');

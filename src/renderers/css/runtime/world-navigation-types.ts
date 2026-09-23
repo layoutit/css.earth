@@ -4,6 +4,7 @@ import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from '../nav
 export type ObjectWorldNavigationListener = (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 
 export interface ObjectWorldNavigation {
+  readonly motion: import('../navigation/camera-motion.js').CameraMotion;
   readonly frame: PreparedWorldCameraFrame;
   /** The retained surface may differ from the current overview focus. */
   readonly detailFrame?: PreparedWorldCameraFrame;

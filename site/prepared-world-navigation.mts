@@ -15,6 +15,7 @@ export interface WorldHandoff {transferTo(signal: AbortSignal): void; mountOptio
 interface FocusRequest {objectId: string; mount: ShellCamera; signal: AbortSignal; reducedMotion?: boolean; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; timing?: Timing;}
 interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics, options: { signal: AbortSignal; commit?: () => void }) => Promise<boolean> | void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
 interface WorldFlightRequest {
+  motion: ReturnType<typeof createCameraMotion>;
   owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal;
   reducedMotion?: boolean; paused?: boolean; limitElapsedS?: () => number; canFinish?: () => boolean;
   windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>;
@@ -27,7 +28,7 @@ import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARR
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
-import { createCameraFlight, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
+import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;
@@ -35,6 +36,7 @@ const AIMED_AT_CENTER_PIXELS = 2;
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
 export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document,
   systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, systemViewHosts = SYSTEM_VIEW_HOSTS, systemCenters = SYSTEM_CENTERS, stellarSystems = STELLAR_SYSTEMS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: ReadonlyMap<string, Parameters<typeof systemViewTarget>[3]>; systemViewHosts?: ReadonlySet<string>; systemCenters?: typeof SYSTEM_CENTERS; stellarSystems?: ReadonlySet<string>}) {
+  const motion = createCameraMotion();
   const frames = new Map(objects.map(object => [object.id, object.worldFrame]));
   const arrivals = new Map(objects.map(object => [object.id, object.discovery?.arrival]));
   function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {
@@ -48,7 +50,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
     const a = frames.get(from), b = frames.get(to);
     return Boolean(a && b && a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt);
   };
-  return Object.freeze({ supports,
+  return Object.freeze({ supports, motion,
     centerTarget({ objectId, fromId, mount, force = false }: TargetRequest) {
       const owner = mount?.navigation, frame = frames.get(objectId);
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
@@ -132,7 +134,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: targetFocusPositionM ?? frame.originM,
         durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });
       owner.setPreparedFocus?.(null);
-      const running = createWorldFlight({ owner, from, flight,
+      const running = createWorldFlight({ motion, owner, from, flight,
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
         windowTarget, documentTarget, onPaint(world) {
           lastCamera = world;
@@ -208,7 +210,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       let departureHeld = !departureOwner || Boolean(reducedMotion);
       if (departureHeld) reachHandoff();
       let drawn = reducedMotion ? target : from;
-      const running = createWorldFlight({ from, flight, anchors, signal, reducedMotion,
+      const running = createWorldFlight({ motion, from, flight, anchors, signal, reducedMotion,
         paused: departureHeld, windowTarget, documentTarget,
         limitElapsedS: () => detailReady || incomingOwner?.detailActivated?.() ? flight.durationS : approachLimitS,
         canFinish: () => detailReady,
@@ -217,7 +219,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
           if (!handedOff) return departureOwner?.apply(world, { signal: running.signal });
           if (detailReady) return incomingOwner!.apply(world, { signal: running.signal });
           return presentWorld?.(world, optics, { signal: activationSignal,
-            commit: () => incomingOwner?.apply(world) });
+            commit: () => { void incomingOwner?.apply(world, { signal: running.signal }); } });
         } },
         onPaint(world, elapsedS) {
           drawn = lastCamera = world;
@@ -270,7 +272,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
             arrivingByFlight: true,
             ...(progressive ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
               if (running.signal.aborted) return;
-              incomingOwner = owner; owner.apply(drawn);
+              incomingOwner = owner; void owner.apply(drawn, { signal: running.signal });
             } } : {}) },
           async afterMount(mount: ObjectSceneLifecycle, { signal: mountedSignal }: {signal: AbortSignal}) {
             const cancelMounted = () => running.cancel(mountedSignal.reason);
@@ -282,7 +284,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
               timing.mark('mounted');
               incomingOwner = mount.navigation; detailReady = true;
               activation.abort();
-              incomingOwner.apply(drawn);
+              void incomingOwner.apply(drawn, { signal: running.signal });
               if (reducedMotion) running.complete(); else running.resume();
               if (!(await running.finished).completed) throw cancellationReason(running.signal);
               lastCamera = incomingOwner.capture(); lastOptics = incomingOwner.optics();
@@ -364,7 +366,7 @@ function detailHandoffTime(flight: Flight, from: WorldCamera, frame: WorldFrame,
   return 0;
 }
 
-function createWorldFlight({ owner, from, flight, anchors, signal, reducedMotion = false, paused = false,
+function createWorldFlight({ motion, owner, from, flight, anchors, signal, reducedMotion = false, paused = false,
   limitElapsedS = () => flight.durationS, canFinish = () => true,
   windowTarget, documentTarget, onPaint = () => {}, interruptible = () => true }: WorldFlightRequest) {
   let elapsedS = 0, publishedElapsed: number | null = null;
@@ -380,7 +382,7 @@ function createWorldFlight({ owner, from, flight, anchors, signal, reducedMotion
       running.cancel(error);
     }
   }
-  const running = createCameraFlight({ windowTarget, signal, paused,
+  const running = motion.start({ windowTarget, signal, paused,
     onFinish() { for (const event of events) documentTarget.removeEventListener(event, input, { capture: true }); },
     advance(clockS, stepS) {
       const permittedEndS = reducedMotion ? flight.durationS : limitElapsedS();
