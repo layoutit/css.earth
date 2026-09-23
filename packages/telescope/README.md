@@ -95,7 +95,7 @@ export success does not turn unresolved or refused scientific evidence into fulf
 
 ## Archive products
 
-Scientific queries also inspect the bounded ESO/ALMA ObsCore and ESA PSA EPN-TAP services through PyVO. Their results enter the same saved choices, `get`, `outputs` and `export` commands. An advertised synchronous SODA service can fulfill an explicit ICRS cutout; failed subsets never fall back to a full download. Direct FITS and supported single-science-file ZIP/TAR products retain their complete pinned input set.
+Scientific queries also inspect the bounded ESO/ALMA ObsCore and ESA PSA EPN-TAP services through PyVO. Their results enter the same saved choices and `get` flow. An advertised synchronous SODA service can fulfill an explicit ICRS cutout; failed subsets never fall back to a full download. Direct FITS images and supported single-science-file ZIP/TAR raster products offer native image exports. A confirmed direct FITS binary table with one table extension offers the existing F08 operations after `get`; its calibration level remains unknown. Package tables and in-field tables are discoverable but cannot be qualified by this route.
 
 Use `telescope help` for region, frame and byte/member limits. `get --offline` replays an already delivered, pinned artifact without a remote refresh; it does not requalify it with current software. Acquisition verifies origin and integrity, while scientific request satisfaction can remain unresolved. [Protocol ownership, evidence and limitations](../../docs/vo-observation-access.md).
 

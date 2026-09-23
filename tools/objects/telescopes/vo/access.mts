@@ -23,6 +23,13 @@ export interface AcquisitionSpec {
   readonly implementation: string;
 }
 export interface AccessPlan { readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }
+/** The table route requires an exact direct FITS product and an archive-confirmed target. */
+export function nativeQualificationRoute(spec: AcquisitionSpec): 'raster' | 'f08-table' | null {
+  if (spec.decoder === 'fits-raster' && (spec.kind === 'image' || spec.kind === 'cube')) return 'raster';
+  if (spec.decoder === 'family-pending' && spec.kind === 'table' && spec.format === 'fits' &&
+    spec.operation.kind === 'direct' && spec.observation.target.status === 'confirmed') return 'f08-table';
+  return null;
+}
 const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
 function supportedKind(value: string | null): value is AcquisitionSpec['kind'] { return value !== null && (PRODUCT_KINDS as readonly string[]).includes(value); }
 async function implementation(): Promise<string> {
@@ -222,6 +229,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     if (spec.operation.kind === 'soda-sync' && !descriptorPin) throw new Error('Subset descriptor is outside the metadata evidence closure.');
     const receivedName = spec.format === 'fits' ? 'science.fits' : `archive.${spec.format}`;
     const transferred = (await astroquery({ operation: 'vo-download', url: spec.operation.url, destination: resolve(staging, receivedName), format: spec.format,
+      ...(nativeQualificationRoute(spec) === 'f08-table' ? { fitsProfile: 'bintable' as const } : {}),
       byteLimit: spec.limits.scienceBytes, parameters: spec.operation.parameters, allowedPrivateHosts: policy.allowedPrivateHosts,
       ...(spec.operation.kind === 'soda-sync' ? { descriptor: { file: descriptorPin!, row: spec.serviceRow!, serviceId: spec.descriptor!.id! } } : {}) })).transfer!;
     const unpacked = spec.format === 'fits' ? undefined : await extractVoPackage(resolve(staging, receivedName), staging, { expandedBytes: spec.limits.expandedBytes, members: spec.limits.packageMembers });
@@ -246,10 +254,10 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     await writeFile(resolve(staging, 'content.json'), canonical({ schema: 'cssearth-vo-content@2', format: spec.format,
       archiveProposal: { kind: spec.kind, decoder: spec.decoder }, members: content,
       legacyRasterMember: legacy, qualification: legacy === 'science.fits' ? 'raster candidate requires content qualification.' : 'non-qualifiable through the legacy raster route; select a family-specific qualified operation using the stable member identity above.' }));
-    await writeProductRecord(resolve(staging, 'acquisition.json'), run, [...(legacy === 'science.fits' ? [{ path: 'science.fits', file: resolve(staging, 'science.fits') }] : []),
+    await writeProductRecord(resolve(staging, 'acquisition.json'), run, [...(legacy === 'science.fits' || spec.format === 'fits' ? [{ path: 'science.fits', file: resolve(staging, 'science.fits') }] : []),
       { path: 'content.json', file: resolve(staging, 'content.json') },
       { path: 'origin.json', file: resolve(staging, 'origin.json') }, ...metadata], []);
     await rename(staging, destination);
-    return { file: legacy === 'science.fits' ? resolve(destination, 'science.fits') : null, record: recordPath, reused: false };
+    return { file: legacy === 'science.fits' || spec.format === 'fits' ? resolve(destination, 'science.fits') : null, record: recordPath, reused: false };
   } finally { await rm(staging, { recursive: true, force: true }); }
 }

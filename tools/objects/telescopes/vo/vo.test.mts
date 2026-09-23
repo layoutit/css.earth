@@ -168,7 +168,7 @@ test('a malformed advertised MIME is read as DataLink at its access URL, and ref
   const refused = await planAccess(root, obs, saved, request, async () => { throw new Error('not a VOTable'); });
   assert.equal(refused.products.length, 0); assert.match(refused.issues.join('\n'), /DataLink transport or parsing failed/u);
 });
-test('non-raster archive products remain discoverable but have no broken qualification choice', async () => {
+test('direct tables have a qualified route while other non-raster archive products stay discoverable', async () => {
   const base = await almaPromise(), saved = snapshot(base), normalized = normalizeSnapshot(saved, profile, target, [target])[0]!;
   for (const kind of ['table', 'events'] as const) {
     const observation = { ...normalized, kind, target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' }, access: { url: `https://example.org/${kind}.fits`, mime: 'application/fits', estimatedKilobytes: 1 } };
@@ -179,8 +179,17 @@ test('non-raster archive products remain discoverable but have no broken qualifi
     const inputs = { records: [{ observation, snapshot: saved, ...plan }], services: [] };
     assert.equal(voCandidates({ ...request, kind, time: { any: true }, angularResolutionArcsec: 1 }, inputs, []).some(candidate => candidate.action), false);
     const exploration = explorationAnswer({ target: target.id, kind }, { ledgers: [], capabilities: [], targetCatalogue: [{ id: target.id, name: 'Betelgeuse', aliases: [] }], targetAssociations: [], bodyMaps: [], vo: inputs });
-    assert.equal(exploration.choices.length, 0);
-    assert.match(exploration.unsupported[0]!.reason, /no native qualification route/u);
+    assert.equal(exploration.choices.length, kind === 'table' ? 1 : 0);
+    if (kind === 'events') assert.match(exploration.unsupported[0]!.reason, /no native qualification route/u);
+    if (kind === 'table') for (const excluded of [
+      { ...observation, target: { status: 'in-field' as const, target: target.id, reason: 'archive field overlap only' } },
+      { ...observation, access: { ...observation.access, url: 'https://example.org/table.zip', mime: 'application/zip' } },
+    ]) {
+      const excludedPlan = await planAccess(root, excluded, saved, { ...request, kind });
+      const answer = explorationAnswer({ target: target.id, kind }, { ledgers: [], capabilities: [], targetCatalogue: [{ id: target.id, name: 'Betelgeuse', aliases: [] }],
+        targetAssociations: [], bodyMaps: [], vo: { records: [{ observation: excluded, snapshot: saved, ...excludedPlan }], services: [] } });
+      assert.equal(answer.choices.length, 0);
+    }
   }
 });
 test('archive URLs reject local and private targets before selection', async () => {

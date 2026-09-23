@@ -31,7 +31,7 @@ export function inspectVoFits(member: string, bytes: Buffer): VoContentProfile {
       reason: names.has('OI_WAVELENGTH') ? 'OIFITS observables are present; this VO route has no OIFITS qualification handoff.' : 'OIFITS observable table lacks OI_WAVELENGTH; it is not qualifiable.' };
   }
   if (hdus.some(hdu => hdu.header.XTENSION === 'BINTABLE')) {
-    return { member, family: 'fits-table', profile: 'fits-bintable@1', state: 'non-qualifiable', reason: 'FITS binary table is present; this VO route has no table qualification handoff.' };
+    return { member, family: 'fits-table', profile: 'fits-bintable@1', state: 'non-qualifiable', reason: 'FITS binary table is present; qualification requires one direct FITS table and an archive-confirmed target.' };
   }
   if (hdus.some(hdu => typeof hdu.header.NAXIS === 'number' && hdu.header.NAXIS >= 2 && hdu.header.XTENSION !== 'BINTABLE')) {
     return { member, family: 'raster', profile: 'fits-raster@1', state: 'confirmed', reason: 'Validated FITS image array.' };
