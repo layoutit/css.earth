@@ -13,6 +13,7 @@ const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'er
   display:{instrument:'Fixture camera',observationTime:{startIso:'2025-01-02T03:04:05.000Z',endIso:null},productKind:'image',wavelengthsMicrometres:[[2.2,2.4]] as const,advertisedKilobytes:null,metadataBasis:'indexed' as const},
   reason:'Exact source product can be qualified.',limitations:['Resolution is not established.'] };
 const answer = {schema:'cssearth-telescope-exploration@1' as const,request:{target:'eris'},target:'eris',targetResolution:{status:'resolved' as const,requested:'Eris',canonical:{id:'eris',name:'Eris'},matchedBy:'name' as const},
+  outcome:{selection:'available' as const,coverage:'incomplete' as const},
   choices:[choice],unresolved:[{scope:'observation' as const,code:'filter-unresolved' as const,identity:'Maybe / row',reason:'Advertised product family is unknown.'}],unsupported:[{scope:'observation' as const,code:'unsupported-observation' as const,identity:'Other / row',reason:'No supported exact access operation.'}],
   issues:[{scope:'provider' as const,code:'provider-overflow' as const,identity:'Archive',reason:'Bounded result overflowed.'}],services:[],coverage:[]};
 const exploration=(directory:string):ExplorationSession&{readonly directory:string}=>({schema:'cssearth-telescope-exploration@1',createdAt:'2026-09-20T12:00:00.000Z',arguments:['eris'],target:'eris',choices:[choice],answer,directory});
@@ -83,7 +84,7 @@ test('explore parses optional filters without inventing strict scientific criter
 
 test('human exploration and artifact screens retain unknowns, blockers, context and reproducible commands',()=>{
   const directory='/tmp/run with spaces',screen=formatExploration(exploration(directory));
-  assert.match(screen,/Eris/u);assert.match(screen,/size unknown/u);assert.match(screen,/Resolution is not established/u);assert.match(screen,/Unresolved discoveries/u);assert.match(screen,/Unsupported discoveries/u);assert.match(screen,/Bounded result overflowed/u);assert.match(screen,/telescope get '\/tmp\/run with spaces' --pick N/u);
+  assert.match(screen,/Eris/u);assert.match(screen,/Search coverage is incomplete/u);assert.match(screen,/size unknown/u);assert.match(screen,/Resolution is not established/u);assert.match(screen,/Unresolved discoveries/u);assert.match(screen,/Unsupported discoveries/u);assert.match(screen,/Bounded result overflowed/u);assert.match(screen,/telescope get '\/tmp\/run with spaces' --pick N/u);
   const session=exploration(directory),opus={service:'https://opus.pds-rings.seti.org/api/' as const,state:'sampled' as const,scope:'OPUS fixture',reason:'fixture',opusTarget:'Kerberos',images:2292,meanRadiusKm:4.75,
     sharpest:[{instrument:'New Horizons LORRI',instrumentImages:2292,opusId:'nh-lorri-lor_0299153805',startTime:'2015-07-14T04:24:46.755',centreResolutionKmPerPixel:1.96379,pixelsAcross:4.8}]};
   assert.match(formatExploration({...session,answer:{...session.answer,services:[opus]}}),/Spacecraft images in OPUS \(2292 of Kerberos.*\n  New Horizons LORRI · 2015-07-14T04:24:46\.755 · 1\.96379 km\/px at body centre · 4\.8 px across/u);
@@ -97,8 +98,24 @@ test('human exploration and artifact screens retain unknowns, blockers, context 
 
 test('query continuation quotes shell metacharacters without command substitution',()=>{
   const directory='/tmp/$(touch unsafe) with spaces';
-  const session={target:'Eris',choices:[{pick:1,telescope:'Fixture',mode:'camera',observation:'obs-1',program:'program',state:'qualify'}],answer:{request:{kind:'image',wavelengthMicrometres:[1,2]},targetCoverage:[]}} as unknown as Session;
+  const session={target:'Eris',choices:[{pick:1,telescope:'Fixture',mode:'camera',observation:'obs-1',program:'program',state:'qualify'}],answer:{request:{kind:'image',wavelengthMicrometres:[1,2]},endpoint:{coverage:'bounded'},targetCoverage:[]}} as unknown as Session;
   assert.match(formatSession(session,directory),/Next: telescope get '\/tmp\/\$\(touch unsafe\) with spaces' --pick N/u);
+});
+
+test('query puts failed providers before bounded candidate blockers and preserves full verbose evidence',()=>{
+  const reason='The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install';
+  const candidates=Array.from({length:30},(_,index)=>({telescope:`Facility ${index}`,mode:`Mode ${index}`,selectionAssessment:{blockers:[{reason:index===29?'A final recorded reason.':`An unrelated historical note ${index}. ${'Long detail '.repeat(40)}`}]}}));
+  const session={target:'fixture',choices:[],answer:{request:{kind:'spectrum',wavelengthMicrometres:[0.3,0.8]},targetResolution:{status:'resolved'},endpoint:{status:'no-selectable-candidate',coverage:'incomplete'},candidates,
+    targetCoverage:[],sourceIntakeIssues:[],archiveAccess:{services:['ESO','ALMA','PSA'].map(service=>({service,state:'unavailable',reason})),records:[]}}} as unknown as Session;
+  const screen=formatSession(session,'/tmp/query');
+  assert.match(screen,/Search coverage is incomplete/u);
+  assert.match(screen,/Provider status \(3\):\n  3 providers unavailable: The astronomy packages are not installed/u);
+  assert.ok(screen.indexOf('Provider status')<screen.indexOf('Candidate mode blockers'));
+  assert.match(screen,/Candidate mode blockers \(30\):/u);
+  assert.match(screen,/25 more in the saved result/u);
+  assert.doesNotMatch(screen,/A final recorded reason/u);
+  assert.match(formatSession(session,'/tmp/query',true),/A final recorded reason/u);
+  assert.equal(session.answer.candidates.length,30);
 });
 
 test('family-only artifact offers a numbered operation without an empty output section',async()=>{
@@ -160,6 +177,43 @@ test('exploration screen bounds repeated archive diagnostics while the saved ans
   assert.match(screen,/4 more in the saved result/u);
   assert.doesNotMatch(screen,/issue-8/u);
   assert.match(formatExploration(session,true),/issue-8/u);
+});
+
+test('no-choice exploration distinguishes incomplete, unsupported, bounded-empty and unresolved target outcomes',async()=>{
+  const base=exploration('/tmp/no-choice'),cases=[
+    {coverage:'incomplete' as const,unsupported:[],issues:[{scope:'provider' as const,code:'provider-unavailable' as const,identity:'Archive',reason:'Astronomy packages are not installed.'}],expected:/Search incomplete; no retrievable observation was confirmed/u},
+    {coverage:'bounded' as const,unsupported:base.answer.unsupported,issues:[],expected:/1 discovery record\(s\) lack a supported route/u},
+    {coverage:'bounded' as const,unsupported:[],issues:[],expected:/This does not establish that no observation exists/u},
+  ];
+  for(const item of cases){
+    const session={...base,choices:[],answer:{...base.answer,choices:[],outcome:{selection:'none' as const,coverage:item.coverage},unresolved:[],unsupported:item.unsupported,issues:item.issues}};
+    const screen=formatExploration(session);
+    assert.match(screen,item.expected);
+    assert.doesNotMatch(screen,/No actionable observation is available/u);
+    if(item.coverage==='incomplete'){
+      assert.ok(screen.indexOf('Search limits and provider status')<screen.indexOf('Unresolved discoveries')||!screen.includes('Unresolved discoveries'));
+      assert.match(screen,/Retry in a new directory: telescope explore eris --out NEW_DIRECTORY/u);
+      const io=mockIo(true,true),api=mockServices(session.directory);
+      assert.equal(await main(['explore','eris'],'/workspace',text=>io.io.write(text),io.io,{...api.services,saveExploration:async()=>session}),3);
+      assert.equal(io.prompts.length,0);
+      assert.match(io.stdout.join(''),/Search incomplete/u);
+    }
+  }
+  const unresolved={...base,choices:[],answer:{...base.answer,choices:[],outcome:{selection:'none' as const,coverage:'target-unresolved' as const},targetResolution:{status:'unknown' as const,requested:'nonesuch',suggestions:[]},issues:[{scope:'target' as const,code:'unknown-target' as const,reason:'Target is unknown.'}],unresolved:[],unsupported:[]}};
+  assert.match(formatExploration(unresolved),/Target unresolved; no archive search was run/u);
+});
+
+test('terminal groups a shared provider failure but keeps every provider in verbose and saved data',()=>{
+  const initial=exploration('/tmp/provider-failure'),reason='Target-name query. The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install';
+  const issues=['ESO','ALMA','PSA'].map(identity=>({scope:'provider' as const,code:'provider-unavailable' as const,identity,reason}));
+  const session={...initial,arguments:['HD 189733','--kind','spectrum'],choices:[],answer:{...initial.answer,choices:[],issues,unresolved:[],unsupported:[],outcome:{selection:'none' as const,coverage:'incomplete' as const}}};
+  const screen=formatExploration(session);
+  assert.match(screen,/Search limits and provider status \(3\):/u);
+  assert.match(screen,/3 providers \(ESO, ALMA, PSA\): Target-name query/u);
+  assert.equal([...screen.matchAll(/The astronomy packages are not installed/gu)].length,1);
+  assert.match(screen,/telescope explore 'HD 189733' --kind spectrum --out NEW_DIRECTORY/u);
+  assert.equal([...formatExploration(session,true).matchAll(/The astronomy packages are not installed/gu)].length,3);
+  assert.equal(session.answer.issues.length,3);
 });
 
 test('JSON and every redirected explore mode are deterministic and never prompt',async()=>{
