@@ -422,6 +422,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // outside the galaxy. They stay in the document, as every other retained scene node does. The completed cloud
         // is already graded by this host's opacity.
         volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource }, () => 1);
+        // Unselected, the galaxy is its sky cube from inside and its billboard from outside. The slice stack is the
+        // volumetric view of the observer who selected it.
+        if (payload.impostors) volumeLayer.setDetail(false);
         for (const [index, bank] of declaredImageLayers.entries()) if (initialImageLayers.has(bank.id)) void ensureImageLayerLoaded(index);
         // Image and volume lens banks mount lazily; far layers have no payload or DOM until admitted.
         let galaxyPrefetched = false;
@@ -467,6 +470,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               next?.focus.positionM.some((value, axis) => value !== detailedFocus?.focus.positionM[axis]);
             detailedFocus = next;
             galaxyCatalog?.select(id);
+            if (payload.impostors) volumeLayer?.setDetail(id === plan.volume.objectId);
             if (changed) requestPublication?.();
           },
           resolveGalaxy(id: string) { return galaxyCatalog?.resolve(id) ?? null; },
