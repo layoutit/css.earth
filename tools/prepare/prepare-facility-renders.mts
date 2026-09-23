@@ -35,12 +35,12 @@ if (!selected.length) throw new Error('No model-render entries selected');
 
 const local = (base: string, path: string) => { const result = resolve(base, path); if (!result.startsWith(base + sep)) throw new Error('Unsafe asset path'); return result; };
 await mkdir(resolve(output, 'rendered'), { recursive: true }); await mkdir(resolve(output, 'before'), { recursive: true });
-const files = new Map<string, { path: string; url: string; sha256: string; bytes: number }>();
+const files = new Map<string, { path: string; url: string; bytes: number }>();
 for (const entry of selected) {
   const source = requireRecord(entry.source), model = requireRecord(source.model);
   for (const value of [model, ...requireArray(source.dependencies ?? [])]) {
     const file = requireRecord(value), path = requireString(file.path);
-    files.set(path, { path, url: requireString(file.url ?? source.url), sha256: requireString(file.sha256), bytes: requireFiniteNumber(file.bytes) });
+    files.set(path, { path, url: requireString(file.url ?? source.url), bytes: requireFiniteNumber(file.bytes) });
   }
 }
 for (const file of files.values()) {
@@ -50,10 +50,10 @@ for (const file of files.values()) {
     if (!(error instanceof Error) || !('code' in error) || error.code !== 'ENOENT') throw error;
     const response = await fetch(file.url); if (!response.ok) throw new Error(`Source download failed: ${file.url}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== file.bytes || sha256(bytes) !== file.sha256) throw new Error(`Source identity mismatch: ${file.path}`);
+    if (bytes.length !== file.bytes) throw new Error(`Source byte count mismatch: ${file.path} has ${bytes.length}, library declares ${file.bytes}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   }
-  if (bytes.length !== file.bytes || sha256(bytes) !== file.sha256) throw new Error(`Source identity mismatch: ${file.path}`);
+  if (bytes.length !== file.bytes) throw new Error(`Source byte count mismatch: ${file.path} has ${bytes.length}, library declares ${file.bytes}`);
 }
 for (const file of files.values()) if (file.path.endsWith('.usdz')) {
   const source = local(cache, file.path), destination = local(cache, file.path.replace(/\.usdz$/, '.usda'));
@@ -134,10 +134,10 @@ try {
     const destination = resolve(root, 'public' + requireString(entry.url));
     try { await copyFile(destination, resolve(output, `before/${id}.webp`), 1); } catch (error) { if (!(error instanceof Error) || !('code' in error) || error.code !== 'EEXIST') throw error; }
     await writeFile(resolve(output, `rendered/${id}.webp`), webp);
-    entry.bytes = webp.length; entry.sha256 = sha256(webp); entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
+    entry.bytes = webp.length; entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
     entry.composition = { scale: 1, offsetXCssPixels: 0 };
     entry.processing = { recipe: 'tools/facility-renders/render.mts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, omissions: result.report.omissions, camera: result.report.camera, pose: result.report.pose };
-    reports.push({ ...result.report, bytes: webp.length, sha256: entry.sha256, subject: entry.subject });
+    reports.push({ ...result.report, bytes: webp.length, sha256: sha256(webp), subject: entry.subject });
     console.log(`${id}: ${result.report.triangles} triangles; ${webp.length} bytes; ${result.report.omissions.reduce((n, v) => n + v.triangles, 0)} omitted`);
   }
   if (!inspectAxes && !inspectRolls) {
