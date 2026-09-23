@@ -155,7 +155,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
       item.hidden = !matches.has(item) || !matchesObjectCategory(item.dataset.objectClassification, selected);
     }
     const order = items.toSorted((a, b) => selected === 'planet' && (a.dataset.objectClassification === 'planet') !== (b.dataset.objectClassification === 'planet')
-      ? a.dataset.objectClassification === 'planet' ? -1 : 1 : Number(a.dataset.objectDistanceAu) - Number(b.dataset.objectDistanceAu));
+      ? a.dataset.objectClassification === 'planet' ? -1 : 1 : Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
     for (const [index, chunk] of [...browser.querySelectorAll<HTMLElement>('.object-chunk')].entries()) {
       const rows = order.slice(index * 16, (index + 1) * 16);
       requiredElement(chunk, '.object-chunk-list').append(...rows);

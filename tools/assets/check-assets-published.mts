@@ -210,11 +210,11 @@ export interface CheckAssetsPublishedResult {
   readonly checked: number;
   readonly inventoried: number;
   readonly scope: string;
-  /** Keys R2 answered with HTTP 404 on every attempt: really not published. The only class that fails a gate. */
+  /** Keys R2 answered with HTTP 404 on every attempt: really not published. */
   readonly notFound: readonly string[];
-  /** Keys whose last answer was another HTTP status or a byte-count mismatch: warned, not failed. */
+  /** Keys whose last answer was another HTTP status or a byte-count mismatch. */
   readonly otherMisses: readonly string[];
-  /** Keys that never got an answer (network error or timeout): unverified, warned, never failed. */
+  /** Keys that never got an answer (network error or timeout): unverified. */
   readonly unverified: readonly string[];
 }
 
@@ -278,18 +278,20 @@ export async function checkAssetsPublished(objectIds: readonly string[], { origi
 /**
  * What the gate's result means for the job. A PR, a local run and the nightly sweep fail only on a real HTTP 404;
  * any other HTTP answer, a byte-count mismatch and every unverified (network) key only warn. `reportOnly` (a push
- * to main) never fails: that change already passed its PR gate, and a deploy tolerates a missing asset, so the
- * findings go to the report as warnings instead of turning main red.
+ * to main) never fails. A production deploy uses `requireVerified` so it publishes only after every inventoried
+ * key answers successfully, including keys unchanged since the last PR gate.
  */
-export function gateVerdict(result: CheckAssetsPublishedResult, { reportOnly = false }: { reportOnly?: boolean } = {}): { exitCode: 0 | 1; report: string } {
+export function gateVerdict(result: CheckAssetsPublishedResult, { reportOnly = false, requireVerified = false }:
+  { reportOnly?: boolean; requireVerified?: boolean } = {}): { exitCode: 0 | 1; report: string } {
+  if (reportOnly && requireVerified) throw new TypeError('A verified deploy cannot be report-only.');
   const lines = [`Checked ${result.checked} of ${result.inventoried} inventoried file(s) against ${RUNTIME_ASSET_ORIGIN}: ${result.scope}.`];
   const section = (title: string, entries: readonly string[]) => {
     if (entries.length) lines.push("", `${title} (${entries.length}):`, ...entries.map(entry => `- ${entry}`));
   };
   section(reportOnly ? "WARNING: not published (HTTP 404); this push to main does not fail on assets" : "FAIL: not published (HTTP 404)", result.notFound);
-  section("WARNING: other HTTP answers", result.otherMisses);
-  section("WARNING: unverified (network); publication neither proven nor disproven", result.unverified);
-  const failed = !reportOnly && result.notFound.length > 0;
+  section(`${requireVerified ? 'FAIL' : 'WARNING'}: other HTTP answers`, result.otherMisses);
+  section(`${requireVerified ? 'FAIL' : 'WARNING'}: unverified (network); publication neither proven nor disproven`, result.unverified);
+  const failed = !reportOnly && (result.notFound.length > 0 || requireVerified && (result.otherMisses.length > 0 || result.unverified.length > 0));
   if (!result.notFound.length && !result.otherMisses.length && !result.unverified.length) lines.push("", "Every checked file is published.");
   return { exitCode: failed ? 1 : 0, report: lines.join("\n") };
 }
@@ -298,9 +300,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const args = process.argv.slice(2);
   const option = (name: string) => args.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
   const addedSinceArg = option("added-since"), concurrencyArg = option("concurrency");
-  const lastGreen = args.includes("--added-since-last-green"), reportOnly = args.includes("--report-only");
-  const objectArgs = args.filter(arg => !/^--(?:added-since|concurrency)=/u.test(arg) && arg !== "--added-since-last-green" && arg !== "--report-only");
+  const lastGreen = args.includes("--added-since-last-green"), reportOnly = args.includes("--report-only"), requireVerified = args.includes("--require-verified");
+  const objectArgs = args.filter(arg => !/^--(?:added-since|concurrency)=/u.test(arg) && arg !== "--added-since-last-green" && arg !== "--report-only" && arg !== "--require-verified");
   if (addedSinceArg !== undefined && lastGreen) throw new Error("Use --added-since=<ref> or --added-since-last-green, not both.");
+  if (reportOnly && requireVerified) throw new Error('A verified deploy cannot be report-only.');
   const concurrency = concurrencyArg === undefined ? undefined : Number(concurrencyArg);
   if (concurrency !== undefined && (!Number.isInteger(concurrency) || concurrency < 1)) throw new Error(`Invalid --concurrency=${concurrencyArg}`);
   let addedSince = addedSinceArg;
@@ -312,7 +315,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     else addedSince = sha;
   }
   const result = await checkAssetsPublished(objectArgs, { ...(addedSince ? { addedSince } : {}), ...(concurrency ? { concurrency } : {}) });
-  const { exitCode, report } = gateVerdict(result, { reportOnly });
+  const { exitCode, report } = gateVerdict(result, { reportOnly, requireVerified });
   console.log(report);
   if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `### Published assets\n\n${report}\n`);
   process.exitCode = exitCode;

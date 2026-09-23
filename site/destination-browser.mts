@@ -48,6 +48,10 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset }
         if (destroyed || selection !== place || request !== selectionRevision) return;
         panel.ariaBusy = "false";
         status.textContent = completed ? result.status : "Flight stopped. Select the city again to continue.";
+      }, () => {
+        if (destroyed || selection !== place || request !== selectionRevision) return;
+        panel.ariaBusy = "false";
+        status.textContent = "Flight failed. Select the city again to retry.";
       });
     } finally {
       selecting = false;

@@ -312,6 +312,15 @@ test('network errors and other HTTP answers only warn, in every mode', () => {
   }
 });
 
+test('a deploy requires every R2 key to be verified after retries', () => {
+  const { exitCode, report } = gateVerdict(gateResult({ unverified: [UNVERIFIED], otherMisses: [OTHER] }), { requireVerified: true });
+  assert.equal(exitCode, 1);
+  assert.match(report, /FAIL: other HTTP answers \(1\)/);
+  assert.match(report, /FAIL: unverified \(network\)/);
+  assert.equal(gateVerdict(gateResult({}), { requireVerified: true }).exitCode, 0);
+  assert.throws(() => gateVerdict(gateResult({}), { reportOnly: true, requireVerified: true }), /cannot be report-only/);
+});
+
 // The #331 main run went red on one live key that answered "fetch failed". A push to main must never fail here.
 test('a push to main never fails on assets: real 404s and unverified keys become warnings', () => {
   const { exitCode, report } = gateVerdict(gateResult({ notFound: [MISSING], otherMisses: [OTHER], unverified: [UNVERIFIED] }), { reportOnly: true });

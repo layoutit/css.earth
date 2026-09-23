@@ -54,10 +54,20 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
   assert.equal(list.querySelector<HTMLElement>('[data-catalogue-index="0"] .object-name')?.textContent, 'Earth 90');
   assert.equal(list.querySelectorAll('.object-item').length, 2);
 
-  catalogue.setSelection('earth-91', '');
+  catalogue.setSelection({ kind: 'scene', id: 'earth-91' });
   assert.equal(list.querySelector('[data-catalogue-index="1"] a')?.getAttribute('aria-current'), 'page');
   assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
     'objects with the same display name must not share selection');
+  const focus: CatalogueIndexEntry = { ...entry(91), kind: 'prepared-focus', id: 'm42', route: '/sun/?focus=m42',
+    source: { subject: 'focus:m42', document: '/sources/m42/', label: 'Sources M42' },
+    marker: { kind: 'focus', thumbnail: null } };
+  catalogue.setEntries([entry(91), focus]);
+  catalogue.setSelection({ kind: 'prepared-focus', id: 'm42' });
+  assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
+    'a prepared focus cannot also select the current scene');
+  assert.equal(list.querySelector('[data-catalogue-index="1"] a')?.getAttribute('aria-current'), 'page');
+  catalogue.setSelection(null);
+  assert.equal(list.querySelectorAll('[aria-current="page"]').length, 0, 'an overview selects no catalogue row');
   catalogue.clear();
   assert.equal(list.querySelectorAll('.object-item').length, 0);
   assert.equal(list.style.height, '0px');
