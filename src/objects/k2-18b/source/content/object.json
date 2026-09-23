@@ -8,12 +8,12 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "2.37 Earth radii",
+        "value": "2.610 Earth radii",
         "source": {
-          "catalogueId": "arxiv-1805-00830",
-          "url": "https://arxiv.org/abs/1805.00830",
-          "label": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
-          "checked": "2026-09-21",
+          "catalogueId": "arxiv-1909-04642",
+          "url": "https://arxiv.org/abs/1909.04642",
+          "label": "Benneke et al. 2019, ApJL 887, L14, Table 2",
+          "checked": "2026-09-22",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -23,10 +23,10 @@
         "label": "Year",
         "value": "32.94 days",
         "source": {
-          "catalogueId": "arxiv-1805-00830",
-          "url": "https://arxiv.org/abs/1805.00830",
-          "label": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
-          "checked": "2026-09-21",
+          "catalogueId": "arxiv-1909-04642",
+          "url": "https://arxiv.org/abs/1909.04642",
+          "label": "Benneke et al. 2019, ApJL 887, L14, Table 2",
+          "checked": "2026-09-22",
           "path": "source/measurements.json",
           "locator": "orbitalPeriodDays; orbitalPeriodSource"
         }
@@ -48,7 +48,7 @@
         "source": {
           "id": "k2-18b-observational-measurements",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/1805.00830"
+          "url": "https://arxiv.org/abs/1909.04642"
         },
         "falseColor": false,
         "notes": "No image or colour of this planet exists (it has never been resolved: its size, orbit and transmission spectrum are measured, not its surface; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
@@ -71,8 +71,8 @@
     {
       "label": "Research",
       "role": "facts",
-      "description": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
-      "href": "https://arxiv.org/abs/1805.00830"
+      "description": "Benneke et al. (2019), ApJL 887, L14, Table 2",
+      "href": "https://arxiv.org/abs/1909.04642"
     }
   ],
   "provenance": {
@@ -80,12 +80,12 @@
       "path": "../presentation/title-mark.json"
     },
     "editorial": {
-      "url": "https://arxiv.org/abs/1805.00830",
-      "credit": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830"
+      "url": "https://arxiv.org/abs/1909.04642",
+      "credit": "Benneke et al. (2019), ApJL 887, L14, Table 2"
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/k2-18b.json",
-      "credit": "Published radius and transit-fitted orbit; Sarkis et al. (2018), AJ 155, 257, arXiv:1805.00830"
+      "credit": "Radius and transit-fitted orbit: Benneke et al. (2019), ApJL 887, L14, Table 2; eccentricity: Sarkis et al. (2018), AJ 155, 257, Table 3"
     }
   }
 }

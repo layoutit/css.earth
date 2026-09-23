@@ -12,7 +12,7 @@ Measured and not shown: mass, 0.685 (+0.015/−0.014) Jupiter masses (Torres et 
 
 ## Evidence
 
-No dated test report exists for this body yet.
+[2026-09-22 exoplanet radius and route check](../../../site/test/evidence/exoplanets/2026-09-22/README.md): the 97,158 km source radius agrees with the scene and world frame; the prepared runtime contract passed. Chrome opened this route, showed the 1.359 Jupiter-radii fact and reported no console errors after the view settled. The rebaked package passed a fresh download of its pinned assets.
 
 ## Known problems
 
