@@ -26,7 +26,7 @@ const classification = objectClassificationLabel(object.classification);
   data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase("en")}>
     <a class:list={["object-link object-observation-control object-thumbnail-leading", { "is-active": object.id === activeObjectId }]}
       href={object.route} data-object-id={object.id}
-      data-source-subject={`object:${object.name}`} data-source-document={source.href} data-source-label={source.label}
+      data-source-subject={`object:${object.id}`} data-source-document={source.href} data-source-label={source.label}
       aria-current={object.id === activeObjectId ? "page" : undefined}>
       <span class="object-lens-icon">
         {preview ? <img class="object-search-preview" src={preview} width="40" height="40" alt="" loading="lazy" decoding="async" />

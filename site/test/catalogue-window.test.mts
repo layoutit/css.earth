@@ -7,10 +7,10 @@ import type { CatalogueIndexEntry } from '../catalogue-index.mts';
 import { createCatalogueWindow } from '../catalogue-window.mts';
 
 const entry = (index: number): CatalogueIndexEntry => ({
-  kind: 'scene', id: 'earth', name: `Earth ${index}`, searchNames: [], classification: 'planet',
+  kind: 'scene', id: `earth-${index}`, name: `Earth ${index}`, searchNames: [], classification: 'planet',
   classificationName: 'planet', systemName: 'solar system', route: `/earth-${index}/`, illustration: false,
   distanceMeters: index, detail: { text: `${index} au`, value: String(index), unit: 'au', title: 'Distance', ariaLabel: `${index} au. Distance` },
-  source: { subject: `object:Earth ${index}`, document: `/sources/${index}/`, label: `Sources ${index}` },
+  source: { subject: `object:earth-${index}`, document: `/sources/${index}/`, label: `Sources ${index}` },
   marker: { kind: 'scene', id: 'earth', color: '#fff' },
 });
 
@@ -50,12 +50,14 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
   assert.equal(catalogue.focus(100), false);
 
   scroll.scrollTop = 0;
-  catalogue.setEntries([entry(90), entry(91)]);
+  catalogue.setEntries([entry(90), { ...entry(91), name: 'Earth 90' }]);
   assert.equal(list.querySelector<HTMLElement>('[data-catalogue-index="0"] .object-name')?.textContent, 'Earth 90');
   assert.equal(list.querySelectorAll('.object-item').length, 2);
 
-  catalogue.setSelection('Earth 91', '');
+  catalogue.setSelection('earth-91', '');
   assert.equal(list.querySelector('[data-catalogue-index="1"] a')?.getAttribute('aria-current'), 'page');
+  assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
+    'objects with the same display name must not share selection');
   catalogue.clear();
   assert.equal(list.querySelectorAll('.object-item').length, 0);
   assert.equal(list.style.height, '0px');
