@@ -89,7 +89,7 @@ Explore filters and query options use micrometres, arcseconds and kilometres:
   --kind image|cube|spectrum|table|photometry|events|strips
 
   --json                             JSON-only stdout; progress on stderr
-  --verbose                          Full query evidence or error stack
+  --verbose                          Full exploration diagnostics, query evidence or error stack
   --help                             Show this help
 
 Explorations and queries save immutable numbered choices in explore.json and query.json. Get

@@ -204,16 +204,17 @@ export async function skyTargetRequest(root: string, request: ExplorationRequest
   return resolution ? { request: withRegion(resolution.target), simbadMiss: false, evidence: resolution.evidence } : { request, simbadMiss: true };
 }
 
-export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationInputs> {
+export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<ExplorationInputs> {
   const sky = request.skyTarget ? [skyCatalogueEntry(request.skyTarget)] : [];
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
-  const [inputs, opus] = await Promise.all([loadQueryInputs(root, { ...request, target: resolution.canonical.id }, selectedObservation), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
+  const [inputs, opus] = await Promise.all([loadQueryInputs(root, { ...request, target: resolution.canonical.id }, selectedObservation, progress), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
   return { ...inputs, opus };
 }
 
-export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationAnswer> {
-  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation));
+export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<ExplorationAnswer> {
+  progress?.('Resolving target');
+  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation, progress));
   if (sky.evidence) return { ...answer, skyResolution: sky.evidence };
   if (!sky.simbadMiss) return answer;
   return { ...answer, issues: answer.issues.map(issue => issue.scope === 'target' ? { ...issue, reason: `${issue.reason} SIMBAD resolves no object by that name either.` } : issue) };
