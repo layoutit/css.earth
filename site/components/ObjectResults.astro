@@ -34,7 +34,8 @@ const catalogueIndexBytes = PREPARED_CATALOGUE_INDEX_PIN.bytes;
 ---
 
 <div data-object-navigation-slot>
-  <NavigationTree current={activeObjectId ?? ''} bounded />
+  <!-- The homepage exposes the existing tree's destinations in its initial HTML. -->
+  <NavigationTree current={activeObjectId ?? ''} bounded eager={Astro.url.pathname === '/'} />
 </div>
 <div class="object-tabs" role="tablist" aria-label="Object categories" hidden>
   {groups.map((group) => <button type="submit" form={formId} name="category" value={group.type} role="tab"
