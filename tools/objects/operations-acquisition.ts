@@ -25,6 +25,8 @@ interface Download extends OperationBase {kind:'download';path:string;url:string
 interface RequestDownload extends OperationBase {kind:'request-download';path:string;url:string;form:Record<string,string>;fileSource?:string;trimEnd?:boolean;appendText?:string;headers?:Record<string,string>;replacements?:{pattern:string;flags?:string;replacement:string}[];requiredPrefix?:string;requiredText?:string[];numericLineCount?:number;}
 interface JsonDocument extends OperationBase {kind:'json-document';path:string;value:Record<string,unknown>;}
 interface ZipMember extends OperationBase {kind:'zip-member';path:string;url:string;member:string;}
+/** One member of a published .tar.gz deposit, streamed out by tar so the archive never has to fit in memory. */
+interface TarGzMember extends OperationBase {kind:'tar-gz-member';path:string;url:string;member:string;}
 interface SatelliteCatalog extends OperationBase {kind:'satellite-catalog';path:string;recipePath:string;headers?:Record<string,string>;}
 interface VerifyDownload extends OperationBase {kind:'verify-download';url:string;}
 interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;}
@@ -32,7 +34,7 @@ interface RequestCheck extends OperationBase {kind:'verify-request';url:string;f
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
 /** A pinned JPL Horizons time-list table asked for again; Horizons dates each response, so its rows are compared, not its bytes. */
 interface HorizonsTimeList extends OperationBase {kind:'horizons-time-list';path:string;url:string;parameters:Record<string,string>;epochs:number[];}
-export type AcquisitionOperation=MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|HorizonsTimeList;
+export type AcquisitionOperation=MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|TarGzMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|HorizonsTimeList;
 export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
@@ -40,11 +42,12 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  // An empty plan is legal: a body whose every declared source input is already
  // tracked needs no reacquisition operation at all (e.g. eris, haumea, makemake).
  const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
- for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','horizons-time-list'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
+ for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member','tar-gz-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
+  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','horizons-time-list'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
   if(step.kind==='horizons-time-list'){const parameters=record(step.parameters);if(Object.values(parameters).some(value=>typeof value!=='string')||'TLIST' in parameters||!Array.isArray(step.epochs)||!step.epochs.length||step.epochs.some(epoch=>typeof epoch!=='number'||!Number.isFinite(epoch)))throw new TypeError('Invalid Horizons time list.');}
+  if(step.kind==='tar-gz-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_. /-]+$/.test(step.member)||step.member.startsWith('-')||step.member.split('/').includes('..')))throw new TypeError('Invalid tar.gz member.');
   if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
@@ -128,6 +131,18 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
     try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
    }
    const {stdout}=await promisify(execFile)('unzip',['-p',archivePath,step.member],{encoding:'buffer',maxBuffer:512*1024*1024});
+   await publish(step.path,stdout);
+  }
+  else if(step.kind==='tar-gz-member'){
+   const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});
+   // As for ZIP members: the archive is cached by its URL and tar streams the one member out of it.
+   const archivePath=resolve(cache,`${sha256(new TextEncoder().encode(step.url))}.tar.gz`);
+   if(!await lstat(archivePath).then(info=>info.isFile()&&info.size>0,()=>false)){
+    const response=await request(step.url);if(!response.body)throw new Error('tar.gz download has no body.');
+    const temporary=`${archivePath}.partial-${process.pid}`;
+    try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
+   }
+   const {stdout}=await promisify(execFile)('tar',['-xzOf',archivePath,step.member],{encoding:'buffer',maxBuffer:512*1024*1024});
    await publish(step.path,stdout);
   }
   else if(step.kind==='hrii-facets'){

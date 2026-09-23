@@ -13,12 +13,13 @@ export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'po
 export type NavigationIntent =
   | { kind: 'object' }
   | { kind: 'focus'; id: string }
-  | { kind: 'feature'; id: string }
+  | { kind: 'feature'; id: string | null }
   | { kind: 'link'; url: string }
   | { kind: 'history'; url: string; history: NavigationHistory }
   | { kind: 'overview'; scope: OverviewScope; camera: 'frame' | 'preserve' };
 export type NavigationCamera =
   | { kind: 'focus' }
+  | { kind: 'surface' }
   | { kind: 'restore'; animate: boolean }
   | { kind: 'preserve' }
   | { kind: 'frame'; framing: 'center' | 'detail'; world: WorldCameraPose | null; focusPositionM: PositionM | null };
@@ -74,7 +75,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     url = withDataset(withPreparedFocus(url, null, null), null);
     withOverviewScope(url, intent.kind === 'overview' ? intent.scope
       : center && intent.kind === 'object' && systemById(objects, object.id) ? 'system' : null);
-    if (intent.kind === 'feature') url.searchParams.set('feature', intent.id);
+    if (intent.kind === 'feature' && intent.id !== null) url.searchParams.set('feature', intent.id);
   }
   const selection = readNavigationSelection(url, object.id, objects);
   const interruptedFlight = current.pending !== null
@@ -82,7 +83,8 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const restore = history.history === 'pop' || linked && selection.savedView;
   const keepCamera = intent.kind === 'overview' && intent.camera === 'preserve'
     || current.reuseScene && (linked && selection.dataset || interruptedFlight);
-  const camera: NavigationCamera = intent.kind === 'focus' ? { kind: 'focus' } : restore ? { kind: 'restore', animate: history.history === 'pop' }
+  const camera: NavigationCamera = current.reuseScene && (intent.kind === 'feature' || selection.feature !== null)
+    ? { kind: 'surface' } : intent.kind === 'focus' ? { kind: 'focus' } : restore ? { kind: 'restore', animate: history.history === 'pop' }
     : keepCamera ? { kind: 'preserve' }
     : { kind: 'frame', framing: center ? 'center' : 'detail', world: center, focusPositionM: overviewTarget?.focusPositionM ?? null };
   if (current.reuseScene && !restore) {

@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-18b",
+  "entries": [
+    {
+      "id": "eigenspectra-maps",
+      "subject": "Challener, Weiner Mansfield et al. (2025) Eigenspectra brightness-temperature maps at 25 wavelengths and their three regions",
+      "status": "included",
+      "finding": "Shown as the 25-step Temperature lens, with the borders of the three regions drawn over it as thin lines as in the paper's Figure 1, read unchanged from the Zenodo deposit. Turned by this package's orbit and rotation, the deposited flux maps reproduce the deposited light curves; mirrored east-west they fit worse by a chi-squared of 384.8 over the 25 wavelengths.",
+      "evidence": [
+        "https://arxiv.org/abs/2510.24708",
+        "https://zenodo.org/records/14751570"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
+        }
+      ]
+    },
+    {
+      "id": "theresa-3d-map",
+      "subject": "The ThERESA 3D temperature grid of the same eclipse (8 wavelength bins)",
+      "status": "excluded",
+      "finding": "The paper uses it only as a cross-check and says ThERESA struggled to match the emission features; its reduced chi-squared is 1.56 against Eigenspectra's 1.19. It is in the deposit but not drawn.",
+      "revisitWhen": "A paper presents a 3D grid of this planet as its main result.",
+      "evidence": [
+        "https://arxiv.org/abs/2510.24708"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
+        }
+      ]
+    },
+    {
+      "id": "retrieved-profiles",
+      "subject": "Hotspot and ring temperature-pressure profiles retrieved with HyDRA and PyratBay (Figure 4)",
+      "status": "deferred",
+      "finding": "The vertical structure of the two regions, deposited as text tables. Not drawn in this package; a chart of them would show the depth dimension the maps do not.",
+      "revisitWhen": "Charts of retrieved profiles are wanted for exoplanets.",
+      "evidence": [
+        "https://zenodo.org/records/14751570"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
+        }
+      ]
+    },
+    {
+      "id": "coulombe-2023-broadband-map",
+      "subject": "Coulombe et al. (2023) broadband eclipse map of the same NIRISS eclipse",
+      "status": "excluded",
+      "finding": "Two equally good solutions (a plateau and a peaked hotspot) and no deposited map file; the 2025 wavelength-resolved maps supersede it.",
+      "revisitWhen": "A map file of it is published.",
+      "evidence": [
+        "https://arxiv.org/abs/2301.08192"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
+        }
+      ]
+    }
+  ]
+}

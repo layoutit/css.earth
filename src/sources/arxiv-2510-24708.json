@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2510-24708",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Challener, Weiner Mansfield et al. (2025): Horizontal and vertical exoplanet thermal structure from a JWST spectroscopic eclipse map",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2510.24708"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41550-025-02666-9"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2510.24708",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41550-025-02666-9",
+      "label": "Nature Astronomy (2025)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2510.24708",
+      "checkedOn": "2026-09-23",
+      "locator": "Methods: Eigenspectra and ThERESA mapping; Figure 1 maps; Extended Data Figure 2 groups"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Nature Astronomy (2025)",
+  "creators": [
+    "R. C. Challener",
+    "M. Weiner Mansfield",
+    "P. E. Cubillos",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

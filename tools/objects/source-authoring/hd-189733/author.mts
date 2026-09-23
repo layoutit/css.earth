@@ -11,7 +11,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { MARKER_PATH, planetMarker, starMarker } from '../wasp-43/author.mts';
+import { MARKER_PATH, planetMarker, starMarker } from '../context-markers.mts';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
 

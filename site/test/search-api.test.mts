@@ -3,14 +3,17 @@ import test from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createDestinationBrowser } from '../destination-browser.mts';
 import { createFeatureBrowser } from '../feature-browser.mts';
+import { selectSceneFeature } from '../scene/scene-feature.mts';
+import type { SceneSession } from '../scene/scene-session.mts';
+import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import { handleFindRequest } from '../find.mts';
 
 // Named features and cities are searched by the find function; the page sends its query and gets rows back, and never
 // downloads the cross-body index (3.3 MB) or Earth's places catalogue (14.8 MB).
 const catalog = JSON.stringify({ schema: 'cssearth-prepared-destinations@1', places: [
-  { id: 3435910, name: 'Buenos Aires', names: ['buenos aires', 'capital federal'], context: 'Buenos Aires F.D., Argentina', searchContext: 'buenos aires argentina ar', coverage: 'overview' },
-  { id: 1691490, name: 'Rosario', names: ['rosario'], context: 'Calabarzon, Philippines', searchContext: 'calabarzon philippines ph', coverage: 'overview' },
-  { id: 3838583, name: 'Rosario', names: ['rosario', 'rosario de santa fe'], context: 'Santa Fe, Argentina', searchContext: 'santa fe argentina ar', coverage: 'overview' }] });
+  { id: 3435910, name: 'Buenos Aires', names: ['buenos aires', 'capital federal'], context: 'Buenos Aires F.D., Argentina', searchContext: 'buenos aires argentina ar', coverage: 'overview', camera: { controlPitch: 1, controlYaw: 2, zoom: 3 } },
+  { id: 1691490, name: 'Rosario', names: ['rosario'], context: 'Calabarzon, Philippines', searchContext: 'calabarzon philippines ph', coverage: 'overview', camera: { controlPitch: 1, controlYaw: 2, zoom: 3 } },
+  { id: 3838583, name: 'Rosario', names: ['rosario', 'rosario de santa fe'], context: 'Santa Fe, Argentina', searchContext: 'santa fe argentina ar', coverage: 'overview', camera: { controlPitch: 1, controlYaw: 2, zoom: 3 } }] });
 const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',
   objects: [{ id: 'earth', name: 'Earth', route: '/earth/', count: 1 }, { id: 'mars', name: 'Mars', route: '/mars/', count: 1 }],
   features: [
@@ -60,16 +63,14 @@ test('keystrokes queued before a frame send one request, for the newest text', a
   assert.deepEqual(shown, ['Buenos Crater', 'Buenos Aires']);
 });
 
-test('a failed feature selection reports a retry and restores its result buttons', async context => {
+test('feature rows leave selection to the ordinary navigation link handler', async context => {
   const { document, window } = parseHTML(`<body data-object-shell="mars"><section class="object-feature-results" hidden data-feature-index='${JSON.stringify(pin)}'>
     <p class="object-destination-hint"></p><ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></section></body>`);
   const frames: (() => void)[] = [];
   Object.assign(window, { requestAnimationFrame: (callback: () => void) => frames.push(callback) });
   context.mock.method(globalThis, 'fetch', async (input: string | URL) => handleFindRequest(new Request(String(input)), pin, files));
-  const errors: unknown[] = [];
-  const browser = createFeatureBrowser({ documentTarget: document, objectId: 'mars', onSelected() {}, onResults() {}, onSelectionError(error) { errors.push(error); } })!;
-  browser.bind({ catalog: () => null, loaded: async () => { throw new Error('unused'); },
-    select: async () => { throw new Error('camera failed'); }, selected: () => null, clear() {} });
+  const selected: string[] = [];
+  const browser = createFeatureBrowser({ documentTarget: document, objectId: 'mars', onSelected(result) { selected.push(result.id); }, onResults() {} })!;
   const searching = browser.search('buenos');
   await new Promise(resolve => setTimeout(resolve, 0));
   for (const frame of frames.splice(0)) frame();
@@ -79,9 +80,9 @@ test('a failed feature selection reports a retry and restores its result buttons
   Object.defineProperty(click, 'button', { value: 0 });
   button.dispatchEvent(click);
   await new Promise(resolve => setTimeout(resolve, 0));
-  assert.equal(errors.length, 1);
-  assert.match(document.querySelector('.object-destination-hint')?.textContent ?? '', /Select it again to retry/);
-  assert.equal(button.ariaDisabled, 'false');
+  assert.deepEqual(selected, ['1']);
+  assert.equal(click.defaultPrevented, false);
+  assert.equal(button.getAttribute('href'), '/mars/?feature=1');
 });
 
 test('a city opens from its id with one small request, and the Back label names the bound body', async context => {
@@ -91,8 +92,8 @@ test('a city opens from its id with one small request, and the Back label names 
   context.mock.method(globalThis, 'fetch', async (input: string | URL) => { requested.push(new URL(String(input)).search); return handleFindRequest(new Request(String(input)), pin, files); });
   const browser = createDestinationBrowser({ documentTarget: document, onSelected() {}, onReset() {} })!;
   const selected: unknown[] = [];
-  browser.bind({ select: async place => { selected.push(place); return { status: 'Earth overview at this location.' }; }, reset() {} }, { id: 'earth', name: 'Earth' });
-  await browser.selectById('1691490');
+  const { session, request } = cityFixture(browser, place => { selected.push(place); return Promise.resolve({ completed: true }); });
+  await selectSceneFeature(session, request, 'Earth');
   assert.deepEqual(requested, ['?object=earth&place=1691490']);
   assert.equal((selected[0] as { name: string }).name, 'Rosario');
   assert.equal(document.querySelector('.object-destination-name')?.textContent, 'Rosario');
@@ -107,12 +108,24 @@ test('a rejected city arrival clears busy state and offers a retry', async conte
   let rejectArrival!: (error: Error) => void;
   const arrival = new Promise<{ completed: boolean }>((_, reject) => { rejectArrival = reject; });
   const browser = createDestinationBrowser({ documentTarget: document, onSelected() {}, onReset() {} })!;
-  browser.bind({ select: async () => ({ status: 'Earth overview at this location.', arrival }), reset() {} }, { id: 'earth', name: 'Earth' });
-  await browser.selectById('1691490');
+  const { session, request } = cityFixture(browser, () => arrival);
+  const selection = selectSceneFeature(session, request, 'Earth');
+  const rejected = assert.rejects(selection, /flight failed/);
+  await new Promise(resolve => setTimeout(resolve, 0));
   const panel = document.querySelector<HTMLElement>('.object-destination-panel')!;
   assert.equal(panel.ariaBusy, 'true');
   rejectArrival(new Error('flight failed'));
-  await new Promise(resolve => setTimeout(resolve, 0));
+  await rejected;
   assert.equal(panel.ariaBusy, 'false');
   assert.match(document.querySelector('.object-destination-status')?.textContent ?? '', /Flight failed.*retry/);
 });
+
+function cityFixture(browser: NonNullable<ReturnType<typeof createDestinationBrowser>>, fly: (place: unknown) => Promise<{ completed: boolean }>) {
+  const signal = new AbortController().signal;
+  const session = { objectId: 'earth', signal, shell: { presentDestination: browser.present }, mount: {
+    datasets: { ids: ['normal'], defaultId: 'normal', current: () => 'normal', select: async () => true },
+    destinations: { lensId: 'normal', select: async (place: unknown) => ({ status: 'Earth overview at this location.', arrival: fly(place) }) },
+  } } as unknown as SceneSession;
+  const request = { feature: 'city-1691490', url: 'https://site.test/earth/?feature=city-1691490', signal } as NavigationRequest;
+  return { session, request };
+}

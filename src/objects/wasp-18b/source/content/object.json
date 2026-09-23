@@ -1,0 +1,1738 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-18b",
+  "displayName": "WASP-18b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.28 Jupiter radii",
+        "source": {
+          "catalogueId": "zenodo-14751570",
+          "url": "https://zenodo.org/records/14751570",
+          "label": "Eigenspectra fit, Rp/R* 0.09783",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "10.4 Jupiter masses",
+        "source": {
+          "catalogueId": "zenodo-14751570",
+          "url": "https://zenodo.org/records/14751570",
+          "label": "Deposited ThERESA configuration",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "22.6 hours",
+        "source": {
+          "catalogueId": "arxiv-2301-08192",
+          "url": "https://arxiv.org/abs/2301.08192",
+          "label": "Coulombe et al. (2023), Table 3",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "temperature-0-89um",
+    "controls": [
+      {
+        "id": "temperature-0-89um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 0.89 µm",
+        "thumbnail": "wasp-18b-lens-temperature-0-89um.webp",
+        "surface": "wasp-18b-surface-temperature-0-89um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-0-89um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-0-89",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "0.89 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 0.89 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-0-97um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 0.97 µm",
+        "thumbnail": "wasp-18b-lens-temperature-0-97um.webp",
+        "surface": "wasp-18b-surface-temperature-0-97um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-0-97um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-0-97",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "0.97 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 0.97 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-05um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.05 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-05um.webp",
+        "surface": "wasp-18b-surface-temperature-1-05um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-05um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-05",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.05 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.05 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-13um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.13 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-13um.webp",
+        "surface": "wasp-18b-surface-temperature-1-13um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-13um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-13",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.13 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.13 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-21um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.21 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-21um.webp",
+        "surface": "wasp-18b-surface-temperature-1-21um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-21um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-21",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.21 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.21 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-29um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.29 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-29um.webp",
+        "surface": "wasp-18b-surface-temperature-1-29um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-29um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-29",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.29 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.29 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-37um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.37 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-37um.webp",
+        "surface": "wasp-18b-surface-temperature-1-37um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-37um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-37",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.37 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.37 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-45um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.45 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-45um.webp",
+        "surface": "wasp-18b-surface-temperature-1-45um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-45um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-45",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.45 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.45 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-53um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.53 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-53um.webp",
+        "surface": "wasp-18b-surface-temperature-1-53um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-53um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-53",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.53 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.53 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-60um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.60 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-60um.webp",
+        "surface": "wasp-18b-surface-temperature-1-60um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-60um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-60",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.60 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.60 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-68um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.68 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-68um.webp",
+        "surface": "wasp-18b-surface-temperature-1-68um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-68um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-68",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.68 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.68 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-76um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.76 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-76um.webp",
+        "surface": "wasp-18b-surface-temperature-1-76um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-76um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-76",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.76 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.76 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-84um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.84 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-84um.webp",
+        "surface": "wasp-18b-surface-temperature-1-84um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-84um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-84",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.84 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.84 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-1-92um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.92 µm",
+        "thumbnail": "wasp-18b-lens-temperature-1-92um.webp",
+        "surface": "wasp-18b-surface-temperature-1-92um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-1-92um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-1-92",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "1.92 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 1.92 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-00um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.00 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-00um.webp",
+        "surface": "wasp-18b-surface-temperature-2-00um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-00um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-00",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.00 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.00 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-08um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.08 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-08um.webp",
+        "surface": "wasp-18b-surface-temperature-2-08um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-08um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-08",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.08 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.08 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-16um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.16 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-16um.webp",
+        "surface": "wasp-18b-surface-temperature-2-16um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-16um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-16",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.16 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.16 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-24um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.24 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-24um.webp",
+        "surface": "wasp-18b-surface-temperature-2-24um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-24um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-24",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.24 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.24 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-31um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.31 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-31um.webp",
+        "surface": "wasp-18b-surface-temperature-2-31um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-31um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-31",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.31 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.31 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-39um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.39 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-39um.webp",
+        "surface": "wasp-18b-surface-temperature-2-39um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-39um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-39",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.39 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.39 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-47um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.47 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-47um.webp",
+        "surface": "wasp-18b-surface-temperature-2-47um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-47um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-47",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.47 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.47 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-55um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.55 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-55um.webp",
+        "surface": "wasp-18b-surface-temperature-2-55um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-55um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-55",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.55 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.55 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-63um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.63 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-63um.webp",
+        "surface": "wasp-18b-surface-temperature-2-63um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-63um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-63",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.63 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.63 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-71um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.71 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-71um.webp",
+        "surface": "wasp-18b-surface-temperature-2-71um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-71um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-71",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.71 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.71 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      },
+      {
+        "id": "temperature-2-79um",
+        "label": "Temperature",
+        "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.79 µm",
+        "thumbnail": "wasp-18b-lens-temperature-2-79um.webp",
+        "surface": "wasp-18b-surface-temperature-2-79um@2x.webp",
+        "poles": "wasp-18b-poles-temperature-2-79um@2x.webp",
+        "source": {
+          "id": "wasp-18b-temp-wave-2-79",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/14751570"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "2.79 µm"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2605",
+            "3711"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2605",
+              "3711"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/14751570"
+        },
+        "notes": "Brightness temperature at 2.79 µm. Each wavelength sees a different depth in the atmosphere; step through all 25.",
+        "legendNote": "Black lines: borders of the hotspot and the colder ring the paper finds."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Challener, Weiner Mansfield et al. (2025), Nature Astronomy",
+      "href": "https://arxiv.org/abs/2510.24708"
+    },
+    {
+      "label": "Data",
+      "role": "dataset",
+      "description": "Maps and retrievals, Zenodo",
+      "href": "https://zenodo.org/records/14751570"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2510.24708",
+      "credit": "Challener, Weiner Mansfield et al. (2025), Nature Astronomy"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-18b.json",
+      "credit": "Radius, mass and orbit from the deposited Eigenspectra fit and ThERESA configuration; assumed synchronous rotation"
+    }
+  }
+}

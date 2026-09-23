@@ -1,0 +1,294 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_0.89.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_0.89.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_0.97.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_0.97.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.05.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.05.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.13.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.13.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.21.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.21.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.29.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.29.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.37.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.37.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.45.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.45.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.53.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.53.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.60.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.60.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.68.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.68.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.76.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.76.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.84.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.84.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_1.92.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.92.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.00.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.00.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.08.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.08.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.16.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.16.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.24.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.24.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.31.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.31.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.39.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.39.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.47.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.47.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.55.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.55.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.63.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.63.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.71.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.71.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/temp_wave_2.79.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.79.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/eigenspectra_25_bins_3_groups.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/Eigen_posteriors_Fpfs.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/Figure2/Eigen_posteriors_Fpfs.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/spec_lambin_25.npz",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/eigenspectra/spec_lambin_25.npz"
+    }
+  ]
+}

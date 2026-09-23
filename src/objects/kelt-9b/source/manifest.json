@@ -155,24 +155,25 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "map-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1910.01567",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "credit": "The Mansfield et al. (2020) Spitzer 4.5 um brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-hosted-planet.mts",
+        "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
-          "kelt-9b-observational-measurements"
+          "kelt-9b-mansfield-2020-phase-curve",
+          "kelt-9b-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-hosted-planet.mts",
+      "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default lens rendered as the dayside disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],
