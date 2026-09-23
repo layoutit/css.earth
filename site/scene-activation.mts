@@ -1,6 +1,7 @@
 import type { BrowserWindow } from './browser-types.mts';
 import { errorMessage, record } from './browser-types.mts';
 import { readNavigationSelection } from './navigation-request.mts';
+import { SCENE_OBJECTS } from './objects.mts';
 import { withDataset } from './dataset-url.mts';
 import type { createPreparedWorldNavigation, WorldHandoff } from './prepared-world-navigation.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
@@ -18,9 +19,9 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function restore(session: SceneSession, handoff?: WorldHandoff) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
-    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url)) : null;
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, SCENE_OBJECTS) : null;
     if (initialSelection?.subject.kind === 'overview' && !initialSelection.savedView) {
-      const target = navigation?.overviewTarget?.({ scope: initialSelection.subject.scope, objectId, fromId: objectId, mount });
+      const target = navigation?.overviewTarget?.({ scope: initialSelection.subject.overview.scope, objectId, fromId: objectId, mount });
       if (target) {
         const framed = await session.wait(navigation!.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,

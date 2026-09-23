@@ -14,7 +14,7 @@ type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
 /** Reuse a ready session for dataset changes, saved views, and overview/detail selections. */
 export async function focusExistingScene({ session, request, selectionTransition, navigation, requests, view,
-  windowTarget, getReducedMotion, setOverview, syncPlayback }: {
+  windowTarget, getReducedMotion, commitSelection, syncPlayback }: {
   session: SceneSession;
   request: NavigationRequest;
   selectionTransition?: ShellNavigationTransition | null;
@@ -23,7 +23,7 @@ export async function focusExistingScene({ session, request, selectionTransition
   view: SceneView;
   windowTarget: BrowserWindow;
   getReducedMotion(): boolean;
-  setOverview(enabled: boolean, transition?: ShellNavigationTransition | null): void;
+  commitSelection(request: NavigationRequest, transition?: ShellNavigationTransition | null): void;
   syncPlayback(): void;
 }) {
   const datasetSelection = selectSceneDataset(session, request.url, request.signal);
@@ -61,7 +61,7 @@ export async function focusExistingScene({ session, request, selectionTransition
   }
   if (!requests.advance(request, 'committing')) return false;
   if (!restore) view.commit(request, session);
-  setOverview(request.subject.kind === 'overview', selectionTransition);
+  commitSelection(request, selectionTransition);
   await view.bind(session, { restore, request });
   if (!requests.owns(request)) return false;
   requests.finish(request, 'finished'); syncPlayback();

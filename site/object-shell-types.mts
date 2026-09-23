@@ -1,9 +1,7 @@
-import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
 import type { NavigationContent } from './navigation-content.mts';
 import type { ObjectEntry } from './object-schema.mts';
-import type { ShellOverview } from './shell-selection.mts';
-import type { PreparedFocusPresentation } from './prepared-focus.mts';
+import type { SceneOverview, SceneSubject, SelectionTarget } from './scene-selection.mts';
 import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 
@@ -24,6 +22,7 @@ export interface ShellSettingsOptions {
 
 export interface ShellOptions extends Partial<ShellSettingsOptions> {
   objectId: string;
+  readSelection(): SceneSubject;
   documentTarget?: Document;
   windowTarget?: BrowserWindow;
   onCategoryChange?(classification: string | null): void;
@@ -31,11 +30,11 @@ export interface ShellOptions extends Partial<ShellSettingsOptions> {
 
 export type ShellNavigationTarget =
   | { kind: 'object'; object: ObjectEntry; targetWorldCamera?: WorldCameraPose }
-  | { kind: 'overview'; overview: ShellOverview; preview: boolean };
+  | { kind: 'overview'; overview: SceneOverview; preview: boolean };
 
 export interface ShellNavigationTransition {
   /** Publish the arriving selection while its camera can still be in flight. */
-  arrive(selection: { overview: boolean; content?: NavigationContent }): void;
+  arrive(selection: { subject: SelectionTarget; content?: NavigationContent }): void;
   /** Roll back an unarrived preview and release the card's flight lock. */
   dispose(): void;
 }
@@ -49,8 +48,7 @@ export interface ObjectShell {
   setDestinations(provider: PreparedDestinationRuntime | null | undefined): void;
   selectPlace(id: string): Promise<void>;
   setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined): void;
-  setPreparedFocus(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;
-  setOverview(enabled: boolean): void;
+  presentSelection(): void;
   setCamera(provider: ShellCamera | null): void;
   setMotionEnabled(enabled: boolean): void;
   setPlaybackState(state: PlaybackState): void;
