@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-spot-occultation@1",
+  "source": "Haris, Tuomi & Hackman (2025), A&A 704, A102, Table 3 and Section 3.4; doi:10.1051/0004-6361/202452633",
+  "event": {
+    "planet": "hd-189733b",
+    "transitIndex": 2165,
+    "conjunctionBjdMinus2450000": 9435.46,
+    "midEventOffsetSeconds": 1890,
+    "minimumAngularRadiusDegrees": 5.0,
+    "contrast": 0.076,
+    "midEventOffsetUncertaintySeconds": {
+      "lower": 82,
+      "upper": 65
+    },
+    "minimumAngularRadiusUncertaintyDegrees": {
+      "lower": 0.8,
+      "upper": 1.0
+    },
+    "contrastUncertainty": {
+      "lower": 0.025,
+      "upper": 0.041
+    },
+    "log10BayesFactor": 3.55
+  },
+  "method": "Table 3 posterior central values. Place a circular cap of the minimum angular radius at the planet centre at the event midpoint, using the hosted circular orbit. The source constrains an occulted active region along the transit chord, not a unique circular spot or unobserved stellar latitudes.",
+  "display": "Static camera-facing limb plate. The orbit sky position angle and direction across the displayed disc are conventions. TESS-band contrast is applied achromatically over the Gaia spectrum colour; no time evolution or rotation is shown."
+}

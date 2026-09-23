@@ -150,15 +150,49 @@
       "id": "starspot-map",
       "subject": "A map of HD 189733 A's starspots",
       "status": "excluded",
-      "finding": "SIMBAD classes the star a BY Draconis variable (rotating spots). No spot map is drawn: spots crossed during transits are strips at single moments, and no brightness map of the photosphere was found.",
+      "finding": "Haris, Tuomi & Hackman (2025) report several TESS transit-chord dark-region candidates, one of which is reconstructed in the spot-2021 lens. These snapshots do not constrain a global stellar brightness map or unobserved latitudes.",
       "revisitWhen": "A Doppler or light-curve inversion brightness map of HD 189733 A is published as data.",
       "evidence": [
-        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+189733"
+        "https://doi.org/10.1051/0004-6361/202452633",
+        "https://arxiv.org/html/2502.18129v1"
       ],
       "checked": [
         {
           "date": "2026-09-17",
           "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "starspot-2021-transit",
+      "subject": "2021 TESS dark-region occultation in HD 189733b transit 2165",
+      "status": "included",
+      "finding": "Haris, Tuomi & Hackman (2025), Table 3 report a candidate dark-region occultation with event midpoint +1890 s, minimum angular radius 5.0 degrees and TESS-band contrast 0.076. The spot-2021 lens displays one static minimum circular cap on the transit chord. The cap shape, sky orientation and achromatic display contrast are explicit model choices.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202452633",
+        "https://arxiv.org/html/2502.18129v1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "d3c1fb2acc2de28a56a6388553a6cf3fee6ada38"
+        }
+      ]
+    },
+    {
+      "id": "spot-rotation",
+      "subject": "Time-dependent rotation of the 2021 dark-region reconstruction",
+      "status": "deferred",
+      "finding": "The MVP keeps the dated occultation reconstruction on a stationary camera-facing limb plate. The star’s measured spin period does not establish where that dark region persisted at later dates, nor how it evolved; rotating the one-event patch would imply measurements the source does not provide.",
+      "revisitWhen": "A published multi-epoch spot track or a source-backed surface-coordinate and evolution model is available for HD 189733 A.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202452633",
+        "https://doi.org/10.1051/0004-6361/202346366"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "d3c1fb2acc2de28a56a6388553a6cf3fee6ada38"
         }
       ]
     },
