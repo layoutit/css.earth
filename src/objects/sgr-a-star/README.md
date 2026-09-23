@@ -27,7 +27,9 @@ image here is made with those: EHT's eht-imaging pipeline, run on the April 7 lo
 combinations drawn with a fixed seed from the 5594 of its Top Set (EHT Collaboration 2022, Sgr A* Paper III,
 [arXiv:2311.09479](https://arxiv.org/abs/2311.09479), Table "Parameters in the eht-imaging Pipeline Top Set"), then averaged.
 It sits behind the shadow disc, turned so celestial north is where the scene's sky has it, on eht-imaging's own display
-colour map (matplotlib afmhot), with opacity following the light.
+colour map (matplotlib afmhot), with opacity following the light. `node tools/objects/eht/topset-mean.mts sgr-a-star` remakes
+it from [the recipe](source/preparation/eht-topset.json): both releases by commit and git blob id, the pipeline's one change
+(one process per run), the toolchain and the 200 combinations.
 
 ## The S-stars
 
