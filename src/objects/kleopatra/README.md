@@ -59,7 +59,7 @@ A separate nearest-surface diagnostic compares 8,192 deterministic area-stratifi
 
 Matched source/result preparation previews from six directions retain the two lobes and neck. They share the existing CPU context renderer and a neutral material. They demonstrate mesh shape correspondence, not native browser parity or observation-pixel parity. Fine features become more angular at the 800-face budget.
 
-[Source test definitions](../../../tests/objects/unit/kleopatra/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/kleopatra/source.test.mts).
 
 ## Known problems
 

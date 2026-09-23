@@ -14,7 +14,7 @@ The shared recipe targets at most 800 native PolyCSS `u` raster triangles with 1
 
 The source-preserving reducer uses `regularize: false`. The optional triangle-quality bias produced one retained face centroid 1366.159 m from the source, beyond the unchanged 1350 m transfer limit. Disabling that option keeps 800 closed faces and gives an independently checked trial maximum of 979.090 m over 8192 samples in each direction. The retained-centroid correspondence check is also enforced in the body test. Trial measurements are separate from final baked-product qualification; they are sampled distances rather than an exhaustive surface-error bound.
 
-[Source test definitions](../../../tests/objects/unit/aemilia/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/aemilia/source.test.mts).
 
 ## Known problems
 

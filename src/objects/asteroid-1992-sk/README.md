@@ -16,7 +16,7 @@ Independent 8,192 area-stratified samples in each direction measured nearest-tri
 
 The recorded source-scalar and decoded-atlas checks are detailed below; their sampled results do not establish browser pixel parity.
 
-[Source test definitions](../../../tests/objects/unit/asteroid-1992-sk/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/asteroid-1992-sk/source.test.mts).
 
 ## Known problems
 

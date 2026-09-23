@@ -203,7 +203,7 @@ Run `pnpm test:node` for metadata, bindings and catalogue compilation. It covers
 malformed records, source conservation, reverse links and deterministic output.
 For changes to dataset selection or routing, also run the affected
 [selection](../../src/platform/object-selection-runtime.test.mts) and
-[router](../../site/test/navigation-router.test.mts) tests for cancellation and history.
+[router](https://github.com/layoutit/css.earth/blob/264ef405472f4713af68fa692b4b8fd0ccaf5690/site/test/navigation-router.test.mts) tests for cancellation and history.
 
 For dataset navigation or card presentation changes, run
 `pnpm test:node` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`) against an assembled build.

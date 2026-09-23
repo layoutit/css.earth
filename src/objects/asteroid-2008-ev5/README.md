@@ -16,7 +16,7 @@ An independent nearest-triangle comparison used 8,192 area-stratified samples in
 
 Source-scalar and decoded-atlas measurements are retained below. They are sampled preparation checks, not browser pixel-parity evidence.
 
-[Source test definitions](../../../tests/objects/unit/asteroid-2008-ev5/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/asteroid-2008-ev5/source.test.mts).
 
 ## Known problems
 

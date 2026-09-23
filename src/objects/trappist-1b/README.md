@@ -60,7 +60,7 @@ longitude, the smooth map puts it 1.6° from noon. The 28° west offset an earli
 
 ## Evidence
 
-- [`lens-fits.test.mts`](../../../tests/objects/unit/trappist-1b/lens-fits.test.mts) runs the shipped recipe and holds it to the
+- [`lens-fits.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1b/lens-fits.test.mts) runs the shipped recipe and holds it to the
   temperature and fit it was measured to give, checks the ephemeris against every eclipse in the light curve, and refits the old
   smooth map on the same data to compare the fit and find the hot spot.
 - The rendered [day side](source/reference/rendered-thermal-day.png), [terminator](source/reference/rendered-thermal-terminator.png)
