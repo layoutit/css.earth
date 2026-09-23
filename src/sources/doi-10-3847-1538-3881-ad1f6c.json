@@ -1,0 +1,34 @@
+{
+  "id": "doi-10-3847-1538-3881-ad1f6c",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Axisymmetric High Spot Coverage on Exoplanet Host HD 189733 A",
+  "identifiers": [
+    { "type": "doi", "value": "10.3847/1538-3881/ad1f6c" }
+  ],
+  "links": [
+    { "role": "landing", "url": "https://doi.org/10.3847/1538-3881/ad1f6c", "label": "The Astronomical Journal" },
+    { "role": "original", "url": "https://www.astroexplorer.org/details/ajad1f6cf7", "label": "Figure 7 and caption, AAS Journals" }
+  ],
+  "evidence": [
+    { "path": "src/objects/hd-189733/source/photometry/narrett-2024-band-model.json", "locator": "/panel" },
+    { "path": "src/objects/hd-189733/source/photometry/narrett-2024-figure-7.jpg", "locator": "/figure-7-left-panel" },
+    { "path": "src/objects/hd-189733/text.json", "locator": "/datasets/activity-model" }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "I. S. Narrett, B. V. Rackham and J. de Wit (2024), AJ 167, 107, Figure 7; original paper and figure CC BY 4.0",
+      "scope": "HD 189733 A hypothetical spot-band model",
+      "evidence": "src/objects/hd-189733/source/photometry/narrett-2024-figure-7.jpg"
+    },
+    {
+      "kind": "limitation",
+      "text": "Figure 7 is a hypothetical example consistent with the authors' inferred coverage and variability. It is not a resolved image or measured spot map.",
+      "scope": "Spot-band model",
+      "evidence": "src/objects/hd-189733/source/photometry/narrett-2024-band-model.json#/limits"
+    }
+  ],
+  "publisher": "American Astronomical Society"
+}

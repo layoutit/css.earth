@@ -36,6 +36,11 @@
               "id": "spot-2021",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "activity-model",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
