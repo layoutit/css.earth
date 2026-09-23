@@ -224,7 +224,9 @@ export function formatExploration(session:ExplorationSession & {readonly directo
   else lines.push('No retrievable observation in this configured, bounded search. This does not establish that no observation exists.');
   for(const choice of session.choices){
     const d=choice.display,size=d.advertisedKilobytes===null?'size unknown':`${d.advertisedKilobytes} kB advertised`;
-    lines.push(`${choice.pick}. ${d.instrument} · ${displayTime(d.observationTime.startIso,d.observationTime.endIso)} · ${d.productKind??'product kind unknown'}`,
+    const instrument = d.instrument === choice.telescope || d.instrument.startsWith(`${choice.telescope} / `)
+      ? d.instrument : `${choice.telescope} / ${d.instrument}`;
+    lines.push(`${choice.pick}. ${instrument} · ${displayTime(d.observationTime.startIso,d.observationTime.endIso)} · ${d.productKind??'product kind unknown'}`,
       `   ${choice.state==='ready'?'Qualified product available':'Retrieval and qualification available'} · ${size} · ${d.metadataBasis} metadata`,
       `   ${displayWavelengths(d.wavelengthsMicrometres)}`,
       `   ${choice.reason}`);
@@ -236,10 +238,18 @@ export function formatExploration(session:ExplorationSession & {readonly directo
     lines.push('',`Spacecraft images in OPUS (${service.images} of ${service.opusTarget}; sharpest per instrument, not retrievable from here):`);
     for(const image of service.sharpest)lines.push(`  ${image.instrument} · ${image.startTime} · ${image.centreResolutionKmPerPixel??'unknown'} km/px at body centre${image.pixelsAcross===null?'':` · ${image.pixelsAcross} px across`} · ${image.instrumentImages} images · ${image.opusId}`);
   }
+  for(const service of answer.services)if('instruments' in service&&service.instruments.length){
+    lines.push('',`Live archive leads (${service.service}; ${service.scope}):`);
+    for(const lead of service.instruments)lines.push(`  ${lead.telescope} / ${lead.instrument} · ${lead.records} record(s) · example ${lead.sample}`);
+    lines.push('  Discovery only; no exact acquisition or qualification route is implied.');
+  }
   const appendIssues=(heading:string,issues:readonly {readonly identity?:string;readonly scope:string;readonly reason:string}[],total=issues.length)=>{
     if(!issues.length)return;
     lines.push('',`${heading} (${total}):`);
-    for(const issue of verbose?issues:issues.slice(0,5))lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);
+    for(const issue of verbose?issues:issues.slice(0,5)){
+      const row=`${issue.identity??issue.scope}: ${issue.reason}`;
+      lines.push(`  ${verbose?row:briefDiagnostic(row)}`);
+    }
     if(!verbose&&issues.length>5)lines.push(`  ${issues.length-5} more in the saved result.`);
   };
   const statusIssues=verbose?answer.issues:(()=>{

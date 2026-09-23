@@ -13,6 +13,7 @@ import { nativeQualificationRoute } from './vo/access.mts';
 import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
 import { searchOpus, type OpusService } from './opus.mts';
+import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadService } from './archive-leads.mts';
 
 export const EXPLORATION_SCHEMA = 'cssearth-telescope-exploration@1';
 export interface ExplorationRequest extends DiscoveryRequest {}
@@ -30,6 +31,8 @@ export interface ExplorationDisplay {
 export interface ExplorationChoice {
   readonly pick: number; readonly key: string; readonly state: 'ready' | 'qualify';
   readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
+  /** The VO endpoint used for qualification; `telescope` is the archive's human-readable facility or mission. */
+  readonly archiveService?: string;
   readonly reference: ExplorationReference; readonly display: ExplorationDisplay;
   readonly familyEvidence: ObservationFamilyEvidence;
   readonly configuration?: QualificationConfiguration; readonly product?: QualifiedObservation;
@@ -40,7 +43,7 @@ export interface ExplorationIssue {
   readonly code: 'unknown-target' | 'ambiguous-target' | 'provider-unavailable' | 'provider-overflow' | 'provider-target-unknown' | 'unsupported-observation' | 'filter-unresolved' | 'source-unavailable' | 'coverage';
   readonly reason: string; readonly identity?: string;
 }
-export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService }
+export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService; readonly archiveLeads?: readonly ArchiveLeadService[] }
 export interface ExplorationOutcome {
   /** A choice is a current route, not a guarantee that retrieval or qualification will succeed. */
   readonly selection: 'available' | 'none';
@@ -52,7 +55,7 @@ export interface ExplorationAnswer {
   readonly target: string; readonly targetResolution: TargetResolution;
   readonly outcome: ExplorationOutcome;
   readonly choices: readonly ExplorationChoice[]; readonly unresolved: readonly ExplorationIssue[]; readonly unsupported: readonly ExplorationIssue[];
-  readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService)[]; readonly coverage: readonly TargetCoverage[];
+  readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService | ArchiveLeadService)[]; readonly coverage: readonly TargetCoverage[];
   /** The pinned SIMBAD answers a target outside the catalogue was resolved from in this run. */
   readonly skyResolution?: SkyResolution['evidence'];
 }
@@ -176,8 +179,9 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
         continue;
       }
       const reference: ExplorationReference = { kind: 'vo-acquisition', acquisitionKey: spec.key, observation: observation.key, snapshot: observation.snapshot };
-      choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: observation.service, mode: ready?.mode ?? `native-${spec.kind}`, observation: observation.key, program: spec.key, reference, familyEvidence: observation.familyEvidence,
-        display: { instrument: observation.service, observationTime: { startIso: observation.startIso, endIso: observation.endIso }, productKind: observation.kind,
+      choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: observation.telescopeName ?? observation.service, archiveService: observation.service, mode: ready?.mode ?? `native-${spec.kind}`, observation: observation.key, program: spec.key, reference, familyEvidence: observation.familyEvidence,
+        display: { instrument: observation.instrument ?? 'instrument unknown',
+          observationTime: { startIso: observation.startIso, endIso: observation.endIso }, productKind: observation.kind,
           wavelengthsMicrometres: observation.wavelengthsMicrometres, advertisedKilobytes: observation.access.estimatedKilobytes, metadataBasis: ready ? 'qualified' : 'advertised' },
         ...(ready ? { product: ready } : { configuration: { kind: 'archive-acquisition', key: spec.key, request: canonicalRequest } as const }),
         reason: ready ? 'Existing qualified artifact; pins will be revalidated before use.' : 'Exact archive access operation is available; selecting it retrieves and qualifies this identity.',
@@ -185,7 +189,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     }
   }
   choices.sort((a, b) => (a.state === 'ready' ? 0 : 1) - (b.state === 'ready' ? 0 : 1) || a.key.localeCompare(b.key));
-  const services = [...inputs.vo?.services ?? [], ...inputs.opus ? [inputs.opus] : []], issues: ExplorationIssue[] = [];
+  const services = [...inputs.vo?.services ?? [], ...inputs.opus ? [inputs.opus] : [], ...inputs.archiveLeads ?? []], issues: ExplorationIssue[] = [];
   for (const service of services) {
     if (service.state === 'unavailable') issues.push({ scope: 'provider', code: 'provider-unavailable', identity: service.service, reason: `${service.scope}. ${service.reason}` });
     else if (service.state === 'overflow') issues.push({ scope: 'provider', code: 'provider-overflow', identity: service.service, reason: `${service.scope}. ${service.reason}` });
@@ -227,8 +231,10 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   const sky = request.skyTarget ? [skyCatalogueEntry(request.skyTarget)] : [];
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
-  const [inputs, opus] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
-  return { ...inputs, opus };
+  const target = targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
+  const [inputs, opus] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target)]);
+  const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target), searchGeminiLeads(root, target)]);
+  return { ...inputs, opus, archiveLeads };
 }
 
 export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<ExplorationAnswer> {

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { CAPTION_LIMIT, abstractText, displayName, evidenceScore, extractCaptions, hostNames, isChallenge, mentions, openAlexQuery, parseOpenAlexResponse, rankWorks, relevantCaptions } from './papers.mts';
+import { CAPTION_LIMIT, abstractText, arxivQuery, displayName, evidenceScore, extractCaptions, hostNames, isChallenge, mentions, openAlexQuery, parseArxivResponse, parseOpenAlexResponse, rankWorks, relevantCaptions, searchPapers } from './papers.mts';
 import { parseCli } from './cli.mts';
 
 const fixtures = resolve(import.meta.dirname, '../../../tests/fixtures/telescope-papers');
@@ -52,6 +52,27 @@ test('the OpenAlex query searches title and abstract of papers only', () => {
 test('a target name with the OpenAlex wildcard is searched without it', () => {
   const url = new URL(openAlexQuery('Sagittarius A*'));
   assert.equal(url.searchParams.get('filter'), 'title_and_abstract.search:Sagittarius A ,type:article|review|preprint|letter');
+});
+
+test('a temporary OpenAlex failure falls back to source-identified arXiv works within the same request budget', async () => {
+  const feed = `<feed xmlns="http://www.w3.org/2005/Atom"><entry><id>http://arxiv.org/abs/2609.12345v2</id>
+    <title>Io JIRAM maps</title><summary>JIRAM mapped Io hotspots</summary><published>2026-09-20T00:00:00Z</published>
+    <author><name>A. Researcher</name></author></entry></feed>`;
+  const calls: string[] = [];
+  const fetcher: typeof fetch = async input => {
+    const url = String(input); calls.push(url);
+    if (url.startsWith('https://api.openalex.org/')) return new Response('rate limited', { status: 429 });
+    if (url.startsWith('https://export.arxiv.org/')) return new Response(feed, { headers: { 'content-type': 'application/atom+xml' } });
+    return new Response('%PDF', { headers: { 'content-type': 'application/pdf' } });
+  };
+  const result = await searchPapers(resolve(import.meta.dirname, '../../..'), { target: 'Io', instrument: 'JIRAM', fetcher });
+  assert.equal(result.source, 'arxiv'); assert.match(result.sourceIssue!, /429/u);
+  assert.equal(result.requests, 3); assert.equal(result.works[0]?.arxiv, 'https://arxiv.org/abs/2609.12345');
+  assert.equal(result.works[0]?.openAlex, undefined); assert.equal(result.works[0]?.access.status, 'fetchable');
+  assert.match(calls[1]!, /export\.arxiv\.org/u);
+  assert.match(new URL(arxivQuery('Io', 'JIRAM')).searchParams.get('search_query')!, /all:"Io" AND all:"JIRAM"/u);
+  assert.throws(() => parseArxivResponse('<html>not Atom</html>'), /Atom feed/u);
+  await assert.rejects(searchPapers(resolve(import.meta.dirname, '../../..'), { target: 'Io', fetcher: async () => new Response('', { status: 400 }) }), /OpenAlex returned HTTP 400/u);
 });
 
 test('a hosted body is searched together with any one of its host names', () => {

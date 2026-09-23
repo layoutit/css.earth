@@ -11,6 +11,11 @@ import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../ob
 export interface ServiceProfile {
   readonly authority: string; readonly service: string; readonly table: string; readonly model: DiscoverySnapshot['model'];
   readonly identityColumns: readonly string[]; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly documentation: string;
+  readonly label?: string;
+  /** Archive collection restriction when one TAP service mixes unrelated missions. */
+  readonly collections?: readonly string[];
+  readonly compactNameVariants?: boolean;
+  readonly facetByInstrument?: boolean;
 }
 /** The archive boundary needs only explicit discovery/subset inputs. Scientific acceptance
  * criteria remain in CapabilityRequest and are never synthesized for target exploration. */
@@ -39,25 +44,36 @@ export const SERVICES: readonly ServiceProfile[] = [
   { authority: 'ivo://eso.org', service: 'https://archive.eso.org/tap_obs', table: 'ivoa.ObsCore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://archive.eso.org/tap_obs' },
   { authority: 'ivo://alma', service: 'https://almascience.eso.org/tap', table: 'ivoa.obscore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://almascience.eso.org/alma-data/archive/archive-notebooks/nb9_ALMA_Download_data.html' },
   { authority: 'ivo://esa/psa', service: 'https://psa.esa.int/psa-tap/tap', table: 'psa.epn_core', model: 'epn-tap-2.0', identityColumns: ['granule_uid'], documentation: 'https://archives.esac.esa.int/psa/' },
+  { authority: 'ivo://archive.stsci.edu/caomtap', service: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/', table: 'ivoa.obscore',
+    model: 'obscore-1.1', identityColumns: ['access_format', 'obs_publisher_did', 'obs_id', 'access_url'], timeScale: 'utc', collections: ['JWST'], label: 'MAST JWST', compactNameVariants: true, facetByInstrument: true,
+    documentation: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/examples' },
+  { authority: 'ivo://archive.stsci.edu/caomtap', service: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/', table: 'ivoa.obscore',
+    model: 'obscore-1.1', identityColumns: ['access_format', 'obs_publisher_did', 'obs_id', 'access_url'], timeScale: 'utc', collections: ['HST'], label: 'MAST HST', compactNameVariants: true, facetByInstrument: true,
+    documentation: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/examples' },
 ];
 export interface ArchiveTarget { readonly id: string; readonly names: readonly string[]; readonly classification?: string; readonly classificationSource?: string }
 /** `in-field` means the archive names another target but the record's footprint intersects the requested ICRS circle: the
  * target is in the field, which is not a target identity. It only arises from a region query (`targetQuery` with a region). */
 export interface TargetAssociation { readonly status: 'confirmed' | 'ambiguous' | 'unmatched' | 'in-field'; readonly target: string; readonly reason: string }
 const nameKey = (s: string) => s.trim().toLocaleLowerCase('en-US').replace(/\s+/gu, ' ');
+const compactKey = (s: string) => nameKey(s).replace(/[\s-]+/gu, '');
+const catalogueDesignation = /^[A-Za-z]{1,12}[\s-]*\d+[A-Za-z0-9\s-]*$/u;
+const archiveNameMatch = (left: string, right: string) => nameKey(left) === nameKey(right) ||
+  catalogueDesignation.test(left) && catalogueDesignation.test(right) && compactKey(left) === compactKey(right);
 export function associateTarget(rawName: Json | undefined, rawClass: Json | undefined, target: ArchiveTarget, catalogue: readonly ArchiveTarget[]): TargetAssociation {
   if (typeof rawName !== 'string' || !rawName.trim()) return { status: 'unmatched', target: target.id, reason: 'No archive target name.' };
   // EPN multi-target lists cannot be treated as a measurement of one named body.
   if (/[#;,]/u.test(rawName)) return { status: 'ambiguous', target: target.id, reason: 'Multiple archive target names; no per-target measurement association.' };
   // A numbered minor-planet name can collide with a satellite name. Its class is required to disambiguate that shortened spelling.
-  const matches = catalogue.filter(t => t.names.some(n => nameKey(n) === nameKey(rawName) || t.classification === 'asteroid' && nameKey(n.replace(/^\(?\d+\)?\s+/u, '')) === nameKey(rawName)));
+  const matches = catalogue.filter(t => t.names.some(n => archiveNameMatch(n, rawName) || t.classification === 'asteroid' && nameKey(n.replace(/^\(?\d+\)?\s+/u, '')) === nameKey(rawName)));
   const classified = typeof rawClass === 'string' && rawClass.trim() ? matches.filter(t => t.classificationSource && nameKey(t.classification ?? '') === nameKey(rawClass)) : matches;
-  if (classified.length === 1 && classified[0]!.id === target.id) return { status: 'confirmed', target: target.id, reason: 'Exact catalogue name/alias and any supplied archive classification agree.' };
+  if (classified.length === 1 && classified[0]!.id === target.id) return { status: 'confirmed', target: target.id, reason: 'Unique catalogue name/alias under archive designation spelling, and any supplied classification agree.' };
   return { status: matches.some(t => t.id === target.id) ? 'ambiguous' : 'unmatched', target: target.id,
     reason: 'Archive target name/class does not establish a unique catalogue identity; sky overlap is not target association.' };
 }
 export interface DiscoveredObservation {
   readonly key: string; readonly snapshot: string; readonly service: string; readonly table: string;
+  readonly facility: string | null; readonly collection: string | null; readonly telescopeName: string | null; readonly instrument: string | null;
   readonly identities: Readonly<Record<string, Json>>; readonly target: TargetAssociation; readonly rawTarget: Json;
   readonly kind: string | null; readonly productType:ProductTypeMapping|null; readonly familyEvidence: ObservationFamilyEvidence; readonly calibration: { readonly scheme: string; readonly token: Json };
   readonly wavelengthsMicrometres: readonly [number | null, number | null]; readonly startIso: string | null; readonly endIso: string | null;
@@ -91,11 +107,14 @@ export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceP
     };
     const mime = string('access_format');
     if (mime && !/^[\w.+-]+\/[\w.+-]+(?:\s*;.*)?$/u.test(mime)) issues.push(`Malformed access_format ${JSON.stringify(mime)}; access protocol is unresolved.`);
-    const keys = epn ? ['granule_uid', 'granule_gid', 'obs_id'] : ['obs_publisher_did', 'obs_id'];
+    const keys = epn ? ['granule_uid', 'granule_gid', 'obs_id'] : profile.identityColumns;
     const uniqueIdentity = profile.identityColumns.every(k => row[k] !== undefined && row[k] !== null && row[k] !== '') && snapshot.response.rows.filter(r => profile.identityColumns.every(k => canonical(r[k] ?? null) === canonical(row[k] ?? null))).length === 1;
     if (!uniqueIdentity) issues.push('Declared row identity is absent or repeated; this record key is bound to its snapshot and row position.');
     const kind=epn && row.dataproduct_type === 'im' ? 'image' : epn && row.dataproduct_type === 'sc' ? 'cube' : string('dataproduct_type'),productType=mapIvoaProductType(kind);
+    const collection = string('obs_collection'), facility = string('facility_name');
     return { key: recordKey(snapshot, row, profile.identityColumns, index), snapshot: snapshot.response.raw.sha256, service: snapshot.service, table: snapshot.table,
+      collection, facility, telescopeName: collection && profile.collections?.includes(collection) ? collection : facility,
+      instrument: string('instrument_name'),
       identities: Object.fromEntries(keys.map(k => [k, row[k] ?? null])), rawTarget: row.target_name ?? null,
       target: fieldAssociation(associateTarget(row.target_name, row.target_class, target, catalogue), row.target_name, region), kind,productType,
       familyEvidence: productTypeFamilyEvidence(productType, { kind: 'archive-adapter', id: profile.authority, evidence: `${profile.service} ${profile.table}; ${profile.documentation}` }),
@@ -140,10 +159,18 @@ export const searchCircle = (request?: DiscoveryRequest): IcrsCircle | undefined
 export function targetQuery(profile: ServiceProfile, names: readonly string[], sampleLimit = 50, request?: DiscoveryRequest): string {
   if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)?$/u.test(profile.table)) throw new TypeError('Unvalidated TAP table identifier.');
   if (!Number.isSafeInteger(sampleLimit) || sampleLimit < 1 || sampleLimit > 1000 || !names.length) throw new TypeError('A bounded TAP target-name query is required.');
-  const literals = [...new Set(names)].map(n => { if (!n.trim() || /[\u0000-\u001f]/u.test(n)) throw new TypeError('Invalid target name.'); return `'${n.replaceAll("'", "''")}'`; });
+  const variants = profile.compactNameVariants ? names.flatMap(name => [name, name.replace(/\s+/gu, ''), name.replace(/\s+/gu, '-')]) : names;
+  const literals = [...new Set(variants)].map(n => { if (!n.trim() || /[\u0000-\u001f]/u.test(n)) throw new TypeError('Invalid target name.'); return `'${n.replaceAll("'", "''")}'`; });
   const byName = `target_name IN (${literals.join(',')})`;
   const circle = searchCircle(request);
   const filters = [circle && profile.model === 'obscore-1.1' ? `(${byName} OR ${regionClause(circle)})` : byName];
+  if (profile.collections?.length) {
+    const collections = profile.collections.map(name => {
+      if (!/^[A-Za-z0-9_-]+$/u.test(name)) throw new TypeError('Invalid archive collection.');
+      return `'${name}'`;
+    });
+    filters.push(`obs_collection IN (${collections.join(',')})`);
+  }
   if (request?.instrument !== undefined) {
     if (!request.instrument.trim() || /[\u0000-\u001f]/u.test(request.instrument)) throw new TypeError('Invalid instrument name.');
     filters.push(`instrument_name='${request.instrument.replaceAll("'", "''")}'`);
@@ -175,8 +202,31 @@ export function parseSnapshot(value: unknown): DiscoverySnapshot {
     request: jsonValue(r.request), query: requireString(r.query), scope: requireString(r.scope), sampleLimit, response, completeness };
 }
 /** A failed refresh never replaces a successful immutable snapshot. */
-export async function discover(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits): Promise<DiscoverySnapshot> {
-  const directory = resolve(root, 'output/telescopes/vo/metadata'), query = targetQuery(profile, names, 50, request), sampleLimit = 50;
+export const INSTRUMENT_FACET_LIMIT = 8;
+export const INSTRUMENT_SAMPLE_LIMIT = 5;
+export function instrumentFacetQuery(profile: ServiceProfile, names: readonly string[], request: DiscoveryRequest): string {
+  if (!profile.facetByInstrument || request.instrument) throw new TypeError('Instrument facets require an unfiltered faceted service.');
+  const query = targetQuery(profile, names, 50, request);
+  return query.replace('SELECT TOP 50 *', `SELECT DISTINCT TOP ${INSTRUMENT_FACET_LIMIT} instrument_name`)
+    .replace(/ ORDER BY [A-Za-z_, ]+$/u, ' ORDER BY instrument_name');
+}
+export interface InstrumentFacets { readonly names: readonly string[]; readonly complete: boolean; readonly evidence: string; readonly issues: readonly string[] }
+/** Enumerate archive modes before sampling rows, so a high-volume mode cannot hide every later one. */
+export async function discoverInstrumentFacets(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits): Promise<InstrumentFacets> {
+  const directory = resolve(root, 'output/telescopes/vo/metadata'), query = instrumentFacetQuery(profile, names, request);
+  await mkdir(directory, { recursive: true });
+  const response = (await astroquery({ operation: 'vo-tap', service: profile.service, query, maxrec: INSTRUMENT_FACET_LIMIT + 1,
+    directory, byteLimit: limits.metadataBytes, timeFormat: 'mjd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}) })).vo!;
+  if (response.queryStatus === 'ERROR') throw new Error(`Instrument search failed: ${response.issues.join('; ') || 'archive query error'}`);
+  const instruments = [...new Set(response.rows.map(row => row.instrument_name).filter((value): value is string => typeof value === 'string' && Boolean(value.trim())))];
+  if (instruments.length !== response.rows.length) throw new TypeError('Instrument facet response has missing or duplicate names.');
+  const complete = response.queryStatus === 'OK' && instruments.length < INSTRUMENT_FACET_LIMIT;
+  const result = { names: instruments, complete, evidence: response.raw.sha256, issues: response.issues };
+  await writeFile(resolve(directory, `${digest({ query, result })}.facets.json`), canonical({ query, result }));
+  return result;
+}
+export async function discover(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits, sampleLimit = 50): Promise<DiscoverySnapshot> {
+  const directory = resolve(root, 'output/telescopes/vo/metadata'), query = targetQuery(profile, names, sampleLimit, request);
   await mkdir(directory, { recursive: true });
   const response = (await astroquery({ operation: 'vo-tap', service: profile.service, query, maxrec: sampleLimit, directory, byteLimit: limits.metadataBytes,
     timeFormat: profile.model === 'obscore-1.1' ? 'mjd' : 'jd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}),
