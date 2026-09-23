@@ -63,6 +63,8 @@ export interface PreparedContextBody extends PreparedContextPoint {
   readonly unpackaged?: true;
   /** A host's authored presentation range: the camera distance up to which its system draws every member's orbit. */
   readonly orbitsWithinM?: number;
+  /** Caption the body over its middle instead of below it. */
+  readonly labelPlacement?: 'centre';
   /** A placed star measured to be bound to another with no measured orbit: its host and the pair's centre of mass. */
   readonly boundTo?: { readonly hostId: string; readonly centerM: PositionM };
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
@@ -488,12 +490,13 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
-    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM'];
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView);
     if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (input.unpackaged !== undefined && input.unpackaged !== true) throw new TypeError('A context body is unpackaged or not.');
+    if (input.labelPlacement !== undefined && input.labelPlacement !== 'centre') throw new TypeError(`Context body ${String(input.id)} label placement is ${String(input.labelPlacement)}, not centre.`);
     // A placed star can name the star it is measured to be bound to, with the pair's centre of mass.
     const bound = input.boundTo === undefined ? undefined : (() => {
       const pair = record(input.boundTo, 'bound companion', ['hostId', 'centerM']);
@@ -501,7 +504,8 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
     })();
     const body = { ...rawBody, ...(systemView ? { systemView } : {}), ...(bound ? { boundTo: bound } : {}),
       ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(input.unpackaged === true ? { unpackaged: true as const } : {}),
-      ...(input.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(input.orbitsWithinM, `context body ${String(input.id)} orbit range`) }) };
+      ...(input.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(input.orbitsWithinM, `context body ${String(input.id)} orbit range`) }),
+      ...(input.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}) };
     if (input.orbit === undefined) return Object.freeze(body);
     if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit) });
     return Object.freeze({ ...body, orbit: validateOrbitGeometry(jsonOrbitGeometry(input.orbit), body.positionM, focus.id, renderedIds, body.id) });

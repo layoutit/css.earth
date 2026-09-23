@@ -50,7 +50,7 @@ export interface WorldContextSource {
   readonly focus: WorldContextFocus;
   /** `unpackaged`: drawn from its astronomy record around a packaged host, with no object page (the S-stars around Sgr A*).
    * `orbitsWithinM`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
-  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number }[];
+  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number; readonly labelPlacement?: 'centre' }[];
   /** Preparation resolves catalogue membership before computing the context. */
   readonly bodySelection?: "catalog";
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
@@ -92,6 +92,8 @@ export interface PreparedWorldContext {
     readonly placement?: 'approximate';
     readonly unpackaged?: true;
     readonly orbitsWithinM?: number;
+    /** Caption the body over its middle instead of below it. */
+    readonly labelPlacement?: 'centre';
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
@@ -118,10 +120,11 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM'], `world context body ${index}`);
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement'], `world context body ${index}`);
+    if (body.labelPlacement !== undefined && body.labelPlacement !== 'centre') throw new TypeError(`World context body ${index} label placement is ${String(body.labelPlacement)}, not centre.`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (body.unpackaged !== undefined && body.unpackaged !== true) throw new TypeError('World context unpackaged is true or absent.');
-    return freeze({ ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
+    return freeze({ ...(body.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}), ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
   });
   if (new Set(bodies.map(body => body.id)).size !== bodies.length || bodies.some(body => body.id === focus.id)) throw new TypeError('World context body ids must be unique and exclude the focus.');
   const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'trail'], 'world context orbit');
