@@ -62,6 +62,10 @@ The shared F03 preview draws at most 1,600 uniformly selected usable samples, pr
 
 The [ESO SDP standard, version 8, section 8](https://www.eso.org/sci/observing/phase3/p3sdpstd.pdf) defines the source layout. A [compact real ESPRESSO excerpt](../tests/fixtures/telescope-vo/eso-spectrum/README.md) supplies an independent Astropy comparison; a saved-session test covers acquisition, descriptor discovery, export and identity refusals.
 
+On 2026-09-23 the public commands above acquired the 17,841,600-byte ESPRESSO product `ADP.2024-03-08T10:41:06.519` under a 20 MiB transfer limit. F03 exported 440,029 usable samples, excluding 3,233 with zero ERR. Astropy 8.0.1 independently reproduced those counts. The preview below draws 1,600 samples; its local command took 1.25 seconds and reported 376 MiB maximum resident set size with a 384 MiB Node heap cap. These are one-run figures, not a general performance bound.
+
+![HD 110067 ESPRESSO spectrum: 1,600 of 440,029 usable samples, with native wavelength and flux units](images/telescopes/vo-hd-110067-spectrum.png)
+
 ## Live evidence and validation
 
 On 2026-09-20 the public query/get/outputs/export flow delivered a 169,920-byte ESO Betelgeuse FITS cutout (112×112 usable samples). A second 95,040-byte cutout and the 8,458,560-byte direct FITS product passed the same saved-session acquisition/qualification/delivery owners and public output commands. Those additional runs reused the retained live ObsCore discovery response and fetched fresh access descriptions and science bytes. All three have distinct acquisition keys and science hashes; this alone does not prove every cross-subset cache rejection case.
