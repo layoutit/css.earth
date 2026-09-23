@@ -90,7 +90,8 @@ test('OPUS selects a native raw image with its label and support file, rejecting
       services: [{ service: OPUS_SERVICE, state: 'sampled', opusTarget: 'Himalia', sharpest: [{ opusId, instrument: 'Cassini ISS' }] }],
     } }, null, 2)}\n`);
     const result = await fetchOpusSource(exploration, 1, resolve(root, 'out'), async () => listing,
-      async input => fileResponse(Buffer.from(String(input).endsWith('.LBL') ? 'PDS_VERSION_ID = PDS3\n' : 'native'), 'application/octet-stream'));
+      async input => fileResponse(Buffer.from(String(input).endsWith('.LBL')
+        ? 'PDS_VERSION_ID = PDS3\n^IMAGE = "N1.IMG"\n^STRUCTURE = "PREFIX.FMT"\nEND\n' : 'native'), 'application/octet-stream'));
     assert.equal(result.files.length, 3); assert.equal(result.status, 'unresolved');
     assert.equal(result.files[0], resolve(root, 'out/holdings/volumes/COISS/data/N1.IMG'));
     assert.match(await readFile(result.source, 'utf8'), /"coiss_raw"/u);
