@@ -45,7 +45,7 @@
     {
       "id": "trappist-1-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "origin": "Repository-authored raster recipe: measured Gaia colour on the reference sphere and a modeled I+z limb-darkening plate",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -194,6 +194,29 @@
             "catalogueId": "gaia-dr3-trappist-1",
             "role": "material",
             "evidence": "src/objects/trappist-1/source/photometry/gaia-dr3-xp-continuous.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1-gillon-2016-limb-darkening",
+      "path": "photometry/gillon-2016-limb-darkening.json",
+      "origin": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/",
+      "credit": "Gillon et al. (2016), Temperate Earth-sized planets transiting a nearby ultracool dwarf star, Nature 533, 221, Extended Data Table 2",
+      "license": "Factual numerical coefficients; source attribution retained",
+      "acquisition": "Transcribed the I+z row of Extended Data Table 2 with its one-sigma uncertainties and theoretical-prior qualification",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1038-nature17448",
+            "role": "material",
+            "evidence": "src/objects/trappist-1/source/photometry/gillon-2016-limb-darkening.json#/u1"
           }
         ]
       }

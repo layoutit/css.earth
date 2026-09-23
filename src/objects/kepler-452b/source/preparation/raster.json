@@ -58,6 +58,8 @@
       "schema": "csskepler-452b-prepared-lighting@1",
       "storageModel": "prepared-full-resolution-density-row-shards",
       "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.",
       "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
       "ambientIntensity": 0.05,
       "shadowlessFloodLimbFloor": 0.35,
