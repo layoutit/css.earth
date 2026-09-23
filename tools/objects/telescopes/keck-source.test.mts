@@ -7,6 +7,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { TAP_SYNC } from '../keck/koa.mts';
 import { fetchKeckSource } from './keck-source.mts';
 import { openFitsSource } from './fits-source.mts';
+import { readSourceQuestion } from './source-relevance.mts';
 
 const koaid = 'N2.20090805.31896.fits';
 const row = { koaid, targname: 'HR 8799', koaimtyp: 'object', filehand: `/koadata9/NIRC2/20090805/lev0/${koaid}`, date_obs: '2009-08-05 00:00:00' };
@@ -37,6 +38,7 @@ test('selected Keck lead revalidates one exact public row, pins source bytes and
     assert.equal(source?.file, result.file);
     assert.match(source?.limitations.join(' ') ?? '', /raw Keck source file/u);
     assert.match(await readFile(result.source, 'utf8'), /"status": "unresolved"/u);
+    assert.equal((await readSourceQuestion(output)).archiveTargetName,'HR 8799');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

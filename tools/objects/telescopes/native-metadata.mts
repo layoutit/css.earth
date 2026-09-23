@@ -8,6 +8,7 @@ export interface NativeMetadata {
   readonly structures?: readonly NativeMetadata[];
   readonly quality?: { readonly policy: string; readonly samples: number; readonly finite: number; readonly usable: number; readonly flagged: number; readonly invalidUncertainty: number; readonly mask: string | null };
   readonly uncertainty?: { readonly status: 'validated' | 'unknown'; readonly kind: string | null; readonly structure: string | null };
+  readonly skyPosition?: { readonly status:'in-field'|'outside-field'|'unknown';readonly reason:string;readonly pixel?:readonly [number,number] };
   readonly structure: string;
   readonly units?: { readonly value: string; readonly source: string };
   readonly spectral?: { readonly axis?: number; readonly centersMicrometres: readonly number[]; readonly binEdgesMicrometres?: readonly number[]; readonly source: string; readonly usableBands?: readonly boolean[] };
@@ -21,6 +22,10 @@ export function parseNativeMetadata(raw: unknown, depth = 0): NativeMetadata {
   const spectral = v.spectral === undefined ? undefined : requireRecord(v.spectral);
   const quality = v.quality === undefined ? undefined : requireRecord(v.quality);
   const uncertainty = v.uncertainty === undefined ? undefined : requireRecord(v.uncertainty);
+  const skyPosition = v.skyPosition === undefined ? undefined : requireRecord(v.skyPosition,'sky position');
+  if(skyPosition && !['in-field','outside-field','unknown'].includes(String(skyPosition.status)))throw new TypeError('Invalid sky position status');
+  const pixel=skyPosition?.pixel===undefined?undefined:requireArray(skyPosition.pixel,'sky pixel').map(value=>requireFiniteNumber(value,'sky pixel'));
+  if(pixel&&pixel.length!==2)throw new TypeError('Sky pixel requires two coordinates');
   if (quality) for (const key of ['samples','finite','usable','flagged','invalidUncertainty']) { const n=requireFiniteNumber(quality[key]); if(!Number.isSafeInteger(n)||n<0||n>requireFiniteNumber(quality.samples))throw new Error('Invalid science quality counts'); }
   if(uncertainty && !['validated','unknown'].includes(String(uncertainty.status)))throw new Error('Invalid uncertainty status');
   if(spectral?.usableBands !== undefined && (requireArray(spectral.usableBands).length!==requireArray(spectral.centersMicrometres).length || requireArray(spectral.usableBands).some(x=>typeof x!=='boolean')))throw new Error('Invalid spectral mask');
@@ -32,6 +37,7 @@ export function parseNativeMetadata(raw: unknown, depth = 0): NativeMetadata {
     ...(v.structures ? {structures:requireArray(v.structures).map(s=>parseNativeMetadata(s,depth+1))}:{}),
     ...(quality ? {quality:{policy:requireString(quality.policy),samples:requireFiniteNumber(quality.samples),finite:requireFiniteNumber(quality.finite),usable:requireFiniteNumber(quality.usable),flagged:requireFiniteNumber(quality.flagged),invalidUncertainty:requireFiniteNumber(quality.invalidUncertainty),mask:quality.mask===null?null:requireString(quality.mask)}}:{}),
     ...(uncertainty ? {uncertainty:{status:uncertainty.status as 'validated'|'unknown',kind:uncertainty.kind===null?null:requireString(uncertainty.kind),structure:uncertainty.structure===null?null:requireString(uncertainty.structure)}}:{}),
+    ...(skyPosition ? {skyPosition:{status:skyPosition.status as 'in-field'|'outside-field'|'unknown',reason:requireString(skyPosition.reason,'sky position reason'),...(pixel?{pixel:pixel as [number,number]}:{})}}:{}),
     ...(units ? { units: { value: requireString(units.value), source: requireString(units.source) } } : {}),
     ...(spectral ? { spectral: { ...(spectral.axis===undefined?{}:{axis:requireFiniteNumber(spectral.axis)}), centersMicrometres: coordinates(requireArray(spectral.centersMicrometres).map(n => requireFiniteNumber(n))), source: requireString(spectral.source), ...(spectral.binEdgesMicrometres === undefined ? {} : {binEdgesMicrometres: coordinates(requireArray(spectral.binEdgesMicrometres).map(n=>requireFiniteNumber(n)),requireArray(spectral.centersMicrometres).length+1)}), ...(spectral.usableBands === undefined ? {} : {usableBands: requireArray(spectral.usableBands) as boolean[]}) } } : {}),
     calibration: requireArray(v.calibration).map(raw => { const row = requireRecord(raw); return { field: requireString(row.field), value: requireString(row.value) }; }),

@@ -91,6 +91,18 @@ the science image. The shared output path then uses the archive uncertainty unit
 uncovered pixels, following the [IRAC handbook's mosaic, uncertainty and coverage roles](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/31/).
 Source outputs retain an unresolved scientific verdict: acquisition and
 extraction alone do not establish target detection or fitness.
+The same `outputs` inspection now assesses the fetched source against the saved
+`explore` request. It reports the archive's target name, each recognized native
+structure's units, masks, uncertainty and calibration fields, and whether its
+kind and usable wavelength-bin edges support the requested kind and interval.
+For a saved SIMBAD position or explicit ICRS circle centre, Astropy checks a
+two-dimensional FITS science image's celestial WCS and reports `in-field`,
+`outside-field` or `unknown`. This is a nominal-position check, not a detection,
+full footprint test, moving-body ephemeris or calibration verdict. A Chandra
+event descriptor and a native OPUS PDS image keep their own operation routes;
+absence of a supported sky-image grid stays `unknown` rather than becoming a
+negative field claim. The [command guide](../packages/telescope/README.md#use)
+shows the output and its limits.
 If a selected Chandra ObsID has several level-2 event files, or a Spitzer AOR has several science
 FITS products, fetch lists their exact names and requires `--file NAME`. It does not silently pick
 one detector or channel. Repeat fetch with a new output directory to retrieve another file.
@@ -171,6 +183,10 @@ observations (Table 1) and radiance maps (Figure 2).
 
 Requests run one at a time, with a 20 second timeout and at most 25 per run. Nothing is written to
 disk unless you pass `--out`. Then the command saves `papers.json` and the downloaded HTML texts.
+
+### Software discovery with ASCL
+
+`pnpm -s telescope ascl Astroquery` searches titles in the live [ASCL software catalog](https://ascl.net/). `pnpm -s telescope ascl --product FETCH/output.product.json --json` first verifies the product receipt and original files, then matches its recorded software names to exact ASCL title aliases. The JSON reports the catalog URL and SHA-256 of the catalog response, ASCL IDs, entry URLs, code sites and preferred citations where available. A software listing is a citation lead, separate from the receipt's version claim and from source relevance, calibration and detection. Unmatched names are not proof that ASCL lacks the code. The catalog request is explicit, bounded to 8 MiB and does not rewrite the receipt. [ASCL's schema](https://ascl.net/home/getwp/3297) defines the software metadata fields.
 
 Use `query` when the wavelength, time, product kind and resolution are actual acceptance criteria:
 

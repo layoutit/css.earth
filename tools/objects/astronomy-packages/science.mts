@@ -227,6 +227,25 @@ def read_science(path):
                         if specaxis==len(shape)-1: usable[start:start+a.size] |= good
                         elif good.any(): usable[prefix[specaxis]]=True
             row['quality']={'policy':'finite-science; DQ/MASK=0; external coverage > 0 when supplied; finite nonnegative uncertainty when supplied','samples':total,'finite':finite,'usable':goodcount,'flagged':flagged,'invalidUncertainty':baderror,'mask':dq.name if dq is not None else 'external coverage > 0' if coverage is not None else None}
+            if request.get('position'):
+                point={'status':'unknown','reason':'This science array has no supported two-dimensional celestial WCS.'}
+                try:
+                    if len(shape)!=2: raise ValueError('A position check requires a two-dimensional science image.')
+                    with warnings.catch_warnings():
+                        warnings.simplefilter('ignore', AstropyWarning)
+                        celestial=WCS(h, fobj=hdus, fix=False).celestial
+                    if not celestial.has_celestial: raise ValueError('No celestial WCS in the science image.')
+                    position=request['position']
+                    coordinate=SkyCoord(position['raDegrees']*u.deg,position['decDegrees']*u.deg,frame='icrs')
+                    x,y=celestial.world_to_pixel(coordinate)
+                    if not np.isfinite(x) or not np.isfinite(y): raise ValueError('Celestial WCS returned no finite pixel position.')
+                    inside=-.5<=x<shape[1]-.5 and -.5<=y<shape[0]-.5
+                    point={'status':'in-field' if inside else 'outside-field',
+                           'reason':'The requested ICRS position projects inside the science pixel grid.' if inside else 'The requested ICRS position projects outside the science pixel grid.',
+                           'pixel':[float(x),float(y)]}
+                except Exception as e:
+                    point['reason']=str(e)
+                row['skyPosition']=point
             if region_check is not None:
                 # Reuse the extraction mask policy, row by row, without allocating a whole-image sky grid.
                 if region_wcs is not None:
@@ -300,7 +319,7 @@ elif request['operation']=='spectral-convert':
 else: raise ValueError('Unknown science operation')
 json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 `;
-export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent'; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
+export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle; position?: { readonly raDegrees:number;readonly decDegrees:number }; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent'; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
     const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });

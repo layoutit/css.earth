@@ -95,14 +95,14 @@ function choices(structures:readonly NativeMetadata[],sourceOnly=false):OutputCh
     {kind:'sphere',available:false,reason:'Use telescope export MAP/map.fits.product.json --output sphere after projection; native pixels are insufficient.'},
     {kind:'points',available:false,reason:'Export an existing physical object.json with --output points, volume or volume-lens-bank. A spectral cube requires a scientific reconstruction first; wavelength or radial velocity is not distance.'}];
 }
-export async function listOutputs(resultPath:string,structure?:string){
+export async function listOutputs(resultPath:string,structure?:string,position?:{readonly raDegrees:number;readonly decDegrees:number}){
   const source=await openFitsSource(resultPath);
   if(source){
     if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
-    const metadata=await sciencePackage({operation:'fits',path:source.file,...(source.companions?{companions:source.companions}:{})});
+    const metadata=await sciencePackage({operation:'fits',path:source.file,...(source.companions?{companions:source.companions}:{}),...(position?{position}:{})});
     const structures=requireArray(metadata.structures).map(s=>parseNativeMetadata(s));
     const outputs=choices(structures,true).map(({structure:_structure,...choice})=>choice);
-    return {source:source.path,sourceContext:undefined,outputs,limitations:source.limitations};
+    return {source:source.path,sourceContext:undefined,outputs,limitations:source.limitations,sourceMetadata:structures};
   }
   const pds=await openPdsSource(resultPath);
   if(pds){
@@ -112,7 +112,7 @@ export async function listOutputs(resultPath:string,structure?:string){
       const input=await nativeFigureInput(staged,resolve(scratch,'converted'),structure);
       const metadata=await sciencePackage({operation:'fits',path:input.file});
       const structures=requireArray(metadata.structures).map(s=>parseNativeMetadata(s));
-      return {source:pds.path,sourceContext:undefined,outputs:choices(structures,true),limitations:pds.limitations,native:input.native};
+      return {source:pds.path,sourceContext:undefined,outputs:choices(structures,true),limitations:pds.limitations,native:input.native,sourceMetadata:structures};
     }finally{await rm(scratch,{recursive:true,force:true});}
   }
   const d=await delivery(resultPath);
