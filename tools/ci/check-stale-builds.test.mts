@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { mkdtemp, mkdir, rm, utimes, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { rebuildStale, staleBuilds } from './check-stale-builds.mts';
+import { BUILD_RULES, rebuildStale, staleBuilds } from './check-stale-builds.mts';
 
 test('a build is stale when a compiled source is newer than its output or the output is missing', async () => {
   const root = await mkdtemp(join(tmpdir(), 'stale-builds-'));
@@ -54,4 +54,12 @@ test('--run rebuilds only the stale builds, in rule order, and nothing when they
     await utimes(join(root, 'b/src/b.ts'), 9000, 9000);
     await assert.rejects(rebuildStale(root, rules.slice(0, 2), async () => { throw new Error('tsup failed'); }), /tsup failed/);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('every root script a build rule runs exists in package.json', async () => {
+  const { scripts } = JSON.parse(await readFile(new URL('../../package.json', import.meta.url), 'utf8')) as { scripts: Record<string, string> };
+  for (const rule of BUILD_RULES) {
+    const script = /^pnpm (?!--)(\S+)$/u.exec(rule.command)?.[1];
+    if (script) assert.ok(script in scripts, `${rule.name} runs "${rule.command}", but package.json has no "${script}" script.`);
+  }
 });
