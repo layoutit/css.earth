@@ -109,7 +109,7 @@
           "meta": "relative intensity",
           "sourceUrl": "https://zenodo.org/records/20024778"
         },
-        "notes": "The mean of many maps that fit the spectra: dark and bright patches of cloud, drawn pixel by pixel as the paper draws them.",
+        "notes": "The mean of many maps that fit the spectra: dark and bright patches of cloud, interpolated between the map's pixel centres without changing any of them.",
         "legendNote": "Features are only one to two uncertainties deep; see Uncertainty."
       },
       {

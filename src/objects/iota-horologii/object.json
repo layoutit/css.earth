@@ -1,0 +1,329 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "iota-horologii",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "ι Horologii",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-01",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-02",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-03",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-04",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-05",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-06",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-07",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-08",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-09",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-10",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-11",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-12",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-13",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-14",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-15",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-16",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-17",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-18",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-01",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-02",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-03",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-04",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-05",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-06",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-07",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-08",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-09",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-10",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-11",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-12",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-13",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-14",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-15",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-16",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-17",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field-18",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 807012
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/iota-horologii-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "ι Horologii",
+      "classification": "star",
+      "color": "#fcf6ff",
+      "distanceAu": 3580207.3,
+      "description": "Young Sun-like star 17 parsecs away whose magnetic field was mapped 18 times over three years.",
+      "systemName": "ι Horologii system",
+      "order": 1747,
+      "context": {
+        "order": 1744
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        256861070345287070,
+        220493939959668200,
+        -415045727553215700
+      ],
+      "presentationToReference": [
+        0.7093326141871065,
+        -0.2694454525049719,
+        0.6513419920248321,
+        0.6088958790836035,
+        -0.23128380630729498,
+        -0.7587842970008112,
+        -0.35509583338232953,
+        -0.9348299038137369,
+        -0.000007078720996293063
+      ],
+      "orbitUpReference": [
+        0.2694454525049719,
+        0.23128380630729498,
+        0.9348299038137369
+      ],
+      "metersPerUnit": 2603264.5161290322,
+      "bodyRadiusM": 807012000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

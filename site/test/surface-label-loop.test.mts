@@ -1,3 +1,4 @@
+import { createCameraMotion } from '../../src/renderers/css/dist/navigation.js';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -20,7 +21,7 @@ test('surface labels keep no frame loop while they are off, the default', () => 
   const unused = (): never => { throw new Error('The label-loop fixture must not navigate.'); };
   const labels = mountSurfaceFeatureLabels({ host: document.getElementById('host')!, plan, objectId: 'moon', target: document.getElementById('mesh')!,
     pickingHost: host, inputSurface: host, flightLimits: unused,
-    navigation: { frame: { referenceFrame:'test',epochJdTt:1,originM:[0,0,0],presentationToReference:[1,0,0,0,1,0,0,0,1],metersPerUnit:1,bodyRadiusM:1 },
+    navigation: { motion: createCameraMotion(), frame: { referenceFrame:'test',epochJdTt:1,originM:[0,0,0],presentationToReference:[1,0,0,0,1,0,0,0,1],metersPerUnit:1,bodyRadiusM:1 },
       capture:unused,apply:unused,preparedFocus:unused,setPreparedFocus:unused,flyToPreparedFocus:unused,optics:unused,subscribe:unused },
     scene: document.getElementById('scene')!, zoomRange: () => ({ minimum: 1, maximum: 2 }), lifetime, onError() {},
     // The catalogue never arrives: this test is about the frame loop, not the labels it would place.

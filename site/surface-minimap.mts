@@ -6,7 +6,7 @@ interface MapElements { config: SurfaceMapConfig | null; rectangles: HTMLElement
 type WheelInput = Pick<WheelEvent, 'deltaY'> & Partial<Pick<WheelEvent, 'deltaX' | 'deltaMode' | 'ctrlKey' | 'preventDefault' | 'stopPropagation'>>;
 import { cssCameraAxesFromOrientation } from '../src/renderers/css/dist/navigation.js';
 import { directionOnMap, mapDirection, orbitMapCamera } from './surface-minimap-math.mts';
-import { surfaceViewRectangle } from './surface-minimap-rectangle.mts';
+import { loadSurfaceGeometry, loadedSurfaceGeometry } from './surface-geometry.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
 
 export function loadSurfacePreview(map: HTMLElement) {
@@ -59,9 +59,11 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       map.dataset.ready = String(Boolean(state));
       if (!state || !camera?.navigation) continue;
       visible = true;
+      const geometry = loadedSurfaceGeometry();
+      if (!geometry) { void loadSurfaceGeometry().then(schedule); continue; }
       const optics = camera.navigation.optics();
       const view = surfaceMapViewport(state.scene, optics);
-      const extent = surfaceViewRectangle({ eye: state.relative.map(x => x / camera!.navigation!.frame.bodyRadiusM) as [number, number, number],
+      const extent = geometry.surfaceViewRectangle({ eye: state.relative.map(x => x / camera!.navigation!.frame.bodyRadiusM) as [number, number, number],
         rotation: cssCameraAxesFromOrientation(state.world.pose.orientationXyzw), view, axes: state.axes });
       const center = extent.center ?? directionOnMap(state.relative, state.axes);
       map.dataset.centerU = center.u.toFixed(6);

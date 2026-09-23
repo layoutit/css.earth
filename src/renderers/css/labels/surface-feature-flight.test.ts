@@ -1,3 +1,4 @@
+import { createCameraMotion } from '../navigation/camera-motion.js';
 import { expect, test } from 'vitest';
 import { flyToSurfaceDirection, surfaceOrbitPose, surfaceOrbitRotation } from './surface-feature-flight.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
@@ -24,7 +25,7 @@ test('a flight applies eased poses each frame, ends on the target, and yields to
   const applied: WorldCameraPose[] = [];
   let current = world, time = 0;
   const frames: (() => void)[] = [];
-  const navigation = { frame: { originM: [...origin] }, capture: () => current, apply(pose: WorldCameraPose) { current = pose; applied.push(pose); } } as unknown as ObjectWorldNavigation;
+  const navigation = { motion: createCameraMotion(), frame: { originM: [...origin] }, capture: () => current, apply(pose: WorldCameraPose) { current = pose; applied.push(pose); } } as unknown as ObjectWorldNavigation;
   const windowTarget = { requestAnimationFrame: (callback: (t: number) => void) => { frames.push(() => callback(time)); return frames.length; }, cancelAnimationFrame() {}, performance: { now: () => time } };
   const flight = flyToSurfaceDirection(navigation, { directionWorld: [0, 1, 0], distanceM: 6000, durationMilliseconds: 100, windowTarget });
   for (time = 0; frames.length; time += 25) frames.shift()!();
@@ -32,14 +33,38 @@ test('a flight applies eased poses each frame, ends on the target, and yields to
   const relative = current.pose.positionM.map((value, axis) => value - origin[axis]!);
   expect(relative[1]).toBeCloseTo(6000, 6);
   expect(applied.length).toBeGreaterThan(3);
-  // A drag between frames moves the eye away from the flight's last pose: the flight stops.
+  // A new camera owner interrupts even a write smaller than the old position tolerance.
   const interrupted = flyToSurfaceDirection(navigation, { directionWorld: [1, 0, 0], distanceM: 5000, durationMilliseconds: 100, windowTarget });
   time = 0; frames.shift()!();
-  current = { ...current, pose: { ...current.pose, positionM: [current.pose.positionM[0] + 500, current.pose.positionM[1], current.pose.positionM[2]] } };
+  navigation.motion.cancel();
+  current = { ...current, pose: { ...current.pose, positionM: [current.pose.positionM[0] + 0.001, current.pose.positionM[1], current.pose.positionM[2]] } };
   time = 25; frames.shift()!();
   expect(await interrupted.done).toEqual({ completed: false });
   expect(frames).toHaveLength(0);
   const immediate = flyToSurfaceDirection(navigation, { directionWorld: [0, 0, 1], distanceM: 7000, reducedMotion: true, windowTarget });
+  frames.shift()!();
   expect(await immediate.done).toEqual({ completed: true });
   expect(current.pose.positionM[2] - origin[2]).toBeCloseTo(7000, 6);
+});
+
+
+test('replacement owns completion while an old surface publication is still awaiting presentation', async () => {
+  const motion = createCameraMotion(), frames = new Map<number, FrameRequestCallback>();
+  let next = 0, acknowledge!: (shown: boolean) => void;
+  const windowTarget = { performance: { now: () => 0 },
+    requestAnimationFrame(callback: FrameRequestCallback) { frames.set(++next, callback); return next; },
+    cancelAnimationFrame(id: number) { frames.delete(id); } };
+  const navigation = { motion, frame: { originM: [...origin] }, capture: () => world,
+    apply: () => new Promise<boolean>(resolve => { acknowledge = resolve; }) } as unknown as ObjectWorldNavigation;
+  const surface = flyToSurfaceDirection(navigation, { directionWorld: [0, 1, 0], distanceM: 6000, reducedMotion: true, windowTarget });
+  const [id, paint] = [...frames][0]!; frames.delete(id); paint(0);
+  let complete = false; void surface.done.then(() => { complete = true; });
+  await Promise.resolve(); expect(complete).toBe(false);
+  const replacement = motion.start({ windowTarget, advance: () => 'complete' });
+  expect(await surface.done).toEqual({ completed: false });
+  surface.cancel(); acknowledge(true); await Promise.resolve();
+  expect(replacement.signal.aborted).toBe(false);
+  const [replacementId, replacementPaint] = [...frames][0]!; frames.delete(replacementId); replacementPaint(0);
+  expect(await replacement.finished).toEqual({ completed: true });
+  expect(frames.size).toBe(0);
 });

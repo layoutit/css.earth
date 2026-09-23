@@ -1,0 +1,30 @@
+{
+ "id": "iota-horologii",
+ "classification": "star",
+ "order": 1747,
+ "physical": {
+  "name": "ι Horologii",
+  "horizonsCode": null,
+  "meanRadiusKm": 807012.0,
+  "gravitationalParameterKm3PerS2": 163236301251.58542,
+  "parent": null,
+  "effectiveTemperatureK": 6080
+ },
+ "physicalNotes": "Radius 1.16 +/- 0.04 solar radii and mass 1.23 +/- 0.12 solar masses: Bruntt et al. (2010, MNRAS 405, 1907), as tabulated by Alvarado-Gomez et al. (2018, MNRAS 473, 4326; arXiv:1710.02438), Table 1, the values the ZDI maps of this package were computed with. Temperature 6080 +/- 80 K from the same table. presentationUp: the display axis is a sky-plane convention.",
+ "star": {
+  "rightAscensionDegrees": 40.64179116281783,
+  "declinationDegrees": -50.7993179041391,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 17.357150201833974,
+  "properMotionRaMasPerYear": 333.7156354272668,
+  "properMotionDecMasPerYear": 219.42328991689652,
+  "radialVelocityKmPerS": 16.935308,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4745373133284418816 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/iota-horologii/source/photometry/gaia-dr3-source.csv; cross-identification HD 17051, HR 810, HIP 12653: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=iot+Hor",
+   "distance": "Gaia DR3 parallax 57.6131 +/- 0.0383 mas (same row): 17.36 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 333.716, 219.423 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 16.94 +/- 0.12 km/s; Alvarado-Gomez et al. (2018) measure 16.943 +/- 0.002 km/s from HARPSpol"
+  }
+ }
+}

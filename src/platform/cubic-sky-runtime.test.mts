@@ -1,3 +1,4 @@
+import { createCameraMotion } from '../renderers/css/dist/navigation.js';
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -71,7 +72,7 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
     opticalCenterX:326.5, opticalCenterY:280,
     surfaceRadius:144.65263161811257, focalLength:598.73636504, viewportWidth: 693 };
   let metricsReads = 0;
-  const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface:nativeElement(surface),
+  const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface:nativeElement(surface),
     trackballMetrics:() => { metricsReads += 1; return { ...trackball }; },
     rotate:value => publications.push(value) });
   const tick = (time: number) => { const callbacks=[...pending.values()]; pending.clear(); callbacks.forEach(callback=>callback(time)); };
@@ -256,7 +257,7 @@ test("sky orbit keeps screen axes through reversals, limb crossings and release"
     pitchResponse: 1.3 };
   const surface = new Surface(), publications: Publication[] = [];
   let reads = 0;
-  const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface: nativeElement(surface),
+  const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface: nativeElement(surface),
     trackballMetrics: () => { reads++; return completeTrackball({ ...trackball }); },
     rotate: value => publications.push(value) });
   const emit = (type: string, x: number, y: number, timeStamp: number) => surface.dispatch(type, { clientX: x, clientY: y, timeStamp });
@@ -335,7 +336,7 @@ test("wheel takes over a flight without leaving a camera callback", (t) => {
   }
   Object.defineProperty(globalThis, "HTMLElement", { configurable: true, value: Surface });
   const surface = new Surface(), publications: Publication[] = [];
-  const controls = createUnboundedMatrixDragControls({ runtimePolicy,
+  const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy,
     inputSurface: nativeElement(surface),
     trackballMetrics: () => ({ centerX:500, centerY:400, radius:250,
       surfaceRadius:275, focalLength:900,

@@ -13,4 +13,6 @@ export type { PerspectiveWorldContext } from './perspective-dolly.js';
 export { bindObjectNavigationTarget, supportsObjectNavigation } from '../solar-system/heliocentric-navigation.js';
 export { createCameraViewport } from './camera-viewport.js';
 export type { CameraViewport, CameraViewportSnapshot } from './camera-viewport.js';
+export { createCameraMotion } from './camera-motion.js';
+export type { CameraMotion } from './camera-motion.js';
 export { createCameraFlight } from './camera-flight.js';

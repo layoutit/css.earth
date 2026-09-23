@@ -1,3 +1,4 @@
+import { createCameraMotion } from '../renderers/css/dist/navigation.js';
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -21,7 +22,7 @@ test("drag constructor removes partially attached listeners if initial style pub
       configurable: true,
       set() { throw new Error("style failure"); },
     });
-    assert.throws(() => createUnboundedMatrixDragControls({ runtimePolicy,
+    assert.throws(() => createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy,
       inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() {},
@@ -37,7 +38,7 @@ test("drag destruction releases listeners and capture even if interaction comple
   try {
     const surface = new Surface();
     let updates = 0;
-    const controls = createUnboundedMatrixDragControls({ runtimePolicy,
+    const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy,
       inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() { updates += 1; },
@@ -84,7 +85,7 @@ test("native drag publication failure releases capture/listeners and reports ins
   globalThis.HTMLElement = nativeConstructor;
   try {
   const surface = new Surface(), errors: unknown[] = [];
-  const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface: nativeSurface(surface),
+  const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() { throw new Error("drag publication"); }, onError: (error) => errors.push(error) });
     surface.dispatch("pointerdown");
@@ -139,7 +140,7 @@ test("disposing during a release publication cannot restart the coast", t => {
   t.after(() => { globalThis.HTMLElement = previous; });
   const surface = new Surface();
   let disposeOnPublish = false;
-  const controls = createUnboundedMatrixDragControls({ runtimePolicy,
+  const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy,
     inputSurface: nativeSurface(surface),
     trackballMetrics: trackball,
     rotate() { if (disposeOnPublish) controls.destroy(); },
@@ -162,7 +163,7 @@ for (const action of ["complete", "wheel", "destroy", "failure"]) {
     const previous = globalThis.HTMLElement;
     globalThis.HTMLElement = nativeConstructor;
     const surface = new Surface(), samples = [], errors = [];
-    const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface: nativeSurface(surface),
+    const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() {}, onError: error => errors.push(error) });
     try {
@@ -197,7 +198,7 @@ test("a fresh accelerating drag after interrupting flight owns its own release",
   globalThis.HTMLElement = nativeConstructor;
   t.after(() => { globalThis.HTMLElement = previous; });
   const surface = new Surface();
-  const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface:nativeSurface(surface),
+  const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface:nativeSurface(surface),
     trackballMetrics:() => ({ centerX:0, centerY:0, radius:200,
       surfaceRadius:200, focalLength:600, viewportWidth:400,
       sceneMatrix:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),

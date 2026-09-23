@@ -1,3 +1,4 @@
+import { createCameraMotion } from '../../renderers/css/dist/navigation.js';
 import * as runtimePolicy from "../../../site/runtime-policy.mts";
 import { createRetainedCubicSkyOrbit, type OrbitServices, type RetainedCubicSkyOrbit, type RetainedOrbitOptions } from "../../renderers/css/dist/platform/object-orbit.js";
 import type { CameraPlan } from '../../renderers/css/navigation/types.ts';
@@ -76,6 +77,6 @@ export function orbitFixture(failure: OrbitFailure, cleanupFailure = false, depe
     if (signal?.aborted || !request.current()) return signal ? Promise.resolve(false) : undefined;
     request.commit(); return signal ? Promise.resolve(true) : undefined;
   } };
-  const arguments_: RetainedOrbitOptions = { runtimePolicy, onError(error: unknown): void { throw error; }, stage: stage.asElement(), inputSurface: stage.asElement(), cameraElement: new Surface().asElement(), sceneElement: new Surface().asElement(), worldContext, viewport, framePresenter, cameraPlan, objectId: "unit", onPublish() { if (failure === "publish") throw new Error("publish failure"); } };
+  const arguments_: RetainedOrbitOptions = { cameraMotion: createCameraMotion(), runtimePolicy, onError(error: unknown): void { throw error; }, stage: stage.asElement(), inputSurface: stage.asElement(), cameraElement: new Surface().asElement(), sceneElement: new Surface().asElement(), worldContext, viewport, framePresenter, cameraPlan, objectId: "unit", onPublish() { if (failure === "publish") throw new Error("publish failure"); } };
   return { create, callbacks, owners, stage, arguments: arguments_ };
 }

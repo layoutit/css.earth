@@ -4,6 +4,7 @@ import { rm } from "node:fs/promises";
 import { defineConfig } from "astro/config";
 import { SITE_ORIGIN } from "./site/seo.mts";
 import { performanceSourceMaps } from "./tools/performance/source-maps.mts";
+import { rendererSources } from "./tools/performance/renderer-sources.mts";
 import { searchServer } from './tools/cli/search-server.mts';
 import { prepareContextAvailability } from "./tools/prepare/prepare-context-availability.mts";
 import { assetOrigin } from "./site/asset-origin.mts";
@@ -52,7 +53,7 @@ export default defineConfig({
     },
   } }],
   vite: {
-    plugins: [searchServer(), performanceSourceMaps()],
+    plugins: [searchServer(), performanceSourceMaps(), rendererSources()],
     define: {
       __CSSEARTH_VERSION__: JSON.stringify(cssEarthVersion()),
     },

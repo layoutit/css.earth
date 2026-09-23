@@ -12,9 +12,11 @@ import IntersectionTests from '@cesium/engine/Source/Core/IntersectionTests.js';
 import Ray from '@cesium/engine/Source/Core/Ray.js';
 import { rotateWorldPosition } from '../src/renderers/css/dist/navigation.js';
 import { wrapMapU } from './surface-minimap-math.mts';
+import { viewScale } from './view-readout.mts';
 import { computeViewRectangle } from './vendor/cesium-view-rectangle.mjs';
 
 const dot = (a: PositionM, b: PositionM) => a.reduce((sum, x, i) => sum + x * b[i], 0);
+const referenceAxes: SurfaceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };
 
 // Adapt the existing CSS camera to Cesium's calculation interface. Coordinates
 // are in body radii, with map prime/east/north as Cesium X/Y/Z. No scene,
@@ -65,5 +67,36 @@ export function surfaceViewRectangle(state: MinimapCameraState) {
   return {
     bounds: rectangleOnMap(rectangle),
     center: center ? { u: wrapMapU(center.longitude / (Math.PI * 2)), v: .5 - center.latitude / Math.PI } : null,
+  };
+}
+
+export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes, mapLeftEdgeLongitudeDeg = 0 }: { eyeM: PositionM; radiusM: number; rotation: WorldRotation; view: MapViewport; focalPixels: number; axes?: SurfaceAxes; mapLeftEdgeLongitudeDeg?: number }) {
+  const camera = minimapCamera({ eye: [eyeM[0] / radiusM, eyeM[1] / radiusM, eyeM[2] / radiusM], rotation, view, axes: axes ?? referenceAxes });
+  const pick = (x: number) => {
+    const point = camera.pickEllipsoid({ x, y: .5 }, Ellipsoid.UNIT_SPHERE);
+    // At interstellar distances a subpixel globe may be below float precision.
+    return point && Math.abs(Math.hypot(point.x, point.y, point.z) - 1) < 1e-5 ? point : null;
+  };
+  const center = pick(.5);
+  const width = (view.right - view.left) * focalPixels;
+  const a = pick(.5 - .5 / width), b = pick(.5 + .5 / width);
+  let metersPerPixel, scaleTitle;
+  if (a && b) {
+    const cross = [a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x];
+    metersPerPixel = Math.atan2(Math.hypot(...cross), a.x * b.x + a.y * b.y + a.z * b.z) * radiusM;
+    scaleTitle = 'Approximate surface scale at the center of the view';
+  } else {
+    const forward = rotateWorldPosition(rotation, [0, 0, -1]);
+    metersPerPixel = -dot(eyeM, forward) / focalPixels;
+    scaleTitle = 'Scale at the distance of the selected object';
+  }
+  return {
+    altitudeM: Math.max(0, Math.hypot(...eyeM) - radiusM),
+    coordinates: center && axes ? {
+      latitude: Math.asin(Math.max(-1, Math.min(1, center.z / Math.hypot(center.x, center.y, center.z)))) * 180 / Math.PI,
+      // The axes count longitude from the map's left edge, as the feature labels do.
+      longitude: ((Math.atan2(center.y, center.x) * 180 / Math.PI + mapLeftEdgeLongitudeDeg) % 360 + 540) % 360 - 180,
+    } : null,
+    scale: viewScale(metersPerPixel), scaleTitle,
   };
 }

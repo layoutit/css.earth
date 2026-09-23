@@ -1,3 +1,4 @@
+import { createCameraMotion } from './camera-motion.js';
 import assert from 'node:assert/strict';
 import { afterEach, test, vi } from 'vitest';
 import { getEventListeners } from 'node:events';
@@ -128,7 +129,7 @@ function fixture(hitTest: (x: number, y: number) => boolean = () => false,
     }));
   };
   const readBounds = () => ({ left: bounds.x, top: bounds.y, width: bounds.width, height: bounds.height });
-  const controls = createUnboundedMatrixDragControls({ inputSurface: narrowElement(surface), runtimePolicy,
+  const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), inputSurface: narrowElement(surface), runtimePolicy,
     trackballMetrics: () => ({ centerX: 500, centerY: 400, radius: 250, surfaceRadius: 250, focalLength: 900,
       viewportWidth: 1000, sceneMatrix: [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
     surfaceFlyToState: () => ({ zoom: 1, minimumZoom: .5, maximumZoom: 4 }), surfaceFlyToHitTest: hitTest,

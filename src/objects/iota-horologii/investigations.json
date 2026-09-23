@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "iota-horologii",
+  "entries": [
+    {
+      "id": "constrained-maps",
+      "subject": "The symmetric and antisymmetric ZDI reconstructions",
+      "status": "excluded",
+      "finding": "The deposit holds three reconstructions per epoch; the paper's Figs. 1-3 show the unconstrained one, which is shown here. The constrained sets test how robust the maps are.",
+      "revisitWhen": "A reader asks to compare reconstructions.",
+      "evidence": [
+        "https://zenodo.org/records/17251923"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed8630a88a49f1036c92da9fa2009e3f555340ac"
+        }
+      ]
+    },
+    {
+      "id": "meridional-field",
+      "subject": "The meridional field component",
+      "status": "excluded",
+      "finding": "Each map also carries B_M; the paper's cycle analysis (butterfly diagrams) uses the radial and azimuthal components, which are shown here.",
+      "revisitWhen": "The meridional component is needed to explain something shown.",
+      "evidence": [
+        "https://arxiv.org/abs/2510.03146"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed8630a88a49f1036c92da9fa2009e3f555340ac"
+        }
+      ]
+    },
+    {
+      "id": "planet",
+      "subject": "The giant planet iota Horologii b",
+      "status": "unresolved",
+      "finding": "The star hosts a giant planet at about 1 au (Alvarado-Gomez et al. 2023, citing the radial-velocity discovery). No three-dimensional orbit of it is used in this package yet, so it is not placed.",
+      "revisitWhen": "A published three-dimensional orbit of the planet is added.",
+      "evidence": [
+        "https://arxiv.org/abs/2307.01744"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed8630a88a49f1036c92da9fa2009e3f555340ac"
+        }
+      ]
+    },
+    {
+      "id": "spin-direction",
+      "subject": "The direction of the spin axis on the sky",
+      "status": "unresolved",
+      "finding": "ZDI gives the axis's tilt to the line of sight (60 degrees adopted) but not its position angle, which is set toward celestial north.",
+      "revisitWhen": "Interferometry or another method measures the axis's position angle.",
+      "evidence": [
+        "https://arxiv.org/abs/2510.03146"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed8630a88a49f1036c92da9fa2009e3f555340ac"
+        }
+      ]
+    }
+  ]
+}

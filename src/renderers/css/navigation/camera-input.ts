@@ -1,4 +1,4 @@
-import { createCameraFlight } from './camera-flight.js';
+import type { createCameraFlight } from './camera-flight.js';
 import { validateDragControlsOptions } from './camera-input-options.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { MatrixDragControlsOptions } from './camera-input-options.js';
@@ -19,7 +19,7 @@ import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
 import { clearCursor, setBaseCursor } from './cursor-state.js';
 const POINTER_POSITION_EPSILON = 1e-6;
 export function createUnboundedMatrixDragControls({
-  inputSurface, runtimePolicy, trackballMetrics,
+  inputSurface, cameraMotion, runtimePolicy, trackballMetrics,
   flyToTrackballMetrics = trackballMetrics,
   rotate,
   surfaceFlyToState = null,
@@ -27,7 +27,7 @@ export function createUnboundedMatrixDragControls({
   onPointerStart = () => {}, onStart = () => {}, onEnd = () => {},
   onError = null,
 }: MatrixDragControlsOptions) {
-  validateDragControlsOptions({ inputSurface, runtimePolicy, trackballMetrics, flyToTrackballMetrics,
+  validateDragControlsOptions({ inputSurface, cameraMotion, runtimePolicy, trackballMetrics, flyToTrackballMetrics,
     rotate, surfaceFlyToState, surfaceFlyToHitTest, onPointerStart, onStart, onEnd, onError });
   const lifetime = createSceneLifetime();
   const guardNative = <Args extends unknown[], Result>(callback: (...args: Args) => Result) => (...args: Args) => {
@@ -206,13 +206,13 @@ export function createUnboundedMatrixDragControls({
       if (lifetime.disposed || flyToMotion !== owner) return;
       if (destination) destinationFlight.frames++; else flyToFrames++;
     });
-    const motion = createCameraFlight({ signal, windowTarget: {
+    const motion = cameraMotion.start({ signal, windowTarget: {
       requestAnimationFrame: requestFrame, cancelAnimationFrame: cancelFrame, performance: windowTarget.performance,
     }, onFinish(completed) {
       flyToMotion = null;
       if (destination) { if (completed) destinationFlight.completions++; else destinationFlight.cancels++; }
       else if (completed) flyToCompletions++; else flyToCancels++;
-      if (completed || signal?.aborted) guardNative(finishInteraction)();
+      guardNative(finishInteraction)();
     }, advance(elapsedS) {
       const progress = Math.min(1, elapsedS * 1000 / durationMilliseconds);
       publish(progress);
@@ -242,8 +242,8 @@ export function createUnboundedMatrixDragControls({
     if (plan === null) return false;
     event.preventDefault();
     cancelPointer();
-    const wasInteractionActive = interactionActive;
     replaceCameraMotion("fly-to");
+    const wasInteractionActive = interactionActive;
     flyToStarts += 1;
     if (!wasInteractionActive) {
       interactionActive = true;
@@ -367,6 +367,7 @@ export function createUnboundedMatrixDragControls({
     onPointerStart();
     if (lifetime.disposed) return;
     interruptMotion("pointer");
+    cameraMotion.cancel();
     if (lifetime.disposed) return;
 
     skyGesture = startsOnSky || tumbleOnly;
@@ -531,9 +532,9 @@ export function createUnboundedMatrixDragControls({
 
       return;
     }
-    if (activeMode !== "inertia" && activeMode !== "fly-to") return;
     if (hurryDestination()) { event.preventDefault(); return; }
     interruptMotion("wheel");
+    cameraMotion.cancel();
   };
   lifetime.onDispose(() => { interruptMotion("destroy"); clearCursor(inputSurface); });
   try {

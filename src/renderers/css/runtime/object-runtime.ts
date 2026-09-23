@@ -37,12 +37,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, onFeatureSelect, datasetEffects, inputSurface, runtimePolicy, diagnostics = false, capabilities = {}, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, onFeatureSelect, datasetEffects, inputSurface, runtimePolicy, diagnostics = false, capabilities = {}, worldContext, cameraMotion, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
     }
-    if (!worldContext || !viewport || !framePresenter) throw new TypeError('Object mount requires its shared world, viewport and frame presenter.');
+    if (!worldContext || !viewport || !framePresenter || !cameraMotion) throw new TypeError('Object mount requires its shared world, viewport and frame presenter.');
     const worldFrame = worldContext.frame;
     const initialLens = stage.dataset.preparedDataset;
     if (stage.dataset.preparedView) {
@@ -148,14 +148,13 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       },
       subscribe(listener: () => void) { viewListeners.add(listener); return () => viewListeners.delete(listener); },
     });
-    const navigation: ObjectWorldNavigation = Object.freeze({ frame: worldFrame,
+    const navigation: ObjectWorldNavigation = Object.freeze({ frame: worldFrame, motion: cameraMotion,
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal }) {
-        if (lifetime.disposed) return options ? Promise.resolve(false) : undefined;
+        if (lifetime.disposed || options?.signal.aborted) return options ? Promise.resolve(false) : undefined;
         setAllowed(false);
-        if (options) return getOrbit().presentWorldCamera(pose, worldFrame, options.signal);
-        getOrbit().applyWorldCamera(pose, worldFrame);
+        return getOrbit().applyWorldCamera(pose, worldFrame, options?.signal);
       },
       preparedFocus() { return getOrbit().preparedFocus(); },
       // Every prepared group is connected and painted once: an arriving flight
@@ -346,7 +345,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         // An undrawn mesh commits no textures; it stays hidden until it has them.
         canReveal: () => selection?.state().plan?.deferredTextures !== true,
          directionalSunPlan: definition.sun ?? null, worldContext,
-        cameraPlan, viewport, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
+        cameraPlan, viewport, cameraMotion, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
         onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);
@@ -359,7 +358,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Seed the incoming view before an asynchronous material selection can
       // paint. The shared world remains visible throughout a scene handoff.
       if (initialWorldCamera) {
-        orbit.applyWorldCamera(initialWorldCamera, worldFrame);
+        void orbit.applyWorldCamera(initialWorldCamera, worldFrame, cameraMotion.signal);
       }
       if (!preparedResources) resources.finishStartup();
       const initialized = await lifetime.wait(selection.start());
