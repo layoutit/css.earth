@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2301-03209",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mikal-Evans et al. (2023): A JWST NIRSpec Phase Curve for WASP-121b: Dayside Emission Strongest Eastward of the Substellar Point and Nightside Conditions Conducive to Cloud Formation",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2301.03209"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/acb049"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2301.03209",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/acb049",
+      "label": "ApJ Letters 943, L17"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2301.03209",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 3: dayside brightness temperatures 2,762 and 2,768 K, nightside 926 and 1,122 K, phase offsets 3.36 and 2.66 degrees"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters 943, L17",
+  "creators": [
+    "T. Mikal-Evans",
+    "D. K. Sing",
+    "J. Dong",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

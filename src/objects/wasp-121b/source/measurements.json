@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-121b",
+  "radiusKm": 122409.28,
+  "radiusSource": "Radius: Rp/R* 0.122657, the NRS1 (2.7 to 3.7 um) value of Evans-Soma et al. (2025), Nature Astronomy, 'SiO and a super-stellar C/O ratio in the atmosphere of the giant exoplanet WASP-121b' (arXiv:2506.01771), Supplementary Table 1 (white phase-curve fit, best-fit column), times the host record's radius; NRS2 (3.8 to 5.2 um) gives 0.123736, the planet looking larger where its atmosphere is more opaque. A sphere: tidal and rotational flattening are not modelled (Mikal-Evans et al. 2023 found an oblate shape did not change their phase-curve results). GM from that fit's planet mass, 1.170 Jupiter masses, at the IAU 2015 nominal Jupiter-to-Sun mass ratio 1/1047.348644, times the JPL solar GM.",
+  "orbitalPeriodDays": 1.27492503,
+  "orbitalPeriodSource": "Bourrier et al. (2020), A&A 635, A205, Table 1: 1.27492504 d; Evans-Soma et al. (2025, Supplementary Table 1) fit the phase curve with 1.27492503 d, the value used here",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius carrying the paper's own brightness-temperature maps. The planet is expected to be stretched toward its star; its oblateness is not measured, so it is not modelled."
+  },
+  "effectiveTemperatureK": 2762,
+  "effectiveTemperatureSource": "Mikal-Evans et al. (2023), ApJL 943, L17: dayside brightness temperature 2,762 +30/-32 K in the JWST NIRSpec NRS1 band, 2.70 to 3.72 um (https://arxiv.org/abs/2301.03209)"
+}

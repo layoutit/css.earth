@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/emspec_wav.txt",
+      "url": "https://zenodo.org/records/20651891/files/emspec_wav.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/emspec_fpfs_vals.txt",
+      "url": "https://zenodo.org/records/20651891/files/emspec_fpfs_vals.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/emspec_tbright_vals.txt",
+      "url": "https://zenodo.org/records/20651891/files/emspec_tbright_vals.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/spectra1d_wav_nrs1.txt",
+      "url": "https://zenodo.org/records/20651891/files/spectra1d_wav_nrs1.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/spectra1d_vals_nrs1.txt",
+      "url": "https://zenodo.org/records/20651891/files/spectra1d_vals_nrs1.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/spectra1d_wav_nrs2.txt",
+      "url": "https://zenodo.org/records/20651891/files/spectra1d_wav_nrs2.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/spectra1d_vals_nrs2.txt",
+      "url": "https://zenodo.org/records/20651891/files/spectra1d_vals_nrs2.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/whitelc_model_nrs1.txt",
+      "url": "https://zenodo.org/records/20651891/files/whitelc_model_nrs1.txt?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/evans-soma-2025/whitelc_model_nrs2.txt",
+      "url": "https://zenodo.org/records/20651891/files/whitelc_model_nrs2.txt?download=1"
+    }
+  ]
+}

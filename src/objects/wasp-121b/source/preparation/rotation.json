@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "wasp-121",
+  "source": "Assumed synchronous rotation: a planet 3.8 stellar radii from its star is expected to be tidally locked, and no rotation period of WASP-121b is measured. The authors' deposited starry models of the white light curves are reproduced with the rotation period equal to the orbit (see the README). Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/wasp-121b.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of WASP-121b is measured."
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-starry-toolchain@1",
+  "purpose": "One pinned starry boundary: starry (Luger et al. 2019) owns spherical-harmonic brightness maps, their intensities and the star-planet light curves they make, as published fits made with it parameterise them. cssEarth owns the paper transcription, the conversion to brightness temperature and scientific qualification.",
+  "license": "starry is copyright 2019-2021 Rodrigo Luger under the MIT license (STARRY-LICENSE.txt, from its 1.2.0 wheel). Theano-PyMC is BSD-3-Clause, PyMC3 Apache-2.0, exoplanet MIT; NumPy, SciPy, Matplotlib and Astropy are BSD-style.",
+  "micromamba": {
+    "channel": "conda-forge",
+    "packages": [
+      "python=3.9",
+      "numpy=1.21.6",
+      "scipy=1.7.3",
+      "pip=23.3.2",
+      "setuptools=65.6.3"
+    ]
+  },
+  "requirements": "starry-requirements.lock",
+  "starry": "1.2.0",
+  "platform": "The lock pins the files pip resolves on macOS arm64 with Python 3.9; another platform needs its own hashes added to the lock.",
+  "why": "starry 1.2.0 is the last release on the Theano backend that published fits used. It needs Theano-PyMC 1.1.2 and PyMC3 3.11.5, which need NumPy below 1.22, so it has its own environment rather than the astroquery toolchain's Python 3.12 and NumPy 2.",
+  "compilerFlag": "PyMC3 3.11.5 adds -fno-exceptions to Theano's C++ flags on every platform (a workaround for old GCC on Windows); starry's compiled operators throw C++ exceptions, so Apple clang refuses them. The runner removes that one flag from theano.config.gcc__cxxflags after importing starry. No starry code is changed or bypassed. Theano compiles into the toolchain directory and HOME is an empty directory there."
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/wasp-121b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "wasp-121b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswasp-121b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature-nrs1",
+      "output": "wasp-121b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-121b-lens-{id}.webp",
+      "source": "science/evans-soma-2025/phase-curve-nrs1.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-nrs1",
+        "label": "2.7–3.7 µm",
+        "format": "published-phase-curve-map",
+        "path": "science/evans-soma-2025/phase-curve-nrs1.json",
+        "consumer": "evans-soma-2025-starry-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3136,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1568",
+          "3136"
+        ],
+        "description": "Brightness temperature in the JWST NIRSpec NRS1, 2.7 to 3.7 um band from the paper's own starry map of its white-light phase curve, evaluated by starry and converted through the authors' deposited spectra. Grey: where the fitted map's brightness is not positive.",
+        "title": "JWST NIRSpec · 2.7–3.7 µm phase-curve map",
+        "sourceUrl": "https://arxiv.org/abs/2506.01771"
+      }
+    },
+    {
+      "id": "temperature-nrs2",
+      "output": "wasp-121b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-121b-lens-{id}.webp",
+      "source": "science/evans-soma-2025/phase-curve-nrs2.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-nrs2",
+        "label": "3.8–5.2 µm",
+        "format": "published-phase-curve-map",
+        "path": "science/evans-soma-2025/phase-curve-nrs2.json",
+        "consumer": "evans-soma-2025-starry-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3136,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1568",
+          "3136"
+        ],
+        "description": "Brightness temperature in the JWST NIRSpec NRS2, 3.8 to 5.2 um band from the paper's own starry map of its white-light phase curve, evaluated by starry and converted through the authors' deposited spectra. Grey: where the fitted map's brightness is not positive.",
+        "title": "JWST NIRSpec · 3.8–5.2 µm phase-curve map",
+        "sourceUrl": "https://arxiv.org/abs/2506.01771"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "wasp-121b-context-{id}{suffix}.webp",
+    "limbOutput": "wasp-121b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csswasp-121b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "sourceRadius": "measurements.json#radiusKm",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

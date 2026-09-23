@@ -2,7 +2,11 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
-import { brightnessTemperature, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, sinusoidMap } from './published-phase-curve-map.mts';
+import { hostedOrbit, starAstrometry } from '@cssearth/astronomy';
+import { starryMapGrid, starrySystemFlux } from '../astronomy-packages/starry.mts';
+import { mapPhaseCurve, mirrorGrid, type EmissionGrid } from '../eclipse-map/phase-curve.mts';
+import { brightnessTemperature, depositedChannelWeights, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, parseStarryPhaseCurve,
+  sinusoidMap } from './published-phase-curve-map.mts';
 
 const test = sourceTest();
 const objects = new URL('../../../src/objects/', import.meta.url);
@@ -72,4 +76,59 @@ test('WASP-76b: SPIDERMAN evaluates May et al. (2021)\'s dipole to their day sid
   // Around the antistellar point the fitted dipole is below zero; those cells have no temperature.
   assert.equal(map.sample(180, 0), null);
   assert.ok(derived.nonPositiveAreaFraction! > 0.02 && derived.nonPositiveAreaFraction! < 0.05);
+});
+
+const wasp121b = new URL('wasp-121b/source/', objects).pathname, evansSoma = (name: string) => `${wasp121b}science/evans-soma-2025/${name}`;
+const depositedRows = async (path: string) => (await readFile(path, 'utf8')).split('\n').filter(line => line.trim() && !line.startsWith('#')).map(line => line.trim().split(/\s+/u).map(Number));
+const rms = (model: ArrayLike<number>, data: readonly number[], use: (index: number) => boolean = () => true) => {
+  let sum = 0, n = 0; data.forEach((value, i) => { if (use(i)) { sum += (model[i]! - value) ** 2; n++; } }); return Math.sqrt(sum / n);
+};
+
+test('WASP-121b: starry turns Evans-Soma et al. (2025)\'s table values into their deposited model light curves, and the package orbit agrees east of noon', async () => {
+  for (const detector of ['nrs1', 'nrs2']) {
+    // The authors' deposited white light curve models: time (BJD_TDB), systematics, and the starry star-plus-planet flux.
+    const deposited = await depositedRows(evansSoma(`whitelc_model_${detector}.txt`)), times = deposited.map(row => row[0]!), physical = deposited.map(row => row[2]!);
+    const { model, radiusRatio } = parseStarryPhaseCurve(JSON.parse(await readFile(evansSoma(`phase-curve-${detector}.json`), 'utf8')));
+    // Measured 2026-09-23: 1.13 ppm rms (NRS1) and 1.40 ppm (NRS2) with the offset turning the map east; turned west, 129 and 119 ppm.
+    const flux = starrySystemFlux(model.map, model.system, times);
+    const west = starrySystemFlux(model.map, { ...model.system, orbit: { ...model.system.orbit, theta0Degrees: 180 - model.offsetDegrees } }, times);
+    assert.ok(rms(flux, physical) < 2e-6, `${detector}: ${rms(flux, physical)}`);
+    assert.ok(rms(west, physical) > 100e-6, `${detector} mirrored: ${rms(west, physical)}`);
+    // The map as this package draws it (longitude east of the substellar point) through the package's own orbit and synchronous rotation.
+    const latitudes: number[] = [], longitudes: number[] = [];
+    for (let lat = -89.5; lat < 90; lat++) latitudes.push(lat);
+    for (let lon = -179.5; lon < 180; lon++) longitudes.push(lon);
+    const intensity = starryMapGrid(model.map, latitudes, longitudes.map(lon => lon - model.offsetDegrees)).values;
+    const cells = latitudes.length * longitudes.length;
+    const grid: EmissionGrid = { width: longitudes.length, height: latitudes.length, values: Float64Array.from({ length: cells }, (_, i) => intensity[Math.floor(i / longitudes.length)]![i % longitudes.length]!),
+      latitudes: Float64Array.from({ length: cells }, (_, i) => latitudes[Math.floor(i / longitudes.length)]!), longitudes: Float64Array.from({ length: cells }, (_, i) => longitudes[i % longitudes.length]!) };
+    const orbit = hostedOrbit('wasp-121b' as never), host = starAstrometry('wasp-121' as never), bmjd = times.map(time => time - 2400000.5);
+    // Away from transit, where the deposited model carries the star's own dip, the planet's flux is the model minus the star's 1.
+    const outOfTransit = (i: number) => { const phase = (((bmjd[i]! - orbit.transitTimeBmjdTdb) / orbit.periodDays) % 1 + 1) % 1; return phase > 0.06 && phase < 0.94; };
+    const planet = physical.map(value => value - 1);
+    const east = mapPhaseCurve(grid, orbit, host, radiusRatio, bmjd), mirrored = mapPhaseCurve(mirrorGrid(grid, 'longitude'), orbit, host, radiusRatio, bmjd);
+    // Measured 2026-09-23: 0.75 ppm rms (NRS1) and 1.52 ppm (NRS2); mirrored east-west, 135 and 124 ppm.
+    assert.ok(rms(east, planet, outOfTransit) < 2e-6, `${detector} east: ${rms(east, planet, outOfTransit)}`);
+    assert.ok(rms(mirrored, planet, outOfTransit) > 100e-6, `${detector} mirrored: ${rms(mirrored, planet, outOfTransit)}`);
+  }
+});
+
+test('WASP-121b: the deposited spectra give each channel one conversion at every phase, and the maps peak just east of noon', async () => {
+  for (const [detector, channels, hottestK, offset, grey] of [['nrs1', 146, 3096, 3, 0.142], ['nrs2', 203, 3136, 2, 0.068]] as const) {
+    const record = parseStarryPhaseCurve(JSON.parse(await readFile(evansSoma(`phase-curve-${detector}.json`), 'utf8')));
+    const weights = await depositedChannelWeights(wasp121b, record.conversion);
+    assert.equal(weights.channels.length, channels);
+    assert.equal(weights.phaseBins, 36);
+    // (Fp/Fs) / B(T_b) is the same at all 36 phase bins to within the authors' whole-kelvin rounding (measured: at most 0.66 %).
+    assert.ok(weights.channels.every(channel => channel.spread < 0.01), `${detector} spread`);
+    const map = await loadPublishedPhaseCurveMap(wasp121b, { path: `science/evans-soma-2025/phase-curve-${detector}.json` });
+    const derived = (map.report as unknown as { derived: { hottest: { kelvin: number; longitude: number; latitude: number }; nonPositiveAreaFraction: number } }).derived;
+    assert.ok(Math.abs(derived.hottest.kelvin - hottestK) < 1, `${detector} hottest ${derived.hottest.kelvin}`);
+    assert.equal(derived.hottest.longitude, offset, 'the hotspot is the nearest grid longitude east of noon to the fitted offset');
+    assert.equal(derived.hottest.latitude, 0);
+    // East of noon is warmer than the same distance west; around the antistellar point the dipole is below zero and has no temperature.
+    assert.ok(map.sample(90, 0)! > map.sample(-90, 0)!);
+    assert.equal(map.sample(180, 0), null);
+    assert.ok(Math.abs(derived.nonPositiveAreaFraction - grey) < 0.001, `${detector} grey ${derived.nonPositiveAreaFraction}`);
+  }
 });

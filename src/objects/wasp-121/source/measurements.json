@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-121",
+  "angularDiameterMas": 0.051,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 997,980.4 km at 263.18 pc = 0.051 mas. No interferometric diameter of this star is published; the disc is far too small to resolve.",
+  "distanceParsecs": 263.1834588578964,
+  "distanceSource": "Gaia DR3 parallax 3.7996 +/- 0.0104 mas (photometry/gaia-dr3-source.csv), no zero-point correction",
+  "radiusKm": 997980.4,
+  "radiusSource": "Radius: 10^0.1567 = 1.4345 solar radii at 695700 km per solar radius, the log10 stellar radius of Evans-Soma et al. (2025), Nature Astronomy, 'SiO and a super-stellar C/O ratio in the atmosphere of the giant exoplanet WASP-121b' (arXiv:2506.01771), Supplementary Table 1 (white phase-curve fit, best-fit column), the fit whose planet maps this system shows (derived R* 1.434). GM from the same fit's stellar mass, 1.332 solar masses, times the JPL solar GM 132712440041.93938 km^3/s^2. Their isochrone analysis (Supplementary Table 9) gives 1.49 solar radii and 1.36 solar masses. presentationUp: the display axis is a sky-plane convention; the star's spin axis is measured only through the planet's nearly polar orbit (Bourrier et al. 2020).",
+  "effectiveTemperatureK": 6481,
+  "effectiveTemperatureSource": "Evans-Soma et al. (2025), Nature Astronomy, Supplementary Table 9: 6,481 K from their spectroscopic and isochrone analysis (https://arxiv.org/abs/2506.01771)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
+  }
+}

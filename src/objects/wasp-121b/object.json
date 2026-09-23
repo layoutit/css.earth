@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wasp-121b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-121b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "temperature-nrs1",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-nrs2",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 122409.28
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-121b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-121b",
+      "classification": "exoplanet",
+      "color": "#fbc95a",
+      "distanceAu": 54285571.2,
+      "description": "Ultra-hot giant JWST watched for a whole orbit: day side near 2,760 K, night side near 1,000 K.",
+      "systemName": "WASP-121 system",
+      "order": 1744,
+      "context": {
+        "order": 1744
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1905717537466400300,
+        6007504189156348000,
+        -5121412925578392000
+      ],
+      "presentationToReference": [
+        -0.2684475372568495,
+        0.9442319173200715,
+        -0.19068824309535773,
+        0.7285162285214261,
+        0.3285150376889121,
+        0.601117272080224,
+        -0.6302380697178248,
+        -0.02244897160928481,
+        0.776077328075003
+      ],
+      "orbitUpReference": [
+        -0.9442319173200715,
+        -0.3285150376889121,
+        0.02244897160928481
+      ],
+      "metersPerUnit": 394868.6451612903,
+      "bodyRadiusM": 122409280
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-121b",
+  "card": {
+    "text": "Ultra-hot giant JWST watched for a whole orbit: day side near 2,760 K, night side near 1,000 K.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2301-03209",
+        "url": "https://arxiv.org/abs/2301.03209",
+        "label": "Mikal-Evans et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "nightside emission ratios translate to planetary brightness temperatures of 926 ± 12 K (NRS1) and 1,122 ± 10 K (NRS2)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WASP-121b circles its star in 31 hours. JWST's full orbit finds its hottest point just east of noon and a night side cool enough for clouds.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2301-03209",
+        "url": "https://arxiv.org/abs/2301.03209",
+        "label": "Mikal-Evans et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "consistent with the strongest dayside emission emanating from eastward of the substellar point"
+      }
+    ]
+  },
+  "datasets": {
+    "temperature-nrs1": {
+      "title": "Temperature at 2.7–3.7 µm",
+      "detail": "2 bands",
+      "summary": "Heat from JWST’s whole-orbit light curve in two bands. Grey is where the fitted map gives no temperature."
+    },
+    "temperature-nrs2": {
+      "title": "Temperature at 3.8–5.2 µm",
+      "detail": "2 bands",
+      "summary": "Heat from JWST’s whole-orbit light curve in two bands. Grey is where the fitted map gives no temperature."
+    }
+  }
+}

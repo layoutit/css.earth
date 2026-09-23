@@ -1,0 +1,27 @@
+{
+  "id": "wasp-121b",
+  "classification": "exoplanet",
+  "order": 1744,
+  "physical": {
+    "name": "WASP-121b",
+    "horizonsCode": null,
+    "meanRadiusKm": 122409.28,
+    "gravitationalParameterKm3PerS2": 148253932.1921,
+    "parent": "wasp-121"
+  },
+  "physicalNotes": "Radius: Rp/R* 0.122657, the NRS1 (2.7 to 3.7 um) value of Evans-Soma et al. (2025), Nature Astronomy, 'SiO and a super-stellar C/O ratio in the atmosphere of the giant exoplanet WASP-121b' (arXiv:2506.01771), Supplementary Table 1 (white phase-curve fit, best-fit column), times the host record's radius; NRS2 (3.8 to 5.2 um) gives 0.123736, the planet looking larger where its atmosphere is more opaque. A sphere: tidal and rotational flattening are not modelled (Mikal-Evans et al. 2023 found an oblate shape did not change their phase-curve results). GM from that fit's planet mass, 1.170 Jupiter masses, at the IAU 2015 nominal Jupiter-to-Sun mass ratio 1/1047.348644, times the JPL solar GM.",
+  "hostedOrbit": {
+    "periodDays": 1.27492503,
+    "semiMajorAxisStellarRadii": 3.79621,
+    "inclinationDegrees": 87.96,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 59867.14265,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Evans-Soma et al. (2025), Nature Astronomy, 'SiO and a super-stellar C/O ratio in the atmosphere of the giant exoplanet WASP-121b' (arXiv:2506.01771), Supplementary Table 1 (white phase-curve fit, best-fit column): P 1.27492504 d (Bourrier et al. 2020, A&A 635, A205) plus the fitted Delta P, derived best fit 1.27492503 d",
+      "shape": "Evans-Soma et al. (2025), Nature Astronomy, 'SiO and a super-stellar C/O ratio in the atmosphere of the giant exoplanet WASP-121b' (arXiv:2506.01771), Supplementary Table 1 (white phase-curve fit, best-fit column): inclination 87.96 degrees; a/R* 3.79621 from Kepler's third law with that fit's stellar mass 1.332 and planet mass 1.170 Jupiter masses and radius 10^0.1567 solar radii, as starry computes the orbit from them. Eccentricity 0, as the maps were fitted (Bourrier et al. 2020: below 0.0032).",
+      "phase": "Evans-Soma et al. (2025), Nature Astronomy, 'SiO and a super-stellar C/O ratio in the atmosphere of the giant exoplanet WASP-121b' (arXiv:2506.01771), Supplementary Table 1 (white phase-curve fit, best-fit column): NRS1 transit mid-time 2459867.64265 BJD_TDB = 59867.14265 BMJD_TDB (NRS2 2459867.64263)",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
+  }
+}

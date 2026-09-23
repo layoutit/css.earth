@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Evans-Soma et al. (2025), Nature Astronomy 9, 845, 'SiO and a super-stellar C/O ratio in the atmosphere of the giant exoplanet WASP-121b' (doi:10.1038/s41550-025-02513-x; arXiv:2506.01771). JWST NIRSpec G395H phase curve of program 1729 (37.8 h, two eclipses and a transit). Map values from Supplementary Table 1 (white phase-curve fit results), best-fit column, read from the arXiv version's supplementary information; the deposited products are Zenodo doi:10.5281/zenodo.20651891 (CC BY 4.0).",
+  "band": "NRS2, 3.82 to 5.17 um",
+  "radiusRatio": {
+    "value": 0.123736,
+    "cell": "0.123736",
+    "where": "Supplementary Table 1, best-fit, NRS2: Rp/R* (derived)"
+  },
+  "model": {
+    "kind": "starry",
+    "description": "starry, a degree-1 spherical-harmonic map for the planet and a quadratic limb-darkening law for the star (Methods, 'White phase-curve fitting'). The fitted map terms are the planet-to-star luminosity A, the Y(1,0) coefficient and the phase offset; a map with Y(1,0) alone was favoured by the BIC over maps adding Y(1,1) and Y(2,0), so Y(1,-1) and Y(1,1) are zero.",
+    "map": {
+      "ydeg": 1,
+      "amp": {
+        "value": 0.002784,
+        "cell": "2784 ppm",
+        "where": "Supplementary Table 1, best-fit, NRS2: A"
+      },
+      "y": [
+        {
+          "value": 0,
+          "cell": "not fitted",
+          "where": "Methods: Y(1,0) alone favoured by the BIC"
+        },
+        {
+          "value": 0.669,
+          "cell": "0.669",
+          "where": "Supplementary Table 1, best-fit, NRS2: y(1,0)"
+        },
+        {
+          "value": 0,
+          "cell": "not fitted",
+          "where": "Methods: Y(1,0) alone favoured by the BIC"
+        }
+      ]
+    },
+    "offsetDegrees": {
+      "value": 2.39,
+      "cell": "2.39 deg",
+      "where": "Supplementary Table 1, best-fit, NRS2: phase offset"
+    },
+    "system": {
+      "star": {
+        "massSolar": {
+          "value": 1.332,
+          "cell": "1.332",
+          "where": "Supplementary Table 1, best-fit, shared: stellar mass"
+        },
+        "log10RadiusSolar": {
+          "value": 0.1567,
+          "cell": "0.1567",
+          "where": "Supplementary Table 1, best-fit, shared: log10 stellar radius"
+        },
+        "u1": {
+          "value": 0.03,
+          "cell": "0.03",
+          "where": "Supplementary Table 1, best-fit, NRS2: u1"
+        },
+        "u2": {
+          "value": 0.09,
+          "cell": "0.09",
+          "where": "Supplementary Table 1, best-fit, NRS2: u2"
+        }
+      },
+      "orbit": {
+        "planetMassJupiter": {
+          "value": 1.17,
+          "cell": "1.170",
+          "where": "Supplementary Table 1, best-fit, shared: planet mass"
+        },
+        "jupiterToSunMass": {
+          "value": 0.0009547918983127075,
+          "cell": "1/1047.348644",
+          "where": "IAU 2015 Resolution B3 nominal GM(Jupiter)/GM(Sun); the paper does not print its conversion"
+        },
+        "periodDays": {
+          "value": 1.27492503,
+          "cell": "1.27492503 d",
+          "where": "Supplementary Table 1, best-fit, shared: orbital period (derived)"
+        },
+        "transitTimeBjdTdb": {
+          "value": 2459867.64263,
+          "cell": "2459867.64263",
+          "where": "Supplementary Table 1, best-fit, NRS2: transit mid-time (derived)"
+        },
+        "inclinationDegrees": {
+          "value": 87.96,
+          "cell": "87.96 deg",
+          "where": "Supplementary Table 1, best-fit, shared: inclination"
+        }
+      }
+    }
+  },
+  "conversion": {
+    "kind": "deposited-channels",
+    "description": "The authors' phase-binned planet-to-star spectra and brightness temperatures give each channel's conversion term; the star's mean detected counts in each channel, from the deposited 1D spectra of this detector, weight the channels as the white light curve sums them.",
+    "channelEdges": "science/evans-soma-2025/emspec_wav.txt",
+    "planetToStarPpm": "science/evans-soma-2025/emspec_fpfs_vals.txt",
+    "brightnessTemperatureK": "science/evans-soma-2025/emspec_tbright_vals.txt",
+    "stellarSpectrumWavelengths": "science/evans-soma-2025/spectra1d_wav_nrs2.txt",
+    "stellarSpectrumCounts": "science/evans-soma-2025/spectra1d_vals_nrs2.txt"
+  }
+}
