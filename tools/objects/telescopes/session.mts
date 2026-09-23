@@ -314,7 +314,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
       if (!choice.configuration) throw new Error('No current qualification action.');
       const qualifying = choice;
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
-      await locked(resolve(root, 'output/telescopes'), () => api.qualify(root, { target: answer.target, telescope: qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
+      await locked(resolve(root, 'output/telescopes'), () => api.qualify(root, { target: answer.target, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
       answer = await exploreForRequest(api, root, { ...request, ...answer.request.skyTarget ? { skyTarget: answer.request.skyTarget } : {} }, saved.observation);
       choice = savedChoice(answer.choices, saved);
       if (!choice || choice.state !== 'ready') throw new Error('Qualification did not produce a selectable artifact for the original exploration. Explore again for the current result.');

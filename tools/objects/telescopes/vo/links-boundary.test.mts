@@ -71,7 +71,7 @@ test('public VO query follows a descriptor-bound nested DataLink service', async
         request: jsonValue(request), query: 'fixture', scope: 'synthetic descriptor traversal', sampleLimit: 1, completeness: 'bounded-sample',
         response: { ...response, rows: profile === SERVICES[0] ? [{ ...response.rows[0]!, target_name: 'Betelgeuse', dataproduct_type: 'image',
           access_url: `${service}/root`, access_format: 'application/x-votable+xml;content=datalink' }] : [], times: profile === SERVICES[0] ? response.times : [] } }),
-      { allowedPrivateHosts: ['127.0.0.1'] });
+      { allowedPrivateHosts: ['127.0.0.1'] }, undefined, async () => ({ names: [], complete: true, evidence: 'fixture', issues: [] }));
     assert.equal(seen.length, 2);
     assert.equal(seen[1]!.pathname, '/nested');
     assert.equal(seen[1]!.searchParams.get('ID'), 'ivo://fixture/member+1');

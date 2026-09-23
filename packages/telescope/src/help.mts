@@ -33,6 +33,7 @@ In a terminal, outputs asks which available operation to run, then asks only for
 reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
 starts. With --json or redirected input/output it never prompts; the listed command templates remain.
 Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
+using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
 open access first. It tries one plain GET per open copy, marks browser challenges as blocked, and prints
 HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
 Family-run executes one operation from a verified product descriptor through the static owner allowlist.
