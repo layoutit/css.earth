@@ -58,7 +58,7 @@ query; choosing a result or dismissing search relinquishes that ownership.
 
 ## Application request ownership
 
-`site/navigation-lifecycle.mts` owns the pending request, its abort signal,
+`site/navigation/navigation-lifecycle.mts` owns the pending request, its abort signal,
 transient resources and terminal outcome. Requests move from preparing to flying
 to committing; same-body dataset changes can proceed directly to committing.
 Loading and flight preparation can overlap. These phases describe application
@@ -82,7 +82,7 @@ the latest settings. Playback remains governed by the shared runtime policy.
 
 ## Scene activation and prepared ownership
 
-`site/scene-session.mts` admits one live session. Its state is loading, ready,
+`site/scene/scene-session.mts` admits one live session. Its state is loading, ready,
 failed or disposed; loading distinguishes native activation from subsequent
 dataset and saved-view restoration. A native handle cannot publish readiness
 before its ready promise resolves and the router commits restoration. Playback

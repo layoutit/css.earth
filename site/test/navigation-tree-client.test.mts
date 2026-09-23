@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
-import { createNavigationTreeController } from '../navigation-tree-client.mts';
+import { createNavigationTreeController } from '../navigation/navigation-tree-client.mts';
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload } from '../../src/navigation/navigation-tree-schema.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 

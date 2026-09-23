@@ -1,0 +1,49 @@
+{
+  "id": "gaia-dr3-hd-29391",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 gaia_source row for 51 Eridani (source_id 3205095125321700480)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "3205095125321700480"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "label": "Gaia Collaboration (2023), Gaia DR3 summary"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20ref_epoch%2C%20ra%2C%20dec%2C%20parallax%2C%20parallax_error%2C%20pmra%2C%20pmdec%2C%20radial_velocity%2C%20radial_velocity_error%2C%20phot_g_mean_mag%2C%20ruwe%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203205095125321700480",
+      "checkedOn": "2026-09-23",
+      "locator": "gaiadr3.gaia_source at epoch 2016.0: ra 69.40074849308137, dec -2.473833383625505, parallax 33.4390324822182 +/- 0.07770842 mas, pmra 44.04884090373149, pmdec -64.02842203088811 mas/yr, no radial velocity, G 5.1412, RUWE 1.145"
+    },
+    {
+      "path": "src/objects/hd-29391/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/hd-29391/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC).",
+      "scope": "citation",
+      "evidence": "src/objects/hd-29391/text.json#/introduction/sources/1"
+    }
+  ],
+  "publisher": "European Space Agency"
+}

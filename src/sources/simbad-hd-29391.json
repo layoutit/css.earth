@@ -1,0 +1,35 @@
+{
+  "id": "simbad-hd-29391",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for 51 Eri (HD 29391, HIP 21547)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=51+Eri",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-29391/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20main_id%2Csp_type%2Csp_bibcode%2Crvz_radvel%2Crvz_err%2Crvz_bibcode%20FROM%20basic%20JOIN%20ident%20ON%20oidref%3Doid%20WHERE%20id%3D'51%20Eri'",
+      "checkedOn": "2026-09-23",
+      "locator": "main_id * 51 Eri; spectral type F0IV (1995ApJS...99..135A); radial velocity 12.6 +/- 0.3 km/s (2006AstL...32..759G)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; spectral type and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/hd-29391/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

@@ -16,13 +16,13 @@ import { F14_BODY_MAP_SPHERE_HANDLER } from './families/f14-body-map-sphere.mts'
 import { F02_MIXED_ND_HANDLER } from './families/f02-mixed-nd.mts';
 import { F14_HEALPIX_HANDLER } from './families/f14-healpix.mts';
 import { F15_RADAR_HANDLER } from './families/f15-radar.mts';
-import { F16_SPATIAL_PHYSICAL_HANDLER } from './families/f16-spatial-physical.mts';
-import { F16_CARTESIAN_GRID_HANDLER } from './families/f16-cartesian-grid.mts';
-import { F16_SPHERICAL_GRID_HANDLER } from './families/f16-spherical-grid.mts';
-import { F16_PLANETARY_DEPTH_HANDLER } from './families/f16-planetary-depth.mts';
-import { F16_JUNO_MWR_RETRIEVAL_HANDLER } from './families/f16-juno-mwr-retrieval.mts';
-import { F16_PLANETARY_COVERAGE_HANDLER } from './families/f16-planetary-coverage.mts';
-import { F16_SHARAD_PDS4_HANDLER } from './families/f16-sharad-pds4.mts';
+import { F16_SPATIAL_PHYSICAL_HANDLER } from './families/f16/f16-spatial-physical.mts';
+import { F16_CARTESIAN_GRID_HANDLER } from './families/f16/f16-cartesian-grid.mts';
+import { F16_SPHERICAL_GRID_HANDLER } from './families/f16/f16-spherical-grid.mts';
+import { F16_PLANETARY_DEPTH_HANDLER } from './families/f16/f16-planetary-depth.mts';
+import { F16_JUNO_MWR_RETRIEVAL_HANDLER } from './families/f16/f16-juno-mwr-retrieval.mts';
+import { F16_PLANETARY_COVERAGE_HANDLER } from './families/f16/f16-planetary-coverage.mts';
+import { F16_SHARAD_PDS4_HANDLER } from './families/f16/f16-sharad-pds4.mts';
 import { F17_CALIBRATION_HANDLER } from './families/f17-calibration.mts';
 import { F18_COMPOUND_HANDLER } from './families/f18-compound.mts';
 

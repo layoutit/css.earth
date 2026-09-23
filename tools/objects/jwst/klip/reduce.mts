@@ -13,7 +13,7 @@
  * memory passes the ceiling (default 6 GiB). */
 import { createHash } from 'node:crypto';
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
-import { totalmem } from 'node:os';
+import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
@@ -49,6 +49,20 @@ const REDUCE = `
 import json, sys, time
 from spaceKLIP import database, coron1pipeline, coron2pipeline, imagetools, pyklippipeline
 files, output_dir, settings = json.loads(sys.argv[1]), sys.argv[2], json.loads(sys.argv[3])
+if settings.get('firstAnnulusOuterArcsec') is not None:
+    # pyKLIP spaces its annuli evenly from IWA to OWA; spaceKLIP sets OWA to the image's half-widths summed. A paper that states where
+    # its first annulus ends fixes OWA: IWA + (OWA - IWA) / annuli is that edge.
+    from pyklip.instruments import JWST
+    original = JWST.JWSTData.readdata
+    def readdata(self, filepaths, *args, **kwargs):
+        original(self, filepaths, *args, **kwargs)
+        # The pixel scale pyKLIP itself uses: the square root of the first science file's PIXAR_A2.
+        from astropy.io import fits
+        edge = settings['firstAnnulusOuterArcsec'] / fits.getheader(filepaths[0], 'SCI')['PIXAR_A2'] ** 0.5
+        annuli = settings['klip']['annuli'][0]
+        self._OWA = self._IWA + annuli * (edge - self._IWA)
+        print(json.dumps({'IWA': float(self._IWA), 'OWA': float(self._OWA)}), file=sys.stderr)
+    JWST.JWSTData.readdata = readdata
 start = time.time()
 db = database.Database(output_dir=output_dir)
 db.read_jwst_s012_data(datapaths=files, psflibpaths=None, bgpaths=None, cr_from_siaf=settings['crFromSiaf'])
@@ -65,7 +79,7 @@ tools.pad_frames(npix=settings['padPixels'], cval=0., types=['SCI', 'SCI_BG', 'R
 tools.recenter_frames(spectral_type=settings['spectralType'], subdir='recentered')
 tools.align_frames(**settings['align'], subdir='aligned')
 tools.crop_frames(npix=settings['cropPixels'], types=['SCI', 'SCI_BG', 'REF', 'REF_BG'], subdir='cropped')
-pyklippipeline.run_obs(database=db, kwargs=settings['klip'], subdir='klipsub')
+pyklippipeline.run_obs(database=db, kwargs={**settings['klip'], 'numthreads': settings['workers']}, subdir='klipsub')
 key = next(iter(db.red))
 products = [row['FITSFILE'] for row in db.red[key]]
 print(json.dumps({'seconds': round(time.time() - start, 1), 'concatenation': key, 'products': products}))
@@ -99,15 +113,18 @@ export async function reduceKlip(id: string, bandName: string, work: string, opt
   const files = await stageExposures(program, band, options.raw, resolve(work, 'uncal'));
   const output = resolve(work, 'spaceklip');
   await mkdir(output, { recursive: true });
-  const toolchain = await jwstToolchain('klip', program.crdsContext);
-  const result = await toolchainPython(toolchain, work, REDUCE, [JSON.stringify(files), output, JSON.stringify(program.settings)], resolve(work, 'reduce.log'),
+  // pyKLIP runs one worker per core by default and each worker's linear algebra starts its own threads, so a 32-zone subtraction
+  // asked a 14-core machine for hundreds of threads (load average 366). Half the cores, one thread each, keeps the machine usable.
+  const workers = Math.max(1, Math.floor(availableParallelism() / 2)), single = Object.fromEntries(['OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'VECLIB_MAXIMUM_THREADS', 'NUMEXPR_NUM_THREADS'].map(name => [name, '1']));
+  const base = await jwstToolchain('klip', program.crdsContext), toolchain = { ...base, env: { ...base.env, ...single } };
+  const result = await toolchainPython(toolchain, work, REDUCE, [JSON.stringify(files), output, JSON.stringify({ ...program.settings, workers })], resolve(work, 'reduce.log'),
     { maxRssBytes: ceiling, progressLabel: `${id} ${bandName}` });
   const summary = requireRecord(JSON.parse(result.lastLine) as unknown, 'spaceKLIP result');
   const products = requireArray(summary.products, 'spaceKLIP products').map(value => requireString(value, 'spaceKLIP product'));
   const record = { schema: 'cssearth-jwst-klip-run@1', program: id, band: bandName, crdsContext: program.crdsContext, toolchain: 'tools/objects/jwst/klip/toolchain.json',
     inputs: await Promise.all(files.map(async file => ({ name: basename(file), sha256: await sha256(file) }))),
     products: await Promise.all(products.map(async file => ({ path: file.startsWith(output) ? file.slice(output.length + 1) : file, sha256: await sha256(file) }))),
-    seconds: summary.seconds, peakRssGiB: +(result.peakRssBytes / 2 ** 30).toFixed(2) };
+    workers, seconds: summary.seconds, peakRssGiB: +(result.peakRssBytes / 2 ** 30).toFixed(2) };
   await writeFile(resolve(work, 'run.json'), `${JSON.stringify(record, null, 2)}\n`);
   return record;
 }
