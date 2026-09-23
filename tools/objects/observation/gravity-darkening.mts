@@ -14,19 +14,38 @@ import { linearToSrgb } from '../color-transfer.mts';
 import { planckLinearSrgb, type StellarColor } from './stellar/stellar-photometric-color.mts';
 
 export interface GravityDarkeningRecord {
-  readonly omega: number; readonly beta: number; readonly poleTemperatureK: number; readonly equatorTemperatureK: number;
+  readonly omega: number; readonly beta: number; readonly poleTemperatureK: number;
+  /** The paper's own equatorial temperature; absent when it publishes only the polar temperature, ω or the flattening, and β. */
+  readonly equatorTemperatureK?: number;
   readonly polarRadiusSolar: number; readonly equatorialRadiusSolar: number;
-  readonly inclinationDegrees: number; readonly polePositionAngleDegrees: number; readonly source: string;
+  /** The pole's sky orientation, when the fit measures it (interferometric images). A transit fit places the pole against its
+   * planet's orbit instead, in the star's rotation record. */
+  readonly inclinationDegrees?: number; readonly polePositionAngleDegrees?: number; readonly source: string;
+}
+
+/** ω of the Roche surface whose equatorial radius is `ratio` polar radii: 1/x + 4/27 ω² x² = 1 at x = ratio. */
+export function rocheOmegaForFlattening(ratio: number) {
+  if (!(ratio > 1 && ratio < 1.5)) throw new RangeError('A Roche surface has an equatorial-to-polar radius ratio between 1 and 1.5.');
+  return Math.sqrt(27 * (ratio - 1) / (4 * ratio ** 3));
 }
 
 export function parseGravityDarkeningRecord(value: unknown): GravityDarkeningRecord {
   const input = requireRecord(value, 'gravity-darkening record');
   if (input.schema !== 'cssearth-roche-von-zeipel@1') throw new TypeError('The gravity-darkening record must use cssearth-roche-von-zeipel@1.');
-  const model = requireRecord(input.model, 'model'), view = requireRecord(input.view, 'view');
+  const model = requireRecord(input.model, 'model'), view = input.view === undefined ? null : requireRecord(input.view, 'view');
   const number = (record: Record<string, unknown>, key: string) => requireFiniteNumber(requireRecord(record[key], key).value, `${key}.value`);
-  const record = { omega: number(model, 'omega'), beta: number(model, 'beta'), poleTemperatureK: number(model, 'poleTemperatureK'),
-    equatorTemperatureK: number(model, 'equatorTemperatureK'), polarRadiusSolar: number(model, 'polarRadiusSolar'), equatorialRadiusSolar: number(model, 'equatorialRadiusSolar'),
-    inclinationDegrees: number(view, 'inclinationDegrees'), polePositionAngleDegrees: number(view, 'polePositionAngleDegrees'), source: requireString(input.source, 'source') };
+  // A fit publishes ω and both radii (interferometric images), or the equatorial radius and its ratio to the polar one (a transit
+  // fit), from which the Roche surface's ω and polar radius follow.
+  const byRatio = model.omega === undefined;
+  if (byRatio === (model.equatorialToPolarRadius === undefined) || byRatio !== (model.polarRadiusSolar === undefined))
+    throw new TypeError('A gravity-darkening record gives ω and the polar radius, or the equatorial-to-polar radius ratio, not both.');
+  const ratio = byRatio ? number(model, 'equatorialToPolarRadius') : null, equatorialRadiusSolar = number(model, 'equatorialRadiusSolar');
+  const record: GravityDarkeningRecord = { omega: ratio === null ? number(model, 'omega') : rocheOmegaForFlattening(ratio), beta: number(model, 'beta'),
+    poleTemperatureK: number(model, 'poleTemperatureK'),
+    ...(model.equatorTemperatureK === undefined ? {} : { equatorTemperatureK: number(model, 'equatorTemperatureK') }),
+    polarRadiusSolar: ratio === null ? number(model, 'polarRadiusSolar') : equatorialRadiusSolar / ratio, equatorialRadiusSolar,
+    ...(view ? { inclinationDegrees: number(view, 'inclinationDegrees'), polePositionAngleDegrees: number(view, 'polePositionAngleDegrees') } : {}),
+    source: requireString(input.source, 'source') };
   if (!(record.omega > 0 && record.omega < 1)) throw new TypeError('ω is a fraction of the break-up rate, between 0 and 1.');
   if (!(record.beta > 0 && record.beta <= 0.25)) throw new TypeError('β lies between 0 and the von Zeipel value 0.25.');
   return record;

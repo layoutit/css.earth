@@ -1,0 +1,35 @@
+{
+  "id": "source-kelt-9-gaia-dr3-xp-sampled",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "KELT-9 · kelt 9 gaia dr3 xp sampled",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2064327278651198336&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kelt-9/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "scope": "The kelt 9 gaia dr3 xp sampled input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

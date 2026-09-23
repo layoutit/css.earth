@@ -488,11 +488,11 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const gravity = surface.science.gravityDarkening === undefined ? null : await (async () => {
           const path = requireString(surface.science.gravityDarkening, 'science.gravityDarkening');
           await source.validatePath(path); await source.validatePath(requireString(surface.science.colorMatching, 'science.colorMatching'));
-          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature } = await import('./gravity-darkening.mts');
+          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('./gravity-darkening.mts');
           const { parseCieTable } = await import('./disc-integrated-color.mts');
           const record = parseGravityDarkeningRecord(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
           const colorMatching = parseCieTable(await readFile(resolve(sourceDirectory, requireString(surface.science.colorMatching, 'science.colorMatching')), 'utf8'), 3);
-          return { record, rows: gravityDarkenedRows(record, color, colorMatching, height), meanK: meanSurfaceTemperature(record) };
+          return { record, rows: gravityDarkenedRows(record, color, colorMatching, height), meanK: meanSurfaceTemperature(record), equatorK: surfaceTemperature(record, Math.PI / 2) };
         })();
         for (let offset = 0; offset < data.length; offset += 4) data.set([...(gravity ? gravity.rows[Math.floor(offset / 4 / width)]! : color.srgb), 255], offset);
         if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar colour belongs to an emissive body.`);
@@ -543,7 +543,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         return { data, channels: 4, nearest: true, plates,
           report: { stellarPhotometricColor: { ...(temperature ? { temperature } : { spectrum }), srgb: color.srgb, linearSrgb: color.linear, ...(range ? { srgbAtBounds: range.map(bound => bound.srgb) } : {}),
             ...(crossCheck ? { crossCheck } : {}),
-            ...(gravity ? { gravityDarkening: { poleTemperatureK: gravity.record.poleTemperatureK, equatorTemperatureK: gravity.record.equatorTemperatureK,
+            ...(gravity ? { gravityDarkening: { poleTemperatureK: gravity.record.poleTemperatureK, equatorTemperatureK: gravity.record.equatorTemperatureK ?? null,
+              modelEquatorTemperatureK: Math.round(gravity.equatorK),
               meanTemperatureK: Math.round(gravity.meanK), omega: gravity.record.omega, beta: gravity.record.beta, poleSrgb: gravity.rows[0], equatorSrgb: gravity.rows[Math.floor(height / 2)] } } : {}),
             ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2,
               basis: modeledLimb ? 'model' : 'transit-fit',

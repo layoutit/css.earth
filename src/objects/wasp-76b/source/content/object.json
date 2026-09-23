@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-76b",
+  "displayName": "WASP-76b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.85 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-2003-05528",
+          "url": "https://arxiv.org/abs/2003.05528",
+          "label": "Ehrenreich et al. (2020), Extended Data Table 1",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "43.4 hours",
+        "source": {
+          "catalogueId": "arxiv-2003-05528",
+          "url": "https://arxiv.org/abs/2003.05528",
+          "label": "Ehrenreich et al. (2020), Extended Data Table 1",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "day-side",
+        "label": "Day side",
+        "value": "About 2,700 K",
+        "source": {
+          "catalogueId": "arxiv-2107-03349",
+          "url": "https://arxiv.org/abs/2107.03349",
+          "label": "May et al. (2021), section 3.3",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "temperature.daysideK"
+        }
+      },
+      {
+        "id": "night-side",
+        "label": "Night side",
+        "value": "About 1,300 K",
+        "source": {
+          "catalogueId": "arxiv-2107-03349",
+          "url": "https://arxiv.org/abs/2107.03349",
+          "label": "May et al. (2021), section 3.3",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "temperature.nightsideK"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "temperature",
+    "controls": [
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · May et al. 2021 · Spitzer 4.5 µm, 2017",
+        "thumbnail": "wasp-76b-lens-temperature.webp",
+        "surface": "wasp-76b-surface-temperature@2x.webp",
+        "poles": "wasp-76b-poles-temperature@2x.webp",
+        "source": {
+          "id": "wasp-76b-may-2021-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2107.03349"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "600",
+            "1800",
+            "3000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "600",
+              "1800",
+              "3000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2107.03349"
+        },
+        "notes": "Brightness temperature at 4.5 µm from May et al. (2021)'s published SPIDERMAN fit to a Spitzer phase curve of April 2017, evaluated by SPIDERMAN itself. The fit is a dipole, the simplest map: hottest at noon, coldest at midnight. Around the midnight point the fitted dipole dips below zero, which no temperature can match; that patch shows no data. The false colour runs from 600 to 3,000 K."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "May et al. (2021), AJ 162, 158",
+      "href": "https://arxiv.org/abs/2107.03349"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ehrenreich et al. (2020), Nature 580, 597",
+      "href": "https://arxiv.org/abs/2003.05528"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2003.05528",
+      "credit": "Ehrenreich et al. (2020), Nature 580, 597"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-76b.json",
+      "credit": "Radius, mass and orbit from Ehrenreich et al. (2020); assumed synchronous rotation"
+    }
+  }
+}

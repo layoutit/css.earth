@@ -84,10 +84,10 @@ describe('the body table', () => {
         expect(densityGramsPerCm3, id).toBeLessThan(1e8)
         continue
       }
-      // Mean density between 0.2 and 8.5 g/cm^3 covers porous Helene and
-      // Atlas through Mercury and catches a GM or radius entered in the wrong
-      // unit, which is the failure this table is most exposed to.
-      expect(densityGramsPerCm3).toBeGreaterThan(0.2)
+      // Mean density between 0.1 and 8.5 g/cm^3 covers the inflated hot Jupiter WASP-76b (0.17 +/- 0.02, Ehrenreich
+      // et al. 2020, Extended Data Table 1), porous Helene and Atlas through Mercury, and catches a GM or radius entered
+      // in the wrong unit, which is the failure this table is most exposed to.
+      expect(densityGramsPerCm3).toBeGreaterThan(0.1)
       expect(densityGramsPerCm3).toBeLessThan(8.5)
     }
   })

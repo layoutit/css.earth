@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kelt-9",
+  "displayName": "KELT-9",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.39 solar radii at the equator",
+        "source": {
+          "catalogueId": "arxiv-2004-14812",
+          "url": "https://arxiv.org/abs/2004.14812",
+          "label": "Ahlers et al. (2020), Table 2",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "207 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-kelt-9",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "flattening",
+        "label": "Flattening",
+        "value": "Equator 1.089 times the pole",
+        "source": {
+          "catalogueId": "arxiv-2004-14812",
+          "url": "https://arxiv.org/abs/2004.14812",
+          "label": "Ahlers et al. (2020), abstract",
+          "checked": "2026-09-23",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialToPolarRadius"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "About 16 hours",
+        "source": {
+          "catalogueId": "arxiv-2004-14812",
+          "url": "https://arxiv.org/abs/2004.14812",
+          "label": "Ahlers et al. (2020), Table 2",
+          "checked": "2026-09-23",
+          "path": "source/preparation/rotation.json",
+          "locator": "equatorialRotationPeriod"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star, brighter and bluer at the poles from a fit to TESS transits; darkening toward the edge from a model atmosphere.",
+        "thumbnail": "kelt-9-lens-color.webp",
+        "surface": "kelt-9-surface-color@2x.webp",
+        "poles": "kelt-9-poles-color@2x.webp",
+        "source": {
+          "id": "kelt-9-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of the star, a hot A star. Its fast spin flattens it, the equator 1.089 times the pole, and makes the poles hotter and brighter than the equator (Ahlers et al. 2020, from the uneven shape of KELT-9b's transits in TESS data). The rows are shaded from that fit's gravity-darkening exponent with the Roche model of the other fast-spinning stars: about 10,170 K at the poles and 9,670 K at the equator. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band. The spin axis leans about 87° from KELT-9b's orbit, so the planet passes over the poles."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ahlers et al. (2020), AJ 160, 4",
+      "href": "https://arxiv.org/abs/2004.14812"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gaudi et al. (2017), Nature 546, 514",
+      "href": "https://arxiv.org/abs/1706.06723"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2004.14812",
+      "credit": "Ahlers et al. (2020), AJ 160, 4"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kelt-9.json",
+      "credit": "Flattened radius and spin axis from Ahlers et al. (2020); Gaia DR3 astrometry"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+#
+#   VizieR Astronomical Server vizier.cds.unistra.fr
+#    Date: 2026-09-23T16:58:11 [V7.6]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-09-23T16:58:11	  Query execution date
+#INFO	request=https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=10000..10500&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36000030
+#Name: J/A+A/600/A30
+#Title: Limb-darkening for TESS satellite (Claret, 2017)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/600/a30	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/600/a30	    IVOID of underlying data collection
+#INFO	creator=Claret A.	    First author or institution
+#INFO	cites=bibcode:2017A&A...600A..30C	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2017	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/600/A30	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier.36000030	    Dataset identifier that can be used for citation
+#INFO	publication_date=2017-04-11	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_600_A30_tableab:
+#Name: J/A+A/600/A30/tableab
+#Title: a,b quadratic LDCs PHOENIX (tables 4, 5, 15, 16
+#Column	logg	(F5.2)	[2.5/6.0] Surface gravity	[ucd=phys.gravity]
+#Column	Teff	(F6)	[1500/12000] Effective temperature	[ucd=phys.temperature.effective]
+#Column	Z	(F4.1)	[0] Metallicity (log[M/H])	[ucd=phys.abund.Z]
+#Column	L/HP	(F4.1)	[2] Mixing-length parameter	[ucd=stat.fit.param]
+#Column	aLSM	(F8.4)	Quadratic limb darkening coefficient a (TESS LSM) (G2)	[ucd=phot.limbDark]
+#Column	bLSM	(F8.4)	Quadratic limb darkening coefficient b (TESS LSM) (G2)	[ucd=phot.limbDark]
+#Column	aPCM	(F8.4)	Quadratic limb darkening coefficient a (TESS FCM) (G2)	[ucd=phot.limbDark]
+#Column	bPCM	(F8.4)	Quadratic limb darkening coefficient b (TESS FCM) (G2)	[ucd=phot.limbDark]
+#Column	chi2	(F7.4)	SQRT(CHI2Q) (TESS LSM)	[ucd=stat.fit.chi2]
+#Column	Type	(A1)	[qsr] PHOENIX type of model (G1)	[ucd=meta.id;stat.fit]
+#Column	Mod	(A2)	[PD PC A] Model name (G3)	[ucd=meta.id;stat.fit]
+logg	Teff	Z	L/HP	aLSM	bLSM	aPCM	bPCM	chi2	Type	Mod
+[cm/s2]	K	[Sun]	 	 	 	 	 	 	 	
+-----	------	----	----	--------	--------	--------	--------	-------	-	--
+ 4.00	 10000	 0.0	 2.0	  0.1621	  0.2508	 -0.1469	  0.9329	 0.0948	q	PC
+ 4.50	 10000	 0.0	 2.0	  0.1602	  0.2331	 -0.1015	  0.8017	 0.0887	q	PC
+ 4.00	 10200	 0.0	 2.0	  0.1588	  0.2544	 -0.1503	  0.9371	 0.0964	q	PC
+ 4.50	 10200	 0.0	 2.0	  0.1573	  0.2352	 -0.1048	  0.8048	 0.0900	q	PC
+ 4.00	 10400	 0.0	 2.0	  0.1552	  0.2583	 -0.1542	  0.9421	 0.0982	q	PC
+ 4.50	 10400	 0.0	 2.0	  0.1543	  0.2380	 -0.1080	  0.8083	 0.0914	q	PC
+ 4.00	 10000	 0.0	 2.0	  0.1381	  0.2677	 -0.1469	  0.9329	 0.1909	r	PC
+ 4.50	 10000	 0.0	 2.0	  0.1364	  0.2587	 -0.1015	  0.8017	 0.1903	r	PC
+ 4.00	 10200	 0.0	 2.0	  0.1339	  0.2722	 -0.1503	  0.9371	 0.1953	r	PC
+ 4.50	 10200	 0.0	 2.0	  0.1328	  0.2617	 -0.1048	  0.8048	 0.1936	r	PC
+ 4.00	 10400	 0.0	 2.0	  0.1292	  0.2775	 -0.1542	  0.9421	 0.2013	r	PC
+ 4.50	 10400	 0.0	 2.0	  0.1291	  0.2655	 -0.1080	  0.8083	 0.1975	r	PC
+

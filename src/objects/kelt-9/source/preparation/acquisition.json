@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-source.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT source_id, ref_epoch, ra, dec, parallax, parallax_error, pmra, pmdec, radial_velocity, radial_velocity_error, phot_g_mean_mag, bp_rp, teff_gspphot, has_xp_sampled FROM gaiadr3.gaia_source WHERE source_id = 2064327278651198336"
+      },
+      "requiredPrefix": "source_id,"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2064327278651198336&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2017-tess-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=10000..10500&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod"
+    }
+  ]
+}

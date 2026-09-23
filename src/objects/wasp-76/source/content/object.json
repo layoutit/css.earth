@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-76",
+  "displayName": "WASP-76",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.76 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2003-05528",
+          "url": "https://arxiv.org/abs/2003.05528",
+          "label": "Ehrenreich et al. (2020), Extended Data Table 1",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "189 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-wasp-76",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "wasp-76-lens-color.webp",
+        "surface": "wasp-76-surface-color@2x.webp",
+        "poles": "wasp-76-poles-color@2x.webp",
+        "source": {
+          "id": "wasp-76-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of the star, an F7 dwarf. Its fainter companion, WASP-76 B, 0.44 arcseconds away, falls inside Gaia's spectrum window and adds a little of its redder light. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at the star's ESPRESSO temperature and gravity (6,329 K, log g 4.20): a model. The spin axis is measured only on the sky, 61° from the orbit, so the display axis is celestial north."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ehrenreich et al. (2020), Nature 580, 597",
+      "href": "https://arxiv.org/abs/2003.05528"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2003.05528",
+      "credit": "Ehrenreich et al. (2020), Nature 580, 597"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-76.json",
+      "credit": "Radius and mass from Ehrenreich et al. (2020); Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

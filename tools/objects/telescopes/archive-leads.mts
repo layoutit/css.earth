@@ -11,8 +11,16 @@ export interface ArchiveLeadService {
   readonly service: string; readonly state: 'sampled' | 'overflow' | 'empty-in-scope' | 'unavailable';
   readonly scope: string; readonly reason: string;
   readonly instruments: readonly { readonly telescope: string; readonly instrument: string; readonly records: number; readonly sample: string }[];
+  /** Exact public source files sampled from KOA, distinct from qualified observation choices. */
+  readonly sources?: readonly KeckSourceLead[];
   readonly evidence?: readonly string[];
 }
+export interface KeckSourceLead {
+  readonly table: string; readonly instrument: string; readonly koaid: string;
+  readonly targetName: string; readonly filehand: string; readonly dateObs: string;
+  readonly evidence: string;
+}
+export const KECK_SOURCE_SAMPLE_LIMIT = 3;
 const key = (name: string) => name.toLocaleLowerCase('en-US').replace(/[^a-z0-9]+/gu, '');
 const namesOf = (target: TargetCatalogueEntry) => [...new Set([target.name, ...target.aliases].flatMap(name =>
   [name, name.replace(/\s+/gu, ''), name.replace(/\s+/gu, '-')]))].filter(Boolean);
@@ -28,15 +36,33 @@ async function save(root: string, source: string, request: unknown, rows: unknow
 
 /** KOA publishes one TAP table per instrument. Query each sequentially to keep process and network load small. */
 export async function searchKeckLeads(root: string, target: TargetCatalogueEntry, query: typeof koaQuery = koaQuery): Promise<ArchiveLeadService> {
-  const scope = `Exact target-name variants across ${INSTRUMENT_TABLES.length} public KOA TAP instrument tables; object-frame counts only`;
+  const scope = `Exact target-name variants across ${INSTRUMENT_TABLES.length} public KOA TAP instrument tables; object-frame counts and up to ${KECK_SOURCE_SAMPLE_LIMIT} exact public FITS files per instrument`;
   try { if (query === koaQuery) astroqueryToolchainSync(); }
   catch (error) { return { service: TAP_SYNC, state: 'unavailable', scope, reason: message(error), instruments: [] }; }
   const names = namesOf(target), literals = names.map(name => `'${name.replaceAll("'", "''")}'`).join(',');
-  const instruments: ArchiveLeadService['instruments'][number][] = [], failures: string[] = [], evidence: string[] = [];
+  const instruments: ArchiveLeadService['instruments'][number][] = [], sources: KeckSourceLead[] = [], failures: string[] = [], evidence: string[] = [];
+  const sample = async (table: (typeof INSTRUMENT_TABLES)[number]) => {
+    const instrument = table.slice(4).toUpperCase();
+    const exact = `SELECT TOP ${KECK_SOURCE_SAMPLE_LIMIT} koaid,targname,koaimtyp,filehand,date_obs FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals}) AND filehand IS NOT NULL ORDER BY koaid`;
+    const frames = await query(exact);
+    const pin = await save(root, TAP_SYNC, exact, frames);
+    const sampled: KeckSourceLead[] = [];
+    for (const frame of frames) {
+      const targetName = requireString(column(frame, 'targname'), 'KOA frame target');
+      if (!names.some(candidate => key(candidate) === key(targetName))) throw new TypeError(`KOA ${table} returned an unrequested frame target.`);
+      if (column(frame, 'koaimtyp') !== 'object') throw new TypeError(`KOA ${table} returned a non-object frame.`);
+      const koaid = requireString(column(frame, 'koaid'), 'KOA frame id'), filehand = requireString(column(frame, 'filehand'), 'KOA filehand');
+      if (!/^\/[A-Za-z0-9._/-]+\.fits$/u.test(filehand) || filehand.includes('..') || !/^[A-Za-z0-9._-]+\.fits$/u.test(koaid))
+        throw new TypeError(`KOA ${table} returned an unsupported source file identity.`);
+      sampled.push({ table, instrument, koaid, targetName, filehand, dateObs: column(frame, 'date_obs') ?? '', evidence: pin });
+    }
+    evidence.push(pin); sources.push(...sampled);
+  };
   let attempted = 0;
   for (const table of INSTRUMENT_TABLES) {
     attempted++;
     const adql = `SELECT targname, COUNT(*) AS frames FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals}) GROUP BY targname`;
+    let hasFrames = false;
     try {
       const rows = await query(adql);
       evidence.push(await save(root, TAP_SYNC, adql, rows));
@@ -44,15 +70,21 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
         const name = requireString(column(row, 'targname'), 'KOA target name'), count = Number(column(row, 'frames'));
         if (!Number.isSafeInteger(count) || count < 0) throw new TypeError(`KOA ${table} has an invalid frame count.`);
         if (!names.some(candidate => key(candidate) === key(name))) throw new TypeError(`KOA ${table} returned an unrequested target.`);
-        if (count) instruments.push({ telescope: 'Keck', instrument: table.slice(4).toUpperCase(), records: count, sample: name });
+        if (!count) continue;
+        hasFrames = true;
+        const instrument = table.slice(4).toUpperCase();
+        instruments.push({ telescope: 'Keck', instrument, records: count, sample: name });
       }
     } catch (error) {
       failures.push(`${table}: ${message(error)}`);
+      continue;
     }
+    if (hasFrames) try { await sample(table); }
+    catch (error) { failures.push(`${table}: exact-file sampling failed: ${message(error)}`); }
   }
   return { service: TAP_SYNC, state: failures.length ? evidence.length ? 'overflow' : 'unavailable' : instruments.length ? 'sampled' : 'empty-in-scope', scope,
-    reason: failures.length ? `${evidence.length}/${attempted} attempted tables answered; ${INSTRUMENT_TABLES.length - attempted} not searched; ${failures.join('; ')}` : `${instruments.reduce((n, item) => n + item.records, 0)} matching public object frames; archive names are not science qualifications.`,
-    instruments, evidence };
+    reason: failures.length ? `${attempted - failures.length}/${attempted} attempted tables answered; ${failures.join('; ')}` : `${instruments.reduce((n, item) => n + item.records, 0)} matching public object frames; ${sources.length} exact FITS leads sampled. Archive names are not science qualifications.`,
+    instruments, sources: sources.sort((a,b)=>a.instrument.localeCompare(b.instrument)||a.koaid.localeCompare(b.koaid)), evidence };
 }
 
 const GEMINI = 'https://archive.gemini.edu/jsonsummary/';
