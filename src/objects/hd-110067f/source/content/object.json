@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-110067f",
+  "displayName": "HD 110067 f",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.601 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-06692-3",
+          "url": "https://doi.org/10.1038/s41586-023-06692-3",
+          "label": "Luque et al. (2023)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "41.05854 days",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-06692-3",
+          "url": "https://doi.org/10.1038/s41586-023-06692-3",
+          "label": "Luque et al. (2023)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 110067; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-110067f-lens-shape.webp",
+        "surface": "hd-110067f-surface-shape@2x.webp",
+        "poles": "hd-110067f-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-110067f-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1038/s41586-023-06692-3"
+        },
+        "falseColor": false,
+        "notes": "The transit and radial-velocity measurements constrain the size and orbit, not a surface image or visible colour. Gray is a display convention. Circular orbits with the published 2023 periods and transit epochs. Planet-planet perturbations and transit-timing variations are not propagated; this is not a current transit forecast or an N-body resonance simulation. Absolute sky nodes and spin axes are unknown."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Luque et al. (2023), Nature 623, 932–937",
+      "href": "https://doi.org/10.1038/s41586-023-06692-3"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1038/s41586-023-06692-3",
+      "credit": "Luque et al. (2023), Nature 623, 932–937"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-110067f.json",
+      "credit": "Luque et al. (2023), Table 1: radius and circular orbit; mass adopted only where measured."
+    }
+  }
+}

@@ -127,3 +127,6 @@ tests/fixtures/telescope-vo/*.fits binary
 # Dawn VIR Ceres mosaic labels and catalog (CRLF PDS3 text) and the Davies et al. (2024) machine-readable table.
 src/objects/ceres/source/science/vir-mosaic/* -text -whitespace
 src/objects/io/source/science/davies-2024/*.txt -text -whitespace
+
+# Preserve the CIE provider's original CRLF table.
+src/objects/hd-110067/source/reference/CIE_xyz_1931_2deg.csv -text -whitespace
