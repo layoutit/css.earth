@@ -16,8 +16,8 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { inferEmission, type InferenceGrid } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
-import { circumstellarAuthor, type EdgeOnReconstruction, type EdgeOnSolveInputs } from '../../adapters/preparation/circumstellar.ts';
-import { densityEncoder } from '../../adapters/preparation/density-encoding.ts';
+import { circumstellarAuthor, type EdgeOnReconstruction, type EdgeOnSolveInputs } from '../../../adapters/preparation/circumstellar.ts';
+import { densityEncoder } from '../../../adapters/preparation/density-encoding.ts';
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const id = process.argv[2];

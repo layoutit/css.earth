@@ -1,5 +1,5 @@
 import { inputWavelengths } from './recipe-request.mts';
-import { skyCatalogueEntry } from './sky-target.mts';
+import { skyCatalogueEntry } from './sky/target.mts';
 import { parseLimits, parseRegion } from './vo/contracts.mts';
 import { loadVoInputs, voCandidates, type VoInputs, type VoProductCandidate } from './vo/bridge.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
