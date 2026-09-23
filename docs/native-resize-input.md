@@ -1,7 +1,15 @@
 # Native resize as a camera input
 
-The current working shape is a native resize surface for rotation, inside a
-separate native scroll surface for zoom. Try the retained Saturn scene at
+This document records a historical input experiment. The browser helpers under
+`tests/experiments/native-scroll/` and `tests/experiments/native-resize/`, and
+the `perf:trace` package command, last existed before
+[revision `6e32bc459b`](https://github.com/layoutit/css.earth/tree/6e32bc459b%5E).
+Commands below that name those helpers or `perf:trace` describe the original
+runs; they cannot be run from this checkout. The preparation tools under
+`tools/experiments/` still exist.
+
+The experiment used a native resize surface for rotation, inside a
+separate native scroll surface for zoom. Its retained Saturn scene was at
 `http://127.0.0.1:4352/saturn/?drag=resize`:
 
 ```sh
@@ -44,7 +52,7 @@ rounding of small registered numbers. Perspective covariance calculations also
 avoid a tiny intermediate factor. A discarded 1e36 storage scale overflowed in
 Chromium; its captures are explicitly invalid. The current scale is 1e6.
 
-Browser checks under `tests/experiments/native-scroll/` cover:
+The historical browser checks under `tests/experiments/native-scroll/` covered:
 
 - `resize-browser.mts`: repeated drags, one-pixel movement, release, independent
   wheel zoom, wheel over a marker, and native Neptune navigation.
@@ -62,7 +70,8 @@ Generated evidence remains in ignored `output/playwright/native-drag/`. The
 numeric and captured-reference image checks retain their errors and images;
 performance runs retain the HTML, helper script, raw traces and hashes. Capture
 without a simultaneous video or another heavy browser workload. Analyze traces
-with the repository's `perf:trace` command before running `perf-analysis.mts`.
+with the then-available `perf:trace` command before running
+`perf-analysis.mts`. That package command is no longer available.
 
 The final Chrome 153.0.8010.37 capture at 1280×900, DPR 1 records 23.9ms p95
 presentation intervals for native input near Saturn and 24.5ms for JS input

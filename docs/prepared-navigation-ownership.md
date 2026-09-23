@@ -106,14 +106,13 @@ comparisons and the interpretation used for its model.
 
 ## Verification
 
-- `pnpm test` and `pnpm typecheck:renderer`
-- `pnpm build`
-- `node `site/test/rendered-page.test.mts` — registry-derived Chrome DPR 1/2,
-  stable nodes and animations, native visual comparisons, actual pause/resume.
-- `node `site/test/rendered-page.test.mts` — real bank replacement and
-  flights, capacity limits, no resets and retained sidebar.
-- `node `site/test/rendered-page.test.mts` — delayed package and input
-  cancellation, immediate complete card, no intermediate card at mount.
+- `node --test tools/prepared/prepared-activation-registry.test.mts tools/prepared/prepared-activation-transport.test.mts`
+  checks activation ownership and cancellation.
+- `node --test site/test/navigation-lifecycle.test.mts site/test/scene-session.test.mts`
+  checks navigation and retained scene state.
+- `node --test site/test/rendered-page.test.mts` parses built Saturn, Earth and
+  Mercury HTML for one scene, a camera and prepared texture references. It does
+  not run Chrome or verify animation and flight behavior.
 - [prepared-object-worker-client.test.ts](../src/renderers/css/prepared-object-worker-client.test.ts)
   in the renderer suite — persistent worker reuse, cancellation and disposal.
 

@@ -122,7 +122,7 @@ Originals are acquired from their publishers, not other objects.
 | --- | --- |
 | Title | Pinned Inter variable font; shared title outline preparation. |
 | Physical/orbit data | Vendored `@cssearth/astronomy` JPL body data, Kepler state vectors and IAU rotation. Mean radius 469.7 km; fixed geometry epoch 2026-09-03T00:00:00 TT. |
-| Facts | [NASA Ceres facts](https://science.nasa.gov/dwarf-planets/ceres/facts/), summarized in `tools/prepare-content.mjs`: asteroid-belt location, Dawn observations, about nine hours per rotation, no moons. |
+| Facts | [NASA Ceres facts](https://science.nasa.gov/dwarf-planets/ceres/facts/), summarized in [text.json](text.json): asteroid-belt location, Dawn observations, about nine hours per rotation, no moons. |
 
 The maps share a global equirectangular grid. As with Pluto, exactly black pixels connected to the southern source border are identified before interpolation. The shared preparation helper marks those gaps with a neutral gray grid; it does not infer terrain. Enclosed black terrain and nonzero JPEG edge pixels remain untouched, so a dark edge fringe can remain.
 
