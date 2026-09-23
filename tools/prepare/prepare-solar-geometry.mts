@@ -45,7 +45,7 @@ const {
   SMALL_BODY_IDS, asteroidElements,
   COMET_IDS, cometElements,
   STAR_IDS, starAstrometry, starStateKm,
-  HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedOrbit, hostedKeplerElements,
+  HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedPlanetStateAboutCentreKm, hostedOrbitCentreStateKm, hostedBarycentreCompanion, hostedOrbitCentreId, hostedOrbit, hostedKeplerElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToParentKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   bodyRotationAt, ROTATING_BODY_IDS,
@@ -162,20 +162,25 @@ const primaryVelocity = (id: string) => primaryState(id).velocityKmPerDay.map(va
 const entries = BODIES.map((body) => {
   const parent = ASTRONOMY_BODY_DATA[body].parent, star = isPlacedStar(body), hosted = isHostedPlanet(body);
   const hostedState = hosted ? hostedPlanetStateRelativeKm(body as Parameters<typeof hostedPlanetStateRelativeKm>[0], EPOCH_JD_TT) : null;
+  // A circumbinary orbit is drawn about the centre of mass of its host and companion: its own state about that centre, the
+  // three masses, and the centre placed off the host.
+  const companion = hosted ? hostedBarycentreCompanion(body as Parameters<typeof hostedBarycentreCompanion>[0]) : null;
+  const orbitCentreKm = companion ? hostedOrbitCentreStateKm(body as Parameters<typeof hostedOrbitCentreStateKm>[0], EPOCH_JD_TT).positionKm : null;
+  const hostedOrbitState = companion ? hostedPlanetStateAboutCentreKm(body as Parameters<typeof hostedPlanetStateAboutCentreKm>[0], EPOCH_JD_TT) : hostedState;
   if (parent === null && !star) throw new TypeError(`Solar geometry requires an orbital parent for ${body}.`);
   const isSatellite = parent !== null && parent !== "sun";
   const epochState = isSatellite ? epochStates.get(body) : null;
   if (epochState && epochState.centerBodyId !== parent) throw new TypeError(`Ephemeris parent differs for ${body}.`);
-  const moonPosition = hostedState ? hostedState.positionKm : isSatellite ? epochState?.positionKm ?? moonPositionRelativeToParentKm(body, EPOCH_JD_TT) : null;
+  const moonPosition = hostedOrbitState ? hostedOrbitState.positionKm : isSatellite ? epochState?.positionKm ?? moonPositionRelativeToParentKm(body, EPOCH_JD_TT) : null;
   // ELP supplies the Earth's Moon position; take its centred derivative.
   // Other satellite records already expose their analytic Kepler velocity.
   const dt = 0.001;
-  const moonVelocity = !isSatellite ? null : hostedState ? hostedState.velocityKmPerDay : epochState ? epochState.velocityKmPerDay : isIncluded(SATELLITE_IDS, body)
+  const moonVelocity = !isSatellite ? null : hostedOrbitState ? hostedOrbitState.velocityKmPerDay : epochState ? epochState.velocityKmPerDay : isIncluded(SATELLITE_IDS, body)
     ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
     : moonPositionRelativeToParentKm(body, EPOCH_JD_TT + dt).map((value, index) =>
       (value - moonPositionRelativeToParentKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
   const parentPosition = !isSatellite ? null : isSatellite
-    ? hostedState ? starStateKm(parent as Parameters<typeof starStateKm>[0], EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+    ? hostedState ? starStateKm(parent as Parameters<typeof starStateKm>[0], EPOCH_JD_TT).positionKm.map((value, axis) => (value + (orbitCentreKm?.[axis] ?? 0)) / ASTRONOMICAL_UNIT_KILOMETERS)
       : primaryStates.has(parent)
       ? primaryStates.get(parent)!.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : isIncluded(DWARF_PLANET_IDS, parent)
@@ -183,7 +188,15 @@ const entries = BODIES.map((body) => {
       : isIncluded(SMALL_BODY_IDS, parent)
       ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : primaryPosition(parent) : null;
-  const mu = isSatellite
+  // A hosted orbit is a published ellipse propagated at its measured period, not at the masses: its drawn orbit uses the
+  // gravitational parameter that ellipse implies, n^2 a^3, so the path drawn is the path the body moves on. Masses and a
+  // measured period disagree by up to a fifth of the axis (Kepler-186 f), and a circumbinary mean period differs from the
+  // osculating axis by design.
+  const hostedElements = hosted ? hostedKeplerElements(hostedOrbit(body as never), starAstrometry(parent as never),
+    (ASTRONOMY_BODY_DATA as Record<string, { meanRadiusKm: number }>)[parent!]!.meanRadiusKm) : null;
+  const mu = hostedElements
+    ? hostedElements.meanMotionRadPerDay ** 2 * (hostedElements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS) ** 3
+    : isSatellite
     ? (epochState?.gravitationalParametersKm3PerS2?.combined ?? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
        ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2)) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
     : GM_SUN_AU3_PER_DAY2;
@@ -298,6 +311,7 @@ const entries = BODIES.map((body) => {
   return Object.freeze({
     body,
     parent,
+    centreId: companion ? hostedOrbitCentreId(body as Parameters<typeof hostedOrbitCentreId>[0]) : parent,
     centerPositionAu,
     direction: bodyFixed,
     starDirection,
@@ -459,6 +473,7 @@ ${
     {
       body,
       parent,
+      centreId,
       centerPositionAu,
       semiMajorAxisAu,
       eccentricity,
@@ -473,7 +488,7 @@ ${
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
     `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu === null ? 'none (unbound)' : aphelionAu.toPrecision(5) + ' AU'}\n` +
     `  ${sourceKey(body)}: Object.freeze({\n` +
-    (parent === "sun" || parent === null ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body)!.parentHeliocentricState)},\n` : ""}`) +
+    (parent === "sun" || parent === null ? "" : `    centerBodyId: ${JSON.stringify(centreId)},\n${centreId === parent ? "" : `    centerParentBodyId: ${JSON.stringify(parent)},\n`}    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body)!.parentHeliocentricState)},\n` : ""}`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +
     `    eccentricity: ${eccentricity},\n` +
     `    heliocentricDistanceAu: ${heliocentricDistanceAu},\n` +
@@ -537,6 +552,8 @@ export interface BodyOrbit {
   semiMajorAxisAu: number; eccentricity: number; heliocentricDistanceAu: number;
   perihelionDirection: readonly number[]; trueAnomalyDegrees: number; inclinationDegrees: number;
   perihelionAu: number; aphelionAu: number | null; centerBodyId?: string; centerPositionAu?: readonly number[];
+  /** Set when the orbit centre is a binary's centre of mass rather than a body: the body that centre is placed from. */
+  centerParentBodyId?: string;
 }
 
 export function requireBodyOrbit(bodyId: string): BodyOrbit {

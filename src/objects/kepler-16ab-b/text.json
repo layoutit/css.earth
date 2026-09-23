@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-16ab-b",
+  "card": {
+    "text": "Saturn-mass planet that circles both stars of Kepler-16, one year every 226 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1109-3432",
+        "url": "https://arxiv.org/abs/1109.3432",
+        "label": "Doyle et al. 2011",
+        "checked": "2026-09-23",
+        "locator": "Table 1, Planet b",
+        "quote": "Mass, Mb (MJupiter) 0.333"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-16 (AB) b circles two stars at once, a real Tatooine. It is three-quarters as wide as Jupiter and a third as heavy; here it is a plain gray sphere.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1109-3432",
+        "url": "https://arxiv.org/abs/1109.3432",
+        "label": "Doyle et al. 2011",
+        "checked": "2026-09-23",
+        "locator": "Table 1, Planet b",
+        "quote": "Radius, Rb (RJupiter) 0.7538"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A gray sphere of the measured radius, lit by star A. No colour, surface or atmosphere is observed."
+    }
+  }
+}

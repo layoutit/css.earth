@@ -18,6 +18,8 @@ class Input extends EventTarget {
   readonly attributes: Record<string, string> = {}; tagName = "INPUT"; type = "checkbox"; min = "0"; max = "4"; step = "1";
   constructor(fields: Partial<Input> = {}) { super(); Object.assign(this, fields); }
   setAttribute(key: string, value: string): void { this.attributes[key] = value; }
+  getAttribute(key: string): string | null { return key === "name" ? this.name : key === "value" ? this.value : this.attributes[key] ?? null; }
+  closest(): Root | null { return null; }
   hasAttribute(key: string): boolean { return Object.hasOwn(this.attributes, key); }
   emit(type: string): void { this.dispatchEvent(new Event(type)); }
 }
@@ -35,8 +37,8 @@ class Root {
     contains: (key: string): boolean => this.classes.has(key),
   };
 }
-type InformationPanel = { querySelector(selector: string): Root | null };
-type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null };
+type InformationPanel = { querySelector(selector: string): { elements: Input[]; closest(): Root } | null; querySelectorAll(): never[] };
+type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null; getElementById(id: string): { hidden: boolean } | null };
 type HarnessMutation = (parts: { lensInputs: Input[]; settingInputs: Input[]; stage: HTMLElement; document: HarnessDocument; lensRoot: Root }) => void;
 function selectionState(initial: ObjectSelection): ObjectSelectionState {
   return { committed: null, desired: initial, plan: null, pending: true, loadingMaterial: false, ready: false, error: null, viewRevision: null };
@@ -51,8 +53,11 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   const minimap = new Input({ name: "minimap" });
   settingInputs.push(motion, surfaceLabels, heliosphere, illustrationModels, minimap);
   const lensRoot = new Root(lensInputs), settingsRoot = new Root(settingInputs);
-  const information: InformationPanel = { querySelector: selector => selector === ".object-lenses" ? lensRoot : null };
-  const document: HarnessDocument = { querySelector: selector => selector === ".object-information-panel" ? information : selector === ".object-lenses" ? lensRoot : settingsRoot };
+  const panels = new Map(lensInputs.map(input => { input.setAttribute('aria-controls', input.value); return [input.value, { hidden: false }]; }));
+  const form = { elements: lensInputs, closest: () => lensRoot };
+  const information: InformationPanel = { querySelector: selector => selector === 'form[data-dataset-form]' ? form : null, querySelectorAll: () => [] };
+  const document: HarnessDocument = { querySelector: selector => selector === ".object-information-panel" ? information : selector === ".object-lenses" ? lensRoot : settingsRoot,
+    getElementById: id => panels.get(id) ?? null };
   // The binding accepts an HTMLElement only to reach ownerDocument; this mock supplies that boundary.
   const stage = { ownerDocument: document as unknown as Document } as unknown as HTMLElement;
   const errors: unknown[] = [], actions: ObjectAction[] = []; let state = selectionState(initial);
@@ -179,12 +184,12 @@ test("one failed native listener removal does not stop the rest of control clean
 });
 
 
-test("prepared lens legends follow committed selection through pending work", () => {
+test("prepared dataset details follow committed selection through pending work", () => {
   const ids = moonControls.lenses?.controls.slice(0, 2).map(lens => lens.id) ?? []; assert.equal(ids.length, 2);
-  const legends = ids.map(id => ({ dataset: { lensLegend: id }, hidden: true }));
-  const h = harness(moonControls, ({ lensRoot, lensInputs }) => {
-    lensRoot.querySelectorAll = <T extends Element>(selector?: string): NodeListOf<T> =>
-      (selector === "[data-lens-legend]" ? legends : lensInputs) as unknown as NodeListOf<T>;
+  const legends = ids.map(() => ({ hidden: true }));
+  const h = harness(moonControls, ({ document }) => {
+    const lookup = document.getElementById;
+    document.getElementById = id => legends[ids.indexOf(id)] ?? lookup(id);
   });
   h.ready(); assert.deepEqual(legends.map(legend => legend.hidden), [false, true]);
   const desired = { ...h.initial, lensId: ids[1] };
