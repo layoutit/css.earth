@@ -1,5 +1,5 @@
 import { direction, fail, finite, numbers, positive, record, text } from './guards.js';
-import type { CubicSkyPlan } from '../solar-system/cubic-sky-runtime.js';
+import type { CubicSkyPlan } from '../solar-system/cubic-sky-plan.js';
 import type { DirectionalSunPlan } from '../solar-system/directional-sun-coordinate.js';
 
 export function requireSky(value: unknown): asserts value is CubicSkyPlan {

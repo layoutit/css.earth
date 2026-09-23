@@ -6,19 +6,20 @@ import type { ObjectSceneLifecycle } from './object-scene.js';
 import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import { createPreparedObjectNavigation } from './prepared-object-navigation.js';
 
-type Bind<Options> = (definition: ObjectRuntimeDefinition) => (stage: HTMLElement, options: Options) => ObjectSceneLifecycle;
+type Bind<Options> = (definition: ObjectRuntimeDefinition, frame: import('../navigation/world-camera.js').PreparedWorldCameraFrame) => (stage: HTMLElement, options: Options) => ObjectSceneLifecycle;
 
 /** Loading yields a native factory, not another mounted lifecycle. Preflight and mount share its definition. */
 export async function loadNavigableObject<Options>(input: unknown, transport: PreparedCssTransport, bind: Bind<Options>, signal?: AbortSignal) {
   const descriptor = parseObjectDescriptor(input);
   const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
+  if (!frame) throw new TypeError('A navigable object requires a prepared world frame.');
   const definition = await loadPreparedCssObject(descriptor, transport, { signal });
   signal?.throwIfAborted();
   const mount = (stage: HTMLElement, options: Options) => {
     if (stage.dataset?.preparedObject && stage.dataset.preparedObject !== descriptor.id) {
       throw new TypeError('Initial view belongs to another prepared object.');
     }
-    return bind(definition)(stage, { ...options, ...(frame ? { worldFrame: frame } : {}) });
+    return bind(definition, frame)(stage, options);
   };
-  return Object.assign(mount, { navigation: frame ? createPreparedObjectNavigation(async () => definition, frame) : null });
+  return Object.assign(mount, { navigation: createPreparedObjectNavigation(async () => definition, frame) });
 }

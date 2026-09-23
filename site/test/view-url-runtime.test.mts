@@ -1,3 +1,4 @@
+import { unusedMountOptions } from './navigation-test-values.mts';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -46,13 +47,13 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
   const session = scenes.start({ objectId: 'mercury', url: href, onFailure: (_session, error) => onError(error), onCleanupError: onError });
   const activation = session.activate(() => ({ ready: Promise.resolve(), sharedView: view,
     pause() {}, resume() {}, destroy() {},
-  }), {} as HTMLElement, {});
+  }), {} as HTMLElement, unusedMountOptions);
   const sceneView = createSceneView({ windowTarget: windowTarget as unknown as BrowserWindow, scenes,
-    requests: createNavigationLifecycle({ onCancel() {}, onError }), listenToPopState: true,
+    requests: createNavigationLifecycle({ onCancel() {}, onError }),
     getHistory: () => null, getWorld: () => null, getMotion: () => motion, setMotion: value => { motion = value; }, onError,
   });
   const owner = {
-    async restore() { await activation; await sceneView.arrive(session); session.commit(); },
+    async restore() { await activation; session.url = windowTarget.location.href; await sceneView.arrive(session); session.commit(); },
     destroy() { session.dispose(undefined, { flush: false }); },
   };
   return { owner, windowTarget, timers, writes, errors, restored,
@@ -101,10 +102,10 @@ test("invalid links leave the current scene usable and are replaced only after a
   }
 });
 
-test("popstate restores the stored camera and disposal removes history listeners and scheduled work", async () => {
+test("application arrivals restore the stored camera and disposal removes scheduled work", async () => {
   const h = fixture(); await h.owner.restore();
   h.windowTarget.location = new URL(`http://localhost:4210/mercury?${formatSharedView(saved())}`);
-  h.windowTarget.dispatchEvent(new Event("popstate")); await new Promise<void>(resolve => setImmediate(resolve));
+  await h.owner.restore();
   assert.deepEqual(h.restored, [saved()]);
   h.changed(); assert.equal(h.timers.size, 1); h.owner.destroy();
   h.windowTarget.dispatchEvent(new Event("popstate")); h.changed();

@@ -32,7 +32,7 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
       presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
-    cameraElement: make(170), skyElement: make(0), stage: make(0), sceneElement: { style: {} } };
+    cameraElement: make(170), viewport: { read: () => ({ bounds: make(0).getBoundingClientRect(), focalPixels: focal, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(0), sceneElement: { style: {} } };
   const dolly = createPerspectiveDolly(options as unknown as Parameters<typeof createPerspectiveDolly>[0]);
   const bodyCenter = [120, -70, -1200] as const;
   dolly.setBodyCenter(bodyCenter);
@@ -52,13 +52,13 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   expect(published.stageViewport).toEqual({ focalPixels: focal, widthPixels: width, heightPixels: height,
     principalOffsetPixels: [0, 0] });
   expect(published.projection.focalPixels).toBe(focal);
-  expect(published.projection.principalOffsetPixels).toEqual([-170, 0]);
+  expect(published.projection.principalOffsetPixels).toEqual([0, 0]);
   const expected = [0, .3, 0, 0, -.3, 0, 0, 0, 0, 0, .3, 0, ...bodyCenter, 1];
   published.projection.eyeFromScene.forEach((value, index) => expect(value).toBeCloseTo(expected[index]!, 10));
   expect(dolly.state().silhouetteRadius).toBe(published.body!.silhouetteRadius);
   expect(dolly.state().offAxisDegrees).toBe(published.body!.offAxisDegrees);
   const trackball = dolly.trackball();
-  expect(trackball.centerX).toBeCloseTo(170 + width / 2 + published.body!.silhouette!.centre[0], 10);
+  expect(trackball.centerX).toBeCloseTo(width / 2 + published.body!.silhouette!.centre[0], 10);
   expect(trackball.centerY).toBeCloseTo(height / 2 + published.body!.silhouette!.centre[1], 10);
   expect(published.levelOfDetail!.stage).toBe('geometry');
   const local = [30, 40, 50], eye = [108, -61, -1185];
@@ -98,11 +98,11 @@ it('overview centering preserves the current view and only converges while dolly
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0, 0, 0],
       presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
-    cameraElement: make(170), skyElement: make(0), stage: make(0), sceneElement: { style: {} },
+    cameraElement: make(170), viewport: { read: () => ({ bounds: make(0).getBoundingClientRect(), focalPixels: focal, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(0), sceneElement: { style: {} },
   } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
   dolly.setBodyCenter([1300, -600, -3500]);
   const initial = dolly.bodyCenter(), initialDistance = dolly.camera.state.distance;
-  const screen = () => { const [x, y, z] = dolly.bodyCenter()!; return [-170 + focal * x / -z, focal * y / -z]; };
+  const screen = () => { const [x, y, z] = dolly.bodyCenter()!; return [focal * x / -z, focal * y / -z]; };
   const initialOffset = Math.hypot(...screen());
   dolly.setZoomOutCentering(true);
   expect(dolly.bodyCenter(), 'Enabling centering does not move the eye').toEqual(initial);
@@ -142,7 +142,7 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
     worldContext: { frame: { ...frame, originM }, bodyRadiusUnits: 100, kilometersPerUnit: .001,
       maximumExtentUnits: 1e9 },
-    cameraElement: make(), skyElement: make(), stage: make(), sceneElement: element,
+    cameraElement: make(), viewport: { read: () => ({ bounds: make().getBoundingClientRect(), focalPixels: 1247, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(), sceneElement: element,
   } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
   const dolly = create(frame.originM);
   const identity = { m11: 1, m21: 0, m31: 0, m12: 0, m22: 1, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;

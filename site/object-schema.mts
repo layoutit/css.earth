@@ -12,9 +12,9 @@ export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-plan
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
   color: string; distance: NavigationDistance; route: string; description: string;
-  loadScene(signal?: AbortSignal): Promise<SceneFactory>; worldFrame?: unknown; discovery?: ObjectDiscovery;
+  loadScene(signal?: AbortSignal): Promise<SceneFactory>; worldFrame: unknown; discovery?: ObjectDiscovery;
 }
-export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: PreparedWorldCameraFrame | null }>;
+export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: PreparedWorldCameraFrame }>;
 
 const OBJECT_INPUT_KEYS = new Set([
   "id",
@@ -46,7 +46,7 @@ export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
     throw new TypeError(`Unsupported object field: ${unsupported.join(", ")}.`);
   }
 
-  const { id, name, systemName, classification, color, distance, route, loadScene, description, worldFrame = null } = input;
+  const { id, name, systemName, classification, color, distance, route, loadScene, description, worldFrame } = input;
   if (!safeId(id) || !nonEmpty(name) || !nonEmpty(systemName) || !OBJECT_CLASSIFICATIONS.includes(classification) ||
       !/^#[0-9a-f]{6}$/u.test(color ?? "") ||
       route !== `/${id}/` || typeof loadScene !== "function" ||
@@ -96,8 +96,7 @@ function nonEmpty(value: unknown): value is string {
 }
 // Registry capability data is numeric; importing a renderer entry here would
 // pull its native camera factory into every otherwise unrelated object route.
-function parseWorldFrame(value: unknown): PreparedWorldCameraFrame | null {
-  if (value === null || value === undefined) return null;
+function parseWorldFrame(value: unknown): PreparedWorldCameraFrame {
   const fields = ['referenceFrame', 'epochJdTt', 'originM', 'presentationToReference', 'metersPerUnit', 'bodyRadiusM', 'orbitUpReference'];
   const vector = (input: unknown, length: number): input is number[] => isArray(input) && input.length === length && Array.from(input).every(Number.isFinite);
   if (!record(value) || Object.getPrototypeOf(value) !== Object.prototype || Object.keys(value).some(key => !fields.includes(key)) ||

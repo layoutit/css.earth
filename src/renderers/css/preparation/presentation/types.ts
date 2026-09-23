@@ -1,6 +1,6 @@
 import type { PreparedLeaf } from '../scene/projector.js';
 import type { CameraPlan } from '../../navigation/types.js';
-import type { CubicSkyPlan } from '../../solar-system/cubic-sky-runtime.js';
+import type { CubicSkyPlan } from '../../solar-system/cubic-sky-plan.js';
 import type { DirectionalSunPlan } from '../../solar-system/directional-sun-coordinate.js';
 import type { LensVolume, ObjectControls } from '../../runtime/object-contract.js';
 import type { ObjectRuntimeDefinition } from '../../runtime/object-runtime-types.js';
