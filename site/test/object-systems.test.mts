@@ -11,7 +11,7 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
       ['hd-209458', 'HD 209458 system', '/hd-209458/'], ['k2-18', 'K2-18 system', '/k2-18/'], ['kepler-186', 'Kepler-186 system', '/kepler-186/'],
       ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'],
       ['wasp-39', 'WASP-39 system', '/wasp-39/'], ['beta-pictoris', 'Beta Pictoris system', '/beta-pictoris/'],
-      ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/']]);
+      ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/'], ['hd-110067', 'HD 110067 system', '/hd-110067/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the candidate orbits its measurements allow.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
     ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],
@@ -28,6 +28,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'beta-pictoris')!.memberIds,
     ['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'hd-110067')!.memberIds,
+    ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']);
 });
 
 test("a system's exit distance scales the Sun's 100 AU by the prepared framing radius", () => {

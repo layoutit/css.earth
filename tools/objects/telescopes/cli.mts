@@ -177,7 +177,7 @@ function displayWavelengths(value:readonly (number|null)[]|readonly (readonly [n
   const ranges = Array.isArray(value[0]) ? value as readonly (readonly [number,number])[] : [value as readonly [number|null,number|null]];
   return ranges.map(range=>range[0]===null||range[1]===null?'unknown':`${range[0]}–${range[1]} µm`).join(', ');
 }
-export function formatExploration(session:ExplorationSession & {readonly directory:string}):string {
+export function formatExploration(session:ExplorationSession & {readonly directory:string},verbose=false):string {
   const answer=session.answer,resolution=answer.targetResolution;
   const title=resolution.status==='resolved'?resolution.canonical.name:answer.target;
   const lines=[title,''];
@@ -187,16 +187,24 @@ export function formatExploration(session:ExplorationSession & {readonly directo
       `   ${choice.state==='ready'?'Qualified product available':'Retrieval and qualification available'} · ${size} · ${d.metadataBasis} metadata`,
       `   ${displayWavelengths(d.wavelengthsMicrometres)}`,
       `   ${choice.reason}`);
-    for(const limitation of choice.limitations)lines.push(`   Limitation: ${limitation}`);
+    const limitations=[...new Set(choice.limitations)];
+    for(const limitation of verbose?limitations:limitations.slice(0,3))lines.push(`   Limitation: ${limitation}`);
+    if(!verbose&&limitations.length>3)lines.push(`   ${limitations.length-3} more distinct limitation(s) in the saved result.`);
   }
   if(!session.choices.length)lines.push('No actionable observation is available in this bounded exploration.');
   for(const service of answer.services)if('sharpest' in service&&service.sharpest?.length){
     lines.push('',`Spacecraft images in OPUS (${service.images} of ${service.opusTarget}; sharpest per instrument, not retrievable from here):`);
     for(const image of service.sharpest)lines.push(`  ${image.instrument} · ${image.startTime} · ${image.centreResolutionKmPerPixel??'unknown'} km/px at body centre${image.pixelsAcross===null?'':` · ${image.pixelsAcross} px across`} · ${image.instrumentImages} images · ${image.opusId}`);
   }
-  if(answer.unresolved.length){lines.push('','Unresolved discoveries:');for(const issue of answer.unresolved)lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);}
-  if(answer.unsupported.length){lines.push('','Unsupported discoveries:');for(const issue of answer.unsupported)lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);}
-  if(answer.issues.length){lines.push('','Search limits and provider status:');for(const issue of answer.issues)lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);}
+  const appendIssues=(heading:string,issues:readonly {readonly identity?:string;readonly scope:string;readonly reason:string}[])=>{
+    if(!issues.length)return;
+    lines.push('',`${heading} (${issues.length}):`);
+    for(const issue of verbose?issues:issues.slice(0,5))lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);
+    if(!verbose&&issues.length>5)lines.push(`  ${issues.length-5} more in the saved result.`);
+  };
+  appendIssues('Unresolved discoveries',answer.unresolved);
+  appendIssues('Unsupported discoveries',answer.unsupported);
+  appendIssues('Search limits and provider status',answer.issues);
   lines.push('',`Saved: ${resolve(session.directory,'explore.json')}`);
   if(session.choices.length)lines.push(`Continue explicitly: telescope get ${shellWord(session.directory)} --pick N`);
   return `${lines.join('\n')}\n`;
@@ -248,9 +256,9 @@ export function formatArtifact(result:ArtifactInspection):string {
 }
 
 export interface CliIo {
-  readonly stdinIsTTY:boolean;readonly stdoutIsTTY:boolean;
+  readonly stdinIsTTY:boolean;readonly stdoutIsTTY:boolean;readonly stderrIsTTY?:boolean;
   readonly write:(text:string)=>void;readonly error:(text:string)=>void;
-  readonly question:(prompt:string)=>Promise<string|undefined>;readonly close:()=>void;
+  readonly question:(prompt:string)=>Promise<string|undefined>;readonly flush?:()=>Promise<void>;readonly close:()=>void;
 }
 export interface RetrievedResult {
   readonly resultPath:string;readonly product:string;readonly reused:boolean;
@@ -259,7 +267,7 @@ export interface RetrievedResult {
 export interface CliServices {
   readonly importLocalArtifact:typeof importLocalArtifact;
   readonly familyCoverageLedger:typeof familyCoverageLedger;
-  readonly saveExploration:(root:string,args:readonly string[],directory?:string)=>Promise<ExplorationSession&{readonly directory:string}>;
+  readonly saveExploration:typeof saveExploration;
   readonly getSession:(root:string,directory:string,pick:number,progress:(text:string)=>void,api?:undefined,options?:{readonly offline?:boolean})=>Promise<RetrievedResult>;
   readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
   readonly exportOutput:typeof exportOutput;
@@ -272,10 +280,35 @@ const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,save
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
   let terminal:ReturnType<typeof createInterface>|undefined;
-  return {stdinIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY),stdoutIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY),write:output,error:text=>process.stderr.write(text),
+  let flushId=0;
+  const flush=async()=>{
+    if(!process.send||!process.connected)return;
+    const id=++flushId;
+    await new Promise<void>(accept=>{
+      const acknowledged=(message:unknown)=>{if(message&&typeof message==='object'&&'flush' in message&&message.flush===id){process.off('message',acknowledged);process.off('disconnect',disconnected);accept();}};
+      const disconnected=()=>{process.off('message',acknowledged);accept();};
+      process.on('message',acknowledged);process.once('disconnect',disconnected);process.send!({flush:id});
+    });
+  };
+  return {stdinIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY),stdoutIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY),stderrIsTTY:process.stderr.isTTY===true,write:output,error:text=>process.stderr.write(text),flush,
     question:async prompt=>{terminal??=createInterface({input:process.stdin,output:process.stderr,terminal:true});try{return await terminal.question(prompt);}catch{return undefined;}},close:()=>terminal?.close()};
 }
 export const guided = (options:{readonly json:boolean},io:Pick<CliIo,'stdinIsTTY'|'stdoutIsTTY'>):boolean => !options.json&&io.stdinIsTTY&&io.stdoutIsTTY;
+function startProgress(io:CliIo,initial:string){
+  const terminal=io.stderrIsTTY===true,started=Date.now(),frames=['|','/','-','\\'];
+  let stage=initial,frame=0,width=0,stopped=false;
+  const draw=()=>{
+    const elapsed=Math.floor((Date.now()-started)/1000),line=`${frames[frame++%frames.length]} ${stage} (${elapsed}s)`;
+    io.error(`\r${line}${' '.repeat(Math.max(0,width-line.length))}`);width=line.length;
+  };
+  if(terminal)draw();else io.error(`${stage}\n`);
+  const timer=terminal?setInterval(draw,120):undefined;timer?.unref();
+  return {
+    update:(next:string)=>{if(stopped||next===stage)return;stage=next;if(terminal)draw();else io.error(`${stage}\n`);},
+    stop:(status:'done'|'failed')=>{if(stopped)return;stopped=true;if(timer)clearInterval(timer);const elapsed=Math.floor((Date.now()-started)/1000),line=`${status==='done'?'Done':'Failed'} (${elapsed}s)`;
+      if(terminal)io.error(`\r${line}${' '.repeat(Math.max(0,width-line.length))}\n`);else io.error(`${line}\n`);}
+  };
+}
 type ExecutableOutput=Extract<CliOptions,{readonly command:'export'|'project'|'sphere'|'spatial'}>;
 async function executeOutput(options:ExecutableOutput,api:CliServices):Promise<string>{
   if(options.command==='project'){
@@ -300,6 +333,7 @@ const promptLabels:Readonly<Record<string,string>>={
 const canceled=(value:string|undefined):boolean=>value===undefined||!value.trim()||/^q(?:uit)?$/iu.test(value.trim());
 async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices):Promise<number>{
   io.write(formatArtifact(result));
+  await io.flush?.();
   const available=result.outputs.map((choice,index)=>({choice,index:index+1})).filter(row=>row.choice.available);
   if(result.terminal||!available.length)return 0;
   let selected:typeof available[number]|undefined;
@@ -337,8 +371,9 @@ async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices
     io.write(await executeOutput(options,api));return 0;
   }
 }
-async function guidedExploration(root:string,session:ExplorationSession&{readonly directory:string},io:CliIo,api:CliServices):Promise<number>{
-  io.write(formatExploration(session));
+async function guidedExploration(root:string,session:ExplorationSession&{readonly directory:string},io:CliIo,api:CliServices,verbose=false):Promise<number>{
+  io.write(formatExploration(session,verbose));
+  await io.flush?.();
   if(!session.choices.length)return 3;
   let pick:number|undefined;
   for(;;){
@@ -381,9 +416,11 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         text=options.json?`${JSON.stringify(result)}\n`:`Imported: ${result.manifest}\n${result.descriptor?`Descriptor: ${result.descriptor}\n`:''}Evidence: ${result.receipt}\nProfiles proposed: ${result.value.proposedProfiles.length}\n`;
         code=0;
       }else if(options.command==='explore'){
-        io.error('Exploring observations…\n');
-        const session=await api.saveExploration(root,options.requestArgs,options.directory);
-        if(guided(options,io)){process.stdout.write=stdout;return await guidedExploration(root,session,io,api);}
+        const progress=startProgress(io,'Resolving target');
+        let session:ExplorationSession&{readonly directory:string};
+        try{session=await api.saveExploration(root,options.requestArgs,options.directory,undefined,progress.update);progress.stop('done');}
+        catch(error){progress.stop('failed');throw error;}
+        if(guided(options,io)){process.stdout.write=stdout;return await guidedExploration(root,session,io,api,options.verbose);}
         text=`${JSON.stringify(session)}\n`;code=session.choices.length?0:3;
       }else if(options.command==='project'){
         const result=await api.projectOutput(options.result,options.geometry,options.directory);text=options.json?JSON.stringify(result)+'\n':`Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;code=0;
@@ -399,8 +436,10 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         const result=await api.exportOutput(options.result,options.selection,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
       }else if (options.command === 'query') {
-        io.error('Querying observations…\n');
-        const session = await saveSession(root, options.requestArgs, options.directory);
+        const progress=startProgress(io,'Reading local evidence');
+        let session:Session;
+        try{session=await saveSession(root, options.requestArgs, options.directory, undefined, progress.update);progress.stop('done');}
+        catch(error){progress.stop('failed');throw error;}
         text = options.json ? `${JSON.stringify(session)}\n` : formatSession(session, options.directory) + (options.verbose ? `\n${formatAnswer(session.answer)}` : '');
         code = session.choices.length ? 0 : 3;
       } else {
@@ -428,8 +467,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const worker = fork(fileURLToPath(import.meta.url), process.argv.slice(2), { stdio: ['inherit', 2, 2, 'ipc'],env:{...process.env,
       CSSEARTH_TELESCOPE_STDIN_TTY:process.stdin.isTTY?'1':'0',
       CSSEARTH_TELESCOPE_STDOUT_TTY:process.stdout.isTTY?'1':'0'} });
+    let pendingOutput:Promise<void>=Promise.resolve();
     worker.on('message', (message: unknown) => {
-      if (message && typeof message === 'object' && 'text' in message && typeof message.text === 'string') process.stdout.write(message.text);
+      if (message && typeof message === 'object' && 'text' in message && typeof message.text === 'string') {
+        const text=message.text;
+        pendingOutput=pendingOutput.then(()=>new Promise(accept=>process.stdout.write(text,()=>accept())));
+      }
+      else if(message&&typeof message==='object'&&'flush' in message&&typeof message.flush==='number')void pendingOutput.then(()=>worker.send({flush:message.flush}));
     });
     const forward = (signal: NodeJS.Signals) => worker.kill(signal);
     process.on('SIGINT', forward); process.on('SIGTERM', forward);

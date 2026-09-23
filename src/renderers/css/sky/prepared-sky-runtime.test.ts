@@ -36,7 +36,7 @@ const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bot
 vi.mock('../universe/world-context-point-source.js', () => ({ mountWorldContextPointSource: () => null }));
 vi.mock('../universe/prepared-galaxy-catalog.js', () => ({ mountPreparedGalaxyCatalog: catalogMount }));
 vi.mock('../universe/prepared-world-context.js', async importOriginal => ({ ...await importOriginal<typeof import('../universe/prepared-world-context.js')>(),
-  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
+  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, setSuppressedLabels() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
 
 const bases = [
   ['px', [1, 0, 0], [0, -1, 0], [0, 0, 1]], ['nx', [-1, 0, 0], [0, 1, 0], [0, 0, 1]],

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-110067",
+  "angularDiameterMas": 0.23,
+  "angularDiameterSource": "Derived from the published radius and inverse-parallax distance; not a resolved angular-diameter measurement.",
+  "distanceParsecs": 32.219712664602454,
+  "distanceSource": "SIMBAD Gaia EDR3 parallax 31.0369 +/- 0.0222 mas; inverse parallax, without zero-point correction.",
+  "radiusKm": 548211.6,
+  "radiusSource": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Extended Data Table 3: radius 0.788 +/- 0.008 solar radii, mass 0.798 +/- 0.042 solar masses, effective temperature 5266 +/- 64 K. Conversion uses 695700 km per solar radius and solar GM 132712440041.93938 km^3/s^2. The display axis is sky north, not a measured stellar pole.",
+  "effectiveTemperatureK": 5266,
+  "effectiveTemperatureSource": "Luque et al. (2023), Nature 623, 932–937, Extended Data Table 3: 5266 +/- 64 K; https://doi.org/10.1038/s41586-023-06692-3",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "Spherical unresolved stellar disc at the published radius. Its uniform chromaticity comes from the archived ESPRESSO spectrum; brightness, spots and limb darkening are not measured by this rendering."
+  }
+}

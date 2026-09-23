@@ -85,6 +85,11 @@
   transform: translate(var(--context-label-x, 12px), var(--context-label-y, -9px));
   opacity: var(--context-label-alpha, .65);
 }
+.prepared-selected-body-label[data-placement="overlay"] {
+  color: #fff;
+  background: rgba(0, 0, 0, .82);
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, .82);
+}
 .prepared-world-context .context-flight-caption {
   position: absolute;
   inset: 0 auto auto 0;

@@ -76,11 +76,25 @@ test('human exploration and artifact screens retain unknowns, blockers, context 
   assert.equal(outputCommand(inspection.source,inspection.outputs[0]!),"telescope export /tmp/run/pick-1/result.json --output image --hdu 1 --structure SCI --plane N --out DIRECTORY");
 });
 
+test('exploration screen bounds repeated archive diagnostics while the saved answer retains them',()=>{
+  const original=exploration('/tmp/run'),repeated={...original.choices[0]!,limitations:['repeat','repeat','second','third','fourth']};
+  const unsupported=Array.from({length:9},(_,index)=>({...original.answer.unsupported[0]!,identity:`issue-${index}`}));
+  const session={...original,choices:[repeated],answer:{...original.answer,unsupported}};
+  const screen=formatExploration(session);
+  assert.equal([...screen.matchAll(/Limitation: repeat/gu)].length,1);
+  assert.match(screen,/1 more distinct limitation\(s\) in the saved result/u);
+  assert.match(screen,/Unsupported discoveries \(9\)/u);
+  assert.match(screen,/4 more in the saved result/u);
+  assert.doesNotMatch(screen,/issue-8/u);
+  assert.match(formatExploration(session,true),/issue-8/u);
+});
+
 test('JSON and every redirected explore mode are deterministic and never prompt',async()=>{
   for(const [stdin,stdout,json] of [[true,true,true],[false,true,false],[true,false,false],[false,false,false]] as const){
     const directory=resolve('/tmp','cli-noninteractive'),mock=mockIo(stdin,stdout),api=mockServices(directory);
     const code=await main(['explore','eris','--out',directory,...(json?['--json']:[])],'/workspace',text=>mock.io.write(text),mock.io,api.services);
     assert.equal(code,0);assert.equal(mock.prompts.length,0);assert.equal(api.calls.get,0);assert.equal(api.calls.inspect,0);assert.equal(mock.stdout.length,1);
+    assert.equal(mock.stderr.join('').includes('\r'),false);
     const parsed=JSON.parse(mock.stdout[0]!);assert.equal(parsed.directory,directory);assert.equal(parsed.answer.target,'eris');assert.deepEqual(api.calls.args,['eris']);assert.equal(mock.closed(),true);
   }
 });
@@ -90,6 +104,17 @@ test('terminal cancellation preserves the saved exploration and starts no select
   const code=await main(['explore','eris','--out',directory],'/workspace',text=>mock.io.write(text),mock.io,api.services);
   assert.equal(code,0);assert.equal(mock.prompts.length,1);assert.equal(api.calls.save,1);assert.equal(api.calls.get,0);assert.equal(api.calls.inspect,0);
   assert.match(mock.stdout.join(''),/Exploration saved; no observation was selected/u);
+});
+
+test('terminal exploration reports stages and flushes its choices before prompting',async()=>{
+  const mock=mockIo(true,true),api=mockServices('/tmp/run');let flushed=false;
+  const io:CliIo={...mock.io,stderrIsTTY:true,flush:async()=>{flushed=true;},question:async()=>{assert.equal(flushed,true);return '';}};
+  const services:CliServices={...api.services,saveExploration:async(root,args,out,_api,progress)=>{progress?.('Searching archives');return api.services.saveExploration(root,args,out);}};
+  assert.equal(await main(['explore','eris'],'/workspace',text=>io.write(text),io,services),0);
+  assert.match(mock.stderr.join(''),/\r\| Resolving target \(0s\)/u);
+  assert.match(mock.stderr.join(''),/Searching archives/u);
+  assert.match(mock.stderr.join(''),/Done \(0s\)/u);
+  assert.equal(mock.stdout.length,2);
 });
 
 test('terminal selection retrieves the exact saved pick and shows its artifact operations',async()=>{

@@ -33,6 +33,7 @@ import { createWorldContextPlannerClient } from './world-context-planner-client.
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { createLabelBudget } from '../labels/universe-label-policy.js';
 import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
+import { mountSelectedBodyLabel } from './selected-body-label.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -173,6 +174,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       frontRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
       presentationHost.appendChild(frontRoot);
       const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
+      const selectedLabel = mountSelectedBodyLabel(frontRoot, opacityClock);
       const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
       const billboardIndex = volumeLensBanks.map(() => -1);
       const billboardEntries = volumeLensBanks.flatMap((bank, index) => {
@@ -367,6 +369,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       const mountedShells = [...shells];
       let selected = plan.focus;
+      let suppressedLabels: readonly string[] = [];
+      const publishSuppressedLabels = () => spatial?.setSuppressedLabels(overview
+        ? suppressedLabels : [...new Set([...suppressedLabels, selected.id])]);
       let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
       let detailContextOpacity = 1;
       let destroyed = false;
@@ -404,7 +409,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         destroyed = true;
         for (let index = 0; index < lensGeneration.length; index++) lensGeneration[index]++;
         prefetchAbort.abort();
-        volumeLayer?.destroy(); skyLayer?.destroy(); stellarPoints?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
+        volumeLayer?.destroy(); skyLayer?.destroy(); stellarPoints?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy(); selectedLabel.destroy();
         for (const shell of shellLayers) shell.destroy();
         for (const bank of imageBanks) bank?.destroy(); galaxyCatalog?.destroy();
         for (const bank of lensBanks) bank?.destroy();
@@ -439,6 +444,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
         spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationLandmarks, annotationOpacities, distantNavigation, opacityClock, orbitRenderer: 'strokes' });
+        publishSuppressedLabels();
         const bodyAnnotations = spatial.inspect();
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock });
@@ -564,12 +570,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             return spatial!.captureFrame(world, viewport);
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
-          setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
+          setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); publishSuppressedLabels(); },
           setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
           setHiddenBodies(ids: readonly string[]) { spatial!.setHiddenBodies(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
-          setSuppressedLabels(ids: readonly string[]) { spatial!.setSuppressedLabels(ids); },
+          setSuppressedLabels(ids: readonly string[]) { suppressedLabels = ids; publishSuppressedLabels(); },
           setRotationActive(active: boolean) { spatial!.setRotationActive(active); },
           setHiddenIndicators(ids: readonly string[]) { spatial!.setHiddenIndicators(ids); },
           setHighlighted(ids: readonly string[]) { spatial!.setHighlighted(ids); },
@@ -587,6 +593,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             selected = body;
             spatial!.selectObject(id);
+            publishSuppressedLabels();
             root.dataset.selectedObject = id;
           },
           publish(world: WorldCameraPose, viewport: WorldCameraViewport, shellVisibility: Readonly<Record<string, boolean>> = {}, frame?: WorldContextPublication) {
@@ -686,7 +693,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
             }
             spatial!.publish(world, viewport, frame);
-            const foregroundRects = [...spatial!.backgroundExclusionRects(), ...labelBlockers];
+            const selectedRect = selectedLabel.publish(world, viewport, selected, {
+              overview, focused: detailedFocus !== null, preview: selectionPreview,
+            });
+            const foregroundRects = [...spatial!.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : [])];
             labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
               bodyAnnotations.flatMap(body => body.labelRect ? [body.labelRect] : []), foregroundRects);
             const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);

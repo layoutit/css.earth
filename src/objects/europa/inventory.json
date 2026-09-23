@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "europa-coarse-ice.webp",
+      "bytes": 20152,
+      "sha256": "6664f29a64af4d48c2cc9d5b8b492d478d0859168fe8d4a7b736f84890b4b1da"
+    },
+    {
+      "location": "public",
+      "filename": "europa-coarse-ice@2x.webp",
+      "bytes": 40214,
+      "sha256": "3445290322e40e6b3f5bf745b69757e140bc89366377d989bf63137491a16e30"
+    },
+    {
+      "location": "public",
       "filename": "europa-elevation@2x.webp",
       "bytes": 46540,
       "sha256": "6b1a48692cdfb54ff8fac2b2def291ca7fdc0974998067eb84958e15652cfdfa"
@@ -21,15 +33,45 @@
     },
     {
       "location": "public",
+      "filename": "europa-fine-ice.webp",
+      "bytes": 19132,
+      "sha256": "489891eac605bd6f740707a82ad3a7c69bc14af7c3c2da5bfe6afb52114ce619"
+    },
+    {
+      "location": "public",
+      "filename": "europa-fine-ice@2x.webp",
+      "bytes": 37256,
+      "sha256": "8249b8c3fbcc7deec23cf39a11680b84d575abded14da051ca77c7d5670382b0"
+    },
+    {
+      "location": "public",
       "filename": "europa-geology@2x.webp",
       "bytes": 77748,
       "sha256": "a3fd7b9f836f9d4c5e19c5f35da3da1b73fb7cd9974879ca81dae14dc99113a7"
     },
     {
       "location": "public",
+      "filename": "europa-ice-signature.webp",
+      "bytes": 19416,
+      "sha256": "213aaaf1feae8facefc96449e0661a3a5c1ae02f1ce43fc2fe65d87daf6a6c7a"
+    },
+    {
+      "location": "public",
+      "filename": "europa-ice-signature@2x.webp",
+      "bytes": 38392,
+      "sha256": "1cb04424881acf1fe3b1bf442ad8fdcb13dedde0320ed372a2a56dba09b2e11e"
+    },
+    {
+      "location": "public",
       "filename": "europa-infrared@2x.webp",
       "bytes": 218316,
       "sha256": "36f9d2a251ae888cec5020aeb38a39235152d78d09c64b13f591c5819a1f6c37"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-coarse-ice.webp",
+      "bytes": 4454,
+      "sha256": "78eef448eb826f1a50fc56756ad375c28dcd0713a37e38f7f305a4f8cf5ddf8d"
     },
     {
       "location": "public",
@@ -45,9 +87,21 @@
     },
     {
       "location": "public",
+      "filename": "europa-lens-fine-ice.webp",
+      "bytes": 4488,
+      "sha256": "e98011c7da839a2ba0093aa5c7a9b2819624cebf513fbb17f0d1aa8e0af2c46b"
+    },
+    {
+      "location": "public",
       "filename": "europa-lens-geology.webp",
       "bytes": 470,
       "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-ice-signature.webp",
+      "bytes": 4320,
+      "sha256": "1d3747071e6b6dc8d776e686907651eb07c17c66322e899d3541488bef28be53"
     },
     {
       "location": "public",
@@ -267,6 +321,18 @@
     },
     {
       "location": "public",
+      "filename": "europa-poles-coarse-ice.webp",
+      "bytes": 3436,
+      "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2"
+    },
+    {
+      "location": "public",
+      "filename": "europa-poles-coarse-ice@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "location": "public",
       "filename": "europa-poles-elevation@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
@@ -279,9 +345,33 @@
     },
     {
       "location": "public",
+      "filename": "europa-poles-fine-ice.webp",
+      "bytes": 3436,
+      "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2"
+    },
+    {
+      "location": "public",
+      "filename": "europa-poles-fine-ice@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "location": "public",
       "filename": "europa-poles-geology@2x.webp",
       "bytes": 12962,
       "sha256": "88cb0181282a36a3cc302af263ce148031dde2b24c824535233995645a64723d"
+    },
+    {
+      "location": "public",
+      "filename": "europa-poles-ice-signature.webp",
+      "bytes": 3436,
+      "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2"
+    },
+    {
+      "location": "public",
+      "filename": "europa-poles-ice-signature@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
     },
     {
       "location": "public",

@@ -23,11 +23,13 @@ export interface AcquisitionSpec {
   readonly implementation: string;
 }
 export interface AccessPlan { readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }
-/** The table route requires an exact direct FITS product and an archive-confirmed target. */
-export function nativeQualificationRoute(spec: AcquisitionSpec): 'raster' | 'f08-table' | null {
+/** Table and spectrum routes require a direct FITS product and an archive-confirmed target. */
+export function nativeQualificationRoute(spec: AcquisitionSpec): 'raster' | 'f08-table' | 'f03-spectrum' | null {
   if (spec.decoder === 'fits-raster' && (spec.kind === 'image' || spec.kind === 'cube')) return 'raster';
   if (spec.decoder === 'family-pending' && spec.kind === 'table' && spec.format === 'fits' &&
     spec.operation.kind === 'direct' && spec.observation.target.status === 'confirmed') return 'f08-table';
+  if (spec.decoder === 'family-pending' && spec.kind === 'spectrum' && spec.format === 'fits' &&
+    spec.operation.kind === 'direct' && spec.observation.target.status === 'confirmed') return 'f03-spectrum';
   return null;
 }
 const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
@@ -49,7 +51,7 @@ export function mediaType(value: string | null): { type: string; parameters: Rea
   return { type: type.toLowerCase(), parameters };
 }
 const datalink = (mime: string | null) => { const m = mediaType(mime); return m?.type === 'application/x-votable+xml' && m.parameters.content === 'datalink'; };
-const fits = (mime: string | null) => ['application/fits', 'image/fits'].includes(mediaType(mime)?.type ?? '');
+const fits = (mime: string | null) => ['application/fits', 'image/fits', 'application/x-fits-bintable'].includes(mediaType(mime)?.type ?? '');
 const standardId = (resource: Resource) => resource.parameters.find(p => p.name === 'standardID')?.value;
 const SODA_SYNC = 'ivo://ivoa.net/std/SODA#sync-1.0';
 const DATALINK_LINKS = 'ivo://ivoa.net/std/DataLink#links-1.0';
@@ -229,7 +231,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     if (spec.operation.kind === 'soda-sync' && !descriptorPin) throw new Error('Subset descriptor is outside the metadata evidence closure.');
     const receivedName = spec.format === 'fits' ? 'science.fits' : `archive.${spec.format}`;
     const transferred = (await astroquery({ operation: 'vo-download', url: spec.operation.url, destination: resolve(staging, receivedName), format: spec.format,
-      ...(nativeQualificationRoute(spec) === 'f08-table' ? { fitsProfile: 'bintable' as const } : {}),
+      ...(['f08-table', 'f03-spectrum'].includes(nativeQualificationRoute(spec) ?? '') ? { fitsProfile: 'bintable' as const } : {}),
       byteLimit: spec.limits.scienceBytes, parameters: spec.operation.parameters, allowedPrivateHosts: policy.allowedPrivateHosts,
       ...(spec.operation.kind === 'soda-sync' ? { descriptor: { file: descriptorPin!, row: spec.serviceRow!, serviceId: spec.descriptor!.id! } } : {}) })).transfer!;
     const unpacked = spec.format === 'fits' ? undefined : await extractVoPackage(resolve(staging, receivedName), staging, { expandedBytes: spec.limits.expandedBytes, members: spec.limits.packageMembers });

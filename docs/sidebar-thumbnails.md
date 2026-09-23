@@ -4,7 +4,7 @@ Galaxy and nebula object rows use the default dataset's own image. Dataset rows
 use their selected dataset's image. The shared sidebar displays prepared 32 px
 WebPs at 14 or 16 CSS pixels; it does not download a full preview just for an icon.
 
-Run `pnpm prepare:sidebar-thumbnails` after restoring the runtime assets or
+Run `node tools/prepare/prepare-sidebar-thumbnails.mts` after restoring the runtime assets or
 changing a prepared dataset preview. Run it with `--check` to reproduce every
 thumbnail in memory and compare its bytes with the committed files.
 

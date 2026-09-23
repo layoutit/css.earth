@@ -178,6 +178,10 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     else if (service.state === 'unknown-target') issues.push({ scope: 'provider', code: 'provider-target-unknown', identity: service.service, reason: service.reason });
   }
   for (const item of indexed.coverage) if (item.state !== 'observed') issues.push({ scope: 'indexed-source', code: 'coverage', identity: item.telescope, reason: item.reason });
+  for (const issue of inputs.sourceIntakeIssues ?? []) {
+    if (issue.state === 'incomplete') unresolved.push({ scope: 'indexed-source', code: 'coverage', identity: issue.path, reason: issue.reason });
+    else if (issue.state === 'unsupported') unsupported.push({ scope: 'indexed-source', code: 'unsupported-observation', identity: issue.path, reason: issue.reason });
+  }
   const missingHeaders = inputs.sourceIntakeIssues?.filter(issue => issue.state === 'unavailable') ?? [];
   if (missingHeaders.length) issues.push({ scope: 'indexed-source', code: 'coverage', identity: 'source manifest',
     reason: `${missingHeaders.length} declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.` });
@@ -204,16 +208,17 @@ export async function skyTargetRequest(root: string, request: ExplorationRequest
   return resolution ? { request: withRegion(resolution.target), simbadMiss: false, evidence: resolution.evidence } : { request, simbadMiss: true };
 }
 
-export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationInputs> {
+export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<ExplorationInputs> {
   const sky = request.skyTarget ? [skyCatalogueEntry(request.skyTarget)] : [];
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
-  const [inputs, opus] = await Promise.all([loadQueryInputs(root, { ...request, target: resolution.canonical.id }, selectedObservation), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
+  const [inputs, opus] = await Promise.all([loadQueryInputs(root, { ...request, target: resolution.canonical.id }, selectedObservation, progress), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
   return { ...inputs, opus };
 }
 
-export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationAnswer> {
-  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation));
+export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<ExplorationAnswer> {
+  progress?.('Resolving target');
+  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation, progress));
   if (sky.evidence) return { ...answer, skyResolution: sky.evidence };
   if (!sky.simbadMiss) return answer;
   return { ...answer, issues: answer.issues.map(issue => issue.scope === 'target' ? { ...issue, reason: `${issue.reason} SIMBAD resolves no object by that name either.` } : issue) };

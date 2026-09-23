@@ -47,11 +47,29 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
     }
   }
   const toggles = [...new Set(keys.flatMap(when => Object.keys(when).filter(key => key !== 'lensId')))];
+  const declaredToggles = [...settings.values()].filter(setting => setting.kind === 'toggle').map(setting => setting.name);
+  for (const name of declaredToggles) if (!toggles.includes(name)) fail(`setting ${name} has no prepared variant`);
   if (toggles.length > 12) fail('selection table exceeds bounded toggle combinations');
-  for (const lensId of lensIds.length ? lensIds : [null]) for (let bits = 0; bits < 2 ** toggles.length; bits++) {
-    const state: Record<string, string | boolean | null> = {lensId, ...Object.fromEntries(toggles.map((name, bit) => [name, !!(bits & 2 ** bit)]))};
-    if (keys.filter(when => Object.entries(when).every(([key, value]) => state[key] === value)).length !== 1) fail('selection table must cover each combination exactly once');
+  // A toggle may apply only to compatible lenses, but it must change at least one prepared selection.
+  const effective = new Set<string>();
+  const effect = (variant: PreparedVariant) => JSON.stringify({ required: variant.required, writes: variant.writes,
+    materials: variant.materials, navigation: variant.navigation });
+  for (const lensId of lensIds.length ? lensIds : [null]) {
+    const resolved: PreparedVariant[] = [];
+    for (let bits = 0; bits < 2 ** toggles.length; bits++) {
+      const state: Record<string, string | boolean | null> = {lensId, ...Object.fromEntries(toggles.map((name, bit) => [name, !!(bits & 2 ** bit)]))};
+      const matching = variants.filter((variant, index) => Object.entries(keys[index]!).every(([key, value]) => state[key] === value));
+      if (matching.length !== 1) fail('selection table must cover each combination exactly once');
+      resolved.push(matching[0] as PreparedVariant);
+    }
+    for (const [bit, name] of toggles.entries()) {
+      for (let bits = 0; bits < resolved.length; bits++) {
+        if (bits & 2 ** bit) continue;
+        if (effect(resolved[bits]!) !== effect(resolved[bits | 2 ** bit]!)) effective.add(name);
+      }
+    }
   }
+  for (const name of declaredToggles) if (!effective.has(name)) fail(`setting ${name} has no prepared effect`);
 }
 export function requireViewBindings(value: unknown, tree: PreparedTree, camera: CameraPlan): asserts value is readonly PreparedViewBinding[] {
   for (const input of array(value, 'view bindings')) {

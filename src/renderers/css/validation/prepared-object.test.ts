@@ -131,7 +131,8 @@ test('a body without lenses validates both fixed and toggle-selected presentatio
   assert.throws(() => parsePreparedObjectRuntime(input), /declared lens capability/);
   delete input.variants[0].when.lensId;
   input.controls.settings.controls = [{ kind: 'toggle', name: 'shadows', label: 'Shadows', checked: true }];
-  input.variants = [false, true].map(shadows => ({ ...structuredClone(original.variants[0]), when: { shadows } }));
+  input.variants = [false, true].map(shadows => ({ ...structuredClone(original.variants[0]), when: { shadows },
+    writes: [...original.variants[0].writes, { kind: 'class', target: -1, name: 'test-shadows', value: shadows }] }));
   parsePreparedObjectRuntime(input);
   input.variants.pop();
   assert.throws(() => parsePreparedObjectRuntime(input), /exactly once/);

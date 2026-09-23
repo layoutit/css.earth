@@ -44,7 +44,7 @@ ESA/Hubble under CC BY 4.0. Jupiter owns the NASA, ESA, STScI, and Amy Simon
 2024 full-disc Hubble view inside its adapter. Saturn uses the exact OpenSpace
 source already owned by the Saturn adapter.
 
-Prepared output: `pnpm prepare:navigation` writes the 1× and 2× planet-marker
+Prepared output: `node tools/prepare/prepare-navigation.mts` writes the 1× and 2× planet-marker
 atlas, Sun marker, black-hole marker, supernova marker, and action markers to
 `public/navigation/`.
 

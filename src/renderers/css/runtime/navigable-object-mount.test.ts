@@ -15,7 +15,8 @@ async function preparedFixture() {
   // Retain the real tree and selections while keeping image decoding in its browser gate.
   const data = { ...source, assets: { ...source.assets, startup: [] }, materials: [],
     variants: source.variants.map(variant => ({ ...variant, required: [], materials: [],
-      writes: variant.writes.map(write => write.kind === 'texture' ? { ...write, resource: null } : write) })) };
+      writes: [...variant.writes.map(write => write.kind === 'texture' ? { ...write, resource: null } : write),
+        { kind: 'class' as const, target: -1, name: 'fixture-shadows', value: variant.when.shadows === true }] })) };
   const payload = { ...envelope, data: { ...data,
     tree: { ...data.tree, activationGroups: prepareActivationGroups(data) } } };
   return { descriptor, payload };

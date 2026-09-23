@@ -34,8 +34,9 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
   if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2'||raw.schema==='cssearth-telescope-delivery@3'){
     const delivered=await delivery(artifact),descriptorOutputs=delivered.producing.outputs.filter(output=>output.path.endsWith('/descriptor.json')||output.path==='descriptor.json');
     const facts=requireRecord(delivered.record.facts,'delivery facts');
-    if(facts.kind==='table'&&structure!==undefined)throw new TypeError('--structure does not select a table component.');
-    const listed=facts.kind==='table'?{target:delivered.target,source:artifact,sourceContext:delivered.context,outputs:[] as OutputChoice[]}:await listDeliveryOutputs(artifact,structure);
+    const familyDelivery=facts.kind==='table'||facts.kind==='spectrum'&&descriptorOutputs.length>0;
+    if(familyDelivery&&structure!==undefined)throw new TypeError('--structure does not select a descriptor component.');
+    const listed=familyDelivery?{target:delivered.target,source:artifact,sourceContext:delivered.context,outputs:[] as OutputChoice[]}:await listDeliveryOutputs(artifact,structure);
     if(!descriptorOutputs.length)return{...listed,artifact:'delivery'};
     if(descriptorOutputs.length!==1)throw new TypeError('Delivery has an ambiguous family descriptor.');
     const output=descriptorOutputs[0]!,matches=delivered.files.filter(file=>file.bytes===output.bytes&&file.path.endsWith('/descriptor.json'));

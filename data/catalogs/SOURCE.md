@@ -75,13 +75,12 @@ they do not derive it).
 `node tools/ci/sync-upstream.mts` re-copies these catalogues together with
 `packages/astronomy` and `packages/catalog` from `UPSTREAM_ROOT` (default: the
 local galaxio checkout) in one idempotent run, and regenerates `upstream.json`
-and `manifest.json`. `tools/sync-upstream.test.mjs` (run by
-`pnpm test:platform`) asserts every file matches its recorded hash, no
-unlisted file exists, every current file parses as a version-1 `.gxct` whose
-row count and `meta` match its manifest entry, the excluded catalogues are
-absent, and `NOTICE.md` states each vendored catalogue's terms, source, and
-URL exactly as its manifest entry does.
+and `manifest.json`. The upstream lock retains the copied files' hashes;
+the runtime manifest resolves catalogue paths and metadata.
 
-No cssEarth consumer reads these files yet. Nothing in the build or the test
-globs parses `.gxct`; Astro's `srcDir` is `site/` and `publicDir` is `public/`,
-so `data/` is never bundled or served.
+The former sync-integrity test has been removed. Review a sync against the
+upstream lock, catalogue metadata and required notices; the current package
+tests (`pnpm --filter @cssearth/catalog test`, from the repository root) exercise
+the reader and writer but do not audit every vendored file or its attribution.
+The [package guide](../../packages/catalog/README.md) describes the separate
+cross-language parity gap.
