@@ -67,7 +67,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     : approachModule ? [(await approachModule.spacecraftApproach(approachModule.parseApproachRecipe(approachSource, `${descriptor.id} approach`))).direction] : undefined;
   const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
   // A lit body without photograph frames opens on the side of its default map that has data.
-  const coverageModule = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/default-lens-coverage.mts')).href) as typeof import('./default-lens-coverage.mts');
+  const coverageModule = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/default-view/lens-coverage.mts')).href) as typeof import('./default-view/lens-coverage.mts');
   const coverage = !observation?.length && light === 'sun' ? await coverageModule.readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
   const angles = cameraModule.prepareDefaultCameraAngles(descriptor.id, { observation, light, coverage: coverage && coverageModule.coverageDirection(coverage) });
   if (coverage) {

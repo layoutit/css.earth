@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { atlasTree, readObjects } from '../../../atlas/src/objects.mts';
 import { navigationTreeArtifact } from '../../../atlas/src/navigation-tree-data.mts';
-import { applicationTreeDestination } from '../../navigation-tree-destination.mts';
+import { applicationTreeDestination } from '../../navigation/navigation-tree-destination.mts';
 
 // The application's own tree, so the pin the shell renders addresses this file.
 const artifact = navigationTreeArtifact(atlasTree(readObjects(), applicationTreeDestination));

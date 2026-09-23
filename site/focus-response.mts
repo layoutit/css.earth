@@ -6,7 +6,7 @@ import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/objec
 import { initialFocusCatalog, loadFocusCatalogs } from './focus-catalog.mts';
 import { record, requiredElement } from './browser-types.mts';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
-import { readPreparedFocusSelection } from './navigation-scope.mts';
+import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
 import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusLens } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';

@@ -54,6 +54,10 @@ The angular orbits are placed at 8277 pc. Gillessen et al. (2017) fitted at 8320
 
 ## Evidence
 
+[The page before and after the stage-selector fix](evidence/eht-plate-before-after.png) (PR #611, 2026-09-23): the EHT image
+sat in a zero-height layer because this object's stylesheet was scoped to a stage class the shell no longer renders; it
+now shows around the shadow, with the caption over the shadow's middle.
+
 The orbit convention is measured, not assumed. With i and Ω as published and ω + 180°, this repository's hosted orbit
 reproduces the positions Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30, table5) measured for S2 (145 positions,
 1992–2016) to 2.08 mas rms and for S1 (161) to 3.17 mas rms, and S2's 44 radial velocities to 31.9 km/s rms. The mirror
