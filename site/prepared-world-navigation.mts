@@ -14,16 +14,20 @@ interface TargetRequest {objectId: string; fromId: string; mount?: ShellCamera |
 export interface WorldHandoff {transferTo(signal: AbortSignal): void; mountOptions: Partial<MountOptions>; afterMount(mount: ObjectSceneLifecycle, options: {signal: AbortSignal}): Promise<void>;}
 interface FocusRequest {objectId: string; mount: ShellCamera; signal: AbortSignal; reducedMotion?: boolean; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; timing?: Timing;}
 interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics, options: { signal: AbortSignal; commit?: () => void }) => Promise<boolean> | void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
-interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;}
-/** Shared by every segment of one navigation, so a wheel keeps hurrying it across the handoff. */
-interface FlightPace {speed: number;}
-interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera, elapsedS: number) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
+interface WorldFlightRequest {
+  owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal;
+  reducedMotion?: boolean; paused?: boolean; limitElapsedS?: () => number; canFinish?: () => boolean;
+  windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>;
+  documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>;
+  onPaint?: (world: WorldCamera, elapsedS: number) => void;
+  interruptible?: () => boolean;
+}
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
-import { createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
+import { createCameraFlight, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;
@@ -127,13 +131,14 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: targetFocusPositionM ?? frame.originM,
         durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });
       owner.setPreparedFocus?.(null);
-      await animateWorldFlight({ owner, from, flight,
+      const running = createWorldFlight({ owner, from, flight,
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
         windowTarget, documentTarget, onPaint(world) {
           lastCamera = world;
           if (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
               world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis])) timing.mark('first-motion');
         } });
+      if (!(await running.finished).completed) throw cancellationReason(running.signal);
       lastCamera = owner.capture(); lastOptics = owner.optics();
     },
     async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url, targetWorldCamera = null, targetFocusPositionM = null, centerSelection = false, preserveView = false, presentWorld = null, cameraViewport, timing = { mark() {} } }: PrepareRequest): Promise<WorldHandoff> {
@@ -187,154 +192,110 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       // A replacement can arrive while the previous detail is still activating.
       // Its retirement must not retire the application's camera progression.
       const departureOwner = source ?? (presentWorld ? { apply(world: WorldCamera) {
-        return presentWorld(world, optics, { signal: controller.signal });
+        return presentWorld(world, optics, { signal: running.signal });
       } } : null);
       const approachLimitS = departureOwner && !reducedMotion
         ? destinationDetailTime(flight, from, targetFrame, optics) : 0;
-      const controller = new AbortController();
-      const cancel = () => controller.abort(signal.reason ?? cancelled());
-      signal.addEventListener('abort', cancel, { once: true });
-      if (signal.aborted) cancel();
-      // After handoff the router owns the prepared lease until it mounts; input that ends the
-      // flight in that gap must not release what the mount is about to claim.
       const ownership = createPreparedSceneOwnership(signal);
-      let handedOff = false;
-      const events = ['pointerdown', 'keydown'];
-      // Stopping between bodies strands the camera far from the destination, often facing
-      // along its path with the target off screen. Input there hurries the navigation like
-      // a wheel; it stops the view only before any motion or once the approach is drawn.
-      let moved = false, approaching = false;
-      const interrupt = (event: Event) => {
-        if (!isFlightInput(event)) return;
-        if (moved && !approaching) {
-          event.preventDefault(); event.stopImmediatePropagation();
-          pace.speed = FLIGHT_WHEEL_SPEEDUP;
-          return;
-        }
-        const error = cancelled(); error.preserveView = true;
-        controller.abort(error);
-      };
-      // A wheel hurries this navigation instead of abandoning it far from the destination.
-      // The navigation listens before its flights do, so it owns the wheel for every segment.
-      const pace: FlightPace = { speed: 1 };
-      const hurry = (event: Event) => {
-        if (!isFlightInput(event)) return;
-        event.preventDefault(); event.stopPropagation();
-        pace.speed = FLIGHT_WHEEL_SPEEDUP;
-      };
-      for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
-      documentTarget.addEventListener('wheel', hurry, { capture: true, passive: false });
-      let rejectInterruption!: (reason: unknown) => void;
-      const release = ownership.dispose;
-      const interrupted = new Promise<never>((_, reject) => { rejectInterruption = reject; });
-      interrupted.catch(() => {});
-      const abort = () => { if (!handedOff) release(); rejectInterruption(cancellationReason(controller.signal)); cleanup(); };
-      controller.signal.addEventListener('abort', abort, { once: true });
-      if (controller.signal.aborted) abort();
-      function cleanup() {
-        signal.removeEventListener('abort', cancel);
-        controller.signal.removeEventListener('abort', abort);
-        for (const event of events) documentTarget.removeEventListener(event, interrupt, { capture: true });
-        documentTarget.removeEventListener('wheel', hurry, { capture: true });
-      }
-      let bankReady = false;
+      let handedOff = false, bankReady = false, detailReady = false, moved = false, approaching = false;
+      let incomingOwner: ObjectWorldNavigation | null = null;
+      // Cancels only a publication superseded by the fully active detail. The
+      // flight itself retains its clock, input policy and completion promise.
+      const activation = new AbortController();
+      let reachHandoff!: () => void;
+      const handoffReady = new Promise<void>(resolve => { reachHandoff = resolve; });
+      let departureHeld = !departureOwner || Boolean(reducedMotion);
+      if (departureHeld) reachHandoff();
+      let drawn = reducedMotion ? target : from;
+      const running = createWorldFlight({ from, flight, anchors, signal, reducedMotion,
+        paused: departureHeld, windowTarget, documentTarget,
+        limitElapsedS: () => detailReady || incomingOwner?.detailActivated?.() ? flight.durationS : approachLimitS,
+        canFinish: () => detailReady,
+        interruptible: () => !moved || approaching,
+        owner: { apply(world) {
+          if (!handedOff) return departureOwner?.apply(world, { signal: running.signal });
+          if (detailReady) return incomingOwner!.apply(world, { signal: running.signal });
+          return presentWorld?.(world, optics, { signal: activationSignal,
+            commit: () => incomingOwner?.apply(world) });
+        } },
+        onPaint(world, elapsedS) {
+          drawn = lastCamera = world;
+          approaching = elapsedS >= approachLimitS;
+          if (!moved && (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
+              world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis]))) {
+            moved = true; timing.mark('first-motion');
+          }
+          if (!departureHeld && (approaching || bankReady && elapsedS >= handoffTimeS)) {
+            departureHeld = true;
+            running.hold(elapsedS);
+            reachHandoff();
+          }
+        },
+      });
+      const activationSignal = AbortSignal.any([running.signal, activation.signal]);
+      const interrupted = running.finished.then(() => {
+        if (!handedOff) ownership.dispose();
+        throw cancellationReason(running.signal);
+      }, error => {
+        if (!handedOff) ownership.dispose();
+        throw error;
+      });
+      void interrupted.catch(() => {});
+      const wait = <T,>(task: Promise<T>): Promise<T> => Promise.race([task, interrupted]);
       const preparation = Promise.resolve(toFactory).then(factory => {
         if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
         return factory.navigation.prepare({ signal: ownership.signal, cameraViewport,
-          getView: () => ({ world: reducedMotion ? target : lastCamera ?? from, viewport: optics }) });
+          getView: () => ({ world: drawn, viewport: optics }) });
       }).then(value => {
         ownership.own(value);
-        if (controller.signal.aborted) { release(); throw cancellationReason(controller.signal); }
+        if (running.signal.aborted) { ownership.dispose(); throw cancellationReason(running.signal); }
         bankReady = true;
         return value;
       });
-      preparation.catch(() => {});
-      const onPaint = (world: WorldCamera, elapsedS: number) => {
-        lastCamera = world;
-        if (elapsedS >= approachLimitS) approaching = true;
-        if (!moved && (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
-            world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis]))) {
-          moved = true; timing.mark('first-motion');
-        }
-      };
       try {
-        // Keep moving with the current owner while the bank loads. Transfer as
-        // soon as it is ready and the source is coarse, or hold before the
-        // destination proxy would grow into a detailed view.
-        const departure: Promise<FlightCheckpoint> = departureOwner && !reducedMotion
-          ? animateWorldFlight({ owner: departureOwner, from, flight, anchors, signal: controller.signal, pace,
-            endElapsedS: approachLimitS,
-            stopWhen: elapsed => bankReady && elapsed >= handoffTimeS,
-            windowTarget, documentTarget, onPaint })
-          : Promise.resolve({ world: reducedMotion ? target : from, elapsedS: reducedMotion ? flight.durationS : 0 });
-        const [preparedLease, checkpoint] = await Promise.race([Promise.all([preparation, departure]), interrupted]);
-        // A final RAF can cross a material boundary after preparation resolves.
-        // Keep the existing scene until this exact drawn view is decoded too.
-        await preparedLease.prepareView(() => ({ world: checkpoint.world, viewport: optics }));
-        if (controller.signal.aborted) throw cancellationReason(controller.signal);
+        const [preparedLease] = await wait(Promise.all([preparation, handoffReady]));
+        // Freeze the acknowledged pose until its exact material demand is ready.
+        // This holds the existing flight; no segment or replacement clock starts.
+        await wait(preparedLease.prepareView(() => ({ world: drawn, viewport: optics })));
         timing.mark('assets-ready');
-        // Camera progression belongs to the application, not to the lifetime
-        // of a detailed object. Keep presenting the coarse world while the
-        // destination activates its prepared groups over successive paints.
-        let incomingOwner: ObjectWorldNavigation | null = null, detailReady = false;
-        const activation = new AbortController();
-        const activationSignal = AbortSignal.any([controller.signal, activation.signal]);
-        const continuation = presentWorld && !reducedMotion && checkpoint.elapsedS < flight.durationS
-          ? animateWorldFlight({ owner: { apply(world: WorldCamera) {
-              if (detailReady) return incomingOwner?.apply(world, { signal: controller.signal });
-              // The activating detail and the surrounding world share the
-              // worker's publication, instead of racing two camera owners.
-              return presentWorld(world, optics, { signal: activationSignal,
-                commit: () => incomingOwner?.apply(world) });
-            } }, from, flight, anchors, signal: controller.signal, pace,
-            startElapsedS: checkpoint.elapsedS, startTime: checkpoint.time ?? null,
-            // The approach holds only until the incoming detail is fully active.
-            limitElapsedS: () => detailReady || incomingOwner?.detailActivated?.() ? flight.durationS : Math.max(checkpoint.elapsedS, approachLimitS),
-            windowTarget, documentTarget, onPaint }) : null;
-        continuation?.catch(() => {});
         handedOff = true;
+        const initialWorldCamera = drawn;
+        const progressive = Boolean(presentWorld && !reducedMotion);
+        if (progressive) running.resume();
         return {
           transferTo: ownership.transferTo,
-          mountOptions: { preparedResources: preparedLease.resources, preparedTree: preparedLease.tree, initialWorldCamera: checkpoint.world, initialProjection: preparedLease.projection({ world: checkpoint.world, viewport: optics }),
-            // The destination holds its catalogue load until this flight ends; see afterMount.
+          mountOptions: { preparedResources: preparedLease.resources, preparedTree: preparedLease.tree,
+            initialWorldCamera, initialProjection: preparedLease.projection({ world: initialWorldCamera, viewport: optics }),
             arrivingByFlight: true,
-            ...(continuation ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
-              // An interrupted flight still mounts its destination; afterMount reports the interruption.
-              if (controller.signal.aborted) return;
-              incomingOwner = owner; owner.apply(lastCamera ?? from);
+            ...(progressive ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
+              if (running.signal.aborted) return;
+              incomingOwner = owner; owner.apply(drawn);
             } } : {}) },
           async afterMount(mount: ObjectSceneLifecycle, { signal: mountedSignal }: {signal: AbortSignal}) {
-            const cancelMounted = () => controller.abort(mountedSignal.reason ?? cancelled());
+            const cancelMounted = () => running.cancel(mountedSignal.reason);
             mountedSignal.addEventListener('abort', cancelMounted, { once: true });
             if (mountedSignal.aborted) cancelMounted();
             try {
-              if (controller.signal.aborted) throw cancellationReason(controller.signal);
+              if (running.signal.aborted) throw cancellationReason(running.signal);
               if (!mount.navigation) throw new Error('The destination camera is unavailable.');
               timing.mark('mounted');
-              if (continuation) {
-                incomingOwner = mount.navigation; detailReady = true;
-                activation.abort();
-                incomingOwner.apply(lastCamera ?? from);
-                await continuation;
-              } else if (checkpoint.elapsedS < flight.durationS) {
-                mount.navigation.apply(checkpoint.world);
-                await animateWorldFlight({ owner: mount.navigation, from, flight, anchors, signal: controller.signal, pace,
-                  startElapsedS: checkpoint.elapsedS, windowTarget, documentTarget, onPaint });
-              } else mount.navigation.apply(checkpoint.world);
-              lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
-            } finally {
-              // The flight ended. The destination stays on screen when it landed or the visitor stopped it (preserveView);
-              // a navigation that replaced it will retire it, so the loads it held are dropped.
-              const reason: unknown = controller.signal.reason;
-              mount.features?.setNavigationInFlight?.(false, !controller.signal.aborted ||
+              incomingOwner = mount.navigation; detailReady = true;
+              activation.abort();
+              incomingOwner.apply(drawn);
+              if (reducedMotion) running.complete(); else running.resume();
+              if (!(await running.finished).completed) throw cancellationReason(running.signal);
+              lastCamera = incomingOwner.capture(); lastOptics = incomingOwner.optics();
+            } catch (error) { running.cancel(error); throw error; }
+            finally {
+              const reason: unknown = running.signal.reason;
+              mount.features?.setNavigationInFlight?.(false, !running.signal.aborted ||
                 (reason instanceof Error && 'preserveView' in reason && reason.preserveView === true));
               mountedSignal.removeEventListener('abort', cancelMounted);
-              cleanup();
             }
           },
         };
       } catch (error) {
-        controller.abort(error); release(); cleanup();
+        running.cancel(error); ownership.dispose();
         throw error;
       }
     },
@@ -402,84 +363,46 @@ function detailHandoffTime(flight: Flight, from: WorldCamera, frame: WorldFrame,
   return 0;
 }
 
-export function animateWorldFlight({ owner, from, flight, anchors, signal, reducedMotion = false,
-  startElapsedS = 0, endElapsedS = flight.durationS, startTime = null, limitElapsedS = () => endElapsedS,
-  windowTarget, documentTarget, onPaint = () => {}, stopWhen = () => false, pace = { speed: 1 } }: WorldFlightRequest): Promise<FlightCheckpoint> {
-  return new Promise<FlightCheckpoint>((resolve, reject) => {
-    let frameId: number | null = null, started = startTime, finished = false, elapsedS = startElapsedS, publishedElapsed: number | null = null;
-    // Flight time runs on its own clock, so a wheel can hurry the arrival without a jump.
-    let clockS = 0, clockTime: number | null = null;
-    const sample = createSelectionFlightSample();
-    const events = ['pointerdown', 'keydown'];
-    function finish(error: unknown, result?: FlightCheckpoint) {
-      if (finished) return;
-      finished = true;
-      if (frameId !== null) windowTarget.cancelAnimationFrame(frameId);
-      signal.removeEventListener('abort', abort);
-      for (const event of events) documentTarget.removeEventListener(event, interrupt, { capture: true });
-      documentTarget.removeEventListener('wheel', hurry, { capture: true });
-      if (error || !result) reject(error); else resolve(result);
-    }
-    function abort() { finish(cancellationReason(signal)); }
-    function interrupt(event: Event) {
-      if (!isFlightInput(event)) return;
+function createWorldFlight({ owner, from, flight, anchors, signal, reducedMotion = false, paused = false,
+  limitElapsedS = () => flight.durationS, canFinish = () => true,
+  windowTarget, documentTarget, onPaint = () => {}, interruptible = () => true }: WorldFlightRequest) {
+  let elapsedS = 0, publishedElapsed: number | null = null;
+  const sample = createSelectionFlightSample();
+  const events = ['pointerdown', 'keydown', 'wheel'];
+  function input(event: Event) {
+    if (!isFlightInput(event)) return;
+    if (event.type === 'wheel' || !interruptible()) {
+      event.preventDefault(); event.stopImmediatePropagation();
+      running.hurry(FLIGHT_WHEEL_SPEEDUP);
+    } else {
       const error = cancelled(); error.preserveView = true;
-      finish(error);
+      running.cancel(error);
     }
-    // A wheel asks to get there, not to stop. The flight speeds up and swallows the
-    // wheel, so zoom starts from the arrival framing instead of fighting the flight.
-    function hurry(event: Event) {
-      if (!isFlightInput(event)) return;
-      event.preventDefault(); event.stopPropagation();
-      pace.speed = FLIGHT_WHEEL_SPEEDUP;
-    }
-    function paint(time: number) {
-      frameId = null;
-      if (finished) return;
-      try {
-        if (started === null) started = time;
-        const previousClockS = clockS;
-        if (clockTime === null) clockS = (time - started) / 1000;
-        else clockS += (time - clockTime) / 1000 * pace.speed;
-        clockTime = time;
-        const permittedEndS = reducedMotion ? endElapsedS : limitElapsedS();
-        const requestedElapsedS = reducedMotion ? endElapsedS
-          : Math.min(endElapsedS, permittedEndS, startElapsedS + clockS);
-        const previousElapsed = elapsedS;
-        elapsedS = reducedMotion ? requestedElapsedS
-          : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
-        if (!reducedMotion) elapsedS = easeArrivalInto(flight, previousElapsed, elapsedS, clockS - previousClockS, sample);
-        // The curve approaches its terminal pose exponentially; its last second or so moves the
-        // view by under a pixel. Finish once the rest is invisible instead of publishing that
-        // tail. Rounded progress is no signal: from galactic range it reaches 1 while the camera
-        // is still thousands of kilometres out. A detail readiness hold must still be respected.
-        if (endElapsedS === flight.durationS && permittedEndS >= endElapsedS &&
-            arrivalIsInvisible(flight, anchors, sample)) elapsedS = endElapsedS;
-        const world = worldSample(flight, from, elapsedS, sample);
-        const advance = (shown = true, continueNow = false) => {
-          if (finished) return;
-          if (!shown) elapsedS = previousElapsed;
-          else {
-            if (publishedElapsed !== elapsedS) { onPaint(world, elapsedS); publishedElapsed = elapsedS; }
-            if (elapsedS >= endElapsedS || stopWhen(elapsedS)) { finish(null, { world, elapsedS, time }); return; }
-          }
-          // An asynchronous publication already crossed its presentation rAF.
-          // Plan the next pose now, so a second admission rAF cannot halve the
-          // flight cadence. A stationary readiness hold still sleeps on rAF.
-          if (continueNow && shown) paint(windowTarget.performance.now());
-          else frameId = windowTarget.requestAnimationFrame(paint);
-        };
-        const publication = publishedElapsed !== elapsedS ? owner.apply(world, { signal }) : undefined;
-        if (publication && typeof publication.then === 'function') publication.then(shown => advance(shown, true)).catch(finish);
-        else advance();
-      } catch (error) { finish(error); }
-    }
-    signal.addEventListener('abort', abort, { once: true });
-    if (signal.aborted) { abort(); return; }
-    for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
-    documentTarget.addEventListener('wheel', hurry, { capture: true, passive: false });
-    frameId = windowTarget.requestAnimationFrame(paint);
+  }
+  const running = createCameraFlight({ windowTarget, signal, paused,
+    onFinish() { for (const event of events) documentTarget.removeEventListener(event, input, { capture: true }); },
+    advance(clockS, stepS) {
+      const permittedEndS = reducedMotion ? flight.durationS : limitElapsedS();
+      const requestedElapsedS = reducedMotion ? flight.durationS : Math.min(flight.durationS, permittedEndS, clockS);
+      const previousElapsed = elapsedS;
+      elapsedS = reducedMotion ? requestedElapsedS
+        : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
+      if (!reducedMotion) elapsedS = easeArrivalInto(flight, previousElapsed, elapsedS, stepS, sample);
+      if (permittedEndS >= flight.durationS && arrivalIsInvisible(flight, anchors, sample)) elapsedS = flight.durationS;
+      const world = worldSample(flight, from, elapsedS, sample);
+      const acknowledge = (shown = true) => {
+        if (running.signal.aborted) return 'idle' as const;
+        if (!shown) { elapsedS = previousElapsed; return 'idle' as const; }
+        const changed = publishedElapsed !== elapsedS;
+        if (changed) { publishedElapsed = elapsedS; onPaint(world, elapsedS); }
+        return elapsedS >= flight.durationS && canFinish() ? 'complete' as const : changed ? 'presented' as const : 'idle' as const;
+      };
+      const publication = publishedElapsed !== elapsedS ? owner.apply(world, { signal: running.signal }) : undefined;
+      return publication && typeof publication.then === 'function' ? publication.then(acknowledge) : acknowledge();
+    },
   });
+  if (!running.signal.aborted) for (const event of events) documentTarget.addEventListener(event, input, { capture: true, passive: false });
+  return running;
 }
 
 function worldSample(flight: Flight, from: WorldCamera, elapsedS: number, sample: FlightSample): WorldCamera {

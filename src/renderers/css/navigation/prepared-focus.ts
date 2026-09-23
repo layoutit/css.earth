@@ -152,10 +152,7 @@ export function createPreparedFocusNavigation(options: Options) {
         options.publish();
       };
       if (flightOptions.reducedMotion) { sample(1); return { completed: true }; }
-      const abort = () => options.stop();
-      flightOptions.signal?.addEventListener('abort', abort, { once: true });
-      try { return await options.flyTo({ sample, durationMilliseconds: flight.durationS * 1000 }); }
-      finally { flightOptions.signal?.removeEventListener('abort', abort); }
+      return options.flyTo({ sample, durationMilliseconds: flight.durationS * 1000, signal: flightOptions.signal });
     },
   });
 }
