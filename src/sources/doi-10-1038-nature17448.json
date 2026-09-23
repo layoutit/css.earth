@@ -1,0 +1,54 @@
+{
+  "id": "doi-10-1038-nature17448",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Temperate Earth-sized planets transiting a nearby ultracool dwarf star",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1038/nature17448"
+    },
+    {
+      "type": "arxiv",
+      "value": "1605.07211"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/nature17448",
+      "label": "Nature"
+    },
+    {
+      "role": "original",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/",
+      "label": "Open full text at PubMed Central"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1/source/photometry/gillon-2016-limb-darkening.json",
+      "locator": "/u1 and /u2, transcribed from Extended Data Table 2"
+    },
+    {
+      "path": "src/objects/trappist-1/text.json",
+      "locator": "/datasets/color/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. Gillon, E. Jehin, S. M. Lederer et al. (2016), Nature 533, 221–224",
+      "scope": "I+z theoretical limb-darkening priors",
+      "evidence": "src/objects/trappist-1/source/photometry/gillon-2016-limb-darkening.json#/u1"
+    },
+    {
+      "kind": "limitation",
+      "text": "The I+z coefficients were inferred from theoretical tables and used as transit priors; they are not a resolved limb measurement.",
+      "scope": "TRAPPIST-1 modeled stellar limb plate",
+      "evidence": "src/objects/trappist-1/source/photometry/gillon-2016-limb-darkening.json#/note"
+    }
+  ],
+  "publisher": "Nature Research"
+}

@@ -1,6 +1,6 @@
 # Exoplanet radius and route check — 2026-09-22
 
-Checked on branch `fix/exoplanet-coverage-evidence`, subsequently rebased onto `4533674a80`, with the radius, source-credit and inventory changes in this pull request. The Chrome checks used the isolated checkout's Astro server at `127.0.0.1:4298`; this was not a production deployment.
+Checked on branch `fix/exoplanet-coverage-evidence` at `bc3e181bbda36f6cd31273703c016735d45ded56`, before the [2026-09-23 modeled limb bake](../2026-09-23/README.md), with the radius, source-credit and inventory changes in this pull request. The Chrome checks used the isolated checkout's Astro server at `127.0.0.1:4298`; this was not a production deployment.
 
 ## Source and package checks
 

@@ -97,3 +97,22 @@ test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectr
   const broken = [...flux.flux]; broken[visible(500)] = -1e6 * flux.fluxError[visible(500)]!;
   assert.throws(() => xpSampledColor(broken, colorMatching, flux.fluxError), /consistent with zero/u);
 });
+
+test('TRAPPIST-1 bakes its cited I+z model-prior limb law without off-disc light', async () => {
+  const system = new URL('../../../src/objects/trappist-1/source/', import.meta.url);
+  const source = async (path: string) => readFile(new URL(path, system));
+  const science = JSON.parse((await source('preparation/raster.json')).toString('utf8')).surfaces[0].science;
+  const { limbDarkening, color } = await loadStellarPhotometricColor(source, science, 'photometry/stellar-color.json');
+  assert.ok(limbDarkening);
+  assert.equal(limbDarkening.recipe.source, 'published');
+  assert.equal(limbDarkening.coefficients.u1, 0.65);
+  assert.equal(limbDarkening.coefficients.u2, 0.28);
+  assert.ok('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior');
+  assert.ok(Math.abs(limbDarkening.coefficients.u1Bounds[0] - 0.55) < 1e-12);
+  assert.ok(Math.abs(limbDarkening.coefficients.u2Bounds[0] - 0.16) < 1e-12);
+  assert.ok(Math.abs(quadraticIntensity(0, 0.65, 0.28) - 0.07) < 1e-12);
+  const plate = limbDarkeningPlate(256, limbDarkening.coefficients, color);
+  assert.equal(plate.data[3], 0);
+  assert.equal(plate.data[(128 * 256 + 128) * 4 + 3], 0);
+  assert.ok(plate.data[(128 * 256 + 254) * 4 + 3]! > 100);
+});
