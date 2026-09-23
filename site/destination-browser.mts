@@ -35,7 +35,7 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset }
     selecting = true;
     try {
       const result = destinationResult(await provider.select(place));
-      if (destroyed) return;
+      if (destroyed || request !== selectionRevision) return;
       selection = place;
       heading.textContent = place.name;
       context.textContent = place.context;
@@ -57,30 +57,40 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset }
       selecting = false;
     }
   }
-  back.addEventListener("click", () => {
-    provider?.reset();
+  function clearSelection() {
     selectionRevision++;
     selection = null;
     panel.ariaBusy = "false";
     panel.hidden = true;
+  }
+  back.addEventListener("click", () => {
+    provider?.reset();
+    clearSelection();
     onReset();
   }, { signal: events.signal });
   /** Opens a place by its catalogue id: a search result, or a `?feature=city-<id>` link. */
   async function selectById(id: string) {
     if (destroyed || !provider || !bodyId || !/^[0-9]+$/u.test(id)) return;
+    const requestedBody = bodyId, request = selectionRevision;
     const url = new URL(FIND_PATH, documentTarget.location?.href ?? 'http://localhost/');
-    url.searchParams.set('object', bodyId);
+    url.searchParams.set('object', requestedBody);
     url.searchParams.set('place', id);
     const response = await fetch(url, { signal: events.signal });
     if (!response.ok) throw new Error(`City ${id} could not load.`);
-    await select(destinationPlace(await response.json()));
+    const place = destinationPlace(await response.json());
+    // The body may have changed while the place loaded; its city belongs to the body that asked.
+    if (destroyed || bodyId !== requestedBody || request !== selectionRevision) return;
+    await select(place);
   }
   return Object.freeze({
     /** Binds the mounted body's places; the Back label names that body, which differs from the page's first body after a flight. */
     bind(next: PreparedDestinationRuntime | null | undefined, body?: { id: string; name: string }) {
       if (destroyed) return;
+      const nextBodyId = next && body ? body.id : null;
+      // A selected city belongs to its body; another body starts without one.
+      if (nextBodyId !== bodyId) clearSelection();
       provider = next ?? null;
-      bodyId = provider && body ? body.id : null;
+      bodyId = nextBodyId;
       if (provider && body) back.textContent = `← Back to ${body.name}`;
     },
     selectById,

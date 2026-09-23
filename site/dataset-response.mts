@@ -5,6 +5,7 @@ import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from
 import { renderNativeFocus } from './focus-response.mts';
 import { serializePreparedScene } from '../tools/prepared/serialize-prepared-scene.mts';
 import { requiredElement } from './browser-types.mts';
+import { PLACE_FEATURE_PREFIX } from './feature-search.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -18,7 +19,10 @@ function region(html: string, name: string) {
 export async function renderDatasetResponse(html: string, url: URL, objectId: string, fetcher: typeof fetch = fetch): Promise<string> {
   const ids = url.searchParams.getAll('dataset');
   const settingRequest = url.searchParams.has('settings');
-  const featureIds = url.searchParams.getAll('feature');
+  const featureParams = url.searchParams.getAll('feature');
+  if (featureParams.length > 1 || featureParams.length && !/^(?:city-)?[0-9]{1,16}$/u.test(featureParams[0]!)) throw new RangeError('Invalid feature selection.');
+  // A city link (`city-<id>`) is selected by the page on arrival; only surface features are drawn here.
+  const featureIds = featureParams.filter(id => !id.startsWith(PLACE_FEATURE_PREFIX));
   const views = url.searchParams.getAll('v');
   const focusing = url.searchParams.has('focus') || url.searchParams.has('focusLens');
   if (!ids.length && !settingRequest && !featureIds.length && !views.length && !focusing) return html;
@@ -26,7 +30,6 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   let saved;
   try { saved = views.length ? parseSharedView(`v=${views[0]}`) : null; }
   catch { throw new RangeError('Invalid saved view.'); }
-  if (featureIds.length > 1 || featureIds.length && !/^[0-9]{1,16}$/u.test(featureIds[0])) throw new RangeError('Invalid feature selection.');
   if (ids.length > 1 || ids.length && (!/^[a-z][a-z0-9-]*$/u.test(ids[0]) || ids[0].length > 128)) throw new RangeError('Invalid dataset selection.');
   let lensId = ids[0];
   const descriptorRegion = region(html, 'prepared-descriptor');

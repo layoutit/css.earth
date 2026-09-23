@@ -40,7 +40,7 @@ test('native selection replaces only the existing prepared presentation and sele
   }
 });
 test('invalid requests and corrupt prepared bytes cannot publish another dataset', async () => {
-  for (const query of ['dataset=', 'dataset=unknown', 'dataset=normal&dataset=ultraviolet', 'dataset=..%2Fearth']) {
+  for (const query of ['dataset=', 'dataset=unknown', 'dataset=normal&dataset=ultraviolet', 'dataset=..%2Fearth', 'feature=city-', 'feature=city-lima', 'feature=city-1&feature=2']) {
     await assert.rejects(renderDatasetResponse(html, new URL(`/saturn/?${query}`, origin), 'saturn', read), RangeError);
     const transport: typeof fetch = async () => new Response(html, { headers: { 'content-type': 'text/html' } });
     assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?${query}`), transport)).status, 400);
@@ -48,6 +48,10 @@ test('invalid requests and corrupt prepared bytes cannot publish another dataset
   const corrupt: typeof fetch = async () => new Response('{}');
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', corrupt), /hash|sha256|digest|identity/i);
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'earth', read), /identity/);
+});
+test('a city link is left to the page, which selects the city on arrival', async () => {
+  // The native response used to reject every non-numeric feature, so a shared city link answered 400.
+  assert.equal(await renderDatasetResponse(html, new URL('/saturn/?feature=city-3435910', origin), 'saturn', read), html);
 });
 test('Netlify handles dataset and combined search queries without intercepting static assets', () => {
   for (const query of ['dataset=ultraviolet', 'q=Titan&dataset=cross-section&v=view']) {
