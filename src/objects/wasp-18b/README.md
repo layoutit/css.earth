@@ -20,6 +20,7 @@ Run of 2026-09-23 (this version):
 
 - [`eigenspectra-map.test.mts`](../../../tools/objects/terrestrial-layers/eigenspectra-map.test.mts) turns the deposited flux maps with this package's orbit and rotation ([phase-curve.mts](../../../tools/objects/eclipse-map/phase-curve.mts)) and fits the 25 deposited light curves with a free scale and offset. Reduced chi-squared is 1.017 to 1.391 per wavelength, matching the paper's 1.02 to 1.39, and the flux scale is within 2 % of one, so the maps' units and the orbit's phase agree with the observation. Mirrored east-west, the maps fit worse by a total chi-squared of 384.8; a uniform planet is worse by 4,468. Mirrored north-south they fit 15.9 better: north and south are not decided.
 - The same test finds the hottest observed node within 8° of noon at 0.89, 1.45 and 2.79 µm, as the paper reports, checks the group counts and the no-data longitudes, and that the border lines cross the equator twice (hotspot to ring, ring to outer) and never inside the hotspot.
+- [`wasp-18-default-views.png`](evidence/wasp-18-default-views.png): WASP-18, WASP-18b at 0.89 µm (its default) and WASP-18b at 2.79 µm on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready. The planet opens on its substellar point; the thin black lines are the paper's group borders.
 - [`lens-steps.test.mts`](../../../tools/objects/content/lens-steps.test.mts) checks that stepped datasets form groups of consecutive steps with distinct labels.
 
 ## Known problems
