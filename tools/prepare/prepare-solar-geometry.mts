@@ -46,7 +46,7 @@ const {
   COMET_IDS, cometElements,
   STAR_IDS, starAstrometry, starStateKm,
   HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedOrbit, hostedKeplerElements,
-  SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
+  SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToParentKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   bodyRotationAt, ROTATING_BODY_IDS,
   bodyFixedToIcrf,
@@ -151,13 +151,13 @@ for (const state of epochStates.values()) {
   }
   primaryStates.set(state.centerBodyId, primary);
 }
-const planetState = (id: string) => {
+const primaryState = (id: string) => {
   const state = primaryStates.get(id);
   if (!state) throw new TypeError(`No retained heliocentric state for ${id}.`);
   return state;
 };
-const planetPosition = (id: string) => planetState(id).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
-const planetVelocity = (id: string) => planetState(id).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
+const primaryPosition = (id: string) => primaryState(id).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
+const primaryVelocity = (id: string) => primaryState(id).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
 
 const entries = BODIES.map((body) => {
   const parent = ASTRONOMY_BODY_DATA[body].parent, star = isPlacedStar(body), hosted = isHostedPlanet(body);
@@ -166,14 +166,14 @@ const entries = BODIES.map((body) => {
   const isSatellite = parent !== null && parent !== "sun";
   const epochState = isSatellite ? epochStates.get(body) : null;
   if (epochState && epochState.centerBodyId !== parent) throw new TypeError(`Ephemeris parent differs for ${body}.`);
-  const moonPosition = hostedState ? hostedState.positionKm : isSatellite ? epochState?.positionKm ?? moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT) : null;
+  const moonPosition = hostedState ? hostedState.positionKm : isSatellite ? epochState?.positionKm ?? moonPositionRelativeToParentKm(body, EPOCH_JD_TT) : null;
   // ELP supplies the Earth's Moon position; take its centred derivative.
   // Other satellite records already expose their analytic Kepler velocity.
   const dt = 0.001;
   const moonVelocity = !isSatellite ? null : hostedState ? hostedState.velocityKmPerDay : epochState ? epochState.velocityKmPerDay : isIncluded(SATELLITE_IDS, body)
     ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
-    : moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT + dt).map((value, index) =>
-      (value - moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
+    : moonPositionRelativeToParentKm(body, EPOCH_JD_TT + dt).map((value, index) =>
+      (value - moonPositionRelativeToParentKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
   const parentPosition = !isSatellite ? null : isSatellite
     ? hostedState ? starStateKm(parent as Parameters<typeof starStateKm>[0], EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : primaryStates.has(parent)
@@ -182,7 +182,7 @@ const entries = BODIES.map((body) => {
       ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : isIncluded(SMALL_BODY_IDS, parent)
       ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-      : planetPosition(parent) : null;
+      : primaryPosition(parent) : null;
   const mu = isSatellite
     ? (epochState?.gravitationalParametersKm3PerS2?.combined ?? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
        ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2)) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
@@ -196,11 +196,11 @@ const entries = BODIES.map((body) => {
   const heliocentricAu = starState ? starState.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
     ? parentPosition!.map((value, index) => value + moonPosition![index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? (primaryStates.get(body) ?? kepler).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-    : planetPosition(body);
+    : primaryPosition(body);
   const velocityAuPerDay = starState ? starState.velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
     ? moonVelocity!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-    : planetVelocity(body);
+    : primaryVelocity(body);
   const orbitPositionAu = isSatellite ? moonPosition!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
   // Every body keeps its true Sun direction: the world context rebuilds heliocentric positions from it. A hosted planet's own
   // light source is its host star, which its synchronous rotation record faces at longitude 0; its map is emissive.

@@ -1,8 +1,0 @@
----
-import type { HTMLAttributes } from 'astro/types';
-interface Props extends HTMLAttributes<'div'> {}
-const { class: className, ...attributes } = Astro.props;
----
-<div class:list={['planet-card', className]} {...attributes}>
-  <slot />
-</div>

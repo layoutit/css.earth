@@ -34,7 +34,7 @@ const transparentMarkerFiles = Object.freeze([
 test('adding and reordering bodies preserves existing marker bytes', async context => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-order-'));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const descriptors = (await loadMarkerDescriptors()).filter(({ planetId }) => ['sun', 'moon', 'comet-67p', 'vesta'].includes(planetId));
+  const descriptors = (await loadMarkerDescriptors()).filter(({ objectId }) => ['sun', 'moon', 'comet-67p', 'vesta'].includes(objectId));
   assert.equal(descriptors.length, 4);
   const before = resolve(root, 'before'), after = resolve(root, 'after');
   await prepareBodyMarkers({ projectRoot, outputRoot: before, descriptors: descriptors.slice(0, 3) });
@@ -72,12 +72,12 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
   const markerPlanets = SCENE_OBJECTS
     .toSorted((left, right) => left.distance.meters - right.distance.meters);
   assert.deepEqual(
-    descriptors.map(({ planetId }) => planetId),
+    descriptors.map(({ objectId }) => objectId),
     markerPlanets.map(({ id }) => id),
   );
   assert.deepEqual(
-    descriptors.filter(({ owner }) => owner === "object").map(({ planetId }) =>
-      planetId),
+    descriptors.filter(({ owner }) => owner === "object").map(({ objectId }) =>
+      objectId),
     markerPlanets.map(({ id }) => id),
   );
   assert.ok(descriptors.every(({ source }) =>
@@ -86,22 +86,22 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
 
 test('body marker atlases preserve every visible prepared tile pixel exactly', async () => {
   const descriptors = await loadMarkerDescriptors({ projectRoot });
-  for (const [descriptorIndex, { planetId }] of descriptors.entries()) {
+  for (const [descriptorIndex, { objectId }] of descriptors.entries()) {
     const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
     const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
     for (const density of [1, 2]) {
       const tile = 16 * density;
       const suffix = density === 2 ? '@2x' : '';
-      const accepted = await sharp(resolve(projectRoot, 'public/navigation', `body-${planetId}${suffix}.webp`)).ensureAlpha().raw().toBuffer();
+      const accepted = await sharp(resolve(projectRoot, 'public/navigation', `body-${objectId}${suffix}.webp`)).ensureAlpha().raw().toBuffer();
       const atlas = await sharp(resolve(projectRoot, 'public/navigation', `body-markers-${String(page).padStart(2, '0')}${suffix}.webp`))
         .extract({ left: index * tile, top: 0, width: tile, height: tile }).ensureAlpha().raw().toBuffer();
-      assert.equal(atlas.length, accepted.length, `${planetId}${suffix}: byte length`);
+      assert.equal(atlas.length, accepted.length, `${objectId}${suffix}: byte length`);
       for (let offset = 0; offset < accepted.length; offset += 4) {
-        assert.equal(atlas[offset + 3], accepted[offset + 3], `${planetId}${suffix}: alpha`);
+        assert.equal(atlas[offset + 3], accepted[offset + 3], `${objectId}${suffix}: alpha`);
         // Lossless WebP is allowed to discard RGB under fully transparent
         // pixels; require exact bytes for every pixel the browser can paint.
         if (accepted[offset + 3]) {
-          assert.deepEqual(atlas.subarray(offset, offset + 3), accepted.subarray(offset, offset + 3), `${planetId}${suffix}: visible RGB`);
+          assert.deepEqual(atlas.subarray(offset, offset + 3), accepted.subarray(offset, offset + 3), `${objectId}${suffix}: visible RGB`);
         }
       }
     }
@@ -152,12 +152,12 @@ for (const failure of ["object source", "late utility source", "publication", "r
     await copyFile(resolve(projectRoot, "src/objects/sun/swatch.json"), resolve(root, "src/objects/sun/swatch.json"));
     const original = (await loadMarkerDescriptors())[0];
     // The marker names its source by path; the source manifest owns the record.
-    await writeFile(resolve(root, "src/objects/new-body/source/preparation/navigation.json"), JSON.stringify({ ...original, planetId: "new-body", source: { path: "source.jpg" } }));
+    await writeFile(resolve(root, "src/objects/new-body/source/preparation/navigation.json"), JSON.stringify({ ...original, objectId: "new-body", source: { path: "source.jpg" } }));
     const { path: _path, ...record } = original.source;
-    await writeFile(resolve(root, "src/objects/new-body/source/manifest.json"), JSON.stringify({ schema: "cssnew-body-authoritative-sources@2", inputs: [], generatedIntermediates: [], documents: [{ ...record, path: "source.jpg" }] }));
+    await writeFile(resolve(root, "src/objects/new-body/source/manifest.json"), JSON.stringify({ schema: "cssearth-authoritative-sources@2", inputs: [], generatedIntermediates: [], documents: [{ ...record, path: "source.jpg" }] }));
     await writeFile(resolve(root, "src/objects/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
     const sourcePath = resolve(root, "src/objects/new-body/source/source.jpg");
-    await copyFile(resolve(projectRoot, "src/objects", original.planetId, "source", original.source.path), sourcePath);
+    await copyFile(resolve(projectRoot, "src/objects", original.objectId, "source", original.source.path), sourcePath);
     if (failure === "object source") await writeFile(sourcePath, "corrupt object source");
     for (const filename of await readdir(resolve(projectRoot, "src/navigation/source"))) {
       if (failure === "late utility source" && filename === "share-mark.svg") {

@@ -20,8 +20,8 @@ import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
 import {inventoryPublicAssets} from '../../../src/platform/runtime-asset-closure.mts';
 import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
-import {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
-import {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
+import {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
+import {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
 import {prepareGiantLayers} from '../giant-layers/index.mts';
 import {prepareCutawayMaterials} from '../cutaway/materials.mts';
@@ -58,7 +58,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const declared=descriptor.recipe.surfaces.flatMap(surface=>surface.lenses.map(lens=>lens.id));
   if(JSON.stringify(declared)!==JSON.stringify(contentSource.lenses.controls.map(lens=>lens.id)))throw new TypeError('Authored lenses differ from content controls.');
   const sourceDirectory=resolve(objectRoot,'source');
-  const sourceManifest=await createSourceManifest({planetId:descriptor.id,planetName:contentSource.displayName,sourceRoot:sourceDirectory});await sourceManifest.verify();
+  const sourceManifest=await createSourceManifest({objectId:descriptor.id,objectName:contentSource.displayName,sourceRoot:sourceDirectory});await sourceManifest.verify();
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(outputDirectory,{recursive:true})]);
   const stagingDirectory=resolve(outputDirectory,'.material-masters');
   const context={sourceDirectory,publicDirectory,stagingDirectory};
@@ -71,8 +71,8 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const compiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:{...radial,lenses:materialLenses,views}});
   const material=await compiler.composeMaterialSurfaces(metadata);
   const {runtimeScene:scene}=await compiler.prepareLayeredScene(material);
-  const sky=preparePlanetCubicSky({objectId:descriptor.id,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD});
-  const sun=preparePlanetDirectionalSun();
+  const sky=prepareCubicSky({objectId:descriptor.id,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD});
+  const sun=prepareDirectionalSun();
   const contentResult=await prepareContent({sourceDirectory,publicDirectory,outputDirectory,config:{contentPath:relative(sourceDirectory,requiredSource('content').path)}});
   const {controls,content}=contentResult;
   const projectRoot=resolve(objectRoot,'../../..'),stylesheetPath=resolve(projectRoot,presentationConfig.stylesheet.path);
@@ -101,7 +101,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
 /** Preparation may retain intermediate density banks; deployed closure is exact. */
 export function prepareLayeredConsumerManifest({id,definition,content,stylesheet,publicDirectory,objectDirectory}: {id:string;definition:unknown;content:unknown;stylesheet:string;publicDirectory:string;objectDirectory:string}) {
   const urls=collectUrls(id,[definition,content,stylesheet]);
-  return inventoryPublicAssets({planetId:id,objectDirectory,urls,publicRoot:publicDirectory,allowPreparationArtifacts:true});
+  return inventoryPublicAssets({objectId:id,objectDirectory,urls,publicRoot:publicDirectory,allowPreparationArtifacts:true});
 }
 
 function collectUrls(id:string,values:readonly unknown[]) {

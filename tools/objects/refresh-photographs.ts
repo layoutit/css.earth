@@ -49,7 +49,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   await mkdir(publicDirectory, { recursive: true });
   for (const filename of replacements.keys()) await copyFile(resolve(stage, filename), resolve(publicDirectory, filename));
   await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(combined) + '\n');
-  await updateInventory({ planetId: id, objectDirectory, location: 'public', assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) });
+  await updateInventory({ objectId: id, objectDirectory, location: 'public', assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) });
   const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare/prepare-surface-minimaps.mts')).href) as typeof import('../prepare/prepare-surface-minimaps.mts');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   await refreshSurfaceContent(id, lensIds);

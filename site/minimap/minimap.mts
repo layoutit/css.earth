@@ -9,7 +9,7 @@ import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 // Spatial overview, published by the same camera as the main world.
 // No second scene/camera, navigation writes, ephemeris work, or runtime geometry.
 export function mountSpaceMinimap(documentTarget: Document) {
-  const overlays = documentTarget.querySelector('.planet-scene-overlays');
+  const overlays = documentTarget.querySelector('.object-scene-overlays');
   if (!overlays) throw new Error('Minimap preview requires the shared scene overlay layer.');
   const root = documentTarget.createElement('div');
   root.className = 'space-minimap';

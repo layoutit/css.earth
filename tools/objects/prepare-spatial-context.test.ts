@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
+import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToParentKm,
   systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '../prepare/prepare-catalog.mts';
@@ -168,7 +168,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       if (DWARF_PLANET_IDS.includes(id as DwarfPlanetId)) return dwarfPlanetPositionKm(id as DwarfPlanetId, source.frame.epochJdTt).map(value => value * 1000);
       if (parent !== 'sun') {
         const parentPosition = modelPositionM(parent);
-        return (sourcePositions.get(id) ?? moonPositionRelativeToPlanetKm(id, source.frame.epochJdTt)).map((value, axis) => parentPosition[axis]! + value * 1000);
+        return (sourcePositions.get(id) ?? moonPositionRelativeToParentKm(id, source.frame.epochJdTt)).map((value, axis) => parentPosition[axis]! + value * 1000);
       }
       return systemBarycentreHeliocentricAu((id === 'earth' ? 'emb' : id) as Vsop87BodyKey, source.frame.epochJdTt)
         .map((value, axis) => value * M_PER_AU + (id === 'earth' ? sourcePositions.get('earth')![axis]! * 1000 : 0));

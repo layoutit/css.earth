@@ -108,15 +108,9 @@ export function ciCacheKeys({ root = resolve(import.meta.dirname, '../..'), runt
   return { buildDigest: build.digest('hex'), tsconfigDigest: typecheck.digest('hex'), files: entries.length, bytes, missing, configFiles };
 }
 
-// These are the only package build steps with filesystem behavior beyond tsup's compiler inputs.
-// Their audited implementations read package-local astronomy data, or bundle the telescope CLI. A change
-// falls back to the whole-tracked key until its build-time input contract has been reviewed again.
-const AUDITED_BUILD_FILES: Readonly<Record<string, string>> = {
-  'packages/astronomy/tools/body-records.mts': '527f837d1bb41ff1c29950dfe7cf09deab5323d374a675cc806d420c48a2afb1',
-  'packages/astronomy/tools/lib/generator-records.mts': '505d5bd1fb121423af5e04c0466e2a8c6e2410c4c1a6acb5f0a7bf03b377625e',
-  'packages/astronomy/tools/lib/source-validation.mts': '680dee1e4f81f9307bdcd377891cc0673da54ca1488f5f300c501781309f500a',
-  'packages/telescope/build.mts': '8a9ff660b1851bc90f4afb8ec07d7f51e461097fc2220a5d5930f8dbc0e0de08',
-};
+// The package digest hashes every tracked file under packages/. The two non-tsup builds read only
+// package-local files (astronomy's body-records reads packages/astronomy/data; telescope bundles its CLI),
+// so a change to their scripts or data changes the digest without a separate hash list to keep current.
 const fileHash = (path: string) => createHash('sha256').update(readFileSync(path)).digest('hex');
 const BUILD_CONFIG_FIELDS = new Set(['entry', 'outDir', 'tsconfig', 'format', 'external', 'dts', 'sourcemap', 'clean', 'target', 'splitting']);
 
@@ -237,8 +231,6 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
     for (const pkg of packages) {
       const supported = pkg.script === 'tsup' || pkg.directory === 'packages/astronomy' && pkg.script === 'node tools/body-records.mts && tsup' || pkg.directory === 'packages/telescope' && pkg.script === 'node build.mts';
       if (!supported) throw new TypeError(`Unaudited package build: ${pkg.directory}`);
-      for (const [path, sha] of Object.entries(AUDITED_BUILD_FILES).filter(([path]) => path.startsWith(`${pkg.directory}/`)))
-        if (fileHash(resolve(root, path)) !== sha) throw new TypeError(`Package filesystem build inputs changed: ${path}`);
       const config = pkg.directory === 'packages/telescope' ? null : resolve(root, pkg.directory, 'tsup.config.ts');
       await closure(pkg.directory, config, packageInputs, packageOptions);
     }

@@ -84,7 +84,7 @@
           "retrievedAt": "2026-09-01",
           "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
         },
-        "planetId": "saturn",
+        "objectId": "saturn",
         "samples": 181,
         "maximumAngleDegrees": 150,
         "qualification": "Globe-only phase curve. The rings are excluded because no wide-angle combined planet-and-ring equation is available.",

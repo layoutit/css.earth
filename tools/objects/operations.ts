@@ -2,7 +2,7 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import {inventoryPublicAssets,requireInventory} from '../../src/platform/runtime-asset-closure.mts';
 import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
 import type { SourceBinding } from '../../src/platform/source-catalog.mts';
-import { assertRangeResponse, assertSourceRange, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
+import { assertRangeResponse, assertSourceRange, rangeRequestHeader, SOURCE_MANIFEST_SCHEMA } from '../../src/platform/source-manifest.mts';
 import type { SourceRange } from '../../src/platform/source-manifest.mts';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
@@ -29,7 +29,7 @@ export function containedPath(root:string,path:string):string {
 }
 export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
  const manifest=object(value);
- if(typeof manifest.schema!=='string'||!/^css[a-z][a-z0-9-]*-authoritative-sources@2$/.test(manifest.schema)||(id!==undefined&&manifest.schema!==`css${id}-authoritative-sources@2`&&manifest.schema!=='cssearth-authoritative-sources@2'))throw new TypeError('Unsupported source manifest schema.');
+ if(manifest.schema!==SOURCE_MANIFEST_SCHEMA)throw new TypeError('Unsupported source manifest schema.');
  const paths=new Set<string>(),ids=new Set<string>();
  for(const collection of ['inputs','generatedIntermediates','documents'] as const){
   const entries=manifest[collection];if(!Array.isArray(entries)||(collection==='inputs'&&!entries.length))throw new TypeError(`Source manifest ${collection} is missing or empty.`);
@@ -119,13 +119,13 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
 }
 export async function prepareRuntimeManifest({id,publicRoot,objectDirectory,values,allowPreparationArtifacts=false}:{id:string;publicRoot:string;objectDirectory:string;values:unknown[];allowPreparationArtifacts?:boolean}) {
  const urls=collectRuntimeAssetUrls(id,...values);if(!urls.length)throw new Error('Prepared object has no runtime asset references.');
- const inventory=await inventoryPublicAssets({planetId:id,objectDirectory,urls,publicRoot,allowPreparationArtifacts});
+ const inventory=await inventoryPublicAssets({objectId:id,objectDirectory,urls,publicRoot,allowPreparationArtifacts});
  const manifest={assets:(inventory?.assets??[]).filter(asset=>asset.location==='public').map(({filename,bytes,sha256})=>({filename,bytes,sha256}))};
  await verifyAssetFiles(publicRoot,manifest,!allowPreparationArtifacts);
  return manifest;
 }
-export async function assembleRuntimeAssets({id,manifest,productionRoot}:{id:string;manifest:RuntimeManifest;productionRoot:string}) {
- parseRuntimeManifest(manifest,id);
+export async function assembleRuntimeAssets({id,inventory,productionRoot}:{id:string;inventory:unknown;productionRoot:string}) {
+ const manifest=parseRuntimeManifest(inventory,id);
  // Verify required assets before deleting build leftovers: a failed assembly retains its evidence.
  await verifyAssetFiles(productionRoot,manifest,false);
  const expected=new Set(manifest.assets.map(asset=>asset.filename)),entries=await readdir(productionRoot,{withFileTypes:true});
@@ -167,7 +167,7 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
   // ASSET_ORIGIN builds never populate dist/scenes (astro.config.mts removes the publicDir
   // copy once the build finishes): nothing here needs verifying or pruning.
   if(process.env.ASSET_ORIGIN?.trim()&&!(await lstat(productionRoot).catch(()=>null))?.isDirectory())return parseRuntimeManifest(JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,id);
-  return assembleRuntimeAssets({id,manifest:parseRuntimeManifest(JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,id),productionRoot});
+  return assembleRuntimeAssets({id,inventory:JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,productionRoot});
  }
  throw new TypeError(`Unknown object operation: ${mode}.`);
 }

@@ -18,11 +18,11 @@ export function loadSurfacePreview(map: HTMLElement) {
 }
 
 export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onInteraction, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; onInteraction(): void; surfaceReader?: SurfaceMapReader }) {
-  const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap], .planet-surface-minimap')];
+  const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap], .object-surface-minimap')];
   const events = new AbortController();
   const elements = new Map<HTMLElement, MapElements>(maps.map(map => [map, {
     config: map.dataset.surfaceMinimap ? parseSurfaceMapConfig(map.dataset.surfaceMinimap) : null,
-    rectangles: [...map.querySelectorAll<HTMLElement>('.planet-minimap-viewport')],
+    rectangles: [...map.querySelectorAll<HTMLElement>('.object-minimap-viewport')],
     size: null,
   }]));
   let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let disposed = false;
@@ -115,7 +115,7 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     event.stopPropagation?.();
     onInteraction();
     // Feed the original deltas into the scene's retained zoom controller.
-    const input = requiredElement(documentTarget, '.planet-input-surface');
+    const input = requiredElement(documentTarget, '.object-input-surface');
     const bounds = input.getBoundingClientRect();
     input.dispatchEvent(new windowTarget.WheelEvent('wheel', {
       bubbles: true, cancelable: true, deltaY: event.deltaY, deltaX: event.deltaX ?? 0,

@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="patroclus"]) > :is(.patroclus-sun-camera, .patroclus-camera, .patroclus-material-root) {
+.object-stage:where([data-object-id="patroclus"]) > :is(.patroclus-sun-camera, .patroclus-camera, .patroclus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-sun-camera, :where(.planet-stage[data-object-id="patroclus"]) .patroclus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-body > u {
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-sun-camera, :where(.object-stage[data-object-id="patroclus"]) .patroclus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--patroclus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-body > .patroclus-polar { background-image: var(--patroclus-poles-image); }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-material-root { z-index: 3; --patroclus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-material, :where(.planet-stage[data-object-id="patroclus"]) .patroclus-billboard {
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-body > .patroclus-polar { background-image: var(--patroclus-poles-image); }
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-material-root { z-index: 3; --patroclus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-material, :where(.object-stage[data-object-id="patroclus"]) .patroclus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-material { background-repeat: no-repeat; transform: rotate(var(--patroclus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="patroclus"]) .patroclus-billboard { border-radius: 50%; background-color: var(--patroclus-billboard-color); opacity: var(--patroclus-billboard-opacity); }
-.planet-stage:where([data-object-id="patroclus"])[data-lod="billboard"] .patroclus-scene, .planet-stage:where([data-object-id="patroclus"])[data-lod="marker"] .patroclus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="patroclus"])[data-lod="marker"] .patroclus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-material { background-repeat: no-repeat; transform: rotate(var(--patroclus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="patroclus"]) .patroclus-billboard { border-radius: 50%; background-color: var(--patroclus-billboard-color); opacity: var(--patroclus-billboard-opacity); }
+.object-stage:where([data-object-id="patroclus"])[data-lod="billboard"] .patroclus-scene, .object-stage:where([data-object-id="patroclus"])[data-lod="marker"] .patroclus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="patroclus"])[data-lod="marker"] .patroclus-billboard { opacity: 0; }
 

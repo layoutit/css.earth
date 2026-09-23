@@ -19,14 +19,14 @@ The retained source checks cover closed 800-face geometry, independent facet/cen
 
 The [12 September 2026 browser and installation evidence](evidence/draco-mosaic-browser.json) records desktop, DPR 2 and mobile runs: dataset switching, retained drag, close zoom, both lighting states and a click on Carillon Saxum. The check used separately downloaded, hash-verified runtime files. Shadows start off. The [close-up](evidence/draco-mosaic-close.webp) and [mobile view](evidence/draco-mosaic-mobile.webp) expose the partial coverage and coarse source detail; they are product captures, not native mission photographs. Didymos's runtime inventory grows from 8.126 to 8.964 MB, entirely from the DRACO surface, shadow and thumbnail; its 40 previous assets are unchanged. These totals exclude the shared app and scene JSON.
 
-[Source test definitions](../../../tests/objects/unit/didymos/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/didymos/source.test.mts).
 
 The two DRACO cameras are recovered from the selected target's archived XYZ/pixel
 pairs. Their maximum disjoint holdout residuals are below 0.00001 source pixels.
 The 307 and 104 sampled intercepts transfer to the retained 9.309 m source OBJ
 within 5.00 and 1.08 m respectively, inside the existing 8 m limit. These checks
 establish internal camera consistency and transfer between the released meshes;
-they do not improve the source's scientific accuracy. The [DRACO tests](../../../tests/objects/unit/didymos/draco.test.mts)
+they do not improve the source's scientific accuracy. The [DRACO tests](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/didymos/draco.test.mts)
 also require the unfiltered, mixed-body camera fit to fail.
 
 The preparation trial uses 64 deterministic samples per triangle on the unchanged

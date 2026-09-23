@@ -6,14 +6,14 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { OBJECTS, SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mts";
+import { objectNavigation, SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../search-objects.mts";
 import { BODY_MARKER_ATLAS_PAGE_SIZE, loadMarkerDescriptors } from "../../tools/prepare/prepare-navigation.mts";
 import { markerStyle, resolveMarkerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
 test("search contains every object, including the Sun; only planets enter the scale", () => {
-  assert.deepEqual(new Set(PLANET_SEARCH_OBJECTS), new Set(OBJECTS));
-  assert.ok(PLANET_SEARCH_OBJECTS.some(({ id }) => id === "sun"));
+  assert.deepEqual(new Set(SEARCH_OBJECTS), new Set(OBJECTS));
+  assert.ok(SEARCH_OBJECTS.some(({ id }) => id === "sun"));
   assert.ok(PLANET_NAVIGATION_OBJECTS.every(({ classification }) => classification === "planet"));
   const unknown = [
     { id: "future-dwarf", classification: "dwarf-planet", distance: { meters: 40 } },
@@ -26,9 +26,9 @@ test("search contains every object, including the Sun; only planets enter the sc
 
 test("prepared marker atlases and presentation follow packages", async () => {
   const descriptors = await loadMarkerDescriptors();
-  assert.deepEqual(Object.keys(PREPARED_NAVIGATION_MARKERS), descriptors.map(({ planetId }) => planetId));
+  assert.deepEqual(Object.keys(PREPARED_NAVIGATION_MARKERS), descriptors.map(({ objectId }) => objectId));
   for (const [descriptorIndex, descriptor] of descriptors.entries()) {
-    const marker = PREPARED_NAVIGATION_MARKERS[descriptor.planetId];
+    const marker = PREPARED_NAVIGATION_MARKERS[descriptor.objectId];
     const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
     const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
     const count = Math.min(BODY_MARKER_ATLAS_PAGE_SIZE, descriptors.length - page * BODY_MARKER_ATLAS_PAGE_SIZE);
@@ -66,7 +66,7 @@ test("an unknown object loads its own marker; missing packages fail without fall
   const dir = resolve(root, "src/objects/new-body/source/preparation");
   await mkdir(dir, { recursive: true });
   const source = (await loadMarkerDescriptors())[0];
-  const fixture = { ...source, planetId: "new-body", presentation: { size: 8 } };
+  const fixture = { ...source, objectId: "new-body", presentation: { size: 8 } };
   // The recipe names its source by path; the source manifest owns the record the loader merges in.
   const { path, ...record } = source.source;
   await writeFile(resolve(dir, "navigation.json"), JSON.stringify({ ...fixture, source: { path } }));

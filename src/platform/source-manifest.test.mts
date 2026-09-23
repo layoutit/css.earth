@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parseSourceManifest } from '../../tools/objects/dist/operations.js';
+import { parseSourceManifest } from '#preparation/operations';
 
 import {
   assertRangeResponse,
@@ -43,7 +43,7 @@ test("validates and verifies every authoritative source entry class", async (t) 
   const manifest = validateSourceManifest("fixture", valid);
   assert.deepEqual(await verifySourceManifest({
     manifest,
-    planetName: "Fixture",
+    objectName: "Fixture",
     sourceRoot: root,
   }), {
     inputCount: 1,
@@ -82,7 +82,7 @@ test("validates and verifies every authoritative source entry class", async (t) 
 
   await writeFile(join(root, "undeclared.txt"), "undeclared");
   await assert.rejects(
-    verifySourceManifest({ manifest, planetName: "Fixture", sourceRoot: root }),
+    verifySourceManifest({ manifest, objectName: "Fixture", sourceRoot: root }),
     /Undeclared: undeclared.txt/,
   );
 });
@@ -98,14 +98,14 @@ test("rejects a declared file missing from the source tree", async (t) => {
     documents: [],
   });
   await assert.rejects(
-    verifySourceManifest({ manifest, planetName: "Fixture", sourceRoot: root }),
+    verifySourceManifest({ manifest, objectName: "Fixture", sourceRoot: root }),
     /Missing: input\/source.txt/,
   );
 });
 
 function sourceManifest(files: Record<string, Buffer>, overrides: Partial<Record<"input" | "generated" | "document", Record<string, unknown>>> = {}) {
   return {
-    schema: "cssfixture-authoritative-sources@2",
+    schema: "cssearth-authoritative-sources@2",
     inputs: [{
       id: "source",
       path: "input/source.txt",

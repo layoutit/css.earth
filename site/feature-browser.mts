@@ -15,15 +15,15 @@ export type { FindResult } from './find-protocol.mts';
 export function createFeatureBrowser({ documentTarget, objectId, onSelected, onResults, selectOwnPlace }: { documentTarget: Document; objectId: string; onSelected(result: FindResult): void; onResults(count: number): void;
   /** Opens a place of the current body (its id without the `city-` prefix). */
   selectOwnPlace?(id: string): Promise<unknown> }) {
-  const candidate = documentTarget.querySelector<HTMLElement>('.planet-feature-results');
+  const candidate = documentTarget.querySelector<HTMLElement>('.object-feature-results');
   if (!candidate) return null;
   const root = candidate;
   const pin = parseFeaturePin(root.dataset.featureIndex);
-  const buttons = [...root.querySelectorAll<HTMLAnchorElement>('.planet-destination-result')];
+  const buttons = [...root.querySelectorAll<HTMLAnchorElement>('.object-destination-result')];
   const events = new AbortController();
   const currentObjectId = () => documentTarget.body.dataset.objectShell || objectId;
   let provider: SurfaceFeatureNavigationRuntime | null = null, inFlight: AbortController | null = null;
-  let matches: FindResult[] = [], query = documentTarget.querySelector<HTMLInputElement>('.planet-sidebar-search')?.value.trim().toLocaleLowerCase('en') ?? '', revision = 0, destroyed = false, selecting = false;
+  let matches: FindResult[] = [], query = documentTarget.querySelector<HTMLInputElement>('.object-sidebar-search')?.value.trim().toLocaleLowerCase('en') ?? '', revision = 0, destroyed = false, selecting = false;
   function clearRows() {
     matches = [];
     for (const button of buttons) button.parentElement!.hidden = true;
@@ -57,8 +57,8 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
         const result = matches[row];
         button.parentElement!.hidden = !result;
         if (!result) continue;
-        requiredElement(button, '.planet-destination-result-name').textContent = result.name;
-        requiredElement(button, '.planet-destination-result-context').textContent = result.context;
+        requiredElement(button, '.object-destination-result-name').textContent = result.name;
+        requiredElement(button, '.object-destination-result-context').textContent = result.context;
         button.ariaLabel = result.label;
         button.href = result.href;
       }

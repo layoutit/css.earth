@@ -1,4 +1,4 @@
-/** The camera publishes its values once, on `.planet-viewport`, and registers them not to inherit,
+/** The camera publishes its values once, on `.object-viewport`, and registers them not to inherit,
  * so a camera change restyles only the elements that read them. Each reader, and every ancestor
  * between it and the viewport, receives an explicit `inherit` for exactly the values used below it.
  * Declarations and computed values are unchanged; only the inheritance path is narrower. */
@@ -6,13 +6,13 @@ interface StyleRule { readonly selector: string; readonly declarations: string; 
 interface PropertyRule { readonly name: string; readonly body: string }
 
 export function carryViewportValues(document: Document, css: string): { readonly values: number; readonly elements: number } {
-  const viewport = document.querySelector('.planet-viewport');
+  const viewport = document.querySelector('.object-viewport');
   if (!viewport) throw new TypeError('The native camera viewport is missing.');
   const { styles, properties } = parseCss(css);
   const nonInheriting = new Set(properties.filter(rule => /inherits\s*:\s*false/u.test(rule.body)).map(rule => rule.name));
   const carried = new Set<string>();
   for (const rule of styles) {
-    if (!selectorList(rule.selector).includes('.planet-viewport')) continue;
+    if (!selectorList(rule.selector).includes('.object-viewport')) continue;
     for (const name of declaredNames(rule.declarations)) if (nonInheriting.has(name)) carried.add(name);
   }
   const used = (text: string) => [...text.matchAll(/var\(\s*(--[\w-]+)/gu)].map(match => match[1]!).filter(name => carried.has(name));
@@ -38,7 +38,7 @@ export function carryViewportValues(document: Document, css: string): { readonly
       throw new TypeError(`A named container query reads carried camera values: ${rule.container}`);
     }
     for (const selector of selectorList(rule.selector)) {
-      if (selector === '.planet-viewport') continue;
+      if (selector === '.object-viewport') continue;
       const subject = selector.replace(/::?(?:hover|active|focus-visible|focus-within|focus|before|after|-webkit-[\w-]+)/gu, '').trim();
       if (!subject) throw new TypeError(`Cannot find the readers of camera values for selector ${selector}`);
       let matches: Element[];

@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="palma"]) > :is(.palma-sun-camera, .palma-camera, .palma-material-root) {
+.object-stage:where([data-object-id="palma"]) > :is(.palma-sun-camera, .palma-camera, .palma-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="palma"]) .palma-sun-camera, :where(.planet-stage[data-object-id="palma"]) .palma-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="palma"]) .palma-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="palma"]) .palma-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="palma"]) .palma-body > u {
+:where(.object-stage[data-object-id="palma"]) .palma-sun-camera, :where(.object-stage[data-object-id="palma"]) .palma-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="palma"]) .palma-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="palma"]) .palma-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="palma"]) .palma-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--palma-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="palma"]) .palma-body > .palma-polar { background-image: var(--palma-poles-image); }
-:where(.planet-stage[data-object-id="palma"]) .palma-material-root { z-index: 3; --palma-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="palma"]) .palma-material, :where(.planet-stage[data-object-id="palma"]) .palma-billboard {
+:where(.object-stage[data-object-id="palma"]) .palma-body > .palma-polar { background-image: var(--palma-poles-image); }
+:where(.object-stage[data-object-id="palma"]) .palma-material-root { z-index: 3; --palma-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="palma"]) .palma-material, :where(.object-stage[data-object-id="palma"]) .palma-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="palma"]) .palma-material { background-repeat: no-repeat; transform: rotate(var(--palma-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="palma"]) .palma-billboard { border-radius: 50%; background-color: var(--palma-billboard-color); opacity: var(--palma-billboard-opacity); }
-.planet-stage:where([data-object-id="palma"])[data-lod="billboard"] .palma-scene, .planet-stage:where([data-object-id="palma"])[data-lod="marker"] .palma-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="palma"])[data-lod="marker"] .palma-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="palma"]) .palma-material { background-repeat: no-repeat; transform: rotate(var(--palma-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="palma"]) .palma-billboard { border-radius: 50%; background-color: var(--palma-billboard-color); opacity: var(--palma-billboard-opacity); }
+.object-stage:where([data-object-id="palma"])[data-lod="billboard"] .palma-scene, .object-stage:where([data-object-id="palma"])[data-lod="marker"] .palma-scene { visibility: hidden; }
+.object-stage:where([data-object-id="palma"])[data-lod="marker"] .palma-billboard { opacity: 0; }
 

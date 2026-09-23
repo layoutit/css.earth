@@ -29,7 +29,7 @@ export function bindSaturnResizeInput(bindings: Bindings): Bindings {
   box.setAttribute('aria-label', 'Native resize camera input experiment');
   const style = doc.createElement('style');
   style.textContent = `
-    .planet-input-surface { overflow: hidden; }
+    .object-input-surface { overflow: hidden; }
     .native-saturn-resize { position: absolute; left: -2048px; top: -2048px;
       min-width: 3584px; min-height: 3584px; max-width: 4608px; max-height: 4608px;
       overflow: scroll; resize: both; background: transparent; opacity: 0;

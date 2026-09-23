@@ -47,8 +47,8 @@ test('a place is opened by its id; malformed requests are refused', async () => 
 });
 
 test('keystrokes queued before a frame send one request, for the newest text', async context => {
-  const { document, window } = parseHTML(`<body data-object-shell="mars"><section class="planet-feature-results" hidden data-feature-index='${JSON.stringify(pin)}'>
-    <p class="planet-destination-hint"></p><ul class="planet-destination-list">${'<li hidden><a class="planet-destination-result"><span class="planet-destination-result-name"></span><span class="planet-destination-result-context"></span></a></li>'.repeat(3)}</ul></section></body>`);
+  const { document, window } = parseHTML(`<body data-object-shell="mars"><section class="object-feature-results" hidden data-feature-index='${JSON.stringify(pin)}'>
+    <p class="object-destination-hint"></p><ul class="object-destination-list">${'<li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li>'.repeat(3)}</ul></section></body>`);
   const frames: (() => void)[] = [];
   Object.assign(window, { requestAnimationFrame: (callback: () => void) => frames.push(callback) });
   const requests: string[] = [];
@@ -59,13 +59,13 @@ test('keystrokes queued before a frame send one request, for the newest text', a
   for (const frame of frames.splice(0)) frame();
   await Promise.all(searches);
   assert.deepEqual(requests, ['buenos']);
-  const shown = [...document.querySelectorAll('li')].filter(row => !row.hidden).map(row => row.querySelector('.planet-destination-result-name')?.textContent);
+  const shown = [...document.querySelectorAll('li')].filter(row => !row.hidden).map(row => row.querySelector('.object-destination-result-name')?.textContent);
   assert.deepEqual(shown, ['Buenos Crater', 'Buenos Aires']);
 });
 
 test('a city opens from its id with one small request, and the Back label names the bound body', async context => {
-  const { document } = parseHTML(`<body><section class="planet-destination-panel" hidden><button class="planet-destination-back">← Back to Mars</button>
-    <h2 class="planet-destination-name"></h2><p class="planet-destination-context"></p><p class="planet-destination-status"></p></section></body>`);
+  const { document } = parseHTML(`<body><section class="object-destination-panel" hidden><button class="object-destination-back">← Back to Mars</button>
+    <h2 class="object-destination-name"></h2><p class="object-destination-context"></p><p class="object-destination-status"></p></section></body>`);
   const requested: string[] = [];
   context.mock.method(globalThis, 'fetch', async (input: string | URL) => { requested.push(new URL(String(input)).search); return handleFindRequest(new Request(String(input)), pin, files); });
   const browser = createDestinationBrowser({ documentTarget: document, onSelected() {}, onReset() {} })!;
@@ -74,7 +74,7 @@ test('a city opens from its id with one small request, and the Back label names 
   await browser.selectById('1691490');
   assert.deepEqual(requested, ['?object=earth&place=1691490']);
   assert.equal((selected[0] as { name: string }).name, 'Rosario');
-  assert.equal(document.querySelector('.planet-destination-name')?.textContent, 'Rosario');
-  assert.equal(document.querySelector('.planet-destination-back')?.textContent, '← Back to Earth');
-  assert.equal(document.querySelector<HTMLElement>('.planet-destination-panel')?.hidden, false);
+  assert.equal(document.querySelector('.object-destination-name')?.textContent, 'Rosario');
+  assert.equal(document.querySelector('.object-destination-back')?.textContent, '← Back to Earth');
+  assert.equal(document.querySelector<HTMLElement>('.object-destination-panel')?.hidden, false);
 });

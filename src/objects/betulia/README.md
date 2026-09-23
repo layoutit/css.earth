@@ -14,7 +14,7 @@ Shape uses the shared missing-imagery grid. Elevation shows original model radiu
 
 Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 15.812102 m and maximum 45.629614 m; display-to-source p95 15.719719 m and maximum 46.250738 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.
 
-[Source test definitions](../../../tests/objects/unit/betulia/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/betulia/source.test.mts).
 
 ## Known problems
 

@@ -1,5 +1,5 @@
 // Records what one preparation process reads, probes, lists and writes, and which programs it starts, so the
-// preparation cache keys a body's outputs on exactly those files. tools/prepare/prepare-planets.mts loads it into each
+// preparation cache keys a body's outputs on exactly those files. tools/prepare/prepare-objects.mts loads it into each
 // body's preparation through NODE_OPTIONS=--import, so Node child processes inherit it. Each process writes
 // <directory>/<pid>.started when it begins and <pid>.json when it exits; the cache refuses a receipt when a
 // started process left no record.

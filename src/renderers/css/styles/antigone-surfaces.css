@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="antigone"]) > :is(.antigone-sun-camera, .antigone-camera, .antigone-material-root) {
+.object-stage:where([data-object-id="antigone"]) > :is(.antigone-sun-camera, .antigone-camera, .antigone-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-sun-camera, :where(.planet-stage[data-object-id="antigone"]) .antigone-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-body > u {
+:where(.object-stage[data-object-id="antigone"]) .antigone-sun-camera, :where(.object-stage[data-object-id="antigone"]) .antigone-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="antigone"]) .antigone-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="antigone"]) .antigone-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="antigone"]) .antigone-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--antigone-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-body > .antigone-polar { background-image: var(--antigone-poles-image); }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-material-root { z-index: 3; --antigone-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-material, :where(.planet-stage[data-object-id="antigone"]) .antigone-billboard {
+:where(.object-stage[data-object-id="antigone"]) .antigone-body > .antigone-polar { background-image: var(--antigone-poles-image); }
+:where(.object-stage[data-object-id="antigone"]) .antigone-material-root { z-index: 3; --antigone-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="antigone"]) .antigone-material, :where(.object-stage[data-object-id="antigone"]) .antigone-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-material { background-repeat: no-repeat; transform: rotate(var(--antigone-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="antigone"]) .antigone-billboard { border-radius: 50%; background-color: var(--antigone-billboard-color); opacity: var(--antigone-billboard-opacity); }
-.planet-stage:where([data-object-id="antigone"])[data-lod="billboard"] .antigone-scene, .planet-stage:where([data-object-id="antigone"])[data-lod="marker"] .antigone-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="antigone"])[data-lod="marker"] .antigone-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="antigone"]) .antigone-material { background-repeat: no-repeat; transform: rotate(var(--antigone-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="antigone"]) .antigone-billboard { border-radius: 50%; background-color: var(--antigone-billboard-color); opacity: var(--antigone-billboard-opacity); }
+.object-stage:where([data-object-id="antigone"])[data-lod="billboard"] .antigone-scene, .object-stage:where([data-object-id="antigone"])[data-lod="marker"] .antigone-scene { visibility: hidden; }
+.object-stage:where([data-object-id="antigone"])[data-lod="marker"] .antigone-billboard { opacity: 0; }
 

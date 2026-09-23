@@ -528,7 +528,7 @@ function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, sample: Flig
 }
 function isFlightInput(event: Event) {
   const target = event.target;
-  return target && 'closest' in target && typeof target.closest === 'function' && Boolean(target.closest('.planet-input-surface, .planet-surface-minimap')) &&
+  return target && 'closest' in target && typeof target.closest === 'function' && Boolean(target.closest('.object-input-surface, .object-surface-minimap')) &&
     (event.type !== 'keydown' || 'key' in event && typeof event.key === 'string' && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '-', '=', 'Escape'].includes(event.key));
 }
 function cancellationReason(signal: AbortSignal): unknown {

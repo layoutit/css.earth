@@ -16,7 +16,7 @@ Published occultation/photometric model with semiaxes 240±40, 180±30 and 143±
 
 Hiʻiaka uses the retained JPL#110 system solution, not the newer 2024 interacting orbit. Its older 2005–2008 observations support limited phase accuracy; the source reports 900 km uncertainty at 2025-Jan-01, not an uncertainty bound at the 2026 scene epoch. Exact target/center IDs, time conversion, vectors, parent GM and independent heliocentric composition checks are in [epoch record](source/validation/epoch-state.json). Runtime extrapolation is not enabled.
 
-[Source test definitions](../../../tests/objects/unit/hiiaka/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/hiiaka/source.test.mts).
 
 ## Known problems
 

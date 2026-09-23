@@ -1,5 +1,5 @@
 ---
-import type { Props as ShellProps } from '../planet-shell-types';
+import type { Props as ShellProps } from '../object-shell-types';
 interface Props { objectId: string; lens: NonNullable<ShellProps['lenses']>['controls'][number];
   /** The dataset this legend is shown under, when it is borrowed from another one; it keeps the element ids unique. */
   owner?: string; }
@@ -17,28 +17,28 @@ const labels = categories?.map(item => ({ text: item.label, detail: item.descrip
 // The shell explains the shared no-data grid once, so dataset text never repeats it.
 const noData = lens.noData === true;
 ---
-{(legend || noData) && <section id={`${objectId}-${slot}-legend`} class="planet-lens-legend-panel"
+{(legend || noData) && <section id={`${objectId}-${slot}-legend`} class="object-lens-legend-panel"
   data-lens-legend={slot} aria-label={`${lens.label} legend`}>
-  {legend && <div class="planet-lens-legend-scale-row">
+  {legend && <div class="object-lens-legend-scale-row">
     {legend?.src
-      ? <img class="planet-lens-legend-scale" src={legend.src}
+      ? <img class="object-lens-legend-scale" src={legend.src}
           width={legend.width} height={legend.height} alt={scaleLabel} />
-      : colors && <span class="planet-lens-legend-scale planet-lens-legend-segments" role="img" aria-label={scaleLabel}>
-          {colors?.map(color => <span class="planet-lens-legend-segment"
-            style={`--planet-lens-legend-color: ${color}`} aria-hidden="true"></span>)}
+      : colors && <span class="object-lens-legend-scale object-lens-legend-segments" role="img" aria-label={scaleLabel}>
+          {colors?.map(color => <span class="object-lens-legend-segment"
+            style={`--object-lens-legend-color: ${color}`} aria-hidden="true"></span>)}
         </span>}
   </div>}
-  {legend && (categories ? <ul class="planet-lens-legend-categories">
+  {legend && (categories ? <ul class="object-lens-legend-categories">
     {categories.map(item => <li>
-      <span class="planet-lens-legend-swatch" style={`--planet-lens-legend-color: ${item.color}`} aria-hidden="true"></span>
-      <span class="planet-lens-legend-category-label">{item.label}</span>
-      <span class="planet-lens-legend-category-description">{item.description}</span>
+      <span class="object-lens-legend-swatch" style={`--object-lens-legend-color: ${item.color}`} aria-hidden="true"></span>
+      <span class="object-lens-legend-category-label">{item.label}</span>
+      <span class="object-lens-legend-category-description">{item.description}</span>
     </li>)}
-  </ul> : <div class="planet-lens-legend-labels" style={`--legend-label-count: ${labels.length}`}>
+  </ul> : <div class="object-lens-legend-labels" style={`--legend-label-count: ${labels.length}`}>
     {labels.map(label => <span>{label.text}</span>)}
   </div>)}
-  {noData && <p class="planet-lens-legend-no-data">
-    <svg class="planet-lens-legend-no-data-swatch" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+  {noData && <p class="object-lens-legend-no-data">
+    <svg class="object-lens-legend-no-data-swatch" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       <rect width="12" height="12" fill="#525452" />
       <path d="M0 4.5H12M0 9.5H12M4.5 0V12M9.5 0V12" stroke="#70736f" stroke-width="1" />
     </svg>

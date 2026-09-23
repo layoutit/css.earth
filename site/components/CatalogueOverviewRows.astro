@@ -1,0 +1,31 @@
+---
+import ContextNavigationMarker from './ContextNavigationMarker.astro';
+import ObjectNavigationMarker from './ObjectNavigationMarker.astro';
+import { OVERVIEW_TITLES, SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
+import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
+import { overviewSourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
+
+const galacticRoute = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!.route;
+const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({
+  system,
+  star: SCENE_OBJECTS.find(object => object.id === system.id)!,
+  source: systemSourceDocumentation(system),
+}));
+---
+
+{systems.map(({ system, star, source }) => <li data-search-overview={SYSTEM_TITLES[system.id]!.label.toLocaleLowerCase('en')} hidden>
+  <a class="object-link object-observation-control object-thumbnail-leading" href={`${system.route}?overview=system`}
+    data-source-subject={`overview:system:${system.id}`} data-source-document={source.href} data-source-label={source.label}>
+    <span class="object-lens-icon"><ObjectNavigationMarker objectId={star.id} color={star.color} /></span>
+    <span class="object-name object-lens-label">{system.name}</span>
+  </a>
+</li>)}
+{Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} hidden>
+  <a class="object-link object-observation-control object-thumbnail-leading" href={`${galacticRoute}?overview=${scope}`}
+    data-source-subject={`overview:${scope}`} data-source-document={overviewSourceDocumentation(scope, title.label).href}
+    data-source-label={overviewSourceDocumentation(scope, title.label).label}>
+    <span class="object-lens-icon"><ContextNavigationMarker objectId={scope} /></span>
+    <span class="object-name object-lens-label">{title.label}</span>
+  </a>
+</li>)}

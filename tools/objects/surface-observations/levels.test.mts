@@ -65,7 +65,7 @@ test('archived-camera mosaics bind a separate camera to each image', async () =>
 test('each archived-camera mosaic frame verifies its original source closure before decoding', async () => {
   const sourceDirectory = resolve('src/objects/steins/source');
   const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8'));
-  const source = await createSourceManifest({ planetId: 'steins', planetName: 'Steins', sourceRoot: sourceDirectory });
+  const source = await createSourceManifest({ objectId: 'steins', objectName: 'Steins', sourceRoot: sourceDirectory });
   const drift = new Error('Original camera kernel bytes changed');
   let checked = false;
   await assert.rejects(loadSurfaceObservation({ sourceDirectory, config,

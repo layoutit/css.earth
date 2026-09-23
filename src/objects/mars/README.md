@@ -141,7 +141,7 @@ request or scientific calculation.
 
 Build-time editorial information comes from NASA Science topic `107740` and
 its structured block endpoint. The prepared snapshot is committed at
-`data/planets/mars.json`. Factsheet values cite the JPL references pinned in
+`data/object-information/mars.json`. Factsheet values cite the JPL references pinned in
 `source/editorial/factsheet-review.json`.
 
 ## Runtime boundary

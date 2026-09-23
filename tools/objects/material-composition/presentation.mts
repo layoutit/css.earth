@@ -6,8 +6,8 @@ import {requireString} from '../../sources/source-values.mts';
 import type {createLayeredOblatePreparation} from './layered-oblate.mts';
 import type {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
-import type {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
-import type {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
+import type {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
+import type {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import type {PreparedNode} from '../../prepared/prepared-node-tree.mts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 import { prepareAtlasRows } from './atlas-rows.mts';
@@ -31,7 +31,7 @@ function prepareTransform(value:string|null|undefined) {
   return matrix;
 }
 
-export async function prepareLayeredOblatePresentation({publicDirectory,config:input,plan,layouts,lenses:lensInput,views,sky,sun}: {publicDirectory:string;config:unknown;plan:LayeredScene;layouts:ReturnType<typeof prepareLayeredLeafLayouts>;lenses:unknown;views:Awaited<ReturnType<typeof prepareCutawayMaterials>>;sky:Awaited<ReturnType<typeof preparePlanetCubicSky>>;sun:Awaited<ReturnType<typeof preparePlanetDirectionalSun>>}) {
+export async function prepareLayeredOblatePresentation({publicDirectory,config:input,plan,layouts,lenses:lensInput,views,sky,sun}: {publicDirectory:string;config:unknown;plan:LayeredScene;layouts:ReturnType<typeof prepareLayeredLeafLayouts>;lenses:unknown;views:Awaited<ReturnType<typeof prepareCutawayMaterials>>;sky:Awaited<ReturnType<typeof prepareCubicSky>>;sun:Awaited<ReturnType<typeof prepareDirectionalSun>>}) {
   const config=parse(input,layeredPresentationRecipe,'layered presentation recipe'),lenses=parseLayeredLenses(lensInput);
   const {namespace,camera}=config;
   const exteriorAtlas = parseLayeredAtlas(plan.preparedLighting.orbitAtlas.runtimeShards), interiorAtlas = parseLayeredAtlas(plan.interior.atmosphere.runtimeShards);
@@ -67,7 +67,7 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     ...plan.interior.shells.flatMap(shell => shell.leaves), ...plan.interior.sectionLeaves,
     plan.fixedMaterialPlane.leaf, plan.interior.atmosphere.leaf];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(leaves.map(leaf => leaf.style)) });
-  const cameraNode = b.element("div", "polycss-camera planet-render-root", plan.camera.style);
+  const cameraNode = b.element("div", "polycss-camera object-render-root", plan.camera.style);
   const scene = b.element("div", "polycss-scene", plan.camera.sceneStyle, { "aria-hidden": "true" });
   const system = b.mesh(`${namespace}-system`, plan.systemTransform);
   b.append(null, cameraNode); b.append(cameraNode, scene); b.append(scene, system);

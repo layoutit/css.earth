@@ -18,13 +18,13 @@ function destinationResult(input: unknown): { status: string; arrival?: Promise<
 /** The selected-city panel. Cities are found by the shared feature search; opening one asks the search function for that
  * one place's record, so no page downloads the body's places catalogue (Earth's is 14.8 MB). */
 export function createDestinationBrowser({ documentTarget, onSelected, onReset }: { documentTarget: Document; onSelected(place: DestinationPlace): void; onReset(): void }) {
-  const candidate = documentTarget.querySelector<HTMLElement>(".planet-destination-panel");
+  const candidate = documentTarget.querySelector<HTMLElement>(".object-destination-panel");
   if (!candidate) return null;
   const panel = candidate;
-  const heading = requiredElement(panel, ".planet-destination-name");
-  const context = requiredElement(panel, ".planet-destination-context");
-  const status = requiredElement(panel, ".planet-destination-status");
-  const back = requiredElement(panel, ".planet-destination-back");
+  const heading = requiredElement(panel, ".object-destination-name");
+  const context = requiredElement(panel, ".object-destination-context");
+  const status = requiredElement(panel, ".object-destination-status");
+  const back = requiredElement(panel, ".object-destination-back");
   const events = new AbortController();
   let provider: PreparedDestinationRuntime | null = null, bodyId: string | null = null, selection: DestinationPlace | null = null;
   let destroyed = false, selecting = false, selectionRevision = 0;

@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="demodokus"]) > :is(.demodokus-sun-camera, .demodokus-camera, .demodokus-material-root) {
+.object-stage:where([data-object-id="demodokus"]) > :is(.demodokus-sun-camera, .demodokus-camera, .demodokus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-sun-camera, :where(.planet-stage[data-object-id="demodokus"]) .demodokus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-body > u {
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-sun-camera, :where(.object-stage[data-object-id="demodokus"]) .demodokus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--demodokus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-body > .demodokus-polar { background-image: var(--demodokus-poles-image); }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-material-root { z-index: 3; --demodokus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-material, :where(.planet-stage[data-object-id="demodokus"]) .demodokus-billboard {
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-body > .demodokus-polar { background-image: var(--demodokus-poles-image); }
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-material-root { z-index: 3; --demodokus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-material, :where(.object-stage[data-object-id="demodokus"]) .demodokus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-material { background-repeat: no-repeat; transform: rotate(var(--demodokus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="demodokus"]) .demodokus-billboard { border-radius: 50%; background-color: var(--demodokus-billboard-color); opacity: var(--demodokus-billboard-opacity); }
-.planet-stage:where([data-object-id="demodokus"])[data-lod="billboard"] .demodokus-scene, .planet-stage:where([data-object-id="demodokus"])[data-lod="marker"] .demodokus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="demodokus"])[data-lod="marker"] .demodokus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-material { background-repeat: no-repeat; transform: rotate(var(--demodokus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="demodokus"]) .demodokus-billboard { border-radius: 50%; background-color: var(--demodokus-billboard-color); opacity: var(--demodokus-billboard-opacity); }
+.object-stage:where([data-object-id="demodokus"])[data-lod="billboard"] .demodokus-scene, .object-stage:where([data-object-id="demodokus"])[data-lod="marker"] .demodokus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="demodokus"])[data-lod="marker"] .demodokus-billboard { opacity: 0; }
 

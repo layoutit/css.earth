@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="ambrosia"]) > :is(.ambrosia-sun-camera, .ambrosia-camera, .ambrosia-material-root) {
+.object-stage:where([data-object-id="ambrosia"]) > :is(.ambrosia-sun-camera, .ambrosia-camera, .ambrosia-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-sun-camera, :where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-body > u {
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-sun-camera, :where(.object-stage[data-object-id="ambrosia"]) .ambrosia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--ambrosia-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-body > .ambrosia-polar { background-image: var(--ambrosia-poles-image); }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-material-root { z-index: 3; --ambrosia-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-material, :where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-billboard {
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-body > .ambrosia-polar { background-image: var(--ambrosia-poles-image); }
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-material-root { z-index: 3; --ambrosia-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-material, :where(.object-stage[data-object-id="ambrosia"]) .ambrosia-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-material { background-repeat: no-repeat; transform: rotate(var(--ambrosia-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="ambrosia"]) .ambrosia-billboard { border-radius: 50%; background-color: var(--ambrosia-billboard-color); opacity: var(--ambrosia-billboard-opacity); }
-.planet-stage:where([data-object-id="ambrosia"])[data-lod="billboard"] .ambrosia-scene, .planet-stage:where([data-object-id="ambrosia"])[data-lod="marker"] .ambrosia-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="ambrosia"])[data-lod="marker"] .ambrosia-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-material { background-repeat: no-repeat; transform: rotate(var(--ambrosia-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="ambrosia"]) .ambrosia-billboard { border-radius: 50%; background-color: var(--ambrosia-billboard-color); opacity: var(--ambrosia-billboard-opacity); }
+.object-stage:where([data-object-id="ambrosia"])[data-lod="billboard"] .ambrosia-scene, .object-stage:where([data-object-id="ambrosia"])[data-lod="marker"] .ambrosia-scene { visibility: hidden; }
+.object-stage:where([data-object-id="ambrosia"])[data-lod="marker"] .ambrosia-billboard { opacity: 0; }
 

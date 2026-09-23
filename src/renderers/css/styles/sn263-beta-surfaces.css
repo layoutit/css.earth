@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="sn263-beta"]) > :is(.sn263-beta-sun-camera, .sn263-beta-camera, .sn263-beta-material-root) {
+.object-stage:where([data-object-id="sn263-beta"]) > :is(.sn263-beta-sun-camera, .sn263-beta-camera, .sn263-beta-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-sun-camera, :where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-body > u {
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-sun-camera, :where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--sn263-beta-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-body > .sn263-beta-polar { background-image: var(--sn263-beta-poles-image); }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-material-root { z-index: 3; --sn263-beta-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-material, :where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-billboard {
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-body > .sn263-beta-polar { background-image: var(--sn263-beta-poles-image); }
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-material-root { z-index: 3; --sn263-beta-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-material, :where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-material { background-repeat: no-repeat; transform: rotate(var(--sn263-beta-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="sn263-beta"]) .sn263-beta-billboard { border-radius: 50%; background-color: var(--sn263-beta-billboard-color); opacity: var(--sn263-beta-billboard-opacity); }
-.planet-stage:where([data-object-id="sn263-beta"])[data-lod="billboard"] .sn263-beta-scene, .planet-stage:where([data-object-id="sn263-beta"])[data-lod="marker"] .sn263-beta-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="sn263-beta"])[data-lod="marker"] .sn263-beta-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-material { background-repeat: no-repeat; transform: rotate(var(--sn263-beta-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="sn263-beta"]) .sn263-beta-billboard { border-radius: 50%; background-color: var(--sn263-beta-billboard-color); opacity: var(--sn263-beta-billboard-opacity); }
+.object-stage:where([data-object-id="sn263-beta"])[data-lod="billboard"] .sn263-beta-scene, .object-stage:where([data-object-id="sn263-beta"])[data-lod="marker"] .sn263-beta-scene { visibility: hidden; }
+.object-stage:where([data-object-id="sn263-beta"])[data-lod="marker"] .sn263-beta-billboard { opacity: 0; }
 

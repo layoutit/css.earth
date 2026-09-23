@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+interface Props extends Omit<HTMLAttributes<'details'>, 'title'> { title: string; count?: number; }
+const { title, count, open = false, class: className, ...attributes } = Astro.props;
+---
+<details class:list={['object-accordion', className]} open={open} {...attributes}>
+  <summary class="object-panel-summary">
+    <h2 class="object-panel-heading">{title}{count !== undefined && <> <span class="object-panel-heading-count">({count})</span></>}</h2>
+    <span class="object-panel-toggle" aria-hidden="true"></span>
+  </summary>
+  <slot />
+</details>

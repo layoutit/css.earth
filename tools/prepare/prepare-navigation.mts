@@ -63,13 +63,13 @@ export async function loadMarkerDescriptors({
     validateMarkerDescriptor(descriptor);
     validateMarkerPresentation(descriptor.presentation);
     if (descriptor.owner !== "object") throw new Error(`Object marker must be owned by ${planet.id}.`);
-    if (descriptor.planetId !== planet.id) {
+    if (descriptor.objectId !== planet.id) {
       throw new Error(`Navigation marker identity drifted: ${planet.id}.`);
     }
     // Both the image recipe and its shell presentation have been validated.
     descriptors.push(descriptor as ObjectMarkerDescriptor);
   }
-  if (new Set(descriptors.map(({ planetId }) => planetId)).size !== planets.length) {
+  if (new Set(descriptors.map(({ objectId }) => objectId)).size !== planets.length) {
     throw new Error("Navigation marker descriptors are not unique.");
   }
   return Object.freeze(descriptors);
@@ -85,8 +85,8 @@ export async function prepareNavigation({
   catalogOnly = false,
 } : NavigationOptions = {}) {
   const descriptors = await loadMarkerDescriptors({ planets, projectRoot });
-  if (objectIds?.some(id => !descriptors.some(descriptor => descriptor.planetId === id))) throw new TypeError('Unknown navigation object.');
-  const selected = objectIds ? descriptors.filter(descriptor => objectIds.includes(descriptor.planetId)) : descriptors;
+  if (objectIds?.some(id => !descriptors.some(descriptor => descriptor.objectId === id))) throw new TypeError('Unknown navigation object.');
+  const selected = objectIds ? descriptors.filter(descriptor => objectIds.includes(descriptor.objectId)) : descriptors;
   // A crash or failed rollback must never leave recoverable source/backups in
   // public/, which Vite copies recursively (including dot directories).
   const cacheRoot = resolve(projectRoot, "node_modules/.cache");
@@ -108,7 +108,7 @@ export async function prepareNavigation({
       source: resolve(stagedOutput, filename), target: resolve(outputRoot, filename),
     }));
     const generatedTargets = new Set(changes.map(({ target }) => target));
-    const obsolete = catalogOnly ? [] : [...selected.flatMap(({ planetId }) => [`${planetId}.webp`, `${planetId}-context.webp`]),
+    const obsolete = catalogOnly ? [] : [...selected.flatMap(({ objectId }) => [`${objectId}.webp`, `${objectId}-context.webp`]),
       "planet-markers.webp", "planet-markers@2x.webp", "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp", "sun-indicator-hexagon.png"];
     changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
     changes.push({ source: stagedPresentation, target: presentationPath });
@@ -140,7 +140,7 @@ async function markerPresentations(descriptors: readonly ObjectMarkerDescriptor[
   };
   const entries = [];
   for (const [descriptorIndex, descriptor] of descriptors.entries()) {
-    const id = descriptor.planetId;
+    const id = descriptor.objectId;
     const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
     const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
     const count = Math.min(BODY_MARKER_ATLAS_PAGE_SIZE, descriptors.length - page * BODY_MARKER_ATLAS_PAGE_SIZE);
@@ -178,7 +178,7 @@ export async function prepareBodyMarkerAtlases({ outputRoot, descriptors, direct
       const tile = markerTileSize * density;
       // Copy decoded straight-alpha pixels, not a composite operation: blending
       // partially transparent edges changes their RGB by a rounding unit.
-      const tiles = await Promise.all(members.map(async ({ planetId }) => sharp(await locate(`body-${planetId}${density === 2 ? '@2x' : ''}.webp`))
+      const tiles = await Promise.all(members.map(async ({ objectId }) => sharp(await locate(`body-${objectId}${density === 2 ? '@2x' : ''}.webp`))
         .ensureAlpha().raw().toBuffer({ resolveWithObject: true })));
       if (tiles.some(({ info }) => info.width !== tile || info.height !== tile || info.channels !== 4)) throw new TypeError(`Invalid marker tile dimensions in ${pageName}.`);
       const width = tile * members.length, pixels = Buffer.alloc(width * tile * 4);
@@ -249,14 +249,14 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
   const parents = new Set<string | null | undefined>(planets.filter(({ classification }) => classification === "satellite")
     .map(({ id }) => bodies[id]?.parent).filter(Boolean));
   const markers: Record<string, {url: string; pixels: number}> = {};
-  const contexts = descriptors.filter(descriptor => parents.has(descriptor.planetId) || descriptor.context);
+  const contexts = descriptors.filter(descriptor => parents.has(descriptor.objectId) || descriptor.context);
   // Each context image is independent: encode them concurrently, a bounded few at a time; bytes and file names are unchanged.
   let next = 0;
   const results: {url: string; pixels: number}[] = [];
   await Promise.all(Array.from({ length: Math.min(8, contexts.length) }, async () => {
     for (let index = next++; index < contexts.length; index = next++) {
       const descriptor = contexts[index];
-      const sourcePath = resolve(projectRoot, "src/objects", descriptor.planetId, "source", descriptor.source.path);
+      const sourcePath = resolve(projectRoot, "src/objects", descriptor.objectId, "source", descriptor.source.path);
       let crop = await readMarkerImage(descriptor.source, sourcePath);
       for (const operation of descriptor.operations) {
         if (operation.type === "resize") break;
@@ -268,12 +268,12 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
       // Fixed canonical image, capped by the actual native crop, never the UI atlas.
       const pixels = Math.min(descriptor.context?.pixels ?? 1536, info.width, info.height);
       const png = await renderMarker(descriptor, { sourcePath, tileSize: pixels });
-      const filename = `${descriptor.planetId}-context.webp`;
+      const filename = `${descriptor.objectId}-context.webp`;
       await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(outputRoot, filename));
       results[index] = { url: `/navigation/${filename}`, pixels };
     }
   }));
-  contexts.forEach((descriptor, index) => { markers[descriptor.planetId] = results[index]; });
+  contexts.forEach((descriptor, index) => { markers[descriptor.objectId] = results[index]; });
   return markers;
 }
 
@@ -285,10 +285,10 @@ export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors 
     const tileSize = markerTileSize * density;
     for (const descriptor of descriptors) {
       const sourcePath = descriptor.owner === 'object'
-        ? resolve(projectRoot, 'src/objects', descriptor.planetId, 'source', descriptor.source.path)
+        ? resolve(projectRoot, 'src/objects', descriptor.objectId, 'source', descriptor.source.path)
         : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
       const tile = await renderMarker(descriptor, { sourcePath, tileSize });
-      await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.planetId}${density === 2 ? '@2x' : ''}.webp`));
+      await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.objectId}${density === 2 ? '@2x' : ''}.webp`));
     }
   }
 }
@@ -580,25 +580,25 @@ export async function prepareSunIndicator({
  * An object's marker recipe with its source record taken from the source manifest, which owns the pins and
  * attribution. Older recipes still carry a copy of that record; it is ignored here and removed by write mode.
  */
-export async function loadObjectMarkerDescriptor(planetId: string, projectRoot: string): Promise<Record<string, unknown>> {
-  const directory = resolve(projectRoot, 'src/objects', planetId);
+export async function loadObjectMarkerDescriptor(objectId: string, projectRoot: string): Promise<Record<string, unknown>> {
+  const directory = resolve(projectRoot, 'src/objects', objectId);
   const navigation = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/preparation/navigation.json'), 'utf8')), 'navigation marker');
   const source = requireRecord(navigation.source, 'navigation marker source'), path = source.path;
-  if (typeof path !== 'string') throw new TypeError(`Navigation marker source path is missing: ${planetId}.`);
+  if (typeof path !== 'string') throw new TypeError(`Navigation marker source path is missing: ${objectId}.`);
   const manifest = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/manifest.json'), 'utf8')), 'source manifest');
   const record = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => Array.isArray(manifest[key]) ? manifest[key] as unknown[] : [])
     .map(value => requireRecord(value, 'source record')).find(entry => entry.path === path);
-  if (!record) throw new TypeError(`Navigation marker source is not in the source manifest: ${planetId}/${path}.`);
+  if (!record) throw new TypeError(`Navigation marker source is not in the source manifest: ${objectId}/${path}.`);
   const hints = Object.fromEntries(MARKER_SOURCE_HINTS.filter(hint => hint in source).map(hint => [hint, source[hint]]));
   return { ...navigation, source: { ...record, ...hints } };
 }
 
-async function loadObjectDescriptor(planetId: string, projectRoot: string): Promise<unknown> {
-  if (await authoredObject(planetId, projectRoot)) return loadObjectMarkerDescriptor(planetId, projectRoot);
+async function loadObjectDescriptor(objectId: string, projectRoot: string): Promise<unknown> {
+  if (await authoredObject(objectId, projectRoot)) return loadObjectMarkerDescriptor(objectId, projectRoot);
   const modulePath = resolve(
     projectRoot,
     "src/objects",
-    planetId,
+    objectId,
     "tools/navigation-marker.mjs",
   );
   const module: unknown = await import(pathToFileURL(modulePath).href);

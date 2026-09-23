@@ -74,7 +74,7 @@ function elementsAtEpoch(record: SatelliteRecord, epochJdTt: number): KeplerianE
     meanMotionRadPerDay: elements.meanMotionRadPerDay + rate };
 }
 
-/** Position of a moon relative to its planet's centre, in km, on ICRF axes. */
+/** Position of a moon relative to its parent's centre, in km, on ICRF axes. */
 export const satellitePositionKm = (id: SatelliteId, epochJdTt: number): Vec3 => {
   const record = satelliteRecord(id)
   let position = toIcrf(record, keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt).positionKm)
@@ -95,7 +95,7 @@ function barycentreCompanion(record: SatelliteRecord): { id: SatelliteId; weight
     weight: companion.gravitationalParameterKm3PerS2 / (parent.gravitationalParameterKm3PerS2 + companion.gravitationalParameterKm3PerS2) }
 }
 
-/** Position and velocity of a moon relative to its planet's centre, km and km/day, on ICRF axes. */
+/** Position and velocity of a moon relative to its parent's centre, km and km/day, on ICRF axes. */
 export const satelliteStateKm = (
   id: SatelliteId,
   epochJdTt: number,

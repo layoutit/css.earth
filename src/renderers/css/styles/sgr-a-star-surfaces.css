@@ -1,5 +1,5 @@
-/* Sagittarius A*: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   planet-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+/* Sagittarius A*: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .planet-stage[data-object-id="sgr-a-star"] > :is(.polycss-camera, .sgr-a-star-corona-layer, .sgr-a-star-limb-layer) {
   --sgr-a-star-scene-side-padding: 16px;
   --sgr-a-star-reference-width: 1920px;
@@ -14,7 +14,7 @@
   );
 }
 
-/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .planet-stage[data-object-id="sgr-a-star"] > :is(.sgr-a-star-corona-layer, .sgr-a-star-limb-layer) {
   position: absolute;
   inset: 0;

@@ -1,4 +1,4 @@
-import { PLANET_SEARCH_OBJECTS } from './planet-search-objects.mts';
+import { SEARCH_OBJECTS } from './search-objects.mts';
 import { isSceneObject } from './prepared-focus-object.mts';
 import preparedWorld from '../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import moonCatalogues from './source/moon-catalogues.json' with { type: 'json' };
@@ -33,7 +33,7 @@ const catalogues: Readonly<Record<string, ReturnType<typeof parseMoonCatalogue>>
 export function prepareBodyMoons(objectId: string): readonly MoonListEntry[] {
   const children = new Set(preparedWorld.bodies
     .filter(body => body.orbit?.centerBodyId === objectId).map(body => body.id));
-  const available = PLANET_SEARCH_OBJECTS.filter(isSceneObject).filter(object =>
+  const available = SEARCH_OBJECTS.filter(isSceneObject).filter(object =>
     object.classification === 'satellite' && children.has(object.id));
   const catalogue = catalogues[objectId];
   if (!catalogue) return available.map(object => ({ id: object.id, name: object.name, object }));
@@ -47,10 +47,10 @@ export function prepareBodyMoons(objectId: string): readonly MoonListEntry[] {
 export function prepareBodyRelations(objectId: string) {
   const moons = prepareBodyMoons(objectId);
   if (moons.length) return { label: 'Moons', moons, parent: undefined };
-  const object = PLANET_SEARCH_OBJECTS.find(object => object.id === objectId);
+  const object = SEARCH_OBJECTS.find(object => object.id === objectId);
   const parentId = object?.classification === 'satellite'
     ? preparedWorld.bodies.find(body => body.id === objectId)?.orbit?.centerBodyId : undefined;
-  const parent = PLANET_SEARCH_OBJECTS.filter(isSceneObject).find(object => object.id === parentId);
+  const parent = SEARCH_OBJECTS.filter(isSceneObject).find(object => object.id === parentId);
   if (!parent) return null;
   return { label: `${parent.name} system`, parent,
     moons: prepareBodyMoons(parent.id).filter(moon => moon.id !== objectId && moon.object && !moon.object.discovery.illustration) };

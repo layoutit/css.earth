@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="dinkinesh"]) > :is(.dinkinesh-sun-camera, .dinkinesh-camera, .dinkinesh-material-root) {
+.object-stage:where([data-object-id="dinkinesh"]) > :is(.dinkinesh-sun-camera, .dinkinesh-camera, .dinkinesh-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-sun-camera, :where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-body > u {
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-sun-camera, :where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--dinkinesh-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-body > .dinkinesh-polar { background-image: var(--dinkinesh-poles-image); }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-material-root { z-index: 3; --dinkinesh-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-material, :where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-billboard {
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-body > .dinkinesh-polar { background-image: var(--dinkinesh-poles-image); }
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-material-root { z-index: 3; --dinkinesh-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-material, :where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-material { background-repeat: no-repeat; transform: rotate(var(--dinkinesh-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="dinkinesh"]) .dinkinesh-billboard { border-radius: 50%; background-color: var(--dinkinesh-billboard-color); opacity: var(--dinkinesh-billboard-opacity); }
-.planet-stage:where([data-object-id="dinkinesh"])[data-lod="billboard"] .dinkinesh-scene, .planet-stage:where([data-object-id="dinkinesh"])[data-lod="marker"] .dinkinesh-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="dinkinesh"])[data-lod="marker"] .dinkinesh-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-material { background-repeat: no-repeat; transform: rotate(var(--dinkinesh-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="dinkinesh"]) .dinkinesh-billboard { border-radius: 50%; background-color: var(--dinkinesh-billboard-color); opacity: var(--dinkinesh-billboard-opacity); }
+.object-stage:where([data-object-id="dinkinesh"])[data-lod="billboard"] .dinkinesh-scene, .object-stage:where([data-object-id="dinkinesh"])[data-lod="marker"] .dinkinesh-scene { visibility: hidden; }
+.object-stage:where([data-object-id="dinkinesh"])[data-lod="marker"] .dinkinesh-billboard { opacity: 0; }
 

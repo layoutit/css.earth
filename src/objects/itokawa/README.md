@@ -175,7 +175,7 @@ were not added. The selected four use its supported paired-exposure format.
 
 The controlled-camera holdouts reached maximum residuals of 0.00000842/0.00000876/0.00002017 px, testing agreement with archived Cartesian coordinates rather than absolute navigation. Source-mesh checks and independent image/flat/brightness anchors are retained below. Earlier Chrome 152 DPR 1/2 checks covered the then-selected lenses; that record does not establish qualification of the later three-image mosaic.
 
-[Source test definitions](../../../tests/objects/unit/itokawa/amica.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/itokawa/amica.test.mts).
 
 - **Reader oracle, 2026-09-12:** `tools/oracles/pds3/amica-ddr.py` reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. `tools/objects/terrestrial-layers/amica-geo.oracle.test.mts` requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
 

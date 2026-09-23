@@ -53,7 +53,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }
     const initialSettings: Record<string, boolean | number> = {};
     for (const control of definition.controls.settings?.controls ?? []) {
-      const input = [...stage.ownerDocument.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].find(input => input.name === control.name);
+      const input = [...stage.ownerDocument.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].find(input => input.name === control.name);
       if (input) initialSettings[control.name] = control.kind === 'toggle' ? input.checked : Number(input.value);
     }
     // Validate the server's transported selection even when the user has since

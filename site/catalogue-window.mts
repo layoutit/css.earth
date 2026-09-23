@@ -22,7 +22,7 @@ function renderMarker(documentTarget: Document, entry: CatalogueIndexEntry) {
   const preview = entry.marker.kind === 'scene' ? searchPreviewUrl(entry.marker.id) : null;
   if (preview) {
     const image = documentTarget.createElement('img');
-    image.className = 'planet-search-preview';
+    image.className = 'object-search-preview';
     image.src = preview;
     image.width = PREVIEW_PIXELS;
     image.height = PREVIEW_PIXELS;
@@ -33,7 +33,7 @@ function renderMarker(documentTarget: Document, entry: CatalogueIndexEntry) {
   }
   const marker = documentTarget.createElement('span');
   if (entry.marker.kind === 'focus') {
-    marker.className = `planet-navigation-marker ${entry.marker.thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker'}`;
+    marker.className = `object-navigation-marker ${entry.marker.thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker'}`;
     marker.ariaHidden = 'true';
     if (entry.marker.thumbnail) {
       const image = documentTarget.createElement('img');
@@ -50,7 +50,7 @@ function renderMarker(documentTarget: Document, entry: CatalogueIndexEntry) {
   const prepared = PREPARED_NAVIGATION_MARKERS[entry.marker.id];
   if (!prepared) throw new Error(`Prepared catalogue marker is missing: ${entry.marker.id}.`);
   const presentation = markerStyle(prepared, { color: entry.marker.color, scale: THUMBNAIL_SCALE });
-  marker.className = `planet-navigation-marker ${entry.marker.id}${presentation.ringed ? ' ringed' : ''}`;
+  marker.className = `object-navigation-marker ${entry.marker.id}${presentation.ringed ? ' ringed' : ''}`;
   marker.style.cssText = presentation.style;
   marker.ariaHidden = 'true';
   const disk = documentTarget.createElement('i');
@@ -58,7 +58,7 @@ function renderMarker(documentTarget: Document, entry: CatalogueIndexEntry) {
   marker.append(disk);
   if (presentation.ringed) {
     const ring = documentTarget.createElement('b');
-    ring.className = 'planet-navigation-ring';
+    ring.className = 'object-navigation-ring';
     ring.style.cssText = presentation.ringStyle;
     marker.append(ring);
   }
@@ -67,16 +67,16 @@ function renderMarker(documentTarget: Document, entry: CatalogueIndexEntry) {
 
 function createRow(documentTarget: Document): RowView {
   const item = documentTarget.createElement('li');
-  item.className = 'planet-object-item';
+  item.className = 'object-item';
   item.role = 'listitem';
   const anchor = documentTarget.createElement('a');
-  anchor.className = 'planet-object-link planet-observation-control planet-thumbnail-leading';
+  anchor.className = 'object-link object-observation-control object-thumbnail-leading';
   const icon = documentTarget.createElement('span');
-  icon.className = 'planet-lens-icon';
+  icon.className = 'object-lens-icon';
   const name = documentTarget.createElement('span');
-  name.className = 'planet-object-name planet-lens-label';
+  name.className = 'object-name object-lens-label';
   const detail = documentTarget.createElement('span');
-  detail.className = 'planet-object-distance planet-lens-detail';
+  detail.className = 'object-distance object-lens-detail';
   anchor.append(icon, name, detail);
   item.append(anchor);
   return { item, anchor, index: -1 };
@@ -123,14 +123,14 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
   detail.ariaLabel = entry.detail.ariaLabel;
   // The subtitle: what the object is, then how far it is.
   const kind = documentTarget.createElement('span');
-  kind.className = 'planet-object-kind';
+  kind.className = 'object-kind';
   kind.textContent = `${entry.classificationName.charAt(0).toLocaleUpperCase('en')}${entry.classificationName.slice(1)} · `;
   if (entry.detail.value && entry.detail.unit) {
     const value = documentTarget.createElement('span');
-    value.className = 'planet-object-distance-value';
+    value.className = 'object-distance-value';
     value.textContent = entry.detail.value;
     const unit = documentTarget.createElement('span');
-    unit.className = 'planet-object-distance-unit';
+    unit.className = 'object-distance-unit';
     unit.textContent = entry.detail.unit;
     detail.replaceChildren(kind, value, ' ', unit);
   } else {

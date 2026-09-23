@@ -133,10 +133,10 @@ test('selecting the system root pulls back from a planet to all major planets, w
 
 test('system fit leaves clearance for the visible sidebar, header and footer', () => {
   const boxes: Record<string, Pick<DOMRect, "left" | "top" | "right" | "bottom" | "width" | "height">> = {
-    '.planet-stage': { left: 0, top: 0, right: 1524, bottom: 1237, width: 1524, height: 1237 },
-    '.planet-sidebar': { left: 12, right: 352, top: 60, bottom: 720, width: 340, height: 660 },
+    '.object-stage': { left: 0, top: 0, right: 1524, bottom: 1237, width: 1524, height: 1237 },
+    '.object-sidebar': { left: 12, right: 352, top: 60, bottom: 720, width: 340, height: 660 },
     '.explorer-shell-header': { left: 12, right: 1512, top: 8, bottom: 52, width: 1500, height: 44 },
-    '.planet-footer': { left: 0, right: 1524, top: 1219, bottom: 1237, width: 1524, height: 18 },
+    '.object-footer': { left: 0, right: 1524, top: 1219, bottom: 1237, width: 1524, height: 18 },
   };
   const documentTarget = { querySelector: (selector: string) => boxes[selector] && { getBoundingClientRect: () => boxes[selector] } };
   assert.deepEqual(systemFramingRect({ ...optics, widthPixels: 1524, heightPixels: 1237 }, documentTarget as unknown as Document),

@@ -30,9 +30,9 @@ const NEUTRAL_GRAY = '#9a9a9a', SHADOW_BLACK = '#000000';
 
 /** The star stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. */
 export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.', geometryScale = GEOMETRY_SCALE) {
-  const s = `.planet-stage[data-object-id="${id}"]`;
-  return `/* ${name}: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   planet-surfaces.css base rules. ${spinNote} ${plateNote} */
+  const s = `.object-stage[data-object-id="${id}"]`;
+  return `/* ${name}: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. ${spinNote} ${plateNote} */
 ${s} > :is(.polycss-camera, .${id}-corona-layer, .${id}-limb-layer) {
   --${id}-scene-side-padding: 16px;
   --${id}-reference-width: 1920px;
@@ -47,7 +47,7 @@ ${s} > :is(.polycss-camera, .${id}-corona-layer, .${id}-limb-layer) {
   );
 }
 
-/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 ${s} > :is(.${id}-corona-layer, .${id}-limb-layer) {
   position: absolute;
   inset: 0;
@@ -168,7 +168,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       emission: { source: 'raster', material: 'emission' } },
-    page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
+    page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: blackHole ? 'black-hole' : 'star', color: catalogColor, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
@@ -193,7 +193,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
       axialTiltNote: "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame" } } });
   put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'], directionalSun: false });
   put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: 'emissive' });
-  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@1', planetId: id, owner: 'object', presentation: { size: 5 }, source: { path: 'presentation/context.png' },
+  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 }, source: { path: 'presentation/context.png' },
     operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' }, { type: 'png' }], context: { pixels: 512 } });
   put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1', ...orientation, phase: 'arbitrary-display-phase',
     source: `No measured rotation axis or period (${TODO}: name the literature checked). The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.`,
@@ -237,7 +237,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   const catalogued = (entryId: string, index: number) => ({ kind: 'catalogued', references: [{ catalogueId: `source-${id}-${entryId}`, role: 'material', evidence: `src/objects/${id}/source/manifest.json@0000000000000000000000000000000000000000#/inputs/${index}` }] });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, origin, sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms', acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
-  put(`${o}/source/manifest.json`, { schema: `css${id}-authoritative-sources@2`, inputs: [
+  put(`${o}/source/manifest.json`, { schema: `cssearth-authoritative-sources@2`, inputs: [
     { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit, license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources', redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'], sourceBinding: local('Measurements transcribed in this package with their sources; repinned when edited.') },
     { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', origin: INTER.url, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1', licenseEvidence: ['presentation/LICENSE.INTER-OFL'], acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.', redistribution: 'Permitted with the accompanying SIL Open Font License.', consumers: ['title'], sourceBinding: catalogued('inter-title-font', 1) },
     preparation('preparation-raster', 'preparation/raster.json', 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates', ['assets', 'lenses']),

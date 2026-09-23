@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="xanthippe"]) > :is(.xanthippe-sun-camera, .xanthippe-camera, .xanthippe-material-root) {
+.object-stage:where([data-object-id="xanthippe"]) > :is(.xanthippe-sun-camera, .xanthippe-camera, .xanthippe-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-sun-camera, :where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-body > u {
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-sun-camera, :where(.object-stage[data-object-id="xanthippe"]) .xanthippe-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--xanthippe-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-body > .xanthippe-polar { background-image: var(--xanthippe-poles-image); }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-material-root { z-index: 3; --xanthippe-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-material, :where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-billboard {
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-body > .xanthippe-polar { background-image: var(--xanthippe-poles-image); }
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-material-root { z-index: 3; --xanthippe-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-material, :where(.object-stage[data-object-id="xanthippe"]) .xanthippe-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-material { background-repeat: no-repeat; transform: rotate(var(--xanthippe-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="xanthippe"]) .xanthippe-billboard { border-radius: 50%; background-color: var(--xanthippe-billboard-color); opacity: var(--xanthippe-billboard-opacity); }
-.planet-stage:where([data-object-id="xanthippe"])[data-lod="billboard"] .xanthippe-scene, .planet-stage:where([data-object-id="xanthippe"])[data-lod="marker"] .xanthippe-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="xanthippe"])[data-lod="marker"] .xanthippe-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-material { background-repeat: no-repeat; transform: rotate(var(--xanthippe-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="xanthippe"]) .xanthippe-billboard { border-radius: 50%; background-color: var(--xanthippe-billboard-color); opacity: var(--xanthippe-billboard-opacity); }
+.object-stage:where([data-object-id="xanthippe"])[data-lod="billboard"] .xanthippe-scene, .object-stage:where([data-object-id="xanthippe"])[data-lod="marker"] .xanthippe-scene { visibility: hidden; }
+.object-stage:where([data-object-id="xanthippe"])[data-lod="marker"] .xanthippe-billboard { opacity: 0; }
 

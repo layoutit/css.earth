@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="castalia"]) > :is(.castalia-sun-camera, .castalia-camera, .castalia-material-root) {
+.object-stage:where([data-object-id="castalia"]) > :is(.castalia-sun-camera, .castalia-camera, .castalia-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-sun-camera, :where(.planet-stage[data-object-id="castalia"]) .castalia-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-body > u {
+:where(.object-stage[data-object-id="castalia"]) .castalia-sun-camera, :where(.object-stage[data-object-id="castalia"]) .castalia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="castalia"]) .castalia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="castalia"]) .castalia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="castalia"]) .castalia-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--castalia-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-body > .castalia-polar { background-image: var(--castalia-poles-image); }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-material-root { z-index: 3; --castalia-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-material, :where(.planet-stage[data-object-id="castalia"]) .castalia-billboard {
+:where(.object-stage[data-object-id="castalia"]) .castalia-body > .castalia-polar { background-image: var(--castalia-poles-image); }
+:where(.object-stage[data-object-id="castalia"]) .castalia-material-root { z-index: 3; --castalia-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="castalia"]) .castalia-material, :where(.object-stage[data-object-id="castalia"]) .castalia-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-material { background-repeat: no-repeat; transform: rotate(var(--castalia-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="castalia"]) .castalia-billboard { border-radius: 50%; background-color: var(--castalia-billboard-color); opacity: var(--castalia-billboard-opacity); }
-.planet-stage:where([data-object-id="castalia"])[data-lod="billboard"] .castalia-scene, .planet-stage:where([data-object-id="castalia"])[data-lod="marker"] .castalia-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="castalia"])[data-lod="marker"] .castalia-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="castalia"]) .castalia-material { background-repeat: no-repeat; transform: rotate(var(--castalia-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="castalia"]) .castalia-billboard { border-radius: 50%; background-color: var(--castalia-billboard-color); opacity: var(--castalia-billboard-opacity); }
+.object-stage:where([data-object-id="castalia"])[data-lod="billboard"] .castalia-scene, .object-stage:where([data-object-id="castalia"])[data-lod="marker"] .castalia-scene { visibility: hidden; }
+.object-stage:where([data-object-id="castalia"])[data-lod="marker"] .castalia-billboard { opacity: 0; }
 

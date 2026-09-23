@@ -2,8 +2,8 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import * as fontkit from 'fontkit';
-import { createPlanetTitleSource } from './prepare-planet-title-sources.mts';
-import { PLANET_TITLE_RECIPE as recipe } from '../../src/platform/planet-title-recipe.mts';
+import { createObjectTitleSource } from './prepare-object-title-sources.mts';
+import { OBJECT_TITLE_RECIPE as recipe } from '../../src/platform/object-title-recipe.mts';
 import { createPreparedTitleLayout } from '../../src/platform/prepared-title.mts';
 
 const fontPath = fileURLToPath(new URL(`../../${recipe.checkedFontPath}`, import.meta.url));
@@ -11,7 +11,7 @@ const baseFont = fontkit.openSync(fontPath);
 if (!("getVariation" in baseFont)) throw new TypeError("The pinned overview font must be one font face.");
 const font = baseFont.getVariation({ wght: recipe.weight, opsz: recipe.opticalSize });
 const title = (label: string) => {
-  const source = createPlanetTitleSource(label, font);
+  const source = createObjectTitleSource(label, font);
   return { ...source, ...createPreparedTitleLayout(source) };
 };
 const titles = Object.fromEntries([['milky-way', 'Milky Way'], ['local-group', 'Local Group'], ['nearby-universe', 'Nearby Universe']].map(([id, label]) => [id, title(label!)]));

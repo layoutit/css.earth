@@ -25,7 +25,7 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`);
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   // Same camera/scene/system/body nodes as composite.ts: the shared orbit writes the perspective and dolly.
-  const camera = b.element('div', 'polycss-camera planet-render-root');
+  const camera = b.element('div', 'polycss-camera object-render-root');
   const scene = b.element('div', 'polycss-scene', `transform:${plan.camera.defaultTransform}`, { 'aria-hidden': 'true', 'data-polycss-lighting': 'baked' });
   const system = b.mesh(`${ns}-system`, `transform:${plan.systemTransform}`), body = b.mesh(`${ns}-body`, '', { style: '' });
   const seamOutset = plan.body.seamRepair?.outset;
@@ -34,9 +34,9 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   for (const leaf of plan.body.leaves) b.append(body, b.leaf(leaf));
   // Off-limb context (stationary observed plate behind the sphere) and limb plate (rim over the leaves):
   // two silhouette-fitted roots, the retired static layout with scale 1 (projected camera).
-  const corona = b.element('div', `${ns}-corona-layer planet-render-root`, '', { 'aria-hidden': 'true' });
+  const corona = b.element('div', `${ns}-corona-layer object-render-root`, '', { 'aria-hidden': 'true' });
   corona.style.setProperty(`--${ns}-camera-zoom`, '1'); corona.style.scale = '1';
-  const limb = b.element('div', `${ns}-limb-layer planet-render-root`, '', { 'aria-hidden': 'true' });
+  const limb = b.element('div', `${ns}-limb-layer object-render-root`, '', { 'aria-hidden': 'true' });
   limb.style.setProperty(`--${ns}-camera-zoom`, '1'); limb.style.scale = '1';
   b.append(null, corona, limb);
   const { tree, index } = b.finish({ camera, scene });

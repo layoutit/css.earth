@@ -45,7 +45,7 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   const assets = [...manifest.assets.filter(asset => asset.filename !== catalogName &&
     !(asset.filename.startsWith(`${stem}-selection-`) && asset.filename.endsWith('.json'))), ...entries]
     .sort((a, b) => a.filename.localeCompare(b.filename));
-  await updateInventory({ planetId: id, objectDirectory, location: 'public', assets });
+  await updateInventory({ objectId: id, objectDirectory, location: 'public', assets });
   const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
   // Feature preparation verified its own inputs above. The unchanged surfaces are reused from
   // their delivery pins, not rebaked: record recovered lineage instead of claiming a fresh

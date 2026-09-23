@@ -1,5 +1,5 @@
 /** Measurement fixture: JS pointer input drives the same CSS camera. */
-const viewport=document.querySelector<HTMLElement>('.planet-viewport');
+const viewport=document.querySelector<HTMLElement>('.object-viewport');
 const sensor=document.querySelector<HTMLElement>('.native-drag-frame');
 if(!viewport||!sensor) throw new TypeError('The retained native input is missing.');
 let x=0,y=0,pending=0;

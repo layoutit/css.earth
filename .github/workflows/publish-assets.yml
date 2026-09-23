@@ -132,7 +132,7 @@ jobs:
                 ;;
             esac
           else
-            # Forwarding an argument through `pnpm prepare:planets` reaches only the final
+            # Forwarding an argument through `pnpm prepare:objects` reaches only the final
             # command in that compound script. Run the shared prerequisites explicitly so
             # the expensive authoring pass is actually restricted to this one object. The
             # global feature index is a tracked catalogue, not an asset needed by this job.
@@ -140,7 +140,7 @@ jobs:
             pnpm build:astronomy
             node tools/prepare/prepare-solar-geometry.mts
             pnpm build:catalog
-            node tools/prepare/prepare-planets.mts "--object=$OBJECT"
+            node tools/prepare/prepare-objects.mts "--object=$OBJECT"
           fi
       - name: Check the rebake reproduces the committed inventory
         # Early contributor feedback. The trusted publish job independently checks the frozen inventory;

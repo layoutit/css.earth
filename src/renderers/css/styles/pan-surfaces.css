@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="pan"]) > :is(.pan-sun-camera, .pan-camera, .pan-material-root) {
+.object-stage:where([data-object-id="pan"]) > :is(.pan-sun-camera, .pan-camera, .pan-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="pan"]) .pan-sun-camera, :where(.planet-stage[data-object-id="pan"]) .pan-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="pan"]) .pan-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="pan"]) .pan-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="pan"]) .pan-body > u {
+:where(.object-stage[data-object-id="pan"]) .pan-sun-camera, :where(.object-stage[data-object-id="pan"]) .pan-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="pan"]) .pan-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="pan"]) .pan-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="pan"]) .pan-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--pan-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="pan"]) .pan-body > .pan-polar { background-image: var(--pan-poles-image); }
-:where(.planet-stage[data-object-id="pan"]) .pan-material-root { z-index: 3; --pan-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="pan"]) .pan-material, :where(.planet-stage[data-object-id="pan"]) .pan-billboard {
+:where(.object-stage[data-object-id="pan"]) .pan-body > .pan-polar { background-image: var(--pan-poles-image); }
+:where(.object-stage[data-object-id="pan"]) .pan-material-root { z-index: 3; --pan-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="pan"]) .pan-material, :where(.object-stage[data-object-id="pan"]) .pan-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="pan"]) .pan-material { background-repeat: no-repeat; transform: rotate(var(--pan-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="pan"]) .pan-billboard { border-radius: 50%; background-color: var(--pan-billboard-color); opacity: var(--pan-billboard-opacity); }
-.planet-stage:where([data-object-id="pan"])[data-lod="billboard"] .pan-scene, .planet-stage:where([data-object-id="pan"])[data-lod="marker"] .pan-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="pan"])[data-lod="marker"] .pan-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="pan"]) .pan-material { background-repeat: no-repeat; transform: rotate(var(--pan-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="pan"]) .pan-billboard { border-radius: 50%; background-color: var(--pan-billboard-color); opacity: var(--pan-billboard-opacity); }
+.object-stage:where([data-object-id="pan"])[data-lod="billboard"] .pan-scene, .object-stage:where([data-object-id="pan"])[data-lod="marker"] .pan-scene { visibility: hidden; }
+.object-stage:where([data-object-id="pan"])[data-lod="marker"] .pan-billboard { opacity: 0; }
 

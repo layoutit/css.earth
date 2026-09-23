@@ -86,7 +86,7 @@ export class CssValues {
     }
     const registered=Array.from(this.entries.values()).filter(({name})=>declarations.has(name)).map(({name})=>`@property ${name}{syntax:'<number>';inherits:false;initial-value:0}`).join('\n');
     const matrices=this.matrices.map(name=>`@property ${name}{syntax:'<transform-list>';inherits:false;initial-value:matrix(1,0,0,1,0,0)}`).join('\n');
-    return `${registered}\n${matrices}\n.planet-viewport{${[...declarations].map(([name,value])=>`${name}:${value}`).join(';')}}`;
+    return `${registered}\n${matrices}\n.object-viewport{${[...declarations].map(([name,value])=>`${name}:${value}`).join(';')}}`;
   }
 }
 export const identity: Matrix = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];

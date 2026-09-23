@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="vesta"]) > :is(.vesta-sun-camera, .vesta-camera, .vesta-material-root) {
+.object-stage:where([data-object-id="vesta"]) > :is(.vesta-sun-camera, .vesta-camera, .vesta-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-sun-camera, :where(.planet-stage[data-object-id="vesta"]) .vesta-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-body > u {
+:where(.object-stage[data-object-id="vesta"]) .vesta-sun-camera, :where(.object-stage[data-object-id="vesta"]) .vesta-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="vesta"]) .vesta-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="vesta"]) .vesta-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="vesta"]) .vesta-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--vesta-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-body > .vesta-polar { background-image: var(--vesta-poles-image); }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-material-root { z-index: 3; --vesta-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-material, :where(.planet-stage[data-object-id="vesta"]) .vesta-billboard {
+:where(.object-stage[data-object-id="vesta"]) .vesta-body > .vesta-polar { background-image: var(--vesta-poles-image); }
+:where(.object-stage[data-object-id="vesta"]) .vesta-material-root { z-index: 3; --vesta-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="vesta"]) .vesta-material, :where(.object-stage[data-object-id="vesta"]) .vesta-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-material { background-repeat: no-repeat; transform: rotate(var(--vesta-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="vesta"]) .vesta-billboard { border-radius: 50%; background-color: var(--vesta-billboard-color); opacity: var(--vesta-billboard-opacity); }
-.planet-stage:where([data-object-id="vesta"])[data-lod="billboard"] .vesta-scene, .planet-stage:where([data-object-id="vesta"])[data-lod="marker"] .vesta-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="vesta"])[data-lod="marker"] .vesta-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="vesta"]) .vesta-material { background-repeat: no-repeat; transform: rotate(var(--vesta-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="vesta"]) .vesta-billboard { border-radius: 50%; background-color: var(--vesta-billboard-color); opacity: var(--vesta-billboard-opacity); }
+.object-stage:where([data-object-id="vesta"])[data-lod="billboard"] .vesta-scene, .object-stage:where([data-object-id="vesta"])[data-lod="marker"] .vesta-scene { visibility: hidden; }
+.object-stage:where([data-object-id="vesta"])[data-lod="marker"] .vesta-billboard { opacity: 0; }
 

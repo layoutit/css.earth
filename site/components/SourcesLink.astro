@@ -3,7 +3,7 @@ import { sourceDocumentation } from '../source-documentation.mts';
 interface Props { objectId: string; name: string; }
 const source = sourceDocumentation(Astro.props.objectId, Astro.props.name);
 ---
-<a class="planet-attribution-footer planet-source-link" data-source-link data-source-document={source.href} data-source-label={source.label}
+<a class="object-attribution-footer object-source-link" data-source-link data-source-document={source.href} data-source-label={source.label}
   href={source.href} aria-label={source.label} title={source.label} target="_blank" rel="noopener noreferrer">
-  <span data-source-link-label>{source.label}</span><span class="planet-source-link-compact" aria-hidden="true">Sources</span><span aria-hidden="true"> ↗</span>
+  <span data-source-link-label>{source.label}</span><span class="object-source-link-compact" aria-hidden="true">Sources</span><span aria-hidden="true"> ↗</span>
 </a>

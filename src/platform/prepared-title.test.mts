@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
-import { createPreparedTitle, PLANET_TITLE_STANDARD, serializePreparedTitleModule } from "./prepared-title.mts";
+import { createPreparedTitle, OBJECT_TITLE_STANDARD, serializePreparedTitleModule } from "./prepared-title.mts";
 
 const source = Object.freeze({
   label: "Planet",
-  viewBox: `0 0 ${PLANET_TITLE_STANDARD.sourceViewBoxWidth} 35`,
+  viewBox: `0 0 ${OBJECT_TITLE_STANDARD.sourceViewBoxWidth} 35`,
   width: 60.25,
   height: 29.32,
   path: "M0 29V8.63H4.35Z",
@@ -23,8 +23,8 @@ test("prepares and serializes a source-bound title deterministically", () => {
   const prepared = createPreparedTitle(source, {
     generator: "adapter/tools/prepare-title.mjs",
   });
-  const first = serializePreparedTitleModule("PREPARED_PLANET_TITLE", prepared);
-  const second = serializePreparedTitleModule("PREPARED_PLANET_TITLE", prepared);
+  const first = serializePreparedTitleModule("PREPARED_OBJECT_TITLE", prepared);
+  const second = serializePreparedTitleModule("PREPARED_OBJECT_TITLE", prepared);
   assert.equal(first, second);
   assert.match(first, /adapter\/tools\/prepare-title\.mjs/u);
   assert.deepEqual(
@@ -35,8 +35,8 @@ test("prepares and serializes a source-bound title deterministically", () => {
       renderPathOffsetY: prepared.renderPathOffsetY,
     },
     {
-      renderViewBox: `0 0 ${PLANET_TITLE_STANDARD.sourceViewBoxWidth} 35`,
-      renderWidth: PLANET_TITLE_STANDARD.renderedWidth,
+      renderViewBox: `0 0 ${OBJECT_TITLE_STANDARD.sourceViewBoxWidth} 35`,
+      renderWidth: OBJECT_TITLE_STANDARD.renderedWidth,
       renderHeight: 30.1284,
       renderPathOffsetY: 0,
     },
@@ -69,7 +69,7 @@ test("normalizes divergent title sources to the Saturn scale and baseline", () =
     },
   );
   assert.equal(prepared.baseline + prepared.renderPathOffsetY,
-    PLANET_TITLE_STANDARD.baseline);
+    OBJECT_TITLE_STANDARD.baseline);
 });
 
 test("rejects unexplained or unsafe title vectors", () => {

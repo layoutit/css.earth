@@ -1,8 +1,8 @@
 /* Application geometry. Tune the dock here, not in planet or component styles. */
-html[data-shell-context="pending"] :is(.planet-sidebar, .planet-dataset-context-rail, .planet-footer) {
+html[data-shell-context="pending"] :is(.object-sidebar, .object-dataset-context-rail, .object-footer) {
   visibility: hidden;
 }
-html[data-shell-context="pending"] .planet-sidebar-frame::before {
+html[data-shell-context="pending"] .object-sidebar-frame::before {
   content: "Loading view…";
   display: block;
   position: absolute;
@@ -59,9 +59,9 @@ body[data-object-shell] {
 }
 
 :is(
-  .planet-card,
+  .object-card,
   .explorer-about-panel,
-  .planet-dataset-context-dock > .explorer-settings-panel
+  .object-dataset-context-dock > .explorer-settings-panel
 ) {
   --explorer-card-padding-inline-start: var(--explorer-card-padding-left, 20px);
   --explorer-card-padding-inline-end: var(--explorer-card-padding-inline-start);
@@ -80,16 +80,16 @@ body[data-object-shell] {
   font: 14px/1.4 var(--shell-ui-font);
 }
 
-.planet-card:has(> .planet-selected-panel > .planet-breadcrumbs) {
+.object-card:has(> .object-selected-panel > .object-breadcrumbs) {
   padding-block-start: 16px;
 }
 
 /* A focused object's hierarchy belongs above its title, not below its datasets. */
-.planet-object-browser:has(> [data-prepared-focus-card]:not([hidden])) > [data-large-scale-overview] .planet-breadcrumbs {
+.object-browser:has(> [data-prepared-focus-card]:not([hidden])) > [data-large-scale-overview] .object-breadcrumbs {
   display: none;
 }
 
-.planet-card > .planet-selected-panel:has(+ :is(.planet-card-tabs, .planet-object-tabs))::after {
+.object-card > .object-selected-panel:has(+ :is(.object-card-tabs, .object-tabs))::after {
   content: "";
   display: block;
   margin-top: 12px;
@@ -97,13 +97,13 @@ body[data-object-shell] {
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
 
-.planet-ui-layer,
-.planet-sidebar-frame {
+.object-ui-layer,
+.object-sidebar-frame {
   display: contents;
 }
 
-.planet-search-toolbar .planet-sidebar-collapse,
-.planet-search-toolbar .planet-toolbar-action {
+.object-search-toolbar .object-sidebar-collapse,
+.object-search-toolbar .object-toolbar-action {
   position: static;
   opacity: 1;
   height: var(--explorer-search-height);
@@ -111,7 +111,7 @@ body[data-object-shell] {
   padding-inline: 0;
   pointer-events: auto;
 }
-body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
+body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
 .explorer-shell-header {
   --explorer-header-control-gap: 4px;
@@ -159,7 +159,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 /* The version shares the wordmark's baseline; the readout copy stays hidden. */
-.planet-view-readout .explorer-brand-version { display: none; }
+.object-view-readout .explorer-brand-version { display: none; }
 
 .explorer-brand-version {
   color: var(--shell-text-muted);
@@ -172,7 +172,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   outline-offset: 2px;
 }
 
-.explorer-shell-header .planet-sidebar-search-card {
+.explorer-shell-header .object-sidebar-search-card {
   display: grid;
   grid-template-columns: 20px minmax(0, 1fr) 24px;
   align-items: center;
@@ -192,7 +192,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 /* Size the field from its prompt, so it stays steady while typing. */
-.explorer-shell-header .planet-sidebar-search-card::before {
+.explorer-shell-header .object-sidebar-search-card::before {
   content: attr(data-search-prompt);
   grid-area: 1 / 2;
   visibility: hidden;
@@ -200,13 +200,13 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   pointer-events: none;
 }
 
-.explorer-shell-header .planet-sidebar-search-icon {
+.explorer-shell-header .object-sidebar-search-icon {
   position: static;
   color: inherit;
   transform: none;
 }
 
-.explorer-shell-header .planet-sidebar-search {
+.explorer-shell-header .object-sidebar-search {
   grid-area: 1 / 2;
   /* The prompt sizes the column; the field fills it. */
   width: 0;
@@ -221,18 +221,18 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   color: var(--explorer-control-text);
 }
 
-.explorer-shell-header .planet-sidebar-search-icon {
+.explorer-shell-header .object-sidebar-search-icon {
   color: var(--explorer-control-text);
 }
 
 /* The prompt reads like the pill labels beside it. */
-.explorer-shell-header .planet-sidebar-search::placeholder {
+.explorer-shell-header .object-sidebar-search::placeholder {
   color: var(--explorer-control-text);
   opacity: 1;
 }
 
 /* Clear sits in the pill's right padding and shows only while there is a query. */
-.explorer-shell-header .planet-sidebar-search-clear {
+.explorer-shell-header .object-sidebar-search-clear {
   appearance: none;
   position: absolute;
   top: 50%;
@@ -251,22 +251,22 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   cursor: pointer;
   pointer-events: auto;
 }
-.explorer-shell-header .planet-sidebar-search-clear .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
-.explorer-shell-header .planet-sidebar-search-clear:is(:hover, :focus-visible) {
+.explorer-shell-header .object-sidebar-search-clear .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+.explorer-shell-header .object-sidebar-search-clear:is(:hover, :focus-visible) {
   color: var(--shell-text);
   background: var(--explorer-header-control-hover);
 }
-.explorer-shell-header .planet-sidebar-search-clear:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 1px; }
-.explorer-shell-header .planet-sidebar-search-card:has(.planet-sidebar-search:placeholder-shown) .planet-sidebar-search-clear { display: none; }
-.explorer-shell-header .planet-sidebar-search-card:not(:has(.planet-sidebar-search:placeholder-shown)) .planet-sidebar-search { padding-inline-end: 24px; }
+.explorer-shell-header .object-sidebar-search-clear:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 1px; }
+.explorer-shell-header .object-sidebar-search-card:has(.object-sidebar-search:placeholder-shown) .object-sidebar-search-clear { display: none; }
+.explorer-shell-header .object-sidebar-search-card:not(:has(.object-sidebar-search:placeholder-shown)) .object-sidebar-search { padding-inline-end: 24px; }
 /* The custom clear replaces the browser's own search cancel control. */
-.explorer-shell-header .planet-sidebar-search::-webkit-search-cancel-button { appearance: none; display: none; }
+.explorer-shell-header .object-sidebar-search::-webkit-search-cancel-button { appearance: none; display: none; }
 
-.explorer-shell-header .planet-sidebar-search-card:focus-within .planet-sidebar-search-icon {
+.explorer-shell-header .object-sidebar-search-card:focus-within .object-sidebar-search-icon {
   color: var(--shell-text);
 }
 
-.explorer-shell-header .planet-sidebar-view-all {
+.explorer-shell-header .object-sidebar-view-all {
   position: static;
   grid-area: 1 / 3;
   width: 24px;
@@ -274,7 +274,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   border-radius: 0;
 }
 
-.explorer-shell-header .planet-search-browser-caret {
+.explorer-shell-header .object-search-browser-caret {
   width: 8px;
   height: 8px;
   border-right: 1.5px solid currentColor;
@@ -282,21 +282,21 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   transform: translateY(-2px) rotate(45deg);
   transition: transform 150ms ease;
 }
-.explorer-shell-header .planet-sidebar-view-all[aria-expanded="true"] .planet-search-browser-caret {
+.explorer-shell-header .object-sidebar-view-all[aria-expanded="true"] .object-search-browser-caret {
   transform: translateY(2px) rotate(225deg);
 }
 
-.explorer-shell-header .planet-toolbar-action { width: 32px; }
+.explorer-shell-header .object-toolbar-action { width: 32px; }
 
-.explorer-shell-header .planet-sidebar-view-all:hover {
+.explorer-shell-header .object-sidebar-view-all:hover {
   background: transparent;
 }
 
-.explorer-shell-header .planet-sidebar-view-all:focus-visible {
+.explorer-shell-header .object-sidebar-view-all:focus-visible {
   outline: none;
 }
 
-.planet-search-toolbar {
+.object-search-toolbar {
   display: flex;
   align-items: center;
   transform: none;
@@ -309,7 +309,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   pointer-events: auto;
 }
 
-.planet-search-browser-shell {
+.object-search-browser-shell {
   position: relative;
   flex: 1 1 auto;
   width: 100%;
@@ -317,18 +317,18 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   height: var(--explorer-search-height);
 }
 
-.planet-sidebar .planet-object-browser[data-navigation-filtered] .planet-object-tabs { display: none; }
-.planet-sidebar .planet-object-browser[data-navigation-filtered] #object-category-results {
+.object-sidebar .object-browser[data-navigation-filtered] .object-tabs { display: none; }
+.object-sidebar .object-browser[data-navigation-filtered] #object-category-results {
   padding-block-start: 0;
 }
 
-.planet-object-context { display: contents; }
-.planet-object-context[hidden] { display: none; }
-.planet-selected-content { display: contents; }
-.planet-selected-content[hidden],
-.planet-object-browser:not([hidden]) ~ .planet-selected-content { display: none; }
+.object-context { display: contents; }
+.object-context[hidden] { display: none; }
+.object-selected-content { display: contents; }
+.object-selected-content[hidden],
+.object-browser:not([hidden]) ~ .object-selected-content { display: none; }
 
-.planet-search-categories {
+.object-search-categories {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -338,11 +338,11 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   pointer-events: auto;
 }
 
-.planet-search-category,
-.planet-header-link,
-.planet-report-issue-link,
-.planet-sidebar-collapse,
-.planet-toolbar-action {
+.object-search-category,
+.object-header-link,
+.object-report-issue-link,
+.object-sidebar-collapse,
+.object-toolbar-action {
   appearance: none;
   display: inline-flex;
   flex: 0 0 auto;
@@ -373,7 +373,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 /* Standard GitHub mark at the shared compact icon size. */
-.planet-github-icon {
+.object-github-icon {
   display: block;
   flex: 0 0 18px;
   width: 18px;
@@ -382,39 +382,39 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   stroke: none;
 }
 
-.planet-search-category[aria-pressed="true"],
-.planet-toolbar-action[aria-pressed="true"] {
+.object-search-category[aria-pressed="true"],
+.object-toolbar-action[aria-pressed="true"] {
   color: var(--shell-text);
   border-bottom-color: var(--shell-focus);
 }
 
-.explorer-shell-header .planet-toolbar-action,
-.planet-search-category,
-.planet-sidebar-collapse {
+.explorer-shell-header .object-toolbar-action,
+.object-search-category,
+.object-sidebar-collapse {
   border: 0;
 }
 
-.explorer-shell-header .planet-sidebar-search-card:hover .planet-sidebar-search,
-.planet-search-category:hover,
-.planet-report-issue-link:hover,
-.planet-sidebar-collapse:hover,
-.planet-toolbar-action:hover {
+.explorer-shell-header .object-sidebar-search-card:hover .object-sidebar-search,
+.object-search-category:hover,
+.object-report-issue-link:hover,
+.object-sidebar-collapse:hover,
+.object-toolbar-action:hover {
   color: var(--shell-text);
   border-bottom-color: var(--shell-border-hover);
 }
 
-.explorer-shell-header .planet-sidebar-search-card:focus-within .planet-sidebar-search,
-.planet-search-category:focus-visible,
-.planet-report-issue-link:focus-visible,
-.planet-sidebar-collapse:focus-visible,
-.planet-toolbar-action:focus-visible {
+.explorer-shell-header .object-sidebar-search-card:focus-within .object-sidebar-search,
+.object-search-category:focus-visible,
+.object-report-issue-link:focus-visible,
+.object-sidebar-collapse:focus-visible,
+.object-toolbar-action:focus-visible {
   border-bottom-color: var(--shell-focus);
   outline: none;
 }
 
 /* Category filters are filled pills, like the search field. */
-.planet-search-category,
-.planet-header-link {
+.object-search-category,
+.object-header-link {
   box-sizing: border-box;
   height: var(--explorer-category-height);
   padding-inline: 10px 12px;
@@ -423,16 +423,16 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   background: var(--explorer-header-control-background);
   font-size: 14px;
 }
-.planet-search-category:hover { background: var(--explorer-header-control-hover); }
+.object-search-category:hover { background: var(--explorer-header-control-hover); }
 /* Project links share the pill look without joining the search filters. */
-.planet-header-link { text-decoration: none; pointer-events: auto; }
-.planet-header-link:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
-.planet-header-link:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
-.planet-search-category[aria-pressed="true"] { background: var(--explorer-header-control-selected); }
-.planet-search-category:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
-.planet-search-category .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+.object-header-link { text-decoration: none; pointer-events: auto; }
+.object-header-link:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
+.object-header-link:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.object-search-category[aria-pressed="true"] { background: var(--explorer-header-control-selected); }
+.object-search-category:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.object-search-category .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
 /* GitHub is an icon-only circle, like the panel toggles. */
-.planet-header-link {
+.object-header-link {
   display: inline-grid;
   place-items: center;
   width: var(--explorer-category-height);
@@ -440,13 +440,13 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 /* Round icon toggles for shell panels: transparent when off, filled when on. */
-.planet-header-actions {
+.object-header-actions {
   display: flex;
   align-items: center;
   gap: 8px;
   pointer-events: auto;
 }
-.planet-header-action {
+.object-header-action {
   appearance: none;
   display: inline-grid;
   flex: 0 0 auto;
@@ -464,22 +464,22 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   pointer-events: auto;
   touch-action: manipulation;
 }
-.planet-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
-.planet-header-action[aria-pressed="true"],
-.planet-facility-action:has(:checked),
-.planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-settings-action {
+.object-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
+.object-header-action[aria-pressed="true"],
+.object-facility-action:has(:checked),
+.object-ui-layer:has(.object-settings-panel:popover-open) .object-settings-action {
   color: var(--shell-text);
   background: var(--explorer-header-control-selected);
 }
-.planet-header-action:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
-.planet-header-action:disabled {
+.object-header-action:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.object-header-action:disabled {
   opacity: var(--shell-disabled-opacity);
   cursor: default;
   color: var(--explorer-control-text);
   background: var(--explorer-header-control-background);
 }
 
-.planet-report-issue-link {
+.object-report-issue-link {
   box-sizing: border-box;
   width: var(--explorer-report-issue-width);
   text-decoration: none;
@@ -495,7 +495,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   max-height: none;
 }
 
-.planet-sidebar {
+.object-sidebar {
   position: fixed;
   z-index: 160;
   inset: 0 auto auto var(--explorer-panel-left);
@@ -520,10 +520,10 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   isolation: isolate;
 }
 
-.planet-sidebar::-webkit-scrollbar { display: none; }
+.object-sidebar::-webkit-scrollbar { display: none; }
 
-.planet-facility-action { position: relative; }
-.planet-facility-toggle {
+.object-facility-action { position: relative; }
+.object-facility-toggle {
   appearance: none;
   position: absolute;
   inset: 0;
@@ -533,36 +533,36 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   opacity: 0;
   cursor: pointer;
 }
-.planet-facility-action:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
-.planet-settings-panel[popover]:not(:popover-open) { display: none; }
-.planet-settings-panel[popover] { color: var(--shell-text-secondary); }
-.planet-ui-layer:has(.planet-facility-toggle:not(:checked)) .planet-dataset-context-rail,
-.planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-dataset-context-rail,
-.planet-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .planet-dataset-context-rail,
-.planet-information-panel > .planet-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .planet-dataset-context-rail,
-.planet-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
+.object-facility-action:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.object-settings-panel[popover]:not(:popover-open) { display: none; }
+.object-settings-panel[popover] { color: var(--shell-text-secondary); }
+.object-ui-layer:has(.object-facility-toggle:not(:checked)) .object-dataset-context-rail,
+.object-ui-layer:has(.object-settings-panel:popover-open) .object-dataset-context-rail,
+.object-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .object-dataset-context-rail,
+.object-information-panel > .object-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .object-dataset-context-rail,
+.object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
 
 /* Dataset context uses the same cards as the left sidebar, above the minimap.
    With the Minimap setting off they may use its corner as well. */
 body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px; }
-.planet-dataset-context-dock { display: contents; }
-.planet-dataset-context-rail {
+.object-dataset-context-dock { display: contents; }
+.object-dataset-context-rail {
   --explorer-card-padding-left: var(--explorer-content-inset);
   width: 100%;
   pointer-events: auto;
 }
-.planet-dataset-context-rail[hidden],
-.planet-dataset-context-rail [data-dataset-context][hidden] { display: none; }
-.planet-dataset-context-rail [data-dataset-context] {
+.object-dataset-context-rail[hidden],
+.object-dataset-context-rail [data-dataset-context][hidden] { display: none; }
+.object-dataset-context-rail [data-dataset-context] {
   display: flex;
   flex-direction: column;
   gap: var(--explorer-panel-gap);
 }
-.planet-dataset-context-card .planet-card-tabpanel { padding-top: 0; }
+.object-dataset-context-card .object-card-tabpanel { padding-top: 0; }
 @media (min-width: 821px) and (orientation: landscape) {
   /* Settings and the spacecraft card take turns in this slot. */
-  .planet-dataset-context-rail,
-  .planet-dataset-context-dock > .planet-settings-panel {
+  .object-dataset-context-rail,
+  .object-dataset-context-dock > .object-settings-panel {
     inset: auto;
     --dataset-context-top: calc(var(--explorer-header-top) + var(--explorer-header-bar-height) + var(--explorer-header-panel-gap));
     position: fixed;
@@ -583,7 +583,7 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     --explorer-header-height: calc(var(--explorer-header-bar-height) + var(--explorer-header-row-gap) + var(--explorer-search-height));
   }
 
-  .planet-ui-layer {
+  .object-ui-layer {
     position: fixed;
     z-index: 160;
     inset: 0 auto auto var(--explorer-panel-left);
@@ -598,7 +598,7 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     isolation: isolate;
   }
 
-  .planet-sidebar-frame {
+  .object-sidebar-frame {
     grid-row: 2;
     display: block;
     width: var(--explorer-panel-width);
@@ -628,11 +628,11 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
   }
 
   .explorer-brand-row { grid-row: 1; grid-column: 1; justify-self: start; pointer-events: auto; }
-  .planet-search-toolbar { grid-row: 2; grid-column: 1; pointer-events: auto; }
-  .planet-search-categories { grid-row: 1; grid-column: 3; }
-  .planet-header-actions { grid-row: 1; grid-column: 4; }
+  .object-search-toolbar { grid-row: 2; grid-column: 1; pointer-events: auto; }
+  .object-search-categories { grid-row: 1; grid-column: 3; }
+  .object-header-actions { grid-row: 1; grid-column: 4; }
 
-  .planet-sidebar {
+  .object-sidebar {
     --explorer-card-padding-left: calc(var(--explorer-content-inset) - var(--explorer-panel-padding));
     position: relative;
     grid-row: 2;
@@ -650,7 +650,7 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     background: transparent;
   }
 
-  .planet-drawer-content {
+  .object-drawer-content {
     display: block;
     flex: 0 1 auto;
     min-height: 0;
@@ -660,15 +660,15 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     border-radius: var(--explorer-card-radius);
   }
 
-  .planet-viewport {
+  .object-viewport {
     inset: 0;
   }
 
 }
 
 @media (min-width: 821px) and (orientation: landscape) {
-  body[data-sidebar-collapsed="true"] .planet-sidebar-frame { display: none; }
-  body[data-sidebar-collapsed="true"] .planet-viewport { left: 0; }
+  body[data-sidebar-collapsed="true"] .object-sidebar-frame { display: none; }
+  body[data-sidebar-collapsed="true"] .object-viewport { left: 0; }
 }
 
 /* Phones and portrait tablets use the map-app pattern: the scene fills the
@@ -714,23 +714,23 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     padding: 0 var(--explorer-panel-left);
   }
 
-  .planet-search-toolbar { grid-row: 1; grid-column: 2; align-self: center; }
-  .explorer-shell-header .planet-sidebar-search-card {
+  .object-search-toolbar { grid-row: 1; grid-column: 2; align-self: center; }
+  .explorer-shell-header .object-sidebar-search-card {
     /* Settings has its own slot in the brand bar; only Clear sits inside the field. */
     padding-inline-end: 10px;
     box-shadow: var(--explorer-float-shadow);
     /* The field inherits this font; keep the mobile size on its owner. */
     font-size: 16px;
   }
-  .explorer-shell-header .planet-sidebar-search-clear { right: 38px; }
+  .explorer-shell-header .object-sidebar-search-clear { right: 38px; }
 
   /* For now phones show no app actions (GitHub, Settings, Machines): the search field gets the room. */
-  .planet-header-actions { display: none; }
+  .object-header-actions { display: none; }
 
   /* Filters scroll edge to edge; the padding keeps their shadows unclipped. */
   /* Phones carry one header row: search reaches every classification, so the filter pills
      stay out of the scene. */
-  .planet-search-categories { display: none; }
+  .object-search-categories { display: none; }
 
 
   /* The wordmark comes first, stacked in two lines, with the search field beside it. */
@@ -742,13 +742,13 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     height: auto;
     padding: 0;
   }
-  .explorer-shell-header .planet-wordmark-one-line { display: none; }
-  .explorer-shell-header .planet-wordmark-two-line { display: flex; gap: 2px; }
-  .explorer-shell-header :is(.planet-wordmark-two-line-css, .planet-wordmark-two-line-earth) { font-size: 22px; }
+  .explorer-shell-header .object-wordmark-one-line { display: none; }
+  .explorer-shell-header .object-wordmark-two-line { display: flex; gap: 2px; }
+  .explorer-shell-header :is(.object-wordmark-two-line-css, .object-wordmark-two-line-earth) { font-size: 22px; }
   /* Phones show no version: not in the header, not in the readout at the foot of the view. */
   .explorer-brand-row .explorer-brand-version { display: none; }
 
-  .planet-sidebar {
+  .object-sidebar {
     position: fixed;
     z-index: 200;
     inset: auto 0 var(--sheet-keyboard, 0px);
@@ -769,22 +769,22 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     touch-action: pan-x;
     will-change: transform;
   }
-  .planet-sidebar:has(:where(.planet-sheet-handle:checked)),
-  body[data-sheet="full"] .planet-sidebar {
+  .object-sidebar:has(:where(.object-sheet-handle:checked)),
+  body[data-sheet="full"] .object-sidebar {
     transform: none;
     overflow-y: auto;
     touch-action: pan-y;
   }
-  body[data-sheet="half"] .planet-sidebar {
+  body[data-sheet="half"] .object-sidebar {
     transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
     overflow: hidden;
     touch-action: pan-x;
   }
-  .planet-sidebar.is-dragging { transition: none; }
-  .planet-sidebar .planet-card { border-radius: 0; }
+  .object-sidebar.is-dragging { transition: none; }
+  .object-sidebar .object-card { border-radius: 0; }
 
   /* Scale and altitude sit above the sheet, like a map's scale bar. */
-  body[data-object-shell] .planet-footer {
+  body[data-object-shell] .object-footer {
     z-index: 150;
     inset: auto var(--explorer-panel-left) var(--sheet-chrome-bottom);
     height: var(--explorer-status-height);
@@ -806,7 +806,7 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
 
   /* Settings opens as a secondary sheet over the information. The spacecraft
      card needs no rule here: phones move it into the sheet's own flow. */
-  .planet-dataset-context-dock > .planet-settings-panel {
+  .object-dataset-context-dock > .object-settings-panel {
     position: fixed;
     z-index: 230;
     inset: auto 0 0;

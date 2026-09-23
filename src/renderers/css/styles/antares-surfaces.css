@@ -1,6 +1,6 @@
-/* Antares: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   planet-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.planet-stage[data-object-id="antares"] > :is(.polycss-camera, .antares-corona-layer, .antares-limb-layer) {
+/* Antares: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="antares"] > :is(.polycss-camera, .antares-corona-layer, .antares-limb-layer) {
   --antares-scene-side-padding: 16px;
   --antares-reference-width: 1920px;
   --antares-reference-height: 1080px;
@@ -14,8 +14,8 @@
   );
 }
 
-/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
-.planet-stage[data-object-id="antares"] > :is(.antares-corona-layer, .antares-limb-layer) {
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="antares"] > :is(.antares-corona-layer, .antares-limb-layer) {
   position: absolute;
   inset: 0;
   transform-origin: 50% 50%;
@@ -23,23 +23,23 @@
 }
 
 /* Paint order: off-limb context behind the sphere, limb plate above it. */
-.planet-stage[data-object-id="antares"] .antares-corona-layer {
+.object-stage[data-object-id="antares"] .antares-corona-layer {
   z-index: 0;
 }
 
-.planet-stage[data-object-id="antares"] .polycss-camera {
+.object-stage[data-object-id="antares"] .polycss-camera {
   z-index: 1;
 }
 
-.planet-stage[data-object-id="antares"] .antares-limb-layer {
+.object-stage[data-object-id="antares"] .antares-limb-layer {
   z-index: 2;
 }
 
-.planet-stage[data-object-id="antares"] .antares-body {
+.object-stage[data-object-id="antares"] .antares-body {
   transform-style: preserve-3d;
 }
 
-.planet-stage[data-object-id="antares"] .polycss-scene s {
+.object-stage[data-object-id="antares"] .polycss-scene s {
   position: absolute;
   display: block;
   transform-origin: 0 0;
@@ -53,18 +53,18 @@
 
 /* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
    hide their back faces. */
-.planet-stage[data-object-id="antares"] .polycss-scene s:not(.antares-polar) {
+.object-stage[data-object-id="antares"] .polycss-scene s:not(.antares-polar) {
   backface-visibility: visible;
   background-image: var(--antares-surface-image) !important;
 }
 
-.planet-stage[data-object-id="antares"] .polycss-scene s.antares-polar {
+.object-stage[data-object-id="antares"] .polycss-scene s.antares-polar {
   backface-visibility: hidden;
   background-image: var(--antares-poles-image) !important;
 }
 
 /* Off-limb context: 600 px = raster.json emission.offLimbSize = no light: a transparent plate at the disc's 496 px. */
-.planet-stage[data-object-id="antares"] .antares-corona-layer {
+.object-stage[data-object-id="antares"] .antares-corona-layer {
   background-image: var(--antares-corona-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -75,7 +75,7 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
    sphere is drawn at, so the plate's edge is the sphere's outline. */
-.planet-stage[data-object-id="antares"] .antares-limb-layer {
+.object-stage[data-object-id="antares"] .antares-limb-layer {
   background-image: var(--antares-limb-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -84,17 +84,17 @@
     calc(496px * 1.25 * var(--antares-camera-zoom, 1));
 }
 
-.planet-stage[data-object-id="antares"] .polycss-camera {
+.object-stage[data-object-id="antares"] .polycss-camera {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.planet-stage[data-object-id="antares"] .polycss-scene {
+.object-stage[data-object-id="antares"] .polycss-scene {
   will-change: transform;
 }
 
-.planet-stage[data-object-id="antares"] .polycss-scene s {
+.object-stage[data-object-id="antares"] .polycss-scene s {
   width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;

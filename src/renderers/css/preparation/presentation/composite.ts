@@ -27,7 +27,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"warm"}))];
   const required=(id: string)=>[...layers.map(layer=>`${layer}:${id}`),...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.body.leaves,...planes.flatMap(entry=>entry.leaves)].map(leaf => leaf.style)) });
-  const camera=b.element("div","polycss-camera planet-render-root");
+  const camera=b.element("div","polycss-camera object-render-root");
   const scene=b.element("div","polycss-scene",`transform:${plan.camera.defaultTransform}`,{"aria-hidden":"true","data-polycss-lighting":"baked"});
   const system=b.mesh(`${ns}-system`,`transform:${plan.systemTransform}`),body=b.mesh(`${ns}-body`,"",{style:""});
   const seamOutset=plan.body.seamRepair?.outset;
@@ -44,7 +44,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       b.append(mesh,node);
     }
   }
-  const composite=b.element("div",`${ns}-material-composite planet-render-root`,"",{"aria-hidden":"true"});
+  const composite=b.element("div",`${ns}-material-composite object-render-root`,"",{"aria-hidden":"true"});
   const plane=b.element("s",`${ns}-fixed-material`);
   if(atmospheric){plane.style.backgroundSize=material.backgroundSize;plane.style.backgroundPosition=material.backgroundPositions[material.defaultFrame];}
   b.append(null,composite);b.append(composite,plane);

@@ -2,7 +2,7 @@ import { bodyData, moonsOf, DWARF_PLANET_IDS, type DwarfPlanetId } from './bodie
 import { DWARF_PLANET_ELEMENTS } from './data/dwarfPlanetElements.data.js'
 import type { Frame } from './frames.js'
 import { keplerApoapsisKm, keplerPositionKm, type KeplerianElements } from './kepler.js'
-import { chooseFrameUnitM, moonApoapsisKm, moonPositionRelativeToPlanetKm, SUN_FRAME_ID, type SolarSystemFrameSpec } from './solarSystem.js'
+import { chooseFrameUnitM, moonApoapsisKm, moonPositionRelativeToParentKm, SUN_FRAME_ID, type SolarSystemFrameSpec } from './solarSystem.js'
 import { isSceneSatellite } from './sceneSatellites.js'
 import { M_PER_AU, M_PER_KM } from './units.js'
 import type { Vec3 } from './vec3.js'
@@ -59,7 +59,7 @@ export const dwarfPlanetFrameSpecs = (): readonly SolarSystemFrameSpec[] =>
         radiusM: bodyData(moon).meanRadiusKm * M_PER_KM,
         maxOffsetInParent: moonApoapsisKm(moon) * M_PER_KM / unitM,
         originInParent: epochJdTt => {
-          const km = moonPositionRelativeToPlanetKm(moon, epochJdTt)
+          const km = moonPositionRelativeToParentKm(moon, epochJdTt)
           return [km[0] * M_PER_KM / unitM, km[1] * M_PER_KM / unitM, km[2] * M_PER_KM / unitM]
         },
       },

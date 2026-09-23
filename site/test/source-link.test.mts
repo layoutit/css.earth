@@ -6,8 +6,8 @@ import { renderSourceLink, sourceDocuments } from '../source-link.mts';
 
 test('one source link follows selection, independent of search, dataset and accordion state', () => {
   const { document } = parseHTML(`<html><body>
-    <input class="planet-sidebar-search" value="Itokawa">
-    <nav class="planet-object-browser"><a data-source-subject="object:Bennu" data-source-document="https://example.test/bennu/README.md" data-source-label="Sources and methods for Bennu"></a>
+    <input class="object-sidebar-search" value="Itokawa">
+    <nav class="object-browser"><a data-source-subject="object:Bennu" data-source-document="https://example.test/bennu/README.md" data-source-label="Sources and methods for Bennu"></a>
       <a data-source-subject="overview:milky-way" data-source-document="https://example.test/milky-way/README.md" data-source-label="Sources and methods for Milky Way"></a>
       <a data-source-subject="focus:andromeda_01" data-source-document="https://example.test/local-group/README.md" data-source-label="Sources and methods for Andromeda I"></a>
     </nav><footer><a data-source-link data-source-document="https://example.test/bennu/README.md" data-source-label="Sources and methods for Bennu"><span data-source-link-label></span></a></footer>

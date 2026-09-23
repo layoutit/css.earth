@@ -44,7 +44,7 @@ export default defineConfig({
   } }, { name: 'asset-origin-scenes', hooks: {
     // `public/scenes` (1.44 GB) is copied into `dist/scenes` by Astro's publicDir copy regardless
     // of ASSET_ORIGIN; when textures and scene JSON resolve to the published bucket instead, that
-    // copy is dead weight the deploy should not ship. `assemble:planets` tolerates its absence.
+    // copy is dead weight the deploy should not ship. the assemble step (`run-implemented-objects.mts assemble`) tolerates its absence.
     'astro:build:done': async ({ dir, logger }) => {
       if (!assetOrigin()) return;
       await rm(new URL('scenes', dir), { recursive: true, force: true });
