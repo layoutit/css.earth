@@ -54,7 +54,7 @@
     "prepare:typecheck": "node tools/prepare/prepare-typecheck.mts",
     "prepare:titles": "node tools/prepare/prepare-shell-titles.mts",
     "prepare:volume": "node tools/objects/dist/prepare-volume.js",
-    "prepare:world-context": "node tools/objects/dist/prepare-spatial-context.js src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && node tools/prepare/prepare-moon-labels.mts",
+    "prepare:world-context": "node tools/objects/dist/prepare-spatial-context.js src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && node tools/prepare/prepare-moon-labels.mts && node tools/prepare/prepare-world-presentation.mts",
     "pretest": "pnpm prepare:shell",
     "preview": "node tools/cli/preview.mts",
     "publish:runtime-assets": "node tools/assets/publish-runtime-assets.mts",

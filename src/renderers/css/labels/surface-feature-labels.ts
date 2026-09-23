@@ -226,7 +226,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   }
   function loop() {
     loopFrame = null;
-    if (destroyed || !playing) return;
+    // Labels are off by default; with them off there is nothing to follow, so the loop stops.
+    if (destroyed || !playing || !labelsEnabled()) return;
     refresh();
     loopFrame = windowTarget!.requestAnimationFrame(loop);
   }
@@ -245,8 +246,13 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     presentCaption();
   }
   const onLabelsChange = () => {
-    if (labelsEnabled()) { requestLoading(); schedule(); }
-    else { hoveredIndex = null; hideAll(); }
+    if (labelsEnabled()) {
+      requestLoading(); schedule();
+      if (playing && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
+    } else {
+      hoveredIndex = null; hideAll();
+      if (loopFrame !== null) { windowTarget!.cancelAnimationFrame(loopFrame); loopFrame = null; }
+    }
   };
   document.body.addEventListener('objectsurfacelabelschange', onLabelsChange);
   function refresh() {
@@ -413,7 +419,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     setPlaying(value: boolean) {
       if (destroyed || playing === value) return;
       playing = value;
-      if (playing && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
+      if (playing && labelsEnabled() && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
       if (!playing && loopFrame !== null) { windowTarget!.cancelAnimationFrame(loopFrame); loopFrame = null; }
     },
     stats(): SurfaceFeatureLayerStats {

@@ -229,7 +229,7 @@ jobs:
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: src/objects/earth/source/presentation/InterVariable.ttf
+          path: site/source/titles/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
@@ -307,7 +307,7 @@ jobs:
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: src/objects/earth/source/presentation/InterVariable.ttf
+          path: site/source/titles/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
@@ -381,7 +381,7 @@ jobs:
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: src/objects/earth/source/presentation/InterVariable.ttf
+          path: site/source/titles/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
@@ -502,7 +502,7 @@ jobs:
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: src/objects/earth/source/presentation/InterVariable.ttf
+          path: site/source/titles/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:

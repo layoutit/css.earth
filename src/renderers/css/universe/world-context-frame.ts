@@ -89,12 +89,15 @@ export function createWorldContextFrameEncoder() {
     for (const body of frame.projectedBodies) {
       const old = baseId ? previous.get(body.index) : undefined;
       const values = changedValues(old, body);
-      let orbit: OrbitPatch | undefined;
+      let orbit: OrbitPatch | undefined, copied: OrbitSegment[] | undefined;
       if (!old || old.segments.length !== body.segments.length || body.segments.some((segment, i) => !sameNumbers(old.segments[i], segment))) {
         const indices: number[] = [], segments: number[] = [];
+        copied = [];
         for (let i = 0; i < body.segments.length; i++) {
-          if (old && sameNumbers(old.segments[i], body.segments[i])) continue;
+          // Baseline chords are never mutated, so an unchanged one is shared rather than copied again.
+          if (old && sameNumbers(old.segments[i], body.segments[i])) { copied.push(old.segments[i]!); continue; }
           indices.push(i); segments.push(...body.segments[i]);
+          copied.push([...body.segments[i]] as OrbitSegment);
         }
         orbit = { count: body.segments.length, indices: Uint32Array.from(indices), segments: Float64Array.from(segments) };
       }
@@ -103,7 +106,7 @@ export function createWorldContextFrameEncoder() {
       let retained = old!;
       if (!old || values || orbit) {
         retained = { ...old, ...values, index: body.index } as Body;
-        retained.segments = orbit ? body.segments.map(segment => [...segment] as OrbitSegment) : old!.segments;
+        retained.segments = copied ?? old!.segments;
       }
       next.set(body.index, retained);
     }
