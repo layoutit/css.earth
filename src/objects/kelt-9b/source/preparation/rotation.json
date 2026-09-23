@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "kelt-9",
+  "source": "Assumed synchronous rotation: a planet 3.2 stellar radii from its star is expected to be tidally locked, and no rotation period or obliquity of KELT-9b is measured (Gaudi et al. 2017, Mansfield et al. 2020 and Ahlers et al. 2020 assume it). Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/kelt-9b.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of KELT-9b is measured."
+}

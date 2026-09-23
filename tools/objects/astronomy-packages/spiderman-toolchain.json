@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-spiderman-toolchain@1",
+  "purpose": "One pinned SPIDERMAN boundary: SPIDERMAN (Louden & Kreidberg 2018) owns spherical-harmonic brightness maps and the phase curves they produce, as published fits used them. cssEarth owns the paper transcription, the conversion to brightness temperature and scientific qualification.",
+  "license": "spiderman-package is copyright 2016 Tom Louden under the MIT license of its repository (SPIDERMAN-LICENSE.txt, from github.com/tomlouden/SPIDERMAN at commit 379a5b6); the PyPI sdist carries no license file and its setup.py metadata says GNU GPLv3. batman-package is GPL-3.0 (BATMAN-NOTICE.txt). NumPy, SciPy, Matplotlib and Astropy are BSD-style.",
+  "micromamba": {
+    "channel": "conda-forge",
+    "packages": [
+      "python=3.9",
+      "numpy=1.26.4",
+      "setuptools=49.6.0",
+      "pip=23.3.2",
+      "scipy=1.13.1",
+      "matplotlib-base=3.8.4",
+      "astropy-base=6.0.1"
+    ]
+  },
+  "requirements": "spiderman-requirements.lock",
+  "spiderman": "1.0.3",
+  "batman": "2.5.3",
+  "why": "spiderman-package 1.0.3 (PyPI, 2019-09-11) is the last release. It builds only against the NumPy 1.x C API and old setuptools (setup.py imports numpy.distutils and passes its license as a list), so it has its own environment rather than the astroquery toolchain's Python 3.12 and NumPy 2.",
+  "importShim": "spiderman/plot.py imports matplotlib._png, removed in Matplotlib 3.3, for its logo art. The runner registers an empty matplotlib._png module whose read_png raises before importing spiderman; no plotting function is called, so no SPIDERMAN code is changed or bypassed. HOME is an empty directory so no ~/.spidermanrc is read."
+}

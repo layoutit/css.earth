@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "kelt-9b-context-temperature@2x.webp",
+      "bytes": 100,
+      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
+    },
+    {
+      "location": "public",
+      "filename": "kelt-9b-lens-temperature.webp",
+      "bytes": 206,
+      "sha256": "9fa90649bce66872eca674e9be0eacb8bd212a8102b90559f9860d170f0e66df"
+    },
+    {
+      "location": "public",
+      "filename": "kelt-9b-limb-temperature@2x.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "kelt-9b-poles-temperature@2x.webp",
+      "bytes": 43284,
+      "sha256": "5cbd01a93820c155ecd1eed0dcb05070c52f285df942cda11a10c70fce06f942"
+    },
+    {
+      "location": "public",
+      "filename": "kelt-9b-surface-temperature@2x.webp",
+      "bytes": 13482,
+      "sha256": "99a75d2e9eb3a356c06ae742e980ab0e0476b596d1c730302f1903992aecf97d"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 1930,
+      "sha256": "5f66a668387599b38caab10b5556a652071784b070d1c5a8342dade98ab6bf64"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1542,
+      "sha256": "4dfc7371c7402c57f7b7bec11dca5450bd8aa547f7d777dce965c53248ee6abf"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 4515,
+      "sha256": "d2ef37c7666d0976e629a184038c8a5b5e498b1adaf760ef00b2d781cb6eba83"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 1651,
+      "sha256": "47a1380902766e4c69986a1b4427b0498ece0838a8bf1e042e52274e632618f8"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 2370,
+      "sha256": "f284e3fa5512ec43ec16d0e56325d906de8c1675f35e870142fdb654962164eb"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 94,
+      "sha256": "5b94debb83013dd6d9bb9b907161ba64093b7026cf5dc81458d33721a6c90e67"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature.webp",
+      "bytes": 1884,
+      "sha256": "560e1721071e7024ebca8f65c7ba1ff92f2410532d44dae0a8a8b241d4047173"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 354783,
+      "sha256": "180aeb03409e0bb0b9fe88c367a67303427a95d94dd2d8e1453c73b54f7932b5"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 344637,
+      "sha256": "22ec1e00828bf1ab2596ca542b6b04a6a1a2c6db144bc209f303df7bb7ee665d"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1198,
+      "sha256": "d494bd9fd9c257991ff1f9c9fe93cf637dc107fe94dd95fa4c34874bca7b7a61"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1246,
+      "sha256": "bc1743ca7fb591fe85f303d95cdc5cfda3667b7801cb09ea6a6170a82b86d8ab"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1151,
+      "sha256": "075d4c80c6ff0d882493fc243772466d4cca1c4e1028434a799277e77d8abea3"
+    }
+  ]
+}

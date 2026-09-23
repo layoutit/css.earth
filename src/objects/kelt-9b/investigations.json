@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kelt-9b",
+  "entries": [
+    {
+      "id": "published-2d-map",
+      "subject": "A published two-dimensional map of KELT-9b",
+      "status": "excluded",
+      "finding": "No paper deposits or prints a map of KELT-9b. The Spitzer (Mansfield et al. 2020) and TESS (Wong et al. 2020) papers publish phase-curve fits, and KPF phase-resolved spectra (2026, arXiv:2601.20849) measure winds on the emerging day side, not a map.",
+      "revisitWhen": "A map of KELT-9b is published or deposited.",
+      "evidence": [
+        "https://arxiv.org/abs/1910.01567",
+        "https://arxiv.org/abs/1910.01607",
+        "https://arxiv.org/abs/2601.20849"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "spitzer-phase-curve-map",
+      "subject": "Mansfield et al. (2020) Spitzer 4.5 um two-sinusoid phase-curve fit, as a map of longitude",
+      "status": "included",
+      "finding": "Shown as the temperature lens through the Cowan & Agol (2008) inversion. The fit reproduces the paper's amplitude (0.612 against 0.609 +/- 0.020), night side (2,542 K against 2,556 +101/-97 K) and hottest hemisphere (4,623 K against 4,636 K) once the star's 4.5 um temperature is set by the paper's own day side (7,942 K). The curve peaks 16.5 degrees before eclipse against the paper's 18.7 +2.1/-2.3.",
+      "evidence": [
+        "https://arxiv.org/abs/1910.01567",
+        "https://arxiv.org/abs/0803.3622"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "tess-phase-curve",
+      "subject": "Wong et al. (2020) TESS phase curve: day side 4,600 +/- 100 K, night side 3,040 +/- 100 K, hot spot 5.2 +/- 0.9 degrees east",
+      "status": "deferred",
+      "finding": "A second band of the same kind of fit. Not shown so that both hot Jupiters of this route share one band (Spitzer 4.5 um); its sinusoid fit and the star's pulsations would need their own record.",
+      "revisitWhen": "A second lens per planet is wanted, or TESS becomes the only band for either planet.",
+      "evidence": [
+        "https://arxiv.org/abs/1910.01607"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "jwst-niriss-phase-curve",
+      "subject": "JWST program 7255 (PI K. Stevenson), a full-orbit NIRISS/SOSS phase curve of KELT-9b",
+      "status": "unresolved",
+      "finding": "Cycle 4 program; on 2026-09-23 MAST lists its observation without public data and no paper exists.",
+      "revisitWhen": "The program's data become public or its paper publishes a map.",
+      "evidence": [
+        "https://www.stsci.edu/jwst-program-info/download/jwst/pdf/7255/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "star-8287k-conversion",
+      "subject": "The 8,287 K stellar brightness temperature at 4.5 um in Mansfield et al. (2020), section 5",
+      "status": "excluded",
+      "finding": "Used by the paper for its energy-balance model (PHOENIX, 10,200 K). Through it the eclipse depth gives a 4,739 K day side, not the paper's 4,566 K, so it is not the conversion behind the reported temperatures; the lens uses the one those temperatures imply.",
+      "revisitWhen": "The paper's PHOENIX band conversion is published.",
+      "evidence": [
+        "https://arxiv.org/abs/1910.01567"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "wasp-76",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/wasp-76/wasp-76-surface-color@2x.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/wasp-76/wasp-76-poles-color@2x.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#f8f3ff"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 1
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csswasp-76-prepared-runtime-scene@1",
+    "materialSchema": "csswasp-76-prepared-emission@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 36525,
+      "sourceProjection": "no observation: the shared neutral gray of an unresolved surface on the reference sphere",
+      "polarPreparation": "the same gray on the polar tiles",
+      "axialTiltNote": "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame"
+    }
+  }
+}

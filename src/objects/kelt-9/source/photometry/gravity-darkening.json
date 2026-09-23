@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "kelt-9",
+  "source": "Ahlers et al. (2020), KELT-9 b's Asymmetric TESS Transit Caused by Rapid Stellar Rotation and Spin-Orbit Misalignment, AJ 160, 4 (doi:10.3847/1538-3881/ab8fa3; arXiv:2004.14812): Table 2, gravity-darkened fit to the TESS primary transit, and the abstract, read from the authors' LaTeX source. The polar temperature is Gaudi et al. (2017)'s 10,170 K, which Ahlers et al. adopt as the pole's (section 3.2).",
+  "caption": "Best-fit values from the gravity-darkened model of KELT-9 b's TESS photometry (Table 2, G-Dark column).",
+  "model": {
+    "equatorialToPolarRadius": {
+      "value": 1.089,
+      "uncertainty": 0.017,
+      "cell": "1.089 ± 0.017 (abstract: the equatorial radius is 1.089 times the polar radius)"
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.39,
+      "uncertainty": 0.03,
+      "cell": "2.39 ± 0.03 (Table 2, R*, equatorial stellar radius)"
+    },
+    "beta": {
+      "value": 0.137,
+      "uncertainty": 0.014,
+      "cell": "0.137 ± 0.014 (Table 2, gravity-darkening exponent)"
+    },
+    "poleTemperatureK": {
+      "value": 10170,
+      "uncertainty": 450,
+      "cell": "10170 ± 450 (Table 1 and section 3.2: Gaudi et al. 2017's effective temperature taken as the polar temperature)"
+    }
+  },
+  "reportedNotModelled": {
+    "oblateness": {
+      "value": 0.089,
+      "uncertainty": 0.017,
+      "cell": "zeta = 0.089 ± 0.017 (Table 2, stellar oblateness)",
+      "note": "As 1 - R_pole/R_eq this is a ratio of 1.098; the abstract states 1.089. The abstract's ratio is used."
+    },
+    "rotationPeriodHours": {
+      "value": 16,
+      "cell": "16 +5/-4 h (Table 2)"
+    },
+    "equatorPoleContrast": {
+      "cell": "'its local surface brightness to vary by ~38% between its hot poles and cooler equator' (abstract); 'varies in effective temperature by ~800 K' (Figure 2 caption); 'nearly 1000 K' (section 2)"
+    }
+  },
+  "note": "The paper fits its own gravity-darkening model (Ahlers et al. 2016: surface gravity to second order with a centrifugal term; oblateness from the Darwin-Radau relation) and does not publish ω or an equatorial temperature. Here the Roche-von Zeipel model of the other rapid rotators takes the paper's radius ratio and β: its ω is the Roche surface with that ratio, and the equator comes out about 500 K cooler than the pole, less than the 800 to 1000 K the paper's text states (tools/objects/observation/gravity-darkening.test.mts)."
+}

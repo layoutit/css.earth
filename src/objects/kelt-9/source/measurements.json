@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kelt-9",
+  "angularDiameterMas": 0.104,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,616,133.7 km at 207.22 pc = 0.104 mas. No interferometric diameter of this star is published; the disc is far too small to resolve.",
+  "distanceParsecs": 207.21797818658283,
+  "distanceSource": "Gaia DR3 parallax 4.8258 +/- 0.0248 mas (photometry/gaia-dr3-source.csv), no zero-point correction",
+  "radiusKm": 1616133.7,
+  "radiusSource": "Radius: KELT-9 is a rapid rotator. Ahlers et al. (2020, AJ 160, 4; arXiv:2004.14812) fit its TESS transit with a gravity-darkened oblate star: equatorial radius 2.39 +/- 0.03 solar radii (Table 2) and an equatorial radius 1.089 +/- 0.017 times the polar radius (abstract), so a polar radius of 2.1947. The record's radius is the volume-equivalent sphere of those two, (2.39^2 x 2.1947)^(1/3) = 2.3230 solar radii at 695700 km per solar radius; the scene draws the flattening, with the equatorial radius on the outline. GM from the stellar mass 2.52 +0.25/-0.20 solar masses (Gaudi et al. 2017, Nature 546, 514, Extended Data Table 3, adopted Model 1, which Ahlers et al. adopt) times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis, the spin axis measured against KELT-9b's orbit, is up.",
+  "effectiveTemperatureK": 10170,
+  "effectiveTemperatureSource": "Gaudi et al. (2017), Nature 546, 514, Extended Data Table 3, Model 1: 10,170 +/- 450 K, which Ahlers et al. (2020) adopt as the polar temperature (https://arxiv.org/abs/1706.06723)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A flattened sphere, the equator 1.089 times the pole (Ahlers et al. 2020), coloured from the star's Gaia DR3 spectrum and darkened by latitude from the same fit. No image of the photosphere exists (see investigations.json)."
+  }
+}

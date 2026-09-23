@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-9b",
+  "card": {
+    "text": "The hottest known giant planet, on a polar orbit around a flattened, fast-spinning star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1910-01567",
+        "url": "https://arxiv.org/abs/1910.01567",
+        "label": "Mansfield et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "KELT-9b is the hottest known transiting planet"
+      },
+      {
+        "catalogueId": "arxiv-2004-14812",
+        "url": "https://arxiv.org/abs/2004.14812",
+        "label": "Ahlers et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "a rapidly rotating, oblate early-A-type star in a polar orbit"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "KELT-9b circles its star every 36 hours, passing over its poles. Its day side is about 4,600 K, as hot as a K-type star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1706-06723",
+        "url": "https://arxiv.org/abs/1706.06723",
+        "label": "Gaudi et al. 2017",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "we measure the KELT-9b's day-side temperature to be ~4600 K. This is as hot as stars of stellar type K4"
+      }
+    ]
+  },
+  "datasets": {
+    "temperature": {
+      "title": "Spitzer heat map",
+      "detail": "Published fit, 2018",
+      "summary": "Heat at 4.5 µm from the paper's phase-curve fit. It varies only with longitude: the data hold no north-south detail."
+    }
+  }
+}
