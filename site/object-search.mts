@@ -9,6 +9,7 @@ export interface ObjectSearchLabels {
   classificationName: string;
   systemName: string;
   illustration?: boolean;
+  candidate?: boolean;
 }
 
 /** One matching policy for the native form response and its live enhancement. */
@@ -22,7 +23,7 @@ export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[],
     || item.classificationName === 'galaxy' && query === 'galaxies' || query === item.classification)?.classification;
   const systemName = items.find(item => query === item.systemName)?.systemName;
   const matches = items.filter(item => classification
-    ? matchesObjectClassification(item.classification, classification) && (!item.illustration || illustrations)
+    ? matchesObjectClassification(item.classification, classification) && (!item.illustration || illustrations) && !item.candidate
     : showAll || (systemName ? item.systemName === systemName
       : item.name.includes(query) || normalized.length > 0 && item.names.some(name => name.includes(normalized))));
   const nextCategory = classification ? objectCategory(classification) : showAll ? 'all'
@@ -38,6 +39,7 @@ export function objectSearchLabels(item: HTMLElement): ObjectSearchLabels {
   if (!Array.isArray(names) || !names.every(name => typeof name === 'string')) throw new TypeError('Prepared object search names are invalid.');
   return { name: item.dataset.objectName ?? '', names,
     illustration: item.dataset.objectIllustration === 'true',
+    candidate: item.dataset.objectCandidate === 'true',
     classification: item.dataset.objectClassification ?? '', classificationName: item.dataset.objectClassificationName ?? '',
     systemName: item.dataset.objectSystemName ?? '' };
 }

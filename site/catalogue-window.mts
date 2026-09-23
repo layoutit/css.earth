@@ -106,6 +106,7 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
   item.dataset.objectClassification = entry.classification;
   item.dataset.objectClassificationName = entry.classificationName;
   item.dataset.objectIllustration = String(entry.illustration);
+  item.dataset.objectCandidate = String(entry.candidate);
   item.setAttribute('aria-setsize', '0');
   item.setAttribute('aria-posinset', String(index + 1));
 

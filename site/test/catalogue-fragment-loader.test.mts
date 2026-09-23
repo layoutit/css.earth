@@ -32,7 +32,7 @@ function fixtureWindow(fetchImpl: typeof fetch, { requestIdleCallback = false }:
 const rowsHtml = '<ul class="object-list"><li class="object-item">Saturn</li></ul>';
 const indexJson = JSON.stringify({ schema: 'cssearth-catalogue-index@1', entries: [{
   kind: 'scene', id: 'saturn', name: 'Saturn', searchNames: [], classification: 'planet',
-  classificationName: 'planet', systemName: 'solar system', route: '/saturn/', illustration: false,
+  classificationName: 'planet', systemName: 'solar system', route: '/saturn/', illustration: false, candidate: false,
   distanceMeters: 1, detail: { text: '1 au', title: 'from Earth', ariaLabel: '1 au. from Earth', value: '1', unit: 'au' },
   source: { subject: 'object:saturn', document: '/sources/saturn/', label: 'Sources for Saturn' },
   marker: { kind: 'scene', id: 'saturn', color: '#fff' },
