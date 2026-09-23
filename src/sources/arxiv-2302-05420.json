@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2302-05420",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Franson et al. (2023): Astrometric Accelerations as Dynamical Beacons: A Giant Planet Imaged Inside the Debris Disk of the Young Star AF Lep",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2302.05420"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/acd6f6"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2302.05420",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/acd6f6",
+      "label": "The Astrophysical Journal Letters"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2302.05420",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 4.5: AF Lep, F8V, radius 1.25 +/- 0.06 solar radii (Kervella et al. 2004), rotation period 1.007 d"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters",
+  "creators": [
+    "Kyle Franson",
+    "Brendan P. Bowler",
+    "Yifan Zhou",
+    "Tim D. Pearce",
+    "Daniella C. Bardalez Gagliuffi",
+    "Lauren Biddle"
+  ]
+}

@@ -1,0 +1,106 @@
+/* YSES 1 b: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="yses-1-b"] > :is(.polycss-camera, .yses-1-b-corona-layer, .yses-1-b-limb-layer) {
+  --yses-1-b-scene-side-padding: 16px;
+  --yses-1-b-reference-width: 1920px;
+  --yses-1-b-reference-height: 1080px;
+  --yses-1-b-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--yses-1-b-scene-side-padding) - var(--yses-1-b-scene-side-padding)) /
+        var(--yses-1-b-reference-width)
+    ),
+    calc(100cqh / var(--yses-1-b-reference-height))
+  );
+}
+
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="yses-1-b"] > :is(.yses-1-b-corona-layer, .yses-1-b-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.object-stage[data-object-id="yses-1-b"] .yses-1-b-corona-layer {
+  z-index: 0;
+}
+
+.object-stage[data-object-id="yses-1-b"] .polycss-camera {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="yses-1-b"] .yses-1-b-limb-layer {
+  z-index: 2;
+}
+
+.object-stage[data-object-id="yses-1-b"] .yses-1-b-body {
+  transform-style: preserve-3d;
+}
+
+.object-stage[data-object-id="yses-1-b"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
+   hide their back faces. */
+.object-stage[data-object-id="yses-1-b"] .polycss-scene s:not(.yses-1-b-polar) {
+  backface-visibility: visible;
+  background-image: var(--yses-1-b-surface-image) !important;
+}
+
+.object-stage[data-object-id="yses-1-b"] .polycss-scene s.yses-1-b-polar {
+  backface-visibility: hidden;
+  background-image: var(--yses-1-b-poles-image) !important;
+}
+
+/* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
+   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
+.object-stage[data-object-id="yses-1-b"] .yses-1-b-corona-layer {
+  background-image: var(--yses-1-b-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(600px * 1.25 * var(--yses-1-b-camera-zoom, 1))
+    calc(600px * 1.25 * var(--yses-1-b-camera-zoom, 1));
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
+.object-stage[data-object-id="yses-1-b"] .yses-1-b-limb-layer {
+  background-image: var(--yses-1-b-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(496px * 1.25 * var(--yses-1-b-camera-zoom, 1))
+    calc(496px * 1.25 * var(--yses-1-b-camera-zoom, 1));
+}
+
+.object-stage[data-object-id="yses-1-b"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="yses-1-b"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="yses-1-b"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

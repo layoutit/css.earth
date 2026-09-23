@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2211-01474",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Palma-Bifani et al. (2023): Peering into the Young Planetary System AB Pic. Atmosphere, Orbit, Obliquity &amp; Second Planetary Candidate",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2211.01474"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202244294"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2211.01474",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202244294",
+      "label": "Astronomy & Astrophysics 670, A90"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2211.01474",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1: NaCo and SPHERE astrometry of AB Pic b; Table 4: BT-SETTL13 Teff 1800 +/- 20 K and R 1.8 +/- 0.2 Jupiter radii, Exo-REM 1700 +/- 50 K; section 1: reported mass 10 +/- 1 Jupiter masses; K1V host at 50.14 pc"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 670, A90",
+  "creators": [
+    "P. Palma-Bifani",
+    "G. Chauvin",
+    "M. Bonnefoy",
+    "P. M. Rojo",
+    "S. Petrus",
+    "L. Rodet"
+  ]
+}

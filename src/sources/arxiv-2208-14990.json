@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2208-14990",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Carter et al. (2023): The JWST Early Release Science Program for Direct Observations of Exoplanetary Systems I: High Contrast Imaging of the Exoplanet HIP 65426 b from 2-16 $μ$m",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2208.14990"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/acd93e"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2208.14990",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/acd93e",
+      "label": "The Astrophysical Journal Letters"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2208.14990",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 5.5: BT-Settl fit to JWST and SPHERE/NaCo data, Teff 1624 +16/-15 K, R 1.06 +/- 0.05 Jupiter radii; hot-start estimates 7.1 +/- 1.2 Jupiter masses, 1.44 Jupiter radii, 1283 K (as Blunt et al. 2023 tabulate them)"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters",
+  "creators": [
+    "Aarynn L. Carter",
+    "Sasha Hinkley",
+    "Jens Kammerer",
+    "Andrew Skemer",
+    "Beth A. Biller",
+    "Jarron M. Leisenring"
+  ]
+}

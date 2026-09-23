@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "af-lep",
+  "card": {
+    "text": "Young Sun-like star 27 parsecs away in Lepus, with a Jupiter-like planet photographed directly.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2302-05420",
+        "url": "https://arxiv.org/abs/2302.05420",
+        "label": "Franson et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "member of the 24 $\\pm$ 3 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "AF Lep is a young star in the beta Pictoris moving group, 24 million years old. Its pull on the star led astronomers to its planet b in 2023.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2302-05420",
+        "url": "https://arxiv.org/abs/2302.05420",
+        "label": "Franson et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "stars with astrometric accelerations between Hipparcos and Gaia"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}

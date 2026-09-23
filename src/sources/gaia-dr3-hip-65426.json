@@ -1,0 +1,41 @@
+{
+  "id": "gaia-dr3-hip-65426",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 gaia_source row for HIP 65426 (source_id 6070080754075553792)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "6070080754075553792"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "label": "Gaia Collaboration (2023), Gaia DR3 summary"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20ref_epoch%2C%20ra%2C%20dec%2C%20parallax%2C%20parallax_error%2C%20pmra%2C%20pmdec%2C%20radial_velocity%2C%20radial_velocity_error%2C%20phot_g_mean_mag%2C%20ruwe%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%206070080754075553792",
+      "checkedOn": "2026-09-23",
+      "locator": "gaiadr3.gaia_source at epoch 2016.0: ra 201.1501650286594, dec -51.50454094213159, distance 107.491189 pc, pmra -33.9213, pmdec -18.9174 mas/yr"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC).",
+      "scope": "citation",
+      "evidence": "src/objects/hip-65426/NOTICE.md"
+    }
+  ],
+  "publisher": "European Space Agency"
+}

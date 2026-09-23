@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hip-65426",
+  "angularDiameterMas": 0.15,
+  "angularDiameterSource": "No angular diameter is measured: this is the record's radius at the Gaia distance.",
+  "distanceParsecs": 107.491189,
+  "distanceSource": "Gaia DR3 source 6070080754075553792: parallax 9.3031 +/- 0.0346 mas (RUWE 1.08), inverted to 107.4912 pc with no zero-point correction.",
+  "radiusKm": 1231389,
+  "radiusSource": "Radius 1.77 +/- 0.05 solar radii, temperature 8840 +/- 200 K and mass 1.96 +/- 0.04 solar masses from Chauvin et al. (2017, A&A 605, L9; arXiv:1707.01413), Table 1: an isochrone radius and a temperature from the A2V spectral type (Pecaut calibration), not a measured disc. 1,231,389 km at 695,700 km per solar radius; GM from 1.96 solar masses, the stellar mass Blunt et al. (2023) adopt for the orbit placed here, times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 8840,
+  "effectiveTemperatureSource": "8840 +/- 200 K, Chauvin et al. (2017), A&A 605, L9, Table 1, https://arxiv.org/abs/1707.01413",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+  }
+}

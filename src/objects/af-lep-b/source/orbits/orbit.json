@@ -1,0 +1,66 @@
+{
+ "source": "whereistheplanet 1.0.1, post_aflepb.hdf5 (Balmer et al. 2025)",
+ "rule": "no stored likelihoods differ: smallest chi-squared against the 3 measured positions (20.56)",
+ "samples": 1000,
+ "tauReferenceMjd": 58849.0,
+ "orbit": {
+  "sma1": 8.89847469329834,
+  "ecc1": 0.015401259064674377,
+  "inc1": 57.7776083778917,
+  "aop1": -79.44800910477962,
+  "pan1": -109.51169462342688,
+  "tau1": 0.3969087302684784,
+  "plx": 37.28151321411133,
+  "mtot": 1.2954661846160889
+ },
+ "residuals": [
+  {
+   "epoch": 60251.32,
+   "kind": "radec",
+   "measured": [
+    316.89,
+    62.91
+   ],
+   "error": [
+    0.07,
+    0.09
+   ],
+   "model": [
+    316.7928480601666,
+    63.21336154883995
+   ]
+  },
+  {
+   "epoch": 60273.22,
+   "kind": "radec",
+   "measured": [
+    316.26,
+    60.17
+   ],
+   "error": [
+    0.04,
+    0.04
+   ],
+   "model": [
+    316.2713001866481,
+    60.117485415659395
+   ]
+  },
+  {
+   "epoch": 60302.21,
+   "kind": "radec",
+   "measured": [
+    315.44,
+    55.93
+   ],
+   "error": [
+    0.05,
+    0.05
+   ],
+   "model": [
+    315.45333727359076,
+    55.99521955623511
+   ]
+  }
+ ]
+}

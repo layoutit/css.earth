@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "yses-1-b",
+  "radiusKm": 214476,
+  "radiusSource": "Radius 3.0 +0.2/-0.7 Jupiter radii, temperature 1727 +172/-127 K and mass 14 +/- 3 Jupiter masses from Bohn et al. (2020, ApJL 898, L16; arXiv:2007.10991), as the ESO SupJup survey tabulates them (Zhang et al. 2024, Table 1): 214,476 km at 71,492 km per Jupiter radius. Model values: the planet is unresolved. Wood et al. (2023) give 21.8 +/- 3 Jupiter masses. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 937125,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 186.905 au and total mass 0.9919 solar masses, 2,565.7 years of 365.25 d. Roberts et al. (2025, arXiv:2509.14321): orbitize! parallel-tempered MCMC on four VLTI/GRAVITY positions (their chosen subset, Table 2), six SPHERE and NaCo positions (Table 3) and the CRIRES+ velocity of the planet relative to the star, -1.87 +/- 0.04 km/s (Zhang et al. 2024), refitted here with tools/objects/hosted-orbits/orbitize-fit.py (src/objects/yses-1-b/source/orbits/). Their stellar-mass and parallax priors are 'centered on the respective catalog values' without widths: 1.00 +/- 0.02 solar masses (Bohn et al. 2020) and the Gaia DR3 parallax 10.612 +/- 0.012 mas are used. The maximum of orbitize!'s posterior (ln L -31.84), refined with Nelder-Mead from many starts.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of YSES 1 b is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 1727,
+  "effectiveTemperatureSource": "1727 +172/-127 K, Bohn et al. (2020), as tabulated by Zhang et al. (2024), https://arxiv.org/abs/2409.16660",
+  "semiMajorAxisSource": "Bohn et al. (2020, arXiv:2007.10991), Abstract: orbiting the primary at 160 au (projected). The recorded orbit's semi-major axis is 187 au (packages/astronomy/data/bodies/yses-1-b.json); Roberts et al. (2025) give a median of 146 au.",
+  "massSource": "14 +/- 3 Jupiter masses from evolutionary models, Bohn et al. (2020, ApJL 898, L16), Abstract."
+}

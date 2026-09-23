@@ -1,0 +1,37 @@
+{
+  "id": "arxiv-2310-00148",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Blunt et al. (2023): First VLTI/GRAVITY Observations of HIP 65426 b: Evidence for a Low or Moderate Orbital Eccentricity",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2310.00148"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2310.00148",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2310.00148",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 3: VLTI/GRAVITY astrometry of HIP 65426 b on MJD 59221.312, 59602.271 and 60071.208; the orbitize! fit whose posterior whereistheplanet distributes as post_hip65426b.hdf5"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "S. Blunt",
+    "W. O. Balmer",
+    "J. J. Wang",
+    "S. Lacour",
+    "S. Petrus",
+    "G. Bourdarot"
+  ]
+}

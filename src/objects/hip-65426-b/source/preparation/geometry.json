@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "hip-65426-b",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/hip-65426-b/hip-65426-b-surface-shape@2x.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/hip-65426-b/hip-65426-b-poles-shape@2x.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#9a9a9a"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csship-65426-b-prepared-runtime-scene@1",
+    "materialSchema": "csship-65426-b-prepared-lighting@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 0,
+      "sourceProjection": "no observation: the shared neutral gray of an unresolved surface on the reference sphere",
+      "polarPreparation": "the same gray on the polar tiles",
+      "axialTiltNote": "no obliquity or spin of this planet is measured; the display axis is the orbit normal and nothing turns"
+    }
+  }
+}

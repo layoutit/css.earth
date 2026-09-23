@@ -24,9 +24,9 @@ describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
-    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'dh-tau-b', 'gq-lup-b', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-452b', 'pds-70-b', 'pds-70-c', 'roxs-42b-b', ...trappist, 'vhs-1256-1257-b', 'wasp-121b', 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b'])
+    expect(EXOPLANET_IDS).toEqual(['ab-pic-b', 'af-lep-b', 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'dh-tau-b', 'gq-lup-b', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hip-65426-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-452b', 'pds-70-b', 'pds-70-c', 'roxs-42b-b', ...trappist, 'vhs-1256-1257-b', 'wasp-121b', 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b', 'yses-1-b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'vhs-1256-1257-b', 'gq-lup-b', 'dh-tau-b', 'roxs-42b-b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c', 'wasp-121b'])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'vhs-1256-1257-b', 'gq-lup-b', 'dh-tau-b', 'roxs-42b-b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c', 'wasp-121b', 'hip-65426-b', 'af-lep-b', 'ab-pic-b', 'yses-1-b'])
     for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
     expect(BODIES['wd-1856-534b' as keyof typeof BODIES].parent).toBe('wd-1856-534')
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
@@ -342,8 +342,56 @@ describe('hosted orbits', () => {
     // the size of the star's own velocity jitter (0.4 km/s, Donati et al. 2012) that led Venkatesan et al. to fit the CRIRES value instead.
     const star = starAstrometry('gq-lup'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
     const velocity = dot(hostedOrbitStateRelativeBmjdTdb(hostedOrbit('gq-lup-b'), star, BODIES['gq-lup'].meanRadiusKm, 60003).velocityKmPerDay, sight) / 86400
-    console.log('GQ RV', velocity.toFixed(2))
     expect(velocity).toBeGreaterThan(0)
+  })
+  it('places HIP 65426 b, AF Lep b and AB Pic b where their orbit papers measured them', () => {
+    /** Offset of a planet from its star at an MJD, east and north in mas, at the star's Gaia distance. */
+    const skyMas = (id: 'hip-65426-b' | 'af-lep-b' | 'ab-pic-b', mjd: number) => {
+      const parent = BODIES[id].parent as Parameters<typeof starAstrometry>[0], star = starAstrometry(parent)
+      const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees), distanceKm = star.distanceParsecs * PARSEC_KM
+      const p = hostedOrbitStateRelativeBmjdTdb(hostedOrbit(id), star, BODIES[parent].meanRadiusKm, mjd).positionKm
+      return [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000) as [number, number]
+    }
+    // VLTI/GRAVITY (MJD, dRA, dDec) in mas: HIP 65426 b, Blunt et al. (2023), Table 3; AF Lep b, Balmer et al. (2025), Table 2.
+    // Errors 0.04 to 0.28 mas. Each orbit is one sample of the paper's own posterior, so it passes near, not through, every point.
+    const gravity = {
+      'hip-65426-b': [[59221.312, 415.613, -708.133], [59602.271, 416.269, -705.051], [60071.208, 416.980, -701.373]],
+      'af-lep-b': [[60251.32, 316.89, 62.91], [60273.22, 316.26, 60.17], [60302.21, 315.44, 55.93]],
+    } as const
+    const misses: Record<string, number> = {}
+    for (const [id, points] of Object.entries(gravity) as [keyof typeof gravity, readonly (readonly [number, number, number])[]][]) {
+      misses[id] = Math.max(...points.map(([mjd, dra, ddec]) => { const [x, y] = skyMas(id, mjd); return Math.hypot(x - dra, y - ddec) }))
+    }
+    // Measured 2026-09-23 at the stars' Gaia distances: HIP 65426 b 0.09 mas, AF Lep b 0.32 mas at worst,
+    // against separations of 820 and 323 mas.
+    expect(misses['hip-65426-b']).toBeLessThan(0.1)
+    expect(misses['af-lep-b']).toBeLessThan(0.35)
+    // AB Pic b: Palma-Bifani et al. (2023), Table 1, NaCo and SPHERE (MJD, separation mas, sigma, position angle deg, sigma).
+    let worst = 0
+    for (const [mjd, separation, sigmaSeparation, angle, sigmaAngle] of [[52717.7, 5460, 14, 175.33, 0.18], [53070.9, 5450, 16, 175.13, 0.21],
+      [53274.0, 5450, 14, 175.30, 0.20], [57058.4, 5398.7, 4.5, 175.26, 0.13]] as const) {
+      const [x, y] = skyMas('ab-pic-b', mjd), modelAngle = ((Math.atan2(x, y) * 180 / Math.PI) + 360) % 360
+      worst = Math.max(worst, Math.abs(Math.hypot(x, y) - separation) / sigmaSeparation, Math.abs(angleMiss(modelAngle, angle)) / sigmaAngle)
+    }
+    // Measured 2026-09-23: 0.68 of its own sigmas at worst.
+    expect(worst).toBeLessThan(1)
+  })
+  it('places YSES 1 b where GRAVITY measured it, moving toward us as CRIRES+ measured', () => {
+    const star = starAstrometry('yses-1'), radiusKm = BODIES['yses-1'].meanRadiusKm, orbit = hostedOrbit('yses-1-b')
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+    const distanceKm = star.distanceParsecs * PARSEC_KM
+    // Roberts et al. (2025), Table 2: VLTI/GRAVITY (MJD, dRA, dDec) in mas, errors 0.05 to 0.14 mas.
+    let worst = 0
+    for (const [mjd, dra, ddec] of [[59971.334, -906.598, -1436.899], [60355.278, -904.806, -1434.773], [60461.014, -904.428, -1434.237], [60491.050, -904.516, -1433.772]] as const) {
+      const p = hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, mjd).positionKm
+      const [x, y] = [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000) as [number, number]
+      worst = Math.max(worst, Math.hypot(x - dra, y - ddec))
+    }
+    // Measured 2026-09-23: 0.32 mas at worst, against a separation of 1,700 mas.
+    expect(worst).toBeLessThan(0.35)
+    // Zhang et al. (2024), section 5.5: the planet moves -1.87 +/- 0.04 km/s relative to the star (MJD 60002.5, the midpoint of the two nights).
+    const velocity = dot(hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, 60002.5).velocityKmPerDay, sight) / 86400
+    expect(Math.abs(velocity + 1.87)).toBeLessThan(0.04)
   })
   it('rejects incomplete or non-finite eccentric inputs', () => {
     const star = starAstrometry('wasp-43')

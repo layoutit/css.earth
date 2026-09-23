@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hip-65426-b",
+  "radiusKm": 75781.5,
+  "radiusSource": "Radius 1.06 +/- 0.05 Jupiter radii and temperature 1624 +16/-15 K: the BT-Settl fit of Carter et al. (2023, ApJL; doi:10.3847/2041-8213/acd93e; arXiv:2208.14990) to the JWST/NIRCam and MIRI photometry with the SPHERE and NaCo data, section 5.5: 75,781.5 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. Their hot-start evolutionary estimate is 1.44 +/- 0.03 Jupiter radii and 1283 K. GM from their hot-start mass 7.1 +/- 1.2 Jupiter masses times Jupiter's GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 213931.9,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 87.640 au and total mass 1.9622 solar masses, 585.7 years of 365.25 d. Blunt et al. (2023, arXiv:2310.00148): the orbitize! MCMC fit to VLTI/GRAVITY and literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hip65426b.hdf5). Highest likelihood (ln L -15.55).",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HIP 65426 b is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 1624,
+  "effectiveTemperatureSource": "1624 +16/-15 K, the BT-Settl fit of Carter et al. (2023), section 5.5, https://arxiv.org/abs/2208.14990",
+  "semiMajorAxisSource": "Blunt et al. (2023, arXiv:2310.00148), Abstract: a projected separation of 92 au. The recorded orbit's semi-major axis is 87.6 au at the sample's parallax (packages/astronomy/data/bodies/hip-65426-b.json).",
+  "massSource": "7.1 +/- 1.2 Jupiter masses from the bolometric luminosity and hot-start evolutionary models, Carter et al. (2023, arXiv:2208.14990), Abstract and section 5.5."
+}
