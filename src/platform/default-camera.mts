@@ -22,6 +22,20 @@ export function prepareFacingCameraAngles(bodyId: string, target: Vector3): Defa
   return Object.freeze({ defaultControlYawDegrees: Math.atan2(-x, z) * 180 / Math.PI, initialScenePitchDegrees: Math.atan2(y, Math.hypot(x, z)) * 180 / Math.PI });
 }
 
+/** The body-fixed direction at the centre of a default view: the inverse of `prepareFacingCameraAngles`. */
+export function openingDirection(bodyId: string, { initialScenePitchDegrees, defaultControlYawDegrees }: DefaultCameraAngles): Vector3 {
+  const yaw = defaultControlYawDegrees * Math.PI / 180, pitch = initialScenePitchDegrees * Math.PI / 180;
+  const presentation = [-Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch)];
+  const [xAxis, yAxis, zAxis] = prepareEclipticPresentationFrame(bodyId).basis;
+  return [0, 1, 2].map(axis => presentation[0]! * xAxis![axis]! + presentation[1]! * yAxis![axis]! + presentation[2]! * zAxis![axis]!) as unknown as Vector3;
+}
+
+/** How lopsided a partial map's data must be before the opening turns toward it. The measure is the length of the area-weighted
+ * mean direction of the map's covered pixels: 0 for data spread evenly around the body, 0.5 for one exact hemisphere. Measured on
+ * the prepared default maps (2026-09-23), complete maps sit at 0.021 or less and maps missing much of a hemisphere at 0.19 or
+ * more; 0.1 separates them. */
+export const LOPSIDED_COVERAGE = 0.1;
+
 /** The body-fixed direction toward an observer stated as a sub-observer point (west-positive longitude, as archives state it). */
 export function observerPointDirection(bodyId: string, { observerWestLongitude, observerLatitude }: ObserverPoint): Vector3 {
   if (!Number.isFinite(observerWestLongitude) || !(Math.abs(observerLatitude) <= 90)) throw new TypeError(`${bodyId}: an observation frame has no sub-observer point.`);
@@ -74,11 +88,19 @@ export function photographDirections(bodyId: string, recipe: { raster?: { surfac
  * - a planet of another star: its substellar point, where its synchronous rotation record puts longitude 0 facing the host
  *   star that lights the map;
  * - a placed star: the direction of the Sun, where Earth observes it from;
+ * - a lit body whose default map covers mostly one side (`coverage`, the mean direction of its covered pixels, at least
+ *   LOPSIDED_COVERAGE long): the design pose's tilt, turned to face the centre of that data, and on the south side of the
+ *   ecliptic when that centre is south of it;
  * - any other body: the lit design pose. */
-export function prepareDefaultCameraAngles(bodyId: string, { observation, light = 'sun' }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host' } = {}): DefaultCameraAngles {
+export function prepareDefaultCameraAngles(bodyId: string, { observation, light = 'sun', coverage }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host'; coverage?: Vector3 } = {}): DefaultCameraAngles {
   if (observation?.length) return prepareFacingCameraAngles(bodyId, observationCentroid(bodyId, observation));
   if (light === 'host') return prepareFacingCameraAngles(bodyId, [1, 0, 0] as unknown as Vector3);
   if (light === 'self') return prepareFacingCameraAngles(bodyId, requireBodyFixedSunDirection(bodyId) as unknown as Vector3);
+  if (coverage && Math.hypot(...coverage) >= LOPSIDED_COVERAGE) {
+    // The design tilt, taken on the south side of the ecliptic when the data centre lies south of it.
+    const facing = prepareFacingCameraAngles(bodyId, coverage), tilt = Math.abs(LIT_DEFAULT_VIEW.initialScenePitchDegrees);
+    return Object.freeze({ initialScenePitchDegrees: facing.initialScenePitchDegrees > 0 ? tilt : -tilt, defaultControlYawDegrees: facing.defaultControlYawDegrees });
+  }
   return LIT_DEFAULT_VIEW;
 }
 
