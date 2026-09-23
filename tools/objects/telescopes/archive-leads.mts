@@ -48,7 +48,6 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
       }
     } catch (error) {
       failures.push(`${table}: ${message(error)}`);
-      if (failures.length >= 2 && !evidence.length) break;
     }
   }
   return { service: TAP_SYNC, state: failures.length ? evidence.length ? 'overflow' : 'unavailable' : instruments.length ? 'sampled' : 'empty-in-scope', scope,

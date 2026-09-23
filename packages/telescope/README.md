@@ -6,7 +6,7 @@ This package supplies the command, not the observatory pipelines or catalogue. I
 
 ## Setup
 
-Use Node 22.18+ (22.x) or Node 24+. Prepare a css.earth checkout with its documented dependencies. Archive discovery uses `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install`; PDS decoding uses `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/pds-toolchain.mts install`. Some reduction routes require additional instrument toolchains described by their existing guides.
+Use Node 22.18+ (22.x) or Node 24+. Prepare a css.earth checkout with its documented dependencies. Run `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install` once for the pinned archive client, then use `verify` in place of `install` to check its imports and versions. The environment is shared by checkouts with the same pins; installation does not copy it into each checkout. PDS decoding uses `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/pds-toolchain.mts install`. Some reduction routes require additional instrument toolchains described by their existing guides.
 
 Inside the repository, use `pnpm telescope --help` after installing its dependencies. To test the distributable from the repository:
 
@@ -229,8 +229,8 @@ export checks again before publication. A 2D image can advance to a body map; on
 complete projection bundle can advance to a sphere; physical handoffs require existing
 physical depth. A completed sphere or spatial handoff is reported as terminal.
 
-The astronomy Python environment includes pinned Matplotlib. Reinstall it
-with `node tools/objects/astronomy-packages/toolchain.mts install` after pulling changed pins.
+The astronomy Python environment includes pinned Matplotlib. Run
+`node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install` after pulling changed pins; an existing verified pin is reused.
 The npm package still does not install scientific dependencies automatically.
 
 Surface projection is explicit:

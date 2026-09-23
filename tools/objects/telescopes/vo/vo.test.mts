@@ -129,6 +129,11 @@ test('live-captured ESO and PSA scalar masks decode without losing the response'
     assert.equal(response.rows.length, 1); assert.ok(Object.values(response.rows[0]!).some(v => v === null));
   }
 });
+test('a live KOA empty-looking response with OVERFLOW stays incomplete', async () => {
+  const response = await parse('koa-empty-overflow.xml');
+  assert.equal(response.queryStatus, 'OVERFLOW');
+  assert.equal(response.rows.length, 0);
+});
 test('ESO fixed-ID and CIRCLE resolve via PyVO; a nonexistent BAND capability is refused', async () => {
   const eso = await esoPromise(), descriptor = esoDescriptor(eso), binding = eso.bindings.find(b => b.serviceId === descriptor.id)!;
   assert.equal(binding.error, null); assert.equal(binding.parameters.ID, 'ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647');

@@ -1108,7 +1108,9 @@ export async function loadTargetCatalogue(root: string): Promise<TargetCatalogue
 
 /** Read everything the query needs from the repository. The query itself reads nothing. */
 /** The string overload retains legacy archive loading; an explicit request also searches bounded VO services. */
-export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<QueryInputs> {
+export interface ArchiveSelection { readonly archiveService: string }
+export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string, progress?: (stage:string)=>void,
+  archiveSelection?: ArchiveSelection): Promise<QueryInputs> {
   progress?.('Reading local evidence');
   const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
   const sky = typeof targetOrRequest !== 'string' && 'skyTarget' in targetOrRequest ? targetOrRequest.skyTarget : undefined;
@@ -1118,6 +1120,13 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
     ? targetOrRequest.requestedTargetName : target;
   const targetCatalogue = typeof targetOrRequest === 'string' || resolution.status !== 'resolved' ? catalogue
     : withRequestedTargetName(enteredName, canonicalTarget, catalogue);
+  if (archiveSelection && typeof targetOrRequest !== 'string' && resolution.status === 'resolved') {
+    progress?.('Revalidating the selected archive observation');
+    const vo = await loadVoInputs(root, canonicalTargetRequest(targetOrRequest, canonicalTarget), targetCatalogue,
+      selectedObservation, undefined, {}, undefined, undefined, archiveSelection.archiveService);
+    return { vo, ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], sourceProducts: [],
+      qualifiedProducts: await loadQualifiedObservations(root, canonicalTarget) };
+  }
   const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
     const path = `data/${telescope}/ledger.json`;
