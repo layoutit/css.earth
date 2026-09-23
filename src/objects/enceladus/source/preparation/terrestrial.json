@@ -15,8 +15,7 @@
       {
         "id": "normal",
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         },
         "validity": {
           "kind": "geotiff-float-monochrome",
@@ -182,7 +181,6 @@
       }
     ],
     "observedColors": [],
-    "surfaceQuality": 90,
     "shapeViews": [
       {
         "id": "shape",

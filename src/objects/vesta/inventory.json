@@ -10,14 +10,14 @@
     {
       "location": "public",
       "filename": "vesta-elevation-shadow@2x.webp",
-      "bytes": 500334,
-      "sha256": "3c095d03c05021479d779c39d29e2eba35e500402f1b4fb677e8006976c40811"
+      "bytes": 296816,
+      "sha256": "eaca432d78014b075b7afe791b54720f5249db29df737d331d9cd4104c46aa55"
     },
     {
       "location": "public",
       "filename": "vesta-elevation-surface@2x.webp",
-      "bytes": 1278614,
-      "sha256": "5ff6f3babd8ca5282b932f1c408529f5ddf61698c77b5746d8baf6ec082e874a"
+      "bytes": 765156,
+      "sha256": "7ef54677f94a6a651550411fbe372603a44c1ee54c1756ed1c1e4a3f29f3d9fd"
     },
     {
       "location": "public",
@@ -34,14 +34,14 @@
     {
       "location": "public",
       "filename": "vesta-hamo-shadow@2x.webp",
-      "bytes": 448248,
-      "sha256": "44de5dd45a0190a486b85d0f5e41050070bb0743c016fe10533a4f7e615304de"
+      "bytes": 241824,
+      "sha256": "689cb94ba364ca18be0c580db5d0c841fe1e327bb2e9592f26630effbf0edc68"
     },
     {
       "location": "public",
       "filename": "vesta-hamo-surface@2x.webp",
-      "bytes": 1323370,
-      "sha256": "151e1bacbfb8f34642b0c0e9fb296ce0d4be563d025a1693f09ed915aaac4f7a"
+      "bytes": 746722,
+      "sha256": "8baaee325d2ac16a333bd9a2156967c3d64a7bc092e1a324da28f91e3f4ba284"
     },
     {
       "location": "public",
@@ -52,14 +52,14 @@
     {
       "location": "public",
       "filename": "vesta-normal-shadow@2x.webp",
-      "bytes": 1264150,
-      "sha256": "c1048db804298d8ada5fe6593c0ab0e1144ad02ce839772304d0e00e174cfb76"
+      "bytes": 336622,
+      "sha256": "79e8228712b11537630b149836e781605a25ac34aa13c0f63e0e9149154a4973"
     },
     {
       "location": "public",
       "filename": "vesta-normal-surface@2x.webp",
-      "bytes": 3988488,
-      "sha256": "c3cb6ef48fff0a87fde3f6cf4951a3b4d4cedc67f1640deb6fc0319f137676a4"
+      "bytes": 1331058,
+      "sha256": "590c5fb7cffd5a76be8072dfed8046d9d17b31b25cd4206667cb9be362130ce0"
     },
     {
       "location": "public",
@@ -70,14 +70,14 @@
     {
       "location": "public",
       "filename": "vesta-ratios-shadow@2x.webp",
-      "bytes": 797840,
-      "sha256": "9e0e0302c6b64cf19066bf5d5ca8d1adbc76daed43e66739ffd61835c6a6a1e0"
+      "bytes": 440176,
+      "sha256": "9d54b65017c0788c9208c131e9d6ab090dd409e28d0ae715f58db0ca4726434c"
     },
     {
       "location": "public",
       "filename": "vesta-ratios-surface@2x.webp",
-      "bytes": 2237534,
-      "sha256": "d49ef56a6b02aa5eee052840ac7adbddf5aa1176252d102ee288c329e0bf8e87"
+      "bytes": 1382946,
+      "sha256": "1845c0a9c91c78d4bb29763fbb6a06b6d7af468ff0635f3712214793644e6a8d"
     },
     {
       "location": "public",
@@ -88,14 +88,14 @@
     {
       "location": "public",
       "filename": "vesta-surface-shadow@2x.webp",
-      "bytes": 751634,
-      "sha256": "67e174f465b1df02a973625380b59cf73f0e6e6143c70a0f561544889e09b2f2"
+      "bytes": 406032,
+      "sha256": "b76a358da032a19a350916b906c6f83e7a9ffd21b5da2828fe06a72f6ffbf263"
     },
     {
       "location": "public",
       "filename": "vesta-surface-surface@2x.webp",
-      "bytes": 1920352,
-      "sha256": "c8dee83a0dbf1643d8ef279969a1be901fb60b3a5204b543430106b6e006185a"
+      "bytes": 1212660,
+      "sha256": "d74615d206382a9c44d0c9fd42b5cfd4304c310dc8f73d7dfc45dbed9aafc610"
     },
     {
       "location": "public",
@@ -131,13 +131,13 @@
       "location": "prepared",
       "filename": "lenses.json",
       "bytes": 2655,
-      "sha256": "0726a4fd1ca318c7b79ebd39693cf6b3d192efff5a9e1e60ddea2bea62e82d93"
+      "sha256": "b4b9475eafb72b922beec9248f5ef63258f0e89df40aa326ab1e3405aa4ff095"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 8414,
-      "sha256": "5c6830c38e16988c30f5aa316d387a77b40561aafd692ad95f3570e57745dabd"
+      "bytes": 8018,
+      "sha256": "8c3d470407fd9fce01510ecc27b4f6581c618b922c5bfcd01829f03fedcf2ab6"
     },
     {
       "location": "prepared",
@@ -202,8 +202,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 8417,
-      "sha256": "277d759f33caff44fada9a2e34b8ab979bcfa3246a71edda70abbc7baf1eebec"
+      "bytes": 8021,
+      "sha256": "30915a5635a73621345c3970e889bf293b1e30e0cd2c79d9dc821326bef3a988"
     },
     {
       "location": "prepared",

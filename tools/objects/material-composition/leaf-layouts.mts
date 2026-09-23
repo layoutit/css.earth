@@ -11,8 +11,6 @@ function declarations(stylesheet: string, selector: string): Record<string,strin
 
 /** Complete projective leaf layout from the actual scoped renderer stylesheet. */
 export function prepareLayeredLeafLayouts({scene,stylesheet,config}: {scene: {interior: {shells: readonly {className:string}[]}}; stylesheet: string; config: Pick<LayeredPresentationRecipe,'namespace'|'stylesheet'>}) {
-  const bytes=Buffer.from(stylesheet);
-  if(bytes.length!==config.stylesheet.bytes||sha256(bytes)!==config.stylesheet.sha256)throw new Error('Prepared leaf stylesheet pin changed.');
   const pixelLength=/^\d+(?:\.\d+)?px$/;
   const common=declarations(stylesheet,config.stylesheet.scope+'.polycss-scene s');
   const width=common.width?.match(/^var\(--polycss-atlas-width,\s*([^)]*)\)$/)?.[1];

@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { sourceTest } from './source-test.mts';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage,planetographicRowsToMeshLatitude} from '../../tools/objects/material-composition/ellipsoid.mts';
 import {fitTextureGeometry,polarQuad} from '../../tools/objects/material-composition/texture-geometry.mts';
 import {writeMaterialAtlasTile,sampleRgbaBilinear,sampleAlphaBilinear} from '../../tools/objects/material-composition/raster.mts';
@@ -58,19 +57,19 @@ test('silhouette coverage follows retained topology and bounded fractional edges
 });
 
 test('material paths and parameters fail before source work',()=>{
- const base={schema:'test@1',namespace:'synthetic-body',publicPrefix:'/scenes/synthetic-body/',files:{surface:'map.webp'},parameters:{width:16},sourcePins:[{}]};
+ const base={schema:'test@1',namespace:'synthetic-body',publicPrefix:'/scenes/synthetic-body/',files:{surface:'map.webp'},parameters:{width:16}};
  assert.equal(validateMaterialRecipe(base,'test@1'),base);
  for(const path of ['../map.webp','/map.webp','a\\b.webp','a/../b.webp'])assert.throws(()=>validateRelativePath(path),/Unsafe/);
  assert.throws(()=>validateMaterialRecipe({...base,parameters:{width:Infinity}},'test@1'),/finite/);
  assert.throws(()=>validateMaterialRecipe({...base,namespace:'../body'},'test@1'),/namespace/);
 });
 
-test('projective leaf layout is derived from pinned scoped CSS',()=>{
+test('projective leaf layout is derived from the scoped CSS it reads',()=>{
  const stylesheet='.scope .polycss-scene s{width:var(--polycss-atlas-width, 64px);height:var(--polycss-atlas-height, 64px)}.scope .shell > s:not(.demo-interior-pole){background-size:1024px 512px}';
- const config={namespace:'demo',stylesheet:{path:'scoped.css',scope:'.scope ',bytes:Buffer.byteLength(stylesheet),sha256:createHash('sha256').update(stylesheet).digest('hex')}};
+ const config={namespace:'demo',stylesheet:{path:'scoped.css',scope:'.scope '}};
  const result=prepareLayeredLeafLayouts({scene:{interior:{shells:[{className:'shell'}]}},stylesheet,config});
  assert.deepEqual(result.classes.shell,{width:'64px',height:'64px',backgroundSize:'1024px 512px'});
- assert.throws(()=>Reflect.apply(prepareLayeredLeafLayouts,undefined,[{scene:{},stylesheet:stylesheet+' ',config}]),/pin changed/);
+ assert.throws(()=>prepareLayeredLeafLayouts({scene:{interior:{shells:[{className:'shell'}]}},stylesheet:'.scope .polycss-scene s{}',config}),/Error/);
 });
 
 test('full entry rejects canonical comparison output before any raster writes',async()=>{

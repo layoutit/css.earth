@@ -142,7 +142,6 @@ export interface RasterRecipe {
             width: number;
             height: number;
         };
-        quality: number;
     };
     lighting?: LightingRecipe;
     emission?: EmissionRecipe;
