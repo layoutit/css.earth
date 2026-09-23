@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wd-1856-534",
+  "angularDiameterMas": 0.0045,
+  "angularDiameterSource": "Computed here from the radius and distance: 2 x 8,417.97 km at 24.757 pc = 0.0045 mas. No diameter of WD 1856+534 is measured; the star is far too small and distant to resolve.",
+  "distanceParsecs": 24.756703496389235,
+  "distanceSource": "Gaia DR3 parallax 40.3931 +/- 0.0506 mas for source 2146576589564898688 (photometry/gaia-dr3-source.csv): 1000/40.3931 = 24.757 pc, no zero-point correction.",
+  "radiusKm": 8417.97,
+  "radiusSource": "0.0121 +/- 0.0002 solar radii (8,417.97 km at 695,700 km per solar radius), Limbach et al. (2025, arXiv:2504.16982), Table 1, from white dwarf model fits to its photometry and Gaia distance. About 1.32 Earth radii. Vanderburg et al. (2020, Nature 585, 363), Table 1, gave 0.0131 +/- 0.00054 solar radii.",
+  "effectiveTemperatureK": 4920,
+  "effectiveTemperatureSource": "Limbach et al. (2025), arXiv:2504.16982, Table 1: 4920 +/- 50 K. https://arxiv.org/abs/2504.16982",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured."
+  },
+  "planetCount": 1,
+  "planetCountSource": "One known planet, WD 1856+534 b, transiting every 1.408 days (Vanderburg et al. 2020, Nature 585, 363)."
+}

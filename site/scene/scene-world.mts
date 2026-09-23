@@ -1,7 +1,7 @@
 import type { createApplicationWorldContext } from '../application-world-context.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
-import type { FocusCallbacks } from '../prepared-context-navigation.mts';
+import type { FocusPublication } from '../prepared-context-navigation.mts';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
 
 export type WorldContextOwner = ReturnType<typeof createApplicationWorldContext>;
@@ -15,14 +15,14 @@ interface SceneWorldOptions {
   onMount(world: WorldContextMount): void;
   onSelectFocus(id: string): void;
   canPublishFocus(): boolean;
-  onFocusChange(session: SceneSession, url: string): void;
-  onFocusContentChange: NonNullable<FocusCallbacks['onFocusContentChange']>;
+  readFocus(): string | null;
+  onFocusChange(session: SceneSession, publication: FocusPublication): void;
   onCameraChange(session: SceneSession, world: WorldCameraPose): void;
   onError(error: unknown): void;
 }
 
 /** The world survives detail replacement; each detail owns only its connections to it. */
-export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onSelectFocus, canPublishFocus, onFocusChange, onFocusContentChange, onCameraChange, onError }: SceneWorldOptions) {
+export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onSelectFocus, canPublishFocus, onFocusChange, readFocus, onCameraChange, onError }: SceneWorldOptions) {
   let current: WorldContextMount | null = null;
   let task: Promise<WorldContextMount> | null = null;
   let pending: AbortController | null = null;
@@ -38,8 +38,8 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
           value?.destroy?.();
           throw controller.signal.reason ?? new DOMException('World context mount was cancelled.', 'AbortError');
         }
-        if (!value || typeof value.publish !== 'function' || typeof value.destroy !== 'function') {
-          throw new TypeError('Persistent world context mount must publish and destroy.');
+        if (!value || typeof value.createFramePresenter !== 'function' || typeof value.destroy !== 'function') {
+          throw new TypeError('Persistent world context mount must provide a frame presenter and destroy.');
         }
         current = value;
         onMount(value);
@@ -60,15 +60,13 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     if (!world || !navigation || typeof navigation.subscribe !== 'function') return;
     world.selectObject?.(session.objectId, navigation.frame);
     const disconnectFocus = world.connectNavigation?.(navigation, {
-      onFocusChange(url) { if (isCurrent(session)) onFocusChange(session, url); },
-      onFocusContentChange(record, sources, presentation) {
-        if (isCurrent(session)) onFocusContentChange(record, sources, presentation);
-      },
+      readFocus,
+      onFocusChange(publication) { if (isCurrent(session)) onFocusChange(session, publication); },
       canPublish: () => isCurrent(session) && canPublishFocus(),
     });
     if (disconnectFocus) session.own(disconnectFocus);
-    session.own(navigation.subscribe((frame, viewport) => {
-      if (isCurrent(session) && current === world) { onCameraChange(session, frame); world.publish(frame, viewport); }
+    session.own(navigation.subscribe(frame => {
+      if (isCurrent(session) && current === world) onCameraChange(session, frame);
     }));
     session.framePresenter?.enable();
   }

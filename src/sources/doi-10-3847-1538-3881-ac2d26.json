@@ -1,0 +1,39 @@
+{
+  "id": "doi-10-3847-1538-3881-ac2d26",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gemini/GMOS Transmission Spectroscopy of the Grazing Planet Candidate WD 1856+534 b",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac2d26"
+    },
+    {
+      "type": "arXiv",
+      "value": "2110.14106"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac2d26",
+      "label": "Xu et al. (2021)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-3881/ac2d26",
+      "checkedOn": "2026-09-23",
+      "locator": "Minimum mass"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "S. Xu, H. Diamond-Lowe, R. J. MacDonald et al.",
+      "scope": "citation",
+      "evidence": "Published author list"
+    }
+  ]
+}

@@ -31,7 +31,7 @@ export function objectFixture(id: string, worldFrame: PreparedWorldCameraFrame, 
     async loadScene() { throw new Error('This fixture does not mount a scene.'); }, ...overrides };
 }
 
-export const unusedSharedView: import('../../src/renderers/css/runtime/deferred-object-mount.ts').ObjectSharedView = {
+export const unusedSharedView: import('../../src/renderers/css/runtime/object-scene.ts').ObjectSharedView = {
   capture: () => null,
   async restore() { throw new Error('This fixture does not restore shared URLs.'); },
   subscribe() { return () => {}; },

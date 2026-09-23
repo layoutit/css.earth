@@ -1,5 +1,5 @@
 import type { LensControl, SettingControl } from "../src/renderers/css/runtime/object-contract.js";
-import type { ObjectSceneLifecycle } from "../src/renderers/css/runtime/deferred-object-mount.js";
+import type { ObjectSceneLifecycle } from "../src/renderers/css/runtime/object-scene.js";
 
 // The shell checks this lifecycle shape. The renderer supplies the complete
 // scene contract, including shared-view and navigation capabilities.

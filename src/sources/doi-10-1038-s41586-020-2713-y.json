@@ -1,0 +1,39 @@
+{
+  "id": "doi-10-1038-s41586-020-2713-y",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A giant planet candidate transiting a white dwarf",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-020-2713-y"
+    },
+    {
+      "type": "arXiv",
+      "value": "2009.07282"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-020-2713-y",
+      "label": "Vanderburg et al. (2020)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1038/s41586-020-2713-y",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. Vanderburg, S. A. Rappaport, S. Xu, I. J. M. Crossfield et al.",
+      "scope": "citation",
+      "evidence": "Published author list"
+    }
+  ]
+}

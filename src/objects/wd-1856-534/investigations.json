@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wd-1856-534",
+  "entries": [
+    {
+      "id": "published-star",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Limbach et al. (2025), Table 1: radius 0.0121 +/- 0.0002 solar radii, mass 0.605 +/- 0.013 solar masses, effective temperature 4920 +/- 50 K. They supersede Vanderburg et al. (2020), Table 1 (0.0131 solar radii, 0.518 solar masses, 4710 K). The display axis is sky north, not a measured pole.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.16982",
+        "https://doi.org/10.1038/s41586-020-2713-y"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "gaia-colour",
+      "subject": "Photosphere colour",
+      "status": "included",
+      "finding": "Gaia DR3 publishes only the continuous BP/RP coefficients for source 2146576589564898688 (has_xp_sampled = false). They are sampled on the archive grid with GaiaXPy 2.1.4 (tools/objects/observation/xp-continuous-sample.py), as for TRAPPIST-1. Signal-to-noise is 2 at 380 nm and 17 to 34 from 500 to 780 nm.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2146576589564898688&format=csv&DATA_STRUCTURE=RAW",
+        "https://doi.org/10.5281/zenodo.6674521"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "excluded",
+      "finding": "The only law fitted to this star's transits, Gendreau-Distler et al. (2026), Table 1 (Bessel R, stacked light curve), gives u1 = 0.52 +/- 0.32 and u2 = 0.52 +/- 0.34. The limb intensity 1 - u1 - u2 = -0.04 is below zero, which the shared limb preparer refuses. The transit is grazing, so it samples only part of the limb. The disc is drawn uniform.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ae8c30",
+        "https://arxiv.org/abs/2511.21611"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ],
+      "revisitWhen": "A published limb-darkening law for this white dwarf keeps the limb between dark and the centre brightness."
+    },
+    {
+      "id": "radial-velocity",
+      "subject": "Radial velocity",
+      "status": "included",
+      "finding": "The white dwarf's featureless spectrum gives no radial velocity. The record uses the mean of Gaia DR3's values for its co-moving companions G 229-20 A (17.19 +/- 0.33 km/s) and B (17.38 +/- 0.35 km/s): 17.29 km/s, a derived value. It moves the star by far less than a pixel over the scene's time range.",
+      "evidence": [
+        "https://gea.esac.esa.int/tap-server/tap/sync",
+        "https://doi.org/10.1038/s41586-020-2713-y"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "wide-companions",
+      "subject": "Wide companions G 229-20 A and B",
+      "status": "deferred",
+      "finding": "Vanderburg et al. (2020) identify WD 1856+534 as the distant third member of a triple with the M-dwarf pair G 229-20 A/B, about 43 arcseconds away. This package shows the white dwarf and its planet only.",
+      "evidence": [
+        "https://doi.org/10.1038/s41586-020-2713-y",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=G+229-20"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ],
+      "revisitWhen": "The M-dwarf pair is prepared as star packages bound to this system."
+    }
+  ]
+}

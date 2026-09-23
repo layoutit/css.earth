@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
+import { createSceneSelection } from '../scene/scene-selection.mts';
 import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mts';
 import { withPreparedFocus } from '../navigation/navigation-scope.mts';
 import { createImageFocusBank } from '../../src/renderers/css/universe/prepared-focus-bank.ts';
@@ -110,9 +111,18 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
   // The application request now owns supersession and abort; the focus executor receives that lifetime.
   const requests = createNavigationLifecycle({ onCancel() {}, onError: error => { assert.ok(error instanceof Error); errors.push(error); } });
   let available = false;
+  const selection = createSceneSelection({ objectId: 'mercury', initial: { kind: 'object', objectId: 'mercury' }, onChange() {} });
   executor.connect(owner as unknown as ObjectWorldNavigation, { canPublish: () => available,
-    onFocusChange: url => windowTarget.history.replaceState(windowTarget.history.state, '', url),
-    onFocusContentChange: (record, references, presentation) => { available = true; content.push({ record, references, presentation }); } });
+    readFocus: () => selection.current.kind === 'focus' ? selection.current.id : null,
+    onFocusChange: ({ record, sources: references, presentation, url: policy }) => {
+      available = true; content.push({ record, references, presentation });
+      selection.focus(record, references, presentation);
+      if (policy === 'preserve') return;
+      const url = new URL(windowTarget.location.href);
+      if (policy === 'reframe') url.searchParams.delete('v');
+      const selected = selection.url(url);
+      if (selected !== windowTarget.location.href) windowTarget.history.replaceState(windowTarget.history.state, '', selected);
+    } });
   function apply(url: string, frame: boolean) {
     available = false;
     const request = requests.begin({ id: 'mercury', url, subject: { kind: 'object', objectId: 'mercury' },

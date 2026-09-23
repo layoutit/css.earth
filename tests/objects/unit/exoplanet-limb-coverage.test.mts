@@ -9,7 +9,7 @@ const test = sourceTest();
 const planets = SCENE_OBJECTS.filter(object => object.classification === 'exoplanet');
 
 test('every registered exoplanet bakes the source-radius silhouette through a lit or emissive path', async () => {
-  assert.equal(planets.length, 32);
+  assert.equal(planets.length, 35);
   for (const { id } of planets) {
     const directory = resolve(projectRoot, 'src/objects', id);
     const measurements = requireRecord(await readJsonSource(resolve(directory, 'source/measurements.json')), `${id} measurements`);
@@ -49,7 +49,8 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     const astronomy = requireRecord(await readJsonSource(resolve(projectRoot, 'packages/astronomy/data/bodies', `${id}.json`)), `${id} astronomy`);
     hosts.add(requireString(requireRecord(astronomy.physical, `${id} physical`).parent, `${id} host`));
   }
-  assert.equal(hosts.size, 16);
+  assert.equal(hosts.size, 18);
+  const shapeOnly: string[] = [], uniform: string[] = [];
   for (const id of hosts) {
     const directory = resolve(projectRoot, 'src/objects', id);
     const raster = requireRecord(await readJsonSource(resolve(directory, 'source/preparation/raster.json')), `${id} raster`);
@@ -57,7 +58,11 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     const inputs = requireArray(manifest.inputs, `${id} inputs`).map(input => requireRecord(input, 'input'));
     const surface = requireRecord(requireArray(raster.surfaces, `${id} surfaces`)[0], `${id} surface`);
     const science = requireRecord(surface.science, `${id} science`);
+    // A shape-only star (no colour source fit to draw) carries no limb profile; every other host does.
+    if (science.kind === 'neutral-shape') { shapeOnly.push(id); continue; }
     assert.equal(science.kind, 'stellar-photometric-color');
+    // WD 1856+534's only fitted law puts the limb below zero, which the preparer refuses (its README): a uniform colour disc.
+    if (science.limbDarkening === undefined) { uniform.push(id); continue; }
     const law = requireRecord(science.limbDarkening, `${id} limb darkening`);
     assert.equal(law.law, 'quadratic');
     if (law.path !== undefined) assert.ok(inputs.some(input => input.path === law.path), `${id} limb input must be in its source manifest`);
@@ -73,4 +78,6 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     assert.ok(requireArray(inventory.assets, `${id} assets`).some(asset => typeof requireRecord(asset, 'asset').filename === 'string' &&
       String(requireRecord(asset, 'asset').filename).includes('-limb-color@2x.webp')), `${id} must publish its limb plate`);
   }
+  assert.deepEqual(shapeOnly.sort(), ['hr-8799', 'kepler-16-a']);
+  assert.deepEqual(uniform, ['wd-1856-534']);
 });

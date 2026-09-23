@@ -1,0 +1,34 @@
+{
+  "id": "simbad-pds-70",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for PDS 70 (CD-40 8434, V1032 Cen)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=PDS+70",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pds-70/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20main_id%2Csp_type%2Csp_bibcode%2Crvz_radvel%2Crvz_err%2Crvz_bibcode%20FROM%20basic%20JOIN%20ident%20ON%20oidref%3Doid%20WHERE%20id%3D'PDS%2070'",
+      "checkedOn": "2026-09-23",
+      "locator": "main_id CD-40 8434; spectral type K7IVe (2016MNRAS.461..794P); radial velocity 0.74 +/- 3.22 km/s (2022yCat.1355....0G)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; spectral type and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/pds-70/text.json#/card/sources/0"
+    }
+  ]
+}

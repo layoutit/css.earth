@@ -5,7 +5,7 @@ import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/obje
 import type { SharedView } from "../navigation/view-url.js";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './world-navigation-types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import type { ObjectDatasets } from './deferred-object-mount.js';
+import type { ObjectDatasets } from './object-scene.js';
 import type { SurfaceFeatureLayerRuntime } from '../labels/surface-feature-types.js';
 import { errorMessage } from "../navigation/types.js";
 import { publishObjectDiagnostics } from "./object-diagnostics.js";
@@ -206,7 +206,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       clear: () => surfaceFeatures?.clear(),
       setNavigationInFlight: (active: boolean, landed = true) => { featuresInFlight = active; surfaceFeatures?.setNavigationInFlight?.(active, landed); },
     }) : undefined;
-    const controller = Object.freeze({ ready, sharedView, ...(datasets ? { datasets } : {}), ...(destinations ? { destinations } : {}), ...(features ? { features } : {}), ...(navigation ? { navigation } : {}),
+    const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations } : {}), ...(features ? { features } : {}),
+      // Only the native owner knows when these capabilities can use its camera and selection.
+      get navigation() { return readyPublished && !lifetime.disposed ? navigation : undefined; },
+      get datasets() { return readyPublished && !lifetime.disposed ? datasets : undefined; },
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },

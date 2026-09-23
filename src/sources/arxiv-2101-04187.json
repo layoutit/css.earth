@@ -1,0 +1,62 @@
+{
+  "id": "arxiv-2101-04187",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wang et al. (2021): Constraining the Nature of the PDS 70 Protoplanets with VLTI/GRAVITY",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2101.04187"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abdb2d"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2101.04187",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/abdb2d",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2101.04187",
+      "checkedOn": "2026-09-23",
+      "locator": "Tables 4 and 5: atmospheric model fits to the spectra of b and c with their Bayes factors"
+    },
+    {
+      "path": "src/objects/pds-70-b/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/pds-70-b/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    },
+    {
+      "path": "src/objects/pds-70-c/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/pds-70-c/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "J. J. Wang",
+    "A. Vigan",
+    "S. Lacour",
+    "M. Nowak",
+    "T. Stolker",
+    "R. J. De Rosa"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wd-1856-534b",
+  "entries": [
+    {
+      "id": "published-planet",
+      "subject": "Radius and orbit",
+      "status": "included",
+      "finding": "Radius 0.946 +/- 0.017 Jupiter radii from Limbach et al. (2025), Table 1. Orbit shape a/R* = 336 +/- 14 and inclination 88.778 +/- 0.059 degrees from Vanderburg et al. (2020), Table 1, circular fit. Period 1.407939211 d and reference transit 2459204.572725 BJD_TDB from Gendreau-Distler et al. (2026), Table 2, which also limits the eccentricity to about 0.01. a/R* times the Limbach radius puts the planet at 0.0189 AU; Vanderburg et al. give 0.0204 AU with their larger star. MacDonald et al. (2026) refit a/R* = 339.25 +/- 5.92 from JWST, consistent.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.16982",
+        "https://doi.org/10.1038/s41586-020-2713-y",
+        "https://doi.org/10.3847/1538-3881/ae8c30",
+        "https://doi.org/10.1038/s41586-026-10514-7"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "excluded",
+      "finding": "Only bounds are published: at most 5.2 +0.7/-0.8 Jupiter masses (Limbach et al. 2025, from its heat and the system age) and at least 0.84 (Xu et al. 2021, from the flat transmission spectrum). No gravitational parameter is adopted.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.16982",
+        "https://doi.org/10.3847/1538-3881/ac2d26"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ],
+      "revisitWhen": "A measured mass is published."
+    },
+    {
+      "id": "jwst-heat",
+      "subject": "JWST thermal emission",
+      "status": "included",
+      "finding": "Limbach et al. (2025) detect mid-infrared excess from the planet in JWST MIRI imaging (programme 5204): brightness temperature 186 +6/-7 K. Shown as a fact. The light is blended with the white dwarf's and is not an image of the planet.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.16982",
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=5204"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "jwst-holdings",
+      "subject": "Other JWST and Keck data",
+      "status": "deferred",
+      "finding": "MAST, queried 2026-09-23 by cone search: public NIRSpec slit data from programmes 2358 (the transmission spectrum of MacDonald et al. 2026) and 2507; MIRI slitless data from 9033; MIRI IFU data from 9157, part still exclusive; NIRSpec data from 9033 and 9157 still exclusive. KOA lists 1646 Keck NIRSPEC and 4 ESI frames. None of them images the planet or gives its visible colour.",
+      "evidence": [
+        "https://mast.stsci.edu/api/v0/invoke",
+        "https://koa.ipac.caltech.edu/TAP"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ],
+      "revisitWhen": "A published phase curve or emission spectrum from programme 9033 or 9157 gives a day-night or colour measurement."
+    },
+    {
+      "id": "visible-colour",
+      "subject": "Visible colour",
+      "status": "excluded",
+      "finding": "No visible colour or reflected-light measurement of the planet exists. The sphere is the shared neutral gray, lit by its white dwarf.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.16982",
+        "https://doi.org/10.1038/s41586-026-10514-7"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ],
+      "revisitWhen": "A reflected-light or visible-band emission measurement is published."
+    }
+  ]
+}

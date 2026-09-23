@@ -38,6 +38,8 @@ test("Hiʻiaka preserves its okina using a real glyph in the title font", async 
   assert.throws(() => createObjectTitleSource("Hi\nʻiaka", font), /label is invalid/u);
   assert.ok(createObjectTitleSource("Kepler-16 (AB) b", font).path.length > 0);
   assert.throws(() => createObjectTitleSource("Kepler-16 (AB b", font), /label is invalid: "Kepler-16 \(AB b"/u);
+  assert.equal(createObjectTitleSource("WD 1856+534", font).label, "WD 1856+534");
+  assert.throws(() => createObjectTitleSource("WD 1856++534", font), /label is invalid: "WD 1856\+\+534"/u);
 });
 
 test("regenerates every planet title from one pinned Saturn recipe", async () => {

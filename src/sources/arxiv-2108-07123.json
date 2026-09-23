@@ -1,0 +1,62 @@
+{
+  "id": "arxiv-2108-07123",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Benisty et al. (2021): A Circumplanetary Disk Around PDS70c",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2108.07123"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ac0f83"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2108.07123",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ac0f83",
+      "label": "The Astrophysical Journal Letters"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2108.07123",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: ALMA 855 micrometre continuum at about 20 mas resolution; a compact source co-located with PDS 70 c"
+    },
+    {
+      "path": "src/objects/pds-70/text.json",
+      "locator": "/card/sources/1"
+    },
+    {
+      "path": "src/objects/pds-70/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/pds-70-c/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/pds-70-c/text.json",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "Myriam Benisty",
+    "Jaehan Bae",
+    "Stefano Facchini",
+    "Miriam Keppler",
+    "Richard Teague",
+    "Andrea Isella"
+  ]
+}

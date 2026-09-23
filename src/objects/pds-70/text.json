@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pds-70",
+  "card": {
+    "text": "Young orange star 112 parsecs away in Centaurus, where two giant planets are still forming in a disc.",
+    "sources": [
+      {
+        "catalogueId": "simbad-pds-70",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=PDS+70",
+        "label": "SIMBAD",
+        "checked": "2026-09-23",
+        "locator": "Basic data",
+        "quote": "Spectral type: K7IVe"
+      },
+      {
+        "catalogueId": "arxiv-2108-07123",
+        "url": "https://arxiv.org/abs/2108.07123",
+        "label": "Benisty et al. 2021",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "PDS70 is a unique system in which two protoplanets, PDS70b and c, have been discovered within the dust-depleted cavity of their disk"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "PDS 70 is a young K7 star 112 parsecs away. Two giant planets, b and c, orbit inside the gap of its dusty disc, caught while still forming.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2108-07123",
+        "url": "https://arxiv.org/abs/2108.07123",
+        "label": "Benisty et al. 2021",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "PDS70 is a unique system in which two protoplanets, PDS70b and c, have been discovered within the dust-depleted cavity of their disk"
+      },
+      {
+        "catalogueId": "gaia-dr3-pds-70",
+        "url": "https://gea.esac.esa.int/archive/",
+        "label": "Gaia DR3 parallax",
+        "checked": "2026-09-23",
+        "locator": "gaiadr3.gaia_source, source_id 6110141563309613056",
+        "quote": "parallax 8.8975 +/- 0.0191 mas"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its X-shooter spectrum",
+      "summary": "The colour of the star's measured spectrum. No surface picture exists."
+    },
+    "dust-ring": {
+      "title": "Dust ring, 0.87 mm",
+      "detail": "ALMA, 27 July 2019",
+      "summary": "The dust ring outside the planets' orbits in its own glow at 0.87 mm. Its depth is the tilted ring that fits.",
+      "sources": [
+        {
+          "catalogueId": "source-pds-70-disc-dust-b7-cont",
+          "url": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S",
+          "label": "ALMA project 2018.A.00030.S, pipeline continuum image",
+          "checked": "2026-09-23"
+        }
+      ]
+    }
+  }
+}

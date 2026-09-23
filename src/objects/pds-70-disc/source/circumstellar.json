@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-circumstellar-volume@1",
+  "id": "pds-70-disc",
+  "host": "pds-70",
+  "name": "PDS 70 dust ring",
+  "description": "The ring of dust around PDS 70 in its own glow at 0.87 millimetres, as ALMA imaged it on 27 July 2019 (project 2018.A.00030.S), in the colour map Benisty et al. (2021) show it in. The planets b and c orbit inside the gap it encloses. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, not a measurement.",
+  "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S",
+  "credit": "ALMA (ESO/NAOJ/NRAO), project 2018.A.00030.S (PI M. Benisty); ALMA Science Archive pipeline image; Benisty et al. 2021, ApJL 916, L2",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://almascience.eso.org/alma-data/data-policy",
+    "note": "ALMA data are released under CC BY 4.0; the observatory asks for its standard acknowledgement, which the host star's NOTICE.md carries."
+  },
+  "grid": {
+    "size": 200,
+    "halfUnits": 150,
+    "slabs": 100
+  },
+  "defaultLens": "dust",
+  "lenses": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 0.87 mm",
+      "title": "The dust ring around PDS 70 in its own glow at 0.87 millimetres, from ALMA",
+      "summary": "The ring of dust 50 to 100 au from the star, outside the planets' orbits, in its own glow at 0.87 mm, as ALMA imaged it.",
+      "description": "ALMA observed PDS 70 on 27 July 2019 at 0.87 millimetres, with its antennas up to 16 kilometres apart, sharp enough to separate the star's inner disc, the gap the two planets have cleared and the ring outside them. What it sees is the dust's own faint heat, not starlight. This is the ALMA pipeline's image from the public archive, shown in the colour map and scale Benisty et al. (2021) use in their Figure 1, which they made from the same observations with more processing. The ring is brighter on its north-west side, as they and Keppler et al. (2019) find. The image has no third axis, so the depth is inferred: a tilted ring of the geometry measured on it projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Its west side is drawn nearer, as Keppler et al. (2018) find from scattered light; how thick it is, is a stated convention. The star itself is the sphere at the centre.",
+      "program": "",
+      "archive": {
+        "band": "ALMA-B7-CONT",
+        "path": ".local/pds-70-disc/observations/member.uid___A001_X13b4_Xb1.PDS_70_sci.spw19_23_25_27.cont.I.pbcor.fits",
+        "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X13b4_Xb1.PDS_70_sci.spw19_23_25_27.cont.I.pbcor.fits",
+        "landing": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S",
+        "bytes": 9449280,
+        "unit": "Jy/beam",
+        "filter": "Band 7 continuum, 344 to 357 GHz (0.87 mm)",
+        "instrument": "ALMA 12-m array in its C-8 configuration",
+        "observed": "on 27 July 2019",
+        "title": "ALMA project 2018.A.00030.S, member OUS uid://A001/X13b4/Xb1, pipeline continuum image PDS_70_sci.spw19_23_25_27.cont.I.pbcor",
+        "credit": "ALMA (ESO/NAOJ/NRAO), project 2018.A.00030.S (PI M. Benisty); imaged by the ALMA pipeline (CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2018.A.00030.S.",
+        "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+        "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+        "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-09-23 (the product listed by DataLink for member OUS uid://A001/X13b4/Xb1); restored from that origin or the R2 source cache when missing."
+      },
+      "colorMap": {
+        "path": "benisty-2021-figure-1-colormap.json",
+        "range": [
+          -24.71,
+          389.56
+        ],
+        "unitScale": 1000000,
+        "unit": "µJy/beam",
+        "source": "the colour bar of Benisty et al. (2021), Figure 1, left panel (robust 0.5), decoded from the figure in the paper's arXiv source: matplotlib's inferno map, linear from -24.71 to 389.56 microJy/beam"
+      },
+      "geometry": "ring",
+      "channels": {
+        "red": [
+          "ALMA-B7-CONT"
+        ],
+        "green": [
+          "ALMA-B7-CONT"
+        ],
+        "blue": [
+          "ALMA-B7-CONT"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: at 0.87 mm the image is the dust's own thermal emission, not scattered starlight, and it is shown in its own brightness, Jy per beam.",
+      "innerMaskArcsec": 0,
+      "innerMaskSource": "No mask: an interferometer image has no coronagraph, and the star's own emission at 0.87 mm is below the image noise. The inner disc within 18 au and the cavity are drawn as imaged.",
+      "outerUnits": 130,
+      "backgroundAnnulusArcsec": [
+        2,
+        4
+      ],
+      "nearSidePositionAngleDeg": 250,
+      "nearSideSource": "the west side is drawn nearer, the side Keppler et al. (2018, A&A 617, A44, section 3.3) identify as the near side in scattered light; the planets' published orbits put the near halves of their orbits west too",
+      "heightOfRadius": 0.1,
+      "topAlpha": 0.5,
+      "published": {
+        "citation": "Keppler et al. (2019), A&A 625, A118, arXiv:1902.07639",
+        "url": "https://arxiv.org/abs/1902.07639",
+        "radiusUnits": 74,
+        "inclinationDeg": 51.7,
+        "positionAngleDeg": 156.7,
+        "toleranceDeg": 5,
+        "radiusTolerance": 0.1
+      }
+    }
+  ]
+}

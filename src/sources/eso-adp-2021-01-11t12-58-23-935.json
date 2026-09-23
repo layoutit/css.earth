@@ -1,0 +1,35 @@
+{
+  "id": "eso-adp-2021-01-11t12-58-23-935",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "ESO VLT/X-shooter spectrum ADP.2021-01-11T12:58:23.935 of PDS 70",
+  "identifiers": [
+    {
+      "type": "ESO dp_id",
+      "value": "ADP.2021-01-11T12:58:23.935"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://dataportal.eso.org/dataportal_new/file/ADP.2021-01-11T12:58:23.935",
+      "label": "ESO Science Archive"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pds-70/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Based on observations collected at the European Organisation for Astronomical Research in the Southern Hemisphere under ESO programme 105.205R.001.",
+      "scope": "The archived spectrum.",
+      "evidence": "Manifest credit field."
+    }
+  ],
+  "publisher": "European Southern Observatory"
+}

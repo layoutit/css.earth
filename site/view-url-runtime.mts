@@ -1,4 +1,4 @@
-import type { ObjectSharedView } from '../src/renderers/css/runtime/deferred-object-mount.js';
+import type { ObjectSharedView } from '../src/renderers/css/runtime/object-scene.js';
 import { formatSharedView } from "../src/renderers/css/dist/navigation.js";
 
 // One URL owner in the shared shell. Camera publication only schedules a
