@@ -64,7 +64,7 @@ S/2009 S1 and S/2009 S2 have no full ephemerides in these inputs; Uranus's
 S/2025 U1 has the identity conflict above. All three remain in the sidebar.
 There are no invented phases, spheres or fallback locations.
 
-Run `pnpm prepare:moon-labels` to reproduce the ignored
+Run `node tools/prepare/prepare-moon-labels.mts` to reproduce the ignored
 `site/moon-labels.prepared.json` from the pinned source archive and current world
 context. `pnpm prepare:world-context` runs this step after preparing the world.
 The browser only projects these fixed positions; it performs no ephemeris work.

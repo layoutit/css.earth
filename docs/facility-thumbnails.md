@@ -38,7 +38,7 @@ New source models require another pose review.
 
 ## Regeneration
 
-Run `pnpm prepare:facility-renders` for candidates, or append `--write` to replace
+Run `node tools/prepare/prepare-facility-renders.mts` for candidates, or append `--write` to replace
 the model images and library together after inspection. `--only=cassini` limits
 the selection. `--cache=<directory>` reuses verified downloads;
 `--output=<directory>` selects the review directory. Both default to

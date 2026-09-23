@@ -47,9 +47,9 @@ Use the repository's installed dependencies and built preparation entry points.
 Ordinary regression checks need neither Java nor SBMT:
 
 ```sh
-pnpm test:sbmt --unit     # checked-in synthetic case, identity and rejection tests; also runs in CI
-pnpm test:sbmt --restore  # restore only missing selected archive inputs, then test every case
-pnpm test:sbmt           # every case, offline after restoration
+node tools/oracles/test-sbmt.mts --unit     # checked-in synthetic case, identity and rejection tests; also runs in CI
+node tools/oracles/test-sbmt.mts --restore  # restore only missing selected archive inputs, then test every case
+node tools/oracles/test-sbmt.mts           # every case, offline after restoration
 node --max-old-space-size=512 tools/oracles/sbmt/check.mts
 ```
 

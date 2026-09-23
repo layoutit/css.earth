@@ -11,10 +11,11 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 
 | Workflow | Trigger and responsibility |
 | --- | --- |
-| [Shared universe](../.github/workflows/universe.yml) | PRs always run classification, contract lint and the advisory repository audit. Changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks, and — inside the advisory audit — the source-catalogue and bake-reproduction checks. Main runs every lane. |
+| [Shared universe](../.github/workflows/universe.yml) | PRs run classification and contract lint; changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks. Main runs every lane. |
+| [Repository audit](../.github/workflows/audit.yml) | Main pushes, scheduled runs and manual dispatch: documentation, repository completeness, source-catalogue reconciliation and bake reproduction. Advisory; does not run on PRs or gate deployment. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
-| [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check all published keys and test types. A separately selected production build/browser check also runs on relevant PRs; it does not publish the site. Keep it outside the merge-required set unless it fits the total PR budget. |
-| [Deploy](../.github/workflows/deploy.yml) | A successful Shared universe run on main automatically builds and deploys that exact revision. Manual dispatch also deploys. Merging is therefore not deployment-neutral. |
+| [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
+| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping. Merging validates the gate; it does not deploy. |
 
 The universe and preparation status jobs aggregate their matrix lanes: every
 selected lane must pass. Lint failures do not cancel unrelated checks or conceal
@@ -30,14 +31,13 @@ group and can supersede an older deployment.
 - Keep correctness, source integrity and relevant type checks blocking. Exhaustive
   remote sweeps and broad release qualification have scheduled/manual homes. Moving
   a check requires naming where its proof remains.
-- **No pull-request job contacts R2.** The merge gate is compile, build and behave;
-  it takes no network dependency that can be slow or flaky. Publication proof lives
-  at the two boundaries that can act on it: `pnpm check:deploy-assets` in
-  [Deploy](../.github/workflows/deploy.yml), which refuses to ship a build whose
-  runtime assets are not inventoried, and the full key sweep in the
-  [nightly workflow](../.github/workflows/nightly.yml). A contributor publishing an
-  object runs `node tools/assets/check-assets-published.mts --object=<id>` themselves; see
-  [the publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
+- PR jobs restore the prepared inputs their selected checks need, but do not run
+  an exhaustive R2 publication sweep. Contributors publishing an object run
+  `node tools/assets/check-assets-published.mts --object=<id>` themselves. The
+  default R2 deploy additionally runs `pnpm check:deploy-assets` and
+  `pnpm check:assets-published --require-verified`; missing or unverified keys
+  block publication. The nightly sweep checks every key again. See the
+  [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 - Gate on what ships; report what is merely incomplete. A merge-required check may
   only assert something whose failure means the shipped application is broken, wrong
   or unverifiable as shipped: it does not compile, it does not build, it does not
@@ -48,24 +48,20 @@ group and can supersede an older deployment.
 - `Repository and provenance audit (advisory)` is where that backlog runs. It is
   deliberately absent from the repository's required status checks, so its result is
   reported without blocking a merge. This is not `continue-on-error`, a skip, a wider
-  tolerance or a longer timeout: every check in it runs on every commit, fails the
+  tolerance or a longer timeout: every selected check runs on each audit invocation, fails the
   job, and is named in the run summary. Do not move a check there to silence it —
   move it only when its failure cannot make the deployed site broken or wrong, and
-  say in the pull request where the shipped-side proof remains. The provenance *pins*
-  behind published assets are shipped-side proof: they stay in `Contract lint`
-  (physical frame receipts and the prepared JSON each descriptor pins), which verifies by
-  SHA-256 the bytes the site actually serves.
-- Two whole lanes live in that advisory job rather than on the gate, and run there in
-  full with the same commands and arguments: the source-catalogue reconciliation that
-  was `Universe / sources`, and the bake reproduction that was `Preparation / world`.
-  Both assert that the *repository's* records reconcile and that a bake replays
-  byte-for-byte. The site bakes nothing — it serves the already-published,
-  SHA-256-pinned bank — so a reconciliation or reproduction gap is a stale recipe or a
-  drifted toolchain, not a broken page. They keep the same path-based selection they
-  had as job conditions, so an unrelated change still runs neither.
-- Restore only inputs the selected tests consume. Compiler jobs need pinned JSON
+  say in the pull request where the shipped-side proof remains.
+  Runtime inventories own the published bytes' SHA-256 identities. Source
+  manifests describe paths, acquisition and attribution; do not reintroduce
+  their retired file-stability pins as a merge gate.
+- Source-catalogue reconciliation and broad bake reproduction run in the separate
+  Repository audit workflow. They can expose missing sources or stale recipes
+  without changing a PR's required verdict. Inspect that workflow's result
+  separately; a green Shared universe run does not mean the audit passed.
+- Restore only inputs the selected tests consume. Compiler jobs need declared JSON
   and generated shell data, not the global texture bank. Image-consuming tests
-  must restore their real pinned inputs; missing data is not a pass.
+  must restore their real inputs; a source-dependent skip is not qualification.
 - Parallelize independent owners. Keep a writer ahead of readers of its outputs
   in the same workspace; local execution is serial where GitHub has isolated disks.
 - Cache dependency installation, compiled artifacts and compiler state—not test
@@ -76,26 +72,18 @@ group and can supersede an older deployment.
   declarations needed by a later typecheck.
 - Do not hide a failing check with `continue-on-error`, a wider tolerance, skipped
   cases or a larger timeout. Fix the owning defect and retain a regression test.
-- Narrowing a checkout does not buy latency here, and it is not free. HEAD's tracked
-  source-media bank under `src/objects/*/source/` is 737 MB of the 1.14 GB working tree,
-  so it looks like the obvious target. It is not: measured on run 35621432602, a non-cone
-  `sparse-checkout` that dropped that media took the tree to 533 MB and moved checkout by
-  nothing—22.4 s mean across the narrowed jobs against 25.8 s for the untouched jobs in
-  the same run, inside the ordinary 20-36 s spread. `filter: blob:none` does not help
-  either: Contract lint already sets it and checks out in the same time as jobs that set
-  no options. Checkout on these runners is dominated by fixed per-job cost, not by bytes.
-  Two hazards make it worse than neutral. Small non-JSON evidence under `source/` is read
-  by more steps than it looks: `tools/prepare/prepare-facilities.mts --catalog-only` reads roughly
-  350 such files and re-downloads or fails when one is absent, and the shell lane's
-  `pnpm test:sbmt --unit` still reads Eros `.SUM` and `.INFO` observations because
-  `SBMT_TEST_UNIT` narrows the case list without skipping those tests. Enumerating the
-  wanted extensions is an allowlist over a data-driven citation set, so a new body citing
-  a new extension fails later with a confusing network error. Separately,
-  `tools/ci/ci-cache-key.mts` digests the Git index, so paths
-  left out of the worktree hash as `deleted`—a different cache identity from the
-  unnarrowed jobs, and one that no longer reflects the real bytes. Spend effort on the
-  steps that actually dominate a lane instead: building shared packages and restoring
-  prepared assets, each 30-75 s against roughly 10 s of tests.
+- The heavy universe jobs use a partial clone and the shared `code-and-text`
+  sparse-checkout pattern. Nebula keeps a full tree because its restoration reads
+  tracked preview images. Validate any pattern change against the actual selected
+  consumers, including their source/label dependencies and cache keys.
+
+An earlier checkout experiment, recorded in [PR #475](https://github.com/layoutit/css.earth/pull/475)
+and run [35621432602](https://github.com/layoutit/css.earth/actions/runs/35621432602),
+measured 22.4 s mean for narrowed jobs versus 25.8 s for untouched jobs, inside
+that run's normal spread. [PR #549](https://github.com/layoutit/css.earth/pull/549)
+later introduced the current pattern and documented its checked consumers and
+nebula exception. Neither an older timing nor the smaller checkout alone proves
+that today's required feedback meets the budget; measure the current workflow.
 
 ## Adding tests
 
@@ -104,11 +92,11 @@ Selection belongs in the existing test runner's configuration or
 files must run without editing a workflow list. Keep test cases at their current
 paths; do not move them into a bespoke wrapper to make CI faster.
 
-Node owns the native suites; Vitest owns package/renderer discovery. The nebula
-application suite uses `node --import tsx --test` so TypeScript tests can resolve
-their typed owners without generated caller files. Some older preparation suites
-still use explicit selections; this is not a claim that every suite already has
-automatic discovery. Existing setup-sensitive exceptions must remain covered.
+Node owns the native suites; Vitest owns package/renderer discovery. `test:node`
+loads `tests/register-vite-suffix.mts` for the site's Vite imports. The lab CLI
+owns lab-test discovery; `pnpm test:lab` also runs its assets stage first.
+Some preparation suites keep explicit selections. Preserve setup-sensitive
+exceptions and distinguish source-dependent skips from executed checks.
 
 When changing selection, prove both that a newly matching file is discovered and
 that a deliberately failing assertion makes the command fail. When changing a
@@ -120,11 +108,13 @@ test goes red; restore it and confirm green. A comment alone proves nothing.
 The [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers)
 own the commands and credentials. These rules prevent stale-receipt failures:
 
-1. Verify the actual retained source bytes before changing any pin. Do not copy
-   an expected hash merely to silence a failure.
+1. Verify actual bytes against their owning inventory, delivery receipt or
+   toolchain lock before changing that record. Source manifests do not contain
+   digest expectations. Never copy an expected hash merely to silence a failure.
 2. If a source manifest changes, regenerate its dependent provenance using the
-   canonical preparation owner and the complete required prepared bank. Review
-   the resulting metadata; incomplete local inputs can produce a different receipt.
+   canonical preparation owner and the required prepared bank. Layered bodies
+   regenerate lineage; volumes and catalogues publish baked provenance. Review
+   the result and record missing source inputs without claiming a fresh bake.
 3. Refresh the tracked asset inventory, publish its new bytes, and verify the
    content-addressed key before merging. An inventory edit alone publishes nothing.
 4. Keep local-byte validation at **every upload attempt**, including retry paths
@@ -134,17 +124,20 @@ own the commands and credentials. These rules prevent stale-receipt failures:
 5. Restore and run the affected source/package checks. A deploy is a consumer:
    it must reject tracked metadata drift, not silently rebake and repin assets.
 
-PR publication checks normally inspect newly referenced keys. Changes to shared
-inventory logic can conservatively expand that scope. Confirmed missing keys fail;
-network uncertainty is reported as a warning, **not proof that publication passed**.
-The scheduled sweep checks unchanged keys too. Diagnose the first failing step:
-many red consumers may share one stale source or provenance receipt.
+The publication checker supports selecting objects or keys added since a Git
+reference for a local investigation. Its default verdict treats confirmed 404s
+as failures and network uncertainty as warnings, not proof of availability.
+The default R2 deploy uses `--require-verified` to reject either. No automatic PR
+publication sweep runs; the scheduled sweep includes unchanged keys. Diagnose
+the first failing owner when many consumers report the same missing input.
 
 ## Verifying a CI change
 
 Use the [contributor checks](../CONTRIBUTING.md#check-your-change) to prepare a
 clean checkout. `pnpm check:pr --list` prints the selected workflow commands;
-`pnpm check:pr` runs that plan locally. `--job=<id>` and `--quick` are explicitly
+`pnpm check:pr` runs that plan locally. The local runner can include advisory and
+production-smoke jobs even though their GitHub triggers exclude PRs.
+`--job=<id>` and `--quick` are explicitly
 partial checks, never a complete PR verdict. Local duration is not GitHub latency.
 
 Preparation tests can write generated metadata in the local checkout. GitHub's
@@ -169,8 +162,8 @@ Before merging a CI change:
   the measured critical path; do not silently raise the budget or remove proof.
 - Verify repository-required status names still match the workflows after any
   rename. Adding a required check needs an explicit budget review.
-- Remember that merging to main triggers deployment after main validation.
-  For a validation-only task, leave the PR unmerged unless deployment is authorized.
+- Merging triggers main validation. Deploying is a separate manual dispatch;
+  record the intended revision when requesting a deployment.
 
 Update this guide and the workflow budget comments in the same PR whenever the
 selection, cache, publication or deployment contract changes.
