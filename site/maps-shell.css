@@ -667,14 +667,19 @@
 }
 .object-card-tabpanel :is(.object-surface-minimap, .object-lens-legend-panel, .object-facility-preview) + .object-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
 .object-card-tabpanel .object-lens-legend-panel { width: 100%; min-height: 28px; }
-.object-card-tabpanel .object-lens-steps { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-.object-card-tabpanel .object-lens-step-label { flex: 1; text-align: center; color: var(--shell-text-secondary); font: var(--shell-font-value); font-variant-numeric: tabular-nums; }
+.object-card-tabpanel .object-lens-steps { display: flex; align-items: center; gap: 4px; margin: 6px 0 8px; }
+.object-card-tabpanel .object-lens-step-label { flex: 1; text-align: center; color: var(--shell-text); font: var(--shell-font-value); font-variant-numeric: tabular-nums; }
 .object-card-tabpanel .object-lens-step {
-  width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgb(255 255 255 / 0.18); background: rgb(255 255 255 / 0.06);
-  color: var(--shell-text); font-size: 18px; line-height: 1; cursor: pointer;
+  display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: transparent;
+  color: var(--shell-text-secondary); cursor: pointer;
 }
-.object-card-tabpanel .object-lens-step:disabled { opacity: 0.3; cursor: default; }
-.object-card-tabpanel .object-lens-step:not(:disabled):hover { background: rgb(255 255 255 / 0.14); }
+.object-card-tabpanel .object-lens-step:disabled { opacity: 0.25; cursor: default; }
+.object-card-tabpanel .object-lens-step:not(:disabled):hover { color: var(--shell-text); background: rgb(255 255 255 / 0.08); }
+.object-card-tabpanel .object-lens-step:focus-visible { outline: 0; box-shadow: 0 0 0 1px var(--shell-focus); }
+/* The same drawn chevron as the search caret: two borders of a square, turned to point left or right. */
+.object-card-tabpanel .object-lens-step-chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; }
+.object-card-tabpanel .object-lens-step-chevron.is-next { transform: translateX(-2px) rotate(-45deg); }
+.object-card-tabpanel .object-lens-step-chevron.is-previous { transform: translateX(2px) rotate(135deg); }
 .object-card-tabpanel .object-lens-legend-labels {
   display: grid;
   grid-template-columns: repeat(var(--legend-label-count), minmax(0, 1fr));
