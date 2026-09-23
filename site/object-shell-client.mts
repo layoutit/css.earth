@@ -179,7 +179,7 @@ export function mountObjectShell({
         }
         // Detail controls wait for their renderer; navigation anchors stay usable
         // so another breadcrumb or moon can replace an in-progress selection.
-        pendingControls = [...information.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel], .object-destination-intro')]
+        pendingControls = [...information.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]')]
           .filter(node => node.dataset.informationGroup !== 'overview')
           .map(node => [node, node.inert] as const);
         for (const [node] of pendingControls) node.inert = true;
@@ -1048,10 +1048,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     if (!(event.target instanceof windowTarget.Element) || !event.target.closest('a[data-prepared-focus-id]')) return;
     render(false);
     search.blur();
-  }, { signal: events.signal });
-  documentTarget.querySelector(".object-find-destination")?.addEventListener("click", () => {
-    browsing = true;
-    render(true, { resetQuery: true });
   }, { signal: events.signal });
   // Pressing or wheeling the scene leaves the search: the results close and the typed query stays for reopening.
   const sceneInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');

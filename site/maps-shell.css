@@ -261,8 +261,7 @@
 .object-destination-context { margin: 0 0 18px; color: var(--shell-text-muted); }
 .object-destination-status { margin: 0; color: var(--shell-text-secondary); }
 .object-destination-panel:not([hidden]) + .object-information-panel > :not(.object-lenses) { display: none; }
-.object-destination-back,
-.object-find-destination {
+.object-destination-back {
   padding: 7px 0;
   border: 0;
   color: var(--shell-text);
@@ -273,8 +272,6 @@
   font: 400 14px/1.4 var(--shell-ui-font);
   cursor: pointer;
 }
-.object-destination-intro { margin: 0 0 16px; }
-.object-destination-intro p { margin: 2px 0 0; color: var(--shell-text-muted); font: 400 12px/1.4 var(--shell-ui-font); }
 /* Shared search surface, independent of the selected sidebar panel or viewport. */
 .object-sidebar-search-card {
   position: relative;

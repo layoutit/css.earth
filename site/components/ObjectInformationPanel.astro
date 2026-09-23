@@ -11,7 +11,7 @@ import { prepareBodyRelations } from "../prepare-body-moons.mts";
 import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetLenses from "./DatasetLenses.astro";
 import InformationTabs from './InformationTabs.astro';
-const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], lenses, destinations } = Astro.props;
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], lenses } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
 const relations = prepareBodyRelations(objectId);
 const tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' },
@@ -22,10 +22,6 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
 
 <ObjectCard class="object-information-panel">
   <BodyOverview {objectId} {title} {introduction} {facts} {moreFacts} />
-      {destinations && <section class="object-destination-intro">
-        <button class="object-find-destination" type="button">Find a city</button>
-        <p>{destinations.description}</p>
-      </section>}
       {/* The overview card above carries the page heading; this tabbed card repeats the title. */}
       <ObjectCardHeader {objectId} heading={false} {title} {introduction}>
           <ObjectBreadcrumbs {objectId} />
