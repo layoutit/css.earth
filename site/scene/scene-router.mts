@@ -19,7 +19,7 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import { createNavigationContent } from '../navigation/navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks } from '../navigation/navigation-history.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import * as applicationWorldContext from '../application-world-context.mts';
+import { createWorldViewport } from '../world-viewport.mts';
 import { watchOverviewSelection } from '../overview-selection.mts';
 import { SYSTEM_CENTERS, loadSystemViews, systemViewsLoaded } from '../system-framing.mts';
 import { createSceneSelection, selectionTargetFromUrl } from './scene-selection.mts';
@@ -194,11 +194,6 @@ export function createSceneRouter({
         const contextual = await session.wait(Promise.all([world.ensure(), loadSystemViews()]));
         if (contextual.cancelled || !scenes.isCurrent(session)) return;
       }
-      // Start the world and system views beside the body's activation, which can wait on its surface textures;
-      // they connect once the body has mounted.
-      const worldLoading = persistentWorldContext && !world.current ? world.ensure() : null;
-      worldLoading?.catch(() => {});
-      if (!systemViewsLoaded()) void loadSystemViews().catch(report);
       const framePresenter = world.createFramePresenter();
       session.framePresenter = framePresenter;
       if (framePresenter) session.own(() => framePresenter.destroy());
@@ -213,8 +208,10 @@ export function createSceneRouter({
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
+      // The world and system views load once the body is ready, so its textures have the connection to themselves.
+      if (!systemViewsLoaded()) void loadSystemViews().catch(report);
       if (world.current) world.connect(session);
-      else if (worldLoading) void worldLoading.then(() => {
+      else if (persistentWorldContext) void world.ensure().then(() => {
         if (scenes.isCurrent(session)) { world.connect(session); publishSelection(); }
       }).catch(error => { if (!(error instanceof Error && error.name === 'AbortError')) report(error); });
       publishSelection();
@@ -494,9 +491,15 @@ export function createSceneRouter({
 
 function createWorldContextOwner({ objects, objectId, navigation }: { objects: readonly ObjectEntry[]; objectId: string; navigation: Navigation | null; stage: HTMLElement }) {
   if (!navigation || !objects.some(object => object.id === objectId && object.worldFrame)) return null;
-  const create = applicationWorldContext.createApplicationWorldContext;
-  if (typeof create !== 'function') return null;
-  return create();
+  // The world renderer, its markers and the minimap data stay out of the startup script; they load with the world.
+  let world: Promise<ReturnType<typeof import('../application-world-context.mts').createApplicationWorldContext>> | null = null;
+  return {
+    createViewport: createWorldViewport,
+    async mount(options: Parameters<WorldContextOwner['mount']>[0]) {
+      world ??= import('../application-world-context.mts').then(module => module.createApplicationWorldContext());
+      return (await world).mount(options);
+    },
+  } satisfies WorldContextOwner;
 }
 
 if (typeof document !== "undefined") {
