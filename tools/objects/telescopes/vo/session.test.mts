@@ -50,7 +50,7 @@ test('confirmed direct FITS table reaches F08 export through saved exploration a
     assert.equal(saved.choices.length, 1); assert.equal(saved.choices[0]!.state, 'qualify');
     const result = await getSession(root, saved.directory, 1, () => {}, api), data = await delivery(result.resultPath);
     assert.equal(data.record.schema, 'cssearth-telescope-delivery@3');
-    assert.equal(data.record.facts.kind, 'table');
+    assert.deepEqual(data.record.facts, { target: target.id, verified: true, kind: 'table', result: 'telescope-product' });
     const outputs = await listArtifactOutputs(result.resultPath);
     assert.ok(outputs.familyOperations?.some(operation => operation.id === 'table-export'));
     assert.equal(outputs.outputs.length, 0);
