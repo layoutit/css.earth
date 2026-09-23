@@ -1,5 +1,6 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import {basename} from 'node:path';
+import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 import type {WebpOptions} from 'sharp';
 import type {RasterInfo} from '../observation/raster.mts';
 import type {PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInput, ResizeKernel} from './asset-contract.mts';
@@ -363,12 +364,18 @@ async function prepareMaterialBanks() {
             top: tileRowIndex * stride + gutter,
           });
         }
-        await sharp(shard, {
+        const rowImage = sharp(shard, {
           raw: { width: shardWidth, height: shardHeight, channels: 4 },
-        }).webp({ lossless: true }).toFile(output(
+        });
+        const rowPath = output(
           `${config.namespace}-${role}-row-${String(shardIndex).padStart(2, "0")}` +
           `${suffix}.webp`,
-        ));
+        );
+        // Atmosphere rows carry colour in RGB: it goes through the lossy lane with its alpha exact (quality 80 flags no
+        // pixel on rows 29 to 31 and keeps all 113 alpha levels; 1.46 -> 0.46 MB). Lighting rows carry their shading in
+        // alpha and stay lossless.
+        if (role === "atmosphere") await writeLossyWebp(rowImage, rowPath, { alphaQuality: 100, effort: 6 });
+        else await rowImage.webp({ lossless: true }).toFile(rowPath);
       }
     }
   }
