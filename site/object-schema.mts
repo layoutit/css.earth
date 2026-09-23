@@ -5,8 +5,8 @@ import type { PositionM } from '@cssearth/engine';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { SceneFactory } from './browser-types.mts';
 import { record } from './browser-types.mts';
-import { parseNavigationDistance } from './navigation-distance.mts';
-import type { NavigationDistance } from './navigation-distance.mts';
+import { parseNavigationDistance } from './navigation/navigation-distance.mts';
+import type { NavigationDistance } from './navigation/navigation-distance.mts';
 
 export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole';
 export interface ObjectDefinitionInput {

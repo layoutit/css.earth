@@ -6,7 +6,7 @@ import { requireArray, requireRecord, requireString } from '../../sources/source
 import { fileSize, PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
 import { delivery, listOutputs as listDeliveryOutputs, type OutputChoice } from './outputs.mts';
 import { validateProjectionSource, verifiedProduct } from './projection.mts';
-import { validateSphereSource } from './sphere.mts';
+import { validateSphereSource } from './sphere/sphere.mts';
 import { inspectSpatialObject } from './spatial-handoff.mts';
 import { contextTarget, sourceContext } from './delivery-context.mts';
 import type { FamilyOperation } from './family-handlers.mts';

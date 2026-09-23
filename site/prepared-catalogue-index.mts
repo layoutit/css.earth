@@ -1,4 +1,4 @@
-import { distanceDescription } from './navigation-distance.mts';
+import { distanceDescription } from './navigation/navigation-distance.mts';
 import { FOCUS_SOURCE_DOCUMENTS } from './focus-catalog-data.mts';
 import { isSceneObject } from './prepared-focus-object.mts';
 import { objectClassificationLabel, SEARCH_OBJECTS } from './search-objects.mts';

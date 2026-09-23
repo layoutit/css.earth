@@ -3,7 +3,7 @@ import type { createPreparedUniverse } from '../src/renderers/css/universe/prepa
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
 import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
-import { readPreparedFocusSelection, withPreparedFocus } from './navigation-scope.mts';
+import { readPreparedFocusSelection, withPreparedFocus } from './navigation/navigation-scope.mts';
 import { acquirePreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusPolicy, PreparedFocusPresentation } from './prepared-focus.mts';
