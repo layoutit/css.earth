@@ -1895,6 +1895,14 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   -webkit-touch-callout: none;
 }
 
+/* A moon's catalogue thumbnail fills its 14px marker slot instead of spilling over the rows. */
+.object-information-panel > [data-information-panel="moons"] .object-lens-icon > .object-search-preview {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Portrait tablets: the sheet drops its tab strip and shows every section at once, named by
    its panel's own label. The title, the dataset list and the factsheet float down the left; the
    chosen dataset, its galleries and its spacecraft cards stack on the right. Floats rather than a
@@ -2002,12 +2010,5 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   .object-information-panel > [data-information-panel="moons"] .object-list {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     column-gap: 24px;
-  }
-  /* A moon's catalogue thumbnail fills its 14px marker slot instead of spilling over the rows. */
-  .object-information-panel > [data-information-panel="moons"] .object-lens-icon > .object-search-preview {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
   }
 }
