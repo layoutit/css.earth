@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-29391-b",
+  "card": {
+    "text": "Young giant planet about 9 au from 51 Eridani, with methane in its atmosphere.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1508-03084",
+        "url": "https://arxiv.org/abs/1508.03084",
+        "label": "Macintosh et al. 2015",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Near-infrared observations show a spectrum with strong methane and water vapor absorption."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "51 Eridani b is a young gas giant about 9 au from its star, on an eccentric orbit of about 23 years. At around 800 K it is cool for a planet seen directly.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2602-10260",
+        "url": "https://arxiv.org/abs/2602.10260",
+        "label": "Denis et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "we derive e = 0.55"
+      },
+      {
+        "catalogueId": "arxiv-2510-08327",
+        "url": "https://arxiv.org/abs/2510.08327",
+        "label": "Madurowicz et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "providing the first direct confirmation of these two molecules coexisting in chemical disequilibrium"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing its own heat. No surface, colour or spin is measured."
+    }
+  }
+}
