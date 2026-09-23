@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wd-1856-534",
+  "card": {
+    "text": "A white dwarf smaller than the giant planet that orbits it.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-020-2713-y",
+        "url": "https://doi.org/10.1038/s41586-020-2713-y",
+        "label": "Vanderburg et al. (2020), Nature 585, 363",
+        "checked": "2026-09-23",
+        "locator": "Table 1",
+        "quote": "Radius Ratio (Rp/R⋆) 7.28±0.65"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WD 1856+534 is the cooling core of a dead star, about 1.3 times Earth's size. A planet nearly Jupiter's size circles it every 34 hours.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2504-16982",
+        "url": "https://arxiv.org/abs/2504.16982",
+        "label": "Limbach et al. (2025)",
+        "checked": "2026-09-23",
+        "locator": "Table 1",
+        "quote": "Radius 0.0121± 0.0002 R⊙"
+      },
+      {
+        "catalogueId": "doi-10-1038-s41586-020-2713-y",
+        "url": "https://doi.org/10.1038/s41586-020-2713-y",
+        "label": "Vanderburg et al. (2020), Nature 585, 363",
+        "checked": "2026-09-23",
+        "locator": "Table 1",
+        "quote": "Orbital Period (P)∗ 1.4079405"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its spectrum",
+      "summary": "Gaia colour on a uniform disc; no resolved image or limb darkening.",
+      "sources": [
+        {
+          "catalogueId": "gaia-dr3-wd-1856-534",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-09-23",
+          "locator": "BP/RP continuous spectrum, source 2146576589564898688"
+        }
+      ]
+    }
+  }
+}

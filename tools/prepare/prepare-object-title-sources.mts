@@ -65,8 +65,8 @@ export function createObjectTitleSource(label: string, font: Pick<fontkit.Font, 
   if (!font || typeof font.layout !== "function") {
     throw new TypeError("Planet title generation requires a loaded font.");
   }
-  if (typeof label !== "string" || !/^[\p{L}\p{N}]+\*?(?:\.?[ /–-][\p{L}\p{N}]+\*?)*$/u.test(label)) {
-    throw new TypeError("Planet title label is invalid.");
+  if (typeof label !== "string" || !/^[\p{L}\p{N}]+\*?(?:\.?[ /–+-][\p{L}\p{N}]+\*?)*$/u.test(label)) {
+    throw new TypeError(`Planet title label ${JSON.stringify(label)} is invalid: use letters and digits joined by single spaces, slashes, dashes or plus signs.`);
   }
 
   const scale = OBJECT_TITLE_RECIPE.fontSize / font.unitsPerEm;

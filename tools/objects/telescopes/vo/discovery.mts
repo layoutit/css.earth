@@ -16,6 +16,8 @@ export interface ServiceProfile {
   readonly collections?: readonly string[];
   readonly compactNameVariants?: boolean;
   readonly facetByInstrument?: boolean;
+  /** False where the service cannot select ObsCore footprints: the search is by name only and says the region was not applied. */
+  readonly footprintSearch?: false;
 }
 /** The archive boundary needs only explicit discovery/subset inputs. Scientific acceptance
  * criteria remain in CapabilityRequest and are never synthesized for target exploration. */
@@ -40,15 +42,17 @@ export interface DiscoveryRequest {
   readonly transferLimits?: TransferLimits;
 }
 /** A bounded service list, with no target-specific selection rules. */
+// MAST's CAOM TAP rejects INTERSECTS (TAPRegExt adqlgeo is unsupported) and CONTAINS over s_region returned HTTP 504, both
+// measured 2026-09-23 for WD 1856+534; its searches are by name only.
 export const SERVICES: readonly ServiceProfile[] = [
   { authority: 'ivo://eso.org', service: 'https://archive.eso.org/tap_obs', table: 'ivoa.ObsCore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://archive.eso.org/tap_obs' },
   { authority: 'ivo://alma', service: 'https://almascience.eso.org/tap', table: 'ivoa.obscore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://almascience.eso.org/alma-data/archive/archive-notebooks/nb9_ALMA_Download_data.html' },
   { authority: 'ivo://esa/psa', service: 'https://psa.esa.int/psa-tap/tap', table: 'psa.epn_core', model: 'epn-tap-2.0', identityColumns: ['granule_uid'], documentation: 'https://archives.esac.esa.int/psa/' },
   { authority: 'ivo://archive.stsci.edu/caomtap', service: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/', table: 'ivoa.obscore',
-    model: 'obscore-1.1', identityColumns: ['access_format', 'obs_publisher_did', 'obs_id', 'access_url'], timeScale: 'utc', collections: ['JWST'], label: 'MAST JWST', compactNameVariants: true, facetByInstrument: true,
+    model: 'obscore-1.1', identityColumns: ['access_format', 'obs_publisher_did', 'obs_id', 'access_url'], timeScale: 'utc', collections: ['JWST'], label: 'MAST JWST', compactNameVariants: true, facetByInstrument: true, footprintSearch: false,
     documentation: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/examples' },
   { authority: 'ivo://archive.stsci.edu/caomtap', service: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/', table: 'ivoa.obscore',
-    model: 'obscore-1.1', identityColumns: ['access_format', 'obs_publisher_did', 'obs_id', 'access_url'], timeScale: 'utc', collections: ['HST'], label: 'MAST HST', compactNameVariants: true, facetByInstrument: true,
+    model: 'obscore-1.1', identityColumns: ['access_format', 'obs_publisher_did', 'obs_id', 'access_url'], timeScale: 'utc', collections: ['HST'], label: 'MAST HST', compactNameVariants: true, facetByInstrument: true, footprintSearch: false,
     documentation: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/examples' },
 ];
 export interface ArchiveTarget { readonly id: string; readonly names: readonly string[]; readonly classification?: string; readonly classificationSource?: string }
@@ -156,14 +160,17 @@ export function fieldAssociation(association: TargetAssociation, rawName: Json |
 }
 /** The circle a search selects footprints by: the explicit cutout if there is one, otherwise the footprint. */
 export const searchCircle = (request?: DiscoveryRequest): IcrsCircle | undefined => request?.region ?? request?.footprint;
+/** The circle this service applies: ObsCore footprints, where the service can select them. */
+const footprintCircle = (profile: ServiceProfile, request?: DiscoveryRequest): IcrsCircle | undefined =>
+  profile.model === 'obscore-1.1' && profile.footprintSearch !== false ? searchCircle(request) : undefined;
 export function targetQuery(profile: ServiceProfile, names: readonly string[], sampleLimit = 50, request?: DiscoveryRequest): string {
   if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)?$/u.test(profile.table)) throw new TypeError('Unvalidated TAP table identifier.');
   if (!Number.isSafeInteger(sampleLimit) || sampleLimit < 1 || sampleLimit > 1000 || !names.length) throw new TypeError('A bounded TAP target-name query is required.');
   const variants = profile.compactNameVariants ? names.flatMap(name => [name, name.replace(/\s+/gu, ''), name.replace(/\s+/gu, '-')]) : names;
   const literals = [...new Set(variants)].map(n => { if (!n.trim() || /[\u0000-\u001f]/u.test(n)) throw new TypeError('Invalid target name.'); return `'${n.replaceAll("'", "''")}'`; });
   const byName = `target_name IN (${literals.join(',')})`;
-  const circle = searchCircle(request);
-  const filters = [circle && profile.model === 'obscore-1.1' ? `(${byName} OR ${regionClause(circle)})` : byName];
+  const circle = footprintCircle(profile, request);
+  const filters = [circle ? `(${byName} OR ${regionClause(circle)})` : byName];
   if (profile.collections?.length) {
     const collections = profile.collections.map(name => {
       if (!/^[A-Za-z0-9_-]+$/u.test(name)) throw new TypeError('Invalid archive collection.');
@@ -232,7 +239,7 @@ export async function discover(root: string, profile: ServiceProfile, request: D
     timeFormat: profile.model === 'obscore-1.1' ? 'mjd' : 'jd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}),
     ...(profile.model === 'epn-tap-2.0' ? { timeModel: profile.model } : {}) })).vo!;
   const snapshot = parseSnapshot({ schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
-    request, query, sampleLimit, scope: `${searchCircle(request) && profile.model === 'obscore-1.1' ? 'Exact target-name/alias search, plus records whose footprint intersects the requested ICRS circle (in the field, not identified as the target)' : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${searchCircle(request) && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
+    request, query, sampleLimit, scope: `${footprintCircle(profile, request) ? 'Exact target-name/alias search, plus records whose footprint intersects the requested ICRS circle (in the field, not identified as the target)' : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${searchCircle(request) && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${searchCircle(request) && profile.model === 'obscore-1.1' && profile.footprintSearch === false ? ' This provider cannot select footprints; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
     completeness: response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' ? 'overflow' : 'bounded-sample' });
   await writeFile(resolve(directory, `${digest(snapshot)}.json`), canonical(snapshot));
   return snapshot;

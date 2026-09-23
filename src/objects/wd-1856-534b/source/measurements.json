@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wd-1856-534b",
+  "radiusKm": 67631.4,
+  "radiusSource": "Limbach et al. (2025, arXiv:2504.16982), Table 1: radius 0.946 +/- 0.017 Jupiter radii (at 71492 km per Jupiter radius). No gravitational parameter is adopted: the mass is bounded, not measured. Limbach et al. (2025) give an upper limit of 5.2 +0.7/-0.8 Jupiter masses from its measured 186 K heat and the system age; Xu et al. (2021, arXiv:2110.14106) give a lower limit of 0.84 Jupiter masses. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.407939211,
+  "orbitalPeriodSource": "Gendreau-Distler et al. (2026), AJ 172, 141 (arXiv:2511.21611), Table 2, constant-period model without TESS: 1.407939211 +/- 5e-9 d, fitted to transits spanning 1498 orbits.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, visible colour, map or oblateness of WD 1856+534 b is measured; its size, orbit and mid-infrared heat are."
+  },
+  "temperatureK": 186,
+  "temperatureSource": "Limbach et al. (2025, arXiv:2504.16982), abstract and Table 1: mid-infrared brightness temperature 186 +6/-7 K from JWST MIRI photometry (programme 5204), the planet's own heat blended with the white dwarf's light."
+}
