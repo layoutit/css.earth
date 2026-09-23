@@ -1,3 +1,15 @@
+export const VERSION = '0.1.0';
+
+export const SHORT_HELP = `Telescope — explore observations and turn qualified data into outputs.
+
+Start here:
+  telescope explore TARGET                 Find observations and choose one in a terminal
+  telescope outputs ARTIFACT.json          Inspect a delivery and choose an output
+
+Use telescope --help for all commands, filters, and exit codes.
+Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope/README.md
+`;
+
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
 
 Human entry points:
@@ -6,7 +18,7 @@ Human entry points:
   telescope import SPEC.json --out DIRECTORY
   telescope families [--json]
   telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY [--json]
-  telescope family-run DESCRIPTOR.json OPERATION [--params PARAMS.json] --out DIRECTORY [--json]
+  telescope family-run DESCRIPTOR.json OPERATION [--component ID] [--params PARAMS.json] --out DIRECTORY [--json]
   telescope outputs ARTIFACT.json [--structure NAME]
   telescope candidates STAR --epoch MJD|DATE --out DIRECTORY [--figure-background transparent|opaque]
   telescope associate MEASUREMENTS.csv --system STAR --out DIRECTORY [--orbit-draws N] [--fit-astrometry] [--fit-orbits]
@@ -91,6 +103,7 @@ Explore filters and query options use micrometres, arcseconds and kilometres:
   --json                             JSON-only stdout; progress on stderr
   --verbose                          Full exploration diagnostics, query evidence or error stack
   --help                             Show this help
+  --version                          Show the Telescope CLI version
 
 Explorations and queries save immutable numbered choices in explore.json and query.json. Get
 revalidates the exact saved identity, qualifies it if needed, and exports pinned data and evidence
@@ -119,4 +132,6 @@ fulfilled, unresolved or refused verdict.
 Exit codes: 0 exploration/retrieval completed or request fulfilled, 1 operation failed, 2 invalid arguments,
 3 no retrievable choice or unresolved request, 4 refused request.
 The npm command accepts --workspace PATH (or CSSEARTH_WORKSPACE) for a css.earth science checkout.
+Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope/README.md
+Issues: https://github.com/layoutit/css.earth/issues
 `;

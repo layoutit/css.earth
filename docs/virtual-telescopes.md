@@ -900,7 +900,10 @@ pnpm telescope outputs work/sun-cor1-volume/physical-grid-volume.json
 
 Family-operation receipts identify the complete local TypeScript module closure discovered by the
 build graph, plus the pinned scientific toolchain. Changing a helper imported by the selected
-operation therefore invalidates reuse even when its public owner module is unchanged.
+operation therefore invalidates reuse even when its public owner module is unchanged. Imports of
+generated `dist/` modules with corresponding source paths resolve to their authored TypeScript
+for this fingerprint,
+so an unchanged checkout does not need a renderer build to identify a family operation.
 
 ## From a delivered product to an output
 

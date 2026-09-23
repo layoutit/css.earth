@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { resolve } from 'node:path';
+import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
@@ -15,21 +15,38 @@ import { listArtifactOutputs } from './artifact-outputs.mts';
 import { projectOutput } from './projection.mts';
 import { exportSphere } from './sphere.mts';
 import type { DeliveryContext } from './delivery-context.mts';
-import { HELP } from '../../../packages/telescope/src/help.mts';
+import { HELP, SHORT_HELP, VERSION } from '../../../packages/telescope/src/help.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, searchPapers } from './papers.mts';
 import { familyCoverageLedger } from './family-handlers.mts';
 import type { FamilyOperation } from './family-handlers.mts';
 import { executeFamilyOperation, familyOperationNeedsParameters, type FamilyOperationParameters } from './family-operation.mts';
 import { requireString } from '../../sources/source-values.mts';
-export { HELP };
+export { HELP, SHORT_HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
-export type CliOptions = {readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export type CliOptions = {readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
-  if (!args.length || args.includes('--help') || args.includes('-h')) return { command: 'help' as const };
-  if(command==='family-run'){const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();for(let i=1;i<args.length;i++){const arg=args[i]!;if(!arg.startsWith('-')){positional.push(arg);continue;}if(arg==='--json'||arg==='--verbose'){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);flags.add(arg);continue;}if(!['--params','--out'].includes(arg)||values.has(arg))throw new TypeError('Use telescope family-run DESCRIPTOR.json OPERATION --params PARAMS.json --out DIRECTORY [--json].');const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}.`);values.set(arg,value);}if(positional.length!==2||!values.has('--out'))throw new TypeError('Use telescope family-run DESCRIPTOR.json OPERATION --params PARAMS.json --out DIRECTORY [--json].');return{command,descriptor:resolve(positional[0]!),operationId:positional[1]!,...(values.has('--params')?{parameters:resolve(values.get('--params')!)}:{}),directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};}
+  if (!args.length) return { command: 'help' as const, short: true };
+  if (command === 'help' || args.includes('--help') || args.includes('-h')) return { command: 'help' as const };
+  if (args.length === 1 && command === '--version') return { command: 'version' as const };
+  if(command==='family-run'){
+    const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
+    for(let i=1;i<args.length;i++){
+      const arg=args[i]!;
+      if(!arg.startsWith('-')){positional.push(arg);continue;}
+      if(arg==='--json'||arg==='--verbose'){
+        if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);
+        flags.add(arg);continue;
+      }
+      if(!['--params','--component','--out'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated family-run option ${arg}.`);
+      const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}.`);
+      values.set(arg,value);
+    }
+    if(positional.length!==2||!values.has('--out'))throw new TypeError('Use telescope family-run DESCRIPTOR.json OPERATION [--component ID] [--params PARAMS.json] --out DIRECTORY.');
+    return{command,descriptor:resolve(positional[0]!),operationId:positional[1]!,...(values.has('--component')?{componentId:values.get('--component')!}:{}),...(values.has('--params')?{parameters:resolve(values.get('--params')!)}:{}),directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};
+  }
   if(command==='family-assess'){const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();for(let i=1;i<args.length;i++){const arg=args[i]!;if(!arg.startsWith('-')){positional.push(arg);continue;}if(arg==='--json'||arg==='--verbose'){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);flags.add(arg);continue;}if(arg!=='--out'||values.has(arg))throw new TypeError('Use telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY.');const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError('Missing value for --out.');values.set(arg,value);}if(positional.length!==2||!values.has('--out'))throw new TypeError('Use telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY.');return{command,request:resolve(positional[0]!),descriptor:resolve(positional[1]!),directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};}
   if(command==='papers'){
     const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
@@ -120,7 +137,7 @@ export function parseCli(args: readonly string[]): CliOptions {
     validateOutputRequest(selection);
     return {command,...common,directory:resolve(directory),selection};
   }
-  if (command !== 'query' && command !== 'get') throw new TypeError('Expected explore, papers, import, query, get, outputs, family-run, export or project. Use telescope --help.');
+  if (command !== 'query' && command !== 'get') throw new TypeError('Unknown telescope command. Use telescope --help to list commands.');
   const values = new Map<string, string>(), switches = new Set<string>(), positional: string[] = [], requestArgs: string[] = [];
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -165,12 +182,16 @@ export function formatSession(session: Session, directory: string): string {
   for (const issue of session.answer.sourceIntakeIssues ?? []) lines.push(`Source ${issue.state}: ${issue.path}. ${issue.reason}`);
   for (const service of session.answer.archiveAccess?.services ?? []) lines.push(`${service.service}: ${service.state}. ${service.reason}`);
   for (const record of session.answer.archiveAccess?.records ?? []) if (!record.products.length) lines.push(`Archive ${record.observation.key}: ${record.observation.target.status}. ${record.issues.join('; ')}`);
-  lines.push('', `Saved: ${resolve(directory, 'query.json')}`);
-  if (session.choices.length) lines.push(`Next: telescope get ${JSON.stringify(directory)} --pick N`);
+  lines.push('', `Saved: ${displayPath(resolve(directory, 'query.json'))}`);
+  if (session.choices.length) lines.push(`Next: telescope get ${shellWord(displayPath(directory))} --pick N`);
   return `${lines.join('\n')}\n`;
 }
 
 const shellWord = (value:string):string => /^[A-Za-z0-9_./,:@+%=-]+$/u.test(value) ? value : `'${value.replaceAll("'", "'\\''")}'`;
+const displayPath = (path:string):string => {
+  const local=relative(process.cwd(),resolve(path));
+  return local&&!isAbsolute(local)&&local!=='..'&&!local.startsWith(`..${sep}`)?local:path;
+};
 const displayTime = (start:string|null,end:string|null):string => start === null ? 'date unknown' : end && end !== start ? `${start} to ${end}` : start;
 function displayWavelengths(value:readonly (number|null)[]|readonly (readonly [number,number])[]):string {
   if(!value.length)return 'wavelength unknown';
@@ -205,8 +226,8 @@ export function formatExploration(session:ExplorationSession & {readonly directo
   appendIssues('Unresolved discoveries',answer.unresolved);
   appendIssues('Unsupported discoveries',answer.unsupported);
   appendIssues('Search limits and provider status',answer.issues);
-  lines.push('',`Saved: ${resolve(session.directory,'explore.json')}`);
-  if(session.choices.length)lines.push(`Continue explicitly: telescope get ${shellWord(session.directory)} --pick N`);
+  lines.push('',`Saved: ${displayPath(resolve(session.directory,'explore.json'))}`);
+  if(session.choices.length)lines.push(`Continue explicitly: telescope get ${shellWord(displayPath(session.directory))} --pick N`);
   return `${lines.join('\n')}\n`;
 }
 
@@ -234,14 +255,12 @@ export function outputCommand(source:string,choice:OutputChoice):string {
   args.push('--out','DIRECTORY');
   return args.map(shellWord).join(' ');
 }
-export function formatArtifact(result:ArtifactInspection):string {
-  const lines=[`${result.target??'Artifact'} · ${result.artifact}`,`Source: ${result.source}`];
+export function formatArtifact(result:ArtifactInspection,verbose=false):string {
+  const lines=[`${result.target??'Artifact'} · ${result.artifact}`,`Source: ${displayPath(result.source)}`];
   const context=contextText(result.sourceContext);if(context)lines.push(context);
   if(result.profiles?.length)lines.push(`Proposed profiles: ${result.profiles.map(profile=>`${profile.handlerId}/${profile.profileId}`).join(', ')}.`);
   for(const issue of result.issues??[])lines.push(`Limitation: ${issue}`);
-  if(result.familyOperations?.length){lines.push('','Family operations:');for(const operation of result.familyOperations){const needsParameters=operation.parameters.some(parameter=>parameter.id!=='out'&&parameter.required);lines.push(`${operation.id} · ${operation.componentId}: ${operation.available?'available':'unavailable'}.`, `   ${operation.reason}`,`   Owner: ${operation.owner.module}#${operation.owner.export}`);for(const limitation of operation.limitations)lines.push(`   Limitation: ${limitation}`);if(operation.available)lines.push(`   Next: ${['telescope','family-run',result.source,operation.id,...(needsParameters?['--params','PARAMS.json']:[]),'--out','DIRECTORY'].map(shellWord).join(' ')}`);}}
-  if(result.terminal||!result.outputs.length&&!result.familyOperations?.length)lines.push('No further supported outputs. This artifact is terminal.');
-  else{
+  if(result.outputs.length){
     lines.push('','Supported next operations:');
     result.outputs.forEach((choice,index)=>{
       const identity=[choice.kind,choice.hdu===undefined?undefined:`HDU ${choice.hdu}`,choice.structure,choice.shape?`shape ${choice.shape.join('×')}`:undefined].filter(Boolean).join(' · ');
@@ -249,9 +268,21 @@ export function formatArtifact(result:ArtifactInspection):string {
       if(choice.unit)lines.push(`   Unit: ${choice.unit.value} (${choice.unit.source})`);
       if(choice.spectral?.centersMicrometres.length)lines.push(`   Wavelength coordinates: ${choice.spectral.centersMicrometres[0]}–${choice.spectral.centersMicrometres.at(-1)} µm (${choice.spectral.centersMicrometres.length} samples)`);
       for(const limitation of choice.limitations??[])lines.push(`   Limitation: ${limitation}`);
-      if(choice.available)lines.push(`   Next: ${outputCommand(result.source,choice)}`);
+      if(choice.available)lines.push(`   Next: ${outputCommand(displayPath(result.source),choice)}`);
     });
   }
+  if(result.familyOperations?.length){
+    lines.push('','Family operations:');
+    result.familyOperations.forEach((operation,index)=>{
+      const required=operation.parameters.filter(parameter=>parameter.id!=='out'&&parameter.required);
+      lines.push(`${result.outputs.length+index+1}. ${operation.id} · ${operation.componentId}: ${operation.available?'available':'unavailable'}.`, `   ${operation.reason}`);
+      if(required.length)lines.push(`   Required parameters: ${required.map(parameter=>parameter.description).join(' ')}`);
+      if(verbose)lines.push(`   Owner: ${operation.owner.module}#${operation.owner.export}`);
+      for(const limitation of operation.limitations)lines.push(`   Limitation: ${limitation}`);
+      if(operation.available)lines.push(`   Next: ${['telescope','family-run',displayPath(result.source),operation.id,'--component',operation.componentId,...(required.length?['--params','PARAMS.json']:[]),'--out','DIRECTORY'].map(shellWord).join(' ')}`);
+    });
+  }
+  if(!result.outputs.length&&!result.familyOperations?.length)lines.push('No further supported outputs. This artifact is terminal.');
   return `${lines.join('\n')}\n`;
 }
 
@@ -326,23 +357,49 @@ async function executeOutput(options:ExecutableOutput,api:CliServices):Promise<s
   const result=await api.exportOutput(options.result,options.selection,options.directory);
   return `Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;
 }
+async function runFamilyOperation(options:Extract<CliOptions,{readonly command:'family-run'}>,api:CliServices){
+  let parameters:Record<string,unknown>={};
+  if(options.parameters){
+    const value:unknown=JSON.parse(await readFile(options.parameters,'utf8'));
+    if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Family operation parameters must be a JSON object.');
+    parameters=value as Record<string,unknown>;
+    if(parameters.operationId!==undefined&&parameters.operationId!==options.operationId)throw new TypeError(`Parameter operationId ${String(parameters.operationId)} disagrees with ${options.operationId}.`);
+    if(options.componentId&&parameters.componentId!==undefined&&parameters.componentId!==options.componentId)throw new TypeError(`Parameter componentId ${String(parameters.componentId)} disagrees with ${options.componentId}.`);
+  }else if(familyOperationNeedsParameters(options.operationId))throw new TypeError(`Family operation ${options.operationId} requires --params PARAMS.json.`);
+  return api.executeFamilyOperation(options.descriptor,{...parameters,operationId:options.operationId,...(options.componentId?{componentId:options.componentId}:{})} as FamilyOperationParameters,options.directory);
+}
 const promptLabels:Readonly<Record<string,string>>={
   plane:'Zero-based plane',pixel:'Pixel X,Y',band:'Wavelength band LO,HI (micrometres)',aperture:'Aperture X0,Y0,X1,Y1',
   background:'Background X0,Y0,X1,Y1 or none',continuum:'Continuum L0,L1,R0,R1 (micrometres)',uncertainty:'Uncertainty omit or independent',geometry:'Navigation geometry JSON file'
 };
 const canceled=(value:string|undefined):boolean=>value===undefined||!value.trim()||/^q(?:uit)?$/iu.test(value.trim());
-async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices):Promise<number>{
-  io.write(formatArtifact(result));
+async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices,verbose=false):Promise<number>{
+  io.write(formatArtifact(result,verbose));
   await io.flush?.();
-  const available=result.outputs.map((choice,index)=>({choice,index:index+1})).filter(row=>row.choice.available);
+  const available=[
+    ...result.outputs.map((choice,index)=>({kind:'output' as const,choice,index:index+1})).filter(row=>row.choice.available),
+    ...(result.familyOperations??[]).map((operation,index)=>({kind:'family' as const,operation,index:result.outputs.length+index+1})).filter(row=>row.operation.available),
+  ];
   if(result.terminal||!available.length)return 0;
-  let selected:typeof available[number]|undefined;
+  let selected:(typeof available)[number]|undefined;
   for(;;){
-    const answer=await io.question('Choose an available output number, or press Enter to exit: ');
-    if(canceled(answer)){io.write('No output was selected.\n');return 0;}
+    const answer=await io.question('Choose an available operation number, or press Enter to exit: ');
+    if(canceled(answer)){io.write('No operation was selected.\n');return 0;}
     selected=available.find(row=>String(row.index)===answer!.trim());
     if(selected)break;
     io.error(`Choose one of ${available.map(row=>row.index).join(', ')}, or press Enter to exit.\n`);
+  }
+  if(selected.kind==='family'){
+    const operation=selected.operation;
+    const parameters=familyOperationNeedsParameters(operation.id)?await io.question('Parameters JSON file: '):undefined;
+    if(familyOperationNeedsParameters(operation.id)&&canceled(parameters)){io.write('Operation canceled; no output was started.\n');return 0;}
+    const directory=await io.question('Output directory: ');
+    if(canceled(directory)){io.write('Operation canceled; no output was started.\n');return 0;}
+    const options=parseCli(['family-run',result.source,operation.id,'--component',operation.componentId,...(parameters?['--params',parameters.trim()]:[]),'--out',directory!.trim()]);
+    if(options.command!=='family-run')throw new TypeError('Selected family operation has no executable owner.');
+    const output=await runFamilyOperation(options,api);
+    io.write(`Product: ${output.product}\nEvidence: ${output.record}\nOperation: ${output.operation.id}\n`);
+    return 0;
   }
   const choice=selected.choice;
   for(;;){
@@ -384,20 +441,23 @@ async function guidedExploration(root:string,session:ExplorationSession&{readonl
   }
   const result=await api.getSession(root,session.directory,pick,line=>io.error(`${line}\n`));
   io.write([`Product: ${result.product}`,`Evidence: ${result.resultPath}`,contextText(result.context)??(result.satisfaction?`Scientific request: ${result.satisfaction.status}.`:''),...(result.reused?['Reused: verified existing delivery']:[])].filter(Boolean).join('\n')+'\n\n');
-  return guidedArtifact(artifactScreen(await api.listArtifactOutputs(result.resultPath),result.resultPath),io,api);
+  return guidedArtifact(artifactScreen(await api.listArtifactOutputs(result.resultPath),result.resultPath),io,api,verbose);
 }
 
 export async function main(args: readonly string[], root = resolve(import.meta.dirname, '../../..'), output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices): Promise<number> {
   const io=injectedIo??processIo(output);
   try {
     const options = parseCli(args);
-    if (options.command === 'help') { io.write(HELP); return 0; }
+    if (options.command === 'help') { io.write(options.short ? SHORT_HELP : HELP); return 0; }
+    if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
     // Instrument tools own their logging. Keep every such message off machine-readable stdout.
     const stdout = process.stdout.write;
     let text: string, code: number;
     process.stdout.write = process.stderr.write.bind(process.stderr);
     try {
-      if(options.command==='family-run'){let raw:Record<string,unknown>;if(options.parameters){const value:unknown=JSON.parse(await readFile(options.parameters,'utf8'));if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Family operation parameters must be a JSON object.');raw=value as Record<string,unknown>;if(raw.operationId!==undefined&&raw.operationId!==options.operationId)throw new TypeError(`Parameter operationId ${String(raw.operationId)} disagrees with ${options.operationId}.`);}else{if(familyOperationNeedsParameters(options.operationId))throw new TypeError(`Family operation ${options.operationId} requires --params PARAMS.json.`);raw={};}const result=await api.executeFamilyOperation(options.descriptor,{...raw,operationId:options.operationId}as unknown as FamilyOperationParameters,options.directory);text=options.json?`${JSON.stringify(result)}\n`:`Product: ${result.product}\nEvidence: ${result.record}\nOperation: ${result.operation.id}\n`;code=0;
+      if(options.command==='family-run'){
+        const result=await runFamilyOperation(options,api);
+        text=options.json?`${JSON.stringify(result)}\n`:`Product: ${result.product}\nEvidence: ${result.record}\nOperation: ${result.operation.id}\n`;code=0;
       }else if(options.command==='family-assess'){const request=JSON.parse(await readFile(options.request,'utf8')),descriptor=JSON.parse(await readFile(options.descriptor,'utf8')),saved=await saveFamilyRequestSession(options.directory,request,descriptor);text=options.json?`${JSON.stringify(saved)}\n`:`Descriptor compatibility: ${saved.status}\nSaved: ${resolve(options.directory,'family-request.json')}\n`;code=saved.status==='matched'?0:saved.status==='refused'?4:3;
       }else if(options.command==='papers'){
         const result=await searchPapers(root,{target:options.target,...(options.instrument?{instrument:options.instrument}:{}),...(options.host?{host:options.host}:{}),...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
@@ -430,8 +490,8 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         const result=await api.exportSphere(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`Sphere: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='outputs'){
         const result=await api.listArtifactOutputs(options.result,options.structure);
-        if(guided(options,io)){process.stdout.write=stdout;return await guidedArtifact(artifactScreen(result,options.result),io,api);}
-        text=options.json?`${JSON.stringify(result)}\n`:formatArtifact(artifactScreen(result,options.result));code=0;
+        if(guided(options,io)){process.stdout.write=stdout;return await guidedArtifact(artifactScreen(result,options.result),io,api,options.verbose);}
+        text=options.json?`${JSON.stringify(result)}\n`:formatArtifact(artifactScreen(result,options.result),options.verbose);code=0;
       }else if(options.command==='export'){
         const result=await api.exportOutput(options.result,options.selection,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
@@ -447,7 +507,8 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         const status=result.satisfaction?.status??(result.context?.kind==='exploration'?'not requested':'unknown');
         text = options.json ? `${JSON.stringify(result)}\n` : [`Product: ${result.product}`, `Evidence: ${result.resultPath}`, `Request: ${status}`,
           ...(result.reused ? ['Reused: verified existing delivery'] : []),
-          ...Object.entries(result.satisfaction?.constraints??{}).filter(([, v]) => v.answer !== 'yes').map(([name, v]) => `Remaining ${name}: ${v.answer}. ${v.reason}`)].join('\n') + '\n';
+          ...Object.entries(result.satisfaction?.constraints??{}).filter(([, v]) => v.answer !== 'yes').map(([name, v]) => `Remaining ${name}: ${v.answer}. ${v.reason}`),
+          `Next: telescope outputs ${shellWord(displayPath(result.resultPath))}`].join('\n') + '\n';
         code = result.context?.kind==='exploration'?0:status === 'fulfilled' ? 0 : status === 'refused' ? 4 : 3;
       }
     } finally { process.stdout.write = stdout; }
