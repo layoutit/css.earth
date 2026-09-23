@@ -1,3 +1,4 @@
+import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -143,17 +144,59 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
     return loading;
   }
 
+  function select(id: string, lens: string) {
+    if (lifetime.disposed) return;
+    const bank = byId.get(id);
+    if (!bank) throw new TypeError('Unknown prepared volume lens bank.');
+    bank.pendingSelection = lens;
+    bank.lastUsed = ++useClock;
+    if (bank.mounted) {
+      bank.mounted.selectLens(lens);
+      updateWeight(bank);
+      trimWarmResidency();
+    } else void ensureLoaded(bank).catch(() => {});
+  }
+
+  function subscribe(id: string, listener: (state: ReturnType<LensMount['state']>) => void) {
+    const bank = byId.get(id);
+    if (!bank || lifetime.disposed) return () => {};
+    bank.subscribers++;
+    bank.lastUsed = ++useClock;
+    publishResidency();
+    let released = false;
+    const release = () => {
+      if (released) return;
+      released = true;
+      bank.subscribers--;
+      trimWarmResidency();
+    };
+    if (bank.mounted) {
+      const unsubscribe = bank.mounted.subscribe(listener);
+      return () => { unsubscribe(); release(); };
+    }
+    let cancelled = false, unsubscribe: (() => void) | null = null;
+    void ensureLoaded(bank).then(() => {
+      if (cancelled || lifetime.disposed || !bank.mounted) return;
+      unsubscribe = bank.mounted.subscribe(listener);
+      listener(bank.mounted.state());
+    }).catch(() => {});
+    return () => { cancelled = true; unsubscribe?.(); release(); };
+  }
+
   return {
     publishResidency,
-    ensure(id: string) {
+    select,
+    focusBank(id: string): PreparedFocusBank | null {
       const bank = byId.get(id);
-      return bank ? ensureLoaded(bank) : Promise.reject(new TypeError('Unknown prepared volume lens bank.'));
+      return bank ? {
+        objectId: bank.id,
+        framingRadiusM: () => bank.framing.radiusUnits * bank.framing.frame.metersPerUnit,
+        state: () => bank.mounted?.state() ?? null,
+        load: () => ensureLoaded(bank),
+        selectLens: lens => select(id, lens),
+        subscribe: listener => subscribe(id, listener),
+      } : null;
     },
-    // Authored framing replaces descriptor bounds when the payload arrives.
-    frames() {
-      return Object.fromEntries(banks.map(bank => [bank.id, { frame: bank.framing.frame, framingRadiusUnits: bank.framing.radiusUnits }]));
-    },
-    state(id: string) { return byId.get(id)?.mounted?.state() ?? null; },
     setEnabled(id: string, enabled: boolean) {
       if (lifetime.disposed || typeof enabled !== 'boolean') return;
       const bank = byId.get(id);
@@ -162,49 +205,12 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
       bank.enabled = enabled;
       requestPublication?.();
     },
-    select(id: string, lens: string) {
-      if (lifetime.disposed) return;
-      const bank = byId.get(id);
-      if (!bank) throw new TypeError('Unknown prepared volume lens bank.');
-      bank.pendingSelection = lens;
-      bank.lastUsed = ++useClock;
-      if (bank.mounted) {
-        bank.mounted.selectLens(lens);
-        updateWeight(bank);
-        trimWarmResidency();
-      } else void ensureLoaded(bank).catch(() => {});
-    },
     setStarsVisible(visible: boolean) {
       if (lifetime.disposed) return;
       for (const bank of banks) {
         bank.pendingStarsVisible = visible;
         bank.mounted?.setStarsVisible(visible);
       }
-    },
-    subscribe(id: string, listener: (state: ReturnType<LensMount['state']>) => void) {
-      const bank = byId.get(id);
-      if (!bank || lifetime.disposed) return () => {};
-      bank.subscribers++;
-      bank.lastUsed = ++useClock;
-      publishResidency();
-      let released = false;
-      const release = () => {
-        if (released) return;
-        released = true;
-        bank.subscribers--;
-        trimWarmResidency();
-      };
-      if (bank.mounted) {
-        const unsubscribe = bank.mounted.subscribe(listener);
-        return () => { unsubscribe(); release(); };
-      }
-      let cancelled = false, unsubscribe: (() => void) | null = null;
-      void ensureLoaded(bank).then(() => {
-        if (cancelled || lifetime.disposed || !bank.mounted) return;
-        unsubscribe = bank.mounted.subscribe(listener);
-        listener(bank.mounted.state());
-      }).catch(() => {});
-      return () => { cancelled = true; unsubscribe?.(); release(); };
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string) {
       if (lifetime.disposed) return;

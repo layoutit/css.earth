@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
+import { createImageFocusBank } from '../../src/renderers/css/universe/prepared-focus-bank.ts';
 import { overviewScopeFromUrl, preparedFocusFromUrl } from '../navigation-scope.mts';
 import { isPreparedCluster } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';
@@ -14,7 +15,7 @@ type ContextLayer = Parameters<typeof createPreparedContextNavigation>[0]['layer
 type Content = { record: PreparedCatalogObject | null; references: readonly SpatialCitation[]; presentation: PreparedFocusPresentation | null };
 type FixtureOptions = { object?: Partial<PreparedGalaxyRecord> & Partial<Pick<PreparedClusterRecord, 'kind' | 'classification'>>;
   unavailableObjectIds?: readonly string[]; bankReady?: Promise<PreparedVolumeLensState>; loadedFramingRadiusUnits?: number;
-  imageLayerFrames?: ContextLayer['imageLayerFrames']; volumeLensFrames?: ContextLayer['volumeLensFrames']; volumeBank?: PreparedVolumeLensState | null;
+  imageLayerFrames?: Readonly<Record<string, DensityVolumeFrame>>; volumeLensFrames?: Readonly<Record<string, { frame: DensityVolumeFrame; framingRadiusUnits: number }>>; volumeBank?: PreparedVolumeLensState | null;
   deferredVolumeBank?: PreparedVolumeLensState | null;
   cameraPositionM?: readonly [number, number, number] };
 const baseFrame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0,0,0], localToReferenceXyzw: [0,0,0,1],
@@ -87,12 +88,22 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
       return { ...galaxy, kind: 'galaxy-cluster', classification: required(object.classification),
         redshift: { value: .01, type: 'spectroscopic', sourceRef: 'positions:row' },
         aperture: { definition: 'R500', properRadiusM: 1e22, comovingRadiusM: 1e22, sourceRef: 'positions:row' } };
-    } } satisfies Pick<ContextLayer, 'ensureVolumeLens' | 'imageLayerFrames' | 'volumeLensFrames' | 'selectVolumeLens' | 'subscribeVolumeLens' | 'selectGalaxy' | 'resolveGalaxy'> & { volumeLensState(id: string): PreparedVolumeLensState | null };
+    } };
+  const focusLayer: ContextLayer = { selectGalaxy: layer.selectGalaxy, resolveGalaxy: layer.resolveGalaxy,
+    focusBank(id) {
+      if (imageLayerFrames[id]) return createImageFocusBank(id, imageLayerFrames[id], () => Promise.resolve());
+      if (!currentVolumeLensFrames[id]) return null;
+      return { objectId: id,
+        framingRadiusM: () => { const framing = required(currentVolumeLensFrames[id]); return framing.framingRadiusUnits * framing.frame.metersPerUnit; },
+        state: () => layer.volumeLensState(id), load: () => layer.ensureVolumeLens(id),
+        selectLens: lens => layer.selectVolumeLens(id, lens), subscribe: listener => layer.subscribeVolumeLens(id, listener) };
+    },
+  };
   const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', bytes: 1, citation: 'Published positions', references: [{ id: 'PublishedBibliographicKey', url: 'https://example.test/paper', citation: 'Distance paper' }] },
     { id: 'membership', url: 'https://example.test/membership', bytes: 1, citation: 'Published membership' },
     { id: 'unrelated', url: 'https://example.test/unrelated', bytes: 1, citation: 'Unused audit input' }];
   // Narrow test doubles intentionally expose only this controller's browser/runtime surface.
-  const controller = createPreparedContextNavigation({ layer: layer as unknown as ContextLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
+  const controller = createPreparedContextNavigation({ layer: focusLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
     sources, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
   controller.connect(owner as unknown as ObjectWorldNavigation, { onFocusContentChange: (record, references, presentation) => content.push({ record, references, presentation }) });
   return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, presentationFocuses, writes, callbacks, content, flights, flightFocuses, signal: () => signal,
