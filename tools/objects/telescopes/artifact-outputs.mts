@@ -66,6 +66,13 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
   }
   if(raw.schema!==PRODUCT_RECORD_SCHEMA)throw new TypeError('Expected a telescope delivery, product record, or supported physical object.json');
   const source=await verifiedProduct(artifact),stage=source.record.stage;
+  if(stage==='telescope-wwt-fits'||stage==='telescope-local-import'&&source.record.parameters.fitsSource!==undefined){
+    if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
+    const listed=await listDeliveryOutputs(artifact);
+    return {...listed,artifact:stage,issues:(listed.limitations??[]).filter(issue=>!listed.outputs.some(choice=>choice.limitations?.includes(issue)))};
+  }
+  if(stage==='telescope-source-output')return {artifact:stage,source:artifact,
+    ...(typeof source.record.parameters.label==='string'?{target:source.record.parameters.label}:{}),outputs:[],terminal:true};
   if(stage==='telescope-output'){
     const context=sourceContext(source.record.parameters);
     let issue:string|undefined;try{await validateProjectionSource(source);}catch(error){issue=error instanceof Error?error.message:String(error);}
