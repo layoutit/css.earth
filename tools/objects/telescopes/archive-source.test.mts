@@ -17,7 +17,7 @@ import { OPUS_SERVICE } from './opus.mts';
 import { openFitsSource } from './fits-source.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { openPdsSource, preparePdsSource } from './pds-source.mts';
-import { parseCli } from './cli.mts';
+import { main, parseCli } from './cli.mts';
 import { executeFamilyOperation } from './family-operation.mts';
 
 const fits = Buffer.from(`${'SIMPLE  =                    T'.padEnd(80)}${'END'.padEnd(80)}`.padEnd(2880));
@@ -203,9 +203,23 @@ test('an authentic Chandra ACIS event source enters the existing event operation
     assert.ok(fetched.descriptor);
     const inspection = await listArtifactOutputs(fetched.receipt);
     assert.ok(inspection.familyOperations?.some(operation => operation.id === 'event-inspect' && operation.available));
+    const familyDescriptor = JSON.parse(await readFile(fetched.descriptor!, 'utf8'));
+    const request = resolve(root, 'request.json'), assessment = resolve(root, 'assessment');
+    await writeFile(request, JSON.stringify({ legacy: { target: familyDescriptor.dataset.target, wavelengthMicrometres: [0.1, 1] }, family: 'F10' }));
+    const output: string[] = [], errors: string[] = [];
+    const io = { stdinIsTTY: false, stdoutIsTTY: false, write: (value: string) => output.push(value), error: (value: string) => errors.push(value),
+      question: async () => undefined, close: () => {} };
+    assert.ok([0, 3, 4].includes(await main(['family-assess', request, fetched.receipt, '--out', assessment, '--json'],
+      root, value => output.push(value), io)));
+    const assessed = JSON.parse(await readFile(resolve(assessment, 'family-request.json'), 'utf8'));
+    assert.equal(assessed.descriptor.sha256, sha256(await readFile(fetched.descriptor!)));
     const run = await executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'inspect'));
     assert.equal(JSON.parse(await readFile(run.product, 'utf8')).rows, 62471);
     await writeFile(fetched.files[0]!, 'changed');
+    const changedCode = await main(['family-assess', request, fetched.receipt, '--out', resolve(root, 'changed-assessment'), '--json'],
+      root, value => output.push(value), io);
+    assert.equal(changedCode, 1, output.at(-1));
+    assert.match(JSON.parse(output.at(-1)!).error, /pins changed/u);
     await assert.rejects(executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'changed')), /pins changed/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

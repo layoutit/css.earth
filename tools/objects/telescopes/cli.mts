@@ -4,6 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
 import { readFile } from 'node:fs/promises';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { formatAnswer } from './query.mts';
 import { assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
 import { getSession, saveExploration, saveSession, saveFamilyRequestSession, type ExplorationSession, type Session } from './session.mts';
@@ -602,7 +603,18 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
       }else if(options.command==='family-run'){
         const result=await runFamilyOperation(options,api);
         text=options.json?`${JSON.stringify(result)}\n`:`Product: ${result.product}\nEvidence: ${result.record}\nOperation: ${result.operation.id}\n`;code=0;
-      }else if(options.command==='family-assess'){const request=JSON.parse(await readFile(options.request,'utf8')),descriptor=JSON.parse(await readFile(options.descriptor,'utf8')),saved=await saveFamilyRequestSession(options.directory,request,descriptor);text=options.json?`${JSON.stringify(saved)}\n`:`Descriptor compatibility: ${saved.status}\nSaved: ${resolve(options.directory,'family-request.json')}\n`;code=saved.status==='matched'?0:saved.status==='refused'?4:3;
+      }else if(options.command==='family-assess'){
+        const artifactBytes=await readFile(options.descriptor),artifact=JSON.parse(artifactBytes.toString('utf8'));
+        let descriptorPath=options.descriptor,bytes=artifactBytes;
+        if(artifact?.schema!=='cssearth-telescope-product-descriptor@1'){
+          const inspected=await api.listArtifactOutputs(options.descriptor);
+          if(!inspected.familyOperations||typeof inspected.source!=='string')throw new TypeError(`No verified family descriptor is available for ${options.descriptor}. Run telescope outputs on the artifact to inspect its supported operations.`);
+          descriptorPath=resolve(inspected.source);bytes=await readFile(descriptorPath);
+        }
+        const request=JSON.parse(await readFile(options.request,'utf8')),descriptor=JSON.parse(bytes.toString('utf8'));
+        const saved=await saveFamilyRequestSession(options.directory,request,descriptor,{path:descriptorPath,bytes:bytes.length,sha256:sha256(bytes)});
+        text=options.json?`${JSON.stringify(saved)}\n`:`Descriptor compatibility: ${saved.status}\nDescriptor: ${displayPath(descriptorPath)}\nSaved: ${resolve(options.directory,'family-request.json')}\n`;
+        code=saved.status==='matched'?0:saved.status==='refused'?4:3;
       }else if(options.command==='papers'){
         const result=await searchPapers(root,{target:options.target,...(options.instrument?{instrument:options.instrument}:{}),...(options.host?{host:options.host}:{}),...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;
