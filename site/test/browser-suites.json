@@ -146,9 +146,6 @@
     "expect": "fail",
     "reason": "the Ceres context label stays hidden for 30 s"
   },
-  "seo-browser.mts": {
-    "expect": "pass"
-  },
   "shared-camera-viewport-browser.mts": {
     "expect": "pass"
   },

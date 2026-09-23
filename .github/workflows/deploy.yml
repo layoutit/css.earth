@@ -101,6 +101,8 @@ jobs:
             git diff --name-only -- src/objects
             exit 1
           fi
+      - name: Check built SEO metadata and sitemap
+        run: pnpm test:seo
       - name: Publish the prebuilt site
         # netlify.toml supplies the edge route and the search function; the site is not linked to git,
         # so Actions is the only thing that deploys it.
