@@ -7,7 +7,7 @@ import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mt
 import type { BrowserWindow } from '../browser-types.mts';
 import { formatSharedView, parseSharedView } from "../../src/renderers/css/dist/navigation.js";
 
-import type { ObjectSharedView } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
+import type { ObjectSharedView } from '../../src/renderers/css/runtime/object-scene.ts';
 import type { SharedView } from '../../src/renderers/css/navigation/view-url.ts';
 import { required } from './navigation-test-values.mts';
 interface FakeHistoryWindow extends EventTarget {

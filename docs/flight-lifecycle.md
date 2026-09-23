@@ -18,6 +18,12 @@ and releases the hold. It does not create a departure or continuation runner.
 The incoming detail and persistent world still acknowledge one publication
 together; cancellation prevents a late worker reply from moving either one.
 
+The application frame queue owns publication of that complete view. It commits
+the worker-planned world, then the captured camera, before camera subscribers
+run. Subscriptions observe the presented view without publishing it again.
+Initial mounting remembers its captured camera; enabling the detail presenter
+requests its first complete world frame through the same queue.
+
 Surface fly-to keeps its fitted trajectory and stops when direct input takes
 over. Destination input hurries arrival; cross-object input can also stop before
 motion or during the visible approach. Drag and inertia remain native input
@@ -91,9 +97,17 @@ replacement selection therefore settles the old navigation immediately, even
 when the underlying restoration is still completing. Late transport results
 release their resources and cannot commit a replacement's history or readiness.
 
-`site/world-preferences.mts` retains display intent independently of navigation.
-The shell binds its settings to this owner, and a newly mounted world receives
-the latest settings. Playback remains governed by the shared runtime policy.
+`site/world-preferences.mts` owns motion and display intent independently of
+navigation. Settings controls and search read its current state and issue
+commands to it; replacing a card never reads preferences back from the DOM.
+A newly mounted world receives the latest settings. Playback permission remains
+governed by the shared runtime policy.
+
+`site/scene/scene-selection.mts` owns the committed subject and projects its URL.
+Prepared-focus navigation owns the acquired target and executes camera/lens
+commands. It publishes one result to the selection owner, including whether a
+saved camera must be discarded. It neither mirrors the selected ID nor formats
+another selection URL. Native camera focus remains the geometric pivot.
 
 ## Scene activation and prepared ownership
 
@@ -103,6 +117,13 @@ dataset and saved-view restoration. A native handle cannot publish readiness
 before its ready promise resolves and the router commits restoration. Playback
 commands and the current view-URL binding belong to the session. Router
 diagnostics, shell playback and DOM publication read one derived snapshot.
+
+Object loading decodes the transport under the request or session abort signal
+before returning a mount factory. Preflight and native mounting share that exact
+definition. The factory returns the native lifecycle directly; there is no
+second readiness promise, playback gate or disposal wrapper around it. Native
+readiness also gates public navigation and dataset access, so a superseding
+request cannot read a camera that is still being constructed.
 
 A session owns a returned native handle even if its factory reports an error
 synchronously. Teardown invalidates the session before flushing the URL and

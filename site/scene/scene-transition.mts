@@ -78,7 +78,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   request: NavigationRequest;
   navigation: Navigation;
   requests: NavigationLifecycle;
-  loadObject(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>;
+  loadObject(id: string, descriptor?: ObjectDescriptor, signal?: AbortSignal): Promise<SceneFactory>;
   loadContent: NavigationContentLoader | null;
   contentTransport: ReturnType<typeof createNavigationContent> | null;
   reducedMotion: boolean;
@@ -90,7 +90,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
       request.timing.mark('content-ready'); return content;
     });
   const descriptorTask = contentTransport?.descriptor(object, { signal: request.signal });
-  const factoryTask = (descriptorTask ? descriptorTask.then(descriptor => loadObject(object.id, descriptor)) : loadObject(object.id))
+  const factoryTask = (descriptorTask ? descriptorTask.then(descriptor => loadObject(object.id, descriptor, request.signal)) : loadObject(object.id, undefined, request.signal))
     .then(factory => { request.timing.mark('factory-ready'); return factory; });
   // The registry already owns the physical frames. Start the camera while
   // the destination factory, content and texture bank load independently.

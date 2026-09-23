@@ -1,8 +1,7 @@
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from '@layoutit/polycss';
 import type { ComputeTextureAtlasPlanOptions, PolyTextureLeafGeometry, Polygon } from '@layoutit/polycss';
 import type { SurfacePatch } from '@cssearth/objects';
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer } from './projective.js';
-import { polarCapRasterScale } from '../../../../platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer, polarCapRasterScale } from '../../../../platform/projective-surface-raster.mts';
 import type { GeometryProfile } from './profile.js';
 import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.js';
 

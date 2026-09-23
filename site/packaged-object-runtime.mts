@@ -4,8 +4,8 @@ import { requiredElement } from './browser-types.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { parsePreparedWorldCameraFrame } from '../src/renderers/css/dist/navigation.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities,
-  createWorldContextObjectRuntime, createPreparedObjectNavigation } from '../src/renderers/css/dist/index.js';
+import { createObjectRuntime, loadNavigableObject, preparedObjectCapabilities,
+  createWorldContextObjectRuntime } from '../src/renderers/css/dist/index.js';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
 import * as runtimePolicy from './runtime-policy.mts';
 
@@ -24,13 +24,12 @@ export function bindPackagedObject(definition: ObjectRuntimeDefinition, mount = 
 
 // The shared context plan is already validated: a detail mount reuses it instead of revalidating the JSON.
 export function bindContextualObject(definition: ObjectRuntimeDefinition, context = APPLICATION_WORLD_CONTEXT, frame = context.frame) {
-  const mount = bindPackagedObject(definition, createWorldContextObjectRuntime({ definition, context, frame }));
-  return Object.assign(mount, { navigation: createPreparedObjectNavigation(async () => definition, frame) });
+  return bindPackagedObject(definition, createWorldContextObjectRuntime({ definition, context, frame }));
 }
 
-export async function loadPackagedObject(input: unknown) {
+export async function loadPackagedObject(input: unknown, signal?: AbortSignal) {
   const descriptorInput = parseObjectDescriptor(input);
-  return createNavigableObjectMount(descriptorInput, {
+  return loadNavigableObject(descriptorInput, {
     async read(reference, signal) {
       // Static endpoints copy the transport bytes during the build.
       // The bundler never needs to retain every scene as an eager URL asset.
@@ -45,5 +44,5 @@ export async function loadPackagedObject(input: unknown) {
     },
   }, definition => descriptorInput.properties.worldFrame
     ? bindContextualObject(definition, APPLICATION_WORLD_CONTEXT, parsePreparedWorldCameraFrame(descriptorInput.properties.worldFrame) ?? undefined)
-    : bindPackagedObject(definition));
+    : bindPackagedObject(definition), signal);
 }

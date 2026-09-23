@@ -11,7 +11,7 @@ import { required, position, navigationFixture, unusedSharedView } from './navig
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraPresentation } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
 import type { PreparedNavigationFocus } from '../../src/renderers/css/navigation/prepared-focus.ts';
-import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
+import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '../../src/renderers/css/runtime/prepared-object-navigation.ts';
 import type { SceneFactory } from '../browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';

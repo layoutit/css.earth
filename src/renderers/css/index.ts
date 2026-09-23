@@ -19,10 +19,9 @@ export { CANONICAL_PREPARED_IMAGE_DENSITY } from './rendering/prepared-object-as
 export { loadPreparedCssObject, PREPARED_CSS_OBJECT_FORMAT } from './loader.js';
 export type { PreparedCssTransport } from './loader.js';
 export { parsePreparedObjectRuntime } from './validation/index.js';
-export { createDeferredObjectMount } from './runtime/deferred-object-mount.js';
-export type { ObjectDatasets } from './runtime/deferred-object-mount.js';
-export type { ObjectSharedView, ObjectSceneLifecycle, DeferredMountOptions } from './runtime/deferred-object-mount.js';
-export { createNavigableObjectMount } from './runtime/navigable-object-mount.js';
+export type { ObjectDatasets } from './runtime/object-scene.js';
+export type { ObjectSharedView, ObjectSceneLifecycle } from './runtime/object-scene.js';
+export { loadNavigableObject } from './runtime/navigable-object-mount.js';
 export { parsePreparedWorldCameraFrame } from './validation/world-frame.js';
 export { worldCameraFromCenteredPresentation, presentWorldCamera } from './navigation/world-camera.js';
 export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldReflection, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
