@@ -11,7 +11,7 @@
 import { directionFromRaDec, skyBasis } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { linearToSrgb } from '../color-transfer.mts';
-import { planckLinearSrgb, type StellarColor } from './stellar-photometric-color.mts';
+import { planckLinearSrgb, type StellarColor } from './stellar/stellar-photometric-color.mts';
 
 export interface GravityDarkeningRecord {
   readonly omega: number; readonly beta: number; readonly poleTemperatureK: number; readonly equatorTemperatureK: number;

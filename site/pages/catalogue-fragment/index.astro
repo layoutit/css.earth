@@ -1,8 +1,6 @@
 ---
-// The one build target for the shared object catalogue. `astro build` emits
-// this as `dist/catalogue-fragment/index.html`; `tools/prepare/build-catalogue-fragment.mts`
-// then hashes it, republishes it at the content-addressed `dist/catalogue/<sha256>.html`,
-// removes this generic path, and wires every object page's placeholder to it.
+// The shared object catalogue rows, rendered once for every object page. The
+// server/no-JS search fetches them from this path (`catalogue-fragment-loader.mts`).
 import CatalogueRows from '../../components/CatalogueRows.astro';
 ---
 <CatalogueRows />

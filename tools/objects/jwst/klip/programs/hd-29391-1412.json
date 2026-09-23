@@ -1,0 +1,176 @@
+{
+  "schema": "cssearth-jwst-klip-program@1",
+  "id": "hd-29391-1412",
+  "programme": "1412",
+  "paper": "Balmer et al. (2025, AJ; arXiv:2503.13608, doi:10.3847/1538-3881/adb1c6), Sections III.2-III.3 and Table 1: NIRCam LWB narrow of 51 Eri, GTO 1412 observations 12 and 15 (two rolls), PSF reference HD 30562 in observation 14 (5-POINT-BAR dither), 2023 October; the planet is detected in F410M only.",
+  "crdsContext": "jwst_1256.pmap",
+  "settings": {
+    "crFromSiaf": true,
+    "stage1": {
+      "saturation": {
+        "n_pix_grow_sat": 1,
+        "grow_diagonal": true
+      },
+      "refpix": {
+        "odd_even_columns": true,
+        "odd_even_rows": true,
+        "nlower": 4,
+        "nupper": 4,
+        "nleft": 4,
+        "nright": 4,
+        "nrow_off": 0,
+        "ncol_off": 0
+      },
+      "dark_current": {
+        "skip": true
+      },
+      "jump": {
+        "rejection_threshold": 4,
+        "three_group_rejection_threshold": 4,
+        "four_group_rejection_threshold": 4
+      },
+      "ramp_fit": {
+        "save_calibrated_ramp": false
+      }
+    },
+    "stage2": {
+      "outlier_detection": {
+        "skip": false
+      }
+    },
+    "badPixels": {
+      "method": "bpclean+timemed+dqmed+medfilt",
+      "bpclean_kwargs": {
+        "sigclip": 5,
+        "shift_x": [
+          -1,
+          0,
+          1
+        ],
+        "shift_y": [
+          -1,
+          0,
+          1
+        ]
+      },
+      "custom_kwargs": {},
+      "timemed_kwargs": {},
+      "dqmed_kwargs": {
+        "shift_x": [
+          -1,
+          0,
+          1
+        ],
+        "shift_y": [
+          -1,
+          0,
+          1
+        ]
+      },
+      "medfilt_kwargs": {
+        "size": 3
+      }
+    },
+    "padPixels": [
+      25,
+      26,
+      97,
+      98
+    ],
+    "cropPixels": [
+      125,
+      125,
+      125,
+      125
+    ],
+    "spectralType": "F0IV",
+    "align": {
+      "mask_override": "rec",
+      "msk_shp": 8,
+      "shft_exp": 0.5
+    },
+    "klip": {
+      "mode": [
+        "RDI"
+      ],
+      "annuli": [
+        8
+      ],
+      "subsections": [
+        4
+      ],
+      "numbasis": [
+        50,
+        150
+      ],
+      "algo": "klip"
+    },
+    "firstAnnulusOuterArcsec": 0.5
+  },
+  "settingSources": {
+    "crFromSiaf": "Paper III.2: the LWB narrow uncal headers carry wrong CRPIX; the mask position is taken from SIAF (spaceKLIP #182, in the pinned commit).",
+    "stage1": "Paper III.2: dark subtraction skipped, 4 pseudo-reference pixels on each edge, jump threshold 4. The saturation growth and the three- and four-group thresholds are not in the paper; they are the values of Balmer's own spaceKLIP script of the same period, github.com/wbalmer/aflepb_nircam_ddt aflep_nircam_epoch1_reduction.py.",
+    "stage2": "Balmer's AF Lep b script: outlier detection run. The paper does not state it.",
+    "badPixels": "Paper III.2: bad pixels the pipeline missed are sigma-clipped at 5. The method chain and its other arguments are Balmer's AF Lep b script (which clips at 3).",
+    "padPixels": "Paper III.2: the 400x256 subarray padded to 451x451 ([left, right, bottom, top]).",
+    "cropPixels": "Paper III.2: cropped from 451x451 to 201x201.",
+    "spectralType": "SIMBAD F0IV (Abt & Morrell 1995), a key of webbpsf_ext’s spectral table, as the model spectrum for centring; the paper names no type.",
+    "align": "Paper III.2: the central leakage masked with a rectangle of zeros and the square root taken for the shift estimate (spaceKLIP #183). The rectangle size is not given; msk_shp 8 is spaceKLIP's default.",
+    "blur": "Paper III.2: Gaussian blur FWHM = lambda / 2.3 D with D = 5.2 m before any interpolation; spaceKLIP blur_frames(fact='auto') computes exactly this.",
+    "klip": "Paper III.3: 51 Eri b is recovered in F410M only, with the image split into eight annuli and four subsections and reference-star (RDI) subtraction. The paper is inconsistent on the KL count: its text says 50 eigenimages, its Figure 4 panel is labelled KL=150; both are run, and with 90 reference frames pyKLIP cannot use more than 90.",
+    "firstAnnulusOuterArcsec": "Paper III.3: \"the first of eight annular zones restricts the starlight subtraction to the inner 0.5 arcseconds\". spaceKLIP’s dataset otherwise sets pyKLIP’s outer radius to the sum of the image’s half-widths, 201 pixels, which makes each of the eight annuli about 1.6 arcseconds wide; the outer radius is set so the first annulus ends at 0.5 arcseconds."
+  },
+  "bands": [
+    {
+      "band": "NIRCAM-F410M-MASKLWB",
+      "science": [
+        "jw01412012001_03107_00001_nrcalong_uncal.fits",
+        "jw01412015001_03107_00001_nrcalong_uncal.fits"
+      ],
+      "references": [
+        "jw01412014001_03108_00001_nrcalong_uncal.fits",
+        "jw01412014001_03108_00002_nrcalong_uncal.fits",
+        "jw01412014001_03108_00003_nrcalong_uncal.fits",
+        "jw01412014001_03108_00004_nrcalong_uncal.fits",
+        "jw01412014001_03108_00005_nrcalong_uncal.fits"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "jw01412012001_03107_00001_nrcalong_uncal.fits",
+      "uri": "mast:JWST/product/jw01412012001_03107_00001_nrcalong_uncal.fits",
+      "bytes": 90178560
+    },
+    {
+      "name": "jw01412014001_03108_00001_nrcalong_uncal.fits",
+      "uri": "mast:JWST/product/jw01412014001_03108_00001_nrcalong_uncal.fits",
+      "bytes": 40613760
+    },
+    {
+      "name": "jw01412014001_03108_00002_nrcalong_uncal.fits",
+      "uri": "mast:JWST/product/jw01412014001_03108_00002_nrcalong_uncal.fits",
+      "bytes": 40613760
+    },
+    {
+      "name": "jw01412014001_03108_00003_nrcalong_uncal.fits",
+      "uri": "mast:JWST/product/jw01412014001_03108_00003_nrcalong_uncal.fits",
+      "bytes": 40613760
+    },
+    {
+      "name": "jw01412014001_03108_00004_nrcalong_uncal.fits",
+      "uri": "mast:JWST/product/jw01412014001_03108_00004_nrcalong_uncal.fits",
+      "bytes": 40613760
+    },
+    {
+      "name": "jw01412014001_03108_00005_nrcalong_uncal.fits",
+      "uri": "mast:JWST/product/jw01412014001_03108_00005_nrcalong_uncal.fits",
+      "bytes": 40613760
+    },
+    {
+      "name": "jw01412015001_03107_00001_nrcalong_uncal.fits",
+      "uri": "mast:JWST/product/jw01412015001_03107_00001_nrcalong_uncal.fits",
+      "bytes": 90178560
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import type { BrowserWindow } from '../browser-types.mts';
-import { bindNavigationIntent, createNavigationFragments, navigationFragments, type NavigationFragments } from '../navigation-fragments.mts';
+import { bindNavigationIntent, createNavigationFragments, navigationFragments, type NavigationFragments } from '../navigation/navigation-fragments.mts';
 
 // A fragment body is "<body data-object-shell>|<stage data-object-id>" for this parser fixture.
 class FragmentDocument {
@@ -63,7 +63,7 @@ test('an intent-fetched fragment is requested once, shared by preview and conten
 test('every module copy in a window reaches the same fragment cache', async () => {
   const windowTarget = fixtureWindow().windowTarget, other = fixtureWindow().windowTarget;
   // A query makes Node load a second module instance, like an HMR-updated development module.
-  const specifier = '../navigation-fragments.mts?second-instance';
+  const specifier = '../navigation/navigation-fragments.mts?second-instance';
   const copy: unknown = await import(specifier);
   const shared = typeof copy === 'object' && copy !== null ? Reflect.get(copy, 'navigationFragments') : null;
   assert.equal(typeof shared, 'function');

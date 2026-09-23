@@ -1,0 +1,36 @@
+{
+ "id": "hd-29391-b",
+ "classification": "exoplanet",
+ "order": 1708,
+ "physical": {
+  "name": "51 Eridani b",
+  "horizonsCode": null,
+  "meanRadiusKm": 97229.1,
+  "gravitationalParameterKm3PerS2": 519414780.79,
+  "parent": "hd-29391"
+ },
+ "physicalNotes": "Radius 1.36 +0.07/-0.03 Jupiter radii from the atmospheric model fit of Madurowicz et al. (2025, AJ; arXiv:2510.08327) to JWST/NIRSpec and ground-based spectra: 97,229.1 km at 71,492 km per Jupiter radius. A model radius, not a measured diameter: the planet is unresolved. Balmer et al. (2025) find 1.30 +/- 0.03 with an evolutionary-model radius prior and 1.62 +/- 0.31 without. GM from the Sonora Bobcat model mass 4.1 +/- 0.4 Jupiter masses of Elliott et al. (2024) times Jupiter's GM 126686531.9 km^3/s^2: a model mass; the dynamical mass is only an upper limit (under 9.0 Jupiter masses at 3 sigma, Balmer et al. 2025). A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 8313.1,
+  "semiMajorAxisStellarRadii": 1324.19,
+  "inclinationDegrees": 165,
+  "eccentricity": 0.58,
+  "argumentOfPeriapsisDegrees": 264,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 61592.3,
+  "ascendingNodePositionAngleDegrees": 69,
+  "prediction": {
+   "tool": "whereistheplanet",
+   "planet": "51erib",
+   "reference": "whereistheplanet (Wang et al. 2021) distributes an unpublished GRAVITY orbit fit for 51 Eri b."
+  },
+  "sources": {
+   "period": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. Period 22.76 years.",
+   "shape": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. a 8.91 au, taken at the Gaia DR3 distance: 1324.19 radii of the star's 1,006,594 km; inclination 165 degrees.",
+   "eccentricity": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. e 0.58.",
+   "argumentOfPeriapsis": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. omega 84 degrees, the planet's argument of periastron; stored as the star's, 264 degrees. Of the four sign choices only this one, with the node as printed, reproduces both the JWST position and the receding HiRISE radial velocity (packages/astronomy/src/hostedOrbits.test.ts).",
+   "phase": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. tau 0.33, the fraction of a period after t_ref = MJD 58849 (J2020.0) at which periastron falls: 58849 + 0.33 x 8313.1 d = MJD 61592.3 (taken as BMJD_TDB).",
+   "orientation": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. Ascending node 69 degrees east of north; their radial velocities break the 180-degree degeneracy of omega and Omega that astrometry alone leaves (Balmer et al. 2025, Table 3)."
+  }
+ }
+}
