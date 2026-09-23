@@ -1,5 +1,5 @@
-import targets from './source/jpl-small-body-mission-targets.json' with { type: 'json' };
-import { record } from './browser-types.mts';
+import targets from '../../site/source/jpl-small-body-mission-targets.json' with { type: 'json' };
+import { record } from '../../site/browser-types.mts';
 
 // This is identity binding, not an editorial selection: membership comes only
 // from the vendored JPL target table. Unbound JPL targets are simply not yet
