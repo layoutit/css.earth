@@ -1,6 +1,7 @@
 /** Extract a published *hypothetical* spot layout onto a stationary stellar limb plate.
  * The figure constrains an illustrative pattern, not the actual surface of the star. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { displayedLuminance, quadraticIntensity, type StellarColor } from './stellar-photometric-color.mts';
 
 export interface SpotFigureModel {
   readonly source: string;
@@ -44,7 +45,8 @@ export function parseSpotFigureModel(value: unknown): SpotFigureModel {
 
 export interface SpotFigurePixels { readonly data: Uint8Array; readonly width: number; readonly height: number; readonly channels: number }
 
-export function addSpotFigureToLimbPlate(plate: { data: Uint8Array; size: number; lossless: boolean }, image: SpotFigurePixels, model: SpotFigureModel) {
+export function addSpotFigureToLimbPlate(plate: { data: Uint8Array; size: number; lossless: boolean }, image: SpotFigurePixels, model: SpotFigureModel,
+  color: StellarColor, limb: { readonly u1: number; readonly u2: number }) {
   const { data, size } = plate, { panel } = model;
   if (data.length !== size * size * 4) throw new TypeError('The limb plate must be square RGBA.');
   if (image.channels !== 3 || image.data.length !== image.width * image.height * 3 ||
@@ -64,7 +66,7 @@ export function addSpotFigureToLimbPlate(plate: { data: Uint8Array; size: number
       return dark(x, row - 5) || dark(x, row + 5);
     return dark(x, y);
   };
-  const output = new Uint8Array(data), radius = size / 2;
+  const output = new Uint8Array(data), radius = size / 2, full = displayedLuminance(color.linear);
   let spotSamples = 0, discSamples = 0;
   for (let py = 0; py < size; py++) for (let px = 0; px < size; px++) {
     let covered = 0;
@@ -76,8 +78,14 @@ export function addSpotFigureToLimbPlate(plate: { data: Uint8Array; size: number
       if (spot((1 + x) * panel.size / 2, (1 + y) * panel.size / 2)) { covered++; spotSamples++; }
     }
     if (!covered) continue;
-    const index = 4 * (py * size + px) + 3, base = data[index]!;
-    output[index] = Math.round(base + (255 - base) * (1 - model.spotToPhotosphereTessIntensityRatio) * covered / 4);
+    const x = (px + 0.5 - radius) / radius, y = (py + 0.5 - radius) / radius;
+    const mu = Math.sqrt(Math.max(0, 1 - x * x - y * y));
+    const limbIntensity = Math.max(0, quadraticIntensity(mu, limb.u1, limb.u2));
+    const spotIntensity = 1 - (1 - model.spotToPhotosphereTessIntensityRatio) * covered / 4;
+    // The paper's TESS contrast is a light-intensity ratio. Browser alpha acts on encoded
+    // sRGB bytes; convert the combined linear intensity before baking black-plate alpha.
+    const shown = displayedLuminance(color.linear.map(value => value * limbIntensity * spotIntensity)) / full;
+    output[4 * (py * size + px) + 3] = Math.round(255 * (1 - shown));
   }
   return { plate: { data: output, size, lossless: plate.lossless }, projectedSpotFraction: spotSamples / discSamples };
 }

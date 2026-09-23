@@ -471,7 +471,7 @@ export const quadraticIntensity = (mu: number, u1: number, u2: number) => 1 - u1
 
 const SRGB_LUMINANCE = [0.2126, 0.7152, 0.0722] as const;
 const BAYER_4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map(value => (value + 0.5) / 16);
-const displayedLuminance = (linear: readonly number[]) => linear.reduce((sum, value, channel) => sum + SRGB_LUMINANCE[channel]! * linearToSrgb(value), 0);
+export const displayedLuminance = (linear: readonly number[]) => linear.reduce((sum, value, channel) => sum + SRGB_LUMINANCE[channel]! * linearToSrgb(value), 0);
 
 /** A square RGBA limb plate `size` texels across whose disc fills it edge to edge: black, with alpha such that the photosphere colour
  * under it shows the displayed luminance of the colour dimmed by I(mu) / I(1), dithered to within one 8-bit step. Outside the disc it
