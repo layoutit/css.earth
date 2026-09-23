@@ -22,6 +22,56 @@ const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
 const NEUTRAL_GRAY = '#9a9a9a';
 const INTER_URL = 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf';
 
+/** Static presentation for the scaffold's single neutral-shape lens and 460px lighting frames. */
+export function hostedPlanetStylesheet(id: string): string {
+  const scope = `.object-stage[data-object-id="${id}"]`;
+  const scale = BODY_RADIUS_UNITS * 2 / 460;
+  return `${scope} > .${id}-material-composite {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+${scope} .polycss-scene s,
+${scope} .${id}-fixed-material {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+${scope} .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+}
+${scope} .polycss-scene s:not(.${id}-polar) {
+  background-image: url("/scenes/${id}/${id}-surface-shape@2x.webp") !important;
+}
+${scope} .polycss-scene s.${id}-polar {
+  background-image: url("/scenes/${id}/${id}-poles-shape@2x.webp") !important;
+}
+/* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
+${scope} .${id}-fixed-material {
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(var(--${id}-light-roll, 0deg)) scale(${scale});
+}
+${scope}.${id}-hide-shadows .${id}-fixed-material {
+  transform: translate(-50%, -50%) scale(${scale});
+}
+`;
+}
+
 export interface HostedPlanetScaffold {
   readonly id: string; readonly name: string; readonly system: string; readonly description: string;
   readonly paper: string; readonly paperCredit: string; readonly order?: number; readonly color?: string;
@@ -63,13 +113,14 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       sources: ['raster', 'geometry', 'celestial', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]) },
-    page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css'], metadata: { url: 'prepared/page.json' } },
+    page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: 'exoplanet', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
       description: spec.description, systemName: spec.system, order, context: { order } },
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
       metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
 
+  put(`src/renderers/css/styles/${id}-surfaces.css`, hostedPlanetStylesheet(id));
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
     latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false,
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, quality: 88, centerLongitudeDegrees: 0 },
@@ -81,6 +132,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       terminator: [0, 0.1], maximumAlpha: 0.95, bankSchema: `css${id}-prepared-lighting-bank@1`, billboardSchema: `css${id}-prepared-lighting-billboard@1`,
       metadata: { schema: `css${id}-prepared-lighting@1`, storageModel: 'prepared-full-resolution-density-row-shards',
         model: 'prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere',
+        sourceRadius: 'measurements.json#radiusKm',
+        limbMeaning: 'The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.',
         sourceRenderer: 'OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl', ambientIntensity: 0.05,
         shadowlessFloodLimbFloor: 0.35, orenNayarRoughness: 0, terminatorSmoothstep: [0, 0.1], minimumLightViewZ: -1, maximumLightViewZ: 1,
         baseLightAzimuthDegrees: 0, cameraContract: 'unbounded-accumulated-matrix3d-phase-and-roll', runtimeRasterization: false } } });

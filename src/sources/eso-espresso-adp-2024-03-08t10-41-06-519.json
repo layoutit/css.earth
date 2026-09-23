@@ -1,0 +1,40 @@
+{
+  "id": "eso-espresso-adp-2024-03-08t10-41-06-519",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "ESPRESSO combined spectrum of HD 110067, 2024-02-14",
+  "identifiers": [
+    {
+      "type": "archive",
+      "value": "ivo://eso.org/ID?ADP.2024-03-08T10:41:06.519"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
+      "label": "ESO native FITS spectrum"
+    },
+    {
+      "role": "rights",
+      "url": "https://archive.eso.org/cms/eso-data/eso-data-access-policy.html",
+      "label": "ESO data-use policy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
+      "checkedOn": "2026-09-23",
+      "locator": "Primary header OBJECT, ARCFILE, DATE-OBS, PRODCATG; SPECTRUM extension"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO Science Archive / ESPRESSO",
+      "scope": "spectrum",
+      "evidence": "Archive product and FITS header"
+    }
+  ]
+}

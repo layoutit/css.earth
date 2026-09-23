@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 280.13367087131337,
+  "declinationDegrees": -0.10719446816824861,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No planetary spin is measured in https://doi.org/10.1038/s41586-023-06692-3. The display axis is the hosted orbit normal; no rotation is propagated.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis, the orbit normal; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "Display orientation only; no measured pole, spin sense or prime meridian is implied."
+}
