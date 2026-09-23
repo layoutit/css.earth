@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToParentKm,
-  systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
+  systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedBarycentreCompanion, hostedOrbitCentreStateKm } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '../prepare/prepare-catalog.mts';
 import { parseSpatialContextCommand, prepareSpatialContext } from './prepare-spatial-context.js';
@@ -181,13 +181,24 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
         assert(Math.hypot(...modelPositionM(id).map((value, axis) => value - body.positionM[axis]!)) <= Math.max(.001, Math.hypot(...body.positionM) * Number.EPSILON * 8), `${id} differs from its independent placement`);
         continue;
       }
-      assert.equal(body.orbit.centerBodyId, parent);
       // At outer-dwarf coordinates one floating-point step already exceeds a
       // millimetre. Bound the independent conversion by four relative epsilons.
       const agrees = (expected: readonly number[], actual: readonly number[]) =>
         Math.hypot(...expected.map((value, axis) => value - actual[axis]!)) <=
           Math.max(.001, Math.hypot(...expected) * Number.EPSILON * 4);
       assert(agrees(modelPositionM(id), body.positionM), `${id} differs from its independent ephemeris`);
+      // A circumbinary orbit is centred on its host and companion's centre of mass, a named centre whose parent is the host.
+      const companion = (HOSTED_PLANET_IDS as readonly string[]).includes(id) ? hostedBarycentreCompanion(id as HostedPlanetId) : null;
+      if (companion) {
+        const centreId = `${parent}-${companion.id}-barycentre`, offset = hostedOrbitCentreStateKm(id as HostedPlanetId, source.frame.epochJdTt).positionKm;
+        const centreM = modelPositionM(parent).map((value, axis) => value + offset[axis]! * 1000);
+        assert.equal(body.orbit.centerBodyId, centreId);
+        assert.equal(result.orbitCenters[centreId].centerBodyId, parent);
+        assert(agrees(centreM, body.orbit.centerPositionM), `${id} orbit centre differs from the independent barycentre`);
+        assert(agrees(centreM, result.orbitCenters[centreId].positionM), `${centreId} differs from the independent barycentre`);
+        continue;
+      }
+      assert.equal(body.orbit.centerBodyId, parent);
       assert(agrees(modelPositionM(parent), body.orbit.centerPositionM), `${id} orbit differs from its parent's independent ephemeris`);
     }
     // A placed star with an orbiting planet roots its own planetary system.

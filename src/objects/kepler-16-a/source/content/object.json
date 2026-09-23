@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-16-a",
+  "displayName": "Kepler-16 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.65 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1109-3432",
+          "url": "https://arxiv.org/abs/1109.3432",
+          "label": "Doyle et al. 2011",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "75 parsecs",
+        "source": {
+          "catalogueId": "simbad-kepler-16",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Kepler-16",
+          "label": "SIMBAD, Kepler-16 (Gaia EDR3 parallax)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "kepler-16-a-lens-shape.webp",
+        "surface": "kepler-16-a-surface-shape@2x.webp",
+        "poles": "kepler-16-a-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-16-a-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1109.3432"
+        },
+        "falseColor": false,
+        "notes": "No image of the photosphere is cast here: at 0.08 milliarcseconds the star is far too small for any interferometer to resolve (see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "L. R. Doyle et al., \"Kepler-16: A Transiting Circumbinary Planet\", Science 333, 1602 (2011), arXiv:1109.3432",
+      "href": "https://arxiv.org/abs/1109.3432"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1109.3432",
+      "credit": "L. R. Doyle et al., \"Kepler-16: A Transiting Circumbinary Planet\", Science 333, 1602 (2011), arXiv:1109.3432"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-16-a.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}
