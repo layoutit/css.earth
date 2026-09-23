@@ -18,7 +18,7 @@ import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
 import { inside, assertPinnedLabel, sourceCacheAddress, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
 import { STEREO_COR1_F16_PROFILE } from './observation-families.mts';
-import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './families/f16-spherical-grid.mts';
+import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './families/f16/f16-spherical-grid.mts';
 import { member } from './families/common.mts';
 
 export async function acquireSourceFile(root: string, file: SourceFile): Promise<void> {

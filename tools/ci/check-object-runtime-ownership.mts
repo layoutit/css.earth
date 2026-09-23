@@ -9,7 +9,7 @@ import { isRecord, requireRecord, requireArray, requireString } from "../sources
 import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
 import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
-import { parseNavigationDistance } from '../../site/navigation-distance.mts';
+import { parseNavigationDistance } from '../../site/navigation/navigation-distance.mts';
 import { definePreparedFocus } from '../../site/prepared-focus-object.mts';
 import { parseObjectDiscovery } from '../../site/object-discovery.mts';
 import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";

@@ -1,10 +1,10 @@
-import { ContextChange, createWorldContextFrameReceiver } from './world-context-frame.js';
+import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
-import type { WorldContextPublication } from './world-context-frame.js';
-import type { WorldContextView } from './world-context-planner.js';
+import type { WorldContextPublication } from './world-context/world-context-frame.js';
+import type { WorldContextView } from './world-context/world-context-planner.js';
 import { parsePreparedOrbitCenters } from './prepared-orbit-centers.js';
-import { createSystemFade, createWorldContextPlanner, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context-planner.js';
-export { logarithmicFade } from './world-context-planner.js';
+import { createSystemFade, createWorldContextPlanner, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/world-context-planner.js';
+export { logarithmicFade } from './world-context/world-context-planner.js';
 import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';

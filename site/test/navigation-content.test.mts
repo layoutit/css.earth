@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { objectLinkIsCurrent } from '../navigation-content.mts';
+import { objectLinkIsCurrent } from '../navigation/navigation-content.mts';
 
 const origin = 'https://site.test';
 function link(href: string, preparedFocus = false) {
