@@ -2,14 +2,14 @@ import { createObjectCatalogue } from './object-catalogue.mts';
 import { createSelectionPresentation, setPanelHidden } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
-import type { SceneSubject } from './scene-selection.mts';
+import type { SceneSubject } from './scene/scene-selection.mts';
 import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { requiredElement } from './browser-types.mts';
 import { objectCategoryCount } from './object-categories.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
-import { createNavigationTreeController } from './navigation-tree-client.mts';
+import { createNavigationTreeController } from './navigation/navigation-tree-client.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 

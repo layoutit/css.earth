@@ -5,7 +5,7 @@ import discoveries from './prepared-object-discovery.json' with { type: 'json' }
 import { parseObjectDiscovery } from './object-discovery.mts';
 import distances from './prepared-object-distances.json' with { type: 'json' };
 import focuses from './prepared-focus-objects.json' with { type: 'json' };
-import { parseNavigationDistance } from './navigation-distance.mts';
+import { parseNavigationDistance } from './navigation/navigation-distance.mts';
 import { definePreparedFocus, isSceneObject } from './prepared-focus-object.mts';
 import type { NavigableObject } from './prepared-focus-object.mts';
 import { record } from './browser-types.mts';

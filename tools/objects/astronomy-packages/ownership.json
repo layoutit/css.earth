@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-astronomy-package-ownership@1",
   "pythonBoundary": "tools/objects/astronomy-packages/client.mts",
-  "catalogPreparationPythonBoundary": "tools/objects/telescopes/wwt-catalog-build.mts",
+  "catalogPreparationPythonBoundary": "tools/objects/telescopes/wwt/wwt-catalog-build.mts",
   "owners": [
     {
       "mechanic": "IVOA TAP requests and VOTable decoding",
