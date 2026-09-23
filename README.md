@@ -1,4 +1,4 @@
-# css.earth 🌎
+# ![css.earth](.github/assets/css-earth-wordmark.png)
 
 A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders celestial bodies as real HTML and CSS 3D geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without WebGL or canvas. It turns open space data into browser-ready textures, meshes and scene files, loaded into one model of the universe.
 
