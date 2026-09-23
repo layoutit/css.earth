@@ -31,9 +31,15 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
   let rotation = [1,0,0,0,1,0,0,0,1];
   let liveMotion: any = null, resolveMotion: any, physicalOwners = 0, publications = 0;
   const callbacks: any = {};
-  function stop() { if (liveMotion) { liveMotion = null; resolveMotion({ completed: false }); } }
+  function finish(completed: boolean) {
+    if (liveMotion) { liveMotion.signal?.removeEventListener('abort', stop); liveMotion = null; resolveMotion({ completed }); }
+  }
+  function stop() { finish(false); }
   const control = { stop, destroy: stop, update() {}, stats: () => ({}), invalidateTrackball() {},
-    flyTo(motion: any) { stop(); liveMotion = motion; return new Promise(resolve => { resolveMotion = resolve; }); } };
+    flyTo(motion: any) { stop(); liveMotion = motion; return new Promise(resolve => {
+      resolveMotion = resolve; motion.signal?.addEventListener('abort', stop, { once: true });
+      if (motion.signal?.aborted) stop();
+    }); } };
   const orbit = createRetainedCubicSkyOrbit({ stage, inputSurface: stage, cameraElement, sceneElement,
     cubicSky: { root: skyElement, setOrientation() {} }, requireSun: false,
     skyPlan: { cameraContract: 'scene-locked-unbounded-accumulated-matrix3d' },
@@ -68,7 +74,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
   return { orbit, callbacks, roots, world, range, focusView, view,
     get physicalOwners() { return physicalOwners; }, get publications() { return publications; },
     tick(progress: number) { const motion = liveMotion; if (!motion) throw new Error('No retained flight'); motion.sample(progress);
-      if (progress === 1) { liveMotion = null; resolveMotion({ completed: true }); } },
+      if (progress === 1) finish(true); },
   };
 }
 

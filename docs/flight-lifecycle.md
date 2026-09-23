@@ -9,6 +9,21 @@ detail that is still activating; the persistent world then owns departure
 publication while the replacement factory and assets load. Its camera starts
 from the last drawn pose and retains the same destination-detail hold.
 
+`createCameraFlight` owns scheduling, acceleration, cancellation and completion
+for world navigation, prepared-focus flights and native surface fly-to. Each
+path supplies its existing camera sampling math. World navigation installs one
+set of input listeners for the whole journey. A handoff holds the flight at its
+acknowledged pose while that exact view is prepared, then changes the presenter
+and releases the hold. It does not create a departure or continuation runner.
+The incoming detail and persistent world still acknowledge one publication
+together; cancellation prevents a late worker reply from moving either one.
+
+Surface fly-to keeps its fitted trajectory and stops when direct input takes
+over. Destination input hurries arrival; cross-object input can also stop before
+motion or during the visible approach. Drag and inertia remain native input
+motions. Reduced-motion handoffs publish their endpoint and complete without
+waiting for an animation frame.
+
 Preparation supplies `tree.activationGroups` for every registered object. Each
 group contains at most 64 existing sibling leaves; containers and leaves whose
 display belongs to selection are excluded. The preparation pipeline writes this

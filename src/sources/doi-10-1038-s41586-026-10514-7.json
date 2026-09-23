@@ -1,0 +1,39 @@
+{
+  "id": "doi-10-1038-s41586-026-10514-7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Aerosols and hydrocarbons in the atmosphere of a white dwarf planet",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-026-10514-7"
+    },
+    {
+      "type": "arXiv",
+      "value": "2607.01316"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-026-10514-7",
+      "label": "MacDonald et al. (2026)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1038/s41586-026-10514-7",
+      "checkedOn": "2026-09-23",
+      "locator": "Extended Data Table 1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "R. J. MacDonald, C. E. O'Connor, V. A. Boehm et al.",
+      "scope": "citation",
+      "evidence": "Published author list"
+    }
+  ]
+}

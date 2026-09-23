@@ -392,14 +392,16 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
-          isLocator && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
+          (isLocator || hostedPlanet) && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
           (!entry.indicatorHidden || hovered || isSelected);
         const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
           annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
           lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
-        projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth; projected.diameter = diameter; projected.markerOpacity = markerOpacity;
+        // In a system overview a planet of another star is a locator: its dot stays inside the indicator circle.
+        projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth;
+        projected.diameter = hostedPlanet && overview ? Math.min(diameter, BODY_INDICATOR_DIAMETER / 2) : diameter; projected.markerOpacity = markerOpacity;
         projected.circle = circle; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
         projected.inFrame = inFrame; projected.priority = priority;
         projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;

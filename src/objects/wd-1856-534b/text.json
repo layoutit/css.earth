@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wd-1856-534b",
+  "card": {
+    "text": "A cold giant planet, wider than the white dwarf it circles every 34 hours.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-020-2713-y",
+        "url": "https://doi.org/10.1038/s41586-020-2713-y",
+        "label": "Vanderburg et al. (2020), Nature 585, 363",
+        "checked": "2026-09-23",
+        "locator": "Table 1",
+        "quote": "Radius Ratio (Rp/R⋆) 7.28±0.65"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WD 1856+534 b is nearly Jupiter's size and about eight times wider than its star. JWST saw its own faint heat, about 186 K.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2504-16982",
+        "url": "https://arxiv.org/abs/2504.16982",
+        "label": "Limbach et al. (2025)",
+        "checked": "2026-09-23",
+        "locator": "Abstract; Table 1",
+        "quote": "a temperature of 186+6 −7 K"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the measured radius. Gray marks the unknown visible colour; the light is its white dwarf's."
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wd-1856-534b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WD 1856+534 b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 67631.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wd-1856-534b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WD 1856+534 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 5106533.9,
+      "description": "A cold giant planet, wider than the white dwarf it circles every 34 hours.",
+      "systemName": "WD 1856+534 system",
+      "order": 1711,
+      "context": {
+        "order": 1711
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        113111326620439820,
+        -439999707210069600,
+        614157909711673100
+      ],
+      "presentationToReference": [
+        0.1686568941344329,
+        -0.9651453662634899,
+        -0.2001231471895262,
+        -0.5705392777534365,
+        -0.26115217614066655,
+        0.7786427123126382,
+        0.803766001148042,
+        0.017145345639803373,
+        0.5946984551193806
+      ],
+      "orbitUpReference": [
+        0.9651453662634899,
+        0.26115217614066655,
+        -0.017145345639803373
+      ],
+      "metersPerUnit": 218165.8064516129,
+      "bodyRadiusM": 67631400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
