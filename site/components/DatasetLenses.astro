@@ -30,7 +30,7 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">
     <nav class="object-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens) => (
-        <div class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}>
+        <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}>
           <button
             class="object-observation-control object-thumbnail-leading"
             type="submit"

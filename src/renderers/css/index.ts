@@ -62,3 +62,4 @@ export { requireAssets } from './validation/resources-tree.js';
 export { requireControls } from './validation/camera-controls.js';
 
 export { PREPARED_INTERIOR_DISC_SIZE } from './rendering/prepared-interior-disc.js';
+export { publishDatasetSelection } from './rendering/object-control-binding.js';

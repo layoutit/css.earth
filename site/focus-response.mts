@@ -69,7 +69,6 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
       end.remove();
       presentation = { ...runtime.state(), selectLens() {} };
     }
-    for (const context of bank.querySelectorAll<HTMLElement>('[data-dataset-context]')) context.hidden = context.dataset.datasetContext !== presentation.selectedLens;
   } else resolvePreparedFocusLens(selection.lens, null, unavailable);
   const root = requiredElement<HTMLElement>(shell, '[data-prepared-focus-card]');
   const card = createPreparedFocusCard(root, id => {
