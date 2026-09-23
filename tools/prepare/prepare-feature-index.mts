@@ -1,4 +1,3 @@
-import { sha256 } from '../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -17,7 +16,7 @@ interface IndexedFeature { readonly objectId: string; readonly id: string; reado
 /** One body's places catalogue, pinned for the search function, which searches every place and alternate name so no
  * browser downloads it (Earth's is 14.8 MB). `duplicates` pairs a place with the named feature of the body that already
  * carries it ([place id, feature id]): search lists the feature, found by the place's alternate names too. */
-interface PlacePin { readonly objectId: string; readonly type: string; readonly url: string; readonly assetUrl: string; readonly bytes: number; readonly sha256: string; readonly count: number; readonly duplicates: readonly (readonly [string, string])[]; }
+interface PlacePin { readonly objectId: string; readonly type: string; readonly url: string; readonly assetUrl: string; readonly count: number; readonly duplicates: readonly (readonly [string, string])[]; }
 
 /** A place and a named feature of the same settlement (Natural Earth's Buenos Aires and GeoNames' Buenos Aires): same
  * search name, within this distance. The named feature is kept; it already has a label on the body. */
@@ -36,7 +35,6 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
   if (radiusM === null) throw new TypeError(`${objectId}: places need the body's radius.`);
   if (!record(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
   const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
-  if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${objectId}: the public places catalogue does not match its prepared descriptor; run pnpm prepare:objects.`);
   const catalog: unknown = JSON.parse(bytes.toString('utf8'));
   if (!record(catalog) || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count differs from its descriptor.`);
   const duplicates: (readonly [string, string])[] = [];
@@ -50,7 +48,7 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
     if (settlement) duplicates.push([at.id, settlement.id]);
   }
   // The deploy serves scene files from the asset bucket (ASSET_ORIGIN); a local build serves them itself.
-  return { objectId, type: 'City', url, assetUrl: await resolveBuildSceneAddress(url, root), bytes: bytes.length, sha256: text(pin.sha256, 'places sha256'), count: catalog.places.length, duplicates };
+  return { objectId, type: 'City', url, assetUrl: await resolveBuildSceneAddress(url, root), count: catalog.places.length, duplicates };
 }
 
 function text(value: unknown, at: string): string { if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be text.`); return value; }
@@ -77,7 +75,6 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     for (const pin of pins) {
       const url = text(pin.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
-      if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${object.id}: the public feature catalogue does not match its prepared descriptor; run pnpm prepare:objects.`);
       const part: unknown = JSON.parse(bytes.toString('utf8'));
       if (!record(part) || !Array.isArray(part.features) || part.features.length !== pin.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
       catalog ??= part;
@@ -115,7 +112,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   const encoded = Buffer.from(`${JSON.stringify(index)}\n`);
   await mkdir(resolve(root, 'public/features'), { recursive: true });
   await writeFile(resolve(root, 'public/features/index.json'), encoded);
-  const pin = { schema: FEATURE_INDEX_SCHEMA, url: FEATURE_INDEX_URL, bytes: encoded.length, sha256: sha256(encoded), count: features.length, objects: objects.map(object => object.id) };
+  const pin = { schema: FEATURE_INDEX_SCHEMA, url: FEATURE_INDEX_URL, count: features.length, objects: objects.map(object => object.id) };
   await writeFile(resolve(root, 'site/prepared-feature-index.json'), `${JSON.stringify(pin, null, 2)}\n`);
   return pin;
 }

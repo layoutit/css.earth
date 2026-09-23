@@ -268,7 +268,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
 /** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as the
  * binary orbit bank (`encodeWorldOrbits`), which this summary pins; each orbit here keeps its parent, bounds and
  * size. Classification views are build-time only. */
-export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank: { readonly byteLength: number; readonly sha256: string }) {
+export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank: { readonly byteLength: number }) {
   const { classificationViews: _views, ...rest } = prepared;
   return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBank: freeze({ ...orbitBank }), bodies: freeze(prepared.bodies.map(body => {
     if (!body.orbit) return body;

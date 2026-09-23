@@ -124,7 +124,7 @@ export interface PreparedWorldContext {
   readonly bodies: readonly PreparedContextBody[];
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
   /** The summary pins the binary orbit bank that holds its orbits' paths (`decodeWorldOrbits`). */
-  readonly orbitBank?: { readonly byteLength: number; readonly sha256: string };
+  readonly orbitBank?: { readonly byteLength: number };
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -412,10 +412,9 @@ export function orbitVertices(orbit: Pick<PreparedContextOrbitGeometry, 'vertice
 }
 const WORLD_ORBITS_MAGIC = 0x4f575343, WORLD_ORBITS_VERSION = 1;
 /** The planner's full context from the summary plan and its pinned binary orbit bank. The bank's sections become
- * typed-array views over the transferred bytes; each orbit passes the same checks as the JSON file. The caller
- * verifies the bank's sha256 against `plan.orbitBank` before decoding. */
+ * typed-array views over the transferred bytes; each orbit passes the same checks as the JSON file. */
 export function decodeWorldOrbits(plan: PreparedWorldContext, bytes: ArrayBuffer): PreparedWorldContextGeometry {
-  if (!plan.orbitBank || bytes.byteLength !== plan.orbitBank.byteLength) throw new TypeError('Orbit bank differs from its summary pin.');
+  if (!plan.orbitBank || bytes.byteLength !== plan.orbitBank.byteLength) throw new TypeError(`Orbit bank is ${bytes.byteLength} bytes; its summary says ${plan.orbitBank?.byteLength}.`);
   const view = new DataView(bytes);
   if (view.getUint32(0, true) !== WORLD_ORBITS_MAGIC || view.getUint32(4, true) !== WORLD_ORBITS_VERSION) throw new TypeError('Unsupported orbit bank.');
   const headerLength = view.getUint32(8, true), dataStart = 12 + headerLength + (8 - (12 + headerLength) % 8) % 8;
@@ -479,10 +478,10 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!geometry && input.classificationViews !== undefined) throw new TypeError('The world context summary carries no classification views.');
   if (geometry && input.orbitBank !== undefined) throw new TypeError('The full world context carries its orbit paths, not a bank pin.');
   const orbitBank = input.orbitBank === undefined ? undefined : (() => {
-    const pin = record(input.orbitBank, 'orbit bank pin', ['byteLength', 'sha256']);
-    const byteLength = positive(pin.byteLength, 'orbit bank byte length'), sha256 = text(pin.sha256, 'orbit bank sha256');
-    if (!Number.isSafeInteger(byteLength) || !/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Orbit bank pin is invalid.');
-    return Object.freeze({ byteLength, sha256 });
+    const bank = record(input.orbitBank, 'orbit bank', ['byteLength']);
+    const byteLength = positive(bank.byteLength, 'orbit bank byte length');
+    if (!Number.isSafeInteger(byteLength)) throw new TypeError('Orbit bank byte length is invalid.');
+    return Object.freeze({ byteLength });
   })();
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
