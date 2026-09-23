@@ -51,8 +51,7 @@ test('scientific focus emits the complete navigation contract for every lens tog
 });
 
 test('a displayed toggle must select a distinct prepared effect', () => {
-  const unbound = [structuredClone(variants()[0])];
-  unbound[0]!.when = {lensId:'elevation'};
+  const unbound = [{...structuredClone(variants()[0]),when:{lensId:'elevation'}}];
   assert.throws(() => validate(unbound), /setting shadows has no prepared variant/);
   const inert = variants().map(variant => ({...variant,writes:[]}));
   assert.throws(() => validate(inert), /setting shadows has no prepared effect/);
