@@ -23,7 +23,8 @@ const manifestCache = new Map<string, Promise<Readonly<Record<string, string>>>>
 /** The `filename -> sha256` map published for one object's `public/scenes/<id>/*`
  * assets (the public entries of its tracked `inventory.json`), cached per build process. */
 export function assetShaMap(id: string, root = process.cwd()): Promise<Readonly<Record<string, string>>> {
-  let cached = manifestCache.get(id);
+  const key = `${resolve(root)}\0${id}`;
+  let cached = manifestCache.get(key);
   if (!cached) {
     cached = (async () => {
       let bytes: string;
@@ -36,7 +37,7 @@ export function assetShaMap(id: string, root = process.cwd()): Promise<Readonly<
       const inventory = requireInventory(id, JSON.parse(bytes) as unknown);
       return Object.freeze(Object.fromEntries(inventory.assets.filter(asset => asset.location === 'public').map(asset => [asset.filename, asset.sha256])));
     })();
-    manifestCache.set(id, cached);
+    manifestCache.set(key, cached);
   }
   return cached;
 }

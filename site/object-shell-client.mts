@@ -438,6 +438,7 @@ function createSettingsController(
   surfaceLabels.addEventListener("change", () => {
     surfaceLabelsEnabled = surfaceLabels.checked;
     renderSurfaceLabels();
+    documentTarget.body.dispatchEvent(new Event('objectsurfacelabelschange'));
     onSurfaceLabelsChange(surfaceLabelsEnabled);
   }, { signal: events.signal });
   renderSurfaceLabels();
@@ -792,6 +793,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     documentTarget, objectId: documentTarget.body.dataset.objectShell ?? '',
     onResults(count) { visibleFeatures = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
+    onSelectionError(error) { console.error('Feature selection failed:', error); browsing = true; render(true); search.focus(); },
     selectOwnPlace: id => destinations?.selectById(id) ?? Promise.resolve(),
   });
   lifetime.onDispose(() => features?.destroy());
@@ -1064,10 +1066,12 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
 
   const markSelection = () => {
     documentTarget.documentElement.dataset.selection = preparedFocus ? 'prepared-focus' : overview ? overviewScope : 'object';
-    catalogueWindow?.setSelection(selectedObjectId, preparedFocus?.id ?? '');
+    const selection = preparedFocus ? { kind: 'prepared-focus', id: preparedFocus.id } as const
+      : overview || !selectedObjectId ? null : { kind: 'scene', id: selectedObjectId } as const;
+    catalogueWindow?.setSelection(selection);
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
-      const selected = preparedFocus ? anchor.dataset.preparedFocusId === preparedFocus.id
-        : !overview && !anchor.dataset.preparedFocusId && anchor.dataset.objectId === selectedObjectId;
+      const selected = selection?.kind === 'prepared-focus' ? anchor.dataset.preparedFocusId === selection.id
+        : selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
       anchor.classList.toggle('is-active', selected);
       if (selected) anchor.setAttribute('aria-current', 'page');
       else anchor.removeAttribute('aria-current');

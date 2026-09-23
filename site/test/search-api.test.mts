@@ -63,6 +63,30 @@ test('keystrokes queued before a frame send one request, for the newest text', a
   assert.deepEqual(shown, ['Buenos Crater', 'Buenos Aires']);
 });
 
+test('a failed feature selection reports a retry and restores its result buttons', async context => {
+  const { document, window } = parseHTML(`<body data-object-shell="mars"><section class="object-feature-results" hidden data-feature-index='${JSON.stringify(pin)}'>
+    <p class="object-destination-hint"></p><ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></section></body>`);
+  const frames: (() => void)[] = [];
+  Object.assign(window, { requestAnimationFrame: (callback: () => void) => frames.push(callback) });
+  context.mock.method(globalThis, 'fetch', async (input: string | URL) => handleFindRequest(new Request(String(input)), pin, files));
+  const errors: unknown[] = [];
+  const browser = createFeatureBrowser({ documentTarget: document, objectId: 'mars', onSelected() {}, onResults() {}, onSelectionError(error) { errors.push(error); } })!;
+  browser.bind({ catalog: () => null, loaded: async () => { throw new Error('unused'); },
+    select: async () => { throw new Error('camera failed'); }, selected: () => null, clear() {} });
+  const searching = browser.search('buenos');
+  await new Promise(resolve => setTimeout(resolve, 0));
+  for (const frame of frames.splice(0)) frame();
+  await searching;
+  const button = document.querySelector<HTMLAnchorElement>('.object-destination-result')!;
+  const click = new window.Event('click', { bubbles: true, cancelable: true });
+  Object.defineProperty(click, 'button', { value: 0 });
+  button.dispatchEvent(click);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(errors.length, 1);
+  assert.match(document.querySelector('.object-destination-hint')?.textContent ?? '', /Select it again to retry/);
+  assert.equal(button.ariaDisabled, 'false');
+});
+
 test('a city opens from its id with one small request, and the Back label names the bound body', async context => {
   const { document } = parseHTML(`<body><section class="object-destination-panel" hidden><button class="object-destination-back">← Back to Mars</button>
     <h2 class="object-destination-name"></h2><p class="object-destination-context"></p><p class="object-destination-status"></p></section></body>`);
@@ -77,4 +101,21 @@ test('a city opens from its id with one small request, and the Back label names 
   assert.equal(document.querySelector('.object-destination-name')?.textContent, 'Rosario');
   assert.equal(document.querySelector('.object-destination-back')?.textContent, '← Back to Earth');
   assert.equal(document.querySelector<HTMLElement>('.object-destination-panel')?.hidden, false);
+});
+
+test('a rejected city arrival clears busy state and offers a retry', async context => {
+  const { document } = parseHTML(`<body><section class="object-destination-panel" hidden><button class="object-destination-back"></button>
+    <h2 class="object-destination-name"></h2><p class="object-destination-context"></p><p class="object-destination-status"></p></section></body>`);
+  context.mock.method(globalThis, 'fetch', async (input: string | URL) => handleFindRequest(new Request(String(input)), pin, files));
+  let rejectArrival!: (error: Error) => void;
+  const arrival = new Promise<{ completed: boolean }>((_, reject) => { rejectArrival = reject; });
+  const browser = createDestinationBrowser({ documentTarget: document, onSelected() {}, onReset() {} })!;
+  browser.bind({ select: async () => ({ status: 'Earth overview at this location.', arrival }), reset() {} }, { id: 'earth', name: 'Earth' });
+  await browser.selectById('1691490');
+  const panel = document.querySelector<HTMLElement>('.object-destination-panel')!;
+  assert.equal(panel.ariaBusy, 'true');
+  rejectArrival(new Error('flight failed'));
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(panel.ariaBusy, 'false');
+  assert.match(document.querySelector('.object-destination-status')?.textContent ?? '', /Flight failed.*retry/);
 });

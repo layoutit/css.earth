@@ -12,6 +12,7 @@ const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKE
   .map(({ presentation }) => presentation.size));
 
 interface RowView { readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; }
+export type CatalogueSelection = Readonly<{ kind: CatalogueIndexEntry['kind']; id: string }> | null;
 
 /** The prepared search thumbnail of a scene object with a context sprite (`tools/prepare/prepare-search-thumbnails.mts`). */
 export function searchPreviewUrl(objectId: string): string | null {
@@ -82,8 +83,7 @@ function createRow(documentTarget: Document): RowView {
   return { item, anchor, index: -1 };
 }
 
-function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexEntry, index: number, selectedObjectId: string,
-  selectedFocusId: string) {
+function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexEntry, index: number, selection: CatalogueSelection) {
   const { item, anchor } = view;
   view.index = index;
   item.style.position = 'absolute';
@@ -110,7 +110,7 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
     anchor.dataset.preparedFocusId = entry.id;
     delete anchor.dataset.objectId;
   }
-  const selected = entry.kind === 'scene' ? entry.id === selectedObjectId : entry.id === selectedFocusId;
+  const selected = selection?.kind === entry.kind && selection.id === entry.id;
   anchor.classList.toggle('is-active', selected);
   if (selected) anchor.setAttribute('aria-current', 'page');
   else anchor.removeAttribute('aria-current');
@@ -143,8 +143,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
   documentTarget: Document; windowTarget: BrowserWindow; list: HTMLUListElement; scrollTarget: HTMLElement;
 }) {
   let entries: readonly CatalogueIndexEntry[] = [];
-  let selectedObjectId = '';
-  let selectedFocusId = '';
+  let selection: CatalogueSelection = null;
   let frame: number | null = null;
   let active = new Map<number, RowView>();
   const spare: RowView[] = [];
@@ -166,7 +165,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     for (let index = start; index < end; index++) {
       if (active.has(index)) continue;
       const view = spare.pop() ?? createRow(documentTarget);
-      bindRow(documentTarget, view, entries[index]!, index, selectedObjectId, selectedFocusId);
+      bindRow(documentTarget, view, entries[index]!, index, selection);
       active.set(index, view);
     }
     for (const view of active.values()) {
@@ -190,7 +189,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     entries = next;
     for (const [index, view] of active) {
       const entry = entries[index];
-      if (entry) bindRow(documentTarget, view, entry, index, selectedObjectId, selectedFocusId);
+      if (entry) bindRow(documentTarget, view, entry, index, selection);
       else {
         view.item.remove();
         active.delete(index);
@@ -216,10 +215,9 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
       active.get(index)?.anchor.focus();
       return true;
     },
-    setSelection(objectId: string, focusId: string) {
-      selectedObjectId = objectId;
-      selectedFocusId = focusId;
-      for (const [index, view] of active) bindRow(documentTarget, view, entries[index]!, index, selectedObjectId, selectedFocusId);
+    setSelection(next: CatalogueSelection) {
+      selection = next;
+      for (const [index, view] of active) bindRow(documentTarget, view, entries[index]!, index, selection);
     },
     clear() { setEntries([]); },
     inspect() { return Object.freeze({ entries: entries.length, connectedRows: active.size, spareRows: spare.length }); },
