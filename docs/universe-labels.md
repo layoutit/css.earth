@@ -25,6 +25,8 @@ does not automatically need a caption on screen.
 - Nebula captions enter with the prepared stellar-context fade and retire with
   the galactic transition. Galaxies and clusters retain their prepared distance
   ranges. Background stars and the distant galaxy point field remain anonymous.
+- Catalogue-only galaxies remain visible as dots. Without a prepared scene,
+  they do not mount a marker or caption in the spatial view.
 
 ## Priority and crowding
 

@@ -157,7 +157,7 @@ test('only labels that show or are still fading out follow the camera', () => {
   runtime.publish(observer(0), viewport, 1); document.defaultView.advance(300);
   const shown = labels.filter(label => Number(label.style.opacity) > 0);
   expect(shown.length).toBe(Number(root.dataset.visibleLabels));
-  expect(root.children.filter(node => node.dataset.galaxyMarker && node.style.transform).length).toBeGreaterThan(shown.length);
+  expect(root.children.filter(node => node.dataset.galaxyMarker && node.style.transform).length).toBeGreaterThanOrEqual(shown.length);
   expect(ids(labels.filter(label => label.style.transform))).toEqual(ids(shown));
   // Covering the screen hides every label. Labels still fading out keep following their galaxies.
   const cover = [{ left: -400, right: 400, top: -300, bottom: 300 }], previous = transforms();
@@ -191,10 +191,18 @@ test('catalogue-only rows remain dots without marker captions while saved catalo
   expect(dots.length).toBeGreaterThan(10);
   expect(Number(root.dataset.visibleLabels)).toBeLessThanOrEqual(12);
   const unsupportedLabel = runtime.inspect().labels[unsupported.id]!;
-  const unsupportedMarker = root.children.find(node => node.dataset.galaxyMarker === unsupported.id)!;
+  const unsupportedMarker = root.children.find(node => node.dataset.galaxyMarker === unsupported.id);
   expect(unsupportedLabel.style.pointerEvents).toBe('none');
   expect(Number(unsupportedLabel.style.opacity)).toBe(0);
-  expect(Number(unsupportedMarker.style.opacity)).toBe(0);
+  expect(unsupportedLabel.parent).toBeNull();
+  expect(unsupportedMarker).toBeUndefined();
+  for (const id of ['hydra_1', 'leo_a', 'sagittarius_1']) {
+    const row = payload.objects.find((object: {id: string}) => object.id === id);
+    expect(row?.detailedObjectId).toBeUndefined();
+    expect(root.children.some(node => node.dataset.galaxyDot === id)).toBe(true);
+    expect(root.children.some(node => node.dataset.galaxyLabel === id || node.dataset.galaxyMarker === id)).toBe(false);
+  }
+  expect(root.children.some(node => node.dataset.galaxyLabel === supported.id)).toBe(true);
   runtime.publish(world, viewport, 0); document.defaultView.advance(600);
   expect(dots.every(dot => Number(dot.style.opacity) === 0)).toBe(true);
   runtime.destroy();
