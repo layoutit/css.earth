@@ -21,12 +21,6 @@
     },
     {
       "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 2660019,
-      "sha256": "bd745b55cd09c0277621cabfec1373082c79082628a50236373640c72dc4c06b"
-    },
-    {
-      "location": "prepared",
       "filename": "delivery.json",
       "bytes": 3704,
       "sha256": "f21e7e1ba2072fd6683336d323f1d140aa28866e6867abb7882a6b53ec631900"
@@ -394,8 +388,8 @@
     {
       "location": "prepared",
       "filename": "provenance.json",
-      "bytes": 57636,
-      "sha256": "70fb67ed1a0620c25aa15513eba75d99d3aa9e6e32793a1c2f2ff47ac1681491"
+      "bytes": 57328,
+      "sha256": "96c96c44b82cde7fde42eedae7797eaad02b5b308127412961c206bb8c441007"
     },
     {
       "location": "prepared",
