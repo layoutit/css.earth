@@ -10,13 +10,15 @@ export interface ObjectSelectionRuntimeOptions {
   definition: PreparedPresentationDefinition & { controls: ObjectControls };
   presentation: Pick<ReturnType<typeof mountPreparedPresentation>, "publishFrame" | "commitSelection">;
   residency: ReturnType<typeof createPreparedResidency>; lifetime: SceneLifetime;
-  onChange?: (state: Readonly<ObjectSelectionState>) => void; onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan) => void;
+  onChange?: (state: Readonly<ObjectSelectionState>) => void;
+  prepareSelection?: (selection: ObjectSelection, signal: AbortSignal) => void | Promise<void>;
+  onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan, intent: { kind: SelectionRequest['kind']; frameCamera: boolean }) => void;
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
   deferTextureRefinement?: boolean;
   initialLens?: string;
   initialSettings?: unknown;
 }
-interface SelectionRequest { selection: ObjectSelection; kind: "initial" | "selection" | "frame"; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
+interface SelectionRequest { selection: ObjectSelection; kind: "initial" | "selection" | "frame"; controller: AbortController; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
 
 import { resolvePreparedPresentation } from "./prepared-presentation.js";
 import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from "../runtime/object-contract.js";
@@ -25,7 +27,7 @@ const sameKeys = (a: readonly string[], b: readonly string[]) => a.length === b.
 
 export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime, initialLens, initialSettings,
-  onChange = () => {}, onCommit = () => {}, onFatalError, onMaterialError = () => {}, deferTextureRefinement = false,
+  onChange = () => {}, prepareSelection, onCommit = () => {}, onFatalError, onMaterialError = () => {}, deferTextureRefinement = false,
 }: ObjectSelectionRuntimeOptions) {
   const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
   let desired = initialSelection, committed: ObjectSelection | null = null, committedPlan: PreparedPresentationPlan | null = null, view: PreparedView | null = null;
@@ -71,12 +73,15 @@ export function createObjectSelectionRuntime({
     request.previous = null;
     return request.ticket;
   }
-  function run(selection: ObjectSelection, kind: SelectionRequest["kind"], signal?: AbortSignal) {
+  function run(selection: ObjectSelection, kind: SelectionRequest["kind"], signal?: AbortSignal, frameCamera = true) {
     if (!live() || signal?.aborted) return Promise.resolve(false);
+    const superseded = active;
     let previous = active;
     while (previous && !previous.ticket) previous = previous.previous;
-    const request: SelectionRequest = { selection, kind, ticket: null, plan: null, previous };
+    const request: SelectionRequest = { selection, kind, controller: new AbortController(), ticket: null, plan: null, previous };
     active = request;
+    superseded?.controller.abort();
+    const operationSignal = signal ? AbortSignal.any([signal, request.controller.signal]) : request.controller.signal;
     desired = selection;
     error = null;
     requests++;
@@ -93,19 +98,27 @@ export function createObjectSelectionRuntime({
       busy = false;
       notify();
     };
-    signal?.addEventListener('abort', abort, { once: true });
+    operationSignal.addEventListener('abort', abort, { once: true });
     const work = (async () => {
       try { busy = true; notify(); }
       catch (failure) { if (current()) onFatalError(failure); throw failure; }
       // Give rapid input one turn to replace demand before starting a decode.
       await Promise.resolve();
+      let prepared = false;
+      let preparation: Promise<void> | undefined;
       while (current()) {
         let ticket;
         try {
           const plan = resolve(selection);
           ticket = request.ticket && request.plan && sameKeys(plan.required, planFor(request).required) && sameKeys(plan.prewarm, planFor(request).prewarm)
             ? request.ticket : preparePass(request, plan);
-          const result = await Promise.race([lifetime.wait(ticket.ready), cancelled]);
+          if (!prepared && kind === 'selection' && prepareSelection) {
+            preparation = Promise.resolve(prepareSelection(selection, operationSignal));
+            prepared = true;
+          }
+          // Transfer native demand before awaiting companions, preserving shared decodes across rapid input.
+          const ready = preparation ? Promise.all([ticket.ready, preparation]).then(([value]) => value) : ticket.ready;
+          const result = await Promise.race([lifetime.wait(ready), cancelled]);
           if (!current() || result.cancelled) { discard(request); return false; }
           if (!result.value || request.ticket !== ticket) continue;
         } catch (failure) {
@@ -137,7 +150,7 @@ export function createObjectSelectionRuntime({
           request.ticket = null;
           frame(selection, plan);
           if (!current()) return false;
-          onCommit(selection, plan);
+          onCommit(selection, plan, { kind, frameCamera });
           if (!current()) return false;
           committed = selection;
           committedPlan = plan;
@@ -159,7 +172,10 @@ export function createObjectSelectionRuntime({
     // The binder observes user errors; frame-only failures retain the current
     // material and are reported separately from fatal partial DOM publication.
     work.catch(() => {});
-    return work.then(value => live() && value).finally(() => signal?.removeEventListener('abort', abort));
+    return work.then(value => live() && value).finally(() => {
+      operationSignal.removeEventListener('abort', abort);
+      request.controller.abort();
+    });
   }
   return Object.freeze({
     start() {
@@ -169,11 +185,11 @@ export function createObjectSelectionRuntime({
       started = true;
       return run(desired, "initial");
     },
-    dispatch(action: ObjectAction, options: { signal?: AbortSignal } = {}) {
+    dispatch(action: ObjectAction, options: { signal?: AbortSignal; frameCamera?: boolean } = {}) {
       if (!live() || !committed) return Promise.resolve(false);
       const valid = requireObjectAction(definition.controls, action);
       const next = reduceObjectSelection(desired, valid);
-      return run(next, "selection", options.signal);
+      return run(next, "selection", options.signal, options.frameCamera);
     },
     setView(next: PreparedView) {
       if (!live()) return;
@@ -209,6 +225,7 @@ export function createObjectSelectionRuntime({
     destroy() {
       if (destroyed) return;
       destroyed = true;
+      active?.controller.abort();
       discard(active);
       discard(active?.previous);
       active = null;

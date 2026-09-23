@@ -12,9 +12,9 @@ export function isFocusDatasetUrl(url: URL): boolean {
 export function readDatasetUrl(url: URL): { requested: boolean; id: string | null } {
   const query = url.searchParams.getAll('dataset');
   if (!query.length) return { requested: false, id: null };
-  if (query.length !== 1) throw new TypeError('The dataset link contains more than one dataset.');
+  if (query.length !== 1) throw new RangeError('The dataset link contains more than one dataset.');
   const id = query[0];
-  if (!id || /[\u0000-\u001f]/.test(id)) throw new TypeError('The dataset link is malformed.');
+  if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || id.length > 128) throw new RangeError('The dataset link is malformed.');
   return { requested: true, id };
 }
 
