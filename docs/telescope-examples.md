@@ -13,7 +13,10 @@ green or blue. That is representative colour, not what an eye would see, and eac
 channel. Channels that do not share a grid are refused rather than resampled onto one another. The rest are grey
 because there is only one measurement to draw. Every source sample becomes a block of equal output pixels. Nothing is
 smoothed, sharpened, interpolated or cleaned up, and a value outside the stated range is clipped rather than rescaled.
-The recipe also pins each product's sha256 and the command that makes it, so the whole chain can be re-run:
+The recipe also pins each product's sha256 and records the command that made it.
+The NGC 3132 NIRCam example has a missing grid recipe, as noted below; its
+product chain cannot currently be rerun from this checkout. For the other
+examples, rerun the chain with:
 
 ```
 <the toolkit command listed below>                  # re-makes the product
@@ -34,7 +37,12 @@ and east left, from the mosaics' own world coordinates. F187N and F405N are narr
 why the shells stand out and the stars, bright in the wide blue filter, come out blue-white. The two stars in the middle
 are the pair at the heart of the nebula; the dying star that made it is the fainter one.
 
-`node tools/objects/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-<band> output/jwst-imaging/<band>-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json`
+The recorded `image3.mts` command for this picture uses
+`--grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json`. That grid
+recipe is absent from this checkout, and no current NGC 3132 shared-grid recipe
+was found. The program record at
+[`ngc-3132-2733.json`](../tools/objects/jwst/imaging/programs/ngc-3132-2733.json)
+still identifies the exposures, but it does not replace the missing grid.
 
 ## JWST, NIRSpec: the ring around SN 1987A
 

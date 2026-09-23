@@ -154,12 +154,10 @@ After building the packages and renderer, check page metadata with:
 ```sh
 node --test site/test/object-page-data.test.mts
 node --test tools/prepared/serialize-prepared-scene.test.mts
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
+node --test site/test/rendered-page.test.mts
 node --test site/test/search-response.test.mts
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
 node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
-node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
+node --test site/test/scene-session.test.mts
 ```
 
 Worker reuse, cancellation and disposal are covered by
@@ -167,6 +165,8 @@ Worker reuse, cancellation and disposal are covered by
 in the renderer suite. Browser checks should hold a destination's actual scene
 request and verify an immediate complete card, one scene swap, retained camera
 and correct interruption behavior.
+The rendered-page test parses built HTML only; it does not perform those browser
+interactions.
 
 The progressive enhancement browser check disables JavaScript at desktop and
 phone widths, exercises native controls and links, then holds and releases
