@@ -8,6 +8,8 @@ The [Astropy 8.0.1 / NumPy 2.5.3 reference](color-reference.json) independently 
 
 The focused astronomy checks passed 26 tests, covering catalogue registration, stellar placement and hosted-orbit propagation. The system membership, radius, limb-source and planet-scaffold checks passed 13 tests. The seven prepared runtime packages passed 14 checks, including toggle commits without replacement of retained nodes. The star-scaffold and package-consistency checks passed six tests. Edited TypeScript passed scoped ESLint.
 
+CI exposed a preparation-order defect: restoring the Sun's published context after generating the current catalogue replaced it with a version missing the seven new bodies. The universe lanes now rerun the existing world-context preparation after restoration. Locally, restoring those three published files and regenerating them passed both the catalogue-membership check and the full-context/summary/binary-orbit consistency check (two selected tests).
+
 The shared source validator verified the seven manifests and public assets. The published source catalogue compiled with the new facts and citations. [Delivery evidence](delivery.json) records a fresh restore of all 312 inventoried files (50,027,919 bytes), with zero reuse or skipped files. Every downloaded file passed its inventory size and SHA-256 check.
 
 ## Inspected browser views
