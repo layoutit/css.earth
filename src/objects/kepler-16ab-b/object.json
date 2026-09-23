@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-16ab-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-16 (AB) b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 53890.6696
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-16ab-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-16 (AB) b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 15531101.1,
+      "description": "Saturn-mass planet that circles both stars of Kepler-16, one year every 226 days.",
+      "systemName": "Kepler-16 system",
+      "order": 1709,
+      "context": {
+        "order": 1709
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        470029765199096800,
+        -1359213603548961800,
+        1824798416548536800
+      ],
+      "presentationToReference": [
+        0.20176795073040893,
+        -0.9452143985662257,
+        -0.2566309311075723,
+        -0.5851897938330917,
+        -0.32644995555002165,
+        0.7422825147576716,
+        0.7853932768057257,
+        -0.0004089798003646699,
+        0.6189969575724004
+      ],
+      "orbitUpReference": [
+        0.9452143985662257,
+        0.32644995555002165,
+        0.0004089798003646699
+      ],
+      "metersPerUnit": 173840.86967741937,
+      "bodyRadiusM": 53890669.6
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

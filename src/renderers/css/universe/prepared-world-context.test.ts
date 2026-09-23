@@ -769,7 +769,8 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
     required(frame), viewport, required(SYSTEM_VIEWS.get(planet)), systemFramingRect(viewport), 0, false, SYSTEM_RANGES.get(planet));
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
-  const memberIds = new Set(context.bodies.filter(body => body.orbit?.centerBodyId === planet).map(body => body.id));
+  // The system's prepared members: bodies orbiting the planet, or a centre placed off it (a circumbinary planet).
+  const memberIds = new Set(required([context.focus, ...context.bodies].find(body => body.id === planet)!.systemView).memberIds);
   const moons = layer.inspect().filter(body => memberIds.has(body.id));
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   layer.selectObject(planet);

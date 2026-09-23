@@ -12,7 +12,8 @@ export interface StarRecord { hipparcosId?: number; rightAscensionDegrees: numbe
 export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: number;
   argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction' | 'periastron';
   transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; prediction?: HostedOrbitPredictionRecord; weaklyConstrained?: true;
-  sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string; constraint?: string } }
+  barycentreCompanion?: string;
+  sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string; constraint?: string; barycentre?: string } }
 
 export function objectValue(value: unknown, label = 'record'): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object`);
@@ -102,10 +103,15 @@ export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
     ascendingNodePositionAngleDegrees: numberValue(record.ascendingNodePositionAngleDegrees),
     ...(record.prediction === undefined ? {} : { prediction: readPredictionRecord(record.prediction) }),
     ...(record.weaklyConstrained === undefined ? {} : { weaklyConstrained: trueValue(record.weaklyConstrained) }),
+    ...(record.barycentreCompanion === undefined ? {} : { barycentreCompanion: stringValue(record.barycentreCompanion, 'hosted barycentre companion') }),
     sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation),
       ...(sources.eccentricity === undefined ? {} : { eccentricity: stringValue(sources.eccentricity) }),
       ...(sources.argumentOfPeriapsis === undefined ? {} : { argumentOfPeriapsis: stringValue(sources.argumentOfPeriapsis) }),
-      ...(sources.constraint === undefined ? {} : { constraint: stringValue(sources.constraint) }) } };
+      ...(sources.constraint === undefined ? {} : { constraint: stringValue(sources.constraint) }),
+      ...(sources.barycentre === undefined ? {} : { barycentre: stringValue(sources.barycentre) }) } };
+  if ((orbit.barycentreCompanion === undefined) !== (orbit.sources.barycentre === undefined)) {
+    throw new TypeError(`A hosted orbit about a binary barycentre cites that barycentre in sources.barycentre, and only then: barycentreCompanion ${String(orbit.barycentreCompanion)}.`);
+  }
   if ((orbit.weaklyConstrained === undefined) !== (orbit.sources.constraint === undefined)) {
     throw new TypeError(`A weakly constrained hosted orbit quotes its criterion in sources.constraint, and only then: weaklyConstrained ${String(orbit.weaklyConstrained)}.`);
   }
