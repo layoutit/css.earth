@@ -114,7 +114,7 @@ export async function sourceRun(root: string, product: SourceProduct, dependenci
   return { telescope: product.telescope, stage: 'source-qualification', inputs: [...inputs, ...dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!}))],
     parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: digest.digest('hex') }, { name: 'Node.js', version: process.version }] };
 }
-export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = []): Promise<LoadedSourceProduct[]> {
+export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = [], options: { readonly fetchRemote?: boolean } = {}): Promise<LoadedSourceProduct[]> {
   safeId(target, 'target');
   const source = resolve(root, 'src/objects', target, 'source');
   const value = await readFile(resolve(source, 'observations.json'), 'utf8').then(text => JSON.parse(text) as unknown).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
@@ -128,7 +128,7 @@ export async function loadSourceProducts(root: string, target: string, issues: S
       units: observation.units, meaning: observation.use, citation: observation.sourceFiles[0]!.origin,
       limitations: ['Filter width and achieved optical resolution are not supplied; pixel sampling is not optical resolution.'] });
   }
-  declared.push(...await intakeSources(root, target, declared, issues));
+  declared.push(...await intakeSources(root, target, declared, issues, options));
   if (new Set(declared.map(product => product.id)).size !== declared.length) throw new TypeError('Duplicate source product identity.');
   const loaded: LoadedSourceProduct[] = [];
   for (const product of declared) {
