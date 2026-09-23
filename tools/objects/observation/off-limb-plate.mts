@@ -15,7 +15,10 @@ export interface OffLimbSource {
   readonly center: readonly [number, number]; readonly discRadiusPx: number;
   readonly backgroundMaximum: number;
 }
-export interface OffLimbDisplay { readonly low: number; readonly high: number; readonly palette: readonly string[]; readonly rotationDegrees: number; }
+/** `opaqueAt`: the light at which alpha reaches 1, from the background maximum; the stretch low when absent. */
+/** `edgeFeatherPixels`: opacity falls to zero over this many frame pixels at the frame's edge, so a frame whose light reaches its
+ * edge does not end in a line. A presentation choice; the light values are unchanged. */
+export interface OffLimbDisplay { readonly low: number; readonly high: number; readonly palette: readonly string[]; readonly rotationDegrees: number; readonly opaqueAt?: number; readonly edgeFeatherPixels?: number }
 
 export function offLimbPlate(source: OffLimbSource, display: OffLimbDisplay, size: number, bodyDiameterPx: number): Uint8Array {
   if (!(size > 0) || !(bodyDiameterPx > 0) || !(source.discRadiusPx > 0) || !(display.high > display.low) || !(display.low > 0)) throw new TypeError('An off-limb plate needs positive sizes and a display stretch.');
@@ -34,7 +37,8 @@ export function offLimbPlate(source: OffLimbSource, display: OffLimbDisplay, siz
     const value = sample(ix - 0.5, iy - 0.5);
     if (!(value > source.backgroundMaximum)) continue;
     const level = Math.max(0, Math.min(1, (value - display.low) / (display.high - display.low)));
-    const alpha = Math.round(255 * Math.max(0, Math.min(1, (value - source.backgroundMaximum) / (display.low - source.backgroundMaximum))));
+    const edge = display.edgeFeatherPixels ? Math.max(0, Math.min(1, Math.min(ix, iy, source.width - ix, source.height - iy) / display.edgeFeatherPixels)) : 1;
+    const alpha = Math.round(255 * edge * edge * (3 - 2 * edge) * Math.max(0, Math.min(1, (value - source.backgroundMaximum) / ((display.opaqueAt ?? display.low) - source.backgroundMaximum))));
     const [r, g, b] = interpolatePalette(display.palette, level);
     data.set([r!, g!, b!, alpha], (py * size + px) * 4);
   }

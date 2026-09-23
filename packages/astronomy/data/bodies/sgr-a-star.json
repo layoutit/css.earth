@@ -1,0 +1,29 @@
+{
+  "id": "sgr-a-star",
+  "classification": "black-hole",
+  "order": 1252,
+  "physical": {
+    "name": "Sagittarius A*",
+    "horizonsCode": null,
+    "meanRadiusKm": 30150695.4,
+    "gravitationalParameterKm3PerS2": 5.702653548602135e+17,
+    "parent": null
+  },
+  "physicalNotes": "Radius: half the angular shadow diameter 48.7 +/- 7.0 microarcseconds measured from EHT data alone (EHT Collaboration 2022, ApJL 930, L12, Sgr A* Paper I, Table 1), at the distance 8277 pc of GRAVITY Collaboration (2022, A&A 657, L12, Table 1): 24.35e-6 x 8277 au = 0.2015 au = 30,150,695 km at 149,597,870.7 km per au. It is the size of the dark region an observer sees, not an event horizon. GM from the mass 4.297 +/- 0.012 million solar masses (GRAVITY 2022, Table 1) times the JPL solar GM 132712440041.93938 km^3/s^2.",
+  "star": {
+    "rightAscensionDegrees": 266.41681662499997,
+    "declinationDegrees": -29.00782497222222,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 8277,
+    "properMotionRaMasPerYear": -3.1528,
+    "properMotionDecMasPerYear": -5.5865,
+    "radialVelocityKmPerS": -1.8,
+    "sources": {
+      "position": "SIMBAD NAME Sgr A* (ICRS; coordinate reference 2011AJ....142...35P, Petrov et al. 2011, VLBA): https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*",
+      "distance": "GRAVITY Collaboration (2022, A&A 657, L12; arXiv:2112.07478), Table 1, four-star fit: R0 = 8277 +/- 9 pc. The stellar orbits in this system are angular sizes converted at this distance, as that fit does.",
+      "properMotion": "Reid & Brunthaler (2020, ApJ 892, 39; arXiv:2001.04386): -6.411 +/- 0.008 mas/yr along the Galactic plane and -0.219 +/- 0.007 mas/yr toward the North Galactic Pole, converted to ICRS components with Astropy 8.0.1 at the SIMBAD position: -3.1528, -5.5865 mas/yr (their Table 2 row against J1745-2820 reads -3.147, -5.578).",
+      "radialVelocity": "GRAVITY Collaboration (2022), Table 1: vz0 = -1.8 +/- 1.3 km/s, the fitted line-of-sight velocity of the mass centre."
+    },
+    "presentationUp": "display-axis"
+  }
+}

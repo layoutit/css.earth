@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { BODIES, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
+import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { encodeWorldOrbits, parseWorldContextSource, prepareWorldContext, summarizeWorldContext } from '../../src/preparation/spatial-context.js';
@@ -38,17 +38,39 @@ export function parseSpatialContextCommand(args: readonly string[], cwd = proces
   return { sourcePath: resolve(cwd, sourcePath), outputPath: resolve(cwd, outputPath), solarGeometryPath: resolve(cwd, solarGeometryPath) };
 }
 
+/** The sRGB hex of a Planck spectrum at a temperature, through a CIE colour-matching table (the route a star without a measured
+ * spectrum takes in tools/objects/observation/stellar-photometric-color.mts). */
+async function planckHex(kelvin: number, colorMatchingPath: string): Promise<string> {
+  const [{ planckColor }, { parseCieTable }] = await Promise.all([import('./observation/stellar-photometric-color.mts'), import('./observation/disc-integrated-color.mts')]);
+  const color = planckColor(kelvin, parseCieTable(await readFile(colorMatchingPath, 'utf8'), 3));
+  return `#${color.srgb.map(channel => channel.toString(16).padStart(2, '0')).join('')}`;
+}
+
 /** Prepares a renderer-neutral solar context from a pinned source document and epoch geometry adapter. */
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
   if (input.bodies === 'catalog') {
-    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
+    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string; orbitsWithinAu?: number } }[]> };
     const objects = await readCatalog(options.objectsDirectory);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
       .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,
+        ...(body.context!.orbitsWithinAu === undefined ? {} : { orbitsWithinM: body.context!.orbitsWithinAu * M_PER_AU }),
         ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
           ? { placement: 'approximate' as const } : {}) }));
+    // A star on a hosted orbit around a packaged host is drawn from its astronomy record without a page. Its colour is the Planck
+    // colour at its measured effective temperature, through the CIE 1931 2° observer its host package keeps, as a star package
+    // without a measured spectrum is coloured; with no measured temperature it is the shared neutral gray. Adding its package
+    // later makes it an ordinary, clickable body.
+    const packaged = new Set(objects.map(object => object.id));
+    const records = BODIES as Readonly<Record<string, { readonly name: string; readonly parent: string | null; readonly effectiveTemperatureK?: number }>>;
+    const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
+    for (const id of HOSTED_PLANET_IDS as readonly string[]) {
+      const record = records[id], parent = record?.parent;
+      if (packaged.has(id) || !parent || !packaged.has(parent)) continue;
+      input.bodies.push({ id, name: record!.name, color: record!.effectiveTemperatureK === undefined ? '#9a9a9a'
+        : await planckHex(record!.effectiveTemperatureK, resolve(objectsRoot, parent, 'source/reference/CIE_xyz_1931_2deg.csv')), unpackaged: true });
+    }
   }
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
@@ -58,6 +80,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   };
   const planetIds = new Set(SCENE_OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   const classifications = new Map(SCENE_OBJECTS.map(body => [body.id, body.classification]));
+  // A planet of another star closes its orbit. A star on a hosted orbit (an S-star around Sgr A*) draws the half-orbit trail a
+  // comet does: dozens of eccentric ellipses around one host read as a tangle, their recent paths as motion.
+  const hostedIds = new Set<string>(HOSTED_PLANET_IDS), hostedStarIds = new Set<string>(HOSTED_PLANET_IDS.filter(id => !(EXOPLANET_IDS as readonly string[]).includes(id)));
   const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mts')).href) as {
     SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE: number;
     SYSTEM_FRAMING_ANGLES: { readonly elevationsDegrees: readonly number[]; readonly azimuthStepDegrees: number };
@@ -83,7 +108,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // A star other than the focus is placed, not orbiting: the context carries its position and radius and draws no trajectory.
     // A planet of another star closes its orbit around that star, which makes the star the root of its own planetary system.
     const classification = classifications.get(body.id);
-    facts[body.id] = { radiusM, orbitStyle: classification === 'star' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
+    facts[body.id] = { radiusM, orbitStyle: hostedStarIds.has(body.id) ? 'trail' : hostedIds.has(body.id) ? 'closed' : classification === 'star' || classification === 'black-hole' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
   }
   // A star measured to be bound to another with no measured orbit carries the pair's centre of mass, weighted by the
   // published masses (as gravitational parameters) at the two prepared positions.

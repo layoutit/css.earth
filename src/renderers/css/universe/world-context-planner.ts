@@ -16,6 +16,8 @@ export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
 const ORBIT_LOD_PIXELS = 0.1;
+/** An authored system range fades out over one doubling of camera distance beyond it. */
+const AUTHORED_RANGE_FADE = 2;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
 // camera sample. This uses committed visibility, never worker-local history.
@@ -142,6 +144,11 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   const positions = roots.map(id => byId.get(id)!.positionM);
   const rootIndex = rootIds.map(id => roots.indexOf(id));
   const values = new Float64Array(roots.length);
+  // Every system fades over the authored distances, unless its host authors its own orbit range: that system is drawn
+  // whole to the range and gone one doubling of distance beyond it (a presentation choice, not a measurement).
+  const ranges = roots.map(id => { const point = byId.get(id); return point && 'orbitsWithinM' in point ? point.orbitsWithinM : undefined; });
+  const fadeStarts = ranges.map(range => range ?? plan.system.fadeOutStartDistanceM);
+  const hiddenDistances = ranges.map(range => range === undefined ? plan.system.hiddenDistanceM : range * AUTHORED_RANGE_FADE);
   return Object.freeze({
     /** The largest system opacity, after measuring every system from this camera position. */
     update(positionM: readonly number[]) {
@@ -149,7 +156,7 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
       for (let index = 0; index < roots.length; index++) {
         const star = positions[index]!;
         values[index] = 1 - logarithmicFade(Math.hypot(positionM[0]! - star[0], positionM[1]! - star[1], positionM[2]! - star[2]),
-          plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+          fadeStarts[index]!, hiddenDistances[index]!);
         maximum = Math.max(maximum, values[index]!);
       }
       return maximum;
@@ -158,6 +165,8 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
     of(pointIndex: number) { const root = rootIndex[pointIndex]!; return root < 0 ? 1 : values[root]!; },
     /** A system's star: the focus or a placed star that bodies orbit. */
     isSystemStar(id: string) { return roots.includes(id); },
+    /** Inside its host's authored range a system draws every member's orbit, named or not. */
+    hasAuthoredRange(pointIndex: number) { const root = rootIndex[pointIndex]!; return root >= 0 && ranges[root] !== undefined; },
   });
 }
 
@@ -373,7 +382,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         // or the inner planet disappears at the very range that frames the system. The world's own focus keeps its rules: its
         // planets are measured against the focus distance, below, as they always were.
         const hostedPlanet = entry.orbit !== null && entry.orbit.centerBodyId !== plan.focus.id &&
-          systemFade.isSystemStar(entry.orbit.centerBodyId) && (annotationPriorities[body.id] ?? 0) >= 3;
+          systemFade.isSystemStar(entry.orbit.centerBodyId) &&
+          (annotationPriorities[body.id] ?? 0) >= 3;
         const proxyOpacity = highlighted || hostedPlanet ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
@@ -549,7 +559,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         // An on-screen context path belongs to the annotation that identifies its body
         // when that annotation lost ordinary decluttering. The selected object's own
         // path remains available.
-        if (anonymousMinor || projected.inFrame && !entry.labelShown &&
+        if (anonymousMinor || projected.inFrame && !entry.labelShown && !systemFade.hasAuthoredRange(entry.index) &&
             (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout

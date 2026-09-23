@@ -1,0 +1,31 @@
+{
+  "id": "s38",
+  "classification": "star",
+  "order": 1273,
+  "physical": {
+    "name": "S38",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sgr-a-star"
+  },
+  "physicalNotes": "No radius or mass is measured: Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30), table3 gives only its class (late-type) and K = 17.00 mag, and Habibi et al. (2017, ApJ 847, 120) fit spectra of S1, S2, S4, S6, S7, S8, S9 and S12. Radius and GM are recorded as 0: not measured.",
+  "hostedOrbit": {
+    "periodDays": 7140.3929,
+    "semiMajorAxisStellarRadii": 5853.7988,
+    "inclinationDegrees": 166.65,
+    "eccentricity": 0.8145,
+    "transitTimeBmjdTdb": 59837.2821,
+    "argumentOfPeriapsisDegrees": 207.17,
+    "epochDefinition": "periastron",
+    "ascendingNodePositionAngleDegrees": 109.45,
+    "sources": {
+      "period": "Derived: Kepler's third law with a = 0.14254 arcsec x 8277 pc = 1179.80 au and the central mass 4.297e6 solar masses (GRAVITY 2022, Table 1): sqrt(1179.80^3 / 4.297e6) = 19.5493 yr of 365.25 d. The table prints no period.",
+      "shape": "GRAVITY Collaboration (2022, A&A 657, L12), Table 1: a = 0.14254 +/- 0.00004 arcsec, placed at 8277 pc: 1179.8 au, 5853.8 shadow radii; e = 0.8145 +/- 0.0002; i = 166.65 +/- 0.40 degrees. Osculating elements.",
+      "phase": "GRAVITY Collaboration (2022), Table 1: t_peri = 2022.7044 +/- 0.0080 yr. Decimal year taken as a Julian epoch, MJD = 51544.5 + (year - 2000.0) x 365.25; its time scale is taken as TDB (a difference of about a minute).",
+      "orientation": "GRAVITY Collaboration (2022), Table 1: Omega = 109.45 +/- 1.00 degrees. This is a Keplerian orbit: no relativistic precession is modelled. Orientation mapped by measurement: Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30) table5 positions and radial velocities of S2 (145 positions, 44 radial velocities, 1992-2016) and S1 (161 positions) are reproduced by this package's hosted orbit with i and Omega as published and omega + 180 degrees (2.08 and 3.17 mas rms, 31.9 km/s rms for S2); every other mapping is off by 135-594 mas or 1551 km/s. The published omega is the star's own argument of periapsis; the hosted-orbit convention stores the host-side one, as the beta-pictoris records do.",
+      "eccentricity": "GRAVITY Collaboration (2022), Table 1: 0.8145 +/- 0.0002.",
+      "argumentOfPeriapsis": "GRAVITY Collaboration (2022), Table 1: omega = 27.17 +/- 1.02 degrees, the star's own; stored as 207.17."
+    }
+  }
+}

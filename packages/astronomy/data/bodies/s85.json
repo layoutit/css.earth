@@ -1,0 +1,33 @@
+{
+  "id": "s85",
+  "classification": "star",
+  "order": 1283,
+  "physical": {
+    "name": "S85",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sgr-a-star"
+  },
+  "physicalNotes": "No radius or mass is measured: Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30), table3 gives only its class (late-type) and K = 15.60 mag, and Habibi et al. (2017, ApJ 847, 120) fit spectra of S1, S2, S4, S6, S7, S8, S9 and S12. Radius and GM are recorded as 0: not measured.",
+  "hostedOrbit": {
+    "periodDays": 1307595,
+    "semiMajorAxisStellarRadii": 188911.7041,
+    "inclinationDegrees": 84.78,
+    "eccentricity": 0.78,
+    "transitTimeBmjdTdb": 26050.05,
+    "argumentOfPeriapsisDegrees": 336.3,
+    "epochDefinition": "periastron",
+    "ascendingNodePositionAngleDegrees": 107.36,
+    "weaklyConstrained": true,
+    "sources": {
+      "period": "Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30), table3: P = 3580.00 +/- 2550.00 yr of 365.25 d.",
+      "shape": "Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30), table3: a = 4.6000 +/- 3.3000 arcsec, placed at 8277 pc: 38074.2 au, 188911.7 shadow radii; e = 0.7800 +/- 0.1500; i = 84.78 +/- 0.29 degrees.",
+      "phase": "Gillessen et al. (2017), table3: Tp = 1930.20 +/- 9.80 yr. Decimal year taken as a Julian epoch, MJD = 51544.5 + (year - 2000.0) x 365.25; its time scale is taken as TDB (a difference of about a minute).",
+      "orientation": "Gillessen et al. (2017), table3: Omega = 107.36 +/- 0.43 degrees. Their fit used R0 = 8320 pc; the angular elements are placed at 8277 pc like the rest of this system. Orientation mapped by measurement: Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30) table5 positions and radial velocities of S2 (145 positions, 44 radial velocities, 1992-2016) and S1 (161 positions) are reproduced by this package's hosted orbit with i and Omega as published and omega + 180 degrees (2.08 and 3.17 mas rms, 31.9 km/s rms for S2); every other mapping is off by 135-594 mas or 1551 km/s. The published omega is the star's own argument of periapsis; the hosted-orbit convention stores the host-side one, as the beta-pictoris records do.",
+      "eccentricity": "Gillessen et al. (2017), table3: 0.7800 +/- 0.1500.",
+      "argumentOfPeriapsis": "Gillessen et al. (2017), table3: omega = 156.30 +/- 6.80 degrees, the star's own; stored as 336.3.",
+      "constraint": "Gillessen et al. (2017), Sect. 3.4.1: an orbit constrains the central mass only with at least 8 measured dynamical quantities including a radial-velocity term; the 17 orbits fitted together are S2, S1, S4, S8, S9, S12, S13, S14, S17, S18, S19, S21, S24, S31, S38, S54, S55. S85 is not among them and GRAVITY (2022) does not refit it, so its path is not drawn."
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/sgr-a-star/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "sgr-a-star-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csssgr-a-star-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "shape",
+      "output": "sgr-a-star-surface-{id}{suffix}.webp",
+      "thumbnail": "sgr-a-star-lens-{id}.webp",
+      "source": "measurements.json",
+      "falseColor": false,
+      "science": {
+        "kind": "black-shadow",
+        "qualification": "The measured shadow drawn as a black disc that always faces the viewer. A display convention; not an event horizon, a surface or a measured colour. No lighting. Around it, on the off-limb plate, the EHT's 1.3 mm image of 2017 April 7: the mean of 200 reconstructions drawn at random from the 5594 of EHT Sgr A* Paper III's eht-imaging Top Set, on eht-imaging's own display colour map (matplotlib afmhot, linear, sampled at quarter steps), a legend for relative intensity and not a colour.",
+        "offLimb": {
+          "path": "observations/eht-2017-04-07-topset-mean.fits",
+          "encoding": "fits-oi-reconstruction",
+          "percentiles": [
+            1,
+            99.5
+          ],
+          "palette": [
+            "#000000",
+            "#800000",
+            "#ff8001",
+            "#ffff81",
+            "#ffffff"
+          ]
+        }
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 1528,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "sgr-a-star-context-{id}{suffix}.webp",
+    "limbOutput": "sgr-a-star-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csssgr-a-star-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 1528,
+        "source": "observations/eht-2017-04-07-topset-mean.fits: the mean of 200 EHT Sgr A* Paper III eht-imaging Top Set reconstructions, 2017 April 7",
+        "composition": "the image's light on the display stretch, alpha fading to zero light; the plate covers the image's 150 microarcsecond field at the shadow's scale (496 x 150 / 48.7)",
+        "rotation": "celestial north to its screen direction at the default camera",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

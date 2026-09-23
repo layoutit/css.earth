@@ -1,0 +1,32 @@
+{
+  "id": "s12",
+  "classification": "star",
+  "order": 1260,
+  "physical": {
+    "name": "S12",
+    "horizonsCode": null,
+    "meanRadiusKm": 2831499,
+    "gravitationalParameterKm3PerS2": 1008614544318.7,
+    "parent": "sgr-a-star",
+    "effectiveTemperatureK": 20882
+  },
+  "physicalNotes": "Radius 4.07 (+1.31/-0.78) solar radii and mass 7.60 (+1.4/-1.3) solar masses from Habibi et al. (2017, ApJ 847, 120; arXiv:1708.06353), Table 3, model-atmosphere fit to SINFONI spectra (Teff 20882 K, B0-B3), at 695,700 km per solar radius and the JPL solar GM.",
+  "hostedOrbit": {
+    "periodDays": 21513.225,
+    "semiMajorAxisStellarRadii": 12266.9404,
+    "inclinationDegrees": 33.56,
+    "eccentricity": 0.8883,
+    "transitTimeBmjdTdb": 49933.7475,
+    "argumentOfPeriapsisDegrees": 137.9,
+    "epochDefinition": "periastron",
+    "ascendingNodePositionAngleDegrees": 230.1,
+    "sources": {
+      "period": "Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30), table3: P = 58.90 +/- 0.22 yr of 365.25 d.",
+      "shape": "Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30), table3: a = 0.2987 +/- 0.0018 arcsec, placed at 8277 pc: 2472.3 au, 12266.9 shadow radii; e = 0.8883 +/- 0.0017; i = 33.56 +/- 0.49 degrees.",
+      "phase": "Gillessen et al. (2017), table3: Tp = 1995.59 +/- 0.04 yr. Decimal year taken as a Julian epoch, MJD = 51544.5 + (year - 2000.0) x 365.25; its time scale is taken as TDB (a difference of about a minute).",
+      "orientation": "Gillessen et al. (2017), table3: Omega = 230.10 +/- 1.80 degrees. Their fit used R0 = 8320 pc; the angular elements are placed at 8277 pc like the rest of this system. Orientation mapped by measurement: Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30) table5 positions and radial velocities of S2 (145 positions, 44 radial velocities, 1992-2016) and S1 (161 positions) are reproduced by this package's hosted orbit with i and Omega as published and omega + 180 degrees (2.08 and 3.17 mas rms, 31.9 km/s rms for S2); every other mapping is off by 135-594 mas or 1551 km/s. The published omega is the star's own argument of periapsis; the hosted-orbit convention stores the host-side one, as the beta-pictoris records do.",
+      "eccentricity": "Gillessen et al. (2017), table3: 0.8883 +/- 0.0017.",
+      "argumentOfPeriapsis": "Gillessen et al. (2017), table3: omega = 317.90 +/- 1.50 degrees, the star's own; stored as 137.9."
+    }
+  }
+}

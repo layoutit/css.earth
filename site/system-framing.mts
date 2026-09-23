@@ -55,6 +55,8 @@ export const SYSTEM_CENTERS = systemCenters(context);
  * years away, where a turn out of edge-on reads as an approach; the Sun's and a planet's moons keep the departure angle. */
 export const STELLAR_SYSTEMS: ReadonlySet<string> = new Set(context.bodies.filter(body => body.systemView && !body.orbit).map(body => body.id));
 export const SYSTEM_VIEWS = new Map([context.focus, ...context.bodies].filter(body => body.systemView).map(body => [body.id, body.systemView]));
+/** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
+export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 
 /** Zoom along the current viewing ray, keeping its anchor and orientation. */
@@ -103,7 +105,7 @@ export function systemFramingRect(optics: Optics, documentTarget?: Document) {
 }
 
 /** Keep the departure angle (opened out of edge-on for another star's system) and fit the prepared system around its new center. */
-export function systemViewTarget(from: WorldCameraPose, frame: FramingFrame, optics: Optics, view: SystemView, rect: MapViewport, minimumRangeM = 0, openEdgeOn = false): WorldCameraPose {
+export function systemViewTarget(from: WorldCameraPose, frame: FramingFrame, optics: Optics, view: SystemView, rect: MapViewport, minimumRangeM = 0, openEdgeOn = false, maximumRangeM = Number.POSITIVE_INFINITY): WorldCameraPose {
   if (from.referenceFrame !== frame.referenceFrame || from.epochJdTt !== frame.epochJdTt) {
     throw new TypeError('System selection requires a common frame and epoch.');
   }
@@ -116,7 +118,7 @@ export function systemViewTarget(from: WorldCameraPose, frame: FramingFrame, opt
   const referenceToCamera = cssViewFromOrientation(orientationXyzw);
   // Each prepared box encloses the complete system. Project their eight corners
   // at the current angle and use the tightest fit; none dictates a camera turn.
-  const depth = Math.min(...view.candidates.map(candidate =>
+  const depth = Math.min(maximumRangeM, ...view.candidates.map(candidate =>
     fitSystemDepth(frame, optics, candidate, rect, minimumRangeM, referenceToCamera)));
   if (!Number.isFinite(depth)) throw new TypeError('System framing requires prepared bounds.');
   const [ox, oy] = (optics.principalOffsetPixels ?? [0, 0]), focal = optics.focalPixels;

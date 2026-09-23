@@ -38,6 +38,7 @@ export interface GeometrySceneOptions {
  worldContext?:unknown;
  adapters:ScenePreparationAdapters;outputDirectory:string;
 }
+
 export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,worldContext,adapters,outputDirectory}:GeometrySceneOptions) {
  if(profile.surface.radius!==solarSource.bodyRadiusUnits)throw new TypeError('Authored surface radius differs from the physical scene scale.');
  const physical=await adapters.preparePhysicalScene({...solarSource,starfield,sun,...(worldContext!==undefined?{worldContext}:{})});

@@ -10,7 +10,7 @@ const nullableNumber = (value: unknown) => value === null ? null : numberValue(v
 const parseRecord = shape({
   id: stringValue, classification: stringValue, order: optional(numberValue), classificationOrder: optional(numberValue),
   physical: shape({ name: stringValue, horizonsCode: nullableString, meanRadiusKm: numberValue,
-    gravitationalParameterKm3PerS2: numberValue, parent: nullableString }),
+    gravitationalParameterKm3PerS2: numberValue, parent: nullableString, effectiveTemperatureK: optional(numberValue) }),
   asteroid: optional(readElementRecord), comet: optional(readElementRecord), star: optional(readStarRecord), hostedOrbit: optional(readHostedOrbitRecord),
   asteroidFixture: optional(readVectorFixture), cometFixture: optional(readVectorFixture),
   acquisition: optional(shape({
@@ -33,12 +33,23 @@ function bodyRecord(value: unknown): BodyRecord {
     if (value !== undefined && (!Number.isSafeInteger(value) || value < 0)) throw new TypeError(`Invalid astronomy order: ${record.id}.`);
   }
   const physical = record.physical;
-  if (!physical.name || physical.meanRadiusKm <= 0 || physical.gravitationalParameterKm3PerS2 < 0) throw new TypeError(`Invalid physical data: ${record.id}.`);
-  // A star beyond the Solar System is placed by its astrometry and orbits nothing this package models.
-  if (record.star !== undefined && (record.classification !== 'star' || physical.parent !== null)) throw new TypeError(`Star astrometry belongs to a parentless star: ${record.id}.`);
-  // A hosted orbit belongs to an exoplanet and is placed around its parent star; bodies.ts checks the parent is a placed star.
-  if ((record.hostedOrbit !== undefined) !== (record.classification === 'exoplanet') || record.hostedOrbit !== undefined && physical.parent === null) {
-    throw new TypeError(`An exoplanet has exactly a hosted orbit around a parent: ${record.id}.`);
+  if (!physical.name || physical.meanRadiusKm < 0 || physical.gravitationalParameterKm3PerS2 < 0) throw new TypeError(`Invalid physical data: ${record.id}.`);
+  if (physical.effectiveTemperatureK !== undefined && (record.classification !== 'star' || !(physical.effectiveTemperatureK > 0))) {
+    throw new TypeError(`A measured effective temperature belongs to a star and is positive: ${record.id} has ${physical.effectiveTemperatureK}.`);
+  }
+  // Zero radius means no source measures one; only a star known from its hosted orbit alone may lack it (most S-stars).
+  if (physical.meanRadiusKm === 0 && (record.classification !== 'star' || record.hostedOrbit === undefined)) {
+    throw new TypeError(`Only a hosted star may have an unmeasured radius: ${record.id} has meanRadiusKm 0.`);
+  }
+  // A star or black hole beyond the Solar System is placed by its astrometry and orbits nothing this package models.
+  if (record.star !== undefined && (!['star', 'black-hole'].includes(record.classification) || physical.parent !== null)) {
+    throw new TypeError(`Placement astrometry belongs to a parentless star or black hole: ${record.id}.`);
+  }
+  // A hosted orbit is placed around its parent: every exoplanet has one, and a star may have one instead of its own placement
+  // (the S-stars around Sgr A*). The parent must be placed; readBodyRecords checks that.
+  if (record.classification === 'exoplanet' && record.hostedOrbit === undefined || record.hostedOrbit !== undefined &&
+    (!['exoplanet', 'star'].includes(record.classification) || physical.parent === null || record.star !== undefined)) {
+    throw new TypeError(`A hosted orbit belongs to an exoplanet or an unplaced star around a parent: ${record.id}.`);
   }
   const acquisition = record.acquisition;
   if (acquisition?.heliocentric && !['asteroid', 'comet', 'dwarfPlanet'].includes(acquisition.heliocentric.model)) throw new TypeError('Invalid heliocentric model.');
@@ -50,7 +61,8 @@ function bodyRecord(value: unknown): BodyRecord {
 const packageRoot = resolve(import.meta.dirname, '..');
 const order = (a: {id: string; order?: number}, b: {id: string; order?: number}) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
 const kinds = { planet: 'PLANET_IDS', 'dwarf-planet': 'DWARF_PLANET_IDS', asteroid: 'ASTEROID_IDS',
-  'trans-neptunian': 'TRANS_NEPTUNIAN_IDS', interstellar: 'INTERSTELLAR_IDS', comet: 'COMET_IDS', exoplanet: 'EXOPLANET_IDS' };
+  'trans-neptunian': 'TRANS_NEPTUNIAN_IDS', interstellar: 'INTERSTELLAR_IDS', comet: 'COMET_IDS', exoplanet: 'EXOPLANET_IDS',
+  'black-hole': 'BLACK_HOLE_IDS' };
 const models = {
   asteroid: ['ASTEROID_ELEMENTS', "import type { KeplerianElements } from '../../kepler.js'", '{ query: string; elements: KeplerianElements }'],
   comet: ['COMET_ELEMENTS', "import type { KeplerianElements } from '../../kepler.js'", '{ query: string; elements: KeplerianElements }'],
@@ -75,7 +87,7 @@ export async function readBodyRecords(root = packageRoot) {
   if (!ids.size) throw new TypeError('Astronomy records are empty.');
   for (const record of records) {
     if (record.physical.parent !== null && !ids.has(record.physical.parent)) throw new TypeError(`Missing astronomy parent: ${record.id}.`);
-    if (record.hostedOrbit !== undefined && records.find(parent => parent.id === record.physical.parent)?.star === undefined) throw new TypeError(`A hosted orbit's parent must be a placed star: ${record.id}.`);
+    if (record.hostedOrbit !== undefined && records.find(parent => parent.id === record.physical.parent)?.star === undefined) throw new TypeError(`A hosted orbit's parent must be a placed star or black hole: ${record.id}.`);
     if (record.star?.boundTo !== undefined && records.find(host => host.id === record.star!.boundTo)?.star === undefined) throw new TypeError(`A bound star's companion must be a placed star: ${record.id}.`);
   }
   return records.sort(order);

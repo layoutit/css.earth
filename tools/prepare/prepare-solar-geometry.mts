@@ -45,7 +45,7 @@ const {
   SMALL_BODY_IDS, asteroidElements,
   COMET_IDS, cometElements,
   STAR_IDS, starAstrometry, starStateKm,
-  HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm,
+  HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedOrbit, hostedKeplerElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   bodyRotationAt, ROTATING_BODY_IDS,
@@ -58,12 +58,16 @@ const {
 const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
 // A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
 const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
-const BODIES = SCENE_OBJECTS.filter(body =>
+const PACKAGED = SCENE_OBJECTS.filter(body =>
   ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
-  (body.classification === "star" && isPlacedStar(body.id))).map(body => {
+  ((body.classification === "star" || body.classification === "black-hole") && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
   if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
   return body.id as BodyId;
 });
+// A star on a hosted orbit around a packaged placed host is drawn from its astronomy record without a package of its own.
+const RECORD_ONLY_HOSTED = (HOSTED_PLANET_IDS as readonly string[]).filter(id => !PACKAGED.includes(id as BodyId) &&
+  PACKAGED.includes((ASTRONOMY_BODY_DATA as Record<string, { parent: string | null }>)[id]!.parent as BodyId)) as BodyId[];
+const BODIES = [...PACKAGED, ...RECORD_ONLY_HOSTED];
 
 // The J2000 ecliptic north pole in ICRF: the ICRF +z axis tilted by the
 // obliquity about +x.
@@ -105,7 +109,16 @@ const GM_SUN_AU3_PER_DAY2 = GAUSSIAN_GRAVITATIONAL_CONSTANT ** 2;
 }
 
 // Object-owned orientation sources distinguish observed poles from display axes.
+// A record-only star has no package and no measured spin: the display orientation new-hosted-planet writes for an unmeasured
+// rotation, an axis along its hosted orbit's normal with the meridian at 90 degrees and no spin.
+const recordOnlyRotation = (id: BodyId): RotationElements => {
+  const parent = (ASTRONOMY_BODY_DATA as Record<string, { parent: string | null; meanRadiusKm: number }>)[id]!.parent!;
+  const elements = hostedKeplerElements(hostedOrbit(id as never), starAstrometry(parent as never), (ASTRONOMY_BODY_DATA as Record<string, { meanRadiusKm: number }>)[parent]!.meanRadiusKm);
+  const normal = [Math.sin(elements.inclinationRad) * Math.sin(elements.ascendingNodeRad), -Math.sin(elements.inclinationRad) * Math.cos(elements.ascendingNodeRad), Math.cos(elements.inclinationRad)];
+  return { poleRightAscensionRad: (Math.atan2(normal[1]!, normal[0]!) + 2 * Math.PI) % (2 * Math.PI), poleDeclinationRad: Math.asin(normal[2]!), primeMeridianRad: Math.PI / 2, spinRateRadPerDay: 0 };
+};
 const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promise<readonly [BodyId, RotationElements | null]> => {
+  if (RECORD_ONLY_HOSTED.includes(id)) return [id, recordOnlyRotation(id)];
   const descriptor = requireRecord(await readJsonSource(resolve("src/objects", id, "object.json")));
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
   const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");

@@ -21,7 +21,7 @@ const styles = SCENE_OBJECTS.map(({ id }) => {
 }).join('\n');
 const defaults = '.prepared-world-context { color: #dfdfdf; }';
 const majorBodyLabelStyles = SCENE_OBJECTS
-  .filter(({ classification }) => classification === 'star' || classification === 'planet')
+  .filter(({ classification }) => classification === 'star' || classification === 'black-hole' || classification === 'planet')
   .map(({ id }) => `.prepared-world-context [data-context-label="${id}"] { text-transform: uppercase; }`)
   .join('\n');
 ---
