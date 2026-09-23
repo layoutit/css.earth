@@ -1,6 +1,6 @@
 # Exoplanet and host-star limb bake — 2026-09-23
 
-This is the follow-up to the [17-planet and nine-star baseline audit](../2026-09-22/README.md) in [PR #562](https://github.com/layoutit/css.earth/pull/562). It checks the selected physical limb treatment of every registered exoplanet and host star. The browser capture used the isolated checkout's Astro server at `127.0.0.1:4298`, not a production deployment.
+This [PR #565](https://github.com/layoutit/css.earth/pull/565) follow-up to the [17-planet and nine-star baseline audit](../2026-09-22/README.md) in [PR #562](https://github.com/layoutit/css.earth/pull/562) checks the selected physical limb treatment of every registered exoplanet and host star. The browser capture used the isolated checkout's Astro server at `127.0.0.1:4298`, not a production deployment.
 
 ## Adopted treatments
 
