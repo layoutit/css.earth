@@ -8,7 +8,7 @@ import type { WorldHandoff } from './prepared-world-navigation.mts';
 import type { bindViewUrl } from './view-url-runtime.mts';
 import { requireSceneLifecycle } from './scene-contract.mts';
 
-type SessionState =
+export type SceneSessionState =
   | { readonly kind: 'loading'; readonly activation: 'idle' | 'mounting' | 'restoring'; readonly mount: ObjectSceneLifecycle | null }
   | { readonly kind: 'ready'; readonly mount: ObjectSceneLifecycle }
   | { readonly kind: 'failed'; readonly error: Error }
@@ -21,6 +21,7 @@ interface SessionOptions {
   onCleanupError(error: unknown): void;
 }
 export type SceneSession = ReturnType<typeof createSceneSession>;
+export type SceneSessions = ReturnType<typeof createSceneSessions>;
 
 /** Holds the last terminal state for diagnostics, but admits only one live session. */
 export function createSceneSessions() {
@@ -28,7 +29,7 @@ export function createSceneSessions() {
   return {
     get current() { return session?.live ? session : null; },
     isCurrent(candidate: SceneSession) { return session === candidate && candidate.live; },
-    get state(): SessionState { return session?.state ?? { kind: 'disposed' }; },
+    get state(): SceneSessionState { return session?.state ?? { kind: 'disposed' }; },
     start(options: SessionOptions) {
       if (session?.live) throw new Error('Retire the current scene before starting another.');
       session = createSceneSession(options);
@@ -39,7 +40,7 @@ export function createSceneSessions() {
 
 function createSceneSession({ objectId, url, request, onFailure, onCleanupError }: SessionOptions) {
   const lifetime = createSceneLifetime(), controller = new AbortController();
-  let state: SessionState = { kind: 'loading', activation: 'idle', mount: null };
+  let state: SceneSessionState = { kind: 'loading', activation: 'idle', mount: null };
   let lastCommand: boolean | null = null;
   let viewUrl: ReturnType<typeof bindViewUrl> | null = null;
   lifetime.onDispose(() => controller.abort());
