@@ -58,21 +58,24 @@ export async function prepareVolumeImpostors(options: {
   const metadata = new Map(volume.resources.map(resource => [resource.path, resource]));
   const textures = new Map<string, Pixels>();
   let decodedBytes = 0;
-  for (const { planes } of stacks) for (const { leaf } of planes) {
-    if (textures.has(leaf.texturePath)) {
-      const image = textures.get(leaf.texturePath)!;
-      if (image.width !== leaf.widthPx || image.height !== leaf.heightPx) throw new TypeError('Impostor leaf dimensions disagree with its shared texture.');
-      continue;
+  // A leaf either owns its texture or takes a rectangle out of a shared atlas. Its CSS background is what maps one
+  // onto the other, and the rasteriser samples through that mapping, so the decoded image must match the declared
+  // resource and the background must cover it exactly. Checking the leaf's own pixel size instead would refuse every
+  // delivered bank, which is why the Magellanic Clouds shipped without impostor views.
+  for (const { planes } of stacks) for (const { leaf, backgroundWidth, backgroundHeight } of planes) {
+    const resource = metadata.get(leaf.texturePath);
+    if (!resource) throw new TypeError(`Impostor leaf ${leaf.id} has no declared texture resource.`);
+    if (backgroundWidth !== resource.width || backgroundHeight !== resource.height) {
+      throw new TypeError(`Impostor leaf ${leaf.id} background does not cover ${leaf.texturePath}.`);
     }
-    const resource = metadata.get(leaf.texturePath)!;
-    const count = leaf.widthPx * leaf.heightPx;
+    if (textures.has(leaf.texturePath)) continue;
+    const count = resource.width * resource.height;
     decodedBytes += count * 4;
     if (count > MAX_TEXTURE_PIXELS || decodedBytes > MAX_DECODED_BYTES) throw new TypeError('Impostor source textures exceed the bounded decode budget.');
     const bytes = await readResource(leaf.texturePath);
     if (bytes.byteLength !== resource.bytes || digest(bytes) !== resource.sha256) throw new TypeError(`Impostor texture identity mismatch: ${leaf.texturePath}.`);
     const { data, info } = await sharp(bytes, { limitInputPixels: MAX_TEXTURE_PIXELS }).toColourspace('srgb').ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-    if (info.width !== leaf.widthPx || info.height !== leaf.heightPx || info.width !== resource.width ||
-        info.height !== resource.height || info.channels !== 4 || data.length !== count * 4) {
+    if (info.width !== resource.width || info.height !== resource.height || info.channels !== 4 || data.length !== count * 4) {
       throw new TypeError(`Impostor decoded texture dimensions mismatch: ${leaf.texturePath}.`);
     }
     textures.set(leaf.texturePath, { width: info.width, height: info.height, data });

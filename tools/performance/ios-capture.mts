@@ -37,7 +37,9 @@ export type Step =
   | { readonly drag: { readonly from: readonly [number, number]; readonly to: readonly [number, number]; readonly seconds: number } }
   | { readonly wait: number }
   | { readonly screenshot: string }
-  | { readonly probe: string };
+  | { readonly probe: string }
+  | { readonly layers: string; readonly selector?: string }
+  | { readonly script: string };
 
 const point = (value: unknown, label: string): [number, number] => {
   const list = requireArray(value, label);
@@ -48,15 +50,22 @@ const point = (value: unknown, label: string): [number, number] => {
 export function parseSteps(value: unknown): Step[] {
   return requireArray(value, 'steps').map((input, index) => {
     const step = requireRecord(input, `step ${index}`), keys = Object.keys(step);
-    if (keys.length !== 1) throw new TypeError(`Step ${index} must have exactly one action.`);
+    // A layer snapshot may name the subtree it reads; every other step is exactly one action.
+    if (keys.length !== 1 && !(keys.length === 2 && 'layers' in step && 'selector' in step)) throw new TypeError(`Step ${index} must have exactly one action.`);
     const label = `step ${index}`;
     if ('tap' in step) return { tap: point(step.tap, label) };
     if ('type' in step) return { type: requireString(step.type, label) };
     if ('wait' in step) return { wait: requireFiniteNumber(step.wait, label) };
+    if ('script' in step) return { script: requireString(step.script, label) };
     if ('probe' in step) {
       const name = requireString(step.probe, label);
       if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: probe names are lowercase words and dashes.`);
       return { probe: name };
+    }
+    if ('layers' in step) {
+      const name = requireString(step.layers, label);
+      if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: layer snapshot names are lowercase words and dashes.`);
+      return { layers: name, ...(step.selector === undefined ? {} : { selector: requireString(step.selector, label) }) };
     }
     if ('screenshot' in step) {
       const name = requireString(step.screenshot, label);
@@ -75,18 +84,23 @@ export function parseSteps(value: unknown): Step[] {
 const PROBE_EXPRESSION = `(() => {
   const app = window.__cssEarth, read = key => { try { return app ? app[key] : undefined; } catch (error) { return 'unreadable'; } };
   const error = read('error');
-  return { path: location.pathname, ready: read('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
+  return { path: location.pathname, ready: read('ready') ?? document.body.classList.contains('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
     overview: read('overview'), mountedObjectCount: read('mountedObjectCount'), lifecycle: read('lifecycle'),
     error: error ? String(error.message ?? error) : null, elements: document.getElementsByTagName('*').length };
 })()`;
 
 async function perform(steps: readonly Step[], udid: string, out: string, marks: { label: string; at: number; value?: unknown }[], started: number,
-  evaluate: (expression: string) => Promise<unknown>) {
+  evaluate: (expression: string) => Promise<unknown>, snapshotLayers?: (selector?: string) => Promise<unknown>) {
   for (const step of steps) {
     const label = JSON.stringify(step);
     const mark: { label: string; at: number; value?: unknown } = { label, at: Date.now() - started };
     marks.push(mark);
-    if ('probe' in step) mark.value = await evaluate(PROBE_EXPRESSION).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    // A scripted step changes the page to measure a change before it is prepared (a leaf's raster size, say). Its result
+    // is recorded beside the step, so a capture says what it did.
+    if ('script' in step) mark.value = await evaluate(step.script).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    else if ('probe' in step) mark.value = await evaluate(PROBE_EXPRESSION).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    // A layer snapshot mid-journey: which layers have repainted most so far, before the tree changes again.
+    else if ('layers' in step) mark.value = snapshotLayers ? await snapshotLayers(step.selector).catch(error => ({ error: error instanceof Error ? error.message : String(error) })) : { error: 'no inspector' };
     else if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
     else if ('type' in step) await run('axe', ['type', step.type, '--udid', udid]);
     else if ('wait' in step) await wait(step.wait * 1000);
@@ -196,10 +210,12 @@ function inspector(socketUrl: string) {
   return { ready, send, listen: (listener: (source: string, message: Message) => void) => listeners.push(listener), close: () => socket.close() };
 }
 
-/** Waits until the page has loaded and the app reports its body ready (window.__cssEarth.ready, as the other capture tools
- * wait for) or failed. Evaluations during the navigation itself can fail; they count as not ready. */
+/** Waits until the page has loaded and the app reports itself ready or failed. The shell marks its own body, which is
+ * what the site's other checks read; the diagnostics hook is only present in builds that publish it. Evaluations
+ * during the navigation itself can fail; they count as not ready. */
 async function waitForApp(session: ReturnType<typeof inspector>, timeoutMs = 120_000): Promise<void> {
-  const expression = "document.readyState === 'complete' && Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error))";
+  const expression = "document.readyState === 'complete' && (document.body.classList.contains('ready') || " +
+    "document.body.classList.contains('error') || Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error)))";
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true }).catch(() => null);
@@ -328,8 +344,34 @@ export function summariseInitiators(stacks: readonly { type: string; frames: rea
   }));
 }
 
+/** Every compositing layer under the first element matching a selector, with its paint count, backing memory, bounds and
+ * reasons. Two snapshots diffed by layerId give the repaint count of each layer over the interval. */
+async function subtreeLayers(session: ReturnType<typeof inspector>, selector: string) {
+  const documentReply = await session.send('DOM.getDocument');
+  const rootNode = isRecord(documentReply.result) && isRecord(documentReply.result.root) ? documentReply.result.root.nodeId : null;
+  if (typeof rootNode !== 'number') return { error: 'no document' };
+  const found = await session.send('DOM.querySelector', { nodeId: rootNode, selector });
+  const nodeId = isRecord(found.result) ? found.result.nodeId : null;
+  if (typeof nodeId !== 'number' || nodeId === 0) return { selector, error: 'no such element' };
+  await session.send('LayerTree.enable');
+  const reply = await session.send('LayerTree.layersForNode', { nodeId });
+  const layers = isRecord(reply.result) && Array.isArray(reply.result.layers) ? reply.result.layers.filter(isRecord) : [];
+  const listed = [];
+  for (const layer of layers.slice(0, 400)) {
+    const why = await session.send('LayerTree.reasonsForCompositingLayer', { layerId: layer.layerId });
+    const flags = isRecord(why.result) && isRecord(why.result.compositingReasons) ? why.result.compositingReasons : {};
+    listed.push({ layerId: layer.layerId, nodeId: layer.nodeId ?? null, paintCount: typeof layer.paintCount === 'number' ? layer.paintCount : 0,
+      memoryKb: Math.round((typeof layer.memory === 'number' ? layer.memory : 0) / 1024), bounds: layer.bounds ?? null,
+      reasons: Object.entries(flags).filter(([, on]) => on === true).map(([reason]) => reason) });
+  }
+  await session.send('LayerTree.disable');
+  return { selector, count: layers.length, listed: listed.length,
+    memoryMb: Math.round(layers.reduce((sum, layer) => sum + (typeof layer.memory === 'number' ? layer.memory : 0), 0) / 1048576 * 10) / 10,
+    paints: layers.reduce((sum, layer) => sum + (typeof layer.paintCount === 'number' ? layer.paintCount : 0), 0), layers: listed };
+}
+
 /** Composited layers: how many, their backing memory, and why the largest were composited. */
-async function layerTree(session: ReturnType<typeof inspector>) {
+async function layerTree(session: ReturnType<typeof inspector>, options: { byMemory?: number; byPaints?: number; reasons?: boolean } = {}) {
   const documentReply = await session.send('DOM.getDocument');
   const rootNode = isRecord(documentReply.result) && isRecord(documentReply.result.root) ? documentReply.result.root.nodeId : null;
   if (typeof rootNode !== 'number') return { error: 'no document' };
@@ -340,11 +382,11 @@ async function layerTree(session: ReturnType<typeof inspector>) {
   const reasons = new Map<string, number>();
   const paints = (layer: Record<string, unknown>) => typeof layer.paintCount === 'number' ? layer.paintCount : 0;
   // The largest by backing memory, then the most repainted: a layer repainted every frame is re-sent every frame.
-  const byMemory = [...layers].sort((a, b) => memory(b) - memory(a)).slice(0, 12);
-  const byPaints = [...layers].sort((a, b) => paints(b) - paints(a)).filter(layer => !byMemory.includes(layer)).slice(0, 8);
+  const byMemory = [...layers].sort((a, b) => memory(b) - memory(a)).slice(0, options.byMemory ?? 12);
+  const byPaints = [...layers].sort((a, b) => paints(b) - paints(a)).filter(layer => !byMemory.includes(layer)).slice(0, options.byPaints ?? 8);
   const largest = [...byMemory, ...byPaints];
   // Reasons for a sample of layers across the list, so the count by reason describes the whole tree.
-  const sample = layers.filter((_, index) => index % Math.max(1, Math.ceil(layers.length / 300)) === 0);
+  const sample = options.reasons === false ? [] : layers.filter((_, index) => index % Math.max(1, Math.ceil(layers.length / 300)) === 0);
   for (const layer of sample) {
     const why = await session.send('LayerTree.reasonsForCompositingLayer', { layerId: layer.layerId });
     const flags = isRecord(why.result) && isRecord(why.result.compositingReasons) ? why.result.compositingReasons : {};
@@ -615,7 +657,7 @@ export async function captureIosMoment(args: readonly string[]) {
     const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true });
     return isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
   };
-  if (steps.length) await perform(steps, udid, out, marks, started, evaluate);
+  if (steps.length) await perform(steps, udid, out, marks, started, evaluate, selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }));
   else { marks.push({ label: `manual ${option.seconds} s`, at: 0 }); await wait((option.seconds ?? 0) * 1000); }
   const durationMs = Date.now() - started;
   await session.send('Timeline.stop');
@@ -696,7 +738,7 @@ function readme(r: ReadmeInput): string {
   const lines = [`# ${r.name}`, '', `${r.url}, ${Math.round(r.durationMs / 100) / 10} s. Source maps for ${r.sourceMaps.mapped} scripts.`, '',
     `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
     ...(r.steps.some(step => 'value' in step) ? ['## Probes', '', ...r.steps.filter(step => 'value' in step)
-      .map(step => `- ${JSON.parse(step.label).probe} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`), ''] : []),
+      .map(step => `- ${JSON.parse(step.label).probe ?? 'script'} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`), ''] : []),
     ...(r.pixels ? ['## Pixels against ' + r.pixels.baseline, '', ...r.pixels.screenshots.map(shot => shot.differing === null
       ? `- ${shot.name}: no baseline screenshot` : `- ${shot.name}: ${shot.differing} of ${shot.total} pixels differ`), ''] : []),
     `Rendering frames by work inside them: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',
