@@ -68,7 +68,7 @@ test('detached label membership is enforced for every decoder, including direct 
     assert.doesNotThrow(() => parseSourceProducts(attached, f.manifest, 'test-body'));
     const product = parseSourceProducts(f.declaration, f.manifest, 'test-body')[0];
     const bypass = { ...product, labelPath: 'src/objects/test-body/source/unpinned.lbl' };
-    await assert.rejects(sourceRun(bypass), /pinned input/); await assert.rejects(qualifySourceProduct(f.root, bypass), /pinned input/);
+    await assert.rejects(sourceRun(f.root,bypass), /pinned input/); await assert.rejects(qualifySourceProduct(f.root, bypass), /pinned input/);
     await qualifySourceProduct(f.root, product);
     assert.equal((await qualifySourceProduct(f.root, product)).reused, true);
     await writeFile(resolve(f.source, 'core.lbl'), label(10));
@@ -121,6 +121,10 @@ test('saved choices qualify, export complete dependencies, reassess and reuse wi
     assert.ok(delivery.files.some((f: { path: string }) => f.path.endsWith('core.lbl')));
     assert.ok(delivery.files.some((f: { path: string }) => f.path.endsWith('decoded.json')));
     assert.equal((await getSession(f.root, out, 1, () => {}, f.api)).reused, true); assert.equal(f.qualifications(), 1);
+    const copied = resolve(out, 'pick-1', delivery.product), original = await readFile(copied);
+    const changed = Buffer.from(original); changed[0] = changed[0] === 0 ? 1 : 0; await writeFile(copied, changed);
+    await assert.rejects(getSession(f.root, out, 1, () => {}, f.api, { offline: true }), /content pin mismatch/u);
+    await writeFile(copied, original);
     await assert.rejects(saveSession(f.root, args, out, f.api), /already exists/);
     await writeFile(result.product, Buffer.alloc(8));
     await assert.rejects(getSession(f.root, out, 1, () => {}, f.api), /did not match/);
@@ -149,7 +153,7 @@ test('exploration is immutable, revalidates its exact choice, and delivers with 
     const result = await getSession(f.root, out, 1, () => {}, api);
     assert.equal(result.context.kind, 'exploration'); assert.equal(result.context.assessment.status, 'not-requested');
     const delivery = JSON.parse(await readFile(result.resultPath, 'utf8'));
-    assert.equal(delivery.schema, 'cssearth-telescope-delivery@2'); assert.equal(delivery.context.assessment.status, 'not-requested');
+    assert.equal(delivery.schema, 'cssearth-telescope-delivery@3'); assert.equal(delivery.context.assessment.status, 'not-requested');
     assert.equal((await getSession(f.root, out, 1, () => {}, api, { offline: true })).replay, 'pinned-local-artifact');
     await writeFile(resolve(out, 'query.json'), '{}');
     await assert.rejects(getSession(f.root, out, 1, () => {}, api), /both query\.json and explore\.json/);

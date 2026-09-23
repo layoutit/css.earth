@@ -31,7 +31,7 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const dataset=requireRecord(raw.dataset,'descriptor dataset'),target=typeof dataset.target==='string'?dataset.target:undefined;
     return {artifact:'product-descriptor',...(target?{target}:{}),source:artifact,outputs:[],familyOperations:await verifiedExecutableFamilyOperations(artifact)};
   }
-  if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2'){
+  if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2'||raw.schema==='cssearth-telescope-delivery@3'){
     const listed=await listDeliveryOutputs(artifact,structure),delivered=await delivery(artifact),descriptorOutputs=delivered.producing.outputs.filter(output=>output.path.endsWith('/descriptor.json')||output.path==='descriptor.json');
     if(!descriptorOutputs.length)return{...listed,artifact:'delivery'};
     if(descriptorOutputs.length!==1)throw new TypeError('Delivery has an ambiguous family descriptor.');

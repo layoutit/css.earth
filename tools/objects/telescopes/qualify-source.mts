@@ -67,12 +67,12 @@ export function inspectFits(bytes: Buffer, identity: SourceProduct['identity'], 
 export async function qualifySourceProduct(root: string, product: SourceProduct) {
   assertPinnedLabel(product);
   for (const file of product.files) await acquireSourceFile(root, file);
-  let run = await sourceRun(product); const receipt = sourceReceipt(product);
+  let run = await sourceRun(root,product); const receipt = sourceReceipt(product);
   await assertInputPins(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
   const previous = await readProductRecord(resolve(root, receipt));
   const oldFacts = await readFile(resolve(root, `${dirname(receipt)}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined);
   if(oldFacts && !await verifyCalibrationDependencies(root,oldFacts.calibrationDependencies??[]))throw new Error('Calibration dependency pin mismatch');
-  if(oldFacts)run=await sourceRun(product,oldFacts.calibrationDependencies);
+  if(oldFacts)run=await sourceRun(root,product,oldFacts.calibrationDependencies);
   if (previous && sourceRecordComplete(previous, product) && await sameRun(previous, run, path => inside(root, path))) return { product: product.files.find(file => file.role === 'science')!.path, receipt, reused: true };
   let decoded: unknown;
   let metadata: Partial<ProductFacts> = {};
@@ -106,7 +106,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   }
   const scienceFile = product.files.find(f=>f.role==='science')!;
   metadata = await readProductScience(root,{file:scienceFile.path,format:product.decoder==='fits-image'?'fits':product.decoder==='isis3'?'isis3':'pds',target:product.target,label:product.labelPath,decoded});
-  run=await sourceRun(product,metadata.calibrationDependencies);
+  run=await sourceRun(root,product,metadata.calibrationDependencies);
   // Recheck after the decoder: the receipt may only attest the exact bytes it read.
   await assertInputPins(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
   const report = `${dirname(receipt)}/decoded.json`;
