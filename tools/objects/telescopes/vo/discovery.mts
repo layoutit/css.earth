@@ -16,6 +16,8 @@ export interface ServiceProfile {
  * criteria remain in CapabilityRequest and are never synthesized for target exploration. */
 export interface DiscoveryRequest {
   readonly target: string;
+  /** Exact entered name for this saved request, only associated after unique catalogue resolution to `target`. */
+  readonly requestedTargetName?: string;
   readonly wavelengthMicrometres?: readonly [number, number];
   readonly continuumMicrometres?: readonly [readonly [number, number], readonly [number, number]];
   readonly time?: { readonly any: true } | { readonly fromIso: string; readonly toIso: string };
