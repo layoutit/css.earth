@@ -75,6 +75,14 @@ test('WWT image export has separate image numbers and an explicit bounded level'
     ['wwt-image','run/explore.json','--pick','1','--out','image-out']])assert.throws(()=>parseCli(args));
 });
 
+test('WWT FITS acquisition selects a named numeric imageset and one tile',()=>{
+  assert.deepEqual(parseCli(['wwt-fits','data/wwt/phat-fits.json','--set','PHAT-f475w','--level','0','--x','0','--y','0','--out','fits-out','--json']),
+    {command:'wwt-fits',catalog:resolve('data/wwt/phat-fits.json'),setName:'PHAT-f475w',level:0,x:0,y:0,directory:resolve('fits-out'),json:true,verbose:false});
+  for(const args of [['wwt-fits','catalog.json','--set','Science','--level','0','--x','0','--out','fits-out'],
+    ['wwt-fits','catalog.json','--set','Science','--level','-1','--x','0','--y','0','--out','fits-out'],
+    ['wwt-fits','catalog.json','--set','Science','--level','0','--x','0','--y','0','--out','fits-out','--x','1']])assert.throws(()=>parseCli(args));
+});
+
 test('family coverage is derived through one public command',async()=>{
   assert.deepEqual(parseCli(['families','--json']),{command:'families',json:true,verbose:false});assert.throws(()=>parseCli(['families','extra']));
   const mock=mockIo(false,false),api=mockServices('/tmp');const code=await main(['families','--json'],'/workspace',text=>mock.io.write(text),mock.io,api.services);

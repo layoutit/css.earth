@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Folder Browseable="True" Group="Explorer" MSRCommunityId="0" MSRComponentId="0" Name="Folder" Permission="0" Searchable="True" Type="Sky">
+  <Place Angle="0.0" AngularSize="0.0" DataSetType="Sky" Dec="41.750727658092664" Distance="0.0" DomeAlt="0.0" DomeAz="0.0" Lat="0.0" Lng="0.0" Magnitude="0.0" MSRCommunityId="0" MSRComponentId="0" Name="PHAT-f475w" Opacity="100.0" Permission="0" RA="0.7540616664708953" Rotation="0.0" ZoomLevel="16.887526499930992">
+    <ForegroundImageSet>
+      <ImageSet BandPass="Visible" BaseDegreesPerTile="1.8196669948415534" BaseTileLevel="0" BottomsUp="False" CenterX="11.271831266098" CenterY="41.708843330177" DataSetType="Sky" ElevationModel="False" FileType=".fits" Generic="False" MeanRadius="0.0" MSRCommunityId="0" MSRComponentId="0" Name="PHAT-f475w" OffsetX="-0.001518775459567335" OffsetY="0.05102149014859764" Permission="0" Projection="Tan" Rotation="33.14184558618669" Sparse="True" StockSet="False" TileLevels="9" Url="http://data1.wwtassets.org/packages/2021/09_phat_fits/f475w/{1}/{3}/{3}_{2}.fits" WidthFactor="2" />
+    </ForegroundImageSet>
+  </Place>
+  <Place Angle="0.0" AngularSize="0.0" DataSetType="Sky" Dec="41.75073011754832" Distance="0.0" DomeAlt="0.0" DomeAz="0.0" Lat="0.0" Lng="0.0" Magnitude="0.0" MSRCommunityId="0" MSRComponentId="0" Name="PHAT-f814w" Opacity="100.0" Permission="0" RA="0.7540620867488498" Rotation="0.0" ZoomLevel="16.886983407108833">
+    <ForegroundImageSet>
+      <ImageSet BandPass="Visible" BaseDegreesPerTile="1.8196542502101865" BaseTileLevel="0" BottomsUp="False" CenterX="11.271832452597" CenterY="41.708848773004" DataSetType="Sky" ElevationModel="False" FileType=".fits" Generic="False" MeanRadius="0.0" MSRCommunityId="0" MSRComponentId="0" Name="PHAT-f814w" OffsetX="-0.0015245924270355677" OffsetY="0.05102105072441093" Permission="0" Projection="Tan" Rotation="33.1407328370327" Sparse="True" StockSet="False" TileLevels="9" Url="http://data1.wwtassets.org/packages/2021/09_phat_fits/f814w/{1}/{3}/{3}_{2}.fits" WidthFactor="2" />
+    </ForegroundImageSet>
+  </Place>
+</Folder>
