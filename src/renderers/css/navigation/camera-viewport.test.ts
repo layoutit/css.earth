@@ -1,3 +1,4 @@
+import { fixedCameraOrientation } from '../../../platform/test/camera-orientation-fixture.mts';
 import { expect, test, vi } from 'vitest';
 import { createCameraViewport } from './camera-viewport.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
@@ -53,7 +54,7 @@ test('one viewport snapshot survives camera mounts and refreshes on layout chang
       presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
     stage: element(), cameraElement: element(), skyElement: element(), sceneElement: element(),
-  } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
+  } as unknown as Parameters<typeof createPerspectiveDolly>[0], () => fixedCameraOrientation());
   const a = camera(), b = camera();
   expect(a.state().focal).toBe(960); expect(b.trackball().centerY).toBe(380);
   expect(viewport.read(scene.camera.projection.cssPerspective)).toBe(first);

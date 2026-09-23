@@ -1,6 +1,15 @@
+import { fixedCameraOrientation } from '../../../platform/test/camera-orientation-fixture.mts';
 import { expect, it } from 'vitest';
+import type { PerspectiveDolly } from './perspective-dolly.js';
+import type { PositionM } from '@cssearth/engine';
 import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js';
 import scene from '../../../objects/mercury/prepared/scene.json';
+
+// Restore through the public camera boundary; the presenter cannot mutate a body centre.
+function place(dolly: PerspectiveDolly, bodyCenterUnits: PositionM) {
+  const [x, y, z] = bodyCenterUnits;
+  dolly.camera.restore({}, undefined, [x * .001, y * .001, z * .001]);
+}
 
 it('crossfades mesh and marker in two stages, drawing no billboard disc', () => {
   const lod = { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20,
@@ -33,20 +42,19 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
       presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
     cameraElement: make(170), viewport: { read: () => ({ bounds: make(0).getBoundingClientRect(), focalPixels: focal, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(0), sceneElement: { style: {} } };
-  const dolly = createPerspectiveDolly(options as unknown as Parameters<typeof createPerspectiveDolly>[0]);
+  const dolly = createPerspectiveDolly(options as unknown as Parameters<typeof createPerspectiveDolly>[0], () => fixedCameraOrientation([0, -1, 0, 1, 0, 0, 0, 0, 1]));
   const bodyCenter = [120, -70, -1200] as const;
-  dolly.setBodyCenter(bodyCenter);
-  const rotation = { m11: 0, m21: -1, m31: 0, m12: 1, m22: 0, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
+  place(dolly, bodyCenter);
   const measured = layoutReads;
   const beforePrepare = { ...options.sceneElement.style };
-  const captured = dolly.prepare(rotation, 'rotateZ(90deg)');
+  const captured = dolly.prepare();
   expect(options.sceneElement.style).toEqual(beforePrepare);
-  dolly.setBodyCenter([500, 300, -8000]);
+  place(dolly, [500, 300, -8000]);
   const committed = captured.commit();
   expect(committed.distance).toBe(Math.hypot(...bodyCenter));
-  expect(dolly.bodyCenter(), 'Committing an older frame must preserve newer requested input').toEqual([500, 300, -8000]);
-  dolly.setBodyCenter(bodyCenter);
-  const published = dolly.publish(rotation, 'rotateZ(90deg)');
+  expect(dolly.camera.bodyCenter(), 'Committing an older frame must preserve newer requested input').toEqual([500, 300, -8000]);
+  place(dolly, bodyCenter);
+  const published = dolly.prepare().commit();
   expect(committed).toEqual(published);
   expect(layoutReads, 'Camera publication must not force layout after its transform writes').toBe(measured);
   expect(published.stageViewport).toEqual({ focalPixels: focal, widthPixels: width, heightPixels: height,
@@ -69,21 +77,21 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   const cssPoint = [translation[0] - 12, translation[1] + 9, translation[2] + 15];
   const cssScreen = [0,1].map(axis => published.principalOffset[axis]! + focal * (cssPoint[axis]! - published.principalOffset[axis]!) / (focal - cssPoint[2]!));
   screen.forEach((value, axis) => expect(value).toBeCloseTo(cssScreen[axis]!, 10));
-  dolly.setBodyCenter([120, -70, -1e6]);
-  const distant = dolly.publish(rotation, 'rotateZ(90deg)');
+  place(dolly, [120, -70, -1e6]);
+  const distant = dolly.prepare().commit();
   expect(distant.levelOfDetail!.stage).toBe('marker');
   expect(dolly.levelOfDetail()).toEqual(distant.levelOfDetail);
   // A grazing eye outside the sphere has an unbounded silhouette, so close
   // geometry must remain visible and interaction metrics must stay finite.
-  dolly.setBodyCenter([100, 0, -20]);
-  const grazing = dolly.publish(rotation, 'rotateZ(90deg)');
+  place(dolly, [100, 0, -20]);
+  const grazing = dolly.prepare().commit();
   expect(grazing.body!.silhouette).toBeNull();
   expect(grazing.levelOfDetail!.stage).toBe('geometry');
   expect(Number.isFinite(dolly.trackball().radius)).toBe(true);
   width = 1000; height = 700; focal = 866;
   dolly.remeasure();
   const resizedReads = layoutReads;
-  expect(dolly.publish(rotation, 'rotateZ(90deg)').stageViewport).toEqual({
+  expect(dolly.prepare().commit().stageViewport).toEqual({
     focalPixels: focal, widthPixels: width, heightPixels: height, principalOffsetPixels: [0, 0],
   });
   expect(layoutReads, 'The next frame uses the refreshed layout cache').toBe(resizedReads);
@@ -99,18 +107,18 @@ it('overview centering preserves the current view and only converges while dolly
       presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
     cameraElement: make(170), viewport: { read: () => ({ bounds: make(0).getBoundingClientRect(), focalPixels: focal, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(0), sceneElement: { style: {} },
-  } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
-  dolly.setBodyCenter([1300, -600, -3500]);
-  const initial = dolly.bodyCenter(), initialDistance = dolly.camera.state.distance;
-  const screen = () => { const [x, y, z] = dolly.bodyCenter()!; return [focal * x / -z, focal * y / -z]; };
+  } as unknown as Parameters<typeof createPerspectiveDolly>[0], () => fixedCameraOrientation());
+  place(dolly, [1300, -600, -3500]);
+  const initial = dolly.camera.bodyCenter(), initialDistance = dolly.camera.state.distance;
+  const screen = () => { const [x, y, z] = dolly.camera.bodyCenter()!; return [focal * x / -z, focal * y / -z]; };
   const initialOffset = Math.hypot(...screen());
-  dolly.setZoomOutCentering(true);
-  expect(dolly.bodyCenter(), 'Enabling centering does not move the eye').toEqual(initial);
+  dolly.camera.setZoomOutCentering(true);
+  expect(dolly.camera.bodyCenter(), 'Enabling centering does not move the eye').toEqual(initial);
   let previousOffset = initialOffset;
   for (let step = 1; step <= 100; step++) {
     const distance = initialDistance * (1 + step * .09);
-    dolly.camera.update({ distance });
-    expect(Math.hypot(...dolly.bodyCenter()!)).toBeCloseTo(distance, 8);
+    dolly.camera.dolly({ distance });
+    expect(Math.hypot(...dolly.camera.bodyCenter()!)).toBeCloseTo(distance, 8);
     const offset = Math.hypot(...screen());
     expect(offset).toBeLessThan(previousOffset);
     expect(previousOffset - offset).toBeLessThan(initialOffset * .1);
@@ -118,15 +126,15 @@ it('overview centering preserves the current view and only converges while dolly
   }
   expect(previousOffset).toBeLessThan(initialOffset * .11);
   const finalScreen = screen();
-  dolly.camera.update({ distance: dolly.camera.state.distance * .9 });
+  dolly.camera.dolly({ distance: dolly.camera.state.distance * .9 });
   screen().forEach((value, axis) => expect(value).toBeCloseTo(finalScreen[axis]!, 9));
-  dolly.setZoomOutCentering(false);
-  dolly.camera.update({ distance: dolly.camera.state.distance * 2 });
+  dolly.camera.setZoomOutCentering(false);
+  dolly.camera.dolly({ distance: dolly.camera.state.distance * 2 });
   screen().forEach((value, axis) => expect(value).toBeCloseTo(finalScreen[axis]!, 9));
-  dolly.setBodyCenter([100, 0, 1000]);
-  dolly.setZoomOutCentering(true);
-  dolly.camera.update({ distance: dolly.camera.state.distance * 2 });
-  expect(dolly.bodyCenter(), 'A body behind the eye cannot jump across the camera').toEqual([200, 0, 2000]);
+  place(dolly, [100, 0, 1000]);
+  dolly.camera.setZoomOutCentering(true);
+  dolly.camera.dolly({ distance: dolly.camera.state.distance * 2 });
+  expect(dolly.camera.bodyCenter(), 'A body behind the eye cannot jump across the camera').toEqual([200, 0, 2000]);
 });
 
 
@@ -143,29 +151,28 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
     worldContext: { frame: { ...frame, originM }, bodyRadiusUnits: 100, kilometersPerUnit: .001,
       maximumExtentUnits: 1e9 },
     cameraElement: make(), viewport: { read: () => ({ bounds: make().getBoundingClientRect(), focalPixels: 1247, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(), sceneElement: element,
-  } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
+  } as unknown as Parameters<typeof createPerspectiveDolly>[0], () => fixedCameraOrientation());
   const dolly = create(frame.originM);
-  const identity = { m11: 1, m21: 0, m31: 0, m12: 0, m22: 1, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
-  dolly.setBodyCenter([0, 0, -1e5]);
-  const near = dolly.publish(identity, 'rotateZ(0deg)').levelOfDetail!;
+  place(dolly, [0, 0, -1e5]);
+  const near = dolly.prepare().commit().levelOfDetail!;
   expect(near.stage).toBe('marker');
   expect(near.silhouetteDiameter).toBeGreaterThan(1.25);
   expect(hidden, 'The opaque proxy stands for a marker-stage body').toBe(true);
   expect(visibilityWrites).toBe(1);
-  dolly.setBodyCenter([0, 0, -1e7]);
-  const far = dolly.publish(identity, 'rotateZ(0deg)');
+  place(dolly, [0, 0, -1e7]);
+  const far = dolly.prepare().commit();
   expect(hidden).toBe(true);
   expect(element.style.transform, 'A hidden scene draws nothing, so it is not transformed').toBeUndefined();
-  dolly.setBodyCenter([0, 0, -2e7]);
-  const further = dolly.publish(identity, 'rotateZ(0deg)');
+  place(dolly, [0, 0, -2e7]);
+  const further = dolly.prepare().commit();
   expect(element.style.transform, 'Hidden camera publication writes no scene transform').toBeUndefined();
   expect(further.projection.eyeFromScene[14]).toBe(-2e7);
   expect(far.projection.eyeFromScene[14]).toBe(-1e7);
   expect(visibilityWrites, 'Hidden camera publication does not churn visibility').toBe(1);
   // A resolved mesh returns, also outside the enclosing context's extent.
   const outside = create([1e10, 0, 0]);
-  outside.setBodyCenter([0, 0, -1200]);
-  expect(outside.publish(identity, 'rotateZ(0deg)').levelOfDetail!.stage).toBe('geometry');
+  place(outside, [0, 0, -1200]);
+  expect(outside.prepare().commit().levelOfDetail!.stage).toBe('geometry');
   expect(hidden).toBe(false);
   expect(element.style.transform, 'The shown scene carries the current pose').toMatch(/^translate3d\(/);
 });

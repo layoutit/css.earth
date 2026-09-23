@@ -48,7 +48,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
     preparedSurfaceHitTest,
     onPublish() { publications++; }, onError(error: unknown) { throw error; },
   } as any, { HTMLElement: Surface,
-    createPerspectiveDolly(options: any) { physicalOwners++; return createPerspectiveDolly(options); },
+    createPerspectiveDolly(options: any, orientation: any) { physicalOwners++; return createPerspectiveDolly(options, orientation); },
     createCameraOrientation() {
       return { scene: () => worldRotationCss(rotation), sceneMatrix: () => ({
         m11: rotation[0], m21: rotation[1], m31: rotation[2], m12: rotation[3], m22: rotation[4], m32: rotation[5],

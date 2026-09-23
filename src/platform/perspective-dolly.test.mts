@@ -1,3 +1,4 @@
+import { fixedCameraOrientation } from './test/camera-orientation-fixture.mts';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -133,17 +134,9 @@ function fakeDom({ viewportWidth = 1440, viewportHeight = 900, focal = 1247 } = 
   };
 }
 
-// The identity linear part of a CSS `matrix3d`, in the column-major layout
-// `rotationFromMatrix3d` reads (`m11`.. `m33`).
-const IDENTITY_MATRIX3D = Object.freeze({
-  m11: 1, m21: 0, m31: 0,
-  m12: 0, m22: 1, m32: 0,
-  m13: 0, m23: 0, m33: 1,
-});
-
 test("the dolly's farthest distance is the world extent over its orbit-relative bound", () => {
   const cameraPlan = PREPARED_MERCURY_SCENE.camera;
-  const { dolly: stats } = createPerspectiveDolly({ cameraPlan, worldContext, ...fakeDom() }).stats();
+  const { dolly: stats } = createPerspectiveDolly({ cameraPlan, worldContext, ...fakeDom() }, () => fixedCameraOrientation()).stats();
   assert.equal(stats.maximumDistance, cameraPlan.dolly.maximumDistanceOverOrbitExtent * worldContext.maximumExtentUnits);
   assert.ok(stats.minimumDistance >= cameraPlan.dolly.minimumDistanceRadii * worldContext.bodyRadiusUnits);
   assert.ok(stats.minimumDistance < stats.maximumDistance);
@@ -161,8 +154,8 @@ test("publication reports the physical observer and the resolved body it frames"
   const cameraPlan = PREPARED_MERCURY_SCENE.camera;
   const published: unknown[] = [];
   const dolly = createPerspectiveDolly({ cameraPlan, ...fakeDom(),
-    worldContext: { ...worldContext, onWorldPublish: world => published.push(world) } });
-  const result = dolly.publish(IDENTITY_MATRIX3D, "");
+    worldContext: { ...worldContext, onWorldPublish: world => published.push(world) } }, () => fixedCameraOrientation());
+  const result = dolly.prepare().commit();
   assert.equal(published.length, 1);
   assert.ok(result.body && result.body.silhouetteDiameter > 0);
   assert.equal(result.levelOfDetail?.stage, "geometry");
