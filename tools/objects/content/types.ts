@@ -68,7 +68,20 @@ export interface LensRecipe {
    * plates for the body itself, and the shell asks the cloud's bank for the lens while it is selected.
    */
   volume?: LensVolume;
+  /**
+   * One step of a dataset shown as a sequence, such as a map at each of 25 wavelengths. Every step is an ordinary lens with
+   * its own prepared surface; the steps of a group sit together in the controls, the panel lists the group once and steps
+   * through its members in order.
+   */
+  step?: LensStep;
   source: LensSource;
+}
+
+export interface LensStep {
+  /** The group this lens is one step of; members are consecutive in the controls. */
+  group: string;
+  /** What distinguishes this step, such as "1.45 µm". */
+  label: string;
 }
 
 export interface ChartRecipe {

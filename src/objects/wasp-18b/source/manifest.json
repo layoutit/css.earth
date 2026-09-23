@@ -1,0 +1,1185 @@
+{
+  "schema": "cssearth-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "wasp-18b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/2510.24708",
+      "credit": "Challener, Weiner Mansfield et al. (2025), Nature Astronomy",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-18b-inter-title-font",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, self-luminous with transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "wasp-18b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-18b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the hosted planet, no directional light",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "wasp-18b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-18b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "wasp-18b-temp-wave-0-89",
+      "path": "science/challener-2025/temp_wave_0.89.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_0.89.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 0.89 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_0.89.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-0-97",
+      "path": "science/challener-2025/temp_wave_0.97.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_0.97.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 0.97 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_0.97.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-05",
+      "path": "science/challener-2025/temp_wave_1.05.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.05.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.05 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.05.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-13",
+      "path": "science/challener-2025/temp_wave_1.13.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.13.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.13 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.13.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-21",
+      "path": "science/challener-2025/temp_wave_1.21.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.21.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.21 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.21.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-29",
+      "path": "science/challener-2025/temp_wave_1.29.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.29.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.29 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.29.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-37",
+      "path": "science/challener-2025/temp_wave_1.37.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.37.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.37 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.37.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-45",
+      "path": "science/challener-2025/temp_wave_1.45.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.45.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.45 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.45.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-53",
+      "path": "science/challener-2025/temp_wave_1.53.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.53.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.53 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.53.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-60",
+      "path": "science/challener-2025/temp_wave_1.60.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.60.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.60 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.60.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-68",
+      "path": "science/challener-2025/temp_wave_1.68.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.68.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.68 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.68.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-76",
+      "path": "science/challener-2025/temp_wave_1.76.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.76.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.76 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.76.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-84",
+      "path": "science/challener-2025/temp_wave_1.84.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.84.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.84 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.84.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-1-92",
+      "path": "science/challener-2025/temp_wave_1.92.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.92.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 1.92 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_1.92.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-00",
+      "path": "science/challener-2025/temp_wave_2.00.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.00.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.00 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.00.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-08",
+      "path": "science/challener-2025/temp_wave_2.08.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.08.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.08 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.08.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-16",
+      "path": "science/challener-2025/temp_wave_2.16.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.16.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.16 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.16.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-24",
+      "path": "science/challener-2025/temp_wave_2.24.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.24.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.24 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.24.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-31",
+      "path": "science/challener-2025/temp_wave_2.31.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.31.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.31 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.31.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-39",
+      "path": "science/challener-2025/temp_wave_2.39.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.39.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.39 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.39.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-47",
+      "path": "science/challener-2025/temp_wave_2.47.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.47.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.47 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.47.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-55",
+      "path": "science/challener-2025/temp_wave_2.55.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.55.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.55 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.55.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-63",
+      "path": "science/challener-2025/temp_wave_2.63.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.63.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.63 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.63.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-71",
+      "path": "science/challener-2025/temp_wave_2.71.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.71.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.71 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.71.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-temp-wave-2-79",
+      "path": "science/challener-2025/temp_wave_2.79.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.79.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra brightness-temperature map at 2.79 um: lower, best and upper maps on a 1-degree grid",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure1/temp_wave_2.79.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-eigenspectra-25-bins-3-groups",
+      "path": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/eigenspectra_25_bins_3_groups.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra k-means group map (outer, ring, hotspot) over the observed longitudes, with the group spectra",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/eigenspectra_25_bins_3_groups.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-eigenspectra"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-eigen-posteriors-fpfs",
+      "path": "science/challener-2025/Eigen_posteriors_Fpfs.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/Figure2/Eigen_posteriors_Fpfs.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "Eigenspectra planet-to-star flux maps, lower, best and upper, at the 25 wavelengths (orientation test)",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/Figure2/Eigen_posteriors_Fpfs.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-orientation-check"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-spec-lambin-25",
+      "path": "science/challener-2025/spec_lambin_25.npz",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "productId": "WASP-18b 3D Mapping Archive/eigenspectra/spec_lambin_25.npz",
+      "version": "10.5281/zenodo.14751570",
+      "title": "The 25 systematics-corrected NIRISS/SOSS light curves the maps were fitted to (orientation test)",
+      "sourceUrl": "https://zenodo.org/records/14751570",
+      "credit": "R. C. Challener, M. Weiner Mansfield et al. (2025); JWST NIRISS/SOSS, ERS program 1366",
+      "displayCredit": "Challener, Weiner Mansfield et al. · JWST NIRISS",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14751570",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Member 'WASP-18b 3D Mapping Archive/eigenspectra/spec_lambin_25.npz' of the published archive WASP-18b-3D-Mapping-Archive.tar.gz (MD5 3c4492b84ce7bdba072b9e632ee71483), extracted unchanged by the tar-gz-member operation in source/preparation/acquisition.json.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "challener-2025-orientation-check"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "map-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://zenodo.org/records/14751570",
+      "credit": "The Challener, Weiner Mansfield et al. (2025) 0.89 um brightness-temperature map with its region borders, seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "inputs": [
+          "wasp-18b-temp-wave-0-89",
+          "wasp-18b-eigenspectra-25-bins-3-groups",
+          "wasp-18b-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default lens rendered as the dayside disc; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL"
+    },
+    {
+      "path": "presentation/title-mark.json"
+    }
+  ]
+}

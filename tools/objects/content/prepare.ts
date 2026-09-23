@@ -166,11 +166,12 @@ export async function prepareObjectContentAssets({
   const shellLenses = {
     title: preparedWithAssets.lenses.title,
     defaultLens: preparedWithAssets.lenses.defaultLens,
-    controls: preparedWithAssets.lenses.controls.map(({ id, label, thumbnailUrl, noData, facts, legend, legendNote, volume }) => ({
+    controls: preparedWithAssets.lenses.controls.map(({ id, label, thumbnailUrl, noData, facts, legend, legendNote, volume, step }) => ({
       id,
       label,
       thumbnailUrl,
       ...(volume ? { volume } : {}),
+      ...(step ? { step } : {}),
       ...(noData === true ? { noData } : {}),
       ...(facts?.length ? { facts } : {}),
       ...(legend ? { legend } : {}),
