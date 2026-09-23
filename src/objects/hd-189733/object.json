@@ -31,6 +31,16 @@
               "id": "color",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "spot-2021",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "activity-model",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

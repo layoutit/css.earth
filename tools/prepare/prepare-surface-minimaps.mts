@@ -9,6 +9,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
+import { composeLimbPreview } from '../../src/preparation/raster/emission-preview.ts';
 import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/observation/interpret.mts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
@@ -48,6 +49,10 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const selected = photographs ? new Set(photographs) : null;
   // Raster-lane surfaces with a scientific interpretation preview through the same decoders the lane packs with.
   const science = new Map(requireArray(rasterInput?.surfaces ?? []).flatMap(value => { const record = requireRecord(value); return isRecord(record.science) ? [[requireString(record.id), record.science] as const] : []; }));
+  const limbPreviews = new Set(requireArray(rasterInput?.surfaces ?? []).flatMap(value => {
+    const record = requireRecord(value);
+    return record.thumbnailFromLimbPlate === true ? [requireString(record.id)] : [];
+  }));
   for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map && (!selected || !surfaces.has(surface.id))) surfaces.set(surface.id, surface);
   if (selected && (!selected.size || selected.size !== photographs!.length || [...selected].some(id => !surfaces.has(id))))
     throw new TypeError('Choose existing photographic surfaces for minimap refresh.');
@@ -75,7 +80,12 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       const interpreted = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
       const emission = requireRecord(recipe).emission;
       // A shadow's sphere is not drawn: its preview is what is, the off-limb image with the shadow disc over its centre.
-      if (interpretation.kind === 'black-shadow' && interpretation.offLimb !== undefined && interpreted.plates && isRecord(emission)) {
+      if (limbPreviews.has(surface.id) && interpreted.plates?.limb) {
+        const plate = interpreted.plates.limb, disc = composeLimbPreview(plate, interpreted.data);
+        pipeline = sharp(disc, { raw: { width: plate.size, height: plate.size, channels: 4 } })
+          .resize(320, 320, { kernel: 'lanczos3' })
+          .extend({ left: 160, right: 160, top: 0, bottom: 0, background: { r: 0, g: 0, b: 0, alpha: 0 } });
+      } else if (interpretation.kind === 'black-shadow' && interpretation.offLimb !== undefined && interpreted.plates && isRecord(emission)) {
         const plate = interpreted.plates.offLimb, disc = requireFiniteNumber(emission.bodyDiameter) / requireFiniteNumber(emission.offLimbSize) * plate.size / 2;
         const rgb = Buffer.alloc(plate.size * plate.size * 3);
         for (let y = 0; y < plate.size; y++) for (let x = 0; x < plate.size; x++) {

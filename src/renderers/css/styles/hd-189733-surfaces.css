@@ -1,5 +1,5 @@
 /* HD 189733 A: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+   body-surfaces.css base rules. The camera-facing plates are static; the orbit source gives a spin axis but no evolving surface map. */
 .object-stage[data-object-id="hd-189733"] > :is(.polycss-camera, .hd-189733-corona-layer, .hd-189733-limb-layer) {
   --hd-189733-scene-side-padding: 16px;
   --hd-189733-reference-width: 1920px;
@@ -63,7 +63,8 @@
   background-image: var(--hd-189733-poles-image) !important;
 }
 
-/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
+/* Off-limb context: 600 px = raster.json emission.offLimbSize. The silhouette-fit binding already follows the
+   rendered sphere; multiplying background-size by geometryScale again would oversize this plate. */
 .object-stage[data-object-id="hd-189733"] .hd-189733-corona-layer {
   background-image: var(--hd-189733-corona-image);
   background-position: center;
@@ -73,7 +74,8 @@
     calc(600px * var(--hd-189733-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. The silhouette-fit transform
+   scales this box with the sphere, putting the 2021 transit-chord region on the visible disc. */
 .object-stage[data-object-id="hd-189733"] .hd-189733-limb-layer {
   background-image: var(--hd-189733-limb-image);
   background-position: center;

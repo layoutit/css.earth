@@ -6,6 +6,10 @@ Colour: the Gaia DR3 BP/RP sampled spectrum of source 1827242816201846144 (Gaia 
 
 Limb darkening: fitted in this project to TESS light curves of sectors 41, 54 and 81. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, and processed by the Science Processing Operations Center (Jenkins et al. 2016), obtained from the Mikulski Archive for Space Telescopes (MAST).
 
+Spot-crossing reconstruction: A. Haris, M. Tuomi and T. Hackman, "Homogeneous search for spot transits in Kepler and TESS photometry of K–M-type main-sequence stars", Astronomy & Astrophysics 704, A102 (2025), doi:10.1051/0004-6361/202452633, Table 3. The 2021 lens transcribes one candidate's timing, minimum angular radius and TESS-band contrast; the circular cap, sky orientation and achromatic application to Gaia colour are project display assumptions. No paper image is reproduced.
+
+Spot-band model: I. S. Narrett, B. V. Rackham and J. de Wit, "Axisymmetric High Spot Coverage on Exoplanet Host HD 189733 A", The Astronomical Journal 167, 107 (2024), doi:10.3847/1538-3881/ad1f6c, Figure 7 left. The AAS Figure 7 JPEG is reproduced under the article's Creative Commons Attribution 4.0 license; original © 2024 the authors. The displayed spot mask comes from their hypothetical dense-band illustration, not an observation of the stellar surface. The published TESS-band intensity ratio is applied achromatically to the Gaia-colour limb plate. Source: https://www.astroexplorer.org/details/ajad1f6cf7
+
 Spin axis and rotation: E. Cristo, E. Esparza Borges, N. C. Santos et al., "An ESPRESSO view of the HD 189733 system", A&A 682, A28 (2024), doi:10.1051/0004-6361/202346366.
 
 Placement: Gaia DR3 position, parallax, proper motion and radial velocity.

@@ -24,6 +24,7 @@
       "id": "color",
       "output": "hd-189733-surface-{id}{suffix}.webp",
       "thumbnail": "hd-189733-lens-{id}.webp",
+      "thumbnailFromLimbPlate": true,
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
@@ -41,6 +42,56 @@
             ]
           }
         }
+      }
+    },
+    {
+      "id": "spot-2021",
+      "output": "hd-189733-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-189733-lens-{id}.webp",
+      "thumbnailFromLimbPlate": true,
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "qualification": "Static reconstruction of a 2021 HD 189733b spot-crossing candidate (Haris et al. 2025, Table 3), on the Gaia-colour photosphere with TESS-fitted limb darkening. A minimum 5-degree circular cap has 7.6% TESS-band contrast. Its sky direction, circular shape and achromatic display contrast are assumptions; no global map or rotation.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "transits": {
+            "planet": "hd-189733b",
+            "lightCurves": [
+              "photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+              "photometry/tess/tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
+              "photometry/tess/tess2024196212429-s0081-0000000256364928-0276-s_lc.fits"
+            ]
+          }
+        },
+        "spotOccultation": "photometry/haris-2025-spot-occultation.json"
+      }
+    },
+    {
+      "id": "activity-model",
+      "output": "hd-189733-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-189733-lens-{id}.webp",
+      "thumbnailFromLimbPlate": true,
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "qualification": "Narrett, Rackham & de Wit (2024), Figure 7 left: one hypothetical dense spot-band layout consistent with about 40% modeled coverage and 1.4% TESS variability. The layout is an illustration, not an observed map. Its 0.099 TESS spot/photosphere intensity ratio is applied achromatically over Gaia colour on a fixed limb plate.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "transits": {
+            "planet": "hd-189733b",
+            "lightCurves": [
+              "photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+              "photometry/tess/tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
+              "photometry/tess/tess2024196212429-s0081-0000000256364928-0276-s_lc.fits"
+            ]
+          }
+        },
+        "spotFigure": "photometry/narrett-2024-band-model.json"
       }
     }
   ],
@@ -62,7 +113,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "composition": "black alpha darkens the photosphere by the quadratic limb law; selected lenses add either one transit-chord dark-region reconstruction or a published hypothetical dense-spot-band pattern; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

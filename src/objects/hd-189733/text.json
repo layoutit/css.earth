@@ -32,6 +32,34 @@
       "title": "Photosphere colour",
       "detail": "From its spectrum",
       "summary": "The colour of Gaia's spectrum of the star, darker toward the edge as its planet's transits show. No surface picture exists."
+    },
+    "activity-model": {
+      "title": "One possible active surface",
+      "detail": "Published illustration",
+      "summary": "A hypothetical spot-band pattern from Narrett et al. (2024), based on HST and TESS data; not a measured surface map.",
+      "sources": [
+        {
+          "catalogueId": "doi-10-3847-1538-3881-ad1f6c",
+          "url": "https://www.astroexplorer.org/details/ajad1f6cf7",
+          "label": "Narrett et al. (2024), Figure 7 left",
+          "checked": "2026-09-23",
+          "locator": "Figure 7, hypothetical dense spot bands"
+        }
+      ]
+    },
+    "spot-2021": {
+      "title": "2021 spot crossing",
+      "detail": "TESS transit model",
+      "summary": "A candidate dark region crossed by HD 189733b in 2021, shown as a static minimum-size model. The rest is unknown.",
+      "sources": [
+        {
+          "catalogueId": "doi-10-1051-0004-6361-202452633",
+          "url": "https://doi.org/10.1051/0004-6361/202452633",
+          "label": "Haris et al. (2025), Table 3",
+          "checked": "2026-09-23",
+          "locator": "Table 3, HD 189733b transit 2165"
+        }
+      ]
     }
   }
 }
