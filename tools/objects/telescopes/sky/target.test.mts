@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parseSkyTarget, readSkyTarget, resolveSkyTarget, simbadObjectQuery, skyCatalogueEntry, skyRegion, skyTargetId, type SkyTarget } from './sky-target.mts';
-import { skyTargetRequest } from './exploration.mts';
-import { SERVICES, searchCircle, targetQuery } from './vo/discovery.mts';
-import type { MetadataResponse } from './vo/contracts.mts';
+import { parseSkyTarget, readSkyTarget, resolveSkyTarget, simbadObjectQuery, skyCatalogueEntry, skyRegion, skyTargetId, type SkyTarget } from './target.mts';
+import { skyTargetRequest } from '../exploration.mts';
+import { SERVICES, searchCircle, targetQuery } from '../vo/discovery.mts';
+import type { MetadataResponse } from '../vo/contracts.mts';
 
 const field = (name: string, unit: string | null) => ({ name, id: null, datatype: 'char', arraysize: null, unit, ucd: null, utype: null, xtype: null, ref: null });
 const response = (rows: MetadataResponse['rows'], units: Readonly<Record<string, string | null>> = { ra: 'deg', dec: 'deg', coo_err_maj: 'mas' }): MetadataResponse => ({

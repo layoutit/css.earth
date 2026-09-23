@@ -27,8 +27,8 @@ export interface DiscoveryRequest {
   /** A circle to search by footprint only, never a cutout (`region` is the cutout). A SIMBAD target supplies SIMBAD's
    * position and position error here. */
   readonly footprint?: import('./contracts.mts').IcrsCircle;
-  /** A target outside the application catalogue, named and placed by SIMBAD (sky-target.mts). */
-  readonly skyTarget?: import('../sky-target.mts').SkyTarget;
+  /** A target outside the application catalogue, named and placed by SIMBAD (sky/target.mts). */
+  readonly skyTarget?: import('../sky/target.mts').SkyTarget;
   readonly spectralFrame?: 'barycentric';
   readonly transferLimits?: TransferLimits;
 }

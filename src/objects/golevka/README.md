@@ -16,7 +16,7 @@ Independent 8,192 area-stratified surface samples in each direction give source-
 
 Source-scalar and decoded-atlas measurements are retained below. They are sampled preparation checks, not browser pixel-parity evidence.
 
-[Source test definitions](../../../tests/objects/unit/golevka/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/golevka/source.test.mts).
 
 ## Known problems
 

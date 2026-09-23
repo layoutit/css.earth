@@ -3,9 +3,9 @@ import { test } from 'node:test';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { associate, candidatesAtEpoch, epochMjd, hostedPlanetsOf, readRelativeAstrometryCsv, runAssociation } from './sky-association.mts';
+import { associate, candidatesAtEpoch, epochMjd, hostedPlanetsOf, readRelativeAstrometryCsv, runAssociation } from './association.mts';
 
-const root = resolve(import.meta.dirname, '../../..');
+const root = resolve(import.meta.dirname, '../../../..');
 const fixture = resolve(root, 'tests/fixtures/telescope-families/sky-association-beta-pictoris/gravity-2026.csv');
 const temporary = async () => mkdtemp(resolve(tmpdir(), 'sky-association-'));
 

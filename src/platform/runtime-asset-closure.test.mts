@@ -46,6 +46,23 @@ test("one inventory per object: each location is written by its own stage and ke
   assert.equal(await readInventory("fixture", objectDirectory), null);
 });
 
+test("a volume bank's baked provenance is inventoried; a scene body's regenerated one is not", async (context) => {
+  const root = await mkdtemp(resolve(tmpdir(), "inventory-provenance-"));
+  context.after(() => rm(root, { force: true, recursive: true }));
+  const prepared = async (id: string, type: string) => {
+    const objectDirectory = resolve(root, "src/objects", id), preparedRoot = resolve(objectDirectory, "prepared");
+    await mkdir(preparedRoot, { recursive: true });
+    await writeFile(resolve(objectDirectory, "object.json"), JSON.stringify({ id, type }));
+    await writeFile(resolve(preparedRoot, "lenses.json"), "bank");
+    await writeFile(resolve(preparedRoot, "provenance.json"), "provenance");
+    const inventory = await inventoryPreparedAssets({ objectId: id, objectDirectory, gitTrackedPaths: async () => new Set() });
+    return inventory?.assets.map(asset => asset.filename);
+  };
+  // prepare-provenance writes a scene body's record on every checkout; a bank's comes only from its bake (#541, #550).
+  assert.deepEqual(await prepared("fixture-bank", "volume-lens-bank"), ["lenses.json", "provenance.json"]);
+  assert.deepEqual(await prepared("fixture-body", "layered-body"), ["lenses.json"]);
+});
+
 test("verification catches drift and closure gaps per location; the validator rejects unsafe or repeated entries", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "inventory-verify-"));
   context.after(() => rm(root, { force: true, recursive: true }));

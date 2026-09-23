@@ -20,7 +20,7 @@ accepted cell counts for all three ice maps. The unchanged native maps give
 69.31% methane-rich ice and 19.88% nitrogen-rich ice averaged over 60–90° N,
 matching the paper's rounded 69% and 20% in section 3 and Figure 9.
 [Pinned reference values](../../../tests/objects/fixtures/pluto/leisa-astropy.json)
-and [the comparison test](../../../tests/objects/unit/pluto/leisa.test.mts)
+and [the comparison test](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/pluto/leisa.test.mts)
 identify the exact source files and oracle versions. These checks establish
 decoding, source sampling and the declared mask; they do not validate the
 authors' spectral inversion.
@@ -47,7 +47,7 @@ These download sizes refer only to the polar sprites. Decoded dimensions are unc
 Pluto uses the shared raster lane used by Mercury, Venus and Mars. Photographs,
 elevation and composition share the existing geometry, camera and lighting bank.
 
-The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and the shared browser conformance harness, and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
+The retained notes point to [unit checks](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/pluto) and the shared browser conformance harness, and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
 
 Declared inputs are checked by the shared source manifest coverage check.
 

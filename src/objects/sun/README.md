@@ -68,7 +68,7 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   equals astropy's raw integer through BSCALE/BZERO, with BLANK samples in the
   same places. The [oracle table](../../../tools/oracles/README.md) lists the
   committed fixture.
-- [Unit tests](../../../tests/objects/unit/sun) and the
+- [Unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/sun) and the
   the shared browser conformance harness
   define the package checks. The [four-lens render](source/reference/rendered-lenses.png)
   of this version was inspected after the scene reported ready: active regions

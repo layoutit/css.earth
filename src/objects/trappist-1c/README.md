@@ -39,11 +39,11 @@ radii), so the measured day side is dimmer than a black rock's. The lens is labe
 
 ## Evidence
 
-- [`source.test.mts`](../../../tests/objects/unit/trappist-1/source.test.mts) checks the pins, and that the planet turns synchronously
+- [`source.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1/source.test.mts) checks the pins, and that the planet turns synchronously
   with longitude 0 on its star and orbits it;
   [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
-- [`lens-fits.test.mts`](../../../tests/objects/unit/trappist-1c/lens-fits.test.mts) runs the shipped recipe and checks that the
+- [`lens-fits.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1c/lens-fits.test.mts) runs the shipped recipe and checks that the
   drawn rock shows the middle of the measured eclipse depth and is dark at night.
 - Driven in a real browser: the seven orbits and labels draw around the star in the system view. The rendered
   [day side](source/reference/rendered-model-day.png) and [terminator](source/reference/rendered-model-terminator.png) show the model lens.

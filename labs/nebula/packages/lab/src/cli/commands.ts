@@ -53,7 +53,7 @@ export const labCommands: Record<string, string> = {
   "prepare-nebula-structures": "labs/nebula/packages/lab/src/cli/commands/prepare-nebula-structures.ts",
   "browser-emission": "labs/nebula/packages/lab/browser/browser-emission.ts",
   "prepare-emission": "labs/nebula/packages/lab/src/cli/commands/prepare-emission.ts",
-  "reconstruct-circumstellar": "labs/nebula/packages/lab/src/cli/commands/reconstruct-circumstellar.ts",
+  "reconstruct-circumstellar": "labs/nebula/packages/lab/src/cli/commands/circumstellar/reconstruct.ts",
   "verify-nebula": "labs/nebula/packages/lab/src/cli/commands/verify-nebula.ts",
   "process-density-candidates": "labs/nebula/packages/lab/src/cli/commands/process-density-candidates.ts",
   "bake-nebula": "labs/nebula/packages/lab/src/cli/commands/bake-nebula.ts",

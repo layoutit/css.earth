@@ -44,7 +44,7 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
     writeFile(resolve(source, 'observation.dat'), input), writeFile(resolve(source, 'unused.dat'), 'unused'),
     writeFile(resolve(publicDirectory, 'surface@2x.webp'), output),
     writeFile(resolve(source, 'preparation/raster.json'), recipe),
-    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssfixture-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [{ path: 'preparation/raster.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) }], generatedIntermediates: [] })),
+    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssearth-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [{ path: 'preparation/raster.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) }], generatedIntermediates: [] })),
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [
       { id: 'raster', path: 'source/preparation/raster.json' },
     ] } } })),
