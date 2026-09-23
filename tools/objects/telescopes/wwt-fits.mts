@@ -106,14 +106,20 @@ export async function acquireWwtFits(catalogPath: string, setName: string, level
     const outputNames = requireArray(plotted.files, 'science products').map(value => requireString(value, 'science product'));
     if (outputNames.length !== 4 || ['figure.png', 'figure.svg', 'values.csv', 'image.fits'].some(name => !outputNames.includes(name)))
       throw new Error('Astropy plotting returned an unexpected science product list.');
+    const implementation = digest(Buffer.concat(await Promise.all([
+      new URL('wwt-fits.mts', import.meta.url), new URL('../astronomy-packages/science.mts', import.meta.url),
+      new URL('../astronomy-packages/plots.mts', import.meta.url),
+    ].map(path => readFile(path)))));
     await writeProductRecord(resolve(staging, 'output.product.json'), {
       telescope: 'WorldWideTelescope hosted FITS collection', stage: 'telescope-wwt-fits',
       inputs: [
+        { role: 'WWT FITS catalog snapshot', identity: resolve(catalogPath), bytes: catalogBytes.length, sha256: digest(catalogBytes) },
         { role: 'WTML collection', identity: requireString(source.url, 'WTML URL'), bytes: wtmlBytes.length, sha256: digest(wtmlBytes) },
         { role: 'FITS tile', identity: url, bytes: bytes.length, sha256: digest(bytes) },
       ],
       parameters: { imageset: requireString(selected.name, 'WWT FITS name'), level, x, y, status: 'unresolved', limitations, sourceInspection: science[0] },
-      software: [{ name: 'wwt-data-formats catalog parser', version: '0.18.1' }, { name: 'Astropy', version: requireString(inspected.astropy, 'Astropy version') },
+      software: [{ name: 'cssEarth Telescope WWT FITS', version: implementation }, { name: 'wwt-data-formats catalog parser', version: '0.18.1' },
+        { name: 'Astropy', version: requireString(inspected.astropy, 'Astropy version') },
         { name: 'Matplotlib', version: requireString(plotted.matplotlib, 'Matplotlib version') }],
     }, [{ path: 'source.fits', file: original }, { path: 'source.json', file: resolve(staging, 'source.json') },
       { path: 'catalog.json', file: resolve(staging, 'catalog.json') }, { path: 'source.wtml', file: resolve(staging, 'source.wtml') },
