@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hr-8799-e",
+  "card": {
+    "text": "The innermost of HR 8799's four imaged giants, 16 au out, found in 2010.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1011-4918",
+        "url": "https://arxiv.org/abs/1011.4918",
+        "label": "Marois et al. 2010",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Here we report the presence of a fourth planet, interior to and about the same mass as the other three."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HR 8799 e is a young gas giant of about 7.4 Jupiter masses, 16 au from its star. One orbit takes about 53 years, near a 2:1 resonance with its neighbours.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1011-4918",
+        "url": "https://arxiv.org/abs/1011.4918",
+        "label": "Marois et al. 2010",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Here we report the presence of a fourth planet, interior to and about the same mass as the other three."
+      },
+      {
+        "catalogueId": "arxiv-2207-10684",
+        "url": "https://arxiv.org/abs/2207.10684",
+        "label": "Zurlo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "periods very close to the 2:1 resonance"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "JWST infrared colour",
+      "detail": "Measured, false colour",
+      "summary": "Its 4.1 to 4.6 µm brightness from JWST as blue, green and red, on one scale with its siblings. One colour, not a map."
+    }
+  }
+}

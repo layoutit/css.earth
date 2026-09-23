@@ -367,6 +367,8 @@ const searchCategories = [
           <nav class="object-observation-controls" aria-label="Datasets" data-system-dataset-options></nav>
           <div class="object-lens-details" data-system-dataset-details></div>
         </div>
+        {/* A telescope's picture of the whole system, kept in its star's gallery, is shown here while the system is the selection. */}
+        <div class="object-system-galleries" data-system-galleries hidden></div>
         <div data-solar-system-facts>
           <InformationTabs idPrefix={`${objectId}-solar-system`} group="solar-system"
             label="Solar System information" tabs={[{ id: 'factsheet', label: 'Factsheet' }]} />

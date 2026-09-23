@@ -3,7 +3,7 @@ import { createSelectionPresentation, setPanelHidden } from './selection-present
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
 import type { OverviewScope } from './overview-context.mts';
-import { selectedShellSubject, type ShellSelection, type ShellSubject } from './shell-selection.mts';
+import type { SceneSubject } from './scene-selection.mts';
 import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { requiredElement } from './browser-types.mts';
 import { objectCategoryCount } from './object-categories.mts';
@@ -15,23 +15,24 @@ import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 
 export interface ObjectBrowserOptions {
-  readSelection(): ShellSelection;
+  readSelection(): SceneSubject;
+  readObjectId(): string;
   onCategoryChange?(classification: string | null): void;
   illustrationModelsEnabled?: boolean;
 }
 
 interface SubjectOverride {
-  readonly subject: ShellSubject;
+  readonly subject: SceneSubject;
   hideFocus: boolean;
 }
 
 export function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
-  { readSelection, onCategoryChange = () => {}, illustrationModelsEnabled = false }: ObjectBrowserOptions) {
+  { readSelection, readObjectId, onCategoryChange = () => {}, illustrationModelsEnabled = false }: ObjectBrowserOptions) {
   // Browsing a system keeps the committed focus; a flight preview temporarily
   // covers it. Neither changes which scene or focus the shell owns.
   let subjectOverride: SubjectOverride | null = null;
-  const currentSubject = (): ShellSubject => {
-    const committed = selectedShellSubject(readSelection());
+  const currentSubject = (): SceneSubject => {
+    const committed = readSelection();
     return subjectOverride && (subjectOverride.hideFocus || committed.kind !== 'focus')
       ? subjectOverride.subject : committed;
   };
@@ -125,7 +126,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   });
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
-    documentTarget, objectId: readSelection().objectId,
+    documentTarget, objectId: readObjectId(),
     onResults(count) { visibleFeatures = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
     onSelectionError(error) { console.error('Feature selection failed:', error); browsing = true; render(true); search.focus(); },
@@ -358,7 +359,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     const selected = presentation.mark(currentSubject());
     catalogue.setSelection(selected);
   };
-  const previewSelection = (subject: ShellSubject) => {
+  const previewSelection = (subject: SceneSubject) => {
     const previous = subjectOverride, previousBrowsing = browsing;
     const preview = { subject, hideFocus: true };
     subjectOverride = preview;
@@ -392,20 +393,17 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       if (systemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();
       markSelection(); render(false);
     },
-    refreshFocus() {
-      // A focus publication supersedes the focus hidden by a flight preview,
-      // while the preview or explorer still owns its underlying body/context.
-      if (subjectOverride) subjectOverride.hideFocus = false;
-      markSelection(); render(browsing);
-    },
-    refreshSelection({ clearObjectProviders = false } = {}) {
-      subjectOverride = null;
-      const subject = selectedShellSubject(readSelection());
+    refreshSelection() {
+      const subject = readSelection();
+      // Focus content can publish during a preview; keep its temporary context.
+      if (subject.kind === 'focus') {
+        if (subjectOverride) subjectOverride.hideFocus = false;
+      } else subjectOverride = null;
       if (subject.kind === 'overview' && subject.overview.scope === 'system' && subject.overview.systemId === SOLAR_SYSTEM_ID) {
         collapseSolarSystemBranches();
       }
       markSelection();
-      if (clearObjectProviders) { destinations?.bind(null); features?.bind(null); }
+      if (subject.kind === 'overview') { destinations?.bind(null); features?.bind(null); }
       render(browsing);
     },
     bindObject(id: string) {
@@ -424,7 +422,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       render(browsing);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) {
-      const body = SCENE_OBJECTS.find(object => object.id === readSelection().objectId);
+      const body = SCENE_OBJECTS.find(object => object.id === readObjectId());
       destinations?.bind(provider, body ? { id: body.id, name: body.name } : undefined);
     },
     selectPlace(id: string) { return destinations?.selectById(id) ?? Promise.resolve(); },
