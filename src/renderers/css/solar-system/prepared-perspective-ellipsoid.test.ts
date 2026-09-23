@@ -41,31 +41,29 @@ test('perspective overlays follow exact off-axis ellipsoid tangents across incli
     const eyeFromScene=scene.map((value,i)=>i<12?value*scale:value);
     eyeFromScene[12]=distance*.3*scale;eyeFromScene[13]=-distance*.11*scale;eyeFromScene[14]=-distance*scale;
     const physical:PhysicalProjection={eyeFromScene,focalPixels:870,principalOffsetPixels:[-130,48]};
-    const result=readPreparedMatrix4(f.publish({degrees:roll,sceneMatrix:scene,counterMatrix:counter,projection:physical,preserveDefault:true}));
+    const result=readPreparedMatrix4(f.publish({degrees:roll,counterMatrix:counter,projection:physical}));
     assert.ok(tangentError(f,result,physical,counter)<2e-9,`physical tangency ${JSON.stringify({scale,pitch,roll,distance})}`);
     cases++;
   }
   assert.equal(cases,32);
 });
 
-test('removing physical projection breaks the actual default-pose silhouette guarantee',()=>{
+test('the default pose satisfies the physical silhouette guarantee',()=>{
   const f=fixture(),physical:PhysicalProjection={eyeFromScene:translation(28,-9,-70),focalPixels:800,principalOffsetPixels:[40,-20]};
-  const view={degrees:0,sceneMatrix:identity,counterMatrix:identity,preserveDefault:true};
+  const view={degrees:0,counterMatrix:identity};
   assert.ok(tangentError(f,readPreparedMatrix4(f.publish({...view,projection:physical})),physical,identity)<1e-10);
-  assert.ok(tangentError(f,readPreparedMatrix4(f.publish(view)),physical,identity)>.01);
-  assert.deepEqual(readPreparedMatrix4(f.publish(view)),f.projection.baseProjection,'affine default remains exact');
 });
 
 test('far off-axis physical overlays stay finite instead of losing covariance through centre subtraction',()=>{
   const f=fixture(),physical:PhysicalProjection={eyeFromScene:translation(3e18,-1e18,-1e19),focalPixels:800,principalOffsetPixels:[0,0]};
-  assert.ok(readPreparedMatrix4(f.publish({degrees:20,sceneMatrix:identity,counterMatrix:identity,projection:physical})).every(Number.isFinite));
+  assert.ok(readPreparedMatrix4(f.publish({degrees:20,counterMatrix:identity,projection:physical})).every(Number.isFinite));
 });
 
 test('grazing near-surface overlays retain the unbounded conic and remain ahead of the body',()=>{
   const f=fixture(),scene=preparedRotationMatrix4('x',90),counter=preparedRotationMatrix4('x',-90);
   const eyeFromScene=[...scene];eyeFromScene[12]=15;eyeFromScene[14]=-16;
   const physical:PhysicalProjection={eyeFromScene,focalPixels:800,principalOffsetPixels:[-170,0]};
-  const result=readPreparedMatrix4(f.publish({degrees:0,sceneMatrix:scene,counterMatrix:counter,projection:physical}));
+  const result=readPreparedMatrix4(f.publish({degrees:0,counterMatrix:counter,projection:physical}));
   assert.ok(result.every(Number.isFinite));
   assert.ok(tangentError(f,result,physical,counter)<1e-9);
   const material=multiplyPreparedMatrix4(multiplyPreparedMatrix4(eyeFromScene,counter),result);
@@ -85,11 +83,11 @@ test('the retained material publisher fits angle-only textures in their actual C
       physical:{projection:f.projection,width:f.width,height:f.height,systemTransform:`matrix3d(${identity})`}}};
   const publisher=createPreparedMaterialPublisher(track,element),physical:PhysicalProjection={eyeFromScene:translation(28,-9,-70),focalPixels:800,principalOffsetPixels:[-170,0]};
   const view={controlPitch:0,controlYaw:0,zoom:1,sceneMatrix:`matrix3d(${identity})`,sunViewDirection:[1,0,0],
+    principalOffset: physical.principalOffsetPixels, stageViewport: physical,
+    levelOfDetail: {stage:'geometry',silhouetteDiameter:40,billboardOpacity:0,markerOpacity:0}, body:{visible:true},
     counterRotation:`matrix3d(${identity})`,counterRotationFor:()=>`matrix3d(${identity})`,projection:physical};
   const selected={track:'material',bank:'bank',mode:'frames' as const,fixedMode:'fixed',enabled:true,rotationEnabled:true};
   const resources={has:()=>true,url:()=>null} as unknown as PreparedResources;
-  publisher.publish(selected,{...view,projection:undefined,reference:view},resources);
-  assert.equal(style.transformOrigin,'50px 40px','the affine angle publisher retains the authored rotation centre');
   publisher.publish(selected,{...view,reference:view},resources);
   // CSS conjugates transform by transform-origin. Testing just the supplied
   // matrix misses the extra centring that detached the actual atmosphere.

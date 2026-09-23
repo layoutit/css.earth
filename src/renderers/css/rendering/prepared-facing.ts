@@ -26,13 +26,13 @@ export function frontFacing(plane: PreparedFacingPlane['plane'], eye: readonly n
 
 export function createPreparedFacing(plans: readonly PreparedFacingPlane[], nodes: readonly HTMLElement[]) {
   const faces = plans.map(plan => ({ ...plan, node: nodes[plan.target], visibility: nodes[plan.target].style.visibility, visible: true }));
-  return (projection: PhysicalProjection | undefined) => {
-    const observer = projection ? sceneObserver(projection) : null;
+  return (projection: PhysicalProjection) => {
+    const observer = sceneObserver(projection);
     const eye = observer?.eye ?? null;
     // Preserve a one-CSS-pixel angular rim on each side for raster coverage. A
     // mathematically rear-facing plane can still contribute antialiased edge
     // pixels; Chrome keeps final ownership of those grazing faces at any DPR.
-    const grazingMargin = eye && projection ? 2 * Math.hypot(...eye) / projection.focalPixels : 0;
+    const grazingMargin = eye ? 2 * Math.hypot(...eye) / projection.focalPixels : 0;
     for (const face of faces) {
       const visible = eye === null || frontFacing(face.plane, eye, Math.max(grazingMargin, face.tolerance * observer!.toleranceScale));
       if (visible === face.visible) continue;

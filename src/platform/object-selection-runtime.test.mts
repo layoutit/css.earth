@@ -66,7 +66,7 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: Ha
     const track = definition.materials[1], frame = 20 + row * 32 + withinRow;
     const z = frame / (track.frame.indices.length - 1) * 2 - 1;
     const direction: readonly [number, number, number] = [Math.sqrt(1 - z * z), 0, z];
-    const next: PreparedView = { controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
+    const next: PreparedView = { ...f.view, controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
       levelOfDetail: { stage: 'geometry', silhouetteDiameter: 100, billboardOpacity: 0, markerOpacity: 0 },
       revision: ++revision, sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
       sunViewDirection: direction, reference: currentView?.reference, };

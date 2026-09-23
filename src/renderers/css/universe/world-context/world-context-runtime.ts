@@ -27,7 +27,6 @@ export function createWorldContextObjectRuntime({ definition, context, frame }: 
       maximumExtentUnits: plan.camera.maximumDistanceM / frame.metersPerUnit,
       framingReferenceZoom: isFocus ? plan.camera.framingReferenceZoom
         : definition.camera.defaultZoom * definition.camera.logicalBodyDiameter / 2 /
-          (frame.bodyRadiusM / frame.metersPerUnit),
-      sceneRegistration: isFocus ? plan.sky.sceneRegistration : definition.sky.sceneRegistration },
+          (frame.bodyRadiusM / frame.metersPerUnit) },
   });
 }

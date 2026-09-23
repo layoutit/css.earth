@@ -171,7 +171,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       },
       optics() {
         const state = getOrbit().state();
-        if (state.focal === undefined || !state.principalOffset || !definition.camera.levelOfDetail) throw new TypeError('World navigation requires a physical camera.');
         return { focalPixels: state.focal, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
           visibleRect: state.visibleRect ?? null,
           widthPixels: latestWorldPublication?.stageViewport.widthPixels,
@@ -312,7 +311,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed || startup.cancelled) return;
       // Resolve any new projection before attaching the detailed scene. The
       // application-owned snapshot normally survives the handoff unchanged.
-      if (cameraPlan.projection) viewport.read(cameraPlan.projection.cssPerspective);
+      viewport.read(cameraPlan.projection.cssPerspective);
       mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation);
       if (lifetime.disposed) return;
       syncPagePlayback();
@@ -333,7 +332,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         const featureOrigin = definition.assetOrigin, featurePlan = definition.features;
         surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
           scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
-          navigation, flightLimits: () => ({ minimumDistanceM: (definition.camera.dolly?.minimumDistanceRadii ?? 1.2) * worldFrame.bodyRadiusM }),
+          navigation, flightLimits: () => ({ minimumDistanceM: definition.camera.dolly.minimumDistanceRadii * worldFrame.bodyRadiusM }),
           onSelect: onFeatureSelect, onFlight: () => { stopMotion(); },
           ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
             fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
@@ -346,7 +345,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
         // An undrawn mesh commits no textures; it stays hidden until it has them.
         canReveal: () => selection?.state().plan?.deferredTextures !== true,
-        skyPlan: definition.sky, directionalSunPlan: definition.sun ?? null, worldContext,
+         directionalSunPlan: definition.sun ?? null, worldContext,
         cameraPlan, viewport, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
         onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());

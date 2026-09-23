@@ -153,7 +153,27 @@ class ControlledImage implements PreparedImage {
         this.src = ""; }
 }
 type FixtureView = OrbitPublication & { reference?: FixtureView; revision: number; };
-function objectView(definition: ObjectRuntimeDefinition, silhouetteDiameter?: number): FixtureView { const sun = definition.sun ?? null, direction = sun?.referenceViewDirection; const view: FixtureView = { worldCamera: { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } }, stageViewport: { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 }, controlPitch: definition.camera.defaultControlPitchDegrees ?? 0, controlYaw: definition.camera.defaultControlYawDegrees ?? 0, zoom: definition.camera.defaultZoom, revision: 1, sceneMatrix: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", skyboxMatrix: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", counterRotation: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", counterRotationFor: () => "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", skySunViewDirection: direction ?? null, sunViewDirection: direction ? viewSunDirectionToPreparedLightDirection(direction) : null, ...(silhouetteDiameter === undefined ? {} : { levelOfDetail: { stage: "geometry", silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0, proxyOpacity: 0 } }) }; view.reference = view; return view; }
+export function objectView(definition: ObjectRuntimeDefinition, silhouetteDiameter = 100): FixtureView {
+    const direction = definition.sun?.referenceViewDirection ?? null;
+    const identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+    const matrix = `matrix3d(${identity})`, distance = 1000;
+    const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+    const view: FixtureView = {
+        worldCamera: { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+        stageViewport: viewport, principalOffset: viewport.principalOffsetPixels,
+        projection: { ...viewport, eyeFromScene: [...identity.slice(0, 12), 0, 0, -distance, 1] },
+        distance, focal: viewport.focalPixels, viewportWidth: viewport.widthPixels, viewportHeight: viewport.heightPixels,
+        body: { visible: true, screen: [0, 0], distance, depth: distance, offAxisDegrees: 0, silhouetteRadius: silhouetteDiameter / 2,
+            silhouetteDiameter, silhouette: null, orthographicRadius: silhouetteDiameter / 2, translate: [0, 0, 0] },
+        levelOfDetail: { stage: "geometry", silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0, proxyOpacity: 0 },
+        controlPitch: definition.camera.defaultControlPitchDegrees, controlYaw: definition.camera.defaultControlYawDegrees,
+        zoom: definition.camera.defaultZoom, revision: 1, sceneMatrix: matrix,
+        counterRotation: matrix, counterRotationFor: () => matrix, skySunViewDirection: direction,
+        sunViewDirection: direction ? viewSunDirectionToPreparedLightDirection(direction) : null,
+    };
+    view.reference = view;
+    return view;
+}
 export function objectRuntimePackageTests(value: unknown): void {
     const definition = runtimeDefinition(value);
     test(`${definition.id}: the actual definition satisfies the common contract`, () => { resolvePreparedPresentation(definition, { selection: initialObjectSelection(definition.controls), view: objectView(definition) }); });

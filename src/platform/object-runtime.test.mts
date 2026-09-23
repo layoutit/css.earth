@@ -13,16 +13,14 @@ import { createPreparedResidency } from '../renderers/css/dist/testing.js';
 import { createPreparedPlayback } from '../renderers/css/dist/testing.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
-import { retainedPresentationFixture, fixtureObjectCapabilities } from "./test/object-runtime-package.mts";
+import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "./test/object-runtime-package.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("moon"));
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));
 // This mount harness records lifecycle calls; no page requests are made here.
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 function publicationForTest(): OrbitPublication {
-  return { worldCamera: { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } }, stageViewport: { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 }, controlPitch: 0, controlYaw: 0, zoom: 1, sceneMatrix: matrix, skyboxMatrix: matrix,
-    sunViewDirection: null, skySunViewDirection: null, counterRotation: matrix,
-    counterRotationFor: () => matrix };
+  return { ...objectView(moonDefinition), sunViewDirection: null, skySunViewDirection: null };
 }
 type RuntimeServices = NonNullable<Parameters<typeof createObjectRuntime>[1]>;
 type RuntimeFactory = typeof createObjectRuntime;
@@ -85,10 +83,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
     created.push(node as unknown as HTMLElement); return node;
   };
   let lifetime: Lifetime | null = null, playback: Playback | null = null, resources: Residency | null = null, resourceOptions: ResourceOptions | null = null, orbitArguments: OrbitOptions | null = null, coordinator: Selection | null = null;
-  const publication: OrbitPublication = { worldCamera: { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } }, stageViewport: { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 }, controlPitch: definition.camera.defaultControlPitchDegrees ?? 0,
-    controlYaw: definition.camera.defaultControlYawDegrees ?? 0, zoom: definition.camera.defaultZoom,
-    sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
-    skyboxMatrix: matrix, skySunViewDirection: definition.sun?.referenceViewDirection ?? [1, 0, 0], sunViewDirection: [1, 0, 0] };
+  const publication: OrbitPublication = { ...objectView(definition), sunViewDirection: [1, 0, 0] };
   let runtime: Runtime;
   try {
     const mount = runtimeFactory(definition, {
@@ -139,7 +134,6 @@ test("one mount owns the actual prepared tree, startup, celestial layers, readin
   assert.equal(h.selection().stats().commits, 1);
   assert.equal(h.selection().stats().framePublications > 0, true);
   assert.deepEqual(h.orbitArguments().cameraPlan, moonDefinition.camera);
-  assert.equal(h.orbitArguments().skyPlan, moonDefinition.sky);
   h.runtime.resume(); assert.equal(h.native.playState, "running");
   h.runtime.destroy(); assert.equal(h.native.cancels, 1); assert.equal(h.stage.children.length, 0);
   assert.deepEqual(h.events.slice(-4).filter(value => value.startsWith("remove:")), ["remove:orbit", "remove:camera"]);

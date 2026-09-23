@@ -29,7 +29,7 @@ test("Venus preserves roll and shadow boundaries while selecting physical direct
     const track=definition.materials[0],element=f.document.createElement("s");
     const first=track.banks[0].frames[track.defaultFrame];
     element.style.backgroundSize=first.backgroundSize;element.style.backgroundPosition=first.backgroundPosition;
-    const publisher=createPreparedMaterialPublisher(track,nativeElement(element),definition.camera);
+    const publisher=createPreparedMaterialPublisher(track,nativeElement(element));
     for(const record of reference.records){
       const selection={...initialObjectSelection(definition.controls),shadows:record.shadows};
       const view={...f.view,sunViewDirection:record.direction,skySunViewDirection:definition.sun?.referenceViewDirection ?? null,
@@ -61,7 +61,7 @@ test("frame mapping consumes numeric bounds independently of the presentation id
 test("metadata observation and unchanged publication have no extra material writes",()=>{
   const f=retainedPresentationFixture(definition);
   try{
-    const track=definition.materials[0],element=f.document.createElement("s"),publisher=createPreparedMaterialPublisher(track,nativeElement(element),definition.camera);
+    const track=definition.materials[0],element=f.document.createElement("s"),publisher=createPreparedMaterialPublisher(track,nativeElement(element));
     const selection=initialObjectSelection(definition.controls),selected=selectedPreparedVariant(definition,selection).materials[0];
     const view={...f.view,sunViewDirection:[1,0,0],controlPitch:0,controlYaw:0};view.reference=view;
     publisher.publish(selected,view,f.resources);const before=publisher.observe();
@@ -81,7 +81,7 @@ test("prepared address caching survives native URL serialization and still publi
     Object.defineProperty(element.style, "backgroundImage", { get: () => image,
       set(value: string) { writes++; image = value.replace(/^url\(([^\"]+)\)$/, 'url("$1")'); } });
     const selected = selectedPreparedVariant(definition, { ...initialObjectSelection(definition.controls), shadows: false }).materials[0];
-    const publisher = createPreparedMaterialPublisher(track, nativeElement(element), definition.camera);
+    const publisher = createPreparedMaterialPublisher(track, nativeElement(element));
     const view = { ...f.view, controlPitch: 89, sunViewDirection: [1, 0, 0], reference: {sceneMatrix: f.view.sceneMatrix, sunViewDirection: [1, 0, 0] } };
     publisher.publish(selected, view, f.resources); assert.equal(writes, 1);
     publisher.publish(selected, { ...view, sunViewDirection: [0, 0, -1] }, f.resources); assert.equal(writes, 1);

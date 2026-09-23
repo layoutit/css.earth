@@ -73,8 +73,8 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
 }
 export function requireViewBindings(value: unknown, tree: PreparedTree, camera: CameraPlan): asserts value is readonly PreparedViewBinding[] {
   for (const input of array(value, 'view bindings')) {
-    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'variable', 'defaultZoom', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'sceneFromBody', 'radii', 'inset']);
-    const kind = choice(binding.kind, ['zoom-property', 'shell-scale', 'counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property', 'interior-disc'], 'view binding');
+    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'sceneFromBody', 'radii', 'inset']);
+    const kind = choice(binding.kind, ['counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property', 'interior-disc'], 'view binding');
     const target = nodeReference(binding.target, tree, kind === 'view-attribute' || kind === 'view-property');
     if ([tree.camera, tree.scene].includes(target) && kind !== 'view-attribute') fail('view binding cannot duplicate camera publisher');
     if (kind === 'interior-disc') {
@@ -107,9 +107,7 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
         if (target === -1 && binding.source !== 'level-of-detail-stage') fail('only level of detail is published on stage');
       }
       if (binding.precision !== null && (integer(binding.precision, 'view precision') > 12 || binding.source === 'scene-matrix')) fail('invalid view precision');
-    } else if (kind === 'zoom-property') text(binding.property, 'zoom property');
-    else if (kind === 'shell-scale') { text(binding.variable, 'shell variable'); positive(binding.defaultZoom, 'shell default zoom'); }
-    else if (binding.systemTransform !== null) text(binding.systemTransform, 'counter rotation transform', true);
+    } else if (binding.systemTransform !== null) text(binding.systemTransform, 'counter rotation transform', true);
   }
 }
 export function requireAnimations(value: unknown, tree: PreparedTree, motion = false): asserts value is PreparedPresentationDefinition['animations'] {

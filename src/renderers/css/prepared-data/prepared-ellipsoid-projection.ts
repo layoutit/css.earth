@@ -3,7 +3,7 @@ import { projectEyeEllipsoid, requirePhysicalProjection } from './physical-proje
 import type { PhysicalProjection } from './physical-projection.js';
 export interface CounterTransport { counterPrecision?:number;counterFractionDigits?:number;counterFractionScale?:number; }
 export interface EllipsoidProjectionPlan extends CounterTransport {equatorialRadius:number;polarRadius:number;coverageScale:number;bodySystemMatrix:Matrix4;bodyMeshMatrix:Matrix4;materialSystemMatrix:Matrix4;materialMeshMatrix:Matrix4;baseProjection:Matrix4;centerTranslation:Matrix4;inverseCenterTranslation:Matrix4;textureEllipse?:{center:readonly[number,number];covariance:readonly[number,number,number]};}
-export interface EllipsoidView {degrees:number;sceneMatrix?:Matrix4|string;counterMatrix?:Matrix4|string;preserveDefault?:boolean;projection?:PhysicalProjection;}
+export interface EllipsoidView {degrees:number;counterMatrix:Matrix4|string;projection:PhysicalProjection;}
 interface Point3 {x:number;y:number;z:number;}
 interface Covariance {xx:number;xy:number;yy:number;}
 type Matrix2 = readonly (readonly number[])[];
@@ -44,65 +44,44 @@ export function createPreparedEllipsoidProjection({ projection, width, height = 
   }
   const textureX=Math.sqrt(xx),textureSkew=xy/textureX,textureY=Math.sqrt(yy-textureSkew**2);
   const textureFrame=[textureX,textureSkew,0,0,0,textureY,0,0,0,0,1,0,textureCenter[0],textureCenter[1],0,1];
-  return ({ degrees, sceneMatrix, counterMatrix, preserveDefault = false, projection: physical }: EllipsoidView) => {
-    if (!Number.isFinite(degrees) || typeof preserveDefault !== "boolean") {
+  return ({ degrees, counterMatrix, projection: physical }: EllipsoidView) => {
+    if (!Number.isFinite(degrees)) {
       throw new TypeError("Prepared ellipsoid view must be finite.");
     }
     const localRotation = multiplyPreparedMatrix4(matrices.centerTranslation,
       multiplyPreparedMatrix4(preparedRotationMatrix4("z", degrees), matrices.inverseCenterTranslation));
     const materialProjection = multiplyPreparedMatrix4(matrices.baseProjection, localRotation);
-    if (preserveDefault && !physical) return serializePreparedMatrix4(materialProjection);
-    const scene = physical ? requirePhysicalProjection(physical).eyeFromScene : readPreparedMatrix4(sceneMatrix);
+    const scene = requirePhysicalProjection(physical).eyeFromScene;
     const counter = readPreparedCounterMatrix(counterMatrix, counterTransport);
     const body = multiplyPreparedMatrix4(multiplyPreparedMatrix4(scene, matrices.bodySystemMatrix), matrices.bodyMeshMatrix);
     const parent = multiplyPreparedMatrix4(multiplyPreparedMatrix4(
       multiplyPreparedMatrix4(scene, matrices.materialSystemMatrix), counter), matrices.materialMeshMatrix);
     const material = multiplyPreparedMatrix4(parent, materialProjection);
-    if (physical) {
-      const target = projectEyeEllipsoid(transformPreparedPoint(body, 0, 0, 0, 1), [
-        transformPreparedPoint(body, 1, 0, 0, 0), transformPreparedPoint(body, 0, 1, 0, 0), transformPreparedPoint(body, 0, 0, 1, 0),
-      ], [equatorialRadius, equatorialRadius, polarRadius], physical.focalPixels);
-      const texture=multiplyPreparedMatrix4(material,textureFrame);
-      const source = projectEyeEllipsoid(transformPreparedPoint(texture,0,0,0,1), [
-        transformPreparedPoint(texture,1,0,0,0),transformPreparedPoint(texture,0,1,0,0),
-      ], [1,1], physical.focalPixels);
-      if (!target || !source) {
-        const tangent=tangentDisc(body,texture,[equatorialRadius,equatorialRadius,polarRadius]);
-        if (!tangent) return serializePreparedMatrix4(materialProjection);
-        return serializePreparedMatrix4(multiplyPreparedMatrix4(multiplyPreparedMatrix4(
-          invertPreparedAffineMatrix4(parent),tangent),invertPreparedAffineMatrix4(textureFrame)));
-      }
-      const covarianceScale = Math.max(target.covariance.xx, target.covariance.yy, source.covariance.xx, source.covariance.yy);
-      const normalized = (value: Covariance): Covariance => ({ xx: value.xx / covarianceScale, xy: value.xy / covarianceScale, yy: value.yy / covarianceScale });
-      const correction = multiplyMatrix2(covarianceSquareRoot(normalized(target.covariance)), invertMatrix2(covarianceSquareRoot(normalized(source.covariance)), 0));
-      const tx = target.center[0] - correction[0][0] * source.center[0] - correction[0][1] * source.center[1];
-      const ty = target.center[1] - correction[1][0] * source.center[0] - correction[1][1] * source.center[1];
-      // An affine correction in projected coordinates is a homogeneous eye
-      // transform: screen translation multiplies depth, never world metres.
-      const screenCorrection = [
-        correction[0][0], correction[1][0], 0, 0,
-        correction[0][1], correction[1][1], 0, 0,
-        -tx / physical.focalPixels, -ty / physical.focalPixels, 1, 0,
-        0, 0, 0, 1,
-      ];
-      return serializePreparedMatrix4(multiplyPreparedMatrix4(
-        multiplyPreparedMatrix4(invertPreparedAffineMatrix4(parent), screenCorrection), material));
-    }
-    const target = projectedCovariance([
+    const target = projectEyeEllipsoid(transformPreparedPoint(body, 0, 0, 0, 1), [
       transformPreparedPoint(body, 1, 0, 0, 0), transformPreparedPoint(body, 0, 1, 0, 0), transformPreparedPoint(body, 0, 0, 1, 0),
-    ], [equatorialRadius, equatorialRadius, polarRadius]);
-    const source = projectedCovariance([
-      transformPreparedPoint(material, 1, 0, 0, 0), transformPreparedPoint(material, 0, 1, 0, 0),
-    ], [width / 2, height / 2]);
-    const correction = multiplyMatrix2(covarianceSquareRoot(target), invertMatrix2(covarianceSquareRoot(source)));
-    const materialCenter = transformPreparedPoint(material, width / 2, height / 2, 0, 1);
-    const bodyCenter = transformPreparedPoint(body, 0, 0, 0, 1);
+    ], [equatorialRadius, equatorialRadius, polarRadius], physical.focalPixels);
+    const texture=multiplyPreparedMatrix4(material,textureFrame);
+    const source = projectEyeEllipsoid(transformPreparedPoint(texture,0,0,0,1), [
+      transformPreparedPoint(texture,1,0,0,0),transformPreparedPoint(texture,0,1,0,0),
+    ], [1,1], physical.focalPixels);
+    if (!target || !source) {
+      const tangent=tangentDisc(body,texture,[equatorialRadius,equatorialRadius,polarRadius]);
+      if (!tangent) return serializePreparedMatrix4(materialProjection);
+      return serializePreparedMatrix4(multiplyPreparedMatrix4(multiplyPreparedMatrix4(
+        invertPreparedAffineMatrix4(parent),tangent),invertPreparedAffineMatrix4(textureFrame)));
+    }
+    const covarianceScale = Math.max(target.covariance.xx, target.covariance.yy, source.covariance.xx, source.covariance.yy);
+    const normalized = (value: Covariance): Covariance => ({ xx: value.xx / covarianceScale, xy: value.xy / covarianceScale, yy: value.yy / covarianceScale });
+    const correction = multiplyMatrix2(covarianceSquareRoot(normalized(target.covariance)), invertMatrix2(covarianceSquareRoot(normalized(source.covariance)), 0));
+    const tx = target.center[0] - correction[0][0] * source.center[0] - correction[0][1] * source.center[1];
+    const ty = target.center[1] - correction[1][0] * source.center[0] - correction[1][1] * source.center[1];
+    // An affine correction in projected coordinates is a homogeneous eye
+    // transform: screen translation multiplies depth, never world metres.
     const screenCorrection = [
       correction[0][0], correction[1][0], 0, 0,
       correction[0][1], correction[1][1], 0, 0,
-      0, 0, 1, 0,
-      bodyCenter.x - correction[0][0] * materialCenter.x - correction[0][1] * materialCenter.y,
-      bodyCenter.y - correction[1][0] * materialCenter.x - correction[1][1] * materialCenter.y, 0, 1,
+      -tx / physical.focalPixels, -ty / physical.focalPixels, 1, 0,
+      0, 0, 0, 1,
     ];
     return serializePreparedMatrix4(multiplyPreparedMatrix4(
       multiplyPreparedMatrix4(invertPreparedAffineMatrix4(parent), screenCorrection), material));
@@ -212,14 +191,6 @@ function transformPreparedPoint(matrix: Matrix4, x:number, y:number, z:number, w
 
 export function serializePreparedMatrix4(matrix: Matrix4): string {
   return `matrix3d(${matrix.map(value => Math.abs(value) < 1e-12 ? 0 : Number(value.toFixed(12))).join(",")})`;
-}
-
-function projectedCovariance(directions:readonly Point3[], radii:readonly number[]): Covariance {
-  return {
-    xx: directions.reduce((sum, direction, index) => sum + (direction.x * radii[index]) ** 2, 0),
-    xy: directions.reduce((sum, direction, index) => sum + direction.x * direction.y * radii[index] ** 2, 0),
-    yy: directions.reduce((sum, direction, index) => sum + (direction.y * radii[index]) ** 2, 0),
-  };
 }
 
 function covarianceSquareRoot(matrix: Covariance): Matrix2 {
