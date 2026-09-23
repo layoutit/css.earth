@@ -12,7 +12,7 @@ Detector translation is measured from the original image, independently of the n
 
 The 2026-09-10 follow-up checked the pinned 1024 × 1024 calibrated source directly. At I/F 0.08–0.20 its illuminated disc is only 8 × 13 pixels, and the source crop contains no independently identifiable surface feature to fit. The result is recorded in [registration-attempt-2026-09-10.json](source/survey/registration-attempt-2026-09-10.json). The existing limb fit remains useful pointing evidence, but it cannot establish surface-feature registration to the ellipsoid; the photographic patch stays explicitly coarse and its limits are not upgraded.
 
-[Source test definitions](../../../tests/objects/unit/pallene/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/pallene/source.test.mts).
 
 ### Registration
 

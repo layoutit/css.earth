@@ -1,3 +1,4 @@
+import { SOURCE_MANIFEST_SCHEMA } from '../../src/platform/source-manifest.mts';
 import type { InputRole } from '../../src/platform/product-input-evidence.mts';
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '../sources/source-values.mts';
 import { parseCapture } from '../../src/platform/exploration-catalog.mts';
@@ -25,7 +26,7 @@ export function sourceEntry(value: unknown) {
 }
 export function provenanceManifest(value: unknown) {
   const input = requireRecord(value);
-  if (!/^css[a-z][a-z0-9-]*-authoritative-sources@2$/.test(requireString(input.schema))) throw new TypeError('Unsupported source manifest schema.');
+  if (requireString(input.schema) !== SOURCE_MANIFEST_SCHEMA) throw new TypeError('Unsupported source manifest schema.');
   return {...input, inputs: requireArray(input.inputs).map(value => {
     const entry = sourceEntry(value);
     return Object.assign({}, entry, {id: requireString(entry.id), consumers: texts(entry.consumers), sourceBinding: parseSourceBinding(entry.sourceBinding)});

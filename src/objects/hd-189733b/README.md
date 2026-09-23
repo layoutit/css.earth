@@ -28,10 +28,10 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 
 Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-189733b` prepared the package.
 
-- [`eclipse-map.test.mts`](../../../tests/objects/unit/hd-189733b/eclipse-map.test.mts) reads the deposit and checks the table above: the hottest cell, the dayside mean, the visible range from the saved times and the 240 shown cells. It then turns the deposited map with this package's orbit and rotation ([phase-curve.mts](../../../tools/objects/eclipse-map/phase-curve.mts)) and compares its light curve with the deposit's own best-fit model over the MIRI eclipses.
+- [`eclipse-map.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/hd-189733b/eclipse-map.test.mts) reads the deposit and checks the table above: the hottest cell, the dayside mean, the visible range from the saved times and the 240 shown cells. It then turns the deposited map with this package's orbit and rotation ([phase-curve.mts](../../../tools/objects/eclipse-map/phase-curve.mts)) and compares its light curve with the deposit's own best-fit model over the MIRI eclipses.
 - [`npy-pickle.test.mts`](../../../tools/objects/terrestrial-layers/npy-pickle.test.mts) checks the stated grid layout, ThERESA's visible-longitude rule including its wrapping, and that a kept cell is drawn whole.
 - [`hd-189733b-raw-map.test.mts`](../../../tools/objects/eclipse-map/hd-189733b-raw-map.test.mts) (from an earlier change) fits a map to the two MIRI eclipses this project reduced from raw exposures and matches the deposited map's dayside with correlation 0.94; it runs where the reduction's outputs are present.
-- [`source.test.mts`](../../../tests/objects/unit/hd-189733b/source.test.mts) verifies the pins, the lens recipe and that the prepared body frame's +X points at the host star at the scene epoch.
+- [`source.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/hd-189733b/source.test.mts) verifies the pins, the lens recipe and that the prepared body frame's +X points at the host star at the scene epoch.
 - [`rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/hd-189733b/` in headless Chrome, no console errors: the dayside faces the camera with the hot spot east of centre, and the lens preview leaves the unobserved strip blank.
 
 ## Known problems

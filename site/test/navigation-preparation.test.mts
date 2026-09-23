@@ -154,7 +154,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
     // The marker names its source by path; the source manifest owns the record.
     await writeFile(resolve(root, "src/objects/new-body/source/preparation/navigation.json"), JSON.stringify({ ...original, objectId: "new-body", source: { path: "source.jpg" } }));
     const { path: _path, ...record } = original.source;
-    await writeFile(resolve(root, "src/objects/new-body/source/manifest.json"), JSON.stringify({ schema: "cssnew-body-authoritative-sources@2", inputs: [], generatedIntermediates: [], documents: [{ ...record, path: "source.jpg" }] }));
+    await writeFile(resolve(root, "src/objects/new-body/source/manifest.json"), JSON.stringify({ schema: "cssearth-authoritative-sources@2", inputs: [], generatedIntermediates: [], documents: [{ ...record, path: "source.jpg" }] }));
     await writeFile(resolve(root, "src/objects/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
     const sourcePath = resolve(root, "src/objects/new-body/source/source.jpg");
     await copyFile(resolve(projectRoot, "src/objects", original.objectId, "source", original.source.path), sourcePath);

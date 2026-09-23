@@ -68,7 +68,7 @@ export async function acquireKernelBank(set: string) {
 export async function addKernels(set: string, urls: readonly string[], options: { credit?: string; license?: string; catalogue?: string } = {}) {
   const root = kernelBankRoot(set), manifestPath = resolve(root, 'manifest.json');
   const manifest = await readFile(manifestPath, 'utf8').then(text => requireRecord(JSON.parse(text), 'kernel bank manifest'),
-    () => ({ schema: `cssspice-${set}-authoritative-sources@2`, inputs: [], generatedIntermediates: [], documents: [] }) as Record<string, unknown>);
+    () => ({ schema: `cssearth-authoritative-sources@2`, inputs: [], generatedIntermediates: [], documents: [] }) as Record<string, unknown>);
   const inputs = requireArray(manifest.inputs, 'kernel bank inputs').map(entry => requireRecord(entry, 'kernel bank input'));
   const first = inputs[0];
   const credit = options.credit ?? (first ? requireString(first.credit, 'credit') : undefined);

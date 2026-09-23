@@ -148,7 +148,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',
     acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
-  put(`${o}/source/manifest.json`, { schema: `css${id}-authoritative-sources@2`, inputs: [
+  put(`${o}/source/manifest.json`, { schema: `cssearth-authoritative-sources@2`, inputs: [
     { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit,
       license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources',
       redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'],

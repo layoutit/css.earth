@@ -4,28 +4,20 @@
   "name": "Beta Pictoris debris disc",
   "defaultLens": "visible",
   "bank": {
-    "path": "src/objects/beta-pictoris-disc/prepared/lenses.json",
-    "sha256": "d919a671d3ee163fa78c6d7bfc787eb538d67c61809fc2262fedc945917a3011",
-    "bytes": 971854
+    "path": "src/objects/beta-pictoris-disc/prepared/lenses.json"
   },
   "recipes": [
     {
       "id": "visible",
-      "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
-      "sha256": "047c9166273edbcf96b64c8315015ec4c57704bdc45a9b8ff2f7577035a1d435",
-      "bytes": 1680
+      "path": "src/objects/beta-pictoris-disc/source/volume-visible.json"
     },
     {
       "id": "contrast",
-      "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json",
-      "sha256": "d654229030198f7db82ca0638e071158b5a0c70dfda7e6355a95bc8fa60bd333",
-      "bytes": 1681
+      "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json"
     },
     {
       "id": "colour",
-      "path": "src/objects/beta-pictoris-disc/source/volume-colour.json",
-      "sha256": "822d14231379ba0a1c7405fd755feea95c56e272103efc1ab7e4717448ce3f4c",
-      "bytes": 1678
+      "path": "src/objects/beta-pictoris-disc/source/volume-colour.json"
     }
   ],
   "sharedInputs": [],
@@ -68,8 +60,6 @@
       "input": "visible-stis-50ccd",
       "preview": {
         "path": "src/objects/beta-pictoris-disc/source/previews/visible.png",
-        "sha256": "87e1f642660c55a774dc3e62a97d49cb771d80f6098c11031b16f099b8afd3b0",
-        "bytes": 11180,
         "authoredFrom": "visible-stis-50ccd"
       }
     },
@@ -110,8 +100,6 @@
       "input": "contrast-f410m",
       "preview": {
         "path": "src/objects/beta-pictoris-disc/source/previews/contrast.png",
-        "sha256": "7abd538758e526049bdd00c42913dde51e16a8cb4011605543a4ae3a7fd9d872",
-        "bytes": 14488,
         "authoredFrom": "contrast-f410m"
       }
     },
@@ -152,8 +140,6 @@
       "input": "colour-f435w-roll1",
       "preview": {
         "path": "src/objects/beta-pictoris-disc/source/previews/colour.png",
-        "sha256": "85d12f68b5d40ce80da37a108565772d2238763d0e95d27ece324a21be8286cf",
-        "bytes": 58940,
         "authoredFrom": "colour-f435w-roll1"
       }
     }

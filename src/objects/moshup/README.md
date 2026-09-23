@@ -14,7 +14,7 @@ Shape uses the shared missing-imagery grid. Elevation shows original model radiu
 
 Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 6.351102 m and maximum 16.991139 m; display-to-source p95 6.335770 m and maximum 15.013194 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.
 
-[Source test definitions](../../../tests/objects/unit/moshup/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/moshup/source.test.mts).
 
 ## Known problems
 

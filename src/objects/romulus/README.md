@@ -15,7 +15,7 @@ One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and
 
 The fixed-epoch orbit uses the published 2021 Sylvia-system model retained in [published orbit parameters](source/orbit/published-parameters.json). Independent projections from the newer Miriade 2024 solution differ by about 42 milliarcseconds (140 km in the sky plane) at the scene epoch and 23–63 milliarcseconds over six checks. These checks establish an approximate orbital context; they do not reproduce or claim the paper’s 9.85-milliarcsecond fit RMS. Full source receipts and limits are retained in [epoch record](source/validation/epoch-state.json), [projection checks](source/validation/projection-checks.json), and [orbit report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/romulus-orbit.md). This orbit qualification is separate from the selected 2014 illustrative shape-family member and its 2020 geometric reanalysis caveat.
 
-[Source test definitions](../../../tests/objects/unit/romulus/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/romulus/source.test.mts).
 
 ## Known problems
 

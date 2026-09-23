@@ -26,7 +26,7 @@ surface, lit by its own star at the measured orbit, and the page says so.
 
 ## Evidence
 
-- [`source.test.mts`](../../../tests/objects/unit/trappist-1/source.test.mts) checks the pins, and that the planet turns synchronously
+- [`source.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1/source.test.mts) checks the pins, and that the planet turns synchronously
   with longitude 0 on its star and orbits it;
   [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
