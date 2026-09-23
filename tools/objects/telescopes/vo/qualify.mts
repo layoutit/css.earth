@@ -10,6 +10,7 @@ import { readProductRecord, fileSize, writeProductRecord, type ProductRun } from
 import { digest } from './contracts.mts';
 import { acquireVoProduct, nativeQualificationRoute, type AcquisitionSpec } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
+import { qualifyEsoSpectrum } from './qualify-spectrum.mts';
 
 export async function qualifyVoProduct(root: string, spec: AcquisitionSpec, policy: VoNetworkPolicy = {}): Promise<QualifiedObservation> {
   const inField = spec.observation.target.status === 'in-field';
@@ -25,6 +26,7 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec, poli
   const legacyContent = content.schema === 'cssearth-vo-content@1';
   if (!legacyContent && content.schema !== 'cssearth-vo-content@2') throw new Error('Acquired VO content manifest is missing or unsupported. Reacquire the product.');
   if (!legacyContent && (content.archiveProposal?.kind !== spec.kind || content.archiveProposal.decoder !== spec.decoder)) throw new Error('Archive proposal changed after acquisition. Requery the product.');
+  if (route === 'f03-spectrum') return qualifyEsoSpectrum(root, spec, acquired, acquisition);
   if (route === 'f08-table') {
     if (!acquired.file || !Array.isArray(content.members) || content.members.length !== 1 ||
       content.members[0]?.member !== 'science.fits' || content.members[0].profile !== 'fits-bintable@1')

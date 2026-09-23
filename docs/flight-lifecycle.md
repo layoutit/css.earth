@@ -112,10 +112,8 @@ cleanup ordering, including abort callbacks and failed destructors.
 Use an immutable build for sustained recording; repeated preparation and HMR
 can inflate the development server's compiler heap and interrupt navigation:
 
-```sh
-pnpm build:performance
-pnpm preview --port 4221
-```
+Follow the [performance build commands](../tools/performance/README.md), then
+serve that immutable build with `pnpm preview --port 4221`.
 
 This mode retains production bundling and static serving while explicitly
 enabling the existing diagnostic APIs and recorder. Ordinary production

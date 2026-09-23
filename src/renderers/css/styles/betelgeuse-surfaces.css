@@ -63,25 +63,24 @@
   background-image: var(--betelgeuse-poles-image) !important;
 }
 
-/* Off-limb context: 1168 px = raster.json emission.offLimbSize = the reconstruction's 100 mas field at the disc's 496 px. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="betelgeuse"] .betelgeuse-corona-layer {
   background-image: var(--betelgeuse-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(1168px * 1.25 * var(--betelgeuse-camera-zoom, 1))
-    calc(1168px * 1.25 * var(--betelgeuse-camera-zoom, 1));
+    calc(1168px * var(--betelgeuse-camera-zoom, 1))
+    calc(1168px * var(--betelgeuse-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
-   sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="betelgeuse"] .betelgeuse-limb-layer {
   background-image: var(--betelgeuse-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * 1.25 * var(--betelgeuse-camera-zoom, 1))
-    calc(496px * 1.25 * var(--betelgeuse-camera-zoom, 1));
+    calc(496px * var(--betelgeuse-camera-zoom, 1))
+    calc(496px * var(--betelgeuse-camera-zoom, 1));
 }
 
 .object-stage[data-object-id="betelgeuse"] .polycss-camera {

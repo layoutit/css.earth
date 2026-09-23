@@ -12,17 +12,17 @@ owners may import neither test nor evidence modules.
 Test directories and capture filenames do not exempt authored code. Data fixtures retain their native formats; executable fixture helpers and browser/oracle harnesses are TypeScript. Generated browser bundles and package distributions are ignored build products. The inventory names the remaining JavaScript exceptions individually:
 
 - Three preserved Cesium modules with their upstream provenance.
+- The telescope Node launcher, which selects a runtime before importing TypeScript.
 
 The shell title, icon, overview-title and wordmark data modules are ignored build
 products, like the navigation-marker module. `pnpm prepare:shell` restores the
-hash-pinned Inter font when missing, prepares the object catalogue, then replays
+configured Inter font when missing, prepares the object catalogue, then replays
 the four generators. The source vectors, font recipe and generators remain
 committed. Installation, development, builds, asset setup and the root test command
 run this preparation before consuming the modules.
 
 Astro and ESLint use `.mts` configuration entry points, checked by
-`pnpm typecheck:configs` and the main typecheck command. The pinned `jiti`
-development dependency lets ESLint load its TypeScript configuration normally.
+`pnpm typecheck:configs` and the main typecheck command. The configured Node runtime loads the TypeScript entry points.
 
 Application and test consumers import typed owners directly. The five obsolete
 JavaScript compatibility entry points have been removed. Historical source
@@ -56,7 +56,7 @@ surfaces. An `.mts` extension alone does not establish strict ownership. Missing
 local prepared assets or failures in that broader gate must be reported separately,
 not hidden by the focused oracle check.
 
-`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tests/tsconfig.json) in sequential compiler groups to bound memory use; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
+`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tests/tsconfig.json) with the configured TypeScript compiler; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
 
 Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` execution; the TypeScript gates perform checking. Shell and native-tool configurations reject syntax requiring runtime transformation.
 
@@ -70,22 +70,26 @@ Full navigation preparation previously recompressed existing markers at Q75, whi
 
 The [source-authoring comparison](../../tools/evidence/source-authoring-typescript-parity.json) covers the twenty comet meshes, the catalogue and astronomy records, 48 open-orbit cases, and nine distant-world source finalizations. Offline CLI replay supplies the original Horizons responses and native mesh bytes to both implementations; it does not claim a fresh native C++ build.
 
-An Earth texture-level recipe already had its new hash in the descriptor but its parent hash in the source manifest. The manifest now pins the existing recipe bytes. The correction changes no scientific input or texture-level parameter; provenance is rebuilt through its owner.
+During that migration an Earth texture-level recipe and its manifest had mismatched hashes. That historical correction changed no scientific input or texture-level parameter. Current manifests and descriptors no longer carry those pins; runtime inventories own published asset identity.
 
 ## Contributor checks
 
+Choose the checks for the affected owner; these are available entry points, not a
+mandatory full-suite checklist for every migration:
+
 ```sh
-pnpm install
-pnpm check:typescript-ownership
-pnpm test:typescript-ownership
-pnpm typecheck:oracles
+node tools/ci/typescript-ownership.mts
 pnpm typecheck
-pnpm build
+pnpm typecheck:oracles
 pnpm test:packages
 pnpm test:renderer
-node --test --test-concurrency=1 src/platform/*.test.mts src/navigation/*.test.mts tools/*.test.mts
-node --test --test-concurrency=1 site/test/*.test.mts
+pnpm test:node
 pnpm test:preparation
 ```
+
+`typecheck:tests` invokes the strict test compiler directly. The native suite uses
+`tests/register-vite-suffix.mts` for site imports; its source-dependent skips do not
+establish qualification. Use a build and inspected browser output when behavior
+or rendering changes.
 
 Source/runtime closure, malformed-input and tampering tests, preparation comparisons and actual browser interaction provide different evidence. Record their current outcomes in the PR using the [template](../../.github/pull_request_template.md). A clean ownership inventory or typecheck alone does not prove application behavior or merge readiness.

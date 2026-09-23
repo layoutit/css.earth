@@ -12,7 +12,7 @@ Run from the repository root with its supported Node version and dependencies.
 Use one preparation process at a time. The original preparation used a 3 GiB
 Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
 
-1. Restore a body's pinned originals with
+1. Restore a body's declared originals with
    `node tools/objects/dist/operations.js acquire <id>`.
 2. For ordinary regeneration, run the existing preparer directly:
    `node tools/objects/dist/prepare-authored.js <id> --write`.
@@ -23,13 +23,15 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
    bindings and other package metadata. Run
    `node tools/objects/source-authoring/distant-worlds/finalize-sources.mts`,
    then prepare each changed body.
-4. Prepare changed marker sources with `pnpm prepare:navigation <id>`.
+4. Prepare changed marker sources with `node tools/prepare/prepare-navigation.mts <id>`.
    Prepare the selected body to bind its stable marker URL.
 5. Install published runtime assets with `pnpm setup:assets --object=<id>`.
 
 `register.py` writes each body’s catalogue metadata and creates its astronomy
-record when missing. Existing astronomy records are preserved. `finalize-sources.mts --refresh-pins` only refreshes source
-pins; omitting that flag also prepares title and context source images.
+record when missing. Existing astronomy records are preserved. Despite its legacy
+flag name, `finalize-sources.mts --refresh-pins` refreshes document declarations
+and removes descriptor source hashes; it does not create manifest digests.
+Omitting that flag also prepares title and context source images.
 
 `author.py` and `register.py` accept an input JSON path as their first argument;
 `finalize-sources.mts` accepts `--inputs=<path>`. This selects the exact bodies

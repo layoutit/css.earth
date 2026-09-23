@@ -25,7 +25,7 @@ From the repository root, start the existing site and then the experiment:
 
 ```sh
 pnpm exec astro dev --host 127.0.0.1 --port 4349
-pnpm preview:native-scroll
+node tools/experiments/native-scroll/run.mts
 ```
 
 Open <http://127.0.0.1:4350/saturn/>. Scroll over the scene to move from body detail
@@ -36,7 +36,7 @@ retains the document. The mobile information panel keeps its own scrolling.
 The preview accepts an upstream localhost URL and listening port:
 
 ```sh
-pnpm preview:native-scroll http://127.0.0.1:4210 4350
+node tools/experiments/native-scroll/run.mts http://127.0.0.1:4210 4350
 ```
 
 The launcher bundles its TypeScript into ignored `output/native-scroll/`. It does

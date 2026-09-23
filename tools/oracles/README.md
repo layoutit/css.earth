@@ -41,21 +41,19 @@ same group and name, and the comparing tests beside the code they check (under
 
 ## Rules
 
-- A fixture is evidence. It records the oracle and interpreter versions and the
-  sha256 of every input it read. An input from outside the repository, such as
-  another project's test data, is a reference: its URL names a commit, and the
-  fixture records its sha256 and size. `tools/contract/oracle-fixtures.test.mts`, part of
-  `pnpm test:platform`, refuses a fixture whose tool versions differ from
-  `requirements.txt`, whose inputs are not the bodies' manifest input/document pins
-  or the hashed checked-in test files and test-only archive acquisition record
-  under `tests/fixtures/fits/` and hosted-orbit qualification records under
-  `tests/fixtures/hosted-orbits/`, or whose
-  references are not pinned to a commit. It needs neither Python nor restored
-  sources.
-- Comparing tests read the committed fixture and the same pinned inputs the
-  pipeline reads. They run without Python.
-  `readOracleInput` checks the actual bytes and SHA-256 immediately before a FITS
-  comparison; matching a fixture to a manifest declaration alone is not that check.
+- A fixture is evidence. Its current envelope records oracle/interpreter
+  versions, input paths and byte counts. External references name a commit in
+  their URL and record a size. `tools/contract/oracle-fixtures.test.mts`, included
+  in `pnpm test:node`, checks tool versions, permitted input declarations and
+  reference URLs. Body inputs must appear in their manifest; the shared reader
+  also accepts the declared FITS, SBMT and hosted-orbit test fixtures. These checks
+  need no Python, but may need restored files. A source-dependent skip is not a
+  completed fixture audit.
+- Comparing tests read the committed fixture and the same declared inputs the
+  pipeline reads. They run without Python. `readOracleInput` checks the recorded
+  byte count immediately before comparison; it does not verify a source SHA-256.
+  Preserve existing historical hashes and toolchain-lock identities without
+  claiming that the current fixture reader validates input digests.
 - An oracle reads the archive with its own reader. It may read a recipe's declared
   policy, such as a detector border, but never a value the pipeline computed.
 - Regenerate a fixture only when the oracle version or an input changes, and say
@@ -68,8 +66,8 @@ same group and name, and the comparing tests beside the code they check (under
 
 SBMT is an opt-in native backend: `node tools/oracles/setup.mts sbmt`, then
 `node tools/oracles/run.mts sbmt/projection`. It uses the same fixture envelope with a
-pinned executable/software lock and generator digest. `pnpm test:sbmt --unit`
-runs offline in CI; `pnpm test:sbmt --restore` restores only its selected inputs
+pinned executable/software lock and generator digest. `node tools/oracles/test-sbmt.mts --unit`
+runs offline in CI; `node tools/oracles/test-sbmt.mts --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](sbmt/README.md).
 The commands below operate on the Python backends.
 

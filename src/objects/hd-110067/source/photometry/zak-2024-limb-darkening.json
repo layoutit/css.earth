@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "hd-110067",
+  "basis": "model-prior",
+  "source": "Zak et al. (2024), A&A 687, L2, section 4. https://doi.org/10.1051/0004-6361/202450570",
+  "band": "ESPRESSO 380–788 nm",
+  "law": "I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2",
+  "u1": {
+    "value": 0.564,
+    "fixed": "ExoCTK ATLAS9 atmosphere-model coefficient adopted by Zak et al., not fitted from these transits."
+  },
+  "u2": {
+    "value": 0.145,
+    "fixed": "ExoCTK ATLAS9 atmosphere-model coefficient adopted by Zak et al., not fitted from these transits."
+  },
+  "note": "Published model-prior values, not measured limb-darkening coefficients. The achromatic rendering applies the integrated ESPRESSO-band law to all three colour channels."
+}

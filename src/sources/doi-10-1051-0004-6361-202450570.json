@@ -1,0 +1,36 @@
+{
+  "id": "doi-10-1051-0004-6361-202450570",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "HD 110067 c has an aligned orbit: Measuring the Rossiter–McLaughlin effect inside a resonant multi-planet system with ESPRESSO",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202450570"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202450570",
+      "label": "Zak et al. (2024)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.aanda.org/articles/aa/full_html/2024/07/aa50570-24/aa50570-24.html",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 4: ATLAS9 quadratic limb-darkening coefficients"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. Zak et al.",
+      "scope": "citation",
+      "evidence": "Published author list"
+    }
+  ],
+  "publicationDate": "2024"
+}

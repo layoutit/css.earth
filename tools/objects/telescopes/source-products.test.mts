@@ -101,3 +101,33 @@ test('a source-qualified cube remains selectable as an intermediate for a suppor
     assert.ok(answer.candidates[0]!.selectionAssessment.nextActions.some(action => action.kind === 'select-observation'));
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
+
+test('incomplete and malformed mission labels do not hide a declared FITS product or a native derived map', async () => {
+  const f = await fixture();
+  try {
+    const labels = [
+      { id: 'incomplete', text: 'PDS_VERSION_ID = PDS3\n^IMAGE = "incomplete.img"\nEND\n' },
+      { id: 'syntax', text: 'PDS_VERSION_ID = PDS3\nPRODUCT_ID = "unterminated\nEND\n' },
+      { id: 'derived', text: 'PDS_VERSION_ID = PDS3\nPRODUCT_ID = "DERIVED-MAP"\n^IMAGE = "derived.img"\nEND\n' },
+    ];
+    const inputs: { id: string; path: string; origin: string }[] = [...f.manifest.inputs];
+    for (const label of labels) {
+      for (const extension of ['lbl', 'img']) inputs.push({ id: `${label.id}-${extension}`, path: `${label.id}.${extension}`, origin: `https://example.org/${label.id}.${extension}` });
+      await writeFile(resolve(f.source, `${label.id}.lbl`), label.text);
+      await writeFile(resolve(f.source, `${label.id}.img`), Buffer.alloc(8));
+    }
+    await writeFile(resolve(f.source, 'manifest.json'), JSON.stringify({ inputs }));
+    const issues: import('./source-intake.mts').SourceIntakeIssue[] = [];
+    const products = await loadSourceProducts(f.root, 'test-body', issues);
+    assert.ok(products.some(product => product.id === 'frame-1'));
+    const map = products.find(product => product.identity.PRODUCT_ID === 'DERIVED-MAP');
+    assert.ok(map);
+    assert.equal(map.decoder, 'pds-product');
+    assert.equal(map.telescope, 'Source archive', 'A derived map gets no invented spacecraft.');
+    assert.equal(map.startIso, undefined);
+    assert.equal(map.qualified, false);
+    assert.ok(issues.some(issue => issue.path.endsWith('incomplete.lbl')));
+    assert.ok(issues.some(issue => issue.path.endsWith('syntax.lbl')));
+    assert.ok(!issues.some(issue => issue.path.endsWith('derived.lbl')), 'Native intake resolved the narrower adapter limitation.');
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});

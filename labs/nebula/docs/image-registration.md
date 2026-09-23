@@ -30,7 +30,7 @@ The checked-in `models/lmc/overlays/source/registration-receipts.json` preserves
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm lab:nebula:overlays
+node labs/nebula/run.mts prepare-overlays
 pnpm lab:nebula
 ```
 

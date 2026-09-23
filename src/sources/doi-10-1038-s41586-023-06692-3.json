@@ -1,0 +1,45 @@
+{
+  "id": "doi-10-1038-s41586-023-06692-3",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A resonant sextuplet of sub-Neptunes transiting the bright star HD 110067",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-023-06692-3"
+    },
+    {
+      "type": "arXiv",
+      "value": "2311.17775"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-023-06692-3",
+      "label": "Luque et al. (2023)"
+    },
+    {
+      "role": "original",
+      "url": "https://arxiv.org/html/2311.17775v1",
+      "label": "Author manuscript v1"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/html/2311.17775v1",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1; Extended Data Table 3"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "R. Luque, H. P. Osborn, A. Leleu, E. Pallé et al.",
+      "scope": "citation",
+      "evidence": "Published author list"
+    }
+  ],
+  "publicationDate": "2023-11-29"
+}

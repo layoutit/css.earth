@@ -159,11 +159,21 @@ checks them against the capture's size/SHA-256 manifest. A mismatch withholds
 source-map attribution. Maps supplied separately are identified as such.
 Symlinks outside the supplied build directory are not followed.
 
-`pnpm build:performance` is configured to request renderer and hidden final source
-maps. Verify the actual build output: the candidate captured on 2026-09-10 did
-not emit final `.js.map` files, so its reports retain generated locations and
-explicitly report unavailable original-source attribution. Build configuration
-alone is not evidence that source maps reached the served bundle.
+For a recording build, run the current preparation and assembly entry points
+from the repository root:
+
+```sh
+CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm prebuild
+CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm exec astro build --mode performance
+node tools/prepare/build-catalogue-fragment.mts
+node tools/cli/run-implemented-objects.mts assemble
+```
+
+This requests renderer and hidden final source maps. Verify the actual output:
+the candidate captured on 2026-09-10 did not emit final `.js.map` files, so its
+historical reports retain generated locations and unavailable original-source
+attribution. Build configuration alone is not evidence that maps reached a
+particular recording.
 
 FrameSleuth is reused directly from the sibling `cssGraphics` checkout. For a
 different layout, set `CSSEARTH_FRAMESLEUTH` or use
@@ -177,7 +187,7 @@ Missing recorder data, screenshots, per-node invalidations or allocation owners
 cannot be reconstructed from timing alone. The brief lists those missing signals
 instead of filling them with a guessed architectural cause.
 
-Run the focused tooling checks with `pnpm test:performance-tools`.
+Run the focused tooling checks with `node --test "tools/performance/*.test.mts"`.
 
 ## Capturing node-level style evidence
 

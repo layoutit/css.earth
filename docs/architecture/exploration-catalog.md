@@ -61,9 +61,9 @@ and prepared by
 into the same library, where `source.kind` tells a photograph from a render.
 
 Artwork preparation is an explicit maintenance operation; normal builds reuse the
-committed files. `pnpm prepare:facility-photographs` re-acquires each pinned
+committed files. `node tools/prepare/prepare-facility-photographs.mts` re-acquires each pinned
 photograph and prepares it to the library's frame.
-`pnpm prepare:facility-renders` clears the flat sidebar background out of the
+`node tools/prepare/prepare-facility-renders.mts` clears the flat sidebar background out of the
 approved renders to alpha, flood-filling only from the frame edges and refusing
 any change to artwork RGB, then records where each facility sits so a card can
 crop to it rather than to the empty frame around it.
@@ -126,11 +126,10 @@ and schematic morphology. Empty attribution stays empty; names, publishers,
 mission targets and aliases are not association rules.
 
 [`prepare-facilities.mts`](../../tools/prepare/prepare-facilities.mts) compiles the Sources
-and Missions catalogues with their validated records, graphs and dependency hashes.
-The hashes cover source records, every body manifest/provenance/page/descriptor,
-registry and compiler owners, and approved artwork bytes. The common
-[site entry point](../../site/exploration-catalog.mts) verifies these pins and
-exposes `MISSIONS` and `FACILITIES`. A stale catalogue fails the build. Astro
+and Missions catalogues with their validated records and graphs. The common
+[site entry point](../../site/exploration-catalog.mts) parses the prepared records
+against the Sources catalogue; it no longer verifies a dependency-hash closure.
+Regenerate the catalogues after changing their inputs. Astro
 renders the current body's cards and relevant vehicle details; the browser does
 not receive the complete graph or walk source provenance.
 

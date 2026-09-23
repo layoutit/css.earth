@@ -1,0 +1,21 @@
+{
+  "source": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
+  "checked": "2026-09-23",
+  "astropy": "8.0.1",
+  "numpy": "2.5.3",
+  "method": "Astropy io.fits native WAVE/FLUX/ERR/QUAL; finite FLUX and positive finite ERR, QUAL=0. WAVE angstrom to nm. NumPy bincount averages half-open 1 nm bins centred at 380 through 780; every bin populated. CIE 1931 2 degree XYZ sum; IEC sRGB matrix, peak normalization and sRGB encoding. No interpolation or clipping.",
+  "visibleUsableSamples": 432364,
+  "minimumSamplesPerBin": 769,
+  "linearSrgb": [
+    1.0,
+    0.7030857522880236,
+    0.6574806313864962
+  ],
+  "srgb": [
+    255,
+    218,
+    212
+  ],
+  "hex": "#ffdad4",
+  "limits": "This independently checks the numerical integration of the same spectrum. It is not a second instrument or an independent calibration of the source."
+}

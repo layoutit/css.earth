@@ -360,14 +360,15 @@ if a third attached-label, pointer-addressed PDS3 geometry archive appears.
 The pipeline derives nothing from an oracle; an oracle recomputes what the
 pipeline computed so a test can compare. `tools/oracles/` holds them with a
 pinned Python environment (`node tools/oracles/setup.mts`, `tools/oracles/requirements.txt`),
-and each writes a fixture under `tests/oracles/` that names its versions and the
-sha256 of every input. Existing decoder references include
+and each writes a fixture under `tests/oracles/` that names its versions, input
+paths and byte counts. Existing decoder references include
 SpiceyPy for `tools/spice/` (a microsecond in time, a millimetre in position, a
 nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
 the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
 the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS
 layouts. Comparing tests sit beside each reader, and `tools/contract/oracle-fixtures.test.mts`
-refuses a fixture from an unpinned environment or unpinned inputs. A new scientific
+checks tool versions, declared input paths and recorded byte counts; it does not
+compare source digests. Missing inputs can skip source-dependent cases. A new scientific
 source-format parser, decoder or interpretation algorithm needs independent reference evidence.
 Use the existing pinned oracle framework for new decoding behavior; do not use
 the implementation's own output as its expected result.
@@ -398,14 +399,14 @@ purposes; run those needed for the task, not every preparation step by default.
 | --- | --- |
 | Build shared tool bundles when needed | `pnpm build:tools` |
 | Install already published prepared files | `pnpm setup:assets --object=<id>` |
-| Restore missing source pins and verify existing bytes | `node tools/objects/dist/operations.js acquire <id>` |
-| Verify source closure without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only` |
+| Restore missing declared source files | `node tools/objects/dist/operations.js acquire <id>` |
+| Check declared source-file coverage without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only`; this does not verify source digests |
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:objects -- --object=<id>` |
 | Create the oracle environment and regenerate oracle fixtures | `node tools/oracles/setup.mts`, then `node tools/oracles/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
-| Prepare one authored object end to end, resumable by step | `node tools/prepare/prepare-object.mts <id> [--from <step>] [--presentation-only]` (the last reuses a paged-ellipsoid body's published heavy outputs): stale builds, pins, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
+| Prepare one authored object end to end, resumable by step | `node tools/prepare/prepare-object.mts <id> [--from <step>] [--presentation-only]` (the last reuses a paged-ellipsoid body's published heavy outputs): stale builds, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
 | Say which build a run would read stale | `node tools/ci/check-stale-builds.mts` |
-| Adopt a new download's first pin. Authored, generated and tool-written files that git tracks carry no pin | `node tools/sources/pin-object-documents.mts <id> --adopt-downloads [--check]` |
+| Declare a new input or document | Update `source/manifest.json` and its acquisition recipe with the path and source binding; the old document-pinning helper is retired |
 | Re-prepare only the content record after a credit or provenance edit | `node tools/objects/refresh-content.mts <id> ...` (refuses if any other prepared file would change) |
 | Find what the literature published for a resolved-star candidate | `node tools/objects/star-candidates.mts "<SIMBAD identifier>"`: OiDB calibration levels, VizieR image deposits from the star's own papers, and the route that worked for the placed stars; archive leads (`tools/objects/archive-search.mts`) from the JMDC measured diameter, ALMA projects with beams across the disc, ESO interferometer and adaptive-optics frames, HST and JWST imaging, and DataCite deposits of the star's papers |
 | Image a star from one raw season and decide whether it may be cast | `node tools/objects/interferometry/image-star.mts <season dir> <work> [--raw <dir>]`: a `seasons/<id>/season.json` pin; calibrates, selects, fits the disc, reconstructs the season, halves and spotless twins with SQUEEZE, writes `verdict.json` and compares with the author's file and image; see [Interferometric imaging](../../../../docs/interferometric-imaging.md#one-command-per-star) |
@@ -421,25 +422,28 @@ purposes; run those needed for the task, not every preparation step by default.
 | Reduce a JWST time series from raw exposures | `node tools/objects/jwst/reduce-tso.mts tools/objects/jwst/programs/<id> <work> [--raw <dir>]`: Eureka! stages 1-4 in memory-safe batches, light curves exported to CSV with the author's deposit; then `compare-light-curves.mts`; see [Eclipse mapping](../../../../docs/eclipse-mapping.md) |
 | Find whether an archive holds finer frames than a body ships | `node tools/objects/imagery-candidates.mts [<id> ...] [--minimum-pixels 50] [--json]`: OPUS's finest body-centre image resolution per covered body against the finest frame its photograph lenses cast, with pixels across and phase; advisory, since a frame still needs a camera, registration and reuse terms. `--archives <id> ...` searches ALMA, ESO raw frames and MAST under the body's catalogue name and SBDB designations, and DataCite for deposits of the papers it already cites |
 | Set up a VLT/SPHERE survey body's photograph lens and measure it against the survey figure | `node tools/objects/sphere-survey/setup.mts <id>` in scratch, then `node tools/objects/sphere-survey/install.mts <id>` into the package; see [SPHERE survey photographs](sphere-survey-photographs.md) |
-| Write a ground-based lens's two Horizons tables | `node tools/objects/sphere-horizons.mts <id> [--write]`: Paranal rows at each frame's exposure start and heliocentric vectors one light time earlier, asked in batches of 25 and pinned in the manifest; a table the manifest does not name yet is declared for `node tools/sources/author-source-records.mts` |
+| Write a ground-based lens's two Horizons tables | `node tools/objects/sphere-horizons.mts <id> [--write]`: Paranal rows at each frame's exposure start and heliocentric vectors one light time earlier, asked in batches of 25 and declared in the manifest; a table the manifest does not name yet is declared for `node tools/sources/author-source-records.mts` |
 | Measure a ground-based lens against its paper's comparison figure | `node tools/objects/published-comparison.mts <id> [--write]`: reads the figure from the pinned PDF (`tools/fits/pdf-image.mts`), writes `evidence/published-comparison.json` and its image; a new record's zero pixel digest is adopted on the first `--write` |
 | Scaffold a placed star from its astronomy record | `node tools/objects/new-star.mts <id> --name ... --temperature <K> --temperature-source <citation with URL> --paper ...`: every number derived, the catalogue colour from the cited effective temperature through the star field's colour fit, prose marked `TODO(new-star)`, then `prepare-object` |
-| Restore sources before root preparation | `pnpm prepare:checkout` |
+| Restore selected-body sources before baking | `node tools/assets/restore-source-inputs.mts --object=<id>`, then `pnpm prepare:objects --object=<id>` |
 | Build the site and assemble declared runtime files | `pnpm build` |
 
-Default acquisition restores missing pins from `source/preparation/acquisition.json`
-and fails on changed existing bytes. `tools/assets/restore-source-inputs.mts` delegates
-selected objects to shared acquisition; it also restores Earth's pinned WMTS
-inputs. `setup:assets` installs prepared files independently of source preparation.
+Default acquisition restores missing inputs through `source/preparation/acquisition.json`.
+`tools/assets/restore-source-inputs.mts` selects the shared acquisition route;
+source-manifest coverage and path checks do not compare a stored digest.
+`pnpm setup:assets` separately installs published runtime bytes against their
+inventories. Preserve source identity and scientific interpretation without
+reintroducing the removed manifest-pin layer.
 
-`tools/cli/run-implemented-objects.mts` discovers registered objects and selects the
-authored commands. It routes `test:planets` to `tests/objects/unit/<id>/` plus the shared contract runners in `tests/objects/unit/*.test.mts`, scoped to one body through `CSSEARTH_TEST_OBJECTS`.
-`pnpm test` currently runs packages, renderer, platform and shell checks;
-`test:planets` and `test:preparation` are separate commands.
+`tools/cli/run-implemented-objects.mts` discovers registered scene objects for
+preparation and assembly. The old per-body test directories and planet-test alias
+are retired. `pnpm test` runs packages, renderer, native tests, the preparation
+subset and lab checks; use the affected suite or direct test files for a focused
+change. The shared runtime-package test exercises registered object packages.
 
-Rendering proof is `site/test/rendered-page.test.mts`: it builds each body's page
-and asserts the served HTML over `linkedom`, so there is no browser to drive. The
-Playwright suites and their per-body browser profiles were retired; test the code
-that produces the markup, not a live render.
-Use the actual command coverage when reporting proof; readiness requirements
-belong to the user's contract and [qualification](qualification.md).
+`site/test/rendered-page.test.mts` reads an existing build and checks shared HTML
+invariants for Saturn, Earth and Mercury. It does not build every object or test
+interaction, raster appearance or line wrapping. The old Playwright conformance
+profiles are retired; inspect changed browser views and interactions as required
+by [qualification](qualification.md). Report unavailable assets and skipped tests
+separately from executed checks.

@@ -18,16 +18,16 @@ These are **relative display emission** models, not measured 3D gas density. The
 
 ## Reproduce from a clean checkout
 
-Requires Node 22.18+ and pnpm 10.33.0. Dependency installation needs internet; the accepted nebula bake uses checked-in compact inputs and needs no native image downloads, Python, NOX or simulation archive. Run from a clean repository checkout.
+Requires Node 24 (or 22.18+) and pnpm 10.33.0. Dependency installation needs internet; the accepted nebula bake uses checked-in compact inputs and needs no native image downloads, Python, NOX or simulation archive. Run from a clean repository checkout.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
+pnpm build:tools
 pnpm prepare:nebulae
 pnpm dev
 ```
 
-`pnpm prepare:nebulae` enters through `tools/nebula/prepare.mts` and the private volume-bake package, without invoking the lab CLI. It handles **all 23 configured lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the six smaller nebulae, and the prepared mission/facility/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored; changed pinned scientific inputs fail. M2–9 integrates its retained RGB emission grid; the compiler objects replay fitted fields and saved materials. The delivery receipts identify actual output versions; a successful replay is not an independent visual or scientific acceptance.
+`pnpm prepare:nebulae` enters through `tools/nebula/prepare.mts` and the private volume-bake package, without invoking the lab CLI. It handles **all 23 configured lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the six smaller nebulae, and the prepared mission/facility/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored or rebuilt. Tracked scientific recipes identify inputs by path; source changes require fresh qualification rather than a claim that a manifest digest rejected them. M2–9 integrates its retained RGB emission grid; the compiler objects replay fitted fields and saved materials. The delivery receipts identify actual output versions; a successful replay is not an independent visual or scientific acceptance.
 
 Source recipes, provenance, requests, compact pre-slice bake inputs and small object descriptors are committed. Textures, prepared descriptors and receipts under each object's `prepared/`, native caches and intermediate results are ignored. Runtime consumes prepared geometry and pixels only.
 
@@ -43,9 +43,9 @@ To restore one of the six Galactic nebulae through its existing delivery recipe:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
+pnpm build:tools
 node tools/nebula/prepare.mts --object=helix --if-missing
-pnpm prepare:sources
+node tools/prepare/prepare-facilities.mts --catalog-only
 ```
 
 The processing prerequisites above still apply. Restart the development server
@@ -65,7 +65,7 @@ after restoration; available banks are selected once at startup. LMC is selected
 
 The native images and their completed star-removal or explicit compact-emission-preservation products feed reconstruction. **The source-card previews never feed the cloud bake.** Shared geometry and star positions remain independent of lens selection; each lens carries its registered color treatment and saved display settings. Pleiades' composite reference preview is Niittee's original wide photograph before NOIRLab detail fusion. Crab's Hubble 2017 bridge supports registration and is excluded from selectable lenses. M2–9 gains an independently catalogued surrounding field; its symmetry image does not infer those stellar positions.
 
-Each object owns `source/presentation.json` and a source manifest with image identities, credits, capture evidence and supporting scientific references. `prepare:nebulae` and `prepare:sources` generate `prepared/presentation.json`, standard `cssearth-object-provenance@3` lineage, bounded WebP previews and shared source usage. These generated files are ignored. An ordinary rebake takes the current descriptor's output identity; it does not require editing a duplicate presentation hash.
+Each object owns `source/presentation.json` and a source manifest with image identities, credits, capture evidence and supporting scientific references. `pnpm prepare:nebulae` prepares `prepared/presentation.json`, standard `cssearth-object-provenance@3` lineage and bounded WebP previews, then refreshes shared source usage. `node tools/prepare/prepare-facilities.mts --catalog-only` refreshes the shared catalogue from installed provenance. These generated files are ignored. Volume provenance is inventoried and published with the bake; the layered-body provenance generator does not recreate it. An ordinary rebake takes the current descriptor's output identity; it does not require editing a duplicate presentation hash.
 
 The site reuses the planets' dataset selector, descriptions, details and source/telescope sidebar. Selecting a lens updates that lens's source context and URL while retaining the world camera and scene. Supporting observations remain distinguishable from the selected image; papers do not become spacecraft observations. Horálek's camera remains unidentified in the retained evidence, so its attribution names the photographer without inventing an instrument.
 
@@ -106,7 +106,7 @@ M2–9 has a published 113.6° AVM rotation and a 58.035″ image width. Its exi
 
 ## Update a delivery
 
-`source/request.json` fixes compiler controls, evidence weights and saved image transforms. `source/delivery.json` pins that request and scientific recipe inputs, records the assessed result, physical embedding and display framing. Source switching changes prepared star material while retaining every ID/position and the shared camera.
+`source/request.json` fixes compiler controls, evidence weights and saved image transforms. `source/delivery.json` names that request and scientific recipe inputs by path, records the assessed result, physical embedding and display framing. Source switching changes prepared star material while retaining every ID/position and the shared camera.
 
 The current checked-in compiler can produce a new immutable result for those settings. The generated receipt records both the historically assessed identity and the actual reproduced identity. A new result still needs front, oblique and side inspection; numerical agreement alone does not establish visual acceptance.
 
