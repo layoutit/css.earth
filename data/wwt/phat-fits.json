@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-wwt-fits-catalog@1",
+  "source": {
+    "url": "https://data1.wwtassets.org/packages/2021/09_phat_fits/index.wtml",
+    "file": "phat-fits.wtml",
+    "sha256": "87b1d0e58a73815ffd79057979749b0a2e1a22aab3d0b8ad1f14ff24402f4cdc",
+    "parser": "wwt-data-formats@0.18.1"
+  },
+  "imagesets": [
+    {
+      "name": "PHAT-f475w",
+      "urlTemplate": "http://data1.wwtassets.org/packages/2021/09_phat_fits/f475w/{1}/{3}/{3}_{2}.fits",
+      "fileType": ".fits",
+      "dataSetType": "Sky",
+      "projection": "Tan",
+      "bandPass": "Visible",
+      "credits": "",
+      "creditsUrl": "",
+      "position": {
+        "centerXDegrees": 11.271831266098,
+        "centerYDegrees": 41.708843330177,
+        "offsetX": -0.001518775459567335,
+        "offsetY": 0.05102149014859764,
+        "rotationDegrees": 33.14184558618669,
+        "baseDegreesPerTile": 1.8196669948415534,
+        "tileLevels": 9,
+        "bottomsUp": false
+      }
+    },
+    {
+      "name": "PHAT-f814w",
+      "urlTemplate": "http://data1.wwtassets.org/packages/2021/09_phat_fits/f814w/{1}/{3}/{3}_{2}.fits",
+      "fileType": ".fits",
+      "dataSetType": "Sky",
+      "projection": "Tan",
+      "bandPass": "Visible",
+      "credits": "",
+      "creditsUrl": "",
+      "position": {
+        "centerXDegrees": 11.271832452597,
+        "centerYDegrees": 41.708848773004,
+        "offsetX": -0.0015245924270355677,
+        "offsetY": 0.05102105072441093,
+        "rotationDegrees": 33.1407328370327,
+        "baseDegreesPerTile": 1.8196542502101865,
+        "tileLevels": 9,
+        "bottomsUp": false
+      }
+    }
+  ]
+}

@@ -144,9 +144,9 @@ export interface EigenFit {
   readonly map: Float64Array;
 }
 
-function solve(matrix: Float64Array, rhs: Float64Array, n: number) {
-  if (!Number.isInteger(n) || n < 1 || matrix.length !== n * n || rhs.length !== n) throw new RangeError('Linear-system dimensions do not match.');
-  if (matrix.some(value => !Number.isFinite(value)) || rhs.some(value => !Number.isFinite(value))) throw new RangeError('Linear system must contain only finite values.');
+function factorPositiveDefinite(matrix: Float64Array, n: number) {
+  if (!Number.isInteger(n) || n < 1 || matrix.length !== n * n) throw new RangeError('Linear-system dimensions do not match.');
+  if (matrix.some(value => !Number.isFinite(value))) throw new RangeError('Linear system must contain only finite values.');
   for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
     const a = matrix[i * n + j]!, b = matrix[j * n + i]!;
     const scale = Math.max(1, Math.abs(a), Math.abs(b), Math.sqrt(Math.abs(matrix[i * n + i]!)) * Math.sqrt(Math.abs(matrix[j * n + j]!)));
@@ -166,6 +166,13 @@ function solve(matrix: Float64Array, rhs: Float64Array, n: number) {
       if (!Number.isFinite(l[i * n + j]!)) throw new RangeError('Linear-system factorization produced a non-finite value.');
     }
   }
+  return l;
+}
+
+function solve(matrix: Float64Array, rhs: Float64Array, n: number) {
+  if (rhs.length !== n) throw new RangeError('Linear-system dimensions do not match.');
+  if (rhs.some(value => !Number.isFinite(value))) throw new RangeError('Linear system must contain only finite values.');
+  const l = factorPositiveDefinite(matrix, n);
   const y = new Float64Array(n), x = new Float64Array(n);
   for (let i = 0; i < n; i++) { let sum = rhs[i]!; for (let k = 0; k < i; k++) sum -= l[i * n + k]! * y[k]!; y[i] = sum / l[i * n + i]!; }
   for (let i = n - 1; i >= 0; i--) { let sum = y[i]!; for (let k = i + 1; k < n; k++) sum -= l[k * n + i]! * x[k]!; x[i] = sum / l[i * n + i]!; }
@@ -336,30 +343,24 @@ export function sampleEigenmap(basis: EigenBasis, fit: EigenFit, { steps = 20000
   if (initial.length !== p) throw new RangeError('Fitted parameter layout does not match the stored normal-equation dimension.');
   if (!Number.isFinite(dataSquares) || initial.some(value => !Number.isFinite(value))) throw new RangeError('Posterior inputs must contain only finite values.');
   const chi2 = (x: Float64Array) => { let v = dataSquares; for (let i = 0; i < p; i++) { v -= 2 * x[i]! * rhs[i]!; let row = 0; for (let j = 0; j < p; j++) row += matrix[i * p + j]! * x[j]!; v += x[i]! * row; } return v; };
-  // Covariance = (A)^-1 for chi2 = x'Ax - 2b'x (the likelihood exp(-chi2/2)); its Cholesky factor scales the proposal.
-  const inverse = new Float64Array(p * p);
-  for (let k = 0; k < p; k++) { const e = new Float64Array(p); e[k] = 1; const column = solve(matrix, e, p); for (let i = 0; i < p; i++) inverse[i * p + k] = column[i]!; }
-  const chol = new Float64Array(p * p);
-  for (let i = 0; i < p; i++) for (let j = 0; j <= i; j++) {
-    let sum = inverse[i * p + j]!; for (let k = 0; k < j; k++) sum -= chol[i * p + k]! * chol[j * p + k]!;
-    if (i === j) {
-      if (!(sum > 0) || !Number.isFinite(sum)) throw new RangeError(`Posterior covariance is not positive definite at pivot ${i}.`);
-      chol[i * p + j] = Math.sqrt(sum);
-    } else {
-      chol[i * p + j] = sum / chol[j * p + j]!;
-      if (!Number.isFinite(chol[i * p + j]!)) throw new RangeError('Posterior covariance factorization produced a non-finite value.');
-    }
-  }
+  // If A = L L^T, then L^-T z has covariance A^-1 for standard-normal z.
+  // Reuse the normal matrix's factorization; forming A^-1 and factoring it again adds rounding and duplicate machinery.
+  const lower = factorPositiveDefinite(matrix, p);
   const visible = Array.from(basis.visible.keys()).filter(c => basis.visible[c]);
   const feasible = (x: Float64Array) => { for (const c of visible) { let v = x[n]! / Math.PI; for (let k = 0; k < n; k++) v += x[k]! * basis.maps[k]![c]!; if (!(v > 0)) return false; } return true; };
   const random = seededRandom(seed), scale = 2.38 / Math.sqrt(p);
   let x = initial, current = chi2(x), accepted = 0;
   if (!Number.isFinite(current)) throw new RangeError('Initial posterior chi-squared is not finite.');
   const samples: Float64Array[] = [], interval = Math.max(1, Math.floor((steps - burn) / keep)), chains: number[] = [];
-  const z = new Float64Array(p), proposal = new Float64Array(p);
+  const z = new Float64Array(p), delta = new Float64Array(p), proposal = new Float64Array(p);
   for (let step = 0; step < steps; step++) {
     for (let i = 0; i < p; i++) z[i] = random.normal();
-    for (let i = 0; i < p; i++) { let d = 0; for (let j = 0; j <= i; j++) d += chol[i * p + j]! * z[j]!; proposal[i] = x[i]! + scale * d; }
+    for (let i = p - 1; i >= 0; i--) {
+      let value = z[i]!;
+      for (let j = i + 1; j < p; j++) value -= lower[j * p + i]! * delta[j]!;
+      delta[i] = value / lower[i * p + i]!;
+      proposal[i] = x[i]! + scale * delta[i]!;
+    }
     const next = chi2(proposal);
     if (Math.log(random.uniform()) < (current - next) / 2 && feasible(proposal)) { x = Float64Array.from(proposal); current = next; accepted++; }
     if (step >= burn && (step - burn) % interval === 0 && samples.length < keep) { samples.push(Float64Array.from(x)); chains.push(current); }

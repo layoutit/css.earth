@@ -6,6 +6,7 @@ import{mkdtemp,rm,writeFile}from'node:fs/promises';import{tmpdir}from'node:os';
 import { formatArtifact, formatExploration, formatSession, main, outputCommand, parseCli, type ArtifactInspection, type CliIo, type CliServices } from './cli.mts';
 import type { ExplorationSession } from './session.mts';
 import type { Session } from './session.mts';
+import { loadWwtImagery } from './wwt-catalog.mts';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
   reference:{kind:'indexed-observation' as const,telescope:'Fixture telescope',mode:'camera',observation:'obs-1',programme:'eris-obs-1'},
@@ -66,6 +67,22 @@ test('local import has one bounded data-only entry point',()=>{
   for(const args of [['import'],['import','spec.json'],['import','spec.json','--out','a','--out','b'],['import','spec.json','other.json','--out','a']])assert.throws(()=>parseCli(args));
 });
 
+test('WWT image export has separate image numbers and an explicit bounded level',()=>{
+  const parsed=parseCli(['wwt-image','run/explore.json','--pick','2','--level','1','--out','image-out','--json']);
+  assert.deepEqual(parsed,{command:'wwt-image',exploration:resolve('run/explore.json'),pick:2,level:1,directory:resolve('image-out'),json:true,verbose:false});
+  for(const args of [['wwt-image','run/explore.json','--pick','0','--level','1','--out','image-out'],
+    ['wwt-image','run/explore.json','--pick','1','--level','4','--out','image-out'],
+    ['wwt-image','run/explore.json','--pick','1','--out','image-out']])assert.throws(()=>parseCli(args));
+});
+
+test('WWT FITS acquisition selects a named numeric imageset and one tile',()=>{
+  assert.deepEqual(parseCli(['wwt-fits','data/wwt/phat-fits.json','--set','PHAT-f475w','--level','0','--x','0','--y','0','--out','fits-out','--json']),
+    {command:'wwt-fits',catalog:resolve('data/wwt/phat-fits.json'),setName:'PHAT-f475w',level:0,x:0,y:0,directory:resolve('fits-out'),json:true,verbose:false});
+  for(const args of [['wwt-fits','catalog.json','--set','Science','--level','0','--x','0','--out','fits-out'],
+    ['wwt-fits','catalog.json','--set','Science','--level','-1','--x','0','--y','0','--out','fits-out'],
+    ['wwt-fits','catalog.json','--set','Science','--level','0','--x','0','--y','0','--out','fits-out','--x','1']])assert.throws(()=>parseCli(args));
+});
+
 test('family coverage is derived through one public command',async()=>{
   assert.deepEqual(parseCli(['families','--json']),{command:'families',json:true,verbose:false});assert.throws(()=>parseCli(['families','extra']));
   const mock=mockIo(false,false),api=mockServices('/tmp');const code=await main(['families','--json'],'/workspace',text=>mock.io.write(text),mock.io,api.services);
@@ -98,6 +115,17 @@ test('human exploration and artifact screens retain unknowns, blockers, context 
   const local=formatArtifact({...inspection,source:resolve('output/a run/result.json')});
   assert.match(local,/Source: output\/a run\/result\.json/u);
   assert.match(local,/Next: telescope export 'output\/a run\/result\.json'/u);
+});
+
+test('WWT imagery appears with credits but never becomes a numbered retrieval choice',async()=>{
+  const curatedImagery=await loadWwtImagery(process.cwd(),{id:'europa',name:'Europa',aliases:[]});
+  assert.equal(curatedImagery.state,'indexed');
+  const session=exploration('/tmp/wwt-run'),screen=formatExploration({...session,answer:{...session.answer,curatedImagery}});
+  assert.match(screen,/WWT curated imagery \(1 title\/frame match/u);
+  assert.match(screen,/Europa \(Jupiter\).*Toast.*reference-frame match/u);
+  assert.match(screen,/NASA\/JPL\/Space Science Institute/u);
+  assert.match(screen,/Display imagery only; these are not selectable observations/u);
+  assert.equal((screen.match(/^\d+\. /gmu)??[]).length,1);
 });
 
 test('query continuation quotes shell metacharacters without command substitution',()=>{
