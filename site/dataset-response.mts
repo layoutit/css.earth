@@ -1,11 +1,12 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection } from '../src/renderers/css/dist/index.js';
+import { loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection } from '../src/renderers/css/dist/index.js';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { renderNativeFocus } from './focus-response.mts';
 import { serializePreparedScene } from '../tools/prepared/serialize-prepared-scene.mts';
 import { requiredElement } from './browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './feature-search.mts';
+import { readDatasetUrl } from './dataset-url.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -17,7 +18,7 @@ function region(html: string, name: string) {
 /** A native request uses the same authenticated prepared records and serializer
  * as the static page. Only the existing scene and its dataset controls change. */
 export async function renderDatasetResponse(html: string, url: URL, objectId: string, fetcher: typeof fetch = fetch): Promise<string> {
-  const ids = url.searchParams.getAll('dataset');
+  const dataset = readDatasetUrl(url);
   const settingRequest = url.searchParams.has('settings');
   const featureParams = url.searchParams.getAll('feature');
   if (featureParams.length > 1 || featureParams.length && !/^(?:city-)?[0-9]{1,16}$/u.test(featureParams[0]!)) throw new RangeError('Invalid feature selection.');
@@ -25,13 +26,12 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   const featureIds = featureParams.filter(id => !id.startsWith(PLACE_FEATURE_PREFIX));
   const views = url.searchParams.getAll('v');
   const focusing = url.searchParams.has('focus') || url.searchParams.has('focusLens');
-  if (!ids.length && !settingRequest && !featureIds.length && !views.length && !focusing) return html;
+  if (!dataset.requested && !settingRequest && !featureIds.length && !views.length && !focusing) return html;
   if (views.length > 1) throw new RangeError('Invalid saved view.');
   let saved;
   try { saved = views.length ? parseSharedView(`v=${views[0]}`) : null; }
   catch { throw new RangeError('Invalid saved view.'); }
-  if (ids.length > 1 || ids.length && (!/^[a-z][a-z0-9-]*$/u.test(ids[0]) || ids[0].length > 128)) throw new RangeError('Invalid dataset selection.');
-  let lensId = ids[0];
+  let lensId = dataset.id ?? undefined;
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
   if (descriptor.id !== objectId || descriptor.prepared?.url !== 'prepared/object.json') throw new Error('Prepared dataset descriptor identity drifted.');
@@ -97,17 +97,17 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
     caption.element.style.transform = 'translate(-50%,-100%)';
     stage.append(root);
   }
-  for (const button of buttons) button.setAttribute('aria-pressed', String(button.getAttribute('value') === activeLens));
-  if (ids.length || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
-  for (const details of shell.document.querySelectorAll<HTMLElement>('[data-lens-details]')) details.hidden = details.dataset.lensDetails !== activeLens;
-  for (const context of shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')) context.hidden = context.dataset.datasetContext !== activeLens;
+  publishDatasetSelection(buttons,
+    [...shell.document.querySelectorAll<HTMLElement>('[data-lens-details]')].map(panel => ({ id: panel.dataset.lensDetails!, panel })),
+    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')], new Set([activeLens ?? null]));
+  if (dataset.requested || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
   for (const input of shell.document.querySelectorAll<HTMLInputElement>('.object-settings input[name]')) {
     if (Object.hasOwn(settings, input.name)) {
       if (input.type === 'checkbox') input.toggleAttribute('checked', settings[input.name] === true);
       else input.setAttribute('value', String(settings[input.name]));
     }
   }
-  for (const tab of ids.length ? shell.document.querySelectorAll<HTMLInputElement>('.object-information-panel > .object-native-tabs > [data-information-tab]') : []) {
+  for (const tab of dataset.requested ? shell.document.querySelectorAll<HTMLInputElement>('.object-information-panel > .object-native-tabs > [data-information-tab]') : []) {
     tab.toggleAttribute('checked', tab.dataset.informationTab === 'dataset');
   }
   // Replace from the end so the original shell offsets remain valid.

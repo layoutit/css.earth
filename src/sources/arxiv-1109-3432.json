@@ -1,0 +1,38 @@
+{
+  "id": "arxiv-1109-3432",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kepler-16: A Transiting Circumbinary Planet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1109.3432"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1126/science.1210923"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1109.3432",
+      "label": "Doyle et al. 2011"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kepler-16ab-b/text.json",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "L. R. Doyle, J. A. Carter, D. C. Fabrycky et al.",
+      "scope": "citation",
+      "evidence": "src/objects/kepler-16ab-b/text.json#/introduction/sources/0"
+    }
+  ]
+}
