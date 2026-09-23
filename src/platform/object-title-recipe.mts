@@ -6,7 +6,7 @@ export const OBJECT_TITLE_RECIPE = Object.freeze({
   sourceUrl:
     "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
   checkedFontPath:
-    "src/objects/earth/source/presentation/InterVariable.ttf",
+    "site/source/titles/InterVariable.ttf",
   weight: 500,
   opticalSize: 28,
   fontSize: 28,

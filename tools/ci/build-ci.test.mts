@@ -38,9 +38,10 @@ test('an exact full hit reuses only compiled output while all generated source a
   f.executed.length = 0;
   const results = await buildCi({ ...f, mode: 'full', digest, cacheHit: true });
   assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation', 'renderer']);
-  assert.deepEqual([...f.executed].sort(), ['astronomy-data', 'catalog', 'font', 'icons', 'moon-labels', 'navigation', 'overview-titles', 'solar', 'titles', 'wordmark', 'world']);
+  assert.deepEqual([...f.executed].sort(), ['astronomy-data', 'catalog', 'font', 'icons', 'moon-labels', 'navigation', 'overview-titles', 'solar', 'titles', 'wordmark', 'world', 'world-presentation']);
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('moon-labels'));
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('overview-titles'));
+  assert.ok(f.executed.indexOf('world') < f.executed.indexOf('world-presentation'));
 });
 
 test('cache hits with missing JS, declarations, nested chunks or receipt rebuild the affected owner', async t => {

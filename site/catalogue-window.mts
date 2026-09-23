@@ -11,7 +11,11 @@ const MAX_WINDOW_ROWS = 28;
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS)
   .map(({ presentation }) => presentation.size));
 
-interface RowView { readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; }
+/** A pooled row. Its subtitle spans are retained; `entry` is what they show, so a row keeps its nodes until it shows another entry. */
+interface RowView {
+  readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; entry: CatalogueIndexEntry | null;
+  readonly kind: HTMLSpanElement; readonly value: HTMLSpanElement; readonly unit: HTMLSpanElement;
+}
 export type CatalogueSelection = Readonly<{ kind: CatalogueIndexEntry['kind']; id: string }> | null;
 
 /** The prepared search thumbnail of a scene object with a context sprite (`tools/prepare/prepare-search-thumbnails.mts`). */
@@ -80,7 +84,13 @@ function createRow(documentTarget: Document): RowView {
   detail.className = 'object-distance object-lens-detail';
   anchor.append(icon, name, detail);
   item.append(anchor);
-  return { item, anchor, index: -1 };
+  const kind = documentTarget.createElement('span');
+  kind.className = 'object-kind';
+  const value = documentTarget.createElement('span');
+  value.className = 'object-distance-value';
+  const unit = documentTarget.createElement('span');
+  unit.className = 'object-distance-unit';
+  return { item, anchor, index: -1, entry: null, kind, value, unit };
 }
 
 function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexEntry, index: number, selection: CatalogueSelection) {
@@ -115,6 +125,8 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
   if (selected) anchor.setAttribute('aria-current', 'page');
   else anchor.removeAttribute('aria-current');
 
+  if (view.entry === entry) return;
+  view.entry = entry;
   const icon = anchor.children[0] as HTMLElement;
   icon.replaceChildren(renderMarker(documentTarget, entry));
   (anchor.children[1] as HTMLElement).textContent = entry.name;
@@ -122,15 +134,10 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
   detail.title = entry.detail.title;
   detail.ariaLabel = entry.detail.ariaLabel;
   // The subtitle: what the object is, then how far it is.
-  const kind = documentTarget.createElement('span');
-  kind.className = 'object-kind';
+  const { kind, value, unit } = view;
   kind.textContent = `${entry.classificationName.charAt(0).toLocaleUpperCase('en')}${entry.classificationName.slice(1)} · `;
   if (entry.detail.value && entry.detail.unit) {
-    const value = documentTarget.createElement('span');
-    value.className = 'object-distance-value';
     value.textContent = entry.detail.value;
-    const unit = documentTarget.createElement('span');
-    unit.className = 'object-distance-unit';
     unit.textContent = entry.detail.unit;
     detail.replaceChildren(kind, value, ' ', unit);
   } else {
@@ -149,11 +156,15 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
   const spare: RowView[] = [];
 
   list.dataset.catalogueWindow = '';
-  const render = () => {
+  /** Layout reads happen before any row is written, so a render never forces a second layout. */
+  const measure = () => {
+    const listTop = list.offsetTop;
+    return { listTop: Number.isFinite(listTop) ? listTop : 0, scrollTop: scrollTarget.scrollTop || 0, height: scrollTarget.clientHeight || 420 };
+  };
+  const render = (viewport = measure()) => {
     frame = null;
-    const listTop = Number.isFinite(list.offsetTop) ? list.offsetTop : 0;
-    const relativeTop = Math.max(0, (scrollTarget.scrollTop || 0) - listTop);
-    const visibleRows = Math.max(1, Math.ceil((scrollTarget.clientHeight || 420) / ROW_PITCH));
+    const relativeTop = Math.max(0, viewport.scrollTop - viewport.listTop);
+    const visibleRows = Math.max(1, Math.ceil(viewport.height / ROW_PITCH));
     const start = Math.max(0, Math.floor(relativeTop / ROW_PITCH) - OVERSCAN_ROWS);
     const end = Math.min(entries.length, start + Math.min(MAX_WINDOW_ROWS, visibleRows + OVERSCAN_ROWS * 2));
     for (const [index, view] of active) {
@@ -181,11 +192,12 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     }
   };
   const invalidate = () => {
-    if (frame === null) frame = windowTarget.requestAnimationFrame(render);
+    if (frame === null) frame = windowTarget.requestAnimationFrame(() => render());
   };
   scrollTarget.addEventListener('scroll', invalidate, { passive: true });
 
   const setEntries = (next: readonly CatalogueIndexEntry[]) => {
+    const viewport = measure();
     entries = next;
     for (const [index, view] of active) {
       const entry = entries[index];
@@ -197,7 +209,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
       }
     }
     list.style.height = next.length ? `${next.length * ROW_PITCH - 8}px` : '0px';
-    render();
+    render(viewport);
   };
 
   return Object.freeze({
