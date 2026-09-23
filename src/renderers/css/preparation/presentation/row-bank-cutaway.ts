@@ -41,7 +41,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   // A true perspective camera (the shared orbit writes its perspective and
   // eye from the prepared plan): the body is placed by dolly on the scene
   // root, the roots are never scaled.
-  const camera = b.element("div", `polycss-camera ${ns}-camera planet-render-root`);
+  const camera = b.element("div", `polycss-camera ${ns}-camera object-render-root`);
   const scene = b.element("div", `polycss-scene ${ns}-scene`); scene.style.transform = plan.camera.defaultTransform;
   const system = b.mesh(`${ns}-system`); system.style.transform = plan.systemTransform;
   // The outset reaches both the body and the cutaway body, which reuses the surface leaves.
@@ -68,7 +68,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   // The overlay root carries the billboard (a flat disc of the surface's mean
   // colour fitted to the same silhouette as the overlay above it, which
   // lights it) and the terminator overlay.
-  const materialRoot = b.element("div", `${ns}-material-root planet-render-root`);
+  const materialRoot = b.element("div", `${ns}-material-root object-render-root`);
   materialRoot.style.setProperty(`--${ns}-billboard-color`, normal.billboardColor);
   const billboardDisc = b.element("s", `${ns}-billboard`), materialLeaf = b.element("s", `${ns}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboardDisc); b.append(materialRoot, materialLeaf);

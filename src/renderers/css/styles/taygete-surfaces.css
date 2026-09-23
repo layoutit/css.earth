@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="taygete"]) > :is(.taygete-sun-camera, .taygete-camera, .taygete-material-root) {
+.object-stage:where([data-object-id="taygete"]) > :is(.taygete-sun-camera, .taygete-camera, .taygete-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-sun-camera, :where(.planet-stage[data-object-id="taygete"]) .taygete-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-body > u {
+:where(.object-stage[data-object-id="taygete"]) .taygete-sun-camera, :where(.object-stage[data-object-id="taygete"]) .taygete-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="taygete"]) .taygete-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="taygete"]) .taygete-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="taygete"]) .taygete-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--taygete-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-body > .taygete-polar { background-image: var(--taygete-poles-image); }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-material-root { z-index: 3; --taygete-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-material, :where(.planet-stage[data-object-id="taygete"]) .taygete-billboard {
+:where(.object-stage[data-object-id="taygete"]) .taygete-body > .taygete-polar { background-image: var(--taygete-poles-image); }
+:where(.object-stage[data-object-id="taygete"]) .taygete-material-root { z-index: 3; --taygete-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="taygete"]) .taygete-material, :where(.object-stage[data-object-id="taygete"]) .taygete-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-material { background-repeat: no-repeat; transform: rotate(var(--taygete-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="taygete"]) .taygete-billboard { border-radius: 50%; background-color: var(--taygete-billboard-color); opacity: var(--taygete-billboard-opacity); }
-.planet-stage:where([data-object-id="taygete"])[data-lod="billboard"] .taygete-scene, .planet-stage:where([data-object-id="taygete"])[data-lod="marker"] .taygete-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="taygete"])[data-lod="marker"] .taygete-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="taygete"]) .taygete-material { background-repeat: no-repeat; transform: rotate(var(--taygete-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="taygete"]) .taygete-billboard { border-radius: 50%; background-color: var(--taygete-billboard-color); opacity: var(--taygete-billboard-opacity); }
+.object-stage:where([data-object-id="taygete"])[data-lod="billboard"] .taygete-scene, .object-stage:where([data-object-id="taygete"])[data-lod="marker"] .taygete-scene { visibility: hidden; }
+.object-stage:where([data-object-id="taygete"])[data-lod="marker"] .taygete-billboard { opacity: 0; }
 

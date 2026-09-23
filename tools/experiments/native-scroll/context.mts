@@ -37,9 +37,9 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
   const world = savedWorldCamera(saved, frame, viewport);
   const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
   const eye = (position: readonly number[]) => rotateWorldPosition(rotation, [position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
-  const stage = document.querySelector<HTMLElement>('.planet-stage')!;
-  const worldStage = document.querySelector<HTMLElement>('.planet-world-stage')!;
-  const overlays = document.querySelector<HTMLElement>('.planet-scene-overlays')!;
+  const stage = document.querySelector<HTMLElement>('.object-stage')!;
+  const worldStage = document.querySelector<HTMLElement>('.object-world-stage')!;
+  const overlays = document.querySelector<HTMLElement>('.object-scene-overlays')!;
   if (!volume.sky) throw new Error('The shared prepared sky is missing.');
   const sky = mountPreparedCssSky({ host: worldStage, before: stage, payload: volume.sky, resources: volume.resources,
     resolveResource: path => `/src/objects/milky-way/prepared/${path}` });

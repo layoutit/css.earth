@@ -44,7 +44,7 @@ export function testRadiusNucleus(id:string,radiusKm:number,axisRatioAB:number){
   assert.equal(content.settings.controls.find(control=>control.name==='shadows')?.checked,false);
  });
  test(`${id}: source closure and fixed illustrative attitude`,async()=>{
-  const root=resolve('src/objects',id),source=await createSourceManifest({planetId:id,planetName:id,sourceRoot:`${root}/source`});await source.verify();
+  const root=resolve('src/objects',id),source=await createSourceManifest({objectId:id,objectName:id,sourceRoot:`${root}/source`});await source.verify();
   const ref=requireObjectRotationReference(await json(`${root}/object.json`));
   const a=await readAuthoredRotation(root,ref,2461286.5),b=await readAuthoredRotation(root,ref,2462286.5);assert.deepEqual(a,b);assert.equal(a.spinRateRadPerDay,0);
  });

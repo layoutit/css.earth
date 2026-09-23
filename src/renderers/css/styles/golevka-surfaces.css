@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="golevka"]) > :is(.golevka-sun-camera, .golevka-camera, .golevka-material-root) {
+.object-stage:where([data-object-id="golevka"]) > :is(.golevka-sun-camera, .golevka-camera, .golevka-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-sun-camera, :where(.planet-stage[data-object-id="golevka"]) .golevka-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-body > u {
+:where(.object-stage[data-object-id="golevka"]) .golevka-sun-camera, :where(.object-stage[data-object-id="golevka"]) .golevka-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="golevka"]) .golevka-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="golevka"]) .golevka-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="golevka"]) .golevka-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--golevka-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-body > .golevka-polar { background-image: var(--golevka-poles-image); }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-material-root { z-index: 3; --golevka-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-material, :where(.planet-stage[data-object-id="golevka"]) .golevka-billboard {
+:where(.object-stage[data-object-id="golevka"]) .golevka-body > .golevka-polar { background-image: var(--golevka-poles-image); }
+:where(.object-stage[data-object-id="golevka"]) .golevka-material-root { z-index: 3; --golevka-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="golevka"]) .golevka-material, :where(.object-stage[data-object-id="golevka"]) .golevka-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-material { background-repeat: no-repeat; transform: rotate(var(--golevka-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="golevka"]) .golevka-billboard { border-radius: 50%; background-color: var(--golevka-billboard-color); opacity: var(--golevka-billboard-opacity); }
-.planet-stage:where([data-object-id="golevka"])[data-lod="billboard"] .golevka-scene, .planet-stage:where([data-object-id="golevka"])[data-lod="marker"] .golevka-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="golevka"])[data-lod="marker"] .golevka-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="golevka"]) .golevka-material { background-repeat: no-repeat; transform: rotate(var(--golevka-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="golevka"]) .golevka-billboard { border-radius: 50%; background-color: var(--golevka-billboard-color); opacity: var(--golevka-billboard-opacity); }
+.object-stage:where([data-object-id="golevka"])[data-lod="billboard"] .golevka-scene, .object-stage:where([data-object-id="golevka"])[data-lod="marker"] .golevka-scene { visibility: hidden; }
+.object-stage:where([data-object-id="golevka"])[data-lod="marker"] .golevka-billboard { opacity: 0; }
 

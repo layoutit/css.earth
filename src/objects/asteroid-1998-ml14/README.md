@@ -16,7 +16,7 @@ The source mesh is reduced from 1020 to 800 faces, with a 10 m stopping and scal
 
 Source-scalar and decoded-atlas measurements are retained below. They are sampled preparation checks, not browser pixel-parity evidence.
 
-[Source test definitions](../../../tests/objects/unit/asteroid-1998-ml14/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/asteroid-1998-ml14/source.test.mts).
 
 ## Known problems
 

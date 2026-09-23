@@ -54,8 +54,8 @@ export async function fetchWithRetry(fetcher: typeof fetch, url: string,
   for (let attempt = 0; attempt < attempts; attempt++) {
     try {
       const response = await fetcher(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      if (!response.body) throw new Error('Response has no body.');
+      if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
+      if (!response.body) throw new Error(`Response has no body for ${url}`);
       const stream = withIdleTimeout(Readable.fromWeb(response.body as never), idleMs);
       const chunks: Buffer[] = [];
       for await (const chunk of stream) chunks.push(chunk as Buffer);

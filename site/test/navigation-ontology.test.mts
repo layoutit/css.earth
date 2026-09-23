@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
-import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mts';
+import { SEARCH_OBJECTS } from '../search-objects.mts';
 import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '../../tools/prepare/prepare-navigation-destinations.mts';
 import { normalizeDestinationQuery } from '../destination-search.mts';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
@@ -18,7 +18,7 @@ test('every prepared spatial subject and every scene has exactly one searchable 
   const prepared = await readPreparedFocusObjects(resolve('src/objects'), 'sun');
   assert.equal(OBJECTS.length, SCENE_OBJECTS.length + prepared.length);
   assert.deepEqual(OBJECTS.filter(object => object.kind === 'prepared-focus'), prepared);
-  assert.deepEqual(new Set(PLANET_SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
+  assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(), SCENE_OBJECTS.map(object => object.route));
   assert.equal(requireObject('m_031').kind, 'prepared-focus');
   assert.throws(() => requireSceneObject('m_031'), /not a scene owner/);
@@ -41,7 +41,7 @@ test('distance display and order use the prepared position, never the legacy orb
   assert.ok(halley.distance.value > 30 && halley.distance.value < 40);
   assert.match(distanceDescription(halley.distance), /Distance from the Sun at JD/);
   assert.ok(!('distanceAu' in halley));
-  assert.ok(PLANET_SEARCH_OBJECTS.every((object, index) => index === 0 || object.distance.meters >= PLANET_SEARCH_OBJECTS[index - 1]!.distance.meters));
+  assert.ok(SEARCH_OBJECTS.every((object, index) => index === 0 || object.distance.meters >= SEARCH_OBJECTS[index - 1]!.distance.meters));
   const cluster = requireObject('virgo-cluster');
   assert.equal(cluster.distance.quantity, 'comoving');
   assert.equal(cluster.distance.epochJdTt, null, 'navigation epoch must not become a measured distance epoch');

@@ -1,0 +1,138 @@
+---
+import type { Props } from "../object-shell-types";
+import ObjectBreadcrumbs from "./ObjectBreadcrumbs.astro";
+import BodyOverview from "./BodyOverview.astro";
+import { orderScientificCharts } from "../scientific-chart-order.mts";
+import ObjectCard from "./ObjectCard.astro";
+import ObjectCardHeader from "./ObjectCardHeader.astro";
+import ObjectFactsheet from "./ObjectFactsheet.astro";
+import SystemList from "./SystemList.astro";
+import { prepareBodyRelations } from "../prepare-body-moons.mts";
+import DatasetContextPanels from "./DatasetContextPanels.astro";
+import DatasetLenses from "./DatasetLenses.astro";
+import InformationTabs from './InformationTabs.astro';
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], lenses, destinations } = Astro.props;
+const hasLenses = Boolean(lenses && lenses.controls.length > 0);
+const relations = prepareBodyRelations(objectId);
+const tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' },
+  ...(relations ? [{ id: 'moons', label: relations.label }] : [])];
+const orderedCharts = orderScientificCharts(charts);
+const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
+---
+
+<ObjectCard class="object-information-panel">
+  <BodyOverview {objectId} {title} {introduction} {facts} {moreFacts} />
+      {destinations && <section class="object-destination-intro">
+        <button class="object-find-destination" type="button">Find a city</button>
+        <p>{destinations.description}</p>
+      </section>}
+      {/* The overview card above carries the page heading; this tabbed card repeats the title. */}
+      <ObjectCardHeader {objectId} heading={false} {title} {introduction}>
+          <ObjectBreadcrumbs {objectId} />
+      </ObjectCardHeader>
+      <InformationTabs idPrefix={objectId} {tabs} />
+      <p data-dataset-notice role="status" aria-live="polite" hidden></p>
+      <div class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset"
+        role="region" aria-label="Datasets">
+      {defaultChart && <details
+        id={`${objectId}-charts`}
+        class="object-chart-switcher"
+        style="display: none;"
+        data-active-chart={defaultChart.id}
+        aria-labelledby={`${objectId}-charts-title`}
+      >
+        <summary class="object-panel-summary object-chart-switcher-header">
+          <h2
+            id={`${objectId}-charts-title`}
+            class="object-panel-heading object-chart-switcher-title"
+            aria-live="polite"
+          >
+            {orderedCharts.map((chart) => (
+              <span
+                class="object-chart-label"
+                data-chart-label={chart.id}
+                hidden={chart.id !== defaultChart.id}
+              >{chart.title.label}</span>
+            ))}
+          </h2>
+          <div class="object-chart-switcher-controls" aria-label="Choose chart">
+            <button
+              class="object-chart-step object-chart-previous"
+              type="button"
+              data-chart-step="-1"
+              aria-controls={`${objectId}-chart-slides`}
+              aria-label="Previous chart"
+              disabled={orderedCharts.length < 2}
+            ><span aria-hidden="true">‹</span></button>
+            <button
+              class="object-chart-step object-chart-next"
+              type="button"
+              data-chart-step="1"
+              aria-controls={`${objectId}-chart-slides`}
+              aria-label="Next chart"
+              disabled={orderedCharts.length < 2}
+            ><span aria-hidden="true">›</span></button>
+          </div>
+        </summary>
+        <div id={`${objectId}-chart-slides`} class="object-chart-slides">
+          {orderedCharts.map((chart) => (
+            <figure
+              id={`${objectId}-${chart.id}`}
+              class="object-chart-slide"
+              data-chart-id={chart.id}
+              data-chart-title={chart.title.label}
+              aria-label={chart.title.label}
+              hidden={chart.id !== defaultChart.id}
+            >
+              <img
+                class="object-chart"
+                src={chart.src}
+                width={chart.width}
+                height={chart.height}
+                alt={chart.alt}
+              />
+            </figure>
+          ))}
+        </div>
+      </details>}
+      {hasLenses && lenses && <DatasetLenses {objectId} {lenses} />}
+      {galleries.map((gallery) => (
+      <details id={`${objectId}-${gallery.id}`} class="object-gallery-panel" hidden={gallery.hidden}>
+        <summary class="object-panel-summary">
+          <h2 class="object-panel-heading">{gallery.title.label}</h2>
+          <span class="object-panel-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="object-gallery" aria-label={gallery.title.label}>
+          {gallery.items.map((item) => (
+            <figure class="object-gallery-item" data-gallery-item={item.id}>
+              <img
+                class="object-gallery-image"
+                src={item.src}
+                width={item.width}
+                height={item.height}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="object-gallery-caption">
+                <strong>{item.label}</strong>
+                <span>{item.caption}</span>
+                <a class="object-gallery-source" href={item.sourceUrl} target="_blank" rel="noreferrer">Archive file</a>
+              </figcaption>
+            </figure>
+          ))}
+          {gallery.qualification && <p class="object-gallery-qualification">{gallery.qualification}</p>}
+        </div>
+      </details>
+      ))}
+      </div>
+      <div class="object-card-tabpanel" id={`${objectId}-factsheet-content`} data-information-panel="factsheet"
+        role="region" aria-label="Factsheet">
+        <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
+      </div>
+      <DatasetContextPanels {...Astro.props} />
+      {relations && <div class="object-card-tabpanel object-results-scroll" id={`${objectId}-moons-content`} data-information-panel="moons"
+        role="region" aria-label={relations.label}>
+        <SystemList {relations} />
+      </div>}
+    </ObjectCard>

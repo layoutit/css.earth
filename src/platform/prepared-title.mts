@@ -1,25 +1,25 @@
 export interface TitleSource { label: string; viewBox: string; path: string; source: string; sourceUrl: string; width: number; height: number; weight: number; opticalSize: number; fontSize: number; letterSpacing: number; baseline: number; }
 export type PreparedTitle = TitleSource & ReturnType<typeof createPreparedTitleLayout> & { generator: string };
 
-import { PLANET_TITLE_RECIPE } from "./planet-title-recipe.mts";
+import { OBJECT_TITLE_RECIPE } from "./object-title-recipe.mts";
 
 const SAFE_EXPORT = /^[A-Z][A-Z0-9_]*$/u;
 const VIEW_BOX = /^0 0 ([1-9][0-9]*(?:\.[0-9]+)?) ([1-9][0-9]*(?:\.[0-9]+)?)$/u;
 
-export const PLANET_TITLE_STANDARD = Object.freeze({
-  reference: PLANET_TITLE_RECIPE.reference,
-  sourceViewBoxWidth: PLANET_TITLE_RECIPE.referenceViewBoxWidth,
-  renderedWidth: PLANET_TITLE_RECIPE.referenceRenderedWidth,
-  baseline: PLANET_TITLE_RECIPE.baseline,
+export const OBJECT_TITLE_STANDARD = Object.freeze({
+  reference: OBJECT_TITLE_RECIPE.reference,
+  sourceViewBoxWidth: OBJECT_TITLE_RECIPE.referenceViewBoxWidth,
+  renderedWidth: OBJECT_TITLE_RECIPE.referenceRenderedWidth,
+  baseline: OBJECT_TITLE_RECIPE.baseline,
   lineBoxHeight:
-    PLANET_TITLE_RECIPE.viewBoxHeight *
-      (PLANET_TITLE_RECIPE.referenceRenderedWidth /
-        PLANET_TITLE_RECIPE.referenceViewBoxWidth),
+    OBJECT_TITLE_RECIPE.viewBoxHeight *
+      (OBJECT_TITLE_RECIPE.referenceRenderedWidth /
+        OBJECT_TITLE_RECIPE.referenceViewBoxWidth),
 });
 
-const PLANET_TITLE_SCALE =
-  PLANET_TITLE_STANDARD.renderedWidth /
-  PLANET_TITLE_STANDARD.sourceViewBoxWidth;
+const OBJECT_TITLE_SCALE =
+  OBJECT_TITLE_STANDARD.renderedWidth /
+  OBJECT_TITLE_STANDARD.sourceViewBoxWidth;
 
 
 
@@ -42,11 +42,11 @@ export function createPreparedTitleLayout(source: TitleSource) {
   const sourceViewBoxWidth = Number(match[1]);
   const sourceViewBoxHeight = Number(match[2]);
   const renderViewBoxWidth = Math.max(sourceViewBoxWidth, source.width);
-  const renderPathOffsetY = PLANET_TITLE_STANDARD.baseline - source.baseline;
+  const renderPathOffsetY = OBJECT_TITLE_STANDARD.baseline - source.baseline;
   return Object.freeze({
     renderViewBox: `0 0 ${renderViewBoxWidth} ${sourceViewBoxHeight}`,
-    renderWidth: stableNumber(renderViewBoxWidth * PLANET_TITLE_SCALE),
-    renderHeight: stableNumber(sourceViewBoxHeight * PLANET_TITLE_SCALE),
+    renderWidth: stableNumber(renderViewBoxWidth * OBJECT_TITLE_SCALE),
+    renderHeight: stableNumber(sourceViewBoxHeight * OBJECT_TITLE_SCALE),
     renderPathOffsetY: stableNumber(renderPathOffsetY),
   });
 }

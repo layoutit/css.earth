@@ -37,7 +37,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - [source/manifest.json](source/manifest.json) pins acquisition URLs, byte counts, checksums, credits, and consumers.
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ceres) and the shared browser conformance harness.
+- Focused checks are defined in the [unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/ceres) and the shared browser conformance harness.
 
 ### Ammonium band from our VIR reduction (21 September 2026)
 
@@ -62,11 +62,11 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 ### Clay band, and the archived maps (September 2026)
 
-- **Decoding.** `tools/objects/terrestrial-layers/pds-float-map.mts` reads both maps through their detached labels and checks every layout and projection field against the recipe. Six values per map at the label's pixel centres match an independent Python read of the archive bytes, and the painted colors match the scale ([unit tests](../../../tests/objects/unit/ceres/science-surfaces.test.mts)).
+- **Decoding.** `tools/objects/terrestrial-layers/pds-float-map.mts` reads both maps through their detached labels and checks every layout and projection field against the recipe. Six values per map at the label's pixel centres match an independent Python read of the archive bytes, and the painted colors match the scale ([unit tests](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/ceres/science-surfaces.test.mts)).
 - **Handedness and registration.** Frigeri et al. (2019) note that Haulani crater has a low 2.7 µm band depth; the archived map also dips at Cerealia Facula in Occator. Within 3° of their [IAU Gazetteer](https://planetarynames.wr.usgs.gov/Page/CERES/target) centres (10.77°E 5.80°N; 239.6°E 19.7°N) the median 2.7 µm band depth is 0.232 and 0.235, against 0.259 and 0.255 at the mirrored longitudes. The lowest 1% of pixels near Cerealia sit at 240.5°E 19.4°N, 0.9° from the Gazetteer centre. Dantu, high in the 3.1 µm band in the paper's figure, has its highest 1% at 138.3°E 26.1°N (Gazetteer 138.2°E 24.3°N).
 - **Values against the paper.** The archived 2.7 µm map has median 0.255 (1st to 99th percentile 0.2245 to 0.2859); the paper's histogram peaks near 0.20. The archived 3.1 µm map has median 0.064 (0.0432 to 0.0925); the paper peaks near 0.087. On the paper's scales most of Ceres was red in the Clay band lens and blue in the Ammonium band lens, so each scale now spans its map's own 2nd to 98th percentile.
 - **Why the values differ from the paper.** The archive's catalog says it follows Ammannito et al. (2016): Survey spectra only, a continuum between the two local maxima in 2.58–3.00 µm (OH) and 2.85–3.30 µm (NH4), and no artifact removal. Frigeri et al. (2019, Section 3.1) used Survey and HAMO spectra, other continuum points, and the artifact correction of Carrozzo et al. (2016), which includes "a new instrument response function" tied to ground-based telescope spectra of Ceres. That correction was never released: the PDS calibrated cubes still carry the 2016 V2 response. We reduced one HAMO cube (`VIR_IR_1B_1_493158996`, 18 August 2015) ourselves with Frigeri's continuum and the public calibration: after a three-channel boxcar for the odd/even detector pattern, its 2.7 µm band depth has median 0.272, near the archive's 0.255 and above the paper's 0.20. Thermal emission cannot close the gap: at 235 K it adds about 1.5% of the signal at 3.0 µm.
-- **In the browser.** [Clay band](evidence/band-depth/clay-band.png) and [Ammonium band](evidence/band-depth/ammonium-band.png) at the default camera, headless Chromium, 1440 × 900 at DPR 2, saved at 1440 pixels wide, Shadows off; the page loaded each lens's own surface and pole images with no console errors. Surface rules for both lenses are in `src/renderers/css/styles/planet-surfaces.css`.
+- **In the browser.** [Clay band](evidence/band-depth/clay-band.png) and [Ammonium band](evidence/band-depth/ammonium-band.png) at the default camera, headless Chromium, 1440 × 900 at DPR 2, saved at 1440 pixels wide, Shadows off; the page loaded each lens's own surface and pole images with no console errors. Surface rules for both lenses are in `src/renderers/css/styles/body-surfaces.css`.
 
 ## Registration and coverage
 

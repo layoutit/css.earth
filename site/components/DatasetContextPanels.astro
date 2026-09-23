@@ -1,5 +1,5 @@
 ---
-import type { Props as ShellProps } from '../planet-shell-types';
+import type { Props as ShellProps } from '../object-shell-types';
 interface Props {
   objectId: string;
   lenses?: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
@@ -7,7 +7,7 @@ interface Props {
 }
 import { datasetContributors } from '../dataset-context.mts';
 import { EXPLORATION } from '../exploration-catalog.mts';
-import PlanetCard from './PlanetCard.astro';
+import ObjectCard from './ObjectCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
 const { objectId, lenses, directSourceIdsByLens } = Astro.props;
@@ -53,48 +53,48 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
   return bands.every(Boolean) && new Set(bands).size === bands.length;
 };
 ---
-<aside class="planet-dataset-context-rail" data-dataset-context-owner={objectId} aria-label="Selected dataset context">
+<aside class="object-dataset-context-rail" data-dataset-context-owner={objectId} aria-label="Selected dataset context">
   {contexts.map(context => {
     const credited = contributors(context);
     const tabbed = credited.length > 1 && distinctBands(credited);
     // Without tabs each contributor keeps its own card, so one card per group.
     const groups = tabbed ? [credited] : credited.map(entry => [entry]);
     return <div data-dataset-context={context.lens.id} hidden={context.lens.id !== lenses?.defaultLens}>
-      {groups.map(group => <PlanetCard class="planet-dataset-context-card" role="region"
+      {groups.map(group => <ObjectCard class="object-dataset-context-card" role="region"
         aria-label={tabbed ? 'Credited machines' : group[0].title}>
         {tabbed && <InformationTabs idPrefix={`${objectId}-${context.lens.id}`}
           group={`context-${objectId}-${context.lens.id}`} label="Credited machines" panelSuffix="panel"
           tabs={group.map(entry => ({ id: entry.id, label: entry.band ?? entry.title }))} />}
         {group.map(entry => {
           const publishedBackdrop = entry.image?.kind.startsWith('published-') ?? false;
-          return <div class="planet-card-tabpanel"
+          return <div class="object-card-tabpanel"
           id={tabbed ? `${objectId}-${context.lens.id}-${entry.id}-panel` : undefined}
           data-information-group={tabbed ? `context-${objectId}-${context.lens.id}` : undefined}
           data-information-panel={tabbed ? entry.id : undefined}
           role={tabbed ? 'region' : undefined}
           aria-label={tabbed ? entry.band : undefined}
           tabindex={tabbed ? 0 : undefined}>
-          <article class="planet-facility" {...entry.attribute}>
+          <article class="object-facility" {...entry.attribute}>
             <SelectedContent title={entry.title} lead={entry.lead} description={entry.description}>
-              <div slot="header" class:list={{ 'planet-facility-preview': Boolean(entry.image || entry.emblem),
-                'planet-facility-preview-overlay': publishedBackdrop }}>
-                <div class:list={['planet-facility-heading', publishedBackdrop && 'planet-facility-heading-backdrop']}>
-                  <h3 class="planet-lens-details-title">{entry.title}</h3>
-                  {entry.dates && <span class="planet-selected-content-meta">{entry.dates}</span>}
+              <div slot="header" class:list={{ 'object-facility-preview': Boolean(entry.image || entry.emblem),
+                'object-facility-preview-overlay': publishedBackdrop }}>
+                <div class:list={['object-facility-heading', publishedBackdrop && 'object-facility-heading-backdrop']}>
+                  <h3 class="object-lens-details-title">{entry.title}</h3>
+                  {entry.dates && <span class="object-selected-content-meta">{entry.dates}</span>}
                 </div>
-                {entry.image && <a class:list={['planet-facility-image-link', entry.image.subject && 'planet-facility-image-crop']}
+                {entry.image && <a class:list={['object-facility-image-link', entry.image.subject && 'object-facility-image-crop']}
                   style={entry.image.subject && `--frame-w:${entry.image.width};--frame-h:${entry.image.height};--subject-x:${entry.image.subject.left};--subject-y:${entry.image.subject.top};--subject-w:${entry.image.subject.width};--subject-h:${entry.image.subject.height}`}
                   href={entry.image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} artwork — ${entry.image.credit}`}>
-                  <img class="planet-facility-image" src={entry.image.src} width={entry.image.width} height={entry.image.height} alt={`${entry.title} illustration`} loading="lazy" decoding="async" />
+                  <img class="object-facility-image" src={entry.image.src} width={entry.image.width} height={entry.image.height} alt={`${entry.title} illustration`} loading="lazy" decoding="async" />
                 </a>}
-                {entry.emblem && <a class={entry.image ? 'planet-facility-emblem' : 'planet-facility-image-link'} href={entry.emblem.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} emblem — ${entry.emblem.credit}`}>
-                  <img class="planet-facility-image" src={entry.emblem.src} width={entry.emblem.width} height={entry.emblem.height} alt={`${entry.title} emblem`} loading="lazy" decoding="async" />
+                {entry.emblem && <a class={entry.image ? 'object-facility-emblem' : 'object-facility-image-link'} href={entry.emblem.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} emblem — ${entry.emblem.credit}`}>
+                  <img class="object-facility-image" src={entry.emblem.src} width={entry.emblem.width} height={entry.emblem.height} alt={`${entry.title} emblem`} loading="lazy" decoding="async" />
                 </a>}
               </div>
             </SelectedContent>
           </article>
         </div>; })}
-      </PlanetCard>)}
+      </ObjectCard>)}
     </div>;
   })}
 </aside>

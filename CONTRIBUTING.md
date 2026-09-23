@@ -50,7 +50,7 @@ directory? Then the baked bytes must reach R2 **before the pull request can
 merge**, and the tracked inventory must be part of the diff. Git holds the
 inventory; R2 holds the bytes.
 
-1. Bake the object. `pnpm prepare:planets --object=<id>` for a body,
+1. Bake the object. `pnpm prepare:objects --object=<id>` for a body,
    `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, `pnpm prepare:checkout` restores the pinned source downloads first.
 2. Publish the bytes: `node tools/assets/publish-runtime-assets.mts --object=<id>`.
@@ -145,8 +145,8 @@ Preparation uses separate publication/browser and galaxy/world lanes; its requir
 status also needs both to pass. The galaxy writer finishes before world readers.
 Compiled artifacts use exact-input caches; these never cache a test verdict.
 Package and renderer caches follow compiler inputs; preparation retains a
-conservative whole-tree key. Runtime-only jobs omit preparation declarations;
-compiler jobs and shell checks keep them, with separate cache identities. Cached
+conservative whole-tree key. The preparation bundle ships JS only: type checks
+read its sources through the root `#preparation/*` imports. Cached
 baked JSON remains subject to the installer's byte and SHA-256 checks on every run.
 Cold and cached CI timings must be reported separately.
 

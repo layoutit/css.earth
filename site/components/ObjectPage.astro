@@ -1,10 +1,10 @@
 ---
-import PlanetLayout from '../layouts/PlanetLayout.astro';
+import ObjectLayout from '../layouts/ObjectLayout.astro';
 import PreparedObjectHead from './PreparedObjectHead.astro';
 import PreparedObjectPanel from './PreparedObjectPanel.astro';
 import { loadObjectPageData } from '../object-page-data.mts';
 import { objectPageStyles } from '../object-page-contract.mts';
-import shellCss from '../planet-shell.css?inline';
+import shellCss from '../object-shell.css?inline';
 import { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
 import { rewriteSceneCss, resolveSceneAddressesDeep, withPreparedAssetOrigin } from '../asset-origin.mts';
 
@@ -19,13 +19,13 @@ const cssFiles = import.meta.glob<string>('../../src/**/*.css', { query: '?inlin
 const descriptor = scene?.descriptor ?? await withPreparedAssetOrigin(preparedPage.descriptor);
 const preparedContent = await resolveSceneAddressesDeep(await contentFiles[`../../src/objects/${objectId}/prepared/content.json`]());
 const styles = await Promise.all(objectPageStyles(descriptor)
-  .map(async path => ({ path, css: await rewriteSceneCss(path === 'site/planet-shell.css' ? shellCss : await cssFiles[`../../${path}`]()) })));
+  .map(async path => ({ path, css: await rewriteSceneCss(path === 'site/object-shell.css' ? shellCss : await cssFiles[`../../${path}`]()) })));
 ---
 
-<PlanetLayout objectId={objectId} navigation={navigation} scene={scene} descriptor={descriptor}>
-  <Fragment slot="planet-head">
+<ObjectLayout objectId={objectId} navigation={navigation} scene={scene} descriptor={descriptor}>
+  <Fragment slot="object-head">
     {styles.map(({ path, css }) => <style is:inline data-object-style={path} set:html={css} />)}
     {!navigation && <PreparedObjectHead preparedAssets={preparedPage.assets} />}
   </Fragment>
-  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} navigation={navigation} />
-</PlanetLayout>
+  <PreparedObjectPanel slot="object-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} navigation={navigation} />
+</ObjectLayout>

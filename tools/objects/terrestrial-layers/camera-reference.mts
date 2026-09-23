@@ -11,7 +11,7 @@ const [sourceDirectory,cameraPath,imagePath,output] = process.argv.slice(2);
 if (!sourceDirectory || !cameraPath || !imagePath || !output || process.argv.length !== 6) throw new TypeError('Usage: camera-reference.mts <source-directory> <camera.json> <image> <output>');
 const config=parseRadialLoaderConfig(JSON.parse(await readFile(resolve(sourceDirectory,'preparation/terrestrial.json'),'utf8')));
 const camera: unknown=JSON.parse(await readFile(cameraPath,'utf8'));
-const source=await createSourceManifest({planetId:config.namespace,planetName:config.displayName ?? config.namespace,sourceRoot:sourceDirectory});
+const source=await createSourceManifest({objectId:config.namespace,objectName:config.displayName ?? config.namespace,sourceRoot:sourceDirectory});
 const radial=await loadRadialTerrain({config,sourceDirectory,source});
 if (!radial) throw new TypeError("Camera reference requires a source mesh.");
 const decoded=decodeOsirisReflectance(await readFile(imagePath),camera,true),frame=castSourceRays(matrixCamera('archived-closure',decoded.camera),requireTerrainMesh(radial.grid),decoded.width,decoded.height);

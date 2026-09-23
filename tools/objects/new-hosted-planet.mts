@@ -63,7 +63,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       sources: ['raster', 'geometry', 'celestial', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]) },
-    page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css'], metadata: { url: 'prepared/page.json' } },
+    page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css'], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: 'exoplanet', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
       description: spec.description, systemName: spec.system, order, context: { order } },
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
@@ -99,7 +99,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
 
   put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'] });
   put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: 'composite' });
-  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@1', planetId: id, owner: 'object', presentation: { size: 5 },
+  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 },
     source: { path: 'presentation/context.png' }, operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' }, { type: 'png' }],
     context: { pixels: 512 } });
   if (rotation === 'unmeasured') {
@@ -148,7 +148,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',
     acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
-  put(`${o}/source/manifest.json`, { schema: `css${id}-authoritative-sources@2`, inputs: [
+  put(`${o}/source/manifest.json`, { schema: `cssearth-authoritative-sources@2`, inputs: [
     { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit,
       license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources',
       redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'],

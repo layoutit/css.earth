@@ -41,8 +41,8 @@ test("prepares phase charts without runtime derivation", async () => {
     });
     assert.equal(outputs.length, 2);
     const contents = await Promise.all(outputs.map((path) => readFile(path, "utf8")));
-    assert.match(contents[0], /planet-photometric-phase-chart/u);
-    assert.match(contents[1], /planet-photometric-phase-chart/u);
+    assert.match(contents[0], /object-photometric-phase-chart/u);
+    assert.match(contents[1], /object-photometric-phase-chart/u);
     assert.ok(contents.every((svg) => svg.includes("<metadata>")));
   } finally {
     await rm(outputRoot, { recursive: true, force: true });

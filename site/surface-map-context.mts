@@ -83,7 +83,7 @@ export function createSurfaceMapReader({ documentTarget, windowTarget }: { docum
       if (!entry || entry.source !== source || entry.body !== body || entry.scene !== scene || entry.frame !== camera.navigation.frame) {
         const nodes: HTMLElement[] = [];
         for (let node: HTMLElement | null = body; node && node !== scene; node = node.parentElement) nodes.push(node);
-        entry = { source, config, body, scene, nodes, stage: scene.closest('.planet-stage'),
+        entry = { source, config, body, scene, nodes, stage: scene.closest('.object-stage'),
           frame: camera.navigation.frame, axes: null, animations: null, times: [] };
         entries.set(map, entry);
         if (!observer) {
@@ -124,7 +124,7 @@ export function surfaceMapViewport(scene: HTMLElement, optics: ReturnType<Object
       top: (rect.top - oy) / optics.focalPixels, bottom: (rect.bottom - oy) / optics.focalPixels };
   }
   const root = requiredElement(scene.ownerDocument, '.polycss-camera').getBoundingClientRect();
-  const stage = requiredElement(scene.ownerDocument, '.planet-stage').getBoundingClientRect();
+  const stage = requiredElement(scene.ownerDocument, '.object-stage').getBoundingClientRect();
   const ox = root.x + root.width / 2 + (optics.principalOffsetPixels?.[0] ?? 0);
   const oy = root.y + root.height / 2 + (optics.principalOffsetPixels?.[1] ?? 0);
   return {

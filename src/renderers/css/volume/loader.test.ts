@@ -25,19 +25,24 @@ test('loads the checked-in density artifact with its complete fixed asset bank',
   expect(Boolean(payload.sky)).toBe(Boolean(recipe.sky));
   expect(baked.quads).toHaveLength(count);
   const nonempty = baked.quads.filter(quad => quad.alphaCoverage !== 0);
-  expect(payload.resources).toHaveLength(nonempty.length + sky.length);
+  // The bank also carries one billboard view per prepared direction, which is what a distant camera renders
+  // instead of the slice stack.
+  const views = payload.impostors?.views ?? [];
+  expect(views).toHaveLength(26);
+  expect(payload.resources).toHaveLength(nonempty.length + sky.length + views.length);
   expect(slices.map(leaf => leaf.id).sort()).toEqual(nonempty.map(quad => quad.id).sort());
   // The prepared traversal owns presentation order; source depth order is not
   // a loader instruction. Keep every leaf and transport the authored ordering.
   const prepared = JSON.parse(new TextDecoder().decode(bytes));
   expect(payload.stacks).toEqual(prepared.data.stacks);
-  const used = [...slices, ...sky].map(image => image.texturePath).sort();
+  const used = [...slices, ...sky, ...views].map(image => image.texturePath).sort();
   expect(payload.resources.map(resource => resource.path).sort()).toEqual(used);
   const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u, ''), base);
   const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path)).sort();
   // Baked transparent slabs remain reproducible preparation evidence, but
   // are absent from the runtime resource closure and mounted scene.
-  expect(ownedImages).toEqual([...baked.quads.map(quad => quad.texturePath), ...sky.map(face => face.texturePath)].sort());
+  expect(ownedImages).toEqual([...baked.quads.map(quad => quad.texturePath), ...sky.map(face => face.texturePath),
+    ...views.map(view => view.texturePath)].sort());
   const skyPaths = new Set(sky.map(face => face.texturePath));
   const banks = { volume: { images: slices.length, bytes: 0, decodedRgbaBytes: 0 }, sky: { images: sky.length, bytes: 0, decodedRgbaBytes: 0 } };
   for (const resource of payload.resources) {

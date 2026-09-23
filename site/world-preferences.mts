@@ -1,5 +1,5 @@
 import type { createApplicationWorldContext } from './application-world-context.mts';
-import type { ShellOptions } from './planet-shell-client.mts';
+import type { ShellOptions } from './object-shell-client.mts';
 
 type World = Awaited<ReturnType<ReturnType<typeof createApplicationWorldContext>['mount']>>;
 

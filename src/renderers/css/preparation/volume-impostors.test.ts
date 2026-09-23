@@ -187,3 +187,57 @@ test('rejects source identity errors, unsafe output collisions and unsupported p
       style: { ...first.style, transform: `matrix3d(${m})` } }] }) } }), /affine CSS matrix/);
   assert.equal(writes, 0);
 });
+
+test('leaves that share one delivered atlas render the same views as leaves that own their textures', async () => {
+  // Delivered lens banks pack every slice of an axis into one atlas image, which is how the Magellanic Clouds ship.
+  // The leaf's CSS background is the mapping, so the same pixels must come out either way, with one decode per image.
+  const raster = (color: Rgba) => ({ width: 4, height: 4, data: Uint8Array.from(Array.from({ length: 16 }, () => color).flat()) });
+  const red = raster([220, 40, 40, 255]), blue = raster([40, 80, 220, 255]);
+  const separate = await fixture([
+    { axis: 'x', depth: 0, color: [90, 90, 90, 255], raster: raster([90, 90, 90, 255]) },
+    { axis: 'y', depth: 0, color: [60, 60, 60, 255], raster: raster([60, 60, 60, 255]) },
+    { axis: 'z', depth: -0.5, color: [220, 40, 40, 255], raster: red },
+    { axis: 'z', depth: 0.5, color: [40, 80, 220, 255], raster: blue },
+  ]);
+  // One image holding both slices, each with the edge bleed the packer writes so bilinear taps never cross a tile.
+  const ATLAS_WIDTH = 10, TILE_ORIGIN = [0, 6];
+  const atlasData = new Uint8Array(ATLAS_WIDTH * 4 * 4);
+  for (let y = 0; y < 4; y++) for (let x = 0; x < ATLAS_WIDTH; x++) {
+    const source = x < 5 ? red : blue, sx = Math.min(3, Math.max(0, (x < 5 ? x : x - 6)));
+    for (let c = 0; c < 4; c++) atlasData[(y * ATLAS_WIDTH + x) * 4 + c] = source.data[(y * 4 + sx) * 4 + c]!;
+  }
+  const atlasPng = await sharp(atlasData, { raw: { width: ATLAS_WIDTH, height: 4, channels: 4 } }).png().toBuffer();
+  const atlasPath = 'atlases/z.png';
+  const leaves = separate.volume.stacks.find(stack => stack.axis === 'z')!.leaves;
+  const atlased = validatePreparedCssVolume({ ...separate.volume,
+    stacks: separate.volume.stacks.map(stack => stack.axis !== 'z' ? stack : { ...stack,
+      leaves: stack.leaves.map((leaf, index) => {
+        const [backgroundWidth, backgroundHeight] = leaf.style.backgroundSize.split(' ').map(Number.parseFloat);
+        const [backgroundX, backgroundY] = leaf.style.backgroundPosition.split(' ').map(Number.parseFloat);
+        // The background widens with the atlas and the offset walks to this leaf's tile, so the leaf still covers
+        // exactly the pixels it owned when it had its own image.
+        const perPixel = backgroundWidth! / 4;
+        return { ...leaf, texturePath: atlasPath, style: { ...leaf.style,
+          backgroundSize: `${backgroundWidth! * (ATLAS_WIDTH / 4)}px ${backgroundHeight}px`,
+          backgroundPosition: `${backgroundX! - TILE_ORIGIN[index]! * perPixel}px ${backgroundY}px` } };
+      }) }),
+    resources: [...separate.volume.resources.filter(resource => !leaves.some(leaf => leaf.texturePath === resource.path)),
+      { path: atlasPath, sha256: hash(atlasPng), bytes: atlasPng.length, width: ATLAS_WIDTH, height: 4 }] });
+  const atlasFixture = { volume: atlased, bytes: new Map([...separate.bytes, [atlasPath, atlasPng]]) };
+  const one = await bake(separate), two = await bake(atlasFixture);
+  assert.equal(two.reads.filter(path => path === atlasPath).length, 1, 'A shared atlas is decoded once.');
+  for (const direction of [[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 1, 1]] as VolumeVector[]) {
+    const expected = await one.image(direction), actual = await two.image(direction);
+    assert.deepEqual([...actual.data], [...expected.data], `Atlased view ${actual.view.id} differs.`);
+  }
+});
+
+test('an atlased leaf whose background does not cover its texture is refused', async () => {
+  const white = { width: 4, height: 4, data: Uint8Array.from(Array.from({ length: 16 }, () => [255, 255, 255, 255]).flat()) };
+  const input = await fixture([{ axis: 'x', depth: 0, color: [255, 255, 255, 255], raster: white },
+    { axis: 'y', depth: 0, color: [255, 255, 255, 255], raster: white },
+    { axis: 'z', depth: 0, color: [255, 255, 255, 255], raster: white }]);
+  const broken = { ...input.volume, stacks: input.volume.stacks.map(stack => stack.axis !== 'z' ? stack : { ...stack,
+    leaves: stack.leaves.map(leaf => ({ ...leaf, style: { ...leaf.style, backgroundSize: '3px 3px' } })) }) };
+  await assert.rejects(bake(input, WHITE, broken), /background does not cover/u);
+});

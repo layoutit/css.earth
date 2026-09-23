@@ -30,8 +30,8 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
   catalogue.setEntries(Array.from({ length: 100 }, (_, index) => entry(index)));
   // 56 px rows (48 px and an 8 px gap): 100 rows less the trailing gap; a 420 px scrollport shows 8, plus 6 above and below.
   assert.equal(list.style.height, '5592px');
-  assert.equal(list.querySelectorAll('.planet-object-item').length, 20);
-  assert.equal(list.querySelector<HTMLElement>('[data-catalogue-index="0"] .planet-object-name')?.textContent, 'Earth 0');
+  assert.equal(list.querySelectorAll('.object-item').length, 20);
+  assert.equal(list.querySelector<HTMLElement>('[data-catalogue-index="0"] .object-name')?.textContent, 'Earth 0');
   assert.equal(list.querySelector('[data-catalogue-index="0"]')?.getAttribute('aria-setsize'), '100');
 
   scroll.scrollTop = 2800;
@@ -51,13 +51,13 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
 
   scroll.scrollTop = 0;
   catalogue.setEntries([entry(90), entry(91)]);
-  assert.equal(list.querySelector<HTMLElement>('[data-catalogue-index="0"] .planet-object-name')?.textContent, 'Earth 90');
-  assert.equal(list.querySelectorAll('.planet-object-item').length, 2);
+  assert.equal(list.querySelector<HTMLElement>('[data-catalogue-index="0"] .object-name')?.textContent, 'Earth 90');
+  assert.equal(list.querySelectorAll('.object-item').length, 2);
 
   catalogue.setSelection('Earth 91', '');
   assert.equal(list.querySelector('[data-catalogue-index="1"] a')?.getAttribute('aria-current'), 'page');
   catalogue.clear();
-  assert.equal(list.querySelectorAll('.planet-object-item').length, 0);
+  assert.equal(list.querySelectorAll('.object-item').length, 0);
   assert.equal(list.style.height, '0px');
   catalogue.destroy();
 });

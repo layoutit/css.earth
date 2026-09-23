@@ -6,6 +6,7 @@ import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe
 import { sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../renderers/css/preparation/volume.js';
+import { prepareVolumeImpostors } from '../../renderers/css/preparation/volume-impostors.js';
 import { acquireVolumeSource } from './acquisition.js';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
 import { parseSkyRecipe } from '../sky/config.js';
@@ -27,6 +28,15 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   await mkdir(outputDirectory, { recursive: true });
   const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe });
   let data = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, slices, recipe });
+  // One flat image of the whole cloud per viewing direction. Without them a distant volume has nothing to hand off
+  // to, so all of its slices stay mounted and composited: the galaxy alone keeps 1,368 elements in every page.
+  data = await prepareVolumeImpostors({ volume: data, brightness: { overall: 1, x: 1, y: 1, z: 1 }, prefix: 'impostors',
+    readResource: path => readFile(resolve(outputDirectory, path)),
+    writeResource: async (path, bytes) => {
+      const target = resolve(outputDirectory, path);
+      await mkdir(dirname(target), { recursive: true });
+      await writeFile(target, bytes);
+    } });
   if (recipe.sky) {
     const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(sourceDirectory, recipe.sky)).toString('utf8')));
     const skyDirectory = dirname(containedPath(sourceDirectory, recipe.sky.path));
@@ -48,7 +58,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   }
   await retireVolumeTextures(outputDirectory, previousTextures, slices.quads.map(quad => quad.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
-    await inventoryPreparedAssets({ planetId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
+    await inventoryPreparedAssets({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   const decodedBytes = data.resources.reduce((sum, resource) => sum + resource.width * resource.height * 4, 0);
   console.log(`PREPARED ${descriptor.id}: ${slices.quads.length} PolyCSS leaves; ${decodedBytes} decoded RGBA bytes; ${outputPath}`);

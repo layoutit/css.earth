@@ -2,7 +2,7 @@ import type { BrowserWindow } from './browser-types.mts';
 /** Align only visible charts. Hidden content owns no measurement frame, and
  * reading all positions before publishing avoids per-chart layout flushes. */
 export function createChartPixelAlignmentController(drawer: HTMLElement, windowTarget: BrowserWindow) {
-  const charts = [...drawer.querySelectorAll<HTMLElement>('.planet-chart')];
+  const charts = [...drawer.querySelectorAll<HTMLElement>('.object-chart')];
   if (!charts.length) return { destroy() {} };
   const visible = new Set<HTMLElement>(), offsets = new Map<HTMLElement, number>(), events = new AbortController();
   let frame: number | null = null, disposed = false;
@@ -41,7 +41,7 @@ export function createChartPixelAlignmentController(drawer: HTMLElement, windowT
     observer.observe(chart);
     chart.addEventListener('load', schedule, { signal: events.signal });
   }
-  for (const switcher of drawer.querySelectorAll('.planet-chart-switcher')) switcher.addEventListener('chartchange', schedule, { signal: events.signal });
+  for (const switcher of drawer.querySelectorAll('.object-chart-switcher')) switcher.addEventListener('chartchange', schedule, { signal: events.signal });
   windowTarget.addEventListener('resize', schedule, { signal: events.signal });
   return {
     destroy() {

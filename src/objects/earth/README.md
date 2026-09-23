@@ -316,7 +316,7 @@ pressure/temperature layers to static SVG charts.
 <details>
 <summary>Mantle tomography calculation and subset reproduction</summary>
 
-`data/planets/earth.json` is prepared from NASA Science record 48583, `Facts About Earth`.
+`data/object-information/earth.json` is prepared from NASA Science record 48583, `Facts About Earth`.
 NASA's block-feed endpoint currently fails server-side for this record. Earth acquisition
 therefore validates the canonical WordPress record and parses the same selected headings from
 its checked `content.rendered` field.

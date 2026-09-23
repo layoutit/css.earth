@@ -1,7 +1,7 @@
 import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contract.mts';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import type {PreparedProjectiveTextureLeaf} from '../../../src/renderers/css/prepared-data/projective-layout.ts';
-import type {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
+import type {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import type {prepareSolidMaterial,SolidRasterGrid} from './solid-raster.mts';
 import type {combineRadialModels} from './radial-models.mts';
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
@@ -132,7 +132,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     ]),
   ];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.bodyLeaves, ...(plan.rings?.leaves ?? [])].map(leaf => leaf.style)) });
-  const camera = b.mesh(`polycss-camera ${id}-camera planet-render-root`);
+  const camera = b.mesh(`polycss-camera ${id}-camera object-render-root`);
   const scene = b.mesh(`polycss-scene ${id}-scene`), system = b.mesh(`${id}-system`, `transform:${plan.systemTransform}`);
   const body = b.mesh(`${id}-body`);
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
@@ -150,7 +150,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       b.append(rings, node);
     }
   }
-  const materialRoot = b.element('div', `${id}-material-root planet-render-root`);
+  const materialRoot = b.element('div', `${id}-material-root object-render-root`);
   const billboard = b.element('s', `${id}-billboard`), material = b.element('s', `${id}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboard); b.append(materialRoot, material);
   const { tree, index } = b.finish({ camera, scene });

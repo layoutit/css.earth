@@ -176,7 +176,7 @@ export function retainedPresentationFixture(value: unknown, { failAtElement = nu
     document.head = new FixtureElement(document, "head");
     const stage = new FixtureElement(document, "div");
     document.stage = stage;
-    stage.className = "planet-stage";
+    stage.className = "object-stage";
     Object.defineProperty(globalThis, "document", { configurable: true, value: nativeDocument(document) });
     Object.defineProperty(globalThis, "HTMLElement", { configurable: true, value: FixtureElement });
     Object.defineProperty(globalThis, "DOMMatrix", { configurable: true, value: Matrix });
@@ -240,12 +240,12 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
         inputs.set(control.name, input({ name: control.name, type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
     const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
     const information = Object.assign(f.document.createElement("section"), {
-        querySelector: (selector: string): FixtureElement | null => selector === ".planet-lenses" ? lensRoot : null,
+        querySelector: (selector: string): FixtureElement | null => selector === ".object-lenses" ? lensRoot : null,
     });
     lensRoot.querySelectorAll = selector => selector === 'button[name="dataset"]' ? buttons : [];
     settingsRoot.querySelectorAll = selector => selector === 'input[name], button[name]' ? [...inputs.values()] : [];
-    f.document.querySelector = selector => selector === ".planet-information-panel" ? information
-        : selector === ".planet-settings" ? settingsRoot : null;
+    f.document.querySelector = selector => selector === ".object-information-panel" ? information
+        : selector === ".object-settings" ? settingsRoot : null;
     let binding: ReturnType<typeof createObjectControlBinding> | null = null;
     const selection = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime, onCommit: state => f.playback.setSelection(state), onChange: state => binding?.publish(state), onFatalError(error) { errors.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
     f.lifetime.onDispose(() => selection.destroy());

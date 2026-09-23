@@ -37,7 +37,7 @@ for (const entry of (await readdir(objects,{withFileTypes:true})).filter(entry=>
   // Its whole `prepared/` bake (this loop's only output) is the R2
   // inventory — a full nested closure, no exclusions needed since `object.json` and the `.prepared-<pid>`
   // staging directory both live outside `prepared/`.
-  await inventoryPreparedAssets({ planetId: entry.name, objectDirectory: directory });
+  await inventoryPreparedAssets({ objectId: entry.name, objectDirectory: directory });
 }
 if (selected && !results.length) throw new TypeError(`No nebula delivery is registered for ${selected}.`);
 console.log(`NEBULA_OBJECTS_COMPLETE ${JSON.stringify(results)}`);

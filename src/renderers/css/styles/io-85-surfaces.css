@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="io-85"]) > :is(.io-85-sun-camera, .io-85-camera, .io-85-material-root) {
+.object-stage:where([data-object-id="io-85"]) > :is(.io-85-sun-camera, .io-85-camera, .io-85-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-sun-camera, :where(.planet-stage[data-object-id="io-85"]) .io-85-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-body > u {
+:where(.object-stage[data-object-id="io-85"]) .io-85-sun-camera, :where(.object-stage[data-object-id="io-85"]) .io-85-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="io-85"]) .io-85-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="io-85"]) .io-85-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="io-85"]) .io-85-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--io-85-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-body > .io-85-polar { background-image: var(--io-85-poles-image); }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-material-root { z-index: 3; --io-85-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-material, :where(.planet-stage[data-object-id="io-85"]) .io-85-billboard {
+:where(.object-stage[data-object-id="io-85"]) .io-85-body > .io-85-polar { background-image: var(--io-85-poles-image); }
+:where(.object-stage[data-object-id="io-85"]) .io-85-material-root { z-index: 3; --io-85-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="io-85"]) .io-85-material, :where(.object-stage[data-object-id="io-85"]) .io-85-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-material { background-repeat: no-repeat; transform: rotate(var(--io-85-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="io-85"]) .io-85-billboard { border-radius: 50%; background-color: var(--io-85-billboard-color); opacity: var(--io-85-billboard-opacity); }
-.planet-stage:where([data-object-id="io-85"])[data-lod="billboard"] .io-85-scene, .planet-stage:where([data-object-id="io-85"])[data-lod="marker"] .io-85-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="io-85"])[data-lod="marker"] .io-85-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="io-85"]) .io-85-material { background-repeat: no-repeat; transform: rotate(var(--io-85-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="io-85"]) .io-85-billboard { border-radius: 50%; background-color: var(--io-85-billboard-color); opacity: var(--io-85-billboard-opacity); }
+.object-stage:where([data-object-id="io-85"])[data-lod="billboard"] .io-85-scene, .object-stage:where([data-object-id="io-85"])[data-lod="marker"] .io-85-scene { visibility: hidden; }
+.object-stage:where([data-object-id="io-85"])[data-lod="marker"] .io-85-billboard { opacity: 0; }
 

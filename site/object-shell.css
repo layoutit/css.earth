@@ -1,0 +1,1896 @@
+.object-cubic-sky {
+  --object-cubic-sky-zoom: 1;
+  --object-cubic-sky-camera-distance: max(
+    50cqh,
+    calc(86.60254cqh * var(--object-cubic-sky-zoom))
+  );
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  perspective: var(--object-cubic-sky-camera-distance);
+  perspective-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.object-cubic-sky-cube,
+.object-cubic-sky-orientation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.object-cubic-sky-cube {
+  transform: translateZ(var(--object-cubic-sky-camera-distance));
+}
+
+.object-drawer-content {
+  display: contents;
+}
+
+.object-layers-menu {
+  display: block;
+}
+
+.object-sheet-handle {
+  display: none;
+}
+
+.object-browser {
+  display: none;
+}
+
+.object-browser[hidden] {
+  display: none;
+}
+
+.object-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin: 6px 0 0;
+  padding: 12px 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--shell-text-secondary);
+  background: var(--explorer-panel-background);
+  box-shadow: none;
+  pointer-events: auto;
+}
+
+.object-lens-details-body {
+  user-select: text;
+}
+
+.object-lens-details-copy {
+  margin: 0;
+  color: var(--shell-text-secondary);
+  font: var(--shell-font-small);
+  overflow-wrap: anywhere;
+}
+
+.object-surface-minimap + .object-lens-details-copy {
+  margin-top: 10px;
+  margin-inline-end: 4px;
+}
+
+.object-motion-description {
+  margin: 0 0 8px;
+  padding: 8px var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
+  color: var(--shell-text-secondary);
+  font: 400 0.75rem/18px var(--shell-ui-font);
+}
+
+.object-lens-texture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+.object-lens-texture:not([src]) { visibility: hidden; }
+
+.object-surface-minimap {
+  position: relative;
+  margin-inline-end: 0;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.object-surface-minimap[data-surface-minimap] {
+  touch-action: none;
+  user-select: none;
+  cursor: crosshair;
+}
+
+.object-surface-minimap[data-dragging="true"] { cursor: grabbing; }
+.object-surface-minimap:focus { outline: none; }
+
+.object-surface-minimap[data-ready="true"] > .object-lens-texture { opacity: .35; }
+
+.object-minimap-viewport {
+  display: none;
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.object-surface-minimap[data-ready="true"] .object-minimap-viewport:not([hidden]) { display: block; }
+
+.object-minimap-viewport {
+  border: 1px solid rgb(255 255 255 / 50%);
+  background-image: var(--surface-preview-image, none);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
+  background-origin: border-box;
+  background-repeat: repeat-x;
+}
+
+.object-surface-minimap[data-full-view="true"] .object-minimap-viewport {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.object-lens-legend-panel {
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--shell-text-secondary);
+  background: transparent;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.object-lens-legend-panel[hidden] {
+  display: none;
+}
+
+.object-lens-legend-scale-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 12px;
+}
+
+.object-lens-legend-scale {
+  display: block;
+  width: 100%;
+  height: 7px;
+  margin: 0;
+  border: 0;
+  image-rendering: pixelated;
+  object-fit: fill;
+}
+
+.object-lens-legend-segments {
+  display: flex;
+  overflow: hidden;
+}
+
+.object-lens-legend-segment {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--object-lens-legend-color);
+}
+
+.object-lens-legend-labels {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  color: var(--shell-text-muted);
+  font: 400 0.75rem/16px var(--shell-ui-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.object-lens-legend-categories {
+  display: grid;
+  gap: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.object-lens-legend-categories li {
+  display: grid;
+  grid-template-columns: 8px max-content minmax(8px, 0.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 24px;
+  min-width: 0;
+  color: var(--shell-text-secondary);
+  font: var(--shell-font-metadata);
+}
+
+.object-lens-legend-categories li::before {
+  align-self: center;
+  grid-column: 3;
+  grid-row: 1;
+  border-bottom: 1px dotted var(--shell-divider-muted);
+  content: "";
+  transform: translateY(0.3em);
+}
+
+.object-lens-legend-swatch {
+  align-self: center;
+  grid-column: 1;
+  grid-row: 1;
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+  background: var(--object-lens-legend-color);
+  opacity: 0.75;
+}
+
+.object-lens-legend-category-label {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--shell-text);
+}
+
+/* One key for the shared no-data grid, drawn with the grid's own colors. */
+.object-lens-legend-no-data {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--shell-text-secondary);
+  font: var(--shell-font-metadata);
+}
+
+.object-lens-legend-panel > * + .object-lens-legend-no-data {
+  margin-top: 4px;
+}
+
+.object-lens-legend-no-data-swatch {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+}
+
+.object-lens-legend-category-description {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  grid-column: 4;
+  grid-row: 1;
+  color: var(--shell-text-muted);
+  text-align: right;
+}
+
+:is(
+  .object-selected-panel,
+  .object-factsheet-section,
+  .object-gallery-panel,
+  .object-chart-switcher
+) {
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+  border: 0;
+  border-top: 0;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.object-selected-panel {
+  margin-top: 0;
+  padding: 0;
+  border-top: 0;
+}
+
+.object-factsheet-section {
+  position: relative;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+.object-factsheet-section[open] {
+  padding-bottom: 16px;
+}
+
+.object-card > :is(
+  .object-selected-panel,
+  .object-factsheet-section,
+  .object-gallery-panel,
+  .object-chart-switcher,
+  .object-lenses,
+  .object-lens-details,
+  .object-accordion,
+  .object-settings-panel
+) {
+  padding-inline: var(--explorer-card-padding-inline-start, 16px)
+    var(--explorer-card-padding-inline-end, 12px);
+}
+
+.object-card > .object-selected-panel {
+  padding-bottom: 16px;
+}
+
+.object-card > .object-selected-panel > .object-introduction {
+  width: 100%;
+  padding-inline: 0;
+}
+
+.object-card > .object-factsheet-section {
+  padding-block-start: 0;
+}
+
+.object-card > :is(
+  .object-selected-panel,
+  .object-factsheet-section,
+  .object-gallery-panel,
+  .object-chart-switcher,
+  .object-lenses,
+  .object-lens-details,
+  .object-accordion,
+  .object-settings-panel
+):has(~ :is(
+  .object-factsheet-section,
+  .object-gallery-panel,
+  .object-chart-switcher,
+  .object-lenses,
+  .object-lens-details,
+  .object-accordion,
+  .object-settings-panel
+)) {
+  border-bottom: var(--explorer-divider-width) solid var(--explorer-divider);
+}
+
+.object-factsheet-section > .object-factsheet-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 45px;
+  min-height: 45px;
+  padding: 0;
+}
+
+.object-factsheet-body {
+  width: 100%;
+}
+
+:is(
+  .object-gallery-panel,
+  .object-chart-switcher,
+  .object-lenses,
+  .object-lens-details,
+  .object-accordion,
+  .object-settings-panel
+):not([open]) {
+  min-height: 30px;
+}
+
+.object-panel-summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  width: 100%;
+  min-height: 30px;
+  margin: 0;
+  padding: 0;
+  color: var(--shell-text);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.object-chart-switcher-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 30px;
+  margin: 0;
+  padding: 0;
+  color: var(--shell-text);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.object-chart-switcher-title {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.object-chart-switcher-controls {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0;
+  margin-left: auto;
+}
+
+.object-chart-step {
+  display: grid;
+  width: 22px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--shell-text-muted);
+  background: transparent;
+  font: 400 20px/1 var(--shell-ui-font);
+  cursor: pointer;
+  place-items: center;
+}
+
+.object-chart-step:hover,
+.object-chart-step:focus-visible {
+  color: var(--shell-text);
+  outline: 0;
+}
+
+.object-chart-step:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.object-chart-label[hidden],
+.object-chart-slide[hidden] {
+  display: none;
+}
+
+.object-panel-toggle {
+  display: grid;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  place-items: center;
+  color: var(--shell-text-muted);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+  transform: translateY(1px);
+}
+
+.object-panel-toggle::before {
+  content: "▾";
+}
+
+details:not([open]) > .object-panel-summary .object-panel-toggle::before {
+  content: "▸";
+}
+
+.object-panel-summary:hover .object-panel-toggle,
+.object-panel-summary:focus-visible .object-panel-toggle {
+  color: var(--shell-text);
+  opacity: 0.9;
+}
+
+.object-panel-summary:focus-visible {
+  outline: 0;
+}
+
+.object-panel-icon {
+  --object-panel-icon-scale: 1;
+  display: block;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  object-fit: contain;
+  opacity: 0.72;
+  transform: scale(var(--object-panel-icon-scale));
+  transform-origin: center;
+}
+
+details:not([open]) > .object-panel-summary .object-panel-icon {
+  opacity: 0.5;
+}
+
+.object-panel-icon .material-symbol {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  stroke: none;
+}
+
+.object-panel-summary:hover .object-panel-icon,
+.object-panel-summary:focus-visible .object-panel-icon {
+  opacity: 0.9;
+}
+
+.object-title {
+  width: max-content;
+  height: 30.13px;
+  margin: 0;
+  color: var(--shell-text);
+  line-height: 0;
+}
+
+.object-title-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 30.13px;
+}
+
+.object-title-row > .object-title { flex: 0 0 auto; }
+
+.object-title-svg {
+  display: inline-block;
+  vertical-align: calc(-1 * var(--object-title-descent, 0px));
+  overflow: visible;
+  fill: currentColor;
+}
+
+.object-breadcrumbs {
+  position: relative;
+  margin: 0 0 4px;
+  color: var(--shell-text-muted);
+  font: var(--shell-font-metadata);
+}
+
+.object-breadcrumbs ol {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.object-breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.object-breadcrumb-separator { flex: 0 0 auto; }
+
+.object-breadcrumbs :is(a, button, [aria-current="page"]) {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+.object-breadcrumbs :is(a, button) { cursor: pointer; }
+.object-breadcrumbs :is(a, button):hover { color: var(--shell-text); text-decoration: underline; }
+.object-breadcrumbs :is(a, button):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
+.object-breadcrumbs [aria-current="page"] { color: var(--shell-text-secondary); }
+/* Mission headings overlay their artwork without taking input; keep the trail usable. */
+/* Missions titled by a short name open their description with the full name. */
+.object-lens-details-lead { color: var(--shell-text); font-weight: 500; }
+/* Mission and spacecraft names title their cards at the shell's panel heading size,
+   outranking the shared tab-panel text scale. */
+.object-card-tabpanel .object-facility .object-lens-details-title { font: var(--shell-font-panel-heading); }
+
+.object-introduction {
+  width: 100%;
+  margin: 7px 0 0;
+  padding: 0 8px 0 0;
+  color: inherit;
+  font: var(--shell-font-introduction);
+  user-select: text;
+}
+
+.object-facts {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 0;
+  color: inherit;
+  font-family: var(--shell-ui-font);
+  font-size: 0.875rem;
+  line-height: 20px;
+  list-style: none;
+}
+
+.object-facts li {
+  min-width: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.object-fact-label {
+  font-weight: inherit;
+}
+
+.object-fact-label::after {
+  content: ":";
+}
+
+.object-primary-facts {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.object-panel-heading {
+  width: auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--shell-text);
+  font: 500 1.0625rem/1.35 var(--shell-ui-font);
+  font-optical-sizing: auto;
+  letter-spacing: -0.006em;
+  text-wrap: nowrap;
+}
+
+.object-panel-heading-count {
+  font-weight: 300;
+}
+
+details:not([open]) > .object-panel-summary .object-panel-heading {
+  color: var(--shell-text-muted);
+}
+
+details:not([open]) > .object-panel-summary:hover .object-panel-heading,
+details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading {
+  color: var(--shell-text);
+}
+
+.object-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 8px 0 0;
+}
+
+.object-chart-slide {
+  width: 100%;
+  margin: 0;
+}
+
+.object-gallery {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  margin: 8px 0 0;
+}
+
+.object-gallery-item {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  margin: 0;
+}
+
+.object-gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  background: var(--shell-background);
+}
+
+.object-gallery-caption {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  color: var(--shell-text-secondary);
+  line-height: 1.4;
+  user-select: text;
+}
+
+.object-gallery-caption strong {
+  color: var(--shell-text);
+  font-weight: 600;
+}
+
+.object-gallery-source {
+  width: max-content;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.object-gallery-source:hover,
+.object-gallery-source:focus-visible {
+  color: var(--shell-text);
+}
+
+.object-gallery-qualification {
+  margin: 0;
+  color: var(--shell-text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+  user-select: text;
+}
+
+.object-settings {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  margin: 8px 0 0;
+  color: var(--shell-text-secondary);
+  font: 400 13px/1.4 var(--shell-ui-font);
+  pointer-events: auto;
+}
+
+.object-setting-control {
+  appearance: none;
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) max-content;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--shell-text);
+  background: transparent;
+  font: inherit;
+  line-height: inherit;
+  text-align: left;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.object-setting-text {
+  grid-column: 1;
+  grid-row: 1;
+  overflow: hidden;
+  color: var(--shell-text-muted);
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.object-setting-control::before {
+  align-self: center;
+  grid-column: 2;
+  grid-row: 1;
+  border-bottom: 1px dotted var(--shell-divider-muted);
+  content: "";
+  transform: translateY(0.3em);
+}
+
+.object-setting-select {
+  grid-column: 3;
+  grid-row: 1;
+  max-width: 11em;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 3px;
+  color: var(--shell-text-secondary);
+  background: transparent;
+  font: 13px/1.4 var(--shell-ui-font);
+  cursor: pointer;
+}
+.object-setting-select:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+.object-setting-control[data-state]::after {
+  grid-column: 3;
+  grid-row: 1;
+  overflow: hidden;
+  color: var(--shell-text-secondary);
+  content: attr(data-state);
+  font: 13px/1.4 var(--shell-ui-font);
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.object-setting-control:hover,
+.object-setting-control:focus-visible {
+  color: var(--shell-text);
+  outline: 0;
+}
+
+.object-setting-control:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+.object-settings-panel {
+  display: block;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+  border: 0;
+  border-top: 0;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  font: 14px/1.4 var(--shell-ui-font);
+  pointer-events: auto;
+  user-select: none;
+}
+
+.object-lenses,
+.object-lens-details {
+  display: block;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+  border: 0;
+  border-top: 0;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  font: 14px/1.4 var(--shell-ui-font);
+  pointer-events: auto;
+  user-select: none;
+}
+
+.object-lens-browser-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 30px;
+  margin: 0;
+  padding: 0;
+  color: var(--shell-text);
+}
+
+.object-lens-search-field {
+  position: relative;
+  display: block;
+  flex: 0 0 92px;
+  min-width: 0;
+  margin: 0 0 0 auto;
+  padding: 0;
+  color: var(--shell-text-muted);
+}
+
+.object-lens-search {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 22px 0 0;
+  border: 0;
+  color: var(--shell-text);
+  background: transparent;
+  font: var(--shell-font-metadata);
+  text-align: right;
+  outline: 0;
+}
+
+.object-lens-search::-webkit-search-cancel-button {
+  display: none;
+}
+
+.object-lens-search-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: block;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  translate: 0 -50%;
+}
+
+.object-lens-search-icon .search-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.7;
+}
+
+.object-lens-search-field:focus-within {
+  color: var(--shell-text-secondary);
+}
+
+.object-footer {
+  position: fixed;
+  z-index: 210;
+  inset: auto 0 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: var(--explorer-footer-height);
+  background: var(--shell-background);
+  pointer-events: auto;
+  /* A relayout boundary: the readout's ruler and text change while the camera
+     moves, and a fixed box would otherwise lay the whole document out again. */
+  contain: layout size;
+}
+
+.object-attribution-footer {
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-right: auto;
+  pointer-events: auto;
+}
+.object-source-link {
+  overflow: hidden;
+  color: inherit;
+  font: inherit;
+  text-overflow: ellipsis;
+  text-decoration: none;
+}
+.object-source-link:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 3px; }
+.object-source-link:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 2px; }
+.object-source-link-compact { display: none; }
+
+.object-view-readout {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  justify-content: safe flex-end;
+  gap: 8px;
+  height: var(--explorer-status-height);
+  box-sizing: border-box;
+  padding: 0 8px;
+  color: var(--shell-text-secondary);
+  background: transparent;
+  font: 12px/1.4 var(--shell-ui-font);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.object-view-context {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.object-view-altitude { flex: 0 0 auto; }
+
+.object-view-date,
+.object-view-coordinates {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.object-diagnostic-record {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.object-diagnostic-record:hover { color: var(--shell-text); }
+.object-diagnostic-record[aria-pressed="true"] { color: #e98679; }
+
+.object-view-scale {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-view-scale-label] {
+  text-align: right;
+}
+
+.object-view-separator {
+  color: var(--shell-text-muted);
+}
+
+.object-view-ruler-slot {
+  display: flex;
+  flex: 0 0 80px;
+  justify-content: flex-end;
+  width: 80px;
+}
+
+@media (min-width: 641px) {
+  .object-view-readout {
+    padding-right: 10px;
+  }
+
+  .object-view-scale {
+    position: relative;
+    flex: 0 0 170px;
+    margin-left: 8px;
+  }
+
+  .object-view-scale [data-view-scale-label] {
+    flex: 0 0 auto;
+  }
+
+  .object-view-ruler-slot {
+    flex: 1 1 80px;
+    min-width: 80px;
+  }
+
+  .object-view-ruler {
+    min-width: 100%;
+  }
+
+  .object-view-scale > .object-view-separator {
+    position: absolute;
+    right: calc(100% + 8px);
+  }
+}
+
+.object-view-readout [hidden] { display: none; }
+
+.object-view-ruler {
+  position: relative;
+  display: block;
+  height: 5px;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-top: 0;
+}
+
+.object-view-measure {
+  position: absolute;
+  left: -1px;
+  bottom: 0;
+  height: 3px;
+  box-sizing: border-box;
+  border-right: 1px solid currentColor;
+}
+
+@media (max-width: 820px), (orientation: portrait) {
+  .object-footer {
+    gap: 8px;
+  }
+  .object-attribution-footer { flex: 0 0 auto; }
+  .object-source-link [data-source-link-label] { display: none; }
+  .object-source-link-compact { display: inline; }
+  .object-view-readout {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .object-view-context { display: none; }
+  .object-view-altitude {
+    display: flex;
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: 4px;
+  }
+  [data-view-distance-label] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  [data-view-altitude] { flex: 0 0 auto; }
+}
+
+.object-observation-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  max-height: 202px;
+  margin: 0;
+  padding: 0 0 4px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: rgb(255 255 255 / 18%) transparent;
+  scrollbar-width: thin;
+}
+
+.object-observation-controls::-webkit-scrollbar {
+  width: 4px;
+}
+
+.object-observation-controls::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: rgb(255 255 255 / 18%);
+}
+
+.object-observation-option {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.object-observation-option[hidden] {
+  display: none;
+}
+
+.object-observation-control {
+  appearance: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--shell-text-muted);
+  background: transparent;
+  font: inherit;
+  line-height: 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.object-observation-control:hover,
+.object-observation-control:focus-visible {
+  color: var(--shell-text-secondary);
+  outline: 0;
+}
+
+.object-observation-control:is([aria-pressed="true"], [aria-current="page"]) {
+  color: var(--shell-text);
+}
+
+.object-factsheet-section .object-facts li {
+  align-items: center;
+  color: var(--shell-text-muted);
+}
+
+.object-lens-icon {
+  display: block;
+  grid-column: -2 / -1;
+  grid-row: 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  object-fit: cover;
+  opacity: 0.62;
+  transition: opacity 120ms ease;
+}
+
+.object-observation-control:hover .object-lens-icon,
+.object-observation-control:focus-visible .object-lens-icon {
+  opacity: 0.86;
+}
+
+.object-observation-control:is([aria-pressed="true"], [aria-current="page"]) .object-lens-icon {
+  opacity: 1;
+}
+
+.object-lens-icon > .object-navigation-marker {
+  width: 100%;
+  height: 100%;
+}
+
+.object-lens-label {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  color: inherit;
+  font: var(--shell-font-content);
+  opacity: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.object-observation-control:has(.object-lens-detail) {
+  grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) max-content 14px;
+}
+
+.object-observation-control:has(.object-lens-detail)::after,
+.object-factsheet-section .object-facts li::before {
+  align-self: center;
+  margin-top: 0;
+  grid-column: 2;
+  grid-row: 1;
+  border-bottom: 1px dotted #222;
+  content: "";
+  transform: translateY(0.3em);
+}
+
+.object-lens-detail {
+  grid-column: 3;
+  grid-row: 1;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.object-lens-detail,
+.object-facts .object-fact-value {
+  font: var(--shell-font-value);
+}
+
+.object-observation-control.object-thumbnail-leading {
+  grid-template-columns: 14px minmax(0, 1fr);
+}
+.object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
+  grid-template-columns: 14px minmax(0, max-content) minmax(8px, 1fr) max-content;
+}
+.object-thumbnail-leading > .object-lens-icon { grid-column: 1; }
+.object-thumbnail-leading > .object-lens-label { grid-column: 2; }
+.object-thumbnail-leading > .object-lens-detail { grid-column: 4; }
+.object-observation-control.object-thumbnail-leading:has(.object-lens-detail)::after { grid-column: 3; }
+
+.object-lens-empty {
+  margin: 2px 0 4px;
+  color: var(--shell-text-muted);
+  font: 400 0.8125rem/28px var(--shell-ui-font);
+}
+
+.object-lens-empty[hidden] {
+  display: none;
+}
+
+.object-lenses.is-loading .object-observation-control {
+  cursor: progress;
+}
+
+.object-setting-control > input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (min-width: 821px) and (orientation: landscape) {
+
+  .object-panel-toggle {
+    color: var(--shell-text-muted);
+    opacity: 1;
+  }
+
+  .object-introduction {
+    padding: 0 29px 0 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  ) {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  ):not([open]) {
+    min-height: 45px;
+    padding-bottom: 0;
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  )[open] {
+    padding-bottom: 12px;
+  }
+
+  .object-lenses[open] {
+    padding-bottom: 8px;
+  }
+
+  .object-lens-details[open] {
+    padding-bottom: 16px;
+  }
+
+  .object-panel-summary,
+  .object-chart-switcher-header {
+    height: 45px;
+    min-height: 45px;
+    gap: 8px;
+  }
+
+  .object-panel-heading {
+    overflow: hidden;
+    font: var(--shell-font-label);
+    letter-spacing: 0;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    transform: translateY(-1px);
+    white-space: nowrap;
+  }
+
+  details:not([open]) > .object-panel-summary .object-panel-heading {
+    color: var(--shell-text-muted);
+    opacity: 1;
+  }
+
+  details:not([open]) > .object-panel-summary:hover .object-panel-heading,
+  details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading {
+    color: var(--shell-text);
+    opacity: 1;
+  }
+
+  .object-panel-icon {
+    flex-basis: 16px;
+    width: 16px;
+    height: 16px;
+    transform: translateY(0.5px) scale(var(--object-panel-icon-scale));
+  }
+
+  .object-chart-step {
+    width: 18px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .object-panel-toggle {
+    flex-basis: 12px;
+    width: 12px;
+    height: 12px;
+    font-size: 13px;
+    transform: translateY(1.5px);
+  }
+
+  .object-facts {
+    margin-top: 8px;
+  }
+
+  .object-gallery-caption {
+    color: var(--shell-text-secondary);
+    opacity: 1;
+  }
+
+  .object-gallery-qualification {
+    color: var(--shell-text-muted);
+    opacity: 1;
+  }
+
+  .object-chart {
+    margin-top: 0;
+  }
+
+  .object-action-marker {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    background-size: 48px 48px;
+    background-repeat: no-repeat;
+  }
+
+  .object-drawer-content {
+    position: relative;
+    z-index: 100;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    gap: 10px;
+    width: 100%;
+    min-height: 0;
+    overflow: visible;
+    border-radius: 0;
+    pointer-events: auto;
+  }
+
+  .object-card {
+    flex: 0 0 auto;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    padding: 12px 0 0;
+    overflow: hidden;
+    border-radius: 0;
+    background: var(--explorer-panel-background);
+    box-shadow: none;
+  }
+
+  .object-layers-menu {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    color: var(--shell-text-secondary);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .object-facts li {
+    display: grid;
+    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) fit-content(55%);
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .object-facts li::before {
+    align-self: start;
+    margin-top: 0.85em;
+    grid-column: 2;
+    grid-row: 1;
+    border-bottom: 1px dotted var(--shell-divider-muted);
+    content: "";
+  }
+
+  .object-fact-label {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--shell-text-muted);
+    opacity: 1;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .object-fact-label::after {
+    content: "";
+  }
+
+  .object-fact-value {
+    grid-column: 3;
+    grid-row: 1;
+    font: inherit;
+    min-width: 0;
+    text-align: right;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+}
+
+@media (max-width: 820px), (orientation: portrait) {
+
+  .object-drawer-content {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  .object-card {
+    display: contents;
+  }
+
+  .object-title,
+  .object-title-svg {
+    width: 74.25px;
+    height: 31.41px;
+  }
+
+  .object-selected-panel {
+    margin-top: 8px;
+    padding-bottom: 0;
+  }
+
+  :is(
+    .object-selected-panel,
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  ) {
+    padding: 0;
+    border: 0;
+  }
+
+  :is(.object-lenses, .object-lens-details, .object-accordion, .object-settings-panel) {
+    color: var(--shell-text-secondary);
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  ) {
+    margin-top: 24px;
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  ):not([open]),
+  .object-panel-summary,
+  .object-chart-switcher-header {
+    min-height: 32px;
+  }
+
+  .object-facts,
+  .object-gallery,
+  .object-chart,
+  .object-settings {
+    margin-top: 8px;
+  }
+
+  .object-observation-controls {
+    max-height: none;
+    overflow: visible;
+  }
+
+}
+
+/* Mobile keeps the current shell language; only its spatial flow changes. */
+@media (max-width: 820px), (orientation: portrait) {
+
+  /* The grabber stays on top while the open sheet scrolls. */
+  .object-sheet-handle {
+    appearance: none;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    display: block;
+    flex: 0 0 auto;
+    width: 100%;
+    height: 20px;
+    margin: 0 0 -8px;
+    padding: 0;
+    border: 0;
+    background: var(--explorer-panel-background);
+    cursor: grab;
+    outline: 0;
+    touch-action: none;
+  }
+
+  .object-sheet-handle::before {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgb(255 255 255 / 28%);
+    content: "";
+    transform: translateX(-50%);
+  }
+
+  .object-sheet-handle:focus-visible::before {
+    outline: 2px solid var(--shell-focus);
+    outline-offset: 2px;
+  }
+
+  .object-sidebar.is-dragging .object-sheet-handle { cursor: grabbing; }
+
+  /* Sections of the sheet are separated by bands of the scene background. */
+  .object-drawer-content {
+    gap: 8px;
+    padding: 0;
+    border-radius: 0;
+    background: var(--shell-background);
+    box-shadow: none;
+  }
+  /* Search results are one list, not sections: they sit on the sheet's own background. */
+  .object-drawer-content:has(> [data-search-results]) { background: transparent; }
+
+  .object-card {
+    display: flex;
+    flex: 0 0 auto;
+    height: auto;
+    margin: 0;
+    padding: 12px 0;
+    overflow: hidden;
+    border-radius: 0;
+    background: var(--explorer-panel-background);
+    box-shadow: none;
+  }
+
+  .object-title,
+  .object-title-svg {
+    width: auto;
+    height: 30.13px;
+  }
+
+  .object-selected-panel {
+    margin: 0;
+    padding: 0;
+  }
+
+  .object-introduction {
+    padding: 0 29px 0 0;
+    text-wrap: balance;
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  ) {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  ):not([open]) {
+    min-height: 45px;
+  }
+
+  :is(
+    .object-gallery-panel,
+    .object-chart-switcher,
+    .object-lenses,
+    .object-lens-details,
+    .object-accordion,
+    .object-settings-panel
+  )[open] {
+    padding-bottom: 12px;
+  }
+
+  .object-lenses[open] {
+    padding-bottom: 8px;
+  }
+
+  .object-panel-summary,
+  .object-chart-switcher-header {
+    height: 45px;
+    min-height: 45px;
+    gap: 8px;
+  }
+
+  .object-panel-heading {
+    overflow: hidden;
+    font: var(--shell-font-label);
+    letter-spacing: 0;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    transform: translateY(-1px);
+    white-space: nowrap;
+  }
+
+  details:not([open]) > .object-panel-summary .object-panel-heading {
+    color: var(--shell-text-muted);
+    opacity: 1;
+  }
+
+  .object-panel-icon,
+  .object-panel-toggle {
+    flex-basis: 12px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .object-chart-step {
+    width: 20px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .object-panel-toggle {
+    color: var(--shell-text-muted);
+    font-size: 13px;
+    opacity: 1;
+  }
+
+  .object-chart {
+    margin-top: 0;
+  }
+
+  .object-facts {
+    margin-top: 8px;
+  }
+
+  .object-facts li {
+    display: grid;
+    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) fit-content(55%);
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .object-facts li::before {
+    align-self: start;
+    margin-top: 0.85em;
+    grid-column: 2;
+    grid-row: 1;
+    border-bottom: 1px dotted var(--shell-divider-muted);
+    content: "";
+  }
+
+  .object-fact-label {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--shell-text-muted);
+    opacity: 1;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .object-fact-label::after {
+    content: "";
+  }
+
+  .object-fact-value {
+    grid-column: 3;
+    grid-row: 1;
+    min-width: 0;
+    text-align: right;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+}
+
+/* Prepared nomenclature labels. The renderer positions each retained span and
+   the shared tooltip; typography and the card belong to the shell. */
+.prepared-surface-features [data-feature-label] {
+  color: var(--shell-text);
+  font: 500 12px/14px var(--shell-ui-font);
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 2px rgb(0 0 0 / 95%), 0 1px 3px rgb(0 0 0 / 80%);
+  transition: color 120ms ease;
+}
+
+/* Surface labels default to hidden before the shell binds so prepared
+   nomenclature never flashes on first paint. */
+body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-label] {
+  visibility: hidden !important;
+}
+
+.prepared-surface-features [data-feature-kind="point"]::before {
+  position: absolute;
+  top: 50%;
+  left: -11px;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 70%);
+  content: "";
+}
+
+.prepared-surface-features [data-feature-kind="linear"] {
+  font-style: italic;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-kind="region"] {
+  font: 600 11px/14px var(--shell-ui-font);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-label][data-object-hovered="true"] {
+  color: #fff;
+}
+
+.prepared-surface-features [data-feature-tooltip] {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 280px;
+  margin-top: -14px;
+  padding: 10px 12px 11px;
+  border-radius: 8px;
+  color: var(--shell-text);
+  background: rgb(32 33 36 / 94%);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 55%), 0 0 0 1px rgb(255 255 255 / 8%);
+  font: 400 12px/16px var(--shell-ui-font);
+  text-align: left;
+  white-space: normal;
+}
+
+.prepared-surface-features [data-feature-tooltip][hidden] {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-name] {
+  display: block;
+  font: 600 14px/18px var(--shell-ui-font);
+  color: #fff;
+}
+
+.prepared-surface-features [data-feature-tooltip-detail] {
+  display: block;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-tooltip-origin] {
+  margin: 6px 0 0;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-tooltip-origin]:empty {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-note] {
+  margin: 6px 0 0;
+  color: var(--shell-text);
+}
+
+.prepared-surface-features [data-feature-tooltip-note]:empty {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-credit] {
+  display: block;
+  margin-top: 6px;
+  font: 400 10px/13px var(--shell-ui-font);
+  letter-spacing: 0.02em;
+  color: var(--shell-text-secondary);
+  opacity: 0.8;
+}
+
+/* The hovered feature's published diameter, traced as retained screen chords
+   like the orbit lines. The stroke is a shell size in CSS pixels. */
+.prepared-surface-features [data-feature-outline-piece] {
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: rgb(255 255 255 / 85%);
+  box-shadow: 0 0 2px rgb(0 0 0 / 60%);
+}
+
+/* The scene is dragged, not read: a drag or long press must never select text and paint it blue. */
+.object-viewport,
+.object-world-stage,
+.object-input-surface {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}

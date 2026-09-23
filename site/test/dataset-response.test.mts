@@ -13,11 +13,11 @@ const origin = 'https://example.test';
 const scene = await loadPreparedSceneMarkup('saturn');
 const prepared = await readPreparedObjectBytes('saturn');
 const html = `<!doctype html><html><head><style>u { color: red }</style></head><body><!--search-shell:start-->
-<input class="planet-sheet-handle" type="checkbox"><section class="planet-information-panel">
-<div class="planet-native-tabs"><input type="radio" data-information-tab="dataset"><input type="radio" data-information-tab="factsheet" checked></div>
+<input class="object-sheet-handle" type="checkbox"><section class="object-information-panel">
+<div class="object-native-tabs"><input type="radio" data-information-tab="dataset"><input type="radio" data-information-tab="factsheet" checked></div>
 ${['normal', 'ultraviolet', 'cross-section'].map(id => `<button type="submit" name="dataset" value="${id}" aria-pressed="${id === 'normal'}">${id}</button><div data-lens-details="${id}" ${id === 'normal' ? '' : 'hidden'}>${id}</div>`).join('')}
 </section><!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(scene.descriptor)}</script><!--prepared-descriptor:end-->
-<!--prepared-scene:start--><main class="planet-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" aria-label="Saturn">${scene.html}</main><!--prepared-scene:end--><script src="/app.js"></script></body></html>`;
+<!--prepared-scene:start--><main class="object-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" aria-label="Saturn">${scene.html}</main><!--prepared-scene:end--><script src="/app.js"></script></body></html>`;
 const read: typeof fetch = async input => {
   const url = new URL(String(input));
   assert.equal(url.origin, origin);
@@ -30,13 +30,13 @@ test('native selection replaces only the existing prepared presentation and sele
     const document = parseHTML(result).document;
     assert.equal(document.querySelectorAll('.polycss-scene').length, 1);
     assert.equal(document.querySelectorAll('[data-prepared-node]').length, scene.nodes);
-    assert.equal(document.querySelector('.planet-stage')?.getAttribute('data-prepared-dataset'), id);
+    assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-dataset'), id);
     assert.equal(document.querySelector('button[aria-pressed="true"]')?.getAttribute('value'), id);
     assert.equal(document.querySelector('[data-lens-details]:not([hidden])')?.getAttribute('data-lens-details'), id);
     assert.equal(document.querySelector('[data-information-tab][checked]')?.getAttribute('data-information-tab'), 'dataset');
     assert.equal(result.slice(0, result.indexOf('<!--search-shell:start-->')), html.slice(0, html.indexOf('<!--search-shell:start-->')));
     assert.equal(result.slice(result.indexOf('<!--prepared-scene:end-->')), html.slice(html.indexOf('<!--prepared-scene:end-->')));
-    assert.equal(document.querySelector('.planet-stage')?.getAttribute('data-view'), id === 'cross-section' ? 'interior' : null);
+    assert.equal(document.querySelector('.object-stage')?.getAttribute('data-view'), id === 'cross-section' ? 'interior' : null);
   }
 });
 test('invalid requests and corrupt prepared bytes cannot publish another dataset', async () => {
@@ -73,9 +73,9 @@ test('a native search-only Earth selection fetches the base catalogue and exactl
     return new Response(null, { status: 404 });
   };
   const earthHtml = `<!doctype html><html><body><!--search-shell:start-->
-    <input class="planet-sheet-handle" type="checkbox"><section class="planet-information-panel"></section>
+    <input class="object-sheet-handle" type="checkbox"><section class="object-information-panel"></section>
     <!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(earthScene.descriptor)}</script><!--prepared-descriptor:end-->
-    <!--prepared-scene:start--><main class="planet-stage ${earthScene.classes.join(' ')}" data-object-id="earth" data-prepared-object="earth" aria-label="Earth">${earthScene.html}</main><!--prepared-scene:end--></body></html>`;
+    <!--prepared-scene:start--><main class="object-stage ${earthScene.classes.join(' ')}" data-object-id="earth" data-prepared-object="earth" aria-label="Earth">${earthScene.html}</main><!--prepared-scene:end--></body></html>`;
   const result = await renderDatasetResponse(earthHtml, new URL('/earth/?feature=1159321043', origin), 'earth', transport);
   const document = parseHTML(result).document;
   assert.equal(document.querySelector('[data-feature-tooltip-name]')?.textContent, 'Monaco');

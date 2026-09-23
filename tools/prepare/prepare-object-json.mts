@@ -62,7 +62,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
-  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('../objects/dist/prepare-world-navigation.js');
+  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('#preparation/prepare-world-navigation');
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
   if (options?.keepBindings) refuseStaleKeptBindings(id, preparedNavigation.systemTransform);
@@ -95,7 +95,7 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
   // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory; object.json, page.json
   // and provenance.json are regenerated on each checkout and stay out of it.
-  await inventoryPreparedAssets({ planetId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory });
+  await inventoryPreparedAssets({ objectId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory });
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }
 
@@ -108,7 +108,7 @@ export async function refreshPreparedInventory(id: string, projectRoot = root): 
   const objectDirectory = resolve(projectRoot, 'src/objects', id);
   const before = await readInventory(id, objectDirectory);
   if (before === null) return false;
-  const after = await inventoryPreparedAssets({ planetId: id, objectDirectory });
+  const after = await inventoryPreparedAssets({ objectId: id, objectDirectory });
   return JSON.stringify(after) !== JSON.stringify(before);
 }
 
@@ -146,7 +146,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   if (ids && results.length !== new Set(ids).size) throw new TypeError('A requested object has no registered JSON descriptor.');
   // Contexts consume finalized body frames. Preparing them first can retain a
   // previous radius and make an otherwise valid destination fail at handoff.
-  const { prepareSpatialContext } = await import('../objects/dist/prepare-spatial-context.js');
+  const { prepareSpatialContext } = await import('#preparation/prepare-spatial-context');
   for (const object of SCENE_OBJECTS) {
     const directory = resolve(root, 'src/objects', object.id);
     const descriptor = parseObjectDescriptor(await readFile(resolve(directory, 'object.json'), 'utf8'));

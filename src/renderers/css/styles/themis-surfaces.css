@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="themis"]) > :is(.themis-sun-camera, .themis-camera, .themis-material-root) {
+.object-stage:where([data-object-id="themis"]) > :is(.themis-sun-camera, .themis-camera, .themis-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="themis"]) .themis-sun-camera, :where(.planet-stage[data-object-id="themis"]) .themis-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="themis"]) .themis-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="themis"]) .themis-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="themis"]) .themis-body > u {
+:where(.object-stage[data-object-id="themis"]) .themis-sun-camera, :where(.object-stage[data-object-id="themis"]) .themis-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="themis"]) .themis-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="themis"]) .themis-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="themis"]) .themis-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--themis-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="themis"]) .themis-body > .themis-polar { background-image: var(--themis-poles-image); }
-:where(.planet-stage[data-object-id="themis"]) .themis-material-root { z-index: 3; --themis-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="themis"]) .themis-material, :where(.planet-stage[data-object-id="themis"]) .themis-billboard {
+:where(.object-stage[data-object-id="themis"]) .themis-body > .themis-polar { background-image: var(--themis-poles-image); }
+:where(.object-stage[data-object-id="themis"]) .themis-material-root { z-index: 3; --themis-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="themis"]) .themis-material, :where(.object-stage[data-object-id="themis"]) .themis-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="themis"]) .themis-material { background-repeat: no-repeat; transform: rotate(var(--themis-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="themis"]) .themis-billboard { border-radius: 50%; background-color: var(--themis-billboard-color); opacity: var(--themis-billboard-opacity); }
-.planet-stage:where([data-object-id="themis"])[data-lod="billboard"] .themis-scene, .planet-stage:where([data-object-id="themis"])[data-lod="marker"] .themis-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="themis"])[data-lod="marker"] .themis-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="themis"]) .themis-material { background-repeat: no-repeat; transform: rotate(var(--themis-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="themis"]) .themis-billboard { border-radius: 50%; background-color: var(--themis-billboard-color); opacity: var(--themis-billboard-opacity); }
+.object-stage:where([data-object-id="themis"])[data-lod="billboard"] .themis-scene, .object-stage:where([data-object-id="themis"])[data-lod="marker"] .themis-scene { visibility: hidden; }
+.object-stage:where([data-object-id="themis"])[data-lod="marker"] .themis-billboard { opacity: 0; }
 

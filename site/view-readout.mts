@@ -93,17 +93,17 @@ export function measurePreparedFocusView(world: WorldCameraPose, focus: Prepared
 }
 
 export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; surfaceReader?: SurfaceMapReader }): ViewReadout {
-  const root = documentTarget.querySelector<HTMLElement>('.planet-view-readout');
+  const root = documentTarget.querySelector<HTMLElement>('.object-view-readout');
   if (!root) return { setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
-  const dateGroup = requiredElement(root, '.planet-view-date'), date = requiredElement(root, '[data-view-date]');
-  const coordinates = requiredElement(root, '.planet-view-coordinates');
+  const dateGroup = requiredElement(root, '.object-view-date'), date = requiredElement(root, '[data-view-date]');
+  const coordinates = requiredElement(root, '.object-view-coordinates');
   const latitude = requiredElement(root, '[data-view-latitude]'), longitude = requiredElement(root, '[data-view-longitude]');
   const altitude = requiredElement(root, '[data-view-altitude]');
   const distanceLabel = requiredElement(root, '[data-view-distance-label]');
-  const distanceGroup = requiredElement(root, '.planet-view-altitude');
-  const scale = requiredElement(root, '.planet-view-scale'), scaleLabel = requiredElement(root, '[data-view-scale-label]');
-  const ruler = requiredElement(root, '.planet-view-ruler');
-  const measure = requiredElement(root, '.planet-view-measure');
+  const distanceGroup = requiredElement(root, '.object-view-altitude');
+  const scale = requiredElement(root, '.object-view-scale'), scaleLabel = requiredElement(root, '[data-view-scale-label]');
+  const ruler = requiredElement(root, '.object-view-ruler');
+  const measure = requiredElement(root, '.object-view-measure');
   const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap]')];
   const configs = new Map(maps.map(map => [map, parseSurfaceMapConfig(map.dataset.surfaceMinimap)]));
   const events = new AbortController();

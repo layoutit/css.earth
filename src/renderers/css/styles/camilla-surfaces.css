@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="camilla"]) > :is(.camilla-sun-camera, .camilla-camera, .camilla-material-root) {
+.object-stage:where([data-object-id="camilla"]) > :is(.camilla-sun-camera, .camilla-camera, .camilla-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-sun-camera, :where(.planet-stage[data-object-id="camilla"]) .camilla-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-body > u {
+:where(.object-stage[data-object-id="camilla"]) .camilla-sun-camera, :where(.object-stage[data-object-id="camilla"]) .camilla-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="camilla"]) .camilla-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="camilla"]) .camilla-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="camilla"]) .camilla-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--camilla-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-body > .camilla-polar { background-image: var(--camilla-poles-image); }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-material-root { z-index: 3; --camilla-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-material, :where(.planet-stage[data-object-id="camilla"]) .camilla-billboard {
+:where(.object-stage[data-object-id="camilla"]) .camilla-body > .camilla-polar { background-image: var(--camilla-poles-image); }
+:where(.object-stage[data-object-id="camilla"]) .camilla-material-root { z-index: 3; --camilla-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="camilla"]) .camilla-material, :where(.object-stage[data-object-id="camilla"]) .camilla-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-material { background-repeat: no-repeat; transform: rotate(var(--camilla-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="camilla"]) .camilla-billboard { border-radius: 50%; background-color: var(--camilla-billboard-color); opacity: var(--camilla-billboard-opacity); }
-.planet-stage:where([data-object-id="camilla"])[data-lod="billboard"] .camilla-scene, .planet-stage:where([data-object-id="camilla"])[data-lod="marker"] .camilla-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="camilla"])[data-lod="marker"] .camilla-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="camilla"]) .camilla-material { background-repeat: no-repeat; transform: rotate(var(--camilla-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="camilla"]) .camilla-billboard { border-radius: 50%; background-color: var(--camilla-billboard-color); opacity: var(--camilla-billboard-opacity); }
+.object-stage:where([data-object-id="camilla"])[data-lod="billboard"] .camilla-scene, .object-stage:where([data-object-id="camilla"])[data-lod="marker"] .camilla-scene { visibility: hidden; }
+.object-stage:where([data-object-id="camilla"])[data-lod="marker"] .camilla-billboard { opacity: 0; }
 

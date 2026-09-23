@@ -178,7 +178,7 @@ export function createApplicationWorldContext() {
         let contextNavigation: ReturnType<typeof createPreparedContextNavigation> | undefined;
         let refreshWorld = () => false;
         // World presentation lives beside the detail stage, outside its changing object scope.
-        const presentationHost = stage.closest<HTMLElement>('.planet-world-stage') ?? stage;
+        const presentationHost = stage.closest<HTMLElement>('.object-world-stage') ?? stage;
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
         const occlusion = labelOcclusionFor(stage.ownerDocument);
@@ -193,9 +193,9 @@ export function createApplicationWorldContext() {
         pendingPlanner = framePlanner;
         // On phones the header floats over the top of the scene and the readout rides on the drawer; the camera centres
         // the focus between them. Wider layouts measure these as uncovering nothing of note.
-        const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'), phone ? {
+        const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.object-sidebar'), phone ? {
           above: stage.ownerDocument.querySelector<HTMLElement>('.explorer-shell-header'),
-          below: stage.ownerDocument.querySelector<HTMLElement>('.planet-view-readout') } : null);
+          below: stage.ownerDocument.querySelector<HTMLElement>('.object-view-readout') } : null);
         const minimap = createSpaceMinimapSetting(stage.ownerDocument, error => target.reportError(error));
         const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
@@ -253,7 +253,7 @@ export function createApplicationWorldContext() {
           } };
         }, layer.opacityClock);
         refreshWorld = () => frameQueue.refresh();
-        const inputSurface = stage.ownerDocument.querySelector<HTMLElement>('.planet-input-surface');
+        const inputSurface = stage.ownerDocument.querySelector<HTMLElement>('.object-input-surface');
         // Rotation suppresses hover/picking churn; label placement is continuous.
         const rotationChanged = (event: Event) => {
           const active = event instanceof CustomEvent && (event.detail as { active?: unknown } | null)?.active === true;

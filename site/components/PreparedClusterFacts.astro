@@ -1,12 +1,12 @@
 ---
 import { parsePreparedClusterCatalog } from '@cssearth/catalog';
 import catalogue from '../../src/objects/galaxy-clusters/prepared/catalogue.json';
-import PlanetFactsheet from './PlanetFactsheet.astro';
+import ObjectFactsheet from './ObjectFactsheet.astro';
 const clusters = parsePreparedClusterCatalog(catalogue);
 const format = new Intl.NumberFormat('en', { maximumSignificantDigits: 4 });
 ---
 {clusters.objects.map(object => <div data-focus-record-bank={object.id} hidden>
-  <PlanetFactsheet id={`focus-${object.id}-catalogue`} embedded facts={[
+  <ObjectFactsheet id={`focus-${object.id}-catalogue`} embedded facts={[
     {id:'aperture',label:'R500 radius',value:format.format(object.aperture.properRadiusM / 3.085677581491367e22)+' Mpc'},
     {id:'ra',label:'Right ascension',value:format.format(object.skyPosition.raDeg)+'°'},
     {id:'dec',label:'Declination',value:format.format(object.skyPosition.decDeg)+'°'},

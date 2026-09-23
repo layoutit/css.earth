@@ -16,9 +16,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
   }
   const document = stage.ownerDocument;
-  const information = document.querySelector(".planet-information-panel");
-  const lensRoot = information?.querySelector(".planet-lenses");
-  const settingsRoot = document.querySelector(".planet-settings");
+  const information = document.querySelector(".object-information-panel");
+  const lensRoot = information?.querySelector(".object-lenses");
+  const settingsRoot = document.querySelector(".object-settings");
   const lensInputs = [...(lensRoot?.querySelectorAll<HTMLButtonElement>('button[name="dataset"]') ?? [])];
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !["motion", "heliosphere", "illustrationModels", "surfaceLabels", "minimap", "threeDStars"].includes(input.name));

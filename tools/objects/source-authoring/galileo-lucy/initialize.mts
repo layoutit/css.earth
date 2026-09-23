@@ -8,17 +8,17 @@ const parseNavigation = (v: unknown) => { const raw=requireRecord(v); return {..
 const parseSnapshotRecipe=shape({size:number,longitudeDegrees:number,latitudeDegrees:number,ambient:number,diffuse:number,inputs:array(text)});
 import {bodies} from './catalog.mts';
 import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';import {resolve} from 'node:path';import {createHash} from 'node:crypto';
-import * as fontkit from 'fontkit';import {createPlanetTitleSource} from '../../../prepare/prepare-planet-title-sources.mts';import {PLANET_TITLE_RECIPE} from '../../../../src/platform/planet-title-recipe.mts';
+import * as fontkit from 'fontkit';import {createObjectTitleSource} from '../../../prepare/prepare-object-title-sources.mts';import {OBJECT_TITLE_RECIPE} from '../../../../src/platform/object-title-recipe.mts';
 import {loadRadialTerrain} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';import {prepareSolidRasters} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';import {renderRadialSnapshot} from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 const read=async (p: string): Promise<unknown>=>JSON.parse(await readFile(p,'utf8')),write=async(p: string,o: unknown)=>writeFile(p,JSON.stringify(o,null,2)+'\n');
 const loadedFont=fontkit.openSync('src/objects/dactyl/source/presentation/InterVariable.ttf');
 assert('getVariation' in loadedFont);
-const font=loadedFont.getVariation({wght:PLANET_TITLE_RECIPE.weight,opsz:PLANET_TITLE_RECIPE.opticalSize});
+const font=loadedFont.getVariation({wght:OBJECT_TITLE_RECIPE.weight,opsz:OBJECT_TITLE_RECIPE.opticalSize});
 for(const c of bodies){
  const p=resolve('src/objects',c.id),s=resolve(p,'source'),config=parseAuthoringSolid(await read(resolve(s,'preparation/terrestrial.json')));
  assert.equal(c.name,config.displayName);
- await write(resolve(s,'presentation/title-mark.json'),{schema:'cssearth-title-source@1',...createPlanetTitleSource(c.name,font)});
- const source=await createSourceManifest({planetId:c.id,planetName:c.name,sourceRoot:s});
+ await write(resolve(s,'presentation/title-mark.json'),{schema:'cssearth-title-source@1',...createObjectTitleSource(c.name,font)});
+ const source=await createSourceManifest({objectId:c.id,objectName:c.name,sourceRoot:s});
  const scratch=resolve('output/galileo-lucy/context',c.id);await mkdir(scratch,{recursive:true});
  const ctx={config,sourceDirectory:s,source,publicDirectory:scratch,outputDirectory:scratch};
  const radial=await loadRadialTerrain(ctx);assert(radial);

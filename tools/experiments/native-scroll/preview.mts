@@ -37,7 +37,7 @@ const css = (distanceM: number, metersPerUnit: number, radiusM: number) => `
   10% { --native-log-distance: 0; }
   100% { --native-log-distance: ${Math.log(solarMaximumDistanceM / distanceM)}; }
 }
-.planet-viewport {
+.object-viewport {
   container-type: size;
   --native-focal: 86.60254037844386cqw;
   --native-distance-m: calc(${distanceM} * exp(var(--native-log-distance)));
@@ -54,13 +54,13 @@ const css = (distanceM: number, metersPerUnit: number, radiusM: number) => `
    tree resumes at exactly the same visibility threshold as its existing fade. */
 @container style(--native-orbit-alpha: 0) { .native-solar-orbits { display:none } }
 @supports (animation-timeline: scroll()) {
-  .planet-viewport { timeline-scope: --native-zoom;
+  .object-viewport { timeline-scope: --native-zoom;
     animation: native-scroll-distance linear both; animation-timeline: --native-zoom; }
-  .planet-input-surface { overflow-x: hidden; overflow-y: auto; scrollbar-width: none; touch-action: pan-y;
+  .object-input-surface { overflow-x: hidden; overflow-y: auto; scrollbar-width: none; touch-action: pan-y;
     overscroll-behavior: contain; scroll-timeline: --native-zoom y; }
-  .planet-input-surface::-webkit-scrollbar { display: none; }
-  .planet-input-surface::before { content: ''; display: block; height: 400px; }
-  .planet-input-surface::after { content: ''; display: block; height: 3600px; }
+  .object-input-surface::-webkit-scrollbar { display: none; }
+  .object-input-surface::before { content: ''; display: block; height: 400px; }
+  .object-input-surface::after { content: ''; display: block; height: 3600px; }
   .native-zoom-start { display: block; height: 100%; scroll-initial-target: nearest; scroll-snap-align: start; outline: none; }
   .polycss-scene { translate: 0 0 calc(var(--native-dolly-m) / ${metersPerUnit} * -1px); }
 }
@@ -101,18 +101,18 @@ createServer((request, response) => {
           preparedEpochJdTt: frame.epochJdTt,
         } satisfies SharedView;
       }
-      const stage = document.querySelector<HTMLElement>('.planet-stage');
+      const stage = document.querySelector<HTMLElement>('.object-stage');
       if (!stage || stage.dataset.objectId !== descriptor.id) throw new Error('The retained scene identity is missing.');
       const lensId = url.searchParams.get('dataset') ?? undefined;
       const markup = serializePreparedScene(definition, lensId);
-      stage.className = ['planet-stage', 'example-stage', ...markup.classes].join(' ');
+      stage.className = ['object-stage', ...markup.classes].join(' ');
       stage.setAttribute('style', markup.style);
       for (const [name, value] of Object.entries(markup.attributes)) stage.setAttribute(name, value);
       stage.innerHTML = markup.html;
       const selection = initialObjectSelection(definition.controls, lensId);
       const publication = publishPreparedNativeView(definition, selection, stage, frame, saved);
       stage.dataset.preparedView = formatSharedView(saved).slice(2);
-      const surface = document.querySelector('.planet-input-surface');
+      const surface = document.querySelector('.object-input-surface');
       if (!surface || !document.querySelector('.polycss-scene')) throw new Error('The existing prepared scene is missing.');
       const nativeCamera = url.searchParams.get('drag') === 'resize' ? addNativeCamera(document, definition, selection, frame, publication) : undefined;
       const rules = addNativeSolarContext(document, frame, saved, descriptor.id, nativeCamera);

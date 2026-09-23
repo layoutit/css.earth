@@ -9,6 +9,7 @@ import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter
 import { parsePreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
 import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
 import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
+import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
 import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { writeAtomic } from './io.ts';
 
@@ -108,13 +109,28 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
           sizePx: star.sizePx * size, opacity: star.opacity * support * brightness };
       });
       const presentation = record(spec.presentation, `${lens.imageId} presentation`);
+      const lensBrightness = record(spec.brightness, `${lens.imageId} brightness`);
+      const attenuation = (key: string) => {
+        const value = lensBrightness[key];
+        assert.ok(typeof value === 'number' && Number.isFinite(value), `${lens.imageId} brightness ${key} must be a number.`);
+        return value;
+      };
+      // Render the impostor views before the slices are packed, so a galaxy that covers a few pixels is drawn as one
+      // billboard. Without them the renderer keeps every slice of the cloud in the layer tree at any distance: on an
+      // iPhone the Magellanic Clouds alone held 526 layers and 1.3 GB of layer memory while the camera was light-years
+      // away. The atlas packer rewrites slice textures only, so these views pass through it unchanged.
+      const projected = await prepareVolumeImpostors({ volume: prefixed,
+        brightness: { overall: attenuation('overall'), x: attenuation('x'), y: attenuation('y'), z: attenuation('z') },
+        prefix: `${lens.imageId}/impostors`,
+        readResource: path => readFile(localPath(staging, path)),
+        writeResource: async (path: string, bytes: Uint8Array) => writeAtomic(localPath(staging, `atlases-out/${path}`), Buffer.from(bytes)) });
       // Pack the axis atlases from the restored slices; three requests per lens instead of one per slab.
-      const baked = await prepareVolumeAtlases({ volume: prefixed, prefix: `${lens.imageId}/atlases`,
+      const baked = await prepareVolumeAtlases({ volume: projected, prefix: `${lens.imageId}/atlases`,
         readResource: path => readFile(localPath(staging, path)),
         writeResource: async (path: string, bytes: Uint8Array) => writeAtomic(localPath(staging, `atlases-out/${path}`), Buffer.from(bytes)) });
       lenses.push({ id: lens.imageId, label: text(presentation.label, 'lens label'), title: text(presentation.label, 'lens title'),
         description: text(presentation.description, 'lens description'), sourceUrl: presentation.sourceUrl,
-        volume: baked, brightness: record(spec.brightness, `${lens.imageId} brightness`), stars: { frame: starsPayload.frame, points } });
+        volume: baked, brightness: lensBrightness, stars: { frame: starsPayload.frame, points } });
     }
     const first = delivered.find(entry => entry.imageId === defaultLens);
     assert.ok(first, 'The delivered default lens is missing.');

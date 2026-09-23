@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="orus"]) > :is(.orus-sun-camera, .orus-camera, .orus-material-root) {
+.object-stage:where([data-object-id="orus"]) > :is(.orus-sun-camera, .orus-camera, .orus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="orus"]) .orus-sun-camera, :where(.planet-stage[data-object-id="orus"]) .orus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="orus"]) .orus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="orus"]) .orus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="orus"]) .orus-body > u {
+:where(.object-stage[data-object-id="orus"]) .orus-sun-camera, :where(.object-stage[data-object-id="orus"]) .orus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="orus"]) .orus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="orus"]) .orus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="orus"]) .orus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--orus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="orus"]) .orus-body > .orus-polar { background-image: var(--orus-poles-image); }
-:where(.planet-stage[data-object-id="orus"]) .orus-material-root { z-index: 3; --orus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="orus"]) .orus-material, :where(.planet-stage[data-object-id="orus"]) .orus-billboard {
+:where(.object-stage[data-object-id="orus"]) .orus-body > .orus-polar { background-image: var(--orus-poles-image); }
+:where(.object-stage[data-object-id="orus"]) .orus-material-root { z-index: 3; --orus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="orus"]) .orus-material, :where(.object-stage[data-object-id="orus"]) .orus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="orus"]) .orus-material { background-repeat: no-repeat; transform: rotate(var(--orus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="orus"]) .orus-billboard { border-radius: 50%; background-color: var(--orus-billboard-color); opacity: var(--orus-billboard-opacity); }
-.planet-stage:where([data-object-id="orus"])[data-lod="billboard"] .orus-scene, .planet-stage:where([data-object-id="orus"])[data-lod="marker"] .orus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="orus"])[data-lod="marker"] .orus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="orus"]) .orus-material { background-repeat: no-repeat; transform: rotate(var(--orus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="orus"]) .orus-billboard { border-radius: 50%; background-color: var(--orus-billboard-color); opacity: var(--orus-billboard-opacity); }
+.object-stage:where([data-object-id="orus"])[data-lod="billboard"] .orus-scene, .object-stage:where([data-object-id="orus"])[data-lod="marker"] .orus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="orus"])[data-lod="marker"] .orus-billboard { opacity: 0; }
 

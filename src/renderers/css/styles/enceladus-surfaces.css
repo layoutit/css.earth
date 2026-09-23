@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="enceladus"]) > :is(.enceladus-sun-camera, .enceladus-camera, .enceladus-material-root) {
+.object-stage:where([data-object-id="enceladus"]) > :is(.enceladus-sun-camera, .enceladus-camera, .enceladus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-sun-camera, :where(.planet-stage[data-object-id="enceladus"]) .enceladus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-body > u {
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-sun-camera, :where(.object-stage[data-object-id="enceladus"]) .enceladus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: visible;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--enceladus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-body > .enceladus-polar { background-image: var(--enceladus-poles-image); }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-material-root { z-index: 3; --enceladus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-material, :where(.planet-stage[data-object-id="enceladus"]) .enceladus-billboard {
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-body > .enceladus-polar { background-image: var(--enceladus-poles-image); }
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-material-root { z-index: 3; --enceladus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-material, :where(.object-stage[data-object-id="enceladus"]) .enceladus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-material { background-repeat: no-repeat; transform: rotate(var(--enceladus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="enceladus"]) .enceladus-billboard { border-radius: 50%; background-color: var(--enceladus-billboard-color); opacity: var(--enceladus-billboard-opacity); }
-.planet-stage:where([data-object-id="enceladus"])[data-lod="billboard"] .enceladus-scene, .planet-stage:where([data-object-id="enceladus"])[data-lod="marker"] .enceladus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="enceladus"])[data-lod="marker"] .enceladus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-material { background-repeat: no-repeat; transform: rotate(var(--enceladus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="enceladus"]) .enceladus-billboard { border-radius: 50%; background-color: var(--enceladus-billboard-color); opacity: var(--enceladus-billboard-opacity); }
+.object-stage:where([data-object-id="enceladus"])[data-lod="billboard"] .enceladus-scene, .object-stage:where([data-object-id="enceladus"])[data-lod="marker"] .enceladus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="enceladus"])[data-lod="marker"] .enceladus-billboard { opacity: 0; }
 

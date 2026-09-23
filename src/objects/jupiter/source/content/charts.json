@@ -93,7 +93,7 @@
           "retrievedAt": "2026-09-01",
           "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
         },
-        "planetId": "jupiter",
+        "objectId": "jupiter",
         "samples": 181,
         "maximumAngleDegrees": 130,
         "qualification": "The greater-than-12-degree Cassini branch is limited to 130 degrees because the source paper reports no constraining data beyond that angle.",

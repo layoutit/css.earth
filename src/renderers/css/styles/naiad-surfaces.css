@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="naiad"]) > :is(.naiad-sun-camera, .naiad-camera, .naiad-material-root) {
+.object-stage:where([data-object-id="naiad"]) > :is(.naiad-sun-camera, .naiad-camera, .naiad-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-sun-camera, :where(.planet-stage[data-object-id="naiad"]) .naiad-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-body > u {
+:where(.object-stage[data-object-id="naiad"]) .naiad-sun-camera, :where(.object-stage[data-object-id="naiad"]) .naiad-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="naiad"]) .naiad-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="naiad"]) .naiad-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="naiad"]) .naiad-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--naiad-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-body > .naiad-polar { background-image: var(--naiad-poles-image); }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-material-root { z-index: 3; --naiad-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-material, :where(.planet-stage[data-object-id="naiad"]) .naiad-billboard {
+:where(.object-stage[data-object-id="naiad"]) .naiad-body > .naiad-polar { background-image: var(--naiad-poles-image); }
+:where(.object-stage[data-object-id="naiad"]) .naiad-material-root { z-index: 3; --naiad-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="naiad"]) .naiad-material, :where(.object-stage[data-object-id="naiad"]) .naiad-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-material { background-repeat: no-repeat; transform: rotate(var(--naiad-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="naiad"]) .naiad-billboard { border-radius: 50%; background-color: var(--naiad-billboard-color); opacity: var(--naiad-billboard-opacity); }
-.planet-stage:where([data-object-id="naiad"])[data-lod="billboard"] .naiad-scene, .planet-stage:where([data-object-id="naiad"])[data-lod="marker"] .naiad-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="naiad"])[data-lod="marker"] .naiad-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="naiad"]) .naiad-material { background-repeat: no-repeat; transform: rotate(var(--naiad-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="naiad"]) .naiad-billboard { border-radius: 50%; background-color: var(--naiad-billboard-color); opacity: var(--naiad-billboard-opacity); }
+.object-stage:where([data-object-id="naiad"])[data-lod="billboard"] .naiad-scene, .object-stage:where([data-object-id="naiad"])[data-lod="marker"] .naiad-scene { visibility: hidden; }
+.object-stage:where([data-object-id="naiad"])[data-lod="marker"] .naiad-billboard { opacity: 0; }
 

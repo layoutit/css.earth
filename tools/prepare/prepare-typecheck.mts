@@ -97,7 +97,7 @@ function uniqueAssets(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLoca
   return [...selected.values()].sort((a, b) => a.file.localeCompare(b.file));
 }
 
-/** PlanetShell imports the real feature-index pin. Restore its named-feature JSON inputs, never the rest of
+/** ObjectShell imports the real feature-index pin. Restore its named-feature JSON inputs, never the rest of
  * those bodies' texture banks; the existing index compiler still validates every catalogue and selection. */
 export async function typecheckFeatureAssets(root = projectRoot, ids = SCENE_OBJECTS.map(object => object.id)) {
   const assets: RuntimeAssetLocation[] = [], catalogues: RuntimeAssetLocation[] = [];

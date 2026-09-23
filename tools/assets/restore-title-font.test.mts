@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { PLANET_TITLE_RECIPE as recipe } from '../../src/platform/planet-title-recipe.mts';
+import { OBJECT_TITLE_RECIPE as recipe } from '../../src/platform/object-title-recipe.mts';
 import { restoreTitleFont } from './restore-title-font.mts';
 
 test('restores the pinned font from a missing source tree, then works offline', async t => {

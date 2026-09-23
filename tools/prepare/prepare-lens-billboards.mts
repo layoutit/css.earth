@@ -10,6 +10,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { presentPhysicalPoseInVolume } from '../../packages/engine/dist/index.js';
 import { isRecord, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { readInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const OUTPUT = { metadata: 'site/prepared-lens-billboards.json', atlas: 'site/prepared-lens-billboards.webp' };
@@ -40,9 +41,12 @@ export async function prepareLensBillboards(projectRoot = root) {
     catch (error) { if (isRecord(error) && error.code === 'ENOENT') continue; throw error; }
     if (descriptor.type !== 'volume-lens-bank') continue;
     const pin = requireRecord(descriptor.prepared, `${id} prepared pin`);
-    const payloadPath = resolve(objects, id, requireString(pin.url, `${id} prepared url`));
-    const bytes = await readFile(payloadPath);
-    if (sha256(bytes) !== pin.sha256) throw new TypeError(`${id}: prepared lenses differ from their descriptor pin; run pnpm setup:prepared.`);
+    const url = requireString(pin.url, `${id} prepared url`), filename = url.replace(/^prepared\//u, '');
+    // The object's inventory is the one record of its baked bytes; descriptors carry no digest.
+    const entry = (await readInventory(id, resolve(objects, id)))?.assets.find(asset => asset.location === 'prepared' && asset.filename === filename);
+    if (!entry) throw new TypeError(`${id}: src/objects/${id}/inventory.json lists no prepared ${filename}.`);
+    const bytes = await readFile(resolve(objects, id, url));
+    if (sha256(bytes) !== entry.sha256) throw new TypeError(`${id}: ${url} is ${sha256(bytes)}, but its inventory says ${entry.sha256}; run pnpm setup:prepared.`);
     const data = requireRecord(requireRecord(JSON.parse(bytes.toString('utf8'))).data, `${id} lenses`);
     const contextVisibility = data.contextVisibility ?? 'galactic';
     if (contextVisibility !== 'galactic' && contextVisibility !== 'independent') throw new TypeError(`${id}: unsupported context visibility.`);
@@ -53,7 +57,7 @@ export async function prepareLensBillboards(projectRoot = root) {
       throw new TypeError(`${id}: default lens frame differs from the descriptor frame.`);
     }
     // A cloud that accompanies a body stays dark until that body's dataset asks for it.
-    const bank = { id, payloadSha256: requireString(pin.sha256, `${id} sha256`), contextVisibility, attached: data.attachedTo !== undefined } as (typeof banks)[number];
+    const bank = { id, payloadSha256: entry.sha256, contextVisibility, attached: data.attachedTo !== undefined } as (typeof banks)[number];
     if (volume.impostors !== undefined) {
       const impostors = requireRecord(volume.impostors, `${id} impostors`);
       const frame = requireRecord(volume.frame) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];

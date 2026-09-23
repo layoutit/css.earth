@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="squannit"]) > :is(.squannit-sun-camera, .squannit-camera, .squannit-material-root) {
+.object-stage:where([data-object-id="squannit"]) > :is(.squannit-sun-camera, .squannit-camera, .squannit-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-sun-camera, :where(.planet-stage[data-object-id="squannit"]) .squannit-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-body > u {
+:where(.object-stage[data-object-id="squannit"]) .squannit-sun-camera, :where(.object-stage[data-object-id="squannit"]) .squannit-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="squannit"]) .squannit-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="squannit"]) .squannit-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="squannit"]) .squannit-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--squannit-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-body > .squannit-polar { background-image: var(--squannit-poles-image); }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-material-root { z-index: 3; --squannit-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-material, :where(.planet-stage[data-object-id="squannit"]) .squannit-billboard {
+:where(.object-stage[data-object-id="squannit"]) .squannit-body > .squannit-polar { background-image: var(--squannit-poles-image); }
+:where(.object-stage[data-object-id="squannit"]) .squannit-material-root { z-index: 3; --squannit-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="squannit"]) .squannit-material, :where(.object-stage[data-object-id="squannit"]) .squannit-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-material { background-repeat: no-repeat; transform: rotate(var(--squannit-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="squannit"]) .squannit-billboard { border-radius: 50%; background-color: var(--squannit-billboard-color); opacity: var(--squannit-billboard-opacity); }
-.planet-stage:where([data-object-id="squannit"])[data-lod="billboard"] .squannit-scene, .planet-stage:where([data-object-id="squannit"])[data-lod="marker"] .squannit-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="squannit"])[data-lod="marker"] .squannit-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="squannit"]) .squannit-material { background-repeat: no-repeat; transform: rotate(var(--squannit-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="squannit"]) .squannit-billboard { border-radius: 50%; background-color: var(--squannit-billboard-color); opacity: var(--squannit-billboard-opacity); }
+.object-stage:where([data-object-id="squannit"])[data-lod="billboard"] .squannit-scene, .object-stage:where([data-object-id="squannit"])[data-lod="marker"] .squannit-scene { visibility: hidden; }
+.object-stage:where([data-object-id="squannit"])[data-lod="marker"] .squannit-billboard { opacity: 0; }
 

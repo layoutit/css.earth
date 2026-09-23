@@ -35,7 +35,7 @@ test('all registry objects own ordered CSS and scene-bound page metadata',async(
   const descriptor=JSON.parse(await readFile(new URL(`../../src/objects/${id}/object.json`,import.meta.url),'utf8'));
   const page=await loadObjectPageData(id);
   const styles=objectPageStyles(descriptor);
-  assert.equal(styles.at(-1),'site/planet-shell.css');
+  assert.equal(styles.at(-1),'site/object-shell.css');
   for(const path of styles) await access(new URL(`../../${path}`,import.meta.url));
   const transport=await readPreparedObjectBytes(id);
   const data=JSON.parse(transport.bytes.toString('utf8')).data;

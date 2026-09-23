@@ -1,22 +1,22 @@
 /* Body-owned dataset bindings for the existing retained spherical scene.
    Prepared science atlases share the photograph atlas layout at one eighth its dimensions. */
-.planet-stage[data-object-id="europa"][data-lens="ice-signature"] .polycss-scene s:not(.europa-polar) {
+.object-stage[data-object-id="europa"][data-lens="ice-signature"] .polycss-scene s:not(.europa-polar) {
   background-image: url("/scenes/europa/europa-ice-signature@2x.webp") !important;
 }
-.planet-stage[data-object-id="europa"][data-lens="ice-signature"] .polycss-scene s.europa-polar {
+.object-stage[data-object-id="europa"][data-lens="ice-signature"] .polycss-scene s.europa-polar {
   background-image: url("/scenes/europa/europa-poles-ice-signature@2x.webp") !important;
 }
 
-.planet-stage[data-object-id="europa"][data-lens="fine-ice"] .polycss-scene s:not(.europa-polar) {
+.object-stage[data-object-id="europa"][data-lens="fine-ice"] .polycss-scene s:not(.europa-polar) {
   background-image: url("/scenes/europa/europa-fine-ice@2x.webp") !important;
 }
-.planet-stage[data-object-id="europa"][data-lens="fine-ice"] .polycss-scene s.europa-polar {
+.object-stage[data-object-id="europa"][data-lens="fine-ice"] .polycss-scene s.europa-polar {
   background-image: url("/scenes/europa/europa-poles-fine-ice@2x.webp") !important;
 }
 
-.planet-stage[data-object-id="europa"][data-lens="coarse-ice"] .polycss-scene s:not(.europa-polar) {
+.object-stage[data-object-id="europa"][data-lens="coarse-ice"] .polycss-scene s:not(.europa-polar) {
   background-image: url("/scenes/europa/europa-coarse-ice@2x.webp") !important;
 }
-.planet-stage[data-object-id="europa"][data-lens="coarse-ice"] .polycss-scene s.europa-polar {
+.object-stage[data-object-id="europa"][data-lens="coarse-ice"] .polycss-scene s.europa-polar {
   background-image: url("/scenes/europa/europa-poles-coarse-ice@2x.webp") !important;
 }
