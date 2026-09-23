@@ -1,0 +1,2437 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "iota-horologii",
+  "displayName": "ι Horologii",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.16 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1710-02438",
+          "url": "https://arxiv.org/abs/1710.02438",
+          "label": "Alvarado-Gómez et al. 2018, Table 1 (Bruntt et al. 2010)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "17.4 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-iota-horologii",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "7.7 days",
+        "source": {
+          "catalogueId": "arxiv-2510-03146",
+          "url": "https://arxiv.org/abs/2510.03146",
+          "label": "Alvarado-Gómez et al. 2025",
+          "checked": "2026-09-23",
+          "path": "source/preparation/rotation.json",
+          "locator": "source"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "iota-horologii-lens-color.webp",
+        "surface": "iota-horologii-surface-color@2x.webp",
+        "poles": "iota-horologii-poles-color@2x.webp",
+        "source": {
+          "id": "iota-horologii-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of the star, an F8 to G0 dwarf. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at 6,080 K and log g 4.40 (Bruntt et al. 2010): a model. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-01",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2015",
+        "thumbnail": "iota-horologii-lens-radial-field-01.webp",
+        "surface": "iota-horologii-surface-radial-field-01@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-01@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-01",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Oct 2015"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Oct 2015, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-02",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2015",
+        "thumbnail": "iota-horologii-lens-radial-field-02.webp",
+        "surface": "iota-horologii-surface-radial-field-02@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-02@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-02",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Dec 2015"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Dec 2015, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-03",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2016",
+        "thumbnail": "iota-horologii-lens-radial-field-03.webp",
+        "surface": "iota-horologii-surface-radial-field-03@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-03@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-03",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Feb 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Feb 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-04",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2016",
+        "thumbnail": "iota-horologii-lens-radial-field-04.webp",
+        "surface": "iota-horologii-surface-radial-field-04@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-04@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-04",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Jun 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Jun 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-05",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2016",
+        "thumbnail": "iota-horologii-lens-radial-field-05.webp",
+        "surface": "iota-horologii-surface-radial-field-05@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-05@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-05",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Aug 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Aug 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-06",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2016",
+        "thumbnail": "iota-horologii-lens-radial-field-06.webp",
+        "surface": "iota-horologii-surface-radial-field-06@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-06@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-06",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Sep 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Sep 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-07",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2016",
+        "thumbnail": "iota-horologii-lens-radial-field-07.webp",
+        "surface": "iota-horologii-surface-radial-field-07@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-07@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-07",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Oct 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Oct 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-08",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2016",
+        "thumbnail": "iota-horologii-lens-radial-field-08.webp",
+        "surface": "iota-horologii-surface-radial-field-08@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-08@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-08",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Dec 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Dec 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-09",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2017",
+        "thumbnail": "iota-horologii-lens-radial-field-09.webp",
+        "surface": "iota-horologii-surface-radial-field-09@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-09@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-09",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Feb 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Feb 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-10",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jul 2017",
+        "thumbnail": "iota-horologii-lens-radial-field-10.webp",
+        "surface": "iota-horologii-surface-radial-field-10@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-10@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-10",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Jul 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Jul 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-11",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2017",
+        "thumbnail": "iota-horologii-lens-radial-field-11.webp",
+        "surface": "iota-horologii-surface-radial-field-11@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-11@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-11",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Aug 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Aug 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-12",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2017",
+        "thumbnail": "iota-horologii-lens-radial-field-12.webp",
+        "surface": "iota-horologii-surface-radial-field-12@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-12@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-12",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Sep 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Sep 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-13",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Nov 2017",
+        "thumbnail": "iota-horologii-lens-radial-field-13.webp",
+        "surface": "iota-horologii-surface-radial-field-13@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-13@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-13",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Nov 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Nov 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-14",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "iota-horologii-lens-radial-field-14.webp",
+        "surface": "iota-horologii-surface-radial-field-14@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-14@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-14",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Dec 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-15",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2018",
+        "thumbnail": "iota-horologii-lens-radial-field-15.webp",
+        "surface": "iota-horologii-surface-radial-field-15@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-15@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-15",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Feb 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Feb 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-16",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2018",
+        "thumbnail": "iota-horologii-lens-radial-field-16.webp",
+        "surface": "iota-horologii-surface-radial-field-16@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-16@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-16",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Jun 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Jun 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-17",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2018",
+        "thumbnail": "iota-horologii-lens-radial-field-17.webp",
+        "surface": "iota-horologii-surface-radial-field-17@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-17@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-17",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Aug 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Aug 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-18",
+        "label": "Radial field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2018",
+        "thumbnail": "iota-horologii-lens-radial-field-18.webp",
+        "surface": "iota-horologii-surface-radial-field-18@2x.webp",
+        "poles": "iota-horologii-poles-radial-field-18@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-18",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Sep 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Sep 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-01",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2015",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-01.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-01@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-01@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-01",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Oct 2015"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Oct 2015, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-02",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2015",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-02.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-02@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-02@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-02",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Dec 2015"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Dec 2015, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-03",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2016",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-03.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-03@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-03@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-03",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Feb 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Feb 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-04",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2016",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-04.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-04@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-04@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-04",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Jun 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Jun 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-05",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2016",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-05.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-05@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-05@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-05",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Aug 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Aug 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-06",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2016",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-06.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-06@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-06@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-06",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Sep 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Sep 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-07",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2016",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-07.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-07@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-07@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-07",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Oct 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Oct 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-08",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2016",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-08.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-08@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-08@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-08",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Dec 2016"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Dec 2016, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-09",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2017",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-09.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-09@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-09@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-09",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Feb 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Feb 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-10",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jul 2017",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-10.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-10@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-10@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-10",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Jul 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Jul 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-11",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2017",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-11.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-11@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-11@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-11",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Aug 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Aug 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-12",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2017",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-12.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-12@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-12@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-12",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Sep 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Sep 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-13",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Nov 2017",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-13.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-13@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-13@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-13",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Nov 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Nov 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-14",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-14.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-14@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-14@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-14",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Dec 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-15",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2018",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-15.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-15@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-15@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-15",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Feb 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Feb 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-16",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2018",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-16.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-16@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-16@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-16",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Jun 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Jun 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-17",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2018",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-17.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-17@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-17@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-17",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Aug 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Aug 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-18",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2018",
+        "thumbnail": "iota-horologii-lens-azimuthal-field-18.webp",
+        "surface": "iota-horologii-surface-azimuthal-field-18@2x.webp",
+        "poles": "iota-horologii-poles-azimuthal-field-18@2x.webp",
+        "source": {
+          "id": "iota-horologii-zdi-epoch-18",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/17251923"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Sep 2018"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-12",
+              "0",
+              "+12"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://zenodo.org/records/17251923"
+        },
+        "notes": "The large-scale magnetic field in Sep 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Alvarado-Gómez et al. (2025), A&A 704, A68",
+      "href": "https://arxiv.org/abs/2510.03146"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2510.03146",
+      "credit": "Alvarado-Gómez et al. (2025), A&A 704, A68"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/iota-horologii.json",
+      "credit": "Radius and mass from Bruntt et al. (2010); Gaia DR3 astrometry; spin tilt from the ZDI maps, axis direction a display convention"
+    }
+  }
+}

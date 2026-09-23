@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 40.64179116281781,
+  "declinationDegrees": 69.20068209586091,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "Spin inclination 60 degrees from the line of sight, the value Alvarado-Gomez et al. (2025, A&A 704, A68) adopt for every ZDI map shown here (their own fit gives about 56 degrees from v sin i = 6.3 km/s, P = 7.73 d and R = 1.16 solar radii), with the pole the maps call north tilted toward us. The direction of the axis on the sky is not measured; it is placed toward celestial north as a convention. The axis is sin(i) x sky-north - cos(i) x (direction to the star): RA 40.6418, Dec +69.2007. The maps share one rotational ephemeris (day 0 = BJD 2457300.78580, P = 7.73 d), so their longitudes line up from epoch to epoch; that period cannot phase them to today, so longitude 0 faces the Sun as a display convention.",
+  "coordinateSystem": "ICRF/J2000. +Z is the spin axis above; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "The tilt of the spin axis is the maps' own; its position angle on the sky and the rotation phase are display conventions."
+}

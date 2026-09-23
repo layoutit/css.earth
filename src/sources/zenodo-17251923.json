@@ -1,0 +1,36 @@
+{
+  "id": "zenodo-17251923",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Zeeman-Doppler Imaging (ZDI) maps of ι Horologii associated to the \"Far Beyond the Sun Campaign\"",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.17251923"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/17251923",
+      "label": "Zenodo record"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/records/17251923",
+      "checkedOn": "2026-09-23",
+      "locator": "iHor_ZDI-Unconstrained.zip, -Symmetric.zip, -Antisymmetric.zip: 18 Tecplot .dat maps each (longitude, latitude, B_R, B_A, B_M on an 89 x 45 grid); CC BY 4.0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. D. Alvarado-Gómez and G. Hussain (2025), ZDI maps of iota Horologii, Zenodo, CC BY 4.0",
+      "scope": "citation",
+      "evidence": "https://zenodo.org/records/17251923"
+    }
+  ],
+  "publisher": "Zenodo"
+}

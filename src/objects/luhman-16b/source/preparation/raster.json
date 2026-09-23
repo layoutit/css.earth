@@ -16,7 +16,6 @@
   },
   "thumbnail": {
     "size": 64,
-    "quality": 88,
     "centerLongitudeDegrees": 0
   },
   "surfaces": [
@@ -35,8 +34,8 @@
         "ordering": "ring",
         "transform": "value",
         "consumer": "ureshino-2026-doppler-imaging",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
         "outputLongitudeOrigin": 0,
         "units": "relative intensity",
         "minimum": 0.006416,
@@ -55,7 +54,8 @@
         ],
         "description": "Surface brightness from Doppler imaging: the posterior mean map of Ureshino et al. (2026), fitted to the CRIRES spectra of Crossfield et al. (2014).",
         "title": "VLT CRIRES · Doppler-imaging map",
-        "sourceUrl": "https://zenodo.org/records/20024778"
+        "sourceUrl": "https://zenodo.org/records/20024778",
+        "interpolation": "bilinear"
       }
     },
     {
@@ -73,8 +73,8 @@
         "ordering": "ring",
         "transform": "sqrt",
         "consumer": "ureshino-2026-doppler-imaging",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
         "outputLongitudeOrigin": 0,
         "units": "relative intensity, one standard deviation",
         "minimum": 0.001232,
@@ -93,7 +93,8 @@
         ],
         "description": "One standard deviation of the brightness at each point: the square root of the posterior variance map of Ureshino et al. (2026).",
         "title": "VLT CRIRES · Doppler-imaging uncertainty",
-        "sourceUrl": "https://zenodo.org/records/20024778"
+        "sourceUrl": "https://zenodo.org/records/20024778",
+        "interpolation": "bilinear"
       }
     }
   ],
