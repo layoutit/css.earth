@@ -130,3 +130,36 @@ test('filtering retains matching objects inside their hierarchy and restores the
   assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="earth"]')?.getAttribute('aria-current'), 'page');
   controller.destroy();
 });
+
+test('a deferred selection that finishes after a newer one leaves the newer entry current', async () => {
+  const payload: NavigationTreePayload = {
+    schema: NAVIGATION_TREE_SCHEMA,
+    roots: ['root'],
+    nodes: {
+      root: { label: 'Root', objectId: null, place: true, count: 1, marker: null, children: ['leaf'], href: null, focusId: null },
+      leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1, marker: null, children: [], href: '/leaf/', focusId: null },
+    },
+  };
+  const text = JSON.stringify(payload);
+  const sha256 = createHash('sha256').update(text).digest('hex');
+  const { document, window } = parseHTML(`<div data-object-navigation-tree
+    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    <ul class="atlas-tree">
+      <li><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Root (1)</span></summary></details></li>
+      <li><details open data-atlas-depth="0" data-atlas-key="other-root"><summary>Other</summary><ul><li><a data-atlas-object="other">Other</a></li></ul></details></li>
+    </ul>
+  </div>`);
+  let respond!: (response: Response) => void;
+  window.fetch = () => new Promise<Response>(resolve => { respond = resolve; });
+  const root = document.querySelector<HTMLElement>('[data-object-navigation-tree]')!;
+  const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
+
+  const older = controller.select('leaf');
+  await controller.select('other');
+  respond(new Response(text));
+  await older;
+
+  assert.equal(root.querySelector('a[data-atlas-object="other"]')?.getAttribute('aria-current'), 'page');
+  assert.equal(root.querySelector('a[aria-current]:not([data-atlas-object="other"])'), null);
+  controller.destroy();
+});
