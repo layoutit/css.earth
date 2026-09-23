@@ -45,36 +45,41 @@ function defaultSample(assets: readonly PublishAsset[], count: number): readonly
   return Array.from({ length: count }, (_, i) => sorted[Math.min(sorted.length - 1, Math.floor(i * step))]!);
 }
 
+/** Reads are latency-bound, one round trip each; one at a time, 16,000 keys took about 40 minutes. */
+export const VERIFY_HEAD_CONCURRENCY = 64, VERIFY_BYTES_CONCURRENCY = 16;
+
+/** The assets whose check fails, `limit` checks at a time; the result keeps the input order. */
+async function failing(assets: readonly PublishAsset[], limit: number, fails: (asset: PublishAsset) => Promise<boolean>) {
+  const failed = new Array<boolean>(assets.length);
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(limit, assets.length) }, async () => {
+    while (next < assets.length) { const index = next++; failed[index] = await fails(assets[index]!); }
+  }));
+  return assets.filter((_, index) => failed[index]);
+}
+
 export async function verifyPublished(assets: readonly PublishAsset[], options: VerifyOptions): Promise<VerifyResult> {
   const fetcher = options.fetcher ?? fetch;
   const url = (key: string) => `${options.origin}/${key}`;
+  const missing = async (asset: PublishAsset) => !headOk(await fetcher(url(asset.key), { method: 'HEAD' }).catch(() => null), asset);
 
-  const misses: PublishAsset[] = [];
-  for (const asset of assets) {
-    const response = await fetcher(url(asset.key), { method: 'HEAD' }).catch(() => null);
-    if (!headOk(response, asset)) misses.push(asset);
-  }
+  const misses = await failing(assets, VERIFY_HEAD_CONCURRENCY, missing);
 
   const retried: string[] = [];
   for (const asset of misses) { await options.uploadOne(asset); retried.push(asset.key); }
 
-  const stillMissing: string[] = [];
-  for (const asset of misses) {
-    const response = await fetcher(url(asset.key), { method: 'HEAD' }).catch(() => null);
-    if (!headOk(response, asset)) stillMissing.push(asset.key);
-  }
+  const stillMissing = (await failing(misses, VERIFY_HEAD_CONCURRENCY, missing)).map(asset => asset.key);
 
   const jsonAssets = assets.filter(a => a.key.endsWith('.json'));
   const otherAssets = assets.filter(a => !a.key.endsWith('.json'));
   const pickSample = options.pickSample ?? defaultSample;
   const sample = pickSample(otherAssets, options.sampleSize ?? 10);
-  const sampleFailures: string[] = [];
-  for (const asset of [...jsonAssets, ...sample]) {
+  const sampleFailures = (await failing([...jsonAssets, ...sample], VERIFY_BYTES_CONCURRENCY, async asset => {
     const response = await fetcher(url(asset.key)).catch(() => null);
-    if (!response || !response.ok) { sampleFailures.push(asset.key); continue; }
+    if (!response || !response.ok) return true;
     const bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) sampleFailures.push(asset.key);
-  }
+    return bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256;
+  })).map(asset => asset.key);
 
   return { retried, misses: stillMissing, sampleFailures };
 }
