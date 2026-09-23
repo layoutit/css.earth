@@ -1,13 +1,10 @@
 import { createObjectBrowserController } from './object-browser.mts';
-import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
+import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import type { OverviewScope } from './overview-context.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
-import { readInitialFocus } from './focus-catalog.mts';
-import { shellSubjectKey, type ShellSelection } from './shell-selection.mts';
-import type { PreparedFocusPresentation } from './prepared-focus.mts';
+import { selectionKey } from './scene-selection.mts';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import type { ShellCamera, PlaybackState } from './browser-types.mts';
@@ -22,7 +19,7 @@ import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mts"
 import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
-import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
+import { bodyCardViewAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
 import { createSheetController } from './shell-sheet.mts';
 import { createSettingsController } from './shell-settings.mts';
@@ -38,6 +35,7 @@ interface SelectionPreview {
 
 export function mountObjectShell({
   objectId,
+  readSelection,
   documentTarget = document,
   windowTarget = window,
   motionEnabled = false,
@@ -70,33 +68,31 @@ export function mountObjectShell({
   let selectionPreview: SelectionPreview | null = null;
   let navigationTransition: ShellNavigationTransition | null = null;
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
-  let selection: ShellSelection = { objectId, overview: null, focus: readInitialFocus(documentTarget) };
   let camera: ShellCamera | null = null;
-  let unsubscribeOverview: (() => void) | null = null;
+  let unsubscribeCamera: (() => void) | null = null;
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
   const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
   lifetime.onDispose(() => focusCard.destroy());
-  lifetime.onDispose(() => unsubscribeOverview?.());
+  lifetime.onDispose(() => unsubscribeCamera?.());
   // The card panel is retained; a camera frame re-queries it only after a card swap.
   let information: HTMLElement | null = null;
   function updateBodyCard(world = camera?.navigation?.capture()) {
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
     const previous = information?.dataset.cardView;
     const view = cardNavigation?.view ?? bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
-      camera?.navigation?.optics?.(), selectionPreview?.id ?? selection.objectId,
+      camera?.navigation?.optics?.(), selectionPreview?.id ?? objectId,
       previous === 'detail' || previous === 'overview' ? previous : undefined);
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
   }
-  function updateOverview(force = false, world = camera?.navigation?.capture()) {
-    updateBodyCard(world);
-    if (selectionPreview) return;
-    const previousScope = selection.overview?.scope ?? 'system';
-    const scope = selection.overview && world ? overviewScopeAtCamera(world, previousScope) : 'system';
-    if (!force && scope === previousScope) return;
-    if (selection.overview) selection = { ...selection, overview: { ...selection.overview, scope } };
-    objectBrowser.refreshSelection({ clearObjectProviders: selection.overview !== null });
-    viewReadout.setOverviewScope(scope);
+  function presentSelection() {
+    if (lifetime.disposed) return;
+    const subject = readSelection(), focus = subject.kind === 'focus' ? subject : null;
+    focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
+    objectBrowser.refreshSelection();
+    viewReadout.setPreparedFocus(focus?.record ?? null);
+    viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : 'system');
+    updateBodyCard();
   }
   function own<T extends { destroy(): void }>(controller: T) {
     lifetime.onDispose(() => controller.destroy());
@@ -104,11 +100,11 @@ export function mountObjectShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
-    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection: () => selection, onCategoryChange, illustrationModelsEnabled }));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId, onCategoryChange, illustrationModelsEnabled }));
     // Hover, focus or press on another body fetches its card before the click.
-    own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === selection.objectId }));
+    own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === objectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime,
-      () => `${selection.objectId}:${shellSubjectKey(objectBrowser.readSubject())}`));
+      () => `${objectId}:${selectionKey(objectBrowser.readSubject())}`));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSystem(SOLAR_SYSTEM_ID),
     }));
@@ -133,20 +129,13 @@ export function mountObjectShell({
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
     selectPlace(id: string) { return lifetime.disposed ? Promise.resolve() : objectBrowser.selectPlace(id); },
     setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
-    setPreparedFocus(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[] = [], presentation: PreparedFocusPresentation | null = null) {
-      if (lifetime.disposed) return;
-      selection = { ...selection, focus: record };
-      focusCard.set(record, sources, presentation);
-      objectBrowser.refreshFocus();
-      viewReadout.setPreparedFocus(record);
-    },
-    setOverview,
+    presentSelection,
     setCamera(provider: ShellCamera | null) {
       if (!lifetime.disposed) {
-        unsubscribeOverview?.(); camera = provider;
+        unsubscribeCamera?.(); camera = provider;
         minimapController.setCamera(provider); viewReadout.setCamera(provider);
-        unsubscribeOverview = provider?.navigation?.subscribe(world => updateOverview(false, world)) ?? null;
-        updateOverview(true);
+        unsubscribeCamera = provider?.navigation?.subscribe(world => updateBodyCard(world)) ?? null;
+        updateBodyCard();
       }
     },
     setMotionEnabled(enabled: boolean) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
@@ -182,16 +171,16 @@ export function mountObjectShell({
     }
     let arrived = false;
     const transition: ShellNavigationTransition = {
-      arrive({ overview, content }) {
+      arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;
         const preserveSidebar = content !== undefined && preview?.id === content.id;
         // A content handoff can retain its previewed card. An in-place arrival
         // commits the requested subject without replacing the mounted body.
-        const acceptsPreview = content ? preserveSidebar : overview === (target.kind === 'overview');
+        const acceptsPreview = content ? preserveSidebar : (subject.kind === 'overview') === (target.kind === 'overview');
         if (acceptsPreview) preview?.commit();
         else preview?.restore();
         if (content) setObject(content, { preserveSidebar });
-        setOverview(overview);
+        presentSelection();
         arrived = true;
       },
       dispose() {
@@ -230,7 +219,7 @@ export function mountObjectShell({
   }
   function beginObjectSelection(object: ObjectEntry) {
     sheet.showSelection();
-    if (object.id === selection.objectId) {
+    if (object.id === objectId) {
       const restoreBrowser = objectBrowser.previewObject(object.id);
       const preview = { id: object.id, commit() { selectionPreview = null; }, restore() {
         if (selectionPreview !== preview) return;
@@ -302,20 +291,10 @@ export function mountObjectShell({
     const motion = requiredElement<HTMLInputElement>(documentTarget, '.object-motion-setting').checked;
     disposeContent();
     content.apply({ preserveSidebar });
-    selection = { objectId: content.id, overview: null, focus: null };
+    objectId = content.id;
     focusCard.set(null);
     objectBrowser.bindObject(content.id);
     mountContent(content.id, motion);
-  }
-
-  function setOverview(enabled: boolean) {
-    if (!lifetime.disposed) {
-      selection = { ...selection, overview: enabled ? {
-        scope: selection.overview?.scope ?? 'system',
-        systemId: systemById(SCENE_OBJECTS, selection.objectId)?.id ?? SOLAR_SYSTEM_ID,
-      } : null };
-      updateOverview(true);
-    }
   }
 
   function disposeContent() {
@@ -344,7 +323,8 @@ export function mountObjectShell({
       onInteraction() { settingsController.setMotionEnabled(false); },
     }));
     viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }));
-    viewReadout.setPreparedFocus(selection.focus);
+    const subject = readSelection();
+    viewReadout.setPreparedFocus(subject.kind === 'focus' ? subject.record : null);
     informationCard.activatePanels();
   }
 }
