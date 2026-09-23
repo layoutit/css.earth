@@ -36,6 +36,31 @@ and redirected input or output never prompt. Without `--out`, the command create
 under `./telescope-runs/`. An exploration delivery retains “no scientific acceptance criteria
 requested” through later outputs.
 
+The saved answer reports `outcome.selection` separately from `outcome.coverage`. An unavailable
+provider, overflow, unread source, unanswered ledger or unresolved metadata makes coverage
+`incomplete`, even if another choice is available. When no choice is available, the terminal
+distinguishes that from a bounded search with no retrievable route and from an unresolved target.
+Provider failures appear before long lists of unresolved rows. Fix the reported blocker and use a
+new exploration directory for another run; the saved numbered choices do not change. A bounded
+empty result is not a claim that no observation exists outside these configured searches.
+
+The live [MAST ObsCore TAP search](https://mast.stsci.edu/vo-tap/api/v0.1/caom/examples) covers JWST and HST separately. It first asks the archive which
+instruments match the target, then samples up to five records from each of at most eight
+instruments. This keeps a populous mode from hiding another mode, while an instrument or row cap
+remains an incomplete search. The target query accepts the catalogue spelling and compact/hyphen
+variants, and each returned name is checked for a unique catalogue match. Archive facility,
+collection, and instrument fields are retained; a MAST result displays as, for example,
+`JWST / MIRI/CORON`. Direct FITS access can become a numbered qualification choice, but the
+archive metadata alone is not a qualified science product. Shared DataLink URLs are described
+once per query, including when an archive truncates its advertised MIME type.
+
+`explore` also searches [KOA's public TAP instrument tables](https://koa.ipac.caltech.edu/UserGuide/PyKOA/TAPClients.html) for exact target-name variants and
+[Gemini's canonical JSON summary](https://archive.gemini.edu/help/api.html) for science-file metadata. These are live instrument counts and
+example identities under `services`, not numbered retrieval choices. KOA queries run serially;
+Gemini responses are capped at 1 MB. A refused, truncated or partly answered archive is marked
+unavailable or overflow rather than reported as empty. Neither free-form archive object names nor
+sky overlap alone confirms a scientific target association.
+
 `explore` also asks the PDS Ring-Moon Systems Node's
 [OPUS search](https://opus.pds-rings.seti.org/api/) which spacecraft images exist of the body.
 This covers Voyager, Galileo, Cassini, New Horizons and the other missions OPUS indexes. OPUS
@@ -50,7 +75,7 @@ bodies such as Kerberos, the mean diameter gives fewer pixels than the long axis
 explore filters (kind, wavelength, time) are not sent to OPUS, and these images are listed for
 reading only; they do not become numbered choices for `get`. A failed request, including the
 HTML error page OPUS returns for an invalid query, is reported as `unavailable`, never as an
-empty result. The entry sits in `services` with the ESO, ALMA and PSA searches:
+empty result. The entry sits in `services` with the ESO, ALMA, PSA, and MAST JWST/HST searches:
 
 ```sh
 pnpm -s telescope explore kerberos --json
@@ -79,7 +104,8 @@ pnpm -s telescope papers io --instrument JIRAM --json --out output/io-papers
 
 `papers` resolves a catalogue name the same way as `explore`; any other name is searched as written. It then asks OpenAlex for articles,
 reviews, letters and preprints whose title or abstract names the target and, if given, the
-instrument. A body on a hosted orbit is searched together with any one of its host's names, so a short name such as a star's
+instrument. If OpenAlex returns HTTP 429 or a temporary server error, it searches [arXiv's Atom API](https://info.arxiv.org/help/api/user-manual.html) instead. The report names the index that answered and the reason for switching; arXiv covers only its own preprints.
+A body on a hosted orbit is searched together with any one of its host's names, so a short name such as a star's
 "S2" is not matched to papers about the Drosophila S2 cell line. For a name outside the catalogue, `--host NAME` adds the host by hand: `papers S301 --host "Sgr A*"`. A `*` in a name, as in Sagittarius A*, is dropped from the query because
 OpenAlex rejects it. It keeps up to 20, open access first, then by OpenAlex relevance, then newest first.
 Each work shows its title, year, DOI, first three authors, licence and open-access link.
@@ -121,6 +147,10 @@ pins require a new query or exploration directory and a fresh `get` before expor
 For the repository script, use `pnpm --silent telescope … --json` to suppress pnpm’s own preamble.
 Progress goes to stderr; `--json` keeps stdout machine-readable, including when a
 native reducer prints to its inherited stdout. `--verbose` retains the full query report.
+The saved query also has `answer.endpoint.coverage`, separate from its workflow status. A failed
+archive query is incomplete even when indexed candidate modes exist. The normal terminal view
+shows provider status before a bounded list of mode blockers; the saved result and `--verbose`
+retain the full evidence.
 Exit 3 can accompany a valid delivered cube: it means scientific requirements remain
 unresolved. Repeating `get` revalidates current qualifications and the exported files
 before reporting reuse. It refuses modified deliveries rather than overwriting them.

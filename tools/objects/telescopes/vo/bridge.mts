@@ -6,9 +6,10 @@ import type { CapabilityRequest } from '../query.mts';
 import type { TargetCatalogueEntry } from '../targets.mts';
 import type { QualifiedObservation } from '../qualified-observations.mts';
 import type { QualificationAction } from '../qualification-routes.mts';
-import { jsonValue, parseLimits, type DiscoverySnapshot } from './contracts.mts';
-import { discover, normalizeSnapshot, SERVICES, type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
-import { nativeQualificationRoute, planAccess, type AcquisitionSpec } from './access.mts';
+import { jsonValue, parseLimits, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
+import { discover, discoverInstrumentFacets, INSTRUMENT_SAMPLE_LIMIT, normalizeSnapshot, SERVICES,
+  type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
+import { nativeQualificationRoute, planAccess, type AcquisitionSpec, type MetadataLoader } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
 
 export interface VoInputs {
@@ -19,28 +20,64 @@ export interface VoProductCandidate {
   readonly acquisitionKey: string; readonly observation: DiscoveredObservation; readonly satisfaction: RequestSatisfaction;
   readonly product?: QualifiedObservation; readonly action?: QualificationAction; readonly limitations: readonly string[];
 }
-export async function loadVoInputs(root: string, request: DiscoveryRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string, discoverer: typeof discover = discover, policy: VoNetworkPolicy = {}): Promise<VoInputs> {
+export async function loadVoInputs(root: string, request: DiscoveryRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string,
+  discoverer: typeof discover = discover, policy: VoNetworkPolicy = {}, metadataLoader?: MetadataLoader,
+  faceter: typeof discoverInstrumentFacets = discoverInstrumentFacets): Promise<VoInputs> {
   const identities = catalogue.map(t => ({ id: t.id, names: [t.name, ...t.aliases], classification: t.archiveClass, classificationSource: t.classificationSource }));
   const target = identities.find(t => t.id === request.target);
   if (!target) return { records: [], services: [] };
   const limits = parseLimits(request.transferLimits), records: VoInputs['records'][number][] = [], services: VoInputs['services'][number][] = [];
   let metadataRequests = 0;
-  const results = await Promise.allSettled(SERVICES.map(profile => discoverer(root, profile, request, target.names, limits)));
-  for (let i = 0; i < results.length; i++) {
-    const result = results[i]!, profile = SERVICES[i]!;
-    if (result.status === 'rejected') { services.push({ service: profile.service, state: 'unavailable', scope: 'Target-name query', reason: String(result.reason) }); continue; }
-    const snapshot = result.value;
-    services.push({ service: profile.service, state: snapshot.completeness === 'failed' ? 'unavailable' : snapshot.completeness === 'overflow' ? 'overflow' : snapshot.response.rows.length ? 'sampled' : 'empty-in-scope',
-      scope: snapshot.scope, reason: snapshot.response.issues.join('; ') || `${snapshot.response.rows.length} rows; this bounded name search is not an archive inventory.` });
-    if (snapshot.completeness === 'failed') continue;
-    for (const observation of normalizeSnapshot(snapshot, profile, target, identities)) {
+  const metadata = new Map<string, Promise<MetadataResponse>>();
+  // Run archive clients one at a time; a faceted MAST search must not start many Python processes together.
+  for (const profile of SERVICES) {
+    let snapshots: DiscoverySnapshot[] = [], facet: Awaited<ReturnType<typeof faceter>> | undefined;
+    const discoveryFailures: string[] = [];
+    try {
+      if (profile.facetByInstrument && !request.instrument) {
+        facet = await faceter(root, profile, request, target.names, limits);
+        for (const instrument of facet.names) {
+          try { snapshots.push(await discoverer(root, profile, { ...request, instrument }, target.names, limits, INSTRUMENT_SAMPLE_LIMIT)); }
+          catch (error) { discoveryFailures.push(`${instrument}: ${error instanceof Error ? error.message : String(error)}`); }
+        }
+      } else snapshots = [await discoverer(root, profile, request, target.names, limits)];
+    } catch (error) { discoveryFailures.push(error instanceof Error ? error.message : String(error)); }
+    if (!snapshots.length && discoveryFailures.length) {
+      services.push({ service: profile.label ?? profile.service, state: 'unavailable', scope: 'Target-name query', reason: discoveryFailures.join('; ') });
+      continue;
+    }
+    const rows = snapshots.reduce((count, snapshot) => count + snapshot.response.rows.length, 0);
+    const incomplete = !facet?.complete && facet !== undefined || discoveryFailures.length > 0 || snapshots.some(snapshot => snapshot.completeness !== 'bounded-sample');
+    services.push({ service: profile.label ?? profile.service, state: incomplete ? 'overflow' : rows ? 'sampled' : 'empty-in-scope',
+      scope: facet ? `Instrument-faceted target-name search; ${INSTRUMENT_SAMPLE_LIMIT} rows per instrument` : snapshots[0]?.scope ?? 'Exact target-name search',
+      reason: [...facet ? [`${facet.names.length} archive instrument(s); facet evidence ${facet.evidence}`] : [],
+        ...snapshots.flatMap(snapshot => snapshot.response.issues), ...facet?.issues ?? [], ...discoveryFailures,
+        `${rows} sampled rows; this is not a complete archive inventory.`].join('; ') });
+    let accessLimitReached = false;
+    for (const snapshot of snapshots) for (const observation of snapshot.completeness === 'failed' ? [] : normalizeSnapshot(snapshot, profile, target, identities)) {
       if (selectedObservation !== undefined && observation.key !== selectedObservation) { records.push({ observation, snapshot, products: [], issues: ['Access descriptions were not refreshed because get selected a different observation.'] }); continue; }
       const plan = await planAccess(root, observation, snapshot, request, async (url, parameters) => {
-        if (++metadataRequests > limits.metadataRequests) throw new Error('The query-wide access-description request limit was reached.');
-        return (await astroquery({ operation: 'vo-links', url, parameters, directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
-          allowedPrivateHosts: policy.allowedPrivateHosts })).vo!;
+        const key = JSON.stringify([url, parameters ?? {}]);
+        let pending = metadata.get(key);
+        if (!pending) {
+          if (metadataRequests >= limits.metadataRequests) {
+            accessLimitReached = true;
+            throw new Error('The query-wide access-description request limit was reached.');
+          }
+          metadataRequests++;
+          pending = metadataLoader ? metadataLoader(url, parameters) : astroquery({ operation: 'vo-links', url, parameters,
+            directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
+            allowedPrivateHosts: policy.allowedPrivateHosts }).then(answer => answer.vo!);
+          metadata.set(key, pending);
+        }
+        return pending;
       }, policy).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
       records.push({ observation, snapshot, ...plan });
+    }
+    if (accessLimitReached) {
+      const previous = services.at(-1)!;
+      services[services.length - 1] = { ...previous, state: 'overflow',
+        reason: `${previous.reason} Access descriptions exceeded the query-wide limit of ${limits.metadataRequests}; later records remain unresolved.` };
     }
   }
   return { records, services };

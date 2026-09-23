@@ -33,6 +33,7 @@ In a terminal, outputs asks which available operation to run, then asks only for
 reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
 starts. With --json or redirected input/output it never prompts; the listed command templates remain.
 Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
+using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
 open access first. It tries one plain GET per open copy, marks browser challenges as blocked, and prints
 HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
 Family-run executes one operation from a verified product descriptor through the static owner allowlist.
@@ -118,6 +119,14 @@ body map + embeddable standard body -> sphere; prepared point/volume/volume-lens
 Configured, bounded archive searches and a declared product kind do not promise universal
 archive coverage, decoding or export. Qualified FITS images, spectra, band images and feature maps
 use zero-based HDU, plane and pixel indices. Cubes require an explicit plane for image export.
+Explore records outcome.selection (available or none) separately from outcome.coverage
+(bounded, incomplete or target-unresolved). A provider failure, overflow, unread source or
+unresolved discovery makes coverage incomplete even when another observation is selectable.
+Query records endpoint.coverage separately from its scientific workflow status, so indexed
+candidate modes do not hide failed provider searches. Human query output puts provider status
+first and bounds the blocker list; --verbose and the saved JSON retain the full evidence.
+No choices in a bounded search never proves that no observation exists. Retry after fixing a
+provider or source error in a new directory; the original numbered choices stay immutable.
 Export writes FITS images or ECSV spectra, PNG, SVG, CSV and a pinned receipt.
 The output directory must be new. No browser or viewer service is required.
 Local import copies and pins a bounded file or directory closure from a data-only JSON specification.

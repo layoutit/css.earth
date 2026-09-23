@@ -114,8 +114,17 @@ export interface UnassignedEvidence {
 
 export type WorkflowBlockerCode = 'request-incomplete' | 'constraint-refused' | 'toolkit-unavailable' | 'body-map-author-missing' | 'target-program-unqualified';
 export type TargetCoverageState = 'observed' | 'searched-empty' | 'unsupported-products' | 'not-searched' | 'unanswered';
+export type SearchCoverage = 'target-unresolved' | 'incomplete' | 'bounded';
+export type ProviderSearchState = 'sampled' | 'overflow' | 'empty-in-scope' | 'unavailable' | 'unknown-target';
 export interface TargetCoverage { readonly telescope: string; readonly ledger: string; readonly state: TargetCoverageState; readonly reason: string;
   readonly registryProducts?: number; readonly admittedProducts?: number; readonly rejected?: readonly { readonly lidvid: string; readonly reason: string }[] }
+/** A bounded answer describes only configured searches; incomplete evidence cannot support a negative. */
+export function assessSearchCoverage(input:{readonly resolution:TargetResolution;readonly indexed:readonly TargetCoverage[];
+  readonly providers:readonly {readonly state:ProviderSearchState}[];readonly sourceIncomplete?:boolean;readonly unresolved?:boolean}):SearchCoverage {
+  if(input.resolution.status!=='resolved')return 'target-unresolved';
+  return input.unresolved||input.sourceIncomplete||input.indexed.some(item=>item.state==='not-searched'||item.state==='unanswered')
+    ||input.providers.some(service=>service.state==='unavailable'||service.state==='overflow')?'incomplete':'bounded';
+}
 export interface WorkflowBlocker { readonly code: WorkflowBlockerCode; readonly reason: string; readonly constraint?: string }
 export interface SelectionAction { readonly kind: 'select-observation'; readonly programme: string; readonly command: 'pnpm'; readonly arguments: readonly string[] }
 export interface CandidateSelectionAssessment {
@@ -197,7 +206,7 @@ export interface CapabilityAnswer {
   readonly targetResolution: TargetResolution;
   readonly candidates: readonly Candidate[];
   readonly unassignedEvidence: readonly UnassignedEvidence[];
-  readonly endpoint: { readonly status: 'unknown-target' | 'request-incomplete' | 'index-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly (WorkflowBlockerCode | 'unknown-target' | 'target-index-unavailable' | 'archive-query-unanswered' | 'archive-products-unsupported')[] };
+  readonly endpoint: { readonly status: 'unknown-target' | 'request-incomplete' | 'index-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly coverage: SearchCoverage; readonly selectableCandidates: number; readonly blockerCodes: readonly (WorkflowBlockerCode | 'unknown-target' | 'target-index-unavailable' | 'archive-query-unanswered' | 'archive-products-unsupported')[] };
   /** One explicit coverage result per ledger. Absence is never silently treated as an archive negative. */
   readonly targetCoverage: readonly TargetCoverage[];
   /** Compatibility view containing only ledgers that explicitly searched for the target and found nothing. */
@@ -954,7 +963,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   inputWavelengths(request);
   const targetResolution = resolveTarget(request.target, inputs.targetCatalogue);
   if (targetResolution.status !== 'resolved') return { target: request.target, request, targetResolution, candidates: [], unassignedEvidence: [], targetCoverage: [], withoutTheTarget: [],
-    endpoint: { status: 'unknown-target', selectableCandidates: 0, blockerCodes: ['unknown-target'] } };
+    endpoint: { status: 'unknown-target', coverage: 'target-unresolved', selectableCandidates: 0, blockerCodes: ['unknown-target'] } };
   const target = targetResolution.canonical.id, canonicalRequest: CapabilityRequest = { ...request, target };
   const capabilities = new Map(inputs.capabilities.map(entry => [`${entry.telescope} :: ${entry.mode}`, entry] as const));
   const targetCoverageResults: TargetCoverage[] = [], found: { ledger: string; mode: TargetMode }[] = [];
@@ -1000,13 +1009,15 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   const archiveProducts = voCandidates(canonicalRequest, inputs.vo, inputs.qualifiedProducts ?? []);
   const selectableCandidates = assessed.filter(candidate => candidate.selectionAssessment.selectable).length + archiveProducts.filter(p => p.product && p.satisfaction.status !== 'refused').length;
   const incompleteIndex = !assessed.length && targetCoverageResults.some(entry => entry.state === 'not-searched' || entry.state === 'unanswered');
+  const searchCoverage=assessSearchCoverage({resolution:targetResolution,indexed:targetCoverageResults,providers:inputs.vo?.services??[],
+    sourceIncomplete:inputs.sourceIntakeIssues?.some(issue=>issue.state==='unavailable'||issue.state==='incomplete')});
   const status = missingRequestFields(canonicalRequest).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : incompleteIndex ? 'index-incomplete' : 'no-selectable-candidate';
   const coverageBlockers = !assessed.length ? targetCoverageResults.flatMap(entry => entry.state === 'not-searched' ? ['target-index-unavailable' as const]
     : entry.state === 'unanswered' ? ['archive-query-unanswered' as const]
     : entry.state === 'unsupported-products' ? ['archive-products-unsupported' as const] : []) : [];
   const withoutTheTarget = targetCoverageResults.filter(entry => entry.state === 'searched-empty').map(({ telescope, ledger, reason }) => ({ telescope, ledger, reason }));
   return { ...(inputs.vo ? { archiveAccess: inputs.vo, archiveProducts } : {}), sourceIntakeIssues: inputs.sourceIntakeIssues, target, request: canonicalRequest, targetResolution, unassignedEvidence: unassigned, targetCoverage: targetCoverageResults, withoutTheTarget, candidates: assessed,
-    endpoint: { status, selectableCandidates, blockerCodes: [...new Set([...coverageBlockers, ...assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code))])] } };
+    endpoint: { status, coverage: searchCoverage, selectableCandidates, blockerCodes: [...new Set([...coverageBlockers, ...assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code))])] } };
 }
 
 /** Every reason an explicit selection cannot run, returned together so a caller does not repair one field only to discover
