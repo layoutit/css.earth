@@ -12,7 +12,7 @@ Not measured and not shown: mass, colour, albedo, surface, atmosphere, rotation.
 
 ## Evidence
 
-No dated test report exists for this body yet.
+[2026-09-22 exoplanet radius and route check](../../../site/test/evidence/exoplanets/2026-09-22/README.md): the 10,396.4 km source radius agrees with the scene and world frame. The pinned prepared package restored from the runtime inventory and passed its runtime contract; Chrome opened this route, showed the 1.63 Earth-radii fact and reported no console errors after the view settled. No assets were rebaked for this body.
 
 ## Known problems
 

@@ -12,7 +12,7 @@ Measured and not shown: mass, 0.281 ± 0.031 ± 0.006 Jupiter masses (Mancini et
 
 ## Evidence
 
-No dated test report exists for this body yet.
+[2026-09-22 exoplanet radius and route check](../../../site/test/evidence/exoplanets/2026-09-22/README.md): the 91,438 km source radius agrees with the scene and world frame; the prepared runtime contract passed. Chrome opened this route, showed the 1.279 Jupiter-radii fact and reported no console errors after the view settled. The rebaked package passed a fresh download of its pinned assets.
 
 ## Known problems
 
