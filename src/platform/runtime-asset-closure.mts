@@ -175,16 +175,31 @@ export async function inventoryPublicAssets({ objectId, objectDirectory, urls, p
 
 /**
  * Files under a body's `prepared/` that a checkout regenerates itself, so they are never inventoried or published:
- * the JSON transport and page written from the restored runtime, the provenance record generated from the manifest,
- * and the radial-terrain reports and source-index rasters that only the audits read.
+ * the JSON transport and page written from the restored runtime, the provenance record `prepare-provenance` generates
+ * from the manifest (for scene bodies only), and the radial-terrain reports and source-index rasters that only the
+ * audits read.
  */
-export function isRegeneratedPreparedFile(filename: string): boolean {
-  return ['object.json', 'page.json', 'provenance.json'].includes(filename) || /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
+export function isRegeneratedPreparedFile(filename: string, provenanceRegenerated = true): boolean {
+  return ['object.json', 'page.json'].includes(filename) || (provenanceRegenerated && filename === 'provenance.json') ||
+    /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
+}
+
+/**
+ * `prepare-provenance` regenerates the provenance of scene bodies (layered bodies) only. A volume, image-layer or
+ * catalogue package's `provenance.json` comes from its bake, so it is inventoried and published like its other files.
+ */
+export async function provenanceIsRegenerated(objectDirectory: string): Promise<boolean> {
+  const text = await readFile(resolve(objectDirectory, 'object.json'), 'utf8').catch((error: unknown) => {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error;
+  });
+  if (text === null) return true;
+  const descriptor: unknown = JSON.parse(text);
+  return !!descriptor && typeof descriptor === 'object' && (descriptor as { type?: unknown }).type === 'layered-body';
 }
 
 /** Every baked file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. */
-export async function bakedPreparedFiles(preparedRoot: string, objectId: string): Promise<string[]> {
-  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name));
+export async function bakedPreparedFiles(preparedRoot: string, objectId: string, provenanceRegenerated = true): Promise<string[]> {
+  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name, provenanceRegenerated));
 }
 
 /** Inventory the object's baked `prepared/` files: an explicit list, or everything baked under `preparedRoot`. */
@@ -194,7 +209,7 @@ export async function inventoryPreparedAssets({ objectId, objectDirectory, prepa
   gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
 }) {
   const excluded = new Set(exclude);
-  const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, objectId)).filter(name => !excluded.has(name)))]
+  const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, objectId, await provenanceIsRegenerated(objectDirectory))).filter(name => !excluded.has(name)))]
     .sort((left, right) => left.localeCompare(right));
   for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Object ${objectId} has an unsafe prepared asset path: ${name}.`);
   if (new Set(names).size !== names.length) throw new TypeError(`Object ${objectId} repeats a prepared asset path.`);

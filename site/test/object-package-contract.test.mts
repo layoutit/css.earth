@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createHash } from "node:crypto";
-import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, readdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
@@ -161,4 +161,13 @@ test("validates runtime asset manifest entries", () => {
     }),
     /invalid inventory entry/,
   );
+});
+
+test("prepare-provenance covers exactly the layered bodies, so only they leave provenance.json out of the inventory", async () => {
+  const layered = new Set<string>();
+  for (const id of await readdir(new URL("../../src/objects/", import.meta.url))) {
+    const text = await readFile(new URL(`../../src/objects/${id}/object.json`, import.meta.url), "utf8").catch(() => null);
+    if (text !== null && JSON.parse(text).type === "layered-body") layered.add(id);
+  }
+  assert.deepEqual([...layered].sort(), SCENE_OBJECTS.map(object => object.id).sort());
 });
