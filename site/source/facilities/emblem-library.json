@@ -5,9 +5,9 @@
     {
       "id": "messenger",
       "src": "/shell/facility-emblems/messenger.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 114715,
+      "width": 128,
+      "height": 128,
+      "bytes": 2635,
       "source": {
         "id": "messenger",
         "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/MESSENGER_mission_emblem.png",
@@ -28,7 +28,7 @@
           "height": 2161
         },
         "outputPadding": 2,
-        "transparentPixels": 39298
+        "transparentPixels": 7909
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -44,9 +44,9 @@
     {
       "id": "dawn",
       "src": "/shell/facility-emblems/dawn.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 172837,
+      "width": 128,
+      "height": 128,
+      "bytes": 3943,
       "source": {
         "id": "dawn",
         "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Dawn_logo.png",
@@ -67,7 +67,7 @@
           "height": 1549
         },
         "outputPadding": 2,
-        "transparentPixels": 20267
+        "transparentPixels": 4148
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -83,9 +83,9 @@
     {
       "id": "galileo",
       "src": "/shell/facility-emblems/galileo.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 84024,
+      "width": 128,
+      "height": 128,
+      "bytes": 3031,
       "source": {
         "id": "galileo",
         "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Galileo_mission_patch.png",
@@ -106,7 +106,7 @@
           "height": 440
         },
         "outputPadding": 2,
-        "transparentPixels": 22608
+        "transparentPixels": 4869
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -122,9 +122,9 @@
     {
       "id": "juno",
       "src": "/shell/facility-emblems/juno.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 21831,
+      "width": 128,
+      "height": 128,
+      "bytes": 1440,
       "source": {
         "id": "juno",
         "kind": "emblem",
@@ -147,7 +147,7 @@
           "height": 998
         },
         "outputPadding": 2,
-        "transparentPixels": 18423
+        "transparentPixels": 3820
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -163,9 +163,9 @@
     {
       "id": "new-horizons",
       "src": "/shell/facility-emblems/new-horizons.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 158395,
+      "width": 128,
+      "height": 128,
+      "bytes": 3546,
       "source": {
         "id": "new-horizons",
         "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/New_Horizons_-_Logo2_big.png",
@@ -186,7 +186,7 @@
           "height": 915
         },
         "outputPadding": 2,
-        "transparentPixels": 21774
+        "transparentPixels": 4440
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -202,9 +202,9 @@
     {
       "id": "sdo",
       "src": "/shell/facility-emblems/sdo.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 124647,
+      "width": 128,
+      "height": 128,
+      "bytes": 3828,
       "source": {
         "id": "sdo",
         "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Solar_Dynamics_Observatory_insignia.png",
@@ -225,7 +225,7 @@
           "height": 3534
         },
         "outputPadding": 2,
-        "transparentPixels": 18380
+        "transparentPixels": 3825
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -241,9 +241,9 @@
     {
       "id": "voyager-1",
       "src": "/shell/facility-emblems/voyager-1.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 43452,
+      "width": 128,
+      "height": 128,
+      "bytes": 1886,
       "source": {
         "id": "voyager-1",
         "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
@@ -264,7 +264,7 @@
           "height": 670
         },
         "outputPadding": 2,
-        "transparentPixels": 39397
+        "transparentPixels": 7876
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -280,9 +280,9 @@
     {
       "id": "voyager-2",
       "src": "/shell/facility-emblems/voyager-2.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 43452,
+      "width": 128,
+      "height": 128,
+      "bytes": 1886,
       "source": {
         "id": "voyager-2",
         "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
@@ -303,7 +303,7 @@
           "height": 670
         },
         "outputPadding": 2,
-        "transparentPixels": 39397
+        "transparentPixels": 7876
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -319,9 +319,9 @@
     {
       "id": "lro",
       "src": "/shell/facility-emblems/lro.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 123377,
+      "width": 128,
+      "height": 128,
+      "bytes": 3233,
       "source": {
         "id": "lro",
         "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/LRO_mission_logo_%28transparent_background%29_01.png/960px-LRO_mission_logo_%28transparent_background%29_01.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -343,7 +343,7 @@
           "height": 872
         },
         "outputPadding": 2,
-        "transparentPixels": 22454
+        "transparentPixels": 4582
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -359,9 +359,9 @@
     {
       "id": "grail",
       "src": "/shell/facility-emblems/grail.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 80312,
+      "width": 128,
+      "height": 128,
+      "bytes": 2655,
       "source": {
         "id": "grail",
         "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/GRAIL_-_GRAIL-logo-sm.png",
@@ -383,7 +383,7 @@
           "height": 255
         },
         "outputPadding": 2,
-        "transparentPixels": 42495
+        "transparentPixels": 8497
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -399,9 +399,9 @@
     {
       "id": "viking",
       "src": "/shell/facility-emblems/viking.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 150681,
+      "width": 128,
+      "height": 128,
+      "bytes": 3231,
       "source": {
         "id": "viking",
         "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg/960px-Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -423,7 +423,7 @@
           "height": 867
         },
         "outputPadding": 2,
-        "transparentPixels": 21166
+        "transparentPixels": 4324
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -439,9 +439,9 @@
     {
       "id": "mro",
       "src": "/shell/facility-emblems/mro.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 54128,
+      "width": 128,
+      "height": 128,
+      "bytes": 2460,
       "source": {
         "id": "mro",
         "url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Mars_Reconnaissance_Orbiter_insignia.png",
@@ -462,7 +462,7 @@
           "height": 1121
         },
         "outputPadding": 2,
-        "transparentPixels": 34745
+        "transparentPixels": 7042
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -478,9 +478,9 @@
     {
       "id": "osiris-rex",
       "src": "/shell/facility-emblems/osiris-rex.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 80651,
+      "width": 128,
+      "height": 128,
+      "bytes": 2774,
       "source": {
         "id": "osiris-rex",
         "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/OSIRIS-REx_Mission_Logo.png",
@@ -501,7 +501,7 @@
           "height": 1335
         },
         "outputPadding": 2,
-        "transparentPixels": 34626
+        "transparentPixels": 6987
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -517,9 +517,9 @@
     {
       "id": "terra",
       "src": "/shell/facility-emblems/terra.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 112836,
+      "width": 128,
+      "height": 128,
+      "bytes": 3303,
       "source": {
         "id": "terra",
         "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Terra_logo.png/960px-Terra_logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -541,7 +541,7 @@
           "height": 1030
         },
         "outputPadding": 2,
-        "transparentPixels": 31255
+        "transparentPixels": 6229
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -557,9 +557,9 @@
     {
       "id": "cassini",
       "src": "/shell/facility-emblems/cassini.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 126628,
+      "width": 128,
+      "height": 128,
+      "bytes": 4009,
       "source": {
         "id": "cassini",
         "kind": "emblem",
@@ -583,7 +583,7 @@
           "height": 723
         },
         "outputPadding": 2,
-        "transparentPixels": 19563
+        "transparentPixels": 4051
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -599,9 +599,9 @@
     {
       "id": "magellan",
       "src": "/shell/facility-emblems/magellan.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 59106,
+      "width": 128,
+      "height": 128,
+      "bytes": 3181,
       "source": {
         "id": "magellan",
         "kind": "emblem",
@@ -624,7 +624,7 @@
           "height": 457
         },
         "outputPadding": 2,
-        "transparentPixels": 18307
+        "transparentPixels": 3812
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -640,9 +640,9 @@
     {
       "id": "odyssey",
       "src": "/shell/facility-emblems/odyssey.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 81390,
+      "width": 128,
+      "height": 128,
+      "bytes": 2518,
       "source": {
         "id": "odyssey",
         "kind": "emblem",
@@ -665,7 +665,7 @@
           "height": 538
         },
         "outputPadding": 2,
-        "transparentPixels": 25516
+        "transparentPixels": 5286
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -681,9 +681,9 @@
     {
       "id": "near-shoemaker",
       "src": "/shell/facility-emblems/near-shoemaker.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 98803,
+      "width": 128,
+      "height": 128,
+      "bytes": 2110,
       "source": {
         "id": "near-shoemaker",
         "kind": "emblem",
@@ -706,7 +706,7 @@
           "height": 331
         },
         "outputPadding": 2,
-        "transparentPixels": 36841
+        "transparentPixels": 7603
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -722,9 +722,9 @@
     {
       "id": "mars-global-surveyor",
       "src": "/shell/facility-emblems/mars-global-surveyor.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 96861,
+      "width": 128,
+      "height": 128,
+      "bytes": 2175,
       "source": {
         "id": "mars-global-surveyor",
         "kind": "emblem",
@@ -747,7 +747,7 @@
           "height": 524
         },
         "outputPadding": 2,
-        "transparentPixels": 21419
+        "transparentPixels": 4394
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -763,9 +763,9 @@
     {
       "id": "suomi-npp",
       "src": "/shell/facility-emblems/suomi-npp.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 113711,
+      "width": 128,
+      "height": 128,
+      "bytes": 3104,
       "source": {
         "id": "suomi-npp",
         "kind": "emblem",
@@ -788,7 +788,7 @@
           "height": 908
         },
         "outputPadding": 2,
-        "transparentPixels": 23006
+        "transparentPixels": 4694
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -804,9 +804,9 @@
     {
       "id": "hubble",
       "src": "/shell/facility-emblems/hubble.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 58343,
+      "width": 128,
+      "height": 128,
+      "bytes": 2445,
       "source": {
         "id": "hubble",
         "kind": "emblem",
@@ -830,7 +830,7 @@
           "height": 954
         },
         "outputPadding": 2,
-        "transparentPixels": 18488
+        "transparentPixels": 3838
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -846,9 +846,9 @@
     {
       "id": "hayabusa",
       "src": "/shell/facility-emblems/hayabusa.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 104923,
+      "width": 128,
+      "height": 128,
+      "bytes": 3879,
       "source": {
         "id": "hayabusa",
         "kind": "emblem",
@@ -870,7 +870,7 @@
           "height": 239
         },
         "outputPadding": 2,
-        "transparentPixels": 29990
+        "transparentPixels": 6051
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -886,9 +886,9 @@
     {
       "id": "hayabusa2",
       "src": "/shell/facility-emblems/hayabusa2.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 78493,
+      "width": 128,
+      "height": 128,
+      "bytes": 3157,
       "source": {
         "id": "hayabusa2",
         "kind": "emblem",
@@ -911,7 +911,7 @@
           "height": 1166
         },
         "outputPadding": 2,
-        "transparentPixels": 22844
+        "transparentPixels": 4708
       },
       "sourceBinding": {
         "kind": "catalogued",
@@ -927,9 +927,9 @@
     {
       "id": "rosetta",
       "src": "/shell/facility-emblems/rosetta.png",
-      "width": 288,
-      "height": 288,
-      "bytes": 54550,
+      "width": 128,
+      "height": 128,
+      "bytes": 2605,
       "source": {
         "id": "rosetta",
         "kind": "emblem",
@@ -951,7 +951,7 @@
           "height": 1182
         },
         "outputPadding": 2,
-        "transparentPixels": 18391
+        "transparentPixels": 3811
       },
       "sourceBinding": {
         "kind": "catalogued",
