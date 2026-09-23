@@ -3,8 +3,9 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
 import{mkdtemp,rm,writeFile}from'node:fs/promises';import{tmpdir}from'node:os';
-import { formatArtifact, formatExploration, main, outputCommand, parseCli, type ArtifactInspection, type CliIo, type CliServices } from './cli.mts';
+import { formatArtifact, formatExploration, formatSession, main, outputCommand, parseCli, type ArtifactInspection, type CliIo, type CliServices } from './cli.mts';
 import type { ExplorationSession } from './session.mts';
+import type { Session } from './session.mts';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
   reference:{kind:'indexed-observation' as const,telescope:'Fixture telescope',mode:'camera',observation:'obs-1',programme:'eris-obs-1'},
@@ -43,6 +44,21 @@ function mockServices(directory:string,inspected:ArtifactInspection=inspection){
   return {services,calls};
 }
 
+test('default help is concise; explicit help keeps the full command reference',async()=>{
+  assert.deepEqual(parseCli([]),{command:'help',short:true});
+  for(const args of [['--help'],['help'],['explore','--help']])assert.deepEqual(parseCli(args),{command:'help'});
+  const brief=mockIo(false,false),full=mockIo(false,false);
+  assert.equal(await main([],'/workspace',text=>brief.io.write(text),brief.io,mockServices('/tmp').services),0);
+  assert.equal(await main(['--help'],'/workspace',text=>full.io.write(text),full.io,mockServices('/tmp').services),0);
+  assert.match(brief.stdout.join(''),/telescope explore TARGET/u);
+  assert.match(brief.stdout.join(''),/Use telescope --help/u);
+  assert.doesNotMatch(brief.stdout.join(''),/--max-science-bytes/u);
+  assert.match(full.stdout.join(''),/--max-science-bytes/u);
+  const version=mockIo(false,false);
+  assert.equal(await main(['--version'],'/workspace',text=>version.io.write(text),version.io,mockServices('/tmp').services),0);
+  assert.equal(version.stdout.join(''),'0.1.0\n');
+});
+
 test('local import has one bounded data-only entry point',()=>{
   const parsed=parseCli(['import','spec.json','--out','run','--json']);assert.equal(parsed.command,'import');if(parsed.command!=='import')return;
   assert.equal(parsed.specification,resolve('spec.json'));assert.equal(parsed.directory,resolve('run'));assert.equal(parsed.json,true);
@@ -74,6 +90,63 @@ test('human exploration and artifact screens retain unknowns, blockers, context 
   const artifact=formatArtifact(inspection);
   assert.match(artifact,/delivery/u);assert.match(artifact,/No scientific acceptance criteria requested/u);assert.match(artifact,/sphere: unavailable/u);assert.match(artifact,/A sphere requires a registered body map/u);assert.match(artifact,/Unit: MJy\/sr/u);assert.match(artifact,/--output image --hdu 1 --structure SCI --plane N --out DIRECTORY/u);
   assert.equal(outputCommand(inspection.source,inspection.outputs[0]!),"telescope export /tmp/run/pick-1/result.json --output image --hdu 1 --structure SCI --plane N --out DIRECTORY");
+  const local=formatArtifact({...inspection,source:resolve('output/a run/result.json')});
+  assert.match(local,/Source: output\/a run\/result\.json/u);
+  assert.match(local,/Next: telescope export 'output\/a run\/result\.json'/u);
+});
+
+test('query continuation quotes shell metacharacters without command substitution',()=>{
+  const directory='/tmp/$(touch unsafe) with spaces';
+  const session={target:'Eris',choices:[{pick:1,telescope:'Fixture',mode:'camera',observation:'obs-1',program:'program',state:'qualify'}],answer:{request:{kind:'image',wavelengthMicrometres:[1,2]},targetCoverage:[]}} as unknown as Session;
+  assert.match(formatSession(session,directory),/Next: telescope get '\/tmp\/\$\(touch unsafe\) with spaces' --pick N/u);
+});
+
+test('family-only artifact offers a numbered operation without an empty output section',async()=>{
+  const operation={id:'spectrum-export',label:'Export spectrum',handlerId:'fixture',componentId:'spectrum',owner:{module:'fixture',export:'fixture'},available:true,reason:'Native samples stay explicit.',fixedArguments:{},parameters:[{id:'out',option:'--out',kind:'output-directory' as const,required:true,description:'New output directory.'}],limitations:[]};
+  const artifact:ArtifactInspection={artifact:'delivery',source:'/tmp/descriptor.json',outputs:[],familyOperations:[operation]};
+  const screen=formatArtifact(artifact);
+  assert.match(screen,/1\. spectrum-export · spectrum: available/u);
+  assert.doesNotMatch(screen,/Supported next operations:/u);
+  assert.doesNotMatch(screen,/Owner:/u);
+  assert.match(formatArtifact(artifact,true),/Owner: fixture#fixture/u);
+  const mock=mockIo(true,true,['1','/tmp/spectrum-out']),api=mockServices('/tmp',artifact);
+  assert.equal(await main(['outputs','/tmp/descriptor.json'],'/workspace',text=>mock.io.write(text),mock.io,api.services),0);
+  assert.deepEqual(mock.prompts,['Choose an available operation number, or press Enter to exit: ','Output directory: ']);
+  assert.equal(api.calls.runs.length,1);
+  assert.equal(api.calls.runs[0]?.kind,'family');
+  assert.equal((api.calls.runs[0]?.args[1] as {readonly componentId?:string}).componentId,'spectrum');
+  assert.match(mock.stdout.join(''),/Operation: spectrum-export/u);
+});
+
+test('family-run selects one component and rejects a conflicting parameters file',async()=>{
+  const work=await mkdtemp(resolve(tmpdir(),'family-component-'));
+  try{
+    const params=resolve(work,'params.json'),api=mockServices(work),good=mockIo(false,false),bad=mockIo(false,false);
+    assert.equal(await main(['family-run','/tmp/descriptor.json','spectrum-export','--component','spectrum','--out',resolve(work,'good')],'/workspace',text=>good.io.write(text),good.io,api.services),0);
+    assert.equal((api.calls.runs[0]?.args[1] as {readonly componentId?:string}).componentId,'spectrum');
+    await writeFile(params,JSON.stringify({componentId:'other',range:[1,2]}));
+    assert.equal(await main(['family-run','/tmp/descriptor.json','spectrum-select-range','--component','spectrum','--params',params,'--out',resolve(work,'bad'),'--json'],'/workspace',text=>bad.io.write(text),bad.io,api.services),2);
+    assert.match(JSON.parse(bad.stdout[0]!).error,/componentId.*disagrees/u);
+  }finally{await rm(work,{recursive:true,force:true});}
+});
+
+test('mixed native and family operations keep one stable numbered choice list',async()=>{
+  const operation={id:'spectrum-export',label:'Export spectrum',handlerId:'fixture',componentId:'spectrum',owner:{module:'fixture',export:'fixture'},available:true,reason:'Ready.',fixedArguments:{},parameters:[{id:'out',option:'--out',kind:'output-directory' as const,required:true,description:'New output directory.'}],limitations:[]};
+  const artifact:ArtifactInspection={...inspection,familyOperations:[operation]};
+  const screen=formatArtifact(artifact);
+  assert.ok(screen.indexOf('1. image')<screen.indexOf('3. spectrum-export'));
+  const mock=mockIo(true,true,['3','/tmp/family-from-mixed']),api=mockServices('/tmp',artifact);
+  assert.equal(await main(['outputs',inspection.source],'/workspace',text=>mock.io.write(text),mock.io,api.services),0);
+  assert.equal(api.calls.runs[0]?.kind,'family');
+});
+
+test('guided family operation with required parameters can cancel before execution',async()=>{
+  const operation={id:'spectrum-select-range',label:'Select range',handlerId:'fixture',componentId:'spectrum',owner:{module:'fixture',export:'fixture'},available:true,reason:'Needs a range.',fixedArguments:{},parameters:[{id:'range',option:'--params',kind:'number-list' as const,required:true,description:'Wavelength range.',count:2},{id:'out',option:'--out',kind:'output-directory' as const,required:true,description:'New output directory.'}],limitations:[]};
+  const artifact:ArtifactInspection={artifact:'delivery',source:'/tmp/descriptor.json',outputs:[],familyOperations:[operation]};
+  const mock=mockIo(true,true,['1','']),api=mockServices('/tmp',artifact);
+  assert.equal(await main(['outputs','/tmp/descriptor.json'],'/workspace',text=>mock.io.write(text),mock.io,api.services),0);
+  assert.equal(api.calls.runs.length,0);
+  assert.match(mock.stdout.join(''),/Operation canceled; no output was started/u);
 });
 
 test('exploration screen bounds repeated archive diagnostics while the saved answer retains them',()=>{
@@ -122,7 +195,7 @@ test('terminal selection retrieves the exact saved pick and shows its artifact o
   const code=await main(['explore','eris','--out',directory],'/workspace',text=>mock.io.write(text),mock.io,api.services);
   assert.equal(code,0);assert.equal(api.calls.get,1);assert.equal(api.calls.inspect,1);
   const screen=mock.stdout.join('');assert.match(screen,/Product:/u);assert.match(screen,/No scientific acceptance criteria requested/u);assert.match(screen,/Supported next operations/u);assert.match(screen,/--plane N/u);
-  assert.equal(api.calls.runs.length,0);assert.match(screen,/No output was selected/u);
+  assert.equal(api.calls.runs.length,0);assert.match(screen,/No operation was selected/u);
 });
 
 test('guided native image retries invalid selectors, then invokes the existing export owner',async()=>{

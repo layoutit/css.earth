@@ -1,7 +1,7 @@
 import { access, readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { spawn } from 'node:child_process';
-import { HELP } from './help.mts';
+import { HELP, SHORT_HELP, VERSION } from './help.mts';
 
 async function workspace(start: string, explicit: boolean): Promise<string> {
   let root = resolve(start);
@@ -25,8 +25,9 @@ try {
     if (!location || location.startsWith('-')) throw new Error('--workspace requires a path.');
     args.splice(at, 2);
   }
-  if (!args.length || args.includes('--help') || args.includes('-h')) process.stdout.write(HELP);
-  else if (args.length === 1 && args[0] === '--version') process.stdout.write('0.1.0\n');
+  if (!args.length) process.stdout.write(SHORT_HELP);
+  else if (args[0] === 'help' || args.includes('--help') || args.includes('-h')) process.stdout.write(HELP);
+  else if (args.length === 1 && args[0] === '--version') process.stdout.write(`${VERSION}\n`);
   else {
     const root = await workspace(location ?? process.cwd(), Boolean(location));
     const child = spawn(process.execPath, [resolve(root, 'tools/cli/run-typed-module.mjs'), resolve(root, 'tools/objects/telescopes/cli.mts'), ...args], { stdio: 'inherit', env: {

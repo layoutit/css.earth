@@ -45,10 +45,15 @@ telescope outputs runs/eris/pick-1/result.json
 ```
 
 The human screen keeps unavailable operations and their blockers visible and prints concrete
-`telescope export` command templates for available operations. In a terminal it also asks which
-available operation to run, then requests only that operation's reported selectors and a new output
-directory. Invalid selectors are rejected by the same command parser used by explicit exports and can
+`telescope export` or `telescope family-run` command templates for available operations. In a
+terminal it also asks which available operation to run. It then requests only that operation's
+selectors and a new output directory. Invalid selectors are rejected by the same command parser used by explicit exports and can
 be entered again. Press Enter at any selection or parameter prompt to cancel before an export starts.
+Family operations from a qualified descriptor appear in the same numbered list. Those with required
+parameters ask for a JSON parameter file, then a new output directory; the same `family-run` owner
+performs the operation. The generated command includes `--component ID` so it still selects the
+intended component when a descriptor contains several. Use `--verbose` to display each operation's
+implementation owner.
 With `--json` or redirected input/output, inspection never prompts or starts an operation. The same
 inspection is returned as structured data with `--json`. Supported inputs are telescope delivery
 JSON, telescope product records, and prepared point-field, density-volume or volume-lens-bank `object.json` packages.
