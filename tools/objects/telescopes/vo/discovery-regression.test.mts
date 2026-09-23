@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { loadVoInputs } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
 import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
-import { associateTarget, instrumentFacetQuery, normalizeSnapshot, SERVICES, targetQuery } from './discovery.mts';
+import { associateTarget, instrumentFacetQuery, mastConeSelection, normalizeSnapshot, SERVICES, targetQuery, verifySnapshot } from './discovery.mts';
+import { sha256File } from '../../../../src/platform/sha256.mts';
 
 const alma = SERVICES[1]!;
 const mast = SERVICES.find(profile => profile.label === 'MAST JWST')!;
@@ -34,6 +35,46 @@ test('MAST searches each mission with generic punctuation variants, and archive 
   assert.equal(observation.facility, 'ALMA'); assert.equal(observation.instrument, 'Band 7');
   assert.equal(observation.telescopeName, 'ALMA');
   assert.equal(observation.access.mime, 'applicati');
+});
+
+test('MAST position ids feed bounded ObsCore metadata without unsupported TAP geometry', async () => {
+  const root=await mkdtemp(resolve(tmpdir(),'mast-position-'));
+  try {
+    const region={frame:'icrs' as const,shape:'circle' as const,raDegrees:284.4,decDegrees:53.5,radiusDegrees:0.1};
+    const request={target:'wd-1856',region};
+    const file=resolve(root,'response.json');await writeFile(file,'saved position response');const pin=await sha256File(file);
+    const selection=await mastConeSelection(mast,region,1,undefined,async queried=>{
+      assert.equal(queried.service,'Mast.Caom.Filtered.Position');
+      assert.equal(queried.params.position,'284.4, 53.5, 0.1');
+      assert.equal(queried.pagesize,2);
+      return {astroquery:'0.4.11',queriedAt:'2026-09-23T00:00:00Z',rows:[
+        {obs_id:'obs-1',obs_collection:'JWST'},{obs_id:'obs-2',obs_collection:'JWST'}],responseRecord:{path:file,sha256:pin.sha256}};
+    });
+    assert.deepEqual(selection.ids,['obs-1']);assert.equal(selection.complete,false);
+    await mastConeSelection(mast,region,1,'NIRCAM/IMAGE',async queried=>{
+      assert.deepEqual(queried.params.filters,[{paramName:'obs_collection',values:['JWST']},{paramName:'instrument_name',values:['NIRCAM/IMAGE']}]);
+      return {astroquery:'0.4.11',queriedAt:'2026-09-23T00:00:00Z',rows:[{obs_id:'obs-1',obs_collection:'JWST'}],responseRecord:{path:file,sha256:pin.sha256}};
+    });
+    const query=targetQuery(mast,['WD 1856+534'],1,request,selection.ids);
+    assert.match(query,/obs_id IN \('obs-1'\)/u);
+    assert.doesNotMatch(query,/INTERSECTS|CONTAINS/u);
+    assert.doesNotMatch(targetQuery(SERVICES.find(profile=>profile.label==='MAST HST')!,['WD 1856+534'],1,request),/INTERSECTS/u);
+    assert.match(targetQuery(alma,['WD 1856+534'],1,request),/INTERSECTS/u);
+    const other={id:'wd-1856',names:['WD 1856+534']};
+    const saved={...snapshot,service:mast.service,table:mast.table,model:mast.model,request,query,spatialSelection:selection,
+      response:{...response,rows:[{...response.rows[0]!,obs_id:'obs-1'},{...response.rows[1]!,obs_id:'other'}]}};
+    const field=normalizeSnapshot(saved,mast,other,[other])[0]!;
+    assert.equal(field.target.status,'in-field');
+    assert.match(field.target.reason,/MAST positional search/u);
+    assert.equal(normalizeSnapshot(saved,mast,other,[other])[1]!.target.status,'unmatched');
+    const old=normalizeSnapshot({...saved,spatialSelection:undefined,query:targetQuery(mast,other.names,1,request)},mast,other,[other])[0]!;
+    assert.equal(old.target.status,'unmatched');
+    const tap=resolve(root,'tap.xml');await writeFile(tap,'saved ObsCore response');
+    const pinned={...saved,response:{...saved.response,raw:{path:tap,...await sha256File(tap)}}};
+    assert.equal(await verifySnapshot(pinned),true);
+    await writeFile(file,'changed position response');
+    assert.equal(await verifySnapshot(pinned),false);
+  } finally { await rm(root,{recursive:true,force:true}); }
 });
 
 test('shared truncated-MIME DataLink responses are fetched once; irrelevant SODA does not add a failure', async () => {

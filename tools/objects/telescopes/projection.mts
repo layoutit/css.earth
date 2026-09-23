@@ -1,9 +1,9 @@
 /** An explicit navigation step between a pinned 2D measurement and an existing body-map contract. */
-import { readFile,writeFile,mkdir,rm,rmdir,rename,realpath } from 'node:fs/promises';
-import { resolve,dirname,relative,isAbsolute } from 'node:path';
+import { readFile,writeFile,mkdir,rm,rmdir,rename } from 'node:fs/promises';
+import { resolve,dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireArray,requireRecord,requireString,requireFiniteNumber } from '../../sources/source-values.mts';
-import { fileSize,parseProductRecord,sameRun,type ProductInput } from '../product-record.mts';
+import { fileSize,type ProductInput } from '../product-record.mts';
 import { parseBodyMapProduct } from '../body-map-product.mts';
 import { assertBodyMapPlanes,bodyMapProductRecord,formatProductRecord } from '../body-map-publication.mts';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
@@ -12,19 +12,9 @@ import { projectWithPlanetMapper } from '../astronomy-packages/projection.mts';
 import { canonical } from './vo/contracts.mts';
 import { sourceContext } from './delivery-context.mts';
 import { delivery } from './outputs.mts';
+import { localOutput, verifiedProduct } from './verified-product.mts';
+export { localOutput, verifiedProduct } from './verified-product.mts';
 
-export function localOutput(root:string,name:string):string {
-  const path=resolve(root,name),rel=relative(root,path);
-  if(isAbsolute(name)||!rel||rel==='..'||rel.startsWith('../'))throw new Error('Output escapes its product directory');
-  return path;
-}
-export async function verifiedProduct(path:string){
-  const file=resolve(path),bytes=await readFile(file),record=parseProductRecord(JSON.parse(bytes.toString())),root=dirname(file);
-  const realRoot=await realpath(root);
-  for(const output of record.outputs)localOutput(realRoot,relative(realRoot,await realpath(localOutput(root,output.path))));
-  if(!await sameRun(record,record,name=>localOutput(root,name)))throw new Error('Product output pins changed or are missing');
-  return {file,root,record,pin:{sha256:sha256(bytes),bytes:bytes.length}};
-}
 export function parseGeometry(raw:unknown,root:string){
   const g=requireRecord(raw);if(g.schema!=='cssearth-navigation-input@1')throw new TypeError('Expected cssearth-navigation-input@1');
   for(const key of Object.keys(g))if(!['schema','observer','kernels','registration','width','height','maximumEmissionDegrees'].includes(key))throw new TypeError(`Unknown navigation option ${key}`);

@@ -7,7 +7,7 @@ import type { TargetCatalogueEntry } from '../targets.mts';
 import type { QualifiedObservation } from '../qualified-observations.mts';
 import type { QualificationAction } from '../qualification-routes.mts';
 import { jsonValue, parseLimits, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
-import { discover, discoverInstrumentFacets, INSTRUMENT_SAMPLE_LIMIT, normalizeSnapshot, SERVICES,
+import { discover, discoverInstrumentFacets, INSTRUMENT_SAMPLE_LIMIT, normalizeSnapshot, searchCircle, SERVICES,
   type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
 import { nativeQualificationRoute, planAccess, type AcquisitionSpec, type MetadataLoader } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
@@ -36,7 +36,7 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
     let snapshots: DiscoverySnapshot[] = [], facet: Awaited<ReturnType<typeof faceter>> | undefined;
     const discoveryFailures: string[] = [];
     try {
-      if (profile.facetByInstrument && !request.instrument) {
+      if (profile.facetByInstrument && !request.instrument && !(profile.spatialMatch === 'mast-api-cone' && searchCircle(request))) {
         facet = await faceter(root, profile, request, target.names, limits);
         for (const instrument of facet.names) {
           try { snapshots.push(await discoverer(root, profile, { ...request, instrument }, target.names, limits, INSTRUMENT_SAMPLE_LIMIT)); }
