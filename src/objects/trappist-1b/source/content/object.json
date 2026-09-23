@@ -128,14 +128,7 @@
   },
   "settings": {
     "titleKey": "settings",
-    "controls": [
-      {
-        "kind": "toggle",
-        "name": "shadows",
-        "label": "Shadows",
-        "checked": false
-      }
-    ]
+    "controls": []
   },
   "charts": [],
   "resources": [

@@ -26,7 +26,10 @@ const controls:ObjectControls = {lenses:{defaultLens:'elevation',controls:[{id:'
 function variants() {
   const navigation = prepareScientificNavigation('europa', focus, scene.camera);
   return [false,true].flatMap(shadows => [false,true].map(orbit => ({
-    when:{lensId:'elevation',shadows,orbit}, required:[], writes:[], materials:[], navigation,
+    when:{lensId:'elevation',shadows,orbit}, required:[], writes:[
+      {kind:'class',target:-1,name:'focus-shadows',value:shadows},
+      {kind:'class',target:-1,name:'focus-orbit',value:orbit},
+    ], materials:[], navigation,
   })));
 }
 const validate = (value:unknown) => requireVariants(value, tree, new Set(), [], controls, scene.camera);
@@ -45,6 +48,14 @@ test('scientific focus emits the complete navigation contract for every lens tog
   tooLow[0].navigation.maximumZoom = 3;
   assert.throws(() => validate(tooLow), /navigation camera must be bounded/);
   assert.throws(() => prepareScientificNavigation('europa', {...focus,zoom:5}, scene.camera), /supported camera zoom/);
+});
+
+test('a displayed toggle must select a distinct prepared effect', () => {
+  const unbound = [structuredClone(variants()[0])];
+  unbound[0]!.when = {lensId:'elevation'};
+  assert.throws(() => validate(unbound), /setting shadows has no prepared variant/);
+  const inert = variants().map(variant => ({...variant,writes:[]}));
+  assert.throws(() => validate(inert), /setting shadows has no prepared effect/);
 });
 
 test('Agenor navigation centres the actual emitted PolyCSS XY-swapped carrier at its established pose', () => {
