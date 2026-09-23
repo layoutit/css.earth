@@ -3,7 +3,6 @@ import type { createPreparedUniverse } from '../src/renderers/css/universe/prepa
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
 import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
-import { record } from './browser-types.mts';
 import { readPreparedFocusSelection, withPreparedFocus } from './navigation-scope.mts';
 import { acquirePreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusTarget } from './prepared-focus-target.mts';
@@ -12,8 +11,14 @@ import type { PreparedFocusPolicy, PreparedFocusPresentation } from './prepared-
 type PreparedContextLayer = Pick<ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>, 'resolveGalaxy' | 'ensureGalaxyCatalog' | 'focusBank' | 'selectGalaxy'>;
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
-  onFlightStart?(): void;
+  canPublish(): boolean;
   onFocusContentChange?(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void;
+}
+export interface FocusOperation {
+  readonly signal: AbortSignal;
+  isCurrent(): boolean;
+  readonly frame: boolean;
+  readonly reducedMotion: boolean;
 }
 interface ContextNavigationOptions {
   layer: PreparedContextLayer;
@@ -49,9 +54,9 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   let navigation: ObjectWorldNavigation | null = null;
   let unsubscribe: (() => void) | null = null;
   let target: PreparedFocusTarget | null = null;
-  let selected: string | null = null, ready = false, flight: AbortController | null = null;
+  let selected: string | null = null;
+  let canPublish = () => false;
   let notify: NonNullable<FocusCallbacks['onFocusChange']> = () => {};
-  let beforeFlight: NonNullable<FocusCallbacks['onFlightStart']> = () => {};
   let notifyContent: NonNullable<FocusCallbacks['onFocusContentChange']> = () => {};
   const currentSources = () => typeof sources === 'function' ? sources() : sources;
   const useTarget = (id: string | null) => {
@@ -78,102 +83,82 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     const active = target, state = active?.datasets;
     const controls = active && state ? { ...state,
       selectLens(lens: string) {
-        if (ready && target === active && navigation?.preparedFocus?.()?.id === active.id && selected === active.id) active.selectLens(lens);
+        if (canPublish() && target === active && navigation?.preparedFocus?.()?.id === active.id && selected === active.id) active.selectLens(lens);
       },
     } : null;
     notifyContent(active?.record ?? null, active?.citations ?? [], controls);
   };
   const publishLens = () => {
-    if (!ready || !selected || target?.id !== selected) return;
+    if (!canPublish() || !selected || target?.id !== selected) return;
     publishContent();
     writeSelectionUrl(selected);
   };
-  const publishSelection = () => {
-    if (!ready || !navigation) return;
+  const publishSelection = (force = false) => {
+    if (!navigation) return;
     const focus = navigation.preparedFocus?.() ?? null, next = focus?.id ?? null;
     layer.selectGalaxy(next, focus);
-    if (next === selected) return;
+    if (!force && next === selected) return;
     selected = next; useTarget(next);
     publishContent();
     writeSelectionUrl(next);
   };
-  function suspend() {
-    const previous = flight;
-    flight = null; ready = false;
-    previous?.abort();
-  }
-
-  // Clicks and saved links own the same catalogue load, target and flight lifetime.
-  // Keep the synchronous path when the target is already available.
-  function transition(readSelection: () => ReturnType<typeof readPreparedFocusSelection>, query?: URLSearchParams) {
+  /** The application request/session owns cancellation; this executor owns only the prepared target. */
+  function apply(url: string | URL, operation: FocusOperation): void | Promise<void> {
     const owner = navigation;
-    if (!owner) return;
-    suspend();
-    const controller = new AbortController(); flight = controller;
-    const current = () => navigation === owner && flight === controller && !controller.signal.aborted;
-    const finish = () => { if (current()) { ready = true; flight = null; } };
-    const fail = (error: unknown) => {
+    const current = () => navigation === owner && !operation.signal.aborted && operation.isCurrent();
+    if (!owner || !current()) return;
+    const query = new URL(url, windowTarget.location.href).searchParams;
+    const recover = (error: unknown): never => {
+      if (current()) {
+        const focus = owner.preparedFocus();
+        selected = focus?.id ?? null;
+        layer.selectGalaxy(selected, focus); useTarget(selected); publishContent();
+      }
+      throw error;
+    };
+    let selection: ReturnType<typeof readPreparedFocusSelection>;
+    try { selection = readPreparedFocusSelection(query); } catch (error) { return recover(error); }
+    const activate = () => {
       if (!current()) return;
-      const focus = owner.preparedFocus();
-      selected = focus?.id ?? null;
-      layer.selectGalaxy(selected, focus); useTarget(selected); publishContent();
-      if (!record(error) || error.name !== 'AbortError') onError(error);
+      const focus = target?.focus ?? null;
+      if (!operation.frame) {
+        const id = selection?.id ?? null, state = target?.datasets;
+        const lens = target?.resolveLens(selection?.lens ?? null);
+        owner.setPreparedFocus(focus);
+        if (lens !== undefined) target!.selectLens(lens);
+        selected = id; layer.selectGalaxy(id, focus); publishContent();
+        if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
+        // Preserve an incoming composition while it still contains its named focus.
+        if (!focus || (query.has('v') && savedCameraShowsFocus(owner, focus))) return;
+        if (query.has('v')) clearSavedCameraUrl();
+      }
+      if (!focus) return;
+      const flight = owner.flyToPreparedFocus(focus, { signal: operation.signal, reducedMotion: operation.reducedMotion });
+      publishSelection(true);
+      return flight.then(() => { if (current()) publishSelection(); });
+    };
+    const prepare = () => {
+      if (!current()) return;
+      const loading = useTarget(selection?.id ?? null)?.prepare({ preload: operation.frame });
+      return loading ? loading.then(activate) : activate();
     };
     try {
-      const selection = readSelection();
-      const apply = () => {
-        if (!current()) return;
-        const focus = target?.focus ?? null;
-        if (query) {
-          const id = selection?.id ?? null, state = target?.datasets;
-          const lens = target?.resolveLens(selection?.lens ?? null);
-          owner.setPreparedFocus(focus);
-          if (lens !== undefined) target!.selectLens(lens);
-          selected = id; layer.selectGalaxy(id, focus); publishContent();
-          if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
-          ready = true;
-          // A saved composition stays authoritative while it shows the named focus.
-          if (!focus || (query.has('v') && savedCameraShowsFocus(owner, focus))) return;
-          if (query.has('v')) clearSavedCameraUrl();
-        }
-        if (!focus) return;
-        beforeFlight();
-        if (!current()) return;
-        ready = true;
-        return owner.flyToPreparedFocus(focus, { signal: controller.signal,
-          reducedMotion: Boolean(query) || windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true,
-        }).then(() => { if (current()) publishSelection(); });
-      };
-      const prepare = () => {
-        if (!current()) return;
-        const loading = useTarget(selection?.id ?? null)?.prepare({ preload: !query });
-        return loading ? loading.then(apply) : apply();
-      };
-      const pending = selection && !layer.resolveGalaxy(selection.id)
-        ? layer.ensureGalaxyCatalog().then(prepare) : prepare();
-      if (pending) return pending.catch(fail).finally(finish);
-    } catch (error) { fail(error); }
-    finish();
+      const pending = selection && !layer.resolveGalaxy(selection.id) ? layer.ensureGalaxyCatalog().then(prepare) : prepare();
+      return pending?.catch(recover);
+    } catch (error) { return recover(error); }
   }
 
   return Object.freeze({
-    connect(owner: ObjectWorldNavigation, { onFocusChange = () => {}, onFlightStart = () => {}, onFocusContentChange = () => {} }: FocusCallbacks = {}) {
-      suspend(); unsubscribe?.(); useTarget(null);
-      navigation = owner; notify = onFocusChange; beforeFlight = onFlightStart; notifyContent = onFocusContentChange;
-      unsubscribe = owner.subscribe(publishSelection);
+    connect(owner: ObjectWorldNavigation, { onFocusChange = () => {}, canPublish: available, onFocusContentChange = () => {} }: FocusCallbacks) {
+      unsubscribe?.(); useTarget(null); selected = null;
+      navigation = owner; notify = onFocusChange; canPublish = available; notifyContent = onFocusContentChange;
+      unsubscribe = owner.subscribe(() => { if (canPublish()) publishSelection(); });
       return () => {
         if (navigation !== owner) return;
-        suspend(); unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null;
+        unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null; canPublish = () => false;
       };
     },
-    suspend,
-    restore(url: string | URL) {
-      const query = new URL(url, windowTarget.location.href).searchParams;
-      return transition(() => readPreparedFocusSelection(query), query);
-    },
-    async select(object: Pick<PreparedCatalogObject, 'id'>) {
-      await transition(() => ({ id: object.id, lens: null }));
-    },
-    destroy() { suspend(); unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null; },
+    apply,
+    destroy() { unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null; canPublish = () => false; },
   });
 }

@@ -62,16 +62,25 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     session.shell?.setDatasetNotice?.(null);
   }
 
-  function install(session: SceneSession, initial: boolean) {
+  function applyFocus(session: SceneSession, url: string, request?: NavigationRequest, frame = false) {
+    const isCurrent = () => scenes.isCurrent(session) && (request ? requests.owns(request) : !requests.current);
+    if (!isCurrent()) return;
+    const world = getWorld();
+    if (!world) return;
+    return world.applyFocus(url, {
+      signal: request ? AbortSignal.any([session.signal, request.signal]) : session.signal,
+      isCurrent, frame, reducedMotion: !frame || windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true,
+    });
+  }
+
+  function install(session: SceneSession, initial: boolean, request?: NavigationRequest) {
     const view = session.mount?.sharedView;
     if (!view) return null;
     const owner = bindViewUrl({ windowTarget, view, listenToPopState, getMotion,
       // The installed owner may flush once during disposal, after the session
       // stops accepting focus changes and before its bindings are destroyed.
       replace: url => { if (session.viewUrl === owner) publish(session, url); },
-      restoreFocus: url => {
-        if (scenes.isCurrent(session)) return getWorld()?.restoreFocus?.(url);
-      },
+      restoreFocus: url => applyFocus(session, url, request),
       setMotion(next) {
         session.shell?.setMotionEnabled?.(next);
         if (initial && !scenes.isCurrent(session)) return;
@@ -86,11 +95,11 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
 
   async function bindInitial(session: SceneSession, { restore = true } = {}) {
     if (session.mount?.sharedView && windowTarget.location?.href) {
-      const owner = install(session, true)!;
+      const owner = install(session, true, session.request)!;
       if (restore) await session.wait(owner.restore());
       if (!scenes.isCurrent(session)) return;
     }
-    if (!restore || !session.mount?.sharedView) await getWorld()?.restoreFocus?.(session.url ?? windowTarget.location.href);
+    if (!restore || !session.mount?.sharedView) await applyFocus(session, session.url ?? windowTarget.location.href, session.request);
   }
 
   async function bind(session: SceneSession, { restore = true, request }: { restore?: boolean; request?: NavigationRequest } = {}) {
@@ -98,11 +107,11 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     // A failed history restoration keeps its incoming URL for diagnosis.
     // The departed scene must not install a writer for that other route.
     if (new URL(session.url).pathname !== windowTarget.location.pathname) return;
-    getWorld()?.suspendFocus?.();
-    const owner = install(session, false)!;
+    const owner = install(session, false, request)!;
     if (restore) await (request?.lifetime.wait ?? session.wait)(owner.restore());
-    if (!restore && (!request || requests.owns(request)) && scenes.isCurrent(session)) await getWorld()?.restoreFocus?.(session.url);
+    if (!restore && request?.camera.kind !== 'focus') await applyFocus(session, session.url, request);
   }
 
-  return { capture, commit, replace, syncDataset, bindInitial, bind };
+  return { capture, commit, replace, syncDataset, bindInitial, bind,
+    focus: (session: SceneSession, request: NavigationRequest) => applyFocus(session, request.url, request, true) };
 }
