@@ -18,7 +18,7 @@ import type { ApplicationWorldLayer } from './application-world-types.mts';
 
 export function createApplicationWorldContext() {
   return {
-    async mount({ stage, signal, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; signal?: AbortSignal; windowTarget?: Window | null }) {
+    async mount({ stage, signal, onSelectFocus, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; signal?: AbortSignal; onSelectFocus(id: string): void; windowTarget?: Window | null }) {
       const target = stage.ownerDocument.defaultView;
       if (!target || !windowTarget) throw new Error('World context requires a window.');
       const lifetime = createSceneLifetime();
@@ -39,13 +39,12 @@ export function createApplicationWorldContext() {
         const prepared = loaded.value;
         const resources = own(prepareObjectResources(prepared.assets, { signal }));
         if ((await lifetime.wait(resources.ready)).cancelled || lifetime.disposed) throw cancelled();
-        let navigation: ReturnType<typeof createPreparedContextNavigation> | undefined;
         let refreshWorld = () => false;
         // World presentation lives beside the detail stage, outside its changing object scope.
         const presentationHost = stage.closest<HTMLElement>('.object-world-stage') ?? stage;
         const layer = own(prepared.mount(stage, { presentationHost,
           requestPublication: () => refreshWorld(),
-          onSelectGalaxy: object => { if (!lifetime.disposed) void navigation?.select(object); },
+          onSelectGalaxy: object => { if (!lifetime.disposed) onSelectFocus(object.id); },
         }));
         const occlusion = labelOcclusionFor(stage.ownerDocument);
         const updateOcclusion = () => { if (!lifetime.disposed) layer.setLabelBlockers(occlusion.read()); };
@@ -54,7 +53,6 @@ export function createApplicationWorldContext() {
         const contextNavigation = own(createPreparedContextNavigation({ layer, presentation: PREPARED_WORLD_PRESENTATION.galaxies,
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: prepared.catalogSources, windowTarget }));
-        navigation = contextNavigation;
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
         // On phones, centre the focus between the floating header and drawer readout.
@@ -87,9 +85,7 @@ export function createApplicationWorldContext() {
           createFramePresenter: frames.createFramePresenter,
           setNavigationInFlight: frames.setNavigationInFlight,
           connectNavigation: contextNavigation.connect,
-          suspendFocus: contextNavigation.suspend,
-          restoreFocus: contextNavigation.restore,
-          selectPreparedFocus: (id: string) => contextNavigation.select({ id }),
+          applyFocus: contextNavigation.apply,
           previewSelection(id?: string | null) {
             if (!lifetime.disposed) layer.previewSelection(id);
           },

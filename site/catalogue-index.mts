@@ -10,6 +10,8 @@ export interface CatalogueIndexEntry {
   readonly systemName: string;
   readonly route: string;
   readonly illustration: boolean;
+  /** A catalogue galaxy its source has not confirmed; see PreparedFocusObject.candidate. */
+  readonly candidate: boolean;
   readonly distanceMeters: number;
   readonly detail: Readonly<{
     text: string;
@@ -45,7 +47,7 @@ export function parseCatalogueIndex(value: unknown): CatalogueIndex {
   }
   const entries = value.entries.map((input, index): CatalogueIndexEntry => {
     if (!record(input) || (input.kind !== 'scene' && input.kind !== 'prepared-focus') || !record(input.detail)
-        || !record(input.source) || !record(input.marker) || typeof input.illustration !== 'boolean' || !Array.isArray(input.searchNames)
+        || !record(input.source) || !record(input.marker) || typeof input.illustration !== 'boolean' || typeof input.candidate !== 'boolean' || !Array.isArray(input.searchNames)
         || !input.searchNames.every(name => typeof name === 'string')) {
       throw new TypeError(`Invalid object catalogue entry: ${index}.`);
     }
@@ -76,6 +78,7 @@ export function parseCatalogueIndex(value: unknown): CatalogueIndex {
       systemName: text(input.systemName, 'system name'),
       route: text(input.route, 'route'),
       illustration: input.illustration,
+      candidate: input.candidate,
       distanceMeters: finite(input.distanceMeters, 'distance'),
       detail: Object.freeze(detail),
       source: Object.freeze({

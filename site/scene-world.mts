@@ -13,7 +13,8 @@ interface SceneWorldOptions {
   windowTarget: BrowserWindow;
   isCurrent(session: SceneSession): boolean;
   onMount(world: WorldContextMount): void;
-  onFlightStart(): void;
+  onSelectFocus(id: string): void;
+  canPublishFocus(): boolean;
   onFocusChange(session: SceneSession, url: string): void;
   onFocusContentChange: NonNullable<FocusCallbacks['onFocusContentChange']>;
   onCameraChange(session: SceneSession, world: WorldCameraPose): void;
@@ -21,7 +22,7 @@ interface SceneWorldOptions {
 }
 
 /** The world survives detail replacement; each detail owns only its connections to it. */
-export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onFlightStart, onFocusChange, onFocusContentChange, onCameraChange, onError }: SceneWorldOptions) {
+export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onSelectFocus, canPublishFocus, onFocusChange, onFocusContentChange, onCameraChange, onError }: SceneWorldOptions) {
   let current: WorldContextMount | null = null;
   let task: Promise<WorldContextMount> | null = null;
   let pending: AbortController | null = null;
@@ -32,7 +33,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     if (!task) {
       const controller = new AbortController();
       pending = controller;
-      task = Promise.resolve(owner.mount({ stage, signal: controller.signal, windowTarget })).then(value => {
+      task = Promise.resolve(owner.mount({ stage, signal: controller.signal, windowTarget, onSelectFocus })).then(value => {
         if (controller.signal.aborted) {
           value?.destroy?.();
           throw controller.signal.reason ?? new DOMException('World context mount was cancelled.', 'AbortError');
@@ -63,7 +64,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
       onFocusContentChange(record, sources, presentation) {
         if (isCurrent(session)) onFocusContentChange(record, sources, presentation);
       },
-      onFlightStart() { if (isCurrent(session)) onFlightStart(); },
+      canPublish: () => isCurrent(session) && canPublishFocus(),
     });
     if (disconnectFocus) session.own(disconnectFocus);
     session.own(navigation.subscribe((frame, viewport) => {

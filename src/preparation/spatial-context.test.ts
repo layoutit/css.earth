@@ -304,3 +304,14 @@ test('prepared sky registration preserves the legacy default sky and rejects a m
   }
   assert.throws(() => parseWorldContextSource({ ...raw, sky: undefined }), /sky/i);
 });
+
+test('a centred caption survives preparation and any other placement is refused', async () => {
+  const raw = await readSource();
+  const body = { ...raw.bodies[0], labelPlacement: 'centre' };
+  const source = parseWorldContextSource({ ...raw, bodies: [body] });
+  const states = { [body.id]: { positionM: [7, 0, 0], centerBodyId: source.focus.id,
+    centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
+    semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 } } as Record<string, OrbitalState>;
+  assert.equal(prepareWorldContext(source, { [body.id]: { radiusM: 1 } }, states).bodies[0]!.labelPlacement, 'centre');
+  assert.throws(() => parseWorldContextSource({ ...raw, bodies: [{ ...body, labelPlacement: 'below' }] }), /label placement is below, not centre/);
+});

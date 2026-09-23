@@ -1,5 +1,5 @@
-import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
-import { errorMessage, type BrowserWindow } from './browser-types.mts';
+import { formatSharedView, parseSharedView } from '../src/renderers/css/dist/navigation.js';
+import type { BrowserWindow } from './browser-types.mts';
 import { withDataset } from './dataset-url.mts';
 import type { createNavigationHistory } from './navigation-history.mts';
 import { replaceNavigationUrl } from './navigation-history.mts';
@@ -24,13 +24,13 @@ export type SceneView = ReturnType<typeof createSceneView>;
 /** Installs session-owned URL writers and commits only the request that still owns navigation. */
 export function createSceneView({ windowTarget, scenes, requests, listenToPopState, getHistory, getWorld,
   getMotion, setMotion, onError }: SceneViewOptions) {
-  function capture() {
+  function capture(href?: string) {
     if (!windowTarget.location?.href) return null;
-    const url = new URL(scenes.current?.url ?? windowTarget.location.href);
+    const url = new URL(href ?? scenes.current?.url ?? windowTarget.location.href, windowTarget.location.href);
     const session = scenes.current;
     const saved = session?.viewUrl ? null : session?.mount?.sharedView?.capture(getMotion());
     const token = session?.viewUrl?.capture() ?? (saved ? new URLSearchParams(formatSharedView(saved)).get('v') : null);
-    if (token) url.searchParams.set('v', token);
+    if (token) url.searchParams.set('v', token); else if (href) url.searchParams.delete('v');
     return url.pathname + url.search + url.hash;
   }
 
@@ -62,47 +62,89 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     session.shell?.setDatasetNotice?.(null);
   }
 
-  function install(session: SceneSession, initial: boolean) {
-    const view = session.mount?.sharedView;
-    if (!view) return null;
-    const owner = bindViewUrl({ windowTarget, view, listenToPopState, getMotion,
-      // The installed owner may flush once during disposal, after the session
-      // stops accepting focus changes and before its bindings are destroyed.
-      replace: url => { if (session.viewUrl === owner) publish(session, url); },
-      restoreFocus: url => {
-        if (scenes.isCurrent(session)) return getWorld()?.restoreFocus?.(url);
-      },
-      setMotion(next) {
-        session.shell?.setMotionEnabled?.(next);
-        if (initial && !scenes.isCurrent(session)) return;
-        setMotion(next);
-        if (initial) session.viewUrl?.schedule();
-      },
-      onError: initial ? error => console.warn(errorMessage(error)) : onError,
+  function applyFocus(session: SceneSession, url: string, request?: NavigationRequest, frame = false) {
+    const binding = session.viewUrl;
+    const isCurrent = () => scenes.isCurrent(session) && session.viewUrl === binding && (request ? requests.owns(request) : !requests.current);
+    if (!isCurrent()) return;
+    const world = getWorld();
+    if (!world) return;
+    return world.applyFocus(url, {
+      signal: request ? AbortSignal.any([session.signal, request.signal]) : session.signal,
+      isCurrent, frame, reducedMotion: !frame || windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true,
     });
-    session.setViewUrl(owner);
-    return owner;
   }
 
-  async function bindInitial(session: SceneSession, { restore = true } = {}) {
-    if (session.mount?.sharedView && windowTarget.location?.href) {
-      const owner = install(session, true)!;
-      if (restore) await session.wait(owner.restore());
-      if (!scenes.isCurrent(session)) return;
+  /** One arrival path for initial mounts, replacement scenes, retained scenes and recovery. */
+  async function arrive(session: SceneSession, { request, interrupted = false }: {
+    request?: NavigationRequest; interrupted?: boolean;
+  } = {}) {
+    const owns = () => scenes.isCurrent(session) && (request ? requests.owns(request) : !requests.current);
+    if (!owns()) return false;
+    if (request) {
+      if (!requests.advance(request, 'committing')) return false;
+      // Saved history and explicit focus publish before flight. Their native
+      // focus/lens result may already have updated the committed URL.
+      if (request.scene === 'replace' || (request.camera.kind !== 'restore' && request.camera.kind !== 'focus')) {
+        if (!commit(request, session)) return false;
+      }
     }
-    if (!restore || !session.mount?.sharedView) await getWorld()?.restoreFocus?.(session.url ?? windowTarget.location.href);
-  }
-
-  async function bind(session: SceneSession, { restore = true, request }: { restore?: boolean; request?: NavigationRequest } = {}) {
-    if ((request && !requests.owns(request)) || !scenes.isCurrent(session) || !session.mount?.sharedView || !windowTarget.location?.href || !session.url) return;
+    const href = session.url ?? windowTarget.location?.href;
+    if (!href || !windowTarget.location?.href) return true;
     // A failed history restoration keeps its incoming URL for diagnosis.
     // The departed scene must not install a writer for that other route.
-    if (new URL(session.url).pathname !== windowTarget.location.pathname) return;
-    getWorld()?.suspendFocus?.();
-    const owner = install(session, false)!;
-    if (restore) await (request?.lifetime.wait ?? session.wait)(owner.restore());
-    if (!restore && (!request || requests.owns(request)) && scenes.isCurrent(session)) await getWorld()?.restoreFocus?.(session.url);
+    if (new URL(href).pathname !== windowTarget.location.pathname) return true;
+    const shared = session.mount?.sharedView;
+    const restore = !interrupted && (!request || request.scene === 'replace' || request.camera.kind === 'restore');
+    const writer = shared ? bindViewUrl({ windowTarget, view: shared, getMotion,
+      // Disposal can flush after the session has stopped accepting changes.
+      replace: url => { if (session.viewUrl === owner) publish(session, url); }, onError,
+    }) : null;
+    const onPopState = () => {
+      session.url = windowTarget.location.href;
+      void arrive(session).catch(onError);
+    };
+    const owner = writer && { ...writer, destroy() {
+      writer.destroy();
+      if (listenToPopState) windowTarget.removeEventListener('popstate', onPopState);
+    } };
+    session.setViewUrl(owner);
+    if (owner && listenToPopState) windowTarget.addEventListener('popstate', onPopState);
+    const current = () => owns() && session.viewUrl === owner;
+    const wait = request?.lifetime.wait ?? session.wait;
+    let incoming: string | null = null;
+    if (restore && shared) {
+      try {
+        const query = new URL(href).searchParams;
+        if (query.getAll('v').length > 1) throw new TypeError('This URL contains more than one saved view.');
+        const token = query.get('v');
+        const saved = token !== null ? parseSharedView(`v=${token}`) : null;
+        if (saved) {
+          const applied = await wait(shared.restore(saved));
+          if (applied.cancelled || !current()) return false;
+          if (applied.value) {
+            incoming = token;
+            session.shell?.setMotionEnabled?.(saved.playback.motionRequested);
+            setMotion(saved.playback.motionRequested);
+          }
+        }
+      } catch (error) { if (current()) onError(error); }
+    }
+    if (!current()) return false;
+    // An explicit focus request has already flown and published its native result.
+    if (request?.camera.kind !== 'focus') {
+      try {
+        const focused = await wait(applyFocus(session, href, request));
+        if (focused.cancelled || !current()) return false;
+      } catch (error) {
+        if (!restore) throw error;
+        if (current()) onError(error);
+      }
+    }
+    if (!current()) return false;
+    owner?.start(incoming);
+    return true;
   }
 
-  return { capture, commit, replace, syncDataset, bindInitial, bind };
+  return { capture, commit, replace, syncDataset, arrive,
+    focus: (session: SceneSession, request: NavigationRequest) => applyFocus(session, request.url, request, true) };
 }

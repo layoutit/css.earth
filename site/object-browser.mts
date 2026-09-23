@@ -2,7 +2,6 @@ import { createObjectCatalogue } from './object-catalogue.mts';
 import { createSelectionPresentation, setPanelHidden } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
-import type { OverviewScope } from './overview-context.mts';
 import type { SceneSubject } from './scene-selection.mts';
 import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { requiredElement } from './browser-types.mts';
@@ -382,12 +381,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       filteredQuery = null;
       if (open) filter(false);
     },
-    previewOverview(scope: OverviewScope, systemId: string) {
-      return previewSelection({ kind: 'overview', overview: { scope, systemId } });
-    },
-    previewObject(objectId: string) {
-      return previewSelection({ kind: 'object', objectId });
-    },
+    previewSelection,
     showSystem(systemId: string) {
       subjectOverride = { subject: { kind: 'overview', overview: { scope: 'system', systemId } }, hideFocus: false };
       if (systemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();

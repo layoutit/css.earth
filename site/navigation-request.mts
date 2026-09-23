@@ -12,11 +12,13 @@ import { selectionContext, selectionTargetFromUrl, type SelectionTarget, type Sc
 export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'pop'; entry: string };
 export type NavigationIntent =
   | { kind: 'object' }
+  | { kind: 'focus'; id: string }
   | { kind: 'feature'; id: string }
   | { kind: 'link'; url: string }
   | { kind: 'history'; url: string; history: NavigationHistory }
   | { kind: 'overview'; scope: OverviewScope; camera: 'frame' | 'preserve' };
 export type NavigationCamera =
+  | { kind: 'focus' }
   | { kind: 'restore'; animate: boolean }
   | { kind: 'preserve' }
   | { kind: 'frame'; framing: 'center' | 'detail'; world: WorldCameraPose | null; focusPositionM: PositionM | null };
@@ -62,7 +64,12 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const center = overviewTarget?.world ?? (intent.kind === 'object' && !opensOverviewFocus
     && object.id !== current.centeredObjectId && current.hasPresented
     ? navigation.systemTarget(targetRequest) ?? navigation.centerTarget(targetRequest) : null);
-  if (!linked) {
+  if (intent.kind === 'focus') {
+    url.pathname = object.route;
+    url = withPreparedFocus(url, intent.id, null);
+    url.searchParams.delete('v');
+    history = { history: 'replace' };
+  } else if (!linked) {
     url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
     url = withDataset(withPreparedFocus(url, null, null), null);
     withOverviewScope(url, intent.kind === 'overview' ? intent.scope
@@ -75,7 +82,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const restore = history.history === 'pop' || linked && selection.savedView;
   const keepCamera = intent.kind === 'overview' && intent.camera === 'preserve'
     || current.reuseScene && (linked && selection.dataset || interruptedFlight);
-  const camera: NavigationCamera = restore ? { kind: 'restore', animate: history.history === 'pop' }
+  const camera: NavigationCamera = intent.kind === 'focus' ? { kind: 'focus' } : restore ? { kind: 'restore', animate: history.history === 'pop' }
     : keepCamera ? { kind: 'preserve' }
     : { kind: 'frame', framing: center ? 'center' : 'detail', world: center, focusPositionM: overviewTarget?.focusPositionM ?? null };
   if (current.reuseScene && !restore) {

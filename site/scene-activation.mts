@@ -41,7 +41,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         // The detailed destination already owns the camera. Real input ends
         // its flight without retiring that scene or restoring the endpoint.
         interrupted = true;
-        const drawnUrl = view.capture();
+        const drawnUrl = view.capture(request.url);
         if (drawnUrl) request.url = session.url = new URL(drawnUrl, windowTarget.location.href).href;
       }
     }
