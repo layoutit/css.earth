@@ -14,7 +14,7 @@ export const HELP = `Telescope — explore observations or continue from an exis
 
 Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
-  telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N --out DIRECTORY [--json]
+  telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope wwt-fits CATALOG.json --set NAME --level N --x X --y Y --out DIRECTORY [--json]
   telescope wwt-image EXPLORE.json --pick N --level 0..3 --out DIRECTORY [--json]

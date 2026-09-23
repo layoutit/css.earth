@@ -4,7 +4,8 @@ import { cxcQuery, chandraObservation, obsidDirectory, TAP } from '../chandra/ar
 import { deliverSource, rawHttpsFetch, readSavedSource } from './archive-source.mts';
 
 export async function fetchChandraSource(explorationPath: string, pick: number, outputDirectory: string,
-  query: typeof cxcQuery = cxcQuery, observe: typeof chandraObservation = chandraObservation, fetcher: typeof fetch = rawHttpsFetch) {
+  query: typeof cxcQuery = cxcQuery, observe: typeof chandraObservation = chandraObservation, fetcher: typeof fetch = rawHttpsFetch,
+  fileName?: string) {
   const saved = await readSavedSource(explorationPath, TAP, pick), selected = saved.selected;
   const obsid = requireFiniteNumber(selected.obsid, 'Chandra ObsID'), targetName = requireString(selected.targetName, 'archive target');
   if (!Number.isSafeInteger(obsid) || obsid < 1) throw new TypeError('Saved Chandra ObsID is invalid.');
@@ -23,7 +24,13 @@ export async function fetchChandraSource(explorationPath: string, pick: number, 
   const observation = await observe(obsid);
   if (observation.obsid !== obsid || observation.targetName !== targetName || observation.instrument !== selected.instrument ||
       observation.grating !== selected.grating) throw new Error('Chandra event headers disagree with the selected ObsID.');
-  const event = observation.products.find(file => /_evt2\.fits(?:\.gz)?$/u.test(file.path));
+  const events = observation.products.filter(file => /_evt2\.fits(?:\.gz)?$/u.test(file.path));
+  const choices = events.map(file => file.path.slice(file.path.lastIndexOf('/') + 1));
+  if (fileName !== undefined && !/^[A-Za-z0-9._-]+\.fits(?:\.gz)?$/u.test(fileName)) throw new TypeError('Invalid Chandra --file name.');
+  if (fileName === undefined && events.length > 1) throw new Error(`Chandra lists several level-2 event files. Repeat with --file NAME: ${choices.join(', ')}`);
+  const matches = fileName === undefined ? events : events.filter(file => file.path.endsWith(`/${fileName}`));
+  if (matches.length !== 1) throw new Error(`Chandra has no unique level-2 event file ${fileName ?? ''}. Available: ${choices.join(', ')}`);
+  const event = matches[0];
   if (!event || !/^primary\/[A-Za-z0-9._-]+\.fits(?:\.gz)?$/u.test(event.path) && !/^secondary\/[A-Za-z0-9._-]+\.fits(?:\.gz)?$/u.test(event.path) ||
       event.url !== `${obsidDirectory(obsid)}/${event.path}` || !Number.isSafeInteger(event.bytes) || event.bytes < 1)
     throw new Error('Chandra lists no valid exact level-2 event source for this ObsID.');

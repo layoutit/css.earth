@@ -74,6 +74,9 @@ Fetch rechecks the selected archive identity, enforces the saved science-byte li
 and records original files, discovery and current metadata, limitations and hashes. Run
 `telescope outputs NEW_DIRECTORY/output.product.json` to inspect operations the actual FITS
 supports. Acquisition alone does not qualify calibration, target detection or scientific fitness.
+If a selected Chandra ObsID has several level-2 event files, or a Spitzer AOR has several science
+FITS products, fetch lists their exact names and requires `--file NAME`. It does not silently pick
+one detector or channel. Repeat fetch with a new output directory to retrieve another file.
 `telescope get` remains the route for qualified observation choices. Every fetch needs a new output directory.
 
 `explore` also asks the PDS Ring-Moon Systems Node's

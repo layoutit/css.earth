@@ -16,9 +16,10 @@ import { fetchOpusSource, opusNativeFiles } from './opus-source.mts';
 import { OPUS_SERVICE } from './opus.mts';
 import { openFitsSource } from './fits-source.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
+import { parseCli } from './cli.mts';
 
 const fits = Buffer.from(`${'SIMPLE  =                    T'.padEnd(80)}${'END'.padEnd(80)}`.padEnd(2880));
-const fileResponse = (bytes: Buffer, type = 'application/fits') => new Response(bytes, { headers: { 'content-type': type } });
+const fileResponse = (bytes: Buffer, type = 'application/fits') => new Response(new Uint8Array(bytes), { headers: { 'content-type': type } });
 
 async function saved(root: string, service: string, source: Record<string, unknown>, rows: unknown, maximum = 4096) {
   const evidence = Buffer.from(`${JSON.stringify({ source: service, request: 'fixture', rows }, null, 2)}\n`), pin = sha256(evidence);
@@ -49,7 +50,7 @@ test('a Chandra gzip response is pinned as compressed archive bytes', async () =
   try {
     const compressed = gzipSync(fits), file = { url: 'https://example.org/a.fits.gz', name: 'a.fits.gz',
       bytes: compressed.length, archiveEncoding: 'gzip' as const };
-    const response = async () => new Response(compressed, { headers: { 'content-encoding': 'x-gzip', 'content-type': 'image/x-fits' } });
+    const response = async () => new Response(new Uint8Array(compressed), { headers: { 'content-encoding': 'x-gzip', 'content-type': 'image/x-fits' } });
     const result = await downloadSource(file, resolve(root, file.name), compressed.length, response);
     assert.equal(result.sha256, sha256(compressed));
     assert.deepEqual(await readFile(resolve(root, file.name)), compressed);
@@ -108,6 +109,12 @@ test('Chandra revalidates its ObsID and pins one level-2 event source', async ()
     const query = async () => [{ obsid: String(obsid), target_name: 'Cas A', instrument: 'ACIS-S', grating: 'NONE', start_date: '2000-01-01', status: 'archived' }];
     const result = await fetchChandraSource(exploration, 1, resolve(root, 'out'), query, async () => observation, async () => fileResponse(fits));
     assert.equal((await openFitsSource(result.receipt))?.file, result.files[0]);
+    const second = { path: `primary/hrcf00210N003_evt2.fits`, url: `${obsidDirectory(obsid)}/primary/hrcf00210N003_evt2.fits`, bytes: fits.length };
+    await assert.rejects(fetchChandraSource(exploration, 1, resolve(root, 'ambiguous'), query,
+      async () => ({ ...observation, products: [...observation.products, second] })), /--file NAME/u);
+    const chosen = await fetchChandraSource(exploration, 1, resolve(root, 'chosen'), query,
+      async () => ({ ...observation, products: [...observation.products, second] }), async () => fileResponse(fits), second.path.split('/').at(-1));
+    assert.match(chosen.files[0]!, /hrcf00210N003_evt2\.fits$/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -124,6 +131,15 @@ test('Spitzer revalidates its AOR and pins one named FITS product', async () => 
       [url.replace('_maic.fits', '_munc.fits'), url.replace('_maic.fits', '_mcov.fits')]);
     assert.equal((await openFitsSource(result.receipt))?.file, result.files[0]);
     assert.equal(result.files.length, 3);
+    const channelTwo = { ...product, channum: '2', externalname: product.externalname.replaceAll('ch1', 'ch2').replaceAll('I1', 'I2'),
+      heritagefilename: product.heritagefilename.replaceAll('ch1', 'ch2').replaceAll('I1', 'I2') };
+    const several: typeof query = async request => request.id === 'aorByRequestID'
+      ? [{ reqkey: String(aorKey), targetname: 'Bennu', modedisplayname: 'IRAC Map' }] : [product, channelTwo];
+    await assert.rejects(fetchSpitzerSource(exploration, 1, resolve(root, 'ambiguous'), several), /--file NAME/u);
+    const chosen = await fetchSpitzerSource(exploration, 1, resolve(root, 'chosen'), several, async () => fileResponse(fits),
+      async url => [url.replace('_maic.fits', '_munc.fits'), url.replace('_maic.fits', '_mcov.fits')],
+      channelTwo.externalname.split('/').at(-1));
+    assert.match(chosen.files[0]!, /SPITZER_I2_/u);
     const fallback: typeof query = async request => request.id === 'aorByRequestID'
       ? [{ reqkey: String(aorKey), targetname: 'Bennu', modedisplayname: 'IRAC Map' }]
       : request.id === 'pbcdByRequestID' ? [{ externalname: 'preview.jpg', heritagefilename: '/sha/archive/preview.jpg' }]
@@ -133,4 +149,11 @@ test('Spitzer revalidates its AOR and pins one named FITS product', async () => 
     assert.equal(basic.files.length, 1);
     assert.match(basic.files[0]!, /_cbcd\.fits$/u);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('the CLI limits exact file selection to archives that can list multiple science files', () => {
+  const parsed = parseCli(['fetch', 'explore.json', '--archive', 'spitzer', '--pick', '1', '--file', 'image.fits', '--out', 'source']);
+  assert.equal(parsed.command, 'fetch');
+  if (parsed.command === 'fetch') assert.equal(parsed.fileName, 'image.fits');
+  assert.throws(() => parseCli(['fetch', 'explore.json', '--archive', 'gemini', '--pick', '1', '--file', 'image.fits', '--out', 'source']), /--file applies/u);
 });

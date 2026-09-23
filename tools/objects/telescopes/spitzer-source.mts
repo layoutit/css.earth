@@ -11,7 +11,8 @@ const sourceName = (row: Readonly<Record<string, string>>): string | null => {
 };
 
 export async function fetchSpitzerSource(explorationPath: string, pick: number, outputDirectory: string,
-  query: typeof shaSearch = shaSearch, fetcher: typeof fetch = fetch, companions: typeof mosaicCompanions = mosaicCompanions) {
+  query: typeof shaSearch = shaSearch, fetcher: typeof fetch = fetch, companions: typeof mosaicCompanions = mosaicCompanions,
+  fileName?: string) {
   const saved = await readSavedSource(explorationPath, SEARCH, pick), selected = saved.selected;
   const aorKey = requireFiniteNumber(selected.aorKey, 'Spitzer AORKEY'), targetName = requireString(selected.targetName, 'Spitzer target name');
   if (!Number.isSafeInteger(aorKey) || aorKey < 1) throw new TypeError('Saved Spitzer AORKEY is invalid.');
@@ -29,10 +30,14 @@ export async function fetchSpitzerSource(explorationPath: string, pick: number, 
   const primary = products.filter(row => sourceName(row) !== null);
   const basic = primary.length ? [] : await query({ id: 'bcdByRequestID', aorKey: String(aorKey) }, { timeoutMs: 20_000, attempts: 1 });
   const candidates = (primary.length ? primary : basic.filter(row => sourceName(row) !== null))
-    .sort((a, b) => Number(sourceName(b)?.endsWith('_maic.fits')) - Number(sourceName(a)?.endsWith('_maic.fits')) ||
-      (sourceName(a) ?? '').localeCompare(sourceName(b) ?? ''));
-  const file = candidates[0];
-  if (!file) throw new Error(`Spitzer AOR ${aorKey} has no source FITS file in its public file listing.`);
+    .filter(row => !/_m(?:unc|cov)\.fits$/iu.test(sourceName(row) ?? ''))
+    .sort((a, b) => (sourceName(a) ?? '').localeCompare(sourceName(b) ?? ''));
+  const choices = candidates.map(row => sourceName(row)!);
+  if (fileName !== undefined && !/^[A-Za-z0-9._-]+\.fits$/iu.test(fileName)) throw new TypeError('Invalid Spitzer --file name.');
+  if (fileName === undefined && candidates.length > 1) throw new Error(`Spitzer AOR ${aorKey} lists several source FITS files. Repeat with --file NAME: ${choices.join(', ')}`);
+  const matches = fileName === undefined ? candidates : candidates.filter(row => sourceName(row) === fileName);
+  if (matches.length !== 1) throw new Error(`Spitzer AOR ${aorKey} has no unique source FITS file ${fileName ?? ''}. Available: ${choices.join(', ')}`);
+  const file = matches[0]!;
   const name = sourceName(file)!, url = archiveUrl(requireString(file.heritagefilename, 'Spitzer archive path'));
   if (!url.endsWith(`/${name}`)) throw new Error('Spitzer file name and archive path disagree.');
   const md5 = file.checksum?.trim() || undefined;
