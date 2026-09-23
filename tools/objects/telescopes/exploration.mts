@@ -178,6 +178,10 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     else if (service.state === 'unknown-target') issues.push({ scope: 'provider', code: 'provider-target-unknown', identity: service.service, reason: service.reason });
   }
   for (const item of indexed.coverage) if (item.state !== 'observed') issues.push({ scope: 'indexed-source', code: 'coverage', identity: item.telescope, reason: item.reason });
+  for (const issue of inputs.sourceIntakeIssues ?? []) {
+    if (issue.state === 'incomplete') unresolved.push({ scope: 'indexed-source', code: 'coverage', identity: issue.path, reason: issue.reason });
+    else if (issue.state === 'unsupported') unsupported.push({ scope: 'indexed-source', code: 'unsupported-observation', identity: issue.path, reason: issue.reason });
+  }
   const missingHeaders = inputs.sourceIntakeIssues?.filter(issue => issue.state === 'unavailable') ?? [];
   if (missingHeaders.length) issues.push({ scope: 'indexed-source', code: 'coverage', identity: 'source manifest',
     reason: `${missingHeaders.length} declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.` });
