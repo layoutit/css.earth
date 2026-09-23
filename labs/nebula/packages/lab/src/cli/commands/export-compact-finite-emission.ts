@@ -85,15 +85,13 @@ const neutralSlices = await putJson(`${compact}/neutral-slices.json.gz`,
   parseLabModelJson(await readFile(resolve(root, modelDirectory, 'neutral/volume-slices.json'), 'utf8')));
 await cp(resolve(root, modelDirectory, 'neutral/slices'), resolve(root, compact, 'neutral/slices'), { recursive: true });
 
-// The depth density the envelope was fitted with, carried with the accepted pin so the identity survives.
-// An envelope that names no alternative density was fitted with the model request's own cloud, exactly as
-// the lens bake resolves it.
+// The depth density the envelope was fitted with. An envelope that names no alternative density was fitted with
+// the model request's own cloud, exactly as the lens bake resolves it. The delivery carries the density itself,
+// and the replay recognises it by the field's own identity, so no digest is recorded beside the path.
 const identityPin = record(envelope.priorCloud ?? record(request.cloud, 'model request cloud').provenance, 'envelope prior cloud');
-assert.ok(typeof identityPin.path === 'string' && typeof identityPin.sha256 === 'string', 'The envelope must pin its depth density.');
-const identityPath = text(identityPin.path, 'envelope prior path'), identityDigest = text(identityPin.sha256, 'envelope prior digest');
+const identityPath = text(identityPin.path, 'envelope prior path');
 const priorDirectory = dirname(identityPath);
 const priorRecipeBytes = await readFile(resolve(root, identityPath));
-assert.equal(sha256(priorRecipeBytes), identityDigest, 'The pinned depth density changed.');
 const priorRecipe = await put(`${compact}/prior/volume.json`, priorRecipeBytes);
 const priorGrid = record(parseLabModelJson(priorRecipeBytes.toString()), 'prior recipe').grid;
 const gridPin = record(priorGrid, 'prior grid');
@@ -164,7 +162,7 @@ const inputs = {
   appearance: lensInputs[0]!.result.appearance,
   encoding: { format: 'webp', quality: record(model.settings, 'model settings').quality },
   emissionField, envelope: envelopeRecord, neutralSlices, neutralTextures: `${compact}/neutral`,
-  priorCloud: { identityPin: { path: identityPath, sha256: identityDigest }, recipe: priorRecipe },
+  priorCloud: { recipe: priorRecipe },
   ...(toneProjection ? { toneProjection } : {}),
   stars, lenses,
   limitations: [

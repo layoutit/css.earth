@@ -102,8 +102,7 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
   assert.ok(Array.isArray(gain) && gain.length === Number(gw) * Number(gh) &&
     gain.every(value => typeof value === 'number' && Number.isFinite(value) && value >= 0), 'Invalid simulation envelope record');
   const prior = record(input.priorCloud, 'prior cloud');
-  const readPin = parsePin(prior.recipe, 'prior recipe'), identityPin = parsePin(prior.identityPin, 'prior identity');
-  const depthPrior = await loadSimulationPrior(root, readPin, distance, modelTangent, { identityPin });
+  const depthPrior = await loadSimulationPrior(root, parsePin(prior.recipe, 'prior recipe'), distance, modelTangent);
   assert.equal(depthPrior.identity, envelopeRecord.priorIdentity, 'Depth density differs from the prior this envelope was fitted with.');
   const zRange = numbers(envelopeRecord.zRange, 2, 'envelope depth range');
   const envelopeGrid = { width: Number(gw), height: Number(gh), bounds: bounds2(envelopeRecord.bounds, 'envelope bounds'),
