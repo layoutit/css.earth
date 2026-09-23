@@ -91,3 +91,17 @@ test('faceted MAST discovery keeps distinct MIRI and NIRCam samples visible to e
     assert.ok(answer.choices.every(choice => choice.archiveService === mast.service));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('a selected archive observation refreshes only its registered provider', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'vo-selected-provider-'));
+  const observation = normalizeSnapshot(snapshot, alma, target, [target])[0]!;
+  const seen: string[] = [];
+  try {
+    const inputs = await loadVoInputs(root, { target: target.id }, [{ id: target.id, name: target.names[0]!, aliases: [], archiveClass: 'star', classificationSource: 'fixture' }],
+      observation.key, async (_root, profile) => { seen.push(profile.service); return snapshot; }, {}, async () => ({ ...response, rows: [], times: [] }),
+      async () => { throw new Error('facets are not needed'); }, alma.service);
+    assert.deepEqual(seen, [alma.service]);
+    assert.deepEqual(inputs.services.map(service => service.service), [alma.service]);
+    assert.ok(inputs.records.some(record => record.observation.key === observation.key));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

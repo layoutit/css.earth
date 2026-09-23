@@ -6,7 +6,7 @@ import { sha256File } from '../../../src/platform/sha256.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { readProductRecord, type ProductRecord } from '../product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection,
-  type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';
+  type ArchiveSelection, type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';
 import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
 import { qualifyObservation, type QualificationRequest } from './qualify.mts';
 import { selectedProductInput } from './selected-product.mts';
@@ -14,6 +14,7 @@ import { qualifiedProductInput } from './selected-product.mts';
 import { assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { QualificationConfiguration } from './qualification-routes.mts';
 import { EXPLORATION_SCHEMA, exploreTarget, parseExplorationArguments, type ExplorationAnswer, type ExplorationChoice, type ExplorationRequest } from './exploration.mts';
+import { SERVICES } from './vo/discovery.mts';
 import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery-context.mts';
 import { canonical } from './vo/contracts.mts';
 
@@ -61,13 +62,13 @@ export interface SessionServices {
   readonly loadRequest?: (root: string, request: CapabilityRequest, selectedObservation?: string, progress?: (stage:string)=>void) => Promise<QueryInputs>;
   readonly load: (root: string, target: string) => Promise<QueryInputs>;
   readonly qualify: (root: string, request: QualificationRequest) => Promise<unknown>;
-  readonly explore?: (root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void) => Promise<ExplorationAnswer>;
+  readonly explore?: (root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void, archiveSelection?: ArchiveSelection) => Promise<ExplorationAnswer>;
 }
 const services: SessionServices = { load: loadQueryInputs, loadRequest: loadQueryInputs, qualify: qualifyObservation, explore: exploreTarget };
 const loadForRequest = (api: SessionServices, root: string, request: CapabilityRequest, selectedObservation?: string, progress?: (stage:string)=>void) => api.loadRequest ? api.loadRequest(root, request, selectedObservation, progress) : api.load(root, request.target);
 const emptyInputs: QueryInputs = { ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [] };
-const exploreForRequest = (api: SessionServices, root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void) =>
-  (api.explore ?? exploreTarget)(root, request, selectedObservation, progress);
+const exploreForRequest = (api: SessionServices, root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
+  archiveSelection?: ArchiveSelection) => (api.explore ?? exploreTarget)(root, request, selectedObservation, progress, archiveSelection);
 export function sessionRequest(args: readonly string[]): CapabilityRequest {
   const request = requestFromArguments(args);
   queryCapabilities(request, emptyInputs); // Public validation, before archive IO.
@@ -265,7 +266,10 @@ function readExplorationChoice(value: unknown, pick: number) {
   const choice = requireRecord(choices[pick - 1], 'saved exploration choice');
   if (choice.pick !== pick) throw new TypeError('Saved exploration choice numbering is inconsistent.');
   const reference = requireRecord(choice.reference, 'saved exploration reference');
-  return { args, target: requireString(session.target, 'saved exploration target'), key: requireString(choice.key, 'saved exploration key'), observation: requireString(choice.observation, 'saved exploration observation'), reference };
+  const archiveService = reference.kind === 'vo-acquisition' && choice.archiveService !== undefined ? requireString(choice.archiveService, 'saved archive service') : undefined;
+  if (archiveService && !SERVICES.some(profile => profile.service === archiveService)) throw new TypeError('Saved archive service is not registered.');
+  return { args, target: requireString(session.target, 'saved exploration target'), key: requireString(choice.key, 'saved exploration key'), observation: requireString(choice.observation, 'saved exploration observation'), reference,
+    ...(archiveService ? { archiveService } : {}) };
 }
 
 async function resolveExplorationArtifact(root: string, choice: ExplorationChoice): Promise<Artifact> {
@@ -306,7 +310,8 @@ async function getExplorationSession(root: string, directory: string, pick: numb
       return { resultPath, product: local.file, context: local.context, assessment: local.context.assessment, reused: true, replay: 'pinned-local-artifact' as const };
     }
     progress('Revalidating the saved observation');
-    let answer = await exploreForRequest(api, root, request, saved.observation);
+    const archiveSelection = saved.archiveService ? { archiveService: saved.archiveService } : undefined;
+    let answer = await exploreForRequest(api, root, request, saved.observation, undefined, archiveSelection);
     if (answer.target !== saved.target) throw new Error('Target identity changed since the saved exploration. Save a new exploration.');
     let choice = savedChoice(answer.choices, saved);
     if (!choice) throw new Error('The saved observation is no longer available for this exploration. Explore again to inspect current blockers.');
@@ -315,7 +320,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
       const qualifying = choice;
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
       await locked(resolve(root, 'output/telescopes'), () => api.qualify(root, { target: answer.target, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
-      answer = await exploreForRequest(api, root, { ...request, ...answer.request.skyTarget ? { skyTarget: answer.request.skyTarget } : {} }, saved.observation);
+      answer = await exploreForRequest(api, root, { ...request, ...answer.request.skyTarget ? { skyTarget: answer.request.skyTarget } : {} }, saved.observation, undefined, archiveSelection);
       choice = savedChoice(answer.choices, saved);
       if (!choice || choice.state !== 'ready') throw new Error('Qualification did not produce a selectable artifact for the original exploration. Explore again for the current result.');
     }
