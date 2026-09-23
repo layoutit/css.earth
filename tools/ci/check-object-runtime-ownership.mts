@@ -233,6 +233,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
       node.type === "ImportExpression" && node.source.type === "Literal" && !registryImportOffsets.has(sourceStart(node))) {
     if (isRecord(node) && (node.importKind === 'type' || node.exportKind === 'type')) return;
     const imported = requireString(node.type === "ImportExpression" ? (node.source.type === "Literal" ? node.source.value : undefined) : node.source?.value);
+    if (/^@wwtelescope\/engine(?:-|$)/u.test(imported)) note(node, 'WWT WebGL engine is forbidden in the CSS runtime');
     // The world-context plan's validated helper import runs only on its Node `file:` branch.
     const onServer = node.type === "ImportExpression" ? sourceStart(node) === contextImport?.helper :
       (astroRoot ? frontmatterImports.has(node) : serverOnly);
