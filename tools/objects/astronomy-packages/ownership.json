@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-astronomy-package-ownership@1",
   "pythonBoundary": "tools/objects/astronomy-packages/client.mts",
+  "catalogPreparationPythonBoundary": "tools/objects/telescopes/wwt-catalog-build.mts",
   "owners": [
     {
       "mechanic": "IVOA TAP requests and VOTable decoding",
@@ -157,6 +158,15 @@
       "operation": "F14 HEALPix inspection and native pixel selection",
       "consumers": [
         "Telescope F14 HEALPix maps"
+      ]
+    },
+    {
+      "mechanic": "WWT WTML imageset metadata decoding at catalog preparation",
+      "package": "wwt-data-formats",
+      "version": "0.18.1",
+      "operation": "wwt-catalog-build.mts",
+      "consumers": [
+        "Telescope explore curated display imagery"
       ]
     }
   ],

@@ -6,6 +6,7 @@ import{mkdtemp,rm,writeFile}from'node:fs/promises';import{tmpdir}from'node:os';
 import { formatArtifact, formatExploration, formatSession, main, outputCommand, parseCli, type ArtifactInspection, type CliIo, type CliServices } from './cli.mts';
 import type { ExplorationSession } from './session.mts';
 import type { Session } from './session.mts';
+import { loadWwtImagery } from './wwt-catalog.mts';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
   reference:{kind:'indexed-observation' as const,telescope:'Fixture telescope',mode:'camera',observation:'obs-1',programme:'eris-obs-1'},
@@ -98,6 +99,17 @@ test('human exploration and artifact screens retain unknowns, blockers, context 
   const local=formatArtifact({...inspection,source:resolve('output/a run/result.json')});
   assert.match(local,/Source: output\/a run\/result\.json/u);
   assert.match(local,/Next: telescope export 'output\/a run\/result\.json'/u);
+});
+
+test('WWT imagery appears with credits but never becomes a numbered retrieval choice',async()=>{
+  const curatedImagery=await loadWwtImagery(process.cwd(),{id:'europa',name:'Europa',aliases:[]});
+  assert.equal(curatedImagery.state,'indexed');
+  const session=exploration('/tmp/wwt-run'),screen=formatExploration({...session,answer:{...session.answer,curatedImagery}});
+  assert.match(screen,/WWT curated imagery \(1 title\/frame match/u);
+  assert.match(screen,/Europa \(Jupiter\).*Toast.*reference-frame match/u);
+  assert.match(screen,/NASA\/JPL\/Space Science Institute/u);
+  assert.match(screen,/Display imagery only; these are not selectable observations/u);
+  assert.equal((screen.match(/^\d+\. /gmu)??[]).length,1);
 });
 
 test('query continuation quotes shell metacharacters without command substitution',()=>{

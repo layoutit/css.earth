@@ -38,6 +38,8 @@ saved without starting a retrieval. With `--json`, redirected stdin, or redirect
 prompts and emits the saved exploration as one JSON value. Without `--out`, it creates a unique run
 under `./telescope-runs/` and reports that path.
 
+`explore` also shows title or reference-frame matches from a pinned [WorldWide Telescope core imagery index](../../docs/astronomy-package-ownership.md#worldwide-telescope-data-reuse). The saved `answer.curatedImagery` carries the WWT source revision, match basis, display projection and positioning fields, band, tile URL template, source XML link and credits. These entries are curated display imagery, not numbered choices: `telescope get` cannot retrieve or qualify them. A title match does not prove that the target lies inside an image; the index does not test current tile availability. WWT imagery never changes `outcome.selection` or scientific search coverage.
+
 The saved answer has an `outcome` with separate `selection` and `coverage` values. `selection`
 is `available` when at least one numbered route can be tried, or `none`. `coverage` is
 `target-unresolved` when no target search ran, `incomplete` when a provider failed or overflowed,

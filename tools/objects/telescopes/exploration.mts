@@ -14,6 +14,7 @@ import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
 import { searchOpus, type OpusService } from './opus.mts';
 import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadService } from './archive-leads.mts';
+import { loadWwtImagery, type WwtImageryResult } from './wwt-catalog.mts';
 
 export const EXPLORATION_SCHEMA = 'cssearth-telescope-exploration@1';
 export interface ExplorationRequest extends DiscoveryRequest {}
@@ -43,7 +44,7 @@ export interface ExplorationIssue {
   readonly code: 'unknown-target' | 'ambiguous-target' | 'provider-unavailable' | 'provider-overflow' | 'provider-target-unknown' | 'unsupported-observation' | 'filter-unresolved' | 'source-unavailable' | 'coverage';
   readonly reason: string; readonly identity?: string;
 }
-export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService; readonly archiveLeads?: readonly ArchiveLeadService[] }
+export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService; readonly archiveLeads?: readonly ArchiveLeadService[]; readonly curatedImagery?: WwtImageryResult }
 export interface ExplorationOutcome {
   /** A choice is a current route, not a guarantee that retrieval or qualification will succeed. */
   readonly selection: 'available' | 'none';
@@ -56,6 +57,8 @@ export interface ExplorationAnswer {
   readonly outcome: ExplorationOutcome;
   readonly choices: readonly ExplorationChoice[]; readonly unresolved: readonly ExplorationIssue[]; readonly unsupported: readonly ExplorationIssue[];
   readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService | ArchiveLeadService)[]; readonly coverage: readonly TargetCoverage[];
+  /** Display metadata from WWT; entries are never numbered retrieval/qualification choices or science search coverage. */
+  readonly curatedImagery?: WwtImageryResult;
   /** The pinned SIMBAD answers a target outside the catalogue was resolved from in this run. */
   readonly skyResolution?: SkyResolution['evidence'];
 }
@@ -203,7 +206,8 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
   const missingHeaders = inputs.sourceIntakeIssues?.filter(issue => issue.state === 'unavailable') ?? [];
   if (missingHeaders.length) issues.push({ scope: 'indexed-source', code: 'source-unavailable', identity: 'source manifest',
     reason: `${missingHeaders.length} declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.` });
-  const answer: Omit<ExplorationAnswer, 'outcome'> = { schema: EXPLORATION_SCHEMA, request: canonicalRequest, target, targetResolution, choices: choices.map((choice, index) => ({ ...choice, pick: index + 1 })), unresolved, unsupported, issues, services, coverage: indexed.coverage };
+  const answer: Omit<ExplorationAnswer, 'outcome'> = { schema: EXPLORATION_SCHEMA, request: canonicalRequest, target, targetResolution, choices: choices.map((choice, index) => ({ ...choice, pick: index + 1 })), unresolved, unsupported, issues, services, coverage: indexed.coverage,
+    ...(inputs.curatedImagery ? { curatedImagery: inputs.curatedImagery } : {}) };
   return { ...answer, outcome: explorationOutcome(answer) };
 }
 
@@ -234,9 +238,9 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
   if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection);
   const target = targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
-  const [inputs, opus] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target)]);
+  const [inputs, opus, curatedImagery] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target)]);
   const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target), searchGeminiLeads(root, target)]);
-  return { ...inputs, opus, archiveLeads };
+  return { ...inputs, opus, archiveLeads, curatedImagery };
 }
 
 export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
