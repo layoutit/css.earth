@@ -1,0 +1,82 @@
+{
+  "id": "arxiv-2504-11210",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Trevascus et al. (2025): Differentiating Formation Models with New Dynamical Masses for the PDS 70 Protoplanets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2504.11210"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202553936"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2504.11210",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202553936",
+      "label": "Astronomy & Astrophysics"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2504.11210",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 2: GRAVITY astrometry; Table 3: orbital parameters, the \"Stable (incl. N-body)\" column"
+    },
+    {
+      "path": "src/objects/pds-70/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/pds-70-b/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/pds-70-b/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/pds-70-b/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/pds-70-b/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    },
+    {
+      "path": "src/objects/pds-70-c/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/pds-70-c/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/pds-70-c/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/pds-70-c/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "David Trevascus",
+    "Sarah Blunt",
+    "Valentin Christiaens",
+    "Elisabeth Matthews",
+    "Iain Hammond",
+    "Wolfgang Brandner"
+  ]
+}

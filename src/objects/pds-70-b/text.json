@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pds-70-b",
+  "card": {
+    "text": "Young giant planet about 21 au from PDS 70, still forming inside the gap of its disc.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1806-11568",
+        "url": "https://arxiv.org/abs/1806.11568",
+        "label": "Keppler et al. 2018",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "We detect a point source within the gap of the disk at about 195 mas (about 22 au) projected separation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "PDS 70 b, found in 2018 inside the gap of its star's disc, is a gas giant still forming about 21 au out. It takes about 96 years to orbit.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1806-11568",
+        "url": "https://arxiv.org/abs/1806.11568",
+        "label": "Keppler et al. 2018",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "We detect a point source within the gap of the disk at about 195 mas (about 22 au) projected separation."
+      },
+      {
+        "catalogueId": "arxiv-2504-11210",
+        "url": "https://arxiv.org/abs/2504.11210",
+        "label": "Trevascus et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "The presence of two directly imaged planets, PDS 70 b and c, in the PDS 70 protoplanetary disk provides us a unique opportunity for dynamical mass measurements"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

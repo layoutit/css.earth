@@ -150,7 +150,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
   if (!crossRecord) return { ...result, crossCheck: null };
   const { parseCieTable } = await import('../disc-integrated-color.mts');
   const colorMatching = parseCieTable((await read(requireString(science.colorMatching, 'science.colorMatching'))).toString('utf8'), 3);
-  const color = measuredSpectrumColor(readMeasuredSpectrum(await read(crossRecord.record.path), crossRecord.record), colorMatching, crossRecord.record.gaps);
+  const color = measuredSpectrumColor(await loadMeasuredSpectrum(read, crossRecord.record), colorMatching, crossRecord.record.gaps);
   const difference = Math.max(...color.srgb.map((value, channel) => Math.abs(value - result.color.srgb[channel]!)));
   return { ...result, crossCheck: { source: crossRecord.source, srgb: color.srgb, maxChannelDifference: difference, ...(crossRecord.disagreement ? { disagreement: crossRecord.disagreement } : {}) } };
 }
@@ -184,7 +184,7 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
         xpSampledColor(spectrum.flux.map((value, i) => Math.max(Number.MIN_VALUE, value + spectrum.fluxError[i]!)), colorMatching)] as const };
   }
   if (record.spectrum === 'measured') {
-    const spectrum = readMeasuredSpectrum(await read(record.measured.path), record.measured);
+    const spectrum = await loadMeasuredSpectrum(read, record.measured);
     return { temperature: null, spectrum: { samples: spectrum.wavelengthsNm.length }, color: measuredSpectrumColor(spectrum, colorMatching, record.measured.gaps), limbDarkening,
       range: null };
   }
@@ -221,7 +221,13 @@ export interface MeasuredSpectrumRecord {
   /** FITS rows (or array samples) whose quality value differs from `good` are left out. */
   readonly quality?: { readonly column: string; readonly good: number };
   readonly gaps: readonly { readonly fromNm: number; readonly toNm: number; readonly reason: string }[];
+  /** A spectrograph that splits the visible between arms, each in its own file of the same layout: `path` is used below `nm` and this
+   * file from `nm` up. Where the arms overlap, their median flux within 5 nm of the join must agree to JOIN_AGREEMENT. */
+  readonly join?: { readonly path: string; readonly nm: number; readonly reason: string };
 }
+
+/** The largest fractional difference between two arms' median flux within 5 nm of their join. */
+export const JOIN_AGREEMENT = 0.05;
 
 const FORMATS = ['fits-table', 'fits-table-array', 'tsv-columns', 'pulkovo-blocks', 'burnashev-records', 'kharitonov-records', 'gaia-xp-sampled'] as const;
 export function parseMeasuredSpectrumRecord(value: unknown): MeasuredSpectrumRecord {
@@ -244,7 +250,28 @@ export function parseMeasuredSpectrumRecord(value: unknown): MeasuredSpectrumRec
     wavelength: { column: requireString(wavelength.column, 'wavelength.column'), unit: unit as MeasuredSpectrumRecord['wavelength']['unit'] },
     flux: { column: requireString(flux.column, 'flux.column'), kind: kind as MeasuredSpectrumRecord['flux']['kind'],
       ...(flux.missing === undefined ? {} : { missing: requireFiniteNumber(flux.missing, 'flux.missing') }) },
-    ...(quality ? { quality: { column: requireString(quality.column, 'quality.column'), good: requireFiniteNumber(quality.good, 'quality.good') } } : {}), gaps };
+    ...(quality ? { quality: { column: requireString(quality.column, 'quality.column'), good: requireFiniteNumber(quality.good, 'quality.good') } } : {}), gaps,
+    ...(input.join === undefined ? {} : (() => {
+      const join = requireRecord(input.join, 'measuredSpectrum.join');
+      return { join: { path: requireString(join.path, 'measuredSpectrum.join.path'), nm: requireFiniteNumber(join.nm, 'measuredSpectrum.join.nm'), reason: requireString(join.reason, 'measuredSpectrum.join.reason') } };
+    })()) };
+}
+
+/** Read a measured spectrum through `read`, joining its second arm when the record names one. */
+export async function loadMeasuredSpectrum(read: (path: string) => Promise<Buffer>, record: MeasuredSpectrumRecord) {
+  const first = readMeasuredSpectrum(await read(record.path), record);
+  if (!record.join) return first;
+  const second = readMeasuredSpectrum(await read(record.join.path), record), at = record.join.nm;
+  const median = (s: typeof first, from: number, to: number) => {
+    const values = s.flux.filter((_, i) => s.wavelengthsNm[i]! >= from && s.wavelengthsNm[i]! <= to).sort((x, y) => x - y);
+    if (!values.length) throw new TypeError(`${record.path} and ${record.join!.path} do not both cover ${from}-${to} nm around the join at ${at} nm.`);
+    return values[Math.floor(values.length / 2)]!;
+  };
+  const below = median(first, at - 5, at + 5), above = median(second, at - 5, at + 5), difference = Math.abs(below / above - 1);
+  if (difference > JOIN_AGREEMENT) throw new TypeError(`${record.path} and ${record.join.path} differ by ${(difference * 100).toFixed(1)}% within 5 nm of the join at ${at} nm, more than ${JOIN_AGREEMENT * 100}%.`);
+  const keep = (s: typeof first, test: (w: number) => boolean) => s.wavelengthsNm.flatMap((w, i) => test(w) ? [[w, s.flux[i]!] as const] : []);
+  const joined = [...keep(first, w => w < at), ...keep(second, w => w >= at)];
+  return { wavelengthsNm: joined.map(sample => sample[0]), flux: joined.map(sample => sample[1]), joinDifference: difference };
 }
 
 const NM_PER_UNIT = { angstrom: 0.1, nm: 1, um: 1000 } as const;

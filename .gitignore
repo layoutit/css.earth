@@ -78,6 +78,7 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png
 !src/objects/beta-pictoris-disc/source/previews/colour.png
+!src/objects/pds-70-disc/source/previews/dust.png
 !src/objects/beta-pictoris-disc/source/previews/contrast.png
 !src/objects/beta-pictoris-disc/source/previews/visible.png
 
@@ -290,6 +291,7 @@ src/objects/*/source/**/*.bpc
 
 /src/objects/betelgeuse-shell/.prepared-*/
 /src/objects/hd-181327-disc/.prepared-*/
+/src/objects/pds-70-disc/.prepared-*/
 /src/objects/m42/.prepared-*/
 /src/objects/helix/.prepared-*/
 /src/objects/m2-9/.prepared-*/

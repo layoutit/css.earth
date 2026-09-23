@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "dust-b7-cont",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pds-70-disc-dust-b7-cont",
+            "role": "material",
+            "evidence": "src/objects/pds-70-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/pds-70-disc/observations/member.uid___A001_X13b4_Xb1.PDS_70_sci.spw19_23_25_27.cont.I.pbcor.fits",
+      "origin": "https://almascience.eso.org/dataPortal/member.uid___A001_X13b4_Xb1.PDS_70_sci.spw19_23_25_27.cont.I.pbcor.fits",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S",
+      "title": "ALMA project 2018.A.00030.S, member OUS uid://A001/X13b4/Xb1, pipeline continuum image PDS_70_sci.spw19_23_25_27.cont.I.pbcor",
+      "credit": "ALMA (ESO/NAOJ/NRAO), project 2018.A.00030.S (PI M. Benisty); imaged by the ALMA pipeline (CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2018.A.00030.S.",
+      "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+      "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-09-23 (the product listed by DataLink for member OUS uid://A001/X13b4/Xb1); restored from that origin or the R2 source cache when missing.",
+      "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+      "lensId": "dust"
+    }
+  ],
+  "documents": [
+    {
+      "id": "circumstellar-json",
+      "path": "src/objects/pds-70-disc/source/circumstellar.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe: the lenses, their pinned program and bands, the stated conventions and the published geometry each is checked against."
+      }
+    },
+    {
+      "id": "benisty-2021-figure-1-colormap-json",
+      "path": "src/objects/pds-70-disc/source/benisty-2021-figure-1-colormap.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The publisher's colour map the dust lens is shown in, read from the published figure as the file itself records (the colour bar of Benisty et al. (2021), Figure 1, left panel (robust 0.5), decoded from the figure in the paper's arXiv source: matplotlib's inferno map, linear from -24.71 to 389.56 microJy/beam)."
+      }
+    },
+    {
+      "id": "delivery-json",
+      "path": "src/objects/pds-70-disc/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/pds-70-disc/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/pds-70-disc/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-dust-ktx2",
+      "path": "src/objects/pds-70-disc/source/density-dust.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-dust-json",
+      "path": "src/objects/pds-70-disc/source/volume-dust.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-dust-png",
+      "path": "src/objects/pds-70-disc/source/previews/dust.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    }
+  ]
+}

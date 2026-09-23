@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Astropy pixel <-> world for tools/fits/fits-sky.mts skyProjection, and region values for tools/fits/fits.mts readFitsFileRegion.
 Run with the pinned oracle environment; never imports the TypeScript helper.
-Each case is a TAN header, rotated or not. For deterministic sky points near the reference, Astropy's all_world2pix (origin 0)
+Each case is a TAN or plain SIN header, rotated or not. For deterministic sky points near the reference, Astropy's all_world2pix (origin 0)
 gives the expected zero-based pixels, and all_pix2world the expected directions of deterministic pixels. Headers marked `from`
-copy the WCS cards of that product verbatim; the rest are written for this oracle. Cases with distortion or a non-TAN projection
+copy the WCS cards of that product verbatim; the rest are written for this oracle. Cases with distortion, a slant SIN or another projection
 are refused by the helper and only recorded. Every case is an IMAGE extension of tests/fixtures/fits/sky-projection.fits; the
 `sci` extension also carries a small float32 image whose region values the file reader must return.
 """
@@ -21,18 +21,25 @@ JWST_F187N = ('JWST NIRCam F187N level-3 mosaic of NGC 3132, programme 2733 (jw0
      'CRPIX1': 2466.1226697446295, 'CRPIX2': 2430.6515446961416, 'CRVAL1': 151.75703008261107, 'CRVAL2': -40.43664687371786,
      'CDELT1': 8.53979982278119e-06, 'CDELT2': 8.53979982278119e-06,
      'PC1_1': 0.3800667721687736, 'PC1_2': 0.9249590524413551, 'PC2_1': 0.9249590524413551, 'PC2_2': -0.3800667721687736})
+ALMA_SIN = ('ALMA pipeline continuum image of PDS 70, project 2018.A.00030.S (member.uid___A001_X13b4_Xb1.PDS_70_sci.spw19_23_25_27.cont.I.pbcor.fits, primary HDU, celestial axes)',
+    {'CTYPE1': 'RA---SIN', 'CTYPE2': 'DEC--SIN', 'CUNIT1': 'deg', 'CUNIT2': 'deg', 'RADESYS': 'ICRS', 'LONPOLE': 180.0, 'LATPOLE': -41.39806682174,
+     'CRPIX1': 769.0, 'CRPIX2': 769.0, 'CRVAL1': 212.0420926751, 'CRVAL2': -41.39806682174,
+     'CDELT1': -2.416666669157e-06, 'CDELT2': 2.416666669157e-06, 'PC1_1': 1.0, 'PC1_2': 0.0, 'PC2_1': 0.0, 'PC2_2': 1.0, 'PV2_1': 0.0, 'PV2_2': 0.0})
 CASES = [
     ('jwst-nircam-rotated', JWST_F187N[0], JWST_F187N[1]),
     ('crota2-thirty', None, {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 50.5, 'CRPIX2': 40.5, 'CRVAL1': 201.4, 'CRVAL2': -43.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'CROTA2': 30.0}),
     ('cd-skewed', None, {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 10.0, 'CRPIX2': -5.0, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CD1_1': -0.0002, 'CD1_2': 0.00003, 'CD2_1': -0.00001, 'CD2_2': 0.00021}),
     ('pc-quarter-turn-east-right', None, {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': 0.0002, 'CDELT2': 0.0002, 'PC1_1': 0.0, 'PC1_2': -1.0, 'PC2_1': 1.0, 'PC2_2': 0.0}),
     ('tan-across-ra-zero', None, {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 359.99995, 'CRVAL2': 5.0, 'CDELT1': -0.0001, 'CDELT2': 0.0001}),
+    ('alma-pipeline-sin', ALMA_SIN[0], ALMA_SIN[1]),
+    ('sin-rotated-wide', None, {'CTYPE1': 'RA---SIN', 'CTYPE2': 'DEC--SIN', 'CRPIX1': 50.5, 'CRPIX2': 40.5, 'CRVAL1': 201.4, 'CRVAL2': -43.0, 'CDELT1': -0.002, 'CDELT2': 0.002, 'CROTA2': 30.0}),
     ('tan-near-pole-wide', None, {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 500, 'CRPIX2': 500, 'CRVAL1': 37.95, 'CRVAL2': 88.9, 'CDELT1': -0.001, 'CDELT2': 0.001, 'PC1_1': 0.8, 'PC1_2': -0.6, 'PC2_1': 0.6, 'PC2_2': 0.8}),
 ]
 REFUSED = [
     ('sip-distortion', {'CTYPE1': 'RA---TAN-SIP', 'CTYPE2': 'DEC--TAN-SIP', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'A_ORDER': 2, 'B_ORDER': 2, 'A_2_0': 1e-6, 'B_0_2': 1e-6}),
     ('tpv-distortion', {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'PV1_1': 1.0, 'PV2_1': 1.0}),
-    ('sin-projection', {'CTYPE1': 'RA---SIN', 'CTYPE2': 'DEC--SIN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002}),
+    ('sin-slant', {'CTYPE1': 'RA---SIN', 'CTYPE2': 'DEC--SIN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'PV2_1': 0.1, 'PV2_2': 0.0}),
+    ('arc-projection', {'CTYPE1': 'RA---ARC', 'CTYPE2': 'DEC--ARC', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002}),
     ('fk4-frame', {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'RADESYS': 'FK4', 'EQUINOX': 1950.0}),
 ]
 SCI_WIDTH, SCI_HEIGHT = 7, 5

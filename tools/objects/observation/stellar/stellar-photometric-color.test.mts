@@ -6,7 +6,7 @@ import { parseCieTable } from '../disc-integrated-color.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor, parseStellarColorRecord, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from './stellar-photometric-color.mts';
 import { linearToSrgb } from '../../color-transfer.mts';
 
-const root = new URL('../../../../src/objects/wasp-43/source', import.meta.url);
+const root = new URL('../../../../src/objects/wasp-43/source/', import.meta.url);
 const read = async (path: string) => readFile(new URL(path, root));
 const colorMatching = parseCieTable((await read('reference/CIE_xyz_1931_2deg.csv')).toString('utf8'), 3);
 const record = JSON.parse((await read('photometry/stellar-color.json')).toString('utf8'));
