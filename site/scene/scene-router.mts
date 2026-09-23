@@ -491,7 +491,7 @@ export function createSceneRouter({
 }
 
 function createWorldContextOwner(): WorldContextOwner {
-  // The world renderer, its markers and the minimap data stay out of the startup script; they load with the world.
+  // The world renderer and its markers stay out of the startup script; they load with the world.
   let world: Promise<ReturnType<typeof import('../application-world-context.mts').createApplicationWorldContext>> | null = null;
   return {
     createViewport: createWorldViewport,

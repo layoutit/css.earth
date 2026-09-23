@@ -26,7 +26,6 @@ body[data-object-shell] {
   --explorer-panel-padding: 0px;
   --explorer-status-height: 18px;
   --explorer-footer-height: var(--explorer-status-height);
-  --explorer-minimap-size: 190px;
   --explorer-header-top: 0px;
   --explorer-panel-block-padding: 0px;
   --explorer-search-height: 48px;
@@ -542,9 +541,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-information-panel > .object-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .object-dataset-context-rail,
 .object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
 
-/* Dataset context uses the same cards as the left sidebar, above the minimap.
-   With the Minimap setting off they may use its corner as well. */
-body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px; }
+/* Dataset context uses the same cards as the left sidebar. */
 .object-dataset-context-dock { display: contents; }
 .object-dataset-context-rail {
   --explorer-card-padding-left: var(--explorer-content-inset);
@@ -570,7 +567,7 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     width: var(--explorer-panel-width);
     top: var(--dataset-context-top);
     right: var(--explorer-panel-left);
-    max-height: calc(100dvh - var(--dataset-context-top) - var(--explorer-minimap-size) - var(--explorer-footer-height) - 2 * var(--explorer-panel-gap));
+    max-height: calc(100dvh - var(--dataset-context-top) - var(--explorer-footer-height) - 2 * var(--explorer-panel-gap));
     overflow-y: auto;
     overscroll-behavior: contain;
   }

@@ -1,7 +1,6 @@
 import { createSelectionFlight, createSelectionFlightSample, sampleSelectionFlightInto } from '@cssearth/engine';
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
 import type { PreparedCamera } from './prepared-camera.js';
-import type { DestinationMotion, MotionCompletion } from './types.js';
 import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';
 import { scaleWorldPosition, validateWorldPosition, worldQuaternionFromRotation } from './world-camera-math.js';
 import { createWorldSelectionTarget } from './selection-target.js';
@@ -21,17 +20,9 @@ export interface PreparedFocusFlightOptions {
   readonly durationMilliseconds?: number;
 }
 
-interface FocusMotion {
-  publish(): void;
-  stop(): void;
-  flyTo(motion: DestinationMotion): Promise<MotionCompletion>;
-}
-
-export async function flyToPreparedFocus(camera: PreparedCamera, motion: FocusMotion, focus: PreparedNavigationFocus, frame: PreparedWorldCameraFrame,
-  viewport: WorldCameraViewport & { framingRadiusPixels: number }, flightOptions: PreparedFocusFlightOptions = {}): Promise<MotionCompletion> {
+export function prepareFocusFlight(camera: PreparedCamera, focus: PreparedNavigationFocus, frame: PreparedWorldCameraFrame,
+  viewport: WorldCameraViewport & { framingRadiusPixels: number }, milliseconds?: number) {
   const checked = validatePreparedNavigationFocus(focus);
-  if (flightOptions.signal?.aborted) return { completed: false };
-  const milliseconds = flightOptions.durationMilliseconds;
   if (milliseconds !== undefined && (!Number.isFinite(milliseconds) || milliseconds <= 0)) throw new TypeError('Focus flight duration must be positive.');
   const from = camera.capture(frame);
   // A prepared focus is a catalogue object every dataset shows as seen from here, so the flight arrives on that line of
@@ -49,16 +40,11 @@ export async function flyToPreparedFocus(camera: PreparedCamera, motion: FocusMo
   const flight = createSelectionFlight({ from: from.pose, to, focusPositionM: checked.positionM,
     ...(milliseconds === undefined ? {} : { durationS: milliseconds / 1000 }) });
   const value = createSelectionFlightSample();
-  motion.stop();
-  camera.setFocus(checked, frame);
-  motion.publish();
   const sample = (progress: number) => {
     sampleSelectionFlightInto(flight, progress * flight.durationS, value);
     camera.adopt({ ...from, pose: { positionM: value.positionM, orientationXyzw: value.orientationXyzw } }, frame);
-    motion.publish();
   };
-  if (flightOptions.reducedMotion) { sample(1); return { completed: true }; }
-  return motion.flyTo({ sample, durationMilliseconds: flight.durationS * 1000, signal: flightOptions.signal });
+  return { focus: checked, sample, durationMilliseconds: flight.durationS * 1000 };
 }
 
 export function validatePreparedNavigationFocus(focus: PreparedNavigationFocus): PreparedNavigationFocus {

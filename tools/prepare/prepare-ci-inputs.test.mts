@@ -122,24 +122,24 @@ test('universe selection keeps registry JSON and actual renderer banks without u
     'milky-way/slices/z/one.webp', 'milky-way/volume.json',
     'mimas/features.json', 'mimas/runtime.json', 'mimas/scene.json',
     'new-body/new-body-photometric-phase-curve.svg', 'new-body/runtime.json', 'new-body/scene.json',
-    'stellar-neighbourhood/stars.bin', 'stellar-neighbourhood/stars.json',
+    'stellar-neighbourhood/stars.json',
   ]);
   assert.equal(new Set(assets.map(asset => asset.file)).size, assets.length);
   assert.deepEqual(assets.filter(asset => asset.file.startsWith(resolve(root, 'public') + '/')).map(asset => asset.filename).sort(),
     ['features.json', 'new-body-photometric-phase-curve.svg']);
   assert.deepEqual(assets.filter(asset => !asset.filename.endsWith('.json')).map(asset => `${asset.id}/${asset.filename}`).sort(), [
-    'heliosphere/atlas.webp', 'milky-way/slices/z/one.webp', 'new-body/new-body-photometric-phase-curve.svg', 'stellar-neighbourhood/stars.bin',
+    'heliosphere/atlas.webp', 'milky-way/slices/z/one.webp', 'new-body/new-body-photometric-phase-curve.svg',
   ]);
 });
 
-test('universe inputs install from empty assets, reuse offline and reject a mutated numerical bank', async t => {
+test('universe inputs install from empty assets, reuse offline and reject a mutated renderer asset', async t => {
   const { root, fetcher } = await universeFixture(t);
   const assets = await ciUniverseInputs(root);
   const expected = { files: assets.length, bytes: assets.reduce((sum, asset) => sum + asset.bytes, 0) };
   assert.deepEqual(await restoreCiUniverseInputs({ root, fetcher }), { ...expected, installed: assets.length, reused: 0, skipped: 0 });
   assert.deepEqual(await restoreCiUniverseInputs({ root, fetcher: async () => { throw new Error('Cached inputs must be offline.'); } }),
     { ...expected, installed: 0, reused: assets.length, skipped: 0 });
-  const bank = assets.find(asset => asset.id === 'stellar-neighbourhood' && asset.filename === 'stars.bin');
+  const bank = assets.find(asset => asset.id === 'milky-way' && asset.filename === 'slices/z/one.webp');
   assert.ok(bank);
   const original = await readFile(bank.file);
   await writeFile(bank.file, Buffer.alloc(original.length));

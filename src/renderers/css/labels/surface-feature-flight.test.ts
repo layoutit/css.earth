@@ -1,5 +1,6 @@
 import { createCameraMotion } from '../navigation/camera-motion.js';
 import { expect, test } from 'vitest';
+import { setImmediate as nextTurn } from 'node:timers/promises';
 import { flyToSurfaceDirection, surfaceOrbitPose, surfaceOrbitRotation } from './surface-feature-flight.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
@@ -42,7 +43,6 @@ test('a flight applies eased poses each frame, ends on the target, and yields to
   expect(await interrupted.done).toEqual({ completed: false });
   expect(frames).toHaveLength(0);
   const immediate = flyToSurfaceDirection(navigation, { directionWorld: [0, 0, 1], distanceM: 7000, reducedMotion: true, windowTarget });
-  frames.shift()!();
   expect(await immediate.done).toEqual({ completed: true });
   expect(current.pose.positionM[2] - origin[2]).toBeCloseTo(7000, 6);
 });
@@ -57,7 +57,6 @@ test('replacement owns completion while an old surface publication is still awai
   const navigation = { motion, frame: { originM: [...origin] }, capture: () => world,
     apply: () => new Promise<boolean>(resolve => { acknowledge = resolve; }) } as unknown as ObjectWorldNavigation;
   const surface = flyToSurfaceDirection(navigation, { directionWorld: [0, 1, 0], distanceM: 6000, reducedMotion: true, windowTarget });
-  const [id, paint] = [...frames][0]!; frames.delete(id); paint(0);
   let complete = false; void surface.done.then(() => { complete = true; });
   await Promise.resolve(); expect(complete).toBe(false);
   const replacement = motion.start({ windowTarget, advance: () => 'complete' });
@@ -66,5 +65,26 @@ test('replacement owns completion while an old surface publication is still awai
   expect(replacement.signal.aborted).toBe(false);
   const [replacementId, replacementPaint] = [...frames][0]!; frames.delete(replacementId); replacementPaint(0);
   expect(await replacement.finished).toEqual({ completed: true });
+  expect(frames.size).toBe(0);
+});
+
+test('requesting arrival while a frame is pending waits for the final displayed sample', async () => {
+  const motion = createCameraMotion(), frames = new Map<number, FrameRequestCallback>(), samples: number[] = [];
+  let next = 0, acknowledge!: (shown: boolean) => void;
+  const windowTarget = { performance: { now: () => 0 },
+    requestAnimationFrame(callback: FrameRequestCallback) { frames.set(++next, callback); return next; },
+    cancelAnimationFrame(id: number) { frames.delete(id); } };
+  const flight = motion.fly({ windowTarget, durationMilliseconds: 1000, inputSpeedUp: 4,
+    sample(progress) { samples.push(progress); return new Promise<boolean>(resolve => { acknowledge = resolve; }); } });
+  const [id, paint] = [...frames][0]!; frames.delete(id); paint(0);
+  motion.arrive();
+  expect(samples).toEqual([0]);
+  let settled = false; void flight.finished.then(() => { settled = true; });
+  acknowledge(true); await nextTurn();
+  expect(samples).toEqual([0, 1]);
+  expect(settled).toBe(false);
+  acknowledge(true);
+  expect(await flight.finished).toEqual({ completed: true });
+  expect(motion.signal).toBeUndefined();
   expect(frames.size).toBe(0);
 });

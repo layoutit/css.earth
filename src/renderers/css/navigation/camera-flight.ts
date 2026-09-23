@@ -64,6 +64,14 @@ export function createCameraFlight({ windowTarget, signal, paused = false, advan
   else schedule();
   return Object.freeze({
     finished, signal: controller.signal, cancel, complete,
+    /** Request the final sample, retaining the outstanding presentation acknowledgement. */
+    finish() {
+      if (settled) return;
+      elapsedS = Infinity; paused = false;
+      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+      frame = null;
+      if (!publishing) paint(windowTarget.performance.now());
+    },
     hurry(multiplier: number) { speed = multiplier; },
     /** Hold at the acknowledged curve position while assets catch up. */
     hold(atElapsedS: number) {

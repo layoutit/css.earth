@@ -4,8 +4,8 @@ import { createPreparedWheelZoomControls as createWheelZoomControls } from './pr
 import { interactionTrackball, directAngularDegreesPerTrackballRadius, directPitchResponseForZoom } from "@cssearth/engine";
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
-import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate, DestinationMotion } from './types.js';
-export interface ObjectInteractionOptions { inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; dolly: { stepPerDelta: number }; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
+import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate } from './types.js';
+export interface ObjectInteractionOptions { inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta, signal?: AbortSignal): void | Promise<boolean>; minimumZoom: number; maximumZoom: number; dolly: { stepPerDelta: number }; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
 export interface InteractionServices { createUnboundedMatrixDragControls?: typeof createMatrixDragControls; createPreparedWheelZoomControls?: typeof createWheelZoomControls; }
 export function createObjectInteractionControls({
   inputSurface,
@@ -87,11 +87,6 @@ export function createObjectInteractionControls({
     stop() {
       wheelControls.stop();
       dragControls.stop();
-    },
-    flyTo(options: DestinationMotion) {
-      if (lifetime.disposed) return Promise.resolve({ completed: false });
-      wheelControls.stop();
-      return dragControls.flyTo(options);
     },
     stats: () => Object.freeze({
       ...dragControls.stats(),

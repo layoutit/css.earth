@@ -46,13 +46,13 @@ function uniqueCiInputs(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLo
  * Runtime ownership, activation and shell contracts inspect every registered body's runtime/scene JSON;
  * catalogue and feature consumers also inspect inventoried context/public JSON. Keep that open-ended JSON
  * closure. The renderer's volume/loader and shell/loader suites additionally inspect every prepared image in
- * the real Milky Way and Heliosphere fixture banks. Minimap data reads the stellar-neighbourhood binary bank,
- * not its atlas image. Source checks also require the inventoried photometric phase-chart SVG family.
+ * the real Milky Way and Heliosphere fixture banks. Source checks also require the inventoried photometric
+ * phase-chart SVG family.
  * These are test fixtures, never a second application registry.
  *
  * This selection intentionally does NOT support prepare:provenance, restore-environment-images, or the full
  * authoring test:sources prerequisite: those replay source preparation and can verify other texture banks.
- * The caller must generate minimap data with --data-only and compile catalogues from restored provenance.
+ * The caller must compile catalogues from restored provenance.
  */
 export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAssetLocation[]> {
   const assets = await inventoryAssets(root, inventoriedObjectIds([], root));
@@ -65,8 +65,7 @@ export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAsset
     // orbit bank they describe. Restoring the two JSON halves alone pairs a context with whatever bank a runner
     // happens to hold, which decodes into orbits that belong to another run.
     if (asset.id === 'sun' && asset.filename === 'world-orbits.bin') return true;
-    return asset.id === 'milky-way' || asset.id === 'heliosphere' ||
-      asset.id === 'stellar-neighbourhood' && asset.filename.endsWith('.bin');
+    return asset.id === 'milky-way' || asset.id === 'heliosphere';
   }));
 }
 

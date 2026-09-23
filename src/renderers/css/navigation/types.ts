@@ -17,7 +17,6 @@ export interface NavigationCamera {
 }
 export interface CameraDelta { controlPitchDelta: number; controlYawDelta: number; zoom?: number; distance?: number; rotation?: Quaternion; }
 export interface ControlsUpdate { drag?: boolean; wheel?: boolean; }
-export interface DestinationMotion { sample(progress: number): void; durationMilliseconds?: number; signal?: AbortSignal; }
 export interface MotionCompletion { completed: boolean; }
 export interface PitchCalibration {
   defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number; maximumScenePitchDegrees: number;

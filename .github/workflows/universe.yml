@@ -166,7 +166,7 @@ jobs:
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
           node --test "tools/ci/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
-            "src/platform/runtime-asset-*.test.mts" "site/minimap/*.test.mts"
+            "src/platform/runtime-asset-*.test.mts"
 
   typecheck:
     name: Typecheck
@@ -420,9 +420,6 @@ jobs:
           # Rebuild all three context files together from this checkout's catalogue before testing it.
           pnpm prepare:world-context
           node tools/prepare/prepare-feature-index.mts
-      - name: Prepare minimap data
-        run: |
-          node site/minimap/prepare.mts --data-only
       - name: Test the selected universe lane
         # Each runner owns its writers and CPU budget. Native runner discovery is unchanged.
         env:
