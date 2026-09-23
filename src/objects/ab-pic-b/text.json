@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ab-pic-b",
+  "card": {
+    "text": "A companion at the planet and brown-dwarf boundary, spinning in about two hours.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2211-01474",
+        "url": "https://arxiv.org/abs/2211.01474",
+        "label": "Palma-Bifani et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Given the 2.1hr rotation period"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "AB Pic b orbits about 190 au out, on an orbit seen edge-on. It spins in about two hours, with its axis tilted against that orbit.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2211-01474",
+        "url": "https://arxiv.org/abs/2211.01474",
+        "label": "Palma-Bifani et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "viewed edge-on"
+      },
+      {
+        "catalogueId": "arxiv-2211-01474",
+        "url": "https://arxiv.org/abs/2211.01474",
+        "label": "Palma-Bifani et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "indicating a significant misalignment between the planet's spin and orbit orientations"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2007-10991",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bohn et al. (2020): Two Directly Imaged, Wide-orbit Giant Planets around the Young, Solar Analog TYC 8998-760-1",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2007.10991"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/aba27e"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2007.10991",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/aba27e",
+      "label": "The Astrophysical Journal Letters 898, L16"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2007.10991",
+      "checkedOn": "2026-09-23",
+      "locator": "Discovery of YSES 1 c and the two-planet system around TYC 8998-760-1: masses 14 +/- 3 and 6 +/- 1 Jupiter masses, as the ESO SupJup survey tabulates them"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters 898, L16",
+  "creators": [
+    "Alexander J. Bohn",
+    "Matthew A. Kenworthy",
+    "Christian Ginski",
+    "Steven Rieder",
+    "Eric E. Mamajek",
+    "Tiffany Meshkat"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "ab-pic-b",
+  "radiusKm": 128685.6,
+  "radiusSource": "Radius 1.8 +/- 0.2 Jupiter radii and temperature 1800 +/- 20 K: the BT-SETTL13 column of Palma-Bifani et al. (2023, A&A 670, A90), Table 4, fitted to the full spectral energy distribution: 128,685.6 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. Their Exo-REM fit gives 1700 +/- 50 K; evolutionary models give 1.50 to 1.57 Jupiter radii (their Table 3). GM from the mass 10 +/- 1 Jupiter masses they report, times Jupiter's GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1026616.5,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 217.367 au and total mass 1.3000 solar masses, 2,810.7 years of 365.25 d. Palma-Bifani et al. (2023, A&A 670, A90; doi:10.1051/0004-6361/202244294): the orbitize! OFTI fit to NaCo and SPHERE astrometry (Table 1) at a fixed total mass of 1.3 solar masses, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_abpicb.hdf5), whose likelihood column is zero throughout. Smallest chi-squared against the four measured positions (0.67).",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of AB Pic b is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 1800,
+  "effectiveTemperatureSource": "1800 +/- 20 K, the BT-SETTL13 fit of Palma-Bifani et al. (2023), Table 4, https://doi.org/10.1051/0004-6361/202244294",
+  "semiMajorAxisSource": "Palma-Bifani et al. (2023, arXiv:2211.01474), Abstract: orbital solutions favour a semi-major axis of about 190 au. The recorded orbit's semi-major axis is 217 au (packages/astronomy/data/bodies/ab-pic-b.json).",
+  "massSource": "10 +/- 1 Jupiter masses as Palma-Bifani et al. (2023, A&A 670, A90) report it; a model value."
+}

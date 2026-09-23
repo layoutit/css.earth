@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "yses-1",
+  "card": {
+    "text": "Young Sun-like star 94 parsecs away in Musca, with two giant planets photographed directly.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2007-10991",
+        "url": "https://arxiv.org/abs/2007.10991",
+        "label": "Bohn et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "the 17 Myr-old, solar-"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "YSES 1 is a 17-million-year-old analogue of the young Sun. Two giant planets orbit it far out; JWST has seen silicate clouds and a dusty disc around them.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2007-10991",
+        "url": "https://arxiv.org/abs/2007.10991",
+        "label": "Bohn et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "we report the detection of a second planetary-mass companion"
+      },
+      {
+        "catalogueId": "arxiv-2507-18861",
+        "url": "https://arxiv.org/abs/2507.18861",
+        "label": "Hoch et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "We report the first direct observations of silicate clouds in the atmosphere of the exoplanet YSES-1 c"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}

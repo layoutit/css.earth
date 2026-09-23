@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2409-16660",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zhang et al. (2024): The ESO SupJup Survey III: Confirmation of 13CO in YSES 1 b and Atmospheric Detection of YSES 1 c with CRIRES+",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2409.16660"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad7ea9"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2409.16660",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad7ea9",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2409.16660",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1: YSES 1 (TYC 8998-760-1), 94.2 pc, K3IV, Teff 4573 K, 1.00 solar masses, 1.01 solar radii; YSES 1 b 1727 K, 14 Jupiter masses, 3.0 Jupiter radii; section 5.5: relative RV of b -1.87 +/- 0.04 km/s, star 12.94 +/- 0.03 km/s, CRIRES+ on UT 2023 February 27 and 28"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal",
+  "creators": [
+    "Yapeng Zhang",
+    "Darío González Picos",
+    "Sam de Regt",
+    "Ignas A. G. Snellen",
+    "Siddharth Gandhi",
+    "Christian Ginski"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+ "id": "yses-1-b",
+ "classification": "exoplanet",
+ "order": 1757,
+ "physical": {
+  "name": "YSES 1 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 214476.0,
+  "gravitationalParameterKm3PerS2": 1773611446.6,
+  "parent": "yses-1"
+ },
+ "physicalNotes": "Radius 3.0 +0.2/-0.7 Jupiter radii, temperature 1727 +172/-127 K and mass 14 +/- 3 Jupiter masses from Bohn et al. (2020, ApJL 898, L16; arXiv:2007.10991), as the ESO SupJup survey tabulates them (Zhang et al. 2024, Table 1): 214,476 km at 71,492 km per Jupiter radius. Model values: the planet is unresolved. Wood et al. (2023) give 21.8 +/- 3 Jupiter masses. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 937125.0,
+  "semiMajorAxisStellarRadii": 39790.13,
+  "inclinationDegrees": 90.6699,
+  "eccentricity": 0.05385,
+  "argumentOfPeriapsisDegrees": 102.6766,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 235842.2,
+  "ascendingNodePositionAngleDegrees": 32.6239,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 186.905 au and total mass 0.9919 solar masses, 2,565.7 years of 365.25 d. Roberts et al. (2025, arXiv:2509.14321): orbitize! parallel-tempered MCMC on four VLTI/GRAVITY positions (their chosen subset, Table 2), six SPHERE and NaCo positions (Table 3) and the CRIRES+ velocity of the planet relative to the star, -1.87 +/- 0.04 km/s (Zhang et al. 2024), refitted here with tools/objects/hosted-orbits/orbitize-fit.py (src/objects/yses-1-b/source/orbits/). Their stellar-mass and parallax priors are 'centered on the respective catalog values' without widths: 1.00 +/- 0.02 solar masses (Bohn et al. 2020) and the Gaia DR3 parallax 10.612 +/- 0.012 mas are used. The maximum of orbitize!'s posterior (ln L -31.84), refined with Nelder-Mead from many starts.",
+   "shape": "Roberts et al. (2025, arXiv:2509.14321): orbitize! parallel-tempered MCMC on four VLTI/GRAVITY positions (their chosen subset, Table 2), six SPHERE and NaCo positions (Table 3) and the CRIRES+ velocity of the planet relative to the star, -1.87 +/- 0.04 km/s (Zhang et al. 2024), refitted here with tools/objects/hosted-orbits/orbitize-fit.py (src/objects/yses-1-b/source/orbits/). Their stellar-mass and parallax priors are 'centered on the respective catalog values' without widths: 1.00 +/- 0.02 solar masses (Bohn et al. 2020) and the Gaia DR3 parallax 10.612 +/- 0.012 mas are used. The maximum of orbitize!'s posterior (ln L -31.84), refined with Nelder-Mead from many starts. a 186.905 au at the sample's parallax 10.6117 mas, kept as the angular size 1983.4 mas and placed at the Gaia DR3 distance: 39790.13 radii of the host's 702,657 km; inclination 90.6699 degrees.",
+   "eccentricity": "Roberts et al. (2025, arXiv:2509.14321): orbitize! parallel-tempered MCMC on four VLTI/GRAVITY positions (their chosen subset, Table 2), six SPHERE and NaCo positions (Table 3) and the CRIRES+ velocity of the planet relative to the star, -1.87 +/- 0.04 km/s (Zhang et al. 2024), refitted here with tools/objects/hosted-orbits/orbitize-fit.py (src/objects/yses-1-b/source/orbits/). Their stellar-mass and parallax priors are 'centered on the respective catalog values' without widths: 1.00 +/- 0.02 solar masses (Bohn et al. 2020) and the Gaia DR3 parallax 10.612 +/- 0.012 mas are used. The maximum of orbitize!'s posterior (ln L -31.84), refined with Nelder-Mead from many starts. e 0.05385.",
+   "argumentOfPeriapsis": "Roberts et al. (2025, arXiv:2509.14321): orbitize! parallel-tempered MCMC on four VLTI/GRAVITY positions (their chosen subset, Table 2), six SPHERE and NaCo positions (Table 3) and the CRIRES+ velocity of the planet relative to the star, -1.87 +/- 0.04 km/s (Zhang et al. 2024), refitted here with tools/objects/hosted-orbits/orbitize-fit.py (src/objects/yses-1-b/source/orbits/). Their stellar-mass and parallax priors are 'centered on the respective catalog values' without widths: 1.00 +/- 0.02 solar masses (Bohn et al. 2020) and the Gaia DR3 parallax 10.612 +/- 0.012 mas are used. The maximum of orbitize!'s posterior (ln L -31.84), refined with Nelder-Mead from many starts. omega 282.6766 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 102.6766 degrees.",
+   "phase": "Roberts et al. (2025, arXiv:2509.14321): orbitize! parallel-tempered MCMC on four VLTI/GRAVITY positions (their chosen subset, Table 2), six SPHERE and NaCo positions (Table 3) and the CRIRES+ velocity of the planet relative to the star, -1.87 +/- 0.04 km/s (Zhang et al. 2024), refitted here with tools/objects/hosted-orbits/orbitize-fit.py (src/objects/yses-1-b/source/orbits/). Their stellar-mass and parallax priors are 'centered on the respective catalog values' without widths: 1.00 +/- 0.02 solar masses (Bohn et al. 2020) and the Gaia DR3 parallax 10.612 +/- 0.012 mas are used. The maximum of orbitize!'s posterior (ln L -31.84), refined with Nelder-Mead from many starts. tau 0.18887 of a period after MJD 58849; the periastron passage nearest that epoch is MJD 235842.2, taken as BMJD_TDB.",
+   "orientation": "Roberts et al. (2025, arXiv:2509.14321): orbitize! parallel-tempered MCMC on four VLTI/GRAVITY positions (their chosen subset, Table 2), six SPHERE and NaCo positions (Table 3) and the CRIRES+ velocity of the planet relative to the star, -1.87 +/- 0.04 km/s (Zhang et al. 2024), refitted here with tools/objects/hosted-orbits/orbitize-fit.py (src/objects/yses-1-b/source/orbits/). Their stellar-mass and parallax priors are 'centered on the respective catalog values' without widths: 1.00 +/- 0.02 solar masses (Bohn et al. 2020) and the Gaia DR3 parallax 10.612 +/- 0.012 mas are used. The maximum of orbitize!'s posterior (ln L -31.84), refined with Nelder-Mead from many starts. Ascending node 32.6239 degrees east of north."
+  }
+ }
+}

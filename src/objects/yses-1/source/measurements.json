@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "yses-1",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "No angular diameter is measured: this is the record's radius at the Gaia distance.",
+  "distanceParsecs": 94.229742,
+  "distanceSource": "Gaia DR3 source 5864061893213196032: parallax 10.6124 +/- 0.0116 mas (RUWE 0.80), inverted to 94.2297 pc with no zero-point correction.",
+  "radiusKm": 702657,
+  "radiusSource": "Temperature 4573 +/- 10 K, mass 1.00 +/- 0.02 solar masses and radius 1.01 +/- 0.02 solar radii as the ESO SupJup survey tabulates them (Zhang et al. 2024, arXiv:2409.16660, Table 1), from Bohn et al. (2020, ApJL 898, L16; arXiv:2007.10991) and Gaia: 702,657 km at 695,700 km per solar radius; GM from 1.00 solar masses times the JPL solar GM. Also catalogued as TYC 8998-760-1. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 4573,
+  "effectiveTemperatureSource": "4573 +/- 10 K, as Zhang et al. (2024) tabulate from Bohn et al. (2020), https://arxiv.org/abs/2409.16660",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+  }
+}

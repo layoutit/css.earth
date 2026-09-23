@@ -1,0 +1,31 @@
+{
+ "id": "af-lep-b",
+ "classification": "exoplanet",
+ "order": 1753,
+ "physical": {
+  "name": "AF Lep b",
+  "horizonsCode": null,
+  "meanRadiusKm": 92939.6,
+  "gravitationalParameterKm3PerS2": 475074494.62,
+  "parent": "af-lep"
+ },
+ "physicalNotes": "Radius 1.30 +/- 0.01 Jupiter radii, temperature 770 +/- 75 K and mass 3.75 +/- 0.5 Jupiter masses: the evolutionary-model row (Saumon & Marley 2008 hybrid clouds, 24 +/- 3 Myr) of Balmer et al. (2025, arXiv:2411.05917), Table 4: 92,939.6 km at 71,492 km per Jupiter radius. Their atmosphere fits give radii from 0.5 to 1.8 Jupiter radii and temperatures from 760 to 1260 K, the 'radius problem' of their section 5, so the evolutionary values are used. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 8518.3,
+  "semiMajorAxisStellarRadii": 1531.9,
+  "inclinationDegrees": 57.7776,
+  "eccentricity": 0.0154,
+  "argumentOfPeriapsisDegrees": 100.552,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 62230.0,
+  "ascendingNodePositionAngleDegrees": 250.4883,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 8.898 au and total mass 1.2955 solar masses, 23.3 years of 365.25 d. Balmer et al. (2025, arXiv:2411.05917): the orvara fit to VLTI/GRAVITY, SPHERE, NIRC2 and NaCo astrometry with the Hipparcos-Gaia accelerations, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_aflepb.hdf5), which stores no likelihoods. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/af-lep-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 3 measured positions (20.56).",
+   "shape": "Balmer et al. (2025, arXiv:2411.05917): the orvara fit to VLTI/GRAVITY, SPHERE, NIRC2 and NaCo astrometry with the Hipparcos-Gaia accelerations, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_aflepb.hdf5), which stores no likelihoods. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/af-lep-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 3 measured positions (20.56). a 8.898 au at the sample's parallax 37.2815 mas, kept as the angular size 331.7 mas and placed at the Gaia DR3 distance: 1531.90 radii of the host's 869,625 km; inclination 57.7776 degrees.",
+   "eccentricity": "Balmer et al. (2025, arXiv:2411.05917): the orvara fit to VLTI/GRAVITY, SPHERE, NIRC2 and NaCo astrometry with the Hipparcos-Gaia accelerations, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_aflepb.hdf5), which stores no likelihoods. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/af-lep-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 3 measured positions (20.56). e 0.01540.",
+   "argumentOfPeriapsis": "Balmer et al. (2025, arXiv:2411.05917): the orvara fit to VLTI/GRAVITY, SPHERE, NIRC2 and NaCo astrometry with the Hipparcos-Gaia accelerations, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_aflepb.hdf5), which stores no likelihoods. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/af-lep-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 3 measured positions (20.56). omega 280.5520 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 100.5520 degrees.",
+   "phase": "Balmer et al. (2025, arXiv:2411.05917): the orvara fit to VLTI/GRAVITY, SPHERE, NIRC2 and NaCo astrometry with the Hipparcos-Gaia accelerations, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_aflepb.hdf5), which stores no likelihoods. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/af-lep-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 3 measured positions (20.56). tau 0.39691 of a period after MJD 58849; the periastron passage nearest that epoch is MJD 62230.0, taken as BMJD_TDB.",
+   "orientation": "Balmer et al. (2025, arXiv:2411.05917): the orvara fit to VLTI/GRAVITY, SPHERE, NIRC2 and NaCo astrometry with the Hipparcos-Gaia accelerations, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_aflepb.hdf5), which stores no likelihoods. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/af-lep-b/source/orbits/pick.json): no stored likelihoods differ: smallest chi-squared against the 3 measured positions (20.56). Ascending node 250.4883 degrees east of north."
+  }
+ }
+}

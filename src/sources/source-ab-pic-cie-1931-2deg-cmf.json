@@ -1,0 +1,35 @@
+{
+  "id": "source-ab-pic-cie-1931-2deg-cmf",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "AB Pic · ab pic cie 1931 2deg cmf",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ab-pic/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CIE (2019), CIE 1931 colour-matching functions, 2 degree observer, doi:10.25039/CIE.DS.xvudnb9b",
+      "scope": "The ab pic cie 1931 2deg cmf input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY-SA 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

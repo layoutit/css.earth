@@ -1,0 +1,31 @@
+{
+ "id": "ab-pic",
+ "classification": "star",
+ "order": 1754,
+ "physical": {
+  "name": "AB Pic",
+  "horizonsCode": null,
+  "meanRadiusKm": 760712.4,
+  "gravitationalParameterKm3PerS2": 111781623241.76,
+  "parent": null,
+  "effectiveTemperatureK": 4878
+ },
+ "physicalNotes": "No paper tabulates this K1V star's size or temperature in the work used here (Palma-Bifani et al. 2023 give only its spectral type and Gaia distance), so they are Gaia DR3's: the FLAME radius 1.0934 solar radii and mass 0.842 solar masses, and the GSP-Phot temperature 4878 K (4876 to 4881 K), catalogue model values from Gaia's photometry and parallax (Andrae et al. 2023; Creevey et al. 2023). 760,702 km at 695,700 km per solar radius; GM from 0.842 solar masses times the JPL solar GM. The orbit of AB Pic b placed here was fitted with a fixed total mass of 1.3 solar masses (Palma-Bifani et al. 2023). presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 94.80392459132621,
+  "declinationDegrees": -58.05411209740835,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 50.137294,
+  "properMotionRaMasPerYear": 14.314244600828026,
+  "properMotionDecMasPerYear": 45.23366121465081,
+  "radialVelocityKmPerS": 22.022335,
+  "sources": {
+   "position": "Gaia DR3 source 5495052596695570816 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 5495052596695570816: parallax 19.9452 +/- 0.0124 mas (RUWE 0.92), inverted to 50.1373 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 5495052596695570816: pmRA* 14.3142 mas/yr, pmDec 45.2337 mas/yr.",
+   "radialVelocity": "Gaia DR3 source 5495052596695570816: 22.02 +/- 0.19 km/s."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 30034
+ }
+}

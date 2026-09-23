@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ab-pic",
+  "card": {
+    "text": "Young orange dwarf 50 parsecs away in Pictor, with a companion at the planet and brown-dwarf boundary.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2211-01474",
+        "url": "https://arxiv.org/abs/2211.01474",
+        "label": "Palma-Bifani et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "a known companion at the exoplanet/ brown-dwarf boundary"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "AB Pic is a young K-type star in the Carina association. Its companion b, found in 2005, sits 5.4 arcseconds out on an orbit seen edge-on.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2211-01474",
+        "url": "https://arxiv.org/abs/2211.01474",
+        "label": "Palma-Bifani et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "viewed edge-on"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}

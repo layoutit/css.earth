@@ -1,0 +1,30 @@
+{
+ "id": "yses-1",
+ "classification": "star",
+ "order": 1756,
+ "physical": {
+  "name": "YSES 1",
+  "horizonsCode": null,
+  "meanRadiusKm": 702657.0,
+  "gravitationalParameterKm3PerS2": 132712440041.94,
+  "parent": null,
+  "effectiveTemperatureK": 4573
+ },
+ "physicalNotes": "Temperature 4573 +/- 10 K, mass 1.00 +/- 0.02 solar masses and radius 1.01 +/- 0.02 solar radii as the ESO SupJup survey tabulates them (Zhang et al. 2024, arXiv:2409.16660, Table 1), from Bohn et al. (2020, ApJL 898, L16; arXiv:2007.10991) and Gaia: 702,657 km at 695,700 km per solar radius; GM from 1.00 solar masses times the JPL solar GM. Also catalogued as TYC 8998-760-1. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 201.30009606067654,
+  "declinationDegrees": -64.93915908863056,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 94.229742,
+  "properMotionRaMasPerYear": -40.99570815148202,
+  "properMotionDecMasPerYear": -17.733532643304407,
+  "radialVelocityKmPerS": 12.94,
+  "sources": {
+   "position": "Gaia DR3 source 5864061893213196032 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 5864061893213196032: parallax 10.6124 +/- 0.0116 mas (RUWE 0.80), inverted to 94.2297 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 5864061893213196032: pmRA* -40.9957 mas/yr, pmDec -17.7335 mas/yr.",
+   "radialVelocity": "Zhang et al. (2024, arXiv:2409.16660), section 5.5: 12.94 +/- 0.03 km/s from VLT/CRIRES+ spectra of the star. Gaia DR3 gives none."
+  },
+  "presentationUp": "display-axis"
+ }
+}

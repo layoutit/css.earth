@@ -1,0 +1,37 @@
+{
+  "id": "arxiv-2509-14321",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Roberts et al. (2025): New Orbital Constraints for YSES 1 b and HR 2562 B from High-Precision Astrometry and Planetary Radial Velocities",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2509.14321"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2509.14321",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2509.14321",
+      "checkedOn": "2026-09-23",
+      "locator": "Tables 2 and 3: VLTI/GRAVITY and literature astrometry of YSES 1 b; section 3: orbitize! ptemcee fit with the four chosen GRAVITY epochs; Table 4: a 146 au, e 0.44, i 90.6, Omega 32.3 degrees; section 5: YSES 1 c's orbit is not constrained"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "Jonathan Roberts",
+    "William Thompson",
+    "Jason J. Wang",
+    "Sarah Blunt",
+    "William O. Balmer",
+    "Guillaume Bourdarot"
+  ]
+}
