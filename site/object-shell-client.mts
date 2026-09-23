@@ -3,6 +3,7 @@ import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
+import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from './focus-fragment.mts';
 import { selectionKey } from './scene/scene-selection.mts';
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import type { ShellCamera, PlaybackState } from './browser-types.mts';
@@ -62,6 +63,19 @@ export function mountObjectShell({
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
   const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
   lifetime.onDispose(() => focusCard.destroy());
+  // The page ships the focus banks as a shared fragment; the first focus selection fetches it.
+  let focusBanks: Promise<void> | null = null;
+  function loadFocusBanks() {
+    if (!focusRoot || focusBanks || !focusBanksPending(focusRoot)) return;
+    focusBanks = fetchFocusFragment(url => windowTarget.fetch(url)).then(html => {
+      if (lifetime.disposed) return;
+      spliceFocusBanks(focusRoot, new windowTarget.DOMParser().parseFromString(html, 'text/html'));
+      focusCard.adoptBanks();
+    }).catch(error => {
+      focusBanks = null; // The next focus selection retries.
+      windowTarget.reportError(error);
+    });
+  }
   lifetime.onDispose(() => unsubscribeCamera?.());
   // The card panel is retained; a camera frame re-queries it only after a card swap.
   let information: HTMLElement | null = null;
@@ -77,6 +91,7 @@ export function mountObjectShell({
     if (lifetime.disposed) return;
     const subject = readSelection(), focus = subject.kind === 'focus' ? subject : null;
     focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
+    if (focus) loadFocusBanks();
     objectBrowser.refreshSelection();
     viewReadout.setPreparedFocus(focus?.record ?? null);
     viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : 'system');
@@ -251,7 +266,7 @@ export function mountObjectShell({
   function mountContent(id: string, motionEnabled: boolean) {
     const owner = contentLifetime = createSceneLifetime();
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
-    informationCard = mountInformationCard(drawer, id, documentTarget, windowTarget, owner);
+    informationCard = mountInformationCard(drawer, id, windowTarget, owner);
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
       { motionEnabled, onMotionChange, heliosphereEnabled, illustrationModelsEnabled, surfaceLabelsEnabled, minimapEnabled, threeDStarsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },

@@ -3,23 +3,20 @@ import type { BrowserWindow } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import { requiredElement } from './browser-types.mts';
 import { objectClassificationLabel } from './search-objects.mts';
-import { createDatasetContextController } from './dataset-context-controller.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];
 
 /** Bind only the controls replaced with an object's information card. */
-export function mountInformationCard(drawer: HTMLElement, objectId: string, documentTarget: Document,
+export function mountInformationCard(drawer: HTMLElement, objectId: string,
   windowTarget: BrowserWindow, lifetime: SceneLifetime) {
   const retain = <T extends { destroy(): void }>(controller: T): T => {
     lifetime.onDispose(() => controller.destroy());
     return controller;
   };
   const tabs = retain(createInformationTabsController(drawer, lifetime));
-  retain(createDatasetContextController(drawer, documentTarget, windowTarget, lifetime));
   retain(createChartSwitcherController(drawer, windowTarget, lifetime));
   retain(createChartPixelAlignmentController(drawer, windowTarget));
-  retain(createLensBrowserController(drawer, windowTarget, lifetime));
   return {
     show: tabs.show,
     // Restore saved openness after the minimap and view readout are bound.
@@ -55,54 +52,6 @@ export function createTabsController(card: HTMLElement | null, lifetime: SceneLi
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
     if (tab) { tab.checked = true; tab.dispatchEvent(new Event('change', { bubbles: true })); }
   }, destroy };
-}
-
-function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
-  const information = drawer.querySelector<HTMLElement>(".object-information-panel");
-  const root = information?.querySelector<HTMLElement>(".object-lenses");
-  if (!root || !information) {
-    return Object.freeze({ destroy() {} });
-  }
-
-  const options = [...root.querySelectorAll("[data-lens-option]")]
-    .filter((option) => option instanceof windowTarget.HTMLElement);
-  const buttons = options.map((option) =>
-    requiredElement<HTMLButtonElement>(option, 'button[name="dataset"]'));
-  if (options.length === 0 || buttons.some((button) =>
-    !(button instanceof windowTarget.HTMLButtonElement))) {
-    throw new Error("Object shell surface lens browser has no valid lenses.");
-  }
-
-  const details = [...information.querySelectorAll<HTMLElement>("[data-lens-details]")];
-  const lensIds = new Set(buttons.map((button) => button.value));
-  if (details.some((detail) => !lensIds.has(detail.dataset.lensDetails ?? ""))) {
-    throw new Error("Object shell surface lens details have no matching lens.");
-  }
-
-  const renderSelection = () => {
-    const activeLens = buttons.find((button) => button.ariaPressed === "true")
-      ?.value;
-    for (const detail of details) {
-      detail.hidden = detail.dataset.lensDetails !== activeLens;
-    }
-  };
-  const selectionObserver = new windowTarget.MutationObserver(renderSelection);
-  lifetime.onDispose(() => selectionObserver.disconnect());
-  for (const button of buttons) {
-    selectionObserver.observe(button, {
-      attributes: true,
-      attributeFilter: ["aria-pressed"],
-    });
-  }
-
-  renderSelection();
-
-  return Object.freeze({
-    destroy() {
-      selectionObserver.disconnect();
-      for (const detail of details) detail.hidden = true;
-    },
-  });
 }
 
 function createChartSwitcherController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {

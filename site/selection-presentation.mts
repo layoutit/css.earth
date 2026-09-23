@@ -1,3 +1,4 @@
+import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SceneSubject } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
 import type { CatalogueSelection } from './catalogue-window.mts';
@@ -25,50 +26,7 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
   const system = context.querySelector<HTMLElement>('[data-system-results]');
   const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
-  // A dataset that draws what a whole system shares, a debris disc around its star, is the system's, not the body's. Its
-  // option and its details move to the system card while that system is the selection, and return to the body card after.
-  const systemDatasets = system?.querySelector<HTMLElement>('[data-system-datasets]') ?? null;
-  const systemDatasetOptions = systemDatasets?.querySelector<HTMLElement>('[data-system-dataset-options]') ?? null;
-  const systemDatasetDetails = systemDatasets?.querySelector<HTMLElement>('[data-system-dataset-details]') ?? null;
-  const readVolumeOptions = () => [...documentTarget.querySelectorAll<HTMLElement>('.object-information-panel [data-lens-volume]')]
-    .map(option => ({ option, home: option.parentElement, next: option.nextElementSibling,
-      details: documentTarget.querySelector<HTMLElement>(`.object-information-panel [data-lens-volume-details="${option.dataset.lensVolume ?? ''}"]`) }))
-    .map(entry => ({ ...entry, detailsHome: entry.details?.parentElement ?? null, detailsNext: entry.details?.nextElementSibling ?? null }));
-  let volumeOptions = readVolumeOptions();
-  // A star's telescope pictures show its whole system, so they open on the system card while the system is selected and
-  // return, closed as they were, to the star's card after.
-  const systemGalleries = system?.querySelector<HTMLElement>('[data-system-galleries]') ?? null;
-  const readGalleries = () => [...documentTarget.querySelectorAll<HTMLDetailsElement>('.object-information-panel details.object-gallery-panel')]
-    .map(panel => ({ panel, home: panel.parentElement, next: panel.nextElementSibling, open: panel.open }));
-  let galleries = readGalleries();
-  const placeGalleries = (onSystemCard: boolean) => {
-    if (!systemGalleries || !galleries.length) return;
-    for (const entry of onSystemCard ? galleries : galleries.toReversed()) {
-      const target = onSystemCard ? systemGalleries : entry.home;
-      if (target && entry.panel.parentElement !== target) {
-        if (onSystemCard) target.append(entry.panel);
-        else target.insertBefore(entry.panel, entry.next?.parentElement === target ? entry.next : null);
-      }
-      entry.panel.open = onSystemCard || entry.open;
-    }
-    systemGalleries.hidden = !onSystemCard;
-  };
-  const placeVolumeDatasets = (onSystemCard: boolean) => {
-    if (!systemDatasets || !systemDatasetOptions || !systemDatasetDetails || !volumeOptions.length) return;
-    for (const entry of onSystemCard ? volumeOptions : volumeOptions.toReversed()) {
-      const optionTarget = onSystemCard ? systemDatasetOptions : entry.home;
-      if (optionTarget && entry.option.parentElement !== optionTarget) {
-        if (onSystemCard) optionTarget.append(entry.option);
-        else optionTarget.insertBefore(entry.option, entry.next?.parentElement === optionTarget ? entry.next : null);
-      }
-      const detailsTarget = onSystemCard ? systemDatasetDetails : entry.detailsHome;
-      if (entry.details && detailsTarget && entry.details.parentElement !== detailsTarget) {
-        if (onSystemCard) detailsTarget.append(entry.details);
-        else detailsTarget.insertBefore(entry.details, entry.detailsNext?.parentElement === detailsTarget ? entry.detailsNext : null);
-      }
-    }
-    systemDatasets.hidden = !onSystemCard;
-  };
+  let systemContent = createSystemCardContent(documentTarget);
   const objectName = (id: string) => SCENE_OBJECTS.find(object => object.id === id)?.name ?? '';
   const overviewName = ({ scope, systemId }: SceneOverview) => scope === 'system'
     ? systemById(SCENE_OBJECTS, systemId)?.name ?? 'Solar System'
@@ -96,8 +54,7 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     if (galaxy) setPanelHidden(galaxy, !galactic);
     const systemSelected = overview?.scope === 'system';
     if (system) setPanelHidden(system, !systemSelected);
-    placeVolumeDatasets(systemSelected);
-    placeGalleries(systemSelected);
+    systemContent.show(systemSelected);
     const showContext = Boolean(focus) || galactic || Boolean(largeScale) || systemSelected;
     setPanelHidden(information, showContext);
     if (!sharedLegacyContext) setPanelHidden(context, !showContext);
@@ -129,10 +86,8 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
   return {
     render, mark, publishSource,
     bindObject() {
-      placeVolumeDatasets(false);
-      placeGalleries(false);
-      volumeOptions = readVolumeOptions();
-      galleries = readGalleries();
+      systemContent.restore();
+      systemContent = createSystemCardContent(documentTarget);
     },
   };
 }

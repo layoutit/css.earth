@@ -123,7 +123,7 @@ class FixtureDocument {
     createElement = (tag: string): FixtureElement => { if (++this.count === this.failAtElement)
         throw new Error("injected native element failure"); return new FixtureElement(this, tag); };
     createDocumentFragment = (): FixtureElement => { const fragment = new FixtureElement(this); fragment.nodeType = 11; return fragment; };
-    getElementById(_id: string): null { return null; }
+    getElementById(_id: string): FixtureElement | null { return null; }
 }
 function dataKey(name: string): string { return name.slice(5).replace(/-([a-z])/g, (_match, letter: string) => letter.toUpperCase()); }
 function createStyle(): FixtureStyle { const values: Record<string, string> = {}; const style = { getPropertyValue: (name: string) => values[name] ?? "", setProperty: (name: string, value: string) => { values[name] = value; }, removeProperty: (name: string) => { delete values[name]; } }; Object.defineProperty(style, "cssText", { set(value: string) { for (const entry of String(value).split(";")) {
@@ -239,8 +239,14 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
     for (const control of definition.controls.settings?.controls ?? [])
         inputs.set(control.name, input({ name: control.name, type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
     const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
+    const form = Object.assign(f.document.createElement("form"), { elements: buttons, closest: () => lensRoot });
+    const details = new Map(buttons.map(button => {
+        button.setAttribute('name', 'dataset'); button.setAttribute('value', button.value); button.setAttribute('aria-controls', button.value);
+        return [button.value, f.document.createElement('div')];
+    }));
+    f.document.getElementById = id => details.get(id) ?? null;
     const information = Object.assign(f.document.createElement("section"), {
-        querySelector: (selector: string): FixtureElement | null => selector === ".object-lenses" ? lensRoot : null,
+        querySelector: (selector: string): FixtureElement | null => selector === 'form[data-dataset-form]' ? form : null,
     });
     lensRoot.querySelectorAll = selector => selector === 'button[name="dataset"]' ? buttons : [];
     settingsRoot.querySelectorAll = selector => selector === 'input[name], button[name]' ? [...inputs.values()] : [];

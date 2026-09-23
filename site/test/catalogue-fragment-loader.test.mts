@@ -2,8 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import type { BrowserWindow } from '../browser-types.mts';
-import { loadCatalogueFragment, loadCatalogueIndex, scheduleWhenIdle } from '../catalogue-fragment-loader.mts';
-import type { CatalogueFragmentPin, CatalogueIndexPin } from '../catalogue-fragment-pin.mts';
+import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentUrl, readCatalogueIndexUrl, scheduleWhenIdle } from '../catalogue-fragment-loader.mts';
 
 class FakeUListElement { html: string; constructor(html: string) { this.html = html; } }
 class FakeDocument {
@@ -22,7 +21,6 @@ function fixtureWindow(fetchImpl: typeof fetch, { requestIdleCallback = false }:
     DOMParser: FakeParser,
     HTMLUListElement: FakeUListElement,
     TextDecoder,
-    crypto: globalThis.crypto,
     setTimeout: (callback: () => void) => { timers.push(callback); return timers.length; },
     ...(requestIdleCallback ? { requestIdleCallback: (callback: () => void) => { timers.push(callback); return timers.length; } } : {}),
   } as unknown as BrowserWindow;
@@ -37,68 +35,49 @@ const indexJson = JSON.stringify({ schema: 'cssearth-catalogue-index@1', entries
   source: { subject: 'object:saturn', document: '/sources/saturn/', label: 'Sources for Saturn' },
   marker: { kind: 'scene', id: 'saturn', color: '#fff' },
 }] });
-const bytesOf = (text: string) => new TextEncoder().encode(text).byteLength;
-async function shaOf(text: string) {
-  return [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))]
-    .map(byte => byte.toString(16).padStart(2, '0')).join('');
-}
-
-test('loadCatalogueFragment fetches, verifies and returns the parsed list', async () => {
-  const pin: CatalogueFragmentPin = { url: '/catalogue/deadbeef.html', sha256: await shaOf(rowsHtml), bytes: bytesOf(rowsHtml) };
+test('loadCatalogueFragment fetches its path and returns the parsed list', async () => {
   const calls: string[] = [];
   const { windowTarget } = fixtureWindow(async url => { calls.push(String(url)); return new Response(rowsHtml); });
-  const rows = await loadCatalogueFragment(pin, { windowTarget });
+  const rows = await loadCatalogueFragment('/catalogue-fragment/', { windowTarget });
   assert.ok(rows instanceof FakeUListElement);
-  assert.deepEqual(calls, [pin.url]);
+  assert.deepEqual(calls, ['/catalogue-fragment/']);
 });
 
-test('loadCatalogueFragment rejects a failed request', async () => {
-  const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: 'a'.repeat(64), bytes: 1 };
+test('loadCatalogueFragment names the path of a failed request', async () => {
   const { windowTarget } = fixtureWindow(async () => new Response('', { status: 503 }));
-  await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /request failed: 503/u);
+  await assert.rejects(loadCatalogueFragment('/catalogue-fragment/', { windowTarget }), /request \/catalogue-fragment\/ failed: 503/u);
 });
 
 test('loadCatalogueFragment rejects a network failure', async () => {
-  const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: 'a'.repeat(64), bytes: 1 };
   const { windowTarget } = fixtureWindow(async () => { throw new TypeError('Failed to fetch'); });
-  await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /Failed to fetch/u);
-});
-
-test('loadCatalogueFragment rejects a size drift', async () => {
-  const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: await shaOf(rowsHtml), bytes: bytesOf(rowsHtml) + 1 };
-  const { windowTarget } = fixtureWindow(async () => new Response(rowsHtml));
-  await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /size drifted/u);
-});
-
-test('loadCatalogueFragment rejects a hash mismatch', async () => {
-  const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: 'f'.repeat(64), bytes: bytesOf(rowsHtml) };
-  const { windowTarget } = fixtureWindow(async () => new Response(rowsHtml));
-  await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /identity drifted/u);
+  await assert.rejects(loadCatalogueFragment('/catalogue-fragment/', { windowTarget }), /Failed to fetch/u);
 });
 
 test('loadCatalogueFragment rejects content missing the list', async () => {
-  const body = '<p>nothing here</p>';
-  const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: await shaOf(body), bytes: bytesOf(body) };
-  const { windowTarget } = fixtureWindow(async () => new Response(body));
-  await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /missing its list/u);
+  const { windowTarget } = fixtureWindow(async () => new Response('<p>nothing here</p>'));
+  await assert.rejects(loadCatalogueFragment('/catalogue-fragment/', { windowTarget }), /missing its list/u);
 });
 
-test('loadCatalogueIndex fetches, verifies and validates compact catalogue data', async () => {
-  const pin: CatalogueIndexPin = { url: '/catalogue/index.json', sha256: await shaOf(indexJson), bytes: bytesOf(indexJson) };
+test('loadCatalogueIndex fetches and validates compact catalogue data', async () => {
   const { windowTarget } = fixtureWindow(async () => new Response(indexJson));
-  const index = await loadCatalogueIndex(pin, { windowTarget });
+  const index = await loadCatalogueIndex('/catalogue/index.json', { windowTarget });
   assert.equal(index.schema, 'cssearth-catalogue-index@1');
   assert.equal(index.entries[0]?.name, 'Saturn');
   assert.ok(Object.isFrozen(index.entries));
 });
 
-test('loadCatalogueIndex rejects transport or schema drift', async () => {
-  const pin: CatalogueIndexPin = { url: '/catalogue/index.json', sha256: await shaOf(indexJson), bytes: bytesOf(indexJson) };
-  const badHash = fixtureWindow(async () => new Response(indexJson));
-  await assert.rejects(loadCatalogueIndex({ ...pin, sha256: 'f'.repeat(64) }, badHash), /identity drifted/u);
-  const invalid = JSON.stringify({ schema: 'wrong', entries: [] });
-  const badSchema = fixtureWindow(async () => new Response(invalid));
-  await assert.rejects(loadCatalogueIndex({ ...pin, sha256: await shaOf(invalid), bytes: bytesOf(invalid) }, badSchema), /Invalid object catalogue index/u);
+test('loadCatalogueIndex rejects a failed request or schema drift', async () => {
+  const failed = fixtureWindow(async () => new Response('', { status: 404 }));
+  await assert.rejects(loadCatalogueIndex('/catalogue/index.json', failed), /index request \/catalogue\/index\.json failed: 404/u);
+  const badSchema = fixtureWindow(async () => new Response(JSON.stringify({ schema: 'wrong', entries: [] })));
+  await assert.rejects(loadCatalogueIndex('/catalogue/index.json', badSchema), /Invalid object catalogue index/u);
+});
+
+test('a page names its transports by path; a page that inlines its rows names none', () => {
+  assert.equal(readCatalogueFragmentUrl({ dataset: { catalogueSrc: '/catalogue-fragment/' } }), '/catalogue-fragment/');
+  assert.equal(readCatalogueIndexUrl({ dataset: { catalogueIndexSrc: '/catalogue/index.json' } }), '/catalogue/index.json');
+  assert.equal(readCatalogueFragmentUrl({ dataset: {} }), null);
+  assert.equal(readCatalogueIndexUrl(null), null);
 });
 
 test('scheduleWhenIdle prefers requestIdleCallback and falls back to a timer', () => {

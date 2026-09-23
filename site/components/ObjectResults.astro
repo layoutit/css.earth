@@ -4,7 +4,7 @@ import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount } from "../objec
 import CatalogueRows from "./CatalogueRows.astro";
 import CatalogueOverviewRows from './CatalogueOverviewRows.astro';
 import NavigationTree from '../../atlas/src/components/NavigationTree.astro';
-import { PREPARED_CATALOGUE_INDEX_PIN } from '../prepared-catalogue-index.mts';
+import { CATALOGUE_FRAGMENT_URL, CATALOGUE_INDEX_URL } from '../catalogue-fragment-loader.mts';
 
 interface Props { activeObjectId?: string; formId?: string; }
 const { activeObjectId, formId } = Astro.props;
@@ -19,18 +19,12 @@ const groups = [...types].map(([type, label]) => ({ type, label,
   count: objectCategoryCount(classifications, type),
 }));
 // Overview rows are small and stay inline. The full object catalogue has two
-// content-addressed transports: compact JSON for the windowed browser runtime,
-// and the existing HTML fragment for server/no-JS search. `astro dev` normally
-// renders the rows inline because it does not run the fragment post-build step.
-const catalogueSrc = '/catalogue/__CATALOGUE_FRAGMENT_SHA__.html';
-const catalogueSha256 = '__CATALOGUE_FRAGMENT_SHA__';
-const catalogueBytes = '__CATALOGUE_FRAGMENT_BYTES__';
+// shared transports, named by path: compact JSON for the windowed browser runtime,
+// and the rendered rows for server/no-JS search. `astro dev` renders the rows
+// inline unless a test asks for the production transport.
 // The browser harness can exercise the production transport against Astro dev
 // without preparing every object package required by a full static build.
 const testCatalogueWindow = import.meta.env.DEV && process.env.CSSEARTH_TEST_CATALOGUE_WINDOW === '1';
-const catalogueIndexSrc = PREPARED_CATALOGUE_INDEX_PIN.url;
-const catalogueIndexSha256 = PREPARED_CATALOGUE_INDEX_PIN.sha256;
-const catalogueIndexBytes = PREPARED_CATALOGUE_INDEX_PIN.bytes;
 ---
 
 <div data-object-navigation-slot>
@@ -47,9 +41,7 @@ const catalogueIndexBytes = PREPARED_CATALOGUE_INDEX_PIN.bytes;
 </div>
 <div id="object-category-results" class="object-results-scroll" role="tabpanel"
   aria-labelledby={`object-tab-${defaultCategory}`} tabindex="0"
-  data-catalogue-src={catalogueSrc} data-catalogue-sha256={catalogueSha256} data-catalogue-bytes={catalogueBytes}
-  data-catalogue-index-src={catalogueIndexSrc} data-catalogue-index-sha256={catalogueIndexSha256}
-  data-catalogue-index-bytes={catalogueIndexBytes}
+  data-catalogue-src={CATALOGUE_FRAGMENT_URL} data-catalogue-index-src={CATALOGUE_INDEX_URL}
   style={`--object-category-visible-rows: ${Math.min(8, Number(objectCategoryCount(classifications, 'planet')))}`}>
   <ul class="object-list object-overview-list"><CatalogueOverviewRows /></ul>
   {import.meta.env.DEV && !testCatalogueWindow

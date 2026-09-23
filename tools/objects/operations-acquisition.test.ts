@@ -50,11 +50,11 @@ test('mapped composition acquisition restores the pinned map and report through 
   assert.deepEqual(await readFile(join(directory,'ice.tif')),Buffer.from(converted.products.ice));
   assert.deepEqual(await readFile(join(directory,'report.json')),report);
 }));
-function chunkedResponse(chunks: Uint8Array[]): Response {
+function chunkedResponse(chunks: Uint8Array[], declared: string|null = String(chunks.reduce((total,chunk)=>total+chunk.length,0))): Response {
   let next=0;
   const response=new Response(new ReadableStream<Uint8Array>({
     pull(controller) { if(next<chunks.length)controller.enqueue(chunks[next++]!);else controller.close(); },
-  },{highWaterMark:0}));
+  },{highWaterMark:0}),declared===null?undefined:{headers:{'content-length':declared}});
   response.arrayBuffer=async()=>{throw new Error('Raw acquisition must not buffer the response');};
   return response;
 }
@@ -147,14 +147,14 @@ test('a Horizons time-list step asks again in batches and compares rows, not the
   await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(Buffer.from('')),plan,transport}),/Horizons rows drifted from observer\.txt/);
 }));
 
-for(const [name,received,error] of [
-  ['short',Buffer.from('pin'),/size drifted/],
-  ['overlong',Buffer.from('pinned data extra'),/size drifted/],
-  ['wrong hash',Buffer.from('mutant data'),/hash drifted/],
+// Manifests carry no byte or hash pins, so the answer's own declared length is what a raw transfer is held to.
+for(const [name,received,declared,error] of [
+  ['short',Buffer.from('pin'),'11',/size drifted: received 3 bytes of the declared 11/],
+  ['overlong',Buffer.from('pinned data extra'),'11',/size drifted: the answer passed its declared 11 bytes/],
 ] as const)test(`raw ${name} transfer preserves the destination and removes partial files`,()=>temporary(async directory=>{
   const data=Buffer.from('pinned data'),old=Buffer.from('previous pin');await writeFile(join(directory,'source.img'),old);
-  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,
-    transport:{fetch:async()=>chunkedResponse([received.subarray(0,2),received.subarray(2)])}}),error);
+  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,mirrorOrigin:null,
+    transport:{fetch:async()=>chunkedResponse([received.subarray(0,2),received.subarray(2)],declared)}}),error);
   assert.deepEqual(await readFile(join(directory,'source.img')),old);
   assert.deepEqual(await readdir(directory),['source.img']);
 }));
@@ -170,13 +170,15 @@ test('abrupt source stream errors clean up without replacing the previous pin',(
   assert.deepEqual(await readFile(join(directory,'source.img')),old);assert.deepEqual(await readdir(directory),['source.img']);
 }));
 
+// An endless body is the case that fills a disk: the write has to stop at the declared size while the bytes are
+// still flowing, not after the answer has been written out and measured.
 test('an unbounded overlong response is cancelled after bounded chunk consumption',()=>temporary(async directory=>{
   const data=Buffer.alloc(32),old=Buffer.from('previous pin');await writeFile(join(directory,'source.img'),old);
   let pulls=0,cancelled=false;
   const response=new Response(new ReadableStream<Uint8Array>({
     pull(controller){pulls++;controller.enqueue(new Uint8Array(1024));},
     cancel(){cancelled=true;},
-  },{highWaterMark:0}));
+  },{highWaterMark:0}),{headers:{'content-length':String(data.length)}});
   await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,mirrorOrigin:null,
     transport:{fetch:async()=>response}}),/size drifted/);
   assert.ok(cancelled,'Rejecting an overlong source must cancel the response');
@@ -194,11 +196,13 @@ test('direct pinned acquisition also consumes raw response chunks',async context
   assert.deepEqual(await readFile(join(directory,'source.img')),data);assert.deepEqual(await readdir(directory),['source.img']);
 }));
 
-test('source verification hashes multi-chunk files and detects late byte drift',()=>temporary(async directory=>{
+// Tracked bytes are git's to keep, so verification is coverage and file kind: every declared source present, every
+// present file declared. It reads the file as it stands and never hashes it against a manifest pin.
+test('source verification covers every declared source and refuses an undeclared file',()=>temporary(async directory=>{
   const data=Buffer.alloc(256*1024+7,37),manifest=rawManifest(data);await writeFile(join(directory,'source.img'),data);
   assert.equal((await verifySources({sourceRoot:directory,manifest})).verifiedCount,1);
-  data[data.length-1]=38;await writeFile(join(directory,'source.img'),data);
-  await assert.rejects(verifySources({sourceRoot:directory,manifest}),/hash drifted/);
+  await writeFile(join(directory,'stray.img'),data);
+  await assert.rejects(verifySources({sourceRoot:directory,manifest}),/Undeclared: stray\.img/);
 }));
 
 test('gzip and pretty-json downloads preserve their existing transformations and pins',()=>temporary(async directory=>{
