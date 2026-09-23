@@ -5,7 +5,7 @@ import { createPreparedContextNavigation } from '../prepared-context-navigation.
 import { createImageFocusBank } from '../../src/renderers/css/universe/prepared-focus-bank.ts';
 import { overviewScopeFromUrl, preparedFocusFromUrl } from '../navigation-scope.mts';
 import { isPreparedCluster } from '@cssearth/catalog';
-import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';
+import type { PreparedFocusPresentation } from '../prepared-focus.mts';
 import type { PreparedCatalogObject, PreparedGalaxyRecord, PreparedClusterRecord, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
 import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
 import type { PreparedNavigationFocus } from '../../src/renderers/css/navigation/prepared-focus.ts';
