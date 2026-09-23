@@ -168,7 +168,7 @@ These observations do not need a new telescope adapter or a synthetic archive le
 `src/objects/<target>/source/observations.json` uses schema `cssearth-source-observations@1` and
 references input IDs in the existing source manifest. The declaration supplies the instrument,
 mode, native product kind, exact archive identity, decoder, header assertions, measurement meaning,
-units, citation and explicit limitations. Optional wavelength intervals, UTC time bounds and achieved-resolution fields can support request fulfillment. Achieved resolution requires a stated measurement basis; source sampling is never promoted into that field. Hashes and sizes remain in the manifest.
+units, citation and explicit limitations. Optional wavelength intervals, UTC time bounds and achieved-resolution fields can support request fulfillment. Achieved resolution requires a stated measurement basis; source sampling is never promoted into that field. The manifest owns source identity and acquisition; Git records tracked bytes.
 
 The available decoders are numeric FITS images/cubes (including supported RICE compression) and
 supported PDS3/PDS4 images, cubes and tables through pinned `pdr`. ISIS3 Real cores use the
@@ -177,6 +177,12 @@ from manifest-pinned FITS and attached or detached PDS products to produce this 
 automatically. Local headers are preferred; retrieved headers are cached with origin, time and
 digest. Header discovery does not verify the complete file. The query reports `sourceIntakeIssues`
 for unavailable, unsupported or incomplete inputs, rather than treating them as empty archives.
+`explore` also retains incomplete inputs under `unresolved` and unsupported formats under
+`unsupported`, with the file path and reason. One incomplete PDS3 mission-image label does not
+abort the target's other observations. A derived map without mission-image fields may still enter
+through native PDS intake; accepting its labeled structures does not qualify its surface registration.
+PDS3 `N/A` wavelength and pixel-scale fields remain unknown. In particular, an HRI-IR spectral
+image with one spatial axis does not acquire a two-dimensional surface resolution from that axis.
 Labels and dependencies can be pinned under `inputs`, `documents` or `generatedIntermediates`.
 Origin requests reuse matching download headers from the existing acquisition plan; those headers
 are not sent to the source mirror. Every referenced input must be pinned, including detached labels, metadata and
