@@ -822,3 +822,28 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     box-shadow: var(--sheet-shadow);
   }
 }
+
+/* Portrait tablets keep the phone's bottom sheet but have the width for the desktop's
+   header: the single-line wordmark, search and actions share the first row, with room
+   around search, and the filters take the second. The sheet lays its card out in two
+   columns. Landscape tablets already get the desktop side panel. */
+@media (orientation: portrait) and (min-width: 700px) {
+  body[data-object-shell] {
+    --explorer-header-height: calc(var(--explorer-search-height) + var(--explorer-header-row-gap) + var(--explorer-category-height));
+  }
+
+  .explorer-shell-header {
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
+    grid-template-rows: var(--explorer-search-height) var(--explorer-category-height);
+    column-gap: 20px;
+  }
+
+  /* The desktop's single-line wordmark, at its desktop size. */
+  .explorer-shell-header .object-wordmark-one-line { display: inline; }
+  .explorer-shell-header .object-wordmark-two-line { display: none; }
+
+  .object-search-toolbar { grid-row: 1; grid-column: 2; }
+  .object-header-actions { display: flex; grid-row: 1; grid-column: 3; }
+  .object-search-categories { display: flex; grid-row: 2; grid-column: 1 / -1; }
+  :is(.object-search-category, .object-header-link, .object-header-action) { box-shadow: var(--explorer-float-shadow); }
+}
