@@ -178,6 +178,9 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     else if (service.state === 'unknown-target') issues.push({ scope: 'provider', code: 'provider-target-unknown', identity: service.service, reason: service.reason });
   }
   for (const item of indexed.coverage) if (item.state !== 'observed') issues.push({ scope: 'indexed-source', code: 'coverage', identity: item.telescope, reason: item.reason });
+  const missingHeaders = inputs.sourceIntakeIssues?.filter(issue => issue.state === 'unavailable') ?? [];
+  if (missingHeaders.length) issues.push({ scope: 'indexed-source', code: 'coverage', identity: 'source manifest',
+    reason: `${missingHeaders.length} declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.` });
   return { schema: EXPLORATION_SCHEMA, request: canonicalRequest, target, targetResolution, choices: choices.map((choice, index) => ({ ...choice, pick: index + 1 })), unresolved, unsupported, issues, services, coverage: indexed.coverage };
 }
 
