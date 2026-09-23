@@ -156,7 +156,7 @@ export function mountObjectShell({
       sheet.showSelection();
       selectionPreview?.restore();
       if (object.id === cardObjectId) {
-        const restoreBrowser = objectBrowser.previewObject(object.name);
+        const restoreBrowser = objectBrowser.previewObject(object.id);
         const preview = { id: object.id, commit() { selectionPreview = null; }, restore() {
           if (selectionPreview !== preview) return;
           selectionPreview = null; restoreBrowser();
@@ -166,7 +166,7 @@ export function mountObjectShell({
         return preview.restore;
       }
       const information = requiredElement(drawer, '.object-information-panel');
-      const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.name);
+      const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.id);
       const previousBusy = information.ariaBusy;
       const previewLifetime = createSceneLifetime();
       let pendingControls: (readonly [HTMLElement, boolean])[] = [];
@@ -233,7 +233,7 @@ export function mountObjectShell({
       cardObjectId = content.id;
       overview = false; overviewScope = 'system';
       preparedFocus = null; focusCard.set(null);
-      objectBrowser.setObject(content.name);
+      objectBrowser.setObject(content.id);
       mountContent(content.id, motion);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
@@ -758,7 +758,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   catalogueRetry?.addEventListener('click', () => { void ensureCatalogueLoaded(); }, { signal: events.signal });
-  let selectedObjectName = "";
+  let selectedObjectId = "";
+  const selectedObjectName = () => SCENE_OBJECTS.find(object => object.id === selectedObjectId)?.name ?? '';
   let initialObject = true;
   let overview = false;
   let overviewScope: OverviewScope = 'system', overviewSystemId = SOLAR_SYSTEM_ID;
@@ -770,9 +771,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   // server-rendered search page), and again once a fetched catalogue
   // inserts them, whichever finds the shell still showing its own object.
   const backfillCurrentSelection = () => {
-    if (!selectedObjectName && !overview && !preparedFocus) {
+    if (!selectedObjectId && !overview && !preparedFocus) {
       const current = SCENE_OBJECTS.find(object => object.id === documentTarget.body.dataset.objectShell);
-      if (current) selectedObjectName = current.name;
+      if (current) selectedObjectId = current.id;
     }
   };
   const overviewName = () => overviewScope === 'system' ? systemById(SCENE_OBJECTS, overviewSystemId)?.name ?? 'Solar System'
@@ -819,7 +820,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const sourceFocus = preparedFocus?.id ?? '';
     if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
     renderSourceLink(documentTarget, preparedFocus ? `focus:${preparedFocus.id}`
-      : overview ? `overview:${overviewScope === 'system' ? `system:${overviewSystemId}` : overviewScope}` : `object:${selectedObjectName}`, sourceLinks);
+      : overview ? `overview:${overviewScope === 'system' ? `system:${overviewSystemId}` : overviewScope}` : `object:${selectedObjectId}`, sourceLinks);
   };
   const renderSelectionContext = () => {
     const focused = Boolean(preparedFocus);
@@ -849,12 +850,11 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const headerSystemId = systemSelected ? overviewSystemId : SOLAR_SYSTEM_ID;
     for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
     if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
-    const selectedObjectId = SCENE_OBJECTS.find(object => object.name === selectedObjectName)?.id ?? objectId;
     const navigationSelection = preparedFocus?.id ?? (galactic ? 'milky-way'
-      : largeScale?.dataset.largeScaleOverview ?? (systemSelected ? overviewSystemId : selectedObjectId));
+      : largeScale?.dataset.largeScaleOverview ?? (systemSelected ? overviewSystemId : selectedObjectId || objectId));
     selectNavigation(navigationSelection);
     context.ariaLabel = preparedFocus?.name ?? (galactic ? 'Milky Way'
-      : largeScale?.dataset.largeScaleName ?? (systemSelected ? overviewName() : selectedObjectName || 'Selected object'));
+      : largeScale?.dataset.largeScaleName ?? (systemSelected ? overviewName() : selectedObjectName() || 'Selected object'));
   };
   const filter = (resetScroll = true) => {
     renderSelectionContext();
@@ -1064,10 +1064,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
 
   const markSelection = () => {
     documentTarget.documentElement.dataset.selection = preparedFocus ? 'prepared-focus' : overview ? overviewScope : 'object';
-    catalogueWindow?.setSelection(selectedObjectName, preparedFocus?.id ?? '');
+    catalogueWindow?.setSelection(selectedObjectId, preparedFocus?.id ?? '');
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
       const selected = preparedFocus ? anchor.dataset.preparedFocusId === preparedFocus.id
-        : !overview && !anchor.dataset.preparedFocusId && anchor.querySelector('.object-name')?.textContent === selectedObjectName;
+        : !overview && !anchor.dataset.preparedFocusId && anchor.dataset.objectId === selectedObjectId;
       anchor.classList.toggle('is-active', selected);
       if (selected) anchor.setAttribute('aria-current', 'page');
       else anchor.removeAttribute('aria-current');
@@ -1085,25 +1085,25 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       if (open) filter(false);
     },
     previewOverview(scope: OverviewScope, systemId: string) {
-      const previous = { selectedObjectName, overview, overviewScope, overviewSystemId, preparedFocus, browsing };
+      const previous = { selectedObjectId, overview, overviewScope, overviewSystemId, preparedFocus, browsing };
       preparedFocus = null;
       overview = true; overviewScope = scope; overviewSystemId = systemId; browsing = false;
       markSelection(); render(false);
       return () => {
         const editing = browsing;
-        ({ selectedObjectName, overview, overviewScope, overviewSystemId, preparedFocus } = previous);
+        ({ selectedObjectId, overview, overviewScope, overviewSystemId, preparedFocus } = previous);
         browsing = editing || previous.browsing;
         markSelection(); render(browsing);
       };
     },
-    previewObject(name: string) {
-      const previous = { selectedObjectName, overview, overviewScope, preparedFocus, browsing };
+    previewObject(id: string) {
+      const previous = { selectedObjectId, overview, overviewScope, preparedFocus, browsing };
       preparedFocus = null;
-      overview = false; selectedObjectName = name;
+      overview = false; selectedObjectId = id;
       markSelection(); render(false);
       return () => {
         const editing = browsing;
-        ({ selectedObjectName, overview, overviewScope, preparedFocus } = previous);
+        ({ selectedObjectId, overview, overviewScope, preparedFocus } = previous);
         browsing = editing || previous.browsing;
         markSelection(); render(browsing);
       };
@@ -1123,15 +1123,15 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       if (enabled) { destinations?.bind(null); features?.bind(null); }
       render(editing);
     },
-    setObject(name: string) {
+    setObject(id: string) {
       // A completed flight publishes the selection, but a newer search owns
       // its query and results until the user chooses or dismisses them.
       const editing = browsing;
       overview = false;
       if (!initialObject) preparedFocus = null;
       initialObject = false;
-      selectedObjectName = name;
-      const object = SCENE_OBJECTS.find(object => object.name === name);
+      selectedObjectId = id;
+      const object = SCENE_OBJECTS.find(object => object.id === id);
       if (object) {
         searchCard.setAttribute('action', object.route);
         searchCard.dataset.searchObject = object.id;

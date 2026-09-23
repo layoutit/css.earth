@@ -82,7 +82,7 @@ function createRow(documentTarget: Document): RowView {
   return { item, anchor, index: -1 };
 }
 
-function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexEntry, index: number, selectedName: string,
+function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexEntry, index: number, selectedObjectId: string,
   selectedFocusId: string) {
   const { item, anchor } = view;
   view.index = index;
@@ -110,7 +110,7 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
     anchor.dataset.preparedFocusId = entry.id;
     delete anchor.dataset.objectId;
   }
-  const selected = entry.kind === 'scene' ? entry.name === selectedName : entry.id === selectedFocusId;
+  const selected = entry.kind === 'scene' ? entry.id === selectedObjectId : entry.id === selectedFocusId;
   anchor.classList.toggle('is-active', selected);
   if (selected) anchor.setAttribute('aria-current', 'page');
   else anchor.removeAttribute('aria-current');
@@ -143,7 +143,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
   documentTarget: Document; windowTarget: BrowserWindow; list: HTMLUListElement; scrollTarget: HTMLElement;
 }) {
   let entries: readonly CatalogueIndexEntry[] = [];
-  let selectedName = '';
+  let selectedObjectId = '';
   let selectedFocusId = '';
   let frame: number | null = null;
   let active = new Map<number, RowView>();
@@ -166,7 +166,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     for (let index = start; index < end; index++) {
       if (active.has(index)) continue;
       const view = spare.pop() ?? createRow(documentTarget);
-      bindRow(documentTarget, view, entries[index]!, index, selectedName, selectedFocusId);
+      bindRow(documentTarget, view, entries[index]!, index, selectedObjectId, selectedFocusId);
       active.set(index, view);
     }
     for (const view of active.values()) {
@@ -190,7 +190,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     entries = next;
     for (const [index, view] of active) {
       const entry = entries[index];
-      if (entry) bindRow(documentTarget, view, entry, index, selectedName, selectedFocusId);
+      if (entry) bindRow(documentTarget, view, entry, index, selectedObjectId, selectedFocusId);
       else {
         view.item.remove();
         active.delete(index);
@@ -216,10 +216,10 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
       active.get(index)?.anchor.focus();
       return true;
     },
-    setSelection(name: string, focusId: string) {
-      selectedName = name;
+    setSelection(objectId: string, focusId: string) {
+      selectedObjectId = objectId;
       selectedFocusId = focusId;
-      for (const [index, view] of active) bindRow(documentTarget, view, entries[index]!, index, selectedName, selectedFocusId);
+      for (const [index, view] of active) bindRow(documentTarget, view, entries[index]!, index, selectedObjectId, selectedFocusId);
     },
     clear() { setEntries([]); },
     inspect() { return Object.freeze({ entries: entries.length, connectedRows: active.size, spareRows: spare.length }); },
