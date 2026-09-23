@@ -95,7 +95,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     if (navigable) label.setAttribute('role', 'button');
     label.style.cursor = navigable ? 'pointer' : 'default';
     label.tabIndex = -1;
-    root.append(marker, label);
+    // Catalogue-only rows have no prepared scene. Keep their dots, but do not
+    // mount inert marker/caption nodes that can resemble a destination.
+    if (navigable) root.append(marker, label);
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
     const entry: Entry = { object, marker, dot, navigable, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
       placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
