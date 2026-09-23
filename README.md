@@ -1,4 +1,4 @@
-<h1><img src=".github/assets/css-earth-wordmark.png" alt="css.earth" width="280"></h1>
+<h1><img src=".github/assets/css-earth-wordmark.png" alt="css.earth" width="260"></h1>
 
 A 3D CSS astrovisualization platform that renders celestial bodies as HTML and CSS 3D geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without WebGL or canvas. It turns open space data into browser-ready meshes, textures and volumes, all fit into one model of the universe.
 
