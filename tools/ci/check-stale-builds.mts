@@ -17,7 +17,7 @@ export interface BuildRule { readonly name: string; readonly command: string; re
 export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
   { name: '@cssearth/objects', command: 'pnpm build:objects', sources: ['packages/objects/src'], output: 'packages/objects/dist/index.js' },
   { name: '@cssearth/astronomy', command: 'pnpm build:astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/tools'], output: 'packages/astronomy/dist/index.js' },
-  { name: '@cssearth/engine', command: 'pnpm build:engine', sources: ['packages/engine/src'], output: 'packages/engine/dist/index.js' },
+  { name: '@cssearth/engine', command: 'pnpm --filter @cssearth/engine build', sources: ['packages/engine/src'], output: 'packages/engine/dist/index.js' },
   { name: '@cssearth/catalog', command: 'pnpm build:catalog', sources: ['packages/catalog/src'], output: 'packages/catalog/dist/index.js' },
   { name: 'CSS renderer bundle', command: 'pnpm build:renderer', sources: ['src/renderers/css'], output: 'src/renderers/css/dist/index.js' },
   { name: 'preparation tools bundle', command: 'pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts', sources: ['tools/objects', 'src/preparation'], output: 'tools/objects/dist/prepare-authored.js' },
