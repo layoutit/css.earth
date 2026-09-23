@@ -9,7 +9,7 @@ import { acquirePreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusPolicy, PreparedFocusPresentation } from './prepared-focus.mts';
 
-type PreparedContextLayer = Pick<ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>, 'resolveGalaxy' | 'focusBank' | 'selectGalaxy'>;
+type PreparedContextLayer = Pick<ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>, 'resolveGalaxy' | 'ensureGalaxyCatalog' | 'focusBank' | 'selectGalaxy'>;
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
   onFlightStart?(): void;
@@ -66,14 +66,12 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   const writeSelectionUrl = (id: string | null) => {
     const url = withPreparedFocus(new URL(windowTarget.location.href), id, target?.datasets?.selectedLens ?? null);
     if (url.href === windowTarget.location.href) return;
-    windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
     notify(url.href);
   };
   const clearSavedCameraUrl = () => {
     const url = new URL(windowTarget.location.href);
     if (!url.searchParams.has('v')) return;
     url.searchParams.delete('v');
-    windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
     notify(url.href);
   };
   const publishContent = () => {
@@ -99,87 +97,83 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     publishContent();
     writeSelectionUrl(next);
   };
-  return Object.freeze({
-    connect(owner: ObjectWorldNavigation, { onFocusChange = () => {}, onFlightStart = () => {}, onFocusContentChange = () => {} }: FocusCallbacks = {}) {
-      unsubscribe?.(); useTarget(null); flight?.abort();
-      navigation = owner; ready = false; notify = onFocusChange; beforeFlight = onFlightStart; notifyContent = onFocusContentChange;
-      unsubscribe = owner.subscribe(publishSelection);
-      return () => {
-        if (navigation !== owner) return;
-        unsubscribe?.(); unsubscribe = null; useTarget(null);
-        flight?.abort(); navigation = null; ready = false;
-      };
-    },
-    suspend() { ready = false; flight?.abort(); },
-    restore(url: string | URL) {
-      const owner = navigation;
-      if (!owner?.setPreparedFocus) return;
-      flight?.abort(); const controller = new AbortController(); flight = controller;
-      const current = () => navigation === owner && flight === controller && !controller.signal.aborted;
-      ready = false;
-      const query = new URL(url, windowTarget.location.href).searchParams;
-      let selection: ReturnType<typeof readPreparedFocusSelection> = null;
-      const finish = () => { if (current()) { ready = true; flight = null; } };
-      const fail = (error: unknown) => {
-        if (!current()) return;
-        selected = owner.preparedFocus?.()?.id ?? null;
-        layer.selectGalaxy(selected, owner.preparedFocus?.() ?? null); useTarget(selected);
-        publishContent();
-        onError(error);
-      };
+  function suspend() {
+    const previous = flight;
+    flight = null; ready = false;
+    previous?.abort();
+  }
+
+  // Clicks and saved links own the same catalogue load, target and flight lifetime.
+  // Keep the synchronous path when the target is already available.
+  function transition(readSelection: () => ReturnType<typeof readPreparedFocusSelection>, query?: URLSearchParams) {
+    const owner = navigation;
+    if (!owner) return;
+    suspend();
+    const controller = new AbortController(); flight = controller;
+    const current = () => navigation === owner && flight === controller && !controller.signal.aborted;
+    const finish = () => { if (current()) { ready = true; flight = null; } };
+    const fail = (error: unknown) => {
+      if (!current()) return;
+      const focus = owner.preparedFocus();
+      selected = focus?.id ?? null;
+      layer.selectGalaxy(selected, focus); useTarget(selected); publishContent();
+      if (!record(error) || error.name !== 'AbortError') onError(error);
+    };
+    try {
+      const selection = readSelection();
       const apply = () => {
         if (!current()) return;
-        const id = selection?.id ?? null, focus = target?.focus ?? null, state = target?.datasets;
-        const lens = target?.resolveLens(selection?.lens ?? null);
-        owner.setPreparedFocus!(focus);
-        if (lens !== undefined) target!.selectLens(lens);
-        selected = id; layer.selectGalaxy(id, focus);
-        publishContent();
-        if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
-        ready = true;
-        // A focus-only link is a destination. A saved camera remains exact while it still shows
-        // the named focus; a stale focus+camera pairing must not strand the user in empty space.
-        const savedCameraIsCompatible = focus && query.has('v') ? savedCameraShowsFocus(owner, focus) : false;
-        if (focus && (!query.has('v') || !savedCameraIsCompatible)) {
+        const focus = target?.focus ?? null;
+        if (query) {
+          const id = selection?.id ?? null, state = target?.datasets;
+          const lens = target?.resolveLens(selection?.lens ?? null);
+          owner.setPreparedFocus(focus);
+          if (lens !== undefined) target!.selectLens(lens);
+          selected = id; layer.selectGalaxy(id, focus); publishContent();
+          if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
+          ready = true;
+          // A saved composition stays authoritative while it shows the named focus.
+          if (!focus || (query.has('v') && savedCameraShowsFocus(owner, focus))) return;
           if (query.has('v')) clearSavedCameraUrl();
-          beforeFlight();
-          if (current()) return owner.flyToPreparedFocus(focus, { signal: controller.signal, reducedMotion: true });
         }
-      };
-      try {
-        selection = readPreparedFocusSelection(query);
-        const loading = useTarget(selection?.id ?? null)?.prepare();
-        if (loading) return loading.then(apply).catch(fail).finally(finish);
-        const flying = apply();
-        if (flying) return flying.catch(fail).finally(finish);
-      } catch (error) { fail(error); }
-      finish();
-    },
-    async select(object: Pick<PreparedCatalogObject, 'id'>) {
-      const owner = navigation;
-      if (!owner?.flyToPreparedFocus) return;
-      flight?.abort(); const controller = new AbortController(); flight = controller;
-      const current = () => navigation === owner && flight === controller && !controller.signal.aborted;
-      try {
-        ready = false;
-        const destination = useTarget(object.id)!;
-        const loading = destination.prepare({ preload: true });
-        if (loading) await loading;
-        if (!current()) return;
-        const focus = destination.focus;
+        if (!focus) return;
         beforeFlight();
         if (!current()) return;
         ready = true;
-        await owner.flyToPreparedFocus(focus, { signal: controller.signal,
-          reducedMotion: windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true });
-        if (current()) publishSelection();
-      } catch (error) {
-        if (current()) {
-          useTarget(owner.preparedFocus?.()?.id ?? null);
-          if (!record(error) || error.name !== 'AbortError') onError(error);
-        }
-      } finally { if (current()) { ready = true; flight = null; } }
+        return owner.flyToPreparedFocus(focus, { signal: controller.signal,
+          reducedMotion: Boolean(query) || windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true,
+        }).then(() => { if (current()) publishSelection(); });
+      };
+      const prepare = () => {
+        if (!current()) return;
+        const loading = useTarget(selection?.id ?? null)?.prepare({ preload: !query });
+        return loading ? loading.then(apply) : apply();
+      };
+      const pending = selection && !layer.resolveGalaxy(selection.id)
+        ? layer.ensureGalaxyCatalog().then(prepare) : prepare();
+      if (pending) return pending.catch(fail).finally(finish);
+    } catch (error) { fail(error); }
+    finish();
+  }
+
+  return Object.freeze({
+    connect(owner: ObjectWorldNavigation, { onFocusChange = () => {}, onFlightStart = () => {}, onFocusContentChange = () => {} }: FocusCallbacks = {}) {
+      suspend(); unsubscribe?.(); useTarget(null);
+      navigation = owner; notify = onFocusChange; beforeFlight = onFlightStart; notifyContent = onFocusContentChange;
+      unsubscribe = owner.subscribe(publishSelection);
+      return () => {
+        if (navigation !== owner) return;
+        suspend(); unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null;
+      };
     },
-    destroy() { ready = false; flight?.abort(); unsubscribe?.(); useTarget(null); navigation = null; },
+    suspend,
+    restore(url: string | URL) {
+      const query = new URL(url, windowTarget.location.href).searchParams;
+      return transition(() => readPreparedFocusSelection(query), query);
+    },
+    async select(object: Pick<PreparedCatalogObject, 'id'>) {
+      await transition(() => ({ id: object.id, lens: null }));
+    },
+    destroy() { suspend(); unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null; },
   });
 }
