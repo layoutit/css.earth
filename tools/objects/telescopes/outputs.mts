@@ -5,8 +5,8 @@ import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
-import { fileSize, writeProductRecord, parseProductRecord } from '../product-record.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { writeProductRecord, parseProductRecord } from '../product-record.mts';
+import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { plotProduct } from '../astronomy-packages/plots.mts';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
@@ -46,24 +46,26 @@ function beneath(root:string,path:string):string {
 }
 export async function delivery(resultPath:string){
   const path=resolve(resultPath),directory=dirname(path),bytes=await readFile(path),record=requireRecord(JSON.parse(bytes.toString('utf8')));
+  if (record.schema !== 'cssearth-telescope-delivery@3') throw new Error('This delivery predates content pins. Run telescope get into a new directory.');
   const context=deliveryContext(record);
-  // A delivery names each copied file by path and size, as product records do; the delivery record itself is hashed below.
-  const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw);return {path:requireString(f.path),bytes:requireFiniteNumber(f.bytes)};});
+  // A delivery binds every copied file by path, size and digest; the delivery record itself is hashed below.
+  const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw),sha256=requireString(f.sha256,'delivery SHA-256');if(!/^[a-f0-9]{64}$/u.test(sha256))throw new TypeError('Invalid delivery SHA-256');return {path:requireString(f.path),bytes:requireFiniteNumber(f.bytes),sha256};});
   if(!files.length||new Set(files.map(f=>f.path)).size!==files.length)throw new Error('Delivery files must be unique and pinned');
   const realDirectory=await realpath(directory);
   for(const expected of files){
     const file=beneath(directory,expected.path);beneath(realDirectory,relative(realDirectory,await realpath(file)));
-    const actual=await fileSize(file);if(actual.bytes!==expected.bytes)throw new Error(`Delivery size mismatch: ${expected.path}`);
+    const actual=await sha256File(file);if(actual.bytes!==expected.bytes||actual.sha256!==expected.sha256)throw new Error(`Delivery content pin mismatch: ${expected.path}`);
   }
   const productPath=requireString(record.product),product=files.find(f=>f.path===productPath);
   if(!product)throw new Error('The chosen product is absent from the delivery pins');
   for(const key of ['record','receipt'])if(!files.some(f=>f.path===requireString(record[key])))throw new Error('Delivery evidence is not pinned');
   const producing=parseProductRecord(JSON.parse(await readFile(beneath(directory,requireString(record.record)),'utf8')));
-  // New deliveries bind output paths to their producer's root. Legacy deliveries retain strict unique-suffix matching.
+  // Producer paths are resolved within its recorded output root when one is supplied.
   const outputRoot=record.outputRoot===undefined?undefined:beneath(directory,requireString(record.outputRoot));
   const outputPins=producing.outputs.map(output=>{
     const exact=outputRoot===undefined?undefined:relative(directory,beneath(outputRoot,output.path));
-    const matches=files.filter(f=>f.bytes===output.bytes&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
+    if(!output.sha256)throw new Error('Producing record has no content digest. Requalify the observation.');
+    const matches=files.filter(f=>f.bytes===output.bytes&&f.sha256===output.sha256&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
     if(matches.length!==1)throw new Error('Producing output is absent or ambiguous in delivery');return matches[0];
   });
   if(!outputPins.some(f=>f.path===product.path))throw new Error('Product is not bound by its producing record');

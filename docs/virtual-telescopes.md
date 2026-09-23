@@ -116,6 +116,8 @@ resolution never becomes verified merely because a file was decoded.
 
 The delivery contains the native product's complete recorded output set (including
 pinned labels and dependencies), evidence, SHA-256 pins and a `result.json` verdict.
+New deliveries use `cssearth-telescope-delivery@3`; older result files without content
+pins require a new query or exploration directory and a fresh `get` before export.
 For the repository script, use `pnpm --silent telescope … --json` to suppress pnpm’s own preamble.
 Progress goes to stderr; `--json` keeps stdout machine-readable, including when a
 native reducer prints to its inherited stdout. `--verbose` retains the full query report.

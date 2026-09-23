@@ -9,7 +9,8 @@ import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { requireArray, requireRecord } from '../../sources/source-values.mts';
-import { fileSize, writeProductRecord } from '../product-record.mts';
+import { writeProductRecord } from '../product-record.mts';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from './cli.mts';
 let root:string;
@@ -47,7 +48,7 @@ fits.HDUList([fits.PrimaryHDU(),h,table]).writeto(root/'tab.fits')
 `,root],{env:{...process.env,...tc.env}});
   const file=resolve(root,'cube.fits'),record=resolve(root,'input.product.json');
   await writeProductRecord(record,{telescope:'Fixture',stage:'fixture',inputs:[],parameters:{},software:[]},[{path:'cube.fits',file}]);
-  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@1',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},request:sourceRequest,satisfaction:sourceAssessment,files:[{path:'cube.fits',...await fileSize(file)},{path:'input.product.json',...await fileSize(record)}]}));
+  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},context:{kind:'scientific-request',request:sourceRequest,assessment:sourceAssessment},files:[{path:'cube.fits',...await sha256File(file)},{path:'input.product.json',...await sha256File(record)}]}));
 });
 after(async()=>{await rm(root,{recursive:true,force:true});});
 async function extract(selection:OutputRequest,file='cube.fits'){

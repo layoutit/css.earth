@@ -27,7 +27,7 @@ test('PyVO sends descriptor-bound DataLink parameters and retains the exact resp
   try {
     const url = `http://127.0.0.1:${address.port}/links`;
     const parameters = { ID: 'ivo://fixture/a+b&member=1', RESPONSEFORMAT: 'application/x-votable+xml;content=datalink' };
-    const answer = (await astroquery({ operation: 'vo-links', url, parameters, directory, byteLimit: 1_000_000 })).vo!;
+    const answer = (await astroquery({ operation: 'vo-links', url, parameters, directory, byteLimit: 1_000_000, allowedPrivateHosts: ['127.0.0.1'] })).vo!;
     assert.equal(requests.length, 1);
     assert.equal(requests[0]!.searchParams.get('ID'), parameters.ID);
     assert.equal(requests[0]!.searchParams.get('RESPONSEFORMAT'), parameters.RESPONSEFORMAT);
@@ -70,7 +70,8 @@ test('public VO query follows a descriptor-bound nested DataLink service', async
       async (_root, profile): Promise<DiscoverySnapshot> => ({ schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
         request: jsonValue(request), query: 'fixture', scope: 'synthetic descriptor traversal', sampleLimit: 1, completeness: 'bounded-sample',
         response: { ...response, rows: profile === SERVICES[0] ? [{ ...response.rows[0]!, target_name: 'Betelgeuse', dataproduct_type: 'image',
-          access_url: `${service}/root`, access_format: 'application/x-votable+xml;content=datalink' }] : [], times: profile === SERVICES[0] ? response.times : [] } }));
+          access_url: `${service}/root`, access_format: 'application/x-votable+xml;content=datalink' }] : [], times: profile === SERVICES[0] ? response.times : [] } }),
+      { allowedPrivateHosts: ['127.0.0.1'] });
     assert.equal(seen.length, 2);
     assert.equal(seen[1]!.pathname, '/nested');
     assert.equal(seen[1]!.searchParams.get('ID'), 'ivo://fixture/member+1');

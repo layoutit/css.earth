@@ -11,6 +11,9 @@ import { astroquery, VoAccessError } from '../../astronomy-packages/client.mts';
 import { canonical, digest, parseMetadata, parseLimits, parseRegion, recordKey, acquisitionKey, type DiscoverySnapshot, type MetadataResponse, type Resource } from './contracts.mts';
 import { associateTarget, fieldAssociation, normalizeSnapshot, SERVICES, targetQuery } from './discovery.mts';
 import { mediaType, planAccess, sodaParameters } from './access.mts';
+import { voUrl } from './network-policy.mts';
+import { voCandidates } from './bridge.mts';
+import { explorationAnswer } from '../exploration.mts';
 
 const root = resolve(import.meta.dirname, '../../../..'), fixtures = resolve(root, 'tests/fixtures/telescope-vo');
 const profile = SERVICES[1]!;
@@ -165,7 +168,7 @@ test('a malformed advertised MIME is read as DataLink at its access URL, and ref
   const refused = await planAccess(root, obs, saved, request, async () => { throw new Error('not a VOTable'); });
   assert.equal(refused.products.length, 0); assert.match(refused.issues.join('\n'), /DataLink transport or parsing failed/u);
 });
-test('archive product kind only proposes a family route; tables and events remain acquirable', async () => {
+test('non-raster archive products remain discoverable but have no broken qualification choice', async () => {
   const base = await almaPromise(), saved = snapshot(base), normalized = normalizeSnapshot(saved, profile, target, [target])[0]!;
   for (const kind of ['table', 'events'] as const) {
     const observation = { ...normalized, kind, target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' }, access: { url: `https://example.org/${kind}.fits`, mime: 'application/fits', estimatedKilobytes: 1 } };
@@ -173,7 +176,36 @@ test('archive product kind only proposes a family route; tables and events remai
     assert.equal(plan.products.length, 1, plan.issues.join('\n'));
     assert.equal(plan.products[0]!.decoder, 'family-pending');
     assert.equal(plan.products[0]!.kind, kind);
+    const inputs = { records: [{ observation, snapshot: saved, ...plan }], services: [] };
+    assert.equal(voCandidates({ ...request, kind, time: { any: true }, angularResolutionArcsec: 1 }, inputs, []).some(candidate => candidate.action), false);
+    const exploration = explorationAnswer({ target: target.id, kind }, { ledgers: [], capabilities: [], targetCatalogue: [{ id: target.id, name: 'Betelgeuse', aliases: [] }], targetAssociations: [], bodyMaps: [], vo: inputs });
+    assert.equal(exploration.choices.length, 0);
+    assert.match(exploration.unsupported[0]!.reason, /no native qualification route/u);
   }
+});
+test('archive URLs reject local and private targets before selection', async () => {
+  for (const address of ['http://127.0.0.1/science.fits', 'http://192.168.1.9/science.fits', 'http://[::1]/science.fits', 'http://localhost/science.fits', 'http://169.254.169.254/latest'])
+    assert.throws(() => voUrl(address, 'https://example.org/'), /non-public/u);
+  assert.equal(voUrl('https://example.org/science.fits', 'https://example.org/'), 'https://example.org/science.fits');
+  const base = await almaPromise(), saved = snapshot(base), normalized = normalizeSnapshot(saved, profile, target, [target])[0]!;
+  const observation = { ...normalized, kind: 'image', target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' },
+    access: { url: 'http://127.0.0.1/science.fits', mime: 'image/fits', estimatedKilobytes: 1 } };
+  const plan = await planAccess(root, observation, saved, request);
+  assert.equal(plan.products.length, 0);
+  assert.match(plan.issues.join('\n'), /non-public/u);
+});
+test('a public transport allowlist does not authorize a redirected private address', async () => {
+  const directory = await mkdtemp(resolve(tmpdir(), 'vo-redirect-'));
+  let requests = 0;
+  const server = createServer((_req, res) => { requests++; res.writeHead(302, { Location: 'http://127.0.0.2/private' }); res.end(); });
+  await new Promise<void>(done => server.listen(0, '127.0.0.1', done));
+  const address = server.address(); if (!address || typeof address === 'string') throw new Error('No port.');
+  try {
+    await assert.rejects(astroquery({ operation: 'vo-download', url: `http://127.0.0.1:${address.port}/science`, destination: resolve(directory, 'science.fits'),
+      byteLimit: 1000, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }), /non-public/u);
+    assert.equal(requests, 1);
+    assert.deepEqual(await readdir(directory), []);
+  } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(directory, { recursive: true, force: true }); }
 });
 test('bounded transfer rejects chunked oversized and error bodies without publishing partial files', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'vo-transfer-')), fixture = await readFile(resolve(fixtures, 'eso-circle.fits'));
@@ -183,9 +215,9 @@ test('bounded transfer rejects chunked oversized and error bodies without publis
   const address = server.address(); if (!address || typeof address === 'string') throw new Error('No test server port.');
   const url = `http://127.0.0.1:${address.port}`;
   try {
-    await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/large`, destination: resolve(directory,'large.fits'), byteLimit: 1024, parameters: {} }), /byte limit/u);
-    await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/error`, destination: resolve(directory,'error.fits'), byteLimit: 1e6, parameters: {} }));
-    const result = await astroquery({ operation: 'vo-download', url: `${url}/small`, destination: resolve(directory,'small.fits'), byteLimit: 1e6, parameters: {} });
+    await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/large`, destination: resolve(directory,'large.fits'), byteLimit: 1024, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }), /byte limit/u);
+    await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/error`, destination: resolve(directory,'error.fits'), byteLimit: 1e6, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }));
+    const result = await astroquery({ operation: 'vo-download', url: `${url}/small`, destination: resolve(directory,'small.fits'), byteLimit: 1e6, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] });
     assert.equal(result.transfer!.file.bytes, 290880); assert.equal(result.transfer!.file.sha256, 'fd2a2d371e121bb50f64d781ac57b60f2f76d2c25d71f1c6a5ab9b5e262def60');
     assert.deepEqual(await readdir(directory), ['small.fits']); assert.deepEqual(requests, ['/large','/error','/small']);
   } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(directory, { recursive: true, force: true }); }
@@ -202,7 +234,7 @@ test('failed SODA requests never ask for the whole product and never publish a p
     const metadata = (await astroquery({ operation: 'vo-parse', file, url, byteLimit: 100000 })).vo!;
     const binding = metadata.bindings.find(b => b.url === url)!;
     await assert.rejects(astroquery({ operation: 'vo-download', url, destination: resolve(directory, 'science.fits'), byteLimit: 1e6,
-      descriptor: { file: metadata.raw, row: binding.row, serviceId: binding.serviceId }, parameters: { ...binding.parameters, CIRCLE: [circle.raDegrees, circle.decDegrees, circle.radiusDegrees] } }), /503/u);
+      descriptor: { file: metadata.raw, row: binding.row, serviceId: binding.serviceId }, parameters: { ...binding.parameters, CIRCLE: [circle.raDegrees, circle.decDegrees, circle.radiusDegrees] }, allowedPrivateHosts: ['127.0.0.1'] }), /503/u);
     assert.equal(requests.length, 1); assert.match(requests[0]!, /^\/soda\?/u); assert.ok(!requests.some(r => r.includes('/file') || r.includes('/parent')));
     assert.deepEqual(await readdir(directory), ['links.xml']);
   } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(directory, { recursive: true, force: true }); }
@@ -237,7 +269,7 @@ test('transfer failures distinguish authentication, no content, error payloads a
   const address = server.address(); if (!address || typeof address === 'string') throw new Error('No port.');
   try {
     for (const [path, code] of [['auth','authentication'], ['empty','no-content'], ['html','protocol'], ['broken','interrupted']]) {
-      await assert.rejects(astroquery({ operation: 'vo-download', url: `http://127.0.0.1:${address.port}/${path}`, destination: resolve(directory, `${path}.fits`), byteLimit: 100000, parameters: {} }),
+      await assert.rejects(astroquery({ operation: 'vo-download', url: `http://127.0.0.1:${address.port}/${path}`, destination: resolve(directory, `${path}.fits`), byteLimit: 100000, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }),
         error => error instanceof VoAccessError && error.code === code);
     }
     assert.deepEqual(await readdir(directory), []);

@@ -3,6 +3,7 @@ import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import { fileSize, readProductRecord, sameRun, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
@@ -104,13 +105,13 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
   });
 }
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
-export async function sourceRun(product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
+export async function sourceRun(root: string, product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
   assertPinnedLabel(product);
   const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits/fits.mts', '../../fits/fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
-  const inputs = await Promise.all(product.files.map(async file => ({ role: file.role, identity: file.origin, ...await fileSize(resolve(import.meta.dirname, '../../..', file.path)) })));
-  return { telescope: product.telescope, stage: 'source-qualification', inputs: inputs.concat(dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!}))),
+  const inputs = await Promise.all(product.files.map(async file => ({ role: file.role, identity: file.origin, ...await sha256File(inside(root, file.path)) })));
+  return { telescope: product.telescope, stage: 'source-qualification', inputs: [...inputs, ...dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!}))],
     parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: digest.digest('hex') }, { name: 'Node.js', version: process.version }] };
 }
 export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = []): Promise<LoadedSourceProduct[]> {
@@ -137,7 +138,7 @@ export async function loadSourceProducts(root: string, target: string, issues: S
     let qualified = false, receiptProblem: string | undefined;
     const savedFacts = record ? await readFile(resolve(root, `output/telescopes/${target}/${product.id}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined):undefined;
     if (record) {
-      qualified = sourceRecordComplete(record, product) && await sameRun(record, await sourceRun(product,savedFacts?.calibrationDependencies), path => inside(root, path));
+      qualified = sourceRecordComplete(record, product) && await sameRun(record, await sourceRun(root,product,savedFacts?.calibrationDependencies), path => inside(root, path));
       for (const file of product.files) {
         const pin = await fileSize(inside(root, file.path)).catch(() => null);
         qualified &&= pin !== null && record.outputs.some(output => output.path === file.path && output.bytes === pin.bytes);

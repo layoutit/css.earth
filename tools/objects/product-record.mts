@@ -3,9 +3,9 @@
  * The instruments stay different: an event list, a spectral cube, a calibrated image and a strip camera want different
  * operations, and each toolkit keeps its own. What they share is what a caller must be able to ask of any product:
  *
- * - **what went in**, exactly: every input by identity and byte count;
+ * - **what went in**, exactly: every input by identity, byte count and available content digest;
  * - **how it was made**: the stage, its parameters, and the software with the versions and toolchain pin that ran;
- * - **what came out**, exactly: every output by path and byte count, with its units and conventions;
+ * - **what came out**, exactly: every output by path, byte count and content digest, with its units and conventions;
  * - **what was checked, and what that check means**: evidence names its kind. Agreement with the archive's own product,
  *   consistency between two of our own reductions, registration against geometry and agreement with a published value
  *   establish different things, and a receipt's existence establishes none of them: evidence is resolved by the exact
@@ -16,7 +16,7 @@
  * (`sameRun`). Records hold no clock time, so the same run writes the same bytes. */
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256, sha256File } from '../../src/platform/sha256.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 
 export const PRODUCT_RECORD_SCHEMA = 'cssearth-telescope-product@1';
@@ -33,9 +33,9 @@ export const PRODUCT_RECORD_SCHEMA = 'cssearth-telescope-product@1';
 export const EVIDENCE_KINDS = ['archive-agreement', 'archive-origin', 'archive-retrieval-origin', 'archive-subset-origin', 'internal-consistency', 'geometric-registration', 'published-value'] as const;
 export type EvidenceKind = typeof EVIDENCE_KINDS[number];
 
-export interface ProductInput { readonly role: string; readonly identity: string; readonly bytes: number }
+export interface ProductInput { readonly role: string; readonly identity: string; readonly bytes: number; readonly sha256?: string }
 export interface ProductSoftware { readonly name: string; readonly version: string }
-export interface ProductOutput { readonly path: string; readonly bytes: number; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }
+export interface ProductOutput { readonly path: string; readonly bytes: number; readonly sha256?: string; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }
 export interface ProductEvidence { readonly kind: EvidenceKind; readonly receipt: string; readonly product: string; readonly establishes: string }
 /** What identifies a run: the same run makes the same outputs. */
 export interface ProductRun {
@@ -61,14 +61,22 @@ export function runDigest(run: ProductRun): string {
 export function parseProductRecord(value: unknown): ProductRecord {
   const record = requireRecord(value, 'product record');
   if (record.schema !== PRODUCT_RECORD_SCHEMA) throw new TypeError(`Unsupported product record schema ${String(record.schema)}.`);
+  const digest = (value: unknown, label: string): string | undefined => {
+    if (value === undefined) return undefined; // Historical records can be read, but cannot be reused without a digest.
+    const text = requireString(value, label);
+    if (!/^[a-f0-9]{64}$/u.test(text)) throw new TypeError(`${label} must be a SHA-256 digest.`);
+    return text;
+  };
   const sized = <T extends { bytes: number }>(entry: T, label: string) => {
     if (!Number.isSafeInteger(entry.bytes) || entry.bytes < 0) throw new TypeError(`${label} needs a byte count.`);
     return entry;
   };
-  const inputs = requireArray(record.inputs, 'inputs').map((raw, index) => { const entry = requireRecord(raw, `input ${index}`);
-    return sized({ role: requireString(entry.role, 'input role'), identity: requireString(entry.identity, 'input identity'), bytes: requireFiniteNumber(entry.bytes, 'input bytes') }, `Input ${index}`); });
-  const outputs = requireArray(record.outputs, 'outputs').map((raw, index) => { const entry = requireRecord(raw, `output ${index}`);
+  const inputs = requireArray(record.inputs, 'inputs').map((raw, index) => { const entry = requireRecord(raw, `input ${index}`), sha256 = digest(entry.sha256, 'input digest');
+    return sized({ role: requireString(entry.role, 'input role'), identity: requireString(entry.identity, 'input identity'), bytes: requireFiniteNumber(entry.bytes, 'input bytes'),
+      ...(sha256 ? { sha256 } : {}) }, `Input ${index}`); });
+  const outputs = requireArray(record.outputs, 'outputs').map((raw, index) => { const entry = requireRecord(raw, `output ${index}`), sha256 = digest(entry.sha256, 'output digest');
     return sized({ path: requireString(entry.path, 'output path'), bytes: requireFiniteNumber(entry.bytes, 'output bytes'),
+      ...(sha256 ? { sha256 } : {}),
       ...(entry.units === undefined ? {} : { units: requireString(entry.units, 'units') }),
       ...(entry.conventions === undefined ? {} : { conventions: Object.fromEntries(Object.entries(requireRecord(entry.conventions, 'conventions')).map(([key, text]) => [key, requireString(text, `convention ${key}`)])) }) }, `Output ${index}`); });
   const software = requireArray(record.software, 'software').map((raw, index) => { const entry = requireRecord(raw, `software ${index}`); return { name: requireString(entry.name, 'software name'), version: requireString(entry.version, 'software version') }; });
@@ -90,16 +98,17 @@ export async function assertInputPins(inputs: readonly ProductInput[], files: Re
   for (const input of inputs) {
     const path = files.get(input.identity);
     if (!path) throw new Error(`No file was given for the input ${input.identity} (${input.role}).`);
-    const found = await fileSize(path).catch(() => null);
+    const found = await (input.sha256 ? sha256File(path) : fileSize(path)).catch(() => null);
     if (!found) throw new Error(`The input ${input.identity} is not at ${path}.`);
-    if (found.bytes !== input.bytes) throw new Error(`${path} is not the recorded ${input.identity}: ${found.bytes} bytes, not ${input.bytes}.`);
+    if (found.bytes !== input.bytes || input.sha256 && 'sha256' in found && found.sha256 !== input.sha256)
+      throw new Error(`${path} is not the recorded ${input.identity}: byte count or SHA-256 changed.`);
   }
 }
 
 /** Write the record of a run beside its outputs. Outputs are recorded as they are on disk at this moment, by the run that made them. */
 export async function writeProductRecord(path: string, run: ProductRun, outputs: readonly { path: string; file: string; units?: string; conventions?: Readonly<Record<string, string>> }[], evidence: readonly ProductEvidence[] = []): Promise<ProductRecord> {
   const pinned: ProductOutput[] = [];
-  for (const output of outputs) pinned.push({ path: output.path, ...(await fileSize(output.file)), ...(output.units === undefined ? {} : { units: output.units }), ...(output.conventions === undefined ? {} : { conventions: output.conventions }) });
+  for (const output of outputs) pinned.push({ path: output.path, ...(await sha256File(output.file)), ...(output.units === undefined ? {} : { units: output.units }), ...(output.conventions === undefined ? {} : { conventions: output.conventions }) });
   const record = parseProductRecord({ schema: PRODUCT_RECORD_SCHEMA, ...run, outputs: pinned, evidence });
   await writeFile(path, `${JSON.stringify(record, null, 2)}\n`);
   return record;
@@ -113,8 +122,9 @@ export const readProductRecord = async (path: string): Promise<ProductRecord | n
 export async function sameRun(record: ProductRecord | null, run: ProductRun, locate: (path: string) => string): Promise<boolean> {
   if (!record || runDigest(record) !== runDigest(run)) return false;
   for (const output of record.outputs) {
-    const found = await fileSize(locate(output.path)).catch(() => null);
-    if (!found || found.bytes !== output.bytes) return false;
+    if (!output.sha256) return false;
+    const found = await sha256File(locate(output.path)).catch(() => null);
+    if (!found || found.bytes !== output.bytes || found.sha256 !== output.sha256) return false;
   }
   return true;
 }

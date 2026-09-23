@@ -7,14 +7,16 @@ import { rememberQualification, type QualifiedObservation } from '../qualified-o
 import { readProductRecord, fileSize, writeProductRecord, type ProductRun } from '../../product-record.mts';
 import { digest } from './contracts.mts';
 import { acquireVoProduct, type AcquisitionSpec } from './access.mts';
+import type { VoNetworkPolicy } from './network-policy.mts';
 
-export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Promise<QualifiedObservation> {
+export async function qualifyVoProduct(root: string, spec: AcquisitionSpec, policy: VoNetworkPolicy = {}): Promise<QualifiedObservation> {
   const inField = spec.observation.target.status === 'in-field';
   if (spec.observation.target.status !== 'confirmed' && !inField || spec.observation.target.target !== spec.request.target || typeof spec.observation.rawTarget !== 'string')
     throw new Error('The selected archive record does not establish the requested target.');
   const circle = spec.request.region ?? spec.request.footprint;
   if (inField && !circle) throw new Error('An in-field archive record is qualified only against the circle that selected it.');
-  const acquired = await acquireVoProduct(root, spec), outputRoot = dirname(acquired.record), acquisition = await readProductRecord(acquired.record);
+  if (spec.decoder !== 'fits-raster') throw new Error(`Archive ${spec.kind} is discoverable but has no native qualification route.`);
+  const acquired = await acquireVoProduct(root, spec, policy), outputRoot = dirname(acquired.record), acquisition = await readProductRecord(acquired.record);
   if (!acquisition) throw new Error('Acquisition record is missing.');
   const content = JSON.parse(await readFile(resolve(outputRoot, 'content.json'), 'utf8')) as { schema?: unknown; archiveProposal?: { kind?: unknown; decoder?: unknown }; legacyRasterMember?: unknown; members?: readonly { member?: unknown; profile?: unknown; state?: unknown; reason?: unknown }[] };
   const legacyContent = content.schema === 'cssearth-vo-content@1';

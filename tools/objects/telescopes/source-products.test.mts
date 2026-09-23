@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { card, imageFixture } from '../../../tests/fixtures/fits/helpers.mts';
-import { parseSourceProducts, loadSourceProducts, SOURCE_PRODUCTS_SCHEMA } from './source-products.mts';
+import { parseSourceProducts, loadSourceProducts, sourceRun, SOURCE_PRODUCTS_SCHEMA } from './source-products.mts';
 import { qualifySourceProduct, inspectFits, assertPdsDependencies } from './qualify-source.mts';
 import { queryCapabilities, selectObservation, type CapabilityRequest, type QueryInputs } from './query.mts';
 import { assessRequest } from './request-satisfaction.mts';
@@ -23,6 +23,9 @@ const fixture = async () => {
 const queryInputs = async (root: string): Promise<QueryInputs> => ({ ledgers: [], capabilities: [], targetCatalogue: [{ id: 'test-body', name: 'Test Body', aliases: [] }], targetAssociations: [], bodyMaps: [], sourceProducts: await loadSourceProducts(root, 'test-body') });
 test('a new telescope and target need no query registry change: actions, exact qualification and honest satisfaction', async () => {
   const f = await fixture(); try {
+    const pinnedRun = await sourceRun(f.root, f.product);
+    assert.equal(pinnedRun.inputs[0]!.bytes, f.bytes.length);
+    assert.match(pinnedRun.inputs[0]!.sha256!, /^[a-f0-9]{64}$/u);
     const before = queryCapabilities(request, await queryInputs(f.root)), candidate = before.candidates[0]!;
     assert.equal(candidate.selectionAssessment.qualificationActions[0]!.configuration.kind, 'source-product');
     assert.equal(candidate.toolkitSupport.level, 'tool-without-checked-program');
@@ -43,7 +46,7 @@ test('a new telescope and target need no query registry change: actions, exact q
     // Inputs are checked before a reuse shortcut.
     await writeFile(resolve(f.source, 'image.fits'), Buffer.alloc(f.bytes.length));
     assert.equal((await loadSourceProducts(f.root, 'test-body'))[0]!.qualified, false);
-    await assert.rejects(qualifySourceProduct(f.root, f.product), /manifest pin/);
+    await assert.rejects(qualifySourceProduct(f.root, f.product), /Invalid FITS header/u);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
 test('request satisfaction uses one product, preserves spectral gaps, and separates missing science from valid bytes', () => {
