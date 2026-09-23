@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hr-8799-d",
+  "card": {
+    "text": "Giant planet 27 au from HR 8799, photographed directly in 2008.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0811-2606",
+        "url": "https://arxiv.org/abs/0811.2606",
+        "label": "Marois et al. 2008",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "High-contrast observations with the Keck and Gemini telescopes have revealed three planets orbiting the star HR 8799"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HR 8799 d is a young gas giant of about 9.2 Jupiter masses, 27 au from its star. One orbit takes about 112 years, near a 2:1 resonance with its neighbours.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0811-2606",
+        "url": "https://arxiv.org/abs/0811.2606",
+        "label": "Marois et al. 2008",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "High-contrast observations with the Keck and Gemini telescopes have revealed three planets orbiting the star HR 8799"
+      },
+      {
+        "catalogueId": "arxiv-2207-10684",
+        "url": "https://arxiv.org/abs/2207.10684",
+        "label": "Zurlo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "periods very close to the 2:1 resonance"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "JWST infrared colour",
+      "detail": "Measured, false colour",
+      "summary": "Its 4.1 to 4.6 µm brightness from JWST as blue, green and red, on one scale with its siblings. One colour, not a map."
+    }
+  }
+}

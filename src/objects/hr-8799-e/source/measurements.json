@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hr-8799-e",
+  "radiusKm": 80071,
+  "radiusSource": "Radius 1.12 +0.05/-0.05 Jupiter radii: the Bayesian model average of the GRAVITY and archival-spectrum retrievals of Nasedkin et al. (2024, A&A 687, A298; arXiv:2404.03776), Table 4, constrained by the dynamical mass of Zurlo et al. (2022) as a prior: 80,071 km at 71,492 km per Jupiter radius. A model radius fitted to the spectrum, not a measured diameter: the planet is unresolved. GM from the dynamical mass 7.41 Jupiter masses of Zurlo et al. (2022, A&A 666, A133, Table 3 model 1) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 19497.6,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the semi-major axis below and the fitted masses of Zurlo et al. (2022, Table 3 model 1): the star 1.47 and this planet 7.41 Jupiter masses, 19497.6 d.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius. No image, map or oblateness of HR 8799 e is measured; its colour is its whole-disc infrared photometry (photometry/jwst-nircam-band-color.json)."
+  },
+  "effectiveTemperatureK": 1161,
+  "effectiveTemperatureSource": "1161 K (+33/-34), the Bayesian model average of the GRAVITY and archival-spectrum retrievals, Nasedkin et al. (2024, A&A 687, A298; arXiv:2404.03776), Table 4. The planet is self-luminous: its light is its own heat (Nasedkin et al. 2024, abstract; Marois et al. 2010, abstract).",
+  "semiMajorAxisSource": "Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. a 16.1458 au at their parallax, kept as the angular size 394.96 mas and placed at the Gaia DR3 distance: 2309.7 radii of the star's 1,045,756 km; inclination 26.8734 degrees.",
+  "massSource": "Radius 1.12 +0.05/-0.05 Jupiter radii: the Bayesian model average of the GRAVITY and archival-spectrum retrievals of Nasedkin et al. (2024, A&A 687, A298; arXiv:2404.03776), Table 4, constrained by the dynamical mass of Zurlo et al. (2022) as a prior: 80,071 km at 71,492 km per Jupiter radius. A model radius fitted to the spectrum, not a measured diameter: the planet is unresolved. GM from the dynamical mass 7.41 Jupiter masses of Zurlo et al. (2022, A&A 666, A133, Table 3 model 1) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured."
+}

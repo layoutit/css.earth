@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hr-8799",
+  "angularDiameterMas": 0.342,
+  "angularDiameterSource": "Limb-darkened angular diameter 0.342 +/- 0.008 mas from the CHARA Array in the K band, Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556), abstract; at the Gaia DR3 distance it is the radius of the astronomy record, 1,045,756 km.",
+  "distanceParsecs": 40.879813,
+  "distanceSource": "Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1): parallax 24.461952 +/- 0.045453 mas, inverted to 40.8798 pc. Zurlo et al. (2022) fit at 24.525662 mas, so the orbits below keep their angular size and are placed at this distance.",
+  "radiusKm": 1045756.14,
+  "radiusSource": "Radius: the CHARA Array limb-darkened angular diameter 0.342 +/- 0.008 mas of Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556) at the Gaia DR3 distance 40.8798 pc: 1,045,756 km, 1.5032 solar radii at 695700 km per solar radius (Baines et al. give 1.44 +/- 0.06 solar radii from the same diameter at the Hipparcos parallax of their time). GM from the stellar mass 1.47 solar masses that Zurlo et al. (2022, A&A 666, A133) adopt for the four-planet fit these orbits come from, times the JPL solar GM 132712440041.93938 km^3/s^2; Baines et al. derive 1.516 +0.038/-0.024 solar masses from the same diameter. presentationUp: the display axis (celestial north at the star) is up; the star's spin axis has no measured direction on the sky (Wright et al. 2011 constrain only its inclination, from asteroseismology).",
+  "effectiveTemperatureK": 7193,
+  "effectiveTemperatureSource": "Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556): effective temperature 7193 +/- 87 K from the CHARA limb-darkened diameter and bolometric flux, https://arxiv.org/abs/1210.0556",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."
+  }
+}

@@ -6,7 +6,7 @@ export const SRGB_REFERENCE = 'https://registry.color.org/rgb-registry/files/sRG
 
 export interface BandColorDisplay {
   readonly kind: 'band-composite';
-  readonly inputQuantity: 'radiance-factor' | 'derived-band-value' | 'radiance';
+  readonly inputQuantity: 'radiance-factor' | 'derived-band-value' | 'radiance' | 'flux-density';
   readonly bands: readonly string[];
   readonly displayRange: readonly [number, number];
   readonly outputEncoding: 'srgb';

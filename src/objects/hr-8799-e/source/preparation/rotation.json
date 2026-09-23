@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 149.82305681810772,
+  "declinationDegrees": -43.98885586176723,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No rotation period or spin axis of HR 8799 e is measured in the papers this package cites (Marois et al. 2008 and 2010, Zurlo et al. 2022, Nasedkin et al. 2024, Balmer et al. 2025). The display axis is the normal of its hosted orbit in packages/astronomy/data/bodies/hr-8799-e.json, computed by hostedKeplerElements in @cssearth/astronomy; the meridian is set so that grid longitude 0 faces the Sun and Earth at the scene epoch.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis, the orbit normal; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement: the spin axis, spin sense, period and prime meridian of HR 8799 e are unmeasured; the axis shown is its orbit normal."
+}

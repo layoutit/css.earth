@@ -108,7 +108,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             // Absent kind keeps the static-observation contract; other kinds are validated by their decoder owners in tools.
             if (science.kind !== undefined) text(science.kind, 'surface.science.kind');
             const validity = science.validity === undefined ? undefined : record(science.validity, 'surface.science.validity');
-            if ((science.kind === 'terrestrial-observed-color' || validity?.kind === 'pds4-float-rgb') && !surface.falseColor)
+            if ((science.kind === 'terrestrial-observed-color' || science.kind === 'disc-integrated-band-color' || validity?.kind === 'pds4-float-rgb') && !surface.falseColor)
                 throw new TypeError('Measured band composites must declare falseColor; display encoding does not establish natural color.');
         }
         if (surface.thumbnailCenterLongitudeDegrees !== undefined) {

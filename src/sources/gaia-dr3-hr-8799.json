@@ -1,0 +1,49 @@
+{
+  "id": "gaia-dr3-hr-8799",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 gaia_source row for HR 8799 (source_id 2832463659640297472)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "2832463659640297472"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "label": "Gaia Collaboration (2023), Gaia DR3 summary"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20ref_epoch%2C%20ra%2C%20dec%2C%20parallax%2C%20parallax_error%2C%20pmra%2C%20pmdec%2C%20radial_velocity%2C%20radial_velocity_error%2C%20phot_g_mean_mag%2C%20ruwe%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%202832463659640297472",
+      "checkedOn": "2026-09-23",
+      "locator": "gaiadr3.gaia_source at epoch 2016.0: ra 346.87016480276117, dec 21.134030591019936, parallax 24.461951706516086 +/- 0.045453273 mas, pmra 108.28364808923558, pmdec -50.04016524335864 mas/yr, radial_velocity -10.412238 +/- 0.22707531 km/s, G 5.9107, RUWE 1.474"
+    },
+    {
+      "path": "src/objects/hr-8799/text.json",
+      "locator": "/introduction/sources/2"
+    },
+    {
+      "path": "src/objects/hr-8799/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC).",
+      "scope": "citation",
+      "evidence": "src/objects/hr-8799/text.json#/introduction/sources/2"
+    }
+  ],
+  "publisher": "European Space Agency"
+}

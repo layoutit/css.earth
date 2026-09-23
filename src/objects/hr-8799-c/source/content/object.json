@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hr-8799-c",
+  "displayName": "HR 8799 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.10 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "arxiv-2404-03776",
+          "url": "https://arxiv.org/abs/2404.03776",
+          "label": "Nasedkin et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "About 217 years",
+        "source": {
+          "catalogueId": "arxiv-2207-10684",
+          "url": "https://arxiv.org/abs/2207.10684",
+          "label": "Zurlo et al. 2022",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its star",
+        "value": "41 au",
+        "source": {
+          "catalogueId": "arxiv-2207-10684",
+          "url": "https://arxiv.org/abs/2207.10684",
+          "label": "Zurlo et al. 2022",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "7.8 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2207-10684",
+          "url": "https://arxiv.org/abs/2207.10684",
+          "label": "Zurlo et al. 2022",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "temperature",
+        "label": "Temperature",
+        "value": "1,159 K",
+        "source": {
+          "catalogueId": "arxiv-2404-03776",
+          "url": "https://arxiv.org/abs/2404.03776",
+          "label": "Nasedkin et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "NIRCam",
+        "qualification": "Infrared false colour of the whole disc from published JWST photometry; not a natural colour and not a map.",
+        "thumbnail": "hr-8799-c-lens-color.webp",
+        "surface": "hr-8799-c-surface-color@2x.webp",
+        "poles": "hr-8799-c-poles-color@2x.webp",
+        "source": {
+          "id": "hr-8799-c-jwst-nircam-band-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2503.13608"
+        },
+        "falseColor": true,
+        "notes": "Red, green and blue are the planet's brightness at 4.6, 4.3 and 4.1 micrometres measured by JWST (Balmer et al. 2025), on one scale shared with its three siblings. The planet is a point in every image, so this is one colour for the whole disc, not a map. It glows with its own heat."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Marois et al. (2008), Science 322, 1348",
+      "href": "https://arxiv.org/abs/0811.2606"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/0811.2606",
+      "credit": "Marois et al. (2008), Science 322, 1348"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hr-8799-c.json",
+      "credit": "Model radius, Nasedkin et al. (2024), A&A 687, A298; dynamical mass and imaged orbit, Zurlo et al. (2022), A&A 666, A133"
+    }
+  }
+}
