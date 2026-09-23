@@ -15,7 +15,7 @@ import{describeCompound}from'./families/f18-compound.mts';
 import{readTessLightCurve}from'../eclipse-map/transit-limb-darkening.mts';
 import{describeDelayDoppler}from'./families/f15-radar.mts';
 import{describeOifits}from'./families/f12-oifits.mts';
-import{describeSpatialPhysicalObject}from'./families/f16-spatial-physical.mts';
+import{describeSpatialPhysicalObject}from'./families/f16/f16-spatial-physical.mts';
 import{describeUvfitsVisibility}from'./families/f11-measurement-set.mts';
 import{executeFamilyOperation,executableFamilyOperations}from'./family-operation.mts';
 import{listArtifactOutputs}from'./artifact-outputs.mts';

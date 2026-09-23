@@ -92,7 +92,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
       bindNativeViewForms(document, window);
-      import("../scene-router.mts").catch(error => {
+      import("../scene/scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         delete document.documentElement.dataset.shellContext;
         console.error('The interactive scene could not load.', error);

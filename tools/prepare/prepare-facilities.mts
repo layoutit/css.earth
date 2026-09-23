@@ -32,7 +32,7 @@ export const explorationCompilerClosure = [
   'tools/prepare/prepare-facilities.mts', 'tools/sources/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/prepare/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare/prepare-catalog.mts',
-  'site/prepared-focus-object.mts', 'site/navigation-distance.mts', 'tools/prepare/prepare-navigation-destinations.mts',
+  'site/prepared-focus-object.mts', 'site/navigation/navigation-distance.mts', 'tools/prepare/prepare-navigation-destinations.mts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
   'site/source/agency-logos.json', 'tools/sources/read-source-catalogue.mts',

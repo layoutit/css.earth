@@ -101,6 +101,9 @@ export interface DiscoverySnapshot {
   readonly schema: 'cssearth-vo-discovery@1'; readonly service: string; readonly table: string; readonly model: 'obscore-1.1' | 'epn-tap-2.0';
   readonly request: Json; readonly query: string; readonly scope: string; readonly sampleLimit: number;
   readonly response: MetadataResponse;
+  /** A bounded MAST positional search that selected exact ObsCore observation ids. */
+  readonly spatialSelection?: { readonly method: 'mast-filtered-position@1'; readonly region: IcrsCircle; readonly collection: string;
+    readonly ids: readonly string[]; readonly complete: boolean; readonly pin: Pin };
   /** Query completion is distinct from a complete archive inventory. */
   readonly completeness: 'bounded-sample' | 'overflow' | 'failed';
 }

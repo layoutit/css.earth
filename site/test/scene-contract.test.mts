@@ -4,7 +4,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from "node:fs/promises";
 
-import { requireObjectControls } from "../scene-contract.mts";
+import { requireObjectControls } from "../scene/scene-contract.mts";
 import { SCENE_OBJECTS } from "../objects.mts";
 
 import { parse, object, array, string, optional, boolean } from '../../tools/objects/material-composition/data-schema.mts';
