@@ -1,0 +1,36 @@
+{
+ "id": "pds-70-b",
+ "classification": "exoplanet",
+ "order": 1710,
+ "physical": {
+  "name": "PDS 70 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 140124.3,
+  "gravitationalParameterKm3PerS2": 177361144.66,
+  "parent": "pds-70"
+ },
+ "physicalNotes": "Radius 1.96 +0.20/-0.17 Jupiter radii and 1,392 K from the atmospheric fit with the highest evidence in Wang et al. (2021, AJ 161, 148; arXiv:2101.04187), Table 4: BT-SETTL with ISM extinction and a second blackbody (Bayes factor 147 against a blackbody): 140,124 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved, and the paper's other fits give 1.3 to 3.6. GM from the dynamical mass 1.4 +2.1/-1.0 Jupiter masses of Trevascus et al. (2025, Table 3, \"Stable (incl. N-body)\"), times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 35230.8,
+  "semiMajorAxisStellarRadii": 3532.67,
+  "inclinationDegrees": 130.6,
+  "eccentricity": 0.16,
+  "argumentOfPeriapsisDegrees": 10,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 71355.9,
+  "ascendingNodePositionAngleDegrees": 176,
+  "prediction": {
+   "tool": "whereistheplanet",
+   "planet": "pds70b",
+   "reference": "whereistheplanet distributes the Wang et al. (2021) GRAVITY orbit posterior for PDS 70 b and c."
+  },
+  "sources": {
+   "period": "Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 3, the \"Stable (incl. N-body)\" column: the posterior medians of the orbitize! fit to all published astrometry of b and c, including their new VLTI/GRAVITY epochs, keeping only orbits that do not cross and stay stable in N-body integration. Period from a^3 = (M* + M_planet) P^2 with the column's own stellar mass 0.952 M_sun and planet mass. Period 96.5 years.",
+   "shape": "Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 3, the \"Stable (incl. N-body)\" column: the posterior medians of the orbitize! fit to all published astrometry of b and c, including their new VLTI/GRAVITY epochs, keeping only orbits that do not cross and stay stable in N-body integration. Period from a^3 = (M* + M_planet) P^2 with the column's own stellar mass 0.952 M_sun and planet mass. a 20.7 au at the fit's parallax; inclination 130.6 degrees (above 90: clockwise on the sky).",
+   "eccentricity": "Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 3, the \"Stable (incl. N-body)\" column: the posterior medians of the orbitize! fit to all published astrometry of b and c, including their new VLTI/GRAVITY epochs, keeping only orbits that do not cross and stay stable in N-body integration. Period from a^3 = (M* + M_planet) P^2 with the column's own stellar mass 0.952 M_sun and planet mass. e 0.16.",
+   "argumentOfPeriapsis": "Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 3, the \"Stable (incl. N-body)\" column: the posterior medians of the orbitize! fit to all published astrometry of b and c, including their new VLTI/GRAVITY epochs, keeping only orbits that do not cross and stay stable in N-body integration. Period from a^3 = (M* + M_planet) P^2 with the column's own stellar mass 0.952 M_sun and planet mass. omega 190 degrees, the planet's argument of periastron; stored as the star's, 10 degrees.",
+   "phase": "Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 3, the \"Stable (incl. N-body)\" column: the posterior medians of the orbitize! fit to all published astrometry of b and c, including their new VLTI/GRAVITY epochs, keeping only orbits that do not cross and stay stable in N-body integration. Period from a^3 = (M* + M_planet) P^2 with the column's own stellar mass 0.952 M_sun and planet mass. tau 0.355, the fraction of a period after MJD 58849 at which periastron falls: MJD 71355.9 (taken as BMJD_TDB).",
+   "orientation": "Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 3, the \"Stable (incl. N-body)\" column: the posterior medians of the orbitize! fit to all published astrometry of b and c, including their new VLTI/GRAVITY epochs, keeping only orbits that do not cross and stay stable in N-body integration. Period from a^3 = (M* + M_planet) P^2 with the column's own stellar mass 0.952 M_sun and planet mass. Omega 176 degrees east of north."
+  }
+ }
+}

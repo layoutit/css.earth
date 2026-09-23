@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "pds-70",
+  "entries": [
+    {
+      "id": "star-colour-spectrum",
+      "subject": "Which measured spectrum gives the star its colour",
+      "status": "included",
+      "finding": "Gaia DR3 publishes no BP/RP spectrum of this star (has_xp_continuous and has_xp_sampled are both false). ESO holds 12 X-shooter spectra from the PENELLOPE programme 105.205R.001, two nights with a 5 arcsecond wide-slit exposure for absolute flux calibration. On 2020-12-26 (ADP.2021-01-11T12:58:23.979 and .935) the UVB and VIS arms agree to 2.3% within 5 nm of the 545 nm join; that night is drawn, #ffcb9b. On 2021-03-08 the arms differ by 15.8% at the join, and the reader refuses it, so there is no cross-check. A 3,972 K blackbody gives #ffd3a4, a little less red; K2-18 (3,457 K) is #ffc796.",
+      "evidence": [
+        "https://archive.eso.org/",
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "orbit-column-and-near-side",
+      "subject": "Which published orbit the planets follow, and which half of each orbit is nearer",
+      "status": "included",
+      "finding": "Trevascus et al. (2025) Table 3 gives three columns. Scored against their eight GRAVITY positions (Table 2), the \"Stable (incl. N-body)\" medians miss by 4.2 mas RMS (b 11.6 mas at its one epoch, c within 1.2 mas at all seven); the coplanar and stable columns give 4.7 (b within 1.5 and 2.3 mas, c 5.4 and 5.2 mas off). The N-body column is drawn. Astrometry cannot say which half of an orbit is nearer; as published, both orbits put their near halves west (position angles 252 and 249 degrees), the side of the disc Keppler et al. (2018) find nearer, and both run clockwise like the disc. packages/astronomy/src/hostedOrbits.test.ts checks all of it.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.11210",
+        "https://arxiv.org/abs/1806.11568"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "planet-d-candidate",
+      "subject": "The proposed third planet, PDS 70 d",
+      "status": "excluded",
+      "finding": "Hammond et al. (2025) propose a compact source orbiting inside b as a third planet; Trevascus et al. (2025) find that including it makes their fitted system unstable, and Balsalobre-Ruza et al. (2026) discuss it as trojan material or inner-disc structure. It is not added as a planet.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.11127",
+        "https://arxiv.org/abs/2504.11210",
+        "https://arxiv.org/abs/2606.26381"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

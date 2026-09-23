@@ -16,7 +16,7 @@ import { requireArray, requireRecord, requireString } from '../../../sources/sou
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
 /** Stars whose default lens is the measured-spectrum colour: marker, catalogue and surface colours. */
 export const SPECTRUM_STARS = ['sirius', 'vega', 'hd-209458', 'arcturus', 'altair', 'deneb', 'fomalhaut', 'rigel', 'alpha-centauri-a', 'alpha-centauri-b',
-  'aldebaran', 'kepler-186', 'kepler-452', 'wasp-39', 'polaris', 'proxima-centauri', 'k2-18', 'regulus', 'alderamin', 'rasalhague', 'caph', 'beta-pictoris'] as const;
+  'aldebaran', 'kepler-186', 'kepler-452', 'wasp-39', 'polaris', 'proxima-centauri', 'k2-18', 'regulus', 'alderamin', 'rasalhague', 'caph', 'beta-pictoris', 'pds-70'] as const;
 /** Stars with an image lens and a measured-spectrum colour lens beside it: the catalogue and surface colours follow the spectrum, and
  * the marker stays the image. */
 export const IMAGE_STARS = ['pi1-gruis', 'betelgeuse', 'r-doradus', 'ce-tauri'] as const;

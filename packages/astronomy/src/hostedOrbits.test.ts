@@ -24,9 +24,9 @@ describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
-    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
+    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'pds-70-b', 'pds-70-c', ...trappist, 'wasp-39b', 'wasp-43b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b'])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'pds-70-b', 'pds-70-c'])
     for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
@@ -232,6 +232,47 @@ describe('hosted orbits', () => {
     for (const [date, measured, sigma] of [['2023-11-21', 1.72, 1.99], ['2024-12-01', 4.24, 2.01], ['2025-02-03', 2.75, 2.9], ['2025-09-11', 4.12, 0.9]] as const) {
       const velocity = dot(hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, mjdOf(date)).velocityKmPerDay, sight) / 86400
       expect(Math.abs(velocity - measured), date).toBeLessThan(2 * sigma)
+    }
+  })
+  it('places PDS 70 b and c where GRAVITY measured them, on orbits whose near side is the disc\'s', () => {
+    // Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 2: VLTI/GRAVITY (MJD, dRA, dDec) in mas, errors 0.08 to 1.0 mas.
+    const star = starAstrometry('pds-70'), radiusKm = BODIES['pds-70'].meanRadiusKm
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+    const distanceKm = star.distanceParsecs * PARSEC_KM
+    const skyMas = (id: 'pds-70-b' | 'pds-70-c', mjd: number) => {
+      const p = hostedOrbitStateRelativeBmjdTdb(hostedOrbit(id), star, radiusKm, mjd).positionKm
+      return [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000) as [number, number]
+    }
+    const gravity = {
+      'pds-70-b': [[59631.28, 111.14, -115.78]],
+      'pds-70-c': [[59222.34, -212.88, 19.32], [59301.24, -212.88, 17.85], [59302.25, -212.83, 17.67], [59307.23, -212.88, 17.55], [59363.10, -212.58, 16.27], [59365.03, -212.32, 16.15], [59631.28, -211.75, 10.04]],
+    } as const
+    const misses: Record<string, number> = {}
+    for (const [id, points] of Object.entries(gravity) as [keyof typeof gravity, readonly (readonly [number, number, number])[]][]) {
+      let worst = 0
+      for (const [mjd, dra, ddec] of points) { const [x, y] = skyMas(id, mjd); worst = Math.max(worst, Math.hypot(x - dra, y - ddec)) }
+      misses[id] = worst
+    }
+    // The posterior medians of the "Stable (incl. N-body)" column. Measured 2026-09-23: b 11.6 mas from its one GRAVITY epoch, c within 1.2 mas
+    // of all seven, against orbits 370 and 600 mas across. Of the paper's three columns this one has the smallest summed miss over the eight
+    // points (4.2 mas RMS; the coplanar and stable columns give 4.7, with b within 1.5 and 2.3 mas but c 5.4 and 5.2 mas off).
+    expect(misses['pds-70-b']).toBeLessThan(12)
+    expect(misses['pds-70-c']).toBeLessThan(2)
+    // Keppler et al. (2018, A&A 617, A44), section 3.3: the disc's west side is its near side; the planets move clockwise, the disc's own
+    // sense of rotation (their section 5). Astrometry alone cannot say which half of an orbit is nearer; the published orbits put it west too.
+    for (const id of ['pds-70-b', 'pds-70-c'] as const) {
+      const orbit = hostedOrbit(id), period = orbit.periodDays
+      let nearest = { toward: -Infinity, pa: 0 }
+      for (let k = 0; k < 360; k++) {
+        const p = hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, 59631.28 + period * k / 360).positionKm
+        const toward = -dot(p, sight)
+        if (toward > nearest.toward) nearest = { toward, pa: ((Math.atan2(dot(p, east), dot(p, north)) * 180 / Math.PI) + 360) % 360 }
+      }
+      expect(nearest.pa, `${id} near side`).toBeGreaterThan(180)
+      expect(nearest.pa, `${id} near side`).toBeLessThan(340)
+      const [x0, y0] = skyMas(id, 59631.28), [x1, y1] = skyMas(id, 59631.28 + 365)
+      // Clockwise on the sky is position angle decreasing, a positive cross product in (east, north).
+      expect(x0 * y1 - y0 * x1, `${id} clockwise`).toBeGreaterThan(0)
     }
   })
   it('rejects incomplete or non-finite eccentric inputs', () => {

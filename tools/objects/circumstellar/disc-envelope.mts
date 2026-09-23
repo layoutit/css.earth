@@ -32,6 +32,9 @@ export interface SkyPlaneRequest {
   readonly halfUnits: number; readonly size: number;
   /** Where the sky is empty: the annulus about the star, in arcseconds, whose median is the background and whose scatter is the noise. */
   readonly backgroundAnnulusArcsec: readonly [number, number];
+  /** Where the image is: the SCI extension of a JWST or HST product (the default), or the primary HDU of an archive image such as an
+   * ALMA pipeline product. */
+  readonly imageHdu?: 'SCI' | 'primary';
 }
 export interface SkyPlane {
   readonly size: number; readonly halfUnits: number; readonly step: number;
@@ -48,8 +51,8 @@ const quantile = (sorted: ArrayLike<number>, q: number) => sorted[Math.min(sorte
 export async function readSkyPlane(mosaic: string, request: SkyPlaneRequest): Promise<SkyPlane> {
   const { size, halfUnits, arcsecPerUnit } = request;
   if (!(size >= 16 && Number.isInteger(size)) || !(halfUnits > 0) || !(arcsecPerUnit > 0)) throw new RangeError('Invalid sky plane request.');
-  const hdus = await readFitsFileHdus(mosaic), sci = hdus.find(hdu => hdu.header.EXTNAME === 'SCI');
-  if (!sci) throw new Error(`${mosaic} has no SCI extension.`);
+  const hdus = await readFitsFileHdus(mosaic), sci = request.imageHdu === 'primary' ? hdus[0] : hdus.find(hdu => hdu.header.EXTNAME === 'SCI');
+  if (!sci) throw new Error(`${mosaic} has no ${request.imageHdu === 'primary' ? 'primary HDU' : 'SCI extension'}.`);
   const [width, height] = sci.dimensions as [number, number];
   const { values } = await readFitsFileRegion(mosaic, sci, { x0: 0, y0: 0, width, height }, 1024 ** 3);
   const projection = skyProjection(sci.header), star = projection.pixelOf(request.starRaDeg, request.starDecDeg);

@@ -144,9 +144,9 @@ const HOSTS: Record<string, string> = { heliosphere: 'sun' };
 // Prepared helper surfaces can have their own documentation without becoming
 // destinations in the Atlas/application navigation. Each one is a prepared
 // volume or surface that belongs to a body already in the tree: the Sun's
-// heliopause and coronal density, Betelgeuse's circumstellar shells, and the
-// HD 181327 debris ring.
-const NAVIGATION_HIDDEN = new Set(['heliosphere', 'sun-cor1-density', 'betelgeuse-shell', 'hd-181327-disc']);
+// heliopause and coronal density, Betelgeuse's circumstellar shells, the
+// HD 181327 debris ring and the PDS 70 dust ring.
+const NAVIGATION_HIDDEN = new Set(['heliosphere', 'sun-cor1-density', 'betelgeuse-shell', 'hd-181327-disc', 'pds-70-disc']);
 
 /** One object and the satellites that orbit it. */
 export interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }

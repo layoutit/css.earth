@@ -20,7 +20,7 @@ const angle = (a: number, b: number) => ((b - a + 540) % 360) - 180;
 
 for (const [name, raw] of Object.entries(fixture.cases)) {
   if (name === 'region' || name === 'refused') continue;
-  test(`Astropy TAN projection: ${name}`, () => {
+  test(`Astropy TAN or SIN projection: ${name}`, () => {
     const entry = requireRecord(raw), header = headers.get(name);
     assert.ok(header, `${name} has an extension`);
     const projection = skyProjection(header);
@@ -37,11 +37,11 @@ for (const [name, raw] of Object.entries(fixture.cases)) {
   });
 }
 
-test('distortion, non-TAN projections and other frames are refused', () => {
+test('distortion, slant SIN, other projections and other frames are refused', () => {
   for (const name of requireArray(fixture.cases.refused).map(value => requireString(value))) {
     const header = headers.get(name);
     assert.ok(header, `${name} has an extension`);
-    assert.throws(() => skyProjection(header), /distortion|RA---TAN|not ICRS/u, name);
+    assert.throws(() => skyProjection(header), /distortion|RA---TAN|not ICRS|slant SIN/u, name);
   }
 });
 

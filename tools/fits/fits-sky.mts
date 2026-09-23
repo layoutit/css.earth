@@ -90,8 +90,8 @@ export function skyDisplayRaster<T extends Float32Array | Float64Array>(values: 
   return out;
 }
 
-/** A gnomonic (TAN) sky image's pixel <-> ICRS mapping, rotated or not: what an archive mosaic needs to be resampled onto another
- * grid. Distortion terms (SIP, TPV, PV cards) are refused, as is a LONPOLE other than 180 or a frame other than ICRS or FK5.
+/** A gnomonic (TAN) or orthographic (SIN) sky image's pixel <-> ICRS mapping, rotated or not: what an archive mosaic needs to be resampled onto another
+ * grid. Distortion terms (SIP, TPV, PV cards other than a plain SIN's zero PV2_1 and PV2_2) are refused, as is a LONPOLE other than 180 or a frame other than ICRS or FK5.
  * Pixels are zero-based (the centre of the first stored pixel is 0, 0). tools/oracles/fits/sky-projection.py checks both
  * directions against Astropy's all_world2pix and all_pix2world. */
 export interface SkyProjection {
@@ -103,11 +103,17 @@ export interface SkyProjection {
   readonly scaleArcsec: number;
 }
 export function skyProjection(header: FitsHeader): SkyProjection {
-  if (text(header, 'CTYPE1') !== 'RA---TAN' || text(header, 'CTYPE2') !== 'DEC--TAN') throw new TypeError('A sky projection needs RA---TAN and DEC--TAN axes.');
+  // TAN (gnomonic) or SIN (orthographic, as radio interferometers write their images): both zenithal about the reference point,
+  // the standard coordinates divided by the direction's height above the tangent plane for TAN and not for SIN.
+  const kind = text(header, 'CTYPE1') === 'RA---TAN' && text(header, 'CTYPE2') === 'DEC--TAN' ? 'TAN' : text(header, 'CTYPE1') === 'RA---SIN' && text(header, 'CTYPE2') === 'DEC--SIN' ? 'SIN' : undefined;
+  if (!kind) throw new TypeError('A sky projection needs RA---TAN and DEC--TAN axes, or RA---SIN and DEC--SIN.');
+  // A SIN header may carry PV2_1 and PV2_2 = 0, the plain orthographic projection; anything else is the slant form, not applied here.
+  const pv = Object.keys(header).filter(key => /^PV\d+_\d+$/u.test(key));
+  if (kind === 'SIN' && pv.some(key => !/^PV2_[12]$/u.test(key) || numberOf(header, key) !== 0)) throw new TypeError('A slant SIN projection (PV2_1 or PV2_2 not zero) is a distortion this projection does not apply.');
   if (numberOf(header, 'LONPOLE', 180) !== 180) throw new TypeError('A sky image with a LONPOLE other than 180 is not supported.');
   const frame = text(header, 'RADESYS');
   if (frame !== undefined && frame !== 'ICRS' && frame !== 'FK5') throw new TypeError(`Sky frame ${frame} is not ICRS.`);
-  if (Object.keys(header).some(key => /^(?:A|B|AP|BP)_(?:ORDER|\d+_\d+)$/u.test(key) || /^PV\d+_\d+$/u.test(key) || /^(?:D2IM|DP|CPDIS|CQDIS)/u.test(key)))
+  if (Object.keys(header).some(key => /^(?:A|B|AP|BP)_(?:ORDER|\d+_\d+)$/u.test(key) || (kind === 'TAN' && /^PV\d+_\d+$/u.test(key)) || /^(?:D2IM|DP|CPDIS|CQDIS)/u.test(key)))
     throw new TypeError('A sky image with distortion terms needs its distortion model, which this projection does not apply.');
   const units = [text(header, 'CUNIT1'), text(header, 'CUNIT2')];
   if (units.some(unit => unit !== undefined && unit !== 'deg')) throw new TypeError('A TAN sky image states its axes in degrees.');
@@ -124,12 +130,14 @@ export function skyProjection(header: FitsHeader): SkyProjection {
       const r = raDeg * DEG, q = decDeg * DEG, v = [Math.cos(q) * Math.cos(r), Math.cos(q) * Math.sin(r), Math.sin(q)], z = dot(v, centre);
       if (!(z > 0)) return undefined;
       // Standard coordinates on the tangent plane, degrees: intermediate world x grows toward increasing RA (east).
-      const x = dot(v, east) / z / DEG, y = dot(v, north) / z / DEG;
+      const height = kind === 'TAN' ? z : 1, x = dot(v, east) / height / DEG, y = dot(v, north) / height / DEG;
       return [(d * x - b * y) / det + crpix[0]! - 1, (-c * x + a * y) / det + crpix[1]! - 1];
     },
     skyOf(px, py) {
       const u = px + 1 - crpix[0]!, w = py + 1 - crpix[1]!, x = (a * u + b * w) * DEG, y = (c * u + d * w) * DEG;
-      const v = [0, 1, 2].map(i => centre[i]! + x * east[i]! + y * north[i]!), n = Math.hypot(v[0]!, v[1]!, v[2]!);
+      // TAN: the point on the tangent plane, normalised. SIN: the point on the sphere straight behind the plane point.
+      const lift = kind === 'TAN' ? 1 : Math.sqrt(Math.max(0, 1 - x * x - y * y));
+      const v = [0, 1, 2].map(i => lift * centre[i]! + x * east[i]! + y * north[i]!), n = Math.hypot(v[0]!, v[1]!, v[2]!);
       return [((Math.atan2(v[1]!, v[0]!) / DEG) % 360 + 360) % 360, Math.asin(v[2]! / n) / DEG];
     },
   };

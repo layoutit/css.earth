@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "pds-70-disc",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2205176112137657600,
+        -1380196578217023200,
+        -2293368850175899000
+      ],
+      "localToReferenceXyzw": [
+        0.7972873077646705,
+        -0.44156148284624525,
+        -0.1993813981014689,
+        0.36000481084992775
+      ],
+      "metersPerUnit": 149597870699.99997,
+      "boundsUnits": {
+        "min": [
+          -150,
+          -150,
+          -150
+        ],
+        "max": [
+          150,
+          150,
+          150
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json"
+  }
+}

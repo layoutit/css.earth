@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pds-70-c",
+  "card": {
+    "text": "Young giant planet about 34 au from PDS 70, with a dusty disc of its own seen by ALMA.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2108-07123",
+        "url": "https://arxiv.org/abs/2108.07123",
+        "label": "Benisty et al. 2021",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Our observations confirm the presence of a compact source of emission co-located with PDS70c"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "PDS 70 c is a gas giant still forming about 34 au from its star, taking about 200 years to orbit. ALMA sees dust around it, a disc of its own.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2108-07123",
+        "url": "https://arxiv.org/abs/2108.07123",
+        "label": "Benisty et al. 2021",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Our observations confirm the presence of a compact source of emission co-located with PDS70c"
+      },
+      {
+        "catalogueId": "arxiv-2504-11210",
+        "url": "https://arxiv.org/abs/2504.11210",
+        "label": "Trevascus et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "The presence of two directly imaged planets, PDS 70 b and c, in the PDS 70 protoplanetary disk provides us a unique opportunity for dynamical mass measurements"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

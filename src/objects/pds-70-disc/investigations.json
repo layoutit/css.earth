@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "pds-70-disc",
+  "entries": [
+    {
+      "id": "lens-dust",
+      "subject": "ALMA band 7 continuum of project 2018.A.00030.S, 27 July 2019: the ALMA pipeline image in the colour map of Benisty et al. (2021) Figure 1",
+      "status": "included",
+      "finding": "Benisty et al. (2021) deposited no image: theirs is self-calibrated and combined with 2016 short-baseline data. The archive holds the pipeline's continuum image of the same observations (CASA 5.6.1-8, robust 0.5, beam 32 x 27 mas, 8.7 mas pixels); its noise is 18 microJy per beam in a 2 to 4 arcsec annulus against their 8.8, and the ring peaks at 18.8 times it. The star, at its Gaia DR3 position moved by proper motion to the observing date, lies 8 mas from the image's phase centre. The figure's colour bar, decoded from the PDF in the paper's arXiv source, is matplotlib's inferno map to 0 of 255 in every channel, linear from -24.71 to 389.56 microJy per beam; the lens shows the image through it.",
+      "evidence": [
+        "https://arxiv.org/abs/2108.07123",
+        "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "ring-geometry-and-depth",
+      "subject": "How the ALMA image is given depth",
+      "status": "included",
+      "finding": "Measured on this image the ring is 73.5 au in radius, tilted 50.0 degrees, with its nodes at position angle 161; Keppler et al. (2019) give 74 au, 51.7 and 156.7 degrees (160.4 from the gas). The drawn envelope, a disc of that geometry following the image's deprojected radial profile, leaves a residual of 2.62e-5 Jy per beam, against 5.95e-5 for a spherical shell and 7.46e-5 for constant depth.",
+      "evidence": [
+        "https://arxiv.org/abs/1902.07639"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "near-side-and-thickness",
+      "subject": "Which side of the ring is nearer, and its thickness",
+      "status": "included",
+      "finding": "The west side is drawn nearer, the side Keppler et al. (2018, section 3.3) identify as the near side in scattered light; the planets' published orbits agree. The thickness, 0.1 of the radius, is a stated convention: millimetre grains settle much thinner than this. It is the convention the HD 181327 ring uses, where a disc of half that thickness showed as strips between the renderer's slices.",
+      "evidence": [
+        "https://arxiv.org/abs/1806.11568"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "planet-c-dust",
+      "subject": "The dust around planet c",
+      "status": "unresolved",
+      "finding": "Benisty et al. (2021) detect a compact source at planet c at 5.4 to 16 times their noise. In the pipeline image the brightest spot within 20 mas of their position reaches 3.6 times its noise, 16 mas off: too faint to claim. It is drawn as imaged, not marked.",
+      "evidence": [
+        "https://arxiv.org/abs/2108.07123"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}
