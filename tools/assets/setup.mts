@@ -44,48 +44,53 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
           reused++;
         } else {
           // A dropped connection is not a missing asset. Across 5,500+ files a single transient
-          // failure would otherwise fail the whole run, so retry the network with backoff. A 404
-          // still fails (or skips) on the first response: "not published" is a fact, not a blip.
-          let response!: Awaited<ReturnType<typeof fetcher>>;
-          for (let attempt = 0; ; attempt++) {
-            try { response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) }); }
-            catch (error) {
-              if (attempt >= TRANSIENT_RETRIES) throw error;
+          // failure would otherwise fail the whole run, so retry the network with backoff, including a
+          // connection that drops while the body streams. A 404 still fails (or skips) on the first
+          // response: "not published" is a fact, not a blip.
+          let bytes: Buffer | 'missing' | undefined;
+          for (let attempt = 0; bytes === undefined; attempt++) {
+            let response: Awaited<ReturnType<typeof fetcher>> | undefined;
+            try {
+              response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) });
+              if (response.status >= 500 && attempt < TRANSIENT_RETRIES) { await response.body?.cancel(); await delay(RETRY_BACKOFF_MS * 2 ** attempt); continue; }
+              // A deploy build may tolerate one object's asset genuinely missing from R2 (a 404, not a flaky
+              // 5xx/network error) rather than fail the whole build: skip it loudly and let the object's own
+              // unavailable-package path report it, instead of installing a fabricated or partial file here.
+              if (response.status === 404 && allowMissing) { await response.body?.cancel(); bytes = 'missing'; break; }
+              if (!response.ok || !response.body) {
+                await response.body?.cancel();
+                throw new Error(`Prepared asset unavailable: ${asset.id}/${asset.filename} (HTTP ${response.status}).`);
+              }
+              const chunks: Uint8Array[] = [];
+              let size = 0;
+              for await (const chunk of response.body) {
+                size += chunk.length;
+                if (size > asset.bytes) throw new Error(`Prepared asset exceeds its expected size: ${asset.id}/${asset.filename}.`);
+                chunks.push(chunk);
+              }
+              bytes = Buffer.concat(chunks);
+            } catch (error) {
+              // An HTTP answer is final; only a network error (before or during the body) is retried.
+              if (response && !response.ok || attempt >= TRANSIENT_RETRIES || (error instanceof Error && error.message.startsWith('Prepared asset'))) throw error;
               await delay(RETRY_BACKOFF_MS * 2 ** attempt);
-              continue;
             }
-            if (response.status < 500 || attempt >= TRANSIENT_RETRIES) break;
-            await response.body?.cancel();
-            await delay(RETRY_BACKOFF_MS * 2 ** attempt);
           }
-          // A deploy build may tolerate one object's asset genuinely missing from R2 (a 404, not a flaky
-          // 5xx/network error) rather than fail the whole build: skip it loudly and let the object's own
-          // unavailable-package path report it, instead of installing a fabricated or partial file here.
-          if (response.status === 404 && allowMissing) {
-            await response.body?.cancel();
+          if (bytes === 'missing') {
             console.warn(`Prepared asset missing on R2, skipping (allow-missing): ${asset.id}/${asset.filename} (HTTP 404).`);
             skipped++;
             onProgress({ completed: installed + reused + skipped, total: assets.length, installed, reused, skipped });
             continue;
           }
-          if (!response.ok || !response.body) {
-            await response.body?.cancel();
-            throw new Error(`Prepared asset unavailable: ${asset.id}/${asset.filename} (HTTP ${response.status}).`);
-          }
-          const chunks: Uint8Array[] = [];
-          let size = 0;
-          for await (const chunk of response.body) {
-            size += chunk.length;
-            if (size > asset.bytes) throw new Error(`Prepared asset exceeds its expected size: ${asset.filename}.`);
-            chunks.push(chunk);
-          }
-          const bytes = Buffer.concat(chunks);
-          if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Prepared asset does not match its inventory: ${asset.filename}.`);
+          if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Prepared asset does not match its inventory: ${asset.id}/${asset.filename}.`);
           await publishSourceBytes({ destination: asset.file, bytes });
           installed++;
         }
         onProgress({ completed: installed + reused + skipped, total: assets.length, installed, reused, skipped });
-      } catch (error) { failures.push(error instanceof Error ? error.message : String(error)); }
+      } catch (error) {
+        // Name the file on every failure: a bare network message ("terminated") says nothing about which one.
+        const message = error instanceof Error ? error.message : String(error);
+        failures.push(message.startsWith('Prepared asset') ? message : `${asset.id}/${asset.filename} (${asset.url}): ${message}`);
+      }
     }
   }));
   if (failures.length) {
