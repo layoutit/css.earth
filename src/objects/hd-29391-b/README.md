@@ -21,6 +21,7 @@
 Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks the JWST position and the four HiRISE radial velocities (above); the astronomy package's 856 tests pass.
+- The planet page, captured headless at 1440 × 900 from the dev server of this version, with no console errors ([hd-29391-b.png](evidence/hd-29391-b.png)).
 
 ## Known problems
 
