@@ -1,6 +1,6 @@
 import {requireRecord} from './source-values.mts';
 import {shape,text,number,array,optional,nullable,boolean} from '../objects/terrestrial-layers/source-records.mts';
-import {parseSourceManifest} from '../objects/dist/operations.js';
+import {parseSourceManifest} from '#preparation/operations';
 import {parseSolidPreparationSource} from '../objects/terrestrial-layers/profile-source.mts';
 
 /** Refresh bytes without discarding reviewed identity, credits or capture evidence. */

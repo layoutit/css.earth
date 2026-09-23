@@ -82,6 +82,36 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Body source and evidence data (images, archives, cubes, video: about 790 of 1,070 MB) is never read by
+          # these jobs, so fetch only the blobs the sparse tree needs. Nebula keeps the full tree: it verifies
+          # volume packages' tracked previews.
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: &code-and-text |
+            /*
+            !/src/objects/**/*.gz
+            !/src/objects/**/*.png
+            !/src/objects/**/*.zst
+            !/src/objects/**/*.zip
+            !/src/objects/**/*.ktx2
+            !/src/objects/**/*.webp
+            !/src/objects/**/*.tif
+            !/src/objects/**/*.jpg
+            !/src/objects/**/*.pdf
+            !/src/objects/**/*.cub
+            !/src/objects/**/*.webm
+            !/src/objects/**/*.nc
+            !/src/objects/**/*.obj
+            !/src/objects/**/*.shp
+            !/src/objects/**/*.gxct
+            !/src/objects/**/*.tpc
+            !/src/objects/**/*.qub
+            !/src/objects/**/*.wrl
+            !/src/objects/**/*.cmod
+            !/src/objects/**/*.fit
+            !/src/objects/**/*.fits
+            !/src/objects/**/*.bc
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -112,14 +142,13 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
       - name: Generate the registry, renderer and preparation bundle
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
           CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
-          CI_PREPARATION_DTS: "false"
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts lint
@@ -149,6 +178,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -181,7 +214,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-dts-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
@@ -227,6 +260,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -257,7 +294,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-dts-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Keep this lane separate: caches are immutable, so sharing the application's key lets the
@@ -306,6 +343,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -336,7 +377,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-${{ matrix.lane == 'shell' && 'dts' || 'js' }}-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -354,7 +395,7 @@ jobs:
           if [ "$CI_UNIVERSE_LANE" = shell ]; then
             node tools/ci/build-ci.mts full
           else
-            CI_PREPARATION_DTS=false node tools/ci/build-ci.mts full
+            node tools/ci/build-ci.mts full
           fi
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
@@ -420,6 +461,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -450,7 +495,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -462,7 +507,6 @@ jobs:
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
           CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
-          CI_PREPARATION_DTS: "false"
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts full
