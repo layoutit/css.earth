@@ -8,7 +8,7 @@ import type { QualifiedObservation } from '../qualified-observations.mts';
 import type { QualificationAction } from '../qualification-routes.mts';
 import { jsonValue, parseLimits, type DiscoverySnapshot } from './contracts.mts';
 import { discover, normalizeSnapshot, SERVICES, type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
-import { planAccess, type AcquisitionSpec } from './access.mts';
+import { nativeQualificationRoute, planAccess, type AcquisitionSpec } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
 
 export interface VoInputs {
@@ -54,13 +54,13 @@ export function voCandidates(request: CapabilityRequest, inputs: VoInputs | unde
       ...(observation.startIso ? { startIso: observation.startIso } : {}), ...(observation.endIso ? { endIso: observation.endIso } : {}) };
     const satisfaction = assessRequest(request, product?.facts ?? advertised);
     const complete = request.time && request.kind && (request.angularResolutionArcsec !== undefined || request.surfaceResolutionKm !== undefined || request.resolutionElements !== undefined);
-    const refused = spec.decoder !== 'fits-raster' || !complete || satisfaction.status === 'refused' || observation.target.status !== 'confirmed' && observation.target.status !== 'in-field' || request.result !== 'telescope-product';
+    const refused = !nativeQualificationRoute(spec) || !complete || satisfaction.status === 'refused' || observation.target.status !== 'confirmed' && observation.target.status !== 'in-field' || request.result !== 'telescope-product';
     const action: QualificationAction = { kind: 'qualify-observation', observation: observation.key, program: spec.key,
       configuration: { kind: 'archive-acquisition', key: spec.key, request }, command: 'pnpm', arguments: ['--silent','telescope:qualify','--target',request.target,
         '--telescope',observation.service,'--mode',`native-${spec.kind}`,'--observation',observation.key,'--acquisition',spec.key,'--request',JSON.stringify(request)] };
     return { acquisitionKey: spec.key, observation, satisfaction, ...(product ? { product } : {}), ...(!product && !refused ? { action } : {}),
       limitations: ['Archive coverage is advertised metadata; acquisition does not establish local recalibration or a body map.',
-        ...spec.decoder !== 'fits-raster' ? [`Archive ${spec.kind} has no native qualification route.`] : [],
+        ...!nativeQualificationRoute(spec) ? [`Archive ${spec.kind} has no native qualification route.`] : [],
         ...observation.target.status === 'in-field' ? [observation.target.reason] : [], ...entry.issues] };
   }));
 }

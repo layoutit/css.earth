@@ -9,6 +9,7 @@ import type { QualifiedObservation } from './qualified-observations.mts';
 import { parseLimits, parseRegion, type TransferLimits } from './vo/contracts.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';
+import { nativeQualificationRoute } from './vo/access.mts';
 import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
 import { searchOpus, type OpusService } from './opus.mts';
@@ -155,7 +156,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     }
     for (const spec of entry.products) {
       const ready = (inputs.qualifiedProducts ?? []).find(product => product.target === target && product.program === spec.key && product.observation === observation.key);
-      if (spec.decoder !== 'fits-raster' && !ready) {
+      if (!nativeQualificationRoute(spec) && !ready) {
         unsupported.push({ scope: 'observation', code: 'unsupported-observation', identity: `${identity} / ${spec.key}`,
           reason: `Archive ${spec.kind} is discoverable, but no native qualification route is available for this product.` });
         continue;
