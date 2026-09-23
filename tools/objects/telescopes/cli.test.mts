@@ -318,6 +318,17 @@ test('JSON and every redirected explore mode are deterministic and never prompt'
   }
 });
 
+test('network failures retain their actionable cause in human and JSON errors',async()=>{
+  const failed=new Error('fetch failed',{cause:new Error('getaddrinfo ENOTFOUND data1.wwtassets.org')});
+  const api=mockServices('/tmp');
+  for(const args of [['explore','eris'],['explore','eris','--json']]){
+    const io=mockIo(false,false);
+    assert.equal(await main(args,'/workspace',text=>io.io.write(text),io.io,{...api.services,saveExploration:async()=>{throw failed;}}),1);
+    assert.match(io.stderr.join(''),/fetch failed: getaddrinfo ENOTFOUND data1\.wwtassets\.org/u);
+    if(args.includes('--json'))assert.match(JSON.parse(io.stdout.join('')).error,/ENOTFOUND data1\.wwtassets\.org/u);
+  }
+});
+
 test('terminal cancellation preserves the saved exploration and starts no selected operation',async()=>{
   const directory=resolve('/tmp','cli-cancel'),mock=mockIo(true,true,['']),api=mockServices(directory);
   const code=await main(['explore','eris','--out',directory],'/workspace',text=>mock.io.write(text),mock.io,api.services);
