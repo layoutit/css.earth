@@ -1,3 +1,4 @@
+import { createSystemCardContent } from './system-card-content.mts';
 import { parseHTML } from 'linkedom';
 import { record, requiredElement } from './browser-types.mts';
 import { OBJECT_CATEGORIES, matchesObjectCategory, objectCategoryCount } from './object-categories.mts';
@@ -117,6 +118,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   const context = document.querySelector<HTMLElement>('.object-context') ?? browser;
   const sharedLegacyContext = context === browser;
   const selectedOverview = overviewScopeFromUrl(url);
+  if (selectedOverview === 'system') createSystemCardContent(document).show(true);
   const showingContext = Boolean(focusCard || selectedOverview);
   browser.toggleAttribute('hidden', !searching);
   selectedContent.toggleAttribute('hidden', searching);

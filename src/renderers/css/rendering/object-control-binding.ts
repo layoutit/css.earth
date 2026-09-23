@@ -7,6 +7,18 @@ export interface ObjectControlBindingOptions {
 type SettingInput = HTMLInputElement | HTMLButtonElement;
 const isInput = (element: SettingInput): element is HTMLInputElement => element.tagName === "INPUT";
 
+/** Native responses and retained controls publish the same committed dataset presentation. */
+export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], details: readonly { id: string; panel: HTMLElement }[],
+  contexts: readonly HTMLElement[], pressed: ReadonlySet<string | null>) {
+  for (const button of buttons) button.setAttribute('aria-pressed', String(pressed.has(button.getAttribute('value') ?? '')));
+  const active = buttons.find(button => pressed.has(button.getAttribute('value') ?? ''))?.getAttribute('value');
+  for (const { id, panel } of details) if (panel.hidden !== (id !== active)) panel.hidden = id !== active;
+  for (const context of contexts) {
+    const hidden = context.dataset.datasetContext !== active;
+    if (context.hidden !== hidden) context.hidden = hidden;
+  }
+}
+
 import { requireObjectControls } from "../runtime/object-contract.js";
 import { objectCycleStates, requireObjectAction } from "../runtime/object-contract.js";
 
@@ -84,19 +96,10 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       root.classList.toggle("is-loading", !ready || next.pending === true);
       root.setAttribute("aria-busy", String(!ready || next.pending === true));
     }
-    for (const [id, input] of lenses) {
+    for (const input of lensInputs) {
       input.disabled = input.type === 'submit' ? false : !ready;
-      input.setAttribute("aria-pressed", String(pressed.has(id)));
     }
-    const activeLens = lensInputs.find(input => pressed.has(input.value))?.value;
-    for (const { id, panel } of details) {
-      const hidden = id !== activeLens;
-      if (panel.hidden !== hidden) panel.hidden = hidden;
-    }
-    for (const context of contexts) {
-      const hidden = context.dataset.datasetContext !== activeLens;
-      if (context.hidden !== hidden) context.hidden = hidden;
-    }
+    publishDatasetSelection(lensInputs, details, contexts, pressed);
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       if (nativeChanges.has(control.name)) continue;
