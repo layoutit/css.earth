@@ -153,6 +153,8 @@ src/objects/*/source/**/*.bpc
 
 # Native metadata, extracted reference rows and inspected source evidence.
 !src/objects/*/source/reference/*.csv
+# An orbit refit's measurements, transcribed from its paper (tools/objects/hosted-orbits/orbitize-fit.py reads them).
+!src/objects/*/source/orbits/*.csv
 !src/objects/*/source/reference/*-row.tab
 !src/objects/*/source/reference/reflect-index.tab
 !src/objects/*/source/reference/*.png
