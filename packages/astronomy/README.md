@@ -435,6 +435,17 @@ barycentric modified Julian dates in TDB directly. They do not perform a
 barycentric light-time correction. The existing JD_TT functions remain display
 approximations and must not be used to relabel observational times.
 
+A circumbinary orbit names `barycentreCompanion`: another body hosted by the
+same parent. Its elements are then Jacobi elements about the centre of mass
+of the parent and that companion, weighted by the two records'
+gravitational parameters, and `sources.barycentre` cites those masses.
+`hostedPlanetStateRelativeKm` stays parent-centred and adds the centre's
+offset; `hostedPlanetStateAboutCentreKm` and `hostedOrbitCentreStateKm` give
+the two parts, and `hostedOrbitCentreId` names the centre
+(`<parent>-<companion>-barycentre`) the world context draws the orbit around.
+Kepler-16 (AB) b is the first; the eclipses of its two stars and its seven
+Kepler transits check it in `src/hostedOrbits.test.ts`.
+
 `hostedOrbitApoapsisKm` supplies the full `a(1+e)` radius bound. Position and
 velocity vary around an eccentric orbit, and opposition need not occur half a
 period after conjunction. Independent CSPICE propagation checks the numerical

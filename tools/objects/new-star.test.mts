@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { skyPlaneOrientation } from '@cssearth/astronomy';
-import { TODO, scaffoldStarFiles } from './new-star.mts';
+import { TODO, scaffoldStarFiles, solarRadii } from './new-star.mts';
 import { temperatureCatalogueColor } from './star-catalogue-color.mts';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -48,4 +48,11 @@ test('prose the scaffold cannot know is marked, and the package it writes matche
   assert.throws(() => scaffoldStarFiles({ ...spec, temperatureK: 100 }, record, EPOCH), /1,000 and 40,000 K/u);
   assert.throws(() => scaffoldStarFiles({ ...spec, temperatureSource: 'Ohnaka et al. 2013' }, record, EPOCH), /URL/u);
   assert.throws(() => scaffoldStarFiles(spec, { ...record, star: { ...record.star, presentationUp: undefined } }, EPOCH), /presentationUp/u);
+});
+
+test('the panel radius keeps two significant figures below ten solar radii', () => {
+  assert.equal(solarRadii(0.6489), '0.65');
+  assert.equal(solarRadii(1.0), '1');
+  assert.equal(solarRadii(2.345), '2.3');
+  assert.equal(solarRadii(764.3), '764');
 });
