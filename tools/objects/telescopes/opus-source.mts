@@ -51,9 +51,11 @@ export async function fetchOpusSource(explorationPath: string, pick: number, out
   const limits = parseLimits(request.transferLimits), listing = await query(`files/${opusId}.json`, {});
   const native = opusNativeFiles(listing, opusId, limits.packageMembers);
   const saved: SavedSource = { bytes, target, selected, evidence: Buffer.from(`${JSON.stringify(opus[0], null, 2)}\n`), maximum: limits.scienceBytes };
+  const fits = native.files.filter(file => /\.fits?$/iu.test(file.name));
   return deliverSource(explorationPath, outputDirectory, saved, {
     archive: OPUS_SERVICE, telescope: requireString(selected.instrument, 'OPUS instrument'), identity: opusId, target,
     discovery: { opusTarget: opus[0]!.opusTarget, image: selected, productType: native.productType }, current: { productType: native.productType, listing }, files: native.files,
+    ...(fits.length===1?{primaryFits:fits[0]!.path}:{}),
     limitations: ['OPUS geometry and target tags identify a candidate, not confirmed target detection.',
       'Native PDS bytes and labels are preserved; no calibration, units or fitness is inferred from the OPUS listing.'],
   }, fetcher);

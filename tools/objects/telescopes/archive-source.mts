@@ -16,6 +16,9 @@ export interface SourceSelection {
   readonly archive: string; readonly telescope: string; readonly identity: string; readonly target: string;
   readonly discovery: unknown; readonly current: unknown; readonly limitations: readonly string[];
   readonly files: readonly SourceFile[]; readonly primaryFits?: string;
+  readonly fitsCompanions?: { readonly uncertainty: string; readonly coverage: string };
+  /** Optional content-qualified descriptor made from the already downloaded original bytes. */
+  readonly describe?: (directory: string, files: readonly { readonly path: string; readonly bytes: number; readonly sha256: string }[]) => Promise<unknown>;
 }
 export interface SavedSource {
   readonly bytes: Buffer; readonly target: string; readonly maximum: number; readonly selected: Record<string, unknown>;
@@ -125,6 +128,8 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
     }
     if (!files.length) throw new TypeError('Archive source has no retrievable files.');
     const metadata = Buffer.from(`${JSON.stringify(selection.current, null, 2)}\n`);
+    const descriptor = selection.describe ? await selection.describe(staging, files) : undefined;
+    if (descriptor !== undefined) await writeFile(resolve(staging, 'descriptor.json'), `${JSON.stringify(descriptor, null, 2)}\n`);
     const report = { schema: 'cssearth-archive-source@1', status: 'unresolved', archive: selection.archive,
       target: saved.target, identity: selection.identity, discovery: selection.discovery, files, limitations: selection.limitations };
     await writeFile(resolve(staging, 'explore.json'), saved.bytes);
@@ -134,6 +139,9 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
     const fits = selection.primaryFits ? files.find(file => file.path === selection.primaryFits) :
       files.length === 1 && /\.fits?(?:\.gz)?$/iu.test(files[0]!.path) ? files[0] : undefined;
     if (selection.primaryFits && (!fits || !/\.fits?(?:\.gz)?$/iu.test(fits.path))) throw new TypeError('Archive primary FITS was not pinned.');
+    if (selection.fitsCompanions && (!fits || Object.values(selection.fitsCompanions).some(path =>
+      !files.some(file => file.path === path && /\.fits?(?:\.gz)?$/iu.test(path)))))
+      throw new TypeError('Archive FITS companion was not pinned.');
     const inputs: ProductInput[] = [
       { role: 'saved exploration', identity: resolve(explorationPath), bytes: saved.bytes.length, sha256: sha256(saved.bytes) },
       { role: 'archive discovery response', identity: `${selection.archive}#discovery`, bytes: saved.evidence.length, sha256: sha256(saved.evidence) },
@@ -145,12 +153,15 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
       telescope: selection.telescope, stage: 'telescope-archive-source', inputs,
       parameters: { target: saved.target, archive: selection.archive, identity: selection.identity, status: 'unresolved',
         limitations: selection.limitations, ...(fits ? { fitsSource: { schema: FITS_SOURCE_SCHEMA, path: fits.path,
-          label: fits.path, limitations: selection.limitations } } : {}) },
+          label: fits.path, limitations: selection.limitations,
+          ...(selection.fitsCompanions ? { companions: selection.fitsCompanions } : {}) } } : {}) },
       software: [{ name: 'cssEarth Telescope archive source', version: implementation }],
     }, [...files.map(file => ({ path: file.path, file: resolve(staging, file.path) })),
+      ...(descriptor === undefined ? [] : [{ path: 'descriptor.json', file: resolve(staging, 'descriptor.json') }]),
       ...['explore.json', 'discovery.json', 'current-metadata.json', 'source.json'].map(path => ({ path, file: resolve(staging, path) }))]);
     await rename(staging, destination);
     return { files: files.map(file => resolve(destination, file.path)), receipt: resolve(destination, 'output.product.json'),
-      source: resolve(destination, 'source.json'), status: 'unresolved' as const };
+      source: resolve(destination, 'source.json'), ...(descriptor === undefined ? {} : { descriptor: resolve(destination, 'descriptor.json') }),
+      status: 'unresolved' as const };
   } finally { await rm(staging, { recursive: true, force: true }); }
 }

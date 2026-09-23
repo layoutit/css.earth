@@ -16,7 +16,9 @@ import { fetchOpusSource, opusNativeFiles } from './opus-source.mts';
 import { OPUS_SERVICE } from './opus.mts';
 import { openFitsSource } from './fits-source.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
+import { openPdsSource, preparePdsSource } from './pds-source.mts';
 import { parseCli } from './cli.mts';
+import { executeFamilyOperation } from './family-operation.mts';
 
 const fits = Buffer.from(`${'SIMPLE  =                    T'.padEnd(80)}${'END'.padEnd(80)}`.padEnd(2880));
 const fileResponse = (bytes: Buffer, type = 'application/fits') => new Response(new Uint8Array(bytes), { headers: { 'content-type': type } });
@@ -77,11 +79,11 @@ test('Gemini revalidates one CADC artifact, preserves original FITS and refuses 
 
 test('OPUS selects a native raw image with its label and support file, rejecting unsafe URL', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'archive-opus-'));
-  const opusId = 'co-iss-n1355869401', prefix = 'https://opus.pds-rings.seti.org/holdings/volumes/COISS/data/';
-  const listing = { data: { [opusId]: { coiss_thumb: [`${prefix}thumb.jpg`], coiss_raw: [`${prefix}N1.IMG`, `${prefix}N1.LBL`, `${prefix}prefix.fmt`] } } };
+  const opusId = 'co-iss-n1355869401', prefix = 'https://opus.pds-rings.seti.org/holdings/volumes/COISS/';
+  const listing = { data: { [opusId]: { coiss_thumb: [`${prefix}thumb.jpg`], coiss_raw: [`${prefix}data/N1.IMG`, `${prefix}data/N1.LBL`, `${prefix}label/prefix.fmt`] } } };
   try {
     assert.equal(opusNativeFiles(listing, opusId, 4).productType, 'coiss_raw');
-    assert.throws(() => opusNativeFiles({ data: { [opusId]: { coiss_raw: ['https://evil.example/N1.IMG', `${prefix}N1.LBL`] } } }, opusId, 4), /Unsafe OPUS/u);
+    assert.throws(() => opusNativeFiles({ data: { [opusId]: { coiss_raw: ['https://evil.example/N1.IMG', `${prefix}data/N1.LBL`] } } }, opusId, 4), /Unsafe OPUS/u);
     const exploration = resolve(root, 'explore.json');
     await writeFile(exploration, `${JSON.stringify({ schema: 'cssearth-telescope-exploration@1', target: 'himalia', answer: {
       target: 'himalia', request: { target: 'himalia', transferLimits: { scienceBytes: 4096, packageMembers: 4 } },
@@ -92,21 +94,33 @@ test('OPUS selects a native raw image with its label and support file, rejecting
     assert.equal(result.files.length, 3); assert.equal(result.status, 'unresolved');
     assert.equal(result.files[0], resolve(root, 'out/holdings/volumes/COISS/data/N1.IMG'));
     assert.match(await readFile(result.source, 'utf8'), /"coiss_raw"/u);
-    assert.equal((await listArtifactOutputs(result.receipt)).terminal, true);
+    assert.equal(await openFitsSource(result.receipt), null);
+    const pds = await openPdsSource(result.receipt); assert.ok(pds);
+    const staged = await preparePdsSource(pds, resolve(root, 'staged'));
+    assert.match(staged.file, /N1\.IMG$/u);
+    assert.equal((await readFile(resolve(root, 'staged/holdings/volumes/COISS/data/PREFIX.FMT'))).toString(), 'native');
+    assert.notEqual(await readFile(resolve(root, 'staged/holdings/volumes/COISS/data/N1.LBL'), 'utf8'), '');
+    await writeFile(result.files[0]!, 'changed');
+    await assert.rejects(openPdsSource(result.receipt), /pins changed/u);
+    const unsafe = await fetchOpusSource(exploration, 1, resolve(root, 'unsafe'), async () => listing,
+      async input => fileResponse(Buffer.from(String(input).endsWith('.LBL')
+        ? 'PDS_VERSION_ID = PDS3\n^STRUCTURE = "../../not-pinned.fmt"\nEND\n' : 'native'), 'application/octet-stream'));
+    await assert.rejects(preparePdsSource((await openPdsSource(unsafe.receipt))!, resolve(root, 'unsafe-staged')),
+      /Unpinned PDS dependency/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test('Chandra revalidates its ObsID and pins one level-2 event source', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'archive-chandra-'));
   const obsid = 210, name = 'acisf00210N003_evt2.fits';
-  const observation: ChandraObservation = { obsid, instrument: 'ACIS-S', detector: 'ACIS-7', grating: 'NONE', dataMode: 'FAINT',
+  const observation: ChandraObservation = { obsid, instrument: 'HRC-S', detector: 'HRC-S', grating: 'NONE', dataMode: 'FAINT',
     targetName: 'Cas A', proposalNumber: '1', sequenceNumber: '1', startDate: '2000-01-01', startMet: 0, stopMet: 1,
     livetimeSeconds: 1, catalogueExposureSeconds: 1, datasetDoi: 'fixture', ascdsVersion: 'fixture', processing: {}, inputs: [],
     products: [{ path: `secondary/${name}`, url: `${obsidDirectory(obsid)}/secondary/${name}`, bytes: fits.length }] };
   try {
-    const exploration = await saved(root, CHANDRA_TAP, { obsid, targetName: 'Cas A', instrument: 'ACIS-S', grating: 'NONE', startDate: '2000-01-01' },
-      [{ obsid, targetName: 'Cas A', instrument: 'ACIS-S', grating: 'NONE', startDate: '2000-01-01' }]);
-    const query = async () => [{ obsid: String(obsid), target_name: 'Cas A', instrument: 'ACIS-S', grating: 'NONE', start_date: '2000-01-01', status: 'archived' }];
+    const exploration = await saved(root, CHANDRA_TAP, { obsid, targetName: 'Cas A', instrument: 'HRC-S', grating: 'NONE', startDate: '2000-01-01' },
+      [{ obsid, targetName: 'Cas A', instrument: 'HRC-S', grating: 'NONE', startDate: '2000-01-01' }]);
+    const query = async () => [{ obsid: String(obsid), target_name: 'Cas A', instrument: 'HRC-S', grating: 'NONE', start_date: '2000-01-01', status: 'archived' }];
     const result = await fetchChandraSource(exploration, 1, resolve(root, 'out'), query, async () => observation, async () => fileResponse(fits));
     assert.equal((await openFitsSource(result.receipt))?.file, result.files[0]);
     const second = { path: `primary/hrcf00210N003_evt2.fits`, url: `${obsidDirectory(obsid)}/primary/hrcf00210N003_evt2.fits`, bytes: fits.length };
@@ -115,6 +129,30 @@ test('Chandra revalidates its ObsID and pins one level-2 event source', async ()
     const chosen = await fetchChandraSource(exploration, 1, resolve(root, 'chosen'), query,
       async () => ({ ...observation, products: [...observation.products, second] }), async () => fileResponse(fits), second.path.split('/').at(-1));
     assert.match(chosen.files[0]!, /hrcf00210N003_evt2\.fits$/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('an authentic Chandra ACIS event source enters the existing event operations with pinned bytes', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'archive-chandra-events-'));
+  const obsid = 6431, name = 'acisf06431N003_evt2.fits.gz';
+  const bytes = await readFile(resolve(import.meta.dirname, '../../../tests/fixtures/telescope-families/chandra-events', name));
+  const source = { obsid, targetName: 'Polaris', instrument: 'ACIS-S', grating: 'NONE', startDate: '2005-01-01' };
+  const observation: ChandraObservation = { ...source, detector: 'ACIS-7', dataMode: 'FAINT', proposalNumber: '1', sequenceNumber: '1',
+    startMet: 0, stopMet: 1, livetimeSeconds: 1, catalogueExposureSeconds: 1, datasetDoi: 'fixture', ascdsVersion: 'fixture',
+    processing: {}, inputs: [], products: [{ path: `primary/${name}`, url: `${obsidDirectory(obsid)}/primary/${name}`, bytes: bytes.length }] };
+  try {
+    const exploration = await saved(root, CHANDRA_TAP, source, [source], bytes.length + 1024);
+    const query = async () => [{ obsid: String(obsid), target_name: 'Polaris', instrument: 'ACIS-S', grating: 'NONE',
+      start_date: '2005-01-01', status: 'archived' }];
+    const fetched = await fetchChandraSource(exploration, 1, resolve(root, 'out'), query, async () => observation,
+      async () => fileResponse(bytes));
+    assert.ok(fetched.descriptor);
+    const inspection = await listArtifactOutputs(fetched.receipt);
+    assert.ok(inspection.familyOperations?.some(operation => operation.id === 'event-inspect' && operation.available));
+    const run = await executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'inspect'));
+    assert.equal(JSON.parse(await readFile(run.product, 'utf8')).rows, 62471);
+    await writeFile(fetched.files[0]!, 'changed');
+    await assert.rejects(executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'changed')), /pins changed/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -129,7 +167,9 @@ test('Spitzer revalidates its AOR and pins one named FITS product', async () => 
       ? [{ reqkey: String(aorKey), targetname: 'Bennu', modedisplayname: 'IRAC Map' }] : [product];
     const result = await fetchSpitzerSource(exploration, 1, resolve(root, 'out'), query, async () => fileResponse(fits), async url =>
       [url.replace('_maic.fits', '_munc.fits'), url.replace('_maic.fits', '_mcov.fits')]);
-    assert.equal((await openFitsSource(result.receipt))?.file, result.files[0]);
+    const source = await openFitsSource(result.receipt);
+    assert.equal(source?.file, result.files[0]);
+    assert.deepEqual(source?.companions, { uncertainty: result.files[1], coverage: result.files[2] });
     assert.equal(result.files.length, 3);
     const channelTwo = { ...product, channum: '2', externalname: product.externalname.replaceAll('ch1', 'ch2').replaceAll('I1', 'I2'),
       heritagefilename: product.heritagefilename.replaceAll('ch1', 'ch2').replaceAll('I1', 'I2') };

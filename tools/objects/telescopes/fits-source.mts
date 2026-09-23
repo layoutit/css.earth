@@ -13,6 +13,7 @@ export async function openFitsSource(path: string) {
   const source = await verifiedProduct(path), parameters = source.record.parameters;
   // PR #602 records already have the original FITS tile pinned, before this handoff was declared.
   const legacy = source.record.stage === 'telescope-wwt-fits' && parameters.fitsSource === undefined;
+  if (!legacy && parameters.fitsSource === undefined) return null;
   const declared = legacy ? { schema: FITS_SOURCE_SCHEMA, path: 'source.fits', label: parameters.imageset,
     limitations: parameters.limitations } : requireRecord(parameters.fitsSource, 'FITS source declaration');
   if (declared.schema !== FITS_SOURCE_SCHEMA) throw new TypeError('Unsupported FITS source declaration');
@@ -22,5 +23,15 @@ export async function openFitsSource(path: string) {
   if (pins.length !== 1 || !pins[0]!.sha256) throw new Error('FITS source is not uniquely pinned by the product record');
   const label = requireString(declared.label, 'FITS source label');
   const limitations = declared.limitations === undefined ? [] : requireArray(declared.limitations, 'FITS source limitations').map(value => requireString(value, 'FITS source limitation'));
-  return { source, path: resolve(path), file: localOutput(source.root, relativePath), pin: pins[0]!, label, limitations };
+  const companions = declared.companions === undefined ? undefined : (() => {
+    const named = requireRecord(declared.companions, 'FITS source companions');
+    if (Object.keys(named).sort().join(',') !== 'coverage,uncertainty') throw new TypeError('FITS companions require uncertainty and coverage.');
+    return Object.fromEntries(['uncertainty', 'coverage'].map(role => {
+      const name = requireString(named[role], `${role} source path`);
+      if (!/\.fits?(?:\.gz)?$/iu.test(name) || source.record.outputs.filter(output => output.path === name && output.sha256).length !== 1)
+        throw new Error(`${role} FITS companion is not uniquely pinned.`);
+      return [role, localOutput(source.root, name)];
+    })) as { uncertainty: string; coverage: string };
+  })();
+  return { source, path: resolve(path), file: localOutput(source.root, relativePath), pin: pins[0]!, label, limitations, companions };
 }

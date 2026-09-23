@@ -50,5 +50,9 @@ export async function fetchSpitzerSource(explorationPath: string, pick: number, 
     limitations: ['The archive target name or sky position does not prove target detection.',
       'This archive FITS file is preserved as supplied; its processing level, calibration and fitness remain unresolved.'],
     files, primaryFits: name,
+    ...(accompanying.length === 2 ? { fitsCompanions: {
+      uncertainty: accompanying[0]!.slice(accompanying[0]!.lastIndexOf('/') + 1),
+      coverage: accompanying[1]!.slice(accompanying[1]!.lastIndexOf('/') + 1),
+    } } : {}),
   }, fetcher);
 }

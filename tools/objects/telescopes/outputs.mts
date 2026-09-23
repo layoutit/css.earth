@@ -12,6 +12,7 @@ import { plotProduct } from '../astronomy-packages/plots.mts';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
 import { contextTarget, deliveryContext } from './delivery-context.mts';
 import { openFitsSource } from './fits-source.mts';
+import { openPdsSource, preparePdsSource } from './pds-source.mts';
 export interface OutputChoice {
   readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume'|'volume-lens-bank';readonly available:boolean;readonly reason:string;
   readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[];
@@ -90,7 +91,7 @@ function choices(structures:readonly NativeMetadata[],sourceOnly=false):OutputCh
     }
   }
   return [...result,
-    {kind:'body-map',available:false,reason:sourceOnly?'A pinned FITS source has no verified delivery and navigation context for body-map projection.':'First export a 2D image measurement. Its output.product.json can then be exported as a body map with explicit navigation.'},
+    {kind:'body-map',available:false,reason:sourceOnly?'A pinned archive source has no verified delivery and navigation context for body-map projection.':'First export a 2D image measurement. Its output.product.json can then be exported as a body map with explicit navigation.'},
     {kind:'sphere',available:false,reason:'Use telescope export MAP/map.fits.product.json --output sphere after projection; native pixels are insufficient.'},
     {kind:'points',available:false,reason:'Export an existing physical object.json with --output points, volume or volume-lens-bank. A spectral cube requires a scientific reconstruction first; wavelength or radial velocity is not distance.'}];
 }
@@ -98,10 +99,21 @@ export async function listOutputs(resultPath:string,structure?:string){
   const source=await openFitsSource(resultPath);
   if(source){
     if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
-    const metadata=await sciencePackage({operation:'fits',path:source.file});
+    const metadata=await sciencePackage({operation:'fits',path:source.file,...(source.companions?{companions:source.companions}:{})});
     const structures=requireArray(metadata.structures).map(s=>parseNativeMetadata(s));
     const outputs=choices(structures,true).map(({structure:_structure,...choice})=>choice);
     return {source:source.path,sourceContext:undefined,outputs,limitations:source.limitations};
+  }
+  const pds=await openPdsSource(resultPath);
+  if(pds){
+    const scratch=await mkdtemp(resolve(tmpdir(),'telescope-pds-source-'));
+    try{
+      const staged=await preparePdsSource(pds,resolve(scratch,'source'));
+      const input=await nativeFigureInput(staged,resolve(scratch,'converted'),structure);
+      const metadata=await sciencePackage({operation:'fits',path:input.file});
+      const structures=requireArray(metadata.structures).map(s=>parseNativeMetadata(s));
+      return {source:pds.path,sourceContext:undefined,outputs:choices(structures,true),limitations:pds.limitations,native:input.native};
+    }finally{await rm(scratch,{recursive:true,force:true});}
   }
   const d=await delivery(resultPath);
   const scratch=await mkdtemp(resolve(tmpdir(),'telescope-native-'));
@@ -117,7 +129,9 @@ export async function listOutputs(resultPath:string,structure?:string){
 export async function exportOutput(resultPath:string,request:OutputRequest,outputDirectory:string){
   validateOutputRequest(request);
   const source=await openFitsSource(resultPath);
-  if(source)return exportFitsSourceOutput(source,request,outputDirectory);
+  if(source)return exportSourceOutput(source,request,outputDirectory);
+  const pds=await openPdsSource(resultPath);
+  if(pds)return exportSourceOutput(pds,request,outputDirectory);
   const d=await delivery(resultPath);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   // A fresh output directory preserves earlier selections and their evidence.
@@ -143,32 +157,45 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
 }
 
 /** The same extraction and plotting backend, with a pinned source record rather than a qualified delivery. */
-async function exportFitsSourceOutput(source:NonNullable<Awaited<ReturnType<typeof openFitsSource>>>,request:OutputRequest,outputDirectory:string){
-  if(request.structure!==undefined)throw new TypeError('--structure applies only to native delivery outputs');
+async function exportSourceOutput(source:NonNullable<Awaited<ReturnType<typeof openFitsSource>>>|NonNullable<Awaited<ReturnType<typeof openPdsSource>>>,request:OutputRequest,outputDirectory:string){
+  const pds='image' in source;
+  if(!pds&&request.structure!==undefined)throw new TypeError('--structure applies only to native outputs');
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
-    const answer=await sciencePackage({...request,operation:'extract',path:source.file,arrayDirectory:resolve(staging,'arrays'),x:request.pixel?.[0],y:request.pixel?.[1]});
+    const prepared=pds?await nativeFigureInput(await preparePdsSource(source,resolve(staging,'source')),resolve(staging,'native'),request.structure):undefined;
+    const file=prepared?.file??(pds?undefined:source.file);
+    if(!file)throw new Error('Source has no science array.');
+    const label=pds?source.image.path:source.label;
+    const answer=await sciencePackage({...request,operation:'extract',path:file,arrayDirectory:resolve(staging,'arrays'),x:request.pixel?.[0],y:request.pixel?.[1],
+      ...(!pds&&source.companions?{companions:source.companions}:{})});
     const rows=requireArray(answer.structures).map(v=>requireRecord(v)),found=rows.filter(s=>s.fitsHdu===request.hdu);
     if(found.length!==1||found[0].extraction===undefined)throw new Error('Selected HDU is not an unambiguous science array');
     const data=requireRecord(found[0].extraction);
-    const plotted=await plotProduct(staging,source.label,data,source.file,{...request});
-    const fresh=await openFitsSource(source.path);
-    if(!fresh||fresh.source.pin.sha256!==source.source.pin.sha256)throw new Error('FITS source changed while producing output');
-    const softwareFiles=['outputs.mts','fits-source.mts','../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
+    const plotted=await plotProduct(staging,label,data,file,{...request});
+    const fresh=pds?await openPdsSource(source.path):await openFitsSource(source.path);
+    if(!fresh||fresh.source.pin.sha256!==source.source.pin.sha256)throw new Error('Source changed while producing output');
+    const softwareFiles=['outputs.mts',pds?'pds-source.mts':'fits-source.mts',...(pds?['native-figure.mts','../astronomy-packages/pds-client.mts']:[]),'../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
     const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),{
       telescope:source.source.record.telescope,stage:'telescope-source-output',
-      inputs:[{role:'FITS source record',identity:source.source.file,...source.source.pin},
-        {role:'FITS source',identity:source.file,bytes:source.pin.bytes,sha256:source.pin.sha256}],
-      parameters:{selection:request,label:source.label,status:'unresolved',limitations:source.limitations,
-        definition:data.definition??(request.kind==='image'?'Native sampled image plane; no registered surface map.':'Selected samples from a pinned FITS source.'),
+      inputs:[{role:'archive source record',identity:source.source.file,...source.source.pin},
+        ...(pds?source.files.map(member=>({role:'original PDS member',identity:resolve(source.source.root,member.path),bytes:member.bytes,sha256:member.sha256})):
+          [{role:'FITS source',identity:source.file,bytes:source.pin.bytes,sha256:source.pin.sha256},
+            ...Object.entries(source.companions??{}).map(([role,path])=>{
+              const output=source.source.record.outputs.find(entry=>resolve(source.source.root,entry.path)===path);
+              if(!output?.sha256)throw new Error(`${role} FITS companion has no source pin`);
+              return {role:`FITS ${role}`,identity:path,bytes:output.bytes,sha256:output.sha256};
+            })])],
+      parameters:{selection:request,label,status:'unresolved',limitations:source.limitations,...(prepared?.native?{native:prepared.native}:{}),
+        definition:data.definition??(request.kind==='image'?'Native sampled image plane; no registered surface map.':'Selected samples from a pinned source.'),
         measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},
         metadata:parseNativeMetadata(found[0]),software:plotted},
-      software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'}]
+      software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...(prepared?.native?.packages?Object.entries(prepared.native.packages).map(([name,version])=>({name,version})):[])]
     },names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});
+    if(pds){await rm(resolve(staging,'source'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});}
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,figure:resolve(destination,'figure.png'),values:resolve(destination,'values.csv'),
       data:resolve(destination,names.includes('image.fits')?'image.fits':'spectrum.ecsv'),receipt:resolve(destination,'output.product.json'),sourceContext:undefined};

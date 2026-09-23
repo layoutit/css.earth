@@ -72,8 +72,17 @@ Fetch one of those sources with `telescope fetch RUN/explore.json --archive gemi
 source number. Keck remains the default for saved explorations made before `--archive` existed.
 Fetch rechecks the selected archive identity, enforces the saved science-byte limit while reading,
 and records original files, discovery and current metadata, limitations and hashes. Run
-`telescope outputs NEW_DIRECTORY/output.product.json` to inspect operations the actual FITS
-supports. Acquisition alone does not qualify calibration, target detection or scientific fitness.
+`telescope outputs NEW_DIRECTORY/output.product.json` to inspect operations supported by the
+actual files. Gemini and other image FITS sources use the shared Astropy image and cube output
+path. A fetched Chandra ACIS level-2 EVENTS+GTI file of at most 32 MiB gets a pinned family
+descriptor and the existing event inspection, selected-event, count-image, energy-histogram and
+light-curve operations. Those measurements stay in the count domain; no response-corrected flux
+or independent reprocessing is inferred. A Spitzer post-BCD mosaic associates its separately
+fetched uncertainty and coverage images only after their dimensions and celestial WCS agree with
+the science image. The shared output path then uses the archive uncertainty units and excludes
+uncovered pixels, following the [IRAC handbook's mosaic, uncertainty and coverage roles](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/31/).
+Source outputs retain an unresolved scientific verdict: acquisition and
+extraction alone do not establish target detection or fitness.
 If a selected Chandra ObsID has several level-2 event files, or a Spitzer AOR has several science
 FITS products, fetch lists their exact names and requires `--file NAME`. It does not silently pick
 one detector or channel. Repeat fetch with a new output directory to retrieve another file.
@@ -93,7 +102,10 @@ bodies such as Kerberos, the mean diameter gives fewer pixels than the long axis
 explore filters (kind, wavelength, time) are not sent to OPUS. Its per-instrument examples have
 separate **OPUS source** numbers. `telescope fetch RUN/explore.json --archive opus --pick N
 --out NEW_DIRECTORY` retrieves one exact OPUS ID's native image, label and support files as a
-bounded unresolved source; it does not turn OPUS geometry into a qualified measurement or a
+bounded source. For a pinned `.IMG` and unambiguous `.LBL` or `.XML`, `telescope outputs` and
+`telescope export` use the same `pdr` native-array reader as qualified deliveries. This preserves
+native units, special-value masks and associated uncertainty when the label supplies them;
+source results remain scientifically unresolved. OPUS geometry does not become a qualified measurement or a
 numbered choice for `get`. A failed request, including the
 HTML error page OPUS returns for an invalid query, is reported as `unavailable`, never as an
 empty result. The entry sits in `services` with the ESO, ALMA, PSA, and MAST JWST/HST searches:

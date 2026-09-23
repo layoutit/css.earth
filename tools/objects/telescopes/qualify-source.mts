@@ -128,7 +128,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
 }
 
 /** Check every detached pointer before pdr can resolve files outside the pinned dependency set. */
-export async function assertPdsDependencies(root: string, product: SourceProduct): Promise<void> {
+export async function assertPdsDependencies(root: string, product: { readonly labelPath?: string; readonly files: readonly { readonly path: string; readonly role: string }[] }): Promise<void> {
   const pending = product.files.filter(file => file.role === 'label' || file.path === product.labelPath), visited = new Set<string>();
   while (pending.length) {
     const file = pending.shift()!; if (visited.has(file.path)) continue; visited.add(file.path);
@@ -137,7 +137,9 @@ export async function assertPdsDependencies(root: string, product: SourceProduct
     if (pds4Blocks(label,'Product_Observational').length) {
       for (const entry of pds4Elements(label,'file_name')) {
         const path=resolve(dirname(inside(root,file.path)),entry.content.trim());
-        if(!product.files.some(f=>inside(root,f.path)===path))throw new Error(`Unpinned PDS4 dependency ${entry.content}.`);
+        const actual=await realpath(path).catch(()=>undefined);
+        if(!actual||!(await Promise.all(product.files.map(async f=>await realpath(inside(root,f.path))===actual))).some(Boolean))
+          throw new Error(`Unpinned PDS4 dependency ${entry.content}.`);
       }
       continue;
     }

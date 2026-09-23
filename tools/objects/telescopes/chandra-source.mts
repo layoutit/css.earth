@@ -1,7 +1,10 @@
 /** Pin one selected Chandra archive event file without claiming a reprocessed observation. */
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { cxcQuery, chandraObservation, obsidDirectory, TAP } from '../chandra/archive.mts';
 import { deliverSource, rawHttpsFetch, readSavedSource } from './archive-source.mts';
+import { describeChandraEvents } from './families/f10-events.mts';
 
 export async function fetchChandraSource(explorationPath: string, pick: number, outputDirectory: string,
   query: typeof cxcQuery = cxcQuery, observe: typeof chandraObservation = chandraObservation, fetcher: typeof fetch = rawHttpsFetch,
@@ -41,5 +44,12 @@ export async function fetchChandraSource(explorationPath: string, pick: number, 
     limitations: ['The archive target name or sky position does not prove target detection.',
       'The original level-2 event list is preserved; no independent reprocessing or fitness qualification is claimed.'],
     files: [{ url: event.url, name, bytes: event.bytes, ...(/\.gz$/u.test(name) ? { archiveEncoding: 'gzip' as const } : {}) }],
+    ...(observation.instrument.startsWith('ACIS') && event.bytes <= 32 * 1024 * 1024 ? {
+      describe: async (directory: string) => describeChandraEvents({
+        id: `chandra-${obsid}-events`, expectedObservationId: String(obsid), producingRecord: 'output.product.json', acquisition: 'archive',
+        member: { id: 'events', path: name, role: 'science', mediaType: /\.gz$/u.test(name) ? 'application/gzip' : 'application/fits' },
+        archiveBytes: await readFile(resolve(directory, name)),
+      }),
+    } : {}),
   }, fetcher);
 }
