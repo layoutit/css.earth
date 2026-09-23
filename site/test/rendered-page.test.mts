@@ -38,7 +38,9 @@ for (const id of BODIES) {
     // The rendering claim: geometry is CSS transforms, painted from prepared textures.
     const html = document.documentElement.outerHTML;
     assert.ok(html.includes('matrix3d('), 'geometry must be placed with matrix3d');
-    assert.ok(html.includes('/scenes/'), 'surfaces must reference prepared textures');
+    const assetOrigin = process.env.ASSET_ORIGIN?.replace(/\/$/, '');
+    const preparedTexture = assetOrigin ? `${assetOrigin}/runtime-assets/` : '/scenes/';
+    assert.ok(html.includes(preparedTexture), 'surfaces must reference prepared textures');
 
     // No runtime canvas or WebGL. SVG is allowed sparingly, so it is bounded rather than banned.
     assert.equal(document.querySelectorAll('canvas').length, 0, 'no canvas may be served');
