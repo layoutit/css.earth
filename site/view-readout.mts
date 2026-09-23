@@ -3,20 +3,16 @@ import type { WorldCameraPose } from '../src/renderers/css/navigation/world-came
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
-import type { SurfaceAxes } from './surface-minimap-math.mts';
-import type { MapViewport, SurfaceMapReader } from './surface-map-context.mts';
+import type { SurfaceMapReader } from './surface-map-context.mts';
 import { parseSurfaceMapConfig } from './surface-map-context.mts';
-import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { OverviewScope } from './overview-context.mts';
 type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
 interface ViewReadout { setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
-import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
-import { minimapCamera } from './surface-minimap-rectangle.mts';
+import { loadSurfaceGeometry, loadedSurfaceGeometry } from './surface-geometry.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';
 
-const referenceAxes: SurfaceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };
 const dot = (a: PositionM, b: PositionM) => a.reduce((sum, value, i) => sum + value * b[i], 0);
 const units: readonly (readonly [number, string])[] = [[299792458 * 31557600, 'ly'], [149597870700, 'AU'], [1000, 'km'], [1, 'm']];
 const number = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
@@ -52,37 +48,6 @@ export function viewScale(metersPerPixel: number, maxWidth = 80) {
   const measurePixels = value * unitSize / metersPerPixel;
   const labelNumber = value >= 1e6 ? compactNumber : number;
   return { label: `${labelNumber.format(value)} ${unit}`, pixels: maxWidth, measurePixels };
-}
-
-export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes, mapLeftEdgeLongitudeDeg = 0 }: { eyeM: PositionM; radiusM: number; rotation: WorldRotation; view: MapViewport; focalPixels: number; axes?: SurfaceAxes; mapLeftEdgeLongitudeDeg?: number }) {
-  const camera = minimapCamera({ eye: [eyeM[0] / radiusM, eyeM[1] / radiusM, eyeM[2] / radiusM], rotation, view, axes: axes ?? referenceAxes });
-  const pick = (x: number) => {
-    const point = camera.pickEllipsoid({ x, y: .5 }, Ellipsoid.UNIT_SPHERE);
-    // At interstellar distances a subpixel globe may be below float precision.
-    return point && Math.abs(Math.hypot(point.x, point.y, point.z) - 1) < 1e-5 ? point : null;
-  };
-  const center = pick(.5);
-  const width = (view.right - view.left) * focalPixels;
-  const a = pick(.5 - .5 / width), b = pick(.5 + .5 / width);
-  let metersPerPixel, scaleTitle;
-  if (a && b) {
-    const cross = [a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x];
-    metersPerPixel = Math.atan2(Math.hypot(...cross), a.x * b.x + a.y * b.y + a.z * b.z) * radiusM;
-    scaleTitle = 'Approximate surface scale at the center of the view';
-  } else {
-    const forward = rotateWorldPosition(rotation, [0, 0, -1]);
-    metersPerPixel = -dot(eyeM, forward) / focalPixels;
-    scaleTitle = 'Scale at the distance of the selected object';
-  }
-  return {
-    altitudeM: Math.max(0, Math.hypot(...eyeM) - radiusM),
-    coordinates: center && axes ? {
-      latitude: Math.asin(Math.max(-1, Math.min(1, center.z / Math.hypot(center.x, center.y, center.z)))) * 180 / Math.PI,
-      // The axes count longitude from the map's left edge, as the feature labels do.
-      longitude: ((Math.atan2(center.y, center.x) * 180 / Math.PI + mapLeftEdgeLongitudeDeg) % 360 + 540) % 360 - 180,
-    } : null,
-    scale: viewScale(metersPerPixel), scaleTitle,
-  };
 }
 
 export function measurePreparedFocusView(world: WorldCameraPose, focus: PreparedFocus, focalPixels: number) {
@@ -126,7 +91,10 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     dateGroup.hidden = !Number.isFinite(world.epochJdTt);
     const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
     if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
-    const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : measureView({
+    // The surface picking math loads after the first frame; the readout fills in when it arrives.
+    const geometry = preparedFocus ? null : loadedSurfaceGeometry();
+    if (!preparedFocus && !geometry) void loadSurfaceGeometry().then(refresh);
+    const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : geometry?.measureView({
       eyeM: [world.pose.positionM[0] - navigation.frame.originM[0], world.pose.positionM[1] - navigation.frame.originM[1], world.pose.positionM[2] - navigation.frame.originM[2]],
       radiusM: navigation.frame.bodyRadiusM, rotation: cssCameraAxesFromOrientation(world.pose.orientationXyzw),
       view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes, mapLeftEdgeLongitudeDeg: surface?.mapLeftEdgeLongitudeDeg,
@@ -135,13 +103,13 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     write(altitude, formatViewDistance(distance.meters));
     if (distanceLabel) write(distanceLabel, distance.label);
     if (distanceGroup) distanceGroup.title = distance.title;
-    coordinates.hidden = !value.coordinates;
-    if (value.coordinates) {
+    coordinates.hidden = !value?.coordinates;
+    if (value?.coordinates) {
       write(latitude, formatViewCoordinate(value.coordinates.latitude, 'N', 'S'));
       write(longitude, formatViewCoordinate(value.coordinates.longitude, 'E', 'W'));
     }
-    scale.hidden = !value.scale;
-    if (value.scale) {
+    scale.hidden = !value?.scale;
+    if (value?.scale) {
       write(scaleLabel, value.scale.label);
       ruler.style.width = `${value.scale.pixels.toFixed(2)}px`;
       measure.style.width = `${value.scale.measurePixels.toFixed(2)}px`;
