@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-110067f",
+  "radiusKm": 16589.534,
+  "radiusSource": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: radius 2.601 +/- 0.042 Earth radii, using 6378.137 km per Earth radius. Mass 5.04 Earth masses; GM uses Earth's GM 398600.435507 km^3/s^2. No oblateness is measured; the rendered shape is a sphere.",
+  "orbitalPeriodDays": 41.05854,
+  "orbitalPeriodSource": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: 41.05854 d. A fixed-period display approximation, not an N-body model or current transit prediction.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the measured transit radius. This package has no resolved image, surface colour or oblateness measurement."
+  }
+}

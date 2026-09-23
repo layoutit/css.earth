@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hd-110067",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "path": "photometry/espresso.fits",
+    "format": "fits-table-array",
+    "extension": "SPECTRUM",
+    "wavelength": {
+      "column": "WAVE",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux",
+      "missing": 0
+    },
+    "quality": {
+      "column": "QUAL",
+      "good": 0
+    },
+    "gaps": [],
+    "source": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
+    "checked": "2026-09-23"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}
