@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ganymede-dark-material.webp",
+      "bytes": 71842,
+      "sha256": "d9b7c3c493189a7766be7066efc9e55c01abb71b2ff95faa4d773304069909bc"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-dark-material@2x.webp",
+      "bytes": 89810,
+      "sha256": "e8d441e26b173f0f4583edfa4f27376089ccf6c2bb4c6171cd6e3364b3b09114"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-enhanced@2x.webp",
       "bytes": 7128736,
       "sha256": "1310bc4ba61cdad4ca40f37630644457b2ce6a4c52128d8e958b88159ac15ee3"
@@ -21,6 +33,24 @@
     },
     {
       "location": "public",
+      "filename": "ganymede-ice-fraction.webp",
+      "bytes": 67808,
+      "sha256": "c15b604e2d23d41a5a10282431f2484811c20c562036d7fcb47a62e9b266c040"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-ice-fraction@2x.webp",
+      "bytes": 86476,
+      "sha256": "45f9abceb97d0a2ad760b44c38b7ddb69dbe1f6834ee7abbc1d4f731ba2a1f76"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-lens-dark-material.webp",
+      "bytes": 4194,
+      "sha256": "6ac505cb56fe32b6338799621ff6c9f7570166add5b7f6d7b29de03cdf6aa23c"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-lens-enhanced.webp",
       "bytes": 962,
       "sha256": "ddba6d84c5c2ce3daab48e0ad5eb247a3eddb5c4cfcd7f321e59c71ff6815202"
@@ -30,6 +60,12 @@
       "filename": "ganymede-lens-geology.webp",
       "bytes": 1388,
       "sha256": "592f356e5beeb0f3c92530e2ba2ae1888b43e6bf1bae867a5b52ddd704a3d8f7"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-lens-ice-fraction.webp",
+      "bytes": 3868,
+      "sha256": "d236ee987c20f37d0325b8db9b8d9f768a4e1c1301531f31c7046480a822a81f"
     },
     {
       "location": "public",
@@ -255,6 +291,18 @@
     },
     {
       "location": "public",
+      "filename": "ganymede-poles-dark-material.webp",
+      "bytes": 3934,
+      "sha256": "0bb77552130b1d225271f45f807fc5e8759b2cdd7d9ee37ddbe0e84f7b066130"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-poles-dark-material@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-poles-enhanced@2x.webp",
       "bytes": 226008,
       "sha256": "43dd5bbe8377315f24d93938407f564f3ed69b4d8ec02f49aea9302e763cc929"
@@ -264,6 +312,18 @@
       "filename": "ganymede-poles-geology@2x.webp",
       "bytes": 11260,
       "sha256": "d0a72f2188303c037b1db6b635e8e33bfdfd3741d06fa612b3e8c550f2faedba"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-poles-ice-fraction.webp",
+      "bytes": 3934,
+      "sha256": "0bb77552130b1d225271f45f807fc5e8759b2cdd7d9ee37ddbe0e84f7b066130"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-poles-ice-fraction@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
     },
     {
       "location": "public",
