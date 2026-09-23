@@ -36,6 +36,14 @@ and redirected input or output never prompt. Without `--out`, the command create
 under `./telescope-runs/`. An exploration delivery retains “no scientific acceptance criteria
 requested” through later outputs.
 
+The saved answer reports `outcome.selection` separately from `outcome.coverage`. An unavailable
+provider, overflow, unread source, unanswered ledger or unresolved metadata makes coverage
+`incomplete`, even if another choice is available. When no choice is available, the terminal
+distinguishes that from a bounded search with no retrievable route and from an unresolved target.
+Provider failures appear before long lists of unresolved rows. Fix the reported blocker and use a
+new exploration directory for another run; the saved numbered choices do not change. A bounded
+empty result is not a claim that no observation exists outside these configured searches.
+
 `explore` also asks the PDS Ring-Moon Systems Node's
 [OPUS search](https://opus.pds-rings.seti.org/api/) which spacecraft images exist of the body.
 This covers Voyager, Galileo, Cassini, New Horizons and the other missions OPUS indexes. OPUS
@@ -121,6 +129,10 @@ pins require a new query or exploration directory and a fresh `get` before expor
 For the repository script, use `pnpm --silent telescope … --json` to suppress pnpm’s own preamble.
 Progress goes to stderr; `--json` keeps stdout machine-readable, including when a
 native reducer prints to its inherited stdout. `--verbose` retains the full query report.
+The saved query also has `answer.endpoint.coverage`, separate from its workflow status. A failed
+archive query is incomplete even when indexed candidate modes exist. The normal terminal view
+shows provider status before a bounded list of mode blockers; the saved result and `--verbose`
+retain the full evidence.
 Exit 3 can accompany a valid delivered cube: it means scientific requirements remain
 unresolved. Repeating `get` revalidates current qualifications and the exported files
 before reporting reuse. It refuses modified deliveries rather than overwriting them.

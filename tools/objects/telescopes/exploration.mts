@@ -1,8 +1,8 @@
 /** Human discovery starts from a target and preserves omitted scientific filters as omitted. */
 import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget } from './sky/target.mts';
 import { flagValue } from '../../cli/cli-arguments.mts';
-import { PRODUCT_KINDS, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue,
-  type ProductKind, type QueryInputs, type TargetCoverage } from './query.mts';
+import { PRODUCT_KINDS, assessSearchCoverage, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue,
+  type ProductKind, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query.mts';
 import { canonicalTargetRequest, resolveTarget, type TargetResolution } from './targets.mts';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
@@ -37,17 +37,30 @@ export interface ExplorationChoice {
 }
 export interface ExplorationIssue {
   readonly scope: 'target' | 'provider' | 'observation' | 'indexed-source';
-  readonly code: 'unknown-target' | 'ambiguous-target' | 'provider-unavailable' | 'provider-overflow' | 'provider-target-unknown' | 'unsupported-observation' | 'filter-unresolved' | 'coverage';
+  readonly code: 'unknown-target' | 'ambiguous-target' | 'provider-unavailable' | 'provider-overflow' | 'provider-target-unknown' | 'unsupported-observation' | 'filter-unresolved' | 'source-unavailable' | 'coverage';
   readonly reason: string; readonly identity?: string;
 }
 export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService }
+export interface ExplorationOutcome {
+  /** A choice is a current route, not a guarantee that retrieval or qualification will succeed. */
+  readonly selection: 'available' | 'none';
+  /** Bounded means only that configured searches answered within their stated scopes, never a complete archive inventory. */
+  readonly coverage: SearchCoverage;
+}
 export interface ExplorationAnswer {
   readonly schema: typeof EXPLORATION_SCHEMA; readonly request: ExplorationRequest;
   readonly target: string; readonly targetResolution: TargetResolution;
+  readonly outcome: ExplorationOutcome;
   readonly choices: readonly ExplorationChoice[]; readonly unresolved: readonly ExplorationIssue[]; readonly unsupported: readonly ExplorationIssue[];
   readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService)[]; readonly coverage: readonly TargetCoverage[];
   /** The pinned SIMBAD answers a target outside the catalogue was resolved from in this run. */
   readonly skyResolution?: SkyResolution['evidence'];
+}
+
+export function explorationOutcome(answer: Omit<ExplorationAnswer, 'outcome'>): ExplorationOutcome {
+  return { selection: answer.choices.length ? 'available' : 'none',
+    coverage: assessSearchCoverage({resolution:answer.targetResolution,indexed:answer.coverage,providers:answer.services,
+      sourceIncomplete:answer.issues.some(issue=>issue.code==='source-unavailable'),unresolved:answer.unresolved.length>0}) };
 }
 
 const numberFlag = (args: readonly string[], flag: string): number | undefined => {
@@ -118,10 +131,11 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
   const targetResolution = resolveTarget(request.target, inputs.targetCatalogue);
   if (targetResolution.status !== 'resolved') {
     const code = targetResolution.status === 'ambiguous' ? 'ambiguous-target' : 'unknown-target';
-    return { schema: EXPLORATION_SCHEMA, request, target: request.target, targetResolution, choices: [], unresolved: [], unsupported: [], services: [], coverage: [],
+    const answer: Omit<ExplorationAnswer, 'outcome'> = { schema: EXPLORATION_SCHEMA, request, target: request.target, targetResolution, choices: [], unresolved: [], unsupported: [], services: [], coverage: [],
       issues: [{ scope: 'target', code, reason: targetResolution.status === 'ambiguous'
         ? `Target is ambiguous: ${targetResolution.candidates.map(candidate => candidate.id).join(', ')}.`
         : `Target is unknown.${targetResolution.suggestions.length ? ` Suggestions: ${targetResolution.suggestions.map(suggestion => suggestion.id).join(', ')}.` : ''}` }] };
+    return { ...answer, outcome: explorationOutcome(answer) };
   }
   const target = targetResolution.canonical.id, canonicalRequest = canonicalTargetRequest(request, target), choices: Omit<ExplorationChoice, 'pick'>[] = [], unresolved: ExplorationIssue[] = [], unsupported: ExplorationIssue[] = [];
   const indexed = indexedTargetObservations(inputs, target);
@@ -183,9 +197,10 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     else if (issue.state === 'unsupported') unsupported.push({ scope: 'indexed-source', code: 'unsupported-observation', identity: issue.path, reason: issue.reason });
   }
   const missingHeaders = inputs.sourceIntakeIssues?.filter(issue => issue.state === 'unavailable') ?? [];
-  if (missingHeaders.length) issues.push({ scope: 'indexed-source', code: 'coverage', identity: 'source manifest',
+  if (missingHeaders.length) issues.push({ scope: 'indexed-source', code: 'source-unavailable', identity: 'source manifest',
     reason: `${missingHeaders.length} declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.` });
-  return { schema: EXPLORATION_SCHEMA, request: canonicalRequest, target, targetResolution, choices: choices.map((choice, index) => ({ ...choice, pick: index + 1 })), unresolved, unsupported, issues, services, coverage: indexed.coverage };
+  const answer: Omit<ExplorationAnswer, 'outcome'> = { schema: EXPLORATION_SCHEMA, request: canonicalRequest, target, targetResolution, choices: choices.map((choice, index) => ({ ...choice, pick: index + 1 })), unresolved, unsupported, issues, services, coverage: indexed.coverage };
+  return { ...answer, outcome: explorationOutcome(answer) };
 }
 
 /**

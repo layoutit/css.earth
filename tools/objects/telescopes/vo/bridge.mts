@@ -28,7 +28,7 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
   const results = await Promise.allSettled(SERVICES.map(profile => discoverer(root, profile, request, target.names, limits)));
   for (let i = 0; i < results.length; i++) {
     const result = results[i]!, profile = SERVICES[i]!;
-    if (result.status === 'rejected') { services.push({ service: profile.service, state: 'unavailable', scope: 'Target-name query', reason: String(result.reason) }); continue; }
+    if (result.status === 'rejected') { services.push({ service: profile.service, state: 'unavailable', scope: 'Target-name query', reason: result.reason instanceof Error ? result.reason.message : String(result.reason) }); continue; }
     const snapshot = result.value;
     services.push({ service: profile.service, state: snapshot.completeness === 'failed' ? 'unavailable' : snapshot.completeness === 'overflow' ? 'overflow' : snapshot.response.rows.length ? 'sampled' : 'empty-in-scope',
       scope: snapshot.scope, reason: snapshot.response.issues.join('; ') || `${snapshot.response.rows.length} rows; this bounded name search is not an archive inventory.` });

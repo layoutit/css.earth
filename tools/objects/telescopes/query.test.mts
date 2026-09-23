@@ -96,6 +96,7 @@ test('a colliding designation remains ambiguous through the capability query', (
   ] }));
   assert.equal(answer.targetResolution.status, 'ambiguous');
   assert.equal(answer.endpoint.status, 'unknown-target');
+  assert.equal(answer.endpoint.coverage, 'target-unresolved');
   assert.match(formatAnswer(answer), /Ambiguous target 2009 RE26/u);
 });
 
@@ -128,6 +129,7 @@ test('an unsearched target is an incomplete index, while an explicit empty searc
   const skipped = queryCapabilities({ target: 'comet-1p', wavelengthMicrometres: [0.6, 0.7], time: { any: true }, angularResolutionArcsec: 2,
     kind: 'image', result: 'telescope-product' }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [{ object: 'comet-1p', reason: 'moving-target identifier unavailable' }] } }]));
   assert.equal(skipped.endpoint.status, 'index-incomplete');
+  assert.equal(skipped.endpoint.coverage, 'incomplete');
   assert.deepEqual(skipped.endpoint.blockerCodes, ['target-index-unavailable']);
   assert.deepEqual(skipped.targetCoverage, [{ telescope: 'spitzer', ledger: 'data/spitzer/ledger.json', state: 'not-searched', reason: 'moving-target identifier unavailable' }]);
   assert.deepEqual(skipped.withoutTheTarget, []);
@@ -135,7 +137,16 @@ test('an unsearched target is an incomplete index, while an explicit empty searc
   assert.equal(unsearched.endpoint.status, 'index-incomplete');
   const empty = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, searched: ['comet-1p'], notAsked: [] } }]));
   assert.equal(empty.endpoint.status, 'no-selectable-candidate');
+  assert.equal(empty.endpoint.coverage, 'bounded');
   assert.deepEqual(empty.withoutTheTarget.map(entry => entry.telescope), ['spitzer']);
+});
+
+test('query reports incomplete coverage when a provider fails despite indexed candidate modes',()=>{
+  const ask={target:'europa',wavelengthMicrometres:[3.4,3.6] as [number,number],kind:'cube' as const,time:{any:true as const},angularResolutionArcsec:1,result:'telescope-product' as const};
+  const answer=queryCapabilities(ask,inputs([{telescope:'jwst',value:JWST_LEDGER}],{vo:{records:[],services:[{service:'fixture',state:'unavailable',scope:'target-name query',reason:'Toolchain missing.'}]}}));
+  assert.ok(answer.candidates.length>0);
+  assert.equal(answer.endpoint.coverage,'incomplete');
+  assert.equal(answer.archiveAccess?.services[0]?.state,'unavailable');
 });
 
 test('PDS products rejected by normalization are not reported as an empty archive', () => {

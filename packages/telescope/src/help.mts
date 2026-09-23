@@ -118,6 +118,14 @@ body map + embeddable standard body -> sphere; prepared point/volume/volume-lens
 Configured, bounded archive searches and a declared product kind do not promise universal
 archive coverage, decoding or export. Qualified FITS images, spectra, band images and feature maps
 use zero-based HDU, plane and pixel indices. Cubes require an explicit plane for image export.
+Explore records outcome.selection (available or none) separately from outcome.coverage
+(bounded, incomplete or target-unresolved). A provider failure, overflow, unread source or
+unresolved discovery makes coverage incomplete even when another observation is selectable.
+Query records endpoint.coverage separately from its scientific workflow status, so indexed
+candidate modes do not hide failed provider searches. Human query output puts provider status
+first and bounds the blocker list; --verbose and the saved JSON retain the full evidence.
+No choices in a bounded search never proves that no observation exists. Retry after fixing a
+provider or source error in a new directory; the original numbered choices stay immutable.
 Export writes FITS images or ECSV spectra, PNG, SVG, CSV and a pinned receipt.
 The output directory must be new. No browser or viewer service is required.
 Local import copies and pins a bounded file or directory closure from a data-only JSON specification.
