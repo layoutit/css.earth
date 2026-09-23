@@ -51,7 +51,7 @@ uncertainty threshold; those dated selections are not a current catalogue.
    names or URLs, and text a record repeats, are not evidence: the same author
    wrote them. A discovery matches by year and every surname. `--check` reports
    without writing; `--prune` removes what no record proves.
-3. Run `pnpm prepare:factsheets -- <object-id>` to publish facts and refresh their
+3. Run `node tools/prepare/prepare-factsheets.mts -- <object-id>` to publish facts and refresh their
    preparation references. Add `--check` to verify without writing; omit the ID
    only when intentionally processing all bodies.
 
@@ -67,12 +67,14 @@ ever inferred. A value no record proves is not a fact the site shows; remove it
 (`node tools/sources/cite-pinned-facts.mts -- <object-id> --prune` removes what the pinned records cannot
 cite) rather than leaving it uncited.
 
-The facts-only preparer preserves the other content and scene data, and rejects
-changed source pins. Card lines, introductions and dataset text are not content:
-they live in the body's `text.json` and publish with `pnpm prepare:text`; see
+The facts-only preparer preserves the other content and scene data, checks the
+content's manifest declaration and validates its citations. It refreshes the
+inventory for changed prepared text; it does not compare source digest pins.
+Card lines, introductions and dataset text are not content:
+they live in the body's `text.json` and publish with `node tools/prepare/prepare-text.mts`; see
 [reader text](reader-text.md). After a lens label change, run the body's content
 preparation, then `node tools/prepare/prepare-object-json.mts <object-id>` with the
-preparation tools built, and refresh provenance with `pnpm prepare:provenance <object-id>`.
+preparation tools built, and refresh provenance with `node tools/prepare/prepare-provenance.mts <object-id>`.
 Imagery, legends, charts, settings, numeric scene data and lens inventory changes
 still require their preparation owners. Shared ordering keeps four initial rows
 and the View more/View less disclosure.

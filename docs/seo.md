@@ -11,7 +11,7 @@ camera fragments do not change metadata. The sitemap contains one canonical
 URL per registered object, and `/robots.txt` advertises it.
 
 Bodies without a committed capture advertise the default Earth capture, so a
-share preview never points at a missing file. `pnpm prepare:social --object=<id>`
+share preview never points at a missing file. `node tools/prepare/prepare-social-images.mts --object=<id>`
 adds a body's own capture and the page then advertises it.
 
 Social previews are plain screenshots of each actual CSS scene, with the
@@ -26,23 +26,23 @@ Use prepared assets matching the inventories and real Chrome:
 ```sh
 pnpm setup:assets
 pnpm build
-pnpm prepare:social                  # all registered objects
-# pnpm prepare:social --object=earth # one object
+node tools/prepare/prepare-social-images.mts                  # all registered objects
+# node tools/prepare/prepare-social-images.mts --object=earth # one object
 pnpm build                          # include the new images
-pnpm test:seo http://localhost:4210 # use the existing server
+node --test site/test/seo-discovery.test.mts
 ```
 
 Inspect the images before committing them. A new object needs its own capture.
-`prepare:social` starts and closes a preview on port 4266; pass
+The social-image preparer starts and closes a preview on port 4266; pass
 `--base-url=http://localhost:4210` to capture an existing server instead.
 
 ## Check metadata and deployment
 
-The SEO check reads the existing server on 4210 (or the supplied URL) with
-JavaScript disabled. It checks metadata, headings, homepage reachability,
-sitemap coverage, and referenced image dimensions. To inspect production output,
-point it at an already-running preview of that build. It never starts another
-server. Results are written to `output/seo/report.json`.
+`site/test/seo-discovery.test.mts` checks the reachability algorithm with synthetic
+page graphs. It does not crawl a running site. Inspect the built HTML and an
+already-running preview for titles, descriptions, canonical URLs, headings,
+sitemap coverage and image dimensions. The retired `seo-browser.mts` runner and
+its `output/seo/report.json` are not current verification entry points.
 
 After deployment, verify HTTPS and host redirects, canonical URLs, robots and
 sitemap responses, and real 404 responses on the chosen host. Submit the sitemap

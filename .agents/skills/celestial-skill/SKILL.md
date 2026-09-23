@@ -17,6 +17,12 @@ the same PR when a preparation change alters its documented routes or checks;
 implementation-only changes do not require a skill edit.
 Installed copies should follow this version.
 
+Use the [root source and delivery policy](../../../AGENTS.md#sources-and-prepared-delivery):
+tracked manifests, descriptors and recipes name source files by path without
+file-stability hashes. Preserve product versions and acquisition routes. Runtime
+inventories identify published bytes; original evidence and untracked result
+receipts retain their own hashes. A source-coverage check is not digest verification.
+
 Build a body whose appearance is supported by its sources and whose behavior
 comes from cssEarth's shared application. Follow this workflow for a new body;
 for a repair, enter at the affected stage and reuse valid work already done.
@@ -99,7 +105,7 @@ intended changes. When none is designated, start one task-owned server if needed
 If isolation is needed, keep unrelated changes and servers intact; do not
 silently validate a different checkout or accumulate servers on new ports.
 
-Inspect available pinned inputs before downloading alternatives. Before
+Inspect available declared inputs before downloading alternatives. Before
 finalizing a new body's lenses or expanding its views, make a brief source
 survey beyond the first usable texture. Use the
 [source directory](references/source-directory.md) to choose concrete archives
@@ -186,7 +192,7 @@ Do not commit downloaded webpages as evidence.
 Follow [Sources authoring](../../../docs/sources-catalogue.md#add-or-update-a-source)
 when adding or changing inputs: reuse the published identity, preserve each local
 file and bind its actual role. Refreshing sources must preserve existing bindings.
-Run `pnpm prepare:sources` when source records, bindings or generated attribution
+Run `node tools/prepare/prepare-provenance.mts` when source records, bindings or generated attribution
 change. A README-only spelling correction does not trigger source preparation.
 For factsheets, put citations on the individual facts using the existing
 [factsheet fields](../../../docs/factsheets.md#editing-and-reproduction).
@@ -194,13 +200,14 @@ Preserve each fact's evidence when editing content. A general page credit does
 not supply a citation for every number on that page.
 Write the card line, introduction and dataset text in the body's `text.json`,
 cite the source records a reviewer checks them against, and run
-`pnpm prepare:text`; see [reader text](../../../docs/reader-text.md).
+`node tools/prepare/prepare-text.mts`; see [reader text](../../../docs/reader-text.md).
 
 Record the following for selected inputs in the existing source record and
 manifest:
 
 - Provider product identifier and version, authoritative URLs, credits and reuse
-  terms; required inputs must be checked in or restorable from their pins. Keep
+  terms; required inputs must be checked in or restorable by their acquisition
+  recipe. Record their paths and source bindings, not new manifest digests. Keep
   the source’s native labels and stated processing level. Read metadata from the
   selected product, not a neighboring input; resolve contradictory fields before
   relying on them. File hashes, source versions and our code revision are distinct.

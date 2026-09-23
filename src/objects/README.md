@@ -25,7 +25,7 @@ src/objects/<id>/
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  catalogue entry, recipe and prepared transport reference
   text.json                    card line, introduction and dataset text, with their sources
-  source/manifest.json         exact inputs, documents and intermediate pins
+  source/manifest.json         input paths, documents, acquisition and source bindings
   source/preparation/          acquisition and capability configuration
   source/content/              body-owned facts, dataset recipes and controls
   source/                      original inputs, labels and necessary source notes
@@ -37,8 +37,8 @@ public/scenes/<id>/             installed/generated serving assets
 public/navigation/body-<id>*.webp   prepared navigation images
 public/navigation/<id>-context.webp  optional resolved context image
 packages/astronomy/data/bodies/<id>.json  physical data and orbit records
-tests/objects/unit/<id>/        hand-written body checks; template bodies live in the shared anchor tables instead
-tests/objects/browser/<id>/     profiles for the shared browser harness
+tests/objects/unit/             shared runtime/package and scientific checks
+site/test/                     shell, route and rendered-page checks
 site/pages/[id].astro           one shared route for all body ids
 ```
 
@@ -53,7 +53,8 @@ Scientific inputs determine geometry, appearance, supported views and physical
 facts. Reuse existing preparation code with the new body's own source parameters.
 A new recipe operation needs shared code, records of its inputs and outputs,
 and tests of its behavior. Keep source interpretation and static processing out of
-runtime. Preserve pinned original bytes and reproducible preparation.
+runtime. Preserve original input bytes and reproducible preparation; record versions and
+acquisition routes in their source records.
 
 ## Register a body without editing shared lists
 
@@ -72,7 +73,7 @@ Acquisition tools accept `--object=<id>` for asteroid, comet and moon updates.
 They update that body's records; building the library needs no downloads.
 
 After authoring the sources and records, run `pnpm prepare:catalog` and
-`pnpm build:astronomy`, then `pnpm prepare:navigation <id>` and the selected-body
+`pnpm build:astronomy`, then `node tools/prepare/prepare-navigation.mts <id>` and the selected-body
 preparation command below. If this is a parent's first moon, also prepare the
 parent's navigation image. Commit the new body's files and navigation images.
 Adding a capability or changing a parent's physical data can still require
@@ -86,7 +87,10 @@ cannot shift another body's sprite coordinates.
 
 ## Sources and delivery
 
-The source manifest owns exact input IDs, sizes, hashes, credits and terms.
+The source manifest owns input IDs, paths, acquisition, credits and terms.
+Tracked source files are identified by Git, not manifest hash fields. Downloads
+are restored by path from their origin or source cache; runtime inventories
+separately verify the published outputs by byte count and SHA-256.
 Follow [Sources authoring](../../docs/sources-catalogue.md#add-or-update-a-source)
 for canonical identities and `sourceBinding` on each input. Reuse an existing
 published source across bodies; local files keep their own identities.
@@ -95,8 +99,9 @@ recipe. The manifest also lists documents and generated intermediate files.
 Every new source note inside `source/` needs its own manifest entry.
 
 `prepared/provenance.json` is generated product lineage; see its
-[existing contract](../../docs/object-provenance.md). A recovered record is not
-proof of fresh acquisition. Runtime inventories describe prepared delivery;
+[existing contract](../../docs/object-provenance.md). Layered bodies regenerate it; volumes and
+catalogues restore their baked provenance from the inventory. A recovered record
+is not proof of fresh acquisition. Runtime inventories describe prepared delivery;
 source restoration and runtime installation are separate checks.
 
 Installation and common controls belong in the [root README](../../README.md).
@@ -106,14 +111,13 @@ Read the current `package.json` and runner arguments before using commands:
 | --- | --- |
 | Install published prepared assets for one body | `pnpm setup:assets --object=<id>` |
 | Start the shared development site | `pnpm dev` |
-| Acquire missing pins / verify present sources | `node tools/objects/dist/operations.js acquire <id>` / add `--verify-only` |
+| Restore missing source inputs | `node tools/assets/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
-| Update source and mission catalogues | `pnpm prepare:sources` |
-| Give a new download its first pin | `node tools/sources/pin-object-documents.mts <id> --adopt-downloads` (`--check` only reports). Files authored here carry no pin; git records them |
+| Update scene-body provenance and source/mission catalogues | `node tools/prepare/prepare-provenance.mts [<id>]` |
 | Bind new inputs to catalogue records | `node tools/sources/author-source-records.mts <id>` |
-| Run body tests | `CSSEARTH_TEST_OBJECTS=<id> node --test tests/objects/unit/*.test.mts tests/objects/unit/<id>/*.test.mts` (a body covered only by a shared anchor table has no directory of its own); `pnpm test:objects` runs every body file |
-| Run shared package, renderer, platform and shell tests | `pnpm test` |
-| Check source identities, bindings and catalogue generation | `pnpm test:sources` |
+| Check shared body runtime behavior | `node --test tests/objects/unit/runtime-package.test.mts`; run affected scientific tests in `tests/objects/unit/` too |
+| Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
+| Check source identities and bindings | `node --test "src/platform/source-*.test.mts" "tools/sources/*.test.mts"`, or select the affected files |
 | Create the oracle environment and regenerate oracle fixtures | `node tools/oracles/setup.mts`, `node tools/oracles/run.mts`; see `tools/oracles/README.md` |
 | Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
@@ -122,11 +126,13 @@ Read the current `package.json` and runner arguments before using commands:
 Build the shared preparation tools before invoking their `dist/` entry points.
 Select checks using the [PR rules](../../docs/provenance/CONTRACT.md#pull-requests);
 this table lists available commands, not a checklist for every body addition.
-`pnpm test:planets` runs the registry; its current runner does not implement an
-`--object` filter. Use the direct body test path for focused checks.
-`pnpm test` excludes the separate body and preparation runners. Read the browser
-harness coverage before reporting results; a focused case is not an aggregate
-pass. Tests requiring sources/assets need those dependencies installed.
+The retired per-body test folders and browser-profile registry are not required
+for a new object. Shared tests discover body packages; add a scientific regression
+where its calculation or preparation behavior is owned. `pnpm test:node` includes
+the broad native test tree with its Vite import loader. Input-dependent tests may
+skip on a bare checkout. Record those skips, install the needed inputs for a
+qualification claim, and inspect real browser output for changed visuals or
+interactions. Built-HTML assertions alone do not establish browser behavior.
 
 ## Update documentation with the change
 
