@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import type { SurfaceBankPlan, SurfaceBankLenses } from './contracts.mts';
-export interface TextureLevelConfiguration {widths:readonly number[];hysteresis:number;texelsPerCssPixel:number}
+export interface TextureLevelConfiguration {widths:readonly number[];fixedWidth?:number;hysteresis:number;texelsPerCssPixel:number}
 interface TextureLevelAsset {url:string;decodedBytes:number}
 interface TextureLevelReceipt {source:string;sourceSha256:string;url:string;sha256:string;width:number;height:number;bottomPadding:number}
 import sharp from 'sharp';
@@ -15,10 +15,11 @@ export interface TextureLevelBank {id: string; urls: readonly string[]}
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
 export async function prepareTextureLevels({ config, plan, lenses, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string};plan?:SurfaceBankPlan;lenses?:SurfaceBankLenses;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
-  const { widths, hysteresis, texelsPerCssPixel } = config.textureLevels;
+  const { widths, fixedWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
   const canonicalWidth = config.atlas.pageSize;
   if (!Array.isArray(widths) || widths.at(-1) !== canonicalWidth || widths.some((width, i) =>
     !Number.isInteger(width) || width < 1 || canonicalWidth % width || i > 0 && width <= widths[i - 1]) ||
+    (fixedWidth !== undefined && !widths.includes(fixedWidth)) ||
     !(hysteresis >= 0 && hysteresis < 1) || !(texelsPerCssPixel >= 1)) throw new TypeError('Invalid prepared atlas levels.');
   const banks = selectedBanks
     ? selectedBanks.map(bank=>({id:bank.id,urls:requireSurfacePages(bank.urls,`Texture level ${bank.id}`,config.publicBase)}))

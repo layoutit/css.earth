@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
+import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 import { writePreparedSet } from '../../tools/prepared/write-prepared-set.mts';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
 test('private material masters stay staged while all consumer JSON is preflighted',async()=>{
@@ -81,6 +82,7 @@ async function publicationFixture() {
   await put(join(outputDirectory, 'minimaps/old.webp'), 'old preview');
   await put(join(stage, 'prepared/minimaps.json'), '{"images":[{"path":"minimaps/new.webp"}]}');
   await put(join(stage, 'prepared/minimaps/new.webp'), 'new preview');
+  await inventoryPreparedAssets({ objectId: 'fixture', objectDirectory: stage });
   return { root, canonical, args: { id: 'fixture', stage, objectDirectory, outputDirectory, publicDirectory, projectRoot: canonical } };
 }
 
@@ -128,4 +130,3 @@ test('invalid staged metadata or missing previews fail without changing canonica
     assert.deepEqual(await snapshot(fixture.canonical), before);
   } finally { await rm(fixture.root, { recursive: true, force: true }); }
 });
-
