@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { bindViewUrl } from "../view-url-runtime.mts";
+import { createSceneView } from '../scene-view.mts';
+import { createSceneSessions } from '../scene-session.mts';
+import { createNavigationLifecycle } from '../navigation-lifecycle.mts';
+import type { BrowserWindow } from '../browser-types.mts';
 import { formatSharedView, parseSharedView } from "../../src/renderers/css/dist/navigation.js";
 
 import type { ObjectSharedView } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
@@ -25,7 +28,7 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
   const timers = new Map<number, { callback(): void; delay?: number }>(), writes: (string | URL)[] = [],
     errors: string[] = [], restored: SharedView[] = [];
   let sequence = 0, motion = false, time = 0;
-  let listener: (() => void) | null = null;
+  const listeners = new Set<() => void>();
   windowTarget.location = new URL(href);
   const historyState = { existing: true };
   windowTarget.history = { state: historyState, replaceState(state, title, next) {
@@ -36,13 +39,24 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
   // Fired timers advance the fake clock by their delay.
   windowTarget.performance = { now: () => time };
   const view: ObjectSharedView = { capture: requested => ({ ...captured(), playback: { ...captured().playback, motionRequested: requested ?? false } }),
-    async restore(value) { restored.push(value); listener?.(); return true; },
-    subscribe(next) { listener = next; return () => { listener = null; }; } };
-  const owner = bindViewUrl({ windowTarget: windowTarget as unknown as Window, view, getMotion: () => motion, setMotion: value => { motion = value; },
-    replace: url => windowTarget.history.replaceState(windowTarget.history.state, '', url),
-    onError: error => errors.push(error instanceof Error ? error.message : String(error)) });
+    async restore(value) { restored.push(value); listeners.forEach(listener => listener()); return true; },
+    subscribe(next) { listeners.add(next); return () => { listeners.delete(next); }; } };
+  const onError = (error: unknown) => errors.push(error instanceof Error ? error.message : String(error));
+  const scenes = createSceneSessions();
+  const session = scenes.start({ objectId: 'mercury', url: href, onFailure: (_session, error) => onError(error), onCleanupError: onError });
+  const activation = session.activate(() => ({ ready: Promise.resolve(), sharedView: view,
+    pause() {}, resume() {}, destroy() {},
+  }), {} as HTMLElement, {});
+  const sceneView = createSceneView({ windowTarget: windowTarget as unknown as BrowserWindow, scenes,
+    requests: createNavigationLifecycle({ onCancel() {}, onError }), listenToPopState: true,
+    getHistory: () => null, getWorld: () => null, getMotion: () => motion, setMotion: value => { motion = value; }, onError,
+  });
+  const owner = {
+    async restore() { await activation; await sceneView.arrive(session); session.commit(); },
+    destroy() { session.dispose(undefined, { flush: false }); },
+  };
   return { owner, windowTarget, timers, writes, errors, restored,
-    changed: () => listener?.(), motion: () => motion,
+    changed: () => listeners.forEach(listener => listener()), motion: () => motion,
     tick() { const [id, entry] = required(timers.entries().next().value); timers.delete(id); time += entry.delay ?? 0; entry.callback(); } };
 }
 
@@ -90,7 +104,7 @@ test("invalid links leave the current scene usable and are replaced only after a
 test("popstate restores the stored camera and disposal removes history listeners and scheduled work", async () => {
   const h = fixture(); await h.owner.restore();
   h.windowTarget.location = new URL(`http://localhost:4210/mercury?${formatSharedView(saved())}`);
-  h.windowTarget.dispatchEvent(new Event("popstate")); await Promise.resolve(); await Promise.resolve();
+  h.windowTarget.dispatchEvent(new Event("popstate")); await new Promise<void>(resolve => setImmediate(resolve));
   assert.deepEqual(h.restored, [saved()]);
   h.changed(); assert.equal(h.timers.size, 1); h.owner.destroy();
   h.windowTarget.dispatchEvent(new Event("popstate")); h.changed();
