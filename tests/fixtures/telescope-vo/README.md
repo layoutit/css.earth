@@ -9,8 +9,9 @@ Captured on 2026-09-20 using the repository's pinned PyVO 1.9.1 during the indep
 | `eso-circle.fits` | Actual 290,880-byte response for ICRS circle 88.792938, 7.407063, radius 0.3/3600 degrees; 166×166 primary array. SHA-256 `fd2a2d371e121bb50f64d781ac57b60f2f76d2c25d71f1c6a5ab9b5e262def60`. This is a transfer/format fixture, not a calibration or region-coverage oracle. |
 | `eso-obscore.xml` | Original ESO TAP response to `SELECT TOP 1 * FROM ivoa.ObsCore WHERE dataproduct_type='image' AND s_ra BETWEEN 88.78 AND 88.81 AND s_dec BETWEEN 7.39 AND 7.42`. Captured by the new boundary; reproduces zero-dimensional masked values. SHA-256 `0aee7b10fa96ed66c0de76da16f917e3674eb1fc1904660a422aa9f86ffb0a22`. |
 | `psa-epn.xml` | Original PSA TAP response to `SELECT TOP 1 * FROM psa.epn_core WHERE target_name='Mars'`. Captured by the new boundary; tests EPN field metadata and missing values. SHA-256 `9ee97fdf5bd1a48e7701f556484d42943a33b9fc532a34d68fd360e440aa6b85`. |
+| `koa-empty-overflow.xml` | Original KOA TAP response captured 2026-09-23 to `SELECT targname, COUNT(*) AS frames FROM koa_deimos WHERE koaimtyp='object' AND targname IN ('Betelgeuse') GROUP BY targname`, with `MAXREC=10`. The archive returned zero rows with `QUERY_STATUS=OVERFLOW`, so this table cannot prove an empty search. SHA-256 `80bfa93988509bc20629779c357bae1603c1149dc151241cc226c7c226c80c7c`. |
 
-Source services: [ALMA TAP](https://almascience.eso.org/tap), [ESO DataLink](https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647), [ESO SODA](https://dataportal.eso.org/dataPortal/soda/sync).
+Source services: [ALMA TAP](https://almascience.eso.org/tap), [KOA TAP](https://koa.ipac.caltech.edu/TAP), [ESO DataLink](https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647), [ESO SODA](https://dataportal.eso.org/dataPortal/soda/sync).
 
 Tests may replace the ESO service endpoint with a local test server. Those responses are synthetic protocol fixtures and make no live-service claim. The ESO fixed-ID UCD `meta.id;meta.dataset` compatibility is limited to that documented declaration; missing parameters are never invented.
 

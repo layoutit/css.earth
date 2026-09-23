@@ -12,6 +12,7 @@ import { selectedProductInput } from './selected-product.mts';
 import { saveSession, saveExploration, getSession, sessionRequest, observationChoices, savedChoice, type SessionServices } from './session.mts';
 import { explorationAnswer } from './exploration.mts';
 import { parseCli } from './cli.mts';
+import { SERVICES } from './vo/discovery.mts';
 
 const args = ['--target', 'test-body', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'telescope-product'];
 const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
@@ -179,4 +180,24 @@ test('get finds a saved archive choice by its identity when the service stamps e
   assert.equal(savedChoice([...fresh, choice('acq-1', 'obs-1', 'response-at-10:06')], saved), undefined, 'an ambiguous identity is refused');
   const indexed = { key: 'indexed', reference: { kind: 'indexed-observation' } };
   assert.equal(savedChoice(fresh, indexed), undefined, 'indexed observations still match by their exact key');
+});
+
+test('get scopes archive revalidation to the registered service in its saved choice', async () => {
+  const f = await fixture();
+  try {
+    const out = resolve(f.root, 'archive-explore'), service = SERVICES[0]!.service;
+    await mkdir(out);
+    const saved = { schema: 'cssearth-telescope-exploration@1', target: 'test-body', arguments: ['test-body'],
+      choices: [{ pick: 1, key: 'saved-key', observation: 'archive-obs', archiveService: service,
+        reference: { kind: 'vo-acquisition', observation: 'archive-obs', acquisitionKey: 'acq', snapshot: 'first' } }] };
+    await writeFile(resolve(out, 'explore.json'), JSON.stringify(saved));
+    const api: SessionServices = { ...f.api, explore: async (_root, _request, observation, _progress, selection) => {
+      assert.equal(observation, 'archive-obs');
+      assert.deepEqual(selection, { archiveService: service });
+      throw new Error('scope reached');
+    } };
+    await assert.rejects(getSession(f.root, out, 1, () => {}, api), /scope reached/u);
+    await writeFile(resolve(out, 'explore.json'), JSON.stringify({ ...saved, choices: [{ ...saved.choices[0], archiveService: 'https://example.org/unregistered' }] }));
+    await assert.rejects(getSession(f.root, out, 1, () => {}, api), /not registered/u);
+  } finally { await f.cleanup(); }
 });

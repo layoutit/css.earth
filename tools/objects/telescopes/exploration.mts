@@ -2,7 +2,7 @@
 import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget } from './sky/target.mts';
 import { flagValue } from '../../cli/cli-arguments.mts';
 import { PRODUCT_KINDS, assessSearchCoverage, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue,
-  type ProductKind, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query.mts';
+  type ArchiveSelection, type ProductKind, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query.mts';
 import { canonicalTargetRequest, resolveTarget, type TargetResolution } from './targets.mts';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
@@ -227,19 +227,22 @@ export async function skyTargetRequest(root: string, request: ExplorationRequest
   return resolution ? { request: withRegion(resolution.target), simbadMiss: false, evidence: resolution.evidence } : { request, simbadMiss: true };
 }
 
-export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<ExplorationInputs> {
+export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
+  archiveSelection?: ArchiveSelection): Promise<ExplorationInputs> {
   const sky = request.skyTarget ? [skyCatalogueEntry(request.skyTarget)] : [];
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
+  if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection);
   const target = targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
   const [inputs, opus] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target)]);
   const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target), searchGeminiLeads(root, target)]);
   return { ...inputs, opus, archiveLeads };
 }
 
-export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<ExplorationAnswer> {
+export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
+  archiveSelection?: ArchiveSelection): Promise<ExplorationAnswer> {
   progress?.('Resolving target');
-  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation, progress));
+  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation, progress, archiveSelection));
   if (sky.evidence) return { ...answer, skyResolution: sky.evidence };
   if (!sky.simbadMiss) return answer;
   return { ...answer, issues: answer.issues.map(issue => issue.scope === 'target' ? { ...issue, reason: `${issue.reason} SIMBAD resolves no object by that name either.` } : issue) };
