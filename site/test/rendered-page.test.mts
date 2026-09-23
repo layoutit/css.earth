@@ -25,10 +25,10 @@ async function page(id: string) {
 }
 
 for (const id of BODIES) {
-  test(`${id}: the built page is a single clean prepared scene`, async t => {
+  test(`${id}: the built page is a single clean prepared scene`, async () => {
     assert.ok(SCENE_OBJECTS.some(object => object.id === id), `${id} must be a registered scene`);
     const document = await page(id);
-    if (!document) return t.skip('no dist build; run pnpm build first');
+    assert.ok(document, `${id} has no dist build; run pnpm build first`);
 
     const stage = document.querySelector('.object-stage');
     assert.ok(stage, 'the page must carry an object stage');

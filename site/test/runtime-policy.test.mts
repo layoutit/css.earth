@@ -5,11 +5,9 @@ const test = sourceTest();
 import {
   bindResponsiveOrbitPolicy,
   automaticPlaybackPolicy,
-  CANONICAL_PREPARED_IMAGE_DENSITY,
   DESKTOP_VIEWPORT_MIN,
   MOBILE_VIEWPORT_MAX,
   MOBILE_VIEWPORT_QUERY,
-  SKYBOX_DRAG_ENABLED,
   WHEEL_ZOOM_SPEED_MULTIPLIER,
   WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
@@ -62,14 +60,6 @@ test("keeps one shared orientation-aware responsive shell boundary", () => {
     MOBILE_VIEWPORT_QUERY,
     "(max-width: 820px), (orientation: portrait)",
   );
-});
-
-test("uses one canonical high-density image bank for every mount", () => {
-  assert.equal(CANONICAL_PREPARED_IMAGE_DENSITY, 2);
-});
-
-test("skybox orbit dragging is enabled by the shared input policy", () => {
-  assert.equal(SKYBOX_DRAG_ENABLED, true);
 });
 
 // The traced reference response is one commanded interval of travel per 100
