@@ -2,7 +2,7 @@ import type { MotionCompletion } from './types.js';
 
 type FlightFrame = 'presented' | 'idle' | 'complete';
 interface Options {
-  windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>;
+  windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame'> & { performance: Pick<Performance, 'now'> };
   signal?: AbortSignal;
   paused?: boolean;
   advance(elapsedS: number, stepS: number): FlightFrame | Promise<FlightFrame>;

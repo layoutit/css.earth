@@ -48,27 +48,15 @@ export function flyToSurfaceDirection(navigation: ObjectWorldNavigation, { direc
   const start = navigation.capture();
   const rotation = surfaceOrbitRotation(start, origin, directionWorld);
   const startDistance = Math.hypot(start.pose.positionM[0] - origin[0], start.pose.positionM[1] - origin[1], start.pose.positionM[2] - origin[2]);
-  if (reducedMotion || !(durationMilliseconds > 0)) {
-    navigation.apply(surfaceOrbitPose(start, origin, rotation, 1, distanceM));
-    return { done: Promise.resolve({ completed: true }), cancel() {} };
-  }
-  let frame: number | null = null, expected: WorldCameraPose | null = null, resolve!: (value: { completed: boolean }) => void;
-  const done = new Promise<{ completed: boolean }>(next => { resolve = next; });
-  const began = windowTarget.performance.now();
+  const duration = reducedMotion ? 0 : Math.max(0, durationMilliseconds);
   const ease = (t: number) => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-  const finish = (completed: boolean) => { signal?.removeEventListener('abort', cancel); if (frame !== null) windowTarget.cancelAnimationFrame(frame); frame = null; resolve({ completed }); };
-  const cancel = () => finish(false);
-  signal?.addEventListener('abort', cancel, { once: true });
-  const step = () => {
-    frame = null;
-    const current = navigation.capture();
-    if (expected && current.pose.positionM.some((value, axis) => Math.abs(value - expected!.pose.positionM[axis]!) > 1e-3 * distanceM)) { finish(false); return; }
-    const progress = Math.min(1, (windowTarget.performance.now() - began) / durationMilliseconds), share = ease(progress);
-    expected = surfaceOrbitPose(start, origin, rotation, share, startDistance + (distanceM - startDistance) * share);
-    navigation.apply(expected);
-    if (progress >= 1) { finish(true); return; }
-    frame = windowTarget.requestAnimationFrame(step);
-  };
-  frame = windowTarget.requestAnimationFrame(step);
-  return { done, cancel };
+  const flight = navigation.motion.start({ windowTarget, signal, advance(elapsedS) {
+    const progress = duration === 0 ? 1 : Math.min(1, elapsedS * 1000 / duration), share = ease(progress);
+    const pose = surfaceOrbitPose(start, origin, rotation, share, startDistance + (distanceM - startDistance) * share);
+    const acknowledge = (shown = true) => !shown || flight.signal.aborted ? 'idle' as const
+      : progress === 1 ? 'complete' as const : 'presented' as const;
+    const publication = navigation.apply(pose, { signal: flight.signal });
+    return publication ? publication.then(acknowledge) : acknowledge();
+  } });
+  return { done: flight.finished, cancel: flight.cancel };
 }
