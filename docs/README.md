@@ -18,6 +18,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
 | What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
+| Telescope CLI setup, saved queries and outputs, and the boundary to a normal body scene | [Telescope command guide](../packages/telescope/README.md) |
 | Pinning an observation, re-running the observatory's own software, and what each kind of check establishes | [Virtual telescopes](virtual-telescopes.md) |
 | Querying VO archives, selecting bounded science products and retaining acquisition evidence | [VO observation access](vo-observation-access.md) |
 | Which upstream packages own a mechanical boundary here, and which contracts stay ours | [Astronomy package ownership](astronomy-package-ownership.md) |

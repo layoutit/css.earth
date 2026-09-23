@@ -1,6 +1,6 @@
 # @cssearth/telescope
 
-The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request.
+The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. The package interface is a command-line interface: `package.json` exposes a `telescope` binary, not a JavaScript import or HTTP API. Repository code also has internal telescope modules; their exports are not a separate supported package interface.
 
 This package supplies the command, not the observatory pipelines or catalogue. It uses a **css.earth science checkout** containing the telescope API, source manifests and any required Python environments. It can run from any directory with `--workspace PATH` or `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically. Acquisition and reduction caches stay in that checkout, while deliveries go to your `--out` directory. The package does not download a checkout, install Python, or run pipelines during npm installation.
 
@@ -8,7 +8,7 @@ This package supplies the command, not the observatory pipelines or catalogue. I
 
 Use Node 22.18+ (22.x) or Node 24+. Prepare a css.earth checkout with its documented dependencies. Archive discovery uses `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install`; PDS decoding uses `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/pds-toolchain.mts install`. Some reduction routes require additional instrument toolchains described by their existing guides.
 
-The package has not been published by this PR. To test the distributable from the repository:
+Inside the repository, use `pnpm telescope --help` after installing its dependencies. To test the distributable from the repository:
 
 ```sh
 npm pack ./packages/telescope
@@ -51,7 +51,7 @@ directory. Invalid selectors are rejected by the same command parser used by exp
 be entered again. Press Enter at any selection or parameter prompt to cancel before an export starts.
 With `--json` or redirected input/output, inspection never prompts or starts an operation. The same
 inspection is returned as structured data with `--json`. Supported inputs are telescope delivery
-JSON, telescope product records, and prepared point-field or density-volume `object.json` packages.
+JSON, telescope product records, and prepared point-field, density-volume or volume-lens-bank `object.json` packages.
 A raw FITS or PDS file alone has no admitted provenance or qualification and is refused with that
 boundary explained.
 
@@ -59,8 +59,8 @@ When you already know the scientific acceptance criteria, save an explicit reque
 
 ```sh
 telescope query eris --wavelength 2.2,2.4 --kind cube \
-  --any-time --min-arcsec 1 --out runs/eris
-telescope get runs/eris --pick 1
+  --any-time --min-arcsec 1 --out runs/eris-request
+telescope get runs/eris-request --pick 1
 ```
 
 Choose a number from the saved snapshot. The number is only presentation within that immutable snapshot; `get` binds to its recorded observation identity. It reloads current archive and qualification information, and saved commands and file paths are never executed as authority. A stale choice requires a new exploration or query. Existing verified results are reused only after their pins are checked again. A directory containing both `explore.json` and `query.json` is refused rather than guessed.
@@ -76,9 +76,9 @@ The wrapper and scientific implementation remain separate versioned components: 
 | Current artifact | Supported next operation | Additional input |
 | --- | --- | --- |
 | Qualified native delivery | image, spectrum, band image, aperture spectrum or feature map when `outputs` offers it | Explicit selectors reported by `outputs` |
-| Exported 2D measurement | body map | Pinned navigation geometry |
-| Body map | standalone interactive sphere | Complete embeddable standard body package |
-| Existing prepared point field or density volume | portable renderer handoff | None |
+| Exported 2D measurement | projected body map | Pinned navigation geometry |
+| Projected body map | standalone interactive sphere | Complete embeddable standard body package |
+| Existing prepared point field, density volume or volume lens bank | portable renderer handoff | None |
 
 These are supported transitions, not claims that every archive product supports every row.
 Discovery covers the configured archive routes and bounded service profiles; an empty name
@@ -93,11 +93,32 @@ document or output directory. Missing retained sources are reported; they are ne
 rebased or replaced. A completed transformation preserves the original request verdict, so
 export success does not turn unresolved or refused scientific evidence into fulfillment.
 
+## Using a result in a body scene
+
+For a catalogued body, `explore` saves `explore.json` with numbered `choices` and an `answer` containing `unresolved`, `unsupported`, `issues` and `services`. A choice is an available retrieval or qualification route, not a promise that the bytes and every dependency will pass `get`. For example:
+
+```sh
+pnpm --silent telescope explore ceres --json --out output/ceres-telescope
+```
+
+Read the saved file and choose a current `pick` number; substitute it for `N` below. Run `get` only for the product you intend to inspect. If it fails, read the reported blocker and repair the source closure or choose another observation; a failed attempt does not create a new verified delivery. After a successful delivery, inspect `pick-N/result.json` and its `context`, then the operations and unavailable reasons from `outputs`:
+
+```sh
+pnpm --silent telescope get output/ceres-telescope --pick N --json
+pnpm --silent telescope outputs output/ceres-telescope/pick-N/result.json --json
+```
+
+For a constrained scientific question, save a `query` with explicit kind, time and resolution criteria in its own new directory, then use the same `get` and `outputs` sequence. A `get` can deliver valid data with exit 3 when its request remains unresolved. `outputs` reports what this exact artifact can support; an archive hit or declared product kind alone does not establish a surface layer.
+
+`export --output body-map` projects a verified 2D image with explicit navigation, but its generated observation has no ledger mode or program and its resolution is sampling-only. It is not directly a scientifically published layer: [`body-map-publication.mts`](../../tools/objects/body-map-publication.mts) checks an author-produced map, its selected observation identity, measurement definition and evidence separately. `export --output sphere` packages the projected map with an existing standard sphere as **standalone HTML**, not a dataset in the normal site scene.
+
+To add a site lens, use that body's [source manifest and package guide](../../src/objects/README.md) and its existing [surface preparation owner](../../docs/surface-preparation.md). Record the selected source, interpretation, coverage and limits; prepare and inspect the body-owned assets and controls. [Ceres's clay-band recipe](../../src/objects/ceres/source/preparation/raster.json) is an example of an existing source-backed site lens, independent of the CLI sphere export. There is no general telescope command that promotes an arbitrary delivery into every body's renderer.
+
 ## Archive products
 
 Scientific queries also inspect the bounded ESO/ALMA ObsCore and ESA PSA EPN-TAP services through PyVO. Their results enter the same saved choices and `get` flow. An advertised synchronous SODA service can fulfill an explicit ICRS cutout; failed subsets never fall back to a full download. Direct FITS images and supported single-science-file ZIP/TAR raster products offer native image exports. A confirmed direct FITS binary table with one table extension offers the existing F08 operations after `get`; its calibration level remains unknown. Package tables and in-field tables are discoverable but cannot be qualified by this route.
 
-Use `telescope help` for region, frame and byte/member limits. `get --offline` replays an already delivered, pinned artifact without a remote refresh; it does not requalify it with current software. Acquisition verifies origin and integrity, while scientific request satisfaction can remain unresolved. [Protocol ownership, evidence and limitations](../../docs/vo-observation-access.md).
+Use `telescope --help` for region, frame and byte/member limits. `get --offline` replays an already delivered, pinned artifact without a remote refresh; it does not requalify it with current software. Acquisition verifies origin and integrity, while scientific request satisfaction can remain unresolved. [Protocol ownership, evidence and limitations](../../docs/vo-observation-access.md).
 
 Confirmed direct ESO SDP FITS spectra also offer the existing F03 export, range, chart-data and preview operations. Native wavelength/flux/error units and sample indices survive export; flagged or invalid samples break the spectrum into segments. Previews select at most 1,600 usable samples and record that reduction in `preview-sampling.json`; numeric exports retain all usable samples. This route supports one vector-valued spectral table with WAVE/FLUX/ERR and optional QUAL, not arbitrary spectral FITS layouts. See [the spectrum profile and example](../../docs/vo-observation-access.md#eso-sdp-spectra).
 
@@ -183,10 +204,10 @@ supported exports. It revalidates the same current prerequisites used by export,
 retained source-delivery dependencies, body-map bindings, embeddable sphere resources, and
 the physical object's loader, frame and credit closure. Availability is a checked snapshot;
 export checks again before publication. A 2D image can advance to a body map; only a
-complete projection bundle can advance to a sphere; point and volume handoffs require existing
+complete projection bundle can advance to a sphere; physical handoffs require existing
 physical depth. A completed sphere or spatial handoff is reported as terminal.
 
-The existing astronomy Python environment now includes hash-pinned Matplotlib. Reinstall it
+The astronomy Python environment includes pinned Matplotlib. Reinstall it
 with `node tools/objects/astronomy-packages/toolchain.mts install` after pulling changed pins.
 The npm package still does not install scientific dependencies automatically.
 
@@ -206,11 +227,12 @@ physical scale. CSS and base64 images are embedded; no JavaScript executes. The 
 is recorded separately. Projection preserves
 unknown beam resolution and does not qualify scientific publication. See the
 [navigation contract and oracle](../../docs/virtual-telescopes.md#projection-and-sphere).
-Physical 3D handoffs use an existing `point-field` or `density-volume` object package:
+Physical 3D handoffs use an existing `point-field`, `density-volume` or `volume-lens-bank` object package:
 
 ```sh
 telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars
 telescope export src/objects/milky-way/object.json --output volume --out galaxy
+telescope export src/objects/lmc/object.json --output volume-lens-bank --out lmc-lenses
 ```
 
 These copy the prepared renderer files and credits, validate them with the exact

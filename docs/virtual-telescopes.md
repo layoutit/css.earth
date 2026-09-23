@@ -140,9 +140,9 @@ The public chain has four supported transitions:
 | Current artifact | Supported next operation | Required addition |
 | --- | --- | --- |
 | Qualified native delivery | Supported image, spectrum, band, aperture or feature export | The selectors listed by `outputs` |
-| Exported 2D measurement | Registered body map | Explicit pinned navigation |
-| Registered body map | Standalone interactive sphere | An embeddable standard body package |
-| Existing prepared point field or density volume | Renderer handoff | None |
+| Exported 2D measurement | Projected body map | Explicit pinned navigation |
+| Projected body map | Standalone interactive sphere | An embeddable standard body package |
+| Existing prepared point field, density volume or volume lens bank | Renderer handoff | None |
 
 The command coordinates the existing archive, qualification, Astropy, PlanetMapper and renderer
 owners. It does not imply that every observation can traverse every transition. Discovery is
@@ -1039,17 +1039,20 @@ Output ownership and remaining adapters:
 | Spectral chart | Qualified wavelength axis and explicit pixel or fixed region | Executable FITS output adapter; optional background subtraction and explicitly conditional uncertainty |
 | Band image | Qualified units and wavelength bin edges | Executable wavelength-weighted mean; partial boundary bins included |
 | Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
-| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope export --output body-map`; scientific publication remains `body-map-publication.mts` |
-| Body sphere | Qualified surface map plus a prepared layer | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
-| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field and density-volume owners; `--output points` or `volume` packages a physical `object.json` |
+| Surface map | Verified 2D measurement and explicit navigation; achieved resolution may remain unknown | PlanetMapper-backed `telescope export --output body-map`; scientific publication remains `body-map-publication.mts` |
+| Body sphere | Structurally verified body-map bundle and an embeddable standard sphere | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
+| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field, density-volume and volume-lens-bank owners; `--output points`, `volume` or `volume-lens-bank` packages a physical `object.json` |
 
 `telescope outputs ARTIFACT.json` validates current telescope artifact pins and exposes this table as an
 executable transition: delivery to scientific output, image output to registered body map,
-body map to standard sphere, or an existing physical object to its point/volume handoff.
+body map to standard sphere, or an existing physical object to its renderer handoff.
 It does not advertise a later stage when the exact prerequisite outputs are absent, and terminal
 sphere and spatial records have no further output. The original request satisfaction travels in
 the derived records; rendering or projection does not upgrade it.
-The point/volume export performs the full object-package, resource, provenance and licence
+
+The generic projected map records source sampling as sampling, not achieved optical resolution, and does not name an exact ledger mode or program in its generated observation. It cannot be handed directly to `body-map-publication.mts` as an accepted scientific layer; an instrument author must supply and qualify that missing map evidence.
+
+Physical export performs the full object-package, resource, provenance and licence
 validation before it writes a handoff.
 
 A wavelength axis, radial velocity or image intensity cannot silently become physical depth.
