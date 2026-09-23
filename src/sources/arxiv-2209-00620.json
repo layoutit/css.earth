@@ -1,0 +1,66 @@
+{
+  "id": "arxiv-2209-00620",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Miles et al. (2023): The JWST Early Release Science Program for Direct Observations of Exoplanetary Systems II: A 1 to 20 Micron Spectrum of the Planetary-Mass Companion VHS 1256-1257 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2209.00620"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/acb04a"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2209.00620",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/acb04a",
+      "label": "The Astrophysical Journal Letters 946, L6"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2209.00620",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: JWST NIRSpec IFU and MIRI MRS spectrum of VHS 1256 b from 1 to 20 micrometres, 'a = 150 au'; Conclusions: best-matching model, radius 1.27 Jupiter radii, 1100 K"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-b/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-b/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-b/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-b/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-b/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters 946, L6",
+  "creators": [
+    "Brittany E. Miles",
+    "Beth A. Biller",
+    "Polychronis Patapis",
+    "Kadin Worthen",
+    "Emily Rickman",
+    "Kielan K. W. Hoch"
+  ]
+}

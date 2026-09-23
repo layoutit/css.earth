@@ -1,6 +1,5 @@
 import { expect, test, vi } from 'vitest';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { stageWorldViewport } from './object-runtime.js';
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
 const world = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5,
@@ -44,12 +43,4 @@ test('equivalent publications do not repeat world work, but every camera depende
   for (const next of [{ ...viewport, widthPixels: 100 }, { ...viewport, heightPixels: 100 },
     { ...viewport, focalPixels: 900 }, { ...viewport, principalOffsetPixels: [0, 0] as const }]) hub.publish(world, next);
   expect(listener).toHaveBeenCalledTimes(8);
-});
-
-test('stage viewport conversion accounts for camera-root placement', () => {
-  const stage = { getBoundingClientRect: () => ({ left: 100, top: 40, width: 1000, height: 700 }) } as HTMLElement;
-  const camera = { getBoundingClientRect: () => ({ left: 300, top: 100, width: 600, height: 500 }) } as HTMLElement;
-  expect(stageWorldViewport(stage, camera, 900, [12, -8])).toEqual({
-    focalPixels: 900, principalOffsetPixels: [12, -48],
-  });
 });

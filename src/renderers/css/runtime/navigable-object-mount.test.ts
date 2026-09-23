@@ -33,10 +33,10 @@ test('preflight and native mount share one authenticated definition and transfer
   const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
   if (!frame) throw new Error('Venus fixture needs its prepared world frame.');
   const read = vi.fn(async () => bytes), destroyed = vi.fn();
-  const bind = vi.fn((definition: ObjectRuntimeDefinition) => (_stage: HTMLElement, options: ObjectMountOptions) => {
+  const bind = vi.fn((definition: ObjectRuntimeDefinition, worldFrame: NonNullable<ReturnType<typeof parsePreparedWorldCameraFrame>>) => (_stage: HTMLElement, options: Pick<ObjectMountOptions, 'preparedResources'>) => {
     if (!options.preparedResources) throw new Error('Mount must receive preflight resources.');
     const resources = options.preparedResources.claim(definition.assets, {});
-    expect(options.worldFrame?.referenceFrame).toBe('sun-icrf');
+    expect(worldFrame.referenceFrame).toBe('sun-icrf');
     return { ready: Promise.resolve(), pause() {}, resume() {}, destroy() { resources.destroy(); destroyed(); },
       sharedView: { capture: () => null, restore: async () => false, subscribe: () => () => {} } };
   });
@@ -50,8 +50,7 @@ test('preflight and native mount share one authenticated definition and transfer
   }) });
   expect(bind).not.toHaveBeenCalled();
   expect(prepared.definition.tree.activationGroups?.length).toBeGreaterThan(0);
-  const mount = factory({} as HTMLElement, { preparedResources: prepared.resources, onError() {},
-    inputSurface: {} as HTMLElement, runtimePolicy: {} as never });
+  const mount = factory({} as HTMLElement, { preparedResources: prepared.resources });
   await mount.ready;
   expect(read).toHaveBeenCalledOnce();
   expect(bind.mock.calls[0][0]).toBe(prepared.definition);

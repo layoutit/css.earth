@@ -9,8 +9,7 @@ function responsiveFit(plan: ResponsiveFitOptions["plan"], width: number, height
   const bounds = (): DOMRect => ({ width, height, x: 0, y: 0, top: 0, left: 0, right: width, bottom: height, toJSON() { return { width, height }; } });
   return selectPreparedResponsiveZoom({
     // The fixture provides the only DOM operation used by responsive framing.
-    stage: { getBoundingClientRect: bounds } as HTMLElement,
-    cameraElement: { getBoundingClientRect: bounds } as HTMLElement,
+    viewport: { read: () => ({ bounds: bounds(), focalPixels: 1000, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} },
     plan,
     mobile: width < 768,
     ...options,
@@ -33,12 +32,6 @@ test('physical responsive framing honors mobile and desktop diameter independent
       }
     }
   }
-});
-
-test('legacy camera responsive framing retains its authored scale bounds', () => {
-  const plan = { ...venus.camera, projection: undefined };
-  assert.equal(responsiveFit(plan, 390, 844).zoom, plan.responsiveFit.minimumZoom);
-  assert.equal(responsiveFit(plan, 10000, 10000).zoom, plan.responsiveFit.maximumZoom);
 });
 
 test('physical responsive framing uses the world context framing reference', () => {

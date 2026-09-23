@@ -1,0 +1,32 @@
+{
+ "id": "vhs-1256-1257-companion",
+ "classification": "star",
+ "order": 1721,
+ "physical": {
+  "name": "VHS 1256-1257 B",
+  "horizonsCode": null,
+  "meanRadiusKm": 83484.0,
+  "gravitationalParameterKm3PerS2": 9356227022.96,
+  "parent": "vhs-1256-1257",
+  "effectiveTemperatureK": 2700
+ },
+ "physicalNotes": "Radius 0.12 solar radii: the model radius Climent et al. (2022, A&A 660, A65; arXiv:2201.12606) adopt for each component (Chabrier et al. 2000 models; 0.12 to 0.14 over the pair's age and mass ranges). 83,484 km. GM: half the dynamical total mass 0.141 +/- 0.008 solar masses (Dupuy et al. 2023, Table 3), as for A: the pair is nearly equal in brightness and its mass ratio poorly constrained. Temperature 2700 K: Dupuy et al.'s best BT-Settl model to the pair's combined spectrum.",
+ "hostedOrbit": {
+  "periodDays": 2668.882,
+  "semiMajorAxisStellarRadii": 3512.19,
+  "inclinationDegrees": 118.7,
+  "eccentricity": 0.8826,
+  "argumentOfPeriapsisDegrees": 224.9,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 59410.89,
+  "ascendingNodePositionAngleDegrees": 4.4,
+  "sources": {
+   "period": "Dupuy et al. (2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448), Table 3: the orvara fit to Keck/NIRC2 and MagAO relative astrometry of B around A, 2015-2022; posterior medians, which the table note calls nearly Gaussian. P = 7.307 +0.023/-0.024 yr of 365.25 d.",
+   "shape": "Dupuy et al. (2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448), Table 3: the orvara fit to Keck/NIRC2 and MagAO relative astrometry of B around A, 2015-2022; posterior medians, which the table note calls nearly Gaussian. a = 1.96 +/- 0.03 au: 3512.19 radii of A's 83,484 km; i = 118.7 +/- 1.0 degrees.",
+   "eccentricity": "Dupuy et al. (2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448), Table 3: the orvara fit to Keck/NIRC2 and MagAO relative astrometry of B around A, 2015-2022; posterior medians, which the table note calls nearly Gaussian. e = 0.8826 +0.0025/-0.0024.",
+   "argumentOfPeriapsis": "Dupuy et al. (2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448), Table 3: the orvara fit to Keck/NIRC2 and MagAO relative astrometry of B around A, 2015-2022; posterior medians, which the table note calls nearly Gaussian. omega = 44.9 +/- 1.0 degrees, B's own; stored as A's, 224.9 (packages/astronomy/src/hostedOrbits.test.ts reproduces Dupuy et al.'s Table 1 astrometry with this mapping).",
+   "phase": "Dupuy et al. (2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448), Table 3: the orvara fit to Keck/NIRC2 and MagAO relative astrometry of B around A, 2015-2022; posterior medians, which the table note calls nearly Gaussian. t_p = 2021.537 +0.015/-0.014 yr, on orvara's Julian-year scale (t_ref 2010.0 = MJD 55197): MJD 55197 + 11.537 x 365.25, taken as BMJD_TDB.",
+   "orientation": "Dupuy et al. (2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448), Table 3: the orvara fit to Keck/NIRC2 and MagAO relative astrometry of B around A, 2015-2022; posterior medians, which the table note calls nearly Gaussian. Omega = 4.4 +/- 0.5 degrees east of north."
+  }
+ }
+}

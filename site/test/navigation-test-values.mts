@@ -38,3 +38,9 @@ export const unusedSharedView: import('../../src/renderers/css/runtime/object-sc
 };
 
 export const testDistance = (value: number) => ({ meters: value * 149597870700, value, unit: 'AU' as const, quantity: 'geometric' as const, referencePoint: 'heliocentre' as const, epochJdTt: 2461286.5 });
+
+/** Session-only fixtures never measure or present a native frame. */
+export const unusedMountOptions: Pick<import('../browser-types.mts').MountOptions, 'viewport' | 'framePresenter'> = {
+  viewport: { read() { throw new Error('No native measurement in this fixture.'); }, subscribe: () => () => {}, destroy() {} },
+  framePresenter: { present() { throw new Error('No native publication in this fixture.'); } },
+};

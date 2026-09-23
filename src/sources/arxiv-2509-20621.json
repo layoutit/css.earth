@@ -1,0 +1,54 @@
+{
+  "id": "arxiv-2509-20621",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Venkatesan et al. (2025): Constraints on the Orbit of the Young Substellar Companion GQ Lup B from High-Resolution Spectroscopy and VLTI/GRAVITY Astrometry",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2509.20621"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ae0c15"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2509.20621",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ae0c15",
+      "label": "The Astrophysical Journal 993, 69"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2509.20621",
+      "checkedOn": "2026-09-23",
+      "locator": "Tables 2-4: literature, VLTI/GRAVITY astrometry and CRIRES radial velocity of GQ Lup B; section 4: orbitize! priors and sampler; Table 6: GRAVLowRV medians a 97.71 au, e 0.35, i 48.18, omega 175.82, Omega 257.08 degrees, tau 0.32"
+    },
+    {
+      "path": "src/objects/gq-lup-b/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/gq-lup-b/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal",
+  "creators": [
+    "Vidya Venkatesan",
+    "S. Blunt",
+    "J. J. Wang",
+    "S. Lacour",
+    "G. -D. Marleau",
+    "G. A. L. Coleman"
+  ]
+}

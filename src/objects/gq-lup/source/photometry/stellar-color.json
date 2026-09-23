@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "gq-lup",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4300,
+      "lowerKelvin": 4250,
+      "upperKelvin": 4350,
+      "citation": "Donati et al. (2012), MNRAS, doi:10.1111/j.1365-2966.2012.21482.x: 4300 +/- 50 K, as tabulated by Gonzalez Picos et al. (2025), Table 1, https://arxiv.org/abs/1206.1770"
+    },
+    "note": "The star has no Gaia XP spectrum or catalogue temperature of its own that describes it alone, so the colour is a Planck spectrum at the temperature its paper publishes; the range in the prepared report is the colour at the lower and upper bounds."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

@@ -2,7 +2,7 @@ import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/object-s
 import type { ObjectMountOptions } from '../src/renderers/css/runtime/object-runtime-types.js';
 import type { createPreparedObjectNavigation } from '../src/renderers/css/runtime/prepared-object-navigation.js';
 export type BrowserWindow = Window & typeof globalThis;
-export type MountOptions = Omit<ObjectMountOptions, 'runtimePolicy' | 'inputSurface'>;
+export type MountOptions = Omit<ObjectMountOptions, 'runtimePolicy' | 'inputSurface' | 'worldContext'>;
 export type SceneFactory = ((stage: HTMLElement, options: MountOptions) => ObjectSceneLifecycle) & {
   navigation?: ReturnType<typeof createPreparedObjectNavigation> | null;
 };

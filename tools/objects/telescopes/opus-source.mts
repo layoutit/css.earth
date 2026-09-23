@@ -34,7 +34,7 @@ export function opusNativeFiles(value: unknown, opusId: string, maximumMembers: 
 }
 
 export async function fetchOpusSource(explorationPath: string, pick: number, outputDirectory: string,
-  query: OpusFetch = fetchOpus, fetcher: typeof fetch = fetch) {
+  query: OpusFetch = fetchOpus, fetcher: typeof fetch = fetch, resume = false) {
   if (!Number.isSafeInteger(pick) || pick < 1) throw new TypeError('--pick must be a positive OPUS source number.');
   const bytes = await readFile(explorationPath), session = requireRecord(JSON.parse(bytes.toString('utf8')), 'saved exploration');
   if (session.schema !== EXPLORATION_SCHEMA) throw new TypeError('Expected a saved Telescope exploration.');
@@ -58,5 +58,5 @@ export async function fetchOpusSource(explorationPath: string, pick: number, out
     ...(fits.length===1?{primaryFits:fits[0]!.path}:{}),
     limitations: ['OPUS geometry and target tags identify a candidate, not confirmed target detection.',
       'Native PDS bytes and labels are preserved; no calibration, units or fitness is inferred from the OPUS listing.'],
-  }, fetcher);
+  }, fetcher, resume);
 }

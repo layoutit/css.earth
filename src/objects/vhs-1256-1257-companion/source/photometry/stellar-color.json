@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "vhs-1256-1257-companion",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 2700,
+      "lowerKelvin": 2600,
+      "upperKelvin": 2800,
+      "citation": "Dupuy et al. (2023), MNRAS 519, 1688, section 4: the best-fitting BT-Settl model to the pair's combined spectrum, 2700 K on a 100 K grid (the four neighbouring models bound the fit), https://arxiv.org/abs/2208.08448"
+    },
+    "note": "The star has no Gaia XP spectrum or catalogue temperature of its own that describes it alone, so the colour is a Planck spectrum at the temperature its paper publishes; the range in the prepared report is the colour at the lower and upper bounds."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

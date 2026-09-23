@@ -266,7 +266,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
         note(node, 'Forbidden runtime CSS masks, filters, gradients, or blending');
       }
       if (node.type === "CallExpression" &&
-          (node.callee.type === "Identifier" ? aliases.get(node.callee.name) ?? node.callee.name : propertyName(node.callee)) === "createPolyCamera") {
+          ["createPerspectiveDolly", "createPolyCamera"].includes(node.callee.type === "Identifier" ? aliases.get(node.callee.name) ?? node.callee.name : propertyName(node.callee))) {
         cameraFactories.push({ file, line: source.slice(0, sourceStart(node)).split("\n").length });
       }
       if (node.type === "BinaryExpression" && [node.left, node.right].some(hasId) ||
@@ -813,11 +813,9 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     {
       const violations: Violation[] = [], owners: string[] = [], orphanExecutors: string[] = [];
       const assemblyClosure = reachable(resolve(root, client));
-      const factoryCalls = sharedFactoryCalls.get(resolve(root, client)) ?? 0;
-      // The conditional adapter has one ordinary factory and one contextual
-      // delegation to that same renderer. Both are source-bound below; another
-      // factory anywhere in the assembled closure remains a violation.
-      const assemblyFactoryCalls = [...assemblyClosure].reduce((count, file) => count + (sharedFactoryCalls.get(file) ?? 0), 0);
+      // Every adapter reaches the same world-context binding and native mount.
+      // A second mount factory anywhere in its closure is an extra owner.
+      const factoryCalls = [...assemblyClosure].reduce((count, file) => count + (sharedFactoryCalls.get(file) ?? 0), 0);
       let prepared = null;
       try {
         requireDescriptorAdapterSource(await source(resolve(root, client)), loader.exported);
@@ -825,8 +823,6 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         await verify(object, prepared.definition);
       } catch (error) { violations.push({ file: loader.descriptor, line: 1, reason: errorMessage(error) }); }
       if (factoryCalls !== 1) violations.push({ file: client, line: 1, reason: `Expected one actual shared factory call; found ${factoryCalls}` });
-      if (assemblyFactoryCalls !== 2) violations.push({ file: client, line: 1,
-        reason: `Expected one actual shared factory call per ordinary/contextual branch; found ${assemblyFactoryCalls} source sites` });
       entries.push({ id: object.id, migrated: violations.length === 0, entry: { file: loader.descriptor, exported: loader.exported, registry: registryPath, adapter: client },
         schema: prepared ? PREPARED_OBJECT_RUNTIME_SCHEMA : null, factoryCalls,
         presentation: prepared ? { file: relative(root, prepared.payloadPath), format: 'json', property: 'data' } : null,

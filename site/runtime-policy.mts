@@ -38,7 +38,6 @@ export const FLIGHT_VISIBLE_APPROACH = Object.freeze({
 // no correction: a 100-unit swipe and one notch should travel the same way.
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
-export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
 // A released wheel gesture keeps the rate it commanded and decays it, as a
 // thrown drag does. Damping is shorter than the trackball's: the wheel drives
 // distance directly, so a glide outliving its gesture reads as drift.

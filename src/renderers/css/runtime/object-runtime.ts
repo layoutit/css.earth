@@ -4,7 +4,7 @@ import type { ObjectSelectionState } from "../rendering/object-selection-runtime
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { SharedView } from "../navigation/view-url.js";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './world-navigation-types.js';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '../navigation/world-camera.js';
 import type { ObjectDatasets } from './object-scene.js';
 import type { SurfaceFeatureLayerRuntime } from '../labels/surface-feature-types.js';
 import { errorMessage } from "../navigation/types.js";
@@ -21,7 +21,6 @@ import { createObjectSelectionRuntime } from "../rendering/object-selection-runt
 import { createObjectControlBinding } from "../rendering/object-control-binding.js";
 import { createPreparedPlayback } from "../rendering/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
-import { mountRetainedCubicSky } from "../solar-system/cubic-sky-runtime.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { initialObjectSelection, requireObjectRuntimeDefinition, selectedLensVolume } from "./object-contract.js";
@@ -30,7 +29,6 @@ import { createWorldNavigationPublicationHub } from './world-navigation-publicat
 
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
   createPlayback: createPreparedPlayback, createSelection: createObjectSelectionRuntime, createControls: createObjectControlBinding, createOrbit: createRetainedCubicSkyOrbit,
-  mountSky: mountRetainedCubicSky,
   waitDocument: waitForSceneDocument, waitPaint: waitForScenePaint });
 
 // Every registry loader binds this factory. The optional services argument is
@@ -39,15 +37,17 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, onFeatureSelect, datasetEffects, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, onFeatureSelect, datasetEffects, inputSurface, runtimePolicy, diagnostics = false, capabilities = {}, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
     }
+    if (!worldContext || !viewport || !framePresenter) throw new TypeError('Object mount requires its shared world, viewport and frame presenter.');
+    const worldFrame = worldContext.frame;
     const initialLens = stage.dataset.preparedDataset;
     if (stage.dataset.preparedView) {
       const saved = parseSharedView(`v=${stage.dataset.preparedView}`);
-      if (!saved || !worldFrame) throw new TypeError('A prepared view requires its shared world frame.');
+      if (!saved) throw new TypeError('A prepared view requires its shared world frame.');
       initialWorldCamera ??= savedWorldCamera(saved, worldFrame, { focalPixels: 1, principalOffsetPixels: [0, 0] });
       delete stage.dataset.preparedView;
     }
@@ -116,7 +116,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       reset: options => getOrbit().flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }, options),
     }) : null;
-    const preparedEpochJdTt = worldFrame?.epochJdTt ?? null;
+    const preparedEpochJdTt = worldFrame.epochJdTt;
     let restoreVersion = 0;
     const sharedView = Object.freeze({
       capture(motionRequested = false): SharedView | null {
@@ -148,7 +148,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       },
       subscribe(listener: () => void) { viewListeners.add(listener); return () => viewListeners.delete(listener); },
     });
-    const navigation: ObjectWorldNavigation | undefined = worldFrame ? Object.freeze({ frame: worldFrame,
+    const navigation: ObjectWorldNavigation = Object.freeze({ frame: worldFrame,
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal }) {
@@ -174,15 +174,15 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (state.focal === undefined || !state.principalOffset || !definition.camera.levelOfDetail) throw new TypeError('World navigation requires a physical camera.');
         return { focalPixels: state.focal, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
           visibleRect: state.visibleRect ?? null,
-          widthPixels: latestWorldPublication?.stageViewport?.widthPixels,
-          heightPixels: latestWorldPublication?.stageViewport?.heightPixels,
+          widthPixels: latestWorldPublication?.stageViewport.widthPixels,
+          heightPixels: latestWorldPublication?.stageViewport.heightPixels,
           detailHandoffDiameterPixels: definition.camera.levelOfDetail.billboardFullDiscPixels,
           framingRadiusPixels: getOrbit().currentResponsiveZoom() / definition.camera.defaultZoom * definition.camera.logicalBodyDiameter / 2 };
       },
       subscribe(listener: ObjectWorldNavigationListener) {
         return worldPublication.subscribe(listener);
       },
-    }) : undefined;
+    });
     const datasets: ObjectDatasets | undefined = definition.controls.lenses && definition.controls.lenses.controls.length ? Object.freeze({
       ids: Object.freeze(definition.controls.lenses.controls.map(item => item.id)),
       defaultId: definition.controls.lenses.defaultLens,
@@ -282,20 +282,13 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       previousPublication = publication;
       selection?.setView(currentView);
       surfaceFeatures?.publish(currentView);
-      if (worldFrame && publication.focal !== undefined && publication.principalOffset &&
-          publication.principalOffset.length === 2) {
-        latestWorldPublication = publication;
-        publishWorldSnapshot(publication);
-      }
+      latestWorldPublication = publication;
+      publishWorldSnapshot(publication);
       notifyView();
     }
     function publishWorldSnapshot(publication: OrbitPublication) {
-      if (!worldFrame || orbit === null || publication.focal === undefined ||
-          !publication.principalOffset || publication.principalOffset.length !== 2) return;
-      const latestWorld = publication.worldCamera ?? orbit.captureWorldCamera(worldFrame);
-      const latestWorldViewport = publication.stageViewport ?? stageWorldViewport(stage, mounted?.cameraElement ?? null,
-        publication.focal, publication.principalOffset);
-      worldPublication.publish(latestWorld, latestWorldViewport);
+      if (orbit === null) return;
+      worldPublication.publish(publication.worldCamera, publication.stageViewport);
     }
     async function start() {
       await lifetime.wait(environment.waitDocument(lifetime, stage.ownerDocument));
@@ -319,23 +312,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed || startup.cancelled) return;
       // Resolve any new projection before attaching the detailed scene. The
       // application-owned snapshot normally survives the handoff unchanged.
-      if (viewport && cameraPlan.projection) viewport.read(cameraPlan.projection.cssPerspective);
+      if (cameraPlan.projection) viewport.read(cameraPlan.projection.cssPerspective);
       mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation);
       if (lifetime.disposed) return;
       syncPagePlayback();
-      // Presentation owns its roots immediately during construction, including
-      // partial construction failures. The application-owned universe draws the
-      // visible sky and Sun; the object keeps only the sky orientation handles
-      // its orbit publishes to, hidden beneath the stage.
-      const cubicSky = environment.mountSky({ host: stage, plan: definition.sky, objectId: definition.id });
-      context.own(() => cubicSky.destroy());
-      const skyFade = stage.ownerDocument.createElement('div');
-      skyFade.className = 'prepared-context-sky-fade';
-      skyFade.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;visibility:hidden';
-      if (cubicSky.root.parentNode === stage) stage.insertBefore(skyFade, cubicSky.root);
-      else stage.appendChild(skyFade);
-      skyFade.appendChild(cubicSky.root);
-      context.own(() => skyFade.remove());
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement, initialLens, initialSettings,
         prepareSelection: datasetEffects && ((next, signal) => datasetEffects.prepare(selectedLensVolume(definition.controls, next.lensId), signal)),
@@ -353,8 +333,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         const featureOrigin = definition.assetOrigin, featurePlan = definition.features;
         surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
           scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
-          ...(navigation && worldFrame ? { navigation, flightLimits: () => ({ minimumDistanceM: (definition.camera.dolly?.minimumDistanceRadii ?? 1.2) * worldFrame.bodyRadiusM }),
-            onSelect: onFeatureSelect, onFlight: () => { stopMotion(); } } : {}),
+          navigation, flightLimits: () => ({ minimumDistanceM: (definition.camera.dolly?.minimumDistanceRadii ?? 1.2) * worldFrame.bodyRadiusM }),
+          onSelect: onFeatureSelect, onFlight: () => { stopMotion(); },
           ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
             fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
           lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
@@ -366,9 +346,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
         // An undrawn mesh commits no textures; it stays hidden until it has them.
         canReveal: () => selection?.state().plan?.deferredTextures !== true,
-        cubicSky, skyPlan: definition.sky, directionalSunPlan: definition.sun ?? null, worldContext,
-        cameraPlan, viewport, framePresenter, objectId: definition.id, requireSun: false, preparedSurfaceHitTest: mounted.surfaceHitTest,
-        mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal });
+        skyPlan: definition.sky, directionalSunPlan: definition.sun ?? null, worldContext,
+        cameraPlan, viewport, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
+        onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);
       if (lifetime.disposed) return;
@@ -380,7 +360,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Seed the incoming view before an asynchronous material selection can
       // paint. The shared world remains visible throughout a scene handoff.
       if (initialWorldCamera) {
-        if (!worldFrame) throw new TypeError('An initial world camera needs a prepared frame.');
         orbit.applyWorldCamera(initialWorldCamera, worldFrame);
       }
       if (!preparedResources) resources.finishStartup();
@@ -406,21 +385,4 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       else if (definition.textureLevels && currentView) selection.setView(currentView);
     }
   };
-}
-
-export function stageWorldViewport(stage: HTMLElement, camera: HTMLElement | null, focalPixels: number,
-  principalOffset: readonly number[]): WorldCameraViewport {
-  if (!camera || typeof camera.getBoundingClientRect !== 'function') {
-    return Object.freeze({ focalPixels, principalOffsetPixels: [principalOffset[0] ?? 0, principalOffset[1] ?? 0] as const });
-  }
-  const stageBounds = stage.getBoundingClientRect();
-  const cameraBounds = camera.getBoundingClientRect();
-  const cameraCenterX = cameraBounds.left - stageBounds.left + cameraBounds.width / 2;
-  const cameraCenterY = cameraBounds.top - stageBounds.top + cameraBounds.height / 2;
-  return Object.freeze({ focalPixels,
-    principalOffsetPixels: [
-      cameraCenterX - stageBounds.width / 2 + (principalOffset[0] ?? 0),
-      cameraCenterY - stageBounds.height / 2 + (principalOffset[1] ?? 0),
-    ] as const,
-  });
 }

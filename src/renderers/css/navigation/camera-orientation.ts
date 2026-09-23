@@ -1,10 +1,8 @@
-import type { CubicSkyPlan } from '../solar-system/cubic-sky-runtime.js';
 import type { CameraPlan, CameraAngles, CameraPose, Quaternion, Vector3 } from './types.js';
-export interface CameraSkyPlan { cameraPitchResponse: number; presentationPitchOffsetDegrees: number; presentationYawOffsetDegrees: number; cameraContract?: CubicSkyPlan['cameraContract']; sceneRegistration?: string; }
-export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; skyPlan: CameraSkyPlan; requireSun?: boolean; sunDirection?: Vector3 | null; sunReferenceViewDirection?: Vector3 | null; sunTracksScene?: boolean; skyTracksScene?: boolean; }
+export interface CameraSkyPlan { sceneRegistration?: string; }
+export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; skyPlan: CameraSkyPlan; sunDirection?: Vector3 | null; }
 export type CubicSkyCameraOrientation = ReturnType<typeof createCubicSkyCameraOrientation>;
 import { rotationAxisAngle } from "@cssearth/engine";
-import { preparedScenePitch } from "@cssearth/engine";
 import { cssDirectionToViewDirection } from "../solar-system/solar-view-direction.js";
 import { validateWorldRotation } from './world-camera-math.js';
 import { preparedSceneMatrix } from './prepared-camera-basis.js';
@@ -14,29 +12,9 @@ export function createCubicSkyCameraOrientation({
   controlYaw,
   cameraPlan,
   skyPlan,
-  requireSun = true,
   sunDirection = null,
-  sunReferenceViewDirection = null,
-  // An observed Sun direction is fixed in the body-fixed frame, so it has to
-  // ride the scene matrix exactly like the body does. The reference-view path
-  // instead carries its own pitch response and inverted yaw, which is a
-  // presentation choice and drifts away from the terminator as the camera
-  // moves. Objects with prepared solar geometry opt into the physical path.
-  sunTracksScene = false,
-  // The stars are as far away as the Sun, so under camera rotation they must
-  // cross the screen exactly like it: the sky then rides the scene matrix
-  // through a prepared registration (`skyPlan.sceneRegistration`, the cube's
-  // orientation in the scene frame) instead of the presentation sky response
-  // (inverted yaw, scaled pitch) the standard objects keep. Every camera path
-  // (reset, drag, flight, rebase, restore) derives the sky from the scene.
-  skyTracksScene = false,
 }: CameraOrientationOptions) {
-  const skyRegistration = skyTracksScene
-    ? parseSceneRegistration(skyPlan.sceneRegistration)
-    : null;
-  if (sunTracksScene && sunDirection === null) {
-    throw new TypeError("A scene-tracking Sun requires its local direction.");
-  }
+  const skyRegistration = parseSceneRegistration(skyPlan.sceneRegistration);
   if (sunDirection !== null && (
     !Array.isArray(sunDirection) || sunDirection.length !== 3 ||
     sunDirection.some((component) => !Number.isFinite(component)) ||
@@ -44,23 +22,12 @@ export function createCubicSkyCameraOrientation({
   )) {
     throw new TypeError("Cubic-sky Sun direction is invalid.");
   }
-  if (sunReferenceViewDirection !== null && (
-    !Array.isArray(sunReferenceViewDirection) ||
-    sunReferenceViewDirection.length !== 3 ||
-    sunReferenceViewDirection.some((component) =>
-      !Number.isFinite(component)) ||
-    Math.abs(Math.hypot(...sunReferenceViewDirection) - 1) > 1e-9
-  )) {
-    throw new TypeError("Cubic-sky Sun reference view direction is invalid.");
-  }
   const referenceSceneMatrix = createSceneMatrix(
     cameraPlan.materialReferenceControlPitchDegrees ?? controlPitch,
     cameraPlan.materialReferenceControlYawDegrees ?? controlYaw,
     cameraPlan,
   );
   let sceneMatrix: DOMMatrix;
-  let skyboxMatrix: DOMMatrix;
-  let sunViewMatrix: DOMMatrix;
   let scenePresentation: string | null = null;
   let skyboxPresentation: Readonly<{ matrix: string; sunViewDirection: Vector3 | null }> | null = null;
   let counterMatrix: DOMMatrix | null = null;
@@ -71,49 +38,15 @@ export function createCubicSkyCameraOrientation({
     counterMatrix = null;
     counterPresentations.clear();
   };
-  // The sky cube's orientation: locked to the scene through the prepared
-  // registration, or the presentation sky's own accumulated matrix.
-  const currentSkyboxMatrix = () => skyRegistration
-    ? sceneMatrix.multiply(skyRegistration)
-    : skyboxMatrix;
+  const currentSkyboxMatrix = () => sceneMatrix.multiply(skyRegistration);
   const reset = ({ controlPitch: nextPitch, controlYaw: nextYaw }: CameraAngles) => {
-    const renderedPitch = preparedScenePitch(nextPitch, cameraPlan);
-    const skyboxPitch = cameraPlan.initialScenePitchDegrees +
-      skyPlan.cameraPitchResponse *
-        (renderedPitch - cameraPlan.initialScenePitchDegrees);
     sceneMatrix = createSceneMatrix(nextPitch, nextYaw, cameraPlan);
-    const resetSkyboxMatrix = new DOMMatrix()
-      .rotateAxisAngle(
-        1,
-        0,
-        0,
-        skyboxPitch + skyPlan.presentationPitchOffsetDegrees,
-      )
-      .rotateAxisAngle(0, 0, 1, skyPlan.presentationYawOffsetDegrees);
-    skyboxMatrix = new DOMMatrix()
-      .rotateAxisAngle(0, 1, 0, -nextYaw)
-      .multiply(resetSkyboxMatrix);
-    sunViewMatrix = new DOMMatrix()
-      .rotateAxisAngle(
-        1,
-        0,
-        0,
-        (renderedPitch - cameraPlan.initialScenePitchDegrees) *
-          skyPlan.cameraPitchResponse,
-      )
-      .rotateAxisAngle(
-        0,
-        1,
-        0,
-        -(nextYaw - cameraPlan.defaultControlYawDegrees),
-      );
     invalidatePresentations();
   };
   reset({ controlPitch, controlYaw });
   return Object.freeze({
     reset,
     setSceneRotation(rotation: readonly number[]) {
-      if (!skyRegistration) throw new TypeError('A world camera requires a registered scene-tracking sky.');
       validateWorldRotation(rotation);
       sceneMatrix = new DOMMatrix([rotation[0], rotation[3], rotation[6], 0,
         rotation[1], rotation[4], rotation[7], 0, rotation[2], rotation[5], rotation[8], 0, 0, 0, 0, 1]);
@@ -124,63 +57,33 @@ export function createCubicSkyCameraOrientation({
       invalidatePresentations();
     },
     prepareFlight(target: CameraAngles, targetCorrection?: DOMMatrix) {
-      const from = [sceneMatrix, skyboxMatrix, sunViewMatrix];
+      const from = sceneMatrix;
       reset(target);
       if (targetCorrection) sceneMatrix = targetCorrection.multiply(sceneMatrix);
-      const to = [sceneMatrix, skyboxMatrix, sunViewMatrix];
-      [sceneMatrix, skyboxMatrix, sunViewMatrix] = from;
+      const to = sceneMatrix;
+      sceneMatrix = from;
       invalidatePresentations();
-      const rotations = to.map((matrix, i) => rotationAxisAngle(matrix.multiply(from[i].inverse())));
+      const { axis, degrees } = rotationAxisAngle(to.multiply(from.inverse()));
       return Object.freeze({
-        angularDistance: rotations[0].degrees,
+        angularDistance: degrees,
         sample(progress: number) {
-          const matrices = rotations.map(({ axis, degrees }, i) => progress === 0 ? from[i]
-            : progress === 1 ? to[i]
-            : new DOMMatrix().rotateAxisAngle(...axis, degrees * progress).multiply(from[i]));
-          [sceneMatrix, skyboxMatrix, sunViewMatrix] = matrices;
+          sceneMatrix = progress === 0 ? from : progress === 1 ? to
+            : new DOMMatrix().rotateAxisAngle(...axis, degrees * progress).multiply(from);
           invalidatePresentations();
         },
       });
     },
-    snapshot({ sceneOnly = false } = {}): CameraPose {
-      if (sceneOnly) {
-        if (!skyRegistration) throw new TypeError("This camera needs a registered scene orientation.");
-        return Object.freeze({ schema: "cssearth-camera-pose@2", scene: formatMatrix3d(sceneMatrix) });
-      }
-      return Object.freeze({
-        schema: "cssearth-camera-pose@1",
-        scene: formatMatrix3d(sceneMatrix),
-        skybox: formatMatrix3d(currentSkyboxMatrix()),
-        sunView: formatMatrix3d(sunViewMatrix),
-      });
+    snapshot(): CameraPose {
+      return Object.freeze({ schema: "cssearth-camera-pose@2", scene: formatMatrix3d(sceneMatrix) });
     },
     restore(snapshot: CameraPose) {
-      if (snapshot?.schema === "cssearth-camera-pose@2") {
-        if (!skyRegistration) throw new TypeError("This camera needs a registered scene orientation.");
-        sceneMatrix = parseCameraPoseMatrix(snapshot.scene, "scene");
-        invalidatePresentations();
-        return;
-      }
-      if (snapshot?.schema !== "cssearth-camera-pose@1") {
-        throw new TypeError("Cubic-sky camera pose is invalid.");
-      }
+      if (snapshot?.schema !== "cssearth-camera-pose@2") throw new TypeError("Physical camera pose is invalid.");
       sceneMatrix = parseCameraPoseMatrix(snapshot.scene, "scene");
-      skyboxMatrix = parseCameraPoseMatrix(snapshot.skybox, "skybox");
-      sunViewMatrix = parseCameraPoseMatrix(snapshot.sunView, "sun view");
       invalidatePresentations();
     },
     rotate({ renderedPitchDelta, yawDelta, rotation }: { renderedPitchDelta: number; yawDelta: number; rotation?: Quaternion }) {
       if (rotation) {
         sceneMatrix = dragRotationMatrix(rotation).multiply(sceneMatrix);
-        // The background uses the opposite X/Y view axes; Z stays coupled.
-        const viewDelta = dragRotationMatrix([
-          rotation[0] * skyPlan.cameraPitchResponse,
-          -rotation[1],
-          -rotation[2] * skyPlan.cameraPitchResponse,
-          rotation[3],
-        ]);
-        skyboxMatrix = viewDelta.multiply(skyboxMatrix);
-        sunViewMatrix = viewDelta.multiply(sunViewMatrix);
         invalidatePresentations();
         return;
       }
@@ -189,24 +92,6 @@ export function createCubicSkyCameraOrientation({
         .rotateAxisAngle(1, 0, 0, renderedPitchDelta)
         .rotateAxisAngle(0, 1, 0, yawDelta)
         .multiply(sceneMatrix);
-      skyboxMatrix = new DOMMatrix()
-        .rotateAxisAngle(
-          1,
-          0,
-          0,
-          renderedPitchDelta * skyPlan.cameraPitchResponse,
-        )
-        .rotateAxisAngle(0, 1, 0, -yawDelta)
-        .multiply(skyboxMatrix);
-      sunViewMatrix = new DOMMatrix()
-        .rotateAxisAngle(
-          1,
-          0,
-          0,
-          renderedPitchDelta * skyPlan.cameraPitchResponse,
-        )
-        .rotateAxisAngle(0, 1, 0, -yawDelta)
-        .multiply(sunViewMatrix);
       invalidatePresentations();
     },
     scene() {
@@ -259,21 +144,8 @@ export function createCubicSkyCameraOrientation({
 
     skybox() {
       if (skyboxPresentation !== null) return skyboxPresentation;
-      const sunViewDirection = sunTracksScene
-        ? Object.freeze(cssDirectionToViewDirection(
-          transformDirection(sceneMatrix, sunDirection!),
-        ))
-        : sunReferenceViewDirection
-          ? Object.freeze(transformDirection(
-            sunViewMatrix,
-            sunReferenceViewDirection,
-          ))
-          : sunDirection
-            ? Object.freeze(transformDirection(
-              skyboxMatrix,
-              sunDirection,
-            ))
-            : null;
+      const sunViewDirection = sunDirection === null ? null
+        : Object.freeze(cssDirectionToViewDirection(transformDirection(sceneMatrix, sunDirection)));
       skyboxPresentation = Object.freeze({
         matrix: formatMatrix3d(currentSkyboxMatrix()),
         sunViewDirection,

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "roxs-42b-companion",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 2600,
+      "lowerKelvin": 2580,
+      "upperKelvin": 2620,
+      "citation": "Inglis et al. (2024), AJ, Table 1: the SPHINX model fit to the pair's blended spectrum, 2600 +/- 20 K, https://arxiv.org/abs/2402.09533"
+    },
+    "note": "The star has no Gaia XP spectrum or catalogue temperature of its own that describes it alone, so the colour is a Planck spectrum at the temperature its paper publishes; the range in the prepared report is the colour at the lower and upper bounds."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

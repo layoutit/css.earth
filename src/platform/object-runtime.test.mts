@@ -1,3 +1,4 @@
+import { orbitFixture } from './test/orbit-fixture.mts';
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -19,7 +20,7 @@ const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinitio
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 function publicationForTest(): OrbitPublication {
-  return { controlPitch: 0, controlYaw: 0, zoom: 1, sceneMatrix: matrix, skyboxMatrix: matrix,
+  return { worldCamera: { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } }, stageViewport: { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 }, controlPitch: 0, controlYaw: 0, zoom: 1, sceneMatrix: matrix, skyboxMatrix: matrix,
     sunViewDirection: null, skySunViewDirection: null, counterRotation: matrix,
     counterRotationFor: () => matrix };
 }
@@ -33,7 +34,6 @@ type Residency = ReturnType<NonNullable<RuntimeServices["createResources"]>>;
 type Lifetime = ReturnType<NonNullable<RuntimeServices["createLifetime"]>>;
 type Playback = ReturnType<NonNullable<RuntimeServices["createPlayback"]>>;
 type Orbit = ReturnType<NonNullable<RuntimeServices["createOrbit"]>>;
-type Sky = ReturnType<NonNullable<RuntimeServices["mountSky"]>>;
 interface HarnessOptions { definition?: ObjectRuntimeDefinition; failAtElement?: number | null; stageId?: string | null; runtimeFactory?: RuntimeFactory; diagnostics?: boolean; }
 interface DecodeJob { resolve(): void; reject(error: unknown): void; image: ControlledImage; done: boolean; }
 class ControlledImage implements PreparedImage {
@@ -55,7 +55,7 @@ class CSSAnimation implements Pick<Animation, "play" | "pause" | "cancel" | "cur
 }
 const runtimePolicy: RuntimePolicy = {
   MOBILE_VIEWPORT_QUERY: "(max-width: 1px)", SKYBOX_DRAG_ENABLED: true, FLIGHT_WHEEL_SPEEDUP: 6, WHEEL_ZOOM_SPEED_MULTIPLIER: 1,
-  WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: 1, WHEEL_ZOOM_USE_SCROLL_DISTANCE: false, WHEEL_ZOOM_INERTIA: null, WHEEL_ZOOM_INERTIA_INPUT_KINDS: [],
+  WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: 1, WHEEL_ZOOM_INERTIA: null, WHEEL_ZOOM_INERTIA_INPUT_KINDS: [],
   sceneCursor: () => "", isOrbitDragStart: () => true, wheelZoomInputKind: () => "wheel",
   bindResponsiveOrbitPolicy: () => ({ mobile: false, destroy() {} }),
 };
@@ -85,7 +85,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
     created.push(node as unknown as HTMLElement); return node;
   };
   let lifetime: Lifetime | null = null, playback: Playback | null = null, resources: Residency | null = null, resourceOptions: ResourceOptions | null = null, orbitArguments: OrbitOptions | null = null, coordinator: Selection | null = null;
-  const publication: OrbitPublication = { controlPitch: definition.camera.defaultControlPitchDegrees ?? 0,
+  const publication: OrbitPublication = { worldCamera: { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } }, stageViewport: { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 }, controlPitch: definition.camera.defaultControlPitchDegrees ?? 0,
     controlYaw: definition.camera.defaultControlYawDegrees ?? 0, zoom: definition.camera.defaultZoom,
     sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
     skyboxMatrix: matrix, skySunViewDirection: definition.sun?.referenceViewDirection ?? [1, 0, 0], sunViewDirection: [1, 0, 0] };
@@ -101,15 +101,17 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
         resources = createPreparedResidency({ ...resourceConfiguration, createImage() { return new ControlledImage(definition, jobs); } });
         return resources;
       },
-      mountSky() { events.push("sky"); const root = f.document.createElement("div") as unknown as HTMLDivElement; return { root, cube: root, orientation: root, setOrientation() {}, destroy() { events.push("remove:sky"); } } satisfies Sky; },
       createOrbit(orbitConfiguration) {
         orbitArguments = orbitConfiguration; orbitConfiguration.onPublish?.(publication);
-        const state = () => ({ ...publication, pitch: publication.controlPitch, pose: { schema: "cssearth-camera-pose@1" as const, scene: matrix, skybox: matrix, sunView: matrix } });
+        const state = (): ReturnType<Orbit["state"]> => ({ ...publication,
+          distance: 12345000, distanceKilometers: 12345, distanceRadii: 12345000, focal: 1000, principalOffset: [0,0], visibleRect: null, offAxisDegrees: null, silhouetteRadius: null,
+          levelOfDetail: { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0, proxyOpacity: 0 }, pitch: publication.controlPitch, pose: { schema: "cssearth-camera-pose@2" as const, scene: matrix } });
         return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, preparedFocus: () => null, setPreparedFocus() { throw new Error("Focus changes are outside this mount fixture."); }, async flyToPreparedFocus() { throw new Error("Focus flights are outside this mount fixture."); }, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, presentWorldCamera: () => undefined, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, invalidate: () => orbitConfiguration.onPublish?.(publication), refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { Object.assign(publication, value); return state(); }, state, sharedState: () => ({ distanceKilometers: 12345, pose: { schema: "cssearth-camera-pose@2", scene: matrix } }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...overrides,
     });
-    runtime = mount(stage, { diagnostics, inputSurface: stage, runtimePolicy,
+    const { worldContext, viewport, framePresenter } = orbitFixture(null).arguments;
+    runtime = mount(stage, { worldContext, viewport, framePresenter, diagnostics, inputSurface: stage, runtimePolicy,
       capabilities: fixtureObjectCapabilities,
       onError: error => errors.push(error) });
   } catch (error) { f.restore(); throw error; }
@@ -132,16 +134,15 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
 test("one mount owns the actual prepared tree, startup, celestial layers, readiness and playback", async t => {
   const h = harness(); t.after(h.restore); h.runtime.resume(); h.runtime.pause(); await h.complete();
   assert.equal(h.native.playState, "paused"); assert.equal(h.native.currentTime, 0);
-  assert.ok(h.events.includes("sky")); assert.equal(h.events.at(-1), "ready");
-  // The harness records the retained sky orientation root in addition to the prepared presentation tree.
-  assert.equal(h.created.filter(node => !node.closest(".prepared-surface-features")).length, moonDefinition.tree.nodes.length + 2);
+  assert.equal(h.events.at(-1), "ready");
+  assert.equal(h.created.filter(node => !node.closest(".prepared-surface-features")).length, moonDefinition.tree.nodes.length);
   assert.equal(h.selection().stats().commits, 1);
   assert.equal(h.selection().stats().framePublications > 0, true);
   assert.deepEqual(h.orbitArguments().cameraPlan, moonDefinition.camera);
   assert.equal(h.orbitArguments().skyPlan, moonDefinition.sky);
   h.runtime.resume(); assert.equal(h.native.playState, "running");
   h.runtime.destroy(); assert.equal(h.native.cancels, 1); assert.equal(h.stage.children.length, 0);
-  assert.deepEqual(h.events.slice(-4).filter(value => value.startsWith("remove:")), ["remove:orbit", "remove:sky", "remove:camera"]);
+  assert.deepEqual(h.events.slice(-4).filter(value => value.startsWith("remove:")), ["remove:orbit", "remove:camera"]);
   assert.deepEqual(h.errors, []);
 });
 test("production mount restores camera and native playback through its shared view contract", async t => {
@@ -151,7 +152,7 @@ test("production mount restores camera and native playback through its shared vi
   assert.ok(saved);
   assert.equal(saved.camera.pose.scene, matrix);
   assert.equal(saved.playback.times.includes(2345), true);
-  assert.equal(saved.preparedEpochJdTt, null);
+  assert.equal(saved.preparedEpochJdTt, 1);
   h.native.currentTime = 0;
   await h.runtime.sharedView.restore(saved);
   assert.equal(h.native.currentTime, 2345);
@@ -163,7 +164,7 @@ test("destroy settles never-ending real startup and native rejection stays retir
   const h = harness(); t.after(h.restore); await flush(); assert.ok(h.jobs.length > 0);
   h.runtime.destroy(); await h.runtime.ready;
   for (const job of h.jobs) job.reject(new Error("late decode")); await flush();
-  assert.deepEqual(h.events, ["remove:camera", "sky", "remove:orbit", "remove:sky", "remove:camera"]); assert.deepEqual(h.errors, []);
+  assert.deepEqual(h.events, ["remove:camera", "remove:orbit", "remove:camera"]); assert.deepEqual(h.errors, []);
   assert.equal(h.resources().stats().images.entries.length, 0);
 });
 test("pre-document destroy starts no native resources or presentation", async t => {

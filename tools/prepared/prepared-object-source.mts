@@ -51,59 +51,27 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const returned = kind(kind(statements[returnIndex], 'ReturnStatement').argument, 'CallExpression');
   if (returned.arguments.length !== 4 || bindings.get(named(returned.callee))?.name !== 'loadNavigableObject' || named(returned.arguments[0]) !== descriptorInput || named(returned.arguments[3]) !== named(loader.params[1])) fail();
   const transportObject = kind(returned.arguments[1], 'ObjectExpression');
-  const adapter = kind(returned.arguments[2], 'ArrowFunctionExpression');
-  if (adapter.params.length !== 1 || adapter.params[0].type !== 'Identifier') fail();
-  const branch = kind(adapter.body, 'ConditionalExpression');
-  const ownWorldFrame = (node: Node | null | undefined): boolean => node?.type === 'MemberExpression' && !node.computed && named(node.property) === 'worldFrame' &&
-    node.object.type === 'MemberExpression' && !node.object.computed && named(node.object.property) === 'properties' && named(node.object.object) === descriptorInput;
-  const contextual = call(branch.consequent, 'bindContextualObject', 3), plain = call(branch.alternate, 'bindPackagedObject', 1);
-  const frameArgument = contextual.arguments[2];
-  const parsedFrame = frameArgument.type === 'LogicalExpression' && frameArgument.operator === '??' && named(frameArgument.right) === 'undefined'
-    ? frameArgument.left : null;
-  const validatedFrame = parsedFrame?.type === 'CallExpression' && named(parsedFrame.callee) === 'parsePreparedWorldCameraFrame' && parsedFrame.arguments.length === 1 && ownWorldFrame(parsedFrame.arguments[0]);
-  if (!ownWorldFrame(branch.test) || named(contextual.arguments[0]) !== adapter.params[0].name ||
-      !(ownWorldFrame(frameArgument) || validatedFrame) || named(plain.arguments[0]) !== adapter.params[0].name) fail();
-  if (validatedFrame && bindings.get('parsePreparedWorldCameraFrame')?.source !== '../src/renderers/css/dist/navigation.js') fail();
-  // The adapter must forward the application's own prepared world context. The
-  // shell fetches and validates it in world-context-plan.mts so only the parsed
-  // plan stays resident; a bundled JSON module kept a second copy on the heap.
-  const contextName = named(contextual.arguments[1]);
-  const contextBinding = bindings.get(contextName);
-  const contextJsonImport = ast.body.some(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
-    statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.specifiers[0].local.name === contextName &&
-    statement.source.value === '../src/objects/sun/prepared/world-context.json' &&
-    statement.attributes?.length === 1 && propertyKey(statement.attributes[0].key) === 'type' && statement.attributes[0].value.value === 'json');
-  if (!contextJsonImport && !(contextBinding?.source === './world-context-plan.mts' && contextBinding.name === 'APPLICATION_WORLD_CONTEXT')) fail();
-  const plainBinding = functions.get('bindPackagedObject');
-  if (!plainBinding || plainBinding.params.length !== 2 || plainBinding.params[0].type !== 'Identifier') fail();
-  const defaultMount = kind(plainBinding.params[1], 'AssignmentPattern');
-  const mountIdentifier = kind(defaultMount.left, 'Identifier'), defaultFactory = kind(defaultMount.right, 'CallExpression');
-  if (bindings.get(named(defaultFactory.callee))?.name !== 'createObjectRuntime' || defaultFactory.arguments.length !== 1 || named(defaultFactory.arguments[0]) !== plainBinding.params[0].name || plainBinding.body.body.length !== 1) fail();
-  const plainMount = kind(kind(plainBinding.body.body[0], 'ReturnStatement').argument, 'ArrowFunctionExpression');
-  const plainCall = call(plainMount.body, mountIdentifier.name, 2);
-  if (plainMount.params.length !== 2 || plainMount.params.some(param => param.type !== 'Identifier') || named(plainCall.arguments[0]) !== named(plainMount.params[0]) || plainCall.arguments[1].type !== 'ObjectExpression') fail();
-  const bind = functions.get('bindContextualObject');
-  // The context parameter may carry the application context as its default, so
-  // a caller that omits it still mounts against the same validated plan.
-  const contextParam = bind?.params[1];
-  const contextParamName = contextParam?.type === 'Identifier' ? contextParam.name
-    : contextParam?.type === 'AssignmentPattern' && contextParam.left.type === 'Identifier'
-      && bindings.get(named(contextParam.right))?.name === 'APPLICATION_WORLD_CONTEXT' ? contextParam.left.name : null;
-  if (!bind || bind.params.length !== 3 || bind.params[0].type !== 'Identifier' || contextParamName === null || bind.body.body.length !== 1) fail();
-  const frameParameter = kind(bind.params[2], 'AssignmentPattern'), frameDefault = kind(frameParameter.right, 'MemberExpression');
-  if (frameParameter.left.type !== 'Identifier' || frameDefault.computed || named(frameDefault.property) !== 'frame') fail();
-  const contextParameter = contextParamName;
-  const contextParser = frameDefault.object.type === 'CallExpression' ? frameDefault.object : null;
-  if (contextParser) {
-    if (named(contextParser.callee) !== 'parsePreparedWorldContext' || contextParser.arguments.length !== 1 || named(contextParser.arguments[0]) !== contextParameter || bindings.get('parsePreparedWorldContext')?.source !== '../src/renderers/css/dist/index.js') fail();
-  } else if (named(frameDefault.object) !== contextParameter) fail();
-  const mountInit = call(kind(bind.body.body[0], 'ReturnStatement').argument, 'bindPackagedObject', 2);
-  if (named(mountInit.arguments[0]) !== bind.params[0].name) fail();
-  const factory = call(mountInit.arguments[1], 'createWorldContextObjectRuntime', 1);
+  // Loading validates the required world frame and supplies it to the sole native binding.
+  if (named(returned.arguments[2]) !== 'bindPackagedObject') fail();
+  const bind = functions.get('bindPackagedObject');
+  if (!bind || bind.params.length !== 2 || bind.params.some(param => param.type !== 'Identifier') || bind.body.body.length !== 2) fail();
+  const declaration = kind(bind.body.body[0], 'VariableDeclaration');
+  if (declaration.kind !== 'const' || declaration.declarations.length !== 1) fail();
+  const mount = declaration.declarations[0];
+  if (mount.id.type !== 'Identifier') fail();
+  const factory = call(mount.init, 'createWorldContextObjectRuntime', 1);
   const fields = new Map(staticObjectProperties(kind(factory.arguments[0], 'ObjectExpression')).map(property => [propertyKey(property.key), property.value]));
-  if (named(fields.get('definition')) !== bind.params[0].name || named(fields.get('context')) !== contextParameter || named(fields.get('frame')) !== frameParameter.left.name) fail();
+  if (fields.size !== 3 || named(fields.get('definition')) !== named(bind.params[0]) || named(fields.get('frame')) !== named(bind.params[1])) fail();
+  const context = bindings.get(named(fields.get('context')));
+  if (context?.source !== './world-context-plan.mts' || context.name !== 'APPLICATION_WORLD_CONTEXT') fail();
+  const bound = kind(kind(bind.body.body[1], 'ReturnStatement').argument, 'ArrowFunctionExpression');
+  if (bound.params.length !== 2 || bound.params.some(param => param.type !== 'Identifier')) fail();
+  const mounted = call(bound.body, mount.id.name, 2);
+  if (named(mounted.arguments[0]) !== named(bound.params[0]) || mounted.arguments[1].type !== 'ObjectExpression') fail();
+  const options = mounted.arguments[1].properties;
+  if (options[0]?.type !== 'SpreadElement' || named(options[0].argument) !== named(bound.params[1])) fail();
   const rendererBinding = bindings.get('createWorldContextObjectRuntime');
-  if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('loadNavigableObject')?.source !== rendererBinding.source || bindings.get(named(defaultFactory.callee))?.source !== rendererBinding.source) fail();
+  if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('loadNavigableObject')?.source !== rendererBinding.source) fail();
   // The transport carries only the prepared read.
   const transport = transportObject.properties;
   if (transport.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' ||

@@ -13,7 +13,7 @@ import { nativeQualificationRoute } from './vo/access.mts';
 import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
 import { searchOpus, type OpusService } from './opus.mts';
-import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadService } from './archive-leads.mts';
+import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService } from './archive-leads.mts';
 import { searchChandraLeads, searchSpitzerLeads } from './other-leads.mts';
 import { loadWwtImagery, type WwtImageryResult } from './wwt/wwt-catalog.mts';
 
@@ -240,8 +240,10 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection);
   const target = targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
   const [inputs, opus, curatedImagery] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target)]);
-  const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target), searchGeminiLeads(root, target),
-    searchChandraLeads(root, target, request.region), searchSpitzerLeads(root, target, request.region)]);
+  const filter: ArchiveLeadFilter = { ...(request.instrument ? { instrument: request.instrument } : {}),
+    ...(request.time && 'fromIso' in request.time ? { time: request.time } : {}) };
+  const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target, undefined, filter), searchGeminiLeads(root, target, undefined, filter),
+    searchChandraLeads(root, target, request.region, undefined, filter), searchSpitzerLeads(root, target, request.region, undefined, filter)]);
   return { ...inputs, opus, archiveLeads, curatedImagery };
 }
 

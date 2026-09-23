@@ -17,6 +17,16 @@ export interface ArchiveLeadService {
   readonly sources?: readonly (KeckSourceLead | GeminiSourceLead | ChandraSourceLead | SpitzerSourceLead)[];
   readonly evidence?: readonly string[];
 }
+export interface ArchiveLeadFilter {
+  readonly instrument?: string;
+  readonly time?: { readonly fromIso: string; readonly toIso: string };
+}
+export function leadTime(filter?: ArchiveLeadFilter) {
+  if (!filter?.time) return null;
+  const from = Date.parse(filter.time.fromIso), to = Date.parse(filter.time.toIso);
+  if (!Number.isFinite(from) || !Number.isFinite(to) || from > to) throw new TypeError('Archive source time bounds must be valid and ordered.');
+  return { fromIso: new Date(from).toISOString(), toIso: new Date(to).toISOString(), from, to };
+}
 export interface KeckSourceLead {
   readonly table: string; readonly instrument: string; readonly koaid: string;
   readonly targetName: string; readonly filehand: string; readonly dateObs: string;
@@ -51,15 +61,19 @@ export async function saveArchiveLeadEvidence(root: string, source: string, requ
 const save = saveArchiveLeadEvidence;
 
 /** KOA publishes one TAP table per instrument. Query each sequentially to keep process and network load small. */
-export async function searchKeckLeads(root: string, target: TargetCatalogueEntry, query: typeof koaQuery = koaQuery): Promise<ArchiveLeadService> {
-  const scope = `Exact target-name variants across ${INSTRUMENT_TABLES.length} public KOA TAP instrument tables; object-frame counts and up to ${KECK_SOURCE_SAMPLE_LIMIT} exact public FITS files per instrument`;
+export async function searchKeckLeads(root: string, target: TargetCatalogueEntry, query: typeof koaQuery = koaQuery,
+  filter?: ArchiveLeadFilter): Promise<ArchiveLeadService> {
+  const time = leadTime(filter), tables = filter?.instrument ? INSTRUMENT_TABLES.filter(table => table.slice(4).toLowerCase() === filter.instrument!.toLowerCase()) : INSTRUMENT_TABLES;
+  const date = time ? ` AND date_obs BETWEEN '${time.fromIso.slice(0, 10)}' AND '${time.toIso.slice(0, 10)}'` : '';
+  const scope = `Exact target-name variants across ${tables.length} matching public KOA TAP instrument tables${time ? `; UTC observation dates ${time.fromIso.slice(0, 10)} to ${time.toIso.slice(0, 10)}` : ''}; object-frame counts and up to ${KECK_SOURCE_SAMPLE_LIMIT} exact public FITS files per instrument`;
+  if (!tables.length) return { service: TAP_SYNC, state: 'empty-in-scope', scope, reason: `KOA has no public instrument table named ${filter!.instrument}.`, instruments: [] };
   try { if (query === koaQuery) astroqueryToolchainSync(); }
   catch (error) { return { service: TAP_SYNC, state: 'unavailable', scope, reason: message(error), instruments: [] }; }
   const names = namesOf(target), literals = names.map(name => `'${name.replaceAll("'", "''")}'`).join(',');
   const instruments: ArchiveLeadService['instruments'][number][] = [], sources: KeckSourceLead[] = [], failures: string[] = [], evidence: string[] = [];
   const sample = async (table: (typeof INSTRUMENT_TABLES)[number]) => {
     const instrument = table.slice(4).toUpperCase();
-    const exact = `SELECT TOP ${KECK_SOURCE_SAMPLE_LIMIT} koaid,targname,koaimtyp,filehand,date_obs FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals}) AND filehand IS NOT NULL ORDER BY koaid`;
+    const exact = `SELECT TOP ${KECK_SOURCE_SAMPLE_LIMIT} koaid,targname,koaimtyp,filehand,date_obs FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals}) AND filehand IS NOT NULL${date} ORDER BY koaid`;
     const frames = await query(exact);
     const pin = await save(root, TAP_SYNC, exact, frames);
     const sampled: KeckSourceLead[] = [];
@@ -75,9 +89,9 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
     evidence.push(pin); sources.push(...sampled);
   };
   let attempted = 0;
-  for (const table of INSTRUMENT_TABLES) {
+  for (const table of tables) {
     attempted++;
-    const adql = `SELECT targname, COUNT(*) AS frames FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals}) GROUP BY targname`;
+    const adql = `SELECT targname, COUNT(*) AS frames FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals})${date} GROUP BY targname`;
     let hasFrames = false;
     try {
       const rows = await query(adql);
@@ -104,12 +118,16 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
 }
 
 /** CADC mirrors Gemini's public raw files and supplies stable artifact URI, size and MD5. */
-export async function searchGeminiLeads(root: string, target: TargetCatalogueEntry, query: typeof cadcQuery = cadcQuery): Promise<ArchiveLeadService> {
+export async function searchGeminiLeads(root: string, target: TargetCatalogueEntry, query: typeof cadcQuery = cadcQuery,
+  filter?: ArchiveLeadFilter): Promise<ArchiveLeadService> {
   const names = namesOf(target), searched = names.slice(0, 12), limit = 500;
-  const scope = `CADC GEMINI public OBJECT science artifacts for ${searched.length} exact archive-name variants; first ${limit} rows, up to 3 FITS files per instrument`;
+  const time = leadTime(filter), instrument = filter?.instrument?.trim(), quoted = instrument?.replaceAll("'", "''");
+  const scope = `CADC GEMINI public OBJECT science artifacts for ${searched.length} exact archive-name variants${instrument ? `, instrument ${instrument}` : ''}${time ? `, UTC ${time.fromIso} to ${time.toIso}` : ''}; first ${limit} matching rows, up to 3 FITS files per instrument`;
   if (!searched.length) return { service: CADC_TAP, state: 'empty-in-scope', scope, reason: 'No target name was available.', instruments: [] };
   const adql = `SELECT TOP ${limit} ${FRAME_COLUMNS} FROM ${FRAME_JOIN} WHERE o.collection='GEMINI' AND o.type='OBJECT' AND o.intent='science' ` +
     `AND o.target_name IN (${searched.map(name => `'${name.replaceAll("'", "''")}'`).join(',')}) ` +
+    `${quoted ? `AND o.instrument_name='${quoted}' ` : ''}` +
+    `${time ? `AND p.time_bounds_upper >= ${time.from / 86_400_000 + 40_587} AND p.time_bounds_lower <= ${time.to / 86_400_000 + 40_587} ` : ''}` +
     `AND p.dataRelease < '${new Date().toISOString()}' AND a.uri LIKE 'gemini:GEMINI/%.fits' ORDER BY p.time_bounds_lower DESC`;
   try {
     const rows = await query(adql), pin = await save(root, CADC_TAP, adql, rows);

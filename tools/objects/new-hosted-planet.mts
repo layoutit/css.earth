@@ -9,7 +9,8 @@
  * Every number here comes from those two records: the world-frame origin at the scene epoch, the radius facts, the
  * circular synchronous rotation the orbit implies and the light direction its star gives. A planet seen by its own heat (a young
  * giant imaged directly) takes --self-luminous with its cited effective temperature: it is built emissive, like the stars, with no
- * light from its host. The package starts shape-only, in the
+ * light from its host. A star on a hosted orbit (the second star of a pair that a planet orbits) is scaffolded the same way,
+ * --self-luminous with its cited temperature, and keeps its star class and a temperature catalogue colour. The package starts shape-only, in the
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node tools/prepare/prepare-object.mts <id> */
@@ -19,6 +20,7 @@ import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 import { starStylesheet } from './new-star.mts';
+import { temperatureCatalogueColor } from './star-catalogue-color.mts';
 
 export const TODO = 'TODO(new-hosted-planet)';
 const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
@@ -104,7 +106,12 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     positionEpochJulianYear: requireFiniteNumber(star.positionEpochJulianYear), distanceParsecs: requireFiniteNumber(star.distanceParsecs),
     properMotionRaMasPerYear: requireFiniteNumber(star.properMotionRaMasPerYear), properMotionDecMasPerYear: requireFiniteNumber(star.properMotionDecMasPerYear),
     radialVelocityKmPerS: requireFiniteNumber(star.radialVelocityKmPerS) };
-  const radiusKm = requireFiniteNumber(physical.meanRadiusKm), { id, name } = spec, color = spec.color ?? NEUTRAL_GRAY;
+  // A companion star on a hosted orbit (the second star of a pair a planet orbits) keeps its class, and its catalogue colour is its
+  // cited temperature through the star field's colour fit, as new-star gives a placed star.
+  const classification = body.classification === 'star' ? 'star' : 'exoplanet';
+  if (classification === 'star' && !spec.selfLuminous) throw new TypeError(`${spec.id} is a star on a hosted orbit: scaffold it --self-luminous with its cited temperature.`);
+  const radiusKm = requireFiniteNumber(physical.meanRadiusKm), { id, name } = spec;
+  const color = spec.color ?? (classification === 'star' ? temperatureCatalogueColor(spec.selfLuminous!.temperatureK) : NEUTRAL_GRAY);
   const hostKm = starStateFromAstrometryKm(astrometry, epochJdTt).positionKm;
   const relativeKm = hostedPlanetStateRelativeKm(id as Parameters<typeof hostedPlanetStateRelativeKm>[0], epochJdTt).positionKm;
   const originM = hostKm.map((value, axis) => (value + relativeKm[axis]!) * 1000);
@@ -126,7 +133,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       ...(glow ? { emission: { source: 'raster', material: 'emission' } } : {}) },
     page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
-    catalog: { name, classification: 'exoplanet', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
+    catalog: { name, classification, color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
       description: spec.description, systemName: spec.system, order, context: { order } },
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
       metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },

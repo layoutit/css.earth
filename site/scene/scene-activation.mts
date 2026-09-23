@@ -11,7 +11,7 @@ import type { SceneView } from './scene-view.mts';
 /** Arrival restores prepared state before the session becomes ready; every binding belongs to that session. */
 export function createSceneActivation({ windowTarget, navigation, view, isCurrent }: {
   windowTarget: BrowserWindow;
-  navigation: ReturnType<typeof createPreparedWorldNavigation> | null;
+  navigation: ReturnType<typeof createPreparedWorldNavigation>;
   view: SceneView;
   isCurrent(session: SceneSession): boolean;
 }) {
@@ -20,9 +20,9 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     if (!mount || !shell) return false;
     const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, SCENE_OBJECTS) : null;
     if (initialSelection?.subject.kind === 'overview' && !initialSelection.savedView) {
-      const target = navigation?.overviewTarget?.({ scope: initialSelection.subject.overview.scope, objectId, fromId: objectId, mount });
+      const target = navigation.overviewTarget({ scope: initialSelection.subject.overview.scope, objectId, fromId: objectId, mount });
       if (target) {
-        const framed = await session.wait(navigation!.focus({ objectId, mount,
+        const framed = await session.wait(navigation.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,
           targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
         if (framed.cancelled || !isCurrent(session)) return;

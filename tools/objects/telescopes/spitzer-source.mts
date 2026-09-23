@@ -12,7 +12,7 @@ const sourceName = (row: Readonly<Record<string, string>>): string | null => {
 
 export async function fetchSpitzerSource(explorationPath: string, pick: number, outputDirectory: string,
   query: typeof shaSearch = shaSearch, fetcher: typeof fetch = fetch, companions: typeof mosaicCompanions = mosaicCompanions,
-  fileName?: string) {
+  fileName?: string, resume = false) {
   const saved = await readSavedSource(explorationPath, SEARCH, pick), selected = saved.selected;
   const aorKey = requireFiniteNumber(selected.aorKey, 'Spitzer AORKEY'), targetName = requireString(selected.targetName, 'Spitzer target name');
   if (!Number.isSafeInteger(aorKey) || aorKey < 1) throw new TypeError('Saved Spitzer AORKEY is invalid.');
@@ -54,5 +54,5 @@ export async function fetchSpitzerSource(explorationPath: string, pick: number, 
       uncertainty: accompanying[0]!.slice(accompanying[0]!.lastIndexOf('/') + 1),
       coverage: accompanying[1]!.slice(accompanying[1]!.lastIndexOf('/') + 1),
     } } : {}),
-  }, fetcher);
+  }, fetcher, resume);
 }

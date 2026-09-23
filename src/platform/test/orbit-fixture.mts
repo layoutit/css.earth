@@ -50,8 +50,7 @@ export function orbitFixture(failure: OrbitFailure, cleanupFailure = false, depe
   const acquire = (name: string): NativeOwner => { if (failure === name) throw new Error(`${name} failure`); owners.add(name); return { mobile: false, update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete(name); if (cleanupFailure && name === "wheel") throw new Error("wheel cleanup failure"); } }; };
   // These objects model only the browser boundary reached by this fixture.
   const controlled = {
-    createPolyCamera(state: import("../../renderers/css/navigation/types.ts").NavigationCamera["state"]) { return { state, update(value: import("../../renderers/css/navigation/types.ts").CameraUpdate) { Object.assign(state, value); } }; },
-    createCubicSkyCameraOrientation() { return { scene: () => "matrix3d(1)", sceneMatrix: (): never => { throw new Error('Perspective scene matrix is not used by this fixture.'); }, skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [0, 0, 1] }), counterRotation: () => "matrix3d(1)", reset() {}, rotate() {}, rebaseScene() {}, prepareFlight: () => ({ angularDistance: 0, sample() {} }), restore() {}, snapshot: () => ({ schema: 'cssearth-camera-pose@1', scene: 'matrix3d(1)', skybox: 'matrix3d(1)', sunView: 'matrix3d(1)' }) }; },
+    createCubicSkyCameraOrientation() { return { scene: () => "matrix3d(1)", sceneMatrix: () => ({ m11: 1, m22: 1, m33: 1, m12: 0, m13: 0, m21: 0, m23: 0, m31: 0, m32: 0 }), skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [0, 0, 1] }), counterRotation: () => "matrix3d(1)", captureCounterRotation: () => () => "matrix3d(1)", setSceneRotation() {}, reset() {}, rotate() {}, rebaseScene() {}, prepareFlight: () => ({ angularDistance: 0, sample() {} }), restore() {}, snapshot: () => ({ schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1)', skybox: 'matrix3d(1)', sunView: 'matrix3d(1)' }) }; },
     HTMLElement: { [Symbol.hasInstance](value: unknown): boolean { return value instanceof Surface; } },
     matchMedia: () => new MediaQuery(),
     createUnboundedMatrixDragControls(options: DragOptions) { callbacks.drag = options; acquire("drag"); return { flyTo: async () => ({ completed: false }), update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete('drag'); if (cleanupFailure && failure === 'drag') throw new Error('drag cleanup failure'); }, invalidateTrackball() {} }; },
@@ -62,10 +61,23 @@ export function orbitFixture(failure: OrbitFailure, cleanupFailure = false, depe
   // Adapt only the controlled native/service boundary; production uses the renderer services.
   const services = { ...controlled, ...dependencies } as unknown as OrbitServices;
   const create = (options: RetainedOrbitOptions): RetainedCubicSkyOrbit => createRetainedCubicSkyOrbit(options, services);
-  const cameraPlan: CameraPlan = { cameraModel: "accumulated-matrix3d", pitchBounded: false, yawBounded: false, minimumControlPitchDegrees: 1, maximumControlPitchDegrees: 1, defaultControlPitchDegrees: 1, defaultControlYawDegrees: 1, initialScenePitchDegrees: 1, maximumScenePitchDegrees: 1, minimumZoom: 1, maximumZoom: 10, defaultZoom: 1, sceneScale: 1, logicalBodyDiameter: 1, responsiveFit: { model: 'unit', portraitBaseWidthShare: .5, narrowPortraitWidthShareGain: 0, landscapeWidthShareGain: 0, narrowPortraitAspectRatio: .5, portraitAspectRatio: 1, squareAspectRatio: 1, maximumHeightShare: 1, maximumMobilePreviewShare: 1, minimumZoom: 1, maximumZoom: 10 } };
-  const skyPlan: CameraSkyPlan = { cameraPitchResponse: 1, presentationPitchOffsetDegrees: 0, presentationYawOffsetDegrees: 0 };
-  const skyElement = stage.asElement() as HTMLDivElement;
-  const cubicSky: RetainedOrbitOptions["cubicSky"] = { root: skyElement, cube: skyElement, orientation: skyElement, setOrientation() {}, destroy() {} };
-  const arguments_: RetainedOrbitOptions = { runtimePolicy, onError(error: unknown): void { throw error; }, stage: stage.asElement(), inputSurface: stage.asElement(), cameraElement: new Surface().asElement(), sceneElement: new Surface().asElement(), cubicSky, skyPlan, cameraPlan, objectId: "unit", requireSun: false, onPublish() { if (failure === "publish") throw new Error("publish failure"); } };
+  const cameraPlan: CameraPlan = {
+    projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '1000px' },
+    dolly: { model: 'multiplicative-wheel-distance', wheelStepPerDelta: .006, minimumDistanceRadii: 1.2, maximumDistanceOverOrbitExtent: 1 },
+    levelOfDetail: { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20, billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 },
+    orbitLineFade: { visibleBelowDiscHeightShare: .12, hiddenAboveDiscHeightShare: .3 }, cameraModel: "accumulated-matrix3d", pitchBounded: false, yawBounded: false, minimumControlPitchDegrees: 1, maximumControlPitchDegrees: 1, defaultControlPitchDegrees: 1, defaultControlYawDegrees: 1, initialScenePitchDegrees: 1, maximumScenePitchDegrees: 1, minimumZoom: 1, maximumZoom: 10, defaultZoom: 1, sceneScale: 1, logicalBodyDiameter: 1, responsiveFit: { model: 'unit', portraitBaseWidthShare: .5, narrowPortraitWidthShareGain: 0, landscapeWidthShareGain: 0, narrowPortraitAspectRatio: .5, portraitAspectRatio: 1, squareAspectRatio: 1, maximumHeightShare: 1, maximumMobilePreviewShare: 1, minimumZoom: 1, maximumZoom: 10 } };
+  const skyPlan: CameraSkyPlan = { sceneRegistration: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' };
+  const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0] as const,
+    presentationToReference: [1,0,0,0,-1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 1 };
+  const worldContext = { frame, bodyRadiusUnits: 1, kilometersPerUnit: .001, maximumExtentUnits: 1e8 };
+  const viewport: RetainedOrbitOptions['viewport'] = {
+    read: () => ({ bounds: { x: 0, y: 0, left: 0, top: 0, width: 1000, height: 800 }, focalPixels: 1000, previewTop: null, openArea: null }),
+    subscribe(listener) { stage.addEventListener('resize', listener); return () => stage.removeEventListener('resize', listener); }, destroy() {},
+  };
+  const framePresenter: RetainedOrbitOptions['framePresenter'] = { present(request, signal) {
+    if (signal?.aborted || !request.current()) return signal ? Promise.resolve(false) : undefined;
+    request.commit(); return signal ? Promise.resolve(true) : undefined;
+  } };
+  const arguments_: RetainedOrbitOptions = { runtimePolicy, onError(error: unknown): void { throw error; }, stage: stage.asElement(), inputSurface: stage.asElement(), cameraElement: new Surface().asElement(), sceneElement: new Surface().asElement(), worldContext, viewport, framePresenter, skyPlan, cameraPlan, objectId: "unit", onPublish() { if (failure === "publish") throw new Error("publish failure"); } };
   return { create, callbacks, owners, stage, arguments: arguments_ };
 }

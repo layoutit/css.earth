@@ -8,7 +8,7 @@ import { describeChandraEvents } from './families/f10-events.mts';
 
 export async function fetchChandraSource(explorationPath: string, pick: number, outputDirectory: string,
   query: typeof cxcQuery = cxcQuery, observe: typeof chandraObservation = chandraObservation, fetcher: typeof fetch = rawHttpsFetch,
-  fileName?: string) {
+  fileName?: string, resume = false) {
   const saved = await readSavedSource(explorationPath, TAP, pick), selected = saved.selected;
   const obsid = requireFiniteNumber(selected.obsid, 'Chandra ObsID'), targetName = requireString(selected.targetName, 'archive target');
   if (!Number.isSafeInteger(obsid) || obsid < 1) throw new TypeError('Saved Chandra ObsID is invalid.');
@@ -51,5 +51,5 @@ export async function fetchChandraSource(explorationPath: string, pick: number, 
         archiveBytes: await readFile(resolve(directory, name)),
       }),
     } : {}),
-  }, fetcher);
+  }, fetcher, resume);
 }

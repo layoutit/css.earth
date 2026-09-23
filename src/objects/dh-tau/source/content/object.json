@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "dh-tau",
+  "displayName": "DH Tau",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.26 solar radii",
+        "source": {
+          "catalogueId": "vizier-j-apj-786-97",
+          "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/ApJ/786/97",
+          "label": "Herczeg & Hillenbrand 2014",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "133 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-dh-tau",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,600 K",
+        "source": {
+          "catalogueId": "arxiv-2405-13128",
+          "url": "https://arxiv.org/abs/2405.13128",
+          "label": "Xuan et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
+        "thumbnail": "dh-tau-lens-color.webp",
+        "surface": "dh-tau-surface-color@2x.webp",
+        "poles": "dh-tau-poles-color@2x.webp",
+        "source": {
+          "id": "dh-tau-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2405.13128"
+        },
+        "falseColor": false,
+        "notes": "The colour of a 3,600 K blackbody, Xuan et al.'s (2024) temperature for the star."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Xuan et al. (2024)",
+      "href": "https://arxiv.org/abs/2405.13128"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2405.13128",
+      "credit": "Xuan et al. (2024)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/dh-tau.json",
+      "credit": "Published radius at the Gaia distance; host mass adopted by the orbit of DH Tau b; no measured rotation axis (display convention)"
+    }
+  }
+}

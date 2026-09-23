@@ -1,0 +1,53 @@
+{
+  "id": "doi-10-3847-1538-3881-ae4b34",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Inglis et al. (2026): The Orbital Architecture and Origins of the Young, Planetary-mass Companion Host System, ROXs 42B",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae4b34"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae4b34",
+      "label": "The Astronomical Journal 171, 280"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://iopscience.iop.org/article/10.3847/1538-3881/ae4b34",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1: relative astrometry of B and b against A; Table 2: A-B orbit (a 10.9 au, P 31 yr, e 0.61, i 91.0, omega 58, Omega 150.0 degrees, tau 0.32 from MJD 55197); Table 3 and section 3.2: the OFTI fit of b"
+    },
+    {
+      "path": "src/objects/roxs-42b/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/roxs-42b-companion/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/roxs-42b-companion/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/roxs-42b-companion/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal",
+  "creators": [
+    "Julie Inglis",
+    "Maxwell A. Millar-Blanchaer",
+    "Quinn Konopacky",
+    "Jerry W. Xuan",
+    "Heather A. Knutson",
+    "Konstantin Batygin"
+  ]
+}

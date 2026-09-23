@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2410-02672",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Poon et al. (2024): Leaning Sideways: VHS 1256-1257 b is a Super-Jupiter with a Uranus-like Obliquity",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2410.02672"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad84e5"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2410.02672",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad84e5",
+      "label": "The Astronomical Journal 168, 270"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2410.02672",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 3.4: orbitize! OFTI refit of the four Dupuy et al. (2023) positions of VHS 1256 b, system mass 0.152 +/- 0.010 solar masses, parallax 47.27 +/- 0.47 mas; a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal 168, 270",
+  "creators": [
+    "Michael Poon",
+    "Marta L. Bryan",
+    "Hanno Rein",
+    "Caroline V. Morley",
+    "Gregory Mace",
+    "Yifan Zhou"
+  ]
+}

@@ -127,7 +127,7 @@ function fakeDom({ viewportWidth = 1440, viewportHeight = 900, focal = 1247 } = 
   };
   return {
     cameraElement: makeElement(),
-    skyElement: makeElement(),
+    viewport: { read: () => ({ bounds: { width: viewportWidth, height: viewportHeight, x: 0, y: 0, left: 0, top: 0 }, focalPixels: focal, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} },
     sceneElement: { style: {} } as HTMLElement,
     stage: { getBoundingClientRect: () => ({ width: viewportWidth, height: viewportHeight, left: 0, top: 0 }) } as HTMLElement,
   };

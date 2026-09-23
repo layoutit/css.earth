@@ -4,6 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
 import { readFile } from 'node:fs/promises';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { formatAnswer } from './query.mts';
 import { assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
 import { getSession, saveExploration, saveSession, saveFamilyRequestSession, type ExplorationSession, type Session } from './session.mts';
@@ -32,7 +33,7 @@ import { fetchSpitzerSource } from './spitzer-source.mts';
 export { HELP, SHORT_HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
-export type CliOptions = {readonly command:'fetch';readonly archive:'keck'|'gemini'|'opus'|'chandra'|'spitzer';readonly exploration:string;readonly pick:number;readonly fileName?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-fits';readonly catalog:string;readonly setName:string;readonly level:number;readonly x:number;readonly y:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-image';readonly exploration:string;readonly pick:number;readonly level:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export type CliOptions = {readonly command:'fetch';readonly archive:'keck'|'gemini'|'opus'|'chandra'|'spitzer';readonly exploration:string;readonly pick:number;readonly fileName?:string;readonly directory:string;readonly resume?:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-fits';readonly catalog:string;readonly setName:string;readonly level:number;readonly x:number;readonly y:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-image';readonly exploration:string;readonly pick:number;readonly level:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
   if (!args.length) return { command: 'help' as const, short: true };
@@ -43,7 +44,7 @@ export function parseCli(args: readonly string[]): CliOptions {
     for(let i=1;i<args.length;i++){
       const arg=args[i]!;
       if(!arg.startsWith('-')){positional.push(arg);continue;}
-      if(arg==='--json'||arg==='--verbose'){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);flags.add(arg);continue;}
+      if(arg==='--json'||arg==='--verbose'||arg==='--resume'){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);flags.add(arg);continue;}
       if(!['--pick','--out','--archive','--file'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated fetch option ${arg}.`);
       const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}.`);values.set(arg,value);
     }
@@ -53,7 +54,8 @@ export function parseCli(args: readonly string[]): CliOptions {
     const archive=values.get('--archive')??'keck';
     if(!['keck','gemini','opus','chandra','spitzer'].includes(archive))throw new TypeError('--archive must be keck, gemini, opus, chandra, or spitzer.');
     if(values.has('--file')&&!['chandra','spitzer'].includes(archive))throw new TypeError('--file applies only to Chandra or Spitzer sources.');
-    return {command,archive:archive as 'keck'|'gemini'|'opus'|'chandra'|'spitzer',exploration:resolve(positional[0]!),pick,...(values.has('--file')?{fileName:values.get('--file')!}:{}),directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};
+    if(flags.has('--resume')&&archive==='keck')throw new TypeError('Keck fetch has one file and already retries its transfer; --resume applies to Gemini, OPUS, Chandra and Spitzer.');
+    return {command,archive:archive as 'keck'|'gemini'|'opus'|'chandra'|'spitzer',exploration:resolve(positional[0]!),pick,...(values.has('--file')?{fileName:values.get('--file')!}:{}),directory:resolve(values.get('--out')!),...(flags.has('--resume')?{resume:true}:{}),json:flags.has('--json'),verbose:flags.has('--verbose')};
   }
   if(command==='wwt-fits'){
     const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
@@ -355,7 +357,9 @@ export function formatExploration(session:ExplorationSession & {readonly directo
   if(answer.outcome.coverage==='incomplete'){
     const blocked=answer.issues.some(issue=>issue.code==='provider-unavailable'||issue.code==='provider-overflow'||issue.code==='source-unavailable');
     lines.push(blocked?'Resolve the provider or source errors above, or narrow the search; then start a new exploration.':'Inspect unresolved metadata or adjust the filters; then start a new exploration.');
-    lines.push(`Retry in a new directory: ${['telescope','explore',...session.arguments,'--out','NEW_DIRECTORY'].map(shellWord).join(' ')}`);
+    if(answer.issues.some(issue=>issue.code==='provider-overflow'))
+      lines.push('A same-filter retry cannot extend a bounded sample. Narrow with --instrument NAME or --from ISO --to ISO and save in a new directory.');
+    else lines.push(`Retry in a new directory: ${['telescope','explore',...session.arguments,'--out','NEW_DIRECTORY'].map(shellWord).join(' ')}`);
   }else if(answer.outcome.coverage==='target-unresolved')lines.push('Check the target name or use a suggestion above, then start a new exploration.');
   return `${lines.join('\n')}\n`;
 }
@@ -589,10 +593,10 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         text=options.json?`${JSON.stringify(result)}\n`:`Original FITS: ${result.source}\nNumeric image: ${result.data}\nValues: ${result.values}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\n${result.limitations.map(line=>`  ${line}\n`).join('')}`;code=0;
       }else if(options.command==='fetch'){
         const result=options.archive==='keck'?await fetchKeckSource(options.exploration,options.pick,options.directory)
-          :options.archive==='gemini'?await fetchGeminiSource(options.exploration,options.pick,options.directory)
-          :options.archive==='opus'?await fetchOpusSource(options.exploration,options.pick,options.directory)
-          :options.archive==='chandra'?await fetchChandraSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName)
-          :await fetchSpitzerSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName);
+          :options.archive==='gemini'?await fetchGeminiSource(options.exploration,options.pick,options.directory,undefined,undefined,options.resume)
+          :options.archive==='opus'?await fetchOpusSource(options.exploration,options.pick,options.directory,undefined,undefined,options.resume)
+          :options.archive==='chandra'?await fetchChandraSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName,options.resume)
+          :await fetchSpitzerSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName,options.resume);
         const files='files' in result?result.files:[result.file];
         text=options.json?`${JSON.stringify(result)}\n`:`Original archive file(s): ${files.join(', ')}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\nNext: telescope outputs ${shellWord(displayPath(result.receipt))}\n`;code=0;
       }else if(options.command==='wwt-image'){
@@ -601,7 +605,18 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
       }else if(options.command==='family-run'){
         const result=await runFamilyOperation(options,api);
         text=options.json?`${JSON.stringify(result)}\n`:`Product: ${result.product}\nEvidence: ${result.record}\nOperation: ${result.operation.id}\n`;code=0;
-      }else if(options.command==='family-assess'){const request=JSON.parse(await readFile(options.request,'utf8')),descriptor=JSON.parse(await readFile(options.descriptor,'utf8')),saved=await saveFamilyRequestSession(options.directory,request,descriptor);text=options.json?`${JSON.stringify(saved)}\n`:`Descriptor compatibility: ${saved.status}\nSaved: ${resolve(options.directory,'family-request.json')}\n`;code=saved.status==='matched'?0:saved.status==='refused'?4:3;
+      }else if(options.command==='family-assess'){
+        const artifactBytes=await readFile(options.descriptor),artifact=JSON.parse(artifactBytes.toString('utf8'));
+        let descriptorPath=options.descriptor,bytes=artifactBytes;
+        if(artifact?.schema!=='cssearth-telescope-product-descriptor@1'){
+          const inspected=await api.listArtifactOutputs(options.descriptor);
+          if(!inspected.familyOperations||typeof inspected.source!=='string')throw new TypeError(`No verified family descriptor is available for ${options.descriptor}. Run telescope outputs on the artifact to inspect its supported operations.`);
+          descriptorPath=resolve(inspected.source);bytes=await readFile(descriptorPath);
+        }
+        const request=JSON.parse(await readFile(options.request,'utf8')),descriptor=JSON.parse(bytes.toString('utf8'));
+        const saved=await saveFamilyRequestSession(options.directory,request,descriptor,{path:descriptorPath,bytes:bytes.length,sha256:sha256(bytes)});
+        text=options.json?`${JSON.stringify(saved)}\n`:`Descriptor compatibility: ${saved.status}\nDescriptor: ${displayPath(descriptorPath)}\nSaved: ${resolve(options.directory,'family-request.json')}\n`;
+        code=saved.status==='matched'?0:saved.status==='refused'?4:3;
       }else if(options.command==='papers'){
         const result=await searchPapers(root,{target:options.target,...(options.instrument?{instrument:options.instrument}:{}),...(options.host?{host:options.host}:{}),...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;

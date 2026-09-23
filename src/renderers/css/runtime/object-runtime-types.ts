@@ -5,7 +5,7 @@ import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "
 import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 import type { PreparedAssets } from "../rendering/prepared-residency.js";
 import type { PreparedPresentationDefinition } from "../rendering/prepared-presentation.js";
-import type { CubicSkyPlan } from "../solar-system/cubic-sky-runtime.js";
+import type { CubicSkyPlan } from "../solar-system/cubic-sky-plan.js";
 import type { DirectionalSunPlan } from "../solar-system/directional-sun-coordinate.js";
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
@@ -57,13 +57,13 @@ export interface ObjectMountOptions {
     commit(volume: LensVolume | null): void;
     error(error: unknown): void;
   };
-  inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
+  inputSurface: HTMLElement; runtimePolicy: RuntimePolicy;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
-  worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
+  preparedResources?: PreparedResourceLease;
   preparedTree?: import('../rendering/prepared-tree.js').PreparedTreeLease;
-  worldContext?: PerspectiveWorldContext;
-  framePresenter?: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
-  viewport?: import('../navigation/camera-viewport.js').CameraViewport;
+  worldContext: PerspectiveWorldContext;
+  framePresenter: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
+  viewport: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
   /** The router releases refinement after saved-view restoration or flight. */
   deferTextureRefinement?: boolean;

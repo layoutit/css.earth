@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "vhs-1256-1257",
+  "entries": [
+    {
+      "id": "photosphere-colour",
+      "subject": "The colour of the photosphere",
+      "status": "included",
+      "finding": "A Planck spectrum at the published 2,700 K (Dupuy et al. 2023, the pair's combined spectrum), through the CIE 1931 2-degree observer into sRGB with the D65 white. Gaia DR3 has no BP/RP spectrum that describes this star alone, and no limb-darkening measurement or model grid in the repository reaches it, so the disc is uniform.",
+      "revisitWhen": "Gaia publishes a spectrum of this star alone, or a limb-darkening law is measured for it.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "gaia-xp-spectrum",
+      "subject": "Gaia DR3's BP/RP spectrum of the pair as the colour",
+      "status": "excluded",
+      "finding": "Gaia DR3 source 3526198184723289472 has a BP/RP spectrum (has_xp_continuous true, no sampled spectrum published), but it is the combined light of A and B, which Gaia does not resolve, and the pair is faint in BP (18.0 mag), where the visible colour is weighted. The paper temperature is used for both stars instead.",
+      "revisitWhen": "Gaia resolves the pair, or a spectrum of A alone is published.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/2208.08448"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "component-radii",
+      "subject": "A measured radius of either star",
+      "status": "unresolved",
+      "finding": "No interferometric or eclipse radius of A or B is published. Climent et al. (2022) adopt 0.12 solar radii for each from the Chabrier et al. (2000) models at the pair's age and mass (0.12 to 0.14 over those ranges); that model value is used.",
+      "revisitWhen": "A radius of either component is measured.",
+      "evidence": [
+        "https://arxiv.org/abs/2201.12606"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}
