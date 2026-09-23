@@ -4,6 +4,12 @@
   "private": true,
   "license": "MIT",
   "type": "module",
+  "imports": {
+    "#preparation/*": {
+      "types": "./tools/objects/*.ts",
+      "default": "./tools/objects/dist/*.js"
+    }
+  },
   "packageManager": "pnpm@10.33.0",
   "engines": {
     "node": "^22.18.0 || >=24.0.0"
@@ -73,7 +79,8 @@
     "typecheck:platform": "tsc -p src/platform/tsconfig.json",
     "typecheck:pr": "pnpm run '/^typecheck:pr:/'",
     "typecheck:pr:core": "pnpm typecheck:configs && pnpm typecheck:packages && pnpm typecheck:renderer && pnpm typecheck:platform && pnpm typecheck:ownership && node tools/ci/typescript-ownership.mts",
-    "typecheck:pr:preparation": "pnpm typecheck:preparation && pnpm typecheck:tools",
+    "typecheck:pr:preparation": "pnpm typecheck:preparation",
+    "typecheck:pr:tools": "pnpm typecheck:tools",
     "typecheck:pr:astro": "pnpm typecheck:astro",
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "typecheck:renderer": "pnpm --filter @cssearth/engine exec tsc -p ../../src/renderers/css/tsconfig.json",

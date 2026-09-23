@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parseSourceManifest } from '../../tools/objects/dist/operations.js';
+import { parseSourceManifest } from '#preparation/operations';
 
 import {
   assertRangeResponse,

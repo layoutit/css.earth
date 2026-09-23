@@ -136,12 +136,11 @@ export function quickSteps(steps:readonly CiStep[]):CiStep[] {
 /** Paths whose change can break types outside one object package: `--typecheck` appends `pnpm typecheck` for them. */
 export const SHARED_CODE=/^(?:tools|site|src\/platform|src\/renderers|packages)\//u;
 export function sharedCodeChanged(paths:readonly string[]):boolean {return paths.some(path=>SHARED_CODE.test(path));}
-// Matrix lanes share a checkout locally: a later no-DTS build may have cleaned declarations from an earlier
-// typed build. Keep these prerequisites with their consumer so command deduplication cannot discard them.
+// Keep these prerequisites with their consumer so command deduplication cannot discard them.
 export const SHARED_TYPECHECK_STEP:CiStep={
  name:'Typecheck (shared code changed)',
  run:'node tools/ci/build-ci.mts full\npnpm prepare:typecheck\npnpm typecheck',
- env:{NODE_OPTIONS:'--max-old-space-size=4096',CI_PREPARATION_DTS:'true'},
+ env:{NODE_OPTIONS:'--max-old-space-size=4096'},
 };
 
 /** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
