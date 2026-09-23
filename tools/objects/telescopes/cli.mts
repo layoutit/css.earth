@@ -706,7 +706,11 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
     } finally { process.stdout.write = stdout; }
     io.write(text); return code;
   } catch (error) {
-    const code = error instanceof TypeError || error instanceof RangeError ? 2 : 1, message = error instanceof Error ? error.message : String(error);
+    const code = error instanceof TypeError || error instanceof RangeError ? 2 : 1;
+    const summary = error instanceof Error ? error.message : String(error);
+    const cause = error instanceof Error ? error.cause : undefined;
+    const detail = cause instanceof Error ? cause.message : undefined;
+    const message = detail && detail !== summary ? `${summary}: ${detail}` : summary;
     if (args.includes('--json')) io.write(`${JSON.stringify({ error: message, exitCode: code })}\n`);
     io.error(`${args.includes('--verbose') && error instanceof Error ? error.stack : message}\n`);
     return code;
