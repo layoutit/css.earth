@@ -5,7 +5,6 @@ import type { ObjectShell } from './object-shell-types.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import type { BrowserWindow } from './browser-types.mts';
 import { automaticPlaybackPolicy } from './runtime-policy.mts';
-import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { readObjectDiagnostics } from '../src/renderers/css/dist/index.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 
@@ -34,7 +33,7 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
   function readPublication() {
     const { state, mountedObjectCount, playing, pending, objectId, overview, motionEnabled, reducedMotionActive } = read();
     const sceneState: SceneState = state.kind === 'failed' ? 'error' : state.kind === 'disposed' ? 'destroyed' : state.kind;
-    const selected = pending ? !overviewScopeFromUrl(pending.url) : !overview;
+    const selected = pending ? pending.subject.kind !== 'overview' : !overview;
     const playback = Object.freeze({ motionRequested: motionEnabled, ...automaticPlaybackPolicy({
       sceneState: pending ? 'loading' : sceneState, motionRequested: motionEnabled,
       documentHidden: documentTarget.hidden, reducedMotion: reducedMotionActive,
@@ -59,7 +58,7 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
 
   function publishSceneState() {
     const pending = read().pending;
-    const inFlight = Boolean(pending && pending.options.preserveView !== true);
+    const inFlight = Boolean(pending && !(pending.scene === 'replace' && pending.camera.kind === 'preserve'));
     getWorld()?.setNavigationInFlight?.(inFlight);
     getShell()?.setNavigationInFlight?.(inFlight);
     const { scene: state, sceneState, playing, playback } = readPublication();

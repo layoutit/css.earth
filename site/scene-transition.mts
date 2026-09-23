@@ -8,15 +8,13 @@ import type { createPreparedWorldNavigation } from './prepared-world-navigation.
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
 import type { WorldContextMount } from './scene-world.mts';
-import { isFocusDatasetUrl, readDatasetUrl } from './dataset-url.mts';
-import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
 /** Reuse a ready session for dataset changes, saved views, and overview/detail selections. */
 export async function focusExistingScene({ session, request, selectionTransition, navigation, requests, view,
-  windowTarget, getOverview, getReducedMotion, setOverview, syncPlayback }: {
+  windowTarget, getReducedMotion, setOverview, syncPlayback }: {
   session: SceneSession;
   request: NavigationRequest;
   selectionTransition?: ShellNavigationTransition | null;
@@ -24,14 +22,10 @@ export async function focusExistingScene({ session, request, selectionTransition
   requests: NavigationLifecycle;
   view: SceneView;
   windowTarget: BrowserWindow;
-  getOverview(): boolean;
   getReducedMotion(): boolean;
   setOverview(enabled: boolean, transition?: ShellNavigationTransition | null): void;
   syncPlayback(): void;
 }) {
-  const destination = new URL(request.url);
-  const datasetLink = Boolean(request.options.url) &&
-    (readDatasetUrl(destination).requested || isFocusDatasetUrl(destination));
   const datasetSelection = selectSceneDataset(session, request.url, request.signal);
   if (!(typeof datasetSelection === 'boolean' ? datasetSelection : await datasetSelection)) {
     if (!requests.owns(request)) return false;
@@ -41,14 +35,14 @@ export async function focusExistingScene({ session, request, selectionTransition
     return false;
   }
   if (!requests.owns(request)) return false;
-  const restore = request.options.history === 'pop' ||
-    (Boolean(request.options.url) && new URL(request.url).searchParams.has('v'));
+  const { camera } = request;
+  const restore = camera.kind === 'restore';
   if (restore) {
-    if (request.options.history === 'pop' || request.url !== windowTarget.location.href) view.commit(request, session);
+    if (request.history.history === 'pop' || request.url !== windowTarget.location.href) view.commit(request, session);
     else session.url = request.url;
     // History within one object flies to its saved view, as history between objects does;
     // it used to jump there in one frame. The exact saved state is still restored afterwards.
-    const savedWorld = request.options.history === 'pop' && !getReducedMotion()
+    const savedWorld = camera.animate && !getReducedMotion()
       ? navigation.savedTarget?.({ objectId: session.objectId, url: request.url, mount: session.mount }) : null;
     if (savedWorld && navigation.focus) {
       requests.advance(request, 'flying');
@@ -57,22 +51,17 @@ export async function focusExistingScene({ session, request, selectionTransition
         signal: request.signal, reducedMotion: getReducedMotion(), targetWorldCamera: savedWorld, timing: request.timing }));
       if (flown.cancelled || !requests.owns(request)) return false;
     }
-  } else if (!datasetLink && !request.cancelledFlight && !request.options.preserveView && navigation.focus) {
+  } else if (camera.kind === 'frame' && navigation.focus) {
     requests.advance(request, 'flying');
     syncPlayback();
     const focused = await request.lifetime.wait(navigation.focus({ objectId: session.objectId,
       mount: session.mount!, signal: request.signal, reducedMotion: getReducedMotion(),
-      targetWorldCamera: request.options.targetWorldCamera, targetFocusPositionM: request.options.targetFocusPositionM, centerSelection: request.options.centerSelection, timing: request.timing }));
+      targetWorldCamera: camera.world ?? undefined, targetFocusPositionM: camera.focusPositionM ?? undefined, centerSelection: camera.framing === 'center', timing: request.timing }));
     if (focused.cancelled || !requests.owns(request)) return false;
   }
   if (!requests.advance(request, 'committing')) return false;
-  if (!restore) {
-    const changesSelection = getOverview() !== Boolean(overviewScopeFromUrl(request.url)) ||
-      overviewScopeFromUrl(windowTarget.location.href) !== overviewScopeFromUrl(request.url);
-    view.commit(request, session, { ...request.options,
-      history: changesSelection || datasetLink ? request.options.history : 'replace' });
-  }
-  setOverview(Boolean(overviewScopeFromUrl(request.url)), selectionTransition);
+  if (!restore) view.commit(request, session);
+  setOverview(request.subject.kind === 'overview', selectionTransition);
   await view.bind(session, { restore, request });
   if (!requests.owns(request)) return false;
   requests.finish(request, 'finished'); syncPlayback();
@@ -110,10 +99,10 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
     fromId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factoryTask,
     signal: request.signal, url: request.url,
     reducedMotion,
-    targetWorldCamera: request.options.targetWorldCamera,
-    targetFocusPositionM: request.options.targetFocusPositionM,
-    centerSelection: request.options.centerSelection,
-    preserveView: request.options.preserveView,
+    targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined,
+    targetFocusPositionM: request.camera.kind === 'frame' ? request.camera.focusPositionM ?? undefined : undefined,
+    centerSelection: request.camera.kind === 'frame' && request.camera.framing === 'center',
+    preserveView: request.camera.kind === 'preserve',
     cameraViewport: getWorld()?.viewport,
     timing: request.timing,
     presentWorld: getWorld() ? (world, viewport, options) => getWorld()?.present(world, viewport, options) : null,

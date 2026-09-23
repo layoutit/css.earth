@@ -1,6 +1,6 @@
 import type { BrowserWindow } from './browser-types.mts';
 import { errorMessage, record } from './browser-types.mts';
-import { overviewScopeFromUrl } from './navigation-scope.mts';
+import { readNavigationSelection } from './navigation-request.mts';
 import { withDataset } from './dataset-url.mts';
 import type { createPreparedWorldNavigation, WorldHandoff } from './prepared-world-navigation.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
@@ -18,9 +18,9 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function restore(session: SceneSession, handoff?: WorldHandoff) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
-    const initialScope = !request && session.url && overviewScopeFromUrl(session.url);
-    if (initialScope && session.url && !new URL(session.url).searchParams.has('v')) {
-      const target = navigation?.overviewTarget?.({ scope: initialScope, objectId, fromId: objectId, mount });
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url)) : null;
+    if (initialSelection?.subject.kind === 'overview' && !initialSelection.savedView) {
+      const target = navigation?.overviewTarget?.({ scope: initialSelection.subject.scope, objectId, fromId: objectId, mount });
       if (target) {
         const framed = await session.wait(navigation!.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,
@@ -59,10 +59,10 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         request.url = session.url = withDataset(new URL(request.url), current && current !== datasets?.defaultId ? current : null).href;
       }
     }
-    return { interrupted };
+    return { interrupted, feature: request ? request.feature : initialSelection?.feature ?? null };
   }
 
-  function connectControls(session: SceneSession) {
+  function connectControls(session: SceneSession, featureId: string | null) {
     const { mount, shell } = session;
     if (!mount || !shell) return;
     // Restore the incoming camera before arming optional texture detail. An
@@ -94,9 +94,8 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     shell.setCamera?.(mount);
     session.own(() => { shell.setCamera?.(null); shell.setFeatures?.(null); });
     // A feature named in the URL is a one-time selection: fly there, then let the view URL take over.
-    const featureUrl = new URL(session.url ?? windowTarget.location?.href ?? 'https://example.test');
-    const featureId = featureUrl.searchParams.get('feature');
     if (featureId !== null) {
+      const featureUrl = new URL(session.url ?? windowTarget.location?.href ?? 'https://example.test');
       featureUrl.searchParams.delete('feature');
       session.url = featureUrl.href;
       const place = /^city-([0-9]+)$/u.exec(featureId);
