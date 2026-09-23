@@ -71,3 +71,29 @@ test('Gemini uses public CADC artifact identities and does not turn an unavailab
     assert.equal(unavailable.instruments.length, 0);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('archive source filters narrow Keck tables and Gemini rows before their samples', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'filtered-leads-'));
+  const time = { fromIso: '2009-08-01T00:00:00.000Z', toIso: '2009-08-31T23:59:59.000Z' };
+  try {
+    const keckQueries: string[] = [];
+    const keck = await searchKeckLeads(root, target, async adql => {
+      keckQueries.push(adql);
+      return adql.includes('COUNT(*)') ? [{ targname: 'HR 8799', frames: '1' }]
+        : [{ koaid: 'N2.20090805.31896.fits', targname: 'HR 8799', koaimtyp: 'object',
+          filehand: '/koadata9/NIRC2/20090805/lev0/N2.20090805.31896.fits', date_obs: '2009-08-05' }];
+    }, { instrument: 'NIRC2', time });
+    assert.equal(keckQueries.length, 2);
+    assert.ok(keckQueries.every(query => query.includes('koa_nirc2') && query.includes("date_obs BETWEEN '2009-08-01' AND '2009-08-31'")));
+    assert.equal(keck.sources?.length, 1);
+    const gemini = await searchGeminiLeads(root, target, async adql => {
+      assert.match(adql, /o\.instrument_name='NIRI'/u);
+      const bounds = adql.match(/p\.time_bounds_upper >= ([\d.]+) AND p\.time_bounds_lower <= ([\d.]+)/u);
+      assert.ok(bounds);
+      assert.equal(Number(bounds[1]), Date.parse(time.fromIso) / 86_400_000 + 40_587);
+      assert.equal(Number(bounds[2]), Date.parse(time.toIso) / 86_400_000 + 40_587);
+      return [];
+    }, { instrument: 'NIRI', time });
+    assert.equal(gemini.state, 'empty-in-scope');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
