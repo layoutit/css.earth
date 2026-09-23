@@ -1,3 +1,4 @@
+import type { SceneSubject, SelectionTarget } from './scene-selection.mts';
 import type { SceneState } from './shell-contract-types.mts';
 import type { SceneSessionState } from './scene-session.mts';
 import type { NavigationRequest } from './navigation-lifecycle.mts';
@@ -12,7 +13,7 @@ interface ScenePublicationInput {
   state: SceneSessionState;
   pending: NavigationRequest | null;
   objectId: string;
-  overview: boolean;
+  subject: SceneSubject;
   motionEnabled: boolean;
   reducedMotionActive: boolean;
   mountedObjectCount: number;
@@ -31,17 +32,17 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
 }) {
   let publishedBodyState = '';
   function readPublication() {
-    const { state, mountedObjectCount, playing, pending, objectId, overview, motionEnabled, reducedMotionActive } = read();
+    const { state, mountedObjectCount, playing, pending, objectId, subject, motionEnabled, reducedMotionActive } = read();
     const sceneState: SceneState = state.kind === 'failed' ? 'error' : state.kind === 'disposed' ? 'destroyed' : state.kind;
-    const selected = pending ? pending.subject.kind !== 'overview' : !overview;
+    const selected: SelectionTarget = pending?.subject ?? subject;
     const playback = Object.freeze({ motionRequested: motionEnabled, ...automaticPlaybackPolicy({
       sceneState: pending ? 'loading' : sceneState, motionRequested: motionEnabled,
       documentHidden: documentTarget.hidden, reducedMotion: reducedMotionActive,
     }) });
     return { sceneState, playing, playback, scene: Object.freeze({
       activeObjectId: objectId,
-      selectedObjectId: selected ? pending?.id ?? objectId : null,
-      overview: !selected,
+      selectedObjectId: selected.kind === 'object' ? selected.objectId : selected.kind === 'focus' ? selected.id : null,
+      overview: selected.kind === 'overview',
       error: state.kind === 'failed' ? state.error.message : null,
       lifecycle: sceneState === 'ready' ? (playing ? 'mounted' : 'paused') : sceneState,
       mountedObjectCount,

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "hr-8799-d",
+  "unit": "µJy",
+  "source": {
+    "citation": "Balmer et al. (2025), AJ, doi:10.3847/1538-3881/adb1c6, arXiv:2503.13608",
+    "url": "https://arxiv.org/abs/2503.13608",
+    "locator": "Table 2, HR 8799 d: flux density in F460M, F430M and F410M"
+  },
+  "bands": [
+    {
+      "band": "F460M",
+      "wavelengthMicrometres": 4.631,
+      "value": 319.2,
+      "error": 18.8
+    },
+    {
+      "band": "F430M",
+      "wavelengthMicrometres": 4.283,
+      "value": 354.4,
+      "error": 17.7
+    },
+    {
+      "band": "F410M",
+      "wavelengthMicrometres": 4.084,
+      "value": 410.5,
+      "error": 16.7
+    }
+  ],
+  "displayRange": [
+    0,
+    410.5
+  ],
+  "displayRangeSource": "One range for the four planets, from zero flux to the largest of their twelve flux densities in these bands, HR 8799 d in F410M (410.5 µJy, Balmer et al. 2025 Table 2), so their band ratios and relative brightness survive (docs/color-preparation.md). Band order: Balmer et al. (2025) section III.3 detect all four planets in F410M, F430M and F460M; longest wavelength red."
+}

@@ -1,0 +1,35 @@
+{
+  "id": "simbad-hr-8799",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for HR 8799 (HD 218396, HIP 114189)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HR+8799",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hr-8799/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20main_id%2Csp_type%2Csp_bibcode%20FROM%20basic%20JOIN%20ident%20ON%20oidref%3Doid%20WHERE%20id%3D'HR%208799'",
+      "checkedOn": "2026-09-23",
+      "locator": "main_id HD 218396; spectral type F0+VkA5mA5 (Gray et al. 2003, AJ 126, 2048)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; spectral type with the reference SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/hr-8799/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

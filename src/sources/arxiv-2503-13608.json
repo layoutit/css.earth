@@ -1,0 +1,62 @@
+{
+  "id": "arxiv-2503-13608",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Balmer et al. (2025): JWST-TST High Contrast: Living on the Wedge, or, NIRCam Bar Coronagraphy Reveals CO$_2$ in the HR 8799 and 51 Eri Exoplanets' Atmospheres",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2503.13608"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/adb1c6"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2503.13608",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/adb1c6",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2503.13608",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 2: astrometry of b, c, d and e combined over the NIRCam LWB filters of GTO 1194 at MJD 60253.39; Section III: spaceKLIP reduction, jwst 1.12.1, CRDS jwst_1256.pmap"
+    },
+    {
+      "path": "src/objects/hr-8799-b/source/photometry/jwst-nircam-band-color.json",
+      "locator": "/bands"
+    },
+    {
+      "path": "src/objects/hr-8799-c/source/photometry/jwst-nircam-band-color.json",
+      "locator": "/bands"
+    },
+    {
+      "path": "src/objects/hr-8799-d/source/photometry/jwst-nircam-band-color.json",
+      "locator": "/bands"
+    },
+    {
+      "path": "src/objects/hr-8799-e/source/photometry/jwst-nircam-band-color.json",
+      "locator": "/bands"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "William O. Balmer",
+    "Jens Kammerer",
+    "Laurent Pueyo",
+    "Marshall D. Perrin",
+    "Julien H. Girard",
+    "Jarron M. Leisenring"
+  ]
+}

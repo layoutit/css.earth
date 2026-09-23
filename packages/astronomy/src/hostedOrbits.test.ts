@@ -200,6 +200,25 @@ describe('hosted orbits', () => {
     // A circular display orbit at the published semi-major axis, node and inclination, phased to the six epochs: chi-squared 12.5 for 11 degrees of freedom.
     expect(chi2).toBeLessThan(14)
   })
+  it('places the four planets of HR 8799 where JWST measured them after the fit', () => {
+    // Balmer et al. (2025, AJ; arXiv:2503.13608), Table 2: astrometry combined over the NIRCam LWB filters of GTO 1194 on MJD 60253.39,
+    // (dRA, dDec, sigma dRA, sigma dDec) in mas. Zurlo et al. (2022) fitted astrometry up to 2021, so these points are not in that fit.
+    const star = starAstrometry('hr-8799'), radiusKm = BODIES['hr-8799'].meanRadiusKm
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+    const distanceKm = star.distanceParsecs * PARSEC_KM
+    const jwst = { 'hr-8799-b': [1616, 531, 13, 9], 'hr-8799-c': [-291, 911, 12, 3], 'hr-8799-d': [-610, -348, 7, 5], 'hr-8799-e': [-226, 332, 14, 15] } as const
+    let sum = 0
+    for (const [id, [dra, ddec]] of Object.entries(jwst) as [keyof typeof jwst, readonly [number, number, number, number]][]) {
+      const p = hostedOrbitStateRelativeKm(hostedOrbit(id), star, radiusKm, 60253.39 + 2400000.5).positionKm
+      const [x, y] = [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000)
+      const miss = Math.hypot(x! - dra, y! - ddec)
+      // Measured 2026-09-23: b 14.4, c 10.3, d 12.3, e 4.8 mas. c and d miss in declination by 2.5 to 3.4 of the paper's own
+      // sigmas (3 and 5 mas, the scatter between filters); every planet misses by under 2% of its separation from the star.
+      expect(miss, id).toBeLessThan(15)
+      sum += miss ** 2
+    }
+    expect(Math.sqrt(sum / 4)).toBeLessThan(12)
+  })
   it('rejects incomplete or non-finite eccentric inputs', () => {
     const star = starAstrometry('wasp-43')
     expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: undefined }, star, hostRadiusKm, 60000)).toThrow(/requires argumentOfPeriapsis/)
