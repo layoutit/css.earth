@@ -25,8 +25,10 @@ test('Keck reports counts and bounded exact public FITS sources without claiming
     assert.match(queries[0]!, /'HR 8799','HR8799','HR-8799'/u);
     assert.equal(result.state, 'sampled');
     assert.deepEqual(result.instruments.map(item => [item.instrument, item.records]), [['NIRC2', 8], ['OSIRIS', 1]]);
-    assert.equal(result.sources?.[0]?.koaid, 'N2.20090805.31896.fits');
-    assert.equal(result.sources?.[1]?.koaid, 'OI.20200101.00001.fits');
+    const first = result.sources?.[0], second = result.sources?.[1];
+    assert.ok(first && 'koaid' in first && second && 'koaid' in second);
+    assert.equal(first.koaid, 'N2.20090805.31896.fits');
+    assert.equal(second.koaid, 'OI.20200101.00001.fits');
     assert.equal(result.evidence?.length, 16);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -49,16 +51,22 @@ test('Keck keeps searching other instrument tables after an incomplete empty res
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('Gemini counts exact public science labels, deduplicates spelling variants, and treats HTTP rejection as unavailable', async () => {
+test('Gemini uses public CADC artifact identities and does not turn an unavailable mirror into an empty result', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'gemini-leads-'));
   try {
-    const row = { object: 'HR8799', telescope: 'Gemini-North', instrument: 'NIRI', observation_class: 'science', data_label: 'GN-1-001' };
-    const good: typeof fetch = async () => new Response(JSON.stringify([row, { ...row, observation_class: 'acq', data_label: 'GN-1-002' }]),
-      { headers: { 'content-type': 'application/json' } });
-    const result = await searchGeminiLeads(root, target, good);
+    const row = { observationID: 'GN-1-001', type: 'OBJECT', intent: 'science', instrument_name: 'NIRI',
+      target_name: 'HR8799', uri: 'gemini:GEMINI/N20200101S0001.fits', contentLength: '2880',
+      contentChecksum: 'md5:00000000000000000000000000000000', energy_bandpassName: 'K', time_exposure: '30',
+      time_bounds_lower: '58849', dataRelease: '2021-01-01T00:00:00.000' };
+    const result = await searchGeminiLeads(root, target, async adql => {
+      assert.match(adql, /o\.target_name IN \('HR 8799','HR8799','HR-8799'\)/u);
+      return [row, row, { ...row, uri: 'gemini:GEMINI/gN20200101S0001_bias.fits' }];
+    });
     assert.equal(result.state, 'sampled');
-    assert.deepEqual(result.instruments.map(item => [item.telescope, item.instrument, item.records]), [['Gemini-North', 'NIRI', 1]]);
-    const unavailable = await searchGeminiLeads(root, target, async () => new Response('blocked', { status: 403 }));
+    assert.deepEqual(result.instruments.map(item => [item.telescope, item.instrument, item.records]), [['Gemini North', 'NIRI', 1]]);
+    const source = result.sources?.[0]; assert.ok(source && 'uri' in source);
+    assert.equal(source.uri, row.uri);
+    const unavailable = await searchGeminiLeads(root, target, async () => { throw new Error('CADC timeout'); });
     assert.equal(unavailable.state, 'unavailable');
     assert.equal(unavailable.instruments.length, 0);
   } finally { await rm(root, { recursive: true, force: true }); }

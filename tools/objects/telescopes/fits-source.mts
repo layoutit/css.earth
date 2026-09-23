@@ -17,7 +17,7 @@ export async function openFitsSource(path: string) {
     limitations: parameters.limitations } : requireRecord(parameters.fitsSource, 'FITS source declaration');
   if (declared.schema !== FITS_SOURCE_SCHEMA) throw new TypeError('Unsupported FITS source declaration');
   const relativePath = requireString(declared.path, 'FITS source path');
-  if (!/\.fits?$/iu.test(relativePath)) throw new TypeError('FITS source must name a FITS file');
+  if (!/\.fits?(?:\.gz)?$/iu.test(relativePath)) throw new TypeError('FITS source must name a FITS file');
   const pins = source.record.outputs.filter(output => output.path === relativePath);
   if (pins.length !== 1 || !pins[0]!.sha256) throw new Error('FITS source is not uniquely pinned by the product record');
   const label = requireString(declared.label, 'FITS source label');

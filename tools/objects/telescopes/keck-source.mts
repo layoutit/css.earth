@@ -43,8 +43,9 @@ export async function fetchKeckSource(explorationPath: string, pick: number, out
   const sources = requireArray(keck[0]!.sources, 'saved Keck sources').map(savedLead);
   if (pick > sources.length) throw new TypeError(`--pick must be between 1 and ${sources.length}.`);
   const selected = sources[pick - 1]!;
-  const evidenceFile = resolve(dirname(explorationPath), 'keck-source-evidence', `${selected.evidence}.json`);
-  const evidenceBytes = await readFile(evidenceFile), evidence = requireRecord(JSON.parse(evidenceBytes.toString('utf8')), 'saved KOA response');
+  const evidenceFile = resolve(dirname(explorationPath), 'archive-source-evidence', `${selected.evidence}.json`);
+  const evidenceBytes = await readFile(evidenceFile).catch(() => readFile(resolve(dirname(explorationPath), 'keck-source-evidence', `${selected.evidence}.json`)));
+  const evidence = requireRecord(JSON.parse(evidenceBytes.toString('utf8')), 'saved KOA response');
   if (sha256(evidenceBytes) !== selected.evidence || evidence.source !== TAP_SYNC ||
       !requireArray(evidence.rows, 'saved KOA rows').some(value => {
         const row = requireRecord(value, 'saved KOA row');

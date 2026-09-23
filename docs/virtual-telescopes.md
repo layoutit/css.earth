@@ -57,14 +57,24 @@ collection, and instrument fields are retained; a MAST result displays as, for e
 archive metadata alone is not a qualified science product. Shared DataLink URLs are described
 once per query, including when an archive truncates its advertised MIME type.
 
-`explore` also searches [KOA's public TAP instrument tables](https://koa.ipac.caltech.edu/UserGuide/PyKOA/TAPClients.html) for exact target-name variants and
-[Gemini's canonical JSON summary](https://archive.gemini.edu/help/api.html) for science-file metadata. These are live instrument counts and
-example identities under `services`. KOA also samples up to three exact public raw FITS identities per instrument. They have their own source numbers, separate from qualified observation choices. KOA queries run serially;
-Gemini responses are capped at 1 MB. A refused, truncated or partly answered archive is marked
-unavailable or overflow rather than reported as empty. Neither free-form archive object names nor
-sky overlap alone confirms a scientific target association.
+`explore` also searches [KOA's public TAP instrument tables](https://koa.ipac.caltech.edu/UserGuide/PyKOA/TAPClients.html),
+[CADC's public Gemini collection](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/doc/caom2/), the
+[Chandra archive](https://cxc.harvard.edu/cda/) and the
+[Spitzer Heritage Archive](https://irsa.ipac.caltech.edu/onlinehelp/heritage/heritage/api.html).
+Each uses a bounded query and reports its actual archive scope and incomplete results. Keck and
+Gemini sample exact public raw FITS artifacts. Chandra samples ObsIDs and checks the archive's
+event-file listing and headers when fetched. Spitzer samples AORKEYs and checks the archive's
+current FITS listing when fetched. They have source numbers separate from qualified observation
+choices. An archive name or sky overlap is not confirmation that the requested target was detected.
 
-To retrieve a sampled Keck source, run `telescope fetch RUN/explore.json --pick N --out NEW_DIRECTORY` using its **Keck source** number. Fetch rechecks the exact public KOA row, enforces the exploration's science-byte limit during transfer, and saves the original FITS, both discovery and current metadata, source limitations and hashes in a product record. Then run `telescope outputs NEW_DIRECTORY/output.product.json` to inspect operations supported by that actual FITS file. A raw frame may have no usable image or spectrum; the route never claims target detection, calibration or fitness from an archive name. `telescope get` still selects qualified observation choices; Gemini remains metadata-only when its archive denies access. The output directory must be new.
+Fetch one of those sources with `telescope fetch RUN/explore.json --archive gemini --pick N
+--out NEW_DIRECTORY`, substituting `keck`, `chandra` or `spitzer` and that archive's displayed
+source number. Keck remains the default for saved explorations made before `--archive` existed.
+Fetch rechecks the selected archive identity, enforces the saved science-byte limit while reading,
+and records original files, discovery and current metadata, limitations and hashes. Run
+`telescope outputs NEW_DIRECTORY/output.product.json` to inspect operations the actual FITS
+supports. Acquisition alone does not qualify calibration, target detection or scientific fitness.
+`telescope get` remains the route for qualified observation choices. Every fetch needs a new output directory.
 
 `explore` also asks the PDS Ring-Moon Systems Node's
 [OPUS search](https://opus.pds-rings.seti.org/api/) which spacecraft images exist of the body.
@@ -77,8 +87,11 @@ image count and the sharpest image from each instrument: its OPUS id, start time
 at the body centre in km per pixel, as OPUS returns them. It also gives pixels across, which is
 the body's mean diameter from `@cssearth/astronomy` divided by that resolution. For elongated
 bodies such as Kerberos, the mean diameter gives fewer pixels than the long axis would. The
-explore filters (kind, wavelength, time) are not sent to OPUS, and these images are listed for
-reading only; they do not become numbered choices for `get`. A failed request, including the
+explore filters (kind, wavelength, time) are not sent to OPUS. Its per-instrument examples have
+separate **OPUS source** numbers. `telescope fetch RUN/explore.json --archive opus --pick N
+--out NEW_DIRECTORY` retrieves one exact OPUS ID's native image, label and support files as a
+bounded unresolved source; it does not turn OPUS geometry into a qualified measurement or a
+numbered choice for `get`. A failed request, including the
 HTML error page OPUS returns for an invalid query, is reported as `unavailable`, never as an
 empty result. The entry sits in `services` with the ESO, ALMA, PSA, and MAST JWST/HST searches:
 

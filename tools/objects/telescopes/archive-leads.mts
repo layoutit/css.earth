@@ -5,20 +5,35 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { astroqueryToolchainSync } from '../astronomy-packages/toolchain.mts';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../keck/koa.mts';
+import { CADC_TAP, query as cadcQuery } from '../gemini/cadc.mts';
+import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from '../gemini/archive.mts';
 import type { TargetCatalogueEntry } from './targets.mts';
 
 export interface ArchiveLeadService {
   readonly service: string; readonly state: 'sampled' | 'overflow' | 'empty-in-scope' | 'unavailable';
   readonly scope: string; readonly reason: string;
   readonly instruments: readonly { readonly telescope: string; readonly instrument: string; readonly records: number; readonly sample: string }[];
-  /** Exact public source files sampled from KOA, distinct from qualified observation choices. */
-  readonly sources?: readonly KeckSourceLead[];
+  /** Bounded source identities, distinct from qualified observation choices. */
+  readonly sources?: readonly (KeckSourceLead | GeminiSourceLead | ChandraSourceLead | SpitzerSourceLead)[];
   readonly evidence?: readonly string[];
 }
 export interface KeckSourceLead {
   readonly table: string; readonly instrument: string; readonly koaid: string;
   readonly targetName: string; readonly filehand: string; readonly dateObs: string;
   readonly evidence: string;
+}
+export interface GeminiSourceLead {
+  readonly name: string; readonly uri: string; readonly bytes: number; readonly md5: string;
+  readonly targetName: string; readonly instrument: string; readonly telescope: string;
+  readonly observation: string; readonly dataRelease: string; readonly evidence: string;
+}
+export interface ChandraSourceLead {
+  readonly obsid: number; readonly targetName: string; readonly instrument: string; readonly grating: string;
+  readonly startDate: string; readonly evidence: string;
+}
+export interface SpitzerSourceLead {
+  readonly aorKey: number; readonly targetName: string; readonly instrument: string; readonly mode: string;
+  readonly startIso: string; readonly evidence: string;
 }
 export const KECK_SOURCE_SAMPLE_LIMIT = 3;
 const key = (name: string) => name.toLocaleLowerCase('en-US').replace(/[^a-z0-9]+/gu, '');
@@ -27,12 +42,13 @@ const namesOf = (target: TargetCatalogueEntry) => [...new Set([target.name, ...t
 const message = (error: unknown) => error instanceof Error ? error.message : String(error);
 const column = (row: Readonly<Record<string, string>>, name: string): string | undefined =>
   Object.entries(row).find(([key]) => key.toLowerCase() === name)?.[1];
-async function save(root: string, source: string, request: unknown, rows: unknown): Promise<string> {
+export async function saveArchiveLeadEvidence(root: string, source: string, request: unknown, rows: unknown): Promise<string> {
   const directory = resolve(root, 'output/telescopes/archive-leads'), text = `${JSON.stringify({ source, request, rows }, null, 2)}\n`, digest = sha256(text);
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, `${digest}.json`), text);
   return digest;
 }
+const save = saveArchiveLeadEvidence;
 
 /** KOA publishes one TAP table per instrument. Query each sequentially to keep process and network load small. */
 export async function searchKeckLeads(root: string, target: TargetCatalogueEntry, query: typeof koaQuery = koaQuery): Promise<ArchiveLeadService> {
@@ -87,51 +103,34 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
     instruments, sources: sources.sort((a,b)=>a.instrument.localeCompare(b.instrument)||a.koaid.localeCompare(b.koaid)), evidence };
 }
 
-const GEMINI = 'https://archive.gemini.edu/jsonsummary/';
-const MAX_GEMINI_BYTES = 1_000_000;
-async function boundedText(response: Response): Promise<string> {
-  const reader = response.body?.getReader();
-  if (!reader) return '';
-  const chunks: Uint8Array[] = []; let size = 0;
-  for (;;) {
-    const item = await reader.read();
-    if (item.done) break;
-    size += item.value.byteLength;
-    if (size > MAX_GEMINI_BYTES) { await reader.cancel(); throw new RangeError('Gemini metadata exceeded the 1 MB search bound.'); }
-    chunks.push(item.value);
-  }
-  return new TextDecoder().decode(Buffer.concat(chunks));
-}
-/** Gemini's documented JSON summary uses free-form observer names; exact matches are reported as leads only. */
-export async function searchGeminiLeads(root: string, target: TargetCatalogueEntry, fetcher: typeof fetch = fetch): Promise<ArchiveLeadService> {
-  const scope = 'Gemini public canonical JSON summary; at most three exact object-name variants and 1 MB per response';
-  const allNames = namesOf(target), names = allNames.slice(0, 3), truncated = allNames.length > names.length;
-  const groups = new Map<string, { telescope: string; instrument: string; records: number; sample: string }>();
-  const evidence: string[] = [], failures: string[] = [], seen = new Set<string>();
-  for (const name of names) {
-    const url = `${GEMINI}canonical/object=${encodeURIComponent(name)}`;
-    try {
-      const response = await fetcher(url, { signal: AbortSignal.timeout(15_000), headers: { accept: 'application/json' } });
-      if (!response.ok || !/json/iu.test(response.headers.get('content-type') ?? '')) throw new Error(`Gemini returned HTTP ${response.status} ${response.headers.get('content-type') ?? 'without JSON'}.`);
-      const rows = requireArray(JSON.parse(await boundedText(response)) as unknown, 'Gemini summary');
-      evidence.push(await save(root, GEMINI, url, rows));
-      for (const value of rows) {
-        const row = requireRecord(value, 'Gemini row'), archiveName = requireString(row.object, 'Gemini object');
-        if (!names.some(candidate => key(candidate) === key(archiveName)) || row.observation_class !== 'science') continue;
-        const telescope = requireString(row.telescope, 'Gemini telescope'), instrument = requireString(row.instrument, 'Gemini instrument');
-        const id = requireString(row.data_label, 'Gemini data label');
-        if (seen.has(id)) continue;
-        seen.add(id);
-        const groupKey = `${telescope}/${instrument}`, group = groups.get(groupKey) ?? { telescope, instrument, records: 0, sample: id };
-        group.records++; groups.set(groupKey, group);
-      }
-    } catch (error) {
-      failures.push(`${name}: ${message(error)}`);
-      if (/HTTP (?:401|403)/u.test(message(error))) break;
+/** CADC mirrors Gemini's public raw files and supplies stable artifact URI, size and MD5. */
+export async function searchGeminiLeads(root: string, target: TargetCatalogueEntry, query: typeof cadcQuery = cadcQuery): Promise<ArchiveLeadService> {
+  const names = namesOf(target), searched = names.slice(0, 12), limit = 500;
+  const scope = `CADC GEMINI public OBJECT science artifacts for ${searched.length} exact archive-name variants; first ${limit} rows, up to 3 FITS files per instrument`;
+  if (!searched.length) return { service: CADC_TAP, state: 'empty-in-scope', scope, reason: 'No target name was available.', instruments: [] };
+  const adql = `SELECT TOP ${limit} ${FRAME_COLUMNS} FROM ${FRAME_JOIN} WHERE o.collection='GEMINI' AND o.type='OBJECT' AND o.intent='science' ` +
+    `AND o.target_name IN (${searched.map(name => `'${name.replaceAll("'", "''")}'`).join(',')}) ` +
+    `AND p.dataRelease < '${new Date().toISOString()}' AND a.uri LIKE 'gemini:GEMINI/%.fits' ORDER BY p.time_bounds_lower DESC`;
+  try {
+    const rows = await query(adql), pin = await save(root, CADC_TAP, adql, rows);
+    const groups = new Map<string, { telescope: string; instrument: string; records: number; sample: string }>();
+    const sources: GeminiSourceLead[] = [], seen = new Set<string>();
+    for (const row of rows) {
+      const name = requireString(row.target_name, 'CADC target name');
+      if (!searched.some(candidate => key(candidate) === key(name))) throw new TypeError('CADC returned another target name.');
+      if (!/^gemini:GEMINI\/[NS]\d{8}S\d{4}\.fits$/u.test(row.uri ?? '')) continue;
+      const frame = cadcFrame(row), instrument = requireString(row.instrument_name, 'CADC instrument');
+      if (seen.has(frame.uri)) continue;
+      seen.add(frame.uri);
+      const telescope = frame.name.startsWith('N') ? 'Gemini North' : 'Gemini South', groupKey = `${telescope}/${instrument}`;
+      const group = groups.get(groupKey) ?? { telescope, instrument, records: 0, sample: frame.name };
+      group.records++; groups.set(groupKey, group);
+      if (group.records <= 3) sources.push({ name: frame.name, uri: frame.uri, bytes: frame.bytes, md5: frame.md5,
+        targetName: name, instrument, telescope, observation: frame.observation, dataRelease: frame.dataRelease, evidence: pin });
     }
-  }
-  const instruments = [...groups.values()].sort((a, b) => b.records - a.records || a.instrument.localeCompare(b.instrument));
-  return { service: GEMINI, state: failures.length ? evidence.length ? 'overflow' : 'unavailable' : truncated ? 'overflow' : instruments.length ? 'sampled' : 'empty-in-scope', scope,
-    reason: failures.length ? `${evidence.length}/${names.length} name queries answered; ${failures.join('; ')}` : `${seen.size} matching science-file metadata rows; ${truncated ? `${allNames.length - names.length} name variants were not searched; ` : ''}archive object names are not target confirmations or access rights.`,
-    instruments, evidence };
+    const instruments = [...groups.values()].sort((a, b) => b.records - a.records || a.instrument.localeCompare(b.instrument));
+    return { service: CADC_TAP, state: rows.length >= limit || names.length > searched.length ? 'overflow' : instruments.length ? 'sampled' : 'empty-in-scope',
+      scope, reason: `${seen.size} distinct public raw FITS artifact(s) in this bounded search. Archive names do not confirm target detection or calibration.`,
+      instruments, sources, evidence: [pin] };
+  } catch (error) { return { service: CADC_TAP, state: 'unavailable', scope, reason: message(error), instruments: [] }; }
 }

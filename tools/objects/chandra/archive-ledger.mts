@@ -118,17 +118,17 @@ export const isObjectPointing = (targetName: string) => !NOT_AN_OBJECT.test(targ
 const escape = (value: string) => { if (/['\\;]/u.test(value)) throw new TypeError(`Unsafe ADQL literal: ${value}`); return value; };
 
 /** Archived observations of one shipped object: by name when it moves, by a box about its position when it does not. */
-export async function observationsOf(object: ShippedObject): Promise<ArchiveRow[]> {
-  const columns = 'obsid, target_name, instrument, grating, exposure_time, start_date';
+export async function observationsOf(object: ShippedObject, query: typeof cxcQuery = cxcQuery, radiusDegrees?: number, limit?: number): Promise<ArchiveRow[]> {
+  const columns = `${limit === undefined ? '' : `TOP ${limit} `}obsid, target_name, instrument, grating, exposure_time, start_date`;
   const names = MOVING_TARGETS[object.id];
   if (names) {
     const clause = names.map(name => `target_name='${escape(name)}'`).join(' OR ');
-    const rows = await cxcQuery(`SELECT ${columns} FROM cxc.observation WHERE (${clause}) AND status='archived'`);
+    const rows = await query(`SELECT ${columns} FROM cxc.observation WHERE (${clause}) AND status='archived'${limit === undefined ? '' : ' ORDER BY exposure_time DESC, obsid'}`);
     return rows.map(row).sort((a, b) => b.exposureKs - a.exposureKs);
   }
-  const box = objectBox(object);
-  const rows = await cxcQuery(`SELECT ${columns} FROM cxc.observation WHERE ra BETWEEN ${box.raLow.toFixed(6)} AND ${box.raHigh.toFixed(6)}` +
-    ` AND dec BETWEEN ${box.decLow.toFixed(6)} AND ${box.decHigh.toFixed(6)} AND status='archived'`);
+  const box = objectBox(object, radiusDegrees);
+  const rows = await query(`SELECT ${columns} FROM cxc.observation WHERE ra BETWEEN ${box.raLow.toFixed(6)} AND ${box.raHigh.toFixed(6)}` +
+    ` AND dec BETWEEN ${box.decLow.toFixed(6)} AND ${box.decHigh.toFixed(6)} AND status='archived'${limit === undefined ? '' : ' ORDER BY exposure_time DESC, obsid'}`);
   return rows.map(row).filter(entry => isObjectPointing(entry.targetName)).sort((a, b) => b.exposureKs - a.exposureKs);
 }
 
