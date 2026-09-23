@@ -1,5 +1,5 @@
-import type { ShellOverview, ShellSubject } from './shell-selection.mts';
-import { shellSubjectKey } from './shell-selection.mts';
+import type { SceneOverview, SceneSubject } from './scene-selection.mts';
+import { selectionKey } from './scene-selection.mts';
 import type { CatalogueSelection } from './catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
@@ -52,16 +52,16 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     systemDatasets.hidden = !onSystemCard;
   };
   const objectName = (id: string) => SCENE_OBJECTS.find(object => object.id === id)?.name ?? '';
-  const overviewName = ({ scope, systemId }: ShellOverview) => scope === 'system'
+  const overviewName = ({ scope, systemId }: SceneOverview) => scope === 'system'
     ? systemById(SCENE_OBJECTS, systemId)?.name ?? 'Solar System'
     : ({ 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[scope];
-  const publishSource = (subject: ShellSubject, sourceLinks: ReadonlyMap<string, SourceDocumentReference>) => {
-    const sourceFocus = subject.kind === 'focus' ? subject.record.id : '';
+  const publishSource = (subject: SceneSubject, sourceLinks: ReadonlyMap<string, SourceDocumentReference>) => {
+    const sourceFocus = subject.kind === 'focus' ? subject.id : '';
     if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
-    renderSourceLink(documentTarget, shellSubjectKey(subject), sourceLinks);
+    renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
   };
-  const render = (subject: ShellSubject) => {
-    const focus = subject.kind === 'focus' ? subject.record : null;
+  const render = (subject: SceneSubject) => {
+    const focus = subject.kind === 'focus' ? subject : null;
     const overview = subject.kind === 'overview' ? subject.overview : null;
     const galactic = overview?.scope === 'milky-way';
     const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
@@ -85,18 +85,18 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
     for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
     if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
-    const navigationSelection = subject.kind === 'focus' ? subject.record.id
+    const navigationSelection = subject.kind === 'focus' ? subject.id
       : subject.kind === 'overview' ? subject.overview.scope === 'system' ? subject.overview.systemId : subject.overview.scope
       : subject.objectId;
     selectNavigation(navigationSelection);
-    context.ariaLabel = subject.kind === 'focus' ? subject.record.name
+    context.ariaLabel = subject.kind === 'focus' ? subject.record?.name ?? 'Selected object'
       : subject.kind === 'overview' ? largeScale?.dataset.largeScaleName ?? overviewName(subject.overview)
       : objectName(subject.objectId) || 'Selected object';
   };
-  const mark = (subject: ShellSubject): CatalogueSelection => {
+  const mark = (subject: SceneSubject): CatalogueSelection => {
     documentTarget.documentElement.dataset.selection = subject.kind === 'focus' ? 'prepared-focus'
       : subject.kind === 'overview' ? subject.overview.scope : 'object';
-    const selection = subject.kind === 'focus' ? { kind: 'prepared-focus', id: subject.record.id } as const
+    const selection = subject.kind === 'focus' ? { kind: 'prepared-focus', id: subject.id } as const
       : subject.kind === 'object' ? { kind: 'scene', id: subject.objectId } as const : null;
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
       const selected = selection?.kind === 'prepared-focus' ? anchor.dataset.preparedFocusId === selection.id

@@ -1,6 +1,8 @@
 import type { createApplicationWorldContext } from './application-world-context.mts';
 import type { BrowserWindow } from './browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
+import type { FocusCallbacks } from './prepared-context-navigation.mts';
+import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 
 export type WorldContextOwner = ReturnType<typeof createApplicationWorldContext>;
 export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
@@ -13,11 +15,13 @@ interface SceneWorldOptions {
   onMount(world: WorldContextMount): void;
   onFlightStart(): void;
   onFocusChange(session: SceneSession, url: string): void;
+  onFocusContentChange: NonNullable<FocusCallbacks['onFocusContentChange']>;
+  onCameraChange(session: SceneSession, world: WorldCameraPose): void;
   onError(error: unknown): void;
 }
 
 /** The world survives detail replacement; each detail owns only its connections to it. */
-export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onFlightStart, onFocusChange, onError }: SceneWorldOptions) {
+export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onFlightStart, onFocusChange, onFocusContentChange, onCameraChange, onError }: SceneWorldOptions) {
   let current: WorldContextMount | null = null;
   let task: Promise<WorldContextMount> | null = null;
   let pending: AbortController | null = null;
@@ -50,21 +54,20 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     return task;
   }
 
-  function connect(session: SceneSession, overview: boolean) {
+  function connect(session: SceneSession) {
     const world = current, navigation = session.mount?.navigation;
     if (!world || !navigation || typeof navigation.subscribe !== 'function') return;
     world.selectObject?.(session.objectId, navigation.frame);
-    world.setOverview?.(overview);
     const disconnectFocus = world.connectNavigation?.(navigation, {
       onFocusChange(url) { if (isCurrent(session)) onFocusChange(session, url); },
       onFocusContentChange(record, sources, presentation) {
-        if (isCurrent(session)) session.shell?.setPreparedFocus?.(record, sources, presentation);
+        if (isCurrent(session)) onFocusContentChange(record, sources, presentation);
       },
       onFlightStart() { if (isCurrent(session)) onFlightStart(); },
     });
     if (disconnectFocus) session.own(disconnectFocus);
     session.own(navigation.subscribe((frame, viewport) => {
-      if (isCurrent(session) && current === world) world.publish(frame, viewport);
+      if (isCurrent(session) && current === world) { onCameraChange(session, frame); world.publish(frame, viewport); }
     }));
     session.framePresenter?.enable();
   }
