@@ -133,6 +133,8 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
     if (!target && pin) {
       try {
         const payload = await load();
+        // A later selection owns the tree once this one yields.
+        if (selected !== objectId) return;
         const parent = new Map<string, string>();
         for (const [key, node] of Object.entries(payload.nodes)) for (const child of node.children) parent.set(child, key);
         const path: string[] = [];
@@ -142,6 +144,7 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
           const details = detailsByKey(key);
           if (!details) break;
           await materialize(details, payload);
+          if (selected !== objectId) return;
           details.open = true;
         }
         target = anchorByObject(objectId);

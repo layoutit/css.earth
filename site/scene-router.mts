@@ -262,7 +262,8 @@ export function createSceneRouter({
     scenes.current?.setViewUrl(null);
     let url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
-      url.pathname = object.route; url.searchParams.delete('v');
+      // A feature belongs to the page that named it; the next object starts without one.
+      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
       url = withDataset(withPreparedFocus(url, null, null), null);
       withOverviewScope(url, options.overview ? options.overviewScope ?? 'system' : null);
       if (options.feature) url.searchParams.set('feature', options.feature);
