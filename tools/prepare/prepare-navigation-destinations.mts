@@ -36,7 +36,8 @@ export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: s
       : object.membership.group === 'local-group' ? 'Local Group' : 'Galaxy catalogue',
     sceneHostId, route: `/${sceneHostId}/?focus=${encodeURIComponent(object.id)}`,
     distance: { ...(object.distance.subject ? { subject: object.distance.subject } : {}), meters: object.distance.valuePc * PC_M, value: object.distance.valuePc, unit: 'pc',
-      quantity: isPreparedCluster(object) ? 'comoving' : 'catalogue', referencePoint: 'observer', epochJdTt: null } });
+      quantity: isPreparedCluster(object) ? 'comoving' : 'catalogue', referencePoint: 'observer', epochJdTt: null },
+    ...(classification === 'galaxy' && 'status' in object && object.status === 'candidate' ? { candidate: true } : {}) });
 }
 
 /** Source catalogues own identity. Rendering-resource descriptors do not add destinations. */
