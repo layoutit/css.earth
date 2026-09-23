@@ -138,6 +138,8 @@ jobs:
           pnpm check:deploy-assets
       - name: Check no page references a same-origin /scenes/ address
         run: node tools/assets/check-asset-origin-scenes.mts dist
+      - name: Check built SEO metadata and sitemap
+        run: pnpm test:seo
       - name: Check production navigation loads content-addressed assets
         env:
           CSSEARTH_TEST_ORIGIN: http://127.0.0.1:4212

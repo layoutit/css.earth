@@ -8,11 +8,12 @@ shared metadata format.
 Object routes such as `/earth/` and `/saturn/` are canonical. The homepage is
 an Earth alias and declares `/earth/` as canonical. Query parameters and shared
 camera fragments do not change metadata. The sitemap contains one canonical
-URL per registered object, and `/robots.txt` advertises it.
+URL per registered scene, and `/robots.txt` advertises it.
 
-Bodies without a committed capture advertise the default Earth capture, so a
-share preview never points at a missing file. `pnpm prepare:social --object=<id>`
-adds a body's own capture and the page then advertises it.
+Bodies without a committed capture advertise the default Earth capture, labelled
+as a shared preview rather than a picture of that body, so a share preview never
+points at a missing file. `pnpm prepare:social --object=<id>` adds a body's own
+capture and the page then advertises it.
 
 Social previews are plain screenshots of each actual CSS scene, with the
 application controls hidden and the scene centered. They have no added text,
@@ -29,7 +30,7 @@ pnpm build
 pnpm prepare:social                  # all registered objects
 # pnpm prepare:social --object=earth # one object
 pnpm build                          # include the new images
-pnpm test:seo http://localhost:4210 # use the existing server
+pnpm test:seo                        # inspect the built dist/ output
 ```
 
 Inspect the images before committing them. A new object needs its own capture.
@@ -38,11 +39,10 @@ Inspect the images before committing them. A new object needs its own capture.
 
 ## Check metadata and deployment
 
-The SEO check reads the existing server on 4210 (or the supplied URL) with
-JavaScript disabled. It checks metadata, headings, homepage reachability,
-sitemap coverage, and referenced image dimensions. To inspect production output,
-point it at an already-running preview of that build. It never starts another
-server. Results are written to `output/seo/report.json`.
+The SEO check reads `dist/` (or a supplied build directory), with no JavaScript.
+It checks every scene's metadata, sitemap coverage, referenced image dimensions,
+and the internal preview's `noindex`.
+Deploy and nightly builds run the same check before publication.
 
 After deployment, verify HTTPS and host redirects, canonical URLs, robots and
 sitemap responses, and real 404 responses on the chosen host. Submit the sitemap
