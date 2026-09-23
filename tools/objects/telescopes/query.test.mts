@@ -436,7 +436,7 @@ test('the committed ledgers: Europa at 3.4 to 3.6 micrometres has historical JWS
   assert.equal(nirspec.telescope, 'JWST');
   assert.equal(nirspec.meetsConstraints.wavelength?.answer, 'yes');
   assert.equal(nirspec.meetsConstraints.kind?.answer, 'yes');
-  assert.equal(nirspec.toolkitSupport.level, 'proven');
+  assert.equal(nirspec.toolkitSupport.level, 'tool-without-checked-program', 'historical comparisons are not accepted qualification evidence');
   assert.equal(nirspec.toolkitSupport.targetProgramChecked, false, 'historical comparisons need explicit acceptance before they count as checked');
   assert.equal(nirspec.evidence.archiveDate.length, 10);
   assert.ok(answer.candidates.length > 1, 'other modes observed Europa too');

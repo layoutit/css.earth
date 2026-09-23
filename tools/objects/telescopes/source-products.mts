@@ -120,7 +120,8 @@ export async function loadSourceProducts(root: string, target: string, issues: S
   const value = await readFile(resolve(source, 'observations.json'), 'utf8').then(text => JSON.parse(text) as unknown).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
   const declared = value === undefined ? [] : parseSourceProducts(value, JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')) as unknown, target);
   // PDS labels are a producer of the common contract, not a separate query path.
-  for (const observation of await sourcePds3Observations(root, target)) {
+  const legacyIssues: SourceIntakeIssue[] = [];
+  for (const observation of await sourcePds3Observations(root, target, (path, reason) => legacyIssues.push({ path, state: 'incomplete', reason }))) {
     if (declared.some(entry => entry.archiveProductId === observation.archiveProductId)) continue;
     declared.push({ id: observation.id, target, telescope: observation.telescope, mode: observation.mode, kind: observation.kind, archiveProductId: observation.archiveProductId,
       decoder: 'pds-image', files: observation.sourceFiles, identity: { PRODUCT_ID: observation.archiveProductId.slice(observation.datasetId.length + 1), DATA_SET_ID: observation.datasetId, TARGET_NAME: observation.targetName },
@@ -129,6 +130,9 @@ export async function loadSourceProducts(root: string, target: string, issues: S
       limitations: ['Filter width and achieved optical resolution are not supplied; pixel sampling is not optical resolution.'] });
   }
   declared.push(...await intakeSources(root, target, declared, issues, options));
+  // A product accepted by native intake needs no warning about the narrower mission-image adapter.
+  for (const issue of legacyIssues) if (!declared.some(product => product.files.some(file => file.path === issue.path)) &&
+      !issues.some(existing => existing.path === issue.path)) issues.push(issue);
   if (new Set(declared.map(product => product.id)).size !== declared.length) throw new TypeError('Duplicate source product identity.');
   const loaded: LoadedSourceProduct[] = [];
   for (const product of declared) {
