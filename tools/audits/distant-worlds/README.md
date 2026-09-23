@@ -41,10 +41,11 @@ These variables apply to `qualify`, `fresh-sources`, `fresh-install`,
 `surface-fit`, `browser-check` and `contact-sheet`. `final-interactions`
 retains its original named scenarios. `contact-sheet` writes `worlds.webp`.
 
-For example, `node tools/audits/distant-worlds/qualify.mjs` reads the current
-prepared packages. `python3 tools/audits/distant-worlds/surface-fit.py` compares
-them with the adopted ellipsoids. Its finite samples are not a Hausdorff bound
-or a scientific measurement uncertainty.
+Historical commands at [revision `d68eab6c31^`](https://github.com/layoutit/css.earth/tree/d68eab6c31%5E/tools/audits/distant-worlds):
+`node tools/audits/distant-worlds/qualify.mjs` read the prepared packages, and
+`python3 tools/audits/distant-worlds/surface-fit.py` compared them with the
+adopted ellipsoids. These helpers are absent from the current checkout. Their
+finite samples were not a Hausdorff bound or a scientific measurement uncertainty.
 
 Fresh-source and fresh-runtime checks require empty destinations beneath
 the selected report directory (by default `output/distant-worlds/`). To avoid a

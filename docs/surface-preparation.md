@@ -349,10 +349,11 @@ declares a seam outset, preparation writes two corrections instead:
   `1 + outset × scale`. From a 16-pixel disc to the closest zoom, every step adds
   0.38–0.6 CSS pixels on each edge. The runtime only selects a prepared step.
 
-[surface-seams-browser.mts](../site/test/rendered-page.test.mts) measures the
-result at saved Venus radar views. It renders each view over a black and then a
-white backdrop to find pixels that let the backdrop through, and it compares the
-brightness profile across each seam with parallel lines inside both leaves.
+The [historical seam browser test](https://github.com/layoutit/css.earth/blob/6e32bc459b%5E/site/test/surface-seams-browser.mts)
+measured saved Venus radar views over black and white backdrops and compared
+brightness across seams. The current
+[`rendered-page.test.mts`](../site/test/rendered-page.test.mts) checks built HTML
+structure; it does not measure seam pixels.
 These corrections do not change breaks in the source imagery itself, such as
 the one-pixel border columns at the edges of the Venus radar, Mars and Ceres
 source maps.

@@ -4,11 +4,20 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
 const root=path.resolve(import.meta.dirname,'../../site/source/facilities/emblems');
 const output=path.resolve(import.meta.dirname,'../../public/shell/facility-emblems');
+const catalogueRoot=path.resolve(import.meta.dirname,'../../src/sources');
+const historicalEvidence='site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf';
 
 const records=requireArray(JSON.parse(await fs.readFile(path.join(root,'source-records.json'),'utf8'))).map(value=>{const entry=requireRecord(value);return {...entry,id:requireString(entry.id),localSource:requireString(entry.localSource)};});
 await fs.mkdir(output,{recursive:true});
 const entries=[],layers=[];
 for(const e of records){
+ const index=entries.length;
+ const catalogueId=`artwork-emblem-${e.id}`;
+ const catalogue=requireRecord(JSON.parse(await fs.readFile(path.join(catalogueRoot,`${catalogueId}.json`),'utf8')));
+ const sourceEvidence=requireArray(catalogue.evidence);
+ if(catalogue.id!==catalogueId||!sourceEvidence.some(value=>requireRecord(value).locator===`/entries/${index}`))
+  throw Error(`Emblem order no longer matches the catalogued source: ${e.id}`);
+ const sourceBinding={kind:'catalogued',references:[{catalogueId,role:'artwork',evidence:`${historicalEvidence}#/entries/${index}`}]};
  const input=await fs.readFile(path.join(root,e.localSource));
  // Juno's vector uses negative space for the white features shown in the raster
  // insignia. Retain that white inside the circular badge, with no outer square.
@@ -39,12 +48,12 @@ for(const e of records){
  if(transparent<288*288*.03)throw Error('Missing actual transparency: '+e.id);
  for(let y=0;y<288;y++)for(let x=0;x<288;x++)if(x===0||y===0||x===287||y===287)if(raw[(y*288+x)*4+3]!==0)throw Error('Opaque frame edge: '+e.id);
  await fs.writeFile(path.join(output,e.id+'.png'),png);
- entries.push({id:e.id,src:'/shell/facility-emblems/'+e.id+'.png',width:288,height:288,bytes:png.length,source:{...e,inputBytes:input.length},preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent}});
- const index=entries.length-1,x=index%6*160,y=Math.floor(index/6)*186;
+ entries.push({id:e.id,src:'/shell/facility-emblems/'+e.id+'.png',width:288,height:288,bytes:png.length,source:{...e,inputBytes:input.length},preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent},sourceBinding});
+ const x=index%6*160,y=Math.floor(index/6)*186;
  layers.push({input:await sharp(png).resize(128,128).png().toBuffer(),left:x+16,top:y+8});
  layers.push({input:Buffer.from(`<svg width="160" height="28"><text x="8" y="18" fill="#ccc" font-family="Arial" font-size="12">${e.id}</text></svg>`),left:x,top:y+147});
  console.log(e.id,removed?'removed '+removed+' exterior pixels':'native alpha',png.length);
 }
 if(entries.length!==24||new Set(entries.map(e=>e.id)).size!==24)throw Error('Expected all 24');
-await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify({schema:'cssearth-facility-emblems@1',normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries},null,2)+'\n');
+await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify({schema:'cssearth-facility-emblems@3',normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries},null,2)+'\n');
 if(process.argv[2])await sharp({create:{width:960,height:744,channels:3,background:'#0d0d0d'}}).composite(layers).png().toFile(path.resolve(process.argv[2]));

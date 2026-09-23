@@ -204,14 +204,12 @@ For changes to dataset selection or routing, also run the affected
 [selection](../../src/platform/object-selection-runtime.test.mts) and
 [router](https://github.com/layoutit/css.earth/blob/264ef405472f4713af68fa692b4b8fd0ccaf5690/site/test/navigation-router.test.mts) tests for cancellation and history.
 
-For dataset navigation or card presentation changes, run
-`pnpm test:node` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`) against an assembled build.
-The [browser regression](../../site/test/rendered-page.test.mts)
-uses the public shell and records its cases, browser version, requests and
-screenshots under `output/playwright/dataset-navigation/`. It checks direct,
-same-body and cross-body dataset navigation, manual selection and history,
-invalid links, keyboard selection, dataset-specific attribution, deferred
-content, Moons navigation and the phone layout.
-
-Check one mounted object and stable shared controls during those scenarios.
+For dataset navigation or card presentation changes, run the affected
+[dataset response](../../site/test/dataset-response.test.mts),
+[URL](../../site/test/dataset-url.test.mts) and
+[scene session](../../site/test/scene-session.test.mts) tests. After a build,
+[`rendered-page.test.mts`](../../site/test/rendered-page.test.mts) parses the
+Saturn, Earth and Mercury HTML to check that each page contains one prepared
+scene, a camera, prepared texture references and unique element IDs. It does
+not exercise navigation or inspect browser screenshots.
 A source association does not certify texture delivery or scientific accuracy.

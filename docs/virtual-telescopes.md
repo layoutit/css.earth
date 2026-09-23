@@ -1154,7 +1154,9 @@ Chromium's scrollbar/resizer styling and CSS view timelines. Firefox and real
 mobile hardware are not qualified. Unsupported prepared camera bindings are
 refused instead of producing an incomplete view.
 
-Check real exported documents with scripting disabled:
+The following browser check is historical. Its helper last existed at
+[revision `6e32bc459b^`](https://github.com/layoutit/css.earth/blob/6e32bc459b%5E/tests/experiments/native-scroll/sphere-browser.mts)
+and is absent from this checkout:
 
 ```sh
 node tests/experiments/native-scroll/sphere-browser.mts europa-sphere/sphere.html mercury-sphere/sphere.html
