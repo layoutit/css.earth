@@ -14,7 +14,7 @@ export class VoAccessError extends Error {
 
 export type HorizonsEpochs = readonly number[] | { readonly start: string; readonly stop: string; readonly step: string };
 export type AstroqueryRequest =
-  | { readonly operation: 'vo-download'; readonly url: string; readonly destination: string; readonly byteLimit: number; readonly format?: 'fits' | 'zip' | 'tar'; readonly parameters: Readonly<Record<string, Json>>; readonly allowedPrivateHosts?: readonly string[];
+  | { readonly operation: 'vo-download'; readonly url: string; readonly destination: string; readonly byteLimit: number; readonly format?: 'fits' | 'zip' | 'tar'; readonly fitsProfile?: 'raster' | 'bintable'; readonly parameters: Readonly<Record<string, Json>>; readonly allowedPrivateHosts?: readonly string[];
       readonly descriptor?: { readonly file: Pin; readonly row: number; readonly serviceId: string } }
   | { readonly operation: 'vo-tap'; readonly service: string; readonly query: string; readonly maxrec: number; readonly directory: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
   | { readonly operation: 'vo-links'; readonly url: string; readonly parameters?: Readonly<Record<string, Json>>; readonly directory: string; readonly byteLimit: number; readonly allowedPrivateHosts?: readonly string[] }
@@ -117,7 +117,6 @@ def rows(table):
 
 operation = request['operation']
 answer = {'schema': 'cssearth-astroquery-answer@2', 'astroquery': astroquery.__version__, 'operation': operation}
-
 if operation == 'vo-download':
     import os, hashlib, tempfile, io, requests
     from astropy.io.votable import parse
@@ -178,10 +177,12 @@ if operation == 'vo-download':
             if length and not response.headers.get('Content-Encoding') and int(length) != size: raise TransferFailure('interrupted', 'Incomplete science response')
             if request.get('format', 'fits') == 'fits':
                 try:
+                    profile = request.get('fitsProfile', 'raster')
+                    if profile not in ('raster', 'bintable'): raise ValueError('Unsupported FITS content profile')
                     with fits.open(temporary, memmap=True) as hdus:
                         hdus.verify('exception')
-                        if not any(h.header.get('NAXIS', 0) >= 2 and h.header.get('XTENSION', '').strip() not in ('TABLE','BINTABLE') for h in hdus):
-                            raise ValueError('Response contains no supported FITS image/cube')
+                        if profile == 'raster' and not any(h.header.get('NAXIS', 0) >= 2 and h.header.get('XTENSION', '').strip() not in ('TABLE','BINTABLE') for h in hdus): raise ValueError('Response contains no supported FITS image/cube')
+                        if profile == 'bintable' and not any(h.header.get('XTENSION', '').strip() == 'BINTABLE' for h in hdus): raise ValueError('Response contains no FITS binary table')
                 except Exception as error: raise TransferFailure('protocol', 'Invalid science FITS response: ' + str(error)) from error
             # Never overwrite a previously acquired artifact at this destination.
             os.link(temporary, request['destination'])
