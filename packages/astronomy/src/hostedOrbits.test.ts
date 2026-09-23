@@ -24,9 +24,9 @@ describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
-    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', ...hd110067, 'hd-189733b', 'hd-209458b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
+    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b'])
     for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
@@ -218,6 +218,21 @@ describe('hosted orbits', () => {
       sum += miss ** 2
     }
     expect(Math.sqrt(sum / 4)).toBeLessThan(12)
+  })
+  it('places 51 Eridani b where JWST measured it, moving away from us as HiRISE measured', () => {
+    // Balmer et al. (2025), Table 2: (dRA, dDec) = (286 +/- 10, -99 +/- 4) mas on MJD 60235.25. Denis et al. (2026), Table 1: the planet's
+    // radial velocity minus the star's, +1.72, +4.24, +2.75 and +4.12 km/s (errors 2.0, 2.0, 2.4-2.9 and 0.9) on the four nights below.
+    const star = starAstrometry('hd-29391'), radiusKm = BODIES['hd-29391'].meanRadiusKm, orbit = hostedOrbit('hd-29391-b')
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+    const p = hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, 60235.25).positionKm, distanceKm = star.distanceParsecs * PARSEC_KM
+    const [x, y] = [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000)
+    // Measured 2026-09-23: (279, -107), 11 mas from the JWST position.
+    expect(Math.hypot(x! - 286, y! + 99)).toBeLessThan(15)
+    const mjdOf = (iso: string) => Date.parse(`${iso}T00:00:00Z`) / 86400000 + 40587
+    for (const [date, measured, sigma] of [['2023-11-21', 1.72, 1.99], ['2024-12-01', 4.24, 2.01], ['2025-02-03', 2.75, 2.9], ['2025-09-11', 4.12, 0.9]] as const) {
+      const velocity = dot(hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, mjdOf(date)).velocityKmPerDay, sight) / 86400
+      expect(Math.abs(velocity - measured), date).toBeLessThan(2 * sigma)
+    }
   })
   it('rejects incomplete or non-finite eccentric inputs', () => {
     const star = starAstrometry('wasp-43')

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-29391",
+  "angularDiameterMas": 0.45,
+  "angularDiameterSource": "Limb-darkened angular diameter 0.450 +/- 0.006 mas from the CHARA Array, Elliott et al. (2024, PASA 41, e056; arXiv:2401.01468), abstract; at the Gaia DR3 distance it is the radius of the astronomy record, 1,006,594 km.",
+  "distanceParsecs": 29.905171,
+  "distanceSource": "Gaia DR3 source 3205095125321700480: parallax 33.4390 +/- 0.0777 mas (RUWE 1.15), inverted to 29.9052 pc with no zero-point correction.",
+  "radiusKm": 1006593.74,
+  "radiusSource": "Radius: the CHARA Array limb-darkened angular diameter 0.450 +/- 0.006 mas of Elliott et al. (2024, PASA 41, e056; arXiv:2401.01468) at the Gaia DR3 distance 29.9052 pc: 1,006,594 km, 1.4469 solar radii at 695700 km per solar radius (Elliott et al. give 1.45 +/- 0.02 solar radii with the zero-point corrected parallax). GM from their PARSEC isochrone mass 1.550 +0.006/-0.005 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis (celestial north at the star) is up; the star's spin axis has no measured direction on the sky.",
+  "effectiveTemperatureK": 7422,
+  "effectiveTemperatureSource": "Elliott et al. (2024, PASA 41, e056; arXiv:2401.01468): effective temperature 7422 +/- 58 K from the CHARA limb-darkened diameter, bolometric flux and parallax, https://arxiv.org/abs/2401.01468",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."
+  }
+}
