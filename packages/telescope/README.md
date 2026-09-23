@@ -44,6 +44,8 @@ To prepare a WWT display image as a static source, run `telescope wwt-image RUN/
 
 To read WWT-hosted scientific FITS data, run `telescope wwt-fits data/wwt/phat-fits.json --set PHAT-f475w --level 0 --x 0 --y 0 --out NEW_DIRECTORY`. This retrieves one original FITS tile from WWT's published PHAT collection, checks its 256 × 256 numeric primary array with Astropy, and saves the original FITS, a full-resolution numeric FITS image, CSV samples, a figure, the pinned WTML/catalog, and a product record with source URL and hashes. The collection has f475w and f814w imagesets. An individual tile is bounded to 8 MiB, and this command does not start a rendering engine. The published tile has no BUNIT, uncertainty array, or celestial WCS in its FITS header: those scientific requirements remain unresolved. WTML supplies placement for WWT, not a per-tile FITS WCS or proof of the original untiled PHAT product. To snapshot another WWT FITS WTML collection with `wwt-data-formats` 0.18.1, run `CSSEARTH_WWT_PYTHON=... node tools/objects/telescopes/wwt/wwt-fits-catalog-build.mts COLLECTION.wtml HTTPS_SOURCE_URL CATALOG.json`; keep the WTML beside its snapshot.
 
+The original tile also enters the shared FITS output flow, including receipts saved before this handoff: `telescope outputs NEW_DIRECTORY/output.product.json`, then `telescope export NEW_DIRECTORY/output.product.json --output image --hdu 0 --out ANOTHER_DIRECTORY`. The export retains the source pin, units and masks available in the FITS file. It remains unresolved when the tile lacks calibration, units or celestial WCS; it cannot become a body map without a qualified delivery and navigation context.
+
 The saved answer has an `outcome` with separate `selection` and `coverage` values. `selection`
 is `available` when at least one numbered route can be tried, or `none`. `coverage` is
 `target-unresolved` when no target search ran, `incomplete` when a provider failed or overflowed,
@@ -158,6 +160,7 @@ After `get`, inspect what the delivered product can support:
 telescope families
 telescope import import-spec.json --out imported-observation
 telescope outputs imported-observation/import.json
+telescope outputs imported-observation/import.product.json
 telescope outputs runs/eris/pick-1/result.json
 telescope export runs/eris/pick-1/result.json --output image --hdu 1 --plane 95 --out figures/eris-plane
 telescope export runs/eris/pick-1/result.json --output spectrum --hdu 1 --pixel 25,27 --out figures/eris-pixel
@@ -165,6 +168,8 @@ telescope export runs/eris/pick-1/result.json --output band-image --hdu 1 --band
 telescope export runs/eris/pick-1/result.json --output aperture-spectrum --hdu 1 --aperture 19,24,25,30 --background 29,24,35,30 --out figures/eris-aperture
 telescope export runs/eris/pick-1/result.json --output feature-map --hdu 1 --band 2.30,2.34 --continuum 2.26,2.29,2.35,2.38 --out figures/eris-feature
 ```
+
+When an import has exactly one science FITS member, its `import.product.json` offers the same FITS image, spectrum and cube operations supported by the actual arrays. `import.json` continues to expose qualified family operations. The generic FITS route preserves the imported bytes and labels origin and calibration as unresolved.
 
 When one declared family selects an existing content validator, import writes a pinned
 `descriptor.json` and `outputs` lists the package-owned `family-run` operations. Ambiguous inputs

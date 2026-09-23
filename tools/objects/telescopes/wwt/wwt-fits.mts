@@ -6,6 +6,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { sciencePackage } from '../../astronomy-packages/science.mts';
 import { plotProduct } from '../../astronomy-packages/plots.mts';
 import { writeProductRecord } from '../../product-record.mts';
+import { FITS_SOURCE_SCHEMA } from '../fits-source.mts';
 
 const MAX_TILE_BYTES = 8 * 1024 * 1024;
 const digest = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
@@ -117,7 +118,8 @@ export async function acquireWwtFits(catalogPath: string, setName: string, level
         { role: 'WTML collection', identity: requireString(source.url, 'WTML URL'), bytes: wtmlBytes.length, sha256: digest(wtmlBytes) },
         { role: 'FITS tile', identity: url, bytes: bytes.length, sha256: digest(bytes) },
       ],
-      parameters: { imageset: requireString(selected.name, 'WWT FITS name'), level, x, y, status: 'unresolved', limitations, sourceInspection: science[0] },
+      parameters: { imageset: requireString(selected.name, 'WWT FITS name'), level, x, y, status: 'unresolved', limitations, sourceInspection: science[0],
+        fitsSource: { schema: FITS_SOURCE_SCHEMA, path: 'source.fits', label: requireString(selected.name, 'WWT FITS name'), limitations } },
       software: [{ name: 'cssEarth Telescope WWT FITS', version: implementation }, { name: 'wwt-data-formats catalog parser', version: '0.18.1' },
         { name: 'Astropy', version: requireString(inspected.astropy, 'Astropy version') },
         { name: 'Matplotlib', version: requireString(plotted.matplotlib, 'Matplotlib version') }],
