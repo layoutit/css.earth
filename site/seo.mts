@@ -7,9 +7,10 @@ export function objectSeo(object: Pick<import("./object-schema.mts").ObjectEntry
   // Only some bodies have a scene capture. Advertising a missing file would
   // break every share preview, so the rest fall back to the default capture.
   const socialId = !socialImages || socialImages.has(object.id) ? object.id : defaultSocialImageId;
+  const fallbackName = defaultSocialImageId.charAt(0).toUpperCase() + defaultSocialImageId.slice(1);
   const imageAlt = socialId === object.id
     ? `${object.name} in the cssEarth 3D explorer`
-    : `${defaultSocialImageId === 'earth' ? 'Earth' : defaultSocialImageId} in cssEarth (shared preview)`;
+    : `${fallbackName} in cssEarth (shared preview)`;
   return {
     title: `${object.name} | cssEarth`,
     description: object.description,
