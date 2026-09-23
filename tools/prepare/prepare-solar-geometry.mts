@@ -255,13 +255,15 @@ const entries = BODIES.map((body) => {
       component - radialSpeed * velocityAuPerDay[index]) / mu
   );
   const eccentricity = Math.hypot(...eccentricityVectorIcrf);
-  const perihelionDirectionIcrf = normalize(eccentricityVectorIcrf);
+  const radialDirectionIcrf = normalize(orbitPositionAu);
+  // An exactly circular orbit (a hosted orbit drawn at the gravitational parameter its own ellipse implies) has no
+  // perihelion; it is measured from the body's own direction, true anomaly 0.
+  const perihelionDirectionIcrf = eccentricity === 0 ? radialDirectionIcrf : normalize(eccentricityVectorIcrf);
   const perihelionDirection = toBodyFixed(perihelionDirectionIcrf);
   // True anomaly: angle from perihelion to the body, signed by the direction
   // of motion (r.v > 0 while receding from perihelion, i.e. 0 < nu < 180).
   // atan2 of the in-plane sine and cosine, signed by the orbit normal (r x v): acos alone loses about 1e-8 rad near 0 and
   // 180 degrees, which is where a near-circular orbit's noise-defined perihelion can fall.
-  const radialDirectionIcrf = normalize(orbitPositionAu);
   const sinTrueAnomaly = dot(cross(perihelionDirectionIcrf, radialDirectionIcrf), orbitNormalIcrf);
   let trueAnomalyDegrees = Math.atan2(sinTrueAnomaly, dot(perihelionDirectionIcrf, radialDirectionIcrf)) * 180 / Math.PI;
   if (trueAnomalyDegrees < 0) trueAnomalyDegrees += 360;
