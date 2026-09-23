@@ -1,0 +1,115 @@
+{
+  "source": "https://dataportal.eso.org/dataPortal/file/ADP.2020-06-09T07:00:12.910",
+  "sourceSha256": "1c574c6cc9005577e05a6fe6a039f0fdc89cdc6c849324015b3a02995afb404c",
+  "sourceBytes": 6261120,
+  "astropy": "8.0.1",
+  "instrument": "UVES",
+  "voClass": "SPECTRUM v2.0",
+  "nativeSamples": 85123,
+  "usableSamples": 83919,
+  "excludedSamples": 1204,
+  "firstUsableIndex": 1204,
+  "lastUsableIndex": 85122,
+  "excerptNativeStart": 5000,
+  "excerptNativeEndExclusive": 5016,
+  "wavelengthUnit": "angstrom",
+  "fluxUnit": "10**(-16)erg.cm**(-2).s**(-1).angstrom**(-1)",
+  "samples": [
+    {
+      "id": "0",
+      "wavelength": 3806.5356093292007,
+      "value": 1980.5721382259178,
+      "uncertainty": 14.592042848635018
+    },
+    {
+      "id": "1",
+      "wavelength": 3806.550501528951,
+      "value": 1714.325465741483,
+      "uncertainty": 13.877077957118995
+    },
+    {
+      "id": "2",
+      "wavelength": 3806.565393728701,
+      "value": 1794.7221659026793,
+      "uncertainty": 15.022963240473514
+    },
+    {
+      "id": "3",
+      "wavelength": 3806.580285928451,
+      "value": 2157.134582540119,
+      "uncertainty": 15.732227123521328
+    },
+    {
+      "id": "4",
+      "wavelength": 3806.595178128201,
+      "value": 2689.098809615666,
+      "uncertainty": 15.580689425366554
+    },
+    {
+      "id": "5",
+      "wavelength": 3806.6100703279512,
+      "value": 3372.3337068201763,
+      "uncertainty": 17.43039138082065
+    },
+    {
+      "id": "6",
+      "wavelength": 3806.6249625277014,
+      "value": 3983.2481061738467,
+      "uncertainty": 18.759692362712475
+    },
+    {
+      "id": "7",
+      "wavelength": 3806.6398547274516,
+      "value": 4641.449758212797,
+      "uncertainty": 18.69157949181102
+    },
+    {
+      "id": "8",
+      "wavelength": 3806.654746927202,
+      "value": 5046.743478443197,
+      "uncertainty": 20.602882647509027
+    },
+    {
+      "id": "9",
+      "wavelength": 3806.6696391269516,
+      "value": 5419.717703139268,
+      "uncertainty": 22.175657343842293
+    },
+    {
+      "id": "10",
+      "wavelength": 3806.6845313267017,
+      "value": 5826.527782252265,
+      "uncertainty": 20.997926905100663
+    },
+    {
+      "id": "11",
+      "wavelength": 3806.699423526452,
+      "value": 6313.82708153991,
+      "uncertainty": 22.311504640869348
+    },
+    {
+      "id": "12",
+      "wavelength": 3806.714315726202,
+      "value": 6907.5315260682755,
+      "uncertainty": 23.80554522639891
+    },
+    {
+      "id": "13",
+      "wavelength": 3806.7292079259523,
+      "value": 7624.934757780928,
+      "uncertainty": 23.228586499036368
+    },
+    {
+      "id": "14",
+      "wavelength": 3806.7441001257025,
+      "value": 8426.581978132548,
+      "uncertainty": 25.146246383865336
+    },
+    {
+      "id": "15",
+      "wavelength": 3806.7589923254527,
+      "value": 9131.927546271347,
+      "uncertainty": 26.761229119567844
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type Sk
 import { flagValue } from '../../cli/cli-arguments.mts';
 import { PRODUCT_KINDS, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue,
   type ProductKind, type QueryInputs, type TargetCoverage } from './query.mts';
-import { resolveTarget, type TargetResolution } from './targets.mts';
+import { canonicalTargetRequest, resolveTarget, type TargetResolution } from './targets.mts';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
 import { parseLimits, parseRegion, type TransferLimits } from './vo/contracts.mts';
@@ -123,7 +123,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
         ? `Target is ambiguous: ${targetResolution.candidates.map(candidate => candidate.id).join(', ')}.`
         : `Target is unknown.${targetResolution.suggestions.length ? ` Suggestions: ${targetResolution.suggestions.map(suggestion => suggestion.id).join(', ')}.` : ''}` }] };
   }
-  const target = targetResolution.canonical.id, canonicalRequest = { ...request, target }, choices: Omit<ExplorationChoice, 'pick'>[] = [], unresolved: ExplorationIssue[] = [], unsupported: ExplorationIssue[] = [];
+  const target = targetResolution.canonical.id, canonicalRequest = canonicalTargetRequest(request, target), choices: Omit<ExplorationChoice, 'pick'>[] = [], unresolved: ExplorationIssue[] = [], unsupported: ExplorationIssue[] = [];
   const indexed = indexedTargetObservations(inputs, target);
   for (const row of indexed.observations) {
     const assessment = filterAssessment(canonicalRequest, { kind: row.kind, instrumentNames: [row.instrument, row.telescope, row.mode], familyEvidence: row.familyEvidence, startIso: row.startIso, endIso: row.endIso, wavelengths: row.wavelengthIntervalsMicrometres }),filters=filterReasons(assessment);
@@ -212,7 +212,7 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   const sky = request.skyTarget ? [skyCatalogueEntry(request.skyTarget)] : [];
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
-  const [inputs, opus] = await Promise.all([loadQueryInputs(root, { ...request, target: resolution.canonical.id }, selectedObservation, progress), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
+  const [inputs, opus] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
   return { ...inputs, opus };
 }
 
