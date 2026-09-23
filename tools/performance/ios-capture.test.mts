@@ -79,3 +79,8 @@ test('a probe step records the page state under a name', () => {
   assert.deepEqual(parseSteps([{ probe: 'after-flight' }]), [{ probe: 'after-flight' }]);
   assert.throws(() => parseSteps([{ probe: 'After Flight' }]), /lowercase/);
 });
+
+test('a script step carries the expression it runs', () => {
+  assert.deepEqual(parseSteps([{ script: 'document.title' }]), [{ script: 'document.title' }]);
+  assert.throws(() => parseSteps([{ script: 5 }]), /must be a string/);
+});
