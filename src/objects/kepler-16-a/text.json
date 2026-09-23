@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-16-a",
+  "card": {
+    "text": "Orange dwarf 75 parsecs away, the larger of the two stars Kepler-16 (AB) b circles.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1109-3432",
+        "url": "https://arxiv.org/abs/1109.3432",
+        "label": "Doyle et al. 2011",
+        "checked": "2026-09-23",
+        "locator": "Table 1, Star A",
+        "quote": "Radius, RA (R⊙) 0.6489"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-16 A is an orange dwarf 65% as wide as the Sun. Every 41 days its small partner star B passes in front of it, and a Saturn-mass planet circles them both.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1109-3432",
+        "url": "https://arxiv.org/abs/1109.3432",
+        "label": "Doyle et al. 2011",
+        "checked": "2026-09-23",
+        "locator": "Table 1, Star A and Binary star orbit",
+        "quote": "Period, P1 (day) 41.079220"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the measured radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}
