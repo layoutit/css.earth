@@ -36,6 +36,7 @@ import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
+import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar-spot-occultation.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
@@ -483,6 +484,24 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
         // A fitted or explicitly modeled limb-darkening law darkens the disc through the limb plate, fitted edge to edge.
         if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);
+        const spot = surface.science.spotOccultation === undefined ? null : await (async () => {
+          if (!limbDarkening) throw new TypeError(`${objectId}/${surface.id}: a spot reconstruction requires a limb plate.`);
+          const path = requireString(surface.science.spotOccultation, 'science.spotOccultation');
+          await source.validatePath(path);
+          const event = parseSpotOccultation(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
+          const { HOSTED_PLANET_IDS, hostedOrbit, BODIES } = await import('@cssearth/astronomy');
+          if (!(HOSTED_PLANET_IDS as readonly string[]).includes(event.planet)) throw new TypeError(`${objectId}/${surface.id}: unknown hosted planet ${event.planet}.`);
+          const planet = event.planet as (typeof HOSTED_PLANET_IDS)[number];
+          if (BODIES[planet].parent !== objectId) throw new TypeError(`${objectId}/${surface.id}: ${event.planet} does not transit this star.`);
+          const orbit = hostedOrbit(planet);
+          if (orbit.eccentricity !== 0) throw new TypeError(`${objectId}/${surface.id}: spot reconstruction currently requires a circular orbit.`);
+          const centre = spotDiscCentre(event, orbit);
+          plates.limb = addSpotOccultationToLimbPlate(plates.limb, event, orbit);
+          return { source: event.source, transitIndex: event.transitIndex, conjunctionBjdMinus2450000: event.conjunctionBjdMinus2450000,
+            minimumAngularRadiusDegrees: event.minimumAngularRadiusDegrees, contrast: event.contrast, midEventOffsetSeconds: event.midEventOffsetSeconds,
+            displayCentre: { x: centre.x, y: centre.y }, basis: 'published TESS spot-occultation candidate, minimum circular cap on a fixed camera-facing plate',
+            limitations: 'One transit chord, not a full map. Sky orientation and cap shape are display assumptions. TESS-band contrast is applied achromatically to Gaia colour. No rotation or evolution.' };
+        })();
         const modeledLimb = limbDarkening !== null && (limbDarkening.recipe.source === 'grid' ||
           ('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior'));
         return { data, channels: 4, nearest: true, plates,
@@ -493,6 +512,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
             ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2,
               basis: modeledLimb ? 'model' : 'transit-fit',
               ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
+            ...(spot ? { spotOccultation: spot } : {}),
             meaning: `${temperature ? 'Planck colour at the catalogued photometric temperature' : range ? 'Colour of the measured Gaia XP spectrum' : 'Colour of the measured spectrum'}${limbDarkening
               ? `, dimmed toward the limb by a ${modeledLimb ? 'theoretical atmosphere model' : 'law fitted to transits'}; not a resolved photosphere.` : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
       }

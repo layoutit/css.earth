@@ -318,6 +318,29 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-189733-haris-2025-spot-occultation",
+      "path": "photometry/haris-2025-spot-occultation.json",
+      "origin": "https://doi.org/10.1051/0004-6361/202452633",
+      "credit": "A. Haris, M. Tuomi and T. Hackman (2025), A&A 704, A102, Table 3 and Section 3.4",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed Table 3 transit 2165 central values, with interpretation explicitly labelled as a display reconstruction",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1051-0004-6361-202452633",
+            "role": "material",
+            "evidence": "src/objects/hd-189733/source/photometry/haris-2025-spot-occultation.json#/event"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -376,7 +399,7 @@
       "path": "reference/rendered-default-view.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: the branch's dev server at /hd-189733/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+        "reason": "Evidence capture: this branch’s dev server at /hd-189733/ with the default camera, headless Chromium via Playwright at 1440 by 900, taken 2026-09-23 after the limb-plate sizing correction; no console errors."
       }
     },
     {
@@ -384,6 +407,13 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733/?overview=system, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation."
+      }
+    },
+    {
+      "path": "reference/rendered-spot-2021-view.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: this branch’s dev server at /hd-189733/?dataset=spot-2021, headless Chromium via Playwright at 1440 by 900, taken 2026-09-23 after preparation and limb-plate sizing correction; no console errors. It shows the static Table 3 transit-2165 model."
       }
     }
   ]
