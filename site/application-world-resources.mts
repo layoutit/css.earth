@@ -43,7 +43,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       };
       return { descriptor: descriptors[`${base}object.json`], resolve,
         transport: { async read(path: string) {
-          const response = await fetch(resolve(path));
+          const response = await fetch(resolve(path), { signal: AbortSignal.timeout(15_000) });
           if (!response.ok) throw new Error(`Prepared context request failed: ${response.status}.`);
           return response.arrayBuffer();
         } } };

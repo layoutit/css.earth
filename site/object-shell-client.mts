@@ -266,7 +266,7 @@ export function mountObjectShell({
   function mountContent(id: string, motionEnabled: boolean) {
     const owner = contentLifetime = createSceneLifetime();
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
-    informationCard = mountInformationCard(drawer, id, documentTarget, windowTarget, owner);
+    informationCard = mountInformationCard(drawer, id, windowTarget, owner);
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
       { motionEnabled, onMotionChange, heliosphereEnabled, illustrationModelsEnabled, surfaceLabelsEnabled, minimapEnabled, threeDStarsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },

@@ -7,6 +7,18 @@ export interface ObjectControlBindingOptions {
 type SettingInput = HTMLInputElement | HTMLButtonElement;
 const isInput = (element: SettingInput): element is HTMLInputElement => element.tagName === "INPUT";
 
+/** Native responses and retained controls publish the same committed dataset presentation. */
+export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], details: readonly { id: string; panel: HTMLElement }[],
+  contexts: readonly HTMLElement[], pressed: ReadonlySet<string | null>) {
+  for (const button of buttons) button.setAttribute('aria-pressed', String(pressed.has(button.getAttribute('value') ?? '')));
+  const active = buttons.find(button => pressed.has(button.getAttribute('value') ?? ''))?.getAttribute('value');
+  for (const { id, panel } of details) if (panel.hidden !== (id !== active)) panel.hidden = id !== active;
+  for (const context of contexts) {
+    const hidden = context.dataset.datasetContext !== active;
+    if (context.hidden !== hidden) context.hidden = hidden;
+  }
+}
+
 import { requireObjectControls } from "../runtime/object-contract.js";
 import { objectCycleStates, requireObjectAction } from "../runtime/object-contract.js";
 
@@ -17,13 +29,22 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   const document = stage.ownerDocument;
   const information = document.querySelector(".object-information-panel");
-  const lensRoot = information?.querySelector(".object-lenses");
+  // Form ownership survives moving a dataset from the body card to its system card.
+  const lensForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]');
+  const lensRoot = lensForm?.closest(".object-lenses");
   const settingsRoot = document.querySelector(".object-settings");
-  const lensInputs = [...(lensRoot?.querySelectorAll<HTMLButtonElement>('button[name="dataset"]') ?? [])];
+  const lensInputs = [...(lensForm?.elements ?? [])]
+    .filter((input): input is HTMLButtonElement => input.tagName === 'BUTTON' && input.getAttribute('name') === 'dataset');
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !["motion", "heliosphere", "illustrationModels", "surfaceLabels", "minimap", "threeDStars"].includes(input.name));
-  const legends = [...(lensRoot?.querySelectorAll<HTMLElement>("[data-lens-legend]") ?? [])]
-    .filter(legend => legend.dataset?.lensLegend !== undefined);
+  const details = lensInputs.map(input => {
+    const id = input.getAttribute('aria-controls');
+    const panel = id ? document.getElementById(id) : null;
+    if (!panel) throw new Error(`Rendered dataset details are missing: ${input.value}.`);
+    return { id: input.value, panel };
+  });
+  const contexts = [...(information?.querySelectorAll<HTMLElement>('[data-dataset-context]') ?? [])];
+  const busyRoots = new Set([lensRoot, settingsRoot].filter((root): root is Element => !!root));
   const lenses = new Map(lensInputs.map(input => [input.value, input]));
   const settings = new Map(settingsInputs.map(input => [input.name, input]));
   function settingInput(name: string): SettingInput {
@@ -67,15 +88,18 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const committed = next.committed ?? initialSelection;
     const shown = next.pending ? next.desired : committed;
     const pressed = new Set(next.plan?.pressedLenses ?? [committed.lensId]);
-    for (const root of [lensRoot, settingsRoot]) {
-      root?.classList.toggle("is-loading", !ready || next.pending === true);
-      root?.setAttribute("aria-busy", String(!ready || next.pending === true));
+    for (const input of lensInputs) {
+      const root = input.closest('.object-lenses');
+      if (root) busyRoots.add(root);
     }
-    for (const [id, input] of lenses) {
+    for (const root of busyRoots) {
+      root.classList.toggle("is-loading", !ready || next.pending === true);
+      root.setAttribute("aria-busy", String(!ready || next.pending === true));
+    }
+    for (const input of lensInputs) {
       input.disabled = input.type === 'submit' ? false : !ready;
-      input.setAttribute("aria-pressed", String(pressed.has(id)));
     }
-    for (const legend of legends) legend.hidden = !pressed.has(legend.dataset.lensLegend ?? null);
+    publishDatasetSelection(lensInputs, details, contexts, pressed);
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       if (nativeChanges.has(control.name)) continue;
@@ -149,8 +173,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       try { input.disabled = input.type !== 'submit' && !input.hasAttribute('form'); if (input.name === "speed") { input.disabled = true; input.dataset.runtimeReady = "false"; } }
       catch (error) { errors.push(error); }
     }
-    for (const root of [lensRoot, settingsRoot]) {
-      try { root?.classList.remove("is-loading"); root?.setAttribute("aria-busy", "false"); }
+    for (const root of busyRoots) {
+      try { root.classList.remove("is-loading"); root.setAttribute("aria-busy", "false"); }
       catch (error) { errors.push(error); }
     }
     return errors;
