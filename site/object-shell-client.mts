@@ -438,6 +438,7 @@ function createSettingsController(
   surfaceLabels.addEventListener("change", () => {
     surfaceLabelsEnabled = surfaceLabels.checked;
     renderSurfaceLabels();
+    documentTarget.body.dispatchEvent(new Event('objectsurfacelabelschange'));
     onSurfaceLabelsChange(surfaceLabelsEnabled);
   }, { signal: events.signal });
   renderSurfaceLabels();

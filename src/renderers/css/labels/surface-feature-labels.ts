@@ -82,6 +82,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   const picking = screenPicking(pickingHost);
   const fader = createOpacityFader(windowTarget);
   const controller = new AbortController();
+  const labelsEnabled = () => document.body.dataset.surfaceLabels === 'on';
   let destroyed = false, loadStarted = false, loaded = false, error: string | null = null, playing = false, enabled = false, frames = 0, zoomGate = false, outlinePieces = 0;
   let view: Parameters<SurfaceFeatureLayerRuntime['publish']>[0] | null = null;
   let matrix: Float64Array | null = null, local: DOMMatrix | null = null, catalog: PreparedSurfaceFeatureCatalog | null = null, flight: SurfaceFlightHandle | null = null;
@@ -102,6 +103,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   fonts?.addEventListener('loadingdone', measure);
   void fonts?.ready.then(measure);
   const onHover = () => {
+    if (!labelsEnabled()) { hoveredIndex = null; presentCaption(); return; }
     const index = entries.findIndex(entry => entry.element.dataset.objectHovered === 'true');
     hoveredIndex = index >= 0 ? index : null;
     presentCaption();
@@ -118,7 +120,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     root.appendChild(element);
     const entry: Entry = { element, feature: null, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null, x: 0, y: 0 };
     const activate = (event: Event) => {
-      if (!visible.has(index)) return;
+      if (!labelsEnabled() || !visible.has(index)) return;
       event.preventDefault();
       if (pinnedIndex === index) { clearSelection(); return; }
       void selectIndex(index);
@@ -134,14 +136,14 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   // Label picks are consumed by the shared picker before they bubble, so a click that
   // reaches the window from the input surface picked nothing: it clears the selection.
   let press: { x: number; y: number } | null = null;
-  const onPress = (event: PointerEvent) => { requestLoading(); press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null; };
-  const onWheel = () => { requestLoading(); };
+  const onPress = (event: PointerEvent) => { if (labelsEnabled()) requestLoading(); press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null; };
+  const onWheel = () => { if (labelsEnabled()) requestLoading(); };
   const onSurfaceClick = (event: MouseEvent) => {
     if (pinnedIndex === null || event.target !== inputSurface || event.button !== 0) return;
     if (press && Math.hypot(event.clientX - press.x, event.clientY - press.y) > CLICK_SLOP_PIXELS) return;
     clearSelection();
   };
-  const onKey = (event: KeyboardEvent) => { requestLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
+  const onKey = (event: KeyboardEvent) => { if (labelsEnabled()) requestLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
   if (inputSurface) {
     windowTarget.addEventListener('pointerdown', onPress, { capture: true });
     inputSurface.addEventListener('wheel', onWheel, { passive: true });
@@ -242,6 +244,11 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     picking.publish(root, []);
     presentCaption();
   }
+  const onLabelsChange = () => {
+    if (labelsEnabled()) { requestLoading(); schedule(); }
+    else { hoveredIndex = null; hideAll(); }
+  };
+  document.body.addEventListener('objectsurfacelabelschange', onLabelsChange);
   function refresh() {
     if (destroyed) return;
     frames++;
@@ -251,7 +258,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     // Each name carries its own discovery tier; names whose tier lies beyond the current zoom share wait for the camera.
     const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
-    if (!loaded || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view?.levelOfDetail && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
+    if (!labelsEnabled() || !loaded || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view?.levelOfDetail && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
     requirePhysicalProjection(projection);
     // Retained mesh ancestors use zero transform origins; their current matrices
     // carry the body spin exactly as painted. Camera transforms are already in
@@ -297,7 +304,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     presentCaption();
   }
   function presentCaption() {
-    const index = pinnedIndex !== null && visible.has(pinnedIndex) ? pinnedIndex : hoveredIndex !== null && visible.has(hoveredIndex) ? hoveredIndex : null;
+    const index = !labelsEnabled() ? null : pinnedIndex !== null && visible.has(pinnedIndex) ? pinnedIndex : hoveredIndex !== null && visible.has(hoveredIndex) ? hoveredIndex : null;
     if (index === null) {
       if (shownIndex !== null) { tooltip.hidden = true; delete tooltip.dataset.featureTooltipFor; delete root.dataset.featureOutlineFor; hideOutline(); shownIndex = null; }
       return;
@@ -392,6 +399,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     if (populateFrame !== null) windowTarget!.cancelAnimationFrame(populateFrame);
     fonts?.removeEventListener('loadingdone', measure);
     pickingHost.removeEventListener('objecthoverchange', onHover);
+    document.body.removeEventListener('objectsurfacelabelschange', onLabelsChange);
     if (inputSurface) { windowTarget!.removeEventListener('pointerdown', onPress, { capture: true }); inputSurface.removeEventListener('wheel', onWheel); windowTarget!.removeEventListener('click', onSurfaceClick); windowTarget!.removeEventListener('keydown', onKey); }
     entries.forEach((entry, index) => { entry.element.removeEventListener('click', activations[index]!); if (entry.hideTimer !== null) clearTimeout(entry.hideTimer); });
     picking.remove(root);
