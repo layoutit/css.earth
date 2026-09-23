@@ -1,5 +1,3 @@
-import type { SurfaceFlyToPlan } from './surface-fly-to.js';
-import type { Quaternion } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { TrackballMetrics, CameraDelta } from './types.js';
 export interface MatrixDragControlsOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; trackballMetrics(): TrackballMetrics; flyToTrackballMetrics?: () => TrackballMetrics; rotate(delta: CameraDelta): void; surfaceFlyToState?: (() => { zoom: number; minimumZoom: number; maximumZoom: number }) | null; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onPointerStart?: () => void; onStart?: () => void; onEnd?: () => void; onError?: ((error: unknown) => void) | null; }
@@ -18,10 +16,3 @@ export function validateDragControlsOptions({ inputSurface, trackballMetrics, fl
     throw new TypeError("Unbounded matrix drag controls are invalid.");
   }
 }
-
-export type FlyToMotion = { startedAt: number | null } & (
-  { sample: (progress: number) => void; durationMilliseconds: number; finish(completed: boolean): void;
-    /** Flight time runs on its own clock, so input can hurry the arrival without a jump. */
-    elapsedMilliseconds: number; previousTimestamp: number | null; speed: number } |
-  { sample?: undefined; finish?: undefined; plan: SurfaceFlyToPlan; previousPitchDelta: number; previousYawDelta: number; previousRotation: Quaternion }
-);
