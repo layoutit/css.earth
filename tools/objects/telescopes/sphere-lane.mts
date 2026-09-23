@@ -41,7 +41,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
   if (!variant) throw new Error('Standard sphere has no unshadowed surface variant');
   const required = variant.required.filter(key => replacementKeys.has(key));
   if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
-  const styles = await Promise.all(['src/renderers/css/styles/planet-surfaces.css', 'site/planet-shell.css'].map(file => pinned(resolve(root, file))));
+  const styles = await Promise.all(['src/renderers/css/styles/body-surfaces.css', 'site/object-shell.css'].map(file => pinned(resolve(root, file))));
   try { styles.push(await pinned(resolve(root, `src/renderers/css/styles/${id}-surfaces.css`))); }
   catch(error) { if (!error || typeof error !== 'object' || !('code' in error) || error.code !== 'ENOENT') throw error; }
   const descriptor = requireRecord(await json(resolve(object, 'object.json'))),properties = requireRecord(descriptor.properties),worldFrame = properties.worldFrame;

@@ -12,7 +12,7 @@ export type MarkerOperation =
   | { type: "resize"; width: string; height: string; kernel: "lanczos3"; fit?: "cover"; position?: "centre" }
   | { type: "missing-coverage"; kind: string; southConnected: boolean; northConnected?: boolean }
   | { type: "ellipse-mask"; cx: number; cy: number; rx: number; ry: number; shading?: { ambient: number; diffuse: number } };
-export interface MarkerDescriptor { presentation?: unknown; schema: string; planetId: string; owner: string; source: MarkerSource; operations: readonly MarkerOperation[]; context?: { pixels: number }; }
+export interface MarkerDescriptor { presentation?: unknown; schema: string; objectId: string; owner: string; source: MarkerSource; operations: readonly MarkerOperation[]; context?: { pixels: number }; }
 import { readFile } from "node:fs/promises";
 import { posix, win32 } from "node:path";
 
@@ -20,7 +20,7 @@ import sharp from "sharp";
 import { blackFillCoverage, paintMissingCoverage } from "../platform/prepare-missing-coverage.mts";
 
 const SHA256 = /^[0-9a-f]{64}$/u;
-const PLANET_ID = /^[a-z][a-z0-9-]*$/u;
+const OBJECT_ID = /^[a-z][a-z0-9-]*$/u;
 const OPERATION_TYPES = new Set([
   "linear",
   "rotate",
@@ -36,8 +36,8 @@ const OPERATION_TYPES = new Set([
 export function validateMarkerDescriptor(input: unknown): MarkerDescriptor {
   const descriptor = input as MarkerDescriptor;
   if (!descriptor || typeof descriptor !== "object" || isArray(descriptor) ||
-      descriptor.schema !== "cssearth-navigation-marker@1" ||
-      !PLANET_ID.test(descriptor.planetId ?? "") ||
+      descriptor.schema !== "cssearth-navigation-marker@2" ||
+      !OBJECT_ID.test(descriptor.objectId ?? "") ||
       !new Set(["object", "navigation"]).has(descriptor.owner) ||
       !isArray(descriptor.operations) || descriptor.operations.length === 0) {
     throw new TypeError("Navigation marker descriptor is invalid.");

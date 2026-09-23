@@ -3,7 +3,7 @@ import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred
 import type { MountOptions, SceneFactory } from './browser-types.mts';
 import { errorMessage } from './browser-types.mts';
 import type { NavigationRequest } from './navigation-lifecycle.mts';
-import type { mountPlanetShell } from './planet-shell-client.mts';
+import type { mountObjectShell } from './object-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
 import type { bindViewUrl } from './view-url-runtime.mts';
 import { requireSceneLifecycle } from './scene-contract.mts';
@@ -46,7 +46,7 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
   lifetime.onDispose(() => { const owner = viewUrl; viewUrl = null; owner?.destroy(); });
   const session = {
     objectId, url, request,
-    shell: null as ReturnType<typeof mountPlanetShell> | null,
+    shell: null as ReturnType<typeof mountObjectShell> | null,
     framePresenter: undefined as (NonNullable<MountOptions['framePresenter']> & { enable(): void }) | undefined,
     get state() { return state; },
     get live(): boolean { return state.kind === 'loading' || state.kind === 'ready'; },

@@ -22,7 +22,7 @@
 
 .maps-explorer-sidebar::-webkit-scrollbar { display: none; }
 
-.maps-explorer-sidebar .planet-sidebar-search-card {
+.maps-explorer-sidebar .object-sidebar-search-card {
   position: relative;
   display: block;
   flex: 0 0 44px;
@@ -30,7 +30,7 @@
   height: 44px;
 }
 
-.maps-explorer-sidebar .planet-sidebar-search {
+.maps-explorer-sidebar .object-sidebar-search {
   appearance: none;
   display: block;
   width: 100%;
@@ -49,10 +49,10 @@
   outline: 0;
 }
 
-.maps-explorer-sidebar .planet-sidebar-search::placeholder { color: var(--shell-text-muted); opacity: 1; }
-.maps-explorer-sidebar .planet-sidebar-search::-webkit-search-cancel-button { display: none; }
+.maps-explorer-sidebar .object-sidebar-search::placeholder { color: var(--shell-text-muted); opacity: 1; }
+.maps-explorer-sidebar .object-sidebar-search::-webkit-search-cancel-button { display: none; }
 
-.maps-explorer-sidebar .planet-sidebar-view-all {
+.maps-explorer-sidebar .object-sidebar-view-all {
   appearance: none;
   position: absolute;
   top: 0;
@@ -68,7 +68,7 @@
   cursor: pointer;
 }
 
-.maps-explorer-sidebar .planet-drawer-content {
+.maps-explorer-sidebar .object-drawer-content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -76,20 +76,20 @@
   width: 100%;
 }
 
-.planet-sidebar .maps-object-results { display: contents; }
-.planet-sidebar .maps-object-results[hidden],
-.planet-sidebar .maps-object-results .planet-object-item[hidden],
-.planet-card[hidden],
+.object-sidebar .maps-object-results { display: contents; }
+.object-sidebar .maps-object-results[hidden],
+.object-sidebar .maps-object-results .object-item[hidden],
+.object-card[hidden],
 [data-object-type-group][hidden] { display: none; }
 
 /* Keep inactive cards laid out outside the scrollable area. Native inert owns
    their focus, pointer and accessibility exclusion until the controller opens
    them again. Visibility also invalidates descendant paint when a card reopens.
    The attribute enables retention only after that owner mounts. */
-.planet-sidebar .maps-object-results[data-retained][hidden] { display: contents; }
-.planet-sidebar .maps-object-results[data-retained][hidden] > .planet-card,
-.planet-sidebar .maps-object-results[data-retained] > .planet-card[hidden],
-.planet-sidebar .planet-information-panel[data-retained][hidden] {
+.object-sidebar .maps-object-results[data-retained][hidden] { display: contents; }
+.object-sidebar .maps-object-results[data-retained][hidden] > .object-card,
+.object-sidebar .maps-object-results[data-retained] > .object-card[hidden],
+.object-sidebar .object-information-panel[data-retained][hidden] {
   display: flex;
   position: absolute;
   inset-inline: 0;
@@ -98,12 +98,12 @@
   visibility: hidden;
 }
 
-.planet-object-chunk-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-[data-grouped-visibility] .planet-object-chunk { content-visibility: auto; }
-[data-grouped-visibility] .planet-object-chunk[data-in-view],
-[data-grouped-visibility] .planet-object-chunk:focus-within { content-visibility: visible; }
+.object-chunk-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+[data-grouped-visibility] .object-chunk { content-visibility: auto; }
+[data-grouped-visibility] .object-chunk[data-in-view],
+[data-grouped-visibility] .object-chunk:focus-within { content-visibility: visible; }
 
-.planet-sidebar .maps-object-results .planet-object-list {
+.object-sidebar .maps-object-results .object-list {
   position: relative;
   display: grid;
   gap: 0;
@@ -112,7 +112,7 @@
   list-style: none;
 }
 
-.planet-sidebar .maps-object-results .planet-object-list::before {
+.object-sidebar .maps-object-results .object-list::before {
   position: absolute;
   top: 17px;
   bottom: 17px;
@@ -123,9 +123,9 @@
   content: "";
 }
 
-.planet-sidebar .planet-overview-card .planet-object-list::before { content: none; }
+.object-sidebar .object-overview-card .object-list::before { content: none; }
 
-.planet-sidebar .maps-object-results .planet-object-link:not(.planet-observation-control) {
+.object-sidebar .maps-object-results .object-link:not(.object-observation-control) {
   position: relative;
   z-index: 1;
   display: grid;
@@ -136,18 +136,18 @@
   color: var(--shell-text-secondary);
   text-decoration: none;
 }
-.planet-sidebar .maps-object-results .planet-navigation-marker { justify-self: center; }
-.planet-sidebar .maps-object-results .planet-object-name { overflow: hidden; font: var(--shell-font-content); text-overflow: ellipsis; white-space: nowrap; }
-.planet-sidebar .maps-object-results .planet-object-distance:not(.planet-lens-detail) { color: var(--shell-text-muted); font: var(--shell-font-value); white-space: nowrap; }
-.planet-sidebar .maps-object-results .planet-object-distance-unit { font-size: 13px; }
-.planet-sidebar .maps-object-results .planet-object-link[aria-disabled="true"] {
+.object-sidebar .maps-object-results .object-navigation-marker { justify-self: center; }
+.object-sidebar .maps-object-results .object-name { overflow: hidden; font: var(--shell-font-content); text-overflow: ellipsis; white-space: nowrap; }
+.object-sidebar .maps-object-results .object-distance:not(.object-lens-detail) { color: var(--shell-text-muted); font: var(--shell-font-value); white-space: nowrap; }
+.object-sidebar .maps-object-results .object-distance-unit { font-size: 13px; }
+.object-sidebar .maps-object-results .object-link[aria-disabled="true"] {
   opacity: 0.5;
   cursor: default;
 }
-.planet-sidebar .maps-object-results .planet-object-link[aria-disabled="true"] .planet-navigation-marker > i {
+.object-sidebar .maps-object-results .object-link[aria-disabled="true"] .object-navigation-marker > i {
   background: currentColor;
 }
-.planet-sidebar .maps-object-results .planet-object-summary {
+.object-sidebar .maps-object-results .object-summary {
   display: grid;
   grid-template-columns: 11px minmax(0, 1fr) max-content 10px;
   align-items: center;
@@ -156,30 +156,30 @@
   cursor: pointer;
   list-style: none;
 }
-.planet-sidebar .maps-object-results .planet-object-summary::-webkit-details-marker { display: none; }
-.planet-sidebar .maps-object-results .planet-object-label {
+.object-sidebar .maps-object-results .object-summary::-webkit-details-marker { display: none; }
+.object-sidebar .maps-object-results .object-label {
   display: flex;
   align-items: center;
   gap: 6px;
   min-width: 0;
 }
-.planet-sidebar .maps-object-results .planet-object-moon-count {
+.object-sidebar .maps-object-results .object-moon-count {
   color: var(--shell-text-muted);
   font: 400 12px/20px var(--shell-ui-font);
 }
-.planet-sidebar .maps-object-results .planet-object-label > .planet-object-link {
+.object-sidebar .maps-object-results .object-label > .object-link {
   display: block;
   justify-self: start;
   min-width: 0;
   max-width: 100%;
   height: auto;
 }
-.planet-sidebar .maps-object-results .planet-object-summary .planet-object-name { display: block; }
-.planet-sidebar .maps-object-results .planet-object-label > .planet-object-link:hover .planet-object-name {
+.object-sidebar .maps-object-results .object-summary .object-name { display: block; }
+.object-sidebar .maps-object-results .object-label > .object-link:hover .object-name {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.planet-sidebar .maps-object-results .planet-object-summary::after {
+.object-sidebar .maps-object-results .object-summary::after {
   content: "";
   width: 6px;
   height: 6px;
@@ -188,17 +188,17 @@
   border-bottom: 1.5px solid currentColor;
   transform: rotate(-45deg);
 }
-.planet-sidebar .maps-object-results .planet-object-group[open] > .planet-object-summary::after { transform: rotate(45deg); }
-.planet-sidebar .maps-object-results .planet-object-summary:hover { color: var(--shell-text); }
-.planet-sidebar .maps-object-results .planet-object-summary:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 2px; }
-.planet-sidebar .maps-object-results .planet-object-moons {
+.object-sidebar .maps-object-results .object-group[open] > .object-summary::after { transform: rotate(45deg); }
+.object-sidebar .maps-object-results .object-summary:hover { color: var(--shell-text); }
+.object-sidebar .maps-object-results .object-summary:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 2px; }
+.object-sidebar .maps-object-results .object-moons {
   margin: 0 0 5px 5px;
   padding-left: 14px;
   border-left: 1px solid var(--shell-divider);
 }
-.planet-sidebar .maps-object-results .planet-object-moons::before { content: none; }
-.planet-sidebar .maps-object-results .planet-object-moons > .planet-object-item { position: relative; }
-.planet-sidebar .maps-object-results .planet-object-moons > .planet-object-item::before {
+.object-sidebar .maps-object-results .object-moons::before { content: none; }
+.object-sidebar .maps-object-results .object-moons > .object-item { position: relative; }
+.object-sidebar .maps-object-results .object-moons > .object-item::before {
   content: "";
   position: absolute;
   top: 16px;
@@ -206,15 +206,15 @@
   width: 9px;
   border-top: 1px solid var(--shell-divider);
 }
-.planet-sidebar .maps-object-results .planet-object-moons .planet-object-link {
+.object-sidebar .maps-object-results .object-moons .object-link {
   grid-template-columns: 11px minmax(0, 1fr);
   height: 32px;
 }
-.planet-sidebar .maps-object-results .planet-object-link:not(.planet-observation-control):not([aria-disabled="true"]):hover,
-.planet-sidebar .maps-object-results .planet-object-link:not(.planet-observation-control):not([aria-disabled="true"]):focus-visible,
-.planet-sidebar .maps-object-results .planet-object-link:not(.planet-observation-control).is-active { color: var(--shell-text); outline: 0; }
-.planet-sidebar .maps-object-results .planet-object-link:not(.planet-observation-control).is-active .planet-object-name { text-decoration: underline; text-underline-offset: 3px; }
-.planet-sidebar .maps-object-results .planet-object-empty { height: 40px; margin: 0; color: var(--shell-text-muted); font: 400 0.875rem/40px var(--shell-ui-font); }
+.object-sidebar .maps-object-results .object-link:not(.object-observation-control):not([aria-disabled="true"]):hover,
+.object-sidebar .maps-object-results .object-link:not(.object-observation-control):not([aria-disabled="true"]):focus-visible,
+.object-sidebar .maps-object-results .object-link:not(.object-observation-control).is-active { color: var(--shell-text); outline: 0; }
+.object-sidebar .maps-object-results .object-link:not(.object-observation-control).is-active .object-name { text-decoration: underline; text-underline-offset: 3px; }
+.object-sidebar .maps-object-results .object-empty { height: 40px; margin: 0; color: var(--shell-text-muted); font: 400 0.875rem/40px var(--shell-ui-font); }
 
 .maps-empty-stage {
   position: fixed;
@@ -223,12 +223,12 @@
   background: var(--shell-background);
 }
 
-.planet-feature-results[hidden],
-.planet-destination-panel[hidden],
-.planet-destination-list > li[hidden] { display: none; }
-.planet-destination-list { margin: 0; padding: 0; list-style: none; }
-.planet-sidebar[data-has-destinations] .planet-sidebar-search::-webkit-search-cancel-button { display: none; }
-.planet-destination-result {
+.object-feature-results[hidden],
+.object-destination-panel[hidden],
+.object-destination-list > li[hidden] { display: none; }
+.object-destination-list { margin: 0; padding: 0; list-style: none; }
+.object-sidebar[data-has-destinations] .object-sidebar-search::-webkit-search-cancel-button { display: none; }
+.object-destination-result {
   display: grid;
   text-decoration: none;
   gap: 3px;
@@ -243,12 +243,12 @@
   font: 400 15px/1.35 var(--shell-ui-font);
   cursor: pointer;
 }
-.planet-destination-result:hover,
-.planet-destination-result:focus-visible { background: var(--shell-surface-hover); outline: 1px solid var(--shell-focus); }
-.planet-destination-result-context,
-.planet-destination-hint { color: var(--shell-text-muted); font: 400 12px/1.4 var(--shell-ui-font); }
-.planet-destination-hint { margin: 12px 8px 4px; }
-.planet-destination-panel {
+.object-destination-result:hover,
+.object-destination-result:focus-visible { background: var(--shell-surface-hover); outline: 1px solid var(--shell-focus); }
+.object-destination-result-context,
+.object-destination-hint { color: var(--shell-text-muted); font: 400 12px/1.4 var(--shell-ui-font); }
+.object-destination-hint { margin: 12px 8px 4px; }
+.object-destination-panel {
   box-sizing: border-box;
   padding: 18px;
   border-radius: 0;
@@ -257,12 +257,12 @@
   font: 400 14px/1.5 var(--shell-ui-font);
   pointer-events: auto;
 }
-.planet-destination-name { margin: 20px 0 3px; font: 500 26px/1.15 var(--shell-ui-font); }
-.planet-destination-context { margin: 0 0 18px; color: var(--shell-text-muted); }
-.planet-destination-status { margin: 0; color: var(--shell-text-secondary); }
-.planet-destination-panel:not([hidden]) + .planet-information-panel > :not(.planet-lenses) { display: none; }
-.planet-destination-back,
-.planet-find-destination {
+.object-destination-name { margin: 20px 0 3px; font: 500 26px/1.15 var(--shell-ui-font); }
+.object-destination-context { margin: 0 0 18px; color: var(--shell-text-muted); }
+.object-destination-status { margin: 0; color: var(--shell-text-secondary); }
+.object-destination-panel:not([hidden]) + .object-information-panel > :not(.object-lenses) { display: none; }
+.object-destination-back,
+.object-find-destination {
   padding: 7px 0;
   border: 0;
   color: var(--shell-text);
@@ -273,10 +273,10 @@
   font: 400 14px/1.4 var(--shell-ui-font);
   cursor: pointer;
 }
-.planet-destination-intro { margin: 0 0 16px; }
-.planet-destination-intro p { margin: 2px 0 0; color: var(--shell-text-muted); font: 400 12px/1.4 var(--shell-ui-font); }
+.object-destination-intro { margin: 0 0 16px; }
+.object-destination-intro p { margin: 2px 0 0; color: var(--shell-text-muted); font: 400 12px/1.4 var(--shell-ui-font); }
 /* Shared search surface, independent of the selected sidebar panel or viewport. */
-.planet-sidebar-search-card {
+.object-sidebar-search-card {
   position: relative;
   display: block;
   flex: 0 0 var(--explorer-search-height);
@@ -284,7 +284,7 @@
   height: var(--explorer-search-height);
 }
 
-.planet-sidebar-search-icon {
+.object-sidebar-search-icon {
   position: absolute;
   z-index: 1;
   top: 50%;
@@ -298,7 +298,7 @@
   pointer-events: none;
 }
 
-.planet-sidebar-search-icon .search-icon {
+.object-sidebar-search-icon .search-icon {
   display: block;
   width: 20px;
   height: 20px;
@@ -308,7 +308,7 @@
   stroke-linecap: round;
 }
 
-.planet-sidebar-search {
+.object-sidebar-search {
   appearance: none;
   display: block;
   box-sizing: border-box;
@@ -327,14 +327,14 @@
   pointer-events: auto;
 }
 
-.planet-sidebar-search::placeholder { color: var(--shell-text-muted); opacity: 1; }
-.planet-sidebar-search::-webkit-search-cancel-button { display: none; }
-.planet-sidebar-search:focus-visible {
+.object-sidebar-search::placeholder { color: var(--shell-text-muted); opacity: 1; }
+.object-sidebar-search::-webkit-search-cancel-button { display: none; }
+.object-sidebar-search:focus-visible {
   outline: 0;
   box-shadow: none;
 }
 
-.planet-sidebar-view-all {
+.object-sidebar-view-all {
   appearance: none;
   position: absolute;
   top: 2px;
@@ -353,21 +353,21 @@
   touch-action: manipulation;
 }
 
-.planet-sidebar-view-all:hover { color: var(--shell-text); }
-.planet-sidebar-view-all:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: -4px; }
+.object-sidebar-view-all:hover { color: var(--shell-text); }
+.object-sidebar-view-all:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: -4px; }
 
 @media (min-width: 821px) and (orientation: landscape) {
-  body[data-object-shell] .planet-sidebar .planet-card {
+  body[data-object-shell] .object-sidebar .object-card {
     background: var(--explorer-panel-background);
   }
 
-  body[data-object-shell] .planet-sidebar .planet-object-browser {
+  body[data-object-shell] .object-sidebar .object-browser {
     border-radius: 0;
     background: var(--explorer-panel-background);
   }
   /* Typed results replace the sidebar's card, with its background: six rows on the 56 px pitch below the 8 px top
      padding, then the list scrolls. */
-  body[data-object-shell] .planet-sidebar [data-search-results] #object-category-results {
+  body[data-object-shell] .object-sidebar [data-search-results] #object-category-results {
     max-height: calc(8px + 6 * 56px);
     background: var(--explorer-panel-background);
   }
@@ -380,18 +380,18 @@
 }
 
 /* A retained catalogue with one scrolling list beneath its category tabs. */
-.planet-sidebar .planet-card:is(.planet-overview-card, [data-card-view="overview"]) {
+.object-sidebar .object-card:is(.object-overview-card, [data-card-view="overview"]) {
   display: flex;
   flex-direction: column;
   container-type: inline-size;
   padding-bottom: 12px;
   max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-status-height) - var(--explorer-panel-bottom-gap));
 }
-.planet-overview-card > .planet-selected-panel,
-[data-card-view="overview"] > .planet-selected-panel,
-:is(.planet-object-tabs, .planet-card-tabs) { flex: 0 0 auto; }
-.planet-overview-card > .planet-selected-panel { padding-bottom: 8px; }
-:is(.planet-object-tabs, .planet-card-tabs) {
+.object-overview-card > .object-selected-panel,
+[data-card-view="overview"] > .object-selected-panel,
+:is(.object-tabs, .object-card-tabs) { flex: 0 0 auto; }
+.object-overview-card > .object-selected-panel { padding-bottom: 8px; }
+:is(.object-tabs, .object-card-tabs) {
   display: flex;
   flex-wrap: nowrap;
   column-gap: 12px;
@@ -399,12 +399,12 @@
   row-gap: 2px;
   padding: 0 var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
 }
-.planet-object-tabs {
+.object-tabs {
   min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
 }
-:is(.planet-object-tabs, .planet-card-tabs) > :is([role="tab"], .planet-native-tab-label) {
+:is(.object-tabs, .object-card-tabs) > :is([role="tab"], .object-native-tab-label) {
   display: inline-flex;
   justify-self: start;
   align-items: baseline;
@@ -419,14 +419,14 @@
   white-space: nowrap;
   cursor: pointer;
 }
-.planet-object-tab-count { display: none; font-size: 13px; font-variant-numeric: tabular-nums; }
-:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"] .planet-object-tab-count,
-.planet-native-tab:checked + .planet-native-tab-label .planet-object-tab-count { display: inline; }
-:is(.planet-object-tabs, .planet-card-tabs) > :is([role="tab"], .planet-native-tab-label):hover { color: var(--shell-text); }
-:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"],
-:is(.planet-object-tabs, .planet-card-tabs) > .planet-native-tab:checked + .planet-native-tab-label { color: var(--shell-text); border-bottom-color: transparent; }
-:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"]:focus-visible,
-:is(.planet-object-tabs, .planet-card-tabs) > .planet-native-tab:focus-visible + .planet-native-tab-label {
+.object-tab-count { display: none; font-size: 13px; font-variant-numeric: tabular-nums; }
+:is(.object-tabs, .object-card-tabs) > [aria-selected="true"] .object-tab-count,
+.object-native-tab:checked + .object-native-tab-label .object-tab-count { display: inline; }
+:is(.object-tabs, .object-card-tabs) > :is([role="tab"], .object-native-tab-label):hover { color: var(--shell-text); }
+:is(.object-tabs, .object-card-tabs) > [aria-selected="true"],
+:is(.object-tabs, .object-card-tabs) > .object-native-tab:checked + .object-native-tab-label { color: var(--shell-text); border-bottom-color: transparent; }
+:is(.object-tabs, .object-card-tabs) > [role="tab"]:focus-visible,
+:is(.object-tabs, .object-card-tabs) > .object-native-tab:focus-visible + .object-native-tab-label {
   color: var(--shell-focus);
   border-bottom-color: currentColor;
   outline: 0;
@@ -434,7 +434,7 @@
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
-.planet-object-results-scroll {
+.object-results-scroll {
   --object-results-scrollbar-inset: 4px;
   box-sizing: border-box;
   max-height: 280px;
@@ -456,18 +456,18 @@
    still in flight (or failed), so inserting it never shifts the panel around
    it. The tabbed panel and the search/browse panel target different heights
    (see the `[data-search-results]` override below), so each reserves its own. */
-#object-category-results:has(> .planet-object-loading:not([hidden]), > .planet-object-error:not([hidden])) {
+#object-category-results:has(> .object-loading:not([hidden]), > .object-error:not([hidden])) {
   min-height: calc(var(--object-category-visible-rows) * 28px);
 }
-[data-search-results] #object-category-results:has(> .planet-object-loading:not([hidden]), > .planet-object-error:not([hidden])) {
+[data-search-results] #object-category-results:has(> .object-loading:not([hidden]), > .object-error:not([hidden])) {
   min-height: min(420px, 55dvh);
 }
-.planet-object-loading, .planet-object-error {
+.object-loading, .object-error {
   margin: 0;
   color: var(--shell-text-muted);
   font: var(--shell-font-content);
 }
-.planet-object-retry {
+.object-retry {
   padding: 0;
   border: 0;
   color: var(--shell-text);
@@ -479,14 +479,14 @@
 }
 [data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
 [data-search-results] [data-system-results] { padding-top: 8px; }
-[data-search-results] [data-system-results] > :is(.planet-selected-panel, .planet-object-tabs) { display: none; }
+[data-search-results] [data-system-results] > :is(.object-selected-panel, .object-tabs) { display: none; }
 [data-search-results] #object-category-results { max-height: min(420px, 55dvh); }
-[data-search-results] #object-category-results .planet-object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
-[data-search-results] #object-category-results .planet-object-distance { color: var(--shell-text-secondary); }
+[data-search-results] #object-category-results .object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
+[data-search-results] #object-category-results .object-distance { color: var(--shell-text-secondary); }
 /* Search results are big rows: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
    positions rows on a 56 px pitch (48 px row, 8 px gap; `site/catalogue-window.mts`). */
-#object-category-results .planet-observation-control.planet-thumbnail-leading,
-#object-category-results .planet-observation-control.planet-thumbnail-leading:has(.planet-lens-detail) {
+#object-category-results .object-observation-control.object-thumbnail-leading,
+#object-category-results .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
   grid-template-columns: 40px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
@@ -494,9 +494,9 @@
   row-gap: 2px;
   height: 48px;
 }
-#object-category-results .planet-observation-control.planet-thumbnail-leading::after { display: none; }
+#object-category-results .object-observation-control.object-thumbnail-leading::after { display: none; }
 /* A flat result list: no tree connector running down beside the previews. */
-#object-category-results .planet-object-list::before { content: none; }
+#object-category-results .object-list::before { content: none; }
 /* The results fill the drawer's width with the card's inline padding; a phone's column drawer otherwise shrinks them to
    their content. */
 [data-search-results] #object-category-results {
@@ -505,7 +505,7 @@
   width: 100%;
   padding-inline: var(--explorer-card-padding-inline-start, 16px) var(--explorer-card-padding-inline-end, 16px);
 }
-#object-category-results .planet-thumbnail-leading > .planet-lens-icon {
+#object-category-results .object-thumbnail-leading > .object-lens-icon {
   grid-column: 1;
   grid-row: 1 / span 2;
   display: grid;
@@ -513,7 +513,7 @@
   width: 40px;
   height: 40px;
 }
-#object-category-results .planet-thumbnail-leading > .planet-lens-label {
+#object-category-results .object-thumbnail-leading > .object-lens-label {
   grid-column: 2;
   grid-row: 1;
   overflow: hidden;
@@ -521,7 +521,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#object-category-results .planet-thumbnail-leading > .planet-lens-detail {
+#object-category-results .object-thumbnail-leading > .object-lens-detail {
   grid-column: 2;
   grid-row: 2;
   justify-self: start;
@@ -530,29 +530,29 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#object-category-results .planet-search-preview,
+#object-category-results .object-search-preview,
 #object-category-results .context-navigation-thumbnail > img {
   display: block;
   width: 40px;
   height: 40px;
   object-fit: contain;
 }
-#object-category-results:has(> .planet-object-list > :not([hidden])) > .planet-feature-results {
+#object-category-results:has(> .object-list > :not([hidden])) > .object-feature-results {
   margin-top: 8px;
   border-top: 1px solid var(--explorer-divider);
 }
-#object-category-results > .planet-feature-results { padding: 0; }
-#object-category-results > .planet-feature-results > .planet-panel-summary { padding: 0; }
-#object-category-results .planet-feature-results .planet-panel-heading {
+#object-category-results > .object-feature-results { padding: 0; }
+#object-category-results > .object-feature-results > .object-panel-summary { padding: 0; }
+#object-category-results .object-feature-results .object-panel-heading {
   color: var(--shell-text);
   font: var(--shell-font-content);
   opacity: 1;
   text-transform: none;
   transform: none;
 }
-#object-category-results .planet-destination-result { box-sizing: border-box; padding-inline: 0; }
-#object-category-results .planet-destination-hint { margin-inline: 0; }
-.planet-sidebar .planet-object-results-scroll .planet-object-list {
+#object-category-results .object-destination-result { box-sizing: border-box; padding-inline: 0; }
+#object-category-results .object-destination-hint { margin-inline: 0; }
+.object-sidebar .object-results-scroll .object-list {
   /* Keep the scrollbar inside the card gutter, aligned with other tab content. */
   width: calc(100cqi - var(--explorer-card-padding-inline-start) - var(--explorer-card-padding-inline-end));
   display: grid;
@@ -561,22 +561,22 @@
   padding: 0;
   list-style: none;
 }
-.planet-sidebar .planet-object-results-scroll .planet-object-list[data-catalogue-window] {
+.object-sidebar .object-results-scroll .object-list[data-catalogue-window] {
   position: relative;
   display: block;
 }
-.planet-sidebar .planet-object-results-scroll .planet-object-list[data-catalogue-window] > .planet-object-item {
+.object-sidebar .object-results-scroll .object-list[data-catalogue-window] > .object-item {
   width: 100%;
 }
-.planet-object-results-scroll .planet-observation-control { text-decoration: none; }
-.planet-information-panel [data-information-panel="moons"] .planet-object-list {
+.object-results-scroll .object-observation-control { text-decoration: none; }
+.object-information-panel [data-information-panel="moons"] .object-list {
   width: 100%;
 }
-.planet-object-results-scroll .planet-object-link[aria-disabled="true"] {
+.object-results-scroll .object-link[aria-disabled="true"] {
   color: var(--shell-text-muted);
   cursor: default;
 }
-.planet-moon-placeholder {
+.object-moon-placeholder {
   display: block;
   width: 4px;
   height: 4px;
@@ -595,72 +595,72 @@
   top: 50%;
   pointer-events: none;
 }
-.planet-sidebar .planet-object-link .planet-lens-icon { opacity: 1; }
-.planet-object-results-scroll:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
-.planet-sidebar .planet-object-results-scroll .planet-object-link:focus-visible .planet-object-name {
+.object-sidebar .object-link .object-lens-icon { opacity: 1; }
+.object-results-scroll:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
+.object-sidebar .object-results-scroll .object-link:focus-visible .object-name {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 /* Keep both body cards retained; zoom only changes which view is visible.
    A registry-only selection preview has one view until its fragment arrives. */
-.planet-information-panel:not([data-card-view="overview"]) > [data-body-overview],
-.planet-information-panel[data-card-view="overview"] > :not([data-body-overview], [data-card-preview]) {
+.object-information-panel:not([data-card-view="overview"]) > [data-body-overview],
+.object-information-panel[data-card-view="overview"] > :not([data-body-overview], [data-card-preview]) {
   display: none !important;
 }
-.planet-body-overview-image {
+.object-body-overview-image {
   display: block;
   width: 100%;
   height: auto;
   margin-top: 12px;
 }
-.planet-card > .planet-selected-panel > .planet-body-overview-image + .planet-introduction {
+.object-card > .object-selected-panel > .object-body-overview-image + .object-introduction {
   margin-top: 12px;
 }
-.planet-object-results-scroll .planet-object-empty {
+.object-results-scroll .object-empty {
   margin: 0;
   color: var(--shell-text-muted);
   font: var(--shell-font-content);
 }
 
 /* Object tabs share the overview tabs without moving the card heading. */
-.planet-card.planet-information-panel > .planet-selected-panel { padding-bottom: 8px; }
-.planet-card-tabs:not(:has(> :is([role="tab"], .planet-native-tab):not([hidden]))) { display: none; }
-.planet-native-tab { position: absolute; width: 1px; height: 1px; opacity: 0; }
-.planet-native-tab[hidden] + .planet-native-tab-label { display: none; }
-.planet-card-tabs > [role="tab"][hidden] { display: none; }
+.object-card.object-information-panel > .object-selected-panel { padding-bottom: 8px; }
+.object-card-tabs:not(:has(> :is([role="tab"], .object-native-tab):not([hidden]))) { display: none; }
+.object-native-tab { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.object-native-tab[hidden] + .object-native-tab-label { display: none; }
+.object-card-tabs > [role="tab"][hidden] { display: none; }
 /* Keep the Dataset count visible without moving the tab labels. */
-.planet-card-tabs .planet-object-tab-count { display: inline; }
-.planet-card-tabpanel {
+.object-card-tabs .object-tab-count { display: inline; }
+.object-card-tabpanel {
   display: var(--information-panel-display, block);
   padding: 8px var(--explorer-card-padding-inline-end) 20px var(--explorer-card-padding-inline-start);
 }
-.planet-card-tabpanel .planet-surface-minimap {
+.object-card-tabpanel .object-surface-minimap {
   aspect-ratio: 2 / 1;
   background: #000;
 }
-.planet-card-tabpanel .planet-lens-texture {
+.object-card-tabpanel .object-lens-texture {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
-.planet-card-tabpanel .planet-facts { margin-top: 0; }
-:is(.planet-card-tabpanel, .planet-object-results-scroll) :is(.planet-observation-control, .planet-lens-label, .planet-facts, .planet-lens-details-title, .planet-lens-details-copy) {
+.object-card-tabpanel .object-facts { margin-top: 0; }
+:is(.object-card-tabpanel, .object-results-scroll) :is(.object-observation-control, .object-lens-label, .object-facts, .object-lens-details-title, .object-lens-details-copy) {
   font: var(--shell-font-content);
 }
-.planet-card-tabpanel :is(.planet-lens-legend-labels, .planet-lens-legend-categories) {
+.object-card-tabpanel :is(.object-lens-legend-labels, .object-lens-legend-categories) {
   font: var(--shell-font-caption);
 }
-.planet-card-tabpanel > .planet-factsheet-section,
-.planet-card-tabpanel > .planet-lenses {
+.object-card-tabpanel > .object-factsheet-section,
+.object-card-tabpanel > .object-lenses {
   margin-top: 0;
   padding-top: 0;
 }
 /* Dataset sections are no longer accordions; own their spacing explicitly. */
-.planet-dataset-content > .planet-lenses { padding-bottom: 0; }
-.planet-card-tabpanel .planet-observation-controls { padding-bottom: 0; }
-.planet-dataset-content > .planet-lens-details {
+.object-dataset-content > .object-lenses { padding-bottom: 0; }
+.object-card-tabpanel .object-observation-controls { padding-bottom: 0; }
+.object-dataset-content > .object-lens-details {
   width: auto;
   margin-top: 16px;
   margin-inline: calc(-1 * var(--explorer-card-padding-inline-start)) calc(-1 * var(--explorer-card-padding-inline-end));
@@ -668,57 +668,57 @@
   padding-inline: var(--explorer-card-padding-inline-start) var(--explorer-card-padding-inline-end);
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
-.planet-card-tabpanel :is(.planet-surface-minimap, .planet-lens-legend-panel, .planet-facility-preview) + .planet-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
-.planet-card-tabpanel .planet-lens-legend-panel { width: 100%; min-height: 28px; }
-.planet-card-tabpanel .planet-lens-legend-labels {
+.object-card-tabpanel :is(.object-surface-minimap, .object-lens-legend-panel, .object-facility-preview) + .object-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
+.object-card-tabpanel .object-lens-legend-panel { width: 100%; min-height: 28px; }
+.object-card-tabpanel .object-lens-legend-labels {
   display: grid;
   grid-template-columns: repeat(var(--legend-label-count), minmax(0, 1fr));
   min-height: 16px;
   align-items: start;
   white-space: normal;
 }
-.planet-card-tabpanel .planet-lens-legend-labels > span { overflow-wrap: anywhere; text-align: center; }
-.planet-card-tabpanel .planet-lens-legend-labels > span:first-child { text-align: left; }
-.planet-card-tabpanel .planet-lens-legend-labels > span:last-child:not(:first-child) { text-align: right; }
-.planet-card-tabpanel .planet-lens-legend-panel:first-child { margin-top: 0; }
-.planet-card-tabpanel .planet-lens-details-title {
+.object-card-tabpanel .object-lens-legend-labels > span { overflow-wrap: anywhere; text-align: center; }
+.object-card-tabpanel .object-lens-legend-labels > span:first-child { text-align: left; }
+.object-card-tabpanel .object-lens-legend-labels > span:last-child:not(:first-child) { text-align: right; }
+.object-card-tabpanel .object-lens-legend-panel:first-child { margin-top: 0; }
+.object-card-tabpanel .object-lens-details-title {
   margin: 0 0 8px;
   color: var(--shell-text);
 }
-.planet-selected-content-meta { color: var(--shell-text-muted); font: var(--shell-font-caption); white-space: nowrap; }
-.planet-card-tabpanel .planet-lens-details-copy {
+.object-selected-content-meta { color: var(--shell-text-muted); font: var(--shell-font-caption); white-space: nowrap; }
+.object-card-tabpanel .object-lens-details-copy {
   min-height: 60px;
   text-wrap: wrap;
 }
-.planet-card-tabpanel .planet-lens-search-field { flex-basis: 100%; margin: 0; }
-.planet-card-tabpanel .planet-lens-search { text-align: left; }
-.planet-card-tabpanel:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
+.object-card-tabpanel .object-lens-search-field { flex-basis: 100%; margin: 0; }
+.object-card-tabpanel .object-lens-search { text-align: left; }
+.object-card-tabpanel:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
 
-.planet-facility { margin: 0; }
-.planet-facility[hidden] { display: none; }
-.planet-facility:not([hidden]) ~ .planet-facility:not([hidden]) { margin-top: 20px; }
-.planet-facility-preview { position: relative; }
+.object-facility { margin: 0; }
+.object-facility[hidden] { display: none; }
+.object-facility:not([hidden]) ~ .object-facility:not([hidden]) { margin-top: 20px; }
+.object-facility-preview { position: relative; }
 /* A photograph fills its frame, so its title sits over it. A render is
    transparent and cropped to the facility, leaving nothing to sit on, so its
    title keeps the normal flow above the artwork. */
-.planet-facility-preview-overlay > .planet-facility-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
-.planet-facility-heading .planet-lens-details-title { margin-bottom: 0; }
+.object-facility-preview-overlay > .object-facility-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
+.object-facility-heading .object-lens-details-title { margin-bottom: 0; }
 /* A model render arrives on the sidebar's own near-black, so its title needs no
    help. A published photograph is bright and busy, so the heading takes a light
    wash rather than a runtime gradient over the image. */
-.planet-facility-heading-backdrop { padding: 8px 12px 10px; background: rgb(0 0 0 / .35); }
+.object-facility-heading-backdrop { padding: 8px 12px 10px; background: rgb(0 0 0 / .35); }
 /* Over artwork the date reads with the title, not as muted sidebar metadata. */
-.planet-facility-heading-backdrop .planet-selected-content-meta { color: var(--shell-text); }
-.planet-facility-heading .planet-selected-content-meta { display: block; }
-.planet-facility { font: var(--shell-font-metadata); }
-.planet-facility a { color: inherit; text-underline-offset: 3px; }
-.planet-facility a:hover { color: var(--shell-text); }
-.planet-facility :is(a, summary):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
+.object-facility-heading-backdrop .object-selected-content-meta { color: var(--shell-text); }
+.object-facility-heading .object-selected-content-meta { display: block; }
+.object-facility { font: var(--shell-font-metadata); }
+.object-facility a { color: inherit; text-underline-offset: 3px; }
+.object-facility a:hover { color: var(--shell-text); }
+.object-facility :is(a, summary):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
 [data-dataset-notice] { margin: 12px 0; font-size: 12px; }
-.planet-facility-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
+.object-facility-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
 /* A render is transparent apart from its facility, so the card shows the region
    the facility actually occupies instead of the empty frame around it. */
-.planet-facility-image-crop {
+.object-facility-image-crop {
   position: relative;
   overflow: hidden;
   aspect-ratio: var(--subject-w) / var(--subject-h);
@@ -726,21 +726,21 @@
   width: min(100%, calc(148px * var(--subject-w) / var(--subject-h)));
   margin-inline: auto;
 }
-.planet-facility-image-crop > .planet-facility-image {
+.object-facility-image-crop > .object-facility-image {
   position: absolute; object-fit: fill;
   width: calc(var(--frame-w) / var(--subject-w) * 100%);
   height: calc(var(--frame-h) / var(--subject-h) * 100%);
   left: calc(var(--subject-x) / var(--subject-w) * -100%);
   top: calc(var(--subject-y) / var(--subject-h) * -100%);
 }
-.planet-facility-image { display: block; width: 100%; height: 100%; object-fit: contain; }
-.planet-facility-emblem { position: absolute; left: 0; top: 64px; display: block; width: 64px; height: 64px; }
-.planet-facility-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.planet-facility a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
+.object-facility-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+.object-facility-emblem { position: absolute; left: 0; top: 64px; display: block; width: 64px; height: 64px; }
+.object-facility-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.object-facility a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
 /* Labels, format notes and bibliographies are needed to read a dataset but are
    not the dataset, so they fold away under the source that requires them. */
 
 /* Authored per-lens figures stay available without crowding the selected lens. */
-.planet-lens-facts { margin-top: 10px; font-size: 12px; }
-.planet-lens-facts summary { cursor: pointer; color: var(--shell-text-muted); }
-.planet-lens-facts .planet-facts { margin-top: 6px; }
+.object-lens-facts { margin-top: 10px; font-size: 12px; }
+.object-lens-facts summary { cursor: pointer; color: var(--shell-text-muted); }
+.object-lens-facts .object-facts { margin-top: 6px; }

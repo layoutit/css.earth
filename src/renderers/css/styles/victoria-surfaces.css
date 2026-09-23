@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="victoria"]) > :is(.victoria-sun-camera, .victoria-camera, .victoria-material-root) {
+.object-stage:where([data-object-id="victoria"]) > :is(.victoria-sun-camera, .victoria-camera, .victoria-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-sun-camera, :where(.planet-stage[data-object-id="victoria"]) .victoria-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-body > u {
+:where(.object-stage[data-object-id="victoria"]) .victoria-sun-camera, :where(.object-stage[data-object-id="victoria"]) .victoria-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="victoria"]) .victoria-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="victoria"]) .victoria-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="victoria"]) .victoria-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--victoria-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-body > .victoria-polar { background-image: var(--victoria-poles-image); }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-material-root { z-index: 3; --victoria-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-material, :where(.planet-stage[data-object-id="victoria"]) .victoria-billboard {
+:where(.object-stage[data-object-id="victoria"]) .victoria-body > .victoria-polar { background-image: var(--victoria-poles-image); }
+:where(.object-stage[data-object-id="victoria"]) .victoria-material-root { z-index: 3; --victoria-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="victoria"]) .victoria-material, :where(.object-stage[data-object-id="victoria"]) .victoria-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-material { background-repeat: no-repeat; transform: rotate(var(--victoria-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="victoria"]) .victoria-billboard { border-radius: 50%; background-color: var(--victoria-billboard-color); opacity: var(--victoria-billboard-opacity); }
-.planet-stage:where([data-object-id="victoria"])[data-lod="billboard"] .victoria-scene, .planet-stage:where([data-object-id="victoria"])[data-lod="marker"] .victoria-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="victoria"])[data-lod="marker"] .victoria-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="victoria"]) .victoria-material { background-repeat: no-repeat; transform: rotate(var(--victoria-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="victoria"]) .victoria-billboard { border-radius: 50%; background-color: var(--victoria-billboard-color); opacity: var(--victoria-billboard-opacity); }
+.object-stage:where([data-object-id="victoria"])[data-lod="billboard"] .victoria-scene, .object-stage:where([data-object-id="victoria"])[data-lod="marker"] .victoria-scene { visibility: hidden; }
+.object-stage:where([data-object-id="victoria"])[data-lod="marker"] .victoria-billboard { opacity: 0; }
 

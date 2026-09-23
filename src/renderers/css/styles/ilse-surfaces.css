@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="ilse"]) > :is(.ilse-sun-camera, .ilse-camera, .ilse-material-root) {
+.object-stage:where([data-object-id="ilse"]) > :is(.ilse-sun-camera, .ilse-camera, .ilse-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-sun-camera, :where(.planet-stage[data-object-id="ilse"]) .ilse-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-body > u {
+:where(.object-stage[data-object-id="ilse"]) .ilse-sun-camera, :where(.object-stage[data-object-id="ilse"]) .ilse-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="ilse"]) .ilse-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="ilse"]) .ilse-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="ilse"]) .ilse-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--ilse-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-body > .ilse-polar { background-image: var(--ilse-poles-image); }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-material-root { z-index: 3; --ilse-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-material, :where(.planet-stage[data-object-id="ilse"]) .ilse-billboard {
+:where(.object-stage[data-object-id="ilse"]) .ilse-body > .ilse-polar { background-image: var(--ilse-poles-image); }
+:where(.object-stage[data-object-id="ilse"]) .ilse-material-root { z-index: 3; --ilse-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="ilse"]) .ilse-material, :where(.object-stage[data-object-id="ilse"]) .ilse-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-material { background-repeat: no-repeat; transform: rotate(var(--ilse-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="ilse"]) .ilse-billboard { border-radius: 50%; background-color: var(--ilse-billboard-color); opacity: var(--ilse-billboard-opacity); }
-.planet-stage:where([data-object-id="ilse"])[data-lod="billboard"] .ilse-scene, .planet-stage:where([data-object-id="ilse"])[data-lod="marker"] .ilse-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="ilse"])[data-lod="marker"] .ilse-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="ilse"]) .ilse-material { background-repeat: no-repeat; transform: rotate(var(--ilse-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="ilse"]) .ilse-billboard { border-radius: 50%; background-color: var(--ilse-billboard-color); opacity: var(--ilse-billboard-opacity); }
+.object-stage:where([data-object-id="ilse"])[data-lod="billboard"] .ilse-scene, .object-stage:where([data-object-id="ilse"])[data-lod="marker"] .ilse-scene { visibility: hidden; }
+.object-stage:where([data-object-id="ilse"])[data-lod="marker"] .ilse-billboard { opacity: 0; }
 

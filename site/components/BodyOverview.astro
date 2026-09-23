@@ -1,0 +1,50 @@
+---
+import type { ObjectTitle, Fact } from '../object-shell-types';
+interface Props { objectId: string; title: ObjectTitle; introduction?: string; facts?: Fact[]; moreFacts?: Fact[]; }
+import '../body-overview.css';
+import ObjectCardHeader from './ObjectCardHeader.astro';
+import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
+import SystemList from './SystemList.astro';
+import InformationTabs from './InformationTabs.astro';
+import ObjectFactsheet from './ObjectFactsheet.astro';
+import { prepareBodyRelations } from '../prepare-body-moons.mts';
+import { prepareBodyOverview } from '../prepare-body-overview.mts';
+
+const { objectId, title, introduction, facts = [], moreFacts = [] } = Astro.props;
+const overview = await prepareBodyOverview(objectId);
+const relations = prepareBodyRelations(objectId);
+const tabs = [
+  ...(relations ? [{ id: 'moons', label: relations.label, ...(relations.parent ? {} : { count: relations.moons.length }) }] : []),
+  { id: 'factsheet', label: 'Factsheet' },
+  { id: 'spectrum', label: 'Spectrum' },
+];
+---
+
+<ObjectCardHeader {objectId} {title} data-body-overview data-has-portrait={overview.image ? true : undefined}>
+  <ObjectBreadcrumbs {objectId} />
+  <Fragment slot="image">
+    {overview.image && <div class="object-overview-portrait">
+      <img class="object-body-overview-image" src={overview.image}
+        width="1200" height="630" alt={title.label} loading="lazy" decoding="async" />
+    </div>}
+    {introduction && <p class="object-introduction">{introduction}</p>}
+  </Fragment>
+</ObjectCardHeader>
+<InformationTabs idPrefix={`${objectId}-overview`} group="overview" {tabs} />
+{relations && <div class="object-results-scroll object-card-tabpanel" data-body-overview
+  data-information-group="overview" data-information-panel="moons" id={`${objectId}-overview-moons-content`}
+  role="region" aria-label={relations.label}>
+  <SystemList {relations} />
+</div>}
+<div class="object-results-scroll object-card-tabpanel" data-body-overview
+  data-information-group="overview" data-information-panel="factsheet" id={`${objectId}-overview-factsheet-content`}
+  role="region" aria-label="Factsheet">
+  <ObjectFactsheet id={`${objectId}-overview`} {facts} {moreFacts} embedded />
+</div>
+<div class="object-results-scroll object-card-tabpanel" data-body-overview
+  data-information-group="overview" data-information-panel="spectrum" id={`${objectId}-overview-spectrum-content`}
+  role="region" aria-label="Spectrum">
+  {overview.spectrum ? <figure class="object-overview-spectrum" aria-label={overview.spectrum.title}>
+    <img src={overview.spectrum.src} width="300" height="90" alt={overview.spectrum.alt} loading="lazy" decoding="async" />
+  </figure> : <p class="object-empty">No reflectance spectrum available</p>}
+</div>

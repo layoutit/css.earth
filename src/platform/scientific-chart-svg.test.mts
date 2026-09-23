@@ -31,7 +31,7 @@ test("renders deterministic representative Mars and Saturn reflectance data", ()
     assert.match(first, new RegExp(`<title id="${id}-reflectance-title">`));
     assert.match(first, /<g fill="#fff" fill-opacity="\.05" shape-rendering="crispEdges">[\s\S]*?<rect x="0" y="8" width="306" height="1"\/>[\s\S]*?<rect x="0" y="55" width="306" height="1"\/>/u);
     assert.doesNotMatch(first, /stroke-dasharray/u);
-    assert.match(first, /class="planet-chart-line" d="M0\.00 57\.00 L196\.92 8\.00 L320\.00 81\.50"/u);
+    assert.match(first, /class="object-chart-line" d="M0\.00 57\.00 L196\.92 8\.00 L320\.00 81\.50"/u);
     assert.match(first, />wavelength \(nm\)<[\s\S]*?>750<[\s\S]*?>1000</u);
     assert.doesNotMatch(first, />350<|>500<|wavelength · nm/u);
     assert.doesNotMatch(first, /axis-maximum|axis-midpoint|>I\/F</u);
@@ -61,7 +61,7 @@ test("renders deterministic representative atmosphere profiles", () => {
   assert.match(first, /font-family="ui-sans-serif,[^"]+" font-size="13\.572"/u);
   assert.match(first, /<g fill="#fff" fill-opacity="\.05" shape-rendering="crispEdges"><rect x="0" y="62" width="306" height="1"\/><\/g>/u);
   assert.doesNotMatch(first, /stroke-dasharray/u);
-  assert.match(first, /class="planet-chart-line" d="M320\.00 122\.00 L160\.00 65\.00 L0\.00 8\.00"/u);
+  assert.match(first, /class="object-chart-line" d="M320\.00 122\.00 L160\.00 65\.00 L0\.00 8\.00"/u);
   assert.match(first, />temperature \(K\)<[\s\S]*?>150<[\s\S]*?>200</u);
   assert.doesNotMatch(first, />100<|temperature · K/u);
   assert.doesNotMatch(first, /axis-pressure|>Bar</u);

@@ -10,8 +10,8 @@ import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import * as fontkit from 'fontkit';
-import { createPlanetTitleSource } from '../../../prepare/prepare-planet-title-sources.mts';
-import { PLANET_TITLE_RECIPE } from '../../../../src/platform/planet-title-recipe.mts';
+import { createObjectTitleSource } from '../../../prepare/prepare-object-title-sources.mts';
+import { OBJECT_TITLE_RECIPE } from '../../../../src/platform/object-title-recipe.mts';
 import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';
 import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mts';
@@ -29,7 +29,7 @@ if (!refreshOnly) {
   const fontPath = resolve('src/objects/oumuamua/source/presentation/InterVariable.ttf');
   const baseFont = fontkit.openSync(fontPath);
   if (!('getVariation' in baseFont)) throw new TypeError('The title source must contain one font face.');
-  font = baseFont.getVariation({wght:PLANET_TITLE_RECIPE.weight,opsz:PLANET_TITLE_RECIPE.opticalSize});
+  font = baseFont.getVariation({wght:OBJECT_TITLE_RECIPE.weight,opsz:OBJECT_TITLE_RECIPE.opticalSize});
   const width=512,height=256;
   const pixels=paintMissingCoverage(Buffer.alloc(width*height*3,160),{width,height,channels:3},new Uint8Array(width*height).fill(1));
   map=await sharp(pixels,{raw:{width,height,channels:3}}).png().toBuffer();
@@ -39,11 +39,11 @@ for (const b of bodies) {
   const manifest=await read(resolve(src,'manifest.json'));
   if (!refreshOnly) {
     if (!font || !map) throw new TypeError('Title and source map preparation must finish before publication.');
-    const title=createPlanetTitleSource(b.titleLabel ?? b.name,font);
+    const title=createObjectTitleSource(b.titleLabel ?? b.name,font);
     await write(resolve(src,'presentation/title-mark.json'),{schema:'cssearth-title-source@1',...title});
     const raw=await read(resolve(src,'preparation/terrestrial.json')), geometry=requireRecord(raw.geometry);
     const config={...raw,namespace:requireString(raw.namespace),geometry:{...geometry,radius:requireFiniteNumber(geometry.radius),radiusKm:requireFiniteNumber(geometry.radiusKm)}};
-    const source=await createSourceManifest({planetId:b.id,planetName:b.name,sourceRoot:src});
+    const source=await createSourceManifest({objectId:b.id,objectName:b.name,sourceRoot:src});
     const radial=await loadRadialTerrain({config,sourceDirectory:src,source});
     if (!radial) throw new TypeError('The source snapshot requires a radial terrain.');
     const recipe={generator:'tools/objects/terrestrial-layers/radial-snapshot.mts',inputs:['published-shape','model-surface'],size:512,longitudeDegrees:55,latitudeDegrees:20,ambient:.45,diffuse:.55,lensId:'model'};
@@ -51,7 +51,7 @@ for (const b of bodies) {
     await write(resolve(src,'presentation/context.png'),context);
     const navigation=await read('src/objects/annefrank/source/preparation/navigation.json');
     const navigationPath=requireString(requireRecord(navigation.source).path);
-    await write(resolve(src,'preparation/navigation.json'),{...navigation,planetId:b.id,source:{path:navigationPath}});
+    await write(resolve(src,'preparation/navigation.json'),{...navigation,objectId:b.id,source:{path:navigationPath}});
     // A first run has no previous record to merge, so name the generator, licence and consumers here; the
     // source-manifest validator requires all three on a generated intermediate.
     manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{id:'prepared-source-context',path:navigationPath,origin:b.source,credit:b.credit,license:'Authored display of scientific model; source attribution retained.',consumers:['navigation'],recipe,generator:recipe.generator})];

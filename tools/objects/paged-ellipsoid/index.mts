@@ -23,8 +23,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { verifySourceManifest } from '../../../src/platform/source-manifest.mts';
-import { preparePlanetCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
-import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
+import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
+import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { createAtmospherePreparation } from './atmosphere.mts';
 import { createPagedSurfaceRaster } from './surface-raster.mts';
@@ -53,7 +53,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   if (JSON.stringify(declared) !== JSON.stringify(bindingSource.controls.map(lens => lens.id))) throw new TypeError('Authored lenses differ from presentation bindings.');
   const sourceDirectory = resolve(objectDirectory, 'source'), sourceManifest = validateSourceManifest(config.namespace, await json(resolve(sourceDirectory, 'manifest.json')));
   // The raw imagery is read only by the stages a presentation-only run reuses; it may be absent from this checkout.
-  if (!presentationOnly) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, planetName: config.displayName });
+  if (!presentationOnly) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const published = async (name: string) => requireRecord(await json(resolve(outputDirectory, `${name}.json`)), `published ${name}`);
   // Published JSON may order keys differently from a fresh run; compare values, not serializations.
@@ -72,8 +72,8 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     if (unaccepted.length) throw new Error(`${descriptor.id}: recipe sources changed since the published preparation (${unaccepted.join(', ')}); run the full preparation, or pass --accept-changed when a change feeds none of the reused outputs.`);
     if (changed.length) console.log(`${descriptor.id}: reusing published outputs across accepted recipe changes: ${changed.join(', ')}.`);
   }
-  const sun = preparePlanetDirectionalSun();
-  const sky = preparePlanetCubicSky({ objectId: descriptor.id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
+  const sun = prepareDirectionalSun();
+  const sky = prepareCubicSky({ objectId: descriptor.id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
   const destinations = descriptor.recipe.destinations;
   // The scene needs the declared retained pool capacity, not a previously prepared overlay.

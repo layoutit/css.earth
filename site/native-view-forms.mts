@@ -3,7 +3,7 @@ export function bindNativeViewForms(documentTarget: Document, windowTarget: Pick
   const context = ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'];
   const submit = (event: Event) => {
     const form = event.target;
-    if (!(form instanceof HTMLFormElement) || !form.matches('[data-settings-form], [data-dataset-form], .planet-sidebar-search-card')) return;
+    if (!(form instanceof HTMLFormElement) || !form.matches('[data-settings-form], [data-dataset-form], .object-sidebar-search-card')) return;
     const url = new URL(windowTarget.location.href);
     for (const input of form.querySelectorAll<HTMLInputElement>('input[data-view-context], input[data-search-context]')) {
       const value = context.includes(input.name) ? url.searchParams.get(input.name) : null;
@@ -18,7 +18,7 @@ export function bindNativeViewForms(documentTarget: Document, windowTarget: Pick
       form.append(input);
     };
     add('settings', '1');
-    for (const input of documentTarget.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')) {
+    for (const input of documentTarget.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')) {
       if (input.type === 'checkbox') { if (input.checked) add(input.name, 'on'); }
       else if (!input.disabled) add(input.name, input.value);
     }

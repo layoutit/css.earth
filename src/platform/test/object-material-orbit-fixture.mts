@@ -32,7 +32,7 @@ export function materialOrbitFixture(id: string) {
   nativeStage.getAnimations = () => [];
   nativeStage.getComputedStyle = (element: HTMLElement) => element.style;
   document.defaultView = nativeStage as unknown as Record<string, unknown>; document.readyState = 'complete';
-  document.querySelector = selector => selector === '.planet-sidebar' ? null : stage;
+  document.querySelector = selector => selector === '.object-sidebar' ? null : stage;
   // A perspective camera (an object with a heliocentric view) projects through
   // the shared dolly; its native measurements are controlled here too.
   const levelOfDetail = { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0 };

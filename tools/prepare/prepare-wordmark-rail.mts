@@ -7,8 +7,8 @@ import { pathToFileURL } from "node:url";
 
 import * as fontkit from "fontkit";
 
-import { PLANET_TITLE_RECIPE } from
-  "../../src/platform/planet-title-recipe.mts";
+import { OBJECT_TITLE_RECIPE } from
+  "../../src/platform/object-title-recipe.mts";
 
 interface WordmarkSegment {label: string; text?: string; weight: number; tail?: {text: string; weight: number}; renderedHeight: number;}
 
@@ -19,9 +19,9 @@ const outputPath = resolve(
 );
 
 export const WORDMARK_RAIL_RECIPE = Object.freeze({
-  source: PLANET_TITLE_RECIPE.source,
-  sourceUrl: PLANET_TITLE_RECIPE.sourceUrl,
-  checkedFontPath: PLANET_TITLE_RECIPE.checkedFontPath,
+  source: OBJECT_TITLE_RECIPE.source,
+  sourceUrl: OBJECT_TITLE_RECIPE.sourceUrl,
+  checkedFontPath: OBJECT_TITLE_RECIPE.checkedFontPath,
   fontSize: 22,
   opticalSize: 22,
   letterSpacing: 0.1,

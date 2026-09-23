@@ -1,20 +1,20 @@
-.planet-cubic-sky {
-  --planet-cubic-sky-zoom: 1;
-  --planet-cubic-sky-camera-distance: max(
+.object-cubic-sky {
+  --object-cubic-sky-zoom: 1;
+  --object-cubic-sky-camera-distance: max(
     50cqh,
-    calc(86.60254cqh * var(--planet-cubic-sky-zoom))
+    calc(86.60254cqh * var(--object-cubic-sky-zoom))
   );
   position: absolute;
   z-index: 0;
   inset: 0;
   overflow: hidden;
-  perspective: var(--planet-cubic-sky-camera-distance);
+  perspective: var(--object-cubic-sky-camera-distance);
   perspective-origin: 50% 50%;
   pointer-events: none;
 }
 
-.planet-cubic-sky-cube,
-.planet-cubic-sky-orientation {
+.object-cubic-sky-cube,
+.object-cubic-sky-orientation {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -23,6 +23,6 @@
   transform-style: preserve-3d;
 }
 
-.planet-cubic-sky-cube {
-  transform: translateZ(var(--planet-cubic-sky-camera-distance));
+.object-cubic-sky-cube {
+  transform: translateZ(var(--object-cubic-sky-camera-distance));
 }

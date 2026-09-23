@@ -11,7 +11,7 @@ Preparation writes `prepared/page.json` from the finalized scene definition.
 Its descriptor pin validates the small metadata file and its `sceneSha256`
 binds controls/preloads to the full scene transport. A first-load page also
 decodes the authenticated scene during the build and serializes its prepared
-tree into the existing `.planet-stage`. Navigation fragments use the small page
+tree into the existing `.object-stage`. Navigation fragments use the small page
 metadata without including another scene. The `/objects/<id>/<sha256>.json` endpoint still
 verifies the complete transport's hash independently. Changing prepared scenes
 must update both outputs through `writeObjectJson`.

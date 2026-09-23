@@ -48,7 +48,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     // Prepared textures have no role in resolving authored motion. No asset
     // fetch is allowed during this CSS-only compilation step.
     await page.route('**/*', route => route.abort());
-    await page.setContent('<main class="planet-stage example-stage"></main>');
+    await page.setContent('<main class="object-stage"></main>');
     await page.addStyleTag({ content: styles.join('\n') });
     const browserDefinition: PresentationSource = { ...definition, id: input.id };
     const prepared = await page.evaluate(({ definition, closed, ratios, inset, interiorOnly }) => {

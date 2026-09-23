@@ -7,5 +7,5 @@ export function objectPageStyles(descriptor: unknown): string[] {
       !styles.every((path): path is string => typeof path === 'string' && /^src\/[a-zA-Z0-9_./-]+\.css$/u.test(path) && !path.split('/').includes('..'))) {
     throw new TypeError(`${property(descriptor, 'id')}: invalid owned page stylesheets.`);
   }
-  return [...styles, 'site/planet-shell.css'];
+  return [...styles, 'site/object-shell.css'];
 }

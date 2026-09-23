@@ -63,7 +63,7 @@ export async function validateObjectPackageFiles(
 
 export { validateInventory };
 
-export async function validatePlanetData(
+export async function validateObjectData(
   planet: Pick<ObjectEntry, "id" | "name">,
   { projectRoot = process.cwd() } = {},
 ) {
@@ -74,10 +74,10 @@ export async function validatePlanetData(
   ]);
   const inventory = requireInventory(planet.id, runtimeInput);
   const sourceManifest = validateSourceManifest(planet.id, sourceInput);
-  await verifyInventory({ planetId: planet.id, inventory, publicRoot: paths.publicAssets, locations: ['public'] });
+  await verifyInventory({ objectId: planet.id, inventory, publicRoot: paths.publicAssets, locations: ['public'] });
   await verifySourceManifest({
     manifest: sourceManifest,
-    planetName: planet.name,
+    objectName: planet.name,
     sourceRoot: paths.sourceRoot,
   });
   return Object.freeze({

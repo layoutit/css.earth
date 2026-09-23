@@ -7,8 +7,8 @@ export interface SourceRange { offset: number; length: number; }
 export interface SourceEntry { path: string; range?: SourceRange; sourceBinding?: SourceBinding; }
 export interface SourceInput extends SourceEntry { id: string; origin: string; credit: string; license: string; acquisition: string; redistribution: string; consumers: readonly string[]; licenseEvidence?: readonly string[]; sourceBinding: SourceBinding; }
 export interface SourceManifest { schema: string; inputs: readonly SourceInput[]; generatedIntermediates: readonly (SourceEntry & { generator: string })[]; documents: readonly (SourceEntry & { purpose?: string })[]; }
-export interface SourceManifestLocation { planetId: string; planetName: string; sourceRoot: string; }
-export interface SourceVerification { entry: SourceEntry; planetName: string; sourceRoot: string; }
+export interface SourceManifestLocation { objectId: string; objectName: string; sourceRoot: string; }
+export interface SourceVerification { entry: SourceEntry; objectName: string; sourceRoot: string; }
 import { access, readFile, readdir } from "node:fs/promises";
 import { posix, relative, resolve, win32 } from "node:path";
 
@@ -18,9 +18,9 @@ const COLLECTIONS = Object.freeze([
   "documents",
 ] as const);
 
-export async function createSourceManifest({ planetId, planetName, sourceRoot }: SourceManifestLocation) {
+export async function createSourceManifest({ objectId, objectName, sourceRoot }: SourceManifestLocation) {
   const manifest = validateSourceManifest(
-    planetId,
+    objectId,
     JSON.parse(await readFile(resolve(sourceRoot, "manifest.json"), "utf8")),
   );
   // A lens may read an acquired input or a file this repository generates from one, such as a spectrum sampled here from the
@@ -37,57 +37,57 @@ export async function createSourceManifest({ planetId, planetName, sourceRoot }:
       const entries = manifest.inputs.filter(({ consumers }) =>
         consumers.includes(consumer));
       if (entries.length === 0) {
-        throw new Error(`${planetName} source manifest has no inputs for ${consumer}.`);
+        throw new Error(`${objectName} source manifest has no inputs for ${consumer}.`);
       }
       return Object.freeze(entries);
     },
     async validateGroup(consumer: string) {
       const entries = this.inputsFor(consumer);
-      for (const entry of entries) await validateSourceEntry({ entry, planetName, sourceRoot });
+      for (const entry of entries) await validateSourceEntry({ entry, objectName, sourceRoot });
       return entries;
     },
     async validatePath(sourcePath: string) {
       const normalized = sourcePath.replaceAll("\\", "/");
       const entry = inputsByPath.get(normalized);
-      if (!entry) throw new Error(`${planetName} source is not declared: ${normalized}.`);
-      await validateSourceEntry({ entry, planetName, sourceRoot });
+      if (!entry) throw new Error(`${objectName} source is not declared: ${normalized}.`);
+      await validateSourceEntry({ entry, objectName, sourceRoot });
       return entry;
     },
     /** The one way a preparation reads a source file: a download is verified against its manifest pin, a file
      * authored here is read as it is. Nothing else needs to remember a hash. */
     async readSource(sourcePath: string): Promise<Buffer> {
       const normalized = sourcePath.replaceAll("\\", "/");
-      if (normalized.startsWith("/") || normalized.split("/").includes("..")) throw new Error(`${planetName} source path escapes the package: ${normalized}.`);
+      if (normalized.startsWith("/") || normalized.split("/").includes("..")) throw new Error(`${objectName} source path escapes the package: ${normalized}.`);
       const entry = inputsByPath.get(normalized);
-      if (!entry) throw new Error(`${planetName} source is not declared: ${normalized}.`);
+      if (!entry) throw new Error(`${objectName} source is not declared: ${normalized}.`);
       return readFile(resolve(sourceRoot, normalized));
     },
     verify() {
-      return verifySourceManifest({ manifest, planetName, sourceRoot });
+      return verifySourceManifest({ manifest, objectName, sourceRoot });
     },
   });
 }
 
-export function validateSourceManifest(planetId: string, input: unknown): Readonly<SourceManifest> {
+export function validateSourceManifest(objectId: string, input: unknown): Readonly<SourceManifest> {
   const value = input as SourceManifest;
   if (!value || typeof value !== "object" || isArray(value) ||
-      value.schema !== `css${planetId}-authoritative-sources@2`) {
-    throw new TypeError(`Planet ${planetId} source manifest is incompatible.`);
+      value.schema !== `css${objectId}-authoritative-sources@2`) {
+    throw new TypeError(`Object ${objectId} source manifest is incompatible.`);
   }
   for (const collection of COLLECTIONS) {
     if (!isArray(value[collection])) {
-      throw new TypeError(`Planet ${planetId} source manifest ${collection} is missing.`);
+      throw new TypeError(`Object ${objectId} source manifest ${collection} is missing.`);
     }
   }
   if (value.inputs.length === 0) {
-    throw new TypeError(`Planet ${planetId} source manifest inputs are empty.`);
+    throw new TypeError(`Object ${objectId} source manifest inputs are empty.`);
   }
 
   const ids = new Set<string>();
   const paths = new Set<string>();
   for (const input of value.inputs) {
     parseSourceBinding(input.sourceBinding);
-    validateEntryBase(planetId, input, "input", paths);
+    validateEntryBase(objectId, input, "input", paths);
     for (const field of [
       "id",
       "origin",
@@ -97,7 +97,7 @@ export function validateSourceManifest(planetId: string, input: unknown): Readon
       "redistribution",
     ] as const) {
       if (!nonEmpty(input[field])) {
-        throw new TypeError(`Planet ${planetId} source ${input.path} has no ${field}.`);
+        throw new TypeError(`Object ${objectId} source ${input.path} has no ${field}.`);
       }
     }
     if (input.licenseEvidence !== undefined &&
@@ -105,41 +105,41 @@ export function validateSourceManifest(planetId: string, input: unknown): Readon
          new Set(input.licenseEvidence).size !== input.licenseEvidence.length ||
          input.licenseEvidence.some((evidence) => !nonEmpty(evidence)))) {
       throw new TypeError(
-        `Planet ${planetId} source ${input.path} has invalid license evidence.`,
+        `Object ${objectId} source ${input.path} has invalid license evidence.`,
       );
     }
     if (ids.has(input.id)) {
-      throw new TypeError(`Planet ${planetId} repeats source id ${input.id}.`);
+      throw new TypeError(`Object ${objectId} repeats source id ${input.id}.`);
     }
     ids.add(input.id);
     if (!isArray(input.consumers) || input.consumers.length === 0 ||
         new Set(input.consumers).size !== input.consumers.length ||
         input.consumers.some((consumer) => !nonEmpty(consumer))) {
-      throw new TypeError(`Planet ${planetId} source ${input.path} has invalid consumers.`);
+      throw new TypeError(`Object ${objectId} source ${input.path} has invalid consumers.`);
     }
   }
 
   for (const generated of value.generatedIntermediates) {
     if (generated.sourceBinding) parseSourceBinding(generated.sourceBinding);
-    validateEntryBase(planetId, generated, "generated intermediate", paths);
+    validateEntryBase(objectId, generated, "generated intermediate", paths);
     if (!nonEmpty(generated.generator)) {
       throw new TypeError(
-        `Planet ${planetId} generated intermediate ${generated.path} has no generator.`,
+        `Object ${objectId} generated intermediate ${generated.path} has no generator.`,
       );
     }
   }
 
   for (const document of value.documents) {
     if (document.sourceBinding) parseSourceBinding(document.sourceBinding);
-    validateEntryBase(planetId, document, "document", paths);
+    validateEntryBase(objectId, document, "document", paths);
     if (document.purpose !== undefined && !nonEmpty(document.purpose)) {
-      throw new TypeError(`Planet ${planetId} document ${document.path} has an empty purpose.`);
+      throw new TypeError(`Object ${objectId} document ${document.path} has an empty purpose.`);
     }
   }
   return Object.freeze(value);
 }
 
-export async function verifySourceManifest({ manifest, planetName, sourceRoot }: { manifest: SourceManifest; planetName: string; sourceRoot: string }) {
+export async function verifySourceManifest({ manifest, objectName, sourceRoot }: { manifest: SourceManifest; objectName: string; sourceRoot: string }) {
   const declared = new Set(COLLECTIONS.flatMap((collection) =>
     manifest[collection].map(({ path }) => path)));
   const actual = new Set((await walk(sourceRoot))
@@ -149,7 +149,7 @@ export async function verifySourceManifest({ manifest, planetName, sourceRoot }:
   const missing = [...declared].filter((sourcePath) => !actual.has(sourcePath));
   if (undeclared.length > 0 || missing.length > 0) {
     throw new Error(
-      `${planetName} source manifest coverage failed. Undeclared: ${
+      `${objectName} source manifest coverage failed. Undeclared: ${
         undeclared.join(", ") || "none"}. Missing: ${missing.join(", ") || "none"}.`,
     );
   }
@@ -185,19 +185,19 @@ export function assertRangeResponse(
   }
 }
 
-async function validateSourceEntry({ entry, planetName, sourceRoot }: SourceVerification) {
-  await access(resolve(sourceRoot, entry.path)).catch(() => { throw new Error(`${planetName} source is missing: ${entry.path}.`); });
+async function validateSourceEntry({ entry, objectName, sourceRoot }: SourceVerification) {
+  await access(resolve(sourceRoot, entry.path)).catch(() => { throw new Error(`${objectName} source is missing: ${entry.path}.`); });
 }
 
-function validateEntryBase(planetId: string, entry: SourceEntry, kind: string, paths: Set<string>) {
+function validateEntryBase(objectId: string, entry: SourceEntry, kind: string, paths: Set<string>) {
   if (!entry || typeof entry !== "object" || isArray(entry) ||
       !safeRelativePath(entry.path)) {
-    throw new TypeError(`Planet ${planetId} has an invalid source ${kind}.`);
+    throw new TypeError(`Object ${objectId} has an invalid source ${kind}.`);
   }
   if (paths.has(entry.path)) {
-    throw new TypeError(`Planet ${planetId} repeats source path ${entry.path}.`);
+    throw new TypeError(`Object ${objectId} repeats source path ${entry.path}.`);
   }
-  assertSourceRange(entry, `Planet ${planetId} source ${kind} ${entry.path}`);
+  assertSourceRange(entry, `Object ${objectId} source ${kind} ${entry.path}`);
   paths.add(entry.path);
 }
 

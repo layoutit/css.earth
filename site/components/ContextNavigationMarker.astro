@@ -1,9 +1,9 @@
 ---
-import '../planet-navigation-marker.css';
+import '../object-navigation-marker.css';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 interface Props { objectId: string; }
 const thumbnail = sidebarThumbnail(Astro.props.objectId);
 ---
-<span class:list={['planet-navigation-marker', thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker']} aria-hidden="true">
+<span class:list={['object-navigation-marker', thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker']} aria-hidden="true">
   {thumbnail && <img src={thumbnail.url2x} width="16" height="16" alt="" loading="lazy" decoding="async" />}
 </span>

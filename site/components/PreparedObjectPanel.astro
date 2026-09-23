@@ -1,5 +1,5 @@
 ---
-import PlanetShell from "./PlanetShell.astro";
+import ObjectShell from "./ObjectShell.astro";
 import { parsePreparedText } from '../object-text.mts';
 import { parsePreparedPanelContent, parsePanelControls, withDatasetText } from '../prepared-panel-content.mts';
 interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
@@ -31,7 +31,7 @@ const lenses = withDatasetText(controls.lenses && {
 }, text.datasets);
 ---
 
-<PlanetShell
+<ObjectShell
   navigation={Astro.props.navigation}
   objectId={content.objectId}
   title={content.title}

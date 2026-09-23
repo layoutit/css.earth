@@ -1,0 +1,430 @@
+---
+import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
+import ObjectInformationPanel from "./ObjectInformationPanel.astro";
+import PreparedClusterFacts from './PreparedClusterFacts.astro';
+import PreparedFocusLenses from "./PreparedFocusLenses.astro";
+import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
+import type { Props } from "../object-shell-types";
+import { SCENE_OBJECTS } from "../objects.mts";
+import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
+import { requireObjectControls } from "../scene-contract.mts";
+import SourcesLink from './SourcesLink.astro';
+import ObjectResults from "./ObjectResults.astro";
+import MaterialSymbol from "./MaterialSymbol.astro";
+import GitHubIcon from "./GitHubIcon.astro";
+import ExplorerRail from "./ExplorerRail.astro";
+import CssEarthWordmark from "./CssEarthWordmark.astro";
+import ExtragalacticOverviews from './ExtragalacticOverviews.astro';
+import ObjectCard from './ObjectCard.astro';
+import ObjectCardHeader from './ObjectCardHeader.astro';
+import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
+import ObjectFactsheet from './ObjectFactsheet.astro';
+import InformationTabs from './InformationTabs.astro';
+import Accordion from './Accordion.astro';
+import ObjectNavigationMarker from './ObjectNavigationMarker.astro';
+import { OVERVIEW_TITLES, SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
+import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
+import overviewFacts from '../source/overview-facts.json';
+import planetarySystems from '../source/planetary-systems.json';
+import { temperatureColor } from '../../src/preparation/stars/color.ts';
+import featureIndex from '../prepared-feature-index.json' with { type: 'json' };
+import { SEARCH_QUERY_LIMIT } from '../object-search.mts';
+
+declare const __CSSEARTH_VERSION__: string;
+
+const {
+  objectId,
+  lenses,
+  settings,
+  destinations,
+  features,
+  navigation = false,
+} = Astro.props;
+requireObjectControls({ lenses, settings }, objectId);
+const speedSetting = settings?.controls.find((setting) =>
+  setting.kind === "cycle" && setting.name === "speed");
+const shadowSetting = settings?.controls.find((setting) =>
+  setting.kind === "toggle" && setting.name === "shadows");
+const remainingSettings = settings?.controls.filter((setting) =>
+  setting !== speedSetting && setting !== shadowSetting) ?? [];
+const speedValues: Readonly<Record<string, number>> = Object.freeze({
+  off: 0,
+  normal: 1,
+  fast: 2,
+  fastest: 3,
+  superfast: 4,
+});
+const initialSpeedState = speedSetting?.state ?? "normal";
+const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
+const activeObject = SCENE_OBJECTS.find((object) => object.id === objectId);
+const systemStar = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!;
+// Every prepared planetary system is browsable; the orbits decide, not a list.
+const LIGHT_YEAR_M = 9460730472580800;
+const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({ system, star: SCENE_OBJECTS.find(object => object.id === system.id)! }));
+const hostedSystems = systems.filter(({ system }) => system.id !== SOLAR_SYSTEM_ID)
+  .map(({ system, star }) => ({ system, star, distanceLy: Math.round(star.distance.meters / LIGHT_YEAR_M) }))
+  .sort((a, b) => a.distanceLy - b.distanceLy);
+const unavailableSystems = planetarySystems.unavailable.map(system => ({
+  ...system,
+  markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
+}));
+const searchPlaceholder = 'Search celestial objects...';
+const searchFormId = `${objectId}-search`;
+// Each pill types the plural classification query the search already understands.
+const searchCategories = [
+  { classification: 'planet', icon: 'public', label: 'Planets' },
+  { classification: 'satellite', icon: 'moon_stars', label: 'Moons' },
+  { classification: 'comet', icon: 'motion_blur', label: 'Comets' },
+  { classification: 'asteroid', icon: 'grain', label: 'Asteroids' },
+  { classification: 'star', icon: 'asterisk', label: 'Stars' },
+  { classification: 'nebula', icon: 'grain', label: 'Nebulae' },
+  { classification: 'galaxy', icon: 'public', label: 'Galaxies' },
+] as const;
+---
+
+<header class="explorer-shell-header">
+  <div class="explorer-brand-row">
+    <div class="explorer-shell-wordmark">
+      <CssEarthWordmark />
+    </div>
+    <a class="explorer-brand-version" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">v{__CSSEARTH_VERSION__}</a>
+  </div>
+  <div class="object-search-toolbar">
+    <ExplorerRail objectId={objectId} />
+    <div class="object-search-browser-shell">
+      <form id={searchFormId} class="object-sidebar-search-card" role="search" aria-label="Object search"
+        action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
+        {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
+        <span class="object-sidebar-search-icon" aria-hidden="true">
+          <MaterialSymbol name="search" />
+        </span>
+        <input
+          class="object-sidebar-search"
+          type="search"
+          name="q"
+          maxlength={SEARCH_QUERY_LIMIT}
+          placeholder={searchPlaceholder}
+          aria-label={searchPlaceholder}
+          aria-controls={`${objectId}-object-browser`}
+          aria-expanded="false"
+          autocomplete="off"
+        />
+        <a class="object-sidebar-search-clear" href={activeObject?.route} aria-label="Clear search" title="Clear search">
+          <MaterialSymbol name="close" />
+        </a>
+        <button
+          class="object-sidebar-view-all"
+          type="submit"
+          aria-controls={`${objectId}-object-browser`}
+          aria-expanded="false"
+          aria-label="Browse celestial objects"
+          title="Browse celestial objects"
+        >
+          <span class="object-search-browser-caret" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="object-search-categories" role="group" aria-label="Browse by type">
+    {searchCategories.map(category => <button
+      class="object-search-category"
+      type="submit" form={searchFormId} name="browse" value={category.label}
+      data-search-query={category.label}
+      data-search-classification={category.classification}
+      aria-pressed="false"
+    ><MaterialSymbol name={category.icon} /><span>{category.label}</span></button>)}
+  </div>
+  <div class="object-header-actions" role="group" aria-label="App actions">
+    <a class="object-header-link" href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+      <GitHubIcon />
+    </a>
+    <button class="object-header-action object-settings-action" type="button" popovertarget={`${objectId}-settings`}
+      aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`}>
+      <MaterialSymbol name="settings" />
+    </button>
+    <label class="object-header-action object-facility-action" title="Machines">
+      <input class="object-facility-toggle" type="checkbox" aria-label="Machines" checked />
+      <MaterialSymbol name="satellite_alt" />
+    </label>
+  </div>
+</header>
+<div class="object-dataset-context-dock">
+<form id={`${objectId}-settings-form`} action={`/${objectId}/`} method="get" data-settings-form hidden>
+  <input type="hidden" name="settings" value="1" />
+  {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+</form>
+<section
+  id={`${objectId}-settings`}
+  class="object-settings-panel explorer-settings-panel"
+  aria-labelledby={`${objectId}-settings-title`}
+  popover="auto"
+>
+  <h2 id={`${objectId}-settings-title`}>{PREPARED_SHELL_TITLES.settings.label}</h2>
+  <div class="object-settings">
+    <label class="object-setting-control object-motion-setting-control">
+      <input class="object-motion-setting" type="checkbox" name="motion" aria-describedby={`${objectId}-motion-description`} disabled />
+      <span class="object-setting-text">Illustrative rotation</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+      <span id={`${objectId}-motion-blocked`} class="object-motion-blocked" hidden>
+        Paused by reduced motion
+      </span>
+    </label>
+    <p id={`${objectId}-motion-description`} class="object-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>
+    {speedSetting && <label class="object-setting-control object-speed-setting-control">
+      <span class="object-setting-text">{speedSetting.label}</span>
+      <input
+        id={`${objectId}-speed-setting`}
+        class="object-speed-setting"
+        type="range"
+        name={speedSetting.name}
+        form={`${objectId}-settings-form`}
+        min="0"
+        max="4"
+        step="1"
+        value={initialSpeedValue}
+        data-state={initialSpeedState}
+        aria-label={`${speedSetting.label}: ${initialSpeedState}`}
+        disabled
+      />
+    </label>}
+    {shadowSetting && <label class="object-setting-control">
+      <input type="checkbox" name={shadowSetting.name} checked={shadowSetting.checked} form={`${objectId}-settings-form`} />
+      <span class="object-setting-text">{shadowSetting.label}</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+    </label>}
+    <label class="object-setting-control object-minimap-setting-control">
+      <input class="object-minimap-setting" type="checkbox" name="minimap" disabled />
+      <span class="object-setting-text">Minimap</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="object-setting-control object-surface-labels-setting-control">
+      <input class="object-surface-labels-setting" type="checkbox" name="surfaceLabels" disabled />
+      <span class="object-setting-text">Surface labels</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="object-setting-control object-three-d-stars-setting-control">
+      <input class="object-three-d-stars-setting" type="checkbox" name="threeDStars" disabled />
+      <span class="object-setting-text">3D stars</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="object-setting-control">
+      <input class="object-heliosphere-setting" type="checkbox" name="heliosphere" disabled />
+      <span class="object-setting-text">Heliosphere</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="object-setting-control">
+      <input class="object-illustration-models-setting" type="checkbox" name="illustrationModels" aria-describedby={`${objectId}-illustration-models-description`} disabled />
+      <span class="object-setting-text">Illustration models</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+    </label>
+    <p id={`${objectId}-illustration-models-description`} class="object-motion-description">Approximate stand-ins only. Body-specific meshes remain available without imagery.</p>
+    {remainingSettings.map((setting) => setting.kind === "cycle" ? (
+      <button class="object-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
+        <span class="object-setting-text">{setting.label}</span>
+      </button>
+      ) : (
+      <label class="object-setting-control">
+        <input type="checkbox" name={setting.name} checked={setting.checked} form={`${objectId}-settings-form`} />
+        <span class="object-setting-text">{setting.label}</span>
+        <span class="object-setting-switch" aria-hidden="true"></span>
+      </label>
+      ))}
+    <button class="object-setting-control object-settings-submit" type="submit" form={`${objectId}-settings-form`}>Apply settings</button>
+  </div>
+</section>
+</div>
+<div class="object-sidebar-frame">
+<aside id={`${objectId}-sidebar`} class="object-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Object information">
+  <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
+    <h2 id={`${objectId}-about-title`}>About</h2>
+    <div class="explorer-about-content">
+      <div class="explorer-about-introduction">
+        <p>A 3D CSS planetary explorer. cssEarth renders planets as real HTML and CSS 3D geometry through <a href="https://github.com/LayoutitStudio/polycss">PolyCSS</a>, without a WebGL or canvas scene renderer.</p>
+        <p>It preprocesses planetary data into browser-ready textures, charts, and retained scene plans, then lets you orbit and inspect one planet at a time.</p>
+      </div>
+      <div class="explorer-about-links" aria-label="About details">
+        <div class="explorer-about-row">
+          <span>Version</span>
+          <span class="explorer-about-link-destination">v{__CSSEARTH_VERSION__}</span>
+        </div>
+        <a class="explorer-about-row explorer-about-link" href="https://github.com/layoutit/cssEarth">
+          <span>Source code</span>
+          <span class="explorer-about-link-destination">github.com/layoutit/cssEarth</span>
+        </a>
+        <a class="explorer-about-row explorer-about-link" href="mailto:agustin@lowpoly.gg">
+          <span>Contact</span>
+          <span class="explorer-about-link-destination">agustin@lowpoly.gg</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <div class="object-drawer-content" id={`${objectId}-information`}>
+    <input class="object-sheet-handle" type="checkbox" aria-label="Expand information sheet" aria-controls={`${objectId}-information`} />
+    {!navigation && <nav
+      id={`${objectId}-object-browser`}
+      class="object-browser maps-object-results"
+      aria-label="Celestial objects"
+      hidden
+    >
+      <ObjectResults activeObjectId={objectId} formId={searchFormId}>
+        <Accordion title="Named features" count={0} class="object-feature-results"
+          aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
+          <p class="object-feature-hint object-destination-hint" role="status"></p>
+          <ul class="object-destination-list">
+            {Array.from({ length: 8 }, () => <li hidden>
+              <a class="object-destination-result">
+                <span class="object-destination-result-name"></span>
+                <span class="object-destination-result-context"></span>
+              </a>
+            </li>)}
+          </ul>
+        </Accordion>
+      </ObjectResults>
+    </nav>}
+    <div class="object-selected-content">
+    {!navigation && <div class="object-context" hidden><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
+        <section class="object-selected-panel">
+          {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
+            <ObjectBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
+          <div class="object-title-row">
+            <p class="object-title object-title-text" data-focus-name></p>
+            <div class="object-title-tags"><span class="object-classification-tag object-title-tag" data-focus-status></span></div>
+          </div>
+          <p class="object-introduction" data-focus-introduction hidden></p>
+          <p class="object-introduction" data-focus-unavailable role="status" hidden
+            data-unavailable-objects={Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id).join(' ')}></p>
+        </section>
+        <InformationTabs idPrefix="prepared-focus" group="prepared-focus" tabs={[{id: 'dataset', label: 'Datasets'}, {id: 'factsheet', label: 'Factsheet'}]} />
+        <div class="object-card-tabpanel" id="prepared-focus-dataset-content" data-information-panel="dataset"
+          data-information-group="prepared-focus" role="region" aria-label="Datasets">
+          <PreparedFocusLenses {objectId} />
+        </div>
+        <div class="object-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
+          data-information-group="prepared-focus" role="region" aria-label="Factsheet">
+          <div class="object-factsheet-body"><div class="object-facts"><ul class="object-primary-facts">
+            <li data-focus-aliases-row hidden><span class="object-fact-label">Also known as</span><span class="object-fact-value" data-focus-aliases></span></li>
+            {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
+              <li><span class="object-fact-label" data-focus-fact-label={id}>{label}</span><span class="object-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
+          </ul></div></div>
+          <PreparedFocusLenses {objectId} factsOnly />
+          <PreparedClusterFacts />
+        </div>
+      </ObjectCard>
+      <ObjectCard class="object-galactic-overview object-overview-card" data-galactic-overview hidden>
+        <ObjectCardHeader heading={false} title={OVERVIEW_TITLES['milky-way']}
+          introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
+          <ObjectBreadcrumbs scope="milky-way" />
+        </ObjectCardHeader>
+        <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information" hidden
+          tabs={[{ id: 'systems', label: 'Systems', count: 1 + hostedSystems.length + unavailableSystems.length },
+            { id: 'factsheet', label: 'Factsheet' }]} />
+        <div class="object-results-scroll object-card-tabpanel" id={`${objectId}-milky-way-systems-content`} hidden
+          role="region" aria-label="Planetary systems">
+          <ul class="object-list">
+            <li>
+              <a class="object-link object-observation-control object-thumbnail-leading" href={`${systemStar.route}?overview=system`} data-browse-solar-system aria-label="Browse Solar System">
+                <span class="object-lens-icon"><ObjectNavigationMarker objectId={systemStar.id} color={systemStar.color} /></span>
+                <span class="object-name object-lens-label">Solar System</span>
+              </a>
+            </li>
+            {hostedSystems.map(({ system, star, distanceLy }) => <li>
+              <a class="object-link object-observation-control object-thumbnail-leading" href={`${system.route}?overview=system`} data-browse-system={system.id} aria-label={`Browse ${system.name}`}>
+                <span class="object-lens-icon"><ObjectNavigationMarker objectId={star.id} color={star.color} /></span>
+                <span class="object-name object-lens-label">{star.name}</span>
+                <span class="object-distance object-lens-detail">
+                  <span class="object-distance-value">≈{distanceLy}</span>{" "}
+                  <span class="object-distance-unit">ly</span>
+                </span>
+              </a>
+            </li>)}
+            {unavailableSystems.map(system => <li>
+              <span class="object-link object-observation-control object-thumbnail-leading" role="link" aria-disabled="true" title="Not available yet">
+                <span class="object-lens-icon"><ObjectNavigationMarker objectId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} /></span>
+                <span class="object-name object-lens-label">{system.name}</span>
+                <span class="object-distance object-lens-detail">
+                  <span class="object-distance-value">≈{system.distanceLy}</span>{" "}
+                  <span class="object-distance-unit">ly</span>
+                </span>
+              </span>
+            </li>)}
+          </ul>
+        </div>
+        <div class="object-results-scroll object-card-tabpanel" id={`${objectId}-milky-way-factsheet-content`} hidden
+          role="region" aria-label="Factsheet">
+          <ObjectFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} embedded />
+        </div>
+      </ObjectCard>
+      <ExtragalacticOverviews />
+      <ObjectCard class="object-overview-card" data-system-results>
+        {systems.map(({ system, star }) => <ObjectCardHeader heading={false} title={SYSTEM_TITLES[system.id]!}
+          data-system-header={system.id} data-system-current={system.id === SOLAR_SYSTEM_ID ? '' : undefined}
+          introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
+          <ObjectBreadcrumbs scope="system" systemId={system.id} />
+        </ObjectCardHeader>)}
+        {/* A dataset that draws something the whole system shares, like a debris disc, belongs to the system, not to its star:
+            the shell moves those options here while the system is the selection, and back to the body card when it is not. */}
+        <div class="object-lenses object-system-datasets" data-system-datasets hidden>
+          <nav class="object-observation-controls" aria-label="Datasets" data-system-dataset-options></nav>
+          <div class="object-lens-details" data-system-dataset-details></div>
+        </div>
+        <div data-solar-system-facts>
+          <InformationTabs idPrefix={`${objectId}-solar-system`} group="solar-system"
+            label="Solar System information" tabs={[{ id: 'factsheet', label: 'Factsheet' }]} />
+          <div class="object-results-scroll object-card-tabpanel"
+            id={`${objectId}-solar-system-factsheet-content`} data-information-panel="factsheet"
+            data-information-group="solar-system" role="region" aria-label="Factsheet">
+            <ObjectFactsheet id={`${objectId}-solar-system`} facts={overviewFacts['solar-system'].facts} embedded />
+          </div>
+        </div>
+      </ObjectCard></div>}
+    {/* Every page carries the selected-city panel: a visit that starts on another body can open a city on Earth. */}
+    <section class="object-destination-panel" aria-label="Selected city" hidden>
+      <button class="object-destination-back" type="button">← Back to {activeObject?.name}</button>
+      <h2 class="object-destination-name"></h2>
+      <p class="object-destination-context"></p>
+      <p class="object-destination-status" role="status"></p>
+    </section>
+    <ObjectInformationPanel {...Astro.props} />
+    {!navigation && <template data-object-card-preview>
+      <section class="object-selected-panel" data-card-preview>
+        <div class="object-title-row">
+          <p class="object-title object-title-text" data-card-preview-name></p>
+          <div class="object-title-tags"><span class="object-classification-tag object-title-tag" data-card-preview-classification></span></div>
+        </div>
+        <p class="object-introduction" data-card-preview-description></p>
+      </section>
+    </template>}
+    </div>
+  </div>
+</aside>
+</div>
+
+<footer class="object-footer" aria-label="View information">
+    <div class="object-view-readout" aria-label="View information">
+      <SourcesLink objectId={objectId} name={Astro.props.title.label} />
+      <a class="explorer-brand-version" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">v{__CSSEARTH_VERSION__}</a>
+      <span class="object-view-context">
+        {DIAGNOSTICS_ENABLED && <button type="button" class="object-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
+        <span class="object-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
+          <span>Epoch: <span data-view-date></span></span>
+          <span class="object-view-separator" aria-hidden="true">·</span>
+        </span>
+        <span class="object-view-coordinates" title="Coordinates at the center of the view" hidden>
+          <span data-view-latitude></span>
+          <span class="object-view-separator" aria-hidden="true">·</span>
+          <span data-view-longitude></span>
+          <span class="object-view-separator" aria-hidden="true">·</span>
+        </span>
+      </span>
+      <span class="object-view-altitude" title="Camera altitude above the selected object's reference surface">
+        <span data-view-distance-label>Altitude:</span> <span data-view-altitude>—</span>
+      </span>
+      <span class="object-view-scale" hidden>
+        <span class="object-view-separator" aria-hidden="true">·</span>
+        <span class="object-view-ruler-slot" aria-hidden="true">
+          <span class="object-view-ruler"><span class="object-view-measure"></span></span>
+        </span>
+        <span data-view-scale-label></span>
+      </span>
+    </div>
+</footer>

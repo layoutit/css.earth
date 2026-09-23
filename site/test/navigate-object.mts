@@ -13,8 +13,8 @@ export function objectName(id: string): string {
 
 /** Search for the body and return its visible result link. */
 export async function revealObjectLink(page: Page, id: string): Promise<Locator> {
-  await page.locator('.planet-sidebar-search').fill(objectName(id));
-  const link = page.locator(`.planet-object-browser a[data-atlas-object="${id}"]:visible`).first();
+  await page.locator('.object-sidebar-search').fill(objectName(id));
+  const link = page.locator(`.object-browser a[data-atlas-object="${id}"]:visible`).first();
   await link.waitFor({ state: 'visible' });
   return link;
 }
@@ -23,5 +23,5 @@ export async function revealObjectLink(page: Page, id: string): Promise<Locator>
  * leave search so an open results panel cannot move the scene being measured. */
 export async function selectObject(page: Page, id: string): Promise<void> {
   await (await revealObjectLink(page, id)).click();
-  await page.locator('.planet-sidebar-search').fill('');
+  await page.locator('.object-sidebar-search').fill('');
 }

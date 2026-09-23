@@ -1,12 +1,12 @@
-# Planet navigation marker sources
+# Navigation marker sources
 
 The navigation uses one prepared atlas of source-derived raster markers.
-Planned planets keep their marker sources here. Implemented planets own their
-marker source and exact preparation recipe inside their adapter. The shared
-assembler reads every input and applies those recipes without a
-planet-specific branch. No cssEarth scene capture is used by the markers.
+This table lists the Sun and the eight planets. A marker source marked adapter-owned, like every
+other object's, lives with its exact preparation recipe inside the object's adapter. The shared
+assembler reads every input and applies those recipes without an
+object-specific branch. No cssEarth scene capture is used by the markers.
 
-| Planet | Source |
+| Object | Source |
 | --- | --- |
 | Sun | https://science.nasa.gov/wp-content/uploads/2024/07/bigsunspot-hmiintensity-00200-print.jpg?w=768 |
 | Mercury | https://science.nasa.gov/wp-content/uploads/2023/11/mercury-messenger-globe-pia15162.jpg |

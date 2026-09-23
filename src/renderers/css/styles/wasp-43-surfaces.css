@@ -1,6 +1,6 @@
-/* WASP-43: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   planet-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.planet-stage[data-object-id="wasp-43"] > :is(.polycss-camera, .wasp-43-corona-layer, .wasp-43-limb-layer) {
+/* WASP-43: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="wasp-43"] > :is(.polycss-camera, .wasp-43-corona-layer, .wasp-43-limb-layer) {
   --wasp-43-scene-side-padding: 16px;
   --wasp-43-reference-width: 1920px;
   --wasp-43-reference-height: 1080px;
@@ -14,8 +14,8 @@
   );
 }
 
-/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
-.planet-stage[data-object-id="wasp-43"] > :is(.wasp-43-corona-layer, .wasp-43-limb-layer) {
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="wasp-43"] > :is(.wasp-43-corona-layer, .wasp-43-limb-layer) {
   position: absolute;
   inset: 0;
   transform-origin: 50% 50%;
@@ -23,23 +23,23 @@
 }
 
 /* Paint order: off-limb context behind the sphere, limb plate above it. */
-.planet-stage[data-object-id="wasp-43"] .wasp-43-corona-layer {
+.object-stage[data-object-id="wasp-43"] .wasp-43-corona-layer {
   z-index: 0;
 }
 
-.planet-stage[data-object-id="wasp-43"] .polycss-camera {
+.object-stage[data-object-id="wasp-43"] .polycss-camera {
   z-index: 1;
 }
 
-.planet-stage[data-object-id="wasp-43"] .wasp-43-limb-layer {
+.object-stage[data-object-id="wasp-43"] .wasp-43-limb-layer {
   z-index: 2;
 }
 
-.planet-stage[data-object-id="wasp-43"] .wasp-43-body {
+.object-stage[data-object-id="wasp-43"] .wasp-43-body {
   transform-style: preserve-3d;
 }
 
-.planet-stage[data-object-id="wasp-43"] .polycss-scene s {
+.object-stage[data-object-id="wasp-43"] .polycss-scene s {
   position: absolute;
   display: block;
   transform-origin: 0 0;
@@ -53,19 +53,19 @@
 
 /* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
    hide their back faces. */
-.planet-stage[data-object-id="wasp-43"] .polycss-scene s:not(.wasp-43-polar) {
+.object-stage[data-object-id="wasp-43"] .polycss-scene s:not(.wasp-43-polar) {
   backface-visibility: visible;
   background-image: var(--wasp-43-surface-image) !important;
 }
 
-.planet-stage[data-object-id="wasp-43"] .polycss-scene s.wasp-43-polar {
+.object-stage[data-object-id="wasp-43"] .polycss-scene s.wasp-43-polar {
   backface-visibility: hidden;
   background-image: var(--wasp-43-poles-image) !important;
 }
 
 /* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
    solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
-.planet-stage[data-object-id="wasp-43"] .wasp-43-corona-layer {
+.object-stage[data-object-id="wasp-43"] .wasp-43-corona-layer {
   background-image: var(--wasp-43-corona-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -76,7 +76,7 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
    sphere is drawn at, so the plate's edge is the sphere's outline. */
-.planet-stage[data-object-id="wasp-43"] .wasp-43-limb-layer {
+.object-stage[data-object-id="wasp-43"] .wasp-43-limb-layer {
   background-image: var(--wasp-43-limb-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -85,17 +85,17 @@
     calc(496px * 1.25 * var(--wasp-43-camera-zoom, 1));
 }
 
-.planet-stage[data-object-id="wasp-43"] .polycss-camera {
+.object-stage[data-object-id="wasp-43"] .polycss-camera {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.planet-stage[data-object-id="wasp-43"] .polycss-scene {
+.object-stage[data-object-id="wasp-43"] .polycss-scene {
   will-change: transform;
 }
 
-.planet-stage[data-object-id="wasp-43"] .polycss-scene s {
+.object-stage[data-object-id="wasp-43"] .polycss-scene s {
   width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;

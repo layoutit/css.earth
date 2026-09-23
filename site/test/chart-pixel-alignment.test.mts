@@ -22,7 +22,7 @@ test('hidden charts schedule no work; visible charts batch reads, retain correct
       removeProperty() { calls.push(`clear:${id}`); } },
   });
   const charts = [chart(0), chart(1)], switcher = new EventTarget();
-  const drawer = { querySelectorAll: (selector: string) => selector === '.planet-chart' ? charts : [switcher] };
+  const drawer = { querySelectorAll: (selector: string) => selector === '.object-chart' ? charts : [switcher] };
   const controller = createChartPixelAlignmentController(drawer as unknown as HTMLElement, windowTarget as BrowserWindow);
   const visibility = (shown: boolean) => required(observe)(charts.map(target => ({ target, isIntersecting: shown, boundingClientRect: { width: shown ? 300 : 0, height: shown ? 100 : 0 } })));
   const flush = () => { const pending = [...frames.values()]; frames.clear(); for (const callback of pending) callback(0); };

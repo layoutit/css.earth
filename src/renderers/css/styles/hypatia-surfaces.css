@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="hypatia"]) > :is(.hypatia-sun-camera, .hypatia-camera, .hypatia-material-root) {
+.object-stage:where([data-object-id="hypatia"]) > :is(.hypatia-sun-camera, .hypatia-camera, .hypatia-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-sun-camera, :where(.planet-stage[data-object-id="hypatia"]) .hypatia-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-body > u {
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-sun-camera, :where(.object-stage[data-object-id="hypatia"]) .hypatia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--hypatia-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-body > .hypatia-polar { background-image: var(--hypatia-poles-image); }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-material-root { z-index: 3; --hypatia-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-material, :where(.planet-stage[data-object-id="hypatia"]) .hypatia-billboard {
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-body > .hypatia-polar { background-image: var(--hypatia-poles-image); }
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-material-root { z-index: 3; --hypatia-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-material, :where(.object-stage[data-object-id="hypatia"]) .hypatia-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-material { background-repeat: no-repeat; transform: rotate(var(--hypatia-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="hypatia"]) .hypatia-billboard { border-radius: 50%; background-color: var(--hypatia-billboard-color); opacity: var(--hypatia-billboard-opacity); }
-.planet-stage:where([data-object-id="hypatia"])[data-lod="billboard"] .hypatia-scene, .planet-stage:where([data-object-id="hypatia"])[data-lod="marker"] .hypatia-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="hypatia"])[data-lod="marker"] .hypatia-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-material { background-repeat: no-repeat; transform: rotate(var(--hypatia-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="hypatia"]) .hypatia-billboard { border-radius: 50%; background-color: var(--hypatia-billboard-color); opacity: var(--hypatia-billboard-opacity); }
+.object-stage:where([data-object-id="hypatia"])[data-lod="billboard"] .hypatia-scene, .object-stage:where([data-object-id="hypatia"])[data-lod="marker"] .hypatia-scene { visibility: hidden; }
+.object-stage:where([data-object-id="hypatia"])[data-lod="marker"] .hypatia-billboard { opacity: 0; }
 

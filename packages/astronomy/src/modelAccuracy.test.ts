@@ -47,7 +47,7 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
 
 const satelliteFixtureMaximumKm = (id: SatelliteId): number => {
   let worst = 0
-  for (const row of HORIZONS[`${id}FromPlanet`]!.rows) {
+  for (const row of HORIZONS[`${id}FromParent`]!.rows) {
     worst = Math.max(worst, distance(satellitePositionKm(id, row.jdTdb), row.positionKm))
   }
   return worst

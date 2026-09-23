@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { PLANET_TITLE_RECIPE as recipe } from '../../src/platform/planet-title-recipe.mts';
+import { OBJECT_TITLE_RECIPE as recipe } from '../../src/platform/object-title-recipe.mts';
 import { hasErrorCode } from '../sources/source-values.mts';
 
 /** Restore only the small font needed to bootstrap the shared shell. */

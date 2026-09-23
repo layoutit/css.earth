@@ -88,7 +88,7 @@ export function selectPreparedResponsiveZoom({
   return Object.freeze({ model: fit.model, widthShare, zoom });
 }
 
-export function measureRetainedPlanetTrackball({
+export function measureRetainedObjectTrackball({
   stage,
   cameraElement,
   logicalBodyDiameter,
@@ -102,7 +102,7 @@ export function measureRetainedPlanetTrackball({
   const view = cameraElement.ownerDocument.defaultView;
   if (!view) throw new Error("Camera document has no window.");
   const style = view.getComputedStyle(cameraElement);
-  const scale = retainedPlanetUniformScale(style.scale) ?? Math.min(
+  const scale = retainedObjectUniformScale(style.scale) ?? Math.min(
     cameraBounds.width / stageBounds.width,
     cameraBounds.height / stageBounds.height,
   );
@@ -140,7 +140,7 @@ export function measureRetainedPlanetTrackball({
   return metrics;
 }
 
-export function measureRetainedPlanetFlyToDisc({
+export function measureRetainedObjectFlyToDisc({
   stage,
   cameraElement,
   logicalBodyDiameter,
@@ -162,7 +162,7 @@ export function measureRetainedPlanetFlyToDisc({
   return metrics;
 }
 
-export function retainedPlanetUniformScale(value: string) {
+export function retainedObjectUniformScale(value: string) {
   if (typeof value !== "string" || value === "none") return null;
   const components = value.trim().split(/\s+/u).slice(0, 2)
     .map(Number);

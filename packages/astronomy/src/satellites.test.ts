@@ -162,7 +162,7 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
 
 describe('satellite ephemerides against JPL Horizons', () => {
   it.each(SATELLITE_IDS)('places %s within its fit residual at epochs the fit never saw', (id) => {
-    const fixture = HORIZONS[`${id}FromPlanet`]!
+    const fixture = HORIZONS[`${id}FromParent`]!
     expect(fixture.rows.length).toBe(6)
     let worst = 0
     for (const row of fixture.rows) {
@@ -187,7 +187,7 @@ describe('satellite ephemerides against JPL Horizons', () => {
 
   it.each(SATELLITE_IDS)('checks %s only against independent vectors inside its source fit window', (id) => {
     const record = satelliteRecord(id)
-    for (const row of HORIZONS[`${id}FromPlanet`]!.rows) {
+    for (const row of HORIZONS[`${id}FromParent`]!.rows) {
       expect(row.jdTdb).toBeGreaterThan(record.fitFromJdTdb)
       expect(row.jdTdb).toBeLessThan(record.fitToJdTdb)
       expect((row.jdTdb - record.fitFromJdTdb) % record.fitStepDays).not.toBe(0)
@@ -197,7 +197,7 @@ describe('satellite ephemerides against JPL Horizons', () => {
   it.each(SATELLITE_IDS)('gets %s to the right distance from its planet, not just the right direction', (id) => {
     // Separated out because a wrong Laplace basis moves the direction and
     // leaves the radius alone, while a wrong semi-major axis does the reverse.
-    const fixture = HORIZONS[`${id}FromPlanet`]!
+    const fixture = HORIZONS[`${id}FromParent`]!
     for (const row of fixture.rows) {
       const computed = magnitude(satellitePositionKm(id, row.jdTdb))
       const reference = magnitude(row.positionKm)

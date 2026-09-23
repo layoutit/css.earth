@@ -1,5 +1,5 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="earth"]) > .polycss-camera {
+.object-stage:where([data-object-id="earth"]) > .polycss-camera {
   --earth-side-padding: 16px;
   --earth-shell-scale: min(
     1,
@@ -8,13 +8,13 @@
   );
   position: absolute;
   inset: 0;
-  scale: calc(var(--earth-shell-scale) / var(--planet-viewport-zoom-divisor));
+  scale: calc(var(--earth-shell-scale) / var(--object-viewport-zoom-divisor));
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="earth"]) .polycss-scene {
+:where(.object-stage[data-object-id="earth"]) .polycss-scene {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,17 +24,17 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="earth"]) .polycss-mesh {
+:where(.object-stage[data-object-id="earth"]) .polycss-mesh {
   position: absolute;
   transform-style: preserve-3d;
   transform-origin: 0 0 0;
 }
 
-:where(.planet-stage[data-object-id="earth"]) .earth-material-counter {
+:where(.object-stage[data-object-id="earth"]) .earth-material-counter {
   transform-style: preserve-3d;
 }
 
-:where(.planet-stage[data-object-id="earth"]) .polycss-scene s {
+:where(.object-stage[data-object-id="earth"]) .polycss-scene s {
   position: absolute;
   display: block;
   width: var(--polycss-atlas-width, 64px);
@@ -48,7 +48,7 @@
   text-decoration: none;
 }
 
-:where(.planet-stage[data-object-id="earth"]) .earth-body {
+:where(.object-stage[data-object-id="earth"]) .earth-body {
   transform-style: preserve-3d;
   animation-name: earth-sphere-spin;
   animation-timing-function: linear;
@@ -56,23 +56,23 @@
   animation-play-state: paused;
 }
 
-:where(.planet-stage[data-object-id="earth"]) .earth-body:not(.earth-body-polar) > s,
-:where(.planet-stage[data-object-id="earth"]) .earth-cutaway-body:not(.earth-cutaway-body-polar) > s {
+:where(.object-stage[data-object-id="earth"]) .earth-body:not(.earth-body-polar) > s,
+:where(.object-stage[data-object-id="earth"]) .earth-cutaway-body:not(.earth-cutaway-body-polar) > s {
   background-image: var(--earth-surface-texture);
 }
 
-:where(.planet-stage[data-object-id="earth"]) .earth-body-polar > s,
-:where(.planet-stage[data-object-id="earth"]) .earth-cutaway-body-polar > s {
+:where(.object-stage[data-object-id="earth"]) .earth-body-polar > s,
+:where(.object-stage[data-object-id="earth"]) .earth-cutaway-body-polar > s {
   background-image: var(--earth-poles-texture);
 }
 
 /* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
-:where(.planet-stage[data-object-id="earth"]) .earth-cutaway {
+:where(.object-stage[data-object-id="earth"]) .earth-cutaway {
   display: none;
   visibility: hidden;
 }
 
-.planet-stage:where([data-object-id="earth"])[data-view="interior"] :is(
+.object-stage:where([data-object-id="earth"])[data-view="interior"] :is(
   .earth-body,
   .earth-lighting-material,
   .earth-atmosphere-material
@@ -80,16 +80,16 @@
   visibility: hidden;
 }
 
-.planet-stage:where([data-object-id="earth"])[data-view="interior"] .earth-cutaway {
+.object-stage:where([data-object-id="earth"])[data-view="interior"] .earth-cutaway {
   display: block;
   visibility: visible;
 }
 
-.planet-stage:where([data-object-id="earth"])[data-lens="night-lights"] .earth-lighting-material {
+.object-stage:where([data-object-id="earth"])[data-lens="night-lights"] .earth-lighting-material {
   visibility: hidden;
 }
 
-.planet-stage:where([data-object-id="earth"]).earth-hide-atmosphere .earth-atmosphere-material {
+.object-stage:where([data-object-id="earth"]).earth-hide-atmosphere .earth-atmosphere-material {
   visibility: hidden;
 }
 

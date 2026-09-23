@@ -1,7 +1,7 @@
 import { distanceDescription } from './navigation-distance.mts';
 import { FOCUS_SOURCE_DOCUMENTS } from './focus-catalog-data.mts';
 import { isSceneObject } from './prepared-focus-object.mts';
-import { objectClassificationLabel, PLANET_SEARCH_OBJECTS } from './planet-search-objects.mts';
+import { objectClassificationLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from './sidebar-thumbnails.mts';
 import { sourceDocumentation } from './source-documentation.mts';
 import type { CatalogueIndex } from './catalogue-index.mts';
@@ -11,7 +11,7 @@ import { sha256 } from '../src/platform/sha256.mts';
 export function preparedCatalogueIndex(): CatalogueIndex {
   return Object.freeze({
     schema: 'cssearth-catalogue-index@1',
-    entries: Object.freeze(PLANET_SEARCH_OBJECTS.map(object => {
+    entries: Object.freeze(SEARCH_OBJECTS.map(object => {
       const title = distanceDescription(object.distance);
       if (isSceneObject(object)) {
         const source = sourceDocumentation(object.id, object.name);

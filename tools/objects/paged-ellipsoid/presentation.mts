@@ -69,7 +69,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     ...plan.interior.shells.flatMap(shell=>shell.leaves),...plan.interior.sectionLeaves,
     plan.material.lighting.leaf,plan.material.atmosphere.leaf];
   const b=createPreparedNodeTree({cssomReads:await prepareCssomDeclarationReads(allLeaves.map(leaf=>leaf.style))});
-  const camera=b.element("div","polycss-camera planet-render-root",plan.camera.style);
+  const camera=b.element("div","polycss-camera object-render-root",plan.camera.style);
   const scene=b.element("div","polycss-scene",plan.camera.sceneStyle);
   const system=b.mesh(`${config.namespace}-system`,systemTransform);
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);

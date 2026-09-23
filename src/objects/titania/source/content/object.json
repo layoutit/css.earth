@@ -305,6 +305,6 @@
     "letterSpacing": -0.1,
     "baseline": 29,
     "xOrigin": "trim-left-bearing",
-    "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+    "sourceGenerator": "tools/prepare/prepare-object-title-sources.mts"
   }
 }

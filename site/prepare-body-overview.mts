@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireSceneObject } from './objects.mts';
-import { objectClassificationLabel } from './planet-search-objects.mts';
+import { objectClassificationLabel } from './search-objects.mts';
 import { parseSpectrumRecipe, readSpectrumData } from '../tools/objects/content/spectrum-data.mts';
 import { renderCompactSpectrum } from '../tools/objects/content/compact-spectrum.mts';
 

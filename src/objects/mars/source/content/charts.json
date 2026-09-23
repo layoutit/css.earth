@@ -93,7 +93,7 @@
           "retrievedAt": "2026-09-01",
           "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
         },
-        "planetId": "mars",
+        "objectId": "mars",
         "samples": 181,
         "maximumAngleDegrees": 180,
         "qualification": "The published greater-than-50-degree branch is an approximation derived by averaging the Mercury and Earth dimming curves.",

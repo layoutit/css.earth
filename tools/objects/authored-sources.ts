@@ -42,7 +42,7 @@ export async function verifiedSource(objectDirectory: string, manifest: Authored
 /** The authored descriptor, its manifest, and every recipe source verified against the manifest. */
 export async function readAuthoredSources(objectDirectory: string, descriptorValue?: unknown): Promise<AuthoredSources> {
   const descriptor = parseAuthoredObjectDescriptor(descriptorValue ?? JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')) as unknown);
-  const manifest = await createSourceManifest({ planetId: descriptor.id, planetName: descriptor.id, sourceRoot: resolve(objectDirectory, 'source') });
+  const manifest = await createSourceManifest({ objectId: descriptor.id, objectName: descriptor.id, sourceRoot: resolve(objectDirectory, 'source') });
   const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, manifest, reference)));
   return Object.freeze({ descriptor, manifest, entries, sources: new Map(entries.map(entry => [entry.reference.id, entry])) });
 }

@@ -100,7 +100,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   const scene = requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8')));
   const document = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8'))), oldSurfaces = records(document.surfaces);
   const sourceDirectory = resolve(objectDirectory, 'source');
-  const source = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: sourceDirectory });
+  const source = await createSourceManifest({ objectId: id, objectName: id, sourceRoot: sourceDirectory });
   await mkdir(stage, { recursive: true });
   sharp.concurrency(1); sharp.cache(false);
   const emit = createRasterEmitter(stage, config.publicBase), surfaces: RadialMaterialSurface[] = [];
@@ -125,7 +125,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     if (terrain.sourceLighting) {
       const localSource = await access(resolve(sourceDirectory, requireString(terrain.path))).then(() => true, () => false);
       const lightingDirectory = !localSource && sourceRoot ? resolve(sourceRoot, 'src/objects', id, 'source') : sourceDirectory;
-      const lightingSource = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: lightingDirectory });
+      const lightingSource = await createSourceManifest({ objectId: id, objectName: id, sourceRoot: lightingDirectory });
       if (!lightingSource.manifest.inputs.some(entry => entry.path === terrain.path)) throw new Error('Source lighting mesh is not declared in that checkout.');
       grid = (await loadRadialTerrain({ config: { ...config, geometry: { ...config.geometry, radialTerrain: terrain } }, sourceDirectory: lightingDirectory, source: lightingSource }))?.grid;
     }

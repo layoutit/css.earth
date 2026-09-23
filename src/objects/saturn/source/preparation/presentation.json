@@ -40,6 +40,6 @@
   "stylesheet": {
     "path": "src/renderers/css/styles/saturn-surfaces.css",
     "bytes": 8576,
-    "scope": ":where(.planet-stage[data-object-id=\"saturn\"]) "
+    "scope": ":where(.object-stage[data-object-id=\"saturn\"]) "
   }
 }

@@ -1,7 +1,7 @@
 ---
 import type { PreparedFocusObject } from '../prepared-focus-object.mts';
 import { distanceDescription } from '../navigation-distance.mts';
-import { objectClassificationLabel } from '../planet-search-objects.mts';
+import { objectClassificationLabel } from '../search-objects.mts';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { FOCUS_SOURCE_DOCUMENTS } from '../focus-catalog-data.mts';
 interface Props { object: PreparedFocusObject; hidden?: boolean; }
@@ -9,17 +9,17 @@ const { object, hidden = false } = Astro.props;
 const source = FOCUS_SOURCE_DOCUMENTS.get(object.id);
 if (!source) throw new Error(`Missing focus source document: ${object.id}`);
 ---
-<li class="planet-object-item" role="listitem" hidden={hidden} data-navigation-object-id={object.id}
+<li class="object-item" role="listitem" hidden={hidden} data-navigation-object-id={object.id}
   data-object-name={object.name.toLocaleLowerCase('en')}
   data-object-search-names={JSON.stringify(object.searchNames)}
   data-object-distance-m={object.distance.meters}
   data-object-system-name={object.systemName.toLocaleLowerCase('en')}
   data-object-classification={object.classification} data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase('en')}>
-  <a class="planet-object-link planet-observation-control planet-thumbnail-leading"
+  <a class="object-link object-observation-control object-thumbnail-leading"
     href={object.route} data-prepared-focus-id={object.focusId}
     data-source-subject={`focus:${object.focusId}`} data-source-document={source.href} data-source-label={source.label}>
-    <span class="planet-lens-icon"><ContextNavigationMarker objectId={object.id} /></span>
-    <span class="planet-object-name planet-lens-label">{object.name}</span>
-    <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={`${object.distance.value} pc. ${distanceDescription(object.distance)}`}>{new Intl.NumberFormat('en', { maximumSignificantDigits: 4 }).format(object.distance.value)} pc{object.distance.quantity === 'comoving' ? ' (comoving)' : ''}</span>
+    <span class="object-lens-icon"><ContextNavigationMarker objectId={object.id} /></span>
+    <span class="object-name object-lens-label">{object.name}</span>
+    <span class="object-distance object-lens-detail" title={distanceDescription(object.distance)} aria-label={`${object.distance.value} pc. ${distanceDescription(object.distance)}`}>{new Intl.NumberFormat('en', { maximumSignificantDigits: 4 }).format(object.distance.value)} pc{object.distance.quantity === 'comoving' ? ' (comoving)' : ''}</span>
   </a>
 </li>
