@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, loadSystemViews, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyCardViewAtCamera } from '../overview-context.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
@@ -16,6 +16,8 @@ import { required, position, quaternion, navigationFixture, unusedSharedView } f
 import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
+// System framing's candidates load after the first body mounts in the app; these tests need them loaded.
+await loadSystemViews();
 const context = parsePreparedWorldContext(contextInput);
 // Target calculation never requests native frames or queries absent shell nodes.
 const windowTarget = {} as Window;
@@ -27,12 +29,12 @@ const optics: ReturnType<ObjectWorldNavigation["optics"]> = { visibleRect: null,
   principalOffsetPixels: [0,0], widthPixels: 1280, heightPixels: 720 };
 const mount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => world, () => optics) };
 
-test('fitting the current angle is independent of prepared box order and member names', () => {
+test('fitting the current angle is independent of prepared box order', () => {
   const view = required(SYSTEM_VIEWS.get('neptune'));
   const frame = required(required(SCENE_OBJECTS.find(object => object.id === 'neptune')).worldFrame);
   const rect = systemFramingRect(optics);
   const target = systemViewTarget(world, frame, optics, view, rect);
-  const reordered = { ...view, candidates: [...view.candidates].reverse(), memberIds: view.memberIds.map((_, i) => `member-${i}`) };
+  const reordered = { ...view, candidates: [...view.candidates].reverse() };
   assert.deepEqual(systemViewTarget(world, frame, optics, reordered, rect), target);
   assert.deepEqual(target.pose.orientationXyzw, world.pose.orientationXyzw);
 });
@@ -56,11 +58,12 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
     const centering = Math.max(1e-5, 8 * Number.EPSILON * Math.max(...frame.originM.map(Math.abs)) / range * viewport.focalPixels);
     assert.ok(required(projection.centerPixels).every(value => Math.abs(value) < centering), `${id} stays centered`);
     const moons = context.bodies.filter(body => body.orbit?.centerBodyId === id);
-    for (const moon of moons.filter(moon => view.memberIds.includes(moon.id))) {
+    const memberIds = required([context.focus, ...context.bodies].find(body => body.id === id)?.systemView).memberIds;
+    for (const moon of moons.filter(moon => memberIds.includes(moon.id))) {
       const orbit = required(moon.orbit), bound = required(orbit.bounds);
       assert.ok(Math.hypot(...bound.centerM.map((value: number, axis: number): number => value - frame.originM[axis]))
         + bound.radiusM + moon.radiusM <= radiusM * (1 + 1e-10), `${id} includes ${moon.id}`);
-      assert.ok(view.memberIds.includes(moon.id), `${id} frames ${moon.id}`);
+      assert.ok(memberIds.includes(moon.id), `${id} frames ${moon.id}`);
       for (const vertex of orbitVertices(orbit)) {
         const point = presentWorldCamera(target, { ...frame, originM: vertex, bodyRadiusM: moon.radiusM }, viewport);
         const [x, y] = required(point.centerPixels);
@@ -119,7 +122,7 @@ function lookingAlong(direction: readonly number[]): [number, number, number, nu
 
 test('selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat', () => {
   const planets = SCENE_OBJECTS.filter(object => object.classification === 'planet').map(object => object.id).sort();
-  assert.deepEqual([...required(SYSTEM_VIEWS.get(context.focus.id)).memberIds].sort(), planets);
+  assert.deepEqual([...required(context.focus.systemView).memberIds].sort(), planets);
   const parent = required(required(SCENE_OBJECTS.find(object => object.id === 'uranus')).worldFrame);
   const close = createWorldSelectionTarget(world, parent, optics);
   const mount = { sharedView: unusedSharedView, navigation: navigationFixture(parent, () => close, () => optics) };

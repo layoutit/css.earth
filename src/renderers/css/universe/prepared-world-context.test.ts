@@ -11,7 +11,9 @@ import { createWorldContextFrameEncoder } from './world-context/world-context-fr
 import { createWorldContextPlanner, CONTEXT_LINE_WIDTH } from './world-context/world-context-planner.js';
 import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { labelImportance } from '../labels/universe-label-policy.js';
-import { SYSTEM_RANGES, SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
+import { SYSTEM_RANGES, SYSTEM_VIEWS, loadSystemViews, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
+// System framing's candidates load after the first body mounts in the app; these tests need them loaded.
+await loadSystemViews();
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];

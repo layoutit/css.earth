@@ -10,6 +10,9 @@ import { required, objectFixture, navigationFixture } from './navigation-test-va
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { ObjectWorldNavigationListener } from '../../src/renderers/css/runtime/world-navigation-types.ts';
 import type { OverviewSelection } from '../overview-selection.mts';
+import { loadSystemViews } from '../system-framing.mts';
+// System framing's candidates load after the first body mounts in the app; these tests need them loaded.
+await loadSystemViews();
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
 /** CSS presentation to a right-handed reference: a reflection. */
 const reflection = [1, 0, 0, 0, -1, 0, 0, 0, 1] as const;

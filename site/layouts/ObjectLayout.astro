@@ -17,6 +17,9 @@ import "../minimap/minimap.css";
 import type { PreparedSceneMarkup } from '../../tools/prepared/serialize-prepared-scene.mts';
 import type { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
+// The world summary every application module reads when it loads (`site/world-context-plan.mts`); the same file,
+// so the head can start it with the HTML instead of after the router has downloaded.
+import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 
 interface Props {
   objectId: string;
@@ -55,6 +58,19 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <meta name="twitter:image:alt" content={seo.imageAlt} />
     <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    {!navigation && <link rel="preload" href={worldSummaryUrl} as="fetch" crossorigin="anonymous" />}
+    {!navigation && descriptor?.prepared?.url === 'prepared/object.json' &&
+      <link rel="preload" href={`/objects/${objectRecord.id}/object.json`} as="fetch" crossorigin="anonymous" />}
+    {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
+    {!navigation && <script>
+      import { bindNativeViewForms } from '../native-view-forms.mts';
+      bindNativeViewForms(document, window);
+      import("../scene/scene-router.mts").catch(error => {
+        document.documentElement.dataset.ready = 'error';
+        delete document.documentElement.dataset.shellContext;
+        console.error('The interactive scene could not load.', error);
+      });
+    </script>}
     {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
     <slot name="object-head" />
     <title>{seo.title}</title>
@@ -87,14 +103,5 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
       <div class="object-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
       <div class="object-scene-overlays"></div>
     </div>
-    {!navigation && <script>
-      import { bindNativeViewForms } from '../native-view-forms.mts';
-      bindNativeViewForms(document, window);
-      import("../scene/scene-router.mts").catch(error => {
-        document.documentElement.dataset.ready = 'error';
-        delete document.documentElement.dataset.shellContext;
-        console.error('The interactive scene could not load.', error);
-      });
-    </script>}
   </body>
 </html>

@@ -14,7 +14,7 @@ const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
-import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as context, readApplicationSystemViews } from './world-context-plan.mts';
 
 /** Camera framing consumes the prepared orbit bounds, never orbit vertices. */
 export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>) {
@@ -54,7 +54,17 @@ export const SYSTEM_CENTERS = systemCenters(context);
 /** Systems of other stars: placed stars, which have no orbit of their own, that planets orbit. They are reached from light
  * years away, where a turn out of edge-on reads as an approach; the Sun's and a planet's moons keep the departure angle. */
 export const STELLAR_SYSTEMS: ReadonlySet<string> = new Set(context.bodies.filter(body => body.systemView && !body.orbit).map(body => body.id));
-export const SYSTEM_VIEWS = new Map([context.focus, ...context.bodies].filter(body => body.systemView).map(body => [body.id, body.systemView]));
+/** System overview camera candidates by host. Empty until `loadSystemViews` resolves; navigation awaits it first. */
+export const SYSTEM_VIEWS = new Map<string, SystemView>();
+/** Hosts whose overview is framed by prepared candidates. */
+export const SYSTEM_VIEW_HOSTS: ReadonlySet<string> = new Set([context.focus, ...context.bodies].filter(body => body.systemView).map(body => body.id));
+export const systemViewsLoaded = () => SYSTEM_VIEWS.size === SYSTEM_VIEW_HOSTS.size;
+let systemViewsLoading: Promise<void> | null = null;
+export function loadSystemViews(): Promise<void> {
+  systemViewsLoading ??= readApplicationSystemViews().then(views => { for (const [id, view] of views) SYSTEM_VIEWS.set(id, view); })
+    .catch(error => { systemViewsLoading = null; throw error; });
+  return systemViewsLoading;
+}
 /** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
 export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);

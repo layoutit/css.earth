@@ -1,4 +1,5 @@
 import { createSceneLifetime } from '@cssearth/engine';
+import type { SceneFramePresenter } from './scene-world.mts';
 import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/deferred-object-mount.js';
 import type { MountOptions, SceneFactory } from '../browser-types.mts';
 import { errorMessage } from '../browser-types.mts';
@@ -48,7 +49,7 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
   const session = {
     objectId, url, request,
     shell: null as ObjectShell | null,
-    framePresenter: undefined as (NonNullable<MountOptions['framePresenter']> & { enable(): void }) | undefined,
+    framePresenter: undefined as SceneFramePresenter | undefined,
     get state() { return state; },
     get live(): boolean { return state.kind === 'loading' || state.kind === 'ready'; },
     get mount(): ObjectSceneLifecycle | null { return session.live && 'mount' in state ? state.mount : null; },
