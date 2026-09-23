@@ -38,7 +38,7 @@ import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
 import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
-import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
+import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
 import { productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
@@ -1101,8 +1101,12 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   progress?.('Reading local evidence');
   const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
   const sky = typeof targetOrRequest !== 'string' && 'skyTarget' in targetOrRequest ? targetOrRequest.skyTarget : undefined;
-  const objectRoot = resolve(root, 'src/objects'), targetCatalogue = [...await loadTargetCatalogue(root), ...sky ? [skyCatalogueEntry(sky)] : []];
-  const resolution = resolveTarget(target, targetCatalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
+  const objectRoot = resolve(root, 'src/objects'), catalogue = [...await loadTargetCatalogue(root), ...sky ? [skyCatalogueEntry(sky)] : []];
+  const resolution = resolveTarget(target, catalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
+  const enteredName = typeof targetOrRequest !== 'string' && 'requestedTargetName' in targetOrRequest && typeof targetOrRequest.requestedTargetName === 'string'
+    ? targetOrRequest.requestedTargetName : target;
+  const targetCatalogue = typeof targetOrRequest === 'string' || resolution.status !== 'resolved' ? catalogue
+    : withRequestedTargetName(enteredName, canonicalTarget, catalogue);
   const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
     const path = `data/${telescope}/ledger.json`;
@@ -1126,7 +1130,8 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   const sourceIntakeIssues: SourceIntakeIssue[] = [];
   const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues, { fetchRemote: false }) : [];
   if(typeof targetOrRequest !== 'string' && resolution.status === 'resolved')progress?.('Searching VO archives and access descriptions');
-  const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root, { ...targetOrRequest, target: canonicalTarget }, targetCatalogue, selectedObservation) : undefined;
+  const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root,
+    canonicalTargetRequest(targetOrRequest, canonicalTarget), targetCatalogue, selectedObservation) : undefined;
   return { ...(vo ? { vo } : {}), sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 

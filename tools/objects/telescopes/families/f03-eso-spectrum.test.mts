@@ -60,3 +60,15 @@ test('real ESPRESSO excerpt agrees with independent Astropy 8.0.1 values', async
   assert.equal(source.fluxUnit, reference.fluxUnit);
   assert.deepEqual(source.samples.map(({ segment: _segment, ...sample }) => sample), reference.samples);
 });
+
+test('real UVES excerpt accepts ESO lowercase v2.0 and selects calibrated FLUX over reduced counts', async () => {
+  const fixture = new URL('../../../../tests/fixtures/telescope-vo/eso-spectrum/', import.meta.url);
+  const reference = JSON.parse(await readFile(new URL('uves-astropy-reference.json', fixture), 'utf8'));
+  const source = readEsoSpectrum(await readFile(new URL('uves-hd189733-excerpt.fits', fixture)));
+  assert.equal(reference.voClass, 'SPECTRUM v2.0');
+  assert.equal(source.nativeSamples, reference.excerptNativeEndExclusive - reference.excerptNativeStart);
+  assert.equal(source.wavelengthUnit, reference.wavelengthUnit);
+  assert.equal(source.fluxUnit, reference.fluxUnit);
+  assert.equal(source.qualityColumn, true);
+  assert.deepEqual(source.samples.map(({ segment: _segment, ...sample }) => sample), reference.samples);
+});

@@ -27,7 +27,7 @@ export function readEsoSpectrum(bytes: Buffer): EsoSpectrum {
   const tables = hdus.flatMap((hdu, index) => hdu.header.XTENSION === 'BINTABLE' ? [index] : []);
   if (tables.length !== 1) throw new TypeError('ESO SDP requires exactly one spectral BINTABLE.');
   const hdu = tables[0]!, table = binaryTable(hdus[hdu]!), header = table.hdu.header;
-  if (!['SPECTRUM V1.0', 'SPECTRUM V2.0'].includes(String(header.VOCLASS))) throw new TypeError('Unsupported ESO SDP VOCLASS.');
+  if (!/^SPECTRUM [Vv][12]\.0$/u.test(String(header.VOCLASS))) throw new TypeError('Unsupported ESO SDP VOCLASS.');
   if (table.rows !== 1) throw new TypeError('ESO SDP spectrum must contain one vector-valued record.');
   const count = header.NELEM;
   if (typeof count !== 'number' || !Number.isSafeInteger(count) || count < 1) throw new TypeError('ESO SDP NELEM must be a positive sample count.');
