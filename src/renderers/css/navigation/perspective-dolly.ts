@@ -339,36 +339,33 @@ export function createPerspectiveDolly({
   // proxy. In the marker stage the opaque marker or point-source star stands for
   // the body. A mesh there adds a few pixels yet keeps hundreds of composited 3D
   // leaves alive, so it leaves layout until the body resolves.
-  // On entry its prepared groups join across frames, so the leaves' layers are
-  // created across paints. Each frame admits whole groups up to a leaf budget:
-  // a fixed frame count gave Uranus 384 leaves per frame, whose style, layerize
-  // and paint took 15 ms and dropped the frame. The proxy beneath carries the
-  // body's colour.
-  const REVEAL_LEAVES_PER_FRAME = 128;
+  // On entry its prepared leaves join across frames, so their layers are created across paints. Each leaf becomes
+  // its own compositing layer, and on an iPhone creating one costs about 1.1 ms: whole 64-leaf groups made the Sun's
+  // arrival three 140 ms frames. The prepared group order is kept, but a frame admits leaves, not whole groups, up to
+  // a budget that fits a frame there. The proxy beneath carries the body's colour meanwhile.
+  const REVEAL_LEAVES_PER_FRAME = 16;
   const revealView = cameraElement.ownerDocument.defaultView;
   const revealClock = revealView && createOpacityClock(revealView);
-  const revealed = new Uint8Array(revealGroups.length).fill(1);
-  let revealCount = revealGroups.length, revealFrame: number | null = null;
+  const revealLeaves = revealGroups.flat();
+  const revealed = new Uint8Array(revealLeaves.length).fill(1);
+  let revealCount = revealLeaves.length, revealFrame: number | null = null;
   // Flight activation writes the same nodes while the scene is hidden, so the
-  // entry reset checks each node rather than the cached group state.
+  // entry reset checks each node rather than the cached leaf state.
   const revealTo = (count: number, reset = false) => {
     revealCount = count;
-    for (let group = 0; group < revealed.length; group++) {
-      const show = group < count ? 1 : 0;
-      if (!reset && revealed[group] === show) continue;
-      revealed[group] = show;
-      const display = show ? '' : 'none';
-      for (const node of revealGroups[group]!) if (node.style.display !== display) node.style.display = display;
+    for (let leaf = 0; leaf < revealed.length; leaf++) {
+      const show = leaf < count ? 1 : 0;
+      if (!reset && revealed[leaf] === show) continue;
+      revealed[leaf] = show;
+      const node = revealLeaves[leaf]!, display = show ? '' : 'none';
+      if (node.style.display !== display) node.style.display = display;
     }
   };
   const continueReveal = () => {
     revealFrame = null;
-    if (sceneElement.hidden || revealCount >= revealGroups.length) return;
-    let count = revealCount, leaves = 0;
-    do leaves += revealGroups[count++]!.length;
-    while (count < revealGroups.length && leaves + revealGroups[count]!.length <= REVEAL_LEAVES_PER_FRAME);
-    revealTo(count);
-    if (revealCount < revealGroups.length) revealFrame = revealClock!.request(continueReveal);
+    if (sceneElement.hidden || revealCount >= revealLeaves.length) return;
+    revealTo(Math.min(revealLeaves.length, revealCount + REVEAL_LEAVES_PER_FRAME));
+    if (revealCount < revealLeaves.length) revealFrame = revealClock!.request(continueReveal);
   };
   const capturePresentation = (sceneMatrix: Matrix3dLike, scenePresentation: string) => ({
     distance: cameraState.distance, rotation: rotationFromMatrix3d(sceneMatrix), scenePresentation,
@@ -407,7 +404,7 @@ export function createPerspectiveDolly({
           transformWrites += 1;
         }
       }
-      if (revealGroups.length && revealView) {
+      if (revealLeaves.length && revealView) {
         if (hidden && revealFrame !== null) { revealClock!.cancel(revealFrame); revealFrame = null; }
         if (!hidden && sceneElement.hidden) {
           revealTo(0, true);
