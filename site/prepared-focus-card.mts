@@ -1,6 +1,7 @@
 import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
-import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
+import { preparedFocusObjectId } from './prepared-focus.mts';
+import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { requiredElement } from './browser-types.mts';
 
 interface PreparedFocusCard {
@@ -33,13 +34,13 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   for (const bank of banks) {
     for (const button of bank.buttons) button.addEventListener('click', event => {
       if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
-        event.preventDefault(); currentPresentation.selectLens(button.value);
+        event.preventDefault(); currentPresentation.selectLens(button.getAttribute('value') ?? '');
       }
     }, { signal: events.signal });
   }
   const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
     const previous = currentPresentation?.objectId;
-    currentPresentation = record && !isPreparedCluster(record) && record.detailedObjectId === presentation?.objectId ? presentation : null;
+    currentPresentation = record && preparedFocusObjectId(record) === presentation?.objectId ? presentation : null;
     if (datasetTab) datasetTab.hidden = !currentPresentation;
     if (record && (record.id !== currentRecordId || previous !== currentPresentation?.objectId))
       showTab(currentPresentation ? 'dataset' : 'factsheet');
@@ -50,8 +51,10 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       if (!active || !currentPresentation) continue;
       const available = new Set(currentPresentation.lenses.map(lens => lens.id));
       for (const button of bank.buttons) {
-        button.disabled = !available.has(button.value);
-        const pressed = String(button.value === currentPresentation.selectedLens);
+        // Read the prepared attribute in both the server DOM and the live browser.
+        const lens = button.getAttribute('value') ?? '';
+        button.disabled = !available.has(lens);
+        const pressed = String(lens === currentPresentation.selectedLens);
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
@@ -61,7 +64,8 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   return { set(record, sources = [], presentation = null) {
     setPresentation(record, presentation);
     if (unavailable) {
-      const missing = record && !isPreparedCluster(record) && record.detailedObjectId && unavailableIds.has(record.detailedObjectId);
+      const objectId = record && preparedFocusObjectId(record);
+      const missing = objectId && unavailableIds.has(objectId);
       unavailable.hidden = !missing;
       unavailable.textContent = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
     }

@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createPreparedFocusCard } from '../prepared-focus-card.mts';
 import type { PreparedGalaxyRecord } from '@cssearth/catalog';
-import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';
+import type { PreparedFocusPresentation } from '../prepared-focus.mts';
 
 class Element extends EventTarget {
   dataset: Record<string, string> = {}; selectors = new Map<string, Element | Element[]>(); attributes = new Map<string, string>(); hidden = false; checked = false; disabled = false; textContent = '';
@@ -21,7 +21,7 @@ function fixture(unavailableObjects = '') {
   root.selectors.set('[data-focus-unavailable]', unavailable);
   bank.dataset.focusLensBank = 'prepared-galaxy';
   const ids = ['first', 'second', 'third'];
-  const buttons = ids.map(id => Object.assign(new Element(), { value: id }));
+  const buttons = ids.map(id => { const button = new Element(); button.setAttribute('value', id); return button; });
   const details = ids.map(id => Object.assign(new Element(), { dataset: { focusLensDetails: id } }));
   bank.selectors.set('[data-focus-lens]', buttons);
   bank.selectors.set('[data-focus-lens-details]', details);

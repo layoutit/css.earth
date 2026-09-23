@@ -1,11 +1,8 @@
-import { isPreparedCluster, isPreparedNebula, resolveSpatialCitation } from '@cssearth/catalog';
 import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
-import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
 import type { PreparedFocusBank } from '../src/renderers/css/universe/prepared-focus-bank.js';
+import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusLens } from './prepared-focus.mts';
+import type { PreparedFocusPolicy } from './prepared-focus.mts';
 
-export interface PreparedFocusPolicy {
-  metersPerParsec: number; defaultFocusRadiusM: number; minimumDistanceRadii: number; maximumDistanceM: number;
-}
 export interface PreparedFocusSource {
   resolveGalaxy(id: string): PreparedCatalogObject | null;
   focusBank(id: string): PreparedFocusBank | null;
@@ -18,33 +15,16 @@ export function acquirePreparedFocusTarget(id: string, { layer, policy, sources,
 }) {
   const record = layer.resolveGalaxy(id);
   if (!record) throw new TypeError(`Unknown prepared galaxy focus: ${id}`);
-  const objectId = !isPreparedCluster(record) ? record.detailedObjectId : undefined;
-  const bank = objectId && !unavailableObjectIds.includes(objectId) ? layer.focusBank(objectId) : null;
+  const objectId = preparedFocusObjectId(record);
+  const unavailable = objectId !== undefined && unavailableObjectIds.includes(objectId);
+  const bank = objectId && !unavailable ? layer.focusBank(objectId) : null;
   let released = false, citations: readonly SpatialCitation[] | undefined;
   const unsubscribe = bank?.subscribe(() => { if (!released) onChange(); });
   return {
     id, record,
     get datasets() { return bank?.state() ?? null; },
-    get focus(): PreparedNavigationFocus {
-      const radius = record.presentation?.focusRadiusM ?? bank?.framingRadiusM() ??
-        (!isPreparedCluster(record) && !isPreparedNebula(record) && record.halfLightRadius
-          ? record.halfLightRadius.valuePc * policy.metersPerParsec * 3 : policy.defaultFocusRadiusM);
-      return { id, positionM: record.positionM, framingRadiusM: radius,
-        limits: { minimumDistanceM: radius * policy.minimumDistanceRadii, maximumDistanceM: policy.maximumDistanceM } };
-    },
-    get citations() {
-      if (!citations) {
-        const references = [record.skyPosition.sourceRef, record.distance.sourceRef,
-          (isPreparedCluster(record) || isPreparedNebula(record) ? record.classification.sourceRef : record.membership.sourceRef)]
-          .filter((reference): reference is string => Boolean(reference));
-        citations = [...new Map(references.map(reference => {
-          const citation = resolveSpatialCitation(reference, sources());
-          if (!citation) throw new TypeError(`Unresolved prepared focus reference: ${reference}`);
-          return [citation.id, citation] as const;
-        })).values()];
-      }
-      return citations;
-    },
+    get focus() { return resolvePreparedFocus(record, bank?.framingRadiusM(), policy); },
+    get citations() { return citations ??= preparedFocusCitations(record, sources()); },
     prepare({ preload = false }: { preload?: boolean } = {}): Promise<void> | undefined {
       if (released || !bank || bank.state() && !preload) return;
       const loading = bank.load();
@@ -59,11 +39,7 @@ export function acquirePreparedFocusTarget(id: string, { layer, policy, sources,
       });
     },
     resolveLens(requested: string | null) {
-      if (released || !bank) return;
-      const state = bank.state(), lens = requested ?? state?.defaultLens;
-      if (lens === undefined) return;
-      if (state && !state.lenses.some(candidate => candidate.id === lens)) throw new TypeError(`Unknown prepared focus lens: ${lens}`);
-      return lens;
+      if (!released) return resolvePreparedFocusLens(requested, bank?.state() ?? null, unavailable);
     },
     selectLens(lens: string) { if (!released) bank?.selectLens(lens); },
     release() { if (!released) { released = true; unsubscribe?.(); } },

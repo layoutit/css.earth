@@ -7,7 +7,7 @@ import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { readInitialFocus } from './focus-catalog.mts';
 import { shellSubjectKey, type ShellSelection } from './shell-selection.mts';
-import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
+import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import type { ShellCamera, PlaybackState } from './browser-types.mts';
