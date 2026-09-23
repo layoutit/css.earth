@@ -102,8 +102,6 @@ export function createApplicationWorldContext() {
             if (lifetime.disposed) return;
             const object = layer.resolveGalaxy(id);
             if (!object) return;
-            const detailedId = 'detailedObjectId' in object ? object.detailedObjectId : undefined;
-            if (detailedId) void layer.ensureImageLayer(detailedId).catch(reportError);
             await contextNavigation.select(object);
           },
           previewSelection(id?: string | null) {
