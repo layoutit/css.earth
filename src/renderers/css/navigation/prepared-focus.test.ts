@@ -7,7 +7,7 @@ import { presentWorldCamera } from './world-camera.js';
 import { worldRotationCss, worldRotationFromQuaternion } from './world-camera-math.js';
 import type { PreparedNavigationFocus } from './prepared-focus.js';
 
-const frame = Object.freeze({ referenceFrame: 'world', epochJdTt: 1, originM: [3e7, 4e7, 5e7] as const,
+const frame = Object.freeze({ referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [3e7, 4e7, 5e7] as const,
   presentationToReference: [0,1,0,1,0,0,0,0,1], metersPerUnit: 2, bodyRadiusM: 200 });
 const focus: PreparedNavigationFocus = { id: 'catalogue:7', positionM: [1e20, 2e20, -3e20], framingRadiusM: 1e18,
   limits: { minimumDistanceM: 1e13, maximumDistanceM: 1e22 }, upReference: [0, 0, 1], arrivalDistanceM: 4e18 };
@@ -168,4 +168,34 @@ it('uses the retained motion owner for interruption, replacement and teardown, r
   f.orbit.destroy();
   expect(await final).toEqual({ completed: false });
   for (const name of ['pointerdown','pointermove','pointerup','wheel','resize']) expect(getEventListeners(f.view, name)).toHaveLength(0);
+});
+
+it('arrives on the line of sight from the Sun, celestial north up, whatever the previous view faced', async () => {
+  const poses = [];
+  for (const turned of [false, true]) {
+    const f = fixture();
+    // Face the opposite way first: the Crab bug arrived behind its nebula, looking back at the Sun.
+    if (turned) f.callbacks.drag.rotate({ controlPitchDelta: 0, controlYawDelta: 180, rotation: [0, 1, 0, 0] });
+    const flight = f.orbit.flyToPreparedFocus(focus, frame, optics);
+    f.tick(1);
+    expect(await flight).toEqual({ completed: true });
+    poses.push(f.world().pose);
+    f.orbit.destroy();
+  }
+  close(poses[1]!.positionM, poses[0]!.positionM, 1e-9);
+  close(poses[1]!.orientationXyzw, poses[0]!.orientationXyzw, 1e-9);
+  const { positionM, orientationXyzw } = poses[0]!;
+  const length = (v: readonly number[]) => Math.hypot(...v);
+  // Between the Sun and the focus, at the arrival distance.
+  expect(length(positionM)).toBeLessThan(length(focus.positionM));
+  const sight = focus.positionM.map(v => v / length(focus.positionM));
+  const offset = focus.positionM.map((v, axis) => v - positionM[axis]!);
+  // The ray through the principal point, offset beside the panel, is the sightline; the view axis leaves it by that angle.
+  const principal = Math.cos(Math.atan2(Math.hypot(...optics.principalOffsetPixels), optics.focalPixels));
+  expect(offset.reduce((sum, v, axis) => sum + v * sight[axis]!, 0) / length(offset)).toBeCloseTo(1, 9);
+  const forward = [-worldRotationFromQuaternion(orientationXyzw)[2]!, -worldRotationFromQuaternion(orientationXyzw)[5]!, -worldRotationFromQuaternion(orientationXyzw)[8]!];
+  expect(forward.reduce((sum, v, axis) => sum + v * sight[axis]!, 0)).toBeCloseTo(principal, 9);
+  // Camera +y (up) leans toward celestial north.
+  const axes = worldRotationFromQuaternion(orientationXyzw);
+  expect(axes[7]).toBeGreaterThan(0);
 });

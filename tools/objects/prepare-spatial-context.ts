@@ -50,12 +50,13 @@ async function planckHex(kelvin: number, colorMatchingPath: string): Promise<str
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
   if (input.bodies === 'catalog') {
-    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string; orbitsWithinAu?: number } }[]> };
+    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string; orbitsWithinAu?: number; labelPlacement?: 'centre' } }[]> };
     const objects = await readCatalog(options.objectsDirectory);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
       .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,
         ...(body.context!.orbitsWithinAu === undefined ? {} : { orbitsWithinM: body.context!.orbitsWithinAu * M_PER_AU }),
+        ...(body.context!.labelPlacement === undefined ? {} : { labelPlacement: body.context!.labelPlacement }),
         ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
           ? { placement: 'approximate' as const } : {}) }));
     // A star on a hosted orbit around a packaged host is drawn from its astronomy record without a page. Its colour is the Planck

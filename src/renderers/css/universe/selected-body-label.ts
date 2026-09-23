@@ -58,7 +58,11 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       const minimumGap = Math.min(16, gap);
       let left: number, top: number;
       let overMesh = false;
-      if (meshBottom + minimumGap <= maxTop) {
+      if ('labelPlacement' in body && body.labelPlacement === 'centre' && radiusPixels > height) {
+        // The package asks for its caption over the body's middle (Sgr A*'s black shadow), once the disc can hold it.
+        left = Math.max(-widthPixels / 2 + width / 2 + VIEWPORT_EDGE_PX, Math.min(x, widthPixels / 2 - width / 2 - VIEWPORT_EDGE_PX));
+        top = Math.max(-heightPixels / 2 + HEADER_CLEARANCE_PX, Math.min(y - height / 2, maxTop));
+      } else if (meshBottom + minimumGap <= maxTop) {
         left = Math.max(-widthPixels / 2 + width / 2 + VIEWPORT_EDGE_PX,
           Math.min(x, widthPixels / 2 - width / 2 - VIEWPORT_EDGE_PX));
         top = Math.min(meshBottom + gap, maxTop);

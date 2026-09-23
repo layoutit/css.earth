@@ -86,7 +86,10 @@ the authenticated bank inside the existing scene and fills the shared focus
 card. Catalogue transport is separate pinned JSON, shared by the response and
 browser. Construction-order identities let the live volume publisher adopt
 the response's elements and selected lens. Responsive CSS lengths retain the
-prepared camera's projection until the browser resolves its viewport.
+prepared camera's projection until the browser resolves its viewport. A flight
+to a prepared focus arrives on the line of sight from the Sun with celestial
+north up, as its datasets were observed, whichever way the previous view faced;
+a saved camera URL that still shows the focus keeps its own pose.
 
 The existing search field is a GET form. Submitting `q` keeps the object URL and
 returns matches in the same shell. Category buttons submit that form too, and

@@ -79,7 +79,7 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
   });
 }
 
-export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, selectPreparedFocus, onError = () => {} }: { documentTarget: Document; windowTarget: BrowserWindow; objects: readonly ObjectEntry[]; supports(id: string): boolean; navigate: Navigate; selectPreparedFocus?(id: string): Promise<void> | null; onError?(error: unknown): void }) {
+export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, onError = () => {} }: { documentTarget: Document; windowTarget: BrowserWindow; objects: readonly ObjectEntry[]; supports(id: string): boolean; navigate: Navigate; onError?(error: unknown): void }) {
   const available = (id: unknown): id is string => typeof id === 'string' && objects.some(object => object.id === id) && supports(id);
   const query = (event: Event) => { if (available(navigationId(event))) event.preventDefault(); };
   const select = (event: Event) => {
@@ -100,12 +100,9 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     if (!object || !supports(object.id)) return;
     const focusId = url.searchParams.get('focus');
     if (focusId && !url.searchParams.has('v') && anchor.hasAttribute('data-prepared-focus-id')) {
-      const selected = selectPreparedFocus?.(focusId);
-      if (selected) {
-        event.preventDefault();
-        void selected.catch(onError);
-        return;
-      }
+      event.preventDefault();
+      Promise.resolve(navigate(object.id, { kind: 'focus', id: focusId })).catch(onError);
+      return;
     }
     event.preventDefault();
     Promise.resolve(navigate(object.id, { kind: 'link', url: url.href })).catch(onError);

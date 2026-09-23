@@ -112,7 +112,8 @@
       "order": 1252,
       "context": {
         "order": 1249,
-        "orbitsWithinAu": 100000
+        "orbitsWithinAu": 100000,
+        "labelPlacement": "centre"
       }
     },
     "worldFrame": {

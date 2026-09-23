@@ -7,7 +7,8 @@ catalogue snapshot, not a claim that every real galaxy has been discovered.
 - **776** galaxies/candidates have usable sourced distances; **951** other source
   rows have explicit exclusion reasons.
 - **142** retained objects have Local Group associations; **109** are confirmed
-  galaxies. Candidate status remains available to the renderer.
+  galaxies. Candidate status remains available to the renderer; search labels
+  those rows "Candidate galaxy" and leaves them out of the Galaxies list.
 - M31, M33, LMC and SMC link to detailed objects through authored mappings. The
   source MW row lacks a distance; the existing Milky Way keeps its own registration
   and is retained as an unpositioned physical host without invented catalogue coordinates. Its 62 satellite references resolve independently of scene hosting.

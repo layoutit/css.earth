@@ -8,7 +8,7 @@ import { createCatalogueWindow } from '../catalogue-window.mts';
 
 const entry = (index: number): CatalogueIndexEntry => ({
   kind: 'scene', id: `earth-${index}`, name: `Earth ${index}`, searchNames: [], classification: 'planet',
-  classificationName: 'planet', systemName: 'solar system', route: `/earth-${index}/`, illustration: false,
+  classificationName: 'planet', systemName: 'solar system', route: `/earth-${index}/`, illustration: false, candidate: false,
   distanceMeters: index, detail: { text: `${index} au`, value: String(index), unit: 'au', title: 'Distance', ariaLabel: `${index} au. Distance` },
   source: { subject: `object:earth-${index}`, document: `/sources/${index}/`, label: `Sources ${index}` },
   marker: { kind: 'scene', id: 'earth', color: '#fff' },

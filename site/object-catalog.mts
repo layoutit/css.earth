@@ -5,7 +5,8 @@ import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from '.
 import type { NavigationDistance } from './navigation-distance.mts';
 
 /** `orbitsWithinAu`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
-export interface CatalogContext { name?: string; color?: string; order?: number; orbitsWithinAu?: number }
+/** `labelPlacement: 'centre'` captions the body over its middle instead of below it (Sgr A*'s black shadow). */
+export interface CatalogContext { name?: string; color?: string; order?: number; orbitsWithinAu?: number; labelPlacement?: 'centre' }
 /** Alternate scientific names owned by the object's package. They are not navigation labels or system membership. */
 export type CatalogEntry = ObjectEntry & { readonly aliases: readonly string[]; order?: number; context?: CatalogContext };
 
@@ -48,15 +49,17 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
   let context: CatalogContext | undefined;
   if (catalog.context !== undefined) {
     const value = catalog.context;
-    if (!record(value) || Object.keys(value).some(key => !['name', 'color', 'order', 'orbitsWithinAu'].includes(key)) ||
+    if (!record(value) || Object.keys(value).some(key => !['name', 'color', 'order', 'orbitsWithinAu', 'labelPlacement'].includes(key)) ||
         (value.name !== undefined && (typeof value.name !== 'string' || !value.name)) ||
         (value.orbitsWithinAu !== undefined && !(typeof value.orbitsWithinAu === 'number' && Number.isFinite(value.orbitsWithinAu) && value.orbitsWithinAu > 0)) ||
+        (value.labelPlacement !== undefined && value.labelPlacement !== 'centre') ||
         (value.color !== undefined && (typeof value.color !== 'string' || !/^#[0-9a-f]{6}$/u.test(value.color)))) {
       throw new TypeError(`Invalid context metadata: ${input.id}.`);
     }
     context = { ...(typeof value.name === 'string' ? { name: value.name } : {}),
       ...(typeof value.color === 'string' ? { color: value.color } : {}), order: order(value.order),
-      ...(typeof value.orbitsWithinAu === 'number' ? { orbitsWithinAu: value.orbitsWithinAu } : {}) };
+      ...(typeof value.orbitsWithinAu === 'number' ? { orbitsWithinAu: value.orbitsWithinAu } : {}),
+      ...(value.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}) };
   }
   // Legacy catalog.distanceAu mixes orbital references and positions. It is
   // validated as authored metadata but never published as a measured distance.

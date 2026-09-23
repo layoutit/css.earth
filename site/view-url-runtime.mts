@@ -1,14 +1,13 @@
 import type { ObjectSharedView } from '../src/renderers/css/runtime/deferred-object-mount.js';
-import { formatSharedView, parseSharedView } from "../src/renderers/css/dist/navigation.js";
+import { formatSharedView } from "../src/renderers/css/dist/navigation.js";
 
 // One URL owner in the shared shell. Camera publication only schedules a
 // bounded history write; native motion is sampled once per second while on.
-export function bindViewUrl({ windowTarget, view, getMotion, setMotion, replace, restoreFocus = () => {}, onError = () => {}, listenToPopState = true }: {
-  windowTarget: Window; view: ObjectSharedView; getMotion(): boolean; setMotion(value: boolean): void;
-  replace(url: string): void; restoreFocus?(url: string): void | Promise<void>;
-  onError?(error: unknown): void; listenToPopState?: boolean;
+export function bindViewUrl({ windowTarget, view, getMotion, replace, onError = () => {} }: {
+  windowTarget: Window; view: ObjectSharedView; getMotion(): boolean;
+  replace(url: string): void; onError?(error: unknown): void;
 }) {
-  let timer: number | null = null, dueAt = Infinity, lastChange = -Infinity, destroyed = false, restoring = false, revision = 0;
+  let timer: number | null = null, dueAt = Infinity, lastChange = -Infinity, destroyed = false, started = false;
   let restored: { incoming: string; captured: string | null } | null = null;
   const now = () => windowTarget.performance.now();
   const clear = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; dueAt = Infinity; };
@@ -33,7 +32,7 @@ export function bindViewUrl({ windowTarget, view, getMotion, setMotion, replace,
   }
   function flush() {
     clear();
-    if (destroyed || restoring) return;
+    if (destroyed || !started) return;
     try {
       const token = capture();
       if (token !== null) writeToken(token);
@@ -48,53 +47,30 @@ export function bindViewUrl({ windowTarget, view, getMotion, setMotion, replace,
     if (wait > 0) arm(wait, settle); else flush();
   }
   function schedule() {
-    if (destroyed || restoring) return;
+    if (destroyed || !started) return;
     lastChange = now();
     if (timer !== null && dueAt <= lastChange + 150) return;
     arm(150, settle);
   }
-  async function restore() {
-    clear();
-    const current = ++revision;
-    restoring = true; restored = null;
-    const href = windowTarget.location.href;
-    const currentRestore = () => !destroyed && current === revision;
+  // Arrival enables publication only after camera, focus and playback agree.
+  // Pin an incoming token to the resulting camera without round-tripping its bytes.
+  function start(incoming: string | null = null) {
+    if (destroyed || started) return;
     try {
-      const query = new URL(href).searchParams;
-      let applied = false;
-      try {
-        if (query.getAll("v").length > 1) throw new TypeError("This URL contains more than one saved view.");
-        const saved = query.has("v") ? parseSharedView(`v=${query.get("v")}`) : null;
-        if (saved && await view.restore(saved) && currentRestore()) {
-          setMotion(saved.playback.motionRequested);
-          applied = true;
-        }
-      } catch (error) { if (currentRestore()) onError(error); }
-      if (!currentRestore()) return;
-      await restoreFocus(href);
-      if (applied && currentRestore() && new URL(windowTarget.location.href).searchParams.get('v') === query.get('v')) {
-        restored = { incoming: query.get('v')!, captured: captureToken() };
+      if (incoming && new URL(windowTarget.location.href).searchParams.get('v') === incoming) {
+        restored = { incoming, captured: captureToken() };
       }
-    } catch (error) { if (!destroyed && current === revision) onError(error); }
-    finally {
-      if (!destroyed && current === revision) {
-        restoring = false;
-        // Keep an invalid incoming URL intact for diagnosis until the user
-        // moves the camera. Current-format links keep their original token.
-        if (getMotion()) arm(1000, flush);
-        else if (!new URL(windowTarget.location.href).searchParams.has('v')) schedule();
-      }
-    }
+    } catch (error) { onError(error); }
+    started = true;
+    if (getMotion()) arm(1000, flush);
+    else if (!new URL(windowTarget.location.href).searchParams.has('v')) schedule();
   }
   const unsubscribe = view.subscribe(schedule);
-  const onPopState = () => { void restore(); };
-  if (listenToPopState) windowTarget.addEventListener("popstate", onPopState);
   return Object.freeze({
-    restore, capture, schedule, flush,
+    start, capture, schedule, flush,
     destroy() {
       if (destroyed) return;
-      destroyed = true; revision++; clear(); unsubscribe();
-      if (listenToPopState) windowTarget.removeEventListener("popstate", onPopState);
+      destroyed = true; clear(); unsubscribe();
     },
   });
 }

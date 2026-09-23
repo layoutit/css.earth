@@ -86,7 +86,8 @@ export function createSceneRouter({
       if (scenes.current?.mount?.datasets) syncCompanionClouds(scenes.current.mount.datasets, value);
       preferences.apply(value);
     },
-    onFlightStart() { motionEnabled = false; shellOwner?.shell?.setMotionEnabled?.(false); syncPlayback(); },
+    onSelectFocus(id) { void navigate(objectId, { kind: 'focus', id }).catch(report); },
+    canPublishFocus: () => scenes.state.kind === 'ready' && !requests.current,
     onFocusChange(session, url) { view.replace(session, selection.url(url)); },
     onFocusContentChange: selection.focus,
     onCameraChange: followSelectionCamera,
@@ -112,8 +113,6 @@ export function createSceneRouter({
     // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
     historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
-      // During a body flight a focus link is an ordinary navigation, so the last click wins.
-      selectPreparedFocus: id => requests.current ? null : world.current?.selectPreparedFocus?.(id) ?? null,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
   mountTask = mountApplication();
@@ -208,10 +207,7 @@ export function createSceneRouter({
       if (!arrival) return arrival;
       if (!scenes.isCurrent(session)) return;
       const { interrupted } = arrival;
-      if (request) {
-        if (!requests.advance(request, 'committing') || !view.commit(request, session)) return false;
-      }
-      await view.bindInitial(session, { restore: !interrupted });
+      if (!await view.arrive(session, { request, interrupted })) return false;
       if (!scenes.isCurrent(session)) return;
       activation.connectControls(session, arrival.feature);
       if (!session.commit()) return false;
@@ -225,13 +221,7 @@ export function createSceneRouter({
       }
       hasPresented = true;
       initialScene?.commit();
-      if (request) requests.finish(request, interrupted ? 'interrupted' : 'finished');
-      if (session.mount.navigation) followSelectionCamera(session, session.mount.navigation.capture());
-      publishSelection();
-      if (selection.current.kind === 'overview') aimAtSystemCenter();
-      syncPlayback();
-      connectOverviewSelection(session);
-      if (request && (request.history.history !== 'pop' || interrupted)) session.viewUrl?.flush();
+      finishArrival(session, request, interrupted);
       return !interrupted;
     } catch (error) {
       if (scenes.isCurrent(session)) fail(session, error);
@@ -239,12 +229,13 @@ export function createSceneRouter({
   }
 
   function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
+    if (intent.kind === 'focus' && scenes.current) id = objectId;
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
     const source = scenes.current;
     const resolved = resolveNavigation(intent, { object, objects, navigation, current: {
-      objectId, href: windowTarget.location.href, subject: selection.current,
+      objectId, href: intent.kind === 'focus' ? source?.url ?? windowTarget.location.href : windowTarget.location.href, subject: selection.current,
       centeredObjectId, hasPresented, reuseScene: !!source && objectId === id && scenes.state.kind === 'ready',
       mount: source?.mount ?? null, pending: requests.current,
     } });
@@ -253,9 +244,9 @@ export function createSceneRouter({
     if (resolved.destination.history.history === 'pop') historyOwner?.remember();
     else historyOwner?.checkpoint();
     requests.cancel();
-    world.current?.suspendFocus?.();
     scenes.current?.setViewUrl(null);
     const request = requests.begin({ ...resolved.destination, timing: createNavigationTiming(windowTarget, objectId, id) });
+    if (request.camera.kind === 'focus') { motionEnabled = false; shellOwner?.shell?.setMotionEnabled?.(false); }
     mountTask = transition(request, object);
     return mountTask;
   }
@@ -264,11 +255,13 @@ export function createSceneRouter({
     if (!navigation) return false;
     const source = scenes.current;
     try {
-      world.current?.previewSelection?.(request.subject.kind === 'overview' ? null : object.id);
-      request.own(() => {
-        if (!requests.current || requests.owns(request)) world.current?.previewSelection?.();
-      });
-      const selectionTransition = shellOwner?.shell?.beginNavigation?.(request.subject.kind === 'overview'
+      if (request.subject.kind !== 'focus') {
+        world.current?.previewSelection?.(request.subject.kind === 'overview' ? null : object.id);
+        request.own(() => {
+          if (!requests.current || requests.owns(request)) world.current?.previewSelection?.();
+        });
+      }
+      const selectionTransition = request.subject.kind === 'focus' ? null : shellOwner?.shell?.beginNavigation?.(request.subject.kind === 'overview'
         ? { kind: 'overview', overview: request.subject.overview,
           preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
         : { kind: 'object', object, targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
@@ -276,7 +269,7 @@ export function createSceneRouter({
       if (source && request.scene === 'reuse') {
         return await focusExistingScene({ session: source, request, selectionTransition, navigation, requests, view,
           windowTarget, getReducedMotion: () => reducedMotionActive,
-          commitSelection, syncPlayback });
+          commitSelection, finishArrival, syncPlayback });
       }
       syncPlayback();
       const loaded = await prepareSceneReplacement({ fromId: objectId, source, object, request, navigation, requests,
@@ -302,21 +295,22 @@ export function createSceneRouter({
         // selected destination still owns that camera: keep only the drawn view
         // from the departed URL, otherwise its old prepared focus is restored
         // and pulls the camera back to the object the user just left.
-        const captured = view.capture();
+        const snapshot = view.capture(interruptedSelection ? request.url : undefined);
+        // A failed focus load leaves the previous native target in place. Recover
+        // its identity with the drawn camera instead of retrying the failed URL.
+        const captured = snapshot && request.camera.kind === 'focus'
+          ? selection.url(new URL(snapshot, windowTarget.location.href)) : snapshot;
         if (captured && interruptedSelection) {
-          const drawn = new URL(captured, windowTarget.location.href);
-          const selected = new URL(request.url, windowTarget.location.href);
-          const token = drawn.searchParams.get('v');
-          if (token) selected.searchParams.set('v', token); else selected.searchParams.delete('v');
-          source.url = selected.href;
-          historyOwner?.commit(selected.href, request.history);
+          const selected = new URL(captured, windowTarget.location.href).href;
+          source.url = selected;
+          historyOwner?.commit(selected, request.history);
           commitSelection(request);
         } else if (captured) {
           // The source still owns the last drawn camera when destination loading
           // fails. Rebinding its URL writer must not replay the departure pose.
-          historyOwner?.commit(captured, { history: 'replace' });
+          view.replace(source, new URL(captured, windowTarget.location.href).href);
         }
-        await view.bind(source, { restore: false });
+        await view.arrive(source, { interrupted: true });
         source.viewUrl?.flush(); syncPlayback();
         if (!record(error) || error.preserveView !== true) report(error);
       }
@@ -324,6 +318,20 @@ export function createSceneRouter({
       else report(error);
       return false;
     }
+  }
+
+  function finishArrival(session: Session, request?: NavigationRequest, interrupted = false) {
+    if (request) requests.finish(request, interrupted ? 'interrupted' : 'finished');
+    const mounted = !request || request.scene === 'replace';
+    if (mounted) {
+      if (session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
+      publishSelection();
+      if (selection.current.kind === 'overview') aimAtSystemCenter();
+    }
+    syncPlayback();
+    if (mounted) connectOverviewSelection(session);
+    if (request && (interrupted || (request.scene === 'replace'
+      ? request.history.history !== 'pop' : request.camera.kind !== 'restore'))) session.viewUrl?.flush();
   }
 
   function syncReducedMotion() {
