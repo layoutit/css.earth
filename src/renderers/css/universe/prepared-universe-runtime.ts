@@ -620,7 +620,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.
             for (const [index, bank] of imageBanks.entries()) {
-              const presentationOpacity = declaredImageLayers[index]!.id === detailedFocus?.objectId ? 1 : detailContextOpacity;
+              // A galaxy's layers are the view of the observer who selected it, as the Milky Way's slices are.
+              // Unselected, the galaxy catalogue carries it as its marker and label, and its layers never paint.
+              const presentationOpacity = declaredImageLayers[index]!.id === detailedFocus?.objectId ? 1 : 0;
               const opacity = presentationOpacity * volumeOpacity * projectedVolumeOpacity(world, viewport, declaredImageLayers[index]!.frame, imageFramingUnits[index]!);
               if (!bank) {
                 if (opacity > 0) void ensureImageLayerLoaded(index).catch(() => {});
