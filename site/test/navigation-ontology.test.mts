@@ -114,3 +114,19 @@ test('every row of the application navigation tree opens a route the application
   atlasTree(readObjects()).forEach(collect);
   for (const [id, href] of atlas) assert.equal(href, `/${id}/`, id);
 });
+
+test('an unconfirmed LVDB galaxy is searchable by name as a candidate galaxy, and the galaxy listing leaves it out', async () => {
+  const prepared = await readPreparedFocusObjects(resolve('src/objects'), 'sun');
+  const byName = (name: string) => prepared.find(object => object.name === name)!;
+  // LVDB candidate-table rows: Camargo 1105 and Minni 01 are unconfirmed; Hydra I is confirmed real but not a galaxy.
+  for (const name of ['Camargo 1105', 'Minni 01', 'Hydra I']) assert.equal(byName(name).candidate, true, name);
+  for (const name of ['Draco II', 'Segue 1', 'Sagittarius']) assert.equal(byName(name).candidate, undefined, name);
+  const { searchObjects } = await import('../object-search.mts');
+  const labels = prepared.filter(object => object.classification === 'galaxy').map(object => ({ name: object.name.toLocaleLowerCase('en'), names: object.searchNames,
+    classification: object.classification, classificationName: object.candidate ? 'candidate galaxy' : 'galaxy', systemName: object.systemName.toLocaleLowerCase('en'),
+    candidate: object.candidate === true }));
+  const listed = searchObjects(labels, 'galaxies').matches;
+  assert.equal(listed.some(label => label.candidate), false);
+  assert.equal(listed.length, labels.filter(label => !label.candidate).length);
+  assert.deepEqual(searchObjects(labels, 'minni 01').matches.map(label => label.classificationName), ['candidate galaxy']);
+});

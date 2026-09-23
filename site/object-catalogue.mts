@@ -118,6 +118,7 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
             classificationName: entry.classificationName,
             systemName: entry.systemName,
             illustration: entry.illustration,
+            candidate: entry.candidate,
             entry,
           }));
           distanceEntries = catalogueEntries.toSorted((left, right) => left.distanceMeters - right.distanceMeters);
