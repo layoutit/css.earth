@@ -38,8 +38,8 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
           value?.destroy?.();
           throw controller.signal.reason ?? new DOMException('World context mount was cancelled.', 'AbortError');
         }
-        if (!value || typeof value.publish !== 'function' || typeof value.destroy !== 'function') {
-          throw new TypeError('Persistent world context mount must publish and destroy.');
+        if (!value || typeof value.createFramePresenter !== 'function' || typeof value.destroy !== 'function') {
+          throw new TypeError('Persistent world context mount must provide a frame presenter and destroy.');
         }
         current = value;
         onMount(value);
@@ -67,8 +67,8 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
       canPublish: () => isCurrent(session) && canPublishFocus(),
     });
     if (disconnectFocus) session.own(disconnectFocus);
-    session.own(navigation.subscribe((frame, viewport) => {
-      if (isCurrent(session) && current === world) { onCameraChange(session, frame); world.publish(frame, viewport); }
+    session.own(navigation.subscribe(frame => {
+      if (isCurrent(session) && current === world) onCameraChange(session, frame);
     }));
     session.framePresenter?.enable();
   }

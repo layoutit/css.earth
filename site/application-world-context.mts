@@ -63,7 +63,7 @@ export function createApplicationWorldContext() {
         const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock));
         let heliosphereEnabled = false, shellsMounted = false;
         const frames = own(createApplicationWorldFrames({ layer, planner, minimap, moonLabels, lifetime,
-          heliosphereEnabled: () => heliosphereEnabled, onError: reportError }));
+          heliosphereEnabled: () => heliosphereEnabled }));
         refreshWorld = frames.refresh;
         const inputSurface = stage.ownerDocument.querySelector<HTMLElement>('.object-input-surface');
         // Rotation suppresses hover/picking churn; label placement is continuous.
@@ -79,8 +79,9 @@ export function createApplicationWorldContext() {
             if (Reflect.get(target, '__cssEarthUniverse') === diagnostics) Reflect.deleteProperty(target, '__cssEarthUniverse');
           });
         }
-        return { ...layer, viewport, destroy,
-          publish: frames.publish,
+        // Only the frame queue can publish the retained world.
+        const { publish: _publish, ...context } = layer;
+        return { ...context, viewport, destroy,
           present: frames.present,
           createFramePresenter: frames.createFramePresenter,
           setNavigationInFlight: frames.setNavigationInFlight,
@@ -112,10 +113,10 @@ export function createApplicationWorldContext() {
               void prepared.loadShells().then(shells => {
                 if (lifetime.disposed) return;
                 for (const shell of shells) layer.addShell(shell);
-                frames.republish();
+                frames.refresh();
               }).catch(reportError);
             }
-            frames.republish();
+            frames.refresh();
           },
         };
       } catch (error) { destroy(); throw error; }

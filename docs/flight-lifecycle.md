@@ -18,6 +18,12 @@ and releases the hold. It does not create a departure or continuation runner.
 The incoming detail and persistent world still acknowledge one publication
 together; cancellation prevents a late worker reply from moving either one.
 
+The application frame queue owns publication of that complete view. It commits
+the worker-planned world, then the captured camera, before camera subscribers
+run. Subscriptions observe the presented view without publishing it again.
+Initial mounting remembers its captured camera; enabling the detail presenter
+requests its first complete world frame through the same queue.
+
 Surface fly-to keeps its fitted trajectory and stops when direct input takes
 over. Destination input hurries arrival; cross-object input can also stop before
 motion or during the visible approach. Drag and inertia remain native input
