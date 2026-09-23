@@ -135,6 +135,8 @@ test('explore parses optional filters without inventing strict scientific criter
 test('human exploration and artifact screens retain unknowns, blockers, context and reproducible commands',()=>{
   const directory='/tmp/run with spaces',screen=formatExploration(exploration(directory));
   assert.match(screen,/Eris/u);assert.match(screen,/Search coverage is incomplete/u);assert.match(screen,/size unknown/u);assert.match(screen,/Resolution is not established/u);assert.match(screen,/Unresolved discoveries/u);assert.match(screen,/Unsupported discoveries/u);assert.match(screen,/Bounded result overflowed/u);assert.match(screen,/telescope get '\/tmp\/run with spaces' --pick N/u);
+  assert.match(screen,/A same-filter retry cannot extend a bounded sample.*--from ISO --to ISO/u);
+  assert.doesNotMatch(screen,/Retry in a new directory:/u);
   const prefixed={...choice,display:{...choice.display,instrument:'Fixture telescope / camera'}};
   const prefixedScreen=formatExploration({...exploration(directory),choices:[prefixed]});
   assert.match(prefixedScreen,/1\. Fixture telescope \/ camera ·/u);

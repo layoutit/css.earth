@@ -357,7 +357,9 @@ export function formatExploration(session:ExplorationSession & {readonly directo
   if(answer.outcome.coverage==='incomplete'){
     const blocked=answer.issues.some(issue=>issue.code==='provider-unavailable'||issue.code==='provider-overflow'||issue.code==='source-unavailable');
     lines.push(blocked?'Resolve the provider or source errors above, or narrow the search; then start a new exploration.':'Inspect unresolved metadata or adjust the filters; then start a new exploration.');
-    lines.push(`Retry in a new directory: ${['telescope','explore',...session.arguments,'--out','NEW_DIRECTORY'].map(shellWord).join(' ')}`);
+    if(answer.issues.some(issue=>issue.code==='provider-overflow'))
+      lines.push('A same-filter retry cannot extend a bounded sample. Narrow with --instrument NAME or --from ISO --to ISO and save in a new directory.');
+    else lines.push(`Retry in a new directory: ${['telescope','explore',...session.arguments,'--out','NEW_DIRECTORY'].map(shellWord).join(' ')}`);
   }else if(answer.outcome.coverage==='target-unresolved')lines.push('Check the target name or use a suggestion above, then start a new exploration.');
   return `${lines.join('\n')}\n`;
 }
