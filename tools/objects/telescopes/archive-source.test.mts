@@ -218,7 +218,7 @@ test('an authentic Chandra ACIS event source enters the existing event operation
     await writeFile(fetched.files[0]!, 'changed');
     const changedCode = await main(['family-assess', request, fetched.receipt, '--out', resolve(root, 'changed-assessment'), '--json'],
       root, value => output.push(value), io);
-    assert.equal(changedCode, 1, output.at(-1));
+    assert.equal(changedCode, 1, output.at(-1) ?? 'No CLI error output');
     assert.match(JSON.parse(output.at(-1)!).error, /pins changed/u);
     await assert.rejects(executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'changed')), /pins changed/u);
   } finally { await rm(root, { recursive: true, force: true }); }
