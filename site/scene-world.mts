@@ -12,11 +12,12 @@ interface SceneWorldOptions {
   isCurrent(session: SceneSession): boolean;
   onMount(world: WorldContextMount): void;
   onFlightStart(): void;
+  onFocusChange(session: SceneSession, url: string): void;
   onError(error: unknown): void;
 }
 
 /** The world survives detail replacement; each detail owns only its connections to it. */
-export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onFlightStart, onError }: SceneWorldOptions) {
+export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onFlightStart, onFocusChange, onError }: SceneWorldOptions) {
   let current: WorldContextMount | null = null;
   let task: Promise<WorldContextMount> | null = null;
   let pending: AbortController | null = null;
@@ -55,7 +56,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     world.selectObject?.(session.objectId, navigation.frame);
     world.setOverview?.(overview);
     const disconnectFocus = world.connectNavigation?.(navigation, {
-      onFocusChange(url) { if (isCurrent(session)) session.url = url; },
+      onFocusChange(url) { if (isCurrent(session)) onFocusChange(session, url); },
       onFocusContentChange(record, sources, presentation) {
         if (isCurrent(session)) session.shell?.setPreparedFocus?.(record, sources, presentation);
       },

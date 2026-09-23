@@ -3,6 +3,7 @@ import DatasetLenses from './DatasetLenses.astro';
 import DatasetContextPanels from './DatasetContextPanels.astro';
 import ObjectFactsheet from './ObjectFactsheet.astro';
 import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
+import { imageFocusDatasets } from '../../src/renderers/css/dist/universe.js';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
 import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON, CONTEXT_OBJECT_ASSET_URLS } from '../prepared-context-objects.mts';
@@ -20,7 +21,7 @@ const prepared = CONTEXT_OBJECT_PREPARED_JSON as Record<string, { data: Prepared
 const presentations = CONTEXT_OBJECT_PREPARED_JSON, provenanceDocuments = CONTEXT_OBJECT_PREPARED_JSON;
 const banks = await Promise.all(Object.entries(descriptors).filter(([, descriptor]) => (descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available) || descriptor.type === 'image-layer-bank').map(async ([path, descriptor]) => {
   const bank = descriptor.type === 'image-layer-bank'
-    ? { id: descriptor.id, defaultLens: 'optical', lenses: [{id:'optical', stars:{points:[]}}] }
+    ? { ...imageFocusDatasets(descriptor.id), id: descriptor.id }
     : prepared[path.replace(/object\.json$/u, descriptor.prepared?.url ?? '')]?.data;
   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);
   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\.json$/u, 'prepared/provenance.json')], bank.id);

@@ -1,5 +1,6 @@
 // Application surroundings deliberately exclude detailed-object mounting and native input owners.
 export { createPreparedUniverse } from './prepared-universe-runtime.js';
+export { imageFocusDatasets } from './prepared-focus-bank.js';
 export { parseLensBillboards } from './lens-billboards.js';
 export { createWorldFrameQueue } from '../navigation/world-frame-queue.js';
 export type { QueuedRequest } from '../navigation/world-frame-queue.js';

@@ -22,7 +22,8 @@ export interface VoProductCandidate {
 }
 export async function loadVoInputs(root: string, request: DiscoveryRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string,
   discoverer: typeof discover = discover, policy: VoNetworkPolicy = {}, metadataLoader?: MetadataLoader,
-  faceter: typeof discoverInstrumentFacets = discoverInstrumentFacets): Promise<VoInputs> {
+  faceter: typeof discoverInstrumentFacets = discoverInstrumentFacets, selectedService?: string): Promise<VoInputs> {
+  if (selectedService && !SERVICES.some(profile => profile.service === selectedService)) throw new TypeError(`The selected archive service is not registered: ${selectedService}`);
   const identities = catalogue.map(t => ({ id: t.id, names: [t.name, ...t.aliases], classification: t.archiveClass, classificationSource: t.classificationSource }));
   const target = identities.find(t => t.id === request.target);
   if (!target) return { records: [], services: [] };
@@ -31,6 +32,7 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
   const metadata = new Map<string, Promise<MetadataResponse>>();
   // Run archive clients one at a time; a faceted MAST search must not start many Python processes together.
   for (const profile of SERVICES) {
+    if (selectedService && profile.service !== selectedService) continue;
     let snapshots: DiscoverySnapshot[] = [], facet: Awaited<ReturnType<typeof faceter>> | undefined;
     const discoveryFailures: string[] = [];
     try {
@@ -79,6 +81,7 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
       services[services.length - 1] = { ...previous, state: 'overflow',
         reason: `${previous.reason} Access descriptions exceeded the query-wide limit of ${limits.metadataRequests}; later records remain unresolved.` };
     }
+    if (selectedObservation && records.some(record => record.observation.key === selectedObservation)) break;
   }
   return { records, services };
 }

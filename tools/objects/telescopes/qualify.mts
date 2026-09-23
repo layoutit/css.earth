@@ -143,7 +143,7 @@ export async function qualifyObservation(root: string, request: QualificationReq
   if (request.configuration.kind === 'archive-acquisition') {
     const configuration = request.configuration;
     if (configuration.request.target !== request.target) throw new Error('Acquisition target differs from qualification target.');
-    const inputs = await loadQueryInputs(root, configuration.request, request.observation);
+    const inputs = await loadQueryInputs(root, configuration.request, request.observation, undefined, { archiveService: request.telescope });
     const spec = inputs.vo?.records.flatMap(r => r.products).find(p => p.key === configuration.key && p.observation.key === request.observation && p.observation.service === request.telescope && `native-${p.kind}` === request.mode);
     if (!spec) throw new Error('The saved archive acquisition is no longer available. Query again.');
     const { qualifyVoProduct } = await import('./vo/qualify.mts');
