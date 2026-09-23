@@ -1,5 +1,5 @@
-import type { SceneOverview, SceneSubject } from './scene-selection.mts';
-import { selectionKey } from './scene-selection.mts';
+import type { SceneOverview, SceneSubject } from './scene/scene-selection.mts';
+import { selectionKey } from './scene/scene-selection.mts';
 import type { CatalogueSelection } from './catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';

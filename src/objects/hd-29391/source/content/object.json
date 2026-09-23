@@ -1,0 +1,110 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-29391",
+  "displayName": "51 Eridani",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.45 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2401-01468",
+          "url": "https://arxiv.org/abs/2401.01468",
+          "label": "Elliott et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "29.9 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-29391",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.55 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2401-01468",
+          "url": "https://arxiv.org/abs/2401.01468",
+          "label": "Elliott et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "7,422 K",
+        "source": {
+          "catalogueId": "arxiv-2401-01468",
+          "url": "https://arxiv.org/abs/2401.01468",
+          "label": "Elliott et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-29391-lens-color.webp",
+        "surface": "hd-29391-surface-color@2x.webp",
+        "poles": "hd-29391-poles-color@2x.webp",
+        "source": {
+          "id": "hd-29391-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of the star: a white F-type star, a little warmer than Beta Pictoris. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 7,422 K and log g 4.31: a model, because no image measures this star's limb. The star is 0.45 milliarcseconds across, which the CHARA interferometer measures as a size only (Elliott et al. 2024). No spin axis is measured, so the display axis is celestial north."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Macintosh et al. (2015), Science 350, 64",
+      "href": "https://arxiv.org/abs/1508.03084"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1508.03084",
+      "credit": "Macintosh et al. (2015), Science 350, 64"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-29391.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

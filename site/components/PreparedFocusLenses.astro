@@ -11,8 +11,9 @@ import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import { resolveSceneAddressesDeep } from '../asset-origin.mts';
 import { datasetSourceDetail } from '../dataset-context.mts';
 import { EXPLORATION } from '../exploration-catalog.mts';
-interface Props { objectId: string; factsOnly?: boolean }
-const { objectId, factsOnly = false } = Astro.props;
+// Page-neutral: the banks render once into the shared focus fragment, so dataset forms submit to the current page.
+interface Props { factsOnly?: boolean }
+const { factsOnly = false } = Astro.props;
 
 type Descriptor = { id: string; type: string; prepared?: { url: string } };
 // Bodies share src/objects; only the generated context objects' prepared JSON is read here.
@@ -49,10 +50,6 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
   </div>)}
 </div> : <div class="object-dataset-content" data-focus-lens-bank={bank.id} hidden>
   <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
-  <DatasetLenses objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={`/${objectId}/`} lenses={presentation} controlName="focusLens" />
+  <DatasetLenses objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={null} lenses={presentation} controlName="focusLens" />
   <DatasetContextPanels objectId={bank.id} lenses={presentation} {directSourceIdsByLens} />
 </div>)}
-{/* The one shell-level 3D-stars setting owns every 3D point layer, including catalogue points inside prepared volumes. */}
-<style is:inline>
-  .object-ui-layer:has(.object-three-d-stars-setting:not(:checked)) ~ .object-viewport .prepared-catalogue-points { display: none !important; }
-</style>

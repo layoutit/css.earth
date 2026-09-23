@@ -89,7 +89,9 @@ the response's elements and selected lens. Responsive CSS lengths retain the
 prepared camera's projection until the browser resolves its viewport. A flight
 to a prepared focus arrives on the line of sight from the Sun with celestial
 north up, as its datasets were observed, whichever way the previous view faced;
-a saved camera URL that still shows the focus keeps its own pose.
+a saved camera URL that still shows the focus keeps its own pose. Before this
+rule, [the Crab reached from Pluto](images/crab-focus-arrival.png) was seen from
+behind, with the Sun and other foreground markers across it.
 
 The existing search field is a GET form. Submitting `q` keeps the object URL and
 returns matches in the same shell. Category buttons submit that form too, and

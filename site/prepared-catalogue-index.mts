@@ -1,11 +1,10 @@
-import { distanceDescription } from './navigation-distance.mts';
+import { distanceDescription } from './navigation/navigation-distance.mts';
 import { FOCUS_SOURCE_DOCUMENTS } from './focus-catalog-data.mts';
 import { isSceneObject } from './prepared-focus-object.mts';
 import { objectClassificationLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from './sidebar-thumbnails.mts';
 import { sourceDocumentation } from './source-documentation.mts';
 import type { CatalogueIndex } from './catalogue-index.mts';
-import { sha256 } from '../src/platform/sha256.mts';
 
 /** Prepared search transport. Runtime filters records and materializes only the visible rows. */
 export function preparedCatalogueIndex(): CatalogueIndex {
@@ -61,8 +60,3 @@ export function preparedCatalogueIndex(): CatalogueIndex {
 
 export const PREPARED_CATALOGUE_INDEX = preparedCatalogueIndex();
 export const PREPARED_CATALOGUE_INDEX_TEXT = `${JSON.stringify(PREPARED_CATALOGUE_INDEX)}\n`;
-export const PREPARED_CATALOGUE_INDEX_PIN = Object.freeze({
-  sha256: sha256(PREPARED_CATALOGUE_INDEX_TEXT),
-  bytes: new TextEncoder().encode(PREPARED_CATALOGUE_INDEX_TEXT).byteLength,
-  get url() { return `/catalogue/${this.sha256}.json`; },
-});

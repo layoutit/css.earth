@@ -9,7 +9,7 @@ import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import type {PreparedVariant} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 import type {PreparedPresentationDefinition} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 import {requireArray,requireRecord,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
-import {requireObjectControls} from '../../../site/scene-contract.mts';
+import {requireObjectControls} from '../../../site/scene/scene-contract.mts';
 export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;
   geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera?:{framingScale?:number}};

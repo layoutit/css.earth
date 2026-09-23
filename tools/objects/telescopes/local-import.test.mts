@@ -10,6 +10,7 @@ import { readProductRecord } from '../product-record.mts';
 import { importLocalArtifact, parseLocalImportSpec } from './local-import.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { executeFamilyOperation } from './family-operation.mts';
+import { exportOutput } from './outputs.mts';
 import { main, type CliIo } from './cli.mts';
 
 const spec=(path:string,limits={maxMembers:4,maxBytes:4096,maxFileBytes:2048})=>({schema:'cssearth-telescope-local-import-spec@1',datasetId:'local-fixture',sources:[{path,role:'science',name:'observation'}],declarations:{target:'eris',units:'counts',calibrationState:'unknown'},limits});
@@ -28,6 +29,27 @@ test('local import specification is data-only and exact',()=>{
   assert.throws(()=>parseLocalImportSpec({...spec('/tmp/file'),command:'run-me'}),/unsupported field command/u);
   assert.throws(()=>parseLocalImportSpec({...spec('/tmp/file'),sources:[{path:'/tmp/file',role:'science',command:'run-me'}]}),/unsupported field command/u);
   assert.throws(()=>parseLocalImportSpec(spec('/tmp/file',{maxMembers:1,maxBytes:1,maxFileBytes:2})),/cannot exceed/u);
+});
+
+test('one pinned local FITS science member uses the shared image output route without claiming archive calibration',async()=>{
+  const root=await mkdtemp(resolve(tmpdir(),'telescope-import-fits-'));
+  try{
+    const file=resolve(import.meta.dirname,'../../../tests/fixtures/fits/float32.fits');
+    const imported=await importLocalArtifact({schema:'cssearth-telescope-local-import-spec@1',datasetId:'generic-fits',
+      sources:[{path:file,role:'science'}],limits:{maxMembers:1,maxBytes:10000,maxFileBytes:10000}},resolve(root,'imported'));
+    const offered=await listArtifactOutputs(imported.receipt);
+    assert.equal(offered.artifact,'telescope-local-import');
+    assert.ok(offered.outputs.some(choice=>choice.kind==='image'&&choice.hdu===0&&choice.available));
+    assert.ok(offered.issues?.some(issue=>issue.includes('archive origin')));
+    const exported=await exportOutput(imported.receipt,{kind:'image',hdu:0},resolve(root,'image'));
+    const record=await readProductRecord(exported.receipt);
+    assert.equal(record?.stage,'telescope-source-output');
+    assert.equal(record?.parameters.status,'unresolved');
+    assert.ok(record?.inputs.some(input=>input.role==='FITS source'&&input.sha256));
+    assert.match(await readFile(exported.values,'utf8'),/x_pixel,y_pixel,value/u);
+    await writeFile(resolve(imported.directory,'files','float32.fits'),'changed');
+    await assert.rejects(listArtifactOutputs(imported.receipt),/pins changed/u);
+  }finally{await rm(root,{recursive:true,force:true});}
 });
 
 test('local import refuses bounds and symbolic links before publishing a destination',async()=>{

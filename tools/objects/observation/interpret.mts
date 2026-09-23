@@ -36,9 +36,9 @@ import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
 import { loadDiscBandColor } from './disc-band-color.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
-import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
-import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar-spot-occultation.mts';
-import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar-spot-figure.mts';
+import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
+import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
+import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 

@@ -88,7 +88,13 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
       await assert.rejects(readFile(join(prepared, path)), { code: 'ENOENT' });
     assert.equal(await readFile(join(prepared, 'slices/z/unrelated.png'), 'utf8'), 'keep');
     const envelope = JSON.parse(await readFile(join(prepared, 'volume.json'), 'utf8')) as { data: { resources: { path: string; sha256: string }[] } };
-    assert.equal(envelope.data.resources.length, 9, 'normal CLI publishes three volume slabs plus six prepared sky faces');
-    for (const resource of envelope.data.resources) { assert(resource.path.endsWith('.webp')); assert.equal(sha256(await readFile(join(prepared, resource.path))), resource.sha256); }
+    // Three volume slabs and six sky faces in the recipe's WebP, and the 26 distant views every density volume hands off to,
+    // which share the nebulae's PNG impostor format.
+    const paths = envelope.data.resources.map(resource => resource.path);
+    assert.deepEqual(paths.filter(path => path.startsWith('slices/')), ['slices/x/00.webp', 'slices/y/00.webp', 'slices/z/00.webp']);
+    assert.equal(paths.filter(path => /^sky\/[pn][xyz]\.webp$/u.test(path)).length, 6);
+    assert.equal(paths.filter(path => /^impostors\/view-[np0]{3}\.png$/u.test(path)).length, 26);
+    assert.equal(paths.length, 35);
+    for (const resource of envelope.data.resources) assert.equal(sha256(await readFile(join(prepared, resource.path))), resource.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
