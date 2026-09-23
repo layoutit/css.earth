@@ -11,7 +11,7 @@ const records=requireArray(JSON.parse(await fs.readFile(path.join(root,'source-r
 await fs.mkdir(output,{recursive:true});
 const entries=[],layers=[];
 for(const e of records){
- const index=entries.length;
+ const index: number=entries.length;
  const catalogueId=`artwork-emblem-${e.id}`;
  const catalogue=requireRecord(JSON.parse(await fs.readFile(path.join(catalogueRoot,`${catalogueId}.json`),'utf8')));
  const sourceEvidence=requireArray(catalogue.evidence);
