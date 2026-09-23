@@ -109,7 +109,8 @@ test('initial coarse commit remains successful when its publication immediately 
   } });
   t.after(h.restore); await h.ready();
   const initialCommit = h.commits[0], finalCommit = h.commits.at(-1); assert.ok(initialCommit); assert.ok(finalCommit);
-  assert.equal(initialCommit.plan.textureLevel, 2);
+  // The first pass is the prepared 512 bank the page already shows; Earth's fixed level follows it.
+  assert.equal(initialCommit.plan.textureLevel, 0);
   assert.equal(finalCommit.plan.textureLevel, 2);
   assert.deepEqual(h.fatal, []);
 });
@@ -117,8 +118,9 @@ test('URL restoration admits no default-camera detail before the router releases
   const h = harness({ deferTextureRefinement: true }); t.after(h.restore); await h.ready();
   h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'geometry', silhouetteDiameter: 1000, billboardOpacity: 0, markerOpacity: 0 } });
   await h.resolveJobs();
-  const coarsePlan = h.coordinator.state().plan; assert.ok(coarsePlan); assert.equal(coarsePlan.textureLevel, 2);
-  assert(!h.jobs.some(job => /-level-(512|1024|4096)\.webp/.test(job.url)));
+  // Until the router releases refinement the body keeps the prepared 512 bank, whatever the camera shows.
+  const coarsePlan = h.coordinator.state().plan; assert.ok(coarsePlan); assert.equal(coarsePlan.textureLevel, 0);
+  assert(!h.jobs.some(job => /-level-(1024|2048|4096)\.webp/.test(job.url)));
   h.coordinator.setView(h.currentView()); // saved distant view
   h.coordinator.refineTextures(); await h.resolveJobs();
   const restoredPlan = h.coordinator.state().plan; assert.ok(restoredPlan); assert.equal(restoredPlan.textureLevel, 2);
@@ -187,7 +189,10 @@ test("Saturn's actual cutaway is exclusive and repeated selection stays selected
 // new row and there is no row miss to recover from. The row-miss path itself is exercised by a
 // directional body in prepared-illumination-consumers.test.mts; this asserts the pinned contract.
 test("the flood-lit atmosphere holds its real material when the camera moves", async t => {
-  const h = harness(); t.after(h.restore); await h.ready(); const image = h.atmosphereTarget().style.backgroundImage;
+  const h = harness(); t.after(h.restore); await h.ready();
+  // Settle Earth's fixed 2048 level first, as the object runtime does right after readiness.
+  h.coordinator.setView(h.currentView()); await h.resolveJobs();
+  const image = h.atmosphereTarget().style.backgroundImage;
   const jobs = h.jobs.length;
   h.view(1); assert.equal(h.atmosphereTarget().style.backgroundImage, image); await flush();
   assert.equal(h.coordinator.state().pending, false); assert.equal(h.coordinator.state().loadingMaterial, false);

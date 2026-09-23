@@ -401,7 +401,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same
       // selection transaction after visibility, including direct URL loads.
-      if (definition.textureLevels && currentView) selection.setView(currentView);
+      // A body with one fixed level refines to it now, without waiting for input, and keeps it through zoom.
+      if (definition.textureLevels?.fixedLevel !== undefined) selection.refineTextures();
+      else if (definition.textureLevels && currentView) selection.setView(currentView);
     }
   };
 }
