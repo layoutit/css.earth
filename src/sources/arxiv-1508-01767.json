@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-1508-01767",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Filippazzo et al. (2015): Fundamental Parameters and Spectral Energy Distributions of Young and Field Age Objects with Masses Spanning the Stellar to Planetary Regime",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1508.01767"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/810/2/158"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1508.01767",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/810/2/158",
+      "label": "The Astrophysical Journal 810, 158"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1508.01767",
+      "checkedOn": "2026-09-23",
+      "locator": "Fundamental-parameters table: Luhman 16 A and B radius and effective temperature"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 810, 158",
+  "creators": [
+    "J. C. Filippazzo",
+    "E. L. Rice",
+    "J. Faherty",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

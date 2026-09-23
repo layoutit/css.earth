@@ -358,10 +358,52 @@ These corrections do not change breaks in the source imagery itself, such as
 the one-pixel border columns at the edges of the Venus radar, Mars and Ceres
 source maps.
 
+### The lossy lane
+
+A prepared image's size is a cost the reader pays on a phone, and it must still
+look identical. Every lossy image a bake writes goes through the lossy lane
+([lossy-lane.ts](../src/preparation/raster/lossy-lane.ts)): WebP at quality 80
+with sharp YUV chroma (`smartSubsample`). Numeric and categorical images stay
+lossless and never enter it.
+
+Quality 80 is the lowest at which the lane changes nothing a reader can see.
+Each sample below was encoded at 75, 80 and 85 and compared with the file it
+replaces using pixelmatch at threshold 0.1. The count is pixels flagged.
+
+| Map | Pixels | Today | q75 | q80 | q85 |
+|---|---|---|---|---|---|
+| Europa normal | 8320×6144 | 6.98 MB | 3.64 MB, 549 | 5.00 MB, 0 | 6.16 MB, 0 |
+| Moon surface | 8320×6144 | 13.45 MB | 7.24 MB, 1717 | 10.66 MB, 0 | 12.21 MB, 0 |
+| Phobos normal | 5010×5217 | 7.68 MB | 2.36 MB, 1798 | 3.14 MB, 0 | 3.97 MB, 0 |
+| Mercury interior (outer, unlit) | 4096×2048 | 5.49 MB | 1.49 MB, 10 | 1.82 MB, 0 | 2.22 MB, 0 |
+| Saturn interior section | 4096×4096 | 10.06 MB | 0.11 MB, 0 | 0.12 MB, 0 | 0.21 MB, 0 |
+| Deimos normal | 5019×5222 | 1.61 MB | 0.47 MB, 471 | 0.58 MB, 485 | 0.76 MB, 447 |
+
+Deimos was already lossy WebP. Its few hundred flagged pixels (0.002 %) are
+one lossy encoding against another and do not shrink with quality.
+
+These still set their own encoding:
+
+- Earth's full pages keep the qualities its recipe declares; its smaller
+  texture levels follow their page, lossy ones through the lane.
+- Lighting rows and their billboards carry shading in alpha and stay lossless.
+- Mercury's JPEG maps keep their recipe quality (85). Chrome decodes them about
+  three times faster than lossy WebP, which costs about 30 % more bytes.
+- Saturn's layered and spectral materials keep their encodings.
+- Image-layer galaxies (LMC, SMC, M31, M33) and the Milky Way sky keep their
+  recipe qualities; their recipes cannot be rebaked until their stored recipe
+  digests are corrected.
+- Volume atlases (density in alpha, seen as stacked slices) and the
+  staging-only sphere-photograph refresh tool keep their encodings.
+
+To repeat the measurement, run
+[`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)
+on the files a lane change replaces.
+
 [solid-raster.mjs](../tools/objects/terrestrial-layers/solid-raster.mts) writes
 WebP assets and records their dimensions, sizes and hashes. Normalized maps stay
-lossless; banded display output defaults to lossless unless the recipe selects
-a quality setting. Ordinary triangle atlases default to WebP quality 90.
+lossless; display output is written in the lossy lane unless the recipe selects a
+quality setting.
 `pds3-scalar-map`, `facet-scalars`, `vtk-cell-categories` and `obj-uv-fits` atlases
 use lossless output, as do nearest-sampled layers and image-plane DEMs.
 Check decoded pixels after encoding. Rebuild affected atlases and CSS addresses

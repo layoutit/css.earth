@@ -25,7 +25,7 @@ export const parseColorPhotometry = shape({consumer:text,profile:shape({radiusKm
   vectors:shape({sun:text,observer:text}),levels:shape({boundaryPixels:number,luminance:array(number)})});
 export const parseSolidRasterConfig = shape({namespace:text,publicBase:text,
   geometry:optional(shape({radius:number,radiusKm:number,radialTerrain:optional(shape({path:text}))})),
-  raster:shape({width:number,height:number,bandCount:number,gutter:number,poleSize:number,surfaceQuality:optional(number),reportMissingPixels:optional(boolean),
+  raster:shape({width:number,height:number,bandCount:number,gutter:number,poleSize:number,reportMissingPixels:optional(boolean),
     observations:array(parseSolidObservation),scientific:optional(array(parseSolidScience)),
     shapeViews:optional(array(shape({...identity,label:text}))),
     surfaceObservations:optional(array(shape(identity))),

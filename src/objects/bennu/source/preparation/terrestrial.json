@@ -30,8 +30,7 @@
           "specialValueMagnitude": 1e+30
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       },
       {
@@ -52,8 +51,7 @@
           "specialValueMagnitude": 1e+30
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       },
       {
@@ -129,8 +127,7 @@
         }
       }
     ],
-    "observedColors": [],
-    "surfaceQuality": 90
+    "observedColors": []
   },
   "lighting": {
     "frameSize": 512,

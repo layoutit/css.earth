@@ -45,7 +45,8 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
     if (metadata.sourcePositionVariable !== undefined)
         text(metadata.sourcePositionVariable, 'sourcePositionVariable');
     const thumbnail = record(recipe.thumbnail, 'thumbnail');
-    fields(thumbnail, ['size', 'quality'], 'thumbnail', true);
+    fields(thumbnail, ['size'], 'thumbnail', true);
+    if ('quality' in thumbnail) throw new TypeError('thumbnail.quality is no longer read; thumbnails are encoded in the lossy lane (src/preparation/raster/lossy-lane.ts). Remove it from raster.json.');
     if (thumbnail.centerLongitudeDegrees !== undefined && !(typeof thumbnail.centerLongitudeDegrees === 'number' && Number.isFinite(thumbnail.centerLongitudeDegrees))) throw new TypeError('thumbnail.centerLongitudeDegrees must be a finite number.');
     if (thumbnail.crop !== undefined) {
         const crop = record(thumbnail.crop, 'thumbnail.crop');

@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/luhman-16b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "luhman-16b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssluhman-16b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "brightness",
+      "output": "luhman-16b-surface-{id}{suffix}.webp",
+      "thumbnail": "luhman-16b-lens-{id}.webp",
+      "source": "science/ureshino-2026/posterior_mean_chip1.npy",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness",
+        "label": "Brightness",
+        "format": "healpix-npy-map",
+        "path": "science/ureshino-2026/posterior_mean_chip1.npy",
+        "ordering": "ring",
+        "transform": "value",
+        "consumer": "ureshino-2026-doppler-imaging",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "relative intensity",
+        "minimum": 0.006416,
+        "maximum": 0.009022,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0.00642",
+          "0.00772",
+          "0.00902"
+        ],
+        "description": "Surface brightness from Doppler imaging: the posterior mean map of Ureshino et al. (2026), fitted to the CRIRES spectra of Crossfield et al. (2014).",
+        "title": "VLT CRIRES · Doppler-imaging map",
+        "sourceUrl": "https://zenodo.org/records/20024778"
+      }
+    },
+    {
+      "id": "uncertainty",
+      "output": "luhman-16b-surface-{id}{suffix}.webp",
+      "thumbnail": "luhman-16b-lens-{id}.webp",
+      "source": "science/ureshino-2026/posterior_var_chip1.npy",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "uncertainty",
+        "label": "Uncertainty",
+        "format": "healpix-npy-map",
+        "path": "science/ureshino-2026/posterior_var_chip1.npy",
+        "ordering": "ring",
+        "transform": "sqrt",
+        "consumer": "ureshino-2026-doppler-imaging",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "relative intensity, one standard deviation",
+        "minimum": 0.001232,
+        "maximum": 0.001612,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "0.00123",
+          "0.00142",
+          "0.00161"
+        ],
+        "description": "One standard deviation of the brightness at each point: the square root of the posterior variance map of Ureshino et al. (2026).",
+        "title": "VLT CRIRES · Doppler-imaging uncertainty",
+        "sourceUrl": "https://zenodo.org/records/20024778"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "luhman-16b-context-{id}{suffix}.webp",
+    "limbOutput": "luhman-16b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssluhman-16b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "sourceRadius": "measurements.json#radiusKm",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

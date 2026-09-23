@@ -1,0 +1,32 @@
+{
+ "id": "luhman-16b",
+ "classification": "star",
+ "order": 1746,
+ "physical": {
+  "name": "Luhman 16 B",
+  "horizonsCode": null,
+  "meanRadiusKm": 72921.8,
+  "gravitationalParameterKm3PerS2": 3725355219.18623,
+  "parent": "luhman-16",
+  "effectiveTemperatureK": 1261
+ },
+ "physicalNotes": "Radius 1.02 +/- 0.07 Jupiter radii: Filippazzo et al. (2015, ApJ 810, 158; arXiv:1508.01767), fundamental-parameters table; temperature 1261 +/- 55 K from the same table. Ureshino et al. (2026, arXiv:2605.08544) find about 1.2 Jupiter radii from their Doppler-imaging rotation velocity and period, with a tail down to 1.0. GM from the individual mass 29.4 Jupiter masses of Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2 (data-fit column).",
+ "hostedOrbit": {
+  "periodDays": 9697.388,
+  "semiMajorAxisStellarRadii": 7292.72,
+  "inclinationDegrees": 100.08,
+  "eccentricity": 0.344,
+  "argumentOfPeriapsisDegrees": 136.67,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 58140.915,
+  "ascendingNodePositionAngleDegrees": 139.98,
+  "sources": {
+   "period": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2, data-fit column (union/epilogue fit to HST relative astrometry of B around A, 2014-2020): P = 26.55 +/- 0.08 yr of 365.25 d.",
+   "shape": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2, data-fit column: a = 1.764 +/- 0.003 arcsec = 3.52 au at the Table 1 parallax, over A's radius; i = 79.92 +/- 0.008 degrees, stored as 100.08. Bedin et al.'s angles are measured in a sky frame mirrored about the north-west diagonal: stored as i' = 180 - i and Omega' = 270 - Omega, with omega unchanged. With that mapping the orbit reproduces Garcia et al. (2017)'s independent GeMS relative astrometry to 2.6 mas and the sign of their CRIRES relative radial velocities; the unmapped angles miss by 248 mas (packages/astronomy/src/hostedOrbits.test.ts).",
+   "eccentricity": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2, data-fit column: e = 0.344 +/- 0.001.",
+   "argumentOfPeriapsis": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2, data-fit column: omega = 136.67 +/- 0.09 degrees for B's orbit around A, stored unchanged (see shape).",
+   "phase": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2, data-fit column: T0 = 2018.060 +/- 0.003 Julian yr = MJD 51544.5 + 18.060 x 365.25, taken as BMJD_TDB.",
+   "orientation": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2, data-fit column: Omega = 130.02 +/- 0.01 degrees, stored as 270 - 130.02 = 139.98 degrees east of north (see shape)."
+  }
+ }
+}

@@ -10,20 +10,20 @@
     {
       "location": "public",
       "filename": "deimos-albedo-shadow@2x.webp",
-      "bytes": 1315896,
-      "sha256": "64838fbe83b1ca3b8115a1df6e0d4c85b486d1f877e3a1129669c21daf07f9ed"
+      "bytes": 1285026,
+      "sha256": "6214ce40253e1c2200ed22857869ef132c509186297e40dfcf323ac36cd7b505"
     },
     {
       "location": "public",
       "filename": "deimos-albedo-surface@2x.webp",
-      "bytes": 1432968,
-      "sha256": "d3e4d57aa5413983dcde5068e5e4e903087c81d465f79dbdffd3764613090ddc"
+      "bytes": 1051900,
+      "sha256": "8acd8dd21f61e8b032a501424eedc5fd15ae0ba95da88a9010411f2d3f7806ef"
     },
     {
       "location": "public",
       "filename": "deimos-albedo-thumbnail.webp",
-      "bytes": 666,
-      "sha256": "63b57ea31454100e8ebe65c595d0551fa5dd65f48850d009270afd9ef5a23ffd"
+      "bytes": 604,
+      "sha256": "a9efbd9d463982109c42f30d9470ffe5fc0282c8a44d18d2c66b34ca2d9f82e7"
     },
     {
       "location": "public",
@@ -34,14 +34,14 @@
     {
       "location": "public",
       "filename": "deimos-elevation-shadow@2x.webp",
-      "bytes": 490970,
-      "sha256": "e2e0350f23d3d6518f03233da2642945f744ca1b0d359443ab062eed9a2e4eee"
+      "bytes": 227348,
+      "sha256": "1625608663c18bee4c9c5ab06cc343016918f6123a8cc4263c95ec4db4c71e7b"
     },
     {
       "location": "public",
       "filename": "deimos-elevation-surface@2x.webp",
-      "bytes": 742896,
-      "sha256": "a7bf7198676361368844d723ec7a59498b214d75847885a057baaefd504f7bcb"
+      "bytes": 351652,
+      "sha256": "c98c85cd261c195634eeb912cc7c950abc1172e1af735826f47862cd4ad7a671"
     },
     {
       "location": "public",
@@ -58,14 +58,14 @@
     {
       "location": "public",
       "filename": "deimos-normal-shadow@2x.webp",
-      "bytes": 741730,
-      "sha256": "ec6e52bdc2241d08b7a5801239db788c07d09b42c633b098112c83f0fbb79be4"
+      "bytes": 251492,
+      "sha256": "66474962db12dd542cef7b7bb008c05b5694c9e0539611739e5edc4f3a079943"
     },
     {
       "location": "public",
       "filename": "deimos-normal-surface@2x.webp",
-      "bytes": 1605298,
-      "sha256": "1122dd8542d7f9e8d3b5f085d5260d5405329be403cc9275c2e760c2afd62b9e"
+      "bytes": 622592,
+      "sha256": "b9504431c01fb3a4577050d519f2e84d10304d721cf0223bff627679d7786240"
     },
     {
       "location": "public",
@@ -82,20 +82,20 @@
     {
       "location": "public",
       "filename": "deimos-slope-shadow@2x.webp",
-      "bytes": 1543112,
-      "sha256": "d8102905563262f96d206c259e3224e476bd577126e21978f4ca5f7f87aeb67c"
+      "bytes": 1525038,
+      "sha256": "652178bdbcf88efaa065b5dff70b1408629b7ba6b79ecfd7ec50e653bb868f30"
     },
     {
       "location": "public",
       "filename": "deimos-slope-surface@2x.webp",
-      "bytes": 1981274,
-      "sha256": "23a267bb337b732bfdb48928ecb7eb91995c85f8fb21bfe7b4522665ff41ca9a"
+      "bytes": 1767606,
+      "sha256": "5d37e004829018860e1cfb090fea50272c37df03f54fc7db2c74f0a3f0f23cce"
     },
     {
       "location": "public",
       "filename": "deimos-slope-thumbnail.webp",
-      "bytes": 790,
-      "sha256": "a593fd3f599edf0a54948423a53816e8c77596f063b19cb5f73190071826d331"
+      "bytes": 686,
+      "sha256": "b064c94f670f0e15f35d8fe7dcae1799dd7481772153c7e71a54b1469c258c2d"
     },
     {
       "location": "prepared",
@@ -125,13 +125,13 @@
       "location": "prepared",
       "filename": "lenses.json",
       "bytes": 2831,
-      "sha256": "f68d12b0133bbe0beafa05312985f2af603f5c41dc8f70b6e97f58f34bb68d42"
+      "sha256": "4793cbbddbb14333eee288b5a8f03d02ed081d9d4a90a5c34ffd85358a74e5c3"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 9918,
-      "sha256": "979c0df6acec0b8dd33c2278f1ef0ffa88f5b2669c94ba28f1d5e35e1c809fe0"
+      "bytes": 9600,
+      "sha256": "80e648197bf1b8030eee3a78ca3a5ae80e2b28a93407e2ee780cbe502ee08b8f"
     },
     {
       "location": "prepared",
@@ -142,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/albedo.webp",
-      "bytes": 63174,
-      "sha256": "5dfabb35358f0cead571055ca3b845d70d54476b72f21c710bd4f212ed160022"
+      "bytes": 44688,
+      "sha256": "059a9ddad331bc965419c6543ec4286bce692ac0ab8fb617367ccf8506cd709b"
     },
     {
       "location": "prepared",
@@ -160,14 +160,14 @@
     {
       "location": "prepared",
       "filename": "minimaps/slope.webp",
-      "bytes": 96454,
-      "sha256": "c42a072a5d8925893ef0222568d2fed8322f1ef6b9d64123ca67da66babce3bb"
+      "bytes": 65890,
+      "sha256": "6c10c714caa03f7fbe26e7ae6a89fc4c68db8a4b7608ab7ab5b4507ab1941396"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1273275,
-      "sha256": "f9ce3e3b459c2ae30a3640b0f6b4c37841f6ca6365fa3d185306d7f214360c61"
+      "bytes": 1272533,
+      "sha256": "a5e229cbc1db3291da1a321683248e0d7b7f13ddc47b3103997bf84002d11484"
     },
     {
       "location": "prepared",
@@ -178,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1029,
-      "sha256": "6fa1dafefbdf375b6ad1e4f5afed971c68c12a5306ae848090ad210a3edb5868"
+      "bytes": 1179,
+      "sha256": "68082007badb1acf813c7504031283c67787b20dd13ab9acb7f264ee54b88f39"
     },
     {
       "location": "prepared",
@@ -190,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 9922,
-      "sha256": "857fd0c3028d223be2ccd0213bdccf60d7b6f0fd8bd26545f6a42e3ab5f89f48"
+      "bytes": 9604,
+      "sha256": "d80fe5325596355abf92760f46ee8b31b68901c7a7ffb191e454f440e16c20c0"
     },
     {
       "location": "prepared",

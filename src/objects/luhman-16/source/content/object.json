@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "luhman-16",
+  "displayName": "Luhman 16 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.01 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-1508-01767",
+          "url": "https://arxiv.org/abs/1508.01767",
+          "label": "Filippazzo et al. 2015",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "2.0 parsecs",
+        "source": {
+          "catalogueId": "arxiv-2403-08865",
+          "url": "https://arxiv.org/abs/2403.08865",
+          "label": "Bedin et al. 2024, barycentre parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "35.4 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2403-08865",
+          "url": "https://arxiv.org/abs/2403.08865",
+          "label": "Bedin et al. 2024, Table 2",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "luhman-16-lens-shape.webp",
+        "surface": "luhman-16-surface-shape@2x.webp",
+        "poles": "luhman-16-poles-shape@2x.webp",
+        "source": {
+          "id": "luhman-16-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2403.08865"
+        },
+        "falseColor": false,
+        "notes": "No image of its surface exists: Luhman 16 A's clouds have been studied from how its brightness varies, but no map of it is deposited (see the ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bedin et al. (2024), Astronomische Nachrichten",
+      "href": "https://arxiv.org/abs/2403.08865"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2403.08865",
+      "credit": "Bedin et al. (2024), Astronomische Nachrichten"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/luhman-16.json",
+      "credit": "Radius from Filippazzo et al. (2015); mass and barycentre astrometry from Bedin et al. (2024); no measured rotation axis (display convention)"
+    }
+  }
+}

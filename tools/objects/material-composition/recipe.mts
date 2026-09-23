@@ -1,5 +1,5 @@
-import {parse, object, string, optional, dictionary, array, record} from './data-schema.mts';
-const materialBase = object({schema:string,namespace:string,publicPrefix:string,files:optional(dictionary(string)),sourcePins:array(record)});
+import {parse, object, string, optional, dictionary} from './data-schema.mts';
+const materialBase = object({schema:string,namespace:string,publicPrefix:string,files:optional(dictionary(string))});
 /** Shared address and numeric checks run before raster allocation or writes. */
 export function validateMaterialRecipe(input: unknown, schema: string) {
   const config = parse(input, materialBase, 'material recipe');
@@ -12,7 +12,6 @@ export function validateMaterialRecipe(input: unknown, schema: string) {
     if (value && typeof value === 'object') Object.values(value).forEach(finite);
   };
   finite(input);
-  if (!Array.isArray(config.sourcePins) || !config.sourcePins.length) throw new TypeError('Material inputs require source pins.');
   return config;
 }
 

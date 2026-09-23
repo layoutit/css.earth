@@ -10,7 +10,6 @@
     "bandCount": 16,
     "gutter": 64,
     "poleSize": 1024,
-    "surfaceQuality": 90,
     "reportMissingPixels": true,
     "observations": [
       {
@@ -24,8 +23,7 @@
           "resolutionMeters": 416.75190045277
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       },
       {
@@ -36,8 +34,7 @@
           "centerLongitude": 180
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         }
       },
       {

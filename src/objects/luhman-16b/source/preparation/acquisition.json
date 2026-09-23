@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/ureshino-2026/posterior_mean_chip1.npy",
+      "url": "https://zenodo.org/records/20024778/files/prvjapan/BayesianDI-v1.0.0.zip?download=1",
+      "member": "prvjapan-BayesianDI-b75b441/results/posterior_mean_chip1.npy"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/ureshino-2026/posterior_var_chip1.npy",
+      "url": "https://zenodo.org/records/20024778/files/prvjapan/BayesianDI-v1.0.0.zip?download=1",
+      "member": "prvjapan-BayesianDI-b75b441/results/posterior_var_chip1.npy"
+    }
+  ]
+}

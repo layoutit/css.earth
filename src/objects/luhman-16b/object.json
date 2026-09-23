@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "luhman-16b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Luhman 16 B",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "brightness",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "uncertainty",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 72921.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/luhman-16b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Luhman 16 B",
+      "classification": "star",
+      "color": "#ff5b00",
+      "distanceAu": 411836.9,
+      "description": "One of the two nearest brown dwarfs, its clouds mapped from the Doppler shifts of its spectrum as it spins.",
+      "systemName": "Luhman 16 system",
+      "order": 1746,
+      "context": {
+        "order": 1746
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -35061834863338028,
+        11193776786351084,
+        -49408000304797900
+      ],
+      "presentationToReference": [
+        -0.8681379880166696,
+        0.39238961481479173,
+        0.3039191075728345,
+        0.27701660227227554,
+        -0.12501461676795433,
+        0.9526978259972494,
+        -0.4118230637396268,
+        -0.9112638123945562,
+        0.0001684999893136631
+      ],
+      "orbitUpReference": [
+        -0.39238961481479173,
+        0.12501461676795433,
+        0.9112638123945562
+      ],
+      "metersPerUnit": 235231.61290322582,
+      "bodyRadiusM": 72921800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

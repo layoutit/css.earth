@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-2605-08544",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ureshino et al. (2026): Bayesian Doppler Imaging: Simultaneous Inference of Surface Maps and Geometric Parameters",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2605.08544"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2605.08544",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2605.08544",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract; section on Luhman 16B: posterior mean and uncertainty maps, inclination 61.0 degrees, rotation period 4.828 h"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "Y. Ureshino",
+    "H. Kawahara",
+    "H. Yama",
+    "K. Masuda"
+  ],
+  "publicationDate": "2026"
+}

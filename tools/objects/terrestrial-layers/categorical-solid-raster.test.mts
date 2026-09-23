@@ -66,7 +66,7 @@ test('actual category pack, encoded atlases, poles, legend and thumbnail retain 
     const entries=['units.shp','units.dbf','units.prj'].map(path=>({path,id:path,consumers:['geology']}));
     const pinned = await fixtureSource(root, entries);
     const source = {...pinned, async validateGroup(consumer: string) { assert.equal(consumer, 'geology'); return pinned.validateGroup(consumer); }};
-    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,surfaceQuality:5,observations:[],scientific:[lens]},
+    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[lens]},
       lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});
@@ -95,7 +95,7 @@ test('explicit nearest numeric display preserves missing-cell colors through enc
     await Promise.all([writeFile(join(root,'grid.img'),bytes),writeFile(join(root,'grid.lbl'),label)]);
     const entries=['grid.img','grid.lbl'].map(path=>({path,id:path,consumers:['science']}));
     const source = await fixtureSource(root, entries);
-    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,surfaceQuality:5,observations:[],scientific:[lens]},
+    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[lens]},
       lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});

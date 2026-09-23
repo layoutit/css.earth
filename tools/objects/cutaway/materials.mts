@@ -8,15 +8,19 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared/prepared-webp.mts';
+import {writeLossyWebp} from '../../../src/preparation/raster/lossy-lane.ts';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {dotVector as dot3} from '../material-composition/ellipsoid.mts';
+
+/** Interior cutaways are smooth illustrations, written in the lossy lane (lossy-lane.ts). */
+const INTERIOR_WEBP = { alphaQuality: 100, effort: 6 } as const;
 import {validateMaterialRecipe,validateRelativePath} from '../material-composition/recipe.mts';
 /** Declared radial composition, two-face cutaway shading, and polar wedge rasters. */
 export async function prepareCutawayMaterials({sourceDirectory,publicDirectory,config:input,objectLightDirection}: {sourceDirectory:string;publicDirectory:string;config:unknown;objectLightDirection:ReadonlyVector3}) {
   const config=parse(input,cutawayRecipe,'cutaway material recipe');
   validateMaterialRecipe(config, 'cssearth-cutaway-materials@1');
   validateRelativePath(config.source);
-  await verifyObservationSources(sourceDirectory,config.sourcePins);
+  await verifyObservationSources(sourceDirectory,[{path:config.source}]);
 
 
 
@@ -244,9 +248,9 @@ async function writePreparedRaster({ url, url2x, width, height, render }: {url:s
     const rasterWidth = width * scale;
     const rasterHeight = height * scale;
     const raw = render(rasterWidth, rasterHeight);
-    await sharp(raw, {
+    await writeLossyWebp(sharp(raw, {
       raw: { width: rasterWidth, height: rasterHeight, channels: 4 },
-    }).webp({ lossless: true, effort: 6 }).toFile(publicPath(assetUrl));
+    }), publicPath(assetUrl), INTERIOR_WEBP);
     const bytes = await readFile(publicPath(assetUrl));
     outputs.push(Object.freeze({
       url: assetUrl,
@@ -306,9 +310,9 @@ async function writePreparedOuterPoleRaster({
         }
       }
     }
-    await sharp(data, {
+    await writeLossyWebp(sharp(data, {
       raw: { width, height, channels: 4 },
-    }).webp({ lossless: true }).toFile(publicPath(assetUrl));
+    }), publicPath(assetUrl), INTERIOR_WEBP);
     const bytes = await readFile(publicPath(assetUrl));
     outputs.push(Object.freeze({
       url: assetUrl,

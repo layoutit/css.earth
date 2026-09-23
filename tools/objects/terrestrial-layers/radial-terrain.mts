@@ -368,7 +368,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         !config.geometry.radialTerrain.thumbnail && !radial.faces.some(face => face.estimated) && !radial.grid?.imageGrid) {
       const { flood, shadow } = neutralShapeAtlas(radial, sunDirection);
       const raw = { width: canonicalWidth, height: canonicalHeight, channels: 4 as const };
-      const encoding = { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
+      // No quality: the emitter writes it in the lossy lane (lossy-lane.ts).
+      const encoding = { alphaQuality: 100, effort: 4 };
       surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw }), encoding);
       surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw }), encoding);
       surface.polesUrl = surface.surface.url;
@@ -570,7 +571,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     // Scientific colours retain exact palette values; the numeric source index is preparation-only.
     // Photographs keep full chroma detail through sharp's smart subsampling.
     const encoding = scalarSources || nearest || scientific?.format === 'image-plane-dem' ? { lossless: true, effort: 4 }
-      : { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4, ...(observation ? { smartSubsample: true } : {}) };
+      : { alphaQuality: 100, effort: 4 };
     surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw: { width, height, channels: 4 } }), encoding);
     // A photograph that keeps its acquisition lighting has no second, epoch-lit atlas: Shadows shows it as photographed.
     if (observation?.retainsIllumination) delete surface.shadowSurface;

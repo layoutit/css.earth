@@ -14,7 +14,7 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
       ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/'], ['hd-110067', 'HD 110067 system', '/hd-110067/'], ['hd-29391', '51 Eridani system', '/hd-29391/'],
       ['kepler-16-a', 'Kepler-16 system', '/kepler-16-a/'], ['wd-1856-534', 'WD 1856+534 system', '/wd-1856-534/'], ['kelt-9', 'KELT-9 system', '/kelt-9/'],
       ['vhs-1256-1257', 'VHS 1256-1257 system', '/vhs-1256-1257/'], ['gq-lup', 'GQ Lup system', '/gq-lup/'], ['dh-tau', 'DH Tau system', '/dh-tau/'],
-      ['roxs-42b', 'ROXs 42B system', '/roxs-42b/'], ['wasp-76', 'WASP-76 system', '/wasp-76/'], ['pds-70', 'PDS 70 system', '/pds-70/'], ['wasp-18', 'WASP-18 system', '/wasp-18/'], ['wasp-121', 'WASP-121 system', '/wasp-121/'],
+      ['roxs-42b', 'ROXs 42B system', '/roxs-42b/'], ['wasp-76', 'WASP-76 system', '/wasp-76/'], ['pds-70', 'PDS 70 system', '/pds-70/'], ['wasp-18', 'WASP-18 system', '/wasp-18/'], ['wasp-121', 'WASP-121 system', '/wasp-121/'], ['luhman-16', 'Luhman 16 system', '/luhman-16/'],
       ['hip-65426', 'HIP 65426 system', '/hip-65426/'], ['af-lep', 'AF Lep system', '/af-lep/'], ['ab-pic', 'AB Pic system', '/ab-pic/'], ['yses-1', 'YSES 1 system', '/yses-1/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the Gaia measurement that binds it to A (boundTo).
   // VHS 1256-1257 B and ROXs 42B B do have one: each circles A on its measured orbit, and the planet circles the pair.
@@ -22,7 +22,7 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],
     ['trappist-1e', 'trappist-1'], ['trappist-1h', 'trappist-1'], ['trappist-1', 'trappist-1'],
     ['beta-pictoris-b', 'beta-pictoris'], ['beta-pictoris-d', 'beta-pictoris'], ['hr-8799-b', 'hr-8799'], ['hr-8799-e', 'hr-8799'], ['hd-29391-b', 'hd-29391'],
-    ['kelt-9b', 'kelt-9'], ['kelt-9', 'kelt-9'], ['wasp-76b', 'wasp-76'], ['wasp-76', 'wasp-76'], ['pds-70-b', 'pds-70'], ['pds-70-c', 'pds-70'], ['pds-70', 'pds-70'], ['wasp-18b', 'wasp-18'], ['wasp-121b', 'wasp-121'], ['wasp-121', 'wasp-121'],
+    ['kelt-9b', 'kelt-9'], ['kelt-9', 'kelt-9'], ['wasp-76b', 'wasp-76'], ['wasp-76', 'wasp-76'], ['pds-70-b', 'pds-70'], ['pds-70-c', 'pds-70'], ['pds-70', 'pds-70'], ['wasp-18b', 'wasp-18'], ['wasp-121b', 'wasp-121'], ['wasp-121', 'wasp-121'], ['luhman-16b', 'luhman-16'], ['luhman-16', 'luhman-16'],
     ['vhs-1256-1257-companion', 'vhs-1256-1257'], ['vhs-1256-1257-b', 'vhs-1256-1257'], ['gq-lup-b', 'gq-lup'], ['dh-tau-b', 'dh-tau'],
     ['roxs-42b-companion', 'roxs-42b'], ['roxs-42b-b', 'roxs-42b'],
     ['hip-65426-b', 'hip-65426'], ['af-lep-b', 'af-lep'], ['ab-pic-b', 'ab-pic'], ['yses-1-b', 'yses-1']] as const) {

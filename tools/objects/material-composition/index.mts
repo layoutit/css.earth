@@ -12,7 +12,7 @@ import {shape,text,number,boolean,array} from '../terrestrial-layers/source-reco
 import {isRecord,requireRecord} from '../../sources/source-values.mts';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {mkdir,readFile,realpath,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,realpath,writeFile,rm} from 'node:fs/promises';
 import {relative,resolve,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import sharp from 'sharp';
@@ -71,6 +71,8 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const compiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:{...radial,lenses:materialLenses,views}});
   const material=await compiler.composeMaterialSurfaces(metadata);
   const {runtimeScene:scene}=await compiler.prepareLayeredScene(material);
+  // The raw material masters only feed the composition above; they are not published, and prepared/ holds published files.
+  await rm(stagingDirectory,{recursive:true,force:true});
   const sky=prepareCubicSky({objectId:descriptor.id,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD});
   const sun=prepareDirectionalSun();
   const contentResult=await prepareContent({sourceDirectory,publicDirectory,outputDirectory,config:{contentPath:relative(sourceDirectory,requiredSource('content').path)}});

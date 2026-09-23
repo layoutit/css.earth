@@ -3,6 +3,204 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lighting-2x-billboard.webp",
+      "bytes": 115740,
+      "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-00.webp",
+      "bytes": 37672,
+      "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-01.webp",
+      "bytes": 70898,
+      "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-02.webp",
+      "bytes": 92030,
+      "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-03.webp",
+      "bytes": 106840,
+      "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-04.webp",
+      "bytes": 120584,
+      "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-05.webp",
+      "bytes": 132094,
+      "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-06.webp",
+      "bytes": 143228,
+      "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-07.webp",
+      "bytes": 153142,
+      "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-08.webp",
+      "bytes": 163984,
+      "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-09.webp",
+      "bytes": 172632,
+      "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-10.webp",
+      "bytes": 177128,
+      "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-11.webp",
+      "bytes": 179144,
+      "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-12.webp",
+      "bytes": 173518,
+      "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-13.webp",
+      "bytes": 161150,
+      "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-14.webp",
+      "bytes": 132038,
+      "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-15.webp",
+      "bytes": 69930,
+      "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-16.webp",
+      "bytes": 74522,
+      "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-17.webp",
+      "bytes": 143520,
+      "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-18.webp",
+      "bytes": 185628,
+      "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-19.webp",
+      "bytes": 218252,
+      "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-20.webp",
+      "bytes": 245184,
+      "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-21.webp",
+      "bytes": 269836,
+      "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-22.webp",
+      "bytes": 291326,
+      "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-23.webp",
+      "bytes": 312110,
+      "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-24.webp",
+      "bytes": 333302,
+      "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-25.webp",
+      "bytes": 355976,
+      "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-26.webp",
+      "bytes": 377782,
+      "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-27.webp",
+      "bytes": 403282,
+      "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-28.webp",
+      "bytes": 429004,
+      "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-29.webp",
+      "bytes": 456570,
+      "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-30.webp",
+      "bytes": 481914,
+      "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-31.webp",
+      "bytes": 526556,
+      "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
+    },
+    {
+      "location": "public",
       "filename": "titan-coverage-distance@2x.webp",
       "bytes": 2539954,
       "sha256": "d9e495cbeb2daab159675e1d7da0e9e11068bd05e6b5cbd1ccf61f0e0dff5232"
@@ -46,14 +244,14 @@
     {
       "location": "public",
       "filename": "titan-lens-normal.webp",
-      "bytes": 1060,
-      "sha256": "4e9c0e25bfd152607e19a9b4c54eb0e4e8decdcdd841f1da5bbc43810cbba335"
+      "bytes": 730,
+      "sha256": "11ca3e0d7cf00a6c4d603e6c52011e24b836b19bac767f872b10fc226b8824bc"
     },
     {
       "location": "public",
       "filename": "titan-lens-radar.webp",
-      "bytes": 1572,
-      "sha256": "b7f18cea26c004b33e8a5949fef2873cef0a2ce7a685e0855ecd9e7920eca589"
+      "bytes": 1176,
+      "sha256": "b64d0911409b307a8d9540f92c04b8f9b1b2effb079a4c5cd97c0c55824e6075"
     },
     {
       "location": "public",
@@ -63,207 +261,9 @@
     },
     {
       "location": "public",
-      "filename": "titan-lighting-2x-billboard.webp",
-      "bytes": 115740,
-      "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-00.webp",
-      "bytes": 37672,
-      "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-01.webp",
-      "bytes": 70898,
-      "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-02.webp",
-      "bytes": 92030,
-      "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-03.webp",
-      "bytes": 106840,
-      "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-04.webp",
-      "bytes": 120584,
-      "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-05.webp",
-      "bytes": 132094,
-      "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-06.webp",
-      "bytes": 143228,
-      "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-07.webp",
-      "bytes": 153142,
-      "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-08.webp",
-      "bytes": 163984,
-      "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-09.webp",
-      "bytes": 172632,
-      "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-10.webp",
-      "bytes": 177128,
-      "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-11.webp",
-      "bytes": 179144,
-      "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-12.webp",
-      "bytes": 173518,
-      "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-13.webp",
-      "bytes": 161150,
-      "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-14.webp",
-      "bytes": 132038,
-      "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-15.webp",
-      "bytes": 69930,
-      "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-16.webp",
-      "bytes": 74522,
-      "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-17.webp",
-      "bytes": 143520,
-      "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-18.webp",
-      "bytes": 185628,
-      "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-19.webp",
-      "bytes": 218252,
-      "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-20.webp",
-      "bytes": 245184,
-      "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-21.webp",
-      "bytes": 269836,
-      "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-22.webp",
-      "bytes": 291326,
-      "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-23.webp",
-      "bytes": 312110,
-      "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-24.webp",
-      "bytes": 333302,
-      "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-25.webp",
-      "bytes": 355976,
-      "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-26.webp",
-      "bytes": 377782,
-      "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-27.webp",
-      "bytes": 403282,
-      "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-28.webp",
-      "bytes": 429004,
-      "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-29.webp",
-      "bytes": 456570,
-      "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-30.webp",
-      "bytes": 481914,
-      "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9"
-    },
-    {
-      "location": "public",
-      "filename": "titan-lighting-2x-row-31.webp",
-      "bytes": 526556,
-      "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
-    },
-    {
-      "location": "public",
       "filename": "titan-normal@2x.webp",
-      "bytes": 3477388,
-      "sha256": "0b22e5f53ac8ff0f293460bba1a5eebe795690796cf7983b87bb076b942c8655"
+      "bytes": 1846530,
+      "sha256": "11f38fee73aa161cc4a55642bfa303c41c1d2b9a5c5db7568898df7332db25c6"
     },
     {
       "location": "public",
@@ -304,8 +304,8 @@
     {
       "location": "public",
       "filename": "titan-radar@2x.webp",
-      "bytes": 13254156,
-      "sha256": "fe7cd89a697af4edfaefebe12907cc7f6db381bf1530f26c44de0d1e29ba74f0"
+      "bytes": 9927924,
+      "sha256": "7ba66907389064027f3e378787e0b02e0275255c23a9dfc5d32f5dff9754188d"
     },
     {
       "location": "public",
@@ -316,14 +316,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 93233,
-      "sha256": "74a25cee30275fa46d4c750c8632133475a27711a6562c4bf90508ee042b430e"
+      "bytes": 89768,
+      "sha256": "6df0fca19e4fc473c3d27ff3b70bc08d7097892461dcfa04a78503aa843ca9e6"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1556,
-      "sha256": "96300d619b4eb11b2de2fd6c3f44e80f1abb9ea5efffa32fc05bcb49b6464de9"
+      "sha256": "b324a0e9f5c5524e4af6c468e939597647688f23c0fcd58c6e43941ab15cff5e"
     },
     {
       "location": "prepared",
@@ -351,12 +351,6 @@
     },
     {
       "location": "prepared",
-      "filename": "material.json",
-      "bytes": 28529,
-      "sha256": "47ce75ce940edb4e3087374da8297dabd777d1b9e61db4a4cfe87310053ba7e0"
-    },
-    {
-      "location": "prepared",
       "filename": "minimaps.json",
       "bytes": 481,
       "sha256": "21fac1e5fbbcc0cf36038109b5d0e72b37bb79c8adc5c624f1e791ab2bf2fa32"
@@ -364,8 +358,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/coverage-distance.webp",
-      "bytes": 113364,
-      "sha256": "c6360f58fd99398928dbdfd160e6c139e66f02bbd72c28750ab4ba42081df636"
+      "bytes": 117890,
+      "sha256": "b4220f1136025c9878b7a1fb75096c9afdd8fabfa102eb69906d4afd21cb8790"
     },
     {
       "location": "prepared",
@@ -376,8 +370,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/interpolated.webp",
-      "bytes": 98706,
-      "sha256": "75cb71124e59598dcb7b3ebee497e9162bd16f77bc674dccaee49fc1eb07b48f"
+      "bytes": 69724,
+      "sha256": "ee3256e1ffe091b7f949467bf13139edbd1b7c197627b2bc81b58d864273e07e"
     },
     {
       "location": "prepared",
@@ -394,14 +388,14 @@
     {
       "location": "prepared",
       "filename": "minimaps/topography.webp",
-      "bytes": 28858,
-      "sha256": "021eacffa56f78c080cc7aea48d34c0208613c2e2bdbe83c8d9ec7c11516a9b0"
+      "bytes": 24986,
+      "sha256": "61ecb2f500a479dfe52dbaf8a297127f80b7f21e842acb173bf31c981d4ed027"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 451626,
-      "sha256": "5ecbaed713f169ab6e0c460c5d7c3340188c8001728eab3c6e76189c0dbd6d09"
+      "bytes": 450680,
+      "sha256": "c50d68e2d9cba0f6a992a900fb7b0f2cfb4de7a2e96996e499798bb09f12ec69"
     },
     {
       "location": "prepared",
@@ -412,8 +406,8 @@
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1030,
-      "sha256": "e77d29a7886a4a779f98e7b961b3ed16e6aa1780491cf229debe7c962caedd6d"
+      "bytes": 1180,
+      "sha256": "719e27f9db4fabc1ab8ceaa32b19a9cf93556b68500161893914badfa4ed2088"
     },
     {
       "location": "prepared",
@@ -423,21 +417,15 @@
     },
     {
       "location": "prepared",
-      "filename": "surfaces.json",
-      "bytes": 13338,
-      "sha256": "a4e2e623bd5ba3b9333556c09329354893dc00dafbd30ee01d38dd78519dcd39"
+      "filename": "world-navigation.json",
+      "bytes": 1223,
+      "sha256": "28ebe838364132825cdd9ce0aff389df34c364f788fb788521ab5f1530b1ea70"
     },
     {
       "location": "prepared",
       "filename": "text.json",
       "bytes": 1648,
       "sha256": "a56b43ae5befe7ce786536bbf29a34bd6775c62f72e993590b01a159ceada84a"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1223,
-      "sha256": "28ebe838364132825cdd9ce0aff389df34c364f788fb788521ab5f1530b1ea70"
     }
   ]
 }

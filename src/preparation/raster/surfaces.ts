@@ -5,6 +5,7 @@ import { RASTER_DENSITY, type RasterRecipe } from './config.js';
 import { raster, readRgba, assetPath } from './io.js';
 import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.js';
 import { composeLimbPreview } from './emission-preview.js';
+import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.js';
 import { missingCoverageColor } from '../../platform/prepare-missing-coverage.mts';
 type NativePoleSampler = { readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean; };
 
@@ -90,9 +91,12 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 const plates = interpreted.plates;
                 if (!plates) throw new TypeError(`Surface ${surface.id} declares emission but its interpretation returned no plates.`);
                 if (surface.thumbnailFromLimbPlate) thumbnailLimb = plates.limb;
-                const encode = (plate: InterpretedPlate) => plate.lossless ? { lossless: true, effort: 6 } : { quality: 90, alphaQuality: 100, smartSubsample: true, effort: 6 };
-                await raster(plates.offLimb.data, plates.offLimb.size, plates.offLimb.size).webp(encode(plates.offLimb)).toFile(assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
-                await raster(plates.limb.data, plates.limb.size, plates.limb.size).webp(encode(plates.limb)).toFile(assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
+                // A lossless plate keeps its values; a lossy one is encoded in the lossy lane (lossy-lane.ts).
+                const write = (plate: InterpretedPlate, path: string) => plate.lossless
+                    ? raster(plate.data, plate.size, plate.size).webp({ lossless: true, effort: 6 }).toFile(path)
+                    : writeLossyWebp(raster(plate.data, plate.size, plate.size), path, { alphaQuality: 100, effort: 6 });
+                await write(plates.offLimb, assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
+                await write(plates.limb, assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
             }
         } else {
             pixels = source ?? await readRgba(resolve(sourceDirectory, surface.source), width, height, true, surface.sharpen);
@@ -123,8 +127,8 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
         let image = raster(packed.data, packed.packedWidth, packed.packedHeight);
         if (source && !resizedUnpacked && (packingWidth !== width || packingHeight !== height))
             image = image.resize(width + height / config.latitudeBands / 2, height + height / 2, { kernel: 'lanczos3' });
-        // Numeric and categorical surfaces keep their selected values: lossless, no chroma subsampling.
-        const webp = nearest ? { lossless: true, effort: 6 } : config.resample === 'source-packed' ? { quality: 90, smartSubsample: true } : { quality: 88, smartSubsample: true, effort: 6 };
+        // Numeric and categorical surfaces keep their selected values: lossless, no chroma subsampling. Other surfaces are
+        // encoded in the lossy lane (lossy-lane.ts).
         const output = assetPath(publicDirectory, surface.output, density, surface.id);
         if (surface.encoding) {
             // Chrome decodes these maps faster as JPEG than as lossy WebP,
@@ -135,10 +139,12 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             await (grayscale ? pixels.grayscale().toColourspace('b-w') : pixels).jpeg({ quality, mozjpeg: encoder === 'mozjpeg', progressive, ...(chromaSubsampling ? { chromaSubsampling } : {}) }).toFile(output);
             // Lens thumbnails come from the WebP encoding of the prepared map, held in memory only.
             if (config.thumbnail.crop)
-                thumbnailSource = await image.clone().webp(webp).toBuffer();
+                thumbnailSource = await encodeLossyWebp(image.clone(), { effort: 6 });
         }
+        else if (nearest)
+            await image.webp({ lossless: true, effort: 6 }).toFile(output);
         else
-            await image.webp(webp).toFile(output);
+            await writeLossyWebp(image, output, { effort: 6 });
         if (!config.polesCombined) {
             const polar = createPolarSprite(pixels, width, height, config.polarTile * density, config.latitudeBands, nativePhotograph
                 ? { sampling: nearest ? 'nearest' : 'bilinear', nativePhotograph, missingColor: missingCoverageColor }
@@ -156,16 +162,16 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 const sourceX = ((left + x) % width + width) % width, offset = ((top + y) * width + sourceX) * 4;
                 crop.set(pixels.subarray(offset, offset + 4), (y * cropSize + x) * 4);
             }
-            await raster(crop, cropSize, cropSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha().webp(nearest ? { lossless: true, effort: 6 } : { quality: config.thumbnail.quality, effort: 6 }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+            if (nearest) await raster(crop, cropSize, cropSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha().webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+            else await writeLossyWebp(raster(crop, cropSize, cropSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha(), assetPath(publicDirectory, surface.thumbnail, 1, surface.id), { effort: 6 });
         }
         // The authored crop is in canonical-density map pixels.
         if (config.thumbnail.crop)
-            await sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, RASTER_DENSITY, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+            await writeLossyWebp(sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, RASTER_DENSITY, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }), assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
         if (thumbnailLimb) {
             const plateSize = thumbnailLimb.size, disc = composeLimbPreview(thumbnailLimb, pixels);
-            await raster(disc, plateSize, plateSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' })
-                .webp({ quality: config.thumbnail.quality, alphaQuality: 100, effort: 6 })
-                .toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+            await writeLossyWebp(raster(disc, plateSize, plateSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }),
+                assetPath(publicDirectory, surface.thumbnail, 1, surface.id), { alphaQuality: 100, effort: 6 });
         }
     }
     if (config.polesCombined) {
@@ -180,7 +186,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                     for (let y = 0; y < tileSize; y++)
                         atlas.set(tile.subarray(y * tileSize * 4, (y + 1) * tileSize * 4), (y * width + (surfaceIndex * 2 + poleIndex) * tileSize) * 4);
                 }
-            await raster(atlas, width, tileSize).webp({ quality: 90, alphaQuality: 100 }).toFile(assetPath(publicDirectory, config.polesOutput, density));
+            await writeLossyWebp(raster(atlas, width, tileSize), assetPath(publicDirectory, config.polesOutput, density), { alphaQuality: 100 });
 }
     return { metadata, decoded, interpretations };
 }
