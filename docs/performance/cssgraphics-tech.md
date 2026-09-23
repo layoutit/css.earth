@@ -313,8 +313,8 @@ This was the user's manual trace, not a new synchronized video/recorder capture.
 
 Source entry points in this working tree:
 
-- [Planner client](../../src/renderers/css/universe/world-context-planner-client.ts)
-  and [planner](../../src/renderers/css/universe/world-context-planner.ts).
+- [Planner client](../../src/renderers/css/universe/world-context/world-context-planner-client.ts)
+  and [planner](../../src/renderers/css/universe/world-context/world-context-planner.ts).
 - [World frame queue](../../src/renderers/css/navigation/world-frame-queue.ts).
 - [Baked celestial sky](../../src/renderers/css/sky/prepared-sky-runtime.ts)
   and [opacity fader](../../src/renderers/css/stars/opacity-fader.ts).

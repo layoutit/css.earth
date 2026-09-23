@@ -39,9 +39,9 @@ export function parseSpatialContextCommand(args: readonly string[], cwd = proces
 }
 
 /** The sRGB hex of a Planck spectrum at a temperature, through a CIE colour-matching table (the route a star without a measured
- * spectrum takes in tools/objects/observation/stellar-photometric-color.mts). */
+ * spectrum takes in tools/objects/observation/stellar/stellar-photometric-color.mts). */
 async function planckHex(kelvin: number, colorMatchingPath: string): Promise<string> {
-  const [{ planckColor }, { parseCieTable }] = await Promise.all([import('./observation/stellar-photometric-color.mts'), import('./observation/disc-integrated-color.mts')]);
+  const [{ planckColor }, { parseCieTable }] = await Promise.all([import('./observation/stellar/stellar-photometric-color.mts'), import('./observation/disc-integrated-color.mts')]);
   const color = planckColor(kelvin, parseCieTable(await readFile(colorMatchingPath, 'utf8'), 3));
   return `#${color.srgb.map(channel => channel.toString(16).padStart(2, '0')).join('')}`;
 }

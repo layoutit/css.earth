@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-29391",
+  "card": {
+    "text": "Young F0 star 30 parsecs away in Eridanus, orbited by a giant planet photographed directly.",
+    "sources": [
+      {
+        "catalogueId": "simbad-hd-29391",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=51+Eri",
+        "label": "SIMBAD",
+        "checked": "2026-09-23",
+        "locator": "Basic data",
+        "quote": "Spectral type: F0IV"
+      },
+      {
+        "catalogueId": "arxiv-1508-03084",
+        "url": "https://arxiv.org/abs/1508.03084",
+        "label": "Macintosh et al. 2015",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Near-infrared observations show a spectrum with strong methane and water vapor absorption."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "51 Eridani is a young F0 star 30 parsecs away. Its planet b, found in 2015 with the Gemini Planet Imager, shows methane in its infrared glow.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1508-03084",
+        "url": "https://arxiv.org/abs/1508.03084",
+        "label": "Macintosh et al. 2015",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Near-infrared observations show a spectrum with strong methane and water vapor absorption."
+      },
+      {
+        "catalogueId": "gaia-dr3-hd-29391",
+        "url": "https://gea.esac.esa.int/archive/",
+        "label": "Gaia DR3 parallax",
+        "checked": "2026-09-23",
+        "locator": "gaiadr3.gaia_source, source_id 3205095125321700480",
+        "quote": "parallax 33.4390 +/- 0.0777 mas"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}

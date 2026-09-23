@@ -276,12 +276,14 @@ export async function scaffoldStar(spec: StarScaffold, root = process.cwd()) {
   const record = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${spec.id}.json`), 'utf8')) as unknown;
   const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href) as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
   const files = scaffoldStarFiles(spec, record, SOLAR_GEOMETRY_EPOCH_JD_TT);
+  // The title font is a pinned source; a missing copy is refused before any file is written, as the hosted-planet scaffold does.
+  const font = resolve(root, 'src/objects/betelgeuse/source/presentation/InterVariable.ttf');
+  if (!await stat(font).then(() => true, () => false)) throw new Error(`${font} is missing; restore it (pnpm setup:assets) before scaffolding.`);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
   const presentation = resolve(root, 'src/objects', spec.id, 'source/presentation');
   await copyFile(resolve(root, 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL'), resolve(presentation, 'LICENSE.INTER-OFL'));
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-  const font = resolve(root, 'src/objects/betelgeuse/source/presentation/InterVariable.ttf');
-  if (await stat(font).then(() => true, () => false)) await copyFile(font, resolve(presentation, 'InterVariable.ttf'));
+  await copyFile(font, resolve(presentation, 'InterVariable.ttf'));
   return [...files.keys(), `src/objects/${spec.id}/source/presentation/context.png`];
 }
 

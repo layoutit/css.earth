@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { createNavigationLifecycle } from '../navigation-lifecycle.mts';
+import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mts';
 
 function harness() {
   const errors: unknown[] = [], cancelled: string[] = [], marks: string[] = [];

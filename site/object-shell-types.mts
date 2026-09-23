@@ -1,7 +1,7 @@
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
-import type { NavigationContent } from './navigation-content.mts';
+import type { NavigationContent } from './navigation/navigation-content.mts';
 import type { ObjectEntry } from './object-schema.mts';
-import type { SceneOverview, SceneSubject, SelectionTarget } from './scene-selection.mts';
+import type { SceneOverview, SceneSubject, SelectionTarget } from './scene/scene-selection.mts';
 import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 
