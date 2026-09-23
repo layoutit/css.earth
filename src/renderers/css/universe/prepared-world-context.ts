@@ -512,14 +512,16 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
+  const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
+  // A member orbits its system's parent, or a named centre placed off it (a circumbinary planet's barycentre).
   for (const body of [focus, ...bodies]) for (const [index, id] of (body.systemView?.memberIds ?? []).entries()) {
-    const moon = bodies.find(moon => moon.id === id && moon.orbit?.centerBodyId === body.id);
+    const moon = bodies.find(moon => moon.id === id && moon.orbit !== undefined &&
+      (moon.orbit.centerBodyId === body.id || orbitCenters?.[moon.orbit.centerBodyId]?.centerBodyId === body.id));
     if (!moon) {
-      throw new TypeError('System view members must orbit their prepared parent.');
+      throw new TypeError(`System view member ${id} of ${body.id} must orbit ${body.id} or a centre placed off it.`);
     }
     if (moon.radiusM !== body.systemView!.memberRadiiM[index]) throw new TypeError('System view radii must match their prepared members.');
   }
-  const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
   const classificationViews = geometry ? parseClassificationViews(input.classificationViews, bodies) : undefined;
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);

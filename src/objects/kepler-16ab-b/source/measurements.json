@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-16ab-b",
+  "radiusKm": 53890.6696,
+  "radiusSource": "Radius 0.7538 (+0.0026/-0.0023) Jupiter radii and mass 0.333 (+0.016/-0.016) Jupiter masses from Doyle et al. (2011, Science 333, 1602; arXiv:1109.3432), Table 1: 53,890.67 km at 71,492 km per Jupiter radius; GM is the mass times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 225.885,
+  "orbitalPeriodSource": "The mean transit period 225.885 d of the Villanova Kepler Eclipsing Binary Catalogue (Kirk et al. 2016, AJ 151, 68) entry for KIC 12644769, read 2026-09-23 from https://keplerebs.villanova.edu/overview/?k=12644769 (its second ephemeris), a linear fit to the Kepler transits of the planet across star A, 2009-2013. Both published periods fail as a fixed-ellipse period: Doyle et al.'s 228.776 d is osculating at 2010 and 'will vary by approximately +/-5 days over a timescale of just years' (Triaud et al. (2022, MNRAS 511, 3561; arXiv:2112.06584), Table 2, the adopted Kima column, Sect. 3.5), and misplaces the Kepler transits by up to 19 d; Triaud et al.'s mean 226.0 +/- 1.7 d carries a phase uncertain by 92 d. With Doyle et al.'s phase, this period puts all seven Kepler transits across A within 0.13 d of their observed times.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-16 (AB) b is measured; only its size, mass and orbit are."
+  }
+}
