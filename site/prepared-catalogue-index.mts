@@ -30,7 +30,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
           // A search row always states the distance; what kind of model draws it is the object page's business.
           detail: Object.freeze({ text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
             title, ariaLabel: `${value} ${object.distance.unit}. ${title}` }),
-          source: Object.freeze({ subject: `object:${object.name}`, document: source.href, label: source.label }),
+          source: Object.freeze({ subject: `object:${object.id}`, document: source.href, label: source.label }),
           marker: Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color }),
         });
       }
