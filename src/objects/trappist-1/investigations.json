@@ -19,6 +19,23 @@
       ]
     },
     {
+      "id": "stellar-limb-model",
+      "subject": "A source-backed radial brightness profile for TRAPPIST-1",
+      "status": "included",
+      "finding": "Gillon et al. (2016), Extended Data Table 2, gives I+z quadratic coefficients u1 = 0.65 +/- 0.10 and u2 = 0.28 +/- 0.12, inferred from theoretical atmosphere tables and used as transit priors. The selected red-band model darkens the Gaia-coloured disc through a prepared black-alpha limb plate; it is not a resolved or directly measured stellar limb.",
+      "evidence": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/",
+        "https://github.com/layoutit/css.earth/pull/565"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0c0376e5bc65c66ecbfe9341c56651440b3b062c",
+          "pr": 565
+        }
+      ]
+    },
+    {
       "id": "surface-imagery",
       "subject": "Imagery of the photosphere",
       "status": "excluded",
