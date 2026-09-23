@@ -1,0 +1,27 @@
+{
+  "id": "hd-110067d",
+  "classification": "exoplanet",
+  "order": 1703,
+  "physical": {
+    "name": "HD 110067 d",
+    "horizonsCode": null,
+    "meanRadiusKm": 18190.447,
+    "gravitationalParameterKm3PerS2": 3396075.71051964,
+    "parent": "hd-110067"
+  },
+  "physicalNotes": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: radius 2.852 +/- 0.039 Earth radii, using 6378.137 km per Earth radius. Mass 8.52 Earth masses; GM uses Earth's GM 398600.435507 km^3/s^2. No oblateness is measured; the rendered shape is a sphere.",
+  "hostedOrbit": {
+    "periodDays": 20.519617,
+    "semiMajorAxisStellarRadii": 37.21,
+    "inclinationDegrees": 89.248,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 59707.70282,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: 20.519617 d. A fixed-period display approximation, not an N-body model or current transit prediction.",
+      "shape": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: a/R*=37.21, inclination 89.248 degrees. Eccentricity fixed to zero in the published fit. This display does not propagate planet-planet perturbations.",
+      "phase": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: t0=2708.20282 TJD (BJD_TDB-2457000). BMJD_TDB=t0+56999.5; no transit-timing variations are propagated.",
+      "orientation": "Display convention: the ascending-node position angle is set to 0 (sky north). Transit photometry does not determine its absolute sky orientation."
+    }
+  }
+}

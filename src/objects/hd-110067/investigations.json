@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-110067",
+  "entries": [
+    {
+      "id": "published-system",
+      "subject": "Stellar and planetary measurements",
+      "status": "included",
+      "finding": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Extended Data Table 3: radius 0.788 +/- 0.008 solar radii, mass 0.798 +/- 0.042 solar masses, effective temperature 5266 +/- 64 K. Conversion uses 695700 km per solar radius and solar GM 132712440041.93938 km^3/s^2. The display axis is sky north, not a measured stellar pole. Circular orbits with the published 2023 periods and transit epochs. Planet-planet perturbations and transit-timing variations are not propagated; this is not a current transit forecast or an N-body resonance simulation. Absolute sky nodes and spin axes are unknown.",
+      "evidence": [
+        "https://doi.org/10.1038/s41586-023-06692-3",
+        "https://arxiv.org/html/2311.17775v1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
+        }
+      ]
+    },
+    {
+      "id": "unresolved-appearance",
+      "subject": "Resolved photosphere and spots",
+      "status": "excluded",
+      "finding": "The ESPRESSO spectrum is unresolved. No texture or spot map is inferred. The darker edge is a published ATLAS9 model, not a resolved measurement.",
+      "evidence": [
+        "https://doi.org/10.1038/s41586-023-06692-3"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
+        }
+      ],
+      "revisitWhen": "A source-backed resolved product, rotational constraint or appropriate photometric model becomes available."
+    },
+    {
+      "id": "wide-companions",
+      "subject": "Wide stellar companions",
+      "status": "deferred",
+      "finding": "Apps & Luque (2023) report HD 110067 as the wide component of a hierarchical triple. This package displays the inner six-planet system; it does not claim that the host is isolated.",
+      "evidence": [
+        "https://arxiv.org/abs/2312.04599"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
+        }
+      ],
+      "revisitWhen": "Companion astrometry and a justified wide-system placement are prepared."
+    },
+    {
+      "id": "published-limb-model",
+      "subject": "ESPRESSO-band limb darkening",
+      "status": "included",
+      "finding": "Zak et al. (2024), section 4: fixed model coefficients u1=0.564 and u2=0.145 from ExoCTK ATLAS9 in 380–788 nm. Applied achromatically to the measured colour; not a fitted or resolved intensity profile.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202450570"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
+        }
+      ]
+    }
+  ]
+}

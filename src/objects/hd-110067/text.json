@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-110067",
+  "card": {
+    "text": "A nearby K star orbited by six sub-Neptunes in a resonant chain.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-023-06692-3",
+        "url": "https://doi.org/10.1038/s41586-023-06692-3",
+        "label": "Luque et al. (2023)",
+        "checked": "2026-09-23",
+        "locator": "Abstract and Table 1",
+        "quote": "six transiting planets"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 110067 has six transiting sub-Neptunes with linked orbital periods. Their years range from 9.11 to 54.77 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-023-06692-3",
+        "url": "https://doi.org/10.1038/s41586-023-06692-3",
+        "label": "Luque et al. (2023)",
+        "checked": "2026-09-23",
+        "locator": "Table 1",
+        "quote": "9.113678; 54.76992"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "ESPRESSO spectrum",
+      "summary": "Colour from its measured spectrum, with a modeled darker edge. No surface map or absolute brightness."
+    }
+  }
+}

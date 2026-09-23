@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-110067d",
+  "card": {
+    "text": "A 2.85-Earth-radius planet with a 20.52-day year in HD 110067's resonant chain.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-023-06692-3",
+        "url": "https://doi.org/10.1038/s41586-023-06692-3",
+        "label": "Luque et al. (2023)",
+        "checked": "2026-09-23",
+        "locator": "Table 1, planet d",
+        "quote": "20.519617"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 110067 d is one of six transiting sub-Neptunes. Its radius is 2.852 Earth radii and its year lasts 20.52 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-023-06692-3",
+        "url": "https://doi.org/10.1038/s41586-023-06692-3",
+        "label": "Luque et al. (2023)",
+        "checked": "2026-09-23",
+        "locator": "Table 1",
+        "quote": "2.852"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the measured radius. Neutral gray marks the unknown surface colour; lighting comes from the host star."
+    }
+  }
+}

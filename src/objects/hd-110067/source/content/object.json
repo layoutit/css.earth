@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-110067",
+  "displayName": "HD 110067",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.788 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-06692-3",
+          "url": "https://doi.org/10.1038/s41586-023-06692-3",
+          "label": "Luque et al. (2023)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "32.22 parsecs",
+        "source": {
+          "catalogueId": "simbad-hd-110067",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+110067",
+          "label": "SIMBAD / Gaia EDR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Measured ESPRESSO colour with a modeled darker edge. The star is unresolved; no surface map or absolute brightness.",
+        "thumbnail": "hd-110067-lens-color.webp",
+        "surface": "hd-110067-surface-color@2x.webp",
+        "poles": "hd-110067-poles-color@2x.webp",
+        "source": {
+          "id": "hd-110067-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519"
+        },
+        "falseColor": false,
+        "notes": "The edge uses the ESPRESSO-band ATLAS9 model coefficients adopted by Zak et al. (2024), not measured coefficients. No spots or rotation map."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Luque et al. (2023), Nature 623, 932–937",
+      "href": "https://doi.org/10.1038/s41586-023-06692-3"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1038/s41586-023-06692-3",
+      "credit": "Luque et al. (2023), Nature 623, 932–937"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-110067.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

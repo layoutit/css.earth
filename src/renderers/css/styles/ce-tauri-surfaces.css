@@ -63,25 +63,24 @@
   background-image: var(--ce-tauri-poles-image) !important;
 }
 
-/* Off-limb context: 780 px = raster.json emission.offLimbSize = the published image's 16 mas field at the disc's 496 px. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="ce-tauri"] .ce-tauri-corona-layer {
   background-image: var(--ce-tauri-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(780px * 1.25 * var(--ce-tauri-camera-zoom, 1))
-    calc(780px * 1.25 * var(--ce-tauri-camera-zoom, 1));
+    calc(780px * var(--ce-tauri-camera-zoom, 1))
+    calc(780px * var(--ce-tauri-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
-   sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="ce-tauri"] .ce-tauri-limb-layer {
   background-image: var(--ce-tauri-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * 1.25 * var(--ce-tauri-camera-zoom, 1))
-    calc(496px * 1.25 * var(--ce-tauri-camera-zoom, 1));
+    calc(496px * var(--ce-tauri-camera-zoom, 1))
+    calc(496px * var(--ce-tauri-camera-zoom, 1));
 }
 
 .object-stage[data-object-id="ce-tauri"] .polycss-camera {
