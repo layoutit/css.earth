@@ -38,8 +38,8 @@ Explicit scientific request:
   telescope export RESULT_JSON --output feature-map --hdu N --band LO,HI --continuum L0,L1,R0,R1 --out DIRECTORY
 
 Physical object handoff (existing measured/modelled depth):
-  telescope export OBJECT_JSON --output points|volume --out DIRECTORY
-  Reuses the existing point/volume loaders; copies pinned renderer resources and credits.
+  telescope export OBJECT_JSON --output points|volume|volume-lens-bank --out DIRECTORY
+  Reuses the existing physical-object loaders; copies pinned renderer resources and credits.
 
 Surface outputs:
   telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP_DIRECTORY
@@ -98,10 +98,10 @@ to DIRECTORY/pick-N/. If both snapshot files are present, get refuses the ambigu
 Outputs inspects deliveries, derived product records and physical object packages, and reports
 the artifact stage and source context, then reports available operations, blockers, required inputs
 and concrete commands after checking the prerequisites shared with export. Supported inputs are
-existing telescope deliveries, product records and prepared point/volume object packages; raw
+existing telescope deliveries, product records and prepared physical object packages; raw
 FITS/PDS files are not admitted without their qualification evidence. The v1
 transitions are native delivery -> scientific output; 2D measurement + navigation -> body map;
-body map + embeddable standard body -> sphere; prepared point/volume object -> renderer handoff.
+body map + embeddable standard body -> sphere; prepared point/volume/volume-lens-bank object -> renderer handoff.
 Configured, bounded archive searches and a declared product kind do not promise universal
 archive coverage, decoding or export. Qualified FITS images, spectra, band images and feature maps
 use zero-based HDU, plane and pixel indices. Cubes require an explicit plane for image export.
