@@ -1894,3 +1894,120 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   user-select: none;
   -webkit-touch-callout: none;
 }
+
+/* Portrait tablets: the sheet drops its tab strip and shows every section at once, named by
+   its panel's own label. The title, the dataset list and the factsheet float down the left; the
+   chosen dataset, its galleries and its spacecraft cards stack on the right. Floats rather than a
+   grid, so the spacecraft cards follow the dataset map and not the factsheet's height. Long lists
+   (moons) close the sheet at full width, in as many columns as fit. */
+@media (orientation: portrait) and (min-width: 700px) {
+  :is(.object-information-panel, .object-prepared-information-panel):not([hidden]) {
+    --tablet-left-column: 42%;
+    display: flow-root;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-native-tabs { display: none; }
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not([hidden]) { display: block; }
+  /* Every section is visible, so the spacecraft cards no longer wait for the Datasets tab. */
+  .object-ui-layer:not(:has(.object-facility-toggle:not(:checked), .object-settings-panel:popover-open))
+    .object-information-panel:not([aria-busy="true"], [data-card-view="overview"]) > .object-native-tabs
+    ~ .object-dataset-context-rail:has([data-dataset-context]:not([hidden]) > *) { display: block; }
+
+  /* Section headings: the label each tab used to carry, in the sheet's panel-heading type. */
+  .object-information-panel > .object-dataset-content:has(> .object-lenses)::before,
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content)::before {
+    content: attr(aria-label);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 45px;
+    color: var(--shell-text);
+    font: var(--shell-font-label);
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content) { padding-top: 0; }
+
+  /* Two columns: the title and its factsheet on the left; the dataset list, the chosen dataset and its
+     spacecraft on the right. A grid whose second row is flexible, so the factsheet starts right under
+     the intro however tall the dataset column is, and the spacecraft follow the dataset map. */
+  .object-information-panel:not([hidden], [data-card-view="overview"]):has(> .object-dataset-content > .object-lens-details) {
+    display: grid;
+    grid-template-columns: var(--tablet-left-column) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    align-items: start;
+  }
+  .object-information-panel:not([data-card-view="overview"]) > * { grid-column: 1 / -1; }
+  .object-information-panel:not([data-card-view="overview"]) > .object-selected-panel { grid-column: 1; grid-row: 1; }
+  .object-information-panel:not([data-card-view="overview"]) > [data-information-panel="factsheet"] { grid-column: 1; grid-row: 2 / span 2; margin-top: 12px; }
+  .object-information-panel:not([data-card-view="overview"]) > .object-dataset-content:not([hidden]) { display: block; grid-column: 2; grid-row: 1 / span 2; padding-top: 0; }
+  .object-information-panel:not([data-card-view="overview"]) > .object-dataset-context-rail {
+    grid-column: 2;
+    grid-row: 3;
+    box-sizing: border-box;
+    width: auto;
+    padding: 12px 0 20px;
+  }
+  .object-information-panel:not([data-card-view="overview"]) > [data-information-panel="moons"] { grid-row: 4; }
+  /* The chosen dataset follows its list, under the list's own rule. */
+  .object-information-panel > .object-dataset-content > .object-lens-details { margin-top: 12px; }
+
+  /* The focus card's datasets are one panel: it takes the right, and the factsheet rises beside it. */
+  .object-prepared-information-panel > .object-selected-panel,
+  .object-prepared-information-panel > [data-information-panel="factsheet"] {
+    float: left;
+    clear: left;
+    box-sizing: border-box;
+    width: var(--tablet-left-column);
+  }
+  .object-prepared-information-panel > [data-information-panel="factsheet"] { margin-top: 12px; }
+  .object-prepared-information-panel > [data-information-panel="dataset"] {
+    float: right;
+    clear: right;
+    box-sizing: border-box;
+    width: calc(100% - var(--tablet-left-column));
+    padding-inline: var(--explorer-card-padding-inline-start) var(--explorer-card-padding-inline-end);
+  }
+  /* Headings separate the sections; the rule under the title would stop at the column edge. */
+  :is(.object-information-panel, .object-prepared-information-panel).object-card > .object-selected-panel:has(+ .object-native-tabs)::after { content: none; }
+
+  /* A panel with nothing on the right (no datasets) keeps its sections full width. */
+  :is(.object-information-panel, .object-prepared-information-panel):not(:has(> .object-dataset-content > .object-lens-details, > [data-information-panel="dataset"])) > * {
+    float: none;
+    width: auto;
+  }
+
+  /* The distant (overview) view of a body: its portrait and spectrum on the left, its facts on the
+     right. A grid, because these panels come moons-first in the markup. */
+  .object-sidebar .object-information-panel[data-card-view="overview"]:not([hidden]) {
+    display: grid;
+    max-height: none;
+    grid-template-columns: var(--tablet-left-column) minmax(0, 1fr);
+    grid-template-areas: "head facts" "spectrum facts" "moons moons";
+    align-items: start;
+  }
+  .object-information-panel[data-card-view="overview"] > * { width: auto; }
+  .object-information-panel[data-card-view="overview"] > .object-selected-panel { grid-area: head; }
+  .object-information-panel[data-card-view="overview"] > [data-information-panel="factsheet"] { grid-area: facts; margin-top: 0; }
+  .object-information-panel[data-card-view="overview"] > [data-information-panel="spectrum"] { grid-area: spectrum; }
+  .object-information-panel[data-card-view="overview"] > [data-information-panel="moons"] { grid-area: moons; }
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel { max-height: none; overflow: visible; }
+
+  /* Moons close the sheet at full width, in columns. */
+  .object-information-panel > [data-information-panel="moons"] {
+    clear: both;
+    border-top: var(--explorer-divider-width) solid var(--explorer-divider);
+  }
+  .object-information-panel > [data-information-panel="moons"] .object-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    column-gap: 24px;
+  }
+  /* A moon's catalogue thumbnail fills its 14px marker slot instead of spilling over the rows. */
+  .object-information-panel > [data-information-panel="moons"] .object-lens-icon > .object-search-preview {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
