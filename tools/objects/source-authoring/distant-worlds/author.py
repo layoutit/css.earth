@@ -29,7 +29,7 @@ for body in INPUTS['bodies']:
     if not path.exists():
         raise ValueError(f'Author source identities and bindings in {path} before extracting a new body.')
     manifest = json.loads(path.read_text())
-    if manifest.get('schema') != f"css{body['id']}-authoritative-sources@2":
+    if manifest.get('schema') != 'cssearth-authoritative-sources@2':
         raise ValueError(f'Update {path} to the current Sources contract before extraction.')
     expected_ids = [entry['id'] for entry in manifest['inputs']]
     expected_ids += ['published-shape', 'model-surface']
@@ -52,7 +52,7 @@ for body in INPUTS['bodies']:
     config['raster']['observations'][0]['metadata']['coverage'] = description
     config['celestial']['sunSource'] = 'JPL Horizons fixed 2026-09-03 epoch. ' + body['orientationMeaning']
     manifest = current('source/manifest.json', body)
-    manifest['schema'] = f'css{ident}-authoritative-sources@2'
+    manifest['schema'] = 'cssearth-authoritative-sources@2'
     manifest['documents'] = reviewed[ident]['documents']
     manifest['generatedIntermediates'] = reviewed[ident]['generatedIntermediates']
     manifest['inputs'] = [entry for entry in manifest['inputs'] if entry['id'] not in ['published-shape', 'model-surface']]

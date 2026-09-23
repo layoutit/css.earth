@@ -14,7 +14,7 @@ export async function fixtureSource(sourceRoot: string, entries: readonly {
       sourceBinding: { kind: 'local', reason: 'Synthetic unit-test input' }, ...entry, bytes: bytes.length };
   }));
   await writeFile(resolve(sourceRoot, 'manifest.json'), JSON.stringify({
-    schema: 'cssfixture-authoritative-sources@2', inputs, documents: [], generatedIntermediates: [],
+    schema: 'cssearth-authoritative-sources@2', inputs, documents: [], generatedIntermediates: [],
   }));
   return createSourceManifest({ objectId: 'fixture', objectName: 'Fixture', sourceRoot });
 }

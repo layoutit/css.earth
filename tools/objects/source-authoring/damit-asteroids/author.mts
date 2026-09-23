@@ -390,7 +390,7 @@ async function authorBody(body: Body) {
   // Manifest, then the marker snapshot that reads it.
   const font = await readFile(resolve(src, 'presentation/InterVariable.ttf'));
   const manifest: Record<string, unknown> = {
-    schema: `css${id}-authoritative-sources@2`,
+    schema: `cssearth-authoritative-sources@2`,
     inputs: [
       { id: shapeId, path: shapePath, origin: shapeUrl, credit, license: 'CC-BY-4.0, DAMIT; retain original model and authors attribution.',
         acquisition: 'Restore original uncalibrated counted triangle table through the pinned acquisition recipe.',

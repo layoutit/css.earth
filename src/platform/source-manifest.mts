@@ -68,10 +68,13 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot }:
   });
 }
 
+/** Every source manifest, of an object or of a shared kernel bank, has this one format name. */
+export const SOURCE_MANIFEST_SCHEMA = "cssearth-authoritative-sources@2";
+
 export function validateSourceManifest(objectId: string, input: unknown): Readonly<SourceManifest> {
   const value = input as SourceManifest;
   if (!value || typeof value !== "object" || isArray(value) ||
-      value.schema !== `css${objectId}-authoritative-sources@2`) {
+      value.schema !== SOURCE_MANIFEST_SCHEMA) {
     throw new TypeError(`Object ${objectId} source manifest is incompatible.`);
   }
   for (const collection of COLLECTIONS) {
