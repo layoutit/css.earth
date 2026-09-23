@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { explorationAnswer, parseExplorationArguments } from './exploration.mts';
+import { explorationAnswer, explorationOutcome, parseExplorationArguments } from './exploration.mts';
 import { canonicalTargetRequest, withRequestedTargetName } from './targets.mts';
 import { associateTarget, SERVICES, targetQuery } from './vo/discovery.mts';
 
@@ -64,6 +64,21 @@ test('unread source headers mark exploration coverage as incomplete', () => {
   assert.deepEqual(answer.choices, []);
   assert.deepEqual(answer.issues.filter(issue => issue.identity === 'source manifest').map(issue => issue.reason),
     ['2 declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.']);
+  assert.deepEqual(answer.outcome,{selection:'none',coverage:'incomplete'});
+});
+
+test('exploration outcome separates unavailable searches from bounded empty and unsupported results',()=>{
+  const base={ledgers:[],capabilities:[],targetCatalogue:[{id:'eris',name:'Eris',aliases:[]}],targetAssociations:[],bodyMaps:[]};
+  const service=(state:'sampled'|'overflow'|'empty-in-scope'|'unavailable')=>({records:[],services:[{service:'fixture',state,scope:'bounded name search',reason:'Fixture status.'}]});
+  const empty=explorationAnswer({target:'eris'},{...base,vo:service('empty-in-scope')});
+  assert.deepEqual(empty.outcome,{selection:'none',coverage:'bounded'});
+  assert.deepEqual(explorationAnswer({target:'eris'},{...base,vo:service('unavailable')}).outcome,{selection:'none',coverage:'incomplete'});
+  assert.deepEqual(explorationAnswer({target:'eris'},{...base,vo:service('overflow')}).outcome,{selection:'none',coverage:'incomplete'});
+  const unsupported=explorationAnswer({target:'eris'},{...base,sourceIntakeIssues:[{path:'unknown.fits',state:'unsupported',reason:'No decoder.'}]});
+  assert.deepEqual(unsupported.outcome,{selection:'none',coverage:'bounded'});
+  assert.equal(unsupported.unsupported.length,1);
+  assert.deepEqual(explorationAnswer({target:'missing'},base).outcome,{selection:'none',coverage:'target-unresolved'});
+  assert.deepEqual(explorationOutcome({...empty,coverage:[{telescope:'fixture',ledger:'fixture',state:'not-searched',reason:'Index was not queried.'}]}),{selection:'none',coverage:'incomplete'});
 });
 
 test('exploration choices are deterministic and ready products appear first while service limits remain visible', () => {
@@ -81,6 +96,7 @@ test('exploration choices are deterministic and ready products appear first whil
   assert.deepEqual(first.choices.map(choice => choice.key), second.choices.map(choice => choice.key));
   assert.deepEqual(first.choices.map(choice => choice.pick), [1, 2]);
   assert.deepEqual(first.issues.filter(issue => issue.scope === 'provider').map(issue => issue.code), ['provider-overflow','provider-unavailable']);
+  assert.deepEqual(first.outcome,{selection:'available',coverage:'incomplete'});
 });
 
 test('unknown targets return suggestions without exposing provider results', () => {
@@ -94,6 +110,7 @@ test('an OPUS service joins the provider list and a target unknown to OPUS stays
   const answer=explorationAnswer({target:'eris'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'eris',name:'Eris',aliases:[]}],targetAssociations:[],bodyMaps:[],opus});
   assert.deepEqual(answer.services,[opus]);
   assert.deepEqual(answer.issues.map(issue=>[issue.code,issue.identity]),[['provider-target-unknown',opus.service]]);
+  assert.deepEqual(answer.outcome,{selection:'none',coverage:'bounded'});
 });
 
 test('source intake failures remain actionable in exploration without hiding selectable products', () => {

@@ -2,9 +2,9 @@
 /** Install and locate the pinned shared astronomy packages under output/toolchains/astroquery (ignored by git). */
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { accessSync, readFileSync } from 'node:fs';
+import { accessSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 
@@ -48,8 +48,21 @@ export interface AstroqueryToolchain {
   readonly scipyVersion: string; readonly batmanVersion: string; readonly cdflibVersion: string; readonly pyuvdataVersion: string; readonly orbitizeVersion: string; readonly whereIsThePlanetVersion: string; readonly astropyHealpixVersion:string; readonly env: NodeJS.ProcessEnv;
 }
 
+export function toolchainRootIssue(root: string): string | null {
+  const link = lstatSync(root, { throwIfNoEntry: false });
+  if (!link?.isSymbolicLink()) return null;
+  try { realpathSync(root); return null; }
+  catch (error) {
+    if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
+    const target = resolve(dirname(root), readlinkSync(root));
+    return `The astronomy package link ${root} points to missing ${target}. Restore its shared toolchain or replace the link with a local install.`;
+  }
+}
+
 export function astroqueryToolchainSync(): AstroqueryToolchain {
   const { entry, digest } = descriptor(), bin = resolve(ASTROQUERY_ROOT, 'env/bin'), python = resolve(bin, 'python');
+  const rootIssue = toolchainRootIssue(ASTROQUERY_ROOT);
+  if (rootIssue) throw new Error(rootIssue);
   let marker: Record<string, unknown> | null = null;
   try { marker = requireRecord(JSON.parse(readFileSync(resolve(ASTROQUERY_ROOT, 'installed.json'), 'utf8')) as unknown); } catch { /* reported below */ }
   if (!marker) throw new Error('The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install');

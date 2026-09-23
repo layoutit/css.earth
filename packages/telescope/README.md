@@ -38,6 +38,16 @@ saved without starting a retrieval. With `--json`, redirected stdin, or redirect
 prompts and emits the saved exploration as one JSON value. Without `--out`, it creates a unique run
 under `./telescope-runs/` and reports that path.
 
+The saved answer has an `outcome` with separate `selection` and `coverage` values. `selection`
+is `available` when at least one numbered route can be tried, or `none`. `coverage` is
+`target-unresolved` when no target search ran, `incomplete` when a provider failed or overflowed,
+an indexed source could not be read, a ledger was not searched or answered, or a discovery has
+unresolved metadata; otherwise it is `bounded`. Even `bounded` describes only the configured
+searches, not every observatory. A choice can coexist with incomplete coverage. When there is no
+choice, the terminal distinguishes these cases, puts provider errors before long discovery lists,
+and gives a command template for a fresh run after the blocker is addressed. The original
+`explore.json` retains every service and issue; `--verbose` shows all diagnostics in the terminal.
+
 Start with an existing supported artifact to inspect its source context and next operations:
 
 ```sh
@@ -72,6 +82,13 @@ Choose a number from the saved snapshot. The number is only presentation within 
 
 `query.json` preserves the question and evidence. Each `pick-N/` contains `result.json` and a `files/` tree with the complete recorded native output set, detached dependencies and evidence. Relative paths in the original receipts remain intact inside that tree. Raw calibration inputs are referenced by the original receipt, not all copied into the delivery. Scientific facts in `result.json` retain their workspace-relative receipt locations; use its file manifest to locate the exported copies.
 
+`query.json` also records `answer.endpoint.coverage`: `target-unresolved`, `incomplete` or
+`bounded`. This is independent of `endpoint.status`; a query can have indexed candidate modes
+while archive providers remain unavailable. Human output puts those provider failures first and
+caps long blocker lists. The full candidate reasons and provider records remain in the saved JSON
+and are shown with `--verbose`. Correct a failed provider or source, then use a new directory for
+another query rather than changing the saved selection.
+
 Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. Progress goes to stderr. Exit codes: **0** exploration/retrieval completed or a scientific request was fulfilled; **1** operation failed; **2** invalid arguments; **3** no retrievable choices or delivered data still has unresolved requirements; **4** delivered product refuses the request. Exploration exit 0 means the requested discovery or retrieval completed; it makes no scientific fulfillment claim.
 
 The wrapper and scientific implementation remain separate versioned components: updating this npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
@@ -100,7 +117,7 @@ export success does not turn unresolved or refused scientific evidence into fulf
 
 ## Using a result in a body scene
 
-For a catalogued body, `explore` saves `explore.json` with numbered `choices` and an `answer` containing `unresolved`, `unsupported`, `issues` and `services`. A choice is an available retrieval or qualification route, not a promise that the bytes and every dependency will pass `get`. For example:
+For a catalogued body, `explore` saves `explore.json` with numbered `choices` and an `answer` containing `outcome`, `unresolved`, `unsupported`, `issues` and `services`. A choice is an available retrieval or qualification route, not a promise that the bytes and every dependency will pass `get`. For example:
 
 ```sh
 pnpm --silent telescope explore ceres --json --out output/ceres-telescope

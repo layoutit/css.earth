@@ -165,25 +165,40 @@ export function parseCli(args: readonly string[]): CliOptions {
   if (positional.length !== 1 || !Number.isSafeInteger(pick) || pick < 1) throw new TypeError('Use telescope get DIRECTORY --pick N, with a positive whole number.');
   return { command, directory: resolve(positional[0]), pick, json, verbose, ...(switches.has('--offline') ? { offline: true } : {}) };
 }
-export function formatSession(session: Session, directory: string): string {
-  const lines = [`${session.target} · ${session.answer.request.kind} · ${session.answer.request.wavelengthMicrometres.join('–')} µm`, ''];
+const briefDiagnostic=(value:string)=>value.length<=280?value:`${value.slice(0,279).trimEnd()}… (full reason in saved result)`;
+export function formatSession(session: Session, directory: string,verbose=false): string {
+  const answer=session.answer,lines = [`${session.target} · ${answer.request.kind} · ${answer.request.wavelengthMicrometres.join('–')} µm`, ''];
+  const append=(heading:string,rows:readonly string[],total=rows.length)=>{
+    if(!rows.length)return;
+    lines.push('',`${heading} (${total}):`);
+    for(const row of verbose?rows:rows.slice(0,5))lines.push(`  ${verbose?row:briefDiagnostic(row)}`);
+    if(!verbose&&rows.length>5)lines.push(`  ${rows.length-5} more in the saved result.`);
+  };
+  if(answer.endpoint.coverage==='incomplete')lines.push('Search coverage is incomplete; provider or indexed-source results below cannot establish a negative.');
   for (const choice of session.choices) {
-    const verdict = choice.product ? assessRequest(session.answer.request, choice.product.facts) : undefined;
+    const verdict = choice.product ? assessRequest(answer.request, choice.product.facts) : undefined;
     lines.push(`${choice.pick}. ${choice.telescope} / ${choice.mode} / ${choice.observation}`,
       `   ${choice.state === 'ready' ? 'Data qualified' : 'Qualification required'}${verdict ? `; request ${verdict.status}` : ''}`);
     if (verdict) for (const [name, v] of Object.entries(verdict.constraints)) if (v.answer !== 'yes') lines.push(`   ${name}: ${v.answer}. ${v.reason}`);
   }
   if (!session.choices.length) {
-    lines.push(`No retrievable observation. Workflow: ${session.answer.endpoint.status}.`);
-    if (session.answer.targetResolution.status !== 'resolved') lines.push(formatAnswer(session.answer).trim());
-    for (const candidate of session.answer.candidates) lines.push(`  ${candidate.telescope} / ${candidate.mode}: ${candidate.selectionAssessment.blockers.map(b => b.reason).join('; ') || 'No exact qualified artifact or executable qualification action.'}`);
+    lines.push(`No retrievable observation. Workflow: ${answer.endpoint.status}.`);
+    if (answer.targetResolution.status !== 'resolved') lines.push(formatAnswer(answer).trim());
   }
-  for (const coverage of session.answer.targetCoverage) if (coverage.state !== 'observed') lines.push(`${coverage.telescope}: ${coverage.state}. ${coverage.reason}`);
-  for (const issue of session.answer.sourceIntakeIssues ?? []) lines.push(`Source ${issue.state}: ${issue.path}. ${issue.reason}`);
-  for (const service of session.answer.archiveAccess?.services ?? []) lines.push(`${service.service}: ${service.state}. ${service.reason}`);
-  for (const record of session.answer.archiveAccess?.records ?? []) if (!record.products.length) lines.push(`Archive ${record.observation.key}: ${record.observation.target.status}. ${record.issues.join('; ')}`);
+  const services=[...answer.archiveAccess?.services??[]].sort((a,b)=>(a.state==='unavailable'||a.state==='overflow'?0:1)-(b.state==='unavailable'||b.state==='overflow'?0:1));
+  const providerRows=verbose?services.map(service=>`${service.service}: ${service.state}. ${service.reason}`):(()=>{
+    const groups=new Map<string,{state:string;reason:string;names:string[]}>();
+    for(const service of services){const key=`${service.state}\u0000${service.reason}`,group=groups.get(key);if(group)group.names.push(service.service);else groups.set(key,{state:service.state,reason:service.reason,names:[service.service]});}
+    return [...groups.values()].map(group=>group.names.length===1?`${group.names[0]}: ${group.state}. ${group.reason}`:`${group.names.length} providers ${group.state}: ${group.reason} (${group.names.join(', ')})`);
+  })();
+  append('Provider status',providerRows,services.length);
+  append('Indexed coverage',answer.targetCoverage.filter(coverage=>coverage.state!=='observed').map(coverage=>`${coverage.telescope}: ${coverage.state}. ${coverage.reason}`));
+  append('Source intake',answer.sourceIntakeIssues?.map(issue=>`${issue.state}: ${issue.path}. ${issue.reason}`)??[]);
+  if(!session.choices.length)append('Candidate mode blockers',answer.candidates.map(candidate=>`${candidate.telescope} / ${candidate.mode}: ${candidate.selectionAssessment.blockers.map(blocker=>blocker.reason).join('; ')||'No exact qualified artifact or executable qualification action.'}`));
+  append('Unselectable archive records',answer.archiveAccess?.records.filter(record=>!record.products.length).map(record=>`${record.observation.key}: ${record.observation.target.status}. ${record.issues.join('; ')}`)??[]);
   lines.push('', `Saved: ${displayPath(resolve(directory, 'query.json'))}`);
   if (session.choices.length) lines.push(`Next: telescope get ${shellWord(displayPath(directory))} --pick N`);
+  else if(answer.endpoint.coverage==='incomplete')lines.push('Resolve the provider or source errors, or narrow the request; then save a new query in a new directory.');
   return `${lines.join('\n')}\n`;
 }
 
@@ -202,9 +217,16 @@ export function formatExploration(session:ExplorationSession & {readonly directo
   const answer=session.answer,resolution=answer.targetResolution;
   const title=resolution.status==='resolved'?resolution.canonical.name:answer.target;
   const lines=[title,''];
+  if(answer.outcome.coverage==='target-unresolved')lines.push('Target unresolved; no archive search was run.');
+  else if(answer.outcome.selection==='available')lines.push(`${session.choices.length} retrievable choice(s) in this bounded search.${answer.outcome.coverage==='incomplete'?' Search coverage is incomplete.':''}`);
+  else if(answer.outcome.coverage==='incomplete')lines.push('Search incomplete; no retrievable observation was confirmed. Check the search limits and unresolved discoveries below.');
+  else if(answer.unsupported.length)lines.push(`No retrievable observation in this configured, bounded search; ${answer.unsupported.length} discovery record(s) lack a supported route or do not match the filters.`);
+  else lines.push('No retrievable observation in this configured, bounded search. This does not establish that no observation exists.');
   for(const choice of session.choices){
     const d=choice.display,size=d.advertisedKilobytes===null?'size unknown':`${d.advertisedKilobytes} kB advertised`;
-    lines.push(`${choice.pick}. ${d.instrument} · ${displayTime(d.observationTime.startIso,d.observationTime.endIso)} · ${d.productKind??'product kind unknown'}`,
+    const instrument = d.instrument === choice.telescope || d.instrument.startsWith(`${choice.telescope} / `)
+      ? d.instrument : `${choice.telescope} / ${d.instrument}`;
+    lines.push(`${choice.pick}. ${instrument} · ${displayTime(d.observationTime.startIso,d.observationTime.endIso)} · ${d.productKind??'product kind unknown'}`,
       `   ${choice.state==='ready'?'Qualified product available':'Retrieval and qualification available'} · ${size} · ${d.metadataBasis} metadata`,
       `   ${displayWavelengths(d.wavelengthsMicrometres)}`,
       `   ${choice.reason}`);
@@ -212,22 +234,44 @@ export function formatExploration(session:ExplorationSession & {readonly directo
     for(const limitation of verbose?limitations:limitations.slice(0,3))lines.push(`   Limitation: ${limitation}`);
     if(!verbose&&limitations.length>3)lines.push(`   ${limitations.length-3} more distinct limitation(s) in the saved result.`);
   }
-  if(!session.choices.length)lines.push('No actionable observation is available in this bounded exploration.');
   for(const service of answer.services)if('sharpest' in service&&service.sharpest?.length){
     lines.push('',`Spacecraft images in OPUS (${service.images} of ${service.opusTarget}; sharpest per instrument, not retrievable from here):`);
     for(const image of service.sharpest)lines.push(`  ${image.instrument} · ${image.startTime} · ${image.centreResolutionKmPerPixel??'unknown'} km/px at body centre${image.pixelsAcross===null?'':` · ${image.pixelsAcross} px across`} · ${image.instrumentImages} images · ${image.opusId}`);
   }
-  const appendIssues=(heading:string,issues:readonly {readonly identity?:string;readonly scope:string;readonly reason:string}[])=>{
+  for(const service of answer.services)if('instruments' in service&&service.instruments.length){
+    lines.push('',`Live archive leads (${service.service}; ${service.scope}):`);
+    for(const lead of service.instruments)lines.push(`  ${lead.telescope} / ${lead.instrument} · ${lead.records} record(s) · example ${lead.sample}`);
+    lines.push('  Discovery only; no exact acquisition or qualification route is implied.');
+  }
+  const appendIssues=(heading:string,issues:readonly {readonly identity?:string;readonly scope:string;readonly reason:string}[],total=issues.length)=>{
     if(!issues.length)return;
-    lines.push('',`${heading} (${issues.length}):`);
-    for(const issue of verbose?issues:issues.slice(0,5))lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);
+    lines.push('',`${heading} (${total}):`);
+    for(const issue of verbose?issues:issues.slice(0,5)){
+      const row=`${issue.identity??issue.scope}: ${issue.reason}`;
+      lines.push(`  ${verbose?row:briefDiagnostic(row)}`);
+    }
     if(!verbose&&issues.length>5)lines.push(`  ${issues.length-5} more in the saved result.`);
   };
+  const statusIssues=verbose?answer.issues:(()=>{
+    const groups=new Map<string,{issue:(typeof answer.issues)[number];identities:string[]}>();
+    for(const issue of answer.issues){
+      const key=issue.scope==='provider'?`${issue.code}\u0000${issue.reason}`:`${issue.code}\u0000${issue.identity??''}\u0000${issue.reason}`;
+      const group=groups.get(key);
+      if(group)group.identities.push(issue.identity??issue.scope);
+      else groups.set(key,{issue,identities:[issue.identity??issue.scope]});
+    }
+    return [...groups.values()].map(({issue,identities})=>identities.length===1?issue:{...issue,identity:`${identities.length} providers (${identities.join(', ')})`});
+  })();
+  appendIssues('Search limits and provider status',statusIssues,answer.issues.length);
   appendIssues('Unresolved discoveries',answer.unresolved);
   appendIssues('Unsupported discoveries',answer.unsupported);
-  appendIssues('Search limits and provider status',answer.issues);
   lines.push('',`Saved: ${displayPath(resolve(session.directory,'explore.json'))}`);
   if(session.choices.length)lines.push(`Continue explicitly: telescope get ${shellWord(displayPath(session.directory))} --pick N`);
+  if(answer.outcome.coverage==='incomplete'){
+    const blocked=answer.issues.some(issue=>issue.code==='provider-unavailable'||issue.code==='provider-overflow'||issue.code==='source-unavailable');
+    lines.push(blocked?'Resolve the provider or source errors above, or narrow the search; then start a new exploration.':'Inspect unresolved metadata or adjust the filters; then start a new exploration.');
+    lines.push(`Retry in a new directory: ${['telescope','explore',...session.arguments,'--out','NEW_DIRECTORY'].map(shellWord).join(' ')}`);
+  }else if(answer.outcome.coverage==='target-unresolved')lines.push('Check the target name or use a suggestion above, then start a new exploration.');
   return `${lines.join('\n')}\n`;
 }
 
@@ -500,7 +544,7 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         let session:Session;
         try{session=await saveSession(root, options.requestArgs, options.directory, undefined, progress.update);progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
-        text = options.json ? `${JSON.stringify(session)}\n` : formatSession(session, options.directory) + (options.verbose ? `\n${formatAnswer(session.answer)}` : '');
+        text = options.json ? `${JSON.stringify(session)}\n` : formatSession(session, options.directory, options.verbose) + (options.verbose ? `\n${formatAnswer(session.answer)}` : '');
         code = session.choices.length ? 0 : 3;
       } else {
         const result = await api.getSession(root, options.directory, options.pick, line => io.error(`${line}\n`), undefined, { offline: options.offline });

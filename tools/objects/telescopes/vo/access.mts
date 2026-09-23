@@ -158,6 +158,8 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
           if (standard === DATALINK_LINKS) {
             await links(address, binding.parameters, depth + 1, closure);
           } else if (standard === SODA_SYNC) {
+            // A SODA descriptor advertises a possible subset, not an error for a whole-product search.
+            if (!request.region && request.spectralFrame === undefined) continue;
             const parameters = sodaParameters(descriptor, request, binding.parameters);
             add({ kind: 'soda-sync', url: address, parameters }, jsonValue({ row, url: address, dataset: binding.parameters }), closure, descriptor, i, response.raw.path);
           } else if (typeof standard === 'string' && standard.startsWith('ivo://ivoa.net/std/SODA#')) throw new TypeError('No advertised synchronous SODA operation.');

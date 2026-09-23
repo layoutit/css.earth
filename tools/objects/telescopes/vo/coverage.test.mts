@@ -33,8 +33,8 @@ test('independent discovery outcomes retain empty, overflow-unsupported, and fai
       if (profile === SERVICES[0]) return empty;
       if (profile === SERVICES[1]) return unsupported;
       throw new Error('fixture service unavailable');
-    });
-    assert.deepEqual(inputs.services.map(service => service.state), ['empty-in-scope', 'overflow', 'unavailable']);
+    }, {}, undefined, async () => { throw new Error('fixture service unavailable'); });
+    assert.deepEqual(inputs.services.map(service => service.state), ['empty-in-scope', 'overflow', 'unavailable', 'unavailable', 'unavailable']);
     assert.equal(inputs.records.length, 1); assert.equal(inputs.records[0]!.products.length, 0);
     // Spectra are acquirable since family coverage; this row stops at a MIME with no decoder, without any network access.
     assert.match(inputs.records[0]!.issues.join('\n'), /No supported decoder for text\/html\./u);

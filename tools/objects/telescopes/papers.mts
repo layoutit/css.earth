@@ -1,6 +1,7 @@
 /** Paper search for the telescope API: which published works already reduced the data we are about to fetch.
  *
- * OpenAlex lists works whose title or abstract names the target (and instrument). Each open-access copy is fetched once
+ * OpenAlex lists works whose title or abstract names the target (and instrument); arXiv is a bounded fallback when that
+ * index is temporarily unavailable. Each open-access copy is fetched once
  * with a plain GET. A browser challenge is recorded as `blocked` and never worked around. For HTML full texts, figure
  * captions and table titles that describe maps or list observations are reported verbatim so a reader sees at once
  * whether the paper made the product and which frames it used. */
@@ -12,6 +13,7 @@ import { resolveTarget } from './targets.mts';
 
 export const PAPERS_SCHEMA = 'cssearth-telescope-papers@1';
 export const OPENALEX_WORKS = 'https://api.openalex.org/works';
+export const ARXIV_QUERY = 'https://export.arxiv.org/api/query';
 export const MAX_WORKS = 20;
 export const MAX_REQUESTS = 25;
 export const REQUEST_TIMEOUT_MS = 20_000;
@@ -33,14 +35,15 @@ export interface PaperCaption { readonly kind: 'figure' | 'table'; readonly labe
 export interface PaperReport {
   readonly rank: number; readonly title: string; readonly year: number | null; readonly doi: string | null;
   readonly authors: readonly string[]; readonly moreAuthors: boolean; readonly licence: string | null;
-  readonly openAccessUrl: string | null; readonly openAlex: string; readonly access: FullTextAccess;
+  readonly openAccessUrl: string | null; readonly openAlex?: string; readonly arxiv?: string; readonly access: FullTextAccess;
   readonly captionsScanned?: number; readonly captions?: readonly PaperCaption[]; readonly savedFullText?: string;
   /** evidenceScore of the fetched paper; the report is sorted by it. */
   readonly evidence?: number;
 }
 export interface PaperSearch {
   readonly schema: typeof PAPERS_SCHEMA; readonly target: { readonly id: string; readonly name: string };
-  readonly instrument: string | null; readonly query: string; readonly candidates: number; readonly requests: number;
+  readonly instrument: string | null; readonly query: string; readonly source: 'openalex' | 'arxiv'; readonly sourceIssue?: string;
+  readonly candidates: number; readonly requests: number;
   /** Host names a work had to mention besides the target: present for a body on a hosted orbit. */
   readonly hosts?: readonly string[];
   readonly works: readonly PaperReport[];
@@ -126,6 +129,13 @@ export function openAlexQuery(name: string, instrument?: string, hosts: readonly
   return `${OPENALEX_WORKS}?${parameters.toString()}`;
 }
 
+/** arXiv's documented Atom API uses `all:` terms; exact title/abstract and host matching is enforced locally. */
+export function arxivQuery(name: string, instrument?: string, hosts: readonly string[] = []): string {
+  const term = (value: string) => `all:"${searchText(value)}"`;
+  const parts = [term(name), ...hosts.length ? [`(${hosts.map(term).join(' OR ')})`] : [], ...instrument ? [term(instrument)] : []];
+  return `${ARXIV_QUERY}?${new URLSearchParams({ search_query: parts.join(' AND '), start: '0', max_results: String(CANDIDATE_PAGE) })}`;
+}
+
 const ENTITIES: Readonly<Record<string, string>> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', ndash: '–', mdash: '—', minus: '−', deg: '°', times: '×', micro: 'µ', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“' };
 function decodeEntities(text: string): string {
   return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/giu, (whole, name: string) => {
@@ -134,6 +144,27 @@ function decodeEntities(text: string): string {
       return Number.isInteger(code) && code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : whole;
     }
     return ENTITIES[name.toLowerCase()] ?? whole;
+  });
+}
+const atomText = (xml: string, name: string): string | null => {
+  const match = new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${name}>`, 'iu').exec(xml);
+  return match ? decodeEntities(match[1]!.replace(/<[^>]*>/gu, ' ')).replace(/\s+/gu, ' ').trim() : null;
+};
+/** Parse only the Atom fields needed by the paper contract; invalid feeds and identities are refused. */
+export function parseArxivResponse(xml: string): readonly OpenAlexWork[] {
+  if (xml.length > 2_000_000 || !/<feed\b[^>]*xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/iu.test(xml)) throw new TypeError('Invalid or oversized arXiv Atom feed.');
+  return [...xml.matchAll(/<entry\b[^>]*>([\s\S]*?)<\/entry>/giu)].map(([_, entry], index) => {
+    const rawId = atomText(entry!, 'id'), title = atomText(entry!, 'title'), abstract = atomText(entry!, 'summary') ?? '';
+    if (!rawId || !title) throw new TypeError(`arXiv entry ${index + 1} has no id or title.`);
+    const id = new URL(rawId);
+    if (id.hostname !== 'arxiv.org' || !/^\/abs\/[A-Za-z0-9.\/-]+$/u.test(id.pathname)) throw new TypeError(`arXiv entry ${index + 1} has an invalid identity.`);
+    const yearText = atomText(entry!, 'published'), year = yearText && /^\d{4}-\d{2}-\d{2}/u.test(yearText) ? Number(yearText.slice(0, 4)) : null;
+    const authors = [...entry!.matchAll(/<author>([\s\S]*?)<\/author>/giu)].map(match => atomText(match[1]!, 'name')).filter((name): name is string => Boolean(name));
+    const doi = atomText(entry!, 'arxiv:doi');
+    const arxivId = id.pathname.slice('/abs/'.length).replace(/v\d+$/u, '');
+    return { id: `https://arxiv.org/abs/${arxivId}`, doi: doi ? `https://doi.org/${doi}` : null, title, year, type: 'preprint',
+      authors: authors.slice(0, 3), authorCount: authors.length, licence: null, isOpenAccess: true,
+      openAccessUrl: `https://arxiv.org/pdf/${arxivId}`, relevance: null, abstract };
   });
 }
 // Inline tags join their text; block tags separate it.
@@ -285,11 +316,26 @@ export async function searchPapers(root: string, options: PaperSearchOptions): P
   const fetcher = options.fetcher ?? fetch, progress = options.progress ?? (() => undefined), budget: Budget = { used: 0 };
   const catalogue = await loadTargetCatalogue(root), target = displayName(options.target, catalogue), instrument = options.instrument?.trim() || null;
   const hosts = options.host?.trim() ? [options.host.trim()] : await hostNames(root, target.id, catalogue);
-  const query = openAlexQuery(target.name, instrument ?? undefined, hosts);
+  let query = openAlexQuery(target.name, instrument ?? undefined, hosts), source: PaperSearch['source'] = 'openalex', sourceIssue: string | undefined;
   progress(`Searching OpenAlex for ${target.name}${instrument ? ` with ${instrument}` : ''}…`);
-  const response = await politeFetch(query, budget, fetcher, 'application/json');
-  if (!response.ok) throw new Error(`OpenAlex returned HTTP ${response.status}.`);
-  const candidates = parseOpenAlexResponse(await response.json()).filter(work => mentions(work, instrument ? [target.name, instrument] : [target.name])
+  let found: readonly OpenAlexWork[];
+  let response: Response | undefined;
+  try { response = await politeFetch(query, budget, fetcher, 'application/json'); }
+  catch (error) { sourceIssue = `OpenAlex transport failed: ${error instanceof Error ? error.message : String(error)}`; }
+  if (response && !response.ok) {
+    if (response.status !== 429 && response.status < 500) throw new Error(`OpenAlex returned HTTP ${response.status}.`);
+    sourceIssue = `OpenAlex returned HTTP ${response.status}.`;
+    await response.body?.cancel();
+  }
+  if (sourceIssue) {
+    source = 'arxiv'; query = arxivQuery(target.name, instrument ?? undefined, hosts);
+    progress(`${sourceIssue} Searching arXiv…`);
+    const fallback = await politeFetch(query, budget, fetcher, 'application/atom+xml');
+    if (!fallback.ok) throw new Error(`${sourceIssue} arXiv returned HTTP ${fallback.status}.`);
+    found = parseArxivResponse(await fallback.text());
+  } else if (response) found = parseOpenAlexResponse(await response.json());
+  else throw new Error('OpenAlex produced no response.');
+  const candidates = found.filter(work => mentions(work, instrument ? [target.name, instrument] : [target.name])
     && (!hosts.length || hosts.some(host => mentions(work, [host]))));
   const ranked = rankWorks(candidates);
   if (options.directory) await mkdir(resolve(options.directory, 'fulltext'), { recursive: true });
@@ -297,7 +343,7 @@ export async function searchPapers(root: string, options: PaperSearchOptions): P
   for (const [index, work] of ranked.entries()) {
     const rank = index + 1;
     const base = { rank, title: work.title, year: work.year, doi: work.doi, authors: work.authors, moreAuthors: work.authorCount > work.authors.length,
-      licence: work.licence, openAccessUrl: work.openAccessUrl, openAlex: work.id };
+      licence: work.licence, openAccessUrl: work.openAccessUrl, ...(source === 'openalex' ? { openAlex: work.id } : { arxiv: work.id }) };
     if (!work.openAccessUrl) { works.push({ ...base, access: { status: 'closed', reason: 'no open-access copy listed' } }); continue; }
     progress(`${rank}/${ranked.length} ${work.openAccessUrl}`);
     const fetched = await readFullText(work.openAccessUrl, budget, fetcher);
@@ -311,13 +357,15 @@ export async function searchPapers(root: string, options: PaperSearchOptions): P
   const scored = works.map((work, index) => ({ work, index, score: evidenceScore(work, target.name, instrument) }))
     .sort((left, right) => right.score - left.score || left.index - right.index)
     .map(({ work, score }, index) => ({ ...work, rank: index + 1, evidence: score }));
-  const result: PaperSearch = { schema: PAPERS_SCHEMA, target, instrument, ...hosts.length ? { hosts } : {}, query, candidates: candidates.length, requests: budget.used, works: scored };
+  const result: PaperSearch = { schema: PAPERS_SCHEMA, target, instrument, source, ...(sourceIssue ? { sourceIssue } : {}),
+    ...hosts.length ? { hosts } : {}, query, candidates: candidates.length, requests: budget.used, works: scored };
   if (options.directory) await writeFile(resolve(options.directory, 'papers.json'), `${JSON.stringify(result, null, 2)}\n`);
   return result;
 }
 
 export function formatPapers(result: PaperSearch, directory?: string): string {
-  const lines = [`${result.target.name}${result.hosts ? ` at ${result.hosts[0]}` : ''}${result.instrument ? ` · ${result.instrument}` : ''} · ${result.works.length} of ${result.candidates} matching works · ${result.requests} requests`, ''];
+  const lines = [`${result.target.name}${result.hosts ? ` at ${result.hosts[0]}` : ''}${result.instrument ? ` · ${result.instrument}` : ''} · ${result.works.length} of ${result.candidates} matching ${result.source} works · ${result.requests} requests`,
+    ...result.sourceIssue ? [`OpenAlex unavailable: ${result.sourceIssue}; searched arXiv instead.`] : [], ''];
   for (const work of result.works) {
     const authors = `${work.authors.join(', ')}${work.moreAuthors ? ' et al.' : ''}`;
     lines.push(`${work.rank}. ${work.title} (${work.year ?? 'year unknown'})${work.evidence ? ` · evidence ${work.evidence}` : ''}`, `   ${authors}`,
