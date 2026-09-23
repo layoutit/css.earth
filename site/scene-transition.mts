@@ -37,7 +37,13 @@ export async function focusExistingScene({ session, request, selectionTransition
   if (!requests.owns(request)) return false;
   const { camera } = request;
   const restore = camera.kind === 'restore';
-  if (restore) {
+  if (camera.kind === 'focus') {
+    if (!view.commit(request, session)) return false;
+    requests.advance(request, 'flying'); syncPlayback();
+    const focused = await request.lifetime.wait(view.focus(session, request));
+    if (focused.cancelled || !requests.owns(request)) return false;
+    request.url = session.url ?? request.url;
+  } else if (restore) {
     if (request.history.history === 'pop' || request.url !== windowTarget.location.href) view.commit(request, session);
     else session.url = request.url;
     // History within one object flies to its saved view, as history between objects does;
@@ -61,7 +67,7 @@ export async function focusExistingScene({ session, request, selectionTransition
   }
   if (!requests.advance(request, 'committing')) return false;
   if (!restore) view.commit(request, session);
-  commitSelection(request, selectionTransition);
+  if (camera.kind !== 'focus') commitSelection(request, selectionTransition);
   await view.bind(session, { restore, request });
   if (!requests.owns(request)) return false;
   requests.finish(request, 'finished'); syncPlayback();

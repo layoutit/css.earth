@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
+import { createNavigationLifecycle } from '../navigation-lifecycle.mts';
+import { withPreparedFocus } from '../navigation-scope.mts';
 import { createImageFocusBank } from '../../src/renderers/css/universe/prepared-focus-bank.ts';
 import { overviewScopeFromUrl, preparedFocusFromUrl } from '../navigation-scope.mts';
 import { isPreparedCluster } from '@cssearth/catalog';
@@ -103,10 +105,33 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
     { id: 'membership', url: 'https://example.test/membership', bytes: 1, citation: 'Published membership' },
     { id: 'unrelated', url: 'https://example.test/unrelated', bytes: 1, citation: 'Unused audit input' }];
   // Narrow test doubles intentionally expose only this controller's browser/runtime surface.
-  const controller = createPreparedContextNavigation({ layer: focusLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
+  const executor = createPreparedContextNavigation({ layer: focusLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
     sources, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
-  controller.connect(owner as unknown as ObjectWorldNavigation, { onFocusChange: url => windowTarget.history.replaceState(windowTarget.history.state, '', url),
-    onFocusContentChange: (record, references, presentation) => content.push({ record, references, presentation }) });
+  // The application request now owns supersession and abort; the focus executor receives that lifetime.
+  const requests = createNavigationLifecycle({ onCancel() {}, onError: error => { assert.ok(error instanceof Error); errors.push(error); } });
+  let available = false;
+  executor.connect(owner as unknown as ObjectWorldNavigation, { canPublish: () => available,
+    onFocusChange: url => windowTarget.history.replaceState(windowTarget.history.state, '', url),
+    onFocusContentChange: (record, references, presentation) => { available = true; content.push({ record, references, presentation }); } });
+  function apply(url: string, frame: boolean) {
+    available = false;
+    const request = requests.begin({ id: 'mercury', url, subject: { kind: 'object', objectId: 'mercury' },
+      camera: frame ? { kind: 'focus' } : { kind: 'restore', animate: false }, history: { history: 'replace' },
+      scene: 'reuse', origin: 'link', feature: null, timing: { mark() {} } });
+    const finish = () => { if (requests.finish(request, 'finished')) available = true; };
+    const fail = (error: unknown) => { if (requests.owns(request)) { assert.ok(error instanceof Error); errors.push(error); } };
+    try {
+      const result = executor.apply(url, { signal: request.signal, isCurrent: () => requests.owns(request), frame, reducedMotion: !frame });
+      if (result) return result.catch(fail).finally(finish);
+    } catch (error) { fail(error); }
+    finish();
+  }
+  const controller = {
+    restore: (url: string) => apply(url, false),
+    select: ({ id }: { id: string }) => apply(withPreparedFocus(new URL(windowTarget.location.href), id, null).href, true),
+    suspend() { available = false; requests.cancel(); },
+    destroy() { available = false; requests.cancel(); executor.destroy(); },
+  };
   return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, presentationFocuses, writes, callbacks, content, flights, flightFocuses, signal: () => signal,
     resolveDeferredVolumeBank() { required(releaseDeferredBank)(); } };
 }
