@@ -20,7 +20,7 @@ for (const id of ['neptune', 'uranus']) it(`${id} Rings controls the prepared ri
   for (const [index, variant] of variants.entries()) {
     expect(variant).toBeDefined();
     const display = variant!.writes.find(write => write.kind === 'style' && write.name === 'display' &&
-      prepared.tree.nodes[write.target]?.className.includes('rings'));
+      prepared.tree.nodes[write.target]?.className?.includes('rings'));
     expect(display).toMatchObject({ value: index ? 'block' : 'none' });
   }
 }, 30_000);
