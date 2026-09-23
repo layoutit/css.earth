@@ -8,7 +8,7 @@ const exact = (name: string, uri: string, bytes: number, md5: string, observatio
   /^[NS]\d{8}S\d{4}\.fits$/u.test(name) && uri === `gemini:GEMINI/${name}` && Number.isSafeInteger(bytes) && bytes > 0 && /^[a-f0-9]{32}$/u.test(md5) && Boolean(observation);
 
 export async function fetchGeminiSource(explorationPath: string, pick: number, outputDirectory: string,
-  query: typeof cadcQuery = cadcQuery, fetcher: typeof fetch = fetch) {
+  query: typeof cadcQuery = cadcQuery, fetcher: typeof fetch = fetch, resume = false) {
   const saved = await readSavedSource(explorationPath, CADC_TAP, pick), selected = saved.selected;
   const name = requireString(selected.name, 'Gemini file name'), uri = requireString(selected.uri, 'Gemini artifact URI');
   const bytes = Number(selected.bytes), md5 = requireString(selected.md5, 'Gemini archive MD5');
@@ -33,5 +33,5 @@ export async function fetchGeminiSource(explorationPath: string, pick: number, o
     discovery: selected, current: { query: adql, rows },
     limitations: ['Archive target names do not confirm target detection.', 'Raw Gemini FITS has not been calibrated or qualified for the requested science.'],
     files: [{ url: downloadUrl(uri), name, bytes, md5 }],
-  }, fetcher);
+  }, fetcher, resume);
 }

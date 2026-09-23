@@ -8,7 +8,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { CADC_TAP } from '../gemini/cadc.mts';
 import { TAP as CHANDRA_TAP, obsidDirectory, type ChandraObservation } from '../chandra/archive.mts';
 import { SEARCH as SPITZER_SEARCH } from '../spitzer/archive.mts';
-import { downloadSource } from './archive-source.mts';
+import { deliverSource, downloadSource, readSavedSource } from './archive-source.mts';
 import { fetchGeminiSource } from './gemini-source.mts';
 import { fetchChandraSource } from './chandra-source.mts';
 import { fetchSpitzerSource } from './spitzer-source.mts';
@@ -44,6 +44,59 @@ test('source transfer enforces the cap while streaming and rejects an HTML succe
     const result = await downloadSource({ url: 'https://example.org/a.fits', name: 'a.fits', bytes: fits.length },
       resolve(root, 'a.fits'), 4096, async () => fileResponse(fits));
     assert.equal(result.sha256, sha256(fits));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a multi-file fetch resumes only completed, unchanged bytes for the same saved selection', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'archive-resume-'));
+  try {
+    const service = 'https://example.org/archive', exploration = await saved(root, service, { id: 'one' }, [{ id: 'one' }], 8192);
+    const snapshot = await readSavedSource(exploration, service, 1), first = Buffer.from(fits), second = Buffer.from(fits);
+    const selection = { archive: service, telescope: 'Fixture', identity: 'one', target: snapshot.target,
+      discovery: snapshot.selected, current: { id: 'one', revision: '1' }, limitations: ['Unqualified fixture.'],
+      files: [{ url: 'https://example.org/a.fits', name: 'a.fits', bytes: first.length },
+        { url: 'https://example.org/b.fits', name: 'b.fits', bytes: second.length }] };
+    const destination = resolve(root, 'source'), calls: string[] = [];
+    const failSecond: typeof fetch = async input => {
+      calls.push(String(input));
+      return String(input).endsWith('b.fits') ? new Response('unavailable', { status: 503 }) : fileResponse(first);
+    };
+    await assert.rejects(deliverSource(exploration, destination, snapshot, selection, failSecond), /repeat the same fetch with --resume/u);
+    assert.deepEqual(calls, selection.files.map(file => file.url));
+    assert.deepEqual(await readFile(`${destination}.partial/a.fits`), first);
+    await assert.rejects(deliverSource(exploration, destination, snapshot, selection,
+      async () => { throw new Error('Should not download.'); }), /Partial transfer exists/u);
+    const resumed: typeof fetch = async input => {
+      calls.push(String(input));
+      if (String(input).endsWith('a.fits')) throw new Error('Completed source was fetched twice.');
+      return fileResponse(second);
+    };
+    const result = await deliverSource(exploration, destination, snapshot, selection, resumed, true);
+    assert.equal(calls.length, 3);
+    assert.equal(result.status, 'unresolved');
+    assert.deepEqual(await readFile(result.files[1]!), second);
+    assert.equal(await openFitsSource(result.receipt), null); // Two files have no implicit primary science image.
+    await assert.rejects(readFile(`${destination}.partial/transfer-progress.json`), { code: 'ENOENT' });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('resume refuses changed archive metadata or altered completed bytes', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'archive-resume-changed-'));
+  try {
+    const service = 'https://example.org/archive', exploration = await saved(root, service, { id: 'one' }, [{ id: 'one' }], 8192);
+    const snapshot = await readSavedSource(exploration, service, 1), selection = {
+      archive: service, telescope: 'Fixture', identity: 'one', target: snapshot.target, discovery: snapshot.selected,
+      current: { revision: '1' }, limitations: [], files: [
+        { url: 'https://example.org/a.fits', name: 'a.fits', bytes: fits.length },
+        { url: 'https://example.org/b.fits', name: 'b.fits', bytes: fits.length }],
+    }, destination = resolve(root, 'source');
+    await assert.rejects(deliverSource(exploration, destination, snapshot, selection,
+      async input => String(input).endsWith('b.fits') ? new Response('unavailable', { status: 503 }) : fileResponse(fits)));
+    await assert.rejects(deliverSource(exploration, destination, snapshot, { ...selection, current: { revision: '2' } },
+      async () => { throw new Error('Should not download.'); }, true), /changed archive metadata/u);
+    await writeFile(`${destination}.partial/a.fits`, Buffer.from(fits).fill(1, 20, 21));
+    await assert.rejects(deliverSource(exploration, destination, snapshot, selection,
+      async () => { throw new Error('Should not download.'); }, true), /Completed partial file a\.fits changed/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -197,4 +250,8 @@ test('the CLI limits exact file selection to archives that can list multiple sci
   assert.equal(parsed.command, 'fetch');
   if (parsed.command === 'fetch') assert.equal(parsed.fileName, 'image.fits');
   assert.throws(() => parseCli(['fetch', 'explore.json', '--archive', 'gemini', '--pick', '1', '--file', 'image.fits', '--out', 'source']), /--file applies/u);
+  const resume = parseCli(['fetch', 'explore.json', '--archive', 'spitzer', '--pick', '1', '--file', 'image.fits', '--out', 'source', '--resume']);
+  assert.equal(resume.command, 'fetch');
+  if (resume.command === 'fetch') assert.equal(resume.resume, true);
+  assert.throws(() => parseCli(['fetch', 'explore.json', '--archive', 'keck', '--pick', '1', '--out', 'source', '--resume']), /Keck fetch/u);
 });
