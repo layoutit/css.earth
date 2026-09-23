@@ -1,3 +1,4 @@
+import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedVolumeLenses, createPreparedVolumeLenses, imageFocusDatasets } from '../src/renderers/css/dist/universe.js';
 import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSelectionTarget, savedWorldCamera } from '../src/renderers/css/dist/navigation.js';
@@ -6,6 +7,7 @@ import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/objec
 import { initialFocusCatalog, loadFocusCatalogs } from './focus-catalog.mts';
 import { record, requiredElement } from './browser-types.mts';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
+import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from './focus-fragment.mts';
 import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
 import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusLens } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
@@ -21,6 +23,11 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   const selected = catalog?.objects.find(record => record.id === selection.id);
   if (!catalog || !selected) throw new RangeError('Prepared focus is unavailable.');
   const objectId = preparedFocusObjectId(selected);
+  const root = requiredElement<HTMLElement>(shell, '[data-prepared-focus-card]');
+  if (focusBanksPending(root)) {
+    const html = await fetchFocusFragment(path => fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) }));
+    spliceFocusBanks(root, parseHTML(html).document);
+  }
   const unavailable = objectId !== undefined && (shell.querySelector<HTMLElement>('[data-focus-unavailable]')?.dataset.unavailableObjects?.split(' ') ?? []).includes(objectId);
   const bank = unavailable ? undefined : [...shell.querySelectorAll<HTMLElement>('[data-focus-lens-bank]')].find(bank => bank.dataset.focusLensBank === objectId);
   let presentation: PreparedFocusPresentation | undefined;
@@ -71,7 +78,6 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
     }
     for (const context of bank.querySelectorAll<HTMLElement>('[data-dataset-context]')) context.hidden = context.dataset.datasetContext !== presentation.selectedLens;
   } else resolvePreparedFocusLens(selection.lens, null, unavailable);
-  const root = requiredElement<HTMLElement>(shell, '[data-prepared-focus-card]');
   const card = createPreparedFocusCard(root, id => {
     for (const radio of root.querySelectorAll<HTMLInputElement>(':scope > .object-native-tabs > input')) radio.toggleAttribute('checked', radio.value === id);
   });

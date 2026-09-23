@@ -6,6 +6,8 @@ import { requiredElement } from './browser-types.mts';
 
 interface PreparedFocusCard {
   set(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;
+  /** Adopt dataset banks spliced in after mount (`focus-fragment.mts`) and present the current record again. */
+  adoptBanks(): void;
   destroy(): void;
 }
 
@@ -14,7 +16,7 @@ const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, lette
 
 /** One retained card transports the selected prepared record; no catalogue is imported here. */
 export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
-  if (!root) return { set() {}, destroy() {} };
+  if (!root) return { set() {}, adoptBanks() {}, destroy() {} };
   const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const aliasesRow = root.querySelector<HTMLElement>('[data-focus-aliases-row]');
@@ -27,17 +29,25 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   let currentPresentation: PreparedFocusPresentation | null = null;
   const datasetTab = root.querySelector<HTMLElement>('[data-information-tab="dataset"]');
   let currentRecordId: string | undefined;
-  const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')].map(bank => ({ root: bank,
-    buttons: [...bank.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
-    details: [...bank.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
-  }));
-  for (const bank of banks) {
-    for (const button of bank.buttons) button.addEventListener('click', event => {
-      if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
-        event.preventDefault(); currentPresentation.selectLens(button.getAttribute('value') ?? '');
-      }
-    }, { signal: events.signal });
-  }
+  type Bank = { root: HTMLElement; buttons: HTMLButtonElement[]; details: HTMLElement[] };
+  const banks: Bank[] = [];
+  const adopt = () => {
+    for (const element of root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')) {
+      if (banks.some(bank => bank.root === element)) continue;
+      const bank = { root: element,
+        buttons: [...element.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
+        details: [...element.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
+      };
+      for (const button of bank.buttons) button.addEventListener('click', event => {
+        if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
+          event.preventDefault(); currentPresentation.selectLens(button.getAttribute('value') ?? '');
+        }
+      }, { signal: events.signal });
+      banks.push(bank);
+    }
+  };
+  adopt();
+  let presented: Parameters<PreparedFocusCard['set']> | null = null;
   const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
     const previous = currentPresentation?.objectId;
     currentPresentation = record && preparedFocusObjectId(record) === presentation?.objectId ? presentation : null;
@@ -61,7 +71,8 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
-  return { set(record, sources = [], presentation = null) {
+  const card: PreparedFocusCard = { set(record, sources = [], presentation = null) {
+    presented = [record, sources, presentation];
     setPresentation(record, presentation);
     if (unavailable) {
       const objectId = record && preparedFocusObjectId(record);
@@ -103,5 +114,6 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       if (source) { link.href = source.url; link.textContent = source.citation; }
       else { link.removeAttribute('href'); link.textContent = ''; }
     }
-  }, destroy() { events.abort(); currentPresentation = null; } };
+  }, adoptBanks() { adopt(); if (presented) card.set(...presented); }, destroy() { events.abort(); currentPresentation = null; presented = null; } };
+  return card;
 }

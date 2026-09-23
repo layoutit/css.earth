@@ -13,7 +13,7 @@ class Element extends EventTarget {
   getAttribute(name: string) { return this.attributes.get(name) ?? null; }
   removeAttribute(name: string) { this.attributes.delete(name); }
 }
-function fixture(unavailableObjects = '') {
+function fixture(unavailableObjects = '', { banksLater = false } = {}) {
   const root = new Element(), bank = new Element(), datasetTab = new Element();
   const tabs: string[] = [];
   root.selectors.set('[data-information-tab="dataset"]', datasetTab);
@@ -28,7 +28,8 @@ function fixture(unavailableObjects = '') {
   const factsBank = new Element(); factsBank.dataset.focusFactsBank = 'prepared-galaxy';
   const facts = ids.map(id => Object.assign(new Element(), { dataset: { focusLensDetails: id }, textContent: 'Source pixels 2048 × 4096' }));
   factsBank.selectors.set('[data-focus-lens-details]', facts);
-  root.selectors.set('[data-focus-lens-bank], [data-focus-facts-bank]', [bank, factsBank]);
+  const spliceBanks = () => root.selectors.set('[data-focus-lens-bank], [data-focus-facts-bank]', [bank, factsBank]);
+  if (!banksLater) spliceBanks();
   for (const name of ['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']) {
     root.selectors.set(`[data-focus-${name}]`, new Element());
   }
@@ -39,7 +40,7 @@ function fixture(unavailableObjects = '') {
   const presentation: PreparedFocusPresentation = { id: 'first', defaultLens: 'first', objectId: 'prepared-galaxy', selectedLens: 'first', starsVisible: true,
     lenses: ids.map(id => ({ id, label: id, title: id, description: id, sourceUrl: 'https://example.test/source' })), selectLens() {} };
   // This retained DOM stand-in implements only the card's queried fields and events.
-  return { root, bank, factsBank, facts, buttons, details, record, presentation, datasetTab, tabs, unavailable,
+  return { root, bank, factsBank, spliceBanks, facts, buttons, details, record, presentation, datasetTab, tabs, unavailable,
     card: createPreparedFocusCard(root as unknown as HTMLElement, id => tabs.push(id)) };
 }
 
@@ -150,5 +151,22 @@ test('focus uses shared dataset tabs only when a prepared presentation is availa
   f.card.set({ ...f.record, id: 'catalogue:other', detailedObjectId: undefined });
   assert.equal(f.datasetTab.hidden, true);
   assert.deepEqual(f.tabs, ['factsheet', 'dataset', 'factsheet']);
+  f.card.destroy();
+});
+
+test('banks spliced after a focus is presented are adopted and show the current selection', () => {
+  const f = fixture('', { banksLater: true }), requested: string[] = [];
+  f.presentation.selectLens = id => requested.push(id);
+  f.card.set(f.record, [], { ...f.presentation, selectedLens: 'second' });
+  // Spliced banks arrive hidden, as the fragment renders them.
+  f.bank.hidden = true; f.factsBank.hidden = true;
+  f.spliceBanks();
+  f.card.adoptBanks();
+  assert.equal(f.bank.hidden, false);
+  assert.deepEqual(f.buttons.map(button => button.getAttribute('aria-pressed')), ['false', 'true', 'false']);
+  assert.deepEqual(f.facts.map(detail => detail.hidden), [true, false, true]);
+  f.card.adoptBanks();
+  f.buttons[2].dispatchEvent(new Event('click'));
+  assert.deepEqual(requested, ['third'], 'Adopting twice binds each control once');
   f.card.destroy();
 });
