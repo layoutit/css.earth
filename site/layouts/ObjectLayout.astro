@@ -71,6 +71,15 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
         console.error('The interactive scene could not load.', error);
       });
     </script>}
+    {/* Static imports make the browser fetch the application's modules while it parses the HTML; the dynamic import
+        above only starts after parsing. A browser finds a module's imports only after downloading it, and the bundler
+        does not hoist transitive imports, so the two largest modules the router reads at load are named here too.
+        All resolve to the same module instances, and the script above owns failure. */}
+    {!navigation && <script>
+      import '../world-context-plan.mts';
+      import '../objects.mts';
+      import '../scene/scene-router.mts';
+    </script>}
     {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
     <slot name="object-head" />
     <title>{seo.title}</title>

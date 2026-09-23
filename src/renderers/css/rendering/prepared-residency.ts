@@ -219,7 +219,8 @@ export function createPreparedResidency({
       ticket.ready.catch(() => {});
       tickets.set(ticket, state);
       pending = state;
-      warm = prewarm;
+      // Required demand loads first: this request's optional prewarm starts once its required keys are resident, so on
+      // a slow connection warm-up never shares the bandwidth readiness waits for. The previous warm set stays meanwhile.
       try { reconcile({ stabilize }); }
       catch (error) { retirePending(); rejectTicket(error); throw error; }
       awaitKeys(required).then(values => {
@@ -227,6 +228,8 @@ export function createPreparedResidency({
         if (values.some(value => value === null)) throw new Error("Current prepared demand was retired.");
         state.ready = true;
         state.resolve(ticket);
+        warm = state.prewarm;
+        try { reconcile(); } catch (error) { onCleanupError(error); }
       }).catch(error => {
         if (state.retired || pending !== state || destroyed) return;
         state.retired = true;
