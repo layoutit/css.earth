@@ -1,0 +1,1002 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/wasp-18b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "wasp-18b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswasp-18b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature-0-89um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_0.89.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-0-89um",
+        "label": "0.89 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_0.89.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 0.89 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 0.89 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-0-97um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_0.97.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-0-97um",
+        "label": "0.97 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_0.97.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 0.97 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 0.97 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-05um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.05.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-05um",
+        "label": "1.05 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.05.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.05 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.05 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-13um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.13.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-13um",
+        "label": "1.13 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.13.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.13 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.13 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-21um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.21.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-21um",
+        "label": "1.21 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.21.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.21 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.21 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-29um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.29.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-29um",
+        "label": "1.29 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.29.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.29 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.29 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-37um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.37.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-37um",
+        "label": "1.37 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.37.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.37 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.37 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-45um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.45.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-45um",
+        "label": "1.45 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.45.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.45 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.45 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-53um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.53.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-53um",
+        "label": "1.53 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.53.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.53 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.53 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-60um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.60.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-60um",
+        "label": "1.60 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.60.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.60 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.60 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-68um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.68.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-68um",
+        "label": "1.68 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.68.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.68 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.68 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-76um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.76.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-76um",
+        "label": "1.76 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.76.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.76 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.76 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-84um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.84.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-84um",
+        "label": "1.84 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.84.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.84 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.84 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-1-92um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_1.92.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-1-92um",
+        "label": "1.92 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_1.92.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 1.92 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 1.92 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-00um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.00.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-00um",
+        "label": "2.00 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.00.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.00 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.00 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-08um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.08.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-08um",
+        "label": "2.08 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.08.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.08 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.08 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-16um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.16.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-16um",
+        "label": "2.16 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.16.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.16 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.16 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-24um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.24.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-24um",
+        "label": "2.24 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.24.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.24 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.24 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-31um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.31.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-31um",
+        "label": "2.31 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.31.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.31 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.31 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-39um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.39.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-39um",
+        "label": "2.39 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.39.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.39 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.39 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-47um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.47.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-47um",
+        "label": "2.47 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.47.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.47 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.47 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-55um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.55.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-55um",
+        "label": "2.55 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.55.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.55 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.55 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-63um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.63.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-63um",
+        "label": "2.63 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.63.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.63 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.63 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-71um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.71.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-71um",
+        "label": "2.71 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.71.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.71 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.71 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    },
+    {
+      "id": "temperature-2-79um",
+      "output": "wasp-18b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "source": "science/challener-2025/temp_wave_2.79.npz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2-79um",
+        "label": "2.79 µm",
+        "format": "eigenspectra-temperature",
+        "path": "science/challener-2025/temp_wave_2.79.npz",
+        "observedFrom": "science/challener-2025/eigenspectra_25_bins_3_groups.npz",
+        "consumer": "challener-2025-eigenspectra",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1500,
+        "maximum": 3711,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "1500",
+          "2605",
+          "3711"
+        ],
+        "description": "Brightness temperature at 2.79 µm from the Eigenspectra eclipse-map fit, over the longitudes the eclipse observation saw. Black lines: the borders of the hotspot and ring regions.",
+        "title": "JWST NIRISS · 2.79 µm eclipse map",
+        "sourceUrl": "https://zenodo.org/records/14751570",
+        "boundaries": true
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "wasp-18b-context-{id}{suffix}.webp",
+    "limbOutput": "wasp-18b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csswasp-18b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "sourceRadius": "measurements.json#radiusKm",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

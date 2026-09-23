@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-18b",
+  "radiusKm": 91677.27,
+  "radiusSource": "Radius: Rp/R* 0.09783 (the Eigenspectra fitting script's rprs, Figure1.py in Zenodo 10.5281/zenodo.14751570; Coulombe et al. 2023, Nature 620, 292, Table 3: 0.09783 +/- 0.00028 from TESS) times the host record's radius. The Challener, Weiner Mansfield et al. (2025), Nature Astronomy (arXiv:2510.24708), deposited ThERESA configuration wasp-18b-3d-8bin-sinusoidal-tiovo.cfg in Zenodo 10.5281/zenodo.14751570 gives the same 0.13177701 solar radii. A sphere: tidal and rotational flattening are not modelled. GM from that file's planet mass, 0.009956036 solar masses (10.4 Jupiter masses), times the JPL solar GM.",
+  "orbitalPeriodDays": 0.941452382,
+  "orbitalPeriodSource": "Eigenspectra fitting script (Figure1.py, planetparams['per']) in Zenodo 10.5281/zenodo.14751570: 0.941452382 d, as Coulombe et al. (2023), Table 3 (0.941452382 +/- 0.000000069 d)",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius, coloured by the Eigenspectra regions and brightness-temperature maps of Challener, Weiner Mansfield et al. (2025) (preparation/raster.json). Its tidal and rotational flattening are not modelled."
+  },
+  "effectiveTemperatureK": 2781,
+  "effectiveTemperatureSource": "Coulombe et al. (2023), Nature 620, 292, Methods: a brightness-temperature plateau of 2781 +25/-13 K within about 40 degrees of the substellar point (https://arxiv.org/abs/2301.08192)"
+}

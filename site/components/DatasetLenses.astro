@@ -23,6 +23,14 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
   // A dataset that carries the very scale it borrows publishes it once, not twice.
   return JSON.stringify(lender.legend) === JSON.stringify(lens.legend) ? undefined : lender;
 };
+// A dataset shown as a sequence lists its group once, as its first step; every step's details step to its neighbours.
+type Control = NonNullable<ShellProps['lenses']>['controls'][number];
+const stepMembers = (lens: Control) => lens.step ? lenses.controls.filter(candidate => candidate.step?.group === lens.step!.group) : [];
+const listed = (lens: Control) => !lens.step || stepMembers(lens)[0]?.id === lens.id;
+const stepOf = (lens: Control) => {
+  const members = stepMembers(lens), index = members.findIndex(member => member.id === lens.id);
+  return members.length ? { index, count: members.length, previous: members[index - 1], next: members[index + 1] } : undefined;
+};
 ---
 <section id={`${objectId}-lenses`} class="object-lenses">
   <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
@@ -31,7 +39,8 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">
     <nav class="object-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens) => (
-        <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}>
+        <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}
+          data-step-group={lens.step?.group} data-step-listed={lens.step ? String(listed(lens)) : undefined} hidden={!listed(lens) || undefined}>
           <button
             class="object-observation-control object-thumbnail-leading"
             type="submit"
@@ -66,6 +75,25 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
         hidden={lens.id !== lenses.defaultLens}
       >
         <DatasetDescription {lens}>
+          {stepOf(lens) && (() => {
+            const step = stepOf(lens)!;
+            const arrow = (target: Control | undefined, next: boolean) => <button
+              class="object-lens-step"
+              type="submit"
+              form={`${objectId}-datasets`}
+              name={controlName}
+              value={target?.id ?? lens.id}
+              data-dataset-step={target ? target.id : ''}
+              data-focus-lens={focus ? true : undefined}
+              disabled={!target}
+              aria-label={target ? `${next ? 'Next' : 'Previous'}: ${target.step!.label}` : `No ${next ? 'next' : 'previous'} step`}
+            >{next ? '›' : '‹'}</button>;
+            return <div class="object-lens-steps" role="group" aria-label={`${lens.label} steps`}>
+              {arrow(step.previous, false)}
+              <span class="object-lens-step-label">{lens.step!.label} · {step.index + 1} of {step.count}</span>
+              {arrow(step.next, true)}
+            </div>;
+          })()}
           {lens.texture && <div
             class="object-surface-minimap"
             data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}

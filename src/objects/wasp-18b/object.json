@@ -1,0 +1,270 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wasp-18b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-18b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "temperature-0-89um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-0-97um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-05um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-13um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-21um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-29um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-37um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-45um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-53um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-60um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-68um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-76um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-84um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-1-92um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-00um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-08um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-16um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-24um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-31um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-39um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-47um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-55um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-63um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-71um",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-2-79um",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 91677.27
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-18b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-18b",
+      "classification": "exoplanet",
+      "color": "#cf533c",
+      "distanceAu": 25326309.9,
+      "description": "Ten-Jupiter-mass planet whose day side JWST mapped at 25 wavelengths, each seeing a different depth.",
+      "systemName": "WASP-18 system",
+      "order": 1741,
+      "context": {
+        "order": 1741
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2411612603552673300,
+        1091651416070463700,
+        -2710560743533918700
+      ],
+      "presentationToReference": [
+        0.5928525546563239,
+        0.4730100473681547,
+        0.6517571200426172,
+        0.37636912202201134,
+        -0.8782403480495076,
+        0.29502571929623417,
+        -0.7119495294091084,
+        -0.07039450366794256,
+        0.6986934101789519
+      ],
+      "orbitUpReference": [
+        -0.4730100473681547,
+        0.8782403480495076,
+        0.07039450366794256
+      ],
+      "metersPerUnit": 295733.12903225806,
+      "bodyRadiusM": 91677270
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

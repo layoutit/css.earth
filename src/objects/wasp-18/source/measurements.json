@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-18",
+  "angularDiameterMas": 0.071,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 937,107.9 km at 122.78 pc = 0.071 mas. No interferometric diameter of this star is published; the disc is far too small to resolve.",
+  "distanceParsecs": 122.78537721081443,
+  "distanceSource": "Gaia DR3 parallax 8.1443 +/- 0.0116 mas (photometry/gaia-dr3-source.csv), no zero-point correction",
+  "radiusKm": 937107.9,
+  "radiusSource": "Radius: 1.347 solar radii at 695700 km per solar radius, the stellar radius '[f]rom TESS data' in the Challener, Weiner Mansfield et al. (2025), Nature Astronomy (arXiv:2510.24708), deposited ThERESA configuration wasp-18b-3d-8bin-sinusoidal-tiovo.cfg in Zenodo 10.5281/zenodo.14751570; with its semi-major axis of 0.02180079 au it gives the a/R* of 3.48023 the Eigenspectra maps were fitted with. GM from the same file's stellar mass, 1.5596 solar masses, times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis is a sky-plane convention; the star's spin axis is not measured in three dimensions.",
+  "effectiveTemperatureK": 6432,
+  "effectiveTemperatureSource": "Cortes-Zuleta et al. (2020), A&A 636, A98: 6,432 +/- 48 K, the stellar temperature Coulombe et al. (2023, Nature 620, 292, Methods) convert WASP-18b's maps with (https://arxiv.org/abs/2301.08192)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
+  }
+}

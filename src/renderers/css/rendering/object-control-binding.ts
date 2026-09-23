@@ -12,6 +12,16 @@ export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], d
   contexts: readonly HTMLElement[], pressed: ReadonlySet<string | null>) {
   for (const button of buttons) button.setAttribute('aria-pressed', String(pressed.has(button.getAttribute('value') ?? '')));
   const active = buttons.find(button => pressed.has(button.getAttribute('value') ?? ''))?.getAttribute('value');
+  // A dataset shown as a sequence lists only its first step; that entry stays pressed while any of its steps is shown.
+  const groups = new Map<string, boolean>();
+  for (const button of buttons) {
+    const group = button.closest<HTMLElement>('[data-step-group]')?.dataset.stepGroup;
+    if (group) groups.set(group, groups.get(group) === true || pressed.has(button.getAttribute('value') ?? ''));
+  }
+  for (const button of buttons) {
+    const option = button.closest<HTMLElement>('[data-step-group]');
+    if (option?.dataset.stepListed === 'true') button.setAttribute('aria-pressed', String(groups.get(option.dataset.stepGroup!) === true));
+  }
   for (const { id, panel } of details) if (panel.hidden !== (id !== active)) panel.hidden = id !== active;
   for (const context of contexts) {
     const hidden = context.dataset.datasetContext !== active;
@@ -33,8 +43,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const lensForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]');
   const lensRoot = lensForm?.closest(".object-lenses");
   const settingsRoot = document.querySelector(".object-settings");
-  const lensInputs = [...(lensForm?.elements ?? [])]
+  const formButtons = [...(lensForm?.elements ?? [])]
     .filter((input): input is HTMLButtonElement => input.tagName === 'BUTTON' && input.getAttribute('name') === 'dataset');
+  // Step buttons submit a neighbouring dataset of a sequence; they are not the dataset's own control.
+  const lensInputs = formButtons.filter(input => !input.hasAttribute('data-dataset-step'));
+  const stepInputs = formButtons.filter(input => input.hasAttribute('data-dataset-step'));
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !["motion", "heliosphere", "illustrationModels", "surfaceLabels", "minimap", "threeDStars"].includes(input.name));
   const details = lensInputs.map(input => {
@@ -144,6 +157,16 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       event.preventDefault();
       act({ kind: "lens", id });
     });
+    for (const input of stepInputs) {
+      // The first and last steps render a disabled button with nothing to step to.
+      if (input.disabled && !input.dataset.datasetStep) continue;
+      if (!lenses.has(input.value)) throw new Error(`A dataset step names an unknown dataset: ${input.value}.`);
+      listen(input, "click", event => {
+        if (!ready) return;
+        event.preventDefault();
+        act({ kind: "lens", id: input.value });
+      });
+    }
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       const event = control.kind === "toggle" ? "change" : input.type === "range" ? "input" : "click";

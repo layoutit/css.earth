@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-18",
+  "card": {
+    "text": "F6 star in Phoenix, 123 parsecs away, circled every 23 hours by a planet ten times Jupiter's mass.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2001-11112",
+        "url": "https://arxiv.org/abs/2001.11112",
+        "label": "Cortés-Zuleta et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Table 3",
+        "quote": "Mass (MJ) 10.20±0.35"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WASP-18 is an F-type star a little larger and hotter than the Sun. Its massive planet WASP-18b orbits so close that it circles in under a day.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2001-11112",
+        "url": "https://arxiv.org/abs/2001.11112",
+        "label": "Cortés-Zuleta et al. 2020",
+        "checked": "2026-09-23",
+        "locator": "Table 3",
+        "quote": "Radius 1.319, Effective Temperature (K) 6432±48"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}
