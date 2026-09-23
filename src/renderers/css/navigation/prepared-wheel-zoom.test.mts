@@ -15,7 +15,7 @@ function fixture(inertia: WheelZoomInertia | null = null) {
   vi.stubGlobal('HTMLElement', Surface);
   const surface = new Surface();
   const cameraState = { rotX: 0, rotY: 0, zoom: 1, distance: 1000 };
-  const camera: NavigationCamera = { state: cameraState, update() {} };
+  const camera: NavigationCamera = { state: cameraState };
   const controls = createPreparedWheelZoomControls({ inputSurface: surface.asElement(), camera, runtimePolicy,
     dolly: { stepPerDelta: .006 }, inertia,
     rotate(value: CameraDelta) { if (value.distance !== undefined) cameraState.distance = value.distance; },

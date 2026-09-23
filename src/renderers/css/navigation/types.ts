@@ -14,7 +14,6 @@ export interface TrackballMetrics {
 export interface CameraUpdate { rotX?: number; rotY?: number; zoom?: number; distance?: number; distanceKilometers?: number; }
 export interface NavigationCamera {
   readonly state: Readonly<{ rotX: number; rotY: number; zoom: number; distance: number }>;
-  update(partial: CameraUpdate): void;
 }
 export interface CameraDelta { controlPitchDelta: number; controlYawDelta: number; zoom?: number; distance?: number; rotation?: Quaternion; }
 export interface ControlsUpdate { drag?: boolean; wheel?: boolean; }
