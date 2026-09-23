@@ -1,7 +1,7 @@
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { errorMessage, type BrowserWindow } from './browser-types.mts';
 import { withDataset } from './dataset-url.mts';
-import type { createNavigationHistory, NavigationOptions } from './navigation-history.mts';
+import type { createNavigationHistory } from './navigation-history.mts';
 import { replaceNavigationUrl } from './navigation-history.mts';
 import type { NavigationLifecycle, NavigationRequest } from './navigation-lifecycle.mts';
 import type { SceneSession, SceneSessions } from './scene-session.mts';
@@ -45,10 +45,10 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     if (scenes.isCurrent(session)) publish(session, url);
   }
 
-  function commit(request: NavigationRequest, session: SceneSession, options: NavigationOptions = request.options) {
+  function commit(request: NavigationRequest, session: SceneSession) {
     return requests.commit(request, () => {
       session.url = request.url;
-      getHistory()?.commit(request.url, options);
+      getHistory()?.commit(request.url, request.history);
     });
   }
 
