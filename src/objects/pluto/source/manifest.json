@@ -498,6 +498,22 @@
           }
         ]
       }
+    },
+    {
+      "id": "pluto-preparation-approach",
+      "path": "preparation/approach.json",
+      "origin": "Repository-authored Pluto approach recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs; the direction is computed from the new-horizons SPICE kernel bank.",
+      "redistribution": "Prepared navigation input.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored selection of the New Horizons kernels and flyby window the default camera faces."
+      }
     }
   ],
   "generatedIntermediates": [],
