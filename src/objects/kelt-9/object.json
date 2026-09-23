@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kelt-9",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KELT-9",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 1662723,
+        "polarRadiusKm": 1526835
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kelt-9-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KELT-9",
+      "classification": "star",
+      "color": "#b5c9ff",
+      "distanceAu": 42741730.6,
+      "description": "Hot A star spinning so fast it is flattened, with hot bright poles and a cooler equator.",
+      "systemName": "KELT-9 system",
+      "order": 1720,
+      "context": {
+        "order": 1717
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3008840323828361700,
+        -3870601803770405000,
+        4104811428835544600
+      ],
+      "presentationToReference": [
+        0.6217094810758895,
+        0.11142619430458124,
+        0.7752815774692093,
+        -0.7549629789383752,
+        -0.1783492546051985,
+        0.6310486857717593,
+        -0.20858624492723066,
+        0.9776378402069796,
+        0.026758770946916803
+      ],
+      "orbitUpReference": [
+        -0.11142619430458124,
+        0.1783492546051985,
+        -0.9776378402069796
+      ],
+      "metersPerUnit": 5363622.580645162,
+      "bodyRadiusM": 1662723000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

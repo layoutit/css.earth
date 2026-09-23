@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/kelt-9b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "kelt-9b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csskelt-9b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature",
+      "output": "kelt-9b-surface-{id}{suffix}.webp",
+      "thumbnail": "kelt-9b-lens-{id}.webp",
+      "source": "science/mansfield-2020/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Temperature",
+        "format": "published-phase-curve-map",
+        "path": "science/mansfield-2020/phase-curve.json",
+        "consumer": "mansfield-2020-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 2400,
+        "maximum": 5100,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "2400",
+          "3750",
+          "5100"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's two-sinusoid phase-curve fit, turned into a map of longitude (Cowan & Agol 2008). It has no north-south information.",
+        "title": "Spitzer 4.5 µm · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/1910.01567"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "kelt-9b-context-{id}{suffix}.webp",
+    "limbOutput": "kelt-9b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csskelt-9b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "sourceRadius": "measurements.json#radiusKm",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

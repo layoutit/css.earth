@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/wasp-76b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "wasp-76b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswasp-76b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature",
+      "output": "wasp-76b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-76b-lens-{id}.webp",
+      "source": "science/may-2021/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Temperature",
+        "format": "published-phase-curve-map",
+        "path": "science/may-2021/phase-curve.json",
+        "consumer": "may-2021-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 600,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "600",
+          "1800",
+          "3000"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's own SPIDERMAN map fit, evaluated by SPIDERMAN: a dipole centred on the substellar point.",
+        "title": "Spitzer 4.5 µm · published phase-curve map",
+        "sourceUrl": "https://arxiv.org/abs/2107.03349"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "wasp-76b-context-{id}{suffix}.webp",
+    "limbOutput": "wasp-76b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csswasp-76b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "sourceRadius": "measurements.json#radiusKm",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

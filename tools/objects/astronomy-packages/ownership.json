@@ -168,6 +168,15 @@
       "consumers": [
         "Telescope explore curated display imagery"
       ]
+    },
+    {
+      "mechanic": "Spherical-harmonic brightness maps and the phase curves they make, as published fits parameterise them",
+      "package": "spiderman-package",
+      "version": "1.0.3",
+      "operation": "spiderman.mts: spidermanMapGrid (call_map_model), spidermanPhaseCurve (lightcurve), in its own environment (spiderman-toolchain.json)",
+      "consumers": [
+        "published-phase-curve-map: WASP-76b (May et al. 2021)"
+      ]
     }
   ],
   "retained": [

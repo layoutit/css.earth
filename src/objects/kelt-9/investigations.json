@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kelt-9",
+  "entries": [
+    {
+      "id": "gravity-darkened-transit",
+      "subject": "Ahlers et al. (2020) gravity-darkened fit to KELT-9b's TESS transit",
+      "status": "included",
+      "finding": "Sets the flattening (equator 1.089 times the pole), the gravity-darkening exponent and the spin axis (i* 52 degrees in the paper's convention, lambda -88 degrees). The Roche-von Zeipel shading from those numbers puts the equator about 500 K below the pole, where the paper's text says 800 to 1,000 K and a 38 percent brightness contrast.",
+      "evidence": [
+        "https://arxiv.org/abs/2004.14812"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "resolved-photosphere",
+      "subject": "Disc-resolved images or interferometric imaging of KELT-9",
+      "status": "excluded",
+      "finding": "The disc is about 0.1 mas across at 207 pc, far below any interferometer's resolution; no image exists. The surface pattern shown is the transit fit's, not an image.",
+      "revisitWhen": "A reconstructed image of the star's surface is published.",
+      "evidence": [
+        "https://jmmc.fr/jmdc"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    },
+    {
+      "id": "nodal-precession",
+      "subject": "Stephan et al. (2022) joint fit of KELT-9b's nodal precession with Doppler tomography and TESS",
+      "status": "deferred",
+      "finding": "A later fit of the spin geometry that uses Ahlers et al. as a prior in one of its runs. The package keeps the single self-consistent TESS fit that also gives the flattening and the gravity-darkening exponent.",
+      "revisitWhen": "A single paper gives flattening, gravity darkening and spin axis more precisely than Ahlers et al. (2020).",
+      "evidence": [
+        "https://arxiv.org/abs/2203.02546"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "874b508c84625989ad6e61d447f9c73248f0a7ad"
+        }
+      ]
+    }
+  ]
+}
