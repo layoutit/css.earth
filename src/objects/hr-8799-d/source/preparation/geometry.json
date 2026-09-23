@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "hr-8799-d",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/hr-8799-d/hr-8799-d-surface-color@2x.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/hr-8799-d/hr-8799-d-poles-color@2x.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#e4efff"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csshr-8799-d-prepared-runtime-scene@1",
+    "materialSchema": "csshr-8799-d-prepared-lighting@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 0,
+      "sourceProjection": "no map: the published whole-disc infrared colour, uniform on the reference sphere",
+      "polarPreparation": "the same colour on the polar tiles",
+      "axialTiltNote": "no obliquity or spin of this planet is measured; the display axis is the orbit normal and nothing turns"
+    }
+  }
+}

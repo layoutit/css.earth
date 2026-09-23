@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hr-8799",
+  "card": {
+    "text": "Young F0 star 41 parsecs away in Pegasus, orbited by four giant planets that were photographed directly.",
+    "sources": [
+      {
+        "catalogueId": "simbad-hr-8799",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HR+8799",
+        "label": "SIMBAD",
+        "checked": "2026-09-23",
+        "locator": "Basic data",
+        "quote": "Spectral type: F0+VkA5mA5"
+      },
+      {
+        "catalogueId": "arxiv-0811-2606",
+        "url": "https://arxiv.org/abs/0811.2606",
+        "label": "Marois et al. 2008",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "High-contrast observations with the Keck and Gemini telescopes have revealed three planets orbiting the star HR 8799"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HR 8799 is a young F0 star 41 parsecs away. It was the first star seen with several planets in direct images: four giants, 16 to 71 au out.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0811-2606",
+        "url": "https://arxiv.org/abs/0811.2606",
+        "label": "Marois et al. 2008",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "High-contrast observations with the Keck and Gemini telescopes have revealed three planets orbiting the star HR 8799"
+      },
+      {
+        "catalogueId": "arxiv-1011-4918",
+        "url": "https://arxiv.org/abs/1011.4918",
+        "label": "Marois et al. 2010",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Here we report the presence of a fourth planet, interior to and about the same mass as the other three."
+      },
+      {
+        "catalogueId": "gaia-dr3-hr-8799",
+        "url": "https://gea.esac.esa.int/archive/",
+        "label": "Gaia DR3 parallax",
+        "checked": "2026-09-23",
+        "locator": "gaiadr3.gaia_source, source_id 2832463659640297472",
+        "quote": "parallax 24.4620 +/- 0.0455 mas"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the measured radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}

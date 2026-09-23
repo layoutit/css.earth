@@ -1,0 +1,78 @@
+{
+  "id": "arxiv-0811-2606",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Marois et al. (2008): Direct Imaging of Multiple Planets Orbiting the Star HR 8799",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0811.2606"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1126/science.1166585"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0811.2606",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1126/science.1166585",
+      "label": "Science 322, 1348"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0811.2606",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: three planets imaged with Keck and Gemini; counter-clockwise orbital motion over multiple epochs; model radius 1.2 Jupiter radii adopted for the companions"
+    },
+    {
+      "path": "src/objects/hr-8799/text.json",
+      "locator": "/card/sources/1"
+    },
+    {
+      "path": "src/objects/hr-8799/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/hr-8799-b/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/hr-8799-b/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/hr-8799-c/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/hr-8799-c/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/hr-8799-d/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/hr-8799-d/text.json",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "C. Marois",
+    "B. Macintosh",
+    "T. Barman",
+    "B. Zuckerman",
+    "I. Song",
+    "J. Patience"
+  ]
+}

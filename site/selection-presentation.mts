@@ -35,6 +35,24 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
       details: documentTarget.querySelector<HTMLElement>(`.object-information-panel [data-lens-volume-details="${option.dataset.lensVolume ?? ''}"]`) }))
     .map(entry => ({ ...entry, detailsHome: entry.details?.parentElement ?? null, detailsNext: entry.details?.nextElementSibling ?? null }));
   let volumeOptions = readVolumeOptions();
+  // A star's telescope pictures show its whole system, so they open on the system card while the system is selected and
+  // return, closed as they were, to the star's card after.
+  const systemGalleries = system?.querySelector<HTMLElement>('[data-system-galleries]') ?? null;
+  const readGalleries = () => [...documentTarget.querySelectorAll<HTMLDetailsElement>('.object-information-panel details.object-gallery-panel')]
+    .map(panel => ({ panel, home: panel.parentElement, next: panel.nextElementSibling, open: panel.open }));
+  let galleries = readGalleries();
+  const placeGalleries = (onSystemCard: boolean) => {
+    if (!systemGalleries || !galleries.length) return;
+    for (const entry of onSystemCard ? galleries : galleries.toReversed()) {
+      const target = onSystemCard ? systemGalleries : entry.home;
+      if (target && entry.panel.parentElement !== target) {
+        if (onSystemCard) target.append(entry.panel);
+        else target.insertBefore(entry.panel, entry.next?.parentElement === target ? entry.next : null);
+      }
+      entry.panel.open = onSystemCard || entry.open;
+    }
+    systemGalleries.hidden = !onSystemCard;
+  };
   const placeVolumeDatasets = (onSystemCard: boolean) => {
     if (!systemDatasets || !systemDatasetOptions || !systemDatasetDetails || !volumeOptions.length) return;
     for (const entry of onSystemCard ? volumeOptions : volumeOptions.toReversed()) {
@@ -79,6 +97,7 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     const systemSelected = overview?.scope === 'system';
     if (system) setPanelHidden(system, !systemSelected);
     placeVolumeDatasets(systemSelected);
+    placeGalleries(systemSelected);
     const showContext = Boolean(focus) || galactic || Boolean(largeScale) || systemSelected;
     setPanelHidden(information, showContext);
     if (!sharedLegacyContext) setPanelHidden(context, !showContext);
@@ -111,7 +130,9 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     render, mark, publishSource,
     bindObject() {
       placeVolumeDatasets(false);
+      placeGalleries(false);
       volumeOptions = readVolumeOptions();
+      galleries = readGalleries();
     },
   };
 }

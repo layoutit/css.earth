@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
- *   node tools/objects/new-star.mts <id> --name <display name> --system <constellation> --temperature <K>
+ *   node tools/objects/new-star.mts <id> --name <display name> --system <system name, e.g. "Beta Pictoris system"> --temperature <K>
  *     --temperature-source <citation with URL> --description <catalogue line> --paper <url> --paper-credit <credit>
  *   node tools/objects/new-star.mts <id> --black-hole --shadow-source <citation> --name ... --system ... --description ... --paper ... --paper-credit ...
  *
@@ -28,9 +28,10 @@ export interface StarScaffold { readonly id: string; readonly name: string; read
   readonly blackHole?: { readonly shadowSource: string } }
 const NEUTRAL_GRAY = '#9a9a9a', SHADOW_BLACK = '#000000';
 
-/** The star stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. */
-export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.') {
-  const s = `.object-stage[data-object-id="${id}"]`;
+/** The emissive stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. A body whose
+ * solar-system.json enlarges its sphere (a hosted planet's geometryScale 1.25) scales both plates by the same factor. */
+export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.', geometryScale = 1) {
+  const s = `.object-stage[data-object-id="${id}"]`, times = geometryScale === 1 ? '' : ` * ${geometryScale}`;
   return `/* ${name}: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. ${spinNote} ${plateNote} */
 ${s} > :is(.polycss-camera, .${id}-corona-layer, .${id}-limb-layer) {
@@ -96,24 +97,26 @@ ${s} .polycss-scene s.${id}-polar {
   background-image: var(--${id}-poles-image) !important;
 }
 
-/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
+${geometryScale === 1 ? "/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */" : `/* Off-limb context: ${offLimbSize} px = raster.json emission.offLimbSize, drawn at the disc's ${BODY_DIAMETER_PX} px, times the sphere's
+   solar-system.json geometryScale (${geometryScale}) so the plate stays registered to the enlarged sphere. */`}
 ${s} .${id}-corona-layer {
   background-image: var(--${id}-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1))
-    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1));
+    calc(${offLimbSize}px${times} * var(--${id}-camera-zoom, 1))
+    calc(${offLimbSize}px${times} * var(--${id}-camera-zoom, 1));
 }
 
-/* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+${geometryScale === 1 ? `/* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */` : `/* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */`}
 ${s} .${id}-limb-layer {
   background-image: var(--${id}-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1))
-    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1));
+    calc(${BODY_DIAMETER_PX}px${times} * var(--${id}-camera-zoom, 1))
+    calc(${BODY_DIAMETER_PX}px${times} * var(--${id}-camera-zoom, 1));
 }
 
 ${s} .polycss-camera {
