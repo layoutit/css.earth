@@ -7,7 +7,7 @@ import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { readInitialFocus } from './focus-catalog.mts';
-import { selectedShellSubject, type ShellSelection } from './shell-selection.mts';
+import { selectedShellSubject, type ShellOverview, type ShellSelection } from './shell-selection.mts';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
@@ -53,8 +53,19 @@ export interface ShellOptions {
 interface SelectionPreview {
   id: string | null;
   frame?: PreparedWorldCameraFrame | null;
-  commit?(): void;
+  commit(): void;
   restore(): void;
+}
+
+export type ShellNavigationTarget =
+  | { kind: 'object'; object: ObjectEntry; targetWorldCamera?: WorldCameraPose }
+  | { kind: 'overview'; overview: ShellOverview; preview: boolean };
+
+export interface ShellNavigationTransition {
+  /** Publish the arriving selection while its camera can still be in flight. */
+  arrive(selection: { overview: boolean; content?: NavigationContent }): void;
+  /** Roll back an unarrived preview and release the card's flight lock. */
+  dispose(): void;
 }
 
 type Panel = readonly [string, HTMLDetailsElement];
@@ -91,6 +102,7 @@ export function mountObjectShell({
   let minimapController: ReturnType<typeof createSurfaceMinimap>;
   let viewReadout: ReturnType<typeof createViewReadout>;
   let selectionPreview: SelectionPreview | null = null;
+  let navigationTransition: ShellNavigationTransition | null = null;
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
   let selection: ShellSelection = { objectId, overview: null, focus: readInitialFocus(documentTarget) };
   let camera: ShellCamera | null = null;
@@ -134,7 +146,7 @@ export function mountObjectShell({
       onOpenSolarSystem: () => objectBrowser.showSystem(SOLAR_SYSTEM_ID),
     }));
     lifetime.onDispose(() => disposeContent());
-    lifetime.onDispose(() => selectionPreview?.restore());
+    lifetime.onDispose(() => navigationTransition?.dispose());
     mountContent(objectId, motionEnabled);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
@@ -149,113 +161,8 @@ export function mountObjectShell({
       const notice = drawer.querySelector<HTMLElement>('[data-dataset-notice]');
       if (notice) { notice.textContent = message ?? ''; notice.hidden = message === null; }
     },
-    beginCardNavigation(object: ObjectEntry, targetWorldCamera?: WorldCameraPose) {
-      // Classify the endpoint once. Intermediate flight poses and the camera
-      // handoff must not toggle the destination's retained overview/detail card.
-      const transition: { view: 'detail' | 'overview' } = { view: targetWorldCamera
-        ? bodyCardViewAtCamera(targetWorldCamera, object.worldFrame, camera?.navigation?.optics?.(), object.id)
-        : 'detail' };
-      cardNavigation = transition;
-      return () => {
-        if (cardNavigation !== transition) return;
-        cardNavigation = null;
-        updateBodyCard();
-      };
-    },
-    beginOverviewSelection(scope: OverviewScope, systemId: string) {
-      selectionPreview?.restore();
-      const restoreBrowser = objectBrowser.previewOverview(scope, systemId);
-      const preview = { id: null, restore() {
-        if (selectionPreview !== preview) return;
-        selectionPreview = null;
-        restoreBrowser();
-      } };
-      selectionPreview = preview;
-      return preview.restore;
-    },
-    beginObjectSelection(object: ObjectEntry) {
-      sheet.showSelection();
-      selectionPreview?.restore();
-      if (object.id === selection.objectId) {
-        const restoreBrowser = objectBrowser.previewObject(object.id);
-        const preview = { id: object.id, commit() { selectionPreview = null; }, restore() {
-          if (selectionPreview !== preview) return;
-          selectionPreview = null; restoreBrowser();
-        } };
-        selectionPreview = preview;
-        updateBodyCard();
-        return preview.restore;
-      }
-      const information = requiredElement(drawer, '.object-information-panel');
-      const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.id);
-      const previousBusy = information.ariaBusy;
-      const previewLifetime = createSceneLifetime();
-      let pendingControls: (readonly [HTMLElement, boolean])[] = [];
-      const showCard = (card: Element) => {
-        information.replaceChildren(...[...card.childNodes].map(node => documentTarget.importNode(node, true)));
-        restorePanelState([...information.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')].filter(node => node instanceof windowTarget.HTMLDetailsElement)
-          .map(node => [panelKey(node), node] as const), object.id, windowTarget);
-        for (const map of information.querySelectorAll<HTMLElement>('.object-surface-minimap')) {
-          if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
-        }
-        // Detail controls wait for their renderer; navigation anchors stay usable
-        // so another breadcrumb or moon can replace an in-progress selection.
-        pendingControls = [...information.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]')]
-          .filter(node => node.dataset.informationGroup !== 'overview')
-          .map(node => [node, node.inert] as const);
-        for (const [node] of pendingControls) node.inert = true;
-        createInformationTabsController(drawer, previewLifetime, 'overview');
-      };
-      // The destination's static fragment is its card; intent usually fetched it.
-      const cached = fragments.peek(object.id);
-      const card = cached?.document.querySelector('.object-information-panel');
-      if (cached && card) {
-        try { showCard(card); } finally { cached.release(); }
-      }
-      else {
-        cached?.release();
-        // Registry facts show at once; the card follows its fragment without
-        // blocking the flight. A failed fragment fails the destination load.
-        information.replaceChildren(objectCardPreview(documentTarget, object));
-        fragments.get(object.id).then(fragment => {
-          try {
-            const arrived = fragment.document.querySelector('.object-information-panel');
-            if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
-          } finally { fragment.release(); }
-        }, () => {});
-      }
-      information.ariaBusy = 'true';
-      const preview = { id: object.id, frame: object.worldFrame, commit() {
-        previewLifetime.destroy();
-        selectionPreview = null;
-        information.ariaBusy = previousBusy;
-        for (const [node, inert] of pendingControls) node.inert = inert;
-      }, restore() {
-        if (selectionPreview !== preview) return;
-        previewLifetime.destroy();
-        selectionPreview = null;
-        information.replaceChildren(...previous);
-        information.ariaBusy = previousBusy;
-        restoreBrowser();
-        updateBodyCard();
-      } };
-      selectionPreview = preview;
-      updateBodyCard();
-      return preview.restore;
-    },
-    setObject(content: NavigationContent) {
-      if (lifetime.disposed) return;
-      const preserveSidebar = selectionPreview?.id === content.id;
-      if (preserveSidebar) selectionPreview?.commit?.();
-      else selectionPreview?.restore();
-      const motion = requiredElement<HTMLInputElement>(documentTarget, '.object-motion-setting').checked;
-      disposeContent();
-      content.apply({ preserveSidebar });
-      selection = { objectId: content.id, overview: null, focus: null };
-      focusCard.set(null);
-      objectBrowser.bindObject(content.id);
-      mountContent(content.id, motion);
-    },
+    beginNavigation,
+    setObject,
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
     selectPlace(id: string) { return lifetime.disposed ? Promise.resolve() : objectBrowser.selectPlace(id); },
     setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
@@ -266,17 +173,7 @@ export function mountObjectShell({
       objectBrowser.refreshFocus();
       viewReadout.setPreparedFocus(record);
     },
-    setOverview(enabled: boolean) {
-      if (!lifetime.disposed) {
-        if (enabled && selectionPreview?.id === null) selectionPreview = null;
-        else if (!enabled && selectionPreview?.id === selection.objectId) selectionPreview?.commit?.();
-        selection = { ...selection, overview: enabled ? {
-          scope: selection.overview?.scope ?? 'system',
-          systemId: systemById(SCENE_OBJECTS, selection.objectId)?.id ?? SOLAR_SYSTEM_ID,
-        } : null };
-        updateOverview(true);
-      }
-    },
+    setOverview,
     setCamera(provider: ShellCamera | null) {
       if (!lifetime.disposed) {
         unsubscribeOverview?.(); camera = provider;
@@ -299,6 +196,161 @@ export function mountObjectShell({
       if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");
     },
   });
+
+  function beginNavigation(target: ShellNavigationTarget): ShellNavigationTransition | null {
+    if (lifetime.disposed) return null;
+    navigationTransition?.dispose();
+    let preview: SelectionPreview | null = null;
+    let releaseCard: (() => void) | undefined;
+    try {
+      if (target.kind === 'object') {
+        releaseCard = beginCardNavigation(target.object, target.targetWorldCamera);
+        preview = beginObjectSelection(target.object);
+      } else if (target.preview) {
+        preview = beginOverviewSelection(target.overview.scope, target.overview.systemId);
+      }
+    } catch (error) {
+      releaseCard?.();
+      throw error;
+    }
+    let arrived = false;
+    const transition: ShellNavigationTransition = {
+      arrive({ overview, content }) {
+        if (navigationTransition !== transition || arrived) return;
+        const preserveSidebar = content !== undefined && preview?.id === content.id;
+        // A content handoff can retain its previewed card. An in-place arrival
+        // commits the requested subject without replacing the mounted body.
+        const acceptsPreview = content ? preserveSidebar : overview === (target.kind === 'overview');
+        if (acceptsPreview) preview?.commit();
+        else preview?.restore();
+        if (content) setObject(content, { preserveSidebar });
+        setOverview(overview);
+        arrived = true;
+      },
+      dispose() {
+        if (navigationTransition !== transition) return;
+        navigationTransition = null;
+        try { if (!arrived) preview?.restore(); }
+        finally { releaseCard?.(); }
+      },
+    };
+    navigationTransition = transition;
+    return transition;
+  }
+
+  function beginCardNavigation(object: ObjectEntry, targetWorldCamera?: WorldCameraPose) {
+    // Classify the endpoint once. Intermediate flight poses and the camera
+    // handoff must not toggle the destination's retained overview/detail card.
+    const transition: { view: 'detail' | 'overview' } = { view: targetWorldCamera
+      ? bodyCardViewAtCamera(targetWorldCamera, object.worldFrame, camera?.navigation?.optics?.(), object.id)
+      : 'detail' };
+    cardNavigation = transition;
+    return () => {
+      if (cardNavigation !== transition) return;
+      cardNavigation = null;
+      updateBodyCard();
+    };
+  }
+  function beginOverviewSelection(scope: OverviewScope, systemId: string) {
+    const restoreBrowser = objectBrowser.previewOverview(scope, systemId);
+    const preview = { id: null, commit() { selectionPreview = null; }, restore() {
+      if (selectionPreview !== preview) return;
+      selectionPreview = null;
+      restoreBrowser();
+    } };
+    selectionPreview = preview;
+    return preview;
+  }
+  function beginObjectSelection(object: ObjectEntry) {
+    sheet.showSelection();
+    if (object.id === selection.objectId) {
+      const restoreBrowser = objectBrowser.previewObject(object.id);
+      const preview = { id: object.id, commit() { selectionPreview = null; }, restore() {
+        if (selectionPreview !== preview) return;
+        selectionPreview = null; restoreBrowser();
+      } };
+      selectionPreview = preview;
+      updateBodyCard();
+      return preview;
+    }
+    const information = requiredElement(drawer, '.object-information-panel');
+    const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.id);
+    const previousBusy = information.ariaBusy;
+    const previewLifetime = createSceneLifetime();
+    let pendingControls: (readonly [HTMLElement, boolean])[] = [];
+    const showCard = (card: Element) => {
+      information.replaceChildren(...[...card.childNodes].map(node => documentTarget.importNode(node, true)));
+      restorePanelState([...information.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')].filter(node => node instanceof windowTarget.HTMLDetailsElement)
+        .map(node => [panelKey(node), node] as const), object.id, windowTarget);
+      for (const map of information.querySelectorAll<HTMLElement>('.object-surface-minimap')) {
+        if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
+      }
+      // Detail controls wait for their renderer; navigation anchors stay usable
+      // so another breadcrumb or moon can replace an in-progress selection.
+      pendingControls = [...information.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]')]
+        .filter(node => node.dataset.informationGroup !== 'overview')
+        .map(node => [node, node.inert] as const);
+      for (const [node] of pendingControls) node.inert = true;
+      createInformationTabsController(drawer, previewLifetime, 'overview');
+    };
+    // The destination's static fragment is its card; intent usually fetched it.
+    const cached = fragments.peek(object.id);
+    const card = cached?.document.querySelector('.object-information-panel');
+    if (cached && card) {
+      try { showCard(card); } finally { cached.release(); }
+    }
+    else {
+      cached?.release();
+      // Registry facts show at once; the card follows its fragment without
+      // blocking the flight. A failed fragment fails the destination load.
+      information.replaceChildren(objectCardPreview(documentTarget, object));
+      fragments.get(object.id).then(fragment => {
+        try {
+          const arrived = fragment.document.querySelector('.object-information-panel');
+          if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
+        } finally { fragment.release(); }
+      }, () => {});
+    }
+    information.ariaBusy = 'true';
+    const preview = { id: object.id, frame: object.worldFrame, commit() {
+      previewLifetime.destroy();
+      selectionPreview = null;
+      information.ariaBusy = previousBusy;
+      for (const [node, inert] of pendingControls) node.inert = inert;
+    }, restore() {
+      if (selectionPreview !== preview) return;
+      previewLifetime.destroy();
+      selectionPreview = null;
+      information.replaceChildren(...previous);
+      information.ariaBusy = previousBusy;
+      restoreBrowser();
+      updateBodyCard();
+    } };
+    selectionPreview = preview;
+    updateBodyCard();
+    return preview;
+  }
+
+  function setObject(content: NavigationContent, { preserveSidebar = false } = {}) {
+    if (lifetime.disposed) return;
+    const motion = requiredElement<HTMLInputElement>(documentTarget, '.object-motion-setting').checked;
+    disposeContent();
+    content.apply({ preserveSidebar });
+    selection = { objectId: content.id, overview: null, focus: null };
+    focusCard.set(null);
+    objectBrowser.bindObject(content.id);
+    mountContent(content.id, motion);
+  }
+
+  function setOverview(enabled: boolean) {
+    if (!lifetime.disposed) {
+      selection = { ...selection, overview: enabled ? {
+        scope: selection.overview?.scope ?? 'system',
+        systemId: systemById(SCENE_OBJECTS, selection.objectId)?.id ?? SOLAR_SYSTEM_ID,
+      } : null };
+      updateOverview(true);
+    }
+  }
 
   function disposeContent() {
     const errors = contentLifetime?.destroy() ?? [];
