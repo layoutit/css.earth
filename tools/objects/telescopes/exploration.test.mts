@@ -2,7 +2,29 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { explorationAnswer, parseExplorationArguments } from './exploration.mts';
-import { SERVICES, targetQuery } from './vo/discovery.mts';
+import { canonicalTargetRequest, withRequestedTargetName } from './targets.mts';
+import { associateTarget, SERVICES, targetQuery } from './vo/discovery.mts';
+
+test('a uniquely resolved entered name reaches archives without becoming a permanent alias', () => {
+  const catalogue = [{ id: 'gamma-7', name: 'Gamma 7 A', aliases: [] }, { id: 'gamma-7-b', name: 'Gamma 7 B', aliases: [] }];
+  const scoped = withRequestedTargetName('Gamma 7', 'gamma-7', catalogue);
+  assert.deepEqual(canonicalTargetRequest({ target: 'Gamma 7', kind: 'spectrum' }, 'gamma-7'),
+    { target: 'gamma-7', kind: 'spectrum', requestedTargetName: 'Gamma 7' });
+  assert.deepEqual(canonicalTargetRequest({ target: 'gamma-7', requestedTargetName: 'Gamma 7' }, 'gamma-7'),
+    { target: 'gamma-7', requestedTargetName: 'Gamma 7' });
+  assert.deepEqual(catalogue[0]!.aliases, []);
+  const identities = scoped.map(entry => ({ id: entry.id, names: [entry.name, ...entry.aliases] }));
+  const star = identities[0]!, companion = identities[1]!;
+  const answer = explorationAnswer({ target: 'Gamma 7' }, { ledgers: [], capabilities: [], targetCatalogue: catalogue, targetAssociations: [], bodyMaps: [] });
+  assert.deepEqual(answer.request, { target: 'gamma-7', requestedTargetName: 'Gamma 7' });
+  assert.match(targetQuery(SERVICES[0]!, star.names, 50, { target: star.id, kind: 'spectrum', instrument: 'UVES' }), /target_name IN \('Gamma 7 A','Gamma 7'\)/u);
+  assert.equal(associateTarget('Gamma 7', null, star, identities).status, 'confirmed');
+  assert.equal(associateTarget('Gamma 7', null, companion, identities).status, 'unmatched');
+  assert.equal(withRequestedTargetName('unrelated', 'gamma-7', catalogue), catalogue);
+  const ambiguous = [...catalogue, { id: 'other', name: 'Gamma-7', aliases: [] }];
+  assert.equal(withRequestedTargetName('Gamma 7', 'gamma-7', ambiguous), ambiguous);
+  assert.equal(withRequestedTargetName('Gamma 7', 'gamma-7-b', catalogue), catalogue);
+});
 
 test('target-only exploration preserves omitted filters and archive queries add only supplied filters', () => {
   assert.deepEqual(parseExplorationArguments(['eris']), { target: 'eris' });

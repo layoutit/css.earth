@@ -52,3 +52,20 @@ export function resolveTarget(requested: string, catalogue: readonly TargetCatal
     .sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id)).slice(0, 3);
   return { status: 'unknown', requested, suggestions };
 }
+
+/** An entered name may be sent to an archive only when the catalogue resolves it to one target. Keep it
+ * request-scoped: a provider spelling observed in one search is not a permanent alias for a body. */
+export function withRequestedTargetName(requested: string, targetId: string, catalogue: readonly TargetCatalogueEntry[]): readonly TargetCatalogueEntry[] {
+  const key = normalized(requested);
+  const matches = catalogue.filter(entry => [entry.id, entry.name, ...entry.aliases].some(value => normalized(value) === key));
+  const resolution = resolveTarget(requested, catalogue);
+  if (matches.length !== 1 || matches[0]!.id !== targetId || resolution.status !== 'resolved' || resolution.canonical.id !== targetId) return catalogue;
+  return catalogue.map(entry => entry.id === matches[0]!.id && ![entry.name, ...entry.aliases].includes(requested)
+    ? { ...entry, aliases: [...entry.aliases, requested] } : entry);
+}
+
+/** Preserve the user's uniquely resolved spelling when a request is carried forward under its canonical id. */
+export function canonicalTargetRequest<Request extends { readonly target: string; readonly requestedTargetName?: string }>(request: Request, targetId: string) {
+  const requested = request.requestedTargetName ?? request.target;
+  return { ...request, target: targetId, ...(requested === targetId ? {} : { requestedTargetName: requested }) };
+}
