@@ -4,6 +4,7 @@ import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createP
 import { RASTER_DENSITY, type RasterRecipe } from './config.js';
 import { raster, readRgba, assetPath } from './io.js';
 import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.js';
+import { composeLimbPreview } from './emission-preview.js';
 import { missingCoverageColor } from '../../platform/prepare-missing-coverage.mts';
 type NativePoleSampler = { readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean; };
 
@@ -65,6 +66,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
         let source: Uint8Array | undefined;
         let fallback: Uint8Array | undefined;
         let thumbnailSource: Buffer | undefined;
+        let thumbnailLimb: InterpretedPlate | undefined;
         if (config.resample === 'source-packed') {
             source = await load(surface.source);
             if (surface.coverage) {
@@ -87,6 +89,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             if (config.emission) {
                 const plates = interpreted.plates;
                 if (!plates) throw new TypeError(`Surface ${surface.id} declares emission but its interpretation returned no plates.`);
+                if (surface.thumbnailFromLimbPlate) thumbnailLimb = plates.limb;
                 const encode = (plate: InterpretedPlate) => plate.lossless ? { lossless: true, effort: 6 } : { quality: 90, alphaQuality: 100, smartSubsample: true, effort: 6 };
                 await raster(plates.offLimb.data, plates.offLimb.size, plates.offLimb.size).webp(encode(plates.offLimb)).toFile(assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
                 await raster(plates.limb.data, plates.limb.size, plates.limb.size).webp(encode(plates.limb)).toFile(assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
@@ -158,6 +161,12 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
         // The authored crop is in canonical-density map pixels.
         if (config.thumbnail.crop)
             await sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, RASTER_DENSITY, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+        if (thumbnailLimb) {
+            const plateSize = thumbnailLimb.size, disc = composeLimbPreview(thumbnailLimb, pixels);
+            await raster(disc, plateSize, plateSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' })
+                .webp({ quality: config.thumbnail.quality, alphaQuality: 100, effort: 6 })
+                .toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+        }
     }
     if (config.polesCombined) {
         const density = RASTER_DENSITY, tileSize = config.polarTile * density, width = tileSize * preparedSources.length * 2;

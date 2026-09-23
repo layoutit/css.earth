@@ -37,6 +37,7 @@ import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar-spot-occultation.mts';
+import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar-spot-figure.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
@@ -481,6 +482,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         })();
         for (let offset = 0; offset < data.length; offset += 4) data.set([...(gravity ? gravity.rows[Math.floor(offset / 4 / width)]! : color.srgb), 255], offset);
         if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar colour belongs to an emissive body.`);
+        if (surface.science.spotOccultation !== undefined && surface.science.spotFigure !== undefined)
+          throw new TypeError(`${objectId}/${surface.id}: choose one spot interpretation per lens.`);
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
         // A fitted or explicitly modeled limb-darkening law darkens the disc through the limb plate, fitted edge to edge.
         if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);
@@ -502,6 +505,24 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
             displayCentre: { x: centre.x, y: centre.y }, basis: 'published TESS spot-occultation candidate, minimum circular cap on a fixed camera-facing plate',
             limitations: 'One transit chord, not a full map. Sky orientation and cap shape are display assumptions. TESS-band contrast is applied achromatically to Gaia colour. No rotation or evolution.' };
         })();
+        const spotFigure = surface.science.spotFigure === undefined ? null : await (async () => {
+          if (!limbDarkening) throw new TypeError(`${objectId}/${surface.id}: a spot figure requires a limb plate.`);
+          const path = requireString(surface.science.spotFigure, 'science.spotFigure');
+          await source.validatePath(path);
+          const model = parseSpotFigureModel(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
+          await source.validatePath(model.figure);
+          const sharp = (await import('sharp')).default;
+          const decoded = await sharp(await readFile(resolve(sourceDirectory, model.figure))).raw().toBuffer({ resolveWithObject: true });
+          const baked = addSpotFigureToLimbPlate(plates.limb,
+            { data: decoded.data, width: decoded.info.width, height: decoded.info.height, channels: decoded.info.channels }, model);
+          plates.limb = baked.plate;
+          return { source: model.source, figureUrl: model.figureUrl, publishedMeanCoveringFraction: model.reportedMeanCoveringFraction,
+            publishedPhotosphereTemperatureK: model.reportedPhotosphereTemperatureK, publishedSpotTemperatureK: model.reportedSpotTemperatureK,
+            spotToPhotosphereTessIntensityRatio: model.spotToPhotosphereTessIntensityRatio,
+            projectedSpotFractionInFigure: baked.projectedSpotFraction,
+            basis: 'published hypothetical dense-latitudinal-bands illustration, not an observed map',
+            limitations: 'Figure 7 left-panel layout is illustrative. Its transit-guide lines are removed. TESS-band intensity is applied achromatically to Gaia colour. The plate is stationary.' };
+        })();
         const modeledLimb = limbDarkening !== null && (limbDarkening.recipe.source === 'grid' ||
           ('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior'));
         return { data, channels: 4, nearest: true, plates,
@@ -513,6 +534,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
               basis: modeledLimb ? 'model' : 'transit-fit',
               ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
             ...(spot ? { spotOccultation: spot } : {}),
+            ...(spotFigure ? { spotFigure } : {}),
             meaning: `${temperature ? 'Planck colour at the catalogued photometric temperature' : range ? 'Colour of the measured Gaia XP spectrum' : 'Colour of the measured spectrum'}${limbDarkening
               ? `, dimmed toward the limb by a ${modeledLimb ? 'theoretical atmosphere model' : 'law fitted to transits'}; not a resolved photosphere.` : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
       }
