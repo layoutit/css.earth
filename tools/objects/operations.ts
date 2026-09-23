@@ -69,12 +69,28 @@ export async function publishPinnedSource({sourceRoot,entry,bytes}:{sourceRoot:s
  try{await writeFile(temporary,bytes,{flag:'wx'});await rename(temporary,path);}finally{await rm(temporary,{force:true});}
  return entry;
 }
-/** Stream a raw source into a sibling temporary file; only a complete download replaces the destination. */
-export async function publishPinnedSourceStream({sourceRoot,entry,stream}:{sourceRoot:string;entry:SourceEntry;stream:Readable}) {
+/** The byte count a raw download is held to: a ranged input's own slice, else the answer's declared length, else
+ *  null when the answer declares none. */
+export function declaredDownloadBytes(entry:SourceEntry,response:{headers:{get(name:string):string|null}}):number|null {
+ if(entry.range)return entry.range.length;
+ const declared=response.headers.get('content-length');
+ return declared!==null&&/^\d+$/.test(declared.trim())&&Number(declared)>0&&Number.isSafeInteger(Number(declared))?Number(declared):null;
+}
+/** Stream a raw source into a sibling temporary file; only a complete download replaces the destination. A declared
+ *  size is enforced while the bytes flow, so an endless or overlong answer is cut off at the limit instead of being
+ *  written out in full and judged afterwards. */
+export async function publishPinnedSourceStream({sourceRoot,entry,stream,declaredBytes=null}:{sourceRoot:string;entry:SourceEntry;stream:Readable;declaredBytes?:number|null}) {
  const path=containedPath(sourceRoot,entry.path),temporary=`${path}.partial-${process.pid}-${randomUUID()}`;
+ let received=0;
+ const ceiling=new Transform({highWaterMark:0,transform(chunk:Uint8Array,_encoding,callback){
+  received+=chunk.length;
+  if(declaredBytes!==null&&received>declaredBytes){callback(new Error(`Source ${entry.path} size drifted: the answer passed its declared ${declaredBytes} bytes.`));return;}
+  callback(null,chunk);
+ }});
  try{
   await mkdir(dirname(path),{recursive:true});
-  await pipeline(stream,createWriteStream(temporary,{flags:'wx'}));
+  await pipeline(stream,ceiling,createWriteStream(temporary,{flags:'wx'}));
+  if(declaredBytes!==null&&received!==declaredBytes)throw new Error(`Source ${entry.path} size drifted: received ${received} bytes of the declared ${declaredBytes}.`);
   await rename(temporary,path);
  }finally{stream.destroy();await rm(temporary,{force:true});}
  return entry;
@@ -87,7 +103,8 @@ export async function acquirePinnedDownloads({sourceRoot,manifest,paths,fetchByt
    const response=await fetch(entry.origin,entry.range?{headers:{Range:rangeRequestHeader(entry.range)}}:undefined);if(!response.ok)throw new Error(`Acquisition failed ${response.status}: ${entry.origin}.`);
    if(entry.range)assertRangeResponse(response,entry.range,entry.origin);
    if(!response.body)throw new Error(`Source download has no body: ${entry.origin}.`);
-   await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.fromWeb(response.body as never)});
+   await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.fromWeb(response.body as never),
+    declaredBytes:declaredDownloadBytes(entry,response)});
   }
  }
  return {acquiredCount:paths.length};
