@@ -60,7 +60,7 @@ Sampling details and output hashes are in the surface metadata (`prepared/surfac
 
 The retained notes report a successful 35-asset bake, eight downloads restored, a verified 35-file source closure and three focused source tests. Original report paths are `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json`; those reports are not checked in. The generic body test, browser checks, fresh runtime installation and aggregate checks were still pending in that record.
 
-[Source test definitions](../../../tests/objects/unit/mathilde/source.test.mts).
+[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/mathilde/source.test.mts).
 
 ### Registration
 

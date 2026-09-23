@@ -31,7 +31,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - The two training quadrants and two disjoint held-out quadrants are recorded in [source/validation/galileo-color-registration.json](source/validation/galileo-color-registration.json). An independent review sampled the original 15,138 × 7,569 reference at its exact GeoTIFF coordinates, without adjusting the fit: upper-right and lower-left unblurred correlations were 0.713 and 0.573.
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/callisto) and the shared browser conformance harness.
+- Focused checks are defined in the [unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/callisto) and the shared browser conformance harness.
 
 ## Known problems
 
