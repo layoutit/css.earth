@@ -3,7 +3,7 @@ import { createSelectionPresentation, setPanelHidden } from './selection-present
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
 import type { SceneSubject } from './scene/scene-selection.mts';
-import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
+import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement } from './browser-types.mts';
 import { objectCategoryCount } from './object-categories.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
@@ -18,6 +18,7 @@ export interface ObjectBrowserOptions {
   readObjectId(): string;
   onCategoryChange?(classification: string | null): void;
   readIllustrationModels?(): boolean;
+  onResetDestination?(): void;
 }
 
 interface SubjectOverride {
@@ -26,7 +27,7 @@ interface SubjectOverride {
 }
 
 export function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
-  { readSelection, readObjectId, onCategoryChange = () => {}, readIllustrationModels = () => false }: ObjectBrowserOptions) {
+  { readSelection, readObjectId, onCategoryChange = () => {}, readIllustrationModels = () => false, onResetDestination = () => {} }: ObjectBrowserOptions) {
   // Browsing a system keeps the committed focus; a flight preview temporarily
   // covers it. Neither changes which scene or focus the shell owns.
   let subjectOverride: SubjectOverride | null = null;
@@ -121,15 +122,13 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const destinations = createDestinationBrowser({
     documentTarget,
     onSelected() { render(false); search.blur(); },
-    onReset() { render(false); },
+    onReset: onResetDestination,
   });
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
     documentTarget, objectId: readObjectId(),
     onResults(count) { visibleFeatures = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
-    onSelectionError(error) { console.error('Feature selection failed:', error); browsing = true; render(true); search.focus(); },
-    selectOwnPlace: id => destinations?.selectById(id) ?? Promise.resolve(),
   });
   lifetime.onDispose(() => features?.destroy());
   let open = searchCard.hasAttribute('data-search-submitted');
@@ -395,7 +394,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         collapseSolarSystemBranches();
       }
       markSelection();
-      if (subject.kind === 'overview') { destinations?.bind(null); features?.bind(null); }
+      if (subject.kind === 'overview') destinations?.present(null);
       render(browsing);
     },
     bindObject(id: string) {
@@ -410,15 +409,10 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         documentTarget.querySelector('.object-sidebar-search-clear')?.setAttribute('href', object.route);
       }
       markSelection();
-      destinations?.bind(null); features?.bind(null);
+      destinations?.present(null); features?.refresh();
       render(browsing);
     },
-    setDestinations(provider: PreparedDestinationRuntime | null | undefined) {
-      const body = SCENE_OBJECTS.find(object => object.id === readObjectId());
-      destinations?.bind(provider, body ? { id: body.id, name: body.name } : undefined);
-    },
-    selectPlace(id: string) { return destinations?.selectById(id) ?? Promise.resolve(); },
-    setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { features?.bind(provider); },
+    presentDestination(value: DestinationPresentation | null) { destinations?.present(value); },
     destroy() {
       events.abort();
       destinations?.destroy();

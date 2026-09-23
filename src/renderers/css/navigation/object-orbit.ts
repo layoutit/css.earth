@@ -468,8 +468,8 @@ export function createRetainedCubicSkyOrbit({
       try { orientation.rebaseScene(change); publish(); }
       catch (error) { retireFailure(error); throw error; }
     },
-    flyToState({ controlPitch, controlYaw, controlRoll = 0, zoom, transition }: CameraAngles & { zoom: number; controlRoll?: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }, { surfaceTarget = false } = {}) {
-      if (lifetime.disposed) return Promise.resolve({ completed: false });
+    flyToState({ controlPitch, controlYaw, controlRoll = 0, zoom, transition }: CameraAngles & { zoom: number; controlRoll?: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }, { surfaceTarget = false, signal }: { surfaceTarget?: boolean; signal?: AbortSignal } = {}) {
+      if (lifetime.disposed || signal?.aborted) return Promise.resolve({ completed: false });
       try {
       if (![controlPitch, controlYaw, controlRoll, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
       controls.stop();
@@ -502,7 +502,7 @@ export function createRetainedCubicSkyOrbit({
         sample(1);
         return Promise.resolve({ completed: true });
       }
-      return controls.flyTo({ sample, durationMilliseconds: transition?.durationMilliseconds });
+      return controls.flyTo({ sample, durationMilliseconds: transition?.durationMilliseconds, signal });
       } catch (error) { retireFailure(error); throw error; }
     },
     // Native cache notifications report failures through the same fatal owner.

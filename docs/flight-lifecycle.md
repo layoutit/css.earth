@@ -85,6 +85,15 @@ to committing; same-body dataset changes can proceed directly to committing.
 Loading and flight preparation can overlap. These phases describe application
 ownership, not additional camera paths or clocks.
 
+`site/scene/scene-feature.mts` applies named-feature and city selections under
+that same request. Search rows use ordinary links, label clicks issue feature
+intents, and direct URLs join the retained-scene path after the initial mount.
+The request awaits a supporting dataset before fetching a city or flying to a
+feature. Its signal reaches both native flight implementations; superseded
+loads cannot start a late flight. The city panel only renders the request's
+status and sends Back intent. Surface geometry and prepared city camera targets
+keep their existing native implementations.
+
 Only the current request may commit navigation history. Saved history entries
 can be installed before their camera flight completes, preserving Back/Forward
 semantics. Completion, cancellation and failure invalidate the request before

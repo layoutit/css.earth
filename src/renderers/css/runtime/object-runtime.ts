@@ -39,7 +39,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, datasetEffects, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, onFeatureSelect, datasetEffects, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -111,10 +111,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       seekAnimation: playback.seek,
     });
     const destinations = definition.destinations && capabilities.createDestinations ? capabilities.createDestinations({ plan: definition.destinations,
-      ready, lifetime, selectLens: id => getSelection().dispatch({ kind: "lens", id }),
-      navigate: camera => { stopMotion(); alignMotionFrame(); return getOrbit().flyToState(camera, { surfaceTarget: true }); },
-      reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
-        controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }),
+      ready, lifetime,
+      navigate: (camera, options) => { alignMotionFrame(); return getOrbit().flyToState(camera, { ...options, surfaceTarget: true }); },
+      reset: options => getOrbit().flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
+        controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }, options),
     }) : null;
     const preparedEpochJdTt = worldFrame?.epochJdTt ?? null;
     let restoreVersion = 0;
@@ -198,10 +198,11 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         return () => { datasetListeners.delete(listener); };
       },
     }) : undefined;
-    const features: import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime | undefined = definition.features ? Object.freeze({
+    const features: import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime | undefined = definition.features ? Object.freeze<import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime>({
       catalog: () => surfaceFeatures?.catalog() ?? null,
       loaded: () => ready.then(() => { if (!surfaceFeatures) throw new Error('Surface features are not mounted.'); return surfaceFeatures.loaded(); }),
-      select: (id: string) => ready.then(() => surfaceFeatures?.select(id) ?? { completed: false }),
+      lensIds: definition.features.lensIds,
+      select: (id, options) => ready.then(() => surfaceFeatures?.select(id, options) ?? { completed: false }),
       selected: () => surfaceFeatures?.selected() ?? null,
       clear: () => surfaceFeatures?.clear(),
       setNavigationInFlight: (active: boolean, landed = true) => { featuresInFlight = active; surfaceFeatures?.setNavigationInFlight?.(active, landed); },
@@ -353,7 +354,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
           scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
           ...(navigation && worldFrame ? { navigation, flightLimits: () => ({ minimumDistanceM: (definition.camera.dolly?.minimumDistanceRadii ?? 1.2) * worldFrame.bodyRadiusM }),
-            onFlight: () => { stopMotion(); } } : {}),
+            onSelect: onFeatureSelect, onFlight: () => { stopMotion(); } } : {}),
           ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
             fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
           lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
