@@ -164,6 +164,22 @@ test('exploration is immutable, revalidates its exact choice, and delivers with 
   } finally { await f.cleanup(); }
 });
 
+test('saved exploration carries its pinned Keck source evidence into the run directory', async () => {
+  const f = await fixture(); try {
+    const body = `${JSON.stringify({source:'https://koa.ipac.caltech.edu/TAP',request:'SELECT TOP 1 ...',rows:[]})}\n`, pin = digest(body);
+    const archive = resolve(f.root, 'output/telescopes/archive-leads');
+    await mkdir(archive, {recursive:true}); await writeFile(resolve(archive, `${pin}.json`), body);
+    const lead = {service:'https://koa.ipac.caltech.edu/TAP',state:'sampled' as const,scope:'public object frames',reason:'sampled',
+      instruments:[],sources:[{table:'koa_nirc2',instrument:'NIRC2',koaid:'N2.20090805.31896.fits',targetName:'test-body',
+        filehand:'/koadata9/NIRC2/20090805/lev0/N2.20090805.31896.fits',dateObs:'2009-08-05',evidence:pin}]};
+    const api:SessionServices={...f.api,explore:async(_root,request)=>explorationAnswer(request,{...await f.load(),archiveLeads:[lead]})};
+    const out=resolve(f.root,'keck-explore'); await saveExploration(f.root,['test-body'],out,api);
+    assert.equal(await readFile(resolve(out,'keck-source-evidence',`${pin}.json`),'utf8'),body);
+    await writeFile(resolve(archive,`${pin}.json`),'{}');
+    assert.equal(await readFile(resolve(out,'keck-source-evidence',`${pin}.json`),'utf8'),body);
+  } finally { await f.cleanup(); }
+});
+
 test('CLI rejects typos and ambiguous arguments before archive access', () => {
   for (const input of [['query', 'eris', '--wave', '1,2'], ['get', 'x', '--pick', '1.5'], ['get', 'x', '--pick', '1', '--pick', '2'], ['query', 'eris', '--target', 'io', '--out', 'x']]) assert.throws(() => parseCli(input));
   const parsed = parseCli(['query', 'eris', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--out', 'x']);
