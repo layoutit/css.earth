@@ -66,7 +66,8 @@ export async function prepareShellTitles({
     "",
   ].join("\n");
   await mkdir(dirname(moduleOutput), { recursive: true });
-  await writeFile(moduleOutput, moduleSource);
+  // An unchanged module keeps its time, so the preparation bundle that imports it is not rebuilt on every run.
+  if (await readFile(moduleOutput, "utf8").catch(() => null) !== moduleSource) await writeFile(moduleOutput, moduleSource);
   return Object.freeze({ prepared: Object.freeze(prepared), moduleSource });
 }
 

@@ -8,5 +8,7 @@ export default {
   tsconfig: resolve(root, 'tools/objects/tsconfig.json'),
   format: ['esm'], target: 'node22', outDir: resolve(root, 'tools/objects/dist'), clean: true,
   splitting: false, sourcemap: false, dts: false,
+  // tools/ci/check-stale-builds.mts reads the inputs to know when this bundle is stale.
+  metafile: true,
   external: ['@cssearth/astronomy', '@cssearth/catalog', '@cssearth/engine', '@cssearth/objects', 'sharp', '@layoutit/polycss', 'meshoptimizer', 'yaml'],
 };
