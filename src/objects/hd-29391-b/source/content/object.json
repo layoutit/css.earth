@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-29391-b",
+  "displayName": "51 Eridani b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.36 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "arxiv-2510-08327",
+          "url": "https://arxiv.org/abs/2510.08327",
+          "label": "Madurowicz et al. 2025",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "About 23 years",
+        "source": {
+          "catalogueId": "arxiv-2602-10260",
+          "url": "https://arxiv.org/abs/2602.10260",
+          "label": "Denis et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its star",
+        "value": "8.9 au",
+        "source": {
+          "catalogueId": "arxiv-2602-10260",
+          "url": "https://arxiv.org/abs/2602.10260",
+          "label": "Denis et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.1 Jupiter masses (model)",
+        "source": {
+          "catalogueId": "arxiv-2401-01468",
+          "url": "https://arxiv.org/abs/2401.01468",
+          "label": "Elliott et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "temperature",
+        "label": "Temperature",
+        "value": "800 K",
+        "source": {
+          "catalogueId": "arxiv-2510-08327",
+          "url": "https://arxiv.org/abs/2510.08327",
+          "label": "Madurowicz et al. 2025",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-29391-b-lens-shape.webp",
+        "surface": "hd-29391-b-surface-shape@2x.webp",
+        "poles": "hd-29391-b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-29391-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1508.03084"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet's surface exists: it is a point of light in every image, and JWST detects it in only one band (F410M, Balmer et al. 2025), too few for a measured colour. Its size is the radius a model needs for its spectrum. No spin is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Macintosh et al. (2015), Science 350, 64",
+      "href": "https://arxiv.org/abs/1508.03084"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1508.03084",
+      "credit": "Macintosh et al. (2015), Science 350, 64"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-29391-b.json",
+      "credit": "Model radius, Madurowicz et al. (2025), AJ; model mass, Elliott et al. (2024), PASA 41, e056; orbit, Denis et al. (2026)"
+    }
+  }
+}
