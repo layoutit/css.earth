@@ -1,0 +1,100 @@
+{
+  "source": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
+  "sourceSha256": "15d3bb0e2089898330a58c0b1cfd5c362a0cabf63904763eb211ddf3e8d21195",
+  "astropy": "8.0.1",
+  "nativeSamples": 443262,
+  "usableSamples": 440029,
+  "excludedSamples": 3233,
+  "firstUsableIndex": 1710,
+  "lastUsableIndex": 441738,
+  "excerptNativeStart": 1708,
+  "excerptNativeEndExclusive": 1724,
+  "wavelengthUnit": "angstrom",
+  "fluxUnit": "erg.cm**(-2).s**(-1).angstrom**(-1)",
+  "samples": [
+    {
+      "id": "2",
+      "wavelength": 3782.7753731186663,
+      "value": 6.810068417063969e-13,
+      "uncertainty": 1.0377420462089067e-13
+    },
+    {
+      "id": "3",
+      "wavelength": 3782.781681894397,
+      "value": 1.6173228481581063e-12,
+      "uncertainty": 1.2635940095119415e-13
+    },
+    {
+      "id": "4",
+      "wavelength": 3782.787990680649,
+      "value": 1.779278276572255e-12,
+      "uncertainty": 1.2681125757203582e-13
+    },
+    {
+      "id": "5",
+      "wavelength": 3782.7942994774226,
+      "value": 1.5142246194323023e-12,
+      "uncertainty": 1.2561169573803505e-13
+    },
+    {
+      "id": "6",
+      "wavelength": 3782.800608284722,
+      "value": 1.4271838465997184e-12,
+      "uncertainty": 1.2439510327746985e-13
+    },
+    {
+      "id": "7",
+      "wavelength": 3782.806917102539,
+      "value": 1.3213753110249232e-12,
+      "uncertainty": 1.235546978291359e-13
+    },
+    {
+      "id": "8",
+      "wavelength": 3782.8132259308777,
+      "value": 1.010505674596158e-12,
+      "uncertainty": 1.2316882438216792e-13
+    },
+    {
+      "id": "9",
+      "wavelength": 3782.819534769738,
+      "value": 1.4838728629999774e-12,
+      "uncertainty": 1.2429964335387975e-13
+    },
+    {
+      "id": "10",
+      "wavelength": 3782.8258436191195,
+      "value": 1.5730629448973805e-12,
+      "uncertainty": 1.240414549277321e-13
+    },
+    {
+      "id": "11",
+      "wavelength": 3782.832152479023,
+      "value": 7.256965617013164e-13,
+      "uncertainty": 1.218384199997403e-13
+    },
+    {
+      "id": "12",
+      "wavelength": 3782.838461349448,
+      "value": 5.527150882421306e-13,
+      "uncertainty": 1.2100409667331208e-13
+    },
+    {
+      "id": "13",
+      "wavelength": 3782.844770230395,
+      "value": 7.094078597544843e-13,
+      "uncertainty": 1.2125492269109357e-13
+    },
+    {
+      "id": "14",
+      "wavelength": 3782.8510791218637,
+      "value": 1.2613984525989655e-12,
+      "uncertainty": 1.212933225114479e-13
+    },
+    {
+      "id": "15",
+      "wavelength": 3782.857388023854,
+      "value": 1.1216159280571577e-12,
+      "uncertainty": 1.2002537402217485e-13
+    }
+  ]
+}

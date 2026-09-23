@@ -99,6 +99,8 @@ Scientific queries also inspect the bounded ESO/ALMA ObsCore and ESA PSA EPN-TAP
 
 Use `telescope help` for region, frame and byte/member limits. `get --offline` replays an already delivered, pinned artifact without a remote refresh; it does not requalify it with current software. Acquisition verifies origin and integrity, while scientific request satisfaction can remain unresolved. [Protocol ownership, evidence and limitations](../../docs/vo-observation-access.md).
 
+Confirmed direct ESO SDP FITS spectra also offer the existing F03 export, range, chart-data and preview operations. Native wavelength/flux/error units and sample indices survive export; flagged or invalid samples break the spectrum into segments. Previews select at most 1,600 usable samples and record that reduction in `preview-sampling.json`; numeric exports retain all usable samples. This route supports one vector-valued spectral table with WAVE/FLUX/ERR and optional QUAL, not arbitrary spectral FITS layouts. See [the spectrum profile and example](../../docs/vo-observation-access.md#eso-sdp-spectra).
+
 ## Outputs
 
 After `get`, inspect what the delivered product can support:
