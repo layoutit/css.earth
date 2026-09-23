@@ -1,0 +1,30 @@
+{
+  "id": "wasp-18",
+  "classification": "star",
+  "order": 1740,
+  "physical": {
+    "name": "WASP-18",
+    "horizonsCode": null,
+    "meanRadiusKm": 937107.9,
+    "gravitationalParameterKm3PerS2": 206978321489.40866,
+    "parent": null
+  },
+  "physicalNotes": "Radius: 1.347 solar radii at 695700 km per solar radius, the stellar radius '[f]rom TESS data' in the Challener, Weiner Mansfield et al. (2025), Nature Astronomy (arXiv:2510.24708), deposited ThERESA configuration wasp-18b-3d-8bin-sinusoidal-tiovo.cfg in Zenodo 10.5281/zenodo.14751570; with its semi-major axis of 0.02180079 au it gives the a/R* of 3.48023 the Eigenspectra maps were fitted with. GM from the same file's stellar mass, 1.5596 solar masses, times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis is a sky-plane convention; the star's spin axis is not measured in three dimensions.",
+  "star": {
+    "rightAscensionDegrees": 24.3544669330396,
+    "declinationDegrees": -45.6777908467995,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 122.78537721081443,
+    "properMotionRaMasPerYear": 25.404449269627033,
+    "properMotionDecMasPerYear": 20.47932580565009,
+    "radialVelocityKmPerS": 3.4686716,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "Gaia DR3 source 4955371367334610048 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-18/source/photometry/gaia-dr3-source.csv; cross-identification HD 10069: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-18",
+      "distance": "Gaia DR3 parallax 8.1443 +/- 0.0116 mas (same row): 1000/8.1443 = 122.79 pc, no zero-point correction",
+      "properMotion": "Gaia DR3 (same row): 25.404, 20.479 mas/yr",
+      "radialVelocity": "Gaia DR3 (same row): 3.47 +/- 0.34 km/s"
+    },
+    "hipparcosId": 7562
+  }
+}

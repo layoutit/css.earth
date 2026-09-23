@@ -667,6 +667,14 @@
 }
 .object-card-tabpanel :is(.object-surface-minimap, .object-lens-legend-panel, .object-facility-preview) + .object-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
 .object-card-tabpanel .object-lens-legend-panel { width: 100%; min-height: 28px; }
+.object-card-tabpanel .object-lens-steps { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.object-card-tabpanel .object-lens-step-label { flex: 1; text-align: center; color: var(--shell-text-secondary); font: var(--shell-font-value); font-variant-numeric: tabular-nums; }
+.object-card-tabpanel .object-lens-step {
+  width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgb(255 255 255 / 0.18); background: rgb(255 255 255 / 0.06);
+  color: var(--shell-text); font-size: 18px; line-height: 1; cursor: pointer;
+}
+.object-card-tabpanel .object-lens-step:disabled { opacity: 0.3; cursor: default; }
+.object-card-tabpanel .object-lens-step:not(:disabled):hover { background: rgb(255 255 255 / 0.14); }
 .object-card-tabpanel .object-lens-legend-labels {
   display: grid;
   grid-template-columns: repeat(var(--legend-label-count), minmax(0, 1fr));

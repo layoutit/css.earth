@@ -1,5 +1,6 @@
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
 import { createSceneView } from './scene-view.mts';
+import { selectSceneFeature } from './scene-feature.mts';
 import { createSceneActivation } from './scene-activation.mts';
 import { createScenePublication } from './scene-publication.mts';
 import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
@@ -102,9 +103,7 @@ export function createSceneRouter({
     getHistory: () => historyOwner, getWorld: () => world.current, getMotion: () => preferences.state.motionEnabled,
     setMotion(next) { preferences.set('motionEnabled', next); }, onError: report,
   });
-  const activation = createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, requestMotion: (session, next) => {
-    if (scenes.isCurrent(session)) preferences.set('motionEnabled', next);
-  }, onError: report });
+  const activation = createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent });
   const publication = createScenePublication({ stage, documentTarget, windowTarget,
     read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: selection.current, motionEnabled: preferences.state.motionEnabled, reducedMotionActive,
       mountedObjectCount: scenes.current?.mount ? 1 : 0, playing: scenes.current?.playing ?? false,
@@ -168,6 +167,7 @@ export function createSceneRouter({
         shellOwner = owner;
         owner.shell = mountShell({ objectId, readSelection: () => selection.current, documentTarget, windowTarget,
           preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
+          onResetDestination: () => { void navigate(objectId, { kind: 'feature', id: null }).catch(report); },
         });
       }
       const shell = shellOwner.shell!;
@@ -208,6 +208,7 @@ export function createSceneRouter({
         ...(viewport ? { viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
+        onFeatureSelect: id => { void navigate(objectId, { kind: 'feature', id }).catch(report); },
         datasetEffects: createDatasetEffects(session, () => world.current),
       }, handoff)) return false;
       const mount = session.mount;
@@ -220,10 +221,15 @@ export function createSceneRouter({
       const arrival = await activation.restore(session, handoff);
       if (!arrival) return arrival;
       if (!scenes.isCurrent(session)) return;
-      const { interrupted } = arrival;
+      let { interrupted } = arrival;
+      if (request?.feature && !interrupted) {
+        const selected = await request.lifetime.wait(selectFeature(session, request));
+        if (selected.cancelled || !requests.owns(request)) return false;
+        interrupted = !selected.value;
+      }
       if (!await view.arrive(session, { request, interrupted })) return false;
       if (!scenes.isCurrent(session)) return;
-      activation.connectControls(session, arrival.feature);
+      activation.connectControls(session);
       if (!session.commit()) return false;
       if (mount.datasets) {
         session.own(mount.datasets.subscribe(() => {
@@ -234,6 +240,7 @@ export function createSceneRouter({
       hasPresented = true;
       initialScene?.commit();
       finishArrival(session, request, interrupted);
+      if (!request && arrival.feature) return navigate(objectId, { kind: 'feature', id: arrival.feature });
       return !interrupted;
     } catch (error) {
       if (scenes.isCurrent(session)) fail(session, error);
@@ -242,7 +249,7 @@ export function createSceneRouter({
 
   function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
     // System framing reads its prepared candidates; they load after the first body, so a very early click waits for them.
-    if (!destroyed && !systemViewsLoaded()) return loadSystemViews().then(() => navigate(id, intent));
+    if (!destroyed && intent.kind !== 'feature' && !systemViewsLoaded()) return loadSystemViews().then(() => navigate(id, intent));
     if (intent.kind === 'focus' && scenes.current) id = objectId;
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
@@ -260,7 +267,7 @@ export function createSceneRouter({
     requests.cancel();
     scenes.current?.setViewUrl(null);
     const request = requests.begin({ ...resolved.destination, timing: createNavigationTiming(windowTarget, objectId, id) });
-    if (request.camera.kind === 'focus') preferences.set('motionEnabled', false);
+    if (request.camera.kind === 'focus' || request.camera.kind === 'surface' || request.feature) preferences.set('motionEnabled', false);
     mountTask = transition(request, object);
     return mountTask;
   }
@@ -283,7 +290,7 @@ export function createSceneRouter({
       if (source && request.scene === 'reuse') {
         return await focusExistingScene({ session: source, request, selectionTransition, navigation, requests, view,
           windowTarget, getReducedMotion: () => reducedMotionActive,
-          commitSelection, finishArrival, syncPlayback });
+          commitSelection, finishArrival, syncPlayback, selectFeature });
       }
       syncPlayback();
       const loaded = await prepareSceneReplacement({ fromId: objectId, source, object, request, navigation, requests,
@@ -332,6 +339,10 @@ export function createSceneRouter({
       else report(error);
       return false;
     }
+  }
+
+  function selectFeature(session: Session, request: NavigationRequest) {
+    return selectSceneFeature(session, request, objects.find(object => object.id === session.objectId)?.name ?? session.objectId);
   }
 
   function finishArrival(session: Session, request?: NavigationRequest, interrupted = false) {

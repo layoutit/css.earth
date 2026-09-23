@@ -35,14 +35,15 @@ export function surfaceOrbitPose(world: WorldCameraPose, originM: PositionM, rot
 
 export interface SurfaceFlightOptions {
   readonly directionWorld: PositionM; readonly distanceM: number;
-  readonly durationMilliseconds?: number; readonly reducedMotion?: boolean;
+  readonly durationMilliseconds?: number; readonly reducedMotion?: boolean; readonly signal?: AbortSignal;
   readonly windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame'> & { performance: { now(): number } };
 }
 export interface SurfaceFlightHandle { readonly done: Promise<{ completed: boolean }>; cancel(): void; }
 
 /** Animate the world camera onto a surface direction. Any other camera write (a drag, a wheel
  * dolly, a restored view) ends the flight where it is; the observer is never fought for. */
-export function flyToSurfaceDirection(navigation: ObjectWorldNavigation, { directionWorld, distanceM, durationMilliseconds = 900, reducedMotion = false, windowTarget }: SurfaceFlightOptions): SurfaceFlightHandle {
+export function flyToSurfaceDirection(navigation: ObjectWorldNavigation, { directionWorld, distanceM, durationMilliseconds = 900, reducedMotion = false, signal, windowTarget }: SurfaceFlightOptions): SurfaceFlightHandle {
+  if (signal?.aborted) return { done: Promise.resolve({ completed: false }), cancel() {} };
   const origin = navigation.frame.originM;
   const start = navigation.capture();
   const rotation = surfaceOrbitRotation(start, origin, directionWorld);
@@ -55,7 +56,9 @@ export function flyToSurfaceDirection(navigation: ObjectWorldNavigation, { direc
   const done = new Promise<{ completed: boolean }>(next => { resolve = next; });
   const began = windowTarget.performance.now();
   const ease = (t: number) => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-  const finish = (completed: boolean) => { if (frame !== null) windowTarget.cancelAnimationFrame(frame); frame = null; resolve({ completed }); };
+  const finish = (completed: boolean) => { signal?.removeEventListener('abort', cancel); if (frame !== null) windowTarget.cancelAnimationFrame(frame); frame = null; resolve({ completed }); };
+  const cancel = () => finish(false);
+  signal?.addEventListener('abort', cancel, { once: true });
   const step = () => {
     frame = null;
     const current = navigation.capture();
@@ -67,5 +70,5 @@ export function flyToSurfaceDirection(navigation: ObjectWorldNavigation, { direc
     frame = windowTarget.requestAnimationFrame(step);
   };
   frame = windowTarget.requestAnimationFrame(step);
-  return { done, cancel: () => finish(false) };
+  return { done, cancel };
 }

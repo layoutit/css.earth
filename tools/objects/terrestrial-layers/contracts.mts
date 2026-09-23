@@ -13,7 +13,9 @@ export interface SourceMesh {
   sample(longitude:number,latitude:number):number|null;
 }
 export interface SourceSurfaceSample extends ClosestSurfacePoint { value:number; sourceCell?:number }
-export interface SourceScalar { sample(longitude:number,latitude:number):number|null; samplePoint?(point:readonly number[]):SourceSurfaceSample|null }
+export interface SourceScalar { sample(longitude:number,latitude:number):number|null; samplePoint?(point:readonly number[]):SourceSurfaceSample|null;
+  /** True where a published boundary crosses this output pixel (`pixelDegrees` wide); it is drawn over the value. */
+  outline?(longitude:number,latitude:number,pixelDegrees:number):boolean }
 export interface RgbObservation { rgb:Uint8Array; missing:Uint8Array; width?:number; height?:number }
 export interface SourceFace { id:number; a:number[]; ab:number[]; ac:number[]; min:number[]; max:number[] }
 export type FaceTree = {min:number[];max:number[]} & ({items:SourceFace[];left?:never;right?:never}|{items?:never;left:FaceTree;right:FaceTree});

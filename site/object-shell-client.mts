@@ -5,12 +5,11 @@ import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from './focus-fragment.mts';
 import { selectionKey } from './scene/scene-selection.mts';
-import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
+import type { DestinationPresentation } from './destination-browser.mts';
 import type { ShellCamera, PlaybackState } from './browser-types.mts';
 import { errorMessage, requiredElement } from './browser-types.mts';
 import type { NavigationContent } from './navigation/navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createExplorerRailController } from "./explorer-rail.mts";
 import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mts";
@@ -29,7 +28,7 @@ export function mountObjectShell({
   readSelection,
   documentTarget = document,
   windowTarget = window,
-  preferences,
+  preferences, onResetDestination,
 }: ShellOptions): ObjectShell {
   const drawer = requiredElement(documentTarget, ".object-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -93,7 +92,7 @@ export function mountObjectShell({
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId,
       onCategoryChange: value => preferences.set('highlightedClassification', value),
-      readIllustrationModels: () => preferences.state.illustrationModelsEnabled }));
+      onResetDestination, readIllustrationModels: () => preferences.state.illustrationModelsEnabled }));
     lifetime.onDispose(preferences.subscribe(key => {
       if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();
     }));
@@ -122,9 +121,7 @@ export function mountObjectShell({
     },
     beginNavigation,
     setObject,
-    setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
-    selectPlace(id: string) { return lifetime.disposed ? Promise.resolve() : objectBrowser.selectPlace(id); },
-    setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
+    presentDestination(value: DestinationPresentation | null) { if (!lifetime.disposed) objectBrowser.presentDestination(value); },
     presentSelection,
     setCamera(provider: ShellCamera | null) {
       if (!lifetime.disposed) {

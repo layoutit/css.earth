@@ -1,3 +1,4 @@
+import type { PreparedDestination } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { record } from './browser-types.mts';
 
 /** Search named features, cities included, on the server. The browser sends its query and receives the rows to show:
@@ -17,4 +18,25 @@ export function parseFindResults(value: unknown): FindResult[] {
         (result.lensIds !== undefined && (!Array.isArray(result.lensIds) || !result.lensIds.every(id => typeof id === 'string')))) throw new TypeError('Find result is invalid.');
     return result as unknown as FindResult;
   });
+}
+
+export interface DestinationPlace extends PreparedDestination { readonly name: string; readonly context: string; }
+
+/** Validate the one prepared city returned by find, before it reaches the native camera. */
+export function parseDestinationPlace(value: unknown): DestinationPlace {
+  const place = record(value) ? value.place : null;
+  if (!record(place) || typeof place.name !== 'string' || typeof place.context !== 'string' || typeof place.coverage !== 'string' || !record(place.camera)) {
+    throw new TypeError('Destination place requires its prepared record.');
+  }
+  const camera = place.camera;
+  if (['controlPitch', 'controlYaw', 'zoom'].some(key => typeof camera[key] !== 'number' || !Number.isFinite(camera[key])) ||
+      (camera.controlRoll !== undefined && (typeof camera.controlRoll !== 'number' || !Number.isFinite(camera.controlRoll)))) {
+    throw new TypeError('Invalid prepared destination camera.');
+  }
+  const transition = camera.transition;
+  if (transition !== undefined && (!record(transition) || typeof transition.durationMilliseconds !== 'number' ||
+      !Number.isFinite(transition.durationMilliseconds) || transition.durationMilliseconds < 0 || typeof transition.preserveZoom !== 'boolean')) {
+    throw new TypeError('Invalid prepared destination transition.');
+  }
+  return place as unknown as DestinationPlace;
 }

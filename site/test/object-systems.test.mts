@@ -12,13 +12,13 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
       ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'],
       ['wasp-39', 'WASP-39 system', '/wasp-39/'], ['beta-pictoris', 'Beta Pictoris system', '/beta-pictoris/'], ['hr-8799', 'HR 8799 system', '/hr-8799/'],
       ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/'], ['hd-110067', 'HD 110067 system', '/hd-110067/'], ['hd-29391', '51 Eridani system', '/hd-29391/'],
-      ['kepler-16-a', 'Kepler-16 system', '/kepler-16-a/'], ['wd-1856-534', 'WD 1856+534 system', '/wd-1856-534/'], ['kelt-9', 'KELT-9 system', '/kelt-9/'], ['wasp-76', 'WASP-76 system', '/wasp-76/'], ['pds-70', 'PDS 70 system', '/pds-70/']]);
+      ['kepler-16-a', 'Kepler-16 system', '/kepler-16-a/'], ['wd-1856-534', 'WD 1856+534 system', '/wd-1856-534/'], ['kelt-9', 'KELT-9 system', '/kelt-9/'], ['wasp-76', 'WASP-76 system', '/wasp-76/'], ['pds-70', 'PDS 70 system', '/pds-70/'], ['wasp-18', 'WASP-18 system', '/wasp-18/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the candidate orbits its measurements allow.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
     ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],
     ['trappist-1e', 'trappist-1'], ['trappist-1h', 'trappist-1'], ['trappist-1', 'trappist-1'],
     ['beta-pictoris-b', 'beta-pictoris'], ['beta-pictoris-d', 'beta-pictoris'], ['hr-8799-b', 'hr-8799'], ['hr-8799-e', 'hr-8799'], ['hd-29391-b', 'hd-29391'],
-    ['kelt-9b', 'kelt-9'], ['kelt-9', 'kelt-9'], ['wasp-76b', 'wasp-76'], ['wasp-76', 'wasp-76'], ['pds-70-b', 'pds-70'], ['pds-70-c', 'pds-70'], ['pds-70', 'pds-70']] as const) {
+    ['kelt-9b', 'kelt-9'], ['kelt-9', 'kelt-9'], ['wasp-76b', 'wasp-76'], ['wasp-76', 'wasp-76'], ['pds-70-b', 'pds-70'], ['pds-70-c', 'pds-70'], ['pds-70', 'pds-70'], ['wasp-18b', 'wasp-18']] as const) {
     assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
   }
   assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');
