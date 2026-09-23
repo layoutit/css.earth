@@ -14,7 +14,7 @@ type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
 /** Reuse a ready session for dataset changes, saved views, and overview/detail selections. */
 export async function focusExistingScene({ session, request, selectionTransition, navigation, requests, view,
-  windowTarget, getReducedMotion, commitSelection, syncPlayback }: {
+  windowTarget, getReducedMotion, commitSelection, finishArrival, syncPlayback }: {
   session: SceneSession;
   request: NavigationRequest;
   selectionTransition?: ShellNavigationTransition | null;
@@ -24,6 +24,7 @@ export async function focusExistingScene({ session, request, selectionTransition
   windowTarget: BrowserWindow;
   getReducedMotion(): boolean;
   commitSelection(request: NavigationRequest, transition?: ShellNavigationTransition | null): void;
+  finishArrival(session: SceneSession, request: NavigationRequest): void;
   syncPlayback(): void;
 }) {
   const datasetSelection = selectSceneDataset(session, request.url, request.signal);
@@ -31,7 +32,7 @@ export async function focusExistingScene({ session, request, selectionTransition
     if (!requests.owns(request)) return false;
     requests.finish(request, 'cancelled');
     view.syncDataset(session);
-    await view.bind(session, { restore: false }); syncPlayback();
+    await view.arrive(session, { interrupted: true }); syncPlayback();
     return false;
   }
   if (!requests.owns(request)) return false;
@@ -42,7 +43,6 @@ export async function focusExistingScene({ session, request, selectionTransition
     requests.advance(request, 'flying'); syncPlayback();
     const focused = await request.lifetime.wait(view.focus(session, request));
     if (focused.cancelled || !requests.owns(request)) return false;
-    request.url = session.url ?? request.url;
   } else if (restore) {
     if (request.history.history === 'pop' || request.url !== windowTarget.location.href) view.commit(request, session);
     else session.url = request.url;
@@ -65,13 +65,9 @@ export async function focusExistingScene({ session, request, selectionTransition
       targetWorldCamera: camera.world ?? undefined, targetFocusPositionM: camera.focusPositionM ?? undefined, centerSelection: camera.framing === 'center', timing: request.timing }));
     if (focused.cancelled || !requests.owns(request)) return false;
   }
-  if (!requests.advance(request, 'committing')) return false;
-  if (!restore) view.commit(request, session);
   if (camera.kind !== 'focus') commitSelection(request, selectionTransition);
-  await view.bind(session, { restore, request });
-  if (!requests.owns(request)) return false;
-  requests.finish(request, 'finished'); syncPlayback();
-  if (!restore) session.viewUrl?.flush();
+  if (!await view.arrive(session, { request })) return false;
+  finishArrival(session, request);
   return true;
 }
 

@@ -207,10 +207,7 @@ export function createSceneRouter({
       if (!arrival) return arrival;
       if (!scenes.isCurrent(session)) return;
       const { interrupted } = arrival;
-      if (request) {
-        if (!requests.advance(request, 'committing') || !view.commit(request, session)) return false;
-      }
-      await view.bindInitial(session, { restore: !interrupted });
+      if (!await view.arrive(session, { request, interrupted })) return false;
       if (!scenes.isCurrent(session)) return;
       activation.connectControls(session, arrival.feature);
       if (!session.commit()) return false;
@@ -224,13 +221,7 @@ export function createSceneRouter({
       }
       hasPresented = true;
       initialScene?.commit();
-      if (request) requests.finish(request, interrupted ? 'interrupted' : 'finished');
-      if (session.mount.navigation) followSelectionCamera(session, session.mount.navigation.capture());
-      publishSelection();
-      if (selection.current.kind === 'overview') aimAtSystemCenter();
-      syncPlayback();
-      connectOverviewSelection(session);
-      if (request && (request.history.history !== 'pop' || interrupted)) session.viewUrl?.flush();
+      finishArrival(session, request, interrupted);
       return !interrupted;
     } catch (error) {
       if (scenes.isCurrent(session)) fail(session, error);
@@ -278,7 +269,7 @@ export function createSceneRouter({
       if (source && request.scene === 'reuse') {
         return await focusExistingScene({ session: source, request, selectionTransition, navigation, requests, view,
           windowTarget, getReducedMotion: () => reducedMotionActive,
-          commitSelection, syncPlayback });
+          commitSelection, finishArrival, syncPlayback });
       }
       syncPlayback();
       const loaded = await prepareSceneReplacement({ fromId: objectId, source, object, request, navigation, requests,
@@ -304,25 +295,22 @@ export function createSceneRouter({
         // selected destination still owns that camera: keep only the drawn view
         // from the departed URL, otherwise its old prepared focus is restored
         // and pulls the camera back to the object the user just left.
-        const snapshot = view.capture();
+        const snapshot = view.capture(interruptedSelection ? request.url : undefined);
         // A failed focus load leaves the previous native target in place. Recover
         // its identity with the drawn camera instead of retrying the failed URL.
         const captured = snapshot && request.camera.kind === 'focus'
           ? selection.url(new URL(snapshot, windowTarget.location.href)) : snapshot;
         if (captured && interruptedSelection) {
-          const drawn = new URL(captured, windowTarget.location.href);
-          const selected = new URL(request.url, windowTarget.location.href);
-          const token = drawn.searchParams.get('v');
-          if (token) selected.searchParams.set('v', token); else selected.searchParams.delete('v');
-          source.url = selected.href;
-          historyOwner?.commit(selected.href, request.history);
+          const selected = new URL(captured, windowTarget.location.href).href;
+          source.url = selected;
+          historyOwner?.commit(selected, request.history);
           commitSelection(request);
         } else if (captured) {
           // The source still owns the last drawn camera when destination loading
           // fails. Rebinding its URL writer must not replay the departure pose.
-          historyOwner?.commit(captured, { history: 'replace' });
+          view.replace(source, new URL(captured, windowTarget.location.href).href);
         }
-        await view.bind(source, { restore: false });
+        await view.arrive(source, { interrupted: true });
         source.viewUrl?.flush(); syncPlayback();
         if (!record(error) || error.preserveView !== true) report(error);
       }
@@ -330,6 +318,20 @@ export function createSceneRouter({
       else report(error);
       return false;
     }
+  }
+
+  function finishArrival(session: Session, request?: NavigationRequest, interrupted = false) {
+    if (request) requests.finish(request, interrupted ? 'interrupted' : 'finished');
+    const mounted = !request || request.scene === 'replace';
+    if (mounted) {
+      if (session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
+      publishSelection();
+      if (selection.current.kind === 'overview') aimAtSystemCenter();
+    }
+    syncPlayback();
+    if (mounted) connectOverviewSelection(session);
+    if (request && (interrupted || (request.scene === 'replace'
+      ? request.history.history !== 'pop' : request.camera.kind !== 'restore'))) session.viewUrl?.flush();
   }
 
   function syncReducedMotion() {
