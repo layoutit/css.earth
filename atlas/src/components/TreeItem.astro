@@ -2,9 +2,9 @@
 import { treeCount, type TreeNode } from '../objects.mts';
 import { treeMarker } from '../tree-marker.mts';
 
-interface Props { node: TreeNode; current: string; depth: number; bounded?: boolean; assetOrigin?: string }
+interface Props { node: TreeNode; current: string; depth: number; bounded?: boolean; eager?: boolean; assetOrigin?: string }
 
-const { node, current, depth, bounded = false, assetOrigin } = Astro.props;
+const { node, current, depth, bounded = false, eager = false, assetOrigin } = Astro.props;
 const holds = (item: TreeNode): boolean => item.object?.id === current || item.children.some(holds);
 // A top-level section counts every page it holds; a group inside it counts only its own members, so Planets
 // says 8, not 8 plus their moons. A body with moons shows only its name.
@@ -13,7 +13,7 @@ const place = node.object?.group === 'context' || !node.object;
 const nameClass = depth === 0 ? 'atlas-tree-root' : place ? 'atlas-tree-group' : 'atlas-tree-body';
 const marker = node.object ? treeMarker(node.object.id, assetOrigin) : null;
 const open = holds(node);
-const deferred = bounded && node.children.length > 0 && !open;
+const deferred = bounded && !eager && node.children.length > 0 && !open;
 // The node carries the destination this site opens. A row whose site cannot open
 // it keeps its marker and stays a label: nothing clickable that we cannot open.
 const href = node.object ? node.href : null;
@@ -28,7 +28,7 @@ const href = node.object ? node.href : null;
           : <span class:list={['atlas-tree-body', marker?.className]} style={marker?.style} data-atlas-place={node.object.id}>{node.label}</span>
         : <span class={nameClass}>{label}</span>}</summary>
       {!deferred && <ul>
-        {node.children.map(child => <li data-atlas-item-key={child.key}><Astro.self node={child} current={current} depth={depth + 1} {bounded} {assetOrigin} /></li>)}
+        {node.children.map(child => <li data-atlas-item-key={child.key}><Astro.self node={child} current={current} depth={depth + 1} {bounded} {eager} {assetOrigin} /></li>)}
       </ul>}
     </details>
   : node.object && (href
