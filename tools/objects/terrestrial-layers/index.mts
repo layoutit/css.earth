@@ -70,10 +70,8 @@ export function parseTerrestrialProfile(input:unknown) {
   }
   validateTerrestrialRings(value.rings, value.geometry.radiusKm);
   for (const recipe of value.raster.surfaceObservations ?? []) validateSurfaceObservation(recipe, radialTerrainForLens(value, recipe.id));
-  if (value.raster.surfaceQuality !== undefined &&
-      (!Number.isInteger(value.raster.surfaceQuality) || value.raster.surfaceQuality < 1 || value.raster.surfaceQuality > 100)) {
-    throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
-  }
+  if ('surfaceQuality' in value.raster)
+    throw new TypeError(`${value.namespace}: raster.surfaceQuality is no longer read; lossy files are encoded in the lossy lane (src/preparation/raster/lossy-lane.ts). Remove it from terrestrial.json.`);
   if (value.celestial.sunQualification !== undefined &&
       (typeof value.celestial.sunQualification !== 'string' || !value.celestial.sunQualification.trim())) {
     throw new TypeError('Authored Sun qualification must explain the source frame.');

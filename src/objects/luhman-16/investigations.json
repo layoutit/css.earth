@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "luhman-16",
+  "entries": [
+    {
+      "id": "surface-map",
+      "subject": "A surface map of Luhman 16 A",
+      "status": "unresolved",
+      "finding": "Chen et al. (2024) performed multi-band Doppler imaging of the Luhman 16 AB system (as Ureshino et al. 2026 summarise it), but no map of A is deposited or used here. The sphere stays neutral gray.",
+      "revisitWhen": "A map of Luhman 16 A is deposited with its paper.",
+      "evidence": [
+        "https://arxiv.org/abs/2605.08544"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+        }
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "A colour for Luhman 16 A",
+      "status": "excluded",
+      "finding": "A brown dwarf's visible spectrum is dominated by molecular and alkali absorption, so a blackbody colour at its temperature would not be its colour, and no calibrated visible spectrum is used here.",
+      "revisitWhen": "A calibrated visible spectrum of the resolved component is published.",
+      "evidence": [
+        "https://arxiv.org/abs/1508.01767"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+        }
+      ]
+    },
+    {
+      "id": "placement",
+      "subject": "Placing Luhman 16 A itself rather than the barycentre",
+      "status": "unresolved",
+      "finding": "Bedin et al. (2024) give the barycentre's astrometry; A sits at 0.4535 of the separation from it, up to 1.6 au. A is drawn at the barycentre and B circles A.",
+      "revisitWhen": "The world frame can place a binary's components around their barycentre.",
+      "evidence": [
+        "https://arxiv.org/abs/2403.08865"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+        }
+      ]
+    }
+  ]
+}

@@ -10,14 +10,14 @@
     {
       "location": "public",
       "filename": "dimorphos-albedo-shadow@2x.webp",
-      "bytes": 173952,
-      "sha256": "0ea30c3ce220591b14eec1ff65f7f97377557dd2ce7c97c1273dec6e43f039eb"
+      "bytes": 105162,
+      "sha256": "3678364dcad4d52d0840db20f8bce5451fddf4343a2f95a89ff0ab8186e8d9cb"
     },
     {
       "location": "public",
       "filename": "dimorphos-albedo-surface@2x.webp",
-      "bytes": 265060,
-      "sha256": "b18d4cd6b5e268657ed2435bca38067f9fdcc436e99713dd84c46a8b0de007a8"
+      "bytes": 169600,
+      "sha256": "1ddc16de37a06e0c834f94f082a9e166be8c7b2d453771def067e81dc89f976a"
     },
     {
       "location": "public",
@@ -28,14 +28,14 @@
     {
       "location": "public",
       "filename": "dimorphos-draco-shadow@2x.webp",
-      "bytes": 483270,
-      "sha256": "dea78fa9a6fe7ce20b6e47baa6bd84f0c1dcb0f7e386752f5bbf040937521877"
+      "bytes": 305692,
+      "sha256": "fe9077b4dfc392857c51d13c2e41e6a47607de5d051bd096fc0eca91de27ef97"
     },
     {
       "location": "public",
       "filename": "dimorphos-draco-surface@2x.webp",
-      "bytes": 706022,
-      "sha256": "d098a3d85c6db6118e49b9eb2e1c0c20e08261ddbae5dbd836eb5d42438b73f0"
+      "bytes": 490550,
+      "sha256": "2a9e4e659d62e579e863751d56878a5a515f9684e91c117383a64ff2932fc465"
     },
     {
       "location": "public",
@@ -52,14 +52,14 @@
     {
       "location": "public",
       "filename": "dimorphos-elevation-shadow@2x.webp",
-      "bytes": 189272,
-      "sha256": "2f4376482cbfbb37ef749691a95fdc9a85678e5bcefd2e32b80c0bc0ffb7e72d"
+      "bytes": 127252,
+      "sha256": "53b13b8ca342651cf1476a1dd621ead6a0df0f91fc8a3ba07cae453834e4901e"
     },
     {
       "location": "public",
       "filename": "dimorphos-elevation-surface@2x.webp",
-      "bytes": 382966,
-      "sha256": "aaf3850371fbf69ec7be1c320c24520ce266daf69b93dd5bfa9d3e4f15982a32"
+      "bytes": 258634,
+      "sha256": "1e1e3fe355bd6346c9a37aed33ef32d21a4eb1a9e19c1e9e63c8f9a3c950dabd"
     },
     {
       "location": "public",
@@ -76,14 +76,14 @@
     {
       "location": "public",
       "filename": "dimorphos-shape-shadow@2x.webp",
-      "bytes": 85480,
-      "sha256": "bc94f9b825f722f3a4ed019a6c64ac67e8ae0198acdce1bf66f54ab7ca95434e"
+      "bytes": 57098,
+      "sha256": "76aea5c1245af2a9abe7b5dbc84bf2159bb18a9e9ddc9a51022735444f87b07b"
     },
     {
       "location": "public",
       "filename": "dimorphos-shape-surface@2x.webp",
-      "bytes": 76292,
-      "sha256": "81b31e0d8f4ebde5015be8ce11fb643b42eaeb161205c0b76a0a4b6a09c0877b"
+      "bytes": 53226,
+      "sha256": "086921a8b70661ba7e4cec02f11ac98a0e69a7b163e5ed79d85c8bddfd63c547"
     },
     {
       "location": "public",
@@ -100,20 +100,20 @@
     {
       "location": "public",
       "filename": "dimorphos-slope-shadow@2x.webp",
-      "bytes": 1458250,
-      "sha256": "26ec7c2a228e4d8a7f0bb49e9f5dfd1abff384a938c0b9f85cf6906b055ccfdc"
+      "bytes": 1442634,
+      "sha256": "29a7e0a5f348aa6e0c724090d02cce28503fc04955c888000773ef45951f3bd5"
     },
     {
       "location": "public",
       "filename": "dimorphos-slope-surface@2x.webp",
-      "bytes": 2026170,
-      "sha256": "137f5d12b0d7eaf82def78618254b4eda5a830b735707371f77832575663865b"
+      "bytes": 1314710,
+      "sha256": "faeabf1c61fed51a5de6f5f472e197a899fe2ea2846744759fc571b6a5418523"
     },
     {
       "location": "public",
       "filename": "dimorphos-slope-thumbnail.webp",
-      "bytes": 1122,
-      "sha256": "80d0174445c6f14e65521f6926e39e75e663c34f92d710677e4b6999e1d9d9ab"
+      "bytes": 912,
+      "sha256": "f2d87a24b2122ff80db9d618356880d4723311280c50ff9cdcb4f26278672304"
     },
     {
       "location": "prepared",
@@ -143,13 +143,13 @@
       "location": "prepared",
       "filename": "lenses.json",
       "bytes": 4061,
-      "sha256": "46b632276bd7378ee924cfb8f42ec3f92de2ae1e394ea5611c9310e79793008e"
+      "sha256": "f0cac3fb8f22daa854d647830a1486399fa4e94d7e34ea45714bb7e9fe435b7f"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 31883,
-      "sha256": "55c4eef6d6967caba86ff88649275d252e5a373d1808da1386142b78b6b40fcc"
+      "bytes": 30970,
+      "sha256": "7ffcde2aaa69c396e42de486e564878e9c421c9e7d59486926cbe5927d126e37"
     },
     {
       "location": "prepared",
@@ -184,14 +184,14 @@
     {
       "location": "prepared",
       "filename": "minimaps/slope.webp",
-      "bytes": 168022,
-      "sha256": "ea9c3bdced0a6cf38fd73a6cf5f99e88584e037bc5c5eb4496bb9c91613f1fdf"
+      "bytes": 100440,
+      "sha256": "729d363240100088b93e25c3019fc36ecc9342144461acaa5ffcbe4a5a1a4ab2"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 648626,
-      "sha256": "a218bdbc3b22aad235798aaca7d33726fbb312ba4e152dd8fd609a658a3b53d2"
+      "bytes": 647884,
+      "sha256": "ea63cf0ab99cb08c89f0349ed1f136477b1661b2804afe6a98fde0e9f0aa052c"
     },
     {
       "location": "prepared",
@@ -202,8 +202,8 @@
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1043,
-      "sha256": "330f6847fbb5fac33cca0f0db7480c82800df66e56a12315990ab69bd232d291"
+      "bytes": 1183,
+      "sha256": "82f75be1898b06f6e34915c96bc99ca853901475ef57ca73a3ab2aa961378a3d"
     },
     {
       "location": "prepared",
@@ -214,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 31890,
-      "sha256": "8d951bb91c1bba3a5e237c8840c8d10fd5912393059fde8b1e6e73330cfd1009"
+      "bytes": 30977,
+      "sha256": "9d293a4735f31a9173e2503a26d22e70997ca40aac6440c4da10838af32172ff"
     },
     {
       "location": "prepared",

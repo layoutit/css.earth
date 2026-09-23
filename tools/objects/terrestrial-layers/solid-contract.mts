@@ -23,6 +23,6 @@ export type RadialState = NonNullable<Awaited<ReturnType<typeof loadRadialTerrai
 export interface RadialMaterialConfig {
   namespace: string; publicBase: string;
   geometry: {radius: number; radiusKm: number; radialTerrain: {sourceLighting?: unknown; thumbnail?: unknown}};
-  raster: {width: number; surfaceQuality?: number; scientific?: ScientificLens[];
+  raster: {width: number; scientific?: ScientificLens[];
     observations?: readonly {id:string;validity:unknown;nativePhotographicSampling?:import('./native-photograph.mts').NativePhotographicSampling}[]};
 }

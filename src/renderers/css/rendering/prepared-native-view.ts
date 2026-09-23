@@ -12,8 +12,7 @@ import { createPreparedFramePublisher } from './prepared-presentation.js';
  * material and frame publishers. CSS resolves its responsive focal length. */
 export function publishPreparedNativeView(definition: ObjectRuntimeDefinition, selection: ObjectSelection,
   stage: HTMLElement, frame: PreparedWorldCameraFrame, saved: SharedView) {
-  const focalCss = definition.camera.projection?.cssPerspective;
-  if (!focalCss) throw new TypeError('A saved native view requires the shared physical camera.');
+  const focalCss = definition.camera.projection.cssPerspective;
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const };
   const world = savedWorldCamera(saved, frame, viewport), presentation = presentWorldCamera(world, frame, viewport);
   const nodes = definition.tree.nodes.map((_, index) => {
@@ -35,6 +34,8 @@ export function publishPreparedNativeView(definition: ObjectRuntimeDefinition, s
     controlPitch: definition.camera.defaultControlPitchDegrees,
     controlYaw: definition.camera.defaultControlYawDegrees,
     zoom: definition.camera.defaultZoom,
+    principalOffset: viewport.principalOffsetPixels, stageViewport: viewport,
+    levelOfDetail: { stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 },
     body: { visible: !scene.hidden, silhouette: presentation.silhouette },
   };
   const assets = new Map(definition.assets.entries.map(entry => [entry.key, entry.url]));

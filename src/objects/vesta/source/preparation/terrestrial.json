@@ -39,8 +39,7 @@
           }
         },
         "nativePhotographicSampling": {
-          "samplesPerAxis": 2,
-          "quality": 95
+          "samplesPerAxis": 2
         },
         "monochromeBase": "hamo"
       },
@@ -124,8 +123,7 @@
         }
       }
     ],
-    "observedColors": [],
-    "surfaceQuality": 90
+    "observedColors": []
   },
   "lighting": {
     "frameSize": 512,

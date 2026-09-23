@@ -12,7 +12,7 @@ const DOUBLE_CLICK_MILLISECONDS = 500;
 const CLICK_SLOP_PIXELS = 5;
 
 export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement,
-  readBounds?: () => { left: number; top: number; width: number; height: number },
+  readBounds: () => { left: number; top: number; width: number; height: number },
   detailOccludes?: (clientX: number, clientY: number) => boolean) {
   const document = inputSurface.ownerDocument;
   const windowTarget = document.defaultView;
@@ -24,11 +24,8 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   let pointer: { id: number; x: number; y: number; dragged: boolean } | null = null;
   let hovered: HTMLElement | null = null;
   const registry = screenPicking(host);
-  let fallbackBounds = readBounds ? null : host.getBoundingClientRect();
-  const resize = () => { fallbackBounds = host.getBoundingClientRect(); };
-  if (!readBounds) windowTarget.addEventListener('resize', resize);
   const pick = (event: MouseEvent) => {
-    const bounds = readBounds?.() ?? fallbackBounds!;
+    const bounds = readBounds();
     const target = registry.pick(event.clientX - bounds.left - bounds.width / 2,
       event.clientY - bounds.top - bounds.height / 2);
     // Context sprites paint behind the selected detailed surface. Their screen
@@ -167,7 +164,6 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   return () => {
     clearHover();
     unsubscribe();
-    if (!readBounds) windowTarget.removeEventListener('resize', resize);
     windowTarget.removeEventListener('pointerdown', down, { capture: true });
     windowTarget.removeEventListener('pointermove', move, { capture: true });
     windowTarget.removeEventListener('pointerup', up, { capture: true });

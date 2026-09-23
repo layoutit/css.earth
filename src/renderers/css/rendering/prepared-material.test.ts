@@ -44,7 +44,7 @@ test("material demand follows ready addresses, fixed shadows and the geometry-to
   expect(shadowless.required).toEqual(["shadowless"]);
   expect(shadowless.prewarm).toEqual([]);
   expect(resolvePreparedMaterialDemand(track, { ...selected, enabled: false, publishWhenHidden: "static" }, view(-1)).required).toEqual([]);
-  expect(preparedMaterialAddress(track, preparedMaterialState(track, selected, view(-1)), { has: () => false })).toBeNull();
+  expect(preparedMaterialAddress(preparedMaterialState(track, selected, view(-1)), { has: () => false })).toBeNull();
 });
 
 test("prepared default addresses require the actual reference pose and Sun direction", () => {

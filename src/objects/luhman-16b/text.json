@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "luhman-16b",
+  "card": {
+    "text": "One of the two nearest brown dwarfs, its clouds mapped from the Doppler shifts of its spectrum as it spins.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2605-08544",
+        "url": "https://arxiv.org/abs/2605.08544",
+        "label": "Ureshino et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Our analysis reveals a large-scale dark region at mid-latitudes"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Luhman 16 B is a brown dwarf 2 parsecs away that circles its companion A every 27 years. Doppler imaging finds a large dark patch and brighter spots.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2605-08544",
+        "url": "https://arxiv.org/abs/2605.08544",
+        "label": "Ureshino et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Our analysis reveals a large-scale dark region at mid-latitudes, consistent with previous studies"
+      }
+    ]
+  },
+  "datasets": {
+    "brightness": {
+      "title": "Surface brightness",
+      "detail": "Doppler imaging",
+      "summary": "Brighter and darker cloud patches, mapped from how the spectrum shifts as it spins."
+    },
+    "uncertainty": {
+      "title": "Brightness uncertainty",
+      "detail": "One sigma",
+      "summary": "How far the brightness map could be off at each point."
+    }
+  }
+}

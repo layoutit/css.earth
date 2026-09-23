@@ -142,7 +142,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   put(`src/renderers/css/styles/${id}-surfaces.css`, glow ? starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.', undefined, GEOMETRY_SCALE) : hostedPlanetStylesheet(id));
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
     latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false,
-    polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, quality: 88, centerLongitudeDegrees: 0 },
+    polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-lens-{id}.webp`, source: 'measurements.json', falseColor: false,
       science: { kind: 'neutral-shape', qualification: glow
         ? `Shared neutral gray display convention for a self-luminous planet with no image or measured visible colour in this package; a sphere of the published radius that glows with its own heat (${glow.temperatureK.toLocaleString('en-US')} K), so no lighting.`
@@ -152,7 +152,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       offLimbContext: { logicalSize: 600, source: 'none: no observation, a transparent plate', composition: 'transparent', rotation: 'none', runtimeAlphaProcessing: false },
       limbMaterial: { logicalSize: 496, composition: 'transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected', sourceRadius: 'measurements.json#radiusKm', surfaceReplacement: false, runtimeAlphaProcessing: false },
       lighting: false, shadows: false, runtimeLighting: false } } } : { lighting: { frameSize: 512, columns: 8, presentationSize: 460, defaultFrame: 230, billboardFrameSize: 24, billboardColumns: 16,
-      rowOutput: `${id}-lighting-{density}x-row-{row}.webp`, billboardOutput: `${id}-lighting-{density}x-billboard.webp`,
+      rowOutput: 'lighting-{density}x-row-{row}.webp', billboardOutput: 'lighting-{density}x-billboard.webp',
       minimumLightViewZ: -1, maximumLightViewZ: 1, frameCount: 256, shadowlessFloodLimbFloor: 0.35, ambientIntensity: 0.05, radiusScale: 0.505,
       terminator: [0, 0.1], maximumAlpha: 0.95, bankSchema: `css${id}-prepared-lighting-bank@1`, billboardSchema: `css${id}-prepared-lighting-billboard@1`,
       metadata: { schema: `css${id}-prepared-lighting@1`, storageModel: 'prepared-full-resolution-density-row-shards',

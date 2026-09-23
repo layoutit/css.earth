@@ -1,26 +1,23 @@
 import type { CameraPlan, CameraAngles, CameraPose, Quaternion, Vector3 } from './types.js';
-export interface CameraSkyPlan { sceneRegistration?: string; }
-export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; skyPlan: CameraSkyPlan; sunDirection?: Vector3 | null; }
-export type CubicSkyCameraOrientation = ReturnType<typeof createCubicSkyCameraOrientation>;
+export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; sunDirection?: Vector3 | null; }
+export type CameraOrientation = ReturnType<typeof createCameraOrientation>;
 import { rotationAxisAngle } from "@cssearth/engine";
 import { cssDirectionToViewDirection } from "../solar-system/solar-view-direction.js";
 import { validateWorldRotation } from './world-camera-math.js';
 import { preparedSceneMatrix } from './prepared-camera-basis.js';
 
-export function createCubicSkyCameraOrientation({
+export function createCameraOrientation({
   controlPitch,
   controlYaw,
   cameraPlan,
-  skyPlan,
   sunDirection = null,
 }: CameraOrientationOptions) {
-  const skyRegistration = parseSceneRegistration(skyPlan.sceneRegistration);
   if (sunDirection !== null && (
     !Array.isArray(sunDirection) || sunDirection.length !== 3 ||
     sunDirection.some((component) => !Number.isFinite(component)) ||
     Math.abs(Math.hypot(...sunDirection) - 1) > 1e-9
   )) {
-    throw new TypeError("Cubic-sky Sun direction is invalid.");
+    throw new TypeError("Camera Sun direction is invalid.");
   }
   const referenceSceneMatrix = createSceneMatrix(
     cameraPlan.materialReferenceControlPitchDegrees ?? controlPitch,
@@ -29,16 +26,13 @@ export function createCubicSkyCameraOrientation({
   );
   let sceneMatrix: DOMMatrix;
   let scenePresentation: string | null = null;
-  let skyboxPresentation: Readonly<{ matrix: string; sunViewDirection: Vector3 | null }> | null = null;
+  let sunViewDirection: Vector3 | null | undefined;
   let counterMatrix: DOMMatrix | null = null;
-  const counterPresentations = new Map<string | DOMMatrix | null, string>();
   const invalidatePresentations = () => {
     scenePresentation = null;
-    skyboxPresentation = null;
+    sunViewDirection = undefined;
     counterMatrix = null;
-    counterPresentations.clear();
   };
-  const currentSkyboxMatrix = () => sceneMatrix.multiply(skyRegistration);
   const reset = ({ controlPitch: nextPitch, controlYaw: nextYaw }: CameraAngles) => {
     sceneMatrix = createSceneMatrix(nextPitch, nextYaw, cameraPlan);
     invalidatePresentations();
@@ -103,29 +97,6 @@ export function createCubicSkyCameraOrientation({
     sceneMatrix() {
       return sceneMatrix;
     },
-    counterRotation(localMatrix: string | DOMMatrix | null = null): string {
-      if (counterPresentations.has(localMatrix)) {
-        return counterPresentations.get(localMatrix)!;
-      }
-      counterMatrix ??= sceneMatrix.inverse().multiply(referenceSceneMatrix);
-      if (localMatrix === null) {
-        const presentation = formatMatrix3d(counterMatrix);
-        counterPresentations.set(null, presentation);
-        return presentation;
-      }
-      const local = typeof localMatrix === "string"
-        ? new DOMMatrix(localMatrix)
-        : localMatrix;
-      if (!(local instanceof DOMMatrix)) {
-        throw new TypeError("Cubic-sky local counter basis is invalid.");
-      }
-      const presentation = formatMatrix3d(
-        local.inverse().multiply(counterMatrix).multiply(local),
-      );
-      counterPresentations.set(localMatrix, presentation);
-      return presentation;
-    },
-
     /** A deferred frame must not consult a later input rotation. */
     captureCounterRotation() {
       counterMatrix ??= sceneMatrix.inverse().multiply(referenceSceneMatrix);
@@ -135,22 +106,17 @@ export function createCubicSkyCameraOrientation({
         const cached = presentations.get(localMatrix);
         if (cached !== undefined) return cached;
         const local = typeof localMatrix === 'string' ? new DOMMatrix(localMatrix) : localMatrix;
-        if (local !== null && !(local instanceof DOMMatrix)) throw new TypeError('Cubic-sky local counter basis is invalid.');
+        if (local !== null && !(local instanceof DOMMatrix)) throw new TypeError('Camera local counter basis is invalid.');
         const value = formatMatrix3d(local === null ? captured : local.inverse().multiply(captured).multiply(local));
         presentations.set(localMatrix, value);
         return value;
       };
     },
 
-    skybox() {
-      if (skyboxPresentation !== null) return skyboxPresentation;
-      const sunViewDirection = sunDirection === null ? null
+    sunViewDirection() {
+      if (sunViewDirection === undefined) sunViewDirection = sunDirection === null ? null
         : Object.freeze(cssDirectionToViewDirection(transformDirection(sceneMatrix, sunDirection)));
-      skyboxPresentation = Object.freeze({
-        matrix: formatMatrix3d(currentSkyboxMatrix()),
-        sunViewDirection,
-      });
-      return skyboxPresentation;
+      return sunViewDirection;
     },
   });
 }
@@ -166,28 +132,15 @@ function formatMatrix3d(matrix: DOMMatrixReadOnly) {
     : Number(value.toFixed(12))).join(",")})`;
 }
 
-function parseSceneRegistration(registration: string | undefined) {
-  if (typeof registration !== "string" ||
-      !/^matrix3d\([^()]+\)$/u.test(registration)) {
-    throw new TypeError("Cubic-sky scene registration is invalid.");
-  }
-  const matrix = new DOMMatrix(registration);
-  if (!matrix.is2D && [matrix.m41, matrix.m42, matrix.m43].some((value) =>
-    value !== 0)) {
-    throw new TypeError("Cubic-sky scene registration must be a rotation.");
-  }
-  return matrix;
-}
-
 function parseCameraPoseMatrix(value: string, label: string) {
   if (typeof value !== "string" || !/^matrix3d\([^()]+\)$/u.test(value)) {
-    throw new TypeError(`Cubic-sky camera ${label} matrix is invalid.`);
+    throw new TypeError(`Camera camera ${label} matrix is invalid.`);
   }
   // CSS-string parsing in browsers rounds to float32. Numeric construction
   // preserves the saved float64 pose across repeated URL restore cycles.
   const components = value.slice(9, -1).split(",").map(Number);
   if (components.length !== 16 || components.some(component => !Number.isFinite(component))) {
-    throw new TypeError(`Cubic-sky camera ${label} matrix is invalid.`);
+    throw new TypeError(`Camera camera ${label} matrix is invalid.`);
   }
   const matrix = new DOMMatrix(components);
   const values = [
@@ -197,7 +150,7 @@ function parseCameraPoseMatrix(value: string, label: string) {
     matrix.m41, matrix.m42, matrix.m43, matrix.m44,
   ];
   if (values.some((component) => !Number.isFinite(component))) {
-    throw new TypeError(`Cubic-sky camera ${label} matrix is invalid.`);
+    throw new TypeError(`Camera camera ${label} matrix is invalid.`);
   }
   return matrix;
 }

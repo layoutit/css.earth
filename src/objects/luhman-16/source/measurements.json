@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "luhman-16",
+  "angularDiameterMas": 0.48,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 72,206.9 km at 1.9960 pc = 0.48 mas. No interferometric diameter is published.",
+  "distanceParsecs": 1.9960358727567051,
+  "distanceSource": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 1: barycentre parallax 500.993 +0.059/-0.048 mas: 1.996 pc",
+  "radiusKm": 72206.9,
+  "radiusSource": "Radius 1.01 +/- 0.07 Jupiter radii (71,492 km each): Filippazzo et al. (2015, ApJ 810, 158; arXiv:1508.01767), fundamental-parameters table, from its bolometric luminosity through evolutionary models; temperature 1334 +/- 58 K from the same table. GM from the individual mass 35.4 Jupiter masses of Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2 (data-fit column), at the IAU 2015 nominal Jupiter-to-Sun mass ratio 1/1047.348644, times the JPL solar GM. presentationUp: the display axis is a sky-plane convention.",
+  "effectiveTemperatureK": 1334,
+  "effectiveTemperatureSource": "Filippazzo et al. (2015), ApJ 810, 158: 1,334 +/- 58 K from the measured bolometric luminosity and an evolutionary-model radius (https://arxiv.org/abs/1508.01767)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp."
+  }
+}

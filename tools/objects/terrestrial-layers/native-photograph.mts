@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
+import {writeLossyWebp} from '../../../src/preparation/raster/lossy-lane.ts';
 import { resolve } from 'node:path';
-import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
@@ -10,14 +10,13 @@ import { loadNativePhotograph } from './native-photograph-source.mts';
 
 export { loadNativePhotograph } from './native-photograph-source.mts';
 
-export interface NativePhotographicSampling { samplesPerAxis: number; quality: number; }
+export interface NativePhotographicSampling { samplesPerAxis: number; }
 export function parseNativePhotographicSampling(value: unknown): NativePhotographicSampling {
   const record = requireRecord(value);
-  const samplesPerAxis = requireFiniteNumber(record.samplesPerAxis), quality = requireFiniteNumber(record.quality);
-  if (![1, 2, 3, 4].includes(samplesPerAxis) || !Number.isInteger(quality) || quality < 1 || quality > 100) {
-    throw new TypeError('Native photographic sampling requires 1–4 samples per axis and integer WebP quality.');
-  }
-  return {samplesPerAxis, quality};
+  const samplesPerAxis = requireFiniteNumber(record.samplesPerAxis);
+  if (![1, 2, 3, 4].includes(samplesPerAxis)) throw new TypeError(`Native photographic sampling requires 1–4 samples per axis; got ${samplesPerAxis}.`);
+  if ('quality' in record) throw new TypeError('nativePhotographicSampling.quality is no longer read; its files are encoded in the lossy lane (src/preparation/raster/lossy-lane.ts). Remove it from the recipe.');
+  return {samplesPerAxis};
 }
 
 /** Subsample the existing CSS leaf-to-body transform, without changing it. */
@@ -81,8 +80,8 @@ export async function prepareNativePhotographicAtlas({radial,sourceDirectory,sou
   }
   const emit=async (suffix:string,pixels:Buffer)=>{
     const filename=`${id}-${suffix}@2x.webp`;
-    const bytes=await sharp(pixels,{raw:{width,height,channels:4}}).webp({quality:sampling.quality,alphaQuality:100,effort:4}).toBuffer();
-    await writeFile(resolve(publicDirectory,filename),bytes);
+    // Each photograph and its shaded copy is written in the lossy lane (lossy-lane.ts).
+    const bytes=await writeLossyWebp(sharp(pixels,{raw:{width,height,channels:4}}),resolve(publicDirectory,filename),{alphaQuality:100,effort:4});
     return {url:publicBase+filename,width,height,bytes:bytes.length,sha256:sha256(bytes)};
   };
   const surface=await emit('surface',flood),shadowSurface=await emit('shadow',shadow);

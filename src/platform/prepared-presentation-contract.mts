@@ -424,8 +424,8 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {
-    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "sceneFromBody", "radii", "inset", "slices"]);
-    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property", "interior-disc"]), "view binding");
+    record(binding, "view binding", ["kind", "target", "property", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "sceneFromBody", "radii", "inset", "slices"]);
+    choice(binding.kind, new Set(["counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property", "interior-disc"]), "view binding");
     // The stage itself may carry a published level-of-detail attribute or
     // property; every other binding names a retained node.
     node(binding.target, ["view-attribute", "view-property"].includes(binding.kind));
@@ -466,9 +466,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       choice(binding.source, new Set(["scene-pitch", "control-yaw", "zoom", "scene-matrix", "level-of-detail-stage"]), "view attribute source");
       if (binding.target === -1 && binding.source !== "level-of-detail-stage") fail("only the level of detail is published on the stage");
       if (binding.precision !== null) { integer(binding.precision, "view attribute precision"); if (binding.precision > 12 || binding.source === "scene-matrix") fail("invalid view attribute precision"); }
-    } else if (binding.kind === "zoom-property") string(binding.property, "zoom property");
-    else if (binding.kind === "shell-scale") { string(binding.variable, "shell variable"); if (!(binding.defaultZoom > 0)) fail("scale default zoom must be positive"); }
-    else if (binding.systemTransform !== null && typeof binding.systemTransform !== "string") fail("counter rotation needs its immutable prepared transform");
+    } else if (binding.systemTransform !== null && typeof binding.systemTransform !== "string") fail("counter rotation needs its immutable prepared transform");
   }
   for (const animation of array(plan.animations, "animations")) {
     record(animation, "animation", ["target", "id", "keyframes", "duration", "mode", "sourceMinimum", "millisecondsPerDegree"]);

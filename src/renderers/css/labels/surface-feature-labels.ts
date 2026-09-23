@@ -27,15 +27,15 @@ export interface SurfaceFeatureMountOptions {
   readonly target: HTMLElement; readonly scene: HTMLElement;
   /** The camera's current zoom range; the prepared policy gates labels on its logarithmic share. */
   readonly zoomRange: () => { readonly minimum: number; readonly maximum: number };
-  /** The shared world camera, when the object has a prepared frame: selection flies the observer over the feature. */
-  readonly navigation?: ObjectWorldNavigation;
-  readonly flightLimits?: () => { readonly minimumDistanceM: number };
+  /** The shared world camera: selection flies the observer over the feature. */
+  readonly navigation: ObjectWorldNavigation;
+  readonly flightLimits: () => { readonly minimumDistanceM: number };
   /** Called before a flight starts, so the owner can stop prepared motion. */
   readonly onFlight?: () => void;
   readonly onSelect?: (id: string) => void;
-  readonly lifetime: SceneLifetime; readonly pickingHost?: HTMLElement;
+  readonly lifetime: SceneLifetime; readonly pickingHost: HTMLElement;
   /** The shared input surface: a plain click on it that picks no label clears the selection. */
-  readonly inputSurface?: HTMLElement;
+  readonly inputSurface: HTMLElement;
   readonly onError: (error: unknown) => void;
   readonly transport?: Parameters<typeof loadPreparedSurfaceFeatureCatalog>[3];
 }
@@ -59,7 +59,7 @@ const CLICK_SLOP_PIXELS = 5;
  * one 56-70 ms task in the middle of the arrival flight. */
 const LABELS_PER_FRAME = 128;
 
-export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene, zoomRange, navigation, flightLimits, onFlight, onSelect, lifetime, pickingHost = host, inputSurface, onError, transport }: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime {
+export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene, zoomRange, navigation, flightLimits, onFlight, onSelect, lifetime, pickingHost, inputSurface, onError, transport }: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime {
   if (!host?.ownerDocument || !target || !scene.contains(target)) throw new TypeError('Surface feature labels need a host and a mesh target inside the scene.');
   const document = host.ownerDocument, windowTarget = document.defaultView;
   if (!windowTarget) throw new TypeError('Surface feature labels require a mounted window.');
@@ -146,12 +146,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     clearSelection();
   };
   const onKey = (event: KeyboardEvent) => { if (labelsEnabled()) requestLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
-  if (inputSurface) {
-    windowTarget.addEventListener('pointerdown', onPress, { capture: true });
-    inputSurface.addEventListener('wheel', onWheel, { passive: true });
-    windowTarget.addEventListener('click', onSurfaceClick);
-    windowTarget.addEventListener('keydown', onKey);
-  }
+  windowTarget.addEventListener('pointerdown', onPress, { capture: true });
+  inputSurface.addEventListener('wheel', onWheel, { passive: true });
+  windowTarget.addEventListener('click', onSurfaceClick);
+  windowTarget.addEventListener('keydown', onKey);
   lifetime.onDispose(destroy);
   const occlusion = labelOcclusionFor(host.ownerDocument);
   lifetime.onDispose(occlusion.subscribe(() => refresh()));
@@ -266,7 +264,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     // Each name carries its own discovery tier; names whose tier lies beyond the current zoom share wait for the camera.
     const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
-    if (!labelsEnabled() || !loaded || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view?.levelOfDetail && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
+    if (!labelsEnabled() || !loaded || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view !== null && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
     requirePhysicalProjection(projection);
     // Retained mesh ancestors use zero transform origins; their current matrices
     // carry the body spin exactly as painted. Camera transforms are already in
@@ -350,7 +348,6 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     pinnedIndex = index;
     flight?.cancel(); flight = null;
     schedule();
-    if (!navigation) { presentCaption(); return { completed: true }; }
     const frame = navigation.frame;
     const scenePoint = readLocal().transformPoint({ x: feature.normal[0], y: feature.normal[1], z: feature.normal[2], w: 0 });
     const length = Math.hypot(scenePoint.x, scenePoint.y, scenePoint.z);
@@ -362,7 +359,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const current = navigation.capture(), origin = frame.originM;
     const currentDistanceM = Math.hypot(current.pose.positionM[0] - origin[0], current.pose.positionM[1] - origin[1], current.pose.positionM[2] - origin[2]);
     const fitDistanceM = frame.bodyRadiusM + optics.focalPixels * featureRadiusM / (shortSide * ARRIVAL_DIAMETER_SHARE / 2);
-    const minimumM = flightLimits?.().minimumDistanceM ?? frame.bodyRadiusM * 1.2;
+    const minimumM = flightLimits().minimumDistanceM;
     // Never fly away from the surface: arrive at the framing distance or stay as close as the observer already is.
     const distanceM = Math.max(minimumM, Math.min(currentDistanceM, fitDistanceM));
     onFlight?.();
@@ -408,7 +405,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     fonts?.removeEventListener('loadingdone', measure);
     pickingHost.removeEventListener('objecthoverchange', onHover);
     document.body.removeEventListener('objectsurfacelabelschange', onLabelsChange);
-    if (inputSurface) { windowTarget!.removeEventListener('pointerdown', onPress, { capture: true }); inputSurface.removeEventListener('wheel', onWheel); windowTarget!.removeEventListener('click', onSurfaceClick); windowTarget!.removeEventListener('keydown', onKey); }
+    windowTarget!.removeEventListener('pointerdown', onPress, { capture: true });
+    inputSurface.removeEventListener('wheel', onWheel);
+    windowTarget!.removeEventListener('click', onSurfaceClick);
+    windowTarget!.removeEventListener('keydown', onKey);
     entries.forEach((entry, index) => { entry.element.removeEventListener('click', activations[index]!); if (entry.hideTimer !== null) clearTimeout(entry.hideTimer); });
     picking.remove(root);
     fader.destroy();

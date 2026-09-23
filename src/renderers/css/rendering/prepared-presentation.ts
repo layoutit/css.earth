@@ -14,16 +14,16 @@ import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types
 import type { PreparedAssetOrigin } from './prepared-asset-origin.js';
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
-  readonly projection?: import('../prepared-data/physical-projection.js').PhysicalProjection;
+  readonly projection: import('../prepared-data/physical-projection.js').PhysicalProjection;
   revision?: number; controlPitch: number; controlYaw: number; zoom: number; sceneMatrix: string;
   sunViewDirection: readonly number[] | null; reference?: { sceneMatrix: string; sunViewDirection: readonly number[] | null };
   counterRotation: string; counterRotationFor(systemTransform: string | DOMMatrix | null): string;
-  levelOfDetail?: { stage: string; silhouetteDiameter: number | null; billboardOpacity: number; markerOpacity: number };
-  body?: { visible?: boolean; screen?: readonly number[] | null; silhouette?: { radial: readonly number[]; centre: readonly number[]; radialSemiAxis: number; tangentialSemiAxis: number } | null };
+  levelOfDetail: { stage: string; silhouetteDiameter: number | null; billboardOpacity: number; markerOpacity: number };
+  body: { visible: boolean; screen?: readonly number[] | null; silhouette?: { radial: readonly number[]; centre: readonly number[]; radialSemiAxis: number; tangentialSemiAxis: number } | null };
   /** The camera root's principal point, and the stage's: the root moves to centre the body in the area the shell leaves
    * open, so the two differ by that move. */
-  principalOffset?: readonly number[];
-  stageViewport?: { readonly principalOffsetPixels: readonly number[] };
+  principalOffset: readonly number[];
+  stageViewport: { readonly principalOffsetPixels: readonly number[] };
 }
 export type PreparedWrite = { target: number; name: string } & (
   { kind: "attribute"; value: string | null } | { kind: "class"; value: boolean } |
@@ -43,7 +43,6 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "silhouette-fit"; minimumRadius: number; unitScale: number } |
   ({ kind: "interior-disc" } & PreparedInteriorDisc) |
   ({ kind: "silhouette-step-property"; property: string } & PreparedSilhouetteSteps) |
-  { kind: "zoom-property"; property: string } | { kind: "shell-scale"; variable: string; defaultZoom: number } |
   { kind: "counter-rotation"; systemTransform: string | null }
 );
 export interface PreparedPresentationDefinition {
@@ -63,7 +62,7 @@ export interface PreparedPresentationPlan extends PreparedResourceDemand { requi
   /** The mesh is not drawn at this level of detail: its textures only warm. */
   deferredTextures?: boolean; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
-export interface PreparedFramePublication { selection: ObjectSelection; view: PreparedView; resources: Pick<PreparedResources, "has" | "url">; plan?: PreparedPresentationPlan | null; }
+export interface PreparedFramePublication { selection: ObjectSelection; view: PreparedView; resources: Pick<PreparedResources, "has" | "url">; }
 
 import { preparedScenePitch } from "@cssearth/engine";
 import { createPreparedMaterialPublisher } from "./prepared-material.js";
@@ -247,9 +246,8 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
   if (initialProjection) { publishFacing(initialProjection); publishDepth(initialProjection); }
   const materials = new Map(definition.materials.map(track => [track.id,
-    createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
+    createPreparedMaterialPublisher(track, nodes[track.target])]));
   let framePublications = 0, styleWrites = 0, transformWrites = 0;
-  const GEOMETRY_LEVEL_OF_DETAIL = Object.freeze({ stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 });
   const round = (value: number, precision: number | null) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
   const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = (index: number) => index === -1 ? stage : nodes[index];
@@ -258,13 +256,10 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   const interiorDiscs = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-disc"
     ? [[binding.target, createPreparedInteriorDisc(binding)] as const] : []));
   return {
-    publish({ selection, view, resources, plan }: PreparedFramePublication) {
+    publish({ selection, view, resources }: PreparedFramePublication) {
       publishDepth(view.projection);
       publishFacing(view.projection);
-      // The camera's published level of detail (a perspective dolly, see
-      // perspective-dolly.mjs); before its first publication the geometry
-      // stage applies.
-      const levelOfDetail = view.levelOfDetail ?? GEOMETRY_LEVEL_OF_DETAIL;
+      const levelOfDetail = view.levelOfDetail;
       for (const binding of definition.viewBindings) {
         const element = target(binding.target);
         if (binding.kind === "view-attribute") {
@@ -277,7 +272,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
           if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
         } else if (binding.kind === "interior-disc") {
-          const transform = view.projection ? interiorDiscs.get(binding.target)!(view.projection) : null;
+          const transform = interiorDiscs.get(binding.target)!(view.projection);
           const visibility = transform ? "visible" : "hidden";
           if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
           if (transform && element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
@@ -286,8 +281,8 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           // slightly elongated and shifted outward when off-axis, exactly the
           // mathematical silhouette the prepared frames are registered to,
           // never smaller than the prepared floor (the marker it lights).
-          const silhouette = view.body?.silhouette;
-          element.style.visibility = view.body?.visible === false ? "hidden" : "";
+          const silhouette = view.body.silhouette;
+          element.style.visibility = view.body.visible === false ? "hidden" : "";
           if (silhouette) {
             // This transform already owns physical framing. The legacy shell's
             // individual scale would otherwise apply the same fit a second time.
@@ -298,8 +293,8 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
             const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);
             // The silhouette is measured from the camera root's centre; this overlay sits on the stage beside the root,
             // so it takes the root's move too (the phone layout lifts the root above the sheet).
-            const shiftX = (view.stageViewport?.principalOffsetPixels[0] ?? 0) - (view.principalOffset?.[0] ?? 0);
-            const shiftY = (view.stageViewport?.principalOffsetPixels[1] ?? 0) - (view.principalOffset?.[1] ?? 0);
+            const shiftX = view.stageViewport.principalOffsetPixels[0] - view.principalOffset[0];
+            const shiftY = view.stageViewport.principalOffsetPixels[1] - view.principalOffset[1];
             const transform = `translate(${formatNumber(silhouette.centre[0] + shiftX)}px, ${formatNumber(silhouette.centre[1] + shiftY)}px) ` +
               `rotate(${formatNumber(radialAngle)}deg) ` +
               `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
@@ -314,10 +309,6 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
             const value = binding.levels[level].value;
             if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
           }
-        } else if (binding.kind === "zoom-property") { writeStyle(element, binding.property, String(view.zoom)); styleWrites++; }
-        else if (binding.kind === "shell-scale") {
-          element.style.scale = `calc(var(${binding.variable}) / (var(--object-viewport-zoom-divisor) / ${view.zoom / binding.defaultZoom}))`;
-          transformWrites++;
         } else {
           const counter = binding.systemTransform === null ? view.counterRotation : view.counterRotationFor(binding.systemTransform);
           if (element.style.transform !== counter) { element.style.transform = counter; transformWrites++; }
@@ -327,7 +318,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
       if (materials.size) for (const selected of selectedPreparedVariant(definition, selection).materials) {
         const material = materials.get(selected.track);
         if (!material) throw new TypeError(`Unprepared material track: ${selected.track}.`);
-        material.publish(selected, view, resources, plan?.materials?.[selected.track]);
+        material.publish(selected, view, resources);
       }
       framePublications++;
     },

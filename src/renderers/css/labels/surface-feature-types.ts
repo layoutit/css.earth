@@ -77,7 +77,7 @@ export interface SurfaceFeatureNavigationRuntime {
 }
 export interface SurfaceFeatureLayerRuntime extends SurfaceFeatureNavigationRuntime {
   readonly root: HTMLElement;
-  publish(view: { readonly projection?: import('../prepared-data/physical-projection.js').PhysicalProjection; readonly levelOfDetail?: { readonly stage: string } | null; readonly zoom?: number }): void;
+  publish(view: Pick<import('../rendering/prepared-presentation.js').PreparedView, 'projection' | 'levelOfDetail' | 'zoom'>): void;
   setLens(selection: { readonly id: string | null }): void;
   setPlaying(value: boolean): void;
   stats(): SurfaceFeatureLayerStats;

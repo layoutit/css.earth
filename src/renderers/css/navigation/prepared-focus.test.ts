@@ -43,21 +43,20 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
   const orbit = createRetainedCubicSkyOrbit({ stage, inputSurface: stage, cameraElement, sceneElement,
     viewport: { read: () => ({ bounds: stage.getBoundingClientRect(), focalPixels: 1000, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} },
     framePresenter: { present(request: any, signal?: AbortSignal) { request.commit(); return signal ? Promise.resolve(true) : undefined; } },
-    skyPlan: { cameraContract: 'scene-locked-unbounded-accumulated-matrix3d' },
     worldContext: { frame, bodyRadiusUnits: 100, kilometersPerUnit: .002, maximumExtentUnits: 1e8 },
     cameraPlan: scene.camera, objectId: 'unit', runtimePolicy: { MOBILE_VIEWPORT_QUERY: '(max-width: 500px)' },
     preparedSurfaceHitTest,
     onPublish() { publications++; }, onError(error: unknown) { throw error; },
   } as any, { HTMLElement: Surface,
     createPerspectiveDolly(options: any) { physicalOwners++; return createPerspectiveDolly(options); },
-    createCubicSkyCameraOrientation() {
+    createCameraOrientation() {
       return { scene: () => worldRotationCss(rotation), sceneMatrix: () => ({
         m11: rotation[0], m21: rotation[1], m31: rotation[2], m12: rotation[3], m22: rotation[4], m32: rotation[5],
         m13: rotation[6], m23: rotation[7], m33: rotation[8] }),
       setSceneRotation(value: number[]) { rotation = [...value]; },
-      skybox: () => ({ matrix: worldRotationCss(rotation), sunViewDirection: null }),
+      sunViewDirection: () => null,
       snapshot: () => ({ schema: 'cssearth-camera-pose@2', scene: worldRotationCss(rotation) }),
-      counterRotation: () => worldRotationCss(rotation), captureCounterRotation: () => () => worldRotationCss(rotation),
+      captureCounterRotation: () => () => worldRotationCss(rotation),
       restore(pose: any) { const m = pose.scene.slice(9,-1).split(',').map(Number); rotation = [m[0],m[4],m[8],m[1],m[5],m[9],m[2],m[6],m[10]]; },
       rotate(delta: any) { if (!delta.rotation) return;
         const next = worldRotationFromQuaternion(delta.rotation);

@@ -1,0 +1,30 @@
+{
+ "id": "luhman-16",
+ "classification": "star",
+ "order": 1745,
+ "physical": {
+  "name": "Luhman 16 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 72206.9,
+  "gravitationalParameterKm3PerS2": 4485631794.53035,
+  "parent": null,
+  "effectiveTemperatureK": 1334
+ },
+ "physicalNotes": "Radius 1.01 +/- 0.07 Jupiter radii (71,492 km each): Filippazzo et al. (2015, ApJ 810, 158; arXiv:1508.01767), fundamental-parameters table, from its bolometric luminosity through evolutionary models; temperature 1334 +/- 58 K from the same table. GM from the individual mass 35.4 Jupiter masses of Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2 (data-fit column), at the IAU 2015 nominal Jupiter-to-Sun mass ratio 1/1047.348644, times the JPL solar GM. presentationUp: the display axis is a sky-plane convention.",
+ "star": {
+  "rightAscensionDegrees": 162.32821578,
+  "declinationDegrees": -53.31941054,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 1.9960358727567051,
+  "properMotionRaMasPerYear": -2768.511,
+  "properMotionDecMasPerYear": 358.472,
+  "radialVelocityKmPerS": 21.47,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 1: the barycentre of the pair, ICRS at epoch 2000.0 (162.32821578, -53.31941054 degrees). Luhman 16 A is placed at the barycentre: it really circles it at 0.4535 of the separation (mass ratio 0.8305), up to 1.6 au. Gaia DR3 has only a two-parameter solution for one component (source 5353626573555863424), which Bedin et al. (Appendix B) find unusable. SIMBAD: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Luhman+16",
+   "distance": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 1: barycentre parallax 500.993 +0.059/-0.048 mas: 1.996 pc",
+   "properMotion": "Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 1: -2768.511, 358.472 mas/yr (mu_alpha* = mu_alpha cos delta)",
+   "radialVelocity": "Kniazev et al. (2013, ApJ 770, 124; arXiv:1303.7171), section 3.3: 23.1 +/- 1.1 km/s (A) and 19.5 +/- 1.2 km/s (B) from SALT spectra on 2013 March 12, weighted by Bedin et al.'s masses 35.4 and 29.4 Jupiter masses: 21.47 km/s for the barycentre. Both are uncertain by about 1 km/s and include orbital motion of about 1 km/s."
+  }
+ }
+}

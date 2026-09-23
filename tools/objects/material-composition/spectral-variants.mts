@@ -1,4 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
+import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 import {parse} from './data-schema.mts';
 import {spectralRecipe, type SpectralRecipe} from './spectral-recipe.mts';
 import type {Channels, OutputInfo} from 'sharp';
@@ -21,7 +22,8 @@ validateMaterialRecipe(config, 'cssearth-spectral-material-variants@1');
 if(!Array.isArray(config.lenses)||config.lenses.some(plan=>!['scalar-map','morphology-response'].includes(plan.operation)))throw new TypeError('Unsupported spectral material operation.');
 validateRelativePath(config.sourceSubdirectory);
 for(const plan of config.lenses)for(const filename of plan.sourceFiles)validateRelativePath(filename);
-await verifyObservationSources(sourceDirectory,config.sourcePins);
+// Every lens names its files; they are the inputs, read from the source subdirectory.
+await verifyObservationSources(sourceDirectory,config.lenses.flatMap(plan=>plan.sourceFiles.map(filename=>({path:`${config.sourceSubdirectory}/${filename}`}))));
 
 
 
@@ -473,9 +475,8 @@ async function prepareThumbnail(inputPath: string, outputPath: string) {
   const height = Math.min(metadata.height, Math.round(metadata.height * 0.28));
   const left = Math.round((metadata.width - width) * 0.5);
   const top = Math.round((metadata.height - height) * 0.46);
-  await sharp(inputPath).extract({ left, top, width, height })
-    .resize(112, 64, { fit: "cover", kernel: sharp.kernel.lanczos3 })
-    .webp({ quality: 92, effort: 6 }).toFile(outputPath);
+  await writeLossyWebp(sharp(inputPath).extract({ left, top, width, height })
+    .resize(112, 64, { fit: "cover", kernel: sharp.kernel.lanczos3 }), outputPath, { effort: 6 });
 }
 
 function colorizeRgba(source: Buffer, palette: ColorPalette, gain: number) {

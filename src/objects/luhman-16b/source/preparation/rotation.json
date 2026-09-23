@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 162.32821578,
+  "declinationDegrees": 65.68058946,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "Spin inclination from Ureshino et al. (2026, arXiv:2605.08544): i = 61.0 +14.3/-12.3 degrees from the line of sight, fitted with the map it shows, the pole the map calls north tilted toward us. The direction of the axis on the sky is not measured; it is placed toward celestial north as a convention. The axis is the unit vector sin(i) x sky-north - cos(i) x (direction to the star) at the barycentre position: RA 162.3282, Dec +65.6806. The rotation period, 4.828 +0.042/-0.018 h in the same fit, is too uncertain to phase the map to the scene epoch, so longitude 0 faces the Sun and Earth as a display convention.",
+  "coordinateSystem": "ICRF/J2000. +Z is the spin axis above; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "The tilt of the spin axis to the line of sight is measured; its position angle on the sky and the rotation phase are display conventions."
+}

@@ -15,7 +15,7 @@ describe('native source pole sampling', () => {
             const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
                 width: 128, height: 64, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
                 polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
-                thumbnail: {size: 8, quality: 80}, surfaces: [{id: 'science', source: 'source.png', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp', resolutionScale: .5}] });
+                thumbnail: {size: 8}, surfaces: [{id: 'science', source: 'source.png', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp', resolutionScale: .5}] });
             const prepared = await prepareRasterAssets({config,sourceDirectory:directory,publicDirectory:directory,outputDirectory:directory});
             expect(prepared.surfaceDimensions).toEqual({width:128,height:64});
             expect(prepared.surfaces.science.dimensions).toEqual({width:64,height:32});
@@ -50,11 +50,11 @@ describe('native source pole sampling', () => {
                 return [...data.subarray((4 * 8 + 4) * 3, (4 * 8 + 4) * 3 + 3)];
             };
             // Downscaling blends the narrow seam band with its blue surroundings, so compare channels rather than exact colours.
-            const [defaultRed, , defaultBlue] = await centre({ size: 8, quality: 100 });
+            const [defaultRed, , defaultBlue] = await centre({ size: 8 });
             expect(defaultBlue).toBeGreaterThan(defaultRed + 200);
-            const [seamRed, , seamBlue] = await centre({ size: 8, quality: 100, centerLongitudeDegrees: 0 });
+            const [seamRed, , seamBlue] = await centre({ size: 8, centerLongitudeDegrees: 0 });
             expect(seamRed).toBeGreaterThan(seamBlue);
-            expect(() => parseRasterRecipe({ ...base, thumbnail: { size: 8, quality: 100, centerLongitudeDegrees: 'east' } })).toThrow(/finite/);
+            expect(() => parseRasterRecipe({ ...base, thumbnail: { size: 8, centerLongitudeDegrees: 'east' } })).toThrow(/finite/);
         } finally { await rm(directory, { recursive: true, force: true }); }
     });
     it('uses original image texels in the established wrapped normalized map domain', async () => {

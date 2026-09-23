@@ -16,7 +16,6 @@
   },
   "thumbnail": {
     "size": 64,
-    "quality": 88,
     "centerLongitudeDegrees": 0
   },
   "surfaces": [
@@ -39,8 +38,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "trappist-1f-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "trappist-1f-lighting-{density}x-billboard.webp",
+    "rowOutput": "lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "lighting-{density}x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

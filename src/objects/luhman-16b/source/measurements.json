@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "luhman-16b",
+  "radiusKm": 72921.8,
+  "radiusSource": "Radius 1.02 +/- 0.07 Jupiter radii: Filippazzo et al. (2015, ApJ 810, 158; arXiv:1508.01767), fundamental-parameters table; temperature 1261 +/- 55 K from the same table. Ureshino et al. (2026, arXiv:2605.08544) find about 1.2 Jupiter radii from their Doppler-imaging rotation velocity and period, with a tail down to 1.0. GM from the individual mass 29.4 Jupiter masses of Bedin et al. (2024, Astronomische Nachrichten 345, e20230158; doi:10.1002/asna.20230158; arXiv:2403.08865), Table 2 (data-fit column).",
+  "orbitalPeriodDays": 9697.388,
+  "orbitalPeriodSource": "Bedin et al. (2024), Astronomische Nachrichten 345, e20230158, Table 2 (data-fit column): 26.55 +/- 0.08 yr, B around A",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius carrying the Doppler-imaging brightness map. A fast-spinning brown dwarf is slightly flattened; its shape is not measured."
+  },
+  "effectiveTemperatureK": 1261,
+  "effectiveTemperatureSource": "Filippazzo et al. (2015), ApJ 810, 158: 1,261 +/- 55 K (https://arxiv.org/abs/1508.01767)"
+}

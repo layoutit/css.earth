@@ -1,4 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
+import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {RgbObservation} from './contracts.mts';
 import type {RadialState} from './solid-contract.mts';
@@ -13,7 +14,7 @@ export interface LambertAttenuationParameters {
   directionalAmbient: number; fullPhaseAmbient: number; fullPhaseDiffuse: number; maximumOpacity: number;
 }
 interface SolidMaterialConfig {
-  namespace: string; publicBase: string; raster: SolidRasterGrid & {surfaceQuality?: number};
+  namespace: string; publicBase: string; raster: SolidRasterGrid;
   lighting: LambertAttenuationParameters & {logicalSize: number};
 }
 import type {Sharp,WebpOptions} from 'sharp';
@@ -42,10 +43,15 @@ import { radialModelForLens } from './radial-models.mts';
 import { npyLonLatGridDependencies } from './npy-lonlat-grid.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './shape-material.mts';
 
+/** An encoding with neither `lossless` nor `quality` is written in the lossy lane (lossy-lane.ts). One that fixes a quality,
+ * and every lossless encoding, is written as given. */
 export function createRasterEmitter(publicDirectory:string, publicBase:string) {
   return async (filename:string, pipeline:Sharp, encoding:WebpOptions = { lossless: true, effort: 4 }) => {
-    const bytes = await pipeline.webp(encoding).toBuffer();
-    await writeFile(resolve(publicDirectory, filename), bytes);
+    const path = resolve(publicDirectory, filename);
+    const bytes = !encoding.lossless && encoding.quality === undefined
+      ? await writeLossyWebp(pipeline, path, encoding)
+      : await pipeline.webp(encoding).toBuffer();
+    if (encoding.lossless || encoding.quality !== undefined) await writeFile(path, bytes);
     const { width, height } = await sharp(bytes).metadata();
     if (!width || !height) throw new Error(`Raster output has no dimensions: ${filename}`);
     return { url: `${publicBase}${filename}`, width, height, bytes: bytes.length,
@@ -53,11 +59,9 @@ export function createRasterEmitter(publicDirectory:string, publicBase:string) {
   };
 }
 
-// Terminal display encoding only. Source maps stay lossless for pole sampling.
-function surfaceEncoding(config:{raster:{surfaceQuality?:number}}): WebpOptions {
-  return config.raster.surfaceQuality === undefined ? { lossless: true, effort: 4 }
-    : { quality: config.raster.surfaceQuality, alphaQuality: 100, effort: 4, smartSubsample: true };
-}
+// Terminal display encoding only, in the lossy lane (no quality: see createRasterEmitter). Source maps stay lossless for
+// pole sampling.
+const DISPLAY_ENCODING: WebpOptions = { alphaQuality: 100, effort: 4 };
 
 export async function readObservation(sourceDirectory:string, entryInput:unknown, validityInput:unknown, width:number, height:number): Promise<ObservationRaster> {
   const entry=Object.assign({},requireRecord(entryInput),parseDimensions(entryInput));
@@ -313,7 +317,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       const projected = reprojectSolidBodySurfaceRaster(rgba, { width, height, latitudeSegments: bandCount, sampling: nearest ? 'nearest' : 'bilinear' });
       const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount, gutter });
       const { data, ...packedLayout } = packed;
-      surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }), nearest ? { lossless: true, effort: 4 } : surfaceEncoding(config));
+      surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }), nearest ? { lossless: true, effort: 4 } : DISPLAY_ENCODING);
       layout = packedLayout;
     }
     return { id, ...metadata, ...(categorical ? { categorical: true } : {}), ...(nearest ? { displaySampling: 'nearest' } : {}), map, surface, thumbnail, layout,
@@ -350,7 +354,9 @@ export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, conf
     // A radial body's poles come from its triangle atlas (prepareRadialMaterials replaces polesUrl), so no pole image is drawn for it.
     if (!radial) {
       const atlas = prepareSolidBodyPoleRaster(data, { width: info.width, height: info.height, tileSize: poleSize, sampling: surface.displaySampling === 'nearest' ? 'nearest' : 'bilinear' });
-      await sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }).webp(surface.displaySampling === 'nearest' ? { lossless: true, effort: 4 } : surfaceEncoding(config)).toFile(resolve(publicDirectory, filename));
+      const poles = sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }), path = resolve(publicDirectory, filename);
+      if (surface.displaySampling === 'nearest') await poles.webp({ lossless: true, effort: 4 }).toFile(path);
+      else await writeLossyWebp(poles, path, DISPLAY_ENCODING);
     }
     const mean = await sharp(data, { raw: info }).resize(1, 1).removeAlpha().raw().toBuffer();
     surface.billboardColor = `#${mean.subarray(0, 3).toString('hex')}`;
