@@ -12,12 +12,14 @@ import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, 
 import { inside, sourceCacheAddress, type SourceFile, type SourceProduct } from './source-products.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }
 const LIMIT = 128 * 1024;
-export async function sourceHeader(root: string, file: SourceFile): Promise<Buffer> {
+/** Public search can restrict intake to local bytes or an existing header cache. */
+export async function sourceHeader(root: string, file: SourceFile, options: { readonly fetchRemote?: boolean } = {}): Promise<Buffer> {
   const local = await open(resolve(root,file.path),'r').catch(error => { if(hasErrorCode(error,'ENOENT')) return undefined; throw error; });
   if(local) { try { const bytes=Buffer.alloc(LIMIT); const read=await local.read(bytes,0,bytes.length,0); return bytes.subarray(0,read.bytesRead); } finally {await local.close();} }
   const cache=resolve(root,'output/telescopes/source-headers',`${encodeURIComponent(file.path)}.json`);
   const cached=await readFile(cache,'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
   if(cached && cached.version === 3) { const bytes=Buffer.from(requireString(cached.base64),'base64'); if(cached.origin!==file.origin || cached.digest!==sha256(bytes))throw new Error('Header cache identity mismatch.');return bytes; }
+  if (options.fetchRemote === false) throw new Error('Header retrieval requires a local source file or a previously cached header.');
   const headers=await sourceHeaders(root,file);
   let response:Response|undefined;
   for(const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN,...sourceCacheAddress(file)),file.origin]) {
@@ -29,7 +31,7 @@ export async function sourceHeader(root: string, file: SourceFile): Promise<Buff
   const bytes=Buffer.concat(chunks);await mkdir(dirname(cache),{recursive:true});
   await writeFile(cache,JSON.stringify({version:3,origin:file.origin,queriedAt:new Date().toISOString(),digest:sha256(bytes),base64:bytes.toString('base64')}));return bytes;
 }
-export async function intakeSources(root:string,target:string,existing:readonly SourceProduct[], issues:SourceIntakeIssue[]=[]):Promise<SourceProduct[]> {
+export async function intakeSources(root:string,target:string,existing:readonly SourceProduct[], issues:SourceIntakeIssue[]=[], options: { readonly fetchRemote?: boolean } = {}):Promise<SourceProduct[]> {
  const source=`src/objects/${target}/source`,manifest=await readFile(resolve(root,source,'manifest.json'),'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
  if(!manifest)return [];
  const entries=[...requireArray(manifest.inputs),...requireArray(manifest.documents??[]),...requireArray(manifest.generatedIntermediates??[])];
@@ -40,7 +42,7 @@ export async function intakeSources(root:string,target:string,existing:readonly 
   try {
    if(used.has(file.path))continue;
    inside(root,file.path);
-   const bytes=await sourceHeader(root,file), text=bytes.toString('latin1');
+   const bytes=await sourceHeader(root,file,options), text=bytes.toString('latin1');
    let product:SourceProduct;
    if (pds4Blocks(text,'Product_Observational').length) {
     const identity=pds4ProductIdentity(text);

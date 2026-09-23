@@ -1123,7 +1123,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   const investigationPath = `src/objects/${canonicalTarget}/investigations.json`;
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
   const sourceIntakeIssues: SourceIntakeIssue[] = [];
-  const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues) : [];
+  const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues, { fetchRemote: false }) : [];
   const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root, { ...targetOrRequest, target: canonicalTarget }, targetCatalogue, selectedObservation) : undefined;
   return { ...(vo ? { vo } : {}), sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
