@@ -63,26 +63,24 @@
   background-image: var(--alpha-centauri-a-poles-image) !important;
 }
 
-/* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
-   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="alpha-centauri-a"] .alpha-centauri-a-corona-layer {
   background-image: var(--alpha-centauri-a-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(600px * 1.25 * var(--alpha-centauri-a-camera-zoom, 1))
-    calc(600px * 1.25 * var(--alpha-centauri-a-camera-zoom, 1));
+    calc(600px * var(--alpha-centauri-a-camera-zoom, 1))
+    calc(600px * var(--alpha-centauri-a-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
-   sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="alpha-centauri-a"] .alpha-centauri-a-limb-layer {
   background-image: var(--alpha-centauri-a-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * 1.25 * var(--alpha-centauri-a-camera-zoom, 1))
-    calc(496px * 1.25 * var(--alpha-centauri-a-camera-zoom, 1));
+    calc(496px * var(--alpha-centauri-a-camera-zoom, 1))
+    calc(496px * var(--alpha-centauri-a-camera-zoom, 1));
 }
 
 .object-stage[data-object-id="alpha-centauri-a"] .polycss-camera {
