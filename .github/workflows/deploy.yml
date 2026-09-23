@@ -65,7 +65,6 @@ jobs:
         # removes dist/scenes once the build finishes and the assemble step tolerates its absence.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
-          CSSEARTH_ALLOW_MISSING_ASSETS: "1"
           # Default: textures and scene JSON resolve to R2, so the deploy ships no public/scenes copy.
           # This cannot be a dispatch input that defaults on, because the automatic workflow_run path has
           # no inputs at all and shares the `production-deploy` concurrency group with cancel-in-progress:
@@ -78,6 +77,7 @@ jobs:
           else
             ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm build:deploy
             pnpm check:deploy-assets
+            pnpm check:assets-published --require-verified
           fi
       - name: Check the build output
         run: |
@@ -89,9 +89,8 @@ jobs:
           page_count=$(find dist -name '*.html' | wc -l | tr -d ' ')
           echo "Built $page_count HTML pages."
           du -sh dist
-          # Expected ~974 pages (see PLAN_TO_GH_PAGES_RELEASE.md). The margin below that tolerates a
-          # handful of objects reporting unavailable (allow-missing above); a much smaller count means
-          # a truncated build.
+          # Expected ~974 pages (see PLAN_TO_GH_PAGES_RELEASE.md). The margin is a backstop
+          # against a truncated build; missing prepared assets now fail the build above.
           min_pages=900
           if [ "$page_count" -lt "$min_pages" ]; then
             echo "::error::Only $page_count HTML pages were built (expected roughly 974, refusing below $min_pages). Refusing to deploy a truncated site."

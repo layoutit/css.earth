@@ -16,9 +16,9 @@ const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',
   features: [{ objectId: 'moon', id: 'tycho', name: 'Tycho', type: 'Crater', diameterKm: 85,
     searchNames: ['tycho'], searchContext: 'crater' }], places: [] });
 const pin = { url: '/features/index.json', bytes: Buffer.byteLength(index), sha256: createHash('sha256').update(index).digest('hex'), count: 1 };
-const row = (name: string, classification: string, aliases: string[] = []) => `<li class="object-item" data-object-name="${name.toLowerCase()}"
+const row = (name: string, classification: string, aliases: string[] = [], distanceM = 1) => `<li class="object-item" data-object-name="${name.toLowerCase()}"
   data-object-classification="${classification}" data-object-classification-name="${classification}" data-object-system-name="solar system"
-  data-object-distance-au="1" data-object-search-names='${JSON.stringify(aliases)}'><a href="/${name.toLowerCase()}/">${name}</a></li>`;
+  data-object-distance-m="${distanceM}" data-object-search-names='${JSON.stringify(aliases)}'><a href="/${name.toLowerCase()}/">${name}</a></li>`;
 const html = `<!doctype html><html><head><style>u { color: red }</style></head><body data-object-shell="saturn"><!--search-shell:start-->
   <form class="object-sidebar-search-card" data-search-object="saturn"><input class="object-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="object-sheet-handle" type="checkbox">
@@ -119,6 +119,12 @@ test('empty submission browses all objects, categories retain the query, pills r
   const pill = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=old&browse=Planets', origin), fetchIndex)).document;
   assert.deepEqual(visibleNames(pill), ['Saturn']);
   assert.equal(pill.querySelector('input[name=q]')?.getAttribute('value'), 'Planets');
+});
+
+test('native search sorts catalogue rows by their emitted meter distances', async () => {
+  const unsorted = html.replace(row('Titan', 'satellite'), row('Titan', 'satellite', [], 100));
+  const document = parseHTML(await renderSearchResponse(unsorted, new URL('/saturn/?q=', origin), fetchIndex)).document;
+  assert.deepEqual(visibleNames(document), ['Saturn', 'M42', 'Titan']);
 });
 
 test('features are pinned, rendered into existing rows and have ordinary destination links', async () => {
