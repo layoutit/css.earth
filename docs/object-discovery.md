@@ -89,7 +89,9 @@ part of the package's source interpretation update.
 lenses and their raster recipes. It writes the ignored
 `site/prepared-object-discovery.json` projection consumed by the single `OBJECTS`
 registry. Runtime reads this prepared metadata; it does not inspect source images or
-generate assets.
+generate assets. The controls come from R2, not Git, so the dev, build and deploy
+chains restore prepared assets before the catalogue runs. Without them, a clean
+checkout finds no imagery for any body, and moons and small bodies read **Shape only**.
 
 A prepared observation lens makes the destination visible and featured without
 changing a second promotion flag. For asteroids, that discovery metadata does
