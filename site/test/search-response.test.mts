@@ -33,16 +33,15 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div></div>
   </nav><div class="object-selected-content"><section class="object-information-panel">Saturn</section></div></div><!--search-shell:end-->
   <main class="object-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
-// The one shared, content-addressed catalogue fragment (`dist/catalogue/<sha>.html`):
+// The one shared catalogue fragment (`/catalogue-fragment/`):
 // the same rows a page used to inline, minus the div they lived in.
 const catalogueRowsHtml = `<ul class="object-list"><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li>` +
   `<li class="object-chunk"><ul class="object-chunk-list">${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}</ul></li></ul>`;
-const cataloguePin = { url: `/catalogue/${createHash('sha256').update(catalogueRowsHtml).digest('hex')}.html`,
-  sha256: createHash('sha256').update(catalogueRowsHtml).digest('hex'), bytes: Buffer.byteLength(catalogueRowsHtml) };
+const catalogueUrl = '/catalogue-fragment/';
 // A production page: the rows ship empty, referencing the fragment above instead of inlining it.
 const htmlNoCatalogue = html
   .replace('<div id="object-category-results">',
-    `<div id="object-category-results" data-catalogue-src="${cataloguePin.url}" data-catalogue-sha256="${cataloguePin.sha256}" data-catalogue-bytes="${cataloguePin.bytes}">`)
+    `<div id="object-category-results" data-catalogue-src="${catalogueUrl}">`)
   .replace(/<ul>.*?<\/ul>(?=<p class="object-empty")/su,
     '<ul class="object-list" data-catalogue-list></ul><p class="object-loading" data-catalogue-loading>Loading celestial objects…</p>' +
     '<p class="object-error" data-catalogue-error hidden>Couldn\'t load the object list. <button type="button" data-catalogue-retry>Retry</button></p>');
@@ -55,7 +54,7 @@ const fetchIndex: typeof fetch = async input => {
 const visibleNames = (document: Document) => [...document.querySelectorAll('.object-item:not([hidden]) a')].map(element => element.textContent);
 const fetchIndexAndCatalogue: typeof fetch = async input => {
   const url = String(input);
-  if (url === `${origin}${cataloguePin.url}`) return new Response(catalogueRowsHtml);
+  if (url === `${origin}${catalogueUrl}`) return new Response(catalogueRowsHtml);
   return fetchIndex(input);
 };
 
@@ -66,24 +65,21 @@ test('a page that ships its catalogue empty has it fetched and merged before mat
   assert.deepEqual(visibleNames(document), ['Saturn']);
   assert.equal(document.querySelectorAll('.object-item').length, 3);
   assert.equal(document.querySelector<HTMLElement>('[data-catalogue-loading]')?.hidden, true);
-  assert.ok(seen.includes(`${origin}${cataloguePin.url}`), 'the catalogue fragment was fetched');
+  assert.ok(seen.includes(`${origin}${catalogueUrl}`), 'the catalogue fragment was fetched');
   // Re-rendering the merged document needs no second fetch: the rows are already there.
   const again = await renderSearchResponse(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=titan', origin), fetcher), new URL('/saturn/?q=titan', origin), fetchIndex);
   assert.deepEqual(visibleNames(parseHTML(again).document), ['Titan']);
 });
 
-test('a merged catalogue fragment degrades to an empty list plus a message on a byte or hash drift, instead of failing the request', async () => {
-  const wrongBytes: typeof fetch = async input => String(input) === `${origin}${cataloguePin.url}` ? new Response(`${catalogueRowsHtml}<!-- extra -->`) : fetchIndex(input);
-  const bytesDoc = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongBytes)).document;
-  assert.equal(bytesDoc.querySelectorAll('.object-item').length, 0);
-  assert.equal(bytesDoc.querySelector<HTMLElement>('[data-catalogue-error]')?.hidden, false);
-  assert.equal(bytesDoc.querySelector<HTMLElement>('[data-catalogue-loading]')?.hidden, true);
-  assert.equal(bytesDoc.querySelector<HTMLElement>('.object-empty')?.hidden, true);
-
-  const wrongHash: typeof fetch = async input => String(input) === `${origin}${cataloguePin.url}` ? new Response('x'.repeat(catalogueRowsHtml.length)) : fetchIndex(input);
-  const hashDoc = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongHash)).document;
-  assert.equal(hashDoc.querySelector<HTMLElement>('[data-catalogue-error]')?.hidden, false);
-  assert.equal(hashDoc.querySelector<HTMLElement>('.object-empty')?.hidden, true);
+test('a catalogue fragment that fails to load degrades to an empty list plus a message, instead of failing the request', async () => {
+  for (const failure of [async () => new Response('', { status: 503 }), async () => new Response('<p>no list</p>')]) {
+    const fetcher: typeof fetch = async input => String(input) === `${origin}${catalogueUrl}` ? failure() : fetchIndex(input);
+    const document = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), fetcher)).document;
+    assert.equal(document.querySelectorAll('.object-item').length, 0);
+    assert.equal(document.querySelector<HTMLElement>('[data-catalogue-error]')?.hidden, false);
+    assert.equal(document.querySelector<HTMLElement>('[data-catalogue-loading]')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('.object-empty')?.hidden, true);
+  }
 });
 
 test('a page that already inlines its catalogue never fetches the fragment', async () => {
