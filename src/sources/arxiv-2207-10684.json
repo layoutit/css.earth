@@ -1,0 +1,114 @@
+{
+  "id": "arxiv-2207-10684",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zurlo et al. (2022): Orbital and dynamical analysis of the system around HR 8799. New astrometric epochs from VLT/SPHERE and LBT/LUCI",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2207.10684"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202243862"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2207.10684",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243862",
+      "label": "Astronomy & Astrophysics 666, A133"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2207.10684",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 3 model 1: coplanar four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating elements at epoch 1998.83; dynamical masses b 5.80, c 7.80, d 9.19, e 7.41 Jupiter masses; abstract: periods very close to the 2:1 resonance"
+    },
+    {
+      "path": "src/objects/hr-8799/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/hr-8799-b/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/hr-8799-b/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/hr-8799-b/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/hr-8799-b/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    },
+    {
+      "path": "src/objects/hr-8799-c/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/hr-8799-c/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/hr-8799-c/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/hr-8799-c/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    },
+    {
+      "path": "src/objects/hr-8799-d/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/hr-8799-d/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/hr-8799-d/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/hr-8799-d/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    },
+    {
+      "path": "src/objects/hr-8799-e/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/hr-8799-e/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/hr-8799-e/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/hr-8799-e/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "A. Zurlo",
+    "K. Gozdziewski",
+    "C. Lazzoni D. Mesa",
+    "P. Nogueira",
+    "S. Desidera",
+    "R. Gratton"
+  ]
+}

@@ -18,6 +18,14 @@ All three also carry NASA's illustrative model texture as a second, non-default
 lens (`glb-base-color`); it is listed in the package's illustration lenses and is
 not an observation.
 
+An unresolved body measured only in the infrared has no visible colour to reconstruct. When a paper
+publishes its flux densities in three bands, the raster `disc-integrated-band-color` science kind
+([disc-band-color.mts](../tools/objects/observation/disc-band-color.mts)) paints it one false colour:
+the longest wavelength red and the shortest blue, each flux density over one range shared by the
+bodies the record names, encoded once through `encodeBandColor`, so band ratios and the bodies'
+brightness against each other survive. The surface must declare `falseColor`. The four planets of
+[HR 8799](../src/objects/hr-8799/README.md) use it with the JWST/NIRCam photometry of Balmer et al. (2025).
+
 A star with no image may instead show the colour of its catalogued photometric
 temperature, through the `stellar-photometric-color` science kind
 ([stellar-photometric-color.mts](../tools/objects/observation/stellar-photometric-color.mts)).

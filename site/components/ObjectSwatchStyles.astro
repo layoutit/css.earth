@@ -1,25 +1,27 @@
 ---
 import { SCENE_OBJECTS } from '../objects.mts';
 import { contextLocatorImages } from '../../src/navigation/context-locator.mts';
+import { contextColour, DEFAULT_CONTEXT_COLOUR } from '../context-colour.mts';
+import { contextAnnotationOpacity } from '../../src/navigation/marker-presentation.mts';
 
-// Resolve provenance-bearing swatches during the page build. Colors and
+// Resolve provenance-bearing swatches during the page build; an object without one takes its catalogue colour unless that is
+// the neutral gray of an unmeasured body (context-colour.mts). Colors and
 // locator images are published as ordinary CSS rules; the retained scene does
 // not carry a custom-property graph at runtime.
 const swatches = import.meta.glob<{ hex: string; display?: { hex: string } }>('../../src/objects/*/swatch.json', {
   eager: true,
   import: 'default',
 });
-const styles = SCENE_OBJECTS.map(({ id }) => {
+const styles = SCENE_OBJECTS.map(({ id, color, classification }) => {
   const swatch = swatches[`../../src/objects/${id}/swatch.json`];
-  if (!swatch) return '';
-  const hex = swatch.display?.hex ?? swatch.hex;
-  if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error(`Invalid ${id} swatch.`);
+  const hex = contextColour(swatch ? swatch.display?.hex ?? swatch.hex : undefined, color, contextAnnotationOpacity(classification).label);
+  if (!hex) return '';
   const group = `.prepared-world-context [data-context-group="${id}"]`;
   const orbit = `.prepared-world-context [data-context-orbit="${id}"]`;
   const [locator, hover] = contextLocatorImages(hex);
   return `${group}, ${orbit} { color: ${hex}; }\n${group}[data-context-selected="true"]::before { border-radius: 0; box-shadow: none; background-image: ${locator}; }\n${group}[data-context-selected="true"][data-context-indicator-hovered="true"]::before { background-image: ${hover}; }`;
 }).join('\n');
-const defaults = '.prepared-world-context { color: #dfdfdf; }';
+const defaults = `.prepared-world-context { color: ${DEFAULT_CONTEXT_COLOUR}; }`;
 const majorBodyLabelStyles = SCENE_OBJECTS
   .filter(({ classification }) => classification === 'star' || classification === 'black-hole' || classification === 'planet')
   .map(({ id }) => `.prepared-world-context [data-context-label="${id}"], .prepared-selected-body-label[data-selected-body-label="${id}"] { text-transform: uppercase; }`)

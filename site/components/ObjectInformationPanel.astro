@@ -113,11 +113,9 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
               <figcaption class="object-gallery-caption">
                 <strong>{item.label}</strong>
                 <span>{item.caption}</span>
-                <a class="object-gallery-source" href={item.sourceUrl} target="_blank" rel="noreferrer">Archive file</a>
               </figcaption>
             </figure>
           ))}
-          {gallery.qualification && <p class="object-gallery-qualification">{gallery.qualification}</p>}
         </div>
       </details>
       ))}

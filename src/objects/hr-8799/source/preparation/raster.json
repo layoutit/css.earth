@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/hr-8799/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "hr-8799-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csshr-8799-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "shape",
+      "output": "hr-8799-surface-{id}{suffix}.webp",
+      "thumbnail": "hr-8799-lens-{id}.webp",
+      "source": "measurements.json",
+      "falseColor": false,
+      "science": {
+        "kind": "neutral-shape",
+        "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "hr-8799-context-{id}{suffix}.webp",
+    "limbOutput": "hr-8799-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csshr-8799-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

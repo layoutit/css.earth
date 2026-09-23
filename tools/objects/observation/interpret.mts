@@ -34,6 +34,7 @@ import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-laye
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
+import { loadDiscBandColor } from './disc-band-color.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar-spot-occultation.mts';
@@ -463,6 +464,19 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         return { data, channels: 4, nearest: true, report: { discIntegratedColor: { srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance,
           meaning: 'Whole-disc colour and V geometric albedo from published photometry, uniform over the body; not a resolved surface map.' } } };
+      }
+      case 'disc-integrated-band-color': {
+        // An unresolved body painted with one false colour from its published flux densities in three infrared bands.
+        const source = await manifest;
+        const color = await loadDiscBandColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); }, surface.source);
+        if (color.record.objectId !== objectId) throw new TypeError(`${objectId}/${surface.id}: ${surface.source} is the band colour of ${color.record.objectId}.`);
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
+        // A self-luminous body owes the presentation its off-limb and limb plates, transparent: no light beyond the silhouette is observed.
+        const plates = recipe.emission ? { plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : {};
+        return { data, channels: 4, nearest: true, ...plates, report: { discIntegratedBandColor: { srgb: color.srgb, linearDisplay: color.linear, bands: color.record.bands, unit: color.record.unit,
+          displayRange: color.record.displayRange, displayRangeSource: color.record.displayRangeSource, source: color.record.source,
+          meaning: 'Infrared false colour, uniform over the body: red, green and blue are the published flux densities in three bands, longest wavelength red, over one range shared with the bodies it names; not a natural colour and not a resolved surface map.' } } };
       }
       case 'stellar-photometric-color': {
         // A self-luminous photosphere with no image: one colour from its measured spectrum or catalogued photometric temperature, no map.

@@ -305,6 +305,7 @@
   .object-selected-panel,
   .object-factsheet-section,
   .object-gallery-panel,
+  .object-system-galleries,
   .object-chart-switcher,
   .object-lenses,
   .object-lens-details,
@@ -704,27 +705,6 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 .object-gallery-caption strong {
   color: var(--shell-text);
   font-weight: 600;
-}
-
-.object-gallery-source {
-  width: max-content;
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-
-.object-gallery-source:hover,
-.object-gallery-source:focus-visible {
-  color: var(--shell-text);
-}
-
-.object-gallery-qualification {
-  margin: 0;
-  color: var(--shell-text-muted);
-  font-size: 12px;
-  line-height: 1.4;
-  user-select: text;
 }
 
 .object-settings {
@@ -1376,11 +1356,6 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 
   .object-gallery-caption {
     color: var(--shell-text-secondary);
-    opacity: 1;
-  }
-
-  .object-gallery-qualification {
-    color: var(--shell-text-muted);
     opacity: 1;
   }
 

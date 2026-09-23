@@ -166,6 +166,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       else if (kind === 'disc-integrated-color') add(lens.id, 'shape-model', '', used,
         'Fill the authored shape with the published whole-disc colour and V geometric albedo, uniform; no surface map.', {
           interpretation: { kind: 'disc-integrated-color', resolvedSurfaceObservation: false } });
+      else if (kind === 'disc-integrated-band-color') add(lens.id, 'shape-model', '', used,
+        'Fill the authored shape with one infrared false colour from the published flux densities in three bands, on a range shared with its sibling bodies; no surface map.', {
+          interpretation: { kind: 'disc-integrated-band-color', resolvedSurfaceObservation: false } });
       else add(lens.id, 'shape-model', '', used,
         'Fill the authored shape with the shared neutral gray display convention; no surface texture.', {
           observationAttribution: 'none', interpretation: { kind: 'neutral-shape', resolvedSurfaceObservation: false } });

@@ -3,10 +3,13 @@
  *
  *   node tools/objects/new-hosted-planet.mts <id> --name <display name> --system <system name>
  *     --description <catalogue line> --paper <url> --paper-credit <credit> [--order <n>] [--color <#rrggbb>]
+ *     [--rotation synchronous|unmeasured] [--self-luminous <K> --temperature-source <citation>]
  *
  * Requires packages/astronomy/data/bodies/<id>.json with a `hostedOrbit` and a `physical.parent` that is a placed star.
  * Every number here comes from those two records: the world-frame origin at the scene epoch, the radius facts, the
- * circular synchronous rotation the orbit implies and the light direction its star gives. The package starts shape-only, in the
+ * circular synchronous rotation the orbit implies and the light direction its star gives. A planet seen by its own heat (a young
+ * giant imaged directly) takes --self-luminous with its cited effective temperature: it is built emissive, like the stars, with no
+ * light from its host. The package starts shape-only, in the
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node tools/prepare/prepare-object.mts <id> */
@@ -15,9 +18,12 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { starStylesheet } from './new-star.mts';
 
 export const TODO = 'TODO(new-hosted-planet)';
 const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
+/** A hosted planet's sphere is drawn 1.25 times its logical size (solar-system.json geometryScale). */
+const GEOMETRY_SCALE = 1.25;
 /** The shared neutral gray of an unresolved surface, as the shape-only bodies use. */
 const NEUTRAL_GRAY = '#9a9a9a';
 const INTER_URL = 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf';
@@ -78,6 +84,9 @@ export interface HostedPlanetScaffold {
   /** `synchronous` (the default) assumes tidal locking on a circular orbit; `unmeasured` writes a display orientation whose axis is
    * the orbit normal and no spin, for a planet whose rotation is not measured and whose orbit may be eccentric. */
   readonly rotation?: 'synchronous' | 'unmeasured';
+  /** A planet seen by its own heat, as a young giant imaged directly is: emissive like the stars, with transparent off-limb and
+   * limb plates and no light from its host; the cited effective temperature is recorded beside its source. */
+  readonly selfLuminous?: { readonly temperatureK: number; readonly source: string };
 }
 
 /** Every file of a new shape-only planet of another star, keyed by repository path. Pure: the caller writes them. */
@@ -103,16 +112,19 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   const files = new Map<string, string>(), put = (path: string, value: unknown) => files.set(path, typeof value === 'string' ? value : `${JSON.stringify(value, null, 2)}\n`);
   const o = `src/objects/${id}`;
   const order = spec.order ?? 1100;
+  const glow = spec.selfLuminous, material = glow ? 'emission' : 'lighting';
+  if (glow && !(glow.temperatureK > 0)) throw new TypeError(`${spec.id}: a self-luminous planet needs a positive effective temperature, not ${glow.temperatureK}.`);
 
   put(`${o}/object.json`, { schema: 'cssearth-object@1', id, type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name,
-      steps: ['verify-sources', 'title', 'assets', 'panel-content', 'lenses', 'starfield', 'sky-sun', 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
+      steps: ['verify-sources', 'title', 'assets', 'panel-content', 'lenses', 'starfield', ...(glow ? [] : ['sky-sun']), 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
     recipe: { schema: 'cssearth-authored-object@1',
-      surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', lenses: [{ id: 'shape', source: 'content', material: 'lighting' }] }],
-      shape: { kind: 'sphere', radiusKm }, materials: [{ id: 'lighting', source: 'raster', model: 'lit' }],
+      surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', lenses: [{ id: 'shape', source: 'content', material }] }],
+      shape: { kind: 'sphere', radiusKm }, materials: [{ id: material, source: 'raster', model: glow ? 'emissive' : 'lit' }],
       sources: ['raster', 'geometry', 'celestial', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
-        { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]) },
+        { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
+      ...(glow ? { emission: { source: 'raster', material: 'emission' } } : {}) },
     page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: 'exoplanet', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
       description: spec.description, systemName: spec.system, order, context: { order } },
@@ -120,13 +132,19 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
 
-  put(`src/renderers/css/styles/${id}-surfaces.css`, hostedPlanetStylesheet(id));
+  put(`src/renderers/css/styles/${id}-surfaces.css`, glow ? starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.', undefined, GEOMETRY_SCALE) : hostedPlanetStylesheet(id));
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
     latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false,
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, quality: 88, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-lens-{id}.webp`, source: 'measurements.json', falseColor: false,
-      science: { kind: 'neutral-shape', qualification: 'Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star.' } }],
-    lighting: { frameSize: 512, columns: 8, presentationSize: 460, defaultFrame: 230, billboardFrameSize: 24, billboardColumns: 16,
+      science: { kind: 'neutral-shape', qualification: glow
+        ? `Shared neutral gray display convention for a self-luminous planet with no image or measured visible colour in this package; a sphere of the published radius that glows with its own heat (${glow.temperatureK.toLocaleString('en-US')} K), so no lighting.`
+        : 'Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star.' } }],
+    ...(glow ? { emission: { offLimbSize: 600, limbSize: 512, bodyDiameter: 496, offLimbOutput: `${id}-context-{id}{suffix}.webp`, limbOutput: `${id}-limb-{id}{suffix}.webp`, metadata: {
+      schema: `css${id}-prepared-emission@1`, presentation: 'prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate',
+      offLimbContext: { logicalSize: 600, source: 'none: no observation, a transparent plate', composition: 'transparent', rotation: 'none', runtimeAlphaProcessing: false },
+      limbMaterial: { logicalSize: 496, composition: 'transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected', sourceRadius: 'measurements.json#radiusKm', surfaceReplacement: false, runtimeAlphaProcessing: false },
+      lighting: false, shadows: false, runtimeLighting: false } } } : { lighting: { frameSize: 512, columns: 8, presentationSize: 460, defaultFrame: 230, billboardFrameSize: 24, billboardColumns: 16,
       rowOutput: `${id}-lighting-{density}x-row-{row}.webp`, billboardOutput: `${id}-lighting-{density}x-billboard.webp`,
       minimumLightViewZ: -1, maximumLightViewZ: 1, frameCount: 256, shadowlessFloodLimbFloor: 0.35, ambientIntensity: 0.05, radiusScale: 0.505,
       terminator: [0, 0.1], maximumAlpha: 0.95, bankSchema: `css${id}-prepared-lighting-bank@1`, billboardSchema: `css${id}-prepared-lighting-billboard@1`,
@@ -136,7 +154,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         limbMeaning: 'The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.',
         sourceRenderer: 'OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl', ambientIntensity: 0.05,
         shadowlessFloodLimbFloor: 0.35, orenNayarRoughness: 0, terminatorSmoothstep: [0, 0.1], minimumLightViewZ: -1, maximumLightViewZ: 1,
-        baseLightAzimuthDegrees: 0, cameraContract: 'unbounded-accumulated-matrix3d-phase-and-roll', runtimeRasterization: false } } });
+        baseLightAzimuthDegrees: 0, cameraContract: 'unbounded-accumulated-matrix3d-phase-and-roll', runtimeRasterization: false } } }) });
 
   put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id,
     surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
@@ -150,8 +168,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         polarPreparation: 'the same gray on the polar tiles',
         axialTiltNote: rotation === 'unmeasured' ? 'no obliquity or spin of this planet is measured; the display axis is the orbit normal and nothing turns' : "no obliquity of this planet is measured; the rotation record assumes the spin axis on the orbit normal, as tidal locking implies" } } });
 
-  put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'] });
-  put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: 'composite' });
+  put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'], ...(glow ? { directionalSun: false } : {}) });
+  put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: glow ? 'emissive' : 'composite' });
   put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 },
     source: { path: 'presentation/context.png' }, operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' }, { type: 'png' }],
     context: { pixels: 512 } });
@@ -171,22 +189,23 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1',
     operations: [{ kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: INTER_URL }] });
   put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name,
-    bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm, defaultZoom: 1.25, geometryScale: 1.25 });
+    bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm, defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
   put(`${o}/source/measurements.json`, { schema: 'cssearth-hosted-planet@1', id, radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     orbitalPeriodDays: periodDays, orbitalPeriodSource: requireString(requireRecord(orbit.sources).period, 'hosted orbit period source'),
-    shape: { kind: 'sphere', qualification: `A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of ${name} is measured; only its size, mass and orbit are.` } });
+    shape: { kind: 'sphere', qualification: `A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of ${name} is measured; only its size, mass and orbit are.` },
+    ...(glow ? { effectiveTemperatureK: glow.temperatureK, effectiveTemperatureSource: glow.source } : {}) });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@1', version: 1, id, displayName: name,
     panel: { facts: [
       { id: 'radius', label: 'Radius', value: `${TODO}: the radius in Earth radii`,
         source: { catalogueId: `${TODO}-radius-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'radiusKm; radiusSource' } },
       { id: 'period', label: 'Year', value: `${TODO}: the orbital period in days`,
         source: { catalogueId: `${TODO}-period-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'orbitalPeriodDays; orbitalPeriodSource' } }], moreFacts: [] },
-    lenses: { titleKey: 'lenses', defaultLens: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: `A sphere of the published radius, lit by ${spec.system.replace(' system', '')}; the neutral gray is a display convention, not a measured colour.`,
+    lenses: { titleKey: 'lenses', defaultLens: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: glow ? 'A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.' : `A sphere of the published radius, lit by ${spec.system.replace(' system', '')}; the neutral gray is a display convention, not a measured colour.`,
       thumbnail: `${id}-lens-shape.webp`, surface: `${id}-surface-shape@2x.webp`, poles: `${id}-poles-shape@2x.webp`,
       source: { id: `${id}-observational-measurements`, path: '../manifest.json', url: spec.paper }, falseColor: false,
-      notes: `No image or colour of this planet exists (${TODO}: say why, and point at the ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit.` }] },
-    // A lit body's prepared variants bind the shared shadows toggle.
-    settings: { titleKey: 'settings', controls: [{ kind: 'toggle', name: 'shadows', label: 'Shadows', checked: false }] }, charts: [],
+      notes: `No image or colour of this planet exists (${TODO}: say why, and point at the ledger). The gray marks an unresolved surface; ${glow ? 'it glows with its own heat, so no starlight falls on it' : "the lighting is its own star's, at the measured orbit"}.` }] },
+    // A lit body's prepared variants bind the shared shadows toggle; a self-luminous one has no shadows.
+    settings: { titleKey: 'settings', controls: glow ? [] : [{ kind: 'toggle', name: 'shadows', label: 'Shadows', checked: false }] }, charts: [],
     resources: [{ label: 'Research', role: 'facts', description: spec.paperCredit, href: spec.paper }],
     provenance: { title: { path: '../presentation/title-mark.json' }, editorial: { url: spec.paper, credit: spec.paperCredit },
       physical: { path: `../../../../../packages/astronomy/data/bodies/${id}.json`, credit: `Published radius, mass and transit-fitted orbit; ${TODO}` } } });
@@ -209,10 +228,10 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', origin: INTER_URL, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1', licenseEvidence: ['presentation/LICENSE.INTER-OFL'],
       acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.', redistribution: 'Permitted with the accompanying SIL Open Font License.',
       consumers: ['title'], sourceBinding: catalogued('inter-title-font', 1) },
-    preparation('preparation-raster', 'preparation/raster.json', 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star', ['assets', 'lenses']),
-    preparation('preparation-geometry', 'preparation/geometry.json', 'Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material', ['scene', 'presentation']),
-    preparation('preparation-celestial', 'preparation/celestial.json', 'Repository-authored celestial recipe: astrometric sky registration and the host star as the light', ['starfield', 'sky-sun']),
-    preparation('preparation-presentation', 'preparation/presentation.json', 'Repository-authored presentation profile: composite mode', ['presentation']),
+    preparation('preparation-raster', 'preparation/raster.json', glow ? 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, self-luminous with transparent plates' : 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star', ['assets', 'lenses']),
+    preparation('preparation-geometry', 'preparation/geometry.json', `Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, ${glow ? 'emissive' : 'lit'} material`, ['scene', 'presentation']),
+    preparation('preparation-celestial', 'preparation/celestial.json', glow ? 'Repository-authored celestial recipe: astrometric sky registration for the hosted planet, no directional light' : 'Repository-authored celestial recipe: astrometric sky registration and the host star as the light', glow ? ['starfield'] : ['starfield', 'sky-sun']),
+    preparation('preparation-presentation', 'preparation/presentation.json', `Repository-authored presentation profile: ${glow ? 'emissive' : 'composite'} mode`, ['presentation']),
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
     generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper,
       credit: 'Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts', license: 'Project-authored display derivative.', consumers: ['navigation'],
@@ -237,7 +256,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   // Everything the scaffold copies is checked before a file is written, so a missing input never leaves half a package.
   const font = 'src/objects/themis/source/presentation/InterVariable.ttf', license = 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL';
   for (const path of [font, license]) if (!await exists(path)) throw new Error(`${path} is missing; restore it (pnpm setup:assets) before scaffolding.`);
-  const order = flag('order'), color = flag('color'), rotation = flag('rotation');
+  const order = flag('order'), color = flag('color'), rotation = flag('rotation'), glowK = flag('self-luminous'), glowSource = flag('temperature-source');
+  if ((glowK === undefined) !== (glowSource === undefined)) throw new TypeError('--self-luminous <K> and --temperature-source <citation> go together.');
   if (rotation !== undefined && rotation !== 'synchronous' && rotation !== 'unmeasured') throw new TypeError(`--rotation takes synchronous or unmeasured, not ${rotation}.`);
   if (order !== undefined && !Number.isSafeInteger(Number(order))) throw new TypeError(`--order must be a whole number, not ${order}.`);
   if (color !== undefined && !/^#[0-9a-f]{6}$/iu.test(color)) throw new TypeError(`--color must be #rrggbb, not ${color}.`);
@@ -250,6 +270,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     description: requireString(flag('description'), '--description'), paper: requireString(flag('paper'), '--paper'),
     paperCredit: requireString(flag('paper-credit'), '--paper-credit'),
     ...(order === undefined ? {} : { order: Number(order) }), ...(color === undefined ? {} : { color }), ...(rotation === undefined ? {} : { rotation: rotation as 'synchronous' | 'unmeasured' }),
+    ...(glowK === undefined ? {} : { selfLuminous: { temperatureK: Number(glowK), source: glowSource! } }),
   }, body, await read(`packages/astronomy/data/bodies/${hostId}.json`), SOLAR_GEOMETRY_EPOCH_JD_TT);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
   const { neutralDiscMarker } = await import('./new-star.mts');
