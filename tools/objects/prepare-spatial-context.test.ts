@@ -126,7 +126,11 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     await prepareSpatialContext({ sourcePath, solarGeometryPath, outputPath });
     const result = JSON.parse(await readFile(outputPath, 'utf8'));
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
-    assert.deepEqual(result.bodies.map((body: { id: string }) => body.id), contextEntries.map(body => body.id));
+    // Catalogue entries first, then the bodies drawn from their astronomy records around a packaged host.
+    assert.deepEqual(result.bodies.filter((body: { unpackaged?: true }) => !body.unpackaged).map((body: { id: string }) => body.id), contextEntries.map(body => body.id));
+    for (const body of result.bodies.filter((body: { unpackaged?: true }) => body.unpackaged)) {
+      assert.ok(!contextEntries.some(entry => entry.id === body.id) && (HOSTED_PLANET_IDS as readonly string[]).includes(body.id), `${body.id} is a record-only hosted body`);
+    }
     assert.deepEqual(result.bodies.filter((body: { placement?: string }) => body.placement === 'approximate')
       .map((body: { id: string }) => body.id).sort(), ['dactyl', 'selam'], 'Catalogue preparation must preserve the source records’ phase qualification.');
     // Independently parse the retained Horizons output, bypassing the snapshot

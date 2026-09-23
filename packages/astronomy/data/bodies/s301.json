@@ -1,0 +1,31 @@
+{
+  "id": "s301",
+  "classification": "star",
+  "order": 1254,
+  "physical": {
+    "name": "S301",
+    "horizonsCode": null,
+    "meanRadiusKm": 973980.0,
+    "gravitationalParameterKm3PerS2": 199068660062.9,
+    "parent": "sgr-a-star"
+  },
+  "physicalNotes": "Radius 1.4 solar radii and mass 1.5 solar masses: the values the discovery paper assumes in its Extended Data Table 3 (GRAVITY Collaboration 2026, Nature, doi:10.1038/s41586-026-10894-w; arXiv:2607.12664); its text gives 1.4-1.6 solar radii and just below 1.5 solar masses for a main-sequence F1.5 star of m_K = 19.3 +/- 0.3. Not measured directly: the star is unresolved and has no spectrum yet.",
+  "hostedOrbit": {
+    "periodDays": 3170.37,
+    "semiMajorAxisStellarRadii": 3408.6242,
+    "inclinationDegrees": 124.09,
+    "eccentricity": 0.9832,
+    "argumentOfPeriapsisDegrees": 113.4,
+    "epochDefinition": "periastron",
+    "transitTimeBmjdTdb": 59991.2715,
+    "ascendingNodePositionAngleDegrees": 73.8,
+    "sources": {
+      "period": "GRAVITY Collaboration (2026, Nature; arXiv:2607.12664), Extended Data Table 2, Solution 1: P = 8.68 +/- 0.11 yr of 365.25 d.",
+      "shape": "Extended Data Table 2, Solution 1: a = 83.0 +/- 0.7 mas, kept as the angular size and placed at 8277 pc (the distance the paper fixes): 686.99 au, 3408.6 shadow radii; e = 0.9832 +/- 0.0010; i = 124.09 +/- 1.10 degrees.",
+      "eccentricity": "Extended Data Table 2, Solution 1: 0.9832 +/- 0.0010.",
+      "argumentOfPeriapsis": "Extended Data Table 2, Solution 1: omega = 293.4 +/- 2.2 degrees, the star's own; stored as 113.4.",
+      "phase": "Extended Data Table 2, Solution 1: t_P = 2023.126 +/- 0.010 yr. Decimal year taken as a Julian epoch, MJD = 51544.5 + (year - 2000.0) x 365.25; its time scale is taken as TDB (a difference of about a minute).",
+      "orientation": "Extended Data Table 2, Solution 1: Omega = 73.8 +/- 3.5 degrees. Without radial velocities the orbit has two orientations that fit equally well (Solution 2: i 122.84, Omega 256.9, omega 115.1); the paper carries Solution 1 forward (its posterior figure) and so does arXiv:2609.06936. The 1.9 degrees per orbit Schwarzschild precession the paper predicts is not modelled: this is a Keplerian orbit. Orientation mapped by measurement: Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30) table5 positions and radial velocities of S2 (145 positions, 44 radial velocities, 1992-2016) and S1 (161 positions) are reproduced by this package's hosted orbit with i and Omega as published and omega + 180 degrees (2.08 and 3.17 mas rms, 31.9 km/s rms for S2); every other mapping is off by 135-594 mas or 1551 km/s. The published omega is the star's own argument of periapsis; the hosted-orbit convention stores the host-side one, as the beta-pictoris records do."
+    }
+  }
+}

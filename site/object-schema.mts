@@ -8,7 +8,7 @@ import { record } from './browser-types.mts';
 import { parseNavigationDistance } from './navigation-distance.mts';
 import type { NavigationDistance } from './navigation-distance.mts';
 
-export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet';
+export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole';
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
   color: string; distance: NavigationDistance; route: string; description: string;
@@ -33,7 +33,7 @@ const OBJECT_INPUT_KEYS = new Set([
 // Classification vocabulary, not a registry of object identities. Extend this
 // list deliberately when a package introduces a new kind of body.
 export const OBJECT_CLASSIFICATIONS = Object.freeze([
-  "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet",
+  "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet", "black-hole",
 ]);
 
 export function defineObject(input: ObjectDefinitionInput): ObjectEntry {

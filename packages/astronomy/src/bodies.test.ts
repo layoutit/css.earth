@@ -7,6 +7,7 @@ import {
   SMALL_BODY_IDS,
   COMET_IDS,
   EXOPLANET_IDS,
+  BLACK_HOLE_IDS,
   PLANET_IDS,
   bodyData,
   moonsOf,
@@ -16,13 +17,18 @@ import {
 import { SATELLITE_ELEMENTS, SATELLITE_IDS } from './satellites.js'
 import { SOLAR_MASS_KG } from './units.js'
 import { STAR_IDS, type StarId } from './stars.js'
+import { HOSTED_PLANET_IDS } from './hostedOrbits.js'
+
+// A star on a hosted orbit (the S-stars around Sgr A*) is placed by that orbit, not by its own astrometry.
+const HOSTED_STAR_IDS = HOSTED_PLANET_IDS.filter(id => !(EXOPLANET_IDS as readonly string[]).includes(id))
 
 const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
 describe('the body table', () => {
-  it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star and every exoplanet', () => {
-    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length)
-    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS, ...EXOPLANET_IDS] as BodyId[]) {
+  it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star, black hole and hosted star, and every exoplanet', () => {
+    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length + HOSTED_STAR_IDS.length)
+    for (const id of BLACK_HOLE_IDS) expect(STAR_IDS as readonly string[]).toContain(id)
+    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS, ...EXOPLANET_IDS, ...HOSTED_STAR_IDS] as BodyId[]) {
       expect(BODIES[id]).toBeDefined()
       expect(BODIES[id].id).toBe(id)
     }
@@ -56,13 +62,19 @@ describe('the body table', () => {
   it('has physically plausible radii and masses', () => {
     for (const id of BODY_IDS) {
       const data = bodyData(id)
+      // Zero radius is an unmeasured one, allowed only for a hosted star, and such a star has no published mass either.
+      if (data.meanRadiusKm === 0) {
+        expect(HOSTED_STAR_IDS, id).toContain(id)
+        expect(data.gravitationalParameterKm3PerS2, id).toBe(0)
+        continue
+      }
       expect(data.meanRadiusKm).toBeGreaterThan(0)
       expect(data.gravitationalParameterKm3PerS2).toBeGreaterThanOrEqual(0)
       // Zero represents an unpublished GM, not a measured massless body.
       if (data.gravitationalParameterKm3PerS2 === 0) continue
       // Stars range from a red supergiant a thousand times less dense than water to a K dwarf denser than it; only planets and
       // smaller bodies take the rock-and-ice bounds. A star is at least a tenth of the Sun's radius.
-      if (STAR_IDS.includes(id as StarId)) {
+      if (STAR_IDS.includes(id as StarId) || HOSTED_STAR_IDS.includes(id as never)) {
         expect(data.meanRadiusKm).toBeGreaterThan(69570)
         continue
       }

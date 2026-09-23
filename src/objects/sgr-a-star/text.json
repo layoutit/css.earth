@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sgr-a-star",
+  "card": {
+    "text": "The black hole at the centre of the Milky Way, 4.3 million solar masses, with its S-stars in orbit.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2112-07478",
+        "url": "https://arxiv.org/abs/2112.07478",
+        "label": "GRAVITY Collaboration 2022",
+        "checked": "2026-09-22",
+        "locator": "Table 1",
+        "quote": "4.297 0.012"
+      },
+      {
+        "catalogueId": "arxiv-2311-08680",
+        "url": "https://arxiv.org/abs/2311.08680",
+        "label": "EHT Collaboration 2022 (Sgr A* Paper I)",
+        "checked": "2026-09-22",
+        "locator": "Table 1",
+        "quote": "Angular shadow diameter"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Sagittarius A* is the black hole at the centre of our galaxy, 8277 parsecs away. Stars such as S2 and S301 orbit it in years, which is how its mass was weighed.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2112-07478",
+        "url": "https://arxiv.org/abs/2112.07478",
+        "label": "GRAVITY Collaboration 2022",
+        "checked": "2026-09-22",
+        "locator": "Table 1",
+        "quote": "8277"
+      },
+      {
+        "catalogueId": "arxiv-2607-12664",
+        "url": "https://arxiv.org/abs/2607.12664",
+        "label": "GRAVITY Collaboration 2026 (S301)",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "on a 8.7-year orbit"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "EHT image, 2017 April 7",
+      "detail": "1.3 mm",
+      "summary": "The mean of 200 EHT reconstructions around a black disc the size of the measured shadow. Colours are a brightness legend.",
+      "sources": [
+        {
+          "catalogueId": "arxiv-2311-09479",
+          "url": "https://arxiv.org/abs/2311.09479",
+          "label": "EHT Collaboration 2022 (Paper III)",
+          "checked": "2026-09-22",
+          "locator": "Table: Parameters in the eht-imaging Pipeline Top Set",
+          "quote": "5594 in Top Set"
+        }
+      ]
+    }
+  }
+}

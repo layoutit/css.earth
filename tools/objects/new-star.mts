@@ -3,6 +3,7 @@
  *
  *   node tools/objects/new-star.mts <id> --name <display name> --system <constellation> --temperature <K>
  *     --temperature-source <citation with URL> --description <catalogue line> --paper <url> --paper-credit <credit>
+ *   node tools/objects/new-star.mts <id> --black-hole --shadow-source <citation> --name ... --system ... --description ... --paper ... --paper-credit ...
  *
  * Requires packages/astronomy/data/bodies/<id>.json with a `star` block and `physical.meanRadiusKm`. Every number here is
  * derived from that record: the world-frame origin, the catalogue distance, the radius facts and the sky-north display axis
@@ -22,7 +23,10 @@ const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 69
 const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
 const INTER = { url: 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf', bytes: 862936, sha256: '746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c' };
 
-export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK: number; readonly temperatureSource: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number }
+export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK?: number; readonly temperatureSource?: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number;
+  /** A black hole instead of a star: its record's radius is the measured shadow, drawn black. It has no temperature, so its catalogue colour is the shared neutral gray. */
+  readonly blackHole?: { readonly shadowSource: string } }
+const NEUTRAL_GRAY = '#9a9a9a', SHADOW_BLACK = '#000000';
 
 /** The star stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. */
 export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.', geometryScale = GEOMETRY_SCALE) {
@@ -139,8 +143,10 @@ ${s} .polycss-scene s {
 /** Every file of a new shape-only placed star, keyed by repository path. Pure: the caller writes them. */
 export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epochJdTt: number): Map<string, string> {
   if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A star needs a lowercase id.');
-  const temperature = readStarTemperature({ effectiveTemperatureK: spec.temperatureK, effectiveTemperatureSource: spec.temperatureSource });
-  const color = temperatureCatalogueColor(temperature.kelvin);
+  const blackHole = spec.blackHole;
+  const temperature = blackHole ? null : readStarTemperature({ effectiveTemperatureK: spec.temperatureK, effectiveTemperatureSource: spec.temperatureSource });
+  // A black hole's sphere is its shadow, drawn black; its catalogue dot has no measured colour.
+  const color = temperature ? temperatureCatalogueColor(temperature.kelvin) : SHADOW_BLACK, catalogColor = temperature ? color : NEUTRAL_GRAY;
   const body = requireRecord(bodyRecord, 'astronomy record'), star = requireRecord(body.star, 'star astrometry'), physical = requireRecord(body.physical, 'physical');
   if (body.id !== spec.id) throw new TypeError(`The astronomy record is for ${String(body.id)}, not ${spec.id}.`);
   const astrometry = { rightAscensionDegrees: requireFiniteNumber(star.rightAscensionDegrees), declinationDegrees: requireFiniteNumber(star.declinationDegrees),
@@ -163,7 +169,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       emission: { source: 'raster', material: 'emission' } },
     page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
-    catalog: { name, classification: 'star', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
+    catalog: { name, classification: blackHole ? 'black-hole' : 'star', color: catalogColor, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
@@ -171,7 +177,8 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` },
     thumbnail: { size: 64, quality: 88, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-lens-{id}.webp`, source: 'measurements.json', falseColor: false,
-      science: { kind: 'neutral-shape', qualification: 'Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting.' } }],
+      science: blackHole ? { kind: 'black-shadow', qualification: 'The measured shadow drawn as a black disc that always faces the viewer. A display convention; not an event horizon, a surface or a measured colour. No lighting.' }
+        : { kind: 'neutral-shape', qualification: 'Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting.' } }],
     emission: { offLimbSize, limbSize: 512, bodyDiameter: BODY_DIAMETER_PX, offLimbOutput: `${id}-context-{id}{suffix}.webp`, limbOutput: `${id}-limb-{id}{suffix}.webp`, metadata: {
       schema: `css${id}-prepared-emission@1`, presentation: 'prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate',
       offLimbContext: { logicalSize: offLimbSize, source: 'none: no observation, a transparent plate', composition: 'transparent', rotation: 'none', runtimeAlphaProcessing: false },
@@ -195,10 +202,14 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1', operations: [{ kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: INTER.url }] });
   put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name, bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm,
     defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
-  put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
+  if (blackHole) put(`${o}/source/measurements.json`, { schema: 'cssearth-black-hole-shadow@1', id, angularDiameterMas: Math.round(angularDiameterMas * 1e6) / 1e6,
+    angularDiameterSource: blackHole.shadowSource, distanceParsecs: astrometry.distanceParsecs, distanceSource: requireString(requireRecord(star.sources).distance),
+    radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
+    shape: { kind: 'shadow-sphere', qualification: 'A black sphere at the measured shadow radius: the dark region an observer sees, not an event horizon or a surface.' } });
+  else put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
-    effectiveTemperatureK: temperature.kelvin, effectiveTemperatureSource: temperature.source,
+    effectiveTemperatureK: temperature!.kelvin, effectiveTemperatureSource: temperature!.source,
     shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp.' } });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@1', version: 1, id, displayName: name,
     // A published fact names its source: the author replaces each TODO catalogue id with the entry the measurement record cites.
@@ -273,10 +284,11 @@ export async function scaffoldStar(spec: StarScaffold, root = process.cwd()) {
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), id = args.find(argument => !argument.startsWith('--') && !args[args.indexOf(argument) - 1]?.startsWith('--'));
   const option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
-  const required = ['name', 'system', 'temperature', 'temperature-source', 'description', 'paper', 'paper-credit'] as const;
+  const blackHole = args.includes('--black-hole');
+  const required = blackHole ? ['name', 'system', 'shadow-source', 'description', 'paper', 'paper-credit'] as const : ['name', 'system', 'temperature', 'temperature-source', 'description', 'paper', 'paper-credit'] as const;
   const missing = required.filter(name => option(name) === undefined);
   if (!id || missing.length) throw new TypeError(`Usage: new-star <id> ${required.map(name => `--${name} <value>`).join(' ')} [--order <n>]; missing ${missing.join(', ') || 'id'}.`);
   const order = option('order');
-  const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')!, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
+  const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, ...blackHole ? { blackHole: { shadowSource: option('shadow-source')! } } : { temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')! }, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
   console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
 }

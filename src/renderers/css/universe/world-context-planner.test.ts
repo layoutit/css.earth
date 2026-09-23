@@ -571,3 +571,30 @@ test('the Solar System begins revealing context as the distance readout hands fr
   expect(fade.update([0, 0, lightYearM])).toBe(0);
   expect(fade.update([0, 0, lightYearM / 2])).toBeGreaterThan(0);
 });
+
+test('inside its authored range a system draws every member orbit, named or not, and retires beyond it', () => {
+  const recorded = plan.bodies.filter(body => body.unpackaged === true);
+  expect(recorded.map(body => body.id)).toEqual(expect.arrayContaining(['s2', 's301', 's1']));
+  // The application gives a recorded body the tier of a planet of its host's system.
+  const calculate = createWorldContextPlanner(plan, Object.fromEntries(recorded.map(body => [body.id, labelImportance('planet')]))), input = view();
+  const host = plan.bodies.find(body => body.id === 'sgr-a-star')!;
+  expect(host.orbitsWithinM).toBeGreaterThan(0);
+  const members = recorded.filter(body => body.orbit?.centerBodyId === host.id).map(body => [plan.focus, ...plan.bodies].indexOf(body));
+  input.overview = false; input.selectedId = host.id;
+  const at = (rangeShare: number) => {
+    // Above the black hole, looking down -z at it, at a share of the authored range.
+    input.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + host.orbitsWithinM! * rangeShare];
+    let packet = calculate(input);
+    for (let frame = 0; frame < 4; frame++) {
+      for (const body of packet.projectedBodies) input.bodies[body.index]!.labelShown = body.labelShown;
+      packet = calculate(input);
+    }
+    return members.map(index => packet.projectedBodies.find(entry => entry.index === index)!);
+  };
+  // Captions collide in the crowded core; the paths do not follow them.
+  const inside = at(.07);
+  const framed = inside.filter(body => body.visible);
+  expect(framed.some(body => !body.labelShown), 'some framed captions lose the collision').toBe(true);
+  for (const body of framed) expect(body.orbitVisibility, plan.bodies[body.index - 1]!.id).toBeGreaterThan(0);
+  for (const body of at(2.5)) expect(body.orbitVisibility, plan.bodies[body.index - 1]!.id).toBe(0);
+});

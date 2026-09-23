@@ -10,7 +10,7 @@ export function objectCategory(classification: string): string;
 export function objectCategory(classification: string | undefined): string | undefined;
 export function objectCategory(classification: string | undefined): string | undefined {
   if (classification === undefined) return undefined;
-  return classification === 'dwarf-planet' || classification === 'exoplanet' ? 'planet' : classification === 'star' ? 'all'
+  return classification === 'dwarf-planet' || classification === 'exoplanet' ? 'planet' : classification === 'star' || classification === 'black-hole' ? 'all'
     : OWN_TABS.has(classification) ? classification : 'asteroid';
 }
 export const matchesObjectCategory = (classification: string | undefined, category: string | undefined) => category === 'all' || objectCategory(classification) === category;

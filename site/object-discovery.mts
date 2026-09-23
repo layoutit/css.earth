@@ -27,7 +27,7 @@ export function discoveryDescription(discovery: ObjectDiscovery): string | null 
 }
 
 export function isDiscoveryAnchor(object: { classification: string }): boolean {
-  return object.classification === 'star' || object.classification === 'planet';
+  return object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet';
 }
 
 /** The default context suppresses distant orbit classes and limits asteroid orbits to JPL spacecraft targets. */

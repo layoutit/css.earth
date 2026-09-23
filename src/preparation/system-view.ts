@@ -27,7 +27,8 @@ export function prepareSystemView(parent: Pick<PreparedWorldContext['focus'], 'i
   // A placed body carries no orbit and belongs to no system view.
   const members = orderMembers(bodies.filter(body => body.orbit?.centerBodyId === parent.id), states);
   if (!members.length) return undefined;
-  const main = members.filter(member => member.radiusM >= members[0]!.radiusM * policy.minimumRadiusShare);
+  // The share drops members known to be small. An unmeasured radius (0, a star known from its orbit alone) is not known small.
+  const main = members.filter(member => member.radiusM === 0 || member.radiusM >= members[0]!.radiusM * policy.minimumRadiusShare);
   return bakeView(parent, candidateFrames(parent, main, states, policy), main, member => member.orbit!.verticesM);
 }
 

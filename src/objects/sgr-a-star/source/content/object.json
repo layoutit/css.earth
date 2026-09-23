@@ -1,0 +1,103 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "sgr-a-star",
+  "displayName": "Sagittarius A*",
+  "panel": {
+    "facts": [
+      {
+        "id": "shadow",
+        "label": "Shadow diameter",
+        "value": "48.7 microarcseconds (0.40 au)",
+        "source": {
+          "catalogueId": "arxiv-2311-08680",
+          "url": "https://arxiv.org/abs/2311.08680",
+          "label": "EHT Collaboration 2022 (Sgr A* Paper I)",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "angularDiameterMas; angularDiameterSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.297 million solar masses",
+        "source": {
+          "catalogueId": "arxiv-2112-07478",
+          "url": "https://arxiv.org/abs/2112.07478",
+          "label": "GRAVITY Collaboration 2022",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "massSolarMasses; massSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "8277 parsecs",
+        "source": {
+          "catalogueId": "arxiv-2112-07478",
+          "url": "https://arxiv.org/abs/2112.07478",
+          "label": "GRAVITY Collaboration 2022",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shadow",
+        "qualification": "A black disc the size of the measured shadow, with the EHT's 1.3 mm image of 2017 April 7 around it.",
+        "thumbnail": "sgr-a-star-lens-shape.webp",
+        "surface": "sgr-a-star-surface-shape@2x.webp",
+        "poles": "sgr-a-star-poles-shape@2x.webp",
+        "source": {
+          "id": "sgr-a-star-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2112.07478"
+        },
+        "falseColor": false,
+        "notes": "The image is the mean of 200 reconstructions drawn at random from the 5594 of EHT Sgr A* Paper III's eht-imaging Top Set for 2017 April 7, made here with the EHT pipeline on the released data. Its colours are eht-imaging's afmhot legend for brightness, not colour. The disc always faces the viewer."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "GRAVITY Collaboration (2022), A&A 657, L12",
+      "href": "https://arxiv.org/abs/2112.07478"
+    },
+    {
+      "label": "Shadow",
+      "role": "facts",
+      "description": "EHT Collaboration (2022), ApJL 930, L12 (Sgr A* Paper I)",
+      "href": "https://arxiv.org/abs/2311.08680"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2112.07478",
+      "credit": "GRAVITY Collaboration (2022), A&A 657, L12"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/sgr-a-star.json",
+      "credit": "Shadow diameter from EHT Sgr A* Paper I; mass and distance from GRAVITY 2022; SIMBAD position; no measured spin axis (display convention)"
+    }
+  }
+}

@@ -37,7 +37,7 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
   };
   // Hosts are the focus and every star the prepared context frames with orbiting members; a planet's moons are not a
   // planetary system. A registry without the star (a partial fixture) has no system for it.
-  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView)].filter(body => registry.get(body.id)?.classification === 'star');
+  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView)].filter(body => ['star', 'black-hole'].includes(registry.get(body.id)?.classification ?? ''));
   const solarRadiusM = radii.get(plan.focus.id);
   if (!solarRadiusM) throw new TypeError('The Solar System requires its prepared framing radius.');
   return Object.freeze(hosts.map(host => {

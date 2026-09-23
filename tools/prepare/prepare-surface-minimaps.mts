@@ -72,8 +72,19 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       const width = requireFiniteNumber(recipe.width), height = requireFiniteNumber(recipe.height);
       const parsed = parseInterpreterRecipe(recipe);
       const subset = selected ? selectSurfaceDependencies(parsed, [...selected]) : parsed;
-      const { data, channels } = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
-      pipeline = sharp(data, { raw: { width, height, channels } }).resize(minimapResize(nearest));
+      const interpreted = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
+      const emission = requireRecord(recipe).emission;
+      // A shadow's sphere is not drawn: its preview is what is, the off-limb image with the shadow disc over its centre.
+      if (interpretation.kind === 'black-shadow' && interpretation.offLimb !== undefined && interpreted.plates && isRecord(emission)) {
+        const plate = interpreted.plates.offLimb, disc = requireFiniteNumber(emission.bodyDiameter) / requireFiniteNumber(emission.offLimbSize) * plate.size / 2;
+        const rgb = Buffer.alloc(plate.size * plate.size * 3);
+        for (let y = 0; y < plate.size; y++) for (let x = 0; x < plate.size; x++) {
+          const i = y * plate.size + x, alpha = plate.data[i * 4 + 3]! / 255;
+          const covered = Math.max(0, Math.min(1, disc - Math.hypot(x + 0.5 - plate.size / 2, y + 0.5 - plate.size / 2) + 0.5));
+          for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.round(plate.data[i * 4 + c]! * alpha * (1 - covered));
+        }
+        pipeline = sharp(rgb, { raw: { width: plate.size, height: plate.size, channels: 3 } }).resize(minimapResize(false));
+      } else pipeline = sharp(interpreted.data, { raw: { width, height, channels: interpreted.channels } }).resize(minimapResize(nearest));
     } else pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
       if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');

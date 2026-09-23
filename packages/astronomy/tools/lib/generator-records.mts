@@ -11,8 +11,8 @@ export interface StarRecord { hipparcosId?: number; rightAscensionDegrees: numbe
 
 export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: number;
   argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction' | 'periastron';
-  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; prediction?: HostedOrbitPredictionRecord;
-  sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string } }
+  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; prediction?: HostedOrbitPredictionRecord; weaklyConstrained?: true;
+  sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string; constraint?: string } }
 
 export function objectValue(value: unknown, label = 'record'): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object`);
@@ -83,6 +83,10 @@ function readPredictionRecord(value: unknown): HostedOrbitPredictionRecord {
   if (!/^[a-z0-9+_-]+$/u.test(planet)) throw new TypeError('A whereistheplanet planet name is lowercase and unspaced.');
   return { tool: 'whereistheplanet', planet, reference: stringValue(record.reference) };
 }
+const trueValue = (value: unknown): true => {
+  if (value !== true) throw new TypeError(`Expected true or absent, got ${JSON.stringify(value)}.`);
+  return true;
+};
 export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
   const record = objectValue(value), sources = objectValue(record.sources, 'hosted orbit sources');
   const eccentricity = numberValue(record.eccentricity, 'hosted eccentricity');
@@ -97,9 +101,14 @@ export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
     ...(epochDefinition === undefined ? {} : { epochDefinition }),
     ascendingNodePositionAngleDegrees: numberValue(record.ascendingNodePositionAngleDegrees),
     ...(record.prediction === undefined ? {} : { prediction: readPredictionRecord(record.prediction) }),
+    ...(record.weaklyConstrained === undefined ? {} : { weaklyConstrained: trueValue(record.weaklyConstrained) }),
     sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation),
       ...(sources.eccentricity === undefined ? {} : { eccentricity: stringValue(sources.eccentricity) }),
-      ...(sources.argumentOfPeriapsis === undefined ? {} : { argumentOfPeriapsis: stringValue(sources.argumentOfPeriapsis) }) } };
+      ...(sources.argumentOfPeriapsis === undefined ? {} : { argumentOfPeriapsis: stringValue(sources.argumentOfPeriapsis) }),
+      ...(sources.constraint === undefined ? {} : { constraint: stringValue(sources.constraint) }) } };
+  if ((orbit.weaklyConstrained === undefined) !== (orbit.sources.constraint === undefined)) {
+    throw new TypeError(`A weakly constrained hosted orbit quotes its criterion in sources.constraint, and only then: weaklyConstrained ${String(orbit.weaklyConstrained)}.`);
+  }
   if (!(orbit.periodDays > 0) || !(orbit.semiMajorAxisStellarRadii > 1) || orbit.inclinationDegrees < 0 || orbit.inclinationDegrees > 180 ||
       orbit.ascendingNodePositionAngleDegrees < 0 || orbit.ascendingNodePositionAngleDegrees >= 360 ||
       orbit.argumentOfPeriapsisDegrees !== undefined && (orbit.argumentOfPeriapsisDegrees < 0 || orbit.argumentOfPeriapsisDegrees >= 360) ||

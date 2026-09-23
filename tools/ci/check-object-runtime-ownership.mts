@@ -584,7 +584,9 @@ function requireContextFrame(value: unknown, objectId: string) {
   interface ContextPoint {id: string; positionM: number[]; orbit?: {centerBodyId: string};}
   const points = new Map<string, ContextPoint>([[objectId, {id: objectId, positionM: focus.positionM}]]);
   const bodies = context.bodies.map((body: unknown) => {
-    if (!isRecord(body) || !identity(body.id) || points.has(body.id) || !vector(body.positionM) || !positive(body.radiusM)) fail('body inventory identity or physical point is invalid');
+    // A body drawn from its astronomy record may have no measured radius: 0, only when it is unpackaged.
+    const sized = isRecord(body) && (positive(body.radiusM) || body.unpackaged === true && body.radiusM === 0);
+    if (!isRecord(body) || !identity(body.id) || points.has(body.id) || !vector(body.positionM) || !sized) fail(`body inventory identity or physical point is invalid: ${isRecord(body) ? String(body.id) : 'not a record'}`);
     const orbit = body.orbit === undefined ? undefined : body.orbit;
     if (orbit !== undefined && (!isRecord(orbit) || !identity(orbit.centerBodyId))) fail('body orbit parent or prepared vertices are invalid');
     const point = {id: body.id, positionM: body.positionM, ...(isRecord(orbit) ? {orbit: {centerBodyId: requireString(orbit.centerBodyId)}} : {})};
