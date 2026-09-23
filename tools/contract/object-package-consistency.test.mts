@@ -136,3 +136,15 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
   }
   assert.ok(stars.length >= 4, `placed stars checked: ${stars.join(', ')}`);
 });
+
+test('every object stylesheet scopes to the stage the shell renders', async () => {
+  // site/layouts/ObjectLayout.astro renders one `.object-stage` carrying `data-object-id`. A stylesheet scoped to any other
+  // stage class matches nothing, and its plates collapse: Sgr A*'s EHT image sat in a zero-height layer under `.planet-stage`.
+  const directory = resolve(root, 'src/renderers/css/styles');
+  const stale: string[] = [];
+  for (const name of (await readdir(directory)).filter(file => file.endsWith('.css'))) {
+    const css = await readFile(resolve(directory, name), 'utf8');
+    for (const match of css.matchAll(/\.([a-z][a-z0-9-]*)\[data-object-id=/gu)) if (match[1] !== 'object-stage') stale.push(`${name}: .${match[1]}`);
+  }
+  assert.deepEqual([...new Set(stale)], []);
+});
