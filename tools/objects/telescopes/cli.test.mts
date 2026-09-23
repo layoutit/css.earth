@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
@@ -61,10 +62,35 @@ test('default help is concise; explicit help keeps the full command reference',a
   assert.equal(version.stdout.join(''),'0.1.0\n');
 });
 
+test('packaged entrypoint recognizes the current science workspace script',()=>{
+  const root=resolve(import.meta.dirname,'../../..');
+  const result=spawnSync(process.execPath,['--import','tsx',resolve(root,'packages/telescope/src/cli.mts'),
+    '--workspace',root,'unknown-command','--json'],{cwd:root,encoding:'utf8'});
+  assert.equal(result.status,2);
+  assert.match(result.stdout,/Unknown telescope command/u);
+  assert.doesNotMatch(result.stderr,/No css\.earth science workspace/u);
+});
+
 test('local import has one bounded data-only entry point',()=>{
   const parsed=parseCli(['import','spec.json','--out','run','--json']);assert.equal(parsed.command,'import');if(parsed.command!=='import')return;
   assert.equal(parsed.specification,resolve('spec.json'));assert.equal(parsed.directory,resolve('run'));assert.equal(parsed.json,true);
   for(const args of [['import'],['import','spec.json'],['import','spec.json','--out','a','--out','b'],['import','spec.json','other.json','--out','a']])assert.throws(()=>parseCli(args));
+});
+
+test('Keck source fetch uses separate lead numbers and requires a saved exploration and output',()=>{
+  assert.deepEqual(parseCli(['fetch','run/explore.json','--pick','2','--out','raw-out','--json']),
+    {command:'fetch',exploration:resolve('run/explore.json'),pick:2,directory:resolve('raw-out'),json:true,verbose:false});
+  for(const args of [['fetch','run/explore.json','--pick','0','--out','raw-out'],
+    ['fetch','run/explore.json','--pick','1'],['fetch','run/explore.json','--pick','1','--out','a','--out','b']])
+    assert.throws(()=>parseCli(args));
+  const lead={service:'https://koa.ipac.caltech.edu/TAP',state:'sampled' as const,scope:'public object frames',reason:'sampled',
+    instruments:[{telescope:'Keck',instrument:'NIRC2',records:3,sample:'HR 8799'}],
+    sources:[{table:'koa_nirc2',instrument:'NIRC2',koaid:'N2.20090805.31896.fits',targetName:'HR 8799',
+      filehand:'/koadata9/NIRC2/20090805/lev0/N2.20090805.31896.fits',dateObs:'2009-08-05',evidence:'a'.repeat(64)}]};
+  const session=exploration('/tmp/keck run'),screen=formatExploration({...session,answer:{...session.answer,services:[lead]}});
+  assert.match(screen,/Keck 1\. NIRC2 · N2\.20090805\.31896\.fits/u);
+  assert.match(screen,/telescope fetch '\/tmp\/keck run\/explore\.json' --pick N --out DIRECTORY/u);
+  assert.match(screen,/calibration remain unresolved/u);
 });
 
 test('WWT image export has separate image numbers and an explicit bounded level',()=>{

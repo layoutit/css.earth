@@ -10,7 +10,8 @@ async function workspace(start: string, explicit: boolean): Promise<string> {
       await access(resolve(root, 'tools/objects/telescopes/cli.mts'));
       await access(resolve(root, 'tools/cli/run-typed-module.mjs'));
       const pkg: unknown = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'));
-      if (pkg && typeof pkg === 'object' && 'scripts' in pkg && pkg.scripts && typeof pkg.scripts === 'object' && 'telescope:query' in pkg.scripts) return root;
+      if (pkg && typeof pkg === 'object' && 'scripts' in pkg && pkg.scripts && typeof pkg.scripts === 'object' &&
+          'telescope' in pkg.scripts && typeof pkg.scripts.telescope === 'string') return root;
     } catch { /* Try the parent directory unless the caller named an exact workspace. */ }
     const parent = dirname(root);
     if (explicit || parent === root) throw new Error('No css.earth science workspace found. Use --workspace PATH or CSSEARTH_WORKSPACE. See @cssearth/telescope/README.md for setup.');
