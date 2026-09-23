@@ -14,7 +14,7 @@ export const HELP = `Telescope — explore observations or continue from an exis
 
 Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
-  telescope fetch EXPLORE.json --pick N --out DIRECTORY [--json]
+  telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope wwt-fits CATALOG.json --set NAME --level N --x X --y Y --out DIRECTORY [--json]
   telescope wwt-image EXPLORE.json --pick N --level 0..3 --out DIRECTORY [--json]
@@ -42,9 +42,11 @@ HTML figure captions and table titles about maps or observation lists. Nothing i
 WWT image export selects a separately numbered curated TAN sky image from a saved exploration,
 downloads at most 64 pinned-catalog tiles, and assembles one static PNG plus a source receipt.
 It is a display-image input for offline preparation, not a scientific observation or a runtime tile service.
-Fetch selects a separately numbered public Keck source file from a saved exploration. It rechecks
-the exact KOA row, downloads within the saved byte limit, pins the original FITS and metadata, and
-offers the shared outputs path. A raw frame does not establish calibration or target detection.
+Fetch selects a separately numbered source within one archive from a saved exploration. Keck is
+the default for older saved runs. Exact archive identities are rechecked; original bytes, discovery
+and current metadata are pinned within the saved transfer limit. FITS files enter shared outputs;
+OPUS preserves its native image, label and support files. Acquisition does not establish calibration,
+target detection or scientific fitness.
 WWT FITS reads one original numeric tile from a pinned WTML collection snapshot. It preserves the
 source FITS bytes, extracts an image and sample table through Astropy, and records the exact tile
 URL and hashes. Use data/wwt/phat-fits.json for WWT's PHAT f475w/f814w collection. Missing unit,

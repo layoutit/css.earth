@@ -5,11 +5,12 @@ import { requireRecord, requireString } from '../../sources/source-values.mts';
 import { CUBE_OUTPUT_PYTHON } from './cube-outputs.mts';
 export const SCIENCE_PYTHON = String.raw`
 import json, sys, warnings
+from contextlib import ExitStack
 import numpy as np
 import astropy
 from astropy import units as u
 from astropy.io import fits
-from astropy.wcs import WCS
+from astropy.wcs import WCS, WCSCOMPARE_ANCILLARY
 from astropy.coordinates import SkyCoord
 from astropy.utils.exceptions import AstropyWarning
 warnings.simplefilter('error')
@@ -33,7 +34,8 @@ def read_science(path):
     with warnings.catch_warnings(record=True) as format_warnings:
         warnings.simplefilter('always', AstropyWarning)
         opened = fits.open(path, memmap=False, lazy_load_hdus=False)
-    with opened as hdus:
+    with ExitStack() as stack:
+        hdus=stack.enter_context(opened)
         primary=hdus[0].header
         images=[(i,h) for i,h in enumerate(hdus) if isinstance(h,(fits.PrimaryHDU,fits.ImageHDU,fits.CompImageHDU)) and h.header.get('NAXIS',0)>0]
         science=[(i,h) for i,h in images if h.name.upper()=='SCI']
@@ -44,6 +46,20 @@ def read_science(path):
         auxnames={'ERR','ERROR','VAR','VARIANCE','IVAR','DQ','MASK','WMAP','WHT','CON','CONTEXT','VAR_POISSON','VAR_RNOISE','VAR_FLAT'}
         if not science: science=[(i,h) for i,h in images if h.name.upper() not in auxnames]
         if not science: raise ValueError('No science image in FITS product')
+        external_error=None; coverage=None
+        if request.get('companions'):
+            if len(science)!=1 or len(science[0][1].shape)!=2: raise ValueError('External FITS companions require one two-dimensional science image')
+            def external(role):
+                other=stack.enter_context(fits.open(request['companions'][role],memmap=False,lazy_load_hdus=False))
+                arrays=[h for h in other if isinstance(h,(fits.PrimaryHDU,fits.ImageHDU,fits.CompImageHDU)) and h.header.get('NAXIS',0)>0]
+                if len(arrays)!=1: raise ValueError(role+' FITS companion needs one image array')
+                result=arrays[0]; science_hdu=science[0][1]
+                if tuple(result.shape)!=tuple(science_hdu.shape): raise ValueError(role+' FITS companion shape differs from science')
+                a=WCS(science_hdu.header,fix=False).celestial; b=WCS(result.header,fix=False).celestial
+                if not a.has_celestial or not b.has_celestial or not a.wcs.compare(b.wcs,cmp=WCSCOMPARE_ANCILLARY,tolerance=1e-8):
+                    raise ValueError(role+' FITS companion WCS differs from science')
+                return result
+            external_error=external('uncertainty'); coverage=external('coverage')
         seen=set(); structures=[]; refs=[]
         for key,val in primary.items():
             if key.startswith('R_') and isinstance(val,str) and val.startswith('crds://'):
@@ -86,6 +102,9 @@ def read_science(path):
             else:
                 error=companion({'ERR','ERROR','VAR','VARIANCE','IVAR'})
                 dq=companion({'DQ','MASK'})
+            if external_error is not None:
+                if error is not None or dq is not None: raise ValueError('External FITS companions conflict with in-file science companions')
+                error=external_error; error_kind='standard-deviation'
             if error is not None:
                 if error_kind is None: error_kind='variance' if error.name.upper() in ('VAR','VARIANCE') else 'inverse-variance' if error.name.upper()=='IVAR' else 'standard-deviation'
                 eu=unit(error.header.get('BUNIT')); wanted=None if dataunit is None else dataunit**(2 if error_kind=='variance' else -2 if error_kind=='inverse-variance' else 1)
@@ -180,6 +199,9 @@ def read_science(path):
                         q=np.asarray(dq.section[sl])
                         if not np.issubdtype(q.dtype,np.integer): raise ValueError('Quality flags must be integers')
                         flagged+=int(np.count_nonzero(q)); good &= q==0
+                    if coverage is not None:
+                        c=np.asarray(coverage.section[sl]); covered=np.isfinite(c)&(c>0)
+                        flagged+=int(np.count_nonzero(~covered)); good &= covered
                     if error is not None:
                         e=np.asarray(error.section[sl]); bad=np.isfinite(e)&(e<0)&good
                         if bad.any(): raise ValueError('Negative unmasked uncertainty')
@@ -204,7 +226,7 @@ def read_science(path):
                     if usable is not None:
                         if specaxis==len(shape)-1: usable[start:start+a.size] |= good
                         elif good.any(): usable[prefix[specaxis]]=True
-            row['quality']={'policy':'finite-science; DQ/MASK=0; finite nonnegative uncertainty when supplied','samples':total,'finite':finite,'usable':goodcount,'flagged':flagged,'invalidUncertainty':baderror,'mask':dq.name if dq is not None else None}
+            row['quality']={'policy':'finite-science; DQ/MASK=0; external coverage > 0 when supplied; finite nonnegative uncertainty when supplied','samples':total,'finite':finite,'usable':goodcount,'flagged':flagged,'invalidUncertainty':baderror,'mask':dq.name if dq is not None else 'external coverage > 0' if coverage is not None else None}
             if region_check is not None:
                 # Reuse the extraction mask policy, row by row, without allocating a whole-image sky grid.
                 if region_wcs is not None:
@@ -213,6 +235,8 @@ def read_science(path):
                         within=world.icrs.separation(region_center)<=region_radius
                         valid=np.isfinite(np.asarray(hdu.section[y,:]))
                         if dq is not None: valid &= np.asarray(dq.section[y,:])==0
+                        if coverage is not None:
+                            c=np.asarray(coverage.section[y,:]); valid &= np.isfinite(c)&(c>0)
                         if error is not None:
                             e=np.asarray(error.section[y,:]); valid &= np.isfinite(e)&(e>0 if error_kind=='inverse-variance' else e>=0)
                         region_usable+=int((within&valid).sum()); region_bad+=int((within&~valid).sum())
@@ -276,7 +300,7 @@ elif request['operation']=='spectral-convert':
 else: raise ValueError('Unknown science operation')
 json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 `;
-export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
+export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent'; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
     const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });

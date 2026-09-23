@@ -7,7 +7,12 @@ import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import { isisMetadata,pdsMetadata } from './native-metadata.mts';
 import { requireRecord,requireArray,requireString } from '../../sources/source-values.mts';
-import type { delivery } from './outputs.mts';
+interface NativeFigureInput {
+  readonly file: string;
+  readonly directory: string;
+  readonly files: readonly { readonly path: string }[];
+  readonly producing: { readonly parameters: Record<string, unknown> };
+}
 const CONVERT=String.raw`
 import json,sys
 from pathlib import Path
@@ -47,7 +52,7 @@ if a.ndim==3 and meta.get('spectral'):
  table=fits.BinTableHDU.from_columns([column],name='WCS-TAB');table.header['EXTVER']=1;hdus.append(table)
 fits.HDUList(hdus).writeto(path/'native.fits',checksum=True)
 `;
-export async function nativeFigureInput(d:Awaited<ReturnType<typeof delivery>>,directory:string,structure?:string){
+export async function nativeFigureInput(d:NativeFigureInput,directory:string,structure?:string){
   if(/\.fits?$/iu.test(d.file)){if(structure)throw new Error('FITS inputs use --hdu');return {file:d.file};}
   const observation=requireRecord(d.producing.parameters.observation),decoder=requireString(observation.decoder);
   const originalLabel=requireString(observation.labelPath);

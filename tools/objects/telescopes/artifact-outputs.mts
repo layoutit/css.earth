@@ -11,6 +11,7 @@ import { inspectSpatialObject } from './spatial-handoff.mts';
 import { contextTarget, sourceContext } from './delivery-context.mts';
 import type { FamilyOperation } from './family-handlers.mts';
 import { verifiedExecutableFamilyOperations } from './family-operation.mts';
+import { openPdsSource } from './pds-source.mts';
 
 const unavailable = (kind:OutputChoice['kind'],reason:string):OutputChoice => ({kind,available:false,reason});
 const available = (kind:OutputChoice['kind'],reason:string,parameters:readonly string[]=[]):OutputChoice => ({kind,available:true,reason,...(parameters.length?{parameters}:{})});
@@ -44,7 +45,7 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const descriptorPath=resolve(delivered.directory,matches[0]!.path);
     return{...listed,artifact:'delivery',source:descriptorPath,familyOperations:await verifiedExecutableFamilyOperations(descriptorPath)};
   }
-  if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
+  if(structure!==undefined&&raw.schema!==PRODUCT_RECORD_SCHEMA)throw new TypeError('--structure applies only to native delivery or OPUS PDS source inspection');
   if(raw.schema==='cssearth-physical-grid-volume@1'){
     const relativePath=requireString(raw.object,'physical grid volume object');
     if(relativePath!=='physical-volume/object.json')throw new TypeError('Physical grid volume points outside its owned output.');
@@ -66,11 +67,25 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
   }
   if(raw.schema!==PRODUCT_RECORD_SCHEMA)throw new TypeError('Expected a telescope delivery, product record, or supported physical object.json');
   const source=await verifiedProduct(artifact),stage=source.record.stage;
-  if(stage==='telescope-wwt-fits'||stage==='telescope-keck-source'||stage==='telescope-local-import'&&source.record.parameters.fitsSource!==undefined){
+  if(stage==='telescope-archive-source'){
+    const descriptors=source.record.outputs.filter(output=>output.path==='descriptor.json');
+    if(descriptors.length===1){
+      const descriptorPath=resolve(source.root,'descriptor.json');
+      return {artifact:stage,source:descriptorPath,outputs:[],familyOperations:await verifiedExecutableFamilyOperations(descriptorPath)};
+    }
+    if(await openPdsSource(artifact)){
+      const listed=await listDeliveryOutputs(artifact,structure);
+      return {...listed,artifact:stage,issues:(listed.limitations??[]).filter(issue=>!listed.outputs.some(choice=>choice.limitations?.includes(issue)))};
+    }
+  }
+  if(structure!==undefined)throw new TypeError('--structure applies only to native delivery or OPUS PDS source inspection');
+  if(stage==='telescope-wwt-fits'||stage==='telescope-keck-source'||stage==='telescope-archive-source'&&source.record.parameters.fitsSource!==undefined||stage==='telescope-local-import'&&source.record.parameters.fitsSource!==undefined){
     if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
     const listed=await listDeliveryOutputs(artifact);
     return {...listed,artifact:stage,issues:(listed.limitations??[]).filter(issue=>!listed.outputs.some(choice=>choice.limitations?.includes(issue)))};
   }
+  if(stage==='telescope-archive-source')return {artifact:stage,source:artifact,outputs:[],terminal:true,
+    issues:['The original files are pinned, but no supported science output route recognizes this native product.']};
   if(stage==='telescope-source-output')return {artifact:stage,source:artifact,
     ...(typeof source.record.parameters.label==='string'?{target:source.record.parameters.label}:{}),outputs:[],terminal:true};
   if(stage==='telescope-output'){

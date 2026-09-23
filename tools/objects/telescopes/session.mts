@@ -131,11 +131,11 @@ export async function saveExploration(root: string, args: readonly string[], dir
     try {
       const pins = [...new Set(answer.services.flatMap(service => 'sources' in service ? service.sources?.map(source => source.evidence) ?? [] : []))];
       if (pins.length) {
-        const evidenceDirectory = resolve(destination, 'keck-source-evidence');
+        const evidenceDirectory = resolve(destination, 'archive-source-evidence');
         await mkdir(evidenceDirectory, { recursive: true });
         for (const pin of pins) {
           const original = resolve(root, 'output/telescopes/archive-leads', `${pin}.json`);
-          if ((await sha256File(original)).sha256 !== pin) throw new Error(`KOA discovery evidence changed before exploration was saved: ${pin}`);
+          if ((await sha256File(original)).sha256 !== pin) throw new Error(`Archive discovery evidence changed before exploration was saved: ${pin}`);
           await copyFile(original, resolve(evidenceDirectory, `${pin}.json`));
         }
       }

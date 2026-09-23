@@ -367,8 +367,14 @@ elif operation == 'mast-download':
         raise RuntimeError(f'MAST download {status}: {message}')
     answer['files'] = [request['destination']]
 elif operation == 'tap-query':
+    import requests
+    class TapSession(SafeVoSession, requests.Session):
+        def request(self, method, url, **kwargs):
+            if kwargs.get('timeout') is None:
+                kwargs['timeout'] = (15, 45)
+            return super().request(method, url, **kwargs)
     answer['pyvo'] = pyvo.__version__
-    result = pyvo.dal.TAPService(request['service']).search(request['query'], maxrec=request.get('maxrec'))
+    result = pyvo.dal.TAPService(request['service'], session=TapSession()).search(request['query'], maxrec=request.get('maxrec'))
     status = str(result.query_status)
     answer['tap'] = {'queryStatus': status, 'complete': status.upper() == 'OK'}
     answer['rows'] = rows(result.to_table())

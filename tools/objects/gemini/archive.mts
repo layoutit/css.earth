@@ -223,9 +223,10 @@ export async function readGeminiProgram(id: string): Promise<GeminiProgram> {
   return parseGeminiProgram(JSON.parse(await readFile(resolve(PROGRAMS, `${id}.json`), 'utf8')) as unknown);
 }
 
-const FRAME_COLUMNS = 'o.observationID, o.type, o.intent, o.instrument_name, o.proposal_id, o.proposal_pi, o.target_name, ' +
+export const FRAME_COLUMNS = 'o.observationID, o.type, o.intent, o.instrument_name, o.proposal_id, o.proposal_pi, o.target_name, ' +
   'p.energy_bandpassName, p.time_exposure, p.time_bounds_lower, p.dataRelease, a.uri, a.contentLength, a.contentChecksum';
-const JOIN = 'caom2.Observation o JOIN caom2.Plane p ON o.obsID=p.obsID JOIN caom2.Artifact a ON p.planeID=a.planeID';
+export const FRAME_JOIN = 'caom2.Observation o JOIN caom2.Plane p ON o.obsID=p.obsID JOIN caom2.Artifact a ON p.planeID=a.planeID';
+const JOIN = FRAME_JOIN;
 const quote = (value: string) => `'${value.replace(/'/gu, "''")}'`;
 
 const toFrame = (row: Record<string, string>): GeminiFrame => {
@@ -234,6 +235,8 @@ const toFrame = (row: Record<string, string>): GeminiFrame => {
     observation: row.observationID ?? '', type: row.type ?? '', intent: row.intent ?? '', filter: row.energy_bandpassName ?? '',
     exposureSeconds: Number(row.time_exposure), startMjd: Number(row.time_bounds_lower), dataRelease: row.dataRelease ?? '' };
 };
+/** Validate one CADC artifact with the same rules used when a Gemini reduction is pinned. */
+export const cadcFrame = (row: Record<string, string>): GeminiFrame => frame(toFrame(row));
 
 /** The configuration keywords of a primary header, as text, so two headers are compared by what they say and not by how the
  * reader typed it. */

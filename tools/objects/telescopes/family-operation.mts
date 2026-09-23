@@ -167,6 +167,14 @@ function executableOperation(descriptor:ProductDescriptor,id:string,componentId?
 const memberPath=(descriptorPath:string,path:string)=>isAbsolute(path)?resolve(path):resolve(dirname(descriptorPath),path);
 async function loadDescriptor(path:string){
   const file=resolve(path),bytes=await readFile(file),descriptor=parseProductDescriptor(JSON.parse(bytes.toString()));
+  if(descriptor.dataset.acquisition.kind==='archive'&&descriptor.dataset.producingRecord==='output.product.json'){
+    const source=await verifiedProduct(resolve(dirname(file),'output.product.json'));
+    const descriptorPin=source.record.outputs.find(output=>output.path==='descriptor.json');
+    if(source.record.stage!=='telescope-archive-source'||!descriptorPin||descriptorPin.sha256!==sha256(bytes)||descriptorPin.bytes!==bytes.length)
+      throw new Error('Archive family descriptor is not pinned by its source record.');
+    for(const member of descriptor.members)if(!source.record.outputs.some(output=>output.path===member.path))
+      throw new Error(`Archive family member ${member.path} is not pinned by its source record.`);
+  }
   const files=new Map<string,string>();for(const member of descriptor.members){const location=memberPath(file,member.path);await fileSize(location);files.set(member.id,location);}
   return{file,bytes,descriptor,files};
 }

@@ -14,6 +14,7 @@ import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
 import { searchOpus, type OpusService } from './opus.mts';
 import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadService } from './archive-leads.mts';
+import { searchChandraLeads, searchSpitzerLeads } from './other-leads.mts';
 import { loadWwtImagery, type WwtImageryResult } from './wwt/wwt-catalog.mts';
 
 export const EXPLORATION_SCHEMA = 'cssearth-telescope-exploration@1';
@@ -239,7 +240,8 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection);
   const target = targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
   const [inputs, opus, curatedImagery] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target)]);
-  const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target), searchGeminiLeads(root, target)]);
+  const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target), searchGeminiLeads(root, target),
+    searchChandraLeads(root, target, request.region), searchSpitzerLeads(root, target, request.region)]);
   return { ...inputs, opus, archiveLeads, curatedImagery };
 }
 

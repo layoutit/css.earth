@@ -77,11 +77,16 @@ test('local import has one bounded data-only entry point',()=>{
   for(const args of [['import'],['import','spec.json'],['import','spec.json','--out','a','--out','b'],['import','spec.json','other.json','--out','a']])assert.throws(()=>parseCli(args));
 });
 
-test('Keck source fetch uses separate lead numbers and requires a saved exploration and output',()=>{
+test('archive source fetch uses separate lead numbers and requires a saved exploration and output',()=>{
   assert.deepEqual(parseCli(['fetch','run/explore.json','--pick','2','--out','raw-out','--json']),
-    {command:'fetch',exploration:resolve('run/explore.json'),pick:2,directory:resolve('raw-out'),json:true,verbose:false});
+    {command:'fetch',archive:'keck',exploration:resolve('run/explore.json'),pick:2,directory:resolve('raw-out'),json:true,verbose:false});
+  for(const archive of ['gemini','opus','chandra','spitzer']){
+    const parsed=parseCli(['fetch','run/explore.json','--archive',archive,'--pick','1','--out','raw-out']);
+    assert.equal(parsed.command,'fetch');if(parsed.command==='fetch')assert.equal(parsed.archive,archive);
+  }
   for(const args of [['fetch','run/explore.json','--pick','0','--out','raw-out'],
-    ['fetch','run/explore.json','--pick','1'],['fetch','run/explore.json','--pick','1','--out','a','--out','b']])
+    ['fetch','run/explore.json','--pick','1'],['fetch','run/explore.json','--pick','1','--out','a','--out','b'],
+    ['fetch','run/explore.json','--archive','unknown','--pick','1','--out','raw-out']])
     assert.throws(()=>parseCli(args));
   const lead={service:'https://koa.ipac.caltech.edu/TAP',state:'sampled' as const,scope:'public object frames',reason:'sampled',
     instruments:[{telescope:'Keck',instrument:'NIRC2',records:3,sample:'HR 8799'}],
@@ -89,7 +94,7 @@ test('Keck source fetch uses separate lead numbers and requires a saved explorat
       filehand:'/koadata9/NIRC2/20090805/lev0/N2.20090805.31896.fits',dateObs:'2009-08-05',evidence:'a'.repeat(64)}]};
   const session=exploration('/tmp/keck run'),screen=formatExploration({...session,answer:{...session.answer,services:[lead]}});
   assert.match(screen,/Keck 1\. NIRC2 · N2\.20090805\.31896\.fits/u);
-  assert.match(screen,/telescope fetch '\/tmp\/keck run\/explore\.json' --pick N --out DIRECTORY/u);
+  assert.match(screen,/telescope fetch '\/tmp\/keck run\/explore\.json' --archive keck --pick N --out DIRECTORY/u);
   assert.match(screen,/calibration remain unresolved/u);
 });
 
@@ -134,7 +139,7 @@ test('human exploration and artifact screens retain unknowns, blockers, context 
   assert.doesNotMatch(prefixedScreen,/Fixture telescope \/ Fixture telescope/u);
   const session=exploration(directory),opus={service:'https://opus.pds-rings.seti.org/api/' as const,state:'sampled' as const,scope:'OPUS fixture',reason:'fixture',opusTarget:'Kerberos',images:2292,meanRadiusKm:4.75,
     sharpest:[{instrument:'New Horizons LORRI',instrumentImages:2292,opusId:'nh-lorri-lor_0299153805',startTime:'2015-07-14T04:24:46.755',centreResolutionKmPerPixel:1.96379,pixelsAcross:4.8}]};
-  assert.match(formatExploration({...session,answer:{...session.answer,services:[opus]}}),/Spacecraft images in OPUS \(2292 of Kerberos.*\n  New Horizons LORRI · 2015-07-14T04:24:46\.755 · 1\.96379 km\/px at body centre · 4\.8 px across/u);
+  assert.match(formatExploration({...session,answer:{...session.answer,services:[opus]}}),/Spacecraft images in OPUS \(2292 of Kerberos.*\n  OPUS 1\. New Horizons LORRI · 2015-07-14T04:24:46\.755 · 1\.96379 km\/px at body centre · 4\.8 px across/u);
   const artifact=formatArtifact(inspection);
   assert.match(artifact,/delivery/u);assert.match(artifact,/No scientific acceptance criteria requested/u);assert.match(artifact,/sphere: unavailable/u);assert.match(artifact,/A sphere requires a registered body map/u);assert.match(artifact,/Unit: MJy\/sr/u);assert.match(artifact,/--output image --hdu 1 --structure SCI --plane N --out DIRECTORY/u);
   assert.equal(outputCommand(inspection.source,inspection.outputs[0]!),"telescope export /tmp/run/pick-1/result.json --output image --hdu 1 --structure SCI --plane N --out DIRECTORY");

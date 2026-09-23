@@ -25,10 +25,14 @@ import { requireString } from '../../sources/source-values.mts';
 import { exportWwtImage, WWT_IMAGE_MAX_LEVEL } from './wwt/wwt-image.mts';
 import { acquireWwtFits } from './wwt/wwt-fits.mts';
 import { fetchKeckSource } from './keck-source.mts';
+import { fetchGeminiSource } from './gemini-source.mts';
+import { fetchOpusSource } from './opus-source.mts';
+import { fetchChandraSource } from './chandra-source.mts';
+import { fetchSpitzerSource } from './spitzer-source.mts';
 export { HELP, SHORT_HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
-export type CliOptions = {readonly command:'fetch';readonly exploration:string;readonly pick:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-fits';readonly catalog:string;readonly setName:string;readonly level:number;readonly x:number;readonly y:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-image';readonly exploration:string;readonly pick:number;readonly level:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export type CliOptions = {readonly command:'fetch';readonly archive:'keck'|'gemini'|'opus'|'chandra'|'spitzer';readonly exploration:string;readonly pick:number;readonly fileName?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-fits';readonly catalog:string;readonly setName:string;readonly level:number;readonly x:number;readonly y:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-image';readonly exploration:string;readonly pick:number;readonly level:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
   if (!args.length) return { command: 'help' as const, short: true };
@@ -40,13 +44,16 @@ export function parseCli(args: readonly string[]): CliOptions {
       const arg=args[i]!;
       if(!arg.startsWith('-')){positional.push(arg);continue;}
       if(arg==='--json'||arg==='--verbose'){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);flags.add(arg);continue;}
-      if(!['--pick','--out'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated fetch option ${arg}.`);
+      if(!['--pick','--out','--archive','--file'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated fetch option ${arg}.`);
       const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}.`);values.set(arg,value);
     }
     const pick=Number(values.get('--pick'));
     if(positional.length!==1||!values.has('--out')||!/^\d+$/u.test(values.get('--pick')??'')||!Number.isSafeInteger(pick)||pick<1)
       throw new TypeError('Use telescope fetch EXPLORE.json --pick N --out DIRECTORY.');
-    return {command,exploration:resolve(positional[0]!),pick,directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};
+    const archive=values.get('--archive')??'keck';
+    if(!['keck','gemini','opus','chandra','spitzer'].includes(archive))throw new TypeError('--archive must be keck, gemini, opus, chandra, or spitzer.');
+    if(values.has('--file')&&!['chandra','spitzer'].includes(archive))throw new TypeError('--file applies only to Chandra or Spitzer sources.');
+    return {command,archive:archive as 'keck'|'gemini'|'opus'|'chandra'|'spitzer',exploration:resolve(positional[0]!),pick,...(values.has('--file')?{fileName:values.get('--file')!}:{}),directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};
   }
   if(command==='wwt-fits'){
     const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
@@ -286,18 +293,23 @@ export function formatExploration(session:ExplorationSession & {readonly directo
     if(!verbose&&limitations.length>3)lines.push(`   ${limitations.length-3} more distinct limitation(s) in the saved result.`);
   }
   for(const service of answer.services)if('sharpest' in service&&service.sharpest?.length){
-    lines.push('',`Spacecraft images in OPUS (${service.images} of ${service.opusTarget}; sharpest per instrument, not retrievable from here):`);
-    for(const image of service.sharpest)lines.push(`  ${image.instrument} · ${image.startTime} · ${image.centreResolutionKmPerPixel??'unknown'} km/px at body centre${image.pixelsAcross===null?'':` · ${image.pixelsAcross} px across`} · ${image.instrumentImages} images · ${image.opusId}`);
+    lines.push('',`Spacecraft images in OPUS (${service.images} of ${service.opusTarget}; sharpest per instrument):`);
+    for(const [index,image] of service.sharpest.entries())lines.push(`  OPUS ${index+1}. ${image.instrument} · ${image.startTime} · ${image.centreResolutionKmPerPixel??'unknown'} km/px at body centre${image.pixelsAcross===null?'':` · ${image.pixelsAcross} px across`} · ${image.instrumentImages} images · ${image.opusId}`);
+    lines.push(`  Fetch native image and label: telescope fetch ${shellWord(displayPath(resolve(session.directory,'explore.json')))} --archive opus --pick N --out DIRECTORY`);
   }
   for(const service of answer.services)if('instruments' in service&&(service.instruments.length||service.sources?.length)){
     lines.push('',`Live archive leads (${service.service}; ${service.scope}):`);
     for(const lead of service.instruments)lines.push(`  ${lead.telescope} / ${lead.instrument} · ${lead.records} record(s) · example ${lead.sample}`);
     if(service.sources?.length){
-      lines.push(`  ${service.sources.length} exact public Keck source file(s) sampled:`);
-      for(const [index,source] of (verbose?service.sources:service.sources.slice(0,8)).entries())
-        lines.push(`  Keck ${index+1}. ${source.instrument} · ${source.koaid} · ${source.dateObs||'time unknown'} · archive name ${source.targetName}`);
+      const archive='koaid' in service.sources[0]!?'keck':'uri' in service.sources[0]!?'gemini':'obsid' in service.sources[0]!?'chandra':'spitzer';
+      const archiveLabel=archive[0]!.toUpperCase()+archive.slice(1);
+      lines.push(`  ${service.sources.length} ${archiveLabel} source choice(s) sampled:`);
+      for(const [index,source] of (verbose?service.sources:service.sources.slice(0,8)).entries()){
+        const identity='koaid' in source?source.koaid:'uri' in source?source.name:'obsid' in source?String(source.obsid):String(source.aorKey);
+        lines.push(`  ${archiveLabel} ${index+1}. ${source.instrument} · ${identity} · archive name ${source.targetName}`);
+      }
       if(!verbose&&service.sources.length>8)lines.push(`  ${service.sources.length-8} more source lead(s) in the saved result.`);
-      lines.push(`  Fetch source: telescope fetch ${shellWord(displayPath(resolve(session.directory,'explore.json')))} --pick N --out DIRECTORY`);
+      lines.push(`  Fetch source: telescope fetch ${shellWord(displayPath(resolve(session.directory,'explore.json')))} --archive ${archive} --pick N --out DIRECTORY`);
       lines.push('  Native source bytes only; target association and calibration remain unresolved.');
     }else lines.push('  Discovery only; no exact acquisition or qualification route is implied.');
   }
@@ -576,8 +588,13 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         const result=await acquireWwtFits(options.catalog,options.setName,options.level,options.x,options.y,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Original FITS: ${result.source}\nNumeric image: ${result.data}\nValues: ${result.values}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\n${result.limitations.map(line=>`  ${line}\n`).join('')}`;code=0;
       }else if(options.command==='fetch'){
-        const result=await fetchKeckSource(options.exploration,options.pick,options.directory);
-        text=options.json?`${JSON.stringify(result)}\n`:`Original FITS: ${result.file}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\nNext: telescope outputs ${shellWord(displayPath(result.receipt))}\n`;code=0;
+        const result=options.archive==='keck'?await fetchKeckSource(options.exploration,options.pick,options.directory)
+          :options.archive==='gemini'?await fetchGeminiSource(options.exploration,options.pick,options.directory)
+          :options.archive==='opus'?await fetchOpusSource(options.exploration,options.pick,options.directory)
+          :options.archive==='chandra'?await fetchChandraSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName)
+          :await fetchSpitzerSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName);
+        const files='files' in result?result.files:[result.file];
+        text=options.json?`${JSON.stringify(result)}\n`:`Original archive file(s): ${files.join(', ')}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\nNext: telescope outputs ${shellWord(displayPath(result.receipt))}\n`;code=0;
       }else if(options.command==='wwt-image'){
         const result=await exportWwtImage(root,options.exploration,options.pick,options.level,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Image: ${result.image}\nSource: ${result.receipt}\nCredit: ${result.value.imageset.credits}\n`;code=0;

@@ -122,12 +122,13 @@ const numeric = (row: ShaRow, key: string, label: string): number => {
 
 /** Ask the Heritage Archive's search backend one question and return its rows. The backend answers a failure as a JSON array of
  * error objects and a success as an object with a table in it, so the shape itself says which happened. */
-export async function shaSearch(request: Readonly<Record<string, string>>): Promise<ShaRow[]> {
+export async function shaSearch(request: Readonly<Record<string, string>>, options: { readonly timeoutMs?: number; readonly attempts?: number } = {}): Promise<ShaRow[]> {
   const url = `${SEARCH}?cmd=tableSearch&request=${encodeURIComponent(JSON.stringify(request))}`;
+  const attempts = options.attempts ?? ATTEMPTS;
   let last: unknown;
-  for (let attempt = 0; attempt < ATTEMPTS; attempt++) {
+  for (let attempt = 0; attempt < attempts; attempt++) {
     try {
-      const response = await fetch(url, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
+      const response = await fetch(url, { signal: AbortSignal.timeout(options.timeoutMs ?? REQUEST_TIMEOUT_MS) });
       if (!response.ok) throw new Error(`The Heritage Archive answered ${response.status} for ${request.id ?? 'a search'}.`);
       const body: unknown = JSON.parse(await response.text());
       if (Array.isArray(body)) throw new Error(`The Heritage Archive refused ${request.id ?? 'a search'}: ${JSON.stringify(body).slice(0, 400)}`);
@@ -141,7 +142,7 @@ export async function shaSearch(request: Readonly<Record<string, string>>): Prom
       });
     } catch (error) { last = error; }
   }
-  throw new Error(`The Heritage Archive did not answer ${request.id ?? 'a search'} in ${ATTEMPTS} attempts: ${String(last)}`);
+  throw new Error(`The Heritage Archive did not answer ${request.id ?? 'a search'} in ${attempts} attempts: ${String(last)}`);
 }
 
 /** The URL of a file the archive's catalogue names. `heritagefilename` is the path inside the archive's file tree. */
@@ -172,6 +173,20 @@ export async function listArchiveDirectory(url: string): Promise<string[]> {
     if (name && !name.includes('/')) names.add(name);
   }
   return [...names].sort();
+}
+
+/** The archive's uncertainty and coverage planes belonging to one IRAC mosaic. */
+export async function mosaicCompanions(mosaicUrl: string, aorKey: number, channel: number): Promise<readonly string[]> {
+  if (!Number.isSafeInteger(aorKey) || aorKey < 1 || !Number.isSafeInteger(channel) || channel < 1 || channel > 4 ||
+      !mosaicUrl.startsWith(`${DATA}/sha/archive/`) || !mosaicUrl.endsWith('_maic.fits')) throw new TypeError('Invalid Spitzer mosaic identity.');
+  const directory = mosaicUrl.slice(0, mosaicUrl.lastIndexOf('/'));
+  const names = await listArchiveDirectory(directory);
+  return (['mosaic-uncertainty', 'mosaic-coverage'] as const).map(role => {
+    const suffix = `_${ROLE_SUFFIX[role]}.fits`;
+    const found = names.filter(name => name.endsWith(suffix) && name.startsWith(`SPITZER_I${channel}_${aorKey}_`));
+    if (found.length !== 1) throw new Error(`Channel ${channel} has ${found.length} ${role} files beside its mosaic; one is expected.`);
+    return `${directory}/${found[0]!}`;
+  });
 }
 
 /** Download `url` to `path` unless the bytes are already there, and return its identity. Written to a neighbouring `.part`
@@ -257,13 +272,8 @@ export async function pinProgram(id: string, aorKey: number, channels: readonly 
     const directory = resolve(dataRoot, id, `ch${channel}`);
     const mosaicUrl = archiveUrl(requireString(row.heritagefilename, 'mosaic path'));
     const products = [await pinFile('mosaic', mosaicUrl, directory, row.checksum || undefined)];
-    const siblings = await listArchiveDirectory(mosaicUrl.slice(0, mosaicUrl.lastIndexOf('/')));
-    for (const role of ['mosaic-uncertainty', 'mosaic-coverage'] as const) {
-      const suffix = `_${ROLE_SUFFIX[role]}.fits`;
-      const found = siblings.filter(name => name.endsWith(suffix) && name.startsWith(`SPITZER_I${channel}_${aorKey}_`));
-      if (found.length !== 1) throw new Error(`Channel ${channel} has ${found.length} ${role} files beside its mosaic; one is expected.`);
-      products.push(await pinFile(role, `${mosaicUrl.slice(0, mosaicUrl.lastIndexOf('/') + 1)}${found[0]!}`, directory));
-    }
+    for (const [index, url] of (await mosaicCompanions(mosaicUrl, aorKey, channel)).entries())
+      products.push(await pinFile(index === 0 ? 'mosaic-uncertainty' : 'mosaic-coverage', url, directory));
 
     const header = await primaryHeader(resolve(directory, products[0]!.name));
     if (cardNumber(header, 'AORKEY', 'the mosaic') !== aorKey) throw new Error(`Channel ${channel}: the mosaic's AORKEY is ${card(header, 'AORKEY', 'the mosaic')}, not ${aorKey}.`);
