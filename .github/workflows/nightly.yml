@@ -2,7 +2,7 @@ name: Nightly asset sweep
 
 # PR feedback budget: target 2 minutes, maximum 3 minutes end to end for all
 # merge-required checks. Exhaustive sweeps stay scheduled/manual. The production
-# build/browser probe below is separate, change-selected qualification; do not
+# build probe below is separate, change-selected qualification; do not
 # make it merge-required without bringing it inside that same total budget.
 # Maintenance rules and failure recovery: docs/ci-cd.md.
 
@@ -101,9 +101,9 @@ jobs:
     if: needs.changes.outputs.run_production == 'true'
     # Exercises the one path that has broken two real deploys and that no other CI job builds at all: a full
     # `pnpm build:deploy` with `ASSET_ORIGIN` set, the same as .github/workflows/deploy.yml's production path. The static
-    # scan catches emitted same-origin addresses; the production browser test also exercises the client loader,
-    # whose descriptor path can otherwise discard an origin that is present in the emitted page.
-    name: Build with ASSET_ORIGIN and exercise the client loader
+    # scan catches emitted same-origin addresses; the built-page test checks that scene markup carries
+    # content-addressed production texture URLs.
+    name: Build with ASSET_ORIGIN and check the rendered pages
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -138,19 +138,7 @@ jobs:
           pnpm check:deploy-assets
       - name: Check no page references a same-origin /scenes/ address
         run: node tools/assets/check-asset-origin-scenes.mts dist
-      - name: Check production navigation loads content-addressed assets
+      - name: Check production page invariants and asset URLs
         env:
-          CSSEARTH_TEST_ORIGIN: http://127.0.0.1:4212
-          CSSEARTH_ASSET_ORIGIN: https://earth-assets.lowpoly.cc
-          PLAYWRIGHT_CHANNEL: chromium
-        run: |
-          pnpm exec playwright install --with-deps chromium
-          pnpm preview --port 4212 > /tmp/cssearth-preview.log 2>&1 &
-          preview_pid=$!
-          trap 'kill "$preview_pid"' EXIT
-          for attempt in {1..60}; do
-            if curl -fsS http://127.0.0.1:4212/ >/dev/null; then break; fi
-            if [ "$attempt" = 60 ]; then cat /tmp/cssearth-preview.log; exit 1; fi
-            sleep 1
-          done
-          node site/test/navigation-production-browser.mts
+          ASSET_ORIGIN: https://earth-assets.lowpoly.cc
+        run: node --test site/test/rendered-page.test.mts site/test/asset-origin.test.mts
