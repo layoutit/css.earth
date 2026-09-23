@@ -29,7 +29,7 @@ export interface StarScaffold { readonly id: string; readonly name: string; read
 const NEUTRAL_GRAY = '#9a9a9a', SHADOW_BLACK = '#000000';
 
 /** The star stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. */
-export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.', geometryScale = GEOMETRY_SCALE) {
+export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.') {
   const s = `.object-stage[data-object-id="${id}"]`;
   return `/* ${name}: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. ${spinNote} ${plateNote} */
@@ -96,26 +96,24 @@ ${s} .polycss-scene s.${id}-polar {
   background-image: var(--${id}-poles-image) !important;
 }
 
-/* Off-limb context: ${offLimbSize} px = raster.json emission.offLimbSize, drawn at the disc's ${BODY_DIAMETER_PX} px, times the sphere's
-   solar-system.json geometryScale (${geometryScale}) so the plate stays registered to the enlarged sphere. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 ${s} .${id}-corona-layer {
   background-image: var(--${id}-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${offLimbSize}px * ${geometryScale} * var(--${id}-camera-zoom, 1))
-    calc(${offLimbSize}px * ${geometryScale} * var(--${id}-camera-zoom, 1));
+    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1))
+    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1));
 }
 
-/* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
-   sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 ${s} .${id}-limb-layer {
   background-image: var(--${id}-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${BODY_DIAMETER_PX}px * ${geometryScale} * var(--${id}-camera-zoom, 1))
-    calc(${BODY_DIAMETER_PX}px * ${geometryScale} * var(--${id}-camera-zoom, 1));
+    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1))
+    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1));
 }
 
 ${s} .polycss-camera {

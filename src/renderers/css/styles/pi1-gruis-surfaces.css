@@ -63,25 +63,24 @@
   background-image: var(--pi1-gruis-poles-image) !important;
 }
 
-/* Off-limb context: 1398 px = raster.json emission.offLimbSize = the reconstruction's 51 mas field at the disc's 496 px. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="pi1-gruis"] .pi1-gruis-corona-layer {
   background-image: var(--pi1-gruis-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(1398px * 1.25 * var(--pi1-gruis-camera-zoom, 1))
-    calc(1398px * 1.25 * var(--pi1-gruis-camera-zoom, 1));
+    calc(1398px * var(--pi1-gruis-camera-zoom, 1))
+    calc(1398px * var(--pi1-gruis-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
-   sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="pi1-gruis"] .pi1-gruis-limb-layer {
   background-image: var(--pi1-gruis-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * 1.25 * var(--pi1-gruis-camera-zoom, 1))
-    calc(496px * 1.25 * var(--pi1-gruis-camera-zoom, 1));
+    calc(496px * var(--pi1-gruis-camera-zoom, 1))
+    calc(496px * var(--pi1-gruis-camera-zoom, 1));
 }
 
 .object-stage[data-object-id="pi1-gruis"] .polycss-camera {

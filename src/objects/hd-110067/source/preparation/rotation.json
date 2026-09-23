@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 9.839598691579965,
+  "declinationDegrees": 69.97221222871002,
+  "displayMeridianDegrees": -90,
+  "phase": "arbitrary-display-phase",
+  "source": "No stellar pole is adopted in https://doi.org/10.1038/s41586-023-06692-3. The display axis is celestial north in the sky plane; no rotation is propagated.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display orientation only; no measured pole, spin sense or prime meridian is implied."
+}

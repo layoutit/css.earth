@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-110067g",
+  "radiusKm": 16627.803,
+  "radiusSource": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: radius 2.607 +/- 0.052 Earth radii, using 6378.137 km per Earth radius. Only a mass upper limit is published; GM=0 marks no adopted mass, not a massless planet. No oblateness is measured; the rendered shape is a sphere.",
+  "orbitalPeriodDays": 54.76992,
+  "orbitalPeriodSource": "Luque et al. (2023), Nature 623, 932–937, https://doi.org/10.1038/s41586-023-06692-3, Table 1: 54.76992 d. The published duo-transit period is constrained by a resonance prior. A fixed-period display approximation, not an N-body model or current transit prediction.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the measured transit radius. This package has no resolved image, surface colour or oblateness measurement."
+  }
+}
