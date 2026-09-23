@@ -165,7 +165,6 @@ from the repository root:
 ```sh
 CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm prebuild
 CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm exec astro build --mode performance
-node tools/prepare/build-catalogue-fragment.mts
 node tools/cli/run-implemented-objects.mts assemble
 ```
 

@@ -2,7 +2,6 @@
 import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import ObjectInformationPanel from "./ObjectInformationPanel.astro";
 import PreparedClusterFacts from './PreparedClusterFacts.astro';
-import PreparedFocusLenses from "./PreparedFocusLenses.astro";
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../object-shell-types";
 import { SCENE_OBJECTS } from "../objects.mts";
@@ -297,7 +296,12 @@ const searchCategories = [
         <InformationTabs idPrefix="prepared-focus" group="prepared-focus" tabs={[{id: 'dataset', label: 'Datasets'}, {id: 'factsheet', label: 'Factsheet'}]} />
         <div class="object-card-tabpanel" id="prepared-focus-dataset-content" data-information-panel="dataset"
           data-information-group="prepared-focus" role="region" aria-label="Datasets">
-          <PreparedFocusLenses {objectId} />
+          {/* The dataset banks are the same on every page; the first focus selection fetches them (`site/focus-fragment.mts`). */}
+          <div data-focus-banks-slot="lenses" hidden></div>
+          {/* The one shell-level 3D-stars setting owns every 3D point layer, including catalogue points inside prepared volumes. */}
+          <style is:inline>
+            .object-ui-layer:has(.object-three-d-stars-setting:not(:checked)) ~ .object-viewport .prepared-catalogue-points { display: none !important; }
+          </style>
         </div>
         <div class="object-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
           data-information-group="prepared-focus" role="region" aria-label="Factsheet">
@@ -306,7 +310,7 @@ const searchCategories = [
             {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
               <li><span class="object-fact-label" data-focus-fact-label={id}>{label}</span><span class="object-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
           </ul></div></div>
-          <PreparedFocusLenses {objectId} factsOnly />
+          <div data-focus-banks-slot="facts" hidden></div>
           <PreparedClusterFacts />
         </div>
       </ObjectCard>

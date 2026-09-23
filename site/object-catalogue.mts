@@ -5,7 +5,7 @@ import { requiredElement } from './browser-types.mts';
 import { matchesObjectCategory } from './object-categories.mts';
 import { sourceDocuments } from './source-link.mts';
 import { objectSearchLabels, searchObjects, type ObjectSearchLabels } from './object-search.mts';
-import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentPin, readCatalogueIndexPin } from './catalogue-fragment-loader.mts';
+import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentUrl, readCatalogueIndexUrl } from './catalogue-fragment-loader.mts';
 import { createCatalogueWindow, type CatalogueSelection } from './catalogue-window.mts';
 
 /** Own catalogue transport, search indices and the retained result rows. */
@@ -19,15 +19,15 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
 }) {
   let items = [...browser.querySelectorAll<HTMLElement>(".object-item")]
     .filter((item) => item instanceof windowTarget.HTMLLIElement);
-  // Production pages ship the catalogue rows empty and reference shared,
-  // content-addressed JSON and HTML transports (`catalogue-fragment-pin.mts`).
-  // A page or fixture without either pin must still ship its rows inline.
-  const cataloguePin = items.length === 0 ? readCatalogueFragmentPin(resultsPanel) : null;
-  const catalogueIndexPin = items.length === 0 ? readCatalogueIndexPin(resultsPanel) : null;
-  if (items.length === 0 && !catalogueIndexPin && !cataloguePin) {
+  // Production pages ship the catalogue rows empty and name the shared JSON and
+  // HTML transports (`catalogue-fragment-loader.mts`). A page or fixture that
+  // names neither must still ship its rows inline.
+  const catalogueUrl = items.length === 0 ? readCatalogueFragmentUrl(resultsPanel) : null;
+  const catalogueIndexUrl = items.length === 0 ? readCatalogueIndexUrl(resultsPanel) : null;
+  if (items.length === 0 && !catalogueIndexUrl && !catalogueUrl) {
     throw new Error("Object shell object browser has no objects.");
   }
-  const remoteCatalogue = catalogueIndexPin ?? cataloguePin;
+  const remoteCatalogue = catalogueIndexUrl ?? catalogueUrl;
   const catalogueLoading = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
   const catalogueError = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]') : null;
   const catalogueRetry = catalogueError?.querySelector<HTMLButtonElement>('[data-catalogue-retry]') ?? null;
@@ -38,7 +38,7 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
   let distanceEntries: readonly CatalogueIndexEntry[] = [];
   let objectEntries: readonly CatalogueIndexEntry[] = [];
   const catalogueList = resultsPanel.querySelector<HTMLUListElement>('[data-catalogue-list]');
-  const catalogueWindow = catalogueIndexPin && catalogueList
+  const catalogueWindow = catalogueIndexUrl && catalogueList
     ? createCatalogueWindow({ documentTarget, windowTarget, list: catalogueList, scrollTarget: resultsPanel }) : null;
   lifetime.onDispose(() => catalogueWindow?.destroy());
   let sourceLinks = sourceDocuments(documentTarget);
@@ -107,8 +107,8 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
     if (lifetime.disposed || !remoteCatalogue) return Promise.resolve();
     if (catalogueLoad) return catalogueLoad;
     showCatalogueError(false);
-    const load = catalogueIndexPin
-      ? loadCatalogueIndex(catalogueIndexPin, { windowTarget }).then(index => {
+    const load = catalogueIndexUrl
+      ? loadCatalogueIndex(catalogueIndexUrl, { windowTarget }).then(index => {
           if (lifetime.disposed) return;
           catalogueEntries = index.entries;
           searchLabels = catalogueEntries.map(entry => ({
@@ -131,7 +131,7 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
             sourceDocument: entry.source.document, sourceLabel: entry.source.label,
           } });
         })
-      : loadCatalogueFragment(cataloguePin!, { windowTarget }).then(rows => {
+      : loadCatalogueFragment(catalogueUrl!, { windowTarget }).then(rows => {
           if (lifetime.disposed) return;
           requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(rows);
           attachCatalogueRows();
