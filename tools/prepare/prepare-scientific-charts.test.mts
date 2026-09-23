@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { parseHTML } from "linkedom";
+import { requireRecord } from "../sources/source-values.mts";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
@@ -40,10 +42,15 @@ test("prepares phase charts without runtime derivation", async () => {
       outputRoot,
     });
     assert.equal(outputs.length, 2);
-    const contents = await Promise.all(outputs.map((path) => readFile(path, "utf8")));
-    assert.match(contents[0], /object-photometric-phase-chart/u);
-    assert.match(contents[1], /object-photometric-phase-chart/u);
-    assert.ok(contents.every((svg) => svg.includes("<metadata>")));
+    for (const [index, objectId] of ["mercury", "saturn"].entries()) {
+      const svg = await readFile(outputs[index], "utf8");
+      assert.match(svg, /object-photometric-phase-chart/u);
+      const metadata = parseHTML(svg).document.querySelector("metadata");
+      assert.ok(metadata, `${objectId} chart metadata`);
+      const provenance = requireRecord(JSON.parse(metadata.textContent), `${objectId} chart metadata`);
+      assert.equal(provenance.objectId, objectId);
+      assert.deepEqual(provenance.source, context.sources.photometricPhase);
+    }
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }

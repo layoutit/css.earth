@@ -44,8 +44,8 @@ test("prepares one source-bound 20px SVG family for sidebar sections", async (co
     ));
     const preparedSvg = await readFile(
       resolve(publicRoot, descriptor.outputFile),
-      "utf8",
     );
+    assert.deepEqual(preparedSvg, source, `${descriptor.key} prepared SVG copies its source bytes`);
     const icon = SourceEvidence.parse(PREPARED_SHELL_ICONS[descriptor.key]);
     assert.equal(icon.field("width"), 20);
     assert.equal(icon.field("height"), 20);
