@@ -52,6 +52,11 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       if (!selected) throw new Error('Dataset selection was superseded.');
     } catch (error) {
       if (!isCurrent(session) || datasetSignal.aborted) return false;
+      const datasets = mount.datasets;
+      // An adopted server dataset may already be selected before its companion fails to load.
+      if (datasets && datasets.current() !== datasets.defaultId) {
+        if (!await datasets.select(datasets.defaultId, { signal: datasetSignal }) || !isCurrent(session)) return false;
+      }
       shell.setDatasetNotice?.(`${errorMessage(error)} Showing the default dataset.`);
       // A direct invalid link stays visible for diagnosis. A completed body
       // navigation publishes the destination's actual default selection.

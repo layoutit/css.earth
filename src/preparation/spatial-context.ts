@@ -260,7 +260,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...focus, ...(focusView ? { systemView: focusView } : {}) }),
     ...(Object.keys(classificationViews).length ? { classificationViews: freeze(classificationViews) } : {}),
     bodies: freeze(bodies.map(body => {
-      const systemView = systemViewPolicy === undefined ? undefined : prepareSystemView(body, bodies, states, systemViewPolicy);
+      const systemView = systemViewPolicy === undefined ? undefined : prepareSystemView(body, bodies, states, systemViewPolicy, orbitCenters);
       return systemView ? freeze({ ...body, systemView }) : body;
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }

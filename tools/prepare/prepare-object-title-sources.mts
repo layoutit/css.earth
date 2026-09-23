@@ -65,8 +65,10 @@ export function createObjectTitleSource(label: string, font: Pick<fontkit.Font, 
   if (!font || typeof font.layout !== "function") {
     throw new TypeError("Planet title generation requires a loaded font.");
   }
-  if (typeof label !== "string" || !/^[\p{L}\p{N}]+\*?(?:\.?[ /–-][\p{L}\p{N}]+\*?)*$/u.test(label)) {
-    throw new TypeError("Planet title label is invalid.");
+  // Words of letters and digits joined by a space, slash, dash or dot; a word may carry a trailing asterisk or sit in
+  // parentheses, as a binary's components do in a catalogue name ("Kepler-16 (AB) b").
+  if (typeof label !== "string" || !/^[\p{L}\p{N}]+\*?(?:\.?[ /–-](?:[\p{L}\p{N}]+\*?|\([\p{L}\p{N}]+\)))*$/u.test(label)) {
+    throw new TypeError(`Planet title label is invalid: ${JSON.stringify(label)}; the title mark takes words of letters and digits joined by a space, slash, dash or dot, each optionally in parentheses.`);
   }
 
   const scale = OBJECT_TITLE_RECIPE.fontSize / font.unitsPerEm;

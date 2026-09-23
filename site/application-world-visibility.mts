@@ -15,14 +15,16 @@ const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const defaultFeatures: ReadonlySet<string> = new Set(prepared.defaultFeatureIds);
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id)).map(object => object.id);
 const minorMoonIds = prepared.moons.minor;
-const orbitCenters = new Map(applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []));
+// Each body's orbit centre, and each named centre's own parent: a circumbinary planet's barycentre leads to its host star.
+const orbitCenters = new Map([...applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),
+  ...Object.entries(applicationContext.orbitCenters ?? {}).map(([id, center]) => [id, center.centerBodyId] as const)]);
 const placedStarIds = new Set(SCENE_OBJECTS.filter(object => (object.classification === 'star' || object.classification === 'black-hole') && object.id !== applicationContext.focus.id).map(object => object.id));
 /** The placed star an object belongs to, with every body orbiting that star; empty inside the Solar System. */
 function placedSystemOf(id: string): ReadonlySet<string> {
   const rootOf = (start: string) => { let current = start; for (let steps = 0; steps <= orbitCenters.size; steps++) { const center = orbitCenters.get(current); if (!center) return current; current = center; } return current; };
   const root = rootOf(id);
   if (!placedStarIds.has(root)) return new Set();
-  return new Set([root, ...[...orbitCenters.keys()].filter(member => rootOf(member) === root)]);
+  return new Set([root, ...[...orbitCenters.keys()].filter(member => !Object.hasOwn(applicationContext.orbitCenters ?? {}, member) && rootOf(member) === root)]);
 }
 const hiddenOrbitIds = prepared.hiddenOrbitIds;
 const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
