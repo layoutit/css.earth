@@ -9,6 +9,7 @@ import type { QualificationAction } from '../qualification-routes.mts';
 import { jsonValue, parseLimits, type DiscoverySnapshot } from './contracts.mts';
 import { discover, normalizeSnapshot, SERVICES, type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
 import { planAccess, type AcquisitionSpec } from './access.mts';
+import type { VoNetworkPolicy } from './network-policy.mts';
 
 export interface VoInputs {
   readonly records: readonly { readonly observation: DiscoveredObservation; readonly snapshot: DiscoverySnapshot; readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }[];
@@ -18,7 +19,7 @@ export interface VoProductCandidate {
   readonly acquisitionKey: string; readonly observation: DiscoveredObservation; readonly satisfaction: RequestSatisfaction;
   readonly product?: QualifiedObservation; readonly action?: QualificationAction; readonly limitations: readonly string[];
 }
-export async function loadVoInputs(root: string, request: DiscoveryRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string, discoverer: typeof discover = discover): Promise<VoInputs> {
+export async function loadVoInputs(root: string, request: DiscoveryRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string, discoverer: typeof discover = discover, policy: VoNetworkPolicy = {}): Promise<VoInputs> {
   const identities = catalogue.map(t => ({ id: t.id, names: [t.name, ...t.aliases], classification: t.archiveClass, classificationSource: t.classificationSource }));
   const target = identities.find(t => t.id === request.target);
   if (!target) return { records: [], services: [] };
@@ -36,8 +37,9 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
       if (selectedObservation !== undefined && observation.key !== selectedObservation) { records.push({ observation, snapshot, products: [], issues: ['Access descriptions were not refreshed because get selected a different observation.'] }); continue; }
       const plan = await planAccess(root, observation, snapshot, request, async (url, parameters) => {
         if (++metadataRequests > limits.metadataRequests) throw new Error('The query-wide access-description request limit was reached.');
-        return (await astroquery({ operation: 'vo-links', url, parameters, directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes })).vo!;
-      }).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
+        return (await astroquery({ operation: 'vo-links', url, parameters, directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
+          allowedPrivateHosts: policy.allowedPrivateHosts })).vo!;
+      }, policy).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
       records.push({ observation, snapshot, ...plan });
     }
   }
@@ -52,12 +54,13 @@ export function voCandidates(request: CapabilityRequest, inputs: VoInputs | unde
       ...(observation.startIso ? { startIso: observation.startIso } : {}), ...(observation.endIso ? { endIso: observation.endIso } : {}) };
     const satisfaction = assessRequest(request, product?.facts ?? advertised);
     const complete = request.time && request.kind && (request.angularResolutionArcsec !== undefined || request.surfaceResolutionKm !== undefined || request.resolutionElements !== undefined);
-    const refused = !complete || satisfaction.status === 'refused' || observation.target.status !== 'confirmed' && observation.target.status !== 'in-field' || request.result !== 'telescope-product';
+    const refused = spec.decoder !== 'fits-raster' || !complete || satisfaction.status === 'refused' || observation.target.status !== 'confirmed' && observation.target.status !== 'in-field' || request.result !== 'telescope-product';
     const action: QualificationAction = { kind: 'qualify-observation', observation: observation.key, program: spec.key,
       configuration: { kind: 'archive-acquisition', key: spec.key, request }, command: 'pnpm', arguments: ['--silent','telescope:qualify','--target',request.target,
         '--telescope',observation.service,'--mode',`native-${spec.kind}`,'--observation',observation.key,'--acquisition',spec.key,'--request',JSON.stringify(request)] };
     return { acquisitionKey: spec.key, observation, satisfaction, ...(product ? { product } : {}), ...(!product && !refused ? { action } : {}),
       limitations: ['Archive coverage is advertised metadata; acquisition does not establish local recalibration or a body map.',
+        ...spec.decoder !== 'fits-raster' ? [`Archive ${spec.kind} has no native qualification route.`] : [],
         ...observation.target.status === 'in-field' ? [observation.target.reason] : [], ...entry.issues] };
   }));
 }

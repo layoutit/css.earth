@@ -33,18 +33,18 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     const snapshot = parseSnapshot({ schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model, request, query: 'captured fixture', scope: 'fixture replay', sampleLimit: 1, response, completeness: 'bounded-sample' });
     const normalized = normalizeSnapshot(snapshot, profile, target, [target])[0]!;
     const observation = { ...normalized, access: { url: `http://127.0.0.1:${address.port}/science.zip`, mime: 'application/zip', estimatedKilobytes: 291 } };
-    const plan = await planAccess(root, observation, snapshot, request); assert.equal(plan.products.length, 1);
+    const plan = await planAccess(root, observation, snapshot, request, undefined, { allowedPrivateHosts: ['127.0.0.1'] }); assert.equal(plan.products.length, 1);
     let available = true;
     const load = async (): Promise<QueryInputs> => ({ ledgers: [], capabilities: [], targetCatalogue: [{ id: target.id, name: 'Betelgeuse', aliases: [] }], targetAssociations: [], bodyMaps: [],
       qualifiedProducts: await loadQualifiedObservations(root, target.id), vo: { services: [], records: available ? [{ observation, snapshot, ...plan }] : [] } });
     const api: SessionServices = { load, loadRequest: load, qualify: async (_root, q) => {
       assert.equal(q.configuration.kind, 'archive-acquisition');
-      return qualifyVoProduct(root, plan.products[0]!);
+      return qualifyVoProduct(root, plan.products[0]!, { allowedPrivateHosts: ['127.0.0.1'] });
     } };
     const directory = resolve(root, 'delivery'), saved = await saveSession(root, args, directory, api);
     assert.equal(saved.choices.length, 1); assert.equal(saved.choices[0]!.state, 'qualify');
     const result = await getSession(root, directory, 1, () => {}, api), data = await delivery(result.resultPath);
-    assert.equal(data.record.schema, 'cssearth-telescope-delivery@2'); assert.equal(data.context.kind, 'scientific-request'); assert.equal(data.record.observation, observation.key);
+    assert.equal(data.record.schema, 'cssearth-telescope-delivery@3'); assert.equal(data.context.kind, 'scientific-request'); assert.equal(data.record.observation, observation.key);
     assert.equal(data.producing.evidence[0]!.kind, 'archive-retrieval-origin');
     assert.ok(data.files.some(f => f.path.endsWith('/acquisition.json'))); assert.ok(data.files.some(f => f.path.endsWith('.xml')));
     assert.ok(data.files.some(f => f.path.endsWith('/archive.zip'))); assert.ok(data.files.some(f => f.path.endsWith('/members/labels/product.lbl')));
@@ -60,10 +60,10 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     assert.equal(replay.replay, 'pinned-local-artifact');
     await assert.rejects(getSession(root, directory, 1, () => {}, api), /no longer available/u);
     await appendFile(resolve(root, 'output/telescopes/vo/acquired', plan.products[0]!.key, 'science.fits'), 'changed');
-    await assert.rejects(qualifyVoProduct(root, plan.products[0]!), /stale|changed/u);
+    await assert.rejects(qualifyVoProduct(root, plan.products[0]!, { allowedPrivateHosts: ['127.0.0.1'] }), /stale|changed/u);
     const metadata = data.files.find(f => f.path.endsWith('.xml'))!;
     await appendFile(resolve(data.directory, metadata.path), '\nchanged');
-    await assert.rejects(delivery(result.resultPath), /size mismatch/u);
+    await assert.rejects(delivery(result.resultPath), /content pin mismatch/u);
   } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(root, { recursive: true, force: true }); }
 });
 
@@ -92,7 +92,7 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     const planFor = async (request: Parameters<typeof planAccess>[3]) => {
       const key = JSON.stringify(request), existing = plans.get(key);
       if (existing) return existing;
-      const plan = await planAccess(root, observation, { ...snapshot, request: jsonValue(request) }, request, async () => localLinks);
+      const plan = await planAccess(root, observation, { ...snapshot, request: jsonValue(request) }, request, async () => localLinks, { allowedPrivateHosts: ['127.0.0.1'] });
       assert.equal(plan.products.length, 1, plan.issues.join('\n')); plans.set(key, plan); return plan;
     };
     const load = async (_root: string, request: ReturnType<typeof sessionRequest>): Promise<QueryInputs> => {
@@ -107,7 +107,7 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
       assert.ok(request.wavelengthMicrometres, 'This scientific subset fixture retains its requested wavelengths.');
       const spec = (await planFor({ ...request, wavelengthMicrometres: request.wavelengthMicrometres })).products.find(product => product.key === configuration.key);
       if (!spec) throw new Error('Saved subset acquisition was not rediscovered.');
-      return qualifyVoProduct(root, spec);
+      return qualifyVoProduct(root, spec, { allowedPrivateHosts: ['127.0.0.1'] });
     } };
     const firstDirectory = resolve(root, 'first'), secondDirectory = resolve(root, 'second');
     const firstSaved = await saveSession(root, firstArgs, firstDirectory, api), secondSaved = await saveSession(root, secondArgs, secondDirectory, api);

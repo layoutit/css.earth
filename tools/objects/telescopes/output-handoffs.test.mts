@@ -7,7 +7,8 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
-import { fileSize,writeProductRecord } from '../product-record.mts';
+import { writeProductRecord } from '../product-record.mts';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { exportOutput,listOutputs } from './outputs.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
 import { parseCli } from './cli.mts';
@@ -24,7 +25,7 @@ test('PDS arrays retain integer flags, special constants and associated uncertai
     const decoded=await pdsPackages({operation:'decode-product',labelPath:label,arrayDirectory:resolve(root,'arrays')});
     assert.equal(decoded.decoded?.structures.find(s=>s.name==='QUALITY_MAP_IMAGE')?.dtype,'uint8');
     await writeProductRecord(record,{telescope:'Fixture',stage:'fixture',inputs:[],parameters:{observation:{decoder:'pds-product',labelPath:'label.xml'}},software:[]},[{path:'data.bin',file:data},{path:'label.xml',file:label}]);
-    const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@2',product:'data.bin',record:'input.json',receipt:'input.json',facts:{target:'fixture',verified:true},context,files:await Promise.all(['data.bin','label.xml','input.json'].map(async path=>({path,...await fileSize(resolve(root,path))})))}));
+    const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'data.bin',record:'input.json',receipt:'input.json',facts:{target:'fixture',verified:true},context,files:await Promise.all(['data.bin','label.xml','input.json'].map(async path=>({path,...await sha256File(resolve(root,path))})))}));
     const choices=await listOutputs(result),image=choices.outputs.find(o=>o.kind==='image'&&o.available);assert.ok(image);assert.deepEqual(choices.sourceContext,context);assert.equal(image.unit?.value,'W m-2');assert.ok(image.limitations?.length);
     const output=await exportOutput(result,{kind:'image',hdu:0,structure:'IMAGE'},resolve(root,'export'));
     const tc=await astroqueryToolchain();
@@ -37,8 +38,7 @@ with fits.open(sys.argv[1]) as f:
  assert u.Unit(f[0].header['BUNIT']).is_equivalent(u.W/u.m**2)
 a=np.load(sys.argv[2]);assert a.dtype==np.dtype('uint8');np.testing.assert_equal(a,[[0,2],[0,0]])`,output.data,resolve(root,'arrays/native-2.npy')],{env:{...process.env,...tc.env}});
     const evidence=JSON.parse(await readFile(output.receipt,'utf8'));assert.deepEqual(evidence.parameters.sourceContext,context);assert.deepEqual(output.sourceContext,context);
-    // Deliveries name files by path and size (no hashes, PR #531), so a changed file is caught by its size.
-    await writeFile(data,Buffer.alloc(35));await assert.rejects(listOutputs(result),/size mismatch/);
+    await writeFile(data,Buffer.alloc(36));await assert.rejects(listOutputs(result),/content pin mismatch/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

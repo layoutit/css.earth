@@ -2,8 +2,9 @@
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
-import { fileSize, readProductRecord, type ProductRecord } from '../product-record.mts';
+import { readProductRecord, type ProductRecord } from '../product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection,
   type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';
 import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
@@ -139,7 +140,7 @@ function readSavedChoice(value: unknown, pick: number) {
   return { args, ...(choice.acquisitionKey === undefined ? {} : { selectedObservation: requireString(choice.observation) }), target: requireString(session.target, 'saved target'), key: choiceKey({ ...(choice.acquisitionKey === undefined ? {} : { acquisitionKey: requireString(choice.acquisitionKey) }), telescope: requireString(choice.telescope), mode: requireString(choice.mode),
     observation: requireString(choice.observation), program: requireString(choice.program) }) };
 }
-interface FilePin { readonly bytes: number }
+interface FilePin { readonly bytes: number; readonly sha256: string }
 interface ExportFile extends FilePin { readonly path: string; readonly original: string }
 interface Artifact {
   readonly file: string; readonly receipt: string; readonly record: string; readonly outputRoot: string;
@@ -165,23 +166,28 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
   const record = await readProductRecord(artifact.record);
   if (!record) throw new Error('Qualification product record is missing.');
   const expected = new Map<string, FilePin>();
-  for (const output of record.outputs) expected.set(resolve(artifact.outputRoot, output.path), output);
+  for (const output of record.outputs) {
+    if (!output.sha256) throw new Error('The producing record has no content digest. Requalify this observation before delivery.');
+    expected.set(resolve(artifact.outputRoot, output.path), { bytes: output.bytes, sha256: output.sha256 });
+  }
   if (!expected.has(artifact.file)) throw new Error('The chosen file is not a qualified output.');
   for (const evidence of record.evidence) {
     const path = resolve(artifact.outputRoot, evidence.receipt);
-    expected.set(path, await fileSize(path));
+    expected.set(path, await sha256File(path));
   }
-  for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await fileSize(path));
+  for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await sha256File(path));
   const files: ExportFile[] = [], realRoot = await realpath(root);
   for (const [file, pin] of expected) {
     relativeFile(realRoot, await realpath(file));
+    const source = await sha256File(file);
+    if (source.bytes !== pin.bytes || source.sha256 !== pin.sha256) throw new Error(`Artifact changed or did not match its qualification: ${file}`);
     const original = relativeFile(root, file), path = `files/${original}`, target = resolve(destination, path);
     await mkdir(dirname(target), { recursive: true });
     progress(`${reuse ? 'Verifying' : 'Copying'} ${basename(file)} (${(pin.bytes / 1e6).toFixed(1)} MB)`);
     if (!reuse) await copyFile(file, target);
     relativeFile(await realpath(destination), await realpath(target));
-    const copied = await fileSize(target);
-    if (copied.bytes !== pin.bytes) throw new Error(`Artifact changed or did not match its qualification: ${original}`);
+    const copied = await sha256File(target);
+    if (copied.bytes !== pin.bytes || copied.sha256 !== pin.sha256) throw new Error(`Artifact changed or did not match its qualification: ${original}`);
     files.push({ path, original, ...copied });
   }
   return { files, record };
@@ -217,12 +223,12 @@ async function getScientificSession(root: string, directory: string, pick: numbe
     const previous = await readFile(resultPath, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
     if (previous !== undefined) {
       const old = requireRecord(JSON.parse(previous), 'previous result');
-      if (!['cssearth-telescope-delivery@1', 'cssearth-telescope-delivery@2'].includes(String(old.schema)) || old.choice !== saved.key || JSON.stringify(old.schema === 'cssearth-telescope-delivery@2' ? requireRecord(old.context).request : old.request) !== JSON.stringify(answer.request))
+      if (old.schema !== 'cssearth-telescope-delivery@3' || old.choice !== saved.key || JSON.stringify(requireRecord(old.context).request) !== JSON.stringify(answer.request))
         throw new Error('Saved result identity differs. Preserve it and use a new query directory.');
       const { files, record } = await exportArtifact(root, dirname(resultPath), artifact, progress, true);
       const product = `files/${relativeFile(root, artifact.file)}`;
       const context: DeliveryContext = { kind: 'scientific-request', request: answer.request, assessment: satisfaction };
-      const result = { schema: 'cssearth-telescope-delivery@2', choice: saved.key, context, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
         evidence: record.evidence, files, reused: true };
       const temporary = `${resultPath}.${randomUUID()}.partial`;
@@ -236,7 +242,7 @@ async function getScientificSession(root: string, directory: string, pick: numbe
       const { files, record } = await exportArtifact(root, staging, artifact, progress);
       const product = `files/${relativeFile(root, artifact.file)}`;
       const context: DeliveryContext = { kind: 'scientific-request', request: answer.request, assessment: satisfaction };
-      const result = { schema: 'cssearth-telescope-delivery@2', choice: saved.key, context, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
         evidence: record.evidence, files, reused: false };
       await writeFile(resolve(staging, 'result.json'), `${JSON.stringify(result, null, 2)}\n`);
@@ -313,14 +319,14 @@ async function getExplorationSession(root: string, directory: string, pick: numb
     const previous = await readFile(resultPath, 'utf8').catch((error: unknown) => hasErrorCode(error, 'ENOENT') ? undefined : Promise.reject(error));
     const write = async (destination: string, reuse: boolean) => {
       const { files, record } = await exportArtifact(root, destination, artifact, progress, reuse), product = `files/${relativeFile(root, artifact.file)}`;
-      const result = { schema: 'cssearth-telescope-delivery@2', choice: saved.key, context, observation: choice.observation, product,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, observation: choice.observation, product,
         outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts, evidence: record.evidence, files, reused: reuse };
       return { result, product };
     };
     if (previous !== undefined) {
       const old = requireRecord(JSON.parse(previous), 'previous result');
-      if (old.schema !== 'cssearth-telescope-delivery@2' || old.choice !== saved.key) throw new Error('Saved result identity differs. Preserve it and use a new exploration directory.');
+      if (old.schema !== 'cssearth-telescope-delivery@3' || old.choice !== saved.key) throw new Error('Saved result identity differs or predates content pins. Preserve it and use a new exploration directory.');
       const { result, product } = await write(dirname(resultPath), true), temporary = `${resultPath}.${randomUUID()}.partial`;
       try { await writeFile(temporary, `${JSON.stringify(result, null, 2)}\n`); await rename(temporary, resultPath); }
       finally { await rm(temporary, { force: true }); }

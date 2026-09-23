@@ -6,7 +6,7 @@ import { requireArray,requireRecord,requireString,requireFiniteNumber } from '..
 import { fileSize,parseProductRecord,sameRun,type ProductInput } from '../product-record.mts';
 import { parseBodyMapProduct } from '../body-map-product.mts';
 import { assertBodyMapPlanes,bodyMapProductRecord,formatProductRecord } from '../body-map-publication.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { projectWithPlanetMapper } from '../astronomy-packages/projection.mts';
 import { canonical } from './vo/contracts.mts';
@@ -44,7 +44,7 @@ export function parseGeometry(raw:unknown,root:string){
   if(method==='disc'&&!evidencePin)throw new TypeError('Disc registration requires an evidence file');
   return {observer:requireString(g.observer),kernels,registration:{method,explanation,...(parameters?{parameters}: {}),...(evidencePin?{evidence:evidencePin}:{})},width,height,maximumEmissionDegrees};
 }
-async function checkPins(inputs:readonly ProductInput[]){for(const input of inputs){const actual=await fileSize(input.identity);if(actual.bytes!==input.bytes)throw new Error(`Input size mismatch: ${input.identity}`);}}
+async function checkPins(inputs:readonly ProductInput[]){for(const input of inputs){const actual=await (input.sha256?sha256File(input.identity):fileSize(input.identity));if(actual.bytes!==input.bytes||input.sha256&&'sha256'in actual&&actual.sha256!==input.sha256)throw new Error(`Input content pin mismatch: ${input.identity}`);}}
 
 export async function validateProjectionSource(source:Awaited<ReturnType<typeof verifiedProduct>>){
   if(source.record.stage!=='telescope-output'||!source.record.outputs.some(o=>o.path==='image.fits'))throw new TypeError('Body-map export requires a telescope image output.product.json');
@@ -54,9 +54,9 @@ export async function validateProjectionSource(source:Awaited<ReturnType<typeof 
   const deliveryPins=source.record.inputs.filter(i=>i.role==='delivery');
   if(deliveryPins.length!==1)throw new Error('Measurement must name exactly one source delivery');
   const deliveryPin=deliveryPins[0]!,d=await delivery(deliveryPin.identity);
-  if(d.pin.bytes!==deliveryPin.bytes)throw new Error('Measurement source delivery changed');
+  if(d.pin.bytes!==deliveryPin.bytes||deliveryPin.sha256&&d.pin.sha256!==deliveryPin.sha256)throw new Error('Measurement source delivery changed');
   const context=sourceContext(source.record.parameters);if(canonical(context)!==canonical(d.context))throw new Error('Measurement source context differs from its delivery');
-  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes})),...source.record.inputs];
+  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes,...(o.sha256?{sha256:o.sha256}:{})})),...source.record.inputs];
   await checkPins(inputs);
   return {source,d,context,selection,definition,metadata,measurement,inputs};
 }
