@@ -146,9 +146,12 @@ test('a saved number never silently follows reordered or removed observations', 
 
 test('exploration is immutable, revalidates its exact choice, and delivers with not-requested context', async () => {
   const f = await fixture(); try {
-    const api: SessionServices = { ...f.api, explore: async (_root, request) => explorationAnswer(request, await f.load()) };
+    const curatedImagery = { service: 'WWT core catalogs', state: 'indexed', revision: '2c7d96f14bae041501943b9281f71a84a5310f6e',
+      total: 0, matches: [], limit: 25, scope: 'curated display imagery; title or reference-frame match only' } as const;
+    const api: SessionServices = { ...f.api, explore: async (_root, request) => explorationAnswer(request, { ...await f.load(), curatedImagery }) };
     const out = resolve(f.root, 'explore'), saved = await saveExploration(f.root, ['test-body'], out, api);
     assert.equal(saved.choices.length, 1); assert.equal(saved.choices[0]!.state, 'qualify');
+    assert.deepEqual(JSON.parse(await readFile(resolve(out, 'explore.json'), 'utf8')).answer.curatedImagery, curatedImagery);
     const altered = { ...saved, choices: saved.choices.map(choice => ({ ...choice, configuration: { kind: 'untrusted' } })) };
     await writeFile(resolve(out, 'explore.json'), JSON.stringify(altered));
     const result = await getSession(f.root, out, 1, () => {}, api);
