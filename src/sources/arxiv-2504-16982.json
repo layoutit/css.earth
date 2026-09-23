@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-2504-16982",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Thermal Emission and Confirmation of the Frigid White Dwarf Exoplanet WD 1856+534 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2504.16982"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2504.16982",
+      "label": "Limbach et al. (2025)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2504.16982",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract; Table 1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. A. Limbach, A. Vanderburg, R. J. MacDonald, K. B. Stevenson et al.",
+      "scope": "citation",
+      "evidence": "Published author list"
+    }
+  ],
+  "publicationDate": "2025-04-23"
+}

@@ -2,7 +2,7 @@
 import '../navigation-tree.css';
 import TreeItem from './TreeItem.astro';
 import { atlasTree, readObjects } from '../objects.mts';
-import { navigationTreeArtifact } from '../navigation-tree-data.mts';
+import { NAVIGATION_TREE_URL } from '../navigation-tree-data.mts';
 import { applicationTreeDestination } from '../../../site/navigation/navigation-tree-destination.mts';
 
 interface Props { current: string; bounded?: boolean; eager?: boolean }
@@ -12,10 +12,9 @@ const { current, bounded = false, eager = false } = Astro.props;
 // render this component directly; neither keeps a parallel navigation tree.
 // They differ only in where a row leads, which the tree resolves per site.
 const tree = atlasTree(readObjects(), bounded ? applicationTreeDestination : undefined);
-const artifact = bounded ? navigationTreeArtifact(tree) : null;
 ---
 <div class="atlas-tree-card" data-object-navigation-tree data-atlas-current={current}
-  data-atlas-tree-src={artifact?.url} data-atlas-tree-sha256={artifact?.sha256} data-atlas-tree-bytes={artifact?.bytes}>
+  data-atlas-tree-src={bounded ? NAVIGATION_TREE_URL : undefined}>
   <ul class="atlas-tree top-level">
     {tree.map(node => <li data-atlas-item-key={node.key}><TreeItem node={node} current={current} depth={0} {bounded} {eager} assetOrigin={bounded ? '' : undefined} /></li>)}
   </ul>

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wd-1856-534",
+  "spectrum": "gaia-xp-sampled",
+  "sampledSpectrum": {
+    "source": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; BP/RP spectra: De Angeli et al. (2023), A&A 674, A2; external calibration: Montegriffo et al. (2023), A&A 674, A3",
+    "path": "photometry/gaia-dr3-xp-sampled.csv",
+    "service": "Sampled here from the continuous product, photometry/gaia-dr3-xp-continuous.csv (https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2146576589564898688&format=csv&DATA_STRUCTURE=RAW), with GaiaXPy 2.1.4's calibrate on the archive's own 336-1020 nm grid: tools/objects/observation/xp-continuous-sample.py. Gaia publishes no sampled spectrum for this source (has_xp_sampled = false in gaiadr3.gaia_source), only the coefficients.",
+    "checked": "2026-09-23",
+    "sourceId": "2146576589564898688",
+    "sampling": "343 samples from 336 to 1020 nm in 2 nm steps, flux in W m^-2 nm^-1 (the DataLink default sampling)",
+    "note": "Gaia's own low-resolution spectrum of the white dwarf, calibrated to absolute flux. Its samples at the even wavelengths from 380 to 780 nm are weighted by the CIE 1931 2-degree observer. Signal-to-noise is about 2 at 380 nm, 7 at 450 nm and 17 to 34 from 500 to 780 nm. The range in the prepared report is the colour of the spectrum moved one standard error down and up at every sample."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

@@ -73,17 +73,20 @@ describe('the body table', () => {
       // Zero represents an unpublished GM, not a measured massless body.
       if (data.gravitationalParameterKm3PerS2 === 0) continue
       // Stars range from a red supergiant a thousand times less dense than water to a K dwarf denser than it; only planets and
-      // smaller bodies take the rock-and-ice bounds. A star is at least a tenth of the Sun's radius.
+      // smaller bodies take the rock-and-ice bounds. A star is at least a tenth of the Sun's radius, unless it is a white dwarf:
+      // then its density lies between 1e4 and 1e8 g/cm^3 (WD 1856+534 is about 5e5).
+      const massKg = data.gravitationalParameterKm3PerS2 / GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2
+      const volumeKm3 = (4 / 3) * Math.PI * data.meanRadiusKm ** 3
+      const densityGramsPerCm3 = massKg / volumeKm3 / 1e12
       if (STAR_IDS.includes(id as StarId) || HOSTED_STAR_IDS.includes(id as never)) {
-        expect(data.meanRadiusKm).toBeGreaterThan(69570)
+        if (data.meanRadiusKm > 69570) continue
+        expect(densityGramsPerCm3, id).toBeGreaterThan(1e4)
+        expect(densityGramsPerCm3, id).toBeLessThan(1e8)
         continue
       }
       // Mean density between 0.1 and 8.5 g/cm^3 covers the inflated hot Jupiter WASP-76b (0.17 +/- 0.02, Ehrenreich
       // et al. 2020, Extended Data Table 1), porous Helene and Atlas through Mercury, and catches a GM or radius entered
       // in the wrong unit, which is the failure this table is most exposed to.
-      const massKg = data.gravitationalParameterKm3PerS2 / GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2
-      const volumeKm3 = (4 / 3) * Math.PI * data.meanRadiusKm ** 3
-      const densityGramsPerCm3 = massKg / volumeKm3 / 1e12
       expect(densityGramsPerCm3).toBeGreaterThan(0.1)
       expect(densityGramsPerCm3).toBeLessThan(8.5)
     }

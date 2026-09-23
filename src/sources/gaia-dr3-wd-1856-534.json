@@ -1,0 +1,35 @@
+{
+  "id": "gaia-dr3-wd-1856-534",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WD 1856+534 · Gaia DR3 source 2146576589564898688",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wd-1856-534/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
+      "scope": "The Gaia DR3 source row and BP/RP spectrum of WD 1856+534.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data terms: free use with acknowledgement",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
