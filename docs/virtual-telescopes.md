@@ -59,10 +59,12 @@ once per query, including when an archive truncates its advertised MIME type.
 
 `explore` also searches [KOA's public TAP instrument tables](https://koa.ipac.caltech.edu/UserGuide/PyKOA/TAPClients.html) for exact target-name variants and
 [Gemini's canonical JSON summary](https://archive.gemini.edu/help/api.html) for science-file metadata. These are live instrument counts and
-example identities under `services`, not numbered retrieval choices. KOA queries run serially;
+example identities under `services`. KOA also samples up to three exact public raw FITS identities per instrument. They have their own source numbers, separate from qualified observation choices. KOA queries run serially;
 Gemini responses are capped at 1 MB. A refused, truncated or partly answered archive is marked
 unavailable or overflow rather than reported as empty. Neither free-form archive object names nor
 sky overlap alone confirms a scientific target association.
+
+To retrieve a sampled Keck source, run `telescope fetch RUN/explore.json --pick N --out NEW_DIRECTORY` using its **Keck source** number. Fetch rechecks the exact public KOA row, enforces the exploration's science-byte limit during transfer, and saves the original FITS, both discovery and current metadata, source limitations and hashes in a product record. Then run `telescope outputs NEW_DIRECTORY/output.product.json` to inspect operations supported by that actual FITS file. A raw frame may have no usable image or spectrum; the route never claims target detection, calibration or fitness from an archive name. `telescope get` still selects qualified observation choices; Gemini remains metadata-only when its archive denies access. The output directory must be new.
 
 `explore` also asks the PDS Ring-Moon Systems Node's
 [OPUS search](https://opus.pds-rings.seti.org/api/) which spacecraft images exist of the body.

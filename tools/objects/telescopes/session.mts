@@ -128,7 +128,19 @@ export async function saveExploration(root: string, args: readonly string[], dir
     const answer = initial;
     const session: ExplorationSession = { schema: EXPLORATION_SCHEMA, createdAt: new Date().toISOString(), arguments: args, target: answer.target, choices: answer.choices, answer };
     const temporary = `${path}.${randomUUID()}.partial`;
-    try { await writeFile(temporary, `${JSON.stringify(session, null, 2)}\n`); await rename(temporary, path); }
+    try {
+      const pins = [...new Set(answer.services.flatMap(service => 'sources' in service ? service.sources?.map(source => source.evidence) ?? [] : []))];
+      if (pins.length) {
+        const evidenceDirectory = resolve(destination, 'keck-source-evidence');
+        await mkdir(evidenceDirectory, { recursive: true });
+        for (const pin of pins) {
+          const original = resolve(root, 'output/telescopes/archive-leads', `${pin}.json`);
+          if ((await sha256File(original)).sha256 !== pin) throw new Error(`KOA discovery evidence changed before exploration was saved: ${pin}`);
+          await copyFile(original, resolve(evidenceDirectory, `${pin}.json`));
+        }
+      }
+      await writeFile(temporary, `${JSON.stringify(session, null, 2)}\n`); await rename(temporary, path);
+    }
     finally { await rm(temporary, { force: true }); }
     return { ...session, directory: destination };
   });
