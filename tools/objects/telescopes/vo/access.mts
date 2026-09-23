@@ -10,6 +10,7 @@ import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
 import { acquisitionKey, canonical, digest, jsonValue, parseLimits, productKey, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource, type TransferLimits } from './contracts.mts';
 import type { DiscoveredObservation, DiscoveryRequest } from './discovery.mts';
+import { voUrl, type VoNetworkPolicy } from './network-policy.mts';
 
 export interface AcquisitionSpec {
   readonly schema: 'cssearth-vo-acquisition@1'; readonly key: string; readonly productKey: string;
@@ -25,7 +26,7 @@ export interface AccessPlan { readonly products: readonly AcquisitionSpec[]; rea
 const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
 function supportedKind(value: string | null): value is AcquisitionSpec['kind'] { return value !== null && (PRODUCT_KINDS as readonly string[]).includes(value); }
 async function implementation(): Promise<string> {
-  return digest(await Promise.all(['./access.mts', './content.mts', './package.mts', './contracts.mts', './discovery.mts', '../../astronomy-packages/client.mts', '../../astronomy-packages/requirements.lock']
+  return digest(await Promise.all(['./access.mts', './content.mts', './package.mts', './contracts.mts', './discovery.mts', './network-policy.mts', '../../astronomy-packages/client.mts', '../../astronomy-packages/requirements.lock']
     .map(path => readFile(new URL(path, import.meta.url), 'utf8'))));
 }
 export function mediaType(value: string | null): { type: string; parameters: Readonly<Record<string, string>> } | null {
@@ -43,7 +44,6 @@ export function mediaType(value: string | null): { type: string; parameters: Rea
 const datalink = (mime: string | null) => { const m = mediaType(mime); return m?.type === 'application/x-votable+xml' && m.parameters.content === 'datalink'; };
 const fits = (mime: string | null) => ['application/fits', 'image/fits'].includes(mediaType(mime)?.type ?? '');
 const standardId = (resource: Resource) => resource.parameters.find(p => p.name === 'standardID')?.value;
-const url = (value: string, base: string) => { const u = new URL(value, base); if (!['https:', 'http:'].includes(u.protocol) || u.username || u.password) throw new TypeError('Unsupported VO access URL.'); return u.href; };
 const SODA_SYNC = 'ivo://ivoa.net/std/SODA#sync-1.0';
 const DATALINK_LINKS = 'ivo://ivoa.net/std/DataLink#links-1.0';
 
@@ -96,7 +96,7 @@ export function sodaParameters(descriptor: Resource, request: DiscoveryRequest, 
 /** `parameters` are PyVO's descriptor-bound DataLink request parameters, never URL text. */
 export type MetadataLoader = (url: string, parameters?: Readonly<Record<string, Json>>) => Promise<MetadataResponse>;
 export async function planAccess(root: string, observation: DiscoveredObservation, snapshot: DiscoverySnapshot, request: DiscoveryRequest,
-  load?: MetadataLoader): Promise<AccessPlan> {
+  load?: MetadataLoader, policy: VoNetworkPolicy = {}): Promise<AccessPlan> {
   const limits = parseLimits(request.transferLimits), products: AcquisitionSpec[] = [], issues: string[] = [], visited = new Set<string>();
   const implementationDigest = await implementation();
   const evidenceDirectory = resolve(root, 'output/telescopes/vo/metadata');
@@ -110,7 +110,8 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
     return { products, issues: [`No native profile route for advertised product kind ${observation.kind}.`] };
   const kind = observation.kind;
   const loader = load ?? (async (address: string, parameters?: Readonly<Record<string, Json>>) => (await astroquery({ operation: 'vo-links', url: address,
-    ...(parameters === undefined ? {} : { parameters }), directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes })).vo!);
+    ...(parameters === undefined ? {} : { parameters }), directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
+    allowedPrivateHosts: policy.allowedPrivateHosts })).vo!);
   let calls = 0;
   function add(operation: AcquisitionSpec['operation'], binding: Json, metadata: readonly Pin[], descriptor: Resource | null = null, serviceRow: number | null = null, serviceMetadata: string | null = null, format: AcquisitionSpec['format'] = 'fits') {
     const { snapshot: _snapshot, issues: _issues, ...observationFacts } = observation;
@@ -133,7 +134,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
     if (++calls > limits.metadataRequests) { issues.push('DataLink request bound reached.'); return; }
     visited.add(identity);
     let response: MetadataResponse;
-    try { response = await loader(address, parameters); } catch (error) { issues.push(`DataLink transport or parsing failed: ${String(error)}`); return; }
+    try { voUrl(address, address, policy); response = await loader(address, parameters); } catch (error) { issues.push(`DataLink transport or parsing failed: ${String(error)}`); return; }
     const closure = [...pins, response.raw];
     if (response.queryStatus !== 'OK') { issues.push(`DataLink response is ${response.queryStatus}.`); return; }
     for (let i = 0; i < response.rows.length; i++) {
@@ -144,7 +145,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
         const binding = response.bindings.find(b => b.row === i && b.serviceId === row.service_def), descriptor = response.resources.find(r => r.id === row.service_def);
         if (!binding || binding.error || !binding.url || !descriptor) { issues.push('DataLink service descriptor could not be resolved.'); continue; }
         try {
-          const address = url(binding.url, response.effectiveUrl), standard = standardId(descriptor);
+          const address = voUrl(binding.url, response.effectiveUrl, policy), standard = standardId(descriptor);
           if (standard === DATALINK_LINKS) {
             await links(address, binding.parameters, depth + 1, closure);
           } else if (standard === SODA_SYNC) {
@@ -156,13 +157,18 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
         continue;
       }
       if (typeof row.access_url !== 'string' || !row.access_url) { issues.push('DataLink row has no access URL.'); continue; }
-      const next = url(row.access_url, response.effectiveUrl), mime = typeof row.content_type === 'string' ? row.content_type : null;
-      if (datalink(mime)) await links(next, {}, depth + 1, closure);
-      else direct(next, mime, row.content_length, jsonValue({ row, url: next }), closure);
+      try {
+        const next = voUrl(row.access_url, response.effectiveUrl, policy), mime = typeof row.content_type === 'string' ? row.content_type : null;
+        if (datalink(mime)) await links(next, {}, depth + 1, closure);
+        else direct(next, mime, row.content_length, jsonValue({ row, url: next }), closure);
+      } catch (error) { issues.push(String(error)); }
     }
   }
   if (!observation.access.url) return { products, issues: ['No archive access URL.'] };
-  const address = url(observation.access.url, snapshot.response.effectiveUrl), pins = [snapshot.response.raw, snapshotPin];
+  let address: string;
+  try { address = voUrl(observation.access.url, snapshot.response.effectiveUrl, policy); }
+  catch (error) { return { products, issues: [String(error)] }; }
+  const pins = [snapshot.response.raw, snapshotPin];
   const advertised = observation.access.mime;
   if (datalink(advertised)) await links(address, {}, 0, pins);
   else if (advertised !== null && mediaType(advertised) === null) {
@@ -176,7 +182,8 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
 }
 
 /** Acquisition records origin/integrity only. Scientific metadata qualification is a later stage. */
-export async function acquireVoProduct(root: string, spec: AcquisitionSpec) {
+export async function acquireVoProduct(root: string, spec: AcquisitionSpec, policy: VoNetworkPolicy = {}) {
+  voUrl(spec.operation.url, spec.operation.url, policy);
   if (spec.implementation !== await implementation() || spec.key !== acquisitionKey(spec.productKey, jsonValue({ operation: spec.operation, request: spec.request }), jsonValue(spec.descriptor), spec.limits, spec.implementation))
     throw new Error('VO acquisition identity or implementation changed; query again.');
   for (const pin of spec.metadata) {
@@ -215,7 +222,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec) {
     if (spec.operation.kind === 'soda-sync' && !descriptorPin) throw new Error('Subset descriptor is outside the metadata evidence closure.');
     const receivedName = spec.format === 'fits' ? 'science.fits' : `archive.${spec.format}`;
     const transferred = (await astroquery({ operation: 'vo-download', url: spec.operation.url, destination: resolve(staging, receivedName), format: spec.format,
-      byteLimit: spec.limits.scienceBytes, parameters: spec.operation.parameters,
+      byteLimit: spec.limits.scienceBytes, parameters: spec.operation.parameters, allowedPrivateHosts: policy.allowedPrivateHosts,
       ...(spec.operation.kind === 'soda-sync' ? { descriptor: { file: descriptorPin!, row: spec.serviceRow!, serviceId: spec.descriptor!.id! } } : {}) })).transfer!;
     const unpacked = spec.format === 'fits' ? undefined : await extractVoPackage(resolve(staging, receivedName), staging, { expandedBytes: spec.limits.expandedBytes, members: spec.limits.packageMembers });
     if (unpacked) {

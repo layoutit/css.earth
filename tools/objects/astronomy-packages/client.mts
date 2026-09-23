@@ -14,10 +14,10 @@ export class VoAccessError extends Error {
 
 export type HorizonsEpochs = readonly number[] | { readonly start: string; readonly stop: string; readonly step: string };
 export type AstroqueryRequest =
-  | { readonly operation: 'vo-download'; readonly url: string; readonly destination: string; readonly byteLimit: number; readonly format?: 'fits' | 'zip' | 'tar'; readonly parameters: Readonly<Record<string, Json>>;
+  | { readonly operation: 'vo-download'; readonly url: string; readonly destination: string; readonly byteLimit: number; readonly format?: 'fits' | 'zip' | 'tar'; readonly parameters: Readonly<Record<string, Json>>; readonly allowedPrivateHosts?: readonly string[];
       readonly descriptor?: { readonly file: Pin; readonly row: number; readonly serviceId: string } }
   | { readonly operation: 'vo-tap'; readonly service: string; readonly query: string; readonly maxrec: number; readonly directory: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
-  | { readonly operation: 'vo-links'; readonly url: string; readonly parameters?: Readonly<Record<string, Json>>; readonly directory: string; readonly byteLimit: number }
+  | { readonly operation: 'vo-links'; readonly url: string; readonly parameters?: Readonly<Record<string, Json>>; readonly directory: string; readonly byteLimit: number; readonly allowedPrivateHosts?: readonly string[] }
   | { readonly operation: 'vo-parse'; readonly file: string; readonly url: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
   | { readonly operation: 'mast-service'; readonly service: string; readonly parameters: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
   | { readonly operation: 'mast-download'; readonly uri: string; readonly destination: string }
@@ -49,6 +49,46 @@ from astropy.coordinates import SkyCoord
 from astropy import units as u
 
 request = json.load(sys.stdin)
+
+# Check every request, including each redirect. Archive rows and DataLink descriptors
+# may name arbitrary URLs; a DNS name is checked against all of its resolved addresses.
+def check_vo_url(url):
+    import ipaddress, socket
+    from urllib.parse import urlsplit
+    parsed = urlsplit(url)
+    if parsed.scheme not in ('http', 'https') or not parsed.hostname or parsed.username or parsed.password:
+        raise ValueError('Unsupported VO access URL')
+    host = parsed.hostname.lower().rstrip('.')
+    allowed = request.get('allowedPrivateHosts') or []
+    if host in allowed:
+        return
+    if host == 'localhost' or host.endswith('.localhost'):
+        raise ValueError('VO access URL targets a non-public address')
+    addresses = socket.getaddrinfo(host, parsed.port or (443 if parsed.scheme == 'https' else 80), type=socket.SOCK_STREAM)
+    if not addresses or any(not ipaddress.ip_address(item[4][0]).is_global for item in addresses):
+        raise ValueError('VO access URL targets a non-public address')
+
+class SafeVoSession:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.trust_env = False  # Archive URLs must connect directly, never through an ambient proxy.
+
+    def send(self, prepared_request, **kwargs):
+        import ipaddress, socket
+        check_vo_url(prepared_request.url)
+        original = socket.getaddrinfo
+        allowed = request.get('allowedPrivateHosts') or []
+        def guarded_getaddrinfo(host, *args, **options):
+            answers = original(host, *args, **options)
+            if str(host).lower().rstrip('.') not in allowed and (not answers or any(
+                    not ipaddress.ip_address(item[4][0]).is_global for item in answers)):
+                raise ValueError('VO access URL targets a non-public address')
+            return answers
+        socket.getaddrinfo = guarded_getaddrinfo
+        try:
+            return super().send(prepared_request, **kwargs)
+        finally:
+            socket.getaddrinfo = original
 
 def value(item):
     if item is None or item is np.ma.masked or np.ma.is_masked(item):
@@ -84,7 +124,7 @@ if operation == 'vo-download':
     from astropy.io import fits
     from pyvo.dal.adhoc import DatalinkResults, SodaQuery
     from pyvo.dal.query import DALQuery
-    class TransferSession(requests.Session):
+    class TransferSession(SafeVoSession, requests.Session):
         def request(self, method, url, **kwargs):
             kwargs.setdefault('timeout', (15, 45))
             return super().request(method, url, **kwargs)
@@ -168,7 +208,7 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
     from pyvo.dal.tap import TAPResults
     import requests
 
-    class BoundedSession(requests.Session):
+    class BoundedSession(SafeVoSession, requests.Session):
         def request(self, method, url, **kwargs):
             kwargs.setdefault('timeout', (15, 45))
             return super().request(method, url, **kwargs)

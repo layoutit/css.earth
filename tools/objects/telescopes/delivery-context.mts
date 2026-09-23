@@ -130,7 +130,7 @@ export function parseDeliveryContext(value: unknown): DeliveryContext {
 /** Existing delivery@1 and derived product fields normalize here; new writers use context directly. */
 export function deliveryContext(recordValue: unknown): DeliveryContext {
   const record = requireRecord(recordValue, 'telescope delivery');
-  if (record.schema === 'cssearth-telescope-delivery@2') return parseDeliveryContext(record.context);
+  if (record.schema === 'cssearth-telescope-delivery@3' || record.schema === 'cssearth-telescope-delivery@2') return parseDeliveryContext(record.context);
   if (record.schema === 'cssearth-telescope-delivery@1') return parseDeliveryContext({ kind: 'scientific-request', request: record.request, assessment: record.satisfaction });
   throw new TypeError(`Unsupported telescope delivery schema ${String(record.schema)}.`);
 }

@@ -155,6 +155,11 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     }
     for (const spec of entry.products) {
       const ready = (inputs.qualifiedProducts ?? []).find(product => product.target === target && product.program === spec.key && product.observation === observation.key);
+      if (spec.decoder !== 'fits-raster' && !ready) {
+        unsupported.push({ scope: 'observation', code: 'unsupported-observation', identity: `${identity} / ${spec.key}`,
+          reason: `Archive ${spec.kind} is discoverable, but no native qualification route is available for this product.` });
+        continue;
+      }
       const reference: ExplorationReference = { kind: 'vo-acquisition', acquisitionKey: spec.key, observation: observation.key, snapshot: observation.snapshot };
       choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: observation.service, mode: ready?.mode ?? `native-${spec.kind}`, observation: observation.key, program: spec.key, reference, familyEvidence: observation.familyEvidence,
         display: { instrument: observation.service, observationTime: { startIso: observation.startIso, endIso: observation.endIso }, productKind: observation.kind,

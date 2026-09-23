@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { sha256File } from '../../src/platform/sha256.mts';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { addProductEvidence, assertInputPins, evidenceFor, parseProductRecord, fileSize, productRecordPath, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductRun } from './product-record.mts';
@@ -26,6 +27,8 @@ test('an output is reused only when the same run made it and it is still that fi
   await writeProductRecord(recordPath, run(), [{ path: 'final.fits', file: image, units: 'Jy/beam' }]);
   assert.equal(await sameRun(await readProductRecord(recordPath), run(), locate), true);
   assert.equal(await sameRun(await readProductRecord(recordPath), run({ parameters: { fluxScale: 1.015, robust: 0 } }), locate), false, 'a changed parameter runs the stage again');
+  await writeFile(image, 'other image');
+  assert.equal(await sameRun(await readProductRecord(recordPath), run(), locate), false, 'a same-size output replacement is not reused');
   await writeFile(image, 'another image');
   assert.equal(await sameRun(await readProductRecord(recordPath), run(), locate), false, 'a changed output is not the recorded product');
 });
@@ -38,6 +41,10 @@ test('inputs that are not the recorded ones are refused before use', async () =>
   await writeFile(frame, 'raw frame, altered but still valid');
   await assert.rejects(assertInputPins([pin], new Map([[pin.identity, frame]])), /is not the recorded/u);
   await assert.rejects(assertInputPins([pin], new Map()), /No file was given/u);
+  await writeFile(frame, 'raw frame');
+  const contentPin = { role: 'raw', identity: pin.identity, ...await sha256File(frame) };
+  await writeFile(frame, 'bad frame');
+  await assert.rejects(assertInputPins([contentPin], new Map([[pin.identity, frame]])), /SHA-256 changed/u);
 });
 
 test('evidence answers only for the product and the kind it names', async () => {
