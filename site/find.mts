@@ -7,21 +7,17 @@ import type { FindResult } from './find-protocol.mts';
 /** The search function's side of find-protocol.mts. */
 interface FindData { readonly index: FeatureIndex; readonly places: ReadonlyMap<string, ReadonlyMap<string, unknown>>; }
 
-async function verified(url: URL, bytes: number, sha256: string, fetcher: typeof fetch): Promise<unknown> {
+async function readJson(url: URL, fetcher: typeof fetch): Promise<unknown> {
   const response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(15_000) });
-  if (!response.ok) throw new Error(`${url.pathname} could not load.`);
-  const body = await response.arrayBuffer();
-  if (body.byteLength !== bytes) throw new Error(`${url.pathname} size drifted.`);
-  const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', body))].map(value => value.toString(16).padStart(2, '0')).join('');
-  if (digest !== sha256) throw new Error(`${url.pathname} identity drifted.`);
-  return JSON.parse(new TextDecoder().decode(body));
+  if (!response.ok) throw new Error(`${url.pathname} could not load: HTTP ${response.status}.`);
+  return response.json();
 }
 
 async function readFindData(pin: FeatureIndexPin, origin: string, fetcher: typeof fetch): Promise<FindData> {
-  const base = parseFeatureIndex(await verified(new URL(pin.url, origin), pin.bytes, pin.sha256, fetcher), pin);
+  const base = parseFeatureIndex(await readJson(new URL(pin.url, origin), fetcher), pin);
   const places = new Map<string, Map<string, unknown>>(), features: IndexedFeature[] = [...base.features];
   for (const placePin of base.places) {
-    const catalog = await verified(new URL(placePin.assetUrl, origin), placePin.bytes, placePin.sha256, fetcher);
+    const catalog = await readJson(new URL(placePin.assetUrl, origin), fetcher);
     const expanded = placeFeatures(placePin, catalog);
     for (const [index, feature] of features.entries()) {
       const names = feature.objectId === placePin.objectId ? expanded.aliases.get(feature.id) : undefined;
@@ -35,11 +31,11 @@ async function readFindData(pin: FeatureIndexPin, origin: string, fetcher: typeo
   return { index: { ...base, features }, places };
 }
 
-// A warm function instance keeps the verified data for its deploy (keyed by the index identity), never results.
+// A warm function instance keeps the loaded data for its deploy, never results.
 const loaded = new Map<string, Promise<FindData>>();
 function findData(pin: FeatureIndexPin, origin: string, fetcher: typeof fetch): Promise<FindData> {
   if (fetcher !== fetch) return readFindData(pin, origin, fetcher);
-  const key = `${origin}:${pin.sha256}`;
+  const key = `${origin}:${pin.url}`;
   let pending = loaded.get(key);
   if (!pending) {
     loaded.clear();

@@ -2434,8 +2434,8 @@ test('the binary orbit bank decodes to exactly the orbits of the full prepared f
   for (const [index, body] of decoded.bodies.entries()) {
     expect(body.orbit, body.id).toEqual(full.bodies[index]!.orbit);
   }
-  // The pin guards the transport: a bank of another size, or one missing an orbit's path, never decodes.
-  expect(() => decodeWorldOrbits(summary, bank.slice(0, bank.byteLength - 8))).toThrow(/summary pin/);
+  // A bank of another size, or one missing an orbit's path, never decodes.
+  expect(() => decodeWorldOrbits(summary, bank.slice(0, bank.byteLength - 8))).toThrow(/its summary says/);
   const orbiting = summary.bodies.find(body => body.orbit)!;
   expect(() => decodeWorldOrbits({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, bank)).toThrow(/lacks its path/);
 });

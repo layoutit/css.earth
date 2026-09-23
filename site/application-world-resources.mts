@@ -29,7 +29,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
     let catalogs: Awaited<ReturnType<typeof loadFocusCatalogs>> | null = null;
     let catalogsLoading: Promise<Awaited<ReturnType<typeof loadFocusCatalogs>>> | null = null;
-    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadFocusCatalogs(document, location.origin)
+    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadFocusCatalogs(location.origin)
       .then(value => catalogs = value).finally(() => { catalogsLoading = null; });
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;

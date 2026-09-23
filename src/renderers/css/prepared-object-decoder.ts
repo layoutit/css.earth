@@ -15,9 +15,6 @@ export function requirePreparedCssDescriptor(input: unknown) {
   return descriptor;
 }
 
-async function sha256(bytes: ArrayBuffer): Promise<string> {
-  return [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
-}
 function parseJson(bytes: ArrayBuffer, label: string): unknown {
   try { return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)); }
   catch (cause) { throw new TypeError(`${label} is not valid UTF-8 JSON.`, { cause }); }

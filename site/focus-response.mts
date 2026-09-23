@@ -18,7 +18,7 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   frame: PreparedWorldCameraFrame, saved: SharedView | null, fetcher: typeof fetch): Promise<SharedView | null> {
   const selection = readPreparedFocusSelection(url.searchParams);
   if (!selection) return saved;
-  const catalogs = await loadFocusCatalogs(shell, url.origin, fetcher);
+  const catalogs = await loadFocusCatalogs(url.origin, fetcher);
   const catalog = [catalogs.galaxies, catalogs.clusters, catalogs.nebulae].find(catalog => catalog.objects.some(record => record.id === selection.id));
   const selected = catalog?.objects.find(record => record.id === selection.id);
   if (!catalog || !selected) throw new RangeError('Prepared focus is unavailable.');

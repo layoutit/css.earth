@@ -9,10 +9,10 @@ import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from 
 export async function loadPreparedCssPointField(input: unknown, transport: PreparedCssTransport): Promise<PreparedCssPointField> {
   const { descriptor, manifest } = await loadManifest(input, transport);
   const url = descriptor.prepared!.url;
-  // The bank sits beside its manifest. Length and digest are verified before any byte is decoded.
+  // The bank sits beside its manifest; its length is checked before any column is decoded.
   const bank = await transport.read(`${url.slice(0, url.lastIndexOf('/') + 1)}${manifest.bank.path}`);
-  if (bank.byteLength !== manifest.bank.bytes || await sha256(bank) !== manifest.bank.sha256) {
-    throw new TypeError('Prepared point-field bank length or SHA-256 identity mismatch.');
+  if (bank.byteLength !== manifest.bank.bytes) {
+    throw new TypeError(`Prepared point-field bank ${manifest.bank.path} is ${bank.byteLength} bytes; its manifest says ${manifest.bank.bytes}.`);
   }
   return decodePreparedCssPointField(manifest, bank);
 }
@@ -53,7 +53,3 @@ function parsePointFieldDescriptor(input: unknown): { readonly descriptor: Objec
   return Object.freeze({ descriptor, frame: parseDensityVolumeFrame(properties.frame) });
 }
 
-async function sha256(bytes: ArrayBuffer): Promise<string> {
-  const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', bytes));
-  return [...hash].map(value => value.toString(16).padStart(2, '0')).join('');
-}

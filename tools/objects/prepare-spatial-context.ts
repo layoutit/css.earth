@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -157,7 +156,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const orbits = encodeWorldOrbits(prepared);
   await writeIfChanged(worldOrbitsPath(options.outputPath), orbits);
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
-    { byteLength: orbits.byteLength, sha256: createHash('sha256').update(orbits).digest('hex') }))}\n`);
+    { byteLength: orbits.byteLength }))}\n`);
 }
 
 /** `world-context.json` → `world-orbits.bin`, beside it. */

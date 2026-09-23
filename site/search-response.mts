@@ -10,13 +10,11 @@ import { presentFeatureResults, presentOverviewResults, presentSearchResults } f
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
 import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
 
-export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
+export interface SearchPin { url: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
   if (!record(value) || typeof value.url !== 'string' || !/^\/(?:features|scenes)\/[a-zA-Z0-9/_-]+\.json$/u.test(value.url)
-    || typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(value.sha256)
-    || typeof value.bytes !== 'number' || !Number.isSafeInteger(value.bytes) || value.bytes <= 0
     || typeof value.count !== 'number' || !Number.isSafeInteger(value.count) || value.count < 0) throw new TypeError('Invalid prepared search index pin.');
-  return { url: value.url, sha256: value.sha256, bytes: value.bytes, count: value.count };
+  return { url: value.url, count: value.count };
 }
 
 interface Result { name: string; context: string; label: string; href: string; }
