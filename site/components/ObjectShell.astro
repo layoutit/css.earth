@@ -16,13 +16,14 @@ import CssEarthWordmark from "./CssEarthWordmark.astro";
 import ExtragalacticOverviews from './ExtragalacticOverviews.astro';
 import ObjectCard from './ObjectCard.astro';
 import ObjectCardHeader from './ObjectCardHeader.astro';
+import SystemHeaders from './SystemHeaders.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import ObjectFactsheet from './ObjectFactsheet.astro';
 import InformationTabs from './InformationTabs.astro';
 import Accordion from './Accordion.astro';
 import ObjectNavigationMarker from './ObjectNavigationMarker.astro';
-import { OVERVIEW_TITLES, SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
-import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
+import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
+import { SOLAR_SYSTEM_ID, allPlanetarySystems, systemOfObject } from '../object-systems.mts';
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
@@ -59,6 +60,7 @@ const activeObject = SCENE_OBJECTS.find((object) => object.id === objectId);
 const systemStar = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!;
 // Every prepared planetary system is browsable; the orbits decide, not a list.
 const LIGHT_YEAR_M = 9460730472580800;
+const ownSystem = systemOfObject(SCENE_OBJECTS, objectId);
 const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({ system, star: SCENE_OBJECTS.find(object => object.id === system.id)! }));
 const hostedSystems = systems.filter(({ system }) => system.id !== SOLAR_SYSTEM_ID)
   .map(({ system, star }) => ({ system, star, distanceLy: Math.round(star.distance.meters / LIGHT_YEAR_M) }))
@@ -360,11 +362,9 @@ const searchCategories = [
       </ObjectCard>
       <ExtragalacticOverviews />
       <ObjectCard class="object-overview-card" data-system-results>
-        {systems.map(({ system, star }) => <ObjectCardHeader heading={false} title={SYSTEM_TITLES[system.id]!}
-          data-system-header={system.id} data-system-current={system.id === SOLAR_SYSTEM_ID ? '' : undefined}
-          introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
-          <ObjectBreadcrumbs scope="system" systemId={system.id} />
-        </ObjectCardHeader>)}
+        {/* The Solar System's header and this page's own; the others arrive with the first overview of another system. */}
+        <SystemHeaders only={[SOLAR_SYSTEM_ID, ...(ownSystem ? [ownSystem.id] : [])]} />
+        <span data-system-headers-slot hidden></span>
         {/* A dataset that draws something the whole system shares, like a debris disc, belongs to the system, not to its star:
             the shell moves those options here while the system is the selection, and back to the body card when it is not. */}
         <div class="object-lenses object-system-datasets" data-system-datasets hidden>
