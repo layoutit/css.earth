@@ -12,10 +12,12 @@ import { contextTarget, sourceContext } from './delivery-context.mts';
 import type { FamilyOperation } from './family-handlers.mts';
 import { verifiedExecutableFamilyOperations } from './family-operation.mts';
 import { openPdsSource } from './pds-source.mts';
+import { parseProductDescriptor } from './product-descriptor.mts';
+import { assessSourceRelevance, readSourceQuestion, type SourceRelevance } from './source-relevance.mts';
 
 const unavailable = (kind:OutputChoice['kind'],reason:string):OutputChoice => ({kind,available:false,reason});
 const available = (kind:OutputChoice['kind'],reason:string,parameters:readonly string[]=[]):OutputChoice => ({kind,available:true,reason,...(parameters.length?{parameters}:{})});
-export interface ArtifactOutputInspection {readonly artifact:string;readonly target?:string;readonly source:unknown;readonly sourceContext?:ReturnType<typeof sourceContext>;readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly [key:string]:unknown}
+export interface ArtifactOutputInspection {readonly artifact:string;readonly target?:string;readonly source:unknown;readonly sourceContext?:ReturnType<typeof sourceContext>;readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly [key:string]:unknown}
 
 export async function listArtifactOutputs(path:string,structure?:string):Promise<ArtifactOutputInspection>{
   const artifact=resolve(path),raw=requireRecord(JSON.parse(await readFile(artifact,'utf8')));
@@ -67,25 +69,33 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
   }
   if(raw.schema!==PRODUCT_RECORD_SCHEMA)throw new TypeError('Expected a telescope delivery, product record, or supported physical object.json');
   const source=await verifiedProduct(artifact),stage=source.record.stage;
+  const question=stage==='telescope-archive-source'||stage==='telescope-keck-source'?await readSourceQuestion(source.root):undefined;
   if(stage==='telescope-archive-source'){
     const descriptors=source.record.outputs.filter(output=>output.path==='descriptor.json');
     if(descriptors.length===1){
       const descriptorPath=resolve(source.root,'descriptor.json');
-      return {artifact:stage,source:descriptorPath,outputs:[],familyOperations:await verifiedExecutableFamilyOperations(descriptorPath)};
+      const familyOperations=await verifiedExecutableFamilyOperations(descriptorPath);
+      const descriptor=parseProductDescriptor(JSON.parse(await readFile(descriptorPath,'utf8')));
+      return {artifact:stage,target:question!.target,source:descriptorPath,outputs:[],familyOperations,relevance:assessSourceRelevance(question!,[],[],descriptor)};
     }
     if(await openPdsSource(artifact)){
       const listed=await listDeliveryOutputs(artifact,structure);
-      return {...listed,artifact:stage,issues:(listed.limitations??[]).filter(issue=>!listed.outputs.some(choice=>choice.limitations?.includes(issue)))};
+      const {sourceMetadata,limitations,...screen}=listed;
+      return {...screen,artifact:stage,target:question!.target,issues:(limitations??[]).filter(issue=>!screen.outputs.some(choice=>choice.limitations?.includes(issue))),
+        relevance:assessSourceRelevance(question!,sourceMetadata??[],screen.outputs)};
     }
   }
   if(structure!==undefined)throw new TypeError('--structure applies only to native delivery or OPUS PDS source inspection');
   if(stage==='telescope-wwt-fits'||stage==='telescope-keck-source'||stage==='telescope-archive-source'&&source.record.parameters.fitsSource!==undefined||stage==='telescope-local-import'&&source.record.parameters.fitsSource!==undefined){
     if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
-    const listed=await listDeliveryOutputs(artifact);
-    return {...listed,artifact:stage,issues:(listed.limitations??[]).filter(issue=>!listed.outputs.some(choice=>choice.limitations?.includes(issue)))};
+    const listed=await listDeliveryOutputs(artifact,undefined,question?.position);
+    const {sourceMetadata,limitations,...screen}=listed;
+    return {...screen,artifact:stage,...(question?{target:question.target}:{}),issues:(limitations??[]).filter(issue=>!screen.outputs.some(choice=>choice.limitations?.includes(issue))),
+      ...(question?{relevance:assessSourceRelevance(question,sourceMetadata??[],screen.outputs)}:{})};
   }
-  if(stage==='telescope-archive-source')return {artifact:stage,source:artifact,outputs:[],terminal:true,
-    issues:['The original files are pinned, but no supported science output route recognizes this native product.']};
+  if(stage==='telescope-archive-source')return {artifact:stage,target:question!.target,source:artifact,outputs:[],terminal:true,
+    issues:['The original files are pinned, but no supported science output route recognizes this native product.'],
+    relevance:assessSourceRelevance(question!,[],[])};
   if(stage==='telescope-source-output')return {artifact:stage,source:artifact,
     ...(typeof source.record.parameters.label==='string'?{target:source.record.parameters.label}:{}),outputs:[],terminal:true};
   if(stage==='telescope-output'){

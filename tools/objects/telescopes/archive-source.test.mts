@@ -19,6 +19,7 @@ import { listArtifactOutputs } from './artifact-outputs.mts';
 import { openPdsSource, preparePdsSource } from './pds-source.mts';
 import { main, parseCli } from './cli.mts';
 import { executeFamilyOperation } from './family-operation.mts';
+import { readSourceQuestion } from './source-relevance.mts';
 
 const fits = Buffer.from(`${'SIMPLE  =                    T'.padEnd(80)}${'END'.padEnd(80)}`.padEnd(2880));
 const fileResponse = (bytes: Buffer, type = 'application/fits') => new Response(new Uint8Array(bytes), { headers: { 'content-type': type } });
@@ -126,6 +127,7 @@ test('Gemini revalidates one CADC artifact, preserves original FITS and refuses 
     const result = await fetchGeminiSource(exploration, 1, resolve(root, 'out'), async () => [row], async () => fileResponse(fits));
     assert.equal(result.status, 'unresolved'); assert.deepEqual(await readFile(result.files[0]!), fits);
     assert.equal((await openFitsSource(result.receipt))?.file, result.files[0]);
+    assert.equal((await readSourceQuestion(resolve(root,'out'))).archiveTargetName,'HR8799');
     await assert.rejects(fetchGeminiSource(exploration, 1, resolve(root, 'changed'), async () => [{ ...row, contentChecksum: 'md5:00000000000000000000000000000000' }]), /changed the Gemini source/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -148,6 +150,7 @@ test('OPUS selects a native raw image with its label and support file, rejecting
     assert.equal(result.files.length, 3); assert.equal(result.status, 'unresolved');
     assert.equal(result.files[0], resolve(root, 'out/holdings/volumes/COISS/data/N1.IMG'));
     assert.match(await readFile(result.source, 'utf8'), /"coiss_raw"/u);
+    assert.equal((await readSourceQuestion(resolve(root,'out'))).archiveTargetName,'Himalia');
     assert.equal(await openFitsSource(result.receipt), null);
     const pds = await openPdsSource(result.receipt); assert.ok(pds);
     const staged = await preparePdsSource(pds, resolve(root, 'staged'));
@@ -203,6 +206,10 @@ test('an authentic Chandra ACIS event source enters the existing event operation
     assert.ok(fetched.descriptor);
     const inspection = await listArtifactOutputs(fetched.receipt);
     assert.ok(inspection.familyOperations?.some(operation => operation.id === 'event-inspect' && operation.available));
+    assert.equal(inspection.relevance?.archiveTarget.name,'Polaris');
+    assert.equal(inspection.relevance?.field.status,'unknown');
+    assert.equal(inspection.relevance?.detection.status,'unassessed');
+    assert.ok(inspection.relevance?.contents.some(item=>item.structure.includes('events')));
     const familyDescriptor = JSON.parse(await readFile(fetched.descriptor!, 'utf8'));
     const request = resolve(root, 'request.json'), assessment = resolve(root, 'assessment');
     await writeFile(request, JSON.stringify({ legacy: { target: familyDescriptor.dataset.target, wavelengthMicrometres: [0.1, 1] }, family: 'F10' }));
@@ -237,6 +244,7 @@ test('Spitzer revalidates its AOR and pins one named FITS product', async () => 
       [url.replace('_maic.fits', '_munc.fits'), url.replace('_maic.fits', '_mcov.fits')]);
     const source = await openFitsSource(result.receipt);
     assert.equal(source?.file, result.files[0]);
+    assert.equal((await readSourceQuestion(resolve(root,'out'))).archiveTargetName,'Bennu');
     assert.deepEqual(source?.companions, { uncertainty: result.files[1], coverage: result.files[2] });
     assert.equal(result.files.length, 3);
     const channelTwo = { ...product, channum: '2', externalname: product.externalname.replaceAll('ch1', 'ch2').replaceAll('I1', 'I2'),
