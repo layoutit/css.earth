@@ -37,33 +37,31 @@ export async function focusExistingScene({ session, request, selectionTransition
   }
   if (!requests.owns(request)) return false;
   const { camera } = request;
-  const restore = camera.kind === 'restore';
+  const reducedMotion = getReducedMotion();
+  let fly: (() => void | Promise<void>) | undefined;
   if (camera.kind === 'focus') {
     if (!view.commit(request, session)) return false;
-    requests.advance(request, 'flying'); syncPlayback();
-    const focused = await request.lifetime.wait(view.focus(session, request));
-    if (focused.cancelled || !requests.owns(request)) return false;
-  } else if (restore) {
-    if (request.history.history === 'pop' || request.url !== windowTarget.location.href) view.commit(request, session);
-    else session.url = request.url;
-    // History within one object flies to its saved view, as history between objects does;
-    // it used to jump there in one frame. The exact saved state is still restored afterwards.
-    const savedWorld = camera.animate && !getReducedMotion()
-      ? navigation.savedTarget?.({ objectId: session.objectId, url: request.url, mount: session.mount }) : null;
-    if (savedWorld && navigation.focus) {
-      requests.advance(request, 'flying');
-      syncPlayback();
-      const flown = await request.lifetime.wait(navigation.focus({ objectId: session.objectId, mount: session.mount!,
-        signal: request.signal, reducedMotion: getReducedMotion(), targetWorldCamera: savedWorld, timing: request.timing }));
-      if (flown.cancelled || !requests.owns(request)) return false;
+    fly = () => view.focus(session, request);
+  } else {
+    if (camera.kind === 'restore') {
+      if (request.history.history === 'pop' || request.url !== windowTarget.location.href) view.commit(request, session);
+      else session.url = request.url;
     }
-  } else if (camera.kind === 'frame' && navigation.focus) {
-    requests.advance(request, 'flying');
-    syncPlayback();
-    const focused = await request.lifetime.wait(navigation.focus({ objectId: session.objectId,
-      mount: session.mount!, signal: request.signal, reducedMotion: getReducedMotion(),
-      targetWorldCamera: camera.world ?? undefined, targetFocusPositionM: camera.focusPositionM ?? undefined, centerSelection: camera.framing === 'center', timing: request.timing }));
-    if (focused.cancelled || !requests.owns(request)) return false;
+    // Saved history can fly to its endpoint before exact restoration at arrival.
+    const savedWorld = camera.kind === 'restore' && camera.animate && !reducedMotion
+      ? navigation.savedTarget?.({ objectId: session.objectId, url: request.url, mount: session.mount }) : null;
+    if (camera.kind === 'frame' || savedWorld) {
+      fly = () => navigation.focus({ objectId: session.objectId, mount: session.mount!, signal: request.signal,
+        reducedMotion, timing: request.timing,
+        targetWorldCamera: camera.kind === 'frame' ? camera.world ?? undefined : savedWorld!,
+        targetFocusPositionM: camera.kind === 'frame' ? camera.focusPositionM ?? undefined : undefined,
+        centerSelection: camera.kind === 'frame' && camera.framing === 'center' });
+    }
+  }
+  if (fly) {
+    requests.advance(request, 'flying'); syncPlayback();
+    const flown = await request.lifetime.wait(fly());
+    if (flown.cancelled || !requests.owns(request)) return false;
   }
   if (camera.kind !== 'focus') commitSelection(request, selectionTransition);
   if (!await view.arrive(session, { request })) return false;
