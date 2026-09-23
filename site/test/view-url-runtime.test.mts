@@ -39,6 +39,7 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
     async restore(value) { restored.push(value); listener?.(); return true; },
     subscribe(next) { listener = next; return () => { listener = null; }; } };
   const owner = bindViewUrl({ windowTarget: windowTarget as unknown as Window, view, getMotion: () => motion, setMotion: value => { motion = value; },
+    replace: url => windowTarget.history.replaceState(windowTarget.history.state, '', url),
     onError: error => errors.push(error instanceof Error ? error.message : String(error)) });
   return { owner, windowTarget, timers, writes, errors, restored,
     changed: () => listener?.(), motion: () => motion,

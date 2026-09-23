@@ -89,7 +89,7 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
         redshift: { value: .01, type: 'spectroscopic', sourceRef: 'positions:row' },
         aperture: { definition: 'R500', properRadiusM: 1e22, comovingRadiusM: 1e22, sourceRef: 'positions:row' } };
     } };
-  const focusLayer: ContextLayer = { selectGalaxy: layer.selectGalaxy, resolveGalaxy: layer.resolveGalaxy,
+  const focusLayer: ContextLayer = { ensureGalaxyCatalog: async () => {}, selectGalaxy: layer.selectGalaxy, resolveGalaxy: layer.resolveGalaxy,
     focusBank(id) {
       if (imageLayerFrames[id]) return createImageFocusBank(id, imageLayerFrames[id], () => Promise.resolve());
       if (!currentVolumeLensFrames[id]) return null;
@@ -105,7 +105,8 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
   // Narrow test doubles intentionally expose only this controller's browser/runtime surface.
   const controller = createPreparedContextNavigation({ layer: focusLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
     sources, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
-  controller.connect(owner as unknown as ObjectWorldNavigation, { onFocusContentChange: (record, references, presentation) => content.push({ record, references, presentation }) });
+  controller.connect(owner as unknown as ObjectWorldNavigation, { onFocusChange: url => windowTarget.history.replaceState(windowTarget.history.state, '', url),
+    onFocusContentChange: (record, references, presentation) => content.push({ record, references, presentation }) });
   return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, presentationFocuses, writes, callbacks, content, flights, flightFocuses, signal: () => signal,
     resolveDeferredVolumeBank() { required(releaseDeferredBank)(); } };
 }
@@ -183,14 +184,14 @@ test('suspension isolates camera restore publications from incoming focus histor
   assert.equal(f.callbacks.size, 0);
 });
 
-test('an invalid incoming catalogue ID remains available for diagnosis after restoration publications', () => {
+test('an invalid incoming catalogue ID remains available for diagnosis after restoration publications', async () => {
   const f = fixture();
   f.controller.restore(f.windowTarget.location.href);
   f.controller.suspend();
   const incoming = 'https://example.test/mercury/?focus=unknown&v=restored';
   f.windowTarget.location = new URL(incoming);
   f.owner.setPreparedFocus(null);
-  f.controller.restore(incoming);
+  await f.controller.restore(incoming);
   f.owner.setPreparedFocus(null);
   assert.equal(f.errors.length, 1);
   assert.match(f.errors[0].message, /Unknown prepared galaxy/);
