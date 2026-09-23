@@ -15,6 +15,7 @@ source notes, credits, test reports and where to save them. Its
 [standards mapping](../../docs/provenance/CONTRACT.md#standards-basis) combines
 PDS4 1.26.0 provenance guidance with ISO 24495-1:2023 plain-language principles,
 using the existing files.
+For a telescope-derived view, start with the [telescope command guide](../../packages/telescope/README.md#using-a-result-in-a-body-scene). Its qualified delivery and standalone sphere export do not automatically create a normal scene lens.
 
 ## Package layout
 
