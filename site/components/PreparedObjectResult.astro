@@ -14,7 +14,8 @@ if (!source) throw new Error(`Missing focus source document: ${object.id}`);
   data-object-search-names={JSON.stringify(object.searchNames)}
   data-object-distance-m={object.distance.meters}
   data-object-system-name={object.systemName.toLocaleLowerCase('en')}
-  data-object-classification={object.classification} data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase('en')}>
+  data-object-classification={object.classification} data-object-candidate={object.candidate === true}
+  data-object-classification-name={object.candidate ? 'candidate galaxy' : objectClassificationLabel(object.classification).toLocaleLowerCase('en')}>
   <a class="object-link object-observation-control object-thumbnail-leading"
     href={object.route} data-prepared-focus-id={object.focusId}
     data-source-subject={`focus:${object.focusId}`} data-source-document={source.href} data-source-label={source.label}>
