@@ -6,6 +6,7 @@ import { renderSourceLink, type SourceDocumentReference } from './source-link.mt
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
+import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragment.mts';
 
 export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
   if (panel.hidden !== hidden) panel.hidden = hidden;
@@ -24,7 +25,19 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
   const largeScaleCards = [...context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')];
   const focusCard = context.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const system = context.querySelector<HTMLElement>('[data-system-results]');
-  const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
+  let systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
+  // Other systems' headers load with the first overview that needs one (`system-headers-fragment.mts`).
+  let currentSystemHeader = SOLAR_SYSTEM_ID, systemHeadersLoading: Promise<void> | null = null;
+  const showSystemHeader = (id: string) => {
+    currentSystemHeader = id;
+    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === id);
+    const view = documentTarget.defaultView;
+    if (!system || !view || systemHeadersLoading || systemHeaders.some(header => header.dataset.systemHeader === id)) return;
+    systemHeadersLoading = fetchSystemHeaders(url => view.fetch(url)).then(html => {
+      systemHeaders = spliceSystemHeaders(system, new view.DOMParser().parseFromString(html, 'text/html'));
+      showSystemHeader(currentSystemHeader);
+    }).catch(error => { systemHeadersLoading = null; view.reportError(error); });
+  };
   const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
   let systemContent = createSystemCardContent(documentTarget);
   const objectName = (id: string) => SCENE_OBJECTS.find(object => object.id === id)?.name ?? '';
@@ -59,7 +72,7 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     setPanelHidden(information, showContext);
     if (!sharedLegacyContext) setPanelHidden(context, !showContext);
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
-    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
+    showSystemHeader(headerSystemId);
     if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
     const navigationSelection = subject.kind === 'focus' ? subject.id
       : subject.kind === 'overview' ? subject.overview.scope === 'system' ? subject.overview.systemId : subject.overview.scope
