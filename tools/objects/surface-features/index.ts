@@ -467,9 +467,12 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const directory = resolve(context.sourceDirectory, config.directory);
   if (relative(context.sourceDirectory, directory).startsWith('..')) throw new TypeError('Surface feature directory escapes the source tree.');
   const manifest = parseSurfaceFeaturesSourceManifest(JSON.parse(await readFile(resolve(directory, 'manifest.json'), 'utf8')));
+  // A downloaded snapshot (an origin URL) must still be the bytes it was fetched as; a file authored here is tracked by git,
+  // which already records its bytes, so its size is not checked.
   for (const entry of manifest.inputs) {
+    if (!/^https?:\/\//u.test(entry.origin)) continue;
     const bytes = await readFile(resolve(directory, entry.path));
-    if (bytes.length !== entry.bytes) throw new Error(`Gazetteer source snapshot drifted: ${entry.path}`);
+    if (bytes.length !== entry.bytes) throw new Error(`Gazetteer source snapshot drifted: ${directory}/${entry.path} is ${bytes.length} bytes; its manifest records ${entry.bytes}.`);
   }
   if (config.naturalEarth) { for (const layer of config.naturalEarth.layers) if (!manifest.inputs.some(entry => entry.path === layer.archive)) throw new TypeError(`Natural Earth layer ${layer.id} is not pinned by its source manifest.`); }
   else if (config.archive !== null && !manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Surface feature archive is not pinned by its source manifest.');

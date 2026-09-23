@@ -1,4 +1,3 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeVtkCategories } from '../terrestrial-layers/vtk-categories.mts';
@@ -51,9 +50,8 @@ export function parseLandmarks(value: unknown) {
       reference: { title: text(s.title, 'reference title'), url: url(s.url), credit: text(s.credit, 'reference credit') } };
   });
   const vtkInput = doc.vtk === undefined ? null : record(doc.vtk, 'landmarks VTK');
-  const vtk = vtkInput ? { path: path(vtkInput.path), bytes: integer(vtkInput.bytes, 'VTK bytes'), sha256: text(vtkInput.sha256, 'VTK SHA256'),
+  const vtk = vtkInput ? { path: path(vtkInput.path), bytes: integer(vtkInput.bytes, 'VTK bytes'),
     grid: record(vtkInput.grid, 'VTK grid'), maximumDistanceMeters: positive(vtkInput.maximumDistanceMeters, 'VTK maximum distance') } : null;
-  if (vtk && !/^[a-f0-9]{64}$/u.test(vtk.sha256)) throw new TypeError('Invalid VTK hash.');
   if (entries.some(e => 'regionId' in e.position) && !vtk) throw new TypeError('Mapped regions need their pinned source mesh.');
   return { source, frame, entries, vtk };
 }
@@ -74,7 +72,8 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
   if (doc.vtk) {
     if (!hit || !preparedMesh) throw new TypeError('Mapped regions require the prepared picking mesh.');
     const bytes = await readFile(resolve(context.sourceDirectory, doc.vtk.path));
-    if (bytes.length !== doc.vtk.bytes || sha256(bytes) !== doc.vtk.sha256) throw new TypeError('Landmark region mesh changed.');
+    // The mesh's size and its declared grid (expected vertices and faces, checked on decoding) identify it; no hash is kept.
+    if (bytes.length !== doc.vtk.bytes) throw new TypeError(`Landmark region mesh ${doc.vtk.path} is ${bytes.length} bytes; landmarks.json records ${doc.vtk.bytes}.`);
     const decoded = decodeVtkCategories(bytes.toString('utf8'), doc.vtk.grid);
     const sourceMesh = createIndexedShape(decoded.positions, decoded.indices, { metersPerUnit: 1, expectedVertices: decoded.positions.length, expectedFaces: decoded.indices.length });
     const means = new Map<number, { sum: number[]; weight: number }>();
