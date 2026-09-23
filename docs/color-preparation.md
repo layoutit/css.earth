@@ -178,7 +178,7 @@ against MAST and what they cost. A recipe may set `pointSources: "mask"` to repo
 ## Star photospheres
 
 A star whose surface is not imaged still has a measured colour: its spectrum. The `stellar-photometric-color` kind
-([stellar-photometric-color.mts](../tools/objects/observation/stellar-photometric-color.mts)) reads one archived spectrum
+([stellar-photometric-color.mts](../tools/objects/observation/stellar/stellar-photometric-color.mts)) reads one archived spectrum
 in its own layout, averages it into 1 nm bins from 380 to 780 nm, weights it by the CIE 1931 2° observer and converts it to
 sRGB with the D65 white, brightest channel full. It reads HST CALSPEC and the STIS libraries, Gaia DR3 XP, X-Shooter, UVES,
 LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric catalogues. A stretch with no data inside

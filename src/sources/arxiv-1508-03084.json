@@ -1,0 +1,58 @@
+{
+  "id": "arxiv-1508-03084",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Macintosh et al. (2015): Discovery and spectroscopy of the young Jovian planet 51 Eri b with the Gemini Planet Imager",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1508.03084"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1126/science.aac5891"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1508.03084",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1126/science.aac5891",
+      "label": "Science 350, 64"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1508.03084",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: GPI discovery of 51 Eri b at a projected 13 au; spectrum with strong methane and water absorption"
+    },
+    {
+      "path": "src/objects/hd-29391/text.json",
+      "locator": "/card/sources/1"
+    },
+    {
+      "path": "src/objects/hd-29391/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/hd-29391-b/text.json",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "B. Macintosh",
+    "J. R. Graham",
+    "T. Barman",
+    "R. J. De Rosa",
+    "Q. Konopacky",
+    "M. S. Marley"
+  ]
+}

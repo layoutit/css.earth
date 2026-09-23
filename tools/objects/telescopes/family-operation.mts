@@ -22,10 +22,10 @@ import {dolpPreview,extractStokesFits,inspectIntensityDolp,inspectStokesFits,pre
 import {readChannelRows} from '../interferometry/oifits-rows.mts';
 import {subsetOifits,type OifitsRowSelection} from '../interferometry/oifits-concat.mts';
 import {delayDopplerCoordinateView,delayDopplerProfile,inspectDelayDopplerFits,previewDelayDoppler} from './families/f15-radar.mts';
-import {selectSpatialComponents} from './families/f16-spatial-physical.mts';
-import {contextFromPhysicalGridDescriptor,cropPhysicalCartesianGrid,exportPhysicalCartesianNative,inspectPhysicalCartesianGrid,preparePhysicalCartesianVolume,slicePhysicalCartesianGrid,type GridCrop,type GridSlice,type PhysicalGridPlacement,type PhysicalGridTransfer} from './families/f16-cartesian-grid.mts';
-import {contextFromSphericalGridDescriptor,inspectPhysicalSphericalGrid,preparePhysicalSphericalVolume,type SphericalDisplayFill,type SphericalDisplayWeight} from './families/f16-spherical-grid.mts';
-import {contextFromPlanetaryDepthDescriptor,exportPlanetaryDepthNative,inspectPlanetaryDepthGrid,slicePlanetaryDepthGrid} from './families/f16-planetary-depth.mts';
+import {selectSpatialComponents} from './families/f16/f16-spatial-physical.mts';
+import {contextFromPhysicalGridDescriptor,cropPhysicalCartesianGrid,exportPhysicalCartesianNative,inspectPhysicalCartesianGrid,preparePhysicalCartesianVolume,slicePhysicalCartesianGrid,type GridCrop,type GridSlice,type PhysicalGridPlacement,type PhysicalGridTransfer} from './families/f16/f16-cartesian-grid.mts';
+import {contextFromSphericalGridDescriptor,inspectPhysicalSphericalGrid,preparePhysicalSphericalVolume,type SphericalDisplayFill,type SphericalDisplayWeight} from './families/f16/f16-spherical-grid.mts';
+import {contextFromPlanetaryDepthDescriptor,exportPlanetaryDepthNative,inspectPlanetaryDepthGrid,slicePlanetaryDepthGrid} from './families/f16/f16-planetary-depth.mts';
 import {inspectNearMsiBundle} from './families/f17-calibration.mts';
 import {exportSpatialObject,inspectSpatialObject} from './spatial-handoff.mts';
 import {extractMixedNd,inspectMixedNd} from './families/f02-mixed-nd.mts';

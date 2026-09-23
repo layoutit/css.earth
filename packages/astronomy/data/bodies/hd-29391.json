@@ -1,0 +1,30 @@
+{
+ "id": "hd-29391",
+ "classification": "star",
+ "order": 1707,
+ "physical": {
+  "name": "51 Eridani",
+  "horizonsCode": null,
+  "meanRadiusKm": 1006593.74,
+  "gravitationalParameterKm3PerS2": 205704282065.01,
+  "parent": null
+ },
+ "physicalNotes": "Radius: the CHARA Array limb-darkened angular diameter 0.450 +/- 0.006 mas of Elliott et al. (2024, PASA 41, e056; arXiv:2401.01468) at the Gaia DR3 distance 29.9052 pc: 1,006,594 km, 1.4469 solar radii at 695700 km per solar radius (Elliott et al. give 1.45 +/- 0.02 solar radii with the zero-point corrected parallax). GM from their PARSEC isochrone mass 1.550 +0.006/-0.005 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis (celestial north at the star) is up; the star's spin axis has no measured direction on the sky.",
+ "star": {
+  "rightAscensionDegrees": 69.40074849308137,
+  "declinationDegrees": -2.473833383625505,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 29.905171,
+  "properMotionRaMasPerYear": 44.04884090373149,
+  "properMotionDecMasPerYear": -64.02842203088811,
+  "radialVelocityKmPerS": 12.6,
+  "sources": {
+   "position": "Gaia DR3 source 3205095125321700480 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Cross-identification HD 29391, HIP 21547: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=51+Eri",
+   "distance": "Gaia DR3 source 3205095125321700480: parallax 33.4390 +/- 0.0777 mas (RUWE 1.15), inverted to 29.9052 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 3205095125321700480: pmRA* 44.0488 mas/yr, pmDec -64.0284 mas/yr.",
+   "radialVelocity": "Gaia DR3 gives none. 12.6 +/- 0.3 km/s from Gontcharov (2006, AstL 32, 759), the value SIMBAD lists and Denis et al. (2026) adopt for the star."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 21547
+ }
+}

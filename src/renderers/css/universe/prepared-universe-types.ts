@@ -6,7 +6,7 @@ import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { WorldPlannerSource } from './world-context-planner-client.js';
+import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
 import type { LensBillboards } from './lens-billboards.js';
 
 export type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string };

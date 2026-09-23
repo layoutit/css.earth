@@ -6,7 +6,7 @@ import{mkdtemp,rm,writeFile}from'node:fs/promises';import{tmpdir}from'node:os';
 import { formatArtifact, formatExploration, formatSession, main, outputCommand, parseCli, type ArtifactInspection, type CliIo, type CliServices } from './cli.mts';
 import type { ExplorationSession } from './session.mts';
 import type { Session } from './session.mts';
-import { loadWwtImagery } from './wwt-catalog.mts';
+import { loadWwtImagery } from './wwt/wwt-catalog.mts';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
   reference:{kind:'indexed-observation' as const,telescope:'Fixture telescope',mode:'camera',observation:'obs-1',programme:'eris-obs-1'},
