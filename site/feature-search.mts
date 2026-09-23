@@ -8,24 +8,23 @@ export interface IndexedFeature { readonly objectId: string; readonly id: string
 /** The id a place is selected by: `city-` and its catalogue id. */
 export const PLACE_FEATURE_PREFIX = 'city-';
 /** A body's places catalogue (Earth's GeoNames cities): the search function reads it, no browser does. */
-export interface PlacePin { readonly objectId: string; readonly type: string; readonly url: string; readonly assetUrl: string; readonly bytes: number; readonly sha256: string; readonly count: number; readonly duplicates: readonly (readonly [string, string])[]; }
+export interface PlacePin { readonly objectId: string; readonly type: string; readonly url: string; readonly assetUrl: string; readonly count: number; readonly duplicates: readonly (readonly [string, string])[]; }
 export interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number; readonly lensIds?: readonly string[] }[]; readonly features: readonly IndexedFeature[]; readonly places: readonly PlacePin[]; }
-export interface FeatureIndexPin { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
+export interface FeatureIndexPin { readonly url: string; readonly count: number; }
 
 export const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
 
 export function parseFeaturePin(source: string | undefined): FeatureIndexPin | null {
   const value: unknown = JSON.parse(source ?? 'null');
   if (!record(value) || value.count === 0) return null;
-  if (typeof value.url !== 'string' || !value.url.startsWith('/') || typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(value.sha256) ||
-      !Number.isSafeInteger(value.bytes) || Number(value.bytes) < 1 || !Number.isSafeInteger(value.count)) throw new TypeError('Feature index pin is invalid.');
-  return { url: value.url, bytes: Number(value.bytes), sha256: value.sha256, count: Number(value.count) };
+  if (typeof value.url !== 'string' || !value.url.startsWith('/') || !Number.isSafeInteger(value.count)) throw new TypeError('Feature index pin is invalid.');
+  return { url: value.url, count: Number(value.count) };
 }
 export function parseFeatureIndex(value: unknown, pin: FeatureIndexPin): FeatureIndex {
   if (!record(value) || value.schema !== 'cssearth-prepared-feature-index@2' || !Array.isArray(value.objects) || !Array.isArray(value.features) || !Array.isArray(value.places) || value.features.length !== pin.count) throw new TypeError('Feature index is incompatible.');
   for (const place of value.places as unknown[]) {
-    if (!record(place) || ['objectId', 'type', 'url', 'assetUrl', 'sha256'].some(key => typeof place[key] !== 'string') || !/^[a-f0-9]{64}$/u.test(String(place.sha256)) ||
-        !Number.isSafeInteger(place.bytes) || !Number.isSafeInteger(place.count) || !Array.isArray(place.duplicates) || !place.duplicates.every(pair => Array.isArray(pair) && pair.length === 2 && pair.every(id => typeof id === 'string'))) throw new TypeError('Feature index places pin is invalid.');
+    if (!record(place) || ['objectId', 'type', 'url', 'assetUrl'].some(key => typeof place[key] !== 'string') ||
+        !Number.isSafeInteger(place.count) || !Array.isArray(place.duplicates) || !place.duplicates.every(pair => Array.isArray(pair) && pair.length === 2 && pair.every(id => typeof id === 'string'))) throw new TypeError('Feature index places pin is invalid.');
   }
   for (const feature of value.features as unknown[]) {
     if (!record(feature) || ['objectId', 'id', 'name', 'type', 'searchContext'].some(key => typeof feature[key] !== 'string') || typeof feature.diameterKm !== 'number' ||
