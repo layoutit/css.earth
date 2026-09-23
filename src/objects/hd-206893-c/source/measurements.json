@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-206893-c",
+  "radiusKm": 104378.3,
+  "radiusSource": "Radius 1.46 +0.18/-0.06 Jupiter radii and temperature 1182 +21/-54 K from the atmosphere fit of Hinkley et al. (2023; arXiv:2208.04867), Table 3, the discovery paper: 104,378.3 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. GM from the dynamical mass 11.1 +0.4/-0.5 Jupiter masses of Kral et al. (2026), Table 2, times Jupiter's GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2315.2,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 3.752 au and total mass 1.3149 solar masses, 6.3 years of 365.25 d. Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 2). Its Keplerian orbit uses the star's mass plus c's, as orbitize! does. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-c/source/orbits/pick.json): highest stored likelihood (ln L -8.60).",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 206893 c is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 1182,
+  "effectiveTemperatureSource": "1182 +21/-54 K, Hinkley et al. (2023), Table 3, https://arxiv.org/abs/2208.04867",
+  "semiMajorAxisSource": "Kral et al. (2026, arXiv:2511.20091), Table 2: a = 3.74 +0.02/-0.03 au; Hinkley et al. (2023) found 3.53 au. The recorded orbit's semi-major axis is 3.75 au (packages/astronomy/data/bodies/hd-206893-c.json).",
+  "massSource": "Dynamical mass 11.1 +0.4/-0.5 Jupiter masses, Kral et al. (2026), Table 2; Hinkley et al. (2023) found 12.7."
+}

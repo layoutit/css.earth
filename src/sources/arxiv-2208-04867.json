@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2208-04867",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hinkley et al. (2023): Direct discovery of the inner exoplanet in the HD206893 system. Evidence for deuterium burning in a planetary-mass companion",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2208.04867"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202244727"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2208.04867",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202244727",
+      "label": "Astronomy & Astrophysics"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2208.04867",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 3: HD 206893 c, radius 1.46 +0.18/-0.06 Jupiter radii, Teff 1181.9 +20.6/-53.9 K; Abstract: dynamical mass 12.7 Jupiter masses and separation 3.53 au"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics",
+  "creators": [
+    "S. Hinkley",
+    "S. Lacour",
+    "G. -D. Marleau",
+    "A. M. Lagrange",
+    "J. J. Wang",
+    "J. Kammerer"
+  ]
+}

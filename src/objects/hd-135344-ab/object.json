@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-135344-ab",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 135344 Ab",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 114387.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-135344-ab-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 135344 Ab",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 27833983.2,
+      "description": "One of the youngest fully formed planets imaged, about 10 Jupiter masses, on a Solar System scale.",
+      "systemName": "HD 135344 A system",
+      "order": 1768,
+      "context": {
+        "order": 1768
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2179426016353056500,
+        -2503057924111417000,
+        -2514538719976923600
+      ],
+      "presentationToReference": [
+        -0.4380646113885316,
+        -0.46495153749961826,
+        0.769363024862617,
+        -0.4907995504309092,
+        -0.593330744824692,
+        -0.6380238463745643,
+        -0.7531369049155886,
+        0.6570986950394265,
+        -0.03171919657952401
+      ],
+      "orbitUpReference": [
+        0.46495153749961826,
+        0.593330744824692,
+        -0.6570986950394265
+      ],
+      "metersPerUnit": 368990.96774193546,
+      "bodyRadiusM": 114387200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

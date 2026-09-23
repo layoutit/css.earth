@@ -1,0 +1,31 @@
+{
+ "id": "hd-95086-b",
+ "classification": "exoplanet",
+ "order": 1764,
+ "physical": {
+  "name": "HD 95086 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 81500.9,
+  "gravitationalParameterKm3PerS2": 519414780.79,
+  "parent": "hd-95086"
+ },
+ "physicalNotes": "Radius 1.14 +/- 0.08 Jupiter radii, temperature 936 +66/-63 K and mass 4.1 +1.2/-1.0 Jupiter masses: the Exo-REM fit with a surface-gravity prior to the JWST/MIRI and near-infrared photometry of Malin et al. (2024, arXiv:2408.16843), Table 8: 81,500.9 km at 71,492 km per Jupiter radius. Their fits span 1.0 to 1.14 Jupiter radii and 800 to 1050 K. A model radius: the planet is unresolved. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 134033.6,
+  "semiMajorAxisStellarRadii": 8596.0,
+  "inclinationDegrees": 149.1117,
+  "eccentricity": 0.00089,
+  "argumentOfPeriapsisDegrees": 272.9703,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 49210.7,
+  "ascendingNodePositionAngleDegrees": 266.535,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 60.562 au and total mass 1.6495 solar masses, 367.0 years of 365.25 d. Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65).",
+   "shape": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65). a 60.562 au at the sample's parallax 11.6128 mas, kept as the angular size 703.3 mas and placed at the Gaia DR3 distance: 8596.00 radii of the host's 1,058,252 km; inclination 149.1117 degrees.",
+   "eccentricity": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65). e 0.00089.",
+   "argumentOfPeriapsis": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65). omega 92.9703 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 272.9703 degrees.",
+   "phase": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65). tau 0.36715 of a period after MJD 0; the periastron passage nearest that epoch is MJD 49210.7, taken as BMJD_TDB.",
+   "orientation": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65). Ascending node 266.5350 degrees east of north."
+  }
+ }
+}

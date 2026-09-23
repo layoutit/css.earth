@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-206893-b",
+  "card": {
+    "text": "A brown dwarf of about 20 Jupiter masses, watched by GRAVITY for the wobble of a moon.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2511-20091",
+        "url": "https://arxiv.org/abs/2511.20091",
+        "label": "Kral et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "This enabled us to isolate potential residual wobbles in the motion of component B attributable to an orbiting moon"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 206893 B is a dusty brown dwarf 11 au from its star. Small wobbles in its motion could be a moon of about 0.4 Jupiter masses, or instrument errors.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2511-20091",
+        "url": "https://arxiv.org/abs/2511.20091",
+        "label": "Kral et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "a mass of $\\sim$0.4 Jupiter masses"
+      },
+      {
+        "catalogueId": "arxiv-2511-20091",
+        "url": "https://arxiv.org/abs/2511.20091",
+        "label": "Kral et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "the origin of these residuals remains ambiguous and could be due to systematics"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

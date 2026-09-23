@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-135344-ab",
+  "card": {
+    "text": "One of the youngest fully formed planets imaged, about 10 Jupiter masses, on a Solar System scale.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2507-06206",
+        "url": "https://arxiv.org/abs/2507.06206",
+        "label": "Stolker et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "HD 135344 Ab is one of the youngest directly imaged planets that has fully formed"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 135344 Ab orbits 15 to 20 au from its star, found by SPHERE and confirmed by GRAVITY. Its colours match those of a mid-L type object.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2507-06206",
+        "url": "https://arxiv.org/abs/2507.06206",
+        "label": "Stolker et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "The semi-major axis of the planetary orbit is approximately 15-20 au"
+      },
+      {
+        "catalogueId": "arxiv-2507-06206",
+        "url": "https://arxiv.org/abs/2507.06206",
+        "label": "Stolker et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "the photometry is consistent with that of a mid L-type object"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

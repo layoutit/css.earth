@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gj-504",
+  "angularDiameterMas": 0.71,
+  "angularDiameterSource": "Limb-darkened angular diameter 0.71 +/- 0.02 mas from VEGA on the CHARA array (Bonnefoy et al. 2018, section 2.3), the source of the radius.",
+  "distanceParsecs": 17.587755,
+  "distanceSource": "Gaia DR3 source 3732539683617410816: parallax 56.8577 +/- 0.1224 mas (RUWE 0.99), inverted to 17.5878 pc with no zero-point correction.",
+  "radiusKm": 939195,
+  "radiusSource": "Radius 1.35 +/- 0.04 solar radii measured with the CHARA interferometer: a limb-darkened angular diameter of 0.71 +/- 0.02 mas at the Hipparcos parallax (Bonnefoy et al. 2018, A&A 618, A63; arXiv:1807.00657, section 2.3): 939,195 km at 695,700 km per solar radius. Temperature 6200 K from their fit to the star's spectral energy distribution (Appendix A), the grid point closest to the spectroscopic solution of D'Orazi et al. (2017, A&A 598, A19). GM from the 1.2 solar masses they assume for the star in their spot model, times the JPL solar GM; the total mass of the orbit placed here is 1.20 solar masses (Bowler et al. 2020). presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 6200,
+  "effectiveTemperatureSource": "Bonnefoy et al. (2018), Appendix A, https://arxiv.org/abs/1807.00657",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+  }
+}
