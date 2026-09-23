@@ -194,7 +194,7 @@ test('catalogue-only rows remain dots without marker captions while saved catalo
   const unsupportedMarker = root.children.find(node => node.dataset.galaxyMarker === unsupported.id);
   expect(unsupportedLabel.style.pointerEvents).toBe('none');
   expect(Number(unsupportedLabel.style.opacity)).toBe(0);
-  expect(unsupportedLabel.parent).toBeNull();
+  expect(root.children.some(node => node.dataset.galaxyLabel === unsupported.id)).toBe(false);
   expect(unsupportedMarker).toBeUndefined();
   for (const id of ['hydra_1', 'leo_a', 'sagittarius_1']) {
     const row = payload.objects.find((object: {id: string}) => object.id === id);
