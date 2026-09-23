@@ -1,0 +1,34 @@
+{
+  "id": "arxiv-2607-12664",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Discovery of a star sensitive to the spin of Sgr A*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2607.12664"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2607.12664",
+      "label": "GRAVITY Collaboration 2026 (S301)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/sgr-a-star/text.json",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "GRAVITY Collaboration: K. Abd El Dayem, R. Abuter, N. Aimar et al.",
+      "scope": "citation",
+      "evidence": "src/objects/sgr-a-star/text.json#/introduction/sources/1"
+    }
+  ]
+}

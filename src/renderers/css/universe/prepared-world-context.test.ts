@@ -11,7 +11,7 @@ import { createWorldContextFrameEncoder } from './world-context-frame.js';
 import { createWorldContextPlanner, CONTEXT_LINE_WIDTH } from './world-context-planner.js';
 import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { labelImportance } from '../labels/universe-label-policy.js';
-import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
+import { SYSTEM_RANGES, SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
@@ -604,13 +604,14 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   const { readCatalog } = await import('../../../../tools/prepare/prepare-catalog.mts');
   const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
-  expect(parsePreparedWorldContext(source).bodies.map(body => body.id)).toEqual(contextEntries.map(body => body.id));
-  for (const body of parsePreparedWorldContext(source).bodies) {
+  // Bodies drawn from their astronomy records around a packaged host follow the catalogue's own entries.
+  expect(parsePreparedWorldContext(source).bodies.filter(body => !body.unpackaged).map(body => body.id)).toEqual(contextEntries.map(body => body.id));
+  for (const body of parsePreparedWorldContext(source).bodies.filter(body => !body.unpackaged)) {
     const frame = SCENE_OBJECTS.find(object => object.id === body.id)!.worldFrame!;
     expect(body.radiusM, `${body.id} context must match the selectable detail radius`).toBe(frame.bodyRadiusM);
     expectAlignedContextOrigin(body.positionM, frame.originM, `${body.id} context must match the selectable detail origin`);
-    // A placed star has no orbit in the Sun's context; every orbiting body's orbit facts are prepared.
-    if (!body.orbit) { expect(SCENE_OBJECTS.find(object => object.id === body.id)!.classification).toBe('star'); continue; }
+    // A placed star or black hole has no orbit in the Sun's context; every orbiting body's orbit facts are prepared.
+    if (!body.orbit) { expect(['star', 'black-hole']).toContain(SCENE_OBJECTS.find(object => object.id === body.id)!.classification); continue; }
     expect(body.orbit.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
     expect([...body.orbit.activeChords!]).toEqual([...body.orbit.trail].flatMap((weight, index) => weight > 0 ? [index] : []));
     expect([...(body.orbit.extentChords ?? [])].sort((a, b) => a - b)).toEqual([...body.orbit.activeChords!]);
@@ -765,7 +766,7 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
   const frame = SCENE_OBJECTS.find(object => object.id === planet)!.worldFrame;
   const target = systemViewTarget({ referenceFrame: required(frame).referenceFrame, epochJdTt: required(frame).epochJdTt,
     pose: { positionM: [0, 0, 1e15], orientationXyzw: [0, 0, 0, 1] } },
-    required(frame), viewport, required(SYSTEM_VIEWS.get(planet)), systemFramingRect(viewport));
+    required(frame), viewport, required(SYSTEM_VIEWS.get(planet)), systemFramingRect(viewport), 0, false, SYSTEM_RANGES.get(planet));
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
   const memberIds = new Set(context.bodies.filter(body => body.orbit?.centerBodyId === planet).map(body => body.id));
@@ -787,7 +788,9 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
         document.defaultView.advance(16);
         const pieces = moons.flatMap(moon => moon.orbit.filter(paintedOrbitLeaf));
         expect(pieces.length).toBeGreaterThan(0);
-        expect(pieces.every(piece => orbitLeafWeight(piece) === 1)).toBe(true);
+        // A full orbit paints at full weight; a member drawn as a trail (an S-star) fades along its half orbit by design.
+        const full = moons.filter(moon => context.bodies.find(body => body.id === moon.id)?.orbit?.fullTrail === true);
+        expect(full.flatMap(moon => moon.orbit.filter(paintedOrbitLeaf)).every(piece => orbitLeafWeight(piece) === 1)).toBe(true);
       }
     }
   }

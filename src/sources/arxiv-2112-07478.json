@@ -1,0 +1,38 @@
+{
+  "id": "arxiv-2112-07478",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mass distribution in the Galactic Center based on interferometric astrometry of multiple stellar orbits",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2112.07478"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2112.07478",
+      "label": "GRAVITY Collaboration 2022"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/sgr-a-star/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/sgr-a-star/text.json",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "GRAVITY Collaboration: R. Abuter, N. Aimar, A. Amorim et al.",
+      "scope": "citation",
+      "evidence": "src/objects/sgr-a-star/text.json#/card/sources/0"
+    }
+  ]
+}

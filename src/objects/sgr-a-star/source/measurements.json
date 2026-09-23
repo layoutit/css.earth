@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-black-hole-shadow@1",
+  "id": "sgr-a-star",
+  "angularDiameterMas": 0.0487,
+  "angularDiameterSource": "EHT Collaboration (2022, ApJL 930, L12; arXiv:2311.08680), Sgr A* Paper I, Table 1: angular shadow diameter d_sh = 48.7 +/- 7.0 microarcseconds, determined from EHT data alone.",
+  "distanceParsecs": 8277,
+  "distanceSource": "GRAVITY Collaboration (2022, A&A 657, L12; arXiv:2112.07478), Table 1, four-star fit: R0 = 8277 +/- 9 pc. The stellar orbits in this system are angular sizes converted at this distance, as that fit does.",
+  "radiusKm": 30150695.4,
+  "radiusSource": "Radius: half the angular shadow diameter 48.7 +/- 7.0 microarcseconds measured from EHT data alone (EHT Collaboration 2022, ApJL 930, L12, Sgr A* Paper I, Table 1), at the distance 8277 pc of GRAVITY Collaboration (2022, A&A 657, L12, Table 1): 24.35e-6 x 8277 au = 0.2015 au = 30,150,695 km at 149,597,870.7 km per au. It is the size of the dark region an observer sees, not an event horizon. GM from the mass 4.297 +/- 0.012 million solar masses (GRAVITY 2022, Table 1) times the JPL solar GM 132712440041.93938 km^3/s^2.",
+  "shape": {
+    "kind": "shadow-sphere",
+    "qualification": "A black sphere at the measured shadow radius: the dark region an observer sees, not an event horizon or a surface."
+  },
+  "massSolarMasses": 4297000.0,
+  "massSource": "GRAVITY Collaboration (2022, A&A 657, L12; arXiv:2112.07478), Table 1, four-star fit: M = 4.297 +/- 0.012 million solar masses at R0 = 8277 pc."
+}

@@ -83,9 +83,14 @@ test('all retained body centers are composed with their named parent at the fixe
   assert.ok(Math.hypot(...sub(heliocentricKm('earth'), emb)) > 4000, 'Earth must not be replaced with the barycentre');
 });
 
-test('regeneration retains every current registry orbit, including moons and comets', () => {
-  assert.deepEqual(Object.keys(geometry.BODY_ORBITS), SCENE_OBJECTS.filter(body =>
-    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'interstellar', 'comet', 'exoplanet', 'star'].includes(body.classification) && body.id !== 'sun').map(body => body.id));
+test('regeneration retains every current registry orbit, including moons and comets', async () => {
+  const registry = SCENE_OBJECTS.filter(body =>
+    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'interstellar', 'comet', 'exoplanet', 'star', 'black-hole'].includes(body.classification) && body.id !== 'sun').map(body => body.id);
+  // Then every star or planet on a hosted orbit around a packaged host, drawn from its astronomy record alone.
+  const { BODIES, HOSTED_PLANET_IDS } = await import('@cssearth/astronomy');
+  const records = BODIES as Readonly<Record<string, { readonly parent: string | null }>>;
+  const recordOnly = (HOSTED_PLANET_IDS as readonly string[]).filter(id => !registry.includes(id) && registry.includes(records[id]!.parent ?? ''));
+  assert.deepEqual(Object.keys(geometry.BODY_ORBITS), [...registry, ...recordOnly]);
   assert.equal(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get('daphnis'), undefined, 'unavailable contemporary ephemeris is not relabeled as observed');
 });
 

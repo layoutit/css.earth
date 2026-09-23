@@ -1,6 +1,6 @@
 import { PLANET_IDS } from './body-types.js'
 import type { BodyId, BodyData, PlanetId } from './body-types.js'
-export { PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, SMALL_BODY_IDS, COMET_IDS, INTERSTELLAR_IDS, EXOPLANET_IDS } from './body-types.js'
+export { PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, SMALL_BODY_IDS, COMET_IDS, INTERSTELLAR_IDS, EXOPLANET_IDS, BLACK_HOLE_IDS } from './body-types.js'
 export type { BodyData, PlanetId, DwarfPlanetId, AsteroidId, TransNeptunianId, SmallBodyId, BodyId, CometId, InterstellarId, ExoplanetId } from './body-types.js'
 import { BODIES } from './body-data.js'
 export { BODIES } from './body-data.js'
