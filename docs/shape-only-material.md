@@ -28,7 +28,7 @@ brightness against each other survive. The surface must declare `falseColor`. Th
 
 A star with no image may instead show the colour of its catalogued photometric
 temperature, through the `stellar-photometric-color` science kind
-([stellar-photometric-color.mts](../tools/objects/observation/stellar-photometric-color.mts)).
+([stellar-photometric-color.mts](../tools/objects/observation/stellar/stellar-photometric-color.mts)).
 A Planck spectrum at that temperature is integrated with the CIE 1931 observer and
 converted to sRGB with its D65 white, scaled so the brightest channel is full. The
 disc is self-luminous: the colour carries no brightness or spectral lines. WASP-43

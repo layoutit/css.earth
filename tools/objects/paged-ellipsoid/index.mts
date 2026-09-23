@@ -1,6 +1,6 @@
 import { prepareEllipsoidAttitude } from './attitude.mts';
 import { readAuthoredSources } from '../authored-sources.ts';
-import {requireObjectControls} from '../../../site/scene-contract.mts';
+import {requireObjectControls} from '../../../site/scene/scene-contract.mts';
 import type {AuthoredObjectDescriptor} from '@cssearth/objects';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString} from '../../sources/source-values.mts';

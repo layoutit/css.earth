@@ -35,7 +35,7 @@ export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema
   animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
   destinations?: { catalog: { url: string; bytes: number; count: number; sha256: string }; defaultLens: string; statuses: { detail: string; overview: string } };
 };
-import { requireObjectControls } from "../../site/scene-contract.mts";
+import { requireObjectControls } from "../../site/scene/scene-contract.mts";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mts";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mts";
 

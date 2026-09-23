@@ -7,7 +7,7 @@ import { createDiagnosticRecorder } from '../diagnostic-recorder.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import { record } from '../browser-types.mts';
 import { required } from './navigation-test-values.mts';
-import { createNavigationTiming } from '../navigation-timing.mts';
+import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 
 function host() {
   const timers = new Map<number, () => void>(), frames = new Map<number, FrameRequestCallback>();

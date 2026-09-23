@@ -6,7 +6,7 @@ import { parsePreparedNebulaCatalog, isPreparedNebula } from '../../packages/cat
 import type { PreparedCatalogObject } from '../../packages/catalog/src/clusters.ts';
 import { normalizeDestinationQuery } from '../../site/destination-search.mts';
 import { definePreparedFocus } from '../../site/prepared-focus-object.mts';
-import { parseNavigationDistance } from '../../site/navigation-distance.mts';
+import { parseNavigationDistance } from '../../site/navigation/navigation-distance.mts';
 import { isRecord, hasErrorCode } from '../sources/source-values.mts';
 import { defineObjects } from '../../site/object-schema.mts';
 

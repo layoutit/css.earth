@@ -3,7 +3,7 @@ import 'vite/client';
 
 import type { publishObjectDiagnostics } from '../src/renderers/css/runtime/object-diagnostics.ts';
 export type ObjectRuntimeDiagnostics = ReturnType<typeof publishObjectDiagnostics>;
-import type { SceneDiagnostics } from './scene-router.mts';
+import type { SceneDiagnostics } from './scene/scene-router.mts';
 import type { WorldContextDiagnostics } from './application-world-context.mts';
 import type { createDiagnosticRecorder } from './diagnostic-recorder.mts';
 

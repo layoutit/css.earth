@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { hasErrorCode } from "../sources/source-values.mts";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
-import { requireObjectControls } from "../../site/scene-contract.mts";
+import { requireObjectControls } from "../../site/scene/scene-contract.mts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 

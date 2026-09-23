@@ -1,6 +1,6 @@
 import { record } from './browser-types.mts';
-import { parseNavigationDistance } from './navigation-distance.mts';
-import type { NavigationDistance } from './navigation-distance.mts';
+import { parseNavigationDistance } from './navigation/navigation-distance.mts';
+import type { NavigationDistance } from './navigation/navigation-distance.mts';
 import type { ObjectEntry } from './object-schema.mts';
 
 export interface PreparedFocusObject {

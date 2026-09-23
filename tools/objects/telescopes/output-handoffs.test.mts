@@ -86,7 +86,7 @@ test('physical inspection and export share the existing loader, frame and credit
 
 
 test('inactive sphere images are removed without changing geometry or active textures',async()=>{
- const {clearInactiveImageBindings}=await import('./sphere-assets.mts');
+ const {clearInactiveImageBindings}=await import('./sphere/sphere-assets.mts');
  const properties=[{name:'--surface-image',value:'url("/surface.webp")'},{name:'--interior-image',value:'url("/interior.webp"), url("/surface.webp")'},{name:'--transform',value:'rotateY(24deg) scale(2)'},{name:'--different-image',value:'url("/interior.webp-extra")'}];
  const original=structuredClone(properties),result=clearInactiveImageBindings(properties,[{url:'/interior.webp'}]);
  assert.deepEqual(result.inactiveImageProperties,['--interior-image']);

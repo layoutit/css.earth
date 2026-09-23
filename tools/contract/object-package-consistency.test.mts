@@ -10,7 +10,7 @@ import { dirname, relative, resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 import { TODO, starStylesheet } from '../objects/new-star.mts';
 import { readStarTemperature, temperatureCatalogueColor } from '../objects/star-catalogue-color.mts';
-import { CROSS_CHECK_AGREEMENT } from '../objects/observation/stellar-photometric-color.mts';
+import { CROSS_CHECK_AGREEMENT } from '../objects/observation/stellar/stellar-photometric-color.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const objectsDirectory = resolve(root, 'src/objects');

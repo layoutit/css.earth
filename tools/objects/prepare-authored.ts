@@ -92,7 +92,7 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
     summary: changes.map(change => `${change.lensId} ${JSON.stringify(change.authored)} -> ${JSON.stringify(change.derived)}`).join('; ') };
 }
 
-/** A photograph lens states the body point its frame looks at; the default camera must look there too (default-view.mts). The check
+/** A photograph lens states the body point its frame looks at; the default camera must look there too (default-view/geometry.mts). The check
  * reads the final frame, which follows the body as drawn. */
 async function assertDefaultViewsFaceLenses(objectDirectory: string, definition: Record<string, unknown>, frame: unknown): Promise<void> {
   const { descriptor, sources } = await readAuthoredSources(objectDirectory);
@@ -103,7 +103,7 @@ async function assertDefaultViewsFaceLenses(objectDirectory: string, definition:
     const frames = record(science.lens, 'surface-observation lens').frames;
     const lensFrame = Array.isArray(frames) && frames.length === 1 ? record(frames[0], 'lens frame') : null;
     if (!lensFrame || typeof lensFrame.observerWestLongitude !== 'number' || typeof lensFrame.observerLatitude !== 'number') continue;
-    const { assertDefaultViewFacesLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/default-view.mts')).href) as typeof import('./default-view.mts');
+    const { assertDefaultViewFacesLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/default-view/geometry.mts')).href) as typeof import('./default-view/geometry.mts');
     assertDefaultViewFacesLens(descriptor.id, definition.camera as never, frame as never, { longitudeDegrees: -lensFrame.observerWestLongitude, latitudeDegrees: lensFrame.observerLatitude });
   }
 }

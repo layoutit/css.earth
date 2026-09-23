@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { createSceneView } from '../scene-view.mts';
-import { createSceneSessions } from '../scene-session.mts';
-import { createNavigationLifecycle } from '../navigation-lifecycle.mts';
+import { createSceneView } from '../scene/scene-view.mts';
+import { createSceneSessions } from '../scene/scene-session.mts';
+import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import { formatSharedView, parseSharedView } from "../../src/renderers/css/dist/navigation.js";
 

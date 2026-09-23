@@ -9,7 +9,7 @@ import { proposedFamilyProfiles } from './family-handlers.mts';
 import { FAMILY_IDS, type CalibrationState, type DescriptorMember, type FamilyId, type MemberRole } from './product-descriptor.mts';
 import { describeMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
 import { describeHealpix, inspectHealpix } from './families/f14-healpix.mts';
-import { describePhysicalCartesianGrid, inspectPhysicalCartesianGrid, type PhysicalGridContext } from './families/f16-cartesian-grid.mts';
+import { describePhysicalCartesianGrid, inspectPhysicalCartesianGrid, type PhysicalGridContext } from './families/f16/f16-cartesian-grid.mts';
 
 export const LOCAL_IMPORT_SPEC_SCHEMA='cssearth-telescope-local-import-spec@1' as const;
 export const LOCAL_IMPORT_SCHEMA='cssearth-telescope-local-import@1' as const;
