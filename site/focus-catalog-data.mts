@@ -1,6 +1,5 @@
 // Build-owned catalogue transport. The browser and native requests read the
 // same authenticated files; catalogue contents are not application JavaScript.
-import { sha256 } from '../src/platform/sha256.mts';
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import galaxies from '../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import clusters from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
@@ -15,9 +14,7 @@ export const FOCUS_CATALOG_DATA = [
   { id: 'clusters', data: parsePreparedClusterCatalog(clusters) },
   { id: 'nebulae', data: nebulae },
 ].map(({ id, data }) => {
-  const text = JSON.stringify(data);
-  return { id, data, text, pin: { id, url: `/catalogues/${id}.json`, bytes: Buffer.byteLength(text),
-    sha256: sha256(text) } };
+  return { id, data, text: JSON.stringify(data) };
 });
 
 export const FOCUS_SOURCE_DOCUMENTS = new Map(FOCUS_CATALOG_DATA.flatMap(catalog => catalog.data.objects

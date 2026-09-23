@@ -2,16 +2,6 @@ import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload, type NavigationTree
 import type { BrowserWindow } from '../browser-types.mts';
 import { record } from '../browser-types.mts';
 
-interface NavigationTreePin { url: string; sha256: string; bytes: number }
-
-function readPin(root: HTMLElement): NavigationTreePin | null {
-  const url = root.dataset.atlasTreeSrc;
-  const sha256 = root.dataset.atlasTreeSha256;
-  const bytes = Number(root.dataset.atlasTreeBytes);
-  if (!url || !sha256 || !/^\/navigation-tree\/[a-f0-9]{64}\.json$/u.test(url) || !/^[a-f0-9]{64}$/u.test(sha256)
-    || !url.includes(sha256) || !Number.isSafeInteger(bytes) || bytes <= 0) return null;
-  return { url, sha256, bytes };
-}
 
 function parsePayload(value: unknown): NavigationTreePayload {
   if (!record(value) || value.schema !== NAVIGATION_TREE_SCHEMA || !Array.isArray(value.roots) || !record(value.nodes)) {
@@ -37,22 +27,17 @@ function parsePayload(value: unknown): NavigationTreePayload {
 }
 
 export function createNavigationTreeController(root: HTMLElement, windowTarget: BrowserWindow) {
-  const pin = readPin(root);
+  const url = root.dataset.atlasTreeSrc || null;
   const events = new AbortController();
   let selected = root.dataset.atlasCurrent ?? '';
   let payloadPromise: Promise<NavigationTreePayload> | null = null;
   let filterRevision = 0;
 
   const load = () => {
-    if (!pin) return Promise.reject(new Error('Navigation tree has no deferred-data pin.'));
-    if (!payloadPromise) payloadPromise = windowTarget.fetch(pin.url).then(async response => {
-      if (!response.ok) throw new Error(`Navigation tree request failed: ${response.status}.`);
-      const buffer = await response.arrayBuffer();
-      if (buffer.byteLength !== pin.bytes) throw new Error('Navigation tree size drifted.');
-      const digest = [...new Uint8Array(await windowTarget.crypto.subtle.digest('SHA-256', buffer))]
-        .map(byte => byte.toString(16).padStart(2, '0')).join('');
-      if (digest !== pin.sha256) throw new Error('Navigation tree identity drifted.');
-      return parsePayload(JSON.parse(new windowTarget.TextDecoder().decode(buffer)) as unknown);
+    if (!url) return Promise.reject(new Error('Navigation tree has no deferred-data address.'));
+    if (!payloadPromise) payloadPromise = windowTarget.fetch(url).then(async response => {
+      if (!response.ok) throw new Error(`Navigation tree request ${url} failed: ${response.status}.`);
+      return parsePayload(await response.json() as unknown);
     }).catch(error => { payloadPromise = null; throw error; });
     return payloadPromise;
   };
@@ -130,7 +115,7 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
     selected = objectId;
     root.dataset.atlasCurrent = objectId;
     let target = anchorByObject(objectId);
-    if (!target && pin) {
+    if (!target && url) {
       try {
         const payload = await load();
         // A later selection owns the tree once this one yields.
@@ -177,7 +162,7 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
       root.setAttribute('data-atlas-filtered', '');
       root.ariaBusy = 'true';
       try {
-        if (!pin) {
+        if (!url) {
           const matches = new Set(objectIds);
           for (const item of root.querySelectorAll<HTMLElement>('li[data-atlas-item-key]')) {
             item.hidden = ![...item.querySelectorAll<HTMLElement>('a[data-atlas-object]')]

@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
@@ -15,7 +14,7 @@ const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',
   objects: [{ id: 'moon', name: 'Moon', route: '/moon/', count: 1 }],
   features: [{ objectId: 'moon', id: 'tycho', name: 'Tycho', type: 'Crater', diameterKm: 85,
     searchNames: ['tycho'], searchContext: 'crater' }], places: [] });
-const pin = { url: '/features/index.json', bytes: Buffer.byteLength(index), sha256: createHash('sha256').update(index).digest('hex'), count: 1 };
+const pin = { url: '/features/index.json', count: 1 };
 const row = (name: string, classification: string, aliases: string[] = [], distanceM = 1) => `<li class="object-item" data-object-name="${name.toLowerCase()}"
   data-object-classification="${classification}" data-object-classification-name="${classification}" data-object-system-name="solar system"
   data-object-distance-m="${distanceM}" data-object-search-names='${JSON.stringify(aliases)}'><a href="/${name.toLowerCase()}/">${name}</a></li>`;
@@ -128,8 +127,8 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.equal(document.querySelector('.object-destination-result')?.getAttribute('href'), '/moon/?feature=tycho');
   assert.equal(document.querySelector('.object-destination-result-name')?.textContent, 'Tycho');
   assert.equal(document.querySelector<HTMLElement>('.object-empty')?.hidden, true);
-  const corrupt: typeof fetch = async () => new Response(index.replace('Tycho', 'Tych0'));
-  const failure = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=tycho', origin), corrupt)).document;
+  const unavailable: typeof fetch = async () => new Response('', { status: 503 });
+  const failure = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=tycho', origin), unavailable)).document;
   assert.match(failure.querySelector('.object-destination-hint')?.textContent ?? '', /could not load/);
   assert.equal(failure.querySelector('.object-destination-result')?.hasAttribute('href'), false);
 });

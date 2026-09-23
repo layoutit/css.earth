@@ -1,5 +1,5 @@
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
-import { record, requiredElement } from './browser-types.mts';
+import { record } from './browser-types.mts';
 import type { PreparedCatalogObject, PreparedGalaxyCatalog, PreparedClusterCatalog, PreparedNebulaCatalog } from '@cssearth/catalog';
 
 type PreparedFocusCatalog = PreparedGalaxyCatalog | PreparedClusterCatalog | PreparedNebulaCatalog;
@@ -43,21 +43,14 @@ export function readInitialFocus(document: Document): PreparedCatalogObject | nu
   return selected;
 }
 
-export async function loadFocusCatalogs(document: Document, origin: string, fetcher: typeof fetch = fetch, signal?: AbortSignal) {
-  const value: unknown = JSON.parse(requiredElement(document, 'script[data-focus-catalogs]').textContent ?? '');
-  if (!Array.isArray(value) || value.length !== 3) throw new TypeError('Prepared focus catalogues are missing.');
-  const rows = await Promise.all(value.map(async input => {
-    if (!record(input) || !['galaxies', 'clusters', 'nebulae'].includes(String(input.id)) ||
-      input.url !== `/catalogues/${input.id}.json` || typeof input.bytes !== 'number' || !Number.isSafeInteger(input.bytes) || input.bytes <= 0 ||
-      typeof input.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(input.sha256)) throw new TypeError('Invalid prepared focus catalogue pin.');
-    const response = await fetcher(new URL(String(input.url), origin), { redirect: 'error', signal: signal ?? AbortSignal.timeout(15_000) });
-    if (!response.ok) throw new Error('Prepared focus catalogue could not load.');
-    const bytes = await response.arrayBuffer();
-    const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
-    if (bytes.byteLength !== input.bytes || digest !== input.sha256) throw new TypeError('Prepared focus catalogue identity drifted.');
-    return { id: input.id, data: JSON.parse(new TextDecoder().decode(bytes)) as unknown };
+/** The three prepared focus catalogues, served at `/catalogues/<id>.json` (`site/pages/catalogues/[id].json.ts`). */
+export async function loadFocusCatalogs(origin: string, fetcher: typeof fetch = fetch, signal?: AbortSignal) {
+  const rows = await Promise.all((['galaxies', 'clusters', 'nebulae'] as const).map(async id => {
+    const url = new URL(`/catalogues/${id}.json`, origin);
+    const response = await fetcher(url, { redirect: 'error', signal: signal ?? AbortSignal.timeout(15_000) });
+    if (!response.ok) throw new Error(`Prepared focus catalogue ${url.pathname} failed: HTTP ${response.status}.`);
+    return { id, data: await response.json() as unknown };
   }));
-  if (new Set(rows.map(row => row.id)).size !== 3) throw new TypeError('Prepared focus catalogue identities are duplicated.');
   return { galaxies: parsePreparedGalaxyCatalog(rows.find(row => row.id === 'galaxies')?.data),
     clusters: parsePreparedClusterCatalog(rows.find(row => row.id === 'clusters')?.data),
     nebulae: parsePreparedNebulaCatalog(rows.find(row => row.id === 'nebulae')?.data) };
