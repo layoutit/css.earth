@@ -1,0 +1,39 @@
+{
+  "id": "doi-10-3847-1538-3881-ae8c30",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Transit Timing of the White Dwarf-cold Jupiter System WD 1856+534",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae8c30"
+    },
+    {
+      "type": "arXiv",
+      "value": "2511.21611"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae8c30",
+      "label": "Gendreau-Distler et al. (2026)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-3881/ae8c30",
+      "checkedOn": "2026-09-23",
+      "locator": "Tables 1 and 2; abstract"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "E. A. Gendreau-Distler, K. B. Bostow, K. C. Patra et al.",
+      "scope": "citation",
+      "evidence": "Published author list"
+    }
+  ]
+}

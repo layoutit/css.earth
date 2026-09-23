@@ -1,0 +1,28 @@
+{
+  "id": "wd-1856-534b",
+  "classification": "exoplanet",
+  "order": 1711,
+  "physical": {
+    "name": "WD 1856+534 b",
+    "horizonsCode": null,
+    "meanRadiusKm": 67631.4,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "wd-1856-534"
+  },
+  "physicalNotes": "Limbach et al. (2025, arXiv:2504.16982), Table 1: radius 0.946 +/- 0.017 Jupiter radii (at 71492 km per Jupiter radius). No gravitational parameter is adopted: the mass is bounded, not measured. Limbach et al. (2025) give an upper limit of 5.2 +0.7/-0.8 Jupiter masses from its measured 186 K heat and the system age; Xu et al. (2021, arXiv:2110.14106) give a lower limit of 0.84 Jupiter masses. A sphere: no oblateness is measured.",
+  "hostedOrbit": {
+    "periodDays": 1.407939211,
+    "semiMajorAxisStellarRadii": 336,
+    "inclinationDegrees": 88.778,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 59204.072725,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Gendreau-Distler et al. (2026), AJ 172, 141 (arXiv:2511.21611), Table 2, constant-period model without TESS: 1.407939211 +/- 5e-9 d, fitted to 1498 epochs of transits.",
+      "shape": "Vanderburg et al. (2020), Nature 585, 363 (arXiv:2009.07282), Table 1, circular fit: a/R* = 336 +/- 14, inclination 88.778 +/- 0.059 degrees. The display multiplies a/R* by the Limbach et al. (2025) stellar radius (0.0121 solar radii), which places the planet at 0.0189 AU; Vanderburg et al. give 0.0204 AU from their larger 0.0131 solar-radius star.",
+      "eccentricity": "Circular: Gendreau-Distler et al. (2026, AJ 172, 141; arXiv:2511.21611) find no evidence for eccentricity, with an upper limit of about 0.01.",
+      "phase": "Gendreau-Distler et al. (2026, AJ 172, 141; arXiv:2511.21611), Table 2: reference transit t0 = 2459204.572725 BJD_TDB; BMJD_TDB = t0 - 2400000.5.",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
+  }
+}
