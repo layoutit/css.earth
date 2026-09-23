@@ -3,7 +3,7 @@ import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.
 import type { NavigationContent } from './navigation-content.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { ShellOverview } from './shell-selection.mts';
-import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
+import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 
