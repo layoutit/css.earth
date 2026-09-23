@@ -7,7 +7,8 @@ interface Props {
   objectId: string;
   lenses: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
   controlName?: 'dataset' | 'focusLens';
-  route?: string;
+  /** Null leaves the form without an action, so it submits to the page it is spliced into. */
+  route?: string | null;
   thumbnailObjectId?: string;
 }
 const { objectId, lenses, controlName = 'dataset', route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
@@ -24,7 +25,7 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
 };
 ---
 <section id={`${objectId}-lenses`} class="object-lenses">
-  <form id={`${objectId}-datasets`} action={route} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
+  <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
     {['v', 'overview', 'focus', focus ? 'dataset' : 'focusLens', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
   </form>
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">
