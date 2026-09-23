@@ -16,6 +16,7 @@ export interface NavigationRequest {
   own(cleanup: () => void): void;
 }
 type RequestOptions = Pick<NavigationRequest, 'id' | 'cancelledFlight' | 'url' | 'options' | 'timing'>;
+export type NavigationLifecycle = ReturnType<typeof createNavigationLifecycle>;
 
 /** One authority for in-flight work. A settled request can never publish or dispose its successor. */
 export function createNavigationLifecycle({ onCancel, onError }: {
