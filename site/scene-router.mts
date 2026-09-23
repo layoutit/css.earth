@@ -84,6 +84,7 @@ export function createSceneRouter({
       preferences.apply(value);
     },
     onFlightStart() { motionEnabled = false; shellOwner?.shell?.setMotionEnabled?.(false); syncPlayback(); },
+    onFocusChange(session, url) { view.replace(session, url); },
     onError: report,
   });
   const view = createSceneView({ windowTarget, scenes, requests, listenToPopState: !navigation,
@@ -414,8 +415,7 @@ export function createSceneRouter({
           // subscriptions. Change their selection in place in either direction.
           setOverview(next.overview);
           const url = withOverviewScope(withDataset(new URL(windowTarget.location.href), null), next.overview ? 'system' : null);
-          session.url = url.href;
-          historyOwner?.commit(url.href, { history: 'replace' });
+          view.replace(session, url.href);
           session.viewUrl?.flush();
           return;
         }
