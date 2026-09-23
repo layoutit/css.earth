@@ -1,0 +1,7 @@
+---
+// The prepared focus card's dataset banks, rendered once for every object page.
+// Pages fetch this on their first focus selection (`site/focus-fragment.mts`).
+import PreparedFocusLenses from '../../components/PreparedFocusLenses.astro';
+---
+<div data-focus-banks="lenses"><PreparedFocusLenses /></div>
+<div data-focus-banks="facts"><PreparedFocusLenses factsOnly /></div>

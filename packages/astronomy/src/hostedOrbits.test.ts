@@ -1,6 +1,6 @@
 import { keplerStateKm } from './kepler.js'
 import { describe, expect, it } from 'vitest'
-import { hostedKeplerElements, hostSkyFrame, hostedOrbit, hostedOrbitApoapsisKm, hostedOrbitPhase, hostedOrbitPhaseBmjdTdb, hostedOrbitStateRelativeBmjdTdb, hostedOrbitStateRelativeKm, hostedPlanetStateRelativeKm, HOSTED_PLANET_IDS, type HostedOrbit } from './hostedOrbits.js'
+import { hostedBarycentreCompanion, hostedOrbitCentreStateKm, hostedPlanetStateAboutCentreKm, hostedKeplerElements, hostSkyFrame, hostedOrbit, hostedOrbitApoapsisKm, hostedOrbitPhase, hostedOrbitPhaseBmjdTdb, hostedOrbitStateRelativeBmjdTdb, hostedOrbitStateRelativeKm, hostedPlanetStateRelativeKm, HOSTED_PLANET_IDS, type HostedOrbit } from './hostedOrbits.js'
 import { directionFromRaDec, skyBasis, starAstrometry } from './stars.js'
 import { PARSEC_KM } from './index.js'
 import { BODIES, EXOPLANET_IDS } from './bodies.js'
@@ -24,9 +24,9 @@ describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
-    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
+    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-16ab-b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b'])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'kepler-16ab-b'])
     for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
@@ -244,5 +244,57 @@ describe('hosted orbits', () => {
     expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, ascendingNodePositionAngleDegrees: 360 }, star, hostRadiusKm, 60000)).toThrow(/ascendingNode/)
     expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: -1 }, star, hostRadiusKm, 60000)).toThrow(/argumentOfPeriapsis/)
     expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, semiMajorAxisStellarRadii: 1.5 }, star, hostRadiusKm, 60000)).toThrow(/stellar surface/)
+  })
+})
+
+describe('Kepler-16: a circumbinary planet', () => {
+  // Independent oracle: the Villanova Kepler Eclipsing Binary Catalogue (Kirk et al. 2016, AJ 151, 68), KIC 12644769, read
+  // 2026-09-23 from https://keplerebs.villanova.edu/overview/?k=12644769: a linear ephemeris fitted to the Kepler eclipses
+  // themselves, not to Doyle et al.'s photometric-dynamical model the records carry.
+  const catalogue = { bjd0: 2454965.657634, periodDays: 41.0775867, secondaryPhase: 0.4885 }
+  const star = starAstrometry('kepler-16-a'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+  const radiusA = BODIES['kepler-16-a'].meanRadiusKm, radiusB = BODIES['kepler-16-b'].meanRadiusKm
+  const projected = (position: readonly number[]) => Math.hypot(...position.map((value, axis) => value - dot(position, sight) * sight[axis]!))
+  it('eclipses A behind B at every catalogued primary eclipse of the Kepler mission, and B behind A at every secondary', () => {
+    for (let n = 0; n < 36; n++) {
+      const primary = hostedPlanetStateRelativeKm('kepler-16-b', catalogue.bjd0 + n * catalogue.periodDays).positionKm
+      const secondary = hostedPlanetStateRelativeKm('kepler-16-b', catalogue.bjd0 + (n + catalogue.secondaryPhase) * catalogue.periodDays).positionKm
+      // In front is toward the observer, against the line of sight.
+      expect(dot(primary, sight), `primary ${n}`).toBeLessThan(0)
+      expect(projected(primary), `primary ${n}`).toBeLessThan(radiusA + radiusB)
+      expect(dot(secondary, sight), `secondary ${n}`).toBeGreaterThan(0)
+      expect(projected(secondary), `secondary ${n}`).toBeLessThan(radiusA + radiusB)
+    }
+  })
+  it('centres the planet orbit on the mass-weighted point between A and B', () => {
+    const companion = hostedBarycentreCompanion('kepler-16ab-b')!
+    expect(companion.id).toBe('kepler-16-b')
+    expect(companion.weight).toBeCloseTo(0.20255 / (0.6897 + 0.20255), 12)
+    for (const epoch of [2455212.12316, 2461306.5]) {
+      const b = hostedPlanetStateRelativeKm('kepler-16-b', epoch).positionKm, centre = hostedOrbitCentreStateKm('kepler-16ab-b', epoch).positionKm
+      const own = hostedPlanetStateAboutCentreKm('kepler-16ab-b', epoch).positionKm, planet = hostedPlanetStateRelativeKm('kepler-16ab-b', epoch).positionKm
+      for (let axis = 0; axis < 3; axis++) {
+        expect(centre[axis]!).toBeCloseTo(b[axis]! * companion.weight, 3)
+        expect(planet[axis]!).toBeCloseTo(own[axis]! + centre[axis]!, 3)
+      }
+    }
+    expect(hostedOrbitCentreStateKm('wasp-43b', 2461306.5).positionKm).toEqual([0, 0, 0])
+  })
+  it('reproduces the seven Kepler transits across A, early and late as A swings around the barycentre', () => {
+    // Mid-times of the planet's transits across A, measured from the Kepler long-cadence PDCSAP light curves of KIC 12644769
+    // (MAST, kplr012644769-*_llc.fits, quality 0): the depth-weighted centre of each dip deeper than 0.7% outside the stellar
+    // eclipses, after a 1.5-day running median. The record's mean period is a linear fit to these same transits, so only their
+    // alternation tests the barycentre: with it the model is within 0.13 d of every transit, without it off by up to 2.3 d.
+    const observed = [2454973.433, 2455203.617, 2455425.201, 2455655.439, 2455876.974, 2456107.256, 2456328.739]
+    const radiusPlanet = BODIES['kepler-16ab-b'].meanRadiusKm
+    for (const time of observed) {
+      let best = { time: Number.NaN, separation: Infinity }
+      for (let t = time - 5; t <= time + 5; t += 0.002) {
+        const planet = hostedPlanetStateRelativeKm('kepler-16ab-b', t).positionKm
+        if (dot(planet, sight) < 0 && projected(planet) < best.separation) best = { time: t, separation: projected(planet) }
+      }
+      expect(best.separation, `transit near ${time}`).toBeLessThan(radiusA + radiusPlanet)
+      expect(Math.abs(best.time - time), `transit near ${time}`).toBeLessThan(0.5)
+    }
   })
 })

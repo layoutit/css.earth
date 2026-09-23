@@ -8,7 +8,7 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import { encodeWorldOrbits, parseWorldContextSource, prepareWorldContext, summarizeWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
-interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; }
+interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; readonly centerParentBodyId?: string; }
 interface SolarGeometry {
   readonly SOLAR_GEOMETRY_EPOCH_JD_TT: number;
   readonly ASTRONOMICAL_UNIT_KILOMETERS: number;
@@ -134,6 +134,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     if (!states[state.centerBodyId] && state.centerBodyId !== source.focus.id) {
       const primary = geometry.BODY_HELIOCENTRIC_STATES[state.centerBodyId];
       if (primary) orbitCenters[state.centerBodyId] = { positionM: scale(primary.positionKm, M_PER_KM), centerBodyId: 'sun' };
+      // A binary's centre of mass (a circumbinary planet's orbit centre) is placed by the planet's own prepared orbit.
+      const centreParent = geometry.BODY_ORBITS[body.id]!.centerParentBodyId;
+      if (centreParent !== undefined) orbitCenters[state.centerBodyId] = { positionM: state.centerPositionM, centerBodyId: centreParent };
     }
     const parentPosition = state.centerBodyId === source.focus.id ? source.frame.originM :
       (states[state.centerBodyId] ?? orbitCenters[state.centerBodyId])?.positionM;
@@ -247,7 +250,8 @@ function orbits(value: unknown): Readonly<Record<string, Orbit>> {
     if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis and eccentricity are incompatible.`);
     return [id, { semiMajorAxisAu, eccentricity: orbitEccentricity, heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
       perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`),
-      ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }) }];
+      ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }),
+      ...(orbit.centerParentBodyId === undefined ? {} : { centerParentBodyId: text(orbit.centerParentBodyId, `${id} orbit centre parent`) }) }];
   })));
 }
 function apply(matrix: readonly number[], value: Vector3): Vector3 { return [matrix[0]! * value[0] + matrix[1]! * value[1] + matrix[2]! * value[2], matrix[3]! * value[0] + matrix[4]! * value[1] + matrix[5]! * value[2], matrix[6]! * value[0] + matrix[7]! * value[1] + matrix[8]! * value[2]]; }

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-16ab-b",
+  "displayName": "Kepler-16 (AB) b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "8.45 Earth radii",
+        "source": {
+          "catalogueId": "arxiv-1109-3432",
+          "url": "https://arxiv.org/abs/1109.3432",
+          "label": "Doyle et al. 2011",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "226 days",
+        "source": {
+          "catalogueId": "kebc-12644769",
+          "url": "https://keplerebs.villanova.edu/overview/?k=12644769",
+          "label": "Villanova Kepler Eclipsing Binary Catalogue, KIC 12644769",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-16; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-16ab-b-lens-shape.webp",
+        "surface": "kepler-16ab-b-surface-shape@2x.webp",
+        "poles": "kepler-16ab-b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-16ab-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1109.3432"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet exists: it is known from its transits across both stars and from the timing of the stars' eclipses (see the investigation ledger). The gray marks an unresolved surface; the lighting is star A's, at the measured orbit. Star B, 1.5% as bright in Kepler's band, is not added to the lighting."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "L. R. Doyle et al., \"Kepler-16: A Transiting Circumbinary Planet\", Science 333, 1602 (2011), arXiv:1109.3432",
+      "href": "https://arxiv.org/abs/1109.3432"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1109.3432",
+      "credit": "L. R. Doyle et al., \"Kepler-16: A Transiting Circumbinary Planet\", Science 333, 1602 (2011), arXiv:1109.3432"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-16ab-b.json",
+      "credit": "Published radius and mass (Doyle et al. 2011); orbit size and tilt from Doyle et al. 2011, mean period from the Kepler transits (Villanova Kepler Eclipsing Binary Catalogue)"
+    }
+  }
+}
