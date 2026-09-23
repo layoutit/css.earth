@@ -1,0 +1,23 @@
+{
+  "id": "simbad-hd-110067",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic data for HD 110067",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+110067",
+      "label": "SIMBAD HD 110067"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+110067",
+      "checkedOn": "2026-09-23",
+      "locator": "ICRS position, proper motion, parallax and radial velocity"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

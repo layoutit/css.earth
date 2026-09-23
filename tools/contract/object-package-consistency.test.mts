@@ -88,8 +88,10 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
   const stars: string[] = [];
   for (const file of (await readdir(resolve(root, 'packages/astronomy/data/bodies'))).sort()) {
     const record = requireRecord(JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', file), 'utf8')) as unknown);
-    if (!isRecord(record.star)) continue;
+    if (record.classification !== 'star' || !isRecord(record.star)) continue;
     const id = requireString(record.id), directory = resolve(objectsDirectory, id);
+    // Astronomy records can precede an authored renderable package.
+    if (!await exists(resolve(directory, 'object.json'))) continue;
     const descriptor = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')) as unknown), properties = requireRecord(descriptor.properties);
     const catalog = requireRecord(properties.catalog), frame = requireRecord(properties.worldFrame);
     const frameAu = Math.hypot(...(frame.originM as number[])) / 149597870700;
@@ -128,8 +130,7 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
     }
     const stylesheet = await readFile(resolve(root, 'src/renderers/css/styles', `${id}-surfaces.css`), 'utf8');
     const stripComments = (css: string) => css.replace(/\/\*[\s\S]*?\*\//gu, '').replace(/\n{2,}/gu, '\n');
-    assert.equal(stripComments(stylesheet), stripComments(starStylesheet(id, id, requireFiniteNumber(requireRecord(raster.emission).offLimbSize), '', undefined,
-      requireFiniteNumber(requireRecord(JSON.parse(await readFile(resolve(directory, 'source/presentation/solar-system.json'), 'utf8')) as unknown).geometryScale))),
+    assert.equal(stripComments(stylesheet), stripComments(starStylesheet(id, id, requireFiniteNumber(requireRecord(raster.emission).offLimbSize), '')),
       `${id}: ${relative(root, resolve(root, 'src/renderers/css/styles', `${id}-surfaces.css`))} is the star stylesheet template`);
     stars.push(id);
   }

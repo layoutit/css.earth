@@ -63,26 +63,24 @@
   background-image: var(--wasp-39-poles-image) !important;
 }
 
-/* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
-   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="wasp-39"] .wasp-39-corona-layer {
   background-image: var(--wasp-39-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(600px * 1.25 * var(--wasp-39-camera-zoom, 1))
-    calc(600px * 1.25 * var(--wasp-39-camera-zoom, 1));
+    calc(600px * var(--wasp-39-camera-zoom, 1))
+    calc(600px * var(--wasp-39-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
-   sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="wasp-39"] .wasp-39-limb-layer {
   background-image: var(--wasp-39-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * 1.25 * var(--wasp-39-camera-zoom, 1))
-    calc(496px * 1.25 * var(--wasp-39-camera-zoom, 1));
+    calc(496px * var(--wasp-39-camera-zoom, 1))
+    calc(496px * var(--wasp-39-camera-zoom, 1));
 }
 
 .object-stage[data-object-id="wasp-39"] .polycss-camera {
