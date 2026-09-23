@@ -52,8 +52,8 @@
     {
       "location": "public",
       "filename": "comet-67p-features.json",
-      "bytes": 28510,
-      "sha256": "30aa9c5c6d706c8aa41831703c591429a2fed3f6cdec8d46f5bc13af1ca7abf3"
+      "bytes": 28512,
+      "sha256": "cfe2bd026c1b442611b9322df70878c0b320e7c20740135d39ef8a968001d163"
     },
     {
       "location": "public",
@@ -100,14 +100,14 @@
     {
       "location": "public",
       "filename": "comet-67p-model-shadow@2x.webp",
-      "bytes": 157406,
-      "sha256": "8f62d7d463720d2486239fb5ec05f2713afdbca56f5adf6037208661e15a2fb4"
+      "bytes": 87508,
+      "sha256": "dd6cf57ead6fad96a964dbbbfd737d5f3da801a8db3e72e045595645b10e067d"
     },
     {
       "location": "public",
       "filename": "comet-67p-model-surface@2x.webp",
-      "bytes": 178552,
-      "sha256": "344e19cff7489594db475d7a10137b6bd6b366cb2c4012e7939d5d9404eea21d"
+      "bytes": 82816,
+      "sha256": "cc40f291084bf99499b3d0d1f76e91b85d055e30b038374d43d7dbbee248e88e"
     },
     {
       "location": "public",
@@ -118,14 +118,14 @@
     {
       "location": "public",
       "filename": "comet-67p-osiris-shadow@2x.webp",
-      "bytes": 1007074,
-      "sha256": "b01b9be5161b57e178663851e77af694a1c26064487a227dbac94851cc327f5c"
+      "bytes": 587780,
+      "sha256": "0529b8a910055fdb11da829d170d097ccf9d2cdc8a7f196a267b6b259872e70c"
     },
     {
       "location": "public",
       "filename": "comet-67p-osiris-surface@2x.webp",
-      "bytes": 1237682,
-      "sha256": "af3f3686ac5914d1d073c5bfa50cafa5b01018c34919e9b3994eda1cb007d264"
+      "bytes": 769772,
+      "sha256": "8325fe22b5466b15c79178b5e59bfdfa41aea8e9e30ad414e5abaa2810c121fc"
     },
     {
       "location": "public",
@@ -197,19 +197,19 @@
       "location": "prepared",
       "filename": "features.json",
       "bytes": 673,
-      "sha256": "e9ca84944fb87f8edc578c37221a4fbdb5d839763807cd6751f3e75576eaa29b"
+      "sha256": "5932c54b7dbfbed820d852623761c3b71d2c126558a434f3e0e5c7412c1bc6ff"
     },
     {
       "location": "prepared",
       "filename": "lenses.json",
       "bytes": 9185,
-      "sha256": "6b76a71d533e9da5137ee327ae27bcb2dfed9302f4e6e04580a116e0c120aabe"
+      "sha256": "46aaa00faa0eab5fb91af9e95ca31ec3a88d4055a91b9f97226d4816a47dd4e6"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 250937,
-      "sha256": "b3ce1083f68aa0e78e207749f900b2291059861afd1a13312a7434ff9b4f0228"
+      "bytes": 249185,
+      "sha256": "d38338f4e023733f5b08c62183ac732b01e830d072f40e98db36754836f98bab"
     },
     {
       "location": "prepared",
@@ -262,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 948487,
-      "sha256": "5c8e8950da69a90592c5452dd4a0c3401c57afe62035b9ec75a80b3d3afc45f6"
+      "bytes": 947745,
+      "sha256": "602eb052efb3102cc40eb7bd1def1e572a02a7e5d3437c3e62d5d1f58af2882c"
     },
     {
       "location": "prepared",
@@ -292,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 250944,
-      "sha256": "18c0a7a0b5f01d1e9f3dcd11325bd27d7545646a26975ffcf9466b549b84eced"
+      "bytes": 249192,
+      "sha256": "398dbd243ce1b98d1822875034d12dc9b741e527e579bee77b10564ed1acb4ca"
     },
     {
       "location": "prepared",

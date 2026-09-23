@@ -7,11 +7,11 @@ import { prepareImageLayers, sha256 } from '../../src/preparation/image-layers/p
 
 export async function prepareImageLayerObject(objectDirectory: string) {
   const root=resolve(objectDirectory), sourceDirectory=resolve(root,'source'), outputDirectory=resolve(root,'prepared');
-  const descriptor=JSON.parse(await readFile(resolve(root,'object.json'),'utf8')) as {properties?:{preparation?:{source?:string;sha256?:string}}};
+  const descriptor=JSON.parse(await readFile(resolve(root,'object.json'),'utf8')) as {properties?:{preparation?:{source?:string}}};
   const ref=descriptor.properties?.preparation;
-  if(!ref?.source||!ref.sha256)throw new TypeError('Image-layer object must reference its source recipe.');
+  // Git holds the tracked recipe; the descriptor names it and pins nothing.
+  if(!ref?.source)throw new TypeError(`Image-layer object ${root} must name its source recipe in properties.preparation.source.`);
   const recipeBytes=await readFile(resolve(root,ref.source));
-  if(sha256(recipeBytes)!==ref.sha256)throw new TypeError('Image-layer recipe digest mismatch.');
   const recipe=parseImageLayerRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
   await mkdir(outputDirectory,{recursive:true});
   let previous:string[]=[];try{const old=JSON.parse(await readFile(resolve(outputDirectory,'image-layers.json'),'utf8')) as {resources?:{path?:unknown}[]};previous=(old.resources??[]).flatMap(r=>typeof r.path==='string'?[r.path]:[]);}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}
