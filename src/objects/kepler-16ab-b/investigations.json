@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-16ab-b",
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius, mass and orbit adopted from the published record",
+      "status": "included",
+      "finding": "Radius 0.7538 Jupiter radii, mass 0.333 Jupiter masses, a2 = 0.7048 au, i2 = 90.0322 degrees, e2 = 0.0069, omega2 = 318 degrees and the mean longitude 106.51 degrees at BJD 2455212.12316 from Doyle et al. (2011), Table 1. The orbit is about the barycentre of A and B.",
+      "evidence": [
+        "https://arxiv.org/abs/1109.3432"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "id": "mean-period",
+      "subject": "Which period carries the planet to the scene epoch",
+      "status": "included",
+      "finding": "Doyle et al.'s osculating 228.776 d misplaces the seven Kepler transits by -2.6 to +18.7 d. Triaud et al. (2022)'s mean 226.0 +/- 1.7 d has a phase uncertain by 92 d. The Villanova catalogue's mean transit period 225.885 d with Doyle's mean longitude puts all seven transits within 0.13 d.",
+      "evidence": [
+        "https://keplerebs.villanova.edu/overview/?k=12644769",
+        "https://arxiv.org/abs/2112.06584"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "id": "orbit-precession",
+      "subject": "The precessing orbit and the end of transits",
+      "status": "open",
+      "finding": "Doyle et al. predict transits across A to cease in early 2018 and return around 2042, and those across B to stop for 35 years from May 2014. A fixed ellipse keeps the 2010 tilt; showing the precession would need the three-body model at the scene epoch.",
+      "evidence": [
+        "https://arxiv.org/abs/1109.3432"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "id": "surface-or-colour",
+      "subject": "Any image, colour or spectrum of the planet",
+      "status": "excluded",
+      "finding": "None published: the planet is known from transits, eclipse timing and radial velocities only.",
+      "evidence": [],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    }
+  ]
+}

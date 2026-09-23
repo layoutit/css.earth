@@ -22,10 +22,12 @@ export interface SystemViewPolicy {
 /** Bake candidate views, member positions and complete-orbit bounds. Runtime only projects these. */
 export function prepareSystemView(parent: Pick<PreparedWorldContext['focus'], 'id' | 'positionM' | 'radiusM'>,
   bodies: PreparedWorldContext['bodies'], states: Readonly<Record<string, OrbitalState>>,
-  policy: SystemViewPolicy): PreparedSystemView | undefined {
+  policy: SystemViewPolicy, orbitCenters: Readonly<Record<string, { readonly centerBodyId: string }>> = {}): PreparedSystemView | undefined {
   validatePolicy(policy);
-  // A placed body carries no orbit and belongs to no system view.
-  const members = orderMembers(bodies.filter(body => body.orbit?.centerBodyId === parent.id), states);
+  // A placed body carries no orbit and belongs to no system view. A body orbiting a named centre placed off the parent (a
+  // circumbinary planet around its host and companion's centre of mass) belongs to the parent's system.
+  const members = orderMembers(bodies.filter(body => body.orbit !== undefined &&
+    (body.orbit.centerBodyId === parent.id || orbitCenters[body.orbit.centerBodyId]?.centerBodyId === parent.id)), states);
   if (!members.length) return undefined;
   // The share drops members known to be small. An unmeasured radius (0, a star known from its orbit alone) is not known small.
   const main = members.filter(member => member.radiusM === 0 || member.radiusM >= members[0]!.radiusM * policy.minimumRadiusShare);

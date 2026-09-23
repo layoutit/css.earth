@@ -1,0 +1,31 @@
+{
+ "id": "kepler-16-b",
+ "classification": "star",
+ "order": 1710,
+ "physical": {
+  "name": "Kepler-16 B",
+  "horizonsCode": null,
+  "meanRadiusKm": 157388.211,
+  "gravitationalParameterKm3PerS2": 26880904730.494823,
+  "parent": "kepler-16-a"
+ },
+ "physicalNotes": "Radius 0.22623 (+0.00059/-0.00053) solar radii and mass 0.20255 (+0.00066/-0.00065) solar masses from Doyle et al. (2011, Science 333, 1602; arXiv:1109.3432), Table 1: 157,388.211 km at 695,700 km per solar radius; GM is the mass times the JPL solar GM. No effective temperature of star B is measured: Bender et al. (2012, ApJL 751, L31) adopted the 2800 K of the template star GJ 905 to cross-correlate its spectrum, which is not a measurement of B, so the record carries none and the star is drawn in the shared neutral gray.",
+ "hostedOrbit": {
+  "periodDays": 41.077772,
+  "semiMajorAxisStellarRadii": 74.33173,
+  "inclinationDegrees": 90.3401,
+  "eccentricity": 0.15994,
+  "transitTimeBmjdTdb": 57572.5984,
+  "argumentOfPeriapsisDegrees": 263.672,
+  "epochDefinition": "periastron",
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Triaud et al. (2022, MNRAS 511, 3561; arXiv:2112.06584), Table 2, the adopted Kima column: P_bin = 41.077772 +/- 0.000051 d, a mean period from a Keplerian fit to SOPHIE radial velocities of star A (2016-2020). Doyle et al.'s 41.079220 d is an osculating period at 2010, which three-body dynamics moves; propagated as a fixed ellipse to the scene epoch it would drift by a fifth of a day.",
+   "shape": "Doyle et al. (2011, Science 333, 1602; arXiv:1109.3432), Table 1: a1 = 0.22431 (+0.00035/-0.00034) au, the orbit of B relative to A, over A's 451,439.73 km radius (0.6489 solar radii): 74.33173 stellar radii; i1 = 90.3401 (+0.0016/-0.0019) degrees. Radial velocities do not measure the inclination.",
+   "phase": "Triaud et al. (2022, MNRAS 511, 3561; arXiv:2112.06584), Table 2, the adopted Kima column: T0,bin = BJD 2,457,573.0984 +/- 0.0047, the time of periastron (BJD taken as BJD_TDB): BMJD_TDB 57572.5984.",
+   "orientation": "Display convention: eclipse photometry and radial velocities do not measure the orbit's position angle on the sky (Doyle et al. 2011 set Omega1 = 0 by definition), so the ascending node is set at position angle 0 (celestial north).",
+   "eccentricity": "Triaud et al. (2022, MNRAS 511, 3561; arXiv:2112.06584), Table 2, the adopted Kima column: e_bin = 0.15994 +/- 0.00010 (Doyle et al. 2011: 0.15944, osculating).",
+   "argumentOfPeriapsis": "Triaud et al. (2022, MNRAS 511, 3561; arXiv:2112.06584), Table 2, the adopted Kima column: omega_bin = 263.672 +/- 0.040 degrees, star A's own, fitted to A's radial velocities, which is the host-side argument this record stores (Doyle et al. 2011: 263.464, osculating). Checked against the Kepler eclipse times of the Villanova Kepler Eclipsing Binary Catalogue (Kirk et al. 2016, AJ 151, 68) entry for KIC 12644769, read 2026-09-23 from https://keplerebs.villanova.edu/overview/?k=12644769 in packages/astronomy/src/hostedOrbits.test.ts: B is in front of A at every primary eclipse and behind it at every secondary."
+  }
+ }
+}

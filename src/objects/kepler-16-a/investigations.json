@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-16-a",
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius, mass, temperature and placement",
+      "status": "included",
+      "finding": "Radius 0.6489 solar radii, mass 0.6897 solar masses, effective temperature 4450 +/- 150 K and barycentre radial velocity -32.769 km/s from Doyle et al. (2011), Table 1. Position, parallax 13.2806 +/- 0.0284 mas and proper motion from Gaia EDR3 via SIMBAD; Gaia sees the unresolved pair, whose photocentre is star A to well under a milliarcsecond.",
+      "evidence": [
+        "https://arxiv.org/abs/1109.3432",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Kepler-16"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "id": "revised-masses",
+      "subject": "SOPHIE dynamical masses of A and B",
+      "status": "excluded",
+      "finding": "Sebastian et al. (2025, EBLM XV) measure dynamical masses 2 to 7% above earlier values. Not adopted: the orbit elements this system is drawn with were fitted jointly with Doyle et al.'s masses, and mixing the two would move the barycentre without a matching orbit fit.",
+      "evidence": [
+        "https://arxiv.org/abs/2505.19718"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "id": "star-b-temperature",
+      "subject": "A measured temperature for star B",
+      "status": "open",
+      "finding": "None found. Bender et al. (2012) adopted 2800 K from the template star GJ 905 to cross-correlate B's spectrum, which is not a measurement of B; Doyle et al.'s supplement, which may discuss it, was not reachable (science.org refused the download). B is drawn in the shared neutral gray.",
+      "evidence": [
+        "https://arxiv.org/abs/1205.0259"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "id": "resolved-surface",
+      "subject": "A resolved image of the photosphere",
+      "status": "excluded",
+      "finding": "Kepler-16 A subtends 0.08 mas, far below the resolution of CHARA or VLTI; no image exists.",
+      "evidence": [],
+      "checked": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
+    }
+  ]
+}

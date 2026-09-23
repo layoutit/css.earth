@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 109.07573265789,
+  "declinationDegrees": 38.24256035386,
+  "displayMeridianDegrees": -90,
+  "phase": "arbitrary-display-phase",
+  "source": "No measured rotation axis. Winn et al. (2011, ApJL 741, L1; arXiv:1109.3198) measure a rotation period of 35.1 +/- 1.0 d from star spots and a projected obliquity of 1.6 +/- 2.4 degrees to the binary orbit; the binary orbit's own position angle on the sky is unmeasured, so no axis can be placed and no spin is drawn. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of Kepler-16 A are unmeasured; the axis shown is where celestial north lies on the sky."
+}
