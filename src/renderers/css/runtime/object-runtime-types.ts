@@ -5,7 +5,7 @@ import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "
 import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 import type { PreparedAssets } from "../rendering/prepared-residency.js";
 import type { PreparedPresentationDefinition } from "../rendering/prepared-presentation.js";
-import type { CubicSkyPlan } from "../solar-system/cubic-sky-runtime.js";
+import type { CubicSkyPlan } from "../solar-system/cubic-sky-plan.js";
 import type { DirectionalSunPlan } from "../solar-system/directional-sun-coordinate.js";
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
@@ -29,33 +29,41 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly assetOrigin?: PreparedAssetOrigin;
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
+export interface PreparedDestination {
+  readonly camera: Parameters<RetainedCubicSkyOrbit['flyToState']>[0];
+  readonly coverage: string;
+}
 export interface PreparedDestinationRuntime {
-  select(place: unknown): Promise<unknown>;
-  reset(): unknown;
+  readonly lensId: string;
+  select(place: PreparedDestination, options?: { signal?: AbortSignal }): Promise<{
+    status: string; arrival: Promise<{ completed: boolean }>;
+  }>;
+  reset(options?: { signal?: AbortSignal }): Promise<{ completed: boolean }>;
 }
 export interface ObjectRuntimeCapabilities {
   createDestinations?(options: { plan: unknown; ready: Promise<void>; lifetime: SceneLifetime;
-    selectLens(id: string): Promise<boolean>; navigate(camera: Parameters<RetainedCubicSkyOrbit["flyToState"]>[0]): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
-    reset(): ReturnType<RetainedCubicSkyOrbit["flyToState"]> | undefined;
+    navigate(camera: PreparedDestination['camera'], options?: { signal?: AbortSignal }): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
+    reset(options?: { signal?: AbortSignal }): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
   }): PreparedDestinationRuntime;
   /** Prepared nomenclature labels anchored to the body mesh; the catalogue is fetched and byte-verified by the layer. */
   mountSurfaceFeatures?(options: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime;
 }
 export interface ObjectMountOptions {
   onError(error: unknown): void; onMotionRequest?(requested: boolean): void;
+  onFeatureSelect?(id: string): void;
   /** The application owns the world companions required by a body dataset. */
   datasetEffects?: {
     prepare(volume: LensVolume | null, signal: AbortSignal): void | Promise<void>;
     commit(volume: LensVolume | null): void;
     error(error: unknown): void;
   };
-  inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
+  inputSurface: HTMLElement; runtimePolicy: RuntimePolicy;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
-  worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
+  preparedResources?: PreparedResourceLease;
   preparedTree?: import('../rendering/prepared-tree.js').PreparedTreeLease;
-  worldContext?: PerspectiveWorldContext;
-  framePresenter?: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
-  viewport?: import('../navigation/camera-viewport.js').CameraViewport;
+  worldContext: PerspectiveWorldContext;
+  framePresenter: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
+  viewport: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
   /** The router releases refinement after saved-view restoration or flight. */
   deferTextureRefinement?: boolean;

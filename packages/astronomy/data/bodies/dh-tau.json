@@ -1,0 +1,30 @@
+{
+ "id": "dh-tau",
+ "classification": "star",
+ "order": 1725,
+ "physical": {
+  "name": "DH Tau",
+  "horizonsCode": null,
+  "meanRadiusKm": 876582.0,
+  "gravitationalParameterKm3PerS2": 84935961626.84,
+  "parent": null,
+  "effectiveTemperatureK": 3600
+ },
+ "physicalNotes": "Radius 1.26 solar radii from Herczeg & Hillenbrand (2014, ApJ 786, 97; VizieR J/ApJ/786/97, table14), from the star's luminosity and spectral-type temperature at their adopted 140 pc; a derived radius, not a measured disc. 876,582 km at 695,700 km per solar radius. Temperature 3600 +/- 150 K from Xuan et al. (2024; arXiv:2405.13128), Table 1. GM from 0.64 +/- 0.04 solar masses (Kraus & Hillenbrand 2009), the host mass Bowler et al. (2020) adopt for the orbit of DH Tau b placed here, times the JPL solar GM; Herczeg & Hillenbrand give 0.41 from other evolutionary tracks. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 67.4231683715687,
+  "declinationDegrees": 26.549386841787584,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 133.4473,
+  "properMotionRaMasPerYear": 6.603307555678407,
+  "properMotionDecMasPerYear": -20.870573377409652,
+  "radialVelocityKmPerS": 16.378099,
+  "sources": {
+   "position": "Gaia DR3 source 151374202498079872 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 151374202498079872: parallax 7.4936 mas, inverted to 133.4473 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 151374202498079872: pmRA* 6.6033 mas/yr, pmDec -20.8706 mas/yr.",
+   "radialVelocity": "Jonsson et al. (2020, AJ 160, 120; APOGEE DR16) via SIMBAD: 16.378 +/- 0.006 km/s. Gaia DR3 gives none."
+  },
+  "presentationUp": "display-axis"
+ }
+}

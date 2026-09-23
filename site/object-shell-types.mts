@@ -4,12 +4,13 @@ import type { NavigationContent } from './navigation/navigation-content.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { SceneOverview, SceneSubject, SelectionTarget } from './scene/scene-selection.mts';
 import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
-import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
+import type { DestinationPresentation } from './destination-browser.mts';
 
 export interface ShellOptions {
   objectId: string;
   readSelection(): SceneSubject;
   preferences: WorldPreferences;
+  onResetDestination?(): void;
   documentTarget?: Document;
   windowTarget?: BrowserWindow;
 }
@@ -31,9 +32,7 @@ export interface ObjectShell {
   setDatasetNotice(message: string | null): void;
   beginNavigation(target: ShellNavigationTarget): ShellNavigationTransition | null;
   setObject(content: NavigationContent): void;
-  setDestinations(provider: PreparedDestinationRuntime | null | undefined): void;
-  selectPlace(id: string): Promise<void>;
-  setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined): void;
+  presentDestination(value: DestinationPresentation | null): void;
   presentSelection(): void;
   setCamera(provider: ShellCamera | null): void;
   setPlaybackState(state: PlaybackState): void;

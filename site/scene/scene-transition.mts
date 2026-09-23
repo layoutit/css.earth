@@ -14,7 +14,7 @@ type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
 /** Reuse a ready session for dataset changes, saved views, and overview/detail selections. */
 export async function focusExistingScene({ session, request, selectionTransition, navigation, requests, view,
-  windowTarget, getReducedMotion, commitSelection, finishArrival, syncPlayback }: {
+  windowTarget, getReducedMotion, commitSelection, finishArrival, syncPlayback, selectFeature }: {
   session: SceneSession;
   request: NavigationRequest;
   selectionTransition?: ShellNavigationTransition | null;
@@ -24,9 +24,19 @@ export async function focusExistingScene({ session, request, selectionTransition
   windowTarget: BrowserWindow;
   getReducedMotion(): boolean;
   commitSelection(request: NavigationRequest, transition?: ShellNavigationTransition | null): void;
-  finishArrival(session: SceneSession, request: NavigationRequest): void;
+  finishArrival(session: SceneSession, request: NavigationRequest, interrupted?: boolean): void;
+  selectFeature(session: SceneSession, request: NavigationRequest): Promise<boolean>;
   syncPlayback(): void;
 }) {
+  if (request.camera.kind === 'surface') {
+    requests.advance(request, 'flying'); syncPlayback();
+    commitSelection(request, selectionTransition);
+    const result = await request.lifetime.wait(selectFeature(session, request));
+    if (result.cancelled || !requests.owns(request)) return false;
+    if (!await view.arrive(session, { request, interrupted: true })) return false;
+    finishArrival(session, request, !result.value);
+    return result.value;
+  }
   const datasetSelection = selectSceneDataset(session, request.url, request.signal);
   if (!(typeof datasetSelection === 'boolean' ? datasetSelection : await datasetSelection)) {
     if (!requests.owns(request)) return false;

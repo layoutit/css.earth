@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gq-lup",
+  "card": {
+    "text": "Young T Tauri star 154 parsecs away in Lupus, with its own disc and a companion photographed directly.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1206-1770",
+        "url": "https://arxiv.org/abs/1206.1770",
+        "label": "Donati et al. 2012",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "classical T Tauri star (cTTS) GQ Lup"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "GQ Lup is a star only a few million years old, still feeding from its disc. Its companion GQ Lup b, imaged in 2005, orbits about 100 au out.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1206-1770",
+        "url": "https://arxiv.org/abs/1206.1770",
+        "label": "Donati et al. 2012",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "GQ Lup has a photospheric temperature of 4,300+-50 K"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its temperature",
+      "summary": "A blackbody at the star's published temperature. No surface picture exists."
+    }
+  }
+}

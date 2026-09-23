@@ -1,0 +1,31 @@
+{
+ "id": "vhs-1256-1257-b",
+ "classification": "exoplanet",
+ "order": 1722,
+ "physical": {
+  "name": "VHS 1256-1257 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 90794.8,
+  "gravitationalParameterKm3PerS2": 1459534580.07,
+  "parent": "vhs-1256-1257"
+ },
+ "physicalNotes": "Radius 1.27 Jupiter radii and temperature 1100 K: the best-matching model of Miles et al. (2023, ApJL 946, L6; doi:10.3847/2041-8213/acb04a; arXiv:2209.00620) to the JWST NIRSpec and MIRI spectrum from 1 to 20 micrometres, two cloud decks at log g 4.5: 90,794.8 km at 71,492 km per Jupiter radius. A model radius, not a measured diameter: the planet is unresolved. Other fits to the same JWST data give 1.29 (Whiteford et al. 2026, arXiv:2608.06583) and 1.433 Jupiter radii (de Regt et al. 2026, arXiv:2607.00952); Dupuy et al. (2023) derive 1.30 or 1.22 from evolutionary models. GM from 0.011 +/- 0.006 solar masses (11.5 Jupiter masses), the mass Dupuy et al. (2023, section 4) estimate from evolutionary models and add to the pair's for the orbit fit, times the JPL solar GM; their evolutionary analysis is bimodal, 12.0 +/- 0.1 or 16 +/- 1 Jupiter masses. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 8638296.7,
+  "semiMajorAxisStellarRadii": 792691.45,
+  "inclinationDegrees": 46.3282,
+  "eccentricity": 0.63877,
+  "argumentOfPeriapsisDegrees": 264.1109,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": -201766.3,
+  "ascendingNodePositionAngleDegrees": 68.3105,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 441.958 au and total mass 0.1543 solar masses, 23,650.4 years of 365.25 d. Poon et al. (2024, AJ 168, 270; doi:10.3847/1538-3881/ad84e5; arXiv:2410.02672), section 3.4: orbitize! OFTI on the four Keck/NIRC2 positions of b relative to A of Dupuy et al. (2023, Table 2), total mass 0.152 +/- 0.010 solar masses (Dupuy et al.) and parallax 47.27 +/- 0.47 mas; they report a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees and release no posterior. The maximum of orbitize!'s own posterior (ln L -13.88), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (tools/objects/hosted-orbits/orbitize-fit.py, src/objects/vhs-1256-1257-b/source/orbits/fit.json).",
+   "shape": "Poon et al. (2024, AJ 168, 270; doi:10.3847/1538-3881/ad84e5; arXiv:2410.02672), section 3.4: orbitize! OFTI on the four Keck/NIRC2 positions of b relative to A of Dupuy et al. (2023, Table 2), total mass 0.152 +/- 0.010 solar masses (Dupuy et al.) and parallax 47.27 +/- 0.47 mas; they report a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees and release no posterior. The maximum of orbitize!'s own posterior (ln L -13.88), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (tools/objects/hosted-orbits/orbitize-fit.py, src/objects/vhs-1256-1257-b/source/orbits/fit.json). a 441.958 au at the sample's parallax 47.3170 mas, kept as the angular size 20912.1 mas and placed at the Gaia DR3 distance: 792691.45 radii of the host's 83,484 km; inclination 46.3282 degrees.",
+   "eccentricity": "Poon et al. (2024, AJ 168, 270; doi:10.3847/1538-3881/ad84e5; arXiv:2410.02672), section 3.4: orbitize! OFTI on the four Keck/NIRC2 positions of b relative to A of Dupuy et al. (2023, Table 2), total mass 0.152 +/- 0.010 solar masses (Dupuy et al.) and parallax 47.27 +/- 0.47 mas; they report a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees and release no posterior. The maximum of orbitize!'s own posterior (ln L -13.88), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (tools/objects/hosted-orbits/orbitize-fit.py, src/objects/vhs-1256-1257-b/source/orbits/fit.json). e 0.63877.",
+   "argumentOfPeriapsis": "Poon et al. (2024, AJ 168, 270; doi:10.3847/1538-3881/ad84e5; arXiv:2410.02672), section 3.4: orbitize! OFTI on the four Keck/NIRC2 positions of b relative to A of Dupuy et al. (2023, Table 2), total mass 0.152 +/- 0.010 solar masses (Dupuy et al.) and parallax 47.27 +/- 0.47 mas; they report a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees and release no posterior. The maximum of orbitize!'s own posterior (ln L -13.88), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (tools/objects/hosted-orbits/orbitize-fit.py, src/objects/vhs-1256-1257-b/source/orbits/fit.json). omega 84.1109 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 264.1109 degrees.",
+   "phase": "Poon et al. (2024, AJ 168, 270; doi:10.3847/1538-3881/ad84e5; arXiv:2410.02672), section 3.4: orbitize! OFTI on the four Keck/NIRC2 positions of b relative to A of Dupuy et al. (2023, Table 2), total mass 0.152 +/- 0.010 solar masses (Dupuy et al.) and parallax 47.27 +/- 0.47 mas; they report a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees and release no posterior. The maximum of orbitize!'s own posterior (ln L -13.88), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (tools/objects/hosted-orbits/orbitize-fit.py, src/objects/vhs-1256-1257-b/source/orbits/fit.json). tau 0.96983, the fraction of a period after the reference epoch MJD 58849 at which periastron falls; the passage nearest that epoch is MJD -201766.3, taken as BMJD_TDB.",
+   "orientation": "Poon et al. (2024, AJ 168, 270; doi:10.3847/1538-3881/ad84e5; arXiv:2410.02672), section 3.4: orbitize! OFTI on the four Keck/NIRC2 positions of b relative to A of Dupuy et al. (2023, Table 2), total mass 0.152 +/- 0.010 solar masses (Dupuy et al.) and parallax 47.27 +/- 0.47 mas; they report a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees and release no posterior. The maximum of orbitize!'s own posterior (ln L -13.88), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (tools/objects/hosted-orbits/orbitize-fit.py, src/objects/vhs-1256-1257-b/source/orbits/fit.json). Ascending node 68.3105 degrees east of north."
+  }
+ }
+}

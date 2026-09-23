@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "vhs-1256-1257-companion",
+  "card": {
+    "text": "Young dwarf twin of VHS 1256-1257 A, swinging around it every 7.3 years on a very eccentric orbit.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2208-08448",
+        "url": "https://arxiv.org/abs/2208.08448",
+        "label": "Dupuy et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "$P=7.31\\pm0.02$ yr, $e=0.883\\pm0.003$"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "VHS 1256-1257 B and its twin A are near-identical dwarfs. Their orbit is the most eccentric yet measured for so small a pair.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2208-08448",
+        "url": "https://arxiv.org/abs/2208.08448",
+        "label": "Dupuy et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Section 3.1",
+        "quote": "the highest ever measured for a very low-mass binary"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its temperature",
+      "summary": "A blackbody at the star's published temperature. No surface picture exists."
+    }
+  }
+}

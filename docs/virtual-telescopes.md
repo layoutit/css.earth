@@ -66,6 +66,14 @@ Gemini sample exact public raw FITS artifacts. Chandra samples ObsIDs and checks
 event-file listing and headers when fetched. Spitzer samples AORKEYs and checks the archive's
 current FITS listing when fetched. They have source numbers separate from qualified observation
 choices. An archive name or sky overlap is not confirmation that the requested target was detected.
+An `explore --instrument NAME --from ISO --to ISO` request narrows Keck's instrument table and
+observation dates, Gemini's instrument and observation MJD, and Chandra's instrument and start
+dates before those archives take their bounded samples. The Keck and Chandra queries use UTC
+calendar-day bounds, so boundary days can contain observations outside the requested clock times.
+Spitzer's returned AOR list is filtered by instrument and time overlap before its 100-record cap;
+the archive request itself remains a target/position lookup. Kind and wavelength filters do not
+qualify these raw source leads. A reported `overflow` is incomplete; narrow the search and save
+a new exploration rather than treating the sample as the whole archive.
 
 Fetch one of those sources with `telescope fetch RUN/explore.json --archive gemini --pick N
 --out NEW_DIRECTORY`, substituting `keck`, `chandra` or `spitzer` and that archive's displayed
@@ -86,7 +94,11 @@ extraction alone do not establish target detection or fitness.
 If a selected Chandra ObsID has several level-2 event files, or a Spitzer AOR has several science
 FITS products, fetch lists their exact names and requires `--file NAME`. It does not silently pick
 one detector or channel. Repeat fetch with a new output directory to retrieve another file.
-`telescope get` remains the route for qualified observation choices. Every fetch needs a new output directory.
+`telescope get` remains the route for qualified observation choices. Every fresh fetch needs a new output directory.
+For Gemini, OPUS, Chandra and Spitzer, a failed fetch leaves completed original files in
+`DIRECTORY.partial`; repeating the same command with `--resume` rechecks the archive selection and
+local hashes before using those files. A changed selection requires a new directory. Keck's one-file
+transfer retains its existing bounded retry behavior.
 
 `explore` also asks the PDS Ring-Moon Systems Node's
 [OPUS search](https://opus.pds-rings.seti.org/api/) which spacecraft images exist of the body.
@@ -887,7 +899,10 @@ archive origin or scientific fitness.
 `telescope family-assess` reports descriptor compatibility as `matched`, `unresolved` or
 `refused`; it never calls that structural result fulfillment of the original request. It compares
 the target and selected family, delegates spectral-unit conversion to Astropy, and considers every
-eligible component. Requested observation bounds or measured-resolution thresholds remain
+eligible component. A fetched `output.product.json` can be supplied in place of the descriptor
+when `telescope outputs` reports family operations. The command reopens the verified source
+closure and records the pinned descriptor's path, byte count and SHA-256 in its saved assessment.
+Requested observation bounds or measured-resolution thresholds remain
 unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
 selected family are not inherited from the legacy query shape. Every requested scientific
 criterion must hold for one selected component; facts from different components cannot be

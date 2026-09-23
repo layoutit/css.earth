@@ -1,6 +1,6 @@
 /** Shared byte and receipt boundary for an exact, still scientifically unresolved archive source. */
 import { createHash } from 'node:crypto';
-import { lstat, mkdir, mkdtemp, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { lstat, mkdir, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { get } from 'node:https';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
@@ -23,6 +23,49 @@ export interface SourceSelection {
 export interface SavedSource {
   readonly bytes: Buffer; readonly target: string; readonly maximum: number; readonly selected: Record<string, unknown>;
   readonly evidence: Buffer;
+}
+
+interface TransferEntry { readonly path: string; readonly url: string; readonly bytes: number; readonly sha256: string; readonly md5: string }
+interface TransferProgress { readonly schema: 'cssearth-archive-transfer@1'; readonly selection: string; readonly files: readonly TransferEntry[] }
+const progressFile = 'transfer-progress.json';
+const progressBytes = (progress: TransferProgress) => `${JSON.stringify(progress, null, 2)}\n`;
+async function saveProgress(staging: string, progress: TransferProgress) {
+  const temporary = resolve(staging, `${progressFile}.tmp`);
+  await rm(temporary, { force: true });
+  await writeFile(temporary, progressBytes(progress), { flag: 'wx' });
+  await rename(temporary, resolve(staging, progressFile));
+}
+async function checkedParent(staging: string, relative: string) {
+  let path = staging;
+  for (const part of relative.split('/').slice(0, -1)) {
+    path = resolve(path, part);
+    const stat = await lstat(path).catch(error => {
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null;
+      throw error;
+    });
+    if (stat && !stat.isDirectory()) throw new Error(`Partial transfer has a non-directory parent for ${relative}.`);
+  }
+}
+async function checkedProgress(staging: string, selection: string, sources: readonly SourceFile[]): Promise<TransferProgress> {
+  const progress = requireRecord(JSON.parse(await readFile(resolve(staging, progressFile), 'utf8')), 'saved transfer progress');
+  if (progress.schema !== 'cssearth-archive-transfer@1' || progress.selection !== selection) throw new Error('Partial transfer belongs to another saved selection or changed archive metadata. Choose a new --out directory.');
+  const files = requireArray(progress.files, 'completed transfer files').map(value => requireRecord(value, 'completed transfer file'));
+  const expected = new Map(sources.map(file => [file.path ?? file.name, file]));
+  const seen = new Set<string>(), checked: TransferEntry[] = [];
+  for (const file of files) {
+    const path = requireString(file.path, 'completed path'), source = expected.get(path), bytes = file.bytes;
+    if (!source || seen.has(path) || file.url !== source.url || typeof bytes !== 'number' || !Number.isSafeInteger(bytes) || bytes < 1 ||
+        typeof file.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(file.sha256) || typeof file.md5 !== 'string' || !/^[a-f0-9]{32}$/u.test(file.md5) ||
+        source.bytes !== undefined && source.bytes !== bytes || source.md5 !== undefined && source.md5 !== file.md5)
+      throw new Error('Partial transfer manifest does not match the selected archive files. Choose a new --out directory.');
+    seen.add(path);
+    await checkedParent(staging, path);
+    const local = resolve(staging, path), stat = await lstat(local);
+    if (!stat.isFile() || stat.size !== bytes || (await sha256File(local)).sha256 !== file.sha256)
+      throw new Error(`Completed partial file ${path} changed. Choose a new --out directory.`);
+    checked.push({ path, url: source.url, bytes, sha256: file.sha256, md5: file.md5 });
+  }
+  return { schema: 'cssearth-archive-transfer@1', selection, files: checked };
 }
 
 export async function readSavedSource(explorationPath: string, serviceName: string, pick: number): Promise<SavedSource> {
@@ -106,27 +149,68 @@ export async function downloadSource(file: SourceFile, path: string, maximum: nu
 }
 
 export async function deliverSource(explorationPath: string, outputDirectory: string, saved: SavedSource, selection: SourceSelection,
-  fetcher: typeof fetch = fetch) {
+  fetcher: typeof fetch = fetch, resume = false) {
   if (selection.target !== saved.target) throw new TypeError('Archive source target differs from the saved exploration.');
   const destination = resolve(outputDirectory);
   try { await lstat(destination); throw new TypeError('Output directory already exists; choose a new --out directory.'); }
   catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
   await mkdir(dirname(destination), { recursive: true });
-  const staging = await mkdtemp(resolve(dirname(destination), '.archive-source-'));
+  const paths = new Set<string>();
+  const reserved = new Set([progressFile, `${progressFile}.tmp`, 'descriptor.json', 'explore.json',
+    'discovery.json', 'current-metadata.json', 'source.json', 'output.product.json']);
+  for (const file of selection.files) {
+    const path = file.path ?? file.name;
+    if (!path.split('/').every(part => /^[A-Za-z0-9._-]+$/u.test(part) && part !== '.' && part !== '..') ||
+        basename(path) !== file.name || paths.has(path) || reserved.has(path))
+      throw new TypeError(`Invalid or repeated archive source path ${path}.`);
+    paths.add(path);
+  }
+  const key = sha256(JSON.stringify({ exploration: sha256(saved.bytes), evidence: sha256(saved.evidence), maximum: saved.maximum,
+    target: saved.target, archive: selection.archive, telescope: selection.telescope, identity: selection.identity,
+    discovery: selection.discovery, current: selection.current, files: selection.files, primaryFits: selection.primaryFits,
+    fitsCompanions: selection.fitsCompanions, limitations: selection.limitations }));
+  const staging = `${destination}.partial`;
+  let progress: TransferProgress;
+  if (resume) {
+    const stat = await lstat(staging).catch(error => {
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null;
+      throw error;
+    });
+    if (!stat?.isDirectory()) throw new Error(`No partial transfer at ${staging}. Run fetch without --resume or choose a new --out directory.`);
+    progress = await checkedProgress(staging, key, selection.files);
+  } else {
+    await mkdir(staging).catch(error => {
+      if ((error as NodeJS.ErrnoException).code === 'EEXIST') throw new Error(`Partial transfer exists at ${staging}. Repeat with --resume or choose a new --out directory.`);
+      throw error;
+    });
+    progress = { schema: 'cssearth-archive-transfer@1', selection: key, files: [] };
+    try { await saveProgress(staging, progress); }
+    catch (error) { await rm(staging, { recursive: true, force: true }); throw error; }
+  }
   try {
-    const files: { path: string; url: string; bytes: number; sha256: string; md5: string }[] = [];
+    const files: TransferEntry[] = [];
     let remaining = saved.maximum;
     for (const file of selection.files) {
       const relative = file.path ?? file.name;
-      if (!relative.split('/').every(part => /^[A-Za-z0-9._-]+$/u.test(part) && part !== '.' && part !== '..') ||
-          basename(relative) !== file.name) throw new TypeError(`Invalid archive source path ${relative}.`);
-      if (files.some(entry => entry.path === relative)) throw new Error(`Archive source repeats ${relative}.`);
-      const destination = resolve(staging, relative);
-      await mkdir(dirname(destination), { recursive: true });
-      const result = await downloadSource(file, destination, remaining, fetcher);
-      files.push({ path: relative, url: file.url, ...result }); remaining -= result.bytes;
+      const local = resolve(staging, relative);
+      const prior = progress.files.find(entry => entry.path === relative);
+      if (!prior) {
+        await checkedParent(staging, relative);
+        await mkdir(dirname(local), { recursive: true });
+        await rm(local, { force: true }); // A failed attempt may have left an uncommitted file.
+        const result = await downloadSource(file, local, remaining, fetcher);
+        const entry = { path: relative, url: file.url, ...result };
+        progress = { ...progress, files: [...progress.files, entry] };
+        await saveProgress(staging, progress);
+        files.push(entry); remaining -= result.bytes;
+      } else {
+        if (prior.bytes > remaining) throw new RangeError('Reused source exceeds the saved transfer bound.');
+        files.push(prior); remaining -= prior.bytes;
+      }
     }
     if (!files.length) throw new TypeError('Archive source has no retrievable files.');
+    for (const name of ['descriptor.json', 'explore.json', 'discovery.json', 'current-metadata.json', 'source.json', 'output.product.json'])
+      await rm(resolve(staging, name), { force: true });
     const metadata = Buffer.from(`${JSON.stringify(selection.current, null, 2)}\n`);
     const descriptor = selection.describe ? await selection.describe(staging, files) : undefined;
     if (descriptor !== undefined) await writeFile(resolve(staging, 'descriptor.json'), `${JSON.stringify(descriptor, null, 2)}\n`);
@@ -159,9 +243,12 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
     }, [...files.map(file => ({ path: file.path, file: resolve(staging, file.path) })),
       ...(descriptor === undefined ? [] : [{ path: 'descriptor.json', file: resolve(staging, 'descriptor.json') }]),
       ...['explore.json', 'discovery.json', 'current-metadata.json', 'source.json'].map(path => ({ path, file: resolve(staging, path) }))]);
+    await rm(resolve(staging, progressFile));
     await rename(staging, destination);
     return { files: files.map(file => resolve(destination, file.path)), receipt: resolve(destination, 'output.product.json'),
       source: resolve(destination, 'source.json'), ...(descriptor === undefined ? {} : { descriptor: resolve(destination, 'descriptor.json') }),
       status: 'unresolved' as const };
-  } finally { await rm(staging, { recursive: true, force: true }); }
+  } catch (error) {
+    throw new Error(`${error instanceof Error ? error.message : String(error)} Partial files remain at ${staging}; repeat the same fetch with --resume.`, { cause: error });
+  }
 }

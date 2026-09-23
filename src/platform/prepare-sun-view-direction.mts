@@ -5,7 +5,7 @@ import type { Vector3, Matrix3 } from "../renderers/css/solar-system/types.ts";
 //
 // The scene frame is whatever the scene matrix
 // `Rx(initialScenePitch) * Ry(defaultControlYaw)` (see `createSceneMatrix` in
-// cubic-sky-runtime.mjs) is applied to: the body-fixed frame by default, or a
+// camera-orientation.ts) is applied to: the body-fixed frame by default, or a
 // prepared presentation frame when `sceneDirection` is given. These rotations
 // reproduce DOMMatrix.rotateAxisAngle exactly, so the value prepared here is
 // the one the runtime would compute in the browser. Preparation-time only.

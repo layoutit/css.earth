@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "vhs-1256-1257-companion",
+  "radiusKm": 83484,
+  "radiusSource": "Radius 0.12 solar radii: the model radius Climent et al. (2022, A&A 660, A65; arXiv:2201.12606) adopt for each component (Chabrier et al. 2000 models; 0.12 to 0.14 over the pair's age and mass ranges). 83,484 km. GM: half the dynamical total mass 0.141 +/- 0.008 solar masses (Dupuy et al. 2023, Table 3), as for A: the pair is nearly equal in brightness and its mass ratio poorly constrained. Temperature 2700 K: Dupuy et al.'s best BT-Settl model to the pair's combined spectrum.",
+  "orbitalPeriodDays": 2668.882,
+  "orbitalPeriodSource": "Dupuy et al. (2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448), Table 3: the orvara fit to Keck/NIRC2 and MagAO relative astrometry of B around A, 2015-2022; posterior medians, which the table note calls nearly Gaussian. P = 7.307 +0.023/-0.024 yr of 365.25 d.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published model radius. VHS 1256-1257 B's disc is not resolved and no image of it exists; its colour is a blackbody at the published temperature, 2,700 K."
+  },
+  "effectiveTemperatureK": 2700,
+  "effectiveTemperatureSource": "2700 K: the best-fitting BT-Settl model to the pair's combined spectrum, Dupuy et al. (2023), section 4, https://arxiv.org/abs/2208.08448"
+}

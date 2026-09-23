@@ -1,0 +1,32 @@
+{
+ "id": "roxs-42b-companion",
+ "classification": "star",
+ "order": 1728,
+ "physical": {
+  "name": "ROXs 42B B",
+  "horizonsCode": null,
+  "meanRadiusKm": 967023.0,
+  "gravitationalParameterKm3PerS2": 47776478415.1,
+  "parent": "roxs-42b",
+  "effectiveTemperatureK": 2600
+ },
+ "physicalNotes": "Radius 1.39 +/- 0.02 solar radii and temperature 2600 +/- 20 K: the SPHINX model-atmosphere fit to the pair's blended optical spectrum, modelled as the sum of the two stars by Inglis et al. (2024, AJ; doi:10.3847/1538-3881/ad2771; arXiv:2402.09533), Table 1 (their text gives 1.59 solar radii for this star; the table is used). A model radius: the disc is not measured. 967,023 km. GM from the photometric mass 0.36 +/- 0.04 solar masses of Kraus et al. (2014, ApJ 781, 20; arXiv:1311.7664) times the JPL solar GM.",
+ "hostedOrbit": {
+  "periodDays": 11322.75,
+  "semiMajorAxisStellarRadii": 1552.22,
+  "inclinationDegrees": 91.0,
+  "eccentricity": 0.61,
+  "argumentOfPeriapsisDegrees": 58,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 58820.28,
+  "ascendingNodePositionAngleDegrees": 150.0,
+  "sources": {
+   "period": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. P = 31 +3/-2 yr of 365.25 d.",
+   "shape": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. a = 10.9 +0.8/-0.5 au: 1552.22 radii of A's 1,050,507 km; i = 91.0 +/- 0.4 degrees.",
+   "eccentricity": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. e = 0.61 +/- 0.02.",
+   "argumentOfPeriapsis": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. omega = 58 +2/-3 degrees. Astrometry alone cannot tell (omega, Omega) from (omega + 180, Omega + 180), and the paper reports both node solutions, 150 and 330 degrees (section 4, mutual inclination). Its medians take omega and Omega from opposite solutions: with them as printed, orbitize! puts B 180 degrees from every Table 1 position at the right separation. The solution with the printed Omega = 150 has the companion's omega = 238 degrees, stored as A's, 58; packages/astronomy/src/hostedOrbits.test.ts reproduces all seven Table 1 positions with it.",
+   "phase": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. tau = 0.32 +/- 0.03 of a period after t_ref = MJD 55197 (2010.0): MJD 55197 + 0.32 x 31 x 365.25 = 58820.3, taken as BMJD_TDB. The table's derived t_p, 'MJD 55207 +/- 0.08', does not follow from its own tau and period and is not used.",
+   "orientation": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. Omega = 150.0 +/- 0.6 degrees east of north."
+  }
+ }
+}

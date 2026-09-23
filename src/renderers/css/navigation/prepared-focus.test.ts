@@ -41,7 +41,8 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
       if (motion.signal?.aborted) stop();
     }); } };
   const orbit = createRetainedCubicSkyOrbit({ stage, inputSurface: stage, cameraElement, sceneElement,
-    cubicSky: { root: skyElement, setOrientation() {} }, requireSun: false,
+    viewport: { read: () => ({ bounds: stage.getBoundingClientRect(), focalPixels: 1000, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} },
+    framePresenter: { present(request: any, signal?: AbortSignal) { request.commit(); return signal ? Promise.resolve(true) : undefined; } },
     skyPlan: { cameraContract: 'scene-locked-unbounded-accumulated-matrix3d' },
     worldContext: { frame, bodyRadiusUnits: 100, kilometersPerUnit: .002, maximumExtentUnits: 1e8 },
     cameraPlan: scene.camera, objectId: 'unit', runtimePolicy: { MOBILE_VIEWPORT_QUERY: '(max-width: 500px)' },
@@ -56,7 +57,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
       setSceneRotation(value: number[]) { rotation = [...value]; },
       skybox: () => ({ matrix: worldRotationCss(rotation), sunViewDirection: null }),
       snapshot: () => ({ schema: 'cssearth-camera-pose@2', scene: worldRotationCss(rotation) }),
-      counterRotation: () => worldRotationCss(rotation),
+      counterRotation: () => worldRotationCss(rotation), captureCounterRotation: () => () => worldRotationCss(rotation),
       restore(pose: any) { const m = pose.scene.slice(9,-1).split(',').map(Number); rotation = [m[0],m[4],m[8],m[1],m[5],m[9],m[2],m[6],m[10]]; },
       rotate(delta: any) { if (!delta.rotation) return;
         const next = worldRotationFromQuaternion(delta.rotation);

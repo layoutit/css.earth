@@ -9,6 +9,16 @@ detail that is still activating; the persistent world then owns departure
 publication while the replacement factory and assets load. Its camera starts
 from the last drawn pose and retains the same destination-detail hold.
 
+Every registered detail has a prepared world frame and mounts through the
+application world context. The shared viewport and frame presenter are required
+mount inputs. The physical dolly is the only object camera: wheel input changes
+distance, and one scene rotation determines the registered sky and local Sun
+direction. Saved poses contain that scene rotation only. The persistent universe
+owns sky rendering; detail mounts allocate no hidden sky nodes or resize observers.
+Camera publications carry their captured world pose and stage viewport, so the
+runtime forwards them without remeasuring the camera DOM. Application navigation
+owns history restoration; each detail only writes its current saved view.
+
 `createCameraFlight` owns scheduling, acceleration, cancellation and completion
 for world navigation, prepared-focus flights and native surface fly-to. Each
 path supplies its existing camera sampling math. World navigation installs one
@@ -84,6 +94,15 @@ transient resources and terminal outcome. Requests move from preparing to flying
 to committing; same-body dataset changes can proceed directly to committing.
 Loading and flight preparation can overlap. These phases describe application
 ownership, not additional camera paths or clocks.
+
+`site/scene/scene-feature.mts` applies named-feature and city selections under
+that same request. Search rows use ordinary links, label clicks issue feature
+intents, and direct URLs join the retained-scene path after the initial mount.
+The request awaits a supporting dataset before fetching a city or flying to a
+feature. Its signal reaches both native flight implementations; superseded
+loads cannot start a late flight. The city panel only renders the request's
+status and sends Back intent. Surface geometry and prepared city camera targets
+keep their existing native implementations.
 
 Only the current request may commit navigation history. Saved history entries
 can be installed before their camera flight completes, preserving Back/Forward

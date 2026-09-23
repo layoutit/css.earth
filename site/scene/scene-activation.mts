@@ -9,22 +9,20 @@ import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
 
 /** Arrival restores prepared state before the session becomes ready; every binding belongs to that session. */
-export function createSceneActivation({ windowTarget, navigation, view, isCurrent, requestMotion, onError }: {
+export function createSceneActivation({ windowTarget, navigation, view, isCurrent }: {
   windowTarget: BrowserWindow;
-  navigation: ReturnType<typeof createPreparedWorldNavigation> | null;
+  navigation: ReturnType<typeof createPreparedWorldNavigation>;
   view: SceneView;
   isCurrent(session: SceneSession): boolean;
-  requestMotion(session: SceneSession, enabled: boolean): void;
-  onError(error: unknown): void;
 }) {
   async function restore(session: SceneSession, handoff?: WorldHandoff) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
     const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, SCENE_OBJECTS) : null;
     if (initialSelection?.subject.kind === 'overview' && !initialSelection.savedView) {
-      const target = navigation?.overviewTarget?.({ scope: initialSelection.subject.overview.scope, objectId, fromId: objectId, mount });
+      const target = navigation.overviewTarget({ scope: initialSelection.subject.overview.scope, objectId, fromId: objectId, mount });
       if (target) {
-        const framed = await session.wait(navigation!.focus({ objectId, mount,
+        const framed = await session.wait(navigation.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,
           targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
         if (framed.cancelled || !isCurrent(session)) return;
@@ -69,7 +67,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     return { interrupted, feature: request ? request.feature : initialSelection?.feature ?? null };
   }
 
-  function connectControls(session: SceneSession, featureId: string | null) {
+  function connectControls(session: SceneSession) {
     const { mount, shell } = session;
     if (!mount || !shell) return;
     // Restore the incoming camera before arming optional texture detail. An
@@ -90,31 +88,8 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       windowTarget.addEventListener('keydown', releaseRefinement, { once: true });
       session.own(removeRefinementListeners);
     }
-    if (mount.destinations) shell.setDestinations?.({
-      ...mount.destinations,
-      async select(place) {
-        requestMotion(session, false);
-        return mount.destinations!.select(place);
-      },
-    });
-    shell.setFeatures?.(mount.features ?? null);
     shell.setCamera?.(mount);
-    session.own(() => { shell.setCamera?.(null); shell.setFeatures?.(null); });
-    // A feature named in the URL is a one-time selection: fly there, then let the view URL take over.
-    if (featureId !== null) {
-      const featureUrl = new URL(session.url ?? windowTarget.location?.href ?? 'https://example.test');
-      featureUrl.searchParams.delete('feature');
-      session.url = featureUrl.href;
-      const place = /^city-([0-9]+)$/u.exec(featureId);
-      const reportSelectionError = (error: unknown) => { if (isCurrent(session)) onError(error); };
-      if (place && mount.destinations) {
-        requestMotion(session, false);
-        session.wait(shell.selectPlace?.(place[1]!) ?? Promise.resolve()).catch(reportSelectionError);
-      } else if (mount.features && /^[0-9]+$/u.test(featureId)) {
-        requestMotion(session, false);
-        session.wait(mount.features.select(featureId)).catch(reportSelectionError);
-      }
-    }
+    session.own(() => { shell.setCamera?.(null); });
   }
 
   return { restore, connectControls };

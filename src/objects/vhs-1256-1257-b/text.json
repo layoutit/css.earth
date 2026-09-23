@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "vhs-1256-1257-b",
+  "card": {
+    "text": "Young planet-mass companion 150 au from the VHS 1256-1257 pair, with silicate clouds in its JWST spectrum.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2209-00620",
+        "url": "https://arxiv.org/abs/2209.00620",
+        "label": "Miles et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "We directly detect silicate clouds"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "VHS 1256-1257 b is a young planet-mass companion far from its two stars. JWST's spectrum of it shows water, methane, carbon monoxide and silicate clouds.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2209-00620",
+        "url": "https://arxiv.org/abs/2209.00620",
+        "label": "Miles et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Water, methane, carbon monoxide, carbon dioxide, sodium, and potassium are observed"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

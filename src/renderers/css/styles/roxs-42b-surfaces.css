@@ -1,0 +1,104 @@
+/* ROXs 42B A: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="roxs-42b"] > :is(.polycss-camera, .roxs-42b-corona-layer, .roxs-42b-limb-layer) {
+  --roxs-42b-scene-side-padding: 16px;
+  --roxs-42b-reference-width: 1920px;
+  --roxs-42b-reference-height: 1080px;
+  --roxs-42b-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--roxs-42b-scene-side-padding) - var(--roxs-42b-scene-side-padding)) /
+        var(--roxs-42b-reference-width)
+    ),
+    calc(100cqh / var(--roxs-42b-reference-height))
+  );
+}
+
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="roxs-42b"] > :is(.roxs-42b-corona-layer, .roxs-42b-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.object-stage[data-object-id="roxs-42b"] .roxs-42b-corona-layer {
+  z-index: 0;
+}
+
+.object-stage[data-object-id="roxs-42b"] .polycss-camera {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="roxs-42b"] .roxs-42b-limb-layer {
+  z-index: 2;
+}
+
+.object-stage[data-object-id="roxs-42b"] .roxs-42b-body {
+  transform-style: preserve-3d;
+}
+
+.object-stage[data-object-id="roxs-42b"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
+   hide their back faces. */
+.object-stage[data-object-id="roxs-42b"] .polycss-scene s:not(.roxs-42b-polar) {
+  backface-visibility: visible;
+  background-image: var(--roxs-42b-surface-image) !important;
+}
+
+.object-stage[data-object-id="roxs-42b"] .polycss-scene s.roxs-42b-polar {
+  backface-visibility: hidden;
+  background-image: var(--roxs-42b-poles-image) !important;
+}
+
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
+.object-stage[data-object-id="roxs-42b"] .roxs-42b-corona-layer {
+  background-image: var(--roxs-42b-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(600px * var(--roxs-42b-camera-zoom, 1))
+    calc(600px * var(--roxs-42b-camera-zoom, 1));
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+.object-stage[data-object-id="roxs-42b"] .roxs-42b-limb-layer {
+  background-image: var(--roxs-42b-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(496px * var(--roxs-42b-camera-zoom, 1))
+    calc(496px * var(--roxs-42b-camera-zoom, 1));
+}
+
+.object-stage[data-object-id="roxs-42b"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="roxs-42b"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="roxs-42b"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

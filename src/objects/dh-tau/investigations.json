@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "dh-tau",
+  "entries": [
+    {
+      "id": "photosphere-colour",
+      "subject": "The colour of the photosphere",
+      "status": "included",
+      "finding": "A Planck spectrum at the published 3,600 K (Xuan et al. 2024), through the CIE 1931 2-degree observer into sRGB with the D65 white. Gaia DR3 has no BP/RP spectrum that describes this star alone, and no limb-darkening measurement or model grid in the repository reaches it, so the disc is uniform.",
+      "revisitWhen": "Gaia publishes a spectrum of this star alone, or a limb-darkening law is measured for it.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

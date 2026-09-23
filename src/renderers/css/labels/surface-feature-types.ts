@@ -65,9 +65,10 @@ export interface SurfaceFeatureLayerStats {
 }
 /** The shell-facing surface: the loaded catalogue and selection by feature id (pin, caption, outline, flight). */
 export interface SurfaceFeatureNavigationRuntime {
+  readonly lensIds: readonly string[];
   catalog(): PreparedSurfaceFeatureCatalog | null;
   loaded(): Promise<PreparedSurfaceFeatureCatalog>;
-  select(id: string): Promise<{ completed: boolean }>;
+  select(id: string, options?: { signal?: AbortSignal }): Promise<{ completed: boolean }>;
   selected(): string | null;
   clear(): void;
   /** A flight into this body is under way (true) or has ended (false). A flight that ends with the body on screen has

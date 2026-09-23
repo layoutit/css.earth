@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "roxs-42b-companion",
+  "radiusKm": 967023,
+  "radiusSource": "Radius 1.39 +/- 0.02 solar radii and temperature 2600 +/- 20 K: the SPHINX model-atmosphere fit to the pair's blended optical spectrum, modelled as the sum of the two stars by Inglis et al. (2024, AJ; doi:10.3847/1538-3881/ad2771; arXiv:2402.09533), Table 1 (their text gives 1.59 solar radii for this star; the table is used). A model radius: the disc is not measured. 967,023 km. GM from the photometric mass 0.36 +/- 0.04 solar masses of Kraus et al. (2014, ApJ 781, 20; arXiv:1311.7664) times the JPL solar GM.",
+  "orbitalPeriodDays": 11322.75,
+  "orbitalPeriodSource": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. P = 31 +3/-2 yr of 365.25 d.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published model radius. ROXs 42B B's disc is not resolved and no image of it exists; its colour is a blackbody at the published temperature, 2,600 K."
+  },
+  "effectiveTemperatureK": 2600,
+  "effectiveTemperatureSource": "2600 +/- 20 K: the SPHINX model fit of Inglis et al. (2024, AJ), Table 1, https://arxiv.org/abs/2402.09533"
+}

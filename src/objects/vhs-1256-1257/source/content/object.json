@@ -1,0 +1,110 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "vhs-1256-1257",
+  "displayName": "VHS 1256-1257 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.12 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2201-12606",
+          "url": "https://arxiv.org/abs/2201.12606",
+          "label": "Climent et al. 2022",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "21.2 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-vhs-1256-1257",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.07 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2208-08448",
+          "url": "https://arxiv.org/abs/2208.08448",
+          "label": "Dupuy et al. 2023",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "2,700 K",
+        "source": {
+          "catalogueId": "arxiv-2208-08448",
+          "url": "https://arxiv.org/abs/2208.08448",
+          "label": "Dupuy et al. 2023",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
+        "thumbnail": "vhs-1256-1257-lens-color.webp",
+        "surface": "vhs-1256-1257-surface-color@2x.webp",
+        "poles": "vhs-1256-1257-poles-color@2x.webp",
+        "source": {
+          "id": "vhs-1256-1257-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2208.08448"
+        },
+        "falseColor": false,
+        "notes": "The colour of a 2,700 K blackbody, the model temperature Dupuy et al. (2023) fit to the combined light of A and B; the two are nearly equal in brightness."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Dupuy et al. (2023), MNRAS 519, 1688",
+      "href": "https://arxiv.org/abs/2208.08448"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2208.08448",
+      "credit": "Dupuy et al. (2023), MNRAS 519, 1688"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/vhs-1256-1257.json",
+      "credit": "Model radius at the Gaia distance of the unresolved pair; dynamical mass of the pair; no measured rotation axis (display convention)"
+    }
+  }
+}

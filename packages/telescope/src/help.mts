@@ -13,14 +13,14 @@ Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope/README
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
 
 Human entry points:
-  telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
-  telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--json]
+  telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
+  telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope wwt-fits CATALOG.json --set NAME --level N --x X --y Y --out DIRECTORY [--json]
   telescope wwt-image EXPLORE.json --pick N --level 0..3 --out DIRECTORY [--json]
   telescope import SPEC.json --out DIRECTORY
   telescope families [--json]
-  telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY [--json]
+  telescope family-assess REQUEST.json ARTIFACT.json --out DIRECTORY [--json]
   telescope family-run DESCRIPTOR.json OPERATION [--component ID] [--params PARAMS.json] --out DIRECTORY [--json]
   telescope outputs ARTIFACT.json [--structure NAME]
   telescope candidates STAR --epoch MJD|DATE --out DIRECTORY [--figure-background transparent|opaque]
@@ -47,6 +47,15 @@ the default for older saved runs. Exact archive identities are rechecked; origin
 and current metadata are pinned within the saved transfer limit. FITS files enter shared outputs;
 OPUS preserves its native image, label and support files. Acquisition does not establish calibration,
 target detection or scientific fitness.
+For Gemini, OPUS, Chandra and Spitzer, a failed fetch retains completed files in DIRECTORY.partial.
+Repeat the same command with --resume to recheck the selected archive metadata and local hashes,
+then download only unfinished files. Choose a new directory if the archive selection changed.
+Explore pushes an instrument and observation interval into Keck, Gemini and Chandra live source
+queries before their bounded samples. Spitzer filters all returned AORs before sampling. Keck and
+Chandra queries use UTC day bounds; source leads remain separate from qualified choices.
+Family-assess accepts a fetched source receipt when it pins a supported family descriptor, as
+well as a descriptor directly. It verifies the artifact closure and saves the descriptor hash.
+Compatibility is not scientific fulfillment.
 WWT FITS reads one original numeric tile from a pinned WTML collection snapshot. It preserves the
 source FITS bytes, extracts an image and sample table through Astropy, and records the exact tile
 URL and hashes. Use data/wwt/phat-fits.json for WWT's PHAT f475w/f814w collection. Missing unit,

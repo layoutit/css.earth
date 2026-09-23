@@ -24,8 +24,7 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
   const { camera, sky, sun } = definition;
   const orientation = createCubicSkyCameraOrientation({ cameraPlan: camera, skyPlan: sky,
     controlPitch: camera.defaultControlPitchDegrees, controlYaw: camera.defaultControlYawDegrees,
-    requireSun: false, sunDirection: sun?.localDirection, sunReferenceViewDirection: sun?.referenceViewDirection,
-    sunTracksScene: sun?.localDirection != null, skyTracksScene: true });
+    sunDirection: sun?.localDirection });
   const light = () => {
     const direction = orientation.skybox().sunViewDirection;
     return direction && sun ? viewSunDirectionToPhysicalLightDirection(direction) : direction;

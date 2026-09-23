@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "roxs-42b-companion",
+  "entries": [
+    {
+      "id": "photosphere-colour",
+      "subject": "The colour of the photosphere",
+      "status": "included",
+      "finding": "A Planck spectrum at the published 2,600 K through the CIE 1931 2-degree observer into sRGB with the D65 white. Gaia does not resolve this star from ROXs 42B A, so no spectrum or catalogue row of its own exists; no limb-darkening measurement or model grid in the repository reaches it, so the disc is uniform.",
+      "revisitWhen": "A spectrum of this star alone is published.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ae4b34"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

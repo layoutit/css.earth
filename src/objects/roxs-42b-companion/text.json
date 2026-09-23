@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "roxs-42b-companion",
+  "card": {
+    "text": "The smaller star of the ROXs 42B pair, 11 au from its partner on a 31-year orbit seen edge-on.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae4b34",
+        "url": "https://doi.org/10.3847/1538-3881/ae4b34",
+        "label": "Inglis et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Table 2",
+        "quote": "Inclination, i (deg) 91.0 ± 0.4"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ROXs 42B B circles its partner every 31 years. Seen almost exactly edge-on, it swings from one side of the star to the other.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae4b34",
+        "url": "https://doi.org/10.3847/1538-3881/ae4b34",
+        "label": "Inglis et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Table 2",
+        "quote": "Orbital period, P (yr) 31"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its temperature",
+      "summary": "A blackbody at the star's published temperature. No surface picture exists."
+    }
+  }
+}

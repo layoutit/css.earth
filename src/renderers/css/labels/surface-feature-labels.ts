@@ -32,6 +32,7 @@ export interface SurfaceFeatureMountOptions {
   readonly flightLimits?: () => { readonly minimumDistanceM: number };
   /** Called before a flight starts, so the owner can stop prepared motion. */
   readonly onFlight?: () => void;
+  readonly onSelect?: (id: string) => void;
   readonly lifetime: SceneLifetime; readonly pickingHost?: HTMLElement;
   /** The shared input surface: a plain click on it that picks no label clears the selection. */
   readonly inputSurface?: HTMLElement;
@@ -58,7 +59,7 @@ const CLICK_SLOP_PIXELS = 5;
  * one 56-70 ms task in the middle of the arrival flight. */
 const LABELS_PER_FRAME = 128;
 
-export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene, zoomRange, navigation, flightLimits, onFlight, lifetime, pickingHost = host, inputSurface, onError, transport }: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime {
+export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene, zoomRange, navigation, flightLimits, onFlight, onSelect, lifetime, pickingHost = host, inputSurface, onError, transport }: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime {
   if (!host?.ownerDocument || !target || !scene.contains(target)) throw new TypeError('Surface feature labels need a host and a mesh target inside the scene.');
   const document = host.ownerDocument, windowTarget = document.defaultView;
   if (!windowTarget) throw new TypeError('Surface feature labels require a mounted window.');
@@ -123,7 +124,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       if (!labelsEnabled() || !visible.has(index)) return;
       event.preventDefault();
       if (pinnedIndex === index) { clearSelection(); return; }
-      void selectIndex(index);
+      if (onSelect) onSelect(entries[index]!.feature!.id);
+      else void selectIndex(index);
     };
     element.addEventListener('click', activate);
     entries.push(entry); activations.push(activate);
@@ -342,9 +344,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     outlinePieces = chords.length;
   }
   /** Pin the feature and fly the observer over it, framing its published diameter. */
-  async function selectIndex(index: number): Promise<{ completed: boolean }> {
+  async function selectIndex(index: number, signal?: AbortSignal): Promise<{ completed: boolean }> {
     const feature = entries[index]?.feature;
-    if (!feature || destroyed) return { completed: false };
+    if (!feature || destroyed || signal?.aborted) return { completed: false };
     pinnedIndex = index;
     flight?.cancel(); flight = null;
     schedule();
@@ -365,7 +367,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const distanceM = Math.max(minimumM, Math.min(currentDistanceM, fitDistanceM));
     onFlight?.();
     const reducedMotion = typeof windowTarget!.matchMedia === 'function' && windowTarget!.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    flight = flyToSurfaceDirection(navigation, { directionWorld, distanceM, reducedMotion, windowTarget: windowTarget! });
+    flight = flyToSurfaceDirection(navigation, { directionWorld, distanceM, reducedMotion, signal, windowTarget: windowTarget! });
     const handle = flight;
     const result = await handle.done;
     if (flight === handle) flight = null;
@@ -413,7 +415,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     root.remove();
   }
   return Object.freeze({
-    root,
+    root, lensIds: plan.lensIds,
     publish(next: Parameters<SurfaceFeatureLayerRuntime['publish']>[0]) { if (destroyed) return; view = next; schedule(); },
     setLens({ id }: { readonly id: string | null }) { if (destroyed) return; enabled = id !== null && plan.lensIds.includes(id); schedule(); },
     setPlaying(value: boolean) {
@@ -438,19 +440,20 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       loadHeld = false;
       if (held && landed) startLoading();
     },
-    async select(id: string) {
+    async select(id: string, { signal }: { signal?: AbortSignal } = {}) {
+      if (signal?.aborted) return { completed: false };
       startLoading(); await loadedCatalog;
-      if (destroyed) return { completed: false };
+      if (destroyed || signal?.aborted) return { completed: false };
       let index = entries.findIndex(entry => entry.feature?.id === id);
       if (index < 0) {
         const feature = await selectionFeature(id);
-        if (!feature || destroyed) return { completed: false };
+        if (!feature || destroyed || signal?.aborted) return { completed: false };
         const entry = createEntry();
         populateEntry(entry, feature);
         entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; entry.measured = true;
         index = entries.length - 1;
       }
-      return selectIndex(index);
+      return selectIndex(index, signal);
     },
     selected: () => pinnedIndex === null ? null : entries[pinnedIndex]!.feature?.id ?? null,
     clear: clearSelection,

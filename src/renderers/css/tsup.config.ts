@@ -14,7 +14,6 @@ export default {
     'platform/perspective-dolly': fileURLToPath(new URL('./navigation/perspective-dolly.ts', import.meta.url)),
     'platform/solar-view-direction': fileURLToPath(new URL('./solar-system/solar-view-direction.ts', import.meta.url)),
     'platform/prepared-object-assets': fileURLToPath(new URL('./rendering/prepared-object-assets.ts', import.meta.url)),
-    'platform/prepared-camera-runtime': fileURLToPath(new URL('./rendering/prepared-camera-runtime.ts', import.meta.url)),
     'platform/surface-fly-to': fileURLToPath(new URL('./navigation/surface-fly-to.ts', import.meta.url)),
     'platform/directional-sun-coordinate': fileURLToPath(new URL('./solar-system/directional-sun-coordinate.ts', import.meta.url)),
     index: fileURLToPath(new URL('./index.ts', import.meta.url)),

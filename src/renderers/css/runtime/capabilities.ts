@@ -1,4 +1,4 @@
-import type { ObjectRuntimeCapabilities } from './object-runtime-types.js';
+import type { ObjectRuntimeCapabilities, PreparedDestinationRuntime } from './object-runtime-types.js';
 import { mountSurfaceFeatureLabels } from '../labels/surface-feature-labels.js';
 
 function object(value: unknown, label: string): Record<string, unknown> {
@@ -11,7 +11,7 @@ function integer(value: unknown, minimum: number, maximum = Number.MAX_SAFE_INTE
 
 /** The optional runtime capabilities a prepared object may declare: a place catalogue to search and fly to, and nomenclature labels. */
 export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.freeze<ObjectRuntimeCapabilities>({
-  createDestinations({ plan: input, ready, lifetime, selectLens, navigate, reset }) {
+  createDestinations({ plan: input, ready, lifetime, navigate, reset }) {
     const plan = object(input, 'destinations'), catalog = object(plan.catalog, 'destination catalog');
     const statuses = object(plan.statuses, 'destination statuses');
     if (typeof catalog.url !== 'string' || !catalog.url.startsWith('/scenes/') ||
@@ -22,23 +22,23 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
     }
     // The catalogue itself never reaches the page: the site's search function searches it and returns one place's record
     // to select (Earth's is 14.8 MB). The plan keeps its pin, which that function verifies.
-    const defaultLens = plan.defaultLens;
     const assertLive = () => { if (lifetime.disposed) throw new Error('Object was unmounted.'); };
-    return Object.freeze({
-      async select(input: unknown) {
+    const detailStatus = statuses.detail, overviewStatus = statuses.overview;
+    return Object.freeze<PreparedDestinationRuntime>({
+      lensId: plan.defaultLens,
+      async select(input, options = {}) {
         const place = object(input, 'destination');
         await ready; assertLive();
-        if (!await selectLens(defaultLens)) throw new Error('Destination selection was superseded.');
-        assertLive();
+        options.signal?.throwIfAborted();
         const camera = object(place.camera, 'destination camera');
         for (const key of ['controlPitch', 'controlYaw', 'zoom']) {
           if (typeof camera[key] !== 'number' || !Number.isFinite(camera[key])) throw new TypeError(`Invalid prepared destination camera ${key}.`);
         }
-        return { status: place.coverage === 'detail' ? statuses.detail : statuses.overview,
+        return { status: place.coverage === 'detail' ? detailStatus : overviewStatus,
           arrival: navigate({ ...camera, controlPitch: camera.controlPitch as number,
-            controlYaw: camera.controlYaw as number, zoom: camera.zoom as number }) };
+            controlYaw: camera.controlYaw as number, zoom: camera.zoom as number }, options) };
       },
-      reset() { if (!lifetime.disposed) return reset(); },
+      reset(options) { return lifetime.disposed ? Promise.resolve({ completed: false }) : reset(options); },
     });
   },
   mountSurfaceFeatures(options) { return mountSurfaceFeatureLabels(options); },

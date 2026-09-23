@@ -17,8 +17,7 @@ function fixture(inertia: WheelZoomInertia | null = null) {
   const cameraState = { rotX: 0, rotY: 0, zoom: 1, distance: 1000 };
   const camera: NavigationCamera = { state: cameraState, update() {} };
   const controls = createPreparedWheelZoomControls({ inputSurface: surface.asElement(), camera, runtimePolicy,
-    minimumZoom: .001, maximumZoom: 4, dolly: { stepPerDelta: .006 }, inertia,
-    trackballMetrics() { throw new Error('Physical zoom must not acquire a surface anchor'); },
+    dolly: { stepPerDelta: .006 }, inertia,
     rotate(value: CameraDelta) { if (value.distance !== undefined) cameraState.distance = value.distance; },
   });
   return { surface, camera, controls };
