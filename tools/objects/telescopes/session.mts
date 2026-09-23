@@ -58,16 +58,16 @@ export interface Session {
   readonly target: string; readonly choices: readonly Choice[]; readonly answer: CapabilityAnswer;
 }
 export interface SessionServices {
-  readonly loadRequest?: (root: string, request: CapabilityRequest, selectedObservation?: string) => Promise<QueryInputs>;
+  readonly loadRequest?: (root: string, request: CapabilityRequest, selectedObservation?: string, progress?: (stage:string)=>void) => Promise<QueryInputs>;
   readonly load: (root: string, target: string) => Promise<QueryInputs>;
   readonly qualify: (root: string, request: QualificationRequest) => Promise<unknown>;
-  readonly explore?: (root: string, request: ExplorationRequest, selectedObservation?: string) => Promise<ExplorationAnswer>;
+  readonly explore?: (root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void) => Promise<ExplorationAnswer>;
 }
 const services: SessionServices = { load: loadQueryInputs, loadRequest: loadQueryInputs, qualify: qualifyObservation, explore: exploreTarget };
-const loadForRequest = (api: SessionServices, root: string, request: CapabilityRequest, selectedObservation?: string) => api.loadRequest ? api.loadRequest(root, request, selectedObservation) : api.load(root, request.target);
+const loadForRequest = (api: SessionServices, root: string, request: CapabilityRequest, selectedObservation?: string, progress?: (stage:string)=>void) => api.loadRequest ? api.loadRequest(root, request, selectedObservation, progress) : api.load(root, request.target);
 const emptyInputs: QueryInputs = { ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [] };
-const exploreForRequest = (api: SessionServices, root: string, request: ExplorationRequest, selectedObservation?: string) =>
-  (api.explore ?? exploreTarget)(root, request, selectedObservation);
+const exploreForRequest = (api: SessionServices, root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void) =>
+  (api.explore ?? exploreTarget)(root, request, selectedObservation, progress);
 export function sessionRequest(args: readonly string[]): CapabilityRequest {
   const request = requestFromArguments(args);
   queryCapabilities(request, emptyInputs); // Public validation, before archive IO.
@@ -88,13 +88,16 @@ async function locked<T>(directory: string, run: () => Promise<T>): Promise<T> {
   try { await file.writeFile(JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() })); return await run(); }
   finally { await file.close(); await rm(path, { force: true }); }
 }
-export async function saveSession(root: string, args: readonly string[], directory: string, api: SessionServices = services): Promise<Session> {
+export async function saveSession(root: string, args: readonly string[], directory: string, api: SessionServices = services, progress?: (stage:string)=>void): Promise<Session> {
   const request = sessionRequest(args);
   return locked(directory, async () => {
     const path = resolve(directory, 'query.json');
     try { await readFile(path); throw new Error(`${path} already exists. Use a new --out directory to preserve its numbered choices.`); }
     catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
-    const answer = queryCapabilities(request, await loadForRequest(api, root, request));
+    const inputs=await loadForRequest(api, root, request, undefined, progress);
+    progress?.('Evaluating candidates');
+    const answer = queryCapabilities(request, inputs);
+    progress?.('Saving query');
     const session: Session = { schema: SESSION_SCHEMA, createdAt: new Date().toISOString(), arguments: args, target: answer.target, choices: observationChoices(answer), answer };
     const temporary = `${path}.${randomUUID()}.partial`;
     try { await writeFile(temporary, `${JSON.stringify(session, null, 2)}\n`); await rename(temporary, path); }
@@ -113,8 +116,9 @@ const runDirectory = (target: string) => {
   return resolve(process.cwd(), 'telescope-runs', `${canonical}-${stamp}-${randomUUID().slice(0, 8)}`);
 };
 /** Save the unfiltered archive exploration separately from a scientific query. */
-export async function saveExploration(root: string, args: readonly string[], directory?: string, api: SessionServices = services): Promise<ExplorationSession & { readonly directory: string }> {
-  const request = parseExplorationArguments(args), initial = await exploreForRequest(api, root, request);
+export async function saveExploration(root: string, args: readonly string[], directory?: string, api: SessionServices = services, progress?: (stage:string)=>void): Promise<ExplorationSession & { readonly directory: string }> {
+  const request = parseExplorationArguments(args), initial = await exploreForRequest(api, root, request, undefined, progress);
+  progress?.('Saving exploration');
   const destination = directory ?? runDirectory(initial.target);
   return locked(destination, async () => {
     const path = resolve(destination, 'explore.json');

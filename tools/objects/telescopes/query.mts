@@ -1097,7 +1097,8 @@ export async function loadTargetCatalogue(root: string): Promise<TargetCatalogue
 
 /** Read everything the query needs from the repository. The query itself reads nothing. */
 /** The string overload retains legacy archive loading; an explicit request also searches bounded VO services. */
-export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string): Promise<QueryInputs> {
+export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string, progress?: (stage:string)=>void): Promise<QueryInputs> {
+  progress?.('Reading local evidence');
   const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
   const sky = typeof targetOrRequest !== 'string' && 'skyTarget' in targetOrRequest ? targetOrRequest.skyTarget : undefined;
   const objectRoot = resolve(root, 'src/objects'), targetCatalogue = [...await loadTargetCatalogue(root), ...sky ? [skyCatalogueEntry(sky)] : []];
@@ -1124,6 +1125,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
   const sourceIntakeIssues: SourceIntakeIssue[] = [];
   const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues, { fetchRemote: false }) : [];
+  if(typeof targetOrRequest !== 'string' && resolution.status === 'resolved')progress?.('Searching VO archives and access descriptions');
   const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root, { ...targetOrRequest, target: canonicalTarget }, targetCatalogue, selectedObservation) : undefined;
   return { ...(vo ? { vo } : {}), sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
