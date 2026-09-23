@@ -10,6 +10,6 @@
   "reportedMeanCoveringFraction": 0.42,
   "reportedPhotosphereTemperatureK": 5295,
   "reportedSpotTemperatureK": 3222,
-  "method": "Extract the dark spot pattern from the paper's hypothetical dense-latitudinal-bands example in Figure 7, left. Omit the two white dotted transit-guide lines. Apply the paper's TESS-band spot-to-photosphere intensity ratio to the fixed camera-facing limb plate over the Gaia-colour photosphere.",
+  "method": "Extract the dark spot pattern from the paper's hypothetical dense-latitudinal-bands example in Figure 7, left. Omit the two white dotted transit-guide lines. Multiply the limb-darkened photosphere's linear-light intensity by the paper's TESS-band spot-to-photosphere ratio, then encode the result as black-plate sRGB alpha over the Gaia-colour photosphere.",
   "limits": "The paper's figure illustrates one possible distribution, not an observed map. The 42% covering fraction is a two-component HST spectral-model inference, not a measured spatial pattern. TESS intensity ratio is displayed achromatically and the pattern does not rotate."
 }

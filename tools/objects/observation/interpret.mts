@@ -514,7 +514,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           const sharp = (await import('sharp')).default;
           const decoded = await sharp(await readFile(resolve(sourceDirectory, model.figure))).raw().toBuffer({ resolveWithObject: true });
           const baked = addSpotFigureToLimbPlate(plates.limb,
-            { data: decoded.data, width: decoded.info.width, height: decoded.info.height, channels: decoded.info.channels }, model);
+            { data: decoded.data, width: decoded.info.width, height: decoded.info.height, channels: decoded.info.channels }, model,
+            color, limbDarkening.coefficients);
           plates.limb = baked.plate;
           return { source: model.source, figureUrl: model.figureUrl, publishedMeanCoveringFraction: model.reportedMeanCoveringFraction,
             publishedPhotosphereTemperatureK: model.reportedPhotosphereTemperatureK, publishedSpotTemperatureK: model.reportedSpotTemperatureK,
