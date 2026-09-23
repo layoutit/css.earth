@@ -2,9 +2,9 @@
 
 A 3D CSS astrovisualization platform that renders celestial bodies as HTML and CSS 3D geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without WebGL or canvas. It turns open space data into browser-ready meshes, textures and volumes, all fit into one model of the universe.
 
-Explore the live version: [css.earth](https://css.earth) 🔭
+Explore the cosmos at [css.earth](https://css.earth/) 🔭
 
-Join [chat.polycss.com](https://chat.polycss.com) for support and community discussions.
+Join the community at [chat.polycss.com](https://chat.polycss.com/) 🌎
 
 <img src=".github/assets/planets-contact-sheet.webp" alt="The eight planets, Mercury to Neptune, each rendered as DOM and CSS markup" width="960">
 
