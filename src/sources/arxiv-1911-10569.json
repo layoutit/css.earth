@@ -1,0 +1,43 @@
+{
+  "id": "arxiv-1911-10569",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bowler et al. (2020): Population-Level Eccentricity Distributions of Imaged Exoplanets and Brown Dwarf Companions: Dynamical Evidence for Distinct Formation Channels",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1911.10569"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab5b11"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1911.10569",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab5b11",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1911.10569",
+      "checkedOn": "2026-09-23",
+      "locator": "DH Tau B: Keck/NIRC2 position of 2018.080 (2354 +/- 2 mas, 138.46 +/- 0.10 degrees), literature astrometry appendix, jitter 4.9 mas and 0.74 degrees, host mass 0.64 +/- 0.04 and parallax 7.388 +/- 0.069 mas; orbit a 330 +89/-160 au, 'The eccentricity is unconstrained'"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal",
+  "creators": [
+    "Brendan P. Bowler",
+    "Sarah C. Blunt",
+    "Eric L. Nielsen"
+  ]
+}

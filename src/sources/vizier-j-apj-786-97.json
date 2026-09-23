@@ -1,0 +1,42 @@
+{
+  "id": "vizier-j-apj-786-97",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Herczeg & Hillenbrand (2014), An Optical Spectroscopic Study of T Tauri Stars. I. Photospheric Properties, VizieR J/ApJ/786/97",
+  "identifiers": [
+    {
+      "type": "VizieR",
+      "value": "J/ApJ/786/97"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/786/2/97"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/ApJ/786/97",
+      "label": "VizieR"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/786/2/97",
+      "label": "The Astrophysical Journal 786, 97"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/ApJ/786/97/table14",
+      "checkedOn": "2026-09-23",
+      "locator": "table14, DH Tau (2MASS J04294155+2632582): SpT M2.3, AV 0.65, log L -0.66, Rad 1.26 solar radii, Mass 0.41 solar masses, at d = 140 pc"
+    },
+    {
+      "path": "src/objects/dh-tau/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "CDS, Strasbourg"
+}

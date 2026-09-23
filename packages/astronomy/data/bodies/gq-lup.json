@@ -1,0 +1,30 @@
+{
+ "id": "gq-lup",
+ "classification": "star",
+ "order": 1723,
+ "physical": {
+  "name": "GQ Lup",
+  "horizonsCode": null,
+  "meanRadiusKm": 1182690.0,
+  "gravitationalParameterKm3PerS2": 139348062044.04,
+  "parent": null,
+  "effectiveTemperatureK": 4300
+ },
+ "physicalNotes": "Radius 1.7 +/- 0.2 solar radii, temperature 4300 +/- 50 K and mass 1.05 +/- 0.07 solar masses from Donati et al. (2012, MNRAS; doi:10.1111/j.1365-2966.2012.21482.x; arXiv:1206.1770), from spectropolarimetry of the star and evolutionary models, as the ESO SupJup survey tabulates them (Gonzalez Picos et al. 2025, A&A; doi:10.1051/0004-6361/202451936; arXiv:2501.01789, Table 1). A model radius: the disc is not measured. 1,182,690 km at 695,700 km per solar radius; GM from 1.05 solar masses times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 237.3003617825921,
+  "declinationDegrees": -35.65150872134407,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 154.099669,
+  "properMotionRaMasPerYear": -14.133345789587562,
+  "properMotionDecMasPerYear": -23.328559068820223,
+  "radialVelocityKmPerS": -3.6,
+  "sources": {
+   "position": "Gaia DR3 source 6011522757643074304 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 6011522757643074304: parallax 6.4893 mas, inverted to 154.0997 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 6011522757643074304: pmRA* -14.1333 mas/yr, pmDec -23.3286 mas/yr.",
+   "radialVelocity": "Frasca et al. (2017, A&A 602, A33) via SIMBAD: -3.6 +/- 1.3 km/s. Gaia DR3 gives none."
+  },
+  "presentationUp": "display-axis"
+ }
+}

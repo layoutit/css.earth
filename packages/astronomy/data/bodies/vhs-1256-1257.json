@@ -1,0 +1,30 @@
+{
+ "id": "vhs-1256-1257",
+ "classification": "star",
+ "order": 1720,
+ "physical": {
+  "name": "VHS 1256-1257 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 83484.0,
+  "gravitationalParameterKm3PerS2": 9356227022.96,
+  "parent": null,
+  "effectiveTemperatureK": 2700
+ },
+ "physicalNotes": "Radius 0.12 solar radii: the radius Climent et al. (2022, A&A 660, A65; arXiv:2201.12606) adopt for each component of the pair, from the Chabrier et al. (2000) evolutionary models at the pair's age and mass (they give 0.12 to 0.14 over those ranges); a model radius, since neither star's disc is measured. 83,484 km at 695,700 km per solar radius. GM: half the dynamical total mass 0.141 +/- 0.008 solar masses of the A-B orbit (Dupuy et al. 2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448, Table 3), because Dupuy et al. find the two nearly equal (K-band flux ratio 0.033 +/- 0.004 mag; 74 +/- 4 Jupiter masses each if the mass ratio is near unity) while their fitted mass ratio, 0.45 +/- 0.08, is poorly constrained; times the JPL solar GM. Temperature 2700 K: the best-fitting BT-Settl model to the pair's combined spectrum (Dupuy et al. 2023, section 4), which describes both stars only because they are nearly equal. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 194.00764786266586,
+  "declinationDegrees": -12.956935593723335,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 21.153581,
+  "properMotionRaMasPerYear": -272.4615398226702,
+  "properMotionDecMasPerYear": -190.23873707184504,
+  "radialVelocityKmPerS": -1.4,
+  "sources": {
+   "position": "Gaia DR3 source 3526198184723289472 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Gaia DR3 does not resolve A and B, 0.1 arcsec apart: its position, parallax and motion are the pair's photocentre (RUWE 7.3, the pair's orbital wobble). Near-equal brightness puts the photocentre near the pair's centre of mass; this record places A there, and B on its measured orbit around A.",
+   "distance": "Gaia DR3 source 3526198184723289472: parallax 47.2733 mas, inverted to 21.1536 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 3526198184723289472: pmRA* -272.4615 mas/yr, pmDec -190.2387 mas/yr.",
+   "radialVelocity": "Gauza et al. (2015, ApJ 804, 96; arXiv:1505.00806), section 3.4: -1.4 +/- 5.0 km/s from VLT/UVES spectra of the unresolved pair. Gaia DR3 gives none."
+  },
+  "presentationUp": "display-axis"
+ }
+}

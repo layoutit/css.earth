@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "roxs-42b-b",
+  "displayName": "ROXs 42B b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.83 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "arxiv-2402-09533",
+          "url": "https://arxiv.org/abs/2402.09533",
+          "label": "Inglis et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its stars",
+        "value": "About 140 au (1.2 arcseconds)",
+        "source": {
+          "catalogueId": "arxiv-1311-7664",
+          "url": "https://arxiv.org/abs/1311.7664",
+          "label": "Kraus et al. 2014",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "About 13 Jupiter masses (model)",
+        "source": {
+          "catalogueId": "arxiv-2405-13128",
+          "url": "https://arxiv.org/abs/2405.13128",
+          "label": "Xuan et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "temperature",
+        "label": "Temperature",
+        "value": "1,935 K",
+        "source": {
+          "catalogueId": "arxiv-2402-09533",
+          "url": "https://arxiv.org/abs/2402.09533",
+          "label": "Inglis et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "roxs-42b-b-lens-shape.webp",
+        "surface": "roxs-42b-b-surface-shape@2x.webp",
+        "poles": "roxs-42b-b-poles-shape@2x.webp",
+        "source": {
+          "id": "roxs-42b-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2402.09533"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet's surface exists: it is a point of light 1.2 arcseconds from its stars. No paper gives its flux in three bands comparable with HR 8799's planets, so it stays gray. No spin axis is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Inglis et al. (2024), AJ",
+      "href": "https://arxiv.org/abs/2402.09533"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2402.09533",
+      "credit": "Inglis et al. (2024), AJ"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/roxs-42b-b.json",
+      "credit": "Model radius and temperature; orbit refitted with orbitize! on Inglis et al.'s (2026) inputs; one of the orbits the measurements allow"
+    }
+  }
+}

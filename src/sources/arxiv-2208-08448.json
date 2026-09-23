@@ -1,0 +1,82 @@
+{
+  "id": "arxiv-2208-08448",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dupuy et al. (2023): On the Masses, Age, and Architecture of the VHS J1256-1257AB b System",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2208.08448"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stac3557"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2208.08448",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stac3557",
+      "label": "Monthly Notices of the Royal Astronomical Society 519, 1688"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2208.08448",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 3: A-B orbit (a 1.96 au, P 7.307 yr, e 0.8826, i 118.7, Omega 4.4, omega 44.9 degrees, t_p 2021.537), total mass 0.141 +/- 0.008 solar masses; section 4: BT-Settl 2700 K for the pair's combined spectrum; Table 2: Keck/NIRC2 positions of b relative to A"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-companion/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-companion/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-companion/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-companion/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257-b/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 519, 1688",
+  "creators": [
+    "Trent J. Dupuy",
+    "Michael C. Liu",
+    "Elise L. Evans",
+    "William M. J. Best",
+    "Logan A. Pearce",
+    "Aniket Sanghi"
+  ]
+}

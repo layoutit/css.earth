@@ -1,0 +1,30 @@
+{
+ "id": "roxs-42b",
+ "classification": "star",
+ "order": 1727,
+ "physical": {
+  "name": "ROXs 42B A",
+  "horizonsCode": null,
+  "meanRadiusKm": 1050507.0,
+  "gravitationalParameterKm3PerS2": 118114071637.33,
+  "parent": null,
+  "effectiveTemperatureK": 3650
+ },
+ "physicalNotes": "Radius 1.51 +/- 0.02 solar radii and temperature 3650 +/- 20 K: the SPHINX model-atmosphere fit to the pair's blended optical spectrum, modelled as the sum of the two stars by Inglis et al. (2024, AJ; doi:10.3847/1538-3881/ad2771; arXiv:2402.09533), Table 1. Their text gives 1.42 and 1.59 solar radii for the two stars instead of the table's 1.51 and 1.39; the table is used. A model radius: the disc is not measured. 1,050,507 km at 695,700 km per solar radius. GM from the photometric mass 0.89 +/- 0.08 solar masses of Kraus et al. (2014, ApJ 781, 20; arXiv:1311.7664) times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 247.81254835294803,
+  "declinationDegrees": -24.54558025195794,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 146.446387,
+  "properMotionRaMasPerYear": -5.731782479942773,
+  "properMotionDecMasPerYear": -23.366381798649606,
+  "radialVelocityKmPerS": -0.67664474,
+  "sources": {
+   "position": "Gaia DR3 source 6047587937321868288 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Gaia DR3 does not resolve A and B, 83 mas apart: its position, parallax and motion are the pair's photocentre (RUWE 2.1). This record places A there, and B on its measured orbit around A (Inglis et al. 2026).",
+   "distance": "Gaia DR3 source 6047587937321868288: parallax 6.8284 mas, inverted to 146.4464 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 6047587937321868288: pmRA* -5.7318 mas/yr, pmDec -23.3664 mas/yr.",
+   "radialVelocity": "Gaia DR3 source 6047587937321868288: -0.68 +/- 13.37 km/s, the pair's combined light; poorly measured (Gaia DR2 gave 1.13 +/- 7.97)."
+  },
+  "presentationUp": "display-axis"
+ }
+}

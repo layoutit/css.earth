@@ -24,9 +24,9 @@ describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
-    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-452b', 'pds-70-b', 'pds-70-c', ...trappist, 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b'])
+    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'dh-tau-b', 'gq-lup-b', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-452b', 'pds-70-b', 'pds-70-c', 'roxs-42b-b', ...trappist, 'vhs-1256-1257-b', 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c'])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'vhs-1256-1257-b', 'gq-lup-b', 'dh-tau-b', 'roxs-42b-b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c'])
     for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
     expect(BODIES['wd-1856-534b' as keyof typeof BODIES].parent).toBe('wd-1856-534')
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
@@ -275,6 +275,75 @@ describe('hosted orbits', () => {
       // Clockwise on the sky is position angle decreasing, a positive cross product in (east, north).
       expect(x0 * y1 - y0 * x1, `${id} clockwise`).toBeGreaterThan(0)
     }
+  })
+  /** Separation (mas) and position angle (degrees east of north) of a hosted body from its parent at an epoch in decimal Julian years. */
+  const separationAndAngle = (id: Parameters<typeof hostedOrbit>[0], year: number) => {
+    const parent = BODIES[id].parent as Parameters<typeof starAstrometry>[0], star = starAstrometry(parent)
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees), distanceKm = star.distanceParsecs * PARSEC_KM
+    const p = hostedOrbitStateRelativeBmjdTdb(hostedOrbit(id), star, BODIES[parent].meanRadiusKm, 51544.5 + (year - 2000) * 365.25).positionKm
+    const [x, y] = [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000) as [number, number]
+    return { separation: Math.hypot(x, y), angle: ((Math.atan2(x, y) * 180 / Math.PI) + 360) % 360 }
+  }
+  const angleMiss = (a: number, b: number) => ((a - b + 540) % 360) - 180
+  it('puts each companion star of a planet-hosting pair where its paper measured it', () => {
+    // [decimal year, separation mas, sigma, position angle deg, sigma]. VHS 1256-1257 B: Dupuy et al. (2023), Table 1, Keck/NIRC2.
+    // ROXs 42B B: Inglis et al. (2026), Table 1, Keck NIRC speckle, NIRC2 and SPHERE. Both relative to A.
+    const measured = {
+      'vhs-1256-1257-companion': [[2016.059, 128.21, 0.14, 168.07, 0.05], [2017.050, 139.7, 2.8, 163.5, 1.9], [2017.220, 140.5, 0.7, 162.9, 0.4],
+        [2018.017, 135.84, 0.29, 158.37, 0.15], [2019.259, 109.6, 0.4, 150.36, 0.11], [2021.018, 35.02, 0.26, 112.5, 0.6],
+        [2022.066, 70.0, 1.8, 181.0, 1.7], [2022.271, 85.6, 0.7, 177.2, 0.4]],
+      'roxs-42b-companion': [[2001.345, 81, 3, 148, 3], [2002.545, 73, 1, 148, 1.0], [2003.301, 68.7, 0.7, 149.1, 0.6], [2005.29, 54, 8, 146, 10],
+        [2005.315, 57, 1, 147.9, 0.7], [2017.287, 39.2, 0.4, 331, 1], [2022.621, 51, 2, 148, 3]],
+    } as const
+    for (const [id, points] of Object.entries(measured) as [keyof typeof measured, readonly (readonly number[])[]][]) {
+      let worst = 0
+      for (const [year, separation, sigmaSeparation, angle, sigmaAngle] of points) {
+        const model = separationAndAngle(id, year!)
+        worst = Math.max(worst, Math.abs(model.separation - separation!) / sigmaSeparation!, Math.abs(angleMiss(model.angle, angle!)) / sigmaAngle!)
+      }
+      // Measured 2026-09-23, the worst point in its own sigmas: VHS 1256-1257 B 2.1, ROXs 42B B 2.1 (posterior medians, not a fit here).
+      expect(worst, id).toBeLessThan(3)
+    }
+  })
+  it('places each young imaged planet where its latest paper measured it', () => {
+    // Measured offsets of the planet from star A (east, north, mas) and the error, with the share of a pair's mass in its second star:
+    // a planet circling a pair is fitted about the pair's centre of mass, so the measured offset is moved there with the second star's
+    // own hosted orbit before comparing, as the papers do. VHS 1256-1257 b: Dupuy et al. (2023), Table 2, B's share 0.55 (their
+    // fitted A share 0.45). DH Tau b: Bowler et al. (2020), Keck/NIRC2. ROXs 42B b: Inglis et al. (2026), Table 1, B's share 0.4/1.4.
+    // GQ Lup b: Venkatesan et al. (2025), Table 3, VLTI/GRAVITY.
+    const rad = Math.PI / 180, fromSepPa = (sep: number, pa: number) => [sep * Math.sin(pa * rad), sep * Math.cos(pa * rad)] as const
+    const offset = (id: Parameters<typeof hostedOrbit>[0], year: number) => { const m = separationAndAngle(id, year); return fromSepPa(m.separation, m.angle) }
+    const cases = [
+      ['vhs-1256-1257-b', 'vhs-1256-1257-companion', 0.55, [[2016.059, -4974.0, -6409.8, 2.8], [2017.220, -4977.6, -6412.8, 2.2], [2018.017, -4982.9, -6406.5, 2.6], [2022.271, -5049.0, -6387.5, 1.3]]],
+      // Bowler et al. add 4.9 mas and 0.74 degrees of jitter to every error: across the 2.35-arcsecond separation that is 31 mas.
+      ['dh-tau-b', null, 0, [[2018.080, ...fromSepPa(2354, 138.46), 5.3, 31]]],
+      ['roxs-42b-b', 'roxs-42b-companion', 0.4 / 1.4, [[2001.586, ...fromSepPa(1137, 268.0), 14, 6], [2017.287, ...fromSepPa(1176, 271.4), 2, 4.1], [2022.621, ...fromSepPa(1178, 271), 6, 20.6]]],
+    ] as const
+    for (const [id, companion, share, points] of cases) {
+      let worst = 0
+      for (const [year, east, north, sigma, across = sigma] of points as readonly (readonly number[])[]) {
+        const second = companion ? offset(companion, year!) : [0, 0], model = offset(id, year!)
+        const target = [east! - share * second[0]!, north! - share * second[1]!], unit = target.map(v => v / Math.hypot(target[0]!, target[1]!))
+        const d = [model[0] - target[0]!, model[1] - target[1]!]
+        // Along the separation and across it, each in its own error.
+        worst = Math.max(worst, Math.abs(d[0]! * unit[0]! + d[1]! * unit[1]!) / sigma!, Math.abs(d[0]! * unit[1]! - d[1]! * unit[0]!) / across!)
+      }
+      // Measured 2026-09-23: VHS 1256-1257 b 0.97, DH Tau b 1.60, ROXs 42B b 0.75, each the worst point in its own errors.
+      expect(worst, id).toBeLessThan(2)
+    }
+    // GQ Lup b against the four VLTI/GRAVITY positions, whose errors (0.03 to 0.15 mas) are far below what the literature positions
+    // allow: under 0.6 mas at worst, against a separation of 709 mas.
+    for (const [year, east, north] of [[2023.2129, -698.969, 114.058], [2022.6814, -699.789, 112.615], [2022.6185, -699.876, 112.491], [2021.6572, -702.069, 110.363]] as const) {
+      const model = offset('gq-lup-b', year)
+      expect(Math.hypot(model[0] - east, model[1] - north), `gq-lup-b ${year}`).toBeLessThan(0.6)
+    }
+    // The CRIRES+ radial velocity of the companion relative to the star, 2.03 +/- 0.04 km/s on MJD 60003 (Gonzalez Picos et al. 2025,
+    // via Venkatesan et al. 2025, Table 4), was not in the fit. Measured 2026-09-23: 1.67 km/s, receding as measured; the 0.36 km/s gap is
+    // the size of the star's own velocity jitter (0.4 km/s, Donati et al. 2012) that led Venkatesan et al. to fit the CRIRES value instead.
+    const star = starAstrometry('gq-lup'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+    const velocity = dot(hostedOrbitStateRelativeBmjdTdb(hostedOrbit('gq-lup-b'), star, BODIES['gq-lup'].meanRadiusKm, 60003).velocityKmPerDay, sight) / 86400
+    console.log('GQ RV', velocity.toFixed(2))
+    expect(velocity).toBeGreaterThan(0)
   })
   it('rejects incomplete or non-finite eccentric inputs', () => {
     const star = starAstrometry('wasp-43')

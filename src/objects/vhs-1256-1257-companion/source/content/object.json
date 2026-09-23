@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "vhs-1256-1257-companion",
+  "displayName": "VHS 1256-1257 B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.12 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2201-12606",
+          "url": "https://arxiv.org/abs/2201.12606",
+          "label": "Climent et al. 2022",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Orbit around A",
+        "value": "7.31 years",
+        "source": {
+          "catalogueId": "arxiv-2208-08448",
+          "url": "https://arxiv.org/abs/2208.08448",
+          "label": "Dupuy et al. 2023",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "2,700 K",
+        "source": {
+          "catalogueId": "arxiv-2208-08448",
+          "url": "https://arxiv.org/abs/2208.08448",
+          "label": "Dupuy et al. 2023",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
+        "thumbnail": "vhs-1256-1257-companion-lens-color.webp",
+        "surface": "vhs-1256-1257-companion-surface-color@2x.webp",
+        "poles": "vhs-1256-1257-companion-poles-color@2x.webp",
+        "source": {
+          "id": "vhs-1256-1257-companion-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2208.08448"
+        },
+        "falseColor": false,
+        "notes": "The colour of a 2,700 K blackbody, the model temperature Dupuy et al. (2023) fit to the combined light of A and B; the two are nearly equal in brightness."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Dupuy et al. (2023), MNRAS 519, 1688",
+      "href": "https://arxiv.org/abs/2208.08448"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2208.08448",
+      "credit": "Dupuy et al. (2023), MNRAS 519, 1688"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/vhs-1256-1257-companion.json",
+      "credit": "Model radius; orbit around A from Dupuy et al. (2023); no measured rotation (display convention)"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "roxs-42b-companion",
+  "displayName": "ROXs 42B B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.39 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2402-09533",
+          "url": "https://arxiv.org/abs/2402.09533",
+          "label": "Inglis et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Orbit around A",
+        "value": "31 years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae4b34",
+          "url": "https://doi.org/10.3847/1538-3881/ae4b34",
+          "label": "Inglis et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "2,600 K",
+        "source": {
+          "catalogueId": "arxiv-2402-09533",
+          "url": "https://arxiv.org/abs/2402.09533",
+          "label": "Inglis et al. 2024",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
+        "thumbnail": "roxs-42b-companion-lens-color.webp",
+        "surface": "roxs-42b-companion-surface-color@2x.webp",
+        "poles": "roxs-42b-companion-poles-color@2x.webp",
+        "source": {
+          "id": "roxs-42b-companion-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2402.09533"
+        },
+        "falseColor": false,
+        "notes": "The colour of a 2,600 K blackbody, Inglis et al.'s (2024) model temperature for this star from the pair's blended optical spectrum, modelled as the sum of the two stars."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Inglis et al. (2026), AJ 171, 280",
+      "href": "https://doi.org/10.3847/1538-3881/ae4b34"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/1538-3881/ae4b34",
+      "credit": "Inglis et al. (2026), AJ 171, 280"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/roxs-42b-companion.json",
+      "credit": "Model radius; orbit around A from Inglis et al. (2026); no measured rotation (display convention)"
+    }
+  }
+}

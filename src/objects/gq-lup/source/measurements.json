@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gq-lup",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "No angular diameter is measured: this is the model radius, 1.7 solar radii (Donati et al. 2012), at the Gaia distance.",
+  "distanceParsecs": 154.099669,
+  "distanceSource": "Gaia DR3 source 6011522757643074304: parallax 6.4893 mas, inverted to 154.0997 pc with no zero-point correction.",
+  "radiusKm": 1182690,
+  "radiusSource": "Radius 1.7 +/- 0.2 solar radii, temperature 4300 +/- 50 K and mass 1.05 +/- 0.07 solar masses from Donati et al. (2012, MNRAS; doi:10.1111/j.1365-2966.2012.21482.x; arXiv:1206.1770), from spectropolarimetry of the star and evolutionary models, as the ESO SupJup survey tabulates them (Gonzalez Picos et al. 2025, A&A; doi:10.1051/0004-6361/202451936; arXiv:2501.01789, Table 1). A model radius: the disc is not measured. 1,182,690 km at 695,700 km per solar radius; GM from 1.05 solar masses times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 4300,
+  "effectiveTemperatureSource": "4300 +/- 50 K: Donati et al. (2012, MNRAS), as tabulated by Gonzalez Picos et al. (2025), Table 1, https://arxiv.org/abs/1206.1770",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published model radius. The star's disc is not resolved; its colour is a blackbody at the published temperature."
+  }
+}

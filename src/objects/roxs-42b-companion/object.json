@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "roxs-42b-companion",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "ROXs 42B B",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 967023
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/roxs-42b-companion-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "ROXs 42B B",
+      "classification": "star",
+      "color": "#ffa851",
+      "distanceAu": 30206729.4,
+      "description": "The smaller star of the ROXs 42B pair, 11 au from its partner on a 31-year orbit seen edge-on.",
+      "systemName": "ROXs 42B system",
+      "order": 1728,
+      "context": {
+        "order": 1728
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1552279886801445400,
+        -3806127282634701000,
+        -1877219313184007200
+      ],
+      "presentationToReference": [
+        -0.33083203653618865,
+        0.7293453791934359,
+        0.5988367736290929,
+        -0.8512117441179003,
+        -0.5045936371340536,
+        0.1443046362373346,
+        -0.4074171452910155,
+        0.46199629783474494,
+        -0.7877630928838375
+      ],
+      "orbitUpReference": [
+        -0.7293453791934359,
+        0.5045936371340536,
+        -0.46199629783474494
+      ],
+      "metersPerUnit": 3119429.0322580645,
+      "bodyRadiusM": 967023000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

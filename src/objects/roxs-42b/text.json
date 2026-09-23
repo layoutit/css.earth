@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "roxs-42b",
+  "card": {
+    "text": "Young star 146 parsecs away in Ophiuchus, one of a close pair with a giant planet photographed far out.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1311-7664",
+        "url": "https://arxiv.org/abs/1311.7664",
+        "label": "Kraus et al. 2014",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "ROXs 42B (Ophiuchus)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ROXs 42B A and B are young stars 11 au apart, circling each other every 31 years. Their planet b lies about 150 au out.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae4b34",
+        "url": "https://doi.org/10.3847/1538-3881/ae4b34",
+        "label": "Inglis et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Table 2",
+        "quote": "Semimajor axis, a (au) 10.9"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its temperature",
+      "summary": "A blackbody at the star's published temperature. No surface picture exists."
+    }
+  }
+}

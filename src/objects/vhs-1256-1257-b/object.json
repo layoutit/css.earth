@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "vhs-1256-1257-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "VHS 1256-1257 b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 90794.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/vhs-1256-1257-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "VHS 1256-1257 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 4363103.6,
+      "description": "Young planet-mass companion 150 au from the VHS 1256-1257 pair, with silicate clouds in its JWST spectrum.",
+      "systemName": "VHS 1256-1257 system",
+      "order": 1722,
+      "context": {
+        "order": 1722
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -617208721596733300,
+        -153948828968054000,
+        -146383214943290980
+      ],
+      "presentationToReference": [
+        -0.8773783730436111,
+        -0.43339437141809234,
+        -0.20585555454848117,
+        -0.11490122902774835,
+        -0.2267697113238795,
+        0.9671469410560101,
+        0.46583784526727645,
+        -0.8722068658576364,
+        -0.14916529444726748
+      ],
+      "orbitUpReference": [
+        0.43339437141809234,
+        0.2267697113238795,
+        0.8722068658576364
+      ],
+      "metersPerUnit": 292886.4516129032,
+      "bodyRadiusM": 90794800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
