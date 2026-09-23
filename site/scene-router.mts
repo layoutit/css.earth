@@ -5,7 +5,7 @@ import { errorMessage, record } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { NavigationOptions } from './navigation-history.mts';
-import type { NavigationContent } from './object-shell-client.mts';
+import type { NavigationContent, ShellNavigationTransition } from './object-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Shell = ReturnType<typeof mountObjectShell>;
@@ -102,7 +102,13 @@ export function createSceneRouter({
     },
   });
 
-  async function mountApplication({ factory, content, handoff, request }: { factory?: SceneFactory; content?: NavigationContent; handoff?: WorldHandoff; request?: NavigationRequest } = {}): Promise<boolean | undefined> {
+  async function mountApplication({ factory, content, handoff, request, selectionTransition }: {
+    factory?: SceneFactory;
+    content?: NavigationContent;
+    handoff?: WorldHandoff;
+    request?: NavigationRequest;
+    selectionTransition?: ShellNavigationTransition | null;
+  } = {}): Promise<boolean | undefined> {
     if (destroyed || scenes.current) return;
     const session = scenes.start({ objectId, request, url: request?.url ?? windowTarget.location?.href,
       onFailure: fail, onCleanupError: report });
@@ -133,8 +139,12 @@ export function createSceneRouter({
       }
       const shell = shellOwner.shell!;
       session.shell = shell;
-      if (content) shell.setObject(content);
-      shell.setOverview?.(request ? Boolean(overviewScopeFromUrl(request.url)) : overview);
+      const incomingOverview = request ? Boolean(overviewScopeFromUrl(request.url)) : overview;
+      if (selectionTransition) selectionTransition.arrive({ content, overview: incomingOverview });
+      else {
+        if (content) shell.setObject(content);
+        shell.setOverview?.(incomingOverview);
+      }
       if (!scenes.isCurrent(session)) return;
       if (content && request) {
         // The prepared sidebar swap and the detail mount each restyle and lay out
@@ -365,20 +375,6 @@ export function createSceneRouter({
     }
     const request = requests.begin({ id, cancelledFlight,
       url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) });
-    worldContextMount?.previewSelection?.(options.overview ? null : id);
-    request.own(() => {
-      if (!requests.current || requests.owns(request)) worldContextMount?.previewSelection?.();
-    });
-    // Preview the destination card while the camera approaches its overview.
-    if ((options.recenter || options.centerSelection) && options.overview) {
-      const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'system', id);
-      if (restoreSelection) request.own(restoreSelection);
-    } else if (!options.overview) {
-      const releaseCard = shellOwner?.shell?.beginCardNavigation?.(object, options.targetWorldCamera);
-      const restoreSelection = shellOwner?.shell?.beginObjectSelection?.(object);
-      if (restoreSelection) request.own(restoreSelection);
-      if (releaseCard) request.own(releaseCard);
-    }
     mountTask = transition(request, object);
     return mountTask;
   }
@@ -387,6 +383,16 @@ export function createSceneRouter({
     if (!navigation) return false;
     const source = scenes.current;
     try {
+      const options = request.options;
+      worldContextMount?.previewSelection?.(options.overview ? null : object.id);
+      request.own(() => {
+        if (!requests.current || requests.owns(request)) worldContextMount?.previewSelection?.();
+      });
+      const selectionTransition = shellOwner?.shell?.beginNavigation?.(options.overview
+        ? { kind: 'overview', overview: { scope: options.overviewScope ?? 'system', systemId: object.id },
+          preview: Boolean(options.recenter || options.centerSelection) }
+        : { kind: 'object', object, targetWorldCamera: options.targetWorldCamera });
+      if (selectionTransition) request.own(() => selectionTransition.dispose());
       if (source && objectId === object.id && scenes.state.kind === 'ready') {
         const destination = new URL(request.url);
         const datasetLink = Boolean(request.options.url) &&
@@ -431,7 +437,7 @@ export function createSceneRouter({
           commitNavigation(request, source, { ...request.options,
             history: changesSelection || datasetLink ? request.options.history : 'replace' });
         }
-        setOverview(Boolean(overviewScopeFromUrl(request.url)));
+        setOverview(Boolean(overviewScopeFromUrl(request.url)), selectionTransition);
         await bindSessionView(source, { restore, request });
         if (!requests.owns(request)) return false;
         requests.finish(request, 'finished'); syncPlayback();
@@ -469,7 +475,7 @@ export function createSceneRouter({
       if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;
-      const result = await mountApplication({ factory, content, handoff, request });
+      const result = await mountApplication({ factory, content, handoff, request, selectionTransition });
       requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
       return result === true;
     } catch (error) {
@@ -674,11 +680,12 @@ export function createSceneRouter({
     session.own(unsubscribe);
     session.framePresenter?.enable();
   }
-  function setOverview(enabled: boolean) {
+  function setOverview(enabled: boolean, selectionTransition?: ShellNavigationTransition | null) {
     const entered = enabled && !overview;
     overview = enabled;
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(enabled);
-    shellOwner?.shell?.setOverview?.(enabled);
+    if (selectionTransition) selectionTransition.arrive({ overview: enabled });
+    else shellOwner?.shell?.setOverview?.(enabled);
     worldContextMount?.setOverview?.(enabled);
     if (stage.dataset) stage.dataset.selection = enabled ? 'system' : objectId;
     if (entered) aimAtSystemCenter();
