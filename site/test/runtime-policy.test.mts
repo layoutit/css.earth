@@ -9,7 +9,6 @@ import {
   MOBILE_VIEWPORT_MAX,
   MOBILE_VIEWPORT_QUERY,
   WHEEL_ZOOM_SPEED_MULTIPLIER,
-  WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
   WHEEL_ZOOM_INERTIA,
   WHEEL_ZOOM_INERTIA_INPUT_KINDS,
@@ -66,14 +65,8 @@ test("keeps one shared orientation-aware responsive shell boundary", () => {
 // delta units. Both devices report the same units, so both sit on it: a gain
 // above 1 makes that device travel further than the trace it was taken from.
 test("every scroll device is calibrated to the traced reference response", () => {
-  assert.equal(WHEEL_ZOOM_USE_SCROLL_DISTANCE, true);
-  // The controller's own expression for the log travel one gesture commands.
-  const response = (deltaUnits: number, gain: number) => deltaUnits / 100 *
-    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * gain * PREPARED_WHEEL_ZOOM.intervalMilliseconds;
-  const reference =
-    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * PREPARED_WHEEL_ZOOM.intervalMilliseconds;
   for (const gain of [WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER]) {
-    assert.equal(response(100, gain), reference);
+    assert.equal(gain, 1);
   }
 });
 

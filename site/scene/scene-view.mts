@@ -12,7 +12,6 @@ interface SceneViewOptions {
   windowTarget: BrowserWindow;
   scenes: SceneSessions;
   requests: NavigationLifecycle;
-  listenToPopState: boolean;
   getHistory(): ReturnType<typeof createNavigationHistory> | null;
   getWorld(): WorldContextMount | null;
   getMotion(): boolean;
@@ -22,7 +21,7 @@ interface SceneViewOptions {
 export type SceneView = ReturnType<typeof createSceneView>;
 
 /** Installs session-owned URL writers and commits only the request that still owns navigation. */
-export function createSceneView({ windowTarget, scenes, requests, listenToPopState, getHistory, getWorld,
+export function createSceneView({ windowTarget, scenes, requests, getHistory, getWorld,
   getMotion, setMotion, onError }: SceneViewOptions) {
   function capture(href?: string) {
     if (!windowTarget.location?.href) return null;
@@ -95,20 +94,11 @@ export function createSceneView({ windowTarget, scenes, requests, listenToPopSta
     if (new URL(href).pathname !== windowTarget.location.pathname) return true;
     const shared = session.mount?.sharedView;
     const restore = !interrupted && (!request || request.scene === 'replace' || request.camera.kind === 'restore');
-    const writer = shared ? bindViewUrl({ windowTarget, view: shared, getMotion,
+    const owner = shared ? bindViewUrl({ windowTarget, view: shared, getMotion,
       // Disposal can flush after the session has stopped accepting changes.
       replace: url => { if (session.viewUrl === owner) publish(session, url); }, onError,
     }) : null;
-    const onPopState = () => {
-      session.url = windowTarget.location.href;
-      void arrive(session).catch(onError);
-    };
-    const owner = writer && { ...writer, destroy() {
-      writer.destroy();
-      if (listenToPopState) windowTarget.removeEventListener('popstate', onPopState);
-    } };
     session.setViewUrl(owner);
-    if (owner && listenToPopState) windowTarget.addEventListener('popstate', onPopState);
     const current = () => owns() && session.viewUrl === owner;
     const wait = request?.lifetime.wait ?? session.wait;
     let incoming: string | null = null;

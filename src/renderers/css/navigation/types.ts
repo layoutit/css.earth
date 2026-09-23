@@ -50,8 +50,7 @@ export interface PerspectiveCameraPlan extends CameraPlan {
   projection: NonNullable<CameraPlan['projection']>; dolly: NonNullable<CameraPlan['dolly']>;
   levelOfDetail: LevelOfDetailPlan; orbitLineFade: OrbitLineFade;
 }
-export interface LegacyCameraPose { schema: 'cssearth-camera-pose@1'; scene: string; skybox: string; sunView: string; }
 export interface PhysicalCameraPose { schema: 'cssearth-camera-pose@2'; scene: string; }
-export type CameraPose = LegacyCameraPose | PhysicalCameraPose;
+export type CameraPose = PhysicalCameraPose;
 export interface CameraAngles { controlPitch: number; controlYaw: number; }
 export function errorMessage(error: unknown): string { return error instanceof Error ? error.message : String(error); }

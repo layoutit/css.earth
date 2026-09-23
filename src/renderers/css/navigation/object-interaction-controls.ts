@@ -5,7 +5,7 @@ import { interactionTrackball, directAngularDegreesPerTrackballRadius, directPit
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate, DestinationMotion } from './types.js';
-export interface ObjectInteractionOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; dolly?: { stepPerDelta: number } | null; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
+export interface ObjectInteractionOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; dolly: { stepPerDelta: number }; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
 export interface InteractionServices { createUnboundedMatrixDragControls?: typeof createMatrixDragControls; createPreparedWheelZoomControls?: typeof createWheelZoomControls; }
 export function createObjectInteractionControls({
   inputSurface,
@@ -16,7 +16,7 @@ export function createObjectInteractionControls({
   rotate,
   minimumZoom,
   maximumZoom,
-  dolly = null,
+  dolly,
   surfaceFlyToHitTest = null,
   onStart,
   onEnd,
@@ -68,14 +68,11 @@ export function createObjectInteractionControls({
     runtimePolicy,
     onError: fail,
     camera,
-    trackballMetrics: interactionTrackballMetrics,
     rotate(delta) {
       rotate(delta);
       // Measure the changed camera only if a held pointer moves again.
       dragControls.invalidateTrackball();
     },
-    minimumZoom,
-    maximumZoom,
     dolly,
   });
   lifetime.onDispose(() => wheelControls.destroy());

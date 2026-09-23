@@ -1,25 +1,13 @@
 import type { RuntimePolicy, WheelInputKind, WheelZoomInertia } from './runtime-policy.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
-import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate } from './types.js';
-export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; speedMultiplier?: number; useScrollDistance?: boolean; dolly?: { stepPerDelta: number } | null; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
+import type { NavigationCamera, CameraDelta, ControlsUpdate } from './types.js';
+export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; rotate(delta: CameraDelta): void; speedMultiplier?: number; dolly: { stepPerDelta: number }; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
-import { projectSphereDrag } from "@cssearth/engine";
-
-
-// Reference response from the isolated wheel-handler trace. The shared policy
-// adds scroll-distance sensitivity; disabling it restores the timed response.
-//
-// Two wheel models share one controller. The scale camera zooms and holds the
-// surface point under the cursor (the anchor). A perspective `dolly` moves
-// the eye along its own axis toward the body's centre instead: each wheel
-// event adds deltaY * stepPerDelta * input gain to the target log-distance, consumed
-// evenly by the end of the same interval, and no surface anchor exists to
-// hold, so the wheel never turns the scene. Both models apply the shared
-// device sensitivity to their prepared base response.
+// Each wheel event adds its magnitude and device gain to the target
+// log-distance. The eye moves along its axis; wheel input never turns the scene.
 export const PREPARED_WHEEL_ZOOM = Object.freeze({
   schema: "cssearth-prepared-wheel-zoom@1",
   intervalMilliseconds: 200,
-  screenLogScalePerMillisecond: 0.00108,
   sourceFunctions: Object.freeze({
     wheelDispatch: "0x0090d752",
     cameraZoom: "0x0094a860",
@@ -31,13 +19,9 @@ export function createPreparedWheelZoomControls({
   inputSurface,
   runtimePolicy,
   camera,
-  trackballMetrics,
   rotate,
-  minimumZoom,
-  maximumZoom,
   speedMultiplier = runtimePolicy.WHEEL_ZOOM_SPEED_MULTIPLIER,
-  useScrollDistance = runtimePolicy.WHEEL_ZOOM_USE_SCROLL_DISTANCE,
-  dolly = null,
+  dolly,
   inertia = runtimePolicy.WHEEL_ZOOM_INERTIA,
   inertiaInputKinds = runtimePolicy.WHEEL_ZOOM_INERTIA_INPUT_KINDS,
   onError = null,
@@ -46,12 +30,9 @@ export function createPreparedWheelZoomControls({
   const glideKinds = Object.freeze([...inertiaInputKinds]);
   if (!(inputSurface instanceof HTMLElement) ||
       typeof camera?.state !== "object" ||
-      typeof trackballMetrics !== "function" || typeof rotate !== "function" ||
-      ![minimumZoom, maximumZoom].every(Number.isFinite) ||
-      minimumZoom <= 0 || maximumZoom < minimumZoom ||
+      typeof rotate !== "function" ||
       !Number.isFinite(speedMultiplier) || speedMultiplier <= 0 ||
-      typeof useScrollDistance !== "boolean" ||
-      (dolly !== null && !(dolly.stepPerDelta > 0)) ||
+      !(dolly?.stepPerDelta > 0) ||
       (glidePolicy !== null && !(glidePolicy.dampingSeconds > 0 && glidePolicy.gain > 0 &&
         glidePolicy.stopLogRatePerSecond > 0 &&
         glidePolicy.stopRateRatio > 0 && glidePolicy.stopRateRatio < 1)) ||
@@ -81,8 +62,6 @@ export function createPreparedWheelZoomControls({
   let direction = 0;
   let expiresAt = 0;
   let previousTimestamp: number | null = null;
-  let anchor: { x: number; y: number } | null = null;
-  let targetZoom: number | null = null;
   let targetDistance: number | null = null;
   let inputKind: WheelInputKind | null = null;
   let previousInputTimestamp = -Infinity;
@@ -100,8 +79,6 @@ export function createPreparedWheelZoomControls({
     frame = null;
     previousTimestamp = null;
     direction = 0;
-    anchor = null;
-    targetZoom = null;
     targetDistance = null;
     gliding = false;
     glideRate = 0;
@@ -114,30 +91,6 @@ export function createPreparedWheelZoomControls({
     const applied = Math.log(ratio) / elapsed;
     travelRate = travelRate === 0 ? applied : travelRate * .6 + applied * .4;
   };
-  // One zoom step for the scale camera, holding the anchor under the cursor.
-  const applyZoom = (previousZoom: number, zoom: number) => {
-    let rotation;
-    if (anchor !== null && zoom !== previousZoom) {
-      const trackball = trackballMetrics();
-      const scale = zoom / previousZoom;
-      rotation = scale < 1 ? zoomOutRayRotation(trackball, anchor, scale) : projectSphereDrag({
-        ...trackball,
-        radius: trackball.surfaceRadius,
-        previousX: anchor.x,
-        previousY: anchor.y,
-        currentX: trackball.centerX +
-          (anchor.x - trackball.centerX) / scale,
-        currentY: trackball.centerY +
-          (anchor.y - trackball.centerY) / scale,
-      });
-    }
-    rotate({
-      controlPitchDelta: 0,
-      controlYawDelta: 0,
-      zoom,
-      ...(rotation === undefined ? {} : { rotation }),
-    });
-  };
   // The released gesture keeps its rate and decays it toward zero. The wheel
   // commands log-distance, so the glide is exponential in the gesture's own
   // units; a bound, a new event or a stop ends it at once.
@@ -147,21 +100,12 @@ export function createPreparedWheelZoomControls({
     glidePrevious = timestamp;
     glideRate *= Math.max(0, 1 - step / (glidePolicy.dampingSeconds * 1000));
     if (step > 0 && glideRate !== 0) {
-      if (dolly !== null) {
-        const distance = camera.state.distance * Math.exp(glideRate * step);
-        rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance });
-        if (disposed) return;
-        frames += 1;
-        // A bound refused the step: the glide has nowhere left to travel.
-        if (camera.state.distance !== distance) glideRate = 0;
-      } else {
-        const previousZoom = camera.state.zoom;
-        const zoom = clamp(previousZoom * Math.exp(glideRate * step), minimumZoom, maximumZoom);
-        applyZoom(previousZoom, zoom);
-        if (disposed) return;
-        frames += 1;
-        if (zoom === previousZoom) glideRate = 0;
-      }
+      const distance = camera.state.distance * Math.exp(glideRate * step);
+      rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance });
+      if (disposed) return;
+      frames += 1;
+      // A bound refused the step: the glide has nowhere left to travel.
+      if (camera.state.distance !== distance) glideRate = 0;
     }
     // A glide ends when its own motion stops being visible, not when it falls to
     // a share of whatever rate released it: an eye reads distance change per frame,
@@ -191,7 +135,7 @@ export function createPreparedWheelZoomControls({
     // at its own rate instead of showing one short step at the handoff.
     const leftover = Math.max(0, timestamp - previousTimestamp - elapsed);
     previousTimestamp = timestamp;
-    if (elapsed > 0 && direction !== 0 && dolly !== null) {
+    if (elapsed > 0 && direction !== 0) {
       // The dolly: the outstanding log-distance, spread over the interval.
       const previousDistance = camera.state.distance;
       const distance = previousDistance * Math.exp(
@@ -202,22 +146,8 @@ export function createPreparedWheelZoomControls({
       recordTravel(camera.state.distance / previousDistance, elapsed);
       // A clamped dolly drops what the bound refused.
       if (camera.state.distance !== distance) targetDistance = camera.state.distance;
-    } else if (elapsed > 0 && direction !== 0) {
-      const previousZoom = camera.state.zoom;
-      const zoom = clamp(previousZoom * Math.exp(
-        useScrollDistance
-          ? Math.log(targetZoom! / previousZoom) * Math.min(1, elapsed / remaining)
-          : direction * PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * speedMultiplier * elapsed,
-      ), minimumZoom, maximumZoom);
-      applyZoom(previousZoom, zoom);
-      if (disposed) return;
-      frames += 1;
-      recordTravel(camera.state.zoom / previousZoom, elapsed);
     }
-    const continuing = dolly !== null
-      ? timestamp < expiresAt && camera.state.distance !== targetDistance
-      : timestamp < expiresAt && camera.state.zoom > minimumZoom &&
-        camera.state.zoom < maximumZoom;
+    const continuing = timestamp < expiresAt && camera.state.distance !== targetDistance;
     if (continuing) {
       frame = requestFrame(animate);
       return;
@@ -256,25 +186,13 @@ export function createPreparedWheelZoomControls({
     if (direction !== 0 && nextDirection !== direction) travelRate = 0;
     const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2
       ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
-    if (dolly !== null) {
-      inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
-      previousInputTimestamp = event.timeStamp;
-      const origin = frame !== null && direction === nextDirection ? targetDistance! : camera.state.distance;
-      const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
-      targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
-    } else if (useScrollDistance) {
-      inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
-      previousInputTimestamp = event.timeStamp;
-      const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
-      const origin = frame !== null && direction === nextDirection ? targetZoom! : camera.state.zoom;
-      targetZoom = clamp(origin * Math.exp(-event.deltaY * unit / 100 *
-        PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * inputSpeed *
-        PREPARED_WHEEL_ZOOM.intervalMilliseconds), minimumZoom, maximumZoom);
-    }
+    inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
+    previousInputTimestamp = event.timeStamp;
+    const origin = frame !== null && direction === nextDirection ? targetDistance! : camera.state.distance;
+    const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
+    targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
     direction = nextDirection;
     expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
-    // A dolly has no surface anchor: the eye moves along its own axis.
-    anchor = dolly === null ? { x:event.clientX, y:event.clientY } : null;
     events += 1;
     if (frame === null) {
       previousTimestamp = event.timeStamp;
@@ -299,27 +217,6 @@ export function createPreparedWheelZoomControls({
     },
     destroy,
     stats: () => Object.freeze({ active:frame !== null, gliding, events, frames, inputKind,
-      model: dolly === null ? "scale-zoom-with-anchor" : "perspective-dolly" }),
+      model: "perspective-dolly" }),
   });
-}
-
-function clamp(value: number, minimum: number, maximum: number) {
-  return Math.max(minimum, Math.min(maximum, value));
-}
-
-// Native zoom-out steers the viewing ray, while zoom-in holds the surface.
-// Using the sphere tangent for both directions over-rotates zoom-out.
-export function zoomOutRayRotation(trackball: TrackballMetrics, anchor: { x: number; y: number }, scale: number) {
-  const focal = trackball.focalLength;
-  const distance = Math.hypot(1, focal / trackball.surfaceRadius);
-  const nextDistance = Math.hypot(1, focal / (trackball.surfaceRadius * scale));
-  const ratio = distance / nextDistance;
-  const x = (anchor.x - trackball.centerX) / focal;
-  const y = (anchor.y - trackball.centerY) / focal;
-  const a = [x * ratio, y * ratio, 1], b = [x, y, 1];
-  const aLength = Math.hypot(...a), bLength = Math.hypot(...b);
-  const q = [a[1]-b[1], b[0]-a[0], a[0]*b[1]-a[1]*b[0],
-    aLength*bLength+a[0]*b[0]+a[1]*b[1]+1];
-  const length = Math.hypot(...q);
-  return q.map(v => v / length);
 }

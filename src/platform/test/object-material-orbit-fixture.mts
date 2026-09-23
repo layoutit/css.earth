@@ -33,28 +33,14 @@ export function materialOrbitFixture(id: string) {
   nativeStage.getComputedStyle = (element: HTMLElement) => element.style;
   document.defaultView = nativeStage as unknown as Record<string, unknown>; document.readyState = 'complete';
   document.querySelector = selector => selector === '.object-sidebar' ? null : stage;
-  // A perspective camera (an object with a heliocentric view) projects through
-  // the shared dolly; its native measurements are controlled here too.
-  const levelOfDetail = { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0 };
-  const dolly = { rotX: definition.camera.defaultControlPitchDegrees, rotY: definition.camera.defaultControlYawDegrees, zoom: definition.camera.defaultZoom };
   const sharedDependencies = { HTMLElement: globalThis.HTMLElement,
-    createPerspectiveDolly: () => ({
-      camera: { get state() { return { ...dolly, distance: 1 / dolly.zoom }; },
-        update(partial: { distance?: number; rotX?: number; rotY?: number; zoom?: number }) { Object.assign(dolly, partial); if (partial.distance !== undefined) dolly.zoom = 1 / partial.distance; } },
-      measure() {}, reclamp() {}, remeasure() {}, minimumZoom: () => 0.01, maximumZoom: () => definition.camera.maximumZoom,
-      publish: () => ({ distance: 1 / dolly.zoom, focal: 1000, viewportWidth: 1000, viewportHeight: 800, principalOffset: [0, 0],
-        body: null, sun: null, levelOfDetail }),
-      trackball: () => ({ centerX: 500, centerY: 400, radius: 200, surfaceRadius: 200, focalLength: 1000, viewportWidth: 1000,
-        viewportCenterX: 500, viewportCenterY: 400 }),
-      state: () => ({ distance: 1 / dolly.zoom }), levelOfDetail: () => levelOfDetail, stats: () => ({}),
-    }),
     createUnboundedMatrixDragControls(options: Parameters<NonNullable<OrbitServices['createUnboundedMatrixDragControls']>>[0]) {
       shared.callbacks.drag = options; shared.owners.add('drag');
       return { update() {}, stop() {}, invalidateTrackball() {}, stats() { return {}; }, destroy() { shared.owners.delete('drag'); } };
     },
-    createCubicSkyCameraOrientation: () => ({ scene: () => identity, sceneMatrix: () => identity,
+    createCubicSkyCameraOrientation: () => ({ scene: () => identity, sceneMatrix: () => ({ m11: 1, m22: 1, m33: 1, m12: 0, m13: 0, m21: 0, m23: 0, m31: 0, m32: 0 }),
       skybox: () => ({ matrix: identity, sunViewDirection: [0, 0, 1] }),
-      counterRotation: () => identity,
+      counterRotation: () => identity, captureCounterRotation: () => () => identity, setSceneRotation() {},
       reset() {}, rotate() {}, snapshot: () => ({}) }) };
   const shared = orbitFixture(null, false, sharedDependencies as unknown as Partial<import('../../renderers/css/dist/platform/object-orbit.js').OrbitServices>);
   const f = { ...shared, stage: nativeStage, errors: [], writes: 0, fail: false, create: async () => undefined, event: () => undefined, restore() {} } as unknown as MaterialFixture;
@@ -83,18 +69,17 @@ export function materialOrbitFixture(id: string) {
         decode: () => Promise.resolve(), removeAttribute() { this.src = ''; } }) });
       return f.resources;
     },
-    mountSky: () => { const root = document.createElement('div'); return { root, setOrientation() {}, destroy() { root.remove(); } }; },
     createOrbit(options: unknown) { f.orbit = shared.create(options as import('../../renderers/css/dist/platform/object-orbit.js').RetainedOrbitOptions); return f.orbit; },
   };
   const mount = createObjectRuntime(definition, services as unknown as Partial<ObjectRuntimeServices>);
-  f.create = async () => { f.runtime = mount(nativeStage, { inputSurface: nativeStage, runtimePolicy: shared.arguments.runtimePolicy, onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };
+  f.create = async () => { f.runtime = mount(nativeStage, { worldContext: shared.arguments.worldContext, viewport: shared.arguments.viewport, framePresenter: shared.arguments.framePresenter, inputSurface: nativeStage, runtimePolicy: shared.arguments.runtimePolicy, onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };
   f.event = (name: string, orbit: RetainedCubicSkyOrbit) => {
     if (name === 'wheel') return () => {
       const wheel = f.callbacks.wheel; if (!wheel) throw new Error('Wheel fixture was not created');
       try { wheel.rotate({ controlPitchDelta: 0, controlYawDelta: 0, zoom: 2 }); }
       catch (error) { if (typeof wheel.onError === 'function') wheel.onError(error); }
     };
-    if (name === 'resize') { const listener = nativeStage.listeners.get('resize')?.values().next().value; return typeof listener === 'function' ? () => listener({} as PointerEvent) : undefined; }
+    if (name === 'resize') { const listener = shared.stage.listeners.get('resize')?.values().next().value; return typeof listener === 'function' ? () => listener({} as PointerEvent) : undefined; }
     if (name === 'invalidate') return f.ready;
     if (name === 'refresh') return () => orbit.refresh();
     if (name === 'setState') return () => orbit.setState({ zoom: 2 });

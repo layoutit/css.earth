@@ -20,7 +20,7 @@ export interface PerspectiveWorldContext {
   readonly sceneRegistration?: string;
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
-export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; worldContext: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport;
+export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; worldContext: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; stage: HTMLElement; viewport: CameraViewport;
   /** Prepared activation groups of the mesh; a resolving mesh returns through them in stages. */
   revealGroups?: readonly (readonly HTMLElement[])[];
   /** False while the mesh has no committed material; it stays hidden until then. */
@@ -144,7 +144,6 @@ export function createPerspectiveDolly({
   worldContext,
   cameraElement,
   sceneElement,
-  skyElement,
   stage,
   viewport,
   revealGroups = [],
@@ -158,7 +157,7 @@ export function createPerspectiveDolly({
   const kilometersPerUnit = worldContext.kilometersPerUnit;
   const maximumExtent = worldContext.maximumExtentUnits;
   if (!(bodyRadius > 0) || !(kilometersPerUnit > 0) || !(maximumExtent > 0) ||
-      !cameraElement?.style || !sceneElement?.style || !skyElement || !stage) {
+      !cameraElement?.style || !sceneElement?.style || !viewport || !stage) {
     throw new TypeError("Perspective dolly requires a prepared physical camera context.");
   }
   const levelOfDetail = cameraPlan.levelOfDetail;
@@ -204,59 +203,22 @@ export function createPerspectiveDolly({
   let transformWrites = 0;
 
   const measure = () => {
-    if (viewport) {
-      const snapshot = viewport.read(cameraPlan.projection.cssPerspective);
-      focal = snapshot.focalPixels;
-      viewportWidth = snapshot.bounds.width;
-      viewportHeight = snapshot.bounds.height;
-      // Centre the focus on the scene area the shell leaves open (a phone's header and drawer cover the rest).
-      // The camera root moves there whole, so inside it the dolly stays on-axis; consumers in stage coordinates
-      // (world context, sky, volumes) read the same shift as the stage viewport's principal offset.
-      const open = snapshot.openArea;
-      const offsetY = open ? (open.top + open.bottom) / 2 - (snapshot.bounds.top + viewportHeight / 2) : 0;
-      principalOffset = Object.freeze([0, 0]);
-      stageViewport = Object.freeze({ focalPixels: focal, widthPixels: viewportWidth,
-        heightPixels: viewportHeight, principalOffsetPixels: [0, offsetY] as const });
-      visibleRect = Object.freeze({ left: -viewportWidth / 2, right: viewportWidth / 2,
-        top: -viewportHeight / 2 - offsetY, bottom: viewportHeight / 2 - offsetY });
-      cameraElement.style.perspectiveOrigin = '50% 50%';
-      cameraElement.style.translate = offsetY ? `0 ${formatNumber(offsetY)}px` : '';
-      return;
-    }
-    const view = cameraElement.ownerDocument.defaultView;
-    if (!view) throw new Error("Perspective camera document has no window.");
-    const nextFocal = parseFloat(view.getComputedStyle(cameraElement).perspective);
-    const bounds = cameraElement.getBoundingClientRect();
-    if (!(nextFocal > 0) || !(bounds.width > 0) || !(bounds.height > 0)) {
-      throw new Error("Perspective camera root has no projection.");
-    }
-    focal = nextFocal;
-    viewportWidth = bounds.width;
-    viewportHeight = bounds.height;
-    const skyBounds = skyElement.getBoundingClientRect();
-    const [skyOriginX, skyOriginY] = view.getComputedStyle(skyElement)
-      .perspectiveOrigin.split(" ").map(parseFloat);
-    principalOffset = Object.freeze([
-      skyBounds.x + skyOriginX - (bounds.x + bounds.width / 2),
-      skyBounds.y + skyOriginY - (bounds.y + bounds.height / 2),
-    ].map((value) => Number.isFinite(value) ? value : 0));
-    const stageBounds = stage.getBoundingClientRect();
-    const rootCentre = [bounds.x + bounds.width / 2, bounds.y + bounds.height / 2];
-    stageViewport = Object.freeze({ focalPixels: focal,
-      widthPixels: stageBounds.width, heightPixels: stageBounds.height,
-      principalOffsetPixels: [rootCentre[0] - stageBounds.x - stageBounds.width / 2 + principalOffset[0],
-        rootCentre[1] - stageBounds.y - stageBounds.height / 2 + principalOffset[1]] as const });
-    const candidate = {
-      left: Math.max(stageBounds.x, bounds.x) - rootCentre[0],
-      top: Math.max(stageBounds.y, bounds.y) - rootCentre[1],
-      right: Math.min(stageBounds.x + stageBounds.width, bounds.x + bounds.width) - rootCentre[0],
-      bottom: Math.min(stageBounds.y + stageBounds.height, bounds.y + bounds.height) - rootCentre[1],
-    };
-    visibleRect = candidate.right > candidate.left && candidate.bottom > candidate.top
-      ? Object.freeze(candidate) : null;
-    const origin = `calc(50% + ${formatNumber(principalOffset[0])}px) ` +
-      `calc(50% + ${formatNumber(principalOffset[1])}px)`;
-    cameraElement.style.perspectiveOrigin = origin;
+    const snapshot = viewport.read(cameraPlan.projection.cssPerspective);
+    focal = snapshot.focalPixels;
+    viewportWidth = snapshot.bounds.width;
+    viewportHeight = snapshot.bounds.height;
+    // Centre the focus on the scene area the shell leaves open (a phone's header and drawer cover the rest).
+    // The camera root moves there whole, so inside it the dolly stays on-axis; consumers in stage coordinates
+    // (world context, sky, volumes) read the same shift as the stage viewport's principal offset.
+    const open = snapshot.openArea;
+    const offsetY = open ? (open.top + open.bottom) / 2 - (snapshot.bounds.top + viewportHeight / 2) : 0;
+    principalOffset = Object.freeze([0, 0]);
+    stageViewport = Object.freeze({ focalPixels: focal, widthPixels: viewportWidth,
+      heightPixels: viewportHeight, principalOffsetPixels: [0, offsetY] as const });
+    visibleRect = Object.freeze({ left: -viewportWidth / 2, right: viewportWidth / 2,
+      top: -viewportHeight / 2 - offsetY, bottom: viewportHeight / 2 - offsetY });
+    cameraElement.style.perspectiveOrigin = '50% 50%';
+    cameraElement.style.translate = offsetY ? `0 ${formatNumber(offsetY)}px` : '';
   };
   const zoomToDistance = (zoom: number) => distanceForSilhouetteRadius(
     bodyRadius,
@@ -489,9 +451,9 @@ export function createPerspectiveDolly({
     // comfortably: the trackball never shrinks below a fifth of the
     // viewport's short side, and the sphere the drag rides is that disc.
     trackball() {
-      const sharedBounds = viewport?.read(cameraPlan.projection.cssPerspective).bounds;
-      const bounds = sharedBounds ?? cameraElement.getBoundingClientRect();
-      const stageBounds = sharedBounds ?? stage.getBoundingClientRect();
+      const sharedBounds = viewport.read(cameraPlan.projection.cssPerspective).bounds;
+      const bounds = sharedBounds;
+      const stageBounds = sharedBounds;
       const silhouette = projectedBody?.silhouette;
       const centerX = bounds.x + bounds.width / 2 + (silhouette?.centre[0] ?? 0);
       const centerY = bounds.y + bounds.height / 2 + (silhouette?.centre[1] ?? 0);

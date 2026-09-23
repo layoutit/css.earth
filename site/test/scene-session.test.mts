@@ -5,7 +5,7 @@ import { createSceneSessions } from '../scene/scene-session.mts';
 import { createPreparedSceneOwnership } from '../prepared-scene-ownership.mts';
 import type { SceneFactory } from '../browser-types.mts';
 import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/object-scene.js';
-import { unusedSharedView } from './navigation-test-values.mts';
+import { unusedSharedView, unusedMountOptions } from './navigation-test-values.mts';
 
 function deferred<T>() {
   let resolve!: (value: T) => void, reject!: (error: unknown) => void;
@@ -27,7 +27,7 @@ function fixture() {
 
 test('readiness waits for native activation and restoration; one session commands playback and teardown', async () => {
   const h = fixture(), ready = deferred<void>(), mounted = deferred<void>();
-  const work = h.session.activate(() => { mounted.resolve(); return h.native(ready.promise); }, h.stage, {});
+  const work = h.session.activate(() => { mounted.resolve(); return h.native(ready.promise); }, h.stage, unusedMountOptions);
   await mounted.promise;
   assert.equal(h.session.commit(), false, 'A native mount alone cannot publish readiness');
   h.session.play(true); assert.deepEqual(h.calls, ['pause']);
@@ -45,10 +45,10 @@ test('readiness waits for native activation and restoration; one session command
 
 test('a late factory cannot mount or replace the next session after cancellation', async () => {
   const h = fixture(), factory = deferred<SceneFactory>();
-  const old = h.session.activate(factory.promise, h.stage, {});
+  const old = h.session.activate(factory.promise, h.stage, unusedMountOptions);
   h.session.dispose(); assert.equal(await old, false);
   const next = h.scenes.start(h.options);
-  await next.activate(() => h.native(), h.stage, {}); next.commit();
+  await next.activate(() => h.native(), h.stage, unusedMountOptions); next.commit();
   factory.resolve(() => { assert.fail('The retired factory must not mount'); });
   await Promise.resolve();
   assert.equal(h.scenes.current, next); assert.equal(h.scenes.state.kind, 'ready');
@@ -59,7 +59,7 @@ test('a transferred prepared bank survives request completion and releases on sc
   const h = fixture(), request = new AbortController(), ownership = createPreparedSceneOwnership(request.signal);
   let released = 0;
   ownership.own({ destroy() { released++; } });
-  assert.equal(await h.session.activate(() => h.native(), h.stage, {}, {
+  assert.equal(await h.session.activate(() => h.native(), h.stage, unusedMountOptions, {
     mountOptions: {}, transferTo: ownership.transferTo, async afterMount() {},
   }), true);
   request.abort();
@@ -73,7 +73,7 @@ test('failed activation releases transferred preparation even when the factory t
   const h = fixture(), request = new AbortController(), ownership = createPreparedSceneOwnership(request.signal);
   const failure = new Error('factory rejected its prepared bank'); let released = 0;
   ownership.own({ destroy() { released++; } });
-  await assert.rejects(h.session.activate(() => { throw failure; }, h.stage, {}, {
+  await assert.rejects(h.session.activate(() => { throw failure; }, h.stage, unusedMountOptions, {
     mountOptions: {}, transferTo: ownership.transferTo, async afterMount() {},
   }), failure);
   h.session.dispose(failure);
@@ -92,7 +92,7 @@ test('cancellation before handoff releases a late bank and forbids transfer', ()
 
 test('URL replacement stays bounded and flush failures cannot skip native or binding cleanup', async () => {
   const h = fixture(); let oldReleased = 0, currentReleased = 0;
-  await h.session.activate(() => h.native(), h.stage, {}); h.session.commit();
+  await h.session.activate(() => h.native(), h.stage, unusedMountOptions); h.session.commit();
   h.session.setViewUrl({ start() {}, capture: () => null, schedule() {}, flush() {}, destroy() { oldReleased++; } });
   h.session.setViewUrl({ start() {}, capture: () => null, schedule() {},
     flush() { assert.equal(h.scenes.current, null); throw new Error('flush failed'); },

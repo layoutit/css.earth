@@ -13,7 +13,7 @@ type WorldFramePresenter = ReturnType<NonNullable<WorldContextMount['createFrame
 export type SceneFramePresenter = WorldFramePresenter & { attach?(world: WorldContextMount): void };
 
 interface SceneWorldOptions {
-  owner: WorldContextOwner | null;
+  owner: WorldContextOwner;
   stage: HTMLElement;
   windowTarget: BrowserWindow;
   isCurrent(session: SceneSession): boolean;
@@ -33,10 +33,9 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
   let pending: AbortController | null = null;
   // One viewport for the detail and the world, so a detail mounted first frames exactly as the world will.
   let viewport: ReturnType<WorldContextOwner['createViewport']> | null = null;
-  const sharedViewport = () => owner ? viewport ??= owner.createViewport(stage) : null;
+  const sharedViewport = () => viewport ??= owner.createViewport(stage);
 
   function ensure() {
-    if (!owner) return Promise.resolve(null);
     if (current) return Promise.resolve(current);
     if (!task) {
       const controller = new AbortController();
@@ -65,9 +64,8 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
 
   /** The world's presenter, or, before the world has loaded, one that commits the detail's frames directly and
    * hands over to the world's presenter when `connect` attaches it. */
-  function createFramePresenter(): SceneFramePresenter | undefined {
-    if (current) return current.createFramePresenter?.();
-    if (!owner) return undefined;
+  function createFramePresenter(): SceneFramePresenter {
+    if (current) return current.createFramePresenter();
     let inner: WorldFramePresenter | undefined, enabled = false, disposed = false;
     let last: Parameters<WorldFramePresenter['present']>[0] | null = null;
     return {
@@ -79,9 +77,9 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
       },
       attach(world) {
         if (inner || disposed) return;
-        inner = world.createFramePresenter?.();
+        inner = world.createFramePresenter();
         // The world starts from the frame the detail is already showing.
-        if (last?.current()) inner?.present(last);
+        if (last?.current()) inner.present(last);
         last = null;
         if (enabled) inner?.enable();
       },
