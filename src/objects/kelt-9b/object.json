@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kelt-9b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KELT-9b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 131545.28
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kelt-9b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KELT-9b",
+      "classification": "exoplanet",
+      "color": "#f6aa3a",
+      "distanceAu": 42741730.6,
+      "description": "The hottest known giant planet, on a polar orbit around a flattened, fast-spinning star.",
+      "systemName": "KELT-9 system",
+      "order": 1721,
+      "context": {
+        "order": 1721
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3008840326262941700,
+        -3870601806432335000,
+        4104811432551697400
+      ],
+      "presentationToReference": [
+        0.5140376001558712,
+        -0.7619252890863167,
+        -0.39399898410620987,
+        -0.5700265517771812,
+        -0.6466665457833801,
+        0.5068452513673263,
+        0.6409641767642006,
+        0.03594763434948447,
+        0.7667285645452806
+      ],
+      "orbitUpReference": [
+        0.7619252890863167,
+        0.6466665457833801,
+        -0.03594763434948447
+      ],
+      "metersPerUnit": 424339.6129032258,
+      "bodyRadiusM": 131545280
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

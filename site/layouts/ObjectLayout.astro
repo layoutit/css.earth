@@ -16,7 +16,6 @@ import "../shell-layout.css";
 import "../minimap/minimap.css";
 import type { PreparedSceneMarkup } from '../../tools/prepared/serialize-prepared-scene.mts';
 import type { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
-import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 
 interface Props {
@@ -64,7 +63,6 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->
-    <script is:inline type="application/json" data-focus-catalogs set:html={JSON.stringify(FOCUS_CATALOG_DATA.map(entry => entry.pin)).replace(/</g, '\\u003c')}></script>
     <div class="object-ui-layer">
       <slot name="object-ui" />
     </div>

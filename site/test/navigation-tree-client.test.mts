@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
@@ -20,9 +19,8 @@ test('deferred navigation materializes only the selected path from its verified 
     },
   };
   const text = JSON.stringify(payload);
-  const sha256 = createHash('sha256').update(text).digest('hex');
   const { document, window } = parseHTML(`<div data-object-navigation-tree data-atlas-current="old"
-    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    data-atlas-tree-src="/navigation-tree.json">
     <ul class="atlas-tree"><li><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Root (2)</span></summary></details></li></ul>
   </div>`);
   let requests = 0;
@@ -54,9 +52,8 @@ test('deferred rows open the destination the payload names, and a row with none 
     },
   };
   const text = JSON.stringify(payload);
-  const sha256 = createHash('sha256').update(text).digest('hex');
   const { document, window } = parseHTML(`<div data-object-navigation-tree data-atlas-current="saturn"
-    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    data-atlas-tree-src="/navigation-tree.json">
     <ul class="atlas-tree"><li><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Milky Way (3)</span></summary></details></li></ul>
   </div>`);
   window.fetch = async () => new Response(text);
@@ -110,9 +107,9 @@ test('filtering retains matching objects inside their hierarchy and restores the
       sirius: { label: 'Sirius', objectId: 'sirius', place: false, count: 1, marker: null, children: [], href: '/sirius/', focusId: null },
     },
   };
-  const text = JSON.stringify(payload), sha256 = createHash('sha256').update(text).digest('hex');
+  const text = JSON.stringify(payload);
   const { document, window } = parseHTML(`<div data-object-navigation-tree data-atlas-current="earth"
-    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    data-atlas-tree-src="/navigation-tree.json">
     <ul class="atlas-tree"><li data-atlas-item-key="root"><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Root (3)</span></summary></details></li></ul>
   </div>`);
   window.fetch = async () => new Response(text);
@@ -141,9 +138,8 @@ test('a deferred selection that finishes after a newer one leaves the newer entr
     },
   };
   const text = JSON.stringify(payload);
-  const sha256 = createHash('sha256').update(text).digest('hex');
   const { document, window } = parseHTML(`<div data-object-navigation-tree
-    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    data-atlas-tree-src="/navigation-tree.json">
     <ul class="atlas-tree">
       <li><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Root (1)</span></summary></details></li>
       <li><details open data-atlas-depth="0" data-atlas-key="other-root"><summary>Other</summary><ul><li><a data-atlas-object="other">Other</a></li></ul></details></li>

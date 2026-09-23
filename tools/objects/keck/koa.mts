@@ -15,11 +15,12 @@
  * and two downloads: getKOA/nph-getKOA?filehand= for a raw (level 0) file and KoaAPI/nph-dnloadL1data for a level 1 one.
  * Neither needs a cookie of ours; the service issues an anonymous one itself. */
 import { createWriteStream } from 'node:fs';
-import { mkdir, rename, stat } from 'node:fs/promises';
+import { mkdir, rename, rm, stat } from 'node:fs/promises';
 import type { IncomingMessage } from 'node:http';
 import { request } from 'node:https';
 import { dirname, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
+import { Transform } from 'node:stream';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { tapRows } from '../astronomy-packages/client.mts';
@@ -139,17 +140,18 @@ export async function koaProducts(instrument: string, koaid: string, filehand: s
 
 /** Fetch one archive file to `path` unless it is already there with the pinned size, streaming so a cube is never held whole.
  * KOA answers an unknown path with an HTML message and a 200, so the body is refused unless the service says it is a file. */
-export async function koaDownload(url: string, path: string, bytes?: number): Promise<{ sha256: string; bytes: number }> {
+export async function koaDownload(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ sha256: string; bytes: number }> {
   const already = await stat(path).then(entry => entry.size, () => -1);
+  if (maxBytes !== undefined && (!Number.isSafeInteger(maxBytes) || maxBytes < 1 || already > maxBytes)) throw new RangeError('KOA file exceeds the transfer bound.');
   if (already > 0 && (bytes === undefined || already === bytes)) return sha256File(path);
   // A partial body is left in the `.part` file and overwritten on the next attempt, never renamed into place.
-  return koaRetry(() => fetchOnce(url, path, bytes));
+  return koaRetry(() => fetchOnce(url, path, bytes, maxBytes));
 }
 
-async function fetchOnce(url: string, path: string, bytes?: number): Promise<{ sha256: string; bytes: number }> {
+async function fetchOnce(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ sha256: string; bytes: number }> {
   await mkdir(dirname(path), { recursive: true });
   const response = await koaRequest(url);
-  if (response.statusCode !== 200) throw new Error(`KOA refused ${url}: ${response.statusCode}`);
+  if (response.statusCode !== 200) { response.destroy(); throw new Error(`KOA refused ${url}: ${response.statusCode}`); }
   // An unknown path is answered with an HTML message and a 200, so the type decides whether this is a file at all.
   if (/html|json/u.test(response.headers['content-type'] ?? '')) {
     const chunks: Buffer[] = [];
@@ -157,7 +159,15 @@ async function fetchOnce(url: string, path: string, bytes?: number): Promise<{ s
     throw new Error(`KOA returned a message, not a file, for ${url}: ${Buffer.concat(chunks).toString('utf8').slice(0, 200)}`);
   }
   const partial = `${path}.part`;
-  await pipeline(response, createWriteStream(partial));
+  const declared = Number(response.headers['content-length']);
+  if (maxBytes !== undefined && Number.isFinite(declared) && declared > maxBytes) { response.destroy(); throw new RangeError('KOA file exceeds the transfer bound.'); }
+  let received = 0;
+  const limit = new Transform({ transform(chunk: Buffer, _encoding, callback) {
+    received += chunk.length;
+    callback(maxBytes !== undefined && received > maxBytes ? new RangeError('KOA file exceeds the transfer bound.') : null, chunk);
+  } });
+  try { await pipeline(response, limit, createWriteStream(partial)); }
+  catch (error) { await rm(partial, { force: true }); throw error; }
   await rename(partial, path);
   const digest = await sha256File(path);
   if (bytes !== undefined && digest.bytes !== bytes) throw new Error(`${path} is ${digest.bytes} bytes, not the pinned ${bytes}.`);

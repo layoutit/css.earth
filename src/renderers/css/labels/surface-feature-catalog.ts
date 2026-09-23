@@ -117,15 +117,11 @@ export type SurfaceFeatureTransport = (url: string, init: { signal: AbortSignal 
 async function loadPinnedCatalog(plan: PreparedSurfaceFeaturePlan, objectId: string, descriptor: SurfaceFeatureCatalogDescriptor,
   signal: AbortSignal, transport: SurfaceFeatureTransport): Promise<PreparedSurfaceFeatureCatalog> {
   const response = await transport(descriptor.url, { signal });
-  if (!response.ok) throw new Error('Surface feature catalogue request failed.');
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength !== descriptor.bytes) throw new Error('Surface feature catalogue size drifted.');
-  const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
-  if (digest !== descriptor.sha256) throw new Error('Surface feature catalogue identity drifted.');
-  return parsePreparedSurfaceFeatureCatalog(JSON.parse(new TextDecoder().decode(bytes)), plan, objectId, descriptor);
+  if (!response.ok) throw new Error(`Surface feature catalogue ${objectId} ${descriptor.url} failed: HTTP ${response.status}.`);
+  return parsePreparedSurfaceFeatureCatalog(await response.json() as unknown, plan, objectId, descriptor);
 }
 
-/** Fetch and byte-verify the default label catalogue; the plan pins its identity. */
+/** Fetch the default label catalogue. */
 export async function loadPreparedSurfaceFeatureCatalog(plan: PreparedSurfaceFeaturePlan, objectId: string, signal: AbortSignal,
   transport: SurfaceFeatureTransport = (url, init) => fetch(url, init)): Promise<PreparedSurfaceFeatureCatalog> {
   return loadPinnedCatalog(plan, objectId, plan.catalog, signal, transport);

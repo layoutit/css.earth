@@ -1,0 +1,7 @@
+# spiderman-package: PyPI sdist, the last release (2019-09-11), built against the environment's NumPy with --no-build-isolation.
+spiderman-package==1.0.3 \
+    --hash=sha256:6a2cbf8b581045d7811e5abd1d559ac631dcc9b67e6d1e60f94b2801a2ae0249
+# batman-package: imported at module load by spiderman/plot.py.
+batman-package==2.5.3 \
+    --hash=sha256:d5e61ac8879a9212ce08910c19a71d182dfca7d51b1a69eb48c0e4865971d878 \
+    --hash=sha256:fa1bca11947005286687accb4c90af882c0a1eb5d9bbf5849712ffbb920a3144

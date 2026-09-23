@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createDestinationBrowser } from '../destination-browser.mts';
@@ -8,7 +7,6 @@ import { handleFindRequest } from '../find.mts';
 
 // Named features and cities are searched by the find function; the page sends its query and gets rows back, and never
 // downloads the cross-body index (3.3 MB) or Earth's places catalogue (14.8 MB).
-const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const catalog = JSON.stringify({ schema: 'cssearth-prepared-destinations@1', places: [
   { id: 3435910, name: 'Buenos Aires', names: ['buenos aires', 'capital federal'], context: 'Buenos Aires F.D., Argentina', searchContext: 'buenos aires argentina ar', coverage: 'overview' },
   { id: 1691490, name: 'Rosario', names: ['rosario'], context: 'Calabarzon, Philippines', searchContext: 'calabarzon philippines ph', coverage: 'overview' },
@@ -18,9 +16,8 @@ const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',
   features: [
     { objectId: 'mars', id: '1', name: 'Buenos Crater', type: 'Crater', diameterKm: 12, searchNames: ['buenos crater'], searchContext: 'crater' },
     { objectId: 'earth', id: '2', name: 'Rosario', type: 'City', diameterKm: 0, searchNames: ['rosario'], searchContext: 'city' }],
-  places: [{ objectId: 'earth', type: 'City', url: '/scenes/earth/earth-places.json', assetUrl: '/scenes/earth/earth-places.json',
-    bytes: Buffer.byteLength(catalog), sha256: sha(catalog), count: 3, duplicates: [['3838583', '2']] }] });
-const pin = { url: '/features/index.json', bytes: Buffer.byteLength(index), sha256: sha(index), count: 2 };
+  places: [{ objectId: 'earth', type: 'City', url: '/scenes/earth/earth-places.json', assetUrl: '/scenes/earth/earth-places.json', count: 3, duplicates: [['3838583', '2']] }] });
+const pin = { url: '/features/index.json', count: 2 };
 const files = async (input: string | URL | Request) => new Response(String(input).endsWith('earth-places.json') ? catalog : index);
 const find = (query: string) => handleFindRequest(new Request(`https://site.test/.netlify/functions/find?${query}`), pin, files);
 

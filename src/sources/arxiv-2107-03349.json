@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2107-03349",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "May et al. (2021): Spitzer Phase-curve Observations and Circulation Models of the Inflated Ultrahot Jupiter WASP-76b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2107.03349"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac0e30"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2107.03349",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac0e30",
+      "label": "The Astronomical Journal 162, 158"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2107.03349",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 3.3 and Table 4: SPIDERMAN spherical-harmonic fit to the 4.5 um phase curve, dilution factor, day and night brightness temperatures"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal 162, 158",
+  "creators": [
+    "E. M. May",
+    "T. D. Komacek",
+    "K. B. Stevenson",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}
