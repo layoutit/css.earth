@@ -24,6 +24,7 @@ import { loadNpyDictionaryMap } from './npy-dictionary-map.mts';
 import { loadNpyLonLatGrid } from './npy-lonlat-grid.mts';
 import { loadBareRockEclipse, loadBareRockFit, loadEclipseMapFit } from './eclipse-map-fit.mts';
 import { loadPublishedPhaseCurveMap } from './published-phase-curve-map.mts';
+import { loadEigenspectraTemperature } from './eigenspectra-map.mts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -151,6 +152,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'npy-lonlat-grid') return loadNpyLonLatGrid(root, value);
   if (lens.format === 'eclipse-map-fit') return loadEclipseMapFit(root, value);
   if (lens.format === 'published-phase-curve-map') return loadPublishedPhaseCurveMap(root, value);
+  if (lens.format === 'eigenspectra-temperature') return loadEigenspectraTemperature(root, value);
   if (lens.format === 'bare-rock-fit') return loadBareRockFit(root, value);
   if (lens.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
   if (lens.format === 'isis3') {
@@ -243,6 +245,9 @@ export function createSourceSurfacePainter(lens: SciencePalette) {
   };
 }
 
+/** The colour of drawn boundaries: black, as the contours of the papers' figures. */
+const OUTLINE = [0, 0, 0] as const;
+
 export function paintScienceSurface(source: SourceScalar, lens: SciencePalette, width: number, height: number) {
   const origin = lens.outputLongitudeOrigin ?? 0;
   if (!Number.isFinite(origin) || origin < -180 || origin >= 360) throw new TypeError('Invalid scientific output longitude origin.');
@@ -252,7 +257,8 @@ export function paintScienceSurface(source: SourceScalar, lens: SciencePalette, 
     const longitude = origin + (x + 0.5) / width * 360, latitude = 90 - (y + 0.5) / height * 180;
     const i = y * width + x, value = source.sample(longitude, latitude);
     if (value === null) { missing[i] = 1; continue; }
-    const color = lens.categories ? categoryColorForValue(value, lens) : palette!(value);
+    // A source may draw published boundaries over its values, as a paper's figure draws contours on its map.
+    const color = source.outline?.(longitude, latitude, 360 / width) ? OUTLINE : lens.categories ? categoryColorForValue(value, lens) : palette!(value);
     const brightness = lens.relief ? terrainBrightness(source, longitude, latitude, 360 / width, lens.relief) : 1;
     for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.min(255, Math.round(color[c] * brightness));
   }

@@ -1,0 +1,157 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-18b",
+  "card": {
+    "text": "Ten-Jupiter-mass planet whose day side JWST mapped at 25 wavelengths, each seeing a different depth.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-24708",
+        "url": "https://arxiv.org/abs/2510.24708",
+        "label": "Challener, Weiner Mansfield et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Here we present a spectroscopic eclipse map of an extrasolar planet, resolving the atmosphere in multiple dimensions simultaneously."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WASP-18b circles its star in under a day. JWST's eclipse map finds a hotspot under its star and a colder ring near the edges of its day side.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-24708",
+        "url": "https://arxiv.org/abs/2510.24708",
+        "label": "Challener, Weiner Mansfield et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "a “hotspot” surrounding the substellar point and a “ring” near the dayside limbs"
+      }
+    ]
+  },
+  "datasets": {
+    "temperature-0-89um": {
+      "title": "Temperature at 0.89 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-0-97um": {
+      "title": "Temperature at 0.97 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-05um": {
+      "title": "Temperature at 1.05 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-13um": {
+      "title": "Temperature at 1.13 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-21um": {
+      "title": "Temperature at 1.21 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-29um": {
+      "title": "Temperature at 1.29 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-37um": {
+      "title": "Temperature at 1.37 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-45um": {
+      "title": "Temperature at 1.45 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-53um": {
+      "title": "Temperature at 1.53 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-60um": {
+      "title": "Temperature at 1.60 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-68um": {
+      "title": "Temperature at 1.68 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-76um": {
+      "title": "Temperature at 1.76 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-84um": {
+      "title": "Temperature at 1.84 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-1-92um": {
+      "title": "Temperature at 1.92 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-00um": {
+      "title": "Temperature at 2.00 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-08um": {
+      "title": "Temperature at 2.08 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-16um": {
+      "title": "Temperature at 2.16 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-24um": {
+      "title": "Temperature at 2.24 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-31um": {
+      "title": "Temperature at 2.31 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-39um": {
+      "title": "Temperature at 2.39 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-47um": {
+      "title": "Temperature at 2.47 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-55um": {
+      "title": "Temperature at 2.55 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-63um": {
+      "title": "Temperature at 2.63 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-71um": {
+      "title": "Temperature at 2.71 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    },
+    "temperature-2-79um": {
+      "title": "Temperature at 2.79 µm",
+      "detail": "25 wavelengths",
+      "summary": "Heat at each of 25 wavelengths, each seeing a different depth. Lines mark the hotspot and ring; grey was never seen."
+    }
+  }
+}

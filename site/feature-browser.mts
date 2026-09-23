@@ -81,7 +81,7 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
       if (here && result.id.startsWith(PLACE_FEATURE_PREFIX) && selectOwnPlace) await selectOwnPlace(result.id.slice(PLACE_FEATURE_PREFIX.length));
       else if (here && provider) {
         if (result.lensIds) {
-          const lenses = [...documentTarget.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')];
+          const lenses = [...documentTarget.querySelectorAll<HTMLButtonElement>('button[name="dataset"]:not([data-dataset-step])')];
           if (!lenses.some(button => button.ariaPressed === 'true' && result.lensIds!.includes(button.value))) {
             const lens = lenses.find(button => result.lensIds!.includes(button.value));
             if (!lens) throw new Error('The feature source dataset is unavailable.');

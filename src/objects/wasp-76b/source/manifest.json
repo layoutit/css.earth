@@ -155,24 +155,25 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "map-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2107.03349",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "credit": "The May et al. (2021) SPIDERMAN brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-hosted-planet.mts",
+        "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
-          "wasp-76b-observational-measurements"
+          "wasp-76b-may-2021-phase-curve",
+          "wasp-76b-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-hosted-planet.mts",
+      "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default lens rendered as the dayside disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

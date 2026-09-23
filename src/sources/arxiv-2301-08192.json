@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2301-08192",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Coulombe et al. (2023): A broadband thermal emission spectrum of the ultra-hot Jupiter WASP-18b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2301.08192"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-023-06230-1"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2301.08192",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-023-06230-1",
+      "label": "Nature 620, 292"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2301.08192",
+      "checkedOn": "2026-09-23",
+      "locator": "Methods: TESS phase-curve table (Table 3); eclipse-map brightness temperatures"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Nature 620, 292",
+  "creators": [
+    "L.-P. Coulombe",
+    "B. Benneke",
+    "R. Challener",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}
