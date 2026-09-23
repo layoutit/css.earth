@@ -1,0 +1,54 @@
+{
+  "id": "arxiv-1210-0556",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baines et al. (2012): The CHARA Array Angular Diameter of HR 8799 Favors Planetary Masses for Its Imaged Companions",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1210.0556"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/761/1/57"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1210.0556",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/761/1/57",
+      "label": "The Astrophysical Journal 761, 57"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1210.0556",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: limb-darkened angular diameter 0.342 +/- 0.008 mas; radius 1.44 +/- 0.06 solar radii at their distance; effective temperature 7193 +/- 87 K"
+    },
+    {
+      "path": "src/objects/hr-8799/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "Ellyn K. Baines",
+    "Russel J. White",
+    "Daniel Huber",
+    "Jeremy Jones",
+    "Tabetha Boyajian",
+    "Harold A. McAlister"
+  ]
+}

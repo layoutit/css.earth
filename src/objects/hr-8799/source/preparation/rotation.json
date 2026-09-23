@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 166.8701648027611,
+  "declinationDegrees": 68.86596940898008,
+  "displayMeridianDegrees": -90.00000000000001,
+  "phase": "arbitrary-display-phase",
+  "source": "No measured rotation axis direction or period: Wright et al. (2011, ApJ 728, L20; arXiv:1101.1590) constrain the inclination of the star's axis from its pulsations, which is not a direction on the sky, and Baines et al. (2012) measure only its size. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of HR 8799 are unmeasured; the axis shown is where celestial north lies on the sky."
+}

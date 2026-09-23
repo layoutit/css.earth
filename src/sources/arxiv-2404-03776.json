@@ -1,0 +1,78 @@
+{
+  "id": "arxiv-2404-03776",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nasedkin et al. (2024): Four-of-a-kind? Comprehensive atmospheric characterisation of the HR 8799 planets with VLTI/GRAVITY",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2404.03776"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202449328"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2404.03776",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202449328",
+      "label": "Astronomy & Astrophysics 687, A298"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2404.03776",
+      "checkedOn": "2026-09-23",
+      "locator": "Tables 1-4 (this work, BMA A and B): b 942 +12/-15 K, 1.10 +/- 0.03 RJup; c 1159 +11/-12 K, 1.10 +/- 0.01; d 1179 +31/-28 K, 1.26 +0.06/-0.08; e 1161 +33/-34 K, 1.12 +/- 0.05; abstract: self-luminous atmospheres"
+    },
+    {
+      "path": "src/objects/hr-8799-b/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799-b/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799-c/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799-c/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799-d/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799-d/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799-e/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/hr-8799-e/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "E. Nasedkin",
+    "P. Mollière",
+    "S. Lacour",
+    "M. Nowak",
+    "L. Kreidberg",
+    "T. Stolker"
+  ]
+}

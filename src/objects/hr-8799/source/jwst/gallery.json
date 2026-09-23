@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-gallery-source@1",
+  "id": "telescope-images",
+  "label": "Telescope images",
+  "sourcePage": "https://arxiv.org/abs/2503.13608",
+  "credit": "JWST GTO programme 1194 (PI C. Beichman), raw frames from MAST; reduced here with spaceKLIP (tools/objects/jwst/klip) following Balmer et al. (2025)",
+  "qualification": "Our reduction of the raw JWST frames, following Balmer et al. (2025), in the paper's own colour scale. North up, 5.8 arcseconds across.",
+  "items": [
+    {
+      "id": "nircam-f410m-2023-11",
+      "label": "JWST NIRCam · 4.1 µm · November 2023",
+      "sourcePath": "jwst/hr-8799-nircam-f410m.webp",
+      "publicFilename": "hr-8799-nircam-f410m.webp",
+      "sourceUrl": "https://dx.doi.org/10.17909/e4x8-ft26",
+      "width": 744,
+      "height": 744,
+      "alt": "Infrared image in purple and white: four bright points around a dark centre, with faint diffraction streaks.",
+      "caption": "HR 8799's four planets glowing at 4.1 micrometres: b left, c above, d lower right, e close to the star."
+    }
+  ]
+}
