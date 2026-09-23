@@ -40,6 +40,8 @@ under `./telescope-runs/` and reports that path.
 
 `explore` also shows title or reference-frame matches from a pinned [WorldWide Telescope core imagery index](../../docs/astronomy-package-ownership.md#worldwide-telescope-data-reuse). The saved `answer.curatedImagery` carries the WWT source revision, match basis, display projection and positioning fields, band, tile URL template, source XML link and credits. These entries are curated display imagery, not numbered choices: `telescope get` cannot retrieve or qualify them. A title match does not prove that the target lies inside an image; the index does not test current tile availability. WWT imagery never changes `outcome.selection` or scientific search coverage.
 
+To prepare a WWT display image as a static source, run `telescope wwt-image RUN/explore.json --pick N --level 0..3 --out NEW_DIRECTORY`. The WWT numbers shown by `explore` are separate from observation numbers. For supported top-down TAN sky imagesets, this writes `image.png` and `source.json` with the pinned catalog revision, image credit, positioning metadata, each tile URL and SHA-256, and the assembled image hash. Level 3 is capped at 64 tiles and a 2048 × 2048 PNG. An authored image-layer recipe can point to `image.png` as its source and `source.json` as its provenance input. The command does not alter a body or deploy tiles. Check the image publisher's reuse terms before publishing a derived asset.
+
 The saved answer has an `outcome` with separate `selection` and `coverage` values. `selection`
 is `available` when at least one numbered route can be tried, or `none`. `coverage` is
 `target-unresolved` when no target search ran, `incomplete` when a provider failed or overflowed,

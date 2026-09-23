@@ -22,15 +22,36 @@ import { familyCoverageLedger } from './family-handlers.mts';
 import type { FamilyOperation } from './family-handlers.mts';
 import { executeFamilyOperation, familyOperationNeedsParameters, type FamilyOperationParameters } from './family-operation.mts';
 import { requireString } from '../../sources/source-values.mts';
+import { exportWwtImage, WWT_IMAGE_MAX_LEVEL } from './wwt-image.mts';
 export { HELP, SHORT_HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
-export type CliOptions = {readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export type CliOptions = {readonly command:'wwt-image';readonly exploration:string;readonly pick:number;readonly level:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
   if (!args.length) return { command: 'help' as const, short: true };
   if (command === 'help' || args.includes('--help') || args.includes('-h')) return { command: 'help' as const };
   if (args.length === 1 && command === '--version') return { command: 'version' as const };
+  if(command==='wwt-image'){
+    const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
+    for(let i=1;i<args.length;i++){
+      const arg=args[i]!;
+      if(!arg.startsWith('-')){positional.push(arg);continue;}
+      if(arg==='--json'||arg==='--verbose'){
+        if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);
+        flags.add(arg);continue;
+      }
+      if(!['--pick','--level','--out'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated wwt-image option ${arg}.`);
+      const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}.`);
+      values.set(arg,value);
+    }
+    if(positional.length!==1||!values.has('--pick')||!values.has('--level')||!values.has('--out'))
+      throw new TypeError('Use telescope wwt-image EXPLORE.json --pick N --level 0..3 --out DIRECTORY.');
+    const pick=Number(values.get('--pick')),level=Number(values.get('--level'));
+    if(!Number.isSafeInteger(pick)||pick<1||!Number.isSafeInteger(level)||level<0||level>WWT_IMAGE_MAX_LEVEL)
+      throw new TypeError(`WWT --pick must be positive and --level must be 0..${WWT_IMAGE_MAX_LEVEL}.`);
+    return {command,exploration:resolve(positional[0]!),pick,level,directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};
+  }
   if(command==='family-run'){
     const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
     for(let i=1;i<args.length;i++){
@@ -248,13 +269,14 @@ export function formatExploration(session:ExplorationSession & {readonly directo
     lines.push('',`WWT curated imagery (${wwt.total} title/frame match${wwt.total===1?'':'es'}; pinned catalog ${wwt.revision.slice(0,12)}):`);
     const displayed=verbose?wwt.matches:wwt.matches.slice(0,5);
     const catalogText=(value:string)=>value.replace(/[\p{Cc}\p{Cf}]+/gu,' ').replace(/\s+/gu,' ').trim();
-    for(const image of displayed){
-      lines.push(`  ${briefDiagnostic(catalogText(image.name))} · ${catalogText(image.bandPass)} · ${catalogText(image.projection)} · ${image.matchBasis} match`,
+    for(const [index,image] of displayed.entries()){
+      lines.push(`  WWT ${index+1}. ${briefDiagnostic(catalogText(image.name))} · ${catalogText(image.bandPass)} · ${catalogText(image.projection)} · ${image.matchBasis} match`,
         `    Credit: ${briefDiagnostic(catalogText(image.credits))||'not supplied by WWT'} · ${image.catalogUrl}`);
       if(verbose&&image.dataSetType==='Sky')lines.push(`    WWT projection origin: RA ${image.position.centerXDegrees}°, Dec ${image.position.centerYDegrees}° (not a verified footprint)`);
     }
     if(wwt.matches.length>displayed.length)lines.push(`  ${wwt.matches.length-displayed.length} more match(es) in the saved result.`);
     if(wwt.total>wwt.matches.length)lines.push(`  ${wwt.total-wwt.matches.length} additional match(es) omitted by the ${wwt.limit}-entry cap.`);
+    lines.push(`  Static image: telescope wwt-image ${shellWord(displayPath(resolve(session.directory,'explore.json')))} --pick N --level 0..3 --out DIRECTORY`);
     lines.push('  Display imagery only; these are not selectable observations or qualified science products.');
   }else if(wwt?.state==='unavailable')lines.push('',`WWT curated imagery unavailable: ${wwt.reason}`);
   const appendIssues=(heading:string,issues:readonly {readonly identity?:string;readonly scope:string;readonly reason:string}[],total=issues.length)=>{
@@ -513,7 +535,10 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
     let text: string, code: number;
     process.stdout.write = process.stderr.write.bind(process.stderr);
     try {
-      if(options.command==='family-run'){
+      if(options.command==='wwt-image'){
+        const result=await exportWwtImage(root,options.exploration,options.pick,options.level,options.directory);
+        text=options.json?`${JSON.stringify(result)}\n`:`Image: ${result.image}\nSource: ${result.receipt}\nCredit: ${result.value.imageset.credits}\n`;code=0;
+      }else if(options.command==='family-run'){
         const result=await runFamilyOperation(options,api);
         text=options.json?`${JSON.stringify(result)}\n`:`Product: ${result.product}\nEvidence: ${result.record}\nOperation: ${result.operation.id}\n`;code=0;
       }else if(options.command==='family-assess'){const request=JSON.parse(await readFile(options.request,'utf8')),descriptor=JSON.parse(await readFile(options.descriptor,'utf8')),saved=await saveFamilyRequestSession(options.directory,request,descriptor);text=options.json?`${JSON.stringify(saved)}\n`:`Descriptor compatibility: ${saved.status}\nSaved: ${resolve(options.directory,'family-request.json')}\n`;code=saved.status==='matched'?0:saved.status==='refused'?4:3;

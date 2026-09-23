@@ -67,6 +67,14 @@ test('local import has one bounded data-only entry point',()=>{
   for(const args of [['import'],['import','spec.json'],['import','spec.json','--out','a','--out','b'],['import','spec.json','other.json','--out','a']])assert.throws(()=>parseCli(args));
 });
 
+test('WWT image export has separate image numbers and an explicit bounded level',()=>{
+  const parsed=parseCli(['wwt-image','run/explore.json','--pick','2','--level','1','--out','image-out','--json']);
+  assert.deepEqual(parsed,{command:'wwt-image',exploration:resolve('run/explore.json'),pick:2,level:1,directory:resolve('image-out'),json:true,verbose:false});
+  for(const args of [['wwt-image','run/explore.json','--pick','0','--level','1','--out','image-out'],
+    ['wwt-image','run/explore.json','--pick','1','--level','4','--out','image-out'],
+    ['wwt-image','run/explore.json','--pick','1','--out','image-out']])assert.throws(()=>parseCli(args));
+});
+
 test('family coverage is derived through one public command',async()=>{
   assert.deepEqual(parseCli(['families','--json']),{command:'families',json:true,verbose:false});assert.throws(()=>parseCli(['families','extra']));
   const mock=mockIo(false,false),api=mockServices('/tmp');const code=await main(['families','--json'],'/workspace',text=>mock.io.write(text),mock.io,api.services);

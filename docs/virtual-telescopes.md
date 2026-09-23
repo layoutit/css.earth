@@ -37,6 +37,7 @@ under `./telescope-runs/`. An exploration delivery retains “no scientific acce
 requested” through later outputs.
 
 Exploration also reports name or reference-frame matches from [WWT's pinned curated-imagery index](astronomy-package-ownership.md#worldwide-telescope-data-reuse). Its display tile metadata and credits are saved under `answer.curatedImagery`, separately from the numbered scientific choices. WWT entries cannot be selected with `telescope get`, and a title match is not an image-footprint or product qualification check.
+For supported TAN sky entries, `telescope wwt-image RUN/explore.json --pick N --level 0..3 --out NEW_DIRECTORY` prepares a static PNG and source receipt. WWT image numbers are separate from observation choices. The PNG can feed offline image preparation; it is not served as runtime tiles.
 
 The saved answer reports `outcome.selection` separately from `outcome.coverage`. An unavailable
 provider, overflow, unread source, unanswered ledger or unresolved metadata makes coverage
