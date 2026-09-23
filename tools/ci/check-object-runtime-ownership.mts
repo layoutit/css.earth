@@ -466,28 +466,36 @@ function requireContextualBindingSource(source: string) {
         specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'createPreparedObjectNavigation' && specifier.local.name === 'createPreparedObjectNavigation'))) fail();
 }
 
-function requireApplicationWorldContextSource(source: string) {
-  const ast = parseRuntimeSource(source, "source.mts"), imports = new Map<string, {name: string; source: string}>(), defaults = new Map<string, string>();
-  function fail(): never { throw new TypeError('Application world context must use the shared prepared-universe inventory and pinned context.'); }
+function runtimeFactorySource(source: string) {
+  const ast = parseRuntimeSource(source, 'source.mts'), imports = new Map<string, {name: string; source: string}>();
   for (const statement of ast.body) if (statement.type === 'ImportDeclaration') {
     for (const specifier of statement.specifiers) {
       if (specifier.type === 'ImportSpecifier') imports.set(specifier.local.name, { name: nameOf(specifier.imported), source: requireString(statement.source.value) });
-      if (specifier.type === 'ImportDefaultSpecifier') defaults.set(specifier.local.name, requireString(statement.source.value));
     }
   }
-  const context = [...imports].find(([, binding]) => binding.name === 'APPLICATION_WORLD_CONTEXT' && binding.source === './world-context-plan.mts')?.[0];
-  const renderer = '../src/renderers/css/dist/universe.js';
-  const required = ['createPreparedUniverse', 'prepareObjectResources', 'loadPreparedCssVolume', 'loadPreparedPointAppearance', 'loadPreparedCssSurfaceShell'];
-  if (!context || !required.every(name => [...imports].some(([local, binding]) => binding.name === name && binding.source === renderer)) ||
-    ![...imports].some(([local, binding]) => binding.name === 'PREPARED_NAVIGATION_MARKERS' && binding.source === './prepared-navigation-markers.mjs')) fail();
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
   const calls = (name: string) => nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && (imports.get(nameOf(node.callee))?.name ?? nameOf(node.callee)) === name);
+  const importsFactory = (name: string, source: string) => [...imports.values()].some(binding => binding.name === name && binding.source === source);
+  return { imports, nodes, calls, importsFactory };
+}
+
+function requireApplicationWorldContextSource(mountSource: string, resourceSource: string) {
+  const mount = runtimeFactorySource(mountSource);
+  const { imports, nodes, calls, importsFactory } = runtimeFactorySource(resourceSource);
+  function fail(): never { throw new TypeError('Application world context must use the shared prepared-universe inventory and pinned context.'); }
+  const context = [...imports].find(([, binding]) => binding.name === 'APPLICATION_WORLD_CONTEXT' && binding.source === './world-context-plan.mts')?.[0];
+  const renderer = '../src/renderers/css/dist/universe.js';
+  // The mount leases resources; its imported loader owns the pinned prepared inventory.
+  if (!mount.importsFactory('loadApplicationUniverse', './application-world-resources.mts') ||
+    !mount.importsFactory('prepareObjectResources', renderer) || mount.calls('loadApplicationUniverse').length !== 1 ||
+    mount.calls('prepareObjectResources').length !== 1 || calls('prepareObjectResources').length !== 0) fail();
+  const required = ['createPreparedUniverse', 'loadPreparedCssVolume', 'loadPreparedPointAppearance', 'loadPreparedCssSurfaceShell'];
+  if (!context || !required.every(name => importsFactory(name, renderer) && calls(name).length === 1 && mount.calls(name).length === 0) ||
+    !importsFactory('PREPARED_NAVIGATION_MARKERS', './prepared-navigation-markers.mjs')) fail();
   // Bodies share src/objects, so descriptors and asset URLs come from the generated module that globs each context object by name.
   const initializers = nodes.flatMap(node => node.type === 'VariableDeclarator' && node.init?.type === 'Identifier' ? [node.init.name] : []);
   const generated = (name: string) => initializers.some(local => imports.get(local)?.name === name && imports.get(local)?.source === './prepared-context-objects.mts');
-  if (!generated('CONTEXT_OBJECT_DESCRIPTORS') || !generated('CONTEXT_OBJECT_ASSET_URLS') ||
-    calls('loadPreparedCssVolume').length !== 1 || calls('loadPreparedPointAppearance').length !== 1 || calls('createPreparedUniverse').length !== 1 ||
-    calls('loadPreparedCssSurfaceShell').length !== 1 || calls('prepareObjectResources').length !== 1) fail();
+  if (!generated('CONTEXT_OBJECT_DESCRIPTORS') || !generated('CONTEXT_OBJECT_ASSET_URLS')) fail();
   const resourceCalls = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && nameOf(node.callee) === 'resourceSet');
   if (!resourceCalls.some(node => memberPath(node.arguments[0])?.join('.') === 'applicationContext.volume.objectId') &&
     !resourceCalls.some(node => memberPath(node.arguments[0])?.join('.') === `${context}.volume.objectId`)) fail();
@@ -787,7 +795,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   const applicationContextPath = resolve(root, 'site/application-world-context.mts');
   if (sharedClosure.has(applicationContextPath)) {
     try {
-      requireApplicationWorldContextSource(await source(applicationContextPath));
+      requireApplicationWorldContextSource(await source(applicationContextPath), await source(resolve(root, 'site/application-world-resources.mts')));
       requireContextObjectModuleSource(await source(resolve(root, 'site/prepared-context-objects.mts')), await readContextObjects(resolve(root, 'src/objects')));
       const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/objects/sun/prepared/world-context.json'))), 'sun');
       await requireContextPointField(root, context, source);
