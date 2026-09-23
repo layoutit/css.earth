@@ -9,7 +9,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
-import { containedPath, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
+import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
 import type { SourceManifest } from './operations.js';
 import { assertRangeResponse, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
 import type { SourceEntry } from './operations.js';
@@ -86,18 +86,20 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    if(!step.encoding){
     const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
     // Try our own content-addressed mirror first, through the same injected transport as the publisher (so tests
-    // never reach the real network): reliable storage, streamed straight into the pinned-write path, which verifies
-    // size and hash before ever touching the real destination. A miss, a non-OK response, an idle stall or a hash
-    // mismatch there all surface as a rejected publishPinnedSourceStream and fall back to the publisher URL, which
-    // stays the recorded provenance either way. Streaming (not buffering) means a >20 MB input costs no more memory
-    // here than the publisher path already does.
+    // never reach the real network): reliable storage, streamed straight into the pinned-write path, which holds the
+    // answer to its declared size before ever touching the real destination. A miss, a non-OK response, an idle
+    // stall or a size drift there all surface as a rejected publishPinnedSourceStream and fall back to the publisher
+    // URL, which stays the recorded provenance either way. Streaming (not buffering) means a >20 MB input costs no
+    // more memory here than the publisher path already does.
     let usedMirror=false;
     // The mirror is addressed by object and manifest path.
     if(mirrorOrigin){
+     const mirrorUrl=sourceCacheUrl(mirrorOrigin,objectId,step.path);
      try{
-      const response=await transport.fetch(sourceCacheUrl(mirrorOrigin,objectId,step.path));
+      const response=await transport.fetch(mirrorUrl);
       if(response.ok&&response.body){
-       await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),8000)});
+       await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),8000),
+        declaredBytes:declaredDownloadBytes(entry,response)});
        usedMirror=true;
       }
      }catch{/* fall through to the publisher below */}
@@ -105,7 +107,8 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
     if(!usedMirror){
      const response=await request(step.url,{headers:rangeHeaders(entry,step.headers)});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
      if(entry.range)assertRangeResponse(response,entry.range,step.url);
-     await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),120000)});
+     await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),120000),
+      declaredBytes:declaredDownloadBytes(entry,response)});
     }
     continue;
    }

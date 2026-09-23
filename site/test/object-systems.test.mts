@@ -12,7 +12,7 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
       ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'],
       ['wasp-39', 'WASP-39 system', '/wasp-39/'], ['beta-pictoris', 'Beta Pictoris system', '/beta-pictoris/'], ['hr-8799', 'HR 8799 system', '/hr-8799/'],
       ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/'], ['hd-110067', 'HD 110067 system', '/hd-110067/'], ['hd-29391', '51 Eridani system', '/hd-29391/'],
-      ['kelt-9', 'KELT-9 system', '/kelt-9/'], ['wasp-76', 'WASP-76 system', '/wasp-76/']]);
+      ['kepler-16-a', 'Kepler-16 system', '/kepler-16-a/'], ['kelt-9', 'KELT-9 system', '/kelt-9/'], ['wasp-76', 'WASP-76 system', '/wasp-76/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the candidate orbits its measurements allow.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
     ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],

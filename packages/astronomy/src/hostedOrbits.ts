@@ -42,6 +42,12 @@ export interface HostedOrbit {
    * of the orbit. The body is placed by it; its path is not drawn. `sources.constraint` quotes the criterion.
    */
   readonly weaklyConstrained?: true
+  /**
+   * A circumbinary orbit: the elements are Jacobi elements about the centre of mass of the parent and this companion, itself
+   * on a hosted orbit around the same parent (Kepler-16 (AB) b about Kepler-16 A and B). States stay parent-centred, as a
+   * satellite's `barycentreCompanion` does. `sources.barycentre` cites the masses that weight the centre.
+   */
+  readonly barycentreCompanion?: string
   readonly sources: {
     readonly period: string
     readonly shape: string
@@ -50,6 +56,7 @@ export interface HostedOrbit {
     readonly eccentricity?: string
     readonly argumentOfPeriapsis?: string
     readonly constraint?: string
+    readonly barycentre?: string
   }
 }
 export type HostedPlanetId = keyof typeof HOSTED_ORBITS
@@ -166,10 +173,50 @@ export const hostedOrbitStateRelativeKm = (orbit: HostedOrbit, host: { rightAsce
   return hostedOrbitStateRelativeBmjdTdb(orbit, host, stellarRadiusKm, epochJdTt - MJD_OFFSET)
 }
 
-/** The same state for a compiled record: the host's catalogue direction and radius come from its own records. */
-export const hostedPlanetStateRelativeKm = (id: HostedPlanetId, epochJdTt: number): { positionKm: Vec3; velocityKmPerDay: Vec3; hostId: string } => {
+const hostedParent = (id: HostedPlanetId): string => {
   const hostId = BODIES[id].parent
   if (hostId === null || !Object.hasOwn(STAR_ASTROMETRY, hostId)) throw new TypeError(`A hosted orbit needs a placed star as its parent: ${id}.`)
+  return hostId
+}
+
+/** A compiled record's own orbit about its centre: the host itself, or for a circumbinary orbit the centre of mass of the host and
+ * its `barycentreCompanion`. ICRF km and km/day; the host's catalogue direction and radius come from its own records. */
+export const hostedPlanetStateAboutCentreKm = (id: HostedPlanetId, epochJdTt: number): { positionKm: Vec3; velocityKmPerDay: Vec3; hostId: string } => {
+  const hostId = hostedParent(id)
   const host = STAR_ASTROMETRY[hostId as keyof typeof STAR_ASTROMETRY]
   return { ...hostedOrbitStateRelativeKm(hostedOrbit(id), host, BODIES[hostId as keyof typeof BODIES].meanRadiusKm, epochJdTt), hostId }
+}
+
+/** The companion whose mass shares the centre of a circumbinary orbit, with its weight m_companion / (m_host + m_companion). */
+export const hostedBarycentreCompanion = (id: HostedPlanetId): { id: HostedPlanetId; weight: number } | null => {
+  const companionId = hostedOrbit(id).barycentreCompanion
+  if (companionId === undefined) return null
+  if (!Object.hasOwn(HOSTED_ORBITS, companionId)) throw new TypeError(`${id}: barycentreCompanion ${companionId} has no hosted orbit.`)
+  const host = BODIES[hostedParent(id) as keyof typeof BODIES], companion = BODIES[companionId as keyof typeof BODIES]
+  const weight = companion.gravitationalParameterKm3PerS2 / (host.gravitationalParameterKm3PerS2 + companion.gravitationalParameterKm3PerS2)
+  if (!(weight > 0 && weight < 1)) throw new TypeError(`${id}: the barycentre weight of ${companionId} must lie in (0, 1); got ${weight}.`)
+  return { id: companionId as HostedPlanetId, weight }
+}
+
+/** The id of the point a hosted orbit is drawn around: its host, or `<host>-<companion>-barycentre` for a circumbinary orbit. */
+export const hostedOrbitCentreId = (id: HostedPlanetId): string => {
+  const companion = hostedBarycentreCompanion(id), hostId = hostedParent(id)
+  return companion ? `${hostId}-${companion.id}-barycentre` : hostId
+}
+
+/** The centre a hosted orbit is fitted about, relative to the host: zero for a plain hosted orbit, the host-companion centre of
+ * mass for a circumbinary one. */
+export const hostedOrbitCentreStateKm = (id: HostedPlanetId, epochJdTt: number): { positionKm: Vec3; velocityKmPerDay: Vec3 } => {
+  const companion = hostedBarycentreCompanion(id)
+  if (!companion) return { positionKm: [0, 0, 0], velocityKmPerDay: [0, 0, 0] }
+  const state = hostedPlanetStateAboutCentreKm(companion.id, epochJdTt)
+  return { positionKm: state.positionKm.map(value => value * companion.weight) as unknown as Vec3,
+    velocityKmPerDay: state.velocityKmPerDay.map(value => value * companion.weight) as unknown as Vec3 }
+}
+
+/** The same state for a compiled record, relative to its host's centre; a circumbinary orbit adds its centre's offset. */
+export const hostedPlanetStateRelativeKm = (id: HostedPlanetId, epochJdTt: number): { positionKm: Vec3; velocityKmPerDay: Vec3; hostId: string } => {
+  const own = hostedPlanetStateAboutCentreKm(id, epochJdTt), centre = hostedOrbitCentreStateKm(id, epochJdTt)
+  return { positionKm: own.positionKm.map((value, axis) => value + centre.positionKm[axis]!) as unknown as Vec3,
+    velocityKmPerDay: own.velocityKmPerDay.map((value, axis) => value + centre.velocityKmPerDay[axis]!) as unknown as Vec3, hostId: own.hostId }
 }
