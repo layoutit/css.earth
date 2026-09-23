@@ -14,7 +14,7 @@ import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-m
 import type { OrbitSegment } from '../../../src/renderers/css/solar-system/types.js';
 import type { NativeCameraRotation } from './native-camera.mts';
 import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling.mts';
-import { BODY_INDICATOR_DIAMETER } from '../../../src/renderers/css/universe/world-context-planner.js';
+import { BODY_INDICATOR_DIAMETER } from '../../../src/renderers/css/universe/world-context/world-context-planner.js';
 
 const root = pathToFileURL(resolve('.') + '/');
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('src/objects/sun/prepared/world-context.json', root), 'utf8')));

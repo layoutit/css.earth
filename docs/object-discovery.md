@@ -126,8 +126,9 @@ ecliptic plane on its north side. When that body's default map covers mostly one
 side, the camera keeps the 40-degree tilt and turns to face the centre of the
 map's data, taking the tilt on the ecliptic's south side when the data lies
 south. Preparation finds the gaps in the prepared minimap by the gray fill's
-graticule ([`tools/objects/default-lens-coverage.mts`](../tools/objects/default-lens-coverage.mts)).
-Complete maps keep the design pose. Catalogue
+graticule ([`tools/objects/default-view/lens-coverage.mts`](../tools/objects/default-view/lens-coverage.mts)).
+Complete maps keep the design pose. The [openings before and after this rule](images/default-openings-partial-maps.png)
+show the eight bodies it turns. Catalogue
 preparation stores the angle for exposed, non-modeled `observations` and
 `surfaceObservations` lenses. The shared flight approaches this pose; it does
 not analyze coverage in the browser or create missing imagery.

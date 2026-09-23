@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-29391-b",
+  "radiusKm": 97229.1,
+  "radiusSource": "Radius 1.36 +0.07/-0.03 Jupiter radii from the atmospheric model fit of Madurowicz et al. (2025, AJ; arXiv:2510.08327) to JWST/NIRSpec and ground-based spectra: 97,229.1 km at 71,492 km per Jupiter radius. A model radius, not a measured diameter: the planet is unresolved. Balmer et al. (2025) find 1.30 +/- 0.03 with an evolutionary-model radius prior and 1.62 +/- 0.31 without. GM from the Sonora Bobcat model mass 4.1 +/- 0.4 Jupiter masses of Elliott et al. (2024) times Jupiter's GM 126686531.9 km^3/s^2: a model mass; the dynamical mass is only an upper limit (under 9.0 Jupiter masses at 3 sigma, Balmer et al. 2025). A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8313.1,
+  "orbitalPeriodSource": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. Period 22.76 years.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of 51 Eridani b is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 800,
+  "effectiveTemperatureSource": "800 +21.5/-55.5 K, the best-fitting atmospheric model of Madurowicz et al. (2025, AJ; arXiv:2510.08327) to JWST/NIRSpec and ground-based spectra; Balmer et al. (2025) find 632 +/- 13 K with an evolutionary-model radius prior. The planet is self-luminous.",
+  "semiMajorAxisSource": "Denis et al. (2026, arXiv:2602.10260), Table 2, the chi-squared-minimum column: the single best-fitting orbit to all published relative astrometry and four VLT/HiRISE radial velocities. The posterior medians of the same table (a 9.08 au, e 0.55, i 159.24, omega 55.41, Omega 58.25, P 23.49 yr) are not one orbit: near face-on, omega and Omega are uncertain by about 50 degrees, and together the medians put the planet 92 mas from JWST's measured position. a 8.91 au, taken at the Gaia DR3 distance: 1324.19 radii of the star's 1,006,594 km; inclination 165 degrees.",
+  "massSource": "Radius 1.36 +0.07/-0.03 Jupiter radii from the atmospheric model fit of Madurowicz et al. (2025, AJ; arXiv:2510.08327) to JWST/NIRSpec and ground-based spectra: 97,229.1 km at 71,492 km per Jupiter radius. A model radius, not a measured diameter: the planet is unresolved. Balmer et al. (2025) find 1.30 +/- 0.03 with an evolutionary-model radius prior and 1.62 +/- 0.31 without. GM from the Sonora Bobcat model mass 4.1 +/- 0.4 Jupiter masses of Elliott et al. (2024) times Jupiter's GM 126686531.9 km^3/s^2: a model mass; the dynamical mass is only an upper limit (under 9.0 Jupiter masses at 3 sigma, Balmer et al. 2025). A sphere: no oblateness is measured."
+}

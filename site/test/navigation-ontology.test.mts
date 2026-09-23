@@ -8,9 +8,9 @@ import { SEARCH_OBJECTS } from '../search-objects.mts';
 import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '../../tools/prepare/prepare-navigation-destinations.mts';
 import { normalizeDestinationQuery } from '../destination-search.mts';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
-import { parseNavigationDistance, distanceDescription } from '../navigation-distance.mts';
+import { parseNavigationDistance, distanceDescription } from '../navigation/navigation-distance.mts';
 import { atlasTree, readObjects, type TreeNode } from '../../atlas/src/objects.mts';
-import { applicationTreeDestination } from '../navigation-tree-destination.mts';
+import { applicationTreeDestination } from '../navigation/navigation-tree-destination.mts';
 import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
 import { resolve } from 'node:path';
 

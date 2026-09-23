@@ -1,0 +1,58 @@
+{
+  "id": "arxiv-2510-08327",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Madurowicz et al. (2025): Direct Spectroscopy of 51 Eridani b with JWST NIRSpec",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2510.08327"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae1028"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2510.08327",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae1028",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2510.08327",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: best-fit atmosphere Teff 800 +21.5/-55.5 K, R 1.36 +0.07/-0.03 Jupiter radii from JWST/NIRSpec and ground-based IFU spectra"
+    },
+    {
+      "path": "src/objects/hd-29391-b/text.json",
+      "locator": "/introduction/sources/1"
+    },
+    {
+      "path": "src/objects/hd-29391-b/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/hd-29391-b/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "Alexander Madurowicz",
+    "Jean-Baptiste Ruffio",
+    "Bruce Macintosh",
+    "Marshall Perrin",
+    "Quinn M. Konopacky",
+    "Aneesh Baburaj"
+  ]
+}

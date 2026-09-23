@@ -8,8 +8,8 @@ import { findResults } from './find.mts';
 import { renderDatasetResponse } from './dataset-response.mts';
 import { renderSourceLink } from './source-link.mts';
 import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
-import { readCatalogueFragmentPin } from './catalogue-fragment-pin.mts';
-import { overviewScopeFromUrl, withOverviewScope } from './navigation-scope.mts';
+import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
+import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
 
 export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
@@ -36,25 +36,20 @@ function publishResults(root: HTMLElement, results: readonly Result[], hint: str
 }
 
 /** A no-JS search reads the object rows straight from this document, but a page
- * ships them empty and refers to the shared, content-addressed catalogue
- * fragment instead (`catalogue-fragment-pin.mts`). Fetch and splice it in
- * before matching, the one no-JS reader of that markup. Returns false, instead
- * of throwing, when the fragment could not be loaded or verified: the page
- * still renders, with an empty object list and a clear message, the way a
- * failed feature index degrades below. */
+ * ships them empty and names the shared catalogue fragment instead
+ * (`catalogue-fragment-loader.mts`). Fetch and splice it in before matching,
+ * the one no-JS reader of that markup. Returns false, instead of throwing, when
+ * the fragment could not be loaded: the page still renders, with an empty object
+ * list and a clear message, the way a failed feature index degrades below. */
 async function ensureCatalogueRows(document: Document, browser: HTMLElement, origin: string, fetcher: typeof fetch): Promise<boolean> {
   const resultsPanel = requiredElement<HTMLElement>(browser, '#object-category-results');
   if (resultsPanel.querySelector('.object-item')) return true;
-  const pin = readCatalogueFragmentPin(resultsPanel);
-  if (!pin) return true;
+  const url = readCatalogueFragmentUrl(resultsPanel);
+  if (!url) return true;
   try {
-    const response = await fetcher(new URL(pin.url, origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
-    if (!response.ok) throw new Error('Object catalogue fragment could not load.');
-    const bytes = await response.arrayBuffer();
-    if (bytes.byteLength !== pin.bytes) throw new Error('Object catalogue fragment size drifted.');
-    const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
-    if (digest !== pin.sha256) throw new Error('Object catalogue fragment identity drifted.');
-    const fragment = parseHTML(`<html><body>${new TextDecoder().decode(bytes)}</body></html>`).document;
+    const response = await fetcher(new URL(url, origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
+    if (!response.ok) throw new Error(`Object catalogue fragment ${url} failed: ${response.status}.`);
+    const fragment = parseHTML(await response.text()).document;
     const rows = fragment.querySelector('ul.object-list');
     if (!rows) throw new Error('Object catalogue fragment content is missing its list.');
     requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(document.importNode(rows, true));

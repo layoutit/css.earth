@@ -14,7 +14,7 @@ import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
 import { searchOpus, type OpusService } from './opus.mts';
 import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadService } from './archive-leads.mts';
-import { loadWwtImagery, type WwtImageryResult } from './wwt-catalog.mts';
+import { loadWwtImagery, type WwtImageryResult } from './wwt/wwt-catalog.mts';
 
 export const EXPLORATION_SCHEMA = 'cssearth-telescope-exploration@1';
 export interface ExplorationRequest extends DiscoveryRequest {}
