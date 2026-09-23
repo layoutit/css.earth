@@ -49,7 +49,9 @@ export function missingSourceReason(error: unknown, objectId: string | null = nu
     }
     return `${relative} is not restored; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
   }
-  if (/manifest coverage failed|source coverage failed|source is missing|is not restored|not installed|toolchain is not installed|missing fits oracle input/iu.test(error.message))
+  // Coverage that only misses declared files is an unrestored download; an undeclared file is a real failure.
+  if (/coverage failed\. Undeclared: none\. Missing: (?!none\.)/iu.test(error.message)
+    || /source is missing|is not restored|not installed|toolchain is not installed|missing fits oracle input/iu.test(error.message))
     return `${error.message.split('\n')[0]}; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
   return null;
 }

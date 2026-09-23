@@ -99,7 +99,7 @@ for (const id of bodies) {
       // Unsized Gazetteer names (diameter 0) are searchOnly since the default label recipe and carry no rank.
       else if (id !== "earth" && feature.diameterKm > 0) { assert.ok(feature.diameterKm <= previous, `${id}: prepared priority is diameter order`); previous = feature.diameterKm; }
       assert.ok(feature.minimumZoomShare >= 0 && feature.minimumZoomShare <= 1, `${id}: ${feature.name} discovery tier`);
-      assert.ok(feature.searchNames.length > 0 && feature.origin.length >= 0, feature.name);
+      assert.ok(feature.searchNames.length > 0, feature.name);
       // A caption note is a short Wikipedia lead summary pinned with its article; the pinned document is the only source.
       if (feature.note) { assert.ok(feature.note.text.length <= 321 && /^https?:\/\//u.test(feature.note.url), `${id}: ${feature.name} note`); if (feature.note.credit.startsWith("Wikipedia")) noted++; }
     }

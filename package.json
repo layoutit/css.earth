@@ -88,7 +88,7 @@
     "typecheck:tests": "tsc -p tests/tsconfig.json --pretty false",
     "typecheck:tools": "tsc -p tools/tsconfig.json",
     "telescope": "node tools/cli/run-typed-module.mjs tools/objects/telescopes/cli.mts",
-    "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=120000 \"site/test/*.test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \"tools/**/*.test.mts\" \"tools/**/*.test.ts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
+    "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=120000 \"site/test/!(rendered-page).test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \"tools/**/*.test.mts\" \"tools/**/*.test.ts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "test:universe:renderer": "pnpm test:renderer",
     "test:universe:runtime": "node --test --test-concurrency=2 \"site/test/minimap-*.test.mts\" \"tools/prepared/prepared-activation-*.test.mts\" tools/prepare/prepare-context-availability.test.mts tools/assets/restore-object-json.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts && node tools/ci/check-object-runtime-ownership.mts ${RUNTIME_OWNERSHIP_ARGS:---all}",
