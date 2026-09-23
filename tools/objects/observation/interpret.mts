@@ -481,17 +481,20 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         for (let offset = 0; offset < data.length; offset += 4) data.set([...(gravity ? gravity.rows[Math.floor(offset / 4 / width)]! : color.srgb), 255], offset);
         if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar colour belongs to an emissive body.`);
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
-        // A measured limb-darkening law darkens the disc through the limb plate, which the runtime fits edge to edge to the outline.
+        // A fitted or explicitly modeled limb-darkening law darkens the disc through the limb plate, fitted edge to edge.
         if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);
+        const modeledLimb = limbDarkening !== null && (limbDarkening.recipe.source === 'grid' ||
+          ('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior'));
         return { data, channels: 4, nearest: true, plates,
           report: { stellarPhotometricColor: { ...(temperature ? { temperature } : { spectrum }), srgb: color.srgb, linearSrgb: color.linear, ...(range ? { srgbAtBounds: range.map(bound => bound.srgb) } : {}),
             ...(crossCheck ? { crossCheck } : {}),
             ...(gravity ? { gravityDarkening: { poleTemperatureK: gravity.record.poleTemperatureK, equatorTemperatureK: gravity.record.equatorTemperatureK,
               meanTemperatureK: Math.round(gravity.meanK), omega: gravity.record.omega, beta: gravity.record.beta, poleSrgb: gravity.rows[0], equatorSrgb: gravity.rows[Math.floor(height / 2)] } } : {}),
             ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2,
+              basis: modeledLimb ? 'model' : 'transit-fit',
               ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
             meaning: `${temperature ? 'Planck colour at the catalogued photometric temperature' : range ? 'Colour of the measured Gaia XP spectrum' : 'Colour of the measured spectrum'}${limbDarkening
-              ? ', dimmed toward the limb by the limb-darkening law measured from transits; not a resolved photosphere.' : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
+              ? `, dimmed toward the limb by a ${modeledLimb ? 'theoretical atmosphere model' : 'law fitted to transits'}; not a resolved photosphere.` : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }
