@@ -271,8 +271,9 @@ export async function readFitsFileRegion(path: string, hdu: FitsFileHdu,
   region: { x0: number; y0: number; width: number; height: number }, maxDecodedBytes = 512 * 1024 * 1024,
   handle?: FileHandle) {
   const { x0, y0, width, height } = region, [fullWidth, fullHeight] = hdu.dimensions;
-  if (hdu.header.XTENSION === 'BINTABLE' || hdu.dimensions.length !== 2 || ![8, 16, 32, -32, -64].includes(hdu.bitpix))
-    throw new Error('Unsupported FITS image region (requires a 2D numeric image).');
+  // A radio image carries frequency and Stokes axes of length one after its two sky axes: its data are still one plane.
+  if (hdu.header.XTENSION === 'BINTABLE' || hdu.dimensions.length < 2 || hdu.dimensions.slice(2).some(length => length !== 1) || ![8, 16, 32, -32, -64].includes(hdu.bitpix))
+    throw new Error('Unsupported FITS image region (requires a 2D numeric image, or one whose further axes have length 1).');
   if (![x0, y0, width, height].every(Number.isSafeInteger) || x0 < 0 || y0 < 0 || width < 1 || height < 1 ||
       x0 + width > fullWidth! || y0 + height > fullHeight!) throw new RangeError('FITS region outside image.');
   if (width * height * 8 > maxDecodedBytes) throw new Error('FITS decoded allocation exceeds budget.');

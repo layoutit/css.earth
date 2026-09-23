@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "pds-70",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "No angular diameter is measured: at 112 pc the star would be 0.10 mas across, below any interferometer's reach. This value is the record's radius, 1.26 solar radii from Keppler et al. (2018, Table 1), at the Gaia DR3 distance.",
+  "distanceParsecs": 112.391437,
+  "distanceSource": "Gaia DR3 source 6110141563309613056: parallax 8.8975 +/- 0.0191 mas (RUWE 1.39), inverted to 112.39 pc with no zero-point correction.",
+  "radiusKm": 876582,
+  "radiusSource": "Radius 1.26 +/- 0.15 solar radii from Keppler et al. (2018, A&A 617, A44; arXiv:1806.11568), Table 1, from the luminosity 0.35 L_sun and effective temperature 3972 K at 113.4 pc: 876,582 km at 695700 km per solar radius (the Gaia DR3 distance, 112.39 pc, is 0.9% nearer; the radius is not rescaled). GM from the dynamical stellar mass 0.952 +0.032/-0.028 solar masses that Trevascus et al. (2025, Table 3, \"Stable (incl. N-body)\") fit together with the planets' orbits, times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis (celestial north at the star) is up; the star's spin axis has no measured direction on the sky.",
+  "effectiveTemperatureK": 3972,
+  "effectiveTemperatureSource": "Keppler et al. (2018, A&A 617, A44), Table 1: 3972 +/- 36 K from the optical spectrum of Pecaut & Mamajek (2016), https://arxiv.org/abs/1806.11568",
+  "surfaceGravityLogg": 4.22,
+  "surfaceGravitySource": "log g from the dynamical mass 0.952 solar masses of Trevascus et al. (2025, Table 3) and the radius 1.26 solar radii of Keppler et al. (2018, Table 1), log10(GM/R^2) in cgs: 4.22.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."
+  }
+}

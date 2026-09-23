@@ -12,9 +12,9 @@ import { record } from './browser-types.mts';
 
 /** The single application registry, assembled from explicitly registered packages. */
 export const OBJECTS = defineObjects<NavigableObject>([...OBJECT_DESCRIPTORS.map(descriptor => {
-  const { order, context, ...object } = catalogEntry(descriptor, async () => {
+  const { order, context, ...object } = catalogEntry(descriptor, async signal => {
     const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
-    return loadPackagedObject(descriptor);
+    return loadPackagedObject(descriptor, signal);
   }, preparedDistance(descriptor), preparedDiscovery(descriptor));
   return object;
 }), ...focuses.map(definePreparedFocus)]);

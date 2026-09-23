@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "pds-70-disc",
+  "name": "PDS 70 dust ring",
+  "defaultLens": "dust",
+  "bank": {
+    "path": "src/objects/pds-70-disc/prepared/lenses.json"
+  },
+  "recipes": [
+    {
+      "id": "dust",
+      "path": "src/objects/pds-70-disc/source/volume-dust.json"
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "lenses": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 0.87 mm",
+      "title": "The dust ring around PDS 70 in its own glow at 0.87 millimetres, from ALMA",
+      "description": "ALMA observed PDS 70 on 27 July 2019 at 0.87 millimetres, with its antennas up to 16 kilometres apart, sharp enough to separate the star's inner disc, the gap the two planets have cleared and the ring outside them. What it sees is the dust's own faint heat, not starlight. This is the ALMA pipeline's image from the public archive, shown in the colour map and scale Benisty et al. (2021) use in their Figure 1, which they made from the same observations with more processing. The ring is brighter on its north-west side, as they and Keppler et al. (2019) find. The image has no third axis, so the depth is inferred: a tilted ring of the geometry measured on it projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Its west side is drawn nearer, as Keppler et al. (2018) find from scattered light; how thick it is, is a stated convention. The star itself is the sphere at the centre.",
+      "summary": "The ring of dust 50 to 100 au from the star, outside the planets' orbits, in its own glow at 0.87 mm, as ALMA imaged it.",
+      "detail": "2019-07-27T21:08:32.543999, 8.7 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "ALMA 12-m array in its C-8 configuration, on 27 July 2019: b7-cont"
+        },
+        {
+          "id": "colour",
+          "label": "Colour",
+          "value": "Brightness in µJy/beam, from -24.71 to 389.56, in the publisher's colour map"
+        },
+        {
+          "id": "ring",
+          "label": "Ring measured here",
+          "value": "73 au, tilted 50°, nodes at position angle 161°; published 74 au, 51.7°, 156.7°"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "0 to 150 au; the light reaches the noise at 95 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the inclined ring that best projects to the images, with its west side nearer by convention"
+        }
+      ],
+      "input": "dust-b7-cont",
+      "preview": {
+        "path": "src/objects/pds-70-disc/source/previews/dust.png",
+        "authoredFrom": "dust-b7-cont"
+      }
+    }
+  ]
+}

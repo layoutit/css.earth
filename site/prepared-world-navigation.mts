@@ -2,7 +2,7 @@ import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from './browser-types.mts';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.ts';
-import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred-object-mount.ts';
+import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/object-scene.ts';
 type WorldCamera = Parameters<typeof presentWorldCamera>[0];
 type WorldFrame = Parameters<typeof presentWorldCamera>[1];
 type Optics = ReturnType<ObjectWorldNavigation['optics']>;

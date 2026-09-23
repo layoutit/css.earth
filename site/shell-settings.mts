@@ -1,19 +1,14 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow, PlaybackState } from './browser-types.mts';
-import type { ShellSettingsOptions } from './object-shell-types.mts';
+import type { WorldPreferences } from './world-preferences.mts';
 import { requiredElement } from './browser-types.mts';
 
 export function createSettingsController(
   documentTarget: Document,
   windowTarget: BrowserWindow,
-  { motionEnabled, onMotionChange, heliosphereEnabled, onHeliosphereChange,
-    illustrationModelsEnabled, onIllustrationModelsChange, surfaceLabelsEnabled, onSurfaceLabelsChange,
-    minimapEnabled, onMinimapChange, threeDStarsEnabled, onThreeDStarsChange }: ShellSettingsOptions,
+  preferences: WorldPreferences,
   lifetime: SceneLifetime,
 ) {
-  if (typeof onMotionChange !== "function") {
-    throw new TypeError("Object shell motion change handler must be a function.");
-  }
   const motion = documentTarget.querySelector(".object-motion-setting");
   const heliosphere = documentTarget.querySelector(".object-heliosphere-setting");
   const illustrationModels = documentTarget.querySelector(".object-illustration-models-setting");
@@ -34,51 +29,34 @@ export function createSettingsController(
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
-  let motionOn = motionEnabled === true;
-  for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap, threeDStars]) input.disabled = false;
-
-  const renderMotion = () => {
-    motion.checked = motionOn;
-    if (speed) speed.disabled = !motionOn || speed.dataset?.runtimeReady === "false";
+  const inputs = { motionEnabled: motion, heliosphereEnabled: heliosphere,
+    illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels,
+    minimapEnabled: minimap, threeDStarsEnabled: threeDStars };
+  type Toggle = keyof typeof inputs;
+  const render = () => {
+    for (const key of Object.keys(inputs) as Toggle[]) inputs[key].checked = preferences.state[key];
+    if (speed) speed.disabled = !preferences.state.motionEnabled || speed.dataset?.runtimeReady === 'false';
+    documentTarget.body.dataset.illustrationModels = illustrationModels.checked ? 'on' : 'off';
+    documentTarget.body.dataset.surfaceLabels = surfaceLabels.checked ? 'on' : 'off';
+    documentTarget.body.dataset.minimap = minimap.checked ? 'on' : 'off';
   };
-  motion.addEventListener("change", () => {
-    motionOn = motion.checked;
-    renderMotion();
-    onMotionChange(motionOn);
-  }, { signal: events.signal });
-  const bindToggle = (input: HTMLInputElement, enabled: boolean, onChange: (enabled: boolean) => void,
-    { dataset, event }: { dataset?: string; event?: string } = {}) => {
-    const render = () => {
-      if (dataset) documentTarget.body.dataset[dataset] = input.checked ? 'on' : 'off';
-    };
-    input.checked = enabled === true;
+  for (const key of Object.keys(inputs) as Toggle[]) {
+    const input = inputs[key];
+    input.disabled = false;
+    input.addEventListener('change', () => preferences.set(key, input.checked), { signal: events.signal });
+  }
+  lifetime.onDispose(preferences.subscribe(key => {
     render();
-    input.addEventListener('change', () => {
-      render();
-      if (event) documentTarget.body.dispatchEvent(new Event(event));
-      onChange(input.checked);
-    }, { signal: events.signal });
-  };
-  bindToggle(heliosphere, heliosphereEnabled, onHeliosphereChange);
-  bindToggle(illustrationModels, illustrationModelsEnabled, onIllustrationModelsChange, { dataset: 'illustrationModels' });
-  bindToggle(surfaceLabels, surfaceLabelsEnabled, onSurfaceLabelsChange,
-    { dataset: 'surfaceLabels', event: 'objectsurfacelabelschange' });
-  bindToggle(minimap, minimapEnabled, onMinimapChange, { dataset: 'minimap' });
-  bindToggle(threeDStars, threeDStarsEnabled, onThreeDStarsChange);
-  renderMotion();
+    if (key === 'surfaceLabelsEnabled') documentTarget.body.dispatchEvent(new Event('objectsurfacelabelschange'));
+  }));
+  render();
 
   return Object.freeze({
-    setMotionEnabled(next: boolean) {
-      motionOn = next === true;
-      renderMotion();
-      onMotionChange(motionOn);
-    },
-    setPlaybackState({ motionRequested, reason }: PlaybackState) {
-      motionOn = motionRequested === true;
-      renderMotion();
+    setPlaybackState({ reason }: PlaybackState) {
+      render();
       const row = motion.closest<HTMLElement>(".object-motion-setting-control")!;
       const explanation = requiredElement(row, ".object-motion-blocked");
-      const blocked = motionOn && reason === "reduced-motion";
+      const blocked = preferences.state.motionEnabled && reason === "reduced-motion";
       row.dataset.motionBlocked = String(blocked);
       explanation.hidden = !blocked;
       const descriptions = new Set((motion.getAttribute("aria-describedby") ?? "")

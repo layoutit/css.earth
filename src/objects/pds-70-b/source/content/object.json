@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "pds-70-b",
+  "displayName": "PDS 70 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.96 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "arxiv-2101-04187",
+          "url": "https://arxiv.org/abs/2101.04187",
+          "label": "Wang et al. 2021",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "About 96 years",
+        "source": {
+          "catalogueId": "arxiv-2504-11210",
+          "url": "https://arxiv.org/abs/2504.11210",
+          "label": "Trevascus et al. 2025",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its star",
+        "value": "20.7 au",
+        "source": {
+          "catalogueId": "arxiv-2504-11210",
+          "url": "https://arxiv.org/abs/2504.11210",
+          "label": "Trevascus et al. 2025",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "About 1.4 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2504-11210",
+          "url": "https://arxiv.org/abs/2504.11210",
+          "label": "Trevascus et al. 2025",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "temperature",
+        "label": "Temperature",
+        "value": "1,392 K (model)",
+        "source": {
+          "catalogueId": "arxiv-2101-04187",
+          "url": "https://arxiv.org/abs/2101.04187",
+          "label": "Wang et al. 2021",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "pds-70-b-lens-shape.webp",
+        "surface": "pds-70-b-surface-shape@2x.webp",
+        "poles": "pds-70-b-poles-shape@2x.webp",
+        "source": {
+          "id": "pds-70-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2504.11210"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet's surface exists: it is a point of light in every image. Its size is the radius the best-supported atmosphere model of Wang et al. (2021) needs for its spectrum; their other models give sizes from under one to over three Jupiter radii. No spin is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Trevascus et al. (2025), A&A",
+      "href": "https://arxiv.org/abs/2504.11210"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2504.11210",
+      "credit": "Trevascus et al. (2025), A&A"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/pds-70-b.json",
+      "credit": "Model radius, Wang et al. (2021), AJ 161, 148; dynamical mass and orbit, Trevascus et al. (2025), A&A 698, A19"
+    }
+  }
+}

@@ -373,7 +373,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   if (nameOf(kind(statements[1], 'ReturnStatement').argument) !== kind(rest.argument, 'Identifier').name) fail('catalogue mapper must return the declared object');
   const loader = kind(binding.arguments[1], 'ArrowFunctionExpression');
   const loaderStatements = kind(loader.body, 'BlockStatement').body;
-  if (!loader.async || loader.params.length || loaderStatements.length !== 2) fail('catalogue loader factory must import and return one binding');
+  if (!loader.async || loader.params.length !== 1 || loader.params[0].type !== 'Identifier' || loaderStatements.length !== 2) fail('catalogue loader factory must import and return one binding');
   const importedVariable = kind(loaderStatements[0], 'VariableDeclaration');
   if (importedVariable.kind !== 'const' || importedVariable.declarations.length !== 1) fail('catalogue loader must import one binding');
   const importedDeclaration = importedVariable.declarations[0], importedPattern = kind(importedDeclaration.id, 'ObjectPattern');
@@ -382,7 +382,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   const field = kind(importedPattern.properties[0], 'Property');
   const returned = kind(kind(loaderStatements[1], 'ReturnStatement').argument, 'CallExpression');
   if (field.computed || field.kind !== 'init' || nameOf(field.key) !== 'loadPackagedObject' || returned.optional ||
-      nameOf(returned.callee) !== kind(field.value, 'Identifier').name || returned.arguments.length !== 1 || nameOf(returned.arguments[0]) !== parameter) fail('catalogue loader must forward its bound descriptor unchanged');
+      nameOf(returned.callee) !== kind(field.value, 'Identifier').name || returned.arguments.length !== 2 || nameOf(returned.arguments[0]) !== parameter || nameOf(returned.arguments[1]) !== nameOf(loader.params[0])) fail('catalogue loader must forward its bound descriptor and abort signal unchanged');
 
   const entryAst = parseRuntimeSource(await readSource(resolve(root, 'site/object-catalog.mts')), 'site/object-catalog.mts');
   const entry = entryAst.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'catalogEntry' ? [node.declaration] : []);
@@ -452,21 +452,6 @@ function memberPath(node: Node | null | undefined): string[] | null {
   return [...parent, nameOf(node.property)];
 }
 function property(object: Node | null | undefined, name: string) { return objectProperty(object, name); }
-function requireContextualBindingSource(source: string) {
-  function fail(): never { throw new TypeError('Contextual binding must use the shared world-context factories and pinned object inventories.'); }
-  try { requireDescriptorAdapterSource(source, 'loadPackagedObject'); } catch { fail(); }
-  const ast = parseRuntimeSource(source, 'source.mts');
-  const binding = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'bindContextualObject' ? [node.declaration] : [])[0];
-  const frame = astKind(binding?.params[2], 'AssignmentPattern');
-  const returned = astKind(astKind(binding?.body.body[1], 'ReturnStatement')?.argument, 'CallExpression');
-  const navigation = astKind(property(returned?.arguments[1], 'navigation')?.value, 'CallExpression');
-  const load = astKind(navigation?.arguments[0], 'ArrowFunctionExpression');
-  if (!binding || !frame || nameOf(navigation?.callee) !== 'createPreparedObjectNavigation' || navigation?.arguments.length !== 2 ||
-      nameOf(navigation.arguments[1]) !== nameOf(frame.left) || !load?.async || load.params.length !== 0 || nameOf(load.body) !== nameOf(binding.params[0]) ||
-      !ast.body.some(node => node.type === 'ImportDeclaration' && node.source.value === '../src/renderers/css/dist/index.js' && node.specifiers.some(specifier =>
-        specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'createPreparedObjectNavigation' && specifier.local.name === 'createPreparedObjectNavigation'))) fail();
-}
-
 function runtimeFactorySource(source: string) {
   const ast = parseRuntimeSource(source, 'source.mts'), imports = new Map<string, {name: string; source: string}>();
   for (const statement of ast.body) if (statement.type === 'ImportDeclaration') {
@@ -804,7 +789,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   }
   const contextualBindingPath = resolve(root, 'site/packaged-object-runtime.mts');
   if (sharedClosure.has(contextualBindingPath)) {
-    try { requireContextualBindingSource(await source(contextualBindingPath)); }
+    try { requireDescriptorAdapterSource(await source(contextualBindingPath), 'loadPackagedObject'); }
     catch (error) { sharedViolations.push({ file: 'site/packaged-object-runtime.mts', line: 1, reason: errorMessage(error) }); }
   }
   const assemblyFiles = new Set<string>();

@@ -1,6 +1,6 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import type { SceneFramePresenter } from './scene-world.mts';
-import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/deferred-object-mount.js';
+import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/object-scene.js';
 import type { MountOptions, SceneFactory } from '../browser-types.mts';
 import { errorMessage } from '../browser-types.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';

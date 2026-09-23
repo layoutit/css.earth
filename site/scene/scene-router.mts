@@ -36,7 +36,7 @@ export type { WorldContextOwner, WorldContextMount } from './scene-world.mts';
 export interface RouterOptions {
   stage: HTMLElement;
   objectId: string;
-  loadObject?(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>;
+  loadObject?(id: string, descriptor?: ObjectDescriptor, signal?: AbortSignal): Promise<SceneFactory>;
   documentTarget?: Document;
   windowTarget?: BrowserWindow;
   mountShell?: typeof mountObjectShell;
@@ -50,7 +50,7 @@ export interface RouterOptions {
 export function createSceneRouter({
   stage,
   objectId,
-  loadObject = objectAdapter.load,
+  loadObject = (id, descriptor, signal) => objectAdapter.load(id, descriptor, undefined, signal),
   documentTarget = document,
   windowTarget = window,
   mountShell = mountObjectShell,
@@ -62,8 +62,9 @@ export function createSceneRouter({
 }: RouterOptions) {
   const scenes = createSceneSessions();
   let mountTask: Promise<boolean | undefined> | null = null;
-  let motionEnabled = false;
-  const preferences = createWorldPreferences();
+  const preferences = createWorldPreferences({ getWorld: () => world.current,
+    onMotionChange() { syncPlayback(); scenes.current?.viewUrl?.schedule(); },
+  });
   let hasPresented = false;
   const initialScene = retainInitialScene(stage);
   let destroyed = false;
@@ -85,18 +86,27 @@ export function createSceneRouter({
     },
     onSelectFocus(id) { void navigate(objectId, { kind: 'focus', id }).catch(report); },
     canPublishFocus: () => scenes.state.kind === 'ready' && !requests.current,
-    onFocusChange(session, url) { view.replace(session, selection.url(url)); },
-    onFocusContentChange: selection.focus,
+    readFocus: () => selection.current.kind === 'focus' ? selection.current.id : null,
+    onFocusChange(session, focus) {
+      selection.focus(focus.record, focus.sources, focus.presentation);
+      if (focus.url === 'preserve') return;
+      const url = new URL(windowTarget.location.href);
+      if (focus.url === 'reframe') url.searchParams.delete('v');
+      const selected = selection.url(url);
+      if (selected !== windowTarget.location.href) view.replace(session, selected);
+    },
     onCameraChange: followSelectionCamera,
     onError: report,
   });
   const view = createSceneView({ windowTarget, scenes, requests, listenToPopState: !navigation,
-    getHistory: () => historyOwner, getWorld: () => world.current, getMotion: () => motionEnabled,
-    setMotion(next) { motionEnabled = next === true; syncPlayback(); }, onError: report,
+    getHistory: () => historyOwner, getWorld: () => world.current, getMotion: () => preferences.state.motionEnabled,
+    setMotion(next) { preferences.set('motionEnabled', next); }, onError: report,
   });
-  const activation = createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, onError: report });
+  const activation = createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, requestMotion: (session, next) => {
+    if (scenes.isCurrent(session)) preferences.set('motionEnabled', next);
+  }, onError: report });
   const publication = createScenePublication({ stage, documentTarget, windowTarget,
-    read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: selection.current, motionEnabled, reducedMotionActive,
+    read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: selection.current, motionEnabled: preferences.state.motionEnabled, reducedMotionActive,
       mountedObjectCount: scenes.current?.mount ? 1 : 0, playing: scenes.current?.playing ?? false,
       hasPresented: hasPresented || initialScene?.available === true }),
     getShell: () => shellOwner?.shell ?? null, getWorld: () => world.current,
@@ -151,18 +161,13 @@ export function createSceneRouter({
       publication.publish();
       const requestMotion = (next: boolean) => {
         if (!scenes.isCurrent(session)) return;
-        motionEnabled = next === true;
-        syncPlayback();
-        session.viewUrl?.schedule();
+        preferences.set('motionEnabled', next);
       };
       if (!shellOwner) {
         const owner: { shell: ObjectShell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, readSelection: () => selection.current, documentTarget, windowTarget, motionEnabled,
-          ...preferences.bind(() => shellOwner === owner && scenes.current !== null, () => world.current),
-          onMotionChange(next) { if (shellOwner === owner && scenes.current) {
-            motionEnabled = next === true; syncPlayback(); scenes.current?.viewUrl?.schedule();
-          } },
+        owner.shell = mountShell({ objectId, readSelection: () => selection.current, documentTarget, windowTarget,
+          preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
         });
       }
       const shell = shellOwner.shell!;
@@ -198,7 +203,7 @@ export function createSceneRouter({
       session.framePresenter = framePresenter;
       if (framePresenter) session.own(() => framePresenter.destroy());
       const viewport = world.viewport;
-      if (!await session.activate(factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId)), stage, {
+      if (!await session.activate(factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId), session.signal), stage, {
         deferTextureRefinement: true,
         ...(viewport ? { viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
@@ -255,7 +260,7 @@ export function createSceneRouter({
     requests.cancel();
     scenes.current?.setViewUrl(null);
     const request = requests.begin({ ...resolved.destination, timing: createNavigationTiming(windowTarget, objectId, id) });
-    if (request.camera.kind === 'focus') { motionEnabled = false; shellOwner?.shell?.setMotionEnabled?.(false); }
+    if (request.camera.kind === 'focus') preferences.set('motionEnabled', false);
     mountTask = transition(request, object);
     return mountTask;
   }

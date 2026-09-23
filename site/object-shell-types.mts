@@ -1,3 +1,4 @@
+import type { WorldPreferences } from './world-preferences.mts';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
 import type { NavigationContent } from './navigation/navigation-content.mts';
 import type { ObjectEntry } from './object-schema.mts';
@@ -5,27 +6,12 @@ import type { SceneOverview, SceneSubject, SelectionTarget } from './scene/scene
 import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime, SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 
-export interface ShellSettingsOptions {
-  motionEnabled: boolean;
-  onMotionChange(enabled: boolean): void;
-  heliosphereEnabled: boolean;
-  onHeliosphereChange(enabled: boolean): void;
-  illustrationModelsEnabled: boolean;
-  onIllustrationModelsChange(enabled: boolean): void;
-  surfaceLabelsEnabled: boolean;
-  onSurfaceLabelsChange(enabled: boolean): void;
-  minimapEnabled: boolean;
-  onMinimapChange(enabled: boolean): void;
-  threeDStarsEnabled: boolean;
-  onThreeDStarsChange(enabled: boolean): void;
-}
-
-export interface ShellOptions extends Partial<ShellSettingsOptions> {
+export interface ShellOptions {
   objectId: string;
   readSelection(): SceneSubject;
+  preferences: WorldPreferences;
   documentTarget?: Document;
   windowTarget?: BrowserWindow;
-  onCategoryChange?(classification: string | null): void;
 }
 
 export type ShellNavigationTarget =
@@ -50,7 +36,6 @@ export interface ObjectShell {
   setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined): void;
   presentSelection(): void;
   setCamera(provider: ShellCamera | null): void;
-  setMotionEnabled(enabled: boolean): void;
   setPlaybackState(state: PlaybackState): void;
   setNavigationInFlight(active: boolean): void;
   destroy(): void;

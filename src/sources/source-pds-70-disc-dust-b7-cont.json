@@ -1,0 +1,35 @@
+{
+  "id": "source-pds-70-disc-dust-b7-cont",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS 70 Disc · dust b7-cont",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X13b4_Xb1.PDS_70_sci.spw19_23_25_27.cont.I.pbcor.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pds-70-disc/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA (ESO/NAOJ/NRAO), project 2018.A.00030.S (PI M. Benisty); imaged by the ALMA pipeline (CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2018.A.00030.S.",
+      "scope": "The dust b7-cont input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

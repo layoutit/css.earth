@@ -17,7 +17,7 @@ export interface ObjectBrowserOptions {
   readSelection(): SceneSubject;
   readObjectId(): string;
   onCategoryChange?(classification: string | null): void;
-  illustrationModelsEnabled?: boolean;
+  readIllustrationModels?(): boolean;
 }
 
 interface SubjectOverride {
@@ -26,7 +26,7 @@ interface SubjectOverride {
 }
 
 export function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
-  { readSelection, readObjectId, onCategoryChange = () => {}, illustrationModelsEnabled = false }: ObjectBrowserOptions) {
+  { readSelection, readObjectId, onCategoryChange = () => {}, readIllustrationModels = () => false }: ObjectBrowserOptions) {
   // Browsing a system keeps the committed focus; a flight preview temporarily
   // covers it. Neither changes which scene or focus the shell owns.
   let subjectOverride: SubjectOverride | null = null;
@@ -183,7 +183,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       void features?.search('');
       return;
     }
-    const result = catalogue.search(query, activeCategory, { illustrations: illustrationModelsEnabled });
+    const result = catalogue.search(query, activeCategory, { illustrations: readIllustrationModels() });
     const { classification, systemName, showAll } = result;
     markCategory(classification);
     filteredClassification = classification;
@@ -375,9 +375,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   if (catalogue.hasInlineRows) markSelection();
   return Object.freeze({
     readSubject: currentSubject,
-    setIllustrationModelsEnabled(enabled: boolean) {
-      if (illustrationModelsEnabled === enabled) return;
-      illustrationModelsEnabled = enabled;
+    refreshIllustrations() {
       filteredQuery = null;
       if (open) filter(false);
     },

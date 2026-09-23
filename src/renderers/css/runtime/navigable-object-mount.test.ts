@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test, vi } from 'vitest';
-import { createNavigableObjectMount } from './navigable-object-mount.js';
+import { loadNavigableObject } from './navigable-object-mount.js';
 import { prepareActivationGroups } from '../../../../tools/prepared/prepared-activation-groups.mts';
 import { requireObjectRuntimeDefinition } from '../../../../tools/contract/object-runtime-contract.mts';
 import { requirePreparedCssDescriptor } from '../prepared-object-decoder.js';
@@ -40,8 +40,8 @@ test('preflight and native mount share one authenticated definition and transfer
     return { ready: Promise.resolve(), pause() {}, resume() {}, destroy() { resources.destroy(); destroyed(); },
       sharedView: { capture: () => null, restore: async () => false, subscribe: () => () => {} } };
   });
-  const factory = createNavigableObjectMount(descriptor, { read }, bind);
-  expect(read).not.toHaveBeenCalled();
+  const factory = await loadNavigableObject(descriptor, { read }, bind);
+  expect(read).toHaveBeenCalledOnce();
   const signal = new AbortController();
   const prepared = await factory.navigation!.prepare({ signal: signal.signal, getView: () => ({
     world: { referenceFrame: 'sun-icrf', epochJdTt: frame.epochJdTt,
@@ -57,7 +57,7 @@ test('preflight and native mount share one authenticated definition and transfer
   expect(bind.mock.calls[0][0]).toBe(prepared.definition);
   signal.abort(); prepared.resources.destroy();
   expect(destroyed).not.toHaveBeenCalled();
-  mount.destroy(); mount.destroy();
+  mount.destroy();
   expect(destroyed).toHaveBeenCalledOnce();
 });
 
@@ -67,8 +67,7 @@ test('authenticated transport without prepared activation groups fails before na
   delete tree.activationGroups;
   const { descriptor, bytes } = await authenticateFixture(fixture);
   const bind = vi.fn();
-  const factory = createNavigableObjectMount(descriptor, { read: async () => bytes }, bind);
-  await expect(factory.navigation!.prepare({ signal: new AbortController().signal,
-    getView: () => { throw new Error('Invalid transport must fail before view demand.'); } })).rejects.toThrow(/activation groups must be prepared/);
+  await expect(loadNavigableObject(descriptor, { read: async () => bytes }, bind))
+    .rejects.toThrow(/activation groups must be prepared/);
   expect(bind).not.toHaveBeenCalled();
 });

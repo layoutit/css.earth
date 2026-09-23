@@ -33,10 +33,10 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
     if (statement.type === 'ExportNamedDeclaration' && statement.declaration?.type === 'FunctionDeclaration' && statement.declaration.id) functions.set(statement.declaration.id.name, statement.declaration);
   }
   const loader = functions.get(exported);
-  if (!loader || loader.params.length !== 1 || loader.params[0].type !== 'Identifier') fail();
+  if (!loader || loader.params.length !== 2 || loader.params.some(param => param.type !== 'Identifier')) fail();
   // The authored TypeScript adapter validates unknown descriptors once before
   // binding the same immutable descriptor to transport and world navigation.
-  let descriptorInput = loader.params[0].name;
+  let descriptorInput = named(loader.params[0]);
   const statements = loader.body.body;
   let returnIndex = 0;
   if (statements.length === 2) {
@@ -49,7 +49,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
     returnIndex = 1;
   } else if (statements.length !== 1) fail();
   const returned = kind(kind(statements[returnIndex], 'ReturnStatement').argument, 'CallExpression');
-  if (returned.arguments.length !== 3 || bindings.get(named(returned.callee))?.name !== 'createNavigableObjectMount' || named(returned.arguments[0]) !== descriptorInput) fail();
+  if (returned.arguments.length !== 4 || bindings.get(named(returned.callee))?.name !== 'loadNavigableObject' || named(returned.arguments[0]) !== descriptorInput || named(returned.arguments[3]) !== named(loader.params[1])) fail();
   const transportObject = kind(returned.arguments[1], 'ObjectExpression');
   const adapter = kind(returned.arguments[2], 'ArrowFunctionExpression');
   if (adapter.params.length !== 1 || adapter.params[0].type !== 'Identifier') fail();
@@ -89,7 +89,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const contextParamName = contextParam?.type === 'Identifier' ? contextParam.name
     : contextParam?.type === 'AssignmentPattern' && contextParam.left.type === 'Identifier'
       && bindings.get(named(contextParam.right))?.name === 'APPLICATION_WORLD_CONTEXT' ? contextParam.left.name : null;
-  if (!bind || bind.params.length !== 3 || bind.params[0].type !== 'Identifier' || contextParamName === null || bind.body.body.length !== 2) fail();
+  if (!bind || bind.params.length !== 3 || bind.params[0].type !== 'Identifier' || contextParamName === null || bind.body.body.length !== 1) fail();
   const frameParameter = kind(bind.params[2], 'AssignmentPattern'), frameDefault = kind(frameParameter.right, 'MemberExpression');
   if (frameParameter.left.type !== 'Identifier' || frameDefault.computed || named(frameDefault.property) !== 'frame') fail();
   const contextParameter = contextParamName;
@@ -97,17 +97,13 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   if (contextParser) {
     if (named(contextParser.callee) !== 'parsePreparedWorldContext' || contextParser.arguments.length !== 1 || named(contextParser.arguments[0]) !== contextParameter || bindings.get('parsePreparedWorldContext')?.source !== '../src/renderers/css/dist/index.js') fail();
   } else if (named(frameDefault.object) !== contextParameter) fail();
-  const mountStatement = kind(bind.body.body[0], 'VariableDeclaration');
-  if (mountStatement.kind !== 'const' || mountStatement.declarations.length !== 1) fail();
-  const mount = mountStatement.declarations[0], mountId = kind(mount.id, 'Identifier'), mountInit = call(mount.init, 'bindPackagedObject', 2);
+  const mountInit = call(kind(bind.body.body[0], 'ReturnStatement').argument, 'bindPackagedObject', 2);
   if (named(mountInit.arguments[0]) !== bind.params[0].name) fail();
   const factory = call(mountInit.arguments[1], 'createWorldContextObjectRuntime', 1);
   const fields = new Map(staticObjectProperties(kind(factory.arguments[0], 'ObjectExpression')).map(property => [propertyKey(property.key), property.value]));
   if (named(fields.get('definition')) !== bind.params[0].name || named(fields.get('context')) !== contextParameter || named(fields.get('frame')) !== frameParameter.left.name) fail();
-  const assignment = kind(kind(bind.body.body[1], 'ReturnStatement').argument, 'CallExpression'), assignMember = kind(assignment.callee, 'MemberExpression');
-  if (named(assignMember.object) !== 'Object' || named(assignMember.property) !== 'assign' || named(assignment.arguments[0]) !== mountId.name) fail();
   const rendererBinding = bindings.get('createWorldContextObjectRuntime');
-  if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source || bindings.get(named(defaultFactory.callee))?.source !== rendererBinding.source) fail();
+  if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('loadNavigableObject')?.source !== rendererBinding.source || bindings.get(named(defaultFactory.callee))?.source !== rendererBinding.source) fail();
   // The transport carries only the prepared read.
   const transport = transportObject.properties;
   if (transport.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' ||

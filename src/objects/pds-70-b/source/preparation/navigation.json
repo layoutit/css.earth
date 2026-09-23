@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-navigation-marker@2",
+  "objectId": "pds-70-b",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "path": "presentation/context.png"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}
