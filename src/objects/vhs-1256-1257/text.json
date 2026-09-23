@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "vhs-1256-1257",
+  "card": {
+    "text": "Young dwarf 21 parsecs away in Corvus, one of a close pair with a planet-mass companion far out.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2208-08448",
+        "url": "https://arxiv.org/abs/2208.08448",
+        "label": "Dupuy et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "an ultracool dwarf binary that hosts a wide-separation planetary-mass companion"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "VHS 1256-1257 A and B are near-twin dwarfs 2 au apart, possibly brown dwarfs. Their companion b circles them over 100 times farther out.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2208-08448",
+        "url": "https://arxiv.org/abs/2208.08448",
+        "label": "Dupuy et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "being a brown dwarf binary or pair of very low-mass stars"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its temperature",
+      "summary": "A blackbody at the star's published temperature. No surface picture exists."
+    }
+  }
+}

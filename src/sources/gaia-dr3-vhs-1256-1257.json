@@ -1,0 +1,45 @@
+{
+  "id": "gaia-dr3-vhs-1256-1257",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 gaia_source row for VHS 1256-1257 A and B (unresolved) (source_id 3526198184723289472)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "3526198184723289472"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "label": "Gaia Collaboration (2023), Gaia DR3 summary"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20ref_epoch%2C%20ra%2C%20dec%2C%20parallax%2C%20parallax_error%2C%20pmra%2C%20pmdec%2C%20radial_velocity%2C%20radial_velocity_error%2C%20phot_g_mean_mag%2C%20ruwe%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203526198184723289472",
+      "checkedOn": "2026-09-23",
+      "locator": "gaiadr3.gaia_source at epoch 2016.0: ra 194.00764786266586, dec -12.956935593723335, parallax 47.2733 +/- 0.4731 mas, pmra -272.4615, pmdec -190.2387 mas/yr, no radial velocity, G 15.111, RUWE 7.30"
+    },
+    {
+      "path": "src/objects/vhs-1256-1257/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC).",
+      "scope": "citation",
+      "evidence": "src/objects/vhs-1256-1257/NOTICE.md"
+    }
+  ],
+  "publisher": "European Space Agency"
+}

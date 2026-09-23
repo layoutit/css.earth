@@ -1,0 +1,62 @@
+{
+  "id": "arxiv-1206-1770",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Donati et al. (2012): Magnetometry of the classical T Tauri star GQ Lup: non-stationary dynamos &amp; spin evolution of young Suns",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1206.1770"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2012.21482.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1206.1770",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2012.21482.x",
+      "label": "Monthly Notices of the Royal Astronomical Society"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1206.1770",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: photospheric temperature 4,300 +/- 50 K; mass 1.05 +/- 0.07 solar masses; the ESO SupJup survey (arXiv:2501.01789, Table 1) lists its radius 1.7 +/- 0.2 solar radii"
+    },
+    {
+      "path": "src/objects/gq-lup/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/gq-lup/text.json",
+      "locator": "/introduction/sources/0"
+    },
+    {
+      "path": "src/objects/gq-lup/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/gq-lup/source/content/object.json",
+      "locator": "/panel/facts/3/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Monthly Notices of the Royal Astronomical Society",
+  "creators": [
+    "J. F. Donati",
+    "S. G. Gregory",
+    "S. H. P. Alencar",
+    "G. Hussain",
+    "J. Bouvier",
+    "C. Dougados"
+  ]
+}

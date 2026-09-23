@@ -10,6 +10,9 @@ import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interfero
 export type StellarColorRecord = {
   readonly spectrum: 'planck'; readonly temperaturePath: string; readonly sourceId: string;
   readonly columns: { readonly value: string; readonly lower: string; readonly upper: string };
+} | {
+  /** A star with no catalogue row of its own (the unresolved second star of a close pair): the temperature its paper publishes. */
+  readonly spectrum: 'planck'; readonly published: StellarTemperature & { readonly citation: string };
 } | { readonly spectrum: 'gaia-xp-sampled'; readonly spectrumPath: string; readonly sourceId: string }
   | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord };
 export interface StellarTemperature { readonly kelvin: number; readonly lowerKelvin: number; readonly upperKelvin: number }
@@ -30,6 +33,15 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
   }
   const temperature = requireRecord(input.temperature, 'temperature');
   if (input.spectrum !== 'planck') throw new TypeError('The stellar colour record must name the Planck spectrum or the Gaia XP sampled spectrum it applies.');
+  if (temperature.published !== undefined) {
+    const published = requireRecord(temperature.published, 'temperature.published');
+    const bounds = { kelvin: requireFiniteNumber(published.kelvin, 'temperature.published.kelvin'), lowerKelvin: requireFiniteNumber(published.lowerKelvin, 'temperature.published.lowerKelvin'),
+      upperKelvin: requireFiniteNumber(published.upperKelvin, 'temperature.published.upperKelvin') };
+    checkStellarTemperature(bounds, `published temperature ${bounds.kelvin} K (${bounds.lowerKelvin} to ${bounds.upperKelvin})`);
+    const citation = requireString(published.citation, 'temperature.published.citation');
+    if (!/https?:\/\//u.test(citation)) throw new TypeError(`The published temperature ${bounds.kelvin} K names its paper by URL, not "${citation}".`);
+    return { spectrum: 'planck', published: { ...bounds, citation } };
+  }
   const sourceId = integer(requireString(temperature.sourceId, 'temperature.sourceId'));
   return { spectrum: 'planck', temperaturePath: requireString(temperature.path, 'temperature.path'), sourceId,
     columns: { value: requireString(temperature.column, 'temperature.column'), lower: requireString(temperature.lowerColumn, 'temperature.lowerColumn'),
@@ -37,7 +49,13 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
 }
 
 /** Read the temperature and its bounds from the archived catalogue row, by source id. */
-export function readStellarTemperature(csv: string, record: Extract<StellarColorRecord, { spectrum: 'planck' }>): StellarTemperature {
+function checkStellarTemperature(temperature: StellarTemperature, label: string): void {
+  if (!(temperature.kelvin > 1000 && temperature.lowerKelvin <= temperature.kelvin && temperature.kelvin <= temperature.upperKelvin)) {
+    throw new TypeError(`The ${label} must be a stellar temperature inside its bounds.`);
+  }
+}
+
+export function readStellarTemperature(csv: string, record: Extract<StellarColorRecord, { spectrum: 'planck'; temperaturePath: string }>): StellarTemperature {
   const [header, ...rows] = csv.split(/\r?\n/u).filter(line => line.trim()).map(line => line.split(','));
   if (!header) throw new TypeError('The catalogue table is empty.');
   const column = (name: string) => { const index = header.indexOf(name); if (index < 0) throw new TypeError(`The catalogue table lacks ${name}.`); return index; };
@@ -45,9 +63,7 @@ export function readStellarTemperature(csv: string, record: Extract<StellarColor
   if (matches.length !== 1) throw new TypeError(`The catalogue table must hold exactly one row for source ${record.sourceId}.`);
   const read = (name: string) => requireFiniteNumber(Number(matches[0]![column(name)]), name);
   const temperature = { kelvin: read(record.columns.value), lowerKelvin: read(record.columns.lower), upperKelvin: read(record.columns.upper) };
-  if (!(temperature.kelvin > 1000 && temperature.lowerKelvin <= temperature.kelvin && temperature.kelvin <= temperature.upperKelvin)) {
-    throw new TypeError('The catalogue temperature must be a stellar temperature inside its bounds.');
-  }
+  checkStellarTemperature(temperature, 'catalogue temperature');
   return temperature;
 }
 
@@ -188,7 +204,7 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
     return { temperature: null, spectrum: { samples: spectrum.wavelengthsNm.length }, color: measuredSpectrumColor(spectrum, colorMatching, record.measured.gaps), limbDarkening,
       range: null };
   }
-  const temperature = readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
+  const temperature = 'published' in record ? record.published : readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
   return { temperature, spectrum: null, color: planckColor(temperature.kelvin, colorMatching), limbDarkening,
     range: [planckColor(temperature.lowerKelvin, colorMatching), planckColor(temperature.upperKelvin, colorMatching)] as const };
 }

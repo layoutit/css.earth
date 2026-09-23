@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "roxs-42b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "ROXs 42B A",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1050507
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/roxs-42b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "ROXs 42B A",
+      "classification": "star",
+      "color": "#ffcb93",
+      "distanceAu": 30206734.1,
+      "description": "Young star 146 parsecs away in Ophiuchus, one of a close pair with a giant planet photographed far out.",
+      "systemName": "ROXs 42B system",
+      "order": 1727,
+      "context": {
+        "order": 1724
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1552280768853677300,
+        -3806126954818376700,
+        -1877217562661860400
+      ],
+      "presentationToReference": [
+        -0.3435115403647984,
+        0.1568772494932417,
+        -0.9259532116838509,
+        -0.8422758042926943,
+        0.3846567557326252,
+        0.37763825252792677,
+        -0.41541700872653026,
+        -0.9096310839349581,
+        1.2318129424081213e-7
+      ],
+      "orbitUpReference": [
+        -0.1568772494932417,
+        -0.3846567557326252,
+        0.9096310839349581
+      ],
+      "metersPerUnit": 3388732.2580645164,
+      "bodyRadiusM": 1050507000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

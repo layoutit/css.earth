@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "dh-tau-b",
+  "card": {
+    "text": "Young planet-mass companion over 300 au from DH Tau, still feeding from a disc of its own.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2405-13128",
+        "url": "https://arxiv.org/abs/2405.13128",
+        "label": "Xuan et al. 2024",
+        "checked": "2026-09-23",
+        "locator": "Section 2.1.3",
+        "quote": "DH~Tau~b is likely accreting via a circumsubstellar disk"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "DH Tau b is a companion of about 12 Jupiter masses, less than a million years old. It lies about 310 au from its star, too far out for its orbit to be pinned down yet.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2405-13128",
+        "url": "https://arxiv.org/abs/2405.13128",
+        "label": "Xuan et al. 2024",
+        "checked": "2026-09-23",
+        "locator": "Section 2.1.3",
+        "quote": "orbits at a projected separation of"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

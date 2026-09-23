@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gq-lup-b",
+  "card": {
+    "text": "Young companion about 100 au from GQ Lup, still feeding from a disc of its own.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2110-04307",
+        "url": "https://arxiv.org/abs/2110.04307",
+        "label": "Stolker et al. 2021",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "expected to trace continuum emission from small grains in a protolunar disk"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "GQ Lup b is a hot, young companion of about 30 Jupiter masses, still growing from a disc of its own. VLTI/GRAVITY has pinned its position to a fraction of a milliarcsecond.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2509-20621",
+        "url": "https://arxiv.org/abs/2509.20621",
+        "label": "Venkatesan et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "a ~30 M_J companion at ~100 au"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

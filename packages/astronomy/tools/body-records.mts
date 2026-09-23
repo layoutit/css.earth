@@ -26,7 +26,11 @@ const parseRecord = shape({
 export type BodyRecord = ReturnType<typeof parseRecord> & Record<string, unknown>;
 
 function bodyRecord(value: unknown): BodyRecord {
-  const record = { ...objectValue(value), ...parseRecord(value) };
+  const raw = objectValue(value);
+  let parsed: ReturnType<typeof parseRecord>;
+  // A refused field names the record it belongs to.
+  try { parsed = parseRecord(value); } catch (error) { throw new TypeError(`Astronomy record ${String(raw.id)}: ${error instanceof Error ? error.message : String(error)}`); }
+  const record = { ...raw, ...parsed };
   if (!/^[a-z][a-z0-9-]*$/.test(record.id)) throw new TypeError('Invalid astronomy identity.');
   if (![...Object.keys(kinds), 'star', 'satellite'].includes(record.classification)) throw new TypeError(`Invalid astronomy classification: ${record.id}.`);
   for (const value of [record.order, record.classificationOrder]) {

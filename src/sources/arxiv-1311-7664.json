@@ -1,0 +1,62 @@
+{
+  "id": "arxiv-1311-7664",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kraus et al. (2014): Three Wide Planetary-Mass Companions to FW Tau, ROXs 12, and ROXs 42B",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1311.7664"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/781/1/20"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1311.7664",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/781/1/20",
+      "label": "The Astrophysical Journal 781, 20"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1311.7664",
+      "checkedOn": "2026-09-23",
+      "locator": "ROXs 42B binary component masses 0.89 +/- 0.08 and 0.36 +/- 0.04 solar masses, as Inglis et al. (2024, Table 1) and Inglis et al. (2026) cite them"
+    },
+    {
+      "path": "src/objects/roxs-42b/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/roxs-42b/source/content/object.json",
+      "locator": "/panel/facts/2/source"
+    },
+    {
+      "path": "src/objects/roxs-42b-b/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/roxs-42b-b/source/content/object.json",
+      "locator": "/panel/facts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 781, 20",
+  "creators": [
+    "Adam L. Kraus",
+    "Michael J. Ireland",
+    "Lucas A. Cieza",
+    "Sasha Hinkley",
+    "Trent J. Dupuy",
+    "Brendan P. Bowler"
+  ]
+}

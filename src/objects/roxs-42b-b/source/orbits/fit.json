@@ -1,0 +1,45 @@
+{
+ "measurements": "inglis-2026-astrometry.csv",
+ "totalMassSolar": {
+  "value": 1.35,
+  "error": 0.07
+ },
+ "parallaxMas": {
+  "value": 6.83,
+  "error": 0.03
+ },
+ "tauReferenceMjd": 55197,
+ "centreOfMass": {
+  "secondaryMassFraction": 0.2857142857142857,
+  "pairOrbit": {
+   "semiMajorAxisAu": 10.9,
+   "eccentricity": 0.61,
+   "inclinationDegrees": 91.0,
+   "argumentOfPeriastronDegrees": 238,
+   "ascendingNodeDegrees": 150.0,
+   "tau": 0.32,
+   "tauReferenceMjd": 55197,
+   "parallaxMas": 6.83,
+   "totalMassSolar": 1.35
+  }
+ },
+ "mcmc": {
+  "temperatures": 10,
+  "walkers": 100,
+  "burnSteps": 3000,
+  "savedStepsPerWalker": 2000,
+  "thin": 10,
+  "seed": 1,
+  "threads": 4
+ },
+ "paperMedians": {
+  "sma1": 223,
+  "ecc1": 0.4,
+  "inc1": 58,
+  "aop1": 96,
+  "pan1": 112,
+  "tau1": 0.77,
+  "plx": 6.83,
+  "mtot": 1.35
+ }
+}

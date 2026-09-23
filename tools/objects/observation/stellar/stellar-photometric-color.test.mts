@@ -29,9 +29,19 @@ test('records and catalogue rows fail closed', () => {
   assert.throws(() => parseStellarColorRecord({ ...record, schema: 'other' }), /cssearth-stellar-photometric-color@1/u);
   assert.throws(() => parseStellarColorRecord({ ...record, spectrum: 'model' }), /Planck/u);
   const parsed = parseStellarColorRecord(record);
-  assert.ok(parsed.spectrum === 'planck');
+  assert.ok(parsed.spectrum === 'planck' && 'temperaturePath' in parsed);
   assert.throws(() => readStellarTemperature('source_id,teff_gspphot\n1,4400\n', parsed), /exactly one row/u);
   assert.throws(() => readStellarTemperature(`source_id,teff_gspphot,teff_gspphot_lower,teff_gspphot_upper\n${parsed.sourceId},4400,4500,4600\n`, parsed), /inside its bounds/u);
+});
+
+test('a star with no catalogue row takes the temperature its paper publishes, with a citation', () => {
+  const published = (kelvin: number, citation = 'Inglis et al. (2024), Table 1, https://arxiv.org/abs/2402.09533') =>
+    ({ schema: 'cssearth-stellar-photometric-color@1', spectrum: 'planck', temperature: { published: { kelvin, lowerKelvin: 2580, upperKelvin: 2620, citation } } });
+  const parsed = parseStellarColorRecord(published(2600));
+  assert.ok(parsed.spectrum === 'planck' && 'published' in parsed);
+  assert.equal(parsed.published.kelvin, 2600);
+  assert.throws(() => parseStellarColorRecord(published(2700)), /2700 K \(2580 to 2620\)/u);
+  assert.throws(() => parseStellarColorRecord(published(2600, 'Inglis et al. (2024)')), /by URL/u);
 });
 
 test("WASP-43's TESS limb darkening is read from its pinned catalogue row and darkens the limb plate by the quadratic law", async () => {

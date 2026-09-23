@@ -1,0 +1,45 @@
+{
+ "measurements": "dupuy-2023-astrometry.csv",
+ "totalMassSolar": {
+  "value": 0.152,
+  "error": 0.01
+ },
+ "parallaxMas": {
+  "value": 47.27,
+  "error": 0.47
+ },
+ "tauReferenceMjd": 58849,
+ "mcmc": {
+  "temperatures": 10,
+  "walkers": 100,
+  "burnSteps": 3000,
+  "savedStepsPerWalker": 2000,
+  "thin": 10,
+  "seed": 1,
+  "threads": 4
+ },
+ "centreOfMass": {
+  "secondaryMassFraction": 0.55,
+  "pairOrbit": {
+   "semiMajorAxisAu": 1.96,
+   "eccentricity": 0.8826,
+   "inclinationDegrees": 118.7,
+   "argumentOfPeriastronDegrees": 44.9,
+   "ascendingNodeDegrees": 4.4,
+   "tau": 0.579,
+   "tauReferenceMjd": 55197,
+   "parallaxMas": 47.27,
+   "totalMassSolar": 0.141
+  }
+ },
+ "paperMedians": {
+  "sma1": 350,
+  "ecc1": 0.68,
+  "inc1": 24,
+  "aop1": 180,
+  "pan1": 40,
+  "tau1": 0.5,
+  "plx": 47.27,
+  "mtot": 0.152
+ }
+}

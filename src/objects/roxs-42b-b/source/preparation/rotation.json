@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 54.15457674574645,
+  "declinationDegrees": 23.93037552191807,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No spin axis of ROXs 42B b on the sky is measured; the papers cited in the README were checked. The display axis is the normal of its hosted orbit in packages/astronomy/data/bodies/roxs-42b-b.json, computed by hostedKeplerElements in @cssearth/astronomy; the meridian is set so that grid longitude 0 faces the Sun and Earth at the scene epoch.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis, the orbit normal; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement: the spin axis, spin sense, period and prime meridian of ROXs 42B b are unmeasured; the axis shown is its orbit normal."
+}

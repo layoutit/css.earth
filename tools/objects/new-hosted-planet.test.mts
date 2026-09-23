@@ -31,3 +31,16 @@ test('a self-luminous planet scaffolds the emissive build Beta Pictoris c was ma
   assert.deepEqual(made(`${o}/source/content/object.json`).settings, (await json(`${o}/source/content/object.json`)).settings);
   assert.equal(made(`${o}/source/measurements.json`).effectiveTemperatureK, 1250);
 });
+
+test('a star on a hosted orbit scaffolds as a self-luminous star with its temperature colour', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const json = async (path: string) => JSON.parse(await readFile(new URL(`../../${path}`, import.meta.url), 'utf8')) as Record<string, any>;
+  const [body, host] = [await json('packages/astronomy/data/bodies/vhs-1256-1257-companion.json'), await json('packages/astronomy/data/bodies/vhs-1256-1257.json')];
+  const spec = { id: 'vhs-1256-1257-companion', name: 'VHS 1256-1257 B', system: 'VHS 1256-1257 system', description: 'Test', paper: 'https://arxiv.org/abs/2208.08448',
+    paperCredit: 'Test source', rotation: 'unmeasured' as const };
+  assert.throws(() => scaffoldHostedPlanetFiles(spec, body, host, 2461041.5), /--self-luminous/);
+  const files = scaffoldHostedPlanetFiles({ ...spec, selfLuminous: { temperatureK: 2700, source: '2700 K, Dupuy et al. (2023)' } }, body, host, 2461041.5);
+  const catalog = JSON.parse(files.get('src/objects/vhs-1256-1257-companion/object.json')!).properties.catalog;
+  assert.equal(catalog.classification, 'star');
+  assert.notEqual(catalog.color, '#9a9a9a');
+});

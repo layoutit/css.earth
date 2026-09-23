@@ -1,0 +1,31 @@
+{
+ "measurements": "venkatesan-2025-gravlowrv.csv",
+ "totalMassSolar": {
+  "value": 1.05,
+  "error": 0.07
+ },
+ "parallaxMas": {
+  "value": 6.489,
+  "error": 0.029
+ },
+ "tauReferenceMjd": 58849,
+ "mcmc": {
+  "temperatures": 20,
+  "walkers": 100,
+  "burnSteps": 15000,
+  "savedStepsPerWalker": 10000,
+  "thin": 10,
+  "seed": 1,
+  "threads": 4
+ },
+ "paperMedians": {
+  "sma1": 97.71,
+  "ecc1": 0.35,
+  "inc1": 48.18,
+  "aop1": 175.82,
+  "pan1": 257.08,
+  "tau1": 0.32,
+  "plx": 6.49,
+  "mtot": 1.1
+ }
+}

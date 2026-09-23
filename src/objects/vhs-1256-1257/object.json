@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "vhs-1256-1257",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "VHS 1256-1257 A",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 83484
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/vhs-1256-1257-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "VHS 1256-1257 A",
+      "classification": "star",
+      "color": "#ffad59",
+      "distanceAu": 4363236.1,
+      "description": "Young dwarf 21 parsecs away in Corvus, one of a close pair with a planet-mass companion far out.",
+      "systemName": "VHS 1256-1257 system",
+      "order": 1720,
+      "context": {
+        "order": 1717
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -617196618688199400,
+        -153962425733541150,
+        -146360679945456100
+      ],
+      "presentationToReference": [
+        -0.9455628306905726,
+        0.2175511448574896,
+        -0.24203808086255166,
+        -0.2358748293636436,
+        0.05427243748245972,
+        0.970266750642515,
+        -0.22421863903142292,
+        -0.9745388662854386,
+        0.000003160443266066633
+      ],
+      "orbitUpReference": [
+        -0.2175511448574896,
+        -0.05427243748245972,
+        0.9745388662854386
+      ],
+      "metersPerUnit": 269303.22580645164,
+      "bodyRadiusM": 83484000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

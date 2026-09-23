@@ -1,0 +1,58 @@
+{
+  "id": "arxiv-2110-04307",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Stolker et al. (2021): Characterizing the protolunar disk of the accreting companion GQ Lupi B",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2110.04307"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac2c7f"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2110.04307",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac2c7f",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2110.04307",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 4: GQ Lup B, BT-Settl with extinction fitted to MUSE and SINFONI spectra, Teff 2700 K, radius 3.77 Jupiter radii"
+    },
+    {
+      "path": "src/objects/gq-lup-b/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "path": "src/objects/gq-lup-b/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    },
+    {
+      "path": "src/objects/gq-lup-b/source/content/object.json",
+      "locator": "/panel/moreFacts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal",
+  "creators": [
+    "Tomas Stolker",
+    "Sebastiaan Y. Haffert",
+    "Aurora Y. Kesseli",
+    "Rob G. van Holstein",
+    "Yuhiko Aoyama",
+    "Jarle Brinchmann"
+  ]
+}

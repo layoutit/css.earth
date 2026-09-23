@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "vhs-1256-1257-companion",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "VHS 1256-1257 B",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 83484
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/vhs-1256-1257-companion-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "VHS 1256-1257 B",
+      "classification": "star",
+      "color": "#ffad59",
+      "distanceAu": 4363233.8,
+      "description": "Young dwarf twin of VHS 1256-1257 A, swinging around it every 7.3 years on a very eccentric orbit.",
+      "systemName": "VHS 1256-1257 system",
+      "order": 1721,
+      "context": {
+        "order": 1721
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -617196178490776600,
+        -153962493091321250,
+        -146360886083502370
+      ],
+      "presentationToReference": [
+        -0.9533025267200412,
+        0.22775128633545189,
+        -0.19835232320729737,
+        0.2556634865296962,
+        0.9581815532117895,
+        -0.1285468503702922,
+        -0.1607808266077302,
+        0.17325548377234543,
+        0.9716645836594774
+      ],
+      "orbitUpReference": [
+        -0.22775128633545189,
+        -0.9581815532117895,
+        -0.17325548377234543
+      ],
+      "metersPerUnit": 269303.22580645164,
+      "bodyRadiusM": 83484000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
