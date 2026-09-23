@@ -1297,7 +1297,7 @@ Place each downloaded kernel under the recipe's `kernels/` directory; changed ar
 are refused. The executable oracle is:
 
 ```sh
-node tools/objects/telescopes/sphere-oracle.mts \
+node tools/objects/telescopes/sphere/sphere-oracle.mts \
   europa-map/map.fits.product.json europa-sphere/sphere.product.json \
   europa-band/image.fits output/sphere-oracle
 ```

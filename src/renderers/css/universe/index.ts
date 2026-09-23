@@ -16,4 +16,4 @@ export type { PreparedCataloguePoints, PreparedCataloguePoint } from '../stars/p
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 export { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
 
-export type { WorldContextView, WorldBodyPresentation } from './world-context-planner.js';
+export type { WorldContextView, WorldBodyPresentation } from './world-context/world-context-planner.js';

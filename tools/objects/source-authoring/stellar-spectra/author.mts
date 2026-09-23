@@ -9,7 +9,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadStellarPhotometricColor } from '../../observation/stellar-photometric-color.mts';
+import { loadStellarPhotometricColor } from '../../observation/stellar/stellar-photometric-color.mts';
 import { MARKER_PATH, starMarker } from '../wasp-43/author.mts';
 import { requireArray, requireRecord, requireString } from '../../../sources/source-values.mts';
 
