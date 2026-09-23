@@ -8,7 +8,7 @@ import type { BrowserWindow, SceneFactory } from './browser-types.mts';
 import { errorMessage, record } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
-import type { NavigationOptions } from './navigation-history.mts';
+import { resolveNavigation, type NavigationIntent } from './navigation-request.mts';
 import type { NavigationContent, NavigationContentLoader } from './navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from './object-shell-types.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
@@ -20,9 +20,8 @@ import { createNavigationHistory, bindNavigationLinks } from './navigation-histo
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 import * as applicationWorldContext from './application-world-context.mts';
 import { watchOverviewSelection } from './overview-selection.mts';
-import { systemById } from './object-systems.mts';
 import { SYSTEM_CENTERS } from './system-framing.mts';
-import { overviewScopeFromUrl, preparedFocusFromUrl, withOverviewScope, withPreparedFocus } from './navigation-scope.mts';
+import { overviewScopeFromUrl, preparedFocusFromUrl, withOverviewScope } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
 import { retainInitialScene } from './initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from './navigation-lifecycle.mts';
@@ -166,7 +165,7 @@ export function createSceneRouter({
       }
       const shell = shellOwner.shell!;
       session.shell = shell;
-      const incomingOverview = request ? Boolean(overviewScopeFromUrl(request.url)) : overview;
+      const incomingOverview = request ? request.subject.kind === 'overview' : overview;
       if (selectionTransition) selectionTransition.arrive({ content, overview: incomingOverview });
       else {
         if (content) shell.setObject(content);
@@ -207,7 +206,7 @@ export function createSceneRouter({
       }
       await view.bindInitial(session, { restore: !interrupted });
       if (!scenes.isCurrent(session)) return;
-      activation.connectControls(session);
+      activation.connectControls(session, arrival.feature);
       if (!session.commit()) return false;
       if (mount.datasets) {
         syncCompanionClouds(mount.datasets, world.current);
@@ -220,57 +219,34 @@ export function createSceneRouter({
       hasPresented = true;
       initialScene?.commit();
       if (request) requests.finish(request, interrupted ? 'interrupted' : 'finished');
-      setOverview(Boolean(overviewScopeFromUrl(session.url ?? windowTarget.location?.href ?? 'https://example.test')));
+      setOverview(request ? request.subject.kind === 'overview' : Boolean(overviewScopeFromUrl(session.url ?? windowTarget.location?.href ?? 'https://example.test')));
       syncPlayback();
       connectOverviewSelection(session);
-      if (request && (request.options.history !== 'pop' || interrupted)) session.viewUrl?.flush();
+      if (request && (request.history.history !== 'pop' || interrupted)) session.viewUrl?.flush();
       return !interrupted;
     } catch (error) {
       if (scenes.isCurrent(session)) fail(session, error);
     }
   }
 
-  function navigate(id: string, options: NavigationOptions = {}): Promise<boolean | undefined> {
+  function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
-    // A system overview is already the system-level selection for its star.
-    // Clicking that star drills in instead of fitting it again.
-    const opensOverviewFocus = overview && id === objectId && systemById(objects, id) !== null
-      && overviewScopeFromUrl(scenes.current?.url ?? windowTarget.location.href) === 'system';
-    const overviewTarget = options.overviewScope
-      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: scenes.current?.mount })
-      : null;
-    const centerTarget = overviewTarget?.world ?? (options.recenter
-      ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: scenes.current?.mount, force: true })
-      : options.sceneSelection && !opensOverviewFocus && id !== centeredObjectId && hasPresented
-        ? (navigation.systemTarget?.({ objectId: id, fromId: objectId, mount: scenes.current?.mount })
-          ?? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: scenes.current?.mount })) : null);
-    // First selection frames the object's system; a repeat opens its close-up.
-    centeredObjectId = centerTarget && !options.overview ? id : null;
-    if (centerTarget) options = { ...options, targetWorldCamera: centerTarget,
-      targetFocusPositionM: overviewTarget?.focusPositionM, centerSelection: true };
-    if (centerTarget && options.sceneSelection && systemById(objects, id)) {
-      options = { ...options, overview: true };
-    }
-    const cancelledFlight = requests.current !== null && !requests.current.options.centerSelection && !options.centerSelection;
+    const source = scenes.current;
+    const resolved = resolveNavigation(intent, { object, objects, navigation, current: {
+      objectId, href: windowTarget.location.href, url: source?.url ?? windowTarget.location.href,
+      overview, centeredObjectId, hasPresented, reuseScene: !!source && objectId === id && scenes.state.kind === 'ready',
+      mount: source?.mount ?? null, pending: requests.current,
+    } });
+    centeredObjectId = resolved.centeredObjectId;
     // Snapshot the departed view before cancelling: a superseded navigation records nothing.
-    const mode = options.history ?? 'push';
-    if (mode === 'pop') historyOwner?.remember();
+    if (resolved.destination.history.history === 'pop') historyOwner?.remember();
     else historyOwner?.checkpoint();
     requests.cancel();
     world.current?.suspendFocus?.();
     scenes.current?.setViewUrl(null);
-    let url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
-    if (!options.url) {
-      // A feature belongs to the page that named it; the next object starts without one.
-      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
-      url = withDataset(withPreparedFocus(url, null, null), null);
-      withOverviewScope(url, options.overview ? options.overviewScope ?? 'system' : null);
-      if (options.feature) url.searchParams.set('feature', options.feature);
-    }
-    const request = requests.begin({ id, cancelledFlight,
-      url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) });
+    const request = requests.begin({ ...resolved.destination, timing: createNavigationTiming(windowTarget, objectId, id) });
     mountTask = transition(request, object);
     return mountTask;
   }
@@ -279,19 +255,18 @@ export function createSceneRouter({
     if (!navigation) return false;
     const source = scenes.current;
     try {
-      const options = request.options;
-      world.current?.previewSelection?.(options.overview ? null : object.id);
+      world.current?.previewSelection?.(request.subject.kind === 'overview' ? null : object.id);
       request.own(() => {
         if (!requests.current || requests.owns(request)) world.current?.previewSelection?.();
       });
-      const selectionTransition = shellOwner?.shell?.beginNavigation?.(options.overview
-        ? { kind: 'overview', overview: { scope: options.overviewScope ?? 'system', systemId: object.id },
-          preview: Boolean(options.recenter || options.centerSelection) }
-        : { kind: 'object', object, targetWorldCamera: options.targetWorldCamera });
+      const selectionTransition = shellOwner?.shell?.beginNavigation?.(request.subject.kind === 'overview'
+        ? { kind: 'overview', overview: { scope: request.subject.scope, systemId: object.id },
+          preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
+        : { kind: 'object', object, targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
       if (selectionTransition) request.own(() => selectionTransition.dispose());
-      if (source && objectId === object.id && scenes.state.kind === 'ready') {
+      if (source && request.scene === 'reuse') {
         return await focusExistingScene({ session: source, request, selectionTransition, navigation, requests, view,
-          windowTarget, getOverview: () => overview, getReducedMotion: () => reducedMotionActive,
+          windowTarget, getReducedMotion: () => reducedMotionActive,
           setOverview, syncPlayback });
       }
       syncPlayback();
@@ -307,7 +282,7 @@ export function createSceneRouter({
       requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
       return result === true;
     } catch (error) {
-      const interruptedSelection = objectId === object.id && !request.options.url && record(error) &&
+      const interruptedSelection = objectId === object.id && request.origin === 'selection' && record(error) &&
         error.name === 'AbortError' && error.preserveView === true;
       if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
@@ -325,8 +300,8 @@ export function createSceneRouter({
           const token = drawn.searchParams.get('v');
           if (token) selected.searchParams.set('v', token); else selected.searchParams.delete('v');
           source.url = selected.href;
-          historyOwner?.commit(selected.href, request.options);
-          setOverview(Boolean(overviewScopeFromUrl(selected.href)));
+          historyOwner?.commit(selected.href, request.history);
+          setOverview(request.subject.kind === 'overview');
         } else if (captured) {
           // The source still owns the last drawn camera when destination loading
           // fails. Rebinding its URL writer must not replay the departure pose.
@@ -419,7 +394,7 @@ export function createSceneRouter({
           session.viewUrl?.flush();
           return;
         }
-        void navigate(next.objectId, { overview: true, history: 'replace', preserveView: true });
+        void navigate(next.objectId, { kind: 'overview', scope: 'system', camera: 'preserve' });
       },
     }));
   }

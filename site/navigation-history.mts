@@ -1,11 +1,8 @@
-import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
-import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { BrowserWindow } from './browser-types.mts';
 import { record } from './browser-types.mts';
-export interface NavigationOptions { history?: 'push' | 'pop' | 'replace'; entry?: string; url?: string; feature?: string; overview?: boolean; overviewScope?: OverviewScope; recenter?: boolean; sceneSelection?: boolean; centerSelection?: boolean; preserveView?: boolean; targetWorldCamera?: WorldCameraPose; targetFocusPositionM?: PositionM; }
-type Navigate = (id: string, options: NavigationOptions) => unknown;
+import type { NavigationHistory, NavigationIntent } from './navigation-request.mts';
+type Navigate = (id: string, intent: NavigationIntent) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; }
 function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
   if (!target || !('closest' in target) || typeof target.closest !== 'function') return null;
@@ -15,7 +12,6 @@ function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
 }
 const navigationId = (event: Event): unknown => 'detail' in event && record(event.detail) ? event.detail.objectId : undefined;
 const navigationFeature = (event: Event): string | undefined => 'detail' in event && record(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
-import { overviewScopeFromUrl } from './navigation-scope.mts';
 
 /** Standalone scenes replace the current URL without creating application history entries. */
 export function replaceNavigationUrl(windowTarget: Window, url: string) {
@@ -54,19 +50,20 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
     if (navigating() && departure && previous.get(entry) === targetEntry) {
       const location = new URL(departure, windowTarget.location.href);
       const object = objects.find(object => object.route === location.pathname);
-      if (object) { Promise.resolve(navigate(object.id, { history: 'push', url: location.href })).catch(onError); return; }
+      if (object) { Promise.resolve(navigate(object.id, { kind: 'history', url: location.href, history: { history: 'push' } })).catch(onError); return; }
     }
     const url = snapshots.get(targetEntry) ?? (typeof state.cssEarthView === 'string' ? state.cssEarthView : undefined) ?? windowTarget.location.href;
     const location = new URL(url, windowTarget.location.href);
     const object = objects.find(object => object.route === location.pathname);
     if (!object) return;
-    Promise.resolve(navigate(object.id, { history: 'pop', url: location.href, entry: targetEntry })).catch(onError);
+    Promise.resolve(navigate(object.id, { kind: 'history', url: location.href, history: { history: 'pop', entry: targetEntry } })).catch(onError);
   };
   checkpoint();
   windowTarget.addEventListener('popstate', onPopState);
   return Object.freeze({
     checkpoint, remember,
-    commit(url: string, { history = 'push', entry: targetEntry }: Pick<NavigationOptions, 'history' | 'entry'> = {}) {
+    commit(url: string, action: NavigationHistory = { history: 'push' }) {
+      const { history } = action, targetEntry = action.history === 'pop' ? action.entry : undefined;
       if (disposed) return;
       if (history === 'pop' && !targetEntry) throw new TypeError('History restoration requires an entry.');
       const from = entry;
@@ -91,7 +88,7 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     event.preventDefault();
     const feature = navigationFeature(event);
     // A feature selection lands on the body and lets its runtime fly to the feature; no system framing first.
-    Promise.resolve(navigate(id, feature ? { feature } : { sceneSelection: true })).catch(onError);
+    Promise.resolve(navigate(id, feature ? { kind: 'feature', id: feature } : { kind: 'object' })).catch(onError);
   };
   const click = (event: MouseEvent) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -111,11 +108,7 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
       }
     }
     event.preventDefault();
-    const scope = overviewScopeFromUrl(url.href);
-    const options: NavigationOptions = scope && !url.searchParams.has('v')
-      ? { overview: true, overviewScope: scope }
-      : url.search || url.hash ? { url: url.href } : { sceneSelection: true };
-    Promise.resolve(navigate(object.id, options)).catch(onError);
+    Promise.resolve(navigate(object.id, { kind: 'link', url: url.href })).catch(onError);
   };
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);

@@ -6,7 +6,8 @@ import { createNavigationLifecycle } from '../navigation-lifecycle.mts';
 function harness() {
   const errors: unknown[] = [], cancelled: string[] = [], marks: string[] = [];
   const owner = createNavigationLifecycle({ onError: error => errors.push(error), onCancel: request => cancelled.push(request.id) });
-  const begin = (id: string) => owner.begin({ id, url: `/${id}/`, options: {}, cancelledFlight: false,
+  const begin = (id: string) => owner.begin({ id, url: `/${id}/`, subject: { kind: 'object' }, camera: { kind: 'preserve' },
+    history: { history: 'push' }, scene: 'replace', origin: 'selection', feature: null,
     timing: { mark: phase => marks.push(`${id}:${phase}`) } });
   return { owner, begin, errors, cancelled, marks };
 }
