@@ -5,13 +5,9 @@ import { errorMessage, record } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { NavigationOptions } from './navigation-history.mts';
-import type { NavigationContent, ShellNavigationTransition } from './object-shell-client.mts';
+import type { NavigationContent, NavigationContentLoader } from './navigation-content.mts';
+import type { ObjectShell, ShellNavigationTransition } from './object-shell-types.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
-type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
-type Shell = ReturnType<typeof mountObjectShell>;
-export type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
-export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
-export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountObjectShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { readObjectDiagnostics } from '../src/renderers/css/dist/index.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { objectAdapter } from "./object-adapter.mts";
@@ -33,9 +29,26 @@ import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mt
 import { retainInitialScene } from './initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from './navigation-lifecycle.mts';
 import { createWorldPreferences } from './world-preferences.mts';
+import { syncCompanionClouds, selectSceneDataset } from './scene-datasets.mts';
 import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
 import { readPreparedDescriptor } from './prepared-descriptor.mts';
 
+type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
+export type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
+export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
+export interface RouterOptions {
+  stage: HTMLElement;
+  objectId: string;
+  loadObject?(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>;
+  documentTarget?: Document;
+  windowTarget?: BrowserWindow;
+  mountShell?: typeof mountObjectShell;
+  reportError?(error: unknown): void;
+  navigation?: Navigation | null;
+  objects?: readonly ObjectEntry[];
+  loadContent?: NavigationContentLoader | null;
+  persistentWorldContext?: WorldContextOwner | null;
+}
 
 export function createSceneRouter({
   stage,
@@ -53,11 +66,11 @@ export function createSceneRouter({
   const scenes = createSceneSessions();
   let mountTask: Promise<boolean | undefined> | null = null;
   let motionEnabled = false;
-  const preferences = createWorldPreferences(documentTarget);
+  const preferences = createWorldPreferences();
   let hasPresented = false;
   const initialScene = retainInitialScene(stage);
   let destroyed = false;
-  let shellOwner: { shell: Shell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
+  let shellOwner: { shell: ObjectShell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
   let publishedBodyState = '';
   let centeredObjectId: string | null = null;
   let overview = Boolean(overviewScopeFromUrl(windowTarget.location?.href ?? 'https://example.test'));
@@ -128,7 +141,7 @@ export function createSceneRouter({
         session.viewUrl?.schedule();
       };
       if (!shellOwner) {
-        const owner: { shell: Shell | null } = { shell: null };
+        const owner: { shell: ObjectShell | null } = { shell: null };
         shellOwner = owner;
         owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled,
           ...preferences.bind(() => shellOwner === owner && scenes.current !== null, () => worldContextMount),
@@ -199,7 +212,7 @@ export function createSceneRouter({
       }
       const datasetSignal = request ? AbortSignal.any([request.signal, session.signal]) : session.signal;
       try {
-        const selected = session.url ? await selectDataset(session, session.url, datasetSignal, { initial: true }) : true;
+        const selected = session.url ? await selectSceneDataset(session, session.url, datasetSignal, { initial: true }) : true;
         if (!scenes.isCurrent(session) || datasetSignal.aborted) return false;
         if (!selected) throw new Error('Dataset selection was superseded.');
       } catch (error) {
@@ -266,10 +279,10 @@ export function createSceneRouter({
       }
       if (!session.commit()) return false;
       if (mount.datasets) {
-        syncCompanionClouds(mount.datasets);
+        syncCompanionClouds(mount.datasets, worldContextMount);
         session.own(mount.datasets.subscribe(() => {
           if (!scenes.isCurrent(session) || requests.current || scenes.state.kind !== 'ready') return;
-          syncCompanionClouds(mount.datasets!);
+          syncCompanionClouds(mount.datasets!, worldContextMount);
           syncDatasetUrl(session);
         }));
       }
@@ -294,19 +307,6 @@ export function createSceneRouter({
     return url.pathname + url.search + url.hash;
   }
 
-  /** A dataset of this body may ask for a cloud that accompanies it. Only the selected one is drawn. */
-  function syncCompanionClouds(datasets: NonNullable<ObjectSceneLifecycle['datasets']>) {
-    if (!datasets.volumes.length) return;
-    const selected = datasets.volumeOf(datasets.current() ?? datasets.defaultId);
-    // One bank carries every cloud of its object and draws one lens at a time, so each bank is
-    // answered once: the selected dataset names the lens, and a bank no dataset asks for stays dark.
-    for (const objectId of new Set(datasets.volumes.map(volume => volume.objectId))) {
-      const enabled = selected?.objectId === objectId;
-      if (enabled) worldContextMount?.selectVolumeLens?.(objectId, selected!.lensId);
-      worldContextMount?.setVolumeLensEnabled?.(objectId, enabled);
-    }
-  }
-
   function syncDatasetUrl(session: Session) {
     const datasets = session.mount?.datasets;
     if (!datasets || !session.url || !scenes.isCurrent(session)) return;
@@ -316,23 +316,6 @@ export function createSceneRouter({
     session.url = url.href;
     historyOwner?.commit(url.href, { history: 'replace' });
     session.shell?.setDatasetNotice?.(null);
-  }
-
-  function selectDataset(session: Session, href: string, signal: AbortSignal, { initial = false } = {}): boolean | Promise<boolean> {
-    const { id, requested } = readDatasetUrl(new URL(href));
-    const datasets = session.mount?.datasets;
-    if (requested && (!datasets || !datasets.ids.includes(id!))) throw new RangeError(`Dataset “${id}” is unavailable on this object.`);
-    if (!datasets || initial && !requested) return true;
-    const selected = id ?? datasets.defaultId;
-    const finish = (committed: boolean) => {
-      if (!committed || signal.aborted) return false;
-      session.shell?.setDatasetNotice?.(null);
-      if (requested) session.shell?.showDataset?.();
-      return true;
-    };
-    // Selecting the committed default also cancels an older, still decoding
-    // manual choice. Reading current() alone cannot establish that no work is pending.
-    return datasets.select(selected, { signal }).then(finish);
   }
 
   function navigate(id: string, options: NavigationOptions = {}): Promise<boolean | undefined> {
@@ -397,7 +380,7 @@ export function createSceneRouter({
         const destination = new URL(request.url);
         const datasetLink = Boolean(request.options.url) &&
           (readDatasetUrl(destination).requested || isFocusDatasetUrl(destination));
-        const datasetSelection = selectDataset(source, request.url, request.signal);
+        const datasetSelection = selectSceneDataset(source, request.url, request.signal);
         if (!(typeof datasetSelection === 'boolean' ? datasetSelection : await datasetSelection)) {
           if (!requests.owns(request)) return false;
           requests.finish(request, 'cancelled');
@@ -646,7 +629,7 @@ export function createSceneRouter({
         }
         worldContextMount = value;
         // The world mounts after the scene is ready, so a dataset that asks for a companion cloud asks again here.
-        if (scenes.current?.mount?.datasets) syncCompanionClouds(scenes.current.mount.datasets);
+        if (scenes.current?.mount?.datasets) syncCompanionClouds(scenes.current.mount.datasets, value);
         preferences.apply(value);
         return value;
       }).catch(error => {

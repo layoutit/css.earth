@@ -24,3 +24,12 @@ export function selectedShellSubject(selection: ShellSelection): ShellSubject {
   if (selection.overview) return { kind: 'overview', overview: selection.overview };
   return { kind: 'object', objectId: selection.objectId };
 }
+
+/** Stable identity shared by source links and per-selection reading positions. */
+export function shellSubjectKey(subject: ShellSubject): string {
+  switch (subject.kind) {
+    case 'focus': return `focus:${subject.record.id}`;
+    case 'object': return `object:${subject.objectId}`;
+    case 'overview': return `overview:${subject.overview.scope === 'system' ? `system:${subject.overview.systemId}` : subject.overview.scope}`;
+  }
+}
