@@ -60,9 +60,21 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const cameraModule = await import(pathToFileURL(resolve(projectRoot, 'src/platform/default-camera.mts')).href) as typeof import('../../src/platform/default-camera.mts');
   const surfacesReport = await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8').then(JSON.parse, () => null);
   const terrestrial = sources.get('terrestrial');
-  const angles = cameraModule.prepareDefaultCameraAngles(descriptor.id, {
-    observation: terrestrial ? cameraModule.photographDirections(descriptor.id, terrestrial, surfacesReport) : undefined,
-    light: (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun' });
+  // A flyby body without photograph frames faces the side its spacecraft approached (tools/spice/approach.mts).
+  const approachSource = sources.get('approach');
+  const approachModule = approachSource ? await import(pathToFileURL(resolve(projectRoot, 'tools/spice/approach.mts')).href) as typeof import('../spice/approach.mts') : undefined;
+  const observation = terrestrial ? cameraModule.photographDirections(descriptor.id, terrestrial, surfacesReport)
+    : approachModule ? [(await approachModule.spacecraftApproach(approachModule.parseApproachRecipe(approachSource, `${descriptor.id} approach`))).direction] : undefined;
+  const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
+  // A lit body without photograph frames opens on the side of its default map that has data.
+  const coverageModule = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/default-lens-coverage.mts')).href) as typeof import('./default-lens-coverage.mts');
+  const coverage = !observation?.length && light === 'sun' ? await coverageModule.readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
+  const angles = cameraModule.prepareDefaultCameraAngles(descriptor.id, { observation, light, coverage: coverage && coverageModule.coverageDirection(coverage) });
+  if (coverage) {
+    const shown = coverageModule.visibleCoverageShare(coverage, cameraModule.openingDirection(descriptor.id, angles));
+    const design = coverageModule.visibleCoverageShare(coverage, cameraModule.openingDirection(descriptor.id, cameraModule.LIT_DEFAULT_VIEW));
+    if (shown < design) throw new Error(`${descriptor.id}: the default camera (yaw ${angles.defaultControlYawDegrees.toFixed(1)}) shows ${(shown * 100).toFixed(1)}% of the ${coverage.lens} map's data, less than the design pose's ${(design * 100).toFixed(1)}%.`);
+  }
   // Only a solved lane takes the derived pose; a typed lane keeps the camera its own bakes were made for.
   const posed = solved ? poseDefaultCamera(oriented, physical, angles) : null;
   const camera = posed?.camera ?? physical;
