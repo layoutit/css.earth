@@ -27,7 +27,7 @@ test('WWT FITS keeps original numeric bytes and reports missing scientific metad
       imagesets: [{ name: 'Science', fileType: '.fits', dataSetType: 'Sky', projection: 'Tan',
         urlTemplate: 'http://example.org/{1}/{3}/{3}_{2}.fits', position: { tileLevels: 1, centerXDegrees: 0, centerYDegrees: 0 } }] }));
     const requested: string[] = [], result = await acquireWwtFits(snapshot, 'Science', 0, 0, 0, resolve(root, 'result'), async url => {
-      requested.push(url); return new Response(bytes);
+      requested.push(url); return new Response(new Uint8Array(bytes));
     });
     assert.deepEqual(requested, ['https://example.org/0/0/0_0.fits']);
     assert.equal(sha(await readFile(result.source)), sha(bytes));
@@ -39,8 +39,8 @@ test('WWT FITS keeps original numeric bytes and reports missing scientific metad
     const receipt = JSON.parse(await readFile(result.receipt, 'utf8')) as { inputs: { identity: string; sha256: string }[]; outputs: { path: string; sha256: string }[] };
     assert.equal(receipt.inputs.find(item => item.identity.endsWith('.fits'))?.sha256, sha(bytes));
     assert.equal(receipt.outputs.find(item => item.path === 'source.fits')?.sha256, sha(bytes));
-    await assert.rejects(acquireWwtFits(snapshot, 'Science', 1, 2, 0, resolve(root, 'outside'), async () => new Response(bytes)), /outside this level/u);
+    await assert.rejects(acquireWwtFits(snapshot, 'Science', 1, 2, 0, resolve(root, 'outside'), async () => new Response(new Uint8Array(bytes))), /outside this level/u);
     await writeFile(resolve(root, 'collection.wtml'), 'changed');
-    await assert.rejects(acquireWwtFits(snapshot, 'Science', 0, 0, 0, resolve(root, 'changed'), async () => new Response(bytes)), /differs from the pinned catalog/u);
+    await assert.rejects(acquireWwtFits(snapshot, 'Science', 0, 0, 0, resolve(root, 'changed'), async () => new Response(new Uint8Array(bytes))), /differs from the pinned catalog/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
