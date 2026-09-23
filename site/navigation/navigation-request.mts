@@ -49,7 +49,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
 }): { destination: ResolvedNavigation; centeredObjectId: string | null } {
   if (intent.kind === 'link') {
     const link = new URL(intent.url, current.href), selection = readNavigationSelection(link, object.id, objects);
-    if (selection.subject.kind === 'overview' && !selection.savedView) {
+    if (selection.subject.kind === 'overview' && !selection.savedView && !selection.dataset) {
       intent = { kind: 'overview', scope: selection.subject.overview.scope, camera: 'frame' };
     } else if (!link.search && !link.hash) intent = { kind: 'object' };
   }
