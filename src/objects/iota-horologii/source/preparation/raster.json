@@ -1,0 +1,1520 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/iota-horologii/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "iota-horologii-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssiota-horologii-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "qualification": "Uniform photosphere colour from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017) computes from PHOENIX model atmospheres for the TESS band, at the star's temperature and gravity from Bruntt et al. (2010): a model, because no transit fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "grid": {
+            "teffK": 6080,
+            "logg": 4.399,
+            "models": {
+              "Type": "q",
+              "Mod": "PC"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "aLSM",
+            "u2": "bLSM"
+          }
+        }
+      }
+    },
+    {
+      "id": "radial-field-01",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_01.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-01",
+        "label": "Oct 2015",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_01.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 1 (Oct 2015, campaign day 0). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Oct 2015",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-02",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_02.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-02",
+        "label": "Dec 2015",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_02.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 2 (Dec 2015, campaign day 74.75). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Dec 2015",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-03",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_03.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-03",
+        "label": "Feb 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_03.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 3 (Feb 2016, campaign day 135.76). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Feb 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-04",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_04.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-04",
+        "label": "Jun 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_04.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 4 (Jun 2016, campaign day 262.14). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Jun 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-05",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_05.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-05",
+        "label": "Aug 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_05.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 5 (Aug 2016, campaign day 319.04). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Aug 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-06",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_06.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-06",
+        "label": "Sep 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_06.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 6 (Sep 2016, campaign day 345.01). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Sep 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-07",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_07.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-07",
+        "label": "Oct 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_07.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 7 (Oct 2016, campaign day 376.0). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Oct 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-08",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_08.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-08",
+        "label": "Dec 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_08.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 8 (Dec 2016, campaign day 436.86). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Dec 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-09",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_09.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-09",
+        "label": "Feb 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_09.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 9 (Feb 2017, campaign day 483.78). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Feb 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-10",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_10.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-10",
+        "label": "Jul 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_10.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 10 (Jul 2017, campaign day 634.11). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Jul 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-11",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_11.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-11",
+        "label": "Aug 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_11.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 11 (Aug 2017, campaign day 661.11). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Aug 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-12",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_12.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-12",
+        "label": "Sep 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_12.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 12 (Sep 2017, campaign day 713.1). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Sep 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-13",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_13.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-13",
+        "label": "Nov 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_13.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 13 (Nov 2017, campaign day 768.82). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Nov 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-14",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_14.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-14",
+        "label": "Dec 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_14.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 14 (Dec 2017, campaign day 809.83). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Dec 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-15",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_15.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-15",
+        "label": "Feb 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_15.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 15 (Feb 2018, campaign day 854.75). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Feb 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-16",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_16.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-16",
+        "label": "Jun 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_16.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 16 (Jun 2018, campaign day 992.12). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Jun 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-17",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_17.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-17",
+        "label": "Aug 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_17.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 17 (Aug 2018, campaign day 1028.09). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Aug 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "radial-field-18",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_18.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-18",
+        "label": "Sep 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_18.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Radial field of the large-scale field from the unconstrained ZDI reconstruction of epoch 18 (Sep 2018, campaign day 1063.07). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Sep 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-01",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_01.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-01",
+        "label": "Oct 2015",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_01.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 1 (Oct 2015, campaign day 0). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Oct 2015",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-02",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_02.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-02",
+        "label": "Dec 2015",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_02.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 2 (Dec 2015, campaign day 74.75). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Dec 2015",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-03",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_03.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-03",
+        "label": "Feb 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_03.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 3 (Feb 2016, campaign day 135.76). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Feb 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-04",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_04.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-04",
+        "label": "Jun 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_04.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 4 (Jun 2016, campaign day 262.14). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Jun 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-05",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_05.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-05",
+        "label": "Aug 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_05.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 5 (Aug 2016, campaign day 319.04). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Aug 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-06",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_06.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-06",
+        "label": "Sep 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_06.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 6 (Sep 2016, campaign day 345.01). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Sep 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-07",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_07.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-07",
+        "label": "Oct 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_07.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 7 (Oct 2016, campaign day 376.0). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Oct 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-08",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_08.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-08",
+        "label": "Dec 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_08.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 8 (Dec 2016, campaign day 436.86). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Dec 2016",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-09",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_09.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-09",
+        "label": "Feb 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_09.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 9 (Feb 2017, campaign day 483.78). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Feb 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-10",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_10.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-10",
+        "label": "Jul 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_10.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 10 (Jul 2017, campaign day 634.11). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Jul 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-11",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_11.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-11",
+        "label": "Aug 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_11.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 11 (Aug 2017, campaign day 661.11). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Aug 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-12",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_12.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-12",
+        "label": "Sep 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_12.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 12 (Sep 2017, campaign day 713.1). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Sep 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-13",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_13.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-13",
+        "label": "Nov 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_13.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 13 (Nov 2017, campaign day 768.82). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Nov 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-14",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_14.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-14",
+        "label": "Dec 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_14.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 14 (Dec 2017, campaign day 809.83). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Dec 2017",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-15",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_15.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-15",
+        "label": "Feb 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_15.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 15 (Feb 2018, campaign day 854.75). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Feb 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-16",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_16.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-16",
+        "label": "Jun 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_16.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 16 (Jun 2018, campaign day 992.12). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Jun 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-17",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_17.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-17",
+        "label": "Aug 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_17.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 17 (Aug 2018, campaign day 1028.09). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Aug 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    },
+    {
+      "id": "azimuthal-field-18",
+      "output": "iota-horologii-surface-{id}{suffix}.webp",
+      "thumbnail": "iota-horologii-lens-{id}.webp",
+      "source": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_18.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-18",
+        "label": "Sep 2018",
+        "format": "tecplot-lonlat-map",
+        "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_18.dat",
+        "variable": "B<sub>A</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "alvarado-gomez-2025-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-12",
+          "0",
+          "+12"
+        ],
+        "description": "Azimuthal field of the large-scale field from the unconstrained ZDI reconstruction of epoch 18 (Sep 2018, campaign day 1063.07). Black line: 60 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Sep 2018",
+        "sourceUrl": "https://zenodo.org/records/17251923"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "iota-horologii-context-{id}{suffix}.webp",
+    "limbOutput": "iota-horologii-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssiota-horologii-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

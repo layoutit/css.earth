@@ -1,0 +1,35 @@
+{
+  "id": "source-iota-horologii-gaia-dr3-source",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "ι Horologii · iota horologii gaia dr3 source",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/iota-horologii/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
+      "scope": "The iota horologii gaia dr3 source input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

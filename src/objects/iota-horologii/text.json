@@ -1,0 +1,217 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "iota-horologii",
+  "card": {
+    "text": "Young Sun-like star 17 parsecs away whose magnetic field was mapped 18 times over three years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-03146",
+        "url": "https://arxiv.org/abs/2510.03146",
+        "label": "Alvarado-Gómez et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "the technique of Zeeman-Doppler Imaging (ZDI) was used to reconstruct 18 maps of the large-scale surface magnetic field of the star"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ι Horologii is a star like the young Sun, about 600 million years old. Mapped 18 times over three years, its magnetic field flips polarity roughly every two years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-03146",
+        "url": "https://arxiv.org/abs/2510.03146",
+        "label": "Alvarado-Gómez et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "determining a magnetic polarity reversal timescale of roughly 100 rotations (~773 d)"
+      }
+    ]
+  },
+  "datasets": {
+    "radial-field-01": {
+      "title": "Radial field, Oct 2015",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-02": {
+      "title": "Radial field, Dec 2015",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-03": {
+      "title": "Radial field, Feb 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-04": {
+      "title": "Radial field, Jun 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-05": {
+      "title": "Radial field, Aug 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-06": {
+      "title": "Radial field, Sep 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-07": {
+      "title": "Radial field, Oct 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-08": {
+      "title": "Radial field, Dec 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-09": {
+      "title": "Radial field, Feb 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-10": {
+      "title": "Radial field, Jul 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-11": {
+      "title": "Radial field, Aug 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-12": {
+      "title": "Radial field, Sep 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-13": {
+      "title": "Radial field, Nov 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-14": {
+      "title": "Radial field, Dec 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-15": {
+      "title": "Radial field, Feb 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-16": {
+      "title": "Radial field, Jun 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-17": {
+      "title": "Radial field, Aug 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "radial-field-18": {
+      "title": "Radial field, Sep 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-01": {
+      "title": "Azimuthal field, Oct 2015",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-02": {
+      "title": "Azimuthal field, Dec 2015",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-03": {
+      "title": "Azimuthal field, Feb 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-04": {
+      "title": "Azimuthal field, Jun 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-05": {
+      "title": "Azimuthal field, Aug 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-06": {
+      "title": "Azimuthal field, Sep 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-07": {
+      "title": "Azimuthal field, Oct 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-08": {
+      "title": "Azimuthal field, Dec 2016",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-09": {
+      "title": "Azimuthal field, Feb 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-10": {
+      "title": "Azimuthal field, Jul 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-11": {
+      "title": "Azimuthal field, Aug 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-12": {
+      "title": "Azimuthal field, Sep 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-13": {
+      "title": "Azimuthal field, Nov 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-14": {
+      "title": "Azimuthal field, Dec 2017",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-15": {
+      "title": "Azimuthal field, Feb 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-16": {
+      "title": "Azimuthal field, Jun 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-17": {
+      "title": "Azimuthal field, Aug 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "azimuthal-field-18": {
+      "title": "Azimuthal field, Sep 2018",
+      "detail": "18 epochs",
+      "summary": "The star's magnetic field, mapped 18 times from 2015 to 2018 from how it polarises starlight."
+    },
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of Gaia's spectrum of the star."
+    }
+  }
+}

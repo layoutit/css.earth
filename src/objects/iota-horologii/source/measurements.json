@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "iota-horologii",
+  "angularDiameterMas": 0.622,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 807,012.0 km at 17.357 pc = 0.622 mas. No interferometric diameter is used.",
+  "distanceParsecs": 17.357150201833974,
+  "distanceSource": "Gaia DR3 parallax 57.6131 +/- 0.0383 mas (photometry/gaia-dr3-source.csv), no zero-point correction",
+  "radiusKm": 807012,
+  "radiusSource": "Radius 1.16 +/- 0.04 solar radii and mass 1.23 +/- 0.12 solar masses: Bruntt et al. (2010, MNRAS 405, 1907), as tabulated by Alvarado-Gomez et al. (2018, MNRAS 473, 4326; arXiv:1710.02438), Table 1, the values the ZDI maps of this package were computed with. Temperature 6080 +/- 80 K from the same table. presentationUp: the display axis is a sky-plane convention.",
+  "effectiveTemperatureK": 6080,
+  "effectiveTemperatureSource": "Bruntt et al. (2010), MNRAS 405, 1907: 6,080 +/- 80 K, as tabulated by Alvarado-Gomez et al. (2018), Table 1 (https://arxiv.org/abs/1710.02438)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
+  }
+}

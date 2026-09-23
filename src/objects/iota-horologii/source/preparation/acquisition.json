@@ -1,0 +1,228 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-source.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT source_id, ref_epoch, ra, dec, parallax, parallax_error, pmra, pmdec, radial_velocity, radial_velocity_error, phot_g_mean_mag, bp_rp, teff_gspphot, has_xp_sampled FROM gaiadr3.gaia_source WHERE source_id = 4745373133284418816"
+      },
+      "requiredPrefix": "source_id,"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4745373133284418816&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2017-tess-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6000..6250&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_01.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_01.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_02.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_02.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_03.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_03.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_04.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_04.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_05.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_05.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_06.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_06.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_07.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_07.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_08.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_08.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_09.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_09.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_10.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_10.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_11.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_11.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_12.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_12.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_13.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_13.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_14.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_14.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_15.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_15.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_16.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_16.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_17.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_17.dat"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_18.dat",
+      "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "member": "iHor_ZDI-Unconstrained_Epoch_18.dat"
+    }
+  ]
+}

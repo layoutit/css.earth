@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "iota-horologii",
+  "spectrum": "gaia-xp-sampled",
+  "sampledSpectrum": {
+    "source": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; BP/RP spectra: De Angeli et al. (2023), A&A 674, A2, and externally calibrated sampled spectra: Montegriffo et al. (2023), A&A 674, A3",
+    "path": "photometry/gaia-dr3-xp-sampled.csv",
+    "service": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4745373133284418816&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+    "checked": "2026-09-23",
+    "sourceId": "4745373133284418816",
+    "sampling": "343 samples from 336 to 1020 nm in 2 nm steps, flux in W m^-2 nm^-1 (the DataLink default sampling)",
+    "note": "Gaia's own low-resolution spectrum of the star, calibrated to absolute flux. Its samples at the even wavelengths from 380 to 780 nm are weighted by the CIE 1931 2-degree observer. The range in the prepared report is the colour of the spectrum moved one standard error down and up at every sample."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}
