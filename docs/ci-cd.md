@@ -34,9 +34,9 @@ group and can supersede an older deployment.
 - PR jobs restore the prepared inputs their selected checks need, but do not run
   an exhaustive R2 publication sweep. Contributors publishing an object run
   `node tools/assets/check-assets-published.mts --object=<id>` themselves. The
-  default R2 deploy additionally runs `pnpm check:deploy-assets` and
-  `pnpm check:assets-published --require-verified`; missing or unverified keys
-  block publication. The nightly sweep checks every key again. See the
+  default R2 deploy downloads and sha-verifies every inventoried key from R2 in
+  its setup, with no restored cache, and runs `pnpm check:deploy-assets`; a key
+  R2 does not serve blocks publication. The nightly sweep checks every key again. See the
   [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 - Gate on what ships; report what is merely incomplete. A merge-required check may
   only assert something whose failure means the shipped application is broken, wrong

@@ -71,9 +71,9 @@ inventory; R2 holds the bytes.
 
 Skipping publication can leave a PR green but block the later deployment.
 The default deploy serves textures from R2 without a `public/scenes` copy,
-checks build references with `pnpm check:deploy-assets`, and runs
-`pnpm check:assets-published --require-verified`. Missing or unverified keys
-stop that deployment. Merging does not deploy: production requires manual
+downloads and sha-verifies every inventoried key from R2 while it builds, and
+checks build references with `pnpm check:deploy-assets`. A key R2 does not
+serve stops that deployment. Merging does not deploy: production requires manual
 dispatch of `.github/workflows/deploy.yml`.
 
 ### If you do not have R2 credentials
