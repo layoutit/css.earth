@@ -2,8 +2,16 @@
   "id": "publication-2017natas-1e-56g",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2017NatAs...1E..56G, as the NASA Exoplanet Archive cites it.",
+  "title": "Gillon et al. (2017): Two massive rocky planets transiting a K-dwarf 6.5 parsecs away",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1703.01430"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41550-017-0056"
+    },
     {
       "type": "bibliography-key",
       "value": "2017NatAs...1E..56G"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41550-017-0056",
+      "label": "Nature Astronomy 1 0056"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Gillon et al. (2017), Nature Astronomy 1 0056",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G"
     }
+  ],
+  "publisher": "Nature Astronomy 1 0056",
+  "creators": [
+    "Michaël Gillon",
+    "Brice-Olivier Demory",
+    "Valérie Van Grootel",
+    "et al."
   ],
   "publicationDate": "2017"
 }

@@ -2,8 +2,16 @@
   "id": "publication-2024a-a-681a-55h",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2024A&A...681A..55H, as the NASA Exoplanet Archive cites it.",
+  "title": "Heidari et al. (2024): The SOPHIE search for northern extrasolar planets",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2311.13513"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202347897"
+    },
     {
       "type": "bibliography-key",
       "value": "2024A&A...681A..55H"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202347897",
+      "label": "Astronomy & Astrophysics 681 A55"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Heidari et al. (2024), Astronomy & Astrophysics 681 A55",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H"
     }
+  ],
+  "publisher": "Astronomy & Astrophysics 681 A55",
+  "creators": [
+    "N. Heidari",
+    "I. Boisse",
+    "N. C. Hara",
+    "et al."
   ],
   "publicationDate": "2024"
 }

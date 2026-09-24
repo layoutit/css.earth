@@ -2,8 +2,16 @@
   "id": "publication-2017aj-154-5h",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2017AJ....154....5H, as the NASA Exoplanet Archive cites it.",
+  "title": "Hadden & Lithwick (2017): Kepler Planet Masses and Eccentricities from TTV Analysis",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1611.03516"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aa71ef"
+    },
     {
       "type": "bibliography-key",
       "value": "2017AJ....154....5H"
@@ -11,26 +19,36 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aa71ef",
+      "label": "The Astronomical Journal 154 5"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Hadden & Lithwick (2017), The Astronomical Journal 154 5",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H"
     }
+  ],
+  "publisher": "The Astronomical Journal 154 5",
+  "creators": [
+    "Sam Hadden",
+    "Yoram Lithwick"
   ],
   "publicationDate": "2017"
 }

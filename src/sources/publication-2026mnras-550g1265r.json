@@ -2,8 +2,16 @@
   "id": "publication-2026mnras-550g1265r",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2026MNRAS.550g1265R, as the NASA Exoplanet Archive cites it.",
+  "title": "Rescigno et al. (2026): Understanding eccentric temperate giants: an in-depth study of the architecture and stellar obliquity of the TOI-2134 system",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2607.01027"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stag1265"
+    },
     {
       "type": "bibliography-key",
       "value": "2026MNRAS.550g1265R"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stag1265",
+      "label": "Monthly Notices of the Royal Astronomical Society 550 stag1265"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Rescigno et al. (2026), Monthly Notices of the Royal Astronomical Society 550 stag1265",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R"
     }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 550 stag1265",
+  "creators": [
+    "Federica Rescigno",
+    "Manu Stalport",
+    "Ancy Anna John",
+    "et al."
   ],
   "publicationDate": "2026"
 }

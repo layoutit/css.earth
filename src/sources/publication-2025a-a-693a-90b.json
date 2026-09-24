@@ -2,8 +2,16 @@
   "id": "publication-2025a-a-693a-90b",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2025A&A...693A..90B, as the NASA Exoplanet Archive cites it.",
+  "title": "Bonfanti et al. (2025): Radii, masses, and transit-timing variations of the three-planet system orbiting the naked-eye star TOI-396",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2411.14911"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202451300"
+    },
     {
       "type": "bibliography-key",
       "value": "2025A&A...693A..90B"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202451300",
+      "label": "Astronomy & Astrophysics 693 A90"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Bonfanti et al. (2025), Astronomy & Astrophysics 693 A90",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B"
     }
+  ],
+  "publisher": "Astronomy & Astrophysics 693 A90",
+  "creators": [
+    "A. Bonfanti",
+    "I. Amateis",
+    "D. Gandolfi",
+    "et al."
   ],
   "publicationDate": "2025"
 }

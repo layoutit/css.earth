@@ -325,3 +325,22 @@ test('a hosted body\'s package is written after phase one wrote its astronomy re
     await assert.rejects(writePackageFiles(new Map([['src/objects/x-b/README.md', 'again']]), 'x-b', dir), /never overwrites a package/u, 'an existing package still is');
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
+
+test('a reference the archive cites only by its ADS bibcode is read as the paper it links to, keeping the bibcode', async () => {
+  const { fetchPublication } = await import('./archives.mts');
+  const { publicationRecord } = await import('./generate.mts');
+  const arxiv = '<feed><entry><title>Seven temperate terrestrial planets</title><published>2017-03-04T00:00:00Z</published><author><name>Michael Gillon</name></author><author><name>Amaury Triaud</name></author><author><name>Brice-Olivier Demory</name></author><arxiv:journal_ref>Nature 542, 456</arxiv:journal_ref></entry></feed>';
+  const crossref = JSON.stringify({ message: { title: ['Seven temperate terrestrial planets'], issued: { 'date-parts': [[2017]] }, author: [{ given: 'Michael', family: 'Gillon' }, { given: 'Amaury', family: 'Triaud' }, { given: 'Brice-Olivier', family: 'Demory' }], 'container-title': ['Nature &amp; Astronomy'], volume: '1', 'article-number': '0056' } });
+  const linked: Archive = { async text(url) { if (url.includes('api.crossref.org')) return crossref; if (url.includes('export.arxiv.org')) return arxiv; throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; },
+    async location(url) { return url.endsWith('/EPRINT_HTML') ? 'https://arxiv.org/abs/1703.01430' : url.endsWith('/PUB_HTML') ? 'https://doi.org/10.1038/s41550-017-0056' : undefined; } };
+  const found = (await fetchPublication(linked, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
+  assert.deepEqual([found.id, found.arxiv, found.doi, found.bibcode, found.creators.length, found.publisher], ['doi-10-1038-s41550-017-0056', '1703.01430', '10.1038/s41550-017-0056', '2017NatAs...1E..56G', 3, 'Nature & Astronomy 1 0056'], 'the published paper, its preprint id kept, entities decoded');
+  const record = publicationRecord(found);
+  assert.match(String(record.title), /^Gillon et al\. \(2017\): Seven temperate/u);
+  const preprint = (await fetchPublication({ ...linked, async location(url) { return url.endsWith('/EPRINT_HTML') ? 'https://arxiv.org/abs/1703.01430' : undefined; } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
+  assert.equal(preprint.id, 'arxiv-1703-01430', 'no DOI: the arXiv record');
+  assert.deepEqual(record.identifiers.map((identifier: { type: string }) => identifier.type), ['arXiv', 'DOI', 'bibliography-key']);
+  // No gateway answer: the bibcode record as before.
+  const alone = (await fetchPublication({ ...linked, async location() { return undefined; } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
+  assert.equal(alone.id, 'publication-2017natas-1e-56g');
+});

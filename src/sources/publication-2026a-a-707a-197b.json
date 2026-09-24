@@ -2,8 +2,16 @@
   "id": "publication-2026a-a-707a-197b",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2026A&A...707A.197B, as the NASA Exoplanet Archive cites it.",
+  "title": "Bonomo et al. (2026): The GAPS programme at TNG",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2510.11490"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202557662"
+    },
     {
       "type": "bibliography-key",
       "value": "2026A&A...707A.197B"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202557662",
+      "label": "Astronomy & Astrophysics 707 A197"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Bonomo et al. (2026), Astronomy & Astrophysics 707 A197",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B"
     }
+  ],
+  "publisher": "Astronomy & Astrophysics 707 A197",
+  "creators": [
+    "A. S. Bonomo",
+    "L. Naponiello",
+    "A. Sozzetti",
+    "et al."
   ],
   "publicationDate": "2026"
 }

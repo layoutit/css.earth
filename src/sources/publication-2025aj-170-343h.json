@@ -2,8 +2,16 @@
   "id": "publication-2025aj-170-343h",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2025AJ....170..343H, as the NASA Exoplanet Archive cites it.",
+  "title": "Harada et al. (2025): SPORES-HWO. II. Companion Mass Limits and Updated Planet Properties for 120 Future Exoplanet Imaging Targets from 35 yr of Precise Doppler Monitoring <sup>∗</sup>",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2409.10679"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae0b62"
+    },
     {
       "type": "bibliography-key",
       "value": "2025AJ....170..343H"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae0b62",
+      "label": "The Astronomical Journal 170 343"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Harada et al. (2025), The Astronomical Journal 170 343",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H"
     }
+  ],
+  "publisher": "The Astronomical Journal 170 343",
+  "creators": [
+    "Caleb K. Harada",
+    "Courtney D. Dressing",
+    "Emma V. Turtelboom",
+    "et al."
   ],
   "publicationDate": "2025"
 }

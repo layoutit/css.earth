@@ -2,8 +2,16 @@
   "id": "publication-2021natas-5-775d",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2021NatAs...5..775D, as the NASA Exoplanet Archive cites it.",
+  "title": "Delrez et al. (2021): Transit detection of the long-period volatile-rich super-Earth ν2 Lupi d with CHEOPS",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2106.14491"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41550-021-01381-5"
+    },
     {
       "type": "bibliography-key",
       "value": "2021NatAs...5..775D"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41550-021-01381-5",
+      "label": "Nature Astronomy 5 775-787"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Delrez et al. (2021), Nature Astronomy 5 775-787",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D"
     }
+  ],
+  "publisher": "Nature Astronomy 5 775-787",
+  "creators": [
+    "Laetitia Delrez",
+    "David Ehrenreich",
+    "Yann Alibert",
+    "et al."
   ],
   "publicationDate": "2021"
 }
