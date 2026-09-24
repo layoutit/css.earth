@@ -6,7 +6,7 @@ import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/
 import { basename, dirname, isAbsolute, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fileSize, writeProductRecord, type ProductInput } from '../product-record.mts';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { operationsForDescriptor, type FamilyOperation } from './family-handlers.mts';
 import { parseProductDescriptor, type DescriptorMember, type ProductDescriptor } from './product-descriptor.mts';
 import { filterTableRows, inspectFitsTable, previewTableHistogram, previewTableScatter, readFitsTableRows, exportTableCsv, tableHistogram, tableScatterData, type TableFilter } from './families/f08-table.mts';

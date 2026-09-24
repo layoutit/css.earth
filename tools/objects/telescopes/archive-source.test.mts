@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { gzipSync } from 'node:zlib';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { CADC_TAP } from '../gemini/cadc.mts';
 import { TAP as CHANDRA_TAP, obsidDirectory, type ChandraObservation } from '../chandra/archive.mts';
 import { SEARCH as SPITZER_SEARCH } from '../spitzer/archive.mts';

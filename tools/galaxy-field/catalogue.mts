@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { requireRecord, requireString } from '@cssearth/core';
 export interface Point { x:number; y:number; z:number; absoluteMagnitude:number|null; morphology:string }

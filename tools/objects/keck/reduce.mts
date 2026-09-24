@@ -30,7 +30,7 @@ import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs
 import { createWriteStream } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { assertInputPins, productRecordPath, readProductRecord, sameRun, writeProductRecord,
   type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';

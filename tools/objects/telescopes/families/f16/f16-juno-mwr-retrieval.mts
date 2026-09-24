@@ -8,7 +8,7 @@
  */
 import { createHash } from 'node:crypto';
 import { copyFile, mkdir } from 'node:fs/promises';
-import { sha256File } from '../../../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { basename, resolve } from 'node:path';
 import { pds3Values } from '../../../pds3-labels.mts';
 import { fileSize } from '../../../product-record.mts';

@@ -19,7 +19,7 @@ import { projectReducedFile, pixelStepKm, boxMean } from './vir-projection.mts';
  *
  * Byte order is measured, not taken from the labels: the spectral cubes are big-endian and the wavelength cubes
  * little-endian although both labels say IEEE_REAL. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

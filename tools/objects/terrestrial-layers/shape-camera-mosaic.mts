@@ -1,5 +1,5 @@
 import { cross3 as cross } from '../../../src/platform/vector3.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './source-records.mts';
 type Vector = readonly number[] | Float32Array | Float64Array;
 export interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;

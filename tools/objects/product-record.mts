@@ -17,7 +17,7 @@ import { canonical } from '../../src/platform/canonical-value.mts';
  * (`sameRun`). Records hold no clock time, so the same run writes the same bytes. */
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { sha256, sha256File } from '../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PRODUCT_RECORD_SCHEMA = 'cssearth-telescope-product@1';

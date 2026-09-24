@@ -1,6 +1,6 @@
 // Fit filter cameras to a reference image, or measure authored ones with --check-only, and write the full report.
 // Preparation runs the same check for every camera a colour recipe registers; this job fits new cameras.
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {readFile,writeFile} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
 import {requireRecord,requireString,array,shape,text} from '@cssearth/core';

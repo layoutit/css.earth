@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireArray,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
 const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});

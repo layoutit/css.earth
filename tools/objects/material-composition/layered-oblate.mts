@@ -1,5 +1,5 @@
 import { applyLinearTint } from '../color-transfer.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {RingMotionPoint} from './radial-motion.mts';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}

@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from './solid-contract.mts';
 import type { PreparedTriangle, SourceSurfaceSample, SciencePalette } from './contracts.mts';

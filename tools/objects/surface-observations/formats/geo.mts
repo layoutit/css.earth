@@ -1,4 +1,4 @@
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 /**
  * Georeferenced photographs: archive backplanes (OSIRIS GEO, AMICA Gaskell, PDS4 geometry cubes), archived camera closures
  * (OSIRIS reflectance, L'LORRI, New Horizons LORRI and MVIC) and cameras derived from SPICE kernels. GEO_SCHEMAS states what

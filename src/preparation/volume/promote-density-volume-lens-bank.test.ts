@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
-import { sha256 } from '../../platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { loadPreparedVolumeLenses } from '../../renderers/css/volume/prepared-volume-lenses.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { promoteDensityVolumeLensBank } from './promote-density-volume-lens-bank.ts';

@@ -1,7 +1,7 @@
 import { retainedShapeAtlas } from './terrestrial-layers/retained-atlas.mts';
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
 import { alternativeForLens } from './terrestrial-layers/alternative-lenses.mts';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readAuthoredSources } from './authored-sources.ts';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';

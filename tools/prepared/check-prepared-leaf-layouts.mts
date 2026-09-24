@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireString,shape,array,text,number,boolean,dictionary,optional} from '@cssearth/core';
 const parseProperty=shape({name:text,value:text,custom:boolean});
 const parseNode=shape({parent:number,tag:text,style:(value:unknown)=>value,attributes:optional(dictionary(text)),properties:array(number)});

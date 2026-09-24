@@ -22,7 +22,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { archiveHeader, type EsoHeader } from '../interferometry/eso-pipeline.mts';
 import { PROGRAMS, readProgram, type NacoProgram } from './archive.mts';
 import { readReduction, type ReductionResult } from './reduce.mts';

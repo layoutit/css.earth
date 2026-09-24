@@ -30,7 +30,7 @@ import { mastFile } from '../mast.mts';
 import { readImagingProgram } from '../imaging/image3.mts';
 import { bandDepth, openSpectralCube, type Window } from './spectral-cube.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../../body-map-product.mts';
-import { sha256, sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from './body-map.mts';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../../body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '../../product-record.mts';

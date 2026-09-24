@@ -10,7 +10,7 @@ import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { writeProductRecord } from '../product-record.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from './cli.mts';
 let root:string;

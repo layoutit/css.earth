@@ -5,7 +5,7 @@ import { mastService, type MastServiceRequest, type MastServiceResult } from '..
 import type { ProductKind } from '../recipe-request.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { canonical, digest, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from './contracts.mts';
-import { sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
 import type { FamilyId } from '../product-descriptor.mts';
 import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../observation-families.mts';

@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import type { RuntimeAssetLocation } from './runtime-assets.mts';
 interface InstallProgress {completed: number; total: number; installed: number; reused: number; skipped: number;}
 /** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */

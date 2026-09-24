@@ -1,5 +1,5 @@
 /** Host-side hashing of package-owned implementation inventories, independent of installation layout. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { createRequire } from 'node:module';
 import { readFile, readdir, realpath } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';

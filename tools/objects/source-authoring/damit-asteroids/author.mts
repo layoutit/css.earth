@@ -13,7 +13,7 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mts';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';

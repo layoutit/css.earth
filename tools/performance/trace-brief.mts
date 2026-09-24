@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, stat, realpath } from 'node:fs/promises';
 import { resolve, basename, dirname, relative, isAbsolute } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';

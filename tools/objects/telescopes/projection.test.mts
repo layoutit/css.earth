@@ -11,7 +11,7 @@ import { exportSphere } from './sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { bodyMapFits } from '../jwst/cubes/body-map.mts';
 import { formatBodyMapProduct, type BodyMapProduct } from '../body-map-product.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import sharp from 'sharp';
 const test = sourceTest();
 const geometry={schema:'cssearth-navigation-input@1',observer:'JWST',kernels:[{file:'rotation.tpc',role:'rotation',source:'https://naif.jpl.nasa.gov/'}],registration:{method:'wcs',explanation:'Header WCS; no independently fitted centre'},width:360,height:180,maximumEmissionDegrees:65};

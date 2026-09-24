@@ -1,5 +1,5 @@
 /** Capture the installed LMC lenses at one saved world camera. No processing or user storage changes. */
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';

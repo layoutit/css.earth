@@ -1,7 +1,7 @@
 /** Select one exact product/operation. Never turn a failed cutout into a whole-product download. */
 import { dirname, resolve } from 'node:path';
 import { mkdir, readFile, writeFile, copyFile, rename, rm } from 'node:fs/promises';
-import { sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { randomUUID } from 'node:crypto';
 import { fileSize, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../../product-record.mts';
 import { astroquery } from '../../astronomy-packages/client.mts';

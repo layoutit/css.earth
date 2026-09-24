@@ -1,6 +1,6 @@
 /** Inspect a verified artifact and name only the next outputs its present facts can support. */
 import { readFile } from 'node:fs/promises';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';

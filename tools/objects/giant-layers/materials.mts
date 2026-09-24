@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { isArray } from '../../../src/platform/is-array.mts';
 import { shape, array, number, optional } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';

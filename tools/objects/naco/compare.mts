@@ -33,7 +33,7 @@ import { sampleStatistics as statistics, type Statistics } from '../../fits/samp
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits/fits.mts';
 import { addProductEvidence, productRecordPath } from '../product-record.mts';
 import { PROGRAMS, readProgram } from './archive.mts';

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { horizonsRows, observerRowValues } from './terrestrial-layers/observer-cameras.mts';
 import { BATCH, LIGHT_SECONDS_PER_AU, horizonsCommand, horizonsTables, joinResponses, observerQuery, writeHorizonsTables } from './sphere-horizons.mts';
 

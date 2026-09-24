@@ -1,7 +1,7 @@
 // The record format shared by the preparation trace (tools/prepare/preparation-trace.mts) and the preparation cache.
 // Keep this module free of project imports: the trace loads it before it starts recording, so anything it
 // imported would be missing from every record.
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { createHash } from 'node:crypto';
 import { isRecord } from '@cssearth/core';
 

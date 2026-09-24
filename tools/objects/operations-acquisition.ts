@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import sharp from 'sharp';
 import { lstat, readFile, mkdir, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';

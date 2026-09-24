@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { parseReflectanceCamera, type NumericRaster } from './source-records.mts';
 import { field, acceptOsirisQuality } from './osiris-geo.mts';
 

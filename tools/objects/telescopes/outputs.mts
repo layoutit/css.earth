@@ -6,7 +6,7 @@ import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { writeProductRecord, parseProductRecord } from '../product-record.mts';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { plotProduct } from '../astronomy-packages/plots.mts';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';

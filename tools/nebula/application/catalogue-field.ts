@@ -1,5 +1,5 @@
 /** Offline Gaia/Bailer-Jones neighbourhoods in the shared physical volume frame. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, realpath } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/objects';

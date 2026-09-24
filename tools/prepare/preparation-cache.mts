@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { isArray } from '../../src/platform/is-array.mts';
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";

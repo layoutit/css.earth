@@ -1,5 +1,5 @@
 // Prepare explicitly illustrative moon phases using published size/period constraints.
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { evaluatePublishedOrbit } from '../../../../packages/astronomy/tools/body-epoch-ephemeris.mts';

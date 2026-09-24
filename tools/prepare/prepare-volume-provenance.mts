@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { parseProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';

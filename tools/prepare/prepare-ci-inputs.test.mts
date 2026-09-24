@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { ciPreparationInputs, ciUniverseInputs, requireCiInputMode, restoreCiPreparationInputs, restoreCiUniverseInputs } from './prepare-ci-inputs.mts';
 
 async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) {

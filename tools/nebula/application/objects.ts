@@ -11,7 +11,7 @@ import { replayCompactSampled } from '@cssearth/volume-bake/compact-inputs/sampl
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';

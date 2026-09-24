@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {requireRecord} from '@cssearth/core';
 import type {SipCamera} from './contracts.mts';
 import {parseSipCamera,parseLlorriCamera} from './source-records.mts';

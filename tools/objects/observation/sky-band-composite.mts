@@ -3,7 +3,7 @@
  * bands, a grid, one background and one peak percentile for every band, and one common display.
  * Each band is divided by its own measured range, the usual survey false-colour practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rename, rm, writeFile, stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';

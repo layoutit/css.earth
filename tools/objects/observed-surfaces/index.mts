@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {parse} from '@cssearth/core/schema';
 import {observedRecipe, type Region, type ObservationTransform, type BoundaryContinuation, type FalseColor, type PixelPresence, type UniformCoverage, type DiscBaseline, type Calibration, type BrightTail, type PolarProjection, type RasterMap, type Baseline} from './contract.mts';

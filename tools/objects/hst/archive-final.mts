@@ -44,7 +44,7 @@
 import { copyFile, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

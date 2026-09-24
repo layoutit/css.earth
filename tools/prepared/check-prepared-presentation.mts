@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { isArray } from '../../src/platform/is-array.mts';
 import { readFile } from "node:fs/promises";
 import { isDeepStrictEqual } from "node:util";

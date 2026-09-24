@@ -34,7 +34,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { addProductEvidence, fileSize, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import {

@@ -1,6 +1,6 @@
 import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /** Native FITS TAN-SIP camera seed. Surface registration remains a separate requirement. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { scanFitsCards, fitsCardValue } from '../observation/fits.mts';
 import { requireFiniteNumber } from '@cssearth/core';
 import type { KernelSet } from '../../spice/kernel-set.mts';

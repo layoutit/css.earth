@@ -1,6 +1,6 @@
 import { PNG } from "pngjs";
 import { ORACLE_SCENE_CENTER } from "./profile.mts";
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { clampUnit, maximumChannelDelta, relativeLuminance, hasNeighbor, insideSunNeighborhood } from "./image-pixels.mts";
 import { detectPlanet, detectSilhouette, detectSun, analyzeBackground } from "./scene-detection.mts";
 import { analyzeIlluminationProfile, analyzeDiscPhase, shadowShapeMask, shadowShapeSummary, analyzeTerminatorShape, symmetricShapeDistance, circularAngleDifference } from "./scene-illumination.mts";

@@ -4,7 +4,7 @@ import { lstat, mkdir, open, readFile, rename, rm, writeFile } from 'node:fs/pro
 import { get } from 'node:https';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writeProductRecord, type ProductInput } from '../product-record.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';

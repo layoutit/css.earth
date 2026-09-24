@@ -2,7 +2,7 @@ import { copyFile, lstat, mkdir, readFile, rm, writeFile } from 'node:fs/promise
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 
 /** Refuse links at every component, including the inventory itself. Never follow PR-controlled paths. */
 async function regularPath(root: string, path: string, optional = false): Promise<boolean> {

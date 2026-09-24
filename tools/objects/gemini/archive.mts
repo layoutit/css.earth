@@ -36,7 +36,7 @@ import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { artifactName, isRawName, primaryHeaderBytes, query, requireMd5, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 /** What a raw Gemini frame can be. `ACQUISITION` is a pointing exposure: real data, never a science frame. */

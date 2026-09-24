@@ -1,5 +1,5 @@
 import { cross3 as cross } from '../../src/platform/vector3.mts';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import type { RotationElements } from "@cssearth/astronomy";
 import { requireRecord, requireFiniteNumber } from "@cssearth/core";
 import { readFile } from 'node:fs/promises';

@@ -34,7 +34,7 @@ import { pathToFileURL } from 'node:url';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { readFitsFileHdus, type FitsHeader } from '../../fits/fits.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 

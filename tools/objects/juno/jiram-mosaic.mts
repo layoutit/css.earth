@@ -25,7 +25,7 @@
  *
  * Output: a PDS3 simple-cylindrical float map with a detached label, as `pds3-float-map` reads it, and a receipt with
  * every frame's registration. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
