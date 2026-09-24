@@ -51,7 +51,8 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
       outputs: [{ path: 'tools/objects/dist', required: ['operations.js', 'prepare-spatial-context.js'] }] },
   ];
   if (mode === 'full') tasks.push(
-    node('icons', 'tools/prepare/prepare-shell-icons.mts'),
+    // Hashes icon sources with @cssearth/core/node, so it waits for the packages build.
+    node('icons', 'tools/prepare/prepare-shell-icons.mts', ['packages']),
     node('navigation', 'tools/prepare/prepare-navigation.mts', ['solar'], ['--catalog-only']),
     node('world', 'tools/objects/dist/prepare-spatial-context.js', ['preparation', 'navigation'], ['src/objects/sun/source/navigation/universe.json', 'src/objects/sun/prepared/world-context.json']),
     node('moon-labels', 'tools/prepare/prepare-moon-labels.mts', ['world']),

@@ -79,6 +79,7 @@ test('native package graph and the real renderer → catalogue dependency are pr
   assert.deepEqual(plan.find(task => task.id === 'catalog')?.after, ['renderer']);
   assert.deepEqual(plan.find(task => task.id === 'preparation')?.after, ['renderer', 'solar', 'titles']);
   assert.deepEqual(plan.find(task => task.id === 'world')?.after, ['preparation', 'navigation']);
+  assert.deepEqual(plan.find(task => task.id === 'icons')?.after, ['packages']);
 });
 
 test('CI-only changes can reuse package and renderer outputs while preparation keeps its full input identity', async t => {
