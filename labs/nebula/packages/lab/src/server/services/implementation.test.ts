@@ -33,6 +33,9 @@ test('relocated preparation entry points pin their live package owners', async (
   assert.ok(pins.some(pin => pin.path === 'labs/nebula/packages/volume-core/src/fields/authored-shapes.ts'));
   assert.ok(pins.some(pin => pin.path === 'labs/nebula/packages/volume-bake/src/slices/painted-field.ts'));
   assert.equal(pins.some(pin => pin.path.startsWith('labs/nebula/src/')), false);
+  // The shared FITS reader the sampled compiler decodes with is pinned by its sources.
+  for (const path of ['packages/fits/package.json', 'packages/fits/src/fits.ts', 'packages/fits/src/transport.ts'])
+    assert.ok(pins.some(pin => pin.path === path), path);
 });
 
 test('sampled supplementary owner allowlist points at existing implementation files', async () => {
