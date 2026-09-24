@@ -2,8 +2,12 @@ import type { ObjectControls, ObjectSelection, ObjectAction } from "../runtime/o
 import type { SceneLifetime } from "@cssearth/engine";
 import type { PreparedPresentationDefinition, PreparedPresentationPlan, PreparedView, mountPreparedPresentation } from "./prepared-presentation.js";
 import type { createPreparedResidency, PreparedResidencyTicket } from "./prepared-residency.js";
+/** How a committed selection was requested: its kind, and whether it may move the camera. */
+export interface SelectionIntent { readonly kind: "initial" | "selection" | "frame"; readonly frameCamera: boolean; }
 export interface ObjectSelectionState {
   desired: ObjectSelection; committed: ObjectSelection | null; plan: PreparedPresentationPlan | null;
+  /** The request that produced `committed`. */
+  committedBy: SelectionIntent | null;
   pending: boolean; loadingMaterial: boolean; ready: boolean; error: string | null; viewRevision: number | null;
 }
 export interface ObjectSelectionRuntimeOptions {
@@ -12,18 +16,20 @@ export interface ObjectSelectionRuntimeOptions {
   residency: ReturnType<typeof createPreparedResidency>; lifetime: SceneLifetime;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   prepareSelection?: (selection: ObjectSelection, signal: AbortSignal) => void | Promise<void>;
-  onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan, intent: { kind: SelectionRequest['kind']; frameCamera: boolean }) => void;
+  onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan, intent: SelectionIntent) => void;
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
   deferTextureRefinement?: boolean;
   initialLens?: string;
   initialSettings?: unknown;
 }
-interface SelectionRequest { selection: ObjectSelection; kind: "initial" | "selection" | "frame"; controller: AbortController; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
+interface SelectionRequest { selection: ObjectSelection; intent: SelectionIntent; controller: AbortController; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
 
 import { resolvePreparedPresentation } from "./prepared-presentation.js";
 import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from "../runtime/object-contract.js";
 
 const sameKeys = (a: readonly string[], b: readonly string[]) => a.length === b.length && a.every((key, index) => key === b[index]);
+/** Two plans demand the same prepared resources: the same required and prewarmed keys. */
+const sameDemand = (a: PreparedPresentationPlan, b: PreparedPresentationPlan) => sameKeys(a.required, b.required) && sameKeys(a.prewarm, b.prewarm);
 
 export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime, initialLens, initialSettings,
@@ -31,12 +37,14 @@ export function createObjectSelectionRuntime({
 }: ObjectSelectionRuntimeOptions) {
   const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
   let desired = initialSelection, committed: ObjectSelection | null = null, committedPlan: PreparedPresentationPlan | null = null, view: PreparedView | null = null;
-  let active: SelectionRequest | null = null, destroyed = false, started = false, busy = false, error: string | null = null;
+  let committedBy: SelectionIntent | null = null;
+  /** The one request in flight; a newer request supersedes it. */
+  let active: SelectionRequest | null = null, destroyed = false, started = false, error: string | null = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;
   let textureRefinement = !deferTextureRefinement;
   const live = () => !destroyed && !lifetime.disposed;
-  const state = (): Readonly<ObjectSelectionState> => Object.freeze({ desired, committed, plan: committedPlan,
-    pending: busy && active?.kind !== "frame", loadingMaterial: active?.kind === "frame",
+  const state = (): Readonly<ObjectSelectionState> => Object.freeze({ desired, committed, plan: committedPlan, committedBy,
+    pending: active !== null && active.intent.kind !== "frame", loadingMaterial: active?.intent.kind === "frame",
     ready: committed !== null && live(), error, viewRevision: view?.revision ?? null });
   const notify = () => { if (live()) onChange(state()); };
 
@@ -60,6 +68,17 @@ export function createObjectSelectionRuntime({
     request.ticket = null;
     residency.discard(ticket);
   }
+  /** Release a request's demand, and the unfinished demand it replaced. */
+  function releaseDemand(request: SelectionRequest) {
+    discard(request);
+    discard(request.previous);
+  }
+  /** The active request ends. Committed or not, the desired selection is the committed one again. */
+  function endRequest(request: SelectionRequest) {
+    releaseDemand(request);
+    active = null;
+    desired = committed ?? initialSelection;
+  }
   function planFor(request: SelectionRequest): PreparedPresentationPlan {
     if (!request.plan) throw new Error("Prepared selection request has no demand plan.");
     return request.plan;
@@ -69,16 +88,16 @@ export function createObjectSelectionRuntime({
     request.plan = plan;
     // Replacement demand and cancellation enter residency together, preserving
     // shared pending keys instead of briefly dropping every old request lease.
-    request.ticket = residency.request(plan, { stabilize: request.kind === "frame" });
+    request.ticket = residency.request(plan, { stabilize: request.intent.kind === "frame" });
     request.previous = null;
     return request.ticket;
   }
-  function run(selection: ObjectSelection, kind: SelectionRequest["kind"], signal?: AbortSignal, frameCamera = true) {
+  function run(selection: ObjectSelection, kind: SelectionIntent["kind"], signal?: AbortSignal, frameCamera = true) {
     if (!live() || signal?.aborted) return Promise.resolve(false);
     const superseded = active;
     let previous = active;
     while (previous && !previous.ticket) previous = previous.previous;
-    const request: SelectionRequest = { selection, kind, controller: new AbortController(), ticket: null, plan: null, previous };
+    const request: SelectionRequest = { selection, intent: { kind, frameCamera }, controller: new AbortController(), ticket: null, plan: null, previous };
     active = request;
     superseded?.controller.abort();
     const operationSignal = signal ? AbortSignal.any([signal, request.controller.signal]) : request.controller.signal;
@@ -91,16 +110,12 @@ export function createObjectSelectionRuntime({
     const abort = () => {
       cancel();
       if (!current()) return;
-      discard(request);
-      discard(request.previous);
-      active = null;
-      desired = committed ?? initialSelection;
-      busy = false;
+      endRequest(request);
       notify();
     };
     operationSignal.addEventListener('abort', abort, { once: true });
     const work = (async () => {
-      try { busy = true; notify(); }
+      try { notify(); }
       catch (failure) { if (current()) onFatalError(failure); throw failure; }
       // Give rapid input one turn to replace demand before starting a decode.
       await Promise.resolve();
@@ -110,8 +125,7 @@ export function createObjectSelectionRuntime({
         let ticket;
         try {
           const plan = resolve(selection);
-          ticket = request.ticket && request.plan && sameKeys(plan.required, planFor(request).required) && sameKeys(plan.prewarm, planFor(request).prewarm)
-            ? request.ticket : preparePass(request, plan);
+          ticket = request.ticket && request.plan && sameDemand(plan, planFor(request)) ? request.ticket : preparePass(request, plan);
           if (!prepared && kind === 'selection' && prepareSelection) {
             preparation = Promise.resolve(prepareSelection(selection, operationSignal));
             prepared = true;
@@ -123,12 +137,8 @@ export function createObjectSelectionRuntime({
           if (!result.value || request.ticket !== ticket) continue;
         } catch (failure) {
           if (!current()) { discard(request); return false; }
-          discard(request);
-          discard(request.previous);
-          desired = committed ?? initialSelection;
-          active = null;
+          endRequest(request);
           error = failure instanceof Error ? failure.message : String(failure);
-          busy = false;
           try { notify(); } catch (publicationFailure) { onFatalError(publicationFailure); throw publicationFailure; }
           throw failure;
         }
@@ -136,8 +146,7 @@ export function createObjectSelectionRuntime({
           // Re-resolve after decode. No asynchronous gap separates this lookup
           // from publication, so a camera move cannot commit an old row.
           const plan = resolve(selection);
-          if (!sameKeys(plan.required, planFor(request).required) || !sameKeys(plan.prewarm, planFor(request).prewarm) ||
-              plan.required.some(key => !residency.resources.has(key))) {
+          if (!sameDemand(plan, planFor(request)) || plan.required.some(key => !residency.resources.has(key))) {
             preparePass(request, plan);
             continue;
           }
@@ -150,13 +159,13 @@ export function createObjectSelectionRuntime({
           request.ticket = null;
           frame(selection);
           if (!current()) return false;
-          onCommit(selection, plan, { kind, frameCamera });
+          onCommit(selection, plan, request.intent);
           if (!current()) return false;
           committed = selection;
           committedPlan = plan;
+          committedBy = request.intent;
           commits++;
-          active = null;
-          busy = false;
+          endRequest(request);
           notify();
           // A publication callback may immediately request a finer view. That
           // successor does not undo this successfully committed selection.
@@ -196,8 +205,7 @@ export function createObjectSelectionRuntime({
       view = next;
       try {
         const plan = committed ? resolve(committed) : null;
-        const prepared = plan && committedPlan && sameKeys(plan.required, committedPlan.required) &&
-          sameKeys(plan.prewarm, committedPlan.prewarm) && plan.required.every(key => residency.resources.has(key));
+        const prepared = plan && committedPlan && sameDemand(plan, committedPlan) && plan.required.every(key => residency.resources.has(key));
         frame(committed);
         // Pure view facts can change within the same prepared resource set.
         // Remember the plan actually published, without a decode transaction
@@ -226,10 +234,8 @@ export function createObjectSelectionRuntime({
       if (destroyed) return;
       destroyed = true;
       active?.controller.abort();
-      discard(active);
-      discard(active?.previous);
+      if (active) releaseDemand(active);
       active = null;
-      busy = false;
     },
   });
 }

@@ -41,7 +41,7 @@ type InformationPanel = { querySelector(selector: string): { elements: Input[]; 
 type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null; getElementById(id: string): { hidden: boolean } | null };
 type HarnessMutation = (parts: { lensInputs: Input[]; settingInputs: Input[]; stage: HTMLElement; document: HarnessDocument; lensRoot: Root }) => void;
 function selectionState(initial: ObjectSelection): ObjectSelectionState {
-  return { committed: null, desired: initial, plan: null, pending: true, loadingMaterial: false, ready: false, error: null, viewRevision: null };
+  return { committed: null, committedBy: null, desired: initial, plan: null, pending: true, loadingMaterial: false, ready: false, error: null, viewRevision: null };
 }
 function harness(controls: ObjectControls = moonControls, mutate: HarnessMutation = () => {}) {
   const initial = initialObjectSelection(controls);
