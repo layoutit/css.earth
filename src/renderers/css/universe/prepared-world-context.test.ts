@@ -163,9 +163,13 @@ function find(root: FakeElement, key: string, value: string): FakeElement {
   if (!found) throw new Error(`Missing ${key}=${value}`); return found;
 }
 // Orbit leaf blocks are built on first use and then retained. Every earlier node
-// survives in order, and only orbit leaf blocks or their leaves may be added.
-function expectRetained(root: FakeElement, nodes: readonly FakeElement[]) {
-  const known = new Set(nodes), now = all(root), kept = now.filter(node => known.has(node));
+// survives in order, and only orbit leaf blocks or their leaves may be added. The one
+// corner locator is the exception by design: a single element that moves into whichever
+// marker is emphasised, so it and its two paths are left out of the order.
+const isLocator = (node: FakeElement) => node.getAttribute('class') === 'context-locator' || node.parentNode?.getAttribute('class') === 'context-locator';
+function expectRetained(root: FakeElement, retained: readonly FakeElement[]) {
+  const nodes = retained.filter(node => !isLocator(node));
+  const known = new Set(nodes), now = all(root).filter(node => !isLocator(node)), kept = now.filter(node => known.has(node));
   expect(kept.length === nodes.length && kept.every((node, index) => node === nodes[index]), 'every retained node survives in order').toBe(true);
   expect(now.every(node => known.has(node) || node.className === 'context-orbit-block' || node.parentNode?.className === 'context-orbit-block'),
     'only orbit leaf blocks are added').toBe(true);
@@ -300,6 +304,34 @@ test('inactive annotations retain emphasis until their reveal publication', () =
   // selected before the bodies were culled must publish 'false' on its reveal.
   for (const body of shown) expect(find(root, 'contextGroup', body.id).dataset.contextSelected).toBe('false');
   expectRetained(root, nodes);
+  layer.destroy();
+});
+
+test('a body carries its prepared colour inline, and the emphasised one wears the one corner locator by inheritance', () => {
+  const base = plan(1), colours: Record<string, string> = { mercury: '#abcdef', venus: '#123456' };
+  const prepared = { ...base, focus: { ...base.focus, contextColor: '#fedcba' },
+    bodies: base.bodies.map(body => ({ ...body, contextColor: colours[body.id]!, labelCase: 'upper' as const })) };
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: prepared,
+    sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement;
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
+  const mercury = find(root, 'contextGroup', 'mercury'), venus = find(root, 'contextGroup', 'venus'), sun = find(root, 'contextGroup', 'sun');
+  // No stylesheet rule per body: the colour and caption case are on the marker and its orbit.
+  expect([mercury.style.color, venus.style.color, find(root, 'contextOrbit', 'mercury').style.color]).toEqual(['#abcdef', '#123456', '#abcdef']);
+  expect(mercury.dataset.contextLabelCase).toBe('upper');
+  const locatorIn = (marker: FakeElement) => marker.children.find(child => child.getAttribute('class') === 'context-locator');
+  layer.selectObject('mercury'); layer.publish(world, viewport);
+  const locator = locatorIn(mercury)!;
+  // It sits under the sprite, as the ring does, and has no colour of its own: its paths fill with currentColor.
+  expect(mercury.children.indexOf(locator)).toBe(mercury.children.findIndex(child => child.tagName === 'i') - 1);
+  expect([locator.style.color ?? '', ...locator.children.map(path => path.getAttribute('fill'))]).toEqual(['', 'currentColor', 'currentColor']);
+  expect([mercury.dataset.contextLocator, venus.dataset.contextLocator]).toEqual(['', undefined]);
+  layer.selectObject('sun'); layer.publish(world, viewport);
+  // The same element moves; the marker it leaves returns to its ring.
+  expect([locatorIn(sun), locatorIn(mercury), mercury.dataset.contextLocator, sun.dataset.contextLocator]).toEqual([locator, undefined, undefined, '']);
   layer.destroy();
 });
 

@@ -1,3 +1,4 @@
+import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
@@ -129,6 +130,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   }
   const distantNonNavigableIds = new Set(distantNavigation?.nonNavigableIds ?? []);
   const root = host.ownerDocument.createElement('div');
+  // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
+  const locator = createContextLocator(host.ownerDocument);
   root.className = 'prepared-world-context';
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
   root.dataset.worldContext = plan.focus.id;
@@ -165,8 +168,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     spriteLeaf.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;background-repeat:no-repeat;transform-origin:50% 50%;pointer-events:none`;
     if (sprite) applySpriteImage(spriteLeaf, sprite);
     marker.appendChild(spriteLeaf);
-    // A packaged body's colour is its swatch stylesheet; a body drawn from its record carries its prepared colour.
-    if (unpackaged) marker.style.color = body.color;
+    // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
+    // body drawn from its record carries its own; without either the world's default applies. Capitals mark a star, black
+    // hole or planet caption. No page carries a stylesheet rule per body.
+    const colour = body.contextColor ?? (unpackaged ? body.color : undefined);
+    if (colour) marker.style.color = colour;
+    if (body.labelCase === 'upper') marker.dataset.contextLabelCase = 'upper';
     const approximate = 'placement' in body && body.placement === 'approximate';
     if (approximate) {
       marker.dataset.contextPlacement = 'approximate';
@@ -197,9 +204,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // transformed root would paint nothing yet become its own WebKit layer over the composited sky and globe.
     orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
+    if (body.contextColor) orbitRoot.style.color = body.contextColor;
     if (orbit) root.insertBefore(orbitRoot, mover);
     const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
-      ...(unpackaged ? { color: body.color } : {}) });
+      ...(colour ? { color: colour } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
@@ -572,7 +580,20 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             }
           }
           if (entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
-          if (marker.dataset.contextSelected !== selection) marker.dataset.contextSelected = selection;
+          if (marker.dataset.contextSelected !== selection) {
+            // A body with a prepared colour marks its emphasis with the one corner locator, moved in under its sprite; it
+            // inherits the marker's colour. The marker it leaves returns to its ring.
+            if (selection === 'true' && entry.body.contextColor) {
+              const holder = locator.parentElement as HTMLElement | null;
+              if (holder && holder !== marker) delete holder.dataset.contextLocator;
+              marker.insertBefore(locator, entry.spriteLeaf);
+              marker.dataset.contextLocator = '';
+            } else if (selection !== 'true' && locator.parentElement === marker) {
+              locator.remove();
+              delete marker.dataset.contextLocator;
+            }
+            marker.dataset.contextSelected = selection;
+          }
           if (entry.indicatorHovered !== entry.hovered) {
             entry.indicatorHovered = entry.hovered;
             marker.dataset.contextIndicatorHovered = String(entry.hovered);

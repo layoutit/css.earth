@@ -36,7 +36,10 @@ export interface WorldContextPointSource {
     readonly brightnessMultiplier: number;
   };
 }
-type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource };
+/** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
+ * (site/context-colour.mts). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
+type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper' };
+type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 export interface VolumeOpacityProfile {
   readonly model: 'logarithmic-distance';
   readonly nearOpacity: number;
@@ -51,7 +54,7 @@ export interface WorldContextSource {
   readonly focus: WorldContextFocus;
   /** `unpackaged`: drawn from its astronomy record around a packaged host, with no object page (the S-stars around Sgr A*).
    * `orbitsWithinM`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
-  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number; readonly labelPlacement?: 'centre' }[];
+  readonly bodies: readonly ({ readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number; readonly labelPlacement?: 'centre' } & WorldContextPresentation)[];
   /** Preparation resolves catalogue membership before computing the context. */
   readonly bodySelection?: "catalog";
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
@@ -95,6 +98,8 @@ export interface PreparedWorldContext {
     readonly orbitsWithinM?: number;
     /** Caption the body over its middle instead of below it. */
     readonly labelPlacement?: 'centre';
+    readonly contextColor?: string;
+    readonly labelCase?: 'upper';
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
@@ -115,17 +120,22 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const input = record(value, 'world context'); keys(input, ['schema', 'frame', 'focus', 'bodies', 'orbit', 'camera', 'system', 'volume', 'sky', 'stars'], 'world context');
   if (input.schema !== 'cssearth-world-context-source@1') throw new TypeError('Unsupported world context source schema.');
   const frame = parseFrame(input.frame);
-  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource'], 'world context focus');
+  // The prepared presentation a body carries into the world: its context colour and caption case.
+  const presentation = (value: Record<string, unknown>, label: string) => {
+    if (value.labelCase !== undefined && value.labelCase !== 'upper') throw new TypeError(`${label} label case is ${String(value.labelCase)}, not upper.`);
+    return { ...(value.contextColor === undefined ? {} : { contextColor: color(value.contextColor) }), ...(value.labelCase === 'upper' ? { labelCase: 'upper' as const } : {}) };
+  };
+  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource', 'contextColor', 'labelCase'], 'world context focus');
   const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color),
-    ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }) });
+    ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }), ...presentation(focusInput, 'World context focus') });
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement'], `world context body ${index}`);
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase'], `world context body ${index}`);
     if (body.labelPlacement !== undefined && body.labelPlacement !== 'centre') throw new TypeError(`World context body ${index} label placement is ${String(body.labelPlacement)}, not centre.`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (body.unpackaged !== undefined && body.unpackaged !== true) throw new TypeError('World context unpackaged is true or absent.');
-    return freeze({ ...(body.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}), ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
+    return freeze({ ...presentation(body, `World context body ${index}`), ...(body.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}), ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
   });
   if (new Set(bodies.map(body => body.id)).size !== bodies.length || bodies.some(body => body.id === focus.id)) throw new TypeError('World context body ids must be unique and exclude the focus.');
   const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'trail'], 'world context orbit');

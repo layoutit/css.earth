@@ -63,15 +63,8 @@
   transform: scale(1.25) translate(-50%, -50%);
   box-shadow: inset 0 0 0 1.2px currentColor;
 }
-.prepared-world-context [data-context-selected="true"]::before {
-  /* Keep the standard circle unless the shell supplies a swatch locator. */
-  background: none center / 16px 16px no-repeat;
-}
-.prepared-world-context [data-context-selected="true"][data-context-indicator-hovered="true"]::before {
-  background-image: none;
-}
-/* Ordinary captions share typography; major-body casing and swatches are
-   supplied by ObjectSwatchStyles. Geometry owners only place and fade text. */
+/* Ordinary captions share typography; a body's colour and caption case come from its prepared world data, set on its
+   marker (prepared-world-context.ts). Geometry owners only place and fade text. */
 .prepared-world-context [data-context-body]::after,
 .prepared-context-label {
   width: max-content;
@@ -179,4 +172,48 @@
 .prepared-world-context [data-context-body="sgr-a-star"]::after {
   content: 'Sgr A*';
   text-transform: none;
+}
+
+/* A body with a prepared colour marks its emphasis with the world's one corner locator (context-locator.ts), which the
+   world moves in under its sprite; the locator's paths fill with currentColor, so it takes the marker's colour. It sits
+   exactly where the ring does, and the ring gives way to it. Captions of stars, black holes and planets are in capitals. */
+.prepared-world-context [data-context-locator][data-context-selected="true"]::before {
+  box-shadow: none;
+}
+.prepared-world-context [data-context-body] > .context-locator {
+  position: absolute;
+  inset: 0 auto auto 0;
+  transform-origin: 0 0;
+  translate: 8px 8px;
+  scale: var(--context-annotation-scale, 1);
+  width: 16px;
+  height: 16px;
+  overflow: visible;
+  transform: scale(1) translate(-50%, -50%);
+  opacity: var(--context-line-alpha, .65);
+  pointer-events: none;
+  visibility: hidden;
+}
+.prepared-world-context [data-context-annotations-animate="true"] > .context-locator {
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+.prepared-world-context [data-context-indicator-visible="true"] > .context-locator {
+  visibility: inherit;
+}
+.prepared-world-context [data-context-indicator-hovered="true"] > .context-locator {
+  transform: scale(1.25) translate(-50%, -50%);
+}
+.prepared-world-context [data-context-indicator-hovered="true"][data-context-indicator-visible="true"] > .context-locator {
+  opacity: 1;
+}
+.context-locator-hovered,
+.prepared-world-context [data-context-indicator-hovered="true"] > .context-locator .context-locator-resting {
+  display: none;
+}
+.prepared-world-context [data-context-indicator-hovered="true"] > .context-locator .context-locator-hovered {
+  display: inline;
+}
+.prepared-world-context [data-context-label-case="upper"],
+.prepared-selected-body-label[data-label-case="upper"] {
+  text-transform: uppercase;
 }

@@ -13,6 +13,11 @@ export interface PreparedContextPoint {
   readonly id: string;
   readonly name: string;
   readonly color: string;
+  /** The colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour; absent, the
+   * world's default. Set inline on its elements, so no page carries a stylesheet rule per body. */
+  readonly contextColor?: string;
+  /** A star, black hole or planet: its caption is in capitals. */
+  readonly labelCase?: 'upper';
   readonly positionM: PositionM;
   readonly radiusM: number;
 }
@@ -128,7 +133,14 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !/^#[a-f0-9]{6}$/i.test(color)) throw new TypeError('Invalid context point identity or color.');
   return Object.freeze({ id, color, name: text(input.name, 'point name'),
     // A body drawn from its astronomy record may have no measured radius: 0, drawn as its circle only.
-    positionM: vector(input.positionM, 'point position'), radiusM: input.unpackaged === true && input.radiusM === 0 ? 0 : positive(input.radiusM, `point ${id} radius`) });
+    positionM: vector(input.positionM, 'point position'), radiusM: input.unpackaged === true && input.radiusM === 0 ? 0 : positive(input.radiusM, `point ${id} radius`),
+    ...(input.contextColor === undefined ? {} : { contextColor: (() => {
+      const hex = text(input.contextColor, `point ${id} context colour`);
+      if (!/^#[a-f0-9]{6}$/i.test(hex)) throw new TypeError(`Context point ${id} colour ${hex} is not #rrggbb.`);
+      return hex;
+    })() }),
+    ...(input.labelCase === undefined ? {} : input.labelCase === 'upper' ? { labelCase: 'upper' as const }
+      : (() => { throw new TypeError(`Context point ${id} label case is ${String(input.labelCase)}, not upper.`); })()) });
 }
 export interface PreparedSystemViewCandidate { readonly cameraToReference: readonly number[];
   readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }
@@ -185,8 +197,8 @@ function parseClassificationViews(value: unknown, bodies: readonly PreparedConte
   return Object.freeze(Object.fromEntries(entries));
 }
 function focusPoint(value: unknown, withCandidates: boolean): PreparedContextFocus {
-  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
-  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
+  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase']);
+  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase']);
   const systemView = parseSystemView(input.systemView, withCandidates);
   const base = systemView ? Object.freeze({ ...raw, systemView }) : raw;
   if (input.pointSource === undefined) return base;
@@ -467,7 +479,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
-    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement'];
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView, geometry);

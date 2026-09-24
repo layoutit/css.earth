@@ -72,6 +72,28 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
         : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
   }
+  // Each packaged body's world presentation, prepared here so no page carries a stylesheet rule per body: the colour its
+  // marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast, site/context-colour.mts)
+  // and capitals for a star, black hole or planet's caption.
+  {
+    const registry = (await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
+      SCENE_OBJECTS: readonly { id: string; color: string; classification: string }[] }).SCENE_OBJECTS;
+    const { contextColour } = await import(pathToFileURL(resolve(process.cwd(), 'site/context-colour.mts')).href) as typeof import('../../site/context-colour.mts');
+    const { contextAnnotationOpacity } = await import(pathToFileURL(resolve(process.cwd(), 'src/navigation/marker-presentation.mts')).href) as typeof import('../../src/navigation/marker-presentation.mts');
+    const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
+    const byId = new Map(registry.map(object => [object.id, object]));
+    const present = async (body: Record<string, unknown>) => {
+      const object = byId.get(String(body.id));
+      if (!object) return;
+      const swatch = await readFile(resolve(objectsRoot, object.id, 'swatch.json'), 'utf8').then(text => JSON.parse(text) as { hex: string; display?: { hex: string } },
+        (error: unknown) => { if (isMissingFile(error)) return undefined; throw error; });
+      const hex = contextColour(swatch ? swatch.display?.hex ?? swatch.hex : undefined, object.color, contextAnnotationOpacity(object.classification).label);
+      if (hex) body.contextColor = hex;
+      if (object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet') body.labelCase = 'upper';
+    };
+    await present(input.focus);
+    for (const body of input.bodies as Record<string, unknown>[]) await present(body);
+  }
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
