@@ -216,6 +216,17 @@ environment limitation, not a passing integration result.
 | Find the shared guides | [docs/README.md](docs/README.md) |
 | Write the PR | [PR template](.github/pull_request_template.md) and the [PR rules](docs/provenance/CONTRACT.md#pull-requests) |
 
+## Commits
+
+Write every commit as one [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) line, for example
+`refactor(core): move sha256 into core`. Leave out a body, trailers and any attribution such as `Co-Authored-By`, and
+commit as yourself: a bot or AI tool may not be a commit's author or committer. Split a change into small steps so each
+line explains one step. Git's own merge, revert and `--fixup` messages are accepted as Git writes them.
+
+`pnpm install` installs a `commit-msg` hook that checks each message as you commit (it leaves an existing hook of your
+own in place). CI runs the same check over every commit in a pull request as part of the required `Classify changes`
+job, so reword a rejected commit with `git rebase -i` rather than skipping the hook.
+
 ## Pull requests
 
 - Title with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/): `fix(shell): ...`, `feat(universe): ...`, `docs: ...`.
