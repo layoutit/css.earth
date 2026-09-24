@@ -258,7 +258,7 @@
             "#d49950",
             "#873640"
           ],
-          "units": "\u00b5m",
+          "units": "µm",
           "outputLongitudeOrigin": -180,
           "displaySampling": "nearest",
           "format": "geotiff",
@@ -298,247 +298,247 @@
           "categories": [
             {
               "value": "Cc",
-              "label": "Cc \u00b7 Copernican crater",
+              "label": "Cc · Copernican crater",
               "color": "#b84040"
             },
             {
               "value": "Ccc",
-              "label": "Ccc \u00b7 Copernican crater cluster",
+              "label": "Ccc · Copernican crater cluster",
               "color": "#7b99e0"
             },
             {
               "value": "Csc",
-              "label": "Csc \u00b7 Copernican secondary crater",
+              "label": "Csc · Copernican secondary crater",
               "color": "#a4e04f"
             },
             {
               "value": "EIp",
-              "label": "EIp \u00b7 Eratosthenian-Imbrian plateau",
+              "label": "EIp · Eratosthenian-Imbrian plateau",
               "color": "#b865ad"
             },
             {
               "value": "Ec",
-              "label": "Ec \u00b7 Eratosthenian crater",
+              "label": "Ec · Eratosthenian crater",
               "color": "#4fe0c8"
             },
             {
               "value": "Ecc",
-              "label": "Ecc \u00b7 Eratosthenian crater cluster",
+              "label": "Ecc · Eratosthenian crater cluster",
               "color": "#e0b27b"
             },
             {
               "value": "Em",
-              "label": "Em \u00b7 Eratosthenian mare",
+              "label": "Em · Eratosthenian mare",
               "color": "#5e40b8"
             },
             {
               "value": "Esc",
-              "label": "Esc \u00b7 Eratosthenian secondary crater",
+              "label": "Esc · Eratosthenian secondary crater",
               "color": "#80e07b"
             },
             {
               "value": "INp",
-              "label": "INp \u00b7 Imbrian-Nectarian plains",
+              "label": "INp · Imbrian-Nectarian plains",
               "color": "#e04f7f"
             },
             {
               "value": "INt",
-              "label": "INt \u00b7 Imbrian-Nectarian terra",
+              "label": "INt · Imbrian-Nectarian terra",
               "color": "#6599b8"
             },
             {
               "value": "Ib",
-              "label": "Ib \u00b7 Imbrian basin undivided",
+              "label": "Ib · Imbrian basin undivided",
               "color": "#d4e04f"
             },
             {
               "value": "Ibm",
-              "label": "Ibm \u00b7 Imbrian basin massif",
+              "label": "Ibm · Imbrian basin massif",
               "color": "#cb7be0"
             },
             {
               "value": "Ic",
-              "label": "Ic \u00b7 Imbrian crater undivided",
+              "label": "Ic · Imbrian crater undivided",
               "color": "#40b87c"
             },
             {
               "value": "Ic1",
-              "label": "Ic1 \u00b7 Imbrian lower crater",
+              "label": "Ic1 · Imbrian lower crater",
               "color": "#e0907b"
             },
             {
               "value": "Ic2",
-              "label": "Ic2 \u00b7 Imbrian upper crater",
+              "label": "Ic2 · Imbrian upper crater",
               "color": "#4f5be0"
             },
             {
               "value": "Icc",
-              "label": "Icc \u00b7 Imbrian crater cluster",
+              "label": "Icc · Imbrian crater cluster",
               "color": "#84b865"
             },
             {
               "value": "Icf",
-              "label": "Icf \u00b7 Imbrian crater fracture floor",
+              "label": "Icf · Imbrian crater fracture floor",
               "color": "#e04fb0"
             },
             {
               "value": "Id",
-              "label": "Id \u00b7 Imbrian dark mantling",
+              "label": "Id · Imbrian dark mantling",
               "color": "#7bdce0"
             },
             {
               "value": "Ig",
-              "label": "Ig \u00b7 Imbrian grooved terrain",
+              "label": "Ig · Imbrian grooved terrain",
               "color": "#b89940"
             },
             {
               "value": "Iia",
-              "label": "Iia \u00b7 Imbrian imbrium alpes formation",
+              "label": "Iia · Imbrian imbrium alpes formation",
               "color": "#a97be0"
             },
             {
               "value": "Iiap",
-              "label": "Iiap \u00b7 Imbrian imbrium apenninus formation",
+              "label": "Iiap · Imbrian imbrium apenninus formation",
               "color": "#4fe066"
             },
             {
               "value": "Iic",
-              "label": "Iic \u00b7 Imbrian imbrium crater",
+              "label": "Iic · Imbrian imbrium crater",
               "color": "#b86570"
             },
             {
               "value": "Iif",
-              "label": "Iif \u00b7 Imbrian imbrium fra mauro formation",
+              "label": "Iif · Imbrian imbrium fra mauro formation",
               "color": "#4f8ce0"
             },
             {
               "value": "Im1",
-              "label": "Im1 \u00b7 Imbrian lower mare",
+              "label": "Im1 · Imbrian lower mare",
               "color": "#c3e07b"
             },
             {
               "value": "Im2",
-              "label": "Im2 \u00b7 Imbrian upper mare",
+              "label": "Im2 · Imbrian upper mare",
               "color": "#b740b8"
             },
             {
               "value": "Imd",
-              "label": "Imd \u00b7 Imbrian mare dome",
+              "label": "Imd · Imbrian mare dome",
               "color": "#7be0c3"
             },
             {
               "value": "Iohi",
-              "label": "Iohi \u00b7 Imbrian orientale hevelius formation, inner facies",
+              "label": "Iohi · Imbrian orientale hevelius formation, inner facies",
               "color": "#e08b4f"
             },
             {
               "value": "Ioho",
-              "label": "Ioho \u00b7 Imbrian orientale hevelius formation, inner facies",
+              "label": "Ioho · Imbrian orientale hevelius formation, inner facies",
               "color": "#6f65b8"
             },
             {
               "value": "Iohs",
-              "label": "Iohs \u00b7 Imbrian orientale hevelius formation, secondary crater facies",
+              "label": "Iohs · Imbrian orientale hevelius formation, secondary crater facies",
               "color": "#67e04f"
             },
             {
               "value": "Iom",
-              "label": "Iom \u00b7 Imbrian orientale maunder formation",
+              "label": "Iom · Imbrian orientale maunder formation",
               "color": "#e07baa"
             },
             {
               "value": "Iork",
-              "label": "Iork \u00b7 Imbrian orientale montes rook formation, knobby facies",
+              "label": "Iork · Imbrian orientale montes rook formation, knobby facies",
               "color": "#409ab8"
             },
             {
               "value": "Iorm",
-              "label": "Iorm \u00b7 Imbrian orientale montes rook formation, massif facies",
+              "label": "Iorm · Imbrian orientale montes rook formation, massif facies",
               "color": "#e0dc7b"
             },
             {
               "value": "Ip",
-              "label": "Ip \u00b7 Imbrian plains",
+              "label": "Ip · Imbrian plains",
               "color": "#af4fe0"
             },
             {
               "value": "Isc",
-              "label": "Isc \u00b7 Imbrian secondary crater",
+              "label": "Isc · Imbrian secondary crater",
               "color": "#65b884"
             },
             {
               "value": "It",
-              "label": "It \u00b7 Imbrian terra",
+              "label": "It · Imbrian terra",
               "color": "#e05a4f"
             },
             {
               "value": "Itd",
-              "label": "Itd \u00b7 Imbrian terra dome",
+              "label": "Itd · Imbrian terra dome",
               "color": "#7b91e0"
             },
             {
               "value": "Nb",
-              "label": "Nb \u00b7 Nectarian basin undivided",
+              "label": "Nb · Nectarian basin undivided",
               "color": "#7cb840"
             },
             {
               "value": "Nbl",
-              "label": "Nbl \u00b7 Nectarian basin lineated",
+              "label": "Nbl · Nectarian basin lineated",
               "color": "#e07bcc"
             },
             {
               "value": "Nbm",
-              "label": "Nbm \u00b7 Nectarian basin massif",
+              "label": "Nbm · Nectarian basin massif",
               "color": "#4fe0d4"
             },
             {
               "value": "Nbsc",
-              "label": "Nbsc \u00b7 Nectarian basin secondary crater",
+              "label": "Nbsc · Nectarian basin secondary crater",
               "color": "#b89865"
             },
             {
               "value": "Nc",
-              "label": "Nc \u00b7 Nectarian crater",
+              "label": "Nc · Nectarian crater",
               "color": "#7e4fe0"
             },
             {
               "value": "Nnj",
-              "label": "Nnj \u00b7 Nectarian nectaris janssen formation",
+              "label": "Nnj · Nectarian nectaris janssen formation",
               "color": "#7be07f"
             },
             {
               "value": "Np",
-              "label": "Np \u00b7 Nectarian plains",
+              "label": "Np · Nectarian plains",
               "color": "#b8405f"
             },
             {
               "value": "Nt",
-              "label": "Nt \u00b7 Nectarian terra",
+              "label": "Nt · Nectarian terra",
               "color": "#7bb3e0"
             },
             {
               "value": "Ntp",
-              "label": "Ntp \u00b7 Nectarian plains and mantling, terra",
+              "label": "Ntp · Nectarian plains and mantling, terra",
               "color": "#c9e04f"
             },
             {
               "value": "pNb",
-              "label": "pNb \u00b7 Pre-Nectarian basin undivided",
+              "label": "pNb · Pre-Nectarian basin undivided",
               "color": "#ad65b8"
             },
             {
               "value": "pNbm",
-              "label": "pNbm \u00b7 Pre-Nectarian basin massif",
+              "label": "pNbm · Pre-Nectarian basin massif",
               "color": "#4fe0a3"
             },
             {
               "value": "pNc",
-              "label": "pNc \u00b7 Pre-Nectarian crater",
+              "label": "pNc · Pre-Nectarian crater",
               "color": "#e0987b"
             },
             {
               "value": "pNt",
-              "label": "pNt \u00b7 Pre-Nectarian terra",
+              "label": "pNt · Pre-Nectarian terra",
               "color": "#4041b8"
             }
           ],
@@ -567,25 +567,9 @@
     }
   ],
   "lighting": {
-    "frameSize": 512,
-    "columns": 8,
+    "bank": "sphere",
     "presentationSize": 460,
     "defaultFrame": 230,
-    "billboardFrameSize": 24,
-    "billboardColumns": 16,
-    "rowOutput": "lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "lighting-{density}x-billboard.webp",
-    "minimumLightViewZ": -1,
-    "maximumLightViewZ": 1,
-    "frameCount": 256,
-    "shadowlessFloodLimbFloor": 0.35,
-    "ambientIntensity": 0.05,
-    "radiusScale": 0.505,
-    "terminator": [
-      0,
-      0.1
-    ],
-    "maximumAlpha": 0.95,
     "bankSchema": "cssmoon-prepared-lighting-bank@1",
     "billboardSchema": "cssmoon-prepared-lighting-billboard@1",
     "metadata": {

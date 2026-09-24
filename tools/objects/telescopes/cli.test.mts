@@ -74,6 +74,13 @@ test('packaged entrypoint recognizes the current science workspace script',()=>{
   assert.doesNotMatch(result.stderr,/No css\.earth science workspace/u);
 });
 
+test('new-object bakes a spec after generating it, or objects already in the tree',()=>{
+  const spec=parseCli(['new-object','stars.json','--bake']);assert.equal(spec.command,'new-object');if(spec.command!=='new-object')return;
+  assert.equal(spec.spec,resolve('stars.json'));assert.equal(spec.bake,true);assert.equal(spec.ids,undefined);
+  const ids=parseCli(['new-object','--bake','hd-219134','hd-219134b','--json']);assert.equal(ids.command,'new-object');if(ids.command!=='new-object')return;
+  assert.deepEqual(ids.ids,['hd-219134','hd-219134b']);assert.equal(ids.spec,undefined);assert.equal(ids.json,true);
+  for(const args of [['new-object','--bake'],['new-object','a.json','b.json','--check']])assert.throws(()=>parseCli(args));
+});
 test('local import has one bounded data-only entry point',()=>{
   const parsed=parseCli(['import','spec.json','--out','run','--json']);assert.equal(parsed.command,'import');if(parsed.command!=='import')return;
   assert.equal(parsed.specification,resolve('spec.json'));assert.equal(parsed.directory,resolve('run'));assert.equal(parsed.json,true);

@@ -40,6 +40,8 @@ export interface SurfaceRasterRecipe {
 /** An unlit body: per-lens off-limb context and limb plates written by the interpretation instead of a lighting bank. */
 export interface EmissionRecipe { offLimbSize: number; limbSize: number; bodyDiameter: number; offLimbOutput: string; limbOutput: string; metadata: Record<string, unknown>; }
 export interface LightingRecipe extends LambertRasterConfig {
+    /** A shared bank (lighting-banks.ts) whose fields this recipe takes; the parser fills them in. */
+    bank?: string;
     frameSize: number;
     columns: number;
     presentationSize: number;
