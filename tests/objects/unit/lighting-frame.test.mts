@@ -41,3 +41,16 @@ test('a shape-only planet under a star with a measured colour is lit by that col
   }
   assert.deepEqual(gray, []);
 });
+
+test('every self-luminous body loads a stylesheet that places its limb plate', async () => {
+  // A lit planet's stylesheet written over an emissive one (the band-colour relens did, before it was fixed) loses the glow's plates.
+  const missing: string[] = [];
+  for (const { id } of SCENE_OBJECTS) {
+    const raster = await optional(`src/objects/${id}/source/preparation/raster.json`);
+    if (!raster?.emission) continue;
+    const descriptor = await json(`src/objects/${id}/object.json`);
+    const css = (await Promise.all((descriptor.properties.page?.stylesheets ?? []).map((path: string) => readFile(resolve(projectRoot, path), 'utf8').catch(() => '')))).join('\n');
+    if (!new RegExp(`\\.${id}-limb-layer\\b`, 'u').test(css)) missing.push(`${id}: no stylesheet places .${id}-limb-layer`);
+  }
+  assert.deepEqual(missing, []);
+});

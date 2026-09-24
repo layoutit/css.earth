@@ -6,6 +6,7 @@
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
  *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json
+ *   node tools/objects/new-object.mts --draft-photometry <id>... --out entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
  * spectrum with its cross-check, the model limb law, the catalogue colour, marker, manifest, acquisition plan, source records and
@@ -41,6 +42,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // Phase two of a system run (new-object/generate.mts runNewObject), in a process that loads the rebuilt astronomy package.
     const { runHostedPhase } = await import('./new-object/generate.mts');
     process.stdout.write(JSON.stringify(await runHostedPhase(handoff)));
+  } else if (args.includes('--draft-photometry')) {
+    // Band photometry for imaged planets from the UltracoolSheet: `--draft-photometry ID... --out entries.json`, then `--photometry entries.json` (new-object/ultracool.mts).
+    const { readFile, writeFile } = await import('node:fs/promises'), { draftUltracoolPhotometry } = await import('./new-object/ultracool.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const out = option('out'), ids = args.filter((argument, i) => !argument.startsWith('--') && args[i - 1] !== '--out');
+    if (!out || !ids.length) throw new TypeError('Usage: new-object --draft-photometry ID... --out entries.json');
+    const planets = await Promise.all(ids.map(async id => ({ id, name: String((JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`, 'utf8')) as { displayName: string }).displayName) })));
+    const { entries, notes } = await draftUltracoolPhotometry(liveArchive, planets);
+    await writeFile(out, `${JSON.stringify(entries, null, 2)}\n`);
+    process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).
     const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./new-object/spec.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');

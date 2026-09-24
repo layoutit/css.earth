@@ -136,7 +136,8 @@ export async function installBandColorLens(files: PackageFiles, id: string, name
   const descriptor = read(`${o}/object.json`);
   descriptor.properties.recipe.surfaces[0].lenses = [{ id: 'infrared', source: 'content', material: emissive ? 'emission' : 'lighting' }];
   files.set(`${o}/object.json`, json(descriptor));
-  ensureStylesheet(files, id, 'infrared');
+  // A self-luminous planet's stylesheet is the emissive one, which does not name its lens; only a lit planet's names it.
+  if (!emissive) ensureStylesheet(files, id, 'infrared');
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.color = colorHex;
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-infrared@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-infrared@2x.webp`;

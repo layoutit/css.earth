@@ -14,10 +14,12 @@ export interface Archive {
  * failed service is reported at once. Every failure names its URL. A request that gives nothing for TRANSFER_TIMEOUT_MS is a
  * dropped connection: the archives answer in seconds, and a hung one would otherwise hold a batch forever. */
 export const TRANSFER_TIMEOUT_MS = 120_000;
+export const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
 async function transfer<T>(url: string, read: (response: Response) => Promise<T>, init?: RequestInit): Promise<T> {
   for (let attempt = 1; ; attempt++) {
     try {
-      const response = await fetch(url, { ...init, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
+      // Every request names the tool, as the telescope's paper search does; Zenodo refuses one that does not.
+      const response = await fetch(url, { ...init, headers: { 'User-Agent': USER_AGENT, ...(init?.headers as Record<string, string> | undefined) }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
       if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);
       return await read(response);
     } catch (error) {

@@ -364,3 +364,27 @@ test('a whole star package from fixtures is what the bake accepts: declared file
   const stored = parseObjectSpecs({ stars: [JSON.parse(String(generated.files.get(`src/objects/${spec.id}/${STORED_SPEC}`)))] }).stars[0]!;
   assert.deepEqual(stored, { ...spec, order: 9999 }, 'the stored spec reads back to the spec that made the package');
 });
+
+test('an imaged planet\'s K, H and J magnitudes become the band colour, each cited to its paper; a planet missing a band is named', async () => {
+  const { draftUltracoolPhotometry, readCsv, ULTRACOOL } = await import('./ultracool.mts');
+  const { parsePhotometryEntries } = await import('./spec.mts');
+  assert.deepEqual(readCsv('a,b\n"x, y",2\n'), [{ a: 'x, y', b: '2' }]);
+  const main = 'name,name_simbad,name_simbadable,J_MKO,Jerr_MKO,ref_J_MKO,H_MKO,Herr_MKO,ref_H_MKO,K_MKO,Kerr_MKO,ref_K_MKO\n51 Eri b,* 51 Eri b,* 51 Eri b,19.04,0.40,Raja17,18.99,0.21,Raja17,18.67,0.19,Raja17\nAF Lep b,null,null,19.22,0.1,X,18.61,0.1,X,NaN,NaN,null\n';
+  const refs = 'code_ref,ADSkey_ref,Paperskey_ref,citetext_ref,title_ref,notes_ref\nRaja17,2017AJ....154...10R,k,Rajan et al. (2017),"Characterizing 51 Eri b, 1 to 5 um",\n';
+  const svo = (lambda: number, zero: number) => `<PARAM name="WavelengthEff" value="${lambda}"/><PARAM name="ZeroPoint" value="${zero}"/>`;
+  const archive: Archive = { async text(url, form) {
+    if (form?.QUERY?.includes("'51 Eridani b'")) return 'main_id\n"*  51 Eri b"'; if (form?.QUERY) return 'main_id\n';
+    if (url === ULTRACOOL.main) return main; if (url === ULTRACOOL.references) return refs;
+    if (url.includes('NSFCam.K')) return svo(21840.23, 638.185); if (url.includes('NSFCam.H')) return svo(16140.31, 1034.805); if (url.includes('NSFCam.J')) return svo(12417.04, 1544.028);
+    throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  const { entries, notes } = await draftUltracoolPhotometry(archive, [{ id: 'hd-29391-b', name: '51 Eridani b' }, { id: 'af-lep-b', name: 'AF Lep b' }, { id: 'x', name: 'Nobody b' }]);
+  const photometry = entries[0]!.photometry;
+  assert.deepEqual(photometry.bands.map(band => band.band), ['MKO K', 'MKO H', 'MKO J'], 'red is the longest wavelength');
+  assert.equal(photometry.bands[0]!.value, Number((638.185 * 10 ** (-0.4 * 18.67) * 1e6).toPrecision(4)), 'F = zero point x 10^(-0.4 m)');
+  assert.equal(photometry.source.url, 'https://ui.adsabs.harvard.edu/abs/2017AJ....154...10R');
+  assert.match(photometry.source.citation, /^Rajan et al\. \(2017\), as compiled in Best/u);
+  assert.equal(photometry.displayRange[1], Math.max(...photometry.bands.map(band => band.value)));
+  assert.doesNotThrow(() => parsePhotometryEntries(entries), 'the lens\'s own parser accepts the draft');
+  assert.deepEqual(notes.map(note => note.split(':')[0]), ['af-lep-b', 'x']);
+  assert.match(notes[0]!, /no MKO K magnitude/u);
+});
