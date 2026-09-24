@@ -30,6 +30,8 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       }): LabelScreenRect | null {
       if (overview || focused || preview !== undefined && preview !== body.id) return hide();
       const widthPixels = viewport.widthPixels, heightPixels = viewport.heightPixels;
+      // The caption stays below the shell header where the viewport measures one, else below a fixed clearance.
+      const headerClearance = viewport.coveredTopPixels ?? HEADER_CLEARANCE_PX;
       if (!(widthPixels && heightPixels && viewport.focalPixels > 0)) return hide();
       const delta = body.positionM.map((value, axis) => value - world.pose.positionM[axis]!);
       const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
@@ -60,12 +62,12 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       if ('labelPlacement' in body && body.labelPlacement === 'centre' && radiusPixels > height) {
         // The package asks for its caption over the body's middle (Sgr A*'s black shadow), once the disc can hold it.
         left = Math.max(-widthPixels / 2 + width / 2 + VIEWPORT_EDGE_PX, Math.min(x, widthPixels / 2 - width / 2 - VIEWPORT_EDGE_PX));
-        top = Math.max(-heightPixels / 2 + HEADER_CLEARANCE_PX, Math.min(y - height / 2, maxTop));
+        top = Math.max(-heightPixels / 2 + headerClearance, Math.min(y - height / 2, maxTop));
       } else if (meshBottom + minimumGap <= maxTop) {
         left = Math.max(-widthPixels / 2 + width / 2 + VIEWPORT_EDGE_PX,
           Math.min(x, widthPixels / 2 - width / 2 - VIEWPORT_EDGE_PX));
         top = Math.min(meshBottom + gap, maxTop);
-        if (top < -heightPixels / 2 + HEADER_CLEARANCE_PX) return hide();
+        if (top < -heightPixels / 2 + headerClearance) return hide();
       } else {
         // Once the caption cannot sit clear below the body, the body is the view: its name is in the sheet.
         return hide();

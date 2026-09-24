@@ -18,7 +18,7 @@ import { detailedFocusContextOpacity } from './detailed-focus-context.js';
 import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
-import { createLabelBudget } from '../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget } from '../labels/universe-label-policy.js';
 import { mountSelectedBodyLabel } from './selected-body-label.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 import { createUniverseLensBanks } from './universe-lens-banks.js';
@@ -259,7 +259,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const selectedRect = selectedLabel.publish(world, viewport, selected, {
                 overview, focused: detailedFocus !== null, preview: selectionPreview,
               });
-              const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : [])];
+              const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
+                ...coveredTopRects(viewport)];
               labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
                 bodyAnnotations.flatMap(body => body.labelRect ? [body.labelRect] : []), foregroundRects);
               const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);

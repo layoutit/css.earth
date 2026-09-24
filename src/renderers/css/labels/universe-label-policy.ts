@@ -37,6 +37,13 @@ export function labelLimit(width: number): number {
   return width < UNIVERSE_LABEL_POLICY.compactWidth ? UNIVERSE_LABEL_POLICY.compactLimit : UNIVERSE_LABEL_POLICY.desktopLimit;
 }
 
+/** The stage's top band under the shell header, in stage-centre coordinates: every label layer treats it as taken. */
+export function coveredTopRects(viewport: { readonly heightPixels?: number; readonly coveredTopPixels?: number }): LabelScreenRect[] {
+  const height = viewport.heightPixels, covered = viewport.coveredTopPixels;
+  if (!(height! > 0 && covered! > 0)) return [];
+  return [{ left: -Infinity, right: Infinity, top: -height! / 2 - 1, bottom: -height! / 2 + covered! }];
+}
+
 /** All publication layers spend the same slots and reserve the same screen space.
  * The foreground planner admits the active system first; context landmarks and
  * catalogue captions consume the remaining slots, in that order. */
