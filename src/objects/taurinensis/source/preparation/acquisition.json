@@ -25,15 +25,6 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/ReadMe.AcuA.txt",
-      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/ReadMe.AcuA.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/sbdb.json",
       "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=512"
     },

@@ -46,14 +46,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "geometry/cas_iss_v10.ti",
-      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "geometry/cas_rocks_v18.tf",
       "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/fk/cas_rocks_v18.tf"
     },
