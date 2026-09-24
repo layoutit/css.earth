@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "v1358-orionis",
+  "card": {
+    "text": "Young Sun-like star 52 parsecs away whose magnetic field flipped between 2013 and 2017.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2110-06729",
+        "url": "https://arxiv.org/abs/2110.06729",
+        "label": "Willamo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Of special interest is the case of V1358 Ori, which had gone through a polarity reversal between our observations and earlier ones."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "V1358 Orionis is a young Sun-like star that turns in 33 hours. Between its maps of 2013 and 2017, its magnetic field flipped.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2110-06729",
+        "url": "https://arxiv.org/abs/2110.06729",
+        "label": "Willamo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Section 5, V1358 Ori",
+        "quote": "The most interesting feature in the maps is the polarity reversal, which occurred between 2013 and 2017."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field-2013": {
+      "title": "Radial field, Sep 2013",
+      "detail": "2 epochs",
+      "summary": "Where the magnetic field points out of the star or into it, mapped from how it polarises starlight."
+    },
+    "radial-field-2017": {
+      "title": "Radial field, Dec 2017",
+      "detail": "2 epochs",
+      "summary": "Where the magnetic field points out of the star or into it, mapped from how it polarises starlight."
+    },
+    "meridional-field-2013": {
+      "title": "Meridional field, Sep 2013",
+      "detail": "2 epochs",
+      "summary": "The part of the magnetic field running north or south along the surface."
+    },
+    "meridional-field-2017": {
+      "title": "Meridional field, Dec 2017",
+      "detail": "2 epochs",
+      "summary": "The part of the magnetic field running north or south along the surface."
+    },
+    "azimuthal-field-2013": {
+      "title": "Azimuthal field, Sep 2013",
+      "detail": "2 epochs",
+      "summary": "The part of the magnetic field running around the spin axis."
+    },
+    "azimuthal-field-2017": {
+      "title": "Azimuthal field, Dec 2017",
+      "detail": "2 epochs",
+      "summary": "The part of the magnetic field running around the spin axis."
+    },
+    "brightness-2013": {
+      "title": "Brightness, Sep 2013",
+      "detail": "2 epochs",
+      "summary": "Starspots: darker, cooler patches mapped from how they distort the spectrum as the star turns."
+    },
+    "brightness-2017": {
+      "title": "Brightness, Dec 2017",
+      "detail": "2 epochs",
+      "summary": "Starspots: darker, cooler patches mapped from how they distort the spectrum as the star turns."
+    }
+  }
+}

@@ -121,17 +121,23 @@ export function planckColor(kelvin: number, colorMatching: Map<number, readonly 
  * from 336 to 1020 nm in 2 nm steps, in W m^-2 nm^-1. */
 export const XP_SAMPLED_WAVELENGTHS_NM = Array.from({ length: 343 }, (_, i) => 336 + 2 * i);
 
+/** Gaia's XP sampled product in either of the layouts it is served in: ESA's DataLink CSV (source_id, solution_id, ra, dec and the
+ * two arrays in parentheses), or a TAP query of gaiadr3.xp_sampled_mean_spectrum at a partner data centre such as ARI Heidelberg
+ * (source_id, ra, dec, the two arrays in braces, solution_id). Both hold the same 343 samples; checked equal value for value
+ * for source 4745373133284418816 on 2026-09-24. */
 export function readXpSampledSpectrum(csv: string, sourceId: string) {
   const lines = csv.split(/\r?\n/u).filter(line => line.trim());
-  if (lines[0] !== 'source_id,solution_id,ra,dec,flux,flux_error') throw new TypeError('The XP spectrum table must have the DataLink CSV columns.');
+  const datalink = lines[0] === 'source_id,solution_id,ra,dec,flux,flux_error', tap = lines[0] === 'source_id,ra,dec,flux,flux_error,solution_id';
+  if (!datalink && !tap) throw new TypeError(`The XP spectrum table must have the DataLink or the TAP CSV columns, not ${lines[0]}.`);
   // The DataLink sampled product carries the source's position; a spectrum sampled here from the coefficients leaves those
   // two fields empty, because the coefficient product does not repeat them. Neither is read.
-  const rows = lines.slice(1).map(line => /^(\d+),(\d+),([^,]*),([^,]*),"\(([^)]*)\)","\(([^)]*)\)"$/u.exec(line));
-  if (rows.some(row => !row)) throw new TypeError('An XP spectrum row does not have the DataLink CSV layout.');
+  const layout = datalink ? /^(\d+),(\d+),([^,]*),([^,]*),"\(([^)]*)\)","\(([^)]*)\)"$/u : /^(\d+),([^,]*),([^,]*),"\{([^}]*)\}","\{([^}]*)\}",(\d+)$/u;
+  const rows = lines.slice(1).map(line => layout.exec(line));
+  if (rows.some(row => !row)) throw new TypeError(`An XP spectrum row does not have the ${datalink ? 'DataLink' : 'TAP'} CSV layout.`);
   const matches = rows.filter(row => row![1] === sourceId);
   if (matches.length !== 1) throw new TypeError(`The XP spectrum table must hold exactly one row for source ${sourceId}.`);
   const list = (text: string) => text.split(',').map(value => requireFiniteNumber(Number(value), 'XP sample'));
-  const flux = list(matches[0]![5]!), fluxError = list(matches[0]![6]!);
+  const flux = list(matches[0]![datalink ? 5 : 4]!), fluxError = list(matches[0]![datalink ? 6 : 5]!);
   if (flux.length !== XP_SAMPLED_WAVELENGTHS_NM.length || fluxError.length !== flux.length) throw new TypeError(`An XP sampled spectrum has ${XP_SAMPLED_WAVELENGTHS_NM.length} samples.`);
   return { flux, fluxError };
 }

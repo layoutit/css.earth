@@ -1,0 +1,169 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-29615",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 29615",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "meridional-field",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 667872
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-29615-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 29615",
+      "classification": "star",
+      "color": "#fff3f6",
+      "distanceAu": 11210295.6,
+      "description": "Fast-spinning young Sun 54 parsecs away with a large dark spot over its pole, mapped in December 2017.",
+      "systemName": "HD 29615 system",
+      "order": 1771,
+      "context": {
+        "order": 1768
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        518654242530683000,
+        1400869166701682000,
+        -762242937724028200
+      ],
+      "presentationToReference": [
+        0.3471553612978831,
+        0.0058543135276563265,
+        0.9377893591501538,
+        0.9376560444343196,
+        0.01581216212428123,
+        -0.34720472039524575,
+        0.016861122676784048,
+        -0.9998578411664707,
+        5.561006500521612e-8
+      ],
+      "orbitUpReference": [
+        -0.0058543135276563265,
+        -0.01581216212428123,
+        0.9998578411664707
+      ],
+      "metersPerUnit": 2154425.806451613,
+      "bodyRadiusM": 667872000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,30 @@
+{
+ "id": "hd-35296",
+ "classification": "star",
+ "order": 1772,
+ "physical": {
+  "name": "HD 35296",
+  "horizonsCode": null,
+  "meanRadiusKm": 765270,
+  "gravitationalParameterKm3PerS2": 145406013337.11874,
+  "parent": null,
+  "effectiveTemperatureK": 6170
+ },
+ "physicalNotes": "Radius 1.1 solar radii from Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729): 765,270 km at 695,700 km per solar radius. Mass 1.096 (1.056 to 1.136) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 6170 K from Casagrande et al. (2011), A&A 530, A138, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729). Spin inclination 65 degrees and rotation period 3.493 d from Willamo et al. (2022), Table 2, the values of the ZDI inversion (https://arxiv.org/abs/2110.06729). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 81.10726354597193,
+  "declinationDegrees": 17.38350331190306,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 14.579223284277399,
+  "properMotionRaMasPerYear": 250.48290468501668,
+  "properMotionDecMasPerYear": -7.156277817184632,
+  "radialVelocityKmPerS": 37.700523,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3400292798990117888 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-35296/source/photometry/gaia-dr3-source.csv; cross-identification HD 35296, HR 1780, HIP 25278: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3400292798990117888",
+   "distance": "Gaia DR3 parallax 68.5908 +/- 0.1040 mas (same row, RUWE 0.82): 14.58 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 250.483, -7.156 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 37.70 +/- 0.14 km/s"
+  }
+ }
+}

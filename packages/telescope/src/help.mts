@@ -16,6 +16,7 @@ Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
+  telescope new-object SPEC.json [--json]
   telescope ascl SOFTWARE [--json]
   telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
   telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
@@ -38,6 +39,10 @@ explore.json as well as a strict query.json. Exploration does not state scientif
 In a terminal, outputs asks which available operation to run, then asks only for that operation's
 reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
 starts. With --json or redirected input/output it never prompts; the listed command templates remain.
+New-object turns a star spec into a complete object package: SIMBAD (through the same resolver as explore) names it and gives
+its Gaia DR3 source; the colour lens comes from the best archived spectrum (STIS NGSL, Gaia XP, then the ground catalogues),
+cross-checked against the next; a model limb law from Claret's grids; manifest, acquisition plan, source records and credits.
+Only prose is left marked TODO(new-object). The spec format is in tools/objects/new-object/spec.mts. It needs a css.earth checkout.
 Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
 using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
 It ranks open access first, tries one plain GET per open copy, marks browser challenges as blocked, and prints

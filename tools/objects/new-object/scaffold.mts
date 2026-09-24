@@ -1,24 +1,13 @@
-#!/usr/bin/env node
-/** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
- *
- *   node tools/objects/new-star.mts <id> --name <display name> --system <system name, e.g. "Beta Pictoris system"> --temperature <K>
- *     --temperature-source <citation with URL> --description <catalogue line> --paper <url> --paper-credit <credit>
- *   node tools/objects/new-star.mts <id> --black-hole --shadow-source <citation> --name ... --system ... --description ... --paper ... --paper-credit ...
- *
- * Requires packages/astronomy/data/bodies/<id>.json with a `star` block and `physical.meanRadiusKm`. Every number here is
- * derived from that record: the world-frame origin, the catalogue distance, the radius facts and the sky-north display axis
- * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
- * (star-catalogue-color.mts). The package starts with the shape lens and stays off the map until a surface image is added.
- * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-star), which
- * tools/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/prepare-object.mts <id> */
+/** The package files of a placed star, shared by the shape-only scaffold and the full generator (generate.mts); the command is
+ * tools/objects/new-object.mts. */
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
-import { readStarTemperature, temperatureCatalogueColor } from './star-catalogue-color.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { readStarTemperature, temperatureCatalogueColor } from '../star-catalogue-color.mts';
 
-export const TODO = 'TODO(new-star)';
+export const TODO = 'TODO(new-object)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;
 const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
 const INTER = { url: 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf', bytes: 862936, sha256: '746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c' };
@@ -249,8 +238,8 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     preparation('preparation-celestial', 'preparation/celestial.json', 'Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun', ['starfield']),
     preparation('preparation-presentation', 'preparation/presentation.json', 'Repository-authored presentation profile: emissive mode', ['presentation']),
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
-    generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper, credit: `Sphere of the published radius; marker written by tools/objects/new-star.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
-      recipe: { generator: 'tools/objects/new-star.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-star.mts', sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
+    generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper, credit: `Sphere of the published radius; marker written by tools/objects/new-object.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
+      recipe: { generator: 'tools/objects/new-object.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-object.mts', sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
     documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json', 'presentation/LICENSE.INTER-OFL', 'presentation/title-mark.json'].map(path => ({ path,
       // Provenance refuses a document without a binding; the content record is authored here.
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
@@ -287,14 +276,3 @@ export async function scaffoldStar(spec: StarScaffold, root = process.cwd()) {
   return [...files.keys(), `src/objects/${spec.id}/source/presentation/context.png`];
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), id = args.find(argument => !argument.startsWith('--') && !args[args.indexOf(argument) - 1]?.startsWith('--'));
-  const option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
-  const blackHole = args.includes('--black-hole');
-  const required = blackHole ? ['name', 'system', 'shadow-source', 'description', 'paper', 'paper-credit'] as const : ['name', 'system', 'temperature', 'temperature-source', 'description', 'paper', 'paper-credit'] as const;
-  const missing = required.filter(name => option(name) === undefined);
-  if (!id || missing.length) throw new TypeError(`Usage: new-star <id> ${required.map(name => `--${name} <value>`).join(' ')} [--order <n>]; missing ${missing.join(', ') || 'id'}.`);
-  const order = option('order');
-  const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, ...blackHole ? { blackHole: { shadowSource: option('shadow-source')! } } : { temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')! }, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
-  console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
-}

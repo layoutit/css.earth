@@ -1,0 +1,427 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/v1358-orionis/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "v1358-orionis-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssv1358-orionis-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2011-v-quadratic.tsv",
+          "grid": {
+            "teffK": 6032,
+            "logg": 4.42,
+            "models": {
+              "Filt": "V",
+              "Met": "L",
+              "Mod": "A"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        },
+        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,032 K and log g 4.42 (u1 0.410, u2 0.289): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    },
+    {
+      "id": "radial-field-2013",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358or2.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2013",
+        "label": "Sep 2013",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358or2.dat",
+        "column": 3,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": -145.05,
+        "maximum": 145.05,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "B radial",
+        "units": "G",
+        "valueTransform": {
+          "scale": 1000,
+          "offset": 0
+        },
+        "colors": [
+          "#0000ff",
+          "#ffffff",
+          "#ff0000"
+        ],
+        "labels": [
+          "-145",
+          "0",
+          "+145"
+        ],
+        "description": "Radial field of the large-scale magnetic field from the ZDI inversion (Sep 2013). Black line: 59 degrees south, below which the star never faces us.",
+        "title": "ZDI radial field · Sep 2013"
+      }
+    },
+    {
+      "id": "radial-field-2017",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358ori.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2017",
+        "label": "Dec 2017",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358ori.dat",
+        "column": 3,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": -187.01000000000002,
+        "maximum": 187.01000000000002,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "B radial",
+        "units": "G",
+        "valueTransform": {
+          "scale": 1000,
+          "offset": 0
+        },
+        "colors": [
+          "#0000ff",
+          "#ffffff",
+          "#ff0000"
+        ],
+        "labels": [
+          "-187",
+          "0",
+          "+187"
+        ],
+        "description": "Radial field of the large-scale magnetic field from the ZDI inversion (Dec 2017). Black line: 59 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI radial field · Dec 2017"
+      }
+    },
+    {
+      "id": "meridional-field-2013",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358or2.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "meridional-field-2013",
+        "label": "Sep 2013",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358or2.dat",
+        "column": 4,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": -145.05,
+        "maximum": 145.05,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "B meridional",
+        "units": "G",
+        "valueTransform": {
+          "scale": 1000,
+          "offset": 0
+        },
+        "colors": [
+          "#0000ff",
+          "#ffffff",
+          "#ff0000"
+        ],
+        "labels": [
+          "-145",
+          "0",
+          "+145"
+        ],
+        "description": "Meridional field of the large-scale magnetic field from the ZDI inversion (Sep 2013). Black line: 59 degrees south, below which the star never faces us.",
+        "title": "ZDI meridional field · Sep 2013"
+      }
+    },
+    {
+      "id": "meridional-field-2017",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358ori.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "meridional-field-2017",
+        "label": "Dec 2017",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358ori.dat",
+        "column": 4,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": -187.01000000000002,
+        "maximum": 187.01000000000002,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "B meridional",
+        "units": "G",
+        "valueTransform": {
+          "scale": 1000,
+          "offset": 0
+        },
+        "colors": [
+          "#0000ff",
+          "#ffffff",
+          "#ff0000"
+        ],
+        "labels": [
+          "-187",
+          "0",
+          "+187"
+        ],
+        "description": "Meridional field of the large-scale magnetic field from the ZDI inversion (Dec 2017). Black line: 59 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI meridional field · Dec 2017"
+      }
+    },
+    {
+      "id": "azimuthal-field-2013",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358or2.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-2013",
+        "label": "Sep 2013",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358or2.dat",
+        "column": 5,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": -145.05,
+        "maximum": 145.05,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "B azimuthal",
+        "units": "G",
+        "valueTransform": {
+          "scale": 1000,
+          "offset": 0
+        },
+        "colors": [
+          "#0000ff",
+          "#ffffff",
+          "#ff0000"
+        ],
+        "labels": [
+          "-145",
+          "0",
+          "+145"
+        ],
+        "description": "Azimuthal field of the large-scale magnetic field from the ZDI inversion (Sep 2013). Black line: 59 degrees south, below which the star never faces us.",
+        "title": "ZDI azimuthal field · Sep 2013"
+      }
+    },
+    {
+      "id": "azimuthal-field-2017",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358ori.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "azimuthal-field-2017",
+        "label": "Dec 2017",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358ori.dat",
+        "column": 5,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": -187.01000000000002,
+        "maximum": 187.01000000000002,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "B azimuthal",
+        "units": "G",
+        "valueTransform": {
+          "scale": 1000,
+          "offset": 0
+        },
+        "colors": [
+          "#0000ff",
+          "#ffffff",
+          "#ff0000"
+        ],
+        "labels": [
+          "-187",
+          "0",
+          "+187"
+        ],
+        "description": "Azimuthal field of the large-scale magnetic field from the ZDI inversion (Dec 2017). Black line: 59 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI azimuthal field · Dec 2017"
+      }
+    },
+    {
+      "id": "brightness-2013",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358or2.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-2013",
+        "label": "Sep 2013",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358or2.dat",
+        "column": 6,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 0.68901,
+        "maximum": 1.05176,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "brightness",
+        "units": "relative",
+        "colors": [
+          "#1e0100",
+          "#460000",
+          "#680100",
+          "#990000",
+          "#bd1500",
+          "#ed5200",
+          "#ff8300",
+          "#ffbe79",
+          "#fff2e6"
+        ],
+        "labels": [
+          "0.69",
+          "1.05"
+        ],
+        "description": "Brightness of the photosphere from the ZDI inversion (Sep 2013), relative to the unspotted surface. Black line: 59 degrees south, below which the star never faces us.",
+        "title": "ZDI brightness · Sep 2013"
+      }
+    },
+    {
+      "id": "brightness-2017",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "source": "science/willamo-2022/v1358ori.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-2017",
+        "label": "Dec 2017",
+        "format": "latitude-belt-map",
+        "path": "science/willamo-2022/v1358ori.dat",
+        "column": 6,
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "willamo-2022-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 0.78617,
+        "maximum": 1.0181,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+        "variable": "brightness",
+        "units": "relative",
+        "colors": [
+          "#1e0100",
+          "#460000",
+          "#680100",
+          "#990000",
+          "#bd1500",
+          "#ed5200",
+          "#ff8300",
+          "#ffbe79",
+          "#fff2e6"
+        ],
+        "labels": [
+          "0.79",
+          "1.02"
+        ],
+        "description": "Brightness of the photosphere from the ZDI inversion (Dec 2017), relative to the unspotted surface. Black line: 59 degrees south, below which the star never faces us.",
+        "title": "HARPSpol · ZDI brightness · Dec 2017"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "v1358-orionis-context-{id}{suffix}.webp",
+    "limbOutput": "v1358-orionis-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssv1358-orionis-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

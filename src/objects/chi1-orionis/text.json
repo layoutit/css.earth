@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "chi1-orionis",
+  "card": {
+    "text": "Naked-eye young Sun in Orion, 8.7 parsecs away, whose magnetic field was mapped in December 2017.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2110-06729",
+        "url": "https://arxiv.org/abs/2110.06729",
+        "label": "Willamo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "We present five new ZDI maps of young, solar-type stars from December 2017."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "χ¹ Orionis is a young Sun-like star 8.7 parsecs away, bright enough to see without a telescope. Its magnetic field may flip every few years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2110-06729",
+        "url": "https://arxiv.org/abs/2110.06729",
+        "label": "Willamo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Section 5, chi1 Ori",
+        "quote": "This would indicate a rapid magnetic cycle of only a few years, but more frequent mapping would be needed to verify this."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field": {
+      "title": "Radial field, Dec 2017",
+      "detail": "Dec 2017",
+      "summary": "Where the magnetic field points out of the star or into it, mapped from how it polarises starlight."
+    },
+    "meridional-field": {
+      "title": "Meridional field, Dec 2017",
+      "detail": "Dec 2017",
+      "summary": "The part of the magnetic field running north or south along the surface."
+    },
+    "azimuthal-field": {
+      "title": "Azimuthal field, Dec 2017",
+      "detail": "Dec 2017",
+      "summary": "The part of the magnetic field running around the spin axis."
+    }
+  }
+}

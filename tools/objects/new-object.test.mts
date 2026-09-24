@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { skyPlaneOrientation } from '@cssearth/astronomy';
-import { TODO, scaffoldStarFiles, solarRadii } from './new-star.mts';
+import { TODO, scaffoldStarFiles, solarRadii } from './new-object.mts';
 import { temperatureCatalogueColor } from './star-catalogue-color.mts';
 
 const root = resolve(import.meta.dirname, '../..');

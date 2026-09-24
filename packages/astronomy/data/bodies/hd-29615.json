@@ -1,0 +1,30 @@
+{
+ "id": "hd-29615",
+ "classification": "star",
+ "order": 1771,
+ "physical": {
+  "name": "HD 29615",
+  "horizonsCode": null,
+  "meanRadiusKm": 667872,
+  "gravitationalParameterKm3PerS2": 130390259000.07593,
+  "parent": null,
+  "effectiveTemperatureK": 5820
+ },
+ "physicalNotes": "Radius 0.96 solar radii from Vidotto et al. (2014), MNRAS 441, 2361, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729): 667,872 km at 695,700 km per solar radius. Mass 0.983 (0.942 to 1.023) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5820 K from Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729). Spin inclination 62 degrees and rotation period 2.32 d from Willamo et al. (2022), Table 2, the values of the ZDI inversion (https://arxiv.org/abs/2110.06729). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 69.68337273000238,
+  "declinationDegrees": -27.03388305164279,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 54.34884789341498,
+  "properMotionRaMasPerYear": 56.2901668190188,
+  "properMotionDecMasPerYear": -10.885573311021869,
+  "radialVelocityKmPerS": 18.237667,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4891725758804030208 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-29615/source/photometry/gaia-dr3-source.csv; cross-identification HD 29615, HIP 21632: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4891725758804030208",
+   "distance": "Gaia DR3 parallax 18.3997 +/- 0.0150 mas (same row, RUWE 1.03): 54.35 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 56.290, -10.886 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 18.24 +/- 0.30 km/s"
+  }
+ }
+}

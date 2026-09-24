@@ -190,18 +190,18 @@
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2112.07478",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-object.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/new-object.mts",
         "inputs": [
           "sgr-a-star-observational-measurements"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/new-object.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "A flat neutral gray disc, the marker of an unresolved surface."
