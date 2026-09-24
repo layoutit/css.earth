@@ -1,3 +1,4 @@
+import { safeRelativePath } from './source-path.mts';
 import { isArray } from './is-array.mts';
 import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
@@ -10,7 +11,7 @@ export interface SourceManifest { schema: string; inputs: readonly SourceInput[]
 export interface SourceManifestLocation { objectId: string; objectName: string; sourceRoot: string; }
 export interface SourceVerification { entry: SourceEntry; objectName: string; sourceRoot: string; }
 import { access, readFile, readdir } from "node:fs/promises";
-import { posix, relative, resolve, win32 } from "node:path";
+import { relative, resolve } from "node:path";
 
 const COLLECTIONS = Object.freeze([
   "inputs",
@@ -221,12 +222,6 @@ export function assertSourceRange(entry: { path: string; range?: SourceRange; or
   if (!nonEmpty(entry.origin) || !/^https?:\/\//u.test(entry.origin)) {
     throw new TypeError(`${label} ranges a member with no remote origin.`);
   }
-}
-
-function safeRelativePath(value: unknown) {
-  return nonEmpty(value) && !value.includes("\\") && !value.includes("\0") &&
-    !posix.isAbsolute(value) && !win32.isAbsolute(value) &&
-    posix.normalize(value) === value && value !== "." && !value.startsWith("../");
 }
 
 function nonEmpty(value: unknown): value is string {

@@ -1,3 +1,4 @@
+import { cross3 } from '../../../platform/vector3.mts';
 import type { TrackballMetrics, Vector3, Quaternion, Matrix3 } from './types.js';
 export interface SurfaceFlyToInput { clientX: number; clientY: number; trackball: TrackballMetrics; currentZoom: number; minimumZoom: number; maximumZoom: number; }
 export type SurfaceFlyToPlan = NonNullable<ReturnType<typeof planSurfaceFlyTo>>;
@@ -321,14 +322,6 @@ function transpose3(matrix: Matrix3): Matrix3 {
 
 function flipY(): Matrix3 {
   return [[1, 0, 0], [0, -1, 0], [0, 0, 1]];
-}
-
-function cross3(first: Vector3, second: Vector3): Vector3 {
-  return [
-    first[1] * second[2] - first[2] * second[1],
-    first[2] * second[0] - first[0] * second[2],
-    first[0] * second[1] - first[1] * second[0],
-  ];
 }
 
 function normalize3(vector: Vector3): Vector3 {

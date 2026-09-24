@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { deliveryReady } from './delivery.ts';
-import { hash, writeAtomic } from './io.ts';
+import { hash } from './io.ts';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 
 for (const texture of ['prepared/test/slices/x/00.webp', 'prepared/test/atlases/x.webp']) {
 test(`app preparation rebuilds missing ${texture} and rejects changed textures or reference metadata`, async () => {

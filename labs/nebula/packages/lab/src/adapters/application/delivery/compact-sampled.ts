@@ -1,10 +1,11 @@
+import { readCompactPin as pinned } from '@cssearth/volume-bake/compact-inputs/io';
 import { CSS_COMPILER_RENDER_BUDGET } from '../../../../../../../../src/renderers/css/volume/compiler-render-budget.ts';
 import { replayCompactSampled as replay } from '@cssearth/volume-bake/compact-inputs/sampled';
 import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
 import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
 /** Retained measured particles and per-emitter materials; never stores rendered slices. */
-import { readFile, writeFile, mkdir, realpath } from "node:fs/promises";
-import { resolve, relative, isAbsolute } from "node:path";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { resolve } from "node:path";
 import { gzipSync, gunzipSync } from "node:zlib";
 import { geometrySha } from "../../../server/workflows/geometry/registered-source.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
@@ -56,14 +57,6 @@ const pin = (v: unknown): CompilerPin => {
   const p = object(v);
   return { path: text(p.path) };
 };
-async function pinned(root: string, p: CompilerPin) {
-  if (p.path.startsWith("/") || p.path.split("/").includes(".."))
-    throw new Error("Invalid compact source path");
-  const actual = await realpath(resolve(root, p.path));
-  const offset = relative(await realpath(root), actual);
-  if (offset === ".." || offset.startsWith("../") || isAbsolute(offset)) throw new Error("Compact pin escapes root");
-  return readFile(actual);
-}
 async function json(root: string, path: string) {
   return JSON.parse(await readFile(resolve(root, path), "utf8")) as unknown;
 }

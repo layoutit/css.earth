@@ -24,8 +24,6 @@ export function bandColorDisplay(bands: readonly string[], inputQuantity: BandCo
   return { kind: 'band-composite', inputQuantity, bands: [...bands], displayRange: [range[0], range[1]], outputEncoding: 'srgb' };
 }
 
-/** A normalized linear display channel -> sRGB code value. Clamp only at the
- * final display boundary, after interpolation, photometry and mosaic blending. */
 /** Interpolate an authored hex palette at a fraction; endpoints clamp. */
 export function interpolatePalette(colors: readonly string[], fraction: number): number[] {
   const t = Math.max(0, Math.min(1, fraction)) * (colors.length - 1);
@@ -35,6 +33,8 @@ export function interpolatePalette(colors: readonly string[], fraction: number):
   return a.map((v, c) => Math.round(v + (b[c] - v) * remainder));
 }
 
+/** A normalized linear display channel -> sRGB code value. Clamp only at the
+ * final display boundary, after interpolation, photometry and mosaic blending. */
 export function linearToSrgb(value: number): number {
   if (!Number.isFinite(value)) throw new TypeError('A display channel must be finite.');
   const bounded = Math.max(0, Math.min(1, value));
@@ -130,4 +130,17 @@ export function asinhBandEvidence(display: AsinhBandDisplay) {
   return { ...display, interpretation: display.bands.length === 1 ? 'monochrome' : 'false-color', transferReference: LUPTON_ASINH_REFERENCE,
     ...(display.bands.length === 2 ? { channels: 'Red is the first band, blue the second, green their mean (the CDS DSS2 colour survey convention).', channelReference: TWO_BAND_GREEN_REFERENCE } : {}),
     processing: 'Each band is calibrated to MJy/sr and divided by its own measured range, so hue shows where a band is bright relative to itself, not physical band ratios. One common minimum is subtracted; one asinh curve maps the mean of the bands and scales every band by the same factor. Pixels brighter than the display are scaled down as a whole, then quantized once to 8 bits. This does not reconstruct natural color.' };
+}
+
+/** Apply a linear-light gain to a known sRGB display byte and quantize once. */
+export function applyLinearTint(channel: number, factor: number) {
+  const srgb = channel / 255;
+  const linear = srgb <= 0.04045
+    ? srgb / 12.92
+    : Math.pow((srgb + 0.055) / 1.055, 2.4);
+  const lit = Math.max(0, Math.min(1, linear * factor));
+  const encoded = lit <= 0.0031308
+    ? lit * 12.92
+    : 1.055 * Math.pow(lit, 1 / 2.4) - 0.055;
+  return Math.max(0, Math.min(255, Math.round(encoded * 255)));
 }

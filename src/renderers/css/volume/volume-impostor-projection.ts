@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../platform/vector3.mts';
 import { projectVolumeSphere } from './projected-volume-visibility.js';
 import type { PreparedCssVolume, PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
 
@@ -60,4 +61,3 @@ function transport(vector: VolumeVector, from: VolumeVector, to: VolumeVector): 
 }
 function smooth(t: number): number { const value = Math.max(0, Math.min(1, t)); return value * value * (3 - 2 * value); }
 function dot(a: VolumeVector, b: VolumeVector): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
-function cross(a: VolumeVector, b: VolumeVector): VolumeVector { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }

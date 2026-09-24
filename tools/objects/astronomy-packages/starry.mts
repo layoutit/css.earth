@@ -4,7 +4,7 @@
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
  * (starry-toolchain.json says why). Install: node tools/objects/astronomy-packages/starry.mts install */
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { runToolchainProcess } from '../toolchain-process.mts';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -21,22 +21,16 @@ function descriptor() {
   return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
 
-function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}, input?: string) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', input, maxBuffer: 256 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-2000)}`);
-  return result.stdout;
-}
-
 export async function installStarry() {
   const { entry, digest } = descriptor(), prefix = resolve(STARRY_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(STARRY_ROOT, { recursive: true, force: true });
   await mkdir(STARRY_ROOT, { recursive: true });
-  run('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
-    ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') });
+  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
+    ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
   // The lock is hash-pinned and complete; Theano-PyMC builds against the environment's NumPy.
-  run(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
-    resolve(import.meta.dirname, requireString(entry.requirements, 'requirements'))], { PYTHONNOUSERSITE: '1' });
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
+    resolve(import.meta.dirname, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(STARRY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   await writeFile(resolve(STARRY_ROOT, 'installed.json'), `${JSON.stringify({ id: 'starry', pinsSha256: digest }, null, 2)}\n`);
   verifyStarry();
@@ -105,7 +99,7 @@ export interface StarrySystem {
 }
 
 function call(request: Record<string, unknown>, toolchain = starryToolchainSync()) {
-  const answer = requireRecord(JSON.parse(run(toolchain.python, ['-c', PYTHON], toolchain.env, JSON.stringify(request))) as unknown, 'starry answer');
+  const answer = requireRecord(JSON.parse(runToolchainProcess(toolchain.python, ['-c', PYTHON], { env: toolchain.env, maxBuffer: 256 * 1024 * 1024, input: JSON.stringify(request) })) as unknown, 'starry answer');
   if (answer.schema !== 'cssearth-starry@1' || answer.starry !== toolchain.version) throw new Error(`starry answered as ${String(answer.starry)}, expected ${toolchain.version}.`);
   return answer;
 }
@@ -135,7 +129,7 @@ export function starrySystemFlux(map: StarryMap, system: StarrySystem, times: re
 
 export function verifyStarry() {
   const toolchain = starryToolchainSync();
-  const found = run(toolchain.python, ['-c', "import importlib.metadata as m; print(m.version('starry'))"], toolchain.env).trim();
+  const found = runToolchainProcess(toolchain.python, ['-c', "import importlib.metadata as m; print(m.version('starry'))"], { env: toolchain.env, maxBuffer: 256 * 1024 * 1024 }).trim();
   const { entry } = descriptor();
   if (found !== requireString(entry.starry)) throw new Error(`Expected starry ${String(entry.starry)}, found ${found}.`);
   return found;

@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../platform/vector3.mts';
 import type { Vector2, Vector3, Matrix3, Matrix3dLike } from './types.js';
 import type { SilhouetteEllipse } from './types.js';
 export interface OffAxisFrame {radial:Vector2;sinTheta:number;cosTheta:number;tanTheta:number;}
@@ -194,14 +195,6 @@ export function determinant(basis:readonly Vector3[]) {
 
 export function dot(a:Vector3, b:Vector3) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-}
-
-export function cross(a:Vector3, b:Vector3): number[] {
-  return [
-    a[1] * b[2] - a[2] * b[1],
-    a[2] * b[0] - a[0] * b[2],
-    a[0] * b[1] - a[1] * b[0],
-  ];
 }
 
 export function add(a:Vector3, b:Vector3): number[] {

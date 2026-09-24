@@ -8,8 +8,7 @@ interface GeometryPolygon extends Omit<Parameters<typeof computeTextureAtlasPlan
 }
 type TextureLeafOptions = {seamEdges?: Set<number>; seamBleed?:number; fitSurface?:boolean; leafSize?:number};
 import {buildSeamBleedPolygonEdges,computeTextureAtlasPlanPublic,resolvePolyTextureLeafGeometry,formatCssLength} from '@layoutit/polycss';
-import {createProjectiveSurfaceRasterPresentation,fitProjectiveTextureGeometryToStableLayout,polarCapRasterScale,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
-import {fitTextureGeometry} from '../material-composition/texture-geometry.mts';
+import {createProjectiveSurfaceRasterPresentation,fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout,polarCapRasterScale,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
 import {ellipsoidPoint} from '../material-composition/ellipsoid.mts';
 
 const presentation={backend:'image',lighting:'source',projection:'projective'} as const;

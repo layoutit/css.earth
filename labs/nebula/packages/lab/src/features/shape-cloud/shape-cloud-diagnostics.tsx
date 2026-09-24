@@ -1,3 +1,4 @@
+import { bindViewportZoom } from '../../ui/viewport-input.ts';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import type { Matrix } from '../observations/models/model';
 import type { ShapeCloudComparison, ShapeCloudPin } from './types.ts';
@@ -50,15 +51,8 @@ function ComparisonPane({ comparison, src, label, kind, frame, matrix, view, onV
   const scaleRef = useRef(scale); scaleRef.current = scale;
   const drag = useRef<{ id: number; x: number; y: number; view: ComparisonView } | null>(null);
   useEffect(() => {
-    const node = viewport.current; if (!node) return;
-    const observer = new ResizeObserver(([entry]) => { if (entry) setExtent({ width: entry.contentRect.width, height: entry.contentRect.height }); });
-    observer.observe(node);
-    function wheel(event: WheelEvent) {
-      event.preventDefault(); const current = viewRef.current;
-      onView({ ...current, zoom: Math.max(.15, Math.min(12, current.zoom * Math.exp(-event.deltaY * .0015))) });
-    }
-    node.addEventListener('wheel', wheel, { passive: false });
-    return () => { observer.disconnect(); node.removeEventListener('wheel', wheel); };
+    const element = viewport.current; if (!element) return;
+    return bindViewportZoom(element, viewRef, onView, setExtent);
   }, [onView]);
   function pointerDown(event: PointerEvent<HTMLDivElement>) {
     if (event.button !== 0) return;

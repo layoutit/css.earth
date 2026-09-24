@@ -1,7 +1,7 @@
+import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from '../validation/css-matrix.js';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedCssSurfaceShell } from './types.js';
 
-const NUMBER = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/iu;
 
 /** Accepts prepared geometry and material addresses, never authored runtime CSS. */
 export function validatePreparedCssSurfaceShell(input: unknown): PreparedCssSurfaceShell {
@@ -96,11 +96,4 @@ function dimensions(value: unknown, count: number): value is string {
   if (typeof value !== 'string') return false;
   const parts = value.trim().split(/\s+/u);
   return parts.length === count && parts.every(part => part.endsWith('px') && NUMBER.test(part.slice(0, -2)) && positive(Number(part.slice(0, -2))));
-}
-function matrix(value: unknown): value is string {
-  if (typeof value !== 'string') return false;
-  const match = /^matrix3d\(([^)]+)\)$/u.exec(value.trim());
-  if (!match) return false;
-  const parts = match[1]!.split(',').map(part => part.trim());
-  return parts.length === 16 && parts.every(part => NUMBER.test(part) && Number.isFinite(Number(part)));
 }

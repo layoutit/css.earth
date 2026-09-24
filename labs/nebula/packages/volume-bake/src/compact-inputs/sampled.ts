@@ -1,6 +1,5 @@
+import { readCompactPin as pinned } from './io.ts';
 /** Replay retained measured samples and emitter colors without fitting or native images. */
-import { realpath, readFile } from 'node:fs/promises';
-import { resolve, relative, isAbsolute } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hash as geometrySha } from './io.ts';
 import { readSampledRecipe } from '@cssearth/volume-core/contracts/sampled-recipe';
@@ -40,14 +39,6 @@ const pin = (v: unknown): CompilerPin => {
   const p = object(v);
   return { path: text(p.path) };
 };
-async function pinned(root: string, p: CompilerPin) {
-  if (p.path.startsWith("/") || p.path.split("/").includes(".."))
-    throw new Error("Invalid compact source path");
-  const actual = await realpath(resolve(root, p.path));
-  const offset = relative(await realpath(root), actual);
-  if (offset === ".." || offset.startsWith("../") || isAbsolute(offset)) throw new Error("Compact pin escapes root");
-  return readFile(actual);
-}
 function colors(v: unknown): SampledColor[] {
   return array(v).map((c) => {
     const r = object(c),

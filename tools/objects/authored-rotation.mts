@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../src/platform/vector3.mts';
 import { sha256 } from '../../src/platform/sha256.mts';
 import type { RotationElements } from "@cssearth/astronomy";
 import { requireRecord, requireFiniteNumber } from "../sources/source-values.mts";
@@ -83,7 +84,7 @@ async function synchronousRotation(directory: string, source: Record<string, unk
 export function synchronousRotationElements(positionKm: readonly number[], velocityKmPerDay: readonly number[], periodDays: number, eccentricity = 0): RotationElements {
   if (eccentricity !== 0) throw new TypeError('Synchronous rotation needs a circular orbit; supply an explicit authored rotation law for an eccentric orbit.');
   const unit = (v: readonly number[]) => { const n = Math.hypot(...v); if (!(n > 0)) throw new RangeError('Direction has no magnitude.'); return v.map(c => c / n); };
-  const cross = (a: readonly number[], b: readonly number[]) => [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
+
   const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
   const pole = unit(cross(positionKm, velocityKmPerDay)), toHost = unit(positionKm.map(c => -c));
   const node = unit([-pole[1]!, pole[0]!, 0]);

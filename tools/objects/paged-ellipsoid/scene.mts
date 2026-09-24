@@ -1,4 +1,4 @@
-import type {Vec3, PolyTextureLeafGeometry} from '@layoutit/polycss';
+import type {Vec3} from '@layoutit/polycss';
 import type {PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolygon, RasterPolygon} from './scene-contract.mts';
 import type {createAtmospherePreparation, AtmosphereConfiguration} from './atmosphere.mts';
 import type {createPagedSurfaceRaster} from './surface-raster.mts';
@@ -22,6 +22,7 @@ import {
 } from "@layoutit/polycss";
 import {
   createProjectiveSurfaceRasterPresentation,
+  fitTextureGeometry,
   fitProjectiveTextureGeometryToStableLayout,
   prepareProjectiveTextureLayer,
 } from "../../../src/platform/projective-surface-raster.mts";
@@ -685,33 +686,6 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
     projection: fitted.projection,
     lighting: "source",
     lightingOverlay: false,
-  };
-}
-
-function fitTextureGeometry(geometry: PolyTextureLeafGeometry, leafWidth: number, leafHeight: number): PolyTextureLeafGeometry {
-  const matrix = String(geometry.matrix).split(",").map(Number);
-  if (matrix.length !== 16 || matrix.some((value) => !Number.isFinite(value))) {
-    throw new Error("Prepared Earth texture matrix is invalid.");
-  }
-  const matrixScaleX = geometry.leafWidth / leafWidth;
-  const matrixScaleY = geometry.leafHeight / leafHeight;
-  for (const index of [0, 1, 2, 3]) matrix[index] *= matrixScaleX;
-  for (const index of [4, 5, 6, 7]) matrix[index] *= matrixScaleY;
-  const rasterScaleX = leafWidth / geometry.leafWidth;
-  const rasterScaleY = leafHeight / geometry.leafHeight;
-  return {
-    ...geometry,
-    matrix: matrix.map((value) => Number(value.toFixed(6))).join(","),
-    leafWidth,
-    leafHeight,
-    backgroundPosition: [
-      geometry.backgroundPosition[0] * rasterScaleX,
-      geometry.backgroundPosition[1] * rasterScaleY,
-    ],
-    backgroundSize: [
-      geometry.backgroundSize[0] * rasterScaleX,
-      geometry.backgroundSize[1] * rasterScaleY,
-    ],
   };
 }
 

@@ -1,9 +1,9 @@
+import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from '../validation/css-matrix.js';
 import { validatePreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
 
 const FACE_IDS = ['px', 'nx', 'py', 'ny', 'pz', 'nz'];
-const NUMBER = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/iu;
 
 export function validatePreparedCssSky(input: unknown, resources: PreparedCssVolume['resources']): PreparedCssSky {
   const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky', ['parallax', 'nearFaces', 'stars']);
@@ -73,11 +73,4 @@ function dimensions(value: unknown, count: number, nonzero: boolean): value is s
   if (typeof value !== 'string') return false;
   const parts = value.trim().split(/\s+/u);
   return parts.length === count && parts.every(part => part.endsWith('px') && NUMBER.test(part.slice(0, -2)) && (nonzero ? positive : finite)(Number(part.slice(0, -2))));
-}
-function matrix(value: unknown): value is string {
-  if (typeof value !== 'string') return false;
-  const match = /^matrix3d\(([^)]+)\)$/u.exec(value.trim());
-  if (!match) return false;
-  const parts = match[1]!.split(',').map(part => part.trim());
-  return parts.length === 16 && parts.every(part => NUMBER.test(part) && Number.isFinite(Number(part)));
 }

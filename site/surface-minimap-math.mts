@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../src/platform/vector3.mts';
 import { composeDragRotation } from '@cssearth/engine';
 import type { PositionM, OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
@@ -9,7 +10,7 @@ const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 const unit = (v: PositionM): PositionM => { const length = Math.hypot(...v); return [v[0] / length, v[1] / length, v[2] / length]; };
 const unitRotation = (v: readonly number[]): OrientationXyzw => { const length = Math.hypot(...v); return [v[0] / length, v[1] / length, v[2] / length, v[3] / length]; };
 const dot = (a: PositionM, b: PositionM) => a.reduce((sum, x, i) => sum + x * b[i], 0);
-const cross = (a: PositionM, b: PositionM): PositionM => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 
 export function mapDirection(u: number, v: number, { prime, east, north }: SurfaceAxes): PositionM {
   const longitude = u * 2 * Math.PI, latitude = (.5 - v) * Math.PI;

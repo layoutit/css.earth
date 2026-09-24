@@ -1,10 +1,10 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import sharp from 'sharp';
 
 const SAMPLE_OFFSETS = [[.25, .25], [.75, .25], [.25, .75], [.75, .75]];
 // Four premultiplied RGBA float samples per pixel: bound preparation memory.
 const MAX_PIXELS = 8 * 1024 * 1024;
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, value, index) => sum + value * b[index], 0);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 function normalize(vector: readonly number[]) {
   const length = Math.hypot(...vector);
   if (!(length > 0)) throw new Error('Degenerate prepared plane');

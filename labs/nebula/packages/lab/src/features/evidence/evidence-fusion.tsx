@@ -3,7 +3,7 @@ import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { readStructureCatalogue, type StructureCatalogue } from '../observations/models/structures-model';
-import { adjustedMatrix, savedObservationFit, unchanged } from '../observations/models/model';
+import { catalogueMatrices } from '../observations/models/catalogue-matrices';
 import { localFile } from '../legacy-viewer/controller';
 import { ImageCredit } from '../workspace/image-credit';
 import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
@@ -25,9 +25,7 @@ export function EvidenceFusion({ cataloguePath, observationManifest }: { catalog
   return <FusionSession key={cataloguePath} catalogue={data} cataloguePath={cataloguePath} observationManifest={observationManifest} />;
 }
 function FusionSession({ catalogue, cataloguePath, observationManifest }: { catalogue: StructureCatalogue; cataloguePath: string; observationManifest?: string }) {
-  const matrices = useMemo(() => Object.fromEntries(catalogue.images.map(image => [image.id,
-    adjustedMatrix({ imageToFrame: image.imageToFrame, source: { width: image.nativeWidth, height: image.nativeHeight } }, catalogue.frame,
-      observationManifest ? savedObservationFit(observationManifest, { id: image.id, source: { url: image.sourceUrl } }) : unchanged)])), [catalogue, observationManifest]);
+  const matrices = useMemo(() => catalogueMatrices(catalogue, observationManifest), [catalogue, observationManifest]);
   const key = `nebula:joint-evidence:1:${cataloguePath}:${JSON.stringify(catalogue.images.map(image => [image.id,image.sourceSha256,image.mapSha256,matrices[image.id]]))}`;
   const defaults: FusionRequest['settings'] = { channel: 'ridges', weights: catalogue.images.map(() => 1), sensitivity: 1 };
   const [settings, setSettings] = useState(() => { try { return readFusionSettings(JSON.parse(localStorage.getItem(key) ?? 'null')); } catch { return defaults; } });

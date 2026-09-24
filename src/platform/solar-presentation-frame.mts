@@ -1,3 +1,4 @@
+import { cross3 as cross } from './vector3.mts';
 import type { Vector3, Matrix3 } from "../renderers/css/solar-system/types.ts";
 // Builds the ecliptic presentation frame of a body: where each body-fixed direction (+Z north pole, +X prime meridian)
 // lands in the CSS scene the retained camera orbits (+x right, +y down, +z toward the viewer). Prepared once per body
@@ -64,14 +65,6 @@ function formatComponent(value: number) {
 
 function dot(a: Vector3, b: Vector3) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-}
-
-function cross(a: Vector3, b: Vector3) {
-  return [
-    a[1] * b[2] - a[2] * b[1],
-    a[2] * b[0] - a[0] * b[2],
-    a[0] * b[1] - a[1] * b[0],
-  ];
 }
 
 function subtract(a: Vector3, b: Vector3) {

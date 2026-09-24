@@ -1,3 +1,4 @@
+import { bindViewportZoom } from '../../ui/viewport-input.ts';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import type { Matrix } from '../observations/models/model';
 import type { ShapeCloudComponent, ShapeCloudMode, ShapeCloudResult } from './types.ts';
@@ -31,14 +32,7 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
   const drag = useRef<{ id: number; x: number; y: number; view: CloudView; pan: boolean; component?: string } | null>(null);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
-    const observer = new ResizeObserver(([entry]) => { if (entry) setExtent({ width: entry.contentRect.width, height: entry.contentRect.height }); });
-    observer.observe(element);
-    function wheel(event: WheelEvent) {
-      event.preventDefault(); const current = viewRef.current;
-      onView({ ...current, zoom: Math.max(.15, Math.min(12, current.zoom * Math.exp(-event.deltaY * .0015))) });
-    }
-    element.addEventListener('wheel', wheel, { passive: false });
-    return () => { observer.disconnect(); element.removeEventListener('wheel', wheel); };
+    return bindViewportZoom(element, viewRef, onView, setExtent);
   }, [onView]);
   useEffect(() => {
     return () => { renderer.current?.destroy(); renderer.current = null; committedId.current = null; };

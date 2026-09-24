@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import { pds4Blocks, pds4Elements } from '../pds-labels.mts';
 import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
@@ -8,7 +9,7 @@ const parseCamera = shape({ ...archivedCameraFields, ...sipCameraFields, ...dime
   startTime: text, target: text });
 const unquote = (value: string | undefined) => value?.replace(/^'(.*)'$/, '$1').trim();
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+
 const unit = (v: number[]) => { const length = Math.hypot(...v); return v.map(n => n / length); };
 export const multiplyCameraMatrices = (a: readonly number[][],b: readonly number[][]) => a.map(row => b[0].map((_,j) => row.reduce((sum,v,k) => sum+v*b[k][j],0)));
 export const inverseCameraMatrix = (m: readonly number[][]) => {const co=[cross(m[1],m[2]),cross(m[2],m[0]),cross(m[0],m[1])],d=dot(m[0],co[0]);if(!(Math.abs(d)>1e-30))throw new Error('Singular camera matrix.');return [0,1,2].map(i=>co.map(row=>row[i]/d));};

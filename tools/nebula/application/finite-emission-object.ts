@@ -11,7 +11,7 @@ import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.
 import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
 import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
-import { writeAtomic } from './io.ts';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 
 const record = (value: unknown, at: string): Record<string, unknown> => {
   assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Expected an object: ${at}`);

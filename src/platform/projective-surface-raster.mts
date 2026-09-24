@@ -74,12 +74,10 @@ function serializeFiniteMatrix(matrix: readonly number[]) {
 
 export function fitProjectiveTextureGeometryToStableLayout<T extends ProjectiveGeometry>(
   geometry: T,
-  maximumSize = MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE,
 ) {
   if (!geometry || geometry.projection !== "projective" ||
       !Number.isFinite(geometry.leafWidth) || geometry.leafWidth <= 0 ||
       !Number.isFinite(geometry.leafHeight) || geometry.leafHeight <= 0 ||
-      !Number.isFinite(maximumSize) || maximumSize <= 0 ||
       !isArray(geometry.backgroundPosition) ||
       !isArray(geometry.backgroundSize) ||
       geometry.backgroundPosition.length !== 2 ||
@@ -91,8 +89,8 @@ export function fitProjectiveTextureGeometryToStableLayout<T extends ProjectiveG
   }
   const layoutScale = Math.min(
     1,
-    maximumSize / geometry.leafWidth,
-    maximumSize / geometry.leafHeight,
+    MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE / geometry.leafWidth,
+    MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE / geometry.leafHeight,
   );
   if (layoutScale === 1) return geometry;
   const matrix = String(geometry.matrix).split(",").map(Number);
@@ -336,4 +334,29 @@ export function createProjectiveSurfaceRasterPresentation({
     layout,
     overscan,
   });
+}
+
+type TextureCoordinates = Pick<ProjectiveGeometry, 'matrix' | 'leafWidth' | 'leafHeight' | 'backgroundPosition' | 'backgroundSize'>;
+/** Rescale a texture leaf without changing its source coordinates. */
+export function fitTextureGeometry<T extends TextureCoordinates>(geometry: T, leafWidth: number, leafHeight: number): Omit<T,keyof TextureCoordinates> & TextureCoordinates {
+  const matrix = String(geometry.matrix).split(',').map(Number);
+  if (matrix.length !== 16 || matrix.some((value) => !Number.isFinite(value))) {
+    throw new Error('Prepared texture matrix is invalid.');
+  }
+  const matrixScaleX = geometry.leafWidth / leafWidth;
+  const matrixScaleY = geometry.leafHeight / leafHeight;
+  for (const index of [0, 1, 2, 3]) matrix[index] *= matrixScaleX;
+  for (const index of [4, 5, 6, 7]) matrix[index] *= matrixScaleY;
+  const rasterScaleX = leafWidth / geometry.leafWidth;
+  const rasterScaleY = leafHeight / geometry.leafHeight;
+  return {
+    ...geometry,
+    matrix: matrix.map((value) => Number(value.toFixed(6))).join(','),
+    leafWidth,
+    leafHeight,
+    backgroundPosition: [geometry.backgroundPosition[0] * rasterScaleX,
+      geometry.backgroundPosition[1] * rasterScaleY],
+    backgroundSize: [geometry.backgroundSize[0] * rasterScaleX,
+      geometry.backgroundSize[1] * rasterScaleY],
+  };
 }

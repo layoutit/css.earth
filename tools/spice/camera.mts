@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../src/platform/vector3.mts';
 /**
  * A pinhole camera from SPICE kernels for one exposure: the instrument frame's
  * orientation, the observer's position and the Sun direction in the target's
@@ -48,7 +49,7 @@ export interface SpiceCamera {
 const AXES: Record<string, readonly number[]> = { X: [1, 0, 0], '-X': [-1, 0, 0], Y: [0, 1, 0], '-Y': [0, -1, 0], Z: [0, 0, 1], '-Z': [0, 0, -1] };
 const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const unit = (v: readonly number[]) => { const n = Math.hypot(v[0], v[1], v[2]); return [v[0] / n, v[1] / n, v[2] / n]; };
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 
 /** Inverse of a 3x3 matrix by adjugate; throws for a singular pixel model. */
 export function invert(m: Matrix3): Matrix3 {

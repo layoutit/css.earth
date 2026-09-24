@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
+import { useOrbitDrag } from '../../ui/use-orbit-drag.ts';
+import { bindViewportZoom } from '../../ui/viewport-input.ts';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CompilerResult } from './result.ts';
 import { createCompilerViewer, type CompilerMaterial, type CompilerViewer } from '../../adapters/viewer/compiler-viewer';
 import { compilerInspectionCamera, type CompilerInspectionFrame } from '@cssearth/volume-viewer/camera/inspection';
@@ -28,10 +30,10 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
   const viewport = useRef<HTMLDivElement>(null), host = useRef<HTMLDivElement>(null);
   const renderer = useRef<CompilerViewer | null>(null), viewRef = useRef(view);
   const selection = useRef({ lensId, mode, stars }); selection.current = { lensId, mode, stars }; viewRef.current = view;
+  const dragEvents = useOrbitDrag(viewRef, onView);
   const committedKey = useRef('');
   const [visible, setVisible] = useState<CompilerResult | null>(null), [error, setError] = useState('');
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
-  const drag = useRef<{ id: number; x: number; y: number; view: CloudView; pan: boolean } | null>(null);
   const scene = result?.scene;
   const inspectionKey = inspectionFrame ? JSON.stringify(inspectionFrame) : fieldOfViewArcsec ?? 'scene';
   const key = scene ? `${scene.neutral.path}:${scene.lenses.map(item => item.volume.path).join(':')}:${inspectionKey}` : '';
@@ -71,9 +73,7 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
   }, [mode, lensId, visible?.id]);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
-    const wheel = (event: WheelEvent) => { event.preventDefault(); const current = viewRef.current;
-      onView({ ...current, zoom: Math.max(.15, Math.min(12, current.zoom * Math.exp(-event.deltaY * .0015))) }); };
-    element.addEventListener('wheel', wheel, { passive: false }); return () => element.removeEventListener('wheel', wheel);
+    return bindViewportZoom(element, viewRef, onView);
   }, [onView]);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
@@ -105,25 +105,13 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
       transformOrigin: 'center', transform: `translate(-50%,-50%) matrix(${a},${b},0,${d},0,0)` };
   }, [view.yaw, view.pitch, view.panX, view.panY, view.zoom, visible?.scene.skyBoundsArcsec,
     visible?.scene.coordinates.localOriginArcsec, source?.boundsArcsec, viewportSize, fov, inspectionFrame]);
-  function pointerDown(event: PointerEvent<HTMLDivElement>) {
-    if (event.button !== 0) return; event.currentTarget.setPointerCapture(event.pointerId);
-    drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, view: viewRef.current,
-      pan: viewRef.current.locked || event.shiftKey };
-  }
-  function pointerMove(event: PointerEvent<HTMLDivElement>) {
-    const start = drag.current; if (!start || start.id !== event.pointerId) return;
-    const dx = event.clientX - start.x, dy = event.clientY - start.y;
-    onView(start.pan ? { ...start.view, panX: start.view.panX + dx, panY: start.view.panY + dy } :
-      { ...start.view, yaw: start.view.yaw + dx * .35, pitch: Math.max(-89, Math.min(89, start.view.pitch - dy * .35)) });
-  }
   const ready = Boolean(visible);
   return <section className="shape-cloud-pane shape-cloud-pane-cloud compiler-stage" aria-label="Compiled nebula volume"
     data-compiler-ready={ready} data-compiler-result={visible?.id ?? ''} data-compiler-lens={lensId ?? ''}
     data-compiler-mode={mode} data-compiler-stars={stars} data-compiler-original={showOriginal}
     data-compiler-pose={`${view.yaw},${view.pitch}`} data-compiler-field-of-view={fov}>
     <div className="shape-cloud-pane-label">Compiled cloud</div>
-    <div className="shape-cloud-viewport" ref={viewport} tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
-      onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }}
+    <div className="shape-cloud-viewport" ref={viewport} tabIndex={0} {...dragEvents}
       onDoubleClick={() => onView(earthCompilerView)} onKeyDown={event => { if (event.key === 'Home') { event.preventDefault(); onView(earthCompilerView); } }}>
       <div className="shape-cloud-render-host" ref={host} data-compiler-host="true" data-compiler-result={visible?.id ?? ''}
         style={{ width: '100%', height: '100%' }} />

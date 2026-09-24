@@ -12,7 +12,7 @@
  * the lock, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
  * `micromamba`). */
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { runToolchainProcess } from '../toolchain-process.mts';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -39,12 +39,6 @@ async function descriptor(id: ToolchainId) {
   return { entry, lockPath, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
 
-function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-2000)}`);
-  return result.stdout;
-}
-
 /** Fetch one pinned data archive into the toolchain and unpack it where the descriptor says; the bytes must match its sha256. */
 async function installData(root: string, record: unknown) {
   const data = requireRecord(record, 'data'), url = requireString(data.url), sha256 = requireString(data.sha256);
@@ -55,7 +49,7 @@ async function installData(root: string, record: unknown) {
   const archive = resolve(root, 'data.tar.gz'), target = resolve(root, requireString(data.directory));
   await mkdir(target, { recursive: true });
   await writeFile(archive, bytes);
-  run('tar', ['-xzf', archive, '-C', target]);
+  runToolchainProcess('tar', ['-xzf', archive, '-C', target]);
   await rm(archive);
 }
 
@@ -65,9 +59,9 @@ export async function installToolchain(id: ToolchainId) {
   await rm(root, { recursive: true, force: true });
   await mkdir(root, { recursive: true });
   const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
-  run('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], env);
-  run(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', lockPath]);
-  const sitePackages = run(resolve(prefix, 'bin/python'), ['-c', 'import sysconfig; print(sysconfig.get_paths()["purelib"])']).trim();
+  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', lockPath]);
+  const sitePackages = runToolchainProcess(resolve(prefix, 'bin/python'), ['-c', 'import sysconfig; print(sysconfig.get_paths()["purelib"])']).trim();
   for (const record of requireArray(entry.patches ?? [])) {
     const patch = requireRecord(record, 'patch'), path = resolve(sitePackages, requireString(patch.file));
     const source = await readFile(path, 'utf8'), find = requireString(patch.find);

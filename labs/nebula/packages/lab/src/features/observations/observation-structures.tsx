@@ -1,3 +1,4 @@
+import { bindImageZoom } from '../../ui/viewport-input.ts';
 import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { InfoTip } from '../../ui/info-tip';
 import { shapeCloudPresets } from '../shape-cloud/shape-cloud-presets';
@@ -120,14 +121,8 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
     const element = viewport.current; if (!element) return;
     const observer = new ResizeObserver(([entry]) => { if (entry) setExtent({ width: entry.contentRect.width, height: entry.contentRect.height }); });
     observer.observe(element);
-    const wheel = (event: WheelEvent) => {
-      event.preventDefault(); const bounds = element.getBoundingClientRect(), old = cameraRef.current;
-      const zoom = Math.min(12, Math.max(.015, old.zoom * Math.exp(-event.deltaY * .0015)));
-      const x = event.clientX - bounds.left, y = event.clientY - bounds.top;
-      setCamera({ zoom, x: x - (x - old.x) * zoom / old.zoom, y: y - (y - old.y) * zoom / old.zoom });
-    };
-    element.addEventListener('wheel', wheel, { passive: false });
-    return () => { observer.disconnect(); element.removeEventListener('wheel', wheel); };
+    const unbindZoom = bindImageZoom(element, cameraRef, setCamera);
+    return () => { observer.disconnect(); unbindZoom(); };
   }, [host]);
   const image = data?.images.find(item => item.id === selected), map = maps[selected], review = reviews[selected];
   const detector = useGeometryDetection(preset ? undefined : image, geometries[selected], cataloguePath);

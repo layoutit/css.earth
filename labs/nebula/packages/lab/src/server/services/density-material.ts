@@ -1,3 +1,4 @@
+import { createConcurrencyLimit } from './concurrency.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Node-only integrated-signal gating of immutable prepared cloud textures. */
@@ -50,13 +51,6 @@ export function cloudTextureTexelPoint(resource: Pick<SourceResource, 'width' | 
   const cssZ = (m[2]! * localX + m[6]! * localY + m[14]!) / w;
   return [cssY / 50, cssX / 50, cssZ / 50];
 }
-function limiter(concurrency: number) {
-  let active = 0; const queue: (() => void)[] = [];
-  return async <T>(run: () => Promise<T>): Promise<T> => {
-    if (active >= concurrency) await new Promise<void>(done => queue.push(done)); else active++;
-    try { return await run(); } finally { const next = queue.shift(); if (next) next(); else active--; }
-  };
-}
 export function parseCloudDensityPreparationRequest(input: unknown): CloudDensityPreparationRequest {
   if (!record(input) || Object.keys(input).some(key => !['subjectId', 'filter'].includes(key)) ||
       typeof input.subjectId !== 'string' || !/^[a-z0-9-]+$/u.test(input.subjectId) || !record(input.filter) ||
@@ -70,7 +64,7 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
   maximumCacheBytes?: number; maximumCacheFiles?: number;
 } = {}) {
   const root = resolve(repositoryRoot), cache = resolve(root, '.local/nebula-lab/cloud-density-cache');
-  const textureLimit = limiter(4), processingLimit = limiter(4), requestLimit = limiter(1), cacheLimit = limiter(1);
+  const textureLimit = createConcurrencyLimit(4), processingLimit = createConcurrencyLimit(4), requestLimit = createConcurrencyLimit(1), cacheLimit = createConcurrencyLimit(1);
   const mapInflight = new Map<string, Promise<{ map: Float32Array; path: string }>>(), outputInflight = new Map<string, Promise<CloudDensityResource>>();
   let queued = 0;
   async function safe(path: string): Promise<string> {

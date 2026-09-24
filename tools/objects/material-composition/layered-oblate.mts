@@ -1,3 +1,4 @@
+import { applyLinearTint } from '../color-transfer.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {RingMotionPoint} from './radial-motion.mts';
@@ -38,12 +39,12 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, polarCapRasterScale, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, polarCapRasterScale, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
-import { fitTextureGeometry, polarQuad } from './texture-geometry.mts';
+import { polarQuad } from './texture-geometry.mts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
 import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
-import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, crossVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
+import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
 
@@ -3243,18 +3244,6 @@ function prepareInitialObjectViewDirection() {
     CAMERA_ROTATION_X_DEGREES,
     OBJECT_OBLIQUITY_DEGREES,
   );
-}
-
-function applyLinearTint(channel:number, factor:number) {
-  const srgb = channel / 255;
-  const linear = srgb <= 0.04045
-    ? srgb / 12.92
-    : Math.pow((srgb + 0.055) / 1.055, 2.4);
-  const lit = Math.max(0, Math.min(1, linear * factor));
-  const encoded = lit <= 0.0031308
-    ? lit * 12.92
-    : 1.055 * Math.pow(lit, 1 / 2.4) - 0.055;
-  return Math.max(0, Math.min(255, Math.round(encoded * 255)));
 }
 
 function prepareBody() {

@@ -20,14 +20,6 @@ export function subtractVector(left: ReadonlyVector3, right: ReadonlyVector3): V
   return [left[0] - right[0], left[1] - right[1], left[2] - right[2]];
 }
 
-export function crossVector(left: ReadonlyVector3, right: ReadonlyVector3): Vector3 {
-  return [
-    left[1] * right[2] - left[2] * right[1],
-    left[2] * right[0] - left[0] * right[2],
-    left[0] * right[1] - left[1] * right[0],
-  ];
-}
-
 export function rotateX([x, y, z]: ReadonlyVector3, radians: number): Vector3 {
   const cosine = Math.cos(radians);
   const sine = Math.sin(radians);

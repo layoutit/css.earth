@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { cross3 as cross } from '../../src/platform/vector3.mts';
 
 // Computes, for each body, the direction to the Sun, the J2000 ecliptic
 // north pole, the body's orbit normal and its orbital velocity direction, all
@@ -37,8 +38,6 @@ const EPOCH_LABEL = "2026-09-03T00:00:00 TT";
 const sourceKey = (id: string) => /^[a-z][a-z0-9]*$/.test(id) ? id : JSON.stringify(id);
 
 function isIncluded<T extends string>(values: readonly T[], value: string): value is T { return (values as readonly string[]).includes(value); }
-
-
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
@@ -592,12 +591,4 @@ function normalize(vector: readonly number[]) {
 
 function dot(a: readonly number[], b: readonly number[]) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-}
-
-function cross(a: readonly number[], b: readonly number[]): [number, number, number] {
-  return [
-    a[1] * b[2] - a[2] * b[1],
-    a[2] * b[0] - a[0] * b[2],
-    a[0] * b[1] - a[1] * b[0],
-  ];
 }

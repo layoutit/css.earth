@@ -1,7 +1,8 @@
-import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
-import { dirname, isAbsolute, relative, resolve } from 'node:path';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
+import { createHash } from 'node:crypto';
+import { readFile, readdir } from 'node:fs/promises';
+import { isAbsolute, relative, resolve } from 'node:path';
 import { parseLabModelJson, resolveLabModelPath } from '../../../resources/model-paths.ts';
 
 export interface Pin { path: string }
@@ -15,12 +16,6 @@ export function localPath(root: string, path: string) {
 export async function pinned(root: string, pin: Pin) {
   return readFile(localPath(root, pin.path));
 }
-export async function writeAtomic(path: string, bytes: Uint8Array | string) {
-  await mkdir(dirname(path), { recursive: true });
-  const temporary = `${path}.${process.pid}.tmp`;
-  try { await writeFile(temporary, bytes); await rename(temporary, path); }
-  finally { await rm(temporary, { force: true }); }
-}
 export async function acquire(root: string, pin: Pin & { url: string }) {
   const path = localPath(root, pin.path);
   const existing = await readFile(path).catch((error: NodeJS.ErrnoException) => { if (error.code !== 'ENOENT') throw error; return null; });
@@ -32,6 +27,20 @@ export async function acquire(root: string, pin: Pin & { url: string }) {
   const bytes = Buffer.from(await response.arrayBuffer());
   await writeAtomic(path, bytes);
 }
+/** Record every staged artifact before its manifest is written. Paths remain relative to that stage. */
+export async function collectArtifacts(root: string): Promise<Record<string, { sha256: string; bytes: number }>> {
+  const artifacts: Record<string, { sha256: string; bytes: number }> = {};
+  async function collect(directory: string) {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      const path = resolve(directory, entry.name);
+      if (entry.isDirectory()) await collect(path);
+      else { const bytes = await readFile(path); artifacts[relative(root, path)] = { sha256: hash(bytes), bytes: bytes.length }; }
+    }
+  }
+  await collect(root);
+  return artifacts;
+}
+
 export async function run(command: string, args: string[], root: string, onLine: (line: string) => void = console.log) {
   await new Promise<void>((done, reject) => {
     const child = spawn(command, args, { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] });

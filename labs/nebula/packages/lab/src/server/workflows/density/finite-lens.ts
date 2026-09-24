@@ -1,5 +1,6 @@
+import { collectArtifacts } from './io.ts';
 /** Finite component colors on one immutable conditional emission field. */
-import {readFile,writeFile,mkdir,cp,readdir,rename} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,cp,rename} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import sharp from 'sharp';
 import {parseLabModelJson} from '../../../resources/model-paths.ts';
@@ -110,5 +111,5 @@ export async function bakeFiniteLens(root:string,input:FiniteLensInput,signal?:A
  await json(resolve(staging,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
  const local=relative(root,output),subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(relative(root,modelDir),local));subject.id=id;subject.directory=local;subject.name=sourceResult.subject.name+' · finite material';subject.sourcePageUrl=work.sourcePageUrl;subject.credit=work.credit;subject.reconstructionImage={...oldResult.subject.reconstructionImage,label:sourceResult.subject.reconstructionImage.label+' · finite material',note:provenance.qualification.reason};subject.reconstructionNeutral={descriptor:'neutral-object.json'};subject.modelNote=provenance.qualification.reason;
  const result={...oldResult,resultId,finiteMaterial:{modelResultId:input.modelResultId,sourceResultId:input.sourceResultId,...(channelGain?{channelGain}:{}),...(toneCurve?{toneCurve}:{})},imageId:sourceResult.imageId,removalResultId:sourceResult.removalResultId,placement:sourceResult.placement,appearance,subject};await json(resolve(staging,'result.json'),result);
- const artifacts:Record<string,{sha256:string;bytes:number}>={};async function collect(dir:string){for(const e of await readdir(dir,{withFileTypes:true})){const path=resolve(dir,e.name);if(e.isDirectory())await collect(path);else{const b=await readFile(path);artifacts[relative(staging,path)]={sha256:sha256(b),bytes:b.length};}}}await collect(staging);await json(resolve(staging,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,sourceSha256:work.source.sha256,artifacts});await verifyFiniteMaterialArtifacts(staging,id);signal?.throwIfAborted();await rename(staging,output);return result;
+ const artifacts = await collectArtifacts(staging);await json(resolve(staging,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,sourceSha256:work.source.sha256,artifacts});await verifyFiniteMaterialArtifacts(staging,id);signal?.throwIfAborted();await rename(staging,output);return result;
 }
