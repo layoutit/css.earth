@@ -266,10 +266,10 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
 
-/** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as the
- * binary orbit bank (`encodeWorldOrbits`), which this summary pins; each orbit here keeps its parent, bounds and
- * size. Classification views are build-time only. */
-export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank: { readonly byteLength: number }) {
+/** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as binary
+ * orbit banks, one per orbit centre (`worldOrbitBanks`), which this summary pins by byte length; each orbit here keeps
+ * its parent, bounds and size, and names its bank by its centre. Classification views are build-time only. */
+export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>) {
   const { classificationViews: _views, ...rest } = prepared;
   // System views keep their members; their camera candidates are `worldSystemViews`, loaded after the first body mounts.
   const members = <T extends { readonly systemView?: PreparedSystemView }>(body: T): T => {
@@ -277,7 +277,7 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank:
     const { candidates: _candidates, ...view } = body.systemView;
     return freeze({ ...body, systemView: freeze(view) });
   };
-  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBank: freeze({ ...orbitBank }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
+  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
     return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
@@ -298,7 +298,7 @@ export function worldSystemViews(prepared: PreparedWorldContext) {
  * Uint32. The planner worker reads them as typed-array views; nothing is parsed into objects. */
 export const WORLD_ORBITS_MAGIC = 0x4f575343; // 'CSWO'
 export const WORLD_ORBITS_VERSION = 1;
-export function encodeWorldOrbits(prepared: PreparedWorldContext): Uint8Array {
+export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
   const sections: (Float64Array | Uint32Array)[] = [];
   let offset = 0;
   const section = (values: Float64Array | Uint32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
@@ -309,7 +309,7 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext): Uint8Array {
   };
   const bodies = prepared.bodies.flatMap(body => {
     const orbit = body.orbit;
-    if (!orbit) return [];
+    if (!orbit || !include(body)) return [];
     return [{ id: body.id, vertices: f64(orbit.verticesM.flat()), trail: f64(orbit.trail), activeChords: u32(orbit.activeChords),
       extentChords: u32(orbit.extentChords),
       ...(orbit.closed === false ? { bodyVertexIndex: orbit.bodyVertexIndex, trailModel: orbit.trailModel } : {}),
@@ -329,6 +329,13 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext): Uint8Array {
     at += values.byteLength; at += (8 - (at - dataStart) % 8) % 8;
   }
   return bytes;
+}
+/** One orbit bank per orbit centre (the Sun, each planet with moons, each other star, Sgr A*): the planner worker reads a
+ * centre's bank when one of its orbits would be drawn, so a page never downloads the paths of systems it does not show
+ * (the single bank was 1.6 MB brotli on every page, 2026-09-24). */
+export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
+  const centres = [...new Set(prepared.bodies.flatMap(body => body.orbit ? [body.orbit.centerBodyId] : []))].sort();
+  return centres.map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.orbit?.centerBodyId === id) }));
 }
 export interface PreparedOrbitLodLevel {
   readonly vertexIndices: readonly number[]; readonly trail: readonly number[];

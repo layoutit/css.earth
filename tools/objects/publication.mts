@@ -11,20 +11,27 @@ import { writePreparedSet, type PreparedOutput } from '../prepared/write-prepare
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);
 
 /** Validate consumer JSON before publication; private preparation folders stay staged. */
-/** Binary files a prepared set may carry, each beside the JSON that owns it: the world orbit bank the spatial-context step
- * writes next to `world-context.json` (tools/objects/prepare-spatial-context.ts). */
-const PREPARED_BINARIES: Readonly<Record<string, string>> = { 'world-orbits.bin': 'world-context.json' };
+/** Folders a prepared set may carry, each beside the JSON that owns it: the spatial-context step writes one orbit bank
+ * per centre and one system view per host next to `world-context.json` (tools/objects/prepare-spatial-context.ts). */
+const PREPARED_FOLDERS: Readonly<Record<string, { owner: string; extension: string }>> = {
+  'world-orbits': { owner: 'world-context.json', extension: '.bin' }, 'system-views': { owner: 'world-context.json', extension: '.json' } };
 export async function readPreparedBinaryOutputs(directory: string) {
-  const names = new Set((await readdir(directory, { withFileTypes: true })).filter(entry => entry.isFile()).map(entry => entry.name));
-  return Object.entries(PREPARED_BINARIES).filter(([binary, owner]) => names.has(binary) && names.has(owner))
-    .map(([filename]) => ({ filename, path: resolve(directory, filename) }));
+  const entries = await readdir(directory, { withFileTypes: true }), names = new Set(entries.map(entry => entry.name));
+  const outputs = [];
+  for (const [folder, { owner, extension }] of Object.entries(PREPARED_FOLDERS)) {
+    if (!names.has(folder) || !names.has(owner)) continue;
+    for (const file of await readdir(resolve(directory, folder), { withFileTypes: true })) {
+      if (!file.isFile() || !safe(file.name) || !file.name.endsWith(extension)) throw new TypeError(`Prepared folder ${folder} must hold only ${extension} files; found ${file.name} in ${directory}.`);
+      outputs.push({ filename: `${folder}/${file.name}`, path: resolve(directory, folder, file.name) });
+    }
+  }
+  return outputs.sort((left, right) => left.filename.localeCompare(right.filename));
 }
 export async function readPreparedJsonOutputs(directory: string) {
   const outputs = [];
   const entries = await readdir(directory, { withFileTypes: true }), names = new Set(entries.map(entry => entry.name));
   for (const entry of entries) {
     if (entry.isDirectory()) continue;
-    if (entry.isFile() && PREPARED_BINARIES[entry.name] && names.has(PREPARED_BINARIES[entry.name]!)) continue;
     if (!entry.isFile() || !entry.name.endsWith('.json')) throw new TypeError(`Prepared object output must contain only regular JSON files; found ${entry.name} in ${directory}.`);
     const path = resolve(directory, entry.name);
     JSON.parse(await readFile(path, 'utf8'));

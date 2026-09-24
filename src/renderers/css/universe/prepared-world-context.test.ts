@@ -4,7 +4,7 @@ import { required } from '../../../../tools/contract/test-values.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
-import { decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../prepared-data/world-context.js';
+import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../prepared-data/world-context.js';
 import { mountPreparedWorldContext } from './prepared-world-context.js';
 import { worldContextGeometry } from '../prepared-data/world-context.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
@@ -2487,21 +2487,23 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
   layer.destroy();
 });
 
-test('the binary orbit bank decodes to exactly the orbits of the full prepared file', async () => {
+test('the orbit banks, one per centre, decode to exactly the orbits of the full prepared file', async () => {
   const prepared = new URL('../../../objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-  const bytes = await readFile(new URL('world-orbits.bin', prepared));
-  const bank = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-  const decoded = decodeWorldOrbits(summary, bank);
+  const bankOf = async (id: string) => { const bytes = await readFile(new URL(`world-orbits/${id}.bin`, prepared)); return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength); };
+  const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
+  const decoded = decodeWorldOrbits(summary, banks);
   expect(decoded.bodies.map(body => body.id)).toEqual(full.bodies.map(body => body.id));
   for (const [index, body] of decoded.bodies.entries()) {
     expect(body.orbit, body.id).toEqual(full.bodies[index]!.orbit);
   }
-  // A bank of another size, or one missing an orbit's path, never decodes.
-  expect(() => decodeWorldOrbits(summary, bank.slice(0, bank.byteLength - 8))).toThrow(/its summary says/);
-  const orbiting = summary.bodies.find(body => body.orbit)!;
-  expect(() => decodeWorldOrbits({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, bank)).toThrow(/lacks its path/);
+  // A bank of another size, one missing an orbit's path, or one for a centre the summary does not pin never decodes.
+  const sun = banks.get('sun')!;
+  expect(() => decodeWorldOrbitBank(summary, 'sun', sun.slice(0, sun.byteLength - 8))).toThrow(/its summary says/);
+  const orbiting = summary.bodies.find(body => body.orbit?.centerBodyId === 'sun')!;
+  expect(() => decodeWorldOrbitBank({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, 'sun', sun)).toThrow(/lacks its path/);
+  expect(() => decodeWorldOrbitBank(summary, 'nowhere', sun)).toThrow(/summary says undefined/);
 });
 
 test('circle dots grow with radius from 1,000 km to the system star, and stop there', () => {

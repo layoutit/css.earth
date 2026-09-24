@@ -4,7 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { encodeWorldOrbits, parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '../../src/preparation/spatial-context.js';
+import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; readonly centerParentBodyId?: string; }
@@ -154,12 +154,14 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
   // Browser payload: compact JSON. Indentation was 60% of the fetched bytes.
   await writeIfChanged(options.outputPath, `${JSON.stringify(prepared)}\n`);
-  // The browser reads the summary; the planner worker adds the binary orbit bank the summary pins.
-  // The full JSON above remains for build-time tools.
-  const orbits = encodeWorldOrbits(prepared);
-  await writeIfChanged(worldOrbitsPath(options.outputPath), orbits);
+  // The browser reads the summary; the planner worker adds each orbit centre's binary bank, which the summary pins by
+  // byte length, when that centre's orbits come into view. The full JSON above remains for build-time tools.
+  const banks = worldOrbitBanks(prepared), bankDirectory = worldOrbitsDirectory(options.outputPath), keptBanks = new Set<string>();
+  for (const bank of banks) { keptBanks.add(`${bank.id}.bin`); await writeIfChanged(resolve(bankDirectory, `${bank.id}.bin`), bank.bytes); }
+  for (const name of await readdir(bankDirectory).catch(() => [] as string[])) if (!keptBanks.has(name)) await rm(resolve(bankDirectory, name));
+  await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
-    { byteLength: orbits.byteLength }))}\n`);
+    Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength]))))}\n`);
   // System framing's camera candidates, one file per host, read when navigation frames that system.
   const directory = worldSystemViewsDirectory(options.outputPath), views = worldSystemViews(prepared), kept = new Set<string>();
   for (const view of views) { kept.add(`${view.id}.json`); await writeIfChanged(resolve(directory, `${view.id}.json`), `${JSON.stringify(view)}\n`); }
@@ -172,9 +174,9 @@ export function worldSystemViewsDirectory(outputPath: string): string {
   return resolve(dirname(outputPath), 'system-views');
 }
 
-/** `world-context.json` → `world-orbits.bin`, beside it. */
-export function worldOrbitsPath(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-orbits.bin');
+/** `world-context.json` → `world-orbits/`, beside it: `<orbit centre id>.bin` per centre. */
+export function worldOrbitsDirectory(outputPath: string): string {
+  return resolve(dirname(outputPath), 'world-orbits');
 }
 
 /** `world-context.json` → `world-context-summary.json`, beside it. */
