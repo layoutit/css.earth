@@ -12,7 +12,9 @@ const nonempty=(value:unknown):value is string=>typeof value==='string'&&value.l
 /** A pin identifies bytes git does not hold. A file authored in this repository carries none; git is its record. */
 export interface SourceEntry { path:string;id?:string;origin?:string;consumers?:string[];range?:SourceRange;sourceBinding?:SourceBinding; }
 
-export interface SourceManifest { schema:string;inputs:SourceEntry[];generatedIntermediates:SourceEntry[];documents:SourceEntry[]; }
+/** A file a named tool makes; parseSourceManifest refuses one without its generator. */
+export interface GeneratedSourceEntry extends SourceEntry { generator:string; }
+export interface SourceManifest { schema:string;inputs:SourceEntry[];generatedIntermediates:GeneratedSourceEntry[];documents:SourceEntry[]; }
 
 export function containedPath(root:string,path:string):string {
  if(!nonempty(path)||path.includes('\\')||path.includes('\0')||posix.isAbsolute(path)||win32.isAbsolute(path)||posix.normalize(path)!==path||path==='.'||path.startsWith('../'))throw new TypeError(`Unsafe relative path: ${path}.`);
