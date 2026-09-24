@@ -38,8 +38,16 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
  for(const asset of manifest.assets){const path=containedPath(root,asset.filename);if(!(await lstat(path)).isFile())throw new Error(`Runtime asset is not a regular file: ${asset.filename}.`);const bytes=await readFile(path);if(bytes.length!==asset.bytes||sha256(bytes)!==asset.sha256)throw new Error(`Runtime asset drifted: ${asset.filename}.`);}
 }
 
+/** The renderer's stylesheets, whose `url(/scenes/<id>/…)` values the deploy resolves to published hashes like the
+ * prepared data's (site/asset-origin.mts). A body's stylesheet lenses are part of what it ships. */
+export async function stylesheetTexts():Promise<string[]> {
+ const directory=resolve(process.cwd(),'src/renderers/css/styles');
+ const names=(await readdir(directory)).filter(name=>name.endsWith('.css')).sort();
+ return Promise.all(names.map(name=>readFile(resolve(directory,name),'utf8')));
+}
+
 export async function prepareRuntimeManifest({id,publicRoot,objectDirectory,values,allowPreparationArtifacts=false}:{id:string;publicRoot:string;objectDirectory:string;values:unknown[];allowPreparationArtifacts?:boolean}) {
- const urls=collectRuntimeAssetUrls(id,...values);if(!urls.length)throw new Error('Prepared object has no runtime asset references.');
+ const urls=collectRuntimeAssetUrls(id,...values,...await stylesheetTexts());if(!urls.length)throw new Error('Prepared object has no runtime asset references.');
  const inventory=await inventoryPublicAssets({objectId:id,objectDirectory,urls,publicRoot,allowPreparationArtifacts});
  const manifest={assets:(inventory?.assets??[]).filter(asset=>asset.location==='public').map(({filename,bytes,sha256})=>({filename,bytes,sha256}))};
  await verifyAssetFiles(publicRoot,manifest,!allowPreparationArtifacts);

@@ -13,8 +13,14 @@ export interface PreparedLeaf {
 export const rendererPolygon = (patch: SurfacePatch): Polygon => ({ ...patch,
   texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' } });
 
-export function createLeafProjector(profile: GeometryProfile, direction: [number, number, number]) {
+/** A surface too large to decode as one image is published as pages of whole bands (preparation/raster/pages.ts). */
+export interface LeafPages { bandsPerPage: number; pageCount: number }
+
+export function createLeafProjector(profile: GeometryProfile, direction: [number, number, number], pages: LeafPages | null = null) {
   const p = profile.projection, surface = profile.surface, ns = profile.namespace;
+  if (pages && (p.positionVariables || surface.latitudeSegments !== pages.bandsPerPage * pages.pageCount)) {
+    throw new TypeError(`${ns}: pages of ${pages.bandsPerPage} bands need ${pages.bandsPerPage * pages.pageCount} latitude bands, not ${surface.latitudeSegments}, and inline texture addresses.`);
+  }
   const options: ComputeTextureAtlasPlanOptions & { textureLighting: 'baked' } = { tileSize: p.tileSize, layerElevation: p.layerElevation,
     textureLighting: 'baked', seamBleed: 0,
     directionalLight: { direction, color: p.lightColor, intensity: Math.PI },
@@ -38,9 +44,15 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
         addressSourceRect: patch.textureImageSource.sourceRect, backgroundPosition: fitted.backgroundPosition,
         backgroundSize: fitted.backgroundSize, leafWidth: fitted.leafWidth, leafHeight: fitted.leafHeight,
         bandCount: surface.latitudeSegments, gutter: p.rasterGutter, overscan: p.rasterOverscan });
-      const position = raster.backgroundPosition.map(value => value === 0 ? '0px' : formatCssLength(value)).join(' ');
+      // A paged band reads its page: the same atlas address, moved up by the bands above the page and cut to its height.
+      const band = surface.latitudeSegments - 1 - patch.latitudeIndex, page = pages && !patch.pole ? Math.floor(band / pages.bandsPerPage) : null;
+      const pageRows = page === null ? 0 : raster.backgroundSize[1]! / surface.latitudeSegments * pages!.bandsPerPage;
+      const address = page === null ? raster : { backgroundPosition: [raster.backgroundPosition[0]!, raster.backgroundPosition[1]! + page * pageRows],
+        backgroundSize: [raster.backgroundSize[0]!, pageRows] };
+      const position = address.backgroundPosition.map(value => value === 0 ? '0px' : formatCssLength(value)).join(' ');
       // formatCssLength's second argument is its decimals: never hand it Array.map's index.
-      const size = raster.backgroundSize.map(value => formatCssLength(value)).join(' ');
+      const size = address.backgroundSize.map(value => formatCssLength(value)).join(' ');
+      const image = pages ? `var(--${ns}-${page === null ? 'poles-image' : `surface-page-${page}`})` : `url(${fitted.url})`;
       const variable = patch.pole ? `--${ns}-pole-position` : `--${ns}-surface-position`;
       // A polar cap closes the top of the band mesh. Its fitted plate can come out with the opposite winding to the
       // bands around it, and a culled cap leaves a hole at the pole through which the body's interior fill shows as a
@@ -48,7 +60,7 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       const caps = patch.pole ? ';backface-visibility:visible' : '';
       const style = p.positionVariables
         ? `transform:matrix3d(${fitted.matrix});${variable}:${position};background-position:var(${variable});background-size:${size};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${caps}`
-        : `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:url(${fitted.url});background-position:${position};background-size:${size}${caps}`;
+        : `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:${image};background-position:${position};background-size:${size}${caps}`;
       return { tag: 's', className: className ?? (patch.pole ? `${ns}-polar ${ns}-polar-${patch.pole}${patch.inner ? ` ${ns}-polar-inner` : ''}` : ''), style,
         ...(!patch.pole || p.projectivePoles ? { projectiveTextureLayer: { ...prepareProjectiveTextureLayer(fitted.matrix,
           patch.pole ? polarCapRasterScale(p.rasterScale, patch.textureImageSource.sourceRect.width, fitted.leafWidth) : p.rasterScale),

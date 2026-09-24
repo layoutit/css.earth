@@ -96,6 +96,29 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
   });
  });
 }
+test('a paged body reads each band from its page and samples its own cell there',async()=>{
+ // Triton's atlas is past the decode limit, so it comes as pages of one band each (preparation/raster/pages.ts).
+ const {surface,projection}=parseGeometryProfile(await readJson('src/objects/triton/source/preparation/geometry.json'));
+ const result=await prepareAuthored('triton',[1,0,0]),gutter=projection.rasterGutter;
+ assert.ok(!('bodyLeaves' in result));
+ const pages=result.body.surfacePages;
+ assert.equal(pages?.bandsPerPage,1);assert.equal(pages?.pageCount,16);
+ const cellWidth=surface.surface.width/surface.longitudeSegments,cellHeight=surface.surfaceLatitudeHeight/surface.latitudeSegments;
+ // Without an overscan the texture grows with the patch by whole texels (createSurfacePatches).
+ const grow=(cell:number)=>Math.round(projection.overlap*cell*projection.rasterScale)/projection.rasterScale;
+ const packedWidth=surface.surface.width+2*gutter,pageHeight=(cellHeight+2*gutter)*pages!.bandsPerPage;
+ const bands=result.body.leaves.filter(leaf=>!leaf.polarCap);
+ assert.ok(result.body.leaves.filter(leaf=>leaf.polarCap).every(leaf=>leaf.style.includes('background-image:var(--triton-poles-image)')));
+ bands.forEach((leaf,index)=>{
+  const style=new Map(leaf.style.split(';').map(entry=>[entry.slice(0,entry.indexOf(':')),entry.slice(entry.indexOf(':')+1)]));
+  const band=surface.latitudeSegments-2-Math.floor(index/surface.longitudeSegments),page=Math.floor(band/pages!.bandsPerPage);
+  assert.equal(style.get('background-image'),`var(--triton-surface-page-${page})`);
+  const [x=NaN,y=NaN]=(style.get('background-position')??'').split(' ').map(parseFloat),[width=NaN,height=NaN]=(style.get('background-size')??'').split(' ').map(parseFloat);
+  const cellX=gutter+index%surface.longitudeSegments*cellWidth-grow(cellWidth),cellY=(band-page*pages!.bandsPerPage)*(cellHeight+2*gutter)+gutter-grow(cellHeight);
+  const sampledX=-x/width*packedWidth,sampledY=-y/height*pageHeight;
+  assert.ok(Math.abs(sampledX-cellX)<0.01&&Math.abs(sampledY-cellY)<0.01,`band leaf ${index} samples (${sampledX}, ${sampledY}) of page ${page}, its cell starts at (${cellX}, ${cellY})`);
+ });
+});
 test('seam outset steps hold the target within their silhouette steps',()=>{
  const steps=prepareSeamOutsetSteps({targetPixels:0.5,stepRatio:Math.SQRT2,hysteresis:0.1,firstDiameter:16,lastDiameter:32768});
  assert.equal(steps.levels[0].minimumDiameter,0);

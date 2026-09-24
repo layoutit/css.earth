@@ -23,7 +23,7 @@ const lens = union(
     projection: object({boundaryLatitudeDegrees: number, projection: optional(literal('latitude-linear', 'orthographic')), overlap: optional(number), alphaOpaqueRadius: optional(number), alphaTransparentRadius: optional(number)})}));
 const encoding = object({quality: optional(number), alphaQuality: optional(number), effort: optional(number), smartSubsample: optional(boolean)});
 const recipe = object({schema: literal('cssearth-observed-polar-surfaces@1'), namespace: string, publicPrefix: string,
-  sourcePins: array(object({path: string})), lenses: array(lens),
+  lenses: array(lens),
   dimensions: object({width: number, height: number, polarTileSize: number}), packing: object({latitudeBoundsDegrees: array(number), gutter: number}),
   thumbnail: object({width: number, height: number, fit, position: union(string, number)}),
   encoding: object({surface: encoding, polar: encoding, thumbnail: encoding}), descriptor: dictionary(json)});
