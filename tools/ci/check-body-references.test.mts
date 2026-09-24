@@ -23,7 +23,7 @@ test('an acquisition step must restore a declared file', () => {
 test('a pinned paper or archive document fails; our own Markdown notes pass', () => {
   const documents = ['reference/vernazza-2021.pdf', 'reference/ReadMe.AcuA.txt', 'reference/bundle_description.txt', 'survey/overview.docx',
     'vega/tvs_proc.doc', 'tex/table2.tex', 'lvdb/lvdb.bib', 'reference/dataset.cat', 'observations/aaReadMe_uranian_MAP_DEM.txt',
-    'surface/WAC_GLOBAL_README.TXT', 'reference/pds-bundle_description.txt', 'ReadMe', 'vims/document/information_file.xml'];
+    'surface/WAC_GLOBAL_README.TXT', 'reference/plate_shape_definition.asc', 'reference/pds-bundle_description.txt', 'ReadMe', 'vims/document/information_file.xml'];
   const manifest = { inputs: documents.map(path => ({ path })), documents: [{ path: 'geology/README.md' }] };
   const acquisition = { operations: [{ kind: 'download', path: 'reference/paper.PDF', url: 'https://example.org/paper.pdf' }] };
   const committed = new Set([...documents, 'geology/README.md']);

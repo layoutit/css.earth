@@ -7,7 +7,7 @@
  *
  * - a declared file that is not committed, has no acquisition step for its path and is not a generated intermediate;
  * - an acquisition step for a path the manifest does not declare;
- * - a pinned paper or archive document (a PDF, Word or TeX file, a BibTeX file, a readme, a PDS catalogue label, a
+ * - a pinned paper or archive document (a PDF, Word or TeX file, a BibTeX file, a readme, a PDS catalogue label or `.asc` document, a
  *   bundle description or anything in an archive `document/` folder; cite it by URL: docs/provenance/CONTRACT.md,
  *   "References and retained files"), or a byte copy of a file that `src/references` or `src/spice` holds.
  *   Our own Markdown notes are not archive documents.
@@ -23,7 +23,7 @@ import { promisify } from 'node:util';
 const run = promisify(execFile);
 
 /** Documents a body cites instead of keeping. */
-export const CITED_DOCUMENT = /(?:\.(?:pdf|docx?|rtf|odt|tex|bib|ps|cat)|(?:^|\/)[^/]*bundle_description\.txt|\/document\/[^/]+|(?:^|\/)[^/]*read_?me(?![^/]*\.md$)[^/]*)$/iu;
+export const CITED_DOCUMENT = /(?:\.(?:pdf|docx?|rtf|odt|tex|bib|ps|cat|asc)|(?:^|\/)[^/]*bundle_description\.txt|\/document\/[^/]+|(?:^|\/)[^/]*read_?me(?![^/]*\.md$)[^/]*)$/iu;
 
 /** Body copies of bank kernels that a body's own recipe still reads, each with the reason. New copies fail. */
 export const CONSUMED_KERNEL_COPIES: Readonly<Record<string, string>> = Object.freeze(Object.fromEntries([

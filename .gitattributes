@@ -131,3 +131,6 @@ src/objects/io/source/science/davies-2024/*.txt -text -whitespace
 # Preserve the CIE provider's original CRLF table.
 src/objects/hd-110067/source/reference/CIE_xyz_1931_2deg.csv -text -whitespace
 src/objects/wd-1856-534/source/reference/CIE_xyz_1931_2deg.csv -text -whitespace
+
+# SPICE frame kernels (.tf) are data, not Terraform; keep them out of GitHub's language statistics.
+*.[tT][fF] linguist-detectable=false
