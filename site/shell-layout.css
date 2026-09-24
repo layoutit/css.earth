@@ -726,7 +726,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     transform: translate3d(0, var(--sheet-offset), 0);
     transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
   }
-  body:has(.object-sidebar.is-dragging) :is(.object-search-toolbar, .object-search-categories) { transition: none; }
+  body:has(.object-sidebar.is-dragging) .object-search-toolbar { transition: none; }
   .explorer-shell-header .object-sidebar-search-card {
     /* Settings has its own slot in the brand bar; only Clear sits inside the field. */
     padding-inline-end: 10px;
@@ -795,8 +795,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   /* No readout bar: the sheet carries the sources link (.object-sheet-sources). */
   body[data-object-shell] .object-footer { display: none; }
 
-  /* The scene fills the room above the peeking sheet and its search, so the body is centred where it can be seen. */
-  body[data-object-shell] .object-viewport { bottom: calc(var(--sheet-peek) + var(--sheet-lift)); }
+  /* The scene fills the room above the peeking sheet and runs behind the search, which shows only its field. */
+  body[data-object-shell] .object-viewport { bottom: var(--sheet-peek); }
 
   /* The result list scrolls itself (the catalogue window reads its scroll), so it takes the open sheet's height
      instead of the side panel's 420 px. */
@@ -833,26 +833,21 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
 }
 
-/* Portrait tablets keep the phone's bottom sheet, search and header, and have the width for
-   the filters, which ride on the sheet below the search. The sheet lays its card out in two
-   columns. Landscape tablets already get the desktop side panel. */
+/* Portrait tablets keep the phone's bottom sheet, search and header, and have the width for the
+   filters, which join the header row between the wordmark and the actions and scroll sideways.
+   The sheet lays its card out in two columns. Landscape tablets already get the desktop side panel. */
 @media (orientation: portrait) and (min-width: 700px) {
-  /* The filters ride on the sheet too, between the search and the sheet's edge. */
-  body[data-object-shell] {
-    --sheet-lift: calc(var(--explorer-search-height) + var(--explorer-category-height) + 24px);
-  }
-
   .explorer-shell-header { column-gap: 20px; }
 
   .object-search-categories {
-    position: fixed;
-    z-index: 210;
-    top: calc(100dvh - var(--sheet-keyboard, 0px) - var(--sheet-height) - var(--explorer-category-height) - 8px);
-    right: var(--explorer-panel-left);
-    left: var(--explorer-panel-left);
     display: flex;
-    transform: translate3d(0, var(--sheet-offset), 0);
-    transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
+    grid-row: 1;
+    grid-column: 2;
+    align-self: center;
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
   :is(.object-search-category, .object-header-link, .object-header-action) { box-shadow: var(--explorer-float-shadow); }
 }
