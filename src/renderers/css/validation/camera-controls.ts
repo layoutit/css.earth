@@ -58,6 +58,10 @@ export function requireCamera(value: unknown): asserts value is CameraPlan {
     const dolly = record(camera.dolly, 'dolly'); choice(dolly.model, ['multiplicative-wheel-distance'], 'dolly model');
     for (const name of ['wheelStepPerDelta', 'minimumDistanceRadii', 'maximumDistanceOverOrbitExtent']) positive(dolly[name], `dolly ${name}`);
     if (!(positive(dolly.minimumDistanceRadii, 'minimum distance') > 1)) fail('camera must remain outside body');
+    if (dolly.surfaceArcPerCssPixelRadians !== undefined &&
+        !(positive(dolly.surfaceArcPerCssPixelRadians, 'dolly surfaceArcPerCssPixelRadians') < Math.PI)) {
+      fail(`dolly surfaceArcPerCssPixelRadians must be below pi; found ${String(dolly.surfaceArcPerCssPixelRadians)}`);
+    }
   }
   if (camera.levelOfDetail !== undefined) {
     const lod = record(camera.levelOfDetail, 'level of detail'); choice(lod.model, ['silhouette-diameter-crossfade'], 'level of detail model');

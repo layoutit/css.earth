@@ -40,7 +40,10 @@ export interface CameraPlan extends PitchCalibration {
   logicalBodyDiameter: number; responsiveFit: ResponsiveFit;
   projection?: { model: string; cssPerspective: string };
   dolly?: { model: string; wheelStepPerDelta: number; minimumDistanceRadii: number;
-    maximumDistanceOverOrbitExtent: number };
+    maximumDistanceOverOrbitExtent: number;
+    /** The least surface arc (seen from the body's centre) one CSS pixel may show before its prepared imagery only
+     * stretches: the body's sharpest texel times its texture levels' texels-per-CSS-pixel target. */
+    surfaceArcPerCssPixelRadians?: number };
   levelOfDetail?: LevelOfDetailPlan; orbitLineFade?: OrbitLineFade;
   drag?: { model: string };
 }

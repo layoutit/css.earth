@@ -54,7 +54,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
   const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
-  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, false);
+  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, pagedSurfaceArcPerCssPixel(sources.get('paged-ellipsoid')));
   // The default camera has one owner: this stage derives it and rewrites every prepared value computed from it, so a rule change
   // re-runs this stage, not the lanes.
   const cameraModule = await import(pathToFileURL(resolve(projectRoot, 'src/platform/default-camera.mts')).href) as typeof import('../../src/platform/default-camera.mts');
@@ -177,14 +177,26 @@ async function surfacePlacement(objectDirectory: string, bound: Awaited<ReturnTy
   return { prime: map.prime, east: map.east, north: map.north, mapLeftEdgeLongitudeDeg: map.mapLeftEdgeLongitudeDeg };
 }
 
-function physicalCamera(camera: Input, projection: Input, paged: boolean): Input {
+/** The least surface arc, seen from a paged body's centre, that one CSS pixel may show: its texture levels' own sharpness
+ * target (`textureLevels.texelsPerCssPixel`) times one texel of the sharpest level. The canonical atlas carries
+ * `atlas.density` texels per column of its `atlas.sourceWidth` grid around the equator (paged-ellipsoid surface-raster). */
+function pagedSurfaceArcPerCssPixel(paged: Input | undefined): number | undefined {
+  if (paged?.schema !== 'cssearth-paged-ellipsoid@1') return undefined;
+  const { sourceWidth, density } = paged.atlas ?? {}, texelsPerCssPixel = paged.textureLevels?.texelsPerCssPixel;
+  if (!(Number.isInteger(sourceWidth) && sourceWidth > 0 && Number.isInteger(density) && density > 0 && texelsPerCssPixel >= 1)) {
+    throw new TypeError(`${String(paged.namespace)}: paged ellipsoid zoom limit needs atlas.sourceWidth, atlas.density and textureLevels.texelsPerCssPixel; found ${String(sourceWidth)}, ${String(density)} and ${String(texelsPerCssPixel)}.`);
+  }
+  return texelsPerCssPixel * 2 * Math.PI / (sourceWidth * density);
+}
+
+function physicalCamera(camera: Input, projection: Input, surfaceArcPerCssPixelRadians: number | undefined): Input {
   const hadPerspective = camera.projection?.model === 'css-perspective-shared-with-sky';
   return { ...camera,
     projection: hadPerspective ? camera.projection : { model: 'css-perspective-shared-with-sky', ...projection,
       cssPerspective: projection.cssPerspective, eyeOnCameraRootAxis: true, nearPlaneClipping: 'javascript-before-publication' },
-    dolly: { model: 'multiplicative-wheel-distance', wheelStepPerDelta: .006, minimumDistanceRadii: paged ? 1 + 1e-10 : 1.2,
+    dolly: { model: 'multiplicative-wheel-distance', wheelStepPerDelta: .006, minimumDistanceRadii: 1.2,
       maximumDistanceOverOrbitExtent: 1, zoomIsSilhouetteFraming: true, ...camera.dolly,
-      ...(paged ? { minimumDistanceRadii: 1 + 1e-10 } : {}) },
+      ...(surfaceArcPerCssPixelRadians === undefined ? {} : { surfaceArcPerCssPixelRadians }) },
     levelOfDetail: camera.levelOfDetail ?? { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20, billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 },
     orbitLineFade: camera.orbitLineFade ?? { visibleBelowDiscHeightShare: .12, hiddenAboveDiscHeightShare: .3 },
     drag: camera.drag ?? { model: 'screen-axis-tumble' } };
