@@ -213,10 +213,10 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
   }
   if (record.spectrum === 'measured') {
     const spectrum = await loadMeasuredSpectrum(read, record.measured);
-    const error = spectrum.error, shifted = (sign: number) => ({ wavelengthsNm: spectrum.wavelengthsNm, flux: spectrum.flux.map((value, i) => Math.max(0, value + sign * error![i]!)) });
+    const error = 'error' in spectrum ? spectrum.error : undefined, shifted = (errors: number[], sign: number) => ({ wavelengthsNm: spectrum.wavelengthsNm, flux: spectrum.flux.map((value, i) => Math.max(0, value + sign * errors[i]!)) });
     return { temperature: null, spectrum: { samples: spectrum.wavelengthsNm.length }, color: measuredSpectrumColor(spectrum, colorMatching, record.measured.gaps, record.gamut), limbDarkening,
       // With sample errors, as for an XP spectrum: the colours one standard error fainter and brighter at every sample.
-      range: error ? [measuredSpectrumColor(shifted(-1), colorMatching, record.measured.gaps, record.gamut), measuredSpectrumColor(shifted(1), colorMatching, record.measured.gaps, record.gamut)] as const : null };
+      range: error ? [measuredSpectrumColor(shifted(error, -1), colorMatching, record.measured.gaps, record.gamut), measuredSpectrumColor(shifted(error, 1), colorMatching, record.measured.gaps, record.gamut)] as const : null };
   }
   const temperature = 'published' in record ? record.published : readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
   return { temperature, spectrum: null, color: planckColor(temperature.kelvin, colorMatching), limbDarkening,
