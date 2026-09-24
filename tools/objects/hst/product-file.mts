@@ -16,7 +16,8 @@
  *
  * A file whose headers repeat nothing reads exactly as `readFitsFileHdus` reads it. */
 import { open } from 'node:fs/promises';
-import { fitsCardValue, scanFitsCards, type FitsFileHdu, type FitsHeader, type FitsValue } from '../../fits/fits.mts';
+import { fitsCardValue, scanFitsCards, type FitsHeader, type FitsValue } from '@cssearth/fits';
+import type { FitsFileHdu } from '@cssearth/fits/node';
 
 const RECORD = 2880;
 const MAX_HEADER_RECORDS = 256;

@@ -10,7 +10,7 @@ import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { tapRows } from '../astronomy-packages/client.mts';
 
 export type RawRow = Readonly<Record<string, string>>;

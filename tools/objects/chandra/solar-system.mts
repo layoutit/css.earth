@@ -30,7 +30,7 @@ import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { addProductEvidence, productRecordPath, readProductRecord, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
 import { astroqueryRows } from '../astronomy-packages/client.mts';
-import type { FitsHeader } from '../../fits/fits.mts';
+import type { FitsHeader } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainPython } from '../jwst/mast.mts';
 import { PROGRAMS, type ChandraFile, type ChandraObservation } from './archive.mts';

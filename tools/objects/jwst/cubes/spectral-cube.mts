@@ -9,7 +9,7 @@
  * mean brightness in a window on each side and read at the band's centre. It is a ratio of brightnesses at neighbouring
  * wavelengths in one pixel, so it needs no solar spectrum, no distance and no albedo; its error is carried from ERR. */
 import { open } from 'node:fs/promises';
-import { readFitsFileHdus, type FitsFileHdu } from '../../../fits/fits.mts';
+import { readFitsFileHdus, type FitsFileHdu } from '@cssearth/fits/node';
 import { requireFiniteNumber } from '@cssearth/core';
 
 export type Window = readonly [number, number];

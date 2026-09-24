@@ -1,2 +1,6 @@
-// The browser-safe entry: FITS parsing from bytes. Modules are added as they move out of tools/.
-export {};
+// The browser-safe entry: FITS parsing from bytes, with no host built-ins.
+export {
+  assertUnscaledFitsTable, esoHierarchy, fitsCardValue, fitsHeaderLiterals, fitsImageAccessor, imageExtent, MAX_HEADER_RECORDS,
+  readFitsHdu, readFitsHdus, readFitsHeader, readFitsImage, scanFitsCards, type FitsHeader, type FitsValue,
+} from './fits.js';
+export { readRiceCompressedImage, riceDecompress } from './rice.js';

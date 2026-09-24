@@ -4,7 +4,7 @@ import { dirname, resolve, relative, basename } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileSize } from '../product-record.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import { readFitsFileHdus } from '../../fits/fits.mts';
+import { readFitsFileHdus } from '@cssearth/fits/node';
 export interface CalibrationDependency {
   readonly field: string; readonly reference: string; readonly status: 'pinned' | 'unresolved'; readonly reason: string;
   /** A pinned dependency is named by its cached file and size, like every product record (no hashes, PR #531). */

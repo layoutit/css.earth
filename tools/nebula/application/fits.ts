@@ -1,5 +1,5 @@
 /** Offline FITS transport; top-down conversion belongs here, not in the shared decoder. */
-import { readFitsImage } from '../../fits/fits.mts';
+import { readFitsImage } from '@cssearth/fits';
 export type FitsValue = string | number | boolean;
 
 export function encodeFits(values: Float32Array, width: number, height: number,

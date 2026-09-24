@@ -2,7 +2,7 @@
  * segments: a BINTABLE whose `COMPRESSED_DATA` column holds one variable-length byte array per tile. Only lossless
  * integer images are read (no ZQUANTIZ, ZSCALE or ZZERO columns); BSCALE, BZERO and BLANK apply to the decompressed
  * samples. The Rice bit layout follows CFITSIO's `fits_rdecomp` routines. */
-import { readFitsHdu, readFitsHeader, type FitsHeader } from './fits.mts';
+import { readFitsHdu, readFitsHeader, type FitsHeader } from './fits.js';
 
 const PARAMETERS: Record<number, { readonly fsBits: number; readonly fsMax: number; readonly bBits: number }> = {
   1: { fsBits: 3, fsMax: 6, bBits: 8 }, 2: { fsBits: 4, fsMax: 14, bBits: 16 }, 4: { fsBits: 5, fsMax: 25, bBits: 32 },
@@ -71,7 +71,7 @@ function parameter(header: FitsHeader, name: string, fallback: number) {
 }
 
 /** The first RICE_1 tile-compressed image in a file, decompressed to physical values with NaN for BLANK samples. */
-export function readRiceCompressedImage(bytes: Buffer, options: { maxDecodedBytes?: number } = {}) {
+export function readRiceCompressedImage(bytes: Uint8Array, options: { maxDecodedBytes?: number } = {}) {
   // JSOC writes BLANK on the compressed table itself, which the plain HDU reader rightly refuses for a table, so the
   // extension header is read directly after a validated empty primary.
   const primary = readFitsHdu(bytes);
@@ -102,10 +102,11 @@ export function readRiceCompressedImage(bytes: Buffer, options: { maxDecodedByte
   const scale = finite(header, 'BSCALE', 1), zero = finite(header, 'BZERO', 0);
   const blank = Object.hasOwn(header, 'BLANK') ? whole(header, 'BLANK', Number.MIN_SAFE_INTEGER) : undefined;
   const values = new Float64Array(width * height), tileCount = tileWidth * tileHeight;
+  const table = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   for (let row = 0; row < rows; row++) {
     const at = dataOffset + row * rowBytes;
-    const length = descriptor[1] === 'P' ? bytes.readUInt32BE(at) : Number(bytes.readBigUInt64BE(at));
-    const offset = descriptor[1] === 'P' ? bytes.readUInt32BE(at + 4) : Number(bytes.readBigUInt64BE(at + 8));
+    const length = descriptor[1] === 'P' ? table.getUint32(at) : Number(table.getBigUint64(at));
+    const offset = descriptor[1] === 'P' ? table.getUint32(at + 4) : Number(table.getBigUint64(at + 8));
     if (heap + offset + length > heapEnd) throw new Error('FITS compressed tile outside heap.');
     const tile = riceDecompress(bytes.subarray(heap + offset, heap + offset + length), tileCount, blockSize, bytePix);
     for (let i = 0; i < tileCount; i++) {

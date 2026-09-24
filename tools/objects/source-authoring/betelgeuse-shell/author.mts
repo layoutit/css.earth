@@ -18,7 +18,7 @@ import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { fitsImageAccessor, readFitsHdu, readFitsImage } from '../../../fits/fits.mts';
+import { fitsImageAccessor, readFitsHdu, readFitsImage } from '@cssearth/fits';
 import { skyImageAxes } from '../../../fits/fits-sky.mts';
 import { sha256 } from '@cssearth/core/node';
 import { encodeDensityKtx2 } from '../../../../src/preparation/volume/acquisition.ts';

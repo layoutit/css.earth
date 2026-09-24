@@ -7,7 +7,7 @@
  * FITS columns do. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readRiceCompressedImage } from '../../fits/fits-rice.mts';
+import { readRiceCompressedImage } from '@cssearth/fits';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export interface HmiContinuumSource {

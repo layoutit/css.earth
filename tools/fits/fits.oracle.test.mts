@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { readFitsHdus, readFitsImage } from './fits.mts';
+import { readFitsHdus, readFitsImage } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput, verifyOracleBytes } from '../oracles/fixture.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 

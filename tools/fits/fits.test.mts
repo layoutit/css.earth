@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable } from './fits.mts';
+import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable } from '@cssearth/fits';
 import { readFitsPrimary, readFitsPlane } from '../objects/observation/fits.mts';
 import { card, imageFixture } from '../../tests/fixtures/fits/helpers.mts';
 

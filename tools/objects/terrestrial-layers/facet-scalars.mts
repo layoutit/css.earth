@@ -1,4 +1,4 @@
-import { readFitsHdu, assertUnscaledFitsTable } from '../../fits/fits.mts';
+import { readFitsHdu, assertUnscaledFitsTable } from '@cssearth/fits';
 import type {SourceMesh} from './contracts.mts';
 import {parseFacetLens,parseFacetProfile,parseFacetSampler,parseTransferTerrain,parseFacetTable,parseFacetFitsTable,parseSurfaceLens} from './source-records.mts';
 import {text} from '@cssearth/core';

@@ -17,7 +17,7 @@ import { writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
-import { readFitsFileHdus, readFitsFileRegion } from '../../../fits/fits.mts';
+import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { skyProjection } from '../../../fits/fits-sky.mts';
 import { mastFile } from '../mast.mts';
 import { PROGRAMS } from './archive.mts';

@@ -1,12 +1,14 @@
-import { createHash } from 'node:crypto';
-import { open, type FileHandle } from 'node:fs/promises';
-
 /** Preparation-only FITS subset. No projection, calibration, display orientation,
- * table-column interpretation or compression is inferred here. */
+ * table-column interpretation or compression is inferred here. Bytes arrive as a `Uint8Array` and are read through a
+ * big-endian `DataView`, so this module needs no host built-ins. */
 export type FitsValue = string | number | boolean | undefined;
 export type FitsHeader = Record<string, FitsValue>;
-const RECORD = 2880, CARD = 80;
-const padded = (size: number) => Math.ceil(size / RECORD) * RECORD;
+export const RECORD = 2880;
+const CARD = 80;
+export const padded = (size: number) => Math.ceil(size / RECORD) * RECORD;
+/** One byte per character, as the `latin1` decoding of an archive's header records. */
+const latin1 = (bytes: Uint8Array, start: number, end: number) => String.fromCharCode(...bytes.subarray(start, end));
+const view = (bytes: Uint8Array) => new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
 
 /** HIERARCH names retain their namespace and have at least two words, so they never replace ordinary structural keys. ESO pipelines
  * write namespaces other than ESO (MATISSE's `PRO DISP COEF0`) and lower-case letters after the first word (GRAVITY's `MET OFFVOLT FC1FTx`). */
@@ -22,14 +24,14 @@ export function esoHierarchy(card: string) {
  * (FITS 4.0, section 4.2.1.2); those records reach the visitor with their value card. */
 /** ESO raw primaries reach 2,480 cards (MATISSE, GRAVITY), so the bound is 256 records (9,216 cards), not the 64 a product header needs. */
 export const MAX_HEADER_RECORDS = 256;
-export function scanFitsCards(bytes: Buffer, start: number, visit: (key: string, card: string, continuation: readonly string[]) => void, limit = MAX_HEADER_RECORDS * RECORD) {
+export function scanFitsCards(bytes: Uint8Array, start: number, visit: (key: string, card: string, continuation: readonly string[]) => void, limit = MAX_HEADER_RECORDS * RECORD) {
   if (!Number.isSafeInteger(start) || start < 0 || start % RECORD || start >= bytes.length)
     throw new Error('Invalid FITS header offset.');
   const stop = Math.min(bytes.length, start + Math.min(limit, MAX_HEADER_RECORDS * RECORD));
   let pending: [string, string, string[]] | undefined;
   const flush = () => { if (pending) visit(...pending); pending = undefined; };
   for (let offset = start; offset + CARD <= stop; offset += CARD) {
-    const card = bytes.toString('latin1', offset, offset + CARD), key = card.slice(0, 8).trim();
+    const card = latin1(bytes, offset, offset + CARD), key = card.slice(0, 8).trim();
     if (!/^[\x20-\x7e]{80}$/u.test(card)) throw new Error('Invalid FITS header characters.');
     if (key === 'CONTINUE') {
       if (!pending || card.slice(8, 10) !== '  ') throw new Error('Unsupported FITS CONTINUE convention.');
@@ -95,7 +97,7 @@ function fitsLiteral(field: string, card: string): FitsValue {
   return number;
 }
 
-export function readFitsHeader(bytes: Buffer, start = 0) {
+export function readFitsHeader(bytes: Uint8Array, start = 0) {
   const header: FitsHeader = {};
   const dataOffset = scanFitsCards(bytes, start, (key, card, continuation) => {
     if (Object.hasOwn(header, key)) throw new Error(`Duplicate FITS field: ${key}`);
@@ -105,19 +107,19 @@ export function readFitsHeader(bytes: Buffer, start = 0) {
   // from parsed values. Do not rewrite or strip the archived header.
   const cards: string[] = [];
   for (let offset = start; offset < dataOffset; offset += CARD) {
-    const card = bytes.toString('latin1', offset, offset + CARD); cards.push(card);
+    const card = latin1(bytes, offset, offset + CARD); cards.push(card);
     if (card.slice(0, 8).trim() === 'END') break;
   }
   return { header, cards, dataOffset };
 }
 
-function integer(header: FitsHeader, key: string, minimum: number, maximum = Number.MAX_SAFE_INTEGER) {
+export function integer(header: FitsHeader, key: string, minimum: number, maximum = Number.MAX_SAFE_INTEGER) {
   const value = header[key];
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < minimum || value > maximum)
     throw new Error(`Invalid FITS ${key}.`);
   return value;
 }
-function optionalNumber(header: FitsHeader, key: string, fallback: number) {
+export function optionalNumber(header: FitsHeader, key: string, fallback: number) {
   if (!Object.hasOwn(header, key)) return fallback;
   const value = header[key];
   if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error(`Invalid FITS ${key} scaling.`);
@@ -125,7 +127,7 @@ function optionalNumber(header: FitsHeader, key: string, fallback: number) {
 }
 
 /** Validate one complete HDU, including its padded extent. Tables remain opaque. */
-export function readFitsHdu(bytes: Buffer, start = 0) {
+export function readFitsHdu(bytes: Uint8Array, start = 0) {
   const { header, cards, dataOffset } = readFitsHeader(bytes, start);
   const kind = header.XTENSION;
   if (kind === undefined ? header.SIMPLE !== true : !['IMAGE', 'BINTABLE'].includes(String(kind)))
@@ -167,7 +169,7 @@ export function readFitsHdu(bytes: Buffer, start = 0) {
   return { header, cards, dataOffset, nextOffset, dataBytes, bitpix, dimensions, count, scale, zero, blank, warnings };
 }
 
-export function readFitsHdus(bytes: Buffer) {
+export function readFitsHdus(bytes: Uint8Array) {
   const hdus: ReturnType<typeof readFitsHdu>[] = [];
   for (let start = 0; start < bytes.length;) {
     const hdu = readFitsHdu(bytes, start);
@@ -187,24 +189,24 @@ export function imageExtent(dimensions: readonly number[]) {
 }
 
 /** Bounded, zero-copy sample access, retaining native axis order and NaN missingness. */
-export function fitsImageAccessor(bytes: Buffer, hdu = readFitsHdu(bytes)) {
+export function fitsImageAccessor(bytes: Uint8Array, hdu = readFitsHdu(bytes)) {
   // An image may keep degenerate trailing axes: every ALMA product is NAXIS = 4, one frequency and one Stokes plane over the
   // sky axes. Those axes hold one sample each, so the sample order is the 2D/3D order and only the declared rank differs.
   if (hdu.header.XTENSION === 'BINTABLE' || ![8, 16, 32, -32, -64].includes(hdu.bitpix) ||
       !imageExtent(hdu.dimensions) || hdu.dimensions.some(n => n < 1))
     throw new Error('Unsupported FITS image (requires 2D/3D numeric image, not int64).');
-  const stride = Math.abs(hdu.bitpix) / 8;
+  const stride = Math.abs(hdu.bitpix) / 8, data = view(bytes);
   return (index: number) => {
     if (!Number.isSafeInteger(index) || index < 0 || index >= hdu.count) throw new RangeError('FITS sample outside image.');
     const offset = hdu.dataOffset + index * stride;
-    const raw = hdu.bitpix === 8 ? bytes[offset] : hdu.bitpix === 16 ? bytes.readInt16BE(offset) :
-      hdu.bitpix === 32 ? bytes.readInt32BE(offset) : hdu.bitpix === -32 ? bytes.readFloatBE(offset) : bytes.readDoubleBE(offset);
+    const raw = hdu.bitpix === 8 ? bytes[offset] : hdu.bitpix === 16 ? data.getInt16(offset) :
+      hdu.bitpix === 32 ? data.getInt32(offset) : hdu.bitpix === -32 ? data.getFloat32(offset) : data.getFloat64(offset);
     return raw === hdu.blank ? NaN : hdu.scale === 1 && hdu.zero === 0 ? raw : raw * hdu.scale + hdu.zero;
   };
 }
 
 /** A 1-based plane, with an explicit 512 MiB decoded-allocation ceiling. */
-export function readFitsImage(bytes: Buffer, options: { start?: number; plane?: number; maxDecodedBytes?: number } = {}) {
+export function readFitsImage(bytes: Uint8Array, options: { start?: number; plane?: number; maxDecodedBytes?: number } = {}) {
   const hdu = readFitsHdu(bytes, options.start ?? 0), at = fitsImageAccessor(bytes, hdu);
   const [width, height] = hdu.dimensions, planes = hdu.dimensions[2] ?? 1, plane = options.plane ?? 1;
   const size = width * height, budget = options.maxDecodedBytes ?? 512 * 1024 * 1024;
@@ -225,85 +227,4 @@ export function fitsHeaderLiterals(header: FitsHeader): Record<string, string> {
 export function assertUnscaledFitsTable(header: FitsHeader) {
   if (Object.keys(header).some(key => /^(?:TSCAL|TZERO|TNULL)\d+$/u.test(key)))
     throw new Error('Unsupported FITS table column scaling or null convention.');
-}
-
-/** One HDU of a FITS file on disk, located without reading its data. */
-export interface FitsFileHdu {
-  readonly header: FitsHeader; readonly cards: readonly string[];
-  readonly dataStart: number; readonly dataBytes: number; readonly bitpix: number; readonly dimensions: readonly number[];
-}
-
-/** Every HDU header of a file, reading only header blocks: a level-3 archive mosaic of hundreds of megabytes is located, not
- * loaded. Structure is validated as readFitsHdu does, and the file must hold every declared data block. */
-export async function readFitsFileHdus(path: string): Promise<FitsFileHdu[]> {
-  const file = await open(path, 'r');
-  try {
-    const size = (await file.stat()).size, hdus: FitsFileHdu[] = [];
-    for (let start = 0; start < size;) {
-      const block = Buffer.alloc(Math.min(MAX_HEADER_RECORDS * RECORD, size - start));
-      await file.read(block, 0, block.length, start);
-      const { header, cards, dataOffset } = readFitsHeader(block);
-      if (hdus.length ? header.XTENSION === undefined : header.SIMPLE !== true || header.XTENSION !== undefined)
-        throw new Error('Invalid FITS primary/extension sequence.');
-      if (header.GROUPS === true || header.ZIMAGE === true) throw new Error('Unsupported grouped or compressed FITS data.');
-      const bitpix = integer(header, 'BITPIX', -64, 64), naxis = integer(header, 'NAXIS', 0, 999), dimensions: number[] = [];
-      let count = naxis ? 1 : 0;
-      for (let i = 1; i <= naxis; i++) { const n = integer(header, `NAXIS${i}`, 0); dimensions.push(n); count *= n; }
-      const pcount = header.XTENSION !== undefined ? integer(header, 'PCOUNT', 0) : 0, gcount = header.XTENSION !== undefined ? integer(header, 'GCOUNT', 1) : 1;
-      const dataBytes = (count + pcount) * gcount * Math.abs(bitpix) / 8, next = start + padded(dataOffset + dataBytes);
-      if (!Number.isSafeInteger(dataBytes) || next > size) throw new Error('Truncated or unbounded FITS data or padding.');
-      hdus.push({ header, cards, dataStart: start + dataOffset, dataBytes, bitpix, dimensions });
-      start = next;
-      if (hdus.length > 1024) throw new Error('Too many FITS HDUs.');
-    }
-    if (!hdus.length) throw new Error('Empty FITS file.');
-    return hdus;
-  } finally { await file.close(); }
-}
-
-/** One rectangle of a two-axis image HDU, read row by row from disk with BSCALE/BZERO applied and BLANK as NaN.
- * x0/y0 are zero-based FITS column and row (the first stored row is row 0).
- *
- * `handle` may be a file the caller already holds open, and that handle is then left open rather than closed here. A caller
- * reading many regions of one file, a cube plane by plane, opens it once instead of once per region: comparing two
- * 2,595-plane cubes over three passes and four extensions is 124,000 opens and closes otherwise. */
-export async function readFitsFileRegion(path: string, hdu: FitsFileHdu,
-  region: { x0: number; y0: number; width: number; height: number }, maxDecodedBytes = 512 * 1024 * 1024,
-  handle?: FileHandle) {
-  const { x0, y0, width, height } = region, [fullWidth, fullHeight] = hdu.dimensions;
-  // A radio image carries frequency and Stokes axes of length one after its two sky axes: its data are still one plane.
-  if (hdu.header.XTENSION === 'BINTABLE' || hdu.dimensions.length < 2 || hdu.dimensions.slice(2).some(length => length !== 1) || ![8, 16, 32, -32, -64].includes(hdu.bitpix))
-    throw new Error('Unsupported FITS image region (requires a 2D numeric image, or one whose further axes have length 1).');
-  if (![x0, y0, width, height].every(Number.isSafeInteger) || x0 < 0 || y0 < 0 || width < 1 || height < 1 ||
-      x0 + width > fullWidth! || y0 + height > fullHeight!) throw new RangeError('FITS region outside image.');
-  if (width * height * 8 > maxDecodedBytes) throw new Error('FITS decoded allocation exceeds budget.');
-  const scale = optionalNumber(hdu.header, 'BSCALE', 1), zero = optionalNumber(hdu.header, 'BZERO', 0);
-  const blank = hdu.bitpix > 0 && Object.hasOwn(hdu.header, 'BLANK') ? integer(hdu.header, 'BLANK', Number.MIN_SAFE_INTEGER) : undefined;
-  const stride = Math.abs(hdu.bitpix) / 8, values = new Float64Array(width * height), row = Buffer.alloc(width * stride);
-  const file = handle ?? await open(path, 'r');
-  try {
-    for (let y = 0; y < height; y++) {
-      await file.read(row, 0, row.length, hdu.dataStart + ((y0 + y) * fullWidth! + x0) * stride);
-      for (let x = 0; x < width; x++) {
-        const o = x * stride, raw = hdu.bitpix === 8 ? row[o]! : hdu.bitpix === 16 ? row.readInt16BE(o) : hdu.bitpix === 32 ? row.readInt32BE(o) :
-          hdu.bitpix === -32 ? row.readFloatBE(o) : row.readDoubleBE(o);
-        values[y * width + x] = raw === blank ? NaN : scale === 1 && zero === 0 ? raw : raw * scale + zero;
-      }
-    }
-  } finally { if (!handle) await file.close(); }
-  return { ...region, values };
-}
-
-/** sha256 of one HDU's data block as stored (big-endian, before scaling), read in chunks: a pin for products whose headers
- * carry run dates and paths, so the file digest changes while the measurement does not. */
-export async function sha256FitsData(path: string, hdu: FitsFileHdu): Promise<string> {
-  const hash = createHash('sha256'), file = await open(path, 'r'), chunk = Buffer.alloc(8 << 20);
-  try {
-    for (let offset = 0; offset < hdu.dataBytes; offset += chunk.length) {
-      const length = Math.min(chunk.length, hdu.dataBytes - offset);
-      await file.read(chunk, 0, length, hdu.dataStart + offset);
-      hash.update(chunk.subarray(0, length));
-    }
-  } finally { await file.close(); }
-  return hash.digest('hex');
 }

@@ -10,7 +10,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsImage } from '../../fits/fits.mts';
+import { readFitsImage } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bodyMapFits, topRowFirst } from '../jwst/cubes/body-map.mts';
 import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } from '../body-map-product.mts';

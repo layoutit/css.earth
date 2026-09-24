@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString, array, number, optional, shape, text } from '@cssearth/core';
 import { decodeProfile } from './source-records.mts';
-import { readFitsHdu } from '../../fits/fits.mts';
+import { readFitsHdu } from '@cssearth/fits';
 import { parseTextKernel } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds } from '../../spice/lsk.mts';
 import { restoredBankFile } from '../../spice/kernel-bank.mts';

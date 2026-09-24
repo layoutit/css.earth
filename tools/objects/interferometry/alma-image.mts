@@ -13,7 +13,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { flagValue, positionalArguments } from '@cssearth/core';
 
 export interface ContinuumImage {

@@ -16,7 +16,7 @@ import { readSampledRecipe, verifySampledEvidence } from '../../../features/samp
 import { prepareSampledField } from '@cssearth/volume-core/fields/sampled';
 import { sampledStars } from './stars.ts';
 import { sampledPanels } from './panels.ts';
-import { sampledOwnerPins, sampledImplementationOwners } from '../../../features/sampled-prior/ownership.ts';
+import { isSampledFitsOwner, sampledOwnerPins, sampledImplementationOwners } from '../../../features/sampled-prior/ownership.ts';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
 import { sampledBakeProgress } from './progress.ts';
 import { registerComponentBanks } from './layout.ts';
@@ -43,7 +43,7 @@ export async function prepareSampledSceneStars(root: string, outputDirectory: st
 }
 
 export async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
-  if (!( /^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || pin.path === 'tools/fits/fits.mts') || /[\\?#\s]/.test(pin.path) ||
+  if (!( /^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || isSampledFitsOwner(pin.path)) || /[\\?#\s]/.test(pin.path) ||
       pin.path.split('/').some(p => !p || p === '..')) throw new TypeError('Invalid sampled source path.');
   const path = await realpath(resolve(root, pin.path)), offset = relative(await realpath(root), path);
   if (offset === '..' || offset.startsWith('../') || isAbsolute(offset)) throw new TypeError('Sampled source leaves the repository.');

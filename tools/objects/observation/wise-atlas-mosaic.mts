@@ -7,7 +7,7 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
-import { readFitsImage } from '../../fits/fits.mts';
+import { readFitsImage } from '@cssearth/fits';
 import { hasErrorCode, median, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { offsetComponents, solveConstantOffsets } from './background-offsets.mts';
 

@@ -1,6 +1,6 @@
-import { readFitsImage, fitsHeaderLiterals } from '../../fits/fits.mts';
+import { readFitsImage, fitsHeaderLiterals } from '@cssearth/fits';
 import { clamp } from '@cssearth/core';
-export { scanFitsCards, fitsCardValue, readFitsHeader } from '../../fits/fits.mts';
+export { scanFitsCards, fitsCardValue, readFitsHeader } from '@cssearth/fits';
 /** FITS observation decoding and data-defined latitude/longitude/color mapping (moved from the retired static lane). */
 export type FitsColor = {kind: 'signed-asinh'; palette: readonly (readonly number[])[]; softening: number; maximum: number}
   | {kind: 'positive-log'; palette: readonly (readonly number[])[]; range: readonly [number, number]};

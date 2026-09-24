@@ -16,7 +16,7 @@ import { archiveMasterPin, binning, checkAgainstArchive, compareOnDetector, over
 import { checkReceipt, galileanNote, hasScience, ledgerMarkdown, matchShippedObject, observationsOf, parseTargetName,
   RECEIPT_SCHEMA, type Ledger, type MoonRow } from './archive-ledger.mts';
 import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
-import { readFitsFileHdus } from '../../fits/fits.mts';
+import { readFitsFileHdus } from '@cssearth/fits/node';
 import { sha256File } from '@cssearth/core/node';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

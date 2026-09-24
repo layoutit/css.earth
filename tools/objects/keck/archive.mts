@@ -22,7 +22,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { readFitsFileHdus } from '../../fits/fits.mts';
+import { readFitsFileHdus } from '@cssearth/fits/node';
 import { INSTRUMENT_TABLES, instrumentTable, koaCalibrations, koaDownload, koaProducts, koaQuery, lev0Url, lev1Url,
   type InstrumentTable } from './koa.mts';
 

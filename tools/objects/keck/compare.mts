@@ -19,7 +19,8 @@ import { access, open, readFile, writeFile, type FileHandle } from 'node:fs/prom
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
+import type { FitsHeader } from '@cssearth/fits';
+import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { assertInputPins, addProductEvidence, fileSize, productRecordPath, readProductRecord, type ProductEvidence, type ProductInput } from '../product-record.mts';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
