@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
- *   node tools/objects/new-object.mts --spec <stars.json>
+ *   node tools/objects/new-object.mts --spec <stars.json> [--check | --bake]
+ *   node tools/objects/new-object.mts --bake <id>...
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
  * spectrum with its cross-check, the model limb law, the catalogue colour, marker, manifest, acquisition plan, source records and
@@ -37,12 +38,17 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // Phase two of a system run (new-object/generate.mts runNewObject), in a process that loads the rebuilt astronomy package.
     const { runHostedPhase } = await import('./new-object/generate.mts');
     process.stdout.write(JSON.stringify(await runHostedPhase(handoff)));
+  } else if (args.includes('--bake') && !specPath) {
+    // The bake of objects already in the tree: `--bake ID...` (tools/prepare/prepare-object.mts).
+    const { prepareObjects } = await import('../prepare/prepare-object.mts');
+    if (!await prepareObjects(args.filter(argument => argument !== '--bake'))) process.exitCode = 1;
   } else if (specPath) {
     // The full generator: every star in the spec file, from the archives (new-object/generate.mts); also `telescope new-object`.
-    const { checkGenerated, formatNewObject, runNewObject } = await import('./new-object/generate.mts');
+    // `--check` runs the bake through the page data on what was generated, `--bake` the whole chain (tools/prepare/prepare-object.mts).
+    const { formatNewObject, runNewObject } = await import('./new-object/generate.mts'), { prepareObjects } = await import('../prepare/prepare-object.mts');
     const results = await runNewObject(specPath, { progress: line => process.stderr.write(`${line}\n`), skipExisting: args.includes('--skip-existing') });
     process.stdout.write(formatNewObject(results));
-    if (args.includes('--check') && results.length) { await checkGenerated(results.map(result => result.id), process.cwd(), line => process.stderr.write(`${line}\n`)); process.stdout.write(`${results.length} objects passed the bake's first steps (titles, authored preparation, source records, page data).\n`); }
+    if ((args.includes('--check') || args.includes('--bake')) && results.length && !await prepareObjects(results.map(result => result.id), args.includes('--bake') ? {} : { to: 'page' })) process.exitCode = 1;
   } else {
     const id = args.find(argument => !argument.startsWith('--') && !args[args.indexOf(argument) - 1]?.startsWith('--'));
     const blackHole = args.includes('--black-hole');

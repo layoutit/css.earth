@@ -1,7 +1,10 @@
+import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
 import { lightingFrame } from '@cssearth/objects';
 import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from '../../../../preparation/raster/config.js';
 import { raster, hashFile, outputName } from '../../../../preparation/raster/io.js';
+/** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (tools/objects/thread-pool.ts). */
+export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
 export async function prepareLighting(config: RasterRecipe, recipe: LightingRecipe, publicDirectory: string) {
     const banks: Record<string, unknown> = {};
     const density = RASTER_DENSITY, frameSize = recipe.frameSize * density, rowCount = Math.ceil(recipe.frameCount / recipe.columns);
@@ -19,24 +22,38 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
         firstFrame: number;
         frameCount: number;
     }[] = [], presentations = [];
+    // Encoding a lossless row (8 frames at 2x, about 0.5 MB) is single-threaded in libvips and took about 1.2 s; 32 rows in
+    // sequence made a shape-only planet a 40-second bake with one core busy. Rows now encode on sharp's thread pool while the
+    // next row's frames are computed, at most LIGHTING_ENCODE_CONCURRENCY in flight (each row holds 32 MB of RGBA until its
+    // encoder has it). Row order, bytes and hashes are unchanged: every row is still written from its own pixels.
+    const encodes: Promise<void>[] = [];
+    const pending = new Set<Promise<void>>();
     for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
         const firstFrame = rowIndex * recipe.columns, frameCount = Math.min(recipe.columns, recipe.frameCount - firstFrame), width = frameSize * frameCount;
         const pixels = new Uint8Array(width * frameSize * 4);
         const file = outputName(recipe.rowOutput, density).replace('{row}', String(rowIndex).padStart(2, '0'));
         const url = config.publicBase + file;
+        const thumbnails: Promise<void>[] = [];
         for (let column = 0; column < frameCount; column++) {
             const frameIndex = firstFrame + column, frame = lightingFrame(frameSize, frameIndex, recipe);
             for (let y = 0; y < frameSize; y++)
                 pixels.set(frame.subarray(y * frameSize * 4, (y + 1) * frameSize * 4), (y * width + column * frameSize) * 4);
-            const thumbnail = await raster(frame, frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).raw().toBuffer();
-            for (let y = 0; y < bbSize; y++)
-                billboard.set(thumbnail.subarray(y * bbSize * 4, (y + 1) * bbSize * 4), ((Math.floor(frameIndex / recipe.billboardColumns) * bbSize + y) * bbWidth + (frameIndex % recipe.billboardColumns) * bbSize) * 4);
+            thumbnails.push(raster(frame, frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).raw().toBuffer().then(thumbnail => {
+                for (let y = 0; y < bbSize; y++)
+                    billboard.set(thumbnail.subarray(y * bbSize * 4, (y + 1) * bbSize * 4), ((Math.floor(frameIndex / recipe.billboardColumns) * bbSize + y) * bbWidth + (frameIndex % recipe.billboardColumns) * bbSize) * 4);
+            }));
             presentations.push({ frameIndex, rowIndex, url, backgroundPosition: `${-column * recipe.presentationSize}px 0px`, backgroundSize: `${frameCount * recipe.presentationSize}px ${recipe.presentationSize}px` });
         }
         const path = resolve(publicDirectory, file);
-        await raster(pixels, width, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(path);
-        rows.push({ rowIndex, url, encoding: 'lossless-webp', ...await hashFile(path), width, height: frameSize, decodedRgbaBytes: width * frameSize * 4, firstFrame, frameCount });
+        const encode = Promise.all(thumbnails).then(() => raster(pixels, width, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(path)).then(async () => {
+            rows[rowIndex] = { rowIndex, url, encoding: 'lossless-webp', ...await hashFile(path), width, height: frameSize, decodedRgbaBytes: width * frameSize * 4, firstFrame, frameCount };
+        });
+        encodes.push(encode);
+        const tracked: Promise<void> = encode.finally(() => pending.delete(tracked));
+        pending.add(tracked);
+        if (pending.size >= LIGHTING_ENCODE_CONCURRENCY) await Promise.race(pending);
     }
+    await Promise.all(encodes);
     const bbFile = outputName(recipe.billboardOutput, density), bbPath = resolve(publicDirectory, bbFile), bbUrl = config.publicBase + bbFile;
     await raster(billboard, bbWidth, bbHeight).webp({ lossless: true, alphaQuality: 100 }).toFile(bbPath);
     const bbPresentations = Array.from({ length: recipe.frameCount }, (_, frameIndex) => ({ frameIndex, url: bbUrl, backgroundPosition: `${-(frameIndex % recipe.billboardColumns) * recipe.presentationSize}px ${-Math.floor(frameIndex / recipe.billboardColumns) * recipe.presentationSize}px`, backgroundSize: `${recipe.billboardColumns * recipe.presentationSize}px ${bbRows * recipe.presentationSize}px` }));

@@ -367,18 +367,3 @@ export async function specFromArchive(hosts: readonly string[], out: string, { r
 
 /** The bake's first steps on generated objects, so a batch proves itself before anyone bakes it: titles, authored preparation,
  * the catalogue, source records and page data. */
-export async function checkGenerated(ids: readonly string[], root = process.cwd(), progress = (_line: string) => {}) {
-  const { execFile } = await import('node:child_process');
-  const run = (...command: string[]) => new Promise<void>((done, fail) => execFile(command[0]!, command.slice(1), { cwd: root, maxBuffer: 64 * 1024 * 1024 }, (error, _stdout, stderr) => error ? fail(new Error(`${command.join(' ')} failed: ${stderr.toString().split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-4).join(' ')}`)) : done()));
-  // Two objects at a time through the rasterising step: it is CPU-bound, and the machine stays usable.
-  const each = async (label: string, step: (id: string) => Promise<void>) => {
-    const queue = ids.map((id, i) => [id, i] as const);
-    await Promise.all([0, 1].map(async () => { for (let next = queue.shift(); next; next = queue.shift()) { progress(`  [${next[1] + 1}/${ids.length}] ${next[0]}: ${label}`); await step(next[0]); } }));
-  };
-  progress(`Checking ${ids.length} objects: the catalogue, solar geometry and authored preparation`);
-  await run('node', 'tools/prepare/prepare-catalog.mts');
-  await run('node', 'tools/prepare/prepare-solar-geometry.mts');
-  await each('authored preparation', async id => { await run('node', 'tools/objects/dist/prepare-authored.js', id, '--write'); });
-  await run('node', 'tools/prepare/prepare-catalog.mts');
-  await each('source records and page data', async id => { await run('node', 'tools/sources/author-source-records.mts', id); await run('node', 'tools/prepare/prepare-object-json.mts', id); });
-}

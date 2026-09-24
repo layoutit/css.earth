@@ -1,72 +1,111 @@
 #!/usr/bin/env node
-/** Prepare one authored object end to end, in the only order that works, and name the step that failed.
+/** Prepare authored objects end to end, in the only order that works, and name the step that failed.
  *
- *   node tools/prepare/prepare-object.mts <object-id> [--from <step>] [--presentation-only]
+ *   node tools/prepare/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--presentation-only]
  *
  * --presentation-only reuses the object's published heavy outputs (imagery, pages, places, texture levels) and prepares the
  * presentation from them, stopping after the prepare step; the lane refuses when its recipe sources or recomputed plan differ
  * from the published run.
  *
- * Each step is an existing tool run for this object only. Nothing here decides science: it orders the tools, rebuilds what a
- * step would read stale, and never runs a repository-wide provenance pass (that one upgrades records of unrelated objects
- * whose sources happen to be on this checkout). Resume after a fix with `--from <step>`. */
-import { spawnSync } from 'node:child_process';
+ * Each step is an existing tool. Nothing here decides science: it orders the tools, rebuilds what a step would read stale, and
+ * never runs a repository-wide provenance pass (that one upgrades records of unrelated objects whose sources happen to be on
+ * this checkout). Resume after a fix with `--from <step>`.
+ *
+ * With several objects each step runs once: a shared step (the builds, the catalogue, the world context) once in all, a tool
+ * that takes the id list (page data, reader text, markers, provenance) once with every id, and the authored preparation, the
+ * only CPU-bound step, PREPARATIONS_AT_ONCE objects at a time. Measured on 57 objects (2026-09-24): one call per object and
+ * per tool spent about 20 s of start-up on each, an hour in all; this order takes minutes. */
+import { execFile, spawnSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { staleBuilds } from '../ci/check-stale-builds.mts';
 
 export interface PreparationOptions { readonly presentationOnly?: boolean }
-export interface PreparationStep { readonly name: string; readonly purpose: string; readonly commands: (id: string, options?: PreparationOptions) => Promise<readonly (readonly string[])[]> }
+/** `once`: the command does not name an object. `ids`: the tool takes every id in one call. `each`: one command per object,
+ * run PREPARATIONS_AT_ONCE at a time when `parallel`. */
+export interface PreparationStep {
+  readonly name: string; readonly purpose: string; readonly scope: 'once' | 'ids' | 'each'; readonly parallel?: boolean;
+  readonly commands: (ids: readonly string[], options?: PreparationOptions) => Promise<readonly (readonly string[])[]>;
+}
+
+/** Authored preparations running at once. A shape-only planet peaks at 3 GB with its lighting rows in flight and fills the
+ * thread pool (tools/objects/thread-pool.ts); three fit a 36 GB machine beside the dev server, and more only share the cores. */
+export const PREPARATIONS_AT_ONCE = 3;
 
 const node = (...args: string[]) => ['node', ...args];
 const exists = (path: string) => access(path).then(() => true, () => false);
 
 /** The chain, in order. A step's purpose says what the next one needs from it. */
 export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<PreparationStep[]>([
-  { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', commands: async () =>
+  { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', scope: 'once', commands: async () =>
     (await staleBuilds()).filter(build => build.name !== 'solar geometry').map(build => build.command.split(' ')) },
-  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
-  { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', commands: async id =>
-    await exists(resolve('packages/astronomy/data/bodies', `${id}.json`)) ? [node('tools/prepare/prepare-solar-geometry.mts')] : [] },
-  { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', commands: async (id, { presentationOnly = false } = {}) =>
-    [node('tools/objects/dist/prepare-authored.js', id, '--write', ...(presentationOnly ? ['--presentation-only'] : []))] },
-  { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
-  { name: 'sources', purpose: 'write the catalogued source records the manifest cites', commands: async id => [node('tools/sources/author-source-records.mts', id)] },
-  { name: 'page', purpose: 'pin the prepared page data into the descriptor', commands: async id => [node('tools/prepare/prepare-object-json.mts', id)] },
-  { name: 'text', purpose: 'prepare the reader text within its budgets', commands: async id => [node('tools/prepare/prepare-text.mts', id)] },
-  { name: 'markers', purpose: 'draw the navigation markers', commands: async id => [node('tools/prepare/prepare-navigation.mts', id)] },
-  { name: 'world', purpose: 'place the object in the world context', commands: async () => [['pnpm', 'prepare:world-context']] },
-  { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', commands: async id => [node('tools/prepare/prepare-provenance.mts', id)] },
+  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
+  { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async ids =>
+    (await Promise.all(ids.map(id => exists(resolve('packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('tools/prepare/prepare-solar-geometry.mts')] : [] },
+  { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { presentationOnly = false } = {}) =>
+    [node('tools/objects/dist/prepare-authored.js', id!, '--write', ...(presentationOnly ? ['--presentation-only'] : []))] },
+  { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
+  { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('tools/sources/author-source-records.mts', id!)] },
+  { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-object-json.mts', ...ids)] },
+  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-text.mts', ...ids)] },
+  { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-navigation.mts', ...ids)] },
+  { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
+  { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-provenance.mts', ...ids)] },
+  // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.
+  { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('tools/prepare/prepare-object-json.mts', 'sun')] },
 ]);
 
-export async function prepareObject(id: string, { from, presentationOnly = false }: { from?: string; presentationOnly?: boolean } = {}) {
-  if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve('src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
-  const start = from === undefined ? 0 : PREPARATION_STEPS.findIndex(step => step.name === from);
-  if (start < 0) throw new TypeError(`Unknown step ${from}; steps are ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`);
+export type Progress = (line: string) => void;
+
+/** Prepare `ids` through the chain from `from` to `to` (inclusive; the whole chain by default). Returns false after naming
+ * the failed step and the command that resumes. */
+export async function prepareObjects(ids: readonly string[], { from, to, presentationOnly = false, atOnce = PREPARATIONS_AT_ONCE, progress = line => console.log(line) }:
+  { from?: string; to?: string; presentationOnly?: boolean; atOnce?: number; progress?: Progress } = {}) {
+  if (!ids.length || new Set(ids).size !== ids.length) throw new TypeError('prepare-object: name each object once.');
+  for (const id of ids) if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve('src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
+  const index = (name: string | undefined, fallback: number) => { if (name === undefined) return fallback; const at = PREPARATION_STEPS.findIndex(step => step.name === name); if (at < 0) throw new TypeError(`Unknown step ${name}; steps are ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`); return at; };
   // A presentation-only run changes nothing the later steps read, and they read raw imagery a checkout may not have;
   // its prepare step already pins the page data and publishes the set.
-  const steps = PREPARATION_STEPS.slice(start, presentationOnly ? PREPARATION_STEPS.findIndex(step => step.name === 'prepare') + 1 : undefined);
+  const start = index(from, 0), end = presentationOnly ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
+  const steps = PREPARATION_STEPS.slice(start, end + 1), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
+  const resume = (step: PreparationStep) => `node tools/prepare/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
   for (const step of steps) {
-    const commands = await step.commands(id, { presentationOnly });
-    console.log(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'}`);
+    if (step.scope === 'each') {
+      const queue = ids.map((id, at) => [id, at] as const), failures: string[] = [];
+      progress(`\n[${step.name}] ${step.purpose} (${elapsed()})`);
+      await Promise.all(Array.from({ length: step.parallel ? Math.min(atOnce, ids.length) : 1 }, async () => {
+        for (let next = queue.shift(); next && !failures.length; next = queue.shift()) {
+          const [id, at] = next;
+          progress(`  [${at + 1}/${ids.length}] ${id} (${elapsed()})`);
+          for (const [command, ...args] of await step.commands([id], { presentationOnly })) {
+            const failure = await new Promise<string | null>(done => execFile(command!, args, { maxBuffer: 64 * 1024 * 1024 }, (error, _stdout, stderr) =>
+              done(error ? `${[command, ...args].join(' ')}\n${stderr.toString().split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-6).join('\n')}` : null)));
+            if (failure) { failures.push(failure); break; }
+          }
+        }
+      }));
+      if (failures.length) { console.error(`\nStep "${step.name}" failed running: ${failures[0]}\nFix it, then resume: ${resume(step)}`); return false; }
+      continue;
+    }
+    const commands = await step.commands(ids, { presentationOnly });
+    progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);
     for (const [command, ...args] of commands) {
       const run = spawnSync(command!, args, { stdio: 'inherit' });
-      if (run.status !== 0) {
-        console.error(`\nStep "${step.name}" failed running: ${[command, ...args].join(' ')}\nFix it, then resume: node tools/prepare/prepare-object.mts ${id} --from ${step.name}`);
-        return false;
-      }
+      if (run.status !== 0) { console.error(`\nStep "${step.name}" failed running: ${[command, ...args].join(' ')}\nFix it, then resume: ${resume(step)}`); return false; }
     }
   }
-  console.log(`\n${id}: prepared. Check it in the browser, run its unit tests, and review git status before committing.`);
+  progress(`\n${ids.length === 1 ? ids[0] : `${ids.length} objects`}: prepared in ${elapsed()}. Check in the browser, run the unit tests, review git status before committing, and publish: node tools/assets/publish-runtime-assets.mts ${[...ids, ...(end >= index('pins', 0) ? ['sun'] : [])].map(id => `--object=${id}`).join(' ')}`);
   return true;
 }
 
+/** One object, as before. */
+export const prepareObject = (id: string, options: { from?: string; presentationOnly?: boolean } = {}) => prepareObjects([id], options);
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), fromIndex = args.indexOf('--from');
-  const from = fromIndex >= 0 ? args[fromIndex + 1] : undefined;
-  const presentationOnly = args.includes('--presentation-only');
-  const ids = args.filter((argument, index) => argument !== '--from' && argument !== '--presentation-only' && (fromIndex < 0 || index !== fromIndex + 1));
-  if (ids.length !== 1) throw new TypeError(`Usage: prepare-object <object-id> [--from <step>] [--presentation-only]; steps: ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`);
-  if (!await prepareObject(ids[0]!, { ...(from === undefined ? {} : { from }), presentationOnly })) process.exitCode = 1;
+  const args = process.argv.slice(2), option = (name: string) => { const at = args.indexOf(name); return at >= 0 ? args[at + 1] : undefined; };
+  const from = option('--from'), to = option('--to'), presentationOnly = args.includes('--presentation-only');
+  const ids = args.filter((argument, at) => !argument.startsWith('--') && args[at - 1] !== '--from' && args[at - 1] !== '--to');
+  if (!ids.length) throw new TypeError(`Usage: prepare-object <object-id>... [--from <step>] [--to <step>] [--presentation-only]; steps: ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`);
+  if (!await prepareObjects(ids, { ...(from === undefined ? {} : { from }), ...(to === undefined ? {} : { to }), presentationOnly })) process.exitCode = 1;
 }
