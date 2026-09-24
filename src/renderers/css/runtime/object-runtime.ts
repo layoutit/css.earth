@@ -210,6 +210,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       get navigation() { return readyPublished && !lifetime.disposed ? navigation : undefined; },
       get datasets() { return readyPublished && !lifetime.disposed ? datasets : undefined; },
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
+      refinesWithoutInput: definition.textureLevels?.fixedLevel !== undefined,
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
       destroy() {
@@ -378,8 +379,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same
       // selection transaction after visibility, including direct URL loads.
-      // A body with one fixed level refines to it now, without waiting for input, and keeps it through zoom.
-      if (definition.textureLevels?.fixedLevel !== undefined) selection.refineTextures();
+      // A body with one fixed level refines to it now, without waiting for input, and keeps it through zoom. With deferred
+      // refinement the application starts it (`refinesWithoutInput`), once what it loads after the body has arrived.
+      if (definition.textureLevels?.fixedLevel !== undefined && !deferTextureRefinement) selection.refineTextures();
       else if (definition.textureLevels && currentView) selection.setView(currentView);
     }
   };

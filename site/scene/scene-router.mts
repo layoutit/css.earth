@@ -1,7 +1,6 @@
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
 import { createSceneView } from './scene-view.mts';
 import { selectSceneFeature } from './scene-feature.mts';
-import { createSceneActivation } from './scene-activation.mts';
 import { createScenePublication } from './scene-publication.mts';
 import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
 import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
@@ -9,20 +8,21 @@ import { errorMessage, record } from '../browser-types.mts';
 import type { ObjectEntry } from '../object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
-import { resolveNavigation, type NavigationIntent } from '../navigation/navigation-request.mts';
+import type { NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent, NavigationContentLoader } from '../navigation/navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from '../object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import { objectAdapter } from "../object-adapter.mts";
-import { mountObjectShell } from "../object-shell-client.mts";
-import { SCENE_OBJECTS } from '../objects.mts';
+import type { mountObjectShell } from "../object-shell-client.mts";
 import { createNavigationContent } from '../navigation/navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks } from '../navigation/navigation-history.mts';
-import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
+import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldViewport } from '../world-viewport.mts';
-import { watchOverviewSelection } from '../overview-selection.mts';
-import { SYSTEM_CENTERS, loadSystemViews, systemViewsLoaded } from '../system-framing.mts';
-import { createSceneSelection, selectionTargetFromUrl } from './scene-selection.mts';
+import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
+import type { createSceneActivation } from './scene-activation.mts';
+import { createCameraMotion } from '../../src/renderers/css/dist/navigation.js';
+// The world summary the registry's modules read when they load (`world-context-plan.mts`).
+import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 import { readInitialFocus } from '../focus-catalog.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
@@ -42,7 +42,8 @@ export interface RouterOptions {
   windowTarget?: BrowserWindow;
   mountShell?: typeof mountObjectShell;
   reportError?(error: unknown): void;
-  navigation: Navigation;
+  /** Tests supply these; the application builds them from the registry once it has loaded. */
+  navigation?: Navigation;
   objects?: readonly ObjectEntry[];
   loadContent?: NavigationContentLoader | null;
   persistentWorldContext: WorldContextOwner;
@@ -54,10 +55,10 @@ export function createSceneRouter({
   loadObject = (id, descriptor, signal) => objectAdapter.load(id, descriptor, undefined, signal),
   documentTarget = document,
   windowTarget = window,
-  mountShell = mountObjectShell,
+  mountShell: mountShellOption,
   reportError = (error) => console.error(error),
-  navigation,
-  objects = SCENE_OBJECTS,
+  navigation: navigationOption,
+  objects: objectsOption,
   loadContent = null,
   persistentWorldContext,
 }: RouterOptions) {
@@ -71,9 +72,16 @@ export function createSceneRouter({
   let destroyed = false;
   let shellOwner: { shell: ObjectShell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
   let centeredObjectId: string | null = null;
-  const selection = createSceneSelection({ objectId,
-    initial: selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
-    initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
+  // The registry and what the router builds from it (navigation, selection, activation, history and the shell) arrive
+  // after a cold page's first body has mounted: see `ensureRegistry`.
+  type Registry = typeof import('./scene-registry.mts');
+  let registry: Registry | null = null, registryTask: Promise<Registry> | null = null;
+  let objects: readonly ObjectEntry[] = objectsOption ?? [];
+  let navigation: Navigation | null = navigationOption ?? null;
+  let selection: ReturnType<typeof createSceneSelection> | null = null;
+  let activation: ReturnType<typeof createSceneActivation> | null = null;
+  const cameraMotion = navigationOption?.motion ?? createCameraMotion();
+  const subject = (): SceneSubject => selection?.current ?? { kind: 'object', objectId };
   const contentTransport = !loadContent ? createNavigationContent({ documentTarget, windowTarget }) : null;
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = false;
@@ -87,8 +95,9 @@ export function createSceneRouter({
     },
     onSelectFocus(id) { void navigate(objectId, { kind: 'focus', id }).catch(report); },
     canPublishFocus: () => scenes.state.kind === 'ready' && !requests.current,
-    readFocus: () => selection.current.kind === 'focus' ? selection.current.id : null,
+    readFocus: () => selection?.current.kind === 'focus' ? selection.current.id : null,
     onFocusChange(session, focus) {
+      if (!selection) return;
       selection.focus(focus.record, focus.sources, focus.presentation);
       if (focus.url === 'preserve') return;
       const url = new URL(windowTarget.location.href);
@@ -103,9 +112,8 @@ export function createSceneRouter({
     getHistory: () => historyOwner, getWorld: () => world.current, getMotion: () => preferences.state.motionEnabled,
     setMotion(next) { preferences.set('motionEnabled', next); }, onError: report,
   });
-  const activation = createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent });
   const publication = createScenePublication({ stage, documentTarget, windowTarget,
-    read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: selection.current, motionEnabled: preferences.state.motionEnabled, reducedMotionActive,
+    read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: subject(), motionEnabled: preferences.state.motionEnabled, reducedMotionActive,
       mountedObjectCount: scenes.current?.mount ? 1 : 0, playing: scenes.current?.playing ?? false,
       hasPresented: hasPresented || initialScene?.available === true }),
     getShell: () => shellOwner?.shell ?? null, getWorld: () => world.current,
@@ -114,13 +122,6 @@ export function createSceneRouter({
   // These survive scene teardown so a persisted document can restore itself.
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
-  if (windowTarget.location?.href) {
-    // Only a settled scene belongs to the entry that history names. An unfinished navigation
-    // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
-    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
-    unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
-      supports: id => navigation.supports(objectId, id), navigate, onError: report });
-  }
   mountTask = mountApplication();
 
   return Object.freeze({
@@ -132,7 +133,7 @@ export function createSceneRouter({
       if (destroyed) return;
       destroyed = true;
       destroyActiveScene();
-      navigation.motion.cancel();
+      cameraMotion.cancel();
       world.destroy();
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
       windowTarget.removeEventListener("pageshow", restoreCachedScene);
@@ -163,37 +164,29 @@ export function createSceneRouter({
         if (!scenes.isCurrent(session)) return;
         preferences.set('motionEnabled', next);
       };
-      if (!shellOwner) {
-        const owner: { shell: ObjectShell | null } = { shell: null };
-        shellOwner = owner;
-        owner.shell = mountShell({ objectId, readSelection: () => selection.current, documentTarget, windowTarget,
-          preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
-          onResetDestination: () => { void navigate(objectId, { kind: 'feature', id: null }).catch(report); },
-        });
-      }
-      const shell = shellOwner.shell!;
-      session.shell = shell;
-      if (request) selection.commit(request.subject, objectId);
-      if (selectionTransition) selectionTransition.arrive({ content, subject: selection.current });
-      else {
-        if (content) shell.setObject(content);
-        shell.presentSelection();
-      }
-      if (!scenes.isCurrent(session)) return;
-      if (content && request) {
-        // The prepared sidebar swap and the detail mount each restyle and lay out
-        // hundreds of nodes. Let the swap render in its own frame first, so an
-        // arriving flight does not drop a frame for both at once.
-        const rendered = await session.wait(new Promise<void>(resolve =>
-          windowTarget.requestAnimationFrame(() => windowTarget.setTimeout(resolve, 0))));
-        if (rendered.cancelled || !scenes.isCurrent(session)) return;
-      }
-      publication.publish();
-      // The body comes first: on a cold page the world's layers (sky, stars, volume, markers) load after the
-      // detail mounts and connect to it. Only an arrival the world owns, a focus or overview, waits for them.
-      if (handoff || worldOwnsArrival(request)) {
-        const contextual = await session.wait(Promise.all([world.ensure(), loadSystemViews()]));
-        if (contextual.cancelled || !scenes.isCurrent(session)) return;
+      // A plain cold page mounts its body before it downloads the registry, then attaches the shell. Any other arrival
+      // (a navigation, a focus or overview link, a restored page) needs the registry and the shell first.
+      const bodyFirst = !registry && !request && !factory && !handoff && !worldOwnsArrival(request);
+      if (!bodyFirst) {
+        const loaded = await session.wait(ensureRegistry());
+        if (loaded.cancelled || !scenes.isCurrent(session)) return;
+        attachShell(session, { request, content, selectionTransition });
+        if (!scenes.isCurrent(session)) return;
+        if (content && request) {
+          // The prepared sidebar swap and the detail mount each restyle and lay out
+          // hundreds of nodes. Let the swap render in its own frame first, so an
+          // arriving flight does not drop a frame for both at once.
+          const rendered = await session.wait(new Promise<void>(resolve =>
+            windowTarget.requestAnimationFrame(() => windowTarget.setTimeout(resolve, 0))));
+          if (rendered.cancelled || !scenes.isCurrent(session)) return;
+        }
+        publication.publish();
+        // The body comes first: on a cold page the world's layers (sky, stars, volume, markers) load after the
+        // detail mounts and connect to it. Only an arrival the world owns, a focus or overview, waits for them.
+        if (handoff || worldOwnsArrival(request)) {
+          const contextual = await session.wait(Promise.all([world.ensure(), loaded.value.loadSystemViews()]));
+          if (contextual.cancelled || !scenes.isCurrent(session)) return;
+        }
       }
       const framePresenter = world.createFramePresenter();
       session.framePresenter = framePresenter;
@@ -203,13 +196,23 @@ export function createSceneRouter({
         deferTextureRefinement: true,
         viewport,
         framePresenter,
-        cameraMotion: navigation.motion,
+        cameraMotion,
         onMotionRequest: requestMotion,
         onFeatureSelect: id => { void navigate(objectId, { kind: 'feature', id }).catch(report); },
         datasetEffects: createDatasetEffects(session, () => world.current),
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
+      delete documentTarget.documentElement.dataset.bodyPending;
+      if (bodyFirst) {
+        windowTarget.performance?.mark?.('cssearth:body-ready');
+        const loaded = await session.wait(ensureRegistry());
+        if (loaded.cancelled || !scenes.isCurrent(session)) return;
+        attachShell(session, {});
+        if (!scenes.isCurrent(session)) return;
+        publication.publish();
+      }
+      const { loadSystemViews, systemViewsLoaded } = registry!;
       // The world and system views load once the body is ready, so its textures have the connection to themselves.
       if (!systemViewsLoaded()) void loadSystemViews().catch(report);
       if (world.current) world.connect(session);
@@ -217,7 +220,7 @@ export function createSceneRouter({
         if (scenes.isCurrent(session)) { world.connect(session); publishSelection(); }
       }).catch(error => { if (!(error instanceof Error && error.name === 'AbortError')) report(error); });
       publishSelection();
-      const arrival = await activation.restore(session, handoff);
+      const arrival = await activation!.restore(session, handoff);
       if (!arrival) return arrival;
       if (!scenes.isCurrent(session)) return;
       let { interrupted } = arrival;
@@ -228,7 +231,7 @@ export function createSceneRouter({
       }
       if (!await view.arrive(session, { request, interrupted })) return false;
       if (!scenes.isCurrent(session)) return;
-      activation.connectControls(session);
+      activation!.connectControls(session);
       if (!session.commit()) return false;
       if (mount.datasets) {
         session.own(mount.datasets.subscribe(() => {
@@ -246,16 +249,66 @@ export function createSceneRouter({
     }
   }
 
+  /** Load the registry once and build what the router reads from it. */
+  function ensureRegistry(): Promise<Registry> {
+    if (!registryTask && documentTarget.head) {
+      // Its modules fetch the summary only once they have downloaded; start it alongside them.
+      const hint = documentTarget.createElement('link');
+      hint.rel = 'preload'; hint.as = 'fetch'; hint.crossOrigin = 'anonymous'; hint.href = worldSummaryUrl;
+      documentTarget.head.append(hint);
+    }
+    return registryTask ??= import('./scene-registry.mts').then(module => {
+      if (!objectsOption) objects = module.SCENE_OBJECTS;
+      const routes = navigation ??= module.createPreparedWorldNavigation({ objects, motion: cameraMotion });
+      selection = module.createSceneSelection({ objectId,
+        initial: module.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
+        initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
+      activation = module.createSceneActivation({ windowTarget, navigation: routes, view, isCurrent: scenes.isCurrent });
+      if (windowTarget.location?.href && !destroyed) {
+        // Only a settled scene belongs to the entry that history names. An unfinished navigation
+        // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
+        historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
+        unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
+          supports: id => routes.supports(objectId, id), navigate, onError: report });
+      }
+      registry = module;
+      return module;
+    });
+  }
+
+  function attachShell(session: Session, { request, content, selectionTransition }: { request?: NavigationRequest; content?: NavigationContent;
+    selectionTransition?: ShellNavigationTransition | null }) {
+    const current = selection!;
+    if (!shellOwner) {
+      const owner: { shell: ObjectShell | null } = { shell: null };
+      shellOwner = owner;
+      owner.shell = (mountShellOption ?? registry!.mountObjectShell)({ objectId, readSelection: () => current.current, documentTarget, windowTarget,
+        preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
+        onResetDestination: () => { void navigate(objectId, { kind: 'feature', id: null }).catch(report); },
+      });
+    }
+    const shell = shellOwner.shell!;
+    session.shell = shell;
+    if (request) current.commit(request.subject, objectId);
+    if (selectionTransition) selectionTransition.arrive({ content, subject: current.current });
+    else {
+      if (content) shell.setObject(content);
+      shell.presentSelection();
+    }
+  }
+
   function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
+    if (!destroyed && !registry) return ensureRegistry().then(() => navigate(id, intent));
+    const { loadSystemViews, systemViewsLoaded, resolveNavigation } = registry!, routes = navigation!, current = selection!;
     // System framing reads its prepared candidates; they load after the first body, so a very early click waits for them.
     if (!destroyed && intent.kind !== 'feature' && !systemViewsLoaded()) return loadSystemViews().then(() => navigate(id, intent));
     if (intent.kind === 'focus' && scenes.current) id = objectId;
-    if (destroyed || !navigation.supports(objectId, id)) return Promise.resolve(false);
+    if (destroyed || !routes.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
     const source = scenes.current;
-    const resolved = resolveNavigation(intent, { object, objects, navigation, current: {
-      objectId, href: intent.kind === 'focus' ? source?.url ?? windowTarget.location.href : windowTarget.location.href, subject: selection.current,
+    const resolved = resolveNavigation(intent, { object, objects, navigation: routes, current: {
+      objectId, href: intent.kind === 'focus' ? source?.url ?? windowTarget.location.href : windowTarget.location.href, subject: current.current,
       centeredObjectId, hasPresented, reuseScene: !!source && objectId === id && scenes.state.kind === 'ready',
       mount: source?.mount ?? null, pending: requests.current,
     } });
@@ -286,12 +339,12 @@ export function createSceneRouter({
         : { kind: 'object', object, targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
       if (selectionTransition) request.own(() => selectionTransition.dispose());
       if (source && request.scene === 'reuse') {
-        return await focusExistingScene({ session: source, request, selectionTransition, navigation, requests, view,
+        return await focusExistingScene({ session: source, request, selectionTransition, navigation: navigation!, requests, view,
           windowTarget, getReducedMotion: () => reducedMotionActive,
           commitSelection, finishArrival, syncPlayback, selectFeature });
       }
       syncPlayback();
-      const loaded = await prepareSceneReplacement({ fromId: objectId, source, object, request, navigation, requests,
+      const loaded = await prepareSceneReplacement({ fromId: objectId, source, object, request, navigation: navigation!, requests,
         loadObject, loadContent, contentTransport, reducedMotion: reducedMotionActive, getWorld: () => world.current });
       if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
@@ -318,7 +371,7 @@ export function createSceneRouter({
         // A failed focus load leaves the previous native target in place. Recover
         // its identity with the drawn camera instead of retrying the failed URL.
         const captured = snapshot && request.camera.kind === 'focus'
-          ? selection.url(new URL(snapshot, windowTarget.location.href)) : snapshot;
+          ? selection!.url(new URL(snapshot, windowTarget.location.href)) : snapshot;
         if (captured && interruptedSelection) {
           const selected = new URL(captured, windowTarget.location.href).href;
           source.url = selected;
@@ -349,7 +402,7 @@ export function createSceneRouter({
     if (mounted) {
       if (session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
       publishSelection();
-      if (selection.current.kind === 'overview') aimAtSystemCenter();
+      if (selection?.current.kind === 'overview') aimAtSystemCenter();
     }
     syncPlayback();
     if (mounted) connectOverviewSelection(session);
@@ -399,61 +452,64 @@ export function createSceneRouter({
   }
   function followSelectionCamera(session: Session, frame: WorldCameraPose) {
     if (requests.current) return;
-    if (selection.followCamera(frame) && scenes.state.kind === 'ready') {
+    if (selection?.followCamera(frame) && scenes.state.kind === 'ready') {
       view.replace(session, selection.url(session.url ?? windowTarget.location.href));
     }
   }
   function publishSelection() {
-    const overview = selection.context.kind === 'overview';
+    const overview = selection?.context.kind === 'overview';
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(overview);
     shellOwner?.shell?.presentSelection();
-    world.current?.setOverview?.(overview, selection.current.kind === 'overview' ? selection.current.overview.scope : undefined);
+    const subject = selection?.current;
+    world.current?.setOverview?.(overview, subject?.kind === 'overview' ? subject.overview.scope : undefined);
     if (stage.dataset) {
-      const subject = selection.current;
-      stage.dataset.selection = subject.kind === 'overview' ? subject.overview.scope
-        : subject.kind === 'focus' ? subject.id : subject.objectId;
+      const current = subject ?? { kind: 'object' as const, objectId };
+      stage.dataset.selection = current.kind === 'overview' ? current.overview.scope
+        : current.kind === 'focus' ? current.id : current.objectId;
     }
     publication.publish();
   }
   function commitSelection(request: NavigationRequest, transition?: ShellNavigationTransition | null) {
-    const wasOverview = selection.context.kind === 'overview';
-    selection.commit(request.subject, objectId);
-    transition?.arrive({ subject: selection.current });
+    const current = selection!, wasOverview = current.context.kind === 'overview';
+    current.commit(request.subject, objectId);
+    transition?.arrive({ subject: current.current });
     publishSelection();
-    if (!wasOverview && selection.current.kind === 'overview') aimAtSystemCenter();
+    if (!wasOverview && current.current.kind === 'overview') aimAtSystemCenter();
   }
   /** A binary's overview is centred on the pair's centre of mass, not on the star the scene mounts. Entering the overview
    * turns the camera onto that centre at the same distance; zooming out then keeps the pair centred. */
   function aimAtSystemCenter() {
     const session = scenes.current, mount = session?.mount;
-    if (!session || !mount || !SYSTEM_CENTERS.has(objectId)) return;
-    const target = navigation.systemCenterTarget?.({ objectId, fromId: objectId, mount });
+    const routes = navigation;
+    if (!session || !mount || !routes || !registry?.SYSTEM_CENTERS.has(objectId)) return;
+    const target = routes.systemCenterTarget?.({ objectId, fromId: objectId, mount });
     if (!target) return;
-    void navigation.focus({ objectId, mount, signal: session.signal, reducedMotion: reducedMotionActive,
+    void routes.focus({ objectId, mount, signal: session.signal, reducedMotion: reducedMotionActive,
       targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM, centerSelection: true })
       .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); });
   }
   function connectOverviewSelection(session: Session) {
     const owner = session.mount?.navigation;
     if (!owner) return;
-    session.own(watchOverviewSelection({ navigation: owner, objects, objectId,
-      getOverview: () => selection.context.kind === 'overview',
+    const current = selection!;
+    session.own(registry!.watchOverviewSelection({ navigation: owner, objects, objectId,
+      getOverview: () => current.context.kind === 'overview',
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
       // A focus the URL names is a selection from the moment it is named, before
       // its prepared bank has loaded and the runtime can report it. The camera
       // scale must not deselect it during that window.
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current
-        && selection.current.kind !== 'focus',
+        && current.current.kind !== 'focus',
       windowTarget,
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
           // A mounted star and its system overview share the same camera, detail and
           // subscriptions. Change their selection in place in either direction.
-          selection.commit(next.overview ? { kind: 'overview', overview: { scope: 'system', systemId: objectId } }
+          current.commit(next.overview ? { kind: 'overview', overview: { scope: 'system', systemId: objectId } }
             : { kind: 'object', objectId }, objectId);
           if (next.overview) aimAtSystemCenter();
-          view.replace(session, selection.url(windowTarget.location.href));
+          view.replace(session, current.url(windowTarget.location.href));
           session.viewUrl?.flush();
           return;
         }
@@ -463,6 +519,7 @@ export function createSceneRouter({
   }
   function fail(session: Session, error: unknown) {
     if (!scenes.isCurrent(session)) return;
+    delete documentTarget.documentElement.dataset.bodyPending;
     if (session.request) requests.finish(session.request, 'failed');
     try { retire(session, error instanceof Error ? error : new Error(String(error))); }
     catch (failure) { report(failure); }
@@ -507,9 +564,8 @@ if (typeof document !== "undefined") {
   if (!(stage instanceof HTMLElement)) throw new Error("Missing cssEarth planet stage.");
   const objectId = stage.dataset.objectId;
   if (!objectId) throw new Error("Missing cssEarth object identity.");
-  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS });
   const persistentWorldContext = createWorldContextOwner();
-  createSceneRouter({ stage, objectId, navigation, persistentWorldContext });
+  createSceneRouter({ stage, objectId, persistentWorldContext });
 }
 
 export type { SceneDiagnostics } from './scene-publication.mts';

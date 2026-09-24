@@ -157,7 +157,9 @@ keeps one prepared atmosphere image loaded instead of decoding a new one for eac
 That frame is its own image (`earth-atmosphere-flood@2x.webp`, 1,016 pixels with its gutter)
 instead of a quarter of the last four-frame row, so the first view downloads 37 KB of
 atmosphere instead of 158 KB, and does not fetch the two neighbouring rows. It goes through the
-lossy lane with exact alpha, like the rows. Before the bake, a patched build that showed this frame
+lossy lane with exact alpha, like the rows. Outside the interior view the page's markup leaves out the cutaway's 522 hidden nodes
+(`hiddenSubtrees` in the prepared variants); the runtime builds them from their prepared records when it takes over the
+page. The Earth page's compressed HTML fell from 96 KB to 74 KB. Before the bake, a patched build that showed this frame
 from its own image matched the unchanged build pixel for pixel, once settled, at 412 × 823 (DPR 2) and 1,280 × 800.
 Other bodies retain their existing lighting.
 

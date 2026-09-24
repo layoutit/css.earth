@@ -85,12 +85,14 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
   }
   // Keep the exact prepared orientation while the application clock is absent.
   for (const animation of [...definition.motion ?? [], ...definition.animations]) write(animation.target, 'animation', 'none');
+  // A subtree this selection hides stays out of the markup; the runtime builds it when it adopts the tree.
+  const hidden = new Set(variant.hiddenSubtrees ?? []);
   const serialize = (index: number): string => {
     const node = elements[index];
     const attributes = { ...node.attributes, 'data-prepared-node': String(index),
       ...(node.classes.size ? { class: [...node.classes].join(' ') } : {}),
       ...(node.style.size ? { style: styleText(node.style) } : {}) };
-    return `<${node.tag}${Object.entries(attributes).map(([key, value]) => ` ${key}="${escape(value)}"`).join('')}>${node.children.map(serialize).join('')}</${node.tag}>`;
+    return `<${node.tag}${Object.entries(attributes).map(([key, value]) => ` ${key}="${escape(value)}"`).join('')}>${hidden.has(index) ? '' : node.children.map(serialize).join('')}</${node.tag}>`;
   };
   return { html: roots.map(serialize).join(''), classes: [...stage.classes], attributes: stage.attributes,
     style: styleText(stage.style), nodes: elements.length };

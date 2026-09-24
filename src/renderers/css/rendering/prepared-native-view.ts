@@ -15,10 +15,15 @@ export function publishPreparedNativeView(definition: ObjectRuntimeDefinition, s
   const focalCss = definition.camera.projection.cssPerspective;
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const };
   const world = savedWorldCamera(saved, frame, viewport), presentation = presentWorldCamera(world, frame, viewport);
-  const nodes = definition.tree.nodes.map((_, index) => {
+  // Server markup omits what the selection hides; writes to those nodes go to detached stand-ins.
+  const variant = definition.variants.find(entry => Object.entries(entry.when).every(([name, value]) => selection[name] === value));
+  const hidden = new Set(variant?.hiddenSubtrees ?? []), omitted = new Set<number>();
+  definition.tree.nodes.forEach((record, index) => { if (hidden.has(record.parent) || omitted.has(record.parent)) omitted.add(index); });
+  const nodes = definition.tree.nodes.map((record, index) => {
     const node = stage.querySelector<HTMLElement>(`[data-prepared-node="${index}"]`);
-    if (!node) throw new TypeError('A saved native view requires its complete prepared tree.');
-    return node;
+    if (node) return node;
+    if (omitted.has(index)) return stage.ownerDocument.createElement(record.tag);
+    throw new TypeError('A saved native view requires its complete prepared tree.');
   });
   const camera = nodes[definition.tree.camera], scene = nodes[definition.tree.scene];
   camera.style.perspective = focalCss;

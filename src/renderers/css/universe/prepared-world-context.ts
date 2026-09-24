@@ -292,6 +292,30 @@ const validatedContexts = new WeakSet<object>();
 export function parsePreparedWorldContext(value: unknown): PreparedWorldContextGeometry {
   return parseContext(value, true) as PreparedWorldContextGeometry;
 }
+/** What a mounted body reads from the world: the shared frame, the focus body's identity and the camera. Each page
+ * embeds it (`cssearth-world-camera@1`), so a body mounts before the world summary has downloaded. */
+export interface PreparedWorldCamera { readonly frame: PreparedWorldContext['frame']; readonly focusId: string; readonly camera: PreparedWorldContext['camera']; }
+export const PREPARED_WORLD_CAMERA_SCHEMA = 'cssearth-world-camera@1';
+/** The world camera from its embedded record, or from a world context or summary. */
+export function parsePreparedWorldCamera(value: unknown): PreparedWorldCamera {
+  const schema = value && typeof value === 'object' ? (value as { schema?: unknown }).schema : undefined;
+  if (schema !== PREPARED_WORLD_CAMERA_SCHEMA) {
+    const plan = parsePreparedWorldContextPlan(value);
+    return Object.freeze({ frame: plan.frame, focusId: plan.focus.id, camera: plan.camera });
+  }
+  const input = record(value, 'world camera', ['schema', 'frame', 'focusId', 'camera']);
+  const camera = record(input.camera, 'world camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
+  const minimumDistanceM = positive(camera.minimumDistanceM, 'minimum camera distance');
+  const maximumDistanceM = positive(camera.maximumDistanceM, 'maximum camera distance');
+  if (!(maximumDistanceM > minimumDistanceM)) throw new TypeError('World camera distance interval is invalid.');
+  const focusId = text(input.focusId, 'world camera focus');
+  if (!/^[a-z][a-z0-9-]*$/.test(focusId)) throw new TypeError('Invalid world camera focus identity.');
+  const frame = parsePreparedWorldCameraFrame(input.frame);
+  if (!frame) throw new TypeError('World camera requires its prepared frame.');
+  return Object.freeze({ frame, focusId,
+    camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom: positive(camera.framingReferenceZoom, 'framing reference zoom'),
+      presentation: parsePresentation(camera.presentation) }) });
+}
 /** The main thread's copy: `world-context-summary.json`, whose orbits carry no paths. */
 export function parsePreparedWorldContextSummary(value: unknown): PreparedWorldContext {
   return parseContext(value, false);
