@@ -1,0 +1,67 @@
+{
+ "labels off: interaction requests nothing": {
+  "records": 6,
+  "fetches": 1,
+  "identical": true
+ },
+ "labels on load, populate in two batches, then loaded": {
+  "records": 11,
+  "fetches": 1,
+  "identical": true
+ },
+ "second request while fetching fetches once": {
+  "records": 9,
+  "fetches": 1,
+  "identical": true
+ },
+ "flight holds the load until it lands": {
+  "records": 8,
+  "fetches": 1,
+  "identical": true
+ },
+ "replaced flight drops the held load": {
+  "records": 9,
+  "fetches": 1,
+  "identical": true
+ },
+ "explicit load during a flight starts at once": {
+  "records": 10,
+  "fetches": 1,
+  "identical": true
+ },
+ "network failure reports once and stays failed": {
+  "records": 12,
+  "fetches": 1,
+  "identical": true
+ },
+ "HTTP 404 fails with the catalogue message": {
+  "records": 7,
+  "fetches": 1,
+  "identical": true
+ },
+ "destroy while idle": {
+  "records": 5,
+  "fetches": 0,
+  "identical": true
+ },
+ "destroy while held": {
+  "records": 5,
+  "fetches": 0,
+  "identical": true
+ },
+ "destroy while fetching": {
+  "records": 7,
+  "fetches": 1,
+  "identical": true
+ },
+ "destroy while populating": {
+  "records": 8,
+  "fetches": 1,
+  "identical": true
+ },
+ "frame loop follows playing and the labels switch": {
+  "records": 13,
+  "fetches": 1,
+  "identical": true
+ }
+}

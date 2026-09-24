@@ -1,0 +1,60 @@
+{
+ "mars": {
+  "stats": {
+   "loaded": true,
+   "count": 1941,
+   "visible": 8,
+   "eligible": 9,
+   "enabled": true,
+   "playing": false,
+   "frames": 24,
+   "error": null,
+   "zoomGate": true,
+   "outlinePieces": 0,
+   "flying": false,
+   "hovered": null,
+   "pinned": null
+  },
+  "labels": [
+   "Abalos Colles",
+   "Aspledon Undae",
+   "Barabashov",
+   "Hyperboreae Undae",
+   "Lomonosov",
+   "Mareotis Fossae",
+   "Ortygia Colles",
+   "Siton Undae"
+  ],
+  "errors": []
+ },
+ "callisto": {
+  "stats": {
+   "loaded": true,
+   "count": 154,
+   "visible": 10,
+   "eligible": 10,
+   "enabled": true,
+   "playing": false,
+   "frames": 25,
+   "error": null,
+   "zoomGate": true,
+   "outlinePieces": 0,
+   "flying": false,
+   "hovered": null,
+   "pinned": null
+  },
+  "labels": [
+   "Asgard",
+   "Burr",
+   "Höldr",
+   "Maderatcha",
+   "Omol'",
+   "Sid Catena",
+   "Tornarsuk",
+   "Utgard",
+   "Veralden",
+   "Ymir"
+  ],
+  "errors": []
+ }
+}
