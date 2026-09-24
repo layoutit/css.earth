@@ -1,5 +1,7 @@
 # HD 95086
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 95086 is a young star often compared with the early Solar System. Its giant planet b circles about 57 au out, between an inner and an outer belt of dust.
 
 ## Sources

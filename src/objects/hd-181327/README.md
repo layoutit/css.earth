@@ -1,5 +1,7 @@
 # HD 181327
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 ## Sources
 
 - **Placement:** Gaia DR3 source 6643589352010758400 (`source/photometry/gaia-dr3-source.csv`): ICRS position at J2016.0, parallax 20.931 ± 0.029 mas (47.78 pc, no zero-point correction), proper motion and radial velocity, propagated to the scene epoch by `@cssearth/astronomy`.

@@ -1,5 +1,7 @@
 # Sagittarius A*
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 The black hole at the centre of the Milky Way, drawn as a black disc the size of its measured shadow that always faces the
 viewer, with the EHT's image of it around the disc and the S-stars on their published orbits.
 

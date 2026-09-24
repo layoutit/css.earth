@@ -1,5 +1,7 @@
 # YSES 1
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 YSES 1 is a 17-million-year-old analogue of the young Sun. Two giant planets orbit it far out; JWST has seen silicate clouds and a dusty disc around them.
 
 ## Sources

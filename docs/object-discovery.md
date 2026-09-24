@@ -195,3 +195,38 @@ clip at the viewport edge while the caption stays readable inside it.
 Focused checks cover default exclusion, opt-in visibility, category independence,
 mesh-only counterexamples, imagery promotion/demotion, partial coverage, setting
 lifetime and priority without motion-dependent reordering.
+
+## Prepared marker silhouettes
+
+Navigation sprites carry their silhouette in the prepared image alpha channel.
+Object-owned recipes in `source/preparation/navigation.json` apply an offline
+ellipse mask to round bodies whose source map or photograph has an opaque
+rectangular background. Map crops also use the existing full-phase curvature
+shading so a circular identifier reads as rounded; photographs retain their
+source lighting. These static identifiers do not follow scene-time illumination
+or replace the selected body's scientific surface.
+
+Resolved stellar reconstructions crop to the photosphere registered in their
+observation frame before applying the navigation aperture. Their body READMEs
+record the source frame, crop and radius; scientific reconstruction images and
+off-limb emission remain available in the selected-body views.
+
+The [prepared-image comparison](../src/navigation/evidence/marker-silhouettes-20260924/markers.png)
+shows the original 15 silhouette fixes against their previous images. The
+[additional shading comparison](../src/navigation/evidence/marker-silhouettes-20260924/shading.png)
+covers 10 other map or schematic markers, 65 neutral placeholders and 25 comet
+snapshots. The
+[capture record](../src/navigation/evidence/marker-silhouettes-20260924/capture.json)
+identifies the compared bytes, stellar crop inputs and retained comet meshes.
+The comet snapshots reproduce their previous unlit pixels exactly before
+turning on curvature lighting; their geometry and viewing directions stay fixed.
+Gray placeholders receive the same display cue without invented surface detail.
+Measured stellar limb darkening and thermal-map palettes keep their source
+treatment. The [Earth and Moon browser view](../src/navigation/evidence/marker-silhouettes-20260924/earth-moon.png)
+checks the Moon sprite in the existing world renderer.
+`site/test/navigation-preparation.test.mts` checks every registered body marker
+and resolved context image for transparent corners and nonempty content, and
+compares each atlas tile's alpha and visible pixels with its individual image.
+The shared recipe tests separately check bright-center, darker-limb shading.
+The [catalogue audit](../src/navigation/evidence/marker-silhouettes-20260924/catalogue-audit.json)
+records the inspected marker bytes and disposition for all 641 registered bodies.

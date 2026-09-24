@@ -1,5 +1,7 @@
 # VHS 1256-1257 B
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 VHS 1256-1257 B is the twin of [VHS 1256-1257 A](../vhs-1256-1257/README.md): two young dwarfs of about 74 Jupiter masses each, on the boundary between stars and brown dwarfs, 21 parsecs away. B circles A every 7.3 years on the most eccentric orbit yet measured for a very low-mass pair (Dupuy et al. 2023), and the two are circled in turn by the planet-mass companion [VHS 1256-1257 b](../vhs-1256-1257-b/README.md).
 
 ## Sources

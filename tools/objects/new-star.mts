@@ -198,7 +198,8 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'], directionalSun: false });
   put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: 'emissive' });
   put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 }, source: { path: 'presentation/context.png' },
-    operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' }, { type: 'png' }], context: { pixels: 512 } });
+    operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' },
+      { type: 'ensure-alpha' }, { type: 'ellipse-mask', cx: .5, cy: .5, rx: .45, ry: .45, shading: { ambient: .35, diffuse: .65 } }, { type: 'png' }], context: { pixels: 512 } });
   put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1', ...orientation, phase: 'arbitrary-display-phase',
     source: `No measured rotation axis or period (${TODO}: name the literature checked). The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.`,
     coordinateSystem: 'ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.',

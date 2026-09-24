@@ -1,5 +1,7 @@
 # HR 8799 e
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HR 8799 e is the fourth planet, found by Marois et al. ([2010](https://arxiv.org/abs/1011.4918)) inside the orbits of the other three. It orbits [HR 8799](../hr-8799/README.md) about 16 au out.
 
 ## Sources

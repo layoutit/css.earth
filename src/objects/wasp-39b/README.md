@@ -1,5 +1,7 @@
 # WASP-39 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 WASP-39 b is a puffy gas giant 1.28 times as wide as Jupiter, circling a Sun-like star every four days. Here it is a plain gray sphere of that size.
 
 ## Sources

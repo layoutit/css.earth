@@ -1,5 +1,7 @@
 # GJ 504
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 GJ 504 is a Sun-like star whose measured size allows two ages, 21 million or 4 billion years. The answer decides whether its companion b is a planet or a brown dwarf.
 
 ## Sources

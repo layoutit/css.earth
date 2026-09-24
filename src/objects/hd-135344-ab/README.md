@@ -1,5 +1,7 @@
 # HD 135344 Ab
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 135344 Ab orbits 15 to 20 au from its star, found by SPHERE and confirmed by GRAVITY. Its colours match those of a mid-L type object. Its star is [HD 135344 A](../hd-135344-a/README.md).
 
 ## Sources

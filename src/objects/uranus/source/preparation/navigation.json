@@ -29,6 +29,16 @@
       "kernel": "lanczos3"
     },
     {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.5,
+      "cy": 0.5,
+      "rx": 0.5,
+      "ry": 0.5
+    },
+    {
       "type": "png"
     }
   ]

@@ -1,5 +1,7 @@
 # HD 209458 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 209458 b was the first planet seen crossing its star. It is a gas giant 1.36 times as wide as Jupiter, shown as a plain gray sphere.
 
 ## Sources
