@@ -41,7 +41,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1407,
-      "sha256": "7f81b7df437ee9240fb89ef3b218bc422fa3ab66c77bbd4a6a849e979e5f898d"
+      "sha256": "aff65fc859290cfdb284257c76152d069ab933aee416f0cc186dcc6ef0493600"
     },
     {
       "location": "prepared",
@@ -96,6 +96,12 @@
       "filename": "sun.json",
       "bytes": 5,
       "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1360,
+      "sha256": "647901c03862dd5f11565bb82d12bb74550e6f590516333982a1c57752f0ffd3"
     },
     {
       "location": "prepared",

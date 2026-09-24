@@ -9,7 +9,7 @@ const test = sourceTest();
 const planets = SCENE_OBJECTS.filter(object => object.classification === 'exoplanet');
 
 test('every registered exoplanet bakes the source-radius silhouette through a lit or emissive path', async () => {
-  assert.equal(planets.length, 81);
+  assert.equal(planets.length, 82);
   for (const { id } of planets) {
     const directory = resolve(projectRoot, 'src/objects', id);
     const measurements = requireRecord(await readJsonSource(resolve(directory, 'source/measurements.json')), `${id} measurements`);
@@ -49,7 +49,7 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     const astronomy = requireRecord(await readJsonSource(resolve(projectRoot, 'packages/astronomy/data/bodies', `${id}.json`)), `${id} astronomy`);
     hosts.add(requireString(requireRecord(astronomy.physical, `${id} physical`).parent, `${id} host`));
   }
-  assert.equal(hosts.size, 50);
+  assert.equal(hosts.size, 51);
   const shapeOnly: string[] = [], uniform: string[] = [];
   for (const id of hosts) {
     const directory = resolve(projectRoot, 'src/objects', id);
@@ -80,5 +80,6 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
       String(requireRecord(asset, 'asset').filename).includes('-limb-color@2x.webp')), `${id} must publish its limb plate`);
   }
   assert.deepEqual(shapeOnly.sort(), ['hr-8799', 'kepler-16-a']);
-  assert.deepEqual(uniform, ['wd-1856-534']);
+  // Epsilon Indi A's package draws no limb darkening either (its README, #655): a uniform colour disc from its Gaia spectrum.
+  assert.deepEqual(uniform, ['wd-1856-534', 'eps-indi-a']);
 });

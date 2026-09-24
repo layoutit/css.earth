@@ -180,32 +180,6 @@
       }
     },
     {
-      "id": "chi1-orionis-cie-1931-2deg-cmf",
-      "path": "reference/CIE_xyz_1931_2deg.csv",
-      "origin": "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer",
-      "credit": "CIE (2019), CIE 1931 colour-matching functions, 2 degree observer, doi:10.25039/CIE.DS.xvudnb9b",
-      "license": "CC BY-SA 4.0",
-      "licenseEvidence": [
-        "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer"
-      ],
-      "acquisition": "The CIE data table as the hd-189733 package ships it, byte for byte.",
-      "redistribution": "Permitted under CC BY-SA 4.0 with attribution.",
-      "consumers": [
-        "assets",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-chi1-orionis-cie-1931-2deg-cmf",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "chi1-orionis-claret-2011-limb-darkening",
       "path": "photometry/claret-2011-v-quadratic.tsv",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
@@ -307,7 +281,6 @@
         "inputs": [
           "chi1-orionis-stellar-color",
           "chi1-orionis-stis-ngsl",
-          "chi1-orionis-cie-1931-2deg-cmf",
           "chi1-orionis-claret-2011-limb-darkening",
           "chi1-orionis-preparation-raster"
         ]

@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "limbDarkening": {
           "law": "quadratic",
           "path": "photometry/claret-2011-v-quadratic.tsv",
