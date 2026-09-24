@@ -18,7 +18,7 @@ import type { OrbitSegment } from '../solar-system/types.js';
 
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
-import { createOpacityClock } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../stars/opacity-clock.js';
 import type { OpacityClock } from '../stars/opacity-clock.js';
 
 // A fixed leaf carries the prepared image and its two screen-sized pseudos.
@@ -234,7 +234,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail);
   const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
-  const clock = opacityClock ?? createOpacityClock(windowTarget);
+  const clock = opacityClock ?? opacityClockFor(windowTarget);
   const fader = createOpacityFader(windowTarget, clock);
   let labelExclusions: readonly LabelScreenRect[] = [];
   let backgroundExclusions: readonly LabelScreenRect[] = [];

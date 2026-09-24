@@ -1,6 +1,6 @@
 import {expect,test} from 'vitest';
 import {createOpacityFader} from './opacity-fader.js';
-import {createOpacityClock} from './opacity-clock.js';
+import {opacityClockFor} from './opacity-clock.js';
 
 class Element { readonly style:Record<string,string>={opacity:'0'}; animate(){throw new Error('Web Animations must not be used');} }
 class Clock {
@@ -123,7 +123,7 @@ test('cancelling a pool retains unfinished fades and stops after its final activ
 
 
 test('camera commits and all fade owners flush each element only once in one RAF', () => {
-  const window = new Clock(), clock = createOpacityClock(window);
+  const window = new Clock(), clock = opacityClockFor(window);
   const first = createOpacityFader(window, clock), second = createOpacityFader(window, clock);
   let alpha = '0'; const writes: string[] = [];
   const element = { style: { get opacity() { return alpha; }, set opacity(value: string) { alpha = value; writes.push(value); } } } as HTMLElement;
@@ -142,7 +142,7 @@ test('camera commits and all fade owners flush each element only once in one RAF
   window.frame(100);
   expect(Number(alpha)).toBe(.4);
   expect(window.pending.size).toBe(0);
-  first.destroy(); second.destroy(); clock.destroy();
+  first.destroy(); second.destroy();
 });
 
 test('culled and suppressed fades stop ticking and reveal at their current wall time', () => {
@@ -172,7 +172,7 @@ test('hover uses the existing 120ms ease, reverses continuously and stops at the
 });
 
 test('retiring a large set does not repeatedly advance surviving fades between animation frames', () => {
-  const window = new Clock(), clock = createOpacityClock(window);
+  const window = new Clock(), clock = opacityClockFor(window);
   const fader = createOpacityFader(window, clock), other = createOpacityFader(window, clock);
   let writes = 0;
   const makeElement = () => {
@@ -197,7 +197,7 @@ test('retiring a large set does not repeatedly advance surviving fades between a
   window.frame(200);
   expect(active.every(e => e.style.opacity === '1')).toBe(true);
   expect(window.pending.size).toBe(0);
-  fader.destroy(); other.destroy(); clock.destroy();
+  fader.destroy(); other.destroy();
 });
 
 test('repeated setters publish their own values immediately without advancing other entries', () => {
@@ -212,4 +212,24 @@ test('repeated setters publish their own values immediately without advancing ot
   window.frame(25);
   expect(fading.style.opacity).toBe('0.5');
   fader.destroy();
+});
+
+test('a window has one frame clock, which requests a browser frame only while an owner has work', () => {
+  const window = new Clock(), clock = opacityClockFor(window);
+  expect(opacityClockFor(window)).toBe(clock);
+  expect(opacityClockFor(new Clock())).not.toBe(clock);
+  const ran: string[] = [];
+  const first = clock.request(() => ran.push('first')), second = clock.request(() => ran.push('second'), 'input');
+  expect(window.pending.size).toBe(1);
+  clock.cancel(first);
+  window.frame(16);
+  expect(ran).toEqual(['second']);
+  expect(window.pending.size).toBe(0);
+  // An owner that cancels its last request stops the browser frame; the clock itself is never released.
+  clock.cancel(clock.request(() => ran.push('cancelled')));
+  expect(window.pending.size).toBe(0);
+  expect(window.cancelled).toHaveLength(1);
+  clock.request(() => ran.push('later')); window.frame(16);
+  expect(ran).toEqual(['second', 'later']);
+  expect(second).toBeGreaterThan(first);
 });

@@ -1,5 +1,5 @@
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
-import { createOpacityClock } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../stars/opacity-clock.js';
 import type { CameraPlan, PerspectiveCameraPlan, Vector3, LevelOfDetailPlan, OrbitLineFade } from './types.js';
 import type { BodyProjection } from '../solar-system/types.js';
 import type { VisibleRect } from '../solar-system/types.js';
@@ -216,7 +216,7 @@ export function createPerspectiveDolly({
   // body's colour.
   const REVEAL_LEAVES_PER_FRAME = 128;
   const revealView = cameraElement.ownerDocument.defaultView;
-  const revealClock = revealView && createOpacityClock(revealView);
+  const revealClock = revealView && opacityClockFor(revealView);
   const revealed = new Uint8Array(revealGroups.length).fill(1);
   let revealCount = revealGroups.length, revealFrame: number | null = null;
   // Flight activation writes the same nodes while the scene is hidden, so the

@@ -1,5 +1,5 @@
 import { createCameraFlight } from './camera-flight.js';
-import { createOpacityClock } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../stars/opacity-clock.js';
 
 type FlightOptions = Parameters<typeof createCameraFlight>[0];
 interface MotionOptions extends FlightOptions { inputSpeedUp?: number; }
@@ -44,11 +44,11 @@ export function createCameraMotion() {
     },
     fly({ windowTarget, sample, durationMilliseconds, signal, inputSpeedUp, onFinish }: CameraTrajectory) {
       if (!Number.isFinite(durationMilliseconds) || durationMilliseconds < 0) throw new TypeError('Invalid camera flight duration.');
-      const clock = createOpacityClock(windowTarget);
+      const clock = opacityClockFor(windowTarget);
       const flight = motion.start({ signal, inputSpeedUp, windowTarget: {
         requestAnimationFrame: callback => clock.request(callback, 'input'),
         cancelAnimationFrame: id => clock.cancel(id), performance: { now: clock.now },
-      }, onFinish(completed) { clock.destroy(); onFinish?.(completed); }, advance(elapsedS) {
+      }, onFinish(completed) { onFinish?.(completed); }, advance(elapsedS) {
         const progress = durationMilliseconds === 0 ? 1 : Math.min(1, elapsedS * 1000 / durationMilliseconds);
         const acknowledge = (shown = true) => !shown || flight.signal.aborted ? 'idle' as const
           : progress === 1 ? 'complete' as const : 'presented' as const;
