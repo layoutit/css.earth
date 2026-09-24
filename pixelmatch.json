@@ -1,0 +1,31 @@
+{
+ "standard": "Pixelmatch threshold 0.1 (anti-aliasing included) and threshold 0, 1x device scale, headless Chromium",
+ "main": "62d8e75683",
+ "change": "fd4a5fba7e",
+ "views": {
+  "desktop-focus-then-body.png": {
+   "threshold01": 385,
+   "threshold0": 2952
+  },
+  "desktop-pill.png": {
+   "threshold01": 0,
+   "threshold0": 0
+  },
+  "desktop-type-escape.png": {
+   "threshold01": 0,
+   "threshold0": 0
+  },
+  "mobile-type-clear.png": {
+   "threshold01": 0,
+   "threshold0": 0
+  },
+  "mobile-type-escape.png": {
+   "threshold01": 0,
+   "threshold0": 0
+  },
+  "mobile-type-scene.png": {
+   "threshold01": 59784,
+   "threshold0": 237292
+  }
+ }
+}
