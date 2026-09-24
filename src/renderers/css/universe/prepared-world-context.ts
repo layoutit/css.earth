@@ -3,7 +3,7 @@ import { ContextChange, createWorldContextFrameReceiver } from './world-context/
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { WorldContextView } from './world-context/world-context-planner.js';
-import { createSystemFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
+import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -24,6 +24,8 @@ import type { OpacityClock } from '../stars/opacity-clock.js';
 // Camera movement writes one transform; the inverse scale only compensates
 // those two pseudos when the projected image diameter changes.
 const BILLBOARD_SIZE = BODY_INDICATOR_DIAMETER;
+/** Bodies of other systems, seen from inside the focus star's system; hover restores them. */
+const OTHER_SYSTEM_OPACITY = .3;
 // A marker keeps its large image until it shrinks below this share of the
 // switch diameter, so a body at the boundary never alternates images.
 const SPRITE_DETAIL_RETURN = .75;
@@ -53,7 +55,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let presentationRevision = 0, policyRevision = 0, publishedPolicyRevision = -1;
   let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
-  let previousHeader: { emphasizedId: string | null; selectionStrength: number; width: number; height: number } | null = null;
+  let previousHeader: { emphasizedId: string | null; selectionStrength: number; focusSystemShown: boolean; width: number; height: number } | null = null;
   let pickTargets: ScreenPickTarget[] = [];
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
   const selectionPolicy = createContextSelectionPolicy(plan);
@@ -134,6 +136,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       labelPickTarget: null as (ScreenPickTarget & { shape: { kind: 'rect'; left: number; top: number; right: number; bottom: number } }) | null,
       labelRectTarget: null as { left: number; top: number; right: number; bottom: number } | null,
       markerShown: undefined as boolean | undefined, markerDiameter: 0, billboardShown: undefined as boolean | undefined, spriteDetail: false,
+      dotDiameter: sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null, flatDot: false,
       center: [0, 0] as [number, number], markerTransform: '', spriteTransform: '', orbitTransform: '', labelOffset: '',
       labelRect: null as LabelScreenRect | null,
       indicatorPick: null as ScreenPickTarget | null,
@@ -145,6 +148,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
   });
+  const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
   // One caption follows the destination through the entire flight. Its preview sprite has a
   // separate lifetime and fades at 14–20px, long before the close-up has arrived.
   const flightCaption = host.ownerDocument.createElement('span');
@@ -450,14 +454,16 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const selectedRank = pickRanks.get(selectedEntry)!;
       const { emphasizedId, width, height } = frame;
       const selectionStrength = selectionPolicy.strengthAt(emphasizedId, world.pose.positionM);
+      // Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it.
+      const focusSystemShown = systemFade.of(0) > .5;
       cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3);
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
       const policyChanged = resized || distantNavigationChanged || publishedPolicyRevision !== policyRevision || previousHeader?.emphasizedId !== emphasizedId ||
-        previousHeader?.selectionStrength !== selectionStrength;
+        previousHeader?.selectionStrength !== selectionStrength || previousHeader?.focusSystemShown !== focusSystemShown;
       publishedPolicyRevision = policyRevision;
-      previousHeader = { emphasizedId, selectionStrength, width, height };
+      previousHeader = { emphasizedId, selectionStrength, focusSystemShown, width, height };
       if (!cameraChanged && !policyChanged && !depthChanged && !interactiveHover && delta.changes.size === 0) {
         skippedPublications++;
         return;
@@ -526,18 +532,27 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const navigationSuppressed = entry.unpackaged || (distantNavigationActive && distantNonNavigableIds.has(body.id));
         if (mask === 0) continue;
         const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) *
-          (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1);
+          (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
+          (focusSystemShown && !entry.hovered && !systemFade.inFocusSystem(entry.index) ? OTHER_SYSTEM_OPACITY : 1);
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and
         // movement transform. The pseudos only own annotation visibility.
         const billboardShown = (visible || (annotationVisible && (entry.indicatorShown || entry.labelShown))) && markerOpacity > 0;
         if (!billboardShown && entry.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
         bodyPublications++;
-        const markerShown = visible && markerOpacity > 0 && !pointSource;
+        // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
+        // The focus star's circle holds the same dot over its point of light.
+        const flatDot = entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
+        // A body without its own circle inside its parent's dot is part of that dot, not a second dot within it.
+        const parentDot = entry.orbit ? entriesById.get(entry.orbit.centerBodyId) : undefined;
+        const insideParentDot = !entry.indicatorShown && parentDot?.flatDot === true &&
+          Math.hypot(x - parentDot.center[0], y - parentDot.center[1]) < parentDot.markerDiameter / 2;
+        const markerShown = (visible || (pointSource && flatDot)) && markerOpacity > 0 && (!pointSource || flatDot) && !insideParentDot;
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        const markerDiameter = Math.round(Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter) * 20) / 20;
+        const markerDiameter = Math.round((flatDot ? entry.dotDiameter! :
+          Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter)) * 20) / 20;
         const wasShown = entry.billboardShown === true;
         const hoverChanged = entry.indicatorHovered !== entry.hovered;
         const animateHover = interactiveHover && hoverChanged && wasShown && billboardShown;
@@ -566,10 +581,21 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           // A marker wider than its small prepared tile resolves shows the large
           // prepared image; only then is that image loaded and decoded.
           const detail = entry.sprite?.detail;
-          if (detail) {
+          if (detail && !flatDot) {
             const spriteDetail = markerDiameter >= detail.fromDiameterPixels ||
               (entry.spriteDetail && markerDiameter >= detail.fromDiameterPixels * SPRITE_DETAIL_RETURN);
-            if (spriteDetail !== entry.spriteDetail) { entry.spriteDetail = spriteDetail; applySpriteImage(entry.spriteLeaf, spriteDetail ? detail : entry.sprite!); }
+            if (spriteDetail !== entry.spriteDetail) {
+              entry.spriteDetail = spriteDetail;
+              if (!entry.flatDot) applySpriteImage(entry.spriteLeaf, spriteDetail ? detail : entry.sprite!);
+            }
+          }
+          if (entry.flatDot !== flatDot) {
+            entry.flatDot = flatDot;
+            const leaf = entry.spriteLeaf.style;
+            if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = entry.body.color; leaf.borderRadius = '50%'; } else {
+              leaf.backgroundColor = leaf.borderRadius = '';
+              applySpriteImage(entry.spriteLeaf, entry.spriteDetail && detail ? detail : entry.sprite!);
+            }
           }
           if (entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
           if (marker.dataset.contextSelected !== selection) marker.dataset.contextSelected = selection;

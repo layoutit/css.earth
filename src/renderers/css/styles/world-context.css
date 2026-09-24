@@ -27,7 +27,7 @@
   color: #dfdfdf;
 }
 .prepared-world-context [data-context-body-visible="false"] > i {
-  background-image: none !important;
+  background: none !important;
 }
 .prepared-world-context [data-context-body]::before,
 .prepared-world-context [data-context-body]::after {
@@ -44,7 +44,7 @@
 .prepared-world-context [data-context-body]::before,
 .prepared-context-marker {
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px currentColor;
+  box-shadow: inset 0 0 0 1.5px currentColor;
 }
 .prepared-world-context [data-context-body]::before {
   content: '';
@@ -61,7 +61,7 @@
 }
 .prepared-world-context [data-context-indicator-hovered="true"]::before {
   transform: scale(1.25) translate(-50%, -50%);
-  box-shadow: inset 0 0 0 .8px currentColor;
+  box-shadow: inset 0 0 0 1.2px currentColor;
 }
 .prepared-world-context [data-context-selected="true"]::before {
   /* Keep the standard circle unless the shell supplies a swatch locator. */
@@ -101,7 +101,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px currentColor;
+  box-shadow: inset 0 0 0 1.5px currentColor;
   pointer-events: none;
   z-index: 4;
 }
@@ -114,10 +114,6 @@
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-indicator-visible="true"]::before,
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-label-visible="true"]::after {
   opacity: 1;
-}
-.prepared-world-context [data-context-indicator-hovered="true"]::after,
-.prepared-context-label[tabindex="0"]:is(:hover, :focus-visible, [data-object-hovered="true"]) {
-  text-decoration: underline;
 }
 .prepared-context-label[tabindex="0"]:is(:hover, :focus-visible, [data-object-hovered="true"]) {
   /* The shared fader owns inline opacity; admitted hover takes precedence. */
@@ -143,11 +139,11 @@
   margin-top: -.75px;
 }
 
-/* Approximate placements keep the standard one-pixel ring and a dashed orbit.
+/* Approximate placements keep the standard ring and a dashed orbit.
    Selection never thickens them or swaps in the locator corners. */
 .prepared-world-context [data-context-body][data-context-placement="approximate"][data-context-selected="true"]::before {
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px currentColor;
+  box-shadow: inset 0 0 0 1.5px currentColor;
   background-image: none !important;
 }
 .prepared-world-context .context-orbit-strokes g[data-context-placement="approximate"][data-context-selected="true"] polyline {

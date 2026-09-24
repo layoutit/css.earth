@@ -14,7 +14,7 @@ import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { createWorldContextFrameEncoder } from './world-context/world-context-frame.js';
 import { createWorldContextPlanner } from './world-context/world-context-planner.js';
-import { CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
+import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from './world-context/context-scale.js';
 import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { labelImportance } from '../labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, loadSystemViews, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
@@ -2502,4 +2502,58 @@ test('the binary orbit bank decodes to exactly the orbits of the full prepared f
   expect(() => decodeWorldOrbits(summary, bank.slice(0, bank.byteLength - 8))).toThrow(/its summary says/);
   const orbiting = summary.bodies.find(body => body.orbit)!;
   expect(() => decodeWorldOrbits({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, bank)).toThrow(/lacks its path/);
+});
+
+test('circle dots grow with radius from 1,000 km to the system star, and stop there', () => {
+  const dot = (radiusM: number) => indicatorDotDiameter(radiusM, 1e9, 2.4);
+  expect([dot(5e5), dot(1e6)]).toEqual([2.4, 2.4]);
+  expect(dot(Math.sqrt(1e6 * 1e9))).toBeCloseTo((2.4 + INDICATOR_DOT_MAX_DIAMETER) / 2);
+  expect([dot(1e9), dot(1e11)]).toEqual([INDICATOR_DOT_MAX_DIAMETER, INDICATOR_DOT_MAX_DIAMETER]);
+  expect(dot(0)).toBeNull();
+  // Real radii: Saturn reads clearly larger than Earth, and the Sun larger than Jupiter.
+  const sun = (radiusM: number) => indicatorDotDiameter(radiusM, 695_700_000, 2.4)!;
+  expect(sun(58_232_000) - sun(6_371_000)).toBeGreaterThan(2);
+  expect(sun(695_700_000) - sun(69_911_000)).toBeGreaterThan(2);
+});
+
+test('a body circle holds a dot in the body colour until its own disc outgrows the dot', () => {
+  // At this scale the plan's Mercury has a 1,000 km radius, the smallest dot, and its star a 10,000 km radius.
+  const scale = 1e6, root = mount(scale), layer = mounted.get(root)!, marker = find(root, 'contextBody', 'mercury'), leaf = marker.children[0]!;
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [100 * scale, 0, distance * scale], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  // Mercury's 0.8px disc sits inside its circle.
+  publish(1000);
+  expect(marker.dataset.contextIndicatorVisible).toBe('true');
+  expect([leaf.style.backgroundImage, leaf.style.backgroundColor, leaf.style.borderRadius]).toEqual(['none', '#9d9388', '50%']);
+  expect(leaf.style.transform).toBe(`scale(${2.4 / 16})`);
+  // Up close the circle retires and the prepared image returns at the disc's own size.
+  publish(100);
+  expect(marker.dataset.contextIndicatorVisible).toBe('false');
+  expect([leaf.style.backgroundImage, leaf.style.backgroundColor, leaf.style.borderRadius]).toEqual(['url("/marker.png")', '', '']);
+  layer.destroy();
+});
+
+test('inside the Solar System, moons without a circle stay inside their planet dot and other stars are dimmed', async () => {
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
+    annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id,
+      labelImportance(object.classification, object.discovery.featured, object.discovery.orientationReference ?? 0)])),
+    annotationLandmarks: ['io', 'europa', 'ganymede', 'callisto'],
+  });
+  layer.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+    pose: { positionM: [0, 0, 20 * 149_597_870_700], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1100, principalOffsetPixels: [0, 0], widthPixels: 1280, heightPixels: 720 });
+  const jupiter = find(layer.root as unknown as FakeElement, 'contextBody', 'jupiter');
+  expect(jupiter.dataset.contextIndicatorVisible).toBe('true');
+  expect(jupiter.children[0]!.style.backgroundColor).not.toBe('');
+  for (const moon of ['io', 'europa', 'ganymede', 'callisto'])
+    expect(find(layer.root as unknown as FakeElement, 'contextBody', moon).dataset.contextBodyVisible).toBe('false');
+  const opacity = (id: string) => Number(layer.inspect().find(body => body.id === id)!.mover.style.opacity);
+  expect(opacity('jupiter')).toBeGreaterThan(.9);
+  expect(opacity('proxima-centauri')).toBeGreaterThan(0);
+  expect(opacity('proxima-centauri')).toBeLessThanOrEqual(.3);
+  layer.destroy();
 });
