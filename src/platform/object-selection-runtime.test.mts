@@ -172,9 +172,7 @@ test("same resource demand is coalesced across lens and speed actions", async t 
 test("decode failure preserves the actual committed plan and pages, and a retry clears the error", async t => {
   const h = harness(); t.after(h.restore); await h.ready(); const committed = h.coordinator.state().plan;
   const failed = h.lens("topography"), rejected = assert.rejects(failed, /decode/); await flush();
-  const job = h.jobs.findLast(job => !job.done); assert.ok(job); job.done = true; job.reject(new Error("network")); await flush();
-  // A wanted image that fails is decoded once more (prepared-image-store.ts); here the second attempt fails too.
-  const again = h.jobs.findLast(job => !job.done); assert.equal(again?.url, job.url); again!.done = true; again!.reject(new Error("network")); await rejected;
+  const job = h.jobs.findLast(job => !job.done); assert.ok(job); job.done = true; job.reject(new Error("network")); await rejected;
   assert.equal(h.coordinator.state().desired.lensId, "normal"); assert.equal(h.coordinator.state().plan, committed);
   assert.ok(committed); assert.ok(committed.required.every(key => h.resources.resources.has(key))); assert.equal(h.coordinator.state().pending, false);
   const retry = h.lens("topography"); await h.resolveJobs(); assert.equal(await retry, true);

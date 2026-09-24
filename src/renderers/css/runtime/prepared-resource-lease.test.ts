@@ -103,11 +103,7 @@ test('view preparation cancels pending native decode and propagates required ima
   const preparation = failed.lease.prepareDemand(() => ({ required: ['a'] }));
   failed.decodes.get('/base.webp')!.resolve();
   await vi.waitFor(() => expect(failed.decodes.has('/a.webp')).toBe(true));
-  const first = failed.decodes.get('/a.webp')!;
-  first.reject(new Error('image failed'));
-  // A required image that fails is decoded once more (prepared-image-store.ts); the second failure is final.
-  await vi.waitFor(() => expect(failed.decodes.get('/a.webp')).not.toBe(first));
-  failed.decodes.get('/a.webp')!.reject(new Error('image failed again'));
+  failed.decodes.get('/a.webp')!.reject(new Error('image failed'));
   await expect(preparation).rejects.toThrow('did not decode');
   failed.lease.destroy();
 });
