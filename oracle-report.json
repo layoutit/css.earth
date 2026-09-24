@@ -1,0 +1,122 @@
+{
+ "surface throw runs inertia to rest": {
+  "steps": 152,
+  "rotates": 127,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "slow release has no inertia": {
+  "steps": 34,
+  "rotates": 8,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "sky drag and throw": {
+  "steps": 152,
+  "rotates": 127,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "pointercancel ends the drag": {
+  "steps": 29,
+  "rotates": 5,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "press interrupts inertia and drags again": {
+  "steps": 181,
+  "rotates": 138,
+  "identical": true,
+  "exercised": "inertia 2 starts/124 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "wheel interrupts inertia": {
+  "steps": 36,
+  "rotates": 10,
+  "identical": true,
+  "exercised": "inertia 1 starts/3 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "wheel during a press": {
+  "steps": 24,
+  "rotates": 2,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "double-click fly-to completes": {
+  "steps": 241,
+  "rotates": 230,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 1 starts/230 frames/1 landed"
+ },
+ "press interrupts fly-to": {
+  "steps": 166,
+  "rotates": 137,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 1 starts/10 frames/0 landed"
+ },
+ "wheel interrupts fly-to": {
+  "steps": 22,
+  "rotates": 10,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 1 starts/10 frames/0 landed"
+ },
+ "Escape and hidden page during fly-to": {
+  "steps": 31,
+  "rotates": 18,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 1 starts/18 frames/0 landed"
+ },
+ "pinch zooms and abandons the orbit": {
+  "steps": 34,
+  "rotates": 1,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "vertical sky flick": {
+  "steps": 151,
+  "rotates": 127,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "vertical globe flick": {
+  "steps": 151,
+  "rotates": 127,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "gentle globe flick": {
+  "steps": 149,
+  "rotates": 127,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "gentle sky flick": {
+  "steps": 149,
+  "rotates": 127,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "touch throw": {
+  "steps": 151,
+  "rotates": 127,
+  "identical": true,
+  "exercised": "inertia 1 starts/120 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "disable, re-enable, stop and invalidate": {
+  "steps": 45,
+  "rotates": 5,
+  "identical": true,
+  "exercised": "inertia 0 starts/0 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "destroy during inertia": {
+  "steps": 34,
+  "rotates": 10,
+  "identical": true,
+  "exercised": "inertia 1 starts/3 frames, fly-to 0 starts/0 frames/0 landed"
+ },
+ "coalesced samples": {
+  "steps": 80,
+  "rotates": 63,
+  "identical": true,
+  "exercised": "inertia 1 starts/60 frames, fly-to 0 starts/0 frames/0 landed"
+ }
+}
