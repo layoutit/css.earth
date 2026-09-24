@@ -16,3 +16,10 @@
 [[edge_functions]]
   path = "/*"
   function = "search-route"
+
+# Astro names every built asset under /_astro/ by its content hash, so a file there never changes: browsers keep it for a
+# year instead of revalidating it on every page (Netlify's default, max-age=0 with must-revalidate).
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
