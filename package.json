@@ -26,6 +26,7 @@
     "build:tools": "pnpm build:packages && pnpm build:renderer && pnpm prepare:catalog && pnpm prepare:titles && node tools/prepare/prepare-solar-geometry.mts && node tools/prepare/prepare-navigation.mts --catalog-only && pnpm build:preparation:bundle && pnpm prepare:world-context && pnpm prepare:shell-assets",
     "check:assets-published": "node tools/assets/check-assets-published.mts",
     "check:deploy-assets": "node tools/assets/check-deploy-assets.mts",
+    "check:body-references": "node tools/ci/check-body-references.mts",
     "check:directory-growth": "node tools/ci/check-directory-growth.mts",
     "check:ci": "node tools/ci/check-ci.mts",
     "check:pr": "node tools/ci/check-ci.mts",

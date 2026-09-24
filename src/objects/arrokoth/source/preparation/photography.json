@@ -2,7 +2,7 @@
   "schema": "cssearth-arrokoth-photography@1",
   "mesh": "shape/arrokoth_porter_2024_v01.obj",
   "references": [
-    "reference/porteretal2024b.pdf",
+    "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/porteretal2024b.pdf",
     "observations/lor_0408625591_0x630_sci.lbl",
     "observations/lor_0408626332_0x636_sci.lbl"
   ],
@@ -130,7 +130,7 @@
     ],
     "references": [
       "observations/ca05_mvic_cube.lblx",
-      "observations/mvic-overview.pdf",
+      "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/overview.pdf",
       "observations/lor_0408625591_0x630_sci.fit"
     ],
     "registration": {

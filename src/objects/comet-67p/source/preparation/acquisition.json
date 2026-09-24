@@ -288,6 +288,24 @@
       ],
       "path": "observations/n20151115t050650703id40f22.img",
       "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151115t050650703id40f22.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "telescopes/consert/cn_g_l_fss.tab",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "telescopes/consert/cn_g_o_fss.tab",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.tab"
     }
   ]
 }
