@@ -9,7 +9,7 @@
       "license": "Published measurement values; MIT analytic representation",
       "licenseEvidence": [
         "measurements.json",
-        "geometry/pck00011.tpc",
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
         "../../../../LICENSE"
       ],
       "acquisition": "Checked-in radius table; formula and 5 degree sample spacing in measurements.json.",
@@ -151,9 +151,6 @@
     },
     {
       "path": "geometry/pallene_mst2013.bpc"
-    },
-    {
-      "path": "geometry/pck00011.tpc"
     },
     {
       "path": "measurements.json"

@@ -6,5 +6,5 @@
   "spinDegreesPerDay": 1226.911485,
   "referenceEpochJdTt": 2451545,
   "coordinateSystem": "IAU Gaspra frame; Thomas west longitude converted to east longitude during preparation; source epoch is J2000 TDB approximated as TT",
-  "source": "reference/pck00011.tpc"
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
 }
