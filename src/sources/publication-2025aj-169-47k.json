@@ -2,8 +2,16 @@
   "id": "publication-2025aj-169-47k",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2025AJ....169...47K, as the NASA Exoplanet Archive cites it.",
+  "title": "Kunimoto et al. (2025): Two Earth-size Planets and an Earth-size Candidate Transiting the nearby Star HD 101581*",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2412.08863"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad9266"
+    },
     {
       "type": "bibliography-key",
       "value": "2025AJ....169...47K"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad9266",
+      "label": "The Astronomical Journal 169 47"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Kunimoto et al. (2025), The Astronomical Journal 169 47",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K"
     }
+  ],
+  "publisher": "The Astronomical Journal 169 47",
+  "creators": [
+    "Michelle Kunimoto",
+    "Zifan Lin",
+    "Sarah Millholland",
+    "et al."
   ],
   "publicationDate": "2025"
 }

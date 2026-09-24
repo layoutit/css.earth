@@ -2,8 +2,16 @@
   "id": "publication-2024a-a-688a-14s",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2024A&A...688A..14S, as the NASA Exoplanet Archive cites it.",
+  "title": "Sulis et al. (2024): A low-mass sub-Neptune planet transiting the bright active star HD 73344",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2405.17155"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202449559"
+    },
     {
       "type": "bibliography-key",
       "value": "2024A&A...688A..14S"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202449559",
+      "label": "Astronomy & Astrophysics 688 A14"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Sulis et al. (2024), Astronomy & Astrophysics 688 A14",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S"
     }
+  ],
+  "publisher": "Astronomy & Astrophysics 688 A14",
+  "creators": [
+    "S. Sulis",
+    "I. J. M. Crossfield",
+    "A. Santerne",
+    "et al."
   ],
   "publicationDate": "2024"
 }

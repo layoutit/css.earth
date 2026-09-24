@@ -2,8 +2,16 @@
   "id": "publication-2021mnras-507-2782o",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2021MNRAS.507.2782O, as the NASA Exoplanet Archive cites it.",
+  "title": "Osborn et al. (2021): TOI-431/HIP 26013: a super-Earth and a sub-Neptune transiting a bright, early K dwarf, with a third RV planet",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2108.02310"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab2313"
+    },
     {
       "type": "bibliography-key",
       "value": "2021MNRAS.507.2782O"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab2313",
+      "label": "Monthly Notices of the Royal Astronomical Society 507 2782-2803"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Osborn et al. (2021), Monthly Notices of the Royal Astronomical Society 507 2782-2803",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O"
     }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 507 2782-2803",
+  "creators": [
+    "Ares Osborn",
+    "David J Armstrong",
+    "Bryson Cale",
+    "et al."
   ],
   "publicationDate": "2021"
 }

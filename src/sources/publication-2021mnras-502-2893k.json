@@ -2,8 +2,16 @@
   "id": "publication-2021mnras-502-2893k",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2021MNRAS.502.2893K, as the NASA Exoplanet Archive cites it.",
+  "title": "Hodžić et al. (2021): Orbital misalignment of the super-Earth π Men c with the spin of its star",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2007.11564"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab237"
+    },
     {
       "type": "bibliography-key",
       "value": "2021MNRAS.502.2893K"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab237",
+      "label": "Monthly Notices of the Royal Astronomical Society 502 2893-2911"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Hodžić et al. (2021), Monthly Notices of the Royal Astronomical Society 502 2893-2911",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K"
     }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 502 2893-2911",
+  "creators": [
+    "Vedad Kunovac Hodžić",
+    "Amaury H M J Triaud",
+    "Heather M Cegla",
+    "et al."
   ],
   "publicationDate": "2021"
 }

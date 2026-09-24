@@ -2,8 +2,16 @@
   "id": "publication-2023mnras-520-3649h",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2023MNRAS.520.3649H, as the NASA Exoplanet Archive cites it.",
+  "title": "Hawthorn et al. (2023): TOI-836: A super-Earth and mini-Neptune transiting a nearby K-dwarf",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2208.07328"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad306"
+    },
     {
       "type": "bibliography-key",
       "value": "2023MNRAS.520.3649H"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad306",
+      "label": "Monthly Notices of the Royal Astronomical Society 520 3649-3668"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Hawthorn et al. (2023), Monthly Notices of the Royal Astronomical Society 520 3649-3668",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H"
     }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 520 3649-3668",
+  "creators": [
+    "Faith Hawthorn",
+    "Daniel Bayliss",
+    "Thomas G Wilson",
+    "et al."
   ],
   "publicationDate": "2023"
 }

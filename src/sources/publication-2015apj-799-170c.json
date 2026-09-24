@@ -2,8 +2,16 @@
   "id": "publication-2015apj-799-170c",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2015ApJ...799..170C, as the NASA Exoplanet Archive cites it.",
+  "title": "Campante et al. (2015): AN ANCIENT EXTRASOLAR SYSTEM WITH FIVE SUB-EARTH-SIZE PLANETS",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1501.06227"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/799/2/170"
+    },
     {
       "type": "bibliography-key",
       "value": "2015ApJ...799..170C"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/799/2/170",
+      "label": "The Astrophysical Journal 799 170"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Campante et al. (2015), The Astrophysical Journal 799 170",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C"
     }
+  ],
+  "publisher": "The Astrophysical Journal 799 170",
+  "creators": [
+    "T. L. Campante",
+    "T. Barclay",
+    "J. J. Swift",
+    "et al."
   ],
   "publicationDate": "2015"
 }

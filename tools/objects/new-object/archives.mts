@@ -1,6 +1,7 @@
 /** Every archive the star generator reads, behind one small fetch interface so the tests run offline on fixtures. Each call names
  * the URL it read; a failed request says which archive, which URL and which status. */
 import { requireString } from '../../sources/source-values.mts';
+import { decodeEntities } from './orbit.mts';
 
 export interface Archive {
   /** GET, or POST a form when `form` is given; the response text. */
@@ -8,18 +9,39 @@ export interface Archive {
   bytes(url: string): Promise<Buffer>;
   /** Whether a HEAD request answers 200. */
   exists(url: string): Promise<boolean>;
+  /** Where a redirecting URL points, without following it; undefined when it does not redirect. */
+  location?(url: string): Promise<string | undefined>;
 }
 
 /** A dropped connection, before or during the transfer, is retried twice, a second apart; an HTTP error answer is not, so a
  * failed service is reported at once. Every failure names its URL. A request that gives nothing for TRANSFER_TIMEOUT_MS is a
- * dropped connection: the archives answer in seconds, and a hung one would otherwise hold a batch forever. */
+ * dropped connection: the archives answer in seconds, and a hung one would otherwise hold a batch forever. A service that asks us
+ * to slow down (429, or 503 with Retry-After) is waited for as it asks and tried again, up to three times; and a host with a
+ * published request pace is never asked faster than that (PACE_MS). */
 export const TRANSFER_TIMEOUT_MS = 120_000;
 export const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
+/** arXiv's API terms: no more than one request every three seconds (https://info.arxiv.org/help/api/tou.html). */
+export const PACE_MS: Readonly<Record<string, number>> = { 'export.arxiv.org': 3000 };
+const nextSlot = new Map<string, number>();
+async function paced(url: string) {
+  const host = new URL(url).host, pace = PACE_MS[host];
+  if (!pace) return;
+  const now = Date.now(), slot = Math.max(now, nextSlot.get(host) ?? 0);
+  nextSlot.set(host, slot + pace);
+  if (slot > now) await new Promise(done => setTimeout(done, slot - now));
+}
 async function transfer<T>(url: string, read: (response: Response) => Promise<T>, init?: RequestInit): Promise<T> {
-  for (let attempt = 1; ; attempt++) {
+  for (let attempt = 1, slowed = 0; ; attempt++) {
     try {
+      await paced(url);
       // Every request names the tool, as the telescope's paper search does; Zenodo refuses one that does not.
       const response = await fetch(url, { ...init, headers: { 'User-Agent': USER_AGENT, ...(init?.headers as Record<string, string> | undefined) }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
+      const retryAfter = Number(response.headers.get('retry-after'));
+      if ((response.status === 429 || (response.status === 503 && retryAfter > 0)) && slowed < 3) {
+        slowed++; attempt--;
+        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : 10 * slowed) * 1000));
+        continue;
+      }
       if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);
       return await read(response);
     } catch (error) {
@@ -33,6 +55,7 @@ export const liveArchive: Archive = {
   text: (url, form) => transfer(url, response => response.text(), form ? { method: 'POST', body: new URLSearchParams(form) } : undefined),
   bytes: url => transfer(url, async response => Buffer.from(await response.arrayBuffer())),
   exists: url => transfer(url, async response => response.status === 200, { method: 'HEAD' }).catch(error => { if (error instanceof HttpError) return false; throw error; }),
+  location: url => fetch(url, { redirect: 'manual', headers: { 'User-Agent': USER_AGENT }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) }).then(response => response.status >= 300 && response.status < 400 ? response.headers.get('location') ?? undefined : undefined),
 };
 
 export const GAIA_TAP = 'https://gea.esac.esa.int/tap-server/tap/sync';
@@ -109,7 +132,8 @@ export async function identify(resolver: Resolver, target: string | undefined, g
 }
 
 export interface Publication { readonly id: string; readonly title: string; readonly creators: readonly string[]; readonly year: string; readonly publisher?: string; readonly doi?: string; readonly arxiv?: string; readonly bibcode?: string; readonly wikipedia?: { readonly revision?: string }; readonly url: string; readonly page?: true }
-const clean = (value: string) => value.replace(/\s+/gu, ' ').trim();
+// arXiv's Atom feed and Crossref's JSON both carry HTML entities in titles and journal names ("A&amp;A").
+const clean = (value: string) => decodeEntities(value).replace(/\s+/gu, ' ').trim();
 /** An arXiv abstract link resolved through the arXiv API. */
 export function parseArxivEntry(xml: string, arxiv: string, url: string): Publication {
   const entry = /<entry>([\s\S]*?)<\/entry>/u.exec(xml)?.[1];
@@ -130,7 +154,7 @@ export function parseCrossref(json: string, doi: string, url: string): Publicati
   const creators = (message.author ?? []).map((a: { given?: string; family?: string }) => clean(`${a.given ?? ''} ${a.family ?? ''}`));
   const container = message['container-title']?.[0], volume = message.volume, page = message.page ?? message['article-number'];
   return { id: `doi-${doi.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/-$/u, '')}`, title: clean(title), creators, year, url, doi,
-    ...(container ? { publisher: [container, volume, page].filter(Boolean).join(' ') } : {}) };
+    ...(container ? { publisher: clean([container, volume, page].filter(Boolean).join(' ')) } : {}) };
 }
 /** The publication behind a cited URL: an arXiv abstract or a DOI link. Any other URL is cited as a web page by its author. */
 export async function fetchPublication(archive: Archive, url: string): Promise<Publication | undefined> {
@@ -138,8 +162,17 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
   if (arxiv) return parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${arxiv}`), arxiv, url);
   const bibcode = /adsabs\.harvard\.edu\/abs\/([^/?#]+)/u.exec(url)?.[1];
   if (bibcode) {
-    // An ADS link, as the NASA Exoplanet Archive cites each parameter set: identified by its bibcode, with no lookup.
-    const code = decodeURIComponent(bibcode), year = code.slice(0, 4);
+    // An ADS link, as the NASA Exoplanet Archive cites each parameter set. ADS's public link gateway redirects a bibcode to the
+    // paper's arXiv page and its DOI, with no API key; the paper is then read as an arXiv or Crossref record, with the bibcode kept.
+    const code = decodeURIComponent(bibcode), year = code.slice(0, 4), landing = `https://ui.adsabs.harvard.edu/abs/${code}`;
+    const gateway = (type: string) => archive.location?.(`https://ui.adsabs.harvard.edu/link_gateway/${encodeURIComponent(code)}/${type}`).catch(() => undefined);
+    const [eprint, published] = await Promise.all([gateway('EPRINT_HTML'), gateway('PUB_HTML')]);
+    const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = /doi\.org\/(10\.\S+)$/u.exec(published ?? '')?.[1];
+    // The published paper first (Crossref, the better citation, with no request limit), its preprint id kept alongside; the arXiv API
+    // (one request every 3 s) only for a paper with no DOI.
+    if (linkedDoi) { const doi = decodeURIComponent(linkedDoi); return { ...parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, landing), ...(linkedArxiv ? { arxiv: linkedArxiv } : {}), bibcode: code, year }; }
+    // The year is the bibcode's, the published one the archive cites, not the preprint's.
+    if (linkedArxiv) return { ...parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${linkedArxiv}`), linkedArxiv, landing), bibcode: code, year };
     return { id: `publication-${code.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`, title: `Reference ${code}`, creators: [], year, url: `https://ui.adsabs.harvard.edu/abs/${code}`, bibcode: code };
   }
   const wiki = /^https:\/\/en\.wikipedia\.org\/wiki\/([^#?]+)/u.exec(url)?.[1];

@@ -2,8 +2,16 @@
   "id": "publication-2019apj-875l-7d",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2019ApJ...875L...7D, as the NASA Exoplanet Archive cites it.",
+  "title": "Dragomir et al. (2019): TESS Delivers Its First Earth-sized Planet and a Warm Sub-Neptune*",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1901.00051"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ab12ed"
+    },
     {
       "type": "bibliography-key",
       "value": "2019ApJ...875L...7D"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ab12ed",
+      "label": "The Astrophysical Journal Letters 875 L7"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Dragomir et al. (2019), The Astrophysical Journal Letters 875 L7",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D"
     }
+  ],
+  "publisher": "The Astrophysical Journal Letters 875 L7",
+  "creators": [
+    "Diana Dragomir",
+    "Johanna Teske",
+    "Maximilian N. Günther",
+    "et al."
   ],
   "publicationDate": "2019"
 }
