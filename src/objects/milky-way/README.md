@@ -211,7 +211,7 @@ camera metadata uses the volume's Sun-centered ICRF frame and epoch.
 
 ## Billboard UI evidence
 
-The [inspected browser capture](evidence/2026-09-23/billboard-and-labels.png) shows
+The [inspected browser capture](evidence/2026-09-23/billboard-and-labels.jpg) shows
 the fixed arm image, volumetric centre and black Sagittarius A* caption and
 circle. The [capture settings](evidence/2026-09-23/capture.json) preserve the
 camera, viewport, pixel ratio and observed DOM count. The browser engine version
