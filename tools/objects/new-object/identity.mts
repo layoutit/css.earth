@@ -3,7 +3,8 @@
  *
  * **Ids.** A host's id is the slug of the name its planets are called by (the planet name without its letter: "pi Men c" gives
  * pi-men), else of the host name; when that would not start with a letter ("55 Cnc"), of its HD, then HIP, then Gaia DR3 name. A
- * planet's id is its host's id and its letter: joined after a digit (hd-219134b, trappist-1e) and after a hyphen when the host id
+ * star's component letter written against its number ("K2-32B") is hyphenated as the universe's companions are (alpha-centauri-b,
+ * kepler-16-a), so it never reads as a planet's id (k2-32b is K2-32 b). A planet's id is its host's id and its letter: joined after a digit (hd-219134b, trappist-1e) and after a hyphen when the host id
  * ends in a letter (pi-men-c, kepler-16ab-b). The display name stays the archive's.
  *
  * **Duplicates.** A star is already in the universe when an existing placed star sits within DUPLICATE_ARCSEC of it at a common
@@ -20,7 +21,7 @@ export const slug = (name: string) => name.normalize('NFKD').replace(/[̀-ͯ]/gu
 
 /** A host's id from the name its planets use, its own name, then its catalogue names; the first that starts with a letter. */
 export function hostId(names: { readonly planetPrefix?: string; readonly hostname: string; readonly hd?: string; readonly hip?: string; readonly gaiaDr3?: string }): string {
-  const candidates = [names.planetPrefix, names.hostname, names.hd, names.hip, names.gaiaDr3].filter((name): name is string => !!name?.trim()).map(slug);
+  const candidates = [names.planetPrefix, names.hostname, names.hd, names.hip, names.gaiaDr3].filter((name): name is string => !!name?.trim()).map(name => slug(name.trim().replace(/(\d)([A-F])$/u, '$1 $2')));
   const id = candidates.find(candidate => ID.test(candidate));
   if (!id) throw new Error(`${names.hostname}: none of its names (${candidates.join(', ')}) gives an id that starts with a letter; give this host a spec by hand.`);
   return id;

@@ -54,10 +54,10 @@ export function orbitizeHostedOrbit(orbitJson: unknown, hostRadiusKm: number, di
 export interface ArchiveRow {
   readonly name: string; readonly reference: string; readonly label: string; readonly bibcode?: string; readonly url?: string; readonly isDefault: boolean; readonly year: number;
   readonly period?: number; readonly ratioAR?: number; readonly inclination?: number; readonly eccentricity?: number; readonly periastron?: number;
-  readonly transitMid?: number; readonly radiusJupiter?: number; readonly massJupiter?: number; readonly massLimitJupiter?: number; readonly semiMajorAxisAu?: number; readonly starRadius?: number; readonly starMass?: number;
+  readonly transitMid?: number; readonly radiusJupiter?: number; readonly massJupiter?: number; readonly massLimitJupiter?: number; readonly semiMajorAxisAu?: number; readonly starRadius?: number; readonly starMass?: number; readonly impactParameter?: number;
 }
-const COLUMNS = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim';
-const FIELDS = [['period', 3], ['ratioAR', 4], ['inclination', 5], ['eccentricity', 6], ['periastron', 7], ['transitMid', 8], ['radiusJupiter', 9], ['massJupiter', 10], ['semiMajorAxisAu', 11], ['starRadius', 12], ['starMass', 13]] as const;
+const COLUMNS = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar';
+const FIELDS = [['period', 3], ['ratioAR', 4], ['inclination', 5], ['eccentricity', 6], ['periastron', 7], ['transitMid', 8], ['radiusJupiter', 9], ['massJupiter', 10], ['semiMajorAxisAu', 11], ['starRadius', 12], ['starMass', 13], ['impactParameter', 15]] as const;
 export const archiveQuery = (planet: string) => `select ${COLUMNS} from ps where pl_name = '${planet.replaceAll("'", "''")}'`;
 export const archiveHostQuery = (host: string) => `select ${COLUMNS} from ps where hostname = '${host.replaceAll("'", "''")}'`;
 /** The archive's CSV: quoted fields that may hold commas (the reference is an HTML anchor). */
@@ -102,15 +102,16 @@ export interface AssembledOrbit { readonly orbit: HostedOrbit; readonly radius: 
 /** A transiting planet's orbit from its archive rows: the chosen row (the default, or the spec's reference) first, and what it
  * lacks from the most recent other row that has it, each value cited to its own row. a/R* missing everywhere is derived from a row's
  * semi-major axis and stellar radius, or from Kepler's third law with its period, stellar mass and radius. Eccentricity and the
- * argument of periastron come from one row together. A missing period, inclination or transit time refuses the planet. */
+ * argument of periastron come from one row together. An inclination missing everywhere is derived from a row's impact parameter
+ * (Winn 2010, eq. 7). A missing period or transit time, or an inclination no row gives or allows, refuses the planet. */
 export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: string, composite?: CompositeMass): AssembledOrbit {
   const chosen = reference ? rows.find(entry => entry.reference === reference || entry.label === reference || entry.bibcode === reference) : rows.find(entry => entry.isDefault);
   if (!chosen) throw new Error(`${rows[0]!.name}: no ps row ${reference ? `from ${reference}` : 'is the default'}; its references are ${rows.map(entry => `${entry.label} (${entry.reference})`).join(', ')}.`);
   const others = rows.filter(entry => entry !== chosen).sort((a, b) => b.year - a.year), name = chosen.name;
   const cite = (row: ArchiveRow) => `${row.label}${row.bibcode ? ` (${row.bibcode})` : ''}, via the NASA Exoplanet Archive ps table (pl_refname ${row.reference})`;
   const pick = <K extends keyof ArchiveRow>(key: K) => { const row = chosen[key] !== undefined ? chosen : others.find(entry => entry[key] !== undefined); return row ? { value: row[key] as number, row } : undefined; };
-  const period = pick('period'), inclination = pick('inclination'), transit = pick('transitMid');
-  const missing = [['period', period], ['inclination', inclination], ['transit time', transit]].filter(([, value]) => !value).map(([key]) => key);
+  const period = pick('period'), transit = pick('transitMid'), impact = [chosen, ...others].find(row => row.impactParameter !== undefined);
+  const missing = [['period', period], ['inclination', pick('inclination') ?? impact], ['transit time', transit]].filter(([, value]) => !value).map(([key]) => key);
   if (missing.length) throw new Error(`${name}: no archive row gives its ${missing.join(', ')}.`);
   // a/R*: a row's own, else derived from the same row's semi-major axis and stellar radius, else Kepler's third law.
   let ratio: { value: number; row: ArchiveRow; how: string };
@@ -127,6 +128,15 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   // Eccentricity and omega from one row: the chosen row when it states both (or e = 0), else the newest row that does.
   const shape = [chosen, ...others].find(row => row.eccentricity !== undefined && (row.eccentricity === 0 || row.periastron !== undefined));
   const e = shape?.eccentricity ?? 0, radius = pick('radiusJupiter');
+  // The inclination a row states, else the one its impact parameter gives with that row's a/R* (the orbit's when the row has none)
+  // and the orbit's e and omega: b = a/R* cos i (1 - e^2) / (1 + e sin omega), Winn (2010) eq. 7.
+  let inclination: { value: number; row: ArchiveRow; how?: string } | undefined = pick('inclination');
+  if (!inclination) {
+    const row = impact!, own = row.ratioAR ?? (row.semiMajorAxisAu !== undefined && row.starRadius !== undefined ? row.semiMajorAxisAu / (row.starRadius * SOLAR_RADIUS_AU) : undefined), aR = own ?? ratio.value;
+    const omega = e > 0 ? shape!.periastron! * Math.PI / 180 : 0, cos = row.impactParameter! * (1 + e * Math.sin(omega)) / (aR * (1 - e * e));
+    if (!(cos >= 0 && cos < 1)) throw new Error(`${name}: no archive row gives its inclination, and ${row.label}'s impact parameter ${row.impactParameter} with a/R* ${Number(aR.toFixed(4))} allows none (cos i ${cos.toFixed(3)}).`);
+    inclination = { value: Number((Math.acos(cos) * 180 / Math.PI).toFixed(3)), row, how: `inclination derived from its impact parameter ${row.impactParameter} with ${own === undefined ? `the orbit's a/R* ${ratio.value}` : `its a/R* ${Number(own.toFixed(4))}`}${e > 0 ? ` and the orbit's e ${e}, omega ${shape!.periastron} degrees` : ''} (Winn 2010, eq. 7)` };
+  }
   if (!radius) throw new Error(`${name}: no archive row gives its radius.`);
   // The mass is the one the archive's composite table adopts, so the choice between papers is the archive's, not ours.
   if (!composite) throw new Error(`${name}: the archive's composite table gives no mass.`);
@@ -139,10 +149,10 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   if (!(density > 0.1) || (density > 8.5 && mass.value < 13)) throw new Error(`${name}: ${mass.row.label.split(',')[0]}'s mass ${mass.value} Jupiter masses in ${radius.value} Jupiter radii is ${density.toFixed(1)} g/cm^3, outside what the records accept.`);
   const todo = e > 0 ? `omega ${shape!.periastron} degrees is taken as ${shape!.label} gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e ${e}) about the line of sight` : undefined;
   return { rows, radius, mass, ...(todo ? { todo } : {}), orbit: {
-    periodDays: period!.value, semiMajorAxisStellarRadii: ratio.value, inclinationDegrees: inclination!.value, eccentricity: e,
+    periodDays: period!.value, semiMajorAxisStellarRadii: ratio.value, inclinationDegrees: inclination.value, eccentricity: e,
     ...(e > 0 ? { argumentOfPeriapsisDegrees: mod360(shape!.periastron!), epochDefinition: 'inferior-conjunction' as const } : {}),
     transitTimeBmjdTdb: round(transit!.value - 2400000.5, 6), ascendingNodePositionAngleDegrees: 0,
-    sources: { period: `${cite(period!.row)}: P ${period!.value} d`, shape: `${cite(ratio.row)}: ${ratio.how}; ${cite(inclination!.row)}: inclination ${inclination!.value} degrees`,
+    sources: { period: `${cite(period!.row)}: P ${period!.value} d`, shape: `${cite(ratio.row)}: ${ratio.how}; ${cite(inclination.row)}: ${inclination.how ?? `inclination ${inclination.value} degrees`}`,
       eccentricity: shape ? `${cite(shape)}: e ${shape.eccentricity}` : `No archive row states an eccentricity; the orbit is taken as circular`,
       ...(e > 0 ? { argumentOfPeriapsis: `${cite(shape!)}: omega ${shape!.periastron} degrees${shape!.periastron! < 0 || shape!.periastron! >= 360 ? `, stored as ${mod360(shape!.periastron!)}` : ''}` } : {}),
       phase: `${cite(transit!.row)}: transit mid-time ${transit!.value} BJD, taken as BJD_TDB`,

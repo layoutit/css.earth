@@ -14,7 +14,7 @@ export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync';
 /** El-Badry et al. (2021) section 3: pairs with R below 0.1 are bound with high confidence. */
 export const CHANCE_ALIGNMENT_MAX = 0.1;
 const EL_BADRY = { url: 'https://arxiv.org/abs/2101.05282', credit: 'El-Badry, Rix & Heintz (2021), MNRAS 506, 2269' };
-const TIC = { url: 'https://doi.org/10.3847/1538-3881/ab3467', credit: 'Stassun et al. (2019), AJ 158, 138 (TIC v8.2)' };
+export const TIC = { url: 'https://doi.org/10.3847/1538-3881/ab3467', credit: 'Stassun et al. (2019), AJ 158, 138 (TIC v8.2)' };
 
 const csv = (text: string) => { const [header, ...lines] = text.trim().split(/\r?\n/u); const keys = header!.split(','); return lines.filter(Boolean).map(line => Object.fromEntries(line.split(',').map((cell, i) => [keys[i]!, cell.replace(/^"|"$/gu, '')]))); };
 const adql = (query: string) => ({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: query });
@@ -28,6 +28,9 @@ const tsv = (text: string) => {
 };
 const vizier = (archive: Archive, source: string, constraint: Record<string, string>, out: string) => archive.text(`${VIZIER_ASU}?${new URLSearchParams({ '-source': source, ...constraint, '-out': out })}`).then(tsv);
 
+/** The TESS Input Catalog v8.2 row of Gaia DR3 source `gaia`: its TIC number, temperature, radius and mass with their errors. */
+export const ticRow = async (archive: Archive, gaia: string) => (await vizier(archive, 'IV/39/tic82', { GAIA: gaia }, 'TIC,Teff,s_Teff,Rad,s_Rad,Mass,s_Mass'))[0];
+
 /** The bound wide companions of the star with Gaia DR3 `gaia`, as placed-star spec entries of `system`. `held(gaia, name)` names a
  * star the universe already holds; such a companion is noted, not drafted again. */
 export async function wideCompanions(archive: Archive, host: { readonly gaia: string; readonly name: string; readonly system: string }, held: (gaia: string, name: string) => string | undefined): Promise<{ companions: Record<string, unknown>[]; notes: string[] }> {
@@ -40,7 +43,7 @@ export async function wideCompanions(archive: Archive, host: { readonly gaia: st
     const name = (named?.main_id ?? `Gaia DR3 ${gaia}`).replace(/^(?:\*+|NAME|V\*)\s+/u, '').replace(/\s+/gu, ' ').trim();
     const already = held(gaia, name);
     if (already) { notes.push(`${name}, the bound companion of ${host.name} ${separation} AU away, is already in the universe as ${already}`); continue; }
-    const [tic] = await vizier(archive, 'IV/39/tic82', { GAIA: gaia }, 'TIC,Teff,s_Teff,Rad,s_Rad,Mass,s_Mass');
+    const tic = await ticRow(archive, gaia);
     const value = (key: string) => tic?.[key] ? Number(tic[key]) : undefined;
     if (!tic?.TIC || value('Teff') === undefined || value('Rad') === undefined || value('Mass') === undefined) {
       notes.push(`${name} (Gaia DR3 ${gaia}), the bound companion of ${host.name} ${separation} AU away, has no temperature, radius and mass in TIC v8.2; not added`); continue;

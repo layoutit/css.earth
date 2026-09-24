@@ -400,7 +400,7 @@ export async function specFromArchive(hosts: readonly string[], out: string, { r
     progress(`${host}: reading its default parameter sets`);
     // A host the archive cannot give a spec for is reported and left out; the rest of the batch is still drafted.
     let drafted: Awaited<ReturnType<typeof archiveSpec>>;
-    try { drafted = await archiveSpec(liveArchive, host, universe); } catch (error) { failed.push(`${host}: ${(error as Error).message.split('\n')[0]}`); progress(`  ${host}: left out: ${failed.at(-1)}`); continue; }
+    try { drafted = await archiveSpec(liveArchive, host, universe); } catch (error) { const line = (error as Error).message.split('\n')[0]!; failed.push(line.startsWith(`${host}:`) ? line : `${host}: ${line}`); progress(`  left out: ${failed.at(-1)}`); continue; }
     const { spec, skipped, notes, companions } = drafted;
     const planets = (spec.planets as unknown[]).length;
     if (planets || !('host' in spec)) stars.push(spec);
