@@ -161,6 +161,11 @@ jobs:
         run: node tools/ci/check-object-runtime-ownership.mts --receipts
       - name: Check independent body additions
         run: node --test tools/contract/body-additions.test.mts
+      - name: Test the object generator and every lit body's presentation
+        # new-object's decisions offline (ids, duplicates, refresh, colour, orbits) and the static check that every lit body's
+        # lighting frame is sized to its sphere and every shape planet takes its star's light. About two seconds; the heavy
+        # preparation lane also runs them, but only when preparation paths change.
+        run: node --test tools/objects/new-object/new-object.test.mts tests/objects/unit/lighting-frame.test.mts
       - name: Test asset inventory, publish verification, closure and local CI tooling
         # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
