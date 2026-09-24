@@ -11,7 +11,7 @@ import { measureCubeResolution } from '../jwst/cubes/resolution.mts';
 import { readFitsFileHdus, type FitsHeader } from '../../fits/fits.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 import { pathToFileURL } from 'node:url';
-import { flagValue } from '../../cli/cli-arguments.mts';
+import { flagValue } from '@cssearth/core';
 import { compareCubeWithMast, runSpec3 } from '../jwst/cubes/spec3.mts';
 import { DEFAULT_CRDS_CONTEXT, pinImagingProgram } from '../jwst/imaging/archive.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';

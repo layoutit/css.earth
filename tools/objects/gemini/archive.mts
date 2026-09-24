@@ -33,8 +33,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';
 import { artifactName, isRawName, primaryHeaderBytes, query, requireMd5, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
 import { sha256File } from '@cssearth/core/node';
 

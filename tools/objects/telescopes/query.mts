@@ -31,9 +31,8 @@ import { parseAcceptedAssumptions, type ResolutionAssumption } from '../resoluti
  * is reported as "capabilities not recorded" rather than guessed. */
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { flagValue } from '../../cli/cli-arguments.mts';
+import { flagValue, hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readJsonSource } from '../../sources/source-values.mts';
-import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';

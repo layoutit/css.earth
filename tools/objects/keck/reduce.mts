@@ -31,7 +31,7 @@ import { createWriteStream } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
-import { positionalArguments } from '../../cli/cli-arguments.mts';
+import { positionalArguments } from '@cssearth/core';
 import { assertInputPins, productRecordPath, readProductRecord, sameRun, writeProductRecord,
   type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { DOWNLOADS, readKeckProgram, type KeckFile, type KeckObservation, type KeckProgram } from './archive.mts';

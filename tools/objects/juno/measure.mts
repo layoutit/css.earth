@@ -27,7 +27,7 @@ import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrest
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
 import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
 import { astroqueryRows } from '../astronomy-packages/client.mts';
-import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
+import { flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';
 /** The budget every measured program is held to; a lens may state a tighter one. */

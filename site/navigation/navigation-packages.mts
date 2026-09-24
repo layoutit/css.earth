@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
-import { projectRoot } from '../../tools/cli/project-root.mts';
+import { projectRoot } from '@cssearth/core/node';
 
 /** Package labels and catalogue-subject bindings used by navigation preparation. */
 const REPOSITORY = projectRoot(import.meta.url);
