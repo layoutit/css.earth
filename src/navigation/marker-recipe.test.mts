@@ -82,7 +82,8 @@ test("resolved parent sprites retain native source density and the existing phys
     assert.equal(metadata.width,pixels); assert.equal(metadata.height,pixels);
     assert.ok(metadata.width >= 512, "Resolved imagery must not come from the 32px UI atlas");
   }
-  const moon = PREPARED_NAVIGATION_MARKERS.enceladus;
+  // Every prepared body now has a context image; a marker without one keeps only its atlas tile.
+  const { context: _context, ...moon } = PREPARED_NAVIGATION_MARKERS.enceladus;
   assert.deepEqual(contextMarkerSprite(moon), {url:moon.url2x,index:moon.index,count:moon.count,size:moon.presentation.size});
 });
 
@@ -100,4 +101,29 @@ test("prepared flood shading has a bright centre, a darker limb and no terminato
   assert.ok(red(1,32) >= 70 && red(1,32) < 130, 'limb is rounded without going black');
   assert.equal(red(1,32), red(62,32), 'flood shading is symmetric');
   assert.equal(output[3], 0, 'outside the circle stays transparent');
+});
+
+test("an orthographic marker shows the hemisphere its centre names, and nothing outside the disc", async (context) => {
+  const root = await mkdtemp(resolve(tmpdir(), "cssearth-marker-orthographic-"));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  // A 2:1 map: the western half of longitudes red, the eastern half blue; the southern quarter green.
+  const width = 64, height = 32, map = Buffer.alloc(width * height * 3);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const at = (y * width + x) * 3;
+    if (y >= 24) map[at + 1] = 255; else if (x < 32) map[at] = 255; else map[at + 2] = 255;
+  }
+  const sourcePath = resolve(root, 'map.png');
+  await writeFile(sourcePath, await sharp(map, { raw: { width, height, channels: 3 } }).png().toBuffer());
+  const render = async (centerX: number, centerY: number) => {
+    const png = await renderMarker({ ...marsMarker, source: { ...marsMarker.source, path: 'map.png' }, operations: [
+      { type: 'orthographic', centerX, centerY }, { type: 'png' },
+    ] }, { sourcePath, tileSize: 32 });
+    const pixels = await sharp(png).ensureAlpha().raw().toBuffer();
+    return (x: number, y: number) => [...pixels.subarray((y * 32 + x) * 4, (y * 32 + x) * 4 + 4)];
+  };
+  const west = await render(0.25, 0.5), east = await render(0.75, 0.5), south = await render(0.25, 0.9);
+  assert.deepEqual(west(16, 16), [255, 0, 0, 255], 'a western centre shows the red half');
+  assert.deepEqual(east(16, 16), [0, 0, 255, 255], 'an eastern centre shows the blue half');
+  assert.equal(south(16, 16)[1], 255, 'a southern centre shows the green south');
+  assert.equal(west(0, 0)[3], 0, 'outside the disc stays transparent');
 });

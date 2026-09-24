@@ -64,7 +64,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     const distance = Math.min(1, Math.abs(points[next] - currentOffset()) / Math.max(1, points.peek));
     const velocity = Math.min(1, Math.abs(speed) / 1.2);
     const duration = Math.round(Math.max(180, Math.min(340, 220 + 120 * distance - 60 * velocity)));
-    sheet.style.setProperty("--sheet-snap-duration", `${duration}ms`);
+    body.style.setProperty("--sheet-snap-duration", `${duration}ms`);
     if (state === 'full' && next !== 'full') readingPosition = { key: readingKey(), top: handleReadingPosition ?? sheet.scrollTop };
     handleReadingPosition = null;
     const restoreScroll = next === 'full' && state !== 'full' && readingPosition?.key === readingKey() ? readingPosition.top : null;
@@ -77,7 +77,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     snapFrame = windowTarget.requestAnimationFrame(() => {
       snapFrame = 0;
       if (!lifetime.disposed) {
-        sheet.style.removeProperty("transform");
+        body.style.removeProperty("--sheet-offset");
         if (restoreScroll !== null) sheet.scrollTop = restoreScroll;
       }
     });
@@ -132,7 +132,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     if (elapsed > 0) drag.velocity = 0.8 * (event.clientY - drag.lastY) / elapsed + 0.2 * drag.velocity;
     drag.lastY = event.clientY;
     drag.lastTime = event.timeStamp;
-    sheet.style.transform = `translate3d(0, ${drag.offset}px, 0)`;
+    // The sheet and the search riding on it both read this offset (shell-layout.css).
+    body.style.setProperty("--sheet-offset", `${drag.offset}px`);
   }, { signal });
 
   const release = (event: PointerEvent) => {
@@ -209,7 +210,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   mobile.addEventListener("change", () => {
     gesture = null;
     sheet.classList.remove("is-dragging");
-    sheet.style.removeProperty("transform");
+    documentTarget.body.style.removeProperty("--sheet-offset");
   }, { signal });
   // Typing in search opens a keyboard over the sheet it just opened. The layout
   // viewport keeps its height, so the visual viewport reports the lost room.
@@ -239,8 +240,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       events.abort();
       gesture = null;
       sheet.classList.remove("is-dragging");
-      sheet.style.removeProperty("transform");
-      sheet.style.removeProperty("--sheet-snap-duration");
+      body.style.removeProperty("--sheet-offset");
+      body.style.removeProperty("--sheet-snap-duration");
       delete body.dataset.sheet;
     },
   });

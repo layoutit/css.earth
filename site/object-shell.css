@@ -921,6 +921,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 .object-source-link:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 3px; }
 .object-source-link:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 2px; }
 .object-source-link-compact { display: none; }
+/* The sheet's copy of the sources link: only phones and portrait tablets, which show no footer. */
+.object-sheet-sources { display: none; }
 
 .object-view-readout {
   display: flex;
@@ -1054,6 +1056,15 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   .object-view-readout {
     font-size: 11px;
   }
+  .object-sheet-sources {
+    display: block;
+    padding: 12px 16px 16px;
+    color: var(--shell-text-muted, rgb(255 255 255 / 60%));
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .object-sheet-sources .object-source-link [data-source-link-label] { display: inline; }
+  .object-sheet-sources .object-source-link-compact { display: none; }
 }
 
 @media (max-width: 600px) {
