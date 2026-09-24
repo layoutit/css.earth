@@ -14,7 +14,7 @@ import { type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
 import { quoteSource } from './prose.mts';
-import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, thermalFromArchive } from './planet-lenses.mts';
+import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, lensMarkerEntry, thermalFromArchive } from './planet-lenses.mts';
 import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
 import { archiveRows, assembleArchiveOrbit, compositeMass, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
@@ -166,6 +166,8 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
+  // A planet's marker is its lens drawn as a disc (the companion star's comes from its colour lens, lens.mts).
+  if (!star) lensMarkerEntry(files, id);
   bindInputs(files, id);
   // One marker for everything a person still writes.
   for (const [path, value] of files) if (typeof value === 'string' && value.includes(HOSTED_TODO)) files.set(path, value.replaceAll(HOSTED_TODO, TODO));

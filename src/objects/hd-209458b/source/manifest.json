@@ -142,24 +142,26 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "lens-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/0801.1841",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-hosted-planet.mts",
+        "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
-          "hd-209458b-observational-measurements"
+          "hd-209458b-observational-measurements",
+          "hd-209458b-preparation-raster",
+          "hd-209458b-thermal-color"
         ]
       },
-      "generator": "tools/objects/new-hosted-planet.mts",
+      "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],
