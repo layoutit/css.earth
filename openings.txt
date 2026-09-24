@@ -18,12 +18,12 @@ Opening camera per page, main and change (headless Chromium, 1280x800, DPR 1). P
   pixels: 203469 / 239817
 /sun/?dataset=cor1-density
   main:   Altitude: 2,723,016 km | notice: Dataset cloud “sun-cor1-density” is unavailable. Showing the default dataset.
-  change: Altitude: 2,723,016 km
-  pixels: 414944 / 450610
+  change: Altitude: 17,015,196 km
+  pixels: 189514 / 231690
 /betelgeuse/
   main:   Altitude: 13.91 AU | notice: Dataset cloud “betelgeuse-shell” is unavailable. Showing the default dataset.
-  change: Altitude: 13.91 AU
-  pixels: 322986 / 489944
+  change: Altitude: 156.82 AU
+  pixels: 168358 / 197768
 /hd-181327/
   main:   Altitude: 3,736,092 km
   change: Altitude: 3,736,092 km
@@ -36,3 +36,5 @@ in-app /earth/ -> /beta-pictoris/?dataset=debris-disc
   main:   Altitude: 4,230,793 km
   change: Altitude: 986.44 AU
   pixels: 195187 / 458934
+
+Sun, loaded plainly, then COR1 picked in the page once the world is loaded (cor1.mjs): main and change both end at 2,723,016 km, 0 changed pixels.
