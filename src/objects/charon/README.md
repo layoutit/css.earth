@@ -55,7 +55,7 @@ Schenk and the New Horizons team, distributed by USGS. The 2017 GeoTIFF is
 
 - [Mosaic](https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m)
 - [Terrain model](https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m)
-- [PDS processing description](https://pds-smallbodies.astro.umd.edu/holdings/nh-p_psa-lorri_mvic-5-geophys-v1.0/catalog/dataset.cat), retained in source/observations/dataset.cat.
+- [PDS processing description](https://pds-smallbodies.astro.umd.edu/holdings/nh-p_psa-lorri_mvic-5-geophys-v1.0/catalog/dataset.cat).
 
 Both GeoTIFFs have origin (−1,903,950, 952,200) m, 300/−300 m pixels and a
 0° central meridian. The preparer samples those coordinates; it does not assume

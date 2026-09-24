@@ -119,16 +119,5 @@
     "archiveUrl": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
     "path": "science/geology-sim3237/sim3237_Ganymede_metadata.txt",
     "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
-  },
-  {
-    "name": "Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt",
-    "method": 8,
-    "crc": 1096571830,
-    "compressed": 2299,
-    "bytes": 5871,
-    "offset": 107232225,
-    "archiveUrl": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
-    "path": "science/geology-sim3237/sim3237_Ganymede_readme.txt",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
   }
 ]

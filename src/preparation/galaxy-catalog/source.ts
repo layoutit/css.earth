@@ -28,30 +28,44 @@ export function parseGalaxyCsv(source: string): CsvRow[] {
   });
 }
 
-/** Read regular source members only; never extract files or execute archive content. */
-export function readAuthorMetadata(archive: Uint8Array, prefix: string, eligibleTables: readonly string[]): Map<string, AuthorMetadata> {
+/** Walk the gzipped tar's members in order; never extract files or execute archive content. */
+function* tarMembers(archive: Uint8Array): Generator<{ name: string; type: string; bytes: Buffer }> {
   const tar = gunzipSync(archive, { maxOutputLength: 64 * 1024 * 1024 });
-  const result = new Map<string, AuthorMetadata>();
   for (let offset = 0; offset + 512 <= tar.length;) {
     const header = tar.subarray(offset, offset + 512);
-    if (header.every(v => v === 0)) break;
+    if (header.every(v => v === 0)) return;
     const str = (start: number, end: number) => header.subarray(start, end).toString('utf8').replace(/\0.*$/s, '');
     const size = Number.parseInt(str(124, 136).trim(), 8);
     const expected = Number.parseInt(str(148, 156).trim(), 8);
     const sum = header.reduce((n, byte, i) => n + (i >= 148 && i < 156 ? 32 : byte), 0);
     if (!Number.isSafeInteger(size) || size < 0 || sum !== expected || offset + 512 + size > tar.length) throw new TypeError('Invalid or truncated source tar member.');
-    const name = [str(345, 500), str(0, 100)].filter(Boolean).join('/'), type = str(156, 157);
+    yield { name: [str(345, 500), str(0, 100)].filter(Boolean).join('/'), type: str(156, 157), bytes: tar.subarray(offset + 512, offset + 512 + size) };
+    offset += 512 + Math.ceil(size / 512) * 512;
+  }
+}
+
+/** Read one regular file member of the author archive by its exact name. */
+export function readArchiveMember(archive: Uint8Array, member: string): Buffer {
+  for (const { name, type, bytes } of tarMembers(archive)) {
+    if (name !== member) continue;
+    if (!['', '0'].includes(type)) throw new TypeError(`Archive member ${member} is not a regular file (tar type ${JSON.stringify(type)}).`);
+    return bytes;
+  }
+  throw new TypeError(`Source archive has no member ${member}.`);
+}
+
+/** Read regular source members only; never extract files or execute archive content. */
+export function readAuthorMetadata(archive: Uint8Array, prefix: string, eligibleTables: readonly string[]): Map<string, AuthorMetadata> {
+  const result = new Map<string, AuthorMetadata>();
+  for (const { name, type, bytes } of tarMembers(archive)) {
     if (name.startsWith(prefix) && name.endsWith('.yaml')) {
       if (!['', '0'].includes(type) || name.split('/').some(p => p === '..') || name.startsWith('/')) throw new TypeError('Source YAML must be a regular contained archive member.');
       // The author archive contains duplicate fields in unused structural fits.
       // Validate every consumed mapping, without rewriting that original source.
-      const doc = parseDocument(tar.subarray(offset + 512, offset + 512 + size).toString('utf8'), { uniqueKeys: false });
+      const doc = parseDocument(bytes.toString('utf8'), { uniqueKeys: false });
       if (doc.errors.length) throw doc.errors[0];
       if (!isMap(doc.contents)) throw new TypeError('Source YAML must be a mapping.');
-      if (!eligibleTables.includes(String(doc.get('table')))) {
-        offset += 512 + Math.ceil(size / 512) * 512;
-        continue;
-      }
+      if (!eligibleTables.includes(String(doc.get('table')))) continue;
       const consumed = [
         [doc.contents, ['key', 'table', 'location', 'name_discovery', 'distance']],
         [doc.get('location', true), ['ra', 'dec', 'ref_location']],
@@ -69,7 +83,6 @@ export function readAuthorMetadata(archive: Uint8Array, prefix: string, eligible
       if (!/^[A-Za-z0-9][A-Za-z0-9_.+-]*$/.test(item.key) || result.has(item.key) || !name.toLowerCase().endsWith(`/${item.key.toLowerCase()}.yaml`)) throw new TypeError('Source YAML identifier disagrees with its filename or repeats.');
       result.set(item.key, item);
     }
-    offset += 512 + Math.ceil(size / 512) * 512;
   }
   if (!result.size) throw new TypeError('Source archive contains no authored galaxy inputs.');
   return result;

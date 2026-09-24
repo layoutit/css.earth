@@ -10,10 +10,9 @@
         "label": "Explored by",
         "value": "Deep Impact · Stardust-NExT",
         "source": {
-          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
-          "label": "Tempel 1 shape model: tempel1_2012_plan.tab",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/catalog/dataset.cat",
+          "label": "Tempel 1 shape model dataset description",
           "checked": "2026-09-16",
-          "path": "source/reference/dataset.cat",
           "catalogueId": "pds-tempel1-shape-2012",
           "locator": "\"as derived from Deep Impact and Stardust NEXT images\""
         }
@@ -305,7 +304,7 @@
       "credit": "Farnham & Thomas (2013)"
     },
     "physical": {
-      "path": "../reference/dataset.cat",
+      "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/catalog/dataset.cat",
       "credit": "Farnham & Thomas (2013)"
     }
   }

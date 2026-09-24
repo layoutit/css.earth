@@ -59,9 +59,11 @@ change the rights of its scientific input papers.
 
 Membership uses [McConnachie's author-hosted catalogue](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/),
 citing [McConnachie (2012), AJ 144, 4](https://doi.org/10.1088/0004-6256/144/1/4).
-The **October 2019 Table 1** supplies G/A/L/N classifications. The January 2021
+The **October 2019 Table 1** ([PDF](https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf))
+supplies G/A/L/N classifications through its checked-in text transcription. The January 2021
 FITS is preserved for audit and has **no membership column**. The original 2012
-machine-readable table and column definitions are also retained for comparison.
+machine-readable table is also retained for comparison; its column definitions are
+the CDS [ReadMe](https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/ReadMe).
 There are 143 explicit name bindings to the updated table's 144 rows; Canis Major
 has no matching LVDB release row. No coordinates are used to guess this match.
 
@@ -106,7 +108,7 @@ own specific galaxy identifiers; shared preparation contains no object-id dispat
 
 ## Reproduction evidence
 
-All source bytes are checked in. The retained pypdf 5.9.0 extraction receipt checks the original PDF-to-text transcription. The catalogue tests regenerate the declared outputs and compare them byte-for-byte. Common installation and preparation are documented in the [shared contributor guide](../README.md).
+Source data is checked in; papers and archive documents are cited by URL. The retained pypdf 5.9.0 extraction receipt fetches the original PDF and checks the text transcription against it. The catalogue tests regenerate the declared outputs and compare them byte-for-byte. Common installation and preparation are documented in the [shared contributor guide](../README.md).
 
 `provenance.json` records original download URLs, SHA-256 digests and sizes.
 Redownloading is optional; replacing any checked source requires deliberate pin

@@ -22,27 +22,6 @@
       },
       "dependencies": [],
       "license": "Reuse terms unresolved; see NOTICE.md."
-    },
-    {
-      "id": "mcxc-ii-readme",
-      "path": "src/objects/galaxy-clusters/source/ReadMe",
-      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
-      "sourceUrl": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
-      "title": "CDS MCXC-II byte-column definitions, release 2024-11-29",
-      "credit": "Sadibekova et al.; CDS",
-      "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "mcxc-ii-2024",
-            "role": "material",
-            "evidence": "src/objects/galaxy-clusters/source/provenance.json"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "Reuse terms unresolved; see NOTICE.md."
     }
   ],
   "documents": [

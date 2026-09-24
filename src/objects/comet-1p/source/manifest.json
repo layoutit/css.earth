@@ -177,31 +177,6 @@
       }
     },
     {
-      "id": "giotto-source-7",
-      "path": "giotto/vega-readme.txt",
-      "origin": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/00readme.txt",
-      "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
-      "license": "Public scientific archive data; preserve original investigator credits",
-      "licenseEvidence": [
-        "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/00readme.txt"
-      ],
-      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
-      "redistribution": "Retain source attribution and the stated reuse terms.",
-      "consumers": [
-        "giotto-registration"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-comet-1p-giotto-source-7",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "giotto-projection",
       "path": "material/giotto.png",
       "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
@@ -437,32 +412,6 @@
         "references": [
           {
             "catalogueId": "source-comet-1p-vega-t11194-img",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "vega-tvs_proc-doc",
-      "path": "vega/tvs_proc.doc",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc",
-      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
-      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
-      "licenseEvidence": [
-        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
-        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
-      ],
-      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
-      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
-      "consumers": [
-        "encounter-registration"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-comet-1p-vega-tvs-proc-doc",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }

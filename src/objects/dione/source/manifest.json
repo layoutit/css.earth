@@ -415,32 +415,6 @@
       }
     },
     {
-      "id": "dione-vims-source-information-file-xml",
-      "path": "vims/document/information_file.xml",
-      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
-      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
-      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
-      "licenseEvidence": [
-        "https://doi.org/10.17189/ctqe-ta30",
-        "https://pds.nasa.gov/datastandards/citing/"
-      ],
-      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
-      "redistribution": "Preserve PDS labels, authors and calibration description.",
-      "consumers": [
-        "vims-source"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "cassini-vims-dione-rhea-information-label",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "dione-vims-source-vims-wavelengths-ir-tab",
       "path": "vims/data/vims_wavelengths_ir.tab",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",

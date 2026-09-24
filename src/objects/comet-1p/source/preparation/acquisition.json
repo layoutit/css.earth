@@ -62,14 +62,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "giotto/vega-readme.txt",
-      "url": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/00readme.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "giotto/vega2-t01174.hdr",
       "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/t01174.hdr"
     },
@@ -128,14 +120,6 @@
       ],
       "path": "vega/t11194.img",
       "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.img"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "vega/tvs_proc.doc",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc"
     }
   ]
 }

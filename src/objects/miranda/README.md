@@ -4,7 +4,7 @@
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Miranda uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images and updated control networks. Both original ISIS3 cubes contain 6294 × 3147 floating-point samples on a 240 m simple-cylindrical grid. Grid spacing is not uniform effective image or elevation resolution. The release's [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) is retained as text in [the retained author notes](source/observations/aaReadMe_uranian_MAP_DEM.txt).
+Miranda uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images and updated control networks. Both original ISIS3 cubes contain 6294 × 3147 floating-point samples on a 240 m simple-cylindrical grid. Grid spacing is not uniform effective image or elevation resolution. The release's [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) documents the release.
 
 **Monochrome** uses `mumap-cyl-180180.cub`. Its ISIS history includes `photomet` normalization (2020-02-17, ellipsoid angles, maximum emission 83°, maximum incidence 89.9°). We retain that corrected product and apply one linear display stretch from 0–2400 DN to 0–255. This is a display of the published mosaic, not newly calibrated reflectance. Local cast shadows, camera marks and mosaic seams remain; no detail is invented beneath them.
 

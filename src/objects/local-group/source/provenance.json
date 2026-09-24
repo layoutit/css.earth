@@ -25,24 +25,17 @@
     },
     {
       "id": "lvdb-bibliography",
-      "path": "lvdb/lvdb.bib",
+      "archiveMember": "local_volume_database-1.1.1/table/lvdb.bib",
       "bytes": 876966,
       "url": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/table/lvdb.bib",
-      "citation": "Original paper references for the catalogue measurements."
+      "citation": "Original paper references for the catalogue measurements, read from table/lvdb.bib inside the v1.1.1 author archive."
     },
     {
       "id": "mcconnachie-table1-2019",
-      "path": "mcconnachie/table1_OCT2019.pdf",
-      "bytes": 101033,
-      "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
-      "citation": "McConnachie (2012), AJ 144,4, DOI10.1088/0004-6256/144/1/4; author October2019 Table1 update."
-    },
-    {
-      "id": "mcconnachie-table1-text",
       "path": "mcconnachie/table1_OCT2019.txt",
       "bytes": 14694,
-      "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
-      "citation": "Text extracted from the first seven pages of the original October2019 Table1 with pypdf5.9.0; numeric membership classifications unchanged."
+      "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
+      "citation": "McConnachie (2012), AJ 144, 4, DOI 10.1088/0004-6256/144/1/4; author October 2019 Table 1 update, read from its text transcription (first seven pages, pypdf 5.9.0; numeric membership classifications unchanged)."
     },
     {
       "id": "mcconnachie-2021-audit",
@@ -56,14 +49,7 @@
       "path": "mcconnachie/table1.dat",
       "bytes": 13027,
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/table1.dat",
-      "citation": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table."
-    },
-    {
-      "id": "mcconnachie-field-definitions",
-      "path": "mcconnachie/ReadMe",
-      "bytes": 27242,
-      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/ReadMe",
-      "citation": "Author/CDS original catalogue byte-column descriptions; n_Name meanings G/A/L/N."
+      "citation": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table; byte columns defined by the CDS ReadMe https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/ReadMe."
     },
     {
       "id": "smc-distance-citation",
@@ -81,8 +67,8 @@
       "id": "membership-extractor",
       "path": "mcconnachie/extract.py",
       "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
-      "citation": "Local deterministic extraction receipt, pypdf5.9.0; checks unchanged author PDF against the checked text. Not a scientific data source.",
-      "bytes": 756
+      "citation": "Local deterministic extraction receipt, pypdf5.9.0; fetches the unchanged author PDF from its origin and checks it against the checked text. Not a scientific data source.",
+      "bytes": 945
     }
   ],
   "release": {

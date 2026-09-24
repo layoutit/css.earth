@@ -4,6 +4,6 @@
   "declinationDegrees": -17,
   "displayMeridianDegrees": 0,
   "phase": "arbitrary-display-phase",
-  "source": "reference/dataset.cat",
+  "source": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/catalog/dataset.cat",
   "qualification": "PDS model +Z is the minor axis of the fitted ellipsoid; it was assumed to represent the posigrade spin pole. The display retains this archived axis at an arbitrary fixed phase. It is not a current pole or a simulation of rotation."
 }

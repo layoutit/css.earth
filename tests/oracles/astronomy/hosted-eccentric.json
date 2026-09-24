@@ -12,7 +12,7 @@
  "inputs": [
   {
    "path": "tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json",
-   "bytes": 3860
+   "bytes": 3946
   }
  ],
  "references": [
@@ -337,12 +337,12 @@
     "transitTimeBmjdTdb": 57256.57426,
     "ascendingNodePositionAngleDegrees": 0,
     "sources": {
-     "period": "Agol et al. (2021), Table 2: P = 9.207540 +/- 0.000032 d; retained at tests/fixtures/hosted-orbits/trappist-1f-agol2021/agol2021-table2.tex.",
+     "period": "Agol et al. (2021), Table 2 (https://doi.org/10.3847/PSJ/abd022): P = 9.207540 +/- 0.000032 d.",
      "shape": "Agol et al. (2021), Table 5: a/R* = 69.543 and inclination = 89.740 deg. These are separate photodynamical summaries, not a joint draw with the Table 2 eccentricity vector.",
      "phase": "Agol et al. (2021), Table 2: t0 = BJD_TDB 2457257.07426, the two-body inferior-conjunction parameter at the initial osculating epoch; BMJD_TDB 57256.57426.",
      "orientation": "Display convention: transit timing does not measure the orbit's sky position angle, so the ascending node remains 0 deg east of celestial north.",
      "eccentricity": "Agol et al. (2021), Table 2: e cos(omega_source) = -0.00840 and e sin(omega_source) = -0.00051, giving e = 0.00841546790143008.",
-     "argumentOfPeriapsis": "Planet-centric Agol Table 2 vector and its pinned author initializer. The source uses f_transit = 3pi/2 - omega_source. The hosted-orbit convention uses f_transit = pi/2 - omega, so omega = wrap(omega_source - pi) = 3.4744073675316516 deg. This is not a stellar radial-velocity omega or a sky-node angle."
+     "argumentOfPeriapsis": "Planet-centric Agol Table 2 vector and the author initializer (https://github.com/ericagol/TRAPPIST1_Spitzer/blob/0a417ab77425a016eed2b492efa8a556631ac152/src/NbodyGradient/src/kepler_init.jl#L24-L54). The source uses f_transit = 3pi/2 - omega_source. The hosted-orbit convention uses f_transit = pi/2 - omega, so omega = wrap(omega_source - pi) = 3.4744073675316516 deg. This is not a stellar radial-velocity omega or a sky-node angle."
     },
     "id": "trappist-1f-agol2021",
     "stellarRadiusKm": 1.0,

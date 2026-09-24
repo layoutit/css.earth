@@ -1,69 +1,61 @@
 {
- "schema": "cssearth-acquisition-plan@1",
- "operations": [
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "ceres-fc-global.png",
-   "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
-  },
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "PIA19977.jpg",
-   "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
-  },
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "science/ceres-hamo-dtm.tif",
-   "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
-  },
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "features/CERES_nomenclature_center_pts.zip",
-   "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip"
-  },
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
-   "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.IMG"
-  },
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.LBL",
-   "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.LBL"
-  },
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "science/vir-mosaic/VIR_DDR_CERES_MOSAICS_DS.CAT",
-   "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/CATALOG/VIR_DDR_CERES_MOSAICS_DS.CAT"
-  },
-  {
-   "kind": "download",
-   "groups": [
-    "refresh"
-   ],
-   "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
-   "url": "https://earth-assets.lowpoly.cc/source-assets/6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b/ceres-vir-bd31.IMG.gz"
-  }
- ]
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "ceres-fc-global.png",
+      "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "PIA19977.jpg",
+      "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/ceres-hamo-dtm.tif",
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/CERES_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b/ceres-vir-bd31.IMG.gz"
+    }
+  ]
 }

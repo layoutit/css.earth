@@ -111,8 +111,8 @@ Feature notes: 5 of the labelled names carry a caption note, the lead summary of
 
 Titania uses Paul Schenk's 2020 [Uranian Satellites — Global Mosaics and
 DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2
-images with updated control networks. The original author's README is retained
-in `source/observations/aaReadMe_uranian_MAP_DEM.txt`. The release reference is
+images with updated control networks. The original [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download)
+documents the release. The release reference is
 [Schenk and Moore (2020)](https://doi.org/10.1098/rsta.2020.0102).
 
 ## Selected views

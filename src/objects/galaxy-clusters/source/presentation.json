@@ -12,8 +12,7 @@
         "recipe": "source/catalogue.json",
         "selector": "",
         "inputs": [
-          "mcxc-ii",
-          "mcxc-ii-readme"
+          "mcxc-ii"
         ],
         "outputs": [
           "prepared/catalogue.json"

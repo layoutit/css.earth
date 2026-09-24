@@ -4,8 +4,7 @@
   "geometrySources": [
     "giotto/rotation-2004.tab",
     "giotto/vega2-flyby.txt",
-    "giotto/vega2-trajectory.txt",
-    "giotto/vega-readme.txt"
+    "giotto/vega2-trajectory.txt"
   ],
   "frame": "Existing east-positive long-axis PDS Stooke mesh. Long-axis rotation state propagated from the published 2004 compilation; Vega 2 T11190/2:00:30 anchors longitude 270 degrees.",
   "mask": {

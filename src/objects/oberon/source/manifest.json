@@ -12,7 +12,6 @@
       "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
       "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
       "licenseEvidence": [
-        "observations/aaReadMe_uranian_MAP_DEM.txt",
         "https://repository.hou.usra.edu/handle/20.500.11753/1687"
       ],
       "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
@@ -1337,9 +1336,6 @@
   "documents": [
     {
       "path": "presentation/minimap.json"
-    },
-    {
-      "path": "observations/aaReadMe_uranian_MAP_DEM.txt"
     },
     {
       "path": "editorial/factsheet-review.json",

@@ -10,10 +10,9 @@
         "label": "Spacecraft",
         "value": "Deep Space 1",
         "source": {
-          "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.tab",
-          "label": "Comet 19P · usgs dem",
+          "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
+          "label": "Borrelly DEM dataset description",
           "checked": "2026-09-16",
-          "path": "source/reference/dem-dataset.cat",
           "catalogueId": "source-comet-19p-usgs-dem",
           "locator": "DATA_SET_DESC: \"the Deep Space 1 encounter\""
         }
@@ -228,7 +227,7 @@
       "credit": "NASA"
     },
     "physical": {
-      "path": "../reference/dem-dataset.cat",
+      "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
       "credit": "USGS / DLR"
     }
   }

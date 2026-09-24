@@ -23,8 +23,9 @@ Redshift-derived positions are sensitive to peculiar velocities, especially for 
 ## Method
 
 The canonical input is the full 2,221-row MCXC-II release by Sadibekova et al.
-(2024), A&A 688 A187, mirrored by CDS as J/A+A/688/A187. The gzip table and its
-byte-column ReadMe are checked in with SHA-256 and size pins. The source recipe
+(2024), A&A 688 A187, mirrored by CDS as J/A+A/688/A187. The gzip table is checked in
+with its size pinned; the parser's byte columns follow the release's
+[ReadMe](https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe). The source recipe
 selects seven explicit MCXC identifiers; preparation fails for absent rows.
 Publication and independent common-name cross-references are in the provenance.
 

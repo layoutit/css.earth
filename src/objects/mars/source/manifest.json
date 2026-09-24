@@ -632,32 +632,6 @@
       }
     },
     {
-      "id": "pds-mro-sharad-3d-bundle-readme",
-      "path": "telescopes/mro-sharad-3d/readme.txt",
-      "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt",
-      "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
-      "license": "NASA scientific data; archive citation requested",
-      "licenseEvidence": [
-        "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt"
-      ],
-      "acquisition": "Downloaded 2026-09-21. It carries the bundle citation and states the storage order the reader depends on: delay on the fastest axis, projection X slowest, projection Y intermediate.",
-      "redistribution": "Archive-native bundle readme retained unchanged with credit",
-      "consumers": [
-        "telescope-api"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-mro-sharad-3d-radargram-bundle",
-            "role": "reference",
-            "evidence": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt",
-            "locator": "Citation; section 1, DATA collection axis order"
-          }
-        ]
-      }
-    },
-    {
       "id": "pds-mro-sharad-3d-release-notes",
       "path": "telescopes/mro-sharad-3d/release_notes.txt",
       "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/document/release_notes.txt",

@@ -4,7 +4,7 @@
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Oberon's Monochrome view uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images registered with updated control networks. The original selected product is [`oumap-cyl-180180.cub`](https://repository.hou.usra.edu/bitstreams/33526bf8-69e4-4246-b995-0b238a8b31d0/download). The release's [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) is retained in [the retained author notes](source/observations/aaReadMe_uranian_MAP_DEM.txt).
+Oberon's Monochrome view uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images registered with updated control networks. The original selected product is [`oumap-cyl-180180.cub`](https://repository.hou.usra.edu/bitstreams/33526bf8-69e4-4246-b995-0b238a8b31d0/download). The release's [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) documents the release.
 
 Source photometric correction does not remove local cast shadows or guarantee seamless exposures. The Monochrome view is a display of the published corrected observations, not a newly calibrated albedo measurement.
 

@@ -7,8 +7,10 @@
  *
  * - a declared file that is not committed, has no acquisition step for its path and is not a generated intermediate;
  * - an acquisition step for a path the manifest does not declare;
- * - a pinned paper, catalogue ReadMe or bundle description (cite it by URL: docs/provenance/CONTRACT.md,
+ * - a pinned paper or archive document (a PDF, Word or TeX file, a BibTeX file, a readme, a PDS catalogue label, a
+ *   bundle description or anything in an archive `document/` folder; cite it by URL: docs/provenance/CONTRACT.md,
  *   "References and retained files"), or a byte copy of a file that `src/references` or `src/spice` holds.
+ *   Our own Markdown notes are not archive documents.
  *
  *   node tools/ci/check-body-references.mts
  */
@@ -21,12 +23,7 @@ import { promisify } from 'node:util';
 const run = promisify(execFile);
 
 /** Documents a body cites instead of keeping. */
-export const CITED_DOCUMENT = /(?:\.pdf|(?:^|\/)ReadMe\.AcuA\.txt|(?:^|\/)bundle_description\.txt)$/iu;
-
-/** Files that match a cited-document name but are data, each with the reason it stays. Keys are `<object>/<path in source>`. */
-export const DATA_DOCUMENTS: Readonly<Record<string, string>> = Object.freeze({
-  'local-group/mcconnachie/table1_OCT2019.pdf': "McConnachie's October 2019 Table 1 is the author's data table the Local Group catalogue is built from.",
-});
+export const CITED_DOCUMENT = /(?:\.(?:pdf|docx?|rtf|odt|tex|bib|ps|cat)|(?:^|\/)[^/]*bundle_description\.txt|\/document\/[^/]+|(?:^|\/)[^/]*read_?me(?![^/]*\.md$)[^/]*)$/iu;
 
 /** Body copies of bank kernels that a body's own recipe still reads, each with the reason. New copies fail. */
 export const CONSUMED_KERNEL_COPIES: Readonly<Record<string, string>> = Object.freeze(Object.fromEntries([
@@ -50,7 +47,6 @@ export function bodySourceFindings(objectId: string, manifest: unknown, acquisit
   const findings: Finding[] = [], manifestFile = `src/objects/${objectId}/source/manifest.json`;
   const acquisitionFile = `src/objects/${objectId}/source/preparation/acquisition.json`;
   const relative = (path: string) => path.replace(new RegExp(`^src/objects/${objectId}/source/`, 'u'), '');
-  const allowedDocument = (path: string) => Object.hasOwn(DATA_DOCUMENTS, `${objectId}/${relative(path)}`);
   const operations = (Array.isArray(record(acquisition).operations) ? record(acquisition).operations as unknown[] : []).map(record);
   const restored = new Set(operations.map(operation => text(operation.path)).filter((path): path is string => path !== undefined));
   const declared = new Set<string>();
@@ -58,7 +54,7 @@ export function bodySourceFindings(objectId: string, manifest: unknown, acquisit
     const path = text(entry.path);
     if (!path) continue;
     declared.add(path);
-    if (CITED_DOCUMENT.test(path) && !allowedDocument(path))
+    if (CITED_DOCUMENT.test(path))
       findings.push({ file: manifestFile, problem: `${list} pins ${path}; cite it by URL in the source record instead.` });
     else if (list !== 'generatedIntermediates' && !committed.has(relative(path)) && !restored.has(path))
       findings.push({ file: manifestFile, problem: `${list} declares ${path}, which is not committed and has no acquisition step; a fresh checkout cannot restore it.` });
@@ -66,7 +62,7 @@ export function bodySourceFindings(objectId: string, manifest: unknown, acquisit
   for (const operation of operations) {
     const path = text(operation.path);
     if (!path) continue;
-    if (CITED_DOCUMENT.test(path) && !allowedDocument(path))
+    if (CITED_DOCUMENT.test(path))
       findings.push({ file: acquisitionFile, problem: `downloads ${path}; a cited document is not restored into a body.` });
     else if (!declared.has(path))
       findings.push({ file: acquisitionFile, problem: `restores ${path}, which the manifest does not declare.` });
@@ -102,7 +98,7 @@ export async function checkBodyReferences(root = process.cwd()): Promise<Finding
     const match = path.match(/^src\/objects\/([^/]+)\/source\/(.+)$/u);
     if (!match) continue;
     (committed.get(match[1]!) ?? committed.set(match[1]!, new Set()).get(match[1]!)!).add(match[2]!);
-    if (CITED_DOCUMENT.test(path) && !Object.hasOwn(DATA_DOCUMENTS, `${match[1]}/${match[2]}`))
+    if (CITED_DOCUMENT.test(path))
       findings.push({ file: path, problem: 'is a committed paper or archive document; cite it by URL instead.' });
   }
   for (const [objectId, files] of committed) {
