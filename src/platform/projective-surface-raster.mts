@@ -316,11 +316,16 @@ export function createProjectiveSurfaceRasterPresentation({
       sourceToRasterY;
   const rasterSpanX = leafWidth / addressScaleX * sourceToRasterX;
   const rasterSpanY = leafHeight / addressScaleY * sourceToRasterY;
+  // The fitted address carries the renderer's rounding of each leaf's texture size, thousandths of a texel that
+  // accumulate across a band atlas (half a texel by its last column). A leaf that samples its own source rect within
+  // half a texel takes the rect exactly, so every band and column of the atlas lines up.
+  const snaps = [rasterOriginX - sourceRect.x, rasterOriginY - sourceRect.y, rasterSpanX - sourceRect.width, rasterSpanY - sourceRect.height]
+    .every((difference) => Math.abs(difference) < 0.5);
   const packedRect = Object.freeze({
-    x: rasterOriginX + gutter,
-    y: rasterOriginY + sourceBand.packedY - sourceBand.y,
-    width: rasterSpanX,
-    height: rasterSpanY,
+    x: (snaps ? sourceRect.x : rasterOriginX) + gutter,
+    y: (snaps ? sourceRect.y : rasterOriginY) + sourceBand.packedY - sourceBand.y,
+    width: snaps ? sourceRect.width : rasterSpanX,
+    height: snaps ? sourceRect.height : rasterSpanY,
   });
   const scaleX = leafWidth / (packedRect.width + overscan * 2);
   const scaleY = leafHeight / (packedRect.height + overscan * 2);
