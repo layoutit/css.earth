@@ -45,7 +45,7 @@ const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfig
       deepOceanFill: optional(deepOceanFill),
       thumbnailRegion: optional(object({longitude: optional(number), latitude: optional(number), spanDegrees: optional(number)})),
       webp: optional(object({quality: optional(number), effort: optional(number)}))}))})});
-const profile = object({textureLevels: optional(object({widths:array(number),fixedWidth:optional(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string,
+const profile = object({textureLevels: optional(object({widths:array(number),fixedWidth:optional(number),maximumWidth:optional(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string,
   destinations: object({searchLabel: string, descriptionSuffix: string, statuses: object({detail: string, overview: string})}),
   geographic: object({places: record})});
 /** Orientation, light and default camera angles are derived at preparation; a recipe that states them is stale. */

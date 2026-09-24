@@ -22,6 +22,17 @@ export function bindPackagedObject(definition: ObjectRuntimeDefinition, frame: P
   });
 }
 
+// The page's own body mounts first over its server markup, so it reads the transport without the styles that markup
+// already carries (`first-view-transport.mts`). Once only: any later mount builds its tree from the complete transport.
+let serverMarkup = typeof document === 'undefined' ? null : document.querySelector<HTMLElement>('.object-stage[data-prepared-object]');
+function adoptsServerMarkup(id: string) {
+  const stage = serverMarkup;
+  if (stage?.dataset.preparedObject !== id) return false;
+  serverMarkup = null;
+  // A dataset response renders another selection; only the page's initial one matches the first-view transport.
+  return stage.dataset.preparedDataset === undefined && stage.dataset.preparedSettings === undefined;
+}
+
 export async function loadPackagedObject(input: unknown, signal?: AbortSignal) {
   const descriptorInput = parseObjectDescriptor(input);
   return loadNavigableObject(descriptorInput, {
@@ -32,7 +43,7 @@ export async function loadPackagedObject(input: unknown, signal?: AbortSignal) {
           !/^[a-z][a-z0-9-]*$/u.test(descriptorInput.id)) {
         throw new Error(`Prepared object asset is not available: ${reference}.`);
       }
-      const url = `/objects/${descriptorInput.id}/object.json`;
+      const url = `/objects/${descriptorInput.id}/${adoptsServerMarkup(descriptorInput.id) ? 'first-view' : 'object'}.json`;
       const response = await fetch(url, { signal });
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
