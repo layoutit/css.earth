@@ -10,7 +10,7 @@ import { selectionTargetFromUrl } from './scene/scene-selection.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
-import { objectIdAtPath, ROOT_OBJECT_ID } from './root-object.mts';
+import { objectIdAtPath } from './root-object.mts';
 import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
 
 export interface SearchPin { url: string; count: number; }
@@ -137,13 +137,6 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
-/** The visitor-facing address of this request without one parameter: the function route maps back to its page. */
-function pageUrlWithout(url: URL, objectId: string, name: string): string {
-  const page = new URL(url.pathname === '/.netlify/functions/search' ? (objectId === ROOT_OBJECT_ID ? '/' : `/${objectId}/`) : url.pathname, url.origin);
-  for (const [key, value] of url.searchParams) if (key !== name && !(key === 'object' && url.pathname === '/.netlify/functions/search')) page.searchParams.append(key, value);
-  return page.href;
-}
-
 /** Netlify's query rewrite and local middleware call this same request handler. */
 export async function handleSearchRequest(request: Request, fetcher: typeof fetch = fetch): Promise<Response> {
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
@@ -154,13 +147,21 @@ export async function handleSearchRequest(request: Request, fetcher: typeof fetc
   // No query on this fetch: it retrieves the static page without recursing into search.
   const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
+  const page = await response.text();
+  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, fetcher);
   let html: string;
   try {
-    html = await renderDatasetResponse(await response.text(), url, objectId, fetcher);
-    html = await renderSearchResponse(html, url, fetcher);
+    try { html = await render(url); }
+    catch (error) {
+      if (!(error instanceof UnreadableSavedView)) throw error;
+      // An unreadable shared view (an older format, a damaged copy) renders the page as if it were absent; the browser
+      // reports and ignores the same value, and its next camera change rewrites it. Not a redirect: Netlify appends
+      // the original query to a function redirect whose target has none, which looped on the root page.
+      const withoutView = new URL(url);
+      withoutView.searchParams.delete('v');
+      html = await render(withoutView);
+    }
   } catch (error) {
-    // An unreadable shared view drops out of the address: the visitor lands on the same page and selection without it.
-    if (error instanceof UnreadableSavedView) return Response.redirect(pageUrlWithout(url, objectId, 'v'), 302);
     if (error instanceof RangeError) return new Response(error.message, { status: 400 });
     throw error;
   }

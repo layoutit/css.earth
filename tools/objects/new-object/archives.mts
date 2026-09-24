@@ -19,6 +19,7 @@ export interface Archive {
  * to slow down (429, or 503 with Retry-After) is waited for as it asks and tried again, up to three times; and a host with a
  * published request pace is never asked faster than that (PACE_MS). */
 export const TRANSFER_TIMEOUT_MS = 120_000;
+export const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
 /** arXiv's API terms: no more than one request every three seconds (https://info.arxiv.org/help/api/tou.html). */
 export const PACE_MS: Readonly<Record<string, number>> = { 'export.arxiv.org': 3000 };
 const nextSlot = new Map<string, number>();
@@ -33,7 +34,8 @@ async function transfer<T>(url: string, read: (response: Response) => Promise<T>
   for (let attempt = 1, slowed = 0; ; attempt++) {
     try {
       await paced(url);
-      const response = await fetch(url, { ...init, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
+      // Every request names the tool, as the telescope's paper search does; Zenodo refuses one that does not.
+      const response = await fetch(url, { ...init, headers: { 'User-Agent': USER_AGENT, ...(init?.headers as Record<string, string> | undefined) }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
       const retryAfter = Number(response.headers.get('retry-after'));
       if ((response.status === 429 || (response.status === 503 && retryAfter > 0)) && slowed < 3) {
         slowed++; attempt--;

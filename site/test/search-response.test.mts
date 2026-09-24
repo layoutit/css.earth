@@ -280,3 +280,19 @@ test('function fetches only the static page and pinned indexes; search responses
   assert.equal((await handleSearchRequest(new Request(origin + '/.netlify/functions/search?object=../secrets&q=x'), fetcher)).status, 404);
   assert.equal((await handleSearchRequest(new Request(origin + '/saturn/?q=x', { method: 'POST' }), fetcher)).status, 405);
 });
+
+test('an unreadable saved view renders the page as if it were absent', async () => {
+  const fetcher: typeof fetch = async input =>
+    String(input).endsWith('/saturn/') ? new Response(html, { headers: { 'content-type': 'text/html' } }) : fetchIndex(input);
+  const body = async (query: string) => {
+    const response = await handleSearchRequest(new Request(`${origin}/.netlify/functions/search?object=saturn&${query}`), fetcher);
+    assert.equal(response.status, 200, query);
+    assert.equal(response.headers.get('location'), null, query);
+    return response.text();
+  };
+  // Not a redirect: Netlify appends the original query to a function redirect whose target has none (a loop on /).
+  assert.equal(await body('v=681&q=saturn'), await body('q=saturn'));
+  assert.equal(await body('v=not-a-view'), await body(''));
+  // Two views are a malformed request, not an old link.
+  assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?v=a&v=b`), fetcher)).status, 400);
+});

@@ -252,8 +252,8 @@ test('semantic changes invalidate worker snapshots without synchronously republi
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   const planner = createWorldContextPlanner(plan(1));
   const drawing = () => JSON.stringify(all(root).map(node => node.style));
-  for (const change of [() => layer.setOverview(true), () => layer.setHiddenOrbits(['mercury']),
-    () => layer.setHiddenLabels(['venus']), () => layer.previewSelection('mercury')]) {
+  for (const change of [() => layer.setOverview(true), () => layer.setBodyVisibility({ orbitHidden: ['mercury'] }),
+    () => layer.setBodyVisibility({ labelHidden: ['venus'] }), () => layer.previewSelection('mercury')]) {
     const stale = layer.captureFrame(world, viewport), before = drawing(), calls = request.mock.calls.length;
     change();
     expect(stale.current()).toBe(false);
@@ -369,7 +369,7 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   const target = find(root, 'contextOrbit', 'mercury'), other = find(root, 'contextOrbit', 'venus');
   const visibleTarget = target.style.opacity, visibleOther = other.style.opacity;
   expect(visibleTarget).not.toBe('0');
-  layer.setHiddenOrbits(['mercury']);
+  layer.setBodyVisibility({ orbitHidden: ['mercury'] });
   root.ownerDocument.defaultView.advance(200);
   expect(target.style.opacity).toBe('0');
   expect(target.style.pointerEvents).toBe('none');
@@ -379,7 +379,7 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   expect(find(root, 'contextBody', 'mercury').style.visibility).toBe('');
   expectRetained(root, nodes);
   layer.setNavigationInFlight(true);
-  layer.setHiddenOrbits([]);
+  layer.setBodyVisibility({ orbitHidden: [] });
   expect(target.style.opacity).toBe(visibleTarget);
   expect(target.dataset.objectNavigate).toBeUndefined();
   layer.setNavigationInFlight(false);
@@ -399,7 +399,7 @@ test('hover-only trails reveal the full orbit and keep their circle and label be
   })) });
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
-  layer.setHiddenOrbits(['mercury', 'venus']);
+  layer.setBodyVisibility({ orbitHidden: ['mercury', 'venus'] });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
@@ -469,7 +469,7 @@ test('an unlabelled minor body cannot leave an anonymous orbit across the stage'
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite },
     annotationPriorities: { mercury: 1, venus: 3 } });
-  layer.setHiddenLabels(['mercury']);
+  layer.setBodyVisibility({ labelHidden: ['mercury'] });
   const publish = () => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
@@ -498,8 +498,8 @@ test('hidden annotations leave the physical dot pickable and hover reveals the c
   const orbit = find(root, 'contextOrbit', 'mercury');
   const other = find(root, 'contextOrbit', 'venus');
   const sunLabel = find(root, 'contextLabel', 'sun');
-  layer.setHiddenOrbits(['mercury', 'venus']);
-  layer.setHiddenLabels(['mercury', 'venus']);
+  layer.setBodyVisibility({ orbitHidden: ['mercury', 'venus'] });
+  layer.setBodyVisibility({ labelHidden: ['mercury', 'venus'] });
   clock.advance(200);
   expect(annotationVisibility(label, 'label')).toBe('hidden');
   expect(annotationVisibility(circle, 'indicator')).toBe('hidden');
@@ -523,11 +523,11 @@ test('hidden annotations leave the physical dot pickable and hover reveals the c
   expect(annotationVisibility(label, 'label')).toBe('hidden');
   expect(orbit.style.opacity).toBe('0');
   expect(circle.dataset.objectNavigate).toBe('mercury');
-  layer.setHiddenLabels([]); clock.advance(200);
+  layer.setBodyVisibility({ labelHidden: [] }); clock.advance(200);
   expect(annotationVisibility(label, 'label')).toBe('');
   expect(orbit.style.opacity).toBe('0');
-  layer.setHiddenOrbits([]);
-  layer.setHiddenLabels(['mercury']); clock.advance(200);
+  layer.setBodyVisibility({ orbitHidden: [] });
+  layer.setBodyVisibility({ labelHidden: ['mercury'] }); clock.advance(200);
   expect(annotationVisibility(label, 'label')).toBe('hidden');
   expect(orbit.dataset.objectNavigate).toBeUndefined();
   expect(orbit.style.opacity).toBe('0');
@@ -544,13 +544,13 @@ test('a highlighted set reveals hidden labels and marks its retained groups unti
   const nodes = all(root);
   // The caption is this marker's own pseudo-element, so its visibility is the
   // published attribute the style reads, not a style property of a label node.
-  layer.setHiddenLabels(['mercury']); clock.advance(16); clock.advance(200);
+  layer.setBodyVisibility({ labelHidden: ['mercury'] }); clock.advance(16); clock.advance(200);
   expect(label.dataset.contextLabelVisible).toBe('false');
-  layer.setHighlighted(['mercury']); clock.advance(16); clock.advance(200);
+  layer.setBodyVisibility({ highlighted: ['mercury'] }); clock.advance(16); clock.advance(200);
   expect(label.dataset.contextLabelVisible).toBe('true');
   expect(group.dataset.contextHighlight).toBe('true');
   expect(root.dataset.contextHighlighting).toBe('true');
-  layer.setHighlighted([]); clock.advance(16); clock.advance(200);
+  layer.setBodyVisibility({ highlighted: [] }); clock.advance(16); clock.advance(200);
   expect(label.dataset.contextLabelVisible).toBe('false');
   expect(group.dataset.contextHighlight).toBeUndefined();
   expect(root.dataset.contextHighlighting).toBeUndefined();
@@ -562,7 +562,7 @@ test('keyboard focus also reveals a hidden label and orbit, then retires them on
   const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
   const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
   const clock = root.ownerDocument.defaultView;
-  layer.setHiddenOrbits(['mercury']); layer.setHiddenLabels(['mercury']);
+  layer.setBodyVisibility({ orbitHidden: ['mercury'] }); layer.setBodyVisibility({ labelHidden: ['mercury'] });
   Object.assign(root.ownerDocument, { activeElement: circle });
   host.dispatchEvent(new Event('focusin')); clock.advance(16); clock.advance(200);
   expect(annotationVisibility(label, 'label')).toBe('');
@@ -584,7 +584,7 @@ test('camera publication consumes interaction changes without polling retained D
   const publish = (distance = 1_000) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels: 800, heightPixels: 600 });
-  layer.setHiddenLabels(['mercury']);
+  layer.setBodyVisibility({ labelHidden: ['mercury'] });
   for (let distance = 1_000; distance < 1_020; distance++) publish(distance);
   expect(hoverReads).toBe(0); expect(focusReads).toBe(0);
   hovered = 'true';
@@ -980,12 +980,12 @@ test('camera updates retain fixed stroke styles and only publish changed orbit p
   expect(orbitWrites).not.toHaveBeenCalled();
   expect(indicatorWrites).not.toHaveBeenCalled();
   expect(orbit.dataset.objectNavigate).toBe('mercury');
-  layer.setHiddenOrbits(['mercury']);
+  layer.setBodyVisibility({ orbitHidden: ['mercury'] });
   expect(orbitWrites).not.toHaveBeenCalled();
   expect(orbit.dataset.objectNavigate).toBeUndefined(); orbitWrites.mockClear();
   publish(1250);
   expect(orbitWrites).not.toHaveBeenCalled();
-  layer.setHiddenOrbits([]);
+  layer.setBodyVisibility({ orbitHidden: [] });
   expect(orbitWrites).not.toHaveBeenCalled();
   orbitWrites.mockClear();
   layer.setNavigationInFlight(true); layer.setNavigationInFlight(false);
@@ -1101,7 +1101,7 @@ test('orbit settings preserve admitted captions and their placements', () => {
   const labels = () => layer.inspect().filter(body => body.labelShown).map(body => [body.id, body.labelRect]);
   const before = structuredClone(labels());
   expect(before.length).toBeGreaterThan(0);
-  layer.setHiddenOrbits(['mercury', 'venus']);
+  layer.setBodyVisibility({ orbitHidden: ['mercury', 'venus'] });
   expect(labels()).toEqual(before);
   expect(layer.inspect().flatMap(body => body.orbit).some(paintedOrbitLeaf)).toBe(false);
   layer.destroy();
@@ -1411,8 +1411,8 @@ test.each(['pointer', 'keyboard'])('a hidden moon annotation reveals together on
   ] });
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
-  layer.setHiddenOrbits(['venus']);
-  layer.setHiddenLabels(['venus']);
+  layer.setBodyVisibility({ orbitHidden: ['venus'] });
+  layer.setBodyVisibility({ labelHidden: ['venus'] });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
@@ -1440,7 +1440,7 @@ test('an in-frame circle and caption stay visible and constrained at the viewpor
   const context = parsePreparedWorldContext({ ...source, bodies: [{ ...source.bodies[0], positionM: [990, 740, 0], orbit: orbit([990, 740, 0], 1) }] });
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite } });
-  layer.setHiddenOrbits(['mercury']);
+  layer.setBodyVisibility({ orbitHidden: ['mercury'] });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
@@ -1875,11 +1875,11 @@ test('suppression retires the whole annotation while flight preserves admission 
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
   const element = layer.inspect().find(body => body.id === 'mercury')!.billboard;
   const opacity = (element.parentNode as unknown as HTMLElement).style.opacity;
-  layer.setSuppressedLabels(['mercury']);
+  layer.setBodyVisibility({ labelSuppressed: ['mercury'] });
   expect(annotationVisibility(element, 'label')).toBe('hidden');
   expect(annotationVisibility(element, 'indicator')).toBe('hidden');
   expect((element.parentNode as unknown as HTMLElement).style.opacity).toBe(opacity); expect(clock.timers.size).toBe(0);
-  layer.setSuppressedLabels([]);
+  layer.setBodyVisibility({ labelSuppressed: [] });
   expect(annotationVisibility(element, 'label')).toBe('');
   layer.previewSelection('venus');
   layer.setNavigationInFlight(true);
@@ -2321,7 +2321,7 @@ test('delta publication matches full frames through navigation, hover, fades and
     }
   };
   for (const distance of [1000, 1000, 900, 500, 50, 500, 1000]) { world.pose.positionM[2] = distance; publish(); }
-  for (const layer of [full, incremental]) { layer.setOverview(true); layer.setHiddenOrbits(['mercury']); }
+  for (const layer of [full, incremental]) { layer.setOverview(true); layer.setBodyVisibility({ orbitHidden: ['mercury'] }); }
   publish();
   for (const node of [root, deltaRoot]) {
     find(node, 'contextGroup', 'mercury').dataset.objectHovered = 'true';
@@ -2330,7 +2330,7 @@ test('delta publication matches full frames through navigation, hover, fades and
   publish();
   for (const layer of [full, incremental]) { layer.setNavigationInFlight(true); layer.previewSelection('mercury'); }
   publish();
-  for (const layer of [full, incremental]) { layer.selectObject('mercury'); layer.setNavigationInFlight(false); layer.setHiddenOrbits([]); }
+  for (const layer of [full, incremental]) { layer.selectObject('mercury'); layer.setNavigationInFlight(false); layer.setBodyVisibility({ orbitHidden: [] }); }
   publish();
   // A resize changes the absolute transform origin even when a body stays
   // at the same projected coordinates and the worker has no geometry delta.
@@ -2355,7 +2355,7 @@ test('rotation and settlement use the same annotation rules without a deferred r
   layer.setRotationActive(true);
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
   // An explicit policy change applies during motion, not in a burst on release.
-  layer.setSuppressedLabels(['mercury']);
+  layer.setBodyVisibility({ labelSuppressed: ['mercury'] });
   expect(marker.dataset.contextLabelVisible).toBe('false');
   for (const angle of [.05, .1, 0]) {
     camera.pose.orientationXyzw = [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)];
@@ -2366,7 +2366,7 @@ test('rotation and settlement use the same annotation rules without a deferred r
   }
   layer.setRotationActive(false);
   expect(marker.dataset.contextLabelVisible).toBe('false');
-  layer.setSuppressedLabels([]);
+  layer.setBodyVisibility({ labelSuppressed: [] });
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
   expect(marker.dataset.contextLabelVisible).toBe('true');
   layer.destroy();
@@ -2381,7 +2381,7 @@ test('hidden billboards settle without pseudo fades or depth writes and catch up
   layer.publish(camera, viewport);
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
   layer.setOverview(true);
-  layer.setHiddenBodies(['sun', 'mercury', 'venus']);
+  layer.setBodyVisibility({ bodyHidden: ['sun', 'mercury', 'venus'] });
   root.ownerDocument.defaultView.advance(1000);
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
   const counts = all(root).map(node => [node.styleWrites, node.attributeWrites]);
@@ -2394,7 +2394,7 @@ test('hidden billboards settle without pseudo fades or depth writes and catch up
   expect(layer.publicationStats()).toEqual(publications);
   layer.selectObject('mercury');
   layer.setOverview(false);
-  layer.setHiddenBodies([]);
+  layer.setBodyVisibility({ bodyHidden: [] });
   expect(marker.style.visibility).toBe('');
   expect(mover(marker).style.zIndex).toBe('0');
   expect(marker.dataset.contextSelected).toBe('true');
@@ -2443,7 +2443,7 @@ test('only interactive stationary hover arms transitions; every camera axis and 
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
   expect(layer.opacityStats().active).toBe(0);
   hover(false, false); hover(true);
-  layer.setSuppressedLabels(['mercury']);
+  layer.setBodyVisibility({ labelSuppressed: ['mercury'] });
   expect(marker.dataset.contextLabelVisible).toBe('false');
   hover(false, false);
   expect(marker.dataset.contextLabelVisible).toBe('false');

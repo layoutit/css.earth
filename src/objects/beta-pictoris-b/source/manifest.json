@@ -99,28 +99,47 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "beta-pictoris-b-band-color",
+      "path": "photometry/band-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2014ApJ...786...32M",
+      "credit": "Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, beta Pic b: MKO K 12.43 +/- 0.07 (Male14), H 13.30 +/- 0.11 (Male14), J 14.04 +/- 0.21 (Male14); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: the published flux densities transcribed with their bands and the shared display range",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored colour recipe transcribing the cited photometry; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "lens-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2109.10671",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-hosted-planet.mts",
+        "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
-          "beta-pictoris-b-observational-measurements"
+          "beta-pictoris-b-observational-measurements",
+          "beta-pictoris-b-preparation-raster",
+          "beta-pictoris-b-band-color"
         ]
       },
-      "generator": "tools/objects/new-hosted-planet.mts",
+      "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

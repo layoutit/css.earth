@@ -76,22 +76,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "infrared",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hd-29391-b-lens-shape.webp",
-        "surface": "hd-29391-b-surface-shape@2x.webp",
-        "poles": "hd-29391-b-poles-shape@2x.webp",
+        "id": "infrared",
+        "label": "Infrared colour",
+        "qualification": "False colour from its measured flux in three infrared bands (Rajan et al. (2017), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "thumbnail": "hd-29391-b-lens-infrared.webp",
+        "surface": "hd-29391-b-surface-infrared@2x.webp",
+        "poles": "hd-29391-b-poles-infrared@2x.webp",
         "source": {
-          "id": "hd-29391-b-observational-measurements",
+          "id": "hd-29391-b-band-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/1508.03084"
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154...10R"
         },
-        "falseColor": false,
-        "notes": "No image or colour of this planet's surface exists: it is a point of light in every image, and JWST detects it in only one band (F410M, Balmer et al. 2025), too few for a measured colour. Its size is the radius a model needs for its spectrum. No spin is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+        "falseColor": true,
+        "notes": "51 Eridani b's brightness in three infrared bands as one colour: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Rajan et al. (2017), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko j), so the colour shows its band ratios; brightness is not compared across planets at different distances. Not a natural colour; nobody has resolved its disc."
       }
     ]
   },
