@@ -1,0 +1,91 @@
+{
+ "/beta-pictoris/": {
+  "url": "/beta-pictoris/",
+  "altitude": "4,230,793 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [
+   "Dataset cloud “beta-pictoris-disc” is unavailable. Showing the default dataset."
+  ],
+  "errors": []
+ },
+ "/beta-pictoris/?dataset=debris-disc-visible": {
+  "url": "/beta-pictoris/?dataset=debris-disc-visible",
+  "altitude": "—",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": false,
+  "notice": [],
+  "errors": []
+ },
+ "/hd-181327/?dataset=debris-ring": {
+  "url": "/hd-181327/?dataset=debris-ring",
+  "altitude": "3,736,092 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [
+   "Dataset cloud “hd-181327-disc” is unavailable. Showing the default dataset."
+  ],
+  "errors": []
+ },
+ "/pds-70/?dataset=dust-ring": {
+  "url": "/pds-70/?dataset=dust-ring",
+  "altitude": "3,431,000 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [
+   "Dataset cloud “pds-70-disc” is unavailable. Showing the default dataset."
+  ],
+  "errors": []
+ },
+ "/sun/?dataset=cor1-density": {
+  "url": "/sun/?dataset=cor1-density",
+  "altitude": "2,723,016 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [
+   "Dataset cloud “sun-cor1-density” is unavailable. Showing the default dataset."
+  ],
+  "errors": []
+ },
+ "/betelgeuse/": {
+  "url": "/betelgeuse/",
+  "altitude": "13.91 AU",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [
+   "Dataset cloud “betelgeuse-shell” is unavailable. Showing the default dataset."
+  ],
+  "errors": []
+ },
+ "/hd-181327/": {
+  "url": "/hd-181327/",
+  "altitude": "3,736,092 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/earth/": {
+  "url": "/earth/",
+  "altitude": "24,964 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "in-app /earth/ -> /beta-pictoris/?dataset=debris-disc": {
+  "url": "/beta-pictoris/?dataset=debris-disc",
+  "altitude": "4,230,793 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "errors": []
+ }
+}

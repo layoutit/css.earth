@@ -1,0 +1,81 @@
+{
+ "/beta-pictoris/": {
+  "url": "/beta-pictoris/&overview=system",
+  "altitude": "758.53 AU",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/beta-pictoris/?dataset=debris-disc-visible": {
+  "url": "/beta-pictoris/?dataset=debris-disc-visible&overview=system",
+  "altitude": "758.53 AU",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/hd-181327/?dataset=debris-ring": {
+  "url": "/hd-181327/?dataset=debris-ring",
+  "altitude": "1,685.63 AU",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/pds-70/?dataset=dust-ring": {
+  "url": "/pds-70/?dataset=dust-ring&overview=system",
+  "altitude": "842.81 AU",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/sun/?dataset=cor1-density": {
+  "url": "/sun/?dataset=cor1-density",
+  "altitude": "2,723,016 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/betelgeuse/": {
+  "url": "/betelgeuse/",
+  "altitude": "13.91 AU",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/hd-181327/": {
+  "url": "/hd-181327/",
+  "altitude": "3,736,092 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "/earth/": {
+  "url": "/earth/",
+  "altitude": "24,964 km",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "ready": true,
+  "notice": [],
+  "errors": []
+ },
+ "in-app /earth/ -> /beta-pictoris/?dataset=debris-disc": {
+  "url": "/beta-pictoris/?dataset=debris-disc&overview=system",
+  "altitude": "986.44 AU",
+  "distanceLabel": "Altitude:",
+  "lens": null,
+  "errors": []
+ }
+}

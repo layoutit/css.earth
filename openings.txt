@@ -1,0 +1,38 @@
+Opening camera per page, main and change (headless Chromium, 1280x800, DPR 1). Pixels: changed pixels, threshold 0.1 / 0.
+
+/beta-pictoris/
+  main:   Altitude: 4,230,793 km | notice: Dataset cloud “beta-pictoris-disc” is unavailable. Showing the default dataset.
+  change: Altitude: 758.53 AU
+  pixels: 178333 / 229162
+/beta-pictoris/?dataset=debris-disc-visible
+  main:   never ready, Altitude: —
+  change: Altitude: 758.53 AU
+  pixels: 297429 / 723128
+/hd-181327/?dataset=debris-ring
+  main:   Altitude: 3,736,092 km | notice: Dataset cloud “hd-181327-disc” is unavailable. Showing the default dataset.
+  change: Altitude: 1,685.63 AU
+  pixels: 203731 / 284807
+/pds-70/?dataset=dust-ring
+  main:   Altitude: 3,431,000 km | notice: Dataset cloud “pds-70-disc” is unavailable. Showing the default dataset.
+  change: Altitude: 842.81 AU
+  pixels: 203469 / 239817
+/sun/?dataset=cor1-density
+  main:   Altitude: 2,723,016 km | notice: Dataset cloud “sun-cor1-density” is unavailable. Showing the default dataset.
+  change: Altitude: 2,723,016 km
+  pixels: 414944 / 450610
+/betelgeuse/
+  main:   Altitude: 13.91 AU | notice: Dataset cloud “betelgeuse-shell” is unavailable. Showing the default dataset.
+  change: Altitude: 13.91 AU
+  pixels: 322986 / 489944
+/hd-181327/
+  main:   Altitude: 3,736,092 km
+  change: Altitude: 3,736,092 km
+  pixels: 0 / 0
+/earth/
+  main:   Altitude: 24,964 km
+  change: Altitude: 24,964 km
+  pixels: 0 / 0
+in-app /earth/ -> /beta-pictoris/?dataset=debris-disc
+  main:   Altitude: 4,230,793 km
+  change: Altitude: 986.44 AU
+  pixels: 195187 / 458934
