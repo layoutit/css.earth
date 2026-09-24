@@ -75,7 +75,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function frameLensVolume(session: SceneSession) {
     const { objectId, request, mount } = session;
     if (!mount || !session.url || request?.camera.kind === 'restore') return true;
-    const selection = readNavigationSelection(new URL(session.url), objectId, SCENE_OBJECTS);
+    const selection = readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS);
     if (selection.subject.kind !== 'object' || selection.savedView || selection.feature) return true;
     const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
     const target = volume ? navigation.lensVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;

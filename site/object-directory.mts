@@ -3,7 +3,7 @@ import { parseObjectDiscovery } from './object-discovery.mts';
 import { parseNavigationDistance } from './navigation/navigation-distance.mts';
 import { definePreparedFocus, isSceneObject, type NavigableObject } from './prepared-focus-object.mts';
 import type { ObjectEntry } from './object-schema.mts';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 /** The objects a page knows, read one at a time from their prepared entries (`pages/objects/[id]/entry.json.ts`) the first
  * time the page needs them: its own, the Sun's, and whatever it navigates to. A page never loads the whole registry, so an
@@ -26,9 +26,9 @@ export const knownObject = (id: string): NavigableObject | undefined => NAVIGABL
 /** A prepared entry as the directory serves it: a scene object's descriptor with its navigation distance and discovery,
  * or a prepared focus. */
 export function objectFromEntry(value: unknown): NavigableObject {
-  if (!record(value)) throw new TypeError('Invalid object entry.');
+  if (!isRecord(value)) throw new TypeError('Invalid object entry.');
   if (value.kind === 'prepared-focus') return definePreparedFocus(value.focus);
-  if (value.kind !== 'scene' || !record(value.descriptor)) throw new TypeError('Invalid object entry.');
+  if (value.kind !== 'scene' || !isRecord(value.descriptor)) throw new TypeError('Invalid object entry.');
   const descriptor = value.descriptor;
   const { order: _order, context: _context, ...object } = catalogEntry(descriptor, async signal => {
     const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
