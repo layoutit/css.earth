@@ -141,7 +141,6 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
   catalogueRetry?.addEventListener('click', () => { void ensureCatalogueLoaded(); }, { signal: events.signal });
   return {
     get loaded() { return catalogueLoaded; },
-    get hasInlineRows() { return items.length > 0; },
     get windowed() { return catalogueWindow !== null; },
     get sources() { return sourceLinks; },
     ensureLoaded: ensureCatalogueLoaded,

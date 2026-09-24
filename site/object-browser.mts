@@ -60,12 +60,11 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     navigationRoot.hidden = showingSearchResults;
     void navigation?.select(current);
   };
-  const presentation = createSelectionPresentation(documentTarget, browser, information, selectNavigation);
+  const presentation = createSelectionPresentation(documentTarget, { windowTarget, selectNavigation });
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const catalogue = createObjectCatalogue({ documentTarget, windowTarget, browser, resultsPanel, lifetime,
     onLoad() {
-      markSelection();
-      publishSourceContext();
+      presentSelection();
       if (open) { filteredQuery = null; filter(false); }
     },
   });
@@ -128,10 +127,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     });
   };
   let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
-  const publishSourceContext = () => presentation.publishSource(currentSubject(), catalogue.sources);
-  const renderSelectionContext = () => presentation.render(currentSubject());
+  const presentSelection = () => catalogue.setSelection(presentation.present(currentSubject(), catalogue.sources));
   const filter = (resetScroll = true) => {
-    renderSelectionContext();
     const searching = search.value.trim().length > 0;
     const query = searching ? search.value.trim().toLocaleLowerCase("en") : "";
     if (query === filteredQuery && searching === showingSearchResults) {
@@ -168,7 +165,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     setEmptyHidden(visibleObjects !== 0 || Boolean(features && !classification && !showAll));
   };
   const render = (next: boolean) => {
-    publishSourceContext();
+    presentSelection();
     // Only an actual open/close transition may reset a scrolled result list.
     if (open !== next) resetResultsScroll();
     open = next;
@@ -185,7 +182,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     destinations?.setOpen(next);
     if (next) filter();
     else {
-      renderSelectionContext();
       setPanelHidden(browser, true);
       browser.removeAttribute('data-navigation-filtered');
       void navigation?.reset();
@@ -298,26 +294,20 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   }, { signal: events.signal });
   render(open);
 
-  const markSelection = () => {
-    const selected = presentation.mark(currentSubject());
-    catalogue.setSelection(selected);
-  };
   const previewSelection = (subject: SceneSubject) => {
     const previous = subjectOverride, previousOpen = open, previousQuery = search.value;
     const preview = { subject, hideFocus: true };
     subjectOverride = preview;
     // Choosing a result ends that search; a cancelled flight gives the query back.
     search.value = '';
-    markSelection(); render(false);
+    render(false);
     return () => {
       if (subjectOverride !== preview) return;
       subjectOverride = previous;
       if (!search.value) search.value = previousQuery;
-      markSelection(); render(open || previousOpen);
+      render(open || previousOpen);
     };
   };
-  // Inline rows and a fetched catalogue read the same initial shell selection.
-  if (catalogue.hasInlineRows) markSelection();
   return Object.freeze({
     readSubject: currentSubject,
     refreshIllustrations() {
@@ -328,7 +318,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     showSystem(systemId: string) {
       subjectOverride = { subject: { kind: 'overview', overview: { scope: 'system', systemId } }, hideFocus: false };
       if (systemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();
-      markSelection(); render(false);
+      render(false);
     },
     refreshSelection() {
       const subject = readSelection();
@@ -339,7 +329,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       if (subject.kind === 'overview' && subject.overview.scope === 'system' && subject.overview.systemId === SOLAR_SYSTEM_ID) {
         collapseSolarSystemBranches();
       }
-      markSelection();
       if (subject.kind === 'overview') destinations?.present(null);
       render(open);
     },
@@ -354,7 +343,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         searchCard.dataset.searchObject = object.id;
         documentTarget.querySelector('.object-sidebar-search-clear')?.setAttribute('href', object.route);
       }
-      markSelection();
       destinations?.present(null); features?.refresh();
       render(open);
     },
