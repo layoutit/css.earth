@@ -6,15 +6,16 @@
 import { archiveHostQuery, assembleArchiveOrbit, compositeMass, decodeEntities, NASA_TAP, parseArchiveRows } from './orbit.mts';
 import type { Archive } from './archives.mts';
 import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existing } from './identity.mts';
+import { wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';
 import { thermalFromArchive } from './planet-lenses.mts';
 
-const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id';
+const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum';
 const short = (value: number, digits = 2) => Number(value.toPrecision(digits));
 /** The first draft that fits the budget; the last is short by construction. */
 const fit = (budget: number, ...drafts: string[]) => drafts.find(draft => draft.length <= budget) ?? drafts.at(-1)!;
 
-interface StarRow { readonly letter: string; readonly hd?: string; readonly hip?: string; readonly gaiaDr3?: string; readonly planet: string; readonly host: string; readonly reference: string; readonly label: string; readonly url?: string; readonly rad?: number; readonly radErr?: number; readonly teff?: number; readonly teffErr?: number; readonly mass?: number; readonly massErr?: number; readonly dist?: number; readonly year?: number; readonly method: string; readonly transit: boolean }
+interface StarRow { readonly circumbinary: boolean; readonly stars: number; readonly letter: string; readonly hd?: string; readonly hip?: string; readonly gaiaDr3?: string; readonly planet: string; readonly host: string; readonly reference: string; readonly label: string; readonly url?: string; readonly rad?: number; readonly radErr?: number; readonly teff?: number; readonly teffErr?: number; readonly mass?: number; readonly massErr?: number; readonly dist?: number; readonly year?: number; readonly method: string; readonly transit: boolean }
 function parseStarRows(csv: string): StarRow[] {
   const split = (line: string) => [...line.matchAll(/("([^"]|"")*"|[^,]*)(,|$)/gu)].map(m => m[1]!.replace(/^"|"$/gu, '').replaceAll('""', '"'));
   const [header, ...lines] = csv.trim().split(/\r?\n/u);
@@ -23,11 +24,13 @@ function parseStarRows(csv: string): StarRow[] {
     const c = split(line), n = (i: number) => c[i] === '' || c[i] === undefined ? undefined : Number(c[i]), anchor = c[4]!;
     const label = decodeEntities(/>([^<]+)<\/a>/u.exec(anchor)?.[1] ?? anchor).trim(), url = /href=(\S+?)(?:\s|>)/u.exec(anchor)?.[1]?.replaceAll('%26', '&');
     const text = (i: number) => c[i]?.trim() || undefined, gaia = /(\d{6,})/u.exec(c[18] ?? '')?.[1];
-    return { letter: c[15] ?? '', ...(text(16) ? { hd: text(16)! } : {}), ...(text(17) ? { hip: text(17)! } : {}), ...(gaia ? { gaiaDr3: gaia } : {}), planet: c[0]!, host: c[1]!, reference: /refstr=(\S+)/u.exec(anchor)?.[1] ?? label, label, ...(url ? { url } : {}), rad: n(5), radErr: n(6), teff: n(7), teffErr: n(8), mass: n(9), massErr: n(10), dist: n(11), year: n(12), method: c[13]!, transit: c[14] === '1' };
+    return { circumbinary: c[19] === '1', stars: Number(c[20]) || 1, letter: c[15] ?? '', ...(text(16) ? { hd: text(16)! } : {}), ...(text(17) ? { hip: text(17)! } : {}), ...(gaia ? { gaiaDr3: gaia } : {}), planet: c[0]!, host: c[1]!, reference: /refstr=(\S+)/u.exec(anchor)?.[1] ?? label, label, ...(url ? { url } : {}), rad: n(5), radErr: n(6), teff: n(7), teffErr: n(8), mass: n(9), massErr: n(10), dist: n(11), year: n(12), method: c[13]!, transit: c[14] === '1' };
   });
 }
 
-export interface ArchiveSpecResult { readonly spec: Record<string, unknown>; readonly skipped: readonly string[]; readonly notes: readonly string[] }
+export interface ArchiveSpecResult { readonly spec: Record<string, unknown>; readonly skipped: readonly string[]; readonly notes: readonly string[];
+  /** The host's bound wide companions, as placed stars of its system (companions.mts). */
+  readonly companions: readonly Record<string, unknown>[] }
 
 /** The spec entry for one host: its transiting planets on their default rows. A body the universe already holds (by id or by name,
  * identity.mts) is not generated again; a host it holds becomes a host addition. */
@@ -35,6 +38,8 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   const text = await archive.text(`${NASA_TAP}?${new URLSearchParams({ query: `select ${STAR_COLUMNS} from ps where hostname = '${hostname.replaceAll("'", "''")}'`, format: 'csv' })}`);
   const rows = parseStarRows(text);
   if (!rows.length) throw new Error(`The NASA Exoplanet Archive has no default parameter set for a host named ${hostname}.`);
+  // A planet around both stars of a pair needs the pair's orbit, which only a paper gives: built by hand, as Kepler-16 is.
+  if (rows.some(row => row.circumbinary)) throw new Error(`${hostname}: its planets orbit both stars of a pair (circumbinary); the pair's orbit comes from a paper, so build it by hand as Kepler-16 is.`);
   const first = rows[0]!, prefix = planetPrefix(first.planet, first.letter);
   // The host as the universe knows it, by id or name; else its id by the rule (identity.mts).
   const known = [hostname, prefix].flatMap(name => name ? [duplicateName(universe, name)] : []).find(Boolean);
@@ -77,7 +82,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   if (existing(hostId)) notes.push(`${hostname} is already in the universe as ${hostId}`);
   const entry = existing(hostId) ? { host: hostId, planets, notes: skipped } : {
     // The host is named as its planets name it (pi Men for pi Men c), the archive's host name when they match.
-    id: hostId, name: prefix ?? hostname, description: `Star of ${Math.round(star.teff).toLocaleString('en-US')} K${dist} with ${n} transiting planet${n === 1 ? '' : 's'}.`,
+    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+A$/u, '')} system`, description: `Star of ${Math.round(star.teff).toLocaleString('en-US')} K${dist} with ${n} transiting planet${n === 1 ? '' : 's'}.`,
     target: hostname, ...(star.gaiaDr3 ? { gaia: star.gaiaDr3 } : {}), paper: { url: star.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: star.label },
     radius: cited(star.rad, star.radErr, 'radius'), temperature: { value: star.teff, ...(star.teffErr ? { uncertainty: star.teffErr } : {}), source: `${star.label}, the stellar temperature of ${cite(star).split(', ')[1]}`, url: star.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' },
     mass: cited(star.mass, star.massErr, 'mass'),
@@ -88,5 +93,14 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
       ...await quotesFor([hostname], [hostname]) },
     planets, notes: skipped };
   if (!n) notes.push(`${hostname}: none of its planets has a transit fit with the elements an orbit needs`);
-  return { spec: entry, skipped, notes };
+  // The other stars of a multiple system: the wide ones Gaia separates, from El-Badry et al. (2021); the rest are named as missing.
+  let companions: Record<string, unknown>[] = [];
+  if (star.stars > 1 && star.gaiaDr3) {
+    const system = existing(hostId) ? universe.systems?.get(hostId) ?? `${prefix ?? hostname} system` : String((entry as { system?: string }).system);
+    const found = await wideCompanions(archive, { gaia: star.gaiaDr3, name: prefix ?? hostname, system }, (gaia, name) => universe.gaia?.get(gaia) ?? duplicateName(universe, name));
+    companions = found.companions; notes.push(...found.notes);
+    const missing = star.stars - 1 - found.companions.length - found.notes.filter(note => note.includes('already in the universe')).length;
+    if (missing > 0) notes.push(`${hostname}: a ${star.stars}-star system; ${missing} of its other stars ${missing === 1 ? 'is' : 'are'} too close to it for Gaia to separate, or not in the wide-binary catalogue, and ${missing === 1 ? 'is' : 'are'} not added`);
+  }
+  return { spec: entry, skipped, notes, companions };
 }

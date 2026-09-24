@@ -251,7 +251,9 @@ export async function writePackageFiles(files: Map<string, string | Buffer>, id:
   if (await exists(`src/objects/${id}`)) {
     if (!refresh) throw new Error(`src/objects/${id} already exists; the generator never overwrites a package (refresh regenerates one it made: --refresh ${id}).`);
     ({ kept, stale } = await mergeRefresh(files, id, root));
-  } else if (await exists(`packages/astronomy/data/bodies/${id}.json`) && !refresh) throw new Error(`packages/astronomy/data/bodies/${id}.json already exists; the generator never overwrites a record.`);
+  }
+  // The astronomy record is not checked here: runNewObject refuses existing records before anything is written, and a hosted body's
+  // record is written on purpose by phase one, before its package.
   await reconcileSources(files, root);
   const written: string[] = [];
   for (const [path, value] of files) {
@@ -398,10 +400,11 @@ export async function specFromArchive(hosts: readonly string[], out: string, { r
     // A host the archive cannot give a spec for is reported and left out; the rest of the batch is still drafted.
     let drafted: Awaited<ReturnType<typeof archiveSpec>>;
     try { drafted = await archiveSpec(liveArchive, host, universe); } catch (error) { failed.push(`${host}: ${(error as Error).message.split('\n')[0]}`); progress(`  ${host}: left out: ${failed.at(-1)}`); continue; }
-    const { spec, skipped, notes } = drafted;
+    const { spec, skipped, notes, companions } = drafted;
     const planets = (spec.planets as unknown[]).length;
     if (planets || !('host' in spec)) stars.push(spec);
-    report.push(`${host}: ${planets} planet${planets === 1 ? '' : 's'}${'host' in spec ? ' added to the existing star' : ''}${skipped.length ? `; left out: ${skipped.join('; ')}` : ''}${notes.length ? `; ${notes.join('; ')}` : ''}`);
+    stars.push(...companions);
+    report.push(`${host}: ${planets} planet${planets === 1 ? '' : 's'}${companions.length ? `, ${companions.length} companion star${companions.length === 1 ? '' : 's'}` : ''}${'host' in spec ? ' added to the existing star' : ''}${skipped.length ? `; left out: ${skipped.join('; ')}` : ''}${notes.length ? `; ${notes.join('; ')}` : ''}`);
   }
   await mkdir(dirname(resolve(root, out)), { recursive: true }); await writeFile(resolve(root, out), json({ stars }));
   return { path: out, entries: stars.length, report: [...report, ...failed.map(line => `left out: ${line}`)] };
