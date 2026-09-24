@@ -6,6 +6,6 @@
   "spinDegreesPerDay": 2011.143058731885,
   "referenceEpochJdTt": 2451545,
   "coordinateSystem": "Bennu mission body-fixed frame; east longitude",
-  "source": "reference/bennu_v17.tpc",
+  "source": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/orex/orex_spice/spice_kernels/pck/bennu_v17.tpc",
   "primeMeridianQuadraticDegreesPerDaySquared": 0.000002
 }

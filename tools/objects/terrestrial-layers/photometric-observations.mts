@@ -1,6 +1,5 @@
 import type { BandRatioPolicy, ObservationGeometry,PhotometryProfile,BandLevelPolicy,ObservedColorContext,ColorBand,RgbObservation} from './contracts.mts';
-import {shape,text,array as sourceArray,number} from './source-records.mts';
-import {requireRecord} from '../../sources/source-values.mts';
+import {shape,text,array as sourceArray,number,requireRecord} from '@cssearth/core';
 import { diskGain as diskFunctionGain } from '../../photometry/disk.mts';
 import { bandColorDisplay, bandColorEvidence, srgbToLinear } from '../color-transfer.mts';
 const numberArray=sourceArray(number);

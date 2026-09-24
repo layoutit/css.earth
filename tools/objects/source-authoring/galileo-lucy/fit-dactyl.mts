@@ -9,7 +9,8 @@ import { ckSegments } from '../../../spice/ck.mts';
 import { parseTextKernel, number as kernelNumber, numbers as kernelNumbers } from '../../../spice/text-kernel.mts';
 import { parseSpacecraftClock, encodeClock, clockToEt, etToClock } from '../../../spice/sclk.mts';
 import { parseLeapSeconds, utcToEt, etToUtc } from '../../../spice/lsk.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { readPinnedFile } from '../../../spice/kernel-bank.mts';
 
 type Pixel = [number, number];
 type Vector = [number, number, number];
@@ -27,7 +28,8 @@ const pinned = new Map<string, Buffer>();
 for (const item of requireArray(input.files)) {
   const file = requireRecord(item), path = requireString(file.path);
   if ((!path.startsWith('src/objects/') && !path.startsWith('tests/objects/fixtures/dactyl/')) || path.split('/').includes('..')) throw new Error('Invalid source path.');
-  const bytes = await readFile(path);
+  // Kernels are not committed; a missing one is restored from its pinned origin.
+  const bytes = file.url === undefined ? await readFile(path) : await readPinnedFile(path, requireString(file.url), requireString(file.expectedSha256));
   pinned.set(requireString(file.id), bytes);
 }
 function bytes(id: string) {

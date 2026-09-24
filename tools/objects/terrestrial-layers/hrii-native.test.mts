@@ -2,7 +2,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {array,boolean,nullable,number,shape,text} from './source-records.mts';
+import {array,boolean,nullable,number,shape,text} from '@cssearth/core';
 import {decodeHriiSolarTable,fitHriiSpectrum} from './hrii-spectra.mts';
 const parse=shape({method:text,cases:array(shape({body:text,path:text,detectorRow:number,incidenceCosine:number,heliocentricDistanceAu:number,
  reference:shape({temperatureKelvin:number,slopePercentPer100Nm:number}),samples:array(shape({wavelengthMicrons:number,radiance:nullable(number),valid:boolean}))}))});

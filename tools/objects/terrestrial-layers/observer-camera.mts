@@ -20,11 +20,12 @@ import { cross3 as cross } from '../../../src/platform/vector3.mts';
  * lies 90 degrees away in the pole's meridian plane; the +x axis is the prime meridian by construction, and no
  * constant offset separates it from the parameter file's zero phase.
  */
-import { requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireFiniteNumber } from '@cssearth/core';
 import type { Matrix3 } from '../../spice/ck.mts';
 import { pckAngles, pckRotation } from '../../spice/frames.mts';
 import { utcSecondsToEt, type LeapSeconds } from '../../spice/lsk.mts';
 import type { KernelPool } from '../../spice/text-kernel.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 const DEGREE = Math.PI / 180;
 /** Light travel time for one astronomical unit, in seconds (IAU 2009). */
@@ -55,7 +56,6 @@ const unit = (v: Vector): Vector => {
   return [v[0] / m, v[1] / m, v[2] / m];
 };
 
-const dot = (a: Vector, b: Vector) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const wrap360 = (degrees: number) => ((degrees % 360) + 360) % 360;
 
 /**

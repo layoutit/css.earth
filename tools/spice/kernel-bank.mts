@@ -2,8 +2,9 @@
  * Shared SPICE kernel banks: one pinned set of a mission's kernels under
  * `src/spice/<set>/`, used by every body that mission observed. A bank's
  * `manifest.json` has the shape of a body's source manifest and is verified
- * the same way, under the identity `spice-<set>`. Text kernels are committed;
- * binary SPK and CK kernels are restored from their pinned origins.
+ * the same way, under the identity `spice-<set>`. Only the manifest is committed:
+ * every kernel is restored from its NAIF origin, and `kernelBankPaths` restores
+ * the kernels a caller asks for before returning their paths.
  *
  *   node tools/spice/kernel-bank.mts acquire <set>        restore missing kernels, then verify every pin
  *   node tools/spice/kernel-bank.mts verify <set>         verify every pin
@@ -14,11 +15,12 @@
  * bank's first kernel unless the flags give others. A recipe names the bank with
  * `spice.kernelSet` and lists kernels by their paths inside it, in load order.
  */
+import { createHash } from 'node:crypto';
 import { lstat, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
-import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export const KERNEL_BANK_ROOT = resolve(import.meta.dirname, '../../src/spice');
 const SET_ID = /^[a-z][a-z0-9-]*$/u;
@@ -34,14 +36,38 @@ export const openKernelBank = (set: string) =>
   createSourceManifest({ objectId: `spice-${set}`, objectName: `${set} SPICE kernel bank`, sourceRoot: kernelBankRoot(set) });
 
 /** Check that each kernel is a pinned bank input with matching bytes, and return absolute paths in load order. */
+/** The local paths of a bank's kernels, restoring any that are missing from their declared origins first. */
 export async function kernelBankPaths(set: string, kernels: readonly string[]) {
-  const bank = await openKernelBank(set);
+  const root = kernelBankRoot(set), bank = await openKernelBank(set);
+  const origins = new Map(bank.manifest.inputs.map(entry => [entry.path, entry.origin]));
   for (const kernel of kernels) {
-    try { await bank.validatePath(kernel); }
-    catch (error) { throw new Error(`${(error as Error).message} Restore the bank with: node tools/spice/kernel-bank.mts acquire ${set}`); }
+    const origin = origins.get(kernel);
+    if (origin === undefined) throw new Error(`Kernel bank ${set} does not declare ${kernel} (src/spice/${set}/manifest.json).`);
+    try { await lstat(resolve(root, kernel)); } catch { await publish(resolve(root, kernel), await download(origin)); }
+    await bank.validatePath(kernel);
   }
-  return kernels.map(kernel => resolve(kernelBankRoot(set), kernel));
+  return kernels.map(kernel => resolve(root, kernel));
 }
+
+/** A file an evidence record pins by origin and SHA-256: read it, restoring it from the origin first when it is missing. */
+export async function readPinnedFile(path: string, origin: string, sha256: string) {
+  try { return await readFile(path); } catch { /* missing: restore below */ }
+  const bytes = await download(origin), actual = createHash('sha256').update(bytes).digest('hex');
+  if (actual !== sha256) throw new Error(`${origin} has SHA-256 ${actual}; ${path} pins ${sha256}.`);
+  await publish(path, bytes);
+  return Buffer.from(bytes);
+}
+
+/** A path: when it names a kernel inside a bank, that kernel is restored first. Other paths pass through unchanged. */
+export async function restoredBankFile(path: string) {
+  const absolute = resolve(path);
+  if (!absolute.startsWith(KERNEL_BANK_ROOT + '/')) return path;
+  const [set, ...rest] = absolute.slice(KERNEL_BANK_ROOT.length + 1).split('/');
+  return (await kernelBankPaths(set!, [rest.join('/')]))[0]!;
+}
+
+/** One bank kernel's local path, restored first when missing. */
+export const bankKernelPath = async (set: string, kernel: string) => (await kernelBankPaths(set, [kernel]))[0]!;
 
 async function download(url: string) {
   const response = await fetch(url);

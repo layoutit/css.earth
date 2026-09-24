@@ -1,6 +1,6 @@
 import type {BodyId} from '@cssearth/astronomy';
 import type {PreparedCubicSkyPlan} from '../../src/platform/cubic-sky-contract.mts';
-import {requireFiniteNumber} from '../sources/source-values.mts';
+import {requireFiniteNumber} from '@cssearth/core';
 import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
 interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;}
 interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'initialScenePitchDegrees'|'defaultControlYawDegrees'> {bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan;

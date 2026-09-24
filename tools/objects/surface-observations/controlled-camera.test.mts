@@ -5,7 +5,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { requireArray, requireRecord } from '../../sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 import type { PixelGeometry } from './contract.mts';
 import { MAXIMUM_LIT_SHAPE_ON_SKY, litShapeOnSky, parseControlledCameraLens } from './formats/controlled-camera.mts';
 import { publishedPhotometry } from './photometry.mts';

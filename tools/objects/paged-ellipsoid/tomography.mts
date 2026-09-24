@@ -1,4 +1,5 @@
-import {readJsonSource, requireFiniteNumber} from '../../sources/source-values.mts';
+import {readJsonSource} from '../../sources/source-values.mts';
+import {requireFiniteNumber} from '@cssearth/core';
 import {parseTomographyRecipe} from './source-contract.mts';
 import type {TomographyRecipe} from './source-contract.mts';
 import type {Cutaway} from './contracts.mts';

@@ -7,7 +7,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 
 const root = resolve(import.meta.dirname, '../..');
 /** Preview edge in device pixels: 40 CSS px at 2x. */

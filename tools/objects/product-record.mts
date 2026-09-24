@@ -18,7 +18,7 @@ import { canonical } from '../../src/platform/canonical-value.mts';
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { sha256, sha256File } from '../../src/platform/sha256.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PRODUCT_RECORD_SCHEMA = 'cssearth-telescope-product@1';
 

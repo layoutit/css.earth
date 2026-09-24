@@ -26,7 +26,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, readFitsImage } from '../../fits/fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { ALMA, horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';

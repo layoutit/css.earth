@@ -1,6 +1,7 @@
 import type { Page } from "playwright";
 import type { BrowserCamera } from "./profile.mts";
-import { boolean, finite, record, text } from "./input-validation.mts";
+import { requireBoolean as boolean, requireFiniteNumber as finite } from "@cssearth/core";
+import { record, text } from "./input-validation.mts";
 
 // This callback is serialized by Playwright; every diagnostic access is checked
 // in the browser, and every returned state is decoded again on the Node side.

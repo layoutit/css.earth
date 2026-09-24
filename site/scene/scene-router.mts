@@ -4,7 +4,8 @@ import { selectSceneFeature } from './scene-feature.mts';
 import { createScenePublication } from './scene-publication.mts';
 import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
 import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
-import { errorMessage, record } from '../browser-types.mts';
+import { errorMessage } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
@@ -201,7 +202,7 @@ export function createSceneRouter({
         cameraMotion,
         onMotionRequest: requestMotion,
         onFeatureSelect: id => { void navigate(objectId, { kind: 'feature', id }).catch(report); },
-        datasetEffects: createDatasetEffects(session, () => world.current),
+        datasetEffects: createDatasetEffects(session, () => world.current, () => world.ensure()),
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
@@ -268,7 +269,7 @@ export function createSceneRouter({
       const selection = registry.createSceneSelection({ objectId,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
         initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
-      const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent });
+      const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, getReducedMotion: () => reducedMotionActive });
       if (windowTarget.location?.href && !destroyed) {
         // Only a settled scene belongs to the entry that history names. An unfinished navigation
         // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
@@ -366,7 +367,7 @@ export function createSceneRouter({
       requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
       return result === true;
     } catch (error) {
-      const interruptedSelection = objectId === object.id && request.origin === 'selection' && record(error) &&
+      const interruptedSelection = objectId === object.id && request.origin === 'selection' && isRecord(error) &&
         error.name === 'AbortError' && error.preserveView === true;
       if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
@@ -394,7 +395,7 @@ export function createSceneRouter({
         }
         await view.arrive(source, { interrupted: true });
         source.viewUrl?.flush(); syncPlayback();
-        if (!record(error) || error.preserveView !== true) report(error);
+        if (!isRecord(error) || error.preserveView !== true) report(error);
       }
       else if (scenes.current) fail(scenes.current, error);
       else report(error);

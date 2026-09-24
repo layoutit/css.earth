@@ -1,3 +1,4 @@
+import { requireBoolean as boolean, requireFiniteNumber as finite } from "@cssearth/core";
 import { GOOGLE_MAPS_VENUS_URL, ORACLE_POSES, ORACLE_VIEWPORT, parseGoogleCameraUrl } from "./profile.mts";
 
 export function record(value: unknown, label: string): Record<string, unknown> {
@@ -6,14 +7,6 @@ export function record(value: unknown, label: string): Record<string, unknown> {
 }
 export function text(value: unknown, label: string): string {
   if (typeof value !== "string" || value.length === 0) throw new TypeError(`${label} must be a nonempty string.`);
-  return value;
-}
-export function finite(value: unknown, label: string): number {
-  if (typeof value !== "number" || !Number.isFinite(value)) throw new TypeError(`${label} must be finite.`);
-  return value;
-}
-export function boolean(value: unknown, label: string): boolean {
-  if (typeof value !== "boolean") throw new TypeError(`${label} must be boolean.`);
   return value;
 }
 export function array(value: unknown, label: string): unknown[] {

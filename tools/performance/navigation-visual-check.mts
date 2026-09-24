@@ -4,7 +4,8 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { chromium } from 'playwright';
 import { previewSite } from '../cli/preview.mts';
-import { readJsonSource, requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
+import { readJsonSource } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { recordOf } from './trace-model.mts';
 
 // The baseline capture report is external JSON; page diagnostics are read through

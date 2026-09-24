@@ -1,4 +1,4 @@
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../tools/sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { parseRadialSource } from '../../../tools/objects/terrestrial-layers/radial-source.mts';
 import { parseSolidPreparationSource } from '../../../tools/objects/terrestrial-layers/profile-source.mts';

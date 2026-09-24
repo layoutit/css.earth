@@ -7,7 +7,7 @@ import { createRequire } from "node:module";
 import { basename, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import sharp from "sharp";
-import { hasErrorCode, requireString } from '../sources/source-values.mts';
+import { hasErrorCode, requireString } from '@cssearth/core';
 import type { PreparationOptions, PreparationEvent } from '../cli/run-implemented-objects.mts';
 type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
   | {phase: 'receipt-refused'; id: string; reason: string};

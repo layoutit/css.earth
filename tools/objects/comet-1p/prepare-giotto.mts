@@ -7,7 +7,8 @@ import sharp from 'sharp';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
-import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const pair = (value: unknown) => { const result = array(number)(value); assert.equal(result.length, 2); return result; };
 const parseRegistration = shape({
@@ -21,7 +22,6 @@ type Registration = ReturnType<typeof parseRegistration>;
 interface RgbImage {data:Uint8Array; width:number; height:number}
 
 const radians = Math.PI / 180;
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
 const sub = (a: readonly number[], b: readonly number[]) => a.map((n, i) => n - b[i]);
 
 const unit = (a: readonly number[]) => a.map(n => n / Math.hypot(...a));

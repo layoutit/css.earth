@@ -6,6 +6,7 @@ import { normalizeSearchText } from './catalog.js';
 import { projectRadial, surfaceDirection } from './geometry.js';
 import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from './catalog.js';
 import type { SurfaceFeaturePreparationContext } from './index.js';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 type Vec = readonly [number, number, number];
 const record = (v: unknown, at: string): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError(`${at} must be an object.`); return v as Record<string, unknown>; };
@@ -16,7 +17,6 @@ const path = (v: unknown): string => { const p = text(v, 'landmark path'); if (p
 const url = (v: unknown): string => { const u = text(v, 'landmark source URL'); if (!/^https:\/\//u.test(u)) throw new TypeError('Landmarks need an HTTPS source.'); return u; };
 const positive = (v: unknown, at: string): number => { const n = number(v, at); if (!(n > 0)) throw new TypeError(`${at} must be positive.`); return n; };
 const integer = (v: unknown, at: string): number => { const n = number(v, at); if (!Number.isSafeInteger(n) || n < 0) throw new TypeError(`${at} must be a nonnegative integer.`); return n; };
-const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
 const length = (v: readonly number[]) => Math.hypot(...v);
 const unit = (v: Vec): Vec => { const n = length(v); if (!n) throw new TypeError('Landmark at body origin.'); return [v[0] / n, v[1] / n, v[2] / n]; };
 const rounded = (v: readonly number[], digits = 6): Vec => [0, 1, 2].map(i => Number(v[i]!.toFixed(digits))) as unknown as Vec;

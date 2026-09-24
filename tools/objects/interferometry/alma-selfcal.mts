@@ -13,7 +13,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export interface SelfCalibration {
   /** The measurement set the tables were solved against; its name is what the pipeline split the targets to. */

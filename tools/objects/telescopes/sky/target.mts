@@ -7,7 +7,7 @@
  * part of it: SIMBAD names each result table after the request time, so its bytes differ on every call. */
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { IcrsCircle, MetadataResponse, Pin } from '../vo/contracts.mts';
 import type { TargetCatalogueEntry } from '../targets.mts';
 

@@ -1,6 +1,5 @@
 import { cross3 as cross } from '../../../src/platform/vector3.mts';
-import {requireRecord,requireFiniteNumber} from '../../sources/source-values.mts';
-import {shape,text,number,array,optional} from '../terrestrial-layers/source-records.mts';
+import {requireRecord,requireFiniteNumber,shape,text,number,array,optional} from '@cssearth/core';
 const parseGltf=shape({meshes:array(shape({primitives:array(shape({mode:optional(number),attributes:shape({POSITION:number,TEXCOORD_0:number}),indices:number,material:number}))})),nodes:array(requireRecord),
   accessors:array(shape({bufferView:number,type:text,componentType:number,count:number,byteOffset:optional(number),sparse:optional(requireRecord)})),
   bufferViews:array(shape({byteOffset:optional(number),byteLength:number,byteStride:optional(number)})),
@@ -9,8 +8,8 @@ const parseGltf=shape({meshes:array(shape({primitives:array(shape({mode:optional
 interface SurfaceTriangle {p:readonly number[];e1:readonly number[];e2:readonly number[];normal:readonly number[];uv:readonly (readonly number[])[];}
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
-const dot = (a:readonly number[], b:readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const sub = (a:readonly number[], b:readonly number[]) => a.map((v, i) => v - b[i]);
 
 

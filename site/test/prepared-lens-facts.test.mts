@@ -4,7 +4,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { loadObjectContent } from './load-object-content.mts';
 import { prepareObjectContent } from '#preparation/content/prepare';
-import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { ObjectContentSource } from '../../tools/objects/content/types.ts';
 
 const preparedObject = (value: unknown): { readonly data: { readonly lenses: { readonly controls: readonly Record<string, unknown>[] } } } => {

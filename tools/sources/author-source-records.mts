@@ -9,7 +9,7 @@ import { access, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseSourceCatalog } from '../../src/platform/source-catalog.mts';
-import { requireArray, requireRecord, requireString } from './source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 /** What an authored binding rests on: the manifest entry it sits in. */
 export const ENTRY_EVIDENCE = 'Origin and product identifier recorded on this manifest entry.';

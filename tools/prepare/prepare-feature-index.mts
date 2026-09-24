@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
-import { record } from '../../site/browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { normalizeDestinationQuery } from '../../site/destination-search.mts';
 import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
 
@@ -33,13 +33,13 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
   const pin: unknown = await readFile(resolve(root, 'src/objects', objectId, 'prepared/places.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
   if (pin === null) return null;
   if (radiusM === null) throw new TypeError(`${objectId}: places need the body's radius.`);
-  if (!record(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
+  if (!isRecord(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
   const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
   const catalog: unknown = JSON.parse(bytes.toString('utf8'));
-  if (!record(catalog) || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count differs from its descriptor.`);
+  if (!isRecord(catalog) || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count differs from its descriptor.`);
   const duplicates: (readonly [string, string])[] = [];
   for (const place of catalog.places) {
-    if (!record(place)) throw new TypeError(`${objectId}: place record is invalid.`);
+    if (!isRecord(place)) throw new TypeError(`${objectId}: place record is invalid.`);
     const id = place.id;
     if (!(typeof id === 'number' && Number.isSafeInteger(id)) && !(typeof id === 'string' && /^[0-9]+$/u.test(id))) throw new TypeError(`${objectId}: place id is invalid.`);
     const name = text(place.name, 'place name');
@@ -60,13 +60,13 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   for (const object of SCENE_OBJECTS) {
     const descriptor: unknown = await readFile(resolve(root, 'src/objects', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
     if (descriptor === null) continue;
-    if (!record(descriptor) || descriptor.schema !== 'cssearth-prepared-features@1') throw new TypeError(`${object.id}: prepared features descriptor is invalid.`);
+    if (!isRecord(descriptor) || descriptor.schema !== 'cssearth-prepared-features@1') throw new TypeError(`${object.id}: prepared features descriptor is invalid.`);
     const pins: Record<string, unknown>[] = [descriptor];
     if (descriptor.selection !== undefined) {
       const selection = descriptor.selection;
-      if (!record(selection) || !Array.isArray(selection.banks) || !Number.isSafeInteger(selection.count) || Number(selection.count) < 1) throw new TypeError(`${object.id}: feature selection descriptor is invalid.`);
+      if (!isRecord(selection) || !Array.isArray(selection.banks) || !Number.isSafeInteger(selection.count) || Number(selection.count) < 1) throw new TypeError(`${object.id}: feature selection descriptor is invalid.`);
       for (const bank of selection.banks) {
-        if (!record(bank)) throw new TypeError(`${object.id}: feature selection bank is invalid.`);
+        if (!isRecord(bank)) throw new TypeError(`${object.id}: feature selection bank is invalid.`);
         pins.push(bank);
       }
     }
@@ -76,20 +76,20 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
       const url = text(pin.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
       const part: unknown = JSON.parse(bytes.toString('utf8'));
-      if (!record(part) || !Array.isArray(part.features) || part.features.length !== pin.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
+      if (!isRecord(part) || !Array.isArray(part.features) || part.features.length !== pin.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
       catalog ??= part;
       values.push(...part.features);
     }
     if (!catalog || descriptor.totalCount !== undefined && descriptor.totalCount !== values.length) throw new TypeError(`${object.id}: total feature catalogue count differs from its descriptor.`);
     if (descriptor.selection !== undefined) values.sort((left, right) => {
-      if (!record(left) || !record(right) || !Number.isSafeInteger(left.preparedIndex) || !Number.isSafeInteger(right.preparedIndex)) throw new TypeError(`${object.id}: banked feature order is invalid.`);
+      if (!isRecord(left) || !isRecord(right) || !Number.isSafeInteger(left.preparedIndex) || !Number.isSafeInteger(right.preparedIndex)) throw new TypeError(`${object.id}: banked feature order is invalid.`);
       return Number(left.preparedIndex) - Number(right.preparedIndex);
     });
-    if (descriptor.selection !== undefined && values.some((value, index) => !record(value) || value.preparedIndex !== index)) {
+    if (descriptor.selection !== undefined && values.some((value, index) => !isRecord(value) || value.preparedIndex !== index)) {
       throw new TypeError(`${object.id}: banked feature order is incomplete or duplicated.`);
     }
     for (const value of values) {
-      if (!record(value) || !Array.isArray(value.searchNames)) throw new TypeError(`${object.id}: feature record is invalid.`);
+      if (!isRecord(value) || !Array.isArray(value.searchNames)) throw new TypeError(`${object.id}: feature record is invalid.`);
       features.push({ objectId: object.id, id: text(value.id, 'feature id'), name: text(value.name, 'feature name'), type: text(value.type, 'feature type'), diameterKm: finite(value.diameterKm, 'feature diameter'),
         searchNames: value.searchNames.map(name => text(name, 'feature search name')), searchContext: text(value.searchContext, 'feature search context') });
     }
@@ -98,11 +98,11 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     let lensIds: string[] | undefined;
     if (catalog.landmarks !== undefined) {
       const runtime: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8'));
-      if (!record(runtime) || !record(runtime.features) || !Array.isArray(runtime.features.lensIds) || !runtime.features.lensIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
+      if (!isRecord(runtime) || !isRecord(runtime.features) || !Array.isArray(runtime.features.lensIds) || !runtime.features.lensIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
       lensIds = runtime.features.lensIds.map(id => text(id, 'landmark dataset'));
     }
     // Named features that are settlements: search leaves the same places out.
-    const settlements = values.filter((value): value is Record<string, unknown> => record(value) && (value.type === 'Capital' || value.type === 'City'))
+    const settlements = values.filter((value): value is Record<string, unknown> => isRecord(value) && (value.type === 'Capital' || value.type === 'City'))
       .map(value => ({ id: text(value.id, 'feature id'), name: normalizeDestinationQuery(text(value.name, 'feature name')), latitudeDeg: finite(value.latitudeDeg, 'feature latitude'), longitudeDeg: finite(value.longitudeDeg, 'feature longitude') }));
     const placePin = await preparedPlaces(root, object.id, settlements, object.worldFrame?.bodyRadiusM ?? null);
     if (placePin) places.push(placePin);

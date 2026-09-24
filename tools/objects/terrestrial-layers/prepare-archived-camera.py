@@ -1,7 +1,9 @@
 """Reproduce preparation-only OSIRIS or L'LORRI cameras from pinned archives.
 
-Requires numpy, scipy, astropy and spiceypy. No ephemerides are fetched here.
-Usage: python prepare-archived-camera.py src/objects/<id>/source
+Requires numpy, scipy, astropy and spiceypy. No ephemerides are fetched here; kernels are not committed, so restore
+the body's sources first.
+Usage: node tools/assets/restore-source-inputs.mts --object=<id>
+       python prepare-archived-camera.py src/objects/<id>/source
 """
 from pathlib import Path
 import argparse, hashlib, json, re, subprocess, tempfile

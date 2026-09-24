@@ -30,7 +30,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { esoEnvironment, esoHeader, rawFrames, type EsoHeader, type SetOfFrames } from '../interferometry/eso-pipeline.mts';
 import { assertInputPins, fileSize, productRecordPath, readProductRecord, writeProductRecord,
   type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '../product-record.mts';

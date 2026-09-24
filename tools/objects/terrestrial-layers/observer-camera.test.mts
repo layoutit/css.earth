@@ -7,6 +7,8 @@ import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCam
   spinOrientation, rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from './observer-camera.mts';
 import { parseTextKernel, numbers } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds, utcSecondsToEt } from '../../spice/lsk.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { kernelBankPaths } from '../../spice/kernel-bank.mts';
 const DEGREE = Math.PI / 180;
 const direction = (longitude: number, latitude: number): Vector =>
   [Math.cos(latitude * DEGREE) * Math.cos(longitude * DEGREE), Math.cos(latitude * DEGREE) * Math.sin(longitude * DEGREE), Math.sin(latitude * DEGREE)];
@@ -84,7 +86,6 @@ test('the body transform is the documented inversion convention, orthonormal and
   const spin: SpinState = { latitudeDegrees: 20.1825, longitudeDegrees: 73.0895, periodHours: 5.38528201, epochJd: 2444502.76914, phaseDegrees: 0 };
   const axes = [direction(0, 0), direction(90, 0), direction(0, 90)].map(v => eclipticToBody(v, spin, 137.5));
   for (const axis of axes) close(Math.hypot(...axis), 1, 1e-12, 'transformed axis length');
-  const dot = (a: Vector, b: Vector) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
   close(dot(axes[0], axes[1]), 0, 1e-12, 'x.y');
   close(dot(axes[0], axes[2]), 0, 1e-12, 'x.z');
   const cross: Vector = [axes[0][1]*axes[1][2]-axes[0][2]*axes[1][1], axes[0][2]*axes[1][0]-axes[0][0]*axes[1][2], axes[0][0]*axes[1][1]-axes[0][1]*axes[1][0]];
@@ -161,7 +162,6 @@ test('the north azimuth is the pole position angle the camera axes want, not its
   const los = direction(302.04882, 0.89432);
   const skyEast = [-Math.sin(302.04882 * DEGREE), Math.cos(302.04882 * DEGREE), 0] as const;
   const skyNorth = [los[1] * skyEast[2] - los[2] * skyEast[1], los[2] * skyEast[0] - los[0] * skyEast[2], los[0] * skyEast[1] - los[1] * skyEast[0]];
-  const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
   const positionAngle = Math.atan2(dot(pole, skyEast), dot(pole, skyNorth)) / DEGREE;
   closeAngle(camera.northAzimuthDegrees, -positionAngle, 1e-9, 'azimuth is the negated position angle');
   closeAngle(camera.northAzimuthDegrees, 318.7971, 0.01, 'north azimuth');
@@ -186,9 +186,9 @@ test('the ecliptic and equatorial frames round trip through the J2000 obliquity'
 });
 
 /** The shared kernel bank's planetary constants and leap seconds, as the Cassini route pins them. */
-const KERNELS = resolve(import.meta.dirname, '../../../src/spice/cassini');
-const planetaryConstants = () => parseTextKernel(readFileSync(resolve(KERNELS, 'pck/pck00011.tpc'), 'utf8'), 'pck00011.tpc');
-const leapSeconds = () => parseLeapSeconds(parseTextKernel(readFileSync(resolve(KERNELS, 'lsk/naif0012.tls'), 'utf8'), 'naif0012.tls'));
+const [PCK, LSK] = await kernelBankPaths('cassini', ['pck/pck00011.tpc', 'lsk/naif0012.tls']);
+const planetaryConstants = () => parseTextKernel(readFileSync(PCK!, 'utf8'), 'pck00011.tpc');
+const leapSeconds = () => parseLeapSeconds(parseTextKernel(readFileSync(LSK!, 'utf8'), 'naif0012.tls'));
 
 test('the camera evaluates an IAU pole model in ephemeris time, not in the UTC its frames are stamped in', () => {
   // 2017-07-14: 37 leap seconds plus the 32.184 s TAI-TT offset, with the periodic TDB term under two milliseconds.

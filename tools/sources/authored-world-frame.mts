@@ -1,6 +1,6 @@
 import { isDeepStrictEqual } from 'node:util';
 import { resolve } from 'node:path';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from './source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';
 
 export interface AuthoredWorldFrameReceiptInput {

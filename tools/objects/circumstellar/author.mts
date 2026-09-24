@@ -26,7 +26,7 @@ import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { encodeDensityKtx2 } from '../../../src/preparation/volume/acquisition.ts';
 import { gainForTopAlpha, spreadColumns } from '../../../src/preparation/volume/column-depth.ts';
 import { readFitsFileHdus } from '../../fits/fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
 import { mastDownloadUrl, mastFile } from '../astronomy-packages/mast.mts';
 import { readImagingProgram } from '../jwst/imaging/image3.mts';

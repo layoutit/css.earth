@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { newHorizonsCamera, multiplyCameraMatrices, inverseCameraMatrix } from '../terrestrial-layers/new-horizons-geo.mts';
-import { array, number, optional, shape, text } from '../terrestrial-layers/source-records.mts';
+import { array, number, optional, shape, text } from '@cssearth/core';
 
 const source = resolve(process.argv[2] ?? 'src/objects/arrokoth/source');
 const path = 'preparation/photography.json';

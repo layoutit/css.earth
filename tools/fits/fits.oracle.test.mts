@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFitsHdus, readFitsImage } from './fits.mts';
 import { readOracleFixture, readOracleInput, verifyOracleBytes } from '../oracles/fixture.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/core.json');
 for (const [name, raw] of Object.entries(fixture.cases)) test(`Astropy conformance: ${name}`, async () => {

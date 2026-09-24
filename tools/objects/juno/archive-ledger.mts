@@ -14,9 +14,9 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseTextKernel, number as kernelNumber } from '../../spice/text-kernel.mts';
-import { kernelBankRoot } from '../../spice/kernel-bank.mts';
+import { bankKernelPath } from '../../spice/kernel-bank.mts';
 import { FILTER_COMBINATIONS, KERNEL_SET, PROGRAMS, VOLUMES, fetchText, indexNumber, parseIndex, parseProductId, parseProgram, type IndexRow } from './archive.mts';
 import { POLICY, RECEIPT_SCHEMA } from './measure.mts';
 
@@ -41,7 +41,7 @@ export async function shippedObjects() {
 
 /** The camera's pixel angle from the instrument kernel in the bank: pixel pitch over focal length. */
 export async function pixelAngleMicroradians() {
-  const pool = parseTextKernel(await readFile(resolve(kernelBankRoot(KERNEL_SET), 'ik/juno_junocam_v03.ti'), 'latin1'), 'juno_junocam_v03.ti');
+  const pool = parseTextKernel(await readFile(await bankKernelPath(KERNEL_SET, 'ik/juno_junocam_v03.ti'), 'latin1'), 'juno_junocam_v03.ti');
   return 1e6 * kernelNumber(pool, 'INS-61500_PIXEL_SIZE') / kernelNumber(pool, 'INS-61500_FOCAL_LENGTH');
 }
 

@@ -5,7 +5,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from './fixture.mts';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
-import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const args = process.argv.slice(2);
 if (args.some(arg => !['--unit', '--restore'].includes(arg)) || args.includes('--unit') && args.includes('--restore'))

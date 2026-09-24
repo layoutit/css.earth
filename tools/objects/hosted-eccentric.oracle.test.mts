@@ -3,11 +3,11 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { hostSkyFrame, hostedOrbitStateRelativeBmjdTdb, type HostedOrbit } from '@cssearth/astronomy';
 import { readOracleFixture } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { dotN as dot } from '../../src/platform/vector3.mts';
 
 const fixture = await readOracleFixture('astronomy/hosted-eccentric.json');
 const numbers = (value: unknown) => requireArray(value).map(entry => requireFiniteNumber(entry));
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, value, axis) => sum + value * b[axis]!, 0);
 function compare(actual: readonly number[], expected: readonly number[], label: string, scale: number) {
   assert.equal(actual.length, expected.length, `${label} length`);
   actual.forEach((value, axis) => {

@@ -30,7 +30,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
 import { fileSize, productRecordPath, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';

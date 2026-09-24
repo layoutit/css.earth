@@ -2,8 +2,8 @@ import { applyLinearTint } from '../color-transfer.mts';
 import sharp from 'sharp';
 import type {RadiusMapping, RadialBand, RadialShadow, RadialVariant, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from './radial-contract.mts';
 import { type RingWedgeLayout, wedgePoint, wedgeShare } from '../../../src/renderers/css/preparation/scene/ring-wedges.ts';
+import { clamp } from '../../../src/platform/math/scalar.mts';
 /** Preparation-only radial fields. Body identities and interpretation live in JSON. */
-const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
 const smoothstep = (start: number, end: number, value: number) => {
   const amount = clamp((value - start) / (end - start), 0, 1);
   return amount * amount * (3 - 2 * amount);

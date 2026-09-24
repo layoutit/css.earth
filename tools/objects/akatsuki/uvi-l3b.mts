@@ -3,7 +3,7 @@
 // delivered as NetCDF-4 (an HDF5 container). One exposure sees one hemisphere, so the lens keeps the
 // unobserved side as a declared data gap; nothing is interpolated, extrapolated or filled.
 import * as h5 from 'h5wasm/node';
-import { number, object, parse, string } from '../material-composition/data-schema.mts';
+import { number, object, parse, string } from '@cssearth/core/schema';
 
 /** The grid the JAXA converter writes: `-z 2880x1440`, cell centres at 0.0625 + 0.125 k. */
 export const UVI_L3B_GRID = Object.freeze({ width: 2880, height: 1440, cellDegrees: 0.125 });

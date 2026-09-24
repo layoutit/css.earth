@@ -13,7 +13,7 @@ export function navigationTreeText(tree: readonly TreeNode[]): string {
     nodes[node.key] = {
       label: node.label,
       objectId: node.object?.id ?? null,
-      place: node.object?.group === 'context' || !node.object,
+      place: !node.object,
       count: treeCount(node),
       marker: node.object ? treeMarker(node.object.id) : null,
       children: node.children.map(child => child.key),

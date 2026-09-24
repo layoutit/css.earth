@@ -5,7 +5,8 @@ import{eventTable,requireEventColumn,scalar}from'../../chandra/events.mts';
 import type{FamilyHandler,FamilyOperation}from'../family-handlers.mts';
 import type{DescriptorMember,ProductDescriptor}from'../product-descriptor.mts';
 import{plotNumericPreview,type FigureOptions}from'../../astronomy-packages/plots.mts';
-import{csv,descriptor,finite,stable}from'./common.mts';
+import{csv,descriptor,stable}from'./common.mts';
+import{requireFiniteNumber as finite}from'@cssearth/core';
 
 const MAX_COMPRESSED=32*1024*1024,MAX_EXPANDED=128*1024*1024,MAX_ROWS=2_000_000;
 export const F10_CHANDRA_EXAMPLE={member:'tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz',target:'polaris',observationId:'6431',operations:{selectedEvents:{selection:{energyEv:[500,7000],status:0}},countImage:{image:{x:[1495,5423],y:[2774,5542],bins:[128,96],selection:{energyEv:[500,7000],status:0}}},energyHistogram:{histogram:{edgesEv:[500,1000,2000,4000,7000],selection:{status:0}}},lightCurve:{lightCurve:{range:[255835700,255845654],binWidthSeconds:500,selection:{energyEv:[500,7000],status:0}}}}}as const;

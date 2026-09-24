@@ -47,7 +47,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastFile, mastRequest, type MastFile } from '../astronomy-packages/mast.mts';
 import { assertInputPins, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';

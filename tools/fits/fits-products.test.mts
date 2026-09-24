@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFitsPrimary } from '../objects/observation/fits.mts';
 import { readOracleFixture, readOracleInput, sampleList } from '../oracles/fixture.mts';
-import { requireRecord } from '../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/synoptic.json');
 for (const [path, raw] of Object.entries(requireRecord(fixture.cases.products))) test(`Sun/OPAL reference values: ${path}`, async () => {

@@ -1,5 +1,6 @@
 import type {SourceMesh} from './contracts.mts';
-import {parseScalarMapLens,shape,text,number} from './source-records.mts';
+import {parseScalarMapLens} from './source-records.mts';
+import {shape,text,number} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { loadVrmlShape } from './obj-shape.mts';

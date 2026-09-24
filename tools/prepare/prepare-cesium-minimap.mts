@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 import { parseAst } from 'vite';
 import type { ClassDeclaration, ImportDeclaration } from 'estree';
-import { requireRecord } from '../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 import { sourceStart, sourceEnd, nodeName } from '../ci/runtime-ast.mts';
 
 const require = createRequire(import.meta.url);

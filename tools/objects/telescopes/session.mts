@@ -3,7 +3,7 @@ import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readProductRecord, type ProductRecord } from '../product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection, type CapabilityAnswer, type QueryInputs } from './query.mts';
 import type { CapabilityRequest } from './recipe-request.mts';

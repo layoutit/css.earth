@@ -1,5 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {parse, object, string, dictionary, number, union} from '../material-composition/data-schema.mts';
+import {parse, object, string, dictionary, number, union} from '@cssearth/core/schema';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.mts';
 import type {MaterialAsset} from './material-contract.mts';
 import type {OverlayOptions} from 'sharp';

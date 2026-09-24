@@ -5,7 +5,7 @@ import { parsePreparedClusterCatalog } from '../../packages/catalog/src/clusters
 import { sourceObject } from '../../src/platform/source-catalog.mts';
 import type { SourceResolver } from '../../src/platform/source-catalog.mts';
 import type { SourceUse } from '../../src/platform/source-usage.mts';
-import { hasErrorCode } from './source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 
 const quantityLabels: Readonly<Record<string, string>> = { skyPosition: 'Sky position', distance: 'Distance', halfLightRadius: 'Half-light radius', membership: 'Membership', redshift: 'Redshift' };
 

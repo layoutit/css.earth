@@ -1,22 +1,12 @@
+import { requireFiniteNumber as finite, requirePositive as positive, requireRecord as record } from '@cssearth/core';
 import type { GalaxyDistance, GalaxyRecipe, SourcePin } from './types.js';
 
-export function record(value: unknown, label: string): Record<string, unknown> {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object.`);
-  return value as Record<string, unknown>;
-}
 export function keys(value: Record<string, unknown>, allowed: string[], label: string): void {
   for (const key of Object.keys(value)) if (!allowed.includes(key)) throw new TypeError(`Unknown ${label} field: ${key}`);
 }
 export function text(value: unknown, label: string): string {
   if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${label} must be nonempty text.`);
   return value;
-}
-function finite(value: unknown, label: string): number {
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${label} must be finite.`);
-  return value;
-}
-function positive(value: unknown, label: string): number {
-  const result = finite(value, label); if (!(result > 0)) throw new TypeError(`${label} must be positive.`); return result;
 }
 function pin(value: unknown, label: string): SourcePin {
   const r = record(value, label); keys(r, ['path', 'bytes'], label);

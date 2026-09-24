@@ -12,6 +12,7 @@ import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig 
 import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.js';
 import { prepareLandmarks } from './landmarks.js';
 import { parseShpPolylines } from './shp.js';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 /** Spacecraft sites are discovered past the whole-body view (which sits near 0.43 of the zoom range), once the camera closes in. */
 const SITE_ZOOM_SHARE = 0.6;
 
@@ -179,7 +180,6 @@ export function parseSurfaceAxes(value: unknown): SurfaceFeatureAxes {
   const input = record(value, 'surface map');
   const axes = { prime: axis(input.prime, 'surface map prime'), east: axis(input.east, 'surface map east'), north: axis(input.north, 'surface map north'),
     mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'surface map mapLeftEdgeLongitudeDeg') };
-  const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
   if (Math.abs(dot(axes.prime, axes.east)) > 1e-9 || Math.abs(dot(axes.prime, axes.north)) > 1e-9 || Math.abs(dot(axes.east, axes.north)) > 1e-9) throw new TypeError('Surface map axes must be orthogonal.');
   return Object.freeze(axes);
 }

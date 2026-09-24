@@ -7,7 +7,7 @@
  * entries (FACILITY_SWEEP), so facilities compare side by side. */
 import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode } from '../sources/source-values.mts';
+import { hasErrorCode, isRecord } from '@cssearth/core';
 import { readInvestigationSurveys, type InvestigationSurvey } from './investigation-survey.mts';
 
 export const INVESTIGATION_LEDGER_SCHEMA = 'cssearth-investigation-ledger@1';
@@ -34,7 +34,6 @@ const REPOSITORY = 'https://github.com/layoutit/css.earth/';
 // A repository link names the version it describes: a commit's file, tree or commit page, or a pull request.
 const PINNED_REPOSITORY_LINK = /^https:\/\/github\.com\/layoutit\/css\.earth\/(?:(?:blob|tree|commit)\/[0-9a-f]{40}|pull\/[1-9][0-9]*)(?:[/#?]|$)/;
 
-const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
 const isStatus = (value: unknown): value is InvestigationStatus => INVESTIGATION_STATUSES.some(status => status === value);
 function fail(context: string, message: string): never { throw new TypeError(`${context}: ${message}.`); }
 

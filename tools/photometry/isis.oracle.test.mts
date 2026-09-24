@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readOracleFixture, assertPinnedReferences } from '../oracles/fixture.mts';
 import { radianceFactor, type ScatteringAngles } from './normalization.mts';
 import type { HapkeModel, ParticlePhaseFunction } from './hapke.mts';

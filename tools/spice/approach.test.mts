@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceLoad, sourceTest } from '../../tests/objects/source-test.mts';
 import { assertPinnedInputs, ORACLE_ROOT, readOracleFixture } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { parseApproachRecipe, spacecraftApproach } from './approach.mts';
 
 /**

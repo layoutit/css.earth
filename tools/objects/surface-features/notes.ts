@@ -8,9 +8,9 @@ import { parseDbf } from './dbf.js';
 import { parseSurfaceFeaturesConfig } from './index.js';
 import { unzipMember } from './archive.js';
 import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote, type FeatureNotes } from './notes-schema.js';
+import { isRecord } from '@cssearth/core';
 
 
-const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
 const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { if (!isRecord(value)) throw new TypeError(`${label} must be an object.`); return value; };
 const requireArray = (value: unknown, label = 'Source value'): unknown[] => { if (!Array.isArray(value)) throw new TypeError(`${label} must be an array.`); return value; };
 const requireString = (value: unknown, label = 'Source value'): string => { if (typeof value !== 'string') throw new TypeError(`${label} must be a string.`); return value; };

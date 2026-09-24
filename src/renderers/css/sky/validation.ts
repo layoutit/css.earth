@@ -2,6 +2,7 @@ import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from '../validation/css-mat
 import { validatePreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
+import { dot3 as dot } from '../../../platform/vector3.mts';
 
 const FACE_IDS = ['px', 'nx', 'py', 'ny', 'pz', 'nz'];
 
@@ -60,7 +61,6 @@ function finite(value: unknown): value is number { return typeof value === 'numb
 function positive(value: unknown): value is number { return finite(value) && value > 0; }
 function integer(value: unknown): value is number { return positive(value) && Number.isSafeInteger(value); }
 function unit(value: unknown): value is number[] { return Array.isArray(value) && value.length === 3 && value.every(finite) && Math.abs(Math.hypot(...value) - 1) < 1e-6; }
-function dot(a: readonly number[], b: readonly number[]): number { return a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!; }
 function imagePath(value: unknown): value is string { return typeof value === 'string' && /^(?:[a-z0-9_][a-z0-9_.-]*\/)*[a-z0-9_][a-z0-9_.-]*\.(?:png|webp)$/iu.test(value); }
 function record(value: unknown, keys: readonly string[], name: string, optional: readonly string[] = []): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value) || keys.some(key => !Object.prototype.hasOwnProperty.call(value, key)) ||

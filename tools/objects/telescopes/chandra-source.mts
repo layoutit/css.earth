@@ -1,7 +1,7 @@
 /** Pin one selected Chandra archive event file without claiming a reprocessed observation. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { cxcQuery, chandraObservation, obsidDirectory, TAP } from '../chandra/archive.mts';
 import { deliverSource, rawHttpsFetch, readSavedSource } from './archive-source.mts';
 import { describeChandraEvents } from './families/f10-events.mts';

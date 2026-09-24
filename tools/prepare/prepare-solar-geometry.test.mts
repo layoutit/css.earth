@@ -9,7 +9,7 @@ import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packag
 import { loadAstronomyPackage } from '../../src/platform/astronomy-package.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import * as geometry from '../../src/platform/solar-geometry.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSolidPreparationSource } from '../objects/terrestrial-layers/profile-source.mts';
 import { parseSolidReplayScene } from '../prepared/prepared-replay-source.mts';
 import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';

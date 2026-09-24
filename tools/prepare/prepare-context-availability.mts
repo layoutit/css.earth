@@ -8,7 +8,7 @@ import { validateObjectProvenance } from '../../src/platform/object-provenance.m
 import type { ContextAvailability } from '../../src/platform/context-availability.mts';
 import { parsePreparedVolumePresentation } from '../../site/volume-presentation.mts';
 import { readContextObjects } from './prepare-catalog.mts';
-import { hasErrorCode } from '../sources/source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const root = resolve(import.meta.dirname, '../..');

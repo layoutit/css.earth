@@ -1,4 +1,5 @@
 import type { SceneLifecycle, ShellObjectControls } from "../shell-contract-types.mts";
+import { SHELL_SETTING_NAMES } from '../../src/platform/shell-settings.mts';
 
 function objectLike(value: unknown): value is Record<string, unknown> {
   return value !== null && (typeof value === "object" || typeof value === "function");
@@ -48,7 +49,7 @@ export function requireObjectControls(content: unknown, objectId = "unknown"): S
   }
   const names = settings.map((setting) => objectLike(setting) ? setting.name : undefined);
   if (names.some((name) => typeof name !== "string" || !name ||
-      ["motion", "heliosphere", "illustrationModels", "surfaceLabels", "threeDStars"].includes(name)) ||
+      SHELL_SETTING_NAMES.has(name)) ||
       new Set(names).size !== names.length ||
       settings.some((setting) => !objectLike(setting) ||
         (setting.kind !== "toggle" && setting.kind !== "cycle") ||

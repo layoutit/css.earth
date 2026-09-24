@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { resolve } from 'node:path';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
 import { delivery, listOutputs as listDeliveryOutputs, type OutputChoice } from './outputs.mts';
 import { validateProjectionSource } from './projection.mts';

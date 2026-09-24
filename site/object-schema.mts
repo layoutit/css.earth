@@ -4,7 +4,7 @@ import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/w
 import type { PositionM } from '@cssearth/engine';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { SceneFactory } from './browser-types.mts';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { parseNavigationDistance } from './navigation/navigation-distance.mts';
 import type { NavigationDistance } from './navigation/navigation-distance.mts';
 
@@ -99,7 +99,7 @@ function nonEmpty(value: unknown): value is string {
 function parseWorldFrame(value: unknown): PreparedWorldCameraFrame {
   const fields = ['referenceFrame', 'epochJdTt', 'originM', 'presentationToReference', 'metersPerUnit', 'bodyRadiusM', 'orbitUpReference'];
   const vector = (input: unknown, length: number): input is number[] => isArray(input) && input.length === length && Array.from(input).every(Number.isFinite);
-  if (!record(value) || Object.getPrototypeOf(value) !== Object.prototype || Object.keys(value).some(key => !fields.includes(key)) ||
+  if (!isRecord(value) || Object.getPrototypeOf(value) !== Object.prototype || Object.keys(value).some(key => !fields.includes(key)) ||
       !nonEmpty(value.referenceFrame) || !Number.isFinite(value.epochJdTt) || !vector(value.originM, 3) ||
       !vector(value.presentationToReference, 9) || typeof value.epochJdTt !== 'number' ||
       typeof value.metersPerUnit !== 'number' || !Number.isFinite(value.metersPerUnit) || value.metersPerUnit <= 0 ||

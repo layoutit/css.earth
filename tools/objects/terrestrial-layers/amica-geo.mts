@@ -1,4 +1,4 @@
-import {requireRecord} from '../../sources/source-values.mts';
+import {requireRecord} from '@cssearth/core';
 import { gunzipSync } from 'node:zlib';
 import { readFitsPrimary } from '../observation/fits.mts';
 import { pds3Keyword } from '../pds-labels.mts';

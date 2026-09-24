@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { readFitsImage, readFitsHdus } from './fits.mts';
 import { readFitsPrimary } from '../objects/observation/fits.mts';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
-import { requireRecord } from '../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/pallas.json');
 for (const input of fixture.inputs) test(`Pallas SPHERE native pixels and every ESO header: ${input.path}`, async () => {

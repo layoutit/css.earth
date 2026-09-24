@@ -13,7 +13,7 @@ import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contr
 import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../../src/renderers/css/dist/index.js';
 import { requireObjectControls } from '../../site/scene/scene-contract.mts';
-import { hasErrorCode, isRecord, requireRecord, requireArray } from '../sources/source-values.mts';
+import { hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '../ci/runtime-ast.mts';
 import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';
 

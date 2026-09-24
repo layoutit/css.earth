@@ -7,7 +7,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 export const ORACLE_ROOT = resolve(import.meta.dirname, '../..');
 /** The compiled acquisition operations. Loaded here because `sbmt/` is its own package scope, which cannot see the root `#preparation` imports. */

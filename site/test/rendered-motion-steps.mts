@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { required } from './navigation-test-values.mts';
-import { record } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 export interface MotionEvent { kind: string; atMilliseconds: number; qtMouseTarget?: string; }
 export interface MotionFrame { monotonicSeconds: number; }
@@ -17,7 +17,7 @@ export interface RenderedMotionStep<E extends MotionEvent, F extends MotionFrame
   historyLength?: number; gestureIndex?: number; launched?: boolean; released?: boolean;
 }
 export function parseMotionHistory(value: unknown): MotionHistory {
-  assert.ok(record(value), 'Native history must be an object.');
+  assert.ok(isRecord(value), 'Native history must be an object.');
   const number = (v: unknown): number => { assert.ok(typeof v === 'number' && Number.isFinite(v)); return v; };
   const numbers = (v: unknown): number[] => { assert.ok(Array.isArray(v)); return v.map(number); };
   assert.ok(typeof value.object === 'string' || typeof value.object === 'number');
@@ -27,12 +27,12 @@ export function parseMotionHistory(value: unknown): MotionHistory {
   return { t: number(value.t), clock: number(value.clock), object: value.object, length: number(value.length), average, history };
 }
 export function parseMotionEvidence<E extends MotionEvent>(value: unknown, event: (value: unknown) => E): MotionEvidence<E> {
-  assert.ok(record(value), 'Consumed input evidence must be an object.');
+  assert.ok(isRecord(value), 'Consumed input evidence must be an object.');
   assert.ok(typeof value.clockOffsetSeconds === 'number' && Number.isFinite(value.clockOffsetSeconds));
   const launch = (v: unknown) => v === null ? null : parseMotionHistory(v);
   const gestures = value.gestures === undefined ? undefined : (() => {
     assert.ok(Array.isArray(value.gestures));
-    return value.gestures.map(v => { assert.ok(record(v) && Array.isArray(v.events)); return { events: v.events.map(event), launch: launch(v.launch) }; });
+    return value.gestures.map(v => { assert.ok(isRecord(v) && Array.isArray(v.events)); return { events: v.events.map(event), launch: launch(v.launch) }; });
   })();
   return { clockOffsetSeconds: value.clockOffsetSeconds, launch: value.launch === undefined ? undefined : launch(value.launch), gestures };
 }

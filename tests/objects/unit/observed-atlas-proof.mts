@@ -1,5 +1,5 @@
-import {array,dictionary,number,optional,shape,text,numericRaster} from '../../../tools/objects/terrestrial-layers/source-records.mts';
-import {requireFiniteNumber} from '../../../tools/sources/source-values.mts';
+import {numericRaster} from '../../../tools/objects/terrestrial-layers/source-records.mts';
+import {array,dictionary,number,optional,shape,text,requireFiniteNumber} from '@cssearth/core';
 import {required} from '../../../tools/contract/test-values.mts';
 import type {GeoTIFFImage} from 'geotiff';
 import assert from 'node:assert/strict';

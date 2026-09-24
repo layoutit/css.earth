@@ -36,7 +36,7 @@ import { pipeline } from 'node:stream/promises';
 import { readFitsFileHdus, type FitsHeader } from '../../fits/fits.mts';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 export const REPOSITORY = resolve(import.meta.dirname, '../../..');

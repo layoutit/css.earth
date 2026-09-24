@@ -22,7 +22,7 @@ import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireRecord } from '../../../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord } from '../../product-record.mts';
 import { eurekaToolchain } from '../toolchain.mts';
 import { freeMemoryPercent, toolchainPython } from '../mast.mts';

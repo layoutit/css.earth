@@ -1,4 +1,5 @@
-import { record, safeArchiveUrl } from './types';
+import { safeArchiveUrl } from './types';
+import { isRecord as record } from '@cssearth/core';
 
 /** Recognition cutouts are separate from the source catalogue and archive-query identity. */
 export interface MessierPresentationObject {

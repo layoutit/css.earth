@@ -9,9 +9,10 @@
 // brightest channel is 1. The hot poles are brighter and bluer, the cool equator dimmer and redder; the disc-integrated colour stays
 // the measured one. Limb darkening stays on the limb plate, which darkens every latitude alike.
 import { directionFromRaDec, skyBasis } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { linearToSrgb } from '../color-transfer.mts';
 import { planckLinearSrgb, type StellarColor } from './stellar/stellar-photometric-color.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 export interface GravityDarkeningRecord {
   readonly omega: number; readonly beta: number; readonly poleTemperatureK: number;
@@ -105,7 +106,6 @@ export function inclinedPoleOrientation(star: { rightAscensionDegrees: number; d
   if (nodeLength < 1e-12) throw new TypeError('A pole on the celestial pole has no node.');
   const node = [-pole[1]! / nodeLength, pole[0]! / nodeLength, 0];
   const cross = [node[1]! * toEarth[2]! - node[2]! * toEarth[1]!, node[2]! * toEarth[0]! - node[0]! * toEarth[2]!, node[0]! * toEarth[1]! - node[1]! * toEarth[0]!];
-  const dot = (a: number[], b: number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
   return { rightAscensionDegrees: (Math.atan2(pole[1]!, pole[0]!) / radians + 360) % 360, declinationDegrees: Math.asin(Math.max(-1, Math.min(1, pole[2]!))) / radians,
     displayMeridianDegrees: Math.atan2(dot(pole, cross), dot(node, toEarth)) / radians };
 }

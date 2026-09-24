@@ -1,5 +1,6 @@
 import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 export interface PhotographicCamera {
   positionKm: readonly number[];
@@ -38,7 +39,6 @@ const MAX_SHIFT = 5;
 const STEP = .25;
 const MINIMUM_REGION_PIXELS = 16;
 const cosDegrees = (degrees: number) => Math.cos(degrees * Math.PI / 180);
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, value, index) => sum + value * b[index], 0);
 const subtract = (a: readonly number[], b: readonly number[]) => a.map((value, index) => value - b[index]);
 
 const unit = (value: readonly number[]) => { const length = Math.hypot(...value); if (!(length > 0)) throw new Error('Cannot normalize a zero-length camera ray.'); return value.map(component => component / length); };

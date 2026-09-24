@@ -5,12 +5,13 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import { createGiottoSampler, interpolatedNormals, polygonInteriorDistance } from './prepare-giotto.mts';
 import { deriveVegaCamera } from './encounter-camera.mts';
 import { validateVegaOutline } from './encounter-outline.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const vector = array(number);
 const parseRegistration = shape({
@@ -22,7 +23,6 @@ const parseRegistration = shape({
 type Registration = ReturnType<typeof parseRegistration>;
 type Observation = Registration['observations'][number];
 const radians = Math.PI/180;
-const dot = (a:readonly number[], b:readonly number[]) => a.reduce((sum,n,i) => sum+n*b[i],0);
 const sub = (a:readonly number[], b:readonly number[]) => a.map((n,i) => n-b[i]);
 
 

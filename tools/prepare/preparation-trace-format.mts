@@ -3,6 +3,7 @@
 // imported would be missing from every record.
 import { sha256 } from '../../src/platform/sha256.mts';
 import { createHash } from 'node:crypto';
+import { isRecord } from '@cssearth/core';
 
 export const PREPARATION_TRACE_VARIABLE = 'CSSEARTH_PREPARATION_TRACE';
 export const PREPARATION_TRACE_SCHEMA = 'cssearth-preparation-trace@1';
@@ -23,7 +24,6 @@ export const DESCRIPTOR_PATH = /(?:^|\/)src\/objects\/([a-z][a-z0-9-]*)\/object\
 export const CATALOG_MODULE = 'site/prepared-object-catalog.mts';
 export const REGISTRY_MODULE = 'site/objects.mts';
 
-const isRecord = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const without = (value: unknown, key: string) => isRecord(value) ? Object.fromEntries(Object.entries(value).filter(([name]) => name !== key)) : value;
 
 /**

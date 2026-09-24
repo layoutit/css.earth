@@ -1,5 +1,6 @@
 import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type { Vector3, SurfaceFeatureAxes, SurfaceFeatureOutline } from './catalog.js';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 
 /** Same map convention as the shell minimap: texture u wraps east from the map's left edge. */
@@ -91,7 +92,6 @@ export function meshRadiusBand(triangles: readonly (readonly (readonly number[])
 /** Distance from the origin to the closest point of triangle abc (Ericson, Real-Time Collision Detection 5.1.5). */
 function originToTriangle(a: readonly number[], b: readonly number[], c: readonly number[]): number {
   const sub = (p: readonly number[], q: readonly number[]) => [p[0]! - q[0]!, p[1]! - q[1]!, p[2]! - q[2]!];
-  const dot = (p: readonly number[], q: readonly number[]) => p[0]! * q[0]! + p[1]! * q[1]! + p[2]! * q[2]!;
   const ab = sub(b, a), ac = sub(c, a), ap = [-a[0]!, -a[1]!, -a[2]!];
   const d1 = dot(ab, ap), d2 = dot(ac, ap);
   if (d1 <= 0 && d2 <= 0) return Math.hypot(...a);

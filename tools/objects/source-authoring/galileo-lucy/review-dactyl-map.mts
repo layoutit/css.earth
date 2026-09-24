@@ -4,7 +4,7 @@ import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {controlledShapeCamera, decodeCalibratedCamera} from '../../terrestrial-layers/shape-camera-mosaic.mts';
 import {parseTextKernel, number as kernelNumber, numbers as kernelNumbers} from '../../../spice/text-kernel.mts';
-import {requireArray, requireFiniteNumber, requireRecord, requireString} from '../../../sources/source-values.mts';
+import {requireArray, requireFiniteNumber, requireRecord, requireString} from '@cssearth/core';
 
 type Pixel = [number, number];
 type Vector = [number, number, number];

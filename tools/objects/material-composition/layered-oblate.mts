@@ -20,14 +20,14 @@ interface RingRaster {ringData:Uint8Array|null;foregroundRingData:Uint8Array|nul
 interface FixedMaterialOptions extends RingRaster {objectLight:ReadonlyVector3;objectView:ReadonlyVector3;scenePitchDegrees:number;systemObliquityDegrees:number;
   textureUrl?:string;outputSize?:number;preparedMeshSilhouette?:boolean;materialMode?:string;}
 const mapVector3=(fn:(axis:number)=>number):Vector3=>[fn(0),fn(1),fn(2)];
-import {parse,object,number} from './data-schema.mts';
+import {parse,object,number} from '@cssearth/core/schema';
 import {layeredRecipe} from './layered-recipe.mts';
 import {interiorSource} from '../cutaway/source-contract.mts';
 import type {prepareRadialMotionAndShadow} from './radial-motion.mts';
 import type {prepareSpectralMaterialVariants} from './spectral-variants.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import type {ReadonlyVector3} from './ellipsoid.mts';
-import {requireString,requireRecord} from '../../sources/source-values.mts';
+import {requireString,requireRecord} from '@cssearth/core';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
 interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
   ringGroups:PointGroup[];

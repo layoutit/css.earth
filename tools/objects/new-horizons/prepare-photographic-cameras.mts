@@ -14,19 +14,19 @@ import { newHorizonsCamera, decodeNewHorizonsLorri } from '../terrestrial-layers
 import { bindSipCamera } from '../terrestrial-layers/llorri-geo.mts';
 import { observedLimb, limbThreshold, type LimbEdgePoint } from '../terrestrial-layers/limb-refinement.mts';
 import { loadStlShape } from '../terrestrial-layers/obj-shape.mts';
-import { array, boolean, number, optional, shape, text } from '../terrestrial-layers/source-records.mts';
+import { array, boolean, number, optional, shape, text } from '@cssearth/core';
 import { pckRotation } from '../../spice/frames.mts';
 import { parseTextKernel } from '../../spice/text-kernel.mts';
 import { transpose } from '../../spice/ck.mts';
 import { comparePhotographicInteriors } from './compare-photographic-interiors.mts';
 import { writeInteriorComparison } from './render-interior-comparison.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const SPEED_OF_LIGHT_KM_PER_SECOND = 299792.458;
 const MAXIMUM_OFFSET_PIXELS = 32;
 const PARTITION_ROWS = 12;
 const GENERATOR_PATH = fileURLToPath(import.meta.url);
 
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, value, index) => sum + value * b[index], 0);
 const unit = (value: readonly number[]) => { const length = Math.hypot(...value); if (!(length > 0)) throw new Error('Zero-length ray.'); return value.map(v => v / length); };
 const sub = (a: readonly number[], b: readonly number[]) => a.map((value, index) => value - b[index]);
 

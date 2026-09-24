@@ -1,4 +1,4 @@
-import * as s from '../material-composition/data-schema.mts';
+import * as s from '@cssearth/core/schema';
 import {vector2, vector3, webpEncoding} from './radial-contract.mts';
 const n = s.number, str = s.string, opt = s.optional, arr = s.array, obj = s.object;
 export const orientation = s.union(obj({kind: s.literal('normalize')}), obj({kind: s.literal('rotate'), axis: s.literal('x', 'y', 'z'), state: s.literal('scenePitchDegrees', 'systemObliquityDegrees'), factor: n}), obj({kind: s.literal('rotate'), axis: s.literal('x', 'y', 'z'), degrees: n}));

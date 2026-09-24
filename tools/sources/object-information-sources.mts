@@ -1,4 +1,4 @@
-import { isRecord, requireRecord, requireArray, requireString } from './source-values.mts';
+import { isRecord, requireRecord, requireArray, requireString } from '@cssearth/core';
 export interface ObjectInformationSource {id: string; sourceId: number; name: string; expectedTitle: string; sourceUrl: string; recordApiUrl: string; blocksApiUrl: string;}
 export interface ObjectInformationSnapshot {schemaVersion: number; id: string; planet: string; title: string; sourceId: number; sourceUrl: string; recordApiUrl: string; blocksApiUrl: string; modified: string; retrievedAt: string; credit: string; introduction: string; sections: {heading: string; paragraphs: string[]}[];}
 const NASA_API_ROOT = "https://science.nasa.gov/wp-json";

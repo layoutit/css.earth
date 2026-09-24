@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { requireAssets, requireControls } from '../src/renderers/css/dist/index.js';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { resolveSceneAddressesDeep } from './asset-origin.mts';
 
 /** Server/build-only metadata read. Scene trees remain separate runtime assets. */
@@ -22,14 +22,14 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   const directory = resolve(root, 'src/objects', id);
   const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')));
   const page = descriptor.properties.page;
-  const reference = record(page) && record(page.metadata) ? page.metadata : null;
+  const reference = isRecord(page) && isRecord(page.metadata) ? page.metadata : null;
   if (descriptor.id !== id || reference?.url !== 'prepared/page.json') {
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
   // page.json is written from the restored runtime by prepare:object-json.
   const bytes = await readFile(resolve(directory, reference.url));
   const object: unknown = JSON.parse(bytes.toString('utf8'));
-  if (!record(object) || object.schema !== 'cssearth-object-page@1' || object.id !== id || !object.assets || !object.controls) {
+  if (!isRecord(object) || object.schema !== 'cssearth-object-page@1' || object.id !== id || !object.assets || !object.controls) {
     throw new TypeError(`${id}: incomplete prepared page data.`);
   }
   requireAssets(object.assets);

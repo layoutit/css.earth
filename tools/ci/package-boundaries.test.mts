@@ -1,4 +1,4 @@
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';

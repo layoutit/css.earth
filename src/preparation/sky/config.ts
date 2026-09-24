@@ -1,5 +1,6 @@
 /** Renderer-independent, pinned celestial radiance image and fixed offline display transfer. */
-import { record, finite, text } from '@cssearth/volume-core/contracts/volume-recipe';
+import { text } from '@cssearth/volume-core/contracts/volume-recipe';
+import { requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 export interface SkyReference { path: string; }
 export interface SkyShadowFloor { blackPoint: number; fullSignal: number; }
 export interface SkyParallax { originM: [number, number, number]; radiusM: number; }

@@ -1,13 +1,5 @@
+import { requireFiniteNumber as finite, requireNonemptyText as text, requirePositive as positive, requireRecord as record } from '@cssearth/core';
 import type { StarsRecipe } from './types.js';
-export function record(value: unknown, label: string): Record<string, unknown> {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object.`);
-  return value as Record<string, unknown>;
-}
-export function text(value: unknown, label: string): string {
-  if (typeof value !== 'string' || !value) throw new TypeError(`${label} must be nonempty text.`); return value;
-}
-function finite(value: unknown, label: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${label} must be finite.`); return value; }
-function positive(value: unknown, label: string): number { const v = finite(value, label); if (!(v > 0)) throw new TypeError(`${label} must be positive.`); return v; }
 function integer(value: unknown, label: string): number { const v = positive(value, label); if (!Number.isSafeInteger(v)) throw new TypeError(`${label} must be an integer.`); return v; }
 function reference(value: unknown, label: string) {
   const r = record(value, label), path = text(r.path, `${label} path`);

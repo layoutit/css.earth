@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeAmicaGeo } from './amica-geo.mts';
 import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /** pvl, numpy and astropy as the oracle for the AMICA Gaskell DDR reader (Itokawa). */
 const loaded = await sourceLoad(async () => {

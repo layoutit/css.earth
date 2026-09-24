@@ -1,4 +1,4 @@
-import {object, string, number, boolean, optional} from './material-composition/data-schema.mts';
+import {object, string, number, boolean, optional} from '@cssearth/core/schema';
 export const responsiveFit = object({model: string, portraitBaseWidthShare: number, narrowPortraitWidthShareGain: number,
   landscapeWidthShareGain: number, narrowPortraitAspectRatio: number, portraitAspectRatio: number, squareAspectRatio: number,
   maximumHeightShare: number, maximumMobilePreviewShare: number, minimumZoom: number, maximumZoom: number});

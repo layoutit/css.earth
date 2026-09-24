@@ -1,9 +1,9 @@
 import { requireControls } from '../src/renderers/css/dist/index.js';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import type { Props, ObjectTitle, PreparedTitle, Fact, Chart, Gallery, Lens, LensControl, DatasetReaderText } from './object-shell-types.js';
 
 const object = (value: unknown, label: string): Record<string, unknown> => {
-  if (!record(value)) throw new TypeError(`Prepared ${label} must be an object.`);
+  if (!isRecord(value)) throw new TypeError(`Prepared ${label} must be an object.`);
   return value;
 };
 const text = (value: unknown, label: string): string => {

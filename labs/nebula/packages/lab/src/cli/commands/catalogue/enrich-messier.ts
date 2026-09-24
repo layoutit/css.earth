@@ -1,6 +1,7 @@
 /** Bounded metadata GETs and file HEADs only. Call after inventory acquisition has stopped. */
 import { createHash } from 'node:crypto';
-import { readArchiveImage, record, safeArchiveUrl, type ArchiveImage } from '../../../features/catalogue/types.ts';
+import { readArchiveImage, safeArchiveUrl, type ArchiveImage } from '../../../features/catalogue/types.ts';
+import { isRecord as record } from '@cssearth/core';
 
 export interface MetadataLink {
   id: string; url: string; semantics: string; contentType: string; contentLength: number | null;

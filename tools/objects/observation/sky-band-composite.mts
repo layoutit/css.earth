@@ -12,7 +12,7 @@ import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsFileHdus, readFitsFileRegion, readFitsImage } from '../../fits/fits.mts';
 import { skyDisplayRaster, skyImageAxes, skyProjection } from '../../fits/fits-sky.mts';
-import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '../color-transfer.mts';
 import { maskSaturatedStars } from './plate-saturation.mts';
 import { findPointSources } from './point-sources.mts';

@@ -60,6 +60,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@cssearth/core": "workspace:*",
     "@cssearth/objects": "workspace:*"
   },
   "nebulaImplementation": {

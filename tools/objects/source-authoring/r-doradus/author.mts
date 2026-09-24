@@ -16,7 +16,7 @@ import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '../../../fits/fits.mts';
 import { headerBlock, padBlock } from '../../interferometry/fits-table.mts';
 import { readReconstruction } from '../../interferometry/beam-convolve.mts';
-import { requireFiniteNumber, requireString } from '../../../sources/source-values.mts';
+import { requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/r-doradus/source');

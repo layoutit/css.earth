@@ -1,5 +1,6 @@
 import type {SourceMesh} from './contracts.mts';
-import {parseDemScience,shape,number} from './source-records.mts';
+import {parseDemScience} from './source-records.mts';
+import {shape,number} from '@cssearth/core';
 import { resolve } from 'node:path';
 import { loadImageDem } from './image-dem.mts';
 

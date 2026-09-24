@@ -4,7 +4,7 @@ import {resolve, join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {spawn} from 'node:child_process';
 import {parse} from 'yaml';
-import {requireArray, requireRecord, requireString} from '../sources/source-values.mts';
+import {requireArray, requireRecord, requireString} from '@cssearth/core';
 import {affectedJobNames, ALWAYS_JOBS, classifyAffectedPaths, HEAVY_JOBS, loadCiAreasConfig, localChangedPaths, needsProductionBuild} from './ci-affected.mts';
 import {evaluateObjectScopeGate} from './object-scope-gate.mts';
 import {selectRuntimeOwnershipArgs} from './scope-runtime-ownership-check.mts';

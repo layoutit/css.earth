@@ -1,6 +1,7 @@
 import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
-import { readJsonSource, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { readJsonSource } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseBodyAttitude } from './geographic/source-records.mts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

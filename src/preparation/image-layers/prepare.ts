@@ -6,6 +6,7 @@ import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { ImageLayerRecipe, LayerAxis, Vec3 } from './config.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
+import { dot3 as dot } from '../../platform/vector3.mts';
 
 export const sha256 = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
@@ -25,7 +26,6 @@ const unit = (raDeg: number, decDeg: number): Vec3 => {
   const ra = rad(raDeg), dec = rad(decDeg), c = Math.cos(dec); return [c * Math.cos(ra), c * Math.sin(ra), Math.sin(dec)];
 };
 
-const dot = (a: Vec3, b: Vec3): number => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
 const norm = (a: Vec3): Vec3 => { const n = Math.hypot(...a); return [a[0] / n, a[1] / n, a[2] / n]; };
 const scale = (a: Vec3, n: number): Vec3 => [a[0] * n, a[1] * n, a[2] * n];
 const add = (...v: Vec3[]): Vec3 => v.reduce<Vec3>((a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]], [0, 0, 0]);

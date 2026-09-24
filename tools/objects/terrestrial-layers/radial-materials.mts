@@ -3,7 +3,7 @@ import { matchesPreparationGenerator } from '../../prepare/preparation-generator
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from './solid-contract.mts';
 import type { PreparedTriangle, SourceSurfaceSample, SciencePalette } from './contracts.mts';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { requireArray, requireString, requireRecord, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireArray, requireString, requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { parseRadialSnapshot } from './radial-source.mts';
 import { requireTerrainMesh } from './radial-mesh.mts';
 import { resolve, dirname } from 'node:path';
@@ -20,6 +20,7 @@ import { createSourceMeshLighting } from './source-mesh-lighting.mts';
 import { linearToSrgb, srgbToLinear } from '../color-transfer.mts';
 import { prepareNativePhotographicAtlas } from './native-photograph.mts';
 import { neutralShapeAtlas, shapeFillIllumination } from './shape-material.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 interface ObservationTransfer {
   interiorTexels: number; counts: Record<string, number>; sources?: Record<string, number>;
@@ -30,7 +31,6 @@ interface ObservationTransfer {
 const litByte = (byte: number, illumination: number) => Math.round(255 * linearToSrgb(srgbToLinear(byte / 255) * illumination));
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
 
 /** Shared by the retained atlas and prepare-only context image. Coordinates
  * enter in display units and are immediately restored to physical metres. */

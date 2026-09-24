@@ -1,5 +1,5 @@
-import {requireRecord} from '../../sources/source-values.mts';
-import {shape,number,text,optional,boolean,array,dictionary,choice,parseSciencePalette} from './source-records.mts';
+import {requireRecord,shape,number,text,optional,boolean,array,dictionary,choice} from '@cssearth/core';
+import {parseSciencePalette} from './source-records.mts';
 import {parseNativePhotographicSampling} from './native-photograph.mts';
 
 const texture = {textureScale:optional(number),monochromeBase:optional(text),

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "../../../src/renderers/css/dist/index.js";
-import { record } from "../../../site/browser-types.mts";
+import { isRecord } from "@cssearth/core";
 import { mapDirection } from "../../../site/surface-minimap-math.mts";
 
 // Every body that declares a prepared feature catalogue must ship it pinned, anchored on its
@@ -26,7 +26,7 @@ for (const id of bodies) {
     const plan = runtime.features;
     assert.ok(plan, `${id} runtime declares features`);
     const descriptor: unknown = JSON.parse(await readFile(new URL(`${id}/prepared/features.json`, roots), "utf8"));
-    assert.ok(record(descriptor));
+    assert.ok(isRecord(descriptor));
     assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
     const bytes = await readFile(new URL(`../../../public/scenes/${id}/${plan.catalog.url.split("/").at(-1)}`, import.meta.url));
     assert.equal(bytes.length, plan.catalog.bytes);
@@ -52,17 +52,17 @@ for (const id of bodies) {
     const edge = descriptor.mapLeftEdgeLongitudeDeg;
     assert.ok(edge === 0 || edge === 180, `${id} declares a verified map edge`);
     const map: unknown = JSON.parse(await readFile(new URL(`${id}/source/presentation/surface-map.json`, roots), "utf8"));
-    assert.ok(record(map));
+    assert.ok(isRecord(map));
     const axes = { prime: map.prime as [number, number, number], east: map.east as [number, number, number], north: map.north as [number, number, number] };
     // Shape-model bodies anchor on their picking mesh: the anchor keeps the map direction and its radius lies within the mesh.
     const objectDescriptor: unknown = JSON.parse(await readFile(new URL(`${id}/object.json`, roots), "utf8"));
-    assert.ok(record(objectDescriptor) && record(objectDescriptor.properties) && record(objectDescriptor.properties.recipe) && record(objectDescriptor.properties.recipe.shape));
+    assert.ok(isRecord(objectDescriptor) && isRecord(objectDescriptor.properties) && isRecord(objectDescriptor.properties.recipe) && isRecord(objectDescriptor.properties.recipe.shape));
     const shaped = objectDescriptor.properties.recipe.shape.kind === "radial-terrain";
     const hit = (runtime as unknown as { surfaceHit?: { target: number; triangles: number[][][] } }).surfaceHit;
     const band = plan.surfaceRadiusUnits, ellipsoid = plan.surfaceEllipsoidUnits;
     // An oblate body on the paged lane anchors on its rendered leaf surface around the authored reference ellipsoid.
     assert.ok(Array.isArray(objectDescriptor.properties.recipe.sources));
-    const paged = objectDescriptor.properties.recipe.sources.some((source: unknown) => record(source) && source.id === "paged-ellipsoid");
+    const paged = objectDescriptor.properties.recipe.sources.some((source: unknown) => isRecord(source) && source.id === "paged-ellipsoid");
     if (shaped) { assert.ok(hit, `${id} shape body carries a hit mesh`); assert.equal(plan.target, hit!.target); assert.ok(band, `${id} declares its radius band`); assert.equal(ellipsoid, undefined); }
     else if (paged && objectDescriptor.properties.recipe.shape.kind === "ellipsoid") {
       assert.ok(ellipsoid, `${id} declares its ellipsoid band`); assert.equal(band, undefined);
@@ -103,11 +103,11 @@ for (const id of bodies) {
       // A caption note is a short Wikipedia lead summary pinned with its article; the pinned document is the only source.
       if (feature.note) { assert.ok(feature.note.text.length <= 321 && /^https?:\/\//u.test(feature.note.url), `${id}: ${feature.name} note`); if (feature.note.credit.startsWith("Wikipedia")) noted++; }
     }
-    assert.ok(record(rawCatalog));
+    assert.ok(isRecord(rawCatalog));
     if (rawCatalog.notes !== undefined) {
-      assert.ok(record(rawCatalog.notes) && rawCatalog.notes.count === noted && rawCatalog.notes.license === "CC BY-SA 4.0", `${id}: notes provenance`);
+      assert.ok(isRecord(rawCatalog.notes) && rawCatalog.notes.count === noted && rawCatalog.notes.license === "CC BY-SA 4.0", `${id}: notes provenance`);
       const pinned: unknown = JSON.parse(await readFile(new URL(`${id}/source/features/notes.json`, roots), "utf8"));
-      assert.ok(record(pinned) && Array.isArray(pinned.entries), `${id}: pinned notes`);
+      assert.ok(isRecord(pinned) && Array.isArray(pinned.entries), `${id}: pinned notes`);
       const byId = new Map((pinned.entries as { id: string; title: string; extract: string; url: string }[]).map(entry => [entry.id, entry]));
       for (const feature of catalog.features) if (feature.note) if (feature.note.credit.startsWith("Wikipedia")) assert.deepEqual(feature.note, { text: byId.get(feature.id)!.extract, title: byId.get(feature.id)!.title, url: byId.get(feature.id)!.url, credit: "Wikipedia, CC BY-SA 4.0" }, `${id}: ${feature.name} note matches its pin`);
     } else assert.equal(noted, 0, `${id}: notes without a pinned document`);

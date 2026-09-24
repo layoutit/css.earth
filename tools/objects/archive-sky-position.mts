@@ -1,4 +1,4 @@
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 
 /** First authored sky position in recipe traversal order. */
 export function firstSkyPosition(value: unknown): { raDeg: number; decDeg: number } | undefined {

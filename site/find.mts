@@ -1,4 +1,4 @@
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { featureResult, matchFeatures, parseFeatureIndex, placeFeatures, PLACE_FEATURE_PREFIX } from './feature-search.mts';
 import type { FeatureIndex, FeatureIndexPin, IndexedFeature } from './feature-search.mts';
 import { FIND_QUERY_LIMIT } from './find-protocol.mts';
@@ -25,7 +25,7 @@ async function readFindData(pin: FeatureIndexPin, origin: string, fetcher: typeo
     }
     features.push(...expanded.features);
     const records = new Map<string, unknown>();
-    for (const place of (catalog as { places: unknown[] }).places) if (record(place)) records.set(String(place.id), place);
+    for (const place of (catalog as { places: unknown[] }).places) if (isRecord(place)) records.set(String(place.id), place);
     places.set(placePin.objectId, records);
   }
   return { index: { ...base, features }, places };

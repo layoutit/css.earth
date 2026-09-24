@@ -2,7 +2,7 @@
  *
  * The checked-in claim stores only the semantic join. MAST remains authoritative for the observation's programme, mode,
  * archive target, filter and time; cssEarth reads those facts live through the pinned Astroquery boundary. */
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { ArchiveTransportError, mastObservations, type MastObservationResult } from '../astronomy-packages/mast.mts';
 
 export const TARGET_ASSOCIATIONS_SCHEMA = 'cssearth-target-associations@2';

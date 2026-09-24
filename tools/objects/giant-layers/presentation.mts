@@ -1,4 +1,4 @@
-import {parse} from '../material-composition/data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {layeredPresentationRecipe, type LayeredPresentationRecipe} from './presentation-contract.mts';
 import {bandedGeometryRecipe} from './geometry-contract.mts';
 import type {prepareBandedEllipsoid} from './geometry.mts';

@@ -36,8 +36,9 @@ import { numbers } from '../../spice/text-kernel.mts';
 import { utcToEt } from '../../spice/lsk.mts';
 import { spiceCamera, type PixelModelKeys, type SpiceCamera } from '../../spice/camera.mts';
 import { pds3Keyword } from '../pds-labels.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 export const RECIPE_SCHEMA = 'cssearth-jiram-mosaic@1';
 export const RECEIPT_SCHEMA = 'cssearth-jiram-mosaic-receipt@1';
@@ -139,8 +140,6 @@ export function decodeFrame(bytes: Buffer, label: string, recipe: Pick<JiramReci
   const unit = pds3Keyword(label, 'UNIT') ?? '';
   return { values, unit, mode, start: pds3Keyword(label, 'START_TIME') ?? '', stop: pds3Keyword(label, 'STOP_TIME') ?? '' };
 }
-
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 
 /** Where a camera ray through pixel (x, y) meets the ellipsoid, or null: body-fixed kilometres. */
 function intersect(camera: SpiceCamera, radii: readonly number[], x: number, y: number) {

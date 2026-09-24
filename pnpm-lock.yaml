@@ -27,6 +27,9 @@ importers:
       '@cssearth/catalog':
         specifier: workspace:*
         version: link:packages/catalog
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:packages/core
       '@cssearth/engine':
         specifier: workspace:*
         version: link:packages/engine
@@ -141,6 +144,9 @@ importers:
 
   labs/nebula/packages/lab:
     dependencies:
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:../../../../packages/core
       '@cssearth/engine':
         specifier: workspace:*
         version: link:../../../../packages/engine
@@ -187,6 +193,9 @@ importers:
 
   labs/nebula/packages/reconstruction:
     dependencies:
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:../../../../packages/core
       '@cssearth/volume-core':
         specifier: workspace:*
         version: link:../volume-core
@@ -196,6 +205,9 @@ importers:
 
   labs/nebula/packages/volume-bake:
     dependencies:
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:../../../../packages/core
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../../../../packages/objects
@@ -208,6 +220,9 @@ importers:
 
   labs/nebula/packages/volume-core:
     dependencies:
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:../../../../packages/core
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../../../../packages/objects
@@ -238,6 +253,18 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^3.1.1
         version: 3.2.7(vitest@3.2.7(@types/debug@4.1.13)(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0))
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0)
+
+  packages/core:
+    devDependencies:
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)

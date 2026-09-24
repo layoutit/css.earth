@@ -6,7 +6,7 @@ const test = sourceTest();
 import { readRiceCompressedImage } from './fits-rice.mts';
 import { hmiPixel, hmiRecordGeometry } from '../objects/observation/hmi-continuum.mts';
 import { ORACLE_ROOT, readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/rice.json');
 const numbers = (value: unknown) => requireArray(value).map(v => v === null ? NaN : requireFiniteNumber(v));

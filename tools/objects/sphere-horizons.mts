@@ -17,7 +17,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { readFitsHdu } from '../fits/fits.mts';
-import { requireArray, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 import { horizonsRows, loadObserverCameraInputs, observerRowValues, rowJd, zimpolExposure } from './terrestrial-layers/observer-cameras.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');

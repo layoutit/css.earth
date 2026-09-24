@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import {readAuthoredSources} from '../authored-sources.ts';
-import {parse} from './data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {PREPARED_CSS_OBJECT_FORMAT} from '../../../src/renderers/css/dist/index.js';
 import {layeredRecipe} from './layered-recipe.mts';
 import {spectralRecipe} from './spectral-recipe.mts';
@@ -8,8 +8,7 @@ import {radialMotionRecipe} from './radial-motion-recipe.mts';
 import {layeredPresentationRecipe} from './presentation-recipe.mts';
 import {cutawayRecipe} from '../cutaway/recipe-contract.mts';
 import {parseRadialLayerRecipe} from '../giant-layers/index.mts';
-import {shape,text,number,boolean,array} from '../terrestrial-layers/source-records.mts';
-import {isRecord,requireRecord} from '../../sources/source-values.mts';
+import {shape,text,number,boolean,array,isRecord,requireRecord} from '@cssearth/core';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {mkdir,readFile,realpath,writeFile,rm} from 'node:fs/promises';

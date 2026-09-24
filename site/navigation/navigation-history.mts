@@ -1,5 +1,5 @@
 import type { BrowserWindow } from '../browser-types.mts';
-import { record } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { objectIdAtPath } from '../root-object.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-request.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
@@ -7,11 +7,11 @@ interface NavigationAnchor { href: string; target?: string; hasAttribute(name: s
 function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
   if (!target || !('closest' in target) || typeof target.closest !== 'function') return null;
   const anchor: unknown = target.closest('a[href]');
-  if (!record(anchor) || typeof anchor.href !== 'string' || (anchor.target !== undefined && typeof anchor.target !== 'string') || typeof anchor.hasAttribute !== 'function') return null;
+  if (!isRecord(anchor) || typeof anchor.href !== 'string' || (anchor.target !== undefined && typeof anchor.target !== 'string') || typeof anchor.hasAttribute !== 'function') return null;
   return anchor as unknown as NavigationAnchor;
 }
-const navigationId = (event: Event): unknown => 'detail' in event && record(event.detail) ? event.detail.objectId : undefined;
-const navigationFeature = (event: Event): string | undefined => 'detail' in event && record(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
+const navigationId = (event: Event): unknown => 'detail' in event && isRecord(event.detail) ? event.detail.objectId : undefined;
+const navigationFeature = (event: Event): string | undefined => 'detail' in event && isRecord(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
 
 /** Standalone scenes replace the current URL without creating application history entries. */
 export function replaceNavigationUrl(windowTarget: Window, url: string) {
@@ -41,7 +41,7 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     // replacing that URL; the router retires its continuous URL writer next.
     remember();
     const incoming: unknown = event.state;
-    const state = record(incoming) ? incoming : {};
+    const state = isRecord(incoming) ? incoming : {};
     const targetEntry = typeof state.cssEarthEntry === 'string' ? state.cssEarthEntry : `${prefix}-${++serial}`;
     // A flight commits its entry only when it lands, so the current entry is still the view it
     // left. One step Back means "not there after all": fly back to that view as a new entry

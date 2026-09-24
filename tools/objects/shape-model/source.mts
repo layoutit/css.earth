@@ -1,6 +1,5 @@
 import {refuseAuthoredCameraAngles} from '../../../src/platform/default-camera.mts';
-import {shape,text,number,optional,array} from '../terrestrial-layers/source-records.mts';
-import {requireRecord} from '../../sources/source-values.mts';
+import {shape,text,number,optional,array,requireRecord} from '@cssearth/core';
 export const parseShapeModelConfig=shape({schema:text,displayName:text,displayRadius:number,quadBudget:number,
   mesh:shape({latitudeSegments:number,longitudeSegments:number,width:number,height:number,poleSize:number,seamOverlap:number}),
   ring:optional(shape({innerRadiusKm:number,outerRadiusKm:number,segments:number,displayValue:number,displayOpacity:number})),

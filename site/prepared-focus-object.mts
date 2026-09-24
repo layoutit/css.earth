@@ -1,4 +1,4 @@
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { parseNavigationDistance } from './navigation/navigation-distance.mts';
 import type { NavigationDistance } from './navigation/navigation-distance.mts';
 import type { ObjectEntry } from './object-schema.mts';
@@ -22,7 +22,7 @@ export const isSceneObject = (object: NavigableObject): object is ObjectEntry =>
 
 /** A focus reuses its host scene and camera; it has no scene loader. */
 export function definePreparedFocus(input: unknown): PreparedFocusObject {
-  if (!record(input) || Object.keys(input).some(key => !['kind', 'id', 'focusId', 'name', 'searchNames', 'classification', 'systemName', 'route', 'sceneHostId', 'distance', 'candidate'].includes(key)) ||
+  if (!isRecord(input) || Object.keys(input).some(key => !['kind', 'id', 'focusId', 'name', 'searchNames', 'classification', 'systemName', 'route', 'sceneHostId', 'distance', 'candidate'].includes(key)) ||
       input.kind !== 'prepared-focus' || typeof input.id !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9_.+-]*$/u.test(input.id) || input.focusId !== input.id ||
       typeof input.sceneHostId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(input.sceneHostId) ||
       input.route !== `/${input.sceneHostId}/?focus=${encodeURIComponent(input.id)}` ||

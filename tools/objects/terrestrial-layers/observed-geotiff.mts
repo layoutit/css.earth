@@ -1,6 +1,7 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {PixelValidityPolicy,RasterResult} from './contracts.mts';
-import {parseGeoImageEntry,parseDimensions,parseRgbBandPolicy,parseFloatObservationPolicy,parseMaskedObservationPolicy,parseIsisObservationPolicy,numericRasterBands,number,requireWrappedLongitudeSpan} from './source-records.mts';
+import {parseGeoImageEntry,parseDimensions,parseRgbBandPolicy,parseFloatObservationPolicy,parseMaskedObservationPolicy,parseIsisObservationPolicy,numericRasterBands,requireWrappedLongitudeSpan} from './source-records.mts';
+import {number} from '@cssearth/core';
 import sharp from 'sharp';
 import {fromFile} from 'geotiff';
 import {sampleColorBand, loadScienceSurface} from './scientific-raster.mts';

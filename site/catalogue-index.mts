@@ -1,4 +1,4 @@
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 export interface CatalogueIndexEntry {
   readonly kind: 'scene' | 'prepared-focus';
@@ -42,12 +42,12 @@ const finite = (value: unknown, label: string) => {
 };
 
 export function parseCatalogueIndex(value: unknown): CatalogueIndex {
-  if (!record(value) || value.schema !== 'cssearth-catalogue-index@1' || !Array.isArray(value.entries)) {
+  if (!isRecord(value) || value.schema !== 'cssearth-catalogue-index@1' || !Array.isArray(value.entries)) {
     throw new TypeError('Invalid object catalogue index.');
   }
   const entries = value.entries.map((input, index): CatalogueIndexEntry => {
-    if (!record(input) || (input.kind !== 'scene' && input.kind !== 'prepared-focus') || !record(input.detail)
-        || !record(input.source) || !record(input.marker) || typeof input.illustration !== 'boolean' || typeof input.candidate !== 'boolean' || !Array.isArray(input.searchNames)
+    if (!isRecord(input) || (input.kind !== 'scene' && input.kind !== 'prepared-focus') || !isRecord(input.detail)
+        || !isRecord(input.source) || !isRecord(input.marker) || typeof input.illustration !== 'boolean' || typeof input.candidate !== 'boolean' || !Array.isArray(input.searchNames)
         || !input.searchNames.every(name => typeof name === 'string')) {
       throw new TypeError(`Invalid object catalogue entry: ${index}.`);
     }

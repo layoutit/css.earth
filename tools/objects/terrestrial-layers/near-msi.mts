@@ -1,8 +1,8 @@
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
-import { array, number, shape, text } from './source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, n, i) => s + n * b[i], 0);
 const radians = (degrees: number) => degrees * Math.PI / 180;
 const direction = (latitude: number, longitudeWest: number) => {
   const p = radians(latitude), l = radians(-longitudeWest);

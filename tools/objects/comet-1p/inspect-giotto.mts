@@ -1,6 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {hasErrorCode,requireRecord} from '../../sources/source-values.mts';
-import {shape,text,number,array} from '../terrestrial-layers/source-records.mts';
+import {hasErrorCode,requireRecord,shape,text,number,array} from '@cssearth/core';
 export interface PinnedIntakeFile {file:string;url:string;bytes:number;sha256:string;}
 export const parsePinnedIntakeFile=shape({file:text,url:text,bytes:number,sha256:text});
 const parseManifest=shape({shape:shape({path:text,absoluteUncertaintyKm:array(number)}),guide:parsePinnedIntakeFile,

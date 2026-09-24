@@ -19,7 +19,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain } from './toolchain.mts';
 import { renderSettings } from './reduce-tso.mts';
 

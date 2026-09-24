@@ -14,6 +14,7 @@ import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js
 import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } from '../../renderers/css/shell/material-address.js';
 import { shellRim } from './atlas.js';
 import { validatePreparedCssSurfaceShell } from '../../renderers/css/shell/validation.js';
+import { dotN as dot } from '../../platform/vector3.mts';
 
 const objectDirectory = resolve('src/objects/heliosphere');
 const recipe = async () => parseShellRecipe(JSON.parse(await readFile(join(objectDirectory, 'source/shell.json'), 'utf8')) as unknown);
@@ -202,7 +203,6 @@ test('every sorted triple and corner order selects its correct prepared tile wit
 
 test('interpolated corner material reduces source shader error at outside and near-surface viewpoints', async () => {
   const r = await recipe(), mesh = await loadShellMesh(join(objectDirectory, 'source'), r), shell = await prepared(), levels = r.atlas.facingLevels!;
-  const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i]!, 0);
   const direction = (a: readonly number[], b: readonly number[]) => {
     const delta = a.map((v, i) => v - b[i]!), length = Math.hypot(...delta);
     return delta.map(v => v / length);

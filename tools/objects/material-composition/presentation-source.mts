@@ -1,4 +1,4 @@
-import {shape,text,number,optional,array,dictionary} from '../terrestrial-layers/source-records.mts';
+import {shape,text,number,optional,array,dictionary} from '@cssearth/core';
 
 /** Fields consumed while binding prepared material rows to retained scene nodes. */
 export const parseLayeredLenses = shape({defaultLens:text,controls:array(shape({id:text,materialLens:text,view:optional(text),

@@ -1,4 +1,4 @@
-import { array, boolean, dictionary, number, shape, text } from '../../../tools/objects/terrestrial-layers/source-records.mts';
+import { array, boolean, dictionary, number, shape, text } from '@cssearth/core';
 import { parseSolidPreparationSource } from '../../../tools/objects/terrestrial-layers/profile-source.mts';
 
 export function irregularSatelliteConfig(input: unknown) {
