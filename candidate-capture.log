@@ -1,0 +1,27 @@
+### Result
+{"arrived":{"url":"http://127.0.0.1:4388/earth/?v=UAO9-JN0vGp--b4QYk3S8an8wToMO38op4FBQsczQAAAAD-kQ3JOUUOYv8V2hm8TTBC_zPbHChksmgACAAAAAAAAAAAAAAAAAAAAAA","html":{"scenePresented":"true","selection":"object","ready":"true","playing":"false"},"stage":{"lens":"normal","objectId":"earth","lod":"geometry","selection":"earth","contextScale":"system"},"frames":{"requested":185,"committed":180,"superseded":2,"discarded":4,"inFlight":0,"pending":0,"ready":0}},"errors":[],"browser":"153.0.8010.53"}
+### Ran Playwright code
+```js
+await (async(page)=>{
+ const errors=[]; page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});page.on('pageerror',e=>errors.push(e.stack));
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('http://127.0.0.1:4388/sun/?overview=system');
+ await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.documentElement.dataset.scenePresented==='true');
+ await page.waitForTimeout(1000);
+ await page.screenshot({path:'output/handoff/after-overview.png'});
+ await page.getByRole('searchbox',{name:'Search celestial objects...'}).fill('Earth');
+ await page.getByRole('link',{name:/^Earth 1[.,]/}).click();
+ await page.waitForFunction(()=>location.pathname==='/earth/'&&document.documentElement.dataset.ready==='true'&&document.documentElement.dataset.scenePresented==='true',null,{timeout:45000});
+ await page.screenshot({path:'output/handoff/after-transition.png'});
+ const arrived=await page.evaluate(()=>({url:location.href,html:{...document.documentElement.dataset},stage:{...document.querySelector('.object-stage').dataset},frames:window.__cssEarthUniverse?.frames()}));
+ await page.goto('http://127.0.0.1:4388/earth/');
+ await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.documentElement.dataset.scenePresented==='true');
+ await page.waitForTimeout(1000);
+ await page.screenshot({path:'output/handoff/after-earth.png'});
+ return {arrived,errors,browser:page.context().browser().version()};
+}
+)(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4388/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA
+- Page Title: Earth | cssEarth

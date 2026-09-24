@@ -1,0 +1,39 @@
+{
+  "reference": "11815b46dae2dbd0becefbb9c04a2dac747dd767",
+  "candidate": {
+    "site/prepared-world-navigation.mts": "9665547f0fad67f8c5c37d9ce7af14477171c216558247f5da420430016e9934",
+    "site/scene/scene-activation.mts": "5dca391ae803b974e6b82502a12068bb897eb288678a89a8502e7fda613548c8",
+    "site/test/prepared-world-navigation.test.mts": "b63f43d62593404ba65801a1acbe9264b8043b483d4a7af251a404e818d9ffa4",
+    "src/platform/object-runtime.test.mts": "792bd19ac14ad741f81d5c6d3dc8e3d5f446ee251b7a5573766704d9d01b9374",
+    "src/renderers/css/runtime/object-runtime.ts": "6f2922b3d4ba1b2e2416e53228e58137fb3e99539f9ccc7cbcab0a44977a5b28"
+  },
+  "browser": "Chrome 153.0.8010.53",
+  "deviceScaleFactor": 1,
+  "pixelmatch": "7.2.0",
+  "threshold": 0.1,
+  "includeAA": true,
+  "scope": "Actual Astro app, default surface labels off, same prepared inputs. The repaired transition is a functional check; the blank main image is not a passing visual reference.",
+  "results": [
+    {
+      "view": "overview",
+      "width": 1440,
+      "height": 900,
+      "pixels": 1296000,
+      "mismatches": 0,
+      "rawDifferentPixels": 0,
+      "beforeSha256": "88eb26e4951c443529c5e19bf50ba4d6c80b2be0ecb6fd57039d866ea7b33786",
+      "afterSha256": "88eb26e4951c443529c5e19bf50ba4d6c80b2be0ecb6fd57039d866ea7b33786"
+    },
+    {
+      "view": "earth",
+      "width": 1440,
+      "height": 900,
+      "pixels": 1296000,
+      "mismatches": 0,
+      "rawDifferentPixels": 0,
+      "beforeSha256": "638697c2bb9656b201941cdf56b57ece58ecb31006f9239f812e71c2d9b4a342",
+      "afterSha256": "638697c2bb9656b201941cdf56b57ece58ecb31006f9239f812e71c2d9b4a342"
+    }
+  ],
+  "candidateCommit": "23650d115c5c475b1af515bbeab8521ab15c28b7"
+}

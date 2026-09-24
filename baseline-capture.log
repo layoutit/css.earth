@@ -1,0 +1,26 @@
+### Result
+{"state":{"url":"http://127.0.0.1:4388/sun/?overview=system&v=UMOAAAAAAAAAAIAAAAAAAAAAwhK5P9syaBVBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA","html":{"scenePresented":"false","selection":"object","ready":"error"},"stage":{"lens":"photosphere","objectId":"earth","lod":"marker","selection":"earth","contextScale":"system"},"frames":{"requested":47,"committed":42,"superseded":2,"discarded":3,"inFlight":0,"pending":0,"ready":0}},"errors":[["AbortError: Camera flight was cancelled."]]}
+### Ran Playwright code
+```js
+await (async(page)=>{
+ const errors=[];page.on('console',async msg=>{if(msg.type()==='error')errors.push(await Promise.all(msg.args().map(arg=>arg.evaluate(e=>e?.stack??String(e)))));});page.on('pageerror',e=>errors.push(e.stack));
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('http://127.0.0.1:4388/sun/?overview=system');
+ await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.documentElement.dataset.scenePresented==='true');
+ await page.waitForTimeout(1000);
+ await page.screenshot({path:'output/handoff/before-overview.png'});
+ await page.getByRole('searchbox',{name:'Search celestial objects...'}).fill('Earth');
+ await page.getByRole('link',{name:/^Earth 1[.,]/}).click();
+ await page.waitForTimeout(4500);
+ await page.screenshot({path:'output/handoff/before-transition.png'});
+ const state=await page.evaluate(()=>({url:location.href,html:{...document.documentElement.dataset},stage:{...document.querySelector('.object-stage').dataset},frames:window.__cssEarthUniverse?.frames()}));
+ return {state,errors};
+}
+)(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4388/sun/?overview=system&v=UMOAAAAAAAAAAIAAAAAAAAAAwhK5P9syaBVBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA
+- Page Title: Earth | cssEarth
+- Console: 1 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli/console-2026-09-24T09-52-49-002Z.log#L1

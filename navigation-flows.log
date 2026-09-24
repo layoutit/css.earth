@@ -1,0 +1,27 @@
+### Result
+{"reduced":"http://127.0.0.1:4388/earth/?v=UAO9-JN0vGp--b4QYk3S8an8wToMO38op4FBQsczQAAAAD-kQ3JOUUOYv8V2hm8TTBC_zPbHChksmgACAAAAAAAAAAAAAAAAAAAAAA","restored":"http://127.0.0.1:4388/earth/?v=UAO9-JN0vGp--b4QYk3S8an8wToMO38op4FBQsczQAAAAD-kQ3JOUUOYv8V2hm8TTBC_zPbHChksmgACAAAAAAAAAAAAAAAAAAAAAA","replacement":"http://127.0.0.1:4388/venus/?v=UAM92hysCDEm6T4X987ZFocqwN0K0h2crQJBQsczQAAAAD-5Qyg0RdIXv9rB_XOPkbW_yo1oQa3nfwABAAAAAAAAAAA","errors":["Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)","Failed to load resource: the server responded with a status of 404 (Not Found)"],"frames":{"requested":215,"committed":204,"superseded":4,"discarded":8,"inFlight":1,"pending":0,"ready":0}}
+### Ran Playwright code
+```js
+await (async(page)=>{
+ const errors=[];page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});page.on('pageerror',e=>errors.push(e.message));
+ const ready=path=>page.waitForFunction(path=>location.pathname===path&&document.documentElement.dataset.ready==='true'&&document.documentElement.dataset.scenePresented==='true',path,{timeout:45000});
+ const select=async(name)=>{await page.getByRole('searchbox',{name:'Search celestial objects...'}).fill(name);await page.getByRole('link',{name:new RegExp('^'+name+' ')}).first().click();};
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto('http://127.0.0.1:4388/sun/?overview=system');await ready('/sun/');
+ await select('Earth');await ready('/earth/');
+ const reduced=page.url();
+ await page.goBack();await ready('/sun/');
+ await page.goForward();await ready('/earth/');
+ const restored=page.url();
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await select('Moon');await select('Venus');await ready('/venus/');
+ return {reduced,restored,replacement:page.url(),errors,frames:await page.evaluate(()=>window.__cssEarthUniverse?.frames())};
+}
+)(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4388/venus/?v=UAM92hysCDEm6T4X987ZFocqwN0K0h2crQJBQsczQAAAAD-5Qyg0RdIXv9rB_XOPkbW_yo1oQa3nfwABAAAAAAAAAAA
+- Page Title: Venus | cssEarth
+- Console: 24 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli/console-2026-09-24T10-01-21-871Z.log#L1-L27
