@@ -23,11 +23,11 @@ import { measurePublishedComparison, writeComparisonEvidence } from '../publishe
 import { horizonsCommand, horizonsTables, tableInput } from '../sphere-horizons.mts';
 import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../surface-observations/published-comparison.mts';
 import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure } from '../terrestrial-layers/observer-cameras.mts';
-import { radialTerrainForLens } from '../terrestrial-layers/radial-models.mts';
+import { radialTerrainForLens } from '../terrestrial-layers/alternative-lenses.mts';
 import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
-import type { RadialSimplification } from '../terrestrial-layers/radial-meshoptimizer.mts';
-import { requireTerrainMesh, simplifyRadialShape } from '../terrestrial-layers/radial-terrain.mts';
+import type { RadialSimplification } from '../terrestrial-layers/radial-mesh.mts';
+import { requireTerrainMesh, simplifyRadialShape } from '../terrestrial-layers/radial-mesh.mts';
 import { parseSpinState, spinOrientation } from '../terrestrial-layers/observer-camera.mts';
 import { spinRecordReading } from '../terrestrial-layers/spin-record-reading.mts';
 import { glyphTemplates, readLabel } from './figure-labels.mts';

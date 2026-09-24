@@ -1,20 +1,21 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { loadSourceProducts, parseSourceProducts, sourceRun, SOURCE_PRODUCTS_SCHEMA } from './source-products.mts';
+import { loadSourceProducts, sourceRun } from './source-products.mts';
+import { parseSourceProducts, SOURCE_PRODUCTS_SCHEMA } from './source-product-contract.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
 import { queryCapabilities, selectObservation, type QueryInputs } from './query.mts';
 import { selectedProductInput } from './selected-product.mts';
-import { saveSession, saveExploration, getSession, sessionRequest, observationChoices, savedChoice, type SessionServices } from './session.mts';
+import { saveSession, saveExploration, getSession, sessionRequest, savedChoice, type SessionServices } from './session.mts';
 import { explorationAnswer } from './exploration.mts';
 import { parseCli } from './cli.mts';
 import { SERVICES } from './vo/discovery.mts';
 import { matchProductSoftware } from './ascl.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
+const test = sourceTest();
 
 const args = ['--target', 'test-body', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'telescope-product'];
 const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');

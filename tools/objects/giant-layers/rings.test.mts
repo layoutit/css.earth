@@ -2,12 +2,10 @@ import { fixtureRecord } from '../../contract/test-values.mts';
 import type { SourcePin } from './radial-contract.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { readFile } from 'node:fs/promises';
+import { mapRadius, ringRayOccluded, rasterAnnularField } from './rings.mts';
+import { parseRadialLayerRecipe } from './index.mts';
 const test = sourceTest();
-import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { createHash } from 'node:crypto';
-import { mapRadius, ringRayOccluded, parseRadialLayerRecipe, prepareGiantLayers, rasterAnnularField } from './index.mts';
 
 const recipe = () => ({schema:'cssearth-radial-layer-recipe@1',units:'kilometers',sources:[] as SourcePin[],layers:[{
   kind:'annular-field',size:9,densities:[1],output:'hypothetical-ring{suffix}.webp',encoding:{lossless:true},

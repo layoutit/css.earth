@@ -1,3 +1,4 @@
+import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest } from './recipe-request.mts';
 import { inputWavelengths } from './recipe-request.mts';
 import { skyCatalogueEntry } from './sky/target.mts';
 import { parseLimits, parseRegion } from './vo/contracts.mts';
@@ -32,7 +33,7 @@ import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { flagValue } from '../../cli/cli-arguments.mts';
 import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
-import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
+import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';
@@ -44,10 +45,6 @@ import { productKindFamilyEvidence, type ObservationFamilyEvidence } from './obs
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 const TARGET_ASSOCIATIONS_PATH = 'data/telescopes/target-associations.json';
 export const MODES_SCHEMA = 'cssearth-telescope-modes@1';
-export const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
-export type ProductKind = typeof PRODUCT_KINDS[number];
-export const REQUESTED_RESULTS = ['telescope-product', 'body-map'] as const;
-export type RequestedResult = typeof REQUESTED_RESULTS[number];
 
 /** What an instrument mode can do, from its own documentation. `bands` means the coverage is the one `bands.mts` already
  * states for that mode's bands, so it is not retyped here. */
@@ -158,28 +155,6 @@ export interface Candidate {
   readonly selectionAssessment: CandidateSelectionAssessment;
   readonly evidence: CandidateEvidence;
   readonly unknown: readonly string[];
-}
-
-export interface CapabilityRequest {
-  readonly region?: import('./vo/contracts.mts').IcrsCircle;
-  readonly spectralFrame?: 'barycentric';
-  readonly transferLimits?: import('./vo/contracts.mts').TransferLimits;
-  readonly continuumMicrometres?: readonly [readonly [number,number],readonly [number,number]];
-  readonly acceptedAssumptions?: readonly ResolutionAssumption[];
-  readonly target: string;
-  readonly wavelengthMicrometres: readonly [number, number];
-  readonly time?: { readonly any: true } | { readonly fromIso: string; readonly toIso: string };
-  /** The coarsest sharpness that would still answer the question, in arcsec. */
-  readonly angularResolutionArcsec?: number;
-  /** The coarsest surface resolution that would still answer it, in kilometres. Needs `rangeKm`. */
-  readonly surfaceResolutionKm?: number;
-  /** The fewest resolution elements across the disc that would still answer it. Needs `rangeKm` and `bodyRadiusKm`. */
-  readonly resolutionElements?: number;
-  readonly rangeKm?: number;
-  readonly bodyRadiusKm?: number;
-  readonly kind?: ProductKind;
-  /** The deliverable the caller needs. Exploratory queries may omit it; explicit selection may not. */
-  readonly result?: RequestedResult;
 }
 
 /** Everything the query reads, already loaded: it does no input or output of its own. */
@@ -943,24 +918,7 @@ const UNKNOWN_UNTIL_READ = (target: string, mode: TargetMode): string[] => [
   `Whether ${target} was resolved at all in a given exposure, and how much of it the field of view held.`];
 
 export function queryCapabilities(request: CapabilityRequest, inputs: QueryInputs): CapabilityAnswer {
-  const requestFields = new Set(['target','wavelengthMicrometres','continuumMicrometres','acceptedAssumptions','time','angularResolutionArcsec','surfaceResolutionKm','resolutionElements','rangeKm','bodyRadiusKm','kind','result','region','spectralFrame','transferLimits']);
-  for (const key of Object.keys(request)) if (!requestFields.has(key)) throw new TypeError(`Unsupported scientific request constraint ${key}.`);
-  if (request.region !== undefined) parseRegion(request.region);
-  if (request.transferLimits !== undefined) parseLimits(request.transferLimits);
-  if (request.spectralFrame !== undefined && request.spectralFrame !== 'barycentric') throw new TypeError('Only an explicit barycentric spectral frame is supported.');
-  if (request.wavelengthMicrometres.length !== 2 || !request.wavelengthMicrometres.every(Number.isFinite) || !(request.wavelengthMicrometres[0] > 0 && request.wavelengthMicrometres[1] >= request.wavelengthMicrometres[0])) throw new RangeError('A request states its wavelengths in micrometres, shortest first.');
-  for (const key of ['angularResolutionArcsec', 'surfaceResolutionKm', 'resolutionElements', 'rangeKm', 'bodyRadiusKm'] as const) {
-    const value = request[key];
-    if (value !== undefined && (!Number.isFinite(value) || value <= 0)) throw new RangeError(`${key} must be finite and positive.`);
-  }
-  if (request.time && !('any' in request.time)) {
-    const from = Date.parse(request.time.fromIso), to = Date.parse(request.time.toIso);
-    if (!Number.isFinite(from) || !Number.isFinite(to) || from > to) throw new RangeError('A request needs a valid, ordered time interval.');
-  }
-  if (request.time && 'any' in request.time && request.time.any !== true) throw new TypeError('Any-time acceptance must be true.');
-  if (request.kind && !(PRODUCT_KINDS as readonly string[]).includes(request.kind)) throw new TypeError(`Unknown product kind ${request.kind}.`);
-  if (request.result && !(REQUESTED_RESULTS as readonly string[]).includes(request.result)) throw new TypeError(`Unknown requested result ${request.result}.`);
-  inputWavelengths(request);
+  validateCapabilityRequest(request);
   const targetResolution = resolveTarget(request.target, inputs.targetCatalogue);
   if (targetResolution.status !== 'resolved') return { target: request.target, request, targetResolution, candidates: [], unassignedEvidence: [], targetCoverage: [], withoutTheTarget: [],
     endpoint: { status: 'unknown-target', coverage: 'target-unresolved', selectableCandidates: 0, blockerCodes: ['unknown-target'] } };

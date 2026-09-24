@@ -1,5 +1,7 @@
 # HD 206893 B
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 206893 B is a dusty brown dwarf 11 au from its star. Small wobbles in its motion could be a moon of about 0.4 Jupiter masses, or instrument errors. Its star is [HD 206893](../hd-206893/README.md).
 
 ## Sources

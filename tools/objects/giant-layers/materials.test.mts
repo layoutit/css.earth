@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { writeMaterialAtlasTile } from '../material-composition/raster.mts';
 const test = sourceTest();
-import {readFile}from'node:fs/promises';
-import {writeMaterialAtlasTile}from'./materials.mts';
 test('material row gutters copy the source frame edge exactly',()=>{
  const source=Buffer.from([1,2,3,255,4,5,6,128,7,8,9,64,10,11,12,0]),output=Buffer.alloc(4*4*4);
  writeMaterialAtlasTile({output,outputWidth:4,source,sourceSize:2,frameX:1,frameY:1,gutter:1});

@@ -108,6 +108,22 @@ test('body marker atlases preserve every visible prepared tile pixel exactly', a
   }
 });
 
+test('every body marker and resolved context image leaves space outside its silhouette transparent', async () => {
+  const descriptors = await loadMarkerDescriptors({ projectRoot });
+  const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared-navigation-markers.mjs');
+  for (const { objectId } of descriptors) {
+    const context = PREPARED_NAVIGATION_MARKERS[objectId]?.context;
+    const images = [`body-${objectId}.webp`, `body-${objectId}@2x.webp`,
+      ...(context ? [context.url.replace('/navigation/', '')] : [])];
+    for (const filename of images) {
+      const { data, info } = await sharp(resolve(projectRoot, 'public/navigation', filename)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+      const corners = [0, info.width - 1, (info.height - 1) * info.width, info.width * info.height - 1];
+      for (const pixel of corners) assert.equal(data[pixel * 4 + 3], 0, `${filename}: opaque tile corner`);
+      assert(data.some((value, index) => index % 4 === 3 && value > 0), `${filename}: empty marker`);
+    }
+  }
+});
+
 test("reproduces the checked-in body images and utility markers", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-"));
   context.after(() => rm(root, { recursive: true, force: true }));

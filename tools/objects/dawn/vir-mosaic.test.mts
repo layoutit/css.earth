@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { bandDepth } from './vir-projection.mts';
+import { parseRecipe } from './vir-mosaic.mts';
 const test = sourceTest();
-import { bandDepth, parseRecipe } from './vir-mosaic.mts';
 
 test('band depth is 1 - Rb/Rc at the band minimum under the line joining the two anchor maxima (Frigeri et al. 2019)', () => {
   // A flat continuum at 0.05 with a 20% deep triangular band centred at 3.06 µm, anchors at 3.0 and 3.2 µm.

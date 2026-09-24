@@ -127,3 +127,26 @@ test.each(['missing', 'duplicate', 'parent', 'order', 'tag', 'object'] as const)
   expect(own).not.toHaveBeenCalled();
   expect(f.stage.dataset.preparedObject).toBe('fixture');
 });
+
+test('adoption builds a hidden subtree the server omitted, and refuses a partial one', () => {
+  const tree: PreparedTree = { camera: 0, scene: 1, properties: [], stageClasses: [],
+    nodes: [-1, 0, 0, 2, 3].map(parent => ({ parent, tag: 'div', className: 'leaf', style: '', properties: [], attributes: { 'data-kind': 'hidden' } })) };
+  const initial = (count: number) => {
+    const stage = new InitialNode(); stage.dataset = { objectId: 'fixture', preparedObject: 'fixture' };
+    const document = { createElement: () => Object.assign(new InitialNode(), { style: {}, className: '', setAttribute: vi.fn(),
+      appendChild(this: InitialNode, child: InitialNode) { this.append(child); } }) };
+    Object.assign(stage, { ownerDocument: document });
+    const nodes = tree.nodes.slice(0, count).map((_, index) => { const node = Object.assign(new InitialNode(), { appendChild(this: InitialNode, child: InitialNode) { this.append(child); } });
+      node.dataset.preparedNode = String(index); return node; });
+    tree.nodes.slice(0, count).forEach((record, index) => (record.parent === -1 ? stage : nodes[record.parent]).append(nodes[index]));
+    return { stage, nodes };
+  };
+  const whole = initial(3);
+  const adopted = adoptPreparedTree(tree, whole.stage as unknown as HTMLElement, () => {}, new Set([2]));
+  expect(adopted?.nodes.slice(0, 3)).toEqual(whole.nodes);
+  expect(whole.nodes[2].children).toEqual([adopted?.nodes[3]]);
+  expect(adopted?.nodes[3].children).toEqual([adopted?.nodes[4]]);
+  // Without the hidden declaration, or with the subtree cut part-way, the initial scene stays unclaimed.
+  expect(() => adoptPreparedTree(tree, initial(3).stage as unknown as HTMLElement, () => {})).toThrow('Initial prepared tree');
+  expect(() => adoptPreparedTree(tree, initial(4).stage as unknown as HTMLElement, () => {}, new Set([2]))).toThrow('Initial prepared tree');
+});

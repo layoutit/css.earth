@@ -1,13 +1,13 @@
-import type {ShapeModelConfig} from './source.mts';
-interface OutputDirectories {publicDirectory:string;publicBase:string;}
+import type { ShapeModelConfig } from './source.mts';
 import sharp from 'sharp';
-import { lambertAttenuationAtlas } from '../terrestrial-layers/solid-raster.mts';
+import { lambertAttenuationAtlas } from '../terrestrial-layers/lambert-atlas.mts';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
 import { loadDiscIntegratedColor } from '../observation/disc-integrated-color.mts';
 import { prepareGlbSurface } from './glb-surface.mts';
+interface OutputDirectories {publicDirectory:string;publicBase:string;}
 
 function uniformSurface(width:number, height:number, [red, green, blue]:readonly number[]) {
   const data = Buffer.alloc(width * height * 4);

@@ -58,6 +58,7 @@ export interface PreparedCssVolume {
   readonly approximation: unknown;
   readonly sky?: PreparedCssSky;
   readonly impostors?: PreparedVolumeImpostors;
+  readonly detailPlanes?: readonly PreparedVolumeLeaf[];
 }
 
 export interface VolumeCameraPublication {

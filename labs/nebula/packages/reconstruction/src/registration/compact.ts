@@ -1,6 +1,7 @@
 /** Native, compact broad-band stars for sparse fields dominated by coloured filaments. */
 import sharp from 'sharp';
-import { detectStars, applyAffine, type Affine, type Pair, type Point, type Star } from './stellar.ts';
+import { detectStars, type Pair, type Star } from './stellar.ts';
+import { applyAffine, type Affine, type Point } from './affine.ts';
 
 export async function detectCompactStars(bytes: Buffer, native: Point, channel: 'minimum-rgb' | 'maximum-rgb' = 'minimum-rgb', maximumStars = 250): Promise<Star[]> {
   if (!Number.isInteger(maximumStars) || maximumStars < 1 || maximumStars > 500) throw new TypeError('Compact-star pool is bounded to 500.');

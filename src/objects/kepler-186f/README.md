@@ -1,5 +1,7 @@
 # Kepler-186 f
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Kepler-186 f is 1.17 times as wide as Earth and circles its red dwarf every 130 days. Only its size and orbit are measured; here it is a plain gray sphere.
 
 ## Sources

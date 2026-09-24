@@ -8,6 +8,7 @@ import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../renderers/css/preparation/volume.js';
 import { prepareVolumeImpostors } from '../../renderers/css/preparation/volume-impostors.js';
 import { acquireVolumeSource } from './acquisition.js';
+import { prepareFixedDiscVolume } from './fixed-disc.js';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
 import { parseSkyRecipe } from '../sky/config.js';
 import { acquireSkySource } from '../sky/source.js';
@@ -37,6 +38,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
       await mkdir(dirname(target), { recursive: true });
       await writeFile(target, bytes);
     } });
+  data = await prepareFixedDiscVolume({ volume: data, slices, recipe, outputDirectory });
   if (recipe.sky) {
     const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(sourceDirectory, recipe.sky)).toString('utf8')));
     const skyDirectory = dirname(containedPath(sourceDirectory, recipe.sky.path));
@@ -56,11 +58,12 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
     await writeFile(descriptorPath, JSON.stringify({ ...baseDescriptor, prepared: { format: envelope.format,
       url: relative(objectDirectory, outputPath).split('\\').join('/') } }, null, 2) + '\n');
   }
-  await retireVolumeTextures(outputDirectory, previousTextures, slices.quads.map(quad => quad.texturePath));
+  await retireVolumeTextures(outputDirectory, [...previousTextures, ...slices.quads.map(quad => quad.texturePath)],
+    [...data.stacks.flatMap(stack => stack.leaves), ...data.detailPlanes ?? []].map(leaf => leaf.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     await inventoryPreparedAssets({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   const decodedBytes = data.resources.reduce((sum, resource) => sum + resource.width * resource.height * 4, 0);
-  console.log(`PREPARED ${descriptor.id}: ${slices.quads.length} PolyCSS leaves; ${decodedBytes} decoded RGBA bytes; ${outputPath}`);
+  console.log(`PREPARED ${descriptor.id}: ${data.stacks.reduce((count, stack) => count + stack.leaves.length, 0)} PolyCSS leaves; ${decodedBytes} decoded RGBA bytes; ${outputPath}`);
   return envelope;
 }

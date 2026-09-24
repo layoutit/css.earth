@@ -1,0 +1,18 @@
+{
+  "circleColor": "rgb(0, 0, 0)",
+  "dpr": 1,
+  "galaxyImageElements": 454,
+  "label": "\"Sgr A*\"",
+  "labelColor": "rgb(0, 0, 0)",
+  "labelStroke": "0px",
+  "planes": 1,
+  "url": "http://127.0.0.1:4293/sun/?overview=milky-way&v=UCPBqXxihqN8yEG36yTStDr_w6K1t_014fdBQsczQAAAAD_VNFzhC081P89ldCJ-D5S_7SeMLAIOiT_rZtGaVxQ0P9TypL_u2IA_2ZG-ydH5gD_ZW1kxfrE5v-0zalsrKKq_ugHvnXlp6QABAAAAAAAAAAA",
+  "viewport": [
+    1253,
+    1237
+  ],
+  "browser": "Codex in-app browser; engine version not exposed by capture tool",
+  "codeBase": "ed8630a88a49f1036c92da9fa2009e3f555340ac plus this PR working diff",
+  "dataset": "OpenSpace Milky Way, fixed arm plane and volumetric bulge; assets pinned by ../../inventory.json",
+  "purpose": "Inspect arm placement and black Sgr A* label/circle contrast; not a native-renderer pixel comparison or FPS measurement"
+}

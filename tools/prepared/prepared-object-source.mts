@@ -63,7 +63,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const fields = new Map(staticObjectProperties(kind(factory.arguments[0], 'ObjectExpression')).map(property => [propertyKey(property.key), property.value]));
   if (fields.size !== 3 || named(fields.get('definition')) !== named(bind.params[0]) || named(fields.get('frame')) !== named(bind.params[1])) fail();
   const context = bindings.get(named(fields.get('context')));
-  if (context?.source !== './world-context-plan.mts' || context.name !== 'APPLICATION_WORLD_CONTEXT') fail();
+  if (context?.source !== './world-camera.mts' || context.name !== 'APPLICATION_WORLD_CAMERA') fail();
   const bound = kind(kind(bind.body.body[1], 'ReturnStatement').argument, 'ArrowFunctionExpression');
   if (bound.params.length !== 2 || bound.params.some(param => param.type !== 'Identifier')) fail();
   const mounted = call(bound.body, mount.id.name, 2);

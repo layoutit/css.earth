@@ -1,10 +1,9 @@
 import { runProcessingWorker } from '@cssearth/nebula-lab/server/worker';
 import type { Plugin } from 'vite';
 import { createStarRemovalJobs, starRemovalJobsHandler } from '../jobs/operation-jobs.ts';
-import { jointRecord } from '../../features/joint-fit/model.ts';
 import { readCompilerRequest, type CompilerRequest } from '../../features/compiler/model.ts';
-import { readCompilerResult, type CompilerResult } from '../../features/compiler/result.ts';
-import { validateCompilerResult } from '../workflows/compiler/compile.ts';
+import { readCompilerResult } from '../../features/compiler/result.ts';
+import { validateCompilerResult } from '../workflows/compiler/bank-validation.ts';
 async function worker(root: string, request: CompilerRequest, signal: AbortSignal, progress: (message: string, fraction: number) => void) {
   return runProcessingWorker({ root, request, signal, name: 'compiler',
     entry: 'labs/nebula/packages/lab/src/server/workers/compiler.ts',

@@ -8,7 +8,7 @@ const AXES: readonly VolumeAxis[] = ['x', 'y', 'z'];
 
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   const value = record(input, 'prepared CSS volume');
-  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', 'provenance', 'approximation', ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : [])], 'prepared CSS volume');
+  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', 'provenance', 'approximation', ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'detailPlanes') ? ['detailPlanes'] : [])], 'prepared CSS volume');
   if (value.schema !== 'cssearth-css-volume@1' || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
     throw new TypeError('Prepared CSS volume identity is invalid.');
   }
@@ -45,14 +45,16 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
       }
     }
   }
+  if (value.detailPlanes !== undefined) validateStack({ axis: 'z', leaves: value.detailPlanes }, resources, leafIds);
   const frame = parseDensityVolumeFrame(value.frame);
   const impostors = Object.hasOwn(value, 'impostors') ? validateVolumeImpostors(value.impostors, resources) : undefined;
+  if (value.detailPlanes !== undefined && !impostors) throw new TypeError('Fixed detail planes require a distant impostor bank.');
   const sky = Object.hasOwn(value, 'sky') ? validatePreparedCssSky(value.sky, resourcesInput as PreparedCssVolume['resources']) : undefined;
   if (sky && (sky.referenceFrame !== frame.referenceFrame || sky.epochJdTt !== frame.epochJdTt)) throw new TypeError('Prepared sky and volume must share their reference frame and epoch.');
   return { schema: value.schema, id: value.id, frame,
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
-    provenance: value.provenance, approximation: value.approximation, ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}) };
+    provenance: value.provenance, approximation: value.approximation, ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}), ...(value.detailPlanes ? { detailPlanes: value.detailPlanes as PreparedCssVolume['detailPlanes'] } : {}) };
 }
 
 function validateStack(stack: Record<string, unknown>, resources: Set<string>, leafIds: Set<string>): void {

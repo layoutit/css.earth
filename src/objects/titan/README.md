@@ -1,5 +1,7 @@
 # Titan
 
+The [navigation marker](source/preparation/navigation.json) retains its existing source-map crop and silhouette, with the shared prepared full-phase curvature shading (35% ambient, 65% diffuse). It is a stylized identifier, not an observer projection or illumination at the scene epoch.
+
 ## Sources
 
 - The first surface lens is **Near-infrared**, Cassini ISS CL1/CB3 at 937.994 nm (9.498 nm bandwidth). Source: [Weller et al., USGS 2026 release](https://doi.org/10.5066/P14FAEKS).

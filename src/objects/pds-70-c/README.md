@@ -1,5 +1,7 @@
 # PDS 70 c
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 PDS 70 c is a gas giant still forming inside the gap of [PDS 70](../pds-70/README.md)'s disc. ALMA sees a compact source of dust co-located with it, a disc of its own less than about 1.2 au in radius (Benisty et al. 2021, [arXiv:2108.07123](https://arxiv.org/abs/2108.07123)); the pipeline image drawn in the [dust ring](../pds-70-disc/README.md) is too noisy to show it.
 
 ## Sources

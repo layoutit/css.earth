@@ -1,11 +1,12 @@
 import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
 import assert from 'node:assert/strict';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { WorldRotation } from '../../src/renderers/css/navigation/world-camera-math.ts';
 import { required } from './navigation-test-values.mts';
-import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale, measurePreparedFocusView } from '../view-readout.mts';
+import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../view-format.mts';
+import { measurePreparedFocusView } from '../view-readout.mts';
 import { measureView } from '../surface-minimap-rectangle.mts';
+const test = sourceTest();
 
 const identity: WorldRotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const state: Parameters<typeof measureView>[0] = { eyeM: [0, 0, 3e6], radiusM: 1e6, rotation: identity,

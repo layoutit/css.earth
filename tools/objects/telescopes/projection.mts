@@ -1,11 +1,11 @@
 /** An explicit navigation step between a pinned 2D measurement and an existing body-map contract. */
-import { readFile,writeFile,mkdir,rm,rmdir,rename } from 'node:fs/promises';
-import { resolve,dirname } from 'node:path';
+import { readFile, writeFile, mkdir, rm, rmdir, rename } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { requireArray,requireRecord,requireString,requireFiniteNumber } from '../../sources/source-values.mts';
-import { fileSize,type ProductInput } from '../product-record.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { fileSize, type ProductInput } from '../product-record.mts';
 import { parseBodyMapProduct } from '../body-map-product.mts';
-import { assertBodyMapPlanes,bodyMapProductRecord,formatProductRecord } from '../body-map-publication.mts';
+import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { projectWithPlanetMapper } from '../astronomy-packages/projection.mts';
@@ -13,7 +13,7 @@ import { canonical } from './vo/contracts.mts';
 import { sourceContext } from './delivery-context.mts';
 import { delivery } from './outputs.mts';
 import { localOutput, verifiedProduct } from './verified-product.mts';
-export { localOutput, verifiedProduct } from './verified-product.mts';
+
 
 export function parseGeometry(raw:unknown,root:string){
   const g=requireRecord(raw);if(g.schema!=='cssearth-navigation-input@1')throw new TypeError('Expected cssearth-navigation-input@1');

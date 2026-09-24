@@ -1,5 +1,7 @@
 # WD 1856+534 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 A giant planet 0.946 Jupiter radii across, circling its white dwarf every 1.408 days. It is drawn as a gray sphere at its measured size, lit by its star.
 
 ## Sources

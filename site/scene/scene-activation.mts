@@ -73,7 +73,8 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     // Restore the incoming camera before arming optional texture detail. An
     // untouched page keeps its prepared coarse surface; the first real input
     // admits the 2048 refinement outside the cold-load critical path.
-    if (mount.refineTextures) {
+    if (mount.refineTextures && mount.refinesWithoutInput) mount.refineTextures();
+    else if (mount.refineTextures) {
       const releaseRefinement = () => {
         removeRefinementListeners();
         if (isCurrent(session)) mount.refineTextures?.();

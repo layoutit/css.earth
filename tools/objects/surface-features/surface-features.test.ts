@@ -3,10 +3,11 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { parseDbf } from './dbf.js';
-import { budgetTracePaths, extentPolygon, meshRadiusBand, nodeIndex as nodeIndexForTest, normalizeExtent, projectRadial, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
+import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from './index.js';
+import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection } from './geometry.js';
 import { parseShpPolylines } from './shp.js';
+const test = sourceTest();
 
 const root = process.cwd();
 const mercurySource = resolve(root, 'src/objects/mercury/source');

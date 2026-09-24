@@ -1,16 +1,16 @@
-import {evidenceGrid,samplingArcseconds} from '@cssearth/nebula-reconstruction/evidence/grid';
-export {evidenceGrid} from '@cssearth/nebula-reconstruction/evidence/grid';
+import { evidenceGrid, samplingArcseconds } from '@cssearth/nebula-reconstruction/evidence/grid';
 import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
+export {evidenceGrid} from '@cssearth/nebula-reconstruction/evidence/grid';
 /** Server/offline only: reads the pinned NOX-derived working rasters, never native processing. */
 import { readFile, mkdir, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { serialize, deserialize } from 'node:v8';
 import sharp from 'sharp';
 import { readStructureCatalogue } from '../../../features/observations/models/structures-model.ts';
-import { imageCorners, type Matrix } from '../../../features/observations/models/model.ts';
+import { type Matrix } from '../../../features/observations/models/model.ts';
 import { readRegisteredGeometrySource, readGeometryLocal, geometrySha } from '../geometry/registered-source.ts';
 import { extractEvidenceFields, registerEvidenceRaster, validateMatrix } from '@cssearth/nebula-reconstruction/evidence/fields';
-import { type EvidenceInputs, type EvidenceGrid, type EvidenceSource } from '@cssearth/nebula-reconstruction/evidence/model';
+import type { EvidenceInputs, EvidenceGrid, EvidenceSource } from '@cssearth/nebula-reconstruction/evidence/model';
 
 export const evidenceMethodVersion = 'registered-multiscale-evidence@1';
 export interface PrepareEvidenceOptions { imageToFrame?: Record<string, Matrix> }

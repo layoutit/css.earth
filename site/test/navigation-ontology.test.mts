@@ -19,7 +19,7 @@ test('every prepared spatial subject and every scene has exactly one searchable 
   assert.equal(OBJECTS.length, SCENE_OBJECTS.length + prepared.length);
   assert.deepEqual(OBJECTS.filter(object => object.kind === 'prepared-focus'), prepared);
   assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
-  assert.deepEqual(objectAdapter.routes(), SCENE_OBJECTS.map(object => object.route));
+  assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
   assert.equal(requireObject('m_031').kind, 'prepared-focus');
   assert.throws(() => requireSceneObject('m_031'), /not a scene owner/);
   for (const [query, id] of [['Andromeda', 'm_031'], ['M31', 'm_031'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
@@ -87,7 +87,7 @@ test('every row of the application navigation tree opens a route the application
   const rows: TreeNode[] = [];
   const walk = (node: TreeNode) => { if (node.object) rows.push(node); node.children.forEach(walk); };
   atlasTree(readObjects(), applicationTreeDestination).forEach(walk);
-  const pages = new Set(objectAdapter.routes());
+  const pages = new Set(objectAdapter.routes(SCENE_OBJECTS));
   const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => [object.id, object.route]));
   const overviews = new Set(Object.keys(OVERVIEW_TITLES));
   assert.ok(rows.length > 400, 'the tree still names every prepared destination');

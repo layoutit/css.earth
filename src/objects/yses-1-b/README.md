@@ -1,5 +1,7 @@
 # YSES 1 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 YSES 1 b orbits its young Sun-like star about 160 au out. GRAVITY positions and a radial velocity against the star gave it its first full orbit in 2025. Its star is [YSES 1](../yses-1/README.md).
 
 ## Sources

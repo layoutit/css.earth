@@ -1,153 +1,38 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { readObservation, type ObservationRaster } from './observation-raster.mts';
+import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid } from './raster-grid.mts';
+import { lambertAttenuationAtlas, type LambertAttenuationParameters } from './lambert-atlas.mts';
+import type { WebpOptions } from 'sharp';
+import { createRasterEmitter } from './raster-output.mts';
 import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
-import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
-import type {RgbObservation} from './contracts.mts';
-import type {RadialState} from './solid-contract.mts';
+import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { RadialState } from './solid-contract.mts';
 import { encodeBandColor, interpolatePalette } from '../color-transfer.mts';
-import {parseSolidRasterConfig,parseSurfaceSource} from './solid-source.mts';
-import {requireTerrainMesh} from './radial-terrain.mts';
-import {shape,text,number} from './source-records.mts';
-interface ObservationRaster extends RgbObservation {withheldSyntheticPixels?:number;sourceGeoreference?:unknown;}
-import type {SolidSurface} from './solid-contract.mts';
-export interface LambertAttenuationParameters {
-  frameSize: number; columns: number; frameCount: number; terminatorWidth: number;
-  directionalAmbient: number; fullPhaseAmbient: number; fullPhaseDiffuse: number; maximumOpacity: number;
-}
-interface SolidMaterialConfig {
-  namespace: string; publicBase: string; raster: SolidRasterGrid;
-  lighting: LambertAttenuationParameters & {logicalSize: number};
-}
-import type {Sharp,WebpOptions} from 'sharp';
-import {hasErrorCode,requireRecord,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
-import {parseDimensions} from './source-records.mts';
-export interface SolidRasterGrid {width:number;height:number;bandCount:number;gutter:number;poleSize:number;}
-export interface TextureGridLens {textureScale?:number;monochromeBase?:string;previewGrid?:{width:number;height:number};surfaceSampling?:unknown;format?:string;}
+import { parseSolidRasterConfig, parseSurfaceSource } from './solid-source.mts';
+import { requireTerrainMesh } from './radial-mesh.mts';
+import { shape, text, number } from './source-records.mts';
+import type { SolidSurface } from './solid-contract.mts';
+import { requireRecord, requireString } from '../../sources/source-values.mts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { fromFile } from 'geotiff';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
-import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mts';
-import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation, prepareRgbBandObservation} from './observed-geotiff.mts';
-import { preparePdsRgbObservation } from './observed-pds-rgb.mts';
-import { prepareByteObservation } from './observed-image.mts';
-import { preparePds4Observation } from './observed-pds4.mts';
-import { prepareFitsObservation } from './observed-fits.mts';
-import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
-import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
+import { loadControlledObservationGeometry, matchObservedColorLevels } from './photometric-observations.mts';
 import { loadSurfaceObservation } from '../surface-observations/index.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
-import { radialModelForLens } from './radial-models.mts';
+import { radialModelForLens } from './alternative-lenses.mts';
 import { npyLonLatGridDependencies } from './npy-lonlat-grid.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './shape-material.mts';
-
-/** An encoding with neither `lossless` nor `quality` is written in the lossy lane (lossy-lane.ts). One that fixes a quality,
- * and every lossless encoding, is written as given. */
-export function createRasterEmitter(publicDirectory:string, publicBase:string) {
-  return async (filename:string, pipeline:Sharp, encoding:WebpOptions = { lossless: true, effort: 4 }) => {
-    const path = resolve(publicDirectory, filename);
-    const bytes = !encoding.lossless && encoding.quality === undefined
-      ? await writeLossyWebp(pipeline, path, encoding)
-      : await pipeline.webp(encoding).toBuffer();
-    if (encoding.lossless || encoding.quality !== undefined) await writeFile(path, bytes);
-    const { width, height } = await sharp(bytes).metadata();
-    if (!width || !height) throw new Error(`Raster output has no dimensions: ${filename}`);
-    return { url: `${publicBase}${filename}`, width, height, bytes: bytes.length,
-      sha256: sha256(bytes) };
-  };
+interface SolidMaterialConfig {
+  namespace: string; publicBase: string; raster: SolidRasterGrid;
+  lighting: LambertAttenuationParameters & {logicalSize: number};
 }
 
 // Terminal display encoding only, in the lossy lane (no quality: see createRasterEmitter). Source maps stay lossless for
 // pole sampling.
 const DISPLAY_ENCODING: WebpOptions = { alphaQuality: 100, effort: 4 };
-
-export async function readObservation(sourceDirectory:string, entryInput:unknown, validityInput:unknown, width:number, height:number): Promise<ObservationRaster> {
-  const entry=Object.assign({},requireRecord(entryInput),parseDimensions(entryInput));
-  const validity=requireRecord(validityInput),kind=requireString(validity.kind);
-  const sourcePath=requireString(entry.path);
-
-  const path = resolve(sourceDirectory, sourcePath);
-  if (kind === 'pds4-float-rgb') return preparePds4Observation(sourceDirectory, entry, validity, width, height);
-  if (kind === 'pds3-rgb-zip') return preparePdsRgbObservation(path, entry, validity, width, height);
-  if (kind === 'geotiff-rgb-bands') return prepareRgbBandObservation(path, entry, validity, width, height);
-  if (kind === 'fits-byte-monochrome') return prepareFitsObservation(path, entry, validity, width, height);
-  if (kind === 'pds3-byte-monochrome') return preparePdsByteMosaic(sourceDirectory, [entry], width, height, validity);
-  if (kind === 'isis3-float-monochrome') return prepareIsisObservation(path, entry, validity, width, height);
-  if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(kind)) return prepareFloatObservation(path, entry, validity, width, height);
-  const metadata = await sharp(path, { limitInputPixels: false }).metadata();
-  if (metadata.width !== entry.width || metadata.height !== entry.height) throw new Error(`Observation source dimensions changed: ${entry.path}`);
-  if (['image-monochrome-no-data', 'image-rgb-no-data'].includes(kind)) return prepareByteObservation(path, entry, validity, width, height);
-  if(kind==='geotiff-rgb-alpha')return prepareMaskedObservation(path,entry,validity,width,height);
-  if (kind === 'geotiff-monochrome-alpha' && typeof validity.resampling === 'string' && ['source-georeferenced-bilinear','source-georeferenced-nearest'].includes(validity.resampling)) {
-    return prepareMaskedObservation(path, entry, {...validity, channels:'monochrome', zeroValidity:validity.zeroValidity ?? 'all-channels'}, width, height);
-  }
-  if (kind === 'south-connected-black') {
-    const source = await sharp(path).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-    const sourceMissing = blackFillCoverage(source.data, source.info, { southConnected: true });
-    const rgb = await sharp(path).resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).removeAlpha().raw().toBuffer();
-    return { rgb, missing: sampleCoverage(sourceMissing, source.info, width, height) };
-  }
-  if (kind !== 'geotiff-monochrome-alpha') throw new Error(`Unsupported observation validity: ${validity.kind}`);
-  const tiff = await fromFile(path);
-  let origin, resolution;
-  try {
-    const image = await tiff.getImage(), keys = image.getGeoKeys();
-    if (!keys) throw new Error('Observation GeoTIFF has no source keys.');
-    const referenceRadius=requireFiniteNumber(requireRecord(entry.projection).referenceRadiusMeters);
-    origin = image.getOrigin(); resolution = image.getResolution();
-    if (image.getWidth() !== entry.width || image.getHeight() !== entry.height || image.getGDALNoData() !== validity.noData ||
-        resolution[0] <= 0 || resolution[1] >= 0 || keys.ProjCenterLongGeoKey !== validity.centerLongitude ||
-        Math.abs(requireFiniteNumber(keys.GeogSemiMajorAxisGeoKey) - referenceRadius) > 0.01) {
-      throw new Error(`Observation GeoTIFF coordinate mapping changed: ${entry.path}`);
-    }
-  } finally { await tiff.close(); }
-  const source = await sharp(path).greyscale().raw().toBuffer({ resolveWithObject: true });
-  if (source.info.channels !== 1) throw new Error('Monochrome source must have one channel.');
-  const grayAlpha = Buffer.alloc(source.data.length * 2);
-  for (let i = 0; i < source.data.length; i++) {
-    grayAlpha[i * 2] = source.data[i];
-    grayAlpha[i * 2 + 1] = source.data[i] === validity.noData ? 0 : 255;
-  }
-  const { data, info } = await sharp(grayAlpha, { raw: { width: entry.width, height: entry.height, channels: 2 } })
-    .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
-  if (info.channels !== 4) throw new Error('Monochrome resampling must retain its validity channel.');
-  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
-  for (let i = 0; i < missing.length; i++) {
-    rgb.set(data.subarray(i * 4, i * 4 + 3), i * 3);
-    missing[i] = data[i * 4 + 3] < 255 ? 1 : 0;
-  }
-  return { rgb, missing, sourceGeoreference: { origin, resolution } };
-}
-
-/** Only facet-table previews may use a smaller flat map. Native triangle
- * materials still sample the complete source table and have their own atlas. */
-export function scientificPreviewGrid(lens:TextureGridLens, raster:Pick<SolidRasterGrid,'width'|'height'|'bandCount'>) {
-  const grid = lens.previewGrid;
-  if (grid === undefined) return { width: raster.width, height: raster.height };
-  if (lens.format !== 'facet-scalars' || !grid ||
-      Object.keys(grid).some(key => !['width', 'height'].includes(key)) ||
-      ![grid.width, grid.height].every(n => Number.isSafeInteger(n) && n > 0) ||
-      grid.width !== grid.height * 2 || grid.width > raster.width || grid.height > raster.height ||
-      grid.height % raster.bandCount !== 0) {
-    throw new TypeError('Facet preview grid must be a bounded 2:1 integer raster compatible with its latitude bands.');
-  }
-  return { width: grid.width, height: grid.height };
-}
-
-/** A lower-resolution source can keep the exact existing atlas proportions.
- * CSS addresses and body geometry remain fixed; this only changes baked pixels.
- */
-export function lensTextureGrid(lens:TextureGridLens, raster:SolidRasterGrid) {
-  const scale = lens.textureScale ?? 1;
-  const grid = {width:raster.width*scale,height:raster.height*scale,gutter:raster.gutter*scale,poleSize:raster.poleSize*scale};
-  if (![1, .5, .25, .125].includes(scale) || Object.values(grid).some(n => !Number.isSafeInteger(n) || n <= 0) ||
-      grid.height % raster.bandCount !== 0 || (scale !== 1 && (lens.monochromeBase || lens.previewGrid || lens.surfaceSampling))) {
-    throw new TypeError('Lens texture scale must preserve integral atlas bands, gutters and poles.');
-  }
-  return grid;
-}
 
 /** Surface composition is source-dependent; the projection/packing is shared. */
 interface RasterRadialModel { lensIds: string[]; radial: RadialState; config: {geometry: unknown}; }
@@ -325,24 +210,6 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   await writeFile(resolve(outputDirectory, 'surfaces.json'), `${JSON.stringify({ objectId: config.namespace, surfaces })}\n`);
   return surfaces;
-}
-
-export function lambertAttenuationAtlas({ frameSize, columns, frameCount, terminatorWidth, directionalAmbient, fullPhaseAmbient, fullPhaseDiffuse, maximumOpacity }: LambertAttenuationParameters) {
-  const rows = frameCount / columns, width = frameSize * columns, height = frameSize * rows;
-  const pixels = Buffer.alloc(width * height * 4);
-  for (let frame = 0; frame < frameCount; frame++) {
-    const lz = -1 + 2 * frame / (frameCount - 1), lx = Math.sqrt(1 - lz * lz);
-    for (let y = 0; y < frameSize; y++) for (let x = 0; x < frameSize; x++) {
-      const nx = (x - (frameSize - 1) / 2) / (frameSize / 2), ny = (y - (frameSize - 1) / 2) / (frameSize / 2), r2 = nx * nx + ny * ny;
-      if (r2 > 1) continue;
-      const direct = Math.max(0, nx * lx + Math.sqrt(1 - r2) * lz);
-      const t = Math.min(1, direct / terminatorWidth), lit = t * t * (3 - 2 * t) * direct;
-      const illumination = frame === frameCount - 1 ? fullPhaseAmbient + lit * fullPhaseDiffuse : directionalAmbient + lit;
-      const offset = ((Math.floor(frame / columns) * frameSize + y) * width + frame % columns * frameSize + x) * 4;
-      pixels[offset + 3] = Math.round(Math.min(maximumOpacity, Math.max(0, 1 - illumination)) * 255);
-    }
-  }
-  return { pixels, width, height, rows };
 }
 
 export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; config: Pick<SolidMaterialConfig, 'namespace' | 'publicBase' | 'raster'>; radial?: boolean}) {

@@ -1,5 +1,7 @@
 # HIP 65426
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HIP 65426 is a young, hot, fast-spinning star 108 parsecs away. Its giant planet b was found in 2017 and became JWST's first directly imaged exoplanet.
 
 ## Sources

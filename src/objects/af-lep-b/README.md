@@ -1,5 +1,7 @@
 # AF Lep b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 AF Lep b is the lowest-mass imaged planet whose mass was weighed through its orbit. It circles its star at about 8 au, in line with the star's spin. Its star is [AF Lep](../af-lep/README.md).
 
 ## Sources

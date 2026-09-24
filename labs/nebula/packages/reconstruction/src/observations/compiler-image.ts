@@ -1,4 +1,4 @@
-import type {Affine} from '../registration/stellar.ts';
+import type { Affine } from '../registration/affine.ts';
 export interface CompilerRaster { width: number; height: number; data: Uint8Array; path: string; sha256: string }
 export interface CompilerImage { id: string; label: string; credit: string; page: string; matrix: Affine;
   nativeWidth: number; nativeHeight: number; original: CompilerRaster; diffuse: CompilerRaster; stars: CompilerRaster;

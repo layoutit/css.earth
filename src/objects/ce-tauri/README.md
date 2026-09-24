@@ -1,5 +1,7 @@
 # CE Tauri
 
+The [navigation marker](source/preparation/navigation.json) is a photosphere crop of the existing reconstruction, with an offline circular alpha edge. Its centre and radius come from the matching frame in [the raster recipe](source/preparation/raster.json): `(center + 0.5) × 512 / imageSize` and `radiusKm / (rangeKm × pixelAngleMicroradians × 10⁻⁶) × 512 / imageSize`. For `observations/dec_avg.fit`, the 512-pixel marker centre is (263.616, 248.016) and its radius is 162.880 pixels. The enclosing integer crop is (100, 85, 327, 326); the alpha ellipse retains the fractional centre and radius. This navigation proxy omits off-limb emission and reconstruction background. The scientific images, their thresholds and their off-limb views are unchanged.
+
 ## Sources
 
 CE Tauri (119 Tau) is a red supergiant in Taurus and the fourth star placed here. It is placed at its catalogue position, 658 parsecs from the Sun, and shown as a sphere of the published diameter carrying the two images its authors reconstructed from VLTI/PIONIER data and deposited at the CDS. Unlike Betelgeuse and π¹ Gruis, nothing is reconstructed in this repository: the images are cast as published.

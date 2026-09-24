@@ -1,5 +1,7 @@
 # π¹ Gruis
 
+The [navigation marker](source/preparation/navigation.json) is a photosphere crop of the existing reconstruction, with an offline circular alpha edge. Its centre and radius come from the matching frame in [the raster recipe](source/preparation/raster.json): `(center + 0.5) × 512 / imageSize` and `radiusKm / (rangeKm × pixelAngleMicroradians × 10⁻⁶) × 512 / imageSize`. For `observations/pi1-gruis-pionier-2014-09-2.1mas.fits`, the 512-pixel marker centre is (258.008, 254.004) and its radius is 90.850 pixels. The enclosing integer crop is (167, 163, 182, 182); the alpha ellipse retains the fractional centre and radius. This navigation proxy omits off-limb emission and reconstruction background. The scientific images, their thresholds and their off-limb views are unchanged.
+
 ## Sources
 
 π¹ Gruis is the second star here outside the Solar System and the first without a measured rotation axis. It is placed at its catalogue position, 162 parsecs from the Sun, and shown as a sphere of the fitted radius carrying one image reconstructed from the public VLTI/PIONIER visibilities of September 2014, the data behind the first resolved granulation on a star other than the Sun.

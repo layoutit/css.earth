@@ -22,6 +22,7 @@ export interface VolumeRecipe {
     displayColorMatrix?: DisplayColorMatrix; stepMetric?: 'source' | 'texture'; cylinderSupport?: { axis: Axis; radiusSquared: number }; };
   bake: { sliceCounts: Record<Axis, number>; unitsPerSourceUnit: number; imageWidth: number;
     samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
+  hybrid?: { coreRadiusUnits: number; fadeStartUnits: number };
   anchors: { id: string; referencePositionM: Vector3 }[];
   provenance: { path: string };
   sky?: { path: string };
@@ -104,6 +105,13 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
     const anchor = record(entry, 'anchor'); return { id: text(anchor.id, 'anchor id'), referencePositionM: triple(anchor.referencePositionM, 'anchor position') };
   });
   if (new Set(anchors.map(a => a.id)).size !== anchors.length) throw new TypeError('Anchor IDs must be unique.');
+  let hybrid: VolumeRecipe['hybrid'];
+  if (r.hybrid !== undefined) {
+    const h = record(r.hybrid, 'hybrid');
+    const coreRadiusUnits = positive(h.coreRadiusUnits, 'coreRadiusUnits'), fadeStartUnits = finite(h.fadeStartUnits, 'fadeStartUnits');
+    if (fadeStartUnits < 0 || fadeStartUnits >= coreRadiusUnits) throw new TypeError('Invalid hybrid core fade.');
+    hybrid = { coreRadiusUnits, fadeStartUnits };
+  }
   let radialEmission: RadialEmission | undefined;
   let cylinderSupport: VolumeRecipe['material']['cylinderSupport'];
   if (m.cylinderSupport !== undefined) {
@@ -145,5 +153,5 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
       samplesPerSlab: positive(b.samplesPerSlab, 'samplesPerSlab', true), cropTransparent: b.cropTransparent,
       opticalWeight: positive(b.opticalWeight, 'opticalWeight'), ...(imageEncoding ? { imageEncoding } : {}) }, anchors,
     provenance: { path: sourcePath(p.path) },
-    ...(sky ? { sky: { path: sourcePath(sky.path) } } : {}) };
+    ...(sky ? { sky: { path: sourcePath(sky.path) } } : {}), ...(hybrid ? { hybrid } : {}) };
 }

@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
+import { aboutStar, candidateVerdict, readmeImageLines, readmeInterferometric, summariseOidb } from './star-candidates.mts';
+import { fetchRetrying } from './archive-search.mts';
 const test = sourceTest();
-import { aboutStar, candidateVerdict, fetchRetrying, readmeImageLines, readmeInterferometric, summariseOidb } from './star-candidates.mts';
 
 // The CE Tauri deposit's ReadMe, abridged to the lines the reader parses (CDS J/A+A/614/A12).
 const CE_TAU_README = `File Summary:

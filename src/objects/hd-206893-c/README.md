@@ -1,5 +1,7 @@
 # HD 206893 c
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 206893 c is a giant planet circling about 3.5 au from its star, inside the orbit of B. Models in which it still burns deuterium fit its brightness best. Its star is [HD 206893](../hd-206893/README.md).
 
 ## Sources

@@ -2,8 +2,10 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeVtkCategories } from '../terrestrial-layers/vtk-categories.mts';
 import { createIndexedShape } from '../terrestrial-layers/obj-shape.mts';
-import { normalizeSearchText, projectRadial, surfaceDirection } from './index.js';
-import type { PreparedSurfaceFeature, SurfaceFeatureAxes, SurfaceFeaturePreparationContext } from './index.js';
+import { normalizeSearchText } from './catalog.js';
+import { projectRadial, surfaceDirection } from './geometry.js';
+import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from './catalog.js';
+import type { SurfaceFeaturePreparationContext } from './index.js';
 
 type Vec = readonly [number, number, number];
 const record = (v: unknown, at: string): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError(`${at} must be an object.`); return v as Record<string, unknown>; };

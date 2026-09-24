@@ -1,5 +1,7 @@
 # ROXs 42B b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 ROXs 42B b is a young giant planet of about 10 to 13 Jupiter masses, 1.2 arcseconds (about 140 au) from the close pair [ROXs 42B A and B](../roxs-42b/README.md) in Ophiuchus. Its carbon-to-oxygen ratio and metallicity match its stars' (Inglis et al. [2024](https://arxiv.org/abs/2402.09533)).
 
 ## Sources

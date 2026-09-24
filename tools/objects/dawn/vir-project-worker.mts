@@ -1,7 +1,8 @@
 /** Worker for tools/objects/dawn/vir-mosaic.mts: projects one reduced cube per message and returns the covered cells
  * and each parameter's values there as transferable typed arrays. */
 import { parentPort, workerData } from 'node:worker_threads';
-import { projectReducedFile, type VirRecipe } from './vir-mosaic.mts';
+import { projectReducedFile } from './vir-projection.mts';
+import type { VirRecipe } from './vir-mosaic.mts';
 
 const { recipe, gain, work, ppd, fillMaximumStepKm } = workerData as { recipe: VirRecipe; gain: number[][]; work: string; ppd: number; fillMaximumStepKm: number };
 parentPort!.on('message', async (name: string) => {

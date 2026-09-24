@@ -1,5 +1,7 @@
 # GJ 504 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 GJ 504 b glows at about 560 K. JWST's spectrum points to about 25 Jupiter masses and an age of billions of years, which would make it a brown dwarf. Its star is [GJ 504](../gj-504/README.md).
 
 ## Sources

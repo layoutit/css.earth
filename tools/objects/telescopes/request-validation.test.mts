@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { queryCapabilities, type QueryInputs } from './query.mts';
+import type { CapabilityRequest } from './recipe-request.mts';
 const test = sourceTest();
-import { queryCapabilities, type CapabilityRequest, type QueryInputs } from './query.mts';
 const inputs: QueryInputs = { ledgers: [], capabilities: [], targetCatalogue: [{ id: 'test', name: 'Test', aliases: [] }], targetAssociations: [], bodyMaps: [] };
 const base: CapabilityRequest = { target: 'test', wavelengthMicrometres: [1, 2] };
 test('invalid numerical constraints fail before discovery can turn them into scientific answers', () => {

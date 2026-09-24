@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
 import { planAccess, sodaParameters, type MetadataLoader } from './access.mts';
-import type { CapabilityRequest } from '../query.mts';
+import type { CapabilityRequest } from '../recipe-request.mts';
 import { jsonValue, parseLimits, type DiscoverySnapshot, type Json, type MetadataResponse, type Resource } from './contracts.mts';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
+const test = sourceTest();
 
 const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo');
 const target = { id: 'betelgeuse', names: ['Betelgeuse'], classification: 'star', classificationSource: 'fixture catalogue' };

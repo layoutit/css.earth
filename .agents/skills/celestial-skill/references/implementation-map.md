@@ -50,7 +50,7 @@ fallback requirements are not the current authored-package template.
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `src/renderers/css/validation/` |
 | Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare/prepare-object-json.mts` |
-| Source acquisition, verification and runtime inventory | `tools/objects/operations.ts`, `tools/objects/operations-acquisition.ts`, package source manifests and acquisition JSON |
+| Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `tools/objects/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene/scene-contract.mts`, `site/scene/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
@@ -140,8 +140,9 @@ instead of editing a shared list or atlas position.
 
 | Irregular-mesh capability | Owner relative to the repository |
 | --- | --- |
-| Source sampling, native triangle planning and per-texel lighting bake | `tools/objects/terrestrial-layers/radial-terrain.mts` |
-| Position welding, compaction, meshoptimizer simplification and topology checks | `tools/objects/terrestrial-layers/radial-meshoptimizer.mts` |
+| Source loading and native triangle planning | `tools/objects/terrestrial-layers/radial-terrain.mts` |
+| Source sampling, position welding, compaction, meshoptimizer simplification and topology checks | `tools/objects/terrestrial-layers/radial-mesh.mts` |
+| Per-texel lighting and material atlas baking | `tools/objects/terrestrial-layers/radial-materials.mts` |
 | PDS radius values / OBJ radial intersections | `tools/objects/terrestrial-layers/pds-scalar-grid.mts`, `tools/objects/terrestrial-layers/obj-shape.mts` |
 | Geometry regressions and independent body anchors | `tools/objects/terrestrial-layers/radial-meshoptimizer.test.mts`, `tools/objects/terrestrial-layers/radial-terrain.test.mts`, `tests/objects/unit/vesta/source.test.mts` |
 
@@ -257,7 +258,7 @@ for availability; this reference does not establish merge or deployment status.
 | OSIRIS decoding, companion identity and quality flags | `tools/objects/terrestrial-layers/osiris-geo.mts` |
 | Projective fit with a disjoint holdout, footprint sampling, source-mesh correspondence and visibility | `tools/objects/surface-observations/`, described in its [README](../../../../tools/objects/surface-observations/README.md) |
 | Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/surface-observations/levels.mts` |
-| Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mts` |
+| Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-materials.mts` |
 | Selection/level regressions and prepared provenance checks | `tools/objects/surface-observations/levels.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
 | Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/objects/comet-67p/README.md) |
 
