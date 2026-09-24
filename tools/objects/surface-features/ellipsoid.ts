@@ -1,5 +1,5 @@
-import { surfaceDirection } from './index.js';
-import type { SurfaceFeatureAxes } from './index.js';
+import { surfaceDirection } from './geometry.js';
+import type { SurfaceFeatureAxes } from './catalog.js';
 
 /** Ellipsoid anchoring for the shared feature preparation. Catalogue positions are geodetic (positive-east
  * longitude, geodetic latitude on the reference ellipsoid); the prepared anchor is the point where the

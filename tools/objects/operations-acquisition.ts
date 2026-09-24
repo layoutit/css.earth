@@ -1,21 +1,20 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import sharp from 'sharp';
 import { lstat, readFile, mkdir, rename, rm } from 'node:fs/promises';
-import { createReadStream, createWriteStream } from 'node:fs';
+import { createWriteStream } from 'node:fs';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { createHash } from 'node:crypto';
-import {gzipSync} from 'node:zlib';
-import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
-import type { SourceManifest } from './operations.js';
+import { gzipSync } from 'node:zlib';
+import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from './source-files.js';
+import type { SourceManifest } from './source-files.js';
 import { assertRangeResponse, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
-import type { SourceEntry } from './operations.js';
+import type { SourceEntry } from './source-files.js';
 import { sourceCacheUrl, withIdleTimeout } from '../assets/source-mirror.mts';
-import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
-import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
+import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from './acquisition/satellite-catalog.mts';
+import { prepareDskMesh, validateDskMeshRecipe } from './acquisition/dsk-mesh.mts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
 interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}
 interface MappedComposition extends OperationBase {kind:'mapped-composition';path:string;recipePath:string;product:string;}

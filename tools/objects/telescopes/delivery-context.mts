@@ -2,7 +2,8 @@
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseAcceptedAssumptions } from '../resolution-evidence.mts';
 import { inputWavelengths } from './recipe-request.mts';
-import { PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest, type ConstraintVerdict } from './query.mts';
+import { PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from './recipe-request.mts';
+import type { ConstraintVerdict } from './query.mts';
 import type { RequestSatisfaction } from './request-satisfaction.mts';
 import { jsonValue, parseLimits, parseRegion, type Json } from './vo/contracts.mts';
 

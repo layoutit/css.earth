@@ -1,17 +1,12 @@
 import { validateObjUvFits } from './obj-uv-fits.mts';
 import { validateTerrestrialRings } from './rings.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
-import {parseSolidPreparationSource} from './profile-source.mts';
-import type {parseSolidScience} from './solid-source.mts';
-import {requireRecord,requireFiniteNumber,requireString} from '../../sources/source-values.mts';
-import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
-import {validateDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
-type SolidConfig=ReturnType<typeof parseSolidPreparationSource>;
-type Directories={sourceDirectory:string;publicDirectory:string;outputDirectory:string};
-type TerrestrialContext=Directories & {config:SolidConfig;source:Awaited<ReturnType<typeof createSourceManifest>>};
+import { parseSolidPreparationSource } from './profile-source.mts';
+import type { parseSolidScience } from './solid-source.mts';
+import { requireRecord, requireFiniteNumber, requireString } from '../../sources/source-values.mts';
+import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { validateFacetScalarProfile } from './facet-scalars.mts';
-import {validateVtkCategories} from './vtk-categories.mts';
+import { validateVtkCategories } from './vtk-categories.mts';
 import { validateImageDemScience } from './image-dem-science.mts';
 import { validateScienceQualityMasks } from './scientific-raster.mts';
 import { validateGeologyProfile } from './categorical-geology.mts';
@@ -29,12 +24,16 @@ import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
 import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid, lensTextureGrid } from './solid-raster.mts';
 import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from './solid-scene.mts';
-import { prepareRadialMaterials } from './radial-terrain.mts';
-import { loadRadialModels, combineRadialModels, radialTerrainForLens } from './radial-models.mts';
+import { prepareRadialMaterials } from './radial-materials.mts';
+import { loadRadialModels, combineRadialModels } from './radial-models.mts';
+import { radialTerrainForLens } from './alternative-lenses.mts';
 import { validateRadialTableProfile } from './pds-radial-table.mts';
 import { validateFitsObservationPolicy } from './observed-fits.mts';
 import { validateSurfaceObservation } from '../surface-observations/index.mts';
 import { validateFacetFieldRecipe } from './fits-facet-field.mts';
+type SolidConfig=ReturnType<typeof parseSolidPreparationSource>;
+type Directories={sourceDirectory:string;publicDirectory:string;outputDirectory:string};
+type TerrestrialContext=Directories & {config:SolidConfig;source:Awaited<ReturnType<typeof createSourceManifest>>};
 
 /** A categorical grid is discrete units in a nearest-sampled GeoTIFF with its missing value kept apart from the unit codes;
  * both the radial-terrain lane and the generic-lane interpreter apply the same rule. */

@@ -1,27 +1,16 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import type { WebpOptions } from 'sharp';
+import { createRasterEmitter } from './raster-output.mts';
 import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
-import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
-import type {RgbObservation} from './contracts.mts';
-import type {RadialState} from './solid-contract.mts';
+import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { RgbObservation } from './contracts.mts';
+import type { RadialState } from './solid-contract.mts';
 import { encodeBandColor, interpolatePalette } from '../color-transfer.mts';
-import {parseSolidRasterConfig,parseSurfaceSource} from './solid-source.mts';
-import {requireTerrainMesh} from './radial-terrain.mts';
-import {shape,text,number} from './source-records.mts';
-interface ObservationRaster extends RgbObservation {withheldSyntheticPixels?:number;sourceGeoreference?:unknown;}
-import type {SolidSurface} from './solid-contract.mts';
-export interface LambertAttenuationParameters {
-  frameSize: number; columns: number; frameCount: number; terminatorWidth: number;
-  directionalAmbient: number; fullPhaseAmbient: number; fullPhaseDiffuse: number; maximumOpacity: number;
-}
-interface SolidMaterialConfig {
-  namespace: string; publicBase: string; raster: SolidRasterGrid;
-  lighting: LambertAttenuationParameters & {logicalSize: number};
-}
-import type {Sharp,WebpOptions} from 'sharp';
-import {hasErrorCode,requireRecord,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
-import {parseDimensions} from './source-records.mts';
-export interface SolidRasterGrid {width:number;height:number;bandCount:number;gutter:number;poleSize:number;}
-export interface TextureGridLens {textureScale?:number;monochromeBase?:string;previewGrid?:{width:number;height:number};surfaceSampling?:unknown;format?:string;}
+import { parseSolidRasterConfig, parseSurfaceSource } from './solid-source.mts';
+import { requireTerrainMesh } from './radial-mesh.mts';
+import { shape, text, number } from './source-records.mts';
+import type { SolidSurface } from './solid-contract.mts';
+import { requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { parseDimensions } from './source-records.mts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -30,34 +19,29 @@ import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-su
 import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mts';
-import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation, prepareRgbBandObservation} from './observed-geotiff.mts';
+import { prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation, prepareRgbBandObservation } from './observed-geotiff.mts';
 import { preparePdsRgbObservation } from './observed-pds-rgb.mts';
 import { prepareByteObservation } from './observed-image.mts';
 import { preparePds4Observation } from './observed-pds4.mts';
 import { prepareFitsObservation } from './observed-fits.mts';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
-import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
+import { loadControlledObservationGeometry, matchObservedColorLevels } from './photometric-observations.mts';
 import { loadSurfaceObservation } from '../surface-observations/index.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
-import { radialModelForLens } from './radial-models.mts';
+import { radialModelForLens } from './alternative-lenses.mts';
 import { npyLonLatGridDependencies } from './npy-lonlat-grid.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './shape-material.mts';
-
-/** An encoding with neither `lossless` nor `quality` is written in the lossy lane (lossy-lane.ts). One that fixes a quality,
- * and every lossless encoding, is written as given. */
-export function createRasterEmitter(publicDirectory:string, publicBase:string) {
-  return async (filename:string, pipeline:Sharp, encoding:WebpOptions = { lossless: true, effort: 4 }) => {
-    const path = resolve(publicDirectory, filename);
-    const bytes = !encoding.lossless && encoding.quality === undefined
-      ? await writeLossyWebp(pipeline, path, encoding)
-      : await pipeline.webp(encoding).toBuffer();
-    if (encoding.lossless || encoding.quality !== undefined) await writeFile(path, bytes);
-    const { width, height } = await sharp(bytes).metadata();
-    if (!width || !height) throw new Error(`Raster output has no dimensions: ${filename}`);
-    return { url: `${publicBase}${filename}`, width, height, bytes: bytes.length,
-      sha256: sha256(bytes) };
-  };
+interface ObservationRaster extends RgbObservation {withheldSyntheticPixels?:number;sourceGeoreference?:unknown;}
+export interface LambertAttenuationParameters {
+  frameSize: number; columns: number; frameCount: number; terminatorWidth: number;
+  directionalAmbient: number; fullPhaseAmbient: number; fullPhaseDiffuse: number; maximumOpacity: number;
 }
+interface SolidMaterialConfig {
+  namespace: string; publicBase: string; raster: SolidRasterGrid;
+  lighting: LambertAttenuationParameters & {logicalSize: number};
+}
+export interface SolidRasterGrid {width:number;height:number;bandCount:number;gutter:number;poleSize:number;}
+export interface TextureGridLens {textureScale?:number;monochromeBase?:string;previewGrid?:{width:number;height:number};surfaceSampling?:unknown;format?:string;}
 
 // Terminal display encoding only, in the lossy lane (no quality: see createRasterEmitter). Source maps stay lossless for
 // pole sampling.

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { lensTextureGrid } from './solid-raster.mts';
+import { createProjectiveSurfaceRasterLayout } from '../../../src/platform/projective-surface-raster.mts';
 const test = sourceTest();
-import {lensTextureGrid} from './solid-raster.mts';
-import {createProjectiveSurfaceRasterLayout} from '../../../src/platform/projective-surface-raster.mts';
 
 test('reduced science textures preserve every normalized band and gutter address',()=>{
   for(const raster of [{width:4096,height:2048,gutter:32,poleSize:512,bandCount:16},{width:12800,height:6400,gutter:64,poleSize:1024,bandCount:16}]){

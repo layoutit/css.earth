@@ -10,8 +10,9 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
-import { createRasterEmitter } from './terrestrial-layers/solid-raster.mts';
-import { loadRadialTerrain, prepareRadialMaterials } from './terrestrial-layers/radial-terrain.mts';
+import { createRasterEmitter } from './terrestrial-layers/raster-output.mts';
+import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
+import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './terrestrial-layers/shape-material.mts';
 import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';
 import { refreshObservationControls } from './refresh-surface-observations.mts';

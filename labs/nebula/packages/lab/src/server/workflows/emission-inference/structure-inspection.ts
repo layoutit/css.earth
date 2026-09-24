@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import { analyzeStructureMap, colorStructureLayer, structureLayers } from '@cssearth/nebula-reconstruction/evidence/structure-map';
 import { createSupportAtlases } from '@cssearth/nebula-reconstruction/evidence/support-atlas';
 import type { WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
-import { composeAffine, type Affine } from '@cssearth/nebula-reconstruction/registration/stellar';
+import { composeAffine, type Affine } from '@cssearth/nebula-reconstruction/registration/affine';
 
 export function workingRasterToFrame(nativeToFrame: Affine, nativeWidth: number, nativeHeight: number, width: number, height: number): Affine {
   if (![nativeWidth, nativeHeight, width, height].every(n => Number.isInteger(n) && n > 0)) throw new TypeError('Invalid registered raster dimensions.');

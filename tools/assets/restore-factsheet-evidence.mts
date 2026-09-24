@@ -3,7 +3,9 @@ import { lstat, readFile, realpath } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { sourcePath } from '../../src/platform/source-catalog.mts';
 import { hasErrorCode } from '../sources/source-values.mts';
-import { assertSourceFile, containedPath, parseAcquisitionPlan, parseSourceManifest, restoreMissingSources } from '#preparation/operations';
+import { assertSourceFile, containedPath, parseSourceManifest } from '#preparation/source-files';
+import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
+import { restoreMissingSources } from '#preparation/operations';
 export type FactsheetSourceTransport = NonNullable<Parameters<typeof restoreMissingSources>[0]['transport']>;
 
 /** Restore one missing cited document, without acquiring the body's other source assets. */

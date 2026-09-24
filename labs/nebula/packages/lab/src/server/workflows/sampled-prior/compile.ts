@@ -1,11 +1,11 @@
 import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
-import { mkdir, readFile, writeFile, rename, readdir, realpath } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename, realpath } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute } from 'node:path';
 import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
 import { COMPILER_VERSION, type CompilerRequest, type CompilerRecipe } from '../../../features/compiler/model.ts';
 import type { CompilerProgress, CompilerStep } from '../compiler/prerequisites.ts';
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
-import { validateCompilerResult } from '../compiler/compile.ts';
+import { validateCompilerResult } from '../compiler/bank-validation.ts';
 import { loadCompilerImages, compilerImagePanel } from '../compiler/images.ts';
 import { bakeCompiler, type CompilerStarInput } from '../compiler/bake.ts';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';

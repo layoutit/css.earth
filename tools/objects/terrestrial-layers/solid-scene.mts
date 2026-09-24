@@ -1,24 +1,15 @@
-import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contract.mts';
-import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
-import type {PreparedProjectiveTextureLeaf} from '../../../src/renderers/css/prepared-data/projective-layout.ts';
-import type {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
-import type {prepareSolidMaterial,SolidRasterGrid} from './solid-raster.mts';
-import type {combineRadialModels} from './radial-models.mts';
-import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
-import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
-import type {PreparedVariant} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
-import type {PreparedPresentationDefinition} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
-import {requireArray,requireRecord,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
-import {requireObjectControls} from '../../../site/scene/scene-contract.mts';
-export interface SolidSceneConfig {
-  rings?:unknown;namespace:string;kind?:string;publicBase:string;
-  geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera?:{framingScale?:number}};
-  raster:SolidRasterGrid & Partial<Record<'observations'|'scientific'|'observedColors'|'surfaceObservations',readonly {id:string;focus?:unknown}[]>>;
-  presentation:{defaultLens:string};
-}
-type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
-type SolidScene=ReturnType<typeof import('../../prepared/prepared-replay-source.mts').parseSolidReplayScene>;
-import {prepareScientificNavigation} from './scientific-focus.mts';
+import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
+import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
+import type { PreparedProjectiveTextureLeaf } from '../../../src/renderers/css/prepared-data/projective-layout.ts';
+import type { prepareSolidMaterial, SolidRasterGrid } from './solid-raster.mts';
+import type { combineRadialModels } from './radial-models.mts';
+import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
+import type { PreparedVariant } from '../../../src/renderers/css/rendering/prepared-presentation.ts';
+import type { PreparedPresentationDefinition } from '../../../src/renderers/css/rendering/prepared-presentation.ts';
+import { requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
+import { prepareScientificNavigation } from './scientific-focus.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BASE_TILE } from '@layoutit/polycss';
@@ -39,6 +30,14 @@ import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
 import { restoreDepthSource } from '../../prepared/prepared-depth-partitions.mts';
 import { prepareTerrestrialRings } from './rings.mts';
+export interface SolidSceneConfig {
+  rings?:unknown;namespace:string;kind?:string;publicBase:string;
+  geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera?:{framingScale?:number}};
+  raster:SolidRasterGrid & Partial<Record<'observations'|'scientific'|'observedColors'|'surfaceObservations',readonly {id:string;focus?:unknown}[]>>;
+  presentation:{defaultLens:string};
+}
+type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
+type SolidScene=ReturnType<typeof import('../../prepared/prepared-replay-source.mts').parseSolidReplayScene>;
 
 /** The terrestrial lane's default camera: the shared rule over the default lens's photograph frames. */
 export function solidCameraAngles(config: Pick<SolidSceneConfig, 'namespace' | 'raster' | 'presentation'>, surfacesReport: unknown) {

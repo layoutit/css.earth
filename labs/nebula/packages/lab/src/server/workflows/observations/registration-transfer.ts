@@ -1,7 +1,7 @@
 /** Transfer a qualified native grid without inventing stellar matches in nonstellar bands. */
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
-import { composeAffine, type Affine, type verifyRegistration } from '@cssearth/nebula-reconstruction/registration/stellar';
+import { composeAffine, type Affine } from '@cssearth/nebula-reconstruction/registration/affine';
+import type { verifyRegistration } from '@cssearth/nebula-reconstruction/registration/stellar';
 import type { ObservationSource } from '../../../features/observations/recipe.js';
 
 type DirectEvidence = ReturnType<typeof verifyRegistration>['evidence'];

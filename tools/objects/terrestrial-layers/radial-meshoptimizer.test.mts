@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { simplifyRadialTerrain } from './radial-mesh.mts';
 const test = sourceTest();
-import { simplifyRadialTerrain } from './radial-meshoptimizer.mts';
 
 const sample = (longitude: number, latitude: number) => {
   const lon = longitude * Math.PI / 180, lat = latitude * Math.PI / 180;

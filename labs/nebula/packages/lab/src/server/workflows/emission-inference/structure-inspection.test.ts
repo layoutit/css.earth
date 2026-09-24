@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createSupportAtlases } from '@cssearth/nebula-reconstruction/evidence/support-atlas';
 import { workingRasterToFrame } from './structure-inspection.ts';
-import { applyAffine, type Affine } from '@cssearth/nebula-reconstruction/registration/stellar';
+import { applyAffine, type Affine } from '@cssearth/nebula-reconstruction/registration/affine';
 import type { StructureRegion } from '@cssearth/nebula-reconstruction/evidence/wavelets';
 
 test('highlight sprites contain actual disconnected support, never filled bounding rectangles', () => {

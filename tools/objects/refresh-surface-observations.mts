@@ -8,7 +8,8 @@ import { requireRecord, requireArray, requireString } from '../sources/source-va
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
-import { loadRadialTerrain, prepareRadialMaterials } from './terrestrial-layers/radial-terrain.mts';
+import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
+import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
 import { prepareSolidRasters, prepareSolidSurfacePoles } from './terrestrial-layers/solid-raster.mts';
 import { lensBillboardColors } from './content/billboard-colors.mts';
 import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';

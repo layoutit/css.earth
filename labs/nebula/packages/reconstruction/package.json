@@ -91,7 +91,8 @@
     "./registration/regional-density-weights": "./src/registration/regional-density-weights.ts",
     "./methods/sampled/finite-region-material": "./src/methods/sampled/finite-region-material.ts",
     "./methods/inference/simulation-guided": "./src/methods/inference/simulation-guided.ts",
-    "./methods/inference/simulation-envelope": "./src/methods/inference/simulation-envelope.ts"
+    "./methods/inference/simulation-envelope": "./src/methods/inference/simulation-envelope.ts",
+    "./registration/affine": "./src/registration/affine.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"

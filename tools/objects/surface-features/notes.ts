@@ -5,7 +5,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseDbf } from './dbf.js';
-import { parseSurfaceFeaturesConfig, unzipMember } from './index.js';
+import { parseSurfaceFeaturesConfig } from './index.js';
+import { unzipMember } from './archive.js';
 import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote, type FeatureNotes } from './notes-schema.js';
 export { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract } from './notes-schema.js';
 export type { FeatureNote, FeatureNotes } from './notes-schema.js';

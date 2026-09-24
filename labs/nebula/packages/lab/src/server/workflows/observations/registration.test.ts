@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import { applyAffine, invertAffine, detectStars, publisherTransform, verifyRegistration, type Affine, type Pair, type SkyFrame } from '@cssearth/nebula-reconstruction/registration/stellar';
+import { applyAffine, invertAffine, type Affine } from '@cssearth/nebula-reconstruction/registration/affine';
+import { detectStars, publisherTransform, verifyRegistration, type Pair, type SkyFrame } from '@cssearth/nebula-reconstruction/registration/stellar';
 import { readObservationRecipe } from '../../../features/observations/recipe.js';
 import { readFile } from 'node:fs/promises';
 

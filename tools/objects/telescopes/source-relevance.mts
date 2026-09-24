@@ -5,7 +5,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import type { NativeMetadata } from './native-metadata.mts';
 import type { OutputChoice } from './outputs.mts';
 import type { ProductDescriptor } from './product-descriptor.mts';
-import { PRODUCT_KINDS } from './query.mts';
+import { PRODUCT_KINDS } from './recipe-request.mts';
 import { parseSkyTarget } from './sky/target.mts';
 import { parseRegion } from './vo/contracts.mts';
 

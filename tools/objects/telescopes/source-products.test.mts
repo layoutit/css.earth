@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
 import nodeTest from 'node:test';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { card, imageFixture } from '../../../tests/fixtures/fits/helpers.mts';
 import { parseSourceProducts, loadSourceProducts, sourceRun, SOURCE_PRODUCTS_SCHEMA, SOURCE_RUN_FILES } from './source-products.mts';
 import { qualifySourceProduct, inspectFits, assertPdsDependencies } from './qualify-source.mts';
-import { queryCapabilities, selectObservation, type CapabilityRequest, type QueryInputs } from './query.mts';
+import { queryCapabilities, selectObservation, type QueryInputs } from './query.mts';
+import type { CapabilityRequest } from './recipe-request.mts';
 import { assessRequest } from './request-satisfaction.mts';
+const test = sourceTest();
 const request: CapabilityRequest = { target: 'test-body', wavelengthMicrometres: [1, 2], time: { any: true }, kind: 'image', result: 'telescope-product', angularResolutionArcsec: 1 };
 nodeTest('every source-qualification implementation input exists before a source is selected', async () => {
   for (const path of SOURCE_RUN_FILES) assert.ok((await readFile(new URL(path, import.meta.url))).length > 0, path);

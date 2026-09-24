@@ -1,4 +1,5 @@
-import type { Affine, SkyFrame, SkyRaster } from '@cssearth/nebula-reconstruction/registration/stellar';
+import type { Affine } from '@cssearth/nebula-reconstruction/registration/affine';
+import type { SkyFrame, SkyRaster } from '@cssearth/nebula-reconstruction/registration/stellar';
 import type { NativeRemoval } from '../../server/workflows/emission-inference/native-source.ts';
 import { validateImageWcs, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
 import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';

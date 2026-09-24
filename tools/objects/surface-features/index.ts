@@ -1,6 +1,9 @@
+import { PREPARED_SURFACE_FEATURES_SCHEMA, featureDiscoveryZoomShare, normalizeSearchText } from './catalog.js';
+import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan, Vector3 } from './catalog.js';
+import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand } from './geometry.js';
+import { unzipMember } from './archive.js';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { surfaceFeatureBankIndex } from '../../../src/platform/surface-feature-banks.mts';
-import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { extname, relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.js';
@@ -8,26 +11,15 @@ import { parseFeatureNotes, type FeatureNotes } from './notes-schema.js';
 import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig } from './natural-earth.js';
 import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.js';
 import { prepareLandmarks } from './landmarks.js';
+import { parseShpPolylines } from './shp.js';
 /** Spacecraft sites are discovered past the whole-body view (which sits near 0.43 of the zoom range), once the camera closes in. */
 const SITE_ZOOM_SHARE = 0.6;
-import { parseShpPolylines } from './shp.js';
 
 /** Prepared nomenclature catalogue: IAU/USGS Gazetteer centre points anchored to the body mesh.
  * Preparation resolves every surface anchor, priority, label kind and tooltip text; runtime
  * only projects the prepared anchors through the current camera. */
 export const SURFACE_FEATURES_CONFIG_SCHEMA = 'cssearth-surface-features@1';
 export const SURFACE_FEATURES_SOURCE_SCHEMA = 'cssearth-surface-features-source@1';
-export const PREPARED_SURFACE_FEATURES_SCHEMA = 'cssearth-prepared-surface-features@1';
-
-/** Sparse catalogues must not spread a handful of names across the entire zoom range.
- * A floor of 200 keeps roughly ten unnoted names eligible at whole-body framing
- * (share 0.43). Denser catalogues retain their existing progression. Actual label
- * admission still checks projected feature size, facing, overlap and the label cap. */
-export function featureDiscoveryZoomShare(rank: number, count: number, noted = false): number {
-  return Math.min(1, Math.log10(1 + (noted ? rank / 4 : rank)) / Math.log10(Math.max(200, count)));
-}
-
-export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
 /** Gazetteer descriptor-term codes and the label kind their geometry suggests: compact landforms get a point
  * marker and rim circle, elongated ones a linear label, extended terrains a region label. Recipes may override. */
 export const DEFAULT_TYPE_KINDS: Readonly<Record<string, SurfaceFeatureKind>> = Object.freeze({
@@ -36,21 +28,12 @@ export const DEFAULT_TYPE_KINDS: Readonly<Record<string, SurfaceFeatureKind>> = 
   MN: 'region', CH: 'region', LU: 'region', AR: 'linear', CA: 'linear', CM: 'linear', DO: 'linear', FE: 'linear', FM: 'linear', FO: 'linear', FT: 'linear', LI: 'linear', RI: 'linear', RU: 'linear', SC: 'linear', SE: 'linear', SU: 'linear', VA: 'linear', VI: 'linear',
   CO: 'region', CL: 'region', LO: 'region', CR: 'region', FL: 'region', IN: 'region', LA: 'region', LB: 'region', LG: 'region', LC: 'region', LN: 'region', MR: 'region', ME: 'region', MO: 'region', OC: 'region', PA: 'region', PL: 'region', PM: 'region', PR: 'region', RE: 'region', SI: 'region', TA: 'region', TE: 'region', UN: 'region', VS: 'region',
 });
-export type SurfaceFeatureOutline =
-  | { readonly kind: 'circle'; readonly center: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number] }
-  | { readonly kind: 'box'; readonly points: readonly (readonly [number, number, number])[] }
-  /** Mapped structural traces associated with the feature: open polylines on the sphere, in mesh units. */
-  | { readonly kind: 'trace'; readonly paths: readonly (readonly (readonly [number, number, number])[])[] };
 export interface SurfaceFeatureTracesConfig {
   readonly directory: string; readonly archive: string;
   readonly members: { readonly shapes: string; readonly attributes: string; readonly projection: string };
   readonly radiusM: number; readonly classField: string; readonly classes: Readonly<Record<string, string>>;
   readonly paddingDeg: number; readonly insideFraction: number; readonly maximumTraces: number; readonly minimumLengthShare: number; readonly maximumVertices: number;
 }
-/** Where a surface map places latitude and longitude on its mesh node: the prime, east and north axes, with longitude counted
- * east from the map's left edge (texture u = 0). The surface map is the only owner of both. */
-export interface SurfaceFeatureAxes { readonly prime: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number]; readonly mapLeftEdgeLongitudeDeg: number; }
-export interface SurfaceFeaturePolicy { readonly minimumZoomShare: number; readonly minimumDiameterPixels: number; readonly alwaysVisibleCount: number; readonly maximumVisible: number; readonly limbCosine: number; }
 export interface SurfaceFeaturesConfig {
   readonly schema: typeof SURFACE_FEATURES_CONFIG_SCHEMA;
   /** The Gazetteer archive; absent for a body without nomenclature that labels only spacecraft sites. */
@@ -85,59 +68,6 @@ export interface SurfaceFeaturesSourceManifest {
   readonly source: string; readonly snapshotDate: string; readonly sourcePage: string; readonly license: string; readonly licenseEvidence: string;
   readonly qualification: string;
   readonly inputs: readonly { readonly path: string; readonly origin: string; readonly bytes: number }[];
-}
-export interface PreparedSurfaceFeature {
-  readonly id: string; readonly name: string; readonly kind: SurfaceFeatureKind; readonly type: string; readonly code: string;
-  readonly diameterKm: number; readonly longitudeDeg: number; readonly latitudeDeg: number;
-  readonly anchorUnits: readonly [number, number, number]; readonly normal: readonly [number, number, number]; readonly radiusUnits: number;
-  /** Circular features trace their published diameter as a small circle of the sphere, rim(φ) = center + east·cos φ + north·sin φ;
-   * other features trace the Gazetteer's published latitude/longitude extent as a closed polygon on the sphere. Mesh units. */
-  readonly outline: SurfaceFeatureOutline;
-  readonly searchNames: readonly string[]; readonly searchContext: string;
-  readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
-  /** Who published the name or site and when, for the caption's credit line. */
-  readonly credit: string;
-  /** A source-backed note for the caption (a Wikipedia lead summary, or the quoted source sentence of a site) with its page and credit. */
-  readonly note?: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string };
-  /** The facilities-catalogue id of the spacecraft at a site, when catalogued. */
-  readonly facilityId?: string;
-  /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
-  readonly minimumZoomShare: number;
-  /** Found by search and labelled when selected, never by default. */
-  readonly searchOnly?: true;
-}
-export interface PreparedSurfaceFeatureCatalog {
-  readonly schema: typeof PREPARED_SURFACE_FEATURES_SCHEMA; readonly objectId: string;
-  readonly source: string; readonly snapshotDate: string; readonly sourcePage: string; readonly license: string; readonly qualification: string;
-  readonly datum: { readonly name: string; readonly radiusM: number; readonly authoredRadiusM: number; readonly longitude: string };
-  readonly excluded: Readonly<Record<string, { readonly count: number; readonly reason: string }>>;
-  /** Rows left out for a reason other than an excluded type: not adopted, no label kind, or no diameter. */
-  readonly skipped: Readonly<Record<string, { readonly count: number; readonly reason: string }>>;
-  /** Type codes outside the kind table, labelled as regions, and features whose empty extent fell back to a circle. */
-  /** `unsized` counts labelled names the Gazetteer publishes without a diameter, by type code. */
-  readonly assumed: { readonly regionTypes: Readonly<Record<string, number>>; readonly extentFallbacks: number; readonly meshMisses: number; readonly unsized: Readonly<Record<string, number>> };
-  /** Mapped-structure traces associated with named features, when a trace archive is declared. */
-  readonly traces?: TraceSummary;
-  /** Rows the export repeats for one feature identity; the first row's centre is kept. */
-  readonly duplicates: { readonly features: number; readonly rows: number; readonly maxSeparationDeg: number; readonly maxDiameterDifferenceKm: number };
-  /** Present when the recipe pins a notes document: its provenance and how many features carry a note. */
-  readonly notes?: { readonly source: string; readonly retrievedAt: string; readonly license: string; readonly licenseUrl: string; readonly count: number };
-  /** Present when the recipe pins a sites document: its provenance and how many sites and traverses were placed. */
-  readonly sites?: { readonly source: string; readonly retrievedAt: string; readonly count: number };
-  readonly landmarks?: { readonly source: string; readonly frame: string; readonly evidence: Awaited<ReturnType<typeof prepareLandmarks>>['evidence'] };
-  readonly features: readonly PreparedSurfaceFeature[];
-}
-export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
-export interface SurfaceFeatureSelectionPlan { readonly count: number; readonly banks: readonly SurfaceFeatureCatalogDescriptor[]; }
-export interface PreparedSurfaceFeaturePlan {
-  readonly catalog: SurfaceFeatureCatalogDescriptor; readonly selection?: SurfaceFeatureSelectionPlan; readonly target: number; readonly lensIds: readonly string[];
-  /** Mesh radius in raw prepared scene coordinates (before the camera's scene scale). */
-  readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
-  /** Shape-model bodies: the radius band of the picking mesh, inside which every anchor and outline point lies. */
-  readonly surfaceRadiusUnits?: { readonly minimum: number; readonly maximum: number };
-  /** Ellipsoidal bodies: reference semi-axes and polar axis in mesh units, and the normalised-radius band (1 = on the ellipsoid) every prepared point lies within. */
-  readonly surfaceEllipsoidUnits?: { readonly equatorial: number; readonly polar: number; readonly north: Vector3; readonly minimumShare: number; readonly maximumShare: number };
-  readonly outline: { readonly pieces: number };
 }
 
 type Input = Record<string, unknown>;
@@ -254,58 +184,6 @@ export function parseSurfaceAxes(value: unknown): SurfaceFeatureAxes {
   return Object.freeze(axes);
 }
 
-/** Same map convention as the shell minimap: texture u wraps east from the map's left edge. */
-export function surfaceDirection(longitudeDeg: number, latitudeDeg: number, axes: SurfaceFeatureAxes, mapLeftEdgeLongitudeDeg: number): readonly [number, number, number] {
-  const u = (((longitudeDeg - mapLeftEdgeLongitudeDeg) % 360) + 360) % 360 / 360;
-  const longitude = u * 2 * Math.PI, latitude = latitudeDeg * Math.PI / 180;
-  const component = (i: number) => Math.cos(latitude) * (axes.prime[i]! * Math.cos(longitude) + axes.east[i]! * Math.sin(longitude)) + axes.north[i]! * Math.sin(latitude);
-  return [component(0), component(1), component(2)];
-}
-
-const round = (value: number, digits = 6) => Number(value.toFixed(digits));
-/** Same folding as the shell's destination search: lower case, no diacritics, single spaces. */
-export function normalizeSearchText(value: string): string {
-  return value.normalize('NFD').replace(/[\u0300-\u036f]/gu, '').toLocaleLowerCase('en').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
-}
-type Vector3 = readonly [number, number, number];
-const cross = (a: Vector3, b: Vector3): Vector3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-const scaled = (v: Vector3, s: number, digits = 3): Vector3 => [round(v[0] * s, digits), round(v[1] * s, digits), round(v[2] * s, digits)];
-/** Prepared boundary circle: centre pulled towards the body centre by cos θ, spanned by two tangents scaled to R·sin θ. */
-export function rimVectors(direction: Vector3, north: Vector3, meshRadius: number, radiusUnits: number): Extract<SurfaceFeatureOutline, { kind: 'circle' }> {
-  const theta = Math.min(Math.PI / 2, radiusUnits / meshRadius);
-  let east = cross(north, direction);
-  let length = Math.hypot(...east);
-  if (length < 1e-6) { east = cross([1, 0, 0], direction); length = Math.hypot(...east); }
-  east = [east[0] / length, east[1] / length, east[2] / length];
-  const tangentNorth = cross(direction, east);
-  const span = meshRadius * Math.sin(theta);
-  return { kind: 'circle', center: scaled(direction, meshRadius * Math.cos(theta)), east: scaled(east, span), north: scaled(tangentNorth, span) };
-}
-
-/** The Gazetteer extent box as a closed polygon: pieces/4 samples along each latitude- or longitude-parallel edge. */
-export function extentPolygon(box: { minLon: number; maxLon: number; minLat: number; maxLat: number }, axes: SurfaceFeatureAxes, mapLeftEdgeLongitudeDeg: number, meshRadius: number, pieces: number): Extract<SurfaceFeatureOutline, { kind: 'box' }> {
-  const perEdge = Math.max(1, Math.floor(pieces / 4)), points: Vector3[] = [];
-  const corners: readonly [number, number][] = [[box.minLon, box.minLat], [box.maxLon, box.minLat], [box.maxLon, box.maxLat], [box.minLon, box.maxLat]];
-  for (let edge = 0; edge < 4; edge++) {
-    const [lon0, lat0] = corners[edge]!, [lon1, lat1] = corners[(edge + 1) % 4]!;
-    for (let step = 0; step < perEdge; step++) {
-      const t = step / perEdge;
-      points.push(scaled(surfaceDirection(lon0 + (lon1 - lon0) * t, lat0 + (lat1 - lat0) * t, axes, mapLeftEdgeLongitudeDeg), meshRadius));
-    }
-  }
-  return { kind: 'box', points };
-}
-
-/** Gazetteer extents may wrap the meridian or use negative longitudes; keep the box centred near its feature. */
-export function normalizeExtent(row: { minLon: number; maxLon: number; minLat: number; maxLat: number }, centerLon: number) {
-  let { minLon, maxLon } = row;
-  if (maxLon < minLon) maxLon += 360;
-  const mid = (minLon + maxLon) / 2, shift = Math.round((centerLon - mid) / 360) * 360;
-  minLon += shift; maxLon += shift;
-  if (!(maxLon - minLon <= 360) || row.maxLat < row.minLat) throw new TypeError('Gazetteer extent is inconsistent.');
-  return { minLon, maxLon, minLat: row.minLat, maxLat: row.maxLat };
-}
-
 export interface SurfaceFeaturePreparationContext {
   readonly objectId: string; readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string;
   readonly config: unknown; readonly maxEntries: number; readonly radiusKm: number; readonly meshRadiusUnits: number;
@@ -317,61 +195,6 @@ export interface SurfaceFeaturePreparationContext {
   readonly hitMesh?: { readonly target: number; readonly triangles: readonly (readonly (readonly number[])[])[] };
   /** An ellipsoidal body: map directions are cast onto its rendered surface instead of the reference sphere (ellipsoid.ts). */
   readonly surface?: { readonly onSurface: (direction: Vector3) => Vector3; readonly plan: () => NonNullable<PreparedSurfaceFeaturePlan['surfaceEllipsoidUnits']> };
-}
-
-/** Farthest intersection of the ray from the mesh origin along `direction` with the triangle list (Möller–Trumbore), or null when it misses. */
-export function projectRadial(triangles: readonly (readonly (readonly number[])[])[], direction: Vector3): number | null {
-  let best: number | null = null;
-  for (const [a, b, c] of triangles) {
-    const e1 = [b![0]! - a![0]!, b![1]! - a![1]!, b![2]! - a![2]!], e2 = [c![0]! - a![0]!, c![1]! - a![1]!, c![2]! - a![2]!];
-    const p = [direction[1] * e2[2]! - direction[2] * e2[1]!, direction[2] * e2[0]! - direction[0] * e2[2]!, direction[0] * e2[1]! - direction[1] * e2[0]!];
-    const det = e1[0]! * p[0]! + e1[1]! * p[1]! + e1[2]! * p[2]!;
-    if (Math.abs(det) < 1e-12) continue;
-    const inv = 1 / det, t = [-a![0]!, -a![1]!, -a![2]!];
-    const u = (t[0]! * p[0]! + t[1]! * p[1]! + t[2]! * p[2]!) * inv;
-    if (u < 0 || u > 1) continue;
-    const q = [t[1]! * e1[2]! - t[2]! * e1[1]!, t[2]! * e1[0]! - t[0]! * e1[2]!, t[0]! * e1[1]! - t[1]! * e1[0]!];
-    const v = (direction[0] * q[0]! + direction[1] * q[1]! + direction[2] * q[2]!) * inv;
-    if (v < 0 || u + v > 1) continue;
-    const distance = (e2[0]! * q[0]! + e2[1]! * q[1]! + e2[2]! * q[2]!) * inv;
-    if (distance > 0 && (best === null || distance > best)) best = distance;
-  }
-  return best;
-}
-
-export function unzipMember(archive: string, member: string): Uint8Array {
-  return execFileSync('unzip', ['-p', archive, member], { maxBuffer: 64 * 1024 * 1024 });
-}
-
-/** The radius band every cast point can occupy: the farthest vertex and the nearest point of any face (a flat face sags below its vertices). */
-export function meshRadiusBand(triangles: readonly (readonly (readonly number[])[])[]): { minimum: number; maximum: number } {
-  let minimum = Number.POSITIVE_INFINITY, maximum = 0;
-  for (const [a, b, c] of triangles) {
-    for (const point of [a!, b!, c!]) maximum = Math.max(maximum, Math.hypot(point[0]!, point[1]!, point[2]!));
-    minimum = Math.min(minimum, originToTriangle(a!, b!, c!));
-  }
-  if (!(minimum > 0) || !(maximum >= minimum)) throw new TypeError('Surface hit mesh has no positive radius band.');
-  return { minimum: round(minimum, 3), maximum: round(maximum, 3) };
-}
-/** Distance from the origin to the closest point of triangle abc (Ericson, Real-Time Collision Detection 5.1.5). */
-function originToTriangle(a: readonly number[], b: readonly number[], c: readonly number[]): number {
-  const sub = (p: readonly number[], q: readonly number[]) => [p[0]! - q[0]!, p[1]! - q[1]!, p[2]! - q[2]!];
-  const dot = (p: readonly number[], q: readonly number[]) => p[0]! * q[0]! + p[1]! * q[1]! + p[2]! * q[2]!;
-  const ab = sub(b, a), ac = sub(c, a), ap = [-a[0]!, -a[1]!, -a[2]!];
-  const d1 = dot(ab, ap), d2 = dot(ac, ap);
-  if (d1 <= 0 && d2 <= 0) return Math.hypot(...a);
-  const bp = [-b[0]!, -b[1]!, -b[2]!], d3 = dot(ab, bp), d4 = dot(ac, bp);
-  if (d3 >= 0 && d4 <= d3) return Math.hypot(...b);
-  const vc = d1 * d4 - d3 * d2;
-  if (vc <= 0 && d1 >= 0 && d3 <= 0) { const v = d1 / (d1 - d3); return Math.hypot(a[0]! + v * ab[0]!, a[1]! + v * ab[1]!, a[2]! + v * ab[2]!); }
-  const cp = [-c[0]!, -c[1]!, -c[2]!], d5 = dot(ab, cp), d6 = dot(ac, cp);
-  if (d6 >= 0 && d5 <= d6) return Math.hypot(...c);
-  const vb = d5 * d2 - d1 * d6;
-  if (vb <= 0 && d2 >= 0 && d6 <= 0) { const w = d2 / (d2 - d6); return Math.hypot(a[0]! + w * ac[0]!, a[1]! + w * ac[1]!, a[2]! + w * ac[2]!); }
-  const va = d3 * d6 - d5 * d4;
-  if (va <= 0 && d4 - d3 >= 0 && d5 - d6 >= 0) { const w = (d4 - d3) / ((d4 - d3) + (d5 - d6)); return Math.hypot(b[0]! + w * (c[0]! - b[0]!), b[1]! + w * (c[1]! - b[1]!), b[2]! + w * (c[2]! - b[2]!)); }
-  const denominator = 1 / (va + vb + vc), v = vb * denominator, w = vc * denominator;
-  return Math.hypot(a[0]! + ab[0]! * v + ac[0]! * w, a[1]! + ab[1]! * v + ac[1]! * w, a[2]! + ab[2]! * v + ac[2]! * w);
 }
 /** A shape-model body anchors on the node its picking mesh names; that node must still carry the configured class. */
 function hitTarget(context: SurfaceFeaturePreparationContext, target: SurfaceFeaturesConfig['target']): number {
@@ -396,7 +219,7 @@ export function nodeIndex(tree: SurfaceFeaturePreparationContext['tree'], { clas
 }
 
 interface LoadedTrace { readonly className: string; readonly lengthM: number; readonly parts: readonly (readonly (readonly [number, number])[])[]; }
-interface TraceSummary { readonly source: string; readonly sourcePage: string; readonly license: string; readonly snapshotDate: string; readonly traces: number; readonly matched: number; readonly byCode: Readonly<Record<string, number>>; readonly unmatched: readonly string[]; readonly maximumVertices: number; }
+
 
 /** Read the pinned tectonic archive: Plate Carrée metres on the declared sphere become east longitude and latitude. */
 async function loadTraces(sourceDirectory: string, config: SurfaceFeatureTracesConfig): Promise<{ manifest: SurfaceFeaturesSourceManifest; traces: readonly LoadedTrace[] }> {

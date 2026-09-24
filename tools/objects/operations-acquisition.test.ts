@@ -1,15 +1,15 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, readFile, writeFile, rm, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
 import { executeAcquisition, parseAcquisitionPlan } from './operations-acquisition.js';
-import { acquirePinnedDownloads, verifySources, type SourceManifest } from './operations.js';
+import { acquirePinnedDownloads, verifySources, type SourceManifest } from './source-files.js';
 import { gzipSync } from 'node:zlib';
 import { convertMappedComposition, parseMappedCompositionRecipe } from './acquisition/mapped-composition.mts';
+const test = sourceTest();
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const rawSource = (_bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img'});

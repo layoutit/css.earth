@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../sources/source-values.mts';
-import { shadeRadialFaces } from './terrestrial-layers/radial-terrain.mts';
+import { shadeRadialFaces } from './terrestrial-layers/radial-mesh.mts';
 import { parseNativePhotographicSampling, prepareNativePhotographicAtlas, type PhotographicAtlas } from './terrestrial-layers/native-photograph.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 

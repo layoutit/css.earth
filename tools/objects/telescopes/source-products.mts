@@ -1,13 +1,14 @@
+import { inside } from './source-transfer.mts';
 /** Package-owned observations enter the same query as archive holdings. Pins stay in the existing source manifest. */
 import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 import { readFile } from 'node:fs/promises';
-import { resolve, relative, isAbsolute } from 'node:path';
+import { resolve, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import { fileSize, readProductRecord, sameRun, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
-import type { ProductKind } from './query.mts';
+import type { ProductKind } from './recipe-request.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
 import { verifyCalibrationDependencies, type CalibrationDependency } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
@@ -31,11 +32,6 @@ export interface SourceProduct {
 export interface LoadedSourceProduct extends SourceProduct { readonly qualified: boolean; readonly receipt: string; readonly receiptProblem?: string; readonly facts?: ProductFacts }
 const HEX = /^[a-f0-9]{64}$/u;
 const SAFE = /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/u;
-export function inside(root: string, path: string): string {
-  const file = resolve(root, path), rel = relative(root, file);
-  if (!rel || isAbsolute(path) || rel === '..' || rel.startsWith('../')) throw new TypeError(`Source path escapes its package: ${path}`);
-  return file;
-}
 export function safeId(value: unknown, label: string): string {
   const id = requireString(value, label); if (!SAFE.test(id)) throw new TypeError(`${label} must be a safe identifier.`); return id;
 }
@@ -106,7 +102,7 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
 }
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
 /** Authored implementation inputs hashed into every source-qualification receipt. */
-export const SOURCE_RUN_FILES = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits/fits.mts', '../../fits/fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'] as const;
+export const SOURCE_RUN_FILES = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../source-files.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits/fits.mts', '../../fits/fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'] as const;
 export async function sourceRun(root: string, product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
   assertPinnedLabel(product);
   const digest = createHash('sha256');
@@ -181,11 +177,4 @@ export function sourceQualifiedObservations(products: readonly LoadedSourceProdu
   return products.flatMap(product => product.qualified && product.facts ? [{ target: product.target, telescope: product.telescope, mode: product.mode,
     observation: product.id, program: product.id, product: product.files.find(file => file.role === 'science')!.path,
     receipt: product.receipt, productRecord: product.receipt, outputRoot: '.', facts: product.facts }] : []);
-}
-
-/** The object id and package-relative path that address a source file's mirror copy. */
-export function sourceCacheAddress(file: Pick<SourceFile, 'path'>): [string, string] {
-  const match = /^src\/objects\/([a-z0-9-]+)\/source\/(.+)$/u.exec(file.path);
-  if (!match) throw new TypeError(`${file.path} is not an object source path.`);
-  return [match[1]!, match[2]!];
 }

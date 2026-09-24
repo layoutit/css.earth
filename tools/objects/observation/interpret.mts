@@ -14,7 +14,7 @@ import { createSourceManifest } from '../../../src/platform/source-manifest.mts'
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
-import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-terrain.mts';
+import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-mesh.mts';
 import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
 import { skyDisplayRaster } from '../../fits/fits-sky.mts';

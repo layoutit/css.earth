@@ -1,7 +1,7 @@
-import type {RadialSimplification} from './radial-meshoptimizer.mts';
-import type {Decoder} from './source-records.mts';
-import {requireRecord} from '../../sources/source-values.mts';
-import {shape,number,text,optional,boolean} from './source-records.mts';
+import type { RadialSimplification } from './radial-mesh.mts';
+import type { Decoder } from './source-records.mts';
+import { requireRecord } from '../../sources/source-values.mts';
+import { shape, number, text, optional, boolean } from './source-records.mts';
 
 export const parseRadialSimplification:Decoder<RadialSimplification> = shape({method:optional(text),targetFaces:number,maximumErrorMeters:number,regularize:optional(boolean),prune:optional(boolean)});
 export const parseRadialSource = shape({format:optional(text),path:text,grid:requireRecord,faceBudget:number,texelsPerFace:number,
