@@ -1,6 +1,6 @@
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
-import type { NavigationContentLoader, createNavigationContent } from '../navigation/navigation-content.mts';
+import type { createNavigationContent } from '../navigation/navigation-content.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectEntry } from '../object-schema.mts';
 import type { ShellNavigationTransition } from '../object-shell-types.mts';
@@ -81,7 +81,7 @@ export async function focusExistingScene({ session, request, selectionTransition
 
 /** Content, factory and flight prepare concurrently, with resources still owned by the request. */
 export function prepareSceneReplacement({ fromId, source, object, request, navigation, requests, loadObject,
-  loadContent, contentTransport, reducedMotion, getWorld }: {
+  contentTransport, reducedMotion, getWorld }: {
   fromId: string;
   source: SceneSession | null;
   object: ObjectEntry;
@@ -89,18 +89,17 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   navigation: Navigation;
   requests: NavigationLifecycle;
   loadObject(id: string, descriptor?: ObjectDescriptor, signal?: AbortSignal): Promise<SceneFactory>;
-  loadContent: NavigationContentLoader | null;
-  contentTransport: ReturnType<typeof createNavigationContent> | null;
+  contentTransport: ReturnType<typeof createNavigationContent>;
   reducedMotion: boolean;
   getWorld(): WorldContextMount | null;
 }) {
-  const contentTask = (loadContent ?? contentTransport!.load)(object, { signal: request.signal })
+  const contentTask = contentTransport.load(object, { signal: request.signal })
     .then(content => {
       request.own(() => content.dispose?.());
       request.timing.mark('content-ready'); return content;
     });
-  const descriptorTask = contentTransport?.descriptor(object, { signal: request.signal });
-  const factoryTask = (descriptorTask ? descriptorTask.then(descriptor => loadObject(object.id, descriptor, request.signal)) : loadObject(object.id, undefined, request.signal))
+  const factoryTask = contentTransport.descriptor(object, { signal: request.signal })
+    .then(descriptor => loadObject(object.id, descriptor, request.signal))
     .then(factory => { request.timing.mark('factory-ready'); return factory; });
   // The registry already owns the physical frames. Start the camera while
   // the destination factory, content and texture bank load independently.
