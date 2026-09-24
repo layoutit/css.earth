@@ -3,5 +3,3 @@
 Photograph: reconstructed in this repository with SQUEEZE 3.0 (Fabien Baron, Georgia State University; GPL-3.0; commit 4d34e877) from calibrated VLT/MATISSE interferometric data of 8 and 19 February 2020, ESO programme 0104.D-0300, distributed by the JMMC Optical interferometry DataBase (OiDB). The observations and their published reconstruction are Drevon, Millour, Cruzalèbes et al., "Images of Betelgeuse with VLTI/MATISSE across the Great Dimming", MNRAS Letters 527, L88 (2024), doi:10.1093/mnrasl/slad138. The image here is our own reconstruction from their public data, not their figure; it is relative infrared intensity, not colour, temperature or albedo. Based on data obtained from the ESO Science Archive Facility.
 
 Placement: SIMBAD (CDS, Strasbourg) position, proper motion and parallax from van Leeuwen, A&A 474, 653 (2007); radial velocity from Famaey et al., A&A 430, 165 (2005). Distance and radius: Joyce et al., ApJ 902, 63 (2020). Rotation axis: Kervella et al., A&A 609, A67 (2018), ALMA.
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

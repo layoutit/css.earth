@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { parsePreparedPanelContent, parsePanelControls } from '../prepared-panel-content.mts';
 
-type PanelContentInput = { schema: string; title: { baseline: unknown }; facts: { value: unknown }[] };
+type PanelContentInput = { schema: string; title: { label: unknown }; facts: { value: unknown }[] };
 type PanelControlsInput = { lenses: { controls: Record<string, unknown>[] } };
 const read = async (id: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/${file}.json`, import.meta.url), 'utf8'));
 
@@ -23,7 +23,7 @@ test('unknown panel values are rejected before they can claim rendered field typ
   const rawContent = await read('earth', 'content');
   parsePreparedPanelContent(rawContent);
   const content = rawContent as PanelContentInput;
-  const changes: readonly ((value: PanelContentInput) => void)[] = [value => { value.title.baseline = 'bad'; }, value => { const fact = value.facts[0]; assert.ok(fact); fact.value = {}; }, value => { value.schema = 'unsupported'; }];
+  const changes: readonly ((value: PanelContentInput) => void)[] = [value => { value.title.label = 7; }, value => { const fact = value.facts[0]; assert.ok(fact); fact.value = {}; }, value => { value.schema = 'unsupported'; }];
   for (const change of changes) {
     const invalid = structuredClone(content); change(invalid);
     assert.throws(() => parsePreparedPanelContent(invalid), TypeError);

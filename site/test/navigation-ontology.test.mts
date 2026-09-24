@@ -11,7 +11,7 @@ import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/ca
 import { parseNavigationDistance, distanceDescription } from '../navigation/navigation-distance.mts';
 import { atlasTree, readObjects, type TreeNode } from '../../atlas/src/objects.mts';
 import { applicationTreeDestination } from '../navigation/navigation-tree-destination.mts';
-import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
+import { OVERVIEW_TITLES } from '../overview-titles.mts';
 import { resolve } from 'node:path';
 
 test('every prepared spatial subject and every scene has exactly one searchable destination', async () => {

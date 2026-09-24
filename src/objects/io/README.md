@@ -145,8 +145,6 @@ Pole sprite dimensions, geometry, scientific maps and lighting are unchanged.
 Canonical assets are selected once per mount, independently of DPR. Runtime only
 decodes and transports prepared assets.
 
-Inter provides prepared title outlines.
-
 Source restoration and prepared runtime installation are separate. The runtime inventory binds all assets needed by this package; installing prepared assets does not require acquiring the source GeoTIFFs.
 
 ## Preparation ownership

@@ -97,31 +97,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Prepared title outlines under the font license.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "voyager-triton-sun-vectors",
       "path": "photometry/horizons-sun.json",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447763.752269036%0A2447763.753363481%0A2447763.754474592%0A2447763.7567134807%0A2447763.7578079253%0A2447763.758919036%0A2447763.7599968025%0A2447763.7611079137%0A2447763.7621968025%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.76777458%0A2447763.7717134575%0A2447763.777269013%0A2447763.7828078903%0A2447763.7889356567%0A2447763.7944912123%0A2447763.8000300894%0A2447763.8033800893%0A2447763.806713411%0A2447763.8133800663%0A2447763.8167133997%0A2447763.820030066%0A2447763.823380055%0A2447763.826713388%0A2447763.830030055%0A2447763.8333633766%0A2447763.83669671%0A2447763.8400300434%0A2447763.8589188973%0A2447763.8622411196%0A2447763.863363342%0A2447763.864463342%0A2447763.865585564%0A2447763.866685564%0A2447763.867807775%0A2447763.868907775%0A2447763.870029997%0A2447763.871129997%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
@@ -239,31 +214,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored map frame."
-      }
-    },
-    {
-      "id": "triton-title-mark",
-      "path": "presentation/title-mark.json",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "deterministically generated Triton title path from the repository-pinned Inter font",
-      "redistribution": "generated outline under the Inter license",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
       }
     },
     {

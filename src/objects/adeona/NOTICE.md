@@ -3,5 +3,3 @@
 P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey. Original model and documentation: https://observations.lam.fr/astero/
 
 Vernazza et al. (2021), Astronomy & Astrophysics 654, A56, https://doi.org/10.1051/0004-6361/202141781. The article is CC-BY-4.0 and links the authors' public scientific model release. Retain the authors, ESO/VLT/SPHERE programme and release links with derived shape displays. `evidence/published-comparison.webp` reproduces the photograph panels of the article’s Figure B.34 with outlines drawn over them, under the article’s CC-BY-4.0 licence. The photographic surface is the survey’s own deconvolved VLT/SPHERE/ZIMPOL frames, credited to its authors and to ESO programme 199.C-0074; it carries their photographed illumination and no radiometric calibration, so it is not measured albedo or colour. Its placement reproduces the article’s Figure B.34. No photographic texture is attributed to NASA. The grid is cssEarth's missing-imagery convention.
-
-Title font: Inter Project Authors / Rasmus Andersson, SIL OFL 1.1; see source/presentation/LICENSE.INTER-OFL.

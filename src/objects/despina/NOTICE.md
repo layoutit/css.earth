@@ -6,5 +6,3 @@ Physical/orbit metadata: NASA/JPL Horizons. Observation survey: NASA/JPL Voyager
 ISS and PDS Ring-Moon Systems Node. No paper figures or photographic surface
 texels are redistributed as model appearance. Ellipsoid sampling and standard
 no-coverage material: cssEarth, MIT.
-
-Font: Inter, Rasmus Andersson, SIL OFL 1.1.

@@ -135,31 +135,6 @@
       }
     },
     {
-      "id": "presentation-title-mark-mjs",
-      "path": "presentation/title-mark.json",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
-      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "lenses-pluto-dem-lbl",
       "path": "lenses/pluto-dem.lbl",
       "origin": "https://astrogeology.usgs.gov/ckan/dataset/f1332f71-8003-4a75-a330-acce6a3bf09f/resource/70d0d3ac-6ccb-4062-9cc7-25565ef776a4/download/pluto_newhorizons_global_dem_300m_jul2017_16bit.lbl",

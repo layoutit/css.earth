@@ -5,5 +5,3 @@ Shape and spin: Ďurech & Hanuš; [DAMIT model 15015, version 2022-11-29](https:
 Physical scale: [Masiero et al. (2011), ApJ 741, 68](https://doi.org/10.1088/0004-637X/741/2/68), using the source measurement and its stated uncertainty. The thermal diameter provides an approximate display scale for the independently reconstructed shape; source authors did not produce this combined visualization. Preserve the scale and pole limitations in README.md and the active lens description.
 
 No agency, archive, author or mission endorsement is implied. Scientific publications retain their original copyright; paper pages are not runtime assets.
-
-Font: Inter Project Authors, SIL OFL 1.1 (source/presentation/LICENSE.INTER-OFL).

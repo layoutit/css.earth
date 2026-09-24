@@ -122,7 +122,6 @@ Originals are acquired from their publishers, not other objects.
 
 | Input | Source and use |
 | --- | --- |
-| Title | Pinned Inter variable font; shared title outline preparation. |
 | Physical/orbit data | Vendored `@cssearth/astronomy` JPL body data, Kepler state vectors and IAU rotation. Mean radius 469.7 km; fixed geometry epoch 2026-09-03T00:00:00 TT. |
 | Facts | [NASA Ceres facts](https://science.nasa.gov/dwarf-planets/ceres/facts/), summarized in [text.json](text.json): asteroid-belt location, Dawn observations, about nine hours per rotation, no moons. |
 

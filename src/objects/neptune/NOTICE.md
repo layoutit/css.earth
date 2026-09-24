@@ -8,8 +8,6 @@
 - Neptune facts and Planetary Spectrum Generator products: NASA.
 - Satellite tables: NASA/JPL Solar System Dynamics.
 - Ring table: NASA Planetary Data System Rings Node, SETI Institute.
-- Neptune title outline: Inter Variable 4.001 by Rasmus Andersson and the
-  Inter project, SIL Open Font License 1.1.
 
 The observation lenses are source measurements prepared into declared display
 palettes. The normal lens preserves OPAL weather detail with a prepare-time

@@ -3,14 +3,6 @@
   "operations": [
     {
       "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "presentation/InterVariable.ttf",
-      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
-    },
-    {
-      "kind": "download",
       "path": "shape/kw4b.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
       "groups": [

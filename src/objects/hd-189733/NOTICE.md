@@ -13,5 +13,3 @@ Spot-band model: I. S. Narrett, B. V. Rackham and J. de Wit, "Axisymmetric High 
 Spin axis and rotation: E. Cristo, E. Esparza Borges, N. C. Santos et al., "An ESPRESSO view of the HD 189733 system", A&A 682, A28 (2024), doi:10.1051/0004-6361/202346366.
 
 Placement: Gaia DR3 position, parallax, proper motion and radial velocity.
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

@@ -9,5 +9,3 @@ Limb darkening: A. Claret and S. Bloemen, "Gravity and limb-darkening coefficien
 Placement: Gaia DR3 position, parallax, proper motion and radial velocity. Mass: Lacour et al. (2021), A&A 654, L2.
 
 Debris disc: see the attached volume beta-pictoris-disc (JWST/NIRCam programme 4758, PI Y. Zhou; Zhou et al. 2026).
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

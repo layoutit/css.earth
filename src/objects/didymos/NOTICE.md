@@ -8,8 +8,6 @@ Physical and orbital context: NASA/JPL Horizons. The local source shape's geomet
 
 DRACO photographs: NASA/Johns Hopkins Applied Physics Laboratory/DART. Source: NASA PDS, DART calibrated images with geometric backplanes (Ernst, Daly, Barnouin, Espiritu and Waller 2023, DOI 10.26007/QAAN-F992). Retain the dataset citation, native labels and source notices. The photographic mosaic shows the encounter surface with approximate brightness normalization, not measured albedo.
 
-Inter title/font: Inter Project Authors, SIL Open Font License 1.1; `source/presentation/LICENSE.INTER-OFL`.
-
 Context brightness reference: Sunshine et al., Lunar and Planetary Science Conference 2023, NASA NTRS 20230000704. The unchanged abstract is retained as scientific documentation; its global visible geometric albedo is distinct from the grid used by the Shape view.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

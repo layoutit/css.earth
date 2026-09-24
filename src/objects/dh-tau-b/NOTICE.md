@@ -5,5 +5,3 @@ Orbit inputs: Bowler et al. (2020), AJ, doi:10.3847/1538-3881/ab5b11, with the l
 Shape: a sphere of the model radius in the shared neutral gray; no image or colour of the planet's surface exists.
 
 Placement: its star at Gaia DR3 astrometry (see that package's credits).
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

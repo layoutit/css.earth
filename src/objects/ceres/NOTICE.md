@@ -17,9 +17,6 @@ color remains labeled as false color; monochrome is not described as true color.
 Identified south-polar gaps are displayed as a neutral gray cartographic grid,
 using Pluto's shared missing-coverage treatment. The grid is not inferred terrain.
 
-Title outlines derive from Inter by Rasmus Andersson, under the SIL Open Font
-License 1.1.
-
 Elevation: DLR / Dawn Team, distributed by USGS Astrogeology, HAMO global DTM
 (2016). Retain this scientific-data credit with the derived map. The source
 record preserves the reference sphere, units, and withheld polar coverage.

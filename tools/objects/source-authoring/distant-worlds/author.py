@@ -120,7 +120,7 @@ for body in INPUTS['bodies']:
             operation = dict(kind='download',groups=['restore','refresh'],path='reference/'+ref['file'],url=ref['url'])
             acquisition['operations'] = [op for op in acquisition['operations'] if op.get('path') != operation['path']] + [operation]
     write(source/'preparation/acquisition.json',acquisition)
-    for file in ['material/neutral.png','presentation/InterVariable.ttf']:
+    for file in ['material/neutral.png']:
         target=source/file
         if not target.exists():
             available=ROOT/'src/objects/annefrank/source'/file

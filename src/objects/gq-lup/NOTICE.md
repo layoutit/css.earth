@@ -5,5 +5,3 @@ Placement: Gaia DR3 (Gaia Collaboration 2023, A&A 674, A1). This work has made u
 Radius, temperature and mass: Donati et al. (2012), MNRAS, as tabulated by González Picos et al. (2025), A&A.
 
 Colour: a Planck spectrum at the published temperature, weighted by the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0). No image of the star's surface exists.
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

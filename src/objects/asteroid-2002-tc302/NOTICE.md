@@ -6,5 +6,3 @@ Ortiz et al. (2020), combined occultation, photometry and astrometry, §3.: http
 - [outer-worlds-gomez-limon-2026.pdf](https://arxiv.org/pdf/2605.22296): Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.
 
 Published numerical facts are credited. The analytical model extraction and missing-coverage grid are cssEarth MIT work. Paper originals are reacquired through their pinned URLs; scientific figures are not copied into surface maps.
-
-Type: Inter, SIL Open Font License 1.1.

@@ -7,7 +7,6 @@ Original US mission imagery is public domain. The views are processed scientific
 presentations, not NASA endorsement or globally uniform-resolution photography.
 
 Orbits and orientation: NASA/JPL Solar System Dynamics and NAIF. Title font:
-Inter / Rasmus Andersson, SIL OFL 1.1.
 
 ## B6 sources
 

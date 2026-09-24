@@ -8,4 +8,4 @@ Surface colour: one uniform colour computed from published whole-disc photometry
 
 Telescope image: ALMA project 2022.1.01753.S (PI T. Müller), band 7 continuum, member OUS `uid://A001/X35f5/Xb21`, observed 6 to 23 July 2023 and public since 27 February 2025. Imaged by the ALMA pipeline and served by the ALMA Science Archive, whose cutout of that image is redistributed unchanged in `source/alma/`. This work makes use of the following ALMA data: ADS/JAO.ALMA#2022.1.01753.S. ALMA is a partnership of ESO (representing its member states), NSF (USA) and NINS (Japan), together with NRC (Canada), NSTC and ASIAA (Taiwan), and KASI (Republic of Korea), in cooperation with the Republic of Chile. The Joint ALMA Observatory is operated by ESO, AUI/NRAO and NAOJ. ALMA data are released under CC BY 4.0.
 
-Orbital data: vendored JPL small-body orbital elements (`packages/astronomy`). Editorial facts: NASA Science. Title: Inter, SIL Open Font License, following the shared title recipe.
+Orbital data: vendored JPL small-body orbital elements (`packages/astronomy`). Editorial facts: NASA Science.

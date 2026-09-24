@@ -146,8 +146,7 @@ approximated as TT within 2 ms, following the shared astronomy convention.
 <details>
 <summary>Credits</summary>
 
-The shared title font is Inter by Rasmus Andersson under SIL OFL 1.1. Credits
-and restoration pins remain beside the package. Source papers are cited, not
+Credits and restoration pins remain beside the package. Source papers are cited, not
 relicensed as cssEarth assets.
 
 </details>

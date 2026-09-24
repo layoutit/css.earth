@@ -6,8 +6,6 @@ The Stooke map guide and unchanged candidate JPEG are preserved as survey and im
 
 Physical/orbital data and legacy pole constants: NASA/JPL Horizons and NAIF. The observed image is processed monochrome, with source shadows and varying detail; the elevation palette is a scientific display derivative, not a photograph.
 
-Inter title outlines/font: Inter Project Authors, SIL Open Font License 1.1; see `source/presentation/LICENSE.INTER-OFL`.
-
 Calibrated Galileo SSI observation: D. L. Domingue / NASA Planetary Data System; raw detector images and bad-data tables: NASA/JPL/Galileo SSI team. Camera controls and shape: P. C. Thomas and colleagues. Galileo SSI instrument geometry: NASA/JPL NAIF. The separate I/F image lens retains observed illumination and does not portray absolute surface albedo.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

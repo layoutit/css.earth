@@ -26,8 +26,6 @@ NASA and JPL material is credited to the named missions and institutions. NASA i
 
 The atmosphere parameter values in `source/atmosphere/model.json` are adapted from the OpenSpace Team's RenderableAtmosphere tuning (MIT) and cited there; no OpenSpace file is read.
 
-Inter is redistributed under the SIL Open Font License 1.1 in `source/presentation/LICENSE.INTER-OFL`.
-
 The Earth adapter's prepared HTML, CSS, modules, charts, textures, and scientific presentation specifications are project-authored derivatives. Source credits remain embedded in this record and in the prepared chart metadata.
 
 ## ENSO sea-surface temperature anomaly

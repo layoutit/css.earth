@@ -2,7 +2,6 @@
 
 Cassini imagery: NASA/JPL-Caltech/Space Science Institute. Enhanced-color cartography: Paul Schenk, LPI/USRA.
 Elevation: Weirich, J.R., Gaskell, R., Palmer, E.E., Domingue, D.L. (2025), Tethys SPC Shape Models and Assessment Products V1.0, NASA PDS, DOI 10.26033/hpv0-eh61.
-Font: Rasmus Andersson, Inter, SIL OFL 1.1.
 Retain source credits with derivatives. See SOURCE.md.
 
 B2 additions: Native Q128 shape and relative albedo: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS. Relative albedo is not calibrated reflectance.

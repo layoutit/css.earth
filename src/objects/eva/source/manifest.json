@@ -34,31 +34,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors / Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "presentation/LICENSE.INTER-OFL"
-      ],
-      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
-      "redistribution": "Permitted with the accompanying SIL Open Font License.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [
@@ -105,12 +80,6 @@
     },
     {
       "path": "preparation/terrestrial.json"
-    },
-    {
-      "path": "presentation/LICENSE.INTER-OFL"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/1021-IAUspin.txt"
