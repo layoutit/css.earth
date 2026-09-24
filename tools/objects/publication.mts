@@ -19,7 +19,8 @@ export async function readPreparedBinaryOutputs(directory: string) {
   const entries = await readdir(directory, { withFileTypes: true }), names = new Set(entries.map(entry => entry.name));
   const outputs = [];
   for (const [folder, { owner, extension }] of Object.entries(PREPARED_FOLDERS)) {
-    if (!names.has(folder) || !names.has(owner)) continue;
+    if (!names.has(folder)) continue;
+    if (!names.has(owner)) throw new TypeError(`Prepared folder ${folder} is published beside ${owner}, which is missing from ${directory}.`);
     for (const file of await readdir(resolve(directory, folder), { withFileTypes: true })) {
       if (!file.isFile() || !safe(file.name) || !file.name.endsWith(extension)) throw new TypeError(`Prepared folder ${folder} must hold only ${extension} files; found ${file.name} in ${directory}.`);
       outputs.push({ filename: `${folder}/${file.name}`, path: resolve(directory, folder, file.name) });
