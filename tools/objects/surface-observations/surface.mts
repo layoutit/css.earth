@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross } from '@cssearth/core';
 /** The shared surface transfer: from qualified frames to the atlas sampler, the flat preview and the report. */
 import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';

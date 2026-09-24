@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {parse, object, string, dictionary, number, union} from '@cssearth/core/schema';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.mts';
 import type {MaterialAsset} from './material-contract.mts';

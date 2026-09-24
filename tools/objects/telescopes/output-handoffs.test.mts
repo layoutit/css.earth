@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { writeProductRecord } from '../product-record.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { exportOutput,listOutputs } from './outputs.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
 import { parseCli } from './cli.mts';

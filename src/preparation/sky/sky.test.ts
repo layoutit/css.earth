@@ -9,7 +9,7 @@ import { parseSkyRecipe } from './config.js';
 import { loadSkySource } from './source.js';
 import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces, compositeSkyStars } from './bake.js';
 import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssSky } from '../../renderers/css/sky/types.js';
 
 function exrFixture(compressed: boolean): { bytes: Buffer; expected: Buffer } {

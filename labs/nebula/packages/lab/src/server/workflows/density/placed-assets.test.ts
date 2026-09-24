@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
 import sharp from 'sharp';
 import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { preparePlacedDensity } from './placed-assets.ts';
 
 test('compact model placement reuses exact density/alpha bytes and restores missing generated resources', async () => {

@@ -1,6 +1,5 @@
-import { isArray } from '../../../src/platform/is-array.mts';
+import { isArray, isRecord, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { ChartAssetRecipe } from './charts.ts';
-import { isRecord, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 export type SpectrumRecipe = Extract<ChartAssetRecipe['charts'][number], {kind: 'spectrum'}>;
 export interface SpectrumPoint {wavelength: number; total: number;}
 

@@ -8,7 +8,8 @@ import { parseGalaxyRecipe, text } from '../../src/preparation/galaxy-catalog/co
 import { requireRecord as record } from '@cssearth/core';
 import { prepareGalaxyCatalog } from '../../src/preparation/galaxy-catalog/prepare.js';
 import { parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMetadata } from '../../src/preparation/galaxy-catalog/source.js';
-import { sourceBytes, sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import type { GalaxySource } from '../../src/preparation/galaxy-catalog/types.js';
 import { readBibliography } from '../../src/preparation/galaxy-catalog/bibliography.js';
 

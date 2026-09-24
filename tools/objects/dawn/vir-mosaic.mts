@@ -19,7 +19,7 @@ import { projectReducedFile, pixelStepKm, boxMean } from './vir-projection.mts';
  *
  * Byte order is measured, not taken from the labels: the spectral cubes are big-endian and the wavelength cubes
  * little-endian although both labels say IEEE_REAL. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -32,8 +32,7 @@ import { numbers } from '../../spice/text-kernel.mts';
 import { encodeClock, clockToEt } from '../../spice/sclk.mts';
 import { spiceCamera, type PixelModelKeys } from '../../spice/camera.mts';
 import { pds3Keyword } from '../pds-labels.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECIPE_SCHEMA = 'cssearth-vir-mosaic@1';
 const REDUCED_SCHEMA = 'cssearth-vir-reduced@1';

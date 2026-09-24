@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest } from './refresh-source.mts';
 import { parseCoraltempRecipe } from './source-contract.mts';
 import { createHash } from 'node:crypto';

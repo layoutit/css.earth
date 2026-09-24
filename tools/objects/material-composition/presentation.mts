@@ -2,7 +2,7 @@ import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import {parse} from '@cssearth/core/schema';
 import {layeredPresentationRecipe} from './presentation-recipe.mts';
 import {parseLayeredLenses,parseLayeredAtlas} from './presentation-source.mts';
-import {requireString} from '@cssearth/core';
+import { requireString, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
 import type {createLayeredOblatePreparation} from './layered-oblate.mts';
 import type {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
@@ -14,7 +14,6 @@ import { prepareAtlasRows } from './atlas-rows.mts';
 
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
-import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '../../../src/platform/math/matrix.mts';
 import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
 import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 

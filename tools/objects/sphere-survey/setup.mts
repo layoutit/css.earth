@@ -15,7 +15,7 @@ import { constants } from 'node:fs';
 import { access, cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '../../fits/fits.mts';
 import { readPdfImage } from '../../fits/pdf-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

@@ -1,9 +1,9 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from './solid-contract.mts';
 import type { PreparedTriangle, SourceSurfaceSample, SciencePalette } from './contracts.mts';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { requireArray, requireString, requireRecord, requireFiniteNumber } from '@cssearth/core';
+import { requireArray, requireString, requireRecord, requireFiniteNumber, dotN as dot } from '@cssearth/core';
 import { parseRadialSnapshot } from './radial-source.mts';
 import { requireTerrainMesh } from './radial-mesh.mts';
 import { resolve, dirname } from 'node:path';
@@ -20,7 +20,6 @@ import { createSourceMeshLighting } from './source-mesh-lighting.mts';
 import { linearToSrgb, srgbToLinear } from '../color-transfer.mts';
 import { prepareNativePhotographicAtlas } from './native-photograph.mts';
 import { neutralShapeAtlas, shapeFillIllumination } from './shape-material.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 interface ObservationTransfer {
   interiorTexels: number; counts: Record<string, number>; sources?: Record<string, number>;

@@ -2,7 +2,7 @@ import { applyLinearTint } from '../color-transfer.mts';
 import sharp from 'sharp';
 import type {RadiusMapping, RadialBand, RadialShadow, RadialVariant, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from './radial-contract.mts';
 import { type RingWedgeLayout, wedgePoint, wedgeShare } from '../../../src/renderers/css/preparation/scene/ring-wedges.ts';
-import { clamp } from '../../../src/platform/math/scalar.mts';
+import { clamp } from '@cssearth/core';
 /** Preparation-only radial fields. Body identities and interpretation live in JSON. */
 const smoothstep = (start: number, end: number, value: number) => {
   const amount = clamp((value - start) / (end - start), 0, 1);

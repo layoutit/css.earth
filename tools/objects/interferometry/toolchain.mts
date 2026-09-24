@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 /** Install and locate the pinned interferometry toolchains of toolchains.json under output/toolchains/<id> (ignored by git).
  *
  *   node tools/objects/interferometry/toolchain.mts install <squeeze|rotir|pionier|amber|gravity|matisse> [--cache <dir> ...]

@@ -3,7 +3,7 @@ import type {PreparedMaterialTrack,PreparedMaterialSelection} from '../../../src
 import type {PreparedViewBinding} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;root:PreparedNode;axes:readonly number[];config:{displayRadius:number};scene:{systemTransform:string;camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number}};}
 import { BASE_TILE } from '@layoutit/polycss';
-import { readPreparedMatrix4, preparedRotationMatrix4, multiplyPreparedMatrix4, invertPreparedAffineMatrix4 } from '../../../src/platform/math/matrix.mts';
+import { readPreparedMatrix4, preparedRotationMatrix4, multiplyPreparedMatrix4, invertPreparedAffineMatrix4 } from '@cssearth/core';
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 const translation = (x:number, y:number, z:number) => Object.assign(identity(), { 12: x, 13: y, 14: z });

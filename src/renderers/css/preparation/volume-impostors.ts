@@ -1,11 +1,10 @@
-import { cross3 as cross } from '../../../platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 /** Bounded offline views of the accepted PolyCSS leaves; no density reconstruction. */
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import type { PreparedCssVolume, PreparedVolumeImpostors, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '../volume/types.js';
 import type { PreparedVolumeLensBrightness } from '../volume/prepared-volume-lenses.js';
-import { dot3 as dot } from '../../../platform/vector3.mts';
 
 const SIZE = 256;
 const AXES = ['x', 'y', 'z'] as const;

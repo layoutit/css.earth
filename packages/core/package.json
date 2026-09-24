@@ -2,7 +2,7 @@
   "name": "@cssearth/core",
   "version": "0.0.0",
   "private": true,
-  "description": "Runtime validation shared by the browser runtime and the preparation tools. Zero dependencies, zero host globals.",
+  "description": "Runtime validation and small shared helpers (math, arrays, CLI arguments) for the browser runtime and the preparation tools, plus a Node-only entry for hashing and the project root. Zero dependencies.",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -21,14 +21,20 @@
       "types": "./dist/schema.d.ts",
       "import": "./dist/schema.js",
       "require": "./dist/schema.cjs"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.js",
+      "require": "./dist/node.cjs"
     }
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "test": "vitest run"
   },
   "devDependencies": {
+    "@types/node": "^26.4.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^3.1.1"

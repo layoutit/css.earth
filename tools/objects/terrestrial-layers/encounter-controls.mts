@@ -1,4 +1,4 @@
-import { isArray } from '../../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import type {encounterCamera} from './encounter-camera.mts';
 import {parseEncounterRegistration} from './source-records.mts';
 const dot=(a: readonly number[],b: readonly number[])=>a.reduce((s,n,i)=>s+n*b[i],0);

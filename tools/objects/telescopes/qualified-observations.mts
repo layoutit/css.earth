@@ -3,7 +3,7 @@ import { parseCalibrationDependencies, verifyCalibrationDependencies } from './c
 import { parseNativeMetadata } from './native-metadata.mts';
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '@cssearth/core';
 import { readProductRecord, sameRun } from '../product-record.mts';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';

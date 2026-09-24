@@ -1,6 +1,6 @@
 import type { PreparedTextureLevels } from '../renderers/css/rendering/prepared-texture-levels.js';
 import type { PreparedVariant } from '../renderers/css/rendering/prepared-presentation.js';
-import { isArray } from './is-array.mts';
+import { isArray } from '@cssearth/core';
 // Shared by offline qualification and the browser's external JSON boundary.
 export function requireTextureLevels(value: unknown, variants: readonly Pick<PreparedVariant, 'writes' | 'required'>[], resources: {has(key:string):boolean}): asserts value is PreparedTextureLevels {
   const fail = (): never => { throw new TypeError('Invalid prepared texture levels.'); };

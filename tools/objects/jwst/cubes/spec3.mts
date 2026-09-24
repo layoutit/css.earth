@@ -32,7 +32,7 @@ import { mkdir, readdir, rm, writeFile, open } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { sampleAgreement } from '../sample-agreement.mts';
 import { readFitsFileHdus } from '../../../fits/fits.mts';
 import { requireRecord } from '@cssearth/core';

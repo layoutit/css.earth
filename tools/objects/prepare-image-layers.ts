@@ -3,7 +3,8 @@ import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseImageLayerRecipe } from '../../src/preparation/image-layers/config.js';
-import { prepareImageLayers, sha256 } from '../../src/preparation/image-layers/prepare.js';
+import { prepareImageLayers } from '../../src/preparation/image-layers/prepare.js';
+import { sha256 } from '@cssearth/core/node';
 
 export async function prepareImageLayerObject(objectDirectory: string) {
   const root=resolve(objectDirectory), sourceDirectory=resolve(root,'source'), outputDirectory=resolve(root,'prepared');

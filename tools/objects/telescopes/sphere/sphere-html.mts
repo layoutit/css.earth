@@ -4,7 +4,7 @@ import { serializePreparedScene } from '../../../prepared/serialize-prepared-sce
 import { initialObjectSelection } from '../../../../src/renderers/css/runtime/object-contract.ts';
 import { publishPreparedNativeView } from '../../../../src/renderers/css/rendering/prepared-native-view.ts';
 import { preparedSceneMatrix } from '../../../../src/renderers/css/navigation/prepared-camera-basis.ts';
-import { serializePreparedMatrix4 } from '../../../../src/platform/math/matrix.mts';
+import { serializePreparedMatrix4 } from '@cssearth/core';
 import { parsePreparedWorldCameraFrame } from '../../../../src/renderers/css/validation/world-frame.ts';
 import { distanceForSilhouetteRadius } from '../../../../src/renderers/css/solar-system/heliocentric-geometry.ts';
 import { addNativeCamera } from '../../../experiments/native-scroll/native-camera.mts';

@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 
 /** A recipe source bound to its manifest record, with the digest of the bytes that were read. */
 export interface BoundSource { readonly id: string; readonly path: string; readonly sha256: string; }

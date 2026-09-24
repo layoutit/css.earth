@@ -8,7 +8,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '../product-record.mts';
 

@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import type {Channels} from 'sharp';
 import type {ObservedRgb, PolarDetails} from './polar-continuation.mts';
 import type {DetailImage} from './source-contract.mts';

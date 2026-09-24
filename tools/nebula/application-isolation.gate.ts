@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdtemp, mkdir, readFile, writeFile, cp, symlink, access } from 'node:fs/promises';
 import { resolve, relative, dirname, join } from 'node:path';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { spawn, spawnSync } from 'node:child_process';
 const root = process.cwd(), require = createRequire(resolve(root, 'package.json'));
 const engine = createRequire(resolve(root, 'packages/engine/package.json'));

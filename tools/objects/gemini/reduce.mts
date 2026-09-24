@@ -33,7 +33,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, readdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
+import { flagValue, positionalArguments } from '@cssearth/core';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord, assertInputPins,
   type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { digestProgram, readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';

@@ -2,7 +2,7 @@ import { prepareCityPageGeometry } from "./page-geometry.mts";
 import { preparePageTextureQuad } from "./wms-page-geometry.mts";
 
 import type { GeographicScene, PageGeometry, TileAddress, WmtsPage } from './contracts.mts';
-import { dotN as dot } from '../../../../src/platform/vector3.mts';
+import { dotN as dot } from '@cssearth/core';
 const caps = new WeakMap<GeographicScene, PageGeometry[]>();
 const latitude = (row: number, zoom: number) => Math.atan(Math.sinh(Math.PI*(1-2*row/2**zoom)))*180/Math.PI;
 function inverse(m: readonly number[]) {

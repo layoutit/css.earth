@@ -1,6 +1,5 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 export interface PhotographicCamera {
   positionKm: readonly number[];

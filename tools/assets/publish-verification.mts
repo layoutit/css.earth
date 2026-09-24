@@ -3,7 +3,7 @@
 // bulk upload, HEAD every key; retry misses one at a time; then byte-verify every JSON key in full (small, and
 // correctness there matters most) and a sample of the rest (verifying every large binary would mean re-downloading
 // everything we just uploaded). Exit non-zero on any remaining miss or sample failure.
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 
 export interface PublishAsset { readonly key: string; readonly file: string; readonly bytes: number; readonly sha256: string; }
 export interface VerifyResult { readonly retried: readonly string[]; readonly misses: readonly string[]; readonly sampleFailures: readonly string[]; }

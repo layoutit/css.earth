@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
 import { sourceObject } from '../../src/platform/source-catalog.mts';
 import { readFieldRecipe } from './recipe.mts';

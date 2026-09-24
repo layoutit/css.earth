@@ -1,5 +1,6 @@
 /** Source-qualified observational histograms; no missing sky cell becomes empty physical space. */
 import {gunzipSync} from 'node:zlib';
+import {median} from '@cssearth/core';
 import {parseDensityVolumeObjectDescriptor} from '@cssearth/objects';
 import {cataloguePosition} from '@cssearth/volume-core/coordinates/catalogue-position';
 import {sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
@@ -10,7 +11,6 @@ export function string(value:unknown):string{if(typeof value!=='string'||!value)
 export function pin(value:unknown){const p=record(value);return {path:string(p.path)};}
 export function axis(value:unknown):HistogramAxis{const v=record(value);return {min:finite(v.min),max:finite(v.max),bins:finite(v.bins)};}
 const bin=(v:number,a:HistogramAxis)=>Math.floor((v-a.min)/(a.max-a.min)*a.bins);
-export const median=(values:number[])=>{values.sort((a,b)=>a-b);const i=Math.floor(values.length/2);return values.length%2?values[i]!:(values[i-1]!+values[i]!)/2;};
 export function unpackPoints(bytes:Buffer):WeightedPoint[]{
  if(!bytes.length||bytes.length%16)throw new TypeError('Expected XYZ-weight float32 LE');
  const result:WeightedPoint[]=[];

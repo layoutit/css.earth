@@ -17,7 +17,8 @@ import { prepareCloudDetail, CLOUD_DETAIL_METHOD } from '@cssearth/volume-core/m
 import { prepareDensityProjection } from '../workflows/density/density-projection.ts';
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import { prepareReconstructionStars } from '../workflows/density/reconstruction-stars.ts';
-import { sha256, containedPath, loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath, loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 

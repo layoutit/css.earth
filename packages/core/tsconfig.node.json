@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-core-node.tsbuildinfo"
+  },
+  "include": [
+    "src/node"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ]
+}

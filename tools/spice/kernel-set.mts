@@ -3,7 +3,7 @@
  * the ephemeris, CKs into pointing lookups keyed by instrument, plus leap
  * seconds and spacecraft clocks. Later files take precedence, as in SPICE.
  */
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
 import { parseTextKernel, type KernelPool } from './text-kernel.mts';

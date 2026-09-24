@@ -7,7 +7,7 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { ObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
 import type { ObservationPhoto } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { prepareOverlayGeometry } from '../../../adapters/renderer/overlay-geometry.ts';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 
 export async function writeOriginalOverlay(directory:string,photo:ObservationPhoto,mapping:ObservationMapping,
   frame:DensityVolumeFrame,source:{id:string;sourcePageUrl:string;credit:string}) {

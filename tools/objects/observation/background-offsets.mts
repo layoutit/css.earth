@@ -1,16 +1,10 @@
-import { dotN as dot } from '../../../src/platform/vector3.mts';
+import { dotN as dot, median } from '@cssearth/core';
 /** One additive level per region, solved from the median difference of every measured boundary.
  * Montage's mBgModel with constant terms (Berriman et al.): minimise sum n_ij (o_i - o_j - d_ij)^2 with
  * sum o = 0. The WISE atlas mosaic and the photographic plate background share this solver. */
 export const MONTAGE_BACKGROUND_REFERENCE = 'https://doi.org/10.1504/IJCSE.2009.026999';
 
 export interface OffsetPair { readonly i: number; readonly j: number; readonly difference: number; readonly pixels: number }
-
-export function median(values: number[]): number {
-  values.sort((a, b) => a - b);
-  const middle = values.length >> 1;
-  return values.length % 2 ? values[middle]! : (values[middle - 1]! + values[middle]!) / 2;
-}
 
 /** Connected components of the boundary graph, in discovery order; every index belongs to exactly one. */
 export function offsetComponents(count: number, pairs: readonly OffsetPair[]): Int32Array {

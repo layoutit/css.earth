@@ -1,4 +1,4 @@
-import { isArray } from '../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import { chromium } from "playwright";
 
 // Use Playwright's lockfile-pinned Chromium, never the installed Chrome channel.

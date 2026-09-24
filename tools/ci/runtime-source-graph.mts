@@ -1,10 +1,9 @@
-import { isArray } from '../../src/platform/is-array.mts';
+import { isArray, hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { parseAst } from 'vite';
 import { parseForESLint } from '@typescript-eslint/parser';
 import type { Node, Program } from 'estree';
-import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 export type RuntimeSourceReader = (path: string) => string | Promise<string>;
 
@@ -55,12 +54,13 @@ export async function resolveRuntimeSource(imported: string, importer: string, {
   let target: string;
   if (imported.startsWith('.')) target = resolve(dirname(importer), imported);
   else if (imported.startsWith('@cssearth/')) {
-    const name = imported.slice('@cssearth/'.length);
-    if (!/^[a-z][a-z0-9-]*$/.test(name)) throw new Error(`Unclosed workspace import ${imported}`);
+    // `@cssearth/<package>` or one declared subpath entry, `@cssearth/<package>/<entry>`.
+    const [name = '', subpath, ...rest] = imported.slice('@cssearth/'.length).split('/');
+    if (!/^[a-z][a-z0-9-]*$/.test(name) || rest.length || (subpath !== undefined && !/^[a-z][a-z0-9-]*$/.test(subpath))) throw new Error(`Unclosed workspace import ${imported}`);
     const directory = resolve(root, 'packages', name);
     const manifest = requireRecord(JSON.parse(await source(resolve(directory, 'package.json'))));
-    const exports = isRecord(manifest.exports) ? manifest.exports['.'] : null;
-    if (manifest.name !== imported || !isRecord(exports) || typeof exports.import !== 'string') throw new Error(`Workspace export is not concrete: ${imported}`);
+    const exports = isRecord(manifest.exports) ? manifest.exports[subpath === undefined ? '.' : `./${subpath}`] : null;
+    if (manifest.name !== `@cssearth/${name}` || !isRecord(exports) || typeof exports.import !== 'string') throw new Error(`Workspace export is not concrete: ${imported}`);
     target = resolve(directory, exports.import);
   } else target = createRequire(importer).resolve(imported);
   if (relative(root, target).startsWith('../')) throw new Error(`Runtime import escapes the source root: ${imported}`);

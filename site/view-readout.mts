@@ -11,7 +11,7 @@ import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQua
 import { loadSurfaceGeometry, loadedSurfaceGeometry } from './surface-geometry.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';
-import { dotN as dot } from '../src/platform/vector3.mts';
+import { dotN as dot } from '@cssearth/core';
 type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
 interface ViewReadout { setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
 

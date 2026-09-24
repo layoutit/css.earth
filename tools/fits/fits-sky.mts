@@ -7,7 +7,7 @@
  * a display raster cannot hold it without resampling. tools/oracles/fits/sky-orientation.py checks this reading against
  * Astropy's world coordinates. */
 import type { FitsHeader } from './fits.mts';
-import { dot3 as dot } from '../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 export interface SkyImageAxes {
   /** Right ascension increases with column, so stored east is on the right. */

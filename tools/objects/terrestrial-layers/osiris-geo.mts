@@ -2,7 +2,7 @@ import type {GeoFrame,DiskPhotometry,PhasePhotometry} from './contracts.mts';
 import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY } from '../../photometry/disk.mts';
 import { phaseGain as phaseFunctionGain } from '../../photometry/phase.mts';
 import { pds3Keyword } from '../pds-labels.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
+import { dotN as dot } from '@cssearth/core';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO
 // product. No image coordinates, ray tracing or source geometry enter runtime.
 export const GEO_SHAPE_MODEL = 'cg-dlr_spg-shap7-v1.0_4Mfacets.ver';

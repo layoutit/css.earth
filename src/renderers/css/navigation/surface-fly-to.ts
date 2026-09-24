@@ -1,4 +1,4 @@
-import { cross3 } from '../../../platform/vector3.mts';
+import { cross3 } from '@cssearth/core';
 import type { TrackballMetrics, Vector3, Quaternion, Matrix3 } from './types.js';
 export interface SurfaceFlyToInput { clientX: number; clientY: number; trackball: TrackballMetrics; currentZoom: number; minimumZoom: number; maximumZoom: number; }
 export type SurfaceFlyToPlan = NonNullable<ReturnType<typeof planSurfaceFlyTo>>;

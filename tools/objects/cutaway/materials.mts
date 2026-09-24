@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {parse} from '@cssearth/core/schema';
 import {cutawayRecipe} from './recipe-contract.mts';
 import {interiorSource, type InteriorSource} from './source-contract.mts';

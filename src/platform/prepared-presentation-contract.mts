@@ -1,5 +1,5 @@
 import { requireTextureLevels } from './prepared-texture-levels.mts';
-import { isArray } from './is-array.mts';
+import { isArray } from '@cssearth/core';
 import type { ObjectControls } from "../renderers/css/runtime/object-contract.ts";
 import type { ObjectRuntimeDefinition } from "../renderers/css/runtime/object-runtime-types.ts";
 import type { PreparedWrite } from "../renderers/css/rendering/prepared-presentation.ts";

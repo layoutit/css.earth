@@ -1,5 +1,5 @@
 import { safeRelativePath } from './source-path.mts';
-import { isArray } from './is-array.mts';
+import { isArray } from '@cssearth/core';
 import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
 /** One byte range of a remote member, for archive files too large to keep whole. The pin covers exactly the kept bytes. */

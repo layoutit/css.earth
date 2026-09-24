@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {readJsonSource} from '../../sources/source-values.mts';
 import {hasErrorCode, requireRecord, requireString} from '@cssearth/core';
 import {parseMurReceipt} from './source-contract.mts';

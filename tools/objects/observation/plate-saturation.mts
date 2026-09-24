@@ -7,7 +7,7 @@
  *
  * Plate-to-plate background steps are NOT corrected here; see the plate background note in
  * `docs/color-preparation.md` for what the pinned inputs do and do not allow. */
-import { median } from './background-offsets.mts';
+import { median } from '@cssearth/core';
 
 export const DSS_SATURATION_REFERENCE = 'https://archive.stsci.edu/dss/index.html';
 

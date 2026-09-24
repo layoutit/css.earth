@@ -1,6 +1,6 @@
 /** Public asset closure and assembly, independent of source acquisition or CLI dispatch. */
 import { containedPath } from './source-files.ts';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { inventoryPublicAssets, requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { requireRecord as object } from '@cssearth/core';
 import { readFile, readdir, unlink, lstat } from 'node:fs/promises';

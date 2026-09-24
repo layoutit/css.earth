@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import type { SurfaceBankPlan, SurfaceBankLenses } from './contracts.mts';
 /** `maximumWidth`: the largest level the runtime may choose. Wider levels are still prepared (smaller levels are reduced
  * from the canonical page) but never offered, so no view downloads them. */

@@ -6,7 +6,7 @@ import { prepareContextProvenance } from '../prepare/prepare-context-provenance.
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 
 
 test('context provenance binds every declared output and installs one complete inventory', async () => {

@@ -1,4 +1,4 @@
-import { flagValue } from '../../cli/cli-arguments.mts';
+import { flagValue } from '@cssearth/core';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { bandOfFilters } from '../jwst/imaging/archive.mts';
 import { validateCapabilityRequest, type CapabilityRequest } from './recipe-request.mts';

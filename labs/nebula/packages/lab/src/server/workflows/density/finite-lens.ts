@@ -15,7 +15,8 @@ import {createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,enve
 import {loadSimulationPrior} from '../../../cli/commands/simulation-prior.ts';
 import {parseCloudAppearance,type CloudAppearance} from '@cssearth/volume-core/materials/cloud-appearance';
 import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';
-import {sha256,sourceBytes,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import {sourceBytes,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import type {EmissionFieldModel} from '@cssearth/volume-core/contracts/emission';
 import type {VolumeSlices} from '@cssearth/volume-core/contracts/volume-slices';
 import type {Vector3} from '@cssearth/volume-core/contracts/volume-recipe';

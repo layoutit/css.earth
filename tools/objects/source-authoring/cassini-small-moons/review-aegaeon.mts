@@ -1,4 +1,4 @@
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';

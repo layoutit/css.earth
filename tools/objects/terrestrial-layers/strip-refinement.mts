@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross } from '@cssearth/core';
 /**
  * Epoch refinement of a push-frame image against the retained mesh.
  *

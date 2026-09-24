@@ -1,6 +1,6 @@
 import { safeRelativePath } from '../platform/source-path.mts';
-import { sha256 } from '../platform/sha256.mts';
-import { isArray } from '../platform/is-array.mts';
+import { sha256 } from '@cssearth/core/node';
+import { isArray } from '@cssearth/core';
 /** A pin identifies bytes git does not hold; a marker image authored in this repository carries none. */
 export interface MarkerSource { path: string; origin: string; credit: string; license: string; raster?: { kind: string }; width?: number; height?: number; }
 /** Fields an object's marker recipe may add to its source: decoding hints its manifest record does not carry. */

@@ -13,7 +13,7 @@
  * the images and kernels it read at their pinned sizes and digests, the policy the fit was held to, and the digest of the
  * modules that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
  * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -27,7 +27,7 @@ import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrest
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
 import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
 import { astroqueryRows } from '../astronomy-packages/client.mts';
-import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
+import { flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';
 /** The budget every measured program is held to; a lens may state a tighter one. */

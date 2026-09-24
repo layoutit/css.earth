@@ -31,7 +31,7 @@ import { observerCamera, type BodyOrientation } from '../terrestrial-layers/obse
 import { loadOrientation } from '../terrestrial-layers/observer-cameras.mts';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '../jwst/cubes/body-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
-import { sha256 as digestOf } from '../../../src/platform/sha256.mts';
+import { sha256 as digestOf } from '@cssearth/core/node';
 import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '../product-record.mts';
 import {

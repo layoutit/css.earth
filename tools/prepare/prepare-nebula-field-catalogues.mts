@@ -1,5 +1,5 @@
 /** Bounded, source-pinned Gaia DR3/Bailer-Jones stellar neighbourhood intake. */
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises';
 
 const arguments_=process.argv.slice(2), magnitudeOptions=arguments_.filter(value=>value.startsWith('--magnitude-limit='));

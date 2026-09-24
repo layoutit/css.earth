@@ -10,7 +10,7 @@ import { validatePreparedNavigationFocus } from './prepared-focus.js';
 import type { PreparedNavigationFocus } from './prepared-focus.js';
 import type { PerspectiveWorldContext } from './perspective-dolly.js';
 import type { Vector3 } from './types.js';
-import { clamp } from '../../../platform/math/scalar.mts';
+import { clamp } from '@cssearth/core';
 
 /** The live camera stays in its prepared local frame for float64 precision.
  * Input, focus changes and restored observers mutate this owner; frame capture is read-only. */

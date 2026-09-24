@@ -1,5 +1,5 @@
-import { sha256 } from './sha256.mts';
-import { isArray } from './is-array.mts';
+import { sha256 } from '@cssearth/core/node';
+import { isArray } from '@cssearth/core';
 import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, lstat, unlink, writeFile } from "node:fs/promises";

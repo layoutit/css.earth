@@ -5,7 +5,8 @@ import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { resolve } from 'node:path';
 import { zstdCompressSync, constants } from 'node:zlib';
-import { containedPath, sha256, sourceBytes, type DecodedGrid } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath, sourceBytes, type DecodedGrid } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { triple, type Vector3, type VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import { requireRecord as record } from '@cssearth/core';
 

@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';

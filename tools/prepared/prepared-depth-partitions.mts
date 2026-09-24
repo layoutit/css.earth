@@ -10,7 +10,7 @@ export type RecompiledPresentation<T extends PreparedPresentationDefinition> = O
 
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 import { visibilityComponents } from './prepared-visibility-order.mts';
-import { dot3 as dot } from '../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 const MAXIMUM_DEPTH_LEAVES = 64;
 

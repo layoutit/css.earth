@@ -62,6 +62,9 @@ async function resolveRepoFile(fromDirectory: string, specifier: string): Promis
 
 interface Violation { file: string; specifier: string; }
 
+/** A workspace package's Node-only entry (`@cssearth/core/node`) imports Node built-ins, so it counts as one. */
+const NODE_ENTRY = /^@cssearth\/[a-z-]+\/node$/u;
+
 /** Walk the static closure from `entryFiles`; return every `node:` import reached. */
 async function findStaticNodeImports(entryFiles: readonly string[]): Promise<Violation[]> {
   const visited = new Set<string>(), violations: Violation[] = [];
@@ -70,7 +73,7 @@ async function findStaticNodeImports(entryFiles: readonly string[]): Promise<Vio
     visited.add(path);
     const source = await readFile(path, 'utf8');
     for (const specifier of staticSpecifiers(source, path)) {
-      if (isBuiltin(specifier)) { violations.push({ file: relative(root, path), specifier }); continue; }
+      if (isBuiltin(specifier) || NODE_ENTRY.test(specifier)) { violations.push({ file: relative(root, path), specifier }); continue; }
       const target = await resolveRepoFile(dirname(path), specifier);
       if (target) await visit(target);
     }
@@ -103,6 +106,16 @@ test('mutation check: a static node: import reachable from an entry is caught', 
     await writeFile(resolve(stage, 'leaf.mts'), "import { existsSync } from 'node:fs';\nexistsSync('.');\n");
     const violations = await findStaticNodeImports([resolve(stage, 'entry.mts')]);
     assert.deepEqual(violations, [{ file: relative(root, resolve(stage, 'leaf.mts')), specifier: 'node:fs' }]);
+  } finally { await rm(stage, { recursive: true, force: true }); }
+});
+
+test('mutation check: a static import of a workspace node entry reachable from an entry is caught', async () => {
+  const stage = await mkdtemp(resolve(tmpdir(), 'browser-node-imports-entry-'));
+  try {
+    await writeFile(resolve(stage, 'entry.mts'), "import './leaf.mts';\n");
+    await writeFile(resolve(stage, 'leaf.mts'), "import { sha256 } from '@cssearth/core/node';\nimport { isArray } from '@cssearth/core';\nsha256(String(isArray([])));\n");
+    const violations = await findStaticNodeImports([resolve(stage, 'entry.mts')]);
+    assert.deepEqual(violations, [{ file: relative(root, resolve(stage, 'leaf.mts')), specifier: '@cssearth/core/node' }]);
   } finally { await rm(stage, { recursive: true, force: true }); }
 });
 

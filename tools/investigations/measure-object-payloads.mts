@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import type { Browser, Page, BrowserContextOptions, CDPSession, Response, Request } from 'playwright';
 import { requireArray, requireRecord } from '@cssearth/core';
 interface PayloadObject {id: string; route: string;}

@@ -1,6 +1,5 @@
-import { cross3 as cross } from '../../../platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import type { PreparedVolumeImpostors, VolumeVector } from './types.js';
-import { dot3 as dot } from '../../../platform/vector3.mts';
 
 export function validateVolumeImpostors(input: unknown, resources: ReadonlySet<string>): PreparedVolumeImpostors {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Invalid prepared volume impostors.');

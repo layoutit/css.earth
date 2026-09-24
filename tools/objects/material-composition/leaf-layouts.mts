@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import type {LayeredPresentationRecipe} from './presentation-recipe.mts';
 
 function declarations(stylesheet: string, selector: string): Record<string,string> {

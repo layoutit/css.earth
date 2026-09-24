@@ -16,7 +16,7 @@ import { access, mkdir, rm, stat, symlink } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { requireString } from '@cssearth/core';
 import { tapRows } from '../astronomy-packages/client.mts';
 

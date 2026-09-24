@@ -31,7 +31,7 @@ import { ALMA, horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from '../jwst/cubes/body-map.mts';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '../product-record.mts';

@@ -1,4 +1,4 @@
-import { isArray } from '../../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import type {SourceMesh,SourceScalar,SciencePalette,Relief,ScalarGrid,LinearTransform,ScienceProjection,ColorBand,ObservationGeometry,PhotometryProfile,ObservedColorContext} from './contracts.mts';
 import {decodeProfile,parseScienceInput,parseScienceGrid,parseQualitySource,parseQualityMask,parseColorSourceProfile,parseColorEntry,numericRaster,numericRasterBands} from './source-records.mts';
 import {loadPdsFloatMap} from './pds-float-map.mts';

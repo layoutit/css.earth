@@ -5,8 +5,8 @@ import { resolve, sep } from 'node:path';
 import { build } from 'vite';
 
 test('Shared preparation math has no renderer runtime dependency', async () => {
-  const entry = resolve('src/platform/math/matrix.mts');
-  const directory = resolve('src/platform/math') + sep;
+  const entry = resolve('packages/core/src/math/matrix.ts');
+  const directory = resolve('packages/core/src/math') + sep;
   const result = await build({ configFile: false, logLevel: 'silent',
     build: { write: false, minify: false, lib: { entry, formats: ['es'] } } });
   const modules = new Set<string>();

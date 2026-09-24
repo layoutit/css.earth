@@ -6,7 +6,7 @@ import { requireArray, requireRecord, requireString, requireFiniteNumber } from 
 import { fileSize, type ProductInput } from '../product-record.mts';
 import { parseBodyMapProduct } from '../body-map-product.mts';
 import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { projectWithPlanetMapper } from '../astronomy-packages/projection.mts';
 import { canonical } from './vo/contracts.mts';

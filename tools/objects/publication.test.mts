@@ -3,7 +3,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { inventoryPreparedAssets, inventoryText, readInventory, verifyInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { publishPreparedObject } from './publication.mts';
 

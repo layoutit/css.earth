@@ -2,7 +2,7 @@
 import { readFile, realpath } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { parseProductRecord, sameRun } from '../product-record.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 
 export function localOutput(root: string, name: string): string {
   const path = resolve(root, name), rel = relative(root, path);

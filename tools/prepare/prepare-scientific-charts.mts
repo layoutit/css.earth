@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import { isArray } from '../../src/platform/is-array.mts';
+import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
-import {requireRecord,requireFiniteNumber,shape,text,number,optional,array,dictionary} from "@cssearth/core";
 import {decodeProfile} from "../objects/terrestrial-layers/source-records.mts";
 const phaseFields={maximumAngleDegrees:number,qualification:optional(text),segments:array(shape({maximumAngleDegrees:number,kind:text,coefficients:array(number),constant:optional(number)}))};
 const parsePhase=shape(phaseFields);

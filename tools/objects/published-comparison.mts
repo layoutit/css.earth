@@ -12,7 +12,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { readPdfImage } from '../fits/pdf-image.mts';
 import { lamBytes } from './sphere-survey/lam.mts';

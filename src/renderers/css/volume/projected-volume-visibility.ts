@@ -2,7 +2,7 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
-import { dot3 as dot } from '../../../platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 type Vector = readonly [number, number, number];
 

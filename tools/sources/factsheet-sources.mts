@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile, realpath } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';

@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

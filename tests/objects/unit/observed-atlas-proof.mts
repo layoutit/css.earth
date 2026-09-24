@@ -1,5 +1,5 @@
 import {numericRaster} from '../../../tools/objects/terrestrial-layers/source-records.mts';
-import {array,dictionary,number,optional,shape,text,requireFiniteNumber} from '@cssearth/core';
+import { array, dictionary, number, optional, shape, text, requireFiniteNumber, invertPreparedAffineMatrix4 } from '@cssearth/core';
 import {required} from '../../../tools/contract/test-values.mts';
 import type {GeoTIFFImage} from 'geotiff';
 import assert from 'node:assert/strict';
@@ -7,7 +7,6 @@ import {readFile, type FileHandle} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve,basename} from 'node:path';
 import sharp from 'sharp';
-import {invertPreparedAffineMatrix4} from '../../../src/platform/math/matrix.mts';
 import type { PathLike } from 'node:fs';
 
 const root=resolve(import.meta.dirname,'../../..');

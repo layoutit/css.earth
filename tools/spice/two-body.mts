@@ -4,7 +4,7 @@
  * type 5 segments, which store discrete states and propagate between them.
  */
 import type { State } from './spk.mts';
-import { dot3 as dot } from '../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 /** Stumpff functions c2 and c3 of the universal anomaly parameter psi. */
 function stumpff(psi: number) {
