@@ -29,6 +29,8 @@
     "build:preparation:bundle": "pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
     "build:renderer": "pnpm --filter @cssearth/renderer build",
     "build:tools": "pnpm build:packages && pnpm prepare:catalog && pnpm prepare:titles && node tools/prepare/prepare-solar-geometry.mts && node tools/prepare/cli/prepare-navigation.mts --catalog-only && pnpm build:preparation:bundle && pnpm prepare:world-context && pnpm prepare:shell-assets",
+    "arch:map": "node tools/ci/architecture/index.mts map",
+    "check:architecture": "node tools/ci/architecture/index.mts check",
     "check:assets-published": "node tools/assets/check-assets-published.mts",
     "check:deploy-assets": "node tools/assets/check-deploy-assets.mts",
     "check:body-references": "node tools/ci/check-body-references.mts",
