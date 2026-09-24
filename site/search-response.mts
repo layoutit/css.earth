@@ -5,10 +5,10 @@ import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-
 import { parseFeaturePin } from './feature-search.mts';
 import { findResults } from './find.mts';
 import { renderDatasetResponse } from './dataset-response.mts';
-import { createSelectionPresentation, setPanelHidden } from './selection-presentation.mts';
+import { createSelectionPresentation } from './selection-presentation.mts';
 import { selectionTargetFromUrl } from './scene/scene-selection.mts';
 import { SCENE_OBJECTS } from './objects.mts';
-import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
+import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
 import { objectIdAtPath } from './root-object.mts';
 import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
@@ -93,15 +93,14 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   withOverviewScope(clear, overviewScopeFromUrl(url));
   document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.object-browser');
-  const selectedContent = requiredElement<HTMLElement>(document, '.object-selected-content');
-  setPanelHidden(browser, !searching);
-  setPanelHidden(selectedContent, searching);
+  const presentation = createSearchPresentation(document);
+  presentation.present(searching, searching);
   if (searching) requiredElement(document, '.object-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
-  browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
   if (searching) {
     const catalogueLoaded = await ensureCatalogueRows(document, browser, url.origin, fetcher);
-    const items = [...browser.querySelectorAll<HTMLElement>('.object-item')];
+    const rows = createCatalogueRows(browser);
+    const items = rows.items;
     const labels = items.map(item => ({ ...objectSearchLabels(item), item }));
     const requestedCategory = url.searchParams.get('category');
     // Retain old category-only URLs; live search is driven solely by its query.
@@ -114,18 +113,10 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     }
     const order = items.toSorted((a, b) => selected === 'planet' && (a.dataset.objectClassification === 'planet') !== (b.dataset.objectClassification === 'planet')
       ? a.dataset.objectClassification === 'planet' ? -1 : 1 : Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
-    for (const [index, chunk] of [...browser.querySelectorAll<HTMLElement>('.object-chunk')].entries()) {
-      const rows = order.slice(index * 16, (index + 1) * 16);
-      requiredElement(chunk, '.object-chunk-list').append(...rows);
-      const visible = rows.filter(item => !item.hidden).length;
-      chunk.hidden = visible === 0;
-      chunk.style.containIntrinsicBlockSize = `${Math.max(0, visible * 28 - 8)}px`;
-    }
-    presentSearchResults(browser, true);
+    rows.order(order);
+    rows.refresh();
     const overviewCount = presentOverviewResults(browser, value);
-    for (const pill of document.querySelectorAll<HTMLElement>('.object-search-category')) {
-      pill.setAttribute('aria-pressed', String(pill.dataset.searchClassification === result.classification));
-    }
+    presentation.markCategory(result.classification);
     const featureRoot = document.querySelector<HTMLElement>('.object-feature-results');
     let detailCount = 0;
     if (result.detailQuery && featureRoot) {
@@ -140,7 +131,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
         detailCount = 1;
       }
     }
-    requiredElement<HTMLElement>(browser, '.object-empty').hidden = !catalogueLoaded || items.some(item => !item.hidden) || detailCount + overviewCount > 0;
+    presentation.setEmptyHidden(items.some(item => !item.hidden) || detailCount + overviewCount > 0, catalogueLoaded);
   }
   createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, SCENE_OBJECTS));
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);

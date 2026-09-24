@@ -1,5 +1,5 @@
 import type { FindResult } from './find-protocol.mts';
-import { requiredElement } from './browser-types.mts';
+import { requiredElement, setPanelHidden } from './browser-types.mts';
 
 /** Keep existing overview destinations reachable as ordinary search rows. */
 export function presentOverviewResults(browser: HTMLElement, value: string) {
@@ -12,15 +12,60 @@ export function presentOverviewResults(browser: HTMLElement, value: string) {
   return count;
 }
 
-/** Searching shares the retained rows, but does not inherit an overview card. */
-export function presentSearchResults(browser: HTMLElement, searching: boolean) {
-  if (searching) browser.setAttribute('data-search-results', '');
-  else browser.removeAttribute('data-search-results');
-  // Typed results are a flat list; the tree stays for browsing, opened from the button beside the field.
+/** Native requests and live interactions publish the same retained sidebar.
+ * Opening the browser and searching are separate states: an empty live query shows the tree. */
+export function createSearchPresentation(documentTarget: Document) {
+  const browser = requiredElement<HTMLElement>(documentTarget, '.object-browser');
+  const selectedContent = requiredElement<HTMLElement>(documentTarget, '.object-selected-content');
   const navigation = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
-  if (navigation) navigation.hidden = searching;
-  const results = requiredElement(browser, '#object-category-results');
-  results.hidden = !searching;
+  const results = requiredElement<HTMLElement>(browser, '#object-category-results');
+  const empty = requiredElement<HTMLElement>(browser, '.object-empty');
+  const categories = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
+  return {
+    present(open: boolean, searching: boolean) {
+      setPanelHidden(browser, !open);
+      setPanelHidden(selectedContent, open);
+      browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
+      browser.toggleAttribute('data-search-results', searching);
+      // Selection publication never changes this visibility; the query owns it.
+      if (navigation) navigation.hidden = searching;
+      results.hidden = !searching;
+    },
+    markCategory(classification: string | null | undefined = null) {
+      let selected: string | null = null;
+      for (const button of categories) {
+        const active = button.dataset.searchClassification === classification;
+        button.setAttribute('aria-pressed', String(active));
+        if (active) selected = classification ?? null;
+      }
+      return selected;
+    },
+    setEmptyHidden(hidden: boolean, loaded: boolean) { empty.hidden = hidden || !loaded; },
+  };
+}
+
+/** Catalogue fragments use the same retained chunks in native and live search. */
+export function createCatalogueRows(browser: HTMLElement) {
+  const items = [...browser.querySelectorAll<HTMLElement>('.object-item')];
+  const chunks = [...browser.querySelectorAll<HTMLElement>('.object-chunk')]
+    .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.object-item')] }));
+  return {
+    items, chunks,
+    order(ordered: readonly HTMLElement[]) {
+      for (const [index, chunk] of chunks.entries()) {
+        chunk.items = ordered.slice(index * 16, (index + 1) * 16);
+        requiredElement(chunk.node, '.object-chunk-list').append(...chunk.items);
+      }
+    },
+    refresh() {
+      for (const { node, items: rows } of chunks) {
+        const count = rows.filter(item => !item.hidden).length;
+        if (node.hidden !== (count === 0)) node.hidden = count === 0;
+        const height = `${Math.max(0, count * 28 - 8)}px`;
+        if (node.style.containIntrinsicBlockSize !== height) node.style.containIntrinsicBlockSize = height;
+      }
+    },
+  };
 }
 
 /** Native responses and live search publish the same retained result rows. */

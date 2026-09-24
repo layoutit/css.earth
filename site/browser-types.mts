@@ -15,5 +15,11 @@ export function requiredElement<T extends Element = HTMLElement>(root: ParentNod
   if (!element) throw new Error(`Missing shell element: ${selector}.`);
   return element;
 }
+export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
+  if (panel.hidden !== hidden) panel.hidden = hidden;
+  const inert = hidden || panel.getAttribute('aria-busy') === 'true';
+  if (panel.hasAttribute('inert') !== inert) panel.toggleAttribute('inert', inert);
+}
+
 export type ShellCamera = Pick<ObjectSceneLifecycle, 'navigation' | 'sharedView'>;
 export interface PlaybackState { readonly allowed: boolean; readonly reason: string; readonly motionRequested?: boolean; }

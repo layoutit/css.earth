@@ -2,6 +2,7 @@ import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
 import { requiredElement } from './browser-types.mts';
+import { createCatalogueRows } from './search-results-presentation.mts';
 import { sourceDocuments } from './source-link.mts';
 import { objectSearchLabels, searchObjects, type ObjectSearchLabels } from './object-search.mts';
 import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentUrl, readCatalogueIndexUrl } from './catalogue-fragment-loader.mts';
@@ -16,7 +17,8 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
   lifetime: SceneLifetime;
   onLoad(): void;
 }) {
-  let items = [...browser.querySelectorAll<HTMLElement>(".object-item")]
+  let rows = createCatalogueRows(browser);
+  let items = rows.items
     .filter((item) => item instanceof windowTarget.HTMLLIElement);
   // Production pages ship the catalogue rows empty and name the shared JSON and
   // HTML transports (`catalogue-fragment-loader.mts`). A page or fixture that
@@ -41,25 +43,15 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
     ? createCatalogueWindow({ documentTarget, windowTarget, list: catalogueList, scrollTarget: resultsPanel }) : null;
   lifetime.onDispose(() => catalogueWindow?.destroy());
   let sourceLinks = sourceDocuments(documentTarget);
-  let chunks = [...browser.querySelectorAll<HTMLElement>('.object-chunk')]
-    .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.object-item')] }));
-  const refreshChunks = () => {
-    for (const { node, items: rows } of chunks) {
-      const count = rows.filter(item => !item.hidden).length;
-      if (node.hidden !== (count === 0)) node.hidden = count === 0;
-      const height = `${Math.max(0, count * 28 - 8)}px`;
-      if (node.style.containIntrinsicBlockSize !== height) node.style.containIntrinsicBlockSize = height;
-    }
-  };
   let chunkVisibility: { disconnect(): void } | null = null;
   const bindChunkVisibility = () => {
     chunkVisibility?.disconnect();
     chunkVisibility = null;
-    if (chunks.length && typeof windowTarget.IntersectionObserver === 'function') {
+    if (rows.chunks.length && typeof windowTarget.IntersectionObserver === 'function') {
       const observer = new windowTarget.IntersectionObserver(changes => {
         for (const { target, isIntersecting } of changes) target.toggleAttribute('data-in-view', isIntersecting);
       }, { root: resultsPanel, rootMargin: '100px 0px' });
-      for (const { node } of chunks) observer.observe(node);
+      for (const { node } of rows.chunks) observer.observe(node);
       resultsPanel.dataset.groupedVisibility = '';
       chunkVisibility = observer;
     }
@@ -67,19 +59,14 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
   lifetime.onDispose(() => chunkVisibility?.disconnect());
   browser.dataset.retained = '';
   const attachCatalogueRows = () => {
-    items = [...browser.querySelectorAll<HTMLElement>(".object-item")]
+    rows = createCatalogueRows(browser);
+    items = rows.items
       .filter((item) => item instanceof windowTarget.HTMLLIElement);
     searchLabels = items.map(item => ({ ...objectSearchLabels(item), distanceMeters: Number(item.dataset.objectDistanceM), item })).sort(resultOrder);
     sourceLinks = sourceDocuments(documentTarget);
-    chunks = [...browser.querySelectorAll<HTMLElement>('.object-chunk')]
-      .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.object-item')] }));
     bindChunkVisibility();
-    const order = searchLabels.map(label => label.item!);
-    for (const [index, chunk] of chunks.entries()) {
-      chunk.items = order.slice(index * 16, (index + 1) * 16);
-      requiredElement(chunk.node, '.object-chunk-list').append(...chunk.items);
-    }
-    refreshChunks();
+    rows.order(searchLabels.map(label => label.item!));
+    rows.refresh();
   };
   if (items.length) attachCatalogueRows();
   // Fetch once when opened, with retry after a failed transport.
@@ -155,7 +142,7 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
       } else {
         const matches = new Set(result.matches.map(match => match.item));
         for (const item of items) item.hidden = !matches.has(item);
-        refreshChunks();
+        rows.refresh();
       }
       return result;
     },
