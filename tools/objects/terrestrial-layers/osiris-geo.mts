@@ -2,6 +2,7 @@ import type {GeoFrame,DiskPhotometry,PhasePhotometry} from './contracts.mts';
 import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY } from '../../photometry/disk.mts';
 import { phaseGain as phaseFunctionGain } from '../../photometry/phase.mts';
 import { pds3Keyword } from '../pds-labels.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO
 // product. No image coordinates, ray tracing or source geometry enter runtime.
 export const GEO_SHAPE_MODEL = 'cg-dlr_spg-shap7-v1.0_4Mfacets.ver';
@@ -165,7 +166,6 @@ export function observationGain(incidence: number, emission: number, policy: Dis
   return disk === null || correction === null ? null : disk * correction;
 }
 
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
 export function project(matrix: readonly number[][], point: readonly number[]) {
   const q = [...point, 1], h = matrix.map(row => dot(row, q));
   return [h[0] / h[2], h[1] / h[2], h[2]];

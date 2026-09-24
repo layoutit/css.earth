@@ -5,6 +5,7 @@
  * body-specific findings among them. */
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { isRecord } from '../../src/platform/records.mts';
 
 export const INVESTIGATION_SURVEY_SCHEMA = 'cssearth-investigation-survey@1';
 export const INVESTIGATION_SURVEY_DIRECTORY = 'data/investigations';
@@ -20,7 +21,6 @@ export interface InvestigationSurvey {
 }
 
 const IDENTIFIER = /^[a-z0-9][a-z0-9-]*$/;
-const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
 function fail(context: string, message: string): never { throw new TypeError(`${context}: ${message}.`); }
 
 function line(value: unknown, context: string) {

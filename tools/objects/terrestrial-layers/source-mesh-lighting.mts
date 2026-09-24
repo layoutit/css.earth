@@ -1,8 +1,8 @@
 import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type {SourceMesh} from './contracts.mts';
 import {parseMeshLighting} from './source-records.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
 
 const unit = (v: readonly number[]) => { const length = Math.hypot(...v); return v.map(x => x / length); };
 

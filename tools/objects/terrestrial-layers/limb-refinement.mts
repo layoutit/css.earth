@@ -1,6 +1,7 @@
 import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type { SourceMesh } from './contracts.mts';
 import { parseArchivedCamera, parseLimbRefinement } from './source-records.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 /**
  * Pointing refinement against the retained mesh. Archived and kernel cameras
@@ -25,8 +26,6 @@ export interface LimbFrame extends LimbImage { camera: unknown; pixelMapping?: L
 export interface LimbEdgePoint { x: number; y: number; normal: [number, number]; partition: 'fit' | 'holdout' }
 type Vec3 = [number, number, number];
 type Matrix3 = [Vec3, Vec3, Vec3];
-
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 
 const unit = (v: readonly number[]): Vec3 => { const n = Math.hypot(v[0], v[1], v[2]); return [v[0] / n, v[1] / n, v[2] / n]; };
 const apply = (m: readonly (readonly number[])[], v: readonly number[]): Vec3 => [dot(m[0], v), dot(m[1], v), dot(m[2], v)];

@@ -13,9 +13,9 @@ import { rotateWorldPosition } from '../src/renderers/css/dist/navigation.js';
 import { wrapMapU } from './surface-minimap-math.mts';
 import { viewScale } from './view-format.mts';
 import { computeViewRectangle } from './vendor/cesium-view-rectangle.mjs';
+import { dotN as dot } from '../src/platform/vector3.mts';
 export interface MinimapCameraState { eye: PositionM; rotation: WorldRotation; view: MapViewport; axes: SurfaceAxes; }
 
-const dot = (a: PositionM, b: PositionM) => a.reduce((sum, x, i) => sum + x * b[i], 0);
 const referenceAxes: SurfaceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };
 
 // Adapt the existing CSS camera to Cesium's calculation interface. Coordinates

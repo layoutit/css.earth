@@ -22,6 +22,7 @@ export function shapeMaterialRaster(width: number, height: number): Buffer {
 
 import { BASE_TILE } from '@layoutit/polycss';
 import type { PreparedTriangle } from './contracts.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 interface ShapeAtlas {
   width: number; height: number;
   plans: readonly { face: PreparedTriangle; rect: { x: number; y: number; width: number; height: number }; matrix: readonly number[];
@@ -41,7 +42,6 @@ export function neutralShapeAtlas(atlas: ShapeAtlas, sun: readonly number[]) {
         ![rect.x, rect.y].every(Number.isSafeInteger) || rect.x < 0 || rect.y < 0 || rect.x + rect.width > width || rect.y + rect.height > height)
       throw new Error('Neutral material requires a retained affine source triangle.');
     const [a, b, c] = face.vertices, ab = b.map((v, i) => v - a[i]), ac = c.map((v, i) => v - a[i]);
-    const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
     const aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac), denominator = aa * bb - abac * abac;
     if (!(denominator > 0)) throw new Error('Degenerate neutral shape triangle.');
     const barycentric = (px: number, py: number) => {

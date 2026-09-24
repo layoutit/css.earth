@@ -1,3 +1,4 @@
+import { SHELL_SETTING_NAMES } from '../../../platform/shell-settings.mts';
 import { array, boolean, choice, fail, finite, integer, positive, record, text, unique } from './guards.js';
 import type { CameraPlan } from '../navigation/types.js';
 import type { ObjectControls } from '../runtime/object-contract.js';
@@ -17,7 +18,7 @@ export function requireControls(value: unknown): asserts value is ObjectControls
     const settings = record(controls.settings, 'settings'), names: string[] = [];
     for (const input of array(settings.controls, 'setting controls')) {
       const setting = record(input, 'setting'), name = text(setting.name, 'setting name'); names.push(name);
-      if (['motion', 'surfaceLabels', 'heliosphere', 'threeDStars'].includes(name)) fail('setting belongs to shared shell');
+      if (SHELL_SETTING_NAMES.has(name)) fail(`setting ${name} belongs to the shared shell`);
       const label = text(setting.label, 'setting label'), kind = choice(setting.kind, ['cycle', 'toggle'], 'setting kind');
       if (kind === 'toggle') boolean(setting.checked, 'toggle default');
       else {

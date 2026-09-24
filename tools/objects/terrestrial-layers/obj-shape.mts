@@ -7,9 +7,9 @@ import { promisify } from 'node:util';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 const exec = promisify(execFile);
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 
 

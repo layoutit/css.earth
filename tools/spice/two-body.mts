@@ -4,8 +4,7 @@
  * type 5 segments, which store discrete states and propagate between them.
  */
 import type { State } from './spk.mts';
-
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+import { dot3 as dot } from '../../src/platform/vector3.mts';
 
 /** Stumpff functions c2 and c3 of the universal anomaly parameter psi. */
 function stumpff(psi: number) {

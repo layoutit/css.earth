@@ -2,9 +2,9 @@ import { prepareCityPageGeometry } from "./page-geometry.mts";
 import { preparePageTextureQuad } from "./wms-page-geometry.mts";
 
 import type { GeographicScene, PageGeometry, TileAddress, WmtsPage } from './contracts.mts';
+import { dotN as dot } from '../../../../src/platform/vector3.mts';
 const caps = new WeakMap<GeographicScene, PageGeometry[]>();
 const latitude = (row: number, zoom: number) => Math.atan(Math.sinh(Math.PI*(1-2*row/2**zoom)))*180/Math.PI;
-const dot = (a: readonly number[],b: readonly number[]) => a.reduce((sum,v,i)=>sum+v*b[i],0);
 function inverse(m: readonly number[]) {
   const [a,b,c,d,e,f,g,h,i]=m;
   const r=[e*i-f*h,c*h-b*i,b*f-c*e,f*g-d*i,a*i-c*g,c*d-a*f,d*h-e*g,b*g-a*h,a*e-b*d];

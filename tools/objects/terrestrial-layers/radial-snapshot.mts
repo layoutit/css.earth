@@ -1,8 +1,7 @@
 import type {PreparedTriangle} from './contracts.mts';
 import sharp from 'sharp';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
-
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 /** An orthographic, full-phase context image from the same prepared surface
  * and mesh. This CPU rasterization runs only during source preparation. */

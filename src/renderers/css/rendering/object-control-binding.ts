@@ -1,5 +1,6 @@
 import type { ObjectControls, ObjectSelection, ObjectAction } from "../runtime/object-contract.js";
 import type { ObjectSelectionState } from "./object-selection-runtime.js";
+import { SHELL_SETTING_NAMES } from '../../../platform/shell-settings.mts';
 export interface ObjectControlBindingOptions {
   stage: HTMLElement; controls: ObjectControls; initialSelection: ObjectSelection; getState(): Readonly<ObjectSelectionState>;
   onAction(action: ObjectAction): unknown; onError(error: unknown): void;
@@ -49,7 +50,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const lensInputs = formButtons.filter(input => !input.hasAttribute('data-dataset-step'));
   const stepInputs = formButtons.filter(input => input.hasAttribute('data-dataset-step'));
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
-    .filter(input => !["motion", "heliosphere", "illustrationModels", "surfaceLabels", "threeDStars"].includes(input.name));
+    .filter(input => !SHELL_SETTING_NAMES.has(input.name));
   const details = lensInputs.map(input => {
     const id = input.getAttribute('aria-controls');
     const panel = id ? document.getElementById(id) : null;

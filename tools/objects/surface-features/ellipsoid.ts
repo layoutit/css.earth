@@ -1,5 +1,6 @@
 import { surfaceDirection } from './geometry.js';
 import type { SurfaceFeatureAxes } from './catalog.js';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 /** Ellipsoid anchoring for the shared feature preparation. Catalogue positions are geodetic (positive-east
  * longitude, geodetic latitude on the reference ellipsoid); the prepared anchor is the point where the
@@ -30,7 +31,6 @@ export interface RenderedSurfaceLimits { readonly minimumShare: number; readonly
  * 0.9° at Reykjavik). Anything beyond these limits means the surface map axes or edge disagree with the lane. */
 export const PAGED_ELLIPSOID_LIMITS: RenderedSurfaceLimits = Object.freeze({ minimumShare: 0.95, maximumShare: 1.05, longitudeDeg: 0.05, latitudeDeg: 3 });
 
-const dot = (a: Vector3, b: Vector3) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const finite = (value: unknown, at: string): number => { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be a finite number.`); return value; };
 
 export function parseEllipsoidSemiAxes(value: { readonly equatorial: unknown; readonly polar: unknown }): EllipsoidSemiAxesUnits {

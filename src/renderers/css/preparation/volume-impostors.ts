@@ -5,6 +5,7 @@ import sharp from 'sharp';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import type { PreparedCssVolume, PreparedVolumeImpostors, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '../volume/types.js';
 import type { PreparedVolumeLensBrightness } from '../volume/prepared-volume-lenses.js';
+import { dot3 as dot } from '../../../platform/vector3.mts';
 
 const SIZE = 256;
 const AXES = ['x', 'y', 'z'] as const;
@@ -211,7 +212,6 @@ function samplePremultiplied(pixels: Pixels, x: number, y: number, result: numbe
 
 function cssPixels(value: string): number[] { return value.trim().split(/\s+/u).map(part => Number.parseFloat(part)); }
 function digest(bytes: Uint8Array): string { return createHash('sha256').update(bytes).digest('hex'); }
-function dot(a: VolumeVector, b: VolumeVector): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
 function normalize(vector: VolumeVector): VolumeVector {
   const length = Math.hypot(...vector);
   return [vector[0] / length, vector[1] / length, vector[2] / length];
