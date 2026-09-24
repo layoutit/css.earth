@@ -3,13 +3,14 @@
   "objectId": "eps-indi-bb",
   "entries": [
     {
-      "id": "band-colour",
-      "subject": "A false colour from three measured bands, as the HR 8799 planets have",
+      "id": "colour",
+      "subject": "A colour for Epsilon Indi Bb",
       "status": "unresolved",
-      "finding": "A brown dwarf's visible spectrum is dominated by molecular and alkali absorption, so a blackbody colour at its temperature would not be its colour, and no calibrated visible spectrum of the resolved component is used here; it is the shared neutral gray.",
-      "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
+      "finding": "The only resolved spectra of Epsilon Indi Bb, from King et al. (2010, A&A 510, A99; VizieR J/A+A/510/A99), are flux-calibrated but start at 630 nm. The missing 380 to 630 nm carries most of what the eye would see: with the gap filled by a ramp through the resolved V limit it holds 63% of the luminance, and the colour moves from sRGB (255, 0, 0) with the gap empty to about (255, 42, 0) with it filled, so a colour would be the fill, not a measurement. A blackbody at the temperature would misrepresent a brown dwarf's absorbed spectrum as well. It stays the shared neutral gray.",
+      "revisitWhen": "A flux-calibrated spectrum of the resolved component covering about 400 to 630 nm is published.",
       "evidence": [
-        "https://arxiv.org/abs/0911.3143"
+        "https://arxiv.org/abs/0911.3143",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/510/A99"
       ],
       "checked": [
         {

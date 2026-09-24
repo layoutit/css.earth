@@ -10,7 +10,7 @@ Epsilon Indi Bb is the cooler of the two brown dwarfs far out from Epsilon Indi 
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Shape lens.** A sphere of the model radius in the shared neutral gray. King et al.'s resolved spectra start at 630 nm, and the missing blue part of the visible band would decide the colour, so no measured colour exists ([ledger](investigations.json)).
 
 **Rotation.** No rotation period or spin axis of Epsilon Indi Bb on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

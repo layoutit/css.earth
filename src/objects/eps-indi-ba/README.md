@@ -8,7 +8,7 @@ Epsilon Indi Ba is a brown dwarf 1,460 au from Epsilon Indi A. With Bb, a second
 
 **Mass, temperature and radius.** Mass 66.92 ± 0.36 Jupiter masses, measured from ten years of VLT orbit monitoring (Chen et al. [2022](https://arxiv.org/abs/2205.08077), Table 4). Temperature 1,312 ± 13 K from the SM08 hybrid evolutionary models at that mass and its luminosity (Chen et al. 2022). Radius 0.080 to 0.081 solar radii from COND03 models constrained by the dynamical system mass (King et al. [2010](https://arxiv.org/abs/0911.3143), A&A 510, A99); the lower bound is drawn. Model values, not a measured disc.
 
-**Surface.** The shared neutral gray: a blackbody colour would misrepresent a brown dwarf's absorbed visible spectrum ([ledger](investigations.json)).
+**Surface.** The shared neutral gray. King et al.'s resolved spectra start at 630 nm, and the missing blue part of the visible band, about two thirds of what the eye would see, would decide the colour, so no measured colour exists; a blackbody would misrepresent a brown dwarf's absorbed spectrum ([ledger](investigations.json)).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
