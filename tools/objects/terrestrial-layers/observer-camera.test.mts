@@ -8,6 +8,7 @@ import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCam
 import { parseTextKernel, numbers } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds, utcSecondsToEt } from '../../spice/lsk.mts';
 import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { kernelBankPaths } from '../../spice/kernel-bank.mts';
 const DEGREE = Math.PI / 180;
 const direction = (longitude: number, latitude: number): Vector =>
   [Math.cos(latitude * DEGREE) * Math.cos(longitude * DEGREE), Math.cos(latitude * DEGREE) * Math.sin(longitude * DEGREE), Math.sin(latitude * DEGREE)];
@@ -185,9 +186,9 @@ test('the ecliptic and equatorial frames round trip through the J2000 obliquity'
 });
 
 /** The shared kernel bank's planetary constants and leap seconds, as the Cassini route pins them. */
-const KERNELS = resolve(import.meta.dirname, '../../../src/spice/cassini');
-const planetaryConstants = () => parseTextKernel(readFileSync(resolve(KERNELS, 'pck/pck00011.tpc'), 'utf8'), 'pck00011.tpc');
-const leapSeconds = () => parseLeapSeconds(parseTextKernel(readFileSync(resolve(KERNELS, 'lsk/naif0012.tls'), 'utf8'), 'naif0012.tls'));
+const [PCK, LSK] = await kernelBankPaths('cassini', ['pck/pck00011.tpc', 'lsk/naif0012.tls']);
+const planetaryConstants = () => parseTextKernel(readFileSync(PCK!, 'utf8'), 'pck00011.tpc');
+const leapSeconds = () => parseLeapSeconds(parseTextKernel(readFileSync(LSK!, 'utf8'), 'naif0012.tls'));
 
 test('the camera evaluates an IAU pole model in ephemeris time, not in the UTC its frames are stamped in', () => {
   // 2017-07-14: 37 leap seconds plus the 32.184 s TAI-TT offset, with the periodic TDB term under two milliseconds.

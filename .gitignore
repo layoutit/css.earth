@@ -300,9 +300,18 @@ src/objects/*/source/**/*.bpc
 /src/objects/m45/.prepared-*/
 /src/objects/m8/.prepared-*/
 /src/objects/omega-centauri/.prepared-*/
-# Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
-src/spice/**/*.bsp
-src/spice/**/*.bc
+# SPICE kernels are restored from their origins, never committed: bank kernels by tools/spice/kernel-bank.mts,
+# body kernels by their acquisition steps (tools/assets/restore-source-inputs.mts), evidence kernels by the script
+# that reads them.
+*.[tT][lL][sS]
+*.[tT][sS][cC]
+*.[tT][fF]
+*.[tT][iI]
+*.[tT][pP][cC]
+*.[bB][pP][cC]
+*.[bB][sS][pP]
+*.[bB][cC]
+*.[tT][mM]
 
 # Original Pluto LEISA maps, restored from pinned published Zenodo downloads.
 /src/objects/pluto/source/science/leisa/*.fits
