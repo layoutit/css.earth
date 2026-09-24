@@ -39,7 +39,7 @@ import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
-import { encodeBandColor } from '../color-transfer.mts';
+import { encodeBandColor, hostLitGray } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
@@ -409,8 +409,11 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       case 'neutral-shape': {
         // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.
         // The surface source names the authored record that states this, so the manifest still binds the lens.
+        // Under `hostLight`, the gray keeps its brightness and takes the chromaticity of the host star's measured colour: a
+        // neutral reflector under its own star's light instead of under a white lamp. The host's colour lens is the source.
+        const gray = surface.science.hostLight === undefined ? [128, 128, 128] as const : hostLitGray(requireString(requireRecord(surface.science.hostLight, 'science.hostLight').srgb, 'science.hostLight.srgb'));
         const data = Buffer.alloc(width * height * 4);
-        for (let offset = 0; offset < data.length; offset += 4) { data[offset] = 128; data[offset + 1] = 128; data[offset + 2] = 128; data[offset + 3] = 255; }
+        for (let offset = 0; offset < data.length; offset += 4) { data[offset] = gray[0]; data[offset + 1] = gray[1]; data[offset + 2] = gray[2]; data[offset + 3] = 255; }
         // An emissive body (a star with no observation) still owes the presentation its off-limb and limb plates: both transparent.
         if (recipe.emission) return { data, channels: 4, nearest: true, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) };
         return { data, channels: 4, nearest: true };
@@ -477,6 +480,18 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         return { data, channels: 4, nearest: true, ...plates, report: { discIntegratedBandColor: { srgb: color.srgb, linearDisplay: color.linear, bands: color.record.bands, unit: color.record.unit,
           displayRange: color.record.displayRange, displayRangeSource: color.record.displayRangeSource, source: color.record.source,
           meaning: 'Infrared false colour, uniform over the body: red, green and blue are the published flux densities in three bands, longest wavelength red, over one range shared with the bodies it names; not a natural colour and not a resolved surface map.' } } };
+      }
+      case 'dayside-thermal-color': {
+        // A transiting planet with a measured dayside brightness temperature (secondary eclipse) and no image: the whole disc takes
+        // the colour of a black body at that temperature, and the lighting bank turns the day side to its star. Reflected starlight
+        // is not added: the eclipse depth at the cited wavelength is thermal, and nothing measured says how much light the planet reflects.
+        const source = await manifest;
+        const { temperature, color } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); }, surface.science, surface.source);
+        if (recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a dayside thermal colour belongs to a lit body, not an emissive one.`);
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
+        return { data, channels: 4, nearest: true, report: { daysideThermalColor: { srgb: color.srgb, temperature,
+          meaning: 'Colour of a black body at the dayside brightness temperature measured in secondary eclipse at the cited wavelength, uniform over the disc; the planet is unresolved, and reflected starlight is not included.' } } };
       }
       case 'stellar-photometric-color': {
         // A self-luminous photosphere with no image: one colour from its measured spectrum or catalogued photometric temperature, no map.

@@ -115,6 +115,45 @@
         "kind": "local",
         "reason": "Measurement record authored in this package from public MAST products; repinned when edited."
       }
+    },
+    {
+      "id": "wasp-39b-thermal-color",
+      "path": "photometry/thermal-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract",
+      "credit": "Kammer et al. 2015, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archive row chosen and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored colour recipe naming the cited brightness temperature; repinned when edited."
+      }
+    },
+    {
+      "id": "wasp-39b-emission-spectroscopy",
+      "path": "photometry/emission-spectroscopy.csv",
+      "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+plntname%2Ccentralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cespbritemp%2Cespbritemperr1%2Cespbritemperr2%2Cespbritemplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27WASP-39+b%27+order+by+centralwavelng&format=csv",
+      "credit": "NASA Exoplanet Archive, emission spectroscopy table (secondary-eclipse depths and brightness temperatures as published)",
+      "license": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "acquisition": "TAP query in source/preparation/acquisition.json: every emission row of this planet, ordered by wavelength.",
+      "redistribution": "Table rows as served, with the archive acknowledged.",
+      "consumers": [
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-39b-emission-spectroscopy",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

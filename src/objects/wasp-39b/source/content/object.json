@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by WASP-39; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "wasp-39b-lens-shape.webp",
-        "surface": "wasp-39b-surface-shape@2x.webp",
-        "poles": "wasp-39b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body colour at its measured dayside temperature, 1,213 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-39b-lens-thermal.webp",
+        "surface": "wasp-39b-surface-thermal@2x.webp",
+        "poles": "wasp-39b-poles-thermal@2x.webp",
         "source": {
-          "id": "wasp-39b-observational-measurements",
+          "id": "wasp-39b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/1802.03859"
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of this planet exists (it has never been resolved: its size, orbit and transmission spectrum are measured, not its surface; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+        "notes": "The colour of WASP-39 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

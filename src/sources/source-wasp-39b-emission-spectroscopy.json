@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-39b-emission-spectroscopy",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-39 b · wasp 39b emission spectroscopy",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+plntname%2Ccentralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cespbritemp%2Cespbritemperr1%2Cespbritemperr2%2Cespbritemplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27WASP-39+b%27+order+by+centralwavelng&format=csv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-39b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA Exoplanet Archive, emission spectroscopy table (secondary-eclipse depths and brightness temperatures as published)",
+      "scope": "The wasp 39b emission spectroscopy input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

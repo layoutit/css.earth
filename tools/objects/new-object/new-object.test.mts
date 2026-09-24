@@ -104,3 +104,36 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   // A mass that makes an impossible density is refused before the records see it.
   assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.1, provenance: 'Mass', limit: false, label: 'D et al. 2023' }), /g\/cm\^3, outside what the records accept/u);
 });
+
+test('a planet takes its colour from what is measured: the emission row with the smallest relative uncertainty, else its host\'s light on the gray', async () => {
+  const { EMISSION_COLUMNS, parseEmissionRows, pickThermalRow } = await import('./planet-lenses.mts');
+  const { hostLitGray } = await import('../color-transfer.mts');
+  const csv = [EMISSION_COLUMNS,
+    'WASP-39 b,0.8,0.4,,,,,,,,,TESS,,"<a refstr=X href=https://ui.adsabs.harvard.edu/abs/2021AJ....162..127W/abstract target=ref>Wong et al. 2021</a>"',
+    'WASP-39 b,3.6,0.75,220,40,-40,0,1050,50,-50,0,Spitzer,IRAC,"<a refstr=Y href=https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract target=ref>Kammer et al. 2018</a>"',
+    'WASP-39 b,4.5,1.0,300,45,-45,0,1100,80,-80,0,Spitzer,IRAC,"<a refstr=Y href=https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract target=ref>Kammer et al. 2018</a>"',
+    'WASP-39 b,15,3,900,100,-100,0,1500,60,-60,1,JWST,MIRI,"<a refstr=Z href=https://ui.adsabs.harvard.edu/abs/2099ApJ...1...1A/abstract target=ref>Anyone 2099</a>"'].join('\n');
+  const rows = parseEmissionRows(csv);
+  assert.equal(rows.length, 4);
+  assert.deepEqual([rows[0]!.temperatureK, rows[1]!.temperatureErrorK, rows[3]!.temperatureLimit, rows[1]!.label, rows[1]!.url], [undefined, 50, true, 'Kammer et al. 2018', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract']);
+  const picked = pickThermalRow(rows)!;
+  assert.deepEqual([picked.wavelengthMicrometres, picked.temperatureK], [3.6, 1050], 'the 3.6 µm row: 50/1050 beats 80/1100; the 15 µm limit is never a value');
+  assert.equal(pickThermalRow([rows[0]!, rows[3]!]), undefined);
+  assert.deepEqual(hostLitGray('#808080'), [128, 128, 128], 'a gray host leaves the gray');
+  const red = hostLitGray('#ff8040');
+  assert.ok(red[0] > red[1] && red[1] > red[2], 'an orange host makes the gray orange');
+  const luminance = (rgb: readonly number[]) => 0.2126 * ((rgb[0]! / 255) ** 2.2) + 0.7152 * ((rgb[1]! / 255) ** 2.2) + 0.0722 * ((rgb[2]! / 255) ** 2.2);
+  assert.ok(Math.abs(luminance(red) - luminance([128, 128, 128])) < 0.01, 'at the gray\'s brightness');
+});
+
+test('band photometry in a spec is checked by the lens\'s own parser: three bands red to blue on a shared range from zero', async () => {
+  const { parsePhotometryEntries } = await import('./spec.mts');
+  const photometry = { unit: 'µJy', source: { citation: 'Carter et al. (2023), ApJL 951, L20', url: 'https://arxiv.org/abs/2208.14990', locator: 'Table 3, HIP 65426 b' },
+    bands: [{ band: 'F444W', wavelengthMicrometres: 4.4, value: 300, error: 20 }, { band: 'F356W', wavelengthMicrometres: 3.56, value: 250, error: 15 }, { band: 'F300M', wavelengthMicrometres: 3.0, value: 120, error: 10 }],
+    displayRange: [0, 300], displayRangeSource: 'One range for this planet alone, to its brightest band.' };
+  const entries = parsePhotometryEntries([{ id: 'hip-65426-b', photometry }]);
+  assert.deepEqual(entries.get('hip-65426-b')!.bands.map(band => band.band), ['F444W', 'F356W', 'F300M']);
+  assert.throws(() => parsePhotometryEntries([{ id: 'x', photometry: { ...photometry, bands: [photometry.bands[2], photometry.bands[1], photometry.bands[0]] } }]), /red, green, blue/);
+  assert.throws(() => parsePhotometryEntries([{ id: 'x', photometry: { ...photometry, displayRange: [0, 200] } }]), /above the common range/);
+  assert.throws(() => parsePhotometryEntries([{ id: 'x', photometry }, { id: 'x', photometry }]), /listed twice/);
+});

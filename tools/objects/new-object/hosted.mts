@@ -13,6 +13,7 @@ import { parseCieTable } from '../observation/disc-integrated-color.mts';
 import { type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
+import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, thermalFromArchive } from './planet-lenses.mts';
 import { chooseLimb } from './limb.mts';
 import { archiveRows, assembleArchiveOrbit, compositeMass, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
 import { TODO } from './scaffold.mts';
@@ -97,6 +98,21 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     Object.assign(measurements, { surfaceGravityLogg: logg, surfaceGravitySource: `log g from the mass and radius in packages/astronomy/data/bodies/${id}.json, log10(GM/R^2) in cgs, rounded to two decimals` });
     files.set(`${s}/measurements.json`, json(measurements));
   }
+  // A planet's colour from what is measured (planet-lenses.mts): its dayside temperature in eclipse, else its star's light on the gray.
+  let colorLine: string | undefined, colorCredit: string | undefined;
+  if (!star && spec.photometry) {
+    const installed = await installBandColorLens(files, id, spec.name, spec.photometry);
+    colorHex = installed.hex; colorCredit = installed.credit;
+    colorLine = `**Colour.** Infrared false colour from the flux densities ${spec.photometry.source.citation} publishes (${spec.photometry.source.locator}): ${colorHex}. ${spec.photometry.displayRangeSource}`;
+  } else if (!star && spec.thermal) {
+    const { csv } = await thermalFromArchive(archive, spec.name);
+    const installed = await installThermalLens(files, id, spec.name, spec.thermal, csv);
+    colorHex = installed.hex; colorCredit = installed.credit;
+    colorLine = `**Colour.** A black body at the ${spec.thermal.temperatureK.toLocaleString('en-US')} K dayside brightness temperature measured in secondary eclipse at ${spec.thermal.wavelengthMicrometres} µm (${spec.thermal.source}): ${colorHex}. Chosen from the archive's emission rows by rule: ${spec.thermal.chosen}. Reflected starlight is not included.`;
+  } else if (!star && !t) {
+    const light = await hostLightOf(root, record.hostId);
+    if (light) { installHostLight(files, id, light); colorLine = `**Colour.** No image or measured colour exists. The neutral gray is lit by ${record.hostId}'s measured colour (${light.srgb}, ${light.source}) at the gray's own brightness.`; }
+  }
   const measurements = read(`${s}/measurements.json`);
   measurements.massSource = `${record.mass.value} ${star ? 'solar' : 'Jupiter'} masses: ${record.mass.source} (${record.mass.url}).`;
   files.set(`${s}/measurements.json`, json(measurements));
@@ -135,10 +151,10 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   const hosted = star ? 'companion star' : 'planet';
   files.set(`${o}/NOTICE.md`, [`# ${spec.name} credits`, `Radius: ${record.radius.source}. Mass: ${record.mass.source}.${t ? ` Temperature: ${t.source}.` : ''}`,
     `Orbit: ${record.orbitCitation.text}${'whereistheplanet' in spec.orbit ? '; the posterior distributed by whereistheplanet (Wang et al. 2021)' : ''}.`,
-    ...star ? ['Colour: a Planck spectrum at the cited temperature through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).'] : []].join('\n\n') + '\n');
+    ...star ? ['Colour: a Planck spectrum at the cited temperature through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).'] : colorCredit ? [colorCredit] : []].join('\n\n') + '\n');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '', spec.text ? `${spec.text.introduction} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name} is a ${hosted} of ${record.hostId}. ${TODO}: what it is and why it is here, from ${spec.paper.credit}.`, '',
     `**Size and mass.** ${String(record.body.physicalNotes)}`, '', `**Orbit.** ${Object.values(record.orbit.sources).join(' ')}`, '',
-    ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : [],
+    ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : colorLine ? [colorLine, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? ['- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.'] : [`- ${TODO}: anything else not shown and why.`], '',

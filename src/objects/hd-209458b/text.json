@@ -44,10 +44,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Shape only",
-      "detail": "Published radius",
-      "summary": "A gray sphere of the measured radius. No colour or surface is observed; its atmosphere is measured in transmission."
+    "thermal": {
+      "title": "Thermal glow",
+      "detail": "From its measured dayside temperature",
+      "summary": "The colour of a black body at the 1,499 K day side measured in eclipse."
     }
   }
 }

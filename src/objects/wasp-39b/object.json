@@ -29,7 +29,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "thermal",
               "source": "content",
               "material": "lighting"
             }

@@ -190,6 +190,20 @@ this order and keeps the first spectrum the reader accepts, with the next as its
 Library, Gaia DR3 XP (from the ARI Heidelberg mirror when ESA's DataLink is down), Pulkovo, Kiehling, Kharitonov, then Burnashev's
 part 2. With none, the colour is a Planck spectrum at the cited temperature.
 
+A planet nobody has imaged takes its colour from what is measured
+([new-object/planet-lenses.mts](../tools/objects/new-object/planet-lenses.mts)). Where the NASA Exoplanet Archive's
+emission-spectroscopy table holds a measured dayside brightness temperature from a secondary eclipse, the planet gets the
+"Thermal glow" lens: a black body at that temperature over the disc, lit by the sphere lighting so the day side faces its
+star, with reflected starlight left out because nothing measured says how much there is. The row is chosen by rule, the
+smallest relative uncertainty and the longest wavelength on a tie, every row is kept in the package, and the choice is
+stated in the record. Below about 1,800 K a black body lies outside sRGB and is shown mixed with the least white that brings
+it inside, hue kept, which the lens says. A planet with nothing measured keeps the neutral gray, lit by its host's measured
+colour instead of a white lamp: the gray's brightness with the host colour lens's chromaticity (`hostLitGray` in
+[color-transfer.mts](../tools/objects/color-transfer.mts)). `telescope new-object --from-archive` does both; `--thermal <id>...`
+and `--host-light <id>...` give them to planets already in the tree.
+
+![Lens thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
+
 The star's catalogue swatch, minimap dot and navigation marker take the same colour
 ([stellar-spectra/author.mts](../tools/objects/source-authoring/stellar-spectra/author.mts)). A star with no usable
 spectrum keeps the star field's temperature fit at a cited effective temperature
