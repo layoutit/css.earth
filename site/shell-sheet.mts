@@ -199,6 +199,13 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   search.addEventListener("input", openSearch, { signal });
   search.addEventListener("keydown", closeSearch, { signal });
   sheet.addEventListener("keydown", closeSearch, { signal });
+  // A filter pill opens its list the way typing does, and pressing the open pill again returns the sheet. Capture runs
+  // before the browser toggles the pill, so aria-pressed still says which way this press goes.
+  documentTarget.querySelector(".object-search-categories")?.addEventListener("click", (event) => {
+    const pill = event.target instanceof windowTarget.Element ? event.target.closest(".object-search-category") : null;
+    if (!pill) return;
+    if (pill.getAttribute("aria-pressed") === "true") leaveSearch(); else openSearch();
+  }, { capture: true, signal });
   // Clearing the query leaves the results behind, exactly as Escape does.
   documentTarget.querySelector(".object-sidebar-search-clear")
     ?.addEventListener("click", leaveSearch, { signal });
