@@ -2,7 +2,7 @@ import type {RasterImage} from '../objects/observation/raster.mts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.mts';
 import {parsePagedProfile} from '../objects/paged-ellipsoid/profile-source.mts';
-import {requireRecord} from '../sources/source-values.mts';
+import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';

@@ -17,7 +17,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations } from './archive-search.mts';
 
 const OPUS = 'https://opus.pds-rings.seti.org/api';

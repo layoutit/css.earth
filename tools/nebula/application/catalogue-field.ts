@@ -6,7 +6,7 @@ import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/obje
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../../../src/renderers/css/navigation/world-camera-math.js';
 import { validatePreparedCataloguePoints, type PreparedCataloguePoint } from '../../../src/renderers/css/stars/prepared-catalogue-points.js';
 import { ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
-import { isRecord } from '../../../src/platform/records.mts';
+import { isRecord } from '@cssearth/core';
 
 type Vector = readonly [number, number, number];
 function record(v: unknown): Record<string, unknown> {

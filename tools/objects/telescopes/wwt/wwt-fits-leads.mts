@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { TargetCatalogueEntry } from '../targets.mts';
 
 export interface WwtFitsLead { readonly pick:number;readonly target:string;readonly catalog:string;readonly catalogSha256:string;

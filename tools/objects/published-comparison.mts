@@ -13,7 +13,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { sha256 } from '../../src/platform/sha256.mts';
-import { requireArray, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 import { readPdfImage } from '../fits/pdf-image.mts';
 import { lamBytes } from './sphere-survey/lam.mts';
 import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera } from './terrestrial-layers/observer-cameras.mts';

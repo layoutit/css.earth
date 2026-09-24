@@ -1,5 +1,5 @@
 import type { ObjectContentSource } from '../../tools/objects/content/types.ts';
-import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '../../tools/objects/material-composition/data-schema.mts';
+import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '@cssearth/core/schema';
 
 const source = object({ id: string, path: optional(string), url: optional(string) });
 const fact = object({ id: string, label: string, value: string, source: optional(object({

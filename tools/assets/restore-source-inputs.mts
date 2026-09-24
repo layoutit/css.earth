@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { hasErrorCode } from '../sources/source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 import { lstat, mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 

@@ -5,7 +5,7 @@ const test = sourceTest();
 import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAssociationTree } from '../interferometry/eso-associations.mts';
 import { parseRawTable } from '../interferometry/eso-pipeline.mts';
 import { evidenceFor, productRecordPath, readProductRecord } from '../product-record.mts';

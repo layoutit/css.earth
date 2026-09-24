@@ -12,7 +12,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
-import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { loadRadialModels } from './terrestrial-layers/radial-models.mts';
 import { radialModelForLens } from './terrestrial-layers/alternative-lenses.mts';
 import { requireTerrainMesh } from './terrestrial-layers/radial-mesh.mts';

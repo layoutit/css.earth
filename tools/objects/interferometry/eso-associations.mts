@@ -16,7 +16,7 @@
 import { access, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { archiveHeader, esoEnvironment, esoHeader, frameTime, rawFrame, runRecipe, type EsoHeader, type EsoPipeline } from './eso-pipeline.mts';
-import { requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 
 export interface AssociationFile { readonly category: string; readonly name: string }

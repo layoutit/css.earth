@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
-import { requireArray, requireRecord } from '../../sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 import { writeProductRecord } from '../product-record.mts';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';

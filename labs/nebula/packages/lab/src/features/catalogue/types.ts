@@ -1,5 +1,6 @@
 export * from '@cssearth/nebula-reconstruction/observations/model';
-import {record,safeArchiveUrl,readArchiveQuery as readQuery,type ArchiveQuery} from '@cssearth/nebula-reconstruction/observations/model';
+import {isRecord as record} from '@cssearth/core';
+import {safeArchiveUrl,readArchiveQuery as readQuery,type ArchiveQuery} from '@cssearth/nebula-reconstruction/observations/model';
 export interface MessierObject {
   id: string; messier: number; name: string; aliases: string[]; type: string;
   raDegrees: number; decDegrees: number; majorArcmin: number | null; minorArcmin: number | null;

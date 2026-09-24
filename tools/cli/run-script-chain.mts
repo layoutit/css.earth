@@ -9,7 +9,7 @@ import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireRecord, requireString } from '../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 
 export interface ChainStep { readonly script: string; readonly command: string }
 

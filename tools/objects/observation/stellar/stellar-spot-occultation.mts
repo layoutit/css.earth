@@ -1,7 +1,7 @@
 /** A dated transit-chord reconstruction on a camera-facing stellar limb plate.
  * A spot occultation constrains one dark active region, not a global surface map.
  * The orbit's sky position angle and the direction of transit are display conventions. */
-import { requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export interface SpotOccultation {
   readonly planet: string;

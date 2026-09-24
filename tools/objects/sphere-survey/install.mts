@@ -15,7 +15,7 @@ import { access, copyFile, mkdir, readFile, readdir, rename, rm, writeFile } fro
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { authorSourceRecords } from '../../sources/author-source-records.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '../report-registration.mts';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '../surface-observations/published-comparison.mts';
 import { OBSERVER_CAMERAS_FILE } from '../terrestrial-layers/observer-cameras.mts';

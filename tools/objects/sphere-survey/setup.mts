@@ -18,7 +18,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFitsHdu } from '../../fits/fits.mts';
 import { readPdfImage } from '../../fits/pdf-image.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
 import { horizonsCommand, horizonsTables, tableInput } from '../sphere-horizons.mts';
 import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../surface-observations/published-comparison.mts';

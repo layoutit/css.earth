@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { requireArray, requireRecord } from '../../../tools/sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 import { parseRadialLoaderConfig } from '../../../tools/objects/terrestrial-layers/radial-source.mts';
 import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { requireTerrainMesh } from '../../../tools/objects/terrestrial-layers/radial-mesh.mts';

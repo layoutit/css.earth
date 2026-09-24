@@ -9,8 +9,7 @@ import sharp from 'sharp';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { parseRuntimeManifest } from './runtime-assets.js';
-import { requireRecord, requireArray } from '../sources/source-values.mts';
-import { requireString } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString } from '@cssearth/core';
 
 export async function refreshPhotographs(id: string, lensIds: readonly string[]) {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)

@@ -4,7 +4,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {gunzipSync} from 'node:zlib';
-import {requireArray,requireRecord,requireFiniteNumber} from '../../sources/source-values.mts';
+import {requireArray,requireRecord,requireFiniteNumber} from '@cssearth/core';
 import {parseMappedCompositionRecipe,prepareMappedComposition} from './mapped-composition.mts';
 import {loadScienceSurface} from '../terrestrial-layers/scientific-raster.mts';
 

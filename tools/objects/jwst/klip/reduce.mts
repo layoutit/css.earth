@@ -16,7 +16,7 @@ import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { freeMemoryPercent, toolchainPython } from '../mast.mts';
 import { jwstToolchain } from '../toolchain.mts';
 

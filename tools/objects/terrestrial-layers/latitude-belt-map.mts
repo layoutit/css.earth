@@ -11,7 +11,7 @@
  * black lines, for a limit the paper draws, such as the latitude the star never turns toward us. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export function parseLatitudeBelts(text: string, path: string, column: number) {
   const rows = text.split('\n').filter(line => line.trim() && !line.trimStart().startsWith('#')).map((line, i) => {

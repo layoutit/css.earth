@@ -1,6 +1,7 @@
 /** Offline mesh construction; runtime receives only retained transforms and source-derived normals. */
 import type { ShellRecipe } from './config.js';
-import { record, triple, type Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import { requireRecord as record } from '@cssearth/core';
+import { triple, type Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
 import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 
 export interface ShellMesh {

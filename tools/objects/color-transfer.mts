@@ -1,4 +1,4 @@
-import { requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 
 /** IEC 61966-2-1 as published by the ICC. This is a display encoding, not an
  * instrument calibration or a transformation from spectral bands to human vision. */

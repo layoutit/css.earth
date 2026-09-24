@@ -3,7 +3,8 @@ import type { CalibrationDescriptor, DescriptorMember, FrameDescriptor, Observab
 import type { FamilyHandler, FamilyOperation } from '../../family-handlers.mts';
 import { pds3Values } from '../../../pds3-labels.mts';
 import { pds4Elements, pds4Field, pds4Number } from '../../../pds-labels.mts';
-import { csv, descriptor, finite, stable } from '../common.mts';
+import { csv, descriptor, stable } from '../common.mts';
+import { requireFiniteNumber as finite } from '@cssearth/core';
 
 export const F16_PLANETARY_COVERAGE_PROFILE='exact-sparse-planetary-coverage@1' as const;
 export type SparseCoverageKind='track'|'ray'|'station'|'profile';

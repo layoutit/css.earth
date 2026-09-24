@@ -19,7 +19,7 @@ import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const repository = resolve(import.meta.dirname, '../../..');
 const DESCRIPTOR = resolve(import.meta.dirname, 'toolchains.json');

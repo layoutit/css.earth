@@ -1,46 +1,8 @@
+import { checks, failure, type Fail } from '@cssearth/core';
 export type RecordValue = Record<string, unknown>;
-export function fail(message: string): never { throw new TypeError(`Prepared presentation: ${message}.`); }
-function plainRecord(value: unknown): value is RecordValue {
-  return value !== null && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype;
-}
-export function record(value: unknown, label: string, fields?: readonly string[]): RecordValue {
-  if (!plainRecord(value)) fail(`${label} must be a plain record`);
-  if (fields) for (const key of Object.keys(value)) if (!fields.includes(key)) fail(`unsupported ${label} field ${key}`);
-  return value;
-}
-export function array(value: unknown, label: string): unknown[] {
-  if (!Array.isArray(value)) fail(`${label} must be an array`);
-  return value;
-}
-export function text(value: unknown, label: string, empty = false): string {
-  if (typeof value !== 'string' || (!empty && !value.length)) fail(`${label} must be a string${empty ? '' : ' with content'}`);
-  return value;
-}
-export function finite(value: unknown, label: string): number {
-  if (typeof value !== 'number' || !Number.isFinite(value)) fail(`${label} must be finite`);
-  return value;
-}
-export function positive(value: unknown, label: string): number {
-  const result = finite(value, label); if (!(result > 0)) fail(`${label} must be positive`); return result;
-}
-export function integer(value: unknown, label: string, minimum = 0): number {
-  const result = finite(value, label); if (!Number.isSafeInteger(result) || result < minimum) fail(`${label} must be an integer at least ${minimum}`); return result;
-}
-export function boolean(value: unknown, label: string): boolean {
-  if (typeof value !== 'boolean') fail(`${label} must be boolean`); return value;
-}
-export function choice<const T extends readonly (string | number | boolean | null)[]>(value: unknown, choices: T, label: string): T[number] {
-  for (const item of choices) if (item === value) return item;
-  return fail(`unsupported ${label}`);
-}
-export function unique(values: readonly unknown[], label: string): void {
-  if (new Set(values).size !== values.length) fail(`${label} has duplicate identities`);
-}
-export function numbers(value: unknown, label: string, length?: number): number[] {
-  const result = array(value, label).map(item => finite(item, label));
-  if (length !== undefined && result.length !== length) fail(`${label} has incompatible dimensions`);
-  return result;
-}
+/** Prepared presentation checks report `Prepared presentation: <message>.`; `record` accepts only plain records. */
+export const fail: Fail = failure('Prepared presentation: ');
+export const { record, array, text, finite, positive, integer, boolean, choice, unique, numbers } = checks(fail);
 export function direction(value: unknown, label: string, tolerance = 1e-9): number[] {
   const result = numbers(value, label, 3);
   if (Math.abs(Math.hypot(...result) - 1) > tolerance) fail(`${label} must be a unit direction`);

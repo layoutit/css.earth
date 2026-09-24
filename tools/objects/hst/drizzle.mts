@@ -25,7 +25,7 @@ import { mkdir, readdir } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastFile } from '../astronomy-packages/mast.mts';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
 import { fileSize, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';

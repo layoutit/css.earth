@@ -9,7 +9,7 @@ import sharp from "sharp";
 import type { ObjectEntry } from '../../site/object-schema.mts';
 import type { MarkerDescriptor } from '../../src/navigation/marker-recipe.mts';
 import type { MarkerPresentation } from '../../src/navigation/marker-presentation.mts';
-import { hasErrorCode, isRecord, requireRecord } from '../sources/source-values.mts';
+import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 type MarkerPlanet = Pick<ObjectEntry, 'id' | 'classification'>;
 type ObjectMarkerDescriptor = MarkerDescriptor & {presentation: MarkerPresentation};

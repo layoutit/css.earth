@@ -2,7 +2,7 @@
 import { containedPath } from './source-files.ts';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { inventoryPublicAssets, requireInventory } from '../../src/platform/runtime-asset-closure.mts';
-import { requireRecord as object } from '../sources/source-values.mts';
+import { requireRecord as object } from '@cssearth/core';
 import { readFile, readdir, unlink, lstat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 export interface RuntimeAsset { filename:string;bytes:number;sha256:string; }

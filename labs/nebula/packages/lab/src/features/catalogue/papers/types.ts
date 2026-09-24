@@ -1,4 +1,4 @@
-import { record } from '../types';
+import { isRecord as record } from '@cssearth/core';
 
 export const paperSchema = 'cssearth-messier-papers@1';
 export const paperRoot = '.local/nebula-lab/catalogue/messier/papers';

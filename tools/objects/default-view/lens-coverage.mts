@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Vector3 } from '../../../src/renderers/css/solar-system/types.ts';
 import { detectMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
-import { isRecord } from '../../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 
 const DEGREE = Math.PI / 180;
 export interface LensCoverage { readonly lens: string; readonly missing: Uint8Array; readonly width: number; readonly height: number;

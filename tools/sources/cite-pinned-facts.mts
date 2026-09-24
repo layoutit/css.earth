@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { sha256 } from '../../src/platform/sha256.mts';
-import { hasErrorCode, requireArray, requireRecord, requireString } from './source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 /**
  * A published fact names its source. This tool cites an uncited factsheet value from a record the body pins (JPL

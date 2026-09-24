@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { writeProductRecord, parseProductRecord } from '../product-record.mts';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';

@@ -20,7 +20,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { defaultDataRoot, readSpitzerProgram, REPOSITORY, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { spitzerSoftware, spitzerToolchain } from './toolchain.mts';

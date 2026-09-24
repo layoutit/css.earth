@@ -4,7 +4,7 @@
  * that cssEarth already pins, without asking a scientific-query caller to run a separate archive command first. */
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
 
 const measurement = (value: string, field: string) => {

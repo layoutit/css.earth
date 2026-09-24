@@ -2,7 +2,8 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
-import { record, text } from '@cssearth/volume-core/contracts/volume-recipe';
+import { requireRecord as record } from '@cssearth/core';
+import { text } from '@cssearth/volume-core/contracts/volume-recipe';
 import { sourceBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { parseShellRecipe } from './config.js';
 import { loadShellMesh } from './mesh.js';

@@ -5,7 +5,7 @@
  * body-specific findings among them. */
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { isRecord } from '../../src/platform/records.mts';
+import { isRecord } from '@cssearth/core';
 
 export const INVESTIGATION_SURVEY_SCHEMA = 'cssearth-investigation-survey@1';
 export const INVESTIGATION_SURVEY_DIRECTORY = 'data/investigations';

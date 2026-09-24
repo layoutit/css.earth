@@ -1,6 +1,6 @@
 /** Download one OPUS observation's native PDS image with its label and support files. */
 import { readFile } from 'node:fs/promises';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { OPUS_SERVICE, fetchOpus, type OpusFetch } from './opus.mts';
 import { deliverSource, type SavedSource, type SourceFile } from './archive-source.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';

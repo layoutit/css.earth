@@ -21,7 +21,7 @@
 import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { cxcQuery, observationMode, parseChandraProgram, PROGRAMS, REFUSED_MODES, type ChandraObservation } from './archive.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');

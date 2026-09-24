@@ -1,6 +1,6 @@
 import { required } from '../../contract/test-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, writeFile, readFile, rm } from 'node:fs/promises';

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readOracleFixture } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { brightnessTemperatureKelvin, planckIntensity } from './interferometry/alma-disc-selfcal.mts';
 import { rayleighPerSample } from './hst/line-stack-reduction.mts';
 

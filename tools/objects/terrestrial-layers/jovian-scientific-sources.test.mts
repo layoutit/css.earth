@@ -1,6 +1,6 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
-import { requireArray } from '../../sources/source-values.mts';
-import { parseGeologyLens,shape,array,number,text } from './source-records.mts';
+import { requireArray, shape, array, number, text } from '@cssearth/core';
+import { parseGeologyLens } from './source-records.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();

@@ -1,8 +1,8 @@
 import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
-import {parse} from './data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {layeredPresentationRecipe} from './presentation-recipe.mts';
 import {parseLayeredLenses,parseLayeredAtlas} from './presentation-source.mts';
-import {requireString} from '../../sources/source-values.mts';
+import {requireString} from '@cssearth/core';
 import type {createLayeredOblatePreparation} from './layered-oblate.mts';
 import type {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';

@@ -4,7 +4,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 import type { EurekaToolchain } from './toolchain.mts';
 
 export { MAST_CACHE, exists, mastDownloadUrl, mastFile, mastRequest, mastService, type MastFile } from '../astronomy-packages/mast.mts';

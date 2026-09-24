@@ -1,3 +1,4 @@
+import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
 export type Vector3 = [number, number, number];
 /** Row-major transform of ordinary display RGB values during offline preparation. */
@@ -26,14 +27,6 @@ export interface VolumeRecipe {
   anchors: { id: string; referencePositionM: Vector3 }[];
   provenance: { path: string };
   sky?: { path: string };
-}
-export function record(value: unknown, at: string): Record<string, unknown> {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
-  return value as Record<string, unknown>;
-}
-export function finite(value: unknown, at: string): number {
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be finite.`);
-  return value;
 }
 function positive(value: unknown, at: string, integer = false): number {
   const n = finite(value, at);

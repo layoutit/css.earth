@@ -1,7 +1,7 @@
 import type { ResolutionAssumption } from '../resolution-evidence.mts';
 import { parseLimits, parseRegion } from './vo/contracts.mts';
 /** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
-import { requireArray, requireFiniteNumber, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 export function inputWavelengths(request: CapabilityRequest): readonly [number,number] {
   if (!request.continuumMicrometres) return request.wavelengthMicrometres;
   if (request.kind && request.kind !== 'cube') throw new TypeError('Band-depth continuum windows require a cube.');

@@ -18,7 +18,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { starStylesheet } from './new-object/scaffold.mts';
 import { temperatureCatalogueColor } from './star-catalogue-color.mts';
 

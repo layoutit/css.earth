@@ -1,5 +1,5 @@
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
-import { array, number, shape, text } from './source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
 import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 

@@ -1,4 +1,4 @@
-import { shape, text, number, array } from './source-records.mts';
+import { shape, text, number, array } from '@cssearth/core';
 const parseRingProfile = shape({textureSize:number,bands:array(shape({id:text,segments:number,innerRadiusKm:number,outerRadiusKm:number,displayValue:number,displayOpacity:number,qualification:text}))});
 export type TerrestrialRings = ReturnType<typeof parseRingProfile>;
 import { writeFile } from 'node:fs/promises';

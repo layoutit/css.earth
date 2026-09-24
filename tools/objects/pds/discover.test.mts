@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { inspectPdsProduct, mergePdsDiscovery, pdsTargetNameCandidates } from './discover.mts';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 
 test('PDS target-name candidates normalize a PDS3 designation without storing a target LID', () => {
   assert.deepEqual(pdsTargetNameCandidates(['Wild 2', '81P/WILD 2 (1978 A2)']), ['Wild 2', '81P/WILD 2 (1978 A2)', '81P/WILD 2', '81P/Wild 2']);

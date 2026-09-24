@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readOracleFixture } from '../../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { bandBrightnessTemperature, brightnessTemperature, fitEigenmap, planckRadiance, sampleEigenmap } from './eigenmap-fit.mts';
 import { harmonicOrder, realSphericalHarmonics } from './spherical-harmonics.mts';
 

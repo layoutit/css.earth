@@ -8,7 +8,7 @@ import { parseDbf } from './dbf.js';
 import { parseSurfaceFeaturesConfig } from './index.js';
 import { unzipMember } from './archive.js';
 import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote, type FeatureNotes } from './notes-schema.js';
-import { isRecord } from '../../../src/platform/records.mts';
+import { isRecord } from '@cssearth/core';
 
 
 const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { if (!isRecord(value)) throw new TypeError(`${label} must be an object.`); return value; };

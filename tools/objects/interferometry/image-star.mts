@@ -29,7 +29,7 @@ import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { imageCorrelation, matchVis2, vis2Agreement } from './author-comparison.mts';
 import { readReconstruction } from './beam-convolve.mts';
 import { calibrateAmberWindow } from './calibrate-amber.mts';

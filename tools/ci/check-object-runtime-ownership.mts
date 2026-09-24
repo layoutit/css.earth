@@ -5,7 +5,7 @@ import { createRequire, isBuiltin } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Expression, CallExpression, VariableDeclarator } from "estree";
-import { isRecord, requireRecord, requireArray, requireString } from "../sources/source-values.mts";
+import { isRecord, requireRecord, requireArray, requireString } from "@cssearth/core";
 import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
 import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";

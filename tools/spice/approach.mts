@@ -6,7 +6,7 @@
  * direction (New Horizons at Pluto and Charon: within 1 degree from 6 to 48 hours out).
  */
 import type { Vector3 } from '../../src/renderers/css/solar-system/types.ts';
-import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { kernelBankPaths } from './kernel-bank.mts';
 import { loadKernelSet } from './kernel-set.mts';
 import { utcToEt } from './lsk.mts';

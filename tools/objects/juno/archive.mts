@@ -11,7 +11,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const VOLUMES = 'https://planetarydata.jpl.nasa.gov/img/data/juno/';
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');

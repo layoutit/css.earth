@@ -1,5 +1,5 @@
 import { fixtureRecord } from '../../../contract/test-values.mts';
-import { requireString } from '../../../sources/source-values.mts';
+import { requireString } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();

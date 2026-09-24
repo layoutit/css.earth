@@ -7,7 +7,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { TODO, starStylesheet } from '../objects/new-object/scaffold.mts';
 import { readStarTemperature, temperatureCatalogueColor } from '../objects/star-catalogue-color.mts';
 import { CROSS_CHECK_AGREEMENT } from '../objects/observation/stellar/stellar-photometric-color.mts';

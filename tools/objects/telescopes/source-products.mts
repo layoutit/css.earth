@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { hasErrorCode, requireRecord } from '../../sources/source-values.mts';
+import { hasErrorCode, requireRecord } from '@cssearth/core';
 import { fileSize, readProductRecord, sameRun, type ProductRun } from '../product-record.mts';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';

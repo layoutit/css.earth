@@ -1,5 +1,4 @@
-import {array, boolean, dictionary, json, literal, nil, number, object, optional, parse, string, union} from '../material-composition/data-schema.mts';
-import type {Infer} from '../material-composition/data-schema.mts';
+import {array, boolean, dictionary, json, literal, nil, number, object, optional, parse, string, union, type Infer} from '@cssearth/core/schema';
 const axis = object({minimum: number, step: number, count: number});
 const tomography = object({schema: literal('cssearth-mantle-tomography@1'), depth: axis, latitude: axis, longitude: axis,
   geographicLongitudeOffsetDegrees: number, sectionLongitudesDegrees: array(number), modelRadiusKm: number, shellDepthKm: number,

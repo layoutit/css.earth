@@ -6,7 +6,7 @@ import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourcePa
 import type { SourceResolver } from '../../src/platform/source-catalog.mts';
 import type { Fact } from '../objects/content/types.js';
 import { orderFacts } from '../../site/fact-order.mts';
-import { hasErrorCode } from './source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 
 /** The same citation checks apply to full preparation, facts-only edits and Sources: every fact names its source. */
 export function parseFactsheet(panel: unknown) {

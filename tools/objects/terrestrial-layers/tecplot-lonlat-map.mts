@@ -9,7 +9,7 @@
  * a limit the paper draws on its maps, such as the latitude the star never turns toward us. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export function parseTecplotLonLat(text: string, path: string) {
   const variables = text.match(/^\s*VARIABLES\s*=\s*(.*)$/mu)?.[1]?.match(/"([^"]*)"/gu)?.map(name => name.slice(1, -1));

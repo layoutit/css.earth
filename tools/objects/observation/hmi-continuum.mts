@@ -8,7 +8,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readRiceCompressedImage } from '../../fits/fits-rice.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export interface HmiContinuumSource {
   readonly kind: 'hmi-continuum-mosaic';

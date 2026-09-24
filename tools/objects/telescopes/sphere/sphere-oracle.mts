@@ -2,7 +2,7 @@
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import { requireRecord, requireArray } from '../../../sources/source-values.mts';
+import { requireRecord, requireArray } from '@cssearth/core';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

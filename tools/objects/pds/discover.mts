@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue } from '../../cli/cli-arguments.mts';
 import { pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { normalizeDiscoveredPdsProduct, type DiscoveredPdsProduct } from './archive-final.mts';
 import { sourcePds3Observations } from './source-observations.mts';

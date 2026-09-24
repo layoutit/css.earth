@@ -1,5 +1,5 @@
 /** One validated source context follows a telescope product through every derived artifact. */
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseAcceptedAssumptions } from '../resolution-evidence.mts';
 import { inputWavelengths } from './recipe-request.mts';
 import { PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from './recipe-request.mts';

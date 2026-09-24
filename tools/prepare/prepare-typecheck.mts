@@ -9,7 +9,7 @@ import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { type RuntimeAssetLocation, inventoryAssets } from '../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../assets/setup.mts';
 import { volumeMetadataAssets } from '../assets/runtime-assets.mts';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const exec = promisify(execFile);
 const projectRoot = resolve(import.meta.dirname, '../..');

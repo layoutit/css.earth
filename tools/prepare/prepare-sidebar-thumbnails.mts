@@ -5,7 +5,7 @@ import sharp from 'sharp';
 import type { OverlayOptions } from 'sharp';
 import { parseDatasetLens } from '../../site/prepared-panel-content.mts';
 import { sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText } from '../../src/platform/source-catalog.mts';
-import { hasErrorCode } from '../sources/source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 
 const root = process.cwd();
 const check = process.argv.includes('--check');

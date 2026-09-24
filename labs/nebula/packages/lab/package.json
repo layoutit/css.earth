@@ -32,6 +32,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@cssearth/core": "workspace:*",
     "@cssearth/volume-core": "workspace:*",
     "@cssearth/volume-bake": "workspace:*",
     "@cssearth/nebula-reconstruction": "workspace:*",

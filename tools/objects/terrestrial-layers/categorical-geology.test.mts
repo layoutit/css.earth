@@ -1,5 +1,5 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
-import { requireArray, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireString } from '@cssearth/core';
 import { parseGeologyLens } from './source-records.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';

@@ -1,6 +1,6 @@
 /** Test-only archive inputs, separate from production body acquisition. */
 import { readFile } from 'node:fs/promises';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 
 export async function fitsArchiveInputs() {
   const record = requireRecord(JSON.parse(await readFile(new URL('../../../tests/fixtures/fits/archive-inputs.json', import.meta.url), 'utf8')));

@@ -25,7 +25,7 @@ import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promi
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../product-record.mts';
 import { chandraFile, parseChandraProgram, PROGRAMS, type ChandraFile, type ChandraObservation, type ChandraProgram } from './archive.mts';

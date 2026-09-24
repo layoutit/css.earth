@@ -2,7 +2,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import {alignCameraBands} from './band-alignment.mts';
-import {requireRecord,requireArray,requireFiniteNumber} from '../../sources/source-values.mts';
+import {requireRecord,requireArray,requireFiniteNumber} from '@cssearth/core';
 
 test('a wider pointing search recovers an independently shifted image under the same holdout limits',()=>{
  const size=224,dx=18,dy=-14;

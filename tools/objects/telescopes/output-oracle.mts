@@ -3,7 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { mkdir } from 'node:fs/promises';
-import { requireRecord } from '../../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 export const ORACLE_PYTHON=String.raw`
 import json,sys,hashlib,csv
 from pathlib import Path

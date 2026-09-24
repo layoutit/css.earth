@@ -5,7 +5,7 @@ import sharp from 'sharp';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { inventoryAssets } from '../../../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../../../assets/setup.mts';
-import { requireRecord } from '../../../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import { parseRasterRecipe, prepareRasterAssets } from '../../../../src/preparation/raster/index.ts';
 import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/validation/index.ts';

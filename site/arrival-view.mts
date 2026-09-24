@@ -1,4 +1,4 @@
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { validateWorldRotation } from '../src/renderers/css/navigation/world-camera-math.ts';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.ts';
 
@@ -6,7 +6,7 @@ import type { WorldRotation } from '../src/renderers/css/navigation/world-camera
 export interface PreparedArrivalView { defaultLens: string; lensIds: readonly string[]; rotation: WorldRotation; }
 
 export function parseArrivalView(value: unknown): Readonly<PreparedArrivalView> {
-  if (!record(value) || Object.keys(value).some(key => !['defaultLens', 'lensIds', 'rotation'].includes(key)) ||
+  if (!isRecord(value) || Object.keys(value).some(key => !['defaultLens', 'lensIds', 'rotation'].includes(key)) ||
       typeof value.defaultLens !== 'string' || !value.defaultLens || !Array.isArray(value.lensIds) ||
       !value.lensIds.length || !value.lensIds.every(id => typeof id === 'string' && id.length > 0) ||
       new Set(value.lensIds).size !== value.lensIds.length || !Array.isArray(value.rotation) ||

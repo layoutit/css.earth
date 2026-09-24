@@ -15,7 +15,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { mastFile } from '../astronomy-packages/mast.mts';
 import { readImagingProgram } from '../jwst/imaging/image3.mts';
 import { readFitsFileHdus } from '../../fits/fits.mts';

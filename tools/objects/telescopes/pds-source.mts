@@ -1,7 +1,7 @@
 /** Prepare a pinned OPUS PDS image for the existing pdr native-image output path. */
 import { copyFile, mkdir, readFile, realpath, symlink } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { requireRecord } from '../../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
 import { localOutput, verifiedProduct } from './verified-product.mts';
 import { OPUS_SERVICE } from './opus.mts';

@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
-import {parse} from './data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {spectralRecipe, type SpectralRecipe} from './spectral-recipe.mts';
 import type {Channels, OutputInfo} from 'sharp';
 type SpectralLens = SpectralRecipe['lenses'][number];

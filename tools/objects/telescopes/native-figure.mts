@@ -6,7 +6,7 @@ import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import { isisMetadata,pdsMetadata } from './native-metadata.mts';
-import { requireRecord,requireArray,requireString } from '../../sources/source-values.mts';
+import { requireRecord,requireArray,requireString } from '@cssearth/core';
 interface NativeFigureInput {
   readonly file: string;
   readonly directory: string;

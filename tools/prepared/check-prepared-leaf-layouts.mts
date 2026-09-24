@@ -1,6 +1,5 @@
 import { sha256 } from '../../src/platform/sha256.mts';
-import {requireRecord,requireString} from '../sources/source-values.mts';
-import {shape,array,text,number,boolean,dictionary,optional} from '../objects/terrestrial-layers/source-records.mts';
+import {requireRecord,requireString,shape,array,text,number,boolean,dictionary,optional} from '@cssearth/core';
 const parseProperty=shape({name:text,value:text,custom:boolean});
 const parseNode=shape({parent:number,tag:text,style:(value:unknown)=>value,attributes:optional(dictionary(text)),properties:array(number)});
 const parseTree=shape({nodes:array(parseNode),properties:array(parseProperty)});

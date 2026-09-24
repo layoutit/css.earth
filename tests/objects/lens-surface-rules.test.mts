@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from './source-test.mts';
 const test = sourceTest();
 import { projectRoot } from './fixtures.mts';
-import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 /**
  * A raster body paints its globe from hand-written CSS: one base rule for the default lens, and one

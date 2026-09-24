@@ -1,7 +1,7 @@
 import { parentPort, workerData } from 'node:worker_threads';
 import { readPagedEllipsoid } from './context.mts';
 import { preparePagedEllipsoidAssets } from './assets.mts';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 import type { PagedAssetJob } from './parallel-assets.mts';
 
 // One share of a paged ellipsoid's asset preparation, run by parallel-assets.mts.

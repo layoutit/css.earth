@@ -2,7 +2,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync } from '../astronomy-packages/toolchain.mts';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from '../gemini/cadc.mts';

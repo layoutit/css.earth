@@ -17,7 +17,7 @@ import { sha256 } from '../../../../src/platform/sha256.mts';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mts';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadPdsPlateShape } from '../../terrestrial-layers/obj-shape.mts';
 import { loadRadialTerrain } from '../../terrestrial-layers/radial-terrain.mts';
 import { requireTerrainMesh, simplifyRadialShape } from '../../terrestrial-layers/radial-mesh.mts';

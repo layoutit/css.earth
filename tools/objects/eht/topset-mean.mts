@@ -17,7 +17,7 @@ import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsImage } from '../../fits/fits.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 interface ReleaseFile { readonly role: string; readonly path: string; readonly blob: string }
 interface Release { readonly repository: string; readonly commit: string; readonly files: readonly ReleaseFile[] }

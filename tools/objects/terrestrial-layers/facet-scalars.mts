@@ -1,6 +1,7 @@
 import { readFitsHdu, assertUnscaledFitsTable } from '../../fits/fits.mts';
 import type {SourceMesh} from './contracts.mts';
-import {parseFacetLens,parseFacetProfile,parseFacetSampler,parseTransferTerrain,parseFacetTable,parseFacetFitsTable,parseSurfaceLens,text} from './source-records.mts';
+import {parseFacetLens,parseFacetProfile,parseFacetSampler,parseTransferTerrain,parseFacetTable,parseFacetFitsTable,parseSurfaceLens} from './source-records.mts';
+import {text} from '@cssearth/core';
 import {readFile} from 'node:fs/promises';
 import {resolve, basename} from 'node:path';
 import {execFile} from 'node:child_process';

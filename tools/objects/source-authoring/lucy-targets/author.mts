@@ -2,7 +2,7 @@
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRecord, requireArray } from '../../../sources/source-values.mts';
+import { requireRecord, requireArray } from '@cssearth/core';
 
 function verify(bytes: Uint8Array, entry: unknown, label: string) {
   requireRecord(entry, `${label} source manifest entry`);

@@ -5,7 +5,7 @@ import { performance, PerformanceObserver } from 'node:perf_hooks';
 import { webcrypto } from 'node:crypto';
 import { createDiagnosticRecorder } from '../diagnostic-recorder.mts';
 import type { BrowserWindow } from '../browser-types.mts';
-import { record } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { required } from './navigation-test-values.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 
@@ -39,12 +39,12 @@ test('records one correlated run, copies changing camera state, and is idle afte
   assert.equal(recording.id, id);
   for (const [index, expected] of [[0, 1], [1, 7]]) {
     const state = recording.samples[index].state;
-    assert.ok(record(state) && record(state.camera));
+    assert.ok(isRecord(state) && isRecord(state.camera));
     assert.equal(state.camera.x, expected);
   }
   assert.deepEqual(recording.frames, [[120, 20]]);
   const mounted = recording.events.find(event => event.name === 'cssEarth:navigation:mounted');
-  assert.ok(mounted && record(mounted.detail));
+  assert.ok(mounted && isRecord(mounted.detail));
   assert.equal(mounted.detail.recordingId, id);
   assert.equal(mounted.detail.to, 'makemake');
   assert.ok(recording.events.some(event => event.name === 'cssEarth:recording:stopped'));
@@ -62,7 +62,7 @@ test('a failed diagnostic read is captured without interrupting the application'
   const recorder = createDiagnosticRecorder({ windowTarget: w, button, capture() { throw new Error('unavailable owner'); }, download() {} });
   assert.doesNotThrow(() => recorder.start());
   const state = required(recorder.stop()).samples[0].state;
-  assert.ok(record(state) && typeof state.captureError === 'string');
+  assert.ok(isRecord(state) && typeof state.captureError === 'string');
   assert.match(state.captureError, /unavailable owner/);
   recorder.destroy();
 });

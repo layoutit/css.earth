@@ -1,5 +1,4 @@
-import {array, boolean, dictionary, json, literal, number, object, optional, parse, string, tuple, union} from '../material-composition/data-schema.mts';
-import type {Infer} from '../material-composition/data-schema.mts';
+import {array, boolean, dictionary, json, literal, number, object, optional, parse, string, tuple, union, type Infer} from '@cssearth/core/schema';
 const fit = literal('cover', 'contain', 'fill', 'inside', 'outside');
 const resize = object({fit: optional(fit), position: optional(union(string, number))});
 const detailImage = object({path: string, extract: optional(object({left: number, top: number, width: number, height: number})), resize: optional(resize)});

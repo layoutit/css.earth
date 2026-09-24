@@ -1,6 +1,6 @@
 import { initialObjectSelection, loadPreparedCssObject } from '../src/renderers/css/dist/index.js';
 import { readPreparedObjectBytes } from './object-page-data.mts';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 /** Build-only. A page's first mount adopts its server markup (`serialize-prepared-scene.mts`), which already carries every
  * node the initial selection shows, styled. Their records here keep what adoption checks (tag, parent, class and
@@ -14,9 +14,9 @@ export async function firstViewTransport(id: string) {
   const variant = definition.variants.find(entry => Object.entries(entry.when).every(([key, value]) => selection[key] === value));
   if (!variant) throw new TypeError(`${id}: initial presentation is missing.`);
   const document: unknown = JSON.parse(new TextDecoder().decode(bytes));
-  const data = record(document) && record(document.data) ? document.data : null, tree = data && record(data.tree) ? data.tree : null;
+  const data = isRecord(document) && isRecord(document.data) ? document.data : null, tree = data && isRecord(data.tree) ? data.tree : null;
   const table: unknown = tree?.properties;
-  if (!record(document) || !data || !tree || !Array.isArray(tree.nodes) || !Array.isArray(table) || tree.nodes.length !== definition.tree.nodes.length)
+  if (!isRecord(document) || !data || !tree || !Array.isArray(tree.nodes) || !Array.isArray(table) || tree.nodes.length !== definition.tree.nodes.length)
     throw new TypeError(`${id}: prepared tree transport differs from its definition.`);
   const hidden = new Set(variant.hiddenSubtrees ?? []), built = new Set<number>();
   definition.tree.nodes.forEach((node, index) => { if (hidden.has(node.parent) || built.has(node.parent)) built.add(index); });

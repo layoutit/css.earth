@@ -1,6 +1,6 @@
 /** Read prepared geometry and atlas addresses without loading source preparation or refresh commands. */
 import { BASE_TILE } from '@layoutit/polycss';
-import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { shadeRadialFaces } from './radial-mesh.mts';
 import type { PhotographicAtlas } from './native-photograph.mts';
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));

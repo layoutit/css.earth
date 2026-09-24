@@ -8,7 +8,7 @@ import { runCachedPreparationObjects } from './prepare-objects.mts';
 import type { CachedPreparationOptions } from './prepare-objects.mts';
 import { runObjectCommand } from '../cli/run-implemented-objects.mts';
 import type { PreparationCommand, PreparationReport } from '../cli/run-implemented-objects.mts';
-import { requireRecord } from '../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 
 const repository = resolve(import.meta.dirname, '../..'), descriptorPath = 'src/objects/mercury/object.json';
 const payloadPath = 'src/objects/mercury/prepared/object.json';

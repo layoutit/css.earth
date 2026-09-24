@@ -2,7 +2,7 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /**
  * Prepares the published imagery that stands in for facilities which have no

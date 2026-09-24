@@ -1,4 +1,4 @@
-import * as s from '../material-composition/data-schema.mts';
+import * as s from '@cssearth/core/schema';
 const n = s.number, str = s.string, opt = s.optional, arr = s.array, obj = s.object;
 export const vector2 = s.tuple(n, n), vector3 = s.tuple(n, n, n);
 export const sourcePin = obj({path: str});
