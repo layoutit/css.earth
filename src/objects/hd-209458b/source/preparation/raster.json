@@ -20,14 +20,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "thermal",
       "output": "hd-209458b-surface-{id}{suffix}.webp",
       "thumbnail": "hd-209458b-lens-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star."
+        "kind": "dayside-thermal-color",
+        "qualification": "Colour of a black body at the dayside brightness temperature 1,499 K measured in secondary eclipse at 4.5 µm (Zellem et al. 2014, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body colour lies outside the sRGB gamut and is shown mixed with 2% white, the least that brings it inside, hue kept."
       }
     }
   ],

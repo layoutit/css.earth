@@ -32,6 +32,7 @@
  * log g from the mass and radius. `radialVelocity` is needed only when Gaia DR3 has none. Every cited value names its source and a
  * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records). */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '../observation/disc-band-color.mts';
 
 export interface Cited { readonly value: number; readonly source: string; readonly url: string; readonly uncertainty?: number }
 export type ColorRoute = 'stis-ngsl' | 'gaia-xp' | 'pulkovo' | 'kiehling' | 'kharitonov' | 'burnashev';
@@ -53,6 +54,19 @@ export interface StarSpec {
   readonly notes: readonly string[];
 }
 export interface DraftText { readonly card: string; readonly introduction: string; readonly locator: string }
+function photometrySpec(value: unknown, label: string): PhotometrySpec {
+  // The lens's own parser refuses anything the record cannot carry; the spec's object id is filled in at generation.
+  const input = requireRecord(value, label), record = parseDiscBandColorRecord({ schema: DISC_BAND_COLOR_SCHEMA, objectId: 'spec', ...input }, label);
+  return { unit: record.unit, source: record.source, bands: record.bands, displayRange: record.displayRange, displayRangeSource: record.displayRangeSource };
+}
+function thermalSpec(value: unknown, label: string): ThermalSpec {
+  const input = requireRecord(value, label), temperatureK = requireFiniteNumber(input.temperatureK, `${label}.temperatureK`), wavelength = requireFiniteNumber(input.wavelengthMicrometres, `${label}.wavelengthMicrometres`);
+  if (!(temperatureK >= 100 && temperatureK <= 10000)) throw new RangeError(`${label}.temperatureK ${temperatureK} is outside 100..10000 K.`);
+  if (!(wavelength > 0)) throw new RangeError(`${label}.wavelengthMicrometres must be positive.`);
+  const uncertainty = input.uncertaintyK === undefined ? undefined : requireFiniteNumber(input.uncertaintyK, `${label}.uncertaintyK`);
+  return { temperatureK, ...(uncertainty === undefined ? {} : { uncertaintyK: uncertainty }), wavelengthMicrometres: wavelength, facility: requireString(input.facility, `${label}.facility`),
+    source: requireString(input.source, `${label}.source`), url: requireString(input.url, `${label}.url`), chosen: requireString(input.chosen, `${label}.chosen`) };
+}
 function draftText(value: unknown, label: string): DraftText {
   const input = requireRecord(value, label), card = requireString(input.card, `${label}.card`), introduction = requireString(input.introduction, `${label}.introduction`);
   if (card.length > 110) throw new RangeError(`${label}.card is ${card.length} characters; the card budget is 110.`);
@@ -64,10 +78,19 @@ export type OrbitSpec =
   | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string }
   | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: 'periastron' | 'inferior-conjunction'; readonly source: string; readonly url: string };
 /** A body on a hosted orbit: a planet (Jupiter units) or a companion star (solar units). */
+/** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" lens (planet-lenses.mts). */
+export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
+/** Published flux densities in three infrared bands for the band-colour lens of an imaged planet (planet-lenses.mts): red, green,
+ * blue from the longest wavelength, on one display range shared with the bodies it names. */
+export interface PhotometrySpec {
+  readonly unit: string; readonly source: { readonly citation: string; readonly url: string; readonly locator: string };
+  readonly bands: readonly [{ readonly band: string; readonly wavelengthMicrometres: number; readonly value: number; readonly error: number }, { readonly band: string; readonly wavelengthMicrometres: number; readonly value: number; readonly error: number }, { readonly band: string; readonly wavelengthMicrometres: number; readonly value: number; readonly error: number }];
+  readonly displayRange: readonly [number, number]; readonly displayRangeSource: string;
+}
 export interface HostedSpec {
   readonly kind: 'planet' | 'companion'; readonly id: string; readonly name: string; readonly description: string; readonly order?: number;
   readonly paper: { readonly url: string; readonly credit: string };
-  readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec; readonly text?: DraftText;
+  readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec; readonly text?: DraftText; readonly thermal?: ThermalSpec; readonly photometry?: PhotometrySpec;
 }
 const ELEMENT_KEYS = ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'argumentOfPeriapsisDegrees', 'transitTimeBmjdTdb', 'ascendingNodePositionAngleDegrees'];
 function orbitSpec(value: unknown, label: string): OrbitSpec {
@@ -94,14 +117,18 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
 function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): HostedSpec {
   const input = requireRecord(value, label), id = requireString(input.id, `${label}.id`), at = (name: string) => `${id}.${name}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: an id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown fields ${unknown.join(', ')}.`);
   const paper = requireRecord(input.paper, at('paper')), orbit = orbitSpec(input.orbit, at('orbit'));
+  const thermal = input.thermal === undefined ? undefined : thermalSpec(input.thermal, at('thermal'));
+  if (thermal && kind !== 'planet') throw new TypeError(`${id}: a thermal lens is a planet's; a companion star has its temperature.`);
+  const photometry = input.photometry === undefined ? undefined : photometrySpec(input.photometry, at('photometry'));
+  if (photometry && (kind !== 'planet' || thermal)) throw new TypeError(`${id}: band photometry is a planet's one colour lens; not with a companion star or a thermal lens.`);
   const range = kind === 'planet' ? { radius: [0.01, 5] as const, mass: [0.0001, 100] as const } : { radius: [0.005, 3000] as const, mass: [0.01, 300] as const };
   const out: HostedSpec = { kind, id, name: requireString(input.name, at('name')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     ...(input.radius === undefined ? {} : { radius: cited(input.radius, at('radius'), range.radius) }), ...(input.mass === undefined ? {} : { mass: cited(input.mass, at('mass'), range.mass) }),
-    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }) };
+    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }), ...(thermal ? { thermal } : {}), ...(photometry ? { photometry } : {}) };
   const fromArchive = 'archive' in orbit;
   if (!fromArchive && (!out.radius || !out.mass)) throw new TypeError(`${id}: give radius and mass with their sources; only an archive orbit supplies them.`);
   if (kind === 'companion' && (!out.temperature || !out.radius || !out.mass)) throw new TypeError(`${id}: a companion star needs its cited temperature, radius and mass.`);
@@ -187,4 +214,15 @@ export function parseStarSpecs(value: unknown): StarSpec[] {
   const repeated = ids.filter((id, i) => ids.indexOf(id) !== i);
   if (repeated.length) throw new TypeError(`Object ids repeat: ${repeated.join(', ')}.`);
   return specs;
+}
+
+/** `--photometry entries.json`: a list of { id, photometry } for planets already in the tree. */
+export function parsePhotometryEntries(value: unknown): Map<string, PhotometrySpec> {
+  const entries = requireArray(value, 'photometry entries'), out = new Map<string, PhotometrySpec>();
+  for (const [index, entry] of entries.entries()) {
+    const input = requireRecord(entry, `entries[${index}]`), id = requireString(input.id, `entries[${index}].id`);
+    if (out.has(id)) throw new TypeError(`entries[${index}]: ${id} is listed twice.`);
+    out.set(id, photometrySpec(input.photometry, `${id}.photometry`));
+  }
+  return out;
 }

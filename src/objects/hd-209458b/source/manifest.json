@@ -99,6 +99,45 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "hd-209458b-thermal-color",
+      "path": "photometry/thermal-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2014ApJ...790...53Z/abstract",
+      "credit": "Zellem et al. 2014, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archive row chosen and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored colour recipe naming the cited brightness temperature; repinned when edited."
+      }
+    },
+    {
+      "id": "hd-209458b-emission-spectroscopy",
+      "path": "photometry/emission-spectroscopy.csv",
+      "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+plntname%2Ccentralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cespbritemp%2Cespbritemperr1%2Cespbritemperr2%2Cespbritemplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27HD+209458+b%27+order+by+centralwavelng&format=csv",
+      "credit": "NASA Exoplanet Archive, emission spectroscopy table (secondary-eclipse depths and brightness temperatures as published)",
+      "license": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "acquisition": "TAP query in source/preparation/acquisition.json: every emission row of this planet, ordered by wavelength.",
+      "redistribution": "Table rows as served, with the archive acknowledged.",
+      "consumers": [
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-209458b-emission-spectroscopy",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

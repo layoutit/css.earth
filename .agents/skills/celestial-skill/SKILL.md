@@ -290,7 +290,10 @@ presentation in seconds, and refuses when the recipe sources, the recomputed pla
 companion stars, starts with `node tools/objects/star-candidates.mts "<SIMBAD identifier>"` and then `pnpm telescope new-object
 <spec.json>` (the spec format is in `tools/objects/new-object/spec.mts`): it writes the whole system from the archives and leaves
 only the prose marked `TODO(new-object)`; `--check` runs the chain through the page data on what it wrote, `--bake` the whole chain,
-and `telescope new-object --bake <id>...` bakes objects already in the tree. Planets for a star that already exists take a `{ "host": "<id>", "planets": [...] }` entry. Before imagery work on
+and `telescope new-object --bake <id>...` bakes objects already in the tree. Planets for a star that already exists take a `{ "host": "<id>", "planets": [...] }` entry. A planet's colour comes from what is measured
+(`tools/objects/new-object/planet-lenses.mts`): a dayside brightness temperature in the archive's emission table gives the "Thermal glow" lens,
+otherwise the neutral gray is lit by the host's measured colour; `telescope new-object --thermal <id>...` and `--host-light <id>...` do the
+same for planets already in the tree, then `prepare-object.mts` bakes them. Before imagery work on
 a moon or small body, `node tools/objects/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships, and
 `--archives <id> ...` searches ALMA, ESO, MAST and DataCite deposits for bodies seen from the ground or Earth orbit; see the
 [implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.

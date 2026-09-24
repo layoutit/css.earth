@@ -29,8 +29,8 @@ const GEOMETRY_SCALE = 1.25;
 /** The shared neutral gray of an unresolved surface, as the shape-only bodies use. */
 const NEUTRAL_GRAY = '#9a9a9a';
 
-/** Static presentation for the scaffold's single neutral-shape lens and 460px lighting frames. */
-export function hostedPlanetStylesheet(id: string): string {
+/** Static presentation for a hosted planet's single lens (`lens`: its surface id) and 460px lighting frames. */
+export function hostedPlanetStylesheet(id: string, lens = 'shape'): string {
   const scope = `.object-stage[data-object-id="${id}"]`;
   const scale = BODY_RADIUS_UNITS * 2 / 460;
   return `${scope} > .${id}-material-composite {
@@ -59,10 +59,10 @@ ${scope} .polycss-scene s {
   transform-style: preserve-3d;
 }
 ${scope} .polycss-scene s:not(.${id}-polar) {
-  background-image: url("/scenes/${id}/${id}-surface-shape@2x.webp") !important;
+  background-image: url("/scenes/${id}/${id}-surface-${lens}@2x.webp") !important;
 }
 ${scope} .polycss-scene s.${id}-polar {
-  background-image: url("/scenes/${id}/${id}-poles-shape@2x.webp") !important;
+  background-image: url("/scenes/${id}/${id}-poles-${lens}@2x.webp") !important;
 }
 /* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
 ${scope} .${id}-fixed-material {

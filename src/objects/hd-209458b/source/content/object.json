@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by HD 209458; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hd-209458b-lens-shape.webp",
-        "surface": "hd-209458b-surface-shape@2x.webp",
-        "poles": "hd-209458b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body colour at its measured dayside temperature, 1,499 K. The disc itself is unresolved.",
+        "thumbnail": "hd-209458b-lens-thermal.webp",
+        "surface": "hd-209458b-surface-thermal@2x.webp",
+        "poles": "hd-209458b-poles-thermal@2x.webp",
         "source": {
-          "id": "hd-209458b-observational-measurements",
+          "id": "hd-209458b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/0801.1841"
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...790...53Z/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of this planet exists (it has never been resolved: its size, orbit and transmission spectrum are measured, not its surface; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+        "notes": "The colour of HD 209458 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

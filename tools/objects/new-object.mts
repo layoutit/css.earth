@@ -3,6 +3,7 @@
  *
  *   node tools/objects/new-object.mts --spec <stars.json> [--check | --bake]
  *   node tools/objects/new-object.mts --bake <id>...
+ *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
  * spectrum with its cross-check, the model limb law, the catalogue colour, marker, manifest, acquisition plan, source records and
@@ -38,6 +39,17 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // Phase two of a system run (new-object/generate.mts runNewObject), in a process that loads the rebuilt astronomy package.
     const { runHostedPhase } = await import('./new-object/generate.mts');
     process.stdout.write(JSON.stringify(await runHostedPhase(handoff)));
+  } else if (option('photometry') !== undefined && !specPath) {
+    // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).
+    const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./new-object/spec.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const entries = parsePhotometryEntries(JSON.parse(await readFile(option('photometry')!, 'utf8')));
+    const lines = await relensExisting(process.cwd(), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/prepare-object.mts <id>...\n`);
+  } else if ((args.includes('--thermal') || args.includes('--host-light')) && !specPath) {
+    // Colour for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-lenses.mts).
+    const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const lines = await relensExisting(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/prepare-object.mts <id>...\n`);
   } else if (args.includes('--bake') && !specPath) {
     // The bake of objects already in the tree: `--bake ID...` (tools/prepare/prepare-object.mts).
     const { prepareObjects } = await import('../prepare/prepare-object.mts');

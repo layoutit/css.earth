@@ -236,16 +236,16 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
 
 /** The colour of a Planck spectrum at the cited temperature: for a star no archive holds a spectrum of, or a companion the archives
  * do not resolve from its star. `why` opens the record's note. */
-export function planckChoice(id: string, t: Cited, why: string, tried: readonly string[], cmf: Map<number, readonly number[]>): ColorChoice {
+export function planckChoice(id: string, t: Cited, why: string, tried: readonly string[], cmf: Map<number, readonly number[]>, gamut?: 'desaturate'): ColorChoice {
   const lower = t.uncertainty ? t.value - t.uncertainty : t.value, upper = t.uncertainty ? t.value + t.uncertainty : t.value;
   const record = { schema: 'cssearth-stellar-photometric-color@1', objectId: id, spectrum: 'planck', temperature: {
     published: { kelvin: t.value, lowerKelvin: lower, upperKelvin: upper, citation: `${t.source}${t.uncertainty ? `: ${t.value} +/- ${t.uncertainty} K` : `: ${t.value} K; the source gives no uncertainty, so the range is the value itself`}, ${t.url}` },
     note: `${why}, so the colour is a Planck spectrum at its published temperature.` },
-    whitePoint: 'sRGB D65', normalization: 'brightest linear sRGB channel = 1' };
+    whitePoint: 'sRGB D65', normalization: 'brightest linear sRGB channel = 1', ...(gamut ? { gamut } : {}) };
   const inputs = [{ id: `${id}-stellar-color`, path: 'photometry/stellar-color.json', origin: t.url, credit: `${t.source}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
     acquisition: 'Authored method record: names the published temperature and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'lenses'],
     sourceBinding: { kind: 'local', reason: 'Project-authored colour recipe naming the cited temperature; repinned when edited.' } }];
-  return { record, files: new Map(), acquisition: [], inputs, catalogue: [], color: planckColor(t.value, cmf), route: 'planck', tried,
+  return { record, files: new Map(), acquisition: [], inputs, catalogue: [], color: planckColor(t.value, cmf, gamut), route: 'planck', tried,
     credits: [`Colour: a Planck spectrum at the temperature of ${t.source}, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).`],
     summary: `a Planck spectrum at ${t.value.toLocaleString('en-US')} K, because ${why.charAt(0).toLowerCase()}${why.slice(1)}` };
 }
