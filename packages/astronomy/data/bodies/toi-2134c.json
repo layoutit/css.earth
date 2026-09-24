@@ -1,0 +1,31 @@
+{
+ "id": "toi-2134c",
+ "classification": "exoplanet",
+ "order": 1801,
+ "physical": {
+  "name": "TOI-2134 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 46879,
+  "gravitationalParameterKm3PerS2": 23238403.19,
+  "parent": "toi-2134"
+ },
+ "physicalNotes": "Radius 0.65572421 Jupiter radii from Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract): 46,879 km at 71,492 km per Jupiter radius. GM from the mass 0.18343231 Jupiter masses (Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 95.85284,
+  "semiMajorAxisStellarRadii": 70.1,
+  "inclinationDegrees": 89.688,
+  "eccentricity": 0.3125,
+  "argumentOfPeriapsisDegrees": 160,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59718.46933,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): P 95.85284 d",
+   "shape": "Saha 2025 (2025MNRAS.539..928S), via the NASA Exoplanet Archive ps table (pl_refname SAHA_2025): a/R* 70.1; Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): inclination 89.688 degrees",
+   "eccentricity": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): e 0.3125",
+   "argumentOfPeriapsis": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): omega 160 degrees",
+   "phase": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): transit mid-time 2459718.96933 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

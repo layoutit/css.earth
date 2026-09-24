@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-88986b",
+  "radiusKm": 15881.5,
+  "radiusSource": "Radius 0.2221433 Jupiter radii from Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract): 15,881.5 km at 71,492 km per Jupiter radius. GM from the mass 0.05411725 Jupiter masses (Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 146.05,
+  "orbitalPeriodSource": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): P 146.05 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 88986 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.05411725 Jupiter masses: Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract)."
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 185.71757863028478,
+  "declinationDegrees": 77.20916546134363,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "Spin inclination 65 degrees from the line of sight and rotation period 7.676 d: Willamo et al. (2022), Table 2, the values of the ZDI inversion (https://arxiv.org/abs/2110.06729), with the north pole tilted toward us. The direction of the axis on the sky is not measured; it is placed toward celestial north as a convention. The axis is sin(i) x sky-north - cos(i) x (direction to the star): RA 185.7176, Dec +77.2092. Longitude 0 faces the Sun as a display convention.",
+  "coordinateSystem": "ICRF/J2000. +Z is the spin axis above; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "The tilt of the spin axis is measured; its position angle on the sky and the rotation phase are display conventions."
+}

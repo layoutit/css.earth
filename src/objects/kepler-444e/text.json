@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-444e",
+  "card": {
+    "text": "Kepler-444 e crosses its star every 7.74 days and is 0.55 Earth radii across, found in 2015.",
+    "sources": [
+      {
+        "catalogueId": "publication-2015apj-799-170c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+        "label": "Campante et al. 2015",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): pl_orbper 7.743493, pl_radj 0.049, pl_bmassj 0.00031463"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-444 e transits Kepler-444 every 7.74 days and is 0.55 Earth radii across. Orbit and size follow Campante et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2015apj-799-170c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+        "label": "Campante et al. 2015",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): pl_orbper 7.743493, pl_radj 0.049, pl_bmassj 0.00031463"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

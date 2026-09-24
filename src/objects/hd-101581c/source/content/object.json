@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-101581c",
+  "displayName": "HD 101581 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.99 Earth radii",
+        "source": {
+          "catalogueId": "publication-2025aj-169-47k",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K",
+          "label": "Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "6.2 days",
+        "source": {
+          "catalogueId": "publication-2025aj-169-47k",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K",
+          "label": "Kunimoto et al. 2025",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.0029 Jupiter masses",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HIP 56998; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-101581c-lens-shape.webp",
+        "surface": "hd-101581c-surface-shape@2x.webp",
+        "poles": "hd-101581c-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-101581c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 101581 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kunimoto et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+      "credit": "Kunimoto et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-101581c.json",
+      "credit": "Radius from Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive"
+    }
+  }
+}

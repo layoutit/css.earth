@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-207496b",
+  "displayName": "HD 207496 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.3 Earth radii",
+        "source": {
+          "catalogueId": "publication-2023a-a-673a-4b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B",
+          "label": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "6.44 days",
+        "source": {
+          "catalogueId": "publication-2023a-a-673a-4b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B",
+          "label": "Barros et al. 2023",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.019 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2023a-a-673a-4b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B",
+          "label": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 207496; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-207496b-lens-shape.webp",
+        "surface": "hd-207496b-surface-shape@2x.webp",
+        "poles": "hd-207496b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-207496b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 207496 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Barros et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract",
+      "credit": "Barros et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-207496b.json",
+      "credit": "Radius from Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive; mass from Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive; orbit from Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive"
+    }
+  }
+}

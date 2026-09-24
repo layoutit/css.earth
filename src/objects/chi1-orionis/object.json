@@ -1,0 +1,159 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "chi1-orionis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "χ¹ Orionis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "meridional-field",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 730485
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/chi1-orionis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "χ¹ Orionis",
+      "classification": "star",
+      "color": "#fff8f9",
+      "distanceAu": 1794357.8,
+      "description": "Naked-eye young Sun in Orion, 8.7 parsecs away, whose magnetic field was mapped in December 2017.",
+      "systemName": "χ¹ Orionis system",
+      "order": 1770,
+      "context": {
+        "order": 1767
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6177226596178972,
+        251723377428537470,
+        93021368630585380
+      ],
+      "presentationToReference": [
+        0.017266546950855822,
+        0.017423298800370985,
+        0.9996991022379218,
+        0.7034823470255459,
+        0.7102892949295017,
+        -0.02452967451844348,
+        0.7105029583188399,
+        -0.7036942135384263,
+        -0.000007260326578156749
+      ],
+      "orbitUpReference": [
+        -0.017423298800370985,
+        -0.7102892949295017,
+        0.7036942135384263
+      ],
+      "metersPerUnit": 2356403.2258064514,
+      "bodyRadiusM": 730485000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

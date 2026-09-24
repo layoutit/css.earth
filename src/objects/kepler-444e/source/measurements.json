@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-444e",
+  "radiusKm": 3503.1,
+  "radiusSource": "Radius 0.049 Jupiter radii from Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract): 3,503.1 km at 71,492 km per Jupiter radius. GM from the mass 0.00031463 Jupiter masses (Hadden & Lithwick 2017 (2017AJ....154....5H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 7.743493,
+  "orbitalPeriodSource": "Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): P 7.743493 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-444 e is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00031463 Jupiter masses: Hadden & Lithwick 2017 (2017AJ....154....5H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H/abstract)."
+}

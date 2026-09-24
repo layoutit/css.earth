@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-207496b",
+  "card": {
+    "text": "HD 207496 b crosses its star every 6.44 days and is 2.3 Earth radii across, found in 2023.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023a-a-673a-4b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract",
+        "label": "Barros et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL__2023): pl_orbper 6.441008, pl_radj 0.2007319, pl_bmassj 0.01919275"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 207496 b transits HD 207496 every 6.44 days and is 2.3 Earth radii across. Orbit and size follow Barros et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023a-a-673a-4b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract",
+        "label": "Barros et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL__2023): pl_orbper 6.441008, pl_radj 0.2007319, pl_bmassj 0.01919275"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

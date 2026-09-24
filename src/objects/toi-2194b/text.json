@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2194b",
+  "card": {
+    "text": "TOI-2194 b crosses its star every 15.3 days and is 2 Earth radii across, found in 2023.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-9m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+        "label": "Mistry et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MISTRY_ET_AL_2023): pl_orbper 15.337597, pl_radj 0.17746484, pl_bmassj 0.0145"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-2194 b transits TOI-2194 every 15.3 days and is 2 Earth radii across. Orbit and size follow Mistry et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-9m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+        "label": "Mistry et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MISTRY_ET_AL_2023): pl_orbper 15.337597, pl_radj 0.17746484, pl_bmassj 0.0145"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

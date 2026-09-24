@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-navigation-marker@2",
+  "objectId": "hd-101581c",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "path": "presentation/context.png"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.5,
+      "cy": 0.5,
+      "rx": 0.45,
+      "ry": 0.45,
+      "shading": {
+        "ambient": 0.35,
+        "diffuse": 0.65
+      }
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "pi-menc",
+ "classification": "exoplanet",
+ "order": 1788,
+ "physical": {
+  "name": "pi Men c",
+  "horizonsCode": null,
+  "meanRadiusKm": 12876.7,
+  "gravitationalParameterKm3PerS2": 1674121.98,
+  "parent": "hd-39091"
+ },
+ "physicalNotes": "Radius 0.1801145 Jupiter radii from Kunovac Hod&#x17E;ić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract): 12,876.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01321468 Jupiter masses (Harada et al. 2025 (2025AJ....170..343H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.2678399,
+  "semiMajorAxisStellarRadii": 13.1,
+  "inclinationDegrees": 87.045,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58425.289204,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kunovac Hod&#x17E;ić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive ps table (pl_refname KUNOVAC_HODZIC_ET_AL_2021): P 6.2678399 d",
+   "shape": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): a/R* 13.1; Kunovac Hod&#x17E;ić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive ps table (pl_refname KUNOVAC_HODZIC_ET_AL_2021): inclination 87.045 degrees",
+   "eccentricity": "Kunovac Hod&#x17E;ić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive ps table (pl_refname KUNOVAC_HODZIC_ET_AL_2021): e 0",
+   "phase": "Kunovac Hod&#x17E;ić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive ps table (pl_refname KUNOVAC_HODZIC_ET_AL_2021): transit mid-time 2458425.789204 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

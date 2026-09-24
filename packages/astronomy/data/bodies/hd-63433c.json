@@ -1,0 +1,28 @@
+{
+ "id": "hd-63433c",
+ "classification": "exoplanet",
+ "order": 1796,
+ "physical": {
+  "name": "HD 63433 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 17158.1,
+  "gravitationalParameterKm3PerS2": 6193851.5,
+  "parent": "hd-63433"
+ },
+ "physicalNotes": "Radius 0.24 Jupiter radii from Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract): 17,158.1 km at 71,492 km per Jupiter radius. GM from the mass 0.04889116 Jupiter masses (Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 20.5438281,
+  "semiMajorAxisStellarRadii": 33.479,
+  "inclinationDegrees": 89.07,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58843.558938,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): P 20.5438281 d",
+   "shape": "Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): a/R* 33.479; Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): inclination 89.07 degrees",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0",
+   "phase": "Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): transit mid-time 2458844.0589381 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

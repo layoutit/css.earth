@@ -4,6 +4,7 @@ interface InstallProgress {completed: number; total: number; installed: number; 
 /** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */
 const TRANSIENT_RETRIES = 3, RETRY_BACKOFF_MS = 500;
 const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -104,6 +105,45 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
  * restores inventoried files from R2. `--location` narrows to one location; `--metadata` restores only the
  * prepared record and presentation of the volume and context objects, which is all a deploy catalogue reads.
  */
+/**
+ * The files under a body's `prepared/` that a checkout derives itself (`isRegeneratedPreparedFile`): the JSON transport
+ * and page from the restored runtime, and for layered bodies the provenance record. R2 never holds them, so a body
+ * restored into a checkout that has not baked it has none until something derives them, and the first prepare step to
+ * read one fails with a bare ENOENT. Derive them here for every restored scene body that lacks one; a body that has
+ * them is left alone, so a repeat run costs nothing. Needs the renderer build (`pnpm prepare:shell`); without it the
+ * caller is told which command finishes the job instead of failing on an import.
+ */
+export async function deriveRestoredPreparedFiles(ids: readonly string[], root: string) {
+  // A deploy runs setup before `pnpm build:tools` writes the scene catalogue; its second setup run derives the files.
+  if (!existsSync(new URL("../../site/prepared-object-catalog.mts", import.meta.url))) {
+    console.log("Derived page data not written: the scene catalogue is not generated. Run pnpm build:tools && pnpm prepare:object-json.");
+    return { pages: 0, provenance: 0 };
+  }
+  const { SCENE_OBJECTS } = await import("../../site/objects.mts");
+  const { provenanceIsRegenerated } = await import("../../src/platform/runtime-asset-closure.mts");
+  const scene = ids.filter(id => SCENE_OBJECTS.some(object => object.id === id));
+  const missing = (id: string, file: string) => !existsSync(resolve(root, "src/objects", id, "prepared", file));
+  const pages: string[] = [], provenance: string[] = [];
+  for (const id of scene) {
+    if (missing(id, "page.json") || missing(id, "object.json")) pages.push(id);
+    if (missing(id, "provenance.json") && await provenanceIsRegenerated(resolve(root, "src/objects", id))) provenance.push(id);
+  }
+  if (!pages.length && !provenance.length) return { pages: 0, provenance: 0 };
+  if (!existsSync(new URL("../../src/renderers/css/dist/index.js", import.meta.url))) {
+    console.log(`Derived page data not written for ${pages.length + provenance.length} restored object(s): the renderer is not built. Run pnpm prepare:shell && pnpm prepare:object-json.`);
+    return { pages: 0, provenance: 0 };
+  }
+  if (pages.length) {
+    const { restoreObjectJson } = await import("./restore-object-json.mts");
+    await restoreObjectJson(pages, root, { restoredOnly: true });
+  }
+  if (provenance.length) {
+    const { recoverObjectProvenance } = await import("../prepare/prepare-provenance.mts");
+    await recoverObjectProvenance(provenance, { root, catalogue: false });
+  }
+  return { pages: pages.length, provenance: provenance.length };
+}
+
 export async function setupAssets(args: readonly string[], root = resolve(import.meta.dirname, "../..")) {
   const allowMissing = readAllowMissingFlag(args), metadata = args.includes("--metadata");
   const locationArg = args.find(arg => arg.startsWith("--location="))?.slice("--location=".length);
@@ -116,6 +156,10 @@ export async function setupAssets(args: readonly string[], root = resolve(import
     if (completed % 100 === 0) console.log(`Prepared files: ${completed}/${total}`);
   } });
   console.log(`Setup complete: ${result.installed} downloaded, ${result.reused} reused${result.skipped ? `, ${result.skipped} skipped (missing on R2, allow-missing)` : ""}.`);
+  if (!metadata && locationArg !== "public") {
+    const derived = await deriveRestoredPreparedFiles(ids, root);
+    if (derived.pages || derived.provenance) console.log(`Derived page data for ${derived.pages} object(s) and provenance for ${derived.provenance}.`);
+  }
   return result;
 }
 

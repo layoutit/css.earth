@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-431d",
+  "displayName": "TOI-431 d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3.3 Earth radii",
+        "source": {
+          "catalogueId": "publication-2021mnras-507-2782o",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O",
+          "label": "Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "12.5 days",
+        "source": {
+          "catalogueId": "publication-2021mnras-507-2782o",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O",
+          "label": "Osborn et al. 2021",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.031 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2021mnras-507-2782o",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O",
+          "label": "Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-431; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-431d-lens-shape.webp",
+        "surface": "toi-431d-surface-shape@2x.webp",
+        "poles": "toi-431d-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-431d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-431 d is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Osborn et al. 2021",
+      "href": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract",
+      "credit": "Osborn et al. 2021"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-431d.json",
+      "credit": "Radius from Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive; mass from Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive; orbit from Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive"
+    }
+  }
+}

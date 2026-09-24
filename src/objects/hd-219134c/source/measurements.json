@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-219134c",
+  "radiusKm": 9637.3,
+  "radiusSource": "Radius 0.13480239 Jupiter radii from Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract): 9,637.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01371803 Jupiter masses (Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.76458,
+  "orbitalPeriodSource": "Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): P 6.76458 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 219134 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01371803 Jupiter masses: Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract)."
+}

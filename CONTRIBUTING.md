@@ -20,7 +20,9 @@ transport beside each body, and serves the site on port 4210. A warm start
 takes about 17 s; `pnpm setup:assets` runs the restore on its own. For a
 single body, use `pnpm setup:assets --object=<id>` and open `/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the
 `prepared/*` entries (skipping the public texture download) — useful when
-only the JSON changed. For a production build, run `pnpm build`, then `pnpm
+only the JSON changed. Either restore also derives the files R2 never holds
+(`prepared/object.json`, `page.json` and a layered body's `provenance.json`)
+for restored bodies that lack them. For a production build, run `pnpm build`, then `pnpm
 preview`; the build first runs `setup:assets` itself, which only downloads
 files that are missing or changed.
 

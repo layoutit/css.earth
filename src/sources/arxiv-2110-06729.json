@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-2110-06729",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Willamo et al. (2021): Zeeman-Doppler imaging of five young solar-type stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2110.06729"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202141649"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2110.06729",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202141649",
+      "label": "A&amp;A 659, A71 (2022)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2110.06729",
+      "checkedOn": "2026-09-24",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Willamo et al. (2021), A&amp;A 659, A71 (2022)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2110.06729"
+    }
+  ],
+  "publisher": "A&amp;A 659, A71 (2022)",
+  "creators": [
+    "T. Willamo",
+    "J. J. Lehtinen",
+    "T. Hackman",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

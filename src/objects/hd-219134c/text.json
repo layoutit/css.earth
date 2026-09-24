@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-219134c",
+  "card": {
+    "text": "HD 219134 c crosses its star every 6.76 days and is 1.5 Earth radii across, found in 2015.",
+    "sources": [
+      {
+        "catalogueId": "publication-2017natas-1e-56g",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+        "label": "Gillon et al. 2017",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2017): pl_orbper 6.76458, pl_radj 0.13480239, pl_bmassj 0.01371803"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 219134 c transits HD 219134 every 6.76 days and is 1.5 Earth radii across. Orbit and size follow Gillon et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2017natas-1e-56g",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+        "label": "Gillon et al. 2017",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2017): pl_orbper 6.76458, pl_radj 0.13480239, pl_bmassj 0.01371803"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

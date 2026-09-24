@@ -27,6 +27,7 @@ import { loadPublishedPhaseCurveMap } from './published-phase-curve-map.mts';
 import { loadEigenspectraTemperature } from './eigenspectra-map.mts';
 import { loadHealpixNpyMap } from './healpix-map.mts';
 import { loadTecplotLonLatMap } from './tecplot-lonlat-map.mts';
+import { loadLatitudeBeltMap } from './latitude-belt-map.mts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -157,6 +158,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'eigenspectra-temperature') return loadEigenspectraTemperature(root, value);
   if (lens.format === 'healpix-npy-map') return loadHealpixNpyMap(root, value);
   if (lens.format === 'tecplot-lonlat-map') return loadTecplotLonLatMap(root, value);
+  if (lens.format === 'latitude-belt-map') return loadLatitudeBeltMap(root, value);
   if (lens.format === 'bare-rock-fit') return loadBareRockFit(root, value);
   if (lens.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
   if (lens.format === 'isis3') {

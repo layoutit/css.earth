@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-73583b",
+  "radiusKm": 17794.9,
+  "radiusSource": "Radius 0.24890756 Jupiter radii from Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract): 17,794.9 km at 71,492 km per Jupiter radius. GM from the mass 0.03209279 Jupiter masses (Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.398042,
+  "orbitalPeriodSource": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): P 6.398042 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 73583 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.03209279 Jupiter masses: Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)."
+}

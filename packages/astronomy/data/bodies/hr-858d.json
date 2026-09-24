@@ -1,0 +1,28 @@
+{
+ "id": "hr-858d",
+ "classification": "exoplanet",
+ "order": 1814,
+ "physical": {
+  "name": "HR 858 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 12762.6,
+  "gravitationalParameterKm3PerS2": 2830063.1,
+  "parent": "hr-858"
+ },
+ "physicalNotes": "Radius 0.17851757 Jupiter radii from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract): 12,762.6 km at 71,492 km per Jupiter radius. GM from the mass 0.0223391 Jupiter masses (Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 11.230511,
+  "semiMajorAxisStellarRadii": 17.93,
+  "inclinationDegrees": 87.72,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58409.2324,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): P 11.230511 d",
+   "shape": "Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): a/R* 17.93; Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): inclination 87.72 degrees",
+   "eccentricity": "Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): e 0",
+   "phase": "Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): transit mid-time 2458409.7324 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

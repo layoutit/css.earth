@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-88986b",
+  "card": {
+    "text": "HD 88986 b crosses its star every 146 days and is 2.5 Earth radii across, found in 2023.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024a-a-681a-55h",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract",
+        "label": "Heidari et al. 2024",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HEIDARI_ET_AL_2024): pl_orbper 146.05, pl_radj 0.2221433, pl_bmassj 0.05411725"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 88986 b transits HD 88986 every 146 days and is 2.5 Earth radii across. Orbit and size follow Heidari et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024a-a-681a-55h",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract",
+        "label": "Heidari et al. 2024",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HEIDARI_ET_AL_2024): pl_orbper 146.05, pl_radj 0.2221433, pl_bmassj 0.05411725"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hr-858d",
+  "card": {
+    "text": "HR 858 d crosses its star every 11.2 days and is 2 Earth radii across, found in 2019.",
+    "sources": [
+      {
+        "catalogueId": "publication-2025a-a-693a-90b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "label": "Bonfanti et al. 2025",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL__2025): pl_orbper 11.230511, pl_radj 0.17851757, pl_bmassj 0.0223391"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HR 858 d transits HR 858 every 11.2 days and is 2 Earth radii across. Orbit and size follow Bonfanti et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2025a-a-693a-90b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "label": "Bonfanti et al. 2025",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL__2025): pl_orbper 11.230511, pl_radj 0.17851757, pl_bmassj 0.0223391"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

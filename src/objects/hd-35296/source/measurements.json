@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-35296",
+  "angularDiameterMas": 0.7,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 765,270 km at 14.58 pc = 0.7 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 14.579223284277399,
+  "distanceSource": "Gaia DR3 parallax 68.5908 +/- 0.1040 mas (same row, RUWE 0.82): 14.58 pc, no zero-point correction",
+  "radiusKm": 765270,
+  "radiusSource": "Radius 1.1 solar radii from Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729): 765,270 km at 695,700 km per solar radius. Mass 1.096 (1.056 to 1.136) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 6170 K from Casagrande et al. (2011), A&A 530, A138, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729). Spin inclination 65 degrees and rotation period 3.493 d from Willamo et al. (2022), Table 2, the values of the ZDI inversion (https://arxiv.org/abs/2110.06729). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6170,
+  "effectiveTemperatureSource": "Casagrande et al. (2011), A&A 530, A138, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729)",
+  "surfaceGravityLogg": 4.39,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-35296.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.395, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

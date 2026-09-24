@@ -1,0 +1,31 @@
+{
+ "id": "hd-73583b",
+ "classification": "exoplanet",
+ "order": 1811,
+ "physical": {
+  "name": "HD 73583 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 17794.9,
+  "gravitationalParameterKm3PerS2": 4065724.26,
+  "parent": "hd-73583"
+ },
+ "physicalNotes": "Radius 0.24890756 Jupiter radii from Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract): 17,794.9 km at 71,492 km per Jupiter radius. GM from the mass 0.03209279 Jupiter masses (Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.398042,
+  "semiMajorAxisStellarRadii": 19.98,
+  "inclinationDegrees": 88.37,
+  "eccentricity": 0.09,
+  "argumentOfPeriapsisDegrees": 284,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58517.19013,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): P 6.398042 d",
+   "shape": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): a/R* 19.98; Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): inclination 88.37 degrees",
+   "eccentricity": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): e 0.09",
+   "argumentOfPeriapsis": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): omega -76 degrees, stored as 284",
+   "phase": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): transit mid-time 2458517.69013 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

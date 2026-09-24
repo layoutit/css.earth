@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hd-97658",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5212,
+      "lowerKelvin": 5169,
+      "upperKelvin": 5255,
+      "citation": "Ellis et al. 2021, the stellar temperature of the default parameter set of HD 97658 b in the NASA Exoplanet Archive: 5212 +/- 43 K, https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 97658 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

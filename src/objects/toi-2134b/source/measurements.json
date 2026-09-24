@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-2134b",
+  "radiusKm": 17444.1,
+  "radiusSource": "Radius 0.24400078 Jupiter radii from Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract): 17,444.1 km at 71,492 km per Jupiter radius. GM from the mass 0.02948132 Jupiter masses (Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.229198,
+  "orbitalPeriodSource": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): P 9.229198 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-2134 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02948132 Jupiter masses: Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)."
+}

@@ -1,0 +1,31 @@
+{
+ "id": "toi-2134b",
+ "classification": "exoplanet",
+ "order": 1800,
+ "physical": {
+  "name": "TOI-2134 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 17444.1,
+  "gravitationalParameterKm3PerS2": 3734886.19,
+  "parent": "toi-2134"
+ },
+ "physicalNotes": "Radius 0.24400078 Jupiter radii from Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract): 17,444.1 km at 71,492 km per Jupiter radius. GM from the mass 0.02948132 Jupiter masses (Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 9.229198,
+  "semiMajorAxisStellarRadii": 23.66,
+  "inclinationDegrees": 89.69,
+  "eccentricity": 0.067,
+  "argumentOfPeriapsisDegrees": 163,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59010.18937,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): P 9.229198 d",
+   "shape": "Rescigno et al. 2024 (2024MNRAS.527.5385R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2024): a/R* 23.66; Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): inclination 89.69 degrees",
+   "eccentricity": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): e 0.067",
+   "argumentOfPeriapsis": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): omega 163 degrees",
+   "phase": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): transit mid-time 2459010.68937 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

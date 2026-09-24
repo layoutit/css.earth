@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-63433d",
+  "displayName": "HD 63433 d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Earth radii",
+        "source": {
+          "catalogueId": "publication-2024aj-167-54c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C",
+          "label": "Capistrant et al. 2024 (2024AJ....167...54C), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.21 days",
+        "source": {
+          "catalogueId": "publication-2024aj-167-54c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C",
+          "label": "Capistrant et al. 2024",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.0039 Jupiter masses",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 63433; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-63433d-lens-shape.webp",
+        "surface": "hd-63433d-surface-shape@2x.webp",
+        "poles": "hd-63433d-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-63433d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 63433 d is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Capistrant et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C/abstract",
+      "credit": "Capistrant et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-63433d.json",
+      "credit": "Radius from Capistrant et al. 2024 (2024AJ....167...54C), via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Capistrant et al. 2024 (2024AJ....167...54C), via the NASA Exoplanet Archive"
+    }
+  }
+}

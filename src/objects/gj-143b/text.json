@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-143b",
+  "card": {
+    "text": "GJ 143 b crosses its star every 35.6 days and is 2.6 Earth radii across, found in 2019.",
+    "sources": [
+      {
+        "catalogueId": "publication-2019apj-875l-7d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+        "label": "Dragomir et al. 2019",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRAGOMIR_ET_AL__2019): pl_orbper 35.61253, pl_radj 0.2328486, pl_bmassj 0.07142183"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "GJ 143 b transits GJ 143 every 35.6 days and is 2.6 Earth radii across. Orbit and size follow Dragomir et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2019apj-875l-7d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+        "label": "Dragomir et al. 2019",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRAGOMIR_ET_AL__2019): pl_orbper 35.61253, pl_radj 0.2328486, pl_bmassj 0.07142183"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

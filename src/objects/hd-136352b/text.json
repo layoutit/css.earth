@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-136352b",
+  "card": {
+    "text": "HD 136352 b crosses its star every 11.6 days and is 1.7 Earth radii across, found in 2019.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021natas-5-775d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "label": "Delrez et al. 2021",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DELREZ_ET_AL_2021): pl_orbper 11.57797, pl_radj 0.14845239, pl_bmassj 0.01485078"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 136352 b transits HD 136352 every 11.6 days and is 1.7 Earth radii across. Orbit and size follow Delrez et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021natas-5-775d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "label": "Delrez et al. 2021",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DELREZ_ET_AL_2021): pl_orbper 11.57797, pl_radj 0.14845239, pl_bmassj 0.01485078"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

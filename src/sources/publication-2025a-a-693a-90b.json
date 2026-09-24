@@ -1,0 +1,36 @@
+{
+  "id": "publication-2025a-a-693a-90b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2025A&A...693A..90B, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...693A..90B"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
+      "checkedOn": "2026-09-24",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B"
+    }
+  ],
+  "publicationDate": "2025"
+}

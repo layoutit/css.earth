@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-97658b",
+  "radiusKm": 13521.6,
+  "radiusSource": "Radius 0.18913406 Jupiter radii from Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract): 13,521.6 km at 71,492 km per Jupiter radius. GM from the mass 0.02611472 Jupiter masses (Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.4897116,
+  "orbitalPeriodSource": "Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive ps table (pl_refname ELLIS_ET_AL__2021): P 9.4897116 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 97658 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02611472 Jupiter masses: Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract)."
+}

@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "hd-60779",
+  "source": "Assumed synchronous rotation: a planet 37 stellar radii from its star is expected to be tidally locked, and no rotation period of HD 60779 b is measured in the sources this package cites. Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/hd-60779b.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of HD 60779 b is measured."
+}

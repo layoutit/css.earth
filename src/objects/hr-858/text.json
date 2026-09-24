@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hr-858",
+  "card": {
+    "text": "HR 858 is a 6,354 K star 32 parsecs away with 3 known transiting planets.",
+    "sources": [
+      {
+        "catalogueId": "publication-2025a-a-693a-90b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of HR 858 c (st_refname BONFANTI_ET_AL__2025): st_teff 6354, st_rad 1.258, st_mass 1.204"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HR 858 is a star of 6,354 K 32 parsecs away. Its planets b, d cross it, which is how they were found and sized.",
+    "sources": [
+      {
+        "catalogueId": "publication-2025a-a-693a-90b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of HR 858 c (st_refname BONFANTI_ET_AL__2025): st_teff 6354, st_rad 1.258, st_mass 1.204"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

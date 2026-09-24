@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-63433d",
+  "card": {
+    "text": "HD 63433 d crosses its star every 4.21 days and is 1.1 Earth radii across, found in 2023.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024aj-167-54c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C/abstract",
+        "label": "Capistrant et al. 2024",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAPISTRANT_ET_AL_2024): pl_orbper 4.209075, pl_radj 0.09572681, pl_bmassj 0.00394"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 63433 d transits HD 63433 every 4.21 days and is 1.1 Earth radii across. Orbit and size follow Capistrant et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024aj-167-54c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C/abstract",
+        "label": "Capistrant et al. 2024",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAPISTRANT_ET_AL_2024): pl_orbper 4.209075, pl_radj 0.09572681, pl_bmassj 0.00394"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

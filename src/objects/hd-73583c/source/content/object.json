@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-73583c",
+  "displayName": "HD 73583 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.4 Earth radii",
+        "source": {
+          "catalogueId": "publication-2022mnras-514-1606b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B",
+          "label": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "18.9 days",
+        "source": {
+          "catalogueId": "publication-2022mnras-514-1606b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B",
+          "label": "Barragán et al. 2022",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.031 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2022mnras-514-1606b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B",
+          "label": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 73583; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-73583c-lens-shape.webp",
+        "surface": "hd-73583c-surface-shape@2x.webp",
+        "poles": "hd-73583c-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-73583c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 73583 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Barrag&aacute;n et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+      "credit": "Barrag&aacute;n et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-73583c.json",
+      "credit": "Radius from Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive; mass from Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive; orbit from Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive"
+    }
+  }
+}

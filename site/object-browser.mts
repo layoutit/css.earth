@@ -190,6 +190,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       browser.removeAttribute('data-navigation-filtered');
       void navigation?.reset();
       catalogue.clearWindow();
+      // Closing clears the rendered window, so the next open must filter again even for the same query.
+      filteredQuery = null;
       markCategory();
     }
   };
@@ -301,13 +303,16 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     catalogue.setSelection(selected);
   };
   const previewSelection = (subject: SceneSubject) => {
-    const previous = subjectOverride, previousOpen = open;
+    const previous = subjectOverride, previousOpen = open, previousQuery = search.value;
     const preview = { subject, hideFocus: true };
     subjectOverride = preview;
+    // Choosing a result ends that search; a cancelled flight gives the query back.
+    search.value = '';
     markSelection(); render(false);
     return () => {
       if (subjectOverride !== preview) return;
       subjectOverride = previous;
+      if (!search.value) search.value = previousQuery;
       markSelection(); render(open || previousOpen);
     };
   };

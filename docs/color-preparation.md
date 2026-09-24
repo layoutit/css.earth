@@ -185,6 +185,11 @@ LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric ca
 380-780 nm must be declared as a gap, with its reason. Checked against the Sun, the route turns CALSPEC's solar spectrum
 into #fff2ee, the colour the Sun's swatch takes from a different spectrum (ASTM E490) with Colour Science.
 
+For a new star, [new-object/color.mts](../tools/objects/new-object/color.mts) (run by `telescope new-object`) tries the archives in
+this order and keeps the first spectrum the reader accepts, with the next as its cross-check: the STIS Next Generation Spectral
+Library, Gaia DR3 XP (from the ARI Heidelberg mirror when ESA's DataLink is down), Pulkovo, Kiehling, Kharitonov, then Burnashev's
+part 2. With none, the colour is a Planck spectrum at the cited temperature.
+
 The star's catalogue swatch, minimap dot and navigation marker take the same colour
 ([stellar-spectra/author.mts](../tools/objects/source-authoring/stellar-spectra/author.mts)). A star with no usable
 spectrum keeps the star field's temperature fit at a cited effective temperature

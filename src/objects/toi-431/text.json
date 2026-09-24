@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-431",
+  "card": {
+    "text": "TOI-431 is a 4,850 K star 32.6 parsecs away with 2 known transiting planets.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021mnras-507-2782o",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of TOI-431 d (st_refname OSBORN_ET_AL__2021): st_teff 4850, st_rad 0.731, st_mass 0.78"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-431 is a star of 4,850 K 32.6 parsecs away. Its planets b, d cross it, which is how they were found and sized.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021mnras-507-2782o",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of TOI-431 d (st_refname OSBORN_ET_AL__2021): st_teff 4850, st_rad 0.731, st_mass 0.78"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-444",
+  "card": {
+    "text": "Kepler-444 is a 5,046 K star 36.4 parsecs away with 5 known transiting planets.",
+    "sources": [
+      {
+        "catalogueId": "publication-2015apj-799-170c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of Kepler-444 e (st_refname CAMPANTE_ET_AL__2015): st_teff 5046, st_rad 0.752, st_mass 0.758"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-444 is a star of 5,046 K 36.4 parsecs away. Its planets b, c, d, e, f cross it, which is how they were found and sized.",
+    "sources": [
+      {
+        "catalogueId": "publication-2015apj-799-170c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of Kepler-444 e (st_refname CAMPANTE_ET_AL__2015): st_teff 5046, st_rad 0.752, st_mass 0.758"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}
