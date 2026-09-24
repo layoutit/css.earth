@@ -27,9 +27,9 @@ test("Git's comment block and trailing blank lines are ignored, as git's default
 
 test('a body, a trailer or any attribution is rejected', () => {
   assert.match(messageProblem('feat: add x\n\nWhy it matters.\n') ?? '', /single line/u);
-  assert.match(messageProblem('feat: add x\n\nCo-Authored-By: Claude <noreply@anthropic.com>\n') ?? '', /attribution/u);
-  assert.match(messageProblem('feat: add x\n\nCo-authored-by: Codex <codex@openai.com>\n') ?? '', /attribution/u);
-  assert.match(messageProblem('feat: 🤖 Generated with Claude Code\n') ?? '', /attribution/u);
+  assert.match(messageProblem('feat: add x\n\nCo-Authored-By: A Helper <helper@example.org>\n') ?? '', /attribution/u);
+  assert.match(messageProblem('feat: add x\n\nCo-authored-by: Another Helper <another@example.org>\n') ?? '', /attribution/u);
+  assert.match(messageProblem('feat: 🤖 Generated with a tool\n') ?? '', /attribution/u);
 });
 
 test('a title outside Conventional Commits is rejected', () => {
