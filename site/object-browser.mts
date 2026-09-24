@@ -230,6 +230,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       browser.removeAttribute('data-navigation-filtered');
       void navigation?.filter(null);
       catalogue.clearWindow();
+      // Closing clears the rendered window, so the next open must filter again even for the same query.
+      filteredQuery = null;
       markCategory();
     }
   };
