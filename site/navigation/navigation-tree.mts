@@ -1,17 +1,15 @@
 import { orbitRoot } from '../../src/platform/orbit-root.mts';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
-import { SITE_ORIGIN } from '../../site/seo.mts';
+import { appNavigationDestination } from './navigation-destination.mts';
 import { projectRoot } from '../../tools/cli/project-root.mts';
 
-/** Reads the checked-in object packages. The atlas prepares nothing and copies no facts out of them. */
+/** Reads checked-in packages and prepared context for application navigation. */
 export const REPOSITORY = projectRoot(import.meta.url);
-export const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
-export const REPOSITORY_URL = 'https://github.com/layoutit/css.earth';
+const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
 
 /** Sidebar order only. Labels are the descriptors' own classification values, or the prepared catalogue each package belongs to. */
 const ORDER = ['star', 'planet', 'dwarf-planet', 'satellite', 'trans-neptunian', 'comet', 'asteroid', 'interstellar', 'exoplanet', 'nebula', 'galaxy', 'galaxy-cluster', 'heliosphere'];
-const LABELS: Record<string, string> = {};
 /** Top-level groups read as the app's own plurals. */
 const GROUP_LABELS: Record<string, string> = { star: 'Stars', nebula: 'Nebulae', galaxy: 'Galaxies', 'galaxy-cluster': 'Galaxy clusters' };
 
@@ -22,8 +20,7 @@ const SCENE_CLASSIFICATIONS: Record<string, string> = {
   'milky-way': 'galaxy', 'local-group': 'galaxy', 'nearby-universe': 'galaxy-cluster', 'galaxy-clusters': 'galaxy-cluster',
   'stellar-neighbourhood': 'star', heliosphere: 'heliosphere',
 };
-const classificationLabel = (classification: string) => LABELS[classification] ??
-  classification[0].toLocaleUpperCase('en') + classification.slice(1).replaceAll('-', ' ');
+const classificationLabel = (classification: string) => classification[0].toLocaleUpperCase('en') + classification.slice(1).replaceAll('-', ' ');
 
 /** The Local Group catalogue names the packages it details; each nebula package carries its own classified record.
  * The same rows say which catalogue subject a package details, which is how the application reaches a package
@@ -51,18 +48,17 @@ function catalogueSubjects(): { classifications: Map<string, string>; focusIds: 
 }
 const DISTANCE_ORDERED = new Set(['star', 'planet', 'dwarf-planet']);
 
-export interface ObjectRecord {
+interface ObjectRecord {
   id: string; title: string; group: string; groupLabel: string; system: string | null; distanceAu: number | null;
-  catalogued: boolean; readmePath: string; readme: string;
   /** The catalogue subject this package details, when a catalogue names one. */
   focusId: string | null;
 }
 
-export const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
-export const text = (value: unknown): string | null => typeof value === 'string' && value.trim().length > 0 ? value : null;
-export const list = (value: unknown): unknown[] => Array.isArray(value) ? value : [];
+const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
+const text = (value: unknown): string | null => typeof value === 'string' && value.trim().length > 0 ? value : null;
+const list = (value: unknown): unknown[] => Array.isArray(value) ? value : [];
 
-export function readJson(path: string): unknown {
+function readJson(path: string): unknown {
   if (!existsSync(path)) return null;
   try { return JSON.parse(readFileSync(path, 'utf8')); }
   catch (error) { throw new Error(`${relative(REPOSITORY, path)} is not valid JSON`, { cause: error }); }
@@ -81,7 +77,7 @@ export function readObjects(): ObjectRecord[] {
     const catalog = isRecord(descriptor.properties) && isRecord(descriptor.properties.catalog) ? descriptor.properties.catalog : null;
     const group = text(catalog?.classification) ?? catalogued.get(entry.name) ?? 'context';
     objects.push({
-      id: entry.name, readmePath, readme, catalogued: catalog !== null, group,
+      id: entry.name, group,
       focusId: focusIds.get(entry.name) ?? null,
       title: text(catalog?.name) ?? /^#\s+(.+)$/mu.exec(readme)?.[1]?.trim() ?? entry.name,
       groupLabel: classificationLabel(group),
@@ -97,8 +93,8 @@ function groupIndex(group: string) {
   return index === -1 ? ORDER.length - 1.5 : index;
 }
 
-/** Objects grouped for the sidebar and the main page, keeping readObjects order. */
-export function groupObjects(objects: readonly ObjectRecord[]) {
+/** Group packages while preserving navigation order. */
+function groupObjects(objects: readonly ObjectRecord[]) {
   const groups = new Map<string, { label: string; objects: ObjectRecord[] }>();
   for (const object of objects) {
     const group = groups.get(object.group) ?? { label: object.groupLabel, objects: [] };
@@ -108,17 +104,7 @@ export function groupObjects(objects: readonly ObjectRecord[]) {
   return [...groups.values()];
 }
 
-/** The app that serves embedded scenes: the public site, or a local app server during development. */
-export const APP_ORIGIN = appOrigin(process.env.CSSEARTH_APP_ORIGIN);
-
-function appOrigin(value: string | undefined) {
-  if (value === undefined || value === '') return SITE_ORIGIN;
-  const url = new URL(value);
-  if (!['http:', 'https:'].includes(url.protocol) || url.origin !== value.replace(/\/$/u, '')) throw new TypeError(`CSSEARTH_APP_ORIGIN must be a bare http(s) origin: ${value}`);
-  return url.origin;
-}
-
-/** The prepared world context: the atlas derives nothing from it, it reads the orbits and colours preparation wrote. */
+/** Read the orbits and colours already written by world-context preparation. */
 function worldContext() {
   const context = readJson(resolve(OBJECTS_DIRECTORY, 'sun/prepared/world-context.json'));
   if (!isRecord(context)) throw new Error('src/objects/sun/prepared/world-context.json is missing. Run pnpm prepare:world-context.');
@@ -140,29 +126,27 @@ function worldContext() {
 /** Each object's prepared marker colour, for the shell's navigation markers. */
 export const objectColors = (): ReadonlyMap<string, string> => worldContext().colors;
 
-/** Packages the prepared orbits do not place, but that belong to one body: the Sun's heliopause surface. */
-const HOSTS: Record<string, string> = { heliosphere: 'sun' };
 // Prepared helper surfaces can have their own documentation without becoming
-// destinations in the Atlas/application navigation. Each one is a prepared
+// destinations in application navigation. Each one is a prepared
 // volume or surface that belongs to a body already in the tree: the Sun's
 // heliopause and coronal density, Betelgeuse's circumstellar shells, the
 // HD 181327 debris ring and the PDS 70 dust ring.
 const NAVIGATION_HIDDEN = new Set(['heliosphere', 'sun-cor1-density', 'betelgeuse-shell', 'hd-181327-disc', 'pds-70-disc']);
 
 /** One object and the satellites that orbit it. */
-export interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }
+interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }
 /** One star's system: the star itself, then its members grouped by classification. */
-export interface SystemGroup { id: string; label: string; star: SystemEntry | null; groups: { label: string; entries: SystemEntry[] }[] }
+interface SystemGroup { id: string; label: string; star: SystemEntry | null; groups: { label: string; entries: SystemEntry[] }[] }
 
 /** Objects nested by planetary system: the star, its bodies by classification, and each body's satellites under it. */
-export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
+function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
   const { parents } = worldContext(), byId = new Map(objects.map(object => [object.id, object]));
   const entries = new Map(objects.map(object => [object.id, { object, satellites: [] as SystemEntry[] }]));
   const hosted = new Set<string>();
   // A satellite hangs under the object it orbits; every other object hangs under the star its orbit chain reaches.
   for (const object of objects) {
-    const parent = parents.get(object.id) ?? HOSTS[object.id];
-    if (object.group !== 'satellite' && !(object.id in HOSTS) || parent === undefined) continue;
+    const parent = parents.get(object.id);
+    if (object.group !== 'satellite' || parent === undefined) continue;
     const host = entries.get(parent);
     if (!host) continue;
     host.satellites.push(entries.get(object.id)!);
@@ -202,37 +186,20 @@ export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
   return [...systems.values(), ...rest];
 }
 
-export function formatBytes(bytes: number) {
-  if (bytes < 1024) return `${bytes} B`;
-  const units = ['KB', 'MB', 'GB'];
-  let value = bytes / 1024, unit = 0;
-  while (value >= 1024 && unit < units.length - 1) { value /= 1024; unit += 1; }
-  return `${value.toFixed(value < 10 ? 1 : 0)} ${units[unit]}`;
-}
-
 /** The places' names as the app's breadcrumb gives them (site/components/ObjectBreadcrumbs.astro). */
 const PLACE_LABELS: Record<string, string> = {
   'nearby-universe': 'Nearby Universe', 'local-group': 'Local Group', 'milky-way': 'Milky Way',
   'galaxy-clusters': 'Galaxy clusters', 'stellar-neighbourhood': 'Stellar neighbourhood',
 };
 
-/** One node of the shared Atlas tree: a place or group that contains others, optionally with its own page.
- * The node carries the destination it opens, because the same tree is drawn on two sites whose routes
- * differ: the Atlas has a page per package, the application opens scenes, focuses and overviews. A node
- * with no destination is a label, never a link. */
+/** A place or group with the application destination it opens; null destinations remain labels. */
 export interface TreeNode { key: string; label: string; object: ObjectRecord | null; children: TreeNode[]; href: string | null; focusId: string | null }
 
-/** Resolves the destination a tree node opens, or null when the site cannot open it. */
-export type TreeDestination = (object: ObjectRecord) => { href: string; focusId: string | null } | null;
-
-/** The Atlas site's own routes: one documentation page per object package. */
-export const atlasPageDestination: TreeDestination = object => ({ href: `/${object.id}/`, focusId: null });
-
 /** Where things are, read from here outward: Solar System, Stars, Milky Way, Local Group, Beyond. */
-export function atlasTree(objects: readonly ObjectRecord[], destination: TreeDestination = atlasPageDestination): TreeNode[] {
+export function navigationTree(objects: readonly ObjectRecord[]): TreeNode[] {
   const visibleObjects = objects.filter(object => !NAVIGATION_HIDDEN.has(object.id));
   const node = (key: string, label: string, object: ObjectRecord | null, children: TreeNode[]): TreeNode => {
-    const opens = object ? destination(object) : null;
+    const opens = object ? appNavigationDestination(object.id, object.focusId) : null;
     return { key, label, object, children, href: opens?.href ?? null, focusId: opens?.focusId ?? null };
   };
   const systems = systemGroups(visibleObjects), byId = new Map(visibleObjects.map(object => [object.id, object]));
@@ -270,5 +237,5 @@ export function atlasTree(objects: readonly ObjectRecord[], destination: TreeDes
   return [...solarSystem, ...stars, ...milkyWay, ...localGroup, ...beyond, ...group('other', 'Other', rest)];
 }
 
-/** How many object pages a node holds, itself included. */
+/** How many objects a node holds, itself included. */
 export const treeCount = (node: TreeNode): number => (node.object ? 1 : 0) + node.children.reduce((total, child) => total + treeCount(child), 0);

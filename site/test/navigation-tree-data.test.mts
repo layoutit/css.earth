@@ -27,11 +27,18 @@ test('bundled navigation reads object packages and prepared context from the rep
   const outfile = resolve(root, 'dist/.prerender/chunks/navigation.mjs');
   await build({
     stdin: {
-      contents: `import { REPOSITORY, readObjects, objectColors } from './objects.mts';
+      contents: `import { REPOSITORY, readObjects, objectColors } from './navigation-tree.mts';
         console.log(JSON.stringify({ repository: REPOSITORY,
           ids: readObjects().map(object => object.id).sort(), colors: [...objectColors()] }));`,
-      resolveDir: resolve(import.meta.dirname, '../../atlas/src'), sourcefile: 'navigation-fixture.mts', loader: 'ts',
+      resolveDir: resolve(import.meta.dirname, '../navigation'), sourcefile: 'navigation-fixture.mts', loader: 'ts',
     },
+    // This relocation fixture exercises package/context reads, not application route preparation.
+    plugins: [{ name: 'isolate-navigation-inputs', setup(build) {
+      build.onLoad({ filter: /[\/]navigation-destination\.mts$/ }, () => ({
+        contents: 'export function appNavigationDestination() { throw new Error("Routes are outside this fixture"); }',
+        loader: 'ts',
+      }));
+    } }],
     outfile, bundle: true, platform: 'node', format: 'esm', target: 'node22',
   });
   // A workspace-filtered command can run from another directory. Neither cwd nor the bundle depth is the root.

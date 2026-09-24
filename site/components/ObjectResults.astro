@@ -3,7 +3,7 @@ import { SEARCH_OBJECTS } from "../search-objects.mts";
 import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount } from "../object-categories.mts";
 import CatalogueRows from "./CatalogueRows.astro";
 import CatalogueOverviewRows from './CatalogueOverviewRows.astro';
-import NavigationTree from '../../atlas/src/components/NavigationTree.astro';
+import NavigationTree from './NavigationTree.astro';
 import { CATALOGUE_FRAGMENT_URL, CATALOGUE_INDEX_URL } from '../catalogue-fragment-loader.mts';
 
 interface Props { activeObjectId?: string; formId?: string; }
@@ -29,7 +29,7 @@ const testCatalogueWindow = import.meta.env.DEV && process.env.CSSEARTH_TEST_CAT
 
 <div data-object-navigation-slot>
   <!-- The homepage exposes the existing tree's destinations in its initial HTML. -->
-  <NavigationTree current={activeObjectId ?? ''} bounded eager={Astro.url.pathname === '/'} />
+  <NavigationTree current={activeObjectId ?? ''} eager={Astro.url.pathname === '/'} />
 </div>
 <div class="object-tabs" role="tablist" aria-label="Object categories" hidden>
   {groups.map((group) => <button type="submit" form={formId} name="category" value={group.type} role="tab"

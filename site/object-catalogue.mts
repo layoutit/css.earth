@@ -164,7 +164,6 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
     setSelection(selection: CatalogueSelection) { catalogueWindow?.setSelection(selection); },
     focus(index: number) { catalogueWindow?.focus(index); },
     clearWindow() { catalogueWindow?.clear(); },
-    hideRows() { for (const item of items) item.hidden = true; catalogueWindow?.clear(); },
     showInlineRows() { for (const item of items) item.hidden = false; },
     search(query: string, category: string, options: { illustrations: boolean }) {
       const result = searchObjects(searchLabels, query, category, options);
