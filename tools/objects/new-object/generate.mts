@@ -392,14 +392,17 @@ export const formatNewObject = (results: readonly NewObjectResult[]) => `${resul
  * new planets as host additions. */
 export async function specFromArchive(hosts: readonly string[], out: string, { root = process.cwd(), progress = (_line: string) => {} } = {}) {
   const { archiveSpec } = await import('./from-archive.mts'), { existingBodies } = await import('./identity.mts');
-  const universe = await existingBodies(root), stars: unknown[] = [], report: string[] = [];
+  const universe = await existingBodies(root), stars: unknown[] = [], report: string[] = [], failed: string[] = [];
   for (const host of hosts) {
     progress(`${host}: reading its default parameter sets`);
-    const { spec, skipped, notes } = await archiveSpec(liveArchive, host, universe);
+    // A host the archive cannot give a spec for is reported and left out; the rest of the batch is still drafted.
+    let drafted: Awaited<ReturnType<typeof archiveSpec>>;
+    try { drafted = await archiveSpec(liveArchive, host, universe); } catch (error) { failed.push(`${host}: ${(error as Error).message.split('\n')[0]}`); progress(`  ${host}: left out: ${failed.at(-1)}`); continue; }
+    const { spec, skipped, notes } = drafted;
     const planets = (spec.planets as unknown[]).length;
     if (planets || !('host' in spec)) stars.push(spec);
     report.push(`${host}: ${planets} planet${planets === 1 ? '' : 's'}${'host' in spec ? ' added to the existing star' : ''}${skipped.length ? `; left out: ${skipped.join('; ')}` : ''}${notes.length ? `; ${notes.join('; ')}` : ''}`);
   }
   await mkdir(dirname(resolve(root, out)), { recursive: true }); await writeFile(resolve(root, out), json({ stars }));
-  return { path: out, entries: stars.length, report };
+  return { path: out, entries: stars.length, report: [...report, ...failed.map(line => `left out: ${line}`)] };
 }
