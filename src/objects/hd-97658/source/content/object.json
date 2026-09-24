@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-97658",
+  "displayName": "HD 97658",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.73 solar radii",
+        "source": {
+          "catalogueId": "publication-2021aj-162-118e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E",
+          "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "21.6 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-97658",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-97658-lens-color.webp",
+        "surface": "hd-97658-surface-color@2x.webp",
+        "poles": "hd-97658-poles-color@2x.webp",
+        "source": {
+          "id": "hd-97658-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,212 K and log g 4.64 (u1 0.598, u2 0.165): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ellis et al. 2021",
+      "href": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+      "credit": "Ellis et al. 2021"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-97658.json",
+      "credit": "Ellis et al. 2021, the stellar radius of the default parameter set of HD 97658 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

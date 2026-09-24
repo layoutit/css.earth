@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-63433c",
+  "displayName": "HD 63433 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.7 Earth radii",
+        "source": {
+          "catalogueId": "publication-2023a-a-671a-163m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M",
+          "label": "Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "20.5 days",
+        "source": {
+          "catalogueId": "publication-2023a-a-671a-163m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M",
+          "label": "Mallorquín et al. 2023",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.049 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2023a-a-671a-163m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M",
+          "label": "Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 63433; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-63433c-lens-shape.webp",
+        "surface": "hd-63433c-surface-shape@2x.webp",
+        "poles": "hd-63433c-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-63433c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 63433 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mallorqu&iacute;n et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
+      "credit": "Mallorqu&iacute;n et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-63433c.json",
+      "credit": "Radius from Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive; mass from Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive; orbit from Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive"
+    }
+  }
+}

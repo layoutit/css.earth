@@ -1,0 +1,35 @@
+{
+  "id": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Web page exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+      "label": "exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+      "checkedOn": "2026-09-24",
+      "locator": "The page as cited by a NASA Exoplanet Archive parameter set or by a spec"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+      "scope": "citation",
+      "evidence": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+    }
+  ]
+}

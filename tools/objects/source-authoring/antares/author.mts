@@ -6,7 +6,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { neutralDiscMarker } from '../../new-star.mts';
+import { neutralDiscMarker } from '../../new-object/scaffold.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/antares/source');
 export const CONTEXT_PATH = 'presentation/context.png';

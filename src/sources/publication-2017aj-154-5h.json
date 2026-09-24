@@ -1,0 +1,36 @@
+{
+  "id": "publication-2017aj-154-5h",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2017AJ....154....5H, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2017AJ....154....5H"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H",
+      "checkedOn": "2026-09-24",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H"
+    }
+  ],
+  "publicationDate": "2017"
+}

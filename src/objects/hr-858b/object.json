@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hr-858b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HR 858 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 12781.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hr-858b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HR 858 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 6539439.9,
+      "description": "HR 858 b crosses its star every 3.59 days and is 2 Earth radii across, found in 2019.",
+      "systemName": "HR 858 system",
+      "order": 1815,
+      "context": {
+        "order": 1815
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        614620796519886100,
+        572850906612920400,
+        -501125892269721700
+      ],
+      "presentationToReference": [
+        0.5789234647384003,
+        0.7241736726017128,
+        0.37472671893772613,
+        0.635404201477227,
+        -0.6886819772353789,
+        0.3492543986498336,
+        -0.510988378263512,
+        -0.035911365077318964,
+        0.8588371505343196
+      ],
+      "orbitUpReference": [
+        -0.7241736726017128,
+        0.6886819772353789,
+        0.035911365077318964
+      ],
+      "metersPerUnit": 41231.290322580644,
+      "bodyRadiusM": 12781700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

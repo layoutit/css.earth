@@ -1,0 +1,36 @@
+{
+  "id": "publication-2021mnras-502-2893k",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2021MNRAS.502.2893K, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2021MNRAS.502.2893K"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K",
+      "checkedOn": "2026-09-24",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K"
+    }
+  ],
+  "publicationDate": "2021"
+}

@@ -1,0 +1,30 @@
+{
+ "id": "toi-836",
+ "classification": "star",
+ "order": 1804,
+ "physical": {
+  "name": "TOI-836",
+  "horizonsCode": null,
+  "meanRadiusKm": 462640.5,
+  "gravitationalParameterKm3PerS2": 89979034348.4349,
+  "parent": null,
+  "effectiveTemperatureK": 4552
+ },
+ "physicalNotes": "Radius 0.665 +/- 0.01 solar radii from Hawthorn et al. 2023, the stellar radius of the default parameter set of TOI-836 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract): 462,641 km at 695,700 km per solar radius. Mass 0.678 +/- 0.049 solar masses from Hawthorn et al. 2023, the stellar mass of the default parameter set of TOI-836 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract); GM is that mass times the JPL solar GM. Temperature 4552 +/- 154 K from Hawthorn et al. 2023, the stellar temperature of the default parameter set of TOI-836 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 225.07985270942575,
+  "declinationDegrees": -24.454206065152903,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 27.50838911016282,
+  "properMotionRaMasPerYear": -199.48263377244825,
+  "properMotionDecMasPerYear": -27.997252376471966,
+  "radialVelocityKmPerS": -26.563766,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6230733559097425152 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-836/source/photometry/gaia-dr3-source.csv; cross-identification HIP 73427: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+6230733559097425152",
+   "distance": "Gaia DR3 parallax 36.3525 +/- 0.0161 mas (same row, RUWE 1.09): 27.51 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -199.483, -27.997 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -26.56 +/- 0.15 km/s"
+  }
+ }
+}

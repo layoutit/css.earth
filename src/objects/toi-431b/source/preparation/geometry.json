@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "toi-431b",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/toi-431b/toi-431b-surface-shape@2x.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/toi-431b/toi-431b-poles-shape@2x.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#9a9a9a"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csstoi-431b-prepared-runtime-scene@1",
+    "materialSchema": "csstoi-431b-prepared-lighting@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 0.490047,
+      "sourceProjection": "no observation: the shared neutral gray of an unresolved surface on the reference sphere",
+      "polarPreparation": "the same gray on the polar tiles",
+      "axialTiltNote": "no obliquity of this planet is measured; the rotation record assumes the spin axis on the orbit normal, as tidal locking implies"
+    }
+  }
+}

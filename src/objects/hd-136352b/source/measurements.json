@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-136352b",
+  "radiusKm": 10613.2,
+  "radiusSource": "Radius 0.14845239 Jupiter radii from Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract): 10,613.2 km at 71,492 km per Jupiter radius. GM from the mass 0.01485078 Jupiter masses (Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 11.57797,
+  "orbitalPeriodSource": "Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): P 11.57797 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 136352 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01485078 Jupiter masses: Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract)."
+}

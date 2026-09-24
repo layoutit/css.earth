@@ -1,0 +1,247 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "be-ceti",
+  "displayName": "BE Ceti",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2110-06729",
+          "url": "https://arxiv.org/abs/2110.06729",
+          "label": "Willamo et al. (2021), A&amp;A 659, A71 (2022)",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "21.3 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-be-ceti",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "7.7 days",
+        "source": {
+          "catalogueId": "arxiv-2110-06729",
+          "url": "https://arxiv.org/abs/2110.06729",
+          "label": "Willamo et al. (2022), Table 2, the values of the ZDI inversion",
+          "checked": "2026-09-24",
+          "path": "source/preparation/rotation.json",
+          "locator": "source"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "be-ceti-lens-color.webp",
+        "surface": "be-ceti-surface-color@2x.webp",
+        "poles": "be-ceti-poles-color@2x.webp",
+        "source": {
+          "id": "be-ceti-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2110.06729"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,837 K and log g 4.41 (u1 0.447, u2 0.267): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field",
+        "label": "Radial field",
+        "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "be-ceti-lens-radial-field.webp",
+        "surface": "be-ceti-surface-radial-field@2x.webp",
+        "poles": "be-ceti-poles-radial-field@2x.webp",
+        "source": {
+          "id": "be-ceti-zdi-becet",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-43",
+            "0",
+            "+43"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-43",
+              "0",
+              "+43"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 65° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "meridional-field",
+        "label": "Meridional field",
+        "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "be-ceti-lens-meridional-field.webp",
+        "surface": "be-ceti-surface-meridional-field@2x.webp",
+        "poles": "be-ceti-poles-meridional-field@2x.webp",
+        "source": {
+          "id": "be-ceti-zdi-becet",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Meridional magnetic field",
+          "labels": [
+            "-43",
+            "0",
+            "+43"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-43",
+              "0",
+              "+43"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
+        "legendNote": "Red and blue: the field running north or south along the surface, as in the paper. Black line: 65° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "be-ceti-lens-azimuthal-field.webp",
+        "surface": "be-ceti-surface-azimuthal-field@2x.webp",
+        "poles": "be-ceti-poles-azimuthal-field@2x.webp",
+        "source": {
+          "id": "be-ceti-zdi-becet",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-43",
+            "0",
+            "+43"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-43",
+              "0",
+              "+43"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 65° S; the star never shows us what lies below it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Willamo et al. (2022), A&A 659, A71",
+      "href": "https://arxiv.org/abs/2110.06729"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2110.06729",
+      "credit": "Willamo et al. (2022), A&A 659, A71"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/be-ceti.json",
+      "credit": "Takeda et al. radius; Gaia DR3 astrometry; measured spin tilt, axis direction a display convention"
+    }
+  }
+}

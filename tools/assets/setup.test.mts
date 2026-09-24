@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -149,5 +150,20 @@ test("a connection that drops while the body streams is retried, and a failure n
     const always = async () => { drops++; return dropped(); };
     await assert.rejects(installRuntimeAssets([asset], { fetcher: always }), /pluto\/runtime\.json \(https:\/\/example\.invalid\/runtime\.json\): terminated/);
     assert.equal(drops, 4);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("restoring a body derives the page and provenance files R2 never holds, once", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cssearth-setup-derive-"));
+  try {
+    const source = fileURLToPath(new URL("../../src/objects/thetis", import.meta.url));
+    const directory = resolve(root, "src/objects/thetis");
+    await cp(source, directory, { recursive: true });
+    await cp(fileURLToPath(new URL("../../public/scenes/thetis", import.meta.url)), resolve(root, "public/scenes/thetis"), { recursive: true });
+    for (const file of ["object.json", "page.json", "provenance.json"]) await rm(resolve(directory, "prepared", file));
+    const { deriveRestoredPreparedFiles } = await import("./setup.mts");
+    assert.deepEqual(await deriveRestoredPreparedFiles(["thetis", "not-a-scene-body"], root), { pages: 1, provenance: 1 });
+    for (const file of ["object.json", "page.json", "provenance.json"]) assert.ok((await readFile(resolve(directory, "prepared", file))).length > 0, file);
+    assert.deepEqual(await deriveRestoredPreparedFiles(["thetis"], root), { pages: 0, provenance: 0 }, "a body that has them is left alone");
   } finally { await rm(root, { recursive: true, force: true }); }
 });

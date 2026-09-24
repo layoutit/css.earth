@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-101581b",
+  "card": {
+    "text": "HD 101581 b crosses its star every 4.47 days and is 0.96 Earth radii across, found in 2025.",
+    "sources": [
+      {
+        "catalogueId": "publication-2025aj-169-47k",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+        "label": "Kunimoto et al. 2025",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNIMOTO_ET_AL__2025): pl_orbper 4.46569, pl_radj 0.08528875, pl_bmassj 0.0026"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 101581 b transits HIP 56998 every 4.47 days and is 0.96 Earth radii across. Orbit and size follow Kunimoto et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2025aj-169-47k",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+        "label": "Kunimoto et al. 2025",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNIMOTO_ET_AL__2025): pl_orbper 4.46569, pl_radj 0.08528875, pl_bmassj 0.0026"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

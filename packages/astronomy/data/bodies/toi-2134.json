@@ -1,0 +1,30 @@
+{
+ "id": "toi-2134",
+ "classification": "star",
+ "order": 1799,
+ "physical": {
+  "name": "TOI-2134",
+  "horizonsCode": null,
+  "meanRadiusKm": 493251.3,
+  "gravitationalParameterKm3PerS2": 98738055391.2029,
+  "parent": null,
+  "effectiveTemperatureK": 4580
+ },
+ "physicalNotes": "Radius 0.709 +/- 0.017 solar radii from Rescigno et al. 2026, the stellar radius of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract): 493,251 km at 695,700 km per solar radius. Mass 0.744 +/- 0.027 solar masses from Rescigno et al. 2026, the stellar mass of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract); GM is that mass times the JPL solar GM. Temperature 4580 +/- 50 K from Rescigno et al. 2026, the stellar temperature of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 271.9355112378078,
+  "declinationDegrees": 39.07288752305053,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 22.67125780126952,
+  "properMotionRaMasPerYear": 54.53577618013374,
+  "properMotionDecMasPerYear": -283.0509637229036,
+  "radialVelocityKmPerS": -20.806316,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4610267648427698816 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-2134/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 44.1087 +/- 0.0144 mas (same row, RUWE 1.02): 22.67 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 54.536, -283.051 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -20.81 +/- 0.13 km/s"
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2134c",
+  "card": {
+    "text": "TOI-2134 c crosses its star every 95.9 days and is 0.66 Jupiter radii across, found in 2023.",
+    "sources": [
+      {
+        "catalogueId": "publication-2026mnras-550g1265r",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+        "label": "Rescigno et al. 2026",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RESCIGNO_ET_AL_2026): pl_orbper 95.85284, pl_radj 0.65572421, pl_bmassj 0.18343231"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-2134 c transits TOI-2134 every 95.9 days and is 0.66 Jupiter radii across. Orbit and size follow Rescigno et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2026mnras-550g1265r",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+        "label": "Rescigno et al. 2026",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RESCIGNO_ET_AL_2026): pl_orbper 95.85284, pl_radj 0.65572421, pl_bmassj 0.18343231"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

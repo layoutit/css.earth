@@ -1,0 +1,28 @@
+{
+ "id": "hd-101581c",
+ "classification": "exoplanet",
+ "order": 1779,
+ "physical": {
+  "name": "HD 101581 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 6314.3,
+  "gravitationalParameterKm3PerS2": 373725.27,
+  "parent": "hip-56998"
+ },
+ "physicalNotes": "Radius 0.08832204 Jupiter radii from Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract): 6,314.3 km at 71,492 km per Jupiter radius. GM from the mass 0.00295 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.20401,
+  "semiMajorAxisStellarRadii": 19.5577,
+  "inclinationDegrees": 87.93,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60016.614,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): P 6.20401 d",
+   "shape": "Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): a/R* derived from its semi-major axis 0.0573 au and stellar radius 0.63 solar radii; Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): inclination 87.93 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): transit mid-time 2460017.114 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

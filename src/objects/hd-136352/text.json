@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-136352",
+  "card": {
+    "text": "HD 136352 is a 5,664 K star 14.7 parsecs away with 3 known transiting planets.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021natas-5-775d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of HD 136352 c (st_refname DELREZ_ET_AL_2021): st_teff 5664, st_rad 1.058, st_mass 0.87"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 136352 is a star of 5,664 K 14.7 parsecs away. Its planets b, c, d cross it, which is how they were found and sized.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021natas-5-775d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of HD 136352 c (st_refname DELREZ_ET_AL_2021): st_teff 5664, st_rad 1.058, st_mass 0.87"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

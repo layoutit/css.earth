@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-2134c",
+  "displayName": "TOI-2134 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.66 Jupiter radii",
+        "source": {
+          "catalogueId": "publication-2026mnras-550g1265r",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R",
+          "label": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "95.9 days",
+        "source": {
+          "catalogueId": "publication-2026mnras-550g1265r",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R",
+          "label": "Rescigno et al. 2026",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.18 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2026mnras-550g1265r",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R",
+          "label": "Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-2134; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-2134c-lens-shape.webp",
+        "surface": "toi-2134c-surface-shape@2x.webp",
+        "poles": "toi-2134c-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-2134c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-2134 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Rescigno et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+      "credit": "Rescigno et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-2134c.json",
+      "credit": "Radius from Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive; mass from Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive; orbit from Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "be-ceti",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "BE Ceti",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "meridional-field",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "azimuthal-field",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 695700
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/be-ceti-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "BE Ceti",
+      "classification": "star",
+      "color": "#fff1ec",
+      "distanceAu": 4400383.6,
+      "description": "Young Sun-like star 21 parsecs away whose magnetic field was mapped in December 2017.",
+      "systemName": "BE Ceti system",
+      "order": 1769,
+      "context": {
+        "order": 1766
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        640197128240384100,
+        64112045279036860,
+        -139213478487001260
+      ],
+      "presentationToReference": [
+        0.9703310451254966,
+        0.22029108626769017,
+        0.09964687740548049,
+        0.09717521639713037,
+        0.022056235392160395,
+        -0.9950228639576564,
+        0.22139250254656925,
+        -0.9751847823829731,
+        0.000004984038812737056
+      ],
+      "orbitUpReference": [
+        -0.22029108626769017,
+        -0.022056235392160395,
+        0.9751847823829731
+      ],
+      "metersPerUnit": 2244193.5483870967,
+      "bodyRadiusM": 695700000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

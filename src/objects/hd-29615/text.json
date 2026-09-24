@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-29615",
+  "card": {
+    "text": "Fast-spinning young Sun 54 parsecs away with a large dark spot over its pole, mapped in December 2017.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2110-06729",
+        "url": "https://arxiv.org/abs/2110.06729",
+        "label": "Willamo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Section 5, HD 29615",
+        "quote": "The brightness map is dominated by a large polar spot"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 29615 is a young Sun-like star that turns in 2.3 days. Of the five stars in its study, it has the strongest magnetic field.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2110-06729",
+        "url": "https://arxiv.org/abs/2110.06729",
+        "label": "Willamo et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Section 5, HD 29615",
+        "quote": "This star has the strongest magnetic field of the stars in our sample."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field": {
+      "title": "Radial field, Dec 2017",
+      "detail": "Dec 2017",
+      "summary": "Where the magnetic field points out of the star or into it, mapped from how it polarises starlight."
+    },
+    "meridional-field": {
+      "title": "Meridional field, Dec 2017",
+      "detail": "Dec 2017",
+      "summary": "The part of the magnetic field running north or south along the surface."
+    },
+    "azimuthal-field": {
+      "title": "Azimuthal field, Dec 2017",
+      "detail": "Dec 2017",
+      "summary": "The part of the magnetic field running around the spin axis."
+    },
+    "brightness": {
+      "title": "Brightness, Dec 2017",
+      "detail": "Dec 2017",
+      "summary": "Starspots: darker, cooler patches mapped from how they distort the spectrum as the star turns."
+    }
+  }
+}

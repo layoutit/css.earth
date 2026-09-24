@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "be-ceti",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5837,
+      "lowerKelvin": 5837,
+      "upperKelvin": 5837,
+      "citation": "Valenti & Fischer (2005), ApJS 159, 141, as listed by Willamo et al. (2022), Table 2: 5837 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/2110.06729"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 1835 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 88 is not in the catalogue; kiehling: HR 88 is not among its 60 stars; kharitonov: HR 88 is not in the catalogue; burnashev: BS 88 is not in part2), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

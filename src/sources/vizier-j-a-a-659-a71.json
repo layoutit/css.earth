@@ -1,0 +1,41 @@
+{
+  "id": "vizier-j-a-a-659-a71",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "ZDI maps of five young solar-type stars (Willamo et al. 2022), VizieR J/A+A/659/A71",
+  "identifiers": [
+    {
+      "type": "VizieR catalogue",
+      "value": "J/A+A/659/A71"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+      "label": "VizieR J/A+A/659/A71"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/659/A71/",
+      "label": "CDS FTP area"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/659/A71/ReadMe",
+      "checkedOn": "2026-09-23",
+      "locator": "ReadMe of 27-Dec-2021: six map files (becet, chi1ori, hd29615, hd35296, v1358ori, v1358or2), 1876 records each: Lat, Lon (deg), Brad, Bmer, Bazi (kG), Brig (normalised)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Willamo et al. (2022), A&A 659, A71; VizieR (CDS)",
+      "scope": "citation",
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+    }
+  ],
+  "publisher": "CDS, Strasbourg"
+}

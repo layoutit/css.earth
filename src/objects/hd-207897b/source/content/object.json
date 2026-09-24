@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-207897b",
+  "displayName": "HD 207897 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.3 Earth radii",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P",
+          "label": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "16.2 days",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P",
+          "label": "Polanski et al. 2024",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.047 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P",
+          "label": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 207897; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-207897b-lens-shape.webp",
+        "surface": "hd-207897b-surface-shape@2x.webp",
+        "poles": "hd-207897b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-207897b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 207897 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "MacDougall et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+      "credit": "MacDougall et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-207897b.json",
+      "credit": "Radius from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive; mass from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive; orbit from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive"
+    }
+  }
+}

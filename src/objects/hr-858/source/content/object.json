@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hr-858",
+  "displayName": "HR 858",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 solar radii",
+        "source": {
+          "catalogueId": "publication-2025a-a-693a-90b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
+          "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "31.7 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hr-858",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hr-858-lens-color.webp",
+        "surface": "hr-858-surface-color@2x.webp",
+        "poles": "hr-858-poles-color@2x.webp",
+        "source": {
+          "id": "hr-858-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gaia.ari.uni-heidelberg.de/tap/sync"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,354 K and log g 4.32 (u1 0.365, u2 0.309): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bonfanti et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+      "credit": "Bonfanti et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hr-858.json",
+      "credit": "Bonfanti et al. 2025, the stellar radius of the default parameter set of HR 858 c in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

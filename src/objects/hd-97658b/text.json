@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-97658b",
+  "card": {
+    "text": "HD 97658 b crosses its star every 9.49 days and is 2.1 Earth radii across, found in 2010.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021aj-162-118e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+        "label": "Ellis et al. 2021",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ELLIS_ET_AL__2021): pl_orbper 9.4897116, pl_radj 0.18913406, pl_bmassj 0.02611472"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 97658 b transits HD 97658 every 9.49 days and is 2.1 Earth radii across. Orbit and size follow Ellis et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021aj-162-118e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+        "label": "Ellis et al. 2021",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ELLIS_ET_AL__2021): pl_orbper 9.4897116, pl_radj 0.18913406, pl_bmassj 0.02611472"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

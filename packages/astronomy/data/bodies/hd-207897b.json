@@ -1,0 +1,28 @@
+{
+ "id": "hd-207897b",
+ "classification": "exoplanet",
+ "order": 1808,
+ "physical": {
+  "name": "HD 207897 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 14944,
+  "gravitationalParameterKm3PerS2": 5899286.31,
+  "parent": "hd-207897"
+ },
+ "physicalNotes": "Radius 0.20903072 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 14,944 km at 71,492 km per Jupiter radius. GM from the mass 0.04656601 Jupiter masses (Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 16.20166,
+  "semiMajorAxisStellarRadii": 32.13,
+  "inclinationDegrees": 88.757,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58795.99559,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): P 16.20166 d",
+   "shape": "Heidari et al. 2022 (2022A&A...658A.176H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL__2022): a/R* 32.13; Heidari et al. 2022 (2022A&A...658A.176H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL__2022): inclination 88.757 degrees",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0",
+   "phase": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): transit mid-time 2458796.49559 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

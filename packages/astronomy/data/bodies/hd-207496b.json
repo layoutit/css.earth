@@ -1,0 +1,31 @@
+{
+ "id": "hd-207496b",
+ "classification": "exoplanet",
+ "order": 1803,
+ "physical": {
+  "name": "HD 207496 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 14350.7,
+  "gravitationalParameterKm3PerS2": 2431462.94,
+  "parent": "hd-207496"
+ },
+ "physicalNotes": "Radius 0.2007319 Jupiter radii from Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract): 14,350.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01919275 Jupiter masses (Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.441008,
+  "semiMajorAxisStellarRadii": 21.47,
+  "inclinationDegrees": 88.79,
+  "eccentricity": 0.231,
+  "argumentOfPeriapsisDegrees": 57,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58658.28978,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): P 6.441008 d",
+   "shape": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): a/R* 21.47; Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): inclination 88.79 degrees",
+   "eccentricity": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): e 0.231",
+   "argumentOfPeriapsis": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): omega 57 degrees",
+   "phase": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): transit mid-time 2458658.78978 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

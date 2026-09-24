@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hd-136352",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5664,
+      "lowerKelvin": 5603,
+      "upperKelvin": 5725,
+      "citation": "Delrez et al. 2021, the stellar temperature of the default parameter set of HD 136352 c in the NASA Exoplanet Archive: 5664 +/- 61 K, https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 136352 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 5699 is not in the catalogue; kiehling: HR 5699 is not among its 60 stars; kharitonov: HR 5699 is not in the catalogue; burnashev: BS 5699 is not in part2), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

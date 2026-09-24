@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-39091",
+  "card": {
+    "text": "HD 39091 is a 5,998 K star 18.3 parsecs away with 1 known transiting planet.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021mnras-502-2893k",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of pi Men c (st_refname KUNOVAC_HODZIC_ET_AL_2021): st_teff 5998, st_rad 1.17, st_mass 1.07"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 39091 is a star of 5,998 K 18.3 parsecs away. Its planet pi Men c crosses it, which is how it was found and sized.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021mnras-502-2893k",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of pi Men c (st_refname KUNOVAC_HODZIC_ET_AL_2021): st_teff 5998, st_rad 1.17, st_mass 1.07"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

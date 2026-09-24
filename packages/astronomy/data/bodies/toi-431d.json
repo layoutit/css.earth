@@ -1,0 +1,28 @@
+{
+ "id": "toi-431d",
+ "classification": "exoplanet",
+ "order": 1817,
+ "physical": {
+  "name": "TOI-431 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 20983.9,
+  "gravitationalParameterKm3PerS2": 3946143.58,
+  "parent": "toi-431"
+ },
+ "physicalNotes": "Radius 0.29351465 Jupiter radii from Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract): 20,983.9 km at 71,492 km per Jupiter radius. GM from the mass 0.03114888 Jupiter masses (Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 12.46103,
+  "semiMajorAxisStellarRadii": 28.65,
+  "inclinationDegrees": 89.7,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58627.0453,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2021): P 12.46103 d",
+   "shape": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): a/R* 28.65; Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2021): inclination 89.7 degrees",
+   "eccentricity": "Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2021): e 0",
+   "phase": "Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2021): transit mid-time 2458627.5453 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

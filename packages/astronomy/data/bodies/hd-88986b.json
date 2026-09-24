@@ -1,0 +1,31 @@
+{
+ "id": "hd-88986b",
+ "classification": "exoplanet",
+ "order": 1820,
+ "physical": {
+  "name": "HD 88986 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15881.5,
+  "gravitationalParameterKm3PerS2": 6855926.72,
+  "parent": "hd-88986"
+ },
+ "physicalNotes": "Radius 0.2221433 Jupiter radii from Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract): 15,881.5 km at 71,492 km per Jupiter radius. GM from the mass 0.05411725 Jupiter masses (Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 146.05,
+  "semiMajorAxisStellarRadii": 81.1,
+  "inclinationDegrees": 89.9,
+  "eccentricity": 0.24,
+  "argumentOfPeriapsisDegrees": 306,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58891.19,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): P 146.05 d",
+   "shape": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): a/R* 81.1; Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): inclination 89.9 degrees",
+   "eccentricity": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): e 0.24",
+   "argumentOfPeriapsis": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): omega 306 degrees",
+   "phase": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): transit mid-time 2458891.69 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

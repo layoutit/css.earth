@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "gj-143b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 143 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 16646.8
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-143b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 143 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 3368981.1,
+      "description": "GJ 143 b crosses its star every 35.6 days and is 2.6 Earth radii across, found in 2019.",
+      "systemName": "GJ 143 system",
+      "order": 1786,
+      "context": {
+        "order": 1786
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        139209293732950940,
+        176603001285363740,
+        -451043771900330600
+      ],
+      "presentationToReference": [
+        0.2670255354684378,
+        0.7884966003385523,
+        0.5540491626763273,
+        0.3576120251259352,
+        -0.6149500772917221,
+        0.70281579515847,
+        -0.8948804405579113,
+        -0.010464879046143785,
+        0.44618323972716417
+      ],
+      "orbitUpReference": [
+        -0.7884966003385523,
+        0.6149500772917221,
+        0.010464879046143785
+      ],
+      "metersPerUnit": 53699.354838709674,
+      "bodyRadiusM": 16646800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

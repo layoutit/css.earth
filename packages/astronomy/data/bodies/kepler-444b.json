@@ -1,0 +1,28 @@
+{
+ "id": "kepler-444b",
+ "classification": "exoplanet",
+ "order": 1827,
+ "physical": {
+  "name": "Kepler-444 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 2573.7,
+  "gravitationalParameterKm3PerS2": 14949.01,
+  "parent": "kepler-444"
+ },
+ "physicalNotes": "Radius 0.036 Jupiter radii from Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract): 2,573.7 km at 71,492 km per Jupiter radius. GM from the mass 0.000118 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.6001053,
+  "semiMajorAxisStellarRadii": 11.951,
+  "inclinationDegrees": 88,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54965.7599,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): P 3.6001053 d",
+   "shape": "Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): a/R* 11.951; Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): inclination 88 degrees",
+   "eccentricity": "Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive ps table (pl_refname WEISS_ET_AL__2024): e 0",
+   "phase": "Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): transit mid-time 2454966.2599 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

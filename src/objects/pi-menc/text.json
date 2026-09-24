@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pi-menc",
+  "card": {
+    "text": "pi Men c crosses its star every 6.27 days and is 2 Earth radii across, found in 2018.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021mnras-502-2893k",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+        "label": "Kunovac Hod&#x17E;i&#x107; et al. 2021",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNOVAC_HODZIC_ET_AL_2021): pl_orbper 6.2678399, pl_radj 0.1801145, pl_bmassj 0.01321468"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "pi Men c transits HD 39091 every 6.27 days and is 2 Earth radii across. Orbit and size follow Kunovac Hod&#x17E;i&#x107; et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2021mnras-502-2893k",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+        "label": "Kunovac Hod&#x17E;i&#x107; et al. 2021",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNOVAC_HODZIC_ET_AL_2021): pl_orbper 6.2678399, pl_radj 0.1801145, pl_bmassj 0.01321468"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -19,7 +19,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
-import { starStylesheet } from './new-star.mts';
+import { starStylesheet } from './new-object/scaffold.mts';
 import { temperatureCatalogueColor } from './star-catalogue-color.mts';
 
 export const TODO = 'TODO(new-hosted-planet)';
@@ -106,7 +106,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     properMotionRaMasPerYear: requireFiniteNumber(star.properMotionRaMasPerYear), properMotionDecMasPerYear: requireFiniteNumber(star.properMotionDecMasPerYear),
     radialVelocityKmPerS: requireFiniteNumber(star.radialVelocityKmPerS) };
   // A companion star on a hosted orbit (the second star of a pair a planet orbits) keeps its class, and its catalogue colour is its
-  // cited temperature through the star field's colour fit, as new-star gives a placed star.
+  // cited temperature through the star field's colour fit, as new-object gives a placed star.
   const classification = body.classification === 'star' ? 'star' : 'exoplanet';
   if (classification === 'star' && !spec.selfLuminous) throw new TypeError(`${spec.id} is a star on a hosted orbit: scaffold it --self-luminous with its cited temperature.`);
   const radiusKm = requireFiniteNumber(physical.meanRadiusKm), { id, name } = spec;
@@ -273,7 +273,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     ...(glowK === undefined ? {} : { selfLuminous: { temperatureK: Number(glowK), source: glowSource! } }),
   }, body, await read(`packages/astronomy/data/bodies/${hostId}.json`), SOLAR_GEOMETRY_EPOCH_JD_TT);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
-  const { neutralDiscMarker } = await import('./new-star.mts');
+  const { neutralDiscMarker } = await import('./new-object/scaffold.mts');
   const presentation = resolve(root, 'src/objects', id, 'source/presentation');
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   console.log(`${files.size + 1} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-207897b",
+  "card": {
+    "text": "HD 207897 b crosses its star every 16.2 days and is 2.3 Earth radii across, found in 2021.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-33m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+        "label": "MacDougall et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): pl_orbper 16.20166, pl_radj 0.20903072, pl_bmassj 0.04656601"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 207897 b transits HD 207897 every 16.2 days and is 2.3 Earth radii across. Orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-33m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+        "label": "MacDougall et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): pl_orbper 16.20166, pl_radj 0.20903072, pl_bmassj 0.04656601"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

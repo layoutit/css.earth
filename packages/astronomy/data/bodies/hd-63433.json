@@ -1,0 +1,30 @@
+{
+ "id": "hd-63433",
+ "classification": "star",
+ "order": 1795,
+ "physical": {
+  "name": "HD 63433",
+  "horizonsCode": null,
+  "meanRadiusKm": 649783.8,
+  "gravitationalParameterKm3PerS2": 126873092680.09404,
+  "parent": null,
+  "effectiveTemperatureK": 5553
+ },
+ "physicalNotes": "Radius 0.934 +/- 0.029 solar radii from Mallorqu&iacute;n et al. 2023, the stellar radius of the default parameter set of HD 63433 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract): 649,784 km at 695,700 km per solar radius. Mass 0.956 +/- 0.022 solar masses from Mallorqu&iacute;n et al. 2023, the stellar mass of the default parameter set of HD 63433 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract); GM is that mass times the JPL solar GM. Temperature 5553 +/- 56 K from Mallorqu&iacute;n et al. 2023, the stellar temperature of the default parameter set of HD 63433 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 117.4793682618587,
+  "declinationDegrees": 27.363132695843213,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 22.378949860020906,
+  "properMotionRaMasPerYear": -10.220145850916207,
+  "properMotionDecMasPerYear": -11.23527855383033,
+  "radialVelocityKmPerS": -16.07124,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 875071278432954240 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-63433/source/photometry/gaia-dr3-source.csv; cross-identification HD 63433, HIP 38228: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+875071278432954240",
+   "distance": "Gaia DR3 parallax 44.6848 +/- 0.0228 mas (same row, RUWE 0.99): 22.38 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -10.220, -11.235 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -16.07 +/- 0.13 km/s"
+  }
+ }
+}

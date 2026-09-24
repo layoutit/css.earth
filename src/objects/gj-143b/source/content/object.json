@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-143b",
+  "displayName": "GJ 143 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.6 Earth radii",
+        "source": {
+          "catalogueId": "publication-2019apj-875l-7d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D",
+          "label": "Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "35.6 days",
+        "source": {
+          "catalogueId": "publication-2019apj-875l-7d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D",
+          "label": "Dragomir et al. 2019",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.071 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2019apj-875l-7d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D",
+          "label": "Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by GJ 143; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "gj-143b-lens-shape.webp",
+        "surface": "gj-143b-surface-shape@2x.webp",
+        "poles": "gj-143b-poles-shape@2x.webp",
+        "source": {
+          "id": "gj-143b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of GJ 143 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Dragomir et al. 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+      "credit": "Dragomir et al. 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-143b.json",
+      "credit": "Radius from Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive; mass from Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive; orbit from Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive"
+    }
+  }
+}

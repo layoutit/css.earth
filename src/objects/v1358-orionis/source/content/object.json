@@ -1,0 +1,590 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "v1358-orionis",
+  "displayName": "V1358 Orionis",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2110-06729",
+          "url": "https://arxiv.org/abs/2110.06729",
+          "label": "Willamo et al. (2021), A&amp;A 659, A71 (2022)",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "51.7 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-v1358-orionis",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "33 hours",
+        "source": {
+          "catalogueId": "arxiv-2110-06729",
+          "url": "https://arxiv.org/abs/2110.06729",
+          "label": "Willamo et al. (2022), Table 2, the values of the ZDI inversion",
+          "checked": "2026-09-24",
+          "path": "source/preparation/rotation.json",
+          "locator": "source"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "v1358-orionis-lens-color.webp",
+        "surface": "v1358-orionis-surface-color@2x.webp",
+        "poles": "v1358-orionis-poles-color@2x.webp",
+        "source": {
+          "id": "v1358-orionis-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gaia.ari.uni-heidelberg.de/tap/sync"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,032 K and log g 4.42 (u1 0.410, u2 0.289): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-2013",
+        "label": "Radial field",
+        "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
+        "thumbnail": "v1358-orionis-lens-radial-field-2013.webp",
+        "surface": "v1358-orionis-surface-radial-field-2013@2x.webp",
+        "poles": "v1358-orionis-poles-radial-field-2013@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358or2",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Sep 2013"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-145",
+            "0",
+            "+145"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-145",
+              "0",
+              "+145"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Sep 2013, mapped from how the star's light is polarised as it turns. Step to the other year to see the field flip.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 59° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-2017",
+        "label": "Radial field",
+        "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "v1358-orionis-lens-radial-field-2017.webp",
+        "surface": "v1358-orionis-surface-radial-field-2017@2x.webp",
+        "poles": "v1358-orionis-poles-radial-field-2017@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358ori",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Dec 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-187",
+            "0",
+            "+187"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-187",
+              "0",
+              "+187"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns. Step to the other year to see the field flip.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 59° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "meridional-field-2013",
+        "label": "Meridional field",
+        "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
+        "thumbnail": "v1358-orionis-lens-meridional-field-2013.webp",
+        "surface": "v1358-orionis-surface-meridional-field-2013@2x.webp",
+        "poles": "v1358-orionis-poles-meridional-field-2013@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358or2",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "meridional",
+          "label": "Sep 2013"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Meridional magnetic field",
+          "labels": [
+            "-145",
+            "0",
+            "+145"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-145",
+              "0",
+              "+145"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Sep 2013, mapped from how the star's light is polarised as it turns.",
+        "legendNote": "Red and blue: the field running north or south along the surface, as in the paper. Black line: 59° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "meridional-field-2017",
+        "label": "Meridional field",
+        "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "v1358-orionis-lens-meridional-field-2017.webp",
+        "surface": "v1358-orionis-surface-meridional-field-2017@2x.webp",
+        "poles": "v1358-orionis-poles-meridional-field-2017@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358ori",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "meridional",
+          "label": "Dec 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Meridional magnetic field",
+          "labels": [
+            "-187",
+            "0",
+            "+187"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-187",
+              "0",
+              "+187"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
+        "legendNote": "Red and blue: the field running north or south along the surface, as in the paper. Black line: 59° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-2013",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
+        "thumbnail": "v1358-orionis-lens-azimuthal-field-2013.webp",
+        "surface": "v1358-orionis-surface-azimuthal-field-2013@2x.webp",
+        "poles": "v1358-orionis-poles-azimuthal-field-2013@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358or2",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Sep 2013"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-145",
+            "0",
+            "+145"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-145",
+              "0",
+              "+145"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Sep 2013, mapped from how the star's light is polarised as it turns.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 59° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "azimuthal-field-2017",
+        "label": "Azimuthal field",
+        "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "v1358-orionis-lens-azimuthal-field-2017.webp",
+        "surface": "v1358-orionis-surface-azimuthal-field-2017@2x.webp",
+        "poles": "v1358-orionis-poles-azimuthal-field-2017@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358ori",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "azimuthal",
+          "label": "Dec 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Azimuthal magnetic field",
+          "labels": [
+            "-187",
+            "0",
+            "+187"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-187",
+              "0",
+              "+187"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 59° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "brightness-2013",
+        "label": "Brightness",
+        "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
+        "thumbnail": "v1358-orionis-lens-brightness-2013.webp",
+        "surface": "v1358-orionis-surface-brightness-2013@2x.webp",
+        "poles": "v1358-orionis-poles-brightness-2013@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358or2",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Sep 2013"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness",
+          "labels": [
+            "0.69",
+            "1.05"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                30,
+                1,
+                0
+              ],
+              [
+                70,
+                0,
+                0
+              ],
+              [
+                104,
+                1,
+                0
+              ],
+              [
+                153,
+                0,
+                0
+              ],
+              [
+                189,
+                21,
+                0
+              ],
+              [
+                237,
+                82,
+                0
+              ],
+              [
+                255,
+                131,
+                0
+              ],
+              [
+                255,
+                190,
+                121
+              ],
+              [
+                255,
+                242,
+                230
+              ]
+            ],
+            "labels": [
+              "0.69",
+              "1.05"
+            ]
+          },
+          "meta": "relative to the unspotted surface",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The brightness of the photosphere in Sep 2013, from the same inversion as the magnetic maps: starspots are the darker regions.",
+        "legendNote": "Dark: cooler, spotted photosphere; the scale runs from the map's darkest to its brightest point, as in the paper. Black line: 59° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "brightness-2017",
+        "label": "Brightness",
+        "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
+        "thumbnail": "v1358-orionis-lens-brightness-2017.webp",
+        "surface": "v1358-orionis-surface-brightness-2017@2x.webp",
+        "poles": "v1358-orionis-poles-brightness-2017@2x.webp",
+        "source": {
+          "id": "v1358-orionis-zdi-v1358ori",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Dec 2017"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness",
+          "labels": [
+            "0.79",
+            "1.02"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                30,
+                1,
+                0
+              ],
+              [
+                70,
+                0,
+                0
+              ],
+              [
+                104,
+                1,
+                0
+              ],
+              [
+                153,
+                0,
+                0
+              ],
+              [
+                189,
+                21,
+                0
+              ],
+              [
+                237,
+                82,
+                0
+              ],
+              [
+                255,
+                131,
+                0
+              ],
+              [
+                255,
+                190,
+                121
+              ],
+              [
+                255,
+                242,
+                230
+              ]
+            ],
+            "labels": [
+              "0.79",
+              "1.02"
+            ]
+          },
+          "meta": "relative to the unspotted surface",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+        },
+        "notes": "The brightness of the photosphere in Dec 2017, from the same inversion as the magnetic maps: starspots are the darker regions.",
+        "legendNote": "Dark: cooler, spotted photosphere; the scale runs from the map's darkest to its brightest point, as in the paper. Black line: 59° S; the star never shows us what lies below it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Willamo et al. (2022), A&A 659, A71",
+      "href": "https://arxiv.org/abs/2110.06729"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2110.06729",
+      "credit": "Willamo et al. (2022), A&A 659, A71"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/v1358-orionis.json",
+      "credit": "Vican & Schneider radius; Gaia DR3 astrometry; measured spin tilt, axis direction a display convention"
+    }
+  }
+}
