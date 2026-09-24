@@ -18,7 +18,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
-import { skyProjection } from '../../../fits/fits-sky.mts';
+import { skyProjection } from '@cssearth/fits';
 import { mastFile } from '../mast.mts';
 import { PROGRAMS } from './archive.mts';
 import { bandOfHeader } from './bands.mts';

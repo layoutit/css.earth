@@ -8,8 +8,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { readFitsHdus } from '@cssearth/fits';
-import { skyImageAxes, skyProjection } from '../../fits/fits-sky.mts';
+import { readFitsHdus, skyImageAxes, skyProjection } from '@cssearth/fits';
 import { centredCrop, readEventsFile, streamEvents, timeTagPicture, timeTagProduct, type TimeTagRun } from './timetag-frame.mts';
 import {
   azimuthalRatio, backgroundSurface, boxSums, findDisc, goodTimeIntervals, gridLatitudeDegrees, gridRadii, inGoodTime,

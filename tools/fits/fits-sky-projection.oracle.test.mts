@@ -4,9 +4,8 @@ const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readFitsHdus } from '@cssearth/fits';
+import { readFitsHdus, skyProjection } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
-import { skyProjection } from './fits-sky.mts';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 

@@ -26,7 +26,7 @@ import { mkdir, open, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, type FitsFileHdu } from '@cssearth/fits/node';
-import { skyImageAxes } from '../../fits/fits-sky.mts';
+import { skyImageAxes } from '@cssearth/fits';
 import { positionalArguments } from '@cssearth/core';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
 import { assertInputPins, fileSize, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';

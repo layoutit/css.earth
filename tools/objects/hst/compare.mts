@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { sampleStatistics } from '../../fits/sample-statistics.mts';
+import { sampleStatistics, type FitsHeader } from '@cssearth/fits';
 /** Compare the re-run products of an observation with the archive's own, sample by sample: the oracle for calibrate.mts.
  *
  *   node tools/objects/hst/compare.mts <program id> <observation> <run directory> [--raw <dir>]...
@@ -22,7 +22,6 @@ import { access, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
-import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '../interferometry/fits-table.mts';
 import { mastFile } from '../astronomy-packages/mast.mts';

@@ -1,8 +1,7 @@
 /** Convolve a reconstructed image with the interferometric beam it was made under, and write it back as a FITS image that keeps
  * the reconstruction's own pixel scale and axis cards. A reconstruction carries structure below the beam that the visibilities never
  * constrained; convolving to the beam before display shows only what the data resolve, as the source paper does. */
-import { readFitsImage, type FitsHeader } from '@cssearth/fits';
-import { skyImageAxes, type SkyImageAxes } from '../../fits/fits-sky.mts';
+import { readFitsImage, type FitsHeader, skyImageAxes, type SkyImageAxes } from '@cssearth/fits';
 import { headerBlock, padBlock } from './fits-table.mts';
 
 export interface BeamImage { readonly width: number; readonly height: number; readonly values: Float64Array; readonly cards: readonly (readonly [string, string | number | boolean, string?])[] }
