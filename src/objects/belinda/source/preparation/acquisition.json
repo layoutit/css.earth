@@ -1,13 +1,5 @@
 {
   "schema": "cssearth-acquisition-plan@1",
   "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "kernels/naif0012.tls",
-      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls"
-    }
   ]
 }

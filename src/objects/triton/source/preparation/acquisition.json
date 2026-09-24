@@ -32,6 +32,483 @@
       ],
       "path": "features/TRITON_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TRITON_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1137715_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137715_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1138703_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11387XX/C1138703_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1138657_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11386XX/C1138657_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1137721_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137721_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1138715_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11387XX/C1138715_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1137727_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137727_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1137159_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11371XX/C1137159_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1137221_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11372XX/C1137221_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1137245_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11372XX/C1137245_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1133859_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133859_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1133848_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133848_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1133923_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11339XX/C1133923_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139257-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/39a574fbe79dcc6c1f1e48746f09e20e597aaa3ff4c2640d9f5fff872956c667/c1139257-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139259-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/c4824ab0497d55acd6636f5e612d09e50097f19a3acdb55d05910a71e57fd9f5/c1139259-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139257-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/b192389bb62ea8fad090eb0d50ffad46dc7cc9fd4e32fe8b37c8a02e43eb54c7/c1139257-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139259-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/4fccb2ba31ec283268de18ee51175c2ca2bc5997ecff083af405226e676ca834/c1139259-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139305-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/b85b583e614eb8da3a4d5ac2749006e9a115ccbdf4df85121030a8b898d609f8/c1139305-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139305-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/e04a4e52b7486a1e59e71506fe74c16ea2d803e5c99f84cde7cfc4966ca032ae/c1139305-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139307-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/92c201596dcd0525b4fac26ce85d8761d89c86d9a6f6e3263f0aa774cb3aac58/c1139307-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139307-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/2abfbaf8f90a50b68d346df67b58f2b076e595d6df561f2b07149a243f2671d7/c1139307-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139309.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/02ca91f94ec481c50b124d1b3d2d01ec762276e8fac08d04b4c515d835151a27/c1139309.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139311.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/4d2c24bad72e47b7e62f4fb0498ea514b860cdcd4fd38ff80cf3b8f84df2ecae/c1139311.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139315-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/786f4df0374089cb5fccbc512b4ac752c4cef7e41723250d96292acbfd60e171/c1139315-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139315-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/9df1e3edd87fbbe557e76b95462ca60d4023c1b30e99fb9b5af1b5712320727d/c1139315-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139313.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/5985b194355edc90c1f05a69ee2e44fee246467f0244a79007e02b3347919a98/c1139313.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139317-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/a18c782cb95010d2ff13ceb7dd6afae9c0a8a3586bce12931c33d6dcf88c3e7b/c1139317-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139317-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/c18e96180c1e4360db3e85282d13f8d739757ba14cc244879bc6f98f1889e536/c1139317-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1132141_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11321XX/C1132141_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1132400_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11324XX/C1132400_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C1132134_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11321XX/C1132134_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139321-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/b380b5cf4e6e4799788ddcaa8f86bbf6b54e999e8661c4e0c784d30755c3b7b4/c1139321-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139319-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/3eb3c89936cc1867409069a52093c268fd8c024d29e05df5ae4387bd6f921ed3/c1139319-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139319-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/249a292bf4652b70942714f68cb91ce75096b5837f016f2cfde740fffbf3e340/c1139319-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1138703-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/84f58e686317de6d207398e6a80935d32a15eae8bd462edaa371a5bb06bd7833/c1138703-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1138703-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/021025337e486b093c348b4decc5e034e84ba0fc7a1098a3cefcb3bca606ca78/c1138703-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139321-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/b837f4a5566cabf55df42e8b395f05f23961708664a91dbfa19ad20a501f9378/c1139321-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1139323.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/b3388d205ce9dfb3b2c3be604802afe7d033296223e9d007d3b6f4890f74ff69/c1139323.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1138657-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/8df0f5a0014ec783dd393a42cf9bc58299a1d400ea636d593cdea0678615fbc6/c1138657-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1138657-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/1293877bfaccb71bfabbd41c1b0b6ffd4905471efd24dc0e6ff5ddf0def53811/c1138657-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1138715-1.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/868c8e734f22809581d92b670b8d23e628632b3594b087ba44b4d0d9bb9ecb6d/c1138715-1.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1138715-2.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/df357fecfcd5bb3d48e73148b148a78b9ff6f41ff7847475493bd71428a3bfb9/c1138715-2.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1137721.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/901498028089c991fa80696a425d733e36c749e9ad33269dc35fe0a9c27c3f36/c1137721.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1137221.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/169cf97866377d04fd957772931b90ac19212452e7d7c42cc1e12992e418a74b/c1137221.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1137715.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/1b01ed0ec50502b58b12f81a2405a0bba16044bdfd5ae45ef01ce7e19623b05d/c1137715.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1137727.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/9538c82af761f20d490488be2cfd13940e17173152b4ce0ecf2a619e417d3f7f/c1137727.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1133859.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/317bffd51d586cb523046126a145e895d2ed7124b8fec4982454dd3c63a40021/c1133859.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1137245.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/a5d8856edb9c184d200a6e232efbd97e63f21113c3f6c8b06e424b79c41feeee/c1137245.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1137159.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/91357fd193d9b03ed799adddc197bafdfd8a8020ab579374c93c5073a4d6139f/c1137159.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1133848.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/b5cd37042d65d57120ea63f421ff6e291e2a1f19a1fc47d1e0e6a6b2b207ee04/c1133848.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1133923.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/ec4b035ede69c3ba196a91d7d2e338ff5c184c542837fa2ad2f49b1461516fb1/c1133923.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1132134.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/4c978b10fbd1cc817978c782a0f9c7fd01e8f7f2de61ebf8247da3d3c00629ce/c1132134.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1132400.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/f33ee035548002b909e667c8d094e906d559b23c4e50bf4100ad3101f4f94884/c1132400.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c1132141.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/4c4dad172f02101b212313aa35e422dd7bab0c036d1451a66e03d4107defe517/c1132141.equi.tif"
     }
   ]
 }

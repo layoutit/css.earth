@@ -2,7 +2,8 @@ import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } f
 import { containedPath, parseSourceManifest, verifySources } from './source-files.js';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';
-import { RUNTIME_ASSET_ORIGIN } from '../assets/source-mirror.mts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
+import { publishSourceBytes } from '../../src/platform/source-acquisition.mts';
 import { readFile, lstat } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 
@@ -25,7 +26,17 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
     // test's injected transport is never bypassed by surprise); this CLI entry point is the real restore path
     // (invoked by restore-source-inputs.mts), so it explicitly turns the mirror on.
     if(groups.length)await executeAcquisition({sourceRoot,manifest,plan,group:groups[0],mirrorOrigin:RUNTIME_ASSET_ORIGIN});
-    else await restoreMissingSources({sourceRoot,manifest,plan,missing,mirrorOrigin:RUNTIME_ASSET_ORIGIN});
+    else{
+     // A generated intermediate is made by the tool its entry names, not downloaded: restore the copy the source mirror
+     // keeps, and otherwise say which command makes it, since the body cannot be prepared without it.
+     const generated=new Map(manifest.generatedIntermediates.map(entry=>[entry.path,entry.generator] as const)),unmade:string[]=[];
+     for(const path of missing.filter(path=>generated.has(path))){
+      try{await publishSourceBytes({destination:containedPath(sourceRoot,path),bytes:await fetchWithRetry(fetch,sourceCacheUrl(RUNTIME_ASSET_ORIGIN,id,path))});}
+      catch{unmade.push(`${path}: run node ${generated.get(path)}`);}
+     }
+     await restoreMissingSources({sourceRoot,manifest,plan,missing:missing.filter(path=>!generated.has(path)),mirrorOrigin:RUNTIME_ASSET_ORIGIN});
+     if(unmade.length)throw new Error(`${id}: generated sources are missing and not on the source mirror; make them, then publish them with tools/assets/publish-source-cache.mts:\n${unmade.join('\n')}`);
+    }
    }
   }
   return verifySources({sourceRoot,manifest});

@@ -22,7 +22,6 @@
   "qualification": "USGS redistributes the published processed plate with a transparent limb cutout. NASA calls it a global image meaning a full visible disk; this does not establish whole-sphere coverage. The RGB values are not calibrated I/F. Alpha antialiasing and color fringing persist in the source.",
   "independentCatalog": {
     "url": "https://rgcps.asu.edu/urn-nasa-pds-asurgcps_slides_jovian_system/document_database/callisto_photo_database.pdf",
-    "path": "observations/callisto-photo-database.pdf",
     "entry": "callisto_a_004_pht",
     "subSpacecraftLongitudeWestDegrees": 215,
     "eastDegrees": 145

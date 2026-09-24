@@ -11,8 +11,8 @@
     "reference/ROS_STEINS_V05.TPC"
   ],
   "references": [
-    "reference/osiris-boresight.pdf",
-    "reference/osiris-photometry.pdf"
+    "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF",
+    "https://arxiv.org/pdf/1702.00184"
   ],
   "bodyFrame": "STEINS_FIXED",
   "cameraFrame": "ROS_OSIRIS_WAC",

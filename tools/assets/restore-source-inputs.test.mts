@@ -120,8 +120,9 @@ test('checkout restores a missing compressed observation without refreshing exis
   generated.push({ ...pin('presentation/context.png', Buffer.from('reviewed context')),
     generator: 'fixture-renderer' });
   await json(manifestPath, manifest);
+  // A generated intermediate is not downloaded: absent from the source mirror, restore names the command that makes it.
   await assert.rejects(run(root, ['tools/assets/restore-source-inputs.mts', '--object=titan']),
-    /No authored acquisition restores: presentation\/context\.png/);
+    /generated sources are missing[\s\S]*presentation\/context\.png: run node fixture-renderer/u);
 });
 
 test('repository volume package restores a missing download from the object source mirror', async t => {

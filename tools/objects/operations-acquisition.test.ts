@@ -41,7 +41,7 @@ test('mapped composition acquisition restores the pinned map and report through 
   const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[],documents:[],generatedIntermediates:
     [['ice.tif',converted.products.ice],['report.json',report]].map(([path,bytes])=>{
       assert.ok(typeof path==='string');assert.ok(bytes instanceof Uint8Array);
-      return {path};
+      return {path,generator:'fixture spectral-band converter'};
     })};
   const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[
     {kind:'mapped-composition',path:'ice.tif',recipePath:'recipe.json',product:'ice',groups:['composition']},

@@ -98,22 +98,6 @@
       "consumers": [
         "scene"
       ]
-    },
-    {
-      "id": "hr-8799-jwst-nircam-f410m",
-      "path": "jwst/hr-8799-nircam-f410m.webp",
-      "origin": "https://dx.doi.org/10.17909/e4x8-ft26",
-      "credit": "JWST GTO 1194 (PI C. Beichman); reduced with spaceKLIP following Balmer et al. (2025), AJ, arXiv:2503.13608",
-      "license": "JWST data are public; reduction is project-authored",
-      "acquisition": "tools/objects/jwst/klip/reduce.mts hr-8799-1194 NIRCAM-F410M-MASKLWB; KL 5 plane, 93 x 93 pixels about the star, north up, 8x nearest enlargement, mapped through the colour scale of Balmer et al. Figure 4 (arXiv source figures/imaging_summary/NIRCam_Bar_NARROW_F410M_summary_altcolor.pdf): its colour-bar image (object 16, 491 steps decoded through its indexed palette) spanning -10 to 48.434 MJy/sr, read from the bar and its tick marks",
-      "redistribution": "Project-authored derivative of public JWST data",
-      "consumers": [
-        "panel-content"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Picture made here from our own reduction of pinned MAST exposures."
-      }
     }
   ],
   "generatedIntermediates": [
@@ -137,6 +121,23 @@
         "kind": "local",
         "reason": "A flat neutral gray disc, the marker of an unresolved surface."
       }
+    },
+    {
+      "id": "hr-8799-jwst-nircam-f410m",
+      "path": "jwst/hr-8799-nircam-f410m.webp",
+      "origin": "https://dx.doi.org/10.17909/e4x8-ft26",
+      "credit": "JWST GTO 1194 (PI C. Beichman); reduced with spaceKLIP following Balmer et al. (2025), AJ, arXiv:2503.13608",
+      "license": "JWST data are public; reduction is project-authored",
+      "acquisition": "tools/objects/jwst/klip/reduce.mts hr-8799-1194 NIRCAM-F410M-MASKLWB; KL 5 plane, 93 x 93 pixels about the star, north up, 8x nearest enlargement, mapped through the colour scale of Balmer et al. Figure 4 (arXiv source figures/imaging_summary/NIRCam_Bar_NARROW_F410M_summary_altcolor.pdf): its colour-bar image (object 16, 491 steps decoded through its indexed palette) spanning -10 to 48.434 MJy/sr, read from the bar and its tick marks",
+      "redistribution": "Project-authored derivative of public JWST data",
+      "consumers": [
+        "panel-content"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Picture made here from our own reduction of pinned MAST exposures."
+      },
+      "generator": "tools/objects/jwst/klip/reduce.mts hr-8799-1194 NIRCAM-F410M-MASKLWB"
     }
   ],
   "documents": [

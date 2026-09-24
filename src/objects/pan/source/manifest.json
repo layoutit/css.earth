@@ -456,7 +456,7 @@
       "height": 1024,
       "projection": {
         "type": "camera-perspective",
-        "coordinates": "shape/pan_document.pdf",
+        "coordinates": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pan_document.pdf",
         "longitudeDirection": "west-positive"
       },
       "coverage": "IR1 observation registered with the Thomas 2018 camera table; common three-filter footprint only."
@@ -536,7 +536,7 @@
       "height": 1024,
       "projection": {
         "type": "camera-perspective",
-        "coordinates": "shape/pan_document.pdf",
+        "coordinates": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pan_document.pdf",
         "longitudeDirection": "west-positive"
       },
       "coverage": "GRN observation registered with the Thomas 2018 camera table; common three-filter footprint only."
@@ -616,7 +616,7 @@
       "height": 1024,
       "projection": {
         "type": "camera-perspective",
-        "coordinates": "shape/pan_document.pdf",
+        "coordinates": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pan_document.pdf",
         "longitudeDirection": "west-positive"
       },
       "coverage": "UV3 observation registered with the Thomas 2018 camera table; common three-filter footprint only."

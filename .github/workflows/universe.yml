@@ -124,6 +124,10 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies and prove the lockfile
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Check that every body stays restorable from its declared sources
+        # Each declared source file is committed, restored by an acquisition step or made by its named generator;
+        # papers are cited by URL and shared tables live once in src/references or src/spice. Under a second.
+        run: pnpm check:body-references
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
         run: node tools/ci/ci-cache-key.mts
