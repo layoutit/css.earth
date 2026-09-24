@@ -1,4 +1,3 @@
-import type { ObjectEntry } from '../object-schema.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import { record } from '../browser-types.mts';
 import { objectIdAtPath } from '../root-object.mts';
@@ -20,7 +19,7 @@ export function replaceNavigationUrl(windowTarget: Window, url: string) {
 }
 
 /** Preserve exact departed views while object selections create history entries. */
-export function createNavigationHistory({ windowTarget, objects, capture, navigate, navigating = () => false, embedded = false, onError = () => {} }: { windowTarget: Window; objects: readonly ObjectEntry[]; capture(): string | null; navigate: Navigate; navigating?(): boolean; embedded?: boolean; onError?(error: unknown): void }) {
+export function createNavigationHistory({ windowTarget, capture, navigate, navigating = () => false, embedded = false, onError = () => {} }: { windowTarget: Window; capture(): string | null; navigate: Navigate; navigating?(): boolean; embedded?: boolean; onError?(error: unknown): void }) {
   const snapshots = new Map<string, string>();
   // The entry each pushed entry was pushed from, so Back during a flight can be recognised.
   const previous = new Map<string, string>();
@@ -50,14 +49,15 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
     const departure = snapshots.get(entry);
     if (navigating() && departure && previous.get(entry) === targetEntry) {
       const location = new URL(departure, windowTarget.location.href);
-      const object = objects.find(object => object.id === objectIdAtPath(location.pathname));
-      if (object) { Promise.resolve(navigate(object.id, { kind: 'history', url: location.href, history: { history: 'push' } })).catch(onError); return; }
+      // The router loads the object the entry names before it acts, and declines one that is not an object.
+      const id = objectIdAtPath(location.pathname);
+      if (id) { Promise.resolve(navigate(id, { kind: 'history', url: location.href, history: { history: 'push' } })).catch(onError); return; }
     }
     const url = snapshots.get(targetEntry) ?? (typeof state.cssEarthView === 'string' ? state.cssEarthView : undefined) ?? windowTarget.location.href;
     const location = new URL(url, windowTarget.location.href);
-    const object = objects.find(object => object.id === objectIdAtPath(location.pathname));
-    if (!object) return;
-    Promise.resolve(navigate(object.id, { kind: 'history', url: location.href, history: { history: 'pop', entry: targetEntry } })).catch(onError);
+    const id = objectIdAtPath(location.pathname);
+    if (!id) return;
+    Promise.resolve(navigate(id, { kind: 'history', url: location.href, history: { history: 'pop', entry: targetEntry } })).catch(onError);
   };
   checkpoint();
   windowTarget.addEventListener('popstate', onPopState);
@@ -80,8 +80,10 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
   });
 }
 
-export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, onError = () => {} }: { documentTarget: Document; windowTarget: BrowserWindow; objects: readonly ObjectEntry[]; supports(id: string): boolean; navigate: Navigate; onError?(error: unknown): void }) {
-  const available = (id: unknown): id is string => typeof id === 'string' && objects.some(object => object.id === id) && supports(id);
+export function bindNavigationLinks({ documentTarget, windowTarget, navigable, navigate, onError = () => {} }: { documentTarget: Document; windowTarget: BrowserWindow; navigable(id: string): boolean; navigate: Navigate; onError?(error: unknown): void }) {
+  // Whether the app can fly to `id` in place, answered now: an object the page has loaded and can reach, or a body of the
+  // world it draws (site/scene/scene-router.mts). Anything else is left to an ordinary page load.
+  const available = (id: unknown): id is string => typeof id === 'string' && navigable(id);
   const query = (event: Event) => { if (available(navigationId(event))) event.preventDefault(); };
   const select = (event: Event) => {
     const id = navigationId(event);
@@ -97,8 +99,10 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     if (!anchor || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
     const url = new URL(anchor.href, windowTarget.location.href);
     if (url.origin !== windowTarget.location.origin) return;
-    const object = objects.find(object => object.route === url.pathname);
-    if (!object || !supports(object.id)) return;
+    // An object route is `/<id>/`; the front page's `/` is left to the browser, as before.
+    const id = url.pathname === '/' ? undefined : objectIdAtPath(url.pathname);
+    if (!id || !available(id)) return;
+    const object = { id };
     const focusId = url.searchParams.get('focus');
     if (focusId && !url.searchParams.has('v') && anchor.hasAttribute('data-prepared-focus-id')) {
       event.preventDefault();

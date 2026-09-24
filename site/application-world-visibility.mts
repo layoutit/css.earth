@@ -1,5 +1,6 @@
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { SCENE_OBJECTS } from './objects.mts';
+// Every world body's classification and discovery come with the world summary, not the object registry.
+import { WORLD_OBJECTS as SCENE_OBJECTS } from './world-objects.mts';
 import { contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { discoveryVisibility } from './object-discovery.mts';
 import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';

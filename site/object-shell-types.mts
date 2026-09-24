@@ -11,6 +11,8 @@ export interface ShellOptions {
   readSelection(): SceneSubject;
   preferences: WorldPreferences;
   onResetDestination?(): void;
+  /** Whether the app can fly to the object `id` in place; links to it prefetch its fragment on intent. */
+  navigable(id: string): boolean;
   documentTarget?: Document;
   windowTarget?: BrowserWindow;
 }

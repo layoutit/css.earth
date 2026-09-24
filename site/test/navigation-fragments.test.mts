@@ -104,7 +104,7 @@ test('hover, focus and world hover prefetch registry routes after a dwell; a pre
     get: () => Promise.reject(new Error('Intent never waits for a fragment.')),
     inspect: () => ({ encodedEntries: 0, inFlightEntries: 0, activeDocuments: 0, parsedDocuments: 0 }) };
   const intent = bindNavigationIntent({ documentTarget: documentTarget as unknown as Document, windowTarget, fragments,
-    objects: ['sun', 'ceres', 'venus'].map(id => ({ id, route: `/${id}/` })), skip: id => id === 'sun' });
+    navigable: id => ['sun', 'ceres', 'venus'].includes(id), skip: id => id === 'sun' });
   const link = (pathname: string, origin = 'https://example.test') => new IntentElement(new IntentAnchor(pathname, origin));
   const fire = (type: string, target: EventTarget) => {
     const event = new Event(type);

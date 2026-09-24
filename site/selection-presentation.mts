@@ -5,7 +5,7 @@ import { requiredElement, setPanelHidden, type BrowserWindow } from './browser-t
 import type { CatalogueSelection } from './catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
-import { SCENE_OBJECTS } from './objects.mts';
+import { WORLD_OBJECTS } from './world-objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragment.mts';
 
@@ -37,9 +37,9 @@ export function createSelectionPresentation(documentTarget: Document, {
   };
   const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
   let systemContent = createSystemCardContent(documentTarget);
-  const objectName = (id: string) => SCENE_OBJECTS.find(object => object.id === id)?.name ?? '';
+  const objectName = (id: string) => WORLD_OBJECTS.find(object => object.id === id)?.name ?? '';
   const overviewName = ({ scope, systemId }: SceneOverview) => scope === 'system'
-    ? systemById(SCENE_OBJECTS, systemId)?.name ?? 'Solar System'
+    ? systemById(WORLD_OBJECTS, systemId)?.name ?? 'Solar System'
     : ({ 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[scope];
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);

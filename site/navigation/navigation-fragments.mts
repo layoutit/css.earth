@@ -1,5 +1,5 @@
+import { objectIdAtPath } from '../root-object.mts';
 import type { BrowserWindow } from '../browser-types.mts';
-import type { ObjectEntry } from '../object-schema.mts';
 
 /**
  * Destination cards and content come from the static `/navigation/<id>/`
@@ -124,18 +124,17 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
 /**
  * Hover and focus on an object link, or hover on a navigable body in the
  * world, start that object's fragment after a short dwell; a press starts it
- * at once. Only registry routes are requested.
+ * at once. Only object routes (`/<id>/`) the app can navigate in place are requested (`navigable`), without the
+ * object registry.
  */
-export function bindNavigationIntent({ documentTarget, windowTarget, objects, fragments, skip = () => false }: {
-  documentTarget: Document; windowTarget: BrowserWindow; objects: readonly Pick<ObjectEntry, 'id' | 'route'>[];
+export function bindNavigationIntent({ documentTarget, windowTarget, navigable, fragments, skip = () => false }: {
+  documentTarget: Document; windowTarget: BrowserWindow; navigable(id: string): boolean;
   fragments: NavigationFragments; skip?(id: string): boolean;
 }) {
-  const routes = new Map(objects.map(object => [object.route, object.id]));
-  const ids = new Set(routes.values());
   const events = new AbortController();
   let timer: number | null = null;
   const cancel = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; };
-  const start = (id: string | null | undefined) => { if (id && ids.has(id) && !skip(id)) fragments.prefetch(id); };
+  const start = (id: string | null | undefined) => { if (id && navigable(id) && !skip(id)) fragments.prefetch(id); };
   const soon = (id: string | null | undefined) => {
     cancel();
     if (id) timer = windowTarget.setTimeout(() => { timer = null; start(id); }, NAVIGATION_INTENT_DWELL_MS);
@@ -144,7 +143,7 @@ export function bindNavigationIntent({ documentTarget, windowTarget, objects, fr
     const anchor = event.target instanceof windowTarget.Element ? event.target.closest('a[href]') : null;
     if (!(anchor instanceof windowTarget.HTMLAnchorElement) || anchor.origin !== windowTarget.location.origin) return null;
     if (anchor.hasAttribute('data-prepared-focus-id')) return null;
-    return routes.get(anchor.pathname) ?? null;
+    return anchor.pathname === '/' ? null : objectIdAtPath(anchor.pathname) ?? null;
   };
   const options = { capture: true, passive: true, signal: events.signal };
   documentTarget.addEventListener('pointerover', event => { const id = linked(event); if (id) soon(id); }, options);

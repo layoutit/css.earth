@@ -72,16 +72,18 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
         : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
   }
-  // Each packaged body's world presentation, prepared here so no page carries a stylesheet rule per body: the colour its
-  // marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast, site/context-colour.mts)
-  // and capitals for a star, black hole or planet's caption.
+  // Each packaged body's world presentation, prepared here so no page carries a stylesheet rule or a registry entry per body:
+  // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
+  // site/context-colour.mts), capitals for a star, black hole or planet's caption, and its classification and system name.
   {
     const registry = (await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
-      SCENE_OBJECTS: readonly { id: string; color: string; classification: string }[] }).SCENE_OBJECTS;
+      SCENE_OBJECTS: readonly { id: string; color: string; classification: string; systemName: string }[] }).SCENE_OBJECTS;
     const { contextColour } = await import(pathToFileURL(resolve(process.cwd(), 'site/context-colour.mts')).href) as typeof import('../../site/context-colour.mts');
     const { contextAnnotationOpacity } = await import(pathToFileURL(resolve(process.cwd(), 'src/navigation/marker-presentation.mts')).href) as typeof import('../../src/navigation/marker-presentation.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
+    // The catalogue step's discovery records (site/prepared-object-discovery.json): what the world's visibility reads per body.
+    const discoveries = JSON.parse(await readFile(resolve(process.cwd(), 'site/prepared-object-discovery.json'), 'utf8')) as Record<string, unknown>;
     const present = async (body: Record<string, unknown>) => {
       const object = byId.get(String(body.id));
       if (!object) return;
@@ -90,6 +92,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       const hex = contextColour(swatch ? swatch.display?.hex ?? swatch.hex : undefined, object.color, contextAnnotationOpacity(object.classification).label);
       if (hex) body.contextColor = hex;
       if (object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet') body.labelCase = 'upper';
+      // The page needs these for every body without loading the registry: which bodies host systems, and what each is called.
+      body.classification = object.classification; body.systemName = object.systemName;
+      if (Object.hasOwn(discoveries, object.id)) body.discovery = discoveries[object.id];
     };
     await present(input.focus);
     for (const body of input.bodies as Record<string, unknown>[]) await present(body);

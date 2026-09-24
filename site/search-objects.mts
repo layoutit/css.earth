@@ -1,9 +1,7 @@
 import { OBJECTS } from "./objects.mts";
 
-export function objectClassificationLabel(classification: string) {
-  const label = classification === "satellite" ? "moon" : classification.replaceAll("-", " ");
-  return label[0].toUpperCase() + label.slice(1);
-}
+// Pages label classifications without loading the registry.
+export { objectClassificationLabel } from "./object-classification-label.mts";
 
 // Classification describes an object; it never disables an interaction gate.
 export function objectNavigation<T extends { distance: { meters: number }; classification: string }>(objects: readonly T[]) {

@@ -23,7 +23,7 @@ const sun = frame([0, 0, 0], 10), ceres = frame([70 * au, 0, 0], 1);
 const objects = [objectFixture('sun', sun, { classification: 'star', systemName: 'Solar System', distance: testDistance(0) }), objectFixture('ceres', ceres, { systemName: 'Solar System' })];
 const viewport = { focalPixels: 1000, principalOffsetPixels: [140, 0] as const };
 const camera = (frame: PreparedWorldCameraFrame, distanceUnits: number) => worldCameraFromCenteredPresentation({ rotation, distanceUnits }, frame, viewport);
-const choose = (world: WorldCameraPose, objectId: string, overview: boolean) => selectionAtCamera({ world, viewport, objects, objectId, overview });
+const choose = (world: WorldCameraPose, objectId: string, overview: boolean) => selectionAtCamera({ world, viewport, objects, systems: objects, objectId, overview });
 
 test('every body switches to Solar System at 100 AU from the Sun', () => {
   for (const id of ['sun', 'ceres']) {
@@ -38,7 +38,7 @@ test('the threshold follows the Sun origin even in a translated world frame', ()
   const translatedObjects = [objectFixture('sun', translatedSun, { classification: 'star', systemName: 'Solar System', distance: testDistance(0) })];
   for (const [range, expected] of [[99, null], [101, { overview: true, objectId: 'sun' }]] as const) {
     assert.deepEqual(selectionAtCamera({ world: camera(translatedSun, range * au), viewport,
-      objects: translatedObjects, objectId: 'sun', overview: false }), expected);
+      objects: translatedObjects, systems: translatedObjects, objectId: 'sun', overview: false }), expected);
   }
 });
 
@@ -49,7 +49,7 @@ test("another star's planetary system opens its own overview, scaled by the syst
   const system = required(systemById(placed, 'wasp-43'));
   assert.ok(system.exitDistanceM > 3 * 2.25e9 && system.exitDistanceM < .1 * au, "The exit scales the Sun's 100 AU to a 0.015 AU orbit");
   const at = (range: number, id = 'wasp-43b', overview = false, from = host) =>
-    selectionAtCamera({ world: camera(from, range), viewport, objects: placed, objectId: id, overview });
+    selectionAtCamera({ world: camera(from, range), viewport, objects: placed, systems: placed, objectId: id, overview });
   assert.equal(at(system.exitDistanceM * .99), null);
   assert.deepEqual(at(system.exitDistanceM * 1.01), { overview: true, objectId: 'wasp-43' }, 'Never the Sun: the router mounts WASP-43');
   assert.deepEqual(at(system.exitDistanceM * 1.01, 'wasp-43'), { overview: true, objectId: 'wasp-43' });
@@ -57,7 +57,7 @@ test("another star's planetary system opens its own overview, scaled by the syst
   assert.equal(at(4.6e8 * 3, 'sun', true, host), null, 'The Solar System overview ignores another star');
   // Framed whole, the compact system shows its star far wider than the Sun's 48 px card threshold; the card waits.
   const framed = { ...viewport, framingRadiusPixels: 250 };
-  const card = (range: number) => selectionAtCamera({ world: camera(host, range), viewport: framed, objects: placed, objectId: 'wasp-43', overview: true });
+  const card = (range: number) => selectionAtCamera({ world: camera(host, range), viewport: framed, objects: placed, systems: placed, objectId: 'wasp-43', overview: true });
   assert.equal(card(.04 * au), null);
   assert.deepEqual(card(.02 * au), { overview: false, objectId: 'wasp-43' });
 });
@@ -66,7 +66,7 @@ test('a star outside every system keeps its scene until the camera is as far fro
   const pc = 206_264.806 * au, lone = frame([168 * pc, 0, 0], 5e11);
   const placed = [...objects, objectFixture('betelgeuse', lone, { classification: 'star', systemName: 'Orion' })];
   assert.equal(systemById(placed, 'betelgeuse'), null);
-  const at = (range: number) => selectionAtCamera({ world: camera(lone, range), viewport, objects: placed, objectId: 'betelgeuse', overview: false });
+  const at = (range: number) => selectionAtCamera({ world: camera(lone, range), viewport, objects: placed, systems: placed, objectId: 'betelgeuse', overview: false });
   for (const range of [100 * au, 50 * pc, 167.99 * pc]) assert.equal(at(range), null);
   assert.deepEqual(at(168 * pc), { overview: true, objectId: 'sun' });
 });
@@ -84,7 +84,7 @@ test('camera sampling settles before changing selection and releases timers and 
   const getListener = () => required(listener);
   let serial = 0, available = true;
   const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
-  const dispose = watchOverviewSelection({ objects, objectId: 'ceres', getOverview: () => false,
+  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'ceres', getOverview: () => false,
     isAvailable: () => available, onChange: next => changes.push(next),
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => { listener = null; }; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
@@ -113,7 +113,7 @@ test('continuous outward camera updates cannot postpone the Sun overview flip', 
   const getListener = () => required(listener);
   const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
   let serial = 0;
-  const dispose = watchOverviewSelection({ objects, objectId: 'sun', getOverview: () => false,
+  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'sun', getOverview: () => false,
     isAvailable: () => true, onChange: next => changes.push(next),
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });

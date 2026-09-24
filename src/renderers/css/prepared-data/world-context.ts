@@ -18,6 +18,11 @@ export interface PreparedContextPoint {
   readonly contextColor?: string;
   /** A star, black hole or planet: its caption is in capitals. */
   readonly labelCase?: 'upper';
+  /** A packaged body's catalogue classification and system name, so a page knows its systems without the object registry. */
+  readonly classification?: string;
+  readonly systemName?: string;
+  /** Its catalogue discovery record, which the application reads for world visibility; opaque to the renderer. */
+  readonly discovery?: Readonly<Record<string, unknown>>;
   readonly positionM: PositionM;
   readonly radiusM: number;
 }
@@ -140,7 +145,14 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
       return hex;
     })() }),
     ...(input.labelCase === undefined ? {} : input.labelCase === 'upper' ? { labelCase: 'upper' as const }
-      : (() => { throw new TypeError(`Context point ${id} label case is ${String(input.labelCase)}, not upper.`); })()) });
+      : (() => { throw new TypeError(`Context point ${id} label case is ${String(input.labelCase)}, not upper.`); })()),
+    ...(input.classification === undefined ? {} : { classification: (() => {
+      const value = text(input.classification, `point ${id} classification`);
+      if (!/^[a-z][a-z-]*$/.test(value)) throw new TypeError(`Context point ${id} classification ${value} is invalid.`);
+      return value;
+    })() }),
+    ...(input.systemName === undefined ? {} : { systemName: text(input.systemName, `point ${id} system name`) }),
+    ...(input.discovery === undefined ? {} : { discovery: Object.freeze({ ...record(input.discovery, `point ${id} discovery`) }) }) });
 }
 export interface PreparedSystemViewCandidate { readonly cameraToReference: readonly number[];
   readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }
@@ -197,8 +209,8 @@ function parseClassificationViews(value: unknown, bodies: readonly PreparedConte
   return Object.freeze(Object.fromEntries(entries));
 }
 function focusPoint(value: unknown, withCandidates: boolean): PreparedContextFocus {
-  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase']);
-  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase']);
+  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery']);
+  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery']);
   const systemView = parseSystemView(input.systemView, withCandidates);
   const base = systemView ? Object.freeze({ ...raw, systemView }) : raw;
   if (input.pointSource === undefined) return base;
@@ -479,7 +491,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
-    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase'];
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView, geometry);

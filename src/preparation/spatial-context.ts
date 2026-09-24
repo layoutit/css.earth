@@ -38,7 +38,7 @@ export interface WorldContextPointSource {
 }
 /** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
  * (site/context-colour.mts). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
-type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper' };
+type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>> };
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 export interface VolumeOpacityProfile {
   readonly model: 'logarithmic-distance';
@@ -100,6 +100,9 @@ export interface PreparedWorldContext {
     readonly labelPlacement?: 'centre';
     readonly contextColor?: string;
     readonly labelCase?: 'upper';
+    readonly classification?: string;
+    readonly systemName?: string;
+    readonly discovery?: Readonly<Record<string, unknown>>;
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
@@ -123,15 +126,18 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   // The prepared presentation a body carries into the world: its context colour and caption case.
   const presentation = (value: Record<string, unknown>, label: string) => {
     if (value.labelCase !== undefined && value.labelCase !== 'upper') throw new TypeError(`${label} label case is ${String(value.labelCase)}, not upper.`);
-    return { ...(value.contextColor === undefined ? {} : { contextColor: color(value.contextColor) }), ...(value.labelCase === 'upper' ? { labelCase: 'upper' as const } : {}) };
+    if (value.classification !== undefined && !/^[a-z][a-z-]*$/.test(String(value.classification))) throw new TypeError(`${label} classification is ${String(value.classification)}.`);
+    return { ...(value.contextColor === undefined ? {} : { contextColor: color(value.contextColor) }), ...(value.labelCase === 'upper' ? { labelCase: 'upper' as const } : {}),
+      ...(value.classification === undefined ? {} : { classification: String(value.classification) }), ...(value.systemName === undefined ? {} : { systemName: text(value.systemName, `${label} system name`) }),
+      ...(value.discovery === undefined ? {} : { discovery: freeze({ ...record(value.discovery, `${label} discovery`) }) }) };
   };
-  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource', 'contextColor', 'labelCase'], 'world context focus');
+  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'], 'world context focus');
   const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color),
     ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }), ...presentation(focusInput, 'World context focus') });
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase'], `world context body ${index}`);
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'], `world context body ${index}`);
     if (body.labelPlacement !== undefined && body.labelPlacement !== 'centre') throw new TypeError(`World context body ${index} label placement is ${String(body.labelPlacement)}, not centre.`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (body.unpackaged !== undefined && body.unpackaged !== true) throw new TypeError('World context unpackaged is true or absent.');
