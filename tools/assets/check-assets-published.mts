@@ -128,8 +128,12 @@ export const DEFAULT_RETRY_POLICY: Readonly<Record<MissClass, RetryPolicy>> = {
 };
 /** A hung socket fails after this long instead of holding a worker. */
 export const REQUEST_TIMEOUT_MS = 15_000;
-/** Connection cap for the shared keep-alive agent: bounds new-connection and DNS churn. */
-export const MAX_CONNECTIONS = 8;
+/**
+ * Connection cap for the shared keep-alive agent, and the width of the first pass over every key. Timed on 2,000
+ * inventoried keys against the asset domain (2026-09-24): 8 took 106.5 s, 64 took 10.5 s, 128 took 6.1 s, every
+ * answer 200. At 8 a deploy spent 8.3 of its 15 build minutes here. Retries stay narrow (`DEFAULT_RETRY_POLICY`).
+ */
+export const MAX_CONNECTIONS = 128;
 const MAX_RETRY_AFTER_MS = 60_000;
 
 interface HeadResponse { readonly ok: boolean; readonly status: number; readonly headers: { get(name: string): string | null }; }
@@ -228,7 +232,7 @@ export interface CheckAssetsPublishedResult {
  * the reason from its last attempt. `gateVerdict` decides what fails.
  */
 export async function checkAssetsPublished(objectIds: readonly string[], { origin = RUNTIME_ASSET_ORIGIN, fetcher,
-  root = defaultRoot, concurrency = DEFAULT_RETRY_POLICY.missing.concurrency, retryPolicy = {},
+  root = defaultRoot, concurrency = MAX_CONNECTIONS, retryPolicy = {},
   timeoutMs = REQUEST_TIMEOUT_MS, sleep = (ms: number) => new Promise<void>(accept => setTimeout(accept, ms)), addedSince,
   findAddedKeys = (ref: string) => addedAssetKeys(ref, { root }) }:
   { origin?: string; fetcher?: HeadFetcher; root?: string; concurrency?: number;
