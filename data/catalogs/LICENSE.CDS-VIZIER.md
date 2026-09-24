@@ -16,7 +16,6 @@ access tool of the Centre de Données astronomiques de Strasbourg (CDS):
   who must be cited as given there.
 
 The recorded terms string for each of these catalogues is "CDS VizieR terms
-of use". They carry no additional publisher clause. galaxio's `galaxies`
-catalogue, whose terms add that commercial redistribution of the pre-2021
-AAS J/AJ/144/4 table requires permission, is deliberately not vendored; see
-`SOURCE.md`.
+of use". They carry no additional publisher clause. A `galaxies` catalogue,
+whose terms add that commercial redistribution of the pre-2021 AAS J/AJ/144/4
+table requires permission, is deliberately not included; see `SOURCE.md`.

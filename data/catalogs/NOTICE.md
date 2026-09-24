@@ -4,7 +4,7 @@ The `.gxct` files in this directory are prepared derivatives of the published
 catalogues credited below. Each is distributed under its own terms, none of
 which is the licence of the surrounding software. The terms, the source
 credit, and the URL are quoted as recorded in each catalogue's manifest entry
-(`upstream.json`, `catalogs.<name>.manifestEntry`). Where a catalogue requires
+(`manifest.json`, `assets.<key>`). Where a catalogue requires
 attribution, that attribution is the credit line given here.
 
 ## `catalogs/stars-hyg`

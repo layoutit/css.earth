@@ -1,20 +1,15 @@
 # Catalogue sources
 
-This directory is a vendored copy of galaxio's prepared point catalogues:
-`.gxct` packed-column files in the format specified by
-`packages/catalog/FORMAT.md` and read by `@cssearth/catalog`. Every catalogue
-file is byte-identical to the upstream `data/catalogs/<name>` directory it was
-copied from. Nothing here is edited by hand.
+This directory holds prepared point catalogues: `.gxct` packed-column files in
+the format specified by `packages/catalog/FORMAT.md` and read by
+`@cssearth/catalog`. Nothing here is edited by hand.
 
 These are third-party datasets, not MIT-licensed software. Each catalogue has
 its own terms and attribution requirements; they are spelled out in
 `NOTICE.md` and the `LICENSE.*.md` files beside this one, and recorded per
-catalogue in `upstream.json` under `catalogs.<name>.manifestEntry`.
+catalogue in `manifest.json` under `assets.<key>`.
 
-## What is vendored
-
-Eight of galaxio's ten catalogues, copied whole (every `v<N>` directory,
-current and superseded) with the manifest entry each was published under:
+## What is here
 
 | key | current file | rows | source | terms |
 |---|---|---:|---|---|
@@ -27,60 +22,30 @@ current and superseded) with the manifest entry each was published under:
 | `catalogs/hii-regions` | `hii-regions/v1/hii-regions.gxct` | 8 399 | WISE Catalog of Galactic HII Regions (Anderson et al. 2014), VizieR J/ApJS/212/1 | CDS VizieR terms of use |
 | `catalogs/exoplanets` | `exoplanets/v1/exoplanets.gxct` | 6 227 | NASA Exoplanet Archive, Planetary Systems table | Public Domain (U.S. Government work) |
 
-`manifest.json` is the `catalogs/*` subset of galaxio's `data/manifest.json`
-restricted to these eight entries, kept in galaxio's shape (`version`,
-`assets`) so a consumer can resolve logical key → versioned path the way the
-upstream engine does. Superseded versions (`deepsky/v1`) are carried because
-the copy is directory-to-directory; nothing references them.
+`manifest.json` resolves each logical key to its versioned path and records
+the entry each file was published under: source, terms URL, epoch, build date,
+row count and columns. The superseded `deepsky/v1` file is kept; nothing
+references it.
 
 ## What is deliberately excluded
 
-- `catalogs/galaxies` (three versions, 23 MB; HyperLEDA/PGC 2003 VII/237,
-  HyperLEDA HI radial velocities VII/238, and the McConnachie 2012 Local Group
-  table J/AJ/144/4). Its published terms are "VizieR scientific-use terms;
-  commercial redistribution of the pre-2021 AAS J/AJ/144/4 table requires
-  permission". css.earth is a public site, so redistribution is deferred
-  pending a licensing decision. It is not vendored until that is resolved.
-  The upstream manifest entry is recorded in `upstream.json` under
-  `excluded.galaxies` so the exclusion is auditable.
-- `catalogs/nebula-imagery` (five versions, 48 KB). A 15-row placement index
-  for galaxio's `textures/nebula-*` and `volumes/nebula-*` imagery assets,
-  which are not vendored; without the imagery it places, the index is dead
-  data. Its manifest entry is recorded under `excluded.nebula-imagery`.
+- `catalogs/galaxies` (HyperLEDA/PGC 2003 VII/237, HyperLEDA HI radial
+  velocities VII/238, and the McConnachie 2012 Local Group table J/AJ/144/4).
+  Its published terms are "VizieR scientific-use terms; commercial
+  redistribution of the pre-2021 AAS J/AJ/144/4 table requires permission".
+  css.earth is a public site, so redistribution is deferred pending a
+  licensing decision.
 
 ## Provenance
 
-galaxio does not commit its data: `data/` is gitignored and only
-`data/manifest.example.json` is tracked. The catalogues are built by galaxio's
-`pipeline/` (one builder per catalogue, named in `upstream.json` under
-`catalogs.<name>.builder`) and published to its CDN. There is therefore no
-upstream commit for the data itself. `upstream.json` records instead:
+The catalogues were prepared on 2026-09-02 by Juan Cruz Fortunatti's catalogue
+builders, one per catalogue, which are not part of this repository. Each
+manifest entry names the sources, terms, epoch and build date its builder used;
+reproducing a catalogue means building it again from those sources. cssEarth
+carries no pipeline of its own for this data, by design: runtime and
+preparation here consume prepared state, they do not derive it.
 
-- `galaxioHeadCommit`: the galaxio checkout whose `data/catalogs` was copied,
-  which is also the builder code that was checked out at the time;
-- `upstreamManifest`: the SHA-256 and byte count of the `data/manifest.json`
-  the entries were taken from;
-- per catalogue: the manifest entry (source, terms URL, epoch, `built` date,
-  row count, columns), the current file and its hash, and any superseded
-  versions;
-- per file: SHA-256 and byte count.
-
-Reproducing a catalogue means running the named galaxio builder against the
-sources its manifest entry cites; cssEarth carries no pipeline of its own for
-this data, by design (runtime and preparation here consume prepared state,
-they do not derive it).
-
-## Sync and integrity
-
-`node tools/ci/sync-upstream.mts` re-copies these catalogues together with
-`packages/astronomy` and `packages/catalog` from `UPSTREAM_ROOT` (default: the
-local galaxio checkout) in one idempotent run, and regenerates `upstream.json`
-and `manifest.json`. The upstream lock retains the copied files' hashes;
-the runtime manifest resolves catalogue paths and metadata.
-
-The former sync-integrity test has been removed. Review a sync against the
-upstream lock, catalogue metadata and required notices; the current package
-tests (`pnpm --filter @cssearth/catalog test`, from the repository root) exercise
-the reader and writer but do not audit every vendored file or its attribution.
-The [package guide](../../packages/catalog/README.md) describes the separate
-cross-language parity gap.
+The package tests (`pnpm --filter @cssearth/catalog test`, from the repository
+root) exercise the reader and writer; they do not audit every file or its
+attribution. The [package guide](../../packages/catalog/README.md) describes
+the separate cross-language parity gap.
