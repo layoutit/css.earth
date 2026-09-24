@@ -1,5 +1,4 @@
-import { cross3 as cross } from '../../../platform/vector3.mts';
-import { dot3 as dot } from '../../../platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 export type SurfacePoint = readonly [number, number, number];
 export type SurfaceTriangle = readonly [SurfacePoint, SurfacePoint, SurfacePoint];
 export type SurfaceFrontFace = 'clockwise' | 'counter-clockwise';

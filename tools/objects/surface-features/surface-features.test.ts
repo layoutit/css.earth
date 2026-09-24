@@ -7,7 +7,7 @@ import { parseDbf } from './dbf.js';
 import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from './index.js';
 import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection } from './geometry.js';
 import { parseShpPolylines } from './shp.js';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 const test = sourceTest();
 
 const root = process.cwd();

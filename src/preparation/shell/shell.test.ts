@@ -15,7 +15,7 @@ import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js
 import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } from '../../renderers/css/shell/material-address.js';
 import { shellRim } from './atlas.js';
 import { validatePreparedCssSurfaceShell } from '../../renderers/css/shell/validation.js';
-import { dotN as dot } from '../../platform/vector3.mts';
+import { dotN as dot } from '@cssearth/core';
 
 const objectDirectory = resolve('src/objects/heliosphere');
 const recipe = async () => parseShellRecipe(JSON.parse(await readFile(join(objectDirectory, 'source/shell.json'), 'utf8')) as unknown);

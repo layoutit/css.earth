@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, array, number, shape, text } from '@cssearth/core';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -6,7 +6,6 @@ import {loadObjShape} from '../terrestrial-layers/obj-shape.mts';
 import {decodeNewHorizonsLorri,newHorizonsCamera,multiplyCameraMatrices} from '../terrestrial-layers/new-horizons-geo.mts';
 import {readFitsHeader} from '../observation/fits.mts';
 import {observedLimb,limbThreshold,type LimbEdgePoint} from '../terrestrial-layers/limb-refinement.mts';
-import {array,number,shape,text} from '@cssearth/core';
 
 const root=resolve('src/objects/arrokoth/source'),read=async(path:string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 const profile=shape({mesh:text,frames:array(shape({id:text,image:text,output:text,bodyToJ2000:array(array(number)),offsetPixels:array(number)}))})(await read('preparation/photography.json'));

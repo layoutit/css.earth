@@ -1,10 +1,9 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dotN as dot } from '@cssearth/core';
 /** Test-side binding from archived camera fields to the repository's shared
  * projective camera. This module never imports native reference results. It
  * does not qualify a production mosaic or solve an unknown camera. */
 import { project } from '../../objects/terrestrial-layers/osiris-geo.mts';
 import type { Case } from './cases.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const norm = (v: number[]) => {
   const length = Math.hypot(...v);

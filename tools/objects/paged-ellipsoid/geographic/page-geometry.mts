@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../../src/platform/vector3.mts';
+import { cross3 as cross } from '@cssearth/core';
 import { prepareProjectiveTextureLayer } from "../../../../src/platform/projective-surface-raster.mts";
 
 import type { PageAddress, GeographicScene, GeographicLeaf, GeographicBounds, PolarBounds, PageGeometry, PolarProjection, PolarPlane } from './contracts.mts';

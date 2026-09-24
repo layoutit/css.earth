@@ -1,7 +1,6 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import type { SourceMesh } from './contracts.mts';
 import { parseArchivedCamera, parseLimbRefinement } from './source-records.mts';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 /**
  * Pointing refinement against the retained mesh. Archived and kernel cameras

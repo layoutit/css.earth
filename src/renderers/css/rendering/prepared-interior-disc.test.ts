@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createPreparedInteriorDisc, PREPARED_INTERIOR_DISC_SIZE } from './prepared-interior-disc.js';
-import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '../../../platform/math/matrix.mts';
+import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
 
 const identity = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
 const radii = [11500, 11500, 10373] as const;

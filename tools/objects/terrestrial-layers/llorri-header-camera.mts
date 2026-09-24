@@ -1,13 +1,11 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, requireFiniteNumber, dotN as dot } from '@cssearth/core';
 /** Native FITS TAN-SIP camera seed. Surface registration remains a separate requirement. */
 import { sha256 } from '@cssearth/core/node';
 import { scanFitsCards, fitsCardValue } from '../observation/fits.mts';
-import { requireFiniteNumber } from '@cssearth/core';
 import type { KernelSet } from '../../spice/kernel-set.mts';
 import { pckRotation } from '../../spice/frames.mts';
 import { utcToEt } from '../../spice/lsk.mts';
 import { llorriFieldTargets, requireLlorriTarget } from './llorri-geo.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const inverse = (a: readonly (readonly number[])[]) => {
   const columns = [cross(a[1], a[2]), cross(a[2], a[0]), cross(a[0], a[1])], determinant = dot(a[0], columns[0]);

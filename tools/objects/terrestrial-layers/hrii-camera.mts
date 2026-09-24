@@ -1,5 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
-import {array,number,shape,requireRecord} from '@cssearth/core';
+import { cross3 as cross, array, number, shape, requireRecord } from '@cssearth/core';
 import {equatorialVector,validateBodyFrame} from './encounter-camera.mts';
 
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((s,v,i)=>s+v*b[i],0);

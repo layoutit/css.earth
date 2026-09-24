@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {SourceMesh,SourceFace,FaceTree,ClosestSurfacePoint,MeshDimensions} from './contracts.mts';
 import {parseMeshProfile,parseRadiusProfile,parsePlateProfile,parseShapeLens,parseSurfaceLens} from './source-records.mts';
@@ -7,7 +7,6 @@ import { promisify } from 'node:util';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 const exec = promisify(execFile);
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);

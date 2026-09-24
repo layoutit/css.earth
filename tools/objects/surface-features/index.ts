@@ -12,7 +12,7 @@ import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig 
 import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.js';
 import { prepareLandmarks } from './landmarks.js';
 import { parseShpPolylines } from './shp.js';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 /** Spacecraft sites are discovered past the whole-body view (which sits near 0.43 of the zoom range), once the camera closes in. */
 const SITE_ZOOM_SHARE = 0.6;
 

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';
 import { parseObjShape } from './obj-shape.mts';
 import { refineCameraByLimb, rotateCamera, rotationOf, limbThreshold, observedLimb } from './limb-refinement.mts';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 // A 300 x 240 x 180 m ellipsoid, seen from 60 km by a 1 m focal length behind 10 µm pixels (100,000 px/rad, 0.6 m/px).
 const axes = [300, 240, 180], { unit, faces } = subdividedOctahedron(5);

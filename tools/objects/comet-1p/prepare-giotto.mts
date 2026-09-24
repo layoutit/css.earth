@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, array, number, shape, text, dotN as dot } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -7,8 +7,6 @@ import sharp from 'sharp';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
-import { array, number, shape, text } from '@cssearth/core';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const pair = (value: unknown) => { const result = array(number)(value); assert.equal(result.length, 2); return result; };
 const parseRegistration = shape({

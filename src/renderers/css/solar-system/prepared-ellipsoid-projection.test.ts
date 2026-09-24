@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "vitest";
 import { createPreparedEllipsoidProjection, readPreparedCounterMatrix } from '../prepared-data/prepared-ellipsoid-projection.js';
-import { readPreparedMatrix4 } from '../../../platform/math/matrix.mts';
+import { readPreparedMatrix4 } from '@cssearth/core';
 
 const identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 const translate = (x: number, y: number) => [...identity.slice(0, 12), x, y, 0, 1];

@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../src/platform/vector3.mts';
+import { cross3 as cross } from '@cssearth/core';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';

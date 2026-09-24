@@ -1,6 +1,5 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import type { Vector3, SurfaceFeatureAxes, SurfaceFeatureOutline } from './catalog.js';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 
 /** Same map convention as the shell minimap: texture u wraps east from the map's left edge. */

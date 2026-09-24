@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../platform/vector3.mts';
+import { cross3 as cross } from '@cssearth/core';
 import type { Vector2, Vector3, Matrix3, Matrix3dLike } from './types.js';
 import type { SilhouetteEllipse } from './types.js';
 export interface OffAxisFrame {radial:Vector2;sinTheta:number;cosTheta:number;tanTheta:number;}

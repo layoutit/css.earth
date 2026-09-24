@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './source-records.mts';
 type Vector = readonly number[] | Float32Array | Float64Array;
@@ -14,7 +14,6 @@ import {readFitsImage} from '../../fits/fits.mts';
 import {skyDisplayRaster, skyImageAxes} from '../../fits/fits-sky.mts';
 import { pds3Keyword } from '../pds-labels.mts';
 import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 const rad = Math.PI / 180;
 

@@ -4,7 +4,7 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject, initialObjectSelection } from '../../../src/renderers/css/dist/index.js';
 import { parsePreparedWorldCameraFrame, parseSharedView, formatSharedView } from '../../../src/renderers/css/dist/navigation.js';
 import { preparedSceneMatrix } from '../../../src/renderers/css/navigation/prepared-camera-basis.js';
-import { serializePreparedMatrix4 } from '../../../src/platform/math/matrix.mts';
+import { serializePreparedMatrix4 } from '@cssearth/core';
 import { distanceForSilhouetteRadius } from '../../../src/renderers/css/solar-system/heliocentric-geometry.js';
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
 import { serializePreparedScene } from '../../prepared/serialize-prepared-scene.mts';

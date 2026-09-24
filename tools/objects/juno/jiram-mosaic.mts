@@ -36,9 +36,8 @@ import { numbers } from '../../spice/text-kernel.mts';
 import { utcToEt } from '../../spice/lsk.mts';
 import { spiceCamera, type PixelModelKeys, type SpiceCamera } from '../../spice/camera.mts';
 import { pds3Keyword } from '../pds-labels.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireArray, requireFiniteNumber, requireRecord, requireString, dot3 as dot } from '@cssearth/core';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 export const RECIPE_SCHEMA = 'cssearth-jiram-mosaic@1';
 export const RECEIPT_SCHEMA = 'cssearth-jiram-mosaic-receipt@1';

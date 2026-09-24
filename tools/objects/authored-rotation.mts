@@ -1,10 +1,8 @@
-import { cross3 as cross } from '../../src/platform/vector3.mts';
+import { cross3 as cross, requireRecord, requireFiniteNumber, dot3 as dot } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import type { RotationElements } from "@cssearth/astronomy";
-import { requireRecord, requireFiniteNumber } from "@cssearth/core";
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { dot3 as dot } from '../../src/platform/vector3.mts';
 
 // A measured pole is distinct from an IAU prime-meridian solution. For bodies
 // without a phase ephemeris, preserve an explicitly arbitrary display phase.

@@ -1,9 +1,8 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, array, choice, number, shape, text } from '@cssearth/core';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {gzipSync} from 'node:zlib';
 import {parseMeshProfile} from './source-records.mts';
-import {array,choice,number,shape,text} from '@cssearth/core';
 import {loadPdsPlanetocentricShape} from './obj-shape.mts';
 import {decodeHriiSpectra,decodeHriiSolarTable,fitHriiSpectrum} from './hrii-spectra.mts';
 import {hriiCamera,hriiControlResidual} from './hrii-camera.mts';
