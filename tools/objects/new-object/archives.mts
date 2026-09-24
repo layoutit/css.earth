@@ -55,7 +55,7 @@ export const liveArchive: Archive = {
   text: (url, form) => transfer(url, response => response.text(), form ? { method: 'POST', body: new URLSearchParams(form) } : undefined),
   bytes: url => transfer(url, async response => Buffer.from(await response.arrayBuffer())),
   exists: url => transfer(url, async response => response.status === 200, { method: 'HEAD' }).catch(error => { if (error instanceof HttpError) return false; throw error; }),
-  location: url => fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) }).then(response => response.status >= 300 && response.status < 400 ? response.headers.get('location') ?? undefined : undefined),
+  location: url => fetch(url, { redirect: 'manual', headers: { 'User-Agent': USER_AGENT }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) }).then(response => response.status >= 300 && response.status < 400 ? response.headers.get('location') ?? undefined : undefined),
 };
 
 export const GAIA_TAP = 'https://gea.esac.esa.int/tap-server/tap/sync';
