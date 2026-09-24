@@ -54,7 +54,7 @@ function textureLeaf(config:BandedGeometryRecipe,polygon:GeometryPolygon,index:n
     return{style:`transform:matrix3d(${fitted.matrix});width:${length(fitted.leafWidth)};height:${length(fitted.leafHeight)};background-position:${address.backgroundPosition.map(length).join(' ')};background-size:${address.backgroundSize.map(length).join(' ')}`,...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,rasterScale)}:{})};
   }
   const compact=config.leafRecord==='compact';
-  const position=address.backgroundPosition.map(value=>!compact&&value===0?'0px':formatCssLength(value)).join(' '),size=address.backgroundSize.map(formatCssLength).join(' ');
+  const position=address.backgroundPosition.map(value=>!compact&&value===0?'0px':formatCssLength(value)).join(' '),size=address.backgroundSize.map(value=>formatCssLength(value)).join(' ');
   const dimensions=compact?(fitted.leafWidth===64?'':`;--polycss-atlas-width:${formatCssLength(fitted.leafWidth)}`)+(fitted.leafHeight===64?'':`;--polycss-atlas-height:${formatCssLength(fitted.leafHeight)}`):(fitted.leafWidth===64&&fitted.leafHeight===64?'':`;--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px`);
   return{...(compact?{tag:'s'}:{}),style:`transform:matrix3d(${fitted.matrix})${dimensions}${compact&&polygon.polarCap?`;background-image:url(${fitted.url})`:''};background-position:${position};background-size:${size}`,
     ...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,rasterScale)}:{}),...(!compact?{sourceRect:fitted.sourceRect,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,projection:fitted.projection,lighting:'source',lightingOverlay:false}:{})};

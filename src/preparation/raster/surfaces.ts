@@ -1,4 +1,4 @@
-import sharp from 'sharp';
+import sharp, { type Sharp } from 'sharp';
 import { resolve } from 'node:path';
 import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '@cssearth/objects';
 import { RASTER_DENSITY, type RasterRecipe } from './config.js';
@@ -7,6 +7,7 @@ import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from
 import { composeLimbPreview } from './emission-preview.js';
 import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.js';
 import { missingCoverageColor } from '../../platform/prepare-missing-coverage.mts';
+import { RASTER_LEVEL_FACTORS, rasterPagePlan, rasterPageOutput, type RasterPagePlan } from './pages.js';
 type NativePoleSampler = { readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean; };
 
 /** Sample the original image in the exact normalized 2:1 domain used by the established `fit: 'fill'` resize.
@@ -49,7 +50,26 @@ export function applyNativeSurfaceExposure(source: NativePoleSampler, shoulders:
         return true;
     } };
 }
+/** Split a packed atlas into its pages of whole bands, each also reduced to every level, encoded as the atlas is. */
+async function writeRasterPages(image: Sharp, pages: RasterPagePlan, bands: number, lossless: boolean, path: (page: number, levelWidth?: number) => string) {
+    const { data, info } = await image.clone().ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    if (info.height % bands) throw new RangeError(`A ${info.width} × ${info.height} atlas does not hold ${bands} equal bands.`);
+    const rows = info.height / bands * pages.bandsPerPage, stride = info.width * 4;
+    for (let page = 0; page < pages.pageCount; page++) {
+        const pixels = data.subarray(page * rows * stride, (page + 1) * rows * stride);
+        for (const factor of RASTER_LEVEL_FACTORS) {
+            const width = info.width / factor, height = rows / factor;
+            if (!Number.isInteger(width) || !Number.isInteger(height)) throw new RangeError(`Page ${page} (${info.width} × ${rows}) does not reduce by ${factor}.`);
+            let level = raster(pixels, info.width, rows);
+            if (factor !== 1) level = sharp(await level.resize(width, height, { kernel: 'lanczos3' }).raw().toBuffer(), { raw: { width, height, channels: 4 } });
+            const output = path(page, factor === 1 ? undefined : width);
+            if (lossless) await level.webp({ lossless: true, effort: 6 }).toFile(output);
+            else await writeLossyWebp(level, output, { effort: 6 });
+        }
+    }
+}
 export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation) {
+    const pages = rasterPagePlan(config, RASTER_DENSITY);
     const decoded = new Map<string, Uint8Array>();
     const metadata: Record<string, unknown> = {};
     const interpretations: Record<string, Record<string, Readonly<Record<string, unknown>>>> = {};
@@ -142,9 +162,14 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 thumbnailSource = await encodeLossyWebp(image.clone(), { effort: 6 });
         }
         else if (nearest)
-            await image.webp({ lossless: true, effort: 6 }).toFile(output);
+            await image.clone().webp({ lossless: true, effort: 6 }).toFile(output);
         else
-            await writeLossyWebp(image, output, { effort: 6 });
+            await writeLossyWebp(image.clone(), output, { effort: 6 });
+        if (pages) {
+            if (surface.encoding) throw new TypeError(`${surface.id}: a paged surface (${output}) must be WebP, not ${surface.encoding.format}.`);
+            await writeRasterPages(image, pages, config.latitudeBands, nearest, (page, levelWidth) =>
+                resolve(publicDirectory, rasterPageOutput(surface.output, density, surface.id, page, levelWidth)));
+        }
         if (!config.polesCombined) {
             const polar = createPolarSprite(pixels, width, height, config.polarTile * density, config.latitudeBands, nativePhotograph
                 ? { sampling: nearest ? 'nearest' : 'bilinear', nativePhotograph, missingColor: missingCoverageColor }

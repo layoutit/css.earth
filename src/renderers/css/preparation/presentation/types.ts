@@ -9,6 +9,7 @@ import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '../../r
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '../../rendering/prepared-material.js';
 import type { PreparedTextureLevels } from '../../rendering/prepared-texture-levels.js';
 import type { PreparedSeamOutset } from '../scene/seam-outset.js';
+import type { RasterPagePlan } from '../../../../preparation/raster/pages.js';
 type SeamRepair = { outset?: PreparedSeamOutset };
 
 export interface Lens {
@@ -41,7 +42,7 @@ export interface CompositeMaterial {
 export interface Scene {
   camera: CameraPlan & {defaultTransform: string}; systemTransform: string; bodyTransform: string;
   starfield: CubicSkyPlan;
-  bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair}; preparedSurface?: {seamRepair?: SeamRepair};
+  bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair; surfacePages?: RasterPagePlan}; preparedSurface?: {seamRepair?: SeamRepair};
   interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
   /** Flat discs in the body's equatorial plane, such as a ring, drawn under the same system node as the surface. */

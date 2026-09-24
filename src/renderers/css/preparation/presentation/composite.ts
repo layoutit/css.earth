@@ -4,6 +4,8 @@ import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-pr
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
 import type { PreparedNode, PresentationAdapters } from './adapters.js';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
+import { RASTER_LEVEL_FACTORS, RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../../../../preparation/raster/pages.js';
+import type { PreparedResourceEntry } from '../../rendering/prepared-residency.js';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
@@ -22,10 +24,13 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     ...(atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
       :[{key:"shadowless",url:bank!.presentations[bank!.presentations.length-1]!.url,pool:"warm"},{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"warm"}])];
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
-  const entries=[...warm,...lenses.controls.flatMap(lens=>layers.map(layer=>({key:`${layer}:${lens.id}`,
-    url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...lightingRows,
+  // A surface too large to decode as one image comes as pages, each at every level (preparation/raster/pages.ts).
+  const paged=pagedSurface(plan.body.surfacePages,lenses);
+  const entries=[...warm,...lenses.controls.flatMap(lens=>layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>({key:`${layer}:${lens.id}`,
+    url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...(paged?.entries??[]),...lightingRows,
     ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"warm"}))];
-  const required=(id: string)=>[...layers.map(layer=>`${layer}:${id}`),...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
+  const required=(id: string)=>[...(paged?.keys(id)??[]),...layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>`${layer}:${id}`),
+    ...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.body.leaves,...planes.flatMap(entry=>entry.leaves)].map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera object-render-root");
   const scene=b.element("div","polycss-scene",`transform:${plan.camera.defaultTransform}`,{"aria-hidden":"true","data-polycss-lighting":"baked"});
@@ -80,6 +85,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     const focus=input.lensFocus?.[lens.id];
     variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),shadows,...(rings===null?{}:{rings})},required:required(lens.id),writes:[
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},{kind:"attribute",target:-1,name:"data-view",value:null},
+      ...(paged?[...paged.keys(lens.id).map((resource,page)=>({kind:"texture",target:index(body),name:`--${ns}-surface-page-${page}`,resource,quoted:true} as PreparedWrite)),
+        {kind:"texture",target:index(body),name:`--${ns}-poles-image`,resource:`poles:${lens.id}`,quoted:true} as PreparedWrite]:[]),
       ...(atmosphere===null?[]:[{kind:"class",target:-1,name:`${ns}-hide-atmosphere`,value:!atmosphere} as PreparedWrite]),
       ...(atmospheric?[]:[{kind:"class",target:-1,name:`${ns}-hide-shadows`,value:!shadows} as PreparedWrite]),
       ...(ringNode && rings!==null?[{kind:"style",target:index(ringNode),name:"display",value:rings?"block":"none"} as PreparedWrite]:[]),
@@ -92,11 +99,16 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
           {name:"data-material-mode",source:"literal",value:shadows?null:"full-phase-curvature"}]}]});
   }
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:sun,
+    ...(paged?{textureLevels:paged.textureLevels}:{}),
     assets:{entries,pools:[preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:6,concurrency:6}),
+      ...(paged?[preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:paged.pageCount*2*paged.textureLevels.levels.length,
+        eviction:"capacity",maximumDecodedBytes:paged.maximumDecodedBytes})]:[]),
       ...(atmospheric?[]:[preparedResourcePool("lighting",entries,{retention:"selection",decoding:"sync",capacity:bank!.transport.maximumRetainedRowCount,
         concurrency:bank!.transport.maximumRetainedRowCount,eviction:"capacity",reuse:true})])],
-      startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens),...(atmospheric?[]:bank!.transport.initialWarmRows.map(row=>`lighting:${row}`))])]},
+      // A paged surface starts at its first level, the one the first selection chooses.
+      startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens).map(key=>paged?.textureLevels.levels[0]!.resources[key]??key),
+        ...(atmospheric?[]:bank!.transport.initialWarmRows.map(row=>`lighting:${row}`))])]},
     tree,variants,...(atmospheric?{}:{resourceOrder:"materials-first" as const}),materials:[track],
     viewBindings:[{kind:"silhouette-fit",target:index(composite),minimumRadius:POINT_MIN_RADIUS_PX,
       unitScale:2/plan.camera.logicalBodyDiameter},
@@ -108,3 +120,29 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     animations:[],
   };
 }
+
+/** Page resources of every lens at every level: `surface:<lens>:<page>` is the full page, and each smaller level maps it
+ * to `surface:<lens>:<page>:level:<width>`, the page's `-level-<width>` file (preparation/raster/pages.ts). */
+function pagedSurface(pages: RasterPagePlan | undefined, lenses: PresentationInputs['lenses']) {
+  if (!pages) return null;
+  const last = RASTER_LEVEL_FACTORS.length - 1, entries: PreparedResourceEntry[] = [];
+  const levels = pages.levelDiameters.map(minimumDiameter => ({ minimumDiameter, resources: {} as Record<string, string> }));
+  const keys = (id: string) => Array.from({ length: pages.pageCount }, (_, page) => `surface:${id}:${page}`);
+  let largest = 0;
+  for (const lens of lenses.controls) {
+    const url = canonicalPreparedAsset(lens.surfaceUrl, lens.surface2xUrl), cut = url.lastIndexOf('/') + 1, name = url.slice(cut);
+    const surface = pages.surfaces.find(entry => entry.name === name);
+    if (!surface) throw new TypeError(`Lens ${lens.id} shows ${name}, which is not a paged surface of this body (${pages.surfaces.map(entry => entry.name).join(', ')}).`);
+    for (const [page, key] of keys(lens.id).entries()) RASTER_LEVEL_FACTORS.forEach((factor, level) => {
+      const width = surface.width / factor, resource = level === last ? key : `${key}:level:${width}`;
+      entries.push({ key: resource, url: url.slice(0, cut) + rasterPageName(name, page, level === last ? undefined : width),
+        pool: 'pages', decodedBytes: width * surface.pageRows / factor * 4 });
+      levels[level]!.resources[key] = resource;
+    });
+    largest = Math.max(largest, surface.width * surface.pageRows * 4 * pages.pageCount);
+  }
+  // Two complete lenses at full resolution can coexist during a lens switch, as Earth's pages allow.
+  return { entries, keys, pageCount: pages.pageCount, maximumDecodedBytes: 2 * largest,
+    textureLevels: { hysteresis: RASTER_LEVEL_HYSTERESIS, levels } };
+}
+
