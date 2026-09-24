@@ -32,7 +32,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     if (handoff?.afterMount) {
       if (!request) throw new Error('A world handoff requires its navigation request.');
       try {
-        const completed = await session.wait(handoff.afterMount(mount, { signal: session.signal }));
+        const completed = await session.wait(handoff.afterMount(mount));
         if (completed.cancelled || !isCurrent(session) || request.signal.aborted) return;
       } catch (error) {
         if ((!record(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || !isCurrent(session) ||

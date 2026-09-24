@@ -322,7 +322,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           if (intent.kind === 'selection') datasetEffects?.commit(selectedLensVolume(definition.controls, next.lensId));
           playback.setSelection(next);
           surfaceFeatures?.setLens({ id: next.lensId }); surfaceFeatures?.setPlaying(allowed && (next.speed ?? 1) !== 0);
-          frameDatasetCamera = intent.frameCamera;
+          // A handoff or saved view supplies the startup camera. Committing its
+          // initial lens must not replace that camera or cancel the shared flight.
+          frameDatasetCamera = intent.frameCamera && (intent.kind !== 'initial' || !initialWorldCamera);
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });

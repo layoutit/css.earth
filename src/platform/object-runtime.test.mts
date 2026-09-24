@@ -32,7 +32,7 @@ type Residency = ReturnType<NonNullable<RuntimeServices["createResources"]>>;
 type Lifetime = ReturnType<NonNullable<RuntimeServices["createLifetime"]>>;
 type Playback = ReturnType<NonNullable<RuntimeServices["createPlayback"]>>;
 type Orbit = ReturnType<NonNullable<RuntimeServices["createOrbit"]>>;
-interface HarnessOptions { definition?: ObjectRuntimeDefinition; failAtElement?: number | null; stageId?: string | null; runtimeFactory?: RuntimeFactory; diagnostics?: boolean; }
+interface HarnessOptions { initialWorldCamera?: ObjectMountOptions["initialWorldCamera"]; definition?: ObjectRuntimeDefinition; failAtElement?: number | null; stageId?: string | null; runtimeFactory?: RuntimeFactory; diagnostics?: boolean; }
 interface DecodeJob { resolve(): void; reject(error: unknown): void; image: ControlledImage; done: boolean; }
 class ControlledImage implements PreparedImage {
   src = ""; naturalWidth = 1; naturalHeight = 1; decoding: "async" = "async";
@@ -101,12 +101,12 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
         const state = (): ReturnType<Orbit["state"]> => ({ ...publication,
           distance: 12345000, distanceKilometers: 12345, distanceRadii: 12345000, focal: 1000, principalOffset: [0,0], visibleRect: null, offAxisDegrees: null, silhouetteRadius: null,
           levelOfDetail: { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0, proxyOpacity: 0 }, pitch: publication.controlPitch, pose: { schema: "cssearth-camera-pose@2" as const, scene: matrix } });
-        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, preparedFocus: () => null, setPreparedFocus() { throw new Error("Focus changes are outside this mount fixture."); }, async flyToPreparedFocus() { throw new Error("Focus flights are outside this mount fixture."); }, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, invalidate: () => orbitConfiguration.onPublish?.(publication), refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { Object.assign(publication, value); return state(); }, state, sharedState: () => ({ distanceKilometers: 12345, pose: { schema: "cssearth-camera-pose@2", scene: matrix } }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
+        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, preparedFocus: () => null, setPreparedFocus() { throw new Error("Focus changes are outside this mount fixture."); }, async flyToPreparedFocus() { throw new Error("Focus flights are outside this mount fixture."); }, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, invalidate: () => orbitConfiguration.onPublish?.(publication), refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { events.push("camera:reset"); Object.assign(publication, value); return state(); }, state, sharedState: () => ({ distanceKilometers: 12345, pose: { schema: "cssearth-camera-pose@2", scene: matrix } }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...overrides,
     });
     const { worldContext, viewport, framePresenter, cameraMotion } = orbitFixture(null).arguments;
-    runtime = mount(stage, { worldContext, viewport, framePresenter, cameraMotion, diagnostics, inputSurface: stage, runtimePolicy,
+    runtime = mount(stage, { worldContext, viewport, framePresenter, cameraMotion, diagnostics, initialWorldCamera: options.initialWorldCamera, inputSurface: stage, runtimePolicy,
       capabilities: fixtureObjectCapabilities,
       onError: error => errors.push(error) });
   } catch (error) { f.restore(); throw error; }
@@ -138,6 +138,13 @@ test("one mount owns the actual prepared tree, startup, celestial layers, readin
   h.runtime.destroy(); assert.equal(h.native.cancels, 1); assert.equal(h.stage.children.length, 0);
   assert.deepEqual(h.events.slice(-4).filter(value => value.startsWith("remove:")), ["remove:orbit", "remove:camera"]);
   assert.deepEqual(h.errors, []);
+});
+for (const suppliedCamera of [false, true]) test(`initial lens publication respects camera ownership: supplied=${suppliedCamera}`, async t => {
+  const h = harness({ definition: earthDefinition, initialWorldCamera: suppliedCamera ? objectView(earthDefinition).worldCamera : undefined }); t.after(h.restore);
+  await h.complete();
+  assert.equal(h.events.includes("camera:reset"), !suppliedCamera, "Only default startup may frame its lens");
+  assert.deepEqual(h.flights, []);
+  assert.equal(h.selection().stats().commits, 1);
 });
 test("production mount restores camera and native playback through its shared view contract", async t => {
   const h = harness(); t.after(h.restore); await h.complete();

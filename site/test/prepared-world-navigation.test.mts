@@ -97,7 +97,7 @@ test('scene selection and cross-object flight use the prepared photographic face
   const handoff = await drainFrames(f, { task: f.start() });
   const mount = f.mounted();
   handoff.mountOptions.onNavigationReady?.(mount.navigation);
-  await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+  await drainFrames(f, { task: handoff.afterMount(mount) });
   const arrived = presentWorldCamera(mount.navigation.capture(), frame, optics);
   arrived.rotation.forEach((value, index) => assert.ok(Math.abs(value - photographicArrival.rotation[index]) < 1e-12));
   assert.ok(required(arrived.centerPixels).every(value => Math.abs(value) < 1e-6));
@@ -116,7 +116,7 @@ test('saved views and explicit non-photographic datasets keep their requested di
     const handoff = await drainFrames(f, { task: f.start({ url }) });
     const mount = f.mounted();
     handoff.mountOptions.onNavigationReady?.(mount.navigation);
-    await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+    await drainFrames(f, { task: handoff.afterMount(mount) });
     closePose(mount.navigation.capture().pose, target.pose);
   }
 });
@@ -130,7 +130,7 @@ test('a prepared photographic angle never rotates a system overview or an explic
   const handoff = await drainFrames(f, { task: f.start({ targetWorldCamera: target }) });
   const mount = f.mounted();
   handoff.mountOptions.onNavigationReady?.(mount.navigation);
-  await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+  await drainFrames(f, { task: handoff.afterMount(mount) });
   closePose(mount.navigation.capture().pose, target.pose);
 });
 
@@ -262,7 +262,7 @@ test('an overview starts moving before factory and assets are ready, then holds 
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   const handoff = await task;
   assert.deepEqual(handoff.mountOptions.initialWorldCamera, checkpoint);
-  await drainFrames(f, { task: handoff.afterMount(f.mounted(), { signal: f.controller.signal }) });
+  await drainFrames(f, { task: handoff.afterMount(f.mounted()) });
   assert.deepEqual(phases, ['first-motion', 'assets-ready', 'mounted']);
   assertContinuousPaints(f.paints, [f.navigation.frame, f.factory.navigation.frame]);
 });
@@ -283,7 +283,7 @@ test('overview preserves the latest drawn camera through slow preparation, witho
   const scene = new AbortController();
   handoff.transferTo(scene.signal);
   const paints = f.paints.length;
-  await handoff.afterMount(f.mounted(), { signal: f.controller.signal });
+  await handoff.afterMount(f.mounted());
   assert.equal(f.paints.length, paints, 'Handoff does not write an animated or recentered pose');
   f.controller.abort();
   assert.equal(f.resources.destroyed, 0, 'The mounted scene owns its resources');
@@ -302,7 +302,7 @@ test('an animated handoff transfers prepared cleanup to the scene and detaches r
   const f = fixtureFactory(), scene = new AbortController();
   const handoff = await drainFrames(f, { task: f.start() });
   handoff.transferTo(scene.signal);
-  await drainFrames(f, { task: handoff.afterMount(f.mounted(), { signal: scene.signal }) });
+  await drainFrames(f, { task: handoff.afterMount(f.mounted()) });
   assert.equal(getEventListeners(f.controller.signal, 'abort').length, 0);
   f.controller.abort(); assert.equal(f.resources.destroyed, 0);
   scene.abort(); assert.equal(f.resources.destroyed, 1);
@@ -316,7 +316,7 @@ test('overview handoff uses the requested distant camera instead of flying into 
   } };
   const task = f.start({ targetWorldCamera });
   const handoff = await drainFrames(f, { task });
-  await drainFrames(f, { task: handoff.afterMount(f.mounted(), { signal: f.controller.signal }) });
+  await drainFrames(f, { task: handoff.afterMount(f.mounted()) });
   closePose(f.navigation.capture().pose, targetWorldCamera.pose);
   assertContinuousPaints(f.paints, [f.navigation.frame, f.factory.navigation.frame]);
 });
@@ -342,7 +342,7 @@ test('ordinary planet selection clears a prepared catalogue pivot for both same-
     assert.equal(f.navigation.preparedFocus(), null);
     assert.equal(f.navigation.capture(), before, 'Clearing the input pivot cannot move the existing observer');
     const result = await drainFrames<void | WorldHandoff>(f, { task });
-    if (!sameOwner) { assert.ok(result); await result.afterMount(f.mounted(), { signal: f.controller.signal }); }
+    if (!sameOwner) { assert.ok(result); await result.afterMount(f.mounted()); }
     f.controller.abort();
   }
 });
@@ -393,7 +393,7 @@ test('handoff precedes large destination approach and continues the same numeric
     if (range(sampleSelectionFlight(flight, middle), flight.focusPositionM) > checkpointRange) low = middle; else high = middle;
   }
   closePose(checkpoint.pose, sampleSelectionFlight(flight, high));
-  const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
+  const continuation = handoff.afterMount(f.mounted());
   assert.deepEqual(required(f.paints.at(-1)), checkpoint);
   f.step(); assert.deepEqual(required(f.paints.at(-1)), checkpoint);
   f.step(400);
@@ -424,7 +424,7 @@ test('slow asset preparation holds only the distant checkpoint and resumes after
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   const handoff = await task;
   assert.deepEqual(handoff.mountOptions.initialWorldCamera, checkpoint);
-  const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
+  const continuation = handoff.afterMount(f.mounted());
   f.step(5000); assert.deepEqual(required(f.paints.at(-1)), checkpoint);
   await drainFrames(f, { task: continuation });
 });
@@ -486,7 +486,7 @@ test('input during a delayed preparation interrupts at the last drawn checkpoint
 test('input after the early handoff hurries between bodies, then preserves the drawn approach pose', async () => {
   const f = fixtureFactory(), task = f.start();
   f.tick(0); f.tick(5000); const handoff = await drainFrames(f, { task });
-  const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
+  const continuation = handoff.afterMount(f.mounted());
   f.step(); f.step(400);
   assert.equal(f.input().defaultPrevented, true, 'A click between bodies cannot strand the camera there');
   // The fixture target (1 km radius, 1000 px focal) outgrows its 14 px proxy inside 143 km.
@@ -511,7 +511,7 @@ test('reduced motion waits for preparation, then mounts the exact arrival withou
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   const handoff = await task;
   assert.deepEqual(handoff.mountOptions.initialWorldCamera, target);
-  await handoff.afterMount(f.mounted(), { signal: f.controller.signal });
+  await handoff.afterMount(f.mounted());
   assert.equal(f.paints.length, 1);
   assert.equal(f.pending, 0);
 });
@@ -525,7 +525,7 @@ test('saved camera endpoints survive the early owner handoff unchanged', async (
   const task = f.start({ url: `https://example.test/1/?${formatSharedView(saved)}` });
   f.tick(0); f.tick(5000); const handoff = await drainFrames(f, { task });
   assert.notDeepEqual(handoff.mountOptions.initialWorldCamera, target);
-  const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
+  const continuation = handoff.afterMount(f.mounted());
   f.step(); await drainFrames(f, { task: continuation });
   closePose(f.navigation.capture().pose, target.pose);
 });
@@ -558,18 +558,20 @@ test('the application keeps flying while destination groups activate, then trans
   for (let i=0; i<12; i++) f.step();
   assert.deepEqual(mount.navigation.capture(), context.at(-1), 'The incoming camera tracks the live world before full readiness');
   const incoming = mount.navigation.capture(), count = context.length;
-  const finished = handoff.afterMount(mount, {signal:f.controller.signal});
+  const finished = handoff.afterMount(mount);
   assert.deepEqual(mount.navigation.capture(), incoming, 'Full readiness does not reset to the initial checkpoint');
   await drainFrames(f, {task:finished});
   assert.equal(context.length,count, 'The mounted owner takes over publication without duplicate universe writes');
   assert.equal(f.pending,0);
 });
 
-test('cancellation during connected activation stops the application flight and releases its resources', async () => {
+test('session cancellation during activation stops the flight before afterMount and releases its resources', async () => {
   const f = fixtureFactory(), context=[];
   const handoff = await drainFrames(f,{task:f.start({presentWorld:(world, _viewport, options) => { options?.commit?.(); context.push(world); }})});
+  const scene = new AbortController();
+  handoff.transferTo(scene.signal);
   f.step(); const count=context.length;
-  f.controller.abort(); f.step();
+  scene.abort(); f.step();
   assert.equal(context.length,count);
   assert.equal(f.pending,0);
   assert.equal(f.resources.destroyed,1);
@@ -641,7 +643,7 @@ test('replacement departure uses the retained world while its previous detail ow
   const target = createWorldSelectionTarget(drawn, f.navigation.frame, f.navigation.optics());
   const mount = { ...lifecycle, navigation: f.navigation };
   required(nextHandoff.mountOptions.onNavigationReady)(mount.navigation);
-  await drainFrames(f, { task: nextHandoff.afterMount(mount, { signal: replacement.signal }) });
+  await drainFrames(f, { task: nextHandoff.afterMount(mount) });
   closePose(f.navigation.capture().pose, target.pose);
   assert.equal(f.pending, 0);
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
@@ -668,7 +670,7 @@ test('centering changes the focus at the same range and orientation, then focus 
   const handoff = await drainFrames(f, { task: f.start({ targetWorldCamera: target, centerSelection: true }) });
   const mount = f.mounted();
   handoff.mountOptions.onNavigationReady?.(mount.navigation);
-  await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+  await drainFrames(f, { task: handoff.afterMount(mount) });
   const projection = presentWorldCamera(mount.navigation.capture(), mount.navigation.frame, mount.navigation.optics());
   required(projection.centerPixels).forEach(value => assert.ok(Math.abs(value) < 1e-6));
   assert.ok(Math.abs(projection.distanceM / 2e8 - 1) < 1e-12);
@@ -705,7 +707,7 @@ test('a wheel, click or key between bodies hurries a prepared navigation to the 
     if (hurried) assert.equal(f[hurried]().defaultPrevented, true, `The navigation keeps the ${hurried} from moving the camera mid-flight`);
     const handoff = await drainFrames(f, { task });
     required(handoff.mountOptions.onNavigationReady)(f.mounted().navigation);
-    await drainFrames(f, { task: handoff.afterMount({ ...lifecycle, navigation: f.navigation }, { signal: f.controller.signal }) });
+    await drainFrames(f, { task: handoff.afterMount({ ...lifecycle, navigation: f.navigation }) });
     assert.equal(f.pending, 0);
     for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
     return { frames: context.length + f.paints.length, pose: f.navigation.capture().pose };
