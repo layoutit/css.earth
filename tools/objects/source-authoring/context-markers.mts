@@ -4,6 +4,8 @@
  *
  * - a star: the photosphere colour of its colour lens, dimmed toward the limb by the lens's limb-darkening law (a uniform disc
  *   when it has none);
+ * - a planet whose default lens is one colour (the neutral gray under its host's light, the black-body colour of its measured day side,
+ *   or the false colour of its band photometry): a uniform disc of that colour, as the lens draws the sphere;
  * - a body whose default lens is a map (a hosted planet, or a brown dwarf with a surface map): that map in an orthographic view
  *   centred on longitude 0 (a hosted planet's substellar point, as seen from its star), north up and east to the right, in the
  *   lens's palette and range, with any borders the lens draws.
@@ -17,7 +19,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { linearToSrgb } from '../color-transfer.mts';
+import { hostLitGray, linearToSrgb } from '../color-transfer.mts';
+import { loadDiscBandColor } from '../observation/disc-band-color.mts';
 import { loadStellarPhotometricColor, quadraticIntensity } from '../observation/stellar/stellar-photometric-color.mts';
 import { colorForValue, loadScienceSurface } from '../terrestrial-layers/scientific-raster.mts';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
@@ -83,10 +86,21 @@ export async function planetMarker(id: string) {
   });
 }
 
-/** A body whose default lens is a photosphere colour is drawn as a star; a body whose default lens is a map (a hosted planet, or a
- * brown dwarf with a surface map) is drawn as that map. */
+/** The one colour a flat planet lens paints the sphere with, read the way interpret.mts reads it; undefined for a map lens. */
+async function flatLensColor(id: string, science: Record<string, unknown>, surfaceSource: string): Promise<readonly [number, number, number] | undefined> {
+  const source = resolve(objects, id, 'source'), read = (path: string) => readFile(resolve(source, path));
+  if (science.kind === 'neutral-shape') return science.hostLight === undefined ? [128, 128, 128] : hostLitGray(requireString(requireRecord(science.hostLight).srgb, `${id} hostLight.srgb`));
+  if (science.kind === 'dayside-thermal-color') return (await loadStellarPhotometricColor(read, science, surfaceSource)).color.srgb;
+  if (science.kind === 'disc-integrated-band-color') return (await loadDiscBandColor(read, surfaceSource)).srgb;
+  return undefined;
+}
+
+/** A body whose default lens is a photosphere colour is drawn as a star; a planet whose lens is one colour as a disc of it; a body
+ * whose default lens is a map (a hosted planet, or a brown dwarf with a surface map) as that map. */
 async function markerFor(id: string) {
-  const { science } = await defaultSurface(id);
+  const { science, source } = await defaultSurface(id);
+  const flat = await flatLensColor(id, science, source);
+  if (flat) return disc(() => flat);
   // A colour lens without a limb-darkening law (none measured) is drawn as the uniform disc it is on the sphere.
   return science.kind === 'stellar-photometric-color' ? starMarker(id, { requireLimbDarkening: science.limbDarkening !== undefined }) : planetMarker(id);
 }

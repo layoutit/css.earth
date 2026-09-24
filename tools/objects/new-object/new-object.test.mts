@@ -171,11 +171,12 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   const cited = { value: 1, source: 's', url: star.paper.url };
   const thermal = { temperatureK: 1400, uncertaintyK: 80, wavelengthMicrometres: 4.5, facility: 'Spitzer IRAC', source: 'Kammer et al. 2018, dayside brightness temperature at 4.5 µm', url: 'https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract', chosen: '1 measured of 1 rows' };
   const build = async (extra: Record<string, unknown>) => {
-    const spec = parseStarSpec({ ...star, planets: [{ id: 'hd-219134b', name: 'HD 219134 b', description: 'A planet.', paper: star.paper, radius: cited, mass: cited, orbit: { elements: { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000 }, source: 's', url: star.paper.url }, ...extra }] }).planets[0]!;
+    const spec = parseStarSpec({ ...star, planets: [{ id: 'hd-219134b', name: 'HD 219134 b', description: 'A planet.', text: { card: 'A planet.', introduction: 'A planet made from fixtures.', locator: 'fixture' }, paper: star.paper, radius: cited, mass: cited, orbit: { elements: { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000 }, source: 's', url: star.paper.url }, ...extra }] }).planets[0]!;
     const body = { id: spec.id, classification: 'exoplanet', order: 2, physical: { name: spec.name, horizonsCode: null, meanRadiusKm: 71492, gravitationalParameterKm3PerS2: 126686531.9, parent: 'hd-219134' }, physicalNotes: 'n', hostedOrbit: orbit };
     const record = { spec, hostId: 'hd-219134', system: 'HD 219134 system', body, order: 2, orbit, orbitCitation: { text: 's', url: star.paper.url, label: 's' }, radius: cited, mass: cited, documents: new Map<string, string>(), todo: [] };
     const { files } = await hostedPackage(record, host, new Map([[star.paper.url, paper]]), archive, root, 2460000);
     const text = JSON.parse(String(files.get('src/objects/hd-219134b/text.json'))), content = JSON.parse(String(files.get('src/objects/hd-219134b/source/content/object.json')));
+    assertWholePackage(files, 'hd-219134b', true);
     return { datasets: Object.keys(text.datasets), notes: String(content.lenses.controls[0].notes), lens: String(content.lenses.controls[0].id) };
   };
   const glow = await build({ thermal });
@@ -207,6 +208,8 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
     `HD 1 c,HD 1,1,${ref('Two et al. 2020', '2020AJ....1....2T')},${ref('Two et al. 2020', '2020AJ....1....2T')},0.8,0.02,5000,50,0.85,0.03,20.5,2020,Transit,1,c,HD 1,,Gaia DR3 123456789,0,1`,
     `HD 1 b,HD 1,1,${ref('One et al. 2019', '2019AJ....1....1O')},${ref('One et al. 2019', '2019AJ....1....1O')},0.8,0.02,5000,50,0.85,0.03,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789,0,1`,
     `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789,0,1`].join('\n');
+  // GJ 436's case: the default row leaves the stellar temperature empty and another paper's row gives it.
+  const gapped = stars.replaceAll(',5000,50,', ',,,').replace(',5000,,', ',,,') + `\nHD 1 b,HD 1,0,${ref('Four et al. 2022', '2022AJ....1....4F')},${ref('Four et al. 2022', '2022AJ....1....4F')},0.81,,5010,40,0.86,,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789,0,1`;
   const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim',
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
@@ -234,6 +237,11 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.equal(held.spec.host, 'hd-1b-host');
   assert.deepEqual((held.spec.planets as { id: string }[]).map(planet => planet.id), ['hd-1b-host-b', 'hd-1b-host-c']);
   assert.match(planets[0]!.text.card, /^HD 1 b crosses its star every 3 days/u);
+  const filled = await archiveSpec({ ...archive, async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? gapped : archive.text(url); } }, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
+  const temperature = filled.spec.temperature as { value: number; uncertainty: number; source: string };
+  assert.deepEqual([temperature.value, temperature.uncertainty], [5010, 40], 'from the other row, with its own uncertainty');
+  assert.match(temperature.source, /Four et al\. 2022.*the default leaves it empty/u);
+  assert.equal((filled.spec.radius as { value: number }).value, 0.8, 'the default row still gives the radius');
 });
 
 test('ids follow one rule, and a body the universe holds is found whatever its id', async () => {
@@ -324,4 +332,35 @@ test('a hosted body\'s package is written after phase one wrote its astronomy re
     assert.equal(await read(resolve(dir, 'src/objects/x-b/README.md'), 'utf8'), '# X b\n');
     await assert.rejects(writePackageFiles(new Map([['src/objects/x-b/README.md', 'again']]), 'x-b', dir), /never overwrites a package/u, 'an existing package still is');
   } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+/** What the bake will ask of any package the generator writes: every file the manifest declares exists (the marker is drawn after
+ * writing), every file under source/ is declared, every input is bound, and a drafted package carries no TODO. */
+function assertWholePackage(files: ReadonlyMap<string, string | Buffer>, id: string, drafted: boolean) {
+  const o = `src/objects/${id}`, manifest = JSON.parse(String(files.get(`${o}/source/manifest.json`)));
+  const declared = [...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates ?? []].map((entry: { path: string }) => entry.path);
+  for (const path of declared) if (path !== 'presentation/context.png') assert.ok(files.has(`${o}/source/${path}`), `${id}: the manifest declares ${path}, which the package does not hold`);
+  for (const path of files.keys()) if (path.startsWith(`${o}/source/`) && !path.endsWith('manifest.json')) assert.ok(declared.includes(path.slice(`${o}/source/`.length)), `${id}: ${path} is not declared in the manifest`);
+  for (const input of manifest.inputs) assert.ok(input.sourceBinding, `${id}: input ${input.id} has no source binding`);
+  if (drafted) for (const [path, value] of files) if (path.startsWith(o) && typeof value === 'string') assert.doesNotMatch(value, /TODO\(new-object\)/u, `${id}: ${path} keeps a TODO`);
+}
+
+test('a whole star package from fixtures is what the bake accepts: declared files, bound inputs, no TODO, a stored spec that reads back', async () => {
+  const { generateStar } = await import('./generate.mts');
+  const { STORED_SPEC } = await import('./refresh.mts');
+  const gaia = '2009481748875806976';
+  const row = ['source_id,ref_epoch,ra,dec,parallax,parallax_error,pmra,pmdec,radial_velocity,radial_velocity_error,ruwe,phot_g_mean_mag,bp_rp,has_xp_sampled,mass_flame,mass_flame_lower,mass_flame_upper,radius_flame,radius_flame_lower,radius_flame_upper',
+    `${gaia},2016.0,348.3,57.17,153.08,0.02,2074.4,294.9,-18.5,0.2,1.0,5.2,0.99,false,0.8,0.78,0.82,0.78,0.77,0.79`].join('\n');
+  const arxiv = '<feed><entry><title>A paper</title><published>2022-01-01T00:00:00Z</published><author><name>A Author</name></author></entry></feed>';
+  const archive: Archive = {
+    async text(url) { if (url.includes('gea.esac.esa.int/tap')) return row; if (url.includes('export.arxiv.org')) return arxiv; if (url.includes('asu-tsv')) return '#\n'; throw new Error(`unexpected ${url}`); },
+    async bytes(url) { if (url.includes('III/126')) return gzipSync(''); return Buffer.from(''); }, async exists() { return false; } };
+  const spec = parseStarSpec({ ...star, id: 'test-fixture-star', name: 'Test Fixture Star', gaia, target: undefined, limb: { none: 'a test fixture' },
+    text: { card: 'A test star.', introduction: 'A test star made from fixtures.', locator: 'fixture' } });
+  const generated = await generateStar(spec, { archive, root, order: 9999, universe: { ids: new Set(), names: new Map(), stars: [] },
+    resolver: async () => ({ mainId: 'Test Fixture Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
+  assert.equal(generated.color.route, 'planck', 'no archive spectrum in the fixtures, so the Planck route');
+  assertWholePackage(generated.files, spec.id, true);
+  const stored = parseObjectSpecs({ stars: [JSON.parse(String(generated.files.get(`src/objects/${spec.id}/${STORED_SPEC}`)))] }).stars[0]!;
+  assert.deepEqual(stored, { ...spec, order: 9999 }, 'the stored spec reads back to the spec that made the package');
 });
