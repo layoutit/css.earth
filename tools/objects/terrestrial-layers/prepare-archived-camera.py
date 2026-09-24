@@ -180,6 +180,9 @@ def main():
     paths=[args.profile,profile['image'],*profile['kernels'],*profile['references'],profile['mesh']]
     pins={e['path']:e for e in manifest['inputs']};provenance=[]
     for path in paths:
+        # A cited paper or archive document is named by its URL and recorded as cited; package files are checked against their pins.
+        if path.startswith('https://'):
+            provenance.append(dict(url=path));continue
         expected=pins[path]
         # A download is verified against its manifest pin; a file authored here is its own record.
         if 'expectedSha256' in expected and (digest(source/path)!=expected['expectedSha256'] or (source/path).stat().st_size!=expected['expectedBytes']):

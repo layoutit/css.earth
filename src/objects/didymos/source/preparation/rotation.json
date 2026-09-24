@@ -6,6 +6,6 @@
   "displayMeridianDegrees": 0,
   "phase": "arbitrary-display-phase",
   "coordinateSystem": "Didymos v003 source shape: east-positive longitude, +Z spin pole, kilometers; coordinate document Table 2",
-  "source": "reference/didymos_coordinate_system_description_v1.pdf, Table 2; source-bound pole and rotation period, no current phase ephemeris",
+  "source": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-dart:document_draco-v3.0/didymos_coordinate_system_description_v1.pdf, Table 2; source-bound pole and rotation period, no current phase ephemeris",
   "qualification": "The 2022 shape pole is retained; the display prime meridian is arbitrary. Lighting is a prepared display orientation, not an asserted current surface phase."
 }

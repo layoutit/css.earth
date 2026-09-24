@@ -16,6 +16,195 @@
       ],
       "path": "features/OBERON_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/OBERON_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2657840_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657840_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2657852_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657852_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2657858_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657858_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2666510_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666510_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2666522_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666522_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2666528_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666528_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2672319_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672319_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2672331_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672331_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2672337_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672337_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2676027_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676027_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2676039_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676039_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2676045_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676045_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c2678717.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/008228a54a7828e188b8b484a8361ff6d8793687dfd2ef24fe4bf5c8016dca7e/c2678717.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2678717_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678717_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2678729_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678729_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2678735_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678735_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2690421_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690421_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c2678729.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/f793e972acdf9b2b8643bb8f42ca0e272699b606b366ce0266f91004368cc3a8/c2678729.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2690433_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690433_GEOMED.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager-color/c2678735.equi.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/8dfa6ca542c42bf56ff9d0f19a43ba19b91974906ac4d790432d3faed841a0de/c2678735.equi.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/voyager/C2690439_GEOMED.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690439_GEOMED.IMG"
     }
   ]
 }
