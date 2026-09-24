@@ -13,6 +13,7 @@ interface FramingCandidate { originM?: PositionM; minimumM: PositionM; maximumM:
 interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
+import lensVolumes from './prepared-lens-volumes.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
@@ -70,6 +71,8 @@ export function loadSystemViews(read?: () => Promise<unknown>): Promise<void> {
 /** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
 export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
+/** Volumes a body shows through one of its lenses, by volume id (tools/prepare/prepare-catalog.mts). */
+export const LENS_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Object.entries(lensVolumes).map(([id, frame]) => [id, parseDensityVolumeFrame(frame)]));
 
 /** Fit the volume along the current viewing ray, keeping its anchor and orientation. */
 export function volumeZoomTarget(from: WorldCameraPose, volume: DensityVolumeFrame, optics: Optics, rect: MapViewport, referencePositionM: PositionM) {
