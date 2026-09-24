@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { sha256File } from '../../../src/platform/sha256.mts';
 /** Install and locate the pinned interferometry toolchains of toolchains.json under output/toolchains/<id> (ignored by git).
  *
  *   node tools/objects/interferometry/toolchain.mts install <squeeze|rotir|pionier|amber|gravity|matisse> [--cache <dir> ...]
@@ -13,7 +14,7 @@
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { access, copyFile, link, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { createReadStream, createWriteStream } from 'node:fs';
+import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
@@ -25,10 +26,7 @@ const DESCRIPTOR = resolve(import.meta.dirname, 'toolchains.json');
 export const TOOLCHAIN_ROOT = resolve(repository, 'output/toolchains');
 
 const exists = (path: string) => access(path).then(() => true, () => false);
-const sha256File = (path: string) => new Promise<string>((done, fail) => {
-  const hash = createHash('sha256');
-  createReadStream(path).on('data', chunk => hash.update(chunk)).on('error', fail).on('end', () => done(hash.digest('hex')));
-});
+
 
 export async function toolchainDescriptor(id: string) {
   const text = await readFile(DESCRIPTOR, 'utf8');
@@ -45,7 +43,7 @@ function run(command: string, args: readonly string[], options: { cwd: string; e
 
 async function fetchDownload(record: Record<string, unknown>, directory: string, caches: readonly string[]) {
   const name = requireString(record.path), sha256 = requireString(record.sha256), bytes = requireFiniteNumber(record.bytes), target = resolve(directory, name);
-  const good = async (path: string) => await exists(path) && await sha256File(path) === sha256;
+  const good = async (path: string) => await exists(path) && (await sha256File(path)).sha256 === sha256;
   if (await good(target)) return target;
   for (const cache of caches) {
     const candidate = resolve(cache, name);

@@ -1,10 +1,11 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const day=86400000, radians=Math.PI/180;
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((sum,n,i)=>sum+n*b[i],0);
-const cross=(a:readonly number[],b:readonly number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+
 const unit=(a:readonly number[])=>a.map(n=>n/Math.hypot(...a));
 const direction=(ra:number,dec:number)=>[Math.cos(dec*radians)*Math.cos(ra*radians),Math.cos(dec*radians)*Math.sin(ra*radians),Math.sin(dec*radians)];
 function rotate(v:readonly number[],axis:readonly number[],angle:number) {

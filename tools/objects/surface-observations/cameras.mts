@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /** Camera providers. Each turns what an archive or a kernel set gives into the one ObservationCamera contract. */
 import type { ObservationCamera } from './contract.mts';
 import { parseArchivedCamera } from '../terrestrial-layers/source-records.mts';
@@ -5,7 +6,7 @@ import { fitCamera, project } from '../terrestrial-layers/osiris-geo.mts';
 
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
 const unit = (a: readonly number[]) => { const n = Math.hypot(...a); return a.map(v => v / n); };
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 const median = (values: readonly number[]) => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
 
 /** Lens distortion between pinhole and detector pixels, such as a FITS TAN-SIP solution. Points are kilometres. */

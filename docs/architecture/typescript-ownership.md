@@ -14,11 +14,9 @@ Test directories and capture filenames do not exempt authored code. Data fixture
 - Three preserved Cesium modules with their upstream provenance.
 - The telescope Node launcher, which selects a runtime before importing TypeScript.
 
-The shell title, icon, overview-title and wordmark data modules are ignored build
-products, like the navigation-marker module. `pnpm prepare:shell` restores the
-configured Inter font when missing, prepares the object catalogue, then replays
-the four generators. The source vectors, font recipe and generators remain
-committed. Installation, development, builds, asset setup and the root test command
+The shell title and icon data modules are ignored build products, like the
+navigation-marker module. `pnpm prepare:shell` prepares the object catalogue, then
+replays both generators. The source vectors and generators remain committed. Installation, development, builds, asset setup and the root test command
 run this preparation before consuming the modules.
 
 Astro and ESLint use `.mts` configuration entry points, checked by

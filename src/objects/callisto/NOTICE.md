@@ -10,7 +10,6 @@
   coverage cutoff; no new radiometric calibration is claimed. The source camera
   review uses NASA/JPL/USGS monochrome mapping and IAU/USGS Gazetteer positions
   only as registration evidence, never as replacement color texture.
-- Title outlines: Inter by Rasmus Andersson, SIL Open Font License 1.1.
 - Physical and orbital context: NASA/JPL and IAU/WGCCRE through the project's
   vendored astronomy package. See that package's provenance and notices.
 

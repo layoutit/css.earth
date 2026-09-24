@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../platform/vector3.mts';
 import type { OrbitalState, PreparedWorldContext, Vector3 } from './spatial-context.js';
 
 export interface PreparedSystemView {
@@ -118,9 +119,7 @@ function bakeView(parent: ViewParent, frames: readonly CandidateFrame[], members
 }
 
 function dot(a: Vector3, b: Vector3): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
-function cross(a: Vector3, b: Vector3): Vector3 {
-  return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-}
+
 function unit(vector: Vector3): Vector3 {
   const length = Math.hypot(...vector);
   if (!(length > 0)) throw new TypeError('System view needs a defined orbital plane.');

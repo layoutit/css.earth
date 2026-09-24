@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../platform/vector3.mts';
 import { createSelectionFlight, createSelectionFlightSample, sampleSelectionFlightInto } from '@cssearth/engine';
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
 import type { PreparedCamera } from './prepared-camera.js';
@@ -88,7 +89,6 @@ export function sightlineOrientation(positionM: PositionM, up: PositionM = [0, 0
   return worldQuaternionFromRotation([0, 1, 2].flatMap(row => [0, 1, 2].map(column =>
     axes[row * 3]! * turn[column]! + axes[row * 3 + 1]! * turn[3 + column]! + axes[row * 3 + 2]! * turn[6 + column]!)));
 }
-function cross(a: PositionM, b: PositionM): PositionM { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
 function normalize(a: PositionM): PositionM { return scaleWorldPosition(a, 1 / Math.hypot(...a)); }
 function add(a: PositionM, b: PositionM): PositionM { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
 function subtract(a: PositionM, b: PositionM): PositionM { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }

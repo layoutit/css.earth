@@ -12,5 +12,3 @@ SIMBAD; radial velocity from the General Catalogue of Stellar Radial Velocities 
 diameter, stellar mass, effective temperature and convective cell size from Vlemmings et al. (2024); the infrared diameter
 from Ohnaka et al. (2019, *ApJ* 883, 89); the 1.25 micrometre uniform disc from Bedding et al. (1997, *MNRAS* 286, 957)
 through the JMMC JMDC. SIMBAD and VizieR are operated at CDS, Strasbourg.
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

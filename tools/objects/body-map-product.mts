@@ -1,3 +1,4 @@
+import { canonical } from '../../src/platform/canonical-value.mts';
 /** What a map of a measurement on a body means, carried beside the map.
  *
  * Three telescopes already put a measurement on a body through the same projection (jwst/cubes/body-map.mts): a JWST band
@@ -89,9 +90,7 @@ export interface CombinationPolicy {
   readonly resolution: { readonly rule: 'within-factor'; readonly factor: number } | { readonly rule: 'as-observed' };
 }
 
-const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical)
-  : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([key, entry]) => [key, canonical(entry)]))
-  : value;
+
 
 /** The identity of a measurement definition. The citation is left out; everything that fixes the number is in. */
 export const definitionDigest = (definition: MeasurementDefinition): string =>

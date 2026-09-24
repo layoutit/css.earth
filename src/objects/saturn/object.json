@@ -10,7 +10,6 @@
       "label": "Saturn",
       "steps": [
         "verify-sources",
-        "title",
         "assets",
         "starfield",
         "scene",
@@ -29,10 +28,6 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json"
-        },
-        {
-          "id": "title",
-          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "content",

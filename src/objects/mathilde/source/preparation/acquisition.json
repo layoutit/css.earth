@@ -43,18 +43,6 @@
         "restore",
         "refresh"
       ],
-      "path": "presentation/InterVariable.ttf",
-      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "headers": {
-        "User-Agent": "curl/8.7.1"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/253mathimg.tab",
       "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.tab",
       "headers": {

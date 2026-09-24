@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "eps-indi-ba",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Epsilon Indi Ba",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 55656
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/eps-indi-ba-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Epsilon Indi Ba",
+      "classification": "star",
+      "color": "#ff5f00",
+      "distanceAu": 750390.9,
+      "description": "A brown dwarf of 67 Jupiter masses, one of a pair orbiting far out around the nearby star Epsilon Indi A.",
+      "systemName": "Epsilon Indi system",
+      "order": 1772,
+      "context": {
+        "order": 1769
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        53810036662532740,
+        -29707136863616970,
+        -93933883785242660
+      ],
+      "presentationToReference": [
+        0.4794422453280987,
+        -0.7323394499000511,
+        -0.483543238516311,
+        -0.26468777565276275,
+        0.40466588036539836,
+        -0.8753204594250554,
+        -0.8367051540505438,
+        -0.547653590683187,
+        -0.00017261827324597178
+      ],
+      "orbitUpReference": [
+        0.7323394499000511,
+        -0.40466588036539836,
+        0.547653590683187
+      ],
+      "metersPerUnit": 179535.48387096773,
+      "bodyRadiusM": 55656000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

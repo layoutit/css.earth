@@ -28,6 +28,7 @@
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { firstSkyPosition } from '../archive-sky-position.mts';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { mastRequest } from '../astronomy-packages/mast.mts';
 import { evidenceFor, parseProductRecord, runDigest, type ProductRecord } from '../product-record.mts';
@@ -138,14 +139,6 @@ export function matchTarget(target: string, objects: readonly ShippedObject[]): 
 
 const readJson = async (path: string): Promise<unknown> =>
   JSON.parse(await readFile(path, 'utf8').catch(error => { if (hasErrorCode(error, 'ENOENT')) return 'null'; throw error; }));
-const firstSkyPosition = (value: unknown): { raDeg: number; decDeg: number } | undefined => {
-  if (Array.isArray(value)) { for (const item of value) { const found = firstSkyPosition(item); if (found) return found; } return undefined; }
-  if (!isRecord(value)) return undefined;
-  if (typeof value.raDeg === 'number' && typeof value.decDeg === 'number') return { raDeg: value.raDeg, decDeg: value.decDeg };
-  for (const item of Object.values(value)) { const found = firstSkyPosition(item); if (found) return found; }
-  return undefined;
-};
-
 /** Every object package, with the names a proposer might have used and, for what does not move, where it is on the sky: a star
  * within half an arcminute, a nebula within a sixth of a degree of the centre its own recipe records. */
 export async function shippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {

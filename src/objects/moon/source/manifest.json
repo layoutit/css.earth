@@ -99,31 +99,6 @@
       }
     },
     {
-      "id": "moon-title-mark",
-      "path": "presentation/title-mark.json",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "deterministically generated Moon title path from the repository-pinned Inter font",
-      "redistribution": "generated outline under the Inter license",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "lro-lola-ldem16-numeric",
       "path": "science/ldem_16.img",
       "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",

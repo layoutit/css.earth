@@ -1,3 +1,4 @@
+import { safeRelativePath } from '../platform/source-path.mts';
 import { sha256 } from '../platform/sha256.mts';
 import { isArray } from '../platform/is-array.mts';
 /** A pin identifies bytes git does not hold; a marker image authored in this repository carries none. */
@@ -14,7 +15,6 @@ export type MarkerOperation =
   | { type: "ellipse-mask"; cx: number; cy: number; rx: number; ry: number; shading?: { ambient: number; diffuse: number } };
 export interface MarkerDescriptor { presentation?: unknown; schema: string; objectId: string; owner: string; source: MarkerSource; operations: readonly MarkerOperation[]; context?: { pixels: number }; }
 import { readFile } from "node:fs/promises";
-import { posix, win32 } from "node:path";
 
 import sharp from "sharp";
 import { blackFillCoverage, paintMissingCoverage } from "../platform/prepare-missing-coverage.mts";
@@ -181,12 +181,6 @@ function validateOperation(operation: MarkerOperation) {
        operation.shading.ambient + operation.shading.diffuse > 1)) {
     throw new TypeError("Navigation marker curvature shading is invalid.");
   }
-}
-
-function safeRelativePath(value: unknown) {
-  return nonEmpty(value) && !value.includes("\\") && !value.includes("\0") &&
-    !posix.isAbsolute(value) && !win32.isAbsolute(value) &&
-    posix.normalize(value) === value && value !== "." && !value.startsWith("../");
 }
 
 function nonEmpty(value: unknown): value is string {

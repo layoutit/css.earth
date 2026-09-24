@@ -1,3 +1,4 @@
+import { applyLinearTint } from '../color-transfer.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {basename} from 'node:path';
 import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
@@ -565,18 +566,6 @@ function rotateZ([x, y, z]: readonly number[], radians: number) {
 function normalizeVector(vector: readonly number[]) {
   const length = Math.hypot(...vector) || 1;
   return vector.map((component) => component / length);
-}
-
-function applyLinearTint(channel: number, factor: number) {
-  const srgb = channel / 255;
-  const linear = srgb <= 0.04045
-    ? srgb / 12.92
-    : Math.pow((srgb + 0.055) / 1.055, 2.4);
-  const lit = Math.max(0, Math.min(1, linear * factor));
-  const encoded = lit <= 0.0031308
-    ? lit * 12.92
-    : 1.055 * Math.pow(lit, 1 / 2.4) - 0.055;
-  return Math.max(0, Math.min(255, Math.round(encoded * 255)));
 }
 
 async function prepareInteriorAssets({ exterior = true, thumbnailsOnly = false } = {}) {

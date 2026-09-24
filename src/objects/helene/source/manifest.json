@@ -601,31 +601,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Prepared title outlines under the font license.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "n1687119135_1",
       "path": "observations/N1687119135_1_CALIB.IMG",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2068/data/1686940076_1687120280/N1687119135_1_CALIB.IMG",
@@ -1792,9 +1767,6 @@
     },
     {
       "path": "presentation/minimap.json"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "shape/helene_30k_plt.xml"

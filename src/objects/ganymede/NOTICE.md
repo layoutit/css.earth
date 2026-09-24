@@ -7,7 +7,7 @@ maps and replaces the documented synthesized-red sector with observed monochrome
 USGS public scientific imagery policy:
 https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits
 
-Title font: Inter by Rasmus Andersson, SIL Open Font License 1.1. Physical/orbital
+Physical/orbital
 data and rotation models retain the pinned astronomy package's JPL and
 IAU/WGCCRE attribution. Exact inputs and license evidence are in the source
 manifest. The application license does not replace these source terms.

@@ -2,31 +2,6 @@
   "schema": "cssearth-authoritative-sources@2",
   "inputs": [
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Prepared title outlines under the font license.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "pck-shape",
       "path": "shape/ellipsoid.tab",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
@@ -119,9 +94,6 @@
     },
     {
       "path": "presentation/minimap.json"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "shape/pck00011.tpc"

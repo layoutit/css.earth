@@ -1,3 +1,4 @@
+import { canonical } from '../../src/platform/canonical-value.mts';
 /** The one record every virtual telescope writes beside what it produces.
  *
  * The instruments stay different: an event list, a spectral cube, a calibrated image and a strip camera want different
@@ -48,9 +49,7 @@ export interface ProductRun {
 }
 export interface ProductRecord extends ProductRun { readonly schema: typeof PRODUCT_RECORD_SCHEMA; readonly outputs: readonly ProductOutput[]; readonly evidence: readonly ProductEvidence[] }
 
-const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical)
-  : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([key, entry]) => [key, canonical(entry)]))
-  : value;
+
 
 /** One digest for a run: key order and input order do not change it, any value does. */
 export function runDigest(run: ProductRun): string {

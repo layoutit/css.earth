@@ -1,0 +1,32 @@
+{
+ "id": "eps-indi-ba",
+ "classification": "star",
+ "order": 1772,
+ "physical": {
+  "name": "Epsilon Indi Ba",
+  "horizonsCode": null,
+  "meanRadiusKm": 55656.0,
+  "gravitationalParameterKm3PerS2": 8477826290.95,
+  "parent": null,
+  "effectiveTemperatureK": 1312
+ },
+ "physicalNotes": "A brown dwarf of spectral type T1 to T1.5. Mass 66.92 +/- 0.36 Jupiter masses, the dynamical mass of Chen et al. (2022, arXiv:2205.08077), Table 4. Temperature 1312 +/- 13 K from the SM08 hybrid evolutionary models at that mass and its luminosity (Chen et al. 2022, in their test of model atmospheres). Radius 0.080 to 0.081 solar radii from the COND03 models constrained by the dynamical system mass, King et al. (2010, A&A 510, A99; arXiv:0911.3143), in their COND03 predictions for the dynamical age range; the lower bound is drawn: 55,656 km at 695,700 km per solar radius. Model values, not a measured disc. presentationUp: no axis is measured, so the display axis is celestial north at the star.",
+ "star": {
+  "rightAscensionDegrees": 331.07645259656397,
+  "declinationDegrees": -56.79381206688221,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 3.638439,
+  "properMotionRaMasPerYear": 3987.41,
+  "properMotionDecMasPerYear": -2505.35,
+  "radialVelocityKmPerS": -40.426701,
+  "presentationUp": "display-axis",
+  "boundTo": "eps-indi-a",
+  "sources": {
+   "position": "Gaia DR3 source 6412596012146801152 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0: the light centre of the unresolved pair Ba and Bb, 402 arcsec from Epsilon Indi A, about 1,460 au in projection. Ba is placed there and Bb circles it; Ba really circles the pair's centre of mass at 0.443 of their separation (Chen et al. 2022), up to 1.1 au.",
+   "distance": "Epsilon Indi A's Gaia DR3 distance, 3.6384 pc. The pair's own Gaia parallax, 270.66 +/- 0.69 mas, is biased by the pair's orbit (RUWE 4.3); Chen et al. (2022, Table 4) measure 274.99 +/- 0.43 mas with the orbit modelled, agreeing with A's 274.843 +/- 0.096. The depth between A and B is not measured.",
+   "properMotion": "Chen et al. (2022, arXiv:2205.08077), Table 4: the proper motion of the pair's centre of mass, 3987.41 +/- 0.12 and -2505.35 +/- 0.10 mas/yr, from ten years of VLT/FORS2 astrometry with the orbit modelled. Gaia DR3's single-star solution, 3981.98 and -2466.83 mas/yr, includes the orbital motion.",
+   "radialVelocity": "No radial velocity of Epsilon Indi B is measured (Gaia DR3 and SIMBAD give none). Epsilon Indi A's Gaia DR3 value, -40.43 km/s, is used: the pair orbits A, so its speed relative to A along the line of sight is about 1 km/s at most at 1,460 au, not a measurement.",
+   "binary": "Scholz et al. (2003) found Epsilon Indi B as a common-proper-motion companion of Epsilon Indi A; Chen et al. (2022) and Sanghi et al. (2026) treat it as part of the system. No orbit of B around A is measured."
+  }
+ }
+}

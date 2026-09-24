@@ -10,6 +10,7 @@ import {
   MOBILE_VIEWPORT_QUERY,
   WHEEL_ZOOM_SPEED_MULTIPLIER,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER,
   WHEEL_ZOOM_INERTIA,
   WHEEL_ZOOM_INERTIA_INPUT_KINDS,
   wheelZoomInputKind,
@@ -68,6 +69,13 @@ test("every scroll device is calibrated to the traced reference response", () =>
   for (const gain of [WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER]) {
     assert.equal(gain, 1);
   }
+});
+
+// A pinch reports its own, much smaller units: a full-pad pinch traced at
+// 150-170 of them. Its gain puts one full pinch at several wheel notches.
+test("a full trackpad pinch travels several wheel notches", () => {
+  const notches = 160 * WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER / 100;
+  assert.ok(notches >= 4 && notches <= 6, `a full pinch is ${notches} notches`);
 });
 
 // The glide decays per frame, so `dampingSeconds` is a time constant and the

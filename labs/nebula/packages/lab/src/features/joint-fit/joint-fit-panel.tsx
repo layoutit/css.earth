@@ -2,7 +2,7 @@ import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { readStructureCatalogue, type StructureCatalogue } from '../observations/models/structures-model';
-import { adjustedMatrix, savedObservationFit, unchanged } from '../observations/models/model';
+import { catalogueMatrices } from '../observations/models/catalogue-matrices';
 import { defaultJointControls, readJointControls, type JointControls, type JointFamily } from '@cssearth/nebula-reconstruction/methods/joint/model';
 import type { JointRequest } from './model.ts';
 import type { JointCandidate } from './result.ts';
@@ -33,9 +33,7 @@ export function JointFitPanel({ cataloguePath, recipePath, observationManifest }
 }
 
 function JointFitSession({ catalogue, cataloguePath, recipePath, observationManifest }: JointFitPanelProps & { catalogue: StructureCatalogue }) {
-  const matrices = useMemo(() => Object.fromEntries(catalogue.images.map(image => [image.id,
-    adjustedMatrix({ imageToFrame: image.imageToFrame, source: { width: image.nativeWidth, height: image.nativeHeight } }, catalogue.frame,
-      observationManifest ? savedObservationFit(observationManifest, { id: image.id, source: { url: image.sourceUrl } }) : unchanged)])),
+  const matrices = useMemo(() => catalogueMatrices(catalogue, observationManifest),
   [catalogue, observationManifest]);
   const evidenceKey = `nebula:joint-evidence:1:${cataloguePath}:${JSON.stringify(catalogue.images.map(image =>
     [image.id, image.sourceSha256, image.mapSha256, matrices[image.id]]))}`;

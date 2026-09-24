@@ -4,13 +4,10 @@ import { createSourceManifest } from '../../../../src/platform/source-manifest.m
 import { requireTerrainMesh } from '../../terrestrial-layers/radial-mesh.mts';
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
 await ensureReportDirectory('output/distant-worlds', {recursive:true});
-// Use the common title and source-mesh snapshot owners; no scene technique lives here.
+// Use the common source-mesh snapshot owner; no scene technique lives here.
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
-import * as fontkit from 'fontkit';
-import { createObjectTitleSource } from '../../../prepare/prepare-object-title-sources.mts';
-import { OBJECT_TITLE_RECIPE } from '../../../../src/platform/object-title-recipe.mts';
 import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';
 import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mts';
@@ -18,17 +15,13 @@ const root = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== root) throw new Error('Run from the repository root.');
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(entry => requireRecord(entry));
-const bodies = records((await read(process.argv.find(arg => arg.startsWith('--inputs='))?.slice('--inputs='.length) ?? 'tools/objects/source-authoring/distant-worlds/inputs.json')).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit),titleLabel:b.titleLabel===undefined?undefined:requireString(b.titleLabel)}));
+const bodies = records((await read(process.argv.find(arg => arg.startsWith('--inputs='))?.slice('--inputs='.length) ?? 'tools/objects/source-authoring/distant-worlds/inputs.json')).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit)}));
 
 const write = (path: string, value: unknown) => writeFile(path, Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n');
 const files = async (path: string): Promise<string[]> => (await Promise.all((await readdir(path, {withFileTypes:true})).map(e => e.isDirectory() ? files(resolve(path,e.name)) : [resolve(path,e.name)]))).flat();
 const refreshOnly = process.argv.includes('--refresh-pins');
-let font: fontkit.Font | undefined, map: Buffer | undefined;
+let map: Buffer | undefined;
 if (!refreshOnly) {
-  const fontPath = resolve('src/objects/oumuamua/source/presentation/InterVariable.ttf');
-  const baseFont = fontkit.openSync(fontPath);
-  if (!('getVariation' in baseFont)) throw new TypeError('The title source must contain one font face.');
-  font = baseFont.getVariation({wght:OBJECT_TITLE_RECIPE.weight,opsz:OBJECT_TITLE_RECIPE.opticalSize});
   const width=512,height=256;
   const pixels=paintMissingCoverage(Buffer.alloc(width*height*3,160),{width,height,channels:3},new Uint8Array(width*height).fill(1));
   map=await sharp(pixels,{raw:{width,height,channels:3}}).png().toBuffer();
@@ -37,9 +30,7 @@ for (const b of bodies) {
   const pkg=resolve('src/objects',b.id),src=resolve(pkg,'source');
   const manifest=await read(resolve(src,'manifest.json'));
   if (!refreshOnly) {
-    if (!font || !map) throw new TypeError('Title and source map preparation must finish before publication.');
-    const title=createObjectTitleSource(b.titleLabel ?? b.name,font);
-    await write(resolve(src,'presentation/title-mark.json'),{schema:'cssearth-title-source@1',...title});
+    if (!map) throw new TypeError('Source map preparation must finish before publication.');
     const raw=await read(resolve(src,'preparation/terrestrial.json')), geometry=requireRecord(raw.geometry);
     const config={...raw,namespace:requireString(raw.namespace),geometry:{...geometry,radius:requireFiniteNumber(geometry.radius),radiusKm:requireFiniteNumber(geometry.radiusKm)}};
     const source=await createSourceManifest({objectId:b.id,objectName:b.name,sourceRoot:src});

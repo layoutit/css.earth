@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, type PointerEvent } from 'react';
+import { bindViewportZoom } from '../../ui/viewport-input.ts';
+import { useOrbitDrag } from '../../ui/use-orbit-drag.ts';
+import { useEffect, useRef, useState } from 'react';
 import type { JointVolumeResult } from '../../server/workflows/joint-fit/volume.ts';
 import { createJointFitViewer, type JointFitViewer } from '../../adapters/viewer/joint-fit-viewer';
 import type { CloudView } from '../shape-cloud/shape-cloud-stage';
@@ -19,8 +21,8 @@ export function JointFitStage({ result, fieldOfViewArcsec, view, onView }: Joint
   const renderer = useRef<JointFitViewer | null>(null), viewRef = useRef(view);
   const committedPin = useRef('');
   const [visibleId, setVisibleId] = useState(''), [error, setError] = useState('');
-  const drag = useRef<{ id: number; x: number; y: number; view: CloudView; pan: boolean } | null>(null);
   viewRef.current = view;
+  const dragEvents = useOrbitDrag(viewRef, onView);
   useEffect(() => () => { renderer.current?.destroy(); renderer.current = null; committedPin.current = ''; }, []);
   useEffect(() => {
     const key = result ? `${result.volume.path}:${fieldOfViewArcsec ?? 'bounds'}` : '';
@@ -44,30 +46,14 @@ export function JointFitStage({ result, fieldOfViewArcsec, view, onView }: Joint
     [view.zoom, view.panX, view.panY, visibleId]);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
-    const wheel = (event: WheelEvent) => { event.preventDefault(); const current = viewRef.current;
-      onView({ ...current, zoom: Math.max(.15, Math.min(12, current.zoom * Math.exp(-event.deltaY * .0015))) }); };
-    element.addEventListener('wheel', wheel, { passive: false });
-    return () => element.removeEventListener('wheel', wheel);
+    return bindViewportZoom(element, viewRef, onView);
   }, [onView]);
-  function pointerDown(event: PointerEvent<HTMLDivElement>) {
-    if (event.button !== 0) return;
-    event.currentTarget.setPointerCapture(event.pointerId);
-    drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, view: viewRef.current,
-      pan: viewRef.current.locked || event.shiftKey };
-  }
-  function pointerMove(event: PointerEvent<HTMLDivElement>) {
-    const start = drag.current; if (!start || start.id !== event.pointerId) return;
-    const dx = event.clientX - start.x, dy = event.clientY - start.y;
-    onView(start.pan ? { ...start.view, panX: start.view.panX + dx, panY: start.view.panY + dy } :
-      { ...start.view, yaw: start.view.yaw + dx * .35, pitch: Math.max(-89, Math.min(89, start.view.pitch - dy * .35)) });
-  }
   const ready = Boolean(visibleId);
   return <section className="shape-cloud-pane shape-cloud-pane-cloud joint-fit-stage" aria-label="Joint analytic fit volume"
     data-joint-fit-ready={ready} data-joint-fit-result={visibleId} data-joint-fit-pose={`${view.yaw},${view.pitch}`}
     data-joint-fit-field-of-view={fieldOfViewArcsec ?? 'bounds'}>
     <div className="shape-cloud-pane-label">Joint analytic fit</div>
-    <div className="shape-cloud-viewport" ref={viewport} tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
-      onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }}
+    <div className="shape-cloud-viewport" ref={viewport} tabIndex={0} {...dragEvents}
       onDoubleClick={() => onView(earthJointFitView)} onKeyDown={event => {
         if (event.key === 'Home') { event.preventDefault(); onView(earthJointFitView); }
       }}>

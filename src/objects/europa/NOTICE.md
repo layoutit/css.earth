@@ -16,8 +16,6 @@ bounded overlap-based grayscale display matching, the global-mosaic fallback and
 missing-coverage grid are prepared by cssEarth. This is a display adjustment, not
 additional radiometric or photometric calibration.
 
-Title outlines derive from Inter by **Rasmus Andersson**, SIL Open Font License 1.1.
-
 Prepared surface textures preserve photographed terrain. Gray grids are
 cartographic indicators of absent data; spherical lighting is approximate.
 

@@ -10,5 +10,5 @@ Laboratory/Southwest Research Institute; New Horizons LORRI; NASA Planetary Data
 System. No observational image is used as the modeled surface texture.
 
 Historical rotation: Weaver et al. (2016), DOI 10.1126/science.aae0030. Facts:
-NASA Science. Title font: Inter by Rasmus Andersson, SIL Open Font License 1.1.
+NASA Science.
 Full records accompany the source manifest.

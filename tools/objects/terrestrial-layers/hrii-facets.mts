@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {gzipSync} from 'node:zlib';
@@ -20,7 +21,7 @@ const recipeParser=shape({schema:text,target:text,targetAliases:array(text),mesh
 
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((s,v,i)=>s+v*b[i],0);
 const unit=(a:number[])=>a.map(v=>v/Math.hypot(...a));
-const cross=(a:number[],b:number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+
 
 /** Convert pinned spectral pixels to a table on their selected full source mesh.
  * No spectral, geometry or camera work is left to the application runtime. */

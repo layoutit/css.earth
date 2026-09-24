@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { findOne } from './find-product.mts';
 /** Reduce a JWST time-series observation from raw exposures with Eureka!, for eclipse mapping from raw data.
  *
  *   node tools/objects/jwst/reduce-tso.mts <program directory> <work directory> [--raw <directory>]
@@ -205,23 +206,7 @@ print(name, optimal.shape)
 const python = (toolchain: EurekaToolchain, cwd: string, script: string, args: readonly string[], log: string) =>
   toolchainPython(toolchain, cwd, script, args, log).then(result => result.lastLine);
 
-async function findOne(directory: string, pattern: RegExp): Promise<string> {
-  const found: string[] = [];
-  const walk = async (path: string): Promise<void> => {
-    for (const entry of await readdir(path, { withFileTypes: true })) {
-      const full = resolve(path, entry.name);
-      if (entry.isDirectory()) await walk(full); else if (pattern.test(entry.name)) found.push(full);
-    }
-  };
-  await walk(directory);
-  if (found.length !== 1) throw new Error(`${found.length} files match ${pattern} under ${directory}.`);
-  return found[0]!;
-}
 
-const sha256File = (path: string) => new Promise<string>((done, fail) => {
-  const hash = createHash('sha256');
-  createReadStream(path).on('data', chunk => hash.update(chunk)).on('error', fail).on('end', () => done(hash.digest('hex')));
-});
 
 /** `segments` reduces only the first n pinned segments: a partial run that proves the path before a programme's whole
  * download is committed. The light curve it produces covers that part of the time series and nothing more. */

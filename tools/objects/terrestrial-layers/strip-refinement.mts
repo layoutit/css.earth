@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /**
  * Epoch refinement of a push-frame image against the retained mesh.
  *
@@ -21,7 +22,7 @@ export interface StripRefinementPolicy {
   minimumControls: number; maximumControls?: number; searchPixels?: number; minimumSharpness?: number;
 }
 
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 const unit = (v: readonly number[]): [number, number, number] => { const n = Math.hypot(v[0], v[1], v[2]); return [v[0] / n, v[1] / n, v[2] / n]; };
 
 export function validateStripRefinement(policy: StripRefinementPolicy) {

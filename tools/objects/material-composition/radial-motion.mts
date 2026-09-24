@@ -1,3 +1,4 @@
+import { applyLinearTint } from '../color-transfer.mts';
 import {parse, object, string, boolean} from './data-schema.mts';
 import {radialMotionRecipe, type RadialMotionRecipe} from './radial-motion-recipe.mts';
 import type {ReadonlyVector3} from './ellipsoid.mts';
@@ -433,18 +434,6 @@ function mulberry32(seed: number) {
     mixed ^= mixed + Math.imul(mixed ^ (mixed >>> 7), mixed | 61);
     return ((mixed ^ (mixed >>> 14)) >>> 0) / 0x100000000;
   };
-}
-
-function applyLinearTint(channel: number, factor: number) {
-  const srgb = channel / 255;
-  const linear = srgb <= 0.04045
-    ? srgb / 12.92
-    : Math.pow((srgb + 0.055) / 1.055, 2.4);
-  const lit = Math.max(0, Math.min(1, linear * factor));
-  const encoded = lit <= 0.0031308
-    ? lit * 12.92
-    : 1.055 * Math.pow(lit, 1 / 2.4) - 0.055;
-  return Math.max(0, Math.min(255, Math.round(encoded * 255)));
 }
 
 function ringCompositeIntensity({ red, green, blue, alpha }: {red: number; green: number; blue: number; alpha: number}) {

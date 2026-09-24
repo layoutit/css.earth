@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 331.07645259656397,
+  "declinationDegrees": 33.206187933117796,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No rotation axis of Epsilon Indi Ba on the sky is measured; the papers cited in the README were checked. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of Epsilon Indi Ba are unmeasured; the axis shown is where celestial north lies on the sky."
+}

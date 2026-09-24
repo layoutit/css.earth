@@ -1,9 +1,10 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import {parseEncounterControl,array,number} from './source-records.mts';
 import {requireRecord} from '../../sources/source-values.mts';
 // Calibrated detector projection. J2000/body binding and measured pointing
 // corrections are authored preparation inputs; no cameras run in the browser.
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+
 const unit = (a: readonly number[]) => { const n = Math.hypot(...a); if (!(n > 0)) throw new Error('Degenerate camera vector.'); return a.map(v => v/n); };
 export function equatorialVector(ra: number, dec: number) {
   if (![ra, dec].every(Number.isFinite) || Math.abs(dec) > 90) throw new Error('Invalid equatorial direction.');

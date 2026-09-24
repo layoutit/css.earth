@@ -10,6 +10,13 @@ with the highest stored likelihood; a posterior that stores no likelihoods, or s
 against the measured positions with orbitize!'s own orbit function and the published errors, and the smallest chi-squared
 is kept. The residual at every measured position is written beside the orbit.
 
+A paper may instead publish its posterior as a FITS table of its own sampler's columns (Octofitter; Thompson et al. 2023).
+The pick file then names that file, which column holds each element, their angle unit, the periastron-time column (MJD)
+and the column to rank by. PlanetOrbits.jl, which Octofitter orbits are computed with, writes the sky offsets with the same
+formulas as orbitize! and gives the orbiting body's argument of periastron, so the elements carry over unchanged. The
+sample kept is the one with the highest log-posterior: with informative priors (the star's mass), the highest likelihood
+alone can sit where the paper's own prior rules it out.
+
 A joint fit of several companions with their masses stores each companion's six elements, the parallax, the companions'
 masses and the star's. As orbitize! does without N-body integration, a companion's Keplerian orbit uses the star's mass plus
 the masses of every companion at or inside its semi-major axis. The orbit written is that Keplerian orbit alone; the few
@@ -74,9 +81,45 @@ def chi_squared(sample, tau_reference, table):
     return total
 
 
+def from_fits(pick: dict, pick_path: str, output: str) -> None:
+    from astropy.io import fits
+    spec = pick['posteriorFits']
+    with fits.open(os.path.join(os.path.dirname(pick_path), spec['path'])) as posterior:
+        table = posterior[1].data
+        column = lambda name: np.asarray(table[name], dtype=float).ravel()
+        rank = column(spec['rankColumn'])
+        best = int(np.argmax(rank))
+        value = {label: float(column(name)[best]) for label, name in spec['columns'].items()}
+        extra = {label: float(column(name)[best]) for label, name in spec.get('extra', {}).items()}
+    scale = np.degrees(1.0) if spec['angleUnit'] == 'radian' else 1.0
+    for label in ANGLES:
+        value[label] = (value[label] * scale) % 360
+    tau_reference = float(pick['tauReferenceMjd'])
+    period_days = np.sqrt(value['sma1'] ** 3 / value['mtot']) * 365.25
+    value['tau1'] = ((value.pop('periastronMjd') - tau_reference) / period_days) % 1.0
+    sample = np.array([value['sma1'], value['ecc1'], np.radians(value['inc1']), np.radians(value['aop1']), np.radians(value['pan1']),
+                       value['tau1'], value['plx'], value['mtot']])
+    table = read_input.read_file(os.path.join(os.path.dirname(pick_path), pick['measurements']))
+    table = table[[kind in ('radec', 'seppa') for kind in table['quant_type']]]
+    residuals = []
+    for row in table:
+        ra, dec = position(sample, row['epoch'], tau_reference)
+        model = [ra, dec] if row['quant_type'] == 'radec' else [float(np.hypot(ra, dec)), float(np.degrees(np.arctan2(ra, dec)) % 360)]
+        residuals.append({'epoch': float(row['epoch']), 'kind': str(row['quant_type']), 'measured': [float(row['quant1']), float(row['quant2'])],
+                          'error': [float(row['quant1_err']), float(row['quant2_err'])], 'model': model})
+    result = {'source': spec['source'], 'rule': f"highest {spec['rankColumn']} ({rank[best]:.2f}) of {len(rank):,} samples", 'samples': int(len(rank)),
+              'tauReferenceMjd': tau_reference, 'orbit': {label: float(value[label]) for label in LABELS}, 'residuals': residuals}
+    result.update(extra)
+    with open(output, 'w') as handle:
+        json.dump(result, handle, indent=1)
+    print(json.dumps({k: v for k, v in result.items() if k != 'residuals'}, indent=1))
+
+
 def main(pick_path: str, output: str) -> None:
     with open(pick_path) as handle:
         pick = json.load(handle)
+    if 'posteriorFits' in pick:
+        return from_fits(pick, pick_path, output)
     key, body = pick['whereistheplanetKey'], int(pick.get('body', 1))
     filename, reference = catalogue.post_dict[key][0], catalogue.post_dict[key][1]
     with h5py.File(os.path.join(catalogue.datadir, filename)) as posterior:

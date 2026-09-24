@@ -1,3 +1,4 @@
+import { collectArtifacts } from '../../server/workflows/density/io.ts';
 import { parseFiniteMaterialSettings, verifyFiniteMaterialArtifacts } from './finite-density-material-artifacts.ts';
 /** One offline finite-material experiment on an existing reconstruction. All density slice alpha is retained. */
 import { readFile, writeFile, mkdir, cp, readdir } from 'node:fs/promises';
@@ -95,9 +96,8 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   const local=relative(root,output),oldLocal=relative(root,baseline);
   const subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(oldLocal,local));subject.id=id;subject.name+=' · finite regions';subject.directory=local;subject.reconstructionImage={...subject.reconstructionImage,label:subject.reconstructionImage.label+' · finite regions',note:receipt.qualification.reason};
   await json(resolve(output,'result.json'),{...oldResult,resultId,subject});
-  const artifacts:Record<string,{sha256:string;bytes:number}>={};
-  async function collect(dir:string){for(const e of await readdir(dir,{withFileTypes:true})){const path=resolve(dir,e.name);if(e.isDirectory())await collect(path);else{const b=await readFile(path);artifacts[relative(output,path)]={sha256:sha256(b),bytes:b.length};}}}
-  await collect(output);await json(resolve(output,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,sourceSha256:work.source.sha256,artifacts});
+
+  const artifacts = await collectArtifacts(output);await json(resolve(output,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,sourceSha256:work.source.sha256,artifacts});
   console.log(JSON.stringify({resultId,output,regions:receipt.regions.length,beforeRmse:receipt.beforeRmse,afterRmse:receipt.afterRmse,validationBeforeRmse:receipt.validationBeforeRmse,validationAfterRmse:receipt.validationAfterRmse,sameAlpha:true}));
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)await finiteDensityMaterial(process.argv[2]??'',process.argv[3]??'');

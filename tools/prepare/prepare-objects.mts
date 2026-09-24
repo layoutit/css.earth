@@ -25,8 +25,7 @@ import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt 
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 
-const sharedSteps = ["prepare-shell-titles.mts", "prepare-wordmark-rail.mts",
-  "prepare-object-title-sources.mts", "prepare-scientific-charts.mts"];
+const sharedSteps = ["prepare-shell-titles.mts", "prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
 const traceModule = new URL("./preparation-trace.mts", import.meta.url).href;
 

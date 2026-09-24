@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../platform/vector3.mts';
 import { prepareGroupView, prepareSystemView } from './system-view.js';
 import type { PreparedSystemView, SystemViewPolicy } from './system-view.js';
 import { M_PER_AU } from '@cssearth/astronomy';
@@ -487,7 +488,7 @@ function freeze<T>(value: T): T { return Object.freeze(value); }
 function copy(value: Vector3): Vector3 { return Object.freeze([value[0], value[1], value[2]]); }
 function scale(value: Vector3, scalar: number): Vector3 { return [value[0] * scalar, value[1] * scalar, value[2] * scalar]; }
 function add(a: Vector3, b: Vector3): Vector3 { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
-function cross(a: Vector3, b: Vector3): Vector3 { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+
 function dot(a: Vector3, b: Vector3): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
 function unit(value: Vector3): Vector3 { const length = Math.hypot(...value); if (!(length > 0)) throw new TypeError('Orbit direction is undefined.'); return scale(value, 1 / length); }
 

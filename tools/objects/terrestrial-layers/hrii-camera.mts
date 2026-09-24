@@ -1,9 +1,10 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import {array,number,shape} from './source-records.mts';
 import {requireRecord} from '../../sources/source-values.mts';
 import {equatorialVector,validateBodyFrame} from './encounter-camera.mts';
 
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((s,v,i)=>s+v*b[i],0);
-const cross=(a:number[],b:number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+
 const unit=(a:number[])=>{const norm=Math.hypot(...a);if(!(norm>0))throw new Error('Degenerate HRII direction.');return a.map(v=>v/norm);};
 const parseControl=shape({bodyToJ2000:array(array(number)),offsetPixels:array(number)});
 

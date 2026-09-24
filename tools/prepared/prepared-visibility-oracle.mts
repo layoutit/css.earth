@@ -1,10 +1,11 @@
+import { cross3 as cross } from '../../src/platform/vector3.mts';
 import type { SurfacePoint, SurfaceTriangle } from '../../src/renderers/css/navigation/prepared-surface-hit.ts';
 import type { PreparedDepthOrder } from '../../src/renderers/css/rendering/prepared-depth-partitions.ts';
 import assert from 'node:assert/strict';
 
 const sub = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[0]-b[0],a[1]-b[1],a[2]-b[2]];
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
-const cross = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+
 // Independent Moller-Trumbore intersection, not the face-plane relation used
 // by the compiler. The nearest front-facing ray hit must win the group painter.
 export function verifyRayOrder(triangles: readonly SurfaceTriangle[], signs: readonly number[], plan: { groups: readonly (readonly number[])[]; order: PreparedDepthOrder }, eyes: readonly SurfacePoint[], targets: readonly SurfacePoint[]) {

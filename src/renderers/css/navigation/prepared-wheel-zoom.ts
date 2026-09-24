@@ -189,7 +189,8 @@ export function createPreparedWheelZoomControls({
     inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
     previousInputTimestamp = event.timeStamp;
     const origin = frame !== null && direction === nextDirection ? targetDistance! : camera.state.distance;
-    const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
+    const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER
+      : event.ctrlKey ? runtimePolicy.WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER : speedMultiplier;
     targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
     direction = nextDirection;
     expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;

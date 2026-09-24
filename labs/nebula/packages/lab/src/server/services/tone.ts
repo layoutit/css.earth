@@ -1,3 +1,4 @@
+import { createConcurrencyLimit } from './concurrency.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Local Node-only texture preparation. Browser receives finished URLs and retains its geometry. */
@@ -62,17 +63,9 @@ export function removalRgba(endpoint: Uint8Array, layer: Exclude<ImageLayer, 'or
   }
   return result;
 }
-function limit(concurrency: number) {
-  let active = 0; const waiting: (() => void)[] = [];
-  return async <T>(run: () => Promise<T>): Promise<T> => {
-    if (active >= concurrency) await new Promise<void>(done => waiting.push(done));
-    else active++;
-    try { return await run(); } finally { const next = waiting.shift(); if (next) next(); else active--; }
-  };
-}
 export function createTonePreparer(repositoryRoot: string, options: { maximumCacheBytes?: number; maximumCacheFiles?: number; maximumDecodedCacheBytes?: number } = {}) {
   const root = resolve(repositoryRoot), cache = resolve(root, '.local/nebula-lab/tone-cache');
-  const textureLimit = limit(4), requestLimit = limit(2), cacheLimit = limit(1);
+  const textureLimit = createConcurrencyLimit(4), requestLimit = createConcurrencyLimit(2), cacheLimit = createConcurrencyLimit(1);
   const inflight = new Map<string, Promise<ToneResource>>(), protectedFiles = new Map<string, number>();
   const decodedCache = new Map<string, Buffer>(), decoding = new Map<string, Promise<Buffer>>();
   let decodedBytes = 0;

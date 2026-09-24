@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../../src/platform/vector3.mts';
 import { prepareProjectiveTextureLayer } from "../../../../src/platform/projective-surface-raster.mts";
 
 import type { PageAddress, GeographicScene, GeographicLeaf, GeographicBounds, PolarBounds, PageGeometry, PolarProjection, PolarPlane } from './contracts.mts';
@@ -135,7 +136,7 @@ export function createCityGeographicSampler(page: Pick<PageGeometry, 'geographic
 }
 
 const dot=(a: readonly number[],b: readonly number[])=>a.reduce((sum,v,i)=>sum+v*b[i],0);
-const cross=(a: readonly number[],b: readonly number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+
 const multiply3=(a: readonly number[],b: readonly number[])=>Array.from({length:9},(_,i)=>[0,1,2].reduce((sum,k)=>sum+a[Math.floor(i/3)*3+k]*b[k*3+i%3],0));
 function inverse3(m: readonly number[]) {
   const a=cross(m.slice(3,6),m.slice(6,9)),b=cross(m.slice(6,9),m.slice(0,3)),c=cross(m.slice(0,3),m.slice(3,6));
@@ -149,7 +150,7 @@ function acceptedFace(scene: GeographicScene, b: number, x: number) {
   const leafIndex=b===0||b===15?0:(x+32)%32;
   const m=cityGeographicFrame(scene.body.bands.find(p=>p.latitudeIndex===b)!.leaves[leafIndex]).split(',').map(Number);
   const origin=m.slice(12,15),u=origin.map((v,i)=>m[i]-m[3]*v),v=origin.map((v,i)=>m[i+4]-m[7]*v);
-  let normal=cross(u,v);normal=normal.map(n=>n/Math.hypot(...normal));
+  let normal: number[]=cross(u,v);normal=normal.map(n=>n/Math.hypot(...normal));
   return {origin,u,v,normal,d:dot(normal,origin)};
 }
 function canonicalFaceInverse(scene: GeographicScene,band: number,longitude: number) {

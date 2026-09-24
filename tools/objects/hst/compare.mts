@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { sampleStatistics } from '../../fits/sample-statistics.mts';
 /** Compare the re-run products of an observation with the archive's own, sample by sample: the oracle for calibrate.mts.
  *
  *   node tools/objects/hst/compare.mts <program id> <observation> <run directory> [--raw <dir>]...
@@ -59,37 +60,6 @@ export function pairExtensions(ours: readonly FitsFileHdu[], theirs: readonly Fi
   for (const entry of theirNamed.slice(1)) if (!ourNamed.some(other => other.extname === entry.extname && other.extver === entry.extver)) differentGrid.push(`${entry.extname},${entry.extver}: the re-run product has no such extension`);
   return { pairs, differentGrid };
 }
-const quantile = (sorted: Float32Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))] ?? Number.NaN;
-
-/** What every comparison reports, from paired samples: how many both hold, how many agree bit for bit, and how far apart the
- * rest are. `pairs` is walked twice, so a caller that streams reads its samples twice and holds only what it is reading.
- * Sorting is done on copies, so both passes see the same values. */
-async function statistics(pairs: (visit: (local: number, mast: number) => void) => Promise<void> | void, count: number) {
-  const levels = new Float32Array(count), differences = new Float32Array(count);
-  let both = 0, identical = 0, onlyLocal = 0, onlyMast = 0;
-  await pairs((local, mast) => {
-    const fa = Number.isFinite(local), fb = Number.isFinite(mast);
-    if (fa && fb) { if (local === mast) identical++; levels[both] = Math.abs(mast); differences[both] = Math.abs(local - mast); both++; }
-    else if (fa) onlyLocal++; else if (fb) onlyMast++;
-  });
-  const median = quantile(levels.subarray(0, both).slice().sort(), 0.5);
-  const medianDifference = quantile(differences.subarray(0, both).slice().sort(), 0.5);
-  let sa = 0, sb = 0, saa = 0, sbb = 0, sab = 0, n = 0;
-  // The relative difference is kept per sample, not just at its largest: on a rectified grid the median level can be zero, and
-  // then "above the median" includes samples of 1e-19 whose ratio says nothing. The quantiles say whether the largest is alone.
-  const relative = differences;
-  await pairs((local, mast) => {
-    if (!Number.isFinite(local) || !Number.isFinite(mast) || Math.abs(mast) <= median) return;
-    sa += local; sb += mast; saa += local * local; sbb += mast * mast; sab += local * mast;
-    relative[n++] = Math.abs(local - mast) / Math.abs(mast);
-  });
-  const sorted = relative.subarray(0, n).slice().sort();
-  return { samples: count, both, identical, onlyLocal, onlyMast, identicalShare: both ? identical / both : null,
-    medianLevel: median, medianAbsoluteDifferenceOverMedian: median ? medianDifference / median : null,
-    aboveMedian: { samples: n, correlation: n > 1 ? (n * sab - sa * sb) / Math.sqrt((n * saa - sa * sa) * (n * sbb - sb * sb)) : null,
-      relativeDifference: n ? { median: quantile(sorted, 0.5), p99: quantile(sorted, 0.99), largest: quantile(sorted, 1) } : null } };
-}
-
 /** One plane of a two- or three-axis image, read through the shared region reader: the plane's own two axes at its own offset
  * in the data block. The header, and with it BSCALE, BZERO and BLANK, stays the extension's. */
 const planeHdu = (hdu: FitsFileHdu, plane: number): FitsFileHdu => {
@@ -204,4 +174,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       .flatMap(entry => entry.columns ? entry.columns.map(column => `${entry.extname}.${column.column} ${column.identicalShare}`) : [`${entry.extname} ${entry.identicalShare}`]);
     console.log(`REPRODUCTION ${path} ${JSON.stringify({ suffix: suffixOf(`${String(receipt.product)}.fits`), identical: summary })}`);
   }
+}
+
+async function statistics(pairs: (visit: (local: number, mast: number) => void) => Promise<void> | void, count: number) {
+  const result = await sampleStatistics(pairs, count, Float32Array);
+  return { samples: result.samples, both: result.both, identical: result.identical, onlyLocal: result.onlyFirst, onlyMast: result.onlySecond,
+    identicalShare: result.identicalShare, medianLevel: result.medianLevel,
+    medianAbsoluteDifferenceOverMedian: result.medianAbsoluteDifferenceOverMedian, aboveMedian: result.aboveMedian };
 }

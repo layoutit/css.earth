@@ -1,3 +1,4 @@
+import { orbitRoot } from '../src/platform/orbit-root.mts';
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldContext } from '../src/renderers/css/universe/prepared-world-context.js';
 import type { ObjectEntry } from './object-schema.mts';
@@ -27,23 +28,16 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
     ...plan.bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const]
       : body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []),
   ]);
-  const rootOf = (id: string) => {
-    const seen = new Set<string>();
-    for (let current = id; ; current = parents.get(current)!) {
-      if (seen.has(current)) throw new TypeError(`${id} has a cyclic orbit chain.`);
-      seen.add(current);
-      if (!parents.has(current)) return current;
-    }
-  };
   // Hosts are the focus and every star the prepared context frames with orbiting members; a planet's moons are not a
-  // planetary system. A registry without the star (a partial fixture) has no system for it.
-  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView)].filter(body => ['star', 'black-hole'].includes(registry.get(body.id)?.classification ?? ''));
+  // planetary system, and neither is a star that itself orbits or is bound to another (Epsilon Indi Ba, with Bb around it,
+  // belongs to Epsilon Indi A's system). A registry without the star (a partial fixture) has no system for it.
+  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView && !parents.has(body.id))].filter(body => ['star', 'black-hole'].includes(registry.get(body.id)?.classification ?? ''));
   const solarRadiusM = radii.get(plan.focus.id);
   if (!solarRadiusM) throw new TypeError('The Solar System requires its prepared framing radius.');
   return Object.freeze(hosts.map(host => {
     const star = registry.get(host.id), radiusM = radii.get(host.id);
     if (!star || !radiusM) throw new TypeError(`Planetary system ${host.id} requires a registered star and its prepared framing.`);
-    const memberIds = plan.bodies.filter(body => body.id !== host.id && rootOf(body.id) === host.id).map(body => body.id);
+    const memberIds = plan.bodies.filter(body => body.id !== host.id && orbitRoot(body.id, parents) === host.id).map(body => body.id);
     for (const id of memberIds) {
       const member = registry.get(id);
       if (member && member.systemName !== star.systemName) throw new TypeError(`${id} orbits ${star.name} but names its system ${member.systemName}, not ${star.systemName}.`);

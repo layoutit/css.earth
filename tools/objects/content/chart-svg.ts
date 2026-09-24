@@ -24,7 +24,7 @@ export function renderReflectanceChart({
   metadata,
   points,
   maximum,
-}: ChartIdentity & {points:ReflectancePoint[];maximum:number}) {
+}: ChartIdentity & {points:readonly ReflectancePoint[];maximum:number}) {
   validateChartIdentity({ id, title, description, metadata });
   if (!Array.isArray(points) || points.length < 2 ||
       points.some(({ wavelength, total }, index) =>
@@ -97,7 +97,7 @@ export function renderTemperaturePressureChart({
   temperatureMinimum,
   temperatureMaximum,
   pressureTicks,
-}: ChartIdentity & {layers:PressureLayer[];pressureMinimum:number;pressureMaximum:number;temperatureMinimum:number;temperatureMaximum:number;pressureTicks:{pressure:number;label:string}[]}) {
+}: ChartIdentity & {layers:readonly PressureLayer[];pressureMinimum:number;pressureMaximum:number;temperatureMinimum:number;temperatureMaximum:number;pressureTicks:readonly {pressure:number;label:string}[]}) {
   validateChartIdentity({ id, title, description, metadata });
   if (!Array.isArray(layers) || layers.length < 2 ||
       layers.some(({ pressure, temperature }) =>
@@ -152,7 +152,7 @@ export function renderPhotometricPhaseChart({
   description,
   metadata,
   points,
-}: ChartIdentity & {points:PhasePoint[]}) {
+}: ChartIdentity & {points:readonly PhasePoint[]}) {
   validateChartIdentity({ id, title, description, metadata });
   if (!Array.isArray(points) || points.length < 3 ||
       points.some(({ phaseAngle, dimmingMagnitude }, index) =>

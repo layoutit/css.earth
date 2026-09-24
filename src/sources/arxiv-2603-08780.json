@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2603-08780",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Matthews et al. (2026): A second visit to Eps Ind Ab with JWST: new photometry confirms ammonia and suggests thick clouds in the exoplanet atmosphere of the closest super-Jupiter",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2603.08780"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ae5823"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2603.08780",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ae5823",
+      "label": "The Astrophysical Journal Letters"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2603.08780",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 6 and Table 3: orvara refit of the orbit of Epsilon Indi Ab with a JWST position of 2025 May 10 (3.654 +/- 0.018 arcsec, 35.065 +/- 0.036 degrees); medians only"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters",
+  "creators": [
+    "Elisabeth C. Matthews",
+    "James Mang",
+    "Aarynn L. Carter",
+    "Mathlide Mâlin",
+    "Caroline V. Morley",
+    "Bhavesh Rajpoot"
+  ]
+}

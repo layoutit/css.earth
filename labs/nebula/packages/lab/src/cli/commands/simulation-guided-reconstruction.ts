@@ -1,5 +1,6 @@
+import { collectArtifacts } from '../../server/workflows/density/io.ts';
 /** Offline conditional emission experiment; originals and baseline remain immutable. */
-import {readFile,writeFile,mkdir,cp,readdir,rename} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,cp,rename} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import sharp from 'sharp';
 import {parseLabModelJson} from '../../resources/model-paths.ts';
@@ -139,6 +140,6 @@ async function main(settingsPath:string){
  await json(resolve(staging,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
  const local=relative(root,output),oldLocal=relative(root,baseline),subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(oldLocal,local));subject.id=id;subject.name+=' · conditional emission';subject.directory=local;subject.modelNote=qualification.reason;subject.reconstructionImage={...subject.reconstructionImage,label:subject.reconstructionImage.label+' · finite emission',note:qualification.reason};
  await json(resolve(staging,'result.json'),{...oldResult,resultId,subject});
- const artifacts:Record<string,{sha256:string;bytes:number}>={};async function collect(dir:string){for(const e of await readdir(dir,{withFileTypes:true})){const path=resolve(dir,e.name);if(e.isDirectory())await collect(path);else{const b=await readFile(path);artifacts[relative(staging,path)]={sha256:sha256(b),bytes:b.length};}}}await collect(staging);await json(resolve(staging,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,sourceSha256:work.source.sha256,artifacts});await verifyFiniteMaterialArtifacts(staging,id);await rename(staging,output);console.log(JSON.stringify({resultId,output,metrics,qualification}));
+ const artifacts = await collectArtifacts(staging);await json(resolve(staging,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,sourceSha256:work.source.sha256,artifacts});await verifyFiniteMaterialArtifacts(staging,id);await rename(staging,output);console.log(JSON.stringify({resultId,output,metrics,qualification}));
 }
 await main(process.argv[2]??'');

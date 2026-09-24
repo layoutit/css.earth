@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "eps-indi-ab",
+  "entries": [
+    {
+      "id": "band-colour",
+      "subject": "A false colour from three measured bands, as the HR 8799 planets have",
+      "status": "unresolved",
+      "finding": "Sanghi et al. (2026) measured this planet with JWST/NIRCam in F410M and F430M, two of the three bands (F410M, F430M, F460M) that colour HR 8799's planets; F460M is not measured, so no comparable three-band colour exists and it is the shared neutral gray.",
+      "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
+      "evidence": [
+        "https://arxiv.org/abs/2603.08787"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "binary-planet-candidate",
+      "subject": "A second point source inside the planet's Hill sphere",
+      "status": "unresolved",
+      "finding": "Garza et al. (2026) find that a double point-source fit to the JWST/MIRI 15 micron image is preferred over a single one, most plausibly from systematics; follow-up would be needed to rule out a binary planet. Nothing is drawn.",
+      "revisitWhen": "Follow-up imaging confirms or rules out a companion of the planet.",
+      "evidence": [
+        "https://arxiv.org/abs/2604.23448"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "matthews-2026-orbit",
+      "subject": "The orbit of Matthews et al. (2026)",
+      "status": "excluded",
+      "finding": "Matthews et al. (2026) refit the orbit with orvara using a third JWST position (2025 May 10) and publish medians only (a 20.9 au, e 0.244). Their medians miss both JWST positions by about 0.1 arcseconds, 6 to 10 of their errors, so they are not one orbit; Sanghi et al. (2026) publish their posterior, and its best sample is used.",
+      "revisitWhen": "A fit including all four JWST epochs publishes its posterior.",
+      "evidence": [
+        "https://arxiv.org/abs/2603.08780"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

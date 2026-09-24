@@ -4,7 +4,7 @@
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
  * tools/contract/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
 import { execFileSync } from 'node:child_process';
-import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseCieTable } from '../observation/disc-integrated-color.mts';
@@ -166,7 +166,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     `Radius, mass and temperature: ${[physical.radiusText, physical.massText, `temperature from ${spec.temperature.source}`].join('; ')}.${spec.spin ? ` Spin: ${spec.spin.source}.` : ''}`,
     ...color.credits, ...limb.credit ? [limb.credit] : [],
     `Placement: Gaia DR3 source ${row.sourceId}: position, parallax, proper motion${row.radialVelocity !== undefined ? ' and radial velocity' : ''}. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.`,
-    'Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.'];
+  ];
   files.set(`${o}/NOTICE.md`, `${credits.join('\n\n')}\n`);
   const names = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter(Boolean).join(', ');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '',
@@ -228,8 +228,6 @@ export async function reconcileSources(files: Map<string, string | Buffer>, root
 export async function writeGenerated(generated: Generated, root = process.cwd()) {
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   for (const path of [`src/objects/${generated.id}`, `packages/astronomy/data/bodies/${generated.id}.json`]) if (await exists(path)) throw new Error(`${path} already exists; the generator never overwrites a package.`);
-  const font = resolve(root, 'src/objects/betelgeuse/source/presentation/InterVariable.ttf');
-  if (!await exists('src/objects/betelgeuse/source/presentation/InterVariable.ttf')) throw new Error(`${font} is missing; restore it (pnpm setup:assets) before generating.`);
   await reconcileSources(generated.files, root);
   const written: string[] = [];
   for (const [path, value] of generated.files) {
@@ -237,8 +235,6 @@ export async function writeGenerated(generated: Generated, root = process.cwd())
     await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); written.push(path);
   }
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
-  await copyFile(resolve(root, 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL'), resolve(presentation, 'LICENSE.INTER-OFL'));
-  await copyFile(font, resolve(presentation, 'InterVariable.ttf'));
   // The marker needs the package on disk: a placeholder first, then the colour lens as a disc.
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   const { authorContextMarkers } = await import('../source-authoring/context-markers.mts');
@@ -341,8 +337,7 @@ export async function runHostedPhase(handoff: string, root = process.cwd()): Pro
       await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); written.push(path);
     }
     const presentation = resolve(root, `src/objects/${record.spec.id}/source/presentation`);
-    await copyFile(resolve(root, 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL'), resolve(presentation, 'LICENSE.INTER-OFL'));
-    await copyFile(resolve(root, 'src/objects/betelgeuse/source/presentation/InterVariable.ttf'), resolve(presentation, 'InterVariable.ttf'));
+    await mkdir(presentation, { recursive: true });
     await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
     if (record.spec.kind === 'companion') { const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]); }
     results.push({ id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}),
@@ -379,10 +374,10 @@ export async function checkGenerated(ids: readonly string[], root = process.cwd(
     const queue = ids.map((id, i) => [id, i] as const);
     await Promise.all([0, 1].map(async () => { for (let next = queue.shift(); next; next = queue.shift()) { progress(`  [${next[1] + 1}/${ids.length}] ${next[0]}: ${label}`); await step(next[0]); } }));
   };
-  progress(`Checking ${ids.length} objects: the catalogue, solar geometry, titles and authored preparation`);
+  progress(`Checking ${ids.length} objects: the catalogue, solar geometry and authored preparation`);
   await run('node', 'tools/prepare/prepare-catalog.mts');
   await run('node', 'tools/prepare/prepare-solar-geometry.mts');
-  await each('authored preparation', async id => { await run('node', 'tools/prepare/prepare-object-title-sources.mts', id); await run('node', 'tools/objects/dist/prepare-authored.js', id, '--write'); });
+  await each('authored preparation', async id => { await run('node', 'tools/objects/dist/prepare-authored.js', id, '--write'); });
   await run('node', 'tools/prepare/prepare-catalog.mts');
   await each('source records and page data', async id => { await run('node', 'tools/sources/author-source-records.mts', id); await run('node', 'tools/prepare/prepare-object-json.mts', id); });
 }

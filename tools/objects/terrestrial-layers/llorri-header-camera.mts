@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /** Native FITS TAN-SIP camera seed. Surface registration remains a separate requirement. */
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { scanFitsCards, fitsCardValue } from '../observation/fits.mts';
@@ -8,7 +9,7 @@ import { utcToEt } from '../../spice/lsk.mts';
 import { llorriFieldTargets, requireLlorriTarget } from './llorri-geo.mts';
 
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, v, i) => s + v * b[i], 0);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+
 const inverse = (a: readonly (readonly number[])[]) => {
   const columns = [cross(a[1], a[2]), cross(a[2], a[0]), cross(a[0], a[1])], determinant = dot(a[0], columns[0]);
   if (!Number.isFinite(determinant) || Math.abs(determinant) < 1e-16) throw new Error('Degenerate FITS camera.');

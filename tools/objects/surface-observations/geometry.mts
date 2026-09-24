@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /** Per-pixel geometry. An archive either ships backplanes with its image, or the camera's rays are cast onto the full source mesh. */
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import type { ObservationCamera, PixelGeometry } from './contract.mts';
@@ -5,7 +6,7 @@ import type { ObservationCamera, PixelGeometry } from './contract.mts';
 const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const sub = (a: readonly number[], b: readonly number[]) => a.map((n, i) => n - b[i]);
 const unit = (a: readonly number[]) => { const l = Math.hypot(...a); return a.map(n => n / l); };
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 const angle = (cosine: number) => Math.acos(Math.max(-1, Math.min(1, cosine)));
 
 /** A face counts only when the source mesh does not mark it, or any of its vertices, as unconstrained. */

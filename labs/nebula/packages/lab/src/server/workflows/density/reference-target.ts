@@ -6,7 +6,8 @@ import { join, resolve } from 'node:path';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
 import { decomposeFilledComponents } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
 import { extendedMap, rectifyObservation, writeObservationPanel } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
-import { acquire, hash, json, pinned, writeAtomic } from './io.ts';
+import { acquire, hash, json, pinned } from './io.ts';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 
 export async function bakeReferenceTarget(root: string, cataloguePath: string) {
   const { depthModel: refs } = await json(resolve(root, cataloguePath));

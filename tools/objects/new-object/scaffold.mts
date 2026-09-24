@@ -1,6 +1,6 @@
 /** The package files of a placed star, shared by the shape-only scaffold and the full generator (generate.mts); the command is
  * tools/objects/new-object.mts. */
-import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
@@ -10,7 +10,6 @@ import { readStarTemperature, temperatureCatalogueColor } from '../star-catalogu
 export const TODO = 'TODO(new-object)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;
 const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
-const INTER = { url: 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf', bytes: 862936, sha256: '746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c' };
 
 export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK?: number; readonly temperatureSource?: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number;
   /** A black hole instead of a star: its record's radius is the measured shadow, drawn black. It has no temperature, so its catalogue colour is the shared neutral gray. */
@@ -154,12 +153,12 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   const files = new Map<string, string>(), put = (path: string, value: unknown) => files.set(path, typeof value === 'string' ? value : `${JSON.stringify(value, null, 2)}\n`);
   const o = `src/objects/${id}`;
   put(`${o}/object.json`, { schema: 'cssearth-object@1', id, type: 'layered-body', properties: {
-    preparation: { schema: 'cssearth-object-preparation@1', label: name, steps: ['verify-sources', 'title', 'assets', 'panel-content', 'lenses', 'starfield', 'scene', 'controls', 'presentation', 'runtime-assets'] },
+    preparation: { schema: 'cssearth-object-preparation@1', label: name, steps: ['verify-sources', 'assets', 'panel-content', 'lenses', 'starfield', 'scene', 'controls', 'presentation', 'runtime-assets'] },
     recipe: { schema: 'cssearth-authored-object@1', surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', lenses: [{ id: 'shape', source: 'content', material: 'emission' }] }],
       shape: { kind: 'sphere', radiusKm }, materials: [{ id: 'emission', source: 'raster', model: 'emissive' }],
       sources: ['raster', 'geometry', 'celestial', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
-        { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
+        { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       emission: { source: 'raster', material: 'emission' } },
     page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: blackHole ? 'black-hole' : 'star', color: catalogColor, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
@@ -193,7 +192,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     source: `No measured rotation axis or period (${TODO}: name the literature checked). The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.`,
     coordinateSystem: 'ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.',
     qualification: `Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of ${name} are unmeasured; the axis shown is where celestial north lies on the sky.` });
-  put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1', operations: [{ kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: INTER.url }] });
+  put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1', operations: [] });
   put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name, bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm,
     defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
   if (blackHole) put(`${o}/source/measurements.json`, { schema: 'cssearth-black-hole-shadow@1', id, angularDiameterMas: Math.round(angularDiameterMas * 1e6) / 1e6,
@@ -218,22 +217,20 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
       falseColor: false, notes: `No image of the photosphere is cast here (${TODO}: say why, and point at the ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention.` }] },
     settings: { titleKey: 'settings', controls: [] }, charts: [],
     resources: [{ label: 'Research', role: 'facts', description: spec.paperCredit, href: spec.paper }],
-    provenance: { title: { path: '../presentation/title-mark.json' }, editorial: { url: spec.paper, credit: spec.paperCredit },
+    provenance: { editorial: { url: spec.paper, credit: spec.paperCredit },
       physical: { path: `../../../../../packages/astronomy/data/bodies/${id}.json`, credit: 'Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)' } } });
   put(`${o}/text.json`, { schema: 'cssearth-object-text@1', objectId: id, card: { text: spec.description, sources: [{ catalogueId: `${TODO}-card-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     introduction: { text: `${TODO}: two sentences, 180 characters at most.`, sources: [{ catalogueId: `${TODO}-introduction-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     datasets: { shape: { title: 'Sphere of the measured radius', detail: 'No image', summary: 'A sphere at the published size in neutral gray. No picture of the surface is cast here.' } } });
   put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: placement, radius, rotation and the shape lens, each with its source.\n\n## Evidence\n\n${TODO}: the tests and captures that prove the package.\n\n## Known problems\n\n${TODO}: what is not shown and why.\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
-  put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the measurements, placement and title font credits.\n\nTitle: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.\n`);
+  put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the measurements and placement credits.\n`);
   put(`${o}/investigations.json`, { schema: 'cssearth-investigation-ledger@1', objectId: id, entries: [] });
   put(`${o}/.gitignore`, '# No observation files: the sphere is the shared neutral gray.\n');
   const local = (reason: string) => ({ kind: 'local', reason });
-  const catalogued = (entryId: string, index: number) => ({ kind: 'catalogued', references: [{ catalogueId: `source-${id}-${entryId}`, role: 'material', evidence: `src/objects/${id}/source/manifest.json@0000000000000000000000000000000000000000#/inputs/${index}` }] });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, origin, sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms', acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
   put(`${o}/source/manifest.json`, { schema: `cssearth-authoritative-sources@2`, inputs: [
     { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit, license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources', redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'], sourceBinding: local('Measurements transcribed in this package with their sources; repinned when edited.') },
-    { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', origin: INTER.url, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1', licenseEvidence: ['presentation/LICENSE.INTER-OFL'], acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.', redistribution: 'Permitted with the accompanying SIL Open Font License.', consumers: ['title'], sourceBinding: catalogued('inter-title-font', 1) },
     preparation('preparation-raster', 'preparation/raster.json', 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates', ['assets', 'lenses']),
     preparation('preparation-geometry', 'preparation/geometry.json', 'Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material', ['scene', 'presentation']),
     preparation('preparation-celestial', 'preparation/celestial.json', 'Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun', ['starfield']),
@@ -241,7 +238,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
     generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper, credit: `Sphere of the published radius; marker written by tools/objects/new-object.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
       recipe: { generator: 'tools/objects/new-object.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-object.mts', sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
-    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json', 'presentation/LICENSE.INTER-OFL', 'presentation/title-mark.json'].map(path => ({ path,
+    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json'].map(path => ({ path,
       // Provenance refuses a document without a binding; the content record is authored here.
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
   put(`src/renderers/css/styles/${id}-surfaces.css`, starStylesheet(id, name, offLimbSize, 'Both plates are transparent: no observation is cast.'));
@@ -266,14 +263,9 @@ export async function scaffoldStar(spec: StarScaffold, root = process.cwd()) {
   const record = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${spec.id}.json`), 'utf8')) as unknown;
   const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href) as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
   const files = scaffoldStarFiles(spec, record, SOLAR_GEOMETRY_EPOCH_JD_TT);
-  // The title font is a pinned source; a missing copy is refused before any file is written, as the hosted-planet scaffold does.
-  const font = resolve(root, 'src/objects/betelgeuse/source/presentation/InterVariable.ttf');
-  if (!await stat(font).then(() => true, () => false)) throw new Error(`${font} is missing; restore it (pnpm setup:assets) before scaffolding.`);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
   const presentation = resolve(root, 'src/objects', spec.id, 'source/presentation');
-  await copyFile(resolve(root, 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL'), resolve(presentation, 'LICENSE.INTER-OFL'));
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-  await copyFile(font, resolve(presentation, 'InterVariable.ttf'));
   return [...files.keys(), `src/objects/${spec.id}/source/presentation/context.png`];
 }
 

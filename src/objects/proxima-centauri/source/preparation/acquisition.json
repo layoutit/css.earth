@@ -7,15 +7,6 @@
         "restore",
         "refresh"
       ],
-      "path": "presentation/InterVariable.ttf",
-      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/lowlib/hlsp_lowlib_hst_stis_gj551_g230lb-g430l-g750l_v1.0_spect.fits",
       "path": "photometry/hlsp_lowlib_gj551.fits"
     },

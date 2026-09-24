@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2603-08787",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sanghi et al. (2026): Worlds Next Door. IV. Mapping the Late Stages of Giant Planet Evolution with a Precise Dynamical Mass and Luminosity for $ε$ Ind Ab",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2603.08787"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae74c8"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2603.08787",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae74c8",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2603.08787",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 1: Epsilon Indi A, radius 0.713 +/- 0.006 solar radii, Teff 4700 +/- 65 K, mass 0.782 +/- 0.023 solar masses; Table 2: JWST/MIRI and NIRCam astrometry of Ab; Octofitter posteriors on Zenodo doi:10.5281/zenodo.19931118; section 5: radius 1.05 +/- 0.01 Jupiter radii and Teff 275 +/- 5 K; dynamical mass 6.5 +0.7/-0.6 Jupiter masses"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal",
+  "creators": [
+    "Aniket Sanghi",
+    "William Thompson",
+    "James Mang",
+    "Jerry Xuan",
+    "Dimitri Mawet",
+    "Jean-Baptiste Ruffio"
+  ]
+}

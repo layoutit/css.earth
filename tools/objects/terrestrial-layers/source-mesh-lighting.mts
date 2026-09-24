@@ -1,8 +1,9 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type {SourceMesh} from './contracts.mts';
 import {parseMeshLighting} from './source-records.mts';
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 const unit = (v: readonly number[]) => { const length = Math.hypot(...v); return v.map(x => x / length); };
 
 /** Project each simplified surface texel onto the nearby released mesh. Rays

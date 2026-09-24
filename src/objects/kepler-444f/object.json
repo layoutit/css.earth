@@ -8,7 +8,6 @@
       "label": "Kepler-444 f",
       "steps": [
         "verify-sources",
-        "title",
         "assets",
         "panel-content",
         "lenses",
@@ -76,10 +75,6 @@
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json"
-        },
-        {
-          "id": "title",
-          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",

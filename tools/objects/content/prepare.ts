@@ -1,11 +1,10 @@
 // Shared object-content preparation. Source JSON owns facts, labels, recipes,
 // and provenance; this module owns the derived shell payload.
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { basename, dirname, resolve } from "node:path";
+import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
 import { prepareLensLabels } from "../../../site/prepare-lens-labels.mts";
 import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.mts";
-import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mts";
 import { prepareLenses } from "./lenses";
 import { lensBillboardColors } from "./billboard-colors.mts";
 import { parseFactsheet, verifyFactsheetSources } from '../../sources/factsheet-sources.mts';
@@ -52,16 +51,8 @@ export function prepareObjectContent(
   if (source.schema !== "cssearth-object-content@1" || source.version !== 1) {
     throw new Error(`${source.id}: unsupported object content schema`);
   }
-  if (source.title.label !== source.displayName) {
-    throw new Error(`${source.id}: title label does not match display name`);
-  }
-  // The prepared title carries what the page draws: the glyph path, its boxes and the font's name. The font pin and
-  // the generator note stay in the object's title-mark source, whose bytes git records.
-  const { sourceGenerator: _generator, xOrigin: _origin, ...titleSource } = source.title;
-  const title = {
-    ...titleSource,
-    ...createPreparedTitleLayout(source.title),
-  } as PreparedObjectContent["title"];
+  // The page sets the display name in the shared title font; no object carries its own title artwork.
+  const title = { label: source.displayName };
   const { facts, moreFacts } = parseFactsheet(source.panel);
   const lensControls = source.lenses.labels
     ? prepareLensLabels({ controls: source.lenses.controls }, source.lenses.labels).controls
@@ -107,14 +98,7 @@ export async function prepareObjectContentAssets({
   const source = JSON.parse(await readFile(sourcePath, "utf8")) as ObjectContentSource;
   const objectDirectory = resolve(sourceDirectory, '..');
   await verifyFactsheetSources(source.panel, { objectDirectory });
-  const titleSourcePath = source.provenance.title?.path;
-  let preparedSource = source;
-  if (titleSourcePath?.endsWith(".json")) {
-    const parsedTitle = JSON.parse(await readFile(resolve(dirname(sourcePath), titleSourcePath), "utf8")) as ObjectContentSource["title"] & { schema?: string };
-    const { schema: _schema, ...title } = parsedTitle;
-    preparedSource = { ...source, title };
-  }
-  await prepareRasterLegendAssets(preparedSource, sourceDirectory, publicDirectory);
+  await prepareRasterLegendAssets(source, sourceDirectory, publicDirectory);
   let assets: PreparedRasterAssets = {};
   try {
     assets = JSON.parse(await readFile(resolve(outputDirectory, config.assetsPath ?? "assets.json"), "utf8")) as PreparedRasterAssets;
@@ -139,7 +123,7 @@ export async function prepareObjectContentAssets({
       gallery?: { items: GalleryRecipe["items"]; qualification?: string };
     };
   }
-  const prepared = prepareObjectContent(preparedSource, assets);
+  const prepared = prepareObjectContent(source, assets);
   const lenses = await deriveLensBillboardColors(prepared.lenses, publicDirectory);
   const preparedWithAssets = { ...prepared, lenses };
   const content: PreparedObjectContentDocument = {

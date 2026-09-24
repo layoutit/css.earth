@@ -57,6 +57,6 @@ The candidate dispositions and their source evidence are recorded in the [invest
 
 The shared radial-terrain recipe simplifies the 5,040 source triangles to **480 native PolyCSS `u` leaves**, using the existing meshoptimizer path and a 1.5 km simplifier-error setting. The result has one closed component, Euler characteristic 2, and an estimated simplifier error of 1.168 km. The same geometry supplies prepared lighting and the purpose-sized context portrait.
 
-The compact radius table, numerical source transcriptions and constant no-data material are checked in. The acquisition plan restores the pinned external Inter font and NAIF PCK. The context portrait is reproducible by the shared radial-snapshot generator with the recipe in `preparation/navigation.json`. Required preparation inputs have source pins; no private runtime or hand-built renderer is introduced.
+The compact radius table, numerical source transcriptions and constant no-data material are checked in. The acquisition plan restores the pinned NAIF PCK. The context portrait is reproducible by the shared radial-snapshot generator with the recipe in `preparation/navigation.json`. Required preparation inputs have source pins; no private runtime or hand-built renderer is introduced.
 
 </details>

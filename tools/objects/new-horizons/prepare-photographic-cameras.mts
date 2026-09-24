@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /**
  * Bounded New Horizons LORRI pointing registration for a fixed PCK body frame
  * and fixed released STL.  This is deliberately not a pose or shape solver.
@@ -28,7 +29,7 @@ const GENERATOR_PATH = fileURLToPath(import.meta.url);
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, value, index) => sum + value * b[index], 0);
 const unit = (value: readonly number[]) => { const length = Math.hypot(...value); if (!(length > 0)) throw new Error('Zero-length ray.'); return value.map(v => v / length); };
 const sub = (a: readonly number[], b: readonly number[]) => a.map((value, index) => value - b[index]);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 
 const crop = shape({ left: number, top: number, width: number, height: number });
 const recipeShape = shape({ schema: text, bodyId: text, naifBodyId: number,

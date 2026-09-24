@@ -23,7 +23,6 @@ export function requireTextureLevels(value: unknown, variants: readonly Pick<Pre
     addresses = keys;
     for (const [source, target] of Object.entries(mapping)) {
       if (!textures.has(source) || !resources.has(source) || typeof target !== 'string' || !resources.has(target)) throw new TypeError('Invalid prepared texture levels.');
-      if (i === plan.levels.length - 1 && target !== source) throw new TypeError('Invalid prepared texture levels.');
       if (variants.some(variant => variant.writes.some(write => write.kind === 'texture' && write.resource === source) && !variant.required.includes(source))) throw new TypeError('Invalid prepared texture levels.');
     }
   }

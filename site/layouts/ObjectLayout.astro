@@ -1,6 +1,5 @@
 ---
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
-import TitleTypography from "../components/TitleTypography.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { requireSceneObject } from "../objects.mts";
@@ -19,7 +18,8 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
-const worldCamera = { schema: 'cssearth-world-camera@1', frame: worldSummary.frame, focusId: worldSummary.focus.id, camera: worldSummary.camera };
+import { worldCameraOf } from '../../src/renderers/css/dist/index.js';
+const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
   objectId: string;
@@ -60,7 +60,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <link rel="icon" href="/favicon.ico" sizes="any" />
     {!navigation && <script is:inline type="application/json" data-world-camera set:html={JSON.stringify(worldCamera).replace(/</g, '\\u003c')}></script>}
     {!navigation && descriptor?.prepared?.url === 'prepared/object.json' &&
-      <link rel="preload" href={`/objects/${objectRecord.id}/object.json`} as="fetch" crossorigin="anonymous" />}
+      <link rel="preload" href={`/objects/${objectRecord.id}/first-view.json`} as="fetch" crossorigin="anonymous" />}
     {/* Until the first body is ready, the phone sheet's lazy images wait (object-shell.css), so the globe's textures have
         the connection. The router clears this; without JavaScript it is never set. */}
     {!navigation && <script is:inline>document.documentElement.dataset.bodyPending = '';</script>}
@@ -88,7 +88,6 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <slot name="object-head" />
     <title>{seo.title}</title>
     <ObjectSwatchStyles />
-    <TitleTypography />
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->

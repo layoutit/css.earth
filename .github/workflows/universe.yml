@@ -226,11 +226,6 @@ jobs:
           restore-keys: |
             tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
             tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: site/source/titles/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -304,11 +299,6 @@ jobs:
           restore-keys: |
             tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
             tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: site/source/titles/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -378,11 +368,6 @@ jobs:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
           key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: site/source/titles/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -496,11 +481,6 @@ jobs:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
           key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
-          path: site/source/titles/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}

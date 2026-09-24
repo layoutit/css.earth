@@ -1,3 +1,4 @@
+import { applyLinearTint } from '../color-transfer.mts';
 import sharp from 'sharp';
 import type {RadiusMapping, RadialBand, RadialShadow, RadialVariant, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from './radial-contract.mts';
 import { type RingWedgeLayout, wedgePoint, wedgeShare } from '../../../src/renderers/css/preparation/scene/ring-wedges.ts';
@@ -172,14 +173,6 @@ export function rasterAnnularWedges(recipe: AnnularLayer, density: number, layou
     data[offset + 3] = share >= 1 ? texel[3] : Math.round(255 * (1 - (1 - texel[3] / 255) ** share));
   }
   return data;
-}
-
-export function applyLinearTint(channel: number, factor: number) {
-  const encoded = channel / 255;
-  const linear = encoded <= 0.04045 ? encoded / 12.92 : ((encoded + 0.055) / 1.055) ** 2.4;
-  const tinted = Math.max(0, Math.min(1, linear * factor));
-  const output = tinted <= 0.0031308 ? tinted * 12.92 : 1.055 * tinted ** (1 / 2.4) - 0.055;
-  return Math.max(0, Math.min(255, Math.round(output * 255)));
 }
 
 /** Sample a pinned one-dimensional observed color/transparency profile. */

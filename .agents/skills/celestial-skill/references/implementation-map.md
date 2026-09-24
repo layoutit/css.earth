@@ -54,7 +54,7 @@ fallback requirements are not the current authored-package template.
 | Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene/scene-contract.mts`, `site/scene/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
-| Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare/prepare-object-title-sources.mts`, `tools/prepare/prepare-surface-minimaps.mts` |
+| Content, lens labels and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare/prepare-surface-minimaps.mts` |
 | Search and marker presentation | `site/search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mts`, shared world-context preparation and orbit validation/projector |
 

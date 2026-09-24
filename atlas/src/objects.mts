@@ -1,3 +1,4 @@
+import { orbitRoot } from '../../src/platform/orbit-root.mts';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { SITE_ORIGIN } from '../../site/seo.mts';
@@ -156,14 +157,6 @@ export interface SystemGroup { id: string; label: string; star: SystemEntry | nu
 /** Objects nested by planetary system: the star, its bodies by classification, and each body's satellites under it. */
 export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
   const { parents } = worldContext(), byId = new Map(objects.map(object => [object.id, object]));
-  const rootOf = (id: string) => {
-    const seen = new Set<string>();
-    for (let current = id; ; current = parents.get(current)!) {
-      if (seen.has(current)) throw new TypeError(`${id} has a cyclic orbit chain.`);
-      seen.add(current);
-      if (!parents.has(current)) return current;
-    }
-  };
   const entries = new Map(objects.map(object => [object.id, { object, satellites: [] as SystemEntry[] }]));
   const hosted = new Set<string>();
   // A satellite hangs under the object it orbits; every other object hangs under the star its orbit chain reaches.
@@ -179,9 +172,9 @@ export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
   const outside: ObjectRecord[] = [];
   for (const object of objects) {
     if (hosted.has(object.id)) continue;
-    const root = parents.has(object.id) ? rootOf(object.id) : object.id;
+    const root = parents.has(object.id) ? orbitRoot(object.id, parents) : object.id;
     const star = byId.get(root);
-    if (!star || star.group !== 'star' || (root === object.id && !objects.some(member => member.id !== root && parents.has(member.id) && rootOf(member.id) === root))) {
+    if (!star || star.group !== 'star' || (root === object.id && !objects.some(member => member.id !== root && parents.has(member.id) && orbitRoot(member.id, parents) === root))) {
       outside.push(object);
       continue;
     }

@@ -1,3 +1,4 @@
+import { validateBounds } from './bounds.ts';
 /** Offline display-volume reconstruction from an exactly partitioned photograph. */
 import type { FilledComponent, FilledComponentsResult } from './filled-components.ts';
 import type { FilledVolumePart } from './filled-parts.ts';
@@ -11,13 +12,6 @@ interface Family { pixels: number[]; weight: number; x: number; y: number; mode?
 const DEFAULT_CHANNELS: FilledVolumeChannels = { compact: true, diffuse: true, extended: true };
 const finitePositive = (value: number): boolean => Number.isFinite(value) && value > 0;
 const clamp = (value: number, lo: number, hi: number): number => Math.max(lo, Math.min(hi, value));
-
-function validateBounds(bounds: Bounds3, label: string): void {
-  if (bounds.min.length !== 3 || bounds.max.length !== 3 || bounds.min.some((value, axis) =>
-    !Number.isFinite(value) || !Number.isFinite(bounds.max[axis]) || value >= bounds.max[axis]!)) {
-    throw new TypeError(`${label} must contain finite increasing XYZ intervals.`);
-  }
-}
 
 /** C1, compact, exactly normalized quartic kernel. */
 function quartic(z: number, center: number, half: number): number {

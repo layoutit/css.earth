@@ -1,3 +1,4 @@
+import { bindImageZoom } from '../../ui/viewport-input.ts';
 import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { localFile } from '../legacy-viewer/controller';
@@ -65,13 +66,7 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
   useEffect(() => { if (data && extent.width > 40 && extent.height > 40 && !initialFit.current) { fitImages(true); initialFit.current = true; } }, [data, extent]);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
-    const wheel = (event: WheelEvent) => {
-      event.preventDefault(); const bounds = element.getBoundingClientRect(), old = cameraRef.current;
-      const zoom = Math.min(12, Math.max(.015, old.zoom * Math.exp(-event.deltaY * .0015)));
-      const x = event.clientX - bounds.left, y = event.clientY - bounds.top;
-      setCamera({ zoom, x: x - (x - old.x) * zoom / old.zoom, y: y - (y - old.y) * zoom / old.zoom });
-    };
-    element.addEventListener('wheel', wheel, { passive: false }); return () => element.removeEventListener('wheel', wheel);
+    return bindImageZoom(element, cameraRef, setCamera);
   }, []);
   const image = data?.images.find(item => item.id === selected), fit = fits[selected] ?? unchanged;
   const visible = (item: Observation) => item.id === selected;

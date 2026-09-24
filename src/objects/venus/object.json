@@ -10,7 +10,6 @@
       "label": "Venus",
       "steps": [
         "verify-sources",
-        "title",
         "assets",
         "charts",
         "features",
@@ -83,10 +82,6 @@
         {
           "id": "charts",
           "path": "source/content/charts.json"
-        },
-        {
-          "id": "title",
-          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "acquisition",
