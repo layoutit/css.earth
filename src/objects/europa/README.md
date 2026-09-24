@@ -193,7 +193,7 @@ The exact Float32 COG is 642×133, with 39,032 finite non-special samples. Its p
 
 The genuine height no-data value and complete bilinear footprints control coverage. The released `FOM` and `ClrConf` files are byte-identical: the retained processing log translates the FOM VRT into both outputs and cubic-resamples the categorical FOM codes. Neither is used as a confidence or quality mask. Exact ignored source TIFFs have acquisition recipes; the CC0 release and source authors retain attribution.
 
-The body-owned lens focus is 142°E, 43.7°S at supported zoom 4. Shared preparation converts it through the actual solid mesh axes and system matrix to existing camera navigation. The X/Y swap in solid PolyCSS leaf coordinates is included; no source interpretation occurs in runtime. The Yelland trial and its broken quality products are retained only for the intake audit. Useful regional framing, source-versus-display visuals, and Chrome conformance remain separate B2 gates.
+The body-owned lens focus is 142°E, 43.7°S at supported zoom 4. The False color lens covers about a tenth of the map, so it opens on that coverage: 143.5°E, 2.3°N at zoom 1.1, the centre of the pixels that carry colour in its prepared minimap. The same measurement on the elevation minimap lands on the authored 142°E, 43.7°S strip. Shared preparation converts it through the actual solid mesh axes and system matrix to existing camera navigation. The X/Y swap in solid PolyCSS leaf coordinates is included; no source interpretation occurs in runtime. The Yelland trial and its broken quality products are retained only for the intake audit. Useful regional framing, source-versus-display visuals, and Chrome conformance remain separate B2 gates.
 
 ## B6 mapped science
 

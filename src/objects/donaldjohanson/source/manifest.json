@@ -279,22 +279,26 @@
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
-      "credit": "DLR/Lucy shape team, Stefano Mottola and Frank Preusker; Marchi et al. (2026), Science, doi:10.1126/science.aec0503; NASA PDS/NAIF",
-      "license": "Public NASA PDS scientific mission data; retain DLR/Lucy authorship and source notices. See NOTICE.md.",
+      "credit": "DLR/Lucy shape team, Stefano Mottola and Frank Preusker; Marchi et al. (2026), Science, doi:10.1126/science.aec0503; NASA PDS/NAIF; NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public NASA PDS scientific mission data; retain DLR/Lucy authorship and source notices. See NOTICE.md; Public scientific archive; retain original notices and full source attribution.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "donaldjohanson-shape"
+          "donaldjohanson-shape",
+          "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
+          "donaldjohanson-observations-llorri-camera-json",
+          "donaldjohanson-lor_0798443242_04596_00001_1x1_sci_03-fit",
+          "donaldjohanson-llorri-approach-camera"
         ],
         "size": 512,
-        "longitudeDegrees": 0,
-        "latitudeDegrees": 35,
+        "longitudeDegrees": -69.5,
+        "latitudeDegrees": 33.7,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "shape"
+        "lensId": "llorri"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

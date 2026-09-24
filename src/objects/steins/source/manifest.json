@@ -351,23 +351,26 @@
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
       "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
-      "credit": "Phil Stooke/NASA PDS; ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
-      "license": "Stooke Small Bodies Maps V3.0 states these maps are public domain; credit required.",
+      "credit": "Jorda, L., Gaskell, R.W., and Kaasalainen, M.K.J.; T.L. Farnham (editor); NASA PDS,2013; ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "NASA PDS public scientific data with retained source credit; Public scientific archive; retain original notices and full source attribution.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "steins-normal",
-          "steins-shape"
+          "steins-shape",
+          "steins-observations-w20080905t183606461id4df17-img",
+          "steins-observations-osiris-camera-json",
+          "steins-w20080905t183630497id4df17-camera",
+          "steins-w20080905t183630497id4df17-img"
         ],
         "size": 512,
-        "longitudeDegrees": 20,
-        "latitudeDegrees": 10,
+        "longitudeDegrees": 36.8,
+        "latitudeDegrees": 1.0,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "lensId": "osiris"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
