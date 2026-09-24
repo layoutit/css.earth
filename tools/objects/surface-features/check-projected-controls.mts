@@ -6,7 +6,7 @@ import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { readFitsPrimary } from '../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 

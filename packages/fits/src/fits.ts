@@ -223,6 +223,21 @@ export function fitsHeaderLiterals(header: FitsHeader): Record<string, string> {
     typeof value === 'string' ? `'${value.replaceAll("'", "''")}'` : typeof value === 'boolean' ? value ? 'T' : 'F' : String(value)]));
 }
 
+/** Historical name: accepts one 2D primary OR IMAGE-extension HDU. The header comes back as quoted card literals
+ * (`fitsHeaderLiterals`) for the product adapters that read them. */
+export function readFitsPrimary(bytes: Uint8Array) {
+  const image = readFitsImage(bytes);
+  if (image.dimensions.length !== 2) throw new Error('Unsupported FITS image: expected two dimensions.');
+  return { ...image, header: fitsHeaderLiterals(image.header) };
+}
+
+/** One 1-based primary-array plane; native FITS row order is preserved. The header comes back as quoted card literals. */
+export function readFitsPlane(bytes: Uint8Array, plane = 1) {
+  const image = readFitsImage(bytes, { plane });
+  if (image.header.SIMPLE !== true || image.header.XTENSION !== undefined) throw new Error('Expected FITS primary array.');
+  return { ...image, header: fitsHeaderLiterals(image.header) };
+}
+
 /** Our fixed facet-table profiles do not implement column calibration or nulls. */
 export function assertUnscaledFitsTable(header: FitsHeader) {
   if (Object.keys(header).some(key => /^(?:TSCAL|TZERO|TNULL)\d+$/u.test(key)))

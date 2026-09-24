@@ -9,8 +9,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mts';
 import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
-import {readFitsPrimary} from '../observation/fits.mts';
-import { readFitsImage, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
+import { readFitsPrimary, readFitsImage, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
 import { pds3Keyword } from '../pds-labels.mts';
 import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts';
 

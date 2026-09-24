@@ -1,6 +1,6 @@
 import {parseFitsPolicy,parseDimensions} from './source-records.mts';
 import { readFile } from 'node:fs/promises';
-import { readFitsPrimary } from '../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 
 export function validateFitsObservationPolicy(value: unknown) {
   const policy=parseFitsPolicy(value);

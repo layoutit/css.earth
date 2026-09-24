@@ -12,7 +12,7 @@ import { checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, l
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { pds3Keyword, pds3Values } from '../../pds-labels.mts';
-import { readFitsPrimary } from '../../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 import { pds3LabelHasReflectance } from './pds3-reflectance.mts';
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';

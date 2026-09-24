@@ -9,7 +9,7 @@ import { cross3 as cross, array, boolean, number, optional, shape, text, dotN as
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFitsHeader } from '../observation/fits.mts';
+import { readFitsHeader } from '@cssearth/fits';
 import { newHorizonsCamera, decodeNewHorizonsLorri } from '../terrestrial-layers/new-horizons-geo.mts';
 import { bindSipCamera } from '../terrestrial-layers/llorri-geo.mts';
 import { observedLimb, limbThreshold, type LimbEdgePoint } from '../terrestrial-layers/limb-refinement.mts';

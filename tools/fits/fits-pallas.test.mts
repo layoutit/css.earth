@@ -2,8 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createHash } from 'node:crypto';
-import { readFitsImage, readFitsHdus } from '@cssearth/fits';
-import { readFitsPrimary } from '../objects/observation/fits.mts';
+import { readFitsImage, readFitsHdus, readFitsPrimary } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
 import { requireRecord } from '@cssearth/core';
 

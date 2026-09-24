@@ -4,7 +4,7 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {loadObjShape} from '../terrestrial-layers/obj-shape.mts';
 import {decodeNewHorizonsLorri,newHorizonsCamera,multiplyCameraMatrices} from '../terrestrial-layers/new-horizons-geo.mts';
-import {readFitsHeader} from '../observation/fits.mts';
+import { readFitsHeader } from '@cssearth/fits';
 import {observedLimb,limbThreshold,type LimbEdgePoint} from '../terrestrial-layers/limb-refinement.mts';
 
 const root=resolve('src/objects/arrokoth/source'),read=async(path:string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));

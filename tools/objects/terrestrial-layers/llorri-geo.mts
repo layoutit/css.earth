@@ -2,7 +2,7 @@ import { sha256 } from '@cssearth/core/node';
 import {requireRecord} from '@cssearth/core';
 import type {SipCamera} from './contracts.mts';
 import {parseSipCamera,parseLlorriCamera} from './source-records.mts';
-import { readFitsPrimary } from '../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 import { project } from './osiris-geo.mts';
 
 const unquote = (s: unknown) => typeof s === 'string' ? s.replace(/^'(.*)'$/, '$1').trim() : undefined;

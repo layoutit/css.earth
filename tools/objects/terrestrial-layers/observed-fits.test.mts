@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { readFitsPrimary } from '../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 import { mapFitsObservation } from './observed-fits.mts';
 
 function fitsBytes(bitpix: number, values: readonly number[], extra: readonly string[] = []) {

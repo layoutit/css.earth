@@ -1,17 +1,10 @@
-import { readFitsImage, fitsHeaderLiterals } from '@cssearth/fits';
+import { readFitsPrimary } from '@cssearth/fits';
 import { clamp } from '@cssearth/core';
-export { scanFitsCards, fitsCardValue, readFitsHeader } from '@cssearth/fits';
-/** FITS observation decoding and data-defined latitude/longitude/color mapping (moved from the retired static lane). */
+/** Data-defined latitude/longitude/color mapping of a FITS observation map (moved from the retired static lane). Decoding
+ * belongs to @cssearth/fits. */
 export type FitsColor = {kind: 'signed-asinh'; palette: readonly (readonly number[])[]; softening: number; maximum: number}
   | {kind: 'positive-log'; palette: readonly (readonly number[])[]; range: readonly [number, number]};
 export interface FitsMapRecipe {bitpix: number; width: number; height: number; latitude: 'sine-latitude' | 'equirectangular'; positiveOnly?: boolean; nearestLatitudeLimit: number; color: FitsColor;}
-/** Historical name: accepts one 2D primary OR IMAGE-extension HDU. */
-export function readFitsPrimary(bytes: Buffer) {
-  const image = readFitsImage(bytes);
-  if (image.dimensions.length !== 2) throw new Error('Unsupported FITS image: expected two dimensions.');
-  return { ...image, header: fitsHeaderLiterals(image.header) };
-}
-
 export function prepareFitsMap(bytes: Buffer, width: number, height: number, recipe: FitsMapRecipe) {
   const fits = readFitsPrimary(bytes);
   if (fits.bitpix !== recipe.bitpix || fits.width !== recipe.width || fits.height !== recipe.height) throw new Error('Pinned synoptic FITS geometry changed.');
@@ -63,10 +56,3 @@ function nearestValidValue(fits: ReturnType<typeof readFitsPrimary>, x: number, 
   return 0;
 }
 const modulo = (value: number, divisor: number) => ((value % divisor) + divisor) % divisor;
-
-/** One 1-based primary-array plane; native FITS row order is preserved. */
-export function readFitsPlane(bytes: Buffer, plane = 1) {
-  const image = readFitsImage(bytes, { plane });
-  if (image.header.SIMPLE !== true || image.header.XTENSION !== undefined) throw new Error('Expected FITS primary array.');
-  return { ...image, header: fitsHeaderLiterals(image.header) };
-}
