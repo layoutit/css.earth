@@ -1,17 +1,19 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceLoad, sourceTest } from '../../../../tests/objects/source-test.mts';
 import { srgbToLinear } from '../../color-transfer.mts';
 import { limbDarkeningPlate } from './stellar-photometric-color.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar-spot-figure.mts';
 
-const test = sourceTest();
-const root = new URL('../../../../src/objects/hd-189733/source/photometry', import.meta.url);
+const root = new URL('../../../../src/objects/hd-189733/source/photometry/', import.meta.url);
 const record = JSON.parse(await readFile(new URL('narrett-2024-band-model.json', root), 'utf8'));
 const model = parseSpotFigureModel(record);
-const { data, info } = await sharp(await readFile(new URL('narrett-2024-figure-7.jpg', root))).raw().toBuffer({ resolveWithObject: true });
-const image = { data, width: info.width, height: info.height, channels: info.channels };
+// The figure is a download (source/preparation/acquisition.json); a clone without it skips these tests.
+const loaded = await sourceLoad(async () => sharp(await readFile(new URL('narrett-2024-figure-7.jpg', root))).raw().toBuffer({ resolveWithObject: true }));
+const test = sourceTest('hd-189733', loaded);
+const { data, info } = loaded.values;
+const image = { data, width: info?.width, height: info?.height, channels: info?.channels };
 const color = { linear: [1, 0.7605245046752924, 0.6239603916750761], srgb: [255, 226, 207] } as const;
 const limb = { u1: 0.216, u2: 0.440 };
 
