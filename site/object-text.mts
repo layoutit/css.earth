@@ -1,4 +1,5 @@
 import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourceText, sourceUrl } from '../src/platform/source-catalog.mts';
+import { validateDatasetText } from './dataset-content.mts';
 
 /**
  * Reader text for one object: the card line, the introduction and each dataset's
@@ -144,6 +145,9 @@ export function readerTextErrors(text: ObjectText, context: TextContext): TextFi
   for (const [id, dataset] of Object.entries(text.datasets)) {
     if (!lensIds.includes(id)) add(`datasets.${id}`, 'coverage', 'no dataset has this id');
     budget(`datasets.${id}.title`, 'title', dataset.title);
+    // The page refuses a dataset whose title repeats its lens label or its summary (dataset-content.mts); refuse it here first.
+    const lens = context.lenses.find(entry => entry.id === id);
+    try { validateDatasetText({ id, title: dataset.title, label: lens?.label, summary: dataset.summary }); } catch (error) { add(`datasets.${id}.title`, 'identity', (error as Error).message.replace(`${id}: `, '')); }
     if (dataset.detail !== undefined) budget(`datasets.${id}.detail`, 'detail', dataset.detail);
     budget(`datasets.${id}.summary`, 'summary', dataset.summary);
     if (dataset.sources?.length) cite(`datasets.${id}`, dataset.sources);

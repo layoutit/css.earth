@@ -88,7 +88,8 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/body-surfaces.css"
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-39b-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json"

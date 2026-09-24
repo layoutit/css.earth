@@ -21,6 +21,7 @@ import { loadStellarPhotometricColor } from '../observation/stellar/stellar-phot
 import { parseCieTable } from '../observation/disc-integrated-color.mts';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 import { hostLitGray } from '../color-transfer.mts';
+import { hostedPlanetStylesheet } from '../new-hosted-planet.mts';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
 export const emissionQuery = (planet: string) => `select ${EMISSION_COLUMNS} from emissionspec where plntname='${planet.replace(/'/gu, "''")}' order by centralwavelng`;
@@ -88,6 +89,7 @@ export async function installThermalLens(files: PackageFiles, id: string, name: 
   const descriptor = read(`${o}/object.json`);
   descriptor.properties.recipe.surfaces[0].lenses = [{ id: 'thermal', source: 'content', material: 'lighting' }];
   files.set(`${o}/object.json`, json(descriptor));
+  ensureStylesheet(files, id, 'thermal');
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.color = colorHex;
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-thermal@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-thermal@2x.webp`;
@@ -100,7 +102,7 @@ export async function installThermalLens(files: PackageFiles, id: string, name: 
     notes: `The colour of ${name}'s heat: a black body at the dayside brightness temperature measured in secondary eclipse at ${thermal.wavelengthMicrometres} µm (${thermal.facility}). Its star lights the day side; the night side is not measured. Reflected starlight is not included.` }] };
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
-  text.datasets = { thermal: { title: 'Thermal glow', detail: 'From its measured dayside temperature', summary: `The colour of a black body at the ${thermal.temperatureK.toLocaleString('en-US')} K day side measured in eclipse.` } };
+  text.datasets = { thermal: { title: 'Dayside heat', detail: 'From its dayside temperature', summary: `The colour of a black body at the ${thermal.temperatureK.toLocaleString('en-US')} K day side measured in eclipse.` } };
   files.set(`${o}/text.json`, json(text));
   const manifest = read(`${s}/manifest.json`);
   const inputs = [{ id: `${id}-thermal-color`, path: 'photometry/thermal-color.json', origin: thermal.url, credit: `${thermal.source}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
@@ -134,6 +136,7 @@ export async function installBandColorLens(files: PackageFiles, id: string, name
   const descriptor = read(`${o}/object.json`);
   descriptor.properties.recipe.surfaces[0].lenses = [{ id: 'infrared', source: 'content', material: emissive ? 'emission' : 'lighting' }];
   files.set(`${o}/object.json`, json(descriptor));
+  ensureStylesheet(files, id, 'infrared');
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.color = colorHex;
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-infrared@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-infrared@2x.webp`;
@@ -146,7 +149,7 @@ export async function installBandColorLens(files: PackageFiles, id: string, name
     notes: `${name}'s brightness in three infrared bands as one colour: red ${bands[0]}, green ${bands[1]}, blue ${bands[2]} (${photometry.source.citation}), on a range shared with ${photometry.displayRangeSource.split('.')[0]!.toLowerCase()}. Not a natural colour; nobody has resolved its disc.` }] };
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
-  text.datasets = { infrared: { title: 'Infrared colour', detail: 'From its measured band fluxes', summary: `False colour from flux densities in three infrared bands, longest wavelength red.` } };
+  text.datasets = { infrared: { title: 'Infrared brightness', detail: 'From its band fluxes', summary: `False colour from flux densities in three infrared bands, longest wavelength red.` } };
   files.set(`${o}/text.json`, json(text));
   const manifest = read(`${s}/manifest.json`);
   manifest.inputs = [...manifest.inputs, { id: `${id}-band-color`, path: 'photometry/band-color.json', origin: photometry.source.url, credit: `${photometry.source.citation}, ${photometry.source.locator}`, license: 'Factual numerical measurements; source attribution retained',
@@ -154,6 +157,16 @@ export async function installBandColorLens(files: PackageFiles, id: string, name
     sourceBinding: { kind: 'local', reason: 'Project-authored colour recipe transcribing the cited photometry; repinned when edited.' } }];
   files.set(`${s}/manifest.json`, json(manifest));
   return { hex: colorHex, credit: `Colour: infrared false colour from the flux densities of ${photometry.source.citation} (${bands.join(', ')}).` };
+}
+
+/** The planet's own stylesheet, which sizes its lighting frame and names its lens's surface: written for the lens in use and listed
+ * on the page. Planets scaffolded before the tool had none, and their lighting frame measured 0×0, a flat unlit disc. */
+export function ensureStylesheet(files: PackageFiles, id: string, lens: string) {
+  const path = `src/renderers/css/styles/${id}-surfaces.css`, o = `src/objects/${id}`;
+  files.set(path, hostedPlanetStylesheet(id, lens));
+  const descriptor = JSON.parse(String(files.get(`${o}/object.json`))) as { properties: { page: { stylesheets: string[] } } };
+  if (!descriptor.properties.page.stylesheets.includes(path)) descriptor.properties.page.stylesheets.push(path);
+  files.set(`${o}/object.json`, json(descriptor));
 }
 
 export interface HostLight { readonly host: string; readonly srgb: string; readonly source: string; readonly url: string }
@@ -198,17 +211,21 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
   for (const id of ids) {
     const o = resolve(root, 'src/objects', id), files: PackageFiles = new Map();
     for (const path of RELENS_FILES) files.set(`src/objects/${id}/${path}`, await readFile(resolve(o, path), 'utf8'));
+    const before = new Map(files);
     const descriptor = JSON.parse(String(files.get(`src/objects/${id}/source/content/object.json`))) as { displayName: string }, body = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8')) as { physical?: { parent?: string } };
     const raster = JSON.parse(String(files.get(`src/objects/${id}/source/preparation/raster.json`))) as { emission?: unknown; surfaces: { science: { kind: string; hostLight?: unknown } }[] };
     const kind = raster.surfaces[0]?.science.kind;
     // A self-luminous body (an imaged young planet, drawn emissive) shines with its own heat; no starlight to tint.
     if (mode === 'host-light' && raster.emission !== undefined) { lines.push(`${id}: self-luminous, no starlight on it`); progress(lines.at(-1)!); continue; }
+    // Whatever the mode, a lit shape planet gets its own stylesheet if it never had one (the lighting frame is 0×0 without it).
+    if (kind === 'neutral-shape' && raster.emission === undefined && !(JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { page: { stylesheets: string[] } } }).properties.page.stylesheets.includes(`src/renderers/css/styles/${id}-surfaces.css`)) { ensureStylesheet(files, id, 'shape'); lines.push(`${id}: stylesheet written, its lighting frame had no size`); progress(lines.at(-1)!); }
     if (mode === 'photometry') {
       const spec = photometry.get(id);
       if (!spec) { lines.push(`${id}: no photometry entry in the spec`); progress(lines.at(-1)!); continue; }
       const { hex } = await installBandColorLens(files, id, descriptor.displayName, spec);
       lines.push(`${id}: infrared colour ${hex} from ${spec.source.citation}`);
     } else if (mode === 'thermal') {
+      if (kind === 'dayside-thermal-color') { ensureStylesheet(files, id, 'thermal'); lines.push(`${id}: keeps its thermal lens; stylesheet refreshed`); for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } progress(lines.at(-1)!); continue; }
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} lens`); continue; }
       const { csv, thermal } = await thermalFromArchive(archive, descriptor.displayName);
       if (!thermal) { lines.push(`${id}: no measured dayside brightness temperature in the archive's emission table`); continue; }
@@ -216,7 +233,7 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
       lines.push(`${id}: thermal glow ${hex} at ${thermal.temperatureK} K (${thermal.wavelengthMicrometres} µm, ${thermal.facility})`);
     } else {
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} lens`); continue; }
-      if (raster.surfaces[0]!.science.hostLight !== undefined) { lines.push(`${id}: already lit by its host`); continue; }
+      if (raster.surfaces[0]!.science.hostLight !== undefined) { lines.push(`${id}: already lit by its host`); if ([...files].some(([path, value]) => before.get(path) !== value)) for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } continue; }
       const host = body.physical?.parent;
       if (!host) { lines.push(`${id}: no host in its astronomy record`); continue; }
       const light = await hostLightOf(root, host);

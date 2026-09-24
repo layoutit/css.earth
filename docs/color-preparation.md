@@ -204,6 +204,8 @@ and `--host-light <id>...` give them to planets already in the tree.
 
 ![Lens thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
 
+![Before and after on the page: TRAPPIST-1 e, Kepler-186 f and HD 219134 b under their stars' light, HD 209458 b at its measured dayside heat; the flat gray discs on main had no stylesheet sizing their lighting frame](images/planet-colour-before-after.png)
+
 The star's catalogue swatch, minimap dot and navigation marker take the same colour
 ([stellar-spectra/author.mts](../tools/objects/source-authoring/stellar-spectra/author.mts)). A star with no usable
 spectrum keeps the star field's temperature fit at a cited effective temperature
