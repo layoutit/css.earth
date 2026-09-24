@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/asteroid-1998-ml14/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

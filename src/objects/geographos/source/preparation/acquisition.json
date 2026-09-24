@@ -9,15 +9,6 @@
       ],
       "path": "shape/geographos.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/geographos.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf"
     }
   ]
 }

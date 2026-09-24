@@ -25,12 +25,12 @@ test('every survey lens in the repository uses the settings the setup tool write
   assert.ok(lenses >= 7, `${lenses} survey lenses`);
 });
 
-test('the survey figure table names each Appendix B figure once, in the paper every survey body pins', async () => {
+test('the survey figure table names each Appendix B figure once; bodies cite the paper and keep no copy', async () => {
   const { paper, figures } = await surveyFigures();
   assert.equal(figures.length, 42);
   assert.equal(new Set(figures.map(figure => figure.number)).size, 42);
   assert.equal(new Set(figures.map(figure => figure.object)).size, 42);
-  assert.ok((json(resolve(OBJECTS, 'iris/source/manifest.json')).inputs as { path: string }[]).some(input => input.path === 'reference/vernazza-2021.pdf'));
+  assert.ok(!(json(resolve(OBJECTS, 'iris/source/manifest.json')).inputs as { path: string }[]).some(input => input.path.endsWith('.pdf')));
 });
 
 test('the table\'s Table A.1 poles are the ones every survey-sourced package states, and each lens record that states one', async () => {

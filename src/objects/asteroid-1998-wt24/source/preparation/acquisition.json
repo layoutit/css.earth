@@ -9,15 +9,6 @@
       ],
       "path": "shape/wt24.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/wt24.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf"
     }
   ]
 }

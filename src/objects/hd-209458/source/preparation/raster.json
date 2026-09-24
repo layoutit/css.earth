@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (CALSPEC). The disc is unresolved: it is darkened toward the limb by the quadratic law Brown et al. (2001) fitted to transits of its planet (HST/STIS G750M, 581.3-638.2 nm); no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",

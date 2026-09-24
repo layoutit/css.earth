@@ -79,7 +79,7 @@ Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 da
 
 GM is the value in the pinned Horizons physical block, or zero for an unavailable GM; it is not inferred from an assumed density.
 
-[source/manifest.json](source/manifest.json) pins every consumed file. The original mesh is checked in and also restorable through source/preparation/acquisition.json, along with the Inter font. Original model-record snapshots and supporting documents remain checked in because server-generated HTML contains changing timestamps.
+[source/manifest.json](source/manifest.json) pins every consumed file. The original mesh is checked in and also restorable through source/preparation/acquisition.json. Original model-record snapshots and supporting documents remain checked in because server-generated HTML contains changing timestamps.
 
 The pinned context PNG is reproduced by the existing radial snapshot recipe.
 

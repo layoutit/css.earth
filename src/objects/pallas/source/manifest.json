@@ -45,39 +45,6 @@
       }
     },
     {
-      "id": "pallas-survey-research",
-      "path": "reference/vernazza-2021.pdf",
-      "origin": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "vlt-ut3",
-            "missionId": "eso-sphere-asteroid-survey",
-            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
-          }
-        ]
-      },
-      "license": "CC-BY-4.0",
-      "acquisition": "Restore the original article through source/preparation/acquisition.json.",
-      "redistribution": "CC-BY-4.0 with attribution.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "vernazza-2021-survey",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "pallas-sphere-20171008045605",
       "path": "observations/d2Pallas_2017-10-08T04_56_05.317_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-08T04_56_05.317_zpl_science_imaging_cam1.fits",

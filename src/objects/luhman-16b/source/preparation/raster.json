@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform colour of Faherty et al. (2014)'s measured optical spectrum of Luhman 16 B, dimmed toward the limb by the quadratic law Ureshino et al. (2026) fit with its Doppler map at 2.3 um: the only law measured for it, from the infrared, since no visible limb is measured and no model table reaches 1,261 K. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",

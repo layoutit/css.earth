@@ -30,7 +30,9 @@ test('anything a published figure does not use is refused by name', () => {
   assert.throws(() => readPdfImage(base('/Filter /FlateDecode'), 4), /no object 4/);
 });
 
-test('the survey paper every SPHERE body pins yields its Iris figure, where the paper is restored', { skip: !existsSync(resolve(import.meta.dirname, '../../src/objects/iris/source/reference/vernazza-2021.pdf')) }, () => {
-  const figure = readPdfImage(readFileSync(resolve(import.meta.dirname, '../../src/objects/iris/source/reference/vernazza-2021.pdf')), 1085);
+// The survey paper is cited, not kept; set CSSEARTH_SURVEY_PAPER to a downloaded copy to run this check.
+const SURVEY_PAPER = process.env.CSSEARTH_SURVEY_PAPER ?? '';
+test('the SPHERE survey paper yields its Iris figure, given a downloaded copy', { skip: !SURVEY_PAPER || !existsSync(SURVEY_PAPER) }, () => {
+  const figure = readPdfImage(readFileSync(SURVEY_PAPER), 1085);
   assert.deepEqual([figure.width, figure.height, figure.channels], [1598, 1233, 3]);
 });

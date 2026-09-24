@@ -25,35 +25,8 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/ReadMe.AcuA.txt",
-      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/ReadMe.AcuA.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/917-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3468/IAUspin.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/hanus-2016.pdf",
-      "url": "https://arxiv.org/pdf/1510.07422"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/hanus-2021.pdf",
-      "url": "https://arxiv.org/pdf/2107.10027"
     }
   ]
 }

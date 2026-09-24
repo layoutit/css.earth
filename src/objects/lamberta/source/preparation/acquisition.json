@@ -25,38 +25,8 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/ReadMe.AcuA.txt",
-      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/ReadMe.AcuA.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/5914-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/63530/IAUspin"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/vernazza-2021-eso.pdf",
-      "url": "https://www.eso.org/public/archives/releases/sciencepapers/eso2114/eso2114a.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/vernazza-2021.pdf",
-      "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "headers": {
-        "Cookie": "CesAM_LAM_opens_the_door=1"
-      }
     },
     {
       "kind": "download",

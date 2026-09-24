@@ -154,32 +154,6 @@
       }
     },
     {
-      "id": "rigel-cie-1931-2deg-cmf",
-      "path": "reference/CIE_xyz_1931_2deg.csv",
-      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
-      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
-      "license": "CC BY-SA 4.0",
-      "licenseEvidence": [
-        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
-      ],
-      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
-      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "assets",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "cie-1931-2deg-cmf",
-            "role": "method",
-            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
-          }
-        ]
-      }
-    },
-    {
       "id": "rigel-crosscheck-spectrum",
       "path": "photometry/crosscheck-kharitonov-catalog.dat",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",

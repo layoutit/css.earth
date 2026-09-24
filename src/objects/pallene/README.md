@@ -67,6 +67,6 @@ NASA display photographs remain context-only references with photographed illumi
 
 **Runtime orientation and restoration**
 
-`source/manifest.json` pins inputs, original labels, geometry receipts and source documentation. The analytic radius table and small authored files are checked in. `source/preparation/acquisition.json` restores external images, kernels and Inter font from exact URLs/hashes; the generated context portrait is pinned beside the inputs. Shared commands are `node tools/objects/dist/operations.js acquire pallene --verify-only` and `node tools/objects/dist/prepare-authored.js pallene --write`.  Runtime publication, fresh installation and Chrome/DPR qualification require separate results.
+`source/manifest.json` pins inputs, original labels, geometry receipts and source documentation. The analytic radius table and small authored files are checked in. `source/preparation/acquisition.json` restores external images and kernels from exact URLs/hashes; the generated context portrait is pinned beside the inputs. Shared commands are `node tools/objects/dist/operations.js acquire pallene --verify-only` and `node tools/objects/dist/prepare-authored.js pallene --write`.  Runtime publication, fresh installation and Chrome/DPR qualification require separate results.
 
 </details>

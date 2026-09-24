@@ -797,7 +797,7 @@
       "credit": "Peter Thomas, Joseph, Ansty; NASA PDS Small Bodies Node",
       "license": "Public PDS scientific data release. Cite DOI 10.26033/ewy3-jy61.",
       "licenseEvidence": [
-        "shape/hyperion_document.pdf",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf",
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/bundle_description.txt"
       ],
       "acquisition": "Download the original PDS4 plate model.",
@@ -2261,9 +2261,6 @@
       }
     },
     {
-      "path": "observations/cas_iss_v10.ti"
-    },
-    {
       "path": "preparation/acquisition.json"
     },
     {
@@ -2280,9 +2277,6 @@
     },
     {
       "path": "shape/hyperion_30k_plt.xml"
-    },
-    {
-      "path": "shape/hyperion_document.pdf"
     },
     {
       "path": "editorial/factsheet-review.json",

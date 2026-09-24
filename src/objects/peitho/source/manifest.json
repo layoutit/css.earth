@@ -88,9 +88,6 @@
       "path": "reference/AcuA_V1.txt.gz"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt"
-    },
-    {
       "path": "reference/calibration.json"
     },
     {
@@ -99,9 +96,6 @@
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4397",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
-    },
-    {
-      "path": "reference/durech-2020.pdf"
     },
     {
       "path": "reference/horizons-elements.txt"

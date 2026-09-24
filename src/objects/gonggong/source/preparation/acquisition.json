@@ -1,14 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/gonggong-kiss-2019.pdf",
-      "url": "https://ntrs.nasa.gov/api/citations/20210012934/downloads/21-51.pdf?attachment=true"
-    }
-  ]
+  "operations": []
 }

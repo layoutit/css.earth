@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,213 K (TESS Input Catalog v8.2 (TIC 256364937; Stassun et al. 2019), the row of its radius and mass) and log g 5.02 (the same TIC row (5.024)): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",

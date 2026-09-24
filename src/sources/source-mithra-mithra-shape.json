@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/mithra/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

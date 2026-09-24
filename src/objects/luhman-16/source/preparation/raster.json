@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform colour of Faherty et al. (2014)'s measured optical spectrum of Luhman 16 A. No limb darkening is drawn: none is measured for it. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }

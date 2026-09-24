@@ -1,7 +1,8 @@
 import type { PreparedGalaxyRecord, PreparedGalaxyCatalog as Catalog, SpatialCitation } from '@cssearth/catalog';
 export type Vec3 = [number, number, number];
 export interface SourcePin { path: string; bytes: number }
-export interface GalaxySource extends SourcePin { id: string; url: string; citation: string; references?: SpatialCitation[] }
+/** A pinned file, or a citation that only names the references a claim uses (a paper is cited, not retained). */
+export interface GalaxySource extends Partial<SourcePin> { id: string; url: string; citation: string; references?: SpatialCitation[] }
 export interface GalaxyMembership {
   group: 'local-group' | 'local-volume' | 'uncertain';
   subgroup: 'milky-way' | 'andromeda' | 'field' | 'unknown';

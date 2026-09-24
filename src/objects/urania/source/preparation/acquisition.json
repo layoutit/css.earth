@@ -19,18 +19,6 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/vernazza-2021.pdf",
-      "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "headers": {
-        "Cookie": "CesAM_LAM_opens_the_door=1"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "observations/d30Urania_2018-09-16T05_00_02.643_zpl_science_imaging_cam1.fits",
       "url": "https://observations.lam.fr/astero/Data/30Urania/Deconv/d30Urania_2018-09-16T05_00_02.643_zpl_science_imaging_cam1.fits",
       "headers": {

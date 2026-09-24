@@ -5,5 +5,5 @@
   "displayMeridianDegrees": 0,
   "phase": "arbitrary-display-phase",
   "qualification": "The published radar mesh uses center-of-mass principal axes, with +Z along the long axis rather than a spin pole. Toutatis tumbles in a non-principal-axis state with approximately 5.4-day rotation and 7.4-day precession. This fixed display frame does not propagate that attitude and is not a present-day orientation or ephemeris; directional lighting is illustrative.",
-  "source": "reference/bundle_description.txt; https://arxiv.org/html/1511.04357"
+  "source": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/document/bundle_description.txt; https://arxiv.org/html/1511.04357"
 }

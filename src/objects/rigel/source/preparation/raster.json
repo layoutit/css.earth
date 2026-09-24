@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform photosphere colour from the star's ground-based spectrophotometry (Pulkovo catalogue). No limb darkening is drawn: at its 12,100 K and log g 1.75 (Moravveji et al. 2012, ApJ 747, 108) no model table used here reaches it; Claret & Bloemen (2011)'s ATLAS models start at log g 2.5 at that temperature. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }

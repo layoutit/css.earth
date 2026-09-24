@@ -1,14 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/gerdes-2017-deedee.pdf",
-      "url": "https://arxiv.org/pdf/1702.00731v2"
-    }
-  ]
+  "operations": []
 }

@@ -9,24 +9,6 @@
       ],
       "path": "shape/yorp.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/yorp.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/yorp-supplement.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_ph5_supplement.pdf"
     }
   ]
 }

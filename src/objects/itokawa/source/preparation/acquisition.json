@@ -112,24 +112,6 @@
     {
       "kind": "download",
       "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/amica-calibration.pdf",
-      "url": "https://arxiv.org/pdf/0912.4797"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/amica-photometry.pdf",
-      "url": "https://www.hou.usra.edu/meetings/lpsc2018/eposter/1957.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
         "refresh"
       ],
       "path": "features/ITOKAWA_nomenclature_center_pts.zip",

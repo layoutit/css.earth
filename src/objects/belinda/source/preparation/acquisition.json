@@ -6,14 +6,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "kernels/pck00011.tpc",
-      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "kernels/naif0012.tls",
       "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls"
     }

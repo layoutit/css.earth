@@ -43,62 +43,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "asteroid-1992-sk-research-sk",
-      "path": "reference/sk.pdf",
-      "origin": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
-      "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "goldstone-dss14",
-            "missionId": "goldstone-solar-system-radar",
-            "evidence": "The preserved credit for this input reads: Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy"
-          }
-        ]
-      },
-      "license": "Original scientific article; source publisher copyright retained.",
-      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
-      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "asteroid-1992-sk-research-sk-spin-2022",
-      "path": "reference/sk-spin-2022.pdf",
-      "origin": "https://astro.troja.mff.cuni.cz/davok/papers/yorp_AA2022.pdf",
-      "credit": "Ďurech et al. (2022), Astronomy & Astrophysics 657, A5; doi:10.1051/0004-6361/202141844",
-      "license": "Original scientific article; source publisher copyright retained.",
-      "acquisition": "Restore the unchanged primary article through the recorded author-hosted URL.",
-      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk-spin-2022",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [

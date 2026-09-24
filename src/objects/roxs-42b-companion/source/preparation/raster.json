@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Photosphere colour of a Planck spectrum at the published temperature, 2,600 K, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 2,600 K (the record) and log g 3.71 (from the record's mass and radius (packages/astronomy/data/bodies/roxs-42b-companion.json)): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",

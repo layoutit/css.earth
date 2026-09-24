@@ -415,32 +415,6 @@
       }
     },
     {
-      "id": "dione-vims-source-information-file-pdf",
-      "path": "vims/document/information_file.pdf",
-      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
-      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
-      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
-      "licenseEvidence": [
-        "https://doi.org/10.17189/ctqe-ta30",
-        "https://pds.nasa.gov/datastandards/citing/"
-      ],
-      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
-      "redistribution": "Preserve PDS labels, authors and calibration description.",
-      "consumers": [
-        "vims-source"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "cassini-vims-dione-rhea-information-pdf",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "dione-vims-source-information-file-xml",
       "path": "vims/document/information_file.xml",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
@@ -873,9 +847,6 @@
       "path": "observations/catalog.json"
     },
     {
-      "path": "observations/productdescription.pdf"
-    },
-    {
       "path": "observations/dione_eqradius_g.xml"
     },
     {
@@ -951,11 +922,6 @@
       "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
-      "path": "science/b2-intake/bundle_description.txt",
-      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/bundle_description.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
-    },
-    {
       "path": "science/b2-intake/dionekernellist.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dionekernellist.txt",
       "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
@@ -963,11 +929,6 @@
     {
       "path": "science/b2-intake/dioneimagelist.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneimagelist.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
-    },
-    {
-      "path": "science/b2-intake/dioneshapeassessment.pdf",
-      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneshapeassessment.pdf",
       "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {

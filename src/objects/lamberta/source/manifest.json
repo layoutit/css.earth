@@ -1044,29 +1044,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "lamberta-survey-research",
-      "path": "reference/vernazza-2021.pdf",
-      "origin": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "credit": "P. Vernazza et al. (2021), Astronomy & Astrophysics 654, A56",
-      "license": "CC-BY-4.0 research article; retain the citation.",
-      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-lamberta-lamberta-survey-research",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [
@@ -1121,9 +1098,6 @@
       "path": "reference/AcuA_V1.txt.gz"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt"
-    },
-    {
       "path": "reference/calibration.json"
     },
     {
@@ -1141,9 +1115,6 @@
     },
     {
       "path": "reference/model-properties.json"
-    },
-    {
-      "path": "reference/vernazza-2021-eso.pdf"
     },
     {
       "path": "preparation/observer-cameras.json"

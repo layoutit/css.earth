@@ -190,27 +190,6 @@
       },
       "dependencies": [],
       "license": "Reuse terms unresolved; see NOTICE.md."
-    },
-    {
-      "id": "smc-distance-paper",
-      "path": "src/objects/local-group/source/papers/Graczyk2020-SMC.pdf",
-      "origin": "https://arxiv.org/pdf/2010.08754",
-      "sourceUrl": "https://arxiv.org/pdf/2010.08754",
-      "title": "Graczyk et al. (2020), ApJ904,13; DOI10.3847/1538-4357/abbb2b. Original paper supporting the adopted SMC direct distance and separate statistical/systematic errors.",
-      "credit": "Graczyk et al. (2020)",
-      "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "publication-graczyk2020apj-904-13g",
-            "role": "material",
-            "evidence": "src/objects/local-group/source/provenance.json"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "Reuse terms unresolved; see NOTICE.md."
     }
   ],
   "documents": [

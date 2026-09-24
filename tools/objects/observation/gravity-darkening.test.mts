@@ -7,6 +7,7 @@ import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
 import { parseCieTable } from './disc-integrated-color.mts';
 import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheOmegaForFlattening, rocheRadius, surfaceTemperature } from './gravity-darkening.mts';
 import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
+import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 
 const objects = new URL('../../../src/objects/', import.meta.url);
 const record = async (id: string) => {
@@ -36,7 +37,7 @@ test('the Roche-von Zeipel model reproduces each paper\'s equatorial radius and 
 
 test('the texture rows are brightest and bluest at the poles and dimmest and reddest at the equator', async () => {
   const { record: model } = await record('altair');
-  const colorMatching = parseCieTable(await readFile(new URL('altair/source/reference/CIE_xyz_1931_2deg.csv', objects), 'utf8'), 3);
+  const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const rows = gravityDarkenedRows(model, { linear: [0.8, 0.85, 1], srgb: [231, 238, 255] }, colorMatching, 64);
   const [pole, equator] = [rows[0]!, rows[32]!];
   assert.ok(pole.reduce((a, b) => a + b) > equator.reduce((a, b) => a + b), 'the pole is brighter');
