@@ -76,7 +76,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arrivingByFlight;
-    let frameDatasetCamera = true;
     let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
@@ -260,8 +259,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const navigation = state.plan?.navigation;
       if (!navigation) return;
       maximumZoom = navigation.maximumZoom;
-      // Camera intent belongs to the committed request, not concurrent dataset IDs.
-      if (!frameDatasetCamera) return;
+      // Camera intent belongs to the committed request, not concurrent dataset IDs. A handoff or saved view supplies
+      // the startup camera: committing its initial lens must not replace that camera or cancel the shared flight.
+      const intent = state.committedBy;
+      if (!intent?.frameCamera || (intent.kind === 'initial' && initialWorldCamera)) return;
       if (navigation.camera) { stopMotion(); alignMotionFrame(); }
       orbit.setState({ zoom: Math.min(orbit.state().zoom, maximumZoom) });
       if (navigation.camera) orbit.flyToState(navigation.camera, { surfaceTarget: true });
@@ -297,7 +298,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       await lifetime.wait(environment.waitDocument(lifetime, stage.ownerDocument));
       if (lifetime.disposed) return;
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
-        getState: () => selection?.state() ?? { desired: initialSelection, committed: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
+        getState: () => selection?.state() ?? { desired: initialSelection, committed: null, committedBy: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
         onAction: async action => {
           const before = selection?.state().committed?.lensId;
           const committed = await (selection?.dispatch(action) ?? false);
@@ -326,9 +327,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           if (intent.kind === 'selection') datasetEffects?.commit(selectedLensVolume(definition.controls, next.lensId));
           playback.setSelection(next);
           surfaceFeatures?.setLens({ id: next.lensId }); syncPagePlayback(next.speed ?? 1);
-          // A handoff or saved view supplies the startup camera. Committing its
-          // initial lens must not replace that camera or cancel the shared flight.
-          frameDatasetCamera = intent.frameCamera && (intent.kind !== 'initial' || !initialWorldCamera);
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
