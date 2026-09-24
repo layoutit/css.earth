@@ -6,7 +6,8 @@ import { appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
+// CI's change-classification step runs this before `pnpm install`, so import core's dependency-free source, not its built package.
+import { requireArray, requireRecord, requireString } from '../../packages/core/src/validate.ts';
 import type { ChangeMode } from './classify-changes.mts';
 
 const execFileAsync = promisify(execFile);
