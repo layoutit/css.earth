@@ -29,6 +29,15 @@
       "path": "science/ureshino-2026/posterior_var_chip1.npy",
       "url": "https://zenodo.org/records/20024778/files/prvjapan/BayesianDI-v1.0.0.zip?download=1",
       "member": "prvjapan-BayesianDI-b75b441/results/posterior_var_chip1.npy"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/faherty-2014-mage.txt",
+      "url": "https://s3.amazonaws.com/bdnyc/LUH16B+-+opt%2Bunc.txt"
     }
   ]
 }

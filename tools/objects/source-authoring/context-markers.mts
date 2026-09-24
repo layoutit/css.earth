@@ -87,7 +87,8 @@ export async function planetMarker(id: string) {
  * brown dwarf with a surface map) is drawn as that map. */
 async function markerFor(id: string) {
   const { science } = await defaultSurface(id);
-  return science.kind === 'stellar-photometric-color' ? starMarker(id) : planetMarker(id);
+  // A colour lens without a limb-darkening law (none measured) is drawn as the uniform disc it is on the sphere.
+  return science.kind === 'stellar-photometric-color' ? starMarker(id, { requireLimbDarkening: science.limbDarkening !== undefined }) : planetMarker(id);
 }
 
 export async function authorContextMarkers(ids: readonly string[], { check = false } = {}) {

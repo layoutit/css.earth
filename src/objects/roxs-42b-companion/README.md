@@ -8,7 +8,7 @@ ROXs 42B B is the smaller star of the ROXs 42B pair, 146 parsecs away in Ophiuch
 
 **Radius, temperature and mass.** 1.39 ± 0.02 solar radii and 2,600 ± 20 K from the SPHINX fit to the pair's blended optical spectrum, modelled as the sum of the two stars (Inglis et al. [2024](https://arxiv.org/abs/2402.09533), Table 1; their text gives 1.59 solar radii for this star instead). Mass 0.36 ± 0.04 solar masses, the photometric mass of Kraus et al. ([2014](https://arxiv.org/abs/1311.7664)).
 
-**Colour lens.** A Planck spectrum at 2,600 K through the CIE 1931 2° observer into sRGB with the D65 white. No limb darkening is drawn.
+**Colour lens.** A Planck spectrum at 2,600 K through the CIE 1931 2° observer into sRGB with the D65 white. Its limb is darkened by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 2,600 K (the record) and log g 3.71 (from the record's mass and radius (packages/astronomy/data/bodies/roxs-42b-companion.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** None is measured. The display axis is the normal of its orbit around A, and nothing turns ([rotation.json](source/preparation/rotation.json)).
 
