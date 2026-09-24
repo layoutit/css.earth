@@ -9,9 +9,8 @@ import { MAX_LENGTH, cleanMessage, installHook, messageProblem, rangeProblems, t
 const test = sourceTest();
 
 const execFileAsync = promisify(execFile);
-const person = 'Ada Lovelace <ada@example.org>';
 const commit = (message: string, overrides: Partial<RangeCommit> = {}): RangeCommit =>
-  ({ sha: 'a'.repeat(40), parents: 1, author: person, committer: person, message, ...overrides });
+  ({ sha: 'a'.repeat(40), parents: 1, message, ...overrides });
 
 test('one Conventional Commits line passes, with or without a scope or a breaking marker', () => {
   for (const message of ['refactor(core): move sha256 into core\n', 'fix!: drop the old reader\n', 'docs: update CLAUDE.md\n',

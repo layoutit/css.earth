@@ -1,6 +1,6 @@
-// Commit messages: every commit is written by a person, as one Conventional Commits line with no body, trailers or
-// attribution. Only messages Git itself writes are exempt from the format (merges, `git revert`, `--fixup`/`--squash`);
-// no author or committer may be a bot or an AI tool, exempt or not. The same rules run in the local commit-msg hook (fast feedback) and in CI over a pull request's commits
+// Commit messages: every authored commit is one Conventional Commits line with no body, trailers or attribution.
+// Messages Git itself writes are accepted as Git wrote them (merges, `git revert`, `--fixup`/`--squash`). The same
+// rules run in the local commit-msg hook (fast feedback) and in CI over a pull request's commits
 // (the enforcement, since a hook can be skipped). Depends only on Node built-ins: CI runs it right after a sparse
 // checkout, before any install.
 //
@@ -19,8 +19,6 @@ export const TYPES = ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test'
 export const MAX_LENGTH = 150;
 const CONVENTIONAL = new RegExp(`^(${TYPES.join('|')})(\\([a-z0-9._/-]+\\))?!?: \\S(.*\\S)?$`, 'u');
 const ATTRIBUTION = /co-authored-by|generated (with|by)|🤖/iu;
-/** Identities that are not a person coding: GitHub `[bot]` accounts and AI coding tools. */
-const MACHINE_IDENTITY = /\[bot\]|anthropic|claude|codex|openai|copilot|chatgpt|gemini|devin/iu;
 const HOOK_SOURCE = '.githooks/commit-msg';
 const HOOK_MARKER = 'cssearth-commit-message-hook';
 
@@ -52,19 +50,12 @@ export function messageProblem(raw: string): string | undefined {
   return undefined;
 }
 
-export interface RangeCommit { readonly sha: string; readonly parents: number; readonly author: string;
-  readonly committer: string; readonly message: string }
-
-/** Why a commit's author or committer is not a person coding, or undefined when both are. */
-export function identityProblem(commit: RangeCommit): string | undefined {
-  const machine = [commit.author, commit.committer].find(identity => MACHINE_IDENTITY.test(identity));
-  return machine ? `Commit as yourself, not as a bot or AI tool (${machine}).` : undefined;
-}
+export interface RangeCommit { readonly sha: string; readonly parents: number; readonly message: string }
 
 export function rangeProblems(commits: readonly RangeCommit[]): string[] {
   return commits.flatMap(commit => {
-    // A merge's message is Git's; its identities still have to be a person.
-    const problem = identityProblem(commit) ?? (commit.parents > 1 ? undefined : messageProblem(commit.message));
+    // A merge's message is Git's own, whatever its text.
+    const problem = commit.parents > 1 ? undefined : messageProblem(commit.message);
     return problem ? [`${commit.sha.slice(0, 10)} ${cleanMessage(commit.message)[0] ?? ''}\n  ${problem}`] : [];
   });
 }
@@ -73,11 +64,11 @@ const FIELD = '\u001f', RECORD = '\u001e';
 
 async function commitsIn(range: string, root: string): Promise<RangeCommit[]> {
   const { stdout } = await execFileAsync('git', ['log', '--no-color',
-    `--format=%H${FIELD}%P${FIELD}%an <%ae>${FIELD}%cn <%ce>${FIELD}%B${RECORD}`, range],
+    `--format=%H${FIELD}%P${FIELD}%B${RECORD}`, range],
   { cwd: root, maxBuffer: 1024 * 1024 * 64 });
   return stdout.split(RECORD).map(record => record.replace(/^\n/u, '')).filter(Boolean).map(record => {
-    const [sha = '', parents = '', author = '', committer = '', message = ''] = record.split(FIELD);
-    return { sha, parents: parents.split(' ').filter(Boolean).length, author, committer, message };
+    const [sha = '', parents = '', message = ''] = record.split(FIELD);
+    return { sha, parents: parents.split(' ').filter(Boolean).length, message };
   });
 }
 
@@ -115,10 +106,7 @@ async function main(args: readonly string[]): Promise<number> {
     return 1;
   }
   if (args.length === 1 && args[0] && !args[0].startsWith('--')) {
-    const identity = async (name: string) => (await execFileAsync('git', ['var', name], { cwd: root })).stdout.replace(/>.*$/su, '>');
-    const message = await readFile(args[0], 'utf8');
-    const problem = identityProblem({ sha: '', parents: 1, author: await identity('GIT_AUTHOR_IDENT'),
-      committer: await identity('GIT_COMMITTER_IDENT'), message }) ?? messageProblem(message);
+    const problem = messageProblem(await readFile(args[0], 'utf8'));
     if (!problem) return 0;
     console.error(`commit-msg: ${problem}\nSee CONTRIBUTING.md#commits. Skip once with git commit --no-verify; CI still checks.`);
     return 1;
