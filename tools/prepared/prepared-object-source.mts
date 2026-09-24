@@ -31,6 +31,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
       if (specifier.type === 'ImportSpecifier' && typeof statement.source.value === 'string') bindings.set(specifier.local.name, { name: named(specifier.imported), source: statement.source.value });
     }
     if (statement.type === 'ExportNamedDeclaration' && statement.declaration?.type === 'FunctionDeclaration' && statement.declaration.id) functions.set(statement.declaration.id.name, statement.declaration);
+    if (statement.type === 'FunctionDeclaration' && statement.id) functions.set(statement.id.name, statement);
   }
   const loader = functions.get(exported);
   if (!loader || loader.params.length !== 2 || loader.params.some(param => param.type !== 'Identifier')) fail();
@@ -92,7 +93,13 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const address = declarations.find(node => node.init?.type === 'TemplateLiteral');
   if (!address || address.id.type !== 'Identifier') fail();
   const template = kind(address.init, 'TemplateLiteral');
-  if (template.expressions.length !== 1 || !memberIs(template.expressions[0], [descriptorInput, 'id']) || template.quasis.map(part => part.value.cooked).join('|') !== '/objects/|/object.json') fail();
+  // The address is the object's complete transport, or its first-view transport when the page's own markup is adopted.
+  const choice = template.expressions[1];
+  const chosen = choice?.type === 'ConditionalExpression' && choice.test.type === 'CallExpression' && named(choice.test.callee) === 'adoptsServerMarkup' &&
+    choice.test.arguments.length === 1 && memberIs(choice.test.arguments[0], [descriptorInput, 'id']) &&
+    choice.consequent.type === 'Literal' && choice.consequent.value === 'first-view' && choice.alternate.type === 'Literal' && choice.alternate.value === 'object';
+  if (template.expressions.length !== 2 || !memberIs(template.expressions[0], [descriptorInput, 'id']) || !chosen ||
+      template.quasis.map(part => part.value.cooked).join('|') !== '/objects/|/|.json' || !functions.has('adoptsServerMarkup')) fail();
   const guard = kind(method.body.body[0], 'IfStatement');
   const alternatives = (node: Node): Node[] => node.type === 'LogicalExpression' && node.operator === '||' ? [...alternatives(node.left), ...alternatives(node.right)] : [node];
   const predicates = alternatives(guard.test);

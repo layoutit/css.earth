@@ -60,7 +60,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <link rel="icon" href="/favicon.ico" sizes="any" />
     {!navigation && <script is:inline type="application/json" data-world-camera set:html={JSON.stringify(worldCamera).replace(/</g, '\\u003c')}></script>}
     {!navigation && descriptor?.prepared?.url === 'prepared/object.json' &&
-      <link rel="preload" href={`/objects/${objectRecord.id}/object.json`} as="fetch" crossorigin="anonymous" />}
+      <link rel="preload" href={`/objects/${objectRecord.id}/first-view.json`} as="fetch" crossorigin="anonymous" />}
     {/* Until the first body is ready, the phone sheet's lazy images wait (object-shell.css), so the globe's textures have
         the connection. The router clears this; without JavaScript it is never set. */}
     {!navigation && <script is:inline>document.documentElement.dataset.bodyPending = '';</script>}
