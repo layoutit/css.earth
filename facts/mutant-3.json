@@ -1,0 +1,717 @@
+{
+ "typed searches": {
+  "steps": [
+   {
+    "step": "opened",
+    "value": "",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Celestial objects",
+    "searchResults": false,
+    "navFiltered": false,
+    "treeHidden": false,
+    "resultsHidden": true,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "tycho, features in flight",
+    "value": "tycho",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": false,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "tycho, settled",
+    "value": "tycho",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "(8)",
+     "hint": "",
+     "rows": [
+      "Tycho",
+      "Tycho A",
+      "Tycho D",
+      "Tycho Z",
+      "Tycho Y",
+      "Tycho W",
+      "Tycho Q",
+      "Tycho U"
+     ]
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "no match, features in flight",
+    "value": "zzqx",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": false,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "no match, settled",
+    "value": "zzqx",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": false,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "feature search failed",
+    "value": "failq",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "",
+     "hint": "Feature names could not load. Change your search to retry.",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "objects and features",
+    "value": "sat",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "(8)",
+     "hint": "",
+     "rows": [
+      "San Antonio",
+      "Stockholm",
+      "Stuttgart",
+      "Antalya",
+      "Strasbourg",
+      "Stavropol",
+      "Sétif",
+      "Sati Vallis"
+     ]
+    },
+    "objects": [
+     "saturn",
+     "parysatis",
+     "n2146sat",
+     "m101 dwa",
+     "ngc 4631-dw2",
+     "ngc 4594-dgsat-3",
+     "lv j1157+5638 sat",
+     "kksg 32",
+     "ngc 4594-dgsat-2"
+    ],
+    "objectCount": 9,
+    "overviews": []
+   },
+   {
+    "step": "all objects",
+    "value": "all objects",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [
+     "mercury",
+     "venus",
+     "earth",
+     "mars",
+     "jupiter",
+     "saturn",
+     "uranus",
+     "neptune",
+     "sun",
+     "phaethon",
+     "1998 wt24",
+     "mithra"
+    ],
+    "objectCount": 1492,
+    "overviews": []
+   },
+   {
+    "step": "a system name",
+    "value": "solar system",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [
+     "mercury",
+     "venus",
+     "earth",
+     "mars",
+     "jupiter",
+     "saturn",
+     "uranus",
+     "neptune",
+     "sun",
+     "phaethon",
+     "1998 wt24",
+     "mithra"
+    ],
+    "objectCount": 532,
+    "overviews": [
+     "solar system"
+    ]
+   },
+   {
+    "step": "an overview row",
+    "value": "milky",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [
+     "lmc",
+     "smc"
+    ],
+    "objectCount": 2,
+    "overviews": [
+     "milky way"
+    ]
+   },
+   {
+    "step": "whitespace only",
+    "value": "   ",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Celestial objects",
+    "searchResults": false,
+    "navFiltered": false,
+    "treeHidden": false,
+    "resultsHidden": true,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "same query, other case and spacing",
+    "value": "SAT ",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "(8)",
+     "hint": "",
+     "rows": [
+      "San Antonio",
+      "Stockholm",
+      "Stuttgart",
+      "Antalya",
+      "Strasbourg",
+      "Stavropol",
+      "Sétif",
+      "Sati Vallis"
+     ]
+    },
+    "objects": [
+     "saturn",
+     "parysatis",
+     "n2146sat",
+     "m101 dwa",
+     "ngc 4631-dw2",
+     "ngc 4594-dgsat-3",
+     "lv j1157+5638 sat",
+     "kksg 32",
+     "ngc 4594-dgsat-2"
+    ],
+    "objectCount": 9,
+    "overviews": []
+   }
+  ],
+  "errors": []
+ },
+ "pills and clearing": {
+  "steps": [
+   {
+    "step": "first pill",
+    "value": "Planets",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [
+     "planet"
+    ],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [
+     "mercury",
+     "venus",
+     "earth",
+     "mars",
+     "jupiter",
+     "saturn",
+     "uranus",
+     "neptune",
+     "ceres",
+     "pluto",
+     "haumea",
+     "makemake"
+    ],
+    "objectCount": 13,
+    "overviews": []
+   },
+   {
+    "step": "second pill",
+    "value": "Moons",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [
+     "satellite"
+    ],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [
+     "moon",
+     "squannit",
+     "phobos",
+     "deimos",
+     "dimorphos",
+     "2001 sn263 gamma",
+     "2001 sn263 beta",
+     "callisto",
+     "europa",
+     "metis",
+     "amalthea",
+     "thebe"
+    ],
+    "objectCount": 48,
+    "overviews": []
+   },
+   {
+    "step": "second pill again",
+    "value": "",
+    "expanded": "false",
+    "browserHidden": true,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": false,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "no match",
+    "value": "zzqx",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": false,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "cleared",
+    "value": "",
+    "expanded": "false",
+    "browserHidden": true,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": false,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": false,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   }
+  ],
+  "errors": []
+ },
+ "close and reopen": {
+  "steps": [
+   {
+    "step": "sat",
+    "value": "sat",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "(8)",
+     "hint": "",
+     "rows": [
+      "San Antonio",
+      "Stockholm",
+      "Stuttgart",
+      "Antalya",
+      "Strasbourg",
+      "Stavropol",
+      "Sétif",
+      "Sati Vallis"
+     ]
+    },
+    "objects": [
+     "saturn",
+     "parysatis",
+     "n2146sat",
+     "m101 dwa",
+     "ngc 4631-dw2",
+     "ngc 4594-dgsat-3",
+     "lv j1157+5638 sat",
+     "kksg 32",
+     "ngc 4594-dgsat-2"
+    ],
+    "objectCount": 9,
+    "overviews": []
+   },
+   {
+    "step": "closed",
+    "value": "sat",
+    "expanded": "false",
+    "browserHidden": true,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": false,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "(8)",
+     "hint": "",
+     "rows": [
+      "San Antonio",
+      "Stockholm",
+      "Stuttgart",
+      "Antalya",
+      "Strasbourg",
+      "Stavropol",
+      "Sétif",
+      "Sati Vallis"
+     ]
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "reopened, same query",
+    "value": "sat",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "(8)",
+     "hint": "",
+     "rows": [
+      "San Antonio",
+      "Stockholm",
+      "Stuttgart",
+      "Antalya",
+      "Strasbourg",
+      "Stavropol",
+      "Sétif",
+      "Sati Vallis"
+     ]
+    },
+    "objects": [
+     "saturn",
+     "parysatis",
+     "n2146sat",
+     "m101 dwa",
+     "ngc 4631-dw2",
+     "ngc 4594-dgsat-3",
+     "lv j1157+5638 sat",
+     "kksg 32",
+     "ngc 4594-dgsat-2"
+    ],
+    "objectCount": 9,
+    "overviews": []
+   },
+   {
+    "step": "closed while features were in flight",
+    "value": "zzqx",
+    "expanded": "false",
+    "browserHidden": true,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": false,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": false,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   },
+   {
+    "step": "reopened no match",
+    "value": "zzqx",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": false,
+    "pressed": [],
+    "features": {
+     "hidden": true,
+     "open": false,
+     "count": "",
+     "hint": "",
+     "rows": []
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   }
+  ],
+  "errors": []
+ },
+ "native submitted search": {
+  "steps": [
+   {
+    "step": "loaded",
+    "value": "tycho",
+    "expanded": "true",
+    "browserHidden": false,
+    "aria": "Search results",
+    "searchResults": true,
+    "navFiltered": true,
+    "treeHidden": true,
+    "resultsHidden": false,
+    "emptyHidden": true,
+    "pressed": [],
+    "features": {
+     "hidden": false,
+     "open": false,
+     "count": "(8)",
+     "hint": "",
+     "rows": [
+      "Tycho",
+      "Tycho A",
+      "Tycho D",
+      "Tycho Z",
+      "Tycho Y",
+      "Tycho W",
+      "Tycho Q",
+      "Tycho U"
+     ]
+    },
+    "objects": [],
+    "objectCount": 0,
+    "overviews": []
+   }
+  ],
+  "errors": []
+ }
+}

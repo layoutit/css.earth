@@ -1,0 +1,14 @@
+Facts against w-main-1:
+  w-change-1: identical
+  w-change-2: identical
+  w-main-2: 1 differ: search before the catalogue loads / catalogue loading / features
+Pixels against w-main-1 (threshold 0.1 / 0), frames that differ:
+  w-change-1: search-before-the-catalogue-loads-1.png 139/97638, typed-searches-1.png 0/10
+  w-change-2: search-before-the-catalogue-loads-1.png 1636/2498
+  w-main-2: native-submitted-search-1.png 1696/2065, search-before-the-catalogue-loads-1.png 704/154710, typed-searches-1.png 0/10
+Planted bugs against w-change-1:
+  w-mutant-1: caught, 3 facts differ: typed searches / tycho, features in flight / emptyHidden; typed searches / no match, features in flight / emptyHidden; search before the catalogue loads / catalogue loading / features
+  w-mutant-2: caught, 2 facts differ: typed searches / opened / emptyHidden; typed searches / whitespace only / emptyHidden
+  w-mutant-3: caught, 2 facts differ: typed searches / tycho, features in flight / emptyHidden; typed searches / no match, features in flight / emptyHidden
+  w-mutant-4: caught, 5 facts differ: typed searches / no match, settled / emptyHidden; pills and clearing / no match / emptyHidden; pills and clearing / cleared / emptyHidden
+  w-mutant-5: caught, 2 facts differ: close and reopen / reopened, same query / objects; close and reopen / reopened, same query / objectCount

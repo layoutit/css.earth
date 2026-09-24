@@ -1,0 +1,14 @@
+Facts against main-1:
+  change-1: identical
+  change-2: identical
+  main-2: identical
+Pixels against main-1 (threshold 0.1 / 0), frames that differ:
+  change-1: all 0/0
+  change-2: native-submitted-search-1.png 1696/2065, typed-searches-1.png 0/109
+  main-2: native-submitted-search-1.png 1696/2065, typed-searches-1.png 0/99
+Planted bugs against change-1:
+  mutant-1: caught, 2 facts differ: typed searches / tycho, features in flight / emptyHidden; typed searches / no match, features in flight / emptyHidden
+  mutant-2: caught, 2 facts differ: typed searches / opened / emptyHidden; typed searches / whitespace only / emptyHidden
+  mutant-3: caught, 2 facts differ: typed searches / tycho, features in flight / emptyHidden; typed searches / no match, features in flight / emptyHidden
+  mutant-4: caught, 5 facts differ: typed searches / no match, settled / emptyHidden; pills and clearing / no match / emptyHidden; pills and clearing / cleared / emptyHidden
+  mutant-5: MISSED
