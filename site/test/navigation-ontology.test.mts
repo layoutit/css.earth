@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search-objects.mts';
@@ -101,11 +102,17 @@ test('every row of the application navigation tree opens a route the application
     }
     const url = new URL(row.href, 'https://example.test');
     assert.ok(pages.has(url.pathname), `${id} leads to an unserved page: ${row.href}`);
-    const focus = url.searchParams.get('focus'), overview = url.searchParams.get('overview');
+    const focus = url.searchParams.get('focus'), overview = url.searchParams.get('overview'), dataset = url.searchParams.get('dataset');
     assert.equal(focus, row.focusId, `${id} must name the subject it selects in place`);
     if (focus !== null) assert.equal(focuses.get(focus), row.href, `${id} must use the registered focus route`);
     else if (overview !== null) assert.ok(overviews.has(overview), `${id} names an unknown overview: ${overview}`);
-    else assert.equal(row.href, `/${id}/`, `${id} must open its own page`);
+    else if (dataset !== null) {
+      // A volume a body presents opens that body on a lens that shows it.
+      const host = url.pathname.slice(1, -1);
+      const content: unknown = JSON.parse(readFileSync(resolve('src/objects', host, 'source/content/object.json'), 'utf8'));
+      const controls = (content as { lenses?: { controls?: { id?: string; volume?: { objectId?: string } }[] } }).lenses?.controls ?? [];
+      assert.ok(controls.some(control => control.id === dataset && control.volume?.objectId === id), `${id} opens ${host} on ${dataset}, which does not show it`);
+    } else assert.equal(row.href, `/${id}/`, `${id} must open its own page`);
   }
 
 });
