@@ -8,7 +8,7 @@ GQ Lup is a young T Tauri star, a few million years old, 154 parsecs away in Lup
 
 **Radius, temperature and mass.** Donati et al. ([2012](https://arxiv.org/abs/1206.1770)) measure a photospheric temperature of 4,300 ± 50 K and a mass of 1.05 ± 0.07 solar masses from spectropolarimetry and evolutionary models; the ESO SupJup survey (González Picos et al. [2025](https://arxiv.org/abs/2501.01789), Table 1) tabulates these with the radius 1.7 ± 0.2 solar radii. A model radius: the disc is not measured.
 
-**Colour lens.** A Planck spectrum at 4,300 K through the CIE 1931 2° observer into sRGB with the D65 white. Gaia published no BP/RP spectrum of this star. The colour is the star's own: the dust in front of it (0.4 magnitudes in V) is not applied. No limb darkening is drawn.
+**Colour lens.** A Planck spectrum at 4,300 K through the CIE 1931 2° observer into sRGB with the D65 white. Gaia published no BP/RP spectrum of this star. The colour is the star's own: the dust in front of it (0.4 magnitudes in V) is not applied. Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 4,300 K (the record) and log g 4.0 (from the record's mass and radius (packages/astronomy/data/bodies/gq-lup.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** Donati et al. (2012) measure the rotation period, 8.4 ± 0.3 days, but not the axis direction on the sky, so the display axis is celestial north and nothing turns ([rotation.json](source/preparation/rotation.json)).
 

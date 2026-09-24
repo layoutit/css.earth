@@ -28,7 +28,25 @@
       "science": {
         "kind": "stellar-photometric-color",
         "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
-        "qualification": "Uniform photosphere colour of a Planck spectrum at the published temperature, 2,700 K. No limb darkening is drawn: no measurement gives it and no model grid in this package reaches this star. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere colour of a Planck spectrum at the published temperature, 2,700 K, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 2,700 K (the record) and log g 5.13 (from the record's mass and radius (packages/astronomy/data/bodies/vhs-1256-1257-companion.json)): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "grid": {
+            "teffK": 2700,
+            "logg": 5.13,
+            "models": {
+              "Type": "q",
+              "Mod": "PC"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "aLSM",
+            "u2": "bLSM"
+          }
+        }
       }
     }
   ],
@@ -50,7 +68,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false

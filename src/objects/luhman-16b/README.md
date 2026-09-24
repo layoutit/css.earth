@@ -4,7 +4,7 @@
 
 Luhman 16 B is a brown dwarf, a failed star of 29.4 Jupiter masses, 2 parsecs from the Sun. With [Luhman 16 A](../luhman-16/README.md) it is the nearest known pair of brown dwarfs. Crossfield et al. (2014, Nature 505, 654) watched it spin for five hours with VLT/CRIRES and made the first map of a brown dwarf's clouds from how its spectral lines shifted as bright and dark patches crossed the disc (Doppler imaging). Ureshino et al. (2026, [arXiv:2605.08544](https://arxiv.org/abs/2605.08544)) refit those spectra with a fully Bayesian method that also gives each point's uncertainty. Their frozen release, [Zenodo 10.5281/zenodo.20024778](https://zenodo.org/records/20024778) (MIT), holds the maps; this package reads them unchanged.
 
-**The lenses.**
+**The lenses.** It opens on its **Colour**. The colour of Faherty et al. (2014, ApJ 790, 90)'s resolved Magellan/MagE optical spectrum of Luhman 16 B (2013-04-14), from the SIMPLE archive (BSD-3-Clause), through the CIE 1931 2° observer: sRGB (255, 91, 226), #ff5be2. Sodium and potassium absorb most of the yellow and green light, which leaves red with a little violet. The spectrum starts at 400 nm (380–400 nm is held at its first value, where the observer adds little). Below 650 nm the dwarf is so faint that single pixels have a signal-to-noise ratio near 1. Moving the whole spectrum one standard error down or up gives #ff008b to #f070ff, from red-pink to lilac. No limb darkening is measured, so the disc is uniform. Two more datasets show the surface map:
 - **Brightness.** The posterior mean map: relative surface brightness in the CO band head at 2.30 to 2.32 µm (CRIRES chip 2). The scale is inferno from the darkest to the brightest pixel, 0.00642 to 0.00902, as the paper's figure draws it.
 - **Uncertainty.** The square root of the posterior variance map: one standard deviation at each point, 0.00123 to 0.00161, in viridis as in the paper.
 
@@ -14,7 +14,7 @@ The maps are HEALPix vectors of 768 pixels (NSIDE 8, RING order). [healpix-map.m
 
 **Orbit.** B circles A on the orbit of Bedin et al. (2024, Astronomische Nachrichten 345, e20230158), Table 2 data-fit column: period 26.55 yr, a = 3.52 au, e = 0.344, periastron at 2018.060. Their angles are measured in a sky frame mirrored about the north-west diagonal. The record stores i' = 180° − 79.92° and Ω' = 270° − 130.02°, with ω = 136.67° unchanged. Radius 1.02 Jupiter radii and temperature 1,261 K are from Filippazzo et al. (2015).
 
-**Catalogue colour.** #ff5b00, the star field's colour for 1,261 K, as for every star.
+**Catalogue colour.** #ff5be2, the colour lens's prepared colour.
 
 ## Evidence
 

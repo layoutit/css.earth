@@ -28,6 +28,11 @@
     ]
   },
   "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of its measured optical spectrum: magenta, because sodium and potassium absorb the yellow and green."
+    },
     "brightness": {
       "title": "Surface brightness",
       "detail": "Doppler imaging",

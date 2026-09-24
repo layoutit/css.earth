@@ -181,7 +181,7 @@ A star whose surface is not imaged still has a measured colour: its spectrum. Th
 ([stellar-photometric-color.mts](../tools/objects/observation/stellar/stellar-photometric-color.mts)) reads one archived spectrum
 in its own layout, averages it into 1 nm bins from 380 to 780 nm, weights it by the CIE 1931 2° observer and converts it to
 sRGB with the D65 white, brightest channel full. It reads HST CALSPEC and the STIS libraries, Gaia DR3 XP, X-Shooter, UVES,
-LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric catalogues. A stretch with no data inside
+LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric catalogues. Plain column tables can carry a one-sigma error column: a bin below zero within three errors counts as no light, and the colour range is the spectrum moved one error down and up. A record may set `gamut: 'desaturate'` when a measured colour falls outside sRGB; the least white needed to bring it inside is mixed in and reported. A stretch with no data inside
 380-780 nm must be declared as a gap, with its reason. Checked against the Sun, the route turns CALSPEC's solar spectrum
 into #fff2ee, the colour the Sun's swatch takes from a different spectrum (ASTM E490) with Colour Science.
 
@@ -197,8 +197,13 @@ the two differ by more than 12 levels in any channel unless the record states th
 **Limb darkening**, in this order of preference:
 
 1. Coefficients measured on the star, from transits of its planet or from interferometry, in or near the visible.
-2. The Claret & Bloemen (2011) V-band model grid at the star's cited temperature and gravity, labelled as a model.
-3. None, when the star lies outside the grid. The value is not extrapolated.
+2. The Claret & Bloemen (2011) V-band model grid (ATLAS, 3,500 K and hotter) at the star's cited temperature and gravity,
+   labelled as a model. Cooler stars and brown dwarfs use the Claret (2017) PHOENIX grid instead (down to 2,300 K). Both
+   are read bilinearly between the four surrounding grid nodes.
+3. None, when the star lies outside both grids or falls in a hole in them. The value is not extrapolated, and the lens
+   says why it stays flat.
+
+![Stars drawn with a limb law from a model grid or, for Luhman 16 B, a fit of its own light](images/star-limbs.png)
 
 The plate is a round overlay fitted to the sphere's outline at its drawn size, geometry scale included.
 

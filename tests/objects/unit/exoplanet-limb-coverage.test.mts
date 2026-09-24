@@ -61,8 +61,8 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     // A shape-only star (no colour source fit to draw) carries no limb profile; every other host does.
     if (science.kind === 'neutral-shape') { shapeOnly.push(id); continue; }
     assert.equal(science.kind, 'stellar-photometric-color');
-    // WD 1856+534's only fitted law puts the limb below zero, which the preparer refuses (its README), and the young hosts of imaged
-    // planets have no measured law in their packages: uniform colour discs, each saying so in its qualification.
+    // WD 1856+534's only fitted law puts the limb below zero, which the preparer refuses (its README): a uniform colour disc. Every
+    // other host has a measured law or a Claret model law at its own temperature and gravity.
     if (science.limbDarkening === undefined) { uniform.push(id); continue; }
     const law = requireRecord(science.limbDarkening, `${id} limb darkening`);
     assert.equal(law.law, 'quadratic');
@@ -80,5 +80,5 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
       String(requireRecord(asset, 'asset').filename).includes('-limb-color@2x.webp')), `${id} must publish its limb plate`);
   }
   assert.deepEqual(shapeOnly.sort(), ['hr-8799', 'kepler-16-a']);
-  assert.deepEqual(uniform.sort(), ['ab-pic', 'af-lep', 'dh-tau', 'gq-lup', 'hip-65426', 'roxs-42b', 'vhs-1256-1257', 'wd-1856-534', 'yses-1']);
+  assert.deepEqual(uniform, ['wd-1856-534']);
 });

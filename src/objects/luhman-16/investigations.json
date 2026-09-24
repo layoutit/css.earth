@@ -20,17 +20,17 @@
     },
     {
       "id": "colour",
-      "subject": "A colour for Luhman 16 A",
-      "status": "excluded",
-      "finding": "A brown dwarf's visible spectrum is dominated by molecular and alkali absorption, so a blackbody colour at its temperature would not be its colour, and no calibrated visible spectrum is used here.",
-      "revisitWhen": "A calibrated visible spectrum of the resolved component is published.",
+      "subject": "The colour of Luhman 16 A",
+      "status": "resolved",
+      "finding": "Faherty et al. (2014) published resolved MagE optical spectra of A and B, archived in the SIMPLE database; the colour lens is taken from A's. A blackbody colour would have been wrong: the spectrum is dominated by sodium and potassium absorption.",
+      "revisitWhen": "A resolved optical spectrum with higher signal below 650 nm is published.",
       "evidence": [
-        "https://arxiv.org/abs/1508.01767"
+        "https://arxiv.org/abs/1406.1518"
       ],
       "checked": [
         {
           "date": "2026-09-23",
-          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
+          "commit": "78354d5b06738f78624ec5f6a6fd297fda422fb5"
         }
       ]
     },

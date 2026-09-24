@@ -28,7 +28,25 @@
       "science": {
         "kind": "stellar-photometric-color",
         "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
-        "qualification": "Uniform photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved and no limb darkening is measured: no map, limb or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,213 K (TESS Input Catalog v8.2 (TIC 256364937; Stassun et al. 2019), the row of its radius and mass) and log g 5.02 (the same TIC row (5.024)): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "grid": {
+            "teffK": 3213,
+            "logg": 5.02,
+            "models": {
+              "Type": "q",
+              "Mod": "PC"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "aLSM",
+            "u2": "bLSM"
+          }
+        }
       }
     }
   ],
@@ -50,7 +68,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

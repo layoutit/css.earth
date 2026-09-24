@@ -193,14 +193,100 @@
           }
         ]
       }
+    },
+    {
+      "id": "luhman-16b-faherty-2014-mage",
+      "path": "photometry/faherty-2014-mage.txt",
+      "origin": "https://s3.amazonaws.com/bdnyc/LUH16B+-+opt%2Bunc.txt",
+      "credit": "Faherty et al. (2014), ApJ 790, 90; Magellan II Clay/MagE; SIMPLE archive (SIMPLE-AstroDB)",
+      "license": "BSD-3-Clause (SIMPLE-AstroDB archive); the paper retains its citation",
+      "licenseEvidence": [
+        "https://github.com/SIMPLE-AstroDB/SIMPLE-db/blob/main/LICENSE"
+      ],
+      "acquisition": "Download in source/preparation/acquisition.json: the archived resolved optical spectrum of Luhman 16 B (wavelength in um, flux, one-sigma error).",
+      "redistribution": "BSD-3-Clause with its notice and the paper's citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1406-1518",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1406.1518"
+          }
+        ]
+      }
+    },
+    {
+      "id": "luhman-16b-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://arxiv.org/abs/1406.1518",
+      "credit": "cssEarth; the MagE spectrum it names",
+      "license": "Project-authored colour record; the spectrum retains its terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored colour recipe naming the MagE spectrum bound above; repinned when edited."
+      }
+    },
+    {
+      "id": "luhman-16b-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer",
+      "credit": "CIE (2019), CIE 1931 colour-matching functions, 2 degree observer, doi:10.25039/CIE.DS.xvudnb9b",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer"
+      ],
+      "acquisition": "The CIE data table as the hd-189733 package ships it, byte for byte.",
+      "redistribution": "Permitted under CC BY-SA 4.0 with attribution.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-luhman-16b-cie-1931-2deg-cmf",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "luhman-16b-ureshino-2026-limb-darkening",
+      "path": "photometry/ureshino-2026-limb-darkening.json",
+      "origin": "https://arxiv.org/abs/2605.08544",
+      "credit": "Ureshino et al. (2026)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the posterior table of the arXiv source",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published limb-darkening coefficients transcribed with their cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "map-context-marker",
+      "id": "uniform-disc-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://zenodo.org/records/20024778",
-      "credit": "The Ureshino et al. (2026) brightness map seen from its host, rendered by tools/objects/source-authoring/context-markers.mts",
+      "origin": "https://arxiv.org/abs/1406.1518",
+      "credit": "The colour of Faherty et al. (2014)'s MagE spectrum of Luhman 16 B as a uniform disc (no limb law is measured); rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -208,14 +294,16 @@
       "recipe": {
         "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
-          "luhman-16b-posterior-mean",
+          "luhman-16b-stellar-color",
+          "luhman-16b-faherty-2014-mage",
+          "luhman-16b-cie-1931-2deg-cmf",
           "luhman-16b-preparation-raster"
         ]
       },
       "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The default lens rendered as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The colour lens rendered as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],
