@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "europa-52-elevation-shadow-alpha@2x.webp",
+      "bytes": 620382,
+      "sha256": "9a99aa178084f7c7f8d99669289b5ff90ea37daf420c6e0c780f333c463dee32"
+    },
+    {
+      "location": "public",
       "filename": "europa-52-elevation-shadow@2x.webp",
       "bytes": 132406,
       "sha256": "3da6ee122782a69edeb2bdf4dc43d27d96b504fc14f120ab32da887a23372ccc"
+    },
+    {
+      "location": "public",
+      "filename": "europa-52-elevation-surface-alpha@2x.webp",
+      "bytes": 680834,
+      "sha256": "3147c6cf405dbfe17a523c196fdf8a11af87600e48009470a1becc06b6dd4027"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "europa-52-shape-shadow-alpha@2x.webp",
+      "bytes": 531822,
+      "sha256": "7fc583f549c6a1b51b66f524d0f061ba4301ea25b4872428735201a87d4abab0"
+    },
+    {
+      "location": "public",
       "filename": "europa-52-shape-shadow@2x.webp",
       "bytes": 61772,
       "sha256": "fe5665962fa9417ccb35a27ffbb5b989845fa148c55952e37c846c3eaaf5c769"
+    },
+    {
+      "location": "public",
+      "filename": "europa-52-shape-surface-alpha@2x.webp",
+      "bytes": 526966,
+      "sha256": "57fcf2c075117173d55ba9486eabf694b240f396a27de30f6e39783589dd78ae"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "europa-52-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "europa-52-zimpol-surface-alpha@2x.webp",
+      "bytes": 550754,
+      "sha256": "53d07a0cb079b646ef89d691c502b5afa36b50511a2886d7331eff14efe65de9"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1386161,
-      "sha256": "4021aa22c7e099fdbac06f9f80e8ee0a4218f768b8e7a837ffcba232f207c4e1"
+      "bytes": 1387436,
+      "sha256": "c4b281230db102f066493a6934ef628bca6daae2d9e29c9616fae8c2d8d01709"
     },
     {
       "location": "prepared",

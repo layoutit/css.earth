@@ -1,7 +1,7 @@
 import { distanceDescription } from './navigation/navigation-distance.mts';
 import { FOCUS_SOURCE_DOCUMENTS } from './focus-catalog-data.mts';
 import { isSceneObject } from './prepared-focus-object.mts';
-import { objectClassificationLabel, SEARCH_OBJECTS } from './search-objects.mts';
+import { objectClassificationLabel, objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from './sidebar-thumbnails.mts';
 import { sourceDocumentation } from './source-documentation.mts';
 import type { CatalogueIndex } from './catalogue-index.mts';
@@ -21,7 +21,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
           name: object.name,
           searchNames: Object.freeze([]),
           classification: object.classification,
-          classificationName: objectClassificationLabel(object.classification).toLocaleLowerCase('en'),
+          classificationName: objectTypeLabel(object).toLocaleLowerCase('en'),
           systemName: object.systemName.toLocaleLowerCase('en'),
           route: object.route,
           illustration: object.discovery.illustration,

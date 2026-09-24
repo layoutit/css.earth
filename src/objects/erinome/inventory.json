@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "erinome-model-shadow-alpha@2x.webp",
+      "bytes": 128036,
+      "sha256": "2347cccfd3d109098bbf8a8c12c700a82793b0526bc9a64c1514f83dbaa6dde1"
+    },
+    {
+      "location": "public",
       "filename": "erinome-model-shadow@2x.webp",
       "bytes": 20648,
       "sha256": "26b6e2d5805cef80337296aa7f66dd1c9d715f587c16511691ec3cfc1cee0d3a"
+    },
+    {
+      "location": "public",
+      "filename": "erinome-model-surface-alpha@2x.webp",
+      "bytes": 131288,
+      "sha256": "33fbb229bf1b3a7eeb459309bf7774113d994ae97bd6fe30d473a25e08615256"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458641,
-      "sha256": "aab682ba6a50f8cda9dbe3af8d417359919d8232220c7b07af1be5f8650d4bd3"
+      "bytes": 459124,
+      "sha256": "e7020da53cec6f50eeb4835c3f435e3daa2ea0fc2471e848fe040f6dd80a8140"
     },
     {
       "location": "prepared",

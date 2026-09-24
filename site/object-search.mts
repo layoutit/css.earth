@@ -26,7 +26,13 @@ export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[],
     ? matchesObjectClassification(item.classification, classification) && (!item.illustration || illustrations) && !item.candidate
     : showAll || (systemName ? item.systemName === systemName
       : item.name.includes(query) || normalized.length > 0 && item.names.some(name => name.includes(normalized))));
-  return { query, matches, classification, systemName, showAll,
+  // A typed name lists exact names first, then names that begin with it, then the rest, each in catalogue order:
+  // "europa" finds the moon before the asteroid 52 Europa, which lies nearer the Sun.
+  const rank = (item: T) => item.name === query || item.names.includes(normalized) ? 0
+    : item.name.startsWith(query) || normalized.length > 0 && item.names.some(name => name.startsWith(normalized)) ? 1 : 2;
+  const ranked = classification || systemName || showAll ? matches
+    : matches.map((item, index) => ({ item, index, rank: rank(item) })).sort((a, b) => a.rank - b.rank || a.index - b.index).map(entry => entry.item);
+  return { query, matches: ranked, classification, systemName, showAll,
     detailQuery: classification || systemName || showAll ? '' : query };
 }
 

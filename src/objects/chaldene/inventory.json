@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "chaldene-model-shadow-alpha@2x.webp",
+      "bytes": 124246,
+      "sha256": "46f043e9e193e02267dc39d6d47ce8e2610463be50b7d5e176a0d2457579c051"
+    },
+    {
+      "location": "public",
       "filename": "chaldene-model-shadow@2x.webp",
       "bytes": 21400,
       "sha256": "026f78329955f2a17133d7c2db07d40567d9751ca7ba69710b7e47ec01b4d04d"
+    },
+    {
+      "location": "public",
+      "filename": "chaldene-model-surface-alpha@2x.webp",
+      "bytes": 127210,
+      "sha256": "9841aa0fff6b3ccc707df59ce356a1d79ac5b745f3f52114119b2f3de0771b96"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459310,
-      "sha256": "6efe2caee90d1c9720a34bc6363807a2f8c3876ed79a18b3f5322dcfa1b5f7de"
+      "bytes": 459799,
+      "sha256": "ee447b9a52970b9d0e624c5ae851c3ec05df51366b2185fec9b619f28c429f19"
     },
     {
       "location": "prepared",

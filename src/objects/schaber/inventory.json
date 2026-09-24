@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "schaber-elevation-shadow-alpha@2x.webp",
+      "bytes": 444654,
+      "sha256": "4222e1b3c5fc6fad45210cf92fef7bf87ecb1c9231303c652c51a529a9c04a04"
+    },
+    {
+      "location": "public",
       "filename": "schaber-elevation-shadow@2x.webp",
       "bytes": 135262,
       "sha256": "5f79d32b8dd6104b8d9007c8babec01938a5ed5d845e25914b3ece8492669f8c"
+    },
+    {
+      "location": "public",
+      "filename": "schaber-elevation-surface-alpha@2x.webp",
+      "bytes": 506672,
+      "sha256": "fe00a03f98ba168782018eb44c21085960c7c6ab29f5816acdae0749d3ac6c53"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "schaber-shape-shadow-alpha@2x.webp",
+      "bytes": 356888,
+      "sha256": "0f10dc93c64d518e684e173f9fdf09fed888bd9a171999d3cf05ea65922b3fb8"
+    },
+    {
+      "location": "public",
       "filename": "schaber-shape-shadow@2x.webp",
       "bytes": 55226,
       "sha256": "737fba064fdbd3143ade3af78306589e0e2f4b6558c070f8f1a6220ccb686483"
+    },
+    {
+      "location": "public",
+      "filename": "schaber-shape-surface-alpha@2x.webp",
+      "bytes": 349584,
+      "sha256": "5482d2093343e2579a8886e43c0ec56faf3eca54d90d099e7506aa2945825dcc"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750698,
-      "sha256": "75a0ae6a80b184871eb58137d077e629cfae9034b9c2874ee2fe2a9e8f111b9f"
+      "bytes": 751651,
+      "sha256": "354bf68d712bd5a0740750549d2d039d08e049ba3cd065a70d618a8565e01610"
     },
     {
       "location": "prepared",

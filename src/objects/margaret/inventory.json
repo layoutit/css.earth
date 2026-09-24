@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "margaret-model-shadow-alpha@2x.webp",
+      "bytes": 124120,
+      "sha256": "20086c408b3166ec0acbc39a0c7d667af55a6a403bee979e499c96b1dce9c8be"
+    },
+    {
+      "location": "public",
       "filename": "margaret-model-shadow@2x.webp",
       "bytes": 21168,
       "sha256": "e6cccca8c4f46f0711f9f26de9414792e660526e2723852d64afb06bb8fe1667"
+    },
+    {
+      "location": "public",
+      "filename": "margaret-model-surface-alpha@2x.webp",
+      "bytes": 126596,
+      "sha256": "3c84734530639278a72d162d7f436fa6d6fc953fc013f6d039a2fbbaf26edb84"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457958,
-      "sha256": "1403167c7c2803f5c38d1e68a0b0568b701bd921e4ca03d4930773c4fb26d53e"
+      "bytes": 458447,
+      "sha256": "7c610d4b8c79ec14add37162aad51c9fbece69fb6ae19f6fda6b4d81d89f6951"
     },
     {
       "location": "prepared",

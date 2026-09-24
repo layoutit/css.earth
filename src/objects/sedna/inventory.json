@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sedna-model-shadow-alpha@2x.webp",
+      "bytes": 132990,
+      "sha256": "156ac20e0b1702246cfcc2ada8355388c4d75f991768ea827f9803418ed8bc48"
+    },
+    {
+      "location": "public",
       "filename": "sedna-model-shadow@2x.webp",
       "bytes": 21370,
       "sha256": "a5da840cbda6d630c1fc1aecad46489c2d1374abec94c6d56da013f94349c4cf"
+    },
+    {
+      "location": "public",
+      "filename": "sedna-model-surface-alpha@2x.webp",
+      "bytes": 135250,
+      "sha256": "5ba86ecc703c6914fc592a989c2d25078e467b90e18194f3f92cf1a8610355eb"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457747,
-      "sha256": "011bd9f63823eea147e4c031b23ecf1d7f90bd8f5fdbf16b5655a85b05373687"
+      "bytes": 458218,
+      "sha256": "b56214548eec4d0da0b16eaa262273ad28b4d308586ac39f55574a12a0be3c3a"
     },
     {
       "location": "prepared",

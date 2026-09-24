@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eurybates-model-shadow-alpha@2x.webp",
+      "bytes": 138840,
+      "sha256": "6ec385e90e04e3b4df3361212228ea9dae5b0b7bd3b9feebf97bda0297763eb0"
+    },
+    {
+      "location": "public",
       "filename": "eurybates-model-shadow@2x.webp",
       "bytes": 20912,
       "sha256": "a43828e7ba7caf065726e94e718cf2b9186f1d17d23106bc4ceba61c9b9b3001"
+    },
+    {
+      "location": "public",
+      "filename": "eurybates-model-surface-alpha@2x.webp",
+      "bytes": 141378,
+      "sha256": "665be9d2bad3c622563a26c31998546c118ab4021e917508be48f21a273a240b"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 460860,
-      "sha256": "0bef7df73457e37894621af8292f0e3bed5a0266e663de05cf9169bb0f8afb79"
+      "bytes": 461355,
+      "sha256": "046ba6277ba1f574d75f835e223082f83882e06638004fa2340ef9b7f7b6cdbb"
     },
     {
       "location": "prepared",

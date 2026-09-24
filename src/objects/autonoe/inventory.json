@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "autonoe-model-shadow-alpha@2x.webp",
+      "bytes": 128356,
+      "sha256": "05d162f21d551f6ea4a14c64dc9be7aabc7a469e3fe1e64381500a236c66e7df"
+    },
+    {
+      "location": "public",
       "filename": "autonoe-model-shadow@2x.webp",
       "bytes": 20304,
       "sha256": "6b494b4f89ad2d0b62bc2483ac30420e61dcccb98b8622a276bbdabd11c9cb0e"
+    },
+    {
+      "location": "public",
+      "filename": "autonoe-model-surface-alpha@2x.webp",
+      "bytes": 131602,
+      "sha256": "e78bbd0313d7736b01d2837a31e58eadc4019956cfa5cb29cd57f634e91e6deb"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457915,
-      "sha256": "9566491d67f9704ecf2d539a9acdf6773698268bfd87851b5b71cb2523ff5572"
+      "bytes": 458398,
+      "sha256": "f995769ce5b638d5b7b93d0bc01c07edab956a936a2286a2bd1634a1e4c9878a"
     },
     {
       "location": "prepared",

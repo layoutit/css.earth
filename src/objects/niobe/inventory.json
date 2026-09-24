@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "niobe-elevation-shadow-alpha@2x.webp",
+      "bytes": 534338,
+      "sha256": "454ca7758c71b6663fc4c82f883871159f1585204fa739512520cb968f7822f0"
+    },
+    {
+      "location": "public",
       "filename": "niobe-elevation-shadow@2x.webp",
       "bytes": 133682,
       "sha256": "8e59075ee8dfdb938d337b8c13ab3f6d6a88fe37523db1bc52a79710bfecba5c"
+    },
+    {
+      "location": "public",
+      "filename": "niobe-elevation-surface-alpha@2x.webp",
+      "bytes": 574008,
+      "sha256": "b03bbcffa788b7639ecf3a47f7b464341d46107d1b1fc6d337126c6e2662df1f"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "niobe-shape-shadow-alpha@2x.webp",
+      "bytes": 448120,
+      "sha256": "ac9855aaa7cbc5ebc407eef8511410b663a59ec0ab01eb5bbf1dbe77524f16a7"
+    },
+    {
+      "location": "public",
       "filename": "niobe-shape-shadow@2x.webp",
       "bytes": 59488,
       "sha256": "44e10a339b1308265e79a9db0baf947ad0ea8d80c1c847238641c600d51b8197"
+    },
+    {
+      "location": "public",
+      "filename": "niobe-shape-surface-alpha@2x.webp",
+      "bytes": 441714,
+      "sha256": "08e9b1a568389d483ce5ab5f387603a6fd49998c9177804d0abd7adef809e81b"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749142,
-      "sha256": "87458ea78eebc88f483a9d8de3c55d15fdb468a96c1d4d28abb1c17ebf990584"
+      "bytes": 750071,
+      "sha256": "0f7ba9abd0a6a4f16a5bedfadb7110193ac4313cc7b0504a4cdbdd8aec3b63e7"
     },
     {
       "location": "prepared",

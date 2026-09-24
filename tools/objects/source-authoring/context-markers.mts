@@ -37,7 +37,10 @@ const readJson = async (path: string) => JSON.parse(await readFile(path, 'utf8')
 const defaultSurface = async (id: string) => {
   const raster = requireRecord(await readJson(resolve(objects, id, 'source/preparation/raster.json')));
   const content = requireRecord(await readJson(resolve(objects, id, 'source/content/object.json')));
-  const lens = requireString(requireRecord(content.lenses).defaultLens, `${id} default lens`);
+  const lenses = requireRecord(content.lenses), defaultLens = requireString(lenses.defaultLens, `${id} default lens`);
+  // A lens that draws an attached volume (a debris disc) paints the body itself with the surface it names.
+  const control = requireArray(lenses.controls).map(entry => requireRecord(entry)).find(entry => entry.id === defaultLens);
+  const lens = control?.volume === undefined ? defaultLens : requireString(requireRecord(control.volume).surface, `${id} ${defaultLens} volume surface`);
   const surface = requireArray(raster.surfaces).map(entry => requireRecord(entry)).find(entry => entry.id === lens);
   if (!surface) throw new TypeError(`${id}: the default lens ${lens} has no raster surface.`);
   return { lens, science: requireRecord(surface.science), source: requireString(surface.source, `${id} surface source`) };

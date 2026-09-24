@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "dactyl-shape-shadow-alpha@2x.webp",
+      "bytes": 48102,
+      "sha256": "377e31829aa80ea79dcb306e6f363e76716f88ea976920d10a4b43272a2e9f94"
+    },
+    {
+      "location": "public",
       "filename": "dactyl-shape-shadow@2x.webp",
       "bytes": 16968,
       "sha256": "9ff2f2fd8d828732735ddc6b25fb50e3cc8d58ed88eaecd676fb7ca00a08a42f"
+    },
+    {
+      "location": "public",
+      "filename": "dactyl-shape-surface-alpha@2x.webp",
+      "bytes": 44982,
+      "sha256": "13fb4cdd66fb379fe649977bd3cbc8a72528d74484e4fc42c0865ab7149f80ad"
     },
     {
       "location": "public",
@@ -76,8 +88,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 480402,
-      "sha256": "154d9fe4ce2f0fdc1fbfe9eac4e869caeaa9d11a390c003dbf3810c3b5b92a54"
+      "bytes": 480879,
+      "sha256": "943ee9e1df1f9ef6069fdd871cbbc9cbb7e2d6290963e8f51e8fa752436ad953"
     },
     {
       "location": "prepared",

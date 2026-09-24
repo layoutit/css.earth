@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "pales-elevation-shadow-alpha@2x.webp",
+      "bytes": 578440,
+      "sha256": "9d1240e225f7474eb77951a16fcb663ceb37e1b47305cfbef800154cbc9dc9a9"
+    },
+    {
+      "location": "public",
       "filename": "pales-elevation-shadow@2x.webp",
       "bytes": 143724,
       "sha256": "5f2ca057a96add69541aca2df1e12e8fd45633b39716f202ed03e82665b7ba26"
+    },
+    {
+      "location": "public",
+      "filename": "pales-elevation-surface-alpha@2x.webp",
+      "bytes": 619994,
+      "sha256": "9b8a8f92884d40e874d34622a8b7588b214e415446da5445b2f0eec9c2246b16"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "pales-shape-shadow-alpha@2x.webp",
+      "bytes": 484240,
+      "sha256": "dbbce144653f4cdb88edc8ae7749bd0872314b57038fef34672fdf310a276da3"
+    },
+    {
+      "location": "public",
       "filename": "pales-shape-shadow@2x.webp",
       "bytes": 62090,
       "sha256": "057f9df58d46e4b92c5218512039fe01a09b697348077485bb34951255665fd2"
+    },
+    {
+      "location": "public",
+      "filename": "pales-shape-surface-alpha@2x.webp",
+      "bytes": 477690,
+      "sha256": "3c95fea5cff2ec36e9e368beb7f0bae0ce60f555cef1a5e6b1bd96df0ab05a4c"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749236,
-      "sha256": "9b45fd15c3182f805276ac68e64fb053ce4e6f89f59e71ed8a13103de4d8294c"
+      "bytes": 750165,
+      "sha256": "22957f69f22fc2344ce6155ce94bd79297d6a64f92f6956ddd905177f1ff6b4c"
     },
     {
       "location": "prepared",

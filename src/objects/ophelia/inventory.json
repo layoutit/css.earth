@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ophelia-model-shadow-alpha@2x.webp",
+      "bytes": 109220,
+      "sha256": "874ff1ce3d8cc675370a33dc7fc1d20b4af677431fb4f06e558f6945eb2d446e"
+    },
+    {
+      "location": "public",
       "filename": "ophelia-model-shadow@2x.webp",
       "bytes": 23506,
       "sha256": "b242a61eb8a8f2f2639d4cb41c2d2efd2e6ba53a37b87e58d1244f764007026e"
+    },
+    {
+      "location": "public",
+      "filename": "ophelia-model-surface-alpha@2x.webp",
+      "bytes": 109428,
+      "sha256": "365d223a3c74e1bdf38b8ce0c2995ea591328e851ed07e814b3e3d965d424ae5"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459749,
-      "sha256": "a8a8298afc5e4eb09503ac8a2cbcb9d84538c5c2bbbe85e8bd3d5c80d75baf38"
+      "bytes": 460232,
+      "sha256": "3d317081b05e6050de8944ebb1857c884478408973f3fcf2c7fb085d6d0fe38a"
     },
     {
       "location": "prepared",

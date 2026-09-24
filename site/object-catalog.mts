@@ -40,7 +40,7 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
   const catalog = input.properties.catalog;
   if (!isRecord(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
   const { name, systemName, color, distanceAu, description } = catalog;
-  const keys = ['name', 'systemName', 'classification', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationLenses', 'orientationReference'];
+  const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationLenses', 'orientationReference'];
   if (Object.keys(catalog).some(key => !keys.includes(key)) || typeof name !== 'string' || typeof systemName !== 'string' ||
       typeof color !== 'string' || typeof distanceAu !== 'number' || typeof description !== 'string') throw new TypeError(`Invalid catalogue metadata: ${input.id}.`);
   if (catalog.orientationReference !== undefined && (!Number.isInteger(catalog.orientationReference) || Number(catalog.orientationReference) < 1)) throw new TypeError(`Invalid orientation reference: ${input.id}.`);
@@ -64,7 +64,8 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
   // Legacy catalog.distanceAu mixes orbital references and positions. It is
   // validated as authored metadata but never published as a measured distance.
   return { ...defineObject({ id: input.id, name, systemName, color, distance, description,
-    classification: classification(catalog.classification), route: `/${input.id}/`,
+    classification: classification(catalog.classification),
+    classificationLabel: typeof catalog.classificationLabel === 'string' ? catalog.classificationLabel : undefined, route: `/${input.id}/`,
     worldFrame: input.properties.worldFrame, discovery, loadScene }), aliases: aliases(catalog.aliases, input.id),
     order: order(catalog.order), ...(context ? { context } : {}) };
 }

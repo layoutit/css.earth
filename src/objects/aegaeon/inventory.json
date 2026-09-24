@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aegaeon-model-shadow-alpha@2x.webp",
+      "bytes": 132202,
+      "sha256": "2f60763b2bf0ff3485fe3452f9ce650622c734dbc432de7be3bb142c6518da4c"
+    },
+    {
+      "location": "public",
       "filename": "aegaeon-model-shadow@2x.webp",
       "bytes": 20648,
       "sha256": "56c1a7a44b04cc1e5739d1cf60dbea6ccee908224e810546974e823949b3713f"
+    },
+    {
+      "location": "public",
+      "filename": "aegaeon-model-surface-alpha@2x.webp",
+      "bytes": 132402,
+      "sha256": "190c45c6684cad8353450be03321b5d15ab1459c1dacdadc35875845a766663d"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 447982,
-      "sha256": "1b6910e129e6a61b7ee0f8b4c0b7df20ff81998737ad75beb9f699931c6d9b63"
+      "bytes": 448465,
+      "sha256": "aac13dc4be67a1f2e10bacbeda84f1271661463b59ea59f2fd72f5d32500ea25"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pholus-model-shadow-alpha@2x.webp",
+      "bytes": 128986,
+      "sha256": "d26e311f7401581448850501064c02e063570bb3971f0303fa402c683ae0933d"
+    },
+    {
+      "location": "public",
       "filename": "pholus-model-shadow@2x.webp",
       "bytes": 21640,
       "sha256": "77481a943f22f1e06797a44cd2a221ebce98e4fcafdf8a0b4fdc280c4b9682f5"
+    },
+    {
+      "location": "public",
+      "filename": "pholus-model-surface-alpha@2x.webp",
+      "bytes": 131254,
+      "sha256": "0875556fd8c5d9d960b3c9fd1e5ab353dbf424655e126c17e2462bc270d9c469"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457213,
-      "sha256": "72af14751604f87c078aa1423e4b975ba251da86f475099be5dc02fa752602ef"
+      "bytes": 457690,
+      "sha256": "7b76dc062f24ae12237ebfd0d0b91855e3b6f4ee410cd66b3af8f4f7c479c8af"
     },
     {
       "location": "prepared",

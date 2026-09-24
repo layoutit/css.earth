@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "lucia-elevation-shadow-alpha@2x.webp",
+      "bytes": 538174,
+      "sha256": "a35b9dcdbff97998ceeb1f034db989c7ac48cec3dae3bd21b7257618cd95a94e"
+    },
+    {
+      "location": "public",
       "filename": "lucia-elevation-shadow@2x.webp",
       "bytes": 143700,
       "sha256": "a20ed1deb33d5c174a298d5c0d2ffdadacb52f31603d0ac9ab60c6803d7954a6"
+    },
+    {
+      "location": "public",
+      "filename": "lucia-elevation-surface-alpha@2x.webp",
+      "bytes": 595350,
+      "sha256": "622bfa7cf75b29864e857ff12d8c386033eb094d21ac5b558437cb294bb0c79d"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "lucia-shape-shadow-alpha@2x.webp",
+      "bytes": 445848,
+      "sha256": "d95f0e9998a62407ba9f7454d51d4d8815687013b760d566ff2163b21637f242"
+    },
+    {
+      "location": "public",
       "filename": "lucia-shape-shadow@2x.webp",
       "bytes": 57932,
       "sha256": "27ba9057b8b2eaa0b6f6d7fd919fa211ca063d61e7234486266e49749901d287"
+    },
+    {
+      "location": "public",
+      "filename": "lucia-shape-surface-alpha@2x.webp",
+      "bytes": 438244,
+      "sha256": "86974ee4a8e3eb6161a98262ea7fe2d91f80685f6b3ab7fcf9d64a5e01448919"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748663,
-      "sha256": "d4a3d84d615f8cf4088eb4bd7a5d474db24d83acc70d4e7d8ccc76af3ceddb58"
+      "bytes": 749592,
+      "sha256": "fc8a5f3b1a5ff9a152eb1dbd7425e189349cd63e4705ee827ac21480dfe721a1"
     },
     {
       "location": "prepared",

@@ -22,6 +22,7 @@ const materialIds: readonly MaterialId[] = ['lighting', 'atmosphere'];
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
+import { seamOutsetBinding, seamOutsetInitialValue } from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
 import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
 import { surfaceBankInventory } from "./surface-banks.mts";
@@ -76,6 +77,9 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   const camera=b.element("div","polycss-camera object-render-root",plan.camera.style);
   const scene=b.element("div","polycss-scene",plan.camera.sceneStyle);
   const system=b.mesh(`${config.namespace}-system`,systemTransform);
+  // The body and the cutaway body, which reuses the surface leaves, both read the outset from the system.
+  const seamOutset=plan.body.seamRepair.outset;
+  if(seamOutset)system.style.setProperty(seamOutset.property,seamOutsetInitialValue(seamOutset,cameraPlan.logicalBodyDiameter));
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);
   const pages=plan.body.assets.surface.urls.length;
   const writePages=(node: PreparedNode,urls: readonly string[])=>{for(let i=0;i<pages;i++)node.style.setProperty(`--${config.namespace}-surface-page-${i}`,urls.length?`url("${urls[i]}")`:"none");};
@@ -169,7 +173,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       // the atmosphere's flood frame. The default-pose materials are only base styles every variant overwrites.
       startup:[...pageKeys(defaultLens).map(initialResource),initialResource(`poles:${defaultLens.id}`),"shadowless:lighting",
         ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))]},
-    tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null}],animations:[],
+    tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null},...(seamOutset?[seamOutsetBinding(seamOutset,index(system))]:[])],animations:[],
     motionFrame:[index(system),index(body.surface[0])]};
  return {...prepared, schema:'cssearth-object-runtime@4', id:config.namespace, controls,
  materials:prepareMaterialTracks(prepared), variants:prepared.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};

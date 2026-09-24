@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hati-model-shadow-alpha@2x.webp",
+      "bytes": 141642,
+      "sha256": "94317cf645243b50605613a2682435a5fb57f9fd9911933ea7253a1f98966414"
+    },
+    {
+      "location": "public",
       "filename": "hati-model-shadow@2x.webp",
       "bytes": 22452,
       "sha256": "389ecb9a7e5612d796e3dc34a3fce32e3b06f7b518a2373db11b737339d3d345"
+    },
+    {
+      "location": "public",
+      "filename": "hati-model-surface-alpha@2x.webp",
+      "bytes": 142808,
+      "sha256": "d6fd1ea20785ab739b650c81149d17079349254a79b85a54145c42fcf15e3fe1"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457148,
-      "sha256": "d79fdd730e587d3f8dbe18af273886b22b01ddad8cc4b1d80505b0f17d4bdec2"
+      "bytes": 457613,
+      "sha256": "5a3b6341e3cd9e33ce2b84e2d5708f2fc39e048eaa7816a8deb5cafb8f2e279d"
     },
     {
       "location": "prepared",

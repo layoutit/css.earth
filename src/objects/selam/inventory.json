@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "selam-shape-shadow-alpha@2x.webp",
+      "bytes": 85048,
+      "sha256": "0ed486ff93041e7c1faa075e007211bb30df3002ed56d501bc27265b5c700655"
+    },
+    {
+      "location": "public",
       "filename": "selam-shape-shadow@2x.webp",
       "bytes": 33988,
       "sha256": "56c23588534f061f2384c95cad4e9c4b2803431fa926dc240e95d13e47f4dcd5"
+    },
+    {
+      "location": "public",
+      "filename": "selam-shape-surface-alpha@2x.webp",
+      "bytes": 78336,
+      "sha256": "2e0f4886c29a687147c263e4e17baf70c30a07a0b6daa07f2dfdf19431de71a1"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 960930,
-      "sha256": "3305fefbe11eab20e399b35703903a1e0056b2e24496ed955fc1be7867750410"
+      "bytes": 961401,
+      "sha256": "818688fa067ffb54a101db0c54b2c023c28f803a251975f4f8d8e2ec1a4ebdda"
     },
     {
       "location": "prepared",

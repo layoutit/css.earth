@@ -1,7 +1,7 @@
 ---
 import type { ObjectEntry } from '../object-schema.mts';
 interface Props { object: ObjectEntry; }
-import { objectClassificationLabel } from "../search-objects.mts";
+import { objectTypeLabel } from "../search-objects.mts";
 import ObjectNavigationMarker from "./ObjectNavigationMarker.astro";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 import { distanceDescription } from '../navigation/navigation-distance.mts';
@@ -15,7 +15,7 @@ const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKER
   ({ presentation }) => presentation.size,
 ));
 const preview = searchPreviewUrl(object.id);
-const classification = objectClassificationLabel(object.classification);
+const classification = objectTypeLabel(object);
 ---
 
 <li class="object-item" role="listitem" data-navigation-object-id={object.id} data-object-name={object.name.toLocaleLowerCase("en")}
@@ -23,7 +23,7 @@ const classification = objectClassificationLabel(object.classification);
   data-object-distance-m={object.distance.meters}
   data-object-system-name={object.systemName.toLocaleLowerCase("en")}
   data-object-classification={object.classification}
-  data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase("en")}>
+  data-object-classification-name={objectTypeLabel(object).toLocaleLowerCase("en")}>
     <a class="object-link object-observation-control object-thumbnail-leading"
       href={object.route} data-object-id={object.id}
       data-source-subject={`object:${object.id}`} data-source-document={source.href} data-source-label={source.label}>

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "phocaea-elevation-shadow-alpha@2x.webp",
+      "bytes": 575748,
+      "sha256": "75f060593a8d81c63b80f17012c3db63ac6094aab7a844a96047fbe4c4dea233"
+    },
+    {
+      "location": "public",
       "filename": "phocaea-elevation-shadow@2x.webp",
       "bytes": 140014,
       "sha256": "c8e714f5be8a2f1518eb47915ae51f04d9d47847aee2875ae4e5094e4c9f2a6c"
+    },
+    {
+      "location": "public",
+      "filename": "phocaea-elevation-surface-alpha@2x.webp",
+      "bytes": 610588,
+      "sha256": "e3641efc3b9e21c7e1ed0b32d5dccdde6feef604b85bc4bacaecfef4a7efc102"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "phocaea-shape-shadow-alpha@2x.webp",
+      "bytes": 481278,
+      "sha256": "3e90dc23f0f8f70fff4706cc487d388374823a872400d3e76730a15303a69502"
+    },
+    {
+      "location": "public",
       "filename": "phocaea-shape-shadow@2x.webp",
       "bytes": 61954,
       "sha256": "73d42e20e012849f0ae754281561a19edeb93366cda3b8043c7adf2e825b5639"
+    },
+    {
+      "location": "public",
+      "filename": "phocaea-shape-surface-alpha@2x.webp",
+      "bytes": 475664,
+      "sha256": "1f7e4bec8456617fc604238b44cdca63efb663aa958f262b23030644b7e11ec5"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750658,
-      "sha256": "fcaf1fc0e68f329f28e2a629c76906274714ac2c9769c4839dabb116367b55e5"
+      "bytes": 751611,
+      "sha256": "a6f0756d7b11b6538cf3a7e4aa0f0c43defc80badb2d983bdd8b30b47a387e3d"
     },
     {
       "location": "prepared",

@@ -144,24 +144,26 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://doi.org/10.3847/1538-3881/ae4b34",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "origin": "https://arxiv.org/abs/2402.09533",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-hosted-planet.mts",
+        "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
-          "roxs-42b-companion-observational-measurements"
+          "roxs-42b-companion-stellar-color",
+          "roxs-42b-companion-claret-2017-limb-darkening",
+          "roxs-42b-companion-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-hosted-planet.mts",
+      "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

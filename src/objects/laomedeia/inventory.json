@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "laomedeia-model-shadow-alpha@2x.webp",
+      "bytes": 130548,
+      "sha256": "a7f3a55ee3fd2bf6274416654c3ce84daa1e32633bea555d102d0ab6c5d7c97f"
+    },
+    {
+      "location": "public",
       "filename": "laomedeia-model-shadow@2x.webp",
       "bytes": 21112,
       "sha256": "a42fc1dbe93c460e58040c2192c9053118aced4038016a77ddfa886e774e7749"
+    },
+    {
+      "location": "public",
+      "filename": "laomedeia-model-surface-alpha@2x.webp",
+      "bytes": 132444,
+      "sha256": "5492cb70362379bb1fb3a09853424fe709d96cde136bf2ded291f4bb9796e598"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459007,
-      "sha256": "9cfbec238b9032831b5d728f8f36a836730379569ec663aa2b359bc6c9fe46f3"
+      "bytes": 459502,
+      "sha256": "866527620232846265d0aab5afdff1ae710005605ef3825cdc5bc1ccd79ef4d1"
     },
     {
       "location": "prepared",

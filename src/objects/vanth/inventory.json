@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vanth-model-shadow-alpha@2x.webp",
+      "bytes": 129178,
+      "sha256": "b8a535d03ab4f81a6539d1805553764050f0948b30a2bc0fe3b0dd444e490712"
+    },
+    {
+      "location": "public",
       "filename": "vanth-model-shadow@2x.webp",
       "bytes": 21008,
       "sha256": "03318614b53f19d33663bc6bd987f750369f273065197b9f887384e222bf7f90"
+    },
+    {
+      "location": "public",
+      "filename": "vanth-model-surface-alpha@2x.webp",
+      "bytes": 132228,
+      "sha256": "030f54d6fc9d7b1516800940a23f5b7011a744e0824a709e35e0a0fd12d16490"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457893,
-      "sha256": "ebefc9367b517148306856009628d97a21c9e12f569268034137cace81478b95"
+      "bytes": 458364,
+      "sha256": "d5c12d76591c4e66c45ce5da9e5c26d22a9a2ade747ab1740c65ba0bef4fafc9"
     },
     {
       "location": "prepared",

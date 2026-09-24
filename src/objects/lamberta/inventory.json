@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "lamberta-elevation-shadow-alpha@2x.webp",
+      "bytes": 596808,
+      "sha256": "62b8dbea49006df06c519eb9c4861883322457fff2ce7c14c7f33f11e38421f5"
+    },
+    {
+      "location": "public",
       "filename": "lamberta-elevation-shadow@2x.webp",
       "bytes": 146086,
       "sha256": "6a8c3fef0184bfe3cba6502be07377b71f5d823168a8761d3efacc91594bf694"
+    },
+    {
+      "location": "public",
+      "filename": "lamberta-elevation-surface-alpha@2x.webp",
+      "bytes": 631110,
+      "sha256": "4a2de4ccf9bd5a70b8fb1f03232dad7bfb98cc50652de1fca7a348af2e70ab12"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "lamberta-shape-shadow-alpha@2x.webp",
+      "bytes": 500170,
+      "sha256": "969b61320a5f8f308aa6d6c7d72206956691efaafb7fcb5e3cebd5381b7c428b"
+    },
+    {
+      "location": "public",
       "filename": "lamberta-shape-shadow@2x.webp",
       "bytes": 60882,
       "sha256": "6f30d9f9ddd9636cc55499295244e6ee5275b401beb193d6ad810bf03247aee6"
+    },
+    {
+      "location": "public",
+      "filename": "lamberta-shape-surface-alpha@2x.webp",
+      "bytes": 494092,
+      "sha256": "29496fba1a9bd87895e8eeca7e96a79ef3f71ccc8c7d2300dd8678e49eb67c9c"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "lamberta-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "lamberta-zimpol-surface-alpha@2x.webp",
+      "bytes": 568790,
+      "sha256": "fe037097e84630227e2be724eae2e3b2de30b338236df8f77ba9e758495bee85"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1392865,
-      "sha256": "047f7ac3463065f3198df9bdda6ff635dcbd3ee9a3beaf4ed005aab75bea0c30"
+      "bytes": 1394124,
+      "sha256": "fd076be8c53a8cb7115d3651c6b6e436e753585e895eb12671fd5e483a460bf2"
     },
     {
       "location": "prepared",

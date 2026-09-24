@@ -166,24 +166,27 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://doi.org/10.1051/0004-6361/202244294",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-object.mts",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-object.mts",
+        "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
-          "ab-pic-observational-measurements"
+          "ab-pic-stellar-color",
+          "ab-pic-gaia-dr3-xp-sampled",
+          "ab-pic-claret-2011-limb-darkening",
+          "ab-pic-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-object.mts",
+      "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

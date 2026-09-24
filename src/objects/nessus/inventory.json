@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nessus-model-shadow-alpha@2x.webp",
+      "bytes": 124690,
+      "sha256": "b480af36d500d9f07fdac88e4250f409a04831b9ea23ddaeb8b4ced3624c8c9d"
+    },
+    {
+      "location": "public",
       "filename": "nessus-model-shadow@2x.webp",
       "bytes": 21180,
       "sha256": "6efc986b857475f96a27ea021973b47422bd29e45ee36cb4eb5ab1c608a0e40d"
+    },
+    {
+      "location": "public",
+      "filename": "nessus-model-surface-alpha@2x.webp",
+      "bytes": 127260,
+      "sha256": "4a474a1b535b441387034feca8f73d45a063bda13cca69e0e25ac0f5e8423d16"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458584,
-      "sha256": "83cfb10605c2284a9cf97cebb12638d068caab61ae13de06edc139fe32d6b207"
+      "bytes": 459061,
+      "sha256": "8b4fccd3b7de7757d634d0c90ff3679e8e364284bb48fcbaf04814af43b12805"
     },
     {
       "location": "prepared",

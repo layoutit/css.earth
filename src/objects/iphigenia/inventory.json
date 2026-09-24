@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "iphigenia-elevation-shadow-alpha@2x.webp",
+      "bytes": 450062,
+      "sha256": "c0585df1dcfe5343e259d233e2e7a5caf8cad2caa96b276a0f5e9acf9fc0f22c"
+    },
+    {
+      "location": "public",
       "filename": "iphigenia-elevation-shadow@2x.webp",
       "bytes": 127474,
       "sha256": "20d4cfdffee64ec73865a80d731c53972b6ccca6bb7246ff62630b666afd6e18"
+    },
+    {
+      "location": "public",
+      "filename": "iphigenia-elevation-surface-alpha@2x.webp",
+      "bytes": 496346,
+      "sha256": "0705794910766fea70d79d1b9f1cda29c2b0bf12179ab813239b54c2b660f76b"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "iphigenia-shape-shadow-alpha@2x.webp",
+      "bytes": 376026,
+      "sha256": "ce4a6b571dbd3587c3101dc9d5e590a4c63940aa305ac9ccd5a1d60a2b11f47a"
+    },
+    {
+      "location": "public",
       "filename": "iphigenia-shape-shadow@2x.webp",
       "bytes": 60138,
       "sha256": "2c90b619f9792f9f00f065bb4406f4a2fd7e5fbadd3f1d8b0ebe3d9f16527bc8"
+    },
+    {
+      "location": "public",
+      "filename": "iphigenia-shape-surface-alpha@2x.webp",
+      "bytes": 366800,
+      "sha256": "8e18b1816bcd863a74ac9fc6803bb678144b1a12812e4cb53ed75cda6c10a610"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 752008,
-      "sha256": "7b5dc091a7f6f3bbb97e9ba5491a68d9883e54d22e1c188ca8159582be415b59"
+      "bytes": 752985,
+      "sha256": "20c893726294757793438bf4073f1af6703a317832b051a6fd0f87bf7b8dde7a"
     },
     {
       "location": "prepared",

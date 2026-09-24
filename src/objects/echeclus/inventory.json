@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "echeclus-model-shadow-alpha@2x.webp",
+      "bytes": 126996,
+      "sha256": "562f38e4026552f03d4efe82e5dbe26828cf3b93c20b685a81eb9fe3f985ac82"
+    },
+    {
+      "location": "public",
       "filename": "echeclus-model-shadow@2x.webp",
       "bytes": 20988,
       "sha256": "5227088f8d104c556701803c7615abc1861c7c0e471f03ed4f1b87a78c4e9ac2"
+    },
+    {
+      "location": "public",
+      "filename": "echeclus-model-surface-alpha@2x.webp",
+      "bytes": 128994,
+      "sha256": "bf5b5f458a503549a1d9d4af0e5cacfa77096bf7aba11658ae5302a3dab5e558"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458791,
-      "sha256": "fb5d81888c205bd7df04c41927f96bc9af8a8f0648c7da4233867ab8fcfc995b"
+      "bytes": 459280,
+      "sha256": "1cd604919ac9a6e65691fbadd2ade72c8ccf5f9c7fe2e1e9d164d21e6b984c62"
     },
     {
       "location": "prepared",

@@ -252,11 +252,12 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const terrestrialPrepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
       config: terrestrial, prepareContent: prepareObjectContentAssets, replaceReviewedImages });
     const terrestrialAttached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: terrestrialPrepared.definition as unknown as Record<string, unknown> });
-    if (terrestrialAttached.features) {
-      await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialAttached.definition)}\n`);
-      await writeFeatureContent(outputDirectory, terrestrialAttached.features);
-    }
-    const prepared = { ...terrestrialPrepared, definition: terrestrialAttached.definition as typeof terrestrialPrepared.definition };
+    if (terrestrialAttached.features) await writeFeatureContent(outputDirectory, terrestrialAttached.features);
+    // Triangle faces also publish atlases masked to their triangles, for browsers without corner-shape.
+    const { prepareTriangleAlphaAtlases } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/triangle-alpha-atlas.mts')).href) as typeof import('./terrestrial-layers/triangle-alpha-atlas.mts');
+    const terrestrialDefinition = await prepareTriangleAlphaAtlases(terrestrialAttached.definition as never, { namespace: descriptor.id, publicDirectory, publicBase: `/scenes/${descriptor.id}/` });
+    await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialDefinition)}\n`);
+    const prepared = { ...terrestrialPrepared, definition: terrestrialDefinition as typeof terrestrialPrepared.definition };
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
       allowPreparationArtifacts: true,

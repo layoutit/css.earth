@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "fornjot-model-shadow-alpha@2x.webp",
+      "bytes": 140710,
+      "sha256": "539d79254f7759b2923de9f25e6f1207684eeea62799774fb461de194c928faf"
+    },
+    {
+      "location": "public",
       "filename": "fornjot-model-shadow@2x.webp",
       "bytes": 21732,
       "sha256": "f265a315922cf17a5a5c4163a8348060431b3cc0e5137c9ceb26271a9cd8791e"
+    },
+    {
+      "location": "public",
+      "filename": "fornjot-model-surface-alpha@2x.webp",
+      "bytes": 142664,
+      "sha256": "a337d0b145d39e75b89383e7969c4376fa227632ee51056d33c20a0f981285db"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459158,
-      "sha256": "2caf148342f52b28cbbb433a07a6ecef7b804ce193db75c5887c01ab6126e509"
+      "bytes": 459641,
+      "sha256": "04859e162560e2f6d199e7b37610469f40ec43ae9beb5c6d9835dc6539389eab"
     },
     {
       "location": "prepared",

@@ -437,8 +437,8 @@
       "id": "prepared-porter-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.6084/m9.figshare.12779975.v1",
-      "credit": "Simon Porter (2021); NASA New Horizons Project; cssEarth no-coverage visualization",
-      "license": "CC BY 4.0 shape; MIT no-coverage presentation",
+      "credit": "Simon Porter (2021); NASA New Horizons Project; NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team; NASA / JHUAPL / SwRI; Simon Porter; cssEarth pointing refinement",
+      "license": "CC BY 4.0; NASA PDS scientific archive; retain original attribution and notices; MIT for authored preparation; original source notices retained.",
       "consumers": [
         "navigation"
       ],
@@ -446,14 +446,15 @@
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
           "porter-hydra-shape",
-          "model-surface"
+          "lorri-best",
+          "registered-lorri-camera"
         ],
         "size": 512,
-        "longitudeDegrees": 10,
-        "latitudeDegrees": 60,
+        "longitudeDegrees": 166.1,
+        "latitudeDegrees": 78.4,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "model"
+        "lensId": "monochrome"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

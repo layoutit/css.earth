@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ixion-model-shadow-alpha@2x.webp",
+      "bytes": 129016,
+      "sha256": "a2eea70380f3c0936d9d54fe74c0d89583cd659f3fdd1ddbb3e0e395086530ea"
+    },
+    {
+      "location": "public",
       "filename": "ixion-model-shadow@2x.webp",
       "bytes": 22106,
       "sha256": "536875f46e4198a9e4525cc488ab03bcd603cf94dd6733f67ef482b63ee2314d"
+    },
+    {
+      "location": "public",
+      "filename": "ixion-model-surface-alpha@2x.webp",
+      "bytes": 129324,
+      "sha256": "aaa9092f031a2aaf86237f7bfd3338353400b77fc0c9107ad9d481cc6f141f24"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457752,
-      "sha256": "4d96102ff74c1c63de4c3972735ec497852d26560f5f0694989dd3559cfdc610"
+      "bytes": 458223,
+      "sha256": "0c8841bd863d26dbe023716b30a472bbb740d28cd89ca677c2b5909b431c3f7f"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "dido-elevation-shadow-alpha@2x.webp",
+      "bytes": 475044,
+      "sha256": "8b45396428fcd400445bc654cc55b9e05379e88f963db4546ef271c1060c250e"
+    },
+    {
+      "location": "public",
       "filename": "dido-elevation-shadow@2x.webp",
       "bytes": 136752,
       "sha256": "382cee8a7d48b84c4c7ce01fcf1ddbacf06351a3b5e973aec1b84be6b685fa29"
+    },
+    {
+      "location": "public",
+      "filename": "dido-elevation-surface-alpha@2x.webp",
+      "bytes": 527944,
+      "sha256": "db418698772093b4f6a46dd189882e9e50f74a4cd2c380d826a032c348a911c3"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "dido-shape-shadow-alpha@2x.webp",
+      "bytes": 391950,
+      "sha256": "9ebfb4f9674cd1217188cadabbd2fd906cd8587ea561a250b6a89c8bf7dbc917"
+    },
+    {
+      "location": "public",
       "filename": "dido-shape-shadow@2x.webp",
       "bytes": 58780,
       "sha256": "4bec079d1f8ace071da425f25ad36be7c8e42b10c2ba91814b42a5e813eff922"
+    },
+    {
+      "location": "public",
+      "filename": "dido-shape-surface-alpha@2x.webp",
+      "bytes": 384152,
+      "sha256": "9a216559dffd7a1dbbb47278b952cb6bef3e6e24495356213d6eebf595120095"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748158,
-      "sha256": "57f1fc246c6d3de45b01c4005cf3ecf6ac457876bb3ead4ad580d80b1ae00e94"
+      "bytes": 749075,
+      "sha256": "51caa5ba5e8a1ec1f4d7516898bced362eca7432c201bfb82c8a5cd509e9ce83"
     },
     {
       "location": "prepared",

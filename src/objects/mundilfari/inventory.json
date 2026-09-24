@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mundilfari-model-shadow-alpha@2x.webp",
+      "bytes": 142768,
+      "sha256": "1a780f7b8c8bb7279dc38fdfe3606e3c328c957ae917eb6847f1673947d1939a"
+    },
+    {
+      "location": "public",
       "filename": "mundilfari-model-shadow@2x.webp",
       "bytes": 22256,
       "sha256": "632a28a3bf2bda0f06daed86b2b1e3bafc68c57277d157ad7d485abbd3844777"
+    },
+    {
+      "location": "public",
+      "filename": "mundilfari-model-surface-alpha@2x.webp",
+      "bytes": 142248,
+      "sha256": "8a9331af55217df4293864cafc4f1c3ab35f2f60508e6ec4fc788c763017a110"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459821,
-      "sha256": "fc7898d1f1a1ea2082f614266febf8f0c6eeaaa1ec5934fb07c051749eb3b3d7"
+      "bytes": 460322,
+      "sha256": "4b6a1d704f50c482dc6eaf9ddb457387458508aa8647756713a93254eb2c17f2"
     },
     {
       "location": "prepared",

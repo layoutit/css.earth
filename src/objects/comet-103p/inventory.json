@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-103p-constraints-shadow-alpha@2x.webp",
+      "bytes": 338446,
+      "sha256": "2d318f6271ab3b1b72fdc3b082b11ee70427a809ad5ab1cfc677ca4ec268b690"
+    },
+    {
+      "location": "public",
       "filename": "comet-103p-constraints-shadow@2x.webp",
       "bytes": 81714,
       "sha256": "8ac13e46a64a6159f6133e66b351eac334272d2573e43ea33c2ccc7b15f1de94"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-constraints-surface-alpha@2x.webp",
+      "bytes": 329608,
+      "sha256": "065e35283c5137b757dc137cfc2eb1df8fd0321d901dac0fe49d48937bf71f0c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-103p-model-shadow-alpha@2x.webp",
+      "bytes": 321458,
+      "sha256": "531e40d04a160053709ad2ca5a54675c3766c4fe5b83a15c6a33338df93471f9"
+    },
+    {
+      "location": "public",
       "filename": "comet-103p-model-shadow@2x.webp",
       "bytes": 66544,
       "sha256": "43d2446cbd21e594f29d93176771368a904ed7534fd225c02d1794200374eeb4"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-model-surface-alpha@2x.webp",
+      "bytes": 314018,
+      "sha256": "c8953d45b8706f231c8328ce06b70a1830d91a411ab4e53631c9fcf8f69fc42c"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "comet-103p-model-thumbnail.webp",
       "bytes": 3052,
       "sha256": "bbf96a7b1d8ea7c2cd69ad9e41e837348912db104a566734a195d2f1f9195fc1"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-mri-surface-alpha@2x.webp",
+      "bytes": 385478,
+      "sha256": "4ba313b84ef9760de4cec31bd992d5da9d8ab28152b1ba977d70327e894f2512"
     },
     {
       "location": "public",
@@ -63,9 +93,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-103p-spectral-slope-shadow-alpha@2x.webp",
+      "bytes": 771206,
+      "sha256": "3c87dc78640f1eb2b3c14e9e103295d31e7530e3fa3393930e5981f48e68eeff"
+    },
+    {
+      "location": "public",
       "filename": "comet-103p-spectral-slope-shadow@2x.webp",
       "bytes": 486556,
       "sha256": "f89c5eb28698656268dfe43e381e343e6c83e8204588d2f8bd6381d6a2917e48"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-spectral-slope-surface-alpha@2x.webp",
+      "bytes": 534222,
+      "sha256": "9b9b81cf4717f4d3717b99e62cbfdc7c46398f1dba60339f9371d0c2e02defcc"
     },
     {
       "location": "public",
@@ -87,9 +129,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-103p-temperature-shadow-alpha@2x.webp",
+      "bytes": 773638,
+      "sha256": "914f42294e8641bcdffc417c31ee3f9e494d3e621d2f3dbacd2f6efc3d05f1b6"
+    },
+    {
+      "location": "public",
       "filename": "comet-103p-temperature-shadow@2x.webp",
       "bytes": 487562,
       "sha256": "67b1e92e7671d6148bad11a806a2e5a75e815c39977b62a0612b6a79dda73e1c"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-temperature-surface-alpha@2x.webp",
+      "bytes": 532796,
+      "sha256": "f8d734b5060ec1ac2d8f901a9ae032bf081c9f4b9ea0706ae595a19f2a16f76f"
     },
     {
       "location": "public",
@@ -172,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 943030,
-      "sha256": "f36ab905d316e9aec2549522a624458d81ae61c58d02be9eeb25dae511da72f2"
+      "bytes": 945381,
+      "sha256": "eb4b66c914b753ced08cb984534ec717acb9e854e557aed61d8e7e93e90b7456"
     },
     {
       "location": "prepared",

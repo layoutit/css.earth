@@ -1,0 +1,6 @@
+/* A <u> face is the triangle its two bevelled top corners cut from its atlas slice (corner-shape). Where corner-shape
+   is missing (Safari 26) those radii would round the corners into an ellipse; the face instead reads an atlas whose
+   slices are already masked to the triangle (triangle-alpha-atlas.mts, prepared-resource-fallbacks.ts). */
+@supports not ((corner-top-left-shape: bevel) and (corner-top-right-shape: bevel)) {
+  .object-stage .polycss-mesh > u { border-radius: 0; }
+}

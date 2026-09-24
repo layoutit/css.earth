@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "skoll-model-shadow-alpha@2x.webp",
+      "bytes": 140856,
+      "sha256": "5e98c617caaac643a436c6c1a69b7240d0f5729266dae491c45fbf29a8d5b4dd"
+    },
+    {
+      "location": "public",
       "filename": "skoll-model-shadow@2x.webp",
       "bytes": 22008,
       "sha256": "056b25a73bd7e118e4d525f777c83662e14728452c089ac2726d814e91e5ad79"
+    },
+    {
+      "location": "public",
+      "filename": "skoll-model-surface-alpha@2x.webp",
+      "bytes": 141944,
+      "sha256": "08aeb952e3f487bd09ad35252ce6674e08f4ad81ae61b661b220648f67b78a32"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458130,
-      "sha256": "9823ed2a0642c5c2affad6cb2626b4c75b165b40b104172e394f342bbec1e3b8"
+      "bytes": 458601,
+      "sha256": "9b11c08d5ea41b42437536c6def85ea7a2802909ab74cd0def24671db796d105"
     },
     {
       "location": "prepared",

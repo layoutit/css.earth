@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "anthe-model-shadow-alpha@2x.webp",
+      "bytes": 123662,
+      "sha256": "37e485042a618fd9a3de0089eb9170a904e140f2b4ce172b522c27d601528566"
+    },
+    {
+      "location": "public",
       "filename": "anthe-model-shadow@2x.webp",
       "bytes": 21372,
       "sha256": "248d384e80d774afdd9d6ba750f0ced516f67792f9e2d0e1b617f15ed5c4aa82"
+    },
+    {
+      "location": "public",
+      "filename": "anthe-model-surface-alpha@2x.webp",
+      "bytes": 127210,
+      "sha256": "9841aa0fff6b3ccc707df59ce356a1d79ac5b745f3f52114119b2f3de0771b96"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457837,
-      "sha256": "f080a05135644c61abafce2d41ff78b6e2d6c18443f07fd0e02668ad575e1829"
+      "bytes": 458308,
+      "sha256": "17b623e3fd882dc1df6ea7df5652643168793f7fc9b9fbff655b280a1a913caf"
     },
     {
       "location": "prepared",

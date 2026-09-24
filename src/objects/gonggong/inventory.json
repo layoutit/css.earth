@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gonggong-model-shadow-alpha@2x.webp",
+      "bytes": 128926,
+      "sha256": "fca8c41ebda4be4978f83be4fa2135d61d0e920a7e38216e5518c36a3667df1b"
+    },
+    {
+      "location": "public",
       "filename": "gonggong-model-shadow@2x.webp",
       "bytes": 21108,
       "sha256": "edb2c47afcba4d4f4d61b6acfb0d37ea9c17f685ef651e445627adf4d6a528f3"
+    },
+    {
+      "location": "public",
+      "filename": "gonggong-model-surface-alpha@2x.webp",
+      "bytes": 130732,
+      "sha256": "ab82b63b0d72d0ba73f3e006af2c72980a44943805540dd210502293220988c2"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458341,
-      "sha256": "44af2df64829b4a252a360b4e2d7934bae02a768e2491e747eb43d4d833b685f"
+      "bytes": 458830,
+      "sha256": "bdd42de37aca9186f70d89f5c44af1ddf1a1b26f2484820b8876ae3f2cbb7ded"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "juewa-elevation-shadow-alpha@2x.webp",
+      "bytes": 591630,
+      "sha256": "a6a29620ba9b4d29f31bcca2eda6572cf5ee80a956f302018141ac627b92e72a"
+    },
+    {
+      "location": "public",
       "filename": "juewa-elevation-shadow@2x.webp",
       "bytes": 158024,
       "sha256": "9ce69d3f5e5ba31b38555c51088a845a6e50d60f4e530e0a8c23b9a010c3eac7"
+    },
+    {
+      "location": "public",
+      "filename": "juewa-elevation-surface-alpha@2x.webp",
+      "bytes": 658652,
+      "sha256": "d457677b8e7903bbac8ac7961db2c860c82b56966be2659797323f56362f7b2a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "juewa-shape-shadow-alpha@2x.webp",
+      "bytes": 486564,
+      "sha256": "3ef415a253d79aa58e355bcfca92e769e892cc4f74e5a3423b945d0c50819539"
+    },
+    {
+      "location": "public",
       "filename": "juewa-shape-shadow@2x.webp",
       "bytes": 61380,
       "sha256": "1d25ec2c17842b7a9349708bc685d57990164816697b7057e7379f0a3f9d38a7"
+    },
+    {
+      "location": "public",
+      "filename": "juewa-shape-surface-alpha@2x.webp",
+      "bytes": 478430,
+      "sha256": "fd1fb58db28b79dae3686453d0e14469fd73006ddd69c4505061ccabbedef39d"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748932,
-      "sha256": "72556353368cfd7ebd8927344cd4831649137ba2c7ec61fef625d1cbf766ee04"
+      "bytes": 749861,
+      "sha256": "cb668fd549f9f514032b3c632aee00984891ce3de2dc813d08aaf74b1dd55f42"
     },
     {
       "location": "prepared",

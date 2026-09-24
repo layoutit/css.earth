@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "geographos-elevation-shadow-alpha@2x.webp",
+      "bytes": 641418,
+      "sha256": "4d1dccc4ea3acd2d04ab5b49640be54ac6447393dd3da090b2cdf566f12ed8d4"
+    },
+    {
+      "location": "public",
       "filename": "geographos-elevation-shadow@2x.webp",
       "bytes": 169356,
       "sha256": "a594ffb635262ba7a09cc60b1eae3ebcd0efc575f4ccf528a07b46ca953c4fca"
+    },
+    {
+      "location": "public",
+      "filename": "geographos-elevation-surface-alpha@2x.webp",
+      "bytes": 701568,
+      "sha256": "6caab95f29274915667b71cabe1455e2a5520281c2a410fe2a95f117b167f866"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "geographos-shape-shadow-alpha@2x.webp",
+      "bytes": 524768,
+      "sha256": "bebbc4c06d1d57ff90b5b373a6452ff21c7d089332756969ffd0969106c796f5"
+    },
+    {
+      "location": "public",
       "filename": "geographos-shape-shadow@2x.webp",
       "bytes": 61466,
       "sha256": "0f84066bc2826d1f73345934469bd88dabcaf774301cdbc1120a9e1961f81796"
+    },
+    {
+      "location": "public",
+      "filename": "geographos-shape-surface-alpha@2x.webp",
+      "bytes": 518722,
+      "sha256": "272eed8ae222dafff77377b3887acf42f5554220764da29fa313f87f4f43d934"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 753337,
-      "sha256": "d6f3abef532b41b0f01a938a2101ffe78a1320833813d7dc0ebba588ac46f89b"
+      "bytes": 754326,
+      "sha256": "85eddc82239aff5999f30cb91dcb815cea49b316498d8c9c689a8fa32db0054f"
     },
     {
       "location": "prepared",

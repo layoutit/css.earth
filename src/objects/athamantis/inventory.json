@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "athamantis-elevation-shadow-alpha@2x.webp",
+      "bytes": 535188,
+      "sha256": "0ef0e8608bc2761ffa7bbcdb5d0113c4e04e57694944b8042d522cc81ddd97f7"
+    },
+    {
+      "location": "public",
       "filename": "athamantis-elevation-shadow@2x.webp",
       "bytes": 129884,
       "sha256": "725d74e841564b4470575f40fc06846ac331bc098eebc12f0253b52d89dc5eba"
+    },
+    {
+      "location": "public",
+      "filename": "athamantis-elevation-surface-alpha@2x.webp",
+      "bytes": 579754,
+      "sha256": "232c7221741ff095a57dcecfbd7a54ac8ec3d4f610841ec6f25c703fa8211820"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "athamantis-shape-shadow-alpha@2x.webp",
+      "bytes": 451710,
+      "sha256": "494c3fef2322a813dbd52498745dc412c3122695013ddbba8992c0623e5f5de0"
+    },
+    {
+      "location": "public",
       "filename": "athamantis-shape-shadow@2x.webp",
       "bytes": 57100,
       "sha256": "dec7535784a2a82010b86c2963cd9ab71a1e643ce57503a5023f660be3f1b72c"
+    },
+    {
+      "location": "public",
+      "filename": "athamantis-shape-surface-alpha@2x.webp",
+      "bytes": 444860,
+      "sha256": "affdc9624dfe76baa0415873343130a60485f55c1c5fe8bf41986b29abbe6b27"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "athamantis-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "athamantis-zimpol-surface-alpha@2x.webp",
+      "bytes": 602468,
+      "sha256": "48220fd3020ffcee6c07f76eadedff96967c44ad3524798c9f51593a4d5f87e8"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1345835,
-      "sha256": "913bb8f2fcccac4ec4fcf3473b303142e283b5564c884f2e4961a5940d8e457d"
+      "bytes": 1347126,
+      "sha256": "539fcb9a3a2ab25a7c2f56379d005a6c2c9e5cb6bd99260a5331a0259befc1d9"
     },
     {
       "location": "prepared",
