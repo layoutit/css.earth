@@ -22,7 +22,8 @@
  *
  * A planet or companion is a body on a hosted orbit around this star (orbit.mts): `orbit` is { "whereistheplanet": key,
  * "measurements": CSV path, "measurementsSource", "source", "url" } for an imaged orbit from the paper's posterior;
- * { "archive": "nasa-ps", "reference"? } for one paper's transit fit in the NASA Exoplanet Archive; or { "elements": { … },
+ * { "archive": "nasa-ps", "reference"? } for one paper's transit fit in the NASA Exoplanet Archive ("measured": true for a planet
+ * found without a transit whose paper measures its whole orbit, inclination included, orbit.mts assembleMeasuredOrbit); or { "elements": { … },
  * "source", "url" }. A planet's radius and mass are in Jupiter units and default to the archive row's; a planet with a cited
  * `temperature` glows with its own heat (a young giant imaged directly). A companion is a star: solar units, temperature required.
  *
@@ -90,7 +91,7 @@ function draftQuotes(value: unknown, label: string): DraftQuotes {
 }
 export type OrbitSpec =
   | { readonly whereistheplanet: string; readonly measurements: string; readonly measurementsSource: string; readonly body?: number; readonly source: string; readonly url: string }
-  | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string }
+  | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string; readonly measured?: true }
   | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: 'periastron' | 'inferior-conjunction'; readonly source: string; readonly url: string };
 /** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" lens (planet-lenses.mts). */
 export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
@@ -115,7 +116,8 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
     source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
   if (o.archive !== undefined) {
     if (o.archive !== 'nasa-ps') throw new TypeError(`${label}.archive is nasa-ps, not ${String(o.archive)}.`);
-    return { archive: 'nasa-ps', ...(o.reference === undefined ? {} : { reference: requireString(o.reference, `${label}.reference`) }), ...(o.planetName === undefined ? {} : { planetName: requireString(o.planetName, `${label}.planetName`) }) };
+    return { archive: 'nasa-ps', ...(o.reference === undefined ? {} : { reference: requireString(o.reference, `${label}.reference`) }), ...(o.planetName === undefined ? {} : { planetName: requireString(o.planetName, `${label}.planetName`) }),
+      ...(o.measured === undefined ? {} : o.measured === true ? { measured: true as const } : (() => { throw new TypeError(`${label}.measured is true or absent, not ${JSON.stringify(o.measured)}.`); })()) };
   }
   if (o.elements !== undefined) {
     const elements = requireRecord(o.elements, `${label}.elements`), unknown = Object.keys(elements).filter(key => !ELEMENT_KEYS.includes(key));

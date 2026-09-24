@@ -17,7 +17,7 @@ import { quoteSource } from './prose.mts';
 import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, lensMarkerEntry, thermalFromArchive } from './planet-lenses.mts';
 import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
-import { archiveRows, assembleArchiveOrbit, compositeMass, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
+import { archiveRows, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
 import { TODO } from './scaffold.mts';
 import type { Cited, HostedSpec, StarSpec } from './spec.mts';
 
@@ -49,9 +49,10 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     citation = { text: o.source, url: o.url, label: o.source };
   } else if ('archive' in spec.orbit) {
     const planetName = spec.orbit.planetName ?? spec.name;
-    assembled = assembleArchiveOrbit(await archiveRows(archive, planetName), spec.orbit.reference, await compositeMass(archive, planetName));
+    const [rows, composite] = await Promise.all([archiveRows(archive, planetName), compositeMass(archive, planetName)]);
+    assembled = spec.orbit.measured ? assembleMeasuredOrbit(rows, composite, await compositeRadius(archive, planetName), hostRadiusKm / 695700) : assembleArchiveOrbit(rows, spec.orbit.reference, composite);
     orbit = assembled.orbit; if (assembled.todo) todo.push(assembled.todo);
-    const row = assembled.rows.find(entry => spec.orbit && 'reference' in spec.orbit && spec.orbit.reference ? entry.reference === spec.orbit.reference || entry.label === spec.orbit.reference : entry.isDefault) ?? assembled.rows[0]!;
+    const row = assembled.row ?? assembled.rows.find(entry => spec.orbit && 'reference' in spec.orbit && spec.orbit.reference ? entry.reference === spec.orbit.reference || entry.label === spec.orbit.reference : entry.isDefault) ?? assembled.rows[0]!;
     citation = { text: `${row.label}${row.bibcode ? ` (${row.bibcode})` : ''}, via the NASA Exoplanet Archive`, ...(row.url ? { url: row.url } : {}), ...(row.bibcode ? { bibcode: row.bibcode } : {}), label: row.label };
   } else {
     const e = spec.orbit.elements, cite = `${spec.orbit.source} (${spec.orbit.url})`;
@@ -124,10 +125,12 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   const content = read(`${s}/content/object.json`), period = record.orbit.periodDays;
   const radiusValue = star ? `${Number(record.radius.value.toPrecision(2))} solar radii` : record.radius.value >= 0.3 ? `${Number(record.radius.value.toPrecision(2))} Jupiter radii` : `${Number((record.radius.value * JUPITER_RADIUS_KM / EARTH_RADIUS_KM).toPrecision(2))} Earth radii`;
   const periodValue = period < 2 ? `${Math.round(period * 24)} hours` : period < 1000 ? `${Number(period.toPrecision(3))} days` : `${Math.round(period / 365.25)} years`;
+  // A value the archive calculates from a relation, not a paper's measurement, says so on the fact itself, not only in its source.
+  const model = (value: Cited) => value.source.includes('a model, not a measurement') ? ' (model)' : '';
   content.panel.facts = [
-    { id: 'radius', label: 'Radius', value: radiusValue, source: fact(record.radius.url, record.radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
+    { id: 'radius', label: 'Radius', value: `${radiusValue}${model(record.radius)}`, source: fact(record.radius.url, record.radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
     { id: 'period', label: 'Year', value: periodValue, source: fact(record.orbitCitation.url, record.orbitCitation.label, 'source/measurements.json', 'orbitalPeriodDays; orbitalPeriodSource') },
-    { id: 'mass', label: 'Mass', value: record.mass.unmeasured ? 'Not measured' : `${record.mass.limit ? 'Under ' : ''}${Number(record.mass.value.toPrecision(2))} ${star ? 'solar' : 'Jupiter'} masses`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
+    { id: 'mass', label: 'Mass', value: record.mass.unmeasured ? 'Not measured' : `${record.mass.limit ? 'Under ' : ''}${Number(record.mass.value.toPrecision(2))} ${star ? 'solar' : 'Jupiter'} masses${model(record.mass)}`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
   // A planet still on the shape lens: its notes say so; a thermal, band-colour or host-lit lens wrote its own.
   if (!star && !spec.photometry && !spec.thermal) {
     const control = content.lenses.controls[0];
