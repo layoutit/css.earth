@@ -22,7 +22,8 @@ import { prepareDirectionalSun } from '../../../src/platform/prepare-directional
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mts';
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mts';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
-import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid, lensTextureGrid } from './solid-raster.mts';
+import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mts';
+import { scientificPreviewGrid, lensTextureGrid } from './raster-grid.mts';
 import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from './solid-scene.mts';
 import { prepareRadialMaterials } from './radial-materials.mts';
 import { loadRadialModels, combineRadialModels } from './radial-models.mts';

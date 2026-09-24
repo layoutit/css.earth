@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeArrayBuffer, fromFile } from 'geotiff';
 import { resampleGeoreferencedObservation } from './observed-geotiff.mts';
-import { readObservation } from './solid-raster.mts';
+import { readObservation } from './observation-raster.mts';
 const test = sourceTest();
 
 const radius = 180 / Math.PI;

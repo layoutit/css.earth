@@ -9,7 +9,7 @@ import { parsePresentationProfile, prepareCssPresentation, type PresentationInpu
 import { prepareCelestialAssets } from './celestial/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters } from './geometry-adapters.js';
-import { prepareRuntimeManifest } from './operations.js';
+import { prepareRuntimeManifest } from './runtime-assets.js';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
 import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
 

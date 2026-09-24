@@ -1,17 +1,17 @@
 /** Package a measurement lens on the target's existing css.earth standard sphere. */
-import { readFile,writeFile,mkdir,mkdtemp,rm,rmdir,rename } from 'node:fs/promises';
-import { resolve,dirname } from 'node:path';
+import { readFile, writeFile, mkdir, mkdtemp, rm, rmdir, rename } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { build } from 'esbuild';
 import sharp from 'sharp';
-import { requireRecord,requireArray,requireFiniteNumber,requireString } from '../../../sources/source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../../sources/source-values.mts';
 import { parseBodyMapProduct } from '../../body-map-product.mts';
 import { assertBodyMapPlanes } from '../../body-map-publication.mts';
 import { writeProductRecord } from '../../product-record.mts';
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import { verifiedProduct,localOutput } from '../projection.mts';
-import { contextTarget,sourceContext } from '../delivery-context.mts';
+import { verifiedProduct, localOutput } from '../verified-product.mts';
+import { contextTarget, sourceContext } from '../delivery-context.mts';
 
 const root=resolve(import.meta.dirname,'../../../..');
 type SphereOwner=typeof import('./sphere-lane.mts');

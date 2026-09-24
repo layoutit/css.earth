@@ -12,7 +12,7 @@ import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/valida
 import { parseGeometryProfile } from '../../../../src/renderers/css/preparation/scene/profile.ts';
 import { prepareScientificNavigation } from '../../terrestrial-layers/scientific-focus.mts';
 import { parsePreparedWorldContext } from '../../../../src/renderers/css/universe/prepared-world-context.ts';
-export { sphereHtml } from './sphere-html.mts';
+
 
 export async function inspectMeasurementSphere(root:string,target:string){
   const id = target.toLowerCase();
@@ -135,3 +135,4 @@ export async function measurementSphere(root: string, target: string, texture: s
     rasterToolchain: { node: process.version, sharp: sharp.versions },
   } };
 }
+export { sphereHtml } from './sphere-html.mts';

@@ -16,8 +16,9 @@ import { pds4ProductIdentity, pds4Blocks, pds4Elements } from '../pds-labels.mts
 import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
-import { inside, sourceCacheAddress } from './source-transfer.mts';
-import { assertPinnedLabel, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
+import { inside, sourceCacheAddress } from './source-product-contract.mts';
+import { assertPinnedLabel, sourceReceipt, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-product-contract.mts';
+import { sourceRun } from './source-products.mts';
 import { STEREO_COR1_F16_PROFILE } from './observation-families.mts';
 import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './families/f16/f16-spherical-grid.mts';
 import { member } from './families/common.mts';

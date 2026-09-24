@@ -10,7 +10,7 @@ import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
 import { SHAPE_MATERIAL, neutralShapeAtlas } from './terrestrial-layers/shape-material.mts';
 import { createRasterEmitter } from './terrestrial-layers/raster-output.mts';
-import { retainedShapeAtlas } from './refresh-shape-materials.mts';
+import { retainedShapeAtlas } from './terrestrial-layers/retained-atlas.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 
 

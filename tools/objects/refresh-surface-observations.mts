@@ -12,7 +12,7 @@ import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
 import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
 import { prepareSolidRasters, prepareSolidSurfacePoles } from './terrestrial-layers/solid-raster.mts';
 import { lensBillboardColors } from './content/billboard-colors.mts';
-import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';
+import { retainedPhotographicAtlas } from './terrestrial-layers/retained-atlas.mts';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 import { repinObjectJson } from '../prepare/prepare-object-json.mts';

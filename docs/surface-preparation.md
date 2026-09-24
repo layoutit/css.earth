@@ -138,7 +138,7 @@ document their recorded revision; they are not relabeled as a new full sweep.
 
 ### Image and numeric readers
 
-[readObservation](../tools/objects/terrestrial-layers/solid-raster.mts) selects
+[readObservation](../tools/objects/terrestrial-layers/observation-raster.mts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
 and encoding. [Acquisition tools](../tools/objects/acquisition/) handle

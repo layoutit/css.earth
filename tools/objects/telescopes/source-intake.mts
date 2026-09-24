@@ -9,8 +9,8 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString, hasErrorCode } from '../../sources/source-values.mts';
 import { readFitsHeader } from '../../fits/fits.mts';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
-import { inside, sourceCacheAddress } from './source-transfer.mts';
-import { parseSourceProcessing, type SourceFile, type SourceProduct } from './source-products.mts';
+import { inside, sourceCacheAddress } from './source-product-contract.mts';
+import { parseSourceProcessing, type SourceFile, type SourceProduct } from './source-product-contract.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }
 const LIMIT = 128 * 1024;
 /** Public search can restrict intake to local bytes or an existing header cache. */

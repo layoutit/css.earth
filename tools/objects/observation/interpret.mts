@@ -19,7 +19,7 @@ import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
 import { skyDisplayRaster } from '../../fits/fits-sky.mts';
 import { offLimbPlate } from './off-limb-plate.mts';
-import { readObservation } from '../terrestrial-layers/solid-raster.mts';
+import { readObservation } from '../terrestrial-layers/observation-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';
 import { validateGeologyProfile } from '../terrestrial-layers/categorical-geology.mts';
 import { validatePds4ObservationPolicy } from '../terrestrial-layers/observed-pds4.mts';

@@ -208,3 +208,13 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  if(failures.length)throw new AggregateError(failures.map(f=>f.error),`${failures.length} acquisition steps failed (every step was attempted):\n`+failures.map(f=>` - ${'path' in f.step?f.step.path:f.step.kind}: ${f.error instanceof Error?f.error.message:String(f.error)}`).join('\n'));
  return {operationCount:selected.length};
 }
+
+/** Default acquisition restores missing pins only. Existing bytes are verified afterwards, so a stale pin never blocks a download. */
+export async function restoreMissingSources({sourceRoot,manifest,plan,missing,transport,mirrorOrigin}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;missing:string[];transport?:AcquisitionTransport;mirrorOrigin?:string|null}) {
+ const wanted=new Set(missing);
+ const operations=plan.operations.filter(step=>'path' in step&&wanted.has(step.path));
+ const covered=new Set(operations.map(step=>'path' in step?step.path:''));
+ if([...wanted].some(path=>!covered.has(path)))throw new Error(`No authored acquisition restores: ${[...wanted].filter(path=>!covered.has(path)).join(', ')}.`);
+ if(!operations.length)return {operationCount:0};
+ return executeAcquisition({sourceRoot,manifest,plan:{...plan,operations:operations.map(step=>({...step,groups:['restore-missing']}))},group:'restore-missing',transport,mirrorOrigin});
+}

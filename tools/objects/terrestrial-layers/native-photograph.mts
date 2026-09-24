@@ -1,5 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {writeLossyWebp} from '../../../src/preparation/raster/lossy-lane.ts';
+import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
@@ -8,7 +8,7 @@ import type { PreparedTriangle } from './contracts.mts';
 import { BASE_TILE } from '@layoutit/polycss';
 import { loadNativePhotograph } from './native-photograph-source.mts';
 
-export { loadNativePhotograph } from './native-photograph-source.mts';
+
 
 export interface NativePhotographicSampling { samplesPerAxis: number; }
 export function parseNativePhotographicSampling(value: unknown): NativePhotographicSampling {

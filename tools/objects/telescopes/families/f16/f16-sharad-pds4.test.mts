@@ -1,17 +1,17 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import {
-  openSharadPds4Slice, openSharadPds4Volume, parseSharadPds4Label, parseSharadQualificationSource, parseSharadSliceClaim,
-  readSharadDelayFrame, readSharadPlane, sharadExpectedBytes, sharadFileSource, sharadFrameRange, sharadPlanetaryGridQualification,
-  sharadPlaneCost, sharadSliceWindow, F16_SHARAD_PDS4_HANDLER, SHARAD_PDS4_PROFILE,
-  type SharadByteSource, type SharadPds4Label,
+openSharadPds4Slice, openSharadPds4Volume, parseSharadPds4Label, parseSharadQualificationSource, parseSharadSliceClaim,
+readSharadDelayFrame, readSharadPlane, sharadExpectedBytes, sharadFileSource, sharadFrameRange, sharadPlanetaryGridQualification,
+sharadPlaneCost, sharadSliceWindow, F16_SHARAD_PDS4_HANDLER, SHARAD_PDS4_PROFILE,
+type SharadByteSource, type SharadPds4Label,
 } from './f16-sharad-pds4.mts';
-import { parseSourceProducts } from '../../source-products.mts';
+import { parseSourceProducts } from '../../source-product-contract.mts';
 import { familyProfile } from '../../family-handlers.mts';
+const test = sourceTest();
 
 /** The fixture mirrors the published label element for element, including both `description` elements and the cartography block. */
 const label = ({ shape = [2, 3, 4], extra = '' }: { shape?: readonly [number, number, number]; extra?: string } = {}) => `<?xml version="1.0" encoding="UTF-8" standalone="no"?>

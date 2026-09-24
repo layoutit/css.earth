@@ -1,3 +1,4 @@
+import { retainedShapeAtlas } from './terrestrial-layers/retained-atlas.mts';
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
 import { alternativeForLens } from './terrestrial-layers/alternative-lenses.mts';
 import { sha256 } from '../../src/platform/sha256.mts';
@@ -6,7 +7,7 @@ import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'n
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
@@ -14,7 +15,6 @@ import { createRasterEmitter } from './terrestrial-layers/raster-output.mts';
 import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
 import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './terrestrial-layers/shape-material.mts';
-import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';
 import { refreshObservationControls } from './refresh-surface-observations.mts';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
@@ -72,19 +72,6 @@ export async function refreshShapeMaterialDescriptions(id: string) {
   const note = 'Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.';
   const final = updated.includes(note) ? updated : updated.replace(/^(#[^\n]+\n)/, `$1\n${note}\n`);
   if (final !== readme) await writeFile(readmePath, final);
-}
-
-/** Select an existing model without changing a triangle, camera, or atlas address. */
-export function retainedShapeAtlas(scene: Record<string, unknown>, lensId: string) {
-  const ranges = scene.surfaceLensRanges === undefined ? [] : records(scene.surfaceLensRanges);
-  const range = ranges.find(range => range.lensId === lensId);
-  if (ranges.length && !range) throw new Error(`Shape lens has no retained geometry: ${lensId}.`);
-  const triangles = requireArray(scene.surfaceTriangles), leaves = requireArray(scene.bodyLeaves);
-  const start = range ? requireFiniteNumber(range.start) : 0, count = range ? requireFiniteNumber(range.count) : triangles.length;
-  if (![start, count].every(Number.isSafeInteger) || start < 0 || count < 1 || start + count > triangles.length || leaves.length !== triangles.length)
-    throw new Error('Invalid retained shape range.');
-  const atlas = retainedPhotographicAtlas({ surfaceTriangles: triangles.slice(start, start + count), bodyLeaves: leaves.slice(start, start + count) });
-  return { ...atlas, faces: atlas.plans.map(plan => plan.face) };
 }
 
 export async function refreshShapeMaterials(id: string, sourceRoot?: string) {

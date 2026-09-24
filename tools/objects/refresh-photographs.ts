@@ -2,15 +2,13 @@
 // lighting banks and scientific maps. Full preparation uses these same raster/interpreter owners.
 import { updateInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { readAuthoredSources } from './authored-sources.js';
-import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
-import { parseRuntimeManifest } from './operations.js';
+import { parseRuntimeManifest } from './runtime-assets.js';
 import { requireRecord, requireArray } from '../sources/source-values.mts';
 import { requireString } from '../sources/source-values.mts';
 
