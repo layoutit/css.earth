@@ -65,7 +65,7 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
   // validated as authored metadata but never published as a measured distance.
   return { ...defineObject({ id: input.id, name, systemName, color, distance, description,
     classification: classification(catalog.classification),
-    ...(typeof catalog.classificationLabel === 'string' ? { classificationLabel: catalog.classificationLabel } : {}), route: `/${input.id}/`,
+    classificationLabel: typeof catalog.classificationLabel === 'string' ? catalog.classificationLabel : undefined, route: `/${input.id}/`,
     worldFrame: input.properties.worldFrame, discovery, loadScene }), aliases: aliases(catalog.aliases, input.id),
     order: order(catalog.order), ...(context ? { context } : {}) };
 }
