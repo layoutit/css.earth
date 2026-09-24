@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { orbitVertices, parsePreparedWorldContext, mountPreparedWorldContext } from '../../../src/renderers/css/universe/prepared-world-context.js';
+import { orbitVertices, parsePreparedWorldContext } from '../../../src/renderers/css/prepared-data/world-context.js';
+import { mountPreparedWorldContext } from '../../../src/renderers/css/universe/prepared-world-context.js';
 import { mountPreparedOrbitLines } from '../../../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { mountPreparedCssSky, preparedSkyCameraTransform } from '../../../src/renderers/css/sky/prepared-sky-runtime.js';
 import { loadPreparedCssVolume } from '../../../src/renderers/css/volume/loader.js';
@@ -14,7 +15,7 @@ import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-m
 import type { OrbitSegment } from '../../../src/renderers/css/solar-system/types.js';
 import type { NativeCameraRotation } from './native-camera.mts';
 import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling.mts';
-import { BODY_INDICATOR_DIAMETER } from '../../../src/renderers/css/universe/world-context/world-context-planner.js';
+import { BODY_INDICATOR_DIAMETER } from '../../../src/renderers/css/universe/world-context/context-scale.js';
 
 const root = pathToFileURL(resolve('.') + '/');
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('src/objects/sun/prepared/world-context.json', root), 'utf8')));

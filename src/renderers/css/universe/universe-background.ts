@@ -7,8 +7,8 @@ import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/proj
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
-import { logarithmicFade, preparedVolumeOpacity } from './prepared-world-context.js';
-import type { PreparedWorldContext } from './prepared-world-context.js';
+import { logarithmicFade, preparedVolumeOpacity } from './world-context/context-scale.js';
+import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
 /** Retained sky, stellar sample and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,

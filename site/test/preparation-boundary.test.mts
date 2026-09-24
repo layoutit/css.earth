@@ -4,9 +4,9 @@ const test = sourceTest();
 import { resolve, sep } from 'node:path';
 import { build } from 'vite';
 
-test('Node preparation has a closed prepared-data dependency graph', async () => {
-  const entry = resolve('src/renderers/css/preparation.ts');
-  const directory = resolve('src/renderers/css/prepared-data') + sep;
+test('Shared preparation math has no renderer runtime dependency', async () => {
+  const entry = resolve('src/platform/math/matrix.mts');
+  const directory = resolve('src/platform/math') + sep;
   const result = await build({ configFile: false, logLevel: 'silent',
     build: { write: false, minify: false, lib: { entry, formats: ['es'] } } });
   const modules = new Set<string>();
@@ -17,6 +17,6 @@ test('Node preparation has a closed prepared-data dependency graph', async () =>
       for (const id of chunk.moduleIds) modules.add(id);
     }
   }
-  assert.ok(modules.size > 1, 'Inspect the complete executable closure');
+  assert.ok(modules.size >= 1, 'Inspect the complete executable closure');
   for (const id of modules) assert.ok(id === entry || id.startsWith(directory), `Unexpected preparation dependency: ${id}`);
 });

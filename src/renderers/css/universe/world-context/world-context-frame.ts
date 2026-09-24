@@ -16,7 +16,6 @@ export interface WorldContextFrame extends Omit<PlannedWorldContext, 'projectedB
   members: Uint32Array;
   updates: BodyPatch[];
 }
-export type WorldContextPublication = PlannedWorldContext | WorldContextFrame;
 
 function same(a: unknown, b: unknown): boolean {
   if (Object.is(a, b)) return true;
@@ -128,7 +127,6 @@ export function createWorldContextFrameReceiver() {
   let members: Uint32Array = new Uint32Array(), projectedBodies: Body[] = [];
   return {
     get committedId() { return committedId; },
-    invalidate() { committedId = 0; bodies.clear(); members = new Uint32Array(); projectedBodies = []; },
     accept(packet: WorldContextFrame) {
       if (packet.baseId !== 0 && packet.baseId !== committedId) throw new Error('World context publication baseline is stale.');
       if (!packet.baseId) { bodies.clear(); members = new Uint32Array(); }

@@ -3,7 +3,7 @@ import type { WorldRotation } from '../src/renderers/css/navigation/world-camera
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
-import type { PreparedWorldContext } from '../src/renderers/css/universe/prepared-world-context.js';
+import type { PreparedWorldContext } from '../src/renderers/css/prepared-data/world-context.js';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { MapViewport } from './surface-map-context.mts';

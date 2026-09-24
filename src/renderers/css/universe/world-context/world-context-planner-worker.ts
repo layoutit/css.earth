@@ -1,7 +1,7 @@
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context-planner.js';
-import { decodeWorldOrbits, parsePreparedWorldContextSummary } from '../prepared-world-context.js';
-import type { PreparedWorldContextGeometry } from '../prepared-world-context.js';
+import { decodeWorldOrbits, parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
+import type { PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldPlannerSource } from './world-context-planner-client.js';
 import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-context-frame.js';
 import { unpackWorldBodies } from './world-context-view-transport.js';

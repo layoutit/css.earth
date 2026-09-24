@@ -3,7 +3,9 @@ import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
-import { logarithmicFade, mountPreparedWorldContext, parsePreparedWorldContextPlan } from './prepared-world-context.js';
+import { logarithmicFade } from './world-context/context-scale.js';
+import { mountPreparedWorldContext } from './prepared-world-context.js';
+import { parsePreparedWorldContextPlan } from '../prepared-data/world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
@@ -14,7 +16,7 @@ import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog
 import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import { detailedFocusContextOpacity } from './detailed-focus-context.js';
 import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
-import type { WorldContextPublication } from './world-context/world-context-frame.js';
+import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
 import { createLabelBudget } from '../labels/universe-label-policy.js';
 import { mountSelectedBodyLabel } from './selected-body-label.js';
@@ -156,7 +158,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationLandmarks, annotationOpacities, distantNavigation, opacityClock, orbitRenderer: 'strokes' }));
+        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, distantNavigation, opacityClock, orbitRenderer: 'strokes' }));
         const publishSuppressedLabels = () => spatial.setSuppressedLabels(overview
           ? suppressedLabels : [...new Set([...suppressedLabels, selected.id])]);
         publishSuppressedLabels();
@@ -239,7 +241,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
             root.dataset.selectedObject = id;
           },
-          publish(world: WorldCameraPose, viewport: WorldCameraViewport, shellVisibility: Readonly<Record<string, boolean>> = {}, frame?: WorldContextPublication) {
+          publish(world: WorldCameraPose, viewport: WorldCameraViewport, frame: WorldContextFrame, shellVisibility: Readonly<Record<string, boolean>> = {}) {
             if (lifetime.disposed) return;
             opacityClock.batch(() => {
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
