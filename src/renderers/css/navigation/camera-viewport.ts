@@ -6,8 +6,8 @@ export interface CameraViewportSnapshot {
    * client pixels. The camera centres the focus body on it; null where no chrome covers the scene. */
   readonly openArea: { readonly top: number; readonly bottom: number } | null;
   /** How far the shell's header reaches down into the stage, in CSS pixels, on every layout: scene labels stay out
-   * of that band. Zero without a header. */
-  readonly coveredTopPixels: number;
+   * of that band. Absent or zero without a header. */
+  readonly coveredTopPixels?: number;
 }
 /** Fixed chrome that covers the scene: the open area runs from the bottom of `above` to the top of `below`. */
 export interface CameraViewportChrome { readonly above: HTMLElement | null; readonly below: HTMLElement | null }
