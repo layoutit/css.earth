@@ -37,9 +37,12 @@ async function transfer<T>(url: string, read: (response: Response) => Promise<T>
       // Every request names the tool, as the telescope's paper search does; Zenodo refuses one that does not.
       const response = await fetch(url, { ...init, headers: { 'User-Agent': USER_AGENT, ...(init?.headers as Record<string, string> | undefined) }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
       const retryAfter = Number(response.headers.get('retry-after'));
-      if ((response.status === 429 || (response.status === 503 && retryAfter > 0)) && slowed < 3) {
+      // A rate limit or a server error is the archive's moment, not an answer: wait (as long as it asks) and ask again. A draft of
+      // 24 hosts met a bare 503 from the NASA TAP service, which used to leave the whole host out.
+      if ((response.status === 429 || response.status >= 500) && slowed < 3) {
         slowed++; attempt--;
-        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : 10 * slowed) * 1000));
+        await response.body?.cancel();
+        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : (response.status === 429 ? 10 : 1) * slowed) * 1000));
         continue;
       }
       if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);

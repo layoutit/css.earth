@@ -54,10 +54,10 @@ export function orbitizeHostedOrbit(orbitJson: unknown, hostRadiusKm: number, di
 export interface ArchiveRow {
   readonly name: string; readonly reference: string; readonly label: string; readonly bibcode?: string; readonly url?: string; readonly isDefault: boolean; readonly year: number;
   readonly period?: number; readonly ratioAR?: number; readonly inclination?: number; readonly eccentricity?: number; readonly periastron?: number;
-  readonly transitMid?: number; readonly radiusJupiter?: number; readonly massJupiter?: number; readonly massLimitJupiter?: number; readonly semiMajorAxisAu?: number; readonly starRadius?: number; readonly starMass?: number; readonly impactParameter?: number;
+  readonly transitMid?: number; readonly radiusJupiter?: number; readonly massJupiter?: number; readonly massLimitJupiter?: number; readonly semiMajorAxisAu?: number; readonly starRadius?: number; readonly starMass?: number; readonly impactParameter?: number; readonly durationHours?: number; readonly radiusRatio?: number;
 }
-const COLUMNS = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar';
-const FIELDS = [['period', 3], ['ratioAR', 4], ['inclination', 5], ['eccentricity', 6], ['periastron', 7], ['transitMid', 8], ['radiusJupiter', 9], ['massJupiter', 10], ['semiMajorAxisAu', 11], ['starRadius', 12], ['starMass', 13], ['impactParameter', 15]] as const;
+const COLUMNS = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror';
+const FIELDS = [['period', 3], ['ratioAR', 4], ['inclination', 5], ['eccentricity', 6], ['periastron', 7], ['transitMid', 8], ['radiusJupiter', 9], ['massJupiter', 10], ['semiMajorAxisAu', 11], ['starRadius', 12], ['starMass', 13], ['impactParameter', 15], ['durationHours', 16], ['radiusRatio', 17]] as const;
 export const archiveQuery = (planet: string) => `select ${COLUMNS} from ps where pl_name = '${planet.replaceAll("'", "''")}'`;
 export const archiveHostQuery = (host: string) => `select ${COLUMNS} from ps where hostname = '${host.replaceAll("'", "''")}'`;
 /** The archive's CSV: quoted fields that may hold commas (the reference is an HTML anchor). */
@@ -118,13 +118,21 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   const cite = (row: ArchiveRow) => `${row.label}${row.bibcode ? ` (${row.bibcode})` : ''}, via the NASA Exoplanet Archive ps table (pl_refname ${row.reference})`;
   const pick = <K extends keyof ArchiveRow>(key: K) => { const row = chosen[key] !== undefined ? chosen : others.find(entry => entry[key] !== undefined); return row ? { value: row[key] as number, row } : undefined; };
   const period = pick('period'), transit = pick('transitMid'), impact = [chosen, ...others].find(row => row.impactParameter !== undefined);
-  const missing = [['period', period], ['inclination', pick('inclination') ?? impact], ['transit time', transit]].filter(([, value]) => !value).map(([key]) => key);
+  const timed = [chosen, ...others].find(row => row.durationHours !== undefined && row.radiusRatio !== undefined);
+  const missing = [['period', period], ['inclination', pick('inclination') ?? impact ?? timed], ['transit time', transit]].filter(([, value]) => !value).map(([key]) => key);
   if (missing.length) throw new Error(`${name}: no archive row gives its ${missing.join(', ')}.`);
   // a/R*: a row's own, else derived from the same row's semi-major axis and stellar radius, else Kepler's third law.
-  let ratio: { value: number; row: ArchiveRow; how: string };
-  const own = pick('ratioAR');
-  if (own) {
-    ratio = { ...own, how: `a/R* ${own.value}` };
+  // a/R* from one row at a time, the chosen row first: its own value, else its semi-major axis over its stellar radius, else Kepler's
+  // third law with its stellar mass and radius. Another paper's numbers come only after the chosen paper's: in the 835-host sweep of
+  // 2026-09-24, an a/R* borrowed from an old KOI table beside the default paper's star disagreed with it by over 2 on six planets.
+  const fromRow = (row: ArchiveRow) => row.ratioAR !== undefined ? { value: row.ratioAR, row, how: `a/R* ${row.ratioAR}`, stated: true }
+    : row.semiMajorAxisAu !== undefined && row.starRadius !== undefined ? { value: Number((row.semiMajorAxisAu / (row.starRadius * SOLAR_RADIUS_AU)).toFixed(4)), row, how: `a/R* derived from its semi-major axis ${row.semiMajorAxisAu} au and stellar radius ${row.starRadius} solar radii`, stated: false }
+    : row.starMass !== undefined && row.starRadius !== undefined ? { value: Number(keplerRatio(row.starMass, period!.value, row.starRadius).toFixed(4)), row, how: `a/R* derived by Kepler's third law from its period ${period!.value} d, stellar mass ${row.starMass} and radius ${row.starRadius} solar units`, stated: false }
+    : undefined;
+  const ratio = [chosen, ...others].map(fromRow).find(candidate => candidate !== undefined);
+  if (!ratio) throw new Error(`${name}: no archive row gives a/R*, nor a semi-major axis with a stellar radius, nor a stellar mass and radius.`);
+  if (ratio.stated) {
+    const own = ratio;
     // A stated a/R* must fit the star it is placed around: Kepler's third law with the rows' stellar mass and radius.
     const starMass = pick('starMass'), starRadius = pick('starRadius');
     if (starMass && starRadius) {
@@ -132,20 +140,21 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
       if (factor > KEPLER_AGREEMENT || factor < 1 / KEPLER_AGREEMENT) throw new Error(`${name}: ${own.row.label}'s a/R* ${own.value} disagrees with Kepler's third law (${kepler.toFixed(2)} from P ${period!.value} d, ${starMass.row.label}'s stellar mass ${starMass.value} and ${starRadius.row.label}'s radius ${starRadius.value} solar units) by a factor of ${(factor > 1 ? factor : 1 / factor).toFixed(1)}, beyond ${KEPLER_AGREEMENT}.`);
     }
   }
-  else {
-    const byAxis = [chosen, ...others].find(row => row.semiMajorAxisAu !== undefined && row.starRadius !== undefined);
-    const byKepler = [chosen, ...others].find(row => row.period !== undefined && row.starMass !== undefined && row.starRadius !== undefined);
-    if (byAxis) ratio = { value: byAxis.semiMajorAxisAu! / (byAxis.starRadius! * SOLAR_RADIUS_AU), row: byAxis, how: `a/R* derived from its semi-major axis ${byAxis.semiMajorAxisAu} au and stellar radius ${byAxis.starRadius} solar radii` };
-    else if (byKepler) ratio = { value: keplerRatio(byKepler.starMass!, byKepler.period!, byKepler.starRadius!), row: byKepler, how: `a/R* derived by Kepler's third law from its period ${byKepler.period} d, stellar mass ${byKepler.starMass} and radius ${byKepler.starRadius} solar units` };
-    else throw new Error(`${name}: no archive row gives a/R*, nor a semi-major axis with a stellar radius, nor a period with stellar mass and radius.`);
-    ratio = { ...ratio, value: Number(ratio.value.toFixed(4)) };
-  }
   // Eccentricity and omega from one row: the chosen row when it states both (or e = 0), else the newest row that does.
   const shape = [chosen, ...others].find(row => row.eccentricity !== undefined && (row.eccentricity === 0 || row.periastron !== undefined));
   const e = shape?.eccentricity ?? 0, radius = pick('radiusJupiter');
   // The inclination a row states, else the one its impact parameter gives with that row's a/R* (the orbit's when the row has none)
   // and the orbit's e and omega: b = a/R* cos i (1 - e^2) / (1 + e sin omega), Winn (2010) eq. 7.
   let inclination: { value: number; row: ArchiveRow; how?: string } | undefined = pick('inclination');
+  if (!inclination && !impact) {
+    // No impact parameter either: the transit's duration T and depth k = Rp/R* give it (Winn 2010, eq. 14 with the eccentric factor
+    // of eq. 16): cos^2 i = ((1 + k)^2 - (a/R*)^2 sin^2 x) / ((a/R*)^2 cos^2 x), x = pi T / P, T scaled by (1 + e sin omega) / sqrt(1 - e^2).
+    const row = timed!, own = row.ratioAR, aR = own ?? ratio.value, k = row.radiusRatio!;
+    const omega = e > 0 ? shape!.periastron! * Math.PI / 180 : 0, circular = row.durationHours! * (1 + e * Math.sin(omega)) / Math.sqrt(1 - e * e);
+    const x = Math.PI * circular / 24 / period!.value, cos2 = ((1 + k) ** 2 - aR ** 2 * Math.sin(x) ** 2) / (aR ** 2 * Math.cos(x) ** 2);
+    if (!(cos2 >= 0 && cos2 < 1)) throw new Error(`${name}: no archive row gives its inclination, and ${row.label}'s transit duration ${row.durationHours} h with Rp/R* ${k} and a/R* ${Number(aR.toFixed(4))} allows none (cos^2 i ${cos2.toFixed(3)}).`);
+    inclination = { value: Number((Math.acos(Math.sqrt(cos2)) * 180 / Math.PI).toFixed(3)), row, how: `inclination derived from its transit duration ${row.durationHours} h and Rp/R* ${k} with ${own === undefined ? `the orbit's a/R* ${ratio.value}` : `its a/R* ${own}`}${e > 0 ? ` and the orbit's e ${e}, omega ${shape!.periastron} degrees` : ''} (Winn 2010, eqs. 14 and 16)` };
+  }
   if (!inclination) {
     const row = impact!, own = row.ratioAR ?? (row.semiMajorAxisAu !== undefined && row.starRadius !== undefined ? row.semiMajorAxisAu / (row.starRadius * SOLAR_RADIUS_AU) : undefined), aR = own ?? ratio.value;
     const omega = e > 0 ? shape!.periastron! * Math.PI / 180 : 0, cos = row.impactParameter! * (1 + e * Math.sin(omega)) / (aR * (1 - e * e));
