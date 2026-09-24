@@ -1,0 +1,9 @@
+### Result
+[{"phase":"before","ready":true},{"phase":"after","ready":true}]
+### Ran Playwright code
+```js
+await (async page => { const states=[]; for(const [phase,port] of [['before',4390],['after',4389]]) {await page.goto('http://127.0.0.1:'+port+'/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA');await page.waitForFunction(()=>window.__cssEarth?.ready===true&&window.__cssEarth.mountedObjectCount===1);await page.waitForLoadState('networkidle');await page.getByRole('button',{name:'Browse celestial objects'}).click();await page.locator('.object-search-browser-caret').evaluate(el=>Promise.all(el.getAnimations().map(a=>a.finished)));await page.screenshot({path:'output/navigation-direct/'+phase+'-tree.png'});states.push({phase,ready:await page.evaluate(()=>window.__cssEarth.ready)});}return states;})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4389/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA
+- Page Title: Earth | cssEarth

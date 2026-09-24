@@ -1,0 +1,6 @@
+### Result
+{"query":"","ready":true,"mounted":1}
+### Ran Playwright code
+```js
+await (async page=>{await page.waitForFunction(()=>window.__cssEarth?.ready===true,null,{timeout:20000});return{query:await page.getByRole('searchbox').inputValue(),ready:await page.evaluate(()=>window.__cssEarth.ready),mounted:await page.evaluate(()=>window.__cssEarth.mountedObjectCount)};})(page);
+```

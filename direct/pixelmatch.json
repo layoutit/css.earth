@@ -1,0 +1,87 @@
+{
+  "baseline": "c3f222a5a61d5a7b288e0bbc6a2631b827a6b353",
+  "candidate": "900b3f1e4e30a3440b4eef738616de08f9ee3acb",
+  "candidateTree": "04921a963f09c0539ae3daddd968383fb2fa5c0e",
+  "capturedBeforeCommit": true,
+  "versionStamp": "0.3153",
+  "sourceFiles": {
+    ".github/workflows/deploy.yml": "ddc972e25fc7540fbc522fdf96a72dd44b667744f20ecf8f29f84842e6df418c",
+    "pnpm-lock.yaml": "8b203dcc178306a6473bad116ca15857ca36bc0e15569a3b0edce8f01f98d181",
+    "pnpm-workspace.yaml": "71c605f71fb40d991d76e177c65c14a525aa20dcb853943475ea2036e0f2bcdc",
+    "site/components/CatalogueRows.astro": "54b169a4c50ec0198eb5fb8202f6ff2c266442a700b1a5e7e37ce878f51443b8",
+    "site/components/NavigationTree.astro": "2cf690690725081eddda74aa8b90bddebcd347a3b7d2e740a490fdbba73ec1fc",
+    "site/components/NavigationTreeItem.astro": "dd5fe76bf226110292d770a60ed43726004843d1757fcd6335b00209a4aac408",
+    "site/components/ObjectResult.astro": "94789d4eccb12bd81fb19e3772548f3bc35f4d558ef2d995b3df84947b53d60e",
+    "site/components/ObjectResults.astro": "ab376d6fd0f67ddfc943dea2b0f7bb09ea872e63a54543ca82d64940b0f547c9",
+    "site/components/ObjectShell.astro": "154ef1da7919f3ae7a594831e384cdbc49b64d2128f1fa10ee720b8cdce0b48d",
+    "site/components/PreparedObjectResult.astro": "40cfb531281b1cee43a676fe342802744de93315641fdc26e91fd5342b879e51",
+    "site/maps-shell.css": "b076aeff6cab7787bee74fe01fad22e9f240e6f4cb7f6f965417693ba4b6dae1",
+    "site/navigation/navigation-destination.mts": "efc61547387709fafd0a155d83b1a177a1366ec69b096315b07b3de1f5a7114a",
+    "site/navigation/navigation-tree-client.mts": "81e92b4809f730613bce8a756f20bbc88d627eb355a41d997ca58592404bded6",
+    "site/navigation/navigation-tree-data.mts": "dd4601043e737cdf1a23f87e9e9d0a19eb2150d12c8e1ba1f2241fc958afeb41",
+    "site/navigation/navigation-tree.css": "9d0d3b3ce8cf33ffb2b960d6c2df8e6be6a15b41e38a46da8e0d0603192ce8fa",
+    "site/navigation/navigation-tree.mts": "556d24a96ea029ad770f11b04bacb0f7b1514b2875773ac350ae90adb5ebeb78",
+    "site/navigation/tree-marker.mts": "32003989bd9b264cf75fe162e15306eb5a7deb83d429e248678f9acbc714b3d6",
+    "site/object-browser.mts": "9e27616982db0aca9da0011b65c2261c54ad04ff673e5abbe14e53d95759bee9",
+    "site/object-catalogue.mts": "bbd13985959ac27f4cce0214a58ca3aca06377e4397bd8e9368030b7956bc980",
+    "site/object-categories.mts": "a58aaa3af1efa3c09be8aca47c31ab05f7c5edb82420e9886aa78635f269a937",
+    "site/object-search.mts": "9099b6a0dcf5f27f693b8f76e7c7eabe6f2a7ad0ba07d67148e16be9fe30f7ab",
+    "site/pages/navigation-tree.json.ts": "ce128b02b338db0385d992a64f98ba06dd1d3887c4f3db04b91b1eaca8f1e311",
+    "site/search-response.mts": "6f7e85dc40583bb85761392d4185a4e3b4b706de8675c2100126816804418e6b",
+    "site/search-results-presentation.mts": "13990c27d9a03f598e9e55be69fd655d917acb3a5c8a9ae1398ca2198cc9f390",
+    "site/shell-layout.css": "8a24795be1b81e1dd7512377259261cb7a5d84889eb72216653691936f367b6f",
+    "site/test/astro-component-imports.test.mts": "2f52b8cd0789a6250e582ff03b425ea5c238ed4680799a7b389ce67fc4add3f7",
+    "site/test/navigation-ontology.test.mts": "eafe83c02c75909656297faad797d7963b04eeda6d69ad710945bc04857490e3",
+    "site/test/navigation-tree-client.test.mts": "f048bf8531e1d74cb8a63983d6409f85e9132dd364a0576e04b43c21dc012084",
+    "site/test/navigation-tree-data.test.mts": "3becf505c8dda2a5ec89b60c6ee792a7799583bc72c4455a305994f08c5756a6",
+    "site/test/search-response.test.mts": "bdba91f30be8dc618aa4f1226061f9156f5327e4bf8d5e6f874283cdc08a8a01",
+    "site/navigation/navigation-packages.mts": "135c5b7416d872fb74bd7718436cdbf1461e78d133c7ba68f703c04491458821"
+  },
+  "browser": "Chrome 153.0.8010.53",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "pixelmatch": "7.2.0",
+  "threshold": 0.1,
+  "includeAA": true,
+  "assetOrigin": "https://earth-assets.lowpoly.cc",
+  "inputs": "Same prepared inputs, inventory-addressed textures and restored Earth atmosphere/shadowless textures. Default labels and motion off. Both captures wait for scene readiness, network idle and the feature-search response. Baseline uses pinned site/ and atlas/ sources with shared unchanged prepared inputs; only dev-server filesystem permissions/cache isolation differ.",
+  "initialPath": "/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA",
+  "navigationPayload": {
+    "identical": true,
+    "sha256": "0498924b0935f2c3afd605cade0e5b7e9a4b75694ba24f101e9714adfbe77a5b"
+  },
+  "results": [
+    {
+      "view": "earth",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "082fd6138944c2537b92965d2650e00831b58e237834010ff26fcc2c10f2c91c",
+      "afterSha256": "082fd6138944c2537b92965d2650e00831b58e237834010ff26fcc2c10f2c91c"
+    },
+    {
+      "view": "tree",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "7cba9a1d15d7a3ef9619a37599a13ec9b60ce0f6a78a3007ebf7f3a4dc6ce638",
+      "afterSha256": "7cba9a1d15d7a3ef9619a37599a13ec9b60ce0f6a78a3007ebf7f3a4dc6ce638"
+    },
+    {
+      "view": "search",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "2aff9dd16d8f37b2fda4e5351fbc917d00228fdb76d0649cdfded8789f8725c9",
+      "afterSha256": "2aff9dd16d8f37b2fda4e5351fbc917d00228fdb76d0649cdfded8789f8725c9"
+    }
+  ],
+  "subsequentIntegration": "a1120ace5e91db460a1f41ea9317754e3fc58169",
+  "limits": "Matched refactor checkpoint before integrating newer main. The final source-only removal of unused result props does not change emitted markup. The later merge retains new upstream objects, input policy and query-clearing/reopening fixes; the complete merged asset set was not recaptured."
+}

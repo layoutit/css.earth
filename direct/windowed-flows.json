@@ -1,0 +1,418 @@
+{
+  "queries": [
+    {
+      "query": "Planets",
+      "rows": [
+        {
+          "index": "0",
+          "text": "MercuryPlanet \u00b7 0.39 AU"
+        },
+        {
+          "index": "1",
+          "text": "VenusPlanet \u00b7 0.728 AU"
+        },
+        {
+          "index": "2",
+          "text": "EarthPlanet \u00b7 1.009 AU"
+        },
+        {
+          "index": "3",
+          "text": "MarsPlanet \u00b7 1.523 AU"
+        },
+        {
+          "index": "4",
+          "text": "JupiterPlanet \u00b7 5.298 AU"
+        },
+        {
+          "index": "5",
+          "text": "SaturnPlanet \u00b7 9.443 AU"
+        },
+        {
+          "index": "6",
+          "text": "UranusPlanet \u00b7 19.446 AU"
+        },
+        {
+          "index": "7",
+          "text": "NeptunePlanet \u00b7 29.879 AU"
+        },
+        {
+          "index": "8",
+          "text": "CeresDwarf planet \u00b7 2.696 AU"
+        },
+        {
+          "index": "9",
+          "text": "PlutoDwarf planet \u00b7 35.591 AU"
+        },
+        {
+          "index": "10",
+          "text": "HaumeaDwarf planet \u00b7 49.762 AU"
+        },
+        {
+          "index": "11",
+          "text": "MakemakeDwarf planet \u00b7 52.733 AU"
+        },
+        {
+          "index": "12",
+          "text": "ErisDwarf planet \u00b7 95.465 AU"
+        }
+      ]
+    },
+    {
+      "query": "Moons",
+      "rows": [
+        {
+          "index": "0",
+          "text": "MoonMoon \u00b7 1.01 AU"
+        },
+        {
+          "index": "1",
+          "text": "SquannitMoon \u00b7 1.082 AU"
+        },
+        {
+          "index": "2",
+          "text": "PhobosMoon \u00b7 1.523 AU"
+        },
+        {
+          "index": "3",
+          "text": "DeimosMoon \u00b7 1.523 AU"
+        },
+        {
+          "index": "4",
+          "text": "DimorphosMoon \u00b7 1.539 AU"
+        },
+        {
+          "index": "5",
+          "text": "SelamMoon \u00b7 2.074 AU"
+        },
+        {
+          "index": "6",
+          "text": "2001 SN263 GammaMoon \u00b7 2.809 AU"
+        },
+        {
+          "index": "7",
+          "text": "2001 SN263 BetaMoon \u00b7 2.809 AU"
+        },
+        {
+          "index": "8",
+          "text": "DactylMoon \u00b7 2.817 AU"
+        },
+        {
+          "index": "9",
+          "text": "RomulusMoon \u00b7 3.745 AU"
+        },
+        {
+          "index": "10",
+          "text": "MenoetiusMoon \u00b7 5 AU"
+        },
+        {
+          "index": "11",
+          "text": "KalykeMoon \u00b7 5.194 AU"
+        },
+        {
+          "index": "12",
+          "text": "ErinomeMoon \u00b7 5.229 AU"
+        },
+        {
+          "index": "13",
+          "text": "TaygeteMoon \u00b7 5.252 AU"
+        },
+        {
+          "index": "14",
+          "text": "ThemistoMoon \u00b7 5.255 AU"
+        },
+        {
+          "index": "15",
+          "text": "LysitheaMoon \u00b7 5.265 AU"
+        },
+        {
+          "index": "16",
+          "text": "PasiphaeMoon \u00b7 5.267 AU"
+        },
+        {
+          "index": "17",
+          "text": "CallistoMoon \u00b7 5.286 AU"
+        },
+        {
+          "index": "18",
+          "text": "EuropaMoon \u00b7 5.294 AU"
+        }
+      ]
+    },
+    {
+      "query": "Nebulae",
+      "rows": [
+        {
+          "index": "0",
+          "text": "PleiadesNebula \u00b7 136.2 pc"
+        },
+        {
+          "index": "1",
+          "text": "Helix NebulaNebula \u00b7 216 pc"
+        },
+        {
+          "index": "2",
+          "text": "Orion NebulaNebula \u00b7 414 pc"
+        },
+        {
+          "index": "3",
+          "text": "Twin Jet NebulaNebula \u00b7 650 pc"
+        },
+        {
+          "index": "4",
+          "text": "Lagoon NebulaNebula \u00b7 1,326 pc"
+        },
+        {
+          "index": "5",
+          "text": "Crab NebulaNebula \u00b7 2,000 pc"
+        }
+      ]
+    },
+    {
+      "query": "Galaxies",
+      "rows": [
+        {
+          "index": "0",
+          "text": "Draco IIGalaxy \u00b7 21,580 pc"
+        },
+        {
+          "index": "1",
+          "text": "Segue 1Galaxy \u00b7 22,910 pc"
+        },
+        {
+          "index": "2",
+          "text": "SagittariusGalaxy \u00b7 26,300 pc"
+        },
+        {
+          "index": "3",
+          "text": "Hydrus IGalaxy \u00b7 27,540 pc"
+        },
+        {
+          "index": "4",
+          "text": "Carina IIIGalaxy \u00b7 27,800 pc"
+        },
+        {
+          "index": "5",
+          "text": "Triangulum IIGalaxy \u00b7 28,440 pc"
+        },
+        {
+          "index": "6",
+          "text": "Reticulum IIGalaxy \u00b7 31,620 pc"
+        },
+        {
+          "index": "7",
+          "text": "Ursa Major IIGalaxy \u00b7 34,670 pc"
+        },
+        {
+          "index": "8",
+          "text": "Segue 2Galaxy \u00b7 36,480 pc"
+        },
+        {
+          "index": "9",
+          "text": "Carina IIGalaxy \u00b7 37,390 pc"
+        },
+        {
+          "index": "10",
+          "text": "Willman 1Galaxy \u00b7 38,020 pc"
+        },
+        {
+          "index": "11",
+          "text": "Bootes IIGalaxy \u00b7 41,690 pc"
+        },
+        {
+          "index": "12",
+          "text": "Coma BerenicesGalaxy \u00b7 42,270 pc"
+        },
+        {
+          "index": "13",
+          "text": "Pictor IIGalaxy \u00b7 44,870 pc"
+        },
+        {
+          "index": "14",
+          "text": "Tucana IVGalaxy \u00b7 46,990 pc"
+        },
+        {
+          "index": "15",
+          "text": "Bootes IIIGalaxy \u00b7 48,530 pc"
+        },
+        {
+          "index": "16",
+          "text": "LMCGalaxy \u00b7 49,590 pc"
+        },
+        {
+          "index": "17",
+          "text": "Tucana VGalaxy \u00b7 54,950 pc"
+        }
+      ]
+    },
+    {
+      "query": "all objects",
+      "rows": [
+        {
+          "index": "0",
+          "text": "MercuryPlanet \u00b7 0.39 AU"
+        },
+        {
+          "index": "1",
+          "text": "VenusPlanet \u00b7 0.728 AU"
+        },
+        {
+          "index": "2",
+          "text": "EarthPlanet \u00b7 1.009 AU"
+        },
+        {
+          "index": "3",
+          "text": "MarsPlanet \u00b7 1.523 AU"
+        },
+        {
+          "index": "4",
+          "text": "JupiterPlanet \u00b7 5.298 AU"
+        },
+        {
+          "index": "5",
+          "text": "SaturnPlanet \u00b7 9.443 AU"
+        },
+        {
+          "index": "6",
+          "text": "UranusPlanet \u00b7 19.446 AU"
+        },
+        {
+          "index": "7",
+          "text": "NeptunePlanet \u00b7 29.879 AU"
+        },
+        {
+          "index": "8",
+          "text": "SunStar \u00b7 0 AU"
+        },
+        {
+          "index": "9",
+          "text": "PhaethonAsteroid \u00b7 0.145 AU"
+        },
+        {
+          "index": "10",
+          "text": "1998 WT24Asteroid \u00b7 0.671 AU"
+        },
+        {
+          "index": "11",
+          "text": "MithraAsteroid \u00b7 0.76 AU"
+        },
+        {
+          "index": "12",
+          "text": "YORPAsteroid \u00b7 0.894 AU"
+        },
+        {
+          "index": "13",
+          "text": "2008 EV5Asteroid \u00b7 0.929 AU"
+        },
+        {
+          "index": "14",
+          "text": "ApophisAsteroid \u00b7 0.952 AU"
+        },
+        {
+          "index": "15",
+          "text": "MoonMoon \u00b7 1.01 AU"
+        },
+        {
+          "index": "16",
+          "text": "Ra-ShalomAsteroid \u00b7 1.019 AU"
+        },
+        {
+          "index": "17",
+          "text": "MoshupAsteroid \u00b7 1.082 AU"
+        },
+        {
+          "index": "18",
+          "text": "SquannitMoon \u00b7 1.082 AU"
+        }
+      ]
+    },
+    {
+      "query": "t",
+      "rows": [
+        {
+          "index": "0",
+          "text": "EarthPlanet \u00b7 1.009 AU"
+        },
+        {
+          "index": "1",
+          "text": "JupiterPlanet \u00b7 5.298 AU"
+        },
+        {
+          "index": "2",
+          "text": "SaturnPlanet \u00b7 9.443 AU"
+        },
+        {
+          "index": "3",
+          "text": "NeptunePlanet \u00b7 29.879 AU"
+        },
+        {
+          "index": "4",
+          "text": "PhaethonAsteroid \u00b7 0.145 AU"
+        },
+        {
+          "index": "5",
+          "text": "1998 WT24Asteroid \u00b7 0.671 AU"
+        },
+        {
+          "index": "6",
+          "text": "MithraAsteroid \u00b7 0.76 AU"
+        },
+        {
+          "index": "7",
+          "text": "SquannitMoon \u00b7 1.082 AU"
+        },
+        {
+          "index": "8",
+          "text": "CastaliaAsteroid \u00b7 1.517 AU"
+        },
+        {
+          "index": "9",
+          "text": "ItokawaAsteroid \u00b7 1.621 AU"
+        },
+        {
+          "index": "10",
+          "text": "TantalusAsteroid \u00b7 1.676 AU"
+        },
+        {
+          "index": "11",
+          "text": "ToroAsteroid \u00b7 1.686 AU"
+        },
+        {
+          "index": "12",
+          "text": "TaurinensisAsteroid \u00b7 1.928 AU"
+        },
+        {
+          "index": "13",
+          "text": "AugustaAsteroid \u00b7 1.944 AU"
+        },
+        {
+          "index": "14",
+          "text": "EuterpeAsteroid \u00b7 1.951 AU"
+        },
+        {
+          "index": "15",
+          "text": "ThyraAsteroid \u00b7 1.956 AU"
+        },
+        {
+          "index": "16",
+          "text": "DaturaAsteroid \u00b7 1.981 AU"
+        },
+        {
+          "index": "17",
+          "text": "AuravictrixAsteroid \u00b7 2.007 AU"
+        },
+        {
+          "index": "18",
+          "text": "UnitasAsteroid \u00b7 2.011 AU"
+        }
+      ]
+    },
+    {
+      "query": "zzzznoresult",
+      "rows": []
+    }
+  ],
+  "first": "mercury",
+  "second": "venus",
+  "closed": true,
+  "errors": []
+}

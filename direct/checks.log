@@ -1,0 +1,30 @@
+✔ a source-owned globular cluster is discovered, classified and searched through the shared focus route (6.218375ms)
+✔ every prepared spatial subject and every scene has exactly one searchable destination (130.194791ms)
+✔ distance display and order use the prepared position, never the legacy orbital reference (58.04075ms)
+✔ galaxy citations resolve across the full prepared catalogue, including the separate SMC paper (7.833583ms)
+✔ physical hosts remain distinct from scene hosts and M45 retains its measured subject (6.79275ms)
+✔ every row of the application navigation tree opens a route the application serves (36.520875ms)
+✔ an unconfirmed LVDB galaxy is searchable by name as a candidate galaxy, and the galaxy listing leaves it out (40.028334ms)
+✔ bundled navigation reads object packages from the repository root (109.866958ms)
+✔ a page that ships its catalogue empty has it fetched and merged before matching (30.200125ms)
+✔ a catalogue fragment that fails to load degrades to an empty list plus a message, instead of failing the request (2.295ms)
+✔ a page that already inlines its catalogue never fetches the fragment (1.217292ms)
+✔ native search replaces the selected card, retains every row, and preserves the scene/head bytes (3.952583ms)
+✔ empty submission browses all objects, categories retain the query, pills replace it (2.253125ms)
+✔ native search sorts catalogue rows by their emitted meter distances (2.302417ms)
+✔ features are pinned, rendered into existing rows and have ordinary destination links (4.501292ms)
+✔ typed search shows a flat result list without the navigation tree, including queries that name an overview (1.711917ms)
+✔ a URL that names both a focus and an overview resolves to the focus alone (1.639209ms)
+✔ named features share the results panel, start collapsed, and disappear when there are no matches (1.312625ms)
+✔ live feature results retain their rows and disclosure until the query changes (7.5585ms)
+✔ queries stay text, are bounded, and cannot become executable attributes or scene markup (1.887083ms)
+✔ Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function (0.467416ms)
+✔ function fetches only the static page and pinned indexes; search responses are not shared-cacheable (1.163125ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 672.54075

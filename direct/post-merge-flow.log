@@ -1,0 +1,9 @@
+### Result
+{"query":"","ready":false,"scene":"earth"}
+### Ran Playwright code
+```js
+await (async page=>{await page.goto('http://127.0.0.1:4389/earth/');await page.waitForFunction(()=>window.__cssEarth?.ready===true);await page.getByRole('searchbox',{name:'Search celestial objects...'}).fill('Earth');await page.locator('#object-category-results a[data-object-id="earth"]').click();return{query:await page.getByRole('searchbox').inputValue(),ready:await page.evaluate(()=>window.__cssEarth.ready),scene:await page.evaluate(()=>window.__cssEarth.activeObjectId)};})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4389/earth/?v=UMO-OxhvB8e5ej4crAgxJul5wN6brxW3jCFBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA
+- Page Title: Earth | cssEarth

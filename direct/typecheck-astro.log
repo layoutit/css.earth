@@ -1,0 +1,53 @@
+
+> cssearth@0.1.0 typecheck:astro /Users/ekrof/Documents/Codex/2026-09-23/im-x20/work/css-earth-report-cleanup
+> astro check --tsconfig site/astro.tsconfig.json
+
+08:42:33 [WARN] [prepared-context-availability] Some 3D views are unavailable in this installation:
+beta-pictoris-disc: Missing src/objects/beta-pictoris-disc/prepared/lenses.json.
+betelgeuse-shell: Missing src/objects/betelgeuse-shell/prepared/lenses.json.
+hd-181327-disc: Missing src/objects/hd-181327-disc/prepared/lenses.json.
+helix: Missing src/objects/helix/prepared/lenses.json.
+lmc: Missing src/objects/lmc/prepared/lenses.json.
+m1: Missing src/objects/m1/prepared/lenses.json.
+m2-9: Missing src/objects/m2-9/prepared/lenses.json.
+m42: Missing src/objects/m42/prepared/lenses.json.
+m45: Missing src/objects/m45/prepared/lenses.json.
+m8: Missing src/objects/m8/prepared/lenses.json.
+omega-centauri: Missing src/objects/omega-centauri/prepared/lenses.json.
+pds-70-disc: Missing src/objects/pds-70-disc/prepared/lenses.json.
+smc: Missing src/objects/smc/prepared/lenses.json.
+sun-cor1-density: Missing src/objects/sun-cor1-density/prepared/lenses.json.
+Prepare their packages and restart the server to enable them.
+08:42:33 [vite] Re-optimizing dependencies because vite config has changed
+08:42:33 [types] Generated 77ms
+08:42:33 [check] Getting diagnostics for Astro files in /Users/ekrof/Documents/Codex/2026-09-23/im-x20/work/css-earth-report-cleanup...
+[96msite/components/ObjectShell.astro[0m:[93m62[0m:[93m22[0m - [93mwarning[0m[90m ts(80008): [0mNumeric literals with absolute values equal to 2^53 or greater are too large to be represented accurately as integers.
+
+[7m62[0m const LIGHT_YEAR_M = 9460730472580800;
+[7m  [0m [93m                     ~~~~~~~~~~~~~~~~[0m
+
+[96msite/object-text.mts[0m:[93m1[0m:[93m35[0m - [93mwarning[0m[90m ts(6133): [0m'sourceDigest' is declared but its value is never read.
+
+[7m1[0m import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourceText, sourceUrl } from '../src/platform/source-catalog.mts';
+[7m [0m [93m                                  ~~~~~~~~~~~~[0m
+
+[96msite/source-documentation.mts[0m:[93m47[0m:[93m55[0m - [93mwarning[0m[90m ts(6133): [0m'name' is declared but its value is never read.
+
+[7m47[0m export function sourceDocumentation(objectId: string, name: string) {
+[7m  [0m [93m                                                      ~~~~[0m
+
+[96msite/navigation/navigation-fragments.mts[0m:[93m106[0m:[93m5[0m - [93mwarning[0m[90m ts(80006): [0mThis may be converted to an async function.
+
+[7m106[0m     get(id: string, signal?: AbortSignal) {
+[7m   [0m [93m    ~~~[0m
+
+[96msite/scene/scene-router.mts[0m:[93m297[0m:[93m12[0m - [93mwarning[0m[90m ts(80006): [0mThis may be converted to an async function.
+
+[7m297[0m   function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
+[7m   [0m [93m           ~~~~~~~~[0m
+
+Result (210 files): 
+- 0 errors
+- 0 warnings
+- 5 hints
+
