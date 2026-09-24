@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gj-504-b",
+  "entries": [
+    {
+      "id": "band-colour",
+      "subject": "A false colour from three measured bands, as the HR 8799 planets have",
+      "status": "unresolved",
+      "finding": "JWST has a NIRSpec spectrum and MIRI photometry of this companion, but no paper gives its flux densities in the NIRCam F410M, F430M and F460M bands that colour HR 8799's planets. Band fluxes computed here from the spectrum would be a derived value, so it is the shared neutral gray.",
+      "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
+      "evidence": [
+        "https://arxiv.org/abs/2606.19228"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

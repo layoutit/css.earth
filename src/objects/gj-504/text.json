@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-504",
+  "card": {
+    "text": "Sun-like star 18 parsecs away whose cold companion is a planet or a brown dwarf, depending on its age.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1807-00657",
+        "url": "https://arxiv.org/abs/1807.00657",
+        "label": "Bonnefoy et al. 2018",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "yields isochronal ages of 21+/-2Myr or 4.0+/-1.8Gyr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "GJ 504 is a Sun-like star whose measured size allows two ages, 21 million or 4 billion years. The answer decides whether its companion b is a planet or a brown dwarf.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1807-00657",
+        "url": "https://arxiv.org/abs/1807.00657",
+        "label": "Bonnefoy et al. 2018",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "We measure a radius of 1.35+/- 0.04Rsun for GJ504A"
+      },
+      {
+        "catalogueId": "arxiv-1609-02530",
+        "url": "https://arxiv.org/abs/1609.02530",
+        "label": "D'Orazi et al. 2017",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "a young age of $\\sim$ 160 Myr would imply a giant planet as a companion"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "Blackbody at its temperature",
+      "summary": "The colour of a blackbody at the star's temperature. No surface picture exists."
+    }
+  }
+}

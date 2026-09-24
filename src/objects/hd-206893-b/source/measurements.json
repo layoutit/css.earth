@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-206893-b",
+  "radiusKm": 127970.7,
+  "radiusSource": "Radius 1.79 +0.24/-0.35 Jupiter radii and temperature 1162 +158/-67 K: the Exo-REM fit to the GRAVITY K-band spectrum and earlier photometry of Kral et al. (2026, arXiv:2511.20091); their ATMO fit agrees (1.98 Jupiter radii, 1097 K) and BT-Settl gives 0.93 and 1582 K. 127,970.7 km at 71,492 km per Jupiter radius. A model radius: B is unresolved. GM from their dynamical mass 19.5 +1.4/-1.3 Jupiter masses (Table 2) times Jupiter's GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 11061.9,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 10.726 au and total mass 1.3453 solar masses, 30.3 years of 365.25 d. Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 1). Its Keplerian orbit uses the star's mass plus B's and c's, as orbitize! does; the distributed posterior's masses differ from the paper's Table 2 (its B mass median is 7 Jupiter masses against 19.5), while its orbit elements agree with the table within about one standard deviation. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-b/source/orbits/pick.json): highest stored likelihood (ln L -8.60).",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 206893 B is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 1162,
+  "effectiveTemperatureSource": "1162 +158/-67 K, Exo-REM fit, Kral et al. (2026), https://arxiv.org/abs/2511.20091",
+  "semiMajorAxisSource": "Kral et al. (2026, arXiv:2511.20091), Table 2: a = 10.75 +/- 0.08 au. The recorded orbit's semi-major axis is 10.73 au (packages/astronomy/data/bodies/hd-206893-b.json).",
+  "massSource": "Dynamical mass 19.5 +1.4/-1.3 Jupiter masses from the joint fit of the orbits, radial velocities and Gaia astrometry, Kral et al. (2026), Table 2."
+}
