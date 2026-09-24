@@ -1,5 +1,7 @@
 # GQ Lup b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 GQ Lup b is a young, accreting companion of about 30 Jupiter masses, 0.7 arcseconds (about 100 au) from [GQ Lup](../gq-lup/README.md). It glows at about 2,700 K and still has a disc of its own (Stolker et al. [2021](https://arxiv.org/abs/2110.04307)).
 
 ## Sources

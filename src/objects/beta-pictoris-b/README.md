@@ -1,5 +1,7 @@
 # Beta Pictoris b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Beta Pictoris b is a super-Jupiter about 10 au from [Beta Pictoris](../beta-pictoris/README.md), imaged directly since 2008. In 2025 and 2026 MeerKAT heard auroral radio bursts from it, the first radio emission localised to an exoplanet.
 
 ## Sources

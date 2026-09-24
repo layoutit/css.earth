@@ -1,5 +1,7 @@
 # 51 Eridani
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 51 Eridani is a young F0 star 30 parsecs away in Eridanus. In 2015 the Gemini Planet Imager found its giant planet [51 Eridani b](../hd-29391-b/README.md) (Macintosh et al. [2015](https://arxiv.org/abs/1508.03084)). Its object id is its Henry Draper number, HD 29391, because an id cannot begin with a digit.
 
 ## Sources

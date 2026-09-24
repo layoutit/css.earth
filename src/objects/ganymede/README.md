@@ -1,5 +1,7 @@
 # Ganymede
 
+The navigation marker uses its existing source map as a stylized identifier. The [marker recipe](source/preparation/navigation.json) crops and resizes it, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). It is not an observer projection or a view at the scene epoch.
+
 ## Sources
 
 - [USGS Voyager/Galileo monochrome mosaic, 1 km](https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_global_mosaic_1km): 16539 × 8270, one unsigned-byte band.

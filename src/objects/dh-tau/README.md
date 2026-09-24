@@ -1,5 +1,7 @@
 # DH Tau
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 DH Tau is a young T Tauri star, well under ten million years old, 133 parsecs away in the Taurus star-forming clouds. Its companion [DH Tau b](../dh-tau-b/README.md), found in 2005, lies about 330 au out. DH Tau is itself the wide partner, 2,200 au away, of the star DI Tau, which is not in the catalogue.
 
 ## Sources

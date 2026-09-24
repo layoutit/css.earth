@@ -1,5 +1,7 @@
 # Kepler-16 (AB) b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Kepler-16 (AB) b circles two stars at once, a real Tatooine. It is three-quarters as wide as Jupiter and a third as heavy; here it is a plain gray sphere.
 
 ## Sources

@@ -1,5 +1,7 @@
 # GQ Lup
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 GQ Lup is a young T Tauri star, a few million years old, 154 parsecs away in Lupus. It still has a disc of its own and is still accreting. Its companion [GQ Lup b](../gq-lup-b/README.md), found in 2005, orbits about 100 au out; a third, much wider star, GQ Lup C, is 2,400 au away and not in the catalogue.
 
 ## Sources

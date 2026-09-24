@@ -1,5 +1,7 @@
 # DH Tau b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 DH Tau b is a companion of about 12 Jupiter masses, less than a million years old, 2.3 arcseconds (about 310 au) from [DH Tau](../dh-tau/README.md) in Taurus. It is still accreting from a disc of its own (Xuan et al. [2024](https://arxiv.org/abs/2405.13128)).
 
 ## Sources

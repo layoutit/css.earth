@@ -1,5 +1,7 @@
 # Beta Pictoris c
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Beta Pictoris c is a giant planet 2.7 au from [Beta Pictoris](../beta-pictoris/README.md), found by radial velocity and confirmed directly with VLTI/GRAVITY in 2020.
 
 ## Sources

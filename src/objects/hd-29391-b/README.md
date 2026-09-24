@@ -1,5 +1,7 @@
 # 51 Eridani b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 51 Eridani b is a young giant planet found in 2015 with the Gemini Planet Imager (Macintosh et al. [2015](https://arxiv.org/abs/1508.03084)), whose spectrum showed methane and water. It orbits [51 Eridani](../hd-29391/README.md) about 9 au out.
 
 ## Sources

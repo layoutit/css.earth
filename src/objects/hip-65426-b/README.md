@@ -1,5 +1,7 @@
 # HIP 65426 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HIP 65426 b is a young giant planet about 90 au from its star. JWST imaged it from 2 to 16 microns, and VLTI/GRAVITY has tracked its orbit since 2021. Its star is [HIP 65426](../hip-65426/README.md).
 
 ## Sources

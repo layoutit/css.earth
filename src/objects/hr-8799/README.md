@@ -1,5 +1,7 @@
 # HR 8799
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HR 8799 is a young F0 star 41 parsecs away in Pegasus. In 2008 it became the first star seen with several planets in direct images ([Marois et al. 2008](https://arxiv.org/abs/0811.2606)); a fourth followed in 2010 ([Marois et al. 2010](https://arxiv.org/abs/1011.4918)). Its planets are [b](../hr-8799-b/README.md), [c](../hr-8799-c/README.md), [d](../hr-8799-d/README.md) and [e](../hr-8799-e/README.md).
 
 ## Sources

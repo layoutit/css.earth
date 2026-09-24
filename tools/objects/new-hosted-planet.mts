@@ -178,7 +178,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'], ...(glow ? { directionalSun: false } : {}) });
   put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: glow ? 'emissive' : 'composite' });
   put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 },
-    source: { path: 'presentation/context.png' }, operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' }, { type: 'png' }],
+    source: { path: 'presentation/context.png' }, operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' },
+      { type: 'ensure-alpha' }, { type: 'ellipse-mask', cx: .5, cy: .5, rx: .45, ry: .45, shading: { ambient: .35, diffuse: .65 } }, { type: 'png' }],
     context: { pixels: 512 } });
   if (rotation === 'unmeasured') {
     // The orbit normal in ICRF, from the same elements the orbit is propagated with: a display axis, not a measured pole.

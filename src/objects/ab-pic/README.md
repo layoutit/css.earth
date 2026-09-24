@@ -1,5 +1,7 @@
 # AB Pic
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 AB Pic is a young K-type star in the Carina association. Its companion b, found in 2005, sits 5.4 arcseconds out on an orbit seen edge-on.
 
 ## Sources

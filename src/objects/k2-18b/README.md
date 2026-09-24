@@ -1,5 +1,7 @@
 # K2-18 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 K2-18 b is a sub-Neptune that transits the red dwarf K2-18, 38 parsecs away.
 
 ## Sources

@@ -1,5 +1,7 @@
 # ROXs 42B B
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 ROXs 42B B is the smaller star of the ROXs 42B pair, 146 parsecs away in Ophiuchus. It circles [ROXs 42B A](../roxs-42b/README.md) every 31 years at 11 au, on an orbit seen almost exactly edge-on (Inglis et al. 2026), and the pair is circled in turn by the giant planet [ROXs 42B b](../roxs-42b-b/README.md).
 
 ## Sources

@@ -1,5 +1,7 @@
 # HD 206893
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 206893 is a young star 41 parsecs away. VLTI/GRAVITY found its inner planet c in 2022, and now tracks its brown dwarf B closely enough to search it for a moon.
 
 ## Sources
