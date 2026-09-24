@@ -37,7 +37,9 @@ export interface ArchiveSpecResult { readonly spec: Record<string, unknown>; rea
 /** The spec entry for one host: its transiting planets on their default rows. A body the universe already holds (by id or by name,
  * identity.mts) is not generated again; a host it holds becomes a host addition. */
 export async function archiveSpec(archive: Archive, hostname: string, universe: Existing): Promise<ArchiveSpecResult> {
-  const text = await archive.text(`${NASA_TAP}?${new URLSearchParams({ query: `select ${STAR_COLUMNS} from ps where hostname = '${hostname.replaceAll("'", "''")}'`, format: 'csv' })}`);
+  // The star rows and the orbit rows are read at once: each NASA TAP answer takes about a second.
+  const [text, orbitText] = await Promise.all([archive.text(`${NASA_TAP}?${new URLSearchParams({ query: `select ${STAR_COLUMNS} from ps where hostname = '${hostname.replaceAll("'", "''")}'`, format: 'csv' })}`),
+    archive.text(`${NASA_TAP}?${new URLSearchParams({ query: archiveHostQuery(hostname), format: 'csv' })}`)]);
   // The default row of each planet; every row stays for a stellar value the default row leaves empty.
   const all = parseStarRows(text), rows = all.filter(row => row.isDefault);
   if (!rows.length) throw new Error(`The NASA Exoplanet Archive has no default parameter set for a host named ${hostname}.`);
@@ -51,36 +53,45 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   const skipped: string[] = [], notes: string[] = [], existing = (id: string) => universe.ids.has(id);
   // Quotes from the Wikipedia lead (prose.mts): a planet's own article first, then its host's, whose lead names the planet.
   const quotesFor = async (titles: string[], names: string[]) => { const quotes = await wikipediaQuotes(archive, titles, names.filter(Boolean)); if (!quotes) notes.push(`${titles[0]}: no Wikipedia lead to quote`); return quotes ? { quotes } : {}; };
-  const orbitRows = parseArchiveRows(await archive.text(`${NASA_TAP}?${new URLSearchParams({ query: archiveHostQuery(hostname), format: 'csv' })}`));
-  const found: { period: number; entry: Record<string, unknown> }[] = [];
-  for (const row of rows) {
-    const id = planetId(hostId, row.letter), planetRows = orbitRows.filter(entry => entry.name === row.planet), held = duplicateName(universe, row.planet);
-    if (!row.transit) { skipped.push(`${row.planet}: found by ${row.method.toLowerCase()}, not a transit fit`); continue; }
-    // A TESS or Kepler candidate designation (".01") is not a confirmed planet name; the title mark refuses it too.
-    if (/\.\d+$/u.test(row.planet)) { skipped.push(`${row.planet}: a candidate designation, not a confirmed planet name`); continue; }
-    if (existing(id) || held) { notes.push(`${row.planet} is already in the universe as ${held ?? id}`); continue; }
+  const orbitRows = parseArchiveRows(orbitText);
+  type Found = { period: number; planet: string; entry: Record<string, unknown> };
+  const found: Found[] = [];
+  // Each planet's archive reads run at once; what they report keeps the archive's row order.
+  const drafted = await Promise.all(rows.map(async (row): Promise<{ skip?: string; note: string[]; found?: Found }> => {
+    // A confirmed planet the archive still lists by its TESS or Kepler number ("TOI-406.01", letter b) is named by its host and the
+    // archive's letter; the archive's name stays the one its tables are asked by. A bare candidate number without a letter is refused.
+    const listed = /\.\d+$/u.test(row.planet), name = listed ? `${hostname} ${row.letter}` : row.planet;
+    const id = planetId(hostId, row.letter), planetRows = orbitRows.filter(entry => entry.name === row.planet), note: string[] = [];
+    const held = duplicateName(universe, row.planet) ?? duplicateName(universe, name);
+    if (!row.transit) return { skip: `${row.planet}: found by ${row.method.toLowerCase()}, not a transit fit`, note };
+    if (listed && !/^[a-z]$/u.test(row.letter)) return { skip: `${row.planet}: a candidate designation with no planet letter in the archive`, note };
+    if (listed) note.push(`${name}: listed in the NASA Exoplanet Archive as ${row.planet}; named by its host and the archive's letter ${row.letter}`);
+    if (existing(id) || held) return { note: [`${name} is already in the universe as ${held ?? id}`] };
+    const [composite, { thermal }] = await Promise.all([compositeMass(archive, row.planet), thermalFromArchive(archive, row.planet)]);
     let assembled;
-    try { assembled = assembleArchiveOrbit(planetRows, undefined, await compositeMass(archive, row.planet)); } catch (error) { skipped.push((error as Error).message.replace(/\.$/u, '')); continue; }
+    try { assembled = assembleArchiveOrbit(planetRows, undefined, composite); } catch (error) { return { skip: (error as Error).message.replace(/\.$/u, ''), note }; }
     const period = assembled.orbit.periodDays, year = row.year ? `, found in ${row.year}` : '', radius = assembled.radius.value, mass = assembled.mass.value;
     const size = radius >= 0.3 ? `${short(radius)} Jupiter radii` : `${short(radius * 71492 / 6371)} Earth radii`;
     const defaultRow = planetRows.find(entry => entry.isDefault)!;
     // A measured dayside temperature in the archive's emission table gives the planet its thermal colour (planet-lenses.mts).
-    const { thermal } = await thermalFromArchive(archive, row.planet);
-    if (!thermal) notes.push(`${row.planet}: no measured dayside brightness temperature in the archive's emission table; its gray takes the host's light`);
-    found.push({ period, entry: { id, name: row.planet, ...(thermal ? { thermal } : {}), description: `Transiting planet of ${hostname} with a ${short(period, 3)}-day year${year}.`,
+    if (!thermal) note.push(`${name}: no measured dayside brightness temperature in the archive's emission table; its gray takes the host's light`);
+    const quotes = await wikipediaQuotes(archive, [name, hostname], [name, row.planet]);
+    if (!quotes) note.push(`${name}: no Wikipedia lead to quote`);
+    return { note, found: { period, planet: row.planet, entry: { id, name, ...(thermal ? { thermal } : {}), description: `Transiting planet of ${hostname} with a ${short(period, 3)}-day year${year}.`,
       paper: { url: row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: row.label },
-      orbit: { archive: 'nasa-ps', reference: defaultRow.reference },
-      text: { card: `${row.planet} crosses its star every ${short(period, 3)} days and is ${size} across${year}.`,
-        introduction: fit(180, `${row.planet} transits ${hostname} every ${short(period, 3)} days and is ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`,
-          `${row.planet}: a ${short(period, 3)}-day orbit, ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`),
+      orbit: { archive: 'nasa-ps', reference: defaultRow.reference, ...(listed ? { planetName: row.planet } : {}) },
+      text: { card: `${name} crosses its star every ${short(period, 3)} days and is ${size} across${year}.`,
+        introduction: fit(180, `${name} transits ${hostname} every ${short(period, 3)} days and is ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`,
+          `${name}: a ${short(period, 3)}-day orbit, ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`),
         locator: `NASA Exoplanet Archive ps table, default parameter set (pl_refname ${defaultRow.reference}): pl_orbper ${period}, pl_radj ${radius}, pl_bmassj ${mass}`,
-        ...await quotesFor([row.planet, hostname], [row.planet]) } } });
-  }
+        ...(quotes ? { quotes } : {}) } } } };
+  }));
+  for (const result of drafted) { if (result.skip) skipped.push(result.skip); notes.push(...result.note); if (result.found) found.push(result.found); }
   // Planets in order of their period, innermost first, however the archive lists them.
-  const planets = found.sort((a, b) => a.period - b.period).map(item => item.entry);
+  const sorted = found.sort((a, b) => a.period - b.period), planets = sorted.map(item => item.entry);
   // A host with no planet to add is not drafted: a star alone is not what an archive draft is for.
   if (!planets.length) throw new Error(`${hostname}: no planet to add; ${[...skipped, ...notes.filter(note => note.includes('already in the universe'))].join('; ') || 'the archive lists none'}.`);
-  const star = rows.find(row => row.planet === planets[0]?.name) ?? rows[0]!;
+  const star = rows.find(row => row.planet === sorted[0]?.planet) ?? rows[0]!;
   // Each stellar value from the star's default row, else from the newest other row that gives it, cited to that row (as orbits are).
   const others = all.filter(row => row !== star).sort((a, b) => b.refYear - a.refYear);
   const pick = (key: 'teff' | 'rad' | 'mass', err: 'teffErr' | 'radErr' | 'massErr') => { const row = star[key] !== undefined ? star : others.find(entry => entry[key] !== undefined); return row ? { value: row[key]!, err: row[err], row } : undefined; };

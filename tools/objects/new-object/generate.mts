@@ -411,15 +411,28 @@ export const formatNewObject = (results: readonly NewObjectResult[]) => `${resul
 
 /** A spec file for planet hosts, from the NASA Exoplanet Archive (from-archive.mts); hosts already in the universe get their
  * new planets as host additions. */
+/** Hosts an archive draft reads at once. Measured 2026-09-24 on 24 hosts within 200 pc: one at a time (main's loop) took 158 s,
+ * 4 took 27 s, 8 took 19 s and 16 took 18 s, each spec byte-identical; past 8 the archives, not the client, set the pace. */
+export const DRAFT_CONCURRENCY = 8;
 export async function specFromArchive(hosts: readonly string[], out: string, { root = process.cwd(), progress = (_line: string) => {} } = {}) {
   const { archiveSpec } = await import('./from-archive.mts'), { existingBodies } = await import('./identity.mts');
   const universe = await existingBodies(root), stars: unknown[] = [], report: string[] = [], failed: string[] = [];
-  for (const host of hosts) {
-    progress(`${host}: reading its default parameter sets`);
-    // A host the archive cannot give a spec for is reported and left out; the rest of the batch is still drafted.
-    let drafted: Awaited<ReturnType<typeof archiveSpec>>;
-    try { drafted = await archiveSpec(liveArchive, host, universe); } catch (error) { const line = (error as Error).message.split('\n')[0]!; failed.push(line.startsWith(`${host}:`) ? line : `${host}: ${line}`); progress(`  left out: ${failed.at(-1)}`); continue; }
-    const { spec, skipped, notes, companions } = drafted;
+  // DRAFT_CONCURRENCY hosts are read at once; the spec and the report keep the order the hosts were given in.
+  const results: ({ drafted: Awaited<ReturnType<typeof archiveSpec>> } | { failure: string })[] = [];
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(DRAFT_CONCURRENCY, hosts.length) }, async () => {
+    for (let i = next++; i < hosts.length; i = next++) {
+      const host = hosts[i]!;
+      progress(`${host}: reading its default parameter sets`);
+      // A host the archive cannot give a spec for is reported and left out; the rest of the batch is still drafted.
+      try { results[i] = { drafted: await archiveSpec(liveArchive, host, universe) }; }
+      catch (error) { const line = (error as Error).message.split('\n')[0]!; results[i] = { failure: line.startsWith(`${host}:`) ? line : `${host}: ${line}` }; progress(`  left out: ${(results[i] as { failure: string }).failure}`); }
+    }
+  }));
+  for (const [i, result] of results.entries()) {
+    const host = hosts[i]!;
+    if ('failure' in result) { failed.push(result.failure); continue; }
+    const { spec, skipped, notes, companions } = result.drafted;
     const planets = (spec.planets as unknown[]).length;
     if (planets || !('host' in spec)) stars.push(spec);
     stars.push(...companions);

@@ -18,7 +18,16 @@ export interface Quotes { readonly url: string; readonly title: string; readonly
 
 /** The lead of the article at `title`, or undefined when there is none, when it is a disambiguation page, or when neither its
  * description nor its lead says it is about a star, planet or brown dwarf. */
-export async function wikipediaLead(archive: Archive, title: string): Promise<WikipediaLead | undefined> {
+export function wikipediaLead(archive: Archive, title: string): Promise<WikipediaLead | undefined> {
+  // One read per title and archive: a host's article is asked for by each of its planets.
+  let cache = LEADS.get(archive);
+  if (!cache) LEADS.set(archive, cache = new Map());
+  let lead = cache.get(title.trim());
+  if (!lead) cache.set(title.trim(), lead = readLead(archive, title));
+  return lead;
+}
+const LEADS = new WeakMap<Archive, Map<string, Promise<WikipediaLead | undefined>>>();
+async function readLead(archive: Archive, title: string): Promise<WikipediaLead | undefined> {
   const url = `${WIKIPEDIA_SUMMARY}${encodeURIComponent(title.trim().replace(/ /gu, '_'))}`;
   if (!await archive.exists(url)) return undefined;
   const summary = JSON.parse(await archive.text(url)) as { type?: string; title?: string; extract?: string; description?: string; revision?: string | number; content_urls?: { desktop?: { page?: string } } };

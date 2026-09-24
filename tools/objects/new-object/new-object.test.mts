@@ -77,7 +77,7 @@ test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', 
 });
 
 test('a transiting orbit is one paper\'s archive row, with gaps filled from other rows and a/R* derived when no row has it', async () => {
-  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar';
+  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror';
   const anchor = (ref: string, bib: string, label: string) => `"<a refstr=${ref} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
   const csv = [header,
     `"WASP-121 b",${anchor('BOURRIER_ET_AL__2020', '2020A&A...635A.205B', 'Bourrier et al. 2020')},0,1.27492504,3.8131,88.49,0,10,2458119.72074,1.753,1.157,,1.458,1.353,0`,
@@ -107,6 +107,21 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   // Kepler's law in solar units: the Earth's year around the Sun is 215 solar radii (it was 766 times too large before 2026-09-24).
   const { keplerRatio } = await import('./orbit.mts');
   assert.equal(Number(keplerRatio(1, 365.25, 1).toFixed(1)), 215.0);
+  // Neither an inclination nor an impact parameter: the duration and depth give it. K2-148 b's second row: T 1.776 h, Rp/R* 0.0173,
+  // a/R* 16.4, P 4.38 d; the geometry gives b = a/R* cos i, checked against the same equation solved for T.
+  const timedRows = parseArchiveRows([header, `"T b",${anchor('H_ET_AL__2018', '2018AJ....155..136H', 'Hirano et al. 2018')},1,4.38395,,,0,,2457000.5,0.15,,,0.6,0.6,0,,,`,
+    `"T b",${anchor('D_ET_AL__2018', '2018AJ....156...22D', 'Dressing et al. 2018')},0,4.38395,16.4,,,,,,,,,,0,,1.776,0.0173`].join('\n'));
+  const timedOrbit = assembleArchiveOrbit(timedRows, undefined, small).orbit, ci = Math.cos(timedOrbit.inclinationDegrees * Math.PI / 180);
+  const back = 24 * 4.38395 / Math.PI * Math.asin(Math.sqrt((1.0173 ** 2 - (16.4 * ci) ** 2)) / (16.4 * Math.sin(timedOrbit.inclinationDegrees * Math.PI / 180)));
+  assert.ok(Math.abs(back - 1.776) < 1e-3, `the derived inclination gives back the duration: ${back}`);
+  assert.match(timedOrbit.sources.shape!, /inclination derived from its transit duration 1\.776 h and Rp\/R\* 0\.0173 with its a\/R\* 16\.4 \(Winn 2010, eqs\. 14 and 16\)/u);
+  // The chosen paper's own numbers come before another paper's a/R*: Kepler-1651 b's default row (Mann et al. 2017) gives its star, a
+  // KOI table gives an a/R* half as large; the orbit is the default paper's.
+  const koi = parseArchiveRows([header, `"K b",${anchor('MANN_ET_AL__2017', '2017AJ....153..267M', 'Mann et al. 2017')},1,9.87863917,,89.9,0,,2455000.5,0.2,,,0.503,0.522,0,`,
+    `"K b",${anchor('Q1_Q16_KOI_TABLE', '2014ApJS..210...19B', 'Q1-Q16 KOI Table')},0,9.87863917,14.04,,,,,,,,,,0,`].join('\n'));
+  const own = assembleArchiveOrbit(koi, undefined, small).orbit;
+  assert.equal(own.semiMajorAxisStellarRadii, Number(keplerRatio(0.522, 9.87863917, 0.503).toFixed(4)));
+  assert.match(own.sources.shape!, /Mann et al\. 2017.*a\/R\* derived by Kepler's third law/u);
   // A stated a/R* that Kepler's law with the same star cannot give is refused: ZTF J1828+2308 b's 0.838 is its orbit in solar radii.
   const wd = parseArchiveRows([header, `"ZTF b",${anchor('P_ET_AL__2025', '2025MNRAS.1...1P', 'Parsons et al. 2025')},1,0.1120067,0.838,88.9,0,,2460000.5,0.993,,,0.0131,0.61,0,`].join('\n'));
   assert.throws(() => assembleArchiveOrbit(wd, undefined, small), /Parsons et al\. 2025's a\/R\* 0\.838 disagrees with Kepler's third law \(63\.3[0-9] from P 0\.1120067 d, .* by a factor of 75\.[0-9], beyond 2/u);
@@ -220,7 +235,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
 test('a planet whose archive mass is only an upper limit gets GM 0, the records\' unpublished value, and the limit in its notes', async () => {
   const { hostedRecord } = await import('./hosted.mts');
   const anchor = '"<a refstr=BORUCKI_ET_AL__2013 href=https://ui.adsabs.harvard.edu/abs/2013Sci...340..587B/abstract target=ref>Borucki et al. 2013</a>"';
-  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar',
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror',
     `"Kepler-62 f",${anchor},1,267.291,,89.9,0,,2454967.3,0.126,0.11,0.718,0.64,0.69,1,`].join('\n');
   const composite = `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"Kepler-62 f",0.11,1,Mass,${anchor}`;
   const archive: Archive = { async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); if (query.includes('from pscomppars')) return composite; if (query.includes('from ps where pl_name')) return ps; throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
@@ -251,7 +266,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
     `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789,0,1`].join('\n');
   // GJ 436's case: the default row leaves the stellar temperature empty and another paper's row gives it.
   const gapped = stars.replaceAll(',5000,50,', ',,,').replace(',5000,,', ',,,') + `\nHD 1 b,HD 1,0,${ref('Four et al. 2022', '2022AJ....1....4F')},${ref('Four et al. 2022', '2022AJ....1....4F')},0.81,,5010,40,0.86,,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789,0,1`;
-  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar',
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror',
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
   const composite = (name: string, mass: number) => `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"${name}",${mass},0,Mass,${ref('One et al. 2019', '2019AJ....1....1O')}`;
@@ -283,6 +298,12 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.deepEqual([temperature.value, temperature.uncertainty], [5010, 40], 'from the other row, with its own uncertainty');
   assert.match(temperature.source, /Four et al\. 2022.*the default leaves it empty/u);
   assert.equal((filled.spec.radius as { value: number }).value, 0.8, 'the default row still gives the radius');
+  // A confirmed planet the archive still lists by its catalogue number is named by its host and the archive's letter.
+  const numbered = { ...archive, async text(url: string) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); const answer = await archive.text(url.replaceAll('HD+1.01', 'HD+1+c').replaceAll('HD%201.01', 'HD%201%20c')); return query.includes('from ps where hostname') ? answer.replaceAll('HD 1 c,', 'HD 1.01,').replaceAll('"HD 1 c"', '"HD 1.01"') : answer; } };
+  const listed = await archiveSpec(numbered, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
+  const c = (listed.spec.planets as { id: string; name: string; orbit: { planetName?: string } }[]).find(planet => planet.id === 'hd-1c')!;
+  assert.deepEqual([c.name, c.orbit.planetName], ['HD 1 c', 'HD 1.01']);
+  assert.match(listed.notes.join('; '), /HD 1 c: listed in the NASA Exoplanet Archive as HD 1\.01; named by its host and the archive's letter c/u);
   // A host the universe names otherwise is found by the Gaia DR3 source its position cites.
   const byGaia = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-one']), names: new Map(), stars: [], gaia: new Map([['123456789', 'hd-one']]) });
   assert.equal(byGaia.spec.host, 'hd-one');
@@ -374,7 +395,7 @@ test('a wide companion is drafted as a placed star of the host\'s system from th
   const held = await wideCompanions(archive, { gaia: '846946621395854848', name: 'HAT-P-22', system: 's' }, () => 'hd-233731-b');
   assert.deepEqual([held.companions.length, /already in the universe as hd-233731-b/u.test(held.notes[0]!)], [0, true]);
   // A circumbinary host: the pair's orbit is a paper's, so the draft refuses it.
-  const cb = { async text(url: string) { if (decodeURIComponent(url).includes('st_teff')) return 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum\nTOI-1338 b,TOI-1338,1,x,x,1,,5990,,1,,400,2020,Transit,1,b,,,Gaia DR3 1,1,2'; throw new Error('unexpected'); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  const cb = { async text(url: string) { if (decodeURIComponent(url).includes('st_teff')) return 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum\nTOI-1338 b,TOI-1338,1,x,x,1,,5990,,1,,400,2020,Transit,1,b,,,Gaia DR3 1,1,2'; return ''; }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
   await assert.rejects(archiveSpec(cb, 'TOI-1338', { ids: new Set(), names: new Map(), stars: [] }), /circumbinary/u);
 });
 
@@ -479,4 +500,17 @@ test('a star Gaia gives no radial velocity takes SIMBAD\'s, cited to its paper, 
     assert.equal(zero.value, 0);
     assert.match(zero.source, /Zero is assumed; a 30 km\/s error moves the star by one part in 100,000 of its distance per century/u);
   }
+});
+
+test('an archive answering a server error or a rate limit is asked again; a 404 is an answer', async () => {
+  const { liveArchive } = await import('./archives.mts');
+  const real = globalThis.fetch, answers = [503, 200, 404];
+  let calls = 0;
+  globalThis.fetch = (async () => { calls++; const status = answers.shift()!; return new Response(status === 200 ? 'rows' : 'busy', { status }); }) as typeof fetch;
+  try {
+    assert.equal(await liveArchive.text('https://example.invalid/tap'), 'rows');
+    assert.equal(calls, 2, 'the 503 was asked again once');
+    await assert.rejects(liveArchive.text('https://example.invalid/tap'), /answered 404/u);
+    assert.equal(calls, 3, 'the 404 was not');
+  } finally { globalThis.fetch = real; }
 });
