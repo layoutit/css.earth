@@ -6,13 +6,13 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { loadNavigableObject, preparedObjectCapabilities,
   createWorldContextObjectRuntime } from '../src/renderers/css/dist/index.js';
-import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CAMERA } from './world-camera.mts';
 import * as runtimePolicy from './runtime-policy.mts';
 
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.
 export function bindPackagedObject(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame): SceneFactory {
-  const mount = createWorldContextObjectRuntime({ definition, context: APPLICATION_WORLD_CONTEXT, frame });
+  const mount = createWorldContextObjectRuntime({ definition, context: APPLICATION_WORLD_CAMERA, frame });
   return (stage, options) => mount(stage, {
     ...options,
     runtimePolicy,

@@ -30,7 +30,9 @@ export type PreparedWrite = { target: number; name: string } & (
   { kind: "style"; value: string } | { kind: "texture"; resource: string | null; quoted: boolean }
 );
 export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { controlPitch: number; controlYaw: number; controlRoll?: number; zoom: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } } | null; }
-export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection[string]>>; required: readonly string[]; materials: readonly PreparedMaterialSelection[]; writes: readonly PreparedWrite[]; navigation?: PreparedSelectionNavigation; }
+export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection[string]>>; required: readonly string[]; materials: readonly PreparedMaterialSelection[]; writes: readonly PreparedWrite[]; navigation?: PreparedSelectionNavigation;
+  /** Containers this selection does not show. Server markup for it omits their descendants; the runtime builds any it adopts without. */
+  hiddenSubtrees?: readonly number[]; }
 export interface PreparedTree {
   /** Offline first-paint batches. Runtime restores these exact retained leaves. */
   activationGroups?: readonly (readonly number[])[];
@@ -123,7 +125,8 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 // callbacks enter this builder. The ordered records are final prepared DOM.
 export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection, progressiveActivation = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
-    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage, definition.assetOrigin);
+    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage, definition.assetOrigin,
+      new Set(definition.variants.flatMap(variant => variant.hiddenSubtrees ?? [])));
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
   const owned = () => roots.some(root => root.parentNode === stage);
   const stageBindings = new Map<string, PreparedWrite>();

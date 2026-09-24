@@ -52,7 +52,7 @@ const stepOf = (lens: Control) => {
             aria-controls={`${objectId}-${lens.id}-details`}
             title={lens.title}
           >
-            <img class="object-lens-icon" src={sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl} width="14" height="14" alt="" />
+            <img class="object-lens-icon" src={sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl} width="14" height="14" alt="" loading="lazy" decoding="async" />
             <span class="object-lens-label">{lens.label}</span>
             {lens.detail && <span class="object-lens-detail">{lens.detail}</span>}
           </button>

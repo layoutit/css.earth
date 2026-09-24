@@ -14,7 +14,17 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
   const keys: Record<string, unknown>[] = [];
   const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
   for (const input of variants) {
-    const variant = record(input, 'variant', ['when', 'required', 'writes', 'materials', 'navigation']);
+    const variant = record(input, 'variant', ['when', 'required', 'writes', 'materials', 'navigation', 'hiddenSubtrees']);
+    if (variant.hiddenSubtrees !== undefined) {
+      const containers = new Set(tree.nodes.map(node => node.parent)), hidden = new Set<number>();
+      const holds = (root: number, id: number) => { for (let at: number = id; at >= 0; at = tree.nodes[at].parent) if (at === root) return true; return false; };
+      for (const value of array(variant.hiddenSubtrees, 'hidden subtrees')) {
+        const root = integer(value, 'hidden subtree');
+        if (root >= tree.nodes.length || !containers.has(root) || holds(root, tree.camera) || holds(root, tree.scene) || hidden.has(root))
+          fail('a hidden subtree must be a unique container outside the camera and scene path');
+        hidden.add(root);
+      }
+    }
     const when = record(variant.when, 'selection key', ['lensId', ...settings.keys()]); keys.push(when);
     if (lensIds.length ? !lensIds.includes(text(when.lensId, 'variant lens')) : Object.hasOwn(when, 'lensId')) fail('variant must match the declared lens capability');
     for (const [key, value] of Object.entries(when)) if (key !== 'lensId') {
