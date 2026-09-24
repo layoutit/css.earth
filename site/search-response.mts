@@ -9,6 +9,7 @@ import { renderDatasetResponse } from './dataset-response.mts';
 import { renderSourceLink } from './source-link.mts';
 import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
+import { objectIdAtPath } from './root-object.mts';
 import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
 
 export interface SearchPin { url: string; count: number; }
@@ -198,7 +199,7 @@ export async function handleSearchRequest(request: Request, fetcher: typeof fetc
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
   const url = new URL(request.url);
   const objectId = url.pathname === '/.netlify/functions/search' ? url.searchParams.get('object')
-    : url.pathname === '/' ? 'earth' : /^\/([a-z][a-z0-9-]*)\/$/u.exec(url.pathname)?.[1];
+    : objectIdAtPath(url.pathname);
   if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) return new Response('Object not found', { status: 404 });
   // No query on this fetch: it retrieves the static page without recursing into search.
   const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
