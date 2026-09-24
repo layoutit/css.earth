@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { createHash } from 'node:crypto';
 import { writeArrayBuffer } from 'geotiff';
 import sharp from 'sharp';
-import { loadNativePhotograph, samplePhotographicTexel } from './native-photograph.mts';
+import { loadNativePhotograph } from './native-photograph-source.mts';
+import { samplePhotographicTexel } from './native-photograph.mts';
+const test = sourceTest();
 
 const radius = 180 / Math.PI;
 const projection = {type:'equirectangular', referenceRadiusMeters:radius, centerLongitude:180,

@@ -4,7 +4,7 @@
 // Apollo shapefiles). Sites are unsized points ranked like a 20 km feature; traverses are open traces.
 import { parseDbf } from './dbf.js';
 import { parseShpRecords } from './shp.js';
-import { unzipMember } from './index.js';
+import { unzipMember } from './archive.js';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 

@@ -1,13 +1,13 @@
+import { validateCompilerResult } from './bank-validation.ts';
 import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
-import { mkdir, readFile, writeFile, rename, readdir } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
+import { geometrySha } from '../geometry/registered-source.ts';
 import { prepareEvidenceInputs } from '../evidence-fusion/provider.ts';
 import { prepareJointInput, tangentOffsetWestNorth } from '../joint-fit/input.ts';
 import { fitJointModels } from '@cssearth/nebula-reconstruction/methods/joint/fitter';
-import { defaultJointControls, readJointRecipe, jointRecord, jointPath } from '../../../features/joint-fit/model.ts';
+import { defaultJointControls, readJointRecipe } from '../../../features/joint-fit/model.ts';
 import { readObservations } from '../../../features/observations/models/model.ts';
 import { readObservationRecipe } from '../../../features/observations/recipe.ts';
 import { COMPILER_VERSION, readCompilerRecipe, compilerSourceWeights, type CompilerRequest } from '../../../features/compiler/model.ts';
@@ -16,7 +16,7 @@ import { compilerTarget, loadCompilerImages, compilerImagePanel } from './images
 import { fitEmissionField } from './fit.ts';
 import { createPhotometricEmission } from '@cssearth/volume-core/fields/photometric-emission';
 import { createEmissionMaterial } from '@cssearth/volume-core/materials/component-material';
-import { loadDepthModel, readDepthRecipe, verifyDepthEvidence } from './depth-model.ts';
+import { loadDepthModel } from './depth-model.ts';
 import { bakeCompiler } from './bake.ts';
 import { compilerStars } from '@cssearth/nebula-reconstruction/stars/compiler';
 import { prepareCatalogueStars } from './catalogue-stars.ts';
@@ -25,54 +25,8 @@ import { compilerUnionStars } from '@cssearth/nebula-reconstruction/stars/union'
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
 import type { CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 import { compileSampledNebula } from '../sampled-prior/compile.ts';
-import { assertCompilerBankIdentity, assertCompilerLensGeometry } from './bank-validation.ts';
 import { readEmissionWindow } from '@cssearth/volume-core/fields/emission-window';
-import { loadPhotometricPrior, fitPhotometricEmission, readPhotometricMgeRecipe, verifyPhotometricEvidence, photometricEnvelopeColors } from './photometric-prior.ts';
-export async function validateCompilerResult(root: string, value: unknown) {
-  const result = readCompilerResult(value);
-  if (result.scene.starSprites) {
-    const sprites = result.scene.starSprites, bytes = await readGeometryPin(root, sprites.atlas);
-    const metadata = await sharp(bytes).metadata();
-    if (metadata.width !== sprites.width || metadata.height !== sprites.height || !metadata.hasAlpha)
-      throw new TypeError('Saved stellar atlas dimensions or alpha differ.');
-  }
-  for (const pin of [result.model, result.method, result.target, result.projection, result.residual, ...result.sources.flatMap(s => [s.original, s.starless])]) await readGeometryPin(root, pin);
-  const method: unknown = JSON.parse((await readGeometryPin(root, result.method)).toString());
-  if (jointRecord(method) && method.physicalDepth !== undefined) {
-    const depth = method.physicalDepth;
-    if (!jointRecord(depth)) throw new TypeError('Invalid saved physical-depth method.');
-    const snapshot = async (v: unknown) => {
-      if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`)) throw new TypeError('Invalid physical evidence snapshot.');
-      return readGeometryPin(root, { path: v.path });
-    };
-    const recipe = readDepthRecipe(JSON.parse((await snapshot(depth.recipe)).toString())), evidence = await snapshot(depth.evidence);
-    verifyDepthEvidence(recipe, JSON.parse(evidence.toString()));
-  }
-  if (jointRecord(method) && method.photometricPrior !== undefined) {
-    const prior = method.photometricPrior;
-    if (!jointRecord(prior) || !jointRecord(prior.recipe) || !jointRecord(prior.evidence)) throw new TypeError('Invalid saved photometric model.');
-    const snapshot = async (pin: Record<string, unknown>) => {
-      if (!jointPath(pin.path) || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`)) throw new TypeError('Invalid photometric evidence snapshot.');
-      return readGeometryPin(root, { path: pin.path });
-    };
-    const recipe = readPhotometricMgeRecipe(JSON.parse((await snapshot(prior.recipe)).toString()));
-    const evidenceBytes = await snapshot(prior.evidence);
-    const compilerRecipe = readCompilerRecipe(method.recipe);
-    if (!compilerRecipe.photometricPriorRecipe) throw new TypeError('Saved compiler recipe omits its photometric prior.');
-    verifyPhotometricEvidence(recipe, JSON.parse(evidenceBytes.toString()), compilerRecipe.id);
-  }
-  async function readBank(pin: CompilerPin) {
-    const volume = validatePreparedCssVolume(JSON.parse((await readGeometryPin(root, pin)).toString())), directory = pin.path.slice(0, pin.path.lastIndexOf('/') + 1);
-    for (const resource of volume.resources) await readGeometryPin(root, { path: directory + resource.path });
-    return volume;
-  }
-  const neutral = await readBank(result.scene.neutral);
-  assertCompilerBankIdentity(neutral, result.scene);
-  for (const lens of result.scene.lenses) {
-    assertCompilerLensGeometry(neutral, await readBank(lens.volume), result.scene, lens);
-  }
-  return result;
-}
+import { loadPhotometricPrior, fitPhotometricEmission, photometricEnvelopeColors } from './photometric-prior.ts';
 /** Explicit automatic full pipeline. Source owners retain native registration/separation and their caches. */
 export async function compileNebula(root: string, request: CompilerRequest, signal: AbortSignal, progress: CompilerProgress): Promise<CompilerResult> {
   const recipeBytes = await readFile(resolve(root, request.recipePath)), recipe = readCompilerRecipe(JSON.parse(recipeBytes.toString()));

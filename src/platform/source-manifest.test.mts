@@ -3,14 +3,14 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { sourceTest } from '../../tests/objects/source-test.mts';
+import { parseSourceManifest } from '#preparation/source-files';
 const test = sourceTest();
-import { parseSourceManifest } from '#preparation/operations';
 
 import {
-  assertRangeResponse,
-  rangeRequestHeader,
-  validateSourceManifest,
-  verifySourceManifest,
+assertRangeResponse,
+rangeRequestHeader,
+validateSourceManifest,
+verifySourceManifest,
 } from "./source-manifest.mts";
 
 test('document descriptions are optional without weakening generator identity', () => {

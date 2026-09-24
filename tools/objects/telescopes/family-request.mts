@@ -1,5 +1,6 @@
 /** Family-aware request adapter. It translates legacy telescope criteria once, then evaluates only retained descriptor facts. */
-import type { CapabilityRequest, ConstraintAnswer, ConstraintVerdict } from './query.mts';
+import type { CapabilityRequest } from './recipe-request.mts';
+import type { ConstraintAnswer, ConstraintVerdict } from './query.mts';
 import type { AxisDescriptor, DepthDescriptor, FamilyId, InferenceDescriptor, ObservabilityDescriptor, ProductComponent, ProductDescriptor, ResolutionDescriptor, SupportClass } from './product-descriptor.mts';
 import { parseProductDescriptor } from './product-descriptor.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';

@@ -1,8 +1,7 @@
-import { createHash } from 'node:crypto';
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { type AuthoredObjectDescriptor } from '@cssearth/objects';
+import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { parseGeometryProfile, prepareGeometryScene, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
@@ -10,7 +9,7 @@ import { parsePresentationProfile, prepareCssPresentation, type PresentationInpu
 import { prepareCelestialAssets } from './celestial/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters } from './geometry-adapters.js';
-import { prepareRuntimeManifest } from './operations.js';
+import { prepareRuntimeManifest } from './runtime-assets.js';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
 import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
 

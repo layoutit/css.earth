@@ -1,8 +1,8 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
 import { mastService, type MastServiceRequest, type MastServiceResult } from '../../astronomy-packages/mast.mts';
-import type { ProductKind } from '../query.mts';
+import type { ProductKind } from '../recipe-request.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 import { canonical, digest, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from './contracts.mts';
 import { sha256File } from '../../../../src/platform/sha256.mts';

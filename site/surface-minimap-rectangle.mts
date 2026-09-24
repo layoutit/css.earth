@@ -3,7 +3,6 @@ import type { WorldRotation } from '../src/renderers/css/navigation/world-camera
 import type { SurfaceAxes } from './surface-minimap-math.mts';
 import type { MapViewport } from './surface-map-context.mts';
 import type { Rectangle } from '@cesium/engine';
-export interface MinimapCameraState { eye: PositionM; rotation: WorldRotation; view: MapViewport; axes: SurfaceAxes; }
 import Cartesian3 from '@cesium/engine/Source/Core/Cartesian3.js';
 import Cartesian4 from '@cesium/engine/Source/Core/Cartesian4.js';
 import CullingVolume from '@cesium/engine/Source/Core/CullingVolume.js';
@@ -12,8 +11,9 @@ import IntersectionTests from '@cesium/engine/Source/Core/IntersectionTests.js';
 import Ray from '@cesium/engine/Source/Core/Ray.js';
 import { rotateWorldPosition } from '../src/renderers/css/dist/navigation.js';
 import { wrapMapU } from './surface-minimap-math.mts';
-import { viewScale } from './view-readout.mts';
+import { viewScale } from './view-format.mts';
 import { computeViewRectangle } from './vendor/cesium-view-rectangle.mjs';
+export interface MinimapCameraState { eye: PositionM; rotation: WorldRotation; view: MapViewport; axes: SurfaceAxes; }
 
 const dot = (a: PositionM, b: PositionM) => a.reduce((sum, x, i) => sum + x * b[i], 0);
 const referenceAxes: SurfaceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };

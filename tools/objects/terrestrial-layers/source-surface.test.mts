@@ -1,10 +1,9 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { shape, array, text, number, optional, parseShapeLens } from './source-records.mts';
-import { requireArray, requireRecord } from '../../sources/source-values.mts';
+import { requireArray } from '../../sources/source-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -12,7 +11,8 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
 import { parseObjShape, createShapeSurfaceSampler } from './obj-shape.mts';
-import { prepareRadialMaterials } from './radial-terrain.mts';
+import { prepareRadialMaterials } from './radial-materials.mts';
+const test = sourceTest();
 
 const parseFixture = shape({cases:array(shape({id:text,sourcePath:text,oldFirstRayHeight:number,
  triangles:array(shape({sourceFace:number,vertices:array(array(number))})),

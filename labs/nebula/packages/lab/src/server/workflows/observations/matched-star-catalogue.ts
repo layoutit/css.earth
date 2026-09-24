@@ -1,7 +1,7 @@
 /** Replay explicit, visually established stellar identities; the affine holdout is conditional on those identities. */
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
-import { applyAffine, composeAffine, type Affine, type Pair, type Point, type SkyFrame } from '@cssearth/nebula-reconstruction/registration/stellar';
+import { applyAffine, composeAffine, type Affine, type Point } from '@cssearth/nebula-reconstruction/registration/affine';
+import type { Pair, SkyFrame } from '@cssearth/nebula-reconstruction/registration/stellar';
 import type { ObservationSource } from '../../../features/observations/recipe.js';
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Invalid matched-star catalogue.');

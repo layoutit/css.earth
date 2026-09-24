@@ -1,22 +1,9 @@
-import {requireObjectControls} from '../../../site/scene/scene-contract.mts';
-import type {AuthoredObjectDescriptor} from '@cssearth/objects';
-import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {readJsonSource, requireArray, requireRecord, requireString} from '../../sources/source-values.mts';
-import {parseBodyAttitude} from './geographic/source-records.mts';
-export {isPagedEllipsoidRecipe} from './profile-source.mts';
-export interface PagedEllipsoidContext {
-  objectDirectory: string; publicDirectory: string; outputDirectory: string; packDirectory?: string;
-  prepareContent: typeof prepareObjectContentAssets;
-  /** Reuse this object's published raster, overlay, place, page and texture-level outputs from outputDirectory and publicDirectory,
-   * and prepare only what the presentation derives from them. Refuses when the recipe sources or the recomputed plan differ. */
-  presentationOnly?: boolean;
-  /** Recipe sources the author states changed without feeding the reused outputs; each is named in the run's output. */
-  acceptChanged?: readonly string[];
-}
-import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { relative, resolve } from 'node:path';
-import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
+import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
+import type { prepareObjectContentAssets } from '../content/prepare.ts';
+import { readJsonSource, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { parseBodyAttitude } from './geographic/source-records.mts';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { verifySourceManifest } from '../../../src/platform/source-manifest.mts';
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
@@ -27,6 +14,16 @@ import { preparePagedEllipsoidPresentation } from './presentation.mts';
 import { prepareLocationPoint, prepareLocationCamera } from './geographic/prepare-location.mts';
 import { preparePlaces } from './geographic/places.mts';
 import { withFocusedCamera } from '../focused-camera.mts';
+
+export interface PagedEllipsoidContext {
+  objectDirectory: string; publicDirectory: string; outputDirectory: string; packDirectory?: string;
+  prepareContent: typeof prepareObjectContentAssets;
+  /** Reuse this object's published raster, overlay, place, page and texture-level outputs from outputDirectory and publicDirectory,
+   * and prepare only what the presentation derives from them. Refuses when the recipe sources or the recomputed plan differ. */
+  presentationOnly?: boolean;
+  /** Recipe sources the author states changed without feeding the reused outputs; each is named in the run's output. */
+  acceptChanged?: readonly string[];
+}
 
 import { prepareTextureLevels } from './texture-levels.mts';
 

@@ -5,7 +5,7 @@
 // use Natural Earth's label point; regions carry their bounding box as the extent; rivers carry their centreline as an open trace.
 import { parseDbf } from './dbf.js';
 import { parseShpRecords } from './shp.js';
-import { unzipMember } from './index.js';
+import { unzipMember } from './archive.js';
 import { resolve } from 'node:path';
 
 export interface NaturalEarthClass {

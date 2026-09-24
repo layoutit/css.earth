@@ -1,12 +1,13 @@
-import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
-import {parseRadialLoaderConfig} from './radial-source.mts';
+import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { parseRadialLoaderConfig } from './radial-source.mts';
 // Preparation-only source-model image for archived-camera registration.
-import {readFile,writeFile} from 'node:fs/promises';
-import {resolve} from 'node:path';
-import {loadRadialTerrain,requireTerrainMesh} from './radial-terrain.mts';
-import {decodeOsirisReflectance} from './archived-camera.mts';
-import {matrixCamera} from '../surface-observations/cameras.mts';
-import {castSourceRays} from '../surface-observations/geometry.mts';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { loadRadialTerrain } from './radial-terrain.mts';
+import { requireTerrainMesh } from './radial-mesh.mts';
+import { decodeOsirisReflectance } from './archived-camera.mts';
+import { matrixCamera } from '../surface-observations/cameras.mts';
+import { castSourceRays } from '../surface-observations/geometry.mts';
 const [sourceDirectory,cameraPath,imagePath,output] = process.argv.slice(2);
 if (!sourceDirectory || !cameraPath || !imagePath || !output || process.argv.length !== 6) throw new TypeError('Usage: camera-reference.mts <source-directory> <camera.json> <image> <output>');
 const config=parseRadialLoaderConfig(JSON.parse(await readFile(resolve(sourceDirectory,'preparation/terrestrial.json'),'utf8')));

@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { assembleRuntimeAssets } from './operations.js';
+import { assembleRuntimeAssets } from './runtime-assets.js';
+const test = sourceTest();
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 

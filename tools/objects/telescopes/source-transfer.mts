@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { hasErrorCode, requireRecord, requireArray, requireString } from '../../sources/source-values.mts';
-import type { SourceFile } from './source-products.mts';
+import type { SourceFile } from './source-product-contract.mts';
 export async function sourceHeaders(root: string, file: SourceFile): Promise<Record<string, string>> {
   const boundary = file.path.indexOf('/source/');
   if (boundary < 0) return {};

@@ -1,10 +1,10 @@
 import { fixtureRecord } from '../../contract/test-values.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { readFile } from 'node:fs/promises';
+import { parseTerrestrialProfile } from './index.mts';
+import { radialModelForLens } from './alternative-lenses.mts';
 const test = sourceTest();
-import {readFile} from 'node:fs/promises';
-import {parseTerrestrialProfile} from './index.mts';
-import {radialModelForLens} from './radial-models.mts';
 const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{
  for(const id of ['dimorphos','bennu','vesta','ryugu','itokawa','eros'])assert.equal(parseTerrestrialProfile(await read(id)).namespace,id);

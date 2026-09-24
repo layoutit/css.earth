@@ -1,6 +1,6 @@
 import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 /** Prepare a stellar replacement while retaining the exact previously inspected cloud. */
-import { readFile, readdir, mkdir, writeFile, rename } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
@@ -8,7 +8,7 @@ import { readObservations } from '../../../features/observations/models/model.ts
 import { readCompilerRecipe, readCompilerRequest } from '../../../features/compiler/model.ts';
 import { prepareCatalogueStars } from './catalogue-stars.ts';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';
-import { validateCompilerResult } from './compile.ts';
+import { validateCompilerResult } from './bank-validation.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
 import { COMPILER_PHYSICAL_REFERENCE } from '@cssearth/volume-core/coordinates/compiler-frame';

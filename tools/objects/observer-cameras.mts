@@ -6,13 +6,12 @@
  *   node tools/objects/observer-cameras.mts <object-id>          report the derived fields beside the stated ones
  *   node tools/objects/observer-cameras.mts <object-id> --write  state the derived fields in the recipe and re-pin it
  */
-import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '../sources/source-values.mts';
 import { deriveObserverCameras, loadObserverCameraInputs, recipeFields } from './terrestrial-layers/observer-cameras.mts';
 import { loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
-import { radialTerrainForLens } from './terrestrial-layers/radial-models.mts';
+import { radialTerrainForLens } from './terrestrial-layers/alternative-lenses.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const [objectId, flag] = process.argv.slice(2);

@@ -1,4 +1,4 @@
-import type { Affine as Matrix } from '../registration/stellar.ts';
+import type { Affine as Matrix } from '../registration/affine.ts';
 
 export const evidenceChannels = ['broad', 'ridges', 'compact'] as const;
 export type EvidenceChannel = typeof evidenceChannels[number];

@@ -1,7 +1,7 @@
-import {requireRecord} from './source-values.mts';
-import {shape,text,number,array,optional,nullable,boolean} from '../objects/terrestrial-layers/source-records.mts';
-import {parseSourceManifest} from '#preparation/operations';
-import {parseSolidPreparationSource} from '../objects/terrestrial-layers/profile-source.mts';
+import { requireRecord } from './source-values.mts';
+import { shape, text, number, array, optional, nullable, boolean } from '../objects/terrestrial-layers/source-records.mts';
+import { parseSourceManifest } from '#preparation/source-files';
+import { parseSolidPreparationSource } from '../objects/terrestrial-layers/profile-source.mts';
 
 /** Refresh bytes without discarding reviewed identity, credits or capture evidence. */
 export function refreshSourceRecord<T extends {path: string}>(records: readonly unknown[], update: T) {

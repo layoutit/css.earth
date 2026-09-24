@@ -2,9 +2,9 @@
 import { readFile } from 'node:fs/promises';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { requireRecord, requireString } from '../../sources/source-values.mts';
-import { verifiedProduct } from './projection.mts';
+import { verifiedProduct } from './verified-product.mts';
 import { delivery } from './outputs.mts';
-import { recordedSourceProcessing } from './source-products.mts';
+import { recordedSourceProcessing } from './source-product-contract.mts';
 
 export const ASCL_CATALOG = 'https://ascl.net/code/json';
 const MAX_CATALOG_BYTES = 8 * 1024 * 1024;

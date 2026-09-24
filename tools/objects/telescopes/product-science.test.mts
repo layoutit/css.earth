@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { after } from 'node:test';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest(), { before } = test;
 import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -14,7 +13,8 @@ import { fileSize, writeProductRecord, productRecordPath } from '../product-reco
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { recordQualification, QUALIFICATION_SCHEMA, type QualificationResult } from './qualify.mts';
 import { loadQualifiedObservations } from './qualified-observations.mts';
-import type { SourceProduct } from './source-products.mts';
+import type { SourceProduct } from './source-product-contract.mts';
+const test = sourceTest(), { before } = test;
 let root:string;
 before(async()=>{
   root=await mkdtemp(resolve(tmpdir(),'science-readback-'));

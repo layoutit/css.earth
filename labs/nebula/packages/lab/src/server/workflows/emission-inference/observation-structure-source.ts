@@ -9,7 +9,7 @@ import { verifySkyBandRecipe } from '../../../adapters/sources/sky-bands.ts';
 import { nativeStarless } from './native-source.ts';
 import { nativePreserved } from './native-preserved.ts';
 import { verifyTransferPins } from '../observations/registration-transfer.ts';
-import { composeAffine } from '@cssearth/nebula-reconstruction/registration/stellar';
+import { composeAffine } from '@cssearth/nebula-reconstruction/registration/affine';
 import type { WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
 
 const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');

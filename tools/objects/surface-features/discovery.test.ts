@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { featureDiscoveryZoomShare } from './catalog.js';
 const test = sourceTest();
-import { featureDiscoveryZoomShare } from './index.js';
 
 test('a sparse catalogue reveals its names while the whole body fits on screen', () => {
   // The same 400 px body framing for a metre-scale asteroid or a large moon.
