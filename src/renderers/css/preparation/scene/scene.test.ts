@@ -33,8 +33,8 @@ async function prepareAuthored(id:string,direction:[number,number,number],edit:(
  } finally {await rm(outputDirectory,{recursive:true,force:true});}
 }
 const fixtures:[string,[number,number,number],number,string,string?][]=[
- ['mercury',[0.9590465723427557,-0.28324830064510237,0.00026881085002734145],0.005,'369dc1263bd3587a15aa80f32581dcbfa4906aa622d83e4482907f7c1f74da15','8457ddb0c43ba5f4263267a25cb9bdb4178bbe0605fc16301c8bf2fa00595688'],
- ['venus',[0.9978458208272254,-0.04897654126493434,0.043646491993803105],0.008,'c868963aa383bfcd2b5947e0835743a27fa6a7b63d70d62697114e32c131a2d7']];
+ ['mercury',[0.9590465723427557,-0.28324830064510237,0.00026881085002734145],0.005,'1db776d01547b5bb38f448be21e69ca10c567bc0b4f5286b5317ba050574e26d','62b92897c455bc6734f2ba45f90a8abf477fd78c229447e1f63b978b7b1999b7'],
+ ['venus',[0.9978458208272254,-0.04897654126493434,0.043646491993803105],0.008,'52c1a1286be1648205e12257163550b38c79c8d8cadd005d21af6b293db672d7']];
 for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
  test(`authored ${id} geometry preserves independent pre-migration leaf oracle`,async()=>{
   // The oracle predates the stepped seam outset. Restoring the fixed overlap it was taken
@@ -42,7 +42,9 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
   const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0}};});
   // Two changes since this oracle was taken touched these leaves, each by name: d10c041091 draws every polar cap from
   // both sides, and 36198077d3 moved raster images to the canonical 2x density. Undoing exactly those two reproduces
-  // the oracle, and every cap must carry the both-sided suffix.
+  // the oracle, and every cap must carry the both-sided suffix. A third change was taken into the hashes rather than
+  // undone: #712 grows each band leaf's texture with this fixed overlap instead of stretching the cell across it, and
+  // stops rounding background sizes to the decimals Array.map handed formatCssLength as its index.
   const both=';backface-visibility:visible',isCap=(leaf:object)=>Boolean((leaf as {polar?:unknown;polarCap?:unknown}).polar||(leaf as {polarCap?:unknown}).polarCap);
   const undo=(set:readonly {style:string}[])=>JSON.parse(JSON.stringify(set.map(leaf=>isCap(leaf)?{...leaf,style:leaf.style.replace(both,'')}:leaf)).replaceAll('@2x.webp','.webp')) as unknown;
   const leaves='bodyLeaves' in result?result.bodyLeaves:result.body.leaves,caps=leaves.filter(isCap);
@@ -72,6 +74,26 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
    const [a,b]=outset.scale;
    assert.ok(Math.min(a,b)>19.5&&Math.min(a,b)<21.5&&Math.max(a,b)<110,`${id} leaf scale ${a} × ${b}`);
   }
+ });
+ test(`authored ${id} band leaves sample exactly their own map cell`,async()=>{
+  // Array.map once handed formatCssLength its index as the decimals, rounding every background width to whole pixels
+  // and height to tenths: Venus' leaves sampled up to half a map unit, Triton's two and a half, away from their cells.
+  const {surface,projection}=parseGeometryProfile(await readJson(`src/objects/${id}/source/preparation/geometry.json`));
+  const result=await prepareAuthored(id,direction),gutter=projection.rasterGutter;
+  const cellWidth=surface.surface.width/surface.longitudeSegments,cellHeight=surface.surfaceLatitudeHeight/surface.latitudeSegments;
+  const packedWidth=surface.surface.width+2*gutter,packedHeight=surface.latitudeSegments*(cellHeight+2*gutter);
+  const polar=(leaf:object)=>Boolean(('polar' in leaf&&leaf.polar)||('polarCap' in leaf&&leaf.polarCap));
+  const bands=('bodyLeaves' in result?result.bodyLeaves:result.body.leaves).filter(leaf=>!polar(leaf));
+  bands.forEach((leaf,index)=>{
+   const style=new Map(leaf.style.split(';').map(entry=>[entry.slice(0,entry.indexOf(':')),entry.slice(entry.indexOf(':')+1)]));
+   const position=[...style].find(([name])=>name.endsWith('-surface-position'))?.[1]??style.get('background-position')??'';
+   const [x=NaN,y=NaN]=position.split(' ').map(parseFloat),[width=NaN,height=NaN]=(style.get('background-size')??'').split(' ').map(parseFloat);
+   // The matched overscan is drawn around the exact cell, which starts one gutter into its packed band.
+   const cellX=gutter+index%surface.longitudeSegments*cellWidth;
+   const cellY=(surface.latitudeSegments-2-Math.floor(index/surface.longitudeSegments))*(cellHeight+2*gutter)+gutter;
+   const sampledX=-x/width*packedWidth+projection.rasterOverscan,sampledY=-y/height*packedHeight+projection.rasterOverscan;
+   assert.ok(Math.abs(sampledX-cellX)<0.01&&Math.abs(sampledY-cellY)<0.01,`${id} band leaf ${index} samples (${sampledX}, ${sampledY}), its cell starts at (${cellX}, ${cellY})`);
+  });
  });
 }
 test('seam outset steps hold the target within their silhouette steps',()=>{

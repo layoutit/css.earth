@@ -39,7 +39,8 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
         backgroundSize: fitted.backgroundSize, leafWidth: fitted.leafWidth, leafHeight: fitted.leafHeight,
         bandCount: surface.latitudeSegments, gutter: p.rasterGutter, overscan: p.rasterOverscan });
       const position = raster.backgroundPosition.map(value => value === 0 ? '0px' : formatCssLength(value)).join(' ');
-      const size = raster.backgroundSize.map(formatCssLength).join(' ');
+      // formatCssLength's second argument is its decimals: never hand it Array.map's index.
+      const size = raster.backgroundSize.map(value => formatCssLength(value)).join(' ');
       const variable = patch.pole ? `--${ns}-pole-position` : `--${ns}-surface-position`;
       // A polar cap closes the top of the band mesh. Its fitted plate can come out with the opposite winding to the
       // bands around it, and a culled cap leaves a hole at the pole through which the body's interior fill shows as a
@@ -61,7 +62,7 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
         dimensions?.[1] ?? patch.textureImageSource.sourceRect.height);
       const fitted = patch.pole || dimensions ? initial : fitProjectiveTextureGeometryToStableLayout(initial);
       return { tag: 's', className,
-        style: `transform:matrix3d(${fitted.matrix});background-position:${fitted.backgroundPosition.map(formatCssLength).join(' ')};background-size:${fitted.backgroundSize.map(formatCssLength).join(' ')};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${dimensions ? ';backface-visibility:visible' : ''}`,
+        style: `transform:matrix3d(${fitted.matrix});background-position:${fitted.backgroundPosition.map(value => formatCssLength(value)).join(' ')};background-size:${fitted.backgroundSize.map(value => formatCssLength(value)).join(' ')};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${dimensions ? ';backface-visibility:visible' : ''}`,
         ...(!dimensions ? { projectiveTextureLayer: prepareProjectiveTextureLayer(fitted.matrix,
           patch.pole ? polarCapRasterScale(p.rasterScale, patch.textureImageSource.sourceRect.width, fitted.leafWidth) : p.rasterScale), polar: patch.pole ?? null } : {}) };
     },
