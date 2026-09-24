@@ -285,10 +285,11 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank:
   })) });
 }
 
-/** Each system view's camera candidates by host id: what system framing needs, kept out of the summary the page waits for. */
+/** Each system's camera candidates, one document per host: system framing reads the one it frames, so a page never
+ * downloads the candidates of systems it does not open (all 74 were 635 KB brotli on every page). */
 export function worldSystemViews(prepared: PreparedWorldContext) {
-  return freeze({ schema: 'cssearth-world-system-views@1' as const, views: freeze(Object.fromEntries([prepared.focus, ...prepared.bodies]
-    .flatMap(body => body.systemView ? [[body.id, body.systemView.candidates] as const] : []))) });
+  return freeze([prepared.focus, ...prepared.bodies].flatMap(body => body.systemView
+    ? [freeze({ schema: 'cssearth-world-system-view@1' as const, id: body.id, candidates: body.systemView.candidates })] : []));
 }
 
 /** The orbit bank's layout: `CSWO`, format version, header byte length (little-endian u32s), the UTF-8 JSON

@@ -108,7 +108,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       if (!force && objectId === fromId && bodyCardViewAtCamera(from, frame, optics, objectId) === 'detail') return null;
       // Frame the larger moons on first selection; a repeat uses normal focus.
       const view = systemViews.get(objectId);
-      if (!view && systemViewHosts.has(objectId)) throw new Error(`System view candidates for ${objectId} are not loaded; navigation awaits loadSystemViews first.`);
+      if (!view && systemViewHosts.has(objectId)) throw new Error(`System view candidates for ${objectId} are not loaded; navigation awaits loadSystemView first.`);
       const systemRadius = systemRadii.get(objectId);
       if (view) return systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget),
         systemOverviewDistance(frame.bodyRadiusM, systemRadius ?? frame.bodyRadiusM, optics), stellarSystems.has(objectId), SYSTEM_RANGES.get(objectId));

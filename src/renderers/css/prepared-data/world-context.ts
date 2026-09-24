@@ -41,7 +41,7 @@ export interface PreparedContextBody extends PreparedContextPoint {
   /** A placed star measured to be bound to another with no measured orbit: its host and the pair's centre of mass. */
   readonly boundTo?: { readonly hostId: string; readonly centerM: PositionM };
   /** The members a system overview frames. The full context also carries its camera candidates; the browser's summary
-   * does not, and reads them from `world-system-views.json` (`parsePreparedSystemViews`) when navigation needs them. */
+   * does not, and reads a system's from `system-views/<id>.json` (`parsePreparedSystemView`) when navigation frames it. */
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates?: readonly PreparedSystemViewCandidate[] };
   readonly orbit?: PreparedContextOrbit;
@@ -158,17 +158,14 @@ function parseSystemView(value: unknown, withCandidates = true): PreparedContext
   const members = { memberIds: Object.freeze(memberIds), memberRadiiM: Object.freeze(memberRadiiM) };
   return Object.freeze(withCandidates ? { ...members, candidates: parseSystemViewCandidates(view.candidates, memberIds.length, memberIds.join(',')) } : members);
 }
-/** `world-system-views.json`: each summary system view's camera candidates, by host id. */
-export function parsePreparedSystemViews(value: unknown, plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>): ReadonlyMap<string, { readonly candidates: readonly PreparedSystemViewCandidate[] }> {
-  const input = record(value, 'system views', ['schema', 'views']);
-  if (input.schema !== 'cssearth-world-system-views@1') throw new TypeError(`Unsupported prepared system views: ${String(input.schema)}.`);
-  const views = record(input.views, 'system views by host');
-  const hosts = new Map([plan.focus, ...plan.bodies].flatMap(body => body.systemView ? [[body.id, body.systemView] as const] : []));
-  if (Object.keys(views).length !== hosts.size) throw new TypeError(`Prepared system views name ${Object.keys(views).length} hosts; the world context has ${hosts.size}.`);
-  return new Map([...hosts].map(([id, view]) => {
-    if (!Object.hasOwn(views, id)) throw new TypeError(`Prepared system views lack ${id}.`);
-    return [id, Object.freeze({ candidates: parseSystemViewCandidates(views[id], view.memberIds.length, id) })] as const;
-  }));
+/** `system-views/<host id>.json`: one system's camera candidates, checked against that host's system view in the summary. */
+export function parsePreparedSystemView(value: unknown, plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>, id: string): { readonly candidates: readonly PreparedSystemViewCandidate[] } {
+  const input = record(value, 'system view', ['schema', 'id', 'candidates']);
+  if (input.schema !== 'cssearth-world-system-view@1') throw new TypeError(`Unsupported prepared system view for ${id}: ${String(input.schema)}.`);
+  if (input.id !== id) throw new TypeError(`Prepared system view for ${id} names ${String(input.id)}.`);
+  const host = [plan.focus, ...plan.bodies].find(body => body.id === id);
+  if (!host?.systemView) throw new TypeError(`The world context has no system view for ${id}.`);
+  return Object.freeze({ candidates: parseSystemViewCandidates(input.candidates, host.systemView.memberIds.length, id) });
 }
 /** Classification views frame prepared bodies by position; members must match those bodies. */
 function parseClassificationViews(value: unknown, bodies: readonly PreparedContextBody[]) {

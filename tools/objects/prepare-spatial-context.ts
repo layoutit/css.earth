@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
@@ -160,13 +160,16 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await writeIfChanged(worldOrbitsPath(options.outputPath), orbits);
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
     { byteLength: orbits.byteLength }))}\n`);
-  // System framing's camera candidates, read after the first body mounts instead of with the summary.
-  await writeIfChanged(worldSystemViewsPath(options.outputPath), `${JSON.stringify(worldSystemViews(prepared))}\n`);
+  // System framing's camera candidates, one file per host, read when navigation frames that system.
+  const directory = worldSystemViewsDirectory(options.outputPath), views = worldSystemViews(prepared), kept = new Set<string>();
+  for (const view of views) { kept.add(`${view.id}.json`); await writeIfChanged(resolve(directory, `${view.id}.json`), `${JSON.stringify(view)}\n`); }
+  for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept.has(name)) await rm(resolve(directory, name));
+  await rm(resolve(dirname(options.outputPath), 'world-system-views.json'), { force: true });
 }
 
-/** `world-context.json` → `world-system-views.json`, beside it. */
-export function worldSystemViewsPath(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-system-views.json');
+/** `world-context.json` → `system-views/`, beside it: `<host id>.json` per system. */
+export function worldSystemViewsDirectory(outputPath: string): string {
+  return resolve(dirname(outputPath), 'system-views');
 }
 
 /** `world-context.json` → `world-orbits.bin`, beside it. */

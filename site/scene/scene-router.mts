@@ -183,7 +183,7 @@ export function createSceneRouter({
         // The body comes first: on a cold page the world's layers (sky, stars, volume, markers) load after the
         // detail mounts and connect to it. Only an arrival the world owns, a focus or overview, waits for them.
         if (replacement || worldOwnsArrival()) {
-          const contextual = await session.wait(Promise.all([world.ensure(), ready.registry.loadSystemViews()]));
+          const contextual = await session.wait(Promise.all([world.ensure(), ready.registry.loadSystemView(objectId)]));
           if (contextual.cancelled || !scenes.isCurrent(session)) return;
         }
       }
@@ -212,9 +212,9 @@ export function createSceneRouter({
         if (!scenes.isCurrent(session)) return;
         publication.publish();
       }
-      const { registry: { loadSystemViews, systemViewsLoaded }, activation } = ready;
-      // The world and system views load once the body is ready, so its textures have the connection to themselves.
-      if (!systemViewsLoaded()) void loadSystemViews().catch(report);
+      const { registry: { loadSystemView, systemViewLoaded }, activation } = ready;
+      // The world and this system's view load once the body is ready, so its textures have the connection to themselves.
+      if (!systemViewLoaded(objectId)) void loadSystemView(objectId).catch(report);
       if (world.current) world.connect(session);
       else void world.ensure().then(() => {
         if (scenes.isCurrent(session)) { world.connect(session); publishSelection(); }
@@ -297,10 +297,10 @@ export function createSceneRouter({
   function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
     if (destroyed) return Promise.resolve(false);
     if (!context) return ensureContext().then(() => navigate(id, intent));
-    const { registry: { loadSystemViews, systemViewsLoaded, resolveNavigation }, navigation: routes, selection: current, objects } = context;
-    // System framing reads its prepared candidates; they load after the first body, so a very early click waits for them.
-    if (intent.kind !== 'feature' && !systemViewsLoaded()) return loadSystemViews().then(() => navigate(id, intent));
+    const { registry: { loadSystemView, systemViewLoaded, resolveNavigation }, navigation: routes, selection: current, objects } = context;
     if (intent.kind === 'focus' && scenes.current) id = objectId;
+    // System framing reads the target's prepared candidates, fetched when a navigation first frames that system.
+    if (intent.kind !== 'feature' && !systemViewLoaded(id)) return loadSystemView(id).then(() => navigate(id, intent));
     if (!routes.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);

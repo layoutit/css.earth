@@ -17,9 +17,9 @@ import { createWorldContextPlanner } from './world-context/world-context-planner
 import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from './world-context/context-scale.js';
 import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { labelImportance } from '../labels/universe-label-policy.js';
-import { SYSTEM_RANGES, SYSTEM_VIEWS, loadSystemViews, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
+import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../../objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../../objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
 
 // The production publisher only accepts encoded frames. Tests run the actual
 // planner inline and supply that same protocol without starting a browser worker.
