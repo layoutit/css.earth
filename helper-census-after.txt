@@ -1,0 +1,30 @@
+== dot
+  1 const dot = (a: Vec3, b: Vec3) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2] const degrees = (radians: number) => radians / RAD_PER_DEG
+  1 const dot = (a: Vec3, b: Vec3): number => a[0] * b[0] + a[1] * b[1] + a[2] * b[2] 
+  1 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, v, i) => s + v * b[i], 0);
+  1 const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2] export const cross = (a: readonly number[], b: readonly number[]) => [
+  1 const dot = from[axis];
+  1 const dot = dot4(from, to), sign = dot < 0 ? -1 : 1;
+  1 function dot(left: readonly number[], right: readonly number[]): number { return left.reduce((sum, value, index) => sum + value * right[index], 0); }
+  1 function dot(a: Vector3, b: Vector3) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+  1 const dot = matrix[a * 4] * matrix[b * 4] + matrix[a * 4 + 1] * matrix[b * 4 + 1] + matrix[a * 4 + 2] * matrix[b * 4 + 2];
+  1 const dot = axis[0] * n[0] + axis[1] * n[1] + axis[2] * n[2];
+  1 function dot(a:Vector3, b:Vector3) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+  1 const dot = !isPreparedCluster(object) && !isPreparedNebula(object) ? document.createElement('span') : null;
+  1 function dot(matrix: readonly number[], offset: number, point: VolumeVector): number { return matrix[offset]! * point[0] + matrix[offset + 1]! * point[1] + matrix[offset 
+  1 const dot = (p: Pixel, color: string) => { const [x, y] = pos(p); return `<circle cx="${x}" cy="${y}" r="2" fill="${color}"/>`; };
+  1 function dot(a: readonly number[], b: readonly number[]) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+== clamp
+  6 function clamp(value: number, minimum: number, maximum: number) { return Math.max(minimum, Math.min(maximum, value)); }
+  2 function clamp(value: number, minimum: number, maximum: number): number { return Math.max(minimum, Math.min(maximum, value)); }
+  1 const clamp = ({ radiusPx, luminance }: { radiusPx: number; luminance: number }) => anchor ? { radius: Math.max(photometry.minimumRadiusPx, radiusPx), luminance: Math.max
+  1 const clamp = (value: number) => Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
+  1 function clamp(value: number): number { return Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0; }
+  1 const clamp = (value: number, low=0, high=1) => Math.max(low, Math.min(high,value));
+  1 const clamp = (v: number, low: number, high: number) => Math.max(low, Math.min(high, Math.round(v)));
+== isRecord
+  2 function isRecord(value: unknown): value is Record<string, unknown> { return value !== null && typeof value === 'object' && !Array.isArray(value); }
+  1 const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
+  1 function isRecord(value: unknown): value is Record<string, unknown> { return typeof value === 'object' && value !== null && !Array.isArray(value); }
+  1 function isRecord(value: unknown): value is Record<string, unknown> { return typeof value === 'object' && value !== null && !isArray(value); }
+  1 const isRecord = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !isArray(value);

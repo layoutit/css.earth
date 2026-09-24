@@ -1,0 +1,24 @@
+✖ a midpoint inside a request does not prove that the entire exposure fits
+✖ each archived-camera mosaic frame verifies its original source closure before decoding
+✖ every registered object has publishable reader text, and its published copies are current
+✖ exact UTC request edges agree with their Julian dates
+✖ failing tests:
+✖ mercury: serialized activation bank matches its descriptor and tree
+✖ prose, nominal optics, sampling and unpinned measurements cannot satisfy any resolution requirement
+✖ publication binds the question and selected program to current map bytes
+✖ publication establishes input kind only from a current qualified artifact with matching input bytes
+✖ publication refuses a different estimator even when its band overlaps
+✖ publication refuses a map observation that omits its exact mode or program
+✖ publication refuses changed bytes, changed meaning and a selection absent from the map
+✖ publication resolves mode-level uncertainty against the map measured resolution and time
+✖ publication resolves the original wavelength request from the map measurement
+✖ tools/nebula/application/objects.test.ts
+✖ tools/objects/operations-acquisition.test.ts
+✖ tools/objects/operations-assemble.test.ts
+✖ tools/objects/prepare-lighting-bank.test.ts
+✖ tools/objects/prepare-spatial-context.test.ts
+✖ tools/objects/surface-features/discovery.test.ts
+✖ tools/objects/surface-features/landmarks.test.ts
+✖ tools/objects/surface-features/natural-earth.test.ts
+✖ tools/objects/surface-features/surface-features.test.ts
+✖ tools/objects/world-navigation.test.ts

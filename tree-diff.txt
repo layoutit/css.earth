@@ -1,0 +1,32 @@
+2a3
+>     Solar-corona electron density [sun-cor1-density] /sun/?dataset=cor1-density
+544,546d544
+<   Epsilon Indi system [system:eps-indi-ba] -
+<     Epsilon Indi Ba [eps-indi-ba] /eps-indi-ba/
+<     Epsilon Indi Bb [eps-indi-bb] /eps-indi-bb/
+549a548,549
+>     Epsilon Indi Ba [eps-indi-ba] /eps-indi-ba/
+>     Epsilon Indi Bb [eps-indi-bb] /eps-indi-bb/
+585a586
+>       Beta Pictoris debris disc [beta-pictoris-disc] /beta-pictoris/?dataset=debris-disc
+694a696
+>       PDS 70 dust ring [pds-70-disc] /pds-70/?dataset=dust-ring
+730a733,735
+>   Kepler-16 system [system:kepler-16-a] -
+>     Kepler-16 A [kepler-16-a] /kepler-16-a/
+>     Kepler-16 (AB) b [kepler-16ab-b] /kepler-16ab-b/
+749a755
+>     HD 181327 debris ring [hd-181327-disc] /hd-181327/?dataset=debris-ring
+753d758
+<   Kepler-16 A [kepler-16-a] /kepler-16-a/
+756a762
+>     Betelgeuse circumstellar volumes [betelgeuse-shell] /betelgeuse/?dataset=matisse
+769a776,777
+>   Omega Centauri (NGC 5139) [omega-centauri] /sun/?focus=omega-centauri focus=omega-centauri
+>   Sagittarius A* [sgr-a-star] /sgr-a-star/
+779,783d786
+< Other [other] -
+<   Kepler-16 (AB) b [kepler-16ab-b] /kepler-16ab-b/
+<   Beta Pictoris debris disc [beta-pictoris-disc] -
+<   Omega Centauri (NGC 5139) [omega-centauri] /sun/?focus=omega-centauri focus=omega-centauri
+<   Sagittarius A* [sgr-a-star] /sgr-a-star/
