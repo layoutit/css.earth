@@ -30,7 +30,13 @@
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
  * `radius` and `mass` may be "gaia-flame": the Gaia DR3 FLAME value of the same source, an archive product. `gravity` defaults to
  * log g from the mass and radius. `radialVelocity` is needed only when Gaia DR3 has none. Every cited value names its source and a
- * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records). */
+ * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records; ADS links are cited by
+ * bibcode; any other page by its address).
+ *
+ * `text` ({ card, introduction, locator }) is drafted reader text cited to the paper, as `--from-archive` writes it; without it the
+ * card and introduction stay marked for a person. `notes` are sentences for the README's "Not shown" list. A planet may carry
+ * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" lens) or
+ * `photometry` (three-band flux densities for the band-colour lens); planet-lenses.mts. */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '../observation/disc-band-color.mts';
 
@@ -77,7 +83,6 @@ export type OrbitSpec =
   | { readonly whereistheplanet: string; readonly measurements: string; readonly measurementsSource: string; readonly body?: number; readonly source: string; readonly url: string }
   | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string }
   | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: 'periastron' | 'inferior-conjunction'; readonly source: string; readonly url: string };
-/** A body on a hosted orbit: a planet (Jupiter units) or a companion star (solar units). */
 /** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" lens (planet-lenses.mts). */
 export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
 /** Published flux densities in three infrared bands for the band-colour lens of an imaged planet (planet-lenses.mts): red, green,
@@ -87,6 +92,7 @@ export interface PhotometrySpec {
   readonly bands: readonly [{ readonly band: string; readonly wavelengthMicrometres: number; readonly value: number; readonly error: number }, { readonly band: string; readonly wavelengthMicrometres: number; readonly value: number; readonly error: number }, { readonly band: string; readonly wavelengthMicrometres: number; readonly value: number; readonly error: number }];
   readonly displayRange: readonly [number, number]; readonly displayRangeSource: string;
 }
+/** A body on a hosted orbit: a planet (Jupiter units) or a companion star (solar units). */
 export interface HostedSpec {
   readonly kind: 'planet' | 'companion'; readonly id: string; readonly name: string; readonly description: string; readonly order?: number;
   readonly paper: { readonly url: string; readonly credit: string };
@@ -206,14 +212,6 @@ export function parseObjectSpecs(value: unknown): { readonly stars: StarSpec[]; 
   const repeated = ids.filter((id, i) => ids.indexOf(id) !== i);
   if (repeated.length) throw new TypeError(`Object ids repeat: ${repeated.join(', ')}.`);
   return { stars, additions };
-}
-
-export function parseStarSpecs(value: unknown): StarSpec[] {
-  const stars = isRecord(value) ? requireArray(value.stars, 'stars') : requireArray(value, 'star specs');
-  const specs = stars.map(parseStarSpec), ids = specs.flatMap(spec => [spec.id, ...spec.planets.map(p => p.id), ...spec.companions.map(c => c.id)]);
-  const repeated = ids.filter((id, i) => ids.indexOf(id) !== i);
-  if (repeated.length) throw new TypeError(`Object ids repeat: ${repeated.join(', ')}.`);
-  return specs;
 }
 
 /** `--photometry entries.json`: a list of { id, photometry } for planets already in the tree. */
