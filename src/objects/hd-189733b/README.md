@@ -24,7 +24,11 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 
 **Navigation marker.** From a distance the planet is its map seen from the host star, an orthographic dayside disc centred on the substellar point, rendered by [author.mts](../../../tools/objects/source-authoring/hd-189733/author.mts) (`--check` recomputes it).
 
+**Illustration lens.** NASA's artist's concept of HD 189733b: the map its [Eyes on Exoplanets](https://eyes.nasa.gov/apps/exo/) app wraps around the planet ([`HD_189733_b.jpg`](https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HD_189733_b.jpg), 2,048 × 1,024, named in the app's texture table), credited NASA/JPL-Caltech. NASA says each planet in the app shows "an artist's concept of what it might look like" ([tutorial](https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/)); the file carries no credit or date of its own, and NASA does not say how it was made. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in the map was observed. Preparation resizes it unchanged onto the sphere with its left edge at 0° longitude ([`equirectangular-illustration`](../../../tools/objects/observation/interpret.mts)), so its longitudes are arbitrary. It is a second lens: MIRI stays the default. It is listed in the package's illustration lenses, so it never counts as imagery. The planet is drawn self-luminous, so the map is shown evenly bright, without its star's shading, as the MIRI lens is. NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+
 ## Evidence
+
+- Run of 2026-09-24: `node tools/prepare/prepare-object.mts` added the Illustration lens; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../tools/objects/observation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the lens opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
 
 Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-189733b` prepared the package.
 
@@ -44,5 +48,7 @@ Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-1897
 - **Brightness temperature, not temperature.** Each value is the temperature of a blackbody that would give the observed flux at 8 µm, against a PHOENIX model of the star.
 - **Other maps of the same planet are not shown.** The deposit's SPARTA-reduction map (`output_S.npy`), earlier Spitzer eclipse maps and this project's map from raw exposures are in the [investigation ledger](investigations.json).
 - **Assumptions of the frame.** Tidal locking and a pole on the orbit normal are assumed. The orbit's position angle on the sky is not measured by transits; it is set at 0 as a display convention. The planet is a sphere.
+
+- **The Illustration lens is art, not data.** Its colours, clouds and terrain are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

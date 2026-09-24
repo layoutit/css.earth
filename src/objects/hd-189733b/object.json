@@ -30,6 +30,11 @@
               "id": "temperature",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
@@ -98,6 +103,9 @@
       }
     },
     "catalog": {
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "HD 189733b",
       "classification": "exoplanet",
       "color": "#c6427c",

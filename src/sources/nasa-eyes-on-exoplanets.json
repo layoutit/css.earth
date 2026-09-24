@@ -1,0 +1,88 @@
+{
+  "id": "nasa-eyes-on-exoplanets",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "Eyes on Exoplanets planet maps",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://eyes.nasa.gov/apps/exo/",
+      "label": "Eyes on Exoplanets"
+    },
+    {
+      "role": "archive",
+      "url": "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/",
+      "label": "NASA Science tutorial"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "label": "NASA images and media usage guidelines"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-189733b/source/manifest.json",
+      "locator": "/inputs/7"
+    },
+    {
+      "path": "src/objects/gj-504-b/source/manifest.json",
+      "locator": "/inputs/7"
+    },
+    {
+      "path": "src/objects/kepler-452b/source/manifest.json",
+      "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/trappist-1b/source/manifest.json",
+      "locator": "/inputs/9"
+    },
+    {
+      "path": "src/objects/trappist-1c/source/manifest.json",
+      "locator": "/inputs/9"
+    },
+    {
+      "path": "src/objects/trappist-1d/source/manifest.json",
+      "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/trappist-1e/source/manifest.json",
+      "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/trappist-1f/source/manifest.json",
+      "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/trappist-1g/source/manifest.json",
+      "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/trappist-1h/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech",
+      "scope": "Eyes on Exoplanets and the planet maps it wraps around its 3D planets.",
+      "evidence": "Credit line on the NASA Science Eyes on Exoplanets tutorial, checked 2026-09-24. The map files carry no credit or date of their own."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA content is generally not subject to copyright in the United States; NASA is acknowledged as the source. Terms: https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "scope": "The planet maps.",
+      "evidence": "NASA images and media usage guidelines, checked 2026-09-24."
+    },
+    {
+      "kind": "limitation",
+      "text": "Artist's concepts. NASA says each planet in Eyes on Exoplanets shows an artist's concept of what it might look like; no telescope resolves these planets, and the maps' longitudes are arbitrary.",
+      "scope": "Every map used as an illustration lens.",
+      "evidence": "NASA Science tutorial, checked 2026-09-24; see each object README."
+    }
+  ],
+  "publisher": "NASA Jet Propulsion Laboratory"
+}

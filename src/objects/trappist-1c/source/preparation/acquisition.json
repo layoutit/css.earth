@@ -18,6 +18,15 @@
       ],
       "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml",
       "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=137"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "illustration/TRAPPIST-1_c.jpg",
+      "url": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_c.jpg"
     }
   ]
 }

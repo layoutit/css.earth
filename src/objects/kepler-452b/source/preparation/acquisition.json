@@ -1,4 +1,14 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": []
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "illustration/Kepler-452_b.jpg",
+      "url": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/Kepler-452_b.jpg"
+    }
+  ]
 }

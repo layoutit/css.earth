@@ -5,6 +5,8 @@ import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicPr
 // Dependency bindings for the shared preparers. These follow acquisition paths
 // and recipe operations, never factsheet links, publisher names, or UI credits.
 // Unknown capabilities remain explicit gaps rather than receiving invented edges.
+/** An artist's surface (a model's base-colour texture or a published global map): shown unchanged, never an observation. */
+const illustration = (plan: Record<string, unknown>) => ['glb-base-color', 'equirectangular-illustration'].includes(String(maybeRecord(plan.science)?.kind));
 export function provenanceProducts({id, recipes, manifest: inputManifest, lenses: inputLenses, assets: inputAssets, geographic, runtimeUrls = []}: {
   id: string; recipes: ReadonlyMap<string, ProvenanceRecipeSource>; manifest: unknown; lenses?: unknown; assets?: unknown; geographic?: GeographicProvenance; runtimeUrls?: readonly string[];
 }) {
@@ -80,9 +82,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
         : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         inputRoles: frames ? {} : { [text(plan.source)]: { role: 'appearance', evidence: `Raster source at /surfaces/${index}/source.` } },
-        ...(maybeRecord(plan.science)?.kind === 'glb-base-color' ? { observationAttribution: 'none' as const } : {}),
+        ...(illustration(plan) ? { observationAttribution: 'none' as const } : {}),
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
-          ...(maybeRecord(plan.science)?.kind === 'glb-base-color' ? { kind: 'illustrative-model', resolvedSurfaceObservation: false } : {}),
+          ...(illustration(plan) ? { kind: 'illustrative-model', resolvedSurfaceObservation: false } : {}),
           ...(controlledDetail ? { controlledPhotographicDetail: controlledDetail, originalIllumination:true } : {}),
           ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),

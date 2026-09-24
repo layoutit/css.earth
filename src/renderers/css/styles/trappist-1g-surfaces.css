@@ -29,6 +29,12 @@
 .object-stage[data-object-id="trappist-1g"] .polycss-scene s.trappist-1g-polar {
   background-image: url("/scenes/trappist-1g/trappist-1g-poles-shape@2x.webp") !important;
 }
+.object-stage[data-object-id="trappist-1g"][data-lens="illustration"] .polycss-scene s:not(.trappist-1g-polar) {
+  background-image: url("/scenes/trappist-1g/trappist-1g-surface-illustration@2x.webp") !important;
+}
+.object-stage[data-object-id="trappist-1g"][data-lens="illustration"] .polycss-scene s.trappist-1g-polar {
+  background-image: url("/scenes/trappist-1g/trappist-1g-poles-illustration@2x.webp") !important;
+}
 /* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
 .object-stage[data-object-id="trappist-1g"] .trappist-1g-fixed-material {
   top: 50%;

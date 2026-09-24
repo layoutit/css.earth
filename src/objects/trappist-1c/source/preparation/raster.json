@@ -64,6 +64,16 @@
         "title": "Bare-rock model · from our JWST eclipse depth",
         "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
       }
+    },
+    {
+      "id": "illustration",
+      "output": "trappist-1c-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1c-lens-{id}.webp",
+      "source": "illustration/TRAPPIST-1_c.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "equirectangular-illustration"
+      }
     }
   ],
   "emission": {

@@ -32,6 +32,11 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -96,6 +101,9 @@
       }
     },
     "catalog": {
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "TRAPPIST-1e",
       "classification": "exoplanet",
       "color": "#9a9a9a",

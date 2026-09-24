@@ -34,6 +34,16 @@
           "source": "the colour lens of kepler-452 (src/objects/kepler-452/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "illustration",
+      "output": "kepler-452b-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-452b-lens-{id}.webp",
+      "source": "illustration/Kepler-452_b.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "equirectangular-illustration"
+      }
     }
   ],
   "lighting": {

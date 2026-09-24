@@ -65,6 +65,21 @@
         },
         "falseColor": true,
         "notes": "GJ 504 b's brightness in three infrared bands as one colour: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko j), so the colour shows its band ratios; brightness is not compared across planets at different distances. Not a natural colour; nobody has resolved its disc."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "NASA's artist's concept of GJ 504 b, from Eyes on Exoplanets; not an observation.",
+        "thumbnail": "gj-504-b-lens-illustration.webp",
+        "surface": "gj-504-b-surface-illustration@2x.webp",
+        "poles": "gj-504-b-poles-illustration@2x.webp",
+        "source": {
+          "id": "gj-504-b-nasa-eyes-illustration",
+          "path": "../manifest.json",
+          "url": "https://eyes.nasa.gov/apps/exo/"
+        },
+        "falseColor": false,
+        "notes": "NASA's artist's concept of GJ 504 b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
       }
     ]
   },

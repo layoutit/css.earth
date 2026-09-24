@@ -134,6 +134,32 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "hd-189733b-nasa-eyes-illustration",
+      "path": "illustration/HD_189733_b.jpg",
+      "origin": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HD_189733_b.jpg",
+      "productId": "HD_189733_b.jpg",
+      "title": "Eyes on Exoplanets artist's concept map of HD 189733b",
+      "sourceUrl": "https://eyes.nasa.gov/apps/exo/",
+      "credit": "NASA/JPL-Caltech (Eyes on Exoplanets)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original JPEG from the Eyes on Exoplanets app, unchanged; the app's texture table names it as HD 189733b's map.",
+      "redistribution": "NASA media; an artist's concept, not an observation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-eyes-on-exoplanets",
+            "role": "material",
+            "evidence": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HD_189733_b.jpg"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
