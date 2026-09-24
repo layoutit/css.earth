@@ -1,5 +1,5 @@
 import type {CameraPlan} from '../../src/renderers/css/navigation/types.ts';
-import type {PreparedProjectiveTextureLeaf} from '../../src/renderers/css/prepared-data/projective-layout.ts';
+import type {PreparedProjectiveTextureLeaf} from './projective-layout.mts';
 import type {Decoder} from '../objects/terrestrial-layers/source-records.mts';
 export interface ReplayRings {
  leaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];

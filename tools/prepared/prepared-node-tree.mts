@@ -1,11 +1,11 @@
 import type { PreparedTree } from '../../src/renderers/css/rendering/prepared-presentation.ts';
-import type { PreparedProjectiveLayout, PreparedProjectiveTextureLeaf } from '../../src/renderers/css/prepared-data/projective-layout.ts';
+import type { PreparedProjectiveLayout, PreparedProjectiveTextureLeaf } from './projective-layout.mts';
 type PreparedProperty = PreparedTree['properties'][number];
 type StyleValues = { [K in keyof CSSStyleDeclaration as CSSStyleDeclaration[K] extends string ? K : never]: string };
 export type PreparedDeclarations = ReturnType<typeof preparedDeclarations>;
 export interface PreparedNode { tag: string; className: string | null; style: PreparedDeclarations; attributes: Record<string, string>; children: PreparedNode[]; parent: PreparedNode | null; }
 
-import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scalePreparedPixelLengths } from "../../src/renderers/css/dist/preparation.js";
+import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scalePreparedPixelLengths } from "./projective-layout.mts";
 
 const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 // Preparation only: these inputs are the checked-in CSS declaration records,

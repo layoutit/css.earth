@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
-import { createPreparedTitle, OBJECT_TITLE_STANDARD, serializePreparedTitleModule } from "./prepared-title.mts";
+import { createPreparedTitleLayout, OBJECT_TITLE_STANDARD } from "./prepared-title.mts";
 
 const source = Object.freeze({
   label: "Planet",
@@ -19,14 +19,9 @@ const source = Object.freeze({
   baseline: 29,
 });
 
-test("prepares and serializes a source-bound title deterministically", () => {
-  const prepared = createPreparedTitle(source, {
-    generator: "adapter/tools/prepare-title.mjs",
-  });
-  const first = serializePreparedTitleModule("PREPARED_OBJECT_TITLE", prepared);
-  const second = serializePreparedTitleModule("PREPARED_OBJECT_TITLE", prepared);
-  assert.equal(first, second);
-  assert.match(first, /adapter\/tools\/prepare-title\.mjs/u);
+test("prepares a source-bound title layout deterministically", () => {
+  const prepared = createPreparedTitleLayout(source);
+  assert.deepEqual(createPreparedTitleLayout(source), prepared);
   assert.deepEqual(
     {
       renderViewBox: prepared.renderViewBox,
@@ -44,15 +39,13 @@ test("prepares and serializes a source-bound title deterministically", () => {
 });
 
 test("normalizes divergent title sources to the Saturn scale and baseline", () => {
-  const prepared = createPreparedTitle({
+  const prepared = createPreparedTitleLayout({
     ...source,
     label: "Earth",
     viewBox: "0 0 66 30",
     width: 65.277734,
     height: 20.63,
     baseline: 23,
-  }, {
-    generator: "adapter/tools/prepare-title.mjs",
   });
   assert.deepEqual(
     {
@@ -68,16 +61,10 @@ test("normalizes divergent title sources to the Saturn scale and baseline", () =
       renderPathOffsetY: 6,
     },
   );
-  assert.equal(prepared.baseline + prepared.renderPathOffsetY,
+  assert.equal(23 + prepared.renderPathOffsetY,
     OBJECT_TITLE_STANDARD.baseline);
 });
 
 test("rejects unexplained or unsafe title vectors", () => {
-  assert.throws(() => createPreparedTitle({ ...source, path: "<text>Planet</text>" }, {
-    generator: "prepare-title.mjs",
-  }), /vector/u);
-  assert.throws(() => Reflect.apply(serializePreparedTitleModule, undefined, ["unsafe-name", {
-    ...source,
-    generator: "prepare-title.mjs",
-  }]), /export name/u);
+  assert.throws(() => createPreparedTitleLayout({ ...source, path: "<text>Planet</text>" }), /vector/u);
 });
