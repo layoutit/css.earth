@@ -58,31 +58,35 @@ export function createPreparedWheelZoomControls({
   const requestFrame = (callback: FrameRequestCallback) => frameClock.request(guard(callback), 'input');
   const cancelFrame = (id: number) => frameClock.cancel(id);
   let enabled = true;
-  let frame: number | null = null;
-  let direction = 0;
-  let expiresAt = 0;
-  let previousTimestamp: number | null = null;
-  let targetDistance: number | null = null;
   let inputKind: WheelInputKind | null = null;
   let previousInputTimestamp = -Infinity;
   let events = 0;
   let frames = 0;
-  // The rate the camera is actually travelling at, in log units per millisecond,
-  // and the glide it is released into. Both are signed: negative approaches.
-  // Seeding from the camera rather than from the commanded target keeps the
-  // release continuous: a short gesture commands far more than it has run.
-  let travelRate = 0;
-  let gliding = false, glideRate = 0, releasedRate = 0, glidePrevious = 0;
+  /**
+   * What the wheel is doing to the camera: nothing, a dolly toward a commanded distance until its interval expires,
+   * or a glide on the rate the released gesture was travelling at. Rates are log units per millisecond, signed:
+   * negative approaches.
+   */
+  type Motion =
+    | { readonly kind: 'idle' }
+    | { readonly kind: 'dolly'; frame: number; previousTimestamp: number | null; targetDistance: number; expiresAt: number }
+    | { readonly kind: 'glide'; frame: number | null; rate: number; readonly releasedRate: number; previous: number };
+  const IDLE: Motion = Object.freeze({ kind: 'idle' });
+  let motion: Motion = IDLE;
+  // The gesture behind the motion: its direction and the rate the camera actually travelled at. Seeding the glide
+  // from the camera rather than from the commanded target keeps the release continuous: a short gesture commands
+  // far more than it has run. Both outlive a dolly that ends without a glide (trackpad input does not glide), so a
+  // wheel notch that follows in the same direction releases from the speed the camera was already travelling at;
+  // a reversal or a stop resets them.
+  let direction = 0, travelRate = 0;
 
+  const cancelMotion = () => {
+    if (motion.kind !== 'idle' && motion.frame !== null) cancelFrame(motion.frame);
+    motion = IDLE;
+  };
   const stop = () => {
-    if (frame !== null) cancelFrame(frame);
-    frame = null;
-    previousTimestamp = null;
+    cancelMotion();
     direction = 0;
-    targetDistance = null;
-    gliding = false;
-    glideRate = 0;
-    releasedRate = 0;
     travelRate = 0;
   };
   // The camera's own recent speed, averaged over the frames it just travelled.
@@ -95,90 +99,85 @@ export function createPreparedWheelZoomControls({
   // commands log-distance, so the glide is exponential in the gesture's own
   // units; a bound, a new event or a stop ends it at once.
   const glide = (timestamp: number) => {
-    if (glidePolicy === null) { frame = null; gliding = false; return; }
-    const step = Math.max(0, timestamp - glidePrevious);
-    glidePrevious = timestamp;
-    glideRate *= Math.max(0, 1 - step / (glidePolicy.dampingSeconds * 1000));
-    if (step > 0 && glideRate !== 0) {
-      const distance = camera.state.distance * Math.exp(glideRate * step);
+    const current = motion;
+    if (current.kind !== 'glide') return;
+    if (glidePolicy === null) { motion = IDLE; return; }
+    const step = Math.max(0, timestamp - current.previous);
+    current.previous = timestamp;
+    current.rate *= Math.max(0, 1 - step / (glidePolicy.dampingSeconds * 1000));
+    if (step > 0 && current.rate !== 0) {
+      const distance = camera.state.distance * Math.exp(current.rate * step);
       rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance });
-      if (disposed) return;
+      if (disposed || motion !== current) return;
       frames += 1;
       // A bound refused the step: the glide has nowhere left to travel.
-      if (camera.state.distance !== distance) glideRate = 0;
+      if (camera.state.distance !== distance) current.rate = 0;
     }
     // A glide ends when its own motion stops being visible, not when it falls to
     // a share of whatever rate released it: an eye reads distance change per frame,
     // so the absolute floor is what keeps the strongest gestures from snapping and
     // the gentlest from drifting invisibly. The ratio bounds an extreme fling.
     const stopRate = Math.max(glidePolicy.stopLogRatePerSecond / 1000,
-      Math.abs(releasedRate) * glidePolicy.stopRateRatio);
-    if (Math.abs(glideRate) > stopRate) {
-      frame = requestFrame(glide);
+      Math.abs(current.releasedRate) * glidePolicy.stopRateRatio);
+    if (Math.abs(current.rate) > stopRate) {
+      current.frame = requestFrame(glide);
     } else {
-      frame = null;
-      previousTimestamp = null;
+      motion = IDLE;
       direction = 0;
-      gliding = false;
-      glideRate = 0;
     }
   };
   const animate = (timestamp: number) => {
-    if (previousTimestamp === null) previousTimestamp = timestamp;
-    const remaining = expiresAt - previousTimestamp;
+    const dolly = motion;
+    if (dolly.kind !== 'dolly') return;
+    if (dolly.previousTimestamp === null) dolly.previousTimestamp = timestamp;
+    const previousTimestamp = dolly.previousTimestamp;
+    const remaining = dolly.expiresAt - previousTimestamp;
     const elapsed = Math.max(0, Math.min(
       timestamp - previousTimestamp,
-      expiresAt - previousTimestamp,
+      dolly.expiresAt - previousTimestamp,
     ));
     // The commanded interval rarely ends on a frame boundary. Whatever is left
     // of this frame belongs to the glide, so the released gesture keeps moving
     // at its own rate instead of showing one short step at the handoff.
     const leftover = Math.max(0, timestamp - previousTimestamp - elapsed);
-    previousTimestamp = timestamp;
+    dolly.previousTimestamp = timestamp;
     if (elapsed > 0 && direction !== 0) {
       // The dolly: the outstanding log-distance, spread over the interval.
       const previousDistance = camera.state.distance;
       const distance = previousDistance * Math.exp(
-        Math.log(targetDistance! / previousDistance) * Math.min(1, elapsed / remaining));
+        Math.log(dolly.targetDistance / previousDistance) * Math.min(1, elapsed / remaining));
       rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance });
-      if (disposed) return;
+      if (disposed || motion !== dolly) return;
       frames += 1;
       recordTravel(camera.state.distance / previousDistance, elapsed);
       // A clamped dolly drops what the bound refused.
-      if (camera.state.distance !== distance) targetDistance = camera.state.distance;
+      if (camera.state.distance !== distance) dolly.targetDistance = camera.state.distance;
     }
-    const continuing = timestamp < expiresAt && camera.state.distance !== targetDistance;
+    const continuing = timestamp < dolly.expiresAt && camera.state.distance !== dolly.targetDistance;
     if (continuing) {
-      frame = requestFrame(animate);
+      dolly.frame = requestFrame(animate);
       return;
     }
     // The commanded interval is spent. A gesture still carrying rate releases
     // into its glide instead of stopping dead at the target.
     if (glidePolicy !== null && direction !== 0 && travelRate !== 0 &&
         (inputKind === null || glideKinds.includes(inputKind))) {
-      releasedRate = travelRate * glidePolicy.gain;
-      glideRate = releasedRate;
-      glidePrevious = timestamp - leftover;
+      const releasedRate = travelRate * glidePolicy.gain;
       travelRate = 0;
-      gliding = true;
+      const gliding: Extract<Motion, { kind: 'glide' }> = { kind: 'glide', frame: null, rate: releasedRate, releasedRate, previous: timestamp - leftover };
+      motion = gliding;
       if (leftover > 0) { glide(timestamp); return; }
-      frame = requestFrame(glide);
+      gliding.frame = requestFrame(glide);
       return;
     }
-    frame = null;
-    previousTimestamp = null;
+    motion = IDLE;
   };
   const onWheel = (event: WheelEvent) => {
     if (!enabled || !Number.isFinite(event.deltaY) || event.deltaY === 0 || event.defaultPrevented) return;
     event.preventDefault();
     // A new gesture owns the camera: any glide ends where it stands.
-    if (gliding) {
-      if (frame !== null) cancelFrame(frame);
-      frame = null;
-      gliding = false;
-      glideRate = 0;
-      releasedRate = 0;
-      previousTimestamp = null;
+    if (motion.kind === 'glide') {
+      cancelMotion();
       travelRate = 0;
     }
     const nextDirection = -Math.sign(event.deltaY);
@@ -188,17 +187,16 @@ export function createPreparedWheelZoomControls({
       ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
     inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
     previousInputTimestamp = event.timeStamp;
-    const origin = frame !== null && direction === nextDirection ? targetDistance! : camera.state.distance;
+    const origin = motion.kind === 'dolly' && direction === nextDirection ? motion.targetDistance : camera.state.distance;
     const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER
       : event.ctrlKey ? runtimePolicy.WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER : speedMultiplier;
-    targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
+    const targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
     direction = nextDirection;
-    expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
+    const expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
     events += 1;
-    if (frame === null) {
-      previousTimestamp = event.timeStamp;
-      frame = requestFrame(animate);
-    }
+    // A running dolly takes the new command; otherwise a dolly starts from this event.
+    if (motion.kind === 'dolly') { motion.targetDistance = targetDistance; motion.expiresAt = expiresAt; }
+    else motion = { kind: 'dolly', frame: requestFrame(animate), previousTimestamp: event.timeStamp, targetDistance, expiresAt };
   };
   const guardedWheel = guard(onWheel);
   inputSurface.addEventListener("wheel", guardedWheel, { passive:false });
@@ -217,7 +215,7 @@ export function createPreparedWheelZoomControls({
       if (!enabled) stop();
     },
     destroy,
-    stats: () => Object.freeze({ active:frame !== null, gliding, events, frames, inputKind,
+    stats: () => Object.freeze({ active: motion.kind !== 'idle', gliding: motion.kind === 'glide', events, frames, inputKind,
       model: "perspective-dolly" }),
   });
 }

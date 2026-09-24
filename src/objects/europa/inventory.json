@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "europa-coarse-ice@2x.webp",
+      "bytes": 40214,
+      "sha256": "3445290322e40e6b3f5bf745b69757e140bc89366377d989bf63137491a16e30"
+    },
+    {
+      "location": "public",
       "filename": "europa-elevation@2x.webp",
       "bytes": 46540,
       "sha256": "6b1a48692cdfb54ff8fac2b2def291ca7fdc0974998067eb84958e15652cfdfa"
@@ -21,9 +27,21 @@
     },
     {
       "location": "public",
+      "filename": "europa-fine-ice@2x.webp",
+      "bytes": 37256,
+      "sha256": "8249b8c3fbcc7deec23cf39a11680b84d575abded14da051ca77c7d5670382b0"
+    },
+    {
+      "location": "public",
       "filename": "europa-geology@2x.webp",
       "bytes": 77748,
       "sha256": "a3fd7b9f836f9d4c5e19c5f35da3da1b73fb7cd9974879ca81dae14dc99113a7"
+    },
+    {
+      "location": "public",
+      "filename": "europa-ice-signature@2x.webp",
+      "bytes": 38392,
+      "sha256": "1cb04424881acf1fe3b1bf442ad8fdcb13dedde0320ed372a2a56dba09b2e11e"
     },
     {
       "location": "public",
@@ -69,6 +87,12 @@
     },
     {
       "location": "public",
+      "filename": "europa-poles-coarse-ice@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "location": "public",
       "filename": "europa-poles-elevation@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
@@ -81,9 +105,21 @@
     },
     {
       "location": "public",
+      "filename": "europa-poles-fine-ice@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "location": "public",
       "filename": "europa-poles-geology@2x.webp",
       "bytes": 12962,
       "sha256": "88cb0181282a36a3cc302af263ce148031dde2b24c824535233995645a64723d"
+    },
+    {
+      "location": "public",
+      "filename": "europa-poles-ice-signature@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
     },
     {
       "location": "public",
@@ -382,14 +418,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 540456,
-      "sha256": "828e1bf118ac7ca83d6844fe462df13d882d39e89e4e637ca8bed904c3cf7fe6"
+      "bytes": 527779,
+      "sha256": "21670725181d07bd09a836b030d55c7b9068d3903cd8e6abb30bd30d71afc96d"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 391377,
-      "sha256": "c854aba8b15d9dbb71fce0506bce29117704e92f87dbb56b2ea5526300e24567"
+      "bytes": 378475,
+      "sha256": "efe07a6b56697ff1499eca91e5d2092f9a8ffd5d399a9621bb3f8888705d8da0"
     },
     {
       "location": "prepared",
