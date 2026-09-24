@@ -203,10 +203,10 @@ test('a Planck colour outside sRGB (a cool companion) is shown desaturated and t
 test('the archive draft of a host keeps only its confirmed transiting planets, sorted by period, with the archive temperature where one is measured', async () => {
   const { archiveSpec } = await import('./from-archive.mts');
   const ref = (label: string, bib: string) => `"<a refstr=${label.toUpperCase().replace(/[^A-Z]+/gu, '_')} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
-  const stars = ['pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id',
-    `HD 1 c,HD 1,1,${ref('Two et al. 2020', '2020AJ....1....2T')},${ref('Two et al. 2020', '2020AJ....1....2T')},0.8,0.02,5000,50,0.85,0.03,20.5,2020,Transit,1,c,HD 1,,Gaia DR3 123456789`,
-    `HD 1 b,HD 1,1,${ref('One et al. 2019', '2019AJ....1....1O')},${ref('One et al. 2019', '2019AJ....1....1O')},0.8,0.02,5000,50,0.85,0.03,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789`,
-    `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789`].join('\n');
+  const stars = ['pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum',
+    `HD 1 c,HD 1,1,${ref('Two et al. 2020', '2020AJ....1....2T')},${ref('Two et al. 2020', '2020AJ....1....2T')},0.8,0.02,5000,50,0.85,0.03,20.5,2020,Transit,1,c,HD 1,,Gaia DR3 123456789,0,1`,
+    `HD 1 b,HD 1,1,${ref('One et al. 2019', '2019AJ....1....1O')},${ref('One et al. 2019', '2019AJ....1....1O')},0.8,0.02,5000,50,0.85,0.03,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789,0,1`,
+    `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789,0,1`].join('\n');
   const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim',
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
@@ -285,5 +285,43 @@ test('a refresh regenerates what the tool wrote and keeps what a person wrote', 
     await put('source/content/object.json', { lenses: { controls: [{ id: 'shape' }, { id: 'radial-field-2017' }] } });
     await assert.rejects(mergeRefresh(files, 'x-b', dir), /lenses the tool does not make \(radial-field-2017\)/u);
     await assert.rejects(refreshSpec(dir, ['hand-made']), /not made by new-object/u);
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test('a wide companion is drafted as a placed star of the host\'s system from the three catalogues; a circumbinary host is refused', async () => {
+  const { wideCompanions } = await import('./companions.mts');
+  const { archiveSpec } = await import('./from-archive.mts');
+  const asu = (header: string, row: string) => `#\n# VizieR\n${header}\n${header.split('\t').map(() => ' ').join('\t')}\n${header.split('\t').map(() => '---').join('\t')}\n${row}\n`;
+  const archive: Archive = { async text(url, form) {
+    if (form?.QUERY?.includes('FROM basic')) return 'main_id\n"HD 233731B"';
+    const query = new URL(url).searchParams;
+    if (query.get('-source') === 'J/MNRAS/506/2269/catalog') return query.get('Source1') ? asu('Source1\tSource2\tsepAU\tR', '846946621395854848\t846946625690867328\t747.3\t0.001') : asu('Source1\tSource2\tsepAU\tR', '');
+    if (query.get('-source') === 'IV/39/tic82') return asu('TIC\tTeff\ts_Teff\tRad\ts_Rad\tMass\ts_Mass', '252479261\t3589.0\t157.0\t0.599\t0.018\t0.587\t0.02');
+    throw new Error(`unexpected ${url}`);
+  }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  const { companions, notes } = await wideCompanions(archive, { gaia: '846946621395854848', name: 'HAT-P-22', system: 'HAT-P-22 system' }, () => undefined);
+  assert.deepEqual(notes, []);
+  const star = companions[0]! as { id: string; name: string; system: string; gaia: string; temperature: { value: number; uncertainty: number; source: string }; radius: { value: number }; mass: { value: number }; text: { card: string } };
+  assert.deepEqual([star.id, star.name, star.system, star.gaia, star.temperature.value, star.temperature.uncertainty, star.radius.value, star.mass.value], ['hd-233731b', 'HD 233731B', 'HAT-P-22 system', '846946625690867328', 3589, 157, 0.599, 0.587]);
+  assert.match(star.temperature.source, /TIC 252479261/u);
+  assert.doesNotThrow(() => parseStarSpec(star), 'the draft is a valid star spec');
+  const held = await wideCompanions(archive, { gaia: '846946621395854848', name: 'HAT-P-22', system: 's' }, () => 'hd-233731-b');
+  assert.deepEqual([held.companions.length, /already in the universe as hd-233731-b/u.test(held.notes[0]!)], [0, true]);
+  // A circumbinary host: the pair's orbit is a paper's, so the draft refuses it.
+  const cb = { async text(url: string) { if (decodeURIComponent(url).includes('st_teff')) return 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum\nTOI-1338 b,TOI-1338,1,x,x,1,,5990,,1,,400,2020,Transit,1,b,,,Gaia DR3 1,1,2'; throw new Error('unexpected'); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  await assert.rejects(archiveSpec(cb, 'TOI-1338', { ids: new Set(), names: new Map(), stars: [] }), /circumbinary/u);
+});
+
+test('a hosted body\'s package is written after phase one wrote its astronomy record (a regression #695 introduced)', async () => {
+  const { mkdtemp, mkdir, writeFile, readFile: read, rm } = await import('node:fs/promises'), { tmpdir } = await import('node:os');
+  const { writePackageFiles } = await import('./generate.mts');
+  const dir = await mkdtemp(resolve(tmpdir(), 'cssearth-write-'));
+  try {
+    await mkdir(resolve(dir, 'packages/astronomy/data/bodies'), { recursive: true }); await mkdir(resolve(dir, 'src/sources'), { recursive: true });
+    await writeFile(resolve(dir, 'packages/astronomy/data/bodies/x-b.json'), '{}');
+    const { written } = await writePackageFiles(new Map([['src/objects/x-b/README.md', '# X b\n']]), 'x-b', dir);
+    assert.deepEqual(written, ['src/objects/x-b/README.md']);
+    assert.equal(await read(resolve(dir, 'src/objects/x-b/README.md'), 'utf8'), '# X b\n');
+    await assert.rejects(writePackageFiles(new Map([['src/objects/x-b/README.md', 'again']]), 'x-b', dir), /never overwrites a package/u, 'an existing package still is');
   } finally { await rm(dir, { recursive: true, force: true }); }
 });

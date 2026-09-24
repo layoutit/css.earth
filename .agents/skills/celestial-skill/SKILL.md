@@ -292,7 +292,10 @@ companion stars, starts with `node tools/objects/star-candidates.mts "<SIMBAD id
 only the prose marked `TODO(new-object)`; `--check` runs the chain through the page data on what it wrote, `--bake` the whole chain,
 and `telescope new-object --bake <id>...` bakes objects already in the tree. `--from-archive` also quotes each body's English
 Wikipedia lead, verbatim and cited at its revision under CC BY-SA 4.0 (`tools/objects/new-object/prose.mts`): the sentence naming the body for
-the card and the next for the introduction; a body with no article gets no quote and a note. The generator never writes a sentence of its own. Planets for a star that already exists take a `{ "host": "<id>", "planets": [...] }` entry. A planet's colour comes from what is measured
+the card and the next for the introduction; a body with no article gets no quote and a note. The generator never writes a sentence of its own. Planets for a star that already exists take a `{ "host": "<id>", "planets": [...] }` entry. In a multiple system, `--from-archive` adds each bound wide companion
+(El-Badry et al. 2021, chance alignment below 0.1; TIC v8.2 temperature, radius and mass) as a placed star of the host's system at its own Gaia
+position, as Alpha Centauri B is; companions too close for Gaia to separate are named in a note, and circumbinary hosts are refused (build them
+by hand, as Kepler-16 is: the pair's orbit comes from a paper). A planet's colour comes from what is measured
 (`tools/objects/new-object/planet-lenses.mts`): a dayside brightness temperature in the archive's emission table gives the "Thermal glow" lens,
 otherwise the neutral gray is lit by the host's measured colour; `telescope new-object --thermal <id>...` and `--host-light <id>...` do the
 same for planets already in the tree, then `prepare-object.mts` bakes them. Before imagery work on

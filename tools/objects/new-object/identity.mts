@@ -44,20 +44,28 @@ const normal = (name: string) => name.normalize('NFKD').replace(/[̀-ͯ]/gu, '')
 
 interface Placed { readonly id: string; readonly ra: number; readonly dec: number; readonly epoch: number; readonly pmra: number; readonly pmdec: number }
 /** What the universe already holds: ids, the normalized names of every record, and where every placed star is. */
-export interface Existing { readonly ids: ReadonlySet<string>; readonly names: ReadonlyMap<string, string>; readonly stars: readonly Placed[] }
+export interface Existing { readonly ids: ReadonlySet<string>; readonly names: ReadonlyMap<string, string>; readonly stars: readonly Placed[];
+  /** Placed stars by the Gaia DR3 source their position cites, and every package's system name. */
+  readonly gaia?: ReadonlyMap<string, string>; readonly systems?: ReadonlyMap<string, string> }
 
 export async function existingBodies(root: string): Promise<Existing> {
-  const directory = resolve(root, 'packages/astronomy/data/bodies'), ids = new Set<string>(), names = new Map<string, string>(), stars: Placed[] = [];
+  const directory = resolve(root, 'packages/astronomy/data/bodies'), ids = new Set<string>(), names = new Map<string, string>(), stars: Placed[] = [], gaia = new Map<string, string>(), systems = new Map<string, string>();
   for (const name of await readdir(directory)) {
-    const body = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { id: string; physical?: { name?: string }; star?: Record<string, number> };
+    const body = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { id: string; physical?: { name?: string }; star?: Record<string, number> & { sources?: { position?: string } } };
+    const source = /Gaia DR3 source (\d+)/u.exec(body.star?.sources?.position ?? '')?.[1];
+    if (source) gaia.set(source, body.id);
     ids.add(body.id);
     if (body.physical?.name) names.set(normal(body.physical.name), body.id);
     const s = body.star;
     if (s && Number.isFinite(s.rightAscensionDegrees) && Number.isFinite(s.declinationDegrees))
       stars.push({ id: body.id, ra: s.rightAscensionDegrees!, dec: s.declinationDegrees!, epoch: s.positionEpochJulianYear ?? 2016, pmra: s.properMotionRaMasPerYear ?? 0, pmdec: s.properMotionDecMasPerYear ?? 0 });
   }
-  for (const name of await readdir(resolve(root, 'src/objects'))) ids.add(name);
-  return { ids, names, stars };
+  for (const name of await readdir(resolve(root, 'src/objects'))) {
+    ids.add(name);
+    const system = await readFile(resolve(root, 'src/objects', name, 'object.json'), 'utf8').then(text => (JSON.parse(text) as { properties?: { catalog?: { systemName?: string } } }).properties?.catalog?.systemName, () => undefined);
+    if (system) systems.set(name, system);
+  }
+  return { ids, names, stars, gaia, systems };
 }
 
 /** The placed star within DUPLICATE_ARCSEC of a position, both moved by their proper motions to the new star's epoch. */
