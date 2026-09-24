@@ -83,7 +83,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
       text: { card: `${name} crosses its star every ${short(period, 3)} days and is ${size} across${year}.`,
         introduction: fit(180, `${name} transits ${hostname} every ${short(period, 3)} days and is ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`,
           `${name}: a ${short(period, 3)}-day orbit, ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`),
-        locator: `NASA Exoplanet Archive ps table, default parameter set (pl_refname ${defaultRow.reference}): pl_orbper ${period}, pl_radj ${radius}, pl_bmassj ${mass}`,
+        locator: `NASA Exoplanet Archive ps table, default parameter set (pl_refname ${defaultRow.reference}): pl_orbper ${period}, pl_radj ${radius}, ${assembled.mass.unmeasured ? 'no pl_bmassj in pscomppars' : `pl_bmassj ${mass}`}`,
         ...(quotes ? { quotes } : {}) } } } };
   }));
   for (const result of drafted) { if (result.skip) skipped.push(result.skip); notes.push(...result.note); if (result.found) found.push(result.found); }

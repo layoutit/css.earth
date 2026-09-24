@@ -210,7 +210,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   const orbit = { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000, ascendingNodePositionAngleDegrees: 0, sources: { period: 'p', shape: 's', eccentricity: 'e', phase: 'ph', orientation: 'o' } };
   const cited = { value: 1, source: 's', url: star.paper.url };
   const thermal = { temperatureK: 1400, uncertaintyK: 80, wavelengthMicrometres: 4.5, facility: 'Spitzer IRAC', source: 'Kammer et al. 2018, dayside brightness temperature at 4.5 µm', url: 'https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract', chosen: '1 measured of 1 rows' };
-  const build = async (extra: Record<string, unknown>, mass: typeof cited & { limit?: true } = cited) => {
+  const build = async (extra: Record<string, unknown>, mass: typeof cited & { limit?: true; unmeasured?: true } = cited) => {
     const spec = parseStarSpec({ ...star, planets: [{ id: 'hd-219134b', name: 'HD 219134 b', description: 'A planet.', text: { card: 'A planet.', introduction: 'A planet made from fixtures.', locator: 'fixture' }, paper: star.paper, radius: cited, mass: cited, orbit: { elements: { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000 }, source: 's', url: star.paper.url }, ...extra }] }).planets[0]!;
     const body = { id: spec.id, classification: 'exoplanet', order: 2, physical: { name: spec.name, horizonsCode: null, meanRadiusKm: 71492, gravitationalParameterKm3PerS2: 126686531.9, parent: 'hd-219134' }, physicalNotes: 'n', hostedOrbit: orbit };
     const record = { spec, hostId: 'hd-219134', system: 'HD 219134 system', body, order: 2, orbit, orbitCitation: { text: 's', url: star.paper.url, label: 's' }, radius: cited, mass, documents: new Map<string, string>(), todo: [] };
@@ -230,6 +230,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   assert.match(shape.notes, /takes the colour of hd-219134's light/u);
   // A mass that is only an upper limit is shown as one.
   assert.equal((await build({}, { ...cited, value: 0.12, limit: true })).facts.find(fact => fact.id === 'mass')!.value, 'Under 0.12 Jupiter masses');
+  assert.equal((await build({}, { ...cited, value: 0, unmeasured: true })).facts.find(fact => fact.id === 'mass')!.value, 'Not measured');
 });
 
 test('a planet whose archive mass is only an upper limit gets GM 0, the records\' unpublished value, and the limit in its notes', async () => {
@@ -244,6 +245,10 @@ test('a planet whose archive mass is only an upper limit gets GM 0, the records\
   const record = await hostedRecord(spec.planets[0]!, host, 2, archive, root);
   assert.equal((record.body.physical as { gravitationalParameterKm3PerS2: number }).gravitationalParameterKm3PerS2, 0);
   assert.match(String(record.body.physicalNotes), /No mass is measured: Borucki et al\. 2013 \(2013Sci\.\.\.340\.\.587B\), via the NASA Exoplanet Archive \(https:[^)]+\) gives only an upper limit of 0\.11 Jupiter masses/u);
+  // No mass at all in the composite table: GM 0 as well, and the notes say the mass is not measured.
+  const none = await hostedRecord(spec.planets[0]!, host, 2, { ...archive, async text(url) { return url.includes('pscomppars') ? 'pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n' : archive.text(url); } }, root);
+  assert.deepEqual([(none.body.physical as { gravitationalParameterKm3PerS2: number }).gravitationalParameterKm3PerS2, none.mass.unmeasured], [0, true]);
+  assert.match(String(none.body.physicalNotes), /No mass is measured: the NASA Exoplanet Archive's composite table, which adopts no mass for Kepler-62 f/u);
 });
 
 test('a Planck colour outside sRGB (a cool companion) is shown desaturated and the record says so; one inside keeps its record plain', async () => {

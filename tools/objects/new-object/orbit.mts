@@ -103,7 +103,7 @@ export const keplerRatio = (starMass: number, periodDays: number, starRadius: nu
  * the 1,567 default transiting rows that give all three: 99% fall between 0.49 and 1.59, and the 23 beyond a factor of 2 include
  * a/R* stored in solar radii (ZTF J1828+2308 b, 0.838 for 63) and an a/R* paired with another paper's giant-star radius (K2-11 b). */
 export const KEPLER_AGREEMENT = 2;
-export interface AssembledOrbit { readonly orbit: HostedOrbit; readonly radius: { readonly value: number; readonly row: ArchiveRow }; readonly mass: { readonly value: number; readonly row: ArchiveRow; readonly limit?: true }; readonly rows: readonly ArchiveRow[]; readonly todo?: string }
+export interface AssembledOrbit { readonly orbit: HostedOrbit; readonly radius: { readonly value: number; readonly row: ArchiveRow }; readonly mass: { readonly value: number; readonly row: ArchiveRow; readonly limit?: true; readonly unmeasured?: true }; readonly rows: readonly ArchiveRow[]; readonly todo?: string }
 
 /** A transiting planet's orbit from its archive rows: the chosen row (the default, or the spec's reference) first, and what it
  * lacks from the most recent other row that has it, each value cited to its own row. a/R* missing everywhere is derived from a row's
@@ -163,16 +163,18 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   }
   if (!radius) throw new Error(`${name}: no archive row gives its radius.`);
   // The mass is the one the archive's composite table adopts, so the choice between papers is the archive's, not ours.
-  if (!composite) throw new Error(`${name}: the archive's composite table gives no mass.`);
   // An upper limit is kept as one: the record's GM stays 0, its unpublished value, and the limit is shown as a limit.
   // Only 'M-R relationship' is the archive's own model; 'Msini' (a radial-velocity minimum mass, near the mass for a transiting
   // orbit) and 'Msin(i)/sin(i)' are a paper's measurements (pl_bmassprov).
-  const calculated = composite.provenance === 'M-R relationship' && !composite.limit, minimum = composite.provenance === 'Msini' && !composite.limit;
-  const mass = { value: composite.value, ...(composite.limit ? { limit: true as const } : {}), row: { ...chosen, label: composite.limit ? composite.label : calculated ? `the NASA Exoplanet Archive's calculated value (${composite.provenance}, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement` : minimum ? `${composite.label}, the minimum mass (M sin i) the NASA Exoplanet Archive's composite table adopts` : `${composite.label}, the mass the NASA Exoplanet Archive's composite table adopts`,
+  const calculated = composite?.provenance === 'M-R relationship' && !composite.limit, minimum = composite?.provenance === 'Msini' && !composite.limit;
+  // No mass at all (the composite table adopts none, as for 22 Kepler and K2 planets in the 2026-09-24 sweep): GM stays 0, the
+  // records' unpublished value, and the planet says its mass is not measured.
+  const mass = !composite ? { value: 0, unmeasured: true as const, row: { ...chosen, label: `the NASA Exoplanet Archive's composite table, which adopts no mass for ${name}`, reference: 'NO_MASS', url: COMPOSITE_CALC, bibcode: undefined } as ArchiveRow }
+    : { value: composite.value, ...(composite.limit ? { limit: true as const } : {}), row: { ...chosen, label: composite.limit ? composite.label : calculated ? `the NASA Exoplanet Archive's calculated value (${composite.provenance}, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement` : minimum ? `${composite.label}, the minimum mass (M sin i) the NASA Exoplanet Archive's composite table adopts` : `${composite.label}, the mass the NASA Exoplanet Archive's composite table adopts`,
     reference: calculated ? 'CALCULATED_VALUE' : composite.label, url: calculated ? COMPOSITE_CALC : composite.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', bibcode: calculated ? undefined : composite.bibcode } as ArchiveRow };
   // The records' own density rule (packages/astronomy bodies.test.ts): between 0.1 and 8.5 g/cm^3 unless a brown dwarf.
   const density = mass.value * 1.89813e30 / (4 / 3 * Math.PI * (radius.value * 7.1492e9) ** 3);
-  if (!composite.limit && (!(density > 0.1) || (density > 8.5 && mass.value < 13))) throw new Error(`${name}: ${mass.row.label.split(',')[0]}'s mass ${mass.value} Jupiter masses in ${radius.value} Jupiter radii is ${density.toFixed(1)} g/cm^3, outside what the records accept.`);
+  if (composite && !composite.limit && (!(density > 0.1) || (density > 8.5 && mass.value < 13))) throw new Error(`${name}: ${mass.row.label.split(',')[0]}'s mass ${mass.value} Jupiter masses in ${radius.value} Jupiter radii is ${density.toFixed(1)} g/cm^3, outside what the records accept.`);
   const todo = e > 0 ? `omega ${shape!.periastron} degrees is taken as ${shape!.label} gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e ${e}) about the line of sight` : undefined;
   return { rows, radius, mass, ...(todo ? { todo } : {}), orbit: {
     periodDays: period!.value, semiMajorAxisStellarRadii: ratio.value, inclinationDegrees: inclination.value, eccentricity: e,
