@@ -77,31 +77,6 @@
       }
     },
     {
-      "id": "geonames-readme-geonames-txt",
-      "path": "places/README.geonames.txt",
-      "origin": "https://download.geonames.org/export/dump/readme.txt",
-      "credit": "GeoNames",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://creativecommons.org/licenses/by/4.0/"
-      ],
-      "acquisition": "Checked-in GeoNames snapshot acquired 2026-09-04; daily upstream files may change",
-      "redistribution": "CC-BY-4.0 with GeoNames attribution",
-      "consumers": [
-        "places"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-geonames-readme-geonames-txt",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-earth-navigation-globe",
       "path": "earth-navigation.jpg",
       "origin": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg",

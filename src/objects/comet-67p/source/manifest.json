@@ -341,31 +341,6 @@
       }
     },
     {
-      "id": "virtis-bibliography",
-      "path": "science/ref.cat",
-      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/catalog/ref.cat",
-      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
-      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
-      "licenseEvidence": [
-        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
-      ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
-      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
-      "consumers": [
-        "virtis-science"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-comet-67p-virtis-bibliography",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "virtis-shap5-info-asc",
       "path": "science/shap5-info.asc",
       "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC",

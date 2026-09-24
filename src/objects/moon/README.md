@@ -119,7 +119,7 @@ PDS3 float map. Its label identifies observations from 7 November 2009 to
 the label's projection origin is 0°. Preparation reads the actual offsets,
 then rotates the output's left edge to 180° E to retain the existing feature registration.
 
-[LROC's native README](source/surface/WAC_GLOBAL_README.TXT) documents the
+[LROC's native README](https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT) documents the
 GLD100/LOLA projection surfaces, LOLA/GRAIL ephemeris, camera calibration and
 Hapke photometric correction. See [Speyerer et al. (2011), abstract 2387](https://www.lpi.usra.edu/meetings/lpsc2011/pdf/2387.pdf)
 and [Wagner et al. (2015), abstract 1473](https://www.hou.usra.edu/meetings/lpsc2015/pdf/1473.pdf).

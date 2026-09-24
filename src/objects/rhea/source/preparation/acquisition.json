@@ -151,14 +151,6 @@
     },
     {
       "kind": "download",
-      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
-      "path": "vims/document/information_file.xml",
-      "groups": [
-        "cassini-atlas"
-      ]
-    },
-    {
-      "kind": "download",
       "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
       "path": "vims/data/vims_wavelengths_ir.tab",
       "groups": [

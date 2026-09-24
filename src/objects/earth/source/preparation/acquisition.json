@@ -105,18 +105,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "places/README.geonames.txt",
-      "url": "https://download.geonames.org/export/dump/readme.txt",
-      "headers": {
-        "accept": "*/*",
-        "user-agent": "cssEarth Earth source acquisition"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "earth-navigation.jpg",
       "url": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg",
       "headers": {

@@ -4,6 +4,6 @@
   "declinationDegrees": 39.37,
   "displayMeridianDegrees": 0,
   "phase": "arbitrary-display-phase",
-  "source": "reference/dataset.cat",
+  "source": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/catalog/dataset.cat",
   "qualification": "The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
 }

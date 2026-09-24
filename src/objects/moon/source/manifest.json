@@ -1011,31 +1011,6 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
-    },
-    {
-      "id": "lroc-wac-global-readme",
-      "path": "surface/WAC_GLOBAL_README.TXT",
-      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT",
-      "credit": "NASA/GSFC/Arizona State University",
-      "license": "Public domain PDS archive data",
-      "licenseEvidence": [
-        "https://lroc.im-ldi.com/about/terms"
-      ],
-      "acquisition": "Preserved native product README.",
-      "redistribution": "Original PDS documentation retained.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "lroc-wac-global-v1-3",
-            "role": "reference",
-            "evidence": "Native release README: map projection, photographic correction and product citation."
-          }
-        ]
-      }
     }
   ]
 }

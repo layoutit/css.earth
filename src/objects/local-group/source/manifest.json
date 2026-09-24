@@ -66,27 +66,6 @@
       "license": "CC0-1.0; see lvdb/LICENSE"
     },
     {
-      "id": "mcconnachie-table1-2019",
-      "path": "src/objects/local-group/source/mcconnachie/table1_OCT2019.pdf",
-      "origin": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
-      "sourceUrl": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
-      "title": "McConnachie (2012), AJ 144,4, DOI10.1088/0004-6256/144/1/4; author October2019 Table1 update.",
-      "credit": "Alan W. McConnachie; CDS",
-      "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "publication-mcconnachie2012aj-144-4m",
-            "role": "material",
-            "evidence": "src/objects/local-group/source/provenance.json"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "Reuse terms unresolved; see NOTICE.md."
-    },
-    {
       "id": "mcconnachie-table1-text",
       "path": "src/objects/local-group/source/mcconnachie/table1_OCT2019.txt",
       "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
@@ -134,27 +113,6 @@
       "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/table1.dat",
       "sourceUrl": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/table1.dat",
       "title": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table.",
-      "credit": "Alan W. McConnachie; CDS",
-      "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "publication-mcconnachie2012aj-144-4m",
-            "role": "material",
-            "evidence": "src/objects/local-group/source/provenance.json"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "Reuse terms unresolved; see NOTICE.md."
-    },
-    {
-      "id": "mcconnachie-field-definitions",
-      "path": "src/objects/local-group/source/mcconnachie/ReadMe",
-      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/ReadMe",
-      "sourceUrl": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/ReadMe",
-      "title": "Author/CDS original catalogue byte-column descriptions; n_Name meanings G/A/L/N.",
       "credit": "Alan W. McConnachie; CDS",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
       "sourceBinding": {

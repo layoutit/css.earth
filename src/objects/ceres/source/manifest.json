@@ -591,34 +591,6 @@
       }
     },
     {
-      "id": "dawn-vir-ceres-mosaics-catalog",
-      "path": "science/vir-mosaic/VIR_DDR_CERES_MOSAICS_DS.CAT",
-      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/CATALOG/VIR_DDR_CERES_MOSAICS_DS.CAT",
-      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
-      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
-      "licenseEvidence": [
-        "https://pds.nasa.gov/datastandards/documents/policy/",
-        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
-      ],
-      "purpose": "PDS3 data set catalog: citation, band-depth definition, photometric correction, projection, and the statement that the artifact-removal procedure was not applied.",
-      "acquisition": "Retrieve the exact archived file from the PDS Small Bodies Node volume DWNCVIR_2, pinned 2026-09-21.",
-      "redistribution": "Small native PDS3 catalog retained in Git byte for byte.",
-      "consumers": [
-        "clay-band",
-        "ammonium-band"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
-            "role": "material",
-            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
-          }
-        ]
-      }
-    },
-    {
       "id": "ceres-vir-reduction-receipt",
       "path": "science/vir-reduction/receipt.json",
       "origin": "Repository-generated receipt of tools/objects/dawn/vir-mosaic.mts",

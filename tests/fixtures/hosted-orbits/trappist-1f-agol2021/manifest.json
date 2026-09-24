@@ -11,19 +11,10 @@
   "records": [
     {
       "id": "agol2021-kepler-transit-convention",
-      "path": "agol2021-kepler-transit.jl",
       "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/src/NbodyGradient/src/kepler_init.jl",
       "upstreamPath": "src/NbodyGradient/src/kepler_init.jl",
-      "upstreamExpectedBytes": 9197,
-      "locator": "First kepler_init overload: element decoding through mean anomaly; upstream lines 24-54",
-      "extraction": "The executable statements are exact UTF-8 lines from the immutable upstream file; two leading comments identify the excerpt locally."
-    },
-    {
-      "id": "upstream-license",
-      "path": "LICENSE",
-      "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/LICENSE",
-      "extraction": "Unmodified upstream license."
+      "locator": "First kepler_init overload: element decoding through mean anomaly; upstream lines 24-54"
     }
   ],
-  "license": "MIT license in the pinned author repository; factual parameter extraction and short source excerpts retained with attribution."
+  "license": "MIT license in the author repository; this fixture quotes factual parameters and cites the initializer by URL."
 }

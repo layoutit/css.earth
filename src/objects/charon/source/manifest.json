@@ -869,18 +869,6 @@
   ],
   "documents": [
     {
-      "path": "observations/dataset.cat",
-      "purpose": "PDS3 data set catalog for the New Horizons Pluto-system composition maps: archive identity, producer and citation text.",
-      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/",
-      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
-      "license": "Public NASA scientific mission data; retain archive and author attribution",
-      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
-      "licenseEvidence": [
-        "https://pds.nasa.gov/datastandards/citing/",
-        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf"
-      ]
-    },
-    {
       "path": "presentation/minimap.json"
     },
     {

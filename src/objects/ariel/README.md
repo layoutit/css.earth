@@ -4,7 +4,7 @@
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Ariel uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images and revised cartographic control. The original [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) is retained in [the retained author notes](source/observations/aaReadMe_uranian_MAP_DEM.txt).
+Ariel uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images and revised cartographic control. The original [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) documents the release.
 
 **Monochrome** displays the source-corrected Voyager mosaic. [Schenk and Moore (2020)](https://doi.org/10.1098/rsta.2020.0102) describes lunar-Lambert normalization of the best-resolved images to reduce planetary shading; the result approximates normal reflectance and is not a true albedo map. Ariel's best mosaic has approximately 1 km image samples, with two smeared terminator images replaced by desmeared versions supplied by Stryk and Stooke. Cast shadows, camera marks, seams, and unequal local resolution remain. No additional photometric recovery is claimed.
 

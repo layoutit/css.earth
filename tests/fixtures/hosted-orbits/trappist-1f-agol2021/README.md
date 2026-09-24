@@ -4,13 +4,11 @@ This fixture binds the static hosted-orbit record to the TRAPPIST-1
 transit-timing analysis by [Agol et al. (2021)](https://doi.org/10.3847/PSJ/abd022).
 `qualification.json` quotes the planet-f values it uses from Table 2 (period,
 transit epoch, eccentricity vector) and Table 5 (semi-major axis and
-inclination), citing the paper by table. The Julia excerpt is the author's
-two-body initialization that defines Table 2's transit epoch: in its
+inclination), citing the paper by table. The author's two-body initializer,
+[`kepler_init.jl` lines 24-54](https://github.com/ericagol/TRAPPIST1_Spitzer/blob/0a417ab77425a016eed2b492efa8a556631ac152/src/NbodyGradient/src/kepler_init.jl#L24-L54)
+at the commit `manifest.json` records, defines Table 2's transit epoch: in its
 plane-parallel convention, inferior conjunction has
 `f = 3*pi/2 - omega`.
-
-`manifest.json` records the excerpt's upstream file at the author-repository
-commit. The author's MIT notice is retained in `LICENSE`.
 The source convention is checked by `tools/objects/hosted-orbit-source.test.mts`.
 `tools/oracles/astronomy/hosted-eccentric.py` reads `qualification.json` and
 regenerates six independent CSPICE states in the shared oracle fixture.

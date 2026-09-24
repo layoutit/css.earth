@@ -63,7 +63,6 @@
       "credit": "Robert Gaskell; NASA PDS Small Bodies Node",
       "license": "Public PDS scientific data release; cite Gaskell and the PDS archive.",
       "licenseEvidence": [
-        "shape/README.txt",
         "https://sbn.psi.edu/pds/resource/phoebeshape.html"
       ],
       "acquisition": "Download the original PDS4 vertex-facet table.",
@@ -715,9 +714,6 @@
     },
     {
       "path": "presentation/minimap.json"
-    },
-    {
-      "path": "shape/README.txt"
     },
     {
       "path": "shape/icqmodel.asc"

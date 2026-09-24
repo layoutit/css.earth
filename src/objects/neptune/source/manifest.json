@@ -112,30 +112,6 @@
       }
     },
     {
-      "id": "hubble-opal-neptune-readme",
-      "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
-      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
-      "credit": "NASA, ESA, OPAL team, and STScI",
-      "license": "MAST public science data terms",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked plain-text observing record with source credit",
-      "consumers": [
-        "scene",
-        "lenses"
-      ],
-      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-neptune-hubble-opal-neptune-readme",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "ras-oxford-neptune-true-colour-reference",
       "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
       "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",

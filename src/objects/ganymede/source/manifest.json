@@ -1007,23 +1007,6 @@
       "purpose": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3086016464 and SHA-256 verified."
     },
     {
-      "id": "usgs-sim3237-sim3237-ganymede-readme-txt",
-      "path": "science/geology-sim3237/sim3237_Ganymede_readme.txt",
-      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
-      "credit": "Collins et al. (2013), USGS, NASA/JPL",
-      "license": "Public domain USGS data",
-      "licenseEvidence": [
-        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
-      ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1096571830 and SHA-256 verified.",
-      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
-      "consumers": [
-        "geology-validation"
-      ],
-      "archiveMember": "Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt",
-      "purpose": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1096571830 and SHA-256 verified."
-    },
-    {
       "id": "sim3237-archive-index-json",
       "path": "science/geology-sim3237/archive-index.json",
       "origin": "https://pubs.usgs.gov/sim/3237/",

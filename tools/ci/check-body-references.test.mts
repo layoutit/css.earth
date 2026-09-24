@@ -20,16 +20,15 @@ test('an acquisition step must restore a declared file', () => {
   assert.deepEqual(problems(findings), ['restores reference/sbdb.json']);
 });
 
-test('a pinned paper, catalogue ReadMe or bundle description fails; a named data table passes', () => {
-  const manifest = { inputs: [{ path: 'reference/vernazza-2021.pdf' }], documents: [{ path: 'reference/ReadMe.AcuA.txt' }, { path: 'reference/bundle_description.txt' }] };
+test('a pinned paper or archive document fails; our own Markdown notes pass', () => {
+  const documents = ['reference/vernazza-2021.pdf', 'reference/ReadMe.AcuA.txt', 'reference/bundle_description.txt', 'survey/overview.docx',
+    'vega/tvs_proc.doc', 'tex/table2.tex', 'lvdb/lvdb.bib', 'reference/dataset.cat', 'observations/aaReadMe_uranian_MAP_DEM.txt',
+    'surface/WAC_GLOBAL_README.TXT', 'reference/pds-bundle_description.txt', 'ReadMe', 'vims/document/information_file.xml'];
+  const manifest = { inputs: documents.map(path => ({ path })), documents: [{ path: 'geology/README.md' }] };
   const acquisition = { operations: [{ kind: 'download', path: 'reference/paper.PDF', url: 'https://example.org/paper.pdf' }] };
-  const committed = new Set(['reference/ReadMe.AcuA.txt', 'reference/bundle_description.txt', 'reference/vernazza-2021.pdf']);
-  assert.deepEqual(problems(bodySourceFindings('iris', manifest, acquisition, committed)), [
-    'inputs pins reference/vernazza-2021.pdf', 'documents pins reference/ReadMe.AcuA.txt', 'documents pins reference/bundle_description.txt',
-    'downloads reference/paper.PDF']);
-  const table = { inputs: [{ path: 'mcconnachie/table1_OCT2019.pdf' }] };
-  assert.deepEqual(bodySourceFindings('local-group', table, null, new Set(['mcconnachie/table1_OCT2019.pdf'])), []);
-  assert.equal(bodySourceFindings('m31', table, null, new Set(['mcconnachie/table1_OCT2019.pdf'])).length, 1, 'the exception names one body and path');
+  const committed = new Set([...documents, 'geology/README.md']);
+  assert.deepEqual(problems(bodySourceFindings('iris', manifest, acquisition, committed)),
+    [...documents.map(path => `inputs pins ${path}`), 'downloads reference/paper.PDF']);
 });
 
 test('a body file byte-identical to a shared bank file fails, and a named consumed copy passes', () => {
