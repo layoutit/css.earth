@@ -152,7 +152,7 @@ test('image-layer deliveries retain authored documents and every layer in matchi
   try {
     await mkdir(resolve(fixture, 'src/objects'), { recursive: true });
     for (const id of ['m31', 'm33']) await mkdir(resolve(fixture, 'src/objects', id));
-    for (const path of ['tools', 'site', ...['m31', 'm33'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
+    for (const path of ['tools', 'site', 'packages', ...['m31', 'm33'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
       await symlink(resolve(root, path), resolve(fixture, path));
     }
     const entries = await prepareVolumeProvenance({ root: fixture });
