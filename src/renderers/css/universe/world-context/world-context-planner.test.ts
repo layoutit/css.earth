@@ -535,6 +535,9 @@ test('a placed orbitless body keeps its marker beyond the system fade, like the 
   // 300 pc above the Sun-Betelgeuse midpoint, looking down -z: both locators are in frame and the
   // system fade has run its course (opacity 0), so only locators publish.
   const placedM = plan.bodies[star - 1]!.positionM;
+  // Only the anchor and the placed body compete for captions: the catalogue's other stars would otherwise spend the shared
+  // label limit, and which of them are in frame here depends on how many stars the catalogue holds, not on this behaviour.
+  input.bodies.forEach((body, index) => { body.labelHidden = index !== 0 && index !== star; });
   input.anchorOnly = true; input.world.pose.positionM = [placedM[0] / 2, placedM[1] / 2, placedM[2] / 2 + 300 * 3.085677581491367e16];
   const packet = calculate(input);
   const anchor = packet.projectedBodies.find(body => body.index === 0)!, placed = packet.projectedBodies.find(body => body.index === star)!;

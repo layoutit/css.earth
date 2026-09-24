@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-wwt-fits-associations@1",
+  "associations": [
+    {
+      "target": "m31",
+      "catalog": "phat-fits.json",
+      "imageset": "PHAT-f475w",
+      "evidence": "https://archive.stsci.edu/hlsp/phat"
+    },
+    {
+      "target": "m31",
+      "catalog": "phat-fits.json",
+      "imageset": "PHAT-f814w",
+      "evidence": "https://archive.stsci.edu/hlsp/phat"
+    }
+  ]
+}

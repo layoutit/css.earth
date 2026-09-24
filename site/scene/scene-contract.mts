@@ -48,7 +48,7 @@ export function requireObjectControls(content: unknown, objectId = "unknown"): S
   }
   const names = settings.map((setting) => objectLike(setting) ? setting.name : undefined);
   if (names.some((name) => typeof name !== "string" || !name ||
-      ["motion", "heliosphere", "illustrationModels", "surfaceLabels", "minimap", "threeDStars"].includes(name)) ||
+      ["motion", "heliosphere", "illustrationModels", "surfaceLabels", "threeDStars"].includes(name)) ||
       new Set(names).size !== names.length ||
       settings.some((setting) => !objectLike(setting) ||
         (setting.kind !== "toggle" && setting.kind !== "cycle") ||

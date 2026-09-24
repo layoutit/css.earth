@@ -3,9 +3,18 @@
 ## Sources and appearance
 
 [The artwork library](../site/source/facilities/render-library.json) pins the original
-models, textures, credits and prepared image hashes. The 21 model thumbnails use
-the same fixed camera and neutral white studio lights with the source materials unchanged. These
-are illustrations, not reconstructed mission illumination. Eight published
+models, textures and credits. The 21 model thumbnails use the same fixed camera
+and lights with the source materials unchanged: one hard, slightly warm sun key
+that casts shadows, a faint blue fill standing in for light from a planet, and a
+rim light that separates edges from the dark sidebar. Reflections see a black sky
+with a small sun disc and a dim blue glow below, not a lit room. The earlier
+white studio setup lit every side evenly and made the models read flat. These
+are illustrations, not reconstructed mission illumination.
+
+![Each model's old studio-lit thumbnail beside its sunlit one](images/facility-thumbnails-sunlit.webp)
+
+Mostly black models such as Galileo and Rosetta come out darker than before,
+because the studio fill no longer lifts their shadow sides. Eight published
 photographs and three official artwork images retain their existing pixels.
 
 Three.js runs only during preparation. The application loads committed WebP
@@ -49,7 +58,7 @@ around the inward facing axis with lighting fixed. Inspection modes cannot
 publish images; save the chosen quaternion in the pose record before regeneration.
 
 The tool requires installed Chrome, and macOS `usdcat` plus `unzip` for Voyager.
-It verifies every source hash and byte count before use. The output includes
+It checks every source file's byte count against the library before use. The output includes
 before images, PNG masters, candidate WebPs, a candidate library and a report of
 materials, geometry counts, camera/model poses and omitted components. Inspect each
 image for incomplete geometry, unreadable materials and clipping before writing.

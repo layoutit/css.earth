@@ -74,7 +74,7 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
   let metricsReads = 0;
   const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface:nativeElement(surface),
     trackballMetrics:() => { metricsReads += 1; return { ...trackball }; },
-    rotate:value => publications.push(value) });
+    rotate:value => { publications.push(value); } });
   const tick = (time: number) => { const callbacks=[...pending.values()]; pending.clear(); callbacks.forEach(callback=>callback(time)); };
   const history = createDragHistory();
   let yaw = 0, previousX = 330;
@@ -259,7 +259,7 @@ test("sky orbit keeps screen axes through reversals, limb crossings and release"
   let reads = 0;
   const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface: nativeElement(surface),
     trackballMetrics: () => { reads++; return completeTrackball({ ...trackball }); },
-    rotate: value => publications.push(value) });
+    rotate: value => { publications.push(value); } });
   const emit = (type: string, x: number, y: number, timeStamp: number) => surface.dispatch(type, { clientX: x, clientY: y, timeStamp });
   const close = (actual: readonly number[], expected: readonly number[]) => actual.forEach((value, i) =>
     assert.ok(Math.abs(value - expected[i]) < 1e-12, `${actual} differs from ${expected}`));
@@ -342,7 +342,7 @@ test("wheel takes over a flight without leaving a camera callback", (t) => {
       surfaceRadius:275, focalLength:900,
       viewportWidth: 693, sceneMatrix:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
     surfaceFlyToState: () => ({ zoom:1, minimumZoom:0.5, maximumZoom:4 }),
-    rotate: value => publications.push(value),
+    rotate: value => { publications.push(value); },
   });
   const tick = (time: number) => {
     const callbacks = [...pending.values()]; pending.clear();

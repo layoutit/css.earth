@@ -14,13 +14,14 @@ test('source discovery reports missing headers without fetching every manifest U
   await mkdir(source,{recursive:true});
   await writeFile(resolve(source,'local.img'),label('^IMAGE = 32'));
   await writeFile(resolve(source,'manifest.json'),JSON.stringify({inputs:[
-   {path:'local.img',origin:'https://example.org/local.img'},
+   {path:'local.img',origin:'https://example.org/local.img',sourceProcessing:[{name:'SQUEEZE',version:'3.0',evidence:'https://example.org/recipe'}]},
    ...Array.from({length:12},(_,index)=>({path:`missing-${index}.img`,origin:`https://example.org/missing-${index}.img`}))
   ]}));
   globalThis.fetch=(async()=>{fetches++;throw new Error('Unexpected remote header fetch.');}) as typeof fetch;
   const issues:SourceIntakeIssue[]=[],products=await intakeSources(root,'test',[],issues,{fetchRemote:false});
   assert.equal(fetches,0);
   assert.equal(products.length,1);
+  assert.deepEqual(products[0]!.files[0]!.sourceProcessing,[{name:'SQUEEZE',version:'3.0',evidence:'https://example.org/recipe'}]);
   assert.equal(issues.length,12);
   assert.ok(issues.every(issue=>issue.state==='unavailable'&&/local source file or a previously cached header/u.test(issue.reason)));
  } finally {globalThis.fetch=originalFetch;await rm(root,{recursive:true,force:true});}

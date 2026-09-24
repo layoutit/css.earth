@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { writeProductRecord } from '../product-record.mts';
-import { matchProductSoftware, searchAscl } from './ascl.mts';
+import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
 import { main, parseCli } from './cli.mts';
 
 const rows={
@@ -12,6 +12,7 @@ const rows={
   2:{ascl_id:'1304.002',title:'Astropy: Community Python library for astronomy',site_list:[]},
   3:{ascl_id:'2502.014',title:'spaceKLIP: JWST coronagraphy pipeline',site_list:[]},
   4:{ascl_id:'bad',title:'Invalid',site_list:[]},
+  5:{ascl_id:'2601.001',title:'SQUEEZE: Interferometric imaging',site_list:[]},
 };
 const response=async()=>new Response(JSON.stringify(rows),{headers:{'content-type':'application/json'}});
 
@@ -29,10 +30,12 @@ test('verified product software matches exact ASCL alias and never invents use',
   const root=await mkdtemp(resolve(tmpdir(),'ascl-product-'));
   try{
     const file=resolve(root,'data.txt'),receipt=resolve(root,'data.product.json');await writeFile(file,'science');
-    await writeProductRecord(receipt,{telescope:'fixture',stage:'fixture',inputs:[],parameters:{},software:[
+    await writeProductRecord(receipt,{telescope:'fixture',stage:'source-qualification',inputs:[],parameters:{observation:{files:[{role:'science',sourceProcessing:[{name:'SQUEEZE',version:'3.0',evidence:'https://example.org/pinned-recipe'}]}]}},software:[
       {name:'Astroquery',version:'0.4.11'},{name:'Astropy',version:'7.0'},{name:'cssEarth archive source',version:'fixture'}]},[{path:'data.txt',file}]);
     const result=await matchProductSoftware(receipt,response);
     assert.deepEqual(result.software?.map(item=>item.matches.map(match=>match.id)),[['1708.004'],['1304.002'],[]]);
+    assert.deepEqual(result.sourceProcessing?.map(item=>item.matches.map(match=>match.id)),[['2601.001']]);
+    assert.match(formatAscl(result),/Source-declared earlier processing/u);
     assert.match(result.caveat,/does not verify the software version/u);
     await writeFile(file,'altered');
     await assert.rejects(matchProductSoftware(receipt,response),/pins changed/u);

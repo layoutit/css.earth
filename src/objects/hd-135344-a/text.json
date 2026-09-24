@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-135344-a",
+  "card": {
+    "text": "Young hot star 135 parsecs away with a newly found giant planet on a Solar System scale orbit.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2507-06206",
+        "url": "https://arxiv.org/abs/2507.06206",
+        "label": "Stolker et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "HD 135344 Ab is one of the youngest directly imaged planets that has fully formed and orbits on Solar System scales"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 135344 A is a young A0 star whose companion star B hosts a well-known spiral disc. Its own dust is gone, which let SPHERE and GRAVITY find its planet Ab.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2507-06206",
+        "url": "https://arxiv.org/abs/2507.06206",
+        "label": "Stolker et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "best known for the protoplanetary disk around the secondary star"
+      },
+      {
+        "catalogueId": "arxiv-2507-06206",
+        "url": "https://arxiv.org/abs/2507.06206",
+        "label": "Stolker et al. 2025",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "The circumstellar environment of the A0-type primary star, on the other hand, is already depleted"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}

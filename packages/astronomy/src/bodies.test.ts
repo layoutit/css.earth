@@ -86,9 +86,12 @@ describe('the body table', () => {
       }
       // Mean density between 0.1 and 8.5 g/cm^3 covers the inflated hot Jupiter WASP-76b (0.17 +/- 0.02, Ehrenreich
       // et al. 2020, Extended Data Table 1), porous Helene and Atlas through Mercury, and catches a GM or radius entered
-      // in the wrong unit, which is the failure this table is most exposed to.
-      expect(densityGramsPerCm3).toBeGreaterThan(0.1)
-      expect(densityGramsPerCm3).toBeLessThan(8.5)
+      // in the wrong unit, which is the failure this table is most exposed to. Above the deuterium-burning limit, about 13 Jupiter
+      // masses, a companion is a brown dwarf: an old one keeps a Jupiter-sized radius at tens of Jupiter masses, so its density
+      // reaches tens of g/cm^3 (GJ 504 b, 25 Jupiter masses in 0.92 Jupiter radii, Baburaj et al. 2026: about 40).
+      const brownDwarf = data.gravitationalParameterKm3PerS2 > 13 * bodyData('jupiter').gravitationalParameterKm3PerS2
+      expect(densityGramsPerCm3, id).toBeGreaterThan(0.1)
+      expect(densityGramsPerCm3, id).toBeLessThan(brownDwarf ? 150 : 8.5)
     }
   })
 

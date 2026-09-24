@@ -15,7 +15,7 @@ import { bindWorldCameraPicking } from './world-camera-picking.js';
 import { hitsProjectedBody } from './world-camera-hit.js';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
-import { flyToPreparedFocus } from './prepared-focus.js';
+import { prepareFocusFlight } from './prepared-focus.js';
 import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & ReturnType<PerspectiveDolly['state']>;
@@ -93,6 +93,8 @@ export function createRetainedCubicSkyOrbit({
     throw new TypeError("Shared retained cubic-sky orbit is invalid.");
   }
   const lifetime = createSceneLifetime();
+  const flightScope = new AbortController();
+  lifetime.onDispose(() => flightScope.abort());
   let constructing = true;
   const retireFailure = (error: unknown) => {
     if (constructing) throw error;
@@ -182,7 +184,7 @@ export function createRetainedCubicSkyOrbit({
     } catch (error) { retireFailure(error); throw error; }
   };
   const mobileQuery = matchMedia(runtimePolicy.MOBILE_VIEWPORT_QUERY);
-  const publishCameraDelta = (delta: CameraDelta) => { camera.rotate(delta); publish(); };
+  const publishCameraDelta = (delta: CameraDelta, signal?: AbortSignal) => { camera.rotate(delta); return publish(signal); };
   const surfaceHitTest = (clientX: number, clientY: number) => {
     if (preparedSurfaceHitTest && stage.dataset.lod !== 'marker' && stage.dataset.lod !== 'billboard') return preparedSurfaceHitTest(clientX, clientY);
     const body = projected?.body;
@@ -237,6 +239,17 @@ export function createRetainedCubicSkyOrbit({
   const initialResponsiveZoom = responsiveFit.zoom;
   const windowTarget = stage.ownerDocument.defaultView;
   if (!windowTarget) throw new Error("Orbit document has no window.");
+  const flyCamera = (sample: (progress: number) => void, durationMilliseconds: number, signal?: AbortSignal) => {
+    if (lifetime.disposed || signal?.aborted) return Promise.resolve({ completed: false });
+    interactionStarts++; onInteractionStart();
+    const flight = cameraMotion.fly({ windowTarget, durationMilliseconds,
+      signal: signal ? AbortSignal.any([flightScope.signal, signal]) : flightScope.signal,
+      inputSpeedUp: runtimePolicy.FLIGHT_WHEEL_SPEEDUP,
+      sample(progress, signal) { sample(progress); return publish(signal); },
+      onFinish: guardNative(() => { interactionEnds++; onInteractionEnd(); }),
+    });
+    return flight.finished.catch(error => { retireFailure(error); return { completed: false }; });
+  };
   const handleViewportResize = guardNative(() => {
     viewportEpoch++;
     // The dolly keeps its framing across the resize (the shared contract:
@@ -267,13 +280,17 @@ export function createRetainedCubicSkyOrbit({
       camera.setFocus(focus, frame);
       publish();
     },
-    flyToPreparedFocus(focus: PreparedNavigationFocus, frame: PreparedWorldCameraFrame,
+    async flyToPreparedFocus(focus: PreparedNavigationFocus, frame: PreparedWorldCameraFrame,
       viewport: WorldCameraViewport & { framingRadiusPixels: number }, options: PreparedFocusFlightOptions = {}) {
       if (lifetime.disposed) return Promise.resolve({ completed: false });
       validateWorldFrame(frame);
-      return flyToPreparedFocus(camera, { stop: () => { cameraMotion.cancel(); controls.stop(); }, publish: () => publish(),
-        flyTo: motion => controls.flyTo(motion) }, focus, frame, viewport, { ...options,
-        reducedMotion: options.reducedMotion ?? windowTarget.matchMedia('(prefers-reduced-motion: reduce)').matches });
+      if (options.signal?.aborted) return Promise.resolve({ completed: false });
+      const plan = prepareFocusFlight(camera, focus, frame, viewport, options.durationMilliseconds);
+      cameraMotion.cancel(); controls.stop();
+      camera.setFocus(plan.focus, frame);
+      publish();
+      const reduced = options.reducedMotion ?? windowTarget.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      return flyCamera(plan.sample, reduced ? 0 : plan.durationMilliseconds, options.signal);
     },
     captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
       validateWorldFrame(frame);
@@ -318,13 +335,11 @@ export function createRetainedCubicSkyOrbit({
           overviewZoom: cameraPlan.defaultZoom, angularDistance: flight.angularDistance }, progress);
         flight.sample(frame.rotation, { rotX: start.rotX + (controlPitch - start.rotX) * frame.rotation,
           rotY: start.rotY + (controlYaw - start.rotY) * frame.rotation, zoom: frame.zoom });
-        publish();
       };
       if (transition?.durationMilliseconds === 0 || windowTarget.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        sample(1);
-        return Promise.resolve({ completed: true });
+        return flyCamera(sample, 0, signal);
       }
-      return controls.flyTo({ sample, durationMilliseconds: transition?.durationMilliseconds, signal });
+      return flyCamera(sample, transition?.durationMilliseconds ?? 4500, signal);
       } catch (error) { retireFailure(error); throw error; }
     },
     // Native cache notifications report failures through the same fatal owner.
@@ -398,6 +413,7 @@ export function createRetainedCubicSkyOrbit({
         responsiveBaseZoom: responsiveFit.zoom,
         publications,
         preparedFocusId: camera.focus()?.id ?? null,
+        flightActive: cameraMotion.signal !== undefined,
         framePublication: publicationState(),
         interactionStarts,
         interactionEnds,

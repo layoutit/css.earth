@@ -284,8 +284,11 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
               timing.mark('mounted');
               incomingOwner = mount.navigation; detailReady = true;
               activation.abort();
-              void incomingOwner.apply(drawn, { signal: running.signal });
-              if (reducedMotion) running.complete(); else running.resume();
+              const publication = incomingOwner.apply(drawn, { signal: running.signal });
+              if (reducedMotion) {
+                if (publication && !(await publication)) throw cancellationReason(running.signal);
+                running.complete();
+              } else running.resume();
               if (!(await running.finished).completed) throw cancellationReason(running.signal);
               lastCamera = incomingOwner.capture(); lastOptics = incomingOwner.optics();
             } catch (error) { running.cancel(error); throw error; }

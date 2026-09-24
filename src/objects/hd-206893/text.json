@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-206893",
+  "card": {
+    "text": "A star 41 parsecs away with two companions imaged directly: a brown dwarf and an inner giant planet.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2511-20091",
+        "url": "https://arxiv.org/abs/2511.20091",
+        "label": "Kral et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "we monitored the astrometric positions of HD 206893 B and c"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 206893 is a young star 41 parsecs away. VLTI/GRAVITY found its inner planet c in 2022, and now tracks its brown dwarf B closely enough to search it for a moon.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2208-04867",
+        "url": "https://arxiv.org/abs/2208.04867",
+        "label": "Hinkley et al. 2023",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "we report a high significance detection of the companion HD206893c over three epochs"
+      },
+      {
+        "catalogueId": "arxiv-2511-20091",
+        "url": "https://arxiv.org/abs/2511.20091",
+        "label": "Kral et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "This study presents the first application of high-precision astrometry to search for exomoons around substellar companions"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    }
+  }
+}

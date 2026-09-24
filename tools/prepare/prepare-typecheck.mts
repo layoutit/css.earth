@@ -5,9 +5,6 @@ import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import ts from 'typescript';
-import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
-import { sha256 } from '../../src/platform/sha256.mts';
-import { parsePreparedCssPointFieldManifest } from '../../src/renderers/css/dist/index.js';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { type RuntimeAssetLocation, inventoryAssets } from '../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../assets/setup.mts';
@@ -127,28 +124,16 @@ export async function typecheckFeatureAssets(root = projectRoot, ids = SCENE_OBJ
 export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fetch }:
   { root?: string; fetcher?: typeof fetch } = {}) {
   const imports = await collectTypecheckPreparedImports(root);
-  // The minimap's real numerical input is a pinned star manifest and binary bank; its image atlas is not read.
-  const starDirectory = resolve(root, 'src/objects/stellar-neighbourhood');
-  const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(starDirectory, 'object.json'), 'utf8')));
-  const reference = descriptor.prepared;
-  if (descriptor.id !== 'stellar-neighbourhood' || !reference || !reference.url.startsWith('prepared/') || !reference.url.endsWith('.json'))
-    throw new TypeError('Invalid prepared minimap star manifest path.');
-  const starManifest = resolve(starDirectory, reference.url);
   const catalogue = await volumeMetadataAssets(root);
   const features = await typecheckFeatureAssets(root);
-  const initial = uniqueAssets([...await typecheckAssetsForPaths([...imports, starManifest], root), ...catalogue.assets, ...features.assets]);
+  const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
-  const manifestBytes = await readFile(starManifest);
-  const manifest = readPreparedObject(JSON.parse(manifestBytes.toString('utf8')), descriptor, parsePreparedCssPointFieldManifest).data;
-  const bank = await typecheckAssetsForPaths([resolve(dirname(starManifest), manifest.bank.path)], root);
-  if (bank.length !== 1 || bank[0]!.sha256 !== manifest.bank.sha256 || bank[0]!.bytes !== manifest.bank.bytes)
-    throw new TypeError('The minimap star bank must match its published manifest and inventory.');
   const landmarkRuntimes: string[] = [];
   for (const asset of features.catalogues) {
     const data = requireRecord(JSON.parse(await readFile(asset.file, 'utf8')));
     if (data.landmarks !== undefined) landmarkRuntimes.push(resolve(root, 'src/objects', asset.id, 'prepared/runtime.json'));
   }
-  const followup = uniqueAssets([...bank, ...await typecheckAssetsForPaths(landmarkRuntimes, root)])
+  const followup = uniqueAssets(await typecheckAssetsForPaths(landmarkRuntimes, root))
     .filter(asset => !initial.some(previous => previous.file === asset.file));
   const second = await installRuntimeAssets(followup, { fetcher });
   const assets = uniqueAssets([...initial, ...followup]);
@@ -168,11 +153,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (process.argv.length !== 2) throw new TypeError('Usage: node tools/prepare/prepare-typecheck.mts (after pnpm build:tools)');
   const result = await restoreTypecheckInputs();
   console.log(`Typecheck inputs: ${result.files} pinned files, ${result.bytes} bytes; ${result.installed} downloaded, ${result.reused} reused. No body texture banks.`);
-  await run(projectRoot, ['site/minimap/prepare.mts', '--data-only']);
   // `prepared/page.json` is a build output, not a tracked file: restore-object-json writes it from
   // the restored runtime. The two steps below read it, so it has to exist before they run.
   await run(projectRoot, ['tools/assets/restore-object-json.mts', '--restored-only']);
   await run(projectRoot, ['tools/prepare/prepare-feature-index.mts']);
   await run(projectRoot, ['tools/prepare/prepare-facilities.mts', '--catalog-only', '--restored-only']);
-  console.log('Typecheck preparation complete: real minimap and source catalogues generated.');
+  console.log('Typecheck preparation complete: source catalogues generated.');
 }

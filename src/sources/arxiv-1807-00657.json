@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-1807-00657",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bonnefoy et al. (2018): The GJ 504 system revisited. Combining interferometric, radial velocity, and high contrast imaging data",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1807.00657"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201832942"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1807.00657",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201832942",
+      "label": "Astronomy & Astrophysics 618, A63"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1807.00657",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 2.3: GJ 504 A limb-darkened angular diameter 0.71 +/- 0.02 mas and radius 1.35 +/- 0.04 solar radii from VEGA/CHARA; Appendix A: SED fit at Teff 6200 K; Table 2: GJ 504 b astrometry 2011 to 2017"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 618, A63",
+  "creators": [
+    "M. Bonnefoy",
+    "K. Perraut",
+    "A. -M. Lagrange",
+    "P. Delorme",
+    "A. Vigan",
+    "M. Line"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-95086-b",
+  "entries": [
+    {
+      "id": "band-colour",
+      "subject": "A false colour from three measured bands, as the HR 8799 planets have",
+      "status": "unresolved",
+      "finding": "Malin et al. (2024) measured this planet with JWST/MIRI at 10.6 and 11.3 microns, not in the NIRCam F410M, F430M and F460M bands that colour HR 8799's planets, so no comparable colour exists and it is the shared neutral gray.",
+      "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
+      "evidence": [
+        "https://arxiv.org/abs/2408.16843"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

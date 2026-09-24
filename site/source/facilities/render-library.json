@@ -14,7 +14,7 @@
   },
   "normalBuildPolicy": "Reuse the committed images. Rendering and acquisition are explicit maintenance operations only.",
   "renderer": {
-    "name": "Neutral inward-facing facility thumbnails v3",
+    "name": "Sunlit inward-facing facility thumbnails v4",
     "renderer": "Three.js 0.180.0",
     "preparationOnly": true,
     "masterSize": [
@@ -29,43 +29,64 @@
     "toneMapping": "ACESFilmic",
     "exposure": 1,
     "environment": {
-      "name": "RoomEnvironment",
-      "blur": 0.04,
-      "intensity": 0.2
-    },
-    "lights": [
-      {
-        "role": "key",
-        "intensity": 3.2,
+      "name": "Space: black sky, a small sun disc behind the key light and a faint blue planet glow below",
+      "blur": 0.02,
+      "intensity": 1,
+      "sun": {
         "position": [
           -3,
           4,
           6
         ],
-        "shadows": true
+        "radius": 0.9,
+        "radiance": 40
+      },
+      "glow": {
+        "position": [
+          2,
+          -6,
+          1
+        ],
+        "radius": 22,
+        "color": "#5f7fa8",
+        "radiance": 0.5
+      }
+    },
+    "lights": [
+      {
+        "role": "key",
+        "intensity": 4.2,
+        "position": [
+          -3,
+          4,
+          6
+        ],
+        "shadows": true,
+        "color": "#fff6ea"
       },
       {
         "role": "fill",
-        "intensity": 0.25,
+        "intensity": 0.3,
         "position": [
           2,
           -1,
           4
         ],
-        "shadows": false
+        "shadows": false,
+        "color": "#9fb6d8"
       },
       {
         "role": "rim",
-        "intensity": 0.65,
+        "intensity": 1.2,
         "position": [
           4,
           2,
           -4
         ],
-        "shadows": false
+        "shadows": false,
+        "color": "#ffffff"
       }
     ],
-    "lightColor": "#ffffff",
     "shadowMapSize": 2048,
     "framing": "Centered orthographic; fit retained geometry within 88% width / 86% height.",
     "camera": {
@@ -90,14 +111,14 @@
       ],
       "policy": "Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude."
     },
-    "browser": "153.0.8010.37",
+    "browser": "153.0.8010.53",
     "sharp": "0.35.3",
     "implementation": {
-      "tools/prepare/prepare-facility-renders.mts": "03b81a86c1825b7139de72e60316a0f943cccd3d104e6c26517f0219ec4e5604",
-      "tools/facility-renders/render.mts": "36a4e5921698c939e27c6a1070238e7878a55a561e38620baefa45807fe46ffb",
-      "tools/facility-renders/poses.mts": "f5dc1d2f52d0dfcf690b614129cf3ce83c62079ba462610e658942aa3b6d4b41",
+      "tools/prepare/prepare-facility-renders.mts": "1152430566b21a085f31af299a1bda62b795283102c1639dcaeb21f485424351",
+      "tools/facility-renders/render.mts": "79551ff7cf763cd67b9ebfac1c28a36e2eee56764220ed85ecaf3d3e29112119",
+      "tools/facility-renders/poses.mts": "922b7dcc705e68993abeb67df977c630263b806755468d3d339a64455064b424",
       "tools/facility-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",
-      "tools/facility-renders/refresh.mts": "5d05ffb602abb1802928d11bb1dc68a3ed13b6360fa7818dea447124912946b1"
+      "tools/facility-renders/refresh.mts": "430973626c1fb6d83db32e4f00eb2072f5a56ff2874a360b0de016de37f79790"
     }
   },
   "entries": [
@@ -181,7 +202,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 19476,
+      "bytes": 19604,
       "source": {
         "kind": "model-render",
         "id": "cassini",
@@ -286,7 +307,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 10966,
+      "bytes": 11468,
       "source": {
         "kind": "model-render",
         "id": "dawn",
@@ -415,7 +436,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 16366,
+      "bytes": 15034,
       "source": {
         "kind": "model-render",
         "id": "galileo-v2",
@@ -591,7 +612,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 20590,
+      "bytes": 17484,
       "source": {
         "kind": "model-render",
         "id": "grail",
@@ -842,7 +863,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 19388,
+      "bytes": 19090,
       "source": {
         "kind": "model-render",
         "id": "hubble-v2",
@@ -972,7 +993,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 10742,
+      "bytes": 10408,
       "source": {
         "kind": "model-render",
         "id": "juno",
@@ -1067,7 +1088,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 21230,
+      "bytes": 21272,
       "source": {
         "kind": "model-render",
         "id": "lro",
@@ -1162,7 +1183,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 23216,
+      "bytes": 24852,
       "source": {
         "kind": "model-render",
         "id": "magellan",
@@ -1257,7 +1278,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13182,
+      "bytes": 13096,
       "source": {
         "kind": "model-render",
         "id": "mars-global-surveyor",
@@ -1352,7 +1373,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13962,
+      "bytes": 14172,
       "source": {
         "kind": "model-render",
         "id": "messenger",
@@ -1447,7 +1468,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 18898,
+      "bytes": 18322,
       "source": {
         "kind": "model-render",
         "id": "mro",
@@ -1542,7 +1563,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13012,
+      "bytes": 13278,
       "source": {
         "kind": "model-render",
         "id": "near-shoemaker",
@@ -1637,7 +1658,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 18714,
+      "bytes": 19346,
       "source": {
         "kind": "model-render",
         "id": "new-horizons",
@@ -1732,7 +1753,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 16162,
+      "bytes": 15878,
       "source": {
         "kind": "model-render",
         "id": "odyssey",
@@ -1827,7 +1848,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 18992,
+      "bytes": 20616,
       "source": {
         "kind": "model-render",
         "id": "osiris-rex",
@@ -1922,7 +1943,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 20810,
+      "bytes": 20014,
       "source": {
         "kind": "model-render",
         "id": "rosetta-v2",
@@ -2064,7 +2085,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13310,
+      "bytes": 14164,
       "source": {
         "kind": "model-render",
         "id": "sdo",
@@ -2193,7 +2214,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 12000,
+      "bytes": 11876,
       "source": {
         "kind": "model-render",
         "id": "suomi-npp",
@@ -2288,7 +2309,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 18794,
+      "bytes": 18842,
       "source": {
         "kind": "model-render",
         "id": "terra",
@@ -2525,7 +2546,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13080,
+      "bytes": 13322,
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -2629,7 +2650,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13080,
+      "bytes": 13322,
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",

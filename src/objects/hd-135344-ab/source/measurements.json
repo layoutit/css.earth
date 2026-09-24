@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-135344-ab",
+  "radiusKm": 114387.2,
+  "radiusSource": "Radius 1.60 +0.07/-0.06 Jupiter radii and temperature 1510 +/- 35 K from the Sonora Diamondback fit to the SPHERE and GRAVITY spectra of Stolker et al. (2025, arXiv:2507.06206), Table 5: 114,387.2 km at 71,492 km per Jupiter radius. Their evolutionary fit gives 1.45 Jupiter radii and 1585 K. A model radius: the planet is unresolved. GM from their evolutionary mass 10.0 +1.4/-1.9 Jupiter masses times Jupiter's GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 27014.8,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 23.012 au and total mass 2.2277 solar masses, 74.0 years of 365.25 d. Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39).",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 135344 Ab is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 1510,
+  "effectiveTemperatureSource": "1510 +/- 35 K, Stolker et al. (2025), Table 5, https://arxiv.org/abs/2507.06206",
+  "semiMajorAxisSource": "Stolker et al. (2025, arXiv:2507.06206), Abstract: approximately 15 to 20 au; Table 5 gives 16.5 +2.8/-2.0 au. The recorded orbit's semi-major axis is 23.0 au (packages/astronomy/data/bodies/hd-135344-ab.json).",
+  "massSource": "10.0 +1.4/-1.9 Jupiter masses from evolutionary models, Stolker et al. (2025), Table 5."
+}

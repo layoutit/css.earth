@@ -1,4 +1,3 @@
-import type { createCameraFlight } from './camera-flight.js';
 import { validateDragControlsOptions } from './camera-input-options.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { MatrixDragControlsOptions } from './camera-input-options.js';
@@ -7,7 +6,7 @@ import { dragControlDiagnostics } from './camera-input-diagnostics.js';
 import type { ActiveMode, InterruptionMode } from './camera-input-diagnostics.js';
 import { bindCameraInputListeners } from './camera-input-listeners.js';
 import { errorMessage } from './types.js';
-import type { TrackballMetrics, CameraDelta, ControlsUpdate, DestinationMotion, MotionCompletion, Quaternion } from './types.js';
+import type { TrackballMetrics, CameraDelta, ControlsUpdate, Quaternion } from './types.js';
 import type { SphereDragInput } from "@cssearth/engine";
 import type { DragThrow } from "@cssearth/engine";
 export type MatrixDragControls = ReturnType<typeof createUnboundedMatrixDragControls>;
@@ -74,9 +73,10 @@ export function createUnboundedMatrixDragControls({
   let activeMode: ActiveMode = "idle";
   let inertiaStarts = 0, inertiaFrames = 0, inertiaCancels = 0;
   let pointerCancels = 0;
-  let flyToMotion: (ReturnType<typeof createCameraFlight> & { destination: boolean; arrive(): void }) | null = null;
+  const surfaceFlightScope = new AbortController();
+  lifetime.onDispose(() => surfaceFlightScope.abort());
+  const surfaceFlightActive = () => cameraMotion.owns(surfaceFlightScope.signal);
   let flyToStarts = 0, flyToFrames = 0, flyToCompletions = 0, flyToCancels = 0;
-  const destinationFlight = { starts: 0, frames: 0, completions: 0, cancels: 0 };
   const interruptionCounts = {
     drag: 0,
     pointer: 0,
@@ -146,7 +146,7 @@ export function createUnboundedMatrixDragControls({
     inertiaState = null;
     inertiaCancels += 1;
   };
-  const cancelFlyTo = () => flyToMotion?.cancel();
+  const cancelFlyTo = () => cameraMotion.cancel(surfaceFlightScope.signal);
   const cancelPointer = () => {
     pendingDrag = null;
     cancelCadence();
@@ -163,7 +163,7 @@ export function createUnboundedMatrixDragControls({
     syncCursor();
   };
   const interruptMotion = (nextMode: InterruptionMode) => {
-    const previousMode = activeMode;
+    const previousMode = surfaceFlightActive() ? "fly-to" : activeMode;
     const hadActivity = previousMode !== "idle" || pointerId !== null;
     if (!hadActivity) return false;
     cancelInertia();
@@ -179,15 +179,9 @@ export function createUnboundedMatrixDragControls({
     }
     return true;
   };
-  // Stopping a destination flight strands the camera between its endpoints, often with the
-  // target off screen. Input hurries the arrival instead, as it does for world navigation.
-  const hurryDestination = () => {
-    if (!flyToMotion?.destination) return false;
-    flyToMotion.hurry(runtimePolicy.FLIGHT_WHEEL_SPEEDUP);
-    return true;
-  };
-  const replaceCameraMotion = (nextMode: "drag" | "fly-to") => {
-    const previousMode = activeMode;
+  const beginDrag = () => {
+    const nextMode = "drag";
+    const previousMode = surfaceFlightActive() ? "fly-to" : activeMode;
     if (previousMode === "inertia") cancelInertia();
     if (previousMode === "fly-to") cancelFlyTo();
     if (previousMode !== "idle" && previousMode !== nextMode) {
@@ -199,28 +193,6 @@ export function createUnboundedMatrixDragControls({
     }
     activeMode = nextMode;
     return previousMode;
-  };
-  const startFlight = (destination: boolean, sample: (progress: number) => void, durationMilliseconds: number, signal?: AbortSignal) => {
-    const publish = guardNative((progress: number) => {
-      sample(progress);
-      if (lifetime.disposed || flyToMotion !== owner) return;
-      if (destination) destinationFlight.frames++; else flyToFrames++;
-    });
-    const motion = cameraMotion.start({ signal, windowTarget: {
-      requestAnimationFrame: requestFrame, cancelAnimationFrame: cancelFrame, performance: windowTarget.performance,
-    }, onFinish(completed) {
-      flyToMotion = null;
-      if (destination) { if (completed) destinationFlight.completions++; else destinationFlight.cancels++; }
-      else if (completed) flyToCompletions++; else flyToCancels++;
-      guardNative(finishInteraction)();
-    }, advance(elapsedS) {
-      const progress = Math.min(1, elapsedS * 1000 / durationMilliseconds);
-      publish(progress);
-      return progress === 1 ? 'complete' : 'presented';
-    } });
-    const owner = { ...motion, destination, arrive() { publish(1); motion.complete(); } };
-    if (!motion.signal.aborted) flyToMotion = owner;
-    return motion.finished;
   };
   let completedDoublePress: { x: number; y: number; timestamp: number } | null = null;
   const beginSurfaceFlyTo = (event: MouseEvent) => {
@@ -242,7 +214,7 @@ export function createUnboundedMatrixDragControls({
     if (plan === null) return false;
     event.preventDefault();
     cancelPointer();
-    replaceCameraMotion("fly-to");
+    interruptMotion("fly-to");
     const wasInteractionActive = interactionActive;
     flyToStarts += 1;
     if (!wasInteractionActive) {
@@ -252,15 +224,21 @@ export function createUnboundedMatrixDragControls({
     if (lifetime.disposed) return;
     let previousPitchDelta = 0, previousYawDelta = 0;
     let previousRotation: Quaternion = [0, 0, 0, 1];
-    void startFlight(false, progress => {
+    const flight = cameraMotion.fly({ windowTarget, signal: surfaceFlightScope.signal,
+      durationMilliseconds: SURFACE_FLY_TO.durationMilliseconds,
+      onFinish(completed) { if (completed) flyToCompletions++; else flyToCancels++; guardNative(finishInteraction)(); },
+      sample(progress, signal) {
       const sample = sampleSurfaceFlyTo(plan, progress);
-      rotate({ controlPitchDelta: sample.pitchDeltaDegrees - previousPitchDelta,
+      const publication = rotate({ controlPitchDelta: sample.pitchDeltaDegrees - previousPitchDelta,
         controlYawDelta: sample.yawDeltaDegrees - previousYawDelta, zoom: sample.zoom,
-        rotation: composeDragRotation(sample.rotation, conjugateRotation(previousRotation)) });
+        rotation: composeDragRotation(sample.rotation, conjugateRotation(previousRotation)) }, signal);
       previousPitchDelta = sample.pitchDeltaDegrees;
       previousYawDelta = sample.yawDeltaDegrees;
       previousRotation = sample.rotation;
-    }, SURFACE_FLY_TO.durationMilliseconds);
+      flyToFrames++;
+      return publication;
+    } });
+    void flight.finished.catch(guardNative((error: unknown) => { throw error; }));
     return true;
   };
   const onMouseDown = (event: MouseEvent) => {
@@ -352,7 +330,7 @@ export function createUnboundedMatrixDragControls({
   };
   const onPointerDown = (event: PointerEvent) => {
     if (!drag || pointerId !== null || !runtimePolicy.isOrbitDragStart(event)) return;
-    if (hurryDestination()) { event.preventDefault(); return; }
+    if (cameraMotion.hurryForInput()) { event.preventDefault(); return; }
     const measuredTrackball = trackballMetrics();
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
@@ -414,7 +392,7 @@ export function createUnboundedMatrixDragControls({
       }
       if (!pointerDragging) {
         const wasInteractionActive = interactionActive;
-        replaceCameraMotion("drag");
+        beginDrag();
         pointerDragging = true;
         if (!wasInteractionActive) {
           interactionActive = true;
@@ -532,7 +510,7 @@ export function createUnboundedMatrixDragControls({
 
       return;
     }
-    if (hurryDestination()) { event.preventDefault(); return; }
+    if (cameraMotion.hurryForInput()) { event.preventDefault(); return; }
     interruptMotion("wheel");
     cameraMotion.cancel();
   };
@@ -540,11 +518,10 @@ export function createUnboundedMatrixDragControls({
   try {
     bindCameraInputListeners({ inputSurface, windowTarget, lifetime, guardNative,
       onPointerDown, onPointerMove, endPointer, onMouseDown, onDoubleClick, onWheel,
-      cancelDestination: guardNative((event: Event) => {
-        if (!flyToMotion?.destination) return;
-        if ("key" in event && event.key === "Escape") hurryDestination();
+      onMotionCommand: guardNative((event: Event) => {
+        if ("key" in event && event.key === "Escape") cameraMotion.hurryForInput();
         // A hidden page paints nothing; finish at the destination instead of where it hid.
-        else if (inputSurface.ownerDocument.hidden) flyToMotion.arrive();
+        else if (inputSurface.ownerDocument.hidden) cameraMotion.arrive();
       }),
     });
     inputSurface.style.userSelect = "none";
@@ -555,26 +532,6 @@ export function createUnboundedMatrixDragControls({
     throw error;
   }
   return Object.freeze({
-    flyTo({ sample, durationMilliseconds = 4500, signal }: DestinationMotion): Promise<MotionCompletion> {
-      if (lifetime.disposed || signal?.aborted) return Promise.resolve({ completed: false });
-      if (typeof sample !== "function" || !Number.isFinite(durationMilliseconds) || durationMilliseconds <= 0) {
-        throw new TypeError("Invalid destination camera motion.");
-      }
-      try {
-        interruptMotion("programmatic");
-        activeMode = "fly-to";
-        interactionActive = true;
-        destinationFlight.starts++;
-        onStart();
-        if (lifetime.disposed) return Promise.resolve({ completed: false });
-        return startFlight(true, sample, durationMilliseconds, signal);
-      } catch (error) {
-        cancelFlyTo();
-        const cleanup = lifetime.destroy();
-        if (cleanup.length) throw new AggregateError([error, ...cleanup], errorMessage(error), { cause: error });
-        throw error;
-      }
-    },
     update(options: ControlsUpdate) {
       if (lifetime.disposed) return;
       if (options.drag !== undefined) drag = options.drag;
@@ -592,10 +549,9 @@ export function createUnboundedMatrixDragControls({
     },
     stats() {
       return dragControlDiagnostics({ skyGesture, pointerActive: pointerId !== null,
-        inertiaActive: inertiaFrame !== null, flyToActive: flyToMotion !== null,
-        destinationActive: Boolean(flyToMotion?.destination), surfaceFlyToEnabled: surfaceFlyToState !== null,
-        activeMode, pointerDragging, inertiaStarts, inertiaFrames, inertiaCancels, pointerCancels,
-        interruptionCounts, lastInterruption, flyToStarts, flyToFrames, flyToCompletions, flyToCancels, destinationFlight });
+        inertiaActive: inertiaFrame !== null, flyToActive: surfaceFlightActive(), surfaceFlyToEnabled: surfaceFlyToState !== null,
+        activeMode: surfaceFlightActive() ? "fly-to" : activeMode, pointerDragging, inertiaStarts, inertiaFrames, inertiaCancels, pointerCancels,
+        interruptionCounts, lastInterruption, flyToStarts, flyToFrames, flyToCompletions, flyToCancels });
     },
     destroy() {
       const errors = lifetime.destroy();

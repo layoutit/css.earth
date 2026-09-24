@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-95086",
+  "angularDiameterMas": 0.16,
+  "angularDiameterSource": "No angular diameter is measured: this is the record's radius at the Gaia distance.",
+  "distanceParsecs": 86.461332,
+  "distanceSource": "Gaia DR3 source 5231963962676292224: parallax 11.5659 +/- 0.0187 mas (RUWE 0.91), inverted to 86.4613 pc with no zero-point correction.",
+  "radiusKm": 1058252.23,
+  "radiusSource": "Temperature 7750 +/- 250 K and mass 1.6 +/- 0.1 solar masses as Desgrange et al. (2022, A&A 664, A139; arXiv:2206.00425) tabulate them (Table 1, from Chauvin et al. 2018 and earlier work). No paper used here gives a radius, so it is Gaia DR3's FLAME value, 1.5211 solar radii (Creevey et al. 2023), a catalogue model value, not a measured disc: 1,058,237 km at 695,700 km per solar radius. GM from 1.6 solar masses times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 7750,
+  "effectiveTemperatureSource": "Desgrange et al. (2022), Table 1, https://arxiv.org/abs/2206.00425",
+  "surfaceGravityLogg": 4.28,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-95086.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.278, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+  }
+}

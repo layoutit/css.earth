@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-95086-b",
+  "radiusKm": 81500.9,
+  "radiusSource": "Radius 1.14 +/- 0.08 Jupiter radii, temperature 936 +66/-63 K and mass 4.1 +1.2/-1.0 Jupiter masses: the Exo-REM fit with a surface-gravity prior to the JWST/MIRI and near-infrared photometry of Malin et al. (2024, arXiv:2408.16843), Table 8: 81,500.9 km at 71,492 km per Jupiter radius. Their fits span 1.0 to 1.14 Jupiter radii and 800 to 1050 K. A model radius: the planet is unresolved. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 134033.6,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 60.562 au and total mass 1.6495 solar masses, 367.0 years of 365.25 d. Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65).",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 95086 b is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 936,
+  "effectiveTemperatureSource": "936 +66/-63 K, Malin et al. (2024), Table 8, https://arxiv.org/abs/2408.16843",
+  "semiMajorAxisSource": "Desgrange et al. (2022, arXiv:2206.00425), Abstract: orbiting at 57 au. The recorded orbit's semi-major axis is 60.6 au (packages/astronomy/data/bodies/hd-95086-b.json).",
+  "massSource": "4.1 +1.2/-1.0 Jupiter masses from the Exo-REM fit with a surface-gravity prior, Malin et al. (2024, arXiv:2408.16843), Table 8."
+}

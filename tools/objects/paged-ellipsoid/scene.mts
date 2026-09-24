@@ -758,20 +758,24 @@ function prepareMaterialBank({
       const tileRowIndex = Math.floor(frameOffset / columns);
       const scenePitchDegrees = 65 - frameIndex /
         (frameCount - 1) * 65;
+      // With shadows off an illuminated material shows only its last (flood) frame, so that frame is its own image:
+      // the first view loads one frame, not the four-frame row around it.
+      const flood = Boolean(illumination) && frameIndex === frameCount - 1;
       return Object.freeze({
         frameIndex,
         rowIndex,
         columnIndex,
         tileRowIndex,
         scenePitchDegrees,
+        flood,
         assets: materialAssetPair(
           id,
-          `row-${String(rowIndex).padStart(2, "0")}`,
+          flood ? "flood" : `row-${String(rowIndex).padStart(2, "0")}`,
         ),
-        backgroundPosition:
+        backgroundPosition: flood ? `${-gutter * presentationScale}px ${-gutter * presentationScale}px` :
           `${-(columnIndex * stride + gutter) * presentationScale}px ` +
           `${-(tileRowIndex * stride + gutter) * presentationScale}px`,
-        backgroundSize:
+        backgroundSize: flood ? `${stride * presentationScale}px ${stride * presentationScale}px` :
           `${shardWidth * presentationScale}px ` +
           `${shardHeight * presentationScale}px`,
         transform: prepareScreenMaterialPlane({
@@ -859,6 +863,7 @@ function prepareMaterialBank({
     defaultFrame,
     defaultRow,
     defaultAssets: materialAssetPair(id, "default"),
+    ...(illumination ? { floodAssets: materialAssetPair(id, "flood") } : {}),
     ...(supportsShadowless ? {
       shadowlessAssets: materialAssetPair(id, "shadowless"),
     } : {}),

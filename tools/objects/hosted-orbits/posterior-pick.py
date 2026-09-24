@@ -4,10 +4,16 @@
     python tools/objects/hosted-orbits/posterior-pick.py <pick.json> <orbit.json>
 
 When a paper's own orbitize! posterior is published, no refit is needed: the orbit is one of its samples. The pick file
-names the whereistheplanet key and the paper's measured positions (an orbitize! input table). The sample kept is the one
+names the whereistheplanet key, the companion (body 1 unless a joint fit of several says otherwise) and the paper's measured
+positions (an orbitize! input table). The sample kept is the one
 with the highest stored likelihood; a posterior that stores no likelihoods, or stores them all equal, is scored instead
 against the measured positions with orbitize!'s own orbit function and the published errors, and the smallest chi-squared
 is kept. The residual at every measured position is written beside the orbit.
+
+A joint fit of several companions with their masses stores each companion's six elements, the parallax, the companions'
+masses and the star's. As orbitize! does without N-body integration, a companion's Keplerian orbit uses the star's mass plus
+the masses of every companion at or inside its semi-major axis. The orbit written is that Keplerian orbit alone; the few
+hundredths of a milliarcsecond the other companions move the star are not in it, and show in the residuals.
 """
 import json
 import os
@@ -19,8 +25,32 @@ import whereistheplanet
 import whereistheplanet.whereistheplanet as catalogue
 from orbitize import kepler, read_input
 
-LABELS = ['sma1', 'ecc1', 'inc1', 'aop1', 'pan1', 'tau1', 'plx', 'mtot']
+ELEMENTS = ['sma', 'ecc', 'inc', 'aop', 'pan', 'tau']
+LABELS = [f'{name}1' for name in ELEMENTS] + ['plx', 'mtot']
 ANGLES = {'inc1', 'aop1', 'pan1'}
+
+
+def labels(posterior, width: int) -> list[str]:
+    """The posterior's column names: stored, or rebuilt from the fit's own settings as orbitize!'s standard basis orders them."""
+    if 'col_names' in posterior:
+        return [name.decode() if isinstance(name, bytes) else str(name) for name in posterior['col_names']]
+    bodies = int(posterior.attrs.get('num_secondary_bodies', 1))
+    names = [f'{name}{body}' for body in range(1, bodies + 1) for name in ELEMENTS] + ['plx']
+    names += [f'm{body}' for body in range(1, bodies + 1)] + ['m0'] if bool(posterior.attrs.get('fit_secondary_mass', False)) else ['mtot']
+    if len(names) != width:
+        raise ValueError(f'{posterior.filename}: {width} posterior columns, but the fit settings name {len(names)}: {names}')
+    return names
+
+
+def one_body(sample, names: list[str], body: int) -> np.ndarray:
+    """One companion's elements, parallax and the total mass its Keplerian orbit uses."""
+    value = dict(zip(names, sample))
+    if 'mtot' in value:
+        mass = value['mtot']
+    else:
+        bodies = sorted({int(name[3:]) for name in names if name.startswith('sma')})
+        mass = value['m0'] + sum(value[f'm{other}'] for other in bodies if value[f'sma{other}'] <= value[f'sma{body}'])
+    return np.array([value[f'{name}{body}'] for name in ELEMENTS] + [value['plx'], mass])
 
 
 def position(sample, epoch, tau_reference):
@@ -47,14 +77,16 @@ def chi_squared(sample, tau_reference, table):
 def main(pick_path: str, output: str) -> None:
     with open(pick_path) as handle:
         pick = json.load(handle)
-    key = pick['whereistheplanetKey']
+    key, body = pick['whereistheplanetKey'], int(pick.get('body', 1))
     filename, reference = catalogue.post_dict[key][0], catalogue.post_dict[key][1]
     with h5py.File(os.path.join(catalogue.datadir, filename)) as posterior:
-        samples = np.array(posterior['post'], dtype=float)
+        stored = np.array(posterior['post'], dtype=float)
+        names = labels(posterior, stored.shape[1])
+        samples = np.array([one_body(sample, names, body) for sample in stored])
         likelihood = np.array(posterior['lnlike'], dtype=float) if 'lnlike' in posterior else None
         tau_reference = float(posterior.attrs['tau_ref_epoch'])
     table = read_input.read_file(os.path.join(os.path.dirname(pick_path), pick['measurements']))
-    table = table[[kind in ('radec', 'seppa') for kind in table['quant_type']]]
+    table = table[[kind in ('radec', 'seppa') and int(number) == body for kind, number in zip(table['quant_type'], table['object'])]]
     if likelihood is not None and np.ptp(likelihood) > 0:
         best = int(np.argmax(likelihood))
         rule = f'highest stored likelihood (ln L {likelihood[best]:.2f})'
@@ -73,6 +105,8 @@ def main(pick_path: str, output: str) -> None:
               'rule': rule, 'samples': int(len(samples)), 'tauReferenceMjd': tau_reference,
               'orbit': {label: float(np.degrees(v)) if label in ANGLES else float(v) for label, v in zip(LABELS, sample)},
               'residuals': residuals}
+    if f'm{body}' in names:
+        result['companionMassSolar'] = float(stored[best][names.index(f'm{body}')])
     with open(output, 'w') as handle:
         json.dump(result, handle, indent=1)
     print(json.dumps({k: v for k, v in result.items() if k != 'residuals'}, indent=1))
