@@ -18,7 +18,8 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
-const worldCamera = { schema: 'cssearth-world-camera@1', frame: worldSummary.frame, focusId: worldSummary.focus.id, camera: worldSummary.camera };
+import { worldCameraOf } from '../../src/renderers/css/dist/index.js';
+const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
   objectId: string;

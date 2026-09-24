@@ -9,7 +9,7 @@ import { pathToFileURL } from 'node:url';
 import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
 import { verifiedProduct } from '../verified-product.mts';
 import { parseHTML } from 'linkedom';
-import { parsePreparedObjectRuntime, createWorldContextObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
+import { parsePreparedObjectRuntime, createWorldContextObjectRuntime, parsePreparedWorldContext, worldCameraOf } from '../../../../src/renderers/css/dist/index.js';
 import { parsePreparedWorldCameraFrame } from '../../../../src/renderers/css/dist/navigation.js';
 export const ORACLE_PYTHON=String.raw`
 import json,sys,re,html as html_parser
@@ -50,7 +50,7 @@ export async function sphereOracle(mapRecord:string,sphereRecord:string,measurem
  const data=requireRecord(JSON.parse([...embedded.content.childNodes].map(node=>node.textContent??'').join(''))),definition=parsePreparedObjectRuntime(data.definition);
  const frame=parsePreparedWorldCameraFrame(data.worldFrame);
  assert.ok(frame,'Sphere must supply its physical frame');
- createWorldContextObjectRuntime({definition,context:data.context,frame});
+ createWorldContextObjectRuntime({definition,context:worldCameraOf(parsePreparedWorldContext(data.context)),frame});
  assert.throws(()=>createWorldContextObjectRuntime({definition,context:undefined,frame}));
  const contextPin=sphere.record.inputs.find(input=>input.identity.endsWith('/prepared/world-context.json'));
  assert.ok(contextPin,'Sphere must pin the shared camera context');
