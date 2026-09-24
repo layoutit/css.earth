@@ -163,9 +163,32 @@ slot. If the annotation cannot fit, its context orbit and annotation hit targets
 retire with it. Physical sprites remain visible and pickable. The selected
 body's orbit remains available in close-up even when its caption cannot fit.
 Orbit settings can hide a line without changing the admitted annotation.
+The selected body uses the caption below its marker or mesh instead of a second
+context caption. Its existing corner locator keeps its reserved footprint while
+the body is unresolved and retires when the detailed surface takes over.
+The focus point light shares the default body marker's minimum readable core
+diameter. Its faint surrounding halo does not count toward that minimum, so the
+distant Sun keeps a visible dot inside its locator circle.
 
-The same admission runs during dragging, inertia, flight and rest. Category
-emphasis applies to the annotation and orbit together; it does not make a
+Background labels use the same admission during dragging, inertia, flight and
+rest: a label that leaves the viewport or loses a collision can return as soon
+as its circle and text fit again. Clear committed placements retain their side.
+Before keeping or choosing a caption's side, the layout checks the fixed circles
+of eligible peers. A caption moves to a clear alternative when that lets nearby
+annotations fit; it does not make those circles disappear merely to keep its side.
+Truly overlapping circles still follow the same admission priority.
+The active system's established landmark behavior remains independent of that
+background admission; moving the camera does not freeze a list of visible stars.
+
+Only actual circle and text footprints reserve space against background labels.
+An orbit's interior stays available, whatever its size or distance: a projected
+path does not become an opaque rectangle. Physical body occlusion remains
+separate from annotation collisions.
+
+Sagittarius A* uses a black caption and circle for contrast against the bright
+Milky Way bulge.
+
+Category emphasis applies to the annotation and orbit together; it does not make a
 second visibility decision in CSS. Small circle footprints are allowed to
 clip at the viewport edge while the caption stays readable inside it.
 

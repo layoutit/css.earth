@@ -182,6 +182,33 @@ test('a flight destination keeps its caption and its side across the preview fad
   }
 });
 
+test.each(['luhman-16', 'mercury'])('selected %s keeps its locator when the separate selected caption owns its name', id => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const target = plan.bodies.find(body => body.id === id)!, index = 1 + plan.bodies.indexOf(target);
+  input.selectedId = id; input.overview = false;
+  input.bodies[index].labelSuppressed = true;
+  const sample = (diameter: number) => {
+    input.world.pose.positionM = [target.positionM[0], target.positionM[1],
+      target.positionM[2] + Math.hypot(target.radiusM, 2 * input.viewport.focalPixels * target.radiusM / diameter)];
+    return calculate(input).projectedBodies.find(body => body.index === index)!;
+  };
+  const point = sample(.1);
+  expect(point.visible).toBe(true);
+  expect(point.indicatorShown).toBe(true);
+  expect(point.labelShown).toBe(false);
+  expect(point.labelPosition).toBeUndefined();
+  // Resolved detail owns the surface; the small locator must not sit over it.
+  expect(sample(100).indicatorShown).toBe(false);
+  expect(sample(.1).indicatorShown).toBe(true);
+  input.selectionPreview = plan.focus.id;
+  expect(sample(.1).indicatorShown).toBe(false);
+  input.selectionPreview = undefined;
+  input.bodies[index].labelSuppressed = false;
+  const ordinary = sample(.1);
+  expect(ordinary.indicatorShown).toBe(true);
+  expect(ordinary.labelShown).toBe(true);
+});
+
 test('orbit settings do not change admitted names or label placement', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const labels = () => calculate(input).projectedBodies.filter(body => body.labelShown)

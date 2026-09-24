@@ -1226,7 +1226,8 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
   expect(writes).toEqual([]);
   expect(find(root, 'contextLabel', 'sun').dataset.objectNavigate).toBe('sun');
   expect(mercury.billboard.dataset.objectNavigate).toBeUndefined();
-  expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
+  expect(layer.backgroundExclusionRects()).toEqual([...layer.labelExclusionRects(),
+    { left: 22, right: 38, top: -28, bottom: -12 }]); // Only the Sun's caption and 16 px circle remain.
   publish(1000);
   expect(writes.length).toBeGreaterThan(0);
   expect(mercury.billboard.dataset.objectNavigate).toBe('mercury');
@@ -1769,22 +1770,53 @@ test('a moon label tries the other side when its first position overlaps the sel
   layer.destroy();
 });
 
-test('a background star label inside the orbit footprint is excluded even outside every accepted body label', () => {
+test.each([1, 1e9, 1e16])('an orbit interior does not exclude background annotations at physical scale %s', scale => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
-    plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+    plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const camera: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1,
-    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } };
+    pose: { positionM: [0, 0, 1000 * scale], orientationXyzw: [0, 0, 0, 1] } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   layer.publish(camera, viewport);
   const backgroundText = { left: -10, top: 20, right: 10, bottom: 30 };
   expect(layer.labelExclusionRects().every(rect => !labelRectsOverlap(backgroundText, rect))).toBe(true);
-  expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(true);
+  expect(layer.inspect().some(body => body.orbit.some(piece => piece.style.visibility === ''))).toBe(true);
+  expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(false);
+  const circle = layer.inspect().find(body => body.id === 'mercury')!;
+  expect(circle.indicatorShown).toBe(true);
+  const [x, y] = circle.center;
+  expect(layer.backgroundExclusionRects()).toContainEqual({ left: x - 8, right: x + 8, top: y - 8, bottom: y + 8 });
   expect(layer.inspect().find(body => body.id === 'sun')!.mover.style.visibility).toBe('');
   // Close orbits clip the viewport; they must not claim the entire background.
-  layer.publish({ ...camera, pose: { ...camera.pose, positionM: [0, 0, 50] } }, viewport);
+  layer.publish({ ...camera, pose: { ...camera.pose, positionM: [0, 0, 50 * scale] } }, viewport);
   expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
+  layer.destroy();
+});
+
+test.each([1, 1e9, 1e16])('stars returning during a drag regain annotations at physical scale %s', scale => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(scale);
+  const context = parsePreparedWorldContext({ ...base, bodies: base.bodies.map((body, index) => ({
+    ...body, orbit: undefined, positionM: [(index ? -250 : 250) * scale, 120 * scale, 0],
+  })) });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const camera: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000 * scale], orientationXyzw: [0, 0, 0, 1] } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
+  const stars = () => layer.inspect().filter(body => body.id !== 'sun');
+  layer.publish(camera, viewport);
+  expect(stars().every(body => body.labelShown && body.indicatorShown)).toBe(true);
+  layer.setRotationActive(true);
+  layer.publish(camera, { ...viewport, principalOffsetPixels: [1000, 0] });
+  expect(stars().every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
+  layer.publish(camera, viewport);
+  expect(stars().every(body => body.labelShown && body.indicatorShown)).toBe(true);
+  layer.setRotationActive(false);
+  layer.publish(camera, viewport);
+  expect(stars().every(body => body.labelShown && body.indicatorShown)).toBe(true);
   layer.destroy();
 });
 

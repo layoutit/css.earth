@@ -4,6 +4,9 @@ export interface SpriteImage {url:string;index:number;count:number;}
 export interface SpriteWithUrl extends Sprite {url:string; minimumDiameterPixels?: number;
   detail?: SpriteImage & {fromDiameterPixels:number};}
 
+/** Readable core for an unresolved body that remains a navigation target. */
+export const MINIMUM_BODY_MARKER_DIAMETER_PIXELS = 2.4;
+
 // The tile at `index` of the atlas strip, the whole tile scaled to `size`
 // pixels, centred on the element's layout position.
 export function applySprite(element:HTMLElement, sprite:SpriteWithUrl) {

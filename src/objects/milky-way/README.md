@@ -16,7 +16,8 @@ milky-way/
 └── prepared/
     ├── volume.json             Prepared object envelope with PolyCSS leaves
     ├── volume-slices.json      Physical quad and texture intermediates
-    ├── slices/{x,y,z}/*.webp    Generated, ignored 256 / 256 / 32 texture bank
+    ├── core/slices/{x,y,z}/*.png  Generated, ignored 62 / 63 / 26 bulge textures
+    ├── outer-disc.png          One 1024px image in the physical Galactic midplane
     ├── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
     └── sky-near/{px,nx,py,ny,pz,nz}.webp  Committed: the same faces with the neighbourhood stars baked in
 ```
@@ -41,11 +42,12 @@ orbit alignment, and PolyCSS pixel-to-world mapping. The normal
 `pnpm test:preparation` also includes these tests. To prepare another compatible
 volume after building tools, use `pnpm prepare:volume <object-directory>`.
 Preparation reads the local pinned inputs; no sibling checkout or network
-source is required. The checked volume source is 41.77 MiB. The 1024px WebP volume bank is
-14.27 MiB compressed and decodes to 131.05 MiB across 544 retained leaves.
-WebP uses quality 90 for RGB and preserves alpha exactly. Each axis has the
-same physical slice pitch; four samples per Z slab integrate all 128 original
-source Z layers. The thin galaxy detail retains its full in-plane resolution.
+source is required. The checked volume source is 41.77 MiB. Preparation first integrates the original 256 / 256 / 32 slabs at 1024px,
+then keeps only the central volume and composites the outer Z slabs onto one
+fixed image plane. The detailed bank is 10.41 MiB compressed and 15.54 MiB
+decoded: 151 bulge slabs plus one arm image. Bulge textures keep the original
+slice pitch and decoded RGB; lossless PNG avoids another lossy encoding pass.
+Four samples per original Z slab integrate all 128 source Z layers.
 
 The [OpenSpace Milky Way volume](https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html)
 adapts a NAOJ simulation prepared by Jon Parker for AMNH's *Dark Universe*,
@@ -60,6 +62,22 @@ absorption 200, extinction tint [0.3, 0.54, 0.85], cylindrical support and the
 source's channel transfer. The source already contains its bulge. The 8 kpc
 Galactic centre, authored Euler rotation and full physical
 extent are converted to the shared Sun-centred ICRF frame.
+
+The arm billboard uses those same prepared OpenSpace slab pixels, not the NASA
+interior panorama. Its corners span the original model XY bounds, [-10, 10]
+units in each direction, at local Z=0; it shares the volume's physical frame,
+centre, rotation and 6e19 metres per unit. It remains fixed in the Galactic
+plane while the shared camera moves.
+
+The display split keeps full volumetric support inside 1.25 model units and
+smoothly reduces it to zero at 2.5 units. These radii are presentation choices,
+not measured bulge boundaries. Each original slab's alpha is divided through
+complementary optical-depth weights; the decoded RGB stays unchanged. The
+outer Z contribution is composited in its original order into the flat image.
+This removes outer-disc thickness and vertical parallax, and does not retain
+its depth ordering with the bulge. The original whole-galaxy distant impostors
+remain the far-view presentation. No source emission, dust model, colour grade,
+physical bounds or placement is changed.
 
 The 512 MiB unmodified upstream raw file stays outside Git. To reacquire it
 and verify/recreate the checked derivative from a clean checkout:
@@ -117,8 +135,10 @@ slab transfer, optical correction, and labels retain their separate behavior.
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
 images are mixed. Integer optical gains are exact; fractional gains approximate
-the continuous transfer without extra image resources. The 544 prepared slabs
-therefore use 1,632 image elements. Keeping the axis scenes separate avoids
+the continuous transfer without extra image resources. The 151 bulge slabs
+use 453 image elements; the arms use one more, compared with the original
+1,632-element full volume. This is an element count, not a measured frame-rate
+result. Keeping the axis scenes separate avoids
 browser cracks and expensive sorting at intersections between planes.
 
 The near-Solar-System sky uses NASA's [Deep Star Maps 2020 Milky Way-only
@@ -132,8 +152,8 @@ usage notice live together under `source/sky/`.
 
 Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**,
 and the near set below adds **0.44 MiB download and 54 MiB decoded**. The complete
-volume + sky bank is therefore **15.01 MiB download and 239.05 MiB decoded**, across
-556 unique images. Sky faces use quality 90. Original source chunks are offline
+sky contribution is unchanged by the exterior billboard. The exterior bank
+figures above exclude these sky faces and the unchanged distant impostors. Sky faces use quality 90. Original source chunks are offline
 inputs and are never sent to the browser.
 
 The offline baker samples linear RGB before applying a fixed exposure of 4.5
@@ -188,3 +208,12 @@ dust structures or reproduce physical disocclusion. It avoids copying cloud
 features across independent depth layers. Neither geometry nor imagery is
 generated in the browser. The NASA source epoch stays in provenance; shared
 camera metadata uses the volume's Sun-centered ICRF frame and epoch.
+
+## Billboard UI evidence
+
+The [inspected browser capture](evidence/2026-09-23/billboard-and-labels.png) shows
+the fixed arm image, volumetric centre and black Sagittarius A* caption and
+circle. The [capture settings](evidence/2026-09-23/capture.json) preserve the
+camera, viewport, pixel ratio and observed DOM count. The browser engine version
+was not exposed by the capture tool. This checks the displayed composition and
+contrast; it is not native-renderer pixel parity or a frame-rate measurement.
