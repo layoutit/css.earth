@@ -1,6 +1,6 @@
 # Audit fixes: evidence
 
-Tested revisions: `main` at `34b6031730` and the change at `ab28eb3ef3` (fix/audit-2026-09-24).
+Tested revisions: `main` at `34b6031730` and the change at `52e752c1ca` (fix/audit-2026-09-24).
 
 ## The sidebar tree (`tree-before.txt`, `tree-after.txt`, `tree-diff.txt`, `tree-dump.mts`)
 
@@ -32,7 +32,7 @@ Limit, not changed here: the star page's opening camera sits about 4.2 million k
 - **`dotN`:** for the `reduce` copies. It sums the same products in the same order, starting from 0.
 - **`clamp` and `isRecord`:** straight replacements.
 
-69 copies in 68 files were replaced. What remains is in `helper-census-after.txt`: bindings with other meanings (a single-argument clamp, a matrix-row product, variables named `dot`), `packages/*`, and the `record` validators, whose error messages differ.
+71 copies in 68 files were replaced. What remains is in `helper-census-after.txt`: bindings with other meanings (a single-argument clamp, a matrix-row product, variables named `dot`), `packages/*`, and the `record` validators, whose error messages differ.
 
 ## Checks
 
