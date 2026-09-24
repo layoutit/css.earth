@@ -53,8 +53,13 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
       2 / cameraPlan.logicalBodyDiameter * framingReferenceZoom;
     return Math.abs(zoom - cameraPlan.maximumZoom) < 1e-9 ? cameraPlan.maximumZoom : zoom;
   };
+  // The zoom stops where one CSS pixel under the eye shows the least surface arc the body's prepared imagery supports:
+  // closer, it is only stretched. The altitude scales with the focal length, so every viewport stops as sharp.
+  const texelAltitude = () => cameraPlan.dolly.surfaceArcPerCssPixelRadians === undefined ? 0
+    : bodyRadius * cameraPlan.dolly.surfaceArcPerCssPixelRadians * optics().focalPixels;
   const minimumDistance = () => Math.max(
     cameraPlan.dolly.minimumDistanceRadii * bodyRadius,
+    bodyRadius + texelAltitude(),
     zoomToDistance(cameraPlan.maximumZoom),
   );
   const clampDistance = (distance: number) =>

@@ -176,3 +176,24 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   expect(hidden).toBe(false);
   expect(element.style.transform, 'The shown scene carries the current pose').toMatch(/^translate3d\(/);
 });
+
+it('stops the zoom where one CSS pixel shows the least surface arc the imagery supports', () => {
+  const build = (surfaceArcPerCssPixelRadians: number | undefined, focal: number) => {
+    const view = { getComputedStyle: () => ({ perspective: `${focal}px`, perspectiveOrigin: '720px 450px' }) };
+    const make = () => ({ style: {}, ownerDocument: { defaultView: view },
+      getBoundingClientRect: () => ({ width: 1440, height: 900, x: 0, y: 0, left: 0, top: 0 }) });
+    const dolly = { ...scene.camera.dolly, ...(surfaceArcPerCssPixelRadians === undefined ? {} : { surfaceArcPerCssPixelRadians }) };
+    const options = { cameraPlan: { ...scene.camera, sceneScale: .3, dolly }, heliocentric: null,
+      worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
+        presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
+        bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
+      cameraElement: make(), viewport: { read: () => ({ bounds: make().getBoundingClientRect(), focalPixels: focal, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(), sceneElement: { style: {} } };
+    return createPerspectiveDolly(options as unknown as Parameters<typeof createPerspectiveDolly>[0], () => fixedCameraOrientation([0, -1, 0, 1, 0, 0, 0, 0, 1])).camera;
+  };
+  const plain = build(undefined, 1000).minimumDistance();
+  // 1 mrad of arc is 0.1 units of ground on a 100-unit body: one CSS pixel covers it at an altitude of 0.1 x focal.
+  expect(build(.001, 1000).minimumDistance()).toBeCloseTo(Math.max(plain, 100 + 100), 9);
+  expect(build(.001, 1500).minimumDistance()).toBeCloseTo(Math.max(plain, 100 + 150), 9);
+  // A body without a declared arc keeps the prepared radius floor.
+  expect(plain).toBeLessThan(200);
+});
