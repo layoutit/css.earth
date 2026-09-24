@@ -16,6 +16,7 @@ import { fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveAr
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { Cited, StarSpec } from './spec.mts';
+import { quoteSource } from './prose.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
 const GAIA_LICENSE = { license: 'Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained', licenseEvidence: ['https://www.cosmos.esa.int/web/gaia-users/credits'] };
@@ -63,6 +64,10 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow, ids: Identifiers, 
 
 /** A publication record in src/sources for a cited arXiv or DOI link. */
 export function publicationRecord(publication: Publication) {
+  if (publication.wikipedia) return { id: publication.id, kind: 'reference-page', identityLevel: 'work', title: `Wikipedia article: ${publication.title}`, identifiers: [{ type: 'Archive resource', value: publication.url }],
+    links: [{ role: 'landing', url: publication.url, label: `Wikipedia, ${publication.title}` }], evidence: [{ url: publication.url, checkedOn: CHECKED, locator: 'Lead section, as the REST summary API serves it; the quotes name the revision' }], relations: [],
+    statements: [{ kind: 'credit', text: `Wikipedia contributors, "${publication.title}", Wikipedia, The Free Encyclopedia`, scope: 'citation', evidence: publication.url },
+      { kind: 'rights', text: 'Creative Commons Attribution-ShareAlike 4.0; sentences quoted verbatim with attribution', scope: 'Quoted text', evidence: 'https://creativecommons.org/licenses/by-sa/4.0/' }], creators: publication.creators };
   if (publication.page) return { id: publication.id, kind: 'reference-page', identityLevel: 'work', title: `Web page ${publication.title}`, identifiers: [{ type: 'Archive resource', value: publication.url }],
     links: [{ role: 'landing', url: publication.url, label: publication.title }], evidence: [{ url: publication.url, checkedOn: CHECKED, locator: 'The page as cited by a NASA Exoplanet Archive parameter set or by a spec' }], relations: [],
     statements: [{ kind: 'credit', text: publication.title, scope: 'citation', evidence: publication.url }] };
@@ -88,7 +93,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
   const ids = await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-  const urls = [...new Set([spec.paper.url, ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.spin].flatMap(value => value && value !== 'gaia-flame' ? [value.url] : [])])];
+  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.spin].flatMap(value => value && value !== 'gaia-flame' ? [value.url] : [])])];
   const [{ csv, row }, found] = await Promise.all([fetchGaiaRow(archive, ids.gaia), Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, row);
   const body = astronomyRecord(spec, row, ids, order);
@@ -146,7 +151,10 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const text = read(`${o}/text.json`);
   // Drafted text is written as it stands, cited to the paper at its locator; otherwise the card and introduction stay marked.
   if (spec.text) { text.card.text = spec.text.card; text.introduction.text = spec.text.introduction; }
-  for (const key of ['card', 'introduction'] as const) text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: String(publicationRecord(paper).statements[0]!.text), checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) }];
+  // The label a reader sees: the record's credit line, or the spec's credit when the record has none (an ADS bibcode alone).
+  const paperLabel = publicationRecord(paper).statements.find(statement => statement.kind === 'credit')?.text ?? spec.paper.credit;
+  for (const key of ['card', 'introduction'] as const) text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: paperLabel, checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) },
+    ...quoteSource(spec.text?.quotes, key, publications)];
   files.set(`${o}/text.json`, json(text));
 
   // Manifest and acquisition.
@@ -182,7 +190,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
     ...limb.limbDarkening ? ['- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.'] : [],
     ...spec.notes.map(note => `- **Not shown.** ${note}.`),
-    ...spec.text ? ['- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.'] : [`- ${TODO}: anything else not shown and why.`], '',
+    ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
 
   files.set(`src/sources/gaia-dr3-${id}.json`, json({ id: `gaia-dr3-${id}`, kind: 'data-product', identityLevel: 'work', title: `Gaia DR3 gaia_source row for ${spec.name} (source_id ${row.sourceId})`,
@@ -326,7 +334,7 @@ export async function runHostedPhase(handoff: string, root = process.cwd()): Pro
   for (const saved of records) {
     const record = { ...saved, documents: new Map(Object.entries(saved.documents as Record<string, string>)) };
     const hostBody = JSON.parse(await readFile(resolve(root, `packages/astronomy/data/bodies/${record.hostId}.json`), 'utf8'));
-    const urls = [record.spec.paper.url, record.radius.url, record.mass.url, record.orbitCitation.url, record.spec.temperature?.url].filter((url): url is string => typeof url === 'string');
+    const urls = [record.spec.paper.url, record.spec.text?.quotes?.url, record.radius.url, record.mass.url, record.orbitCitation.url, record.spec.temperature?.url].filter((url): url is string => typeof url === 'string');
     const publications = new Map<string, Publication>();
     for (const url of new Set(urls)) { const publication = await fetchPublication(liveArchive, url); if (publication) publications.set(url, publication); }
     const { files, hex } = await hostedPackage(record, hostBody, publications, liveArchive, root, SOLAR_GEOMETRY_EPOCH_JD_TT);

@@ -13,6 +13,7 @@ import { parseCieTable } from '../observation/disc-integrated-color.mts';
 import { type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
+import { quoteSource } from './prose.mts';
 import { chooseLimb } from './limb.mts';
 import { archiveRows, assembleArchiveOrbit, compositeMass, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
 import { TODO } from './scaffold.mts';
@@ -122,7 +123,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   if (!star) text.datasets = { shape: { title: 'Shape only', detail: 'Published radius', summary: 'A sphere at the published size. No picture of its surface exists.' } };
   for (const key of ['card', 'introduction'] as const) {
     text[key].text = spec.text ? spec.text[key] : `${TODO}: ${key === 'card' ? 'one sentence, 110 characters at most' : 'two sentences, 180 characters at most'}.`;
-    text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: label(spec.paper.url, spec.paper.credit), checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) }];
+    text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: label(spec.paper.url, spec.paper.credit), checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) }, ...quoteSource(spec.text?.quotes, key, publications)];
   }
   files.set(`${o}/text.json`, json(text));
   const manifest = read(`${s}/manifest.json`);
@@ -141,7 +142,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
-    ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? ['- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.'] : [`- ${TODO}: anything else not shown and why.`], '',
+    ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
   bindInputs(files, id);
   // One marker for everything a person still writes.

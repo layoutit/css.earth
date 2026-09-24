@@ -104,3 +104,24 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   // A mass that makes an impossible density is refused before the records see it.
   assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.1, provenance: 'Mass', limit: false, label: 'D et al. 2023' }), /g\/cm\^3, outside what the records accept/u);
 });
+
+test('reader quotes come verbatim from the Wikipedia lead: the sentence naming the body, then the next; no article, a disambiguation page or an article about something else gives none', async () => {
+  const { pickQuotes, sentences, wikipediaLead, wikipediaQuotes } = await import('./prose.mts');
+  const extract = 'HD 219134 is a main-sequence star in the constellation Cassiopeia. It is 6.5 parsecs (21 light-years) from the Sun. Smith et al. (2015) found HD 219134 b, a rocky planet with a 3.09-day orbit, transiting the star.';
+  assert.equal(sentences(extract).length, 3);
+  assert.deepEqual(pickQuotes(extract, ['HD 219134 b']), { card: 'Smith et al. (2015) found HD 219134 b, a rocky planet with a 3.09-day orbit, transiting the star.' });
+  assert.deepEqual(pickQuotes(extract, ['HD 219134']), { card: 'HD 219134 is a main-sequence star in the constellation Cassiopeia.', introduction: 'It is 6.5 parsecs (21 light-years) from the Sun.' });
+  const pages: Record<string, unknown> = {
+    'HD_219134': { type: 'standard', title: 'HD 219134', extract, description: 'Star in the constellation Cassiopeia', revision: 1234, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/HD_219134' } } },
+    'Mercury': { type: 'disambiguation', title: 'Mercury', extract: 'Mercury may refer to:', revision: 1, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Mercury' } } },
+    'HD_219134_c': { type: 'standard', title: 'HD 219134', extract, description: 'Star in the constellation Cassiopeia', revision: 1234, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/HD_219134' } } },
+    'Ariel': { type: 'standard', title: 'Ariel', extract: 'Ariel is a spirit in The Tempest.', description: 'Character in a play', revision: 2, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Ariel' } } },
+  };
+  const archive = { exists: async (url: string) => decodeURIComponent(url.split('/').at(-1)!) in pages, text: async (url: string) => JSON.stringify(pages[decodeURIComponent(url.split('/').at(-1)!)]), bytes: async () => Buffer.alloc(0) };
+  assert.equal(await wikipediaLead(archive, 'HD 219134 d'), undefined, 'no article');
+  assert.equal(await wikipediaLead(archive, 'Mercury'), undefined, 'disambiguation');
+  assert.equal(await wikipediaLead(archive, 'Ariel'), undefined, 'not a star or planet');
+  assert.deepEqual(await wikipediaQuotes(archive, ['HD 219134 b', 'HD 219134'], ['HD 219134 b']), { url: 'https://en.wikipedia.org/wiki/HD_219134', title: 'HD 219134', revision: '1234',
+    card: 'Smith et al. (2015) found HD 219134 b, a rocky planet with a 3.09-day orbit, transiting the star.' }, "a planet without its own article quotes its host's lead where it is named");
+  assert.equal(await wikipediaQuotes(archive, ['HD 219134 c', 'HD 219134'], ['HD 219134 c']), undefined, "a planet name redirecting to a host lead that never names the planet gives it no quote");
+});
