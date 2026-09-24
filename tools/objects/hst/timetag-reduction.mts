@@ -32,7 +32,7 @@
  * continuous coordinates, `restFramePixel` answers with the index the event is counted in, and `gridRadii` and
  * `gridLatitudeDegrees` take an index and add the half pixel themselves. Mixing the two puts a symmetric cloud of events
  * half a pixel off its own centre, which at 35 km to the pixel is 17.5 km on each axis. */
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { quadraticFit } from './line-stack-reduction.mts';
 
 export { quadraticFit };

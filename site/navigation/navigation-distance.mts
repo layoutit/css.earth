@@ -1,6 +1,6 @@
 import { parseDistanceSubject } from '../../packages/catalog/src/spatial-relations.ts';
 import type { DistanceSubject } from '../../packages/catalog/src/spatial-relations.ts';
-import { record } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 /** Display and sort values are prepared together; catalogue epochs are not measurement epochs. */
 export interface NavigationDistance {
@@ -14,7 +14,7 @@ export interface NavigationDistance {
 }
 
 export function parseNavigationDistance(input: unknown): NavigationDistance {
-  if (!record(input) || Object.keys(input).some(key => !['meters', 'value', 'unit', 'quantity', 'referencePoint', 'epochJdTt', 'subject'].includes(key)) ||
+  if (!isRecord(input) || Object.keys(input).some(key => !['meters', 'value', 'unit', 'quantity', 'referencePoint', 'epochJdTt', 'subject'].includes(key)) ||
       typeof input.meters !== 'number' || !Number.isFinite(input.meters) || input.meters < 0 ||
       typeof input.value !== 'number' || !Number.isFinite(input.value) || input.value < 0 ||
       (input.unit !== 'AU' && input.unit !== 'pc') || (input.quantity !== 'geometric' && input.quantity !== 'catalogue' && input.quantity !== 'comoving') ||

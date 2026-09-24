@@ -40,7 +40,7 @@ export const explorationCompilerClosure = [
   'src/platform/prepared-sources.mts', 'tools/sources/source-catalogue-inputs.mts',
   'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
   'tools/sources/factsheet-sources.mts', 'site/fact-order.mts', 'tools/assets/restore-factsheet-evidence.mts',
-  'tools/sources/source-values.mts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
+  'packages/core/src/validate.ts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare/prepare-provenance.mts',

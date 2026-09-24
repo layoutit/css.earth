@@ -1,5 +1,5 @@
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import type { PreparedCatalogObject, PreparedGalaxyCatalog, PreparedClusterCatalog, PreparedNebulaCatalog } from '@cssearth/catalog';
 
 type PreparedFocusCatalog = PreparedGalaxyCatalog | PreparedClusterCatalog | PreparedNebulaCatalog;
@@ -35,7 +35,7 @@ export function readInitialFocus(document: Document): PreparedCatalogObject | nu
   const selectedId = script.getAttribute('data-initial-focus');
   if (!selectedId || !/^[a-z0-9][a-z0-9:._+-]{0,127}$/iu.test(selectedId)) throw new TypeError('Initial focus identity is invalid.');
   const value: unknown = JSON.parse(script.textContent ?? '');
-  if (!record(value)) throw new TypeError('Initial focus is invalid.');
+  if (!isRecord(value)) throw new TypeError('Initial focus is invalid.');
   const catalog = value.schema === 'cssearth-nebula-catalog@1' ? parsePreparedNebulaCatalog(value)
     : value.schema === 'cssearth-cluster-catalog@1' ? parsePreparedClusterCatalog(value) : parsePreparedGalaxyCatalog(value);
   const selected = catalog.objects.find(object => object.id === selectedId);

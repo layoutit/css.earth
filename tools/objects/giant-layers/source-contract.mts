@@ -1,5 +1,5 @@
 import { readAuthoredSources } from '../authored-sources.ts';
-import {parse,object,array,string} from '../material-composition/data-schema.mts';
+import {parse,object,array,string} from '@cssearth/core/schema';
 import assert from 'node:assert/strict';
 import{readFile,readdir}from'node:fs/promises';
 import{resolve}from'node:path';

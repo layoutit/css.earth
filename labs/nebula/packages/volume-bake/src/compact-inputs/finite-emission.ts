@@ -18,7 +18,7 @@ import { compilerSlabMaterial, lensChannelGainMaterial, validateChannelGain, val
 import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings, validateEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
 import { physicalToField, angularScale } from '@cssearth/volume-core/coordinates/observer-tangent';
 import { parseCloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
-import { record } from '@cssearth/volume-core/contracts/volume-recipe';
+import { requireRecord as record } from '@cssearth/core';
 import type { EmissionFieldModel } from '@cssearth/volume-core/contracts/emission';
 import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
 import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';

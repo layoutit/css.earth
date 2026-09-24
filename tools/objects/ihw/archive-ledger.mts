@@ -9,7 +9,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '../product-record.mts';
 
 export const IHW_LEDGER_SCHEMA = 'cssearth-ihw-ledger@1';

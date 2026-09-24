@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs';
-import {requireRecord} from '../sources/source-values.mts';
+import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';

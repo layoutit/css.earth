@@ -27,7 +27,7 @@ export default [
     },
   },
   {
-    files: ['packages/{engine,objects}/src/**/*.ts'],
+    files: ['packages/{core,engine,objects}/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-globals': ['error', 'window', 'document', 'HTMLElement', 'DOMMatrix', 'DOMMatrixReadOnly', 'Image', 'CSSStyleDeclaration', 'requestAnimationFrame'],

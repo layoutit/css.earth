@@ -2,7 +2,7 @@
 // object id to independently published anchors; one runner per contract registers
 // a test per entry. CSSEARTH_TEST_OBJECTS=<id>[,<id>] limits a run to those bodies,
 // which is how the per-object runner exercises a single body.
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../tools/sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export interface AnchorEntry<T> { readonly id: string; readonly claim: string; readonly anchors: T; }
 

@@ -6,7 +6,7 @@ import {prepareScientificFocus} from './scientific-focus.mts';
 import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
 import {preparedScenePitch} from '@cssearth/engine';
 import {parseScientificCamera} from './source-records.mts';
-import {requireRecord} from '../../sources/source-values.mts';
+import {requireRecord} from '@cssearth/core';
 test('Agenor focus puts its body-fixed direction at the camera centre',async()=>{
   const camera=parseScientificCamera(requireRecord(JSON.parse(await readFile(new URL('../../../src/objects/europa/prepared/scene.json',import.meta.url), 'utf8')), 'Europa scene').camera);
   const focus={longitudeDegrees:142,latitudeDegrees:-43.7,zoom:4};

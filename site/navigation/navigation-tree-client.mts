@@ -1,17 +1,17 @@
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload, type NavigationTreeRecord } from '../../src/navigation/navigation-tree-schema.mts';
 import type { BrowserWindow } from '../browser-types.mts';
-import { record } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 
 function parsePayload(value: unknown): NavigationTreePayload {
-  if (!record(value) || value.schema !== NAVIGATION_TREE_SCHEMA || !Array.isArray(value.roots) || !record(value.nodes)) {
+  if (!isRecord(value) || value.schema !== NAVIGATION_TREE_SCHEMA || !Array.isArray(value.roots) || !isRecord(value.nodes)) {
     throw new TypeError('Invalid navigation tree payload.');
   }
   const nodes: Record<string, NavigationTreeRecord> = {};
   for (const [key, raw] of Object.entries(value.nodes)) {
-    if (!record(raw) || typeof raw.label !== 'string' || !(typeof raw.objectId === 'string' || raw.objectId === null)
+    if (!isRecord(raw) || typeof raw.label !== 'string' || !(typeof raw.objectId === 'string' || raw.objectId === null)
       || typeof raw.place !== 'boolean' || !Number.isSafeInteger(raw.count) || !Array.isArray(raw.children)
-      || !raw.children.every(child => typeof child === 'string') || !(raw.marker === null || record(raw.marker)
+      || !raw.children.every(child => typeof child === 'string') || !(raw.marker === null || isRecord(raw.marker)
         && typeof raw.marker.className === 'string' && typeof raw.marker.style === 'string')
       || !(typeof raw.href === 'string' && raw.href.startsWith('/') || raw.href === null)
       || !(typeof raw.focusId === 'string' || raw.focusId === null)) {

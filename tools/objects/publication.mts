@@ -4,7 +4,7 @@ import { readInventory, mergeInventory, inventoryText } from '../../src/platform
 import type { RuntimeManifest } from './runtime-assets.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writePreparedSet, type PreparedOutput } from '../prepared/write-prepared-set.mts';
 
 

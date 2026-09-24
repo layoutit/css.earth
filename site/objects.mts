@@ -8,7 +8,7 @@ import focuses from './prepared-focus-objects.json' with { type: 'json' };
 import { parseNavigationDistance } from './navigation/navigation-distance.mts';
 import { definePreparedFocus, isSceneObject } from './prepared-focus-object.mts';
 import type { NavigableObject } from './prepared-focus-object.mts';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 /** The single application registry, assembled from explicitly registered packages. */
 export const OBJECTS = defineObjects<NavigableObject>([...OBJECT_DESCRIPTORS.map(descriptor => {
@@ -20,12 +20,12 @@ export const OBJECTS = defineObjects<NavigableObject>([...OBJECT_DESCRIPTORS.map
 }), ...focuses.map(definePreparedFocus)]);
 
 function preparedDiscovery(descriptor: unknown) {
-  if (!record(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
+  if (!isRecord(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
   return parseObjectDiscovery(Object.getOwnPropertyDescriptor(discoveries, descriptor.id)?.value);
 }
 
 function preparedDistance(descriptor: unknown) {
-  if (!record(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
+  if (!isRecord(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
   return parseNavigationDistance(Object.getOwnPropertyDescriptor(distances, descriptor.id)?.value);
 }
 

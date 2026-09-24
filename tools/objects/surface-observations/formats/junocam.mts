@@ -6,8 +6,8 @@
  * shared route: footprints, photometry, selection between photographs, level matching, display and the report.
  */
 import type { LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import { array, boolean, decodeProfile, number, optional, shape, text, parseLevelMatching, parseSurfaceGeometry, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
-import { requireArray, requireRecord } from '../../../sources/source-values.mts';
+import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
+import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadKernelSet, type KernelSet } from '../../../spice/kernel-set.mts';

@@ -7,7 +7,7 @@ import { readFile } from "node:fs/promises";
 import { requireObjectControls } from "../scene/scene-contract.mts";
 import { SCENE_OBJECTS } from "../objects.mts";
 
-import { parse, object, array, string, optional, boolean } from '../../tools/objects/material-composition/data-schema.mts';
+import { parse, object, array, string, optional, boolean } from '@cssearth/core/schema';
 const preparedControls = (value: unknown) => parse(value, object({ controls: object({ settings: object({
   controls: array(object({ name: string, kind: string, label: string, checked: optional(boolean), state: optional(string) })),
 }) }) }), 'prepared settings').controls;

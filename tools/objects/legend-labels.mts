@@ -1,7 +1,7 @@
 /** Legend labels of a palette lens are derived, not typed: the display stretch runs from the report's low to high cast value,
  * so the labels are that span as a fraction of the brightest displayed point, at its low end, midpoint and top (two decimals).
  * Write mode refreshes them in the object's content record; check mode refuses labels that no longer match the report. */
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 
 export interface LegendLabelChange { readonly lensId: string; readonly authored: readonly string[] | null; readonly derived: readonly string[] }
 

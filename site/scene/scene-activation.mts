@@ -1,5 +1,6 @@
 import type { BrowserWindow } from '../browser-types.mts';
-import { errorMessage, record } from '../browser-types.mts';
+import { errorMessage } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { readNavigationSelection } from '../navigation/navigation-request.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { withDataset } from '../dataset-url.mts';
@@ -35,7 +36,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         const completed = await session.wait(handoff.afterMount(mount));
         if (completed.cancelled || !isCurrent(session) || request.signal.aborted) return;
       } catch (error) {
-        if ((!record(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || !isCurrent(session) ||
+        if ((!isRecord(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || !isCurrent(session) ||
             request.signal.aborted) throw error;
         // The detailed destination already owns the camera. Real input ends
         // its flight without retiring that scene or restoring the endpoint.

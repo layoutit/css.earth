@@ -4,7 +4,7 @@ import type { RadialSamplingProfile, RadialFaces, TerrainGrid } from './radial-m
 import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh } from './radial-mesh.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
-import { requireRecord, requireArray, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
 import { parseRadialSource } from './radial-source.mts';
 import { resolve } from 'node:path';
 import { loadEllipsoidParameters } from './ellipsoid-parameters.mts';

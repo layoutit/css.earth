@@ -5,7 +5,7 @@ import { binAverage, bandTemperatureTable, fitLightCurveMap, lightCurveSamples, 
 import { bareRockFromEclipseDepth, bareRockTemperature, fitBareRock } from '../eclipse-map/bare-rock.mts';
 import { measureTransitShift } from '../eclipse-map/transit-timing.mts';
 import { readTarMember } from './tar-member.mts';
-import { array, boolean, number, optional, shape, text } from './source-records.mts';
+import { array, boolean, number, optional, shape, text } from '@cssearth/core';
 
 const inside = (path: string) => { if (!path || path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError('An eclipse-map input must be inside the source directory.'); return path; };
 const systematic = (value: unknown): Systematic => {

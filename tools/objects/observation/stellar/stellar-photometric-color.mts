@@ -2,7 +2,7 @@
 // is published, otherwise a Planck spectrum at its catalogued photometric effective temperature, through the CIE 1931 2° observer
 // into sRGB (D65 white), scaled so the brightest linear channel is 1. A self-luminous disc shows chromaticity only; its brightness
 // is not modelled. Limb darkening is drawn where a measurement gives it, or from a named model grid (below).
-import { requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { linearToSrgb } from '../../color-transfer.mts';
 import { gunzipSync } from 'node:zlib';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interferometry/fits-table.mts';

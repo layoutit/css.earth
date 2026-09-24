@@ -7,7 +7,7 @@ import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
-import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
 import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 
@@ -25,7 +25,6 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   // `runtime-assets.mts` imports `RUNTIME_ASSET_ORIGIN` from here; without it the fixture root cannot resolve.
   await copyFile(resolve(project, 'tools/assets/asset-origin.mts'), resolve(root, 'tools/assets/asset-origin.mts'));
   await copyFile(resolve(project, 'tools/assets/source-mirror.mts'), resolve(root, 'tools/assets/source-mirror.mts'));
-  await copyFile(resolve(project, 'tools/sources/source-values.mts'), resolve(root, 'tools/sources/source-values.mts'));
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));

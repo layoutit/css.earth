@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
-import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
 import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const pair = (value: unknown) => { const result = array(number)(value); assert.equal(result.length, 2); return result; };

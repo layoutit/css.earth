@@ -8,7 +8,7 @@ import { build } from 'esbuild';
 import { chromium } from 'playwright';
 import sharp from 'sharp';
 import { Quaternion, Vector3, MathUtils } from 'three';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { RenderRequest, renderFacility, recipe } from '../facility-renders/render.mts';
 import { writePreparedSet } from '../prepared/write-prepared-set.mts';
 import { prepareArtworkRefresh } from '../facility-renders/refresh.mts';

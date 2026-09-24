@@ -1,3 +1,4 @@
+import { isRecord as record } from '@cssearth/core';
 /** Read-only archive discovery. An image candidate is not an accepted reconstruction input. */
 export const archiveProviders = ['mast', 'irsa', 'eso'] as const;
 export type ArchiveProvider = typeof archiveProviders[number];
@@ -17,9 +18,6 @@ export interface ArchiveQuery {
   matchedCount: number | null; matchedEstimatedBytes: number | null; matchedUnknownSizeCount: number | null;
   images: ArchiveImage[]; error?: string; responseSha256?: string;
   imagesPath?: string; imagesSha256?: string; imageCount?: number;
-}
-export function record(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 function text(value: unknown): value is string { return typeof value === 'string'; }
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }

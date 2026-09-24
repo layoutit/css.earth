@@ -2,7 +2,7 @@ import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { assertCalibratedAsteroidSource } from './asteroid-calibration-contract.mts';
 import { anchorTable, numberList, selectedObjectIds } from './anchor-table.mts';
-import { requireFiniteNumber, requireRecord, requireString } from '../../../tools/sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import table from './anchors/asteroid-calibration.json' with { type: 'json' };
 
 // Original publisher-coordinate anchors and independent signed-volume intake, one entry per body.

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { requireRecord, requireArray } from '../sources/source-values.mts';
+import { requireRecord, requireArray } from '@cssearth/core';
 
 /** Require the fixture or result under test to exist before inspecting it. */
 export function required<T>(value: T, message = 'Expected test value to exist'): NonNullable<T> {

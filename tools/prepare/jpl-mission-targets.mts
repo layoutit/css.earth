@@ -1,5 +1,5 @@
 import targets from '../../site/source/jpl-small-body-mission-targets.json' with { type: 'json' };
-import { record } from '../../site/browser-types.mts';
+import { isRecord } from '@cssearth/core';
 
 // This is identity binding, not an editorial selection: membership comes only
 // from the vendored JPL target table. Unbound JPL targets are simply not yet
@@ -33,11 +33,11 @@ const objectBySbdbId = Object.freeze({
 } satisfies Readonly<Record<string, string>>);
 
 function sourceTargetIds(source: unknown) {
-  if (!record(source) || source.schema !== 'cssearth-jpl-small-body-mission-targets@1' || !Array.isArray(source.targets)) {
+  if (!isRecord(source) || source.schema !== 'cssearth-jpl-small-body-mission-targets@1' || !Array.isArray(source.targets)) {
     throw new TypeError('Invalid JPL small-body mission-target source.');
   }
   const ids = source.targets.map(target => {
-    if (!record(target) || typeof target.sbdbId !== 'string' || typeof target.name !== 'string' ||
+    if (!isRecord(target) || typeof target.sbdbId !== 'string' || typeof target.name !== 'string' ||
         !Array.isArray(target.missions) || !target.missions.every(mission => typeof mission === 'string')) {
       throw new TypeError('Invalid JPL small-body mission target.');
     }

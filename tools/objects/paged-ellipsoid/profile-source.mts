@@ -1,5 +1,4 @@
-import {array, boolean, dictionary, literal, number, object, optional, parse, record, string, tuple, union} from '../material-composition/data-schema.mts';
-import type {Guard, Infer} from '../material-composition/data-schema.mts';
+import {array, boolean, dictionary, literal, number, object, optional, parse, record, string, tuple, union, type Guard, type Infer} from '@cssearth/core/schema';
 import type {PagedAssetConfiguration} from './asset-contract.mts';
 import type {PagedRasterConfiguration} from './surface-raster.mts';
 import type {PagedGeometryParameters} from './scene-contract.mts';

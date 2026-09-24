@@ -6,7 +6,7 @@ import { open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
 import { resolve, dirname, basename } from 'node:path';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString, hasErrorCode } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
 import { readFitsHeader } from '../../fits/fits.mts';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
 import { inside, sourceCacheAddress } from './source-product-contract.mts';

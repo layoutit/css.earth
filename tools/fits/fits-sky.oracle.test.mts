@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFitsHdus } from './fits.mts';
 import { skyDisplayRaster, skyImageAxes } from './fits-sky.mts';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/sky-orientation.json');
 const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/sky-orientation.fits');

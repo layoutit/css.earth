@@ -1,5 +1,5 @@
 import { sha256 } from '../../src/platform/sha256.mts';
-import { requireRecord } from '../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 
 /** The page's share of the runtime: assets and controls beside the scene. It is a build output that
  * restore-object-json writes from the restored runtime, never committed, and the descriptor names it by path only. */

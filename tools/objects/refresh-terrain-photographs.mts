@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
-import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { parseNativePhotographicSampling, prepareNativePhotographicAtlas } from './terrestrial-layers/native-photograph.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));

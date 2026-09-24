@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpectralBandMaps } from './spectral-band-maps.mts';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, ORACLE_ROOT } from '../../oracles/fixture.mts';
-import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 
 const source = resolve(ORACLE_ROOT, 'src/objects/charon/source');
 const recipePath = 'science/leisa/bands.json';

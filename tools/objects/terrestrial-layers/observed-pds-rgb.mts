@@ -1,4 +1,5 @@
-import {parseGeoImageEntry,parsePdsRgbPolicy,text} from './source-records.mts';
+import {parseGeoImageEntry,parsePdsRgbPolicy} from './source-records.mts';
+import {text} from '@cssearth/core';
 import { spawn } from 'node:child_process';
 import { prepareProjectedByteObservation } from './observed-image.mts';
 import { pds3Keyword } from '../pds-labels.mts';

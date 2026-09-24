@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../../site/objects.mts';
 import { objectRuntimePackageTests, preparedSelectionFixture } from '../../../src/platform/test/object-runtime-package.mts';
 import { required } from '../../../tools/contract/test-values.mts';
-import { requireArray, requireRecord, requireString } from '../../../tools/sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { selectedObjectIds } from './anchor-table.mts';
 import { projectRoot } from '../fixtures.mts';
 

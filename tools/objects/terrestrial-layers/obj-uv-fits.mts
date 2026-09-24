@@ -1,4 +1,5 @@
-import { shape, text, number, boolean, optional, parseTransform } from './source-records.mts';
+import { parseTransform } from './source-records.mts';
+import { shape, text, number, boolean, optional } from '@cssearth/core';
 import type { SourceMesh, SurfaceHit, ClosestSurfacePoint } from './contracts.mts';
 const parseUvSampler = shape({grid:shape({bitpix:number,width:number,height:number,flipV:boolean,noData:optional(number)}),sampling:text,surfaceSampling:shape({method:text,maximumDistanceMeters:number}),valueTransform:optional(parseTransform)});
 const parseUvRecipe = shape({meshPath:text,labelPath:text,...{grid:shape({bitpix:number,width:number,height:number,flipV:boolean,noData:optional(number)}),sampling:text,surfaceSampling:shape({method:text,maximumDistanceMeters:number})},additionalGrids:optional(value=>value),relief:optional(value=>value)});

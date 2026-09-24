@@ -36,7 +36,7 @@ import { numbers } from '../../spice/text-kernel.mts';
 import { utcToEt } from '../../spice/lsk.mts';
 import { spiceCamera, type PixelModelKeys, type SpiceCamera } from '../../spice/camera.mts';
 import { pds3Keyword } from '../pds-labels.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { dot3 as dot } from '../../../src/platform/vector3.mts';
 

@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { readFile, rename, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { hasErrorCode } from "../sources/source-values.mts";
+import { hasErrorCode } from "@cssearth/core";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { requireObjectControls } from "../../site/scene/scene-contract.mts";
 

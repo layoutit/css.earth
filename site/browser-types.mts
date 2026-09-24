@@ -7,9 +7,6 @@ export type SceneFactory = ((stage: HTMLElement, options: MountOptions) => Objec
   navigation?: ReturnType<typeof createPreparedObjectNavigation> | null;
 };
 export const errorMessage = (error: unknown): string => error instanceof Error ? error.message : String(error);
-export function record(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
-}
 export function requiredElement<T extends Element = HTMLElement>(root: ParentNode, selector: string): T {
   const element = root.querySelector<T>(selector);
   if (!element) throw new Error(`Missing shell element: ${selector}.`);

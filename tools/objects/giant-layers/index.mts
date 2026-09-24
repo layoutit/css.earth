@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
-import { parse } from '../material-composition/data-schema.mts';
+import { parse } from '@cssearth/core/schema';
 import { radialRecipe, type SourcePin, type ObservedRadialLayer } from './radial-contract.mts';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';

@@ -1,6 +1,6 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
-import { shape, array, text, number, optional, parseShapeLens } from './source-records.mts';
-import { requireArray } from '../../sources/source-values.mts';
+import { parseShapeLens } from './source-records.mts';
+import { shape, array, text, number, optional, requireArray } from '@cssearth/core';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';

@@ -1,5 +1,5 @@
 import {validateSourceManifest} from '../../../src/platform/source-manifest.mts';
-import {array, number, object, optional, parse, record, string} from '../material-composition/data-schema.mts';
+import {array, number, object, optional, parse, record, string} from '@cssearth/core/schema';
 import {readJsonSource} from '../../sources/source-values.mts';
 type Mutable<T> = T extends readonly (infer Item)[] ? Mutable<Item>[] : T extends object ? {-readonly [Key in keyof T]: Mutable<T[Key]>} : T;
 // The source validators may freeze accepted records. A refresh owns a fresh,

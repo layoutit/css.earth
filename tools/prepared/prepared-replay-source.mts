@@ -1,6 +1,6 @@
 import type {CameraPlan} from '../../src/renderers/css/navigation/types.ts';
 import type {PreparedProjectiveTextureLeaf} from './projective-layout.mts';
-import type {Decoder} from '../objects/terrestrial-layers/source-records.mts';
+import {type Decoder,requireRecord,shape,text,number,array,optional,dictionary,boolean} from '@cssearth/core';
 export interface ReplayRings {
  leaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
  resource:{key:string;url:string;pool:string};coverage:Record<string,unknown>;
@@ -12,10 +12,8 @@ export interface SolidReplayScene {
  bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
  surfaceTriangles?:number[][][];surfaceLensRanges?:readonly {lensId:string;start:number;count:number}[];
 }
-import {requireRecord} from '../sources/source-values.mts';
-import {shape,text,number,array,optional,dictionary,boolean} from '../objects/terrestrial-layers/source-records.mts';
 import {camera} from '../objects/camera-source.mts';
-import {parse} from '../objects/material-composition/data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {validatePreparedCubicSky} from '../../src/platform/cubic-sky-contract.mts';
 import {validateDirectionalSunPlan} from '../../src/platform/directional-sun-contract.mts';
 

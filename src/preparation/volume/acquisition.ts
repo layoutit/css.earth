@@ -6,7 +6,8 @@ import { pipeline } from 'node:stream/promises';
 import { resolve } from 'node:path';
 import { zstdCompressSync, constants } from 'node:zlib';
 import { containedPath, sha256, sourceBytes, type DecodedGrid } from '@cssearth/volume-bake/compact-inputs/density-grid';
-import { record, triple, type Vector3, type VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { triple, type Vector3, type VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { requireRecord as record } from '@cssearth/core';
 
 export interface VolumeAcquisition {
   schema: 'cssearth-raw-volume-acquisition@1';

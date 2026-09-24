@@ -1,6 +1,6 @@
 /** Every archive the star generator reads, behind one small fetch interface so the tests run offline on fixtures. Each call names
  * the URL it read; a failed request says which archive, which URL and which status. */
-import { requireString } from '../../sources/source-values.mts';
+import { requireString } from '@cssearth/core';
 import { decodeEntities } from './orbit.mts';
 
 export interface Archive {

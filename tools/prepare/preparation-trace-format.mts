@@ -3,7 +3,7 @@
 // imported would be missing from every record.
 import { sha256 } from '../../src/platform/sha256.mts';
 import { createHash } from 'node:crypto';
-import { isRecord } from '../../src/platform/records.mts';
+import { isRecord } from '@cssearth/core';
 
 export const PREPARATION_TRACE_VARIABLE = 'CSSEARTH_PREPARATION_TRACE';
 export const PREPARATION_TRACE_SCHEMA = 'cssearth-preparation-trace@1';

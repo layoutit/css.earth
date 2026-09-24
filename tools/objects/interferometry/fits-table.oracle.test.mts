@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readOracleFixture, readOracleInput } from '../../oracles/fixture.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { binaryTable, findTable, numbers, readFitsHdus, tableColumn, text, writeCell } from './fits-table.mts';
 
 const fixture = await readOracleFixture('fits/binary-table.json');

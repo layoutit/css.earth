@@ -1,5 +1,5 @@
 import { readAuthoredSources } from '../authored-sources.ts';
-import { parse } from '../material-composition/data-schema.mts';
+import { parse } from '@cssearth/core/schema';
 import { bandedGeometryRecipe } from './geometry-contract.mts';
 import { normalizedPresentationRecipe } from './normalized-presentation-contract.mts';
 import { layeredPresentationRecipe } from './presentation-contract.mts';
@@ -7,8 +7,7 @@ import { parseEllipsoidMaterialRecipe } from './materials.mts';
 import { parsePhotometricDiscRecipe } from './photometric-disc.mts';
 import { parseObservedSurfaceRecipe } from '../observed-surfaces/index.mts';
 import { parseObservedPolarRecipe } from '../giant-observations/index.mts';
-import { shape, text, number, optional, array } from '../terrestrial-layers/source-records.mts';
-import { isRecord, requireRecord, requireFiniteNumber } from '../../sources/source-values.mts';
+import { shape, text, number, optional, array, isRecord, requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';

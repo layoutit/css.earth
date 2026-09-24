@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
 import { readAuthoredSources } from '../authored-sources.ts';
-import { readJsonSource, requireFiniteNumber } from '../../sources/source-values.mts';
+import { readJsonSource } from '../../sources/source-values.mts';
+import { requireFiniteNumber } from '@cssearth/core';
 import { validateSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from './profile-source.mts';

@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { build } from 'esbuild';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../../sources/source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { parseBodyMapProduct } from '../../body-map-product.mts';
 import { assertBodyMapPlanes } from '../../body-map-publication.mts';
 import { writeProductRecord } from '../../product-record.mts';

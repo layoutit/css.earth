@@ -6,7 +6,7 @@ import { appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { ChangeMode } from './classify-changes.mts';
 
 const execFileAsync = promisify(execFile);

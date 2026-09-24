@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readNpyObject, type NpyArray, type NpyValue } from './npy-pickle.mts';
 import { readTarMember } from './tar-member.mts';
-import { shape, text, array, optional } from './source-records.mts';
+import { shape, text, array, optional } from '@cssearth/core';
 
 const profile = shape({ path: text, member: optional(text), sampling: text, units: text, values: array(text), latitudes: optional(array(text)), longitudes: optional(array(text)),
   gridLayout: optional(text), visibleLongitudes: optional(shape({ times: array(text), planet: text })) });

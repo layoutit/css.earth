@@ -1,5 +1,5 @@
 import type { ObjectEntry } from './object-schema.mts';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -28,15 +28,15 @@ export async function prepareBodyOverview(objectId: string) {
   const sourceDirectory = resolve(root, 'src/objects', objectId, 'source');
   const presentationPath = resolve(sourceDirectory, 'presentation/overview.json');
   const presentation: unknown = existsSync(presentationPath) ? JSON.parse(await readFile(presentationPath, 'utf8')) : {};
-  if (!record(presentation) || (presentation.classificationLabel !== undefined && typeof presentation.classificationLabel !== 'string')) throw new TypeError('Invalid object overview presentation.');
+  if (!isRecord(presentation) || (presentation.classificationLabel !== undefined && typeof presentation.classificationLabel !== 'string')) throw new TypeError('Invalid object overview presentation.');
   const image = [`/overview/${objectId}.webp`, `/social/${objectId}.jpg`]
     .find(url => existsSync(resolve(root, 'public', url.slice(1))));
   let spectrum = null;
   const chartPath = resolve(sourceDirectory, 'content/charts.json');
   if (existsSync(chartPath)) {
     const recipe: unknown = JSON.parse(await readFile(chartPath, 'utf8'));
-    if (!record(recipe) || !Array.isArray(recipe.charts)) throw new TypeError('Overview charts require prepared recipes.');
-    const selected: unknown = recipe.charts.find((chart: unknown) => record(chart) && chart.kind === 'spectrum');
+    if (!isRecord(recipe) || !Array.isArray(recipe.charts)) throw new TypeError('Overview charts require prepared recipes.');
+    const selected: unknown = recipe.charts.find((chart: unknown) => isRecord(chart) && chart.kind === 'spectrum');
     if (selected) {
       const chart = parseSpectrumRecipe(selected);
       const data = await readSpectrumData(sourceDirectory, chart);

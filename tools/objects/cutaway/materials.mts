@@ -1,5 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {parse} from '../material-composition/data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {cutawayRecipe} from './recipe-contract.mts';
 import {interiorSource, type InteriorSource} from './source-contract.mts';
 import type {ReadonlyVector3, Vector3} from '../material-composition/ellipsoid.mts';

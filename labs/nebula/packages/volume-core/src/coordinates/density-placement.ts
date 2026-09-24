@@ -1,5 +1,6 @@
 /** Authored model-only similarity; observed sky/image geometry stays fixed. */
-import { record, finite, triple, type Vector3, type Bounds3 } from '../contracts/volume-recipe.ts';
+import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
+import { triple, type Vector3, type Bounds3 } from '../contracts/volume-recipe.ts';
 import type { VolumeSlices } from '../contracts/volume-slices.ts';
 export interface DensityPlacement {
   schema: 'cssearth-density-placement@1'; scale: number; rotationZDegrees: number;

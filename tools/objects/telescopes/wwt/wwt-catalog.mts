@@ -1,7 +1,7 @@
 /** WWT's curated display imagery is a separate lane from qualified telescope observations. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode } from '../../../sources/source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 import type { TargetCatalogueEntry } from '../targets.mts';
 
 export const WWT_CATALOG_SCHEMA = 'cssearth-wwt-core-imagesets@1';

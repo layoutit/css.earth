@@ -1,7 +1,7 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
-import { shape, array, number, optional } from '../terrestrial-layers/source-records.mts';
-import { parse } from '../material-composition/data-schema.mts';
+import { shape, array, number, optional } from '@cssearth/core';
+import { parse } from '@cssearth/core/schema';
 import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from './material-contract.mts';
 import type { Vector3, ReadonlyVector3 } from '../material-composition/ellipsoid.mts';
 import type { WebpOptions } from 'sharp';

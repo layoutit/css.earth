@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
 import { productSourceIds, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
-import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
 type FixtureContext = PreparationContext & { source: string; outputDirectory: string; publicDirectory: string };

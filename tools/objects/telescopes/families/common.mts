@@ -11,5 +11,4 @@ export const csv=(head:readonly string[],rows:readonly (readonly unknown[])[])=>
 export const sha256=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 export const member=(id:string,path:string,role:DescriptorMember['role'],_bytes:Uint8Array,mediaType?:string):DescriptorMember=>({id,path,role,...(mediaType?{mediaType}:{})});
 export const descriptor=(value:ProductDescriptor):ProductDescriptor=>parseProductDescriptor(value);
-export const finite=(value:number,label:string)=>{if(!Number.isFinite(value))throw new TypeError(`${label} must be finite.`);return value;};
 export const stable=(value:string,label:string)=>{if(!/^[A-Za-z0-9][A-Za-z0-9._:-]*$/u.test(value))throw new TypeError(`${label} must be a stable identifier.`);return value;};

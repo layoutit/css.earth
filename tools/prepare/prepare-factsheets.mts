@@ -1,6 +1,5 @@
 import { sha256 } from '../../src/platform/sha256.mts';
-import {requireRecord,requireArray,hasErrorCode} from '../sources/source-values.mts';
-import {shape,text,number,array,optional} from '../objects/terrestrial-layers/source-records.mts';
+import {requireRecord,requireArray,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
 const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
 const entry_=shape({path:text});

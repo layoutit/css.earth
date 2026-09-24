@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import { createGiottoSampler, interpolatedNormals, polygonInteriorDistance } from './prepare-giotto.mts';

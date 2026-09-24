@@ -6,7 +6,7 @@ const test = sourceTest();
 import sharp from 'sharp';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { validatePreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
-import { parse, object, array, dictionary, number, string, tuple, json as jsonValue } from '../../tools/objects/material-composition/data-schema.mts';
+import { parse, object, array, dictionary, number, string, tuple, json as jsonValue } from '@cssearth/core/schema';
 const pin = object({ bytes: number });
 const path = object({ path: string });
 const brightness = object({ overall: number, x: number, y: number, z: number });

@@ -2,7 +2,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { pdsToolchain } from '../astronomy-packages/pds-toolchain.mts';
 import { writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';

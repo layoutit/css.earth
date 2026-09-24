@@ -26,7 +26,7 @@ import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
 import { familyCoverageLedger } from './family-handlers.mts';
 import type { FamilyOperation } from './family-handlers.mts';
 import { executeFamilyOperation, familyOperationNeedsParameters, type FamilyOperationParameters } from './family-operation.mts';
-import { requireString } from '../../sources/source-values.mts';
+import { requireString } from '@cssearth/core';
 import { exportWwtImage, WWT_IMAGE_MAX_LEVEL } from './wwt/wwt-image.mts';
 import { acquireWwtFits } from './wwt/wwt-fits.mts';
 import { resolveWwtFitsLead } from './wwt/wwt-fits-leads.mts';

@@ -12,7 +12,7 @@
  * Hard failure stays where it was, on lit shape over sky in the format that loads the frame. This stage never throws
  * for a bad number; it records the number. A frame it cannot judge is reported with the reason.
  */
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { loadNativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { framesReference, observationCaster, outline, peakValue, prepareFrame, registrationSweep, reliefSweep, type PreparedFrame, type RegistrationImage, type RegistrationResult, type ReliefResult, type SurfaceReference } from '../terrestrial-layers/registration-sweeps.mts';
 import type { FrameDetector, LoadContext, ObservationFrame } from './contract.mts';

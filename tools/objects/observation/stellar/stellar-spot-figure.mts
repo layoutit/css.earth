@@ -1,6 +1,6 @@
 /** Extract a published *hypothetical* spot layout onto a stationary stellar limb plate.
  * The figure constrains an illustrative pattern, not the actual surface of the star. */
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { displayedLuminance, quadraticIntensity, type StellarColor } from './stellar-photometric-color.mts';
 
 export interface SpotFigureModel {

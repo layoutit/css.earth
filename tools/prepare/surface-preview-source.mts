@@ -1,6 +1,5 @@
 import {readFile} from 'node:fs/promises';
-import {requireRecord,hasErrorCode} from '../sources/source-values.mts';
-import {shape,text,number,array,optional} from '../objects/terrestrial-layers/source-records.mts';
+import {requireRecord,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
 
 export interface SurfacePreviewDirectories {objectDirectory:string;publicDirectory:string;outputDirectory:string;}
 export async function optionalPreviewJson(path:string) {

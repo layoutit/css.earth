@@ -18,7 +18,7 @@ import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { firstSkyPosition } from '../archive-sky-position.mts';
-import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastRequest } from './mast.mts';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
 

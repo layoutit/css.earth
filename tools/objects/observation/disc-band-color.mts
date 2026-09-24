@@ -1,7 +1,7 @@
 // A uniform false colour for an unresolved body from published photometry in three infrared bands: each band's measured flux
 // density drives one display channel, longest wavelength red and shortest blue, through one common range shared by every body
 // the range names, so band ratios and the bodies' relative brightness survive. It is not a natural colour and not a map.
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bandColorByte, bandColorDisplay, type BandColorDisplay } from '../color-transfer.mts';
 
 export const DISC_BAND_COLOR_SCHEMA = 'cssearth-disc-band-color@1';

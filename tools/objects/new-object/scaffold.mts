@@ -4,7 +4,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readStarTemperature, temperatureCatalogueColor } from '../star-catalogue-color.mts';
 
 export const TODO = 'TODO(new-object)';

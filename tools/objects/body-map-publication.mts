@@ -10,7 +10,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue } from '../cli/cli-arguments.mts';
-import { hasErrorCode, requireRecord, requireArray } from '../sources/source-values.mts';
+import { hasErrorCode, requireRecord, requireArray } from '@cssearth/core';
 import { supportsMeasuredResolution } from './resolution-evidence.mts';
 import { readFitsHdus, fitsImageAccessor } from '../fits/fits.mts';
 import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from './body-map-product.mts';

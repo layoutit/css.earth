@@ -12,7 +12,7 @@
  * The raw responses are pinned beside the stack definition, so a re-run reads the same text rather than asking again; a
  * request the pinned file does not hold is only made when the run is told it may. */
 import { readFile, writeFile } from 'node:fs/promises';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 import type { StackHorizons } from './line-stack-reduction.mts';
 import { astroqueryText } from '../astronomy-packages/client.mts';
 

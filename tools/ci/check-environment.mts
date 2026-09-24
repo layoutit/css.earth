@@ -6,7 +6,7 @@ import { access, constants, lstat, readdir, stat } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hasErrorCode } from '../sources/source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 
 const optionalStat = (path: string) => lstat(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
 

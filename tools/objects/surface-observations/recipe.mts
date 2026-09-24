@@ -5,8 +5,7 @@
  * adds its selection and level matching. A format adds only its own frame inputs and lens blocks. A key the format does not
  * declare is refused, so a misspelt field fails validation instead of being silently ignored.
  */
-import { requireRecord } from '../../sources/source-values.mts';
-import { array, number, optional, shape, text } from '../terrestrial-layers/source-records.mts';
+import { requireRecord, array, number, optional, shape, text } from '@cssearth/core';
 import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
 
 /** Keys every lens has, and the two a mosaic adds. */

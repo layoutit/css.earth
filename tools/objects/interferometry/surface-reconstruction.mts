@@ -18,7 +18,7 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
-import { requireString } from '../../sources/source-values.mts';
+import { requireString } from '@cssearth/core';
 
 const repository = resolve(import.meta.dirname, '../../..');
 

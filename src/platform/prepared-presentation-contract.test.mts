@@ -1,5 +1,5 @@
 import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from "../renderers/css/dist/index.js";
-import { requireRecord, requireArray } from "../../tools/sources/source-values.mts";
+import { requireRecord, requireArray } from "@cssearth/core";
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';

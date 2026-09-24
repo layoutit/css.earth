@@ -3,7 +3,7 @@ import { validateTerrestrialRings } from './rings.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import { parseSolidPreparationSource } from './profile-source.mts';
 import type { parseSolidScience } from './solid-source.mts';
-import { requireRecord, requireFiniteNumber, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { validateFacetScalarProfile } from './facet-scalars.mts';
 import { validateVtkCategories } from './vtk-categories.mts';

@@ -1,7 +1,7 @@
 import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
-import {requireRecord,requireString,isRecord,hasErrorCode} from '../sources/source-values.mts';
+import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
 import type {CheckedObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
 import type {RecompiledPresentation} from '../prepared/prepared-depth-partitions.mts';
 /** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation

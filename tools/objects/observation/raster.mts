@@ -8,7 +8,7 @@ import type { Sharp } from 'sharp';
 import type { SourceScalar, SciencePalette } from '../terrestrial-layers/contracts.mts';
 import { loadScienceSurface, paintScienceSurface } from '../terrestrial-layers/scientific-raster.mts';
 import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
-import { object, string, number, boolean, optional, array, union, parse } from '../material-composition/data-schema.mts';
+import { object, string, number, boolean, optional, array, union, parse } from '@cssearth/core/schema';
 import { decodeElevationGrid, elevationRaster } from './elevation.mts';
 import type { ElevationRecipe } from './elevation.mts';
 

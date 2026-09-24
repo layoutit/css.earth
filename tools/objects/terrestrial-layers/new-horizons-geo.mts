@@ -2,7 +2,8 @@ import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import { pds4Blocks, pds4Elements } from '../pds-labels.mts';
 import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
-import { archivedCameraFields, array, dimensions, number, shape, sipCameraFields, text } from './source-records.mts';
+import { archivedCameraFields, dimensions, sipCameraFields } from './source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
 import { bindSipCamera, sipPixel } from './llorri-geo.mts';
 import { dotN as dot } from '../../../src/platform/vector3.mts';
 

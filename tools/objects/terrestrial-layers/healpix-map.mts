@@ -14,7 +14,7 @@
 import { spawnSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync } from '../astronomy-packages/toolchain.mts';
 import { readNpy } from './npy-lonlat-grid.mts';
 

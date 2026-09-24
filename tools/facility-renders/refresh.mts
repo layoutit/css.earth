@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import { parsePreparedExploration, parseExplorationImage } from '../../src/platform/prepared-exploration.mts';
 

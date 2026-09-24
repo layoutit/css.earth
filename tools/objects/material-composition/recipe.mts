@@ -1,4 +1,4 @@
-import {parse, object, string, optional, dictionary} from './data-schema.mts';
+import {parse, object, string, optional, dictionary} from '@cssearth/core/schema';
 const materialBase = object({schema:string,namespace:string,publicPrefix:string,files:optional(dictionary(string))});
 /** Shared address and numeric checks run before raster allocation or writes. */
 export function validateMaterialRecipe(input: unknown, schema: string) {

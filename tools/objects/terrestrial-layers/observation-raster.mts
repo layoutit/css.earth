@@ -1,6 +1,6 @@
 /** Decode an observation and its validity mask independently of material and scene preparation. */
 import type { RgbObservation } from './contracts.mts';
-import { requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { parseDimensions } from './source-records.mts';
 import { resolve } from 'node:path';
 import sharp from 'sharp';

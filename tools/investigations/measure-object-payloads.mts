@@ -1,6 +1,6 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import type { Browser, Page, BrowserContextOptions, CDPSession, Response, Request } from 'playwright';
-import { requireArray, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 interface PayloadObject {id: string; route: string;}
 interface PayloadCase extends PayloadObject {dpr: number;}
 interface BodyMetrics {sha256: string; bodyBytes: number; gzipEstimateBytes: number; brotliEstimateBytes: number;}

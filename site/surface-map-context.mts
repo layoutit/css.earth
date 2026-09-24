@@ -1,7 +1,8 @@
 import type { PositionM } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { BrowserWindow } from './browser-types.mts';
-import { record, requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import type { SurfaceAxes } from './surface-minimap-math.mts';
 /** Axes and the map's left edge longitude: latitude and longitude sit where the prepared feature labels place them. */
 export interface SurfaceMapConfig extends SurfaceAxes { readonly surfaceSelector: string; readonly mapLeftEdgeLongitudeDeg: number; }
@@ -10,7 +11,7 @@ export interface MapViewport { left: number; right: number; top: number; bottom:
 export type SurfaceMapReader = ReturnType<typeof createSurfaceMapReader>;
 export function parseSurfaceMapConfig(source: string | undefined): SurfaceMapConfig {
   const value: unknown = JSON.parse(source ?? 'null');
-  if (!record(value) || typeof value.surfaceSelector !== 'string' || !value.surfaceSelector) throw new TypeError('Surface map requires a selector.');
+  if (!isRecord(value) || typeof value.surfaceSelector !== 'string' || !value.surfaceSelector) throw new TypeError('Surface map requires a selector.');
   const axis = (input: unknown): PositionM => {
     if (!Array.isArray(input) || input.length !== 3 || !input.every(component => typeof component === 'number' && Number.isFinite(component))) throw new TypeError('Surface map requires finite three-component axes.');
     return [input[0], input[1], input[2]];

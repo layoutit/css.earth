@@ -23,7 +23,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { readFitsFileHdus } from '../../fits/fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { INSTRUMENT_TABLES, instrumentTable, koaCalibrations, koaDownload, koaProducts, koaQuery, lev0Url, lev1Url,
   type InstrumentTable } from './koa.mts';
 

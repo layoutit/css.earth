@@ -3,7 +3,7 @@ import { matchesPreparationGenerator } from '../../prepare/preparation-generator
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from './solid-contract.mts';
 import type { PreparedTriangle, SourceSurfaceSample, SciencePalette } from './contracts.mts';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { requireArray, requireString, requireRecord, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireArray, requireString, requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { parseRadialSnapshot } from './radial-source.mts';
 import { requireTerrainMesh } from './radial-mesh.mts';
 import { resolve, dirname } from 'node:path';

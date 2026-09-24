@@ -2,7 +2,7 @@
  * ESO owns WAVE/FLUX/ERR and QUAL=0. Native indices survive exclusions as IDs.
  * https://www.eso.org/sci/observing/phase3/p3sdpstd.pdf */
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interferometry/fits-table.mts';
-import { requireString } from '../../../sources/source-values.mts';
+import { requireString } from '@cssearth/core';
 import type { ProductDescriptor } from '../product-descriptor.mts';
 import { descriptor } from './common.mts';
 import { validateSpectrum, type SpectrumSample } from './f03-spectrum.mts';

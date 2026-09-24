@@ -1,5 +1,6 @@
 import type {SourceMesh,ClosestSurfacePoint} from './contracts.mts';
-import {parseVtkLens,parseVtkGrid,shape,text,number} from './source-records.mts';
+import {parseVtkLens,parseVtkGrid} from './source-records.mts';
+import {shape,text,number} from '@cssearth/core';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createIndexedShape} from './obj-shape.mts';

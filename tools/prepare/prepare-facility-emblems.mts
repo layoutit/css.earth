@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString } from '@cssearth/core';
 // Emblems are decoration: they show at 64 CSS px beside a facility render (128 px at DPR 2), and a card without a
 // render scales the same file up. One small palette PNG each, about 3 KB (2.2 MB of 288 px PNGs before).
 const SIZE=128;

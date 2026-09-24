@@ -1,7 +1,7 @@
 /** batman owns transit light curves and SciPy owns their nonlinear fit. cssEarth owns the time scale, fixed orbit, masks,
  * parameter policy and interpretation of the result. This synchronous boundary keeps existing preparation consumers synchronous. */
 import { spawnSync } from 'node:child_process';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync } from './toolchain.mts';
 
 const TRANSIT_PYTHON = String.raw`

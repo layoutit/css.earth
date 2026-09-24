@@ -1,4 +1,4 @@
-import {array,choice,number,shape,text} from './source-records.mts';
+import {array,choice,number,shape,text} from '@cssearth/core';
 import {readEncounterHdus} from './encounter-fits.mts';
 import {encounterCamera} from './encounter-camera.mts';
 import {hriiCamera} from './hrii-camera.mts';

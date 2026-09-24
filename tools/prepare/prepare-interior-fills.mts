@@ -1,4 +1,4 @@
-import { requireRecord } from '../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 import { refreshSourceScenePins } from '../prepared/prepared-page-metadata.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

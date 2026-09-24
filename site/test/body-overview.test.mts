@@ -8,7 +8,7 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import { prepareBodyOverview, overviewMeasurements } from '../prepare-body-overview.mts';
 import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
-import { hasErrorCode } from '../../tools/sources/source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 import { parseSpectrumRecipe, readSpectrumData } from '../../tools/objects/content/spectrum-data.mts';
 import { renderCompactSpectrum } from '../../tools/objects/content/compact-spectrum.mts';
 

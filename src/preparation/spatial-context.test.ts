@@ -1,4 +1,4 @@
-import { requireArray } from '../../tools/sources/source-values.mts';
+import { requireArray } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';

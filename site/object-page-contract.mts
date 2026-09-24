@@ -1,5 +1,5 @@
-import { record } from './browser-types.mts';
-const property = (value: unknown, key: string): unknown => record(value) ? value[key] : undefined;
+import { isRecord } from '@cssearth/core';
+const property = (value: unknown, key: string): unknown => isRecord(value) ? value[key] : undefined;
 /** Package-owned styles in authored cascade order, shared by Astro and baking. */
 export function objectPageStyles(descriptor: unknown): string[] {
   const styles = property(property(property(descriptor, 'properties'), 'page'), 'stylesheets');
