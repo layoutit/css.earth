@@ -5,6 +5,7 @@
  * drafted from the row's numbers and cite the row's paper; a person edits them, or keeps them. */
 import { archiveHostQuery, assembleArchiveOrbit, compositeMass, decodeEntities, NASA_TAP, parseArchiveRows } from './orbit.mts';
 import type { Archive } from './archives.mts';
+import { wikipediaQuotes } from './prose.mts';
 import { thermalFromArchive } from './planet-lenses.mts';
 
 const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag';
@@ -33,6 +34,8 @@ export async function archiveSpec(archive: Archive, hostname: string, existing: 
   const rows = parseStarRows(text);
   if (!rows.length) throw new Error(`The NASA Exoplanet Archive has no default parameter set for a host named ${hostname}.`);
   const hostId = slug(hostname), skipped: string[] = [], notes: string[] = [];
+  // Quotes from the Wikipedia lead (prose.mts): a planet's own article first, then its host's, whose lead names the planet.
+  const quotesFor = async (titles: string[], names: string[]) => { const quotes = await wikipediaQuotes(archive, titles, names.filter(Boolean)); if (!quotes) notes.push(`${titles[0]}: no Wikipedia lead to quote`); return quotes ? { quotes } : {}; };
   if (!/^[a-z]/u.test(hostId)) throw new Error(`${hostname}: its id ${hostId} would not start with a letter; give this host a spec by hand.`);
   const orbitRows = parseArchiveRows(await archive.text(`${NASA_TAP}?${new URLSearchParams({ query: archiveHostQuery(hostname), format: 'csv' })}`));
   const cite = (row: StarRow) => `${row.label}, the default parameter set of ${row.planet} in the NASA Exoplanet Archive`;
@@ -57,7 +60,8 @@ export async function archiveSpec(archive: Archive, hostname: string, existing: 
       text: { card: `${row.planet} crosses its star every ${short(period, 3)} days and is ${size} across${year}.`,
         introduction: fit(180, `${row.planet} transits ${hostname} every ${short(period, 3)} days and is ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`,
           `${row.planet}: a ${short(period, 3)}-day orbit, ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`),
-        locator: `NASA Exoplanet Archive ps table, default parameter set (pl_refname ${defaultRow.reference}): pl_orbper ${period}, pl_radj ${radius}, pl_bmassj ${mass}` } } });
+        locator: `NASA Exoplanet Archive ps table, default parameter set (pl_refname ${defaultRow.reference}): pl_orbper ${period}, pl_radj ${radius}, pl_bmassj ${mass}`,
+        ...await quotesFor([row.planet, hostname], [row.planet]) } } });
   }
   // Planets in order of their period, innermost first, however the archive lists them.
   const planets = found.sort((a, b) => a.period - b.period).map(item => item.entry);
@@ -74,7 +78,8 @@ export async function archiveSpec(archive: Archive, hostname: string, existing: 
     text: { card: `${hostname} is a ${Math.round(star.teff).toLocaleString('en-US')} K star${dist} with ${n} known transiting planet${n === 1 ? '' : 's'}.`,
       introduction: fit(180, `${hostname} is a star of ${Math.round(star.teff).toLocaleString('en-US')} K${dist}. ${n === 1 ? `Its planet ${String((planets[0] as { name: string }).name)} crosses it` : `Its planets ${planets.map(p => String((p as { name: string }).name).replace(`${hostname} `, '')).join(', ')} cross it`}, which is how ${n === 1 ? 'it was' : 'they were'} found and sized.`,
         `${hostname} is a star of ${Math.round(star.teff).toLocaleString('en-US')} K${dist}. Its ${n} transiting planet${n === 1 ? '' : 's'} were found and sized as ${n === 1 ? 'it crosses' : 'they cross'} it.`),
-      locator: `NASA Exoplanet Archive ps table, default parameter set of ${star.planet} (st_refname ${star.reference}): st_teff ${star.teff}${star.rad !== undefined ? `, st_rad ${star.rad}` : ''}${star.mass !== undefined ? `, st_mass ${star.mass}` : ''}` },
+      locator: `NASA Exoplanet Archive ps table, default parameter set of ${star.planet} (st_refname ${star.reference}): st_teff ${star.teff}${star.rad !== undefined ? `, st_rad ${star.rad}` : ''}${star.mass !== undefined ? `, st_mass ${star.mass}` : ''}`,
+      ...await quotesFor([hostname], [hostname]) },
     planets, notes: skipped };
   if (!n) notes.push(`${hostname}: none of its planets has a transit fit with the elements an orbit needs`);
   return { spec: entry, skipped, notes };

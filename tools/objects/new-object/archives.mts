@@ -106,7 +106,7 @@ export async function identify(resolver: Resolver, target: string | undefined, g
   return { ...ids, gaia: source };
 }
 
-export interface Publication { readonly id: string; readonly title: string; readonly creators: readonly string[]; readonly year: string; readonly publisher?: string; readonly doi?: string; readonly arxiv?: string; readonly bibcode?: string; readonly url: string; readonly page?: true }
+export interface Publication { readonly id: string; readonly title: string; readonly creators: readonly string[]; readonly year: string; readonly publisher?: string; readonly doi?: string; readonly arxiv?: string; readonly bibcode?: string; readonly wikipedia?: { readonly revision?: string }; readonly url: string; readonly page?: true }
 const clean = (value: string) => value.replace(/\s+/gu, ' ').trim();
 /** An arXiv abstract link resolved through the arXiv API. */
 export function parseArxivEntry(xml: string, arxiv: string, url: string): Publication {
@@ -139,6 +139,12 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
     // An ADS link, as the NASA Exoplanet Archive cites each parameter set: identified by its bibcode, with no lookup.
     const code = decodeURIComponent(bibcode), year = code.slice(0, 4);
     return { id: `publication-${code.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`, title: `Reference ${code}`, creators: [], year, url: `https://ui.adsabs.harvard.edu/abs/${code}`, bibcode: code };
+  }
+  const wiki = /^https:\/\/en\.wikipedia\.org\/wiki\/([^#?]+)/u.exec(url)?.[1];
+  if (wiki) {
+    // A Wikipedia article, quoted by the reader text (prose.mts): a reference page credited to its contributors under CC BY-SA 4.0.
+    const title = decodeURIComponent(wiki).replace(/_/gu, ' ');
+    return { id: `wikipedia-${title.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`, title, creators: ['Wikipedia contributors'], year: '', url, page: true, wikipedia: {} };
   }
   const doi = /doi\.org\/(10\.\S+)$/u.exec(url)?.[1];
   if (doi) return parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, url);

@@ -59,7 +59,9 @@ export interface StarSpec {
   /** What the generator or a person chose not to show, one sentence each, for the README. */
   readonly notes: readonly string[];
 }
-export interface DraftText { readonly card: string; readonly introduction: string; readonly locator: string }
+/** Sentences of the body's Wikipedia article lead, verbatim (prose.mts), cited as quotes beside the drafted text. */
+export interface DraftQuotes { readonly url: string; readonly title: string; readonly revision: string; readonly card?: string; readonly introduction?: string }
+export interface DraftText { readonly card: string; readonly introduction: string; readonly locator: string; readonly quotes?: DraftQuotes }
 function photometrySpec(value: unknown, label: string): PhotometrySpec {
   // The lens's own parser refuses anything the record cannot carry; the spec's object id is filled in at generation.
   const input = requireRecord(value, label), record = parseDiscBandColorRecord({ schema: DISC_BAND_COLOR_SCHEMA, objectId: 'spec', ...input }, label);
@@ -77,7 +79,14 @@ function draftText(value: unknown, label: string): DraftText {
   const input = requireRecord(value, label), card = requireString(input.card, `${label}.card`), introduction = requireString(input.introduction, `${label}.introduction`);
   if (card.length > 110) throw new RangeError(`${label}.card is ${card.length} characters; the card budget is 110.`);
   if (introduction.length > 180) throw new RangeError(`${label}.introduction is ${introduction.length} characters; the budget is 180.`);
-  return { card, introduction, locator: requireString(input.locator, `${label}.locator`) };
+  const quotes = input.quotes === undefined ? undefined : draftQuotes(input.quotes, `${label}.quotes`);
+  return { card, introduction, locator: requireString(input.locator, `${label}.locator`), ...(quotes ? { quotes } : {}) };
+}
+function draftQuotes(value: unknown, label: string): DraftQuotes {
+  const input = requireRecord(value, label), url = requireString(input.url, `${label}.url`);
+  if (!/^https:\/\/en\.wikipedia\.org\/wiki\//u.test(url)) throw new TypeError(`${label}.url must be an English Wikipedia article: ${url}`);
+  const quote = (key: 'card' | 'introduction') => { if (input[key] === undefined) return {}; const text = requireString(input[key], `${label}.${key}`); if (text.length > 300) throw new RangeError(`${label}.${key} is ${text.length} characters; a quote is 300 at most.`); return { [key]: text }; };
+  return { url, title: requireString(input.title, `${label}.title`), revision: requireString(input.revision, `${label}.revision`), ...quote('card'), ...quote('introduction') };
 }
 export type OrbitSpec =
   | { readonly whereistheplanet: string; readonly measurements: string; readonly measurementsSource: string; readonly body?: number; readonly source: string; readonly url: string }
