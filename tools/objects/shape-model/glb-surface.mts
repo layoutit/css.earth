@@ -40,7 +40,7 @@ export async function prepareGlbSurface(path:string|URL, width:number, height:nu
   // triangles for UV intersections; the output shape comes from measured recipe
   // dimensions. Reject meshes outside this bounded radial approximation.
   const sourceRadialResidual = Math.max(...points.map(p => Math.abs(Math.hypot(...p) - 1)));
-  if (sourceRadialResidual > .01) throw new TypeError('GLB surface must be centered and within 1% of an axis-aligned ellipsoid.');
+  if (sourceRadialResidual > .01) throw new TypeError(`${String(path)}: the GLB surface is ${(sourceRadialResidual * 100).toFixed(1)}% from the best-fitting centred, axis-aligned ellipsoid; it must be within 1%.`);
   const texture = gltf.materials[primitive.material].pbrMetallicRoughness.baseColorTexture;
   if ((texture.texCoord ?? 0) !== 0 || texture.extensions) throw new TypeError('Unsupported base-color UV transform.');
   const image = gltf.images[gltf.textures[texture.index].source], view = gltf.bufferViews[image.bufferView];

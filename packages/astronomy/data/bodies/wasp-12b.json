@@ -1,0 +1,28 @@
+{
+ "id": "wasp-12b",
+ "classification": "exoplanet",
+ "order": 1832,
+ "physical": {
+  "name": "WASP-12 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 140481.8,
+  "gravitationalParameterKm3PerS2": 186229201.89,
+  "parent": "wasp-12"
+ },
+ "physicalNotes": "Radius 1.965 Jupiter radii from Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract): 140,481.8 km at 71,492 km per Jupiter radius. GM from the mass 1.47 Jupiter masses (Collins et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...78C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.091418901,
+  "semiMajorAxisStellarRadii": 2.9774,
+  "inclinationDegrees": 81.8,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57607.019305,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive ps table (pl_refname LEONARDI_ET_AL__2024): P 1.091418901 d",
+   "shape": "Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive ps table (pl_refname LEONARDI_ET_AL__2024): a/R* derived from its semi-major axis 0.0234 au and stellar radius 1.69 solar radii; Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive ps table (pl_refname LEONARDI_ET_AL__2024): inclination 81.8 degrees",
+   "eccentricity": "&Ouml;ztürk & Erdem 2019 (2019MNRAS.486.2290O), via the NASA Exoplanet Archive ps table (pl_refname _OUML_ZT_UUML_RK__AMP__ERDEM_2019): e 0",
+   "phase": "Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive ps table (pl_refname LEONARDI_ET_AL__2024): transit mid-time 2457607.519305 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

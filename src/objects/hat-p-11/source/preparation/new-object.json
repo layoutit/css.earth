@@ -1,0 +1,48 @@
+{
+  "id": "hat-p-11",
+  "name": "HAT-P-11",
+  "system": "HAT-P-11 system",
+  "description": "Star of 4,780 K 37.8 parsecs away with 1 transiting planet.",
+  "target": "HAT-P-11",
+  "gaia": "2086512227851023872",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+    "credit": "An et al. 2025"
+  },
+  "radius": {
+    "value": 0.76,
+    "source": "Basilicata et al. 2024, the stellar radius of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.811,
+    "source": "An et al. 2025, the stellar mass of the default parameter set of HAT-P-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 4780,
+    "source": "Basilicata et al. 2024, the stellar temperature of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-11 is a 4,780 K star 37.8 parsecs away with 1 known transiting planet.",
+    "introduction": "HAT-P-11 is a star of 4,780 K 37.8 parsecs away. Its planet HAT-P-11 b crosses it, which is how it was found and sized.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BASILICATA_ET_AL__2024, AN_ET_AL__2025): st_teff 4780, st_rad 0.76, st_mass 0.811",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-11",
+      "title": "HAT-P-11",
+      "revision": "1374438410",
+      "card": "HAT-P-11, also designated GSC 03561-02092 and Kepler-3, is a metal-rich orange dwarf star with a planetary system, 123 light-years away in the constellation Cygnus.",
+      "introduction": "This star is notable for its relatively large rate of proper motion."
+    }
+  },
+  "notes": [
+    "HAT-P-11 c: Xuan & Wyatt 2020's row measures its orbit but gives no a/R*, no semi-major axis, and no stellar mass and radius (found by radial velocity)"
+  ],
+  "order": 1837
+}

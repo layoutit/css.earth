@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wasp-12b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3028,
+      "lowerKelvin": 2918,
+      "upperKelvin": 3138,
+      "citation": "López-Morales et al. 2010, dayside brightness temperature at 0.9 µm (NASA Exoplanet Archive emission table): 3028 +/- 110 K, https://ui.adsabs.harvard.edu/abs/2010ApJ...716L..36L/abstract"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 0.9 µm (Astrophysical Research Consortium (ARC) 3.5m Telescope At Apache Point Observatory (APO) Seaver Prototype Imaging camera (SPICam)) and nobody has imaged it, so the colour is a Planck spectrum at its published temperature.",
+    "chosen": "1 measured of 42 rows; the smallest relative uncertainty, then the longest wavelength",
+    "wavelengthMicrometres": 0.9,
+    "facility": "Astrophysical Research Consortium (ARC) 3.5m Telescope At Apache Point Observatory (APO) Seaver Prototype Imaging camera (SPICam)",
+    "rows": "photometry/emission-spectroscopy.csv"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

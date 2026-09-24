@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-22",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 604,563 km at 197.52 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 197.52493505749726,
+  "distanceSource": "Gaia DR3 parallax 5.0627 +/- 0.0110 mas (same row, RUWE 0.88): 197.52 pc, no zero-point correction",
+  "radiusKm": 604563.3,
+  "radiusSource": "Radius 0.869 +/- 0.011 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 604,563 km at 695,700 km per solar radius. Mass 0.857 +/- 0.051 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract); GM is that mass times the JPL solar GM. Temperature 5596 +/- 61 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5596,
+  "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "surfaceGravityLogg": 4.49,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-22.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.493, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

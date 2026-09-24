@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-7",
+  "card": {
+    "text": "Kepler-7 is a 5,933 K star 923 parsecs away with 1 known transiting planet.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. (2015), The Astrophysical Journal 804 150",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 5933, st_rad 1.966, st_mass 1.359"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-7",
+        "url": "https://en.wikipedia.org/wiki/Kepler-7",
+        "label": "Wikipedia, \"Kepler-7\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1335392106",
+        "quote": "Kepler-7 is a star located in the constellation Lyra in the field of view of the Kepler Mission, a NASA operation in search of Earth-like planets."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-7 is a star of 5,933 K 923 parsecs away. Its planet Kepler-7 b crosses it, which is how it was found and sized.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. (2015), The Astrophysical Journal 804 150",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 5933, st_rad 1.966, st_mass 1.359"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-7",
+        "url": "https://en.wikipedia.org/wiki/Kepler-7",
+        "label": "Wikipedia, \"Kepler-7\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1335392106",
+        "quote": "It is home to the fourth of the first five planets that Kepler discovered; this planet, a Jupiter-size gas giant named Kepler-7b, is as light as styrofoam."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "host": "hd-75732",
+  "planets": [
+    {
+      "id": "hd-75732e",
+      "name": "55 Cnc e",
+      "description": "Transiting planet of 55 Cnc with a 0.737-day year, found in 2004.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+        "credit": "Bourrier et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BOURRIER_ET_AL__2018"
+      },
+      "text": {
+        "card": "55 Cnc e crosses its star every 0.737 days and is 1.9 Earth radii across, found in 2004.",
+        "introduction": "55 Cnc e transits 55 Cnc every 0.737 days and is 1.9 Earth radii across. Orbit and size follow Bourrier et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/55_Cancri_Ae",
+          "title": "55 Cancri Ae",
+          "revision": "1374105089",
+          "card": "55 Cancri Ae, officially named Janssen, is an exoplanet orbiting a Sun-like host star, 55 Cancri A. The mass of the exoplanet is about eight Earth masses and its diameter is about twice that of the Earth.",
+          "introduction": "55 Cancri Ae was discovered in data taken during 2003–2004 and announced in 2004, thus making it the first super-Earth discovered around a main sequence star, predating Gliese 876 d by a year."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2360,
+        "uncertaintyK": 300,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Demory et al. 2012, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...751L..28D/abstract",
+        "chosen": "1 measured of 3 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 1834
+    }
+  ]
+}

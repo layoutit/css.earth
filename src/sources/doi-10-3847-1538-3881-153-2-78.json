@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-3847-1538-3881-153-2-78",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Collins et al. (2017): TRANSIT TIMING VARIATION MEASUREMENTS OF WASP-12b AND QATAR-1b: NO EVIDENCE OF ADDITIONAL PLANETS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1512.00464"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/153/2/78"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017AJ....153...78C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/153/2/78",
+      "label": "The Astronomical Journal 153 78"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C",
+      "checkedOn": "2026-09-24",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Collins et al. (2017), The Astronomical Journal 153 78",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C"
+    }
+  ],
+  "publisher": "The Astronomical Journal 153 78",
+  "creators": [
+    "Karen A. Collins",
+    "John F. Kielkopf",
+    "Keivan G. Stassun"
+  ],
+  "publicationDate": "2017"
+}

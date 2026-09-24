@@ -1,0 +1,30 @@
+{
+ "id": "kepler-22",
+ "classification": "star",
+ "order": 1835,
+ "physical": {
+  "name": "Kepler-22",
+  "horizonsCode": null,
+  "meanRadiusKm": 604563.3,
+  "gravitationalParameterKm3PerS2": 113734561115.94205,
+  "parent": null,
+  "effectiveTemperatureK": 5596
+ },
+ "physicalNotes": "Radius 0.869 +/- 0.011 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 604,563 km at 695,700 km per solar radius. Mass 0.857 +/- 0.051 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract); GM is that mass times the JPL solar GM. Temperature 5596 +/- 61 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 289.2171969136639,
+  "declinationDegrees": 47.88413341329258,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 197.52493505749726,
+  "properMotionRaMasPerYear": -39.5891326343343,
+  "properMotionDecMasPerYear": -66.77260975858071,
+  "radialVelocityKmPerS": -4.502016,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2127941757262806656 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-22/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.0627 +/- 0.0110 mas (same row, RUWE 0.88): 197.52 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -39.589, -66.773 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -4.50 +/- 0.51 km/s"
+  }
+ }
+}

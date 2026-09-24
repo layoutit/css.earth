@@ -1,0 +1,31 @@
+{
+ "id": "hd-75732e",
+ "classification": "exoplanet",
+ "order": 1834,
+ "physical": {
+  "name": "55 Cnc e",
+  "horizonsCode": null,
+  "meanRadiusKm": 11958.9,
+  "gravitationalParameterKm3PerS2": 3184801.86,
+  "parent": "hd-75732"
+ },
+ "physicalNotes": "Radius 0.1672763 Jupiter radii from Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract): 11,958.9 km at 71,492 km per Jupiter radius. GM from the mass 0.02513923 Jupiter masses (Bourrier et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018A&A...619A...1B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.7365474,
+  "semiMajorAxisStellarRadii": 3.52,
+  "inclinationDegrees": 83.59,
+  "eccentricity": 0.05,
+  "argumentOfPeriapsisDegrees": 86,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 57062.7096,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): P 0.7365474 d",
+   "shape": "Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): a/R* 3.52; Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): inclination 83.59 degrees",
+   "eccentricity": "Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): e 0.05",
+   "argumentOfPeriapsis": "Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): omega 86 degrees",
+   "phase": "Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): transit mid-time 2457063.2096 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

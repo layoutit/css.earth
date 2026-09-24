@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202347659",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Basilicata et al. (2024): The GAPS Programme at TNG",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2403.01527"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202347659"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...686A.127B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202347659",
+      "label": "Astronomy & Astrophysics 686 A127"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B",
+      "checkedOn": "2026-09-24",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Basilicata et al. (2024), Astronomy & Astrophysics 686 A127",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 686 A127",
+  "creators": [
+    "M. Basilicata",
+    "P. Giacobbe",
+    "A. S. Bonomo",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

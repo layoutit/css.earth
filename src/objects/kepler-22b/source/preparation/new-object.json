@@ -1,0 +1,31 @@
+{
+  "host": "kepler-22",
+  "planets": [
+    {
+      "id": "kepler-22b",
+      "name": "Kepler-22 b",
+      "description": "Transiting planet of Kepler-22 with a 290-day year, found in 2011.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "credit": "Bonomo et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONOMO_ET_AL_2023"
+      },
+      "text": {
+        "card": "Kepler-22 b crosses its star every 290 days and is 2.1 Earth radii across, found in 2011.",
+        "introduction": "Kepler-22 b transits Kepler-22 every 290 days and is 2.1 Earth radii across. Orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): pl_orbper 289.863876, pl_radj 0.18734977, pl_bmassj 0.0286318",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-22b",
+          "title": "Kepler-22b",
+          "revision": "1374868815",
+          "card": "Kepler-22b is an exoplanet orbiting the Sun-like star Kepler-22 within its habitable zone.",
+          "introduction": "It is located about 640 light-years from Earth in the constellation Cygnus."
+        }
+      },
+      "order": 1836
+    }
+  ]
+}

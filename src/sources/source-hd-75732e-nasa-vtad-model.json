@@ -1,0 +1,52 @@
+{
+  "id": "source-hd-75732e-nasa-vtad-model",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "55 Cnc e 3D Model",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/resource/55-cancri-e-3d-model/",
+      "label": "NASA Science resource page"
+    },
+    {
+      "role": "original",
+      "url": "https://assets.science.nasa.gov/content/dam/science/astro/exo-explore/2023/09/55_Cancri_e_1_24364.glb",
+      "label": "Original GLB"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "label": "NASA images and media usage guidelines"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-75732e/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA Visualization Technology Applications and Development (VTAD)",
+      "scope": "55 Cnc e 3D model and its base-color texture.",
+      "evidence": "Credit line on the NASA Science resource page, checked 2026-09-24."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA content is generally not subject to copyright in the United States; NASA is acknowledged as the source. Terms: https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "scope": "The GLB model and its embedded texture.",
+      "evidence": "NASA images and media usage guidelines, checked 2026-09-24."
+    },
+    {
+      "kind": "limitation",
+      "text": "An illustration. No image resolves the surface of 55 Cnc e; the texture is not an observation and its longitudes are arbitrary.",
+      "scope": "The base-color texture used as an illustration lens.",
+      "evidence": "No resolved imagery exists for this body; see the object README."
+    }
+  ],
+  "publisher": "NASA Visualization Technology Applications and Development (VTAD)"
+}

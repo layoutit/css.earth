@@ -1,0 +1,46 @@
+{
+  "id": "kepler-7",
+  "name": "Kepler-7",
+  "system": "Kepler-7 system",
+  "description": "Star of 5,933 K 923 parsecs away with 1 transiting planet.",
+  "target": "Kepler-7",
+  "gaia": "2102117871259036672",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "credit": "Esteves et al. 2015"
+  },
+  "radius": {
+    "value": 1.966,
+    "source": "Esteves et al. 2015, the stellar radius of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 1.359,
+    "source": "Esteves et al. 2015, the stellar mass of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 0.031
+  },
+  "temperature": {
+    "value": 5933,
+    "source": "Esteves et al. 2015, the stellar temperature of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 44
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-7 is a 5,933 K star 923 parsecs away with 1 known transiting planet.",
+    "introduction": "Kepler-7 is a star of 5,933 K 923 parsecs away. Its planet Kepler-7 b crosses it, which is how it was found and sized.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 5933, st_rad 1.966, st_mass 1.359",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-7",
+      "title": "Kepler-7",
+      "revision": "1335392106",
+      "card": "Kepler-7 is a star located in the constellation Lyra in the field of view of the Kepler Mission, a NASA operation in search of Earth-like planets.",
+      "introduction": "It is home to the fourth of the first five planets that Kepler discovered; this planet, a Jupiter-size gas giant named Kepler-7b, is as light as styrofoam."
+    }
+  },
+  "notes": [],
+  "order": 1839
+}
