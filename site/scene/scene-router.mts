@@ -407,7 +407,7 @@ export function createSceneRouter({
     const overview = selection.context.kind === 'overview';
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(overview);
     shellOwner?.shell?.presentSelection();
-    world.current?.setOverview?.(overview);
+    world.current?.setOverview?.(overview, selection.current.kind === 'overview' ? selection.current.overview.scope : undefined);
     if (stage.dataset) {
       const subject = selection.current;
       stage.dataset.selection = subject.kind === 'overview' ? subject.overview.scope

@@ -6,8 +6,10 @@ import { record, text } from '@cssearth/volume-core/contracts/volume-recipe';
 
 function texturePath(outputDirectory: string, value: unknown): string {
   const path = text(value, 'prepared texture path');
-  if (!path.startsWith('slices/')) throw new TypeError('Prepared volume textures must be contained in slices/.');
-  return containedPath(resolve(outputDirectory, 'slices'), path.slice('slices/'.length));
+  if (path === 'outer-disc.png') return containedPath(outputDirectory, path);
+  const directory = path.startsWith('core/slices/') ? 'core/slices/' : 'slices/';
+  if (!path.startsWith(directory)) throw new TypeError('Prepared volume textures must be contained in slices/ or core/slices/.');
+  return containedPath(resolve(outputDirectory, directory), path.slice(directory.length));
 }
 export async function readPreviousVolumeTextures(outputDirectory: string): Promise<string[]> {
   let bytes: Buffer;
@@ -22,9 +24,12 @@ export async function readPreviousVolumeTextures(outputDirectory: string): Promi
     const path = text(record(entry, 'published volume resource').path, 'prepared texture path');
     // Other prepared capabilities share the resource bank but own their files.
     containedPath(outputDirectory, path);
-    if (path.startsWith('slices/')) texturePath(outputDirectory, path);
+    if (ownedTexture(path)) texturePath(outputDirectory, path);
     return path;
-  }).filter(path => path.startsWith('slices/'));
+  }).filter(ownedTexture);
+}
+function ownedTexture(path: string): boolean {
+  return path === 'outer-disc.png' || path.startsWith('slices/') || path.startsWith('core/slices/');
 }
 export async function retireVolumeTextures(outputDirectory: string, previous: string[], current: string[]): Promise<void> {
   // Validate the entire operation before deleting its first file.

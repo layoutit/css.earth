@@ -102,6 +102,7 @@
       "quality": 90
     }
   },
+  "hybrid": { "coreRadiusUnits": 2.5, "fadeStartUnits": 1.25 },
   "anchors": [
     {
       "id": "sun",
