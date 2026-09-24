@@ -6,7 +6,7 @@
  *
  * 1. `readSkyPlane` resamples the mosaic about the star onto a square sky plane in the volume's units (astronomical units at
  *    the star's distance), x toward increasing image column (west) and y toward north, through the mosaic's own WCS
- *    (fits-sky skyProjection), so a rotated mosaic is read, not flipped. The background and noise are measured in an annulus
+ *    (@cssearth/fits skyProjection), so a rotated mosaic is read, not flipped. The background and noise are measured in an annulus
  *    far from the star.
  * 2. `ringGeometry` finds the ring's ridge, the radius of peak brightness in each azimuth, and fits an ellipse to it. A
  *    circular ring seen at inclination i projects to an ellipse of axis ratio cos i whose major axis is the line of nodes,

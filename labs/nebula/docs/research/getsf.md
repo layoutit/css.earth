@@ -59,7 +59,7 @@ Compact peaks can be foreground stars, LMC stars, blends or bright nebular knots
 
 ## Verification scope
 
-`node --experimental-strip-types labs/nebula/src/run.ts test getsf getsf-fits` verifies exact luminance/orientation, required FITS/configuration fields, rejection of incomplete runs, and explicit preservation of signed raw maps. Actual external run status and numerical results are recorded with the benchmark, separately from these synthetic adapter tests.
+`node --experimental-strip-types labs/nebula/run.mts test getsf` and the FITS transport tests of `@cssearth/fits` (`pnpm --filter @cssearth/fits test`) verify exact luminance/orientation, required FITS/configuration fields, rejection of incomplete runs, and explicit preservation of signed raw maps. Actual external run status and numerical results are recorded with the benchmark, separately from these synthetic adapter tests.
 
 ## Recorded full-crop result
 

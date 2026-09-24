@@ -178,11 +178,11 @@ identifies the cubes and processing behind this illustration.
 ## FITS support
 
 FITS decoding happens during preparation, never in the browser. The shared
-[reader](../tools/fits/fits.mts) preserves native pixel/axis order and physical numeric
+[reader](../packages/fits/README.md) (`@cssearth/fits`) preserves native pixel/axis order and physical numeric
 values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
 Product adapters still own units, quality masks, camera registration,
 spectral selection, missing-data policies and display transforms. Sky images do not
-own their orientation: [fits-sky.mts](../tools/fits/fits-sky.mts) reads it from the WCS. An axis-aligned image is flipped into
+own their orientation: the package's [`skyImageAxes`](../packages/fits/src/sky.ts) reads it from the WCS. An axis-aligned image is flipped into
 display order; a rotated gnomonic (TAN) image is resampled through `skyProjection`, which refuses distortion terms and frames
 other than ICRS or FK5 and is checked against Astropy in both directions.
 
@@ -245,7 +245,8 @@ The retained runner's full and `--restore` paths still name four removed per-bod
 test files under `tests/objects/unit/`. They are not a working complete gate.
 Until that runner is repaired, restore the affected body's inputs with
 `node tools/assets/restore-source-inputs.mts --object=<id>` and select the existing
-tests beside `tools/fits/` and the affected preparation owner. Report missing
+FITS tests (`node tools/oracles/test-fits.mts --unit` runs the package's own tests and its
+Astropy comparisons) and the affected preparation owner's tests. Report missing
 archive inputs and source-dependent skips; do not claim a full FITS pass from
 the offline subset. A retained local copy must match the intended provider
 product and version, not merely its filename.

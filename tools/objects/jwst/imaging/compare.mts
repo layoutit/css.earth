@@ -4,7 +4,7 @@ import { sampleAgreement } from '../sample-agreement.mts';
  *   node tools/objects/jwst/imaging/compare.mts <program id> <band> <local i2d> [--raw <dir>]...
  *
  * Both are read with this repository's FITS reader. The two grids' WCS cards are recorded; brightness is compared at the same
- * sky positions: every MAST pixel centre is projected into the local mosaic through both WCSs (fits-sky skyProjection) and
+ * sky positions: every MAST pixel centre is projected into the local mosaic through both WCSs (@cssearth/fits skyProjection) and
  * sampled bilinearly, where both are finite. Identical pixels are counted only when the grids coincide. Reported: the share of identical pixels, the median absolute difference relative to the
  * median brightness, and, over pixels above the median, the RMS difference relative to the RMS brightness and the correlation.
  * A coronagraph band's mosaic is PSF-subtracted: most pixels are residual noise, and how well KLIP matches changes with distance

@@ -92,7 +92,7 @@ changed inputs, wrong software bytes and incomplete stages fail explicitly.
 | Footprints | Native `SmallBodyModel.computeFrustumIntersection` | SBMT footprint cell counts are retained diagnostics; they do not prove a cssEarth footprint implementation |
 | Image coordinates and UVs | Native `PolyDataUtil.generateTextureCoordinates` versus cssEarth `project` | Identity, both axis flips, three quarter turns, central crop; every boundary, interior grid, off-image and behind-camera cases |
 | FITS image values | SBMT's bundled nom-tam-fits versus `readFitsImage` | Pinned raw axes, encoding and up to 65 distinct samples per image; no photometric normalization claim |
-| FITS encodings, missing values and extensions | Existing [FITS oracle](../README.md) and `tools/fits/fits.oracle.test.mts` | Scaled integers, float NaNs, cubes and extension policy; not reimplemented here |
+| FITS encodings, missing values and extensions | Existing [FITS oracle](../README.md) and `tools/oracles/fits/core.oracle.test.mts` | Scaled integers, float NaNs, cubes and extension policy; not reimplemented here |
 | PDS3/PDS4 image and geometry planes | Existing [PDS oracle comparisons](../README.md) | Label-driven dimensions, offsets, quality and units; this backend consumes SUM/INFO, not SPICE kernels or geometry cubes |
 | Released OBJ UV islands and raster sampling | `tools/objects/terrestrial-layers/obj-uv-fits.test.mts` | Barycentric transfer, seams, nearest/bilinear sampling policy, orientation and missing support; existing unit checks, **not native SBMT qualification** |
 | Bad or unsupported inputs | `projection.test.mts` | Missing/duplicate fields, unsafe paths, hash drift, dimensions, degenerate cameras, non-affine frusta and unsupported SUM distortion/K matrices |

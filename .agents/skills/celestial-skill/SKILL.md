@@ -138,11 +138,11 @@ trajectory correction does not also establish the shape's prime meridian or
 rotational phase. Keep these questions separate in the qualification evidence.
 Establish sample/line order, pixel origin, aspect ratio, flips and units, then
 inspect one native-pixel projection before fitting or baking. Read the product
-with this repository's own readers: [`tools/fits/fits.mts`](../../../tools/fits/fits.mts)
-for FITS, [`tools/fits/fits-sky.mts`](../../../tools/fits/fits-sky.mts) for which way a sky
-image faces and for resampling a rotated one, and [`tools/spice/`](../../../tools/spice) for kernels. Both are
-self-contained and run under plain Node, without installed packages or a
-prepared checkout, so an unbuilt worktree is not a reason to write a scratch
+with this repository's own readers: [`@cssearth/fits`](../../../packages/fits/README.md)
+for FITS, including `skyImageAxes` and `skyProjection` for which way a sky
+image faces and for resampling a rotated one, and [`tools/spice/`](../../../tools/spice) for kernels. The
+FITS package needs one `pnpm install` and `pnpm build:fits` in a fresh worktree; `tools/spice/` runs under
+plain Node as it is. Neither needs a prepared checkout, so an unbuilt worktree is not a reason to write a scratch
 decoder in another language. A scratch reader is untested, it can invert an
 axis or a sign without saying so, and it is not the owner that the preparation
 would use, so what it appears to establish has to be established again. Follow the

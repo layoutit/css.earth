@@ -8,7 +8,7 @@ This package draws the ring of dust around [PDS 70](../pds-70/README.md) as a pr
 - **Colour:** the colour map and scale of their Figure 1 (left panel, robust 0.5). Its colour bar was decoded from the figure's PDF in the paper's arXiv source: matplotlib's inferno, all 256 colours to 0 of 255, linear from −24.71 to 389.56 µJy per beam ([benisty-2021-figure-1-colormap.json](source/benisty-2021-figure-1-colormap.json) records how it was read). The image is the dust's own thermal glow, so it is not divided by the star.
 - **Recipe:** [`source/circumstellar.json`](source/circumstellar.json) names the image, the colour map, the conventions and the published geometry it is checked against. [`author.mts`](../../../tools/objects/circumstellar/author.mts) writes everything else in `source/` from it; `--check` reproduces it byte for byte.
 
-**Placement.** One volume unit is one astronomical unit at the star's prepared distance (112.39 pc), and the cube (±150 au) is anchored on the star's scene origin. The image is read through its own sky coordinates (ALMA's SIN projection, which [`fits-sky.mts`](../../../tools/fits/fits-sky.mts) now reads, checked against Astropy on this image's own header). The star is placed at its Gaia DR3 position moved by its proper motion to the observing date; that lands 8 mas from the image's phase centre, under one pixel.
+**Placement.** One volume unit is one astronomical unit at the star's prepared distance (112.39 pc), and the cube (±150 au) is anchored on the star's scene origin. The image is read through its own sky coordinates (ALMA's SIN projection, which [`@cssearth/fits`](../../../packages/fits/src/sky.ts) now reads, checked against Astropy on this image's own header). The star is placed at its Gaia DR3 position moved by its proper motion to the observing date; that lands 8 mas from the image's phase centre, under one pixel.
 
 **The ring, measured on this image:**
 
@@ -27,7 +27,7 @@ The author refuses a ring more than 5° or a tenth of the radius from the publis
 Run of 2026-09-23 (this version):
 
 - The ring rendered in the application around the planets' orbits, captured headless at 1440 × 900 once the application reported ready, with no console errors ([pds-70-disc-rendered.png](evidence/pds-70-disc-rendered.png)); the author's preview of the image as read, north up ([previews/dust.png](source/previews/dust.png)).
-- [`fits-sky-projection.oracle.test.mts`](../../../tools/fits/fits-sky-projection.oracle.test.mts): this image's SIN header and a rotated wide SIN header against Astropy.
+- [`sky-projection.oracle.test.mts`](../../../tools/oracles/fits/sky-projection.oracle.test.mts): this image's SIN header and a rotated wide SIN header against Astropy.
 - `node tools/objects/circumstellar/author.mts pds-70-disc --check` reproduces every authored file.
 
 ## Known problems
