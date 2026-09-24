@@ -13,6 +13,8 @@ import { saveSession, saveExploration, getSession, sessionRequest, observationCh
 import { explorationAnswer } from './exploration.mts';
 import { parseCli } from './cli.mts';
 import { SERVICES } from './vo/discovery.mts';
+import { matchProductSoftware } from './ascl.mts';
+import { listArtifactOutputs } from './artifact-outputs.mts';
 
 const args = ['--target', 'test-body', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'telescope-product'];
 const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
@@ -119,8 +121,14 @@ test('saved choices qualify, export complete dependencies, reassess and reuse wi
     assert.ok('satisfaction' in result);
     assert.equal(result.satisfaction.status, 'unresolved'); assert.equal(f.qualifications(), 1);
     const delivery = JSON.parse(await readFile(result.resultPath, 'utf8'));
+    assert.equal(delivery.sourceQuestion.target,'test-body');assert.equal(delivery.sourceQuestion.kind,'cube');
     assert.ok(delivery.files.some((f: { path: string }) => f.path.endsWith('core.lbl')));
     assert.ok(delivery.files.some((f: { path: string }) => f.path.endsWith('decoded.json')));
+    const inspected=await listArtifactOutputs(result.resultPath);
+    assert.equal(inspected.relevance?.target,'test-body');assert.equal(inspected.relevance?.requested.kind,'cube');
+    assert.equal(inspected.productReceipt,result.resultPath);
+    const cited=await matchProductSoftware(result.resultPath,async()=>new Response('{}'));
+    assert.ok(cited.software?.some(item=>item.name==='cssEarth source qualification'));
     assert.equal((await getSession(f.root, out, 1, () => {}, f.api)).reused, true); assert.equal(f.qualifications(), 1);
     const copied = resolve(out, 'pick-1', delivery.product), original = await readFile(copied);
     const changed = Buffer.from(original); changed[0] = changed[0] === 0 ? 1 : 0; await writeFile(copied, changed);
@@ -158,6 +166,7 @@ test('exploration is immutable, revalidates its exact choice, and delivers with 
     assert.equal(result.context.kind, 'exploration'); assert.equal(result.context.assessment.status, 'not-requested');
     const delivery = JSON.parse(await readFile(result.resultPath, 'utf8'));
     assert.equal(delivery.schema, 'cssearth-telescope-delivery@3'); assert.equal(delivery.context.assessment.status, 'not-requested');
+    assert.equal(delivery.sourceQuestion.target,'test-body');
     assert.equal((await getSession(f.root, out, 1, () => {}, api, { offline: true })).replay, 'pinned-local-artifact');
     await writeFile(resolve(out, 'query.json'), '{}');
     await assert.rejects(getSession(f.root, out, 1, () => {}, api), /both query\.json and explore\.json/);
@@ -174,9 +183,9 @@ test('saved exploration carries its pinned Keck source evidence into the run dir
         filehand:'/koadata9/NIRC2/20090805/lev0/N2.20090805.31896.fits',dateObs:'2009-08-05',evidence:pin}]};
     const api:SessionServices={...f.api,explore:async(_root,request)=>explorationAnswer(request,{...await f.load(),archiveLeads:[lead]})};
     const out=resolve(f.root,'keck-explore'); await saveExploration(f.root,['test-body'],out,api);
-    assert.equal(await readFile(resolve(out,'keck-source-evidence',`${pin}.json`),'utf8'),body);
+    assert.equal(await readFile(resolve(out,'archive-source-evidence',`${pin}.json`),'utf8'),body);
     await writeFile(resolve(archive,`${pin}.json`),'{}');
-    assert.equal(await readFile(resolve(out,'keck-source-evidence',`${pin}.json`),'utf8'),body);
+    assert.equal(await readFile(resolve(out,'archive-source-evidence',`${pin}.json`),'utf8'),body);
   } finally { await f.cleanup(); }
 });
 

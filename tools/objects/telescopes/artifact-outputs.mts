@@ -14,10 +14,12 @@ import { verifiedExecutableFamilyOperations } from './family-operation.mts';
 import { openPdsSource } from './pds-source.mts';
 import { parseProductDescriptor } from './product-descriptor.mts';
 import { assessSourceRelevance, readSourceQuestion, type SourceRelevance } from './source-relevance.mts';
+import { recordedSourceProcessing, type SourceProcessingSoftware } from './source-products.mts';
+import type { ProductSoftware } from '../product-record.mts';
 
 const unavailable = (kind:OutputChoice['kind'],reason:string):OutputChoice => ({kind,available:false,reason});
 const available = (kind:OutputChoice['kind'],reason:string,parameters:readonly string[]=[]):OutputChoice => ({kind,available:true,reason,...(parameters.length?{parameters}:{})});
-export interface ArtifactOutputInspection {readonly artifact:string;readonly target?:string;readonly source:unknown;readonly sourceContext?:ReturnType<typeof sourceContext>;readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly [key:string]:unknown}
+export interface ArtifactOutputInspection {readonly artifact:string;readonly target?:string;readonly source:unknown;readonly productReceipt?:string;readonly sourceContext?:ReturnType<typeof sourceContext>;readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];readonly [key:string]:unknown}
 
 export async function listArtifactOutputs(path:string,structure?:string):Promise<ArtifactOutputInspection>{
   const artifact=resolve(path),raw=requireRecord(JSON.parse(await readFile(artifact,'utf8')));
@@ -39,13 +41,16 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const facts=requireRecord(delivered.record.facts,'delivery facts');
     const familyDelivery=facts.kind==='table'||facts.kind==='spectrum'&&descriptorOutputs.length>0;
     if(familyDelivery&&structure!==undefined)throw new TypeError('--structure does not select a descriptor component.');
-    const listed=familyDelivery?{target:delivered.target,source:artifact,sourceContext:delivered.context,outputs:[] as OutputChoice[]}:await listDeliveryOutputs(artifact,structure);
-    if(!descriptorOutputs.length)return{...listed,artifact:'delivery'};
+    const listed=familyDelivery?{target:delivered.target,source:artifact,sourceContext:delivered.context,outputs:[] as OutputChoice[],sourceMetadata:[]}:await listDeliveryOutputs(artifact,structure,delivered.sourceQuestion.position);
+    const {sourceMetadata,...screen}=listed;
+    const provenance={productReceipt:artifact,software:delivered.producing.software,sourceProcessing:recordedSourceProcessing(delivered.producing)};
+    if(!descriptorOutputs.length)return{...screen,artifact:'delivery',...provenance,relevance:assessSourceRelevance(delivered.sourceQuestion,sourceMetadata,screen.outputs)};
     if(descriptorOutputs.length!==1)throw new TypeError('Delivery has an ambiguous family descriptor.');
     const output=descriptorOutputs[0]!,matches=delivered.files.filter(file=>file.bytes===output.bytes&&file.path.endsWith('/descriptor.json'));
     if(matches.length!==1)throw new TypeError('Delivery family descriptor is absent or ambiguous.');
     const descriptorPath=resolve(delivered.directory,matches[0]!.path);
-    return{...listed,artifact:'delivery',source:descriptorPath,familyOperations:await verifiedExecutableFamilyOperations(descriptorPath)};
+    const descriptor=parseProductDescriptor(JSON.parse(await readFile(descriptorPath,'utf8')));
+    return{...screen,artifact:'delivery',source:descriptorPath,...provenance,relevance:assessSourceRelevance(delivered.sourceQuestion,sourceMetadata,screen.outputs,descriptor),familyOperations:await verifiedExecutableFamilyOperations(descriptorPath)};
   }
   if(structure!==undefined&&raw.schema!==PRODUCT_RECORD_SCHEMA)throw new TypeError('--structure applies only to native delivery or OPUS PDS source inspection');
   if(raw.schema==='cssearth-physical-grid-volume@1'){
