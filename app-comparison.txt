@@ -1,0 +1,14 @@
+Idle browser frames per step (2 s after each step settles):
+  main-1: 0 0 0 0 0 0 0
+  main-2: 0 0 0 0 0 0 0
+  change-1: 0 0 0 0 0 0 0
+  change-2: 0 0 0 0 0 0 0
+Changed pixels against main-1, threshold 0.1 / 0 (1280x800, DPR 1):
+  frame                     main-2          change-1        change-2        
+  1-earth loaded.png        0/0             0/0             0/0             
+  2-dragged.png             0/0             0/0             0/0             
+  3-wheel zoomed.png        0/0             0/0             0/0             
+  4-hovered.png             0/0             0/0             0/0             
+  5-flew to mars.png        0/4             0/5             0/4             
+  6-flew to saturn.png      0/20            0/6             0/28            
+  7-flew to earth.png       0/15            0/8             0/14            

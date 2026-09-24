@@ -1,0 +1,47 @@
+{
+ "steps": [
+  {
+   "step": "earth loaded",
+   "url": "/earth/",
+   "idleFrames": 0,
+   "framesSoFar": true
+  },
+  {
+   "step": "dragged",
+   "url": "/earth/",
+   "idleFrames": 0,
+   "framesSoFar": true
+  },
+  {
+   "step": "wheel zoomed",
+   "url": "/earth/",
+   "idleFrames": 0,
+   "framesSoFar": true
+  },
+  {
+   "step": "hovered",
+   "url": "/earth/",
+   "idleFrames": 0,
+   "framesSoFar": true
+  },
+  {
+   "step": "flew to mars",
+   "url": "/mars/",
+   "idleFrames": 0,
+   "framesSoFar": true
+  },
+  {
+   "step": "flew to saturn",
+   "url": "/saturn/",
+   "idleFrames": 0,
+   "framesSoFar": true
+  },
+  {
+   "step": "flew to earth",
+   "url": "/earth/",
+   "idleFrames": 0,
+   "framesSoFar": true
+  }
+ ],
+ "errors": []
+}

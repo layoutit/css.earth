@@ -1,0 +1,13 @@
+Shared frame clock owner count on main (3baaf4cbfe), one headless run of owner-count-probe.mjs.
+The renderer was built with a temporary log in createOpacityClock: '+' per share taken, '-' per share released,
+'destroyed' when the count reached zero. The log was removed and the renderer rebuilt afterwards.
+
+earth loaded events 6 owners now 6 destroyed 0
+after /mars/ events 15 owners now 9 destroyed 0
+after /saturn/ events 23 owners now 11 destroyed 0
+after /earth/ events 31 owners now 15 destroyed 0
+
+Shares taken, by caller (bundle frames):
+  createOpacityFader 3, createPerspectiveDolly 4, bindWorldCameraPicking 4, createUnboundedMatrixDragControls 4,
+  createPreparedWheelZoomControls 4, prepared universe mount 1, prepareConnectedActivation 3
+23 shares taken, 8 released, never destroyed.

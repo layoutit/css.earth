@@ -1,0 +1,329 @@
+[
+ {
+  "id": "unreleased:site/navigation/navigation-lifecycle.mts#site/navigation/navigation-lifecycle.mts#createNavigationLifecycle/begin:lifetime",
+  "file": "site/navigation/navigation-lifecycle.mts",
+  "line": 44,
+  "kind": "unreleased-acquisition",
+  "subject": "site/navigation/navigation-lifecycle.mts#createNavigationLifecycle/begin",
+  "evidence": [
+   {
+    "binding": "lifetime",
+    "factory": "packages/engine/src/runtime/scene-lifetime.ts#createSceneLifetime",
+    "expression": "createSceneLifetime()",
+    "releaseMembers": [
+     "destroy"
+    ],
+    "releasedPeers": [
+     {
+      "binding": "lifetime",
+      "file": "site/application-world-context.mts",
+      "line": 23,
+      "column": 13,
+      "owner": "site/application-world-context.mts#createApplicationWorldContext/mount",
+      "releasedAt": [
+       {
+        "file": "site/application-world-context.mts",
+        "line": 25,
+        "column": 51,
+        "owner": "site/application-world-context.mts#createApplicationWorldContext/mount/destroy"
+       }
+      ]
+     },
+     {
+      "binding": "lifetime",
+      "file": "site/object-shell-client.mts",
+      "line": 35,
+      "column": 9,
+      "owner": "site/object-shell-client.mts#mountObjectShell",
+      "releasedAt": [
+       {
+        "file": "site/object-shell-client.mts",
+        "line": 106,
+        "column": 27,
+        "owner": "site/object-shell-client.mts#mountObjectShell"
+       },
+       {
+        "file": "site/object-shell-client.mts",
+        "line": 139,
+        "column": 22,
+        "owner": "site/object-shell-client.mts#mountObjectShell/destroy"
+       }
+      ]
+     },
+     {
+      "binding": "previewLifetime",
+      "file": "site/object-shell-client.mts",
+      "line": 147,
+      "column": 11,
+      "owner": "site/object-shell-client.mts#mountObjectShell/beginNavigation",
+      "releasedAt": [
+       {
+        "file": "site/object-shell-client.mts",
+        "line": 152,
+        "column": 7,
+        "owner": "site/object-shell-client.mts#mountObjectShell/beginNavigation/settlePreview"
+       }
+      ]
+     },
+     {
+      "binding": "lifetime",
+      "file": "site/scene/scene-session.mts",
+      "line": 43,
+      "column": 9,
+      "owner": "site/scene/scene-session.mts#createSceneSession",
+      "releasedAt": [
+       {
+        "file": "site/scene/scene-session.mts",
+        "line": 116,
+        "column": 29,
+        "owner": "site/scene/scene-session.mts#createSceneSession/dispose"
+       }
+      ]
+     },
+     {
+      "binding": "lifetime",
+      "file": "src/renderers/css/navigation/camera-input.ts",
+      "line": 31,
+      "column": 9,
+      "owner": "src/renderers/css/navigation/camera-input.ts#createUnboundedMatrixDragControls",
+      "releasedAt": [
+       {
+        "file": "src/renderers/css/navigation/camera-input.ts",
+        "line": 36,
+        "column": 29,
+        "owner": "src/renderers/css/navigation/camera-input.ts#createUnboundedMatrixDragControls/guardNative/<anonymous>"
+       },
+       {
+        "file": "src/renderers/css/navigation/camera-input.ts",
+        "line": 508,
+        "column": 20,
+        "owner": "src/renderers/css/navigation/camera-input.ts#createUnboundedMatrixDragControls"
+       },
+       {
+        "file": "src/renderers/css/navigation/camera-input.ts",
+        "line": 535,
+        "column": 22,
+        "owner": "src/renderers/css/navigation/camera-input.ts#createUnboundedMatrixDragControls/destroy"
+       }
+      ]
+     },
+     {
+      "binding": "lifetime",
+      "file": "src/renderers/css/navigation/object-interaction-controls.ts",
+      "line": 30,
+      "column": 9,
+      "owner": "src/renderers/css/navigation/object-interaction-controls.ts#createObjectInteractionControls",
+      "releasedAt": [
+       {
+        "file": "src/renderers/css/navigation/object-interaction-controls.ts",
+        "line": 32,
+        "column": 21,
+        "owner": "src/renderers/css/navigation/object-interaction-controls.ts#createObjectInteractionControls/fail"
+       },
+       {
+        "file": "src/renderers/css/navigation/object-interaction-controls.ts",
+        "line": 96,
+        "column": 22,
+        "owner": "src/renderers/css/navigation/object-interaction-controls.ts#createObjectInteractionControls/destroy"
+       },
+       {
+        "file": "src/renderers/css/navigation/object-interaction-controls.ts",
+        "line": 101,
+        "column": 21,
+        "owner": "src/renderers/css/navigation/object-interaction-controls.ts#createObjectInteractionControls"
+       }
+      ]
+     },
+     {
+      "binding": "lifetime",
+      "file": "src/renderers/css/navigation/object-orbit.ts",
+      "line": 95,
+      "column": 9,
+      "owner": "src/renderers/css/navigation/object-orbit.ts#createRetainedCubicSkyOrbit",
+      "releasedAt": [
+       {
+        "file": "src/renderers/css/navigation/object-orbit.ts",
+        "line": 102,
+        "column": 27,
+        "owner": "src/renderers/css/navigation/object-orbit.ts#createRetainedCubicSkyOrbit/retireFailure"
+       },
+       {
+        "file": "src/renderers/css/navigation/object-orbit.ts",
+        "line": 426,
+        "column": 22,
+        "owner": "src/renderers/css/navigation/object-orbit.ts#createRetainedCubicSkyOrbit/destroy"
+       },
+       {
+        "file": "src/renderers/css/navigation/object-orbit.ts",
+        "line": 431,
+        "column": 20,
+        "owner": "src/renderers/css/navigation/object-orbit.ts#createRetainedCubicSkyOrbit"
+       }
+      ]
+     },
+     {
+      "binding": "lifetime",
+      "file": "src/renderers/css/runtime/object-runtime.ts",
+      "line": 67,
+      "column": 11,
+      "owner": "src/renderers/css/runtime/object-runtime.ts#createObjectRuntime/mountObject",
+      "releasedAt": [
+       {
+        "file": "src/renderers/css/runtime/object-runtime.ts",
+        "line": 102,
+        "column": 22,
+        "owner": "src/renderers/css/runtime/object-runtime.ts#createObjectRuntime/mountObject"
+       },
+       {
+        "file": "src/renderers/css/runtime/object-runtime.ts",
+        "line": 221,
+        "column": 24,
+        "owner": "src/renderers/css/runtime/object-runtime.ts#createObjectRuntime/mountObject/destroy"
+       },
+       {
+        "file": "src/renderers/css/runtime/object-runtime.ts",
+        "line": 273,
+        "column": 22,
+        "owner": "src/renderers/css/runtime/object-runtime.ts#createObjectRuntime/mountObject/fatal"
+       }
+      ]
+     },
+     {
+      "binding": "lifetime",
+      "file": "src/renderers/css/universe/prepared-universe-runtime.ts",
+      "line": 108,
+      "column": 13,
+      "owner": "src/renderers/css/universe/prepared-universe-runtime.ts#createPreparedUniverse/mount",
+      "releasedAt": [
+       {
+        "file": "src/renderers/css/universe/prepared-universe-runtime.ts",
+        "line": 114,
+        "column": 24,
+        "owner": "src/renderers/css/universe/prepared-universe-runtime.ts#createPreparedUniverse/mount/destroy"
+       },
+       {
+        "file": "src/renderers/css/universe/prepared-universe-runtime.ts",
+        "line": 284,
+        "column": 36,
+        "owner": "src/renderers/css/universe/prepared-universe-runtime.ts#createPreparedUniverse/mount"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "counterevidence": [
+   {
+    "file": "site/navigation/navigation-lifecycle.mts",
+    "line": 47,
+    "column": 48,
+    "endLine": 47,
+    "endColumn": 56,
+    "owner": "site/navigation/navigation-lifecycle.mts#createNavigationLifecycle/begin",
+    "how": "stored in an object"
+   },
+   {
+    "file": "site/navigation/navigation-lifecycle.mts",
+    "line": 51,
+    "column": 40,
+    "endLine": 51,
+    "endColumn": 48,
+    "owner": "site/navigation/navigation-lifecycle.mts#createNavigationLifecycle/begin",
+    "how": "stored in an object"
+   }
+  ],
+  "question": "lifetime comes from createSceneLifetime, whose result offers destroy, and 9 other createSceneLifetime results are released. Who releases this one?"
+ },
+ {
+  "id": "unreleased:src/renderers/css/universe/prepared-world-context.ts#src/renderers/css/universe/prepared-world-context.ts#mountPreparedWorldContext/[plan.focus, ...plan.bodies].map callback@2:navigation",
+  "file": "src/renderers/css/universe/prepared-world-context.ts",
+  "line": 206,
+  "kind": "unreleased-acquisition",
+  "subject": "src/renderers/css/universe/prepared-world-context.ts#mountPreparedWorldContext/[plan.focus, ...plan.bodies].map callback@2",
+  "evidence": [
+   {
+    "binding": "navigation",
+    "factory": "src/renderers/css/solar-system/heliocentric-navigation.ts#bindObjectNavigationTarget",
+    "expression": "bindObjectNavigationTarget(marker, host, { pointerTarget: false })",
+    "releaseMembers": [
+     "destroy"
+    ],
+    "releasedPeers": [
+     {
+      "binding": "navigation",
+      "file": "src/renderers/css/universe/world-context/world-context-point-source.ts",
+      "line": 96,
+      "column": 9,
+      "owner": "src/renderers/css/universe/world-context/world-context-point-source.ts#mountWorldContextPointSource",
+      "releasedAt": [
+       {
+        "file": "src/renderers/css/universe/world-context/world-context-point-source.ts",
+        "line": 122,
+        "column": 78,
+        "owner": "src/renderers/css/universe/world-context/world-context-point-source.ts#mountWorldContextPointSource/destroy"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "counterevidence": [
+   {
+    "file": "src/renderers/css/universe/prepared-world-context.ts",
+    "line": 208,
+    "column": 174,
+    "endLine": 208,
+    "endColumn": 184,
+    "owner": "src/renderers/css/universe/prepared-world-context.ts#mountPreparedWorldContext/[plan.focus, ...plan.bodies].map callback@2",
+    "how": "stored in an object"
+   }
+  ],
+  "question": "navigation comes from bindObjectNavigationTarget, whose result offers destroy, and 1 other bindObjectNavigationTarget result is released. Who releases this one?"
+ },
+ {
+  "id": "unreleased:src/renderers/css/universe/prepared-world-context.ts#src/renderers/css/universe/prepared-world-context.ts#mountPreparedWorldContext/[plan.focus, ...plan.bodies].map callback@2:orbitNavigation",
+  "file": "src/renderers/css/universe/prepared-world-context.ts",
+  "line": 207,
+  "kind": "unreleased-acquisition",
+  "subject": "src/renderers/css/universe/prepared-world-context.ts#mountPreparedWorldContext/[plan.focus, ...plan.bodies].map callback@2",
+  "evidence": [
+   {
+    "binding": "orbitNavigation",
+    "factory": "src/renderers/css/solar-system/heliocentric-navigation.ts#bindObjectNavigationTarget",
+    "expression": "orbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null",
+    "releaseMembers": [
+     "destroy"
+    ],
+    "releasedPeers": [
+     {
+      "binding": "navigation",
+      "file": "src/renderers/css/universe/world-context/world-context-point-source.ts",
+      "line": 96,
+      "column": 9,
+      "owner": "src/renderers/css/universe/world-context/world-context-point-source.ts#mountWorldContextPointSource",
+      "releasedAt": [
+       {
+        "file": "src/renderers/css/universe/world-context/world-context-point-source.ts",
+        "line": 122,
+        "column": 78,
+        "owner": "src/renderers/css/universe/world-context/world-context-point-source.ts#mountWorldContextPointSource/destroy"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "counterevidence": [
+   {
+    "file": "src/renderers/css/universe/prepared-world-context.ts",
+    "line": 208,
+    "column": 186,
+    "endLine": 208,
+    "endColumn": 201,
+    "owner": "src/renderers/css/universe/prepared-world-context.ts#mountPreparedWorldContext/[plan.focus, ...plan.bodies].map callback@2",
+    "how": "stored in an object"
+   }
+  ],
+  "question": "orbitNavigation comes from bindObjectNavigationTarget, whose result offers destroy, and 1 other bindObjectNavigationTarget result is released. Who releases this one?"
+ }
+]
