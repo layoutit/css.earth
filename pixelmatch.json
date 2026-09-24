@@ -1,0 +1,40 @@
+{
+  "baseline": "4969e9edd80437bb231b62a9fd217e3049a0caed",
+  "candidate": {
+    "site/scene/scene-router.mts": "1482271713be420746ab7faa5c7b30dd8cb8007815c52ecdd80d93ecdaaed310",
+    "site/scene/scene-transition.mts": "c4a60b546241283ab68e4e3e04099936ab758c39f608cece178416a9784a687b"
+  },
+  "browser": "Chrome 153.0.8010.53",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "pixelmatch": "7.2.0",
+  "threshold": 0.1,
+  "includeAA": true,
+  "assetOrigin": "https://earth-assets.lowpoly.cc",
+  "inputs": "Same prepared inputs and inventory-addressed published textures; default surface labels off, motion off. No assets regenerated between captures.",
+  "results": [
+    {
+      "view": "earth",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 269,
+      "identicalBytes": false,
+      "beforeSha256": "a6d4b964181c4cd3f3bae183391ffdcdaab74369adb9e07f123f312bbf66952a",
+      "afterSha256": "b0b203af4d49f23b72426f157c045f82488851fc8a19c7bc6cb62d75d511a840"
+    },
+    {
+      "view": "overview",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "02a6634e790b30cb790ee6cbd3042a5f7d2ac4ad21b43046504d9cbc4c8b3540",
+      "afterSha256": "02a6634e790b30cb790ee6cbd3042a5f7d2ac4ad21b43046504d9cbc4c8b3540"
+    }
+  ],
+  "candidateCommit": "c3f222a5a61d5a7b288e0bbc6a2631b827a6b353",
+  "strictDifference": "269 Earth pixels in the two 14px dataset icons differ by at most 3 RGB levels. The whole overview PNG is byte-identical."
+}

@@ -1,0 +1,11 @@
+### Result
+{"states":[{"url":"http://127.0.0.1:4389/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA","state":{"scenePresented":"true","ready":"true","playing":"false","selection":"object"}},{"url":"http://127.0.0.1:4389/sun/?overview=system&v=UMOAAAAAAAAAAIAAAAAAAAAAwhK5P9syaBVBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA","state":{"scenePresented":"true","ready":"true","playing":"false","selection":"system"}}],"errors":[],"browser":"153.0.8010.53"}
+### Ran Playwright code
+```js
+await (async page => { await page.setViewportSize({width:1440,height:900}); const states=[]; const errors=[]; page.on("pageerror",e=>errors.push(e.message)); for(const [view,path] of [["earth","/earth/"],["overview","/sun/?overview=system"]]) { await page.goto("http://127.0.0.1:4389"+path); await page.waitForFunction(()=>document.documentElement.dataset.ready==="true" && document.documentElement.dataset.scenePresented==="true",null,{timeout:30000}); await page.waitForTimeout(1000); await page.screenshot({path:"output/router-context/before-"+view+".png"}); states.push(await page.evaluate(()=>({url:location.href,state:{...document.documentElement.dataset}}))); } return {states,errors,browser:page.context().browser().version()}; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4389/sun/?overview=system&v=UMOAAAAAAAAAAIAAAAAAAAAAwhK5P9syaBVBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA
+- Page Title: Sun | cssEarth
+### Events
+- New console entries: .playwright-cli/console-2026-09-24T10-47-28-717Z.log#L26-L101

@@ -1,0 +1,9 @@
+### Result
+{"back":{"url":"http://127.0.0.1:4389/sun/?overview=system&v=UMOAAAAAAAAAAIAAAAAAAAAAwhK5P9syaBVBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA","ready":true,"count":1},"forward":{"url":"http://127.0.0.1:4389/earth/?v=UAO9-JN0vGp--b4QYk3S8an8wToMO38op4FBQsczQAAAAD-kQ3JOUUOYv8V2hm8TTBC_zPbHChksmgACAAAAAAAAAAAAAAAAAAAAAA","ready":true,"count":1},"errors":[]}
+### Ran Playwright code
+```js
+await (async page => { const errors=[]; page.on("pageerror",e=>errors.push(e.message)); const ready=path=>page.waitForFunction(path=>location.pathname===path && window.__cssEarth?.ready===true && window.__cssEarth?.mountedObjectCount===1,path,{timeout:30000}); await page.goto("http://127.0.0.1:4389/sun/?overview=system"); await ready("/sun/"); await page.getByRole("searchbox",{name:"Search celestial objects..."}).fill("Earth"); await page.getByRole("link",{name:/^Earth /}).first().click(); await ready("/earth/"); await page.goBack(); await ready("/sun/"); const back=await page.evaluate(()=>({url:location.href,ready:window.__cssEarth.ready,count:window.__cssEarth.mountedObjectCount})); await page.goForward(); await ready("/earth/"); const forward=await page.evaluate(()=>({url:location.href,ready:window.__cssEarth.ready,count:window.__cssEarth.mountedObjectCount})); return {back,forward,errors}; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4389/earth/?v=UAO9-JN0vGp--b4QYk3S8an8wToMO38op4FBQsczQAAAAD-kQ3JOUUOYv8V2hm8TTBC_zPbHChksmgACAAAAAAAAAAAAAAAAAAAAAA
+- Page Title: Earth | cssEarth

@@ -1,0 +1,18 @@
+✔ object navigation leaves focus and overview links to the same scene unselected (0.412917ms)
+✔ Back to the front page returns to the body it shows, not nowhere (2.78675ms)
+✔ supersession revokes commit authority before abort and cleanup, including late resources (0.980375ms)
+✔ arrival settles once without aborting the handed-off scene; failures abort (0.251459ms)
+✔ readiness waits for native activation and restoration; one session commands playback and teardown (1.229834ms)
+✔ a late factory cannot mount or replace the next session after cancellation (0.177958ms)
+✔ a transferred prepared bank survives request completion and releases on scene teardown (0.226958ms)
+✔ failed activation releases transferred preparation even when the factory throws before returning a mount (0.200709ms)
+✔ cancellation before handoff releases a late bank and forbids transfer (0.103958ms)
+✔ URL replacement stays bounded and flush failures cannot skip native or binding cleanup (0.180042ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83.865333
