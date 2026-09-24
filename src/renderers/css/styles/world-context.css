@@ -185,3 +185,7 @@
 .prepared-world-context [data-context-body="sgr-a-star"]::after {
   color: #000;
 }
+.prepared-world-context [data-context-body="sgr-a-star"]::after {
+  content: 'Sgr A*';
+  text-transform: none;
+}

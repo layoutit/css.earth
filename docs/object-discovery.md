@@ -185,8 +185,8 @@ An orbit's interior stays available, whatever its size or distance: a projected
 path does not become an opaque rectangle. Physical body occlusion remains
 separate from annotation collisions.
 
-Sagittarius A* uses a black caption and circle for contrast against the bright
-Milky Way bulge.
+Sagittarius A* uses the short caption “Sgr A*” and a black caption and circle
+for contrast against the bright Milky Way bulge. Its accessible name stays full.
 
 Category emphasis applies to the annotation and orbit together; it does not make a
 second visibility decision in CSS. Small circle footprints are allowed to
