@@ -5,7 +5,6 @@ import { loadStellarPhotometricColor, type StellarColor } from '../observation/s
 import type { ColorChoice } from './color.mts';
 import type { LimbChoice } from './limb.mts';
 
-export const CMF = 'reference/CIE_xyz_1931_2deg.csv';
 export const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const hex = (color: StellarColor) => `#${color.srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`;
 
@@ -13,16 +12,15 @@ export type PackageFiles = Map<string, string | Buffer>;
 
 /** Rewrite a scaffolded emissive package (its one `shape` lens) into the colour lens. Returns the prepared colour and the words
  * the rest of the package uses for it. */
-export async function installColorLens(files: PackageFiles, id: string, color: ColorChoice, limb: LimbChoice, cmfText: Buffer) {
+export async function installColorLens(files: PackageFiles, id: string, color: ColorChoice, limb: LimbChoice) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
-  files.set(`${s}/${CMF}`, cmfText);
   for (const [path, bytes] of color.files) files.set(`${s}/${path}`, bytes);
   if (limb.file) files.set(`${s}/${limb.file.path}`, limb.file.text);
   files.set(`${s}/photometry/stellar-color.json`, json(color.record));
 
   const words = color.route === 'planck' ? "a blackbody at the star's published temperature" : color.route === 'gaia-xp' ? "the star's Gaia DR3 BP/RP spectrum" : `the star's measured spectrum (${color.summary.split(':')[0]})`;
   const short = color.route === 'planck' ? "Colour of a blackbody at the star's temperature" : color.route === 'gaia-xp' ? "Colour from Gaia's spectrum of the star" : 'Colour from its measured spectrum';
-  const science: Record<string, unknown> = { kind: 'stellar-photometric-color', colorMatching: CMF, ...(limb.limbDarkening ? { limbDarkening: limb.limbDarkening } : {}),
+  const science: Record<string, unknown> = { kind: 'stellar-photometric-color', ...(limb.limbDarkening ? { limbDarkening: limb.limbDarkening } : {}),
     qualification: `${limb.limbDarkening ? 'Photosphere' : 'Uniform photosphere'} colour from ${words}${limb.limbDarkening ? `, ${limb.sentence}` : `. ${limb.sentence}`}. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.` };
   // The prepared colour, through the lens's own loader on the files as they will be written.
   const loaded = await loadStellarPhotometricColor(async path => { const value = files.get(`${s}/${path}`); if (value === undefined) throw new Error(`${id}: ${path} is not in the generated package.`); return Buffer.from(value); }, science, 'photometry/stellar-color.json');
@@ -55,11 +53,9 @@ export async function installColorLens(files: PackageFiles, id: string, color: C
   files.set(`${o}/text.json`, json(text));
 
   const manifest = read(`${s}/manifest.json`);
-  const cmfInput = { id: `${id}-cie-1931-2deg-cmf`, path: CMF, origin: 'https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer', credit: 'CIE (2019), CIE 1931 colour-matching functions, 2 degree observer, doi:10.25039/CIE.DS.xvudnb9b',
-    license: 'CC BY-SA 4.0', licenseEvidence: ['https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer'], acquisition: 'The CIE data table as the hd-189733 package ships it, byte for byte.',
-    redistribution: 'Permitted under CC BY-SA 4.0 with attribution.', consumers: ['assets', 'lenses'] };
-  manifest.inputs = [...manifest.inputs, ...color.inputs, cmfInput, ...limb.input ? [limb.input] : []];
-  const markerInputs = [`${id}-stellar-color`, ...color.inputs.filter(entry => entry.id !== `${id}-stellar-color` && entry.id !== `${id}-crosscheck-spectrum`).map(entry => String(entry.id)), cmfInput.id, ...limb.input ? [String(limb.input.id)] : [], `${id}-preparation-raster`];
+  // The CIE table is the shared reference bank (src/references/cie-1931-2deg); bodies no longer carry a copy.
+  manifest.inputs = [...manifest.inputs, ...color.inputs, ...limb.input ? [limb.input] : []];
+  const markerInputs = [`${id}-stellar-color`, ...color.inputs.filter(entry => entry.id !== `${id}-stellar-color` && entry.id !== `${id}-crosscheck-spectrum`).map(entry => String(entry.id)), ...limb.input ? [String(limb.input.id)] : [], `${id}-preparation-raster`];
   manifest.generatedIntermediates = [...(manifest.generatedIntermediates ?? []).filter((entry: { path: string }) => entry.path !== 'presentation/context.png'), {
     id: limb.limbDarkening ? 'limb-darkened-disc-context-marker' : 'uniform-disc-context-marker', path: 'presentation/context.png', origin: String(color.inputs[0]?.origin),
     credit: `The colour lens as a disc${limb.limbDarkening ? ', dimmed toward the limb by its model law' : ''}; rendered by tools/objects/source-authoring/context-markers.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
@@ -74,7 +70,7 @@ export async function installColorLens(files: PackageFiles, id: string, color: C
 }
 
 /** Bind every manifest input that has no binding yet to its own catalogue record, `source-<object>-<entry>`, as the placed stars'
- * Gaia rows, CIE tables and limb grids are: tools/sources/author-source-records.mts writes the record in the bake. */
+ * Gaia rows and limb grids are: tools/sources/author-source-records.mts writes the record in the bake. */
 export function bindInputs(files: PackageFiles, id: string) {
   const path = `src/objects/${id}/source/manifest.json`, manifest = JSON.parse(String(files.get(path))) as { inputs: Record<string, unknown>[] };
   for (const input of manifest.inputs) if (input.sourceBinding === undefined) {

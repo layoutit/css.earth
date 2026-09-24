@@ -8,10 +8,11 @@ import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { scaffoldHostedPlanetFiles, TODO as HOSTED_TODO } from '../new-hosted-planet.mts';
+import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 import { parseCieTable } from '../observation/disc-integrated-color.mts';
 import { type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
-import { bindInputs, CMF, installColorLens, json, type PackageFiles } from './lens.mts';
+import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
 import { chooseLimb } from './limb.mts';
 import { archiveRows, assembleArchiveOrbit, compositeMass, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
 import { TODO } from './scaffold.mts';
@@ -86,11 +87,11 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
 
   let colorHex: string | undefined, limbSentence: string | undefined;
   if (star) {
-    const cmfText = await readFile(resolve(root, 'src/objects/hd-189733/source', CMF)), cmf = parseCieTable(cmfText.toString('utf8'), 3);
+    const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
     const logg = fixed(Math.log10(record.mass.value * GM_SUN * 1e15 / (record.radius.value * SOLAR_RADIUS_KM * 1e5) ** 2), 2);
     const limb = await chooseLimb(id, t!.value, logg, archive);
     const color = planckChoice(id, t!, 'The archives do not resolve this companion from its star', [], cmf);
-    const installed = await installColorLens(files, id, color, limb, cmfText);
+    const installed = await installColorLens(files, id, color, limb);
     colorHex = installed.hex; limbSentence = limb.sentence;
     const measurements = read(`${s}/measurements.json`);
     Object.assign(measurements, { surfaceGravityLogg: logg, surfaceGravitySource: `log g from the mass and radius in packages/astronomy/data/bodies/${id}.json, log10(GM/R^2) in cgs, rounded to two decimals` });

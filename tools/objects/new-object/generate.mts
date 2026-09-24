@@ -8,7 +8,8 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseCieTable } from '../observation/disc-integrated-color.mts';
-import { bindInputs, CMF, installColorLens, json } from './lens.mts';
+import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
+import { bindInputs, installColorLens, json } from './lens.mts';
 import { CROSS_CHECK_AGREEMENT } from '../observation/stellar/stellar-photometric-color.mts';
 import { neutralDiscMarker, scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
 import { fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
@@ -86,7 +87,7 @@ export interface Generated {
 export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order }: { archive?: Archive; root?: string; resolver?: Resolver; order: number }): Promise<Generated> {
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
   const ids = await identify(resolver, spec.target, spec.gaia, spec.id);
-  const cmfText = await readFile(resolve(root, 'src/objects/hd-189733/source', CMF)), cmf = parseCieTable(cmfText.toString('utf8'), 3);
+  const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const urls = [...new Set([spec.paper.url, ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.spin].flatMap(value => value && value !== 'gaia-flame' ? [value.url] : [])])];
   const [{ csv, row }, found] = await Promise.all([fetchGaiaRow(archive, ids.gaia), Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, row);
@@ -102,7 +103,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const files = new Map<string, string | Buffer>(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   files.set(`${s}/photometry/gaia-dr3-source.csv`, csv);
-  const { hex: colorHex, words: colorWords } = await installColorLens(files, id, color, limb, cmfText);
+  const { hex: colorHex, words: colorWords } = await installColorLens(files, id, color, limb);
 
   const measurements = read(`${s}/measurements.json`), distance = 1000 / row.parallax, out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(measurements)) {
