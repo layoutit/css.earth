@@ -1,0 +1,36 @@
+{
+  "candidate": "817f256edef8547289f51736b0372713b54c77f3",
+  "navigationPayload": {
+    "identical": true,
+    "sha256": "0498924b0935f2c3afd605cade0e5b7e9a4b75694ba24f101e9714adfbe77a5b"
+  },
+  "results": [
+    {
+      "view": "earth",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "082fd6138944c2537b92965d2650e00831b58e237834010ff26fcc2c10f2c91c",
+      "afterSha256": "082fd6138944c2537b92965d2650e00831b58e237834010ff26fcc2c10f2c91c"
+    },
+    {
+      "view": "tree",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "391fec11dcdf636723dad83e80ea4465644b2a6d124bc6fd1988d5a95bbdd524",
+      "afterSha256": "391fec11dcdf636723dad83e80ea4465644b2a6d124bc6fd1988d5a95bbdd524"
+    },
+    {
+      "view": "search",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "2aff9dd16d8f37b2fda4e5351fbc917d00228fdb76d0649cdfded8789f8725c9",
+      "afterSha256": "2aff9dd16d8f37b2fda4e5351fbc917d00228fdb76d0649cdfded8789f8725c9"
+    }
+  ]
+}

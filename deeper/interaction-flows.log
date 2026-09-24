@@ -1,0 +1,12 @@
+### Result
+{"checks":["Escape","query retention","deferred expansion","reset to selected path","category toggle"],"errors":[],"scene":{"activeObjectId":"earth","selectedObjectId":"earth","overview":false,"mountedObjectCount":1,"ready":true,"error":null,"lifecycle":"paused","playback":{"motionRequested":false,"allowed":false,"reason":"motion-off"}}}
+### Ran Playwright code
+```js
+await (async page => { const errors=[]; page.on("pageerror",e=>errors.push(e.message)); const search=page.getByRole("searchbox",{name:"Search celestial objects..."}); const check=(v,m)=>{if(!v)throw new Error(m)}; await search.press("Escape"); check(await search.getAttribute("aria-expanded")==="false","Escape closes browser"); await page.getByRole("button",{name:"Browse celestial objects"}).click(); check(await search.inputValue()==="Earth","Reopening preserves query"); await search.fill(""); await page.locator("[data-object-navigation-tree]:not([hidden])").waitFor(); const stars=page.locator("details[data-atlas-key=stars]"); await stars.locator(":scope > summary").click(); await page.waitForFunction(()=>!document.querySelector("details[data-atlas-key=stars]").hasAttribute("data-atlas-lazy")); await search.fill("Earth"); await search.fill(""); check(!(await stars.evaluate(e=>e.open)),"Returning to tree closes unrelated root"); check(await page.locator("[data-atlas-object=earth][aria-current=page]").count()===1,"Earth remains selected"); await page.getByRole("button",{name:"Planets",exact:true}).click(); check(await page.getByRole("button",{name:"Planets",exact:true}).getAttribute("aria-pressed")==="true","Category selected"); await page.getByRole("button",{name:"Planets",exact:true}).click(); check(await search.getAttribute("aria-expanded")==="false","Category toggle closes browser"); return {checks:["Escape","query retention","deferred expansion","reset to selected path","category toggle"],errors,scene:await page.evaluate(()=>window.__cssEarth)}; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4389/earth/?v=UMO-Pqf9cwHWnb4vItDlYEGJwN6brxW3l1xBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA
+- Page Title: Earth | cssEarth
+- Console: 8 errors, 1 warnings
+### Events
+- New console entries: .playwright-cli/console-2026-09-24T11-03-53-161Z.log#L34-L41

@@ -1,0 +1,73 @@
+{
+  "baseline": "c3f222a5a61d5a7b288e0bbc6a2631b827a6b353",
+  "candidate": "817f256edef8547289f51736b0372713b54c77f3",
+  "candidateTree": "9a928b87be63633521a5f3d095949e0306e36db7",
+  "capturedBeforeCommit": true,
+  "versionStamp": "0.3153",
+  "sourceFiles": {
+    ".github/workflows/deploy.yml": "ddc972e25fc7540fbc522fdf96a72dd44b667744f20ecf8f29f84842e6df418c",
+    "pnpm-lock.yaml": "8b203dcc178306a6473bad116ca15857ca36bc0e15569a3b0edce8f01f98d181",
+    "pnpm-workspace.yaml": "71c605f71fb40d991d76e177c65c14a525aa20dcb853943475ea2036e0f2bcdc",
+    "site/components/NavigationTree.astro": "d6fcd232338ba482858ca47c39781df4c952c4c5aa25b522b8d5161860625f0b",
+    "site/components/NavigationTreeItem.astro": "dd5fe76bf226110292d770a60ed43726004843d1757fcd6335b00209a4aac408",
+    "site/components/ObjectResults.astro": "b4426278067365f75f4f1de110e5e9bacaf82cdcc79773274510276c976d14ee",
+    "site/navigation/navigation-destination.mts": "efc61547387709fafd0a155d83b1a177a1366ec69b096315b07b3de1f5a7114a",
+    "site/navigation/navigation-tree-client.mts": "81e92b4809f730613bce8a756f20bbc88d627eb355a41d997ca58592404bded6",
+    "site/navigation/navigation-tree-data.mts": "dd4601043e737cdf1a23f87e9e9d0a19eb2150d12c8e1ba1f2241fc958afeb41",
+    "site/navigation/navigation-tree.css": "9d0d3b3ce8cf33ffb2b960d6c2df8e6be6a15b41e38a46da8e0d0603192ce8fa",
+    "site/navigation/navigation-tree.mts": "292e07f1371e26a21c3357d408267087f2d02c2267af79f5324220a955cd1537",
+    "site/navigation/tree-marker.mts": "44038e621d0acaf8e2440b695f9d0e24611454896a3eb71cd84c5130fa64c497",
+    "site/object-browser.mts": "5fc4b15a0c9513058830aaa14adff94f49bac6617439988383c70b99fe848e72",
+    "site/object-catalogue.mts": "174ba2627d9503dd5a149531e34e1d69ef5215f8d534c27c0dabb50a8aba22dc",
+    "site/pages/navigation-tree.json.ts": "41eaa37e6731cb4e009fd6c34ae0d9d8ffe425c696bb291d5f67669869a79313",
+    "site/test/astro-component-imports.test.mts": "2f52b8cd0789a6250e582ff03b425ea5c238ed4680799a7b389ce67fc4add3f7",
+    "site/test/navigation-ontology.test.mts": "26d5afb52cca744fb7db90268aed35ea1e6311ea3fbec9c7d12faa2a94e9a8cd",
+    "site/test/navigation-tree-client.test.mts": "f048bf8531e1d74cb8a63983d6409f85e9132dd364a0576e04b43c21dc012084",
+    "site/test/navigation-tree-data.test.mts": "1339fba67e6760db1614f63a65b069ef72635e29c07d2602014539c5ade53a05"
+  },
+  "browser": "Chrome 153.0.8010.53",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "pixelmatch": "7.2.0",
+  "threshold": 0.1,
+  "includeAA": true,
+  "assetOrigin": "https://earth-assets.lowpoly.cc",
+  "inputs": "Same prepared inputs, inventory-addressed textures and restored Earth atmosphere/shadowless textures. Default labels and motion off. Both captures wait for scene readiness, network idle and the feature-search response. Baseline uses pinned site/ and atlas/ sources with shared unchanged prepared inputs; only dev-server filesystem permissions/cache isolation differ.",
+  "initialPath": "/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA",
+  "navigationPayload": {
+    "identical": true,
+    "sha256": "0498924b0935f2c3afd605cade0e5b7e9a4b75694ba24f101e9714adfbe77a5b"
+  },
+  "results": [
+    {
+      "view": "earth",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "082fd6138944c2537b92965d2650e00831b58e237834010ff26fcc2c10f2c91c",
+      "afterSha256": "082fd6138944c2537b92965d2650e00831b58e237834010ff26fcc2c10f2c91c"
+    },
+    {
+      "view": "tree",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "391fec11dcdf636723dad83e80ea4465644b2a6d124bc6fd1988d5a95bbdd524",
+      "afterSha256": "391fec11dcdf636723dad83e80ea4465644b2a6d124bc6fd1988d5a95bbdd524"
+    },
+    {
+      "view": "search",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "2aff9dd16d8f37b2fda4e5351fbc917d00228fdb76d0649cdfded8789f8725c9",
+      "afterSha256": "2aff9dd16d8f37b2fda4e5351fbc917d00228fdb76d0649cdfded8789f8725c9"
+    }
+  ]
+}

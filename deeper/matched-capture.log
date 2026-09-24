@@ -1,0 +1,11 @@
+### Result
+{"states":[{"phase":"before","url":"http://127.0.0.1:4390/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA","ready":true},{"phase":"after","url":"http://127.0.0.1:4389/earth/?v=UMO-Pqf9cwHWnb4vItDlYEGJwN6brxW3l1xBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA","ready":true}],"errors":[],"browser":"153.0.8010.53"}
+### Ran Playwright code
+```js
+await (async page => { await page.setViewportSize({width:1440,height:900}); const errors=[]; const states=[]; page.on("pageerror",e=>errors.push(e.message)); for (const [phase,port] of [["before",4390],["after",4389]]) { await page.goto("http://127.0.0.1:"+port+"/earth/?v=UMJA3puvFbeOAUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA"); await page.waitForFunction(()=>window.__cssEarth?.ready===true && window.__cssEarth.mountedObjectCount===1,null,{timeout:20000}); await page.waitForLoadState("networkidle"); await page.screenshot({path:"output/router-deep/"+phase+"-earth.png"}); await page.getByRole("button",{name:"Browse celestial objects"}).click(); await page.screenshot({path:"output/router-deep/"+phase+"-tree.png"}); const found=page.waitForResponse(r=>r.url().includes("/.netlify/functions/find?")&&r.url().includes("q=earth")); await page.getByRole("searchbox",{name:"Search celestial objects..."}).fill("Earth"); await found; await page.locator(".object-feature-results:not([hidden])").waitFor(); await page.waitForLoadState("networkidle"); await page.screenshot({path:"output/router-deep/"+phase+"-search.png"}); states.push({phase,url:page.url(),ready:await page.evaluate(()=>window.__cssEarth.ready)}); } return {states,errors,browser:page.context().browser().version()}; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:4389/earth/?v=UMO-Pqf9cwHWnb4vItDlYEGJwN6brxW3l1xBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA
+- Page Title: Earth | cssEarth
+### Events
+- New console entries: .playwright-cli/console-2026-09-24T11-03-53-161Z.log#L14-L32

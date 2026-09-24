@@ -1,0 +1,63 @@
+✔ every relative import in an Astro component frontmatter resolves to a file (209.500625ms)
+✔ every prepared spatial subject and every scene has exactly one searchable destination (262.182083ms)
+✔ distance display and order use the prepared position, never the legacy orbital reference (208.4045ms)
+✔ galaxy citations resolve across the full prepared catalogue, including the separate SMC paper (15.278875ms)
+✔ physical hosts remain distinct from scene hosts and M45 retains its measured subject (14.198834ms)
+✔ every row of the application navigation tree opens a route the application serves (200.486709ms)
+✔ an unconfirmed LVDB galaxy is searchable by name as a candidate galaxy, and the galaxy listing leaves it out (489.793125ms)
+✔ deferred navigation materializes only the selected path from its verified payload (62.814291ms)
+✔ deferred rows open the destination the payload names, and a row with none is a label (1.00175ms)
+✔ selecting an object keeps only its top-level scale branch open (2.388333ms)
+✔ reset collapses unrelated branches and restores the selected path (1.327208ms)
+✔ a deferred selection that finishes after a newer one leaves the newer entry current (0.652916ms)
+✖ bundled navigation reads object packages and prepared context from the repository root (508.591167ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 12
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1844.943917
+
+✖ failing tests:
+
+test at tests/objects/source-test.mts:68:12
+✖ bundled navigation reads object packages and prepared context from the repository root (508.591167ms)
+  Error: Command failed: /Users/ekrof/.nvm/versions/node/v24.21.0/bin/node /private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/dist/.prerender/chunks/navigation.mjs
+  node:internal/modules/esm/resolve:272
+      throw new ERR_MODULE_NOT_FOUND(
+            ^
+  
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/src/objects/sun/prepared/world-context-summary.json' imported from /private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/dist/.prerender/chunks/navigation.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:272:11)
+      at moduleResolve (node:internal/modules/esm/resolve:879:10)
+      at defaultResolve (node:internal/modules/esm/resolve:1006:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:705:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:725:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:763:56)
+      at #resolve (node:internal/modules/esm/loader:687:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:607:35)
+      at node:internal/modules/esm/loader:636:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/src/objects/sun/prepared/world-context-summary.json'
+  }
+  
+  Node.js v24.21.0
+  
+      at genericNodeError (node:internal/errors:986:15)
+      at wrappedFn (node:internal/errors:540:14)
+      at ChildProcess.exithandler (node:child_process:417:12)
+      at ChildProcess.emit (node:events:514:28)
+      at maybeClose (node:internal/child_process:1141:16)
+      at Socket.<anonymous> (node:internal/child_process:498:11)
+      at Socket.emit (node:events:514:28)
+      at Pipe.<anonymous> (node:net:362:12) {
+    code: 1,
+    killed: false,
+    signal: null,
+    cmd: '/Users/ekrof/.nvm/versions/node/v24.21.0/bin/node /private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/dist/.prerender/chunks/navigation.mjs',
+    stdout: '',
+    stderr: "node:internal/modules/esm/resolve:272\n    throw new ERR_MODULE_NOT_FOUND(\n          ^\n\nError [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/src/objects/sun/prepared/world-context-summary.json' imported from /private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/dist/.prerender/chunks/navigation.mjs\n    at finalizeResolution (node:internal/modules/esm/resolve:272:11)\n    at moduleResolve (node:internal/modules/esm/resolve:879:10)\n    at defaultResolve (node:internal/modules/esm/resolve:1006:11)\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:705:20)\n    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:725:38)\n    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:763:56)\n    at #resolve (node:internal/modules/esm/loader:687:17)\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:607:35)\n    at node:internal/modules/esm/loader:636:32\n    at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {\n  code: 'ERR_MODULE_NOT_FOUND',\n  url: 'file:///private/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/navigation-prerender-2yQ25x/src/objects/sun/prepared/world-context-summary.json'\n}\n\nNode.js v24.21.0\n"
+  }
