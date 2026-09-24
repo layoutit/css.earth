@@ -1,5 +1,5 @@
 import { normalizeDestinationQuery } from './destination-search.mts';
-import { matchesObjectCategory, matchesObjectClassification, objectCategory } from './object-categories.mts';
+import { matchesObjectClassification } from './object-categories.mts';
 
 export const SEARCH_QUERY_LIMIT = 200;
 export interface ObjectSearchLabels {
@@ -13,7 +13,7 @@ export interface ObjectSearchLabels {
 }
 
 /** One matching policy for the native form response and its live enhancement. */
-export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[], value: string, category = 'planet',
+export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[], value: string,
   { illustrations = false } = {}) {
   const query = value.slice(0, SEARCH_QUERY_LIMIT).trim().toLocaleLowerCase('en');
   const normalized = normalizeDestinationQuery(query);
@@ -26,10 +26,7 @@ export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[],
     ? matchesObjectClassification(item.classification, classification) && (!item.illustration || illustrations) && !item.candidate
     : showAll || (systemName ? item.systemName === systemName
       : item.name.includes(query) || normalized.length > 0 && item.names.some(name => name.includes(normalized))));
-  const nextCategory = classification ? objectCategory(classification) : showAll ? 'all'
-    : matches.some(item => matchesObjectCategory(item.classification, category)) ? category
-      : objectCategory(matches[0]?.classification) ?? category;
-  return { query, matches, category: nextCategory, classification, systemName, showAll,
+  return { query, matches, classification, systemName, showAll,
     detailQuery: classification || systemName || showAll ? '' : query };
 }
 

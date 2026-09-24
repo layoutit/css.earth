@@ -1,8 +1,0 @@
----
-import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
-import NavigationTree from './NavigationTree.astro';
-
-const current = Astro.locals.starlightRoute.id;
----
-<NavigationTree current={current} />
-<div class="md:sl-hidden"><MobileMenuFooter /></div>

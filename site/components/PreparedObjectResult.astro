@@ -4,12 +4,12 @@ import { distanceDescription } from '../navigation/navigation-distance.mts';
 import { objectClassificationLabel } from '../search-objects.mts';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { FOCUS_SOURCE_DOCUMENTS } from '../focus-catalog-data.mts';
-interface Props { object: PreparedFocusObject; hidden?: boolean; }
-const { object, hidden = false } = Astro.props;
+interface Props { object: PreparedFocusObject; }
+const { object } = Astro.props;
 const source = FOCUS_SOURCE_DOCUMENTS.get(object.id);
 if (!source) throw new Error(`Missing focus source document: ${object.id}`);
 ---
-<li class="object-item" role="listitem" hidden={hidden} data-navigation-object-id={object.id}
+<li class="object-item" role="listitem" data-navigation-object-id={object.id}
   data-object-name={object.name.toLocaleLowerCase('en')}
   data-object-search-names={JSON.stringify(object.searchNames)}
   data-object-distance-m={object.distance.meters}

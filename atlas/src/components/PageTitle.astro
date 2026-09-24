@@ -1,8 +1,0 @@
----
-import Default from '@astrojs/starlight/components/PageTitle.astro';
-
-const { description, object } = Astro.locals.starlightRoute.entry.data;
----
-{/* Object pages put their title at the head of the README pane. */}
-{!object && <Default />}
-{!object && description && <p class="sb-subtitle">{description}</p>}

@@ -5,7 +5,6 @@ import type { BrowserWindow } from './browser-types.mts';
 import type { SceneSubject } from './scene/scene-selection.mts';
 import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement } from './browser-types.mts';
-import { objectCategoryCount } from './object-categories.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
@@ -62,7 +61,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     void navigation?.select(current);
   };
   const presentation = createSelectionPresentation(documentTarget, browser, information, selectNavigation);
-  const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const catalogue = createObjectCatalogue({ documentTarget, windowTarget, browser, resultsPanel, lifetime,
     onLoad() {
@@ -81,9 +79,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     const solarSystem = navigationRoot.querySelector<HTMLDetailsElement>('details[data-atlas-depth="0"][data-atlas-key="solar-system"]');
     if (solarSystem) solarSystem.open = true;
   };
-  let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
   let showingSearchResults = false;
-  let initialCategory: string | null = searchCard.hasAttribute('data-search-submitted') ? activeCategory : null;
   // Scroll events arrive after layout. Retain that state so publishing an
   // unchanged camera or selection never forces layout to rewrite a zero offset.
   let resultsScrolled = false;
@@ -95,28 +91,9 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     resultsPanel.scrollTop = 0;
     resultsScrolled = false;
   };
-  const selectTab = (classification: string, { focus = false, resetScroll = true } = {}) => {
-    if (resetScroll) resetResultsScroll();
-    const previousCategory = activeCategory;
-    activeCategory = classification;
-    for (const tab of tabs) {
-      const selected = tab.dataset.objectTab === classification;
-      tab.setAttribute('aria-selected', String(selected));
-      tab.tabIndex = selected ? 0 : -1;
-      if (selected) {
-        resultsPanel.setAttribute('aria-labelledby', tab.id);
-        if (focus) tab.focus();
-      }
-    }
-    visibleObjects = catalogue.showCategory(classification, previousCategory) + visibleOverviews;
-    setEmptyHidden(visibleObjects > 0);
-    presentSearchResults(browser, showingSearchResults, classification);
-  };
-
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let visibleObjects = 0;
-  let visibleOverviews = 0;
   let visibleFeatures = 0;
   const updateEmpty = () => { setEmptyHidden(visibleObjects + visibleFeatures > 0); };
   const destinations = createDestinationBrowser({
@@ -132,7 +109,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   });
   lifetime.onDispose(() => features?.destroy());
   let open = searchCard.hasAttribute('data-search-submitted');
-  let browsing = open;
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Filtering resets then re-marks the category, so report only the settled value.
@@ -156,7 +132,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const renderSelectionContext = () => presentation.render(currentSubject());
   const filter = (resetScroll = true) => {
     renderSelectionContext();
-    const searching = browsing && search.value.trim().length > 0;
+    const searching = search.value.trim().length > 0;
     const query = searching ? search.value.trim().toLocaleLowerCase("en") : "";
     if (query === filteredQuery && searching === showingSearchResults) {
       setPanelHidden(browser, false);
@@ -165,8 +141,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     }
     filteredQuery = query;
     showingSearchResults = searching;
-    visibleOverviews = presentOverviewResults(browser, searching ? query : '');
-    presentSearchResults(browser, searching, activeCategory);
+    const visibleOverviews = presentOverviewResults(browser, searching ? query : '');
+    presentSearchResults(browser, searching);
     if (searching) browser.setAttribute('data-navigation-filtered', '');
     else browser.removeAttribute('data-navigation-filtered');
     filteredClassification = null;
@@ -178,36 +154,21 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     if (!searching) {
       visibleObjects = 1;
       empty.hidden = true;
-      void navigation?.filter(null);
+      void navigation?.reset();
       void features?.search('');
       return;
     }
-    const result = catalogue.search(query, activeCategory, { illustrations: readIllustrationModels() });
-    const { classification, systemName, showAll } = result;
+    const result = catalogue.search(query, { illustrations: readIllustrationModels() });
+    const { classification, showAll } = result;
     markCategory(classification);
     filteredClassification = classification;
-    visibleObjects = 0;
-    void features?.search(classification || systemName || showAll ? "" : query);
-    if (query.length === 0) {
-      catalogue.hideRows();
-      empty.hidden = true;
-      setPanelHidden(browser, true);
-      return;
-    }
-    setPanelHidden(browser, false);
-    const classifications = result.matches.map(match => match.classification);
-    for (const tab of tabs) {
-      requiredElement(tab, '.object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
-    }
-    const nextCategory = searching ? (classification ? result.category : 'all') : initialCategory ?? result.category;
-    initialCategory = null;
-    selectTab(nextCategory, { resetScroll: false });
+    visibleObjects = result.matches.length + visibleOverviews;
+    void features?.search(result.detailQuery);
     // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
     setEmptyHidden(visibleObjects !== 0 || Boolean(features && !classification && !showAll));
   };
-  const render = (next: boolean, { resetQuery = false } = {}) => {
+  const render = (next: boolean) => {
     publishSourceContext();
-    if (!next) browsing = false;
     // Only an actual open/close transition may reset a scrolled result list.
     if (open !== next) resetResultsScroll();
     open = next;
@@ -220,7 +181,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       input.value = currentUrl.searchParams.get(input.name) ?? '';
       input.disabled = !input.value;
     }
-    if (next && resetQuery) search.value = "";
     if (next) void catalogue.ensureLoaded();
     destinations?.setOpen(next);
     if (next) filter();
@@ -228,7 +188,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       renderSelectionContext();
       setPanelHidden(browser, true);
       browser.removeAttribute('data-navigation-filtered');
-      void navigation?.filter(null);
+      void navigation?.reset();
       catalogue.clearWindow();
       // Closing clears the rendered window, so the next open must filter again even for the same query.
       filteredQuery = null;
@@ -239,7 +199,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   trigger.addEventListener("click", event => {
     event.preventDefault();
     if (open) { render(false); search.focus(); return; }
-    browsing = true;
     render(true);
     search.focus();
   }, {
@@ -247,7 +206,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   });
   searchCard.addEventListener('submit', event => {
     event.preventDefault();
-    browsing = true;
     render(true);
   }, { signal: events.signal });
   // Clearing empties the query and returns to the selected card, like Escape.
@@ -266,7 +224,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         return;
       }
       search.value = button.dataset.searchQuery ?? "";
-      browsing = true;
       render(true);
       requiredElement(documentTarget, '.object-sidebar').scrollTop = 0;
     }, { signal: events.signal });
@@ -277,22 +234,9 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       search.focus();
     }, { signal: events.signal });
   }
-  for (const tab of tabs) {
-    tab.addEventListener('click', event => { event.preventDefault(); selectTab(tab.dataset.objectTab ?? 'all'); }, { signal: events.signal });
-    tab.addEventListener('keydown', event => {
-      const index = tabs.indexOf(tab);
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
-        : event.key === 'ArrowRight' ? (index + 1) % tabs.length
-        : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length : null;
-      if (next === null) return;
-      event.preventDefault();
-      selectTab(tabs[next].dataset.objectTab ?? "all", { focus: true });
-    }, { signal: events.signal });
-  }
   search.addEventListener("input", () => {
-    browsing = true;
     if (!open) render(true);
-    else if (open) filter();
+    else filter();
   }, { signal: events.signal });
   // Source result rows have explicit visibility. Reading every row's geometry
   // here would synchronously lay out all skipped groups on each arrow key.
@@ -300,15 +244,14 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     && (element.classList.contains('object-link') || element.getClientRects().length > 0);
   search.addEventListener("keydown", (event) => {
     if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
-      // Enter opens the first result. The category tabs come first in the browser but are not results.
       const first = [...browser.querySelectorAll<HTMLElement>("summary, a, button")]
-        .find(control => (event.key !== "Enter" || control.getAttribute("role") !== "tab") && visibleControl(control));
+        .find(visibleControl);
       if (first) {
         event.preventDefault();
         if (event.key === "Enter") first.click(); else first.focus();
       }
     } else if (event.key === "Enter") {
-      event.preventDefault(); browsing = true; render(true); return;
+      event.preventDefault(); render(true); return;
     }
     if (event.key !== "Escape" || !open) return;
     event.preventDefault();
@@ -360,19 +303,17 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     catalogue.setSelection(selected);
   };
   const previewSelection = (subject: SceneSubject) => {
-    const previous = subjectOverride, previousBrowsing = browsing, previousQuery = search.value;
+    const previous = subjectOverride, previousOpen = open, previousQuery = search.value;
     const preview = { subject, hideFocus: true };
     subjectOverride = preview;
-    browsing = false;
     // Choosing a result ends that search; a cancelled flight gives the query back.
     search.value = '';
     markSelection(); render(false);
     return () => {
       if (subjectOverride !== preview) return;
       subjectOverride = previous;
-      browsing ||= previousBrowsing;
       if (!search.value) search.value = previousQuery;
-      markSelection(); render(browsing);
+      markSelection(); render(open || previousOpen);
     };
   };
   // Inline rows and a fetched catalogue read the same initial shell selection.
@@ -400,7 +341,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       }
       markSelection();
       if (subject.kind === 'overview') destinations?.present(null);
-      render(browsing);
+      render(open);
     },
     bindObject(id: string) {
       // A completed flight publishes the selection, but a newer search owns
@@ -415,7 +356,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       }
       markSelection();
       destinations?.present(null); features?.refresh();
-      render(browsing);
+      render(open);
     },
     presentDestination(value: DestinationPresentation | null) { destinations?.present(value); },
     destroy() {

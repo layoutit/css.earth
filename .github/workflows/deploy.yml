@@ -105,8 +105,8 @@ jobs:
         # netlify.toml supplies the edge route and the search function; the site is not linked to git,
         # so Actions is the only thing that deploys it.
         #
-        # netlify-cli treats this repo's pnpm workspace packages (packages/*, labs/nebula/packages/*,
-        # atlas) as ambiguous deploy candidates when invoked from inside the checkout, and fails
+        # netlify-cli treats this repo's pnpm workspace packages (packages/*, labs/nebula/packages/*)
+        # as ambiguous deploy candidates when invoked from inside the checkout, and fails
         # non-interactively in CI ("Projects detected: ...") even with valid credentials — reproduced
         # locally with netlify-cli 27.8.0 from this exact checkout. Its own escape hatch only skips
         # that workspace-selection prompt when --cwd resolves to a directory OTHER than the process's

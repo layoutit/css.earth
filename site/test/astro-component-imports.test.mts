@@ -7,7 +7,7 @@ import { dirname, resolve } from 'node:path';
 
 // Only Astro resolves a component's frontmatter, so a wrong relative path there
 // is invisible to every node test and fails the whole page at request time.
-const directories = ['site/components', 'atlas/src/components'];
+const directories = ['site/components'];
 const specifier = /^\s*import\s[^'"]*['"](\.[^'"]+)['"]/gmu;
 
 test('every relative import in an Astro component frontmatter resolves to a file', async () => {

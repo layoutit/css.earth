@@ -14,8 +14,7 @@ const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus
  * owns a page only when it owns a scene; otherwise the application reaches its
  * contents through the catalogue subject it details, or through the overview
  * that draws it, and a package with neither is not something we can open. Ask
- * here before linking to anything: the Atlas has a page per package, the
- * application does not, and the two must never borrow each other's routes. */
+ * here before linking to any package. */
 export function appNavigationDestination(objectId: string, focusId: string | null = null): NavigationDestination | null {
   const page = pages.get(objectId);
   if (page !== undefined) return { href: page, focusId: null };

@@ -4,7 +4,6 @@ const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../search-response.mts';
 import { objectSearchLabels, searchObjects } from '../object-search.mts';
-import { matchesObjectCategory } from '../object-categories.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
 import { createFeatureBrowser } from '../feature-browser.mts';
 import { handleFindRequest } from '../find.mts';
@@ -24,8 +23,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
   <div class="object-drawer-content"><nav class="object-browser" hidden>
     <div data-galactic-overview hidden>Milky Way</div><div data-system-results><section class="object-selected-panel">Solar System introduction</section>
     <div data-object-navigation-tree></div>
-    <div class="object-tabs">${['all', 'planet', 'satellite', 'nebula'].map(category => `<button data-object-tab="${category}"><span class="object-tab-count"></span></button>`).join('')}</div>
-    <div id="object-category-results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li><li class="object-chunk"><ul class="object-chunk-list">
+    <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li><li class="object-chunk"><ul class="object-chunk-list">
     ${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}
     </ul></li></ul><p class="object-empty" hidden>No matching results</p>
     <details class="object-feature-results" data-feature-index='${JSON.stringify(pin)}' hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
@@ -39,8 +37,8 @@ const catalogueRowsHtml = `<ul class="object-list"><li data-search-overview="mil
 const catalogueUrl = '/catalogue-fragment/';
 // A production page: the rows ship empty, referencing the fragment above instead of inlining it.
 const htmlNoCatalogue = html
-  .replace('<div id="object-category-results">',
-    `<div id="object-category-results" data-catalogue-src="${catalogueUrl}">`)
+  .replace('<div id="object-category-results" role="region" aria-label="Search results">',
+    `<div id="object-category-results" role="region" aria-label="Search results" data-catalogue-src="${catalogueUrl}">`)
   .replace(/<ul>.*?<\/ul>(?=<p class="object-empty")/su,
     '<ul class="object-list" data-catalogue-list></ul><p class="object-loading" data-catalogue-loading>Loading celestial objects…</p>' +
     '<p class="object-error" data-catalogue-error hidden>Couldn\'t load the object list. <button type="button" data-catalogue-retry>Retry</button></p>');
@@ -100,7 +98,7 @@ test('native search replaces the selected card, retains every row, and preserves
     assert.equal(response.slice(response.indexOf('<!--search-shell:end-->')), html.slice(html.indexOf('<!--search-shell:end-->')));
     const items = [...document.querySelectorAll<HTMLElement>('.object-item')].map(objectSearchLabels);
     const result = searchObjects(items, query);
-    assert.deepEqual(result.matches.filter(item => matchesObjectCategory(item.classification, result.category)).map(item => item.name), names.map(name => name.toLowerCase()));
+    assert.deepEqual(result.matches.map(item => item.name), names.map(name => name.toLowerCase()));
   }
 });
 
@@ -138,7 +136,7 @@ test('typed search shows a flat result list without the navigation tree, includi
     const document = parseHTML(await renderSearchResponse(html, new URL(`/saturn/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
     assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('[data-system-results] > .object-selected-panel')?.hidden, true);
-    assert.equal(document.querySelector<HTMLElement>('.object-tabs')?.hidden, true);
+    assert.equal(document.querySelectorAll('[data-object-tab]').length, 0);
     assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
     assert.equal(document.querySelector('.object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);

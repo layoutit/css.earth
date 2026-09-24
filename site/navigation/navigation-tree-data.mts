@@ -1,5 +1,5 @@
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload, type NavigationTreeRecord } from '../../src/navigation/navigation-tree-schema.mts';
-import { treeCount, type TreeNode } from './objects.mts';
+import { treeCount, type TreeNode } from './navigation-tree.mts';
 import { treeMarker } from './tree-marker.mts';
 
 /** Where the application shell fetches the branches it did not render (`site/pages/navigation-tree.json.ts`). */
@@ -9,13 +9,13 @@ export const NAVIGATION_TREE_URL = '/navigation-tree.json';
 export function navigationTreeText(tree: readonly TreeNode[]): string {
   const nodes: Record<string, NavigationTreeRecord> = {};
   const visit = (node: TreeNode) => {
-    if (nodes[node.key]) throw new Error(`Duplicate Atlas navigation key: ${node.key}.`);
+    if (nodes[node.key]) throw new Error(`Duplicate navigation key: ${node.key}.`);
     nodes[node.key] = {
       label: node.label,
       objectId: node.object?.id ?? null,
       place: node.object?.group === 'context' || !node.object,
       count: treeCount(node),
-      marker: node.object ? treeMarker(node.object.id, '') : null,
+      marker: node.object ? treeMarker(node.object.id) : null,
       children: node.children.map(child => child.key),
       href: node.href,
       focusId: node.focusId,
