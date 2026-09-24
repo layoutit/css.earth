@@ -77,7 +77,7 @@ test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', 
 });
 
 test('a transiting orbit is one paper\'s archive row, with gaps filled from other rows and a/R* derived when no row has it', async () => {
-  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror';
+  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov';
   const anchor = (ref: string, bib: string, label: string) => `"<a refstr=${ref} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
   const csv = [header,
     `"WASP-121 b",${anchor('BOURRIER_ET_AL__2020', '2020A&A...635A.205B', 'Bourrier et al. 2020')},0,1.27492504,3.8131,88.49,0,10,2458119.72074,1.753,1.157,,1.458,1.353,0`,
@@ -231,12 +231,13 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   // A mass that is only an upper limit is shown as one.
   assert.equal((await build({}, { ...cited, value: 0.12, limit: true })).facts.find(fact => fact.id === 'mass')!.value, 'Under 0.12 Jupiter masses');
   assert.equal((await build({}, { ...cited, value: 0, unmeasured: true })).facts.find(fact => fact.id === 'mass')!.value, 'Not measured');
+  assert.equal((await build({}, { ...cited, value: 0.3, source: "the NASA Exoplanet Archive's calculated value (M-R relationship): a model, not a measurement" })).facts.find(fact => fact.id === 'mass')!.value, '0.3 Jupiter masses (model)');
 });
 
 test('a planet whose archive mass is only an upper limit gets GM 0, the records\' unpublished value, and the limit in its notes', async () => {
   const { hostedRecord } = await import('./hosted.mts');
   const anchor = '"<a refstr=BORUCKI_ET_AL__2013 href=https://ui.adsabs.harvard.edu/abs/2013Sci...340..587B/abstract target=ref>Borucki et al. 2013</a>"';
-  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror',
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov',
     `"Kepler-62 f",${anchor},1,267.291,,89.9,0,,2454967.3,0.126,0.11,0.718,0.64,0.69,1,`].join('\n');
   const composite = `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"Kepler-62 f",0.11,1,Mass,${anchor}`;
   const archive: Archive = { async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); if (query.includes('from pscomppars')) return composite; if (query.includes('from ps where pl_name')) return ps; throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
@@ -271,7 +272,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
     `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789,0,1`].join('\n');
   // GJ 436's case: the default row leaves the stellar temperature empty and another paper's row gives it.
   const gapped = stars.replaceAll(',5000,50,', ',,,').replace(',5000,,', ',,,') + `\nHD 1 b,HD 1,0,${ref('Four et al. 2022', '2022AJ....1....4F')},${ref('Four et al. 2022', '2022AJ....1....4F')},0.81,,5010,40,0.86,,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789,0,1`;
-  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror',
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov',
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
   const composite = (name: string, mass: number) => `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"${name}",${mass},0,Mass,${ref('One et al. 2019', '2019AJ....1....1O')}`;
@@ -289,7 +290,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   const planets = spec.planets as { id: string; thermal?: unknown; text: { card: string } }[];
   assert.deepEqual(planets.map(planet => planet.id), ['hd-1b', 'hd-1c'], 'innermost first, whatever the archive order');
   assert.deepEqual([planets[0]!.thermal !== undefined, planets[1]!.thermal !== undefined], [true, false]);
-  assert.match(skipped.join('; '), /HD 1 d: found by radial velocity, not a transit fit/u);
+  assert.match(skipped.join('; '), /HD 1 d: found by radial velocity, and the archive gives no orbit rows for it/u);
   assert.match(notes.join('; '), /HD 1 c: no measured dayside brightness temperature/u);
   assert.equal((spec.temperature as { value: number }).value, 5000);
   assert.equal(spec.gaia, '123456789', 'the archive\'s Gaia DR3 id, which SIMBAD must agree with');
@@ -314,7 +315,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.equal(byGaia.spec.host, 'hd-one');
   // A host with no planet to add is left out, with the reasons, not drafted as a lone star.
   const rvOnly = { ...archive, async text(url: string) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? stars.split('\n').filter(line => !line.startsWith('HD 1 b') && !line.startsWith('HD 1 c')).join('\n') : archive.text(url); } };
-  await assert.rejects(archiveSpec(rvOnly, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }), /^Error: HD 1: no planet to add; HD 1 d: found by radial velocity, not a transit fit\.$/u);
+  await assert.rejects(archiveSpec(rvOnly, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }), /^Error: HD 1: no planet to add; HD 1 d: found by radial velocity, and the archive gives no orbit rows for it\.$/u);
   // No archive row gives a temperature: TIC v8.2's for the same Gaia source, cited to it.
   const noTeff = stars.replaceAll(',5000,50,', ',,,').replace(',5000,,', ',,,');
   const tic = ['#', 'TIC\tTeff\ts_Teff\tRad\ts_Rad\tMass\ts_Mass', '\t\t\t\t\t\t', '---\t---\t---\t---\t---\t---\t---', '42\t4800\t120\t0.79\t0.04\t0.84\t0.1'].join('\n');
@@ -518,4 +519,36 @@ test('an archive answering a server error or a rate limit is asked again; a 404 
     await assert.rejects(liveArchive.text('https://example.invalid/tap'), /answered 404/u);
     assert.equal(calls, 3, 'the 404 was not');
   } finally { globalThis.fetch = real; }
+});
+
+test('a planet found without a transit is placed only on one paper\'s whole orbit, tilt measured, and its model size says so', async () => {
+  const { assembleMeasuredOrbit, parseArchiveRows: parse } = await import('./orbit.mts');
+  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov';
+  const ref = (key: string, bib: string, label: string) => `"<a refstr=${key} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
+  // pi Men b's case: the default paper gives no inclination; an astrometric paper fits the whole orbit and a true mass with it.
+  const rows = parse([header,
+    `"P b",${ref('D_ET_AL__2024', '2024A&A...1..1D', 'D et al. 2024')},1,2089.1,,,0.64,330.0,,,10.0,3.3,1.1,1.09,0,,,,2451554.0,,Msini`,
+    `"P b",${ref('X_ET_AL__2020', '2020A&A...1..2X', 'X et al. 2020')},0,2088.8,,45.8,0.642,330.6,,,12.3,3.31,1.1,1.07,0,,,,2451550.5,1.1,Mass`].join('\n')).map(row => row.reference === 'X_ET_AL__2020' ? { ...row, massJupiter: 3.2 } : row);
+  const calculated = { value: 1.08, model: true, label: 'Calculated Value' };
+  const placed = assembleMeasuredOrbit(rows, { value: 10.0, provenance: 'Msini', limit: false, label: 'D et al. 2024' }, calculated);
+  assert.deepEqual([placed.row!.label, placed.orbit.inclinationDegrees, placed.orbit.eccentricity, placed.orbit.argumentOfPeriapsisDegrees, placed.orbit.epochDefinition, placed.orbit.transitTimeBmjdTdb],
+    ['X et al. 2020', 45.8, 0.642, 330.6, 'periastron', 51550]);
+  assert.equal(placed.orbit.semiMajorAxisStellarRadii, Number((3.31 / (1.1 * 695700 / 149597870.7)).toFixed(4)), 'the same row\'s semi-major axis over its stellar radius');
+  assert.deepEqual([placed.mass.value, placed.mass.row.label], [3.2, 'X et al. 2020, the mass the NASA Exoplanet Archive\'s composite table adopts'], 'the paper\'s own true mass goes with its inclination');
+  assert.match(placed.radius.row.label, /calculated radius .*: a model, not a measurement, since P b does not transit/u);
+  assert.match(placed.orbit.sources.shape!, /X et al\. 2020.*inclination 45\.8 \+1\.1 degrees, measured in the same fit/u);
+  // A massive giant is dense: 12.3 Jupiter masses in 1.08 Jupiter radii is 12.1 g/cm^3, inside the giants' 20, while the same density
+  // in a planet under half Jupiter's radius is refused.
+  assert.equal(assembleMeasuredOrbit(rows.map(row => row.reference === 'X_ET_AL__2020' ? { ...row, massJupiter: 12.3 } : row), undefined, calculated).mass.value, 12.3);
+  assert.throws(() => assembleMeasuredOrbit(rows.map(row => row.reference === 'X_ET_AL__2020' ? { ...row, massJupiter: 0.35 } : row), undefined, { ...calculated, value: 0.3 }), /g\/cm\^3, outside what the records accept/u);
+  // An astrometric paper gives the semi-major axis in au and no stellar radius: the host's recorded radius converts it, so the
+  // rendered orbit is the paper's 2.294 au (HD 29021 b, Li et al. 2021).
+  const li = parse([header, `"R b",${ref('LI_ET_AL__2021', '2021AJ....162..266L', 'Li et al. 2021')},1,1365,,33.7,0.453,180.6,,,4.47,2.294,,0.86,0,,,,2455824.8,6.8,Mass`].join('\n'));
+  const astrometric = assembleMeasuredOrbit(li, undefined, { value: 1.1, model: true, label: 'Calculated Value' }, 0.88);
+  assert.equal(astrometric.orbit.semiMajorAxisStellarRadii * 0.88 * 695700 / 149597870.7, Number((2.294 / (0.88 * 695700 / 149597870.7)).toFixed(4)) * 0.88 * 695700 / 149597870.7);
+  assert.ok(Math.abs(astrometric.orbit.semiMajorAxisStellarRadii * 0.88 * 695700 / 149597870.7 - 2.294) < 1e-4, 'the paper\'s size in au');
+  assert.match(astrometric.orbit.sources.shape!, /over the host's recorded radius 0\.88 solar radii, so the orbit keeps the paper's size/u);
+  // An inclination fixed at 90, or one with no error bar, is an assumption, not a measurement: the planet is left out.
+  const fixed = parse([header, `"Q b",${ref('Y_ET_AL__2015', '2015A&A...1..3Y', 'Y et al. 2015')},1,14.65,,90,0.003,98,,,0.83,0.115,0.96,0.95,0,,,,2450000.8,0,Mass`].join('\n'));
+  assert.throws(() => assembleMeasuredOrbit(fixed, undefined, calculated), /Q b: found without a transit, and no paper's row measures its whole orbit together/u);
 });

@@ -96,9 +96,14 @@ describe('the body table', () => {
       // in the wrong unit, which is the failure this table is most exposed to. Above the deuterium-burning limit, about 13 Jupiter
       // masses, a companion is a brown dwarf: an old one keeps a Jupiter-sized radius at tens of Jupiter masses, so its density
       // reaches tens of g/cm^3 (GJ 504 b, 25 Jupiter masses in 0.92 Jupiter radii, Baburaj et al. 2026: about 40).
+      // A gas giant (at least half Jupiter's radius) keeps about Jupiter's size as its mass grows, so below 13 Jupiter masses it can
+      // be far denser than rock: of the 881 transiting giants with a measured mass and radius in the NASA Exoplanet Archive
+      // (pscomppars, 2026-09-24), 99% are below 13.5 g/cm^3 and the densest, TOI-4600 c (9.3 Jupiter masses in 0.84 Jupiter radii),
+      // is 19.3. Smaller planets keep 8.5, where a wrong unit shows up (Kepler-32 f's 5.9 Jupiter masses in 0.07 Jupiter radii).
       const brownDwarf = data.gravitationalParameterKm3PerS2 > 13 * bodyData('jupiter').gravitationalParameterKm3PerS2
+      const giant = data.meanRadiusKm >= 0.5 * bodyData('jupiter').meanRadiusKm
       expect(densityGramsPerCm3, id).toBeGreaterThan(0.1)
-      expect(densityGramsPerCm3, id).toBeLessThan(brownDwarf ? 150 : 8.5)
+      expect(densityGramsPerCm3, id).toBeLessThan(brownDwarf ? 150 : giant ? 20 : 8.5)
     }
   })
 
