@@ -668,7 +668,7 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
   const backgroundPosition = fitted.backgroundPosition
     .map((value) => value === 0 ? "0px" : formatCssLength(value)).join(" ");
   const backgroundSize = fitted.backgroundSize
-    .map(formatCssLength).join(" ");
+    .map((value) => formatCssLength(value)).join(" ");
   return {
     style: `transform:matrix3d(${fitted.matrix})` +
       preparedAtlasDimensions(fitted.leafWidth, fitted.leafHeight) +

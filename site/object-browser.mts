@@ -22,6 +22,13 @@ export interface ObjectBrowserOptions {
   onSearchChange?(open: boolean): void;
 }
 
+interface ShownSearch {
+  query: string | null;
+  classification: string | null | undefined;
+  objects: number;
+  features: number | 'pending';
+}
+
 interface SubjectOverride {
   readonly subject: SceneSubject;
   hideFocus: boolean;
@@ -61,7 +68,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const catalogue = createObjectCatalogue({ documentTarget, windowTarget, browser, resultsPanel, lifetime,
     onLoad() {
       presentSelection();
-      if (open) { filteredQuery = null; filter(false); }
+      if (open) { shown.query = null; filter(false); }
     },
   });
   information.dataset.retained = '';
@@ -88,9 +95,11 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   };
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
-  let visibleObjects = 0;
-  let visibleFeatures = 0;
-  const updateEmpty = () => { setEmptyHidden(visibleObjects + visibleFeatures > 0); };
+  // The search the results show: its query (null when the next filter must run again, even for the same text), its
+  // category pill, the objects it matched, and its feature rows, 'pending' while its feature search runs.
+  const shown: ShownSearch = { query: null, classification: null, objects: 0, features: 0 };
+  // "No matching results" waits until the objects and the feature search have both settled at zero.
+  const presentEmpty = () => { setEmptyHidden(!showingSearchResults || shown.objects > 0 || shown.features !== 0); };
   const destinations = createDestinationBrowser({
     documentTarget,
     onSelected() { render(false); search.blur(); },
@@ -99,7 +108,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
     documentTarget, objectId: readObjectId(),
-    onResults(count) { visibleFeatures = count; updateEmpty(); },
+    onResults(count) { shown.features = count; presentEmpty(); },
     onSelected() { render(false); search.blur(); },
   });
   lifetime.onDispose(() => features?.destroy());
@@ -119,7 +128,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       onCategoryChange(reportedCategory);
     });
   };
-  let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
   const presentSelection = () => catalogue.setSelection(presentation.present(currentSubject(), catalogue.sources));
   const presentBrowser = () => {
     searchPresentation.present(open, showingSearchResults);
@@ -130,33 +138,30 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const filter = (resetScroll = true) => {
     const searching = search.value.trim().length > 0;
     const query = searching ? search.value.trim().toLocaleLowerCase("en") : "";
-    if (query === filteredQuery && searching === showingSearchResults) {
+    if (query === shown.query) {
       presentBrowser();
-      markCategory(filteredClassification);
+      markCategory(shown.classification);
       return;
     }
-    filteredQuery = query;
     showingSearchResults = searching;
-    const visibleOverviews = presentOverviewResults(browser, searching ? query : '');
+    const visibleOverviews = presentOverviewResults(browser, query);
     presentBrowser();
-    filteredClassification = null;
     if (resetScroll) resetResultsScroll();
     if (!searching) {
-      visibleObjects = 1;
+      Object.assign(shown, { query, classification: null, objects: 0, features: 0 } satisfies ShownSearch);
       markCategory();
-      setEmptyHidden(true);
+      presentEmpty();
       void navigation?.reset();
       void features?.search('');
       return;
     }
     const result = catalogue.search(query, { illustrations: readIllustrationModels() });
-    const { classification, showAll } = result;
-    markCategory(classification);
-    filteredClassification = classification;
-    visibleObjects = result.matches.length + visibleOverviews;
+    markCategory(result.classification);
+    // The feature browser reports at once when this query starts no feature search.
+    Object.assign(shown, { query, classification: result.classification, objects: result.matches.length + visibleOverviews, features: features ? 'pending' : 0 } satisfies ShownSearch);
     void features?.search(result.detailQuery);
     // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
-    setEmptyHidden(visibleObjects !== 0 || Boolean(features && !classification && !showAll));
+    presentEmpty();
   };
   const render = (next: boolean) => {
     presentSelection();
@@ -176,7 +181,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       void navigation?.reset();
       catalogue.clearWindow();
       // Closing clears the rendered window, so the next open must filter again even for the same query.
-      filteredQuery = null;
+      shown.query = null;
       markCategory();
     }
     if (changed && !lifetime.disposed) onSearchChange(next);
@@ -302,7 +307,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   return Object.freeze({
     readSubject: currentSubject,
     refreshIllustrations() {
-      filteredQuery = null;
+      shown.query = null;
       if (open) filter(false);
     },
     previewSelection,

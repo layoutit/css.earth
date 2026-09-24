@@ -4,6 +4,8 @@ import { buildPolyMeshTransform, buildSeamBleedPolygonEdges } from '@layoutit/po
 import { createSurfacePatches, createPolarPatch } from '@cssearth/objects';
 import type { AtmosphereSource, AtmosphereMaterial, Pole } from '@cssearth/objects';
 import type { RasterRecipe } from '../../../../preparation/raster/config.js';
+import { RASTER_DENSITY } from '../../../../preparation/raster/config.js';
+import { rasterPagePlan } from '../../../../preparation/raster/pages.js';
 import type { GeometryProfile } from './profile.js';
 import { createLeafProjector, rendererPolygon } from './projector.js';
 import { prepareCutaway } from './cutaway.js';
@@ -46,7 +48,9 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  const topology=createSurfacePatches(profile.surface,0);
  const seamEdges=buildSeamBleedPolygonEdges(topology.map(rendererPolygon),{tileSize:profile.projection.tileSize,layerElevation:profile.projection.layerElevation});
  // An emissive body's leaves are source-lit; the ephemeris light is not consulted (the Sun has no entry there).
- const projector=createLeafProjector(profile,assets.emission?[0,0,1]:adapters.bodyFixedSunDirection(solarSource.bodyId));
+ const pages=rasterPagePlan(raster,RASTER_DENSITY);
+ if(pages&&(profile.output.layout==='retained'||profile.cutaway))throw new TypeError(`${profile.namespace}: a paged surface needs the composite layout without a cutaway.`);
+ const projector=createLeafProjector(profile,assets.emission?[0,0,1]:adapters.bodyFixedSunDirection(solarSource.bodyId),pages);
  const leaves=polygons.map((patch,index)=>projector.surface(patch,index,seamEdges.get(index)));
  const innerPolarLeaves=profile.surface.innerPoles?(['north','south'] as Pole[]).map((pole,index)=>projector.surface(createPolarPatch(profile.surface,pole,true),polygons.length+index)):[];
  const bodyLeaves=[...leaves,...innerPolarLeaves];
@@ -89,7 +93,7 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
   ...(interior?{interior}:{}),...(profile.output.motion?{motion:profile.output.motion}:{}),
   counts:{bodyLeafCount:bodyLeaves.length,interiorLeafCount:interior?.leafCount??0,textureLeafCount:bodyLeaves.length+1+(interior?.leafCount??0),retainedRootCount:profile.output.retainedRootCount}
  }:{...common,runtimeGeometry:false,runtimeRasterization:false,...(planes.length?{planes}:{}),
-  body:{leaves:bodyLeaves,equatorialRadius:profile.surface.radius,polarRadius:profile.surface.polarRadius,latitudeSegments:profile.surface.latitudeSegments,longitudeSegments:profile.surface.longitudeSegments,...profile.output.body,sourceMapSize:[profile.surface.surface.width,profile.surface.surface.height],seamRepair},
+  body:{leaves:bodyLeaves,equatorialRadius:profile.surface.radius,polarRadius:profile.surface.polarRadius,latitudeSegments:profile.surface.latitudeSegments,longitudeSegments:profile.surface.longitudeSegments,...profile.output.body,sourceMapSize:[profile.surface.surface.width,profile.surface.surface.height],seamRepair,...(pages?{surfacePages:pages}:{})},
   ...(profile.output.animation?{animation:profile.output.animation}:{}),
   counts:{polygonCount:leaves.length,textureLeafCount:bodyLeaves.length,polarLeafCount:leaves.filter(leaf=>leaf.polarCap).length}
  };

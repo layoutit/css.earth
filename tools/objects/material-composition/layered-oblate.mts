@@ -725,7 +725,7 @@ function preparedCanonicalTextureStyle(
     .map((value) => value === 0 ? "0px" : formatCssLength(value))
     .join(" ");
   const backgroundSize = fitted.backgroundSize
-    .map(formatCssLength)
+    .map((value) => formatCssLength(value))
     .join(" ");
   return Object.freeze({
     style: `transform:matrix3d(${fitted.matrix})` +

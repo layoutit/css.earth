@@ -242,7 +242,7 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
       .map((value) => value === 0 ? "0px" : formatCssLength(value))
       .join(" ");
     const backgroundSize = rasterPresentation.backgroundSize
-      .map(formatCssLength).join(" ");
+      .map((value) => formatCssLength(value)).join(" ");
     const variable = polygon.polar
       ? `--${id}-pole-position:${backgroundPosition};`
       : `--${id}-surface-position:${backgroundPosition};`;

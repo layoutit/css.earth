@@ -18,15 +18,24 @@ export function tuple<const G extends readonly Guard<unknown>[]>(...guards: G): 
   return (value, path = 'recipe'): value is { -readonly [K in keyof G]: Infer<G[K]> } => isArray(value) && value.length === guards.length && guards.every((guard, index) => guard(value[index], `${path}[${index}]`));
 }
 type ObjectValue<S extends Record<string, Guard<unknown>>> = { [K in keyof S as undefined extends Infer<S[K]> ? never : K]: Infer<S[K]> } & { [K in keyof S as undefined extends Infer<S[K]> ? K : never]?: Infer<S[K]> };
+/** The deepest field that failed during the current parse, so a refusal names it. */
+let deepestFailure: { path: string; value: unknown } | null = null;
 export function object<const S extends Record<string, Guard<unknown>>>(shape: S): Guard<ObjectValue<S>> {
   return (value, path = 'recipe'): value is ObjectValue<S> => {
     if (!record(value)) return false;
-    for (const [key, guard] of Object.entries(shape)) if (!guard(value[key], `${path}.${key}`)) return false;
+    for (const [key, guard] of Object.entries(shape)) if (!guard(value[key], `${path}.${key}`)) {
+      if (!deepestFailure || `${path}.${key}`.length > deepestFailure.path.length) deepestFailure = { path: `${path}.${key}`, value: value[key] };
+      return false;
+    }
     return true;
   };
 }
 export function parse<T>(value: unknown, guard: Guard<T>, label = 'recipe'): T {
-  if (!guard(value, label)) throw new TypeError(`Invalid ${label} structure.`);
+  deepestFailure = null;
+  if (!guard(value, label)) {
+    const failure = deepestFailure as { path: string; value: unknown } | null;
+    throw new TypeError(`Invalid ${label} structure${failure ? ` at ${failure.path} (${JSON.stringify(failure.value)?.slice(0, 80) ?? 'missing'})` : ''}.`);
+  }
   return value;
 }
 export type JsonValue = null | boolean | number | string | JsonValue[] | {[key: string]: JsonValue};

@@ -1146,54 +1146,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="charon"] .polycss-scene s:not(.charon-polar) {
-  background-image: url("/scenes/charon/charon-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"] .polycss-scene s.charon-polar {
-  background-image: url("/scenes/charon/charon-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="enhanced-color"] .polycss-scene s:not(.charon-polar) {
-  background-image: url("/scenes/charon/charon-enhanced-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="enhanced-color"] .polycss-scene s.charon-polar {
-  background-image: url("/scenes/charon/charon-poles-enhanced-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="elevation"] .polycss-scene s:not(.charon-polar) {
-  background-image: url("/scenes/charon/charon-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="elevation"] .polycss-scene s.charon-polar {
-  background-image: url("/scenes/charon/charon-poles-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="albedo"] .polycss-scene s:not(.charon-polar) {
-  background-image: url("/scenes/charon/charon-albedo@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="albedo"] .polycss-scene s.charon-polar {
-  background-image: url("/scenes/charon/charon-poles-albedo@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="water-ice"] .polycss-scene s:not(.charon-polar) {
-  background-image: url("/scenes/charon/charon-water-ice@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="water-ice"] .polycss-scene s.charon-polar {
-  background-image: url("/scenes/charon/charon-poles-water-ice@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="ammonia"] .polycss-scene s:not(.charon-polar) {
-  background-image: url("/scenes/charon/charon-ammonia@2x.webp") !important;
-}
-
-.object-stage[data-object-id="charon"][data-lens="ammonia"] .polycss-scene s.charon-polar {
-  background-image: url("/scenes/charon/charon-poles-ammonia@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="charon"] .charon-fixed-material {
@@ -1292,7 +1244,6 @@
 .object-stage[data-object-id="eris"][data-lens="illustration"] .polycss-scene s.eris-polar {
   background-image: url("/scenes/eris/eris-poles-illustration@2x.webp") !important;
 }
-
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
@@ -1877,7 +1828,6 @@
   background-image: url("/scenes/makemake/makemake-poles-illustration@2x.webp") !important;
 }
 
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="makemake"] .makemake-fixed-material {
@@ -2075,7 +2025,6 @@
 .object-stage[data-object-id="oberon"] .polycss-scene s.oberon-polar {
   background-image: url("/scenes/oberon/oberon-poles-normal@2x.webp") !important;
 }
-
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
@@ -2398,38 +2347,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="triton"] .polycss-scene s:not(.triton-polar) {
-  background-image: url("/scenes/triton/triton-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="triton"] .polycss-scene s.triton-polar {
-  background-image: url("/scenes/triton/triton-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="triton"][data-lens="enhanced"] .polycss-scene s:not(.triton-polar) {
-  background-image: url("/scenes/triton/triton-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="triton"][data-lens="enhanced"] .polycss-scene s.triton-polar {
-  background-image: url("/scenes/triton/triton-poles-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="triton"][data-lens="ultraviolet"] .polycss-scene s:not(.triton-polar) {
-  background-image: url("/scenes/triton/triton-ultraviolet@2x.webp") !important;
-}
-
-.object-stage[data-object-id="triton"][data-lens="ultraviolet"] .polycss-scene s.triton-polar {
-  background-image: url("/scenes/triton/triton-poles-ultraviolet@2x.webp") !important;
-}
-
-.object-stage[data-object-id="triton"][data-lens="voyager-color"] .polycss-scene s:not(.triton-polar) {
-  background-image: url("/scenes/triton/triton-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="triton"][data-lens="voyager-color"] .polycss-scene s.triton-polar {
-  background-image: url("/scenes/triton/triton-poles-voyager-color@2x.webp") !important;
-}
-
 .object-stage[data-object-id="miranda"][data-lens="voyager-color"] .polycss-scene s:not(.miranda-polar) {
   background-image: url("/scenes/miranda/miranda-voyager-color@2x.webp") !important;
 }
@@ -2560,7 +2477,6 @@
 .object-stage[data-object-id="umbriel"] .polycss-scene s.umbriel-polar {
   background-image: url("/scenes/umbriel/umbriel-poles-normal@2x.webp") !important;
 }
-
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */

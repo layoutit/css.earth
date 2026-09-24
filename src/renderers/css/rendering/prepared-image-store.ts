@@ -2,7 +2,9 @@ export interface PreparedImage {
   src: string; decoding: "async" | "sync" | "auto"; naturalWidth: number; naturalHeight: number;
   decode(): Promise<void>; removeAttribute?(name: string): void;
 }
-export interface PreparedImagePool { id: string | null; capacity: number; concurrency: number; reuse: boolean; decoding?: PreparedImage["decoding"]; }
+export interface PreparedImagePool { id: string | null; capacity: number; concurrency: number; reuse: boolean; decoding?: PreparedImage["decoding"];
+  /** A pool that budgets decoded bytes holds images large enough to overflow the browser's own decode budget. */
+  maximumDecodedBytes?: number; }
 export interface PreparedImageStoreOptions { createImage?: () => PreparedImage; decoding?: PreparedImage["decoding"]; pools?: readonly PreparedImagePool[]; }
 export interface PreparedImageLease {
   readonly role: string; load(url: string, options?: { pool?: string | null }): Promise<PreparedImage | null>;
@@ -13,13 +15,17 @@ interface ImageSlot { image: PreparedImage; entry: ImageEntry | null; }
 interface ImageReceipt { entry: ImageEntry; pool: PoolState; promise: Promise<PreparedImage | null>; resolve(value: PreparedImage | null): void; reject(reason: unknown): void; }
 interface ImageEntry { url: string; pool: PoolState; owners: Map<PreparedImageLease, ImageReceipt>; started: boolean; ready: boolean; retired: boolean; slot: ImageSlot | null; handedOff?: boolean; }
 
-export async function decodePreparedImage(image: PreparedImage, selectedUrl: string) {
+/** `retry`: whether a failed decode is still wanted, and so tried once more. */
+export async function decodePreparedImage(image: PreparedImage, selectedUrl: string, retry: () => boolean = () => false) {
   if (typeof selectedUrl !== "string" || !selectedUrl || typeof image?.decode !== "function") {
     throw new TypeError("Prepared image decoding requires an image and selected URL.");
   }
   try {
     image.src = selectedUrl;
-    await image.decode();
+    // Chromium rejects a decode that would overflow its decoded-image budget (about 256 MB per page) before evicting
+    // older images, then accepts the same image: measured 2026-09-24, every fifth 16 MP page failed once. Only large
+    // images (a pool with a decoded-byte budget) are retried; any other failure is final at once.
+    await image.decode().catch((error: unknown) => { if (!retry()) throw error; return image.decode(); });
     if (!(image.naturalWidth > 0 && image.naturalHeight > 0)) {
       throw new Error("Decoded image has no pixels.");
     }
@@ -137,7 +143,7 @@ export function createPreparedImageStore({
           entry.started = true;
           pool.active++;
           const activeSlot = slot;
-          decodePreparedImage(activeSlot.image, entry.url).then((image) => {
+          decodePreparedImage(activeSlot.image, entry.url, () => entry.pool.maximumDecodedBytes !== undefined && !entry.retired && activeSlot.entry === entry).then((image) => {
             if (entry.retired || activeSlot.entry !== entry) return;
             entry.pool.active--;
             entry.ready = true;
