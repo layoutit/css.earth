@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-astro-ph-0309256",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "McCaughrean et al. (2004): Epsilon Indi Ba/Bb: the nearest binary brown dwarf",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0309256"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20034292"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0309256",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20034292",
+      "label": "Astronomy & Astrophysics"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0309256",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: Epsilon Indi B resolved as a close binary, Ba (T1) and Bb (T6)"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics",
+  "creators": [
+    "M. J. McCaughrean",
+    "L. M. Close",
+    "R. -D. Scholz",
+    "R. Lenzen",
+    "B. Biller",
+    "W. Brandner"
+  ]
+}

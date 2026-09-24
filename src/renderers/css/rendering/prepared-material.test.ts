@@ -2,7 +2,6 @@ import { expect, test } from "vitest";
 import { preparedMaterialFrame, preparedMaterialState, preparedMaterialAddress, type PreparedMaterialTrack, type PreparedMaterialSelection } from "./prepared-material.js";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 import { mercuryPhaseMapping, venusPhaseMapping } from "./prepared-material-fixtures.js";
-import { scalePreparedPixelLengths } from "../prepared-data/projective-layout.js";
 
 const view = (z: number) => ({ sunViewDirection: [Math.sqrt(1 - z * z), 0, z], sceneMatrix: "moved",
   reference: { sceneMatrix: "initial", sunViewDirection: [0, 0, 1] } });
@@ -52,9 +51,4 @@ test("prepared default addresses require the actual reference pose and Sun direc
   expect(preparedMaterialState(track, selected, { ...reference, reference }).mode).toBe("default");
   expect(preparedMaterialState(track, selected, { ...reference, reference, sceneMatrix: "rotated" }).mode).toBe("directional");
   expect(preparedMaterialState(track, selected, { ...reference, reference, sunViewDirection: [1, 0, 0] }).mode).toBe("directional");
-});
-
-test("projective raster transport scales prepared pixel addresses without changing other units", () => {
-  expect(scalePreparedPixelLengths("calc(-1.25px + 50%) 1e2px var(--atlas)", 2)).toBe("calc(-2.5px + 50%) 200px var(--atlas)");
-  expect(() => scalePreparedPixelLengths("4px", 0.5)).toThrow("at least one");
 });

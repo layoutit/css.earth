@@ -1,0 +1,21 @@
+{
+ "measurements": "chen-2022-astrometry.csv",
+ "totalMassSolar": {
+  "value": 0.114713,
+  "error": 0.000592
+ },
+ "parallaxMas": {
+  "value": 274.99,
+  "error": 0.43
+ },
+ "tauReferenceMjd": 58849,
+ "mcmc": {
+  "temperatures": 20,
+  "walkers": 100,
+  "burnSteps": 2000,
+  "savedStepsPerWalker": 1000,
+  "thin": 10,
+  "seed": 1,
+  "threads": 4
+ }
+}

@@ -80,6 +80,13 @@ describe('the body table', () => {
       const densityGramsPerCm3 = massKg / volumeKm3 / 1e12
       if (STAR_IDS.includes(id as StarId) || HOSTED_STAR_IDS.includes(id as never)) {
         if (data.meanRadiusKm > 69570) continue
+        // Below the hydrogen-burning limit, about 80 Jupiter masses, a small "star" is an old brown dwarf: Epsilon Indi Ba, 67 Jupiter
+        // masses in 0.080 solar radii (Chen et al. 2022; King et al. 2010), is about 180 g/cm^3.
+        if (data.gravitationalParameterKm3PerS2 < 80 * bodyData('jupiter').gravitationalParameterKm3PerS2) {
+          expect(densityGramsPerCm3, id).toBeGreaterThan(1)
+          expect(densityGramsPerCm3, id).toBeLessThan(500)
+          continue
+        }
         expect(densityGramsPerCm3, id).toBeGreaterThan(1e4)
         expect(densityGramsPerCm3, id).toBeLessThan(1e8)
         continue

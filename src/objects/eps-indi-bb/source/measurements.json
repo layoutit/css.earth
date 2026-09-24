@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "eps-indi-bb",
+  "radiusKm": 57047.4,
+  "radiusSource": "A brown dwarf of spectral type T6. Mass 53.25 +/- 0.29 Jupiter masses, the dynamical mass of Chen et al. (2022, arXiv:2205.08077), Table 4. Temperature 972 +/- 13 K from the SM08 hybrid evolutionary models at that mass and its luminosity (Chen et al. 2022, in their test of model atmospheres). Radius 0.082 to 0.083 solar radii from the COND03 models constrained by the dynamical system mass, King et al. (2010, A&A 510, A99; arXiv:0911.3143), in their COND03 predictions for the dynamical age range; the lower bound is drawn: 57,047 km at 695,700 km per solar radius. Model values, not a measured disc. presentationUp: no axis is measured, so the display axis is the normal of its orbit around Ba.",
+  "orbitalPeriodDays": 4025,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 2.406 au and total mass 0.1147 solar masses, 11.0 years of 365.25 d. Chen et al. (2022, AJ; arXiv:2205.08077; doi:10.3847/1538-3881/ac66d2): 32 VLT/NACO positions of Bb relative to Ba from 2004 to 2013 (Table 3). They publish the orbit's elements but not its time of periastron (Table 4), so the relative orbit is refitted here with orbitize! on those positions, with their system mass 120.17 +/- 0.62 Jupiter masses and parallax 274.99 +/- 0.43 mas as priors (tools/objects/hosted-orbits/orbitize-fit.py, src/objects/eps-indi-bb/source/orbits/). The maximum of orbitize!'s posterior (ln L 3.48), refined with Nelder-Mead from many starts.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Epsilon Indi Bb is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 972,
+  "effectiveTemperatureSource": "972 +/- 13 K, SM08 hybrid models, Chen et al. (2022), https://arxiv.org/abs/2205.08077",
+  "semiMajorAxisSource": "Chen et al. (2022, arXiv:2205.08077), Table 4: a = 2.4058 +/- 0.0040 au; the refitted orbit's is 2.4060 au (packages/astronomy/data/bodies/eps-indi-bb.json).",
+  "massSource": "Dynamical mass 53.25 +/- 0.29 Jupiter masses, Chen et al. (2022), Table 4."
+}

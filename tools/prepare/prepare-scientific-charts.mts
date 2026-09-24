@@ -11,7 +11,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { renderPhotometricPhaseChart } from "../../src/platform/scientific-chart-svg.mts";
+import { renderPhotometricPhaseChart } from "../objects/content/chart-svg.ts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 const contextPath = resolve(

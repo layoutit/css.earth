@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "eps-indi-ab",
+  "radiusKm": 75066.6,
+  "radiusSource": "Radius 1.05 +/- 0.01 Jupiter radii and temperature 275 +/- 5 K from evolutionary models at the planet's dynamical mass, age and measured luminosity, Sanghi et al. (2026, arXiv:2603.08787), section 5: 75,066.6 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. GM from their dynamical mass 6.5 +0.7/-0.6 Jupiter masses times Jupiter's GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 25606.5,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 15.755 au and total mass 0.7956 solar masses, 70.1 years of 365.25 d. Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter fit of their fiducial model to three decades of radial velocities with a Gaussian-process activity model, Hipparcos-Gaia absolute astrometry and JWST/MIRI, JWST/NIRCam and VLT/VISIR relative astrometry, whose posterior of 32,768 samples they publish on Zenodo (doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/eps-indi-ab/source/orbits/pick.json): highest logpost (-1258.85) of 32,768 samples.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Epsilon Indi Ab is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 275,
+  "effectiveTemperatureSource": "275 +/- 5 K, Sanghi et al. (2026), https://arxiv.org/abs/2603.08787",
+  "semiMajorAxisSource": "The recorded orbit's semi-major axis, 15.75 au, from the sample of highest log-posterior in the published posterior of Sanghi et al. (2026, arXiv:2603.08787) (packages/astronomy/data/bodies/eps-indi-ab.json).",
+  "massSource": "Dynamical mass 6.5 +0.7/-0.6 Jupiter masses from radial velocities, Hipparcos-Gaia astrometry and imaging, Sanghi et al. (2026, arXiv:2603.08787), Abstract."
+}
