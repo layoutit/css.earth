@@ -44,7 +44,9 @@ test('physical trackpad zoom uses shared sensitivity consistently across packet 
   expect(replay(sweep(8))).toBeCloseTo(expected, 10);
   expect(replay(sweep(240))).toBeCloseTo(expected, 10);
   expect(replay([{deltaY: 2, timeStamp: 0}, {deltaY: 98, timeStamp: 8}])).toBeCloseTo(expected, 10);
-  expect(replay([{deltaY: 100, ctrlKey: true, timeStamp: 0}])).toBeCloseTo(expected, 10);
+  // A pinch carries its own gain: its packets are far smaller than a swipe's.
+  const pinch = Math.exp(.006 * 100 * runtimePolicy.WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER);
+  expect(replay([{deltaY: 100, ctrlKey: true, timeStamp: 0}])).toBeCloseTo(pinch, 10);
   expect(replay([{deltaY: 1, timeStamp: 0}])).toBeLessThan(1.025);
   const wheel = Math.exp(.006 * 100 * runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER);
   expect(replay([{deltaY: 100, timeStamp: 0}])).toBeCloseTo(wheel, 10);

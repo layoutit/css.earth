@@ -38,6 +38,11 @@ export const FLIGHT_VISIBLE_APPROACH = Object.freeze({
 // no correction: a 100-unit swipe and one notch should travel the same way.
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
+// A trackpad pinch arrives as ctrlKey wheel events of a few delta units each.
+// Traced on a MacBook trackpad (2026-09-24), a full-pad pinch summed to 150-170
+// units, under two notches, so zooming took many pinches. This gain makes one
+// full pinch about five notches. Scroll swipes keep the multiplier above.
+export const WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER = 3;
 // A released wheel gesture keeps the rate it commanded and decays it, as a
 // thrown drag does. Damping is shorter than the trackball's: the wheel drives
 // distance directly, so a glide outliving its gesture reads as drift.

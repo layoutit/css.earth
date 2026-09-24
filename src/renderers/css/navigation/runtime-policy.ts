@@ -25,6 +25,7 @@ export interface RuntimePolicy {
   readonly FLIGHT_WHEEL_SPEEDUP: number;
   readonly WHEEL_ZOOM_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: number;
+  readonly WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_INERTIA: WheelZoomInertia | null;
   /** The input kinds whose released gesture is glided. A precision pointer
    * carries the platform's own momentum, so gliding it again compounds two
