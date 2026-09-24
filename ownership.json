@@ -1,0 +1,136 @@
+{
+  "baseline": {
+    "ref": "a9bbe317bb66950bfcbc8cb8edfc163029200f50",
+    "commit": "a9bbe317bb66950bfcbc8cb8edfc163029200f50",
+    "workingTree": false,
+    "branch": null,
+    "contentFingerprint": "a1fa75ba4bd28dfa6238b0633a2b3835428fcbfe3ad40efff55fbbd55bc76936",
+    "dirtyPaths": []
+  },
+  "candidate": {
+    "ref": null,
+    "commit": "a9bbe317bb66950bfcbc8cb8edfc163029200f50",
+    "workingTree": true,
+    "branch": "refactor/search-presentation-20260924",
+    "contentFingerprint": "49a7c8d95149d304684fb73fb315f968964eda268b50f62ca0e3c02938f7d8b5",
+    "dirtyPaths": [
+      "site/browser-types.mts",
+      "site/destination-browser.mts",
+      "site/feature-browser.mts",
+      "site/object-browser.mts",
+      "site/object-catalogue.mts",
+      "site/search-response.mts",
+      "site/search-results-presentation.mts",
+      "site/selection-presentation.mts",
+      "site/test/destination-browser.test.mts"
+    ]
+  },
+  "analysisFingerprint": "9fcd8c5e7fd13676bbab1e3bec4a9ba743b675dd84c4f03fe908e0035879fa59",
+  "outputs": [
+    {
+      "selector": [
+        ".object-browser"
+      ],
+      "output": "attribute:hidden",
+      "before": [
+        "site/object-browser.mts#createObjectBrowserController/filter",
+        "site/object-browser.mts#createObjectBrowserController/render",
+        "site/search-response.mts#renderSearchResponse"
+      ],
+      "after": [
+        "site/search-results-presentation.mts#createSearchPresentation/present"
+      ]
+    },
+    {
+      "selector": [
+        ".object-destination-panel"
+      ],
+      "output": "attribute:hidden",
+      "before": [
+        "site/destination-browser.mts#createDestinationBrowser/destroy",
+        "site/destination-browser.mts#createDestinationBrowser/present",
+        "site/destination-browser.mts#createDestinationBrowser/setOpen"
+      ],
+      "after": [
+        "site/destination-browser.mts#createDestinationBrowser/present"
+      ]
+    },
+    {
+      "selector": [
+        ".object-feature-results"
+      ],
+      "output": "attribute:hidden",
+      "before": [
+        "site/feature-browser.mts#createFeatureBrowser/destroy",
+        "site/feature-browser.mts#createFeatureBrowser/search",
+        "site/search-results-presentation.mts#presentFeatureResults"
+      ],
+      "after": [
+        "site/search-results-presentation.mts#presentFeatureResults"
+      ]
+    },
+    {
+      "selector": [
+        ".object-browser",
+        "[data-object-navigation-tree]"
+      ],
+      "output": "attribute:hidden",
+      "before": [
+        "site/object-browser.mts#createObjectBrowserController/selectNavigation",
+        "site/search-results-presentation.mts#presentSearchResults"
+      ],
+      "after": [
+        "site/search-results-presentation.mts#createSearchPresentation/present"
+      ]
+    },
+    {
+      "selector": [
+        ".object-selected-content"
+      ],
+      "output": "attribute:hidden",
+      "before": [
+        "site/object-browser.mts#createObjectBrowserController/render",
+        "site/search-response.mts#renderSearchResponse"
+      ],
+      "after": [
+        "site/search-results-presentation.mts#createSearchPresentation/present"
+      ]
+    }
+  ],
+  "limits": [
+    "Exact selector contracts only; static output ownership is not proof of behavior or performance.",
+    "Empty-result markup now resolves through its browser parent, so its old and new selector keys are not treated as the same contract."
+  ],
+  "coverage": {
+    "before": {
+      "outputContracts": 164,
+      "outputWrites": 279,
+      "multipleOutputDecisions": 20,
+      "unresolvedOutputSites": 214,
+      "selectedFunctions": 3046,
+      "functions": 4262,
+      "calls": 20486,
+      "resolvedCalls": 6900,
+      "unresolvedCalls": 13586,
+      "callbackSupplies": 9177,
+      "effects": 3141,
+      "awaitSites": 1134
+    },
+    "after": {
+      "outputContracts": 159,
+      "outputWrites": 258,
+      "multipleOutputDecisions": 11,
+      "unresolvedOutputSites": 211,
+      "selectedFunctions": 3048,
+      "functions": 4264,
+      "calls": 20477,
+      "resolvedCalls": 6910,
+      "unresolvedCalls": 13567,
+      "callbackSupplies": 9174,
+      "effects": 3127,
+      "awaitSites": 1134
+    }
+  },
+  "candidateCommit": "95fc80fea32c521f5c0d19f7afc9f9dc6c200ace",
+  "candidateNote": "Export includes final production sources. Only a duplicate test assertion was removed after this export."
+}

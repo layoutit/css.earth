@@ -1,0 +1,17 @@
+✔ a cleared city panel stays hidden (3.679459ms)
+✔ a disposed panel cannot be republished by a late result (0.502625ms)
+✔ from Mars, a city is found by any of its names and links to Earth (13.950917ms)
+✔ a place a named feature already carries is listed once, as the feature, found by the place's names too (3.227875ms)
+✔ a place is opened by its id; malformed requests are refused (1.089208ms)
+✔ keystrokes queued before a frame send one request, for the newest text (6.931125ms)
+✔ feature rows leave selection to the ordinary navigation link handler (3.491166ms)
+✔ a city opens from its id with one small request, and the Back label names the bound body (1.428125ms)
+✔ a rejected city arrival clears busy state and offers a retry (2.238ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 229.332

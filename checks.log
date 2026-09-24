@@ -1,0 +1,35 @@
+✔ no module reachable from the browser entry points has a static node: import (158.576875ms)
+✔ mutation check: a static node: import reachable from an entry is caught (3.256791ms)
+✔ mutation check: a node: import reached only through a dynamic import() is not flagged (1.879583ms)
+✔ a cleared city panel stays hidden when the search sheet closes (2.932625ms)
+✔ a disposed panel cannot be republished by a late result (0.407958ms)
+✔ from Mars, a city is found by any of its names and links to Earth (17.275875ms)
+✔ a place a named feature already carries is listed once, as the feature, found by the place's names too (1.564958ms)
+✔ a place is opened by its id; malformed requests are refused (0.876708ms)
+✔ keystrokes queued before a frame send one request, for the newest text (6.654583ms)
+✔ feature rows leave selection to the ordinary navigation link handler (3.028667ms)
+✔ a city opens from its id with one small request, and the Back label names the bound body (1.776333ms)
+✔ a rejected city arrival clears busy state and offers a retry (1.513833ms)
+✔ a page that ships its catalogue empty has it fetched and merged before matching (26.27175ms)
+✔ a catalogue fragment that fails to load degrades to an empty list plus a message, instead of failing the request (4.334542ms)
+✔ a page that already inlines its catalogue never fetches the fragment (1.5365ms)
+✔ native search replaces the selected card, retains every row, and preserves the scene/head bytes (4.280292ms)
+✔ empty submission browses all objects, categories retain the query, pills replace it (2.255792ms)
+✔ native search sorts catalogue rows by their emitted meter distances (0.809667ms)
+✔ features are pinned, rendered into existing rows and have ordinary destination links (2.849042ms)
+✔ typed search shows a flat result list without the navigation tree, including queries that name an overview (2.035917ms)
+✔ a URL that names both a focus and an overview resolves to the focus alone (8.897459ms)
+✔ native and live selections share card visibility, inertness, labels and system headers (7.041667ms)
+✔ named features share the results panel, start collapsed, and disappear when there are no matches (3.233167ms)
+✔ live feature results retain their rows and disclosure until the query changes (5.783167ms)
+✔ queries stay text, are bounded, and cannot become executable attributes or scene markup (2.43475ms)
+✔ Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function (0.547083ms)
+✔ function fetches only the static page and pinned indexes; search responses are not shared-cacheable (1.432417ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 515.812584

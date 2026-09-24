@@ -1,0 +1,38 @@
+[
+  {
+    "label": "before",
+    "view": "native-search",
+    "rows": 3,
+    "treeHidden": true
+  },
+  {
+    "label": "before",
+    "view": "native-empty",
+    "rows": 1437,
+    "treeHidden": true
+  },
+  {
+    "label": "before",
+    "view": "city",
+    "title": "Buenos Aires",
+    "restored": true
+  },
+  {
+    "label": "after",
+    "view": "native-search",
+    "rows": 3,
+    "treeHidden": true
+  },
+  {
+    "label": "after",
+    "view": "native-empty",
+    "rows": 1437,
+    "treeHidden": true
+  },
+  {
+    "label": "after",
+    "view": "city",
+    "title": "Buenos Aires",
+    "restored": true
+  }
+]

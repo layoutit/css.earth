@@ -1,0 +1,124 @@
+{
+  "baseline": "a9bbe317bb66950bfcbc8cb8edfc163029200f50",
+  "candidate": {
+    "site/browser-types.mts": "70989811dd72137c965ca4a36b2782f3e06d8687e789a67cbdc0ea7111789297",
+    "site/destination-browser.mts": "e317acbf19bfe8e921ccb1aaeccfa8c74bb06bd8f26a5c7b89abf2b220e5a4b8",
+    "site/feature-browser.mts": "4692255a26ae887aebcbff390908295a1c272faba0d482f4a1dc3022b9f1236f",
+    "site/object-browser.mts": "378854f55f2e32ef885ce9296a559640a1116b629107a0818179f2d959cb236c",
+    "site/object-catalogue.mts": "780999f1f30a941457d536e1ab54002eccdf857ec6c5836daf421b2d06d44055",
+    "site/search-response.mts": "7e10f036f526c343db6f5c6b8b0d72cd048066be8987a306881c5980fc6ec4fa",
+    "site/search-results-presentation.mts": "3cb379160f2b96360d5e35dd23b7ca5e2940fb343b59961493afb76ad39577b4",
+    "site/selection-presentation.mts": "7bae9fd0feb2c8f83f2a121eac81efb050d8186f56eca40403d944b6606342a6",
+    "site/test/destination-browser.test.mts": "bea5378cae1e5009bfb61cdf4ba0eb0f38928da431af0eb789768535d91a57ba"
+  },
+  "browser": "Chrome 153.0.8010.53",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "pixelmatch": "7.2.0",
+  "threshold": 0.1,
+  "includeAA": true,
+  "assetOrigin": "https://earth-assets.lowpoly.cc",
+  "inputs": "Same prepared inputs and inventory-addressed published textures; default surface labels off, motion off. No assets regenerated between captures.",
+  "results": [
+    {
+      "view": "earth",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "4d30f49e7fa8318a466d13c1ef8d050f04ba5e113674ed2c88a9e36c6c9edc10",
+      "afterSha256": "4d30f49e7fa8318a466d13c1ef8d050f04ba5e113674ed2c88a9e36c6c9edc10"
+    },
+    {
+      "view": "tree",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "cc75721e8420fc3feb199ac52256574138def398a70ac0fae174da12ec2fc215",
+      "afterSha256": "cc75721e8420fc3feb199ac52256574138def398a70ac0fae174da12ec2fc215"
+    },
+    {
+      "view": "search",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "ed30e7d3a52cce562cf19c1a16e058fd4e374a8fb05ef75f72da1afc188b7020",
+      "afterSha256": "ed30e7d3a52cce562cf19c1a16e058fd4e374a8fb05ef75f72da1afc188b7020"
+    },
+    {
+      "view": "closed",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "5b28b390f8b479e525e5864376d64a87ecdb5a06fbe06f5ba467d54c13c28de4",
+      "afterSha256": "5b28b390f8b479e525e5864376d64a87ecdb5a06fbe06f5ba467d54c13c28de4"
+    },
+    {
+      "view": "cleared",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "cc75721e8420fc3feb199ac52256574138def398a70ac0fae174da12ec2fc215",
+      "afterSha256": "cc75721e8420fc3feb199ac52256574138def398a70ac0fae174da12ec2fc215"
+    },
+    {
+      "view": "planets",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "d2efed6a9da8565d9eb1c9097951c2c51e14a66f73578cf36b68000b6fae169d",
+      "afterSha256": "d2efed6a9da8565d9eb1c9097951c2c51e14a66f73578cf36b68000b6fae169d"
+    },
+    {
+      "view": "empty",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "df8c8b41a4373822cb2c76796d9863896b77d0342d5cf369cbec2638db6c9537",
+      "afterSha256": "df8c8b41a4373822cb2c76796d9863896b77d0342d5cf369cbec2638db6c9537"
+    },
+    {
+      "view": "native-search",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "f54dbbb735a27a66f1a6b1ce86e8b230e1555ef83f080297e8f9f38ad0ecfc6a",
+      "afterSha256": "f54dbbb735a27a66f1a6b1ce86e8b230e1555ef83f080297e8f9f38ad0ecfc6a"
+    },
+    {
+      "view": "native-empty",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "25070f20639e86b67b7b417e000cf5e63de7e33cf144775b95d0e754d96f7026",
+      "afterSha256": "25070f20639e86b67b7b417e000cf5e63de7e33cf144775b95d0e754d96f7026"
+    },
+    {
+      "view": "city",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "321a67706b11fa3a2e0022d508fe48f952f23c7b83027cde42bbfeb8d0bef500",
+      "afterSha256": "321a67706b11fa3a2e0022d508fe48f952f23c7b83027cde42bbfeb8d0bef500"
+    }
+  ],
+  "candidateCommit": "95fc80fea32c521f5c0d19f7afc9f9dc6c200ace",
+  "reuse": "The seven live captures precede removal of the redundant destination search-state API; they have no selected city. Native/city captures include that removal. Later presenter method renames and deletion of a duplicate test assertion do not alter behavior.",
+  "limitations": [
+    "Desktop 1440x900 only; not mobile or full-suite coverage.",
+    "Both revisions had the same eight missing planet search-thumbnail requests. Earth/search/city assets rendered.",
+    "The copied baseline adds only a Vite filesystem allow-list for the shared unchanged renderer assets."
+  ]
+}

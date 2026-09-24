@@ -1,0 +1,16 @@
+{
+  "focusedChecks": {
+    "passed": 27,
+    "command": "node --test site/test/search-response.test.mts site/test/search-api.test.mts site/test/destination-browser.test.mts site/test/browser-node-imports.test.mts"
+  },
+  "destinationFollowup": {
+    "passed": 9,
+    "reason": "Destination state and API were removed after the initial focused pass."
+  },
+  "typecheckShell": {
+    "exitCode": 0
+  },
+  "affectedEslint": {
+    "exitCode": 0
+  }
+}
