@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "kolga-elevation-shadow-alpha@2x.webp",
+      "bytes": 490698,
+      "sha256": "9099b2287ea737bea55f871358251fe6e792a485fa5dbd4d8ee2565cc48f5701"
+    },
+    {
+      "location": "public",
       "filename": "kolga-elevation-shadow@2x.webp",
       "bytes": 140254,
       "sha256": "3f8497d349a225848cf52e9986eca390eed10b87bc9c9657b49197bf956881d0"
+    },
+    {
+      "location": "public",
+      "filename": "kolga-elevation-surface-alpha@2x.webp",
+      "bytes": 535778,
+      "sha256": "11a2714276c3d5ee99f1b04ab531e61653a644476151fce3b53417838ec44fb8"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "kolga-shape-shadow-alpha@2x.webp",
+      "bytes": 402282,
+      "sha256": "da269e7fdf44a3541901a0f3dec6e5c25c00a13504cbaf6b5f129da26cdbe3e6"
+    },
+    {
+      "location": "public",
       "filename": "kolga-shape-shadow@2x.webp",
       "bytes": 58702,
       "sha256": "d474cf0dd7771e71e191e450e23b23b2011fca0f44b20acbb6b76eaa2c9ad6ef"
+    },
+    {
+      "location": "public",
+      "filename": "kolga-shape-surface-alpha@2x.webp",
+      "bytes": 395898,
+      "sha256": "78cff03213588e241bc9f97d0a2ff9c88998f49753f481bbc0591abff9739092"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749184,
-      "sha256": "3d6e7e388d1560f3120943983fa359b0aa1387497aff622f65205bc3c3293a02"
+      "bytes": 750113,
+      "sha256": "3a35f12b9a434e253b8b637218894846f5d6afd782aec126f938667c2d87ba85"
     },
     {
       "location": "prepared",

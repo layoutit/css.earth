@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "leda-model-shadow-alpha@2x.webp",
+      "bytes": 124142,
+      "sha256": "82d2cd56dcb862cc1ccef6a3e844e3aab9a16da96e6dddf38160182208b4bb98"
+    },
+    {
+      "location": "public",
       "filename": "leda-model-shadow@2x.webp",
       "bytes": 20934,
       "sha256": "bcbfadf284f2b772f256d39db1a10cc960b20adbc960acb80ac7adfa8516a844"
+    },
+    {
+      "location": "public",
+      "filename": "leda-model-surface-alpha@2x.webp",
+      "bytes": 126596,
+      "sha256": "3c84734530639278a72d162d7f436fa6d6fc953fc013f6d039a2fbbaf26edb84"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 455672,
-      "sha256": "aa5bc210987aa66d6c95720042b8345aabea974b6df4ea69e8f83c942c472590"
+      "bytes": 456137,
+      "sha256": "6c4bc4767c7af378a219890f3baebd1bd07933270aa25c1437e87d6e1c5f73af"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nix-model-shadow-alpha@2x.webp",
+      "bytes": 240276,
+      "sha256": "48fde469ec0af94faa5e9dde5e4e5e4086155f3c8592bc598bd4b29f4cd45a13"
+    },
+    {
+      "location": "public",
       "filename": "nix-model-shadow@2x.webp",
       "bytes": 34130,
       "sha256": "165e148ba700b23159b84e990532bb9b14c0ae70f09bac51a8b4e24542b525e3"
+    },
+    {
+      "location": "public",
+      "filename": "nix-model-surface-alpha@2x.webp",
+      "bytes": 238702,
+      "sha256": "d27ac595411e353cdd035d19ac1ce3ecb22308bb9f08584d150f72c920ee7008"
     },
     {
       "location": "public",
@@ -18,6 +30,12 @@
       "filename": "nix-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "public",
+      "filename": "nix-monochrome-surface-alpha@2x.webp",
+      "bytes": 275826,
+      "sha256": "7e51f1d08ac42dd99fe1f8b554bf8aac73d59a85cc60bedc7101fa7ceba242ce"
     },
     {
       "location": "public",
@@ -82,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 745080,
-      "sha256": "d643166555baea8ddc4c699558888ca8531c19113672644db4a5cb62c91f2d36"
+      "bytes": 745845,
+      "sha256": "679179d4816a20bbe195aeaef8412000f1794b2083c8c1a837935ca3672d1cc4"
     },
     {
       "location": "prepared",

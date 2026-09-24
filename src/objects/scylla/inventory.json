@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "scylla-elevation-shadow-alpha@2x.webp",
+      "bytes": 509698,
+      "sha256": "f62dadf7199c0e33e1fe7fd6ee8a40920e70ae80025d01ef08bd902d554c491d"
+    },
+    {
+      "location": "public",
       "filename": "scylla-elevation-shadow@2x.webp",
       "bytes": 135618,
       "sha256": "0d9f001fee8f7daaeecd51a96b08441bc455e441997449ec1c333670900a2c15"
+    },
+    {
+      "location": "public",
+      "filename": "scylla-elevation-surface-alpha@2x.webp",
+      "bytes": 555608,
+      "sha256": "a5b79dea659e4352b9cf1d5b931623e06bfe8425e1e2fbba15a4510aaa6c82d7"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "scylla-shape-shadow-alpha@2x.webp",
+      "bytes": 425236,
+      "sha256": "4830fe68b024aa41f6deefd9c5eb88715fcda850a3337ce44e1aa29d269212f1"
+    },
+    {
+      "location": "public",
       "filename": "scylla-shape-shadow@2x.webp",
       "bytes": 58042,
       "sha256": "498c81b113295ae0099edbaccac02edc08485a3754d74c4f900215d6a0c8f52a"
+    },
+    {
+      "location": "public",
+      "filename": "scylla-shape-surface-alpha@2x.webp",
+      "bytes": 417620,
+      "sha256": "554b8e4596e594644ae3bf481e7330db906208cf1eeae8f20bf120561338ae98"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749706,
-      "sha256": "90f168e0447597ff35793671c1956b37353fe53ee675c609cd4a54669902ee69"
+      "bytes": 750647,
+      "sha256": "1d1139488d60c4322067cb69e9a4592d495b21cff7fa7e62cdef4606975f04b6"
     },
     {
       "location": "prepared",

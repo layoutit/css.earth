@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asbolus-model-shadow-alpha@2x.webp",
+      "bytes": 129708,
+      "sha256": "3e3fab15882b9fc61a58e3bad3af4e7a4785c161f6addb720eb5747d6863f371"
+    },
+    {
+      "location": "public",
       "filename": "asbolus-model-shadow@2x.webp",
       "bytes": 21874,
       "sha256": "cbbdf1fc46dc1a8506087adeb3d085ad46aa5f2a22d6e3a33330c78e6e3095ec"
+    },
+    {
+      "location": "public",
+      "filename": "asbolus-model-surface-alpha@2x.webp",
+      "bytes": 131168,
+      "sha256": "65baf842353704db6a2b343f133c06b4f0959f6222f48523d363b69d339e264d"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457295,
-      "sha256": "74e3e8391346e26adc12aeb76b9da8f98b54960186ab022f16426fa220b7bab0"
+      "bytes": 457778,
+      "sha256": "82f8df1878e9b6a86ffcdb7a60049b12bb4ff0a9a512e5d6666e79809796eab3"
     },
     {
       "location": "prepared",

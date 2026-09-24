@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "styx-model-shadow-alpha@2x.webp",
+      "bytes": 99878,
+      "sha256": "600ed0d0f5994c346abe21240afc68a992d3d76339a7a4b0f59f3ee64612410b"
+    },
+    {
+      "location": "public",
       "filename": "styx-model-shadow@2x.webp",
       "bytes": 20654,
       "sha256": "245589ce266be111ce542f5597bf7ccb05c5ab3f3cfa66bdea64d47affe23b7b"
+    },
+    {
+      "location": "public",
+      "filename": "styx-model-surface-alpha@2x.webp",
+      "bytes": 104370,
+      "sha256": "ad01da90f2da1e8ddde2488b5e44429e6368e39abdf6093ea51ed497f0aa2734"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458229,
-      "sha256": "f618f0497f366c1d3717f579d3c072ca0529eddfb88a296d416ed375f5afc001"
+      "bytes": 458694,
+      "sha256": "b28fbc4085651fef9bca8a8428af96f09dc6766edc293536a53a9502a0cf744f"
     },
     {
       "location": "prepared",

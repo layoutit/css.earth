@@ -12,7 +12,8 @@ const geometry: Guard<PagedGeometryParameters> = object({BODY_LATITUDE_SEGMENTS:
   MESH_ROTATION_Z: number, CAMERA_ZOOM: number,
   CAMERA_MINIMUM_CONTROL_PITCH_DEGREES: number, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES: number,
   CAMERA_MILLISECONDS_PER_CONTROL_DEGREE: number, INTERIOR_LATITUDE_SEGMENTS: number, INTERIOR_LONGITUDE_SEGMENTS: number, rotationSeconds: number,
-  interiorCutaway: object({centerLongitudeDegrees: number, widthDegrees: number})});
+  interiorCutaway: object({centerLongitudeDegrees: number, widthDegrees: number}),
+  seamOutset: optional(object({targetPixels: number, stepRatio: number, hysteresis: number, firstDiameter: number, lastDiameter: number}))});
 const relief = object({referenceRadiusMeters: number, heightToMeters: optional(number), lightDirection: array(number), ambient: number});
 const advisory = object({status: string, date: string});
 const enso = {date: string, baseline: string, checked: string, advisory};

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "stephania-elevation-shadow-alpha@2x.webp",
+      "bytes": 516502,
+      "sha256": "84ffb283cd28be2515a320ac46ef405ceca6aff1db1478c41c75f8483e5b3080"
+    },
+    {
+      "location": "public",
       "filename": "stephania-elevation-shadow@2x.webp",
       "bytes": 136162,
       "sha256": "469b8ac8d62086f1c496f06672e8b0c05a751e34a9e374a5acea02283644bb03"
+    },
+    {
+      "location": "public",
+      "filename": "stephania-elevation-surface-alpha@2x.webp",
+      "bytes": 571526,
+      "sha256": "03178bafa72dd7ef4328f636f43b5d5943f2a055745716e98a70540d9db0eb71"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "stephania-shape-shadow-alpha@2x.webp",
+      "bytes": 433770,
+      "sha256": "a4f339becc5180c1120e1418fcd92d4d438ead6d2d080b9109d304e787431bf8"
+    },
+    {
+      "location": "public",
       "filename": "stephania-shape-shadow@2x.webp",
       "bytes": 58944,
       "sha256": "8199392dde02526dda5188bb87513e4606422bb4ac66dab2955f39add567f185"
+    },
+    {
+      "location": "public",
+      "filename": "stephania-shape-surface-alpha@2x.webp",
+      "bytes": 426382,
+      "sha256": "9607465cb1b4a463e7fea87e83a6a36172a6123daf264e56729f90952dead558"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 752853,
-      "sha256": "5f4f8c75586163963229d96f563cf902669a6435c522208c15be7889a8670714"
+      "bytes": 753830,
+      "sha256": "78711f3a204de419be118cd9c78f4c2ccad568492daa82516ebe198dd6e84bdd"
     },
     {
       "location": "prepared",

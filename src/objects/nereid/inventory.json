@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nereid-model-shadow-alpha@2x.webp",
+      "bytes": 141964,
+      "sha256": "383d9ac3d82a706cee15c31bd95f571529977b3b0547cf06d6df91094edff5ee"
+    },
+    {
+      "location": "public",
       "filename": "nereid-model-shadow@2x.webp",
       "bytes": 21916,
       "sha256": "e5756ba937f7b0e663035e32986e3b180b4d9d746e5e3b4991ae1a78d0e7d87f"
+    },
+    {
+      "location": "public",
+      "filename": "nereid-model-surface-alpha@2x.webp",
+      "bytes": 143602,
+      "sha256": "f196e893d9cea4de8a77cc11ac13acf6f96d1519e5d1b06b0df8a151ea0216aa"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458790,
-      "sha256": "97e858dddaef7ebdb05247b35b111994cd5733e921175fc52b4f575a4890ad1c"
+      "bytes": 459267,
+      "sha256": "61df7ac9d7709ff09526c872921680bb626819baa43cbb4580a91891e72adb3f"
     },
     {
       "location": "prepared",

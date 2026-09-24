@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hopi-elevation-shadow-alpha@2x.webp",
+      "bytes": 498320,
+      "sha256": "fe0ab0f0b3f21c2d5587a43674e849017b39af90fa1021215af473099ccaa659"
+    },
+    {
+      "location": "public",
       "filename": "hopi-elevation-shadow@2x.webp",
       "bytes": 125498,
       "sha256": "243a5b0a0977067e9f122ee0e74814062ca1ea87721c719305bcd11cf8dc6cdf"
+    },
+    {
+      "location": "public",
+      "filename": "hopi-elevation-surface-alpha@2x.webp",
+      "bytes": 568876,
+      "sha256": "cc68164a815756a8f3a08afc9e49024006fc7968215a69685bda731c187f5a04"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hopi-shape-shadow-alpha@2x.webp",
+      "bytes": 416304,
+      "sha256": "8cdeea2c95bfd8a78ba81c833f146180c3a519f56c3e9ff80128de3d2063b624"
+    },
+    {
+      "location": "public",
       "filename": "hopi-shape-shadow@2x.webp",
       "bytes": 56368,
       "sha256": "f94109f8e01e17601bf38f84fc32489eb0bb9cfef8f4e5b37ad02ed89a1186bf"
+    },
+    {
+      "location": "public",
+      "filename": "hopi-shape-surface-alpha@2x.webp",
+      "bytes": 411804,
+      "sha256": "acaec75ed09655591e57b243c154b0af88bf36d1c4a3e7e8e81c1b78ae0ea4ed"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748324,
-      "sha256": "1f933782a630c52263596a50280fc5af7f650fe3c87dfe0ebd0856e46bea1ee4"
+      "bytes": 749241,
+      "sha256": "707fc1fe631b594244469d9f7554c661ebe862590f706d542dc1a00810949e8e"
     },
     {
       "location": "prepared",

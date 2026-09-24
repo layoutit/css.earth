@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "trinculo-model-shadow-alpha@2x.webp",
+      "bytes": 128926,
+      "sha256": "5cf5ba550cb4cc9bd05ebc079a55c6dae6194b76a684fd6b09d20249e9732bac"
+    },
+    {
+      "location": "public",
       "filename": "trinculo-model-shadow@2x.webp",
       "bytes": 21272,
       "sha256": "ec9c2d5d8092e6d58de1577863a03bbc9160ef06646a04d387cfd88d94837247"
+    },
+    {
+      "location": "public",
+      "filename": "trinculo-model-surface-alpha@2x.webp",
+      "bytes": 131388,
+      "sha256": "a13b9c8250aef6c96bffec286d693f6b69ba4ec5b2a2d17f3fa9ecc2a05b0554"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459108,
-      "sha256": "de67800e90c902bb6af35a6b5efa6f40d1aa664d71e41936abbb4eacace79642"
+      "bytes": 459597,
+      "sha256": "ffd62dab0faf0acd1185aff1dd563e139a3b2ecb40ea9315d8f45128d8583200"
     },
     {
       "location": "prepared",

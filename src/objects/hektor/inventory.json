@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hektor-elevation-shadow-alpha@2x.webp",
+      "bytes": 516470,
+      "sha256": "d32df4a19a38c8ee630ff2d9e18e461b68c93428ef12183700afad28ed6aa60f"
+    },
+    {
+      "location": "public",
       "filename": "hektor-elevation-shadow@2x.webp",
       "bytes": 135282,
       "sha256": "472214017c67a281bf5f0f0143e3a4649ab46e193afe835b7394fbd796e351e6"
+    },
+    {
+      "location": "public",
+      "filename": "hektor-elevation-surface-alpha@2x.webp",
+      "bytes": 584638,
+      "sha256": "b5ddc6f48710d6570c59ab3476d9d1b968d406ee6062a2f52c731a296b5f6979"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hektor-shape-shadow-alpha@2x.webp",
+      "bytes": 424934,
+      "sha256": "80ed7382b054f72f7cecb61dde0f822ea783fe3051444817798665005f430a6f"
+    },
+    {
+      "location": "public",
       "filename": "hektor-shape-shadow@2x.webp",
       "bytes": 56124,
       "sha256": "ad171866375e331295b945cc4b7e0d358ff086a0dd8ddb86b27bcd2bb64f5fd1"
+    },
+    {
+      "location": "public",
+      "filename": "hektor-shape-surface-alpha@2x.webp",
+      "bytes": 421664,
+      "sha256": "f358956cbb5aa42b74af2b0a52544e457405fa9a1381bd633b7b6dd017410965"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 746951,
-      "sha256": "b3cb40b92f9eaa90ac8ddc3850d97d9ba2a0426c6a3f1e5247bb1e95ece97144"
+      "bytes": 747892,
+      "sha256": "ea4758de398e0f5fcdfe1264d2e8a805f515a484106be27862a145aaa86b4602"
     },
     {
       "location": "prepared",

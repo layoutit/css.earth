@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "puck-normal-shadow-alpha@2x.webp",
+      "bytes": 142816,
+      "sha256": "b829c72376de2236638ab15958fd6a279db8578393039a0e2c0f6e14e5e5e4a5"
+    },
+    {
+      "location": "public",
       "filename": "puck-normal-shadow@2x.webp",
       "bytes": 37424,
       "sha256": "e74e3a8dabfd291cb35d9f0b12db5dad425cea12711cd3a56aa4070c89d29a00"
+    },
+    {
+      "location": "public",
+      "filename": "puck-normal-surface-alpha@2x.webp",
+      "bytes": 149016,
+      "sha256": "33f807059cb0395025fa8e32c28c8db2913af5404f31c42dd3c75244f98e9c2f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456883,
-      "sha256": "77915632017fe6613381e41a4b2ff9c7a20b1cca02c75b1cb31fcfbf6363adf6"
+      "bytes": 457360,
+      "sha256": "807a78382ba3a73cf1344ffede1cdd3a8549202b01816353d9836a051e1d4986"
     },
     {
       "location": "prepared",

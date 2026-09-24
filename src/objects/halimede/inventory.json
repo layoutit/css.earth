@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "halimede-model-shadow-alpha@2x.webp",
+      "bytes": 127296,
+      "sha256": "0adba00ad1e155829961344fa56c3ee4711d1a260fe57df5b00b130eafc40444"
+    },
+    {
+      "location": "public",
       "filename": "halimede-model-shadow@2x.webp",
       "bytes": 20470,
       "sha256": "327a3b18182dfe4a2029b58761fd39216e9623a9afb24dcdb3dfe2b27682cbaf"
+    },
+    {
+      "location": "public",
+      "filename": "halimede-model-surface-alpha@2x.webp",
+      "bytes": 129028,
+      "sha256": "78a8b63b0ecbfa2a7f377d6f4cca022f3ffc113a99ab1cb922ecda7b54972234"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458185,
-      "sha256": "294064951b9c28fea016120101ec2e457c08512c04b1eed92c726f466fe4302c"
+      "bytes": 458674,
+      "sha256": "e34f808d81dfbcf8e4bfdb7e5ba5c6a13707e3bf9cd18f2e2b95dc908ad36c43"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "peitho-elevation-shadow-alpha@2x.webp",
+      "bytes": 565556,
+      "sha256": "588262c23828611275019ee94271469eace735be95f6d9a3a3385e3b943ce656"
+    },
+    {
+      "location": "public",
       "filename": "peitho-elevation-shadow@2x.webp",
       "bytes": 156000,
       "sha256": "94fd2bc8c112b2b50092c597a69a5ccb98bc6bcf37a8898214c4339cca800aa3"
+    },
+    {
+      "location": "public",
+      "filename": "peitho-elevation-surface-alpha@2x.webp",
+      "bytes": 613236,
+      "sha256": "7bbf7d0073b58721728aebaefb583324e45dcde61c25aedc472203f82fa945cd"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "peitho-shape-shadow-alpha@2x.webp",
+      "bytes": 461046,
+      "sha256": "b835ddd12c566f323aaace7248def7be4e0a038cb4e8126ef559661e64f427da"
+    },
+    {
+      "location": "public",
       "filename": "peitho-shape-shadow@2x.webp",
       "bytes": 59972,
       "sha256": "d8da2774dd3e6db52534135a84eef7f4cba09b852f288f1f5482d265c0caed37"
+    },
+    {
+      "location": "public",
+      "filename": "peitho-shape-surface-alpha@2x.webp",
+      "bytes": 454988,
+      "sha256": "c7cb9521b017317cfc0a7c1081563ddb0526af092e7abefbdf2ab45fa024363f"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749284,
-      "sha256": "1a234bf568d2506f7319b3d978ee7e37682792665bfc34b687a96e99c4006c9b"
+      "bytes": 750225,
+      "sha256": "e22feaba9411488ed7fab07ba22f7d8031c28650737047c9f8fed64b2d3235d9"
     },
     {
       "location": "prepared",

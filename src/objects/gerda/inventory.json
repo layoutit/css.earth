@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "gerda-elevation-shadow-alpha@2x.webp",
+      "bytes": 561918,
+      "sha256": "0ac090cdb77effd186a382ea30e684c6a1daa97cfba4e90c05f46c9999a2372f"
+    },
+    {
+      "location": "public",
       "filename": "gerda-elevation-shadow@2x.webp",
       "bytes": 137868,
       "sha256": "12932efc25f33bfb256a17c1412b40a7e8c75f08aa88c5472c49262ddf9aab16"
+    },
+    {
+      "location": "public",
+      "filename": "gerda-elevation-surface-alpha@2x.webp",
+      "bytes": 607650,
+      "sha256": "c0b2152539ce3a8515acad348ea602dec71b584a5033cc8552e8ddb245042610"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "gerda-shape-shadow-alpha@2x.webp",
+      "bytes": 475458,
+      "sha256": "f7da89473c1f9cca8577ce04e162b229c7ff8d2d790439080c750b1bf8d57a7c"
+    },
+    {
+      "location": "public",
       "filename": "gerda-shape-shadow@2x.webp",
       "bytes": 57856,
       "sha256": "5a07ea065b52314cd0c551f04c82dfbe276ce0478f372fc83c460c58529b3446"
+    },
+    {
+      "location": "public",
+      "filename": "gerda-shape-surface-alpha@2x.webp",
+      "bytes": 472434,
+      "sha256": "bf73a9aac4f987af7277faac5a519dd39bda807748c40366044f6c7363a2cec5"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749069,
-      "sha256": "093f83b74a61d387cb0a4ac29074ef7010f6fd1bcb0783b536de64a5b31c24ab"
+      "bytes": 749998,
+      "sha256": "db151bf9c2284199408d79901131e216c00b6a07d801c500db6594b9da8cffdc"
     },
     {
       "location": "prepared",

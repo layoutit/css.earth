@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "paaliaq-model-shadow-alpha@2x.webp",
+      "bytes": 138552,
+      "sha256": "4e1c64bcd9419f6e0fe799d057bd60f8f038b842f0e6c9ac7747654544c6f883"
+    },
+    {
+      "location": "public",
       "filename": "paaliaq-model-shadow@2x.webp",
       "bytes": 21582,
       "sha256": "af5ad9d5fa0348861f4381fb8c2a43c2107b55a41656ab7c7b45c48865dc36de"
+    },
+    {
+      "location": "public",
+      "filename": "paaliaq-model-surface-alpha@2x.webp",
+      "bytes": 139758,
+      "sha256": "9a8a3c679cbba1d44f9413f6774e749b8b166f846109f512a3c5f6e3ff6ebf9f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458801,
-      "sha256": "6489c11da331f9102bef39faf67b983098ee17f3d4d440c31c2da524418384bd"
+      "bytes": 459284,
+      "sha256": "258eeee7595615b06019c7f331e057a03298aa9706648734fe9844dc59667a4e"
     },
     {
       "location": "prepared",

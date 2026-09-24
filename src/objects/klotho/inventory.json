@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "klotho-elevation-shadow-alpha@2x.webp",
+      "bytes": 539688,
+      "sha256": "384e67656cb54a8084501b027f81b0d52450f9c1fdf72b972eb5fb0206bb1989"
+    },
+    {
+      "location": "public",
       "filename": "klotho-elevation-shadow@2x.webp",
       "bytes": 131368,
       "sha256": "9db804964cab2a12379596f8bc360a2150d58c8a19d4c2d6ac25f3b66d5dd3e6"
+    },
+    {
+      "location": "public",
+      "filename": "klotho-elevation-surface-alpha@2x.webp",
+      "bytes": 588876,
+      "sha256": "216d0693a69d82290c74b111ddbcd780792e9bbc26086728052ddf84b4761925"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "klotho-shape-shadow-alpha@2x.webp",
+      "bytes": 456130,
+      "sha256": "efe30dbd94ed63bd8daf08e92eac0996b7de57f19f91adfdccc31a40bb82f749"
+    },
+    {
+      "location": "public",
       "filename": "klotho-shape-shadow@2x.webp",
       "bytes": 59078,
       "sha256": "561a456dcd45da9ed26f3371f1d902c72eb2bba4897e074f97d02ee2eacf000c"
+    },
+    {
+      "location": "public",
+      "filename": "klotho-shape-surface-alpha@2x.webp",
+      "bytes": 449488,
+      "sha256": "c0a0162f8ea5cbe4c513dfbd31502fa206494aeb8a827c566cf3e3c93beb0f93"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750709,
-      "sha256": "f00e316194dcc74003f3c952f9f7f97e839e223bbdab9ffbb2555b40fab5e537"
+      "bytes": 751650,
+      "sha256": "94e1b18b58701711edbf40f90c98d93d84b3e3936c710cc9de7e5d3938e4a5a4"
     },
     {
       "location": "prepared",

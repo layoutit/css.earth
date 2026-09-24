@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "mithra-elevation-shadow-alpha@2x.webp",
+      "bytes": 678044,
+      "sha256": "6000bfca6c87e3d4313b396686b47cdd79cd036299d7ab6b2d68676221aad742"
+    },
+    {
+      "location": "public",
       "filename": "mithra-elevation-shadow@2x.webp",
       "bytes": 202840,
       "sha256": "ac15525b13c52f0e89825b83a1da569a16e75903862502ba769495a6a841f2dc"
+    },
+    {
+      "location": "public",
+      "filename": "mithra-elevation-surface-alpha@2x.webp",
+      "bytes": 737166,
+      "sha256": "598015b8408dd8b905b47141029ed97a7fa853a58ab15e991a1593a0122c4987"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "mithra-shape-shadow-alpha@2x.webp",
+      "bytes": 545774,
+      "sha256": "520dda5305ad617483525387439c0986d832588b8ed39977af20da5982886edc"
+    },
+    {
+      "location": "public",
       "filename": "mithra-shape-shadow@2x.webp",
       "bytes": 71452,
       "sha256": "aa30840c0982aad8de2faba91273d816be0a3c3a3244b38fc20af0ba6ffb06d6"
+    },
+    {
+      "location": "public",
+      "filename": "mithra-shape-surface-alpha@2x.webp",
+      "bytes": 534086,
+      "sha256": "b419f47d239591d0df48fd5ad9261644368210a36d8ad2a962135e0c5a353a82"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 747902,
-      "sha256": "9bf7ff00db872a841c36737266792ec162ad3eef773d980a9e70376f10c051f3"
+      "bytes": 748843,
+      "sha256": "b7b5b5b2c3ae2e45d4522bee1e65319f7e77890544730f3677a2b6cbe3306785"
     },
     {
       "location": "prepared",

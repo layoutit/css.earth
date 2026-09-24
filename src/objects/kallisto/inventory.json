@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "kallisto-elevation-shadow-alpha@2x.webp",
+      "bytes": 479408,
+      "sha256": "70580031edbcdb6c3612f9c0aa8b911bb7991ba3bcfc3e20cb667f6fcb769d38"
+    },
+    {
+      "location": "public",
       "filename": "kallisto-elevation-shadow@2x.webp",
       "bytes": 137962,
       "sha256": "27e8e8412cd34e02cbfdb2d33dcabd7ac66d692baf0674f02e6bad70952a412b"
+    },
+    {
+      "location": "public",
+      "filename": "kallisto-elevation-surface-alpha@2x.webp",
+      "bytes": 532592,
+      "sha256": "142714d81f29e03e55c737a20bd173c72fa654fb77cd392301fdc5875692c4b5"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "kallisto-shape-shadow-alpha@2x.webp",
+      "bytes": 394332,
+      "sha256": "f7ca968be2f6354ce3900baebc775540d970bc20ee3ec11dd107c9396bb0a4b6"
+    },
+    {
+      "location": "public",
       "filename": "kallisto-shape-shadow@2x.webp",
       "bytes": 58468,
       "sha256": "e7f5602133c6048d0dbc3fa086b4eccecd98c8e2caeee7e28bb91ef3e8fe7639"
+    },
+    {
+      "location": "public",
+      "filename": "kallisto-shape-surface-alpha@2x.webp",
+      "bytes": 387578,
+      "sha256": "325a09387e1d263e0b9ee01679d22734cd0bbc2244216713e0be33c47f8e2597"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751689,
-      "sha256": "21aa0510de4a533be516f34050b95a01cbd7616cdf3023f376c53c61d90a1189"
+      "bytes": 752654,
+      "sha256": "91737a7aa42e622b4917e12c4723d2da581dfaaa055d9fd4a5b6ae12aa72c33d"
     },
     {
       "location": "prepared",

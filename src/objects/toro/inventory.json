@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "toro-elevation-shadow-alpha@2x.webp",
+      "bytes": 579130,
+      "sha256": "27f646b9b703aa48cf6f65f1e0f66970d0f7639e7f7b965d21cf24092254b3cd"
+    },
+    {
+      "location": "public",
       "filename": "toro-elevation-shadow@2x.webp",
       "bytes": 145144,
       "sha256": "24b13f128a32dca316551a2a322fa9115c83b683c879afd214071695e23dcd5a"
+    },
+    {
+      "location": "public",
+      "filename": "toro-elevation-surface-alpha@2x.webp",
+      "bytes": 629816,
+      "sha256": "94b5c9d5216ab7bc5135ab3147ad468ac094312ae8755605cb29aafb3cba6e4e"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "toro-shape-shadow-alpha@2x.webp",
+      "bytes": 486314,
+      "sha256": "13b319362e6be81fe6ff9b50f4561f58c6c986765ae960bca08f98d366240b13"
+    },
+    {
+      "location": "public",
       "filename": "toro-shape-shadow@2x.webp",
       "bytes": 61392,
       "sha256": "52b6007c54f08b730dc1d39929625b38a3053a0276ccdde051363ed749fcbe74"
+    },
+    {
+      "location": "public",
+      "filename": "toro-shape-surface-alpha@2x.webp",
+      "bytes": 479078,
+      "sha256": "5a3e662f862798e2067942f25445abcc2d9f249054c985ddfe2c4ede37490d96"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748776,
-      "sha256": "b0f11cdedb5a411034d0c8d6804af0a7aa941e23e68c053cf93cf0f633f86126"
+      "bytes": 749693,
+      "sha256": "60a1c6f1b282fc04f94232bd588f615bb61f0e677798bdf8380376665b203f59"
     },
     {
       "location": "prepared",

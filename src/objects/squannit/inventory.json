@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "squannit-model-shadow-alpha@2x.webp",
+      "bytes": 214018,
+      "sha256": "8c363d883900e3f10f027122960ba2f1c62760a2f5f40b676dbd430070f9ad62"
+    },
+    {
+      "location": "public",
       "filename": "squannit-model-shadow@2x.webp",
       "bytes": 28654,
       "sha256": "815156ad57ba4364801527b5532cdc8135f435ce8d26f1045f3297088a4c286a"
+    },
+    {
+      "location": "public",
+      "filename": "squannit-model-surface-alpha@2x.webp",
+      "bytes": 216890,
+      "sha256": "ee55ec4262db71a8f51165d170cebb6e3e992f4539694aebd2a4f8afd79a14b9"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 655121,
-      "sha256": "b71ffafc7da195cfbb00141b5a9604c79a7863d36bad3209537bef31813c12d8"
+      "bytes": 655610,
+      "sha256": "f5f0b79c59f66fca4445a2cb110919c8296a1c37f3b41af1410a28e7cb8def56"
     },
     {
       "location": "prepared",

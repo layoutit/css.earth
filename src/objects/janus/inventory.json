@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "janus-elevation-shadow-alpha@2x.webp",
+      "bytes": 573726,
+      "sha256": "7a19af479619c2710a33109d38804ba564f001ae915c33d2cc4e255d4ec7e3f2"
+    },
+    {
+      "location": "public",
       "filename": "janus-elevation-shadow@2x.webp",
       "bytes": 146720,
       "sha256": "be76cc52243d2eeb9f15b2cb377850ee2e81506012b86ff731a82017fb8860cf"
+    },
+    {
+      "location": "public",
+      "filename": "janus-elevation-surface-alpha@2x.webp",
+      "bytes": 664954,
+      "sha256": "aef8fa5429603020d17eb6001b688b1afaaab5a2354deaf82c856af3a348301f"
     },
     {
       "location": "public",
@@ -27,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "janus-filter-color-surface-alpha@2x.webp",
+      "bytes": 553040,
+      "sha256": "3e3ac9b6c1e851203e4ebf5cd62b80d1c11efc27d499c43a5470e10a593b6a8a"
+    },
+    {
+      "location": "public",
       "filename": "janus-filter-color-surface@2x.webp",
       "bytes": 141806,
       "sha256": "091f62b6ecb9410ebab3f89ca93b327cfe8ca10389744ffa790470a59fc6af80"
@@ -39,9 +57,21 @@
     },
     {
       "location": "public",
+      "filename": "janus-normal-shadow-alpha@2x.webp",
+      "bytes": 564760,
+      "sha256": "b9516dcff80de43f2d17a419164787627ce52ee9afcb9318acf69cb6c99a1d95"
+    },
+    {
+      "location": "public",
       "filename": "janus-normal-shadow@2x.webp",
       "bytes": 163440,
       "sha256": "bd4ee4642b13ee16498188fc31fa07756321bb123cbab48bb20f14ed23359d3e"
+    },
+    {
+      "location": "public",
+      "filename": "janus-normal-surface-alpha@2x.webp",
+      "bytes": 603188,
+      "sha256": "f0894688ec814a90201b8835490ca79d9d55421d7ffacb0ebbbc57926209e301"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 675503,
-      "sha256": "d374a70311eb3fa37bbf5cd5131d5da7ff7b63dae58258c4b8cf23e711c86585"
+      "bytes": 676774,
+      "sha256": "9f51424fe40ed66e544833cde180fce58b95130da8fb6941c145e3ec038d3ceb"
     },
     {
       "location": "prepared",

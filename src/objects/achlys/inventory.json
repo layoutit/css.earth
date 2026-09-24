@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "achlys-model-shadow-alpha@2x.webp",
+      "bytes": 137270,
+      "sha256": "055fb2aeb22fbe615bef5c7c2b24ca882a24366c59c6a4e9040253d1cb0c4992"
+    },
+    {
+      "location": "public",
       "filename": "achlys-model-shadow@2x.webp",
       "bytes": 18700,
       "sha256": "991acc25a7a8c762b153d1a6b7a829b13bbb5389295d90f24c6301a30fe10c66"
+    },
+    {
+      "location": "public",
+      "filename": "achlys-model-surface-alpha@2x.webp",
+      "bytes": 140210,
+      "sha256": "d2f2e338255839f5c08cb28d189700d22e9cae761e32d802386aa59adbf67c28"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457222,
-      "sha256": "14c9f1fff81dc9cfa772b79317e15a2d9029a04a156b5d4103a59c2c7f05a6ed"
+      "bytes": 457699,
+      "sha256": "73613d7cca0a027d4e3b97546995916d81513c2a2ce4e1a45d7ea84ed6b205b7"
     },
     {
       "location": "prepared",

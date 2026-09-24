@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "unitas-elevation-shadow-alpha@2x.webp",
+      "bytes": 588846,
+      "sha256": "2397989670aba969065f65bdc8ee311dd82fc95c20cf5d696ea6339671678b63"
+    },
+    {
+      "location": "public",
       "filename": "unitas-elevation-shadow@2x.webp",
       "bytes": 143538,
       "sha256": "223ef97c3b083c5967f2b1734e42526869fcbc6ebb94ff7d5643b90e79f02b30"
+    },
+    {
+      "location": "public",
+      "filename": "unitas-elevation-surface-alpha@2x.webp",
+      "bytes": 650036,
+      "sha256": "5a85e80c2707ef79a7c3a77e9af27f320fa55d62623704775c28268a036dc050"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "unitas-shape-shadow-alpha@2x.webp",
+      "bytes": 489962,
+      "sha256": "184f28b9a56f700852aebde40104923d8594db0cab01f8610286d7a14521736a"
+    },
+    {
+      "location": "public",
       "filename": "unitas-shape-shadow@2x.webp",
       "bytes": 60006,
       "sha256": "997e70d29ee024b15aa2af751971f735ddf9df6b8bab36abdce3599b32dcc1af"
+    },
+    {
+      "location": "public",
+      "filename": "unitas-shape-surface-alpha@2x.webp",
+      "bytes": 486746,
+      "sha256": "86a13fa2cc5cdf50466cf7c4fdeb345ee8c5d6dfb2a46dc0a2a9ead303476e4d"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749687,
-      "sha256": "2daf9cec1f0b3344189948b3f1a0b4d7971224cad2d87f390f653df55572af2d"
+      "bytes": 750628,
+      "sha256": "fc26b4cc298b47d3da2018640a92158a631acb4df30765d4ec0ca0c91bee287c"
     },
     {
       "location": "prepared",

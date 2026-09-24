@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "helene-elevation-shadow-alpha@2x.webp",
+      "bytes": 623748,
+      "sha256": "29fdf13fba951637dd1511d97ed17c4dff685489173c01b85d47a4f2b1f7d4e3"
+    },
+    {
+      "location": "public",
       "filename": "helene-elevation-shadow@2x.webp",
       "bytes": 146580,
       "sha256": "a363f70af5da77e6914663f7ff1b30c09b28780db9f69da706e81c1df68fa035"
+    },
+    {
+      "location": "public",
+      "filename": "helene-elevation-surface-alpha@2x.webp",
+      "bytes": 704822,
+      "sha256": "dd7625c6162a5be26662144948ea15cf052a86a1be0c34191bdf7031b119be3f"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "helene-false-color-shadow-alpha@2x.webp",
+      "bytes": 610506,
+      "sha256": "8eafc7b8933526b32ae095f796cd331abe6aeabf84e222729c4884d7f06118cb"
+    },
+    {
+      "location": "public",
       "filename": "helene-false-color-shadow@2x.webp",
       "bytes": 159684,
       "sha256": "82eb0473c56bf8a3b742d6364b94d550fcb3633f3de663dde63ae176e312e38e"
+    },
+    {
+      "location": "public",
+      "filename": "helene-false-color-surface-alpha@2x.webp",
+      "bytes": 624826,
+      "sha256": "04724a980a3551cbd525e7aa6c1c978acf64aaf921b65123492f4d4fed11041a"
     },
     {
       "location": "public",
@@ -45,9 +69,21 @@
     },
     {
       "location": "public",
+      "filename": "helene-normal-shadow-alpha@2x.webp",
+      "bytes": 607216,
+      "sha256": "b6623f7e50956092d82b39456690821bb8e70cf354634ce6fba3220b816c92c4"
+    },
+    {
+      "location": "public",
       "filename": "helene-normal-shadow@2x.webp",
       "bytes": 158474,
       "sha256": "2f832438f35e9992b9a878dd9a679d1dacc177c2e2be5b18a421bf50a1e21f73"
+    },
+    {
+      "location": "public",
+      "filename": "helene-normal-surface-alpha@2x.webp",
+      "bytes": 655304,
+      "sha256": "afe01f34ad3e4a1684dd439a22f720149753afa95344fb6933cd431db7993b3a"
     },
     {
       "location": "public",
@@ -118,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749036,
-      "sha256": "09869bde8a6fe9ca2284f39e57d9e3f4e776a08f6eb0e55d34b075a94f51d857"
+      "bytes": 750477,
+      "sha256": "89e18f7c3c485b7b9ef5eddac08d5c09201eec96facd9638925fd825b99352ba"
     },
     {
       "location": "prepared",

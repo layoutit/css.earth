@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "artemis-elevation-shadow-alpha@2x.webp",
+      "bytes": 589368,
+      "sha256": "045f708c039825058ce9b83bd581593a4ad31408d2b282c4818781650459041c"
+    },
+    {
+      "location": "public",
       "filename": "artemis-elevation-shadow@2x.webp",
       "bytes": 144964,
       "sha256": "8ddcb2fd46bf61898d39d3a147cad0dda1d9df9934f1c79a1ee2a967097883d2"
+    },
+    {
+      "location": "public",
+      "filename": "artemis-elevation-surface-alpha@2x.webp",
+      "bytes": 638804,
+      "sha256": "d12b5e8fd9a343d2873c00d9ba482ad0c53b9c07d0e8f4daac4e169c1538e293"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "artemis-shape-shadow-alpha@2x.webp",
+      "bytes": 494882,
+      "sha256": "c9f2d3d819764f764ce8449f469c477cd64a12d7d66b9536511d1196a2a24a0b"
+    },
+    {
+      "location": "public",
       "filename": "artemis-shape-shadow@2x.webp",
       "bytes": 61236,
       "sha256": "8ed04bd81ff311e4f4d118c1229211dd7904607c37cac31a9474b7e1d2977c96"
+    },
+    {
+      "location": "public",
+      "filename": "artemis-shape-surface-alpha@2x.webp",
+      "bytes": 487100,
+      "sha256": "9e6d906fa7ccf1ae0beca89271abd4128364fa2decd4773335802c9e7c65e523"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751107,
-      "sha256": "cec3453db5842a3d0cafd869ac437e4d6e345a0e48f4fa321768260ec15c4854"
+      "bytes": 752060,
+      "sha256": "41824a83e5f5651c7b44624ecf691bd77b5eefaef9c780839c407f4436891754"
     },
     {
       "location": "prepared",

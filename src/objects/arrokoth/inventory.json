@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "arrokoth-albedo-shadow-alpha@2x.webp",
+      "bytes": 991386,
+      "sha256": "4c36fc64b6fb9b810dc9816729a8391c2d1ca2a66ce2dce61388ecc5a54d3f6d"
+    },
+    {
+      "location": "public",
       "filename": "arrokoth-albedo-shadow@2x.webp",
       "bytes": 490268,
       "sha256": "08881f12983d3899a99429c25cb68715b73626b433ecbeaee1e013ad9aa4fbdd"
+    },
+    {
+      "location": "public",
+      "filename": "arrokoth-albedo-surface-alpha@2x.webp",
+      "bytes": 953238,
+      "sha256": "91f907c852e6e26d775a1beb8380988dccbfff8ad94b1a68a1f47185a9c73fd6"
     },
     {
       "location": "public",
@@ -27,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "arrokoth-lorri-surface-alpha@2x.webp",
+      "bytes": 740714,
+      "sha256": "444ea7dc041ce9f1c30de68e8f4e98d7c8548b302eeffc7b46dfc0c11b762b6f"
+    },
+    {
+      "location": "public",
       "filename": "arrokoth-lorri-surface@2x.webp",
       "bytes": 388324,
       "sha256": "16b3496107394a9b749401873d5d0425f489b06f792553149e3461722e745e00"
@@ -39,9 +57,21 @@
     },
     {
       "location": "public",
+      "filename": "arrokoth-model-shadow-alpha@2x.webp",
+      "bytes": 484880,
+      "sha256": "61c1bc3eb915f4ba952744abbdd468cebc9b052b2dc2ae0b1a39d26a5410a548"
+    },
+    {
+      "location": "public",
       "filename": "arrokoth-model-shadow@2x.webp",
       "bytes": 69650,
       "sha256": "8d625f007ace585006428061a2ca180c7dd946fa8e06198e870fd0eb684d4f6b"
+    },
+    {
+      "location": "public",
+      "filename": "arrokoth-model-surface-alpha@2x.webp",
+      "bytes": 471644,
+      "sha256": "9d22ed2f8b9677e5c7ddfbfd85beeb4abd3a78d34da532905f0fc49da7e92c53"
     },
     {
       "location": "public",
@@ -54,6 +84,12 @@
       "filename": "arrokoth-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "public",
+      "filename": "arrokoth-mvic-surface-alpha@2x.webp",
+      "bytes": 550260,
+      "sha256": "c77b203ea1b74780a356853eec9d0e2650fc38e7434fe1d552044fc97c89b17f"
     },
     {
       "location": "public",
@@ -94,8 +130,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 20659,
-      "sha256": "d5cc8148d3cf1e1a3f0d48caf930c2525b2ca0ed83a5854e3d1274bf51363904"
+      "bytes": 20878,
+      "sha256": "a19b9f4a4abde4da743c76b3ec1ddcd0066cdd2ea2e5cc4e2488df257150ccb0"
     },
     {
       "location": "prepared",
@@ -130,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 939302,
-      "sha256": "3fa5c324e51b104200039aaa69266e5a72b032bd3281d5461301e4c7846795e4"
+      "bytes": 940795,
+      "sha256": "e125193c066d781ae951e688c917090c717b88f8395f3466b788da6059f0d006"
     },
     {
       "location": "prepared",
@@ -154,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 20665,
-      "sha256": "08efcfd5c2e4954e5359a138c3427854d140bd6f3efa95ba257d6127adb0df1d"
+      "bytes": 20884,
+      "sha256": "cfb519475a5adea0ca0d4ed4f8992df95ea07d1519d524a34b5ea5b68ea1963e"
     },
     {
       "location": "prepared",

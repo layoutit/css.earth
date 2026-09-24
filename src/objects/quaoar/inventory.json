@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "quaoar-model-shadow-alpha@2x.webp",
+      "bytes": 124374,
+      "sha256": "9ef7d188683c7a5699ce5b482b1ce9d1a56f7332a5c5fb22f764a9646a152031"
+    },
+    {
+      "location": "public",
       "filename": "quaoar-model-shadow@2x.webp",
       "bytes": 21256,
       "sha256": "8c8d69bc53da030e5436596b32cce3f02fe9db616869ab5eebb32434b605aa99"
+    },
+    {
+      "location": "public",
+      "filename": "quaoar-model-surface-alpha@2x.webp",
+      "bytes": 126336,
+      "sha256": "a4699472639f721ff216266080c2c9516fdb4c451f968173e3300d681fba46f3"
     },
     {
       "location": "public",
@@ -70,8 +82,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459088,
-      "sha256": "01205777e0e484619dc0ad3a105bef244bd73ca9f28960f4f26e31d53e0ea9de"
+      "bytes": 459565,
+      "sha256": "7b3dea56fba20470093dddcb2262680304d264eba4331af0d983492174438220"
     },
     {
       "location": "prepared",

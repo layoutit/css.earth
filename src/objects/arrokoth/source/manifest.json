@@ -417,8 +417,8 @@
       "id": "prepared-source-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.26007/97r3-1e19",
-      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
-      "license": "Authored display of scientific model; source attribution retained.",
+      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS; NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team; cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
+      "license": "NASA PDS scientific data; retain attribution; NASA PDS scientific archive; retain original attribution and notices; MIT for authored registration; original source notices retained.",
       "consumers": [
         "navigation"
       ],
@@ -426,14 +426,15 @@
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
           "published-shape",
-          "model-surface"
+          "lorri-ca06",
+          "ca06-registered-camera"
         ],
         "size": 512,
-        "longitudeDegrees": 55,
-        "latitudeDegrees": -25,
+        "longitudeDegrees": -177.5,
+        "latitudeDegrees": -50.6,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "model"
+        "lensId": "lorri"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

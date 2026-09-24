@@ -40,7 +40,14 @@
       "centerLongitudeDegrees": -56.25,
       "widthDegrees": 112.5
     },
-    "rotationSeconds": 72
+    "rotationSeconds": 72,
+    "seamOutset": {
+      "targetPixels": 0.5,
+      "stepRatio": 1.4142135623730951,
+      "hysteresis": 0.1,
+      "firstDiameter": 16,
+      "lastDiameter": 32768
+    }
   },
   "textureLevels": {
     "widths": [

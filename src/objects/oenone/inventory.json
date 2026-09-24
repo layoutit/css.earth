@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "oenone-elevation-shadow-alpha@2x.webp",
+      "bytes": 566986,
+      "sha256": "680c50aa7081924ae011fa2a6c0800a26c63d6260441b8f0d5f9b04a74dd7977"
+    },
+    {
+      "location": "public",
       "filename": "oenone-elevation-shadow@2x.webp",
       "bytes": 142438,
       "sha256": "bdcc677372448e3ceba1fef56b9c270a83c6c70cbc0f702c8ba2bfb737a2423e"
+    },
+    {
+      "location": "public",
+      "filename": "oenone-elevation-surface-alpha@2x.webp",
+      "bytes": 615634,
+      "sha256": "ebf383cc9be3688746b6e7e7bb4c157e43162047255a387bd6183a196593421a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "oenone-shape-shadow-alpha@2x.webp",
+      "bytes": 471702,
+      "sha256": "67a95982b639695c7127cad33f8aa03f3e7a7386c8b439c1a32266081d23fb0e"
+    },
+    {
+      "location": "public",
       "filename": "oenone-shape-shadow@2x.webp",
       "bytes": 62240,
       "sha256": "83e87fda9df14bd1f63c73914116d0573ea4b1cd6ab90204f58a3630d51e5a7d"
+    },
+    {
+      "location": "public",
+      "filename": "oenone-shape-surface-alpha@2x.webp",
+      "bytes": 464260,
+      "sha256": "3b9d2ab372df0b2bf8abfdd87efd3e369794d839c8b6c6ce9e7e7cbc3053752f"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750743,
-      "sha256": "1c9ab8837893ab1f7ed52e70cc4287648c6ff40c43d934f124f70024d402dead"
+      "bytes": 751684,
+      "sha256": "d93920787af47aedb24a40a37bd4cb4ca60e7d8d1a3db2b4547ab14962323e01"
     },
     {
       "location": "prepared",

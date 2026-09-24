@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "neso-model-shadow-alpha@2x.webp",
+      "bytes": 126314,
+      "sha256": "2a362c3badb1f995fc78a8236bd316827a666fd0947c91ebe56bf4cb8022487d"
+    },
+    {
+      "location": "public",
       "filename": "neso-model-shadow@2x.webp",
       "bytes": 20890,
       "sha256": "bb4843e58a97a495e3d84791ce0b29b8dac18c6ef00bd7558ca0f74b1d79f440"
+    },
+    {
+      "location": "public",
+      "filename": "neso-model-surface-alpha@2x.webp",
+      "bytes": 128498,
+      "sha256": "6e46adfe0263cf446922f4659b6cda407602f9a6fb246ebd201019462c329e35"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457284,
-      "sha256": "61afbe9852cb1b5d9c04132a5f15856a381ff1fe754314ee03b7916a1a9f241f"
+      "bytes": 457749,
+      "sha256": "f5933eb822de7247c0781abd64ab8f12baf389de462068e1dffb0c4ec1f23d2a"
     },
     {
       "location": "prepared",

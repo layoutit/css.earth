@@ -104,9 +104,9 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod",
-      "credit": "ItzImcool (2024), domi9 (2024–2025); Celestia contributors",
-      "license": "CC-BY-4.0; retain ItzImcool and domi9 attribution and mark conversion/scaling.",
+      "origin": "https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+      "credit": "Duncan Lyster; Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST",
+      "license": "Modified MIT License (Attribution Required).",
       "consumers": [
         "navigation"
       ],
@@ -114,14 +114,15 @@
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "shape-model"
+          "tempest-dinkinesh-model",
+          "tempest-license"
         ],
         "size": 512,
-        "longitudeDegrees": 55,
-        "latitudeDegrees": 20,
+        "longitudeDegrees": 113.9,
+        "latitudeDegrees": -37.4,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "shape"
+        "lensId": "tempest-shape"
       }
     }
   ],

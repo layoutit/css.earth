@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "aegina-elevation-shadow-alpha@2x.webp",
+      "bytes": 494936,
+      "sha256": "938cd1e8898a3b5b98fa60e696a776c5fa89c0e57898a6cf35232d91f3a44a57"
+    },
+    {
+      "location": "public",
       "filename": "aegina-elevation-shadow@2x.webp",
       "bytes": 132128,
       "sha256": "9d07726647c19662d233c8df102671a7dae325a495e5f4eb210fc50481698f98"
+    },
+    {
+      "location": "public",
+      "filename": "aegina-elevation-surface-alpha@2x.webp",
+      "bytes": 532494,
+      "sha256": "604feefe349d93f9ead30bf3424e63864775926e35c60170bc62d2ea59b63e27"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "aegina-shape-shadow-alpha@2x.webp",
+      "bytes": 409092,
+      "sha256": "ed009943a3da660821c2adbf9629a0028fb7de782067ec00eb3c5ec00fa35702"
+    },
+    {
+      "location": "public",
       "filename": "aegina-shape-shadow@2x.webp",
       "bytes": 55420,
       "sha256": "f3bd348b515fbaead8743eaf52b633cd1ac36f985d0d3b6b7a0ca456e62f5025"
+    },
+    {
+      "location": "public",
+      "filename": "aegina-shape-surface-alpha@2x.webp",
+      "bytes": 402714,
+      "sha256": "beeae1b3e9248c3503c8e8adbad599db56cb6d4f6c190adfaddbb41e5a5872eb"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749427,
-      "sha256": "309e68ee7b5c068d200c920bd5ea0d4a43c9243f58bbf11a5cbb7647ccea280b"
+      "bytes": 750368,
+      "sha256": "a0ef60b434882c92b16f86e13b67bb41e22f19a4fde71ea8a491730c1cf45761"
     },
     {
       "location": "prepared",

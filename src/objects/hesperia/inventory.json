@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hesperia-elevation-shadow-alpha@2x.webp",
+      "bytes": 575486,
+      "sha256": "059b62cc892f24a579afc7b72b77e32d8306bec275c857005893dff871493d2e"
+    },
+    {
+      "location": "public",
       "filename": "hesperia-elevation-shadow@2x.webp",
       "bytes": 132990,
       "sha256": "321c9b425867456acde904111acdb335d55ab172af0ff044b289fe35d315740a"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-elevation-surface-alpha@2x.webp",
+      "bytes": 619244,
+      "sha256": "1c005ec5b91be7a317cdc016e6d514b39ac06a596f0b4ce292d57a14e42bb070"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hesperia-shape-shadow-alpha@2x.webp",
+      "bytes": 489432,
+      "sha256": "b5d432a09bf60259dd9d93dde5ece6c293f1440c1e297fafb1473fdf68fe2339"
+    },
+    {
+      "location": "public",
       "filename": "hesperia-shape-shadow@2x.webp",
       "bytes": 60158,
       "sha256": "84e82e5e83dfbc428969392286c6364c2e3bbd4606e0e5496313c2a03241b8aa"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-shape-surface-alpha@2x.webp",
+      "bytes": 483612,
+      "sha256": "8b7420e759dba14bc308100cf0c36ffc5505f3d41958b3c567c6ba591fdf7fb4"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751555,
-      "sha256": "05553c5faf066a5eda7560ac2b0babd07c74aef7c936d427c22cc9f9abe46f38"
+      "bytes": 752520,
+      "sha256": "bf5d2922e77f9e0e0ac2cdda213117f9acdfb44aca310edb38240b3596c94bf3"
     },
     {
       "location": "prepared",

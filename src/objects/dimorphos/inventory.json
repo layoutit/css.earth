@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "dimorphos-albedo-shadow-alpha@2x.webp",
+      "bytes": 548864,
+      "sha256": "20677edc5e23e246bce1583574e47c5bf10a5210e8e2ada31fccd2711521d69c"
+    },
+    {
+      "location": "public",
       "filename": "dimorphos-albedo-shadow@2x.webp",
       "bytes": 105162,
       "sha256": "3678364dcad4d52d0840db20f8bce5451fddf4343a2f95a89ff0ab8186e8d9cb"
+    },
+    {
+      "location": "public",
+      "filename": "dimorphos-albedo-surface-alpha@2x.webp",
+      "bytes": 601514,
+      "sha256": "24106ac482edd4603aece47476d157154bbc5d8bd567f29bcfc8c24aa12d8aa9"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "dimorphos-draco-shadow-alpha@2x.webp",
+      "bytes": 703790,
+      "sha256": "9fe6be45f35b0a9a6fee059732a3e6c646a008b1ae66b7c601cdc56273179c51"
+    },
+    {
+      "location": "public",
       "filename": "dimorphos-draco-shadow@2x.webp",
       "bytes": 305692,
       "sha256": "fe9077b4dfc392857c51d13c2e41e6a47607de5d051bd096fc0eca91de27ef97"
+    },
+    {
+      "location": "public",
+      "filename": "dimorphos-draco-surface-alpha@2x.webp",
+      "bytes": 884890,
+      "sha256": "8ae39ac7658bc5b18440b403c93fc3d9459741ae297c93c65276e21d6a181ab0"
     },
     {
       "location": "public",
@@ -51,9 +75,21 @@
     },
     {
       "location": "public",
+      "filename": "dimorphos-elevation-shadow-alpha@2x.webp",
+      "bytes": 596750,
+      "sha256": "abf95acb8008c85157851d572e1169547d511521a8c6c9e2ae8c26222b7e5b99"
+    },
+    {
+      "location": "public",
       "filename": "dimorphos-elevation-shadow@2x.webp",
       "bytes": 127252,
       "sha256": "53b13b8ca342651cf1476a1dd621ead6a0df0f91fc8a3ba07cae453834e4901e"
+    },
+    {
+      "location": "public",
+      "filename": "dimorphos-elevation-surface-alpha@2x.webp",
+      "bytes": 705844,
+      "sha256": "a56a2de994fe29c1b7f90dc99cd897439ce517935486282fd882310cecf08b4e"
     },
     {
       "location": "public",
@@ -75,9 +111,21 @@
     },
     {
       "location": "public",
+      "filename": "dimorphos-shape-shadow-alpha@2x.webp",
+      "bytes": 508852,
+      "sha256": "59b27ebba56d14b32243d94d4bad96565f2830dccb12e690e40f1270244aa0cd"
+    },
+    {
+      "location": "public",
       "filename": "dimorphos-shape-shadow@2x.webp",
       "bytes": 57098,
       "sha256": "76aea5c1245af2a9abe7b5dbc84bf2159bb18a9e9ddc9a51022735444f87b07b"
+    },
+    {
+      "location": "public",
+      "filename": "dimorphos-shape-surface-alpha@2x.webp",
+      "bytes": 508804,
+      "sha256": "d6d4c121f156a8351422446db9f646f6c8aac0912337a61dcdc1e901ec3dfcae"
     },
     {
       "location": "public",
@@ -99,9 +147,21 @@
     },
     {
       "location": "public",
+      "filename": "dimorphos-slope-shadow-alpha@2x.webp",
+      "bytes": 2072668,
+      "sha256": "e4a3203f140107479d436db05a8fdcd6abce30ccc9760a6ad38bb24300b5c916"
+    },
+    {
+      "location": "public",
       "filename": "dimorphos-slope-shadow@2x.webp",
       "bytes": 1442634,
       "sha256": "29a7e0a5f348aa6e0c724090d02cce28503fc04955c888000773ef45951f3bd5"
+    },
+    {
+      "location": "public",
+      "filename": "dimorphos-slope-surface-alpha@2x.webp",
+      "bytes": 2423608,
+      "sha256": "19101bd6d69997597db89072df8615826fbf1125d640ee62ce18a7c25fc06a17"
     },
     {
       "location": "public",
@@ -190,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 647884,
-      "sha256": "ea63cf0ab99cb08c89f0349ed1f136477b1661b2804afe6a98fde0e9f0aa052c"
+      "bytes": 650175,
+      "sha256": "11260340983316734af288b10fd8f829b143c09fdcf8bdbb7b2dc50bc91b2bc6"
     },
     {
       "location": "prepared",

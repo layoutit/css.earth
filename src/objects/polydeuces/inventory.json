@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "polydeuces-normal-shadow-alpha@2x.webp",
+      "bytes": 153688,
+      "sha256": "145295c80fbb42c375d83a13bec4e516bb578799a4c418f373a5619df4eca076"
+    },
+    {
+      "location": "public",
       "filename": "polydeuces-normal-shadow@2x.webp",
       "bytes": 35824,
       "sha256": "af9c005f1736c0011c3f8a994d57eef9b21e2489ca12eb98806e183afe1ea1cd"
+    },
+    {
+      "location": "public",
+      "filename": "polydeuces-normal-surface-alpha@2x.webp",
+      "bytes": 154850,
+      "sha256": "f43b36698c4f84d829a60ec45e8865720608164a1edec7802b1d90f1a2197095"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 460815,
-      "sha256": "153ca9794f7057bb83d3ea71551b19e20d26a536f3ef44add5fc6016c470efc1"
+      "bytes": 461328,
+      "sha256": "8e8901b37411284bd8ab7dad3ff649b843df4126ccf60b494f4a82c402ebf570"
     },
     {
       "location": "prepared",

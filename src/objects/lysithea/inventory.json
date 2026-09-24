@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lysithea-model-shadow-alpha@2x.webp",
+      "bytes": 133074,
+      "sha256": "e1e37ac41570091a5a18bf66683aef4b137f020561635d8c450b10f454be4b80"
+    },
+    {
+      "location": "public",
       "filename": "lysithea-model-shadow@2x.webp",
       "bytes": 21436,
       "sha256": "1b2d408ba9b90fa914d0696b0ad556daf3be1625bb0223adba4c4c850284d92f"
+    },
+    {
+      "location": "public",
+      "filename": "lysithea-model-surface-alpha@2x.webp",
+      "bytes": 135046,
+      "sha256": "da327df4334e66055c27e7c28536f379da6b9cfbfc56831c05620e6200c57a0f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459096,
-      "sha256": "ef8917330edbe1d3811421a2be9883ff4874a3535d43546721165aaee9c84b99"
+      "bytes": 459585,
+      "sha256": "5d85c527db3100b78d4030fbb841b252d9dd67ba88a62bb126a1fd7b320310c2"
     },
     {
       "location": "prepared",

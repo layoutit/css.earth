@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "polymele-model-shadow-alpha@2x.webp",
+      "bytes": 130670,
+      "sha256": "81e89aa3ccb339aa998356b622129c55d794b81401fb0ee46ef3a61d3f997138"
+    },
+    {
+      "location": "public",
       "filename": "polymele-model-shadow@2x.webp",
       "bytes": 16252,
       "sha256": "9929da0eda79f353de1ffa1c6a48b4baa8a3c641077c2e26bc639de696452ea7"
+    },
+    {
+      "location": "public",
+      "filename": "polymele-model-surface-alpha@2x.webp",
+      "bytes": 135532,
+      "sha256": "c20e593d868013161e5fd337756ebb33b5b04aed3ca15587d9c6332a82d5d800"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458577,
-      "sha256": "f968df5e1e8e7b8b6c3e420c485514984c512ae7c71c181ef9b4422f7cecde3a"
+      "bytes": 459066,
+      "sha256": "578a490902c1c444a194965e15db426058b3c95329917e162b1b8a19091a7422"
     },
     {
       "location": "prepared",

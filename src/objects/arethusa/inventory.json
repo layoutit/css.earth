@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "arethusa-elevation-shadow-alpha@2x.webp",
+      "bytes": 507156,
+      "sha256": "facc3643bf6120a4fca3e24c76421136b475bb5c7d2e6d64aab2258a770a10a6"
+    },
+    {
+      "location": "public",
       "filename": "arethusa-elevation-shadow@2x.webp",
       "bytes": 134860,
       "sha256": "6f3c447be0bfcc258f67b677406faa5870e1a1bf6606312ffe4e46ac9c73849a"
+    },
+    {
+      "location": "public",
+      "filename": "arethusa-elevation-surface-alpha@2x.webp",
+      "bytes": 558580,
+      "sha256": "de74ada2258ddcb334e3d91ce8cd9fb1b0213faaf525b08f9426db8890211907"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "arethusa-shape-shadow-alpha@2x.webp",
+      "bytes": 422576,
+      "sha256": "46a995230689e8e0f74e7ca9dd3764e34f46ad5d6736ecde0639f1fb7c360ba8"
+    },
+    {
+      "location": "public",
       "filename": "arethusa-shape-shadow@2x.webp",
       "bytes": 58996,
       "sha256": "9d8fcf6a2c81a3909b80ff5434b4a85df0759a983a27f05c51ea3027390896f4"
+    },
+    {
+      "location": "public",
+      "filename": "arethusa-shape-surface-alpha@2x.webp",
+      "bytes": 415560,
+      "sha256": "5873190ca4da4e5c9a416bcf420d4ef7c0faf1914ff5d3149995db5c861013c3"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751401,
-      "sha256": "efb232bce19da3de9b4b0b9f9f0f88f20a696507fc55c6da71235cca24778189"
+      "bytes": 752366,
+      "sha256": "db0efc977bf5d10105e4059da2880f680a2e883600933a2f80e20c50ab2e3c30"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "iocaste-model-shadow-alpha@2x.webp",
+      "bytes": 132082,
+      "sha256": "fa7f33a3520b91814dc10ed3dc8960035d1fc531e794bc2cb1aec725b072ee12"
+    },
+    {
+      "location": "public",
       "filename": "iocaste-model-shadow@2x.webp",
       "bytes": 21836,
       "sha256": "c8cd90aebc0796c458aba27e4ef7d2ff83359158c8b89651544cc5578b648130"
+    },
+    {
+      "location": "public",
+      "filename": "iocaste-model-surface-alpha@2x.webp",
+      "bytes": 133912,
+      "sha256": "2e8e94dc0b130b4bb75376c5c33ca48ff55af7d791051cdd06e3a4331fe1a962"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457731,
-      "sha256": "67d14864b5554b26e1f5f771475d6daa435ef6fd191c5f6533544dac096412f3"
+      "bytes": 458214,
+      "sha256": "3ad06f26b466dba4a968304d0fb67d5afad1dd4fc58c857c6cac76c860f6f7da"
     },
     {
       "location": "prepared",

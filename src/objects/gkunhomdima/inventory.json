@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gkunhomdima-model-shadow-alpha@2x.webp",
+      "bytes": 124576,
+      "sha256": "022fc828ae9262c63fcb8cc672673aaa6ec958d88eeb373bc6c3cd012f90051e"
+    },
+    {
+      "location": "public",
       "filename": "gkunhomdima-model-shadow@2x.webp",
       "bytes": 21294,
       "sha256": "32b05dd1531a28e6f0ce23df17ab70d8db61509892e605303ba9a25313fbba15"
+    },
+    {
+      "location": "public",
+      "filename": "gkunhomdima-model-surface-alpha@2x.webp",
+      "bytes": 126340,
+      "sha256": "f9041f3cc20eeb1cf616ede38d3852ac5ad14aef662267261b7546cad7906bad"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459862,
-      "sha256": "fc2f3f8ae4165f4955ee9b7791438859f30920b64ac7bd773375e265bac9e4db"
+      "bytes": 460369,
+      "sha256": "c9629b140da489cf9a0a47683f6bdab4e506d2285b8f3c3473674e9704b2962e"
     },
     {
       "location": "prepared",

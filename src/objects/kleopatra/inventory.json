@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kleopatra-shape-shadow-alpha@2x.webp",
+      "bytes": 537696,
+      "sha256": "4e33fc22cee0a1fcc96b84dc665304dd44d781adb753c3455ba57eb8358dac60"
+    },
+    {
+      "location": "public",
       "filename": "kleopatra-shape-shadow@2x.webp",
       "bytes": 65944,
       "sha256": "31cba3f51edf79e5a13e82aef5113cdbeef2462f596b926c881b6f51930115de"
+    },
+    {
+      "location": "public",
+      "filename": "kleopatra-shape-surface-alpha@2x.webp",
+      "bytes": 530784,
+      "sha256": "4896539194bc05f890e7420b50ae18ee3624497b8c0b0c8e77e9303f620d3d0b"
     },
     {
       "location": "public",
@@ -18,6 +30,12 @@
       "filename": "kleopatra-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "kleopatra-zimpol-surface-alpha@2x.webp",
+      "bytes": 568342,
+      "sha256": "87ac9badfe3af86282960e0e605d9f69b1bd14d15b764437d041a51025584e36"
     },
     {
       "location": "public",
@@ -82,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1388337,
-      "sha256": "5e6768621054015624a70d89b28d003ad40e89559e682225b249685f51dfb4d9"
+      "bytes": 1389130,
+      "sha256": "9459569ae59edc34bd4c5bd77bec6946af9c81123c549385d416bc94c682bfd5"
     },
     {
       "location": "prepared",

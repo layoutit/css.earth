@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-19p-difference-shadow-alpha@2x.webp",
+      "bytes": 392496,
+      "sha256": "ac670d30b908aadd53e43da7cf3757e9df8a271d97557abd61a4c405980c810c"
+    },
+    {
+      "location": "public",
       "filename": "comet-19p-difference-shadow@2x.webp",
       "bytes": 282872,
       "sha256": "016304a7a123c67325323020a7a556a769c6f8448288baaa8fc38c4bb77d0014"
+    },
+    {
+      "location": "public",
+      "filename": "comet-19p-difference-surface-alpha@2x.webp",
+      "bytes": 378614,
+      "sha256": "b9aef2a956b6f175d13e81b993d1d2fdf27e44626b0832f5608a00e52e070ccf"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-19p-dlr-shadow-alpha@2x.webp",
+      "bytes": 250758,
+      "sha256": "09cc8dba9a8bcc8b896f5da279ed5d135ca72a418bd2af50a674e6bb23c19be5"
+    },
+    {
+      "location": "public",
       "filename": "comet-19p-dlr-shadow@2x.webp",
       "bytes": 53624,
       "sha256": "31aac45f4b48c324c83dfcceed638c7c57fc42120574fc336d685946a0835284"
+    },
+    {
+      "location": "public",
+      "filename": "comet-19p-dlr-surface-alpha@2x.webp",
+      "bytes": 239622,
+      "sha256": "7a15a77ec3bb11a099bc4d6f3cbe86a8304841752bc543c3fb3ce69115563757"
     },
     {
       "location": "public",
@@ -57,9 +81,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-19p-height-shadow-alpha@2x.webp",
+      "bytes": 369344,
+      "sha256": "f948852e417a2e701abd1a7072ec4657d93f3db7a42f8f02b5fc3f388629cb82"
+    },
+    {
+      "location": "public",
       "filename": "comet-19p-height-shadow@2x.webp",
       "bytes": 254864,
       "sha256": "7370c57d78b463c76eb5c31b5c7aa90e3c41a3a2143d4b2e78ff3fb241a628d8"
+    },
+    {
+      "location": "public",
+      "filename": "comet-19p-height-surface-alpha@2x.webp",
+      "bytes": 319536,
+      "sha256": "e1d59325feed20823096b203c6b74a27472518dd5baade81d6568f8c55ad1cb6"
     },
     {
       "location": "public",
@@ -75,6 +111,12 @@
     },
     {
       "location": "public",
+      "filename": "comet-19p-micas-surface-alpha@2x.webp",
+      "bytes": 156820,
+      "sha256": "b47d45f40de3d34d59a572476e719ec181a6a4973b78c5c3d1818547007aaeee"
+    },
+    {
+      "location": "public",
       "filename": "comet-19p-micas-surface@2x.webp",
       "bytes": 44216,
       "sha256": "1c37037ac47e146d9f3e76d769f3add6f03f48e6eef70d6c02635ebe2d0e6901"
@@ -87,9 +129,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-19p-usgs-shadow-alpha@2x.webp",
+      "bytes": 148148,
+      "sha256": "200c6383680cabe920e77c9bce35686ae48e5efada6d32348475ebc7aff46bba"
+    },
+    {
+      "location": "public",
       "filename": "comet-19p-usgs-shadow@2x.webp",
       "bytes": 33426,
       "sha256": "38eac62e97533e0530955964c8806807de6a50194f6479552bdd015787a638f9"
+    },
+    {
+      "location": "public",
+      "filename": "comet-19p-usgs-surface-alpha@2x.webp",
+      "bytes": 143206,
+      "sha256": "f8a9736d0a6d3d3ed1c2aefbafd5692b916ce17ec10f1eda15d3df7c7de6e9d4"
     },
     {
       "location": "public",
@@ -148,8 +202,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 2413419,
-      "sha256": "b9e3f4e426184b8de35ad729854ca8eb7ef7161b6aac3c7e4722d933446da139"
+      "bytes": 2415542,
+      "sha256": "e8dab8bc8c586aacb9aefdb25d5b45f4fd15ba4e47e4eeacbc4e35bcfe8381b3"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "klio-elevation-shadow-alpha@2x.webp",
+      "bytes": 499430,
+      "sha256": "952f2b99f97db750f8c07e800314ed1efe3fbf9654f6d6851366c133ff2ad96c"
+    },
+    {
+      "location": "public",
       "filename": "klio-elevation-shadow@2x.webp",
       "bytes": 149366,
       "sha256": "fb3f9d68b68b176669cfecd2ac17b39f82b64655acda76c5c90e9a2dc7914c4d"
+    },
+    {
+      "location": "public",
+      "filename": "klio-elevation-surface-alpha@2x.webp",
+      "bytes": 550094,
+      "sha256": "2801dde6be63ca642d404ceead8ba0f247f3d6a1c0f0aa219657c38079ae1744"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "klio-shape-shadow-alpha@2x.webp",
+      "bytes": 400648,
+      "sha256": "e3cd56c714c6490bf4de0c3dd32a5413d2c00e08da6864f7b96859e5bcd9b279"
+    },
+    {
+      "location": "public",
       "filename": "klio-shape-shadow@2x.webp",
       "bytes": 57220,
       "sha256": "2852c3224e5e67908e1c6db40e8de427f4a6ceabb170ba7efe156091cd8e0b00"
+    },
+    {
+      "location": "public",
+      "filename": "klio-shape-surface-alpha@2x.webp",
+      "bytes": 392540,
+      "sha256": "f4ea2c7c9995cd56b99fc1960df9f5e075bc35fe9139a4bd6165309a460d9f7b"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 747269,
-      "sha256": "d0aee2d8ef5e6ec3ff71a0ed8624b34ed213b8ea87cd735cd7af2cb46a01faac"
+      "bytes": 748186,
+      "sha256": "387583da109545be129b485d486c90e27753d37754078abcb42b0f67f7276859"
     },
     {
       "location": "prepared",

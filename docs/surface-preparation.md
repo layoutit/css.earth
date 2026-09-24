@@ -326,6 +326,20 @@ The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles
 several times fewer texels per metre than small ones, at the same bytes.
 
+The `u` leaf cuts its triangle with `corner-shape: bevel` on its two top corners.
+Safari 26 and Firefox have no `corner-shape`, so they round those corners into an
+ellipse and each face shows an oval of its slice. For every atlas a `u` face reads,
+[triangle-alpha-atlas.mts](../tools/objects/terrestrial-layers/triangle-alpha-atlas.mts)
+therefore writes a second copy, `<name>-alpha@2x.webp`, whose slices are transparent
+outside their triangle. The mask is the union of the faces that read that atlas in
+some variant, antialiased over one texel and never grown: at the raster sizing's
+roughly 30× leaf scale, even a one-texel margin showed as spikes past narrow apexes.
+The runtime declares the copies as `corner-shape` resource fallbacks and swaps them in
+once per page when `CSS.supports` reports the capability missing
+([prepared-resource-fallbacks.ts](../src/renderers/css/rendering/prepared-resource-fallbacks.ts)),
+and `triangle-faces.css` then drops the leaf's rounded corners. A browser with
+`corner-shape` never requests the copies.
+
 ![Main's fixed squares, the raster atlas and their pixelmatch difference for Enceladus, Hyperion and Alphonsina](images/raster-atlas-pixelmatch.webp)
 
 Same pose before and after the change (main, raster atlas, pixelmatch at threshold 0.1). Every face gets

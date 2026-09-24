@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "menoetius-model-shadow-alpha@2x.webp",
+      "bytes": 137468,
+      "sha256": "f448dbe2b634628c204afb461e28b2e892f6715220ba7bf885dbbad67d9943af"
+    },
+    {
+      "location": "public",
       "filename": "menoetius-model-shadow@2x.webp",
       "bytes": 22130,
       "sha256": "13cd7659dc5bb3f17d5240280d64fc5b923690e5706789e1cb5f8f70564905f6"
+    },
+    {
+      "location": "public",
+      "filename": "menoetius-model-surface-alpha@2x.webp",
+      "bytes": 138312,
+      "sha256": "e6bbc1a3e2f6c3348dc0f20902cf53287609fd44b99cfb3cf642d64ad9a6a2e2"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 460629,
-      "sha256": "9be5fabee42cc42b493df28827e6281863ff8b11c16bd1b894e66c58f9642d83"
+      "bytes": 461124,
+      "sha256": "6f5a13f588f70a5bed40b66d3346fcb7fc98b3344cf1d45a924712ab7394b22a"
     },
     {
       "location": "prepared",

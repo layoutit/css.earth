@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "erato-elevation-shadow-alpha@2x.webp",
+      "bytes": 515172,
+      "sha256": "2a5d14c90d7d464cfe87d5e2287c134b4ef3d58029871a63b5340e36c72d880e"
+    },
+    {
+      "location": "public",
       "filename": "erato-elevation-shadow@2x.webp",
       "bytes": 137358,
       "sha256": "a9a76807900660ee3f0c6878b99b7fbb661b47d51ebeca31e3fd88fbd59d4479"
+    },
+    {
+      "location": "public",
+      "filename": "erato-elevation-surface-alpha@2x.webp",
+      "bytes": 553660,
+      "sha256": "39b07e0f71f0aeea02a0dfafe8fa85509bd0310acbcc3c9fa885fb8bd7062b3c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "erato-shape-shadow-alpha@2x.webp",
+      "bytes": 425654,
+      "sha256": "0deb8827f24de2a5c575881dbaa75ff2c4604380ebc9567e9033bf473c291160"
+    },
+    {
+      "location": "public",
       "filename": "erato-shape-shadow@2x.webp",
       "bytes": 58902,
       "sha256": "d7b3be28f910c5ff5402b310b2ef7a38ba9bb129014117dacc90f90041f05ca6"
+    },
+    {
+      "location": "public",
+      "filename": "erato-shape-surface-alpha@2x.webp",
+      "bytes": 415508,
+      "sha256": "f17729b5a3e1f4f103836d33ed0ee86ee297086df415f5b2725346c3396876da"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748239,
-      "sha256": "d0b832c9f47e95fbd1f5c76ca22390a41d6716f5625380a5bf99dcd06fee9572"
+      "bytes": 749168,
+      "sha256": "fb9df7a13b9cd68b1253e84caf8ebd774e35fb3fbcd61fb54bff940b51972bc9"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2002-tx300-model-shadow-alpha@2x.webp",
+      "bytes": 124000,
+      "sha256": "ca58f983613d3236eb7889f0459e171d987768682aca21f0069e66a0850e4721"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2002-tx300-model-shadow@2x.webp",
       "bytes": 22678,
       "sha256": "e65fd9a869ba9f0b55972a49ca1618ab64ed3c6c1fbfd0bcd046c44f6ee2b559"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2002-tx300-model-surface-alpha@2x.webp",
+      "bytes": 124108,
+      "sha256": "5ba2a3becb5ccd105c46d6896786df054707ea29bb1f1f082407e1d72a9fb6c4"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 464121,
-      "sha256": "d94dd18f2dda7331869699514afadfc1f6303696a9d853f4cd1856584e76db89"
+      "bytes": 464676,
+      "sha256": "5dd01dc1399145cb5305aa7f052b6653a1f425a58395333329f19e0d67754e59"
     },
     {
       "location": "prepared",

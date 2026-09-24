@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "siwa-elevation-shadow-alpha@2x.webp",
+      "bytes": 584964,
+      "sha256": "c1117d22c12bfe9a7b6584c23c98bac74e2a04a907c4a2f05b659b376eb8083b"
+    },
+    {
+      "location": "public",
       "filename": "siwa-elevation-shadow@2x.webp",
       "bytes": 145788,
       "sha256": "5163e16cb0d424484b7c642e7a2f90d186f2676c976531f38b62f23f81bcde47"
+    },
+    {
+      "location": "public",
+      "filename": "siwa-elevation-surface-alpha@2x.webp",
+      "bytes": 624356,
+      "sha256": "c029277dcbc3a7fe6afce5737d56dcf06a8b010735b1a34b9e86e3a26424f8a3"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "siwa-shape-shadow-alpha@2x.webp",
+      "bytes": 488568,
+      "sha256": "f4fe27eb8f3198eb029fada3318b7a5050ebea545bcd7b80c2e4388eca794b30"
+    },
+    {
+      "location": "public",
       "filename": "siwa-shape-shadow@2x.webp",
       "bytes": 63004,
       "sha256": "a35e0b428a771994c7bf0bf1e3964a55779252755df79ae984b50b6084f981be"
+    },
+    {
+      "location": "public",
+      "filename": "siwa-shape-surface-alpha@2x.webp",
+      "bytes": 482328,
+      "sha256": "3328e50f2335be24e6be9cd36f6218aaa8dd8ed77633f7412e37cdae26d9ece1"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748126,
-      "sha256": "a7d93f943237cb476e4ae86b4fdb8b52a2a4a9a00e45d966f4c784fbbede1743"
+      "bytes": 749043,
+      "sha256": "03b97c2cf1f496dfc62b02bb19d88357ede9d5461ef363a6250d712a0880f3eb"
     },
     {
       "location": "prepared",
