@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "ino-elevation-shadow-alpha@2x.webp",
+      "bytes": 607154,
+      "sha256": "28c0614c60a54d85386b9bd0f2fa415d7ff839f931feafe0dac5440636d79446"
+    },
+    {
+      "location": "public",
       "filename": "ino-elevation-shadow@2x.webp",
       "bytes": 169862,
       "sha256": "8df1637972fa25c0e048a2e6c55aa87be95b81cdc8ba1cb9dcb49466dcec07ee"
+    },
+    {
+      "location": "public",
+      "filename": "ino-elevation-surface-alpha@2x.webp",
+      "bytes": 641574,
+      "sha256": "51f160fa45ad5a7203b3084f8bd17cb9f706b8bd2913abe6090efe0d268865d7"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ino-shape-shadow-alpha@2x.webp",
+      "bytes": 492002,
+      "sha256": "5c00088d4d9ac8810c99d0bedb33202b455944258b4a4ed688873a78dd29d34a"
+    },
+    {
+      "location": "public",
       "filename": "ino-shape-shadow@2x.webp",
       "bytes": 60940,
       "sha256": "e09fbf6cab8ce78944040b86a105098307a5d3fc7d2e437a3cc1c522dc9f254d"
+    },
+    {
+      "location": "public",
+      "filename": "ino-shape-surface-alpha@2x.webp",
+      "bytes": 484160,
+      "sha256": "a31f0b8c027880dafedb99be8a54582076277c4c5cac90aa492e499d0f7b5f0a"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "ino-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "ino-zimpol-surface-alpha@2x.webp",
+      "bytes": 592540,
+      "sha256": "bd48879c122347b0cd4230858cc979998d46eb0d0fe02dd211d238ddb5201201"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1364796,
-      "sha256": "a14d74dcbb00d62be58edd3b231c3cfb5d2d40993fbe50a34deccbd5c8a0fb7a"
+      "bytes": 1365564,
+      "sha256": "824122316e7c6bbaada177bea8ab5f9fbdeb3275dfd0c0512d9f2f70a8424672"
     },
     {
       "location": "prepared",

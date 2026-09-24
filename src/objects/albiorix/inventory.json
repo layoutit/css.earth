@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "albiorix-model-shadow-alpha@2x.webp",
+      "bytes": 139998,
+      "sha256": "ee1063a54941c259331f46014fa959ae86fe1b8ae64e0cbc5406dbb7a49f6aac"
+    },
+    {
+      "location": "public",
       "filename": "albiorix-model-shadow@2x.webp",
       "bytes": 22264,
       "sha256": "00a017080691e0f14c77638d9b572c914c2c1a4724d65ddeae1b70b940ec44a9"
+    },
+    {
+      "location": "public",
+      "filename": "albiorix-model-surface-alpha@2x.webp",
+      "bytes": 140842,
+      "sha256": "597b280b8704b461dd6e3fd0eb2b779c6fe6b1d632f489165e70ceeaf878609f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459615,
-      "sha256": "60ce0cf9defc4e298d244422433b7db9e97450fb7d603654aa6095717f8a583f"
+      "bytes": 460104,
+      "sha256": "dfe685fda03ae0ca69d7f515c9d14738f7e5461b02c272dac1bb26bc36c30089"
     },
     {
       "location": "prepared",

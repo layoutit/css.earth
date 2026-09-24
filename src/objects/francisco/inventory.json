@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "francisco-model-shadow-alpha@2x.webp",
+      "bytes": 132896,
+      "sha256": "6f1e62d223149b53a2dc446fd4e897e702ca644626cca383a1a92c6bcd90ccfd"
+    },
+    {
+      "location": "public",
       "filename": "francisco-model-shadow@2x.webp",
       "bytes": 21322,
       "sha256": "f2f8fdf70ee92822a232845d945e89c2bc046aa2b0b96c0fca610c01357f93c4"
+    },
+    {
+      "location": "public",
+      "filename": "francisco-model-surface-alpha@2x.webp",
+      "bytes": 134806,
+      "sha256": "732911003deae48126d8c564f761a67af31ee6143d3c588b36f8ab8c4755939c"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459183,
-      "sha256": "50427e7abdb1a2a4cbda45fd251cecfac4242151931902afd427bb3470f164a9"
+      "bytes": 459678,
+      "sha256": "d584f7e56f5b10c9673b1012006107c6e83c3ac40aa4e93906f9d4159b354ed1"
     },
     {
       "location": "prepared",

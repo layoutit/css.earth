@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "eva-elevation-shadow-alpha@2x.webp",
+      "bytes": 548452,
+      "sha256": "5052a6f9a37d17b6e416e3c7b49511ec1f1b04df2a2efb9409e4da2cd2564b72"
+    },
+    {
+      "location": "public",
       "filename": "eva-elevation-shadow@2x.webp",
       "bytes": 131840,
       "sha256": "1aa20c32e49ab6d963d4daf136937f0d08158ea86f7c576e8beba0f8221a51b4"
+    },
+    {
+      "location": "public",
+      "filename": "eva-elevation-surface-alpha@2x.webp",
+      "bytes": 591348,
+      "sha256": "c4c6ddb7357bc017040b56fd4aa65525b7f2118109e958f37f7fdb313dd9ecaf"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "eva-shape-shadow-alpha@2x.webp",
+      "bytes": 463184,
+      "sha256": "98efd85bc9b39e4520971b80f86d65f6a1c185719942ce2384f7771569ca9fb9"
+    },
+    {
+      "location": "public",
       "filename": "eva-shape-shadow@2x.webp",
       "bytes": 60640,
       "sha256": "6011d97d42ea95aa426a506a79c023c2e8cc8e64a4b4979490053fedfb54d55f"
+    },
+    {
+      "location": "public",
+      "filename": "eva-shape-surface-alpha@2x.webp",
+      "bytes": 457892,
+      "sha256": "c91ed8b8c2190430dbe6fa6a1ef2d2012f85c53b52b6127c378d4bd5f381c938"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 747953,
-      "sha256": "24f77c5c74ea1e253a6e4eacd7a7ef71d9775a4a7b8f48b66716d20c141a122c"
+      "bytes": 748858,
+      "sha256": "f8979c59b3df2704020102cebd4d4be415c528703aafbc4e79091415a7c5d9a5"
     },
     {
       "location": "prepared",

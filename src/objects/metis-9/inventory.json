@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "metis-9-elevation-shadow-alpha@2x.webp",
+      "bytes": 628578,
+      "sha256": "42c7fd08186edc7f4ba0e9c63a71d4867eeec2352fbcfbeadb147f38ffa922e4"
+    },
+    {
+      "location": "public",
       "filename": "metis-9-elevation-shadow@2x.webp",
       "bytes": 151904,
       "sha256": "a6f474194539d6a1d1228f8bb1299a50280672edf9ef63de00d54e2311d123ed"
+    },
+    {
+      "location": "public",
+      "filename": "metis-9-elevation-surface-alpha@2x.webp",
+      "bytes": 691628,
+      "sha256": "1841fb06f23f50472dfe8aeeb09a2392dafec1b7520c74fc1e8db19ef9cf8b64"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "metis-9-shape-shadow-alpha@2x.webp",
+      "bytes": 525294,
+      "sha256": "73ac47e54289cecf8d7803caf43bf29f3d004c189e577110fc9d103fbb24851b"
+    },
+    {
+      "location": "public",
       "filename": "metis-9-shape-shadow@2x.webp",
       "bytes": 63712,
       "sha256": "d64a59b1016ec8c31738f676e782821c426911abe5fde5c3d6c381fafc2ad692"
+    },
+    {
+      "location": "public",
+      "filename": "metis-9-shape-surface-alpha@2x.webp",
+      "bytes": 518740,
+      "sha256": "b2ca955bbb7cefca3564ba5ddfb121ece23dba7ba288038e9dc6de651c75cd70"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "metis-9-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "metis-9-zimpol-surface-alpha@2x.webp",
+      "bytes": 590070,
+      "sha256": "ddeb0e8102a90cffa0251b2f8d17516f7ee8efa5119568980e9b792ce14e656d"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1379931,
-      "sha256": "9cd64b0d843754322893bc9e5338baf2460374a0044f18ab4388885a52852e11"
+      "bytes": 1380739,
+      "sha256": "5579b1a0a3c139332f8e751ac76fe50635240f82221ed055dae2c2df049a3c71"
     },
     {
       "location": "prepared",

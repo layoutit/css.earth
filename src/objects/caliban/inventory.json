@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "caliban-model-shadow-alpha@2x.webp",
+      "bytes": 141848,
+      "sha256": "382b26aa4c14b39bbc22569cb8572e3180e108f58fd0da62d10a28bb9bd360d4"
+    },
+    {
+      "location": "public",
       "filename": "caliban-model-shadow@2x.webp",
       "bytes": 21922,
       "sha256": "8a31e5aa2bb322f4030fb70c2a92f785d7003623752ca2fd3827f46493a83cc4"
+    },
+    {
+      "location": "public",
+      "filename": "caliban-model-surface-alpha@2x.webp",
+      "bytes": 143916,
+      "sha256": "62b6d6aa93a5de3d8d759e20295592f1188a5d2290741a1cd5bbd6e3ce44c4e0"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459487,
-      "sha256": "319ab82e7c2490f9a5a674736820b637ea9c33c3638036f98891eefc1fbd56c4"
+      "bytes": 459970,
+      "sha256": "68ed592a9ec9f37712351406ee8ddf7d5aa546658073b9d290fcce06c73a596c"
     },
     {
       "location": "prepared",

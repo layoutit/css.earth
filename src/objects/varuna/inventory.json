@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "varuna-model-shadow-alpha@2x.webp",
+      "bytes": 135306,
+      "sha256": "aff6e5c597c06b9b123456c0eebe04385afd8458266cfb0d8d5d7d7a1acdb35d"
+    },
+    {
+      "location": "public",
       "filename": "varuna-model-shadow@2x.webp",
       "bytes": 18212,
       "sha256": "95360ea10e35a07dc13eef332fe52abf9445ccbb264f888fe6b25b3d2abc5db1"
+    },
+    {
+      "location": "public",
+      "filename": "varuna-model-surface-alpha@2x.webp",
+      "bytes": 139102,
+      "sha256": "c3a557e6ce2126a81ca26b286329b52f5e4e2a54f143f385edb67df84604122a"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457093,
-      "sha256": "7f79997e38df8913d44ebd3ea1bc1a1ea31db795a2909f0158963768dfb62b38"
+      "bytes": 457433,
+      "sha256": "60f581ee8ceb553942c50ae469ec9f6c77c633298016e1e850978bd4c0d90b94"
     },
     {
       "location": "prepared",

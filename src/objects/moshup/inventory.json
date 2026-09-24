@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "moshup-elevation-shadow-alpha@2x.webp",
+      "bytes": 646542,
+      "sha256": "c3e2c2be97743ac2b293a2e5a7d8e986e354fb072990672cea8c6f9186a0d881"
+    },
+    {
+      "location": "public",
       "filename": "moshup-elevation-shadow@2x.webp",
       "bytes": 168972,
       "sha256": "501b92e1b9e772fa15b1b81c717855a7496920e5029a3a98b28d5e5094eef569"
+    },
+    {
+      "location": "public",
+      "filename": "moshup-elevation-surface-alpha@2x.webp",
+      "bytes": 743576,
+      "sha256": "80baf4f3e0416f80694ebe37b58d4344032c8e866385457eaab328bded9e4c94"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "moshup-shape-shadow-alpha@2x.webp",
+      "bytes": 532474,
+      "sha256": "aff6e0c08f60f3e01f80853b305ab6a72fe5847724cce30bf3f5f85253d16e7b"
+    },
+    {
+      "location": "public",
       "filename": "moshup-shape-shadow@2x.webp",
       "bytes": 62798,
       "sha256": "1a4b853a7328bb7dd9227adc3a0255e949fc33c7fa89e4cbf430649e03c3d8ea"
+    },
+    {
+      "location": "public",
+      "filename": "moshup-shape-surface-alpha@2x.webp",
+      "bytes": 525068,
+      "sha256": "f5f34982264dbb9ec52aedcfe38220625c2fec1cb53ffb473dbf7ee7f0bb894f"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 747976,
-      "sha256": "a494cc09d7a1bf817f8b03d265794bc67da65ee2f383ee9685d9ef9d0e73ba4f"
+      "bytes": 748628,
+      "sha256": "a07607761d401ae1ed8d2cc6e133ef05513c60c7288f74a2634dc44bb767eceb"
     },
     {
       "location": "prepared",

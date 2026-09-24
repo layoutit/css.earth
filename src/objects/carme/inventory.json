@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "carme-model-shadow-alpha@2x.webp",
+      "bytes": 125390,
+      "sha256": "3866b574980097072f748e006da9e3c15869cab6cf6be1aa6faadd67a57adf12"
+    },
+    {
+      "location": "public",
       "filename": "carme-model-shadow@2x.webp",
       "bytes": 20846,
       "sha256": "0b452b1a31cb7e012a7ff0c9e07d86e20fc79dc4f03dbed3fe30544be6c773a6"
+    },
+    {
+      "location": "public",
+      "filename": "carme-model-surface-alpha@2x.webp",
+      "bytes": 128498,
+      "sha256": "6e46adfe0263cf446922f4659b6cda407602f9a6fb246ebd201019462c329e35"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457855,
-      "sha256": "ba07a31989fb459a07bb296deb6d6bde921f962edd21bc63b04a16c15342479e"
+      "bytes": 458326,
+      "sha256": "626ceb17c91d6c0c9caf007a2181229961989a7cf66fdd97b902c128f100647b"
     },
     {
       "location": "prepared",

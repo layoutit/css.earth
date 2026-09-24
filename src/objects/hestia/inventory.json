@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hestia-elevation-shadow-alpha@2x.webp",
+      "bytes": 585886,
+      "sha256": "0f6177b906684128a5f8b66e9f192061a6b8c647c3f162520bb0b3e29227c679"
+    },
+    {
+      "location": "public",
       "filename": "hestia-elevation-shadow@2x.webp",
       "bytes": 134934,
       "sha256": "82d64fb47e3a626b5495f64c7866ddab0fffb91494a2a60da09b59e242cd6969"
+    },
+    {
+      "location": "public",
+      "filename": "hestia-elevation-surface-alpha@2x.webp",
+      "bytes": 623940,
+      "sha256": "fea0cb33f306253b36d283e08ffbed1285e81b1357bf90124a4e7561f6c45978"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hestia-shape-shadow-alpha@2x.webp",
+      "bytes": 500208,
+      "sha256": "519ad672d75f9ad5054195c5aa8deacc9aab1fd016a06706b042ea5c5101dfec"
+    },
+    {
+      "location": "public",
       "filename": "hestia-shape-shadow@2x.webp",
       "bytes": 60336,
       "sha256": "112967b32434f40f4dd8b69e56220ec1597a13f9e5c3b928ed815599994b1272"
+    },
+    {
+      "location": "public",
+      "filename": "hestia-shape-surface-alpha@2x.webp",
+      "bytes": 492758,
+      "sha256": "bc616282cc35ee49076dc4e94f48b1c2ee667d75b9f788ba09b5045945ecc7dd"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750183,
-      "sha256": "f0ceb8073a5c116e2f19063a0283950da5a76054185dd6108108a557b3abcfba"
+      "bytes": 750835,
+      "sha256": "c7847ddeff7c77e466ec21b1c2a158e1a3bca9d141051b24e2b4576b3e660b12"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "dike-elevation-shadow-alpha@2x.webp",
+      "bytes": 597300,
+      "sha256": "043a3601b1042e3c99e67c9b6b6ff69b000aab36f9714d309230cf59e7cf4e9a"
+    },
+    {
+      "location": "public",
       "filename": "dike-elevation-shadow@2x.webp",
       "bytes": 158850,
       "sha256": "0cc30176f40c6d289516cded7a7c32d976f80219e2de39653129a757f9b376cb"
+    },
+    {
+      "location": "public",
+      "filename": "dike-elevation-surface-alpha@2x.webp",
+      "bytes": 654654,
+      "sha256": "61a922e40b14a08b32862f0d25b7ae0c7e2fb8647fc0dd64ce7100b61ab91507"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "dike-shape-shadow-alpha@2x.webp",
+      "bytes": 491230,
+      "sha256": "debd7e8b3ea3dae832f23253833d464eac7ebf744f2c5fd5ec2c4ada27b66650"
+    },
+    {
+      "location": "public",
       "filename": "dike-shape-shadow@2x.webp",
       "bytes": 61116,
       "sha256": "e0f128de3a72e1e03099c516e5d0756345b666cda87974ce792c141adc02da62"
+    },
+    {
+      "location": "public",
+      "filename": "dike-shape-surface-alpha@2x.webp",
+      "bytes": 487266,
+      "sha256": "f7c20f065e222b466fd3490feb11b2d1fce567d550992e4a94f4a46248e77b04"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748429,
-      "sha256": "ec47387ea490e1361bddaed755a3305930469f2d9e948d1aa016eed4c7254355"
+      "bytes": 749346,
+      "sha256": "e9eb797011e7651ac604a1944a1bd55b46ee34350d29393de2359f30b49a289a"
     },
     {
       "location": "prepared",

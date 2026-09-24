@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "medusa-elevation-shadow-alpha@2x.webp",
+      "bytes": 476704,
+      "sha256": "e89fd3ab1ad2043256c64d8e07be52d1e9565d316126067a9e3d1abc131001e8"
+    },
+    {
+      "location": "public",
       "filename": "medusa-elevation-shadow@2x.webp",
       "bytes": 126866,
       "sha256": "4545c0a91541ba7f8c345c59872a1ddb4d3c7878a3b08c9615d3a5064be91bf2"
+    },
+    {
+      "location": "public",
+      "filename": "medusa-elevation-surface-alpha@2x.webp",
+      "bytes": 522272,
+      "sha256": "5391395ffb1fd75b3bd6d0e15ecdaf90e5eb4cda8923ef40f8dc54b7b353425c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "medusa-shape-shadow-alpha@2x.webp",
+      "bytes": 394420,
+      "sha256": "fb766233f3eb9306882a417aca5427bb653a04dd00c6d33cafe6b7aa0be69e94"
+    },
+    {
+      "location": "public",
       "filename": "medusa-shape-shadow@2x.webp",
       "bytes": 56964,
       "sha256": "b8248dd8debf9e6156e949c46e83861189f2410efadee383280358dd1d3b69ff"
+    },
+    {
+      "location": "public",
+      "filename": "medusa-shape-surface-alpha@2x.webp",
+      "bytes": 384638,
+      "sha256": "718572648982c5c2c2e62dfd1b69b12376e09abc0f844340a6013e173e0eafda"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750235,
-      "sha256": "375abf31429c0863fec48a03d06e77c909c6a9e822ae0062c7f4905c8123d0bc"
+      "bytes": 750887,
+      "sha256": "290e5aed6f2d5371d7a3b7cc0dd70815dcf369983f2ed53d29597123a81fbd0f"
     },
     {
       "location": "prepared",

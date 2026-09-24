@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ida-calibrated-shadow-alpha@2x.webp",
+      "bytes": 604566,
+      "sha256": "fb7a7cfc5021bb8b31b29758e8674fb4f17944e4de679c1df0bb14bd33b06476"
+    },
+    {
+      "location": "public",
       "filename": "ida-calibrated-shadow@2x.webp",
       "bytes": 142380,
       "sha256": "0f8cb7883589961d8d663f7bdf76dab9ee9986eb3546f9dfe161d6813020a616"
+    },
+    {
+      "location": "public",
+      "filename": "ida-calibrated-surface-alpha@2x.webp",
+      "bytes": 616524,
+      "sha256": "a9183f2f8f99381eb3dd5e3c97ae0f4872e5008fce9aa4ebde5c0d8666dd80c1"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ida-elevation-shadow-alpha@2x.webp",
+      "bytes": 632416,
+      "sha256": "8cc41f3c4e0f57419cb504e1f030fd1aa25c04076898f9ad3c9f85520df3c617"
+    },
+    {
+      "location": "public",
       "filename": "ida-elevation-shadow@2x.webp",
       "bytes": 145680,
       "sha256": "060775bd0a330bc99293ac8a39cef00fd7320dfb03af57f7f10e15fb662ff2d2"
+    },
+    {
+      "location": "public",
+      "filename": "ida-elevation-surface-alpha@2x.webp",
+      "bytes": 703270,
+      "sha256": "09e11ceab15e89d2e914f9d31511e647bcff4660ce327a30788dc1ceb45604f7"
     },
     {
       "location": "public",
@@ -51,6 +75,12 @@
     },
     {
       "location": "public",
+      "filename": "ida-filter-color-surface-alpha@2x.webp",
+      "bytes": 645044,
+      "sha256": "7341f8e9f9596a56ff23feb163b53ed830c67ce2015e2e3610268083ff1ed6e6"
+    },
+    {
+      "location": "public",
       "filename": "ida-filter-color-surface@2x.webp",
       "bytes": 187702,
       "sha256": "27afc1763025bd0ba18ef314e93d8837e93ed52f1a074d08c9ac2cc09720b0c1"
@@ -63,9 +93,21 @@
     },
     {
       "location": "public",
+      "filename": "ida-normal-shadow-alpha@2x.webp",
+      "bytes": 771622,
+      "sha256": "f6ee2f80cc033b8564ff9946e344d2e7a0271163d197adca1fd3e1f07371c938"
+    },
+    {
+      "location": "public",
       "filename": "ida-normal-shadow@2x.webp",
       "bytes": 530640,
       "sha256": "6dde80162437f6c0dbce8784329a549f6e2e3edb2ded7c5cef32c550b6cc90d2"
+    },
+    {
+      "location": "public",
+      "filename": "ida-normal-surface-alpha@2x.webp",
+      "bytes": 917360,
+      "sha256": "4a68ee62c33e41f4327b468c2dba04c3c4cee73c1d24afe7753cb8a5735543a7"
     },
     {
       "location": "public",
@@ -148,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748713,
-      "sha256": "e1eb3f5503bc7a29f2bd5eafbd1b69e18bd53d10cf839a1273fbc0774083eeb5"
+      "bytes": 749821,
+      "sha256": "27d328b6b8a59d52915d47c686e88b12a5e3e34e3bc76b643c738b804b69e689"
     },
     {
       "location": "prepared",

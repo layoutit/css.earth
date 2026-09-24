@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "loge-model-shadow-alpha@2x.webp",
+      "bytes": 138390,
+      "sha256": "0c895b170077aeb52f666d1b2039cadfd54bb883d5ad24b416ffc04d7e100aa7"
+    },
+    {
+      "location": "public",
       "filename": "loge-model-shadow@2x.webp",
       "bytes": 21216,
       "sha256": "6c254fbc17f3bab7adac22253c6eba20de1d56863e1eb48cd31b1f6d4203ce3d"
+    },
+    {
+      "location": "public",
+      "filename": "loge-model-surface-alpha@2x.webp",
+      "bytes": 141228,
+      "sha256": "fd25444e00bf470096f2d9d4769e9c46575b2f0bca4a1ce3fbb23532a2c2bd5f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457744,
-      "sha256": "c4993766034a80b477c9229a886fdf8ad8010ab677132290b4e53474579d9e2c"
+      "bytes": 458076,
+      "sha256": "0a70c2f911e9961b9190cdef018102bc55008de6593d53980f656fffe50baa0c"
     },
     {
       "location": "prepared",

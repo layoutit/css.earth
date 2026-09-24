@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hera-elevation-shadow-alpha@2x.webp",
+      "bytes": 531188,
+      "sha256": "475b5677422c911797c82cf726a83ae712d788f7a5cb3f2e0b210fea1b873d3a"
+    },
+    {
+      "location": "public",
       "filename": "hera-elevation-shadow@2x.webp",
       "bytes": 139138,
       "sha256": "4c8037af1281775412220b78bf820358a05ac10a879e077c430d0bbd635558b3"
+    },
+    {
+      "location": "public",
+      "filename": "hera-elevation-surface-alpha@2x.webp",
+      "bytes": 572014,
+      "sha256": "209d5d2f70eb11e4532afe979e04f9c343dfeb84130872b437d5c0694e518814"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hera-shape-shadow-alpha@2x.webp",
+      "bytes": 442902,
+      "sha256": "bd8940d85bc4bfbfb493e0b742a4e751e44f94c50f4868e9e4e05b3e50acaf78"
+    },
+    {
+      "location": "public",
       "filename": "hera-shape-shadow@2x.webp",
       "bytes": 60128,
       "sha256": "435df86cccf8109ec55b5bfd10d3965289803e05a10726b6f9cb2cb36302b856"
+    },
+    {
+      "location": "public",
+      "filename": "hera-shape-surface-alpha@2x.webp",
+      "bytes": 434426,
+      "sha256": "7fdaeb3dce01b22ca176c123d72d4f61b2fc0586c46e6f5899a7e4abbe00cc8f"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 747916,
-      "sha256": "73ada15164ab0d9c0303844055fc9c6f3927a44ff2dd8a34b55c7adef9cd710a"
+      "bytes": 748552,
+      "sha256": "0c24acefd99508091876d87f8ed37cd2a867818550c643ab2fa6062c4d56bee2"
     },
     {
       "location": "prepared",

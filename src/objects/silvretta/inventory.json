@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "silvretta-elevation-shadow-alpha@2x.webp",
+      "bytes": 539812,
+      "sha256": "f0ee73fc4baa2901b2b0914db8a88750229e5583f95a89a975f8a842c5c3f1e3"
+    },
+    {
+      "location": "public",
       "filename": "silvretta-elevation-shadow@2x.webp",
       "bytes": 147580,
       "sha256": "596e202a2c170aad6f1ed6a777b56d06915723a5f1b78efca798462829f0139e"
+    },
+    {
+      "location": "public",
+      "filename": "silvretta-elevation-surface-alpha@2x.webp",
+      "bytes": 599490,
+      "sha256": "6121cc19010d3711e65d7e0bef66f31142c5f72625645d791b21b391d3f5555c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "silvretta-shape-shadow-alpha@2x.webp",
+      "bytes": 440838,
+      "sha256": "60289a6c9486d1bf216cedf10d2c0e5aa9c2bd2e3820f6290d249dddb39396b6"
+    },
+    {
+      "location": "public",
       "filename": "silvretta-shape-shadow@2x.webp",
       "bytes": 58998,
       "sha256": "d4006e16174a516336d5e7a9ff6f4b095334c2781fe04f7f5788716b084335ef"
+    },
+    {
+      "location": "public",
+      "filename": "silvretta-shape-surface-alpha@2x.webp",
+      "bytes": 432478,
+      "sha256": "1b8bf4ecce8b05c9559df12e9d47ebba854ca3d86048ea14bba2eca0569bef8b"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751875,
-      "sha256": "1f8fa35a4265ccd1829c769410a739e2badaff5948e963e9e45249eed9f5d25f"
+      "bytes": 752551,
+      "sha256": "5ee542934ad75be98a9bb52689496be561784fd2e33899984bab3697b2a2bcb0"
     },
     {
       "location": "prepared",

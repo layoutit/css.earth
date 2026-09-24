@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "methone-normal-shadow-alpha@2x.webp",
+      "bytes": 153588,
+      "sha256": "9db542e2fe13f5fb9f9859999d6ec77351b930f431d378a3ff68fb81386130fe"
+    },
+    {
+      "location": "public",
       "filename": "methone-normal-shadow@2x.webp",
       "bytes": 35756,
       "sha256": "6941ea0be80b10095b366d7caeadc0dd71c87a0fc917be55221762332ac129eb"
+    },
+    {
+      "location": "public",
+      "filename": "methone-normal-surface-alpha@2x.webp",
+      "bytes": 157680,
+      "sha256": "e39574e106c4eb5f25aef62bec1d6e49d461d719c6ebaa886cdbc347ab1fedd9"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458405,
-      "sha256": "37b89cd9e653cb557faa4f84a89cf2822fbf1dc60870f2638dacad6e77c59bf8"
+      "bytes": 458757,
+      "sha256": "c11485a9456a7dfd6a8064158f518d3fb8e11b6b4a1c04ba07cc11ac9f54dc46"
     },
     {
       "location": "prepared",

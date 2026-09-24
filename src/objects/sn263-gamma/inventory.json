@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sn263-gamma-shape-shadow-alpha@2x.webp",
+      "bytes": 221050,
+      "sha256": "4e528a94dce5fd9cc505501cf4302285014a70012c0784563bcfc6df444d37dc"
+    },
+    {
+      "location": "public",
       "filename": "sn263-gamma-shape-shadow@2x.webp",
       "bytes": 26410,
       "sha256": "2094c8683c96755cd249d7a40b4ba400bbbe4f2c94d27e876fdad39794e46bdf"
+    },
+    {
+      "location": "public",
+      "filename": "sn263-gamma-shape-surface-alpha@2x.webp",
+      "bytes": 215720,
+      "sha256": "0a9d771224adc914e0cc168f43427dd39e25e6091a550fc6468afc8f0f749a8b"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 745383,
-      "sha256": "08654fa01c02f9675b632de69bbeda6ebd359e3019e418e7a221ac755a853f16"
+      "bytes": 745743,
+      "sha256": "c1820cfb08c0d430794692b5c60251dab41f15c06a03a5b3659bb63b5aa71306"
     },
     {
       "location": "prepared",

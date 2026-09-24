@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "protogeneia-elevation-shadow-alpha@2x.webp",
+      "bytes": 547798,
+      "sha256": "78502cc8d337b3054ba17d503c829d5c07cf97f7116292518e5d508ef595e6db"
+    },
+    {
+      "location": "public",
       "filename": "protogeneia-elevation-shadow@2x.webp",
       "bytes": 131370,
       "sha256": "b9ba298addc3d657431bbdd127cbafdaf8df523c720c75e5a8cf88a4217d90a1"
+    },
+    {
+      "location": "public",
+      "filename": "protogeneia-elevation-surface-alpha@2x.webp",
+      "bytes": 593330,
+      "sha256": "39db7019e46fbb085f90f70abd18bfbff447ba634ad64ae2000bd8ebc238fcfe"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "protogeneia-shape-shadow-alpha@2x.webp",
+      "bytes": 464888,
+      "sha256": "b22a9ca95355bc493ed4bd0d50c88bfbe3a4de708e973e38ee28ecc37199997c"
+    },
+    {
+      "location": "public",
       "filename": "protogeneia-shape-shadow@2x.webp",
       "bytes": 58504,
       "sha256": "6764f0377412e71dd9465678af5d510a23a85cc2d8d41ef96308c49559a45d70"
+    },
+    {
+      "location": "public",
+      "filename": "protogeneia-shape-surface-alpha@2x.webp",
+      "bytes": 455306,
+      "sha256": "a6941db31f9a2221825f0effe2361656052b4cf0e2a1da0ee52a7da7765eefaf"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 753516,
-      "sha256": "11aff2cac1763502bd8c6484a6e02a65330ff0baabff3cff73cb420def6aabe2"
+      "bytes": 754208,
+      "sha256": "79d46bf54d8467104e244981fd94cc9065f355dc94fd2ed270078414995323c0"
     },
     {
       "location": "prepared",

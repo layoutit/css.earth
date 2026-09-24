@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "braille-model-shadow-alpha@2x.webp",
+      "bytes": 128286,
+      "sha256": "af3b6d1591e8657bea3dc685ee2a8ce09344c4cbc39575127d54c342e9fe957b"
+    },
+    {
+      "location": "public",
       "filename": "braille-model-shadow@2x.webp",
       "bytes": 19322,
       "sha256": "c6d84635c50dcd0379979af9073cfe26d74451487e3a3ce905f91d17ef20adfe"
+    },
+    {
+      "location": "public",
+      "filename": "braille-model-surface-alpha@2x.webp",
+      "bytes": 131692,
+      "sha256": "b2406138984e75e3f0151812502bd96f423135c6137dc162b928dac39ab07ae3"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458283,
-      "sha256": "3f37261f9205963c9f3cae3902f8d8e90bf51eaf10f4157db93d1bc4bcf6b72d"
+      "bytes": 458766,
+      "sha256": "09f1bc69eedc9cb5554a6129eb60757e8a2624915b1c611654299d66739fc59c"
     },
     {
       "location": "prepared",

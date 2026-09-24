@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hyrrokkin-model-shadow-alpha@2x.webp",
+      "bytes": 144626,
+      "sha256": "444bb7836d3483187d087db4ef8749b5db4ca01b9831ec460e3ecf25406adb77"
+    },
+    {
+      "location": "public",
       "filename": "hyrrokkin-model-shadow@2x.webp",
       "bytes": 22198,
       "sha256": "f4e2a152538edbf792cf1bf87eaae71dffd04050f3a3bfd4ee27e571bfbabf18"
+    },
+    {
+      "location": "public",
+      "filename": "hyrrokkin-model-surface-alpha@2x.webp",
+      "bytes": 147000,
+      "sha256": "ebb5168a5adb317df48e12eccb5a63f6fa1a7a0a3c3162baec62ba565b74b52f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 460439,
-      "sha256": "924c1155132f1ee94b231e5ef565d95131a785339b67a91a08b3df619e32e00f"
+      "bytes": 460791,
+      "sha256": "49cb9a7a32b17c1918f50c60f9562e5139dc7171df62a933ef71dc0675c24d3a"
     },
     {
       "location": "prepared",

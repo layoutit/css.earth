@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "nereus-elevation-shadow-alpha@2x.webp",
+      "bytes": 634876,
+      "sha256": "bd1091cb9e795238c123a8ebfd2f01eb7bb527d4b2bb38d5611a10a0cf45df07"
+    },
+    {
+      "location": "public",
       "filename": "nereus-elevation-shadow@2x.webp",
       "bytes": 144340,
       "sha256": "a7309ec9d7710ab21503566c7fc9b1029b8227b3c36fefee2457ea6b43ad463c"
+    },
+    {
+      "location": "public",
+      "filename": "nereus-elevation-surface-alpha@2x.webp",
+      "bytes": 691472,
+      "sha256": "9ca2af74346f8e3ef7cac087defa1e6f82b080f0b930db456bdb58351e9cc6a1"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "nereus-shape-shadow-alpha@2x.webp",
+      "bytes": 533258,
+      "sha256": "c187662191d93f5d1cb67e3c90edd1c0f0e116258efc715714755db6d096574d"
+    },
+    {
+      "location": "public",
       "filename": "nereus-shape-shadow@2x.webp",
       "bytes": 63930,
       "sha256": "3211f120ed6afbc161eea11f68b4a8b0aea5ebb69d0aa0f5436a1653168fec1d"
+    },
+    {
+      "location": "public",
+      "filename": "nereus-shape-surface-alpha@2x.webp",
+      "bytes": 527118,
+      "sha256": "3a0cf105fa01e7be224a23948c88672bee9bc30216efd16378e648cc7c3af8a0"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 755634,
-      "sha256": "00e547671e78ed2c60d13f08526a11b2336a643118c945026d2df71f024952a6"
+      "bytes": 756286,
+      "sha256": "7b51b1d56c96e7361a089793ecc72bf4787361c37ef3afb11c0249d5e6865463"
     },
     {
       "location": "prepared",

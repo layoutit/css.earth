@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "yorp-elevation-shadow-alpha@2x.webp",
+      "bytes": 430316,
+      "sha256": "3b7a49640dd8984a064e21346879153d2280366447995518a616d68e5b7e1445"
+    },
+    {
+      "location": "public",
       "filename": "yorp-elevation-shadow@2x.webp",
       "bytes": 117026,
       "sha256": "e03cbaaba8c68d509ade377d37129628c8240d5f108d39b076f7897190cfa76e"
+    },
+    {
+      "location": "public",
+      "filename": "yorp-elevation-surface-alpha@2x.webp",
+      "bytes": 470212,
+      "sha256": "2c3026ca012bd59f35538775b93332d69f5a0f54636d5911291f53e67b774f7c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "yorp-shape-shadow-alpha@2x.webp",
+      "bytes": 349208,
+      "sha256": "d2898936c17b6e2213d33c0f4174cf98f2edb1b7b4eefa884781356aa1156df6"
+    },
+    {
+      "location": "public",
       "filename": "yorp-shape-shadow@2x.webp",
       "bytes": 50964,
       "sha256": "abe8fc63318302cd4e00b79679521a199f5848808eb78f66fd7045426b70e6d2"
+    },
+    {
+      "location": "public",
+      "filename": "yorp-shape-surface-alpha@2x.webp",
+      "bytes": 344522,
+      "sha256": "1e977e4a1ae62bf9fee098f4cc60b61d3515449d911b610a5fd9d9856bc86cca"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 536763,
-      "sha256": "568c5fa92656ec0d42e65ec1efccbe71779d58dd77340aadb241a868eb80b575"
+      "bytes": 537399,
+      "sha256": "612290cd94d48b966715410ca7eaa50bc26f2093c04c06f18762470285a37060"
     },
     {
       "location": "prepared",

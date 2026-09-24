@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "lucina-elevation-shadow-alpha@2x.webp",
+      "bytes": 615396,
+      "sha256": "9056b1d9decda619e27c6df08684de3b4b2b83e635f7d6c9623fdb5b73ffcf23"
+    },
+    {
+      "location": "public",
       "filename": "lucina-elevation-shadow@2x.webp",
       "bytes": 149090,
       "sha256": "96d2e2b7e1b7d0cc4a5465547b810a91b75f25f00867d6bdd961a50a0e9c3dbc"
+    },
+    {
+      "location": "public",
+      "filename": "lucina-elevation-surface-alpha@2x.webp",
+      "bytes": 654418,
+      "sha256": "0b57b14a941ba494e0d44c8b1b63307ccf85066e6df3bda5c4fd5eec737ab2b8"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "lucina-shape-shadow-alpha@2x.webp",
+      "bytes": 514250,
+      "sha256": "d46f82453f75f7988325da67ffd59ba110ce2490e8256c5627cace2a4117285b"
+    },
+    {
+      "location": "public",
       "filename": "lucina-shape-shadow@2x.webp",
       "bytes": 61418,
       "sha256": "3fc3c423e13d9343127259c51015aa6bb60ebe51d052f5fba87f0f4205e264b1"
+    },
+    {
+      "location": "public",
+      "filename": "lucina-shape-surface-alpha@2x.webp",
+      "bytes": 508640,
+      "sha256": "ca4adacf2fdb22b56fe1d78318ecf0ff9240d1d5d5934376abe14adbb83d5b9e"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 765434,
-      "sha256": "52c792f50ae12f52574b27dba51f5d7bc8adcddd8f81128ded4d1d998b62baeb"
+      "bytes": 766086,
+      "sha256": "e0b59269d960defa4d8b21e4164db8428a4de96d5d0e94069023a9b91bc29ec8"
     },
     {
       "location": "prepared",

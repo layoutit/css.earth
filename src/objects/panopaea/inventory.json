@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "panopaea-elevation-shadow-alpha@2x.webp",
+      "bytes": 599426,
+      "sha256": "630c99ae5e009b77f16dfc5dde64093385b3bc30398a536ac424073b56db0b4a"
+    },
+    {
+      "location": "public",
       "filename": "panopaea-elevation-shadow@2x.webp",
       "bytes": 136376,
       "sha256": "f296778f45c96a938607e342f85be7b3ae5b4149bc8b7f9fd508568e2a5f9be2"
+    },
+    {
+      "location": "public",
+      "filename": "panopaea-elevation-surface-alpha@2x.webp",
+      "bytes": 665864,
+      "sha256": "856a5d6f91a17c89a6acc67bd8a92ac48abff57be92e48631b02f08c8fab5650"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "panopaea-shape-shadow-alpha@2x.webp",
+      "bytes": 507352,
+      "sha256": "c21b128dff935edd7bbaae3b50a2cc482280535e66a2b15773166cf5e22e76fa"
+    },
+    {
+      "location": "public",
       "filename": "panopaea-shape-shadow@2x.webp",
       "bytes": 60304,
       "sha256": "5cb6e51159ea821bde3989e46760bbc0652ad61f73756a4b564401d6ed2201fb"
+    },
+    {
+      "location": "public",
+      "filename": "panopaea-shape-surface-alpha@2x.webp",
+      "bytes": 503422,
+      "sha256": "9b92e9558e2dc9c8a5bbcfd58bb416b8a21e63e767531cadbc7564ca084771a1"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 737592,
-      "sha256": "ae69023370368a0e4b773a9cf2554fcb030339e58727a6f6d7df4df0516e457d"
+      "bytes": 738260,
+      "sha256": "d9c4fc1311668bec554df62719dfacec20a6e0d1c39a251febb9202d5d18d809"
     },
     {
       "location": "prepared",

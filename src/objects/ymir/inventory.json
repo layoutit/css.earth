@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ymir-model-shadow-alpha@2x.webp",
+      "bytes": 107992,
+      "sha256": "ed68dabca54d2206d8c7332b850c5e29bc240fc5a6b04f180659b91f7606bfbd"
+    },
+    {
+      "location": "public",
       "filename": "ymir-model-shadow@2x.webp",
       "bytes": 18408,
       "sha256": "88b23e473464db1a1fabe022e1857fc1d814f8566de263244f42427535b1c1e2"
+    },
+    {
+      "location": "public",
+      "filename": "ymir-model-surface-alpha@2x.webp",
+      "bytes": 116334,
+      "sha256": "05c4f2fb86442b79b47e17e296fa4f5d1140719c88d877e19612f2753bff2110"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 448862,
-      "sha256": "739c5c13e57a2b3f35586fe1c7932a1f0be1b5698dc634d3c7d96631860806f2"
+      "bytes": 449194,
+      "sha256": "7a419c0000e58f95cfbccb77bbbd4ac1f528bcb4d7a57d1d7007ecf29f3a7ce1"
     },
     {
       "location": "prepared",

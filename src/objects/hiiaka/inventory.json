@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hiiaka-model-shadow-alpha@2x.webp",
+      "bytes": 139790,
+      "sha256": "fbcda72d66ac6a53272724b224b6b82201cd2c0f76052103c114326da744d80c"
+    },
+    {
+      "location": "public",
       "filename": "hiiaka-model-shadow@2x.webp",
       "bytes": 20720,
       "sha256": "ac91c98dbf70ed3631d23f751102457e9adda1d7115f92e65fc92af118383702"
+    },
+    {
+      "location": "public",
+      "filename": "hiiaka-model-surface-alpha@2x.webp",
+      "bytes": 142238,
+      "sha256": "a511ca58583fdf0285fdf81cc8a420f02e92bac35b5813d650573e1424cdcab2"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457365,
-      "sha256": "fc8ae9c5adbdc9997ea9d6b63cc80223a93887cdeb1ffecf82f4980c8c5db750"
+      "bytes": 457705,
+      "sha256": "1019d4b75dd8e8db60810e71a2b8ee830aca81192c4e9c51922e024849dfa068"
     },
     {
       "location": "prepared",

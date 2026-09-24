@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "salacia-model-shadow-alpha@2x.webp",
+      "bytes": 131372,
+      "sha256": "fbc106523fd19d2b5bda3632785f84c50e2c8b758e65a50250c751858372658e"
+    },
+    {
+      "location": "public",
       "filename": "salacia-model-shadow@2x.webp",
       "bytes": 21784,
       "sha256": "1dc8ddd258b59abd86d9bc5c13960c0b21ee301d108b29d58eed5fe65fa36067"
+    },
+    {
+      "location": "public",
+      "filename": "salacia-model-surface-alpha@2x.webp",
+      "bytes": 133400,
+      "sha256": "b34abc8bb287780050cf74a32ef4863d3268d14fd6e607ba1e4f6e8766e685c7"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458533,
-      "sha256": "0866fc3f24903db5b700f1882b62452e8cb2affd38cbb94320c2d090205dd830"
+      "bytes": 458877,
+      "sha256": "54ad065a33f5065baf6bceecb38ec31942a5aa77021ce16373571306f41662b4"
     },
     {
       "location": "prepared",

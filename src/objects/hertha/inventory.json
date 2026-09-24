@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hertha-elevation-shadow-alpha@2x.webp",
+      "bytes": 625042,
+      "sha256": "8b578e7a1ee8ea3ac4934597d80c1deda868b4db0d667c762b6d13fe45e6a2e3"
+    },
+    {
+      "location": "public",
       "filename": "hertha-elevation-shadow@2x.webp",
       "bytes": 118576,
       "sha256": "a35b1ff0fcd04030d27d6ae997bac6cdeb827663250e6fa2c619690661277ac0"
+    },
+    {
+      "location": "public",
+      "filename": "hertha-elevation-surface-alpha@2x.webp",
+      "bytes": 680882,
+      "sha256": "f4a64af0731df51db37ad49ed2df652ad7e1b752a41fc4131a1debf464f9d82a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hertha-shape-shadow-alpha@2x.webp",
+      "bytes": 545176,
+      "sha256": "3a6a5ed4f8e09a7a4625189b3cc06fe7764f253c0af2279eca09834971f6e100"
+    },
+    {
+      "location": "public",
       "filename": "hertha-shape-shadow@2x.webp",
       "bytes": 60056,
       "sha256": "0672526269f17edb14f3f0ddfda099eb4fe72f9bda1270d6eb49acaba4ddd9c8"
+    },
+    {
+      "location": "public",
+      "filename": "hertha-shape-surface-alpha@2x.webp",
+      "bytes": 539604,
+      "sha256": "5322810ce84703c09a53bbf78339da9a2ae52bc6fe382e84c86c09f97ef25ba7"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 762918,
-      "sha256": "646ad58c9384fb52dacd4d5c3e669eb6ed92ad5e9dd10a33f1d04298ad176b00"
+      "bytes": 763570,
+      "sha256": "ba8e38765f437669b9204777c83f4c6ef85e37f05eeb74e8e362267323e45506"
     },
     {
       "location": "prepared",

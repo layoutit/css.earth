@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "isis-elevation-shadow-alpha@2x.webp",
+      "bytes": 605438,
+      "sha256": "69735cb889e4df06c74b7ff9764b7cc484eb065fbf5faafa30b870d6927a5d3c"
+    },
+    {
+      "location": "public",
       "filename": "isis-elevation-shadow@2x.webp",
       "bytes": 131410,
       "sha256": "608a5012e40b56fcf878f83ead2542dbaeae99aacb54026c123767da073b74a4"
+    },
+    {
+      "location": "public",
+      "filename": "isis-elevation-surface-alpha@2x.webp",
+      "bytes": 655272,
+      "sha256": "10bb4ee807863eb895c0860702311c1bcdf8674c7693f2c58734cb1e1546bd26"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "isis-shape-shadow-alpha@2x.webp",
+      "bytes": 518764,
+      "sha256": "30a1a4bd756dfaa121419deb2e4f1dad2dd74101aef3226d8180f6efa15aa6c9"
+    },
+    {
+      "location": "public",
       "filename": "isis-shape-shadow@2x.webp",
       "bytes": 61148,
       "sha256": "8c2fe7ec5cd2564a9dd67bf50ef30e93fc120d976d038a2be8a84b75a2ab3412"
+    },
+    {
+      "location": "public",
+      "filename": "isis-shape-surface-alpha@2x.webp",
+      "bytes": 511866,
+      "sha256": "a10b4ad5309681e2320a6df9aeaa070e732a6bf17e7cb2a54199c964b5efa914"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 764163,
-      "sha256": "092d5c39eec421c80f71900d8bc1194b4042e3eefeef772fd93fdda93cb438c1"
+      "bytes": 764799,
+      "sha256": "f65823eb1b67e5185a9dfa69f7deecd201613c83398b922cc5d66ef583025790"
     },
     {
       "location": "prepared",

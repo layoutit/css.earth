@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ijiraq-model-shadow-alpha@2x.webp",
+      "bytes": 140262,
+      "sha256": "0f64d45fec7b97a1179375fe06bd8b5158599f3fc2c8aedbf3a228d9b162f9b0"
+    },
+    {
+      "location": "public",
       "filename": "ijiraq-model-shadow@2x.webp",
       "bytes": 21462,
       "sha256": "e17b859008a94ac9f32dbea8923a7324c98c17d0512f6601c5521adb2c4e1048"
+    },
+    {
+      "location": "public",
+      "filename": "ijiraq-model-surface-alpha@2x.webp",
+      "bytes": 141970,
+      "sha256": "e0d46e481595c93ff4f98de61498e8dd69f471faba6365e89a8ef0c6f57d4944"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458832,
-      "sha256": "9e6491c920be5b1dfd7e71cd2210a9ea6791790b954d7a3076e2a62b42a89442"
+      "bytes": 459172,
+      "sha256": "f01ae6821fe0039a371db937cee32317dd636c3b4168531674ded4189c591113"
     },
     {
       "location": "prepared",

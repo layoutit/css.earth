@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bianca-model-shadow-alpha@2x.webp",
+      "bytes": 144726,
+      "sha256": "67fde9fd5c98fc4ac66603a3d2169a88fce055dcd0ddaa2780dc5f7ebf82edf9"
+    },
+    {
+      "location": "public",
       "filename": "bianca-model-shadow@2x.webp",
       "bytes": 24456,
       "sha256": "d61092e8f939937924e31056cc83598bd4252261b6a6db2b4e0b706eede3755e"
+    },
+    {
+      "location": "public",
+      "filename": "bianca-model-surface-alpha@2x.webp",
+      "bytes": 144802,
+      "sha256": "4bb417217586ff0237f9fad7d639320fde5b946d35e6a253e5f2f29e01397ff2"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457867,
-      "sha256": "dde06a33fa11df3d557d4c83b6db306a9b2a76ca42f6a9e56c59dd6b6f8d827f"
+      "bytes": 458344,
+      "sha256": "c469451cd4f28d216290d37d87ea54933daf5af0537f51c4c74e82f682159002"
     },
     {
       "location": "prepared",

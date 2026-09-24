@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "metis-normal-shadow-alpha@2x.webp",
+      "bytes": 70100,
+      "sha256": "d8d3a0cd5817999f28eba83d9051bbe0bfff5942fd15c979ca62102a16b830b6"
+    },
+    {
+      "location": "public",
       "filename": "metis-normal-shadow@2x.webp",
       "bytes": 18390,
       "sha256": "fc5634638f6f7585a5d0f34347a3900bd13baf8d771f8105e2c7d5267a3bcfbb"
+    },
+    {
+      "location": "public",
+      "filename": "metis-normal-surface-alpha@2x.webp",
+      "bytes": 74592,
+      "sha256": "308b120745ae3e3b94ee6942120fa7909746fee23984da62d0b5dcb462c8f2d7"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 454829,
-      "sha256": "e8bd612eab0239643ab4d45e966f59cc196aede729c8e3e92d63746f11e457eb"
+      "bytes": 455173,
+      "sha256": "93afb21252f5e98727f44376bc553948bc9c2f7133bd6ee7f902f4ed49beb322"
     },
     {
       "location": "prepared",

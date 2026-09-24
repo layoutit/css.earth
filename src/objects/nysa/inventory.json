@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "nysa-elevation-shadow-alpha@2x.webp",
+      "bytes": 630418,
+      "sha256": "6b5688d46a75dd76e69f4f06d05c5a65701628d37c9b36a312bff8d8b84b4d65"
+    },
+    {
+      "location": "public",
       "filename": "nysa-elevation-shadow@2x.webp",
       "bytes": 136486,
       "sha256": "e683472c475b108101f5b3d8e564e7269626aa403627af3cccdf9ad0a9d4d024"
+    },
+    {
+      "location": "public",
+      "filename": "nysa-elevation-surface-alpha@2x.webp",
+      "bytes": 691230,
+      "sha256": "97cb7ab801f01ec93d74f1c19713da2ec591ae96c543764e9cf3fa3c70e20b9a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "nysa-shape-shadow-alpha@2x.webp",
+      "bytes": 542518,
+      "sha256": "9b920de3c75d2ffe259056558d27be502c31197de7cee2441cdad5d31086c692"
+    },
+    {
+      "location": "public",
       "filename": "nysa-shape-shadow@2x.webp",
       "bytes": 65958,
       "sha256": "2bd7326fbb217b618c40c3e90905a25cbd172467e1df084f7be53d0a2f006fbb"
+    },
+    {
+      "location": "public",
+      "filename": "nysa-shape-surface-alpha@2x.webp",
+      "bytes": 535536,
+      "sha256": "0a0a48cb441cbb46a74aebf141b491b1e7ceab02dc1b913906fa88f3c0c53dd0"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749583,
-      "sha256": "847c2337e01a45023d300ab2aad9e86c4f7cb7f0ab414c1e65598ffa8c651f9b"
+      "bytes": 750219,
+      "sha256": "52bb3ecf2e680c7dda667e4f0d25b553a061a03f88dbdddf9395c04f105fece2"
     },
     {
       "location": "prepared",

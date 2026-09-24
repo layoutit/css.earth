@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "tartaglia-elevation-shadow-alpha@2x.webp",
+      "bytes": 461436,
+      "sha256": "3ca7177ab96e5bcb55fe58561c18897d836eb578f6ecf9bb4e30c42786142ea4"
+    },
+    {
+      "location": "public",
       "filename": "tartaglia-elevation-shadow@2x.webp",
       "bytes": 115470,
       "sha256": "e0508ffb21d1733e84e52a52fb86d82e180adb711559e8895e4a0750065f3a04"
+    },
+    {
+      "location": "public",
+      "filename": "tartaglia-elevation-surface-alpha@2x.webp",
+      "bytes": 529722,
+      "sha256": "cbdf57ec32734b482dd5c8d0204aad7b02916fa92d95e5fbec5c26f5cb97595d"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "tartaglia-shape-shadow-alpha@2x.webp",
+      "bytes": 387126,
+      "sha256": "31113b93a44dd49db45d1c0af50a4ffcff90496b8bf29df4f0950e1ccfa4cd23"
+    },
+    {
+      "location": "public",
       "filename": "tartaglia-shape-shadow@2x.webp",
       "bytes": 51014,
       "sha256": "b2759b304ddefe9badf855c39fcbc2021184792ed021ece89b1ff246e793c6f6"
+    },
+    {
+      "location": "public",
+      "filename": "tartaglia-shape-surface-alpha@2x.webp",
+      "bytes": 385150,
+      "sha256": "839e06917671e960104a439d74be57725ea1b720641e1ed50074f044eab5b70d"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 752120,
-      "sha256": "1bde8b5e4de9a372f18dcdc2725aa06e8aeecb2f31e5243213353ccbf2ae3918"
+      "bytes": 752796,
+      "sha256": "a1b80384b4f6ec16f6489be3f34feaea2989d001da2547d4847e7803610aa4db"
     },
     {
       "location": "prepared",

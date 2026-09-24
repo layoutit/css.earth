@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mani-model-shadow-alpha@2x.webp",
+      "bytes": 125606,
+      "sha256": "87329ccdf4fecada0cfbc639c7aa2a028232d6f981ccdda569b50150f2d04453"
+    },
+    {
+      "location": "public",
       "filename": "mani-model-shadow@2x.webp",
       "bytes": 21518,
       "sha256": "41792ed1546c4c3e3cf15ae98ea49651e28e09bf0fd1c6a21dbd829357abd2cc"
+    },
+    {
+      "location": "public",
+      "filename": "mani-model-surface-alpha@2x.webp",
+      "bytes": 127220,
+      "sha256": "becc063805564285c86c8ca2fcd45f835736a703f53e6419c55b6bde35924749"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 455794,
-      "sha256": "86f90f37b434aa64c61196d360f863d9d809d57601575716e73923a69681c356"
+      "bytes": 456126,
+      "sha256": "d657d44002b5c3ae9ac2df92fb6c1271cfb1a160a5f35a182083428d91f6275c"
     },
     {
       "location": "prepared",

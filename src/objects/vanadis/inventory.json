@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "vanadis-elevation-shadow-alpha@2x.webp",
+      "bytes": 558812,
+      "sha256": "d3f5397f6855c3a598c769fc70c2edfaa915521cd7eba64ec9d8ad70c82f2a0a"
+    },
+    {
+      "location": "public",
       "filename": "vanadis-elevation-shadow@2x.webp",
       "bytes": 142198,
       "sha256": "fb52f56b53561a60dd339751149df4c6f26796877b93e69914c933103e0ca089"
+    },
+    {
+      "location": "public",
+      "filename": "vanadis-elevation-surface-alpha@2x.webp",
+      "bytes": 595930,
+      "sha256": "01bdb632adb62a2a97245cf3a868a7e00e63880dbcbab8e26223657d71d92385"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "vanadis-shape-shadow-alpha@2x.webp",
+      "bytes": 471664,
+      "sha256": "2a3dc219c3dac6bfe78c5de85e475eebb5818d314b659bbdba955cf8b4f87627"
+    },
+    {
+      "location": "public",
       "filename": "vanadis-shape-shadow@2x.webp",
       "bytes": 59578,
       "sha256": "c89c860b9cdcb2e8ad54b6ec7980b2881e6fd0d2be5ba6addbbea5dcd270e5e6"
+    },
+    {
+      "location": "public",
+      "filename": "vanadis-shape-surface-alpha@2x.webp",
+      "bytes": 463650,
+      "sha256": "34701896034ae05911463ea8ef27c2f38e51c2dca018a74c721cd971346d0338"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750938,
-      "sha256": "e881f889a533be83cabf96cbda6ed288c44a5f18d7ebb78d58edcd916193e313"
+      "bytes": 751598,
+      "sha256": "3a43bedc1195080841d9ff6237d9c2b8467da032a43a4d52579834a9852410a5"
     },
     {
       "location": "prepared",

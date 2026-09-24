@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "proserpina-elevation-shadow-alpha@2x.webp",
+      "bytes": 580126,
+      "sha256": "80c2f0f3dc686d4613993fb5c52726cf75acab3da8090195b2d28e7f10f9c68e"
+    },
+    {
+      "location": "public",
       "filename": "proserpina-elevation-shadow@2x.webp",
       "bytes": 154042,
       "sha256": "ac1a0b7e8eb862eea6c31c718d91341e968fe02d8e2bafbc5b522286ae6227be"
+    },
+    {
+      "location": "public",
+      "filename": "proserpina-elevation-surface-alpha@2x.webp",
+      "bytes": 635714,
+      "sha256": "5d15592b01575159b5268a612ae6bd7348b2606c118fb07ddd68b9fed8ec9d4b"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "proserpina-shape-shadow-alpha@2x.webp",
+      "bytes": 477096,
+      "sha256": "fa80d10110f9596dd3b9ce236c82c48efafc1061d7cbc871368659b56c694ef9"
+    },
+    {
+      "location": "public",
       "filename": "proserpina-shape-shadow@2x.webp",
       "bytes": 60982,
       "sha256": "aae18cfd9004b83a3f6bee30e78e5e61ae7ff86e871fbb4fa74d4d5568fa3ffc"
+    },
+    {
+      "location": "public",
+      "filename": "proserpina-shape-surface-alpha@2x.webp",
+      "bytes": 472580,
+      "sha256": "7dedf4f8e2246bcda8628e09319f8aa145415a78658b71dcbf2961b8931466e7"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 753340,
-      "sha256": "c603579e73e948ed89e4a73be5ddde94998a4a72cff39968968e8b47c0d7289c"
+      "bytes": 754024,
+      "sha256": "dd7c94ebe380d29d5ceb0900e68ce4558ab88d8f34d47a2c557999ff5f9a1d49"
     },
     {
       "location": "prepared",

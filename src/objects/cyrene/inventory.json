@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "cyrene-elevation-shadow-alpha@2x.webp",
+      "bytes": 623382,
+      "sha256": "16795cf43a4b95b5c455c4ca1d50889aa56ab7830b1d3387eaa8c682cac29763"
+    },
+    {
+      "location": "public",
       "filename": "cyrene-elevation-shadow@2x.webp",
       "bytes": 155776,
       "sha256": "0c450ddbf488c87d15cd3e4fc80ac217cd253af694998495764a7ae4045e6092"
+    },
+    {
+      "location": "public",
+      "filename": "cyrene-elevation-surface-alpha@2x.webp",
+      "bytes": 674990,
+      "sha256": "44bd39d6def207777723b138a9f56de85e38c535c2349003b4cfe27ec02b7e8e"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "cyrene-shape-shadow-alpha@2x.webp",
+      "bytes": 516406,
+      "sha256": "7ae322be0a289e605c032083484fa3bdef587d765579501c4049b752c4444310"
+    },
+    {
+      "location": "public",
       "filename": "cyrene-shape-shadow@2x.webp",
       "bytes": 61700,
       "sha256": "7033fa3d02db21ec8f3adf0cb325b4118f8c6b7b16a64ce7296bfb7fc48dd280"
+    },
+    {
+      "location": "public",
+      "filename": "cyrene-shape-surface-alpha@2x.webp",
+      "bytes": 510780,
+      "sha256": "be250ef67e18110d92fbf9edaca844627757b1e21e91167b326b44bd33965772"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750323,
-      "sha256": "b03c3a214072afdbef56720171afc0c22de6c9958a030c29991e3d4a3be353ab"
+      "bytes": 751264,
+      "sha256": "aea275fb75715552d4d8b158646378a260df649c9ba6bb748e10913340640bbf"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "psamathe-model-shadow-alpha@2x.webp",
+      "bytes": 124410,
+      "sha256": "060ca8e8160a0ea1ef0256b0865ae90e2d91e56276370fd4ff82fe85e078b338"
+    },
+    {
+      "location": "public",
       "filename": "psamathe-model-shadow@2x.webp",
       "bytes": 21086,
       "sha256": "6cf6e642000b4968103c56cfccdfd2bfad2e56cc95b13ac3ac451ed278ad710c"
+    },
+    {
+      "location": "public",
+      "filename": "psamathe-model-surface-alpha@2x.webp",
+      "bytes": 126596,
+      "sha256": "3c84734530639278a72d162d7f436fa6d6fc953fc013f6d039a2fbbaf26edb84"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458018,
-      "sha256": "9e500f20737381a51fbaa68195414b0cbfcd882467b888dce566d550d1de3097"
+      "bytes": 458366,
+      "sha256": "3950a64c224c05ff03cf86d12cdce3d2852d52662ec96116376751732eda4ea2"
     },
     {
       "location": "prepared",

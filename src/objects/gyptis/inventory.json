@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "gyptis-elevation-shadow-alpha@2x.webp",
+      "bytes": 484584,
+      "sha256": "9f14251b73a18c02f8a0b583b501d3c094b0cc155d580c7235f45ce84e243489"
+    },
+    {
+      "location": "public",
       "filename": "gyptis-elevation-shadow@2x.webp",
       "bytes": 129820,
       "sha256": "5ff0d1671eae7f722b64a145f36b54d2e6c5cb731c71585bf2402b1c817ce44a"
+    },
+    {
+      "location": "public",
+      "filename": "gyptis-elevation-surface-alpha@2x.webp",
+      "bytes": 541710,
+      "sha256": "5020ede0b722c0e4fcfb43fd987ec55ec6ab5875e2cd264de4a46678f529a5d8"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "gyptis-shape-shadow-alpha@2x.webp",
+      "bytes": 402414,
+      "sha256": "b04acd2b12bf0962cacbe15bdf6e5c05cfdd5b2e155681cc1b1aa3c5f53456dd"
+    },
+    {
+      "location": "public",
       "filename": "gyptis-shape-shadow@2x.webp",
       "bytes": 58276,
       "sha256": "53e79083aefc9906d26655c7405f313926c60f948c582ff25d3083b8fafda266"
+    },
+    {
+      "location": "public",
+      "filename": "gyptis-shape-surface-alpha@2x.webp",
+      "bytes": 395420,
+      "sha256": "8ff1e0352deb5e8c80b13b5dee688ea7f916256d4a932bd74b5a6850e4fab1c8"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750226,
-      "sha256": "66d24e32fb198461cfa18f932b8c2c2e3ba1f1ecff65ad7ac1b15701a918d90a"
+      "bytes": 750878,
+      "sha256": "d504d46e30848a98eeba52808a9d63797f0a6decc9f98410459dbbc0ce0443b5"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kalyke-model-shadow-alpha@2x.webp",
+      "bytes": 128978,
+      "sha256": "4b031587408c12667c16faa46ba62fb2b8ec0bcfd24c87a4f11cedc85fd0e1fc"
+    },
+    {
+      "location": "public",
       "filename": "kalyke-model-shadow@2x.webp",
       "bytes": 21092,
       "sha256": "598cf50ff767580f58e4ea4eb7f279ed5cf600835adc2762fb1e1b37d5f2a3ee"
+    },
+    {
+      "location": "public",
+      "filename": "kalyke-model-surface-alpha@2x.webp",
+      "bytes": 132040,
+      "sha256": "b8df40be6de71bd6150942f779522f867a5c5400e4f81cbb519c9bde09d312a0"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457474,
-      "sha256": "4a17b9e03e8f95f9334749318071400370a4c2e6483d8c64e97ad2bb0b28d76b"
+      "bytes": 457814,
+      "sha256": "4720afcb9cb2ea36fa4d7f660188beb347b0abfbc210d2cf94753ed69d88c8ba"
     },
     {
       "location": "prepared",

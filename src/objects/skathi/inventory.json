@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "skathi-model-shadow-alpha@2x.webp",
+      "bytes": 144678,
+      "sha256": "b9b066c49f2b73edd9dd6e0cdf9af83e6c73b628035152ffd314216503e473f6"
+    },
+    {
+      "location": "public",
       "filename": "skathi-model-shadow@2x.webp",
       "bytes": 22172,
       "sha256": "f75155dd75fc2d0f59205ae25f3b2647be244d2d96c1870df1ac807ca98bb746"
+    },
+    {
+      "location": "public",
+      "filename": "skathi-model-surface-alpha@2x.webp",
+      "bytes": 147000,
+      "sha256": "ebb5168a5adb317df48e12eccb5a63f6fa1a7a0a3c3162baec62ba565b74b52f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458815,
-      "sha256": "faa6c8eb77954c2c9abaeda8eede08fb647a45d4a272be6bd0c7c8f57d8be0ea"
+      "bytes": 459155,
+      "sha256": "343d1fded41100eb286e5b0b014eb5932dbb2fef878ba88650f857890cc98497"
     },
     {
       "location": "prepared",

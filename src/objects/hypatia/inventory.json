@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hypatia-elevation-shadow-alpha@2x.webp",
+      "bytes": 500280,
+      "sha256": "73e6db8d6a6bdd2a920b4bf704e2e5eb24a9d598d4206548ae857509bfc26913"
+    },
+    {
+      "location": "public",
       "filename": "hypatia-elevation-shadow@2x.webp",
       "bytes": 137350,
       "sha256": "422b22822bafbec6dfeb134855dede21e07c6a317a85bb867b68ea55925f2515"
+    },
+    {
+      "location": "public",
+      "filename": "hypatia-elevation-surface-alpha@2x.webp",
+      "bytes": 557884,
+      "sha256": "c752aa02137c39c8b9e6b1f82045f46ab788c253e5e1b9efcd8fca8d827552d0"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hypatia-shape-shadow-alpha@2x.webp",
+      "bytes": 414448,
+      "sha256": "346d858252ef0a4421f2263b9a71e42491a6c3c5b2f314749c7084ff79fc23df"
+    },
+    {
+      "location": "public",
       "filename": "hypatia-shape-shadow@2x.webp",
       "bytes": 57612,
       "sha256": "0fa9a5d70f6175750a0fbd93d2c35de2bb83a71e849eaa6fa715f7c6109ac14c"
+    },
+    {
+      "location": "public",
+      "filename": "hypatia-shape-surface-alpha@2x.webp",
+      "bytes": 408876,
+      "sha256": "ca3d967ef598bc31b383c07fbb38222e0e0cdf0b170b957855d44b82c9406d92"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750032,
-      "sha256": "a2d833751df5918840a88bd66d7f4d4044b03127d9727d03725d437c6ca50631"
+      "bytes": 750692,
+      "sha256": "9a052a9ebe506f060e07b870cc90eed01755160d5dd51542e8a995b6db5cc1ee"
     },
     {
       "location": "prepared",

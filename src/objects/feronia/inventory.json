@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "feronia-elevation-shadow-alpha@2x.webp",
+      "bytes": 608348,
+      "sha256": "a2afe28b537bf8ec2fc37c28ade6e10884334652c1dad374d1cfecca9b71e2dc"
+    },
+    {
+      "location": "public",
       "filename": "feronia-elevation-shadow@2x.webp",
       "bytes": 127866,
       "sha256": "96868322cabf1ce73c36eb1505033081052bc45c4c4242d4c3cae2ff74407b3d"
+    },
+    {
+      "location": "public",
+      "filename": "feronia-elevation-surface-alpha@2x.webp",
+      "bytes": 651652,
+      "sha256": "19115334ad1846412846ac7c674cf8d9a7f598162ba00d004d333007da0b6640"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "feronia-shape-shadow-alpha@2x.webp",
+      "bytes": 520368,
+      "sha256": "4c5f4c4e1592b3b4557ac246de32c78259f427c4a7e8138f1d2cf28a1ea0a4b2"
+    },
+    {
+      "location": "public",
       "filename": "feronia-shape-shadow@2x.webp",
       "bytes": 60288,
       "sha256": "8d8ed6ee2cb506683e5a9a6e537cfa4702e0c28f850fe53cfe8a1b2430863b6b"
+    },
+    {
+      "location": "public",
+      "filename": "feronia-shape-surface-alpha@2x.webp",
+      "bytes": 516620,
+      "sha256": "3897a609b5dcc17ece6b5cdba17452293a5fc20443c6512166dfcf5a4c068a59"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 764697,
-      "sha256": "55a53aa2afcde2bc52f219f60a29ae7729391d75053745cf55213e0da79b78b2"
+      "bytes": 765650,
+      "sha256": "44d8e86dd4066264b44d1fe2b7bc7bb099549a3db7be3b871770b85eb3ab5226"
     },
     {
       "location": "prepared",

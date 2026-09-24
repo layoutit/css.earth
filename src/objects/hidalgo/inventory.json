@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hidalgo-elevation-shadow-alpha@2x.webp",
+      "bytes": 537436,
+      "sha256": "a04a88be619b6e5c3d7494c4eb7727f8b08db1e0407ddcbcc7657435551e25af"
+    },
+    {
+      "location": "public",
       "filename": "hidalgo-elevation-shadow@2x.webp",
       "bytes": 141244,
       "sha256": "6d7a77338006421f2ca18f1519a6f0fe10e001d2055f9afabe89939068469360"
+    },
+    {
+      "location": "public",
+      "filename": "hidalgo-elevation-surface-alpha@2x.webp",
+      "bytes": 600554,
+      "sha256": "bfeccc955690c084e8c3552b9183778680c309148b59bd33540aac85662eb4a2"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hidalgo-shape-shadow-alpha@2x.webp",
+      "bytes": 445482,
+      "sha256": "e6c5abb8b82424b6e7a76a6732c73ef9c08beed6ad3a374d06523fa4794cd3ae"
+    },
+    {
+      "location": "public",
       "filename": "hidalgo-shape-shadow@2x.webp",
       "bytes": 59844,
       "sha256": "f2effeb4833acf5df50a3e8c8655ea63f53eeeb0a5f369d4b87136a5e9755179"
+    },
+    {
+      "location": "public",
+      "filename": "hidalgo-shape-surface-alpha@2x.webp",
+      "bytes": 439320,
+      "sha256": "2d61b5add0ba2da9ee8305c56d38d07aeef47776e8af4882f80db684258bd85a"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750624,
-      "sha256": "ac262009000972dce54a0bde135c0c68e8e4110a709d08737fa79f6e28ef4607"
+      "bytes": 751284,
+      "sha256": "8673343f2e9c0854d60c8dfe90eaacebef17aecff2e6904394ec268b76d4011c"
     },
     {
       "location": "prepared",

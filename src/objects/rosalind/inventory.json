@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rosalind-model-shadow-alpha@2x.webp",
+      "bytes": 130726,
+      "sha256": "69585887aa84fdfc1d4e0bf36e20479900a533b1d176c44d73eba9ecd0a8f999"
+    },
+    {
+      "location": "public",
       "filename": "rosalind-model-shadow@2x.webp",
       "bytes": 22902,
       "sha256": "f0cde3a4eee1bd78f678509337423be1e6a6f553b2df9d26661becfc9e8825ce"
+    },
+    {
+      "location": "public",
+      "filename": "rosalind-model-surface-alpha@2x.webp",
+      "bytes": 131388,
+      "sha256": "a13b9c8250aef6c96bffec286d693f6b69ba4ec5b2a2d17f3fa9ecc2a05b0554"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458800,
-      "sha256": "f2614fa32226d80b4515990d6270b763c4ae104309464fa967cb714ab04fcc8b"
+      "bytes": 459148,
+      "sha256": "25ddec0423c5dcdb0ab0a387307b89ca09e1c6c0bf2eaf325522351cd6438162"
     },
     {
       "location": "prepared",

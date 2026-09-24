@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "astraea-elevation-shadow-alpha@2x.webp",
+      "bytes": 636772,
+      "sha256": "93f28ad5dc9c13fcf29e753a412521643822001bced9499c328ff5c65df6ddeb"
+    },
+    {
+      "location": "public",
       "filename": "astraea-elevation-shadow@2x.webp",
       "bytes": 140558,
       "sha256": "8b54eaa7458e70da14d574335e953db8d3e967fd3c38d9c23a6c33398a9daaa5"
+    },
+    {
+      "location": "public",
+      "filename": "astraea-elevation-surface-alpha@2x.webp",
+      "bytes": 696600,
+      "sha256": "6b0f56662836300950c697ec9da1a4d562666428f50a1a9eabc14665e89d262c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "astraea-shape-shadow-alpha@2x.webp",
+      "bytes": 541054,
+      "sha256": "8dea084438c2b2a8867c013cd063fc419e324a56ec3601f9b01fe3cf322ea28a"
+    },
+    {
+      "location": "public",
       "filename": "astraea-shape-shadow@2x.webp",
       "bytes": 63638,
       "sha256": "39f718b3ea6ef33998b8ab23a6e702c35ad7f1c66172882b3c3c9db0b8909f71"
+    },
+    {
+      "location": "public",
+      "filename": "astraea-shape-surface-alpha@2x.webp",
+      "bytes": 534792,
+      "sha256": "8d4dfe8458fb4583ffa07101a0eae9054cd418ff73865006c8e88d0137244c0c"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 762393,
-      "sha256": "009461c661b5b619c0573e57e4e1219792b98ec2f3f067d985fe7287706d1444"
+      "bytes": 763346,
+      "sha256": "8e1af77a02b44d02d59d6f662886503d7173ec9acedc5c8c902f99a36b577de5"
     },
     {
       "location": "prepared",

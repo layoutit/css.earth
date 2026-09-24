@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2001-sn263-shape-shadow-alpha@2x.webp",
+      "bytes": 228158,
+      "sha256": "429b688da6e4a330e566d2fa54eabb80b1a006e1e60e453618916d1a585735a2"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2001-sn263-shape-shadow@2x.webp",
       "bytes": 26528,
       "sha256": "b8f708cfaa3e81779389ab980982f298e66f78ca9655031229b4e4a95e970333"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2001-sn263-shape-surface-alpha@2x.webp",
+      "bytes": 223580,
+      "sha256": "c9cf37ff3b4a5d65f5defc24d51f9f1c2d6f2d7f192319ed61b2244f18120e7b"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750228,
-      "sha256": "9b23a519f38d5dc9f847d046eb87941ed2b172d7a1b151b5a1cf3c3e2d5e32b0"
+      "bytes": 750783,
+      "sha256": "5043af851c3d2bae16c3e0f706987ad9653b9ac4c91fd4b25672a99fa763353a"
     },
     {
       "location": "prepared",

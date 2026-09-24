@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "thetis-elevation-shadow-alpha@2x.webp",
+      "bytes": 533500,
+      "sha256": "17c76c3c1fb17bad8bc3704546dff31b938ce3d185699c91dcaffca4573a034d"
+    },
+    {
+      "location": "public",
       "filename": "thetis-elevation-shadow@2x.webp",
       "bytes": 129498,
       "sha256": "1ce3e38c678dac263c3a12c4f1e47f7115dc8dcb0fd47d72c9889e74fea14029"
+    },
+    {
+      "location": "public",
+      "filename": "thetis-elevation-surface-alpha@2x.webp",
+      "bytes": 579410,
+      "sha256": "c296addfada4eba123b6eddd06fb2d8666502cdca911ca0ae8e4186d85ce995f"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "thetis-shape-shadow-alpha@2x.webp",
+      "bytes": 447840,
+      "sha256": "21b2def6f8e6a627f382d274751767c5a66e3926d39d79329a5afc0dbfcca412"
+    },
+    {
+      "location": "public",
       "filename": "thetis-shape-shadow@2x.webp",
       "bytes": 57520,
       "sha256": "dab25d7e06b1dbecdae8ac97116b4b3fdfa81b23e59447ef41961915bab6f6bf"
+    },
+    {
+      "location": "public",
+      "filename": "thetis-shape-surface-alpha@2x.webp",
+      "bytes": 442570,
+      "sha256": "faababbe596a42f01c73948bc0772219e0dfff25ea1c4b12873b00ab4031835e"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749417,
-      "sha256": "8f05835e5446d6c3a21ee8b3ca963c7eb52d4c3f9d8fdc89a6a8a0dbe17c3858"
+      "bytes": 750069,
+      "sha256": "6f6696765610c02f4665e0b8f1881fae4588d6ee05a7814541b4aa6778462fa2"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "chiron-model-shadow-alpha@2x.webp",
+      "bytes": 137104,
+      "sha256": "857f0c70e7717a5e2d99d3ad073b609099719030e4a0fcff141dd360f32739c8"
+    },
+    {
+      "location": "public",
       "filename": "chiron-model-shadow@2x.webp",
       "bytes": 19938,
       "sha256": "f3daf1060af02b39346419877771a8c51bdf4b79d68c6d0fca96e22260bdb007"
+    },
+    {
+      "location": "public",
+      "filename": "chiron-model-surface-alpha@2x.webp",
+      "bytes": 138862,
+      "sha256": "f52f1802c7b573c1312cdfd9a169c483e6de9102b8db53a2743a2e3d56beaca8"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457804,
-      "sha256": "9ccbd67941af955a5bb167f7f8fded59fcf641041c371d3e6d7910e0c79186ad"
+      "bytes": 458281,
+      "sha256": "9ad33e792040c8eef2d1117f1f03da90c03d0fb831c66cfc2b7d8272d4de6f80"
     },
     {
       "location": "prepared",

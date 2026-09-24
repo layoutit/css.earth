@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "portia-model-shadow-alpha@2x.webp",
+      "bytes": 143416,
+      "sha256": "eabb0975bc18891c9f0bcbe3563d168d382ec42e439592f36eee2c4869dd0435"
+    },
+    {
+      "location": "public",
       "filename": "portia-model-shadow@2x.webp",
       "bytes": 24424,
       "sha256": "bbe739e9bba0e8e653115d6c3f1b1bab4c32a0773c96cf4e94b471a50bde3073"
+    },
+    {
+      "location": "public",
+      "filename": "portia-model-surface-alpha@2x.webp",
+      "bytes": 142470,
+      "sha256": "e20caf853b6ee5d70a720d77abfea0da0c92a9e279b94f971a995a0fcc49b9c5"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458809,
-      "sha256": "b49d390fb771a6faeaf0c41ad2859766e0624ead0fac70eab408b083e2530109"
+      "bytes": 459149,
+      "sha256": "4f066088333124c022caafa636493ba47fba675236d70bcb3b552ec11dff92f4"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "thebe-elevation-shadow-alpha@2x.webp",
+      "bytes": 241666,
+      "sha256": "0ac42bc4f89236bb6d3e45c80ce8068d6f4b484ff211cea166fc3e103da21dea"
+    },
+    {
+      "location": "public",
       "filename": "thebe-elevation-shadow@2x.webp",
       "bytes": 56070,
       "sha256": "dcde5537e6b16920f943f7e73fc45ce813d3598425734d5ae73f058032db30b9"
+    },
+    {
+      "location": "public",
+      "filename": "thebe-elevation-surface-alpha@2x.webp",
+      "bytes": 276982,
+      "sha256": "a08ebe5627b49173e5afd8a6059a19349c5ef8b07a31f574aec3e6f2695c0b03"
     },
     {
       "location": "public",
@@ -33,9 +45,21 @@
     },
     {
       "location": "public",
+      "filename": "thebe-normal-shadow-alpha@2x.webp",
+      "bytes": 234806,
+      "sha256": "28ff0da9022ca74a1a1c0ce2089bea8b535e9ed27593ff87d03cb98e133a5f8d"
+    },
+    {
+      "location": "public",
       "filename": "thebe-normal-shadow@2x.webp",
       "bytes": 54618,
       "sha256": "64be372edc57187aab1632e8cde3191971d466f385210d434daf3e594982a180"
+    },
+    {
+      "location": "public",
+      "filename": "thebe-normal-surface-alpha@2x.webp",
+      "bytes": 243574,
+      "sha256": "c21a2e93f28d1db95b86f1ae5a718978b194a73355ca5d6db5e9fa6aec91eba5"
     },
     {
       "location": "public",
@@ -106,8 +130,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 663574,
-      "sha256": "c89d8c4a4a817bc102332eb6d0edc15f0e048588cd600a78c3371f0ea3508ecc"
+      "bytes": 664226,
+      "sha256": "7229927c16b19c33e1699b74e250f7f9a31a4970fc00ff71157a5eb4f780434c"
     },
     {
       "location": "prepared",

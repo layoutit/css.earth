@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 
@@ -78,6 +79,20 @@ export async function maskTriangleAtlas(input: string, slices: readonly Slice[])
   return sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } });
 }
 
+/** Whether a WebP holds a lossless (VP8L) bitstream: numeric and categorical atlases are published lossless and their
+ * masked copies must stay so; photographic ones went through the lossy lane. */
+export function webpIsLossless(bytes: Uint8Array): boolean {
+  const text = (at: number) => String.fromCharCode(...bytes.subarray(at, at + 4));
+  if (text(0) !== 'RIFF' || text(8) !== 'WEBP') throw new TypeError('A triangle atlas is not a WebP file.');
+  for (let at = 12; at + 8 <= bytes.length;) {
+    const chunk = text(at), size = bytes[at + 4]! | bytes[at + 5]! << 8 | bytes[at + 6]! << 16 | bytes[at + 7]! << 24;
+    if (chunk === 'VP8L') return true;
+    if (chunk === 'VP8 ') return false;
+    at += 8 + size + (size & 1);
+  }
+  throw new TypeError('A triangle atlas WebP has no image bitstream.');
+}
+
 export const alphaAtlasName = (url: string) => {
   const match = /^(.*?)(@2x)?\.webp$/u.exec(url);
   if (!match) throw new TypeError(`A triangle atlas must be WebP: ${url}.`);
@@ -101,9 +116,12 @@ export async function prepareTriangleAlphaAtlases<T extends Definition>(definiti
     let url = written.get(entry.url);
     if (!url) {
       url = alphaAtlasName(entry.url);
-      // Colour stays in the lossy lane; the triangle edges live in the alpha plane, kept exact.
-      await writeLossyWebp(await maskTriangleAtlas(resolve(publicDirectory, entry.url.slice(publicBase.length)), byUrl.get(entry.url)!),
-        resolve(publicDirectory, url.slice(publicBase.length)), { alphaQuality: 100, effort: 6 });
+      const input = resolve(publicDirectory, entry.url.slice(publicBase.length)), output = resolve(publicDirectory, url.slice(publicBase.length));
+      const masked = await maskTriangleAtlas(input, byUrl.get(entry.url)!);
+      // The copy keeps its atlas's encoding: a lossless atlas stays lossless, a photograph stays in the lossy lane. The
+      // triangle edges live in the alpha plane, kept exact either way.
+      if (webpIsLossless(await readFile(input))) await masked.webp({ lossless: true, effort: 4 }).toFile(output);
+      else await writeLossyWebp(masked, output, { alphaQuality: 100, effort: 6 });
       written.set(entry.url, url);
     }
     entries.push({ ...entry, key: `${key}:alpha`, url });

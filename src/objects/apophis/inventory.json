@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "apophis-elevation-shadow-alpha@2x.webp",
+      "bytes": 642656,
+      "sha256": "17951b461986c28802bc94de846b8e86dfb9e4189c3f3834e12d0138b09f4259"
+    },
+    {
+      "location": "public",
       "filename": "apophis-elevation-shadow@2x.webp",
       "bytes": 159238,
       "sha256": "1e5fddd7c4d360a6922f49ba8e56eb31140e95887698b763d255ef62f3dff21b"
+    },
+    {
+      "location": "public",
+      "filename": "apophis-elevation-surface-alpha@2x.webp",
+      "bytes": 712638,
+      "sha256": "9e70c3a5124ed1450eb0188ff27388adce565590b2a11f9c0efcafcfe3aec395"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "apophis-shape-shadow-alpha@2x.webp",
+      "bytes": 534690,
+      "sha256": "74de20e0ed51cd579d2066c026eab76eb3f21f0ad6a62975306e89eb44850a3d"
+    },
+    {
+      "location": "public",
       "filename": "apophis-shape-shadow@2x.webp",
       "bytes": 66562,
       "sha256": "85ce1bb9f0a82d292a91c2758a20d98c3eac108282dc355b59f47ddb158834ce"
+    },
+    {
+      "location": "public",
+      "filename": "apophis-shape-surface-alpha@2x.webp",
+      "bytes": 527830,
+      "sha256": "29041683ccf440e06a272f24355a6f028e37b4e7ef0b097dbe5e1a1c82c8b9f6"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751162,
-      "sha256": "3772cc68f31c8884a754511cff3339ad3aaf18b4dec7511d54eab007b2333bdf"
+      "bytes": 752115,
+      "sha256": "d275223da08475568061f3221b5bc3db7b3234f47fce38ba5f1ffb339c1069d0"
     },
     {
       "location": "prepared",

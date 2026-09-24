@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "prospero-model-shadow-alpha@2x.webp",
+      "bytes": 140090,
+      "sha256": "3aa6ccfe9ae8a2d00c6ffced51374af0507e4e7691b6b77890441d104fbb7867"
+    },
+    {
+      "location": "public",
       "filename": "prospero-model-shadow@2x.webp",
       "bytes": 20500,
       "sha256": "37daa4b6097a11b8f6bc22d46929a5ea628174964a99617b3920410b0b165d71"
+    },
+    {
+      "location": "public",
+      "filename": "prospero-model-surface-alpha@2x.webp",
+      "bytes": 142490,
+      "sha256": "bc499e37ceaca3d7a24f7c6c2d90c302bcde433a1f784678412523ca43d0c28e"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459009,
-      "sha256": "398eb5543b6f85503acb0b8f9dd89ae11802b2189a16b4add0acb80cc55dfaf7"
+      "bytes": 459357,
+      "sha256": "84a86d5fc22de367893039d2c1c6a91581bf3a7775661901c2b1a6f169d0dc08"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "leucus-model-shadow-alpha@2x.webp",
+      "bytes": 136100,
+      "sha256": "67c847b2fb64e93e7e7a9ea46432e054d4b6c83f304aaa14b0ffb9aed45ad8cc"
+    },
+    {
+      "location": "public",
       "filename": "leucus-model-shadow@2x.webp",
       "bytes": 19062,
       "sha256": "d691afb877e1501f1200ebf059b3e53cb0bbed494e10af21878a8915a478fb01"
+    },
+    {
+      "location": "public",
+      "filename": "leucus-model-surface-alpha@2x.webp",
+      "bytes": 138450,
+      "sha256": "8037238a1fdd1a63b85f509a0401b0f5a580e49ba2dc5f99d407a8a34d44d7c8"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456841,
-      "sha256": "c3aa4e1b29205278cad822aa53b654c72f02ec55bb46fb25692e1fa1e339b761"
+      "bytes": 457181,
+      "sha256": "a5440015e136e2467db15e568155e35fa6cd2a1dcfdc6de74aa67ecd3af2900a"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "adrastea-model-shadow-alpha@2x.webp",
+      "bytes": 100860,
+      "sha256": "4a2b4bed1dd8adcc1ef89fa170cbb767d4a894ee31a307b28a581eb22d1e7c2e"
+    },
+    {
+      "location": "public",
       "filename": "adrastea-model-shadow@2x.webp",
       "bytes": 20316,
       "sha256": "339464d8ee4f199621d4937f9e90a900fb7a93eab8c88298f1109ab5af813514"
+    },
+    {
+      "location": "public",
+      "filename": "adrastea-model-surface-alpha@2x.webp",
+      "bytes": 103934,
+      "sha256": "50724e49a0fb497cc4b77431c397198b6b4a99d0fa8bcc966db2dec12d13b29a"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457909,
-      "sha256": "bf4059cb31cac9c896ea716a0837d893d20a58a3d4dbda1509a1fdafcfcd34a8"
+      "bytes": 458398,
+      "sha256": "d87c17c7bedad84032327077f73a5f11666f27f7dcb026df29d0dadf1868f011"
     },
     {
       "location": "prepared",

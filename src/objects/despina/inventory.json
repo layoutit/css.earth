@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "despina-model-shadow-alpha@2x.webp",
+      "bytes": 100702,
+      "sha256": "fa3ea2494c8791d28c0809b9a33ebf8c26bfbb611029aa13f93a9acbdda2544d"
+    },
+    {
+      "location": "public",
       "filename": "despina-model-shadow@2x.webp",
       "bytes": 20584,
       "sha256": "f022ea8f564964922e25a2407cb0fecb00a5bd5d1ccdb821cce0574c3c5ed2e3"
+    },
+    {
+      "location": "public",
+      "filename": "despina-model-surface-alpha@2x.webp",
+      "bytes": 104192,
+      "sha256": "23edbeacb7d0a48d754b38789965cc757e135bec5fcb61e0c402dedfb25961b8"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458711,
-      "sha256": "665227a790f4988e647752ed909e1b64f4ed03ca6867c92c6e5dd1ac439d4ddf"
+      "bytes": 459194,
+      "sha256": "7b4b7a87cd24cb1740736f23e37dfe988f6366fd9077461a41fb2e2b6a29f299"
     },
     {
       "location": "prepared",

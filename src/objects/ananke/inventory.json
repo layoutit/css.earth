@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ananke-model-shadow-alpha@2x.webp",
+      "bytes": 124066,
+      "sha256": "bbbda58627cb2956a2a96c638a1e04bbc94956fa452398cfbb5a39a62b48d1b6"
+    },
+    {
+      "location": "public",
       "filename": "ananke-model-shadow@2x.webp",
       "bytes": 20846,
       "sha256": "dd10ac2b2d592758f6c03af67c887a79267e06af7dd66cea52313b1e8e2f2807"
+    },
+    {
+      "location": "public",
+      "filename": "ananke-model-surface-alpha@2x.webp",
+      "bytes": 126596,
+      "sha256": "3c84734530639278a72d162d7f436fa6d6fc953fc013f6d039a2fbbaf26edb84"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456810,
-      "sha256": "ee5c7bcaf8def148881a91eaa350b4305cf57058d1cccd4aeed2e0b9c361b1d4"
+      "bytes": 457287,
+      "sha256": "c63459c898a97f1dfe6be8cd9f853391fae926da5e9c8bac2d60c5efb7f1785b"
     },
     {
       "location": "prepared",

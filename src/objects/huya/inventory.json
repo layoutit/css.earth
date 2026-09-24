@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "huya-model-shadow-alpha@2x.webp",
+      "bytes": 123930,
+      "sha256": "427459b2f4b2426223e73107b83775d306c941e044e375a78802e6b780de0b27"
+    },
+    {
+      "location": "public",
       "filename": "huya-model-shadow@2x.webp",
       "bytes": 21212,
       "sha256": "aba71b023e9ad65c5f2fdb0c29db4abb546abc570ed3702ceb280e786c7a1bce"
+    },
+    {
+      "location": "public",
+      "filename": "huya-model-surface-alpha@2x.webp",
+      "bytes": 126652,
+      "sha256": "760ac814c37ff89bfe1cd343cb7745d77856c867c134bc7f7d35d496f96793ad"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457033,
-      "sha256": "7a06e80038cdfaf534796fcad2a353883292f6b89d9081b9f9e50149b507910e"
+      "bytes": 457365,
+      "sha256": "93c13dd71b84a70dd2e6335240ab3bfd888207edbd4bee5d0167e01d24154ef8"
     },
     {
       "location": "prepared",

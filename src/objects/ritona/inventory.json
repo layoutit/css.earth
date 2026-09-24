@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ritona-model-shadow-alpha@2x.webp",
+      "bytes": 121064,
+      "sha256": "994c1c49aeec1074e87d1ac85ddb765281ac2fd4f45cf47133dbb46c749c415f"
+    },
+    {
+      "location": "public",
       "filename": "ritona-model-shadow@2x.webp",
       "bytes": 21378,
       "sha256": "27cc04d98ef70c687c74750cba09357c45713f6d9c53480077616bde7b841c09"
+    },
+    {
+      "location": "public",
+      "filename": "ritona-model-surface-alpha@2x.webp",
+      "bytes": 124062,
+      "sha256": "c8436aad0a5c4f22335212edef504e85732d5ff2f7788bc3e94afbd474c8b104"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458002,
-      "sha256": "de999c4865b6b84f76a801ac1457f24f14ff9a5ce21e94563f58575eab7a075b"
+      "bytes": 458342,
+      "sha256": "fbb27524621ac6bd690268b97d8d82d317b11b7417c8cff2050000d3fe964f74"
     },
     {
       "location": "prepared",

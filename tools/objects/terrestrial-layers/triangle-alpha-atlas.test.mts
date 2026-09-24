@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { alphaAtlasName, triangleSlices } from './triangle-alpha-atlas.mts';
+import { alphaAtlasName, triangleSlices, webpIsLossless } from './triangle-alpha-atlas.mts';
 
 const face = (parent: number, className: string, x: number, size: string, display?: string) => ({ parent, tag: 'u', className,
   style: `transform:none;background-position:-${x}px -4px;background-size:${size};--polycss-atlas-width:10px;--polycss-atlas-height:8px${display ? `;display:var(${display})` : ''}` });
@@ -33,4 +33,12 @@ test('each texture resource masks only the faces that read it, at their own atla
 test('a masked atlas keeps its density suffix', () => {
   assert.equal(alphaAtlasName('/scenes/rock/rock-shape-surface@2x.webp'), '/scenes/rock/rock-shape-surface-alpha@2x.webp');
   assert.throws(() => alphaAtlasName('/scenes/rock/rock.png'), /must be WebP/u);
+});
+
+test('a masked copy can tell a lossless atlas from a lossy one', async () => {
+  const { default: sharp } = await import('sharp');
+  const image = sharp({ create: { width: 8, height: 8, channels: 4, background: { r: 10, g: 20, b: 30, alpha: 1 } } });
+  assert.equal(webpIsLossless(await image.clone().webp({ lossless: true }).toBuffer()), true);
+  assert.equal(webpIsLossless(await image.clone().webp({ quality: 80 }).toBuffer()), false);
+  assert.equal(webpIsLossless(await image.clone().webp({ quality: 80, alphaQuality: 100 }).toBuffer()), false);
 });

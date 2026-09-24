@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "namaka-model-shadow-alpha@2x.webp",
+      "bytes": 126224,
+      "sha256": "bd264509b2581788522d39f27b20c62dc6add59a833bfae8848d644a1f1ca82e"
+    },
+    {
+      "location": "public",
       "filename": "namaka-model-shadow@2x.webp",
       "bytes": 21246,
       "sha256": "b8d836495fd623eca0796be67c1a0a8da39cbf6c09a427513ebe3434c54ad578"
+    },
+    {
+      "location": "public",
+      "filename": "namaka-model-surface-alpha@2x.webp",
+      "bytes": 127352,
+      "sha256": "86cfac2093231dfc4ea79bd312bea938d4df32abafc1cafce17ff67a2dfdedb7"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458119,
-      "sha256": "88ae4a7f3737c4210ba719000a399d95922ac837e74be583e9472afec7040ac3"
+      "bytes": 458459,
+      "sha256": "9195f9be4292eb7ca7d29a0ab17d409922b81b4052c4c653238f590aed7ba842"
     },
     {
       "location": "prepared",

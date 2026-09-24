@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "romulus-model-shadow-alpha@2x.webp",
+      "bytes": 131138,
+      "sha256": "2ea95a13e459c9d762b135c154b61c04851dfef0c6eef12b59e2c731113510d6"
+    },
+    {
+      "location": "public",
       "filename": "romulus-model-shadow@2x.webp",
       "bytes": 20988,
       "sha256": "becc1b827f01b930277d9b2a11f8c7abc5d59f6bd82da81c6194a9a000542ff8"
+    },
+    {
+      "location": "public",
+      "filename": "romulus-model-surface-alpha@2x.webp",
+      "bytes": 133928,
+      "sha256": "f713fbe2d3a61057436dab3caba95835226f8c77f0fb5e16389a1f456b1656e4"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457887,
-      "sha256": "417a6113ab9edc3a0733ef05b684d191770ecceeddade2215b9dd49af90fa2fe"
+      "bytes": 458231,
+      "sha256": "232d5915e68706b0b146783a1d05b27c4358d41c0e68f6222bf6645e4f38d808"
     },
     {
       "location": "prepared",
