@@ -27,7 +27,7 @@ const fixed = (value: number, digits: number) => Number(value.toFixed(digits));
 export interface HostedRecord {
   readonly spec: HostedSpec; readonly hostId: string; readonly system: string; readonly body: Record<string, unknown>; readonly order: number;
   readonly orbit: HostedOrbit; readonly orbitCitation: { readonly text: string; readonly url?: string; readonly bibcode?: string; readonly label: string };
-  readonly radius: Cited; readonly mass: Cited; readonly documents: Map<string, string>; readonly todo: readonly string[];
+  readonly radius: Cited; readonly mass: Cited & { readonly limit?: true }; readonly documents: Map<string, string>; readonly todo: readonly string[];
 }
 
 /** The orbit and physical values of one hosted body, and the files that record how the orbit was chosen. */
@@ -63,18 +63,19 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
         orientation: e.ascendingNodePositionAngleDegrees === undefined ? 'Display convention: the orbit\'s position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).' : `${cite}: ascending node ${e.ascendingNodePositionAngleDegrees} degrees east of north` } };
     citation = { text: spec.orbit.source, url: spec.orbit.url, label: spec.orbit.source };
   }
-  const fromRow = (picked: AssembledOrbit['radius'] | undefined, label: string): Cited => {
+  const fromRow = (picked: AssembledOrbit['mass'] | undefined, label: string): Cited & { limit?: true } => {
     if (!picked) throw new Error(`${spec.id}: give ${label} with its source; no archive row supplies it.`);
-    return { value: picked.value, source: `${picked.row.label}${picked.row.bibcode ? ` (${picked.row.bibcode})` : ''}, via the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
+    return { value: picked.value, ...(picked.limit ? { limit: true as const } : {}), source: `${picked.row.label}${picked.row.bibcode ? ` (${picked.row.bibcode})` : ''}, via the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
   };
   const radius = spec.radius ?? fromRow(assembled?.radius, 'radius'), mass = spec.mass ?? fromRow(assembled?.mass, 'mass');
   const star = spec.kind === 'companion', unit = star ? { r: SOLAR_RADIUS_KM, gm: GM_SUN, rn: 'solar radii', mn: 'solar masses', rper: 'km per solar radius', gmn: 'the JPL solar GM' }
     : { r: JUPITER_RADIUS_KM, gm: JUPITER_GM, rn: 'Jupiter radii', mn: 'Jupiter masses', rper: 'km per Jupiter radius', gmn: "JPL's Jupiter GM" };
   const radiusKm = radius.value * unit.r, t = spec.temperature;
   const body = { id: spec.id, classification: star ? 'star' : 'exoplanet', order,
-    physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(radiusKm, 1), gravitationalParameterKm3PerS2: fixed(mass.value * unit.gm, 2), parent: host.spec.id, ...(star ? { effectiveTemperatureK: t!.value } : {}) },
+    physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(radiusKm, 1), gravitationalParameterKm3PerS2: 'limit' in mass && mass.limit ? 0 : fixed(mass.value * unit.gm, 2), parent: host.spec.id, ...(star ? { effectiveTemperatureK: t!.value } : {}) },
     physicalNotes: `Radius ${radius.value}${radius.uncertainty ? ` +/- ${radius.uncertainty}` : ''} ${unit.rn} from ${radius.source} (${radius.url}): ${fixed(radiusKm, 1).toLocaleString('en-US')} km at ${unit.r.toLocaleString('en-US')} ${unit.rper}. `
-      + `GM from the mass ${mass.value}${mass.uncertainty ? ` +/- ${mass.uncertainty}` : ''} ${unit.mn} (${mass.source}, ${mass.url}) times ${unit.gmn}.${t ? ` Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).` : ''} A sphere: no oblateness is measured.`,
+      + ('limit' in mass && mass.limit ? `No mass is measured: ${mass.source} (${mass.url}) gives only an upper limit of ${mass.value} ${unit.mn}, so GM is 0, the records' unpublished value.`
+        : `GM from the mass ${mass.value}${mass.uncertainty ? ` +/- ${mass.uncertainty}` : ''} ${unit.mn} (${mass.source}, ${mass.url}) times ${unit.gmn}.`) + `${t ? ` Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).` : ''} A sphere: no oblateness is measured.`,
     hostedOrbit: orbit };
   return { spec, hostId: host.spec.id, system: host.spec.system, body, order, orbit, orbitCitation: citation, radius, mass, documents, todo };
 }
@@ -116,7 +117,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     if (light) { installHostLight(files, id, light); colorLine = `**Colour.** No image or measured colour exists. The neutral gray is lit by ${record.hostId}'s measured colour (${light.srgb}, ${light.source}) at the gray's own brightness.`; }
   }
   const measurements = read(`${s}/measurements.json`);
-  measurements.massSource = `${record.mass.value} ${star ? 'solar' : 'Jupiter'} masses: ${record.mass.source} (${record.mass.url}).`;
+  measurements.massSource = `${record.mass.limit ? 'Under ' : ''}${record.mass.value} ${star ? 'solar' : 'Jupiter'} masses: ${record.mass.source} (${record.mass.url}).`;
   files.set(`${s}/measurements.json`, json(measurements));
 
   const content = read(`${s}/content/object.json`), period = record.orbit.periodDays;
@@ -125,7 +126,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   content.panel.facts = [
     { id: 'radius', label: 'Radius', value: radiusValue, source: fact(record.radius.url, record.radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
     { id: 'period', label: 'Year', value: periodValue, source: fact(record.orbitCitation.url, record.orbitCitation.label, 'source/measurements.json', 'orbitalPeriodDays; orbitalPeriodSource') },
-    { id: 'mass', label: 'Mass', value: `${Number(record.mass.value.toPrecision(2))} ${star ? 'solar' : 'Jupiter'} masses`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
+    { id: 'mass', label: 'Mass', value: `${record.mass.limit ? 'Under ' : ''}${Number(record.mass.value.toPrecision(2))} ${star ? 'solar' : 'Jupiter'} masses`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
   // A planet still on the shape lens: its notes say so; a thermal, band-colour or host-lit lens wrote its own.
   if (!star && !spec.photometry && !spec.thermal) {
     const control = content.lenses.controls[0];

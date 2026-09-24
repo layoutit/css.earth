@@ -97,13 +97,14 @@ export async function compositeMass(archive: Archive, planet: string): Promise<C
 }
 
 const GRAVITY_AU_SOLAR = 4 * Math.PI ** 2 / DAYS_PER_YEAR ** 2, SOLAR_RADIUS_AU = 695700 / AU_KM;
-export interface AssembledOrbit { readonly orbit: HostedOrbit; readonly radius: { readonly value: number; readonly row: ArchiveRow }; readonly mass: { readonly value: number; readonly row: ArchiveRow }; readonly rows: readonly ArchiveRow[]; readonly todo?: string }
+export interface AssembledOrbit { readonly orbit: HostedOrbit; readonly radius: { readonly value: number; readonly row: ArchiveRow }; readonly mass: { readonly value: number; readonly row: ArchiveRow; readonly limit?: true }; readonly rows: readonly ArchiveRow[]; readonly todo?: string }
 
 /** A transiting planet's orbit from its archive rows: the chosen row (the default, or the spec's reference) first, and what it
  * lacks from the most recent other row that has it, each value cited to its own row. a/R* missing everywhere is derived from a row's
  * semi-major axis and stellar radius, or from Kepler's third law with its period, stellar mass and radius. Eccentricity and the
  * argument of periastron come from one row together. An inclination missing everywhere is derived from a row's impact parameter
- * (Winn 2010, eq. 7). A missing period or transit time, or an inclination no row gives or allows, refuses the planet. */
+ * (Winn 2010, eq. 7). A missing period or transit time, or an inclination no row gives or allows, refuses the planet. The mass is
+ * the composite table's; when that is only an upper limit it is returned as one (`limit`). */
 export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: string, composite?: CompositeMass): AssembledOrbit {
   const chosen = reference ? rows.find(entry => entry.reference === reference || entry.label === reference || entry.bibcode === reference) : rows.find(entry => entry.isDefault);
   if (!chosen) throw new Error(`${rows[0]!.name}: no ps row ${reference ? `from ${reference}` : 'is the default'}; its references are ${rows.map(entry => `${entry.label} (${entry.reference})`).join(', ')}.`);
@@ -140,13 +141,13 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   if (!radius) throw new Error(`${name}: no archive row gives its radius.`);
   // The mass is the one the archive's composite table adopts, so the choice between papers is the archive's, not ours.
   if (!composite) throw new Error(`${name}: the archive's composite table gives no mass.`);
-  if (composite.limit) throw new Error(`${name}: the archive adopts only an upper limit for its mass (${composite.label}).`);
-  const calculated = composite.provenance !== 'Mass';
-  const mass = { value: composite.value, row: { ...chosen, label: calculated ? `the NASA Exoplanet Archive's calculated value (${composite.provenance}, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement` : `${composite.label}, the mass the NASA Exoplanet Archive's composite table adopts`,
+  // An upper limit is kept as one: the record's GM stays 0, its unpublished value, and the limit is shown as a limit.
+  const calculated = composite.provenance !== 'Mass' && !composite.limit;
+  const mass = { value: composite.value, ...(composite.limit ? { limit: true as const } : {}), row: { ...chosen, label: composite.limit ? composite.label : calculated ? `the NASA Exoplanet Archive's calculated value (${composite.provenance}, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement` : `${composite.label}, the mass the NASA Exoplanet Archive's composite table adopts`,
     reference: calculated ? 'CALCULATED_VALUE' : composite.label, url: calculated ? COMPOSITE_CALC : composite.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', bibcode: calculated ? undefined : composite.bibcode } as ArchiveRow };
   // The records' own density rule (packages/astronomy bodies.test.ts): between 0.1 and 8.5 g/cm^3 unless a brown dwarf.
   const density = mass.value * 1.89813e30 / (4 / 3 * Math.PI * (radius.value * 7.1492e9) ** 3);
-  if (!(density > 0.1) || (density > 8.5 && mass.value < 13)) throw new Error(`${name}: ${mass.row.label.split(',')[0]}'s mass ${mass.value} Jupiter masses in ${radius.value} Jupiter radii is ${density.toFixed(1)} g/cm^3, outside what the records accept.`);
+  if (!composite.limit && (!(density > 0.1) || (density > 8.5 && mass.value < 13))) throw new Error(`${name}: ${mass.row.label.split(',')[0]}'s mass ${mass.value} Jupiter masses in ${radius.value} Jupiter radii is ${density.toFixed(1)} g/cm^3, outside what the records accept.`);
   const todo = e > 0 ? `omega ${shape!.periastron} degrees is taken as ${shape!.label} gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e ${e}) about the line of sight` : undefined;
   return { rows, radius, mass, ...(todo ? { todo } : {}), orbit: {
     periodDays: period!.value, semiMajorAxisStellarRadii: ratio.value, inclinationDegrees: inclination.value, eccentricity: e,

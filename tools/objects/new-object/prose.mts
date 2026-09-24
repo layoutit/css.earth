@@ -49,13 +49,41 @@ export function pickQuotes(extract: string, names: readonly string[], mustName =
 
 /** Quotes for a body: its own article by `titles` in order (a planet's, then its host's, whose lead names the planet), or
  * none. */
-export async function wikipediaQuotes(archive: Archive, titles: readonly string[], names: readonly string[]): Promise<Quotes | undefined> {
+// The IAU's constellation abbreviations and genitives, and the Bayer letters as the archive abbreviates them (alf for Alpha).
+const GENITIVE: Readonly<Record<string, string>> = { And: 'Andromedae', Ant: 'Antliae', Aps: 'Apodis', Aqr: 'Aquarii', Aql: 'Aquilae', Ara: 'Arae', Ari: 'Arietis', Aur: 'Aurigae',
+  Boo: 'Bootis', Cae: 'Caeli', Cam: 'Camelopardalis', Cnc: 'Cancri', CVn: 'Canum Venaticorum', CMa: 'Canis Majoris', CMi: 'Canis Minoris', Cap: 'Capricorni', Car: 'Carinae',
+  Cas: 'Cassiopeiae', Cen: 'Centauri', Cep: 'Cephei', Cet: 'Ceti', Cha: 'Chamaeleontis', Cir: 'Circini', Col: 'Columbae', Com: 'Comae Berenices', CrA: 'Coronae Australis',
+  CrB: 'Coronae Borealis', Crv: 'Corvi', Crt: 'Crateris', Cru: 'Crucis', Cyg: 'Cygni', Del: 'Delphini', Dor: 'Doradus', Dra: 'Draconis', Equ: 'Equulei', Eri: 'Eridani',
+  For: 'Fornacis', Gem: 'Geminorum', Gru: 'Gruis', Her: 'Herculis', Hor: 'Horologii', Hya: 'Hydrae', Hyi: 'Hydri', Ind: 'Indi', Lac: 'Lacertae', Leo: 'Leonis',
+  LMi: 'Leonis Minoris', Lep: 'Leporis', Lib: 'Librae', Lup: 'Lupi', Lyn: 'Lyncis', Lyr: 'Lyrae', Men: 'Mensae', Mic: 'Microscopii', Mon: 'Monocerotis', Mus: 'Muscae',
+  Nor: 'Normae', Oct: 'Octantis', Oph: 'Ophiuchi', Ori: 'Orionis', Pav: 'Pavonis', Peg: 'Pegasi', Per: 'Persei', Phe: 'Phoenicis', Pic: 'Pictoris', PsA: 'Piscis Austrini',
+  Psc: 'Piscium', Pup: 'Puppis', Pyx: 'Pyxidis', Ret: 'Reticuli', Sge: 'Sagittae', Sgr: 'Sagittarii', Sco: 'Scorpii', Scl: 'Sculptoris', Sct: 'Scuti', Ser: 'Serpentis',
+  Sex: 'Sextantis', Tau: 'Tauri', Tel: 'Telescopii', Tri: 'Trianguli', TrA: 'Trianguli Australis', Tuc: 'Tucanae', UMa: 'Ursae Majoris', UMi: 'Ursae Minoris', Vel: 'Velorum',
+  Vir: 'Virginis', Vol: 'Volantis', Vul: 'Vulpeculae' };
+const GREEK: Readonly<Record<string, string>> = { alf: 'Alpha', bet: 'Beta', gam: 'Gamma', del: 'Delta', eps: 'Epsilon', zet: 'Zeta', eta: 'Eta', tet: 'Theta', iot: 'Iota',
+  kap: 'Kappa', lam: 'Lambda', mu: 'Mu', nu: 'Nu', ksi: 'Xi', omi: 'Omicron', pi: 'Pi', rho: 'Rho', sig: 'Sigma', tau: 'Tau', ups: 'Upsilon', phi: 'Phi', chi: 'Chi', psi: 'Psi', ome: 'Omega' };
+/** A catalogue name as Wikipedia titles it: "55 Cnc e" is "55 Cancri e", "eps Ind A" is "Epsilon Indi A", "HU Aqr" is "HU Aquarii". */
+export function spelledOut(name: string): string {
+  const match = /^(\S+) ([A-Z][A-Za-z]{2})\b(.*)$/u.exec(name.trim());
+  const genitive = match && GENITIVE[match[2]!];
+  if (!match || !genitive) return name;
+  const letter = /^([a-z]+)(\d*)$/u.exec(match[1]!), greek = letter && GREEK[letter[1]!];
+  return `${greek ? `${greek}${letter![2]}` : match[1]} ${genitive}${match[3]}`;
+}
+
+export async function wikipediaQuotes(archive: Archive, catalogueTitles: readonly string[], catalogueNames: readonly string[]): Promise<Quotes | undefined> {
+  // Articles are titled with the constellation spelled out, and often a planet's letter against its star (Kepler-62f); a lead may
+  // name the body any of these ways.
+  const titles = catalogueTitles.map(spelledOut), joined = (name: string) => name.replace(/ ([a-z])$/u, '$1');
+  const names = [...new Set(catalogueNames.flatMap(name => [name, spelledOut(name)]).flatMap(name => [name, joined(name)]))];
+  const key = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/gu, ''), host = titles[1] === undefined ? undefined : key(titles[1]);
   for (const [index, title] of titles.entries()) {
     const lead = await wikipediaLead(archive, title);
     if (!lead) continue;
-    // The body's own article is the first title, served under that title; a later title, or one that redirects (a planet's
-    // name leading to its host's article), is another body's article and must name this one.
-    const own = index === 0 && lead.title.toLowerCase() === title.trim().toLowerCase();
+    // The body's own article is the first title, served under that title (spacing aside) or under a longer name of the same
+    // host ("55 Cancri e" is served as "55 Cancri Ae"); a later title, or a redirect to the host's article or to anything else,
+    // is another body's article and must name this one.
+    const served = key(lead.title), own = index === 0 && (served === key(title) || (host !== undefined && served !== host && served.startsWith(host)));
     const picked = pickQuotes(lead.extract, names, !own);
     if (!picked.card) continue;
     return { url: lead.url, title: lead.title, revision: lead.revision, ...picked };
