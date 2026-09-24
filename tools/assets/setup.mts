@@ -114,6 +114,11 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
  * caller is told which command finishes the job instead of failing on an import.
  */
 export async function deriveRestoredPreparedFiles(ids: readonly string[], root: string) {
+  // A deploy runs setup before `pnpm build:tools` writes the scene catalogue; its second setup run derives the files.
+  if (!existsSync(new URL("../../site/prepared-object-catalog.mts", import.meta.url))) {
+    console.log("Derived page data not written: the scene catalogue is not generated. Run pnpm build:tools && pnpm prepare:object-json.");
+    return { pages: 0, provenance: 0 };
+  }
   const { SCENE_OBJECTS } = await import("../../site/objects.mts");
   const { provenanceIsRegenerated } = await import("../../src/platform/runtime-asset-closure.mts");
   const scene = ids.filter(id => SCENE_OBJECTS.some(object => object.id === id));
