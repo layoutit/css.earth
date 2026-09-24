@@ -46,16 +46,17 @@ export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, l
   function update() {
     if (lifetime.disposed) return;
     const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures });
-    const hiddenBodies = visibility.hiddenBodies.filter(id => !openSystem.has(id));
-    layer.setHiddenBodies(hiddenBodies);
-    layer.setHiddenLabels(visibility.hiddenLabels.filter(id => !openSystem.has(id)));
-    layer.setHighlighted(visibility.highlightedBodies);
+    layer.setBodyVisibility({
+      bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id)),
+      labelHidden: visibility.hiddenLabels.filter(id => !openSystem.has(id)),
+      highlighted: visibility.highlightedBodies,
+      // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
+      indicatorHidden: ordinaryAsteroidIds,
+      orbitHidden: hiddenOrbitIds,
+    });
   }
 
-  // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
-  layer.setHiddenIndicators(ordinaryAsteroidIds);
   update();
-  layer.setHiddenOrbits(hiddenOrbitIds);
 
   return {
     selectObject(id: string) {
