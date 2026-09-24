@@ -39,43 +39,48 @@ export function createUnboundedMatrixDragControls({
     }
   };
   let drag = true, wheel = true;
-  let pointerId: number | null = null;
-  let pointerDragging = false;
-  let rotating = false;
-  const setRotating = (active: boolean) => {
-    if (rotating === active) return;
-    rotating = active;
+  type Throw = { -readonly [K in keyof DragThrow]: DragThrow[K] } & { previousTimestamp: number };
+  /** One pressed pointer: its trackball, its latest sample and the orbit it has recorded. It ends with the press. */
+  interface Press {
+    readonly pointerId: number;
+    /** Past the first moved sample: the press orbits instead of only holding. */
+    dragging: boolean;
+    /** A sky press orbits in the screen plane; a globe press follows the sphere under the pointer. */
+    readonly sky: boolean;
+    /** Started over the body's surface, for the pressed cursor. */
+    readonly surface: boolean;
+    trackball: TrackballMetrics;
+    trackballInvalidated: boolean;
+    x: number; y: number; timestamp: number;
+    pitch: number; yaw: number;
+    /** Samples since the last frame, published as one rotation per frame. */
+    pending: (CameraDelta & { rotation: Quaternion }) | null;
+    /** The measured frame cadence sizes the first inertia step on release. */
+    cadenceFrame: number | null; cadenceTimestamp: number | null; frameMilliseconds: number;
+  }
+  let press: Press | null = null;
+  /** What moves the camera between onStart and onEnd. A drag rotates; its throw keeps rotating as inertia. */
+  type Motion = { readonly kind: 'idle' } | { readonly kind: 'drag' } | { readonly kind: 'fly-to' }
+    | { readonly kind: 'inertia'; frame: number; readonly sky: boolean; readonly state: Throw };
+  const IDLE: Motion = Object.freeze({ kind: 'idle' });
+  let motion: Motion = IDLE;
+  const announceRotation = (active: boolean) =>
     inputSurface.dispatchEvent(new CustomEvent('objectrotationchange', { bubbles: true, detail: { active } }));
-  };
-  let previousX = 0, previousY = 0;
-  let accumulatedPitch = 0, accumulatedYaw = 0;
-  let activeTrackball: TrackballMetrics | null = null;
-  let skyGesture = false;
-  const projectSkyRotation = (pointer: SphereDragInput) => {
-    if (activeTrackball === null) throw new Error("Sky drag has no active trackball.");
-    const projected = projectTrackballDelta({
-      ...activeTrackball, ...pointer, radius: activeTrackball.radius,
-    });
+  const projectSkyRotation = (trackball: TrackballMetrics, pointer: SphereDragInput) => {
+    const projected = projectTrackballDelta({ ...trackball, ...pointer, radius: trackball.radius });
     return rotationFromAngularVelocity([
       -projected.pitchDegrees * Math.PI / 180,
       projected.yawDegrees * Math.PI / 180, 0,
     ], 1);
   };
-  let trackballInvalidated = false;
-  let previousPointerTimestamp: number | null = null;
-  let cadenceFrame: number | null = null;
-  let previousCadenceTimestamp: number | null = null;
-  let frameMilliseconds = 1000 / 60;
   const history = createDragHistory();
-  let inertiaFrame: number | null = null;
-  let inertiaState: ({ -readonly [K in keyof DragThrow]: DragThrow[K] } & { previousTimestamp: number }) | null = null;
-  let interactionActive = false;
-  let activeMode: ActiveMode = "idle";
   let inertiaStarts = 0, inertiaFrames = 0, inertiaCancels = 0;
   let pointerCancels = 0;
   const surfaceFlightScope = new AbortController();
   lifetime.onDispose(() => surfaceFlightScope.abort());
   const surfaceFlightActive = () => cameraMotion.owns(surfaceFlightScope.signal);
+  // Camera motion owns the fly-to: it reports as one only while that ownership lasts.
+  const currentMode = (): ActiveMode => surfaceFlightActive() ? 'fly-to' : motion.kind === 'fly-to' ? 'idle' : motion.kind;
   let flyToStarts = 0, flyToFrames = 0, flyToCompletions = 0, flyToCancels = 0;
   const interruptionCounts = {
     drag: 0,
@@ -95,29 +100,29 @@ export function createUnboundedMatrixDragControls({
   lifetime.onDispose(() => frameClock.destroy());
   const requestFrame = (callback: FrameRequestCallback) => frameClock.request(guardNative(callback), 'input');
   const cancelFrame = (id: number) => frameClock.cancel(id);
-  let pendingDrag: (CameraDelta & { rotation: Quaternion }) | null = null;
   const flushPendingDrag = () => {
-    if (pendingDrag === null) return;
-    const update = pendingDrag;
-    pendingDrag = null;
+    const update = press?.pending;
+    if (!update) return;
+    press!.pending = null;
     rotate(update);
   };
-  const cancelCadence = () => {
-    if (cadenceFrame !== null) cancelFrame(cadenceFrame);
-    cadenceFrame = null;
-    previousCadenceTimestamp = null;
-  };
   const measureCadence = (timestamp: number) => {
-    if (previousCadenceTimestamp !== null && timestamp > previousCadenceTimestamp) {
-      frameMilliseconds = timestamp - previousCadenceTimestamp;
+    const current = press;
+    if (current === null) return;
+    if (current.cadenceTimestamp !== null && timestamp > current.cadenceTimestamp) {
+      current.frameMilliseconds = timestamp - current.cadenceTimestamp;
     }
-    previousCadenceTimestamp = timestamp;
+    current.cadenceTimestamp = timestamp;
     flushPendingDrag();
-    if (lifetime.disposed) return;
-    cadenceFrame = requestFrame(measureCadence);
+    if (lifetime.disposed || press !== current) return;
+    current.cadenceFrame = requestFrame(measureCadence);
+  };
+  /** The press ends: its cadence stops and its unpublished samples are dropped. */
+  const endPress = (current: Press) => {
+    if (current.cadenceFrame !== null) cancelFrame(current.cadenceFrame);
+    if (press === current) press = null;
   };
   let pointerPosition: { x: number; y: number } | null = null;
-  let surfaceGesture = false;
   const overSurface = (x: number, y: number) => {
     if (surfaceFlyToHitTest) return surfaceFlyToHitTest(x, y);
     const metrics = trackballMetrics();
@@ -125,47 +130,46 @@ export function createUnboundedMatrixDragControls({
   };
   const syncCursor = () => {
     if (lifetime.disposed) return;
-    const pressed = pointerId !== null;
-    const surface = pressed ? surfaceGesture : pointerPosition !== null && overSurface(pointerPosition.x, pointerPosition.y);
+    const pressed = press !== null;
+    const surface = press !== null ? press.surface : pointerPosition !== null && overSurface(pointerPosition.x, pointerPosition.y);
     const cursor = runtimePolicy.sceneCursor({ surface, pressed, enabled: drag });
     // Picking supplies a separate in-memory hover override; camera input owns
     // the base cursor without publishing a custom property into CSS.
     setBaseCursor(inputSurface, cursor ?? '');
   };
+  /** A drag or fly-to begins the interaction; a drag's inertia continues it. */
+  const startMotion = (next: Motion) => {
+    const idle = motion.kind === 'idle';
+    motion = next;
+    if (idle) onStart();
+  };
   const finishInteraction = () => {
-    if (!interactionActive) return;
-    interactionActive = false;
-    activeMode = "idle";
-    setRotating(false);
+    if (motion.kind === 'idle') return;
+    const rotated = motion.kind === 'drag' || motion.kind === 'inertia';
+    motion = IDLE;
+    if (rotated) announceRotation(false);
     onEnd();
   };
   const cancelInertia = () => {
-    if (inertiaFrame === null) return;
-    cancelFrame(inertiaFrame);
-    inertiaFrame = null;
-    inertiaState = null;
+    if (motion.kind !== 'inertia') return;
+    cancelFrame(motion.frame);
     inertiaCancels += 1;
   };
   const cancelFlyTo = () => cameraMotion.cancel(surfaceFlightScope.signal);
   const cancelPointer = () => {
-    pendingDrag = null;
-    cancelCadence();
-    if (pointerId === null) return;
-    const activePointerId = pointerId;
-    pointerId = null;
-    pointerDragging = false;
+    const current = press;
+    if (current === null) return;
+    endPress(current);
     resetDragHistory(history);
-    activeTrackball = null;
-    if (inputSurface.hasPointerCapture(activePointerId)) {
-      inputSurface.releasePointerCapture(activePointerId);
+    if (inputSurface.hasPointerCapture(current.pointerId)) {
+      inputSurface.releasePointerCapture(current.pointerId);
     }
     pointerCancels += 1;
     syncCursor();
   };
   const interruptMotion = (nextMode: InterruptionMode) => {
-    const previousMode = surfaceFlightActive() ? "fly-to" : activeMode;
-    const hadActivity = previousMode !== "idle" || pointerId !== null;
-    if (!hadActivity) return false;
+    const previousMode = currentMode();
+    if (previousMode === "idle" && press === null) return false;
     cancelInertia();
     cancelFlyTo();
     cancelPointer();
@@ -178,21 +182,6 @@ export function createUnboundedMatrixDragControls({
       });
     }
     return true;
-  };
-  const beginDrag = () => {
-    const nextMode = "drag";
-    const previousMode = surfaceFlightActive() ? "fly-to" : activeMode;
-    if (previousMode === "inertia") cancelInertia();
-    if (previousMode === "fly-to") cancelFlyTo();
-    if (previousMode !== "idle" && previousMode !== nextMode) {
-      interruptionCounts[nextMode] += 1;
-      lastInterruption = Object.freeze({
-        from: previousMode,
-        to: nextMode,
-      });
-    }
-    activeMode = nextMode;
-    return previousMode;
   };
   let completedDoublePress: { x: number; y: number; timestamp: number } | null = null;
   const beginSurfaceFlyTo = (event: MouseEvent) => {
@@ -215,12 +204,8 @@ export function createUnboundedMatrixDragControls({
     event.preventDefault();
     cancelPointer();
     interruptMotion("fly-to");
-    const wasInteractionActive = interactionActive;
     flyToStarts += 1;
-    if (!wasInteractionActive) {
-      interactionActive = true;
-      onStart();
-    }
+    startMotion({ kind: 'fly-to' });
     if (lifetime.disposed) return;
     let previousPitchDelta = 0, previousYawDelta = 0;
     let previousRotation: Quaternion = [0, 0, 0, 1];
@@ -258,7 +243,9 @@ export function createUnboundedMatrixDragControls({
     beginSurfaceFlyTo(event);
   };
   const animateInertia = (timestamp: number) => {
-    if (inertiaState === null) return;
+    const inertia = motion;
+    if (inertia.kind !== 'inertia') return;
+    const inertiaState = inertia.state;
     const elapsedMilliseconds = Math.max(
       0,
       timestamp - inertiaState.previousTimestamp,
@@ -286,19 +273,14 @@ export function createUnboundedMatrixDragControls({
           ) / inertiaState.initialSpeedDegreesPerMillisecond,
         ),
       });
-      if (lifetime.disposed) return;
+      if (lifetime.disposed || motion !== inertia) return;
       inertiaFrames += 1;
     }
-    if (step.active) {
-      inertiaFrame = requestFrame(animateInertia);
-    } else {
-      inertiaFrame = null;
-      inertiaState = null;
-      finishInteraction();
-    }
+    if (step.active) inertia.frame = requestFrame(animateInertia);
+    else finishInteraction();
   };
-  const startInertia = (throwState: DragThrow | null, releaseTimestamp: number, releaseFrameTimestamp: number | null) => {
-    if (throwState === null) return false;
+  const startInertia = (throwState: DragThrow, released: Press, releaseTimestamp: number, releaseFrameTimestamp: number | null) => {
+    const { frameMilliseconds } = released;
     const firstStep = advanceDragThrow({
       ...throwState,
       elapsedMilliseconds: frameMilliseconds,
@@ -317,15 +299,14 @@ export function createUnboundedMatrixDragControls({
         firstStep.yawDeltaDegrees,
     });
     if (lifetime.disposed) return false;
-    inertiaState = {
+    const state: Throw = {
       ...throwState,
       pitchDegreesPerMillisecond: firstStep.pitchDegreesPerMillisecond,
       yawDegreesPerMillisecond: firstStep.yawDegreesPerMillisecond,
       previousTimestamp: releaseFrameTimestamp ?? releaseTimestamp,
     };
-    activeMode = "inertia";
     inertiaStarts += 1;
-    inertiaFrame = requestFrame(animateInertia);
+    motion = { kind: 'inertia', sky: released.sky, state, frame: requestFrame(animateInertia) };
     return true;
   };
   // Two fingers pinch: the second touch ends the one-finger orbit, and the pair zooms through the shared wheel zoom as a
@@ -337,14 +318,11 @@ export function createUnboundedMatrixDragControls({
     return { distance: Math.hypot(a.x - b.x, a.y - b.y), x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
   };
   const abandonOrbit = () => {
-    if (pointerId === null) return;
-    const wasDragging = pointerDragging;
-    pendingDrag = null;
-    cancelCadence();
-    pointerId = null;
-    pointerDragging = false;
+    const current = press;
+    if (current === null) return;
+    endPress(current);
     syncCursor();
-    if (wasDragging) finishInteraction();
+    if (current.dragging) finishInteraction();
   };
   const onPointerDown = (event: PointerEvent) => {
     if (event.pointerType === "touch") touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
@@ -356,7 +334,7 @@ export function createUnboundedMatrixDragControls({
       inputSurface.setPointerCapture(event.pointerId);
       return;
     }
-    if (!drag || pointerId !== null || !runtimePolicy.isOrbitDragStart(event)) return;
+    if (!drag || press !== null || !runtimePolicy.isOrbitDragStart(event)) return;
     if (cameraMotion.hurryForInput()) { event.preventDefault(); return; }
     const measuredTrackball = trackballMetrics();
     if (!isTrackballMetrics(measuredTrackball)) {
@@ -375,34 +353,18 @@ export function createUnboundedMatrixDragControls({
     cameraMotion.cancel();
     if (lifetime.disposed) return;
 
-    skyGesture = startsOnSky || tumbleOnly;
-    surfaceGesture = overSurface(event.clientX, event.clientY);
+    const surface = overSurface(event.clientX, event.clientY);
     pointerPosition = { x: event.clientX, y: event.clientY };
-    pointerId = event.pointerId;
-    pointerDragging = false;
-    previousX = event.clientX;
-    previousY = event.clientY;
-    previousPointerTimestamp = event.timeStamp;
-    accumulatedPitch = 0;
-    accumulatedYaw = 0;
-    pendingDrag = null;
-    activeTrackball = measuredTrackball;
-    trackballInvalidated = false;
-    frameMilliseconds = 1000 / 60;
-    cadenceFrame = requestFrame(measureCadence);
+    const current: Press = press = { pointerId: event.pointerId, dragging: false, sky: startsOnSky || tumbleOnly, surface,
+      trackball: measuredTrackball, trackballInvalidated: false, x: event.clientX, y: event.clientY, timestamp: event.timeStamp,
+      pitch: 0, yaw: 0, pending: null, cadenceFrame: null, cadenceTimestamp: null, frameMilliseconds: 1000 / 60 };
+    current.cadenceFrame = requestFrame(measureCadence);
     resetDragHistory(history);
-    recordDragSample(history, {
-      x: event.clientX,
-      y: event.clientY,
-      timestamp: event.timeStamp,
-      pitch: accumulatedPitch,
-      yaw: accumulatedYaw,
-    });
+    recordDragSample(history, { x: event.clientX, y: event.clientY, timestamp: event.timeStamp, pitch: 0, yaw: 0 });
     syncCursor();
     inputSurface.setPointerCapture(event.pointerId);
   };
-  const applyPointerSamples = (event: PointerEvent) => {
-    if (activeTrackball === null) throw new Error("Pointer drag has no active trackball.");
+  const applyPointerSamples = (current: Press, event: PointerEvent) => {
     const coalesced = typeof event.getCoalescedEvents === "function"
       ? event.getCoalescedEvents()
       : [];
@@ -411,71 +373,46 @@ export function createUnboundedMatrixDragControls({
     let yawDelta = 0;
     let rotation: Quaternion = [0, 0, 0, 1];
     for (const sampleEvent of sampleEvents) {
-      if (Math.abs(sampleEvent.clientX - previousX) <=
-            POINTER_POSITION_EPSILON &&
-          Math.abs(sampleEvent.clientY - previousY) <=
-            POINTER_POSITION_EPSILON) {
+      if (Math.abs(sampleEvent.clientX - current.x) <= POINTER_POSITION_EPSILON &&
+          Math.abs(sampleEvent.clientY - current.y) <= POINTER_POSITION_EPSILON) {
         continue;
       }
-      if (!pointerDragging) {
-        const wasInteractionActive = interactionActive;
-        beginDrag();
-        pointerDragging = true;
-        if (!wasInteractionActive) {
-          interactionActive = true;
-          onStart();
-          if (lifetime.disposed) return;
-        }
-        setRotating(true);
+      if (!current.dragging) {
+        // The press already interrupted every other motion, so the drag begins the interaction.
+        current.dragging = true;
+        startMotion({ kind: 'drag' });
+        if (lifetime.disposed) return;
+        announceRotation(true);
       }
-      if (trackballInvalidated) {
+      if (current.trackballInvalidated) {
         const measuredTrackball = trackballMetrics();
         if (!isTrackballMetrics(measuredTrackball)) {
           throw new TypeError("Unbounded matrix drag trackball is invalid.");
         }
-        activeTrackball = measuredTrackball;
-        trackballInvalidated = false;
+        current.trackball = measuredTrackball;
+        current.trackballInvalidated = false;
         resetDragHistory(history);
-        accumulatedPitch = 0;
-        accumulatedYaw = 0;
+        current.pitch = 0;
+        current.yaw = 0;
       }
-      const projected = projectTrackballDelta({
-        previousX,
-        previousY,
-        currentX: sampleEvent.clientX,
-        currentY: sampleEvent.clientY,
-        ...activeTrackball,
-      });
+      const { trackball } = current;
+      const pointer = { previousX: current.x, previousY: current.y, currentX: sampleEvent.clientX, currentY: sampleEvent.clientY };
+      const projected = projectTrackballDelta({ ...pointer, ...trackball });
       const fittedPitch = projected.pitchDegrees *
-        (skyGesture ? 1 : activeTrackball.pitchResponse ??
-          TRACKBALL_DRAG_INERTIA.directPitchResponse);
-      const sampleRotation = (skyGesture ? projectSkyRotation : projectSphereDrag)({
-        previousX,
-        previousY,
-        currentX: sampleEvent.clientX,
-        currentY: sampleEvent.clientY,
-        centerX: activeTrackball.centerX,
-        centerY: activeTrackball.centerY,
-        opticalCenterX: activeTrackball.opticalCenterX,
-        opticalCenterY: activeTrackball.opticalCenterY,
-        radius: activeTrackball.surfaceRadius,
-        focalLength: activeTrackball.focalLength,
-      });
+        (current.sky ? 1 : trackball.pitchResponse ?? TRACKBALL_DRAG_INERTIA.directPitchResponse);
+      const spherePointer = { ...pointer, centerX: trackball.centerX, centerY: trackball.centerY,
+        opticalCenterX: trackball.opticalCenterX, opticalCenterY: trackball.opticalCenterY,
+        radius: trackball.surfaceRadius, focalLength: trackball.focalLength };
+      const sampleRotation = current.sky ? projectSkyRotation(trackball, spherePointer) : projectSphereDrag(spherePointer);
       rotation = composeDragRotation(sampleRotation, rotation);
       pitchDelta += fittedPitch;
       yawDelta += projected.yawDegrees;
-      accumulatedPitch += fittedPitch;
-      accumulatedYaw += projected.yawDegrees;
-      previousX = sampleEvent.clientX;
-      previousY = sampleEvent.clientY;
-      previousPointerTimestamp = sampleEvent.timeStamp;
-      recordDragSample(history, {
-        x: sampleEvent.clientX,
-        y: sampleEvent.clientY,
-        timestamp: sampleEvent.timeStamp,
-        pitch: accumulatedPitch,
-        yaw: accumulatedYaw,
-      });
+      current.pitch += fittedPitch;
+      current.yaw += projected.yawDegrees;
+      current.x = sampleEvent.clientX;
+      current.y = sampleEvent.clientY;
+      current.timestamp = sampleEvent.timeStamp;
+      recordDragSample(history, { x: current.x, y: current.y, timestamp: current.timestamp, pitch: current.pitch, yaw: current.yaw });
     }
     if (pitchDelta !== 0 || yawDelta !== 0 ||
         Math.abs(rotation[0]) + Math.abs(rotation[1]) + Math.abs(rotation[2]) > 1e-12) {
@@ -484,10 +421,11 @@ export function createUnboundedMatrixDragControls({
         controlYawDelta: yawDelta,
         rotation,
       };
-      pendingDrag = pendingDrag === null ? update : {
-        controlPitchDelta: pendingDrag.controlPitchDelta + pitchDelta,
-        controlYawDelta: pendingDrag.controlYawDelta + yawDelta,
-        rotation: composeDragRotation(rotation, pendingDrag.rotation),
+      const pending = current.pending;
+      current.pending = pending === null ? update : {
+        controlPitchDelta: pending.controlPitchDelta + pitchDelta,
+        controlYawDelta: pending.controlYawDelta + yawDelta,
+        rotation: composeDragRotation(rotation, pending.rotation),
       };
       return update;
     }
@@ -510,9 +448,9 @@ export function createUnboundedMatrixDragControls({
       pointerPosition = { x: event.clientX, y: event.clientY };
       syncCursor();
     }
-    if (!drag || event.pointerId !== pointerId) return;
+    if (!drag || press === null || event.pointerId !== press.pointerId) return;
     event.preventDefault();
-    applyPointerSamples(event);
+    applyPointerSamples(press, event);
   };
   const endPointer = (event: PointerEvent) => {
     if (touches.delete(event.pointerId) && pinchDistance !== null) {
@@ -521,35 +459,31 @@ export function createUnboundedMatrixDragControls({
       if (inputSurface.hasPointerCapture(event.pointerId)) inputSurface.releasePointerCapture(event.pointerId);
       return;
     }
-    if (event.pointerId !== pointerId) return;
+    const current = press;
+    if (current === null || event.pointerId !== current.pointerId) return;
     pointerPosition = { x: event.clientX, y: event.clientY };
-    const wasDragging = pointerDragging;
-    const releaseAge = event.timeStamp - previousPointerTimestamp!;
+    const releaseAge = event.timeStamp - current.timestamp;
     const freshRelease = releaseAge >= 0 &&
       releaseAge <= TRACKBALL_DRAG_INERTIA.releaseFreshnessMilliseconds;
-    const throwState = wasDragging && event.type === "pointerup" && freshRelease
-      ? estimateDragThrow({ history, releaseTimestamp: event.timeStamp,
-        trackball: activeTrackball!, frameMilliseconds,
-        projectRotation: skyGesture ? projectSkyRotation : undefined }) : null;
+    const { trackball } = current;
+    const throwState = current.dragging && event.type === "pointerup" && freshRelease
+      ? estimateDragThrow({ history, releaseTimestamp: event.timeStamp, trackball, frameMilliseconds: current.frameMilliseconds,
+        projectRotation: current.sky ? pointer => projectSkyRotation(trackball, pointer) : undefined }) : null;
     if (throwState !== null) flushPendingDrag();
-    else pendingDrag = null;
+    else current.pending = null;
     if (lifetime.disposed) return;
-    const releaseFrameTimestamp = previousCadenceTimestamp;
-    cancelCadence();
-    pointerId = null;
-    pointerDragging = false;
+    const releaseFrameTimestamp = current.cadenceTimestamp;
+    endPress(current);
     syncCursor();
     if (inputSurface.hasPointerCapture(event.pointerId)) {
       inputSurface.releasePointerCapture(event.pointerId);
     }
-    if (throwState !== null) {
-      if (startInertia(throwState, event.timeStamp, releaseFrameTimestamp)) return;
-    }
-    if (wasDragging) finishInteraction();
+    if (throwState !== null && startInertia(throwState, current, event.timeStamp, releaseFrameTimestamp)) return;
+    if (current.dragging) finishInteraction();
   };
   const onWheel = (event: WheelEvent) => {
     if (!wheel || event.deltaY === 0) return;
-    if (pointerId !== null) {
+    if (press !== null) {
       event.preventDefault();
       interruptMotion("wheel");
 
@@ -589,13 +523,13 @@ export function createUnboundedMatrixDragControls({
       interruptMotion("programmatic");
     },
     invalidateTrackball() {
-      if (pointerId !== null) trackballInvalidated = true;
+      if (press !== null) press.trackballInvalidated = true;
       syncCursor();
     },
     stats() {
-      return dragControlDiagnostics({ skyGesture, pointerActive: pointerId !== null,
-        inertiaActive: inertiaFrame !== null, flyToActive: surfaceFlightActive(), surfaceFlyToEnabled: surfaceFlyToState !== null,
-        activeMode: surfaceFlightActive() ? "fly-to" : activeMode, pointerDragging, inertiaStarts, inertiaFrames, inertiaCancels, pointerCancels,
+      return dragControlDiagnostics({ skyGesture: press?.sky ?? (motion.kind === 'inertia' && motion.sky), pointerActive: press !== null,
+        inertiaActive: motion.kind === 'inertia', flyToActive: surfaceFlightActive(), surfaceFlyToEnabled: surfaceFlyToState !== null,
+        activeMode: currentMode(), pointerDragging: press?.dragging ?? false, inertiaStarts, inertiaFrames, inertiaCancels, pointerCancels,
         interruptionCounts, lastInterruption, flyToStarts, flyToFrames, flyToCompletions, flyToCancels });
     },
     destroy() {
