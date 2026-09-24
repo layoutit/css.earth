@@ -93,6 +93,11 @@ jobs:
         # only the two smallest trees. Warnings are reported here; `lint:packages` still fails on
         # any warning inside `packages/`, where the rules have always been enforced.
         run: pnpm lint
+      - name: Check that no body pins a paper or copies a shared reference file
+        if: ${{ !cancelled() }}
+        # Gates: papers are cited by URL (docs/provenance/CONTRACT.md) and shared tables live once in
+        # src/references or src/spice. Two cleanups removed hundreds of copies; this keeps them out.
+        run: pnpm check:body-references
       - name: Check that no directory grew past its baseline
         if: ${{ !cancelled() }}
         # Convention, not correctness: a flat directory cannot break the shipped site, so this
