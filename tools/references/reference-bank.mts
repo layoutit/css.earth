@@ -3,11 +3,21 @@
  * a copy in each body that uses it. A bank's `manifest.json` has the shape of a body's source manifest and is verified the
  * same way, under the identity `reference-<set>`, as the SPICE kernel banks are (tools/spice/kernel-bank.mts).
  */
+import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 
-export const REFERENCE_BANK_ROOT = resolve(import.meta.dirname, '../../src/references');
+/** The banks' directory, found upward from this module: it runs from tools/references and bundled into tools/objects/dist. */
+function findReferenceBankRoot(from: string): string {
+  for (let directory = from; ; directory = dirname(directory)) {
+    const candidate = resolve(directory, 'src/references');
+    if (existsSync(candidate)) return candidate;
+    if (dirname(directory) === directory) throw new Error(`No src/references directory above ${from}.`);
+  }
+}
+
+export const REFERENCE_BANK_ROOT = findReferenceBankRoot(import.meta.dirname);
 const SET_ID = /^[a-z][a-z0-9-]*$/u;
 
 export function referenceBankRoot(set: string) {
