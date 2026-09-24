@@ -360,15 +360,18 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     catalogue.setSelection(selected);
   };
   const previewSelection = (subject: SceneSubject) => {
-    const previous = subjectOverride, previousBrowsing = browsing;
+    const previous = subjectOverride, previousBrowsing = browsing, previousQuery = search.value;
     const preview = { subject, hideFocus: true };
     subjectOverride = preview;
     browsing = false;
+    // Choosing a result ends that search; a cancelled flight gives the query back.
+    search.value = '';
     markSelection(); render(false);
     return () => {
       if (subjectOverride !== preview) return;
       subjectOverride = previous;
       browsing ||= previousBrowsing;
+      if (!search.value) search.value = previousQuery;
       markSelection(); render(browsing);
     };
   };
