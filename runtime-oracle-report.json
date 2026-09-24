@@ -1,0 +1,82 @@
+{
+ "startup reaches readiness": {
+  "records": 5,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "datasets, pause and resume after readiness": {
+  "records": 7,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "destroy before the document is ready": {
+  "records": 4,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "destroy while decodes never settle": {
+  "records": 5,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "destroy after activation, before the paint": {
+  "records": 4,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "a failed decode rejects readiness": {
+  "records": 4,
+  "identical": true,
+  "readiness": "rejected Error: Prepared image did not decode: /scenes/moon/lighting-2x-row-31.webp."
+ },
+ "a fatal orbit error before readiness rejects it": {
+  "records": 3,
+  "identical": true,
+  "readiness": "rejected Error: camera failed early"
+ },
+ "a fatal orbit error after readiness reports once": {
+  "records": 5,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "a cleanup failure after readiness is fatal": {
+  "records": 3,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "a warm decode failure is recoverable": {
+  "records": 3,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "shared view restore round trip": {
+  "records": 5,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "a user lens action frames the camera": {
+  "records": 4,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "a programmatic dataset switch keeps the camera": {
+  "records": 3,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "a startup from a saved camera keeps it": {
+  "records": 3,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "a default startup may frame the camera": {
+  "records": 3,
+  "identical": true,
+  "readiness": "resolved"
+ },
+ "destroy twice": {
+  "records": 3,
+  "identical": true,
+  "readiness": "resolved"
+ }
+}

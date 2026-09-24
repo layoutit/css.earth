@@ -1,0 +1,89 @@
+{
+ "mars-datasets": {
+  "record": [
+   {
+    "step": "loaded",
+    "lens": "normal",
+    "desired": "normal",
+    "pending": false,
+    "error": null,
+    "level": null,
+    "required": 3
+   },
+   {
+    "step": "elevation",
+    "lens": "elevation",
+    "desired": "elevation",
+    "pending": false,
+    "error": null,
+    "level": null,
+    "required": 3
+   },
+   {
+    "step": "thermal",
+    "lens": "thermal",
+    "desired": "thermal",
+    "pending": false,
+    "error": null,
+    "level": null,
+    "required": 3
+   },
+   {
+    "step": "back",
+    "lens": "normal",
+    "desired": "normal",
+    "pending": false,
+    "error": null,
+    "level": null,
+    "required": 3
+   }
+  ],
+  "errors": []
+ },
+ "earth-refine": {
+  "record": [
+   {
+    "step": "loaded",
+    "lens": "normal",
+    "desired": "normal",
+    "pending": false,
+    "error": null,
+    "level": 2,
+    "required": 10
+   },
+   {
+    "step": "zoomed",
+    "lens": "normal",
+    "desired": "normal",
+    "pending": false,
+    "error": null,
+    "level": 3,
+    "required": 10
+   }
+  ],
+  "errors": []
+ },
+ "mars-quick-switch": {
+  "record": [
+   {
+    "step": "loaded",
+    "lens": "normal",
+    "desired": "normal",
+    "pending": false,
+    "error": null,
+    "level": null,
+    "required": 3
+   },
+   {
+    "step": "three clicks",
+    "lens": "normal",
+    "desired": "normal",
+    "pending": false,
+    "error": null,
+    "level": null,
+    "required": 3
+   }
+  ],
+  "errors": []
+ }
+}

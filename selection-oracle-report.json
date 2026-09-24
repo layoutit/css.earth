@@ -1,0 +1,107 @@
+{
+ "startup commits the native dataset": {
+  "records": 5,
+  "commits": 1,
+  "stateChanges": 2,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "A/B/A lens race": {
+  "records": 7,
+  "commits": 2,
+  "stateChanges": 5,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "three quick lenses, only the last commits": {
+  "records": 5,
+  "commits": 2,
+  "stateChanges": 6,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "view changes while a lens decodes": {
+  "records": 7,
+  "commits": 2,
+  "stateChanges": 4,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "a nearer globe asks for finer material (frame request)": {
+  "records": 7,
+  "commits": 3,
+  "stateChanges": 6,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "a lens supersedes a frame request": {
+  "records": 6,
+  "commits": 2,
+  "stateChanges": 5,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "a frame request supersedes nothing while a lens decodes": {
+  "records": 6,
+  "commits": 2,
+  "stateChanges": 4,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "decode failure then retry": {
+  "records": 5,
+  "commits": 2,
+  "stateChanges": 6,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "an aborted dataset signal before decoding": {
+  "records": 6,
+  "commits": 1,
+  "stateChanges": 4,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "an already aborted signal cannot replace a newer selection": {
+  "records": 5,
+  "commits": 2,
+  "stateChanges": 4,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "a dispatch that must not frame the camera": {
+  "records": 4,
+  "commits": 2,
+  "stateChanges": 4,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "destroy with a pending lens": {
+  "records": 6,
+  "commits": 1,
+  "stateChanges": 3,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "destroy during startup": {
+  "records": 5,
+  "commits": 0,
+  "stateChanges": 1,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "deferred refinement waits for refineTextures": {
+  "records": 6,
+  "commits": 2,
+  "stateChanges": 4,
+  "identical": true,
+  "committedByProblems": []
+ },
+ "a view change during a supersede keeps demand": {
+  "records": 5,
+  "commits": 2,
+  "stateChanges": 5,
+  "identical": true,
+  "committedByProblems": []
+ }
+}
