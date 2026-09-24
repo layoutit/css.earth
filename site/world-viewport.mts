@@ -5,7 +5,8 @@ import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
  * world's code loads. On phones, centre the focus between the floating header and drawer readout. */
 export function createWorldViewport(stage: HTMLElement) {
   const document = stage.ownerDocument;
+  const header = document.querySelector<HTMLElement>('.explorer-shell-header');
   return createCameraViewport(stage, document.querySelector<HTMLElement>('.object-sidebar'), stage.ownerDocument.defaultView?.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches ? {
-    above: document.querySelector<HTMLElement>('.explorer-shell-header'),
-    below: document.querySelector<HTMLElement>('.object-view-readout') } : null);
+    above: header,
+    below: document.querySelector<HTMLElement>('.object-view-readout') } : null, { header });
 }

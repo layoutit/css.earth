@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { createLabelBudget, labelEligible, labelExtentOpacity, labelImportance } from './universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, labelEligible, labelExtentOpacity, labelImportance, UNIVERSE_LABEL_POLICY } from './universe-label-policy.js';
 
 test('proper names and curated notable designations qualify independently', () => {
   expect(labelEligible({ named: true })).toBe(true);
@@ -30,4 +30,14 @@ test('Earth is the second orientation reference after the Sun, ahead of other pl
   expect(labelImportance('star', true, 5)).toBeGreaterThan(labelImportance('planet', true, 4));
   expect(labelImportance('planet', true, 4)).toBeGreaterThan(labelImportance('planet', true));
   expect(labelImportance('planet', true, 0)).toBe(labelImportance('planet', true));
+});
+
+test('labels stay out of the band the shell header covers', () => {
+  const viewport = { widthPixels: 800, heightPixels: 1000, coveredTopPixels: 60 };
+  const budget = createLabelBudget(800, 1000, [], coveredTopRects(viewport));
+  const at = (top: number) => ({ left: -40, right: 40, top, bottom: top + 18 });
+  // The stage runs from -500 to 500; the header covers -500 to -440.
+  expect(budget.accepts(at(-480)), 'a label under the header').toBe(false);
+  expect(budget.accepts(at(-440 + UNIVERSE_LABEL_POLICY.spacingPixels + 1)), 'a label just below it').toBe(true);
+  expect(coveredTopRects({ heightPixels: 1000 }), 'no header, no band').toEqual([]);
 });

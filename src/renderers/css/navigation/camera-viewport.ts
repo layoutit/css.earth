@@ -5,9 +5,14 @@ export interface CameraViewportSnapshot {
   /** The scene area left open by fixed chrome (a phone's header above, the readout riding on the drawer below), in
    * client pixels. The camera centres the focus body on it; null where no chrome covers the scene. */
   readonly openArea: { readonly top: number; readonly bottom: number } | null;
+  /** How far the shell's header reaches down into the stage, in CSS pixels, on every layout: scene labels stay out
+   * of that band. Absent or zero without a header. */
+  readonly coveredTopPixels?: number;
 }
 /** Fixed chrome that covers the scene: the open area runs from the bottom of `above` to the top of `below`. */
 export interface CameraViewportChrome { readonly above: HTMLElement | null; readonly below: HTMLElement | null }
+/** Shell chrome the labels avoid on every layout: the header row the wordmark, filters and actions share. */
+export interface CameraViewportLabelChrome { readonly header: HTMLElement | null }
 export interface CameraViewport {
   read(cssPerspective: string): CameraViewportSnapshot;
   subscribe(listener: () => void): () => void;
@@ -17,7 +22,8 @@ export interface CameraViewport {
 /** The shell's physical cameras share its viewport. Keep measurement and resize
  * ownership alive across object mounts; scene construction only reads a snapshot.
  * CSS still resolves authored projection units (including container units). */
-export function createCameraViewport(stage: HTMLElement, previewElement: HTMLElement | null = null, chrome: CameraViewportChrome | null = null): CameraViewport {
+export function createCameraViewport(stage: HTMLElement, previewElement: HTMLElement | null = null, chrome: CameraViewportChrome | null = null,
+  labelChrome: CameraViewportLabelChrome | null = null): CameraViewport {
   const view = stage.ownerDocument.defaultView;
   if (!view) throw new Error('Camera viewport requires a window.');
   const projections = new Map<string, { probe: HTMLElement; snapshot: CameraViewportSnapshot | null }>();
@@ -36,6 +42,8 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
     const openBottom = Math.min(bounds.bottom, edge(chrome?.below, 'top') ?? bounds.bottom);
     const openArea = chrome && openBottom > openTop && (openTop > bounds.top || openBottom < bounds.bottom)
       ? Object.freeze({ top: openTop, bottom: openBottom }) : null;
+    const headerBottom = edge(labelChrome?.header, 'bottom');
+    const coveredTopPixels = headerBottom === null ? 0 : Math.max(0, Math.min(bounds.height, headerBottom - bounds.top));
     let changed = false;
     for (const entry of projections.values()) {
       const focalPixels = Number.parseFloat(view.getComputedStyle(entry.probe).perspective);
@@ -45,8 +53,9 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
       const previous = entry.snapshot;
       if (previous && previous.focalPixels === focalPixels && previous.previewTop === previewTop &&
           previous.openArea?.top === openArea?.top && previous.openArea?.bottom === openArea?.bottom &&
+          previous.coveredTopPixels === coveredTopPixels &&
           Object.entries(measuredBounds).every(([key, value]) => previous.bounds[key as keyof CameraViewportSnapshot['bounds']] === value)) continue;
-      entry.snapshot = Object.freeze({ bounds: measuredBounds, focalPixels, previewTop, openArea });
+      entry.snapshot = Object.freeze({ bounds: measuredBounds, focalPixels, previewTop, openArea, coveredTopPixels });
       changed = true;
     }
     return changed;
@@ -72,7 +81,7 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
   });
   observer.observe(stage);
   if (previewElement) observer.observe(previewElement);
-  for (const element of [chrome?.above, chrome?.below]) if (element) observer.observe(element);
+  for (const element of [chrome?.above, chrome?.below, labelChrome?.header]) if (element) observer.observe(element);
   view.addEventListener('resize', invalidate, { passive: true });
   view.addEventListener('scroll', invalidate, { passive: true });
   return {

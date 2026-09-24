@@ -194,7 +194,8 @@ export function createPerspectiveDolly({
     const offsetY = open ? (open.top + open.bottom) / 2 - (snapshot.bounds.top + viewportHeight / 2) : 0;
     principalOffset = Object.freeze([0, 0]);
     stageViewport = Object.freeze({ focalPixels: focal, widthPixels: viewportWidth,
-      heightPixels: viewportHeight, principalOffsetPixels: [0, offsetY] as const });
+      heightPixels: viewportHeight, principalOffsetPixels: [0, offsetY] as const,
+      ...(snapshot.coveredTopPixels ? { coveredTopPixels: snapshot.coveredTopPixels } : {}) });
     visibleRect = Object.freeze({ left: -viewportWidth / 2, right: viewportWidth / 2,
       top: -viewportHeight / 2 - offsetY, bottom: viewportHeight / 2 - offsetY });
     cameraElement.style.perspectiveOrigin = '50% 50%';
