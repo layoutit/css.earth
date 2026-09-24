@@ -13,7 +13,6 @@ export function createSettingsController(
   const heliosphere = documentTarget.querySelector(".object-heliosphere-setting");
   const illustrationModels = documentTarget.querySelector(".object-illustration-models-setting");
   const surfaceLabels = documentTarget.querySelector(".object-surface-labels-setting");
-  const minimap = documentTarget.querySelector(".object-minimap-setting");
   const threeDStars = documentTarget.querySelector(".object-three-d-stars-setting");
   const speed = documentTarget.querySelector(
     '.object-speed-setting[type="range"][name="speed"]',
@@ -22,7 +21,6 @@ export function createSettingsController(
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
       !(illustrationModels instanceof windowTarget.HTMLInputElement) ||
       !(surfaceLabels instanceof windowTarget.HTMLInputElement) ||
-      !(minimap instanceof windowTarget.HTMLInputElement) ||
       !(threeDStars instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement))) {
     throw new Error("Object shell settings controls are incomplete.");
@@ -31,14 +29,13 @@ export function createSettingsController(
   lifetime.onDispose(() => events.abort());
   const inputs = { motionEnabled: motion, heliosphereEnabled: heliosphere,
     illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels,
-    minimapEnabled: minimap, threeDStarsEnabled: threeDStars };
+    threeDStarsEnabled: threeDStars };
   type Toggle = keyof typeof inputs;
   const render = () => {
     for (const key of Object.keys(inputs) as Toggle[]) inputs[key].checked = preferences.state[key];
     if (speed) speed.disabled = !preferences.state.motionEnabled || speed.dataset?.runtimeReady === 'false';
     documentTarget.body.dataset.illustrationModels = illustrationModels.checked ? 'on' : 'off';
     documentTarget.body.dataset.surfaceLabels = surfaceLabels.checked ? 'on' : 'off';
-    documentTarget.body.dataset.minimap = minimap.checked ? 'on' : 'off';
   };
   for (const key of Object.keys(inputs) as Toggle[]) {
     const input = inputs[key];
@@ -67,7 +64,7 @@ export function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap, threeDStars]) input.disabled = true;
+      for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, threeDStars]) input.disabled = true;
       delete documentTarget.body.dataset.surfaceLabels;
     },
   });

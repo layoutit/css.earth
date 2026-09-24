@@ -20,13 +20,11 @@ export function observeAuditPreparedActivity(id: string) {
   }
   const object = record(Reflect.get(window, `__${id}`)), runtime = record(object.runtime), camera = record(object.camera);
   const selection = record(call(runtime, 'selection')), stats = record(call(camera, 'stats'));
-  const inertia = stats.dragInertia == null ? null : record(stats.dragInertia);
-  const destination = inertia?.destinationFlyTo == null ? null : record(inertia.destinationFlyTo);
   return {
     selection: { ready: selection.ready, pending: selection.pending,
       loadingMaterial: selection.loadingMaterial, error: selection.error },
     camera: call(camera, 'state'),
-    destinationActive: destination?.active ?? false,
+    destinationActive: stats.flightActive === true,
     pages: call(runtime, 'pages'),
   };
 }

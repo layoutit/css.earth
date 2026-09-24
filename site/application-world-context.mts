@@ -5,7 +5,6 @@ import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
-import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
@@ -55,10 +54,9 @@ export function createApplicationWorldContext() {
           sources: prepared.catalogSources, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
-        const minimap = own(createSpaceMinimapSetting(stage.ownerDocument, reportError));
         const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock));
         let heliosphereEnabled = false, shellsMounted = false;
-        const frames = own(createApplicationWorldFrames({ layer, planner, minimap, moonLabels, lifetime,
+        const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,
           heliosphereEnabled: () => heliosphereEnabled }));
         refreshWorld = frames.refresh;
         const inputSurface = stage.ownerDocument.querySelector<HTMLElement>('.object-input-surface');
@@ -67,7 +65,7 @@ export function createApplicationWorldContext() {
           event instanceof CustomEvent && (event.detail as { active?: unknown } | null)?.active === true);
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
         lifetime.onDispose(() => inputSurface?.removeEventListener('objectrotationchange', rotationChanged));
-        const visibility = createApplicationWorldVisibility(layer, minimap, lifetime, frames.publishMinimap);
+        const visibility = createApplicationWorldVisibility(layer, lifetime);
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frames, presentationHost !== stage) : null;
         if (diagnostics) {
           Reflect.set(target, '__cssEarthUniverse', diagnostics);
@@ -90,14 +88,10 @@ export function createApplicationWorldContext() {
             if (lifetime.disposed) return;
             visibility.selectObject(id);
             layer.selectObject(id, frame);
-            minimap.selectObject(frame);
             moonLabels.selectObject(id);
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,
           setHighlightedClassification: visibility.setHighlightedClassification,
-          setMinimapEnabled(enabled: boolean) {
-            if (!lifetime.disposed) minimap.setEnabled(enabled);
-          },
           setThreeDStarsEnabled(enabled: boolean) {
             if (!lifetime.disposed) layer.setStellarPointsEnabled(enabled);
           },

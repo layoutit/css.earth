@@ -24,26 +24,23 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
     constructor(x = 0) { super(); this.x = x; }
     getBoundingClientRect() { return { x: this.x, y: 0, left: this.x, top: 0, width: 1600, height: 900 }; }
   }
+  const frames = new Map<number, FrameRequestCallback>();
+  let nextFrame = 0, time = 0;
   const view = Object.assign(new EventTarget(), { getComputedStyle: () => ({ perspective: '1000px', perspectiveOrigin: '800px 450px' }),
-    matchMedia: () => ({ matches: false }) });
+    matchMedia: () => ({ matches: false }), performance: { now: () => time },
+    requestAnimationFrame(callback: FrameRequestCallback) { frames.set(++nextFrame, callback); return nextFrame; },
+    cancelAnimationFrame(id: number) { frames.delete(id); } });
   const roots = [new Surface(), new Surface(170), new Surface(), new Surface()];
   roots.forEach(root => { root.ownerDocument = { defaultView: view }; });
   const [stage, cameraElement, sceneElement, skyElement] = roots;
   let rotation = [1,0,0,0,1,0,0,0,1];
-  let liveMotion: any = null, resolveMotion: any, physicalOwners = 0, publications = 0;
+  let physicalOwners = 0, publications = 0;
   const callbacks: any = {};
-  function finish(completed: boolean) {
-    if (liveMotion) { liveMotion.signal?.removeEventListener('abort', stop); liveMotion = null; resolveMotion({ completed }); }
-  }
-  function stop() { finish(false); }
-  const control = { stop, destroy: stop, update() {}, stats: () => ({}), invalidateTrackball() {},
-    flyTo(motion: any) { stop(); liveMotion = motion; return new Promise(resolve => {
-      resolveMotion = resolve; motion.signal?.addEventListener('abort', stop, { once: true });
-      if (motion.signal?.aborted) stop();
-    }); } };
-  const orbit = createRetainedCubicSkyOrbit({ cameraMotion: createCameraMotion(), stage, inputSurface: stage, cameraElement, sceneElement,
+  const control = { stop() {}, destroy() {}, update() {}, stats: () => ({}), invalidateTrackball() {} };
+  const cameraMotion = createCameraMotion();
+  const orbit = createRetainedCubicSkyOrbit({ cameraMotion, stage, inputSurface: stage, cameraElement, sceneElement,
     viewport: { read: () => ({ bounds: stage.getBoundingClientRect(), focalPixels: 1000, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} },
-    framePresenter: { present(request: any, signal?: AbortSignal) { request.commit(); return signal ? Promise.resolve(true) : undefined; } },
+    framePresenter: { present(request: any) { request.commit(); } },
     worldContext: { frame, bodyRadiusUnits: 100, kilometersPerUnit: .002, maximumExtentUnits: 1e8 },
     cameraPlan: scene.camera, objectId: 'unit', runtimePolicy: { MOBILE_VIEWPORT_QUERY: '(max-width: 500px)' },
     preparedSurfaceHitTest,
@@ -72,10 +69,14 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
   const world = () => orbit.captureWorldCamera(frame);
   const range = (point = focus.positionM) => Math.hypot(...world().pose.positionM.map((v, axis) => v - point[axis]));
   const focusView = () => presentWorldCamera(world(), { ...frame, originM: focus.positionM, bodyRadiusM: focus.framingRadiusM }, optics);
+  let ticking: AbortSignal | undefined, started = 0;
+  const paint = () => { const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(time)); };
   return { orbit, callbacks, roots, world, range, focusView, view,
     get physicalOwners() { return physicalOwners; }, get publications() { return publications; },
-    tick(progress: number) { const motion = liveMotion; if (!motion) throw new Error('No retained flight'); motion.sample(progress);
-      if (progress === 1) finish(true); },
+    tick(progress: number) {
+      if (ticking !== cameraMotion.signal) { ticking = cameraMotion.signal; started = time; paint(); }
+      time = started + progress * 1000; paint();
+    },
   };
 }
 
@@ -98,7 +99,7 @@ it('uses prepared surface picking for detail flights and suppresses them while a
 
 it('flies, drags and dollies around a prepared focus while retaining the original detail frame and camera', async () => {
   const f = fixture(), roots = [...f.roots], initial = f.world();
-  const flight = f.orbit.flyToPreparedFocus(focus, frame, optics);
+  const flight = f.orbit.flyToPreparedFocus(focus, frame, optics, { durationMilliseconds: 1000 });
   expect(f.orbit.preparedFocus()?.id).toBe(focus.id);
   close(f.world().pose.positionM, initial.pose.positionM);
   f.tick(.35);
@@ -158,7 +159,7 @@ it('restores a focus without moving the saved world pose, then clears it without
 
 it('uses the retained motion owner for interruption, replacement and teardown, rejecting invalid focus before moving', async () => {
   const f = fixture(), controller = new AbortController();
-  const pending = f.orbit.flyToPreparedFocus(focus, frame, optics, { signal: controller.signal });
+  const pending = f.orbit.flyToPreparedFocus(focus, frame, optics, { signal: controller.signal, durationMilliseconds: 1000 });
   f.tick(.2);
   const interrupted = f.world();
   controller.abort();
@@ -168,7 +169,7 @@ it('uses the retained motion owner for interruption, replacement and teardown, r
   expect(f.orbit.preparedFocus()?.id).toBe(focus.id);
   await expect(f.orbit.flyToPreparedFocus({ ...focus, limits: { minimumDistanceM: 1, maximumDistanceM: 0 } }, frame, optics)).rejects.toThrow('metadata');
   close(f.world().pose.positionM, interrupted.pose.positionM);
-  const replacement = f.orbit.flyToPreparedFocus(focus, frame, optics);
+  const replacement = f.orbit.flyToPreparedFocus(focus, frame, optics, { durationMilliseconds: 1000 });
   // Catalogue ids such as the dwarf galaxy dw1343+58 carry a plus sign.
   const final = f.orbit.flyToPreparedFocus({ ...focus, id: 'dw1343+58', positionM: [2e20, -1e20, 3e20] }, frame, optics);
   expect(await replacement).toEqual({ completed: false });
@@ -183,7 +184,7 @@ it('arrives on the line of sight from the Sun, celestial north up, whatever the 
     const f = fixture();
     // Face the opposite way first: the Crab bug arrived behind its nebula, looking back at the Sun.
     if (turned) f.callbacks.drag.rotate({ controlPitchDelta: 0, controlYawDelta: 180, rotation: [0, 1, 0, 0] });
-    const flight = f.orbit.flyToPreparedFocus(focus, frame, optics);
+    const flight = f.orbit.flyToPreparedFocus(focus, frame, optics, { durationMilliseconds: 1000 });
     f.tick(1);
     expect(await flight).toEqual({ completed: true });
     poses.push(f.world().pose);

@@ -50,13 +50,10 @@ export function flyToSurfaceDirection(navigation: ObjectWorldNavigation, { direc
   const startDistance = Math.hypot(start.pose.positionM[0] - origin[0], start.pose.positionM[1] - origin[1], start.pose.positionM[2] - origin[2]);
   const duration = reducedMotion ? 0 : Math.max(0, durationMilliseconds);
   const ease = (t: number) => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-  const flight = navigation.motion.start({ windowTarget, signal, advance(elapsedS) {
-    const progress = duration === 0 ? 1 : Math.min(1, elapsedS * 1000 / duration), share = ease(progress);
+  const flight = navigation.motion.fly({ windowTarget, signal, durationMilliseconds: duration, sample(progress, signal) {
+    const share = ease(progress);
     const pose = surfaceOrbitPose(start, origin, rotation, share, startDistance + (distanceM - startDistance) * share);
-    const acknowledge = (shown = true) => !shown || flight.signal.aborted ? 'idle' as const
-      : progress === 1 ? 'complete' as const : 'presented' as const;
-    const publication = navigation.apply(pose, { signal: flight.signal });
-    return publication ? publication.then(acknowledge) : acknowledge();
+    return navigation.apply(pose, { signal });
   } });
   return { done: flight.finished, cancel: flight.cancel };
 }

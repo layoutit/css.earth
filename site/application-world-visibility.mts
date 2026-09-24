@@ -6,7 +6,7 @@ import { labelImportance } from '../src/renderers/css/labels/universe-label-poli
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
 import { PREPARED_WORLD_PRESENTATION as prepared } from './prepared-world-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import type { ApplicationWorldLayer, ApplicationWorldMinimap } from './application-world-types.mts';
+import type { ApplicationWorldLayer } from './application-world-types.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
@@ -37,9 +37,8 @@ export const worldVisibilityPolicy = {
   compact: phone, annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, minorMoonIds, hiddenOrbitIds,
 };
 
-/** One visibility policy feeds the retained world and its minimap. */
-export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, minimap: ApplicationWorldMinimap,
-  lifetime: SceneLifetime, publishMinimap: () => void) {
+/** Visibility of retained world bodies, labels and highlights. */
+export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, lifetime: SceneLifetime) {
   let illustrations = false;
   let highlighted: string | null = null;
   let openSystem: ReadonlySet<string> = new Set();
@@ -51,8 +50,6 @@ export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, m
     layer.setHiddenBodies(hiddenBodies);
     layer.setHiddenLabels(visibility.hiddenLabels.filter(id => !openSystem.has(id)));
     layer.setHighlighted(visibility.highlightedBodies);
-    minimap.setHiddenBodies(hiddenBodies);
-    publishMinimap();
   }
 
   // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
