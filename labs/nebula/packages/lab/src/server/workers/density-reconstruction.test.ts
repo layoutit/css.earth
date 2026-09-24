@@ -8,7 +8,7 @@ import { createAlignedObservationMapping } from '@cssearth/volume-core/coordinat
 import { prepareReconstruction } from './density-reconstruction.ts';
 import { defaultOverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { parseCloudCatalogue, createCloudInspection } from '@cssearth/volume-viewer/scene/cloud-inspection';
 const close=(a:readonly number[],b:readonly number[])=>a.forEach((n,i)=>assert.ok(Math.abs(n-b[i])<1e-10,`${n} != ${b[i]}`));
 

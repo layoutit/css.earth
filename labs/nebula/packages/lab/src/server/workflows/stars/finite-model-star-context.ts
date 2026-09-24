@@ -9,7 +9,7 @@ import type { EmissionFieldModel } from '@cssearth/volume-core/contracts/emissio
 import { createEmissionField } from '@cssearth/volume-core/fields/emission';
 import { createIntegratedSignalSampler } from '@cssearth/volume-core/fields/cloud-density';
 import { createEnvelopeSampler, validateEnvelopeSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 import { verifyFiniteMaterialArtifacts } from '../../../cli/commands/finite-density-material-artifacts.ts';
 import { physicalToField, angularScale } from '../../../cli/commands/simulation-guided-coordinates.ts';

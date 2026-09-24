@@ -5,7 +5,7 @@ import { resolve, relative, dirname } from 'node:path';
 import sharp from 'sharp';
 import type { GeometryCandidate, GeometryMap } from '../../../features/observations/models/geometry-model.ts';
 import type { StructureImage } from '../../../features/observations/models/structures-model.ts';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { initializeShapeCloud, readShapeCloudSettings } from '../../../features/shape-cloud/model.ts';
 import { createShapeCloudField, createShapeImageSampler, shapePixelToUnits, shapeUnitsToPixel } from '@cssearth/volume-core/fields/authored-shapes';

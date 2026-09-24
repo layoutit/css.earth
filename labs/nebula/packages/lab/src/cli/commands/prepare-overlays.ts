@@ -5,7 +5,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { overlayCorners, type ImageWcs, type OverlayFrame } from '@cssearth/volume-core/coordinates/overlay-wcs';
 import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
 import { transferOverlayAlignment } from '@cssearth/volume-core/coordinates/overlay-alignment';

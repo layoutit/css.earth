@@ -8,7 +8,7 @@
  * provenance prose; nothing about a single body belongs here.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
+import { sha256 } from '@cssearth/core/node';
 import { basename, dirname, resolve } from 'node:path';
 import { sampleJointDepth } from '@cssearth/nebula-reconstruction/stars/joint-depth';
 import { prepareStarPhotometry } from '@cssearth/volume-core/materials/star-photometry';
@@ -24,7 +24,6 @@ import { finiteModelDirectory, type FiniteModelStarContext } from './finite-mode
 export const MAGNITUDE_LIMIT = 16;
 /** Model-owned external index beside the lens bundle; discovery reads exactly this path. */
 export const finiteModelStarsIndex = (modelResultId: string) => `.local/nebula-lab/finite-stars-${modelResultId}.json`;
-export const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
 
 /** The executable owners of the shared placement, pinned into every layer's provenance. */

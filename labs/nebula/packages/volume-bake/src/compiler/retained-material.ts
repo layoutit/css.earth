@@ -2,7 +2,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative } from 'node:path';
 import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import { containedPath, sha256, sourceBytes } from '../compact-inputs/density-grid.ts';
+import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
+import { sha256 } from '@cssearth/core/node';
 import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { verifyCompilerAlphaIdentity, type BakeCompilerOptions, type CompilerLensInput } from './bake.ts';

@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type MasterVolumeOptions } from '@cssearth/volume-bake/slices/emission';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
