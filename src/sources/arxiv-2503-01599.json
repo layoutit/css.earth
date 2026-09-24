@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2503-01599",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Matthews et al. (2024): A temperate super-Jupiter imaged with JWST in the mid-infrared",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2503.01599"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-024-07837-8"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2503.01599",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-024-07837-8",
+      "label": "Nature 633"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2503.01599",
+      "checkedOn": "2026-09-23",
+      "locator": "JWST/MIRI discovery images of Epsilon Indi Ab on 2023 July 3 (Extended Data Table 2: 4.114 +/- 0.010 arcsec, 37.39 +/- 0.43 degrees at F1550C); temperature about 275 K"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Nature 633",
+  "creators": [
+    "E. C. Matthews",
+    "A. L. Carter",
+    "P. Pathak",
+    "C. V. Morley",
+    "M. W. Phillips",
+    "S. Krishanth P. M."
+  ]
+}

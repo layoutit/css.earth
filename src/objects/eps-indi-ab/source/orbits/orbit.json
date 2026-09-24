@@ -1,0 +1,52 @@
+{
+ "source": "Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter posterior of their fiducial model (relative astrometry, HGCA and RV with a GP activity model, observable-based priors), Zenodo doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits",
+ "rule": "highest logpost (-1258.85) of 32,768 samples",
+ "samples": 32768,
+ "tauReferenceMjd": 58849.0,
+ "orbit": {
+  "sma1": 15.754573233402386,
+  "ecc1": 0.21259215003854998,
+  "inc1": 100.7022645313062,
+  "aop1": 336.5879900214991,
+  "pan1": 223.8090966712542,
+  "tau1": 0.3401051315832292,
+  "plx": 274.8755400453637,
+  "mtot": 0.7956087391590178
+ },
+ "residuals": [
+  {
+   "epoch": 60128.0,
+   "kind": "seppa",
+   "measured": [
+    4114.0,
+    37.39
+   ],
+   "error": [
+    10.0,
+    0.43
+   ],
+   "model": [
+    4095.3733131632084,
+    37.55911115506825
+   ]
+  },
+  {
+   "epoch": 60915.0,
+   "kind": "seppa",
+   "measured": [
+    3551.0,
+    34.97
+   ],
+   "error": [
+    3.0,
+    0.05
+   ],
+   "model": [
+    3548.415331075876,
+    34.98028583624215
+   ]
+  }
+ ],
+ "companionMassJupiter": 6.26067666586307,
+ "primaryMassSolar": 0.7896323333130386
+}

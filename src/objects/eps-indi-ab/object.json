@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "eps-indi-ab",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Epsilon Indi Ab",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 75066.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/eps-indi-ab-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Epsilon Indi Ab",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 750379.7,
+      "description": "The coldest exoplanet photographed so far, 275 K, circling one of the nearest Sun-like stars.",
+      "systemName": "Epsilon Indi system",
+      "order": 1771,
+      "context": {
+        "order": 1771
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        53699530050388260,
+        -29895163961795504,
+        -93935454583541820
+      ],
+      "presentationToReference": [
+        0.4413545503035036,
+        -0.24086069660609963,
+        -0.8644028492299275,
+        -0.09246636944461502,
+        0.9459667757011793,
+        -0.3108003053268237,
+        -0.8925559542393542,
+        -0.21710132219758416,
+        -0.3952352267345823
+      ],
+      "orbitUpReference": [
+        0.24086069660609963,
+        -0.9459667757011793,
+        0.21710132219758416
+      ],
+      "metersPerUnit": 242150.32258064515,
+      "bodyRadiusM": 75066600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

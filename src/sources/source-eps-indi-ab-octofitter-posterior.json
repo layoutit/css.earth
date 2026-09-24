@@ -1,0 +1,35 @@
+{
+  "id": "source-eps-indi-ab-octofitter-posterior",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Epsilon Indi Ab · eps indi ab octofitter posterior",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/api/records/19931118/files/epsInd_allData_obspri-post.fits/content",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eps-indi-ab/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sanghi et al. (2026), The Astronomical Journal, doi:10.3847/1538-3881/ae74c8; data: Zenodo doi:10.5281/zenodo.19931118 (version 1.0.0)",
+      "scope": "The eps indi ab octofitter posterior input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0 (the Zenodo record's license)",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

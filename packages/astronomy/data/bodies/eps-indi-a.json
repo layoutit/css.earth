@@ -1,0 +1,31 @@
+{
+ "id": "eps-indi-a",
+ "classification": "star",
+ "order": 1770,
+ "physical": {
+  "name": "Epsilon Indi A",
+  "horizonsCode": null,
+  "meanRadiusKm": 496034.1,
+  "gravitationalParameterKm3PerS2": 103781128112.8,
+  "parent": null,
+  "effectiveTemperatureK": 4700
+ },
+ "physicalNotes": "Radius 0.713 +/- 0.006 solar radii, temperature 4700 +/- 65 K and mass 0.782 +/- 0.023 solar masses as Sanghi et al. (2026, AJ; arXiv:2603.08787) tabulate them (Table 1), citing Lundkvist et al. (2024, arXiv:2403.04509) for the temperature and for the mass, which is asteroseismic (solar-like oscillations with a known radius), and Creevey et al. (2023), Lundkvist et al. and Rains et al. (2020) for the radius, which is interferometric: a measured disc, not a model value; 496,034 km at 695,700 km per solar radius. GM from 0.782 solar masses, the prior mass of the orbit fit placed here, times the JPL solar GM. Also HD 209100 and HIP 108870. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 330.8724078795965,
+  "declinationDegrees": -56.79725466122902,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 3.638439,
+  "properMotionRaMasPerYear": 3966.6605387484133,
+  "properMotionDecMasPerYear": -2536.1919868044724,
+  "radialVelocityKmPerS": -40.426701,
+  "sources": {
+   "position": "Gaia DR3 source 6412595290592307840 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 6412595290592307840: parallax 274.8431 +/- 0.0956 mas (RUWE 1.15), inverted to 3.6384 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 6412595290592307840: pmRA* 3966.6605 mas/yr, pmDec -2536.1920 mas/yr.",
+   "radialVelocity": "Gaia DR3 source 6412595290592307840: -40.43 +/- 0.13 km/s."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 108870
+ }
+}

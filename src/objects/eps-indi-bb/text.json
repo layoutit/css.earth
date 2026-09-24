@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eps-indi-bb",
+  "card": {
+    "text": "A cool T6 brown dwarf of 53 Jupiter masses, circling its sibling Ba every 11 years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-astro-ph-0309256",
+        "url": "https://arxiv.org/abs/astro-ph/0309256",
+        "label": "McCaughrean et al. 2004",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "have spectral types of T1 and T6, respectively"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Epsilon Indi Bb is the cooler of the two brown dwarfs far out from Epsilon Indi A. Ten years of VLT images traced its whole orbit around Ba.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2205-08077",
+        "url": "https://arxiv.org/abs/2205.08077",
+        "label": "Chen et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Relative astrometry with NACO fully constrains the Keplerian orbit of the binary pair"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

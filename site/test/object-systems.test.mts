@@ -16,7 +16,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
       ['vhs-1256-1257', 'VHS 1256-1257 system', '/vhs-1256-1257/'], ['gq-lup', 'GQ Lup system', '/gq-lup/'], ['dh-tau', 'DH Tau system', '/dh-tau/'],
       ['roxs-42b', 'ROXs 42B system', '/roxs-42b/'], ['wasp-76', 'WASP-76 system', '/wasp-76/'], ['pds-70', 'PDS 70 system', '/pds-70/'], ['wasp-18', 'WASP-18 system', '/wasp-18/'], ['wasp-121', 'WASP-121 system', '/wasp-121/'], ['luhman-16', 'Luhman 16 system', '/luhman-16/'],
       ['hip-65426', 'HIP 65426 system', '/hip-65426/'], ['af-lep', 'AF Lep system', '/af-lep/'], ['ab-pic', 'AB Pic system', '/ab-pic/'], ['yses-1', 'YSES 1 system', '/yses-1/'],
-      ['hd-206893', 'HD 206893 system', '/hd-206893/'], ['hd-95086', 'HD 95086 system', '/hd-95086/'], ['gj-504', 'GJ 504 system', '/gj-504/'], ['hd-135344-a', 'HD 135344 A system', '/hd-135344-a/']]);
+      ['hd-206893', 'HD 206893 system', '/hd-206893/'], ['hd-95086', 'HD 95086 system', '/hd-95086/'], ['gj-504', 'GJ 504 system', '/gj-504/'], ['hd-135344-a', 'HD 135344 A system', '/hd-135344-a/'],
+      ['eps-indi-a', 'Epsilon Indi system', '/eps-indi-a/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the Gaia measurement that binds it to A (boundTo).
   // VHS 1256-1257 B and ROXs 42B B do have one: each circles A on its measured orbit, and the planet circles the pair.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
@@ -27,7 +28,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     ['vhs-1256-1257-companion', 'vhs-1256-1257'], ['vhs-1256-1257-b', 'vhs-1256-1257'], ['gq-lup-b', 'gq-lup'], ['dh-tau-b', 'dh-tau'],
     ['roxs-42b-companion', 'roxs-42b'], ['roxs-42b-b', 'roxs-42b'],
     ['hip-65426-b', 'hip-65426'], ['af-lep-b', 'af-lep'], ['ab-pic-b', 'ab-pic'], ['yses-1-b', 'yses-1'],
-    ['hd-206893-b', 'hd-206893'], ['hd-206893-c', 'hd-206893'], ['hd-95086-b', 'hd-95086'], ['gj-504-b', 'gj-504'], ['hd-135344-ab', 'hd-135344-a']] as const) {
+    ['hd-206893-b', 'hd-206893'], ['hd-206893-c', 'hd-206893'], ['hd-95086-b', 'hd-95086'], ['gj-504-b', 'gj-504'], ['hd-135344-ab', 'hd-135344-a'],
+    ['eps-indi-ab', 'eps-indi-a'], ['eps-indi-ba', 'eps-indi-a'], ['eps-indi-bb', 'eps-indi-a']] as const) {
     assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
   }
   assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');
@@ -42,6 +44,9 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   assert.deepEqual(systemById(SCENE_OBJECTS, 'hd-110067')!.memberIds,
     ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'wd-1856-534')!.memberIds, ['wd-1856-534b']);
+  // Epsilon Indi Ba is bound to A and Bb circles Ba: one system, whose host is A; Ba does not open a system of its own.
+  assert.deepEqual([...systemById(SCENE_OBJECTS, 'eps-indi-a')!.memberIds].sort(), ['eps-indi-ab', 'eps-indi-ba', 'eps-indi-bb']);
+  assert.equal(systemById(SCENE_OBJECTS, 'eps-indi-ba'), null);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'vhs-1256-1257')!.memberIds, ['vhs-1256-1257-companion', 'vhs-1256-1257-b']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'roxs-42b')!.memberIds, ['roxs-42b-companion', 'roxs-42b-b']);
 });
