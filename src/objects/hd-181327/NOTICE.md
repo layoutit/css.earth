@@ -9,5 +9,3 @@ Limb darkening: A. Claret, "Limb and gravity-darkening coefficients for the TESS
 Placement: Gaia DR3 position, parallax, proper motion and radial velocity.
 
 Debris ring: see the attached volume hd-181327-disc (JWST/NIRCam programme 2780, Gáspár et al. 2026).
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

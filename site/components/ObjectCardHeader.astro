@@ -10,18 +10,11 @@ const { title, introduction = '', heading = true, objectId, ...attributes } = As
 const object = SCENE_OBJECTS.find(candidate => candidate.id === objectId);
 const contentDescription = object && !isDiscoveryAnchor(object) ? discoveryDescription(object.discovery) : null;
 const TitleTag = heading ? 'h1' : 'p';
-const titleScale = title.renderHeight / Number(title.renderViewBox.split(' ')[3]);
-const titleDescent = title.renderHeight - (title.baseline + title.renderPathOffsetY) * titleScale;
 ---
 <section class="object-selected-panel" {...attributes}>
   <slot />
   <div class="object-title-row">
-    <TitleTag class="object-title" aria-label={title.label} style={`--object-title-descent: ${titleDescent}px`}>
-      <span class="visually-hidden">{title.label}</span>
-      <svg class="object-title-svg" viewBox={title.renderViewBox} width={title.renderWidth} height={title.renderHeight} aria-hidden="true" focusable="false">
-        <path d={title.path} transform={title.renderPathOffsetY === 0 ? undefined : `translate(0 ${title.renderPathOffsetY})`} />
-      </svg>
-    </TitleTag>
+    <TitleTag class="object-title object-title-text">{title.label}</TitleTag>
     {contentDescription && <span class="object-classification-tag object-title-tag" data-discovery-note>{contentDescription}</span>}
   </div>
   <slot name="image" />

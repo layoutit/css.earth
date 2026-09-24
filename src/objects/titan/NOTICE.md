@@ -8,7 +8,6 @@
   (Randolph L. Kirk), MIDR V1.0, S00 through T126. Original PDS3 files are
   reacquired from Cornell. Prepared derivatives preserve the incidence-corrected
   source levels and mark documented no-data; they do not fill missing terrain.
-- Title outlines: Inter by Rasmus Andersson, SIL Open Font License 1.1.
 - Physical and orbital context: NASA/JPL and IAU/WGCCRE through the vendored
   astronomy package. Editorial information: NASA Science.
 

@@ -45,6 +45,6 @@ Source selections and alternative products are recorded in the [investigation le
 
 ## Preparation and restoration
 
-The acquisition plan restores the pinned external Inter font; no private ignored input is needed for preparation. The context portrait is reproducible with the existing radial snapshot generator and the recipe in `preparation/navigation.json`.
+The context portrait is reproducible with the existing radial snapshot generator and the recipe in `preparation/navigation.json`.
 
 </details>

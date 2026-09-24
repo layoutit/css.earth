@@ -1,6 +1,6 @@
 # Arrokoth: credits
 
-Porter (2024), New Horizons Arrokoth shape model; NASA PDS: https://doi.org/10.26007/97r3-1e19. Numerical source constraints are attributed; papers are not relicensed. Prepared representation: cssEarth MIT. The grid is an authored missing-data indication. Inter SIL OFL1.1.
+Porter (2024), New Horizons Arrokoth shape model; NASA PDS: https://doi.org/10.26007/97r3-1e19. Numerical source constraints are attributed; papers are not relicensed. Prepared representation: cssEarth MIT. The grid is an authored missing-data indication.
 
 LORRI photographs: NASA / Johns Hopkins University Applied Physics Laboratory /
 Southwest Research Institute, New Horizons science team; NASA PDS calibrated KEM1

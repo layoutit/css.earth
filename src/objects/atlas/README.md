@@ -71,7 +71,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 **Orientation, content and credits**
 
-Facts are sourced from [NASA's Atlas overview](https://science.nasa.gov/saturn/moons/atlas/) and the vendored astronomy package. The source mesh, image calibration, scientific-model uncertainty and display simplification are separate properties. Credits: Peter Thomas, Joe Joseph, Trey Ansty; NASA/JPL-Caltech/Space Science Institute; NASA PDS Small Bodies and Ring-Moon Systems Nodes. Title: Inter by Rasmus Andersson, SIL Open Font License 1.1.
+Facts are sourced from [NASA's Atlas overview](https://science.nasa.gov/saturn/moons/atlas/) and the vendored astronomy package. The source mesh, image calibration, scientific-model uncertainty and display simplification are separate properties. Credits: Peter Thomas, Joe Joseph, Trey Ansty; NASA/JPL-Caltech/Space Science Institute; NASA PDS Small Bodies and Ring-Moon Systems Nodes.
 
 The initial camera uses the prepared ecliptic presentation basis and the radial mesh’s CSS X/Y transport to face the source portrait direction; geographic longitude/latitude are not copied into scene yaw/pitch.
 

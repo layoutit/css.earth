@@ -191,18 +191,6 @@
       }
     },
     {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "presentation/InterVariable.ttf",
-      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "headers": {
-        "accept": "*/*",
-        "user-agent": "cssEarth Earth source acquisition"
-      }
-    },
-    {
       "kind": "json-document",
       "groups": [
         "refresh"

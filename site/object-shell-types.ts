@@ -7,13 +7,6 @@ export interface PreparedTitle {
 
 export interface ObjectTitle {
   label: string;
-  viewBox: string;
-  renderViewBox: string;
-  renderWidth: number;
-  renderHeight: number;
-  renderPathOffsetY: number;
-  path: string;
-  baseline: number;
 }
 
 export interface Fact {

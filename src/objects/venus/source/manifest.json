@@ -21,28 +21,6 @@
       }
     },
     {
-      "id": "inter-venus-title-vector",
-      "path": "presentation/title-mark.json",
-      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Venus outline",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "acquisition": "Generated JSON vector from the pinned Inter Variable font with declared variation axes and metrics.",
-      "redistribution": "project-authored SVG outline with Inter attribution",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "artwork",
-            "evidence": "Title outlines extracted from Inter Variable 4.001 at revision 9221beed3."
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-venus-navigation-disc",
       "path": "navigation/venus.webp",
       "origin": "https://science.nasa.gov/wp-content/uploads/2023/05/688-venus-1200-jpg.webp",

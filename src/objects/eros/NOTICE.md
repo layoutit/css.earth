@@ -1,7 +1,6 @@
 # Eros notices
 
-
-Physical and orbital data: NASA/JPL Horizons. Inter title outlines retain the SIL Open Font License.
+Physical and orbital data: NASA/JPL Horizons.
 
 950 nm albedo: NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues (2023), USGS Astrogeology. Retain the original authors, scientific attribution and archive labels.
 

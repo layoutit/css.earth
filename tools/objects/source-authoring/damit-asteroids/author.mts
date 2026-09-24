@@ -28,7 +28,6 @@ if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');
 const TEMPLATE = 'achilles';
 const EPOCH_JD = 2461286.5, AU_KM = 149597870.7, OBLIQUITY_DEGREES = 23.439291111;
 const DAMIT = 'https://damit.cuni.cz/projects/damit';
-const FONT_URL = 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf';
 const PALETTE = ['#35306b', '#2c7db7', '#51b5ab', '#c5d879', '#f3c56b', '#c76138', '#f8eee1'];
 
 interface Reference { id: number; label: string; title: string }
@@ -274,7 +273,6 @@ async function authorBody(body: Body) {
     coordinateSystem: 'Original DAMIT co-rotating Cartesian frame, +Z spin pole and +X reference meridian; east-positive longitude; arbitrary display phase',
     source: `DAMIT model ${model.id}, version ${model.version}: ecliptic J2000 pole (${model.lambda}, ${model.beta}) degrees; period ${model.periodHours} hours; equatorial conversion with obliquity ${OBLIQUITY_DEGREES} degrees. ${limitation}` }));
   const operations = [
-    { kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: FONT_URL },
     { kind: 'download', groups: ['restore', 'refresh'], path: shapePath, url: shapeUrl },
     // Reference PDFs are not committed (see .gitignore); restore them from the archive.
     ...(body.occultation ? [{ kind: 'download', groups: ['restore', 'refresh'], path: `reference/${model.id}-${body.occultation.name}`, url: `${DAMIT}/stored_files/open/${body.occultation.file}/${body.occultation.name}` }] : []),
@@ -282,8 +280,6 @@ async function authorBody(body: Body) {
   await write(resolve(src, 'preparation/acquisition.json'), json({ schema: 'cssearth-acquisition-plan@1', operations }));
   const navigation = requireRecord(JSON.parse(await readFile(resolve(template, 'source/preparation/navigation.json'), 'utf8')));
   await write(resolve(src, 'preparation/navigation.json'), json({ ...navigation, objectId: id }));
-  await write(resolve(src, 'presentation/LICENSE.INTER-OFL'), await readFile(resolve(template, 'source/presentation/LICENSE.INTER-OFL')));
-  await write(resolve(src, 'presentation/InterVariable.ttf'), await download(FONT_URL, 'InterVariable.ttf'));
   await write(resolve(pkg, '.gitignore'), await readFile(resolve(template, '.gitignore')));
   const css = (await readFile(resolve('src/renderers/css/styles', `${TEMPLATE}-surfaces.css`), 'utf8')).replaceAll(TEMPLATE, id);
   await write(resolve('src/renderers/css/styles', `${id}-surfaces.css`), css);
@@ -326,7 +322,6 @@ async function authorBody(body: Body) {
       { label: 'Rotation', role: 'rotation', description: 'Published pole and period; arbitrary display phase', href: modelUrl },
     ],
     provenance: {
-      title: { path: '../presentation/title-mark.json' },
       editorial: { url: modelUrl, credit },
       physical: { path: `../../../../../packages/astronomy/data/bodies/${id}.json`, credit: 'Vendored JPL physical and orbital data' },
     },
@@ -389,7 +384,6 @@ async function authorBody(body: Body) {
   await write(resolve(pkg, 'investigations.json'), json(ledger(body, modelUrl)));
 
   // Manifest, then the marker snapshot that reads it.
-  const font = await readFile(resolve(src, 'presentation/InterVariable.ttf'));
   const manifest: Record<string, unknown> = {
     schema: `cssearth-authoritative-sources@2`,
     inputs: [
@@ -399,10 +393,6 @@ async function authorBody(body: Body) {
         projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'uncalibrated source coordinates', metersPerUnit, referenceRadiusMeters: radiusMeters },
         coverage: `Published convex light-curve model ${model.id}. ${calibration.visibleDescription} ${limitation}`,
         sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `damit-shape-${model.shapeFile}`, role: 'material', evidence: `src/objects/${id}/source/manifest.json@${PLACEHOLDER_REVISION}#/inputs/0` }] } },
-      { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', origin: FONT_URL, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1',
-        licenseEvidence: ['presentation/LICENSE.INTER-OFL'], acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.',
-        redistribution: 'Permitted with the accompanying SIL Open Font License.', consumers: ['title'],
-        sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'inter-9221beed3', role: 'method', evidence: `src/objects/${id}/source/manifest.json@${PLACEHOLDER_REVISION}#/inputs/1` }] } },
     ],
     generatedIntermediates: [], documents: [],
   };

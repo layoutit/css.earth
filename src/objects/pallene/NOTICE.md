@@ -3,5 +3,3 @@
 Cassini ISS originals and calibration: NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node. Attribute these institutions and the archive when redistributing scientific data. Mission/kernel records: NASA/JPL NAIF and Cassini navigation/imaging contributors identified in the original kernels. No endorsement is implied. See the [PDS use policy](https://pds.nasa.gov/datastandards/documents/policy/PolicyOnUseOfPDSSourcedMaterials.txt).
 
 Ellipsoid measurements: Thomas et al. (2013), *The inner small satellites of Saturn: A variety of worlds*, Icarus 226, 999–1019, DOI 10.1016/j.icarus.2013.07.022; NAIF PCK00011. The radius table is cssEarth's analytic representation of published dimensional facts, not an author-released detailed mesh. Photographic source validity, reprojection, approximate illumination normalization, display encoding, mesh simplification and gray coverage grid are changes made by cssEarth under its MIT license. Preserve their limitations and citations.
-
-Inter Variable: Rasmus Andersson, SIL Open Font License 1.1; retained source and pinned upstream revision.

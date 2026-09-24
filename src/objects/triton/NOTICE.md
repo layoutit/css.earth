@@ -9,7 +9,7 @@ Original observation and metadata files are retained or pinned for reacquisition
 Facts: NASA Science. Physical geometry and orbital/rotation data: the vendored
 JPL/NAIF/IAU astronomy package with its accompanying provenance.
 
-Inter font: Rasmus Andersson, SIL Open Font License 1.1. See source licenses
+See source licenses
 beside these inputs.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

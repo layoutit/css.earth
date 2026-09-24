@@ -47,6 +47,6 @@ GEOMED source URL pattern for these inspected images: `https://opus.pds-rings.se
 
 NASA Science supplies the discovery and overview facts. JPL Horizons supplies the physical/orbit reference record; the shared prepared ephemerides own motion. The assumed synchronous rotation and ellipsoid do not recover an observed global terrain model.
 
-The title input retains its own pin and attribution: Inter font under SIL OFL 1.1. Required source inputs are checked in or restored by `source/preparation/acquisition.json`; prepared runtime assets install separately.
+Required source inputs are checked in or restored by `source/preparation/acquisition.json`; prepared runtime assets install separately.
 
 </details>

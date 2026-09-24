@@ -1,7 +1,6 @@
 # Credits and reuse
 
 - Miranda imagery: NASA/JPL/Caltech/USGS, Voyager 2. Retain these credits and follow the [JPL image-use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/). No NASA/JPL endorsement is implied.
-- Title: Inter by Rasmus Andersson, SIL Open Font License 1.1; shared pinned font recipe.
 
 Original and authored input identities, credits and restoration URLs are recorded in `source/manifest.json` and `source/preparation/acquisition.json`.
 

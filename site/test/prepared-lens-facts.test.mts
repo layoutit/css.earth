@@ -17,9 +17,7 @@ const preparedObject = (value: unknown): { readonly data: { readonly lenses: { r
 
 async function fixture(): Promise<{ readonly loaded: Awaited<ReturnType<typeof loadObjectContent>>; readonly source: ObjectContentSource }> {
   const loaded = await loadObjectContent('comet-67p');
-  const rawSource = await loaded.source('content');
-  const rawTitle = await loaded.source('title');
-  const source = parseObjectContentFixture({ ...rawSource, title: rawTitle });
+  const source = parseObjectContentFixture(await loaded.source('content'));
   return { loaded, source };
 }
 

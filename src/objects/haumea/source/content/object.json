@@ -3,9 +3,6 @@
   "version": 1,
   "id": "haumea",
   "displayName": "Haumea",
-  "title": {
-    "label": "Haumea"
-  },
   "panel": {
     "facts": [
       {
@@ -169,9 +166,6 @@
     }
   ],
   "provenance": {
-    "title": {
-      "path": "../presentation/title-mark.json"
-    },
     "physical": {
       "path": "../measurements.json",
       "credit": "Ortiz et al. (2017); JPL orbital elements"

@@ -1,22 +1,5 @@
 import type { LensVolume } from '../../../src/renderers/css/runtime/object-contract.js';
 
-export interface TitleSource {
-  label: string;
-  viewBox: string;
-  width: number;
-  height: number;
-  path: string;
-  source: string;
-  sourceUrl: string;
-  weight: number;
-  opticalSize: number;
-  fontSize: number;
-  letterSpacing: number;
-  baseline: number;
-  xOrigin: string;
-  sourceGenerator: string;
-}
-
 export interface LensLegendRecipe {
   kind: "scale" | "categories" | "ranges";
   ranges?: Array<{ label: string; color: string; low: number }>;
@@ -117,7 +100,6 @@ export interface ObjectContentSource {
   version: 1;
   id: string;
   displayName: string;
-  title: TitleSource;
   panel: {
     facts: Fact[];
     moreFacts?: Fact[];
@@ -153,12 +135,7 @@ export interface Fact {
 
 export interface PreparedObjectContent {
   objectId: string;
-  title: Omit<TitleSource, "sourceGenerator" | "xOrigin"> & {
-    renderViewBox: string;
-    renderWidth: number;
-    renderHeight: number;
-    renderPathOffsetY: number;
-  };
+  title: { label: string };
   facts: ObjectContentSource["panel"]["facts"];
   moreFacts: NonNullable<ObjectContentSource["panel"]["moreFacts"]>;
   lenses: {

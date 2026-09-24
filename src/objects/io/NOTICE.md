@@ -7,8 +7,6 @@ Prepared reprojection, coverage indicators and texture packaging retain this cre
 The enhanced source is a published USGS color-ratio merge; it is not true color.
 Its interpolated polar color is withheld. No new image synthesis is applied.
 
-Title font: Inter, Rasmus Andersson, SIL Open Font License 1.1.
-
 Scientific geometry uses the repository's vendored astronomy/JPL/IAU source
 closure. See `README.md` for map projection, source processing and limitations.
 

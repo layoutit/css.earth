@@ -25,7 +25,6 @@
 - Jupiter visible-map Minnaert coefficients: Amy A. Simon, Michael H. Wong,
   and Glenn S. Orton, Astrophysical Journal 812:55 (2015). Only normalized
   factual values are redistributed; the cited paper is not included.
-- Jupiter and shared shell title vectors: Inter Variable 4.001 by Rasmus Andersson and contributors, SIL Open Font License 1.1.
 
 No source mark or agency logo is reproduced. Source credits do not imply
 endorsement. Exact origins, hashes, licenses, and redistribution notes are in

@@ -8,7 +8,7 @@ Published visualization shape: Stooke, P. (2025), *Stooke small bodies shape mod
 
 Photomosaic: P. Stooke and J. Pfau, with positional control by P. Thomas; NEAR images. Citation: Stooke, P., *Stooke Small Bodies Maps V3.0*, MULTI-SA-MULTI-6-STOOKEMAPS-V3.0, NASA Planetary Data System, 2015. The pinned map guide states that the maps are public domain with proper credit, intended for visualization, and unsuitable for photometric analysis.
 
-Physical/orbital data: NASA/JPL Horizons. Inter title outlines use the pinned Inter font under SIL Open Font License 1.1, retained in `source/presentation/LICENSE.INTER-OFL`.
+Physical/orbital data: NASA/JPL Horizons.
 
 README.md records coordinate conventions, partial coverage, modeled geometry, illumination limits and surveyed alternatives. Research-paper PDFs are not redistributed as body-package sources.
 

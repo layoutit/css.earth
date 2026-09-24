@@ -105,7 +105,7 @@ The archive has metadata inconsistencies: PDS prose interchanges the image/DEM d
 
 ## Orientation and sky
 
-Sun, orbit and body-fixed orientation are prepared at the shared epoch 2026-09-04T00:00:00 TT using JPL Enceladus parent-relative elements, VSOP87 Saturn position and the IAU/WGCCRE Enceladus rotation. The shell title uses the pinned Inter font.
+Sun, orbit and body-fixed orientation are prepared at the shared epoch 2026-09-04T00:00:00 TT using JPL Enceladus parent-relative elements, VSOP87 Saturn position and the IAU/WGCCRE Enceladus rotation.
 
 ## Source restoration
 

@@ -10,8 +10,6 @@ and attribution conditions. No agency or mission endorsement is implied.
 - USGS product terms and credits are preserved in the checked metadata pages.
 - JPL physical facts: NASA Jet Propulsion Laboratory / Solar System Dynamics.
 - NASA editorial facts: NASA Science. The short introduction is authored here.
-- Inter title outline: Inter Project Authors, SIL Open Font License 1.1; the
-  repository-pinned font and license remain in the shared title preparation inputs.
 
 No OpenSpace code, Google imagery, or live external assets are loaded by Pluto. The Lambert lighting bank follows the shared OpenSpace-derived shading model recorded in `source/preparation/raster.json` (MIT-licensed shader reference, no OpenSpace data).
 

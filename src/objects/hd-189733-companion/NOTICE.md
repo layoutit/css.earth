@@ -7,5 +7,3 @@ Colour: the Gaia DR3 BP/RP sampled spectrum of source 1827242816176111360 (Gaia 
 Orbit fit (evidence only, nothing drawn): fitted in this project with LOFTI (L. Pearce, A. Kraus et al. 2020, ApJ 894, 115, doi:10.3847/1538-4357/ab8389; lofti_gaia 2.0.8) from the Gaia DR3 astrometry of both stars. No orbit of this pair is published.
 
 Placement: Gaia DR3 position and proper motion; distance and radial velocity of HD 189733 A (Gaia DR3). No measured rotation axis: the display axis is celestial north.
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

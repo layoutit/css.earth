@@ -29,9 +29,7 @@ function rasterTitle(value: unknown): PreparedTitle {
 }
 function objectTitle(value: unknown): ObjectTitle {
   const title = object(value, 'object title');
-  return { label: text(title.label, 'title label'), path: text(title.path, 'title path'), viewBox: text(title.viewBox, 'title view box'),
-    renderViewBox: text(title.renderViewBox, 'title render view box'), renderWidth: number(title.renderWidth, 'title width'), renderHeight: number(title.renderHeight, 'title height'),
-    renderPathOffsetY: number(title.renderPathOffsetY, 'title offset'), baseline: number(title.baseline, 'title baseline') };
+  return { label: text(title.label, 'title label') };
 }
 function facts(value: unknown): Fact[] {
   return array(value, 'facts').map(value => { const fact = object(value, 'fact'); return { id: text(fact.id, 'fact id'), label: text(fact.label, 'fact label'), value: text(fact.value, 'fact value') }; });

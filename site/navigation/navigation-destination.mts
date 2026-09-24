@@ -1,6 +1,6 @@
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
 import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
-import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
+import { OVERVIEW_TITLES } from '../overview-titles.mts';
 
 /** Where the application opens something, and the catalogue subject to select in
  * place when that destination is a focus on the already mounted world. */

@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { runtimeAssetUrls, unknownRuntimeAssetUrls } from './check-deploy-assets.mts';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { checkPublishedWorldPair, runtimeAssetUrls, unknownRuntimeAssetUrls } from './check-deploy-assets.mts';
 
 const hash = 'a'.repeat(64);
 const known = `https://earth-assets.lowpoly.cc/runtime-assets/${hash}/datasets/preview@2x.webp`;
@@ -19,3 +21,12 @@ test('deploy asset closure ignores unrelated URLs and truncated identities', () 
 function RUNTIME_ASSET_ORIGIN_FIXTURE(): string {
   return `https://earth-assets.lowpoly.cc/runtime-assets/${'c'.repeat(63)}/x.webp`;
 }
+
+test('the published world summary and system views must describe the same systems', async () => {
+  const root = resolve(import.meta.dirname, '../..'), prepared = resolve(root, 'src/objects/sun/prepared');
+  const summary = await readFile(resolve(prepared, 'world-context-summary.json'), 'utf8'), views = JSON.parse(await readFile(resolve(prepared, 'world-system-views.json'), 'utf8'));
+  const read = (viewsText: string) => async (url: string) => url.endsWith('/world-context-summary.json') ? summary : viewsText;
+  assert.ok(await checkPublishedWorldPair(root, read(JSON.stringify(views))) > 0);
+  const [dropped] = Object.keys(views.views); delete views.views[dropped];
+  await assert.rejects(checkPublishedWorldPair(root, read(JSON.stringify(views))), /published world summary and system views disagree/);
+});
