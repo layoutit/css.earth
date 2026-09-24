@@ -138,7 +138,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
 
-  put(`src/renderers/css/styles/${id}-surfaces.css`, glow ? starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.', undefined, GEOMETRY_SCALE) : hostedPlanetStylesheet(id));
+  put(`src/renderers/css/styles/${id}-surfaces.css`, glow ? starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.') : hostedPlanetStylesheet(id));
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
     latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false,
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, centerLongitudeDegrees: 0 },

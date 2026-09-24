@@ -27,10 +27,10 @@
   inset: auto;
   left: 50%;
   top: 50%;
-  width: calc(1528px * 1.25 * var(--sgr-a-star-camera-zoom, 1));
-  height: calc(1528px * 1.25 * var(--sgr-a-star-camera-zoom, 1));
-  margin-left: calc(1528px * 1.25 * var(--sgr-a-star-camera-zoom, 1) / -2);
-  margin-top: calc(1528px * 1.25 * var(--sgr-a-star-camera-zoom, 1) / -2);
+  width: calc(1528px * var(--sgr-a-star-camera-zoom, 1));
+  height: calc(1528px * var(--sgr-a-star-camera-zoom, 1));
+  margin-left: calc(1528px * var(--sgr-a-star-camera-zoom, 1) / -2);
+  margin-top: calc(1528px * var(--sgr-a-star-camera-zoom, 1) / -2);
 }
 
 /* Paint order: off-limb context behind the sphere, limb plate above it. */
@@ -79,26 +79,24 @@
   background-image: var(--sgr-a-star-poles-image) !important;
 }
 
-/* Off-limb context: 1528 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
-   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="sgr-a-star"] .sgr-a-star-corona-layer {
   background-image: var(--sgr-a-star-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(1528px * 1.25 * var(--sgr-a-star-camera-zoom, 1))
-    calc(1528px * 1.25 * var(--sgr-a-star-camera-zoom, 1));
+    calc(1528px * var(--sgr-a-star-camera-zoom, 1))
+    calc(1528px * var(--sgr-a-star-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
-   sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="sgr-a-star"] .sgr-a-star-limb-layer {
   background-image: var(--sgr-a-star-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * 1.25 * var(--sgr-a-star-camera-zoom, 1))
-    calc(496px * 1.25 * var(--sgr-a-star-camera-zoom, 1));
+    calc(496px * var(--sgr-a-star-camera-zoom, 1))
+    calc(496px * var(--sgr-a-star-camera-zoom, 1));
 }
 
 .object-stage[data-object-id="sgr-a-star"] .polycss-camera {
