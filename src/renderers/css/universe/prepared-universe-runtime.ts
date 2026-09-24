@@ -1,7 +1,7 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
-import { createOpacityClock } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { logarithmicFade } from './world-context/context-scale.js';
 import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
@@ -116,7 +116,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       };
       try {
         lifetime.onDispose(() => { delete stage.dataset.contextScale; });
-        const opacityClock = own(createOpacityClock(document.defaultView!));
+        const opacityClock = opacityClockFor(document.defaultView!);
         const root = document.createElement('div');
         lifetime.onDispose(() => root.remove());
         root.className = 'prepared-universe';

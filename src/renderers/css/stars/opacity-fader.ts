@@ -1,4 +1,4 @@
-import { createOpacityClock, type OpacityClock, type OpacityWindow } from './opacity-clock.js';
+import { opacityClockFor, type OpacityClock, type OpacityWindow } from './opacity-clock.js';
 export type OpacityFaderWindow = OpacityWindow;
 type Track = { from: number; target: number; started: number; duration: number; ease: boolean };
 /** Whatever carries an inline opacity: a DOM element, or an owner's adapter that maps it elsewhere. */
@@ -28,7 +28,7 @@ const running = (track: Track, time: number) => track.from !== track.target && t
 /** One numeric opacity writer. Independent authored factors are evaluated on
  * one clock, then multiplied once; CSS/WAAPI never re-animate its output. */
 export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityClock) {
-  const clock = sharedClock ?? createOpacityClock(window);
+  const clock = sharedClock ?? opacityClockFor(window);
   const entries = new Map<FadeTarget, Entry>(), pending = new Set<Entry>(), dirty = new Set<Entry>();
   let destroyed = false, animationEnabled = true;
   const entryFor = (element: FadeTarget) => {
@@ -105,6 +105,6 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
     cancel(element: FadeTarget) { const entry = entries.get(element); if (entry) { pending.delete(entry); dirty.delete(entry); } entries.delete(element); if (pending.size === 0 && dirty.size === 0) clock.remove(flush); },
     batch: clock.batch,
     stats: () => ({ active: pending.size, retained: entries.size }),
-    destroy() { destroyed = true; pending.clear(); dirty.clear(); entries.clear(); clock.remove(flush); if (!sharedClock) clock.destroy(); },
+    destroy() { destroyed = true; pending.clear(); dirty.clear(); entries.clear(); clock.remove(flush); },
   });
 }

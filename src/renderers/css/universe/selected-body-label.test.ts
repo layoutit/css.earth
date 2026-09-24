@@ -1,12 +1,12 @@
 import { parseHTML } from 'linkedom';
 import { expect, test } from 'vitest';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
-import { createOpacityClock } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../stars/opacity-clock.js';
 import { mountSelectedBodyLabel } from './selected-body-label.js';
 
 const { document } = parseHTML('<div id="host"></div>');
 const host = document.getElementById('host') as unknown as HTMLElement;
-const clock = createOpacityClock({ requestAnimationFrame: () => 0, cancelAnimationFrame() {}, performance: { now: () => 0 } });
+const clock = opacityClockFor({ requestAnimationFrame: () => 0, cancelAnimationFrame() {}, performance: { now: () => 0 } });
 const camera = { referenceFrame: 'test', epochJdTt: 0, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } } as unknown as WorldCameraPose;
 const viewport = { focalPixels: 1000, widthPixels: 800, heightPixels: 1000, principalOffsetPixels: [0, 0] as const };
 // A body straight ahead; its disc radius on screen is 1000 / sqrt(distance² - 1) px.

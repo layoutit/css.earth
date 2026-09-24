@@ -1,5 +1,5 @@
 import type { RuntimePolicy, WheelInputKind, WheelZoomInertia } from './runtime-policy.js';
-import { createOpacityClock } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../stars/opacity-clock.js';
 import type { NavigationCamera, CameraDelta, ControlsUpdate } from './types.js';
 export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; rotate(delta: CameraDelta): void; speedMultiplier?: number; dolly: { stepPerDelta: number }; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
@@ -54,7 +54,7 @@ export function createPreparedWheelZoomControls({
   // The zoom glide moves the camera, so it belongs to the same input lane as a
   // thrown drag: one clock, and the glide always resolves before the publication
   // that reads its distance.
-  const frameClock = createOpacityClock(windowTarget);
+  const frameClock = opacityClockFor(windowTarget);
   const requestFrame = (callback: FrameRequestCallback) => frameClock.request(guard(callback), 'input');
   const cancelFrame = (id: number) => frameClock.cancel(id);
   let enabled = true;
@@ -204,7 +204,6 @@ export function createPreparedWheelZoomControls({
     if (disposed) return;
     disposed = true;
     stop();
-    frameClock.destroy();
     inputSurface.removeEventListener("wheel", guardedWheel);
   }
   return Object.freeze({
