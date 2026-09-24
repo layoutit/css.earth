@@ -64,6 +64,13 @@ jobs:
           else
             node tools/ci/ci-affected.mts push "${{ github.event.before }}"
           fi
+      - name: Check that every commit is one Conventional Commits line written by a person
+        # Required with the rest of this job. A local commit-msg hook gives the same answer earlier, but a hook can be
+        # skipped; this reads the pull request's own commits (merge base to head), so the merge itself is never counted.
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node tools/ci/commit-message.mts --range "origin/$GITHUB_BASE_REF..$HEAD_SHA"
       - name: Scope the runtime ownership check
         id: ownership-scope
         # Computed here (this checkout already has the full history a merge-base diff needs) so the "Prepared
