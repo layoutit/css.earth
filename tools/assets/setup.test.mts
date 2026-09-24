@@ -97,24 +97,25 @@ test("readAllowMissingFlag reads the CLI flag or the deploy-only env var", () =>
   }
 });
 
-test("a dropped connection and a 5xx are retried; a 404 is a verdict and is not", async () => {
+test("a dropped connection, a 5xx and a 429 are retried; a 404 is a verdict and is not", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-retry-"));
   const bytes = Buffer.from("prepared image");
   const asset = { id: "earth", key: "earth/image.webp", location: "public" as const, filename: "image.webp", file: join(root, "image.webp"),
     url: "https://example.invalid/image.webp", bytes: bytes.length,
     sha256: createHash("sha256").update(bytes).digest("hex") };
   try {
-    // Two transient failures — one network, one 5xx — then success. Across thousands of files a
+    // Three transient failures — one network, one 5xx, one rate limit — then success. Across thousands of files a
     // single dropped connection must not fail the run.
     let requests = 0;
     const flaky = async () => {
       requests++;
       if (requests === 1) throw new TypeError("fetch failed");
       if (requests === 2) return new Response("upstream", { status: 503 });
+      if (requests === 3) return new Response("slow down", { status: 429 });
       return new Response(bytes);
     };
     assert.deepEqual(await installRuntimeAssets([asset], { fetcher: flaky }), { installed: 1, reused: 0, skipped: 0 });
-    assert.equal(requests, 3);
+    assert.equal(requests, 4);
     assert.deepEqual(await readFile(asset.file), bytes);
 
     // A 404 means the object is not published. That is a fact, not a blip: one request, no retry.

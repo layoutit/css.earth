@@ -108,7 +108,9 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   const y = rows.filter(row => row.name === 'Y b');
   assert.equal(y[0]!.massJupiter, undefined); assert.equal(y[0]!.massLimitJupiter, 0.05);
   assert.match(assembleArchiveOrbit(y, undefined, { value: 0.002, provenance: 'M-R relationship', limit: false, label: 'Calculated Value' }).mass.row.label, /calculated value/u);
-  assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.05, provenance: 'Mass', limit: true, label: 'C et al. 2022' }), /only an upper limit/u);
+  // An adopted upper limit stays a limit, and the density rule does not judge it (Kepler-62's five planets were refused before).
+  const limited = assembleArchiveOrbit(y, undefined, { value: 0.5, provenance: 'Mass', limit: true, label: 'C et al. 2022' }).mass;
+  assert.deepEqual([limited.value, limited.limit, limited.row.label], [0.5, true, 'C et al. 2022']);
   // A mass that makes an impossible density is refused before the records see it.
   assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.1, provenance: 'Mass', limit: false, label: 'D et al. 2023' }), /g\/cm\^3, outside what the records accept/u);
 });
@@ -123,6 +125,8 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
     'HD_219134': { type: 'standard', title: 'HD 219134', extract, description: 'Star in the constellation Cassiopeia', revision: 1234, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/HD_219134' } } },
     'Mercury': { type: 'disambiguation', title: 'Mercury', extract: 'Mercury may refer to:', revision: 1, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Mercury' } } },
     'HD_219134_c': { type: 'standard', title: 'HD 219134', extract, description: 'Star in the constellation Cassiopeia', revision: 1234, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/HD_219134' } } },
+    'HD_219134_e': { type: 'standard', title: 'HD 219134e', extract: 'HD 219134e is a planet orbiting HD 219134. It takes 94 days.', description: 'Exoplanet', revision: 7, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/HD_219134e' } } },
+    'HD_219134_f': { type: 'standard', title: 'Kepler space telescope', extract: 'Kepler was a space telescope that found many a planet. It retired in 2018.', description: 'Space telescope', revision: 8, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Kepler_space_telescope' } } },
     'Ariel': { type: 'standard', title: 'Ariel', extract: 'Ariel is a spirit in The Tempest.', description: 'Character in a play', revision: 2, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Ariel' } } },
   };
   const archive = { exists: async (url: string) => decodeURIComponent(url.split('/').at(-1)!) in pages, text: async (url: string) => JSON.stringify(pages[decodeURIComponent(url.split('/').at(-1)!)]), bytes: async () => Buffer.alloc(0) };
@@ -132,6 +136,11 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
   assert.deepEqual(await wikipediaQuotes(archive, ['HD 219134 b', 'HD 219134'], ['HD 219134 b']), { url: 'https://en.wikipedia.org/wiki/HD_219134', title: 'HD 219134', revision: '1234',
     card: 'Smith et al. (2015) found HD 219134 b, a rocky planet with a 3.09-day orbit, transiting the star.' }, "a planet without its own article quotes its host's lead where it is named");
   assert.equal(await wikipediaQuotes(archive, ['HD 219134 c', 'HD 219134'], ['HD 219134 c']), undefined, "a planet name redirecting to a host lead that never names the planet gives it no quote");
+  assert.equal((await wikipediaQuotes(archive, ['HD 219134 e', 'HD 219134'], ['HD 219134 e']))?.card, 'HD 219134e is a planet orbiting HD 219134.', 'a redirect to the planet\'s own article, titled with its letter joined');
+  assert.equal(await wikipediaQuotes(archive, ['HD 219134 f', 'HD 219134'], ['HD 219134 f']), undefined, 'a redirect to an article about something else, which never names the planet');
+  const { spelledOut } = await import('./prose.mts');
+  assert.deepEqual(['55 Cnc e', 'eps Ind A', 'HU Aqr', 'ups And b', 'mu2 Sco', 'HD 219134 b', 'Kepler-62 f', 'TOI-700'].map(spelledOut),
+    ['55 Cancri e', 'Epsilon Indi A', 'HU Aquarii', 'Upsilon Andromedae b', 'Mu2 Scorpii', 'HD 219134 b', 'Kepler-62 f', 'TOI-700'], 'as Wikipedia titles the articles');
 });
 
 test('a planet takes its colour from what is measured: the emission row with the smallest relative uncertainty, else its host\'s light on the gray', async () => {
@@ -177,14 +186,14 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   const orbit = { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000, ascendingNodePositionAngleDegrees: 0, sources: { period: 'p', shape: 's', eccentricity: 'e', phase: 'ph', orientation: 'o' } };
   const cited = { value: 1, source: 's', url: star.paper.url };
   const thermal = { temperatureK: 1400, uncertaintyK: 80, wavelengthMicrometres: 4.5, facility: 'Spitzer IRAC', source: 'Kammer et al. 2018, dayside brightness temperature at 4.5 µm', url: 'https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract', chosen: '1 measured of 1 rows' };
-  const build = async (extra: Record<string, unknown>) => {
+  const build = async (extra: Record<string, unknown>, mass: typeof cited & { limit?: true } = cited) => {
     const spec = parseStarSpec({ ...star, planets: [{ id: 'hd-219134b', name: 'HD 219134 b', description: 'A planet.', text: { card: 'A planet.', introduction: 'A planet made from fixtures.', locator: 'fixture' }, paper: star.paper, radius: cited, mass: cited, orbit: { elements: { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000 }, source: 's', url: star.paper.url }, ...extra }] }).planets[0]!;
     const body = { id: spec.id, classification: 'exoplanet', order: 2, physical: { name: spec.name, horizonsCode: null, meanRadiusKm: 71492, gravitationalParameterKm3PerS2: 126686531.9, parent: 'hd-219134' }, physicalNotes: 'n', hostedOrbit: orbit };
-    const record = { spec, hostId: 'hd-219134', system: 'HD 219134 system', body, order: 2, orbit, orbitCitation: { text: 's', url: star.paper.url, label: 's' }, radius: cited, mass: cited, documents: new Map<string, string>(), todo: [] };
+    const record = { spec, hostId: 'hd-219134', system: 'HD 219134 system', body, order: 2, orbit, orbitCitation: { text: 's', url: star.paper.url, label: 's' }, radius: cited, mass, documents: new Map<string, string>(), todo: [] };
     const { files } = await hostedPackage(record, host, new Map([[star.paper.url, paper]]), archive, root, 2460000);
     const text = JSON.parse(String(files.get('src/objects/hd-219134b/text.json'))), content = JSON.parse(String(files.get('src/objects/hd-219134b/source/content/object.json')));
     assertWholePackage(files, 'hd-219134b', true);
-    return { datasets: Object.keys(text.datasets), notes: String(content.lenses.controls[0].notes), lens: String(content.lenses.controls[0].id) };
+    return { datasets: Object.keys(text.datasets), notes: String(content.lenses.controls[0].notes), lens: String(content.lenses.controls[0].id), facts: content.panel.facts as { id: string; value: string }[] };
   };
   const glow = await build({ thermal });
   assert.deepEqual([glow.lens, glow.datasets], ['thermal', ['thermal']]);
@@ -195,6 +204,22 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   // Host light adds its sentence to the base note; the scaffold's TODO never survives (a regression #691 introduced).
   assert.doesNotMatch(shape.notes, /TODO/u);
   assert.match(shape.notes, /takes the colour of hd-219134's light/u);
+  // A mass that is only an upper limit is shown as one.
+  assert.equal((await build({}, { ...cited, value: 0.12, limit: true })).facts.find(fact => fact.id === 'mass')!.value, 'Under 0.12 Jupiter masses');
+});
+
+test('a planet whose archive mass is only an upper limit gets GM 0, the records\' unpublished value, and the limit in its notes', async () => {
+  const { hostedRecord } = await import('./hosted.mts');
+  const anchor = '"<a refstr=BORUCKI_ET_AL__2013 href=https://ui.adsabs.harvard.edu/abs/2013Sci...340..587B/abstract target=ref>Borucki et al. 2013</a>"';
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar',
+    `"Kepler-62 f",${anchor},1,267.291,,89.9,0,,2454967.3,0.126,0.11,0.718,0.64,0.69,1,`].join('\n');
+  const composite = `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"Kepler-62 f",0.11,1,Mass,${anchor}`;
+  const archive: Archive = { async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); if (query.includes('from pscomppars')) return composite; if (query.includes('from ps where pl_name')) return ps; throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  const spec = parseStarSpec({ ...star, planets: [{ id: 'kepler-62f', name: 'Kepler-62 f', description: 'A planet.', text: { card: 'A planet.', introduction: 'A planet made from fixtures.', locator: 'fixture' }, paper: star.paper, orbit: { archive: 'nasa-ps' } }] });
+  const host = { spec, body: { physical: { meanRadiusKm: 0.64 * 695700 }, star: { distanceParsecs: 300 } } };
+  const record = await hostedRecord(spec.planets[0]!, host, 2, archive, root);
+  assert.equal((record.body.physical as { gravitationalParameterKm3PerS2: number }).gravitationalParameterKm3PerS2, 0);
+  assert.match(String(record.body.physicalNotes), /No mass is measured: Borucki et al\. 2013 \(2013Sci\.\.\.340\.\.587B\), via the NASA Exoplanet Archive \(https:[^)]+\) gives only an upper limit of 0\.11 Jupiter masses/u);
 });
 
 test('a Planck colour outside sRGB (a cool companion) is shown desaturated and the record says so; one inside keeps its record plain', async () => {
