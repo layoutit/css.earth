@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "24"
 
+# The search function renders the selection card, whose modules read the world summary from disk at load
+# (site/world-context-plan.mts finds it under the project root, marked by pnpm-workspace.yaml). The bundled
+# function carries both files; without them every search request fails with "Could not find the project root".
+[functions]
+  included_files = ["pnpm-workspace.yaml", "src/objects/sun/prepared/world-context-summary.json"]
+
 # This tiny router preserves optional view and category parameters. Search work
 # runs in a Node function; ordinary pages and scene assets stay on the CDN.
 [[edge_functions]]
