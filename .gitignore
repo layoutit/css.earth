@@ -268,7 +268,6 @@ src/objects/*/source/**/*.bpc
 # Shared shell outputs, replayed by pnpm prepare:shell from pinned fonts and vectors.
 /site/prepared-shell-icons.mjs
 /site/prepared-shell-titles.mjs
-/site/source/branding/wordmark-rail-segments.mjs
 
 # Large source inputs with pinned archive downloads; `pnpm prepare:checkout` (or
 # `node tools/objects/dist/operations.js acquire <id>`) restores and verifies them.
@@ -324,5 +323,3 @@ src/spice/**/*.bc
 # Small expected-output receipt supports offline source recovery.
 
 /site/prepared-world-presentation.json
-/site/source/titles/InterVariable.ttf
-/site/source/titles/title-font.woff2

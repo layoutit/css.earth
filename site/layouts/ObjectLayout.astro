@@ -1,6 +1,5 @@
 ---
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
-import TitleTypography from "../components/TitleTypography.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { requireSceneObject } from "../objects.mts";
@@ -88,7 +87,6 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <slot name="object-head" />
     <title>{seo.title}</title>
     <ObjectSwatchStyles />
-    <TitleTypography />
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->

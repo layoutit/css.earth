@@ -51,14 +51,11 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
       outputs: [{ path: 'tools/objects/dist', required: ['operations.js', 'prepare-spatial-context.js'] }] },
   ];
   if (mode === 'full') tasks.push(
-    node('font', 'tools/assets/restore-title-font.mts'),
-    node('title-font', 'tools/prepare/prepare-title-font.mts', ['font']),
     node('icons', 'tools/prepare/prepare-shell-icons.mts'),
     node('navigation', 'tools/prepare/prepare-navigation.mts', ['solar'], ['--catalog-only']),
     node('world', 'tools/objects/dist/prepare-spatial-context.js', ['preparation', 'navigation'], ['src/objects/sun/source/navigation/universe.json', 'src/objects/sun/prepared/world-context.json']),
     node('moon-labels', 'tools/prepare/prepare-moon-labels.mts', ['world']),
     node('world-presentation', 'tools/prepare/prepare-world-presentation.mts', ['world']),
-    node('wordmark', 'tools/prepare/prepare-wordmark-rail.mts', ['font']),
   );
   return tasks;
 }

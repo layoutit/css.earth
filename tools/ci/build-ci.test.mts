@@ -38,9 +38,8 @@ test('an exact full hit reuses only compiled output while all generated source a
   f.executed.length = 0;
   const results = await buildCi({ ...f, mode: 'full', digest, cacheHit: true });
   assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation', 'renderer']);
-  assert.deepEqual([...f.executed].sort(), ['astronomy-data', 'catalog', 'font', 'icons', 'moon-labels', 'navigation', 'solar', 'title-font', 'titles', 'wordmark', 'world', 'world-presentation']);
+  assert.deepEqual([...f.executed].sort(), ['astronomy-data', 'catalog', 'icons', 'moon-labels', 'navigation', 'solar', 'titles', 'world', 'world-presentation']);
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('moon-labels'));
-  assert.ok(f.executed.indexOf('font') < f.executed.indexOf('title-font'));
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('world-presentation'));
 });
 

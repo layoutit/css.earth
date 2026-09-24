@@ -527,6 +527,11 @@ details:not([open]) > .object-panel-summary .object-panel-icon {
 
 .object-title-row > .object-title { flex: 0 0 auto; }
 
+.object-title-text {
+  font: 500 24px/30.13px var(--shell-ui-font);
+  letter-spacing: -0.01em;
+}
+
 .object-breadcrumbs {
   position: relative;
   margin: 0 0 4px;
