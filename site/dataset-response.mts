@@ -15,6 +15,13 @@ function region(html: string, name: string) {
   return { start, end, document: parseHTML(`<html><body>${html.slice(start, end)}</body></html>`).document };
 }
 
+/** A saved view (`v`) this build cannot read: an old or damaged shared link, not a malformed request. The page answers
+ * without it rather than refusing the visit. */
+export class UnreadableSavedView extends RangeError {
+  readonly value: string;
+  constructor(value: string) { super(`Invalid saved view: v=${value.slice(0, 80)}.`); this.value = value; }
+}
+
 /** A native request uses the same authenticated prepared records and serializer
  * as the static page. Only the existing scene and its dataset controls change. */
 export async function renderDatasetResponse(html: string, url: URL, objectId: string, fetcher: typeof fetch = fetch): Promise<string> {
@@ -27,10 +34,10 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   const views = url.searchParams.getAll('v');
   const focusing = url.searchParams.has('focus') || url.searchParams.has('focusLens');
   if (!dataset.requested && !settingRequest && !featureIds.length && !views.length && !focusing) return html;
-  if (views.length > 1) throw new RangeError('Invalid saved view.');
+  if (views.length > 1) throw new RangeError(`Invalid saved view: ${views.length} v parameters.`);
   let saved;
   try { saved = views.length ? parseSharedView(`v=${views[0]}`) : null; }
-  catch { throw new RangeError('Invalid saved view.'); }
+  catch { throw new UnreadableSavedView(views[0]!); }
   let lensId = dataset.id ?? undefined;
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));

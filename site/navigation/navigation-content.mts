@@ -86,8 +86,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
                 if (preserveSidebar && selector === '.object-information-panel' && !target.querySelector(':scope > [data-card-preview]')) continue;
                 target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
               }
-              for (const selector of [...required, '[data-settings-form]', '.object-sidebar-view-all', '.object-sheet-handle',
-                '.explorer-rail-explore', '.explorer-rail-about', '.object-settings-action', '.explorer-about-panel', '.explorer-about-panel h2']) {
+              for (const selector of [...required, '[data-settings-form]', '.object-sidebar-view-all', '.object-sheet-handle', '.object-settings-action']) {
                 const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
                 if (!target || !incoming) continue;
                 for (const name of ['id', 'action', 'aria-label', 'aria-controls', 'aria-labelledby', 'popovertarget', 'placeholder', 'data-has-destinations']) {

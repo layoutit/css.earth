@@ -1,5 +1,4 @@
 import { createObjectBrowserController } from './object-browser.mts';
-import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
@@ -11,7 +10,6 @@ import { errorMessage, requiredElement } from './browser-types.mts';
 import type { NavigationContent } from './navigation/navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createSceneLifetime } from "@cssearth/engine";
-import { createExplorerRailController } from "./explorer-rail.mts";
 import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mts";
 import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "./surface-map-context.mts";
@@ -92,7 +90,8 @@ export function mountObjectShell({
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId,
       onCategoryChange: value => preferences.set('highlightedClassification', value),
-      onResetDestination, readIllustrationModels: () => preferences.state.illustrationModelsEnabled }));
+      onResetDestination, readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
+      onSearchChange: open => sheet.followSearch(open) }));
     lifetime.onDispose(preferences.subscribe(key => {
       if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();
     }));
@@ -100,9 +99,6 @@ export function mountObjectShell({
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === objectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime,
       () => `${objectId}:${selectionKey(objectBrowser.readSubject())}`));
-    own(createExplorerRailController(documentTarget, windowTarget, {
-      onOpenSolarSystem: () => objectBrowser.showSystem(SOLAR_SYSTEM_ID),
-    }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => navigationTransition?.dispose());
     mountContent(objectId);

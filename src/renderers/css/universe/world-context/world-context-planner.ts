@@ -11,7 +11,7 @@ import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { createLabelBudget, labelExtentOpacity, labelLimit, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 
 const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
 const ORBIT_LOD_PIXELS = 0.1;
@@ -465,7 +465,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       const locatorRadius = BODY_INDICATOR_DIAMETER / 2;
       const locatorRects = selectedLocator ? [{ left: selectedLocator.x - locatorRadius, right: selectedLocator.x + locatorRadius,
         top: selectedLocator.y - locatorRadius, bottom: selectedLocator.y + locatorRadius }] : [];
-      const worldLabelBudget = () => createLabelBudget(Infinity, Infinity, [], locatorRects, labelLimit(width));
+      const worldLabelBudget = () => createLabelBudget(Infinity, Infinity, [], [...locatorRects, ...coveredTopRects(viewport)], labelLimit(width));
       const labelBudget = worldLabelBudget();
       // Circle and caption reserve space together. A rejected candidate owns no
       // annotation or context orbit; physical sprites remain independent.

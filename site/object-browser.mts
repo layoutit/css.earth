@@ -18,6 +18,8 @@ export interface ObjectBrowserOptions {
   onCategoryChange?(classification: string | null): void;
   readIllustrationModels?(): boolean;
   onResetDestination?(): void;
+  /** Search results opened or closed. The mobile sheet follows this state, not the input's own events. */
+  onSearchChange?(open: boolean): void;
 }
 
 interface SubjectOverride {
@@ -26,7 +28,8 @@ interface SubjectOverride {
 }
 
 export function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
-  { readSelection, readObjectId, onCategoryChange = () => {}, readIllustrationModels = () => false, onResetDestination = () => {} }: ObjectBrowserOptions) {
+  { readSelection, readObjectId, onCategoryChange = () => {}, readIllustrationModels = () => false, onResetDestination = () => {},
+    onSearchChange = () => {} }: ObjectBrowserOptions) {
   // Browsing a system keeps the committed focus; a flight preview temporarily
   // covers it. Neither changes which scene or focus the shell owns.
   let subjectOverride: SubjectOverride | null = null;
@@ -158,7 +161,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const render = (next: boolean) => {
     presentSelection();
     // Only an actual open/close transition may reset a scrolled result list.
-    if (open !== next) resetResultsScroll();
+    const changed = open !== next;
+    if (changed) resetResultsScroll();
     open = next;
     const currentUrl = new URL(windowTarget.location.href);
     for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
@@ -175,11 +179,15 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       filteredQuery = null;
       markCategory();
     }
+    if (changed && !lifetime.disposed) onSearchChange(next);
   };
 
+  // Focus first: focusing search opens the mobile sheet for the keyboard, and closing
+  // the results must still return the sheet to where the search found it.
+  const closeKeepingFocus = () => { search.focus(); render(false); };
   trigger.addEventListener("click", event => {
     event.preventDefault();
-    if (open) { render(false); search.focus(); return; }
+    if (open) { closeKeepingFocus(); return; }
     render(true);
     search.focus();
   }, {
@@ -193,8 +201,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   documentTarget.querySelector<HTMLElement>('.object-sidebar-search-clear')?.addEventListener('click', event => {
     event.preventDefault();
     search.value = "";
-    render(false);
-    search.focus();
+    closeKeepingFocus();
   }, { signal: events.signal });
   for (const button of categoryButtons) {
     button.addEventListener('click', event => {
@@ -211,8 +218,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     button.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
       event.preventDefault();
-      render(false);
-      search.focus();
+      closeKeepingFocus();
     }, { signal: events.signal });
   }
   search.addEventListener("input", () => {
@@ -253,7 +259,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     }
     const controls = [...browser.querySelectorAll<HTMLElement>("summary, a, button")].filter(visibleControl);
     const index = controls.findIndex(control => control === documentTarget.activeElement);
-    if (event.key === "Escape") { render(false); search.focus(); }
+    if (event.key === "Escape") closeKeepingFocus();
     else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
       const next = index + (event.key === "ArrowDown" ? 1 : -1);
@@ -300,11 +306,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       if (open) filter(false);
     },
     previewSelection,
-    showSystem(systemId: string) {
-      subjectOverride = { subject: { kind: 'overview', overview: { scope: 'system', systemId } }, hideFocus: false };
-      if (systemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();
-      render(false);
-    },
     refreshSelection() {
       const subject = readSelection();
       // Focus content can publish during a preview; keep its temporary context.

@@ -2,8 +2,16 @@
   "id": "publication-2023aj-166-33m",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2023AJ....166...33M, as the NASA Exoplanet Archive cites it.",
+  "title": "MacDougall et al. (2023): The TESS-Keck Survey. XV. Precise Properties of 108 TESS Planets and Their Host Stars",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2306.00251"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/acd557"
+    },
     {
       "type": "bibliography-key",
       "value": "2023AJ....166...33M"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/acd557",
+      "label": "The Astronomical Journal 166 33"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "MacDougall et al. (2023), The Astronomical Journal 166 33",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M"
     }
+  ],
+  "publisher": "The Astronomical Journal 166 33",
+  "creators": [
+    "Mason G. MacDougall",
+    "Erik A. Petigura",
+    "Gregory J. Gilbert",
+    "et al."
   ],
   "publicationDate": "2023"
 }

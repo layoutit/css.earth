@@ -2,8 +2,16 @@
   "id": "publication-2022mnras-514-1606b",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2022MNRAS.514.1606B, as the NASA Exoplanet Archive cites it.",
+  "title": "Barragán et al. (2022): The young HD 73583 (TOI-560) planetary system: two 10-M⊕ mini-Neptunes transiting a 500-Myr-old, bright, and active K dwarf",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2110.13069"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stac638"
+    },
     {
       "type": "bibliography-key",
       "value": "2022MNRAS.514.1606B"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stac638",
+      "label": "Monthly Notices of the Royal Astronomical Society 514 1606-1627"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "Barragán et al. (2022), Monthly Notices of the Royal Astronomical Society 514 1606-1627",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B"
     }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 514 1606-1627",
+  "creators": [
+    "O Barragán",
+    "D J Armstrong",
+    "D Gandolfi",
+    "et al."
   ],
   "publicationDate": "2022"
 }

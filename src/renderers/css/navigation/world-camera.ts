@@ -35,6 +35,8 @@ export interface WorldCameraViewport {
   readonly heightPixels?: number;
   /** Relative to the selected presentation root centre, in CSS pixels. */
   readonly principalOffsetPixels: readonly [number, number];
+  /** The top band of the stage the shell header covers, in CSS pixels: scene labels stay below it. */
+  readonly coveredTopPixels?: number;
 }
 
 export interface LocalWorldCameraPresentation {

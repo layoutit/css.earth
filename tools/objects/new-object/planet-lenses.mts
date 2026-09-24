@@ -136,7 +136,8 @@ export async function installBandColorLens(files: PackageFiles, id: string, name
   const descriptor = read(`${o}/object.json`);
   descriptor.properties.recipe.surfaces[0].lenses = [{ id: 'infrared', source: 'content', material: emissive ? 'emission' : 'lighting' }];
   files.set(`${o}/object.json`, json(descriptor));
-  ensureStylesheet(files, id, 'infrared');
+  // A self-luminous planet's stylesheet is the emissive one, which does not name its lens; only a lit planet's names it.
+  if (!emissive) ensureStylesheet(files, id, 'infrared');
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.color = colorHex;
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-infrared@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-infrared@2x.webp`;
@@ -241,8 +242,23 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
       installHostLight(files, id, light);
       lines.push(`${id}: gray lit by ${host} (${light.srgb})`);
     }
+    lensMarkerEntry(files, id);
     for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
+    const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([id]);
     progress(lines.at(-1)!);
   }
   return lines;
+}
+
+/** A planet's context marker as the marker author draws it from its default lens (source-authoring/context-markers.mts): the
+ * manifest entry names that author and the inputs the lens reads, replacing the scaffold's gray-disc entry. */
+export function lensMarkerEntry(files: PackageFiles, id: string) {
+  const path = `src/objects/${id}/source/manifest.json`, manifest = JSON.parse(String(files.get(path))) as { inputs: { id: string }[]; generatedIntermediates?: Record<string, unknown>[] };
+  const lensInputs = manifest.inputs.map(input => input.id).filter(input => [`${id}-preparation-raster`, `${id}-observational-measurements`, `${id}-thermal-color`].includes(input) || input.endsWith('-band-color'));
+  const generator = 'tools/objects/source-authoring/context-markers.mts', previous = manifest.generatedIntermediates?.find(entry => entry.path === 'presentation/context.png');
+  manifest.generatedIntermediates = [...(manifest.generatedIntermediates ?? []).filter(entry => entry.path !== 'presentation/context.png'), {
+    id: 'lens-colour-context-marker', path: 'presentation/context.png', origin: String(previous?.origin ?? ''), credit: `The default lens's colour as a disc; rendered by ${generator}`,
+    license: 'Project-authored display derivative.', consumers: ['navigation'], recipe: { generator, inputs: lensInputs }, generator,
+    sourceBinding: { kind: 'local', reason: 'The default lens drawn as a disc; `context-markers.mts --check` recomputes it.' } }];
+  files.set(path, json(manifest));
 }

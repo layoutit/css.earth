@@ -95,7 +95,7 @@ test('departed or unsupported galaxy focus hides its retained lens bank and disa
   f.card.set(f.record, [], f.presentation);
   assert.equal(f.bank.hidden, false);
   f.card.set(null);
-  assert.equal(f.root.hidden, true);
+  assert.equal(f.root.hidden, false, 'the selection presentation owns the card\'s visibility');
   assert.equal(f.bank.hidden, true);
   f.buttons[2].dispatchEvent(new Event('click'));
   assert.deepEqual(requested, []);

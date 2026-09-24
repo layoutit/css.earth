@@ -4,7 +4,7 @@ import { mountBackgroundPoints } from './background-points.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { logarithmicFade } from './world-context/context-scale.js';
-import { mountPreparedWorldContext } from './prepared-world-context.js';
+import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
 import { parsePreparedWorldContextPlan } from '../prepared-data/world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
@@ -18,7 +18,7 @@ import { detailedFocusContextOpacity } from './detailed-focus-context.js';
 import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
-import { createLabelBudget } from '../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget } from '../labels/universe-label-policy.js';
 import { mountSelectedBodyLabel } from './selected-body-label.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 import { createUniverseLensBanks } from './universe-lens-banks.js';
@@ -150,7 +150,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
         const mountedShells = [...shells];
         let selected = plan.focus;
-        let suppressedLabels: readonly string[] = [];
         let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
         let publishedScale = '';
         background.mount();
@@ -159,8 +158,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
         const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, distantNavigation, opacityClock, orbitRenderer: 'strokes' }));
-        const publishSuppressedLabels = () => spatial.setSuppressedLabels(overview
-          ? suppressedLabels : [...new Set([...suppressedLabels, selected.id])]);
+        // The selected body's own label is the close-up's; overviews label every body.
+        const publishSuppressedLabels = () => spatial.setBodyVisibility({ labelSuppressed: overview ? [] : [selected.id] });
         publishSuppressedLabels();
         const bodyAnnotations = spatial.inspect();
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
@@ -217,13 +216,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
-          setHiddenOrbits(ids: readonly string[]) { spatial.setHiddenOrbits(ids); },
-          setHiddenBodies(ids: readonly string[]) { spatial.setHiddenBodies(ids); },
-          setHiddenLabels(ids: readonly string[]) { spatial.setHiddenLabels(ids); },
-          setSuppressedLabels(ids: readonly string[]) { suppressedLabels = ids; publishSuppressedLabels(); },
+          /** Label suppression follows the selection here; callers set the other flags. */
+          setBodyVisibility(next: Omit<BodyVisibility, 'labelSuppressed'>) { spatial.setBodyVisibility(next); },
           setRotationActive(active: boolean) { spatial.setRotationActive(active); },
-          setHiddenIndicators(ids: readonly string[]) { spatial.setHiddenIndicators(ids); },
-          setHighlighted(ids: readonly string[]) { spatial.setHighlighted(ids); },
           setLabelBlockers(rects: readonly LabelScreenRect[]) { labelBlockers = rects; spatial.setLabelBlockers(rects); },
           labelBudget() { return labelBudget; },
           inspect() {
@@ -259,7 +254,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const selectedRect = selectedLabel.publish(world, viewport, selected, {
                 overview, focused: detailedFocus !== null, preview: selectionPreview,
               });
-              const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : [])];
+              const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
+                ...coveredTopRects(viewport)];
               labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
                 bodyAnnotations.flatMap(body => body.labelRect ? [body.labelRect] : []), foregroundRects);
               const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);

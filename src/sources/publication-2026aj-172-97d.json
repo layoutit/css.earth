@@ -2,8 +2,16 @@
   "id": "publication-2026aj-172-97d",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Reference 2026AJ....172...97D, as the NASA Exoplanet Archive cites it.",
+  "title": "DiTomasso et al. (2026): The HD 60779 Planetary System: A Transiting Sub-Neptune on a 30 Day Orbit and a More Massive Outer World",
   "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2508.16805"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae819f"
+    },
     {
       "type": "bibliography-key",
       "value": "2026AJ....172...97D"
@@ -11,26 +19,38 @@
   ],
   "links": [
     {
-      "role": "landing",
+      "role": "archive",
       "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D",
-      "label": "Published reference"
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae819f",
+      "label": "The Astronomical Journal 172 97"
     }
   ],
   "evidence": [
     {
       "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D",
       "checkedOn": "2026-09-24",
-      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+      "locator": "arXiv API record: title, authors, journal reference"
     }
   ],
   "relations": [],
   "statements": [
     {
-      "kind": "limitation",
-      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "kind": "credit",
+      "text": "DiTomasso et al. (2026), The Astronomical Journal 172 97",
       "scope": "citation",
       "evidence": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D"
     }
+  ],
+  "publisher": "The Astronomical Journal 172 97",
+  "creators": [
+    "Victoria DiTomasso",
+    "David Charbonneau",
+    "Andrew Vanderburg",
+    "et al."
   ],
   "publicationDate": "2026"
 }

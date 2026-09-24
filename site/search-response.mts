@@ -4,7 +4,7 @@ import { matchesObjectCategory } from './object-categories.mts';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeaturePin } from './feature-search.mts';
 import { findResults } from './find.mts';
-import { renderDatasetResponse } from './dataset-response.mts';
+import { renderDatasetResponse, UnreadableSavedView } from './dataset-response.mts';
 import { createSelectionPresentation } from './selection-presentation.mts';
 import { selectionTargetFromUrl } from './scene/scene-selection.mts';
 import { SCENE_OBJECTS } from './objects.mts';
@@ -147,10 +147,20 @@ export async function handleSearchRequest(request: Request, fetcher: typeof fetc
   // No query on this fetch: it retrieves the static page without recursing into search.
   const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
+  const page = await response.text();
+  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, fetcher);
   let html: string;
   try {
-    html = await renderDatasetResponse(await response.text(), url, objectId, fetcher);
-    html = await renderSearchResponse(html, url, fetcher);
+    try { html = await render(url); }
+    catch (error) {
+      if (!(error instanceof UnreadableSavedView)) throw error;
+      // An unreadable shared view (an older format, a damaged copy) renders the page as if it were absent; the browser
+      // reports and ignores the same value, and its next camera change rewrites it. Not a redirect: Netlify appends
+      // the original query to a function redirect whose target has none, which looped on the root page.
+      const withoutView = new URL(url);
+      withoutView.searchParams.delete('v');
+      html = await render(withoutView);
+    }
   } catch (error) {
     if (error instanceof RangeError) return new Response(error.message, { status: 400 });
     throw error;
