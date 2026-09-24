@@ -11,12 +11,12 @@ test('deploy generation and object authoring place the object with the same worl
   assert.deepEqual(await world.commands(['sun']), [['pnpm', 'prepare:world-context']]);
 });
 
-test('presentation-only preparation reaches the authored preparation only when asked', async () => {
+test('reuse-images preparation reaches the authored preparation only when asked', async () => {
   const prepare = PREPARATION_STEPS.find(step => step.name === 'prepare');
   assert.ok(prepare);
   assert.deepEqual(await prepare.commands(['earth']), [['node', 'tools/objects/dist/prepare-authored.js', 'earth', '--write']]);
-  assert.deepEqual(await prepare.commands(['earth'], { presentationOnly: true }),
-    [['node', 'tools/objects/dist/prepare-authored.js', 'earth', '--write', '--presentation-only']]);
+  assert.deepEqual(await prepare.commands(['earth'], { reuseImages: true }),
+    [['node', 'tools/objects/dist/prepare-authored.js', 'earth', '--write', '--reuse-images']]);
 });
 
 test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun is re-pinned last', async () => {

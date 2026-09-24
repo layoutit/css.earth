@@ -213,3 +213,19 @@ test("preserves a projective crop while remapping a differently sized source", (
     -(rasterOrigin + 15) * scale) < 1e-9);
   assert.ok(Math.abs(presentation.backgroundSize[0] - 2080 * scale) < 1e-9);
 });
+
+test("an overlap-grown band cell maps into its gutter, and one grown past the gutter is refused", () => {
+  const grown = { x: 128 - 2, y: 256 - 2, width: 64 + 4, height: 64 + 4 };
+  const presentation = createProjectiveSurfaceRasterPresentation({
+    sourceWidth: 2048, sourceHeight: 1024, sourceRect: grown,
+    backgroundPosition: [-grown.x, -grown.y], backgroundSize: [2048, 1024],
+    leafWidth: 68, leafHeight: 68, bandCount: 16, gutter: 16, overscan: 0,
+  });
+  // The grown rect keeps the texel scale and starts two texels into the packed gutter on each axis.
+  assert.deepEqual(presentation.packedRect, { x: 128 - 2 + 16, y: 256 + 16 * 2 * 4 + 16 - 2, width: 68, height: 68 });
+  assert.throws(() => createProjectiveSurfaceRasterPresentation({
+    sourceWidth: 2048, sourceHeight: 1024, sourceRect: { x: 128, y: 256 - 20, width: 64, height: 104 },
+    backgroundPosition: [-128, -236], backgroundSize: [2048, 1024],
+    leafWidth: 64, leafHeight: 104, bandCount: 16, gutter: 16, overscan: 0,
+  }), /grown by at most the 16-pixel gutter/);
+});
