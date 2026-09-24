@@ -57,12 +57,9 @@ function savedCameraShowsFocus(navigation: ObjectWorldNavigation, focus: Prepare
 
 /** Catalogue focus on the current detailed scene's shared camera owner. */
 export function createPreparedContextNavigation({ layer, presentation, sources = [], windowTarget, onError = console.error, unavailableObjectIds = [] }: ContextNavigationOptions) {
-  let navigation: ObjectWorldNavigation | null = null;
-  let unsubscribe: (() => void) | null = null;
+  /** The detailed scene's camera owner this focus is connected to, with that scene's publication callbacks. */
+  let connection: (FocusCallbacks & { readonly owner: ObjectWorldNavigation; unsubscribe(): void }) | null = null;
   let target: PreparedFocusTarget | null = null;
-  let canPublish = () => false;
-  let notify: NonNullable<FocusCallbacks['onFocusChange']> = () => {};
-  let readFocus: FocusCallbacks['readFocus'] = () => null;
   const currentSources = () => typeof sources === 'function' ? sources() : sources;
   const useTarget = (id: string | null) => {
     if (id === (target?.id ?? null)) return target;
@@ -73,31 +70,37 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     previous?.release();
     return target;
   };
+  /** The connected scene may publish this target: it can publish, and its camera and committed focus both name it. */
+  const owns = (active: PreparedFocusTarget) => {
+    const current = connection;
+    return current !== null && current.canPublish() && current.owner.preparedFocus?.()?.id === active.id && current.readFocus() === active.id;
+  };
   const publishContent = (url: FocusPublication['url'] = 'selection') => {
     const active = target, state = active?.datasets;
     const controls = active && state ? { ...state,
-      selectLens(lens: string) {
-        if (canPublish() && target === active && navigation?.preparedFocus?.()?.id === active.id && readFocus() === active.id) active.selectLens(lens);
-      },
+      selectLens(lens: string) { if (target === active && owns(active)) active.selectLens(lens); },
     } : null;
-    notify({ record: active?.record ?? null, sources: active?.citations ?? [], presentation: controls, url });
+    connection?.onFocusChange({ record: active?.record ?? null, sources: active?.citations ?? [], presentation: controls, url });
   };
-  const publishLens = () => {
-    if (!canPublish() || !target || target.id !== readFocus() || navigation?.preparedFocus()?.id !== target.id) return;
-    publishContent();
-  };
+  const publishLens = () => { if (target && owns(target)) publishContent(); };
   const publishSelection = (force = false) => {
-    if (!navigation) return;
-    const focus = navigation.preparedFocus?.() ?? null, next = focus?.id ?? null;
+    const current = connection;
+    if (!current) return;
+    const focus = current.owner.preparedFocus?.() ?? null, next = focus?.id ?? null;
     layer.selectGalaxy(next, focus);
-    if (!force && next === readFocus()) return;
+    if (!force && next === current.readFocus()) return;
     useTarget(next);
     publishContent();
   };
+  const disconnect = () => {
+    connection?.unsubscribe();
+    useTarget(null);
+    connection = null;
+  };
   /** The application request/session owns cancellation; this executor owns only the prepared target. */
   function apply(url: string | URL, operation: FocusOperation): void | Promise<void> {
-    const owner = navigation;
-    const current = () => navigation === owner && !operation.signal.aborted && operation.isCurrent();
+    const owner = connection?.owner ?? null;
+    const current = () => connection?.owner === owner && !operation.signal.aborted && operation.isCurrent();
     if (!owner || !current()) return;
     const query = new URL(url, windowTarget.location.href).searchParams;
     const recover = (error: unknown): never => {
@@ -142,16 +145,16 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   }
 
   return Object.freeze({
-    connect(owner: ObjectWorldNavigation, { onFocusChange, canPublish: available, readFocus: readCommittedFocus }: FocusCallbacks) {
-      unsubscribe?.(); useTarget(null);
-      navigation = owner; notify = onFocusChange; canPublish = available; readFocus = readCommittedFocus;
-      unsubscribe = owner.subscribe(() => { if (canPublish()) publishSelection(); });
-      return () => {
-        if (navigation !== owner) return;
-        unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null; canPublish = () => false;
-      };
+    connect(owner: ObjectWorldNavigation, { onFocusChange, canPublish, readFocus }: FocusCallbacks) {
+      connection?.unsubscribe(); useTarget(null);
+      const next = { owner, onFocusChange, canPublish, readFocus, unsubscribe() {} };
+      connection = next;
+      // A subscription may publish at once, so the connection is in place before it starts.
+      next.unsubscribe = owner.subscribe(() => { if (canPublish()) publishSelection(); });
+      // An older disconnect still releases a newer connection to the same owner, as before.
+      return () => { if (connection?.owner === owner) disconnect(); };
     },
     apply,
-    destroy() { unsubscribe?.(); unsubscribe = null; useTarget(null); navigation = null; canPublish = () => false; },
+    destroy: disconnect,
   });
 }
