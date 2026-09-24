@@ -419,6 +419,24 @@ use lossless output, as do nearest-sampled layers and image-plane DEMs.
 Check decoded pixels after encoding. Rebuild affected atlases and CSS addresses
 together when their layout changes.
 
+### Shared lighting banks
+
+The phase-lighting rows and billboard of an opaque sphere lit by the Sun with no
+atmosphere do not depend on the body: 61 bodies carried the same lighting block
+and encoded the same 7 MB one by one. Such a block is now a bank named once in
+[lighting-banks.ts](../src/preparation/raster/lighting-banks.ts) and baked once
+into `public/lighting/<bank>/` (tracked, like the navigation atlases) by
+`node tools/objects/dist/prepare-lighting-bank.js`. A body's raster recipe names
+it, `"lighting": { "bank": "sphere", ... }`, keeping only its presentation
+fields and metadata; the parser fills the bank's fields in, and the bake copies
+the bank's files into the body's scene directory instead of encoding them, so
+the body's prepared output, inventory and published files are what encoding
+would give. `prepare-lighting-bank.js --check`, run by
+[its test](../tools/objects/prepare-lighting-bank.test.ts), bakes each bank afresh
+and compares it with the tracked files byte for byte, so the copy is never stale.
+A body whose lighting differs (Neptune, Uranus, the HD 110067 planets) keeps its
+inline block and its own encode.
+
 ## Run and check a change
 
 Use the [build and preparation commands](../.agents/skills/celestial-skill/references/implementation-map.md#commands-and-test-routing)

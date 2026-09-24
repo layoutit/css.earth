@@ -96,7 +96,7 @@
         "label": "Elevation",
         "format": "geotiff",
         "path": "science/charon-dem.tif",
-        "description": "New Horizons terrain model \u00b7 shaded relief",
+        "description": "New Horizons terrain model · shaded relief",
         "title": "Color encodes elevation relative to a 606 km reference sphere. Fixed northwest relief lighting reveals terrain slopes; gray grid marks missing measurements.",
         "sourceUrl": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m",
         "minimum": -15000,
@@ -107,7 +107,7 @@
           "#aa3e24"
         ],
         "labels": [
-          "\u221215",
+          "−15",
           "0",
           "15"
         ],
@@ -223,7 +223,7 @@
           "75"
         ],
         "units": "% band depth",
-        "description": "Water ice absorbs strongly near 2.0 \u00b5m across Charon\u2019s observed terrain. Colors show the depth of that absorption, which also depends on ice grain size. Grid: no usable spectrum.",
+        "description": "Water ice absorbs strongly near 2.0 µm across Charon’s observed terrain. Colors show the depth of that absorption, which also depends on ice grain size. Grid: no usable spectrum.",
         "title": "Water-ice absorption",
         "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
         "grid": {
@@ -274,7 +274,7 @@
           "0.95"
         ],
         "units": "continuum / absorption band",
-        "description": "A weak 2.2 \u00b5m absorption is associated with ammonia-bearing material, including ejecta around Organa crater. Colors show infrared contrast averaged over roughly 12 km; fine variations include instrument noise. Grid: no usable spectrum.",
+        "description": "A weak 2.2 µm absorption is associated with ammonia-bearing material, including ejecta around Organa crater. Colors show infrared contrast averaged over roughly 12 km; fine variations include instrument noise. Grid: no usable spectrum.",
         "title": "Ammonia-related absorption",
         "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
         "grid": {
@@ -297,25 +297,9 @@
     }
   ],
   "lighting": {
-    "frameSize": 512,
-    "columns": 8,
+    "bank": "sphere",
     "presentationSize": 460,
     "defaultFrame": 230,
-    "billboardFrameSize": 24,
-    "billboardColumns": 16,
-    "rowOutput": "lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "lighting-{density}x-billboard.webp",
-    "minimumLightViewZ": -1,
-    "maximumLightViewZ": 1,
-    "frameCount": 256,
-    "shadowlessFloodLimbFloor": 0.35,
-    "ambientIntensity": 0.05,
-    "radiusScale": 0.505,
-    "terminator": [
-      0,
-      0.1
-    ],
-    "maximumAlpha": 0.95,
     "bankSchema": "csscharon-prepared-lighting-bank@1",
     "billboardSchema": "csscharon-prepared-lighting-billboard@1",
     "metadata": {

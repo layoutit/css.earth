@@ -1,4 +1,5 @@
-import type { RasterRecipe } from './config.js';
+import type { LightingRecipe, RasterRecipe } from './config.js';
+import { resolveLightingRecipe } from './lighting-banks.js';
 type RecordValue = Record<string, unknown>;
 function record(value: unknown, path: string): RecordValue { if (typeof value !== 'object' || value === null || Array.isArray(value))
     throw new TypeError(`${path} must be an object.`); return value as RecordValue; }
@@ -131,7 +132,10 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         }
     }
     if (recipe.lighting !== undefined) {
-        const lighting = record(recipe.lighting, 'lighting');
+        const authored = record(recipe.lighting, 'lighting');
+        // A recipe naming a shared bank states only its own fields; the bank's are filled in here (lighting-banks.ts).
+        if (authored.bank !== undefined) text(authored.bank, 'lighting.bank');
+        const lighting = authored.bank === undefined ? authored : resolveLightingRecipe(authored as unknown as LightingRecipe) as unknown as RecordValue;
         fields(lighting, ['frameSize', 'columns', 'presentationSize', 'billboardFrameSize', 'billboardColumns', 'frameCount', 'radiusScale', 'maximumAlpha'], 'lighting', true);
         fields(lighting, ['defaultFrame', 'minimumLightViewZ', 'maximumLightViewZ', 'shadowlessFloodLimbFloor', 'ambientIntensity'], 'lighting');
         numbers(lighting.terminator, 'lighting.terminator', 2);
@@ -140,6 +144,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         for (const key of ['bankSchema', 'billboardSchema'])
             text(lighting[key], `lighting.${key}`);
         record(lighting.metadata, 'lighting.metadata');
+        recipe.lighting = lighting;
     }
     if (recipe.emission !== undefined) {
         const emission = record(recipe.emission, 'emission');

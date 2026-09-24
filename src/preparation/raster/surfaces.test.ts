@@ -28,6 +28,12 @@ describe('native source pole sampling', () => {
             await expect(readFile(join(directory,'poles-science.webp'))).rejects.toThrow();
             expect([prepared.surfaces.science.url, prepared.surfaces.science.url2x]).toEqual(['/scenes/test/science@2x.webp', '/scenes/test/science@2x.webp']);
             expect(() => parseRasterRecipe({...config,densities:[1,2]})).toThrow(/one canonical density/);
+            // A lighting recipe naming a shared bank parses to the bank's fields plus its own, and may not restate the bank's.
+            const lighting = { bank: 'sphere', presentationSize: 460, defaultFrame: 230, bankSchema: 'test-bank@1', billboardSchema: 'test-billboard@1', metadata: { schema: 'test-lighting@1' } };
+            const banked = parseRasterRecipe({ ...config, lighting }).lighting!;
+            expect([banked.bank, banked.frameSize, banked.columns, banked.frameCount, banked.rowOutput, banked.terminator, banked.presentationSize]).toEqual(['sphere', 512, 8, 256, 'lighting-{density}x-row-{row}.webp', [0, 0.1], 460]);
+            expect(() => parseRasterRecipe({ ...config, lighting: { ...lighting, frameSize: 512 } })).toThrow(/bank's/);
+            expect(() => parseRasterRecipe({ ...config, lighting: { ...lighting, bank: 'cube' } })).toThrow(/Unknown lighting bank/);
             expect(() => parseRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]})).toThrow(/integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }
     });

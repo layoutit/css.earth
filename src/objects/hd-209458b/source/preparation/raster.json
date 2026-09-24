@@ -32,25 +32,9 @@
     }
   ],
   "lighting": {
-    "frameSize": 512,
-    "columns": 8,
+    "bank": "sphere",
     "presentationSize": 460,
     "defaultFrame": 230,
-    "billboardFrameSize": 24,
-    "billboardColumns": 16,
-    "rowOutput": "lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "lighting-{density}x-billboard.webp",
-    "minimumLightViewZ": -1,
-    "maximumLightViewZ": 1,
-    "frameCount": 256,
-    "shadowlessFloodLimbFloor": 0.35,
-    "ambientIntensity": 0.05,
-    "radiusScale": 0.505,
-    "terminator": [
-      0,
-      0.1
-    ],
-    "maximumAlpha": 0.95,
     "bankSchema": "csshd-209458b-prepared-lighting-bank@1",
     "billboardSchema": "csshd-209458b-prepared-lighting-billboard@1",
     "metadata": {
