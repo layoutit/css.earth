@@ -100,6 +100,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     {descriptor && <script is:inline type="application/json" data-prepared-descriptor set:html={JSON.stringify(descriptor).replace(/</g, '\\u003c')}></script>}
     <!--prepared-descriptor:end-->
     <div class="object-viewport">
+      <div class="object-viewport-search-band" aria-hidden="true"></div>
       <div class="object-world-stage">
         <!--prepared-scene:start-->
         <main
