@@ -26,7 +26,6 @@
       "falseColor": false,
       "science": {
         "kind": "disc-integrated-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "illuminant": "reference/CIE_std_illum_D65.csv",
         "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
       }

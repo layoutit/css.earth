@@ -5,10 +5,11 @@ const test = sourceTest();
 import { parseCieTable } from '../disc-integrated-color.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor, parseStellarColorRecord, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from './stellar-photometric-color.mts';
 import { linearToSrgb } from '../../color-transfer.mts';
+import { readCie1931ColorMatching } from '../../../references/reference-bank.mts';
 
 const root = new URL('../../../../src/objects/wasp-43/source/', import.meta.url);
 const read = async (path: string) => readFile(new URL(path, root));
-const colorMatching = parseCieTable((await read('reference/CIE_xyz_1931_2deg.csv')).toString('utf8'), 3);
+const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
 const record = JSON.parse((await read('photometry/stellar-color.json')).toString('utf8'));
 
 test('a Planck spectrum warms from blue-white through white to orange as it cools', () => {
@@ -19,7 +20,7 @@ test('a Planck spectrum warms from blue-white through white to orange as it cool
 });
 
 test("WASP-43's Gaia DR3 photometric temperature gives a pale warm sRGB colour, stable across its percentiles", async () => {
-  const { temperature, color, range } = await loadStellarPhotometricColor(read, { colorMatching: 'reference/CIE_xyz_1931_2deg.csv' }, 'photometry/stellar-color.json');
+  const { temperature, color, range } = await loadStellarPhotometricColor(read, {}, 'photometry/stellar-color.json');
   assert.deepEqual(temperature, { kelvin: 4416.3687, lowerKelvin: 4406.5312, upperKelvin: 4424.338 });
   assert.deepEqual(color.srgb, [255, 220, 184]);
   for (const bound of range) for (let channel = 0; channel < 3; channel++) assert.ok(Math.abs(bound.srgb[channel]! - color.srgb[channel]!) <= 1);
@@ -73,7 +74,7 @@ test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 1
   assert.deepEqual([XP_SAMPLED_WAVELENGTHS_NM[0], XP_SAMPLED_WAVELENGTHS_NM.at(-1), XP_SAMPLED_WAVELENGTHS_NM.length], [336, 1020, 343]);
   for (const [id, sourceId, srgb] of [['hd-189733', '1827242816201846144', [255, 226, 207]], ['hd-189733-companion', '1827242816176111360', [255, 201, 123]]] as const) {
     const system = new URL(`../../../src/objects/${id}/source/`, import.meta.url);
-    const load = async () => loadStellarPhotometricColor(async path => readFile(new URL(path, system)), { colorMatching: 'reference/CIE_xyz_1931_2deg.csv' }, 'photometry/stellar-color.json');
+    const load = async () => loadStellarPhotometricColor(async path => readFile(new URL(path, system)), {}, 'photometry/stellar-color.json');
     const { color, range, temperature } = await load();
     assert.equal(temperature, null);
     assert.deepEqual(color.srgb, srgb, id);
@@ -90,7 +91,7 @@ test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectr
   const { readXpSampledSpectrum, xpSampledColor, NOISE_FLOOR_SIGMA } = await import('./stellar-photometric-color.mts');
   const system = new URL('../../../../src/objects/trappist-1/source', import.meta.url);
   const { color, range, temperature, spectrum } = await loadStellarPhotometricColor(
-    async path => readFile(new URL(path, system)), { colorMatching: 'reference/CIE_xyz_1931_2deg.csv' }, 'photometry/stellar-color.json');
+    async path => readFile(new URL(path, system)), {}, 'photometry/stellar-color.json');
   assert.equal(temperature, null);
   assert.equal(spectrum?.samples, 343);
   assert.deepEqual(color.srgb, [255, 205, 106]);

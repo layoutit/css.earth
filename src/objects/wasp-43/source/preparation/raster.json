@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform photosphere colour from the Gaia DR3 photometric effective temperature through a Planck spectrum, dimmed toward the limb by the limb-darkening law Patel & Espinoza (2022) fitted to TESS transits of WASP-43b (600-1000 nm). The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",

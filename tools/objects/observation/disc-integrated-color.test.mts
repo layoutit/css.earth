@@ -3,10 +3,11 @@ import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { discIntegratedColor, filterReflectance, parseCieTable, parseDiscColorRecord } from './disc-integrated-color.mts';
+import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 
 const root = new URL('../../../src/objects/makemake/source/', import.meta.url);
 const read = async (path: string) => readFile(new URL(path, root));
-const colorMatching = parseCieTable((await read('reference/CIE_xyz_1931_2deg.csv')).toString('utf8'), 3);
+const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
 const illuminant = parseCieTable((await read('reference/CIE_std_illum_D65.csv')).toString('utf8'), 1);
 const makemake = JSON.parse((await read('photometry/disc-color.json')).toString('utf8'));
 const withObject = (indices: Record<string, number>) => ({ ...makemake, object: { ...makemake.object,

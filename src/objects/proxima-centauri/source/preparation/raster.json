@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (LowLib). No limb darkening is drawn: at its 3,098 K (Demory et al. 2009) and log g 5.0 (Pavlenko et al. 2017) the Claret (2017) PHOENIX-COND grid has no node at 3,000 K, log g 5.0 to interpolate from, and its PHOENIX-DRIFT grid stops at 3,000 K. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }

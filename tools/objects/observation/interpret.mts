@@ -487,11 +487,12 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         // A published Roche-von Zeipel fit darkens the surface by latitude (gravity-darkening.mts); otherwise the colour is uniform.
         const gravity = surface.science.gravityDarkening === undefined ? null : await (async () => {
           const path = requireString(surface.science.gravityDarkening, 'science.gravityDarkening');
-          await source.validatePath(path); await source.validatePath(requireString(surface.science.colorMatching, 'science.colorMatching'));
+          await source.validatePath(path);
           const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('./gravity-darkening.mts');
           const { parseCieTable } = await import('./disc-integrated-color.mts');
           const record = parseGravityDarkeningRecord(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
-          const colorMatching = parseCieTable(await readFile(resolve(sourceDirectory, requireString(surface.science.colorMatching, 'science.colorMatching')), 'utf8'), 3);
+          const { readCie1931ColorMatching } = await import('../../references/reference-bank.mts');
+          const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
           return { record, rows: gravityDarkenedRows(record, color, colorMatching, height), meanK: meanSurfaceTemperature(record), equatorK: surfaceTemperature(record, Math.PI / 2) };
         })();
         for (let offset = 0; offset < data.length; offset += 4) data.set([...(gravity ? gravity.rows[Math.floor(offset / 4 / width)]! : color.srgb), 255], offset);
