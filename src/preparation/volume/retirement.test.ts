@@ -6,6 +6,7 @@ import { join, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
 import { zstdCompressSync } from 'node:zlib';
+import sharp from 'sharp';
 import { encodeDensityKtx2 } from './acquisition.js';
 import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
@@ -96,5 +97,25 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
     assert.equal(paths.filter(path => /^impostors\/view-[np0]{3}\.png$/u.test(path)).length, 26);
     assert.equal(paths.length, 35);
     for (const resource of envelope.data.resources) assert.equal(sha256(await readFile(join(prepared, resource.path))), resource.sha256);
+    const originalZ = await sharp(await readFile(join(prepared, 'slices/z/00.webp'))).ensureAlpha().raw().toBuffer();
+    Object.assign(recipe, { hybrid: { coreRadiusUnits: .65, fadeStartUnits: .35 } });
+    await prepare();
+    const hybrid = JSON.parse(await readFile(join(prepared, 'volume.json'), 'utf8')).data;
+    assert.equal(hybrid.detailPlanes.length, 1);
+    assert.deepEqual(hybrid.detailPlanes[0].centerUnits, [0, 0, 0]);
+    assert.equal(hybrid.detailPlanes[0].widthPx, 8);
+    assert.deepEqual(hybrid.frame.boundsUnits, bounds);
+    assert(hybrid.stacks.every((stack: { leaves: { texturePath: string }[] }) => stack.leaves.length > 0 &&
+      stack.leaves.every(leaf => leaf.texturePath.startsWith('core/slices/'))));
+    await assert.rejects(readFile(join(prepared, 'slices/z/00.webp')), { code: 'ENOENT' });
+    const disc = await sharp(await readFile(join(prepared, 'outer-disc.png'))).ensureAlpha().raw().toBuffer();
+    assert.deepEqual(disc.subarray(0, 4), originalZ.subarray(0, 4), 'outer pixels retain the original source colors and alpha');
+    assert.equal(disc[(4 * 8 + 4) * 4 + 3], 0, 'the bulge is removed from the arm image');
+    for (const resource of hybrid.resources) assert.equal(sha256(await readFile(join(prepared, resource.path))), resource.sha256);
+    // Returning to an ordinary volume retires all previously published core slices.
+    Reflect.deleteProperty(recipe, 'hybrid');
+    await prepare();
+    await assert.rejects(readFile(join(prepared, hybrid.stacks[2].leaves[0].texturePath)), { code: 'ENOENT' });
+    await assert.rejects(readFile(join(prepared, 'outer-disc.png')), { code: 'ENOENT' });
   } finally { await rm(root, { recursive: true, force: true }); }
 });

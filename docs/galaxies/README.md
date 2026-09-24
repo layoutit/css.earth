@@ -42,9 +42,16 @@ The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image pl
 
 ## Other detailed galaxies
 
+The Milky Way overview enables the galaxy's prepared depth layers. Other
+destinations keep its distant views; those views remain populated even when
+the galaxy projects large enough for detail. The overview selection owns this
+handoff, so an unrelated catalogue focus publication cannot clear it.
+Selecting it from Local Group fits the galaxy by zooming inward along the
+current viewing ray; selecting it from inside the galaxy zooms outward.
+
 | Renderer | Source | Current depth and coverage |
 | --- | --- | --- |
-| Milky Way exterior | [OpenSpace/AMNH/NAOJ volume](https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html) | Existing 1,024 × 1,024 × 128 RGBA model, baked into directional slices. Simulation-based visualization. [Provenance](../../src/objects/milky-way/source/provenance.json). |
+| Milky Way exterior | [OpenSpace/AMNH/NAOJ volume](https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html) | Existing 1,024 × 1,024 × 128 RGBA model, baked into central volume and fixed arm image. Simulation-based visualization. [Provenance](../../src/objects/milky-way/source/provenance.json). |
 | Milky Way interior | [NASA SVS, Deep Star Maps 2020](https://svs.gsfc.nasa.gov/4851/) | Existing 8,192 × 4,096 Milky Way-only map derived from star catalogues. Angular radiance; the finite panorama shell adds authored visual depth. Credits: NASA/Goddard SVS, Ernie Wright (USRA), ESA/Gaia/DPAC. [Provenance](../../src/objects/milky-way/source/sky/provenance.json). |
 | M31 | [ESA/Hubble & Digitized Sky Survey 2, heic1112f](https://esahubble.org/images/heic1112f/) | 4,783 × 5,000 crop/resample from the 21,299 × 13,775 original; 1 kpc parametric depth. Full visible galaxy plus foreground/background sources. Acknowledgment: Davide De Martin (ESA/Hubble). [Provenance](../../src/objects/m31/source/provenance.json). |
 | M33 | [ESO VST/OmegaCAM, eso1424a](https://www.eso.org/public/images/eso1424a/) | 4,000 × 3,355 publication image, g/r/Hα; 1.2 kpc parametric envelope. Bright optical disk, excluding the larger H I outskirts. [Provenance](../../src/objects/m33/source/provenance.json). |

@@ -180,3 +180,12 @@
 @media (max-width: 820px), (orientation: portrait) {
   .prepared-world-context { --context-annotation-scale: .75; }
 }
+/* The Galactic-centre landmark sits over the bright Milky Way bulge. */
+.prepared-world-context [data-context-body="sgr-a-star"]::before,
+.prepared-world-context [data-context-body="sgr-a-star"]::after {
+  color: #000;
+}
+.prepared-world-context [data-context-body="sgr-a-star"]::after {
+  content: 'Sgr A*';
+  text-transform: none;
+}

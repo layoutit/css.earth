@@ -36,7 +36,7 @@ const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bot
 vi.mock('../universe/world-context/world-context-point-source.js', () => ({ mountWorldContextPointSource: () => null }));
 vi.mock('../universe/prepared-galaxy-catalog.js', () => ({ mountPreparedGalaxyCatalog: catalogMount }));
 vi.mock('../universe/prepared-world-context.js', async importOriginal => ({ ...await importOriginal<typeof import('../universe/prepared-world-context.js')>(),
-  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, setSuppressedLabels() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
+  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, setOverview() {}, setSuppressedLabels() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
 
 const bases = [
   ['px', [1, 0, 0], [0, -1, 0], [0, 0, 1]], ['nx', [-1, 0, 0], [0, 1, 0], [0, 0, 1]],
@@ -102,6 +102,34 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
   await mounted.ensureGalaxyCatalog(); await mounted.focusBank(image.id)!.load();
   expect(loadCatalog).toHaveBeenCalledTimes(1); expect(loadImageLayer).toHaveBeenCalledTimes(1);
   mounted.destroy(); expect(catalogRuntime.destroy).toHaveBeenCalledTimes(1);
+});
+
+test('the galaxy overview enables its depth layers and leaving it restores populated distant views', () => {
+  const base = new URL('../../../', import.meta.url);
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const document = new FakeDocument();
+  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}` }).mount(document.createElement() as unknown as HTMLElement);
+  try {
+    const root = mounted.root as unknown as FakeElement;
+    const image = root.children.find(node => node.className === 'prepared-volume-context')!.children[0]!;
+    const detail = image.children.find(node => node.className === 'css-volume-detail')!;
+    const distant = image.children.find(node => node.className === 'css-volume-impostors')!;
+    const camera: WorldCameraPose = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+      pose: { positionM: [volume.frame.originM[0], volume.frame.originM[1],
+        volume.frame.originM[2] + 2.5 * volume.impostors!.radiusUnits * volume.frame.metersPerUnit], orientationXyzw: [0, 0, 0, 1] } };
+    for (const scope of ['local-group', 'milky-way', 'system', 'milky-way', undefined]) {
+      mounted.setOverview(scope !== undefined, scope);
+      // Catalogue camera publications must not clear the overview's detail selection.
+      mounted.selectGalaxy(null);
+      mounted.publish(camera, viewport);
+      const selected = scope === 'milky-way';
+      expect(detail.style.display).toBe(selected ? 'block' : 'none');
+      expect(distant.style.display).toBe(selected ? 'none' : 'block');
+      if (!selected) expect(Number(distant.dataset.activeViews)).toBeGreaterThan(0);
+    }
+  } finally { mounted.destroy(); }
 });
 
 test('retains exactly six prepared images and changes only shared camera presentation during travel and rotation', () => {
@@ -202,7 +230,9 @@ test.each([
   // billboard views that present it from outside the galaxy.
   const detailHost = volumeImage.children.find(node => node.className === 'css-volume-detail')!;
   expect(volumeImage.children.some(node => node.className === 'css-volume-impostors')).toBe(true);
-  const axes = detailHost.children.filter(node => node.className === 'css-volume-projection');
+  const projections = detailHost.children.filter(node => node.className === 'css-volume-projection');
+  const axes = projections.filter(node => node.dataset.volumePlanes === undefined);
+  expect(projections.filter(node => node.dataset.volumePlanes !== undefined)).toHaveLength(data.detailPlanes ? 1 : 0);
   expect(axes).toHaveLength(3);
   for (const axis of axes) {
     expect(axis.children[0]!.style.opacity).toBeUndefined();

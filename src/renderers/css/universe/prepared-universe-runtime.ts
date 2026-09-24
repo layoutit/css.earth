@@ -191,7 +191,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               next?.focus.positionM.some((value, axis) => value !== detailedFocus?.focus.positionM[axis]);
             detailedFocus = next;
             catalogBanks.catalog?.select(id);
-            background.setDetail(id === plan.volume.objectId);
             if (changed) requestPublication?.();
           },
           resolveGalaxy(id: string) { return catalogBanks.catalog?.resolve(id) ?? null; },
@@ -208,7 +207,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             return spatial.captureFrame(world, viewport);
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial.previewSelection(id); },
-          setOverview(enabled: boolean) { overview = enabled; spatial.setOverview(enabled); publishSuppressedLabels(); },
+          setOverview(enabled: boolean, scope?: string) {
+            overview = enabled;
+            spatial.setOverview(enabled);
+            // The background galaxy is an overview destination, not a catalogue focus.
+            background.setDetail(enabled && scope === plan.volume.objectId);
+            publishSuppressedLabels();
+          },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial.setHiddenOrbits(ids); },
           setHiddenBodies(ids: readonly string[]) { spatial.setHiddenBodies(ids); },

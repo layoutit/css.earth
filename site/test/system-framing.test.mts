@@ -174,6 +174,18 @@ test('clicking the already selected body in close-up does not zoom back out to i
   assert.equal(navigation.systemTarget({ objectId: 'saturn', fromId: 'saturn', mount: closeMount }), null);
 });
 
+test('selecting the Milky Way from Local Group zooms in to the galaxy while keeping the viewing direction', async () => {
+  const { overviewScopeAtCamera } = await import('../overview-context.mts');
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
+  const far: WorldCameraPose = { ...world, pose: { positionM: [0, 0, 3.085677581491367e22], orientationXyzw: [0, 0, 0, 1] } };
+  const distantMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => far, () => optics) };
+  const target = required(navigation.overviewTarget({ objectId: 'sun', fromId: 'sun', mount: distantMount, scope: 'milky-way' }));
+  assert.ok(Math.hypot(...target.world.pose.positionM) < Math.hypot(...far.pose.positionM) / 5,
+    'The arrival must leave Local Group range instead of preserving its departure distance');
+  assert.deepEqual(target.world.pose.orientationXyzw, far.pose.orientationXyzw);
+  assert.equal(overviewScopeAtCamera(target.world, 'milky-way'), 'milky-way');
+});
+
 test('galactic breadcrumbs zoom straight out from the current view without panning or turning', async () => {
   const { GALACTIC_VOLUME, volumeZoomTarget } = await import('../system-framing.mts');
   const { rotateWorldPosition, worldRotationFromQuaternion } = await import('../../src/renderers/css/dist/navigation.js');

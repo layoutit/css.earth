@@ -91,9 +91,9 @@ export interface WorldContextView {
   overview: boolean;
   selectionPreview?: string | null;
   navigationInFlight: boolean;
-  /** Preserve the committed annotation membership and placement during a camera drag. */
+  /** Keep established system landmarks through camera motion. Other labels use ordinary admission. */
   rotationActive?: boolean;
-  /** Preserve the last moving frame through the first settled publication. */
+  /** Keep that landmark presentation through the first settled publication. */
   preserveCommittedAnnotations?: boolean;
   /** External exclusion data retained for transport compatibility; world annotations ignore shell footprints. */
   labelBlockers?: readonly LabelScreenRect[];
@@ -414,8 +414,6 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       // in-frame anchor is already the visibility boundary; captions are kept
       // inside the viewport below, while partially clipped circles are left to
       // normal browser clipping. The viewport width still owns density only.
-      const worldLabelBudget = () => createLabelBudget(Infinity, Infinity, [], [], labelLimit(width));
-      const labelBudget = worldLabelBudget();
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {
         const { entry, x, y, diameter, annotationVisible, hovered, priority } = projected;
@@ -424,8 +422,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         const prominentOrbiter = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
           (annotationPriorities[body.id] ?? 0) >= 3;
         const bodySystemOpacity = systemFade.of(entry.index);
-        // An edge-on orbit can briefly drive the shared proxy alpha to zero.
-        // During rotation, a planet locator that is already on stays on.
+        // Preserve the established system landmarks through an edge-on orbit.
         if (prominentOrbiter && (rotationActive || preserveCommittedAnnotations) && entry.indicatorShown) projected.markerOpacity = 1;
         const markerOpacity = projected.markerOpacity;
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
@@ -512,16 +509,22 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
           ...(anchor ? { anchor } : {}),
         });
       }
+      // The selected body's name is painted by the separate caption below its
+      // marker/mesh. Suppressing the duplicate context caption must not remove
+      // its selected locator. Reserve that fixed footprint before other labels;
+      // the normal circle LOD still retires it when the surface resolves.
+      const selectedLocator = !overview && emphasizedId === selectedId ? projectedBodies.find(projected =>
+        projected.entry.body.id === selectedId && projected.entry.labelSuppressed && projected.circle &&
+        projected.annotationVisible && projected.markerOpacity > 0) : undefined;
+      const locatorRadius = BODY_INDICATOR_DIAMETER / 2;
+      const locatorRects = selectedLocator ? [{ left: selectedLocator.x - locatorRadius, right: selectedLocator.x + locatorRadius,
+        top: selectedLocator.y - locatorRadius, bottom: selectedLocator.y + locatorRadius }] : [];
+      const worldLabelBudget = () => createLabelBudget(Infinity, Infinity, [], locatorRects, labelLimit(width));
+      const labelBudget = worldLabelBudget();
       // Circle and caption reserve space together. A rejected candidate owns no
       // annotation or context orbit; physical sprites remain independent.
-      // A drag moves every candidate on every frame. Re-running collision admission
-      // during that motion made adjacent bodies trade the same slot, so their circles
-      // and captions blinked while the physical markers remained visible. Keep the
-      // committed membership and side until release. A caption is constrained
-      // rather than retired when its committed side reaches the viewport edge.
-      // The system anchor and its planets are permanent orientation landmarks
-      // at the zoom levels where their normal alpha policy names them. Admit
-      // each independently so minor-body labels cannot make one blink.
+      // Preserve the existing system landmark policy. It does not govern the
+      // admission of unrelated stars in the surrounding field.
       const landmarks = candidates.filter(candidate => candidate.projected.entry.body.id === plan.focus.id ||
         (rotationActive || preserveCommittedAnnotations) && candidate.projected.entry.orbit !== null && systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
         (candidate.tier ?? 0) >= 3);
@@ -529,20 +532,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);
       const landmarkSet = new Set(landmarks);
       const otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
-      const acceptedOthers = rotationActive || preserveCommittedAnnotations ? (() => {
-        const admitted = admitStableLabels(otherCandidates.filter(candidate => candidate.pinned > 0), labelBudget);
-        const admittedCandidates = new Set(admitted.map(item => item.candidate));
-        for (const candidate of otherCandidates) {
-          if (admittedCandidates.has(candidate) || !candidate.shown) continue;
-          const previous = candidate.placements.find(item => item.slot === candidate.previousPlacement);
-          if (previous && labelBudget.admit(previous.rect, candidate.anchor)) {
-            admitted.push({ candidate, placement: previous.slot, rect: previous.rect });
-          }
-        }
-        return admitted;
-      })() : admitStableLabels(otherCandidates, labelBudget);
-      const accepted = [...acceptedLandmarks, ...acceptedOthers];
+      // Use the same admission during motion and at rest. Clear committed
+      // placements survive first; obstructed labels can move and newly clear
+      // labels can return. Gesture history must not strand a visible star as a dot.
+      const accepted = [...acceptedLandmarks, ...admitStableLabels(otherCandidates, labelBudget)];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
+      if (selectedLocator) selectedLocator.entry.indicatorShown = true;
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;
         projected.entry.labelShown = true; projected.entry.labelPlacement = placement;

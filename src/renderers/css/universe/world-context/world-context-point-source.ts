@@ -3,6 +3,7 @@ import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/worl
 import { cssViewFromOrientation, rotateWorldPosition } from '../../navigation/world-camera-math.js';
 import { rayHitsSphereBefore } from '../../solar-system/heliocentric-geometry.js';
 import { bindObjectNavigationTarget } from '../../solar-system/heliocentric-navigation.js';
+import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../../solar-system/heliocentric-sprites.js';
 import { screenPicking } from '../../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../../navigation/screen-picking.js';
 import { pointPhotometry } from '../../stars/point-field-projection.js';
@@ -71,7 +72,10 @@ export function worldContextPointAppearance(plan: PreparedWorldContext, field: P
   // Combine the projected disc and optical spread smoothly instead of fitting
   // the whole halo inside the physical photosphere.
   const physicalRadiusPx = Number.isFinite(diameterPx) ? diameterPx / 2 : 0;
-  const radiusPx = Math.max(field.photometry.minimumRadiusPx * gain.radius,
+  // The focus remains a navigation marker after its light becomes unresolved.
+  // Apply the same readable core floor as body sprites, not the smaller floor
+  // for anonymous background stars; the surrounding PSF halo is not the core.
+  const radiusPx = Math.max(MINIMUM_BODY_MARKER_DIAMETER_PIXELS / 2, field.photometry.minimumRadiusPx * gain.radius,
     Math.hypot(physicalRadiusPx, light.radiusPx * gain.radius));
   return Object.freeze({ x: centre[0], y: centre[1], diameterPx, magnitude: light.magnitude, radiusPx,
     // The focus also serves as a navigation landmark once its physical light is too faint.
