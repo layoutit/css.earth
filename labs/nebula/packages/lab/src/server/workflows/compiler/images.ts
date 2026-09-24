@@ -1,17 +1,17 @@
 import { createHash } from 'node:crypto';
-import {sampleRaster} from '@cssearth/nebula-reconstruction/observations/image-sampling';
-export {compilerImagePanel} from '@cssearth/nebula-reconstruction/observations/image-sampling';
+import { sampleRaster } from '@cssearth/nebula-reconstruction/observations/image-sampling';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { readObservations, type Matrix, type Observations } from '../../../features/observations/models/model.ts';
-import { invertAffine, applyAffine } from '@cssearth/nebula-reconstruction/registration/stellar';
+import { readObservations } from '../../../features/observations/models/model.ts';
+import { invertAffine, applyAffine } from '@cssearth/nebula-reconstruction/registration/affine';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
 import { tangentOffsetWestNorth } from '../joint-fit/input.ts';
 import { readGeometryPin } from '../geometry/registered-source.ts';
 import type { SkyBounds } from '@cssearth/volume-core/contracts/emission';
 import type { CompilerRequest } from '../../../features/compiler/model.ts';
-import type {CompilerRaster,CompilerImage} from '@cssearth/nebula-reconstruction/observations/compiler-image';
+import type { CompilerRaster, CompilerImage } from '@cssearth/nebula-reconstruction/observations/compiler-image';
+export {compilerImagePanel} from '@cssearth/nebula-reconstruction/observations/image-sampling';
 export type {CompilerRaster,CompilerImage} from '@cssearth/nebula-reconstruction/observations/compiler-image';
 async function raster(root: string, v: unknown): Promise<CompilerRaster> {
   if (!jointRecord(v) || typeof v.path !== 'string' || typeof v.width !== 'number' || typeof v.height !== 'number') throw new TypeError('Missing source layer.');

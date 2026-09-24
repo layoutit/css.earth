@@ -1,16 +1,14 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { execFileSync, spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
-import type { AddressInfo } from 'node:net';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
-import { parseAcquisitionPlan } from '#preparation/operations';
+import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
 import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const project = resolve(import.meta.dirname, '../..');

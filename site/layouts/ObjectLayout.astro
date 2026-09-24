@@ -16,9 +16,10 @@ import "../shell-layout.css";
 import type { PreparedSceneMarkup } from '../../tools/prepared/serialize-prepared-scene.mts';
 import type { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
-// The world summary every application module reads when it loads (`site/world-context-plan.mts`); the same file,
-// so the head can start it with the HTML instead of after the router has downloaded.
-import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
+// The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
+// body mounts before the world summary itself downloads.
+import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
+const worldCamera = { schema: 'cssearth-world-camera@1', frame: worldSummary.frame, focusId: worldSummary.focus.id, camera: worldSummary.camera };
 
 interface Props {
   objectId: string;
@@ -57,9 +58,12 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <meta name="twitter:image:alt" content={seo.imageAlt} />
     <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    {!navigation && <link rel="preload" href={worldSummaryUrl} as="fetch" crossorigin="anonymous" />}
+    {!navigation && <script is:inline type="application/json" data-world-camera set:html={JSON.stringify(worldCamera).replace(/</g, '\\u003c')}></script>}
     {!navigation && descriptor?.prepared?.url === 'prepared/object.json' &&
       <link rel="preload" href={`/objects/${objectRecord.id}/object.json`} as="fetch" crossorigin="anonymous" />}
+    {/* Until the first body is ready, the phone sheet's lazy images wait (object-shell.css), so the globe's textures have
+        the connection. The router clears this; without JavaScript it is never set. */}
+    {!navigation && <script is:inline>document.documentElement.dataset.bodyPending = '';</script>}
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
@@ -67,16 +71,17 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
       import("../scene/scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         delete document.documentElement.dataset.shellContext;
+        delete document.documentElement.dataset.bodyPending;
         console.error('The interactive scene could not load.', error);
       });
     </script>}
     {/* Static imports make the browser fetch the application's modules while it parses the HTML; the dynamic import
         above only starts after parsing. A browser finds a module's imports only after downloading it, and the bundler
-        does not hoist transitive imports, so the two largest modules the router reads at load are named here too.
-        All resolve to the same module instances, and the script above owns failure. */}
+        does not hoist transitive imports, so the body runtime the router imports while it mounts is named here too.
+        The registry and world summary load after the first body (`scene-router.mts`). All resolve to the same module
+        instances, and the script above owns failure. */}
     {!navigation && <script>
-      import '../world-context-plan.mts';
-      import '../objects.mts';
+      import '../packaged-object-runtime.mts';
       import '../scene/scene-router.mts';
     </script>}
     {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}

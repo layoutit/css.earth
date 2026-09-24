@@ -14,7 +14,7 @@ import { array, finite, numbers, positive, record, text, unique } from '../valid
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation, validateWorldRotation } from '../navigation/world-camera-math.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
-import { applySpriteImage } from '../solar-system/heliocentric-sprites.js';
+import { applySpriteImage, MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
 import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
@@ -22,7 +22,6 @@ import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigat
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { OrbitSegment } from '../solar-system/types.js';
 
-import { compactOrbitFootprint } from './context-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
@@ -292,6 +291,30 @@ const validatedContexts = new WeakSet<object>();
 /** The full prepared file, orbit paths included: the planner worker and build tools read this. */
 export function parsePreparedWorldContext(value: unknown): PreparedWorldContextGeometry {
   return parseContext(value, true) as PreparedWorldContextGeometry;
+}
+/** What a mounted body reads from the world: the shared frame, the focus body's identity and the camera. Each page
+ * embeds it (`cssearth-world-camera@1`), so a body mounts before the world summary has downloaded. */
+export interface PreparedWorldCamera { readonly frame: PreparedWorldContext['frame']; readonly focusId: string; readonly camera: PreparedWorldContext['camera']; }
+export const PREPARED_WORLD_CAMERA_SCHEMA = 'cssearth-world-camera@1';
+/** The world camera from its embedded record, or from a world context or summary. */
+export function parsePreparedWorldCamera(value: unknown): PreparedWorldCamera {
+  const schema = value && typeof value === 'object' ? (value as { schema?: unknown }).schema : undefined;
+  if (schema !== PREPARED_WORLD_CAMERA_SCHEMA) {
+    const plan = parsePreparedWorldContextPlan(value);
+    return Object.freeze({ frame: plan.frame, focusId: plan.focus.id, camera: plan.camera });
+  }
+  const input = record(value, 'world camera', ['schema', 'frame', 'focusId', 'camera']);
+  const camera = record(input.camera, 'world camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
+  const minimumDistanceM = positive(camera.minimumDistanceM, 'minimum camera distance');
+  const maximumDistanceM = positive(camera.maximumDistanceM, 'maximum camera distance');
+  if (!(maximumDistanceM > minimumDistanceM)) throw new TypeError('World camera distance interval is invalid.');
+  const focusId = text(input.focusId, 'world camera focus');
+  if (!/^[a-z][a-z0-9-]*$/.test(focusId)) throw new TypeError('Invalid world camera focus identity.');
+  const frame = parsePreparedWorldCameraFrame(input.frame);
+  if (!frame) throw new TypeError('World camera requires its prepared frame.');
+  return Object.freeze({ frame, focusId,
+    camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom: positive(camera.framingReferenceZoom, 'framing reference zoom'),
+      presentation: parsePresentation(camera.presentation) }) });
 }
 /** The main thread's copy: `world-context-summary.json`, whose orbits carry no paths. */
 export function parsePreparedWorldContextSummary(value: unknown): PreparedWorldContext {
@@ -705,7 +728,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       markerShown: undefined as boolean | undefined, markerDiameter: 0, billboardShown: undefined as boolean | undefined, spriteDetail: false,
       center: [0, 0] as [number, number], markerTransform: '', spriteTransform: '', orbitTransform: '', labelOffset: '',
       labelRect: null as LabelScreenRect | null,
-      orbitBounds: null as LabelScreenRect | null,
       indicatorPick: null as ScreenPickTarget | null,
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
       orbitNavigable: false,
@@ -933,8 +955,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       preserveReleasedAnnotations = rotationActive && !active;
       rotationActive = active;
       if (active) { hoverIntent = false; settleHover(); }
-      // The first settled publication preserves the final moving frame. A later
-      // interaction may add newly available labels without a release-frame jump.
+      // Keep the established system landmarks through the first settled frame.
+      // Background annotations continue ordinary admission throughout the drag.
       presentationRevision++;
       if (!active) policyRevision++;
       refresh();
@@ -1089,7 +1111,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const acceptedRects: LabelScreenRect[] = [];
       pickTargets = [];
       const pickingChanged = policyChanged || ranksChanged || (delta?.changes.size ?? 1) > 0;
-      const orbitBounds = { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity };
+      const indicatorRects: LabelScreenRect[] = [];
       // Only the resolved presentation owns DOM visibility and hit targets.
       // A new depth order changes only z-order. It must not re-run the full
       // material/geometry publisher for every hidden or otherwise unchanged body.
@@ -1120,7 +1142,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        const markerDiameter = Math.round(Math.max(entry.sprite?.minimumDiameterPixels ?? 2.4, diameter) * 20) / 20;
+        const markerDiameter = Math.round(Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter) * 20) / 20;
         const wasShown = entry.billboardShown === true;
         const hoverChanged = entry.indicatorHovered !== entry.hovered;
         const animateHover = interactiveHover && hoverChanged && wasShown && billboardShown;
@@ -1210,8 +1232,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           if (orbitRenderer === 'bars' && entry.orbitTransform !== orbitTransform) {
             entry.orbitRoot.style.transform = orbitTransform; entry.orbitTransform = orbitTransform;
           }
-          entry.orbitBounds = systemFade.isSystemStar(entry.orbit.centerBodyId) && orbitVisibility > .1
-            ? projected.orbitBounds : null;
           const navigable = !navigationSuppressed && orbitVisibility > 0.1 && !entry.orbitHidden;
           if (!navigationInFlight && !rotationActive && entry.orbitNavigable !== navigable) {
             entry.orbitNavigable = navigable;
@@ -1275,10 +1295,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (entry.orbitPick) { entry.orbitPick.rank = rank; pickTargets.push(entry.orbitPick); }
         if (entry.labelPick) { entry.labelPick.rank = rank + 1; pickTargets.push(entry.labelPick); }
         if (entry.labelRect) acceptedRects.push(entry.labelRect);
-        const bounds = entry.orbitBounds;
-        if (bounds) {
-          orbitBounds.left = Math.min(orbitBounds.left, bounds.left); orbitBounds.right = Math.max(orbitBounds.right, bounds.right);
-          orbitBounds.top = Math.min(orbitBounds.top, bounds.top); orbitBounds.bottom = Math.max(orbitBounds.bottom, bounds.bottom);
+        if (entry.indicatorShown && entry.billboardShown) {
+          const [x, y] = entry.center, radius = entry.indicatorRadius;
+          indicatorRects.push({ left: x - radius, right: x + radius, top: y - radius, bottom: y + radius });
         }
       }
       if (captionBody?.labelPosition) {
@@ -1286,8 +1305,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         acceptedRects.push({ left, top, right: left + size.width, bottom: top + size.height });
       }
       labelExclusions = acceptedRects;
-      const footprint = compactOrbitFootprint(orbitBounds, width, height);
-      backgroundExclusions = footprint ? [...acceptedRects, footprint] : acceptedRects;
+      // Only drawn annotation footprints reserve background label space. An
+      // orbit is a line through empty space, never an opaque screen rectangle.
+      backgroundExclusions = [...acceptedRects, ...indicatorRects];
       if (pickingChanged) picking.publish(root, navigationInFlight ? [] : pickTargets);
       });
     },

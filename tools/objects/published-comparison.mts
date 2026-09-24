@@ -17,7 +17,7 @@ import { requireArray, requireRecord } from '../sources/source-values.mts';
 import { readPdfImage } from '../fits/pdf-image.mts';
 import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera } from './terrestrial-layers/observer-cameras.mts';
 import { decodeCalibratedCamera, loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
-import { radialTerrainForLens } from './terrestrial-layers/radial-models.mts';
+import { radialTerrainForLens } from './terrestrial-layers/alternative-lenses.mts';
 import { observerCaster, turnedOrientation, type TurnableCaster } from './terrestrial-layers/registration-sweeps.mts';
 import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from './surface-observations/published-comparison.mts';
 

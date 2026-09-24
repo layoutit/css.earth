@@ -1,7 +1,7 @@
 import { flagValue } from '../../cli/cli-arguments.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { bandOfFilters } from '../jwst/imaging/archive.mts';
-import { queryCapabilities, type CapabilityRequest } from './query.mts';
+import { validateCapabilityRequest, type CapabilityRequest } from './recipe-request.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 
 export interface QualificationObservation {
@@ -195,7 +195,7 @@ export function qualificationConfigurationFromArguments(telescope: string, mode:
   if (flagValue(args, '--acquisition')) {
     const request: unknown = JSON.parse(required(args, '--request'));
     // The public validator checks all constraints before any archive IO. Invalid structures throw here.
-    queryCapabilities(request as CapabilityRequest, { ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [] });
+    validateCapabilityRequest(request as CapabilityRequest);
     return { kind: 'archive-acquisition', key: required(args, '--acquisition'), request: request as CapabilityRequest };
   }
   if (flagValue(args, '--source-product')) return { kind: 'source-product', id: required(args, '--source-product') };

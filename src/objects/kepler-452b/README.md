@@ -1,5 +1,7 @@
 # Kepler-452 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Kepler-452 b is 1.63 times as wide as Earth and circles a Sun-like star every 385 days. Only its size and orbit are measured; here it is a plain gray sphere.
 
 ## Sources

@@ -70,11 +70,13 @@ test('the prepared Sun landmark grows smoothly from the light-year handoff witho
   let previous = sample(1).radiusPx;
   for (const distanceAu of [2, 5, 10, 20, 50, 100, 300, 1000, 10_000, 30_000, lightYearM / au]) {
     const appearance = sample(distanceAu);
-    expect(appearance.radiusPx).toBeLessThan(previous);
+    // The authored glow shrinks smoothly until it reaches the navigation core floor.
+    if (previous > 1.2) expect(appearance.radiusPx).toBeLessThan(previous);
+    else expect(appearance.radiusPx).toBe(previous);
     expect(sample(distanceAu * 1.001).radiusPx / appearance.radiusPx).toBeGreaterThan(.995);
     previous = appearance.radiusPx;
   }
-  expect(sample(30_000).radiusPx).toBeGreaterThan(sample(30_000, unenhanced).radiusPx);
+  expect(sample(30_000).radiusPx).toBe(1.2);
   expect(sample(lightYearM / au).radiusPx).toBe(sample(lightYearM / au, unenhanced).radiusPx);
 });
 
@@ -106,4 +108,17 @@ test('the Sun landmark stays faintly visible beyond the physical photometry limi
     occluder: {positionM: [0, 0, plan.camera.maximumDistanceM / 2], radiusM: 10}});
   expect(layer.element.style.visibility).toBe('hidden');
   layer.destroy();
+});
+
+test('an unresolved focus keeps a readable navigation core at stellar and maximum distances', () => {
+  const faint = { ...field, photometry: { ...field.photometry,
+    samples: field.photometry.samples.map(() => ({ radiusPx: 0, luminance: 0 })) } };
+  for (const distance of [101.51 * 299792458 * 31557600, plan.camera.maximumDistanceM]) {
+    const appearance = worldContextPointAppearance(plan, faint, world(distance), viewport, { selectedDetail: true })!;
+    expect(appearance.diameterPx).toBeLessThan(1);
+    // Match the default body-marker diameter; a 1.2 px PSF core vanishes after downsampling.
+    expect(appearance.radiusPx * 2).toBeGreaterThanOrEqual(2.4);
+    expect(appearance.luminance).toBeGreaterThanOrEqual(.65);
+    expect(appearance.opacity).toBe(1);
+  }
 });

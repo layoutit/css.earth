@@ -19,7 +19,8 @@ import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-c
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 import { loadPdsPlateShape } from '../../terrestrial-layers/obj-shape.mts';
-import { loadRadialTerrain, requireTerrainMesh, simplifyRadialShape } from '../../terrestrial-layers/radial-terrain.mts';
+import { loadRadialTerrain } from '../../terrestrial-layers/radial-terrain.mts';
+import { requireTerrainMesh, simplifyRadialShape } from '../../terrestrial-layers/radial-mesh.mts';
 import { renderRadialSnapshot } from '../../terrestrial-layers/radial-snapshot.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../../..');

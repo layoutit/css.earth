@@ -2,14 +2,14 @@
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import { requireRecord,requireArray } from '../../../sources/source-values.mts';
-import { readFile,mkdir,writeFile } from 'node:fs/promises';
+import { requireRecord, requireArray } from '../../../sources/source-values.mts';
+import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
-import { verifiedProduct } from '../projection.mts';
+import { verifiedProduct } from '../verified-product.mts';
 import { parseHTML } from 'linkedom';
-import { parsePreparedObjectRuntime,createWorldContextObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
+import { parsePreparedObjectRuntime, createWorldContextObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
 import { parsePreparedWorldCameraFrame } from '../../../../src/renderers/css/dist/navigation.js';
 export const ORACLE_PYTHON=String.raw`
 import json,sys,re,html as html_parser

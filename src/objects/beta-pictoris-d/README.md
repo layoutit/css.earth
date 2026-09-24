@@ -1,5 +1,7 @@
 # Beta Pictoris d
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Beta Pictoris d is a cool giant planet about 26 au from [Beta Pictoris](../beta-pictoris/README.md), announced in 2026 after it had hidden in a decade of images.
 
 ## Sources

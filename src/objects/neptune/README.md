@@ -1,5 +1,7 @@
 # Neptune
 
+The [navigation marker](source/preparation/navigation.json) retains its existing source-map crop and silhouette, with the shared prepared full-phase curvature shading (35% ambient, 65% diffuse). It is a stylized identifier, not an observer projection or illumination at the scene epoch.
+
 ## Sources
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).

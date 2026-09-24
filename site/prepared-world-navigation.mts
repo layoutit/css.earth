@@ -34,9 +34,9 @@ import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCentered
 const AIMED_AT_CENTER_PIXELS = 2;
 
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
-export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document,
-  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, systemViewHosts = SYSTEM_VIEW_HOSTS, systemCenters = SYSTEM_CENTERS, stellarSystems = STELLAR_SYSTEMS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: ReadonlyMap<string, Parameters<typeof systemViewTarget>[3]>; systemViewHosts?: ReadonlySet<string>; systemCenters?: typeof SYSTEM_CENTERS; stellarSystems?: ReadonlySet<string>}) {
-  const motion = createCameraMotion();
+export function createPreparedWorldNavigation({ objects, motion = createCameraMotion(), windowTarget = window, documentTarget = document,
+  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, systemViewHosts = SYSTEM_VIEW_HOSTS, systemCenters = SYSTEM_CENTERS, stellarSystems = STELLAR_SYSTEMS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[];
+  /** The camera motion the first body mounted with, when navigation is created after it. */ motion?: ReturnType<typeof createCameraMotion>; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: ReadonlyMap<string, Parameters<typeof systemViewTarget>[3]>; systemViewHosts?: ReadonlySet<string>; systemCenters?: typeof SYSTEM_CENTERS; stellarSystems?: ReadonlySet<string>}) {
   const frames = new Map(objects.map(object => [object.id, object.worldFrame]));
   const arrivals = new Map(objects.map(object => [object.id, object.discovery?.arrival]));
   function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {

@@ -1,11 +1,11 @@
 import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 /** One reproducible optical-material experiment on an explicitly pinned existing cloud. */
-import { readFile, readdir, mkdir, writeFile, rename } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, rename } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
 import { jointRecord, jointPath } from '../../../features/joint-fit/model.ts';
 import { readCompilerRecipe, readCompilerRequest } from '../../../features/compiler/model.ts';
-import { validateCompilerResult } from './compile.ts';
+import { validateCompilerResult } from './bank-validation.ts';
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
 import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
 import { createEmissionField } from '@cssearth/volume-core/fields/emission';

@@ -1,5 +1,5 @@
-import {applyAffine,type Affine as Matrix} from '../registration/stellar.ts';
-import type {EvidenceGrid} from './model.ts';
+import { applyAffine, type Affine as Matrix } from '../registration/affine.ts';
+import type { EvidenceGrid } from './model.ts';
 export function evidenceGrid(frame: { width: number; height: number; fieldArcminutes: [number, number] },
   images: { nativeWidth: number; nativeHeight: number; imageToFrame: Matrix }[]): EvidenceGrid {
   const corners = images.flatMap(image => [[0,0],[image.nativeWidth,0],[0,image.nativeHeight],[image.nativeWidth,image.nativeHeight]].map(p=>applyAffine(image.imageToFrame,[p[0]!,p[1]!])));

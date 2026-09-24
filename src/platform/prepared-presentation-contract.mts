@@ -369,7 +369,16 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   }
   const variants = array(plan.variants, "selection variants");
   for (const variant of variants) {
-    record(variant, "variant", ["when", "required", "writes", "materials", "navigation"]);
+    record(variant, "variant", ["when", "required", "writes", "materials", "navigation", "hiddenSubtrees"]);
+    if (variant.hiddenSubtrees !== undefined) {
+      const containers = new Set(plan.tree.nodes.map(node => node.parent)), hidden = new Set();
+      const holds = (root: number, id: number) => { for (let at = id; at >= 0; at = plan.tree.nodes[at].parent) if (at === root) return true; return false; };
+      for (const root of array(variant.hiddenSubtrees, "hidden subtrees")) {
+        if (typeof root !== "number" || !Number.isInteger(root) || root < 0 || root >= plan.tree.nodes.length || !containers.has(root) || holds(root, plan.tree.camera) || holds(root, plan.tree.scene) || hidden.has(root))
+          fail("a hidden subtree must be a unique container outside the camera and scene path");
+        hidden.add(root);
+      }
+    }
     if(variant.navigation!==undefined) {
       record(variant.navigation,"navigation",["maximumZoom","camera"]);
       const {maximumZoom,camera}=variant.navigation;

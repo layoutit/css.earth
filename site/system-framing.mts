@@ -70,7 +70,7 @@ export function loadSystemViews(read?: () => Promise<unknown>): Promise<void> {
 export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 
-/** Zoom along the current viewing ray, keeping its anchor and orientation. */
+/** Fit the volume along the current viewing ray, keeping its anchor and orientation. */
 export function volumeZoomTarget(from: WorldCameraPose, volume: DensityVolumeFrame, optics: Optics, rect: MapViewport, referencePositionM: PositionM) {
   const range = Math.hypot(...from.pose.positionM.map((value, axis) => value - referencePositionM[axis]));
   const [ox, oy] = (optics.principalOffsetPixels ?? [0, 0]), focal = optics.focalPixels;
@@ -83,7 +83,7 @@ export function volumeZoomTarget(from: WorldCameraPose, volume: DensityVolumeFra
     minimumM: tuple(axis => volume.boundsUnits.min[axis] * volume.metersPerUnit),
     maximumM: tuple(axis => volume.boundsUnits.max[axis] * volume.metersPerUnit),
     cameraToReference: worldRotationFromQuaternion(volume.localToReferenceXyzw),
-  }] }, rect, range);
+  }] }, rect);
   return { world, focusPositionM };
 }
 

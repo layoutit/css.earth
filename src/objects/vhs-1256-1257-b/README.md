@@ -1,5 +1,7 @@
 # VHS 1256-1257 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 VHS 1256-1257 b is a young companion of about 12 Jupiter masses, 8 arcseconds (about 150 au) from the close pair [VHS 1256-1257 A and B](../vhs-1256-1257/README.md), 21 parsecs away. It is the main spectroscopy target of the JWST Early Release Science programme for exoplanets, whose 1 to 20 micrometre spectrum shows water, methane, carbon monoxide, carbon dioxide and silicate clouds (Miles et al. [2023](https://arxiv.org/abs/2209.00620)).
 
 ## Sources

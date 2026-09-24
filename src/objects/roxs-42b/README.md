@@ -1,5 +1,7 @@
 # ROXs 42B A
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 ROXs 42B A is the brighter of two young stars 146 parsecs away in Ophiuchus. They are 11 au apart and circle each other every 31 years on an orbit seen almost exactly edge-on (Inglis et al. 2026). The pair is orbited about 150 au out by the giant planet [ROXs 42B b](../roxs-42b-b/README.md). Its partner is [ROXs 42B B](../roxs-42b-companion/README.md). The "B" in the name is historical: ROXs 42B was the second optical counterpart of the X-ray source ROXs 42, and is not related to ROXs 42A.
 
 ## Sources

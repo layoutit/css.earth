@@ -1,5 +1,7 @@
 # C/1956 R1 Arend–Roland
 
+The navigation snapshot uses the same retained shape and viewing direction, with prepared full-phase lighting (35% ambient, 65% diffuse). Its neutral gray material remains a display convention without observed surface detail. The snapshot recipe is recorded in [the source manifest](source/manifest.json); the selected-body geometry and scientific assets are unchanged.
+
 Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
 
 Arend–Roland is remembered as the Great Comet of 1957. Its bright appearance came during a close passage around the Sun.

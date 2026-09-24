@@ -1,5 +1,7 @@
 # Kepler-16 A
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Kepler-16 A is an orange dwarf 65% as wide as the Sun. Every 41 days its small partner star B passes in front of it, and a Saturn-mass planet, [Kepler-16 (AB) b](../kepler-16ab-b/README.md), circles them both.
 
 ## Sources

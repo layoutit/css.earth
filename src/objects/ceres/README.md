@@ -1,5 +1,7 @@
 # Ceres
 
+The navigation marker uses its existing source map as a stylized identifier. The [marker recipe](source/preparation/navigation.json) crops and resizes it, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). It is not an observer projection or a view at the scene epoch.
+
 ## Sources
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).

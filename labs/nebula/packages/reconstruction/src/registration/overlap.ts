@@ -1,5 +1,5 @@
 /** Common observed area, expressed in source pixels; unrelated photo margins are not calibration evidence. */
-import { applyAffine, composeAffine, invertAffine, type Affine, type Point } from './stellar.ts';
+import { applyAffine, composeAffine, invertAffine, type Affine, type Point } from './affine.ts';
 export interface ReferenceFootprint { width: number; height: number; imageToFrame: Affine }
 export function registrationOverlap(width: number, height: number, imageToFrame: Affine, reference?: ReferenceFootprint): Point[] {
   if (!reference) return [[0, 0], [width, 0], [width, height], [0, height]];

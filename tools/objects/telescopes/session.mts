@@ -5,8 +5,8 @@ import { randomUUID } from 'node:crypto';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { readProductRecord, type ProductRecord } from '../product-record.mts';
-import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection,
-  type ArchiveSelection, type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';
+import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import type { CapabilityRequest } from './recipe-request.mts';
 import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
 import { qualifyObservation, type QualificationRequest } from './qualify.mts';
 import { selectedProductInput } from './selected-product.mts';

@@ -2,7 +2,7 @@ import { afterEach, expect, test, vi } from 'vitest';
 import { parseObjectDescriptor, prepareObject } from '@cssearth/objects';
 import { createPreparedVolumeLenses, loadPreparedVolumeLenses, validatePreparedVolumeLenses,
   volumeLensCompositeOpacity } from './prepared-volume-lenses.js';
-import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
+import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
 import type { PreparedVolumeLenses } from './prepared-volume-lenses.js';
 import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from './types.js';
 import { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
@@ -467,6 +467,8 @@ test('a cloud denied its detail is carried by its billboards at every size, unti
   lod.setDetail(false);
   lod.publish(publication(4.01));
   expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block'); expect(distant.style.opacity).toBe('');
+  expect(Number(distant.dataset.activeViews)).toBeGreaterThan(0);
+  expect(distant.children.some(node => node.style.display === 'block' && node.style.backgroundImage)).toBe(true);
   lod.setDetail(true);
   lod.publish(publication(4));
   expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('none');
@@ -474,4 +476,39 @@ test('a cloud denied its detail is carried by its billboards at every size, unti
   const plain = mountPreparedVolumeLod({ ...f.options, payload: base, resolveResource: path => `/prepared/${path}` }, () => 1);
   expect(() => plain.setDetail(false)).toThrow();
   lod.destroy(); plain.destroy();
+});
+
+test('fixed detail planes retain physical geometry through camera motion, material changes and LOD', () => {
+  const f = dom(), base = budgetPayload(3, 0).lenses[0]!.volume;
+  const leaf = { ...base.stacks[2]!.leaves[0]!, id: 'outer-disc' };
+  const data = { ...base, detailPlanes: [leaf] };
+  const lod = mountPreparedVolumeLod({ ...f.options, payload: data, resolveResource: path => `/prepared/${path}`, lazyDetail: true }, () => 1);
+  lod.publish(publication(100));
+  expect(descendants(f.host).filter(node => node.dataset.volumePlane)).toHaveLength(0);
+  lod.publish(publication(4));
+  const nodes = descendants(f.host), plane = nodes.find(node => node.dataset.volumePlane === leaf.id)!;
+  const planeRoot = nodes.find(node => node.dataset.volumePlanes !== undefined)!;
+  const scene = descendants(planeRoot).find(node => node.className === 'css-volume-scene')!;
+  const sliceRoot = nodes.find(node => node.className === 'css-volume-projection' && node !== planeRoot)!;
+  const sliceScene = descendants(sliceRoot).find(node => node.className === 'css-volume-scene')!;
+  const firstCamera = scene.style.transform;
+  expect(plane.style.transform).toBe(leaf.style.transform);
+  expect(scene.style.transform).toBe(sliceScene.style.transform);
+  lod.publish(publication(3, [.3, .2, 1]));
+  expect(scene.style.transform).not.toBe(firstCamera);
+  expect(scene.style.transform).toBe(sliceScene.style.transform);
+  expect(plane.style.transform).toBe(leaf.style.transform);
+  const next = { ...data, detailPlanes: [{ ...leaf, texturePath: base.resources[0]!.path,
+    style: { ...leaf.style, backgroundPosition: '-1px 0px' } }] };
+  lod.setPresentation(next);
+  expect(descendants(f.host)).toEqual(nodes);
+  expect(plane.style.backgroundImage).toBe(`url("/prepared/${base.resources[0]!.path}")`);
+  expect(plane.style.backgroundPosition).toBe('-1px 0px');
+  expect(samePreparedVolumeTopology(data, { ...data, detailPlanes: [{ ...leaf, centerUnits: [1, 0, 0] }] })).toBe(false);
+  lod.setDetail(false); lod.publish(publication(3));
+  expect(planeRoot.parentNode!.style.display).toBe('none');
+  lod.setDetail(true); lod.publish(publication(3));
+  expect(planeRoot.parentNode!.style.display).toBe('block');
+  expect(descendants(f.host).find(node => node.dataset.volumePlane)).toBe(plane);
+  lod.destroy(); expect(f.host.children).toEqual([f.before]);
 });

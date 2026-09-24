@@ -1,5 +1,7 @@
 # Antares
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 ## Sources
 
 Antares is the nearest red supergiant. Its package holds the placement, the published size and the record of what was tried for its surface, but no image of the photosphere could be cast from public data. A star with only its shape stays off the map until one can: `discoveryVisibility` hides it and its label, and its page still opens from search. The [investigation ledger](investigations.json) records the attempts.

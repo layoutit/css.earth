@@ -1,5 +1,7 @@
 # Haumea
 
+The [navigation marker](source/preparation/navigation.json) retains the existing schematic silhouette and whole-disc color, with prepared full-phase curvature shading. This display cue does not add surface features or change the source shape ratio.
+
 ## Sources
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).

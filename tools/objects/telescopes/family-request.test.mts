@@ -1,6 +1,10 @@
-import assert from 'node:assert/strict';import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';test.before(async () => { await astroqueryToolchain(); });import type {CapabilityRequest} from './query.mts';import {assessFamilyRequest,normalizeFamilyRequest} from './family-request.mts';import {describeDegreeLinearPolarization,describeStokesFits} from './families/f13-polarimetry.mts';
-const legacy:CapabilityRequest={target:'betelgeuse',wavelengthMicrometres:[0.5,0.6]};
+import assert from 'node:assert/strict';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
+import type { CapabilityRequest } from './recipe-request.mts';
+import { assessFamilyRequest, normalizeFamilyRequest } from './family-request.mts';
+import { describeDegreeLinearPolarization, describeStokesFits } from './families/f13-polarimetry.mts';
+const test = sourceTest();test.before(async () => { await astroqueryToolchain(); });const legacy:CapabilityRequest={target:'betelgeuse',wavelengthMicrometres:[0.5,0.6]};
 const pin=(id:string)=>({id,path:`${id}.fits`,role:'science' as const});
 const polar=()=>describeDegreeLinearPolarization({id:'polar',target:'betelgeuse',intensity:pin('intensity'),dolp:pin('dolp'),shape:[2,3],producingRecord:'ESO Phase 3'});
 test('legacy capability request is normalized only into criteria applicable to the selected family',()=>{const normalized=normalizeFamilyRequest(legacy);assert.deepEqual(normalized.criteria.spectral?.intervalMicrometres,[0.5,0.6]);assert.equal(normalized.criteria.polarization,undefined);assert.equal(normalizeFamilyRequest(legacy,{family:'F06'}).criteria.spectral,undefined);});

@@ -1,5 +1,7 @@
 # Beta Pictoris
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 Beta Pictoris is an A6V star 19.6 parsecs away, about 23 million years old, seen through its own edge-on disc of dust. Three giant planets are imaged around it, and its planet b is the first exoplanet whose radio emission has been heard.
 
 ## Sources

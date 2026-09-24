@@ -1,5 +1,7 @@
 # AF Lep
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 AF Lep is a young star in the beta Pictoris moving group, 24 million years old. Its pull on the star led astronomers to its planet b in 2023.
 
 ## Sources

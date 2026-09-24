@@ -1,5 +1,7 @@
 # PDS 70 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 PDS 70 b is a gas giant still forming inside the gap of [PDS 70](../pds-70/README.md)'s disc. Found in 2018 in VLT/SPHERE images (Keppler et al. 2018, [arXiv:1806.11568](https://arxiv.org/abs/1806.11568)).
 
 ## Sources

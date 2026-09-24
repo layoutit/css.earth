@@ -1,5 +1,7 @@
 # HD 95086 b
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 95086 b is a young giant planet with a very red colour. JWST's mid-infrared images rule out a warm disc around the planet as the cause. Its star is [HD 95086](../hd-95086/README.md).
 
 ## Sources

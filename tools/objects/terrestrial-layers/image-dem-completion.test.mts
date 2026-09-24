@@ -1,10 +1,10 @@
 import { required } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import assert from 'node:assert/strict';
 import { completeImageDem } from './image-dem-completion.mts';
-import { validateClosedMesh } from './radial-terrain.mts';
+import { validateClosedMesh } from './radial-mesh.mts';
 import { createIndexedShape } from './obj-shape.mts';
+const test = sourceTest();
 
 const recipe = { method: 'outline-depth-envelope', depthMeters: 3, faceBudget: 100 };
 function closedMesh(front: { vertices: number[][]; }[], added: { vertices: (readonly number[])[]; normal: number[]; estimated: boolean; }[]) {

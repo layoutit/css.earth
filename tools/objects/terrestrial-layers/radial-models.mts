@@ -1,4 +1,6 @@
-import type {RadialState} from './solid-contract.mts';
+import type { RadialState } from './solid-contract.mts';
+import { loadRadialTerrain } from './radial-terrain.mts';
+import { alternativeLensIds } from './alternative-lenses.mts';
 type TerrainContext = Parameters<typeof loadRadialTerrain>[0];
 const lensGroups = ['observations', 'scientific', 'observedColors', 'shapeViews', 'surfaceObservations'] as const;
 interface ModelConfig {
@@ -14,8 +16,6 @@ export interface LoadedRadialModel {
   config: ModelConfig;
 }
 interface CombinedRadial {faces: RadialState['faces']; leaves: RadialState['leaves']; lensRanges?: {lensId: string; start: number; count: number}[];}
-import { loadRadialTerrain } from './radial-terrain.mts';
-import { alternativeForLens, alternativeLensIds } from './alternative-lenses.mts';
 
 /** Separate source meshes share a physical scale and one retained scene. */
 export async function loadRadialModels<T extends ModelConfig>(context: Omit<TerrainContext, 'config'> & {config: T}) {
@@ -39,23 +39,6 @@ export async function loadRadialModels<T extends ModelConfig>(context: Omit<Terr
     models.push({ id: lensId, lensIds: alternativeLensIds({ lensId, additionalLensIds: _additional }), config: selected, radial });
   }
   return models;
-}
-
-/** A lens owns one source mesh.  Alternative meshes are never a fallback for
- * another lens: sampling and its source-distance limit must use this same model. */
-export function radialModelForLens<T extends Pick<LoadedRadialModel, 'lensIds'>>(models: readonly T[], lensId: string): T {
-  const model = models.find(candidate => candidate.lensIds.includes(lensId));
-  if (!model) throw new TypeError(`Lens ${lensId} has no radial model.`);
-  return model;
-}
-
-/** Return the declared mesh profile for a lens before terrain is loaded, so
- * profile validation applies each observation's transfer limit to its owner. */
-export function radialTerrainForLens(config: ModelConfig, lensId: string) {
-  const alternative = alternativeForLens(config.geometry.radialTerrainAlternatives ?? [], lensId);
-  if (!alternative) return config.geometry.radialTerrain;
-  const { lensId: _lensId, additionalLensIds: _additional, ...terrain } = alternative;
-  return terrain;
 }
 
 export function combineRadialModels(models: Awaited<ReturnType<typeof loadRadialModels>>, namespace: string): CombinedRadial | null {

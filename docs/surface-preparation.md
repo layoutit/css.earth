@@ -16,12 +16,23 @@ Original images, meshes and labels
 
 | Step | Implementation |
 | --- | --- |
-| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
+| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../tools/objects/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mts) |
 | Record input, recipe and output identities | [Provenance bindings](../tools/objects/provenance-recipes.mts) and [record generation](../tools/objects/provenance.mts) |
+
+Terrain preparation separates source loading, mesh operations and material output.
+[The loader](../tools/objects/terrestrial-layers/radial-terrain.mts) assembles the
+source surface, atlas layout and retained leaves. It uses
+[mesh sampling and simplification](../tools/objects/terrestrial-layers/radial-mesh.mts),
+which can also run independently of source loading.
+[Material preparation](../tools/objects/terrestrial-layers/radial-materials.mts)
+consumes that prepared layout and writes textures through the shared
+[raster emitter](../tools/objects/terrestrial-layers/raster-output.mts).
+[Lens selection](../tools/objects/terrestrial-layers/alternative-lenses.mts)
+only selects a model or terrain entry; it does not import their preparers.
 
 The [implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
 locates other preparation families. Earth selects among offline atlas levels
@@ -127,7 +138,7 @@ document their recorded revision; they are not relabeled as a new full sweep.
 
 ### Image and numeric readers
 
-[readObservation](../tools/objects/terrestrial-layers/solid-raster.mts) selects
+[readObservation](../tools/objects/terrestrial-layers/observation-raster.mts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
 and encoding. [Acquisition tools](../tools/objects/acquisition/) handle
@@ -290,7 +301,7 @@ stretches differ. Both use related observations, so this is a registration check
 
 ## Reduce geometry and bake the atlas
 
-[radial-terrain.mjs](../tools/objects/terrestrial-layers/radial-terrain.mts)
+[radial-mesh.mts](../tools/objects/terrestrial-layers/radial-mesh.mts)
 supports both a sampled radial surface and reduction of the original mesh.
 A radial surface supplies one radius per direction. `source-meshoptimizer`
 reduces source triangles instead; it can retain surfaces that a single radius
@@ -399,7 +410,7 @@ To repeat the measurement, run
 [`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)
 on the files a lane change replaces.
 
-[solid-raster.mjs](../tools/objects/terrestrial-layers/solid-raster.mts) writes
+[raster-output.mts](../tools/objects/terrestrial-layers/raster-output.mts) writes
 WebP assets and records their dimensions, sizes and hashes. Normalized maps stay
 lossless; display output is written in the lossy lane unless the recipe selects a
 quality setting.

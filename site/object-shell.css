@@ -1459,6 +1459,11 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 
 @media (max-width: 820px), (orientation: portrait) {
 
+  /* The sheet opens below the globe: its images load once the first body is ready (ObjectLayout.astro). */
+  html[data-body-pending] .object-sidebar img[loading="lazy"] {
+    display: none;
+  }
+
   .object-drawer-content {
     box-sizing: border-box;
     position: relative;

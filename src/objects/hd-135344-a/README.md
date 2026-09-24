@@ -1,5 +1,7 @@
 # HD 135344 A
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HD 135344 A is a young A0 star whose companion star B hosts a well-known spiral disc. Its own dust is gone, which let SPHERE and GRAVITY find its planet Ab.
 
 ## Sources

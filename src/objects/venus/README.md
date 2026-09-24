@@ -2,6 +2,8 @@
 
 Venus shows a cloud map, Magellan radar and elevation displays, modeled atmosphere charts, and Venera surface photographs.
 
+The [navigation marker recipe](source/preparation/navigation.json) retains the existing credited image and crop, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). This stylized identifier does not represent the scene epoch or its illumination.
+
 ## Sources
 
 | View or quantity | Source |

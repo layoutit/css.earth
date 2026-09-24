@@ -1,5 +1,7 @@
 # HD 110067 d
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 A sphere with a radius of 2.852 Earth radii, lit by HD 110067. Neutral gray represents unknown surface colour.
 
 ## Sources

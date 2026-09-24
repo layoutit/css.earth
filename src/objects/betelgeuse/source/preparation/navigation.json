@@ -10,12 +10,29 @@
   },
   "operations": [
     {
+      "type": "extract",
+      "left": 149,
+      "top": 145,
+      "width": 218,
+      "height": 218
+    },
+    {
       "type": "resize",
       "width": "tile",
       "height": "tile",
       "fit": "cover",
       "position": "centre",
       "kernel": "lanczos3"
+    },
+    {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.49988991,
+      "cy": 0.50001835,
+      "rx": 0.49749597,
+      "ry": 0.49749597
     },
     {
       "type": "png"

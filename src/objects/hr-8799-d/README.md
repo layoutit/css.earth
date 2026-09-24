@@ -1,5 +1,7 @@
 # HR 8799 d
 
+The [navigation marker](source/preparation/navigation.json) adds a prepared curvature cue to the existing neutral gray placeholder. It remains a schematic identifier without resolved surface imagery; the shading is a display convention, not measured limb darkening or surface detail.
+
 HR 8799 d is one of the three planets Marois et al. ([2008](https://arxiv.org/abs/0811.2606)) imaged with Keck and Gemini. It orbits [HR 8799](../hr-8799/README.md) about 27 au out.
 
 ## Sources

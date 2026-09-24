@@ -163,12 +163,70 @@ slot. If the annotation cannot fit, its context orbit and annotation hit targets
 retire with it. Physical sprites remain visible and pickable. The selected
 body's orbit remains available in close-up even when its caption cannot fit.
 Orbit settings can hide a line without changing the admitted annotation.
+The selected body uses the caption below its marker or mesh instead of a second
+context caption. Its existing corner locator keeps its reserved footprint while
+the body is unresolved and retires when the detailed surface takes over.
+The focus point light shares the default body marker's minimum readable core
+diameter. Its faint surrounding halo does not count toward that minimum, so the
+distant Sun keeps a visible dot inside its locator circle.
 
-The same admission runs during dragging, inertia, flight and rest. Category
-emphasis applies to the annotation and orbit together; it does not make a
+Background labels use the same admission during dragging, inertia, flight and
+rest: a label that leaves the viewport or loses a collision can return as soon
+as its circle and text fit again. Clear committed placements retain their side.
+Before keeping or choosing a caption's side, the layout checks the fixed circles
+of eligible peers. A caption moves to a clear alternative when that lets nearby
+annotations fit; it does not make those circles disappear merely to keep its side.
+Truly overlapping circles still follow the same admission priority.
+The active system's established landmark behavior remains independent of that
+background admission; moving the camera does not freeze a list of visible stars.
+
+Only actual circle and text footprints reserve space against background labels.
+An orbit's interior stays available, whatever its size or distance: a projected
+path does not become an opaque rectangle. Physical body occlusion remains
+separate from annotation collisions.
+
+Sagittarius A* uses the short caption “Sgr A*” and a black caption and circle
+for contrast against the bright Milky Way bulge. Its accessible name stays full.
+
+Category emphasis applies to the annotation and orbit together; it does not make a
 second visibility decision in CSS. Small circle footprints are allowed to
 clip at the viewport edge while the caption stays readable inside it.
 
 Focused checks cover default exclusion, opt-in visibility, category independence,
 mesh-only counterexamples, imagery promotion/demotion, partial coverage, setting
 lifetime and priority without motion-dependent reordering.
+
+## Prepared marker silhouettes
+
+Navigation sprites carry their silhouette in the prepared image alpha channel.
+Object-owned recipes in `source/preparation/navigation.json` apply an offline
+ellipse mask to round bodies whose source map or photograph has an opaque
+rectangular background. Map crops also use the existing full-phase curvature
+shading so a circular identifier reads as rounded; photographs retain their
+source lighting. These static identifiers do not follow scene-time illumination
+or replace the selected body's scientific surface.
+
+Resolved stellar reconstructions crop to the photosphere registered in their
+observation frame before applying the navigation aperture. Their body READMEs
+record the source frame, crop and radius; scientific reconstruction images and
+off-limb emission remain available in the selected-body views.
+
+The [prepared-image comparison](../src/navigation/evidence/marker-silhouettes-20260924/markers.png)
+shows the original 15 silhouette fixes against their previous images. The
+[additional shading comparison](../src/navigation/evidence/marker-silhouettes-20260924/shading.png)
+covers 10 other map or schematic markers, 65 neutral placeholders and 25 comet
+snapshots. The
+[capture record](../src/navigation/evidence/marker-silhouettes-20260924/capture.json)
+identifies the compared bytes, stellar crop inputs and retained comet meshes.
+The comet snapshots reproduce their previous unlit pixels exactly before
+turning on curvature lighting; their geometry and viewing directions stay fixed.
+Gray placeholders receive the same display cue without invented surface detail.
+Measured stellar limb darkening and thermal-map palettes keep their source
+treatment. The [Earth and Moon browser view](../src/navigation/evidence/marker-silhouettes-20260924/earth-moon.png)
+checks the Moon sprite in the existing world renderer.
+`site/test/navigation-preparation.test.mts` checks every registered body marker
+and resolved context image for transparent corners and nonempty content, and
+compares each atlas tile's alpha and visible pixels with its individual image.
+The shared recipe tests separately check bright-center, darker-limb shading.
+The [catalogue audit](../src/navigation/evidence/marker-silhouettes-20260924/catalogue-audit.json)
+records the inspected marker bytes and disposition for all 641 registered bodies.

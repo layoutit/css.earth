@@ -78,8 +78,8 @@
         "size": 512,
         "longitudeDegrees": 70,
         "latitudeDegrees": 20,
-        "ambient": 1,
-        "diffuse": 0,
+        "ambient": 0.35,
+        "diffuse": 0.65,
         "lensId": "model"
       }
     }

@@ -144,7 +144,8 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     const interiorBank=interiorBanks.get(lens.id);
     if (isInterior && !interiorBank) throw new TypeError(`Missing prepared interior bank: ${lens.id}`);
     const pageWrites=(carriers: readonly PreparedNode[],active: boolean)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
-    return {when:{lensId:lens.id,shadows,atmosphere},navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(lens,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
+    // Outside the interior view the cutaway is not shown (earth-surfaces.css), so page markup leaves its 500-odd nodes out.
+    return {when:{lensId:lens.id,shadows,atmosphere},...(isInterior?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(lens,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
         ...(isInterior?interiorTextureNodes.map(({node,url})=>texture(node,'background-image',requireInteriorResource(interiorBank, interiorUrls.indexOf(url)))):[]),
         ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(lens,shadows)}`)),
