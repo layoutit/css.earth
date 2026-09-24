@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "baucis-elevation-shadow-alpha@2x.webp",
+      "bytes": 478998,
+      "sha256": "16d498421cf9cbf80fad6605e886f294081349baf477d436f26136f439da57ea"
+    },
+    {
+      "location": "public",
       "filename": "baucis-elevation-shadow@2x.webp",
       "bytes": 125910,
       "sha256": "0fadb16146aa70df60abc7d42b32adec03511a3caf11a483095211ddf75860bd"
+    },
+    {
+      "location": "public",
+      "filename": "baucis-elevation-surface-alpha@2x.webp",
+      "bytes": 515804,
+      "sha256": "35b8b0ebdccecb6840497b2e8f61dd81bb9b1b555ee2962563ed4846a55f37e9"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "baucis-shape-shadow-alpha@2x.webp",
+      "bytes": 399992,
+      "sha256": "ecb9f8c8faf6a59ad0663e5d42ca63e38f9fa29b7203e322b272e71739d6db55"
+    },
+    {
+      "location": "public",
       "filename": "baucis-shape-shadow@2x.webp",
       "bytes": 59170,
       "sha256": "97fdce828394825e08ff48d509ceef0b13b0feaa8f80cbe92086699d78b22bc9"
+    },
+    {
+      "location": "public",
+      "filename": "baucis-shape-surface-alpha@2x.webp",
+      "bytes": 391352,
+      "sha256": "bf7b38273b03f06464ef9d32640c818fc8b34e9f94c8c7f13a626bedbc5e6205"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750156,
-      "sha256": "10356e23309e79d82a88fa21c4420290fe62dcd82df66c5a8105482a50269b92"
+      "bytes": 750808,
+      "sha256": "a1453db573ee87a5038eaab6f53833c01a8705ff539167c9e85f6eccfd5a3de5"
     },
     {
       "location": "prepared",

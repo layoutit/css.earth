@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "bacchus-elevation-shadow-alpha@2x.webp",
+      "bytes": 395552,
+      "sha256": "410d29fa5a0da623c9af9e562d516348b7827a512b4f39eb4fc8b50dcc8d6a12"
+    },
+    {
+      "location": "public",
       "filename": "bacchus-elevation-shadow@2x.webp",
       "bytes": 104784,
       "sha256": "0afcca7f4eb2a91a6678ece6775245f2a977013ff8e7de13c22012e9d1d16f84"
+    },
+    {
+      "location": "public",
+      "filename": "bacchus-elevation-surface-alpha@2x.webp",
+      "bytes": 428610,
+      "sha256": "5879e0c84ee683861ee067d12302492cff203b8a3eb4f8e9b4a2d9a2c8deb6f3"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "bacchus-shape-shadow-alpha@2x.webp",
+      "bytes": 325876,
+      "sha256": "d0c5c1fe873391a7447d9e0b6edcab7cb8b6f5e4f4776916087e7ffdeee07870"
+    },
+    {
+      "location": "public",
       "filename": "bacchus-shape-shadow@2x.webp",
       "bytes": 46054,
       "sha256": "722b0058ec87027ef1cae28671d7d54e0736ec3c1423f6b480d44dcc67919b18"
+    },
+    {
+      "location": "public",
+      "filename": "bacchus-shape-surface-alpha@2x.webp",
+      "bytes": 320724,
+      "sha256": "c0518b21868b69e6063e9c62d5a076a3ae3b93e7c2f173b772447c858838f36b"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 478439,
-      "sha256": "40660a69c74ab334f565acbebb89eba0455a4470d0ea5f76b8f4f094473f73d7"
+      "bytes": 479099,
+      "sha256": "1116b85c45af0ad935be54605a579df052d6e68de932a821fe6ba3864545d028"
     },
     {
       "location": "prepared",

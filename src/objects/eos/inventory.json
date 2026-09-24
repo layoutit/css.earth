@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "eos-elevation-shadow-alpha@2x.webp",
+      "bytes": 596826,
+      "sha256": "d13c0b7fbde62e370df41fc2e4e6f4a3270ea4a078ce465b3b95adc6f9de3b8f"
+    },
+    {
+      "location": "public",
       "filename": "eos-elevation-shadow@2x.webp",
       "bytes": 150186,
       "sha256": "2166b5ec5b3bf3e4b567b1796e50f08c47c28536041bd7225a957bf91ebc12cd"
+    },
+    {
+      "location": "public",
+      "filename": "eos-elevation-surface-alpha@2x.webp",
+      "bytes": 646942,
+      "sha256": "bfc072835e8dfc7b90d52dd9221f34e87dd9439bb3db48ae727e827cb9ff2b7f"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "eos-shape-shadow-alpha@2x.webp",
+      "bytes": 496850,
+      "sha256": "b3c978c90bef573bb552c6e08cc6dde81d1dac670c790fd0dc97210ca3942674"
+    },
+    {
+      "location": "public",
       "filename": "eos-shape-shadow@2x.webp",
       "bytes": 61292,
       "sha256": "866adaac43f2d8f94596e821febe40ecd46c3245e935a61544b514a66d85830d"
+    },
+    {
+      "location": "public",
+      "filename": "eos-shape-surface-alpha@2x.webp",
+      "bytes": 489212,
+      "sha256": "7da620be13d7dc933a36a28a2046ee37c0b6020b9c46c2b7998c1f046e5583ca"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 746856,
-      "sha256": "70742b7c9b702be939bef515d104e3f2c9342ab5161b64362956ebd656a77c81"
+      "bytes": 747484,
+      "sha256": "39e29b8e7e99c4e17e66e55f0d96597f92db9bd9883815545cb95420887303ad"
     },
     {
       "location": "prepared",

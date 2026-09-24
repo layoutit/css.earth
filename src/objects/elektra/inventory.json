@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "elektra-elevation-shadow-alpha@2x.webp",
+      "bytes": 613952,
+      "sha256": "a06d744065177456724dcadc7a7c8c903afe27952335304e7c86b8fb08cccc1c"
+    },
+    {
+      "location": "public",
       "filename": "elektra-elevation-shadow@2x.webp",
       "bytes": 128844,
       "sha256": "c4f7a4c315e7cdecce3730e21b5c611b33baa2d0c4aa6e3981a07639198e0cc3"
+    },
+    {
+      "location": "public",
+      "filename": "elektra-elevation-surface-alpha@2x.webp",
+      "bytes": 685492,
+      "sha256": "0bc0706092c20ebc825ef8b07a116e56155236b14c209d9a775d7176946aeae9"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "elektra-shape-shadow-alpha@2x.webp",
+      "bytes": 524110,
+      "sha256": "1a2901077e0619a4e25634577f9737687a4fedf3f75dd8aff0678b88824dd6c0"
+    },
+    {
+      "location": "public",
       "filename": "elektra-shape-shadow@2x.webp",
       "bytes": 58834,
       "sha256": "a9fa39b63fe106c4f1674fd35004a126acbf4dbc54d5ff3ab98099955c676968"
+    },
+    {
+      "location": "public",
+      "filename": "elektra-shape-surface-alpha@2x.webp",
+      "bytes": 521090,
+      "sha256": "9493cc06dd8caf6d8e853cef7e8c3595bee672b2c010bca76a7b9b10b91c4676"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "elektra-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "elektra-zimpol-surface-alpha@2x.webp",
+      "bytes": 589204,
+      "sha256": "40e561a2118edc74fcfd651477239e7453eb9ecfdb8e0da11263c21b8dfc3d76"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1382240,
-      "sha256": "5e43a8d54a633c56bab153a28594ec94110d12264ae13f94eba8d3e4e8525799"
+      "bytes": 1383048,
+      "sha256": "7832325629461dc55c26d618b08907af842774f162ebbc17d4d45f3257fd125e"
     },
     {
       "location": "prepared",

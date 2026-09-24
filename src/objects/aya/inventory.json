@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aya-model-shadow-alpha@2x.webp",
+      "bytes": 131978,
+      "sha256": "66d0a9631e0f858c437548f4b2bdb11ce8ec3bed393842417b72522a2df54e9b"
+    },
+    {
+      "location": "public",
       "filename": "aya-model-shadow@2x.webp",
       "bytes": 20662,
       "sha256": "d5ad73611f309fcb65460a52f6cdf13428c6d28dfaab14e78f9058a7b3de941c"
+    },
+    {
+      "location": "public",
+      "filename": "aya-model-surface-alpha@2x.webp",
+      "bytes": 135046,
+      "sha256": "da327df4334e66055c27e7c28536f379da6b9cfbfc56831c05620e6200c57a0f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456255,
-      "sha256": "3a14b88ea989a9989ec5b06fdc297c2fe2082fa6125c697f5f9cfa701d5c5202"
+      "bytes": 456583,
+      "sha256": "55ae8c5b9e649cf70ffb94d4e74467ece96360dc22cbc054f691cc213db11725"
     },
     {
       "location": "prepared",

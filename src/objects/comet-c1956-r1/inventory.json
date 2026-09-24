@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-c1956-r1-model-shadow-alpha@2x.webp",
+      "bytes": 101052,
+      "sha256": "d2fd9021328e43871c1c2240229f6703eccd9f83970ce7549493476eef1c5bf9"
+    },
+    {
+      "location": "public",
       "filename": "comet-c1956-r1-model-shadow@2x.webp",
       "bytes": 25682,
       "sha256": "29c678c1b2038cd65c4598ed8867f8e9836bbf52f3669cda8264116235547585"
+    },
+    {
+      "location": "public",
+      "filename": "comet-c1956-r1-model-surface-alpha@2x.webp",
+      "bytes": 96494,
+      "sha256": "32b7bb27740b4dae12efe36a8418efc767c1b5a6177df620b114cdae741446ca"
     },
     {
       "location": "public",
@@ -58,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 761205,
-      "sha256": "7de91dbaa48b07d2db823935fd65c59afd1dc764b2cc5d085cac506c7ed2dc54"
+      "bytes": 761577,
+      "sha256": "5bee756cbde3239c0955385ebd0f31afb60da5725b8eaf6546c936b7b336c837"
     },
     {
       "location": "prepared",

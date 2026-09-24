@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "euphrosyne-elevation-shadow-alpha@2x.webp",
+      "bytes": 626806,
+      "sha256": "b2ccb6b7aed7e9bf700ebdf180637cf2758fa3698fd95c5416b34de1a5937ccf"
+    },
+    {
+      "location": "public",
       "filename": "euphrosyne-elevation-shadow@2x.webp",
       "bytes": 139304,
       "sha256": "155d336a21550a2c457c82702ccbf02586303a8dfeb1bba445efdff3fd27ac14"
+    },
+    {
+      "location": "public",
+      "filename": "euphrosyne-elevation-surface-alpha@2x.webp",
+      "bytes": 682628,
+      "sha256": "6c1c1ebf52037e657d0b7d5f29ce6934c3f1aa6322297af2c765e4f3a8462e80"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "euphrosyne-shape-shadow-alpha@2x.webp",
+      "bytes": 532592,
+      "sha256": "87668439cee9cd9f5549edc99c3ea7a6beaeae98a8c087e3950d2c7702450bcc"
+    },
+    {
+      "location": "public",
       "filename": "euphrosyne-shape-shadow@2x.webp",
       "bytes": 62462,
       "sha256": "21c8ba0a25fe802eae87386b8a9499852eb49930244ac2f8661ac70d9fd35d19"
+    },
+    {
+      "location": "public",
+      "filename": "euphrosyne-shape-surface-alpha@2x.webp",
+      "bytes": 526950,
+      "sha256": "d101707def156205ee5083694674199440ac2d4b51dc1e4331c7797a28c75b2a"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "euphrosyne-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "euphrosyne-zimpol-surface-alpha@2x.webp",
+      "bytes": 589732,
+      "sha256": "e1ab166e7a869c7c00174c5d1fe4d7644181887e160a1e0443beb370856054b1"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1391118,
-      "sha256": "673bfca73ffaa557ec460b87f97078990a690c221418fb55aefe0dd093a85081"
+      "bytes": 1391956,
+      "sha256": "c7456ef408b1239edb995f4b7b1be5218b083fd032343a6f75fdeaa4ceb15076"
     },
     {
       "location": "prepared",

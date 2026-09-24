@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "enceladus-elevation-shadow-alpha@2x.webp",
+      "bytes": 1898206,
+      "sha256": "d746e98b91706e3dc39573890e9c04e9de5a4e57d4c5a85f0ceb0a4dd1fba922"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-elevation-shadow@2x.webp",
       "bytes": 1502180,
       "sha256": "2799bf94aad395d58ac927d8be54269136aefdf7a296eece7b06469f6d9579ce"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-elevation-surface-alpha@2x.webp",
+      "bytes": 4325726,
+      "sha256": "e5e4211107299ccc461054265f774af4338621b313b0afeb06a57919d01f002e"
     },
     {
       "location": "public",
@@ -39,9 +51,21 @@
     },
     {
       "location": "public",
+      "filename": "enceladus-ice-absorption-shadow-alpha@2x.webp",
+      "bytes": 265484,
+      "sha256": "2a7991c76c49724e1aaa9b283fd70cc744b49f2fb3f435212ba579bdf387ef01"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-ice-absorption-shadow@2x.webp",
       "bytes": 138552,
       "sha256": "4a03214c7977622c2061c8c3a9c94ce0229d0645ffe7987550076d5c1cbc1073"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-ice-absorption-surface-alpha@2x.webp",
+      "bytes": 170688,
+      "sha256": "39416cab3eebd8e19116febc1323ad3c39f27f5fc0cc7b8e82307e5a0db62841"
     },
     {
       "location": "public",
@@ -63,9 +87,21 @@
     },
     {
       "location": "public",
+      "filename": "enceladus-infrared-ratio-shadow-alpha@2x.webp",
+      "bytes": 268880,
+      "sha256": "9d6d5493aa6ef24114246dc79fec27058da0110db7b9aa5df1fc46d0c5b8ce2d"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-infrared-ratio-shadow@2x.webp",
       "bytes": 155720,
       "sha256": "161d3277b1007a6d0a3e58c4c945da114eab3fa835e4882f93729e89410aedd3"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-infrared-ratio-surface-alpha@2x.webp",
+      "bytes": 173110,
+      "sha256": "2932896d87397346e2299395501d7a0e1cdd9c5cc39604ac718d6c7551e7d493"
     },
     {
       "location": "public",
@@ -81,9 +117,21 @@
     },
     {
       "location": "public",
+      "filename": "enceladus-normal-shadow-alpha@2x.webp",
+      "bytes": 1154282,
+      "sha256": "25071bbf7281dac53381bc1b5110f00f75895a83ca52d6352d85b9ee7b1155bf"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-normal-shadow@2x.webp",
       "bytes": 902544,
       "sha256": "75ec537fc6c3d056625e7ba75d7af19c9fb9e3f4a2d8d79a37da5de2a78d84ea"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-normal-surface-alpha@2x.webp",
+      "bytes": 2459500,
+      "sha256": "cdb4c72eca5cbfc36ab684e048bd617d7a269c1ca795dc0fc51f2a176decf3b7"
     },
     {
       "location": "public",
@@ -99,9 +147,21 @@
     },
     {
       "location": "public",
+      "filename": "enceladus-shape-shadow-alpha@2x.webp",
+      "bytes": 807600,
+      "sha256": "4d7e2670f458177187c2da6634c1c08eb0d738048bb24aff89ac4c4415f1fdac"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-shape-shadow@2x.webp",
       "bytes": 109578,
       "sha256": "e137fd6552e626972622a3d569c8ff2d800a8653ef60505339f69dbef85f8ac0"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-shape-surface-alpha@2x.webp",
+      "bytes": 803776,
+      "sha256": "3c000636741b91ce6453604775d8290cab656332d069cb49aa57b99f49931267"
     },
     {
       "location": "public",
@@ -190,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1592513,
-      "sha256": "0098bd46328e53bb587c0cefb03e8ee449f6153fb37ea6ed2154e9fa949db43a"
+      "bytes": 1594217,
+      "sha256": "b8ad3ef453b63378737e8d7fcfab8a3ab5c27c6827e4f9040dd23ecd2caccb22"
     },
     {
       "location": "prepared",

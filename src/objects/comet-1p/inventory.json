@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-1p-giotto-shadow-alpha@2x.webp",
+      "bytes": 320330,
+      "sha256": "352e58444f216bd7ca44695e1d95bfbcaf2417fd145de176052dcbe9c9f10e64"
+    },
+    {
+      "location": "public",
       "filename": "comet-1p-giotto-shadow@2x.webp",
       "bytes": 59286,
       "sha256": "bfc3148e1f6ace32f9538cfe1325206b446f9728330c98406ca38058a2583ce4"
+    },
+    {
+      "location": "public",
+      "filename": "comet-1p-giotto-surface-alpha@2x.webp",
+      "bytes": 326662,
+      "sha256": "8f844e4dcddd8aca73ab6a33a0b207c85d59f958d24d5452d8aadd33d034468b"
     },
     {
       "location": "public",
@@ -21,9 +33,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-1p-model-shadow-alpha@2x.webp",
+      "bytes": 306864,
+      "sha256": "66c51d9543fce920b43243887331f9b5d2ec96aa920d2c53b955bbc912628d9e"
+    },
+    {
+      "location": "public",
       "filename": "comet-1p-model-shadow@2x.webp",
       "bytes": 41356,
       "sha256": "0910743d25462bee3f7090047687e873edbef08d6e9ad92d9b8cc9d472188df3"
+    },
+    {
+      "location": "public",
+      "filename": "comet-1p-model-surface-alpha@2x.webp",
+      "bytes": 293702,
+      "sha256": "d21701fc248b48a7cc7b31748fb95e23b33f182bd456db3f35a1cc779d485e51"
     },
     {
       "location": "public",
@@ -82,8 +106,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 934526,
-      "sha256": "cc12193da8ef166f011200387f4481ee3d511418830c11c87df2d17620ae1428"
+      "bytes": 935170,
+      "sha256": "dabfc585e56e864c70657cf2e924aaa396e4b8e6b4a0e641edd01778cbef9a82"
     },
     {
       "location": "prepared",

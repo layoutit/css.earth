@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "datura-elevation-shadow-alpha@2x.webp",
+      "bytes": 536580,
+      "sha256": "aa2d2235978822f92f1e0880884217d60964d85bac322582b4f374e8b58d242c"
+    },
+    {
+      "location": "public",
       "filename": "datura-elevation-shadow@2x.webp",
       "bytes": 137736,
       "sha256": "c828f5102beff6dd82892e2f00282e1ec962142f96b0b54ba6d464f252384bae"
+    },
+    {
+      "location": "public",
+      "filename": "datura-elevation-surface-alpha@2x.webp",
+      "bytes": 585728,
+      "sha256": "14468b3f49e3dd9f50d0b51895c1d1dff510604f925cb403c1be27d89233caa8"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "datura-shape-shadow-alpha@2x.webp",
+      "bytes": 446902,
+      "sha256": "c81a2d842bb468bdd166c9a0314ae092be10405c4cd4e8ec5ad4d02baad0b271"
+    },
+    {
+      "location": "public",
       "filename": "datura-shape-shadow@2x.webp",
       "bytes": 59884,
       "sha256": "d1e5b0310bd220a797240ca357ab49236d22a322a72ae2c1a481302ed3fa5882"
+    },
+    {
+      "location": "public",
+      "filename": "datura-shape-surface-alpha@2x.webp",
+      "bytes": 440198,
+      "sha256": "8a250c14b40dfbf1660f71b61b5466f99e1831e701c86c2edd27cc24b02e7385"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749855,
-      "sha256": "4e3a029ddc0f1c9242b0f1bfaac6431435253fa1ddba181014973b7dc7658cf4"
+      "bytes": 750507,
+      "sha256": "1ca415c15b21bcf567ba3b89be064419b4181c0994338f3beba07672a271d57c"
     },
     {
       "location": "prepared",

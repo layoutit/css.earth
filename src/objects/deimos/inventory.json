@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "deimos-albedo-shadow-alpha@2x.webp",
+      "bytes": 2613000,
+      "sha256": "b16fe3fade67afe426157d504b936689d584e8e1a88927ab784fc1026fc32b76"
+    },
+    {
+      "location": "public",
       "filename": "deimos-albedo-shadow@2x.webp",
       "bytes": 1285026,
       "sha256": "6214ce40253e1c2200ed22857869ef132c509186297e40dfcf323ac36cd7b505"
+    },
+    {
+      "location": "public",
+      "filename": "deimos-albedo-surface-alpha@2x.webp",
+      "bytes": 2535194,
+      "sha256": "5d5852ca97c57bbfd72fd03d1851fbfc21c908b05498640a04d64852912ec5aa"
     },
     {
       "location": "public",
@@ -33,9 +45,21 @@
     },
     {
       "location": "public",
+      "filename": "deimos-elevation-shadow-alpha@2x.webp",
+      "bytes": 1191666,
+      "sha256": "45b10a92804347fd5eec48b17edd4345d817ced7a292bc404e92f1518708e816"
+    },
+    {
+      "location": "public",
       "filename": "deimos-elevation-shadow@2x.webp",
       "bytes": 227348,
       "sha256": "1625608663c18bee4c9c5ab06cc343016918f6123a8cc4263c95ec4db4c71e7b"
+    },
+    {
+      "location": "public",
+      "filename": "deimos-elevation-surface-alpha@2x.webp",
+      "bytes": 1320762,
+      "sha256": "0f65dc6f034ca303689bf70d0e5ae7f693014156192cc13e03cb4a9c35838cb4"
     },
     {
       "location": "public",
@@ -57,9 +81,21 @@
     },
     {
       "location": "public",
+      "filename": "deimos-normal-shadow-alpha@2x.webp",
+      "bytes": 1122934,
+      "sha256": "84d6cbf43e588058c27fdb182d96517a1495e2dbd4a51d235adcea832047d68f"
+    },
+    {
+      "location": "public",
       "filename": "deimos-normal-shadow@2x.webp",
       "bytes": 251492,
       "sha256": "66474962db12dd542cef7b7bb008c05b5694c9e0539611739e5edc4f3a079943"
+    },
+    {
+      "location": "public",
+      "filename": "deimos-normal-surface-alpha@2x.webp",
+      "bytes": 1296062,
+      "sha256": "13a18734e12ef685b81607ebe3529758a738a8e8486b8c24ec0effce3b46a9a7"
     },
     {
       "location": "public",
@@ -81,9 +117,21 @@
     },
     {
       "location": "public",
+      "filename": "deimos-slope-shadow-alpha@2x.webp",
+      "bytes": 2901988,
+      "sha256": "56cd3249fcdc4340978aa8c72b0745d1ebf77b48a717fae115134f427be4a5a7"
+    },
+    {
+      "location": "public",
       "filename": "deimos-slope-shadow@2x.webp",
       "bytes": 1525038,
       "sha256": "652178bdbcf88efaa065b5dff70b1408629b7ba6b79ecfd7ec50e653bb868f30"
+    },
+    {
+      "location": "public",
+      "filename": "deimos-slope-surface-alpha@2x.webp",
+      "bytes": 3164440,
+      "sha256": "d3a017bd0b4aaafb70e92ba9edb51b81647a408914555e5c0ad4f01dcf5bfef0"
     },
     {
       "location": "public",
@@ -166,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1272533,
-      "sha256": "a5e229cbc1db3291da1a321683248e0d7b7f13ddc47b3103997bf84002d11484"
+      "bytes": 1273761,
+      "sha256": "787417be8cc8eb755c45091c070139ab80e2c16e312c8303670ba8b838860221"
     },
     {
       "location": "prepared",

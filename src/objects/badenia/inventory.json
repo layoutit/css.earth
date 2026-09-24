@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "badenia-elevation-shadow-alpha@2x.webp",
+      "bytes": 484850,
+      "sha256": "d57eae1268301e819737b888066151e71ae7ddd0ecd5f17a16adf58495028789"
+    },
+    {
+      "location": "public",
       "filename": "badenia-elevation-shadow@2x.webp",
       "bytes": 139636,
       "sha256": "0651300cc45b069bee1b9dfa15dd243201f6154ffb4f517b0eeac193fcb5da03"
+    },
+    {
+      "location": "public",
+      "filename": "badenia-elevation-surface-alpha@2x.webp",
+      "bytes": 544178,
+      "sha256": "66f432890b1a3dac6a8851190a028887f8321353fde4c9470ffe99b05027fd1a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "badenia-shape-shadow-alpha@2x.webp",
+      "bytes": 395430,
+      "sha256": "0658dbf9215eaf6222c7b542afce8ab33384d43a488e2dcc5d49a34322837163"
+    },
+    {
+      "location": "public",
       "filename": "badenia-shape-shadow@2x.webp",
       "bytes": 58028,
       "sha256": "10714944e3dc7a6670b2fafd46edd8325180d4906d73f085f7d9d4abf8bdba71"
+    },
+    {
+      "location": "public",
+      "filename": "badenia-shape-surface-alpha@2x.webp",
+      "bytes": 387950,
+      "sha256": "b06e6e5b42cb356814fa9ef168fbdcca2ec352d0f8185b382e2463f6a58f7bb2"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750513,
-      "sha256": "a8786ee7bca9780f7bc149b41c49822db7ca68af8496177009fef68b81660ccd"
+      "bytes": 751173,
+      "sha256": "005ec2e0c4c9a11b66cf0596db3d3439f438d0545f6c4a91df7d92a1f4f8de52"
     },
     {
       "location": "prepared",
