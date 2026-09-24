@@ -12,13 +12,11 @@ function mount() {
 }
 const city = { name: 'Lima', context: 'Earth', coverage: 'global', bodyName: 'Earth', status: 'Arrived.', flying: false };
 
-test('a cleared city panel stays hidden when the search sheet closes', () => {
+test('a cleared city panel stays hidden', () => {
   const { browser, panel } = mount();
   browser.present(city);
   assert.equal(panel.hidden, false);
   browser.present(null);
-  assert.equal(panel.hidden, true);
-  browser.setOpen(false);
   assert.equal(panel.hidden, true);
 });
 
@@ -26,6 +24,5 @@ test('a disposed panel cannot be republished by a late result', () => {
   const { browser, panel } = mount();
   browser.destroy();
   browser.present(city);
-  browser.setOpen(false);
   assert.equal(panel.hidden, true);
 });

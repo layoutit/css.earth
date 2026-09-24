@@ -1,5 +1,5 @@
 import { createObjectCatalogue } from './object-catalogue.mts';
-import { createSelectionPresentation, setPanelHidden } from './selection-presentation.mts';
+import { createSelectionPresentation } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
 import type { SceneSubject } from './scene/scene-selection.mts';
@@ -7,7 +7,7 @@ import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement } from './browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
-import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
+import { presentOverviewResults, createSearchPresentation } from './search-results-presentation.mts';
 import { createNavigationTreeController } from './navigation/navigation-tree-client.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
@@ -40,27 +40,20 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const trigger = documentTarget.querySelector(".object-sidebar-view-all");
   const information = documentTarget.querySelector(".object-information-panel");
   const browser = documentTarget.querySelector(".object-browser");
-  const selectedContent = documentTarget.querySelector(".object-selected-content");
-  const empty = documentTarget.querySelector(".object-empty");
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
       !(trigger instanceof windowTarget.HTMLButtonElement) ||
       !(information instanceof windowTarget.HTMLElement) ||
-      !(browser instanceof windowTarget.HTMLElement) ||
-      !(selectedContent instanceof windowTarget.HTMLElement) ||
-      !(empty instanceof windowTarget.HTMLElement)) {
+      !(browser instanceof windowTarget.HTMLElement)) {
     throw new Error("Object shell object browser is incomplete.");
   }
+  const searchPresentation = createSearchPresentation(documentTarget);
   const navigationRoot = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   const navigation = navigationRoot ? createNavigationTreeController(navigationRoot, windowTarget) : null;
   lifetime.onDispose(() => navigation?.destroy());
-  const selectNavigation = (current: string) => {
-    if (!navigationRoot) return;
-    // A selection change (a flight arriving) must not bring the tree back over typed results.
-    navigationRoot.hidden = showingSearchResults;
-    void navigation?.select(current);
-  };
-  const presentation = createSelectionPresentation(documentTarget, { windowTarget, selectNavigation });
+  const presentation = createSelectionPresentation(documentTarget, {
+    windowTarget, selectNavigation: current => { void navigation?.select(current); },
+  });
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const catalogue = createObjectCatalogue({ documentTarget, windowTarget, browser, resultsPanel, lifetime,
     onLoad() {
@@ -69,7 +62,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     },
   });
   information.dataset.retained = '';
-  const setEmptyHidden = (hidden: boolean) => { empty.hidden = hidden || !catalogue.loaded; };
+  const setEmptyHidden = (hidden: boolean) => searchPresentation.setEmptyHidden(hidden, catalogue.loaded);
   const collapseSolarSystemBranches = () => {
     if (!navigationRoot) return;
     for (const branch of navigationRoot.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth]:not([data-atlas-depth="0"])')) {
@@ -110,13 +103,10 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   let open = searchCard.hasAttribute('data-search-submitted');
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
   // A pill's classification highlights its bodies in the scene; other searches clear it.
-  // Filtering resets then re-marks the category, so report only the settled value.
+  // Coalesce synchronous selection updates before notifying the scene.
   let reportedCategory: string | null = null, pendingCategory: string | null = null, reportQueued = false;
   const markCategory = (classification: string | null | undefined = null) => {
-    for (const button of categoryButtons) {
-      button.ariaPressed = String(button.dataset.searchClassification === classification);
-    }
-    pendingCategory = categoryButtons.some(button => button.dataset.searchClassification === classification) ? classification ?? null : null;
+    pendingCategory = searchPresentation.markCategory(classification);
     if (reportQueued) return;
     reportQueued = true;
     queueMicrotask(() => {
@@ -128,29 +118,30 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   };
   let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
   const presentSelection = () => catalogue.setSelection(presentation.present(currentSubject(), catalogue.sources));
+  const presentBrowser = () => {
+    searchPresentation.present(open, showingSearchResults);
+    browser.toggleAttribute('data-navigation-filtered', open && showingSearchResults);
+    trigger.ariaExpanded = search.ariaExpanded = String(open);
+    trigger.title = trigger.ariaLabel = open ? 'Collapse celestial objects' : 'Browse celestial objects';
+  };
   const filter = (resetScroll = true) => {
     const searching = search.value.trim().length > 0;
     const query = searching ? search.value.trim().toLocaleLowerCase("en") : "";
     if (query === filteredQuery && searching === showingSearchResults) {
-      setPanelHidden(browser, false);
+      presentBrowser();
       markCategory(filteredClassification);
       return;
     }
     filteredQuery = query;
     showingSearchResults = searching;
     const visibleOverviews = presentOverviewResults(browser, searching ? query : '');
-    presentSearchResults(browser, searching);
-    if (searching) browser.setAttribute('data-navigation-filtered', '');
-    else browser.removeAttribute('data-navigation-filtered');
+    presentBrowser();
     filteredClassification = null;
     if (resetScroll) resetResultsScroll();
-    markCategory();
-    destinations?.setOpen(true);
-    browser.ariaLabel = searching ? 'Search results' : 'Celestial objects';
-    setPanelHidden(browser, false);
     if (!searching) {
       visibleObjects = 1;
-      empty.hidden = true;
+      markCategory();
+      setEmptyHidden(true);
       void navigation?.reset();
       void features?.search('');
       return;
@@ -169,21 +160,15 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     // Only an actual open/close transition may reset a scrolled result list.
     if (open !== next) resetResultsScroll();
     open = next;
-    trigger.ariaExpanded = String(next);
-    search.ariaExpanded = String(next);
-    setPanelHidden(selectedContent, next);
-    trigger.title = trigger.ariaLabel = next ? 'Collapse celestial objects' : 'Browse celestial objects';
     const currentUrl = new URL(windowTarget.location.href);
     for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
       input.value = currentUrl.searchParams.get(input.name) ?? '';
       input.disabled = !input.value;
     }
     if (next) void catalogue.ensureLoaded();
-    destinations?.setOpen(next);
     if (next) filter();
     else {
-      setPanelHidden(browser, true);
-      browser.removeAttribute('data-navigation-filtered');
+      presentBrowser();
       void navigation?.reset();
       catalogue.clearWindow();
       // Closing clears the rendered window, so the next open must filter again even for the same query.
@@ -351,7 +336,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       events.abort();
       destinations?.destroy();
       catalogue.showInlineRows();
-      empty.hidden = true;
+      setEmptyHidden(true);
       render(false);
     },
   });

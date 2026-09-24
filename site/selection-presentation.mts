@@ -1,19 +1,13 @@
 import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
-import { requiredElement, type BrowserWindow } from './browser-types.mts';
+import { requiredElement, setPanelHidden, type BrowserWindow } from './browser-types.mts';
 import type { CatalogueSelection } from './catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragment.mts';
-
-export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
-  if (panel.hidden !== hidden) panel.hidden = hidden;
-  const inert = hidden || panel.getAttribute('aria-busy') === 'true';
-  if (panel.hasAttribute('inert') !== inert) panel.toggleAttribute('inert', inert);
-}
 
 /** Present the selected subject in the retained cards and navigation rows. */
 export function createSelectionPresentation(documentTarget: Document, {

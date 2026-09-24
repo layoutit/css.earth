@@ -19,7 +19,7 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   const events = new AbortController();
   const currentObjectId = () => documentTarget.body.dataset.objectShell || objectId;
   let inFlight: AbortController | null = null;
-  let matches: FindResult[] = [], query = documentTarget.querySelector<HTMLInputElement>('.object-sidebar-search')?.value.trim().toLocaleLowerCase('en') ?? '', revision = 0, destroyed = false;
+  let matches: FindResult[] = [], query = documentTarget.querySelector<HTMLInputElement>('.object-sidebar-search')?.value.trim().toLocaleLowerCase('en') ?? '';
   function clearRows() {
     matches = [];
     presentFeatureResults(root, matches);
@@ -33,27 +33,28 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
     return parseFindResults(await response.json());
   }
   async function search(value: string) {
-    if (destroyed) return;
-    if (query !== value) { clearRows(); root.removeAttribute('open'); }
+    if (events.signal.aborted) return;
+    if (query !== value) { matches = []; root.removeAttribute('open'); }
     query = value;
-    const request = ++revision;
-    inFlight?.abort(); inFlight = null;
-    if (!value.trim() || !pin) { root.hidden = true; clearRows(); onResults(0); return; }
-    root.hidden = matches.length === 0;
+    inFlight?.abort();
+    const controller = inFlight = new AbortController();
+    const signal = AbortSignal.any([events.signal, controller.signal]);
+    if (!value.trim() || !pin) { clearRows(); onResults(0); return; }
+    presentFeatureResults(root, matches);
     try {
       // Typing faster than the page draws queues one search per keystroke. Wait for the next frame, by which time every
       // queued keystroke has arrived, and ask only for the newest text.
       await nextFrame(documentTarget);
-      if (destroyed || request !== revision) return;
-      const controller = inFlight = new AbortController();
-      const results = await find(value, AbortSignal.any([events.signal, controller.signal]));
-      if (destroyed || request !== revision) return;
+      if (signal.aborted) return;
+      const results = await find(value, signal);
+      if (signal.aborted) return;
       matches = results.slice(0, buttons.length);
       presentFeatureResults(root, matches);
       onResults(matches.length);
     } catch {
-      if (destroyed || request !== revision) return;
-      presentFeatureResults(root, [], 'Feature names could not load. Change your search to retry.');
+      if (signal.aborted) return;
+      matches = [];
+      presentFeatureResults(root, matches, 'Feature names could not load. Change your search to retry.');
       onResults(1);
     }
   }
@@ -63,8 +64,8 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
     onSelected(matches[row]!);
   }, { signal: events.signal }));
   return Object.freeze({
-    refresh() { if (!destroyed && query) void search(query); },
+    refresh() { if (!events.signal.aborted && query) void search(query); },
     search,
-    destroy() { if (destroyed) return; destroyed = true; revision++; events.abort(); clearRows(); root.hidden = true; },
+    destroy() { if (events.signal.aborted) return; events.abort(); clearRows(); },
   });
 }
