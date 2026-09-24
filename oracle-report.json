@@ -1,0 +1,192 @@
+{
+ "schema": "jankmonster-oracle@1",
+ "repo": "/Users/ekrof/Documents/Codex/2026-09-23/im-x20/work/css-earth-report-cleanup",
+ "files": [
+  "site/prepared-context-navigation.mts"
+ ],
+ "before": "1ee918fd45",
+ "after": "f2c1837c95",
+ "scenarios": 24,
+ "otherChangedFiles": [
+  "site/test/prepared-context-navigation.test.mts"
+ ],
+ "results": [
+  {
+   "name": "a saved lens link to an unavailable package still opens its actual catalogue record",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a disconnected or destroyed focus ignores its old camera owner",
+   "identical": true,
+   "records": 2,
+   "problems": []
+  },
+  {
+   "name": "a direct focus link without a saved camera frames its target immediately",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a focus link with a visible saved camera restores selection without reframing",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a focus link whose saved camera looks away reframes the named target",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a focus link whose saved camera puts the named target off-screen reframes it",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "suspension isolates camera restore publications from incoming focus history and cancels an older selection flight",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "an invalid incoming catalogue ID remains available for diagnosis after restoration publications",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "an authored framing radius takes precedence over an oversized transparent image frame",
+   "identical": true,
+   "records": 2,
+   "problems": []
+  },
+  {
+   "name": "a cluster focus uses its prepared aperture framing and source without pretending it has galaxy membership",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "volume focus uses its authored framing radius before transparent bounds and retains an explicit catalogue override",
+   "identical": true,
+   "records": 2,
+   "problems": []
+  },
+  {
+   "name": "focused lens selection follows applied runtime state while URL restore keeps the same camera owner",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a saved lens waits for its lazy bank instead of rejecting the focus as unknown",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "invalid focused lenses retain their diagnostic URL and never apply an arbitrary bank",
+   "identical": true,
+   "records": 2,
+   "problems": []
+  },
+  {
+   "name": "a lens query without a focus is removed and focused bank subscriptions are released on destruction",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "an image-layer focus exposes its single optical dataset without volume-only actions",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "cold native focus waits for the real bank framing before choosing a destination",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "ordinary cold selection waits for the same authored framing and cancellation prevents stale focus",
+   "identical": true,
+   "records": 2,
+   "problems": []
+  },
+  {
+   "name": "cold saved camera keeps its pose while waiting for an explicitly selected lens",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a failed bank load reports its actual error and never falls back to an inaccurate destination",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a later saved restore supersedes a pending native focus without a delayed flight",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "selecting a catalogue focus replaces the overview it supersedes",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "shared context receives the exact authoritative focus on restore, switch and clear",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  },
+  {
+   "name": "a focus waiting for its lazy bank still owns the URL, and resolves to one state",
+   "identical": true,
+   "records": 1,
+   "problems": []
+  }
+ ],
+ "coverage": [
+  {
+   "file": "site/prepared-context-navigation.mts",
+   "side": "after",
+   "mapped": true,
+   "changedLines": 30,
+   "changedCodeLines": 26,
+   "executed": 26,
+   "missed": []
+  },
+  {
+   "file": "site/prepared-context-navigation.mts",
+   "side": "before",
+   "mapped": true,
+   "changedLines": 27,
+   "changedCodeLines": 27,
+   "executed": 27,
+   "missed": []
+  }
+ ],
+ "mutants": {
+  "generated": 12,
+  "killed": 12,
+  "survived": [],
+  "invalid": 0
+ },
+ "verdict": "identical",
+ "limits": [
+  "Equivalence holds for these scenarios only. A match proves the traces the scenarios record are equal, not that every behaviour is.",
+  "Files other than the targets come from the working tree on both sides; otherChangedFiles lists any that also differ.",
+  "Coverage is V8 block coverage mapped through the bundle source map; a line counts as run when any of its generated code ran."
+ ],
+ "changedCodeCoverage": 1
+}

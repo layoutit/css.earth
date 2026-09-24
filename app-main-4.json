@@ -1,0 +1,52 @@
+{
+ "direct-m42": {
+  "record": [
+   {
+    "step": "loaded",
+    "url": "/earth/?focus=m42&focusLens=eso-optical",
+    "focus": "m42",
+    "focusVisible": true,
+    "name": "Orion Nebula",
+    "selection": "prepared-focus"
+   }
+  ],
+  "errors": []
+ },
+ "search-switch-clear": {
+  "record": [
+   {
+    "step": "loaded",
+    "url": "/earth/",
+    "focus": null,
+    "focusVisible": false,
+    "name": "",
+    "selection": "object"
+   },
+   {
+    "step": "picked",
+    "url": "/earth/?focus=andromeda_16",
+    "focus": "andromeda_16",
+    "focusVisible": true,
+    "name": "Andromeda XVI",
+    "selection": "prepared-focus"
+   },
+   {
+    "step": "switched",
+    "url": "/earth/?focus=m42&focusLens=eso-optical",
+    "focus": "m42",
+    "focusVisible": true,
+    "name": "Orion Nebula",
+    "selection": "prepared-focus"
+   },
+   {
+    "step": "cleared",
+    "url": "/sun/?overview=local-group",
+    "focus": "m42",
+    "focusVisible": false,
+    "name": "Orion Nebula",
+    "selection": "local-group"
+   }
+  ],
+  "errors": []
+ }
+}
