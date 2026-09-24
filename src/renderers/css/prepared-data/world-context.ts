@@ -13,6 +13,16 @@ export interface PreparedContextPoint {
   readonly id: string;
   readonly name: string;
   readonly color: string;
+  /** The colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour; absent, the
+   * world's default. Set inline on its elements, so no page carries a stylesheet rule per body. */
+  readonly contextColor?: string;
+  /** A star, black hole or planet: its caption is in capitals. */
+  readonly labelCase?: 'upper';
+  /** A packaged body's catalogue classification and system name, so a page knows its systems without the object registry. */
+  readonly classification?: string;
+  readonly systemName?: string;
+  /** Its catalogue discovery record, which the application reads for world visibility; opaque to the renderer. */
+  readonly discovery?: Readonly<Record<string, unknown>>;
   readonly positionM: PositionM;
   readonly radiusM: number;
 }
@@ -41,7 +51,7 @@ export interface PreparedContextBody extends PreparedContextPoint {
   /** A placed star measured to be bound to another with no measured orbit: its host and the pair's centre of mass. */
   readonly boundTo?: { readonly hostId: string; readonly centerM: PositionM };
   /** The members a system overview frames. The full context also carries its camera candidates; the browser's summary
-   * does not, and reads them from `world-system-views.json` (`parsePreparedSystemViews`) when navigation needs them. */
+   * does not, and reads a system's from `system-views/<id>.json` (`parsePreparedSystemView`) when navigation frames it. */
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates?: readonly PreparedSystemViewCandidate[] };
   readonly orbit?: PreparedContextOrbit;
@@ -97,8 +107,9 @@ export interface PreparedWorldContext {
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
-  /** The summary pins the binary orbit bank that holds its orbits' paths (`decodeWorldOrbits`). */
-  readonly orbitBank?: { readonly byteLength: number };
+  /** The summary pins each orbit centre's binary orbit bank by byte length (`decodeWorldOrbitBank`); an orbit's bank is its
+   * `centerBodyId`. */
+  readonly orbitBanks?: Readonly<Record<string, number>>;
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -127,7 +138,21 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !/^#[a-f0-9]{6}$/i.test(color)) throw new TypeError('Invalid context point identity or color.');
   return Object.freeze({ id, color, name: text(input.name, 'point name'),
     // A body drawn from its astronomy record may have no measured radius: 0, drawn as its circle only.
-    positionM: vector(input.positionM, 'point position'), radiusM: input.unpackaged === true && input.radiusM === 0 ? 0 : positive(input.radiusM, `point ${id} radius`) });
+    positionM: vector(input.positionM, 'point position'), radiusM: input.unpackaged === true && input.radiusM === 0 ? 0 : positive(input.radiusM, `point ${id} radius`),
+    ...(input.contextColor === undefined ? {} : { contextColor: (() => {
+      const hex = text(input.contextColor, `point ${id} context colour`);
+      if (!/^#[a-f0-9]{6}$/i.test(hex)) throw new TypeError(`Context point ${id} colour ${hex} is not #rrggbb.`);
+      return hex;
+    })() }),
+    ...(input.labelCase === undefined ? {} : input.labelCase === 'upper' ? { labelCase: 'upper' as const }
+      : (() => { throw new TypeError(`Context point ${id} label case is ${String(input.labelCase)}, not upper.`); })()),
+    ...(input.classification === undefined ? {} : { classification: (() => {
+      const value = text(input.classification, `point ${id} classification`);
+      if (!/^[a-z][a-z-]*$/.test(value)) throw new TypeError(`Context point ${id} classification ${value} is invalid.`);
+      return value;
+    })() }),
+    ...(input.systemName === undefined ? {} : { systemName: text(input.systemName, `point ${id} system name`) }),
+    ...(input.discovery === undefined ? {} : { discovery: Object.freeze({ ...record(input.discovery, `point ${id} discovery`) }) }) });
 }
 export interface PreparedSystemViewCandidate { readonly cameraToReference: readonly number[];
   readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }
@@ -158,17 +183,14 @@ function parseSystemView(value: unknown, withCandidates = true): PreparedContext
   const members = { memberIds: Object.freeze(memberIds), memberRadiiM: Object.freeze(memberRadiiM) };
   return Object.freeze(withCandidates ? { ...members, candidates: parseSystemViewCandidates(view.candidates, memberIds.length, memberIds.join(',')) } : members);
 }
-/** `world-system-views.json`: each summary system view's camera candidates, by host id. */
-export function parsePreparedSystemViews(value: unknown, plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>): ReadonlyMap<string, { readonly candidates: readonly PreparedSystemViewCandidate[] }> {
-  const input = record(value, 'system views', ['schema', 'views']);
-  if (input.schema !== 'cssearth-world-system-views@1') throw new TypeError(`Unsupported prepared system views: ${String(input.schema)}.`);
-  const views = record(input.views, 'system views by host');
-  const hosts = new Map([plan.focus, ...plan.bodies].flatMap(body => body.systemView ? [[body.id, body.systemView] as const] : []));
-  if (Object.keys(views).length !== hosts.size) throw new TypeError(`Prepared system views name ${Object.keys(views).length} hosts; the world context has ${hosts.size}.`);
-  return new Map([...hosts].map(([id, view]) => {
-    if (!Object.hasOwn(views, id)) throw new TypeError(`Prepared system views lack ${id}.`);
-    return [id, Object.freeze({ candidates: parseSystemViewCandidates(views[id], view.memberIds.length, id) })] as const;
-  }));
+/** `system-views/<host id>.json`: one system's camera candidates, checked against that host's system view in the summary. */
+export function parsePreparedSystemView(value: unknown, plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>, id: string): { readonly candidates: readonly PreparedSystemViewCandidate[] } {
+  const input = record(value, 'system view', ['schema', 'id', 'candidates']);
+  if (input.schema !== 'cssearth-world-system-view@1') throw new TypeError(`Unsupported prepared system view for ${id}: ${String(input.schema)}.`);
+  if (input.id !== id) throw new TypeError(`Prepared system view for ${id} names ${String(input.id)}.`);
+  const host = [plan.focus, ...plan.bodies].find(body => body.id === id);
+  if (!host?.systemView) throw new TypeError(`The world context has no system view for ${id}.`);
+  return Object.freeze({ candidates: parseSystemViewCandidates(input.candidates, host.systemView.memberIds.length, id) });
 }
 /** Classification views frame prepared bodies by position; members must match those bodies. */
 function parseClassificationViews(value: unknown, bodies: readonly PreparedContextBody[]) {
@@ -187,8 +209,8 @@ function parseClassificationViews(value: unknown, bodies: readonly PreparedConte
   return Object.freeze(Object.fromEntries(entries));
 }
 function focusPoint(value: unknown, withCandidates: boolean): PreparedContextFocus {
-  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
-  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
+  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery']);
+  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery']);
   const systemView = parseSystemView(input.systemView, withCandidates);
   const base = systemView ? Object.freeze({ ...raw, systemView }) : raw;
   if (input.pointSource === undefined) return base;
@@ -378,15 +400,17 @@ export function orbitVertices(orbit: Pick<PreparedContextOrbitGeometry, 'vertice
     [orbit.verticesM[index * 3]!, orbit.verticesM[index * 3 + 1]!, orbit.verticesM[index * 3 + 2]!] as PositionM);
 }
 const WORLD_ORBITS_MAGIC = 0x4f575343, WORLD_ORBITS_VERSION = 1;
-/** The planner's full context from the summary plan and its pinned binary orbit bank. The bank's sections become
- * typed-array views over the transferred bytes; each orbit passes the same checks as the JSON file. */
-export function decodeWorldOrbits(plan: PreparedWorldContext, bytes: ArrayBuffer): PreparedWorldContextGeometry {
-  if (!plan.orbitBank || bytes.byteLength !== plan.orbitBank.byteLength) throw new TypeError(`Orbit bank is ${bytes.byteLength} bytes; its summary says ${plan.orbitBank?.byteLength}.`);
+/** One orbit centre's paths from its pinned binary bank: the bank's sections become typed-array views over the
+ * transferred bytes, and each orbit passes the same checks as the JSON file. The bank must hold exactly the orbits the
+ * summary centres on `centreId`. */
+export function decodeWorldOrbitBank(plan: PreparedWorldContext, centreId: string, bytes: ArrayBuffer): ReadonlyMap<string, PreparedContextOrbitGeometry> {
+  const expected = plan.orbitBanks?.[centreId];
+  if (expected === undefined || bytes.byteLength !== expected) throw new TypeError(`Orbit bank ${centreId} is ${bytes.byteLength} bytes; its summary says ${expected}.`);
   const view = new DataView(bytes);
-  if (view.getUint32(0, true) !== WORLD_ORBITS_MAGIC || view.getUint32(4, true) !== WORLD_ORBITS_VERSION) throw new TypeError('Unsupported orbit bank.');
+  if (view.getUint32(0, true) !== WORLD_ORBITS_MAGIC || view.getUint32(4, true) !== WORLD_ORBITS_VERSION) throw new TypeError(`Unsupported orbit bank ${centreId}.`);
   const headerLength = view.getUint32(8, true), dataStart = 12 + headerLength + (8 - (12 + headerLength) % 8) % 8;
   const header = record(JSON.parse(new TextDecoder().decode(new Uint8Array(bytes, 12, headerLength))), 'orbit bank header', ['schema', 'bodies']);
-  if (header.schema !== 'cssearth-world-orbits@1') throw new TypeError('Unsupported orbit bank.');
+  if (header.schema !== 'cssearth-world-orbits@1') throw new TypeError(`Unsupported orbit bank ${centreId}.`);
   const section = <T extends Float64Array | Uint32Array>(value: unknown, type: { new(buffer: ArrayBuffer, offset: number, length: number): T; BYTES_PER_ELEMENT: number }, label: string): T => {
     const [offset, length] = numbers(value, label, 2);
     if (!Number.isSafeInteger(offset) || !Number.isSafeInteger(length) || offset < 0 || length < 0 || offset % 8 !== 0 ||
@@ -397,11 +421,11 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, bytes: ArrayBuffer
     const body = record(value, 'orbit bank body', ['id', 'vertices', 'trail', 'activeChords', 'extentChords', 'bodyVertexIndex', 'trailModel', 'levels']);
     return [text(body.id, 'orbit bank body id'), body] as const;
   }));
-  const renderedIds = new Set(plan.bodies.map(body => body.id));
-  const bodies = plan.bodies.map<PreparedContextGeometryBody>(body => {
-    if (!body.orbit) return body as PreparedContextGeometryBody;
+  const renderedIds = new Set(plan.bodies.map(body => body.id)), orbits = new Map<string, PreparedContextOrbitGeometry>();
+  for (const body of plan.bodies) {
+    if (!body.orbit || body.orbit.centerBodyId !== centreId) continue;
     const path = paths.get(body.id);
-    if (!path) throw new TypeError(`${body.id}: orbit bank lacks its path.`);
+    if (!path) throw new TypeError(`${body.id}: orbit bank ${centreId} lacks its path.`);
     paths.delete(body.id);
     const { orbit } = body;
     const geometry = validateOrbitGeometry({ centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM,
@@ -415,11 +439,22 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, bytes: ArrayBuffer
         return { vertexIndices: section(level.vertexIndices, Uint32Array, `${body.id} level vertices`), trail: section(level.trail, Float64Array, `${body.id} level trail`),
           activeChords: section(level.activeChords, Uint32Array, `${body.id} level chords`), deviationM: finite(level.deviationM, `${body.id} level deviation`) };
       }) } } : {}) }, body.positionM, plan.focus.id, renderedIds, body.id);
-    if (geometry.vertexCount !== orbit.vertexCount || geometry.fullTrail !== orbit.fullTrail) throw new TypeError(`${body.id}: orbit bank differs from its summary.`);
-    return Object.freeze({ ...body, orbit: geometry });
+    if (geometry.vertexCount !== orbit.vertexCount || geometry.fullTrail !== orbit.fullTrail) throw new TypeError(`${body.id}: orbit bank ${centreId} differs from its summary.`);
+    orbits.set(body.id, geometry);
+  }
+  if (paths.size) throw new TypeError(`Orbit bank ${centreId} carries paths for bodies it does not centre: ${[...paths.keys()].join(', ')}.`);
+  return orbits;
+}
+/** The planner's full context from the summary plan and every centre's bank, for build tools and tests. */
+export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap<string, ArrayBuffer>): PreparedWorldContextGeometry {
+  const orbits = new Map([...banks].flatMap(([id, bytes]) => [...decodeWorldOrbitBank(plan, id, bytes)]));
+  const bodies = plan.bodies.map(body => {
+    if (!body.orbit) return body as PreparedContextGeometryBody;
+    const orbit = orbits.get(body.id);
+    if (!orbit) throw new TypeError(`${body.id}: no bank holds its orbit.`);
+    return Object.freeze({ ...body, orbit });
   });
-  if (paths.size) throw new TypeError('Orbit bank carries paths for bodies without orbits.');
-  const { orbitBank: _pin, ...rest } = plan;
+  const { orbitBanks: _pins, ...rest } = plan;
   return Object.freeze({ ...rest, schema: 'cssearth-world-context@1', bodies: Object.freeze(bodies) });
 }
 function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
@@ -439,24 +474,24 @@ function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
 function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value) &&
       (!geometry || (value as PreparedWorldContext).schema === 'cssearth-world-context@1')) return value as PreparedWorldContext;
-  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'orbitBank', 'camera', 'volume', 'stars', 'system', 'sky']);
+  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'orbitBanks', 'camera', 'volume', 'stars', 'system', 'sky']);
   const schema = geometry ? 'cssearth-world-context@1' : 'cssearth-world-context-summary@1';
   if (input.schema !== schema) throw new TypeError('Unsupported prepared world context.');
   if (!geometry && input.classificationViews !== undefined) throw new TypeError('The world context summary carries no classification views.');
-  if (geometry && input.orbitBank !== undefined) throw new TypeError('The full world context carries its orbit paths, not a bank pin.');
-  const orbitBank = input.orbitBank === undefined ? undefined : (() => {
-    const bank = record(input.orbitBank, 'orbit bank', ['byteLength']);
-    const byteLength = positive(bank.byteLength, 'orbit bank byte length');
-    if (!Number.isSafeInteger(byteLength)) throw new TypeError('Orbit bank byte length is invalid.');
-    return Object.freeze({ byteLength });
-  })();
+  if (geometry && input.orbitBanks !== undefined) throw new TypeError('The full world context carries its orbit paths, not bank pins.');
+  const orbitBanks = input.orbitBanks === undefined ? undefined : Object.freeze(Object.fromEntries(Object.entries(record(input.orbitBanks, 'orbit banks'))
+    .map(([id, value]) => {
+      const byteLength = positive(value, `orbit bank ${id} byte length`);
+      if (!/^[a-z][a-z0-9-]*$/.test(id) || !Number.isSafeInteger(byteLength)) throw new TypeError(`Orbit bank ${id} is invalid.`);
+      return [id, byteLength] as const;
+    })));
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
   const focus = focusPoint(input.focus, geometry);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
-    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement'];
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView, geometry);
@@ -513,9 +548,15 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   }
   const objectId = text(volume.objectId, 'volume identity');
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
+  // Every orbit's centre names a pinned bank, and every pin centres an orbit.
+  if (orbitBanks) {
+    const centres = new Set(bodies.flatMap(body => body.orbit ? [body.orbit.centerBodyId] : []));
+    for (const centre of centres) if (orbitBanks[centre] === undefined) throw new TypeError(`The world context summary pins no orbit bank for centre ${centre}.`);
+    for (const id of Object.keys(orbitBanks)) if (!centres.has(id)) throw new TypeError(`Orbit bank ${id} centres no orbit.`);
+  }
   const result: PreparedWorldContext = Object.freeze({ schema, frame, focus, bodies: Object.freeze(bodies),
     ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
-    ...(classificationViews ? { classificationViews } : {}), ...(orbitBank ? { orbitBank } : {}),
+    ...(classificationViews ? { classificationViews } : {}), ...(orbitBanks ? { orbitBanks } : {}),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
     volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),

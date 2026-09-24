@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, loadSystemViews, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyCardViewAtCamera } from '../overview-context.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
@@ -17,7 +17,7 @@ import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../src/objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
 const context = parsePreparedWorldContext(contextInput);
 // Target calculation never requests native frames or queries absent shell nodes.
 const windowTarget = {} as Window;
@@ -65,7 +65,8 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
         + bound.radiusM + moon.radiusM <= radiusM * (1 + 1e-10), `${id} includes ${moon.id}`);
       assert.ok(memberIds.includes(moon.id), `${id} frames ${moon.id}`);
       for (const vertex of orbitVertices(orbit)) {
-        const point = presentWorldCamera(target, { ...frame, originM: vertex, bodyRadiusM: moon.radiusM }, viewport);
+        // A member drawn from its record has no measured radius (Sgr A*'s S-stars): it must still sit inside the frame, as a point.
+        const point = presentWorldCamera(target, { ...frame, originM: vertex, bodyRadiusM: moon.radiusM || 1 }, viewport);
         const [x, y] = required(point.centerPixels);
         assert.ok(x >= rect.left - .001 && x <= rect.right + .001 && y >= rect.top - .001 && y <= rect.bottom + .001,
           `${id}/${moon.id} complete orbit fits`);
@@ -82,7 +83,8 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
 });
 
 test('another star\'s system, reached edge-on from the Sun, opens to the shallowest prepared elevation', () => {
-  assert.deepEqual([...STELLAR_SYSTEMS].sort(), SCENE_OBJECTS.filter(object => object.classification === 'star' && object.id !== 'sun'
+  // Sgr A*'s S-stars make the black hole a system host too.
+  assert.deepEqual([...STELLAR_SYSTEMS].sort(), SCENE_OBJECTS.filter(object => (object.classification === 'star' || object.classification === 'black-hole') && object.id !== 'sun'
     && SYSTEM_VIEWS.has(object.id)).map(object => object.id).sort());
   const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   const minimum = Math.min(...SYSTEM_FRAMING_ANGLES.elevationsDegrees);

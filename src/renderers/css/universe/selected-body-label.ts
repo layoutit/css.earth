@@ -48,6 +48,7 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       if (measuredId !== body.id) {
         label.textContent = body.name;
         label.dataset.selectedBodyLabel = body.id;
+        if (body.labelCase === 'upper') label.dataset.labelCase = 'upper'; else delete label.dataset.labelCase;
         measuredId = body.id;
         width = label.offsetWidth;
         height = label.offsetHeight;

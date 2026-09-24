@@ -2,7 +2,7 @@ import type { BrowserWindow } from '../browser-types.mts';
 import { errorMessage } from '../browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { readNavigationSelection } from '../navigation/navigation-request.mts';
-import { SCENE_OBJECTS } from '../objects.mts';
+import { WORLD_OBJECTS } from '../world-objects.mts';
 import { withDataset } from '../dataset-url.mts';
 import type { createPreparedWorldNavigation, WorldHandoff } from '../prepared-world-navigation.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
@@ -20,7 +20,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function restore(session: SceneSession, handoff?: WorldHandoff) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
-    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, SCENE_OBJECTS) : null;
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
     if (initialSelection?.subject.kind === 'overview' && !initialSelection.savedView) {
       const target = navigation.overviewTarget({ scope: initialSelection.subject.overview.scope, objectId, fromId: objectId, mount });
       if (target) {
@@ -75,7 +75,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function frameLensVolume(session: SceneSession) {
     const { objectId, request, mount } = session;
     if (!mount || !session.url || request?.camera.kind === 'restore') return true;
-    const selection = readNavigationSelection(new URL(session.url), objectId, SCENE_OBJECTS);
+    const selection = readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS);
     if (selection.subject.kind !== 'object' || selection.savedView || selection.feature) return true;
     const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
     const target = volume ? navigation.lensVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;

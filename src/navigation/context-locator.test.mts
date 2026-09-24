@@ -1,13 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { contextLocatorImages } from './context-locator.mts';
-
-function decode(image: string): string {
-  const match = /^url\("data:image\/svg\+xml,(.+)"\)$/.exec(image);
-  assert.ok(match, 'Locator must be an inline SVG CSS image');
-  return decodeURIComponent(match[1]!);
-}
+import { locatorCornerPath } from '../renderers/css/universe/context-locator.ts';
 
 /** Bounding box of one `M`/`h`/`v`/`H`/`V` rectangle path. */
 function box(rect: string) {
@@ -29,14 +23,9 @@ function box(rect: string) {
 }
 
 test('locators draw four 5px corner arms with 1.5px strokes at rest and on hover', () => {
-  const [rest, hover] = contextLocatorImages('#A1b2C3').map(decode);
-  assert.match(rest!, /width="16" height="16" viewBox="0 0 16 16"/);
-  assert.match(hover!, /width="20" height="20" viewBox="0 0 20 20"/);
-  for (const svg of [rest!, hover!]) {
-    assert.match(svg, /fill="#A1b2C3"/);
-    const rects = svg.match(/M[^z]*z/g) ?? [];
+  for (const size of [16, 20]) {
+    const rects = locatorCornerPath(size).match(/M[^z]*z/g) ?? [];
     assert.equal(rects.length, 8, 'Two arms at each of the four corners');
-    const size = Number(/width="(\d+)"/.exec(svg)![1]);
     const boxes = rects.map(box);
     const horizontal = boxes.filter(b => b.width === 5 && b.height === 1.5);
     const vertical = boxes.filter(b => b.width === 1.5 && b.height === 5);
@@ -51,12 +40,6 @@ test('locators draw four 5px corner arms with 1.5px strokes at rest and on hover
       assert.equal(corners.size, 4);
     }
   }
-  assert.match(rest!, /M11 0h5v1\.5h-5z/, 'Top-right horizontal arm ends at the far edge');
-  assert.match(hover!, /M18\.5 15H20v5h-1\.5z/, 'Bottom-right vertical arm ends at the far edge');
-});
-
-test('locators accept only validated swatch colours', () => {
-  for (const colour of ['red', '#abc', '#12345g', '', 'url(x)']) {
-    assert.throws(() => contextLocatorImages(colour), /Invalid locator color/);
-  }
+  assert.match(locatorCornerPath(16), /M11 0h5v1\.5h-5z/, 'Top-right horizontal arm ends at the far edge');
+  assert.match(locatorCornerPath(20), /M18\.5 15H20v5h-1\.5z/, 'Bottom-right vertical arm ends at the far edge');
 });

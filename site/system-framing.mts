@@ -17,7 +17,7 @@ import lensVolumes from './prepared-lens-volumes.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
-import { readApplicationSystemViews } from './world-system-views.mts';
+import { readApplicationSystemView } from './world-system-views.mts';
 
 /** Camera framing consumes the prepared orbit bounds, never orbit vertices. */
 export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>) {
@@ -57,16 +57,23 @@ export const SYSTEM_CENTERS = systemCenters(context);
 /** Systems of other stars: placed stars, which have no orbit of their own, that planets orbit. They are reached from light
  * years away, where a turn out of edge-on reads as an approach; the Sun's and a planet's moons keep the departure angle. */
 export const STELLAR_SYSTEMS: ReadonlySet<string> = new Set(context.bodies.filter(body => body.systemView && !body.orbit).map(body => body.id));
-/** System overview camera candidates by host. Empty until `loadSystemViews` resolves; navigation awaits it first. */
+/** System overview camera candidates by host, each added when `loadSystemView` reads it; navigation awaits the one it frames. */
 export const SYSTEM_VIEWS = new Map<string, SystemView>();
 /** Hosts whose overview is framed by prepared candidates. */
 export const SYSTEM_VIEW_HOSTS: ReadonlySet<string> = new Set([context.focus, ...context.bodies].filter(body => body.systemView).map(body => body.id));
-export const systemViewsLoaded = () => SYSTEM_VIEWS.size === SYSTEM_VIEW_HOSTS.size;
-let systemViewsLoading: Promise<void> | null = null;
-export function loadSystemViews(read?: () => Promise<unknown>): Promise<void> {
-  systemViewsLoading ??= readApplicationSystemViews(read).then(views => { for (const [id, view] of views) SYSTEM_VIEWS.set(id, view); })
-    .catch(error => { systemViewsLoading = null; throw error; });
-  return systemViewsLoading;
+/** Whether framing `id` can proceed: it is no system host, or its candidates are read. */
+export const systemViewLoaded = (id: string) => !SYSTEM_VIEW_HOSTS.has(id) || SYSTEM_VIEWS.has(id);
+const systemViewsLoading = new Map<string, Promise<void>>();
+/** Read one host's candidates once; a failed read is forgotten so the next navigation retries it. */
+export function loadSystemView(id: string, read?: (id: string) => Promise<unknown>): Promise<void> {
+  if (systemViewLoaded(id)) return Promise.resolve();
+  let loading = systemViewsLoading.get(id);
+  if (!loading) {
+    loading = readApplicationSystemView(id, read).then(view => { SYSTEM_VIEWS.set(id, view); })
+      .catch(error => { systemViewsLoading.delete(id); throw error; });
+    systemViewsLoading.set(id, loading);
+  }
+  return loading;
 }
 /** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
 export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));

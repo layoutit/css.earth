@@ -8,7 +8,7 @@ import { findResults } from './find.mts';
 import { renderDatasetResponse, UnreadableSavedView } from './dataset-response.mts';
 import { createSelectionPresentation } from './selection-presentation.mts';
 import { selectionTargetFromUrl } from './scene/scene-selection.mts';
-import { SCENE_OBJECTS } from './objects.mts';
+import { WORLD_OBJECTS } from './world-objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
 import { objectIdAtPath } from './root-object.mts';
@@ -134,7 +134,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     }
     presentation.setEmptyHidden(items.some(item => !item.hidden) || detailCount + overviewCount > 0, catalogueLoaded);
   }
-  createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, SCENE_OBJECTS));
+  createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 

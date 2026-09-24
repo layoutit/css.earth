@@ -1,6 +1,6 @@
 import { createSystemFade, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
+import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
@@ -118,20 +118,27 @@ interface ProjectedBody<Entry> {
 
 /** `annotationLandmarks`: moons named across their star's system, like the orientation references (a sourced list of
  * each planet's major moons). */
-export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
+/** An orbit is planned from its summary (centre, bounds, size) until its centre's bank supplies the path (`attachOrbits`);
+ * a frame that would draw or measure a path it lacks names that body (`takeWantedOrbits`) and draws no segments for it. */
+type PlannerOrbit = PreparedContextOrbit | PreparedContextOrbitGeometry;
+const hasPath = (orbit: PlannerOrbit): orbit is PreparedContextOrbitGeometry => 'verticesM' in orbit;
+// Prepared detail levels are decoded once; each frame only selects one.
+const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
+  // Each coarser level gathers its selected vertices once, into its own flat array.
+  ...(orbit.lod?.levels ?? []).map(level => ({ vertices: Float64Array.from({ length: level.vertexIndices.length * 3 },
+    (_, slot) => orbit.verticesM[level.vertexIndices[Math.floor(slot / 3)]! * 3 + slot % 3]!),
+    trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
+
+export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
+  const wantedOrbits = new Set<string>();
   const landmarkMoonIds = new Set(annotationLandmarks);
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
   const systemFade = createSystemFade(plan);
   const prepared = points.map(body => {
-    const orbit = 'orbit' in body ? body.orbit ?? null : null;
-    // Prepared detail levels are decoded once; each frame only selects one.
-    const levels = !orbit ? [] : [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
-      // Each coarser level gathers its selected vertices once, into its own flat array.
-      ...(orbit.lod?.levels ?? []).map(level => ({ vertices: Float64Array.from({ length: level.vertexIndices.length * 3 },
-        (_, slot) => orbit.verticesM[level.vertexIndices[Math.floor(slot / 3)]! * 3 + slot % 3]!),
-        trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
+    const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
+    const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
       closedOrbit: orbit?.fullTrail === true,
       orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
@@ -144,7 +151,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
   });
   // Only the selected path fades with depth; one shared scratch pool serves it.
   const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0))));
-  return (view: WorldContextView) => {
+  const planFrame = (view: WorldContextView) => {
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
       rotationActive = false, preserveCommittedAnnotations = false } = view;
     if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt ||
@@ -307,12 +314,17 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
             // projected diameter cannot reach the fade's first visible pixel needs
             // no projection at all: hundreds of small hidden orbits skip here.
             const sphereDiameter = bounds && boundsEye ? projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) : Infinity;
+            const orbit = entry.orbit;
+            if (sphereDiameter >= ORBIT_FADE_START_PIXELS && !hasPath(orbit)) wantedOrbits.add(body.id);
             measuredExtent = sphereDiameter < ORBIT_FADE_START_PIXELS ? Math.max(1, sphereDiameter)
-              : projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
-                ORBIT_FULL_PIXELS, entry.orbit.extentChords ?? entry.orbit.activeChords, entry.orbit.closed !== false);
+              // An orbit whose bank has not arrived is measured by its prepared sphere until its path can be.
+              : !hasPath(orbit) ? Math.max(1, Math.min(sphereDiameter, ORBIT_FULL_PIXELS))
+              : projector.measureExtent(orbit.verticesM, orbit.trail,
+                ORBIT_FULL_PIXELS, orbit.extentChords ?? orbit.activeChords, orbit.closed !== false);
             if (measuredExtent < ORBIT_FULL_PIXELS) skipped = true;
           }
-          if (!skipped) {
+          if (!skipped && !entry.levels.length) wantedOrbits.add(body.id);
+          else if (!skipped) {
             measuredExtent = null;
             const level = entry.levels[detailLevel(entry)]!;
             segments = projector(level.vertices, level.trail, level.activeChords, fullOrbit,
@@ -536,6 +548,22 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
     };
     return { emphasizedId, opacity, width, height, projectedBodies: projectedBodies.map(plannedBody) };
   };
+  return Object.assign(planFrame, {
+    /** Give bodies the paths their centre's bank decoded; each keeps its retained projection and per-frame state. */
+    attachOrbits(orbits: ReadonlyMap<string, PreparedContextOrbitGeometry>) {
+      for (const entry of prepared) {
+        const orbit = orbits.get(entry.body.id);
+        if (!orbit || (entry.orbit && hasPath(entry.orbit))) continue;
+        entry.orbit = orbit; entry.levels = pathLevels(orbit);
+        if (entry.state) Object.assign(entry.state as object, { orbit, levels: entry.levels });
+      }
+    },
+    /** The bodies whose paths the frames since the last call needed and lacked. */
+    takeWantedOrbits(): string[] {
+      const ids = [...wantedOrbits]; wantedOrbits.clear();
+      return ids;
+    },
+  });
 }
 export type PlannedWorldContext = ReturnType<ReturnType<typeof createWorldContextPlanner>>;
 

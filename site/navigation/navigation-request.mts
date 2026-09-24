@@ -6,7 +6,7 @@ import type { OverviewScope } from '../overview-context.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { isFocusDatasetUrl, withDataset } from '../dataset-url.mts';
 import { withOverviewScope, withPreparedFocus } from './navigation-scope.mts';
-import { systemById } from '../object-systems.mts';
+import { systemById, type SystemObjects } from '../object-systems.mts';
 import { selectionContext, selectionTargetFromUrl, type SelectionTarget, type SceneSubject } from '../scene/scene-selection.mts';
 
 export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'pop'; entry: string };
@@ -35,7 +35,7 @@ export interface ResolvedNavigation {
 }
 
 /** Interpret destination intent here; dataset and camera owners still validate their payloads when applying them. */
-export function readNavigationSelection(url: URL, objectId: string, objects: readonly ObjectEntry[]) {
+export function readNavigationSelection(url: URL, objectId: string, objects: SystemObjects) {
   return { subject: selectionTargetFromUrl(url, objectId, objects), savedView: url.searchParams.has('v'),
     dataset: url.searchParams.has('dataset') || isFocusDatasetUrl(url), feature: url.searchParams.get('feature') };
 }
@@ -43,7 +43,8 @@ export function readNavigationSelection(url: URL, objectId: string, objects: rea
 /** Resolve once, before cancellation: loading, preview, flight and arrival consume the same destination. */
 export function resolveNavigation(intent: NavigationIntent, { object, objects, navigation, current }: {
   object: ObjectEntry;
-  objects: readonly ObjectEntry[];
+  /** The world's bodies, for system framing and selections. */
+  objects: SystemObjects;
   navigation: ReturnType<typeof createPreparedWorldNavigation>;
   current: { objectId: string; href: string; subject: SceneSubject; centeredObjectId: string | null;
     hasPresented: boolean; reuseScene: boolean; mount: ShellCamera | null; pending: ResolvedNavigation | null };

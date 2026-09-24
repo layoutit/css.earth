@@ -20,11 +20,11 @@ import { parsePreparedWorldContextSummary } from '../src/renderers/css/dist/inde
 // The JSON-attributed import stays here, so the Node read can only yield data.
 // The main thread reads the summary: every body and camera fact, with each orbit
 // reduced to its parent, bounds and size. Only the planner worker projects orbit
-// paths; it reads them from the binary orbit bank. The full JSON is build-time only.
+// paths; it reads each orbit centre's binary bank when a frame first needs it. The full JSON is build-time only.
 const source = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
-/** What the world planner worker reads itself: this summary, and the binary orbit bank it pins. */
-export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ summaryUrl: source.href,
-  orbitsUrl: new URL('../src/objects/sun/prepared/world-orbits.bin', import.meta.url).href });
+/** What the world planner worker reads itself: this summary, and the banks it pins, served per centre by the build
+ * (`pages/world/orbits/[id].bin.ts`). */
+export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ summaryUrl: source.href, orbitBanksUrl: '/world/orbits/' });
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
   if (source.protocol === 'file:') {

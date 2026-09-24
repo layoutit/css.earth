@@ -59,6 +59,8 @@ export function createApplicationWorldContext() {
         const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,
           heliosphereEnabled: () => heliosphereEnabled }));
         refreshWorld = frames.refresh;
+        // An orbit centre's paths reach the planner after the frame that asked for them; plan that view again to draw them.
+        lifetime.onDispose(planner.onOrbitsLoaded(() => frames.refresh()));
         const inputSurface = stage.ownerDocument.querySelector<HTMLElement>('.object-input-surface');
         // Rotation suppresses hover/picking churn; label placement is continuous.
         const rotationChanged = (event: Event) => frames.setRotationActive(

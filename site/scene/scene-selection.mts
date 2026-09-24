@@ -1,10 +1,9 @@
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-focus.mts';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
-import type { ObjectEntry } from '../object-schema.mts';
 import { overviewScopeAtCamera, type OverviewScope } from '../overview-context.mts';
 import { overviewScopeFromUrl, withOverviewScope, withPreparedFocus } from '../navigation/navigation-scope.mts';
-import { SOLAR_SYSTEM_ID, systemById } from '../object-systems.mts';
+import { SOLAR_SYSTEM_ID, systemById, type SystemObjects } from '../object-systems.mts';
 
 export interface SceneOverview { readonly scope: OverviewScope; readonly systemId: string; }
 export type SceneContext =
@@ -24,7 +23,7 @@ export function selectionContext(subject: SceneSubject): SceneContext {
   return subject.kind === 'focus' ? subject.context : subject;
 }
 
-export function selectionTargetFromUrl(url: URL, objectId: string, objects: readonly ObjectEntry[]): SelectionTarget {
+export function selectionTargetFromUrl(url: URL, objectId: string, objects: SystemObjects): SelectionTarget {
   if (url.searchParams.has('focus')) return { kind: 'focus', id: url.searchParams.get('focus')! };
   const scope = overviewScopeFromUrl(url);
   return scope ? { kind: 'overview', overview: { scope, systemId: systemById(objects, objectId)?.id ?? SOLAR_SYSTEM_ID } }
