@@ -10,15 +10,6 @@
   },
   "records": [
     {
-      "id": "agol2021-table2-trappist-1f",
-      "path": "agol2021-table2.tex",
-      "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/tex/refining_trappist1_ttvs.tex",
-      "upstreamPath": "tex/refining_trappist1_ttvs.tex",
-      "upstreamExpectedBytes": 191498,
-      "locator": "Table 2 caption, header, units, and planet-f row; upstream lines 917-940",
-      "extraction": "Exact UTF-8 lines retained from the immutable upstream file; rows for planets other than f are omitted."
-    },
-    {
       "id": "agol2021-kepler-transit-convention",
       "path": "agol2021-kepler-transit.jl",
       "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/src/NbodyGradient/src/kepler_init.jl",
@@ -32,15 +23,6 @@
       "path": "LICENSE",
       "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/LICENSE",
       "extraction": "Unmodified upstream license."
-    },
-    {
-      "id": "agol2021-table5-geometry",
-      "path": "agol2021-table5.tex",
-      "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/tex/refining_trappist1_ttvs.tex",
-      "upstreamPath": "tex/refining_trappist1_ttvs.tex",
-      "upstreamExpectedBytes": 191498,
-      "locator": "Table 5 planet header (line 1277), geometry rows and caption (lines 1283-1290).",
-      "extraction": "Exact UTF-8 lines retained from the immutable upstream file."
     }
   ],
   "license": "MIT license in the pinned author repository; factual parameter extraction and short source excerpts retained with attribution."

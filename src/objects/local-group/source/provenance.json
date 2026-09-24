@@ -25,10 +25,10 @@
     },
     {
       "id": "lvdb-bibliography",
-      "path": "lvdb/lvdb.bib",
+      "archiveMember": "local_volume_database-1.1.1/table/lvdb.bib",
       "bytes": 876966,
       "url": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/table/lvdb.bib",
-      "citation": "Original paper references for the catalogue measurements."
+      "citation": "Original paper references for the catalogue measurements, read from table/lvdb.bib inside the v1.1.1 author archive."
     },
     {
       "id": "mcconnachie-table1-2019",

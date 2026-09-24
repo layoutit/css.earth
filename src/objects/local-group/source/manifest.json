@@ -66,27 +66,6 @@
       "license": "CC0-1.0; see lvdb/LICENSE"
     },
     {
-      "id": "lvdb-bibliography",
-      "path": "src/objects/local-group/source/lvdb/lvdb.bib",
-      "origin": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/table/lvdb.bib",
-      "sourceUrl": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/table/lvdb.bib",
-      "title": "Original paper references for the catalogue measurements.",
-      "credit": "Andrew B. Pace",
-      "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "lvdb-v1-1-1",
-            "role": "material",
-            "evidence": "src/objects/local-group/source/provenance.json"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "CC0-1.0; see lvdb/LICENSE"
-    },
-    {
       "id": "mcconnachie-table1-2019",
       "path": "src/objects/local-group/source/mcconnachie/table1_OCT2019.pdf",
       "origin": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",

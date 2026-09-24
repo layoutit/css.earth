@@ -11,7 +11,7 @@
     "transitTimeBmjdTdb": 57256.57426,
     "ascendingNodePositionAngleDegrees": 0,
     "sources": {
-      "period": "Agol et al. (2021), Table 2: P = 9.207540 +/- 0.000032 d; retained at tests/fixtures/hosted-orbits/trappist-1f-agol2021/agol2021-table2.tex.",
+      "period": "Agol et al. (2021), Table 2 (https://doi.org/10.3847/PSJ/abd022): P = 9.207540 +/- 0.000032 d.",
       "shape": "Agol et al. (2021), Table 5: a/R* = 69.543 and inclination = 89.740 deg. These are separate photodynamical summaries, not a joint draw with the Table 2 eccentricity vector.",
       "phase": "Agol et al. (2021), Table 2: t0 = BJD_TDB 2457257.07426, the two-body inferior-conjunction parameter at the initial osculating epoch; BMJD_TDB 57256.57426.",
       "orientation": "Display convention: transit timing does not measure the orbit's sky position angle, so the ascending node remains 0 deg east of celestial north.",
