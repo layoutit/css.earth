@@ -14,6 +14,8 @@ import { exportSpatialObject } from './spatial-handoff.mts';
 import { exportOutput, validateOutputRequest, type OutputChoice, type OutputRequest } from './outputs.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import type { SourceRelevance } from './source-relevance.mts';
+import type { ProductSoftware } from '../product-record.mts';
+import type { SourceProcessingSoftware } from './source-products.mts';
 import { projectOutput } from './projection.mts';
 import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery-context.mts';
@@ -27,6 +29,7 @@ import { executeFamilyOperation, familyOperationNeedsParameters, type FamilyOper
 import { requireString } from '../../sources/source-values.mts';
 import { exportWwtImage, WWT_IMAGE_MAX_LEVEL } from './wwt/wwt-image.mts';
 import { acquireWwtFits } from './wwt/wwt-fits.mts';
+import { resolveWwtFitsLead } from './wwt/wwt-fits-leads.mts';
 import { fetchKeckSource } from './keck-source.mts';
 import { fetchGeminiSource } from './gemini-source.mts';
 import { fetchOpusSource } from './opus-source.mts';
@@ -35,7 +38,7 @@ import { fetchSpitzerSource } from './spitzer-source.mts';
 export { HELP, SHORT_HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
-export type CliOptions = {readonly command:'ascl';readonly query?:string;readonly product?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'fetch';readonly archive:'keck'|'gemini'|'opus'|'chandra'|'spitzer';readonly exploration:string;readonly pick:number;readonly fileName?:string;readonly directory:string;readonly resume?:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-fits';readonly catalog:string;readonly setName:string;readonly level:number;readonly x:number;readonly y:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-image';readonly exploration:string;readonly pick:number;readonly level:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export type CliOptions = {readonly command:'ascl';readonly query?:string;readonly product?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'fetch';readonly archive:'keck'|'gemini'|'opus'|'chandra'|'spitzer';readonly exploration:string;readonly pick:number;readonly fileName?:string;readonly directory:string;readonly resume?:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-fits';readonly catalog?:string;readonly exploration?:string;readonly setName?:string;readonly pick?:number;readonly level:number;readonly x:number;readonly y:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'wwt-image';readonly exploration:string;readonly pick:number;readonly level:number;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'candidates';readonly system:string;readonly epoch:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'associate';readonly measurements:string;readonly system:string;readonly directory:string;readonly figureBackground?:'transparent'|'opaque';readonly orbitDraws?:number;readonly fitAstrometry:boolean;readonly fitOrbits:boolean;readonly json:boolean;readonly verbose:boolean}|{readonly command:'papers';readonly target:string;readonly instrument?:string;readonly host?:string;readonly directory?:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-run';readonly descriptor:string;readonly operationId:string;readonly componentId?:string;readonly parameters?:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'family-assess';readonly request:string;readonly descriptor:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean}|{readonly command:'families';readonly json:boolean;readonly verbose:boolean}|{readonly command:'import';readonly specification:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'spatial';readonly kind:'points'|'volume'|'volume-lens-bank';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help'; readonly short?: boolean } | { readonly command: 'version' } | { readonly command: 'explore'; readonly directory?: string; readonly request: ExplorationRequest; readonly requestArgs: readonly string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
   if (!args.length) return { command: 'help' as const, short: true };
@@ -65,13 +68,14 @@ export function parseCli(args: readonly string[]): CliOptions {
       const arg=args[i]!;
       if(!arg.startsWith('-')){positional.push(arg);continue;}
       if(arg==='--json'||arg==='--verbose'){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}.`);flags.add(arg);continue;}
-      if(!['--set','--level','--x','--y','--out'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated wwt-fits option ${arg}.`);
+      if(!['--set','--pick','--level','--x','--y','--out'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated wwt-fits option ${arg}.`);
       const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}.`);values.set(arg,value);
     }
-    if(positional.length!==1||['--set','--level','--x','--y','--out'].some(key=>!values.has(key)))
-      throw new TypeError('Use telescope wwt-fits CATALOG.json --set NAME --level N --x X --y Y --out DIRECTORY.');
+    if(positional.length!==1||['--level','--x','--y','--out'].some(key=>!values.has(key))||values.has('--set')===values.has('--pick'))
+      throw new TypeError('Use telescope wwt-fits CATALOG.json --set NAME or EXPLORE.json --pick N, then --level N --x X --y Y --out DIRECTORY.');
     const number=(key:string)=>{const raw=values.get(key)!;if(!/^\d+$/u.test(raw)||!Number.isSafeInteger(Number(raw)))throw new TypeError(`${key} must be a nonnegative whole number.`);return Number(raw);};
-    return {command,catalog:resolve(positional[0]!),setName:values.get('--set')!,level:number('--level'),x:number('--x'),y:number('--y'),directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};
+    const pick=values.has('--pick')?number('--pick'):undefined;if(pick===0)throw new TypeError('WWT FITS --pick must be positive.');
+    return {command,...(pick?{exploration:resolve(positional[0]!),pick}:{catalog:resolve(positional[0]!),setName:values.get('--set')!}),level:number('--level'),x:number('--x'),y:number('--y'),directory:resolve(values.get('--out')!),json:flags.has('--json'),verbose:flags.has('--verbose')};
   }
   if(command==='wwt-image'){
     const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
@@ -344,6 +348,13 @@ export function formatExploration(session:ExplorationSession & {readonly directo
     lines.push(`  Static image: telescope wwt-image ${shellWord(displayPath(resolve(session.directory,'explore.json')))} --pick N --level 0..3 --out DIRECTORY`);
     lines.push('  Display imagery only; these are not selectable observations or qualified science products.');
   }else if(wwt?.state==='unavailable')lines.push('',`WWT curated imagery unavailable: ${wwt.reason}`);
+  const wwtFits=answer.wwtFits;
+  if(wwtFits?.state==='indexed'&&wwtFits.matches.length){
+    lines.push('',`WWT-hosted FITS source leads for ${answer.target} (${wwtFits.matches.length}; target association only):`);
+    for(const lead of wwtFits.matches)lines.push(`  WWT FITS ${lead.pick}. ${lead.imageset} · ${lead.bandPass} · ${lead.sourceUrl}`,`    Target association: ${lead.evidence}`);
+    lines.push(`  Retrieve original numeric tile: telescope wwt-fits ${shellWord(displayPath(resolve(session.directory,'explore.json')))} --pick N --level 0 --x 0 --y 0 --out DIRECTORY`,
+      '  Tile units, uncertainty, celestial WCS and original exposure identity remain unresolved.');
+  }else if(wwtFits?.state==='unavailable')lines.push('',`WWT FITS leads unavailable: ${wwtFits.reason}`);
   const appendIssues=(heading:string,issues:readonly {readonly identity?:string;readonly scope:string;readonly reason:string}[],total=issues.length)=>{
     if(!issues.length)return;
     lines.push('',`${heading} (${total}):`);
@@ -380,13 +391,13 @@ export function formatExploration(session:ExplorationSession & {readonly directo
 
 export interface ArtifactInspection {
   readonly artifact:string;readonly target?:string;readonly source:string;readonly productReceipt?:string;readonly sourceContext?:DeliveryContext;
-  readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;
+  readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];
 }
 interface InspectedArtifact {
-  readonly artifact:string;readonly target?:unknown;readonly source:unknown;readonly sourceContext?:DeliveryContext;
-  readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;
+  readonly artifact:string;readonly target?:unknown;readonly source:unknown;readonly productReceipt?:string;readonly sourceContext?:DeliveryContext;
+  readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];
 }
-const artifactScreen=(result:InspectedArtifact,path:string):ArtifactInspection=>({artifact:result.artifact,...(/\.product\.json$/u.test(path)?{productReceipt:resolve(path)}:{}),...(typeof result.target==='string'?{target:result.target}:{}),source:resolve(requireString(result.source,'artifact source')),...(result.sourceContext?{sourceContext:result.sourceContext}:{}),outputs:result.outputs,...(result.terminal?{terminal:true}:{}),...(result.profiles?{profiles:result.profiles}:{}),...(result.issues?{issues:result.issues}:{}),...(result.familyOperations?{familyOperations:result.familyOperations}:{}),...(result.relevance?{relevance:result.relevance}:{})});
+const artifactScreen=(result:InspectedArtifact,path:string):ArtifactInspection=>({artifact:result.artifact,...(result.productReceipt||/\.product\.json$/u.test(path)?{productReceipt:resolve(result.productReceipt??path)}:{}),...(typeof result.target==='string'?{target:result.target}:{}),source:resolve(requireString(result.source,'artifact source')),...(result.sourceContext?{sourceContext:result.sourceContext}:{}),outputs:result.outputs,...(result.terminal?{terminal:true}:{}),...(result.profiles?{profiles:result.profiles}:{}),...(result.issues?{issues:result.issues}:{}),...(result.familyOperations?{familyOperations:result.familyOperations}:{}),...(result.relevance?{relevance:result.relevance}:{}),...(result.software?{software:result.software}:{}),...(result.sourceProcessing?{sourceProcessing:result.sourceProcessing}:{})});
 function contextText(context:DeliveryContext|undefined):string|undefined {
   if(!context)return undefined;
   return context.kind==='exploration'?'No scientific acceptance criteria requested.':`Scientific request: ${context.assessment.status}.`;
@@ -420,8 +431,10 @@ export function formatArtifact(result:ArtifactInspection,verbose=false):string {
       if(item.field)lines.push(`   Field: ${item.field.status}. ${item.field.reason}`);
     }
     lines.push(`Next: ${relevance.next}`);
-    if(result.productReceipt)lines.push(`Software citations: telescope ascl --product ${shellWord(displayPath(result.productReceipt))}`);
   }
+  if(result.software?.length)lines.push('',`Recorded software for this run: ${result.software.map(item=>`${item.name} ${item.version}`).join('; ')}`);
+  if(result.sourceProcessing?.length){lines.push('Source-declared earlier processing:');for(const item of result.sourceProcessing)lines.push(`  ${item.name} ${item.version} · ${item.evidence}`);}
+  if(result.productReceipt)lines.push(`Software citations: telescope ascl --product ${shellWord(displayPath(result.productReceipt))}`);
   if(result.profiles?.length)lines.push(`Proposed profiles: ${result.profiles.map(profile=>`${profile.handlerId}/${profile.profileId}`).join(', ')}.`);
   for(const issue of result.issues??[])lines.push(`Limitation: ${issue}`);
   if(result.outputs.length){
@@ -620,7 +633,8 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
     process.stdout.write = process.stderr.write.bind(process.stderr);
     try {
       if(options.command==='wwt-fits'){
-        const result=await acquireWwtFits(options.catalog,options.setName,options.level,options.x,options.y,options.directory);
+        const selected=options.pick?await resolveWwtFitsLead(root,options.exploration!,options.pick):{catalog:options.catalog!,imageset:options.setName!};
+        const result=await acquireWwtFits(selected.catalog,selected.imageset,options.level,options.x,options.y,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Original FITS: ${result.source}\nNumeric image: ${result.data}\nValues: ${result.values}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\n${result.limitations.map(line=>`  ${line}\n`).join('')}`;code=0;
       }else if(options.command==='fetch'){
         const result=options.archive==='keck'?await fetchKeckSource(options.exploration,options.pick,options.directory)

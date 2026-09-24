@@ -8,6 +8,7 @@ import { formatArtifact, formatExploration, formatSession, main, outputCommand, 
 import type { ExplorationSession } from './session.mts';
 import type { Session } from './session.mts';
 import { loadWwtImagery } from './wwt/wwt-catalog.mts';
+import { loadWwtFitsLeads } from './wwt/wwt-fits-leads.mts';
 import { describeDegreeLinearPolarization } from './families/f13-polarimetry.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 
@@ -161,6 +162,16 @@ test('WWT imagery appears with credits but never becomes a numbered retrieval ch
   assert.match(screen,/NASA\/JPL\/Space Science Institute/u);
   assert.match(screen,/Display imagery only; these are not selectable observations/u);
   assert.equal((screen.match(/^\d+\. /gmu)??[]).length,1);
+});
+
+test('target-linked WWT FITS tiles appear as unresolved source leads with a saved-choice command',async()=>{
+  const wwtFits=await loadWwtFitsLeads(process.cwd(),{id:'m31',name:'Andromeda Galaxy',aliases:['M31']});
+  assert.equal(wwtFits.state,'indexed');
+  const session=exploration('/tmp/m31-run'),screen=formatExploration({...session,answer:{...session.answer,target:'m31',wwtFits}});
+  assert.match(screen,/WWT-hosted FITS source leads for m31 \(2; target association only\)/u);
+  assert.match(screen,/WWT FITS 1\. PHAT-f475w/u);
+  assert.match(screen,/telescope wwt-fits \/tmp\/m31-run\/explore\.json --pick N --level 0 --x 0 --y 0 --out DIRECTORY/u);
+  assert.match(screen,/Tile units, uncertainty, celestial WCS and original exposure identity remain unresolved/u);
 });
 
 test('query continuation quotes shell metacharacters without command substitution',()=>{

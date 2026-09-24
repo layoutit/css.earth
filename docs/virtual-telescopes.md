@@ -186,7 +186,7 @@ disk unless you pass `--out`. Then the command saves `papers.json` and the downl
 
 ### Software discovery with ASCL
 
-`pnpm -s telescope ascl Astroquery` searches titles in the live [ASCL software catalog](https://ascl.net/). `pnpm -s telescope ascl --product FETCH/output.product.json --json` first verifies the product receipt and original files, then matches its recorded software names to exact ASCL title aliases. The JSON reports the catalog URL and SHA-256 of the catalog response, ASCL IDs, entry URLs, code sites and preferred citations where available. A software listing is a citation lead, separate from the receipt's version claim and from source relevance, calibration and detection. Unmatched names are not proof that ASCL lacks the code. The catalog request is explicit, bounded to 8 MiB and does not rewrite the receipt. [ASCL's schema](https://ascl.net/home/getwp/3297) defines the software metadata fields.
+`pnpm -s telescope ascl Astroquery` searches titles in the live [ASCL software catalog](https://ascl.net/). `pnpm -s telescope ascl --product FETCH/output.product.json --json` verifies a product receipt and original files; `pnpm -s telescope ascl --product RUN/pick-N/result.json --json` verifies a portable `get` delivery instead. Both match recorded software names to exact ASCL title aliases. A source manifest may separately declare earlier processing software with its evidence; the lookup labels that claim separately from software recorded for the current run. The JSON reports the catalog URL and SHA-256 of the catalog response, ASCL IDs, entry URLs, code sites and preferred citations where available. A software listing is a citation lead, separate from the receipt's version claim and from source relevance, calibration and detection. Unmatched names are not proof that ASCL lacks the code. The catalog request is explicit, bounded to 8 MiB and does not rewrite the receipt. [ASCL's schema](https://ascl.net/home/getwp/3297) defines the software metadata fields.
 
 Use `query` when the wavelength, time, product kind and resolution are actual acceptance criteria:
 
@@ -204,6 +204,7 @@ resolution never becomes verified merely because a file was decoded.
 
 The delivery contains the native product's complete recorded output set (including
 pinned labels and dependencies), evidence, SHA-256 pins and a `result.json` verdict.
+`result.json` is the portable verification entry point. The copied producer record preserves its original bytes and paths as evidence; use `result.json` for `outputs` and `ascl --product` after moving the delivery. New deliveries also preserve the source question so `outputs` can report native kind, wavelength and field relevance alongside the scientific request verdict.
 New deliveries use `cssearth-telescope-delivery@3`; older result files without content
 pins require a new query or exploration directory and a fresh `get` before export.
 For the repository script, use `pnpm --silent telescope … --json` to suppress pnpm’s own preamble.
