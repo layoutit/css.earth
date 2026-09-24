@@ -1,0 +1,32 @@
+{
+  "id": "hd-35296",
+  "name": "HD 35296",
+  "system": "HD 35296 system",
+  "description": "Young Sun-like star 14.6 parsecs away whose magnetic field and starspots were mapped in December 2017.",
+  "order": 1772,
+  "gaia": "3400292798990117888",
+  "paper": {
+    "url": "https://arxiv.org/abs/2110.06729",
+    "credit": "Willamo et al. (2022), A&A 659, A71"
+  },
+  "radius": {
+    "value": 1.1,
+    "source": "Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 6170,
+    "source": "Casagrande et al. (2011), A&A 530, A138, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "spin": {
+    "inclinationDegrees": 65,
+    "periodDays": 3.493,
+    "source": "Willamo et al. (2022), Table 2, the values of the ZDI inversion",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "planets": [],
+  "companions": [],
+  "notes": []
+}

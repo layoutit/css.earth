@@ -1,0 +1,32 @@
+{
+  "id": "chi1-orionis",
+  "name": "χ¹ Orionis",
+  "system": "χ¹ Orionis system",
+  "description": "Naked-eye young Sun in Orion, 8.7 parsecs away, whose magnetic field was mapped in December 2017.",
+  "order": 1770,
+  "gaia": "3399063235755057792",
+  "paper": {
+    "url": "https://arxiv.org/abs/2110.06729",
+    "credit": "Willamo et al. (2022), A&A 659, A71"
+  },
+  "radius": {
+    "value": 1.05,
+    "source": "Takeda et al. (2007), ApJS 168, 297, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5882,
+    "source": "Valenti & Fischer (2005), ApJS 159, 141, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "spin": {
+    "inclinationDegrees": 65,
+    "periodDays": 5.022,
+    "source": "Willamo et al. (2022), Table 2, the values of the ZDI inversion",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "planets": [],
+  "companions": [],
+  "notes": []
+}

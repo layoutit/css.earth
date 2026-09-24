@@ -102,3 +102,33 @@
   from { transform: rotateZ(-176deg); }
   to { transform: rotateZ(-536deg); }
 }
+
+/* Lighting overlay: the bank's frames are 256 px (raster.json lighting.presentationSize); the lit disc is fitted to the sphere's
+   460-unit equatorial diameter (geometry.json radius 230). Without this rule the frame had no size and the planet was
+   drawn unlit. */
+.object-stage[data-object-id="uranus"] > .uranus-material-composite {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+.object-stage[data-object-id="uranus"] .uranus-fixed-material {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 256px;
+  height: 256px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(var(--uranus-light-roll, 0deg)) scale(1.79688);
+}
+.object-stage[data-object-id="uranus"].uranus-hide-shadows .uranus-fixed-material {
+  transform: translate(-50%, -50%) scale(1.79688);
+}

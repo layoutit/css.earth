@@ -1,0 +1,32 @@
+{
+  "id": "v1358-orionis",
+  "name": "V1358 Orionis",
+  "system": "V1358 Orionis system",
+  "description": "Young Sun-like star 52 parsecs away whose magnetic field flipped between 2013 and 2017.",
+  "order": 1773,
+  "gaia": "3116883781327753216",
+  "paper": {
+    "url": "https://arxiv.org/abs/2110.06729",
+    "credit": "Willamo et al. (2022), A&A 659, A71"
+  },
+  "radius": {
+    "value": 1.05,
+    "source": "Vican & Schneider (2014), ApJ 780, 154, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 6032,
+    "source": "McDonald et al. (2012), MNRAS 427, 343, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "spin": {
+    "inclinationDegrees": 59,
+    "periodDays": 1.3571,
+    "source": "Willamo et al. (2022), Table 2, the values of the ZDI inversion",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "planets": [],
+  "companions": [],
+  "notes": []
+}

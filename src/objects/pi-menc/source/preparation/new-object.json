@@ -1,0 +1,24 @@
+{
+  "host": "hd-39091",
+  "planets": [
+    {
+      "id": "pi-menc",
+      "name": "pi Men c",
+      "description": "pi Men c crosses its star every 6.27 days and is 2 Earth radii across, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+        "credit": "Kunovac Hod&#x17E;i&#x107; et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KUNOVAC_HODZIC_ET_AL_2021"
+      },
+      "text": {
+        "card": "pi Men c crosses its star every 6.27 days and is 2 Earth radii across, found in 2018.",
+        "introduction": "pi Men c transits HD 39091 every 6.27 days and is 2 Earth radii across. Orbit and size follow Kunovac Hod&#x17E;i&#x107; et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNOVAC_HODZIC_ET_AL_2021): pl_orbper 6.2678399, pl_radj 0.1801145, pl_bmassj 0.01321468"
+      },
+      "order": 1788
+    }
+  ]
+}

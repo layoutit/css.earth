@@ -1,0 +1,24 @@
+{
+  "host": "hd-97658",
+  "planets": [
+    {
+      "id": "hd-97658b",
+      "name": "HD 97658 b",
+      "description": "HD 97658 b crosses its star every 9.49 days and is 2.1 Earth radii across, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+        "credit": "Ellis et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ELLIS_ET_AL__2021"
+      },
+      "text": {
+        "card": "HD 97658 b crosses its star every 9.49 days and is 2.1 Earth radii across, found in 2010.",
+        "introduction": "HD 97658 b transits HD 97658 every 9.49 days and is 2.1 Earth radii across. Orbit and size follow Ellis et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ELLIS_ET_AL__2021): pl_orbper 9.4897116, pl_radj 0.18913406, pl_bmassj 0.02611472"
+      },
+      "order": 1794
+    }
+  ]
+}

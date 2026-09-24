@@ -1,0 +1,24 @@
+{
+  "host": "toi-2194",
+  "planets": [
+    {
+      "id": "toi-2194b",
+      "name": "TOI-2194 b",
+      "description": "TOI-2194 b crosses its star every 15.3 days and is 2 Earth radii across, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+        "credit": "Mistry et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MISTRY_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-2194 b crosses its star every 15.3 days and is 2 Earth radii across, found in 2023.",
+        "introduction": "TOI-2194 b transits TOI-2194 every 15.3 days and is 2 Earth radii across. Orbit and size follow Mistry et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MISTRY_ET_AL_2023): pl_orbper 15.337597, pl_radj 0.17746484, pl_bmassj 0.0145"
+      },
+      "order": 1790
+    }
+  ]
+}

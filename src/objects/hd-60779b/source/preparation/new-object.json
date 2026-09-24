@@ -1,0 +1,24 @@
+{
+  "host": "hd-60779",
+  "planets": [
+    {
+      "id": "hd-60779b",
+      "name": "HD 60779 b",
+      "description": "HD 60779 b crosses its star every 30 days and is 3.2 Earth radii across, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract",
+        "credit": "DiTomasso et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DITOMASSO_ET_AL_2026"
+      },
+      "text": {
+        "card": "HD 60779 b crosses its star every 30 days and is 3.2 Earth radii across, found in 2026.",
+        "introduction": "HD 60779 b transits HD 60779 every 30 days and is 3.2 Earth radii across. Orbit and size follow DiTomasso et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL_2026): pl_orbper 29.986175, pl_radj 0.28958922, pl_bmassj 0.04464673"
+      },
+      "order": 1824
+    }
+  ]
+}

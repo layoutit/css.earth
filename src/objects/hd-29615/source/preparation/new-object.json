@@ -1,0 +1,32 @@
+{
+  "id": "hd-29615",
+  "name": "HD 29615",
+  "system": "HD 29615 system",
+  "description": "Fast-spinning young Sun 54 parsecs away with a large dark spot over its pole, mapped in December 2017.",
+  "order": 1771,
+  "gaia": "4891725758804030208",
+  "paper": {
+    "url": "https://arxiv.org/abs/2110.06729",
+    "credit": "Willamo et al. (2022), A&A 659, A71"
+  },
+  "radius": {
+    "value": 0.96,
+    "source": "Vidotto et al. (2014), MNRAS 441, 2361, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5820,
+    "source": "Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "spin": {
+    "inclinationDegrees": 62,
+    "periodDays": 2.32,
+    "source": "Willamo et al. (2022), Table 2, the values of the ZDI inversion",
+    "url": "https://arxiv.org/abs/2110.06729"
+  },
+  "planets": [],
+  "companions": [],
+  "notes": []
+}

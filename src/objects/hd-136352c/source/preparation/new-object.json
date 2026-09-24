@@ -1,0 +1,24 @@
+{
+  "host": "hd-136352",
+  "planets": [
+    {
+      "id": "hd-136352c",
+      "name": "HD 136352 c",
+      "description": "HD 136352 c crosses its star every 27.6 days and is 2.9 Earth radii across, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "credit": "Delrez et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DELREZ_ET_AL_2021"
+      },
+      "text": {
+        "card": "HD 136352 c crosses its star every 27.6 days and is 2.9 Earth radii across, found in 2019.",
+        "introduction": "HD 136352 c transits HD 136352 every 27.6 days and is 2.9 Earth radii across. Orbit and size follow Delrez et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DELREZ_ET_AL_2021): pl_orbper 27.59221, pl_radj 0.26014854, pl_bmassj 0.03536499"
+      },
+      "order": 1781
+    }
+  ]
+}

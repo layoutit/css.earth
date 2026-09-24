@@ -1,0 +1,24 @@
+{
+  "host": "hr-858",
+  "planets": [
+    {
+      "id": "hr-858b",
+      "name": "HR 858 b",
+      "description": "HR 858 b crosses its star every 3.59 days and is 2 Earth radii across, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "credit": "Bonfanti et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONFANTI_ET_AL__2025"
+      },
+      "text": {
+        "card": "HR 858 b crosses its star every 3.59 days and is 2 Earth radii across, found in 2019.",
+        "introduction": "HR 858 b transits HR 858 every 3.59 days and is 2 Earth radii across. Orbit and size follow Bonfanti et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL__2025): pl_orbper 3.585287, pl_radj 0.17878521, pl_bmassj 0.01116955"
+      },
+      "order": 1815
+    }
+  ]
+}

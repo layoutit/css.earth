@@ -1,0 +1,24 @@
+{
+  "host": "toi-836",
+  "planets": [
+    {
+      "id": "toi-836b",
+      "name": "TOI-836 b",
+      "description": "TOI-836 b crosses its star every 3.82 days and is 1.7 Earth radii across, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract",
+        "credit": "Hawthorn et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HAWTHORN_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-836 b crosses its star every 3.82 days and is 1.7 Earth radii across, found in 2023.",
+        "introduction": "TOI-836 b transits TOI-836 every 3.82 days and is 1.7 Earth radii across. Orbit and size follow Hawthorn et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HAWTHORN_ET_AL_2023): pl_orbper 3.81673, pl_radj 0.15202096, pl_bmassj 0.01425297"
+      },
+      "order": 1805
+    }
+  ]
+}

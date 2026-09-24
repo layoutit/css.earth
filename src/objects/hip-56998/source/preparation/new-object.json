@@ -1,0 +1,38 @@
+{
+  "id": "hip-56998",
+  "name": "HIP 56998",
+  "system": "HIP 56998 system",
+  "description": "HIP 56998 is a 4,675 K star 12.8 parsecs away with 2 known transiting planets.",
+  "target": "HIP 56998",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+    "credit": "Kunimoto et al. 2025"
+  },
+  "radius": {
+    "value": 0.63,
+    "source": "Kunimoto et al. 2025, the stellar radius of the default parameter set of HD 101581 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+    "uncertainty": 0.027
+  },
+  "mass": {
+    "value": 0.653,
+    "source": "Kunimoto et al. 2025, the stellar mass of the default parameter set of HD 101581 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+    "uncertainty": 0.028
+  },
+  "temperature": {
+    "value": 4675,
+    "source": "Kunimoto et al. 2025, the stellar temperature of the default parameter set of HD 101581 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+    "uncertainty": 53
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HIP 56998 is a 4,675 K star 12.8 parsecs away with 2 known transiting planets.",
+    "introduction": "HIP 56998 is a star of 4,675 K 12.8 parsecs away. Its planets HD 101581 b, HD 101581 c cross it, which is how they were found and sized.",
+    "locator": "NASA Exoplanet Archive ps table, default parameter set of HD 101581 b (st_refname KUNIMOTO_ET_AL__2025): st_teff 4675, st_rad 0.63, st_mass 0.653"
+  },
+  "notes": [],
+  "order": 1777
+}

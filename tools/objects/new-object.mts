@@ -4,6 +4,7 @@
  *   node tools/objects/new-object.mts --from-archive HOST... --out spec.json
  *   node tools/objects/new-object.mts --spec <stars.json> [--skip-existing] [--check | --bake]
  *   node tools/objects/new-object.mts --bake <id>...
+ *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
  *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
@@ -51,6 +52,17 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
     const lines = await relensExisting(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/prepare-object.mts <id>...\n`);
+  } else if (args.includes('--refresh') && !specPath) {
+    // Regenerate bodies the tool made from their stored specs: `--refresh ID... [--check | --bake]` (new-object/refresh.mts).
+    const { mkdir, writeFile } = await import('node:fs/promises'), { refreshSpec } = await import('./new-object/refresh.mts');
+    const { formatNewObject, runNewObject } = await import('./new-object/generate.mts'), { prepareObjects } = await import('../prepare/prepare-object.mts');
+    const ids = args.filter(argument => !argument.startsWith('--')), path = resolve('output/new-object/refresh.json');
+    await mkdir(resolve('output/new-object'), { recursive: true }); await writeFile(path, `${JSON.stringify(await refreshSpec(process.cwd(), ids), null, 2)}\n`);
+    const results = await runNewObject(path, { progress: line => process.stderr.write(`${line}\n`), refresh: true });
+    process.stdout.write(formatNewObject(results));
+    const good = results.filter(result => !result.failed).map(result => result.id);
+    if (results.some(result => result.failed)) process.exitCode = 1;
+    if ((args.includes('--check') || args.includes('--bake')) && good.length && !await prepareObjects(good, args.includes('--bake') ? {} : { to: 'page' })) process.exitCode = 1;
   } else if (args.includes('--bake') && !specPath) {
     // The bake of objects already in the tree: `--bake ID...` (tools/prepare/prepare-object.mts).
     const { prepareObjects } = await import('../prepare/prepare-object.mts');
@@ -61,7 +73,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { formatNewObject, runNewObject } = await import('./new-object/generate.mts'), { prepareObjects } = await import('../prepare/prepare-object.mts');
     const results = await runNewObject(specPath, { progress: line => process.stderr.write(`${line}\n`), skipExisting: args.includes('--skip-existing') });
     process.stdout.write(formatNewObject(results));
-    if ((args.includes('--check') || args.includes('--bake')) && results.length && !await prepareObjects(results.map(result => result.id), args.includes('--bake') ? {} : { to: 'page' })) process.exitCode = 1;
+    // A body that failed is reported and not written; the rest are checked or baked.
+    const good = results.filter(result => !result.failed).map(result => result.id);
+    if (results.some(result => result.failed)) process.exitCode = 1;
+    if ((args.includes('--check') || args.includes('--bake')) && good.length && !await prepareObjects(good, args.includes('--bake') ? {} : { to: 'page' })) process.exitCode = 1;
   } else {
     const id = args.find(argument => !argument.startsWith('--') && !args[args.indexOf(argument) - 1]?.startsWith('--'));
     const blackHole = args.includes('--black-hole');

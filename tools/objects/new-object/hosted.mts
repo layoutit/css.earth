@@ -16,6 +16,7 @@ import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mt
 import { quoteSource } from './prose.mts';
 import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, thermalFromArchive } from './planet-lenses.mts';
 import { chooseLimb } from './limb.mts';
+import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
 import { archiveRows, assembleArchiveOrbit, compositeMass, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
 import { TODO } from './scaffold.mts';
 import type { Cited, HostedSpec, StarSpec } from './spec.mts';
@@ -128,7 +129,9 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   // A planet still on the shape lens: its notes say so; a thermal, band-colour or host-lit lens wrote its own.
   if (!star && !spec.photometry && !spec.thermal) {
     const control = content.lenses.controls[0];
-    if (!String(control.notes).includes("'s light")) control.notes = `No image or colour of ${spec.name} is published: the sphere has its measured size, and the gray marks an unresolved surface. ${t ? 'It glows with its own heat, so no starlight falls on it.' : "The lighting is its own star's, at the measured orbit."}`;
+    // The base note replaces the scaffold's TODO; host light, when installed, adds its sentence after it.
+    const hostLit = String(control.notes).match(/ The gray takes the colour of [^.]*'s light, as its colour lens measures it\./u)?.[0] ?? '';
+    control.notes = `No image or colour of ${spec.name} is published: the sphere has its measured size, and the gray marks an unresolved surface. ${t ? 'It glows with its own heat, so no starlight falls on it.' : "The lighting is its own star's, at the measured orbit."}${hostLit}`;
   }
   content.provenance.physical.credit = `Radius from ${record.radius.source}; mass from ${record.mass.source}; orbit from ${record.orbitCitation.text}`;
   files.set(`${s}/content/object.json`, json(content));
@@ -146,7 +149,9 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   const manifest = read(`${s}/manifest.json`);
   manifest.documents = [...manifest.documents, ...[...record.documents.keys()].map(path => ({ path, sourceBinding: { kind: 'local', reason: path.endsWith('pick.json')
     ? 'The whereistheplanet posterior and the measured positions that choose one sample from it (tools/objects/hosted-orbits/posterior-pick.py).' : path.endsWith('orbit.json')
-      ? 'The sample kept, with the model at every measured position; the astronomy record takes its elements.' : 'The paper\'s published measurements, transcribed for orbitize!.' } }))];
+      ? 'The sample kept, with the model at every measured position; the astronomy record takes its elements.' : 'The paper\'s published measurements, transcribed for orbitize!.' } })), storedSpecDocument];
+  // The spec this package was made from, so `--refresh` can make it again (refresh.mts).
+  files.set(`${s}/preparation/new-object.json`, storedHostedSpec(spec, record.hostId, record.order));
   files.set(`${s}/manifest.json`, json(manifest));
   for (const [path, value] of record.documents) files.set(`${s}/${path}`, value);
 

@@ -1,0 +1,24 @@
+{
+  "host": "toi-5789",
+  "planets": [
+    {
+      "id": "toi-5789c",
+      "name": "TOI-5789 c",
+      "description": "TOI-5789 c crosses its star every 12.9 days and is 2.9 Earth radii across, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+        "credit": "Bonomo et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONOMO_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5789 c crosses its star every 12.9 days and is 2.9 Earth radii across, found in 2026.",
+        "introduction": "TOI-5789 c transits TOI-5789 every 12.9 days and is 2.9 Earth radii across. Orbit and size follow Bonomo et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2026): pl_orbper 12.927748, pl_radj 0.25515255, pl_bmassj 0.01573176"
+      },
+      "order": 1792
+    }
+  ]
+}

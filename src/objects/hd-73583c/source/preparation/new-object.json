@@ -1,0 +1,24 @@
+{
+  "host": "hd-73583",
+  "planets": [
+    {
+      "id": "hd-73583c",
+      "name": "HD 73583 c",
+      "description": "HD 73583 c crosses its star every 18.9 days and is 2.4 Earth radii across, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+        "credit": "Barrag&aacute;n et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARRAGAN_ET_AL_2022"
+      },
+      "text": {
+        "card": "HD 73583 c crosses its star every 18.9 days and is 2.4 Earth radii across, found in 2022.",
+        "introduction": "HD 73583 c transits HD 73583 every 18.9 days and is 2.4 Earth radii across. Orbit and size follow Barrag&aacute;n et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARRAGAN_ET_AL_2022): pl_orbper 18.87974, pl_radj 0.21322189, pl_bmassj 0.03051961"
+      },
+      "order": 1810
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "hd-63433",
+  "name": "HD 63433",
+  "system": "HD 63433 system",
+  "description": "HD 63433 is a 5,553 K star 22.4 parsecs away with 3 known transiting planets.",
+  "target": "HD 63433",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
+    "credit": "Mallorqu&iacute;n et al. 2023"
+  },
+  "radius": {
+    "value": 0.934,
+    "source": "Mallorqu&iacute;n et al. 2023, the stellar radius of the default parameter set of HD 63433 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
+    "uncertainty": 0.029
+  },
+  "mass": {
+    "value": 0.956,
+    "source": "Mallorqu&iacute;n et al. 2023, the stellar mass of the default parameter set of HD 63433 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
+    "uncertainty": 0.022
+  },
+  "temperature": {
+    "value": 5553,
+    "source": "Mallorqu&iacute;n et al. 2023, the stellar temperature of the default parameter set of HD 63433 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
+    "uncertainty": 56
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 63433 is a 5,553 K star 22.4 parsecs away with 3 known transiting planets.",
+    "introduction": "HD 63433 is a star of 5,553 K 22.4 parsecs away. Its planets d, c cross it, which is how they were found and sized.",
+    "locator": "NASA Exoplanet Archive ps table, default parameter set of HD 63433 c (st_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): st_teff 5553, st_rad 0.934, st_mass 0.956"
+  },
+  "notes": [
+    "HD 63433 b: the archive adopts only an upper limit for its mass (Mallorquín et al. 2023)"
+  ],
+  "order": 1795
+}
