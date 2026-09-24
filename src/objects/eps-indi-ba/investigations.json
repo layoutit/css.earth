@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "eps-indi-ba",
+  "entries": [
+    {
+      "id": "colour",
+      "subject": "A colour for Epsilon Indi Ba",
+      "status": "excluded",
+      "finding": "A brown dwarf's visible spectrum is dominated by molecular and alkali absorption, so a blackbody colour at its temperature would not be its colour, and no calibrated visible spectrum of the resolved component is used here.",
+      "revisitWhen": "A calibrated visible spectrum of the resolved component is published.",
+      "evidence": [
+        "https://arxiv.org/abs/0911.3143"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

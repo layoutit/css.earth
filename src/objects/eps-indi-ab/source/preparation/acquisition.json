@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "orbits/epsInd_allData_obspri-post.fits",
+      "url": "https://zenodo.org/api/records/19931118/files/epsInd_allData_obspri-post.fits/content"
+    }
+  ]
+}

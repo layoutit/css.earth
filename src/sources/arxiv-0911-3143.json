@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-0911-3143",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "King et al. (2010): Epsilon Indi Ba, Bb: a detailed study of the nearest known brown dwarfs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0911.3143"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200912981"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0911.3143",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200912981",
+      "label": "Astronomy & Astrophysics 510, A99"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0911.3143",
+      "checkedOn": "2026-09-23",
+      "locator": "COND03 predictions for the dynamical age range: radii 0.080 to 0.081 (Ba) and 0.082 to 0.083 (Bb) solar radii"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 510, A99",
+  "creators": [
+    "Robert R. King",
+    "Mark J. McCaughrean",
+    "Derek Homeier",
+    "France Allard",
+    "Ralf-Dieter Scholz",
+    "Nicolas Lodieu"
+  ]
+}

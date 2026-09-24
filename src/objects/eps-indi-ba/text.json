@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eps-indi-ba",
+  "card": {
+    "text": "A brown dwarf of 67 Jupiter masses, one of a pair orbiting far out around the nearby star Epsilon Indi A.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2205-08077",
+        "url": "https://arxiv.org/abs/2205.08077",
+        "label": "Chen et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "for the binary brown dwarfs"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Epsilon Indi Ba is a brown dwarf 1,460 au from Epsilon Indi A. With Bb, a second brown dwarf, it circles a common centre every 11 years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-astro-ph-0212487",
+        "url": "https://arxiv.org/abs/astro-ph/0212487",
+        "label": "Scholz et al. 2003",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "as a common proper motion companion (separation 1459AU) to the K5V star Epsilon Indi"
+      },
+      {
+        "catalogueId": "arxiv-astro-ph-0309256",
+        "url": "https://arxiv.org/abs/astro-ph/0309256",
+        "label": "McCaughrean et al. 2004",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "We find it to be a close binary"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the model radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+ "posteriorFits": {
+  "path": "epsInd_allData_obspri-post.fits",
+  "source": "Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter posterior of their fiducial model (relative astrometry, HGCA and RV with a GP activity model, observable-based priors), Zenodo doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits",
+  "columns": {
+   "sma1": "b_a",
+   "ecc1": "b_e",
+   "inc1": "b_i",
+   "aop1": "$b_{\\omega}$",
+   "pan1": "$b_{\\Omega}$",
+   "periastronMjd": "b_tp",
+   "plx": "plx",
+   "mtot": "b_M"
+  },
+  "angleUnit": "radian",
+  "rankColumn": "logpost",
+  "extra": {
+   "companionMassJupiter": "b_mass",
+   "primaryMassSolar": "M_pri"
+  }
+ },
+ "tauReferenceMjd": 58849,
+ "measurements": "sanghi-2026-astrometry.csv",
+ "measurementsSource": "Sanghi et al. (2026, arXiv:2603.08787), Table 2: the JWST/MIRI F1550C position of 2023 July 3 (Matthews et al. 2024) and the JWST/NIRCam F410M/F430M position of 2025 August 28, dates as MJD."
+}

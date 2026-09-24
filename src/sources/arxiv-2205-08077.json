@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2205-08077",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Chen et al. (2022): Precise Dynamical Masses of Epsilon Indi Ba and Bb: Evidence of Slowed Cooling at the L/T Transition",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2205.08077"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac66d2"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2205.08077",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac66d2",
+      "label": "The Astronomical Journal"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2205.08077",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 3: VLT/NACO relative astrometry of Epsilon Indi Bb around Ba, 2004 to 2013; Table 4: orbit, centre-of-mass proper motion 3987.41, -2505.35 mas/yr, parallax 274.99 +/- 0.43 mas, masses 66.92 +/- 0.36 and 53.25 +/- 0.29 Jupiter masses; SM08 hybrid Teff 1312 +/- 13 and 972 +/- 13 K"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal",
+  "creators": [
+    "Minghan Chen",
+    "Yiting Li",
+    "Timothy D. Brandt",
+    "Trent J. Dupuy",
+    "Cátia V. Cardoso",
+    "Mark J. McCaughrean"
+  ]
+}

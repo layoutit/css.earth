@@ -1,0 +1,31 @@
+{
+ "id": "eps-indi-ab",
+ "classification": "exoplanet",
+ "order": 1771,
+ "physical": {
+  "name": "Epsilon Indi Ab",
+  "horizonsCode": null,
+  "meanRadiusKm": 75066.6,
+  "gravitationalParameterKm3PerS2": 823462457.35,
+  "parent": "eps-indi-a"
+ },
+ "physicalNotes": "Radius 1.05 +/- 0.01 Jupiter radii and temperature 275 +/- 5 K from evolutionary models at the planet's dynamical mass, age and measured luminosity, Sanghi et al. (2026, arXiv:2603.08787), section 5: 75,066.6 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. GM from their dynamical mass 6.5 +0.7/-0.6 Jupiter masses times Jupiter's GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 25606.5,
+  "semiMajorAxisStellarRadii": 4751.95,
+  "inclinationDegrees": 100.7023,
+  "eccentricity": 0.21259,
+  "argumentOfPeriapsisDegrees": 156.588,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 67557.9,
+  "ascendingNodePositionAngleDegrees": 223.8091,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 15.755 au and total mass 0.7956 solar masses, 70.1 years of 365.25 d. Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter fit of their fiducial model to three decades of radial velocities with a Gaussian-process activity model, Hipparcos-Gaia absolute astrometry and JWST/MIRI, JWST/NIRCam and VLT/VISIR relative astrometry, whose posterior of 32,768 samples they publish on Zenodo (doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/eps-indi-ab/source/orbits/pick.json): highest logpost (-1258.85) of 32,768 samples.",
+   "shape": "Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter fit of their fiducial model to three decades of radial velocities with a Gaussian-process activity model, Hipparcos-Gaia absolute astrometry and JWST/MIRI, JWST/NIRCam and VLT/VISIR relative astrometry, whose posterior of 32,768 samples they publish on Zenodo (doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/eps-indi-ab/source/orbits/pick.json): highest logpost (-1258.85) of 32,768 samples. a 15.755 au at the sample's parallax 274.8755 mas, kept as the angular size 4330.5 mas and placed at the Gaia DR3 distance: 4751.95 radii of the host's 496,034 km; inclination 100.7023 degrees.",
+   "eccentricity": "Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter fit of their fiducial model to three decades of radial velocities with a Gaussian-process activity model, Hipparcos-Gaia absolute astrometry and JWST/MIRI, JWST/NIRCam and VLT/VISIR relative astrometry, whose posterior of 32,768 samples they publish on Zenodo (doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/eps-indi-ab/source/orbits/pick.json): highest logpost (-1258.85) of 32,768 samples. e 0.21259.",
+   "argumentOfPeriapsis": "Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter fit of their fiducial model to three decades of radial velocities with a Gaussian-process activity model, Hipparcos-Gaia absolute astrometry and JWST/MIRI, JWST/NIRCam and VLT/VISIR relative astrometry, whose posterior of 32,768 samples they publish on Zenodo (doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/eps-indi-ab/source/orbits/pick.json): highest logpost (-1258.85) of 32,768 samples. omega 336.5880 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 156.5880 degrees.",
+   "phase": "Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter fit of their fiducial model to three decades of radial velocities with a Gaussian-process activity model, Hipparcos-Gaia absolute astrometry and JWST/MIRI, JWST/NIRCam and VLT/VISIR relative astrometry, whose posterior of 32,768 samples they publish on Zenodo (doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/eps-indi-ab/source/orbits/pick.json): highest logpost (-1258.85) of 32,768 samples. tau 0.34011 of a period after MJD 58849; the periastron passage nearest that epoch is MJD 67557.9, taken as BMJD_TDB.",
+   "orientation": "Sanghi et al. (2026, AJ; arXiv:2603.08787): the Octofitter fit of their fiducial model to three decades of radial velocities with a Gaussian-process activity model, Hipparcos-Gaia absolute astrometry and JWST/MIRI, JWST/NIRCam and VLT/VISIR relative astrometry, whose posterior of 32,768 samples they publish on Zenodo (doi:10.5281/zenodo.19931118, epsInd_allData_obspri-post.fits). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/eps-indi-ab/source/orbits/pick.json): highest logpost (-1258.85) of 32,768 samples. Ascending node 223.8091 degrees east of north."
+  }
+ }
+}

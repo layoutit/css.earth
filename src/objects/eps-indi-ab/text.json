@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eps-indi-ab",
+  "card": {
+    "text": "The coldest exoplanet photographed so far, 275 K, circling one of the nearest Sun-like stars.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-25784",
+        "url": "https://arxiv.org/abs/2609.25784",
+        "label": "Kravtchenko et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Epsilon Indi Ab is currently the coldest, and one of the closest, directly imaged exoplanets"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Epsilon Indi Ab is a cold giant planet about 16 au from its star. JWST first imaged it in 2023, and has since taken the longest-wavelength image of any exoplanet.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2503-01599",
+        "url": "https://arxiv.org/abs/2503.01599",
+        "label": "Matthews et al. 2024",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "Here we report JWST coronagraphic images that reveal a giant exoplanet"
+      },
+      {
+        "catalogueId": "arxiv-2603-08787",
+        "url": "https://arxiv.org/abs/2603.08787",
+        "label": "Sanghi et al. 2026",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "The F2550W detection of $ε$ Ind Ab constitutes the longest wavelength image of an exoplanet acquired to date"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

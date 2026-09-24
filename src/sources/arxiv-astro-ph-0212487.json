@@ -1,0 +1,44 @@
+{
+  "id": "arxiv-astro-ph-0212487",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Scholz et al. (2003): Epsilon Indi B: a new benchmark T dwarf",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0212487"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20021847"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0212487",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20021847",
+      "label": "Astronomy & Astrophysics 398, L29"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0212487",
+      "checkedOn": "2026-09-23",
+      "locator": "Abstract: Epsilon Indi B found as a common-proper-motion companion of Epsilon Indi A at 1459 au"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 398, L29",
+  "creators": [
+    "R. -D. Scholz",
+    "M. J. McCaughrean",
+    "N. Lodieu",
+    "B. Kuhlbrodt"
+  ]
+}

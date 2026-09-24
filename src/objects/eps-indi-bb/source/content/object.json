@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "eps-indi-bb",
+  "displayName": "Epsilon Indi Bb",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.082 solar radii (model)",
+        "source": {
+          "catalogueId": "arxiv-0911-3143",
+          "url": "https://arxiv.org/abs/0911.3143",
+          "label": "King et al. 2010",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from Ba",
+        "value": "2.4 au (semi-major axis)",
+        "source": {
+          "catalogueId": "arxiv-2205-08077",
+          "url": "https://arxiv.org/abs/2205.08077",
+          "label": "Chen et al. 2022",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "53.3 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2205-08077",
+          "url": "https://arxiv.org/abs/2205.08077",
+          "label": "Chen et al. 2022",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "eps-indi-bb-lens-shape.webp",
+        "surface": "eps-indi-bb-surface-shape@2x.webp",
+        "poles": "eps-indi-bb-poles-shape@2x.webp",
+        "source": {
+          "id": "eps-indi-bb-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2205.08077"
+        },
+        "falseColor": false,
+        "notes": "No image of its surface exists, and a blackbody colour would misrepresent a brown dwarf's absorbed visible spectrum (see the ledger). No spin axis is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chen et al. (2022), AJ",
+      "href": "https://arxiv.org/abs/2205.08077"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2205.08077",
+      "credit": "Chen et al. (2022), AJ"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/eps-indi-bb.json",
+      "credit": "Model radius and temperature; orbit refitted with orbitize! on Roberts et al.'s (2025) inputs"
+    }
+  }
+}

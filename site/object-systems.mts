@@ -36,8 +36,9 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
     }
   };
   // Hosts are the focus and every star the prepared context frames with orbiting members; a planet's moons are not a
-  // planetary system. A registry without the star (a partial fixture) has no system for it.
-  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView)].filter(body => ['star', 'black-hole'].includes(registry.get(body.id)?.classification ?? ''));
+  // planetary system, and neither is a star that itself orbits or is bound to another (Epsilon Indi Ba, with Bb around it,
+  // belongs to Epsilon Indi A's system). A registry without the star (a partial fixture) has no system for it.
+  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView && !parents.has(body.id))].filter(body => ['star', 'black-hole'].includes(registry.get(body.id)?.classification ?? ''));
   const solarRadiusM = radii.get(plan.focus.id);
   if (!solarRadiusM) throw new TypeError('The Solar System requires its prepared framing radius.');
   return Object.freeze(hosts.map(host => {
