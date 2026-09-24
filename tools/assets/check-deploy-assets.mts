@@ -4,6 +4,7 @@ import { extname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
+import { parsePreparedSystemViews, parsePreparedWorldContextSummary } from '../../src/renderers/css/dist/index.js';
 
 const execFileAsync = promisify(execFile);
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.map', '.svg', '.txt', '.xml']);
@@ -28,6 +29,19 @@ export function unknownRuntimeAssetUrls(referenced: readonly string[], inventori
   return [...new Set(referenced.filter(url => !inventoried.has(url)))].sort();
 }
 
+/** The site reads the Sun's world summary and system views as published, from their inventory hashes, while builds
+ * regenerate both locally. A pair re-pinned apart (2026-09-24: 48 systems, 44 views) passes every local build and
+ * breaks in-app navigation, so the published pair itself is checked. */
+export async function checkPublishedWorldPair(root: string, fetchText: (url: string) => Promise<string> = async url => {
+  const response = await fetch(url); if (!response.ok) throw new Error(`${url}: ${response.status}`); return response.text();
+}) {
+  const assets = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-context-summary.json', 'world-system-views.json'] });
+  const url = (name: string) => { const asset = assets.find(entry => entry.url.endsWith(`/${name}`)); if (!asset) throw new Error(`The Sun inventory lacks ${name}.`); return asset.url; };
+  const summary = parsePreparedWorldContextSummary(JSON.parse(await fetchText(url('world-context-summary.json'))));
+  try { return parsePreparedSystemViews(JSON.parse(await fetchText(url('world-system-views.json'))), summary).size; }
+  catch (error) { throw new Error(`The Sun's published world summary and system views disagree: ${error instanceof Error ? error.message : String(error)} Run pnpm prepare:world-context, publish the Sun and commit its inventory.`, { cause: error }); }
+}
+
 export async function checkDeployAssets(root = resolve(import.meta.dirname, '../..')): Promise<{ files: number; urls: number }> {
   const { stdout } = await execFileAsync('git', ['diff', '--name-only', '--', 'src/objects'], { cwd: root });
   const drift = stdout.split('\n').map(path => path.trim()).filter(Boolean);
@@ -38,6 +52,7 @@ export async function checkDeployAssets(root = resolve(import.meta.dirname, '../
   const assets = await inventoryAssets(root, inventoriedObjectIds([], root));
   const unknown = unknownRuntimeAssetUrls(referenced, new Set(assets.map(asset => asset.url)));
   if (unknown.length) throw new Error(`The built site references runtime assets outside the committed inventories:\n${unknown.join('\n')}`);
+  await checkPublishedWorldPair(root);
   return { files: files.length, urls: new Set(referenced).size };
 }
 
