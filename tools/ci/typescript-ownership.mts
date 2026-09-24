@@ -1,4 +1,4 @@
-import { isArray } from '../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';

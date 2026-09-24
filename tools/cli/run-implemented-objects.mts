@@ -1,4 +1,4 @@
-import { isArray } from '../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import { execFileSync, spawn } from "node:child_process";
 import { access, readdir, readFile } from "node:fs/promises";
 import { availableParallelism, freemem, totalmem } from "node:os";

@@ -1,10 +1,9 @@
 import { parseObjectDiscovery, type ObjectDiscovery } from './object-discovery.mts';
-import { isArray } from '../src/platform/is-array.mts';
+import { isArray, isRecord } from '@cssearth/core';
 import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
 import type { PositionM } from '@cssearth/engine';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { SceneFactory } from './browser-types.mts';
-import { isRecord } from '@cssearth/core';
 import { parseNavigationDistance } from './navigation/navigation-distance.mts';
 import type { NavigationDistance } from './navigation/navigation-distance.mts';
 

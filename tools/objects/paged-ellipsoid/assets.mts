@@ -1,5 +1,5 @@
 import { applyLinearTint } from '../color-transfer.mts';
-import { isArray } from '../../../src/platform/is-array.mts';
+import { isArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import {basename} from 'node:path';
 import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 import type {WebpOptions} from 'sharp';
@@ -11,7 +11,6 @@ import type {createAtmospherePreparation} from './atmosphere.mts';
 import type {createPagedSurfaceRaster, NativeDeepOceanFill, NativePhotographicCloudComposite, PagedSurfaceRasterPlan} from './surface-raster.mts';
 import {applyDeepOceanFill, clearDeepOceanFillCache, readDeepOceanFill, resizeDeepOceanFill} from './deep-ocean-fill.mts';
 import {readJsonSource} from '../../sources/source-values.mts';
-import {requireFiniteNumber, requireString} from '@cssearth/core';
 import {parseInteriorSource, parseMapFocusBindings} from './source-contract.mts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;

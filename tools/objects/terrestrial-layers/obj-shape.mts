@@ -1,5 +1,4 @@
-import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import { isArray } from '../../../src/platform/is-array.mts';
+import { cross3 as cross, dot3 as dot, isArray } from '@cssearth/core';
 import type {SourceMesh,SourceFace,FaceTree,ClosestSurfacePoint,MeshDimensions} from './contracts.mts';
 import {parseMeshProfile,parseRadiusProfile,parsePlateProfile,parseShapeLens,parseSurfaceLens} from './source-records.mts';
 import { execFile } from 'node:child_process';

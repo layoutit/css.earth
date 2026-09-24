@@ -1,4 +1,4 @@
-import { canonical } from '../../src/platform/canonical-value.mts';
+import { canonical, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 /** What a map of a measurement on a body means, carried beside the map.
  *
  * Three telescopes already put a measurement on a body through the same projection (jwst/cubes/body-map.mts): a JWST band
@@ -21,7 +21,6 @@ import { canonical } from '../../src/platform/canonical-value.mts';
  * never averaged as if they were one without the caller saying so. */
 import { sha256 } from '@cssearth/core/node';
 import { parseResolutionEvidence, type ResolutionEvidence } from './resolution-evidence.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { combineBodyMaps, type BodyMap } from './jwst/cubes/body-map.mts';
 
 export const BODY_MAP_SCHEMA = 'cssearth-body-map@1';

@@ -1,4 +1,4 @@
-import { isArray } from '../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 export interface PreparedLensLegend {
   readonly kind: "scale" | "categories";
   readonly title: string;

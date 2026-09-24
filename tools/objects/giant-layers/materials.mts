@@ -1,6 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import { isArray } from '../../../src/platform/is-array.mts';
-import { shape, array, number, optional } from '@cssearth/core';
+import { isArray, shape, array, number, optional } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';
 import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from './material-contract.mts';
 import type { Vector3, ReadonlyVector3 } from '../material-composition/ellipsoid.mts';

@@ -2,7 +2,7 @@ import { parsePreparationEvidence } from './preparation-evidence.mts';
 import type { PreparationEvidence } from './preparation-evidence.mts';
 import { validateInputEvidence } from './product-input-evidence.mts';
 import type { ProductInputEvidence } from './product-input-evidence.mts';
-import { isArray } from './is-array.mts';
+import { isArray } from '@cssearth/core';
 import { parseCapture } from './exploration-catalog.mts';
 import type { Capture } from './exploration-catalog.mts';
 import { parseSourceBinding } from './source-catalog.mts';

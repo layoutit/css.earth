@@ -1,4 +1,4 @@
-import { canonical } from '../../src/platform/canonical-value.mts';
+import { canonical, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 /** The one record every virtual telescope writes beside what it produces.
  *
  * The instruments stay different: an event list, a spectral cube, a calibrated image and a strip camera want different
@@ -18,7 +18,6 @@ import { canonical } from '../../src/platform/canonical-value.mts';
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { sha256, sha256File } from '@cssearth/core/node';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PRODUCT_RECORD_SCHEMA = 'cssearth-telescope-product@1';
 

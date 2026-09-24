@@ -1,11 +1,10 @@
 import { sha256 } from '@cssearth/core/node';
-import { isArray } from '../../src/platform/is-array.mts';
+import { isArray, isRecord, requireRecord, requireArray, requireString } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
 import { createRequire, isBuiltin } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Expression, CallExpression, VariableDeclarator } from "estree";
-import { isRecord, requireRecord, requireArray, requireString } from "@cssearth/core";
 import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
 import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";

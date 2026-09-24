@@ -1,4 +1,4 @@
-import { isArray } from '../../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import type { SpectrumPoint } from './spectrum-data.mts';
 const escape = (value: unknown) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 

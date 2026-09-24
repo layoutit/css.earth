@@ -1,10 +1,9 @@
-import { isArray } from '../../src/platform/is-array.mts';
+import { isArray, hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { parseAst } from 'vite';
 import { parseForESLint } from '@typescript-eslint/parser';
 import type { Node, Program } from 'estree';
-import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 export type RuntimeSourceReader = (path: string) => string | Promise<string>;
 

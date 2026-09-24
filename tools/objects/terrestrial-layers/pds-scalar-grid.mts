@@ -1,4 +1,4 @@
-import { isArray } from '../../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import {parseScalarGridProfile} from './source-records.mts';
 import { spawn } from 'node:child_process';
 import { pds3Keyword } from '../pds-labels.mts';
