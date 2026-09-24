@@ -127,6 +127,14 @@ export async function prepareTriangleAlphaAtlases<T extends Definition>(definiti
     entries.push({ ...entry, key: `${key}:alpha`, url });
     resources[key] = `${key}:alpha`;
   }
+  // A key that names a masked atlas's file without a face reading it (poles:<lens> often names surface:<lens>'s atlas)
+  // swaps with it: a pool counts files, and two keys that shared one must not become two.
+  for (const entry of definition.assets.entries) {
+    const url = written.get(entry.url);
+    if (!url || resources[entry.key] || entry.key.endsWith(':alpha')) continue;
+    entries.push({ ...entry, key: `${entry.key}:alpha`, url });
+    resources[entry.key] = `${entry.key}:alpha`;
+  }
   const fallbacks = (definition.assets.fallbacks ?? []).filter(fallback => fallback.unsupported !== 'corner-shape');
   return { ...definition, assets: { ...definition.assets, entries: [...definition.assets.entries.filter(entry => !entry.key.endsWith(':alpha')), ...entries],
     fallbacks: [...fallbacks, { unsupported: 'corner-shape', resources }] } };
