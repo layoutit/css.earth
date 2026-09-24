@@ -4,4 +4,6 @@
 # Skip once with git commit --no-verify.
 command -v node >/dev/null 2>&1 || exit 0
 root=$(git rev-parse --show-toplevel) || exit 0
+# A branch from before the check existed has no checker; CI still checks its commits.
+[ -f "$root/tools/ci/commit-message.mts" ] || exit 0
 exec node "$root/tools/ci/commit-message.mts" "$1"
