@@ -3,9 +3,10 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
 import {
+  applyPreparedProjectiveLayout,
   scalePreparedBackgroundAddresses,
   scalePreparedPixelLengths,
-} from "../renderers/css/dist/preparation.js";
+} from "./projective-layout.mts";
 
 test("scales every prepared pixel address in multi-layer backgrounds", () => {
   assert.equal(
@@ -43,7 +44,6 @@ test("scales variable-backed prepared background addresses", () => {
   assert.equal(style.backgroundSize, "4160px 3072px");
 });
 
-const { applyPreparedProjectiveLayout } = await import("../renderers/css/dist/preparation.js");
 test("scaled projective leaves reject missing prepared dimensions and texture size", () => {
   for (const missing of ["width", "height", "backgroundSize"]) {
     const style = { width: "64px", height: "64px", backgroundSize: "1024px 512px", [missing]: "" };
@@ -64,4 +64,9 @@ test("unscaled CSS leaves retain their existing layout contract", () => {
   const style = { width: "", height: "", backgroundSize: "" };
   applyPreparedProjectiveLayout(style, null, 1);
   assert.deepEqual(style, { width: "", height: "", backgroundSize: "" });
+});
+
+test("projective raster transport scales prepared pixel addresses without changing other units", () => {
+  assert.equal(scalePreparedPixelLengths("calc(-1.25px + 50%) 1e2px var(--atlas)", 2), "calc(-2.5px + 50%) 200px var(--atlas)");
+  assert.throws(() => scalePreparedPixelLengths("4px", 0.5), /at least one/);
 });

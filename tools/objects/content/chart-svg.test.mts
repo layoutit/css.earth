@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 
 import {
   renderReflectanceChart,
   renderTemperaturePressureChart,
-} from "./scientific-chart-svg.mts";
+} from "./chart-svg.ts";
 
 test("renders deterministic representative Mars and Saturn reflectance data", () => {
   for (const [id, maximum] of [["mars", 0.16], ["saturn", 0.25]] as const) {
@@ -111,6 +111,6 @@ test("rejects malformed chart shapes and unsafe ids", () => {
 });
 
 test("contains no object id or source record", async () => {
-  const source = await readFile(new URL("./scientific-chart-svg.mts", import.meta.url), "utf8");
+  const source = await readFile(new URL("./chart-svg.ts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /mars|saturn|107740|107933/iu);
 });

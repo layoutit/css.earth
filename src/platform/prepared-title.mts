@@ -1,9 +1,7 @@
 export interface TitleSource { label: string; viewBox: string; path: string; source: string; sourceUrl: string; width: number; height: number; weight: number; opticalSize: number; fontSize: number; letterSpacing: number; baseline: number; }
-export type PreparedTitle = TitleSource & ReturnType<typeof createPreparedTitleLayout> & { generator: string };
 
 import { OBJECT_TITLE_RECIPE } from "./object-title-recipe.mts";
 
-const SAFE_EXPORT = /^[A-Z][A-Z0-9_]*$/u;
 const VIEW_BOX = /^0 0 ([1-9][0-9]*(?:\.[0-9]+)?) ([1-9][0-9]*(?:\.[0-9]+)?)$/u;
 
 export const OBJECT_TITLE_STANDARD = Object.freeze({
@@ -21,20 +19,6 @@ const OBJECT_TITLE_SCALE =
   OBJECT_TITLE_STANDARD.renderedWidth /
   OBJECT_TITLE_STANDARD.sourceViewBoxWidth;
 
-
-
-export function createPreparedTitle(source: TitleSource, { generator }: { generator: string }) {
-  validateTitleSource(source);
-  if (!nonEmpty(generator)) {
-    throw new TypeError("Prepared title generator is missing.");
-  }
-  return Object.freeze({
-    ...source,
-    ...createPreparedTitleLayout(source),
-    generator,
-  });
-}
-
 export function createPreparedTitleLayout(source: TitleSource) {
   validateTitleSource(source);
   const match = source.viewBox.match(VIEW_BOX);
@@ -49,27 +33,6 @@ export function createPreparedTitleLayout(source: TitleSource) {
     renderHeight: stableNumber(sourceViewBoxHeight * OBJECT_TITLE_SCALE),
     renderPathOffsetY: stableNumber(renderPathOffsetY),
   });
-}
-
-export function serializePreparedTitleModule(exportName: string, title: PreparedTitle) {
-  if (!SAFE_EXPORT.test(exportName ?? "")) {
-    throw new TypeError("Prepared title export name is invalid.");
-  }
-  validateTitleSource(title);
-  const expectedLayout = createPreparedTitleLayout(title);
-  for (const [field, expected] of Object.entries(expectedLayout)) {
-    if (title[field as keyof typeof expectedLayout] !== expected) {
-      throw new TypeError(`Prepared title has invalid ${field}.`);
-    }
-  }
-  if (!nonEmpty(title.generator)) {
-    throw new TypeError("Prepared title provenance is incomplete.");
-  }
-  return [
-    "// Generated. Edit the object-owned title source and rerun preparation.",
-    `export const ${exportName} = Object.freeze(${JSON.stringify(title)});`,
-    "",
-  ].join("\n");
 }
 
 export function validateTitleSource(value: TitleSource) {
