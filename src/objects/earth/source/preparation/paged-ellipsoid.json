@@ -44,12 +44,11 @@
   },
   "textureLevels": {
     "widths": [
-      512,
       1024,
       2048,
       4096
     ],
-    "fixedWidth": 2048,
+    "maximumWidth": 2048,
     "hysteresis": 0.2,
     "texelsPerCssPixel": 2
   },

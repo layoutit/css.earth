@@ -1,6 +1,8 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import type { SurfaceBankPlan, SurfaceBankLenses } from './contracts.mts';
-export interface TextureLevelConfiguration {widths:readonly number[];fixedWidth?:number;hysteresis:number;texelsPerCssPixel:number}
+/** `maximumWidth`: the largest level the runtime may choose. Wider levels are still prepared (smaller levels are reduced
+ * from the canonical page) but never offered, so no view downloads them. */
+export interface TextureLevelConfiguration {widths:readonly number[];fixedWidth?:number;maximumWidth?:number;hysteresis:number;texelsPerCssPixel:number}
 interface TextureLevelAsset {url:string;decodedBytes:number}
 interface TextureLevelReceipt {source:string;sourceSha256:string;url:string;sha256:string;width:number;height:number;bottomPadding:number}
 import sharp from 'sharp';
@@ -27,11 +29,12 @@ export interface TextureLevelBank {id: string; urls: readonly string[]}
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
 export async function prepareTextureLevels({ config, plan, lenses, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string};plan?:SurfaceBankPlan;lenses?:SurfaceBankLenses;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
-  const { widths, fixedWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
+  const { widths, fixedWidth, maximumWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
   const canonicalWidth = config.atlas.pageSize;
   if (!Array.isArray(widths) || widths.at(-1) !== canonicalWidth || widths.some((width, i) =>
     !Number.isInteger(width) || width < 1 || canonicalWidth % width || i > 0 && width <= widths[i - 1]) ||
     (fixedWidth !== undefined && !widths.includes(fixedWidth)) ||
+    (maximumWidth !== undefined && (!widths.includes(maximumWidth) || (fixedWidth !== undefined && fixedWidth > maximumWidth))) ||
     !(hysteresis >= 0 && hysteresis < 1) || !(texelsPerCssPixel >= 1)) throw new TypeError('Invalid prepared atlas levels.');
   const banks = selectedBanks
     ? selectedBanks.map(bank=>({id:bank.id,urls:requireSurfacePages(bank.urls,`Texture level ${bank.id}`,config.publicBase)}))
@@ -87,6 +90,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
   // Smaller completed levels share this same byte budget rather than multiply it.
   const maximumDecodedBytes = 2 * Math.max(...banks.map(bank => entries.filter(entry =>
     entry.key.startsWith(`page:${bank.id}:`) && !entry.key.includes(':level:')).reduce((sum, entry) => sum + entry.decodedBytes, 0)));
-  return { textureLevels: { hysteresis, levels }, entries, maximumDecodedBytes,
+  const offered = maximumWidth === undefined ? levels : levels.slice(0, widths.indexOf(maximumWidth) + 1);
+  return { textureLevels: { hysteresis, levels: offered }, entries, maximumDecodedBytes,
     provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'source-webp-encoding', texelsPerCssPixel, receipts } };
 }

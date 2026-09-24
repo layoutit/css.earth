@@ -50,5 +50,7 @@ test('external texture plans reject undeclared, incomplete or reordered levels',
   mutate(copy => { copy.levels[0].resources.a = 'missing'; });
   mutate(copy => { delete (copy.levels[0].resources as Record<string, string>).b; });
   mutate(copy => { copy.levels[1].minimumDiameter = 0; });
-  mutate(copy => { copy.levels[1].resources.a = 'a-small'; });
+  // A body capped below its canonical page (maximumWidth) offers a smaller page as its top level.
+  const capped = structuredClone(textureLevels); capped.levels[1].resources.a = 'a-small';
+  expect(() => requireTextureLevels(capped, variants, resources)).not.toThrow();
 });
