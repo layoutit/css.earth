@@ -1,0 +1,126 @@
+{
+ "schema": "jankmonster-oracle@1",
+ "repo": "/Users/ekrof/Documents/Codex/2026-09-23/im-x20/work/css-earth-report-cleanup",
+ "files": [
+  "site/view-readout.mts"
+ ],
+ "before": "19ad051f6c1bf9a87739c10d7e2a2440bf80fe19",
+ "after": "d96165227b5d91157f0a7d8d312e1739b4e5e85f",
+ "scenarios": 12,
+ "otherChangedFiles": [],
+ "results": [
+  {
+   "name": "no camera clears the whole reading, date included",
+   "identical": true,
+   "records": 3,
+   "problems": []
+  },
+  {
+   "name": "a focus reading, then camera moves throttled to one render per 100 ms",
+   "identical": true,
+   "records": 8,
+   "problems": []
+  },
+  {
+   "name": "a flight blanks the reading but keeps the date, holds still, and arrival refreshes once",
+   "identical": true,
+   "records": 8,
+   "problems": []
+  },
+  {
+   "name": "a flight that begins while a throttled render waits on its timer",
+   "identical": true,
+   "records": 4,
+   "problems": []
+  },
+  {
+   "name": "a hidden page drops pending work and a visible one refreshes",
+   "identical": true,
+   "records": 8,
+   "problems": []
+  },
+  {
+   "name": "playback keeps rendering, and stopping it does not",
+   "identical": true,
+   "records": 4,
+   "problems": []
+  },
+  {
+   "name": "the scene element leaving clears the reading; resize refreshes",
+   "identical": true,
+   "records": 5,
+   "problems": []
+  },
+  {
+   "name": "destroy with a frame pending, then with a timer pending",
+   "identical": true,
+   "records": 4,
+   "problems": []
+  },
+  {
+   "name": "destroy with a timer pending",
+   "identical": true,
+   "records": 5,
+   "problems": []
+  },
+  {
+   "name": "a flight that begins while a frame is pending, then arrives",
+   "identical": true,
+   "records": 5,
+   "problems": []
+  },
+  {
+   "name": "setters after destroy and while hidden schedule nothing",
+   "identical": true,
+   "records": 5,
+   "problems": []
+  },
+  {
+   "name": "switching cameras unsubscribes the old one",
+   "identical": true,
+   "records": 3,
+   "problems": []
+  }
+ ],
+ "coverage": [
+  {
+   "file": "site/view-readout.mts",
+   "side": "after",
+   "mapped": true,
+   "changedLines": 21,
+   "changedCodeLines": 18,
+   "executed": 18,
+   "missed": []
+  },
+  {
+   "file": "site/view-readout.mts",
+   "side": "before",
+   "mapped": true,
+   "changedLines": 17,
+   "changedCodeLines": 16,
+   "executed": 16,
+   "missed": []
+  }
+ ],
+ "mutants": {
+  "generated": 12,
+  "killed": 11,
+  "survived": [
+   {
+    "file": "site/view-readout.mts",
+    "line": 59,
+    "operator": "or became and",
+    "original": "if (events.signal.aborted || documentTarget.hidden) return;",
+    "mutated": "if (events.signal.aborted && documentTarget.hidden) return;"
+   }
+  ],
+  "invalid": 0
+ },
+ "verdict": "identical",
+ "limits": [
+  "Equivalence holds for these scenarios only. A match proves the traces the scenarios record are equal, not that every behaviour is.",
+  "Files other than the targets come from the working tree on both sides; otherChangedFiles lists any that also differ.",
+  "Coverage is V8 block coverage mapped through the bundle source map; a line counts as run when any of its generated code ran."
+ ],
+ "changedCodeCoverage": 1
+}

@@ -1,0 +1,38 @@
+[
+ {
+  "step": "earth",
+  "dateHidden": false,
+  "coordinatesHidden": false,
+  "altitude": "24,964 km",
+  "label": "Altitude:",
+  "scaleHidden": false,
+  "scale": "1,000 km"
+ },
+ {
+  "step": "mid-flight",
+  "dateHidden": false,
+  "coordinatesHidden": true,
+  "altitude": "—",
+  "label": "Altitude:",
+  "scaleHidden": true,
+  "scale": "1,000 km"
+ },
+ {
+  "step": "arrived at mars",
+  "dateHidden": false,
+  "coordinatesHidden": false,
+  "altitude": "112,911 km",
+  "label": "Altitude:",
+  "scaleHidden": false,
+  "scale": "5,000 km"
+ },
+ {
+  "step": "m42 focus",
+  "dateHidden": false,
+  "coordinatesHidden": true,
+  "altitude": "77.21 ly",
+  "label": "Distance to Orion Nebula:",
+  "scaleHidden": false,
+  "scale": "5 ly"
+ }
+]
