@@ -15,8 +15,7 @@ html[data-shell-context="pending"] .object-sidebar-frame::before {
   color: #aaa;
 }
 body[data-object-shell] {
-  --explorer-rail-left: 16px;
-  --explorer-rail-item-gap: 0px;
+  --explorer-header-left: 16px;
   --explorer-panel-left: 12px;
   --explorer-panel-width: 340px;
   --explorer-logo-size: 36px;
@@ -49,7 +48,6 @@ body[data-object-shell] {
   --explorer-controls-top: calc(var(--explorer-header-top) + var(--explorer-header-height) + var(--explorer-header-panel-gap));
   --explorer-dock-width: calc(var(--explorer-panel-left) + var(--explorer-panel-width));
   --explorer-surface-background: var(--shell-surface);
-  --explorer-rail-background: var(--explorer-surface-background);
   --explorer-panel-background: var(--explorer-surface-background);
   --explorer-divider: #000;
   --explorer-divider-width: 2px;
@@ -59,7 +57,6 @@ body[data-object-shell] {
 
 :is(
   .object-card,
-  .explorer-about-panel,
   .object-dataset-context-dock > .explorer-settings-panel
 ) {
   --explorer-card-padding-inline-start: var(--explorer-card-padding-left, 20px);
@@ -126,7 +123,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   gap: var(--explorer-header-row-gap);
   width: min(
     var(--explorer-header-width),
-    calc(100vw - var(--explorer-rail-left) - 8px)
+    calc(100vw - var(--explorer-header-left) - 8px)
   );
   height: var(--explorer-header-height);
   /* The header floats over the scene; only its controls take input. */
@@ -482,15 +479,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   width: var(--explorer-report-issue-width);
   text-decoration: none;
   pointer-events: auto;
-}
-
-.explorer-rail {
-  gap: var(--explorer-header-control-gap);
-  position: static;
-  flex: 0 0 auto;
-  width: max-content;
-  height: var(--explorer-search-height);
-  max-height: none;
 }
 
 .object-sidebar {

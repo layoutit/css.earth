@@ -192,16 +192,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     searchReturn = null;
     settle(previous);
   };
-  const closeSearch = (event: KeyboardEvent) => {
-    if (event.key === "Escape") leaveSearch();
-  };
+  // Focus alone makes room for the keyboard; the results follow the object browser (`followSearch`).
   search.addEventListener("focus", openSearch, { signal });
-  search.addEventListener("input", openSearch, { signal });
-  search.addEventListener("keydown", closeSearch, { signal });
-  sheet.addEventListener("keydown", closeSearch, { signal });
-  // Clearing the query leaves the results behind, exactly as Escape does.
-  documentTarget.querySelector(".object-sidebar-search-clear")
-    ?.addEventListener("click", leaveSearch, { signal });
   // The facility card sits inside the sheet, so opening it has to show it.
   const facilityToggle = documentTarget.querySelector(".object-facility-toggle");
   facilityToggle?.addEventListener("click", () => {
@@ -235,6 +227,10 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       if (!mobile.matches || state !== "full") return;
       searchReturn = null;
       settle("peek");
+    },
+    followSearch(open: boolean) {
+      if (open) openSearch();
+      else leaveSearch();
     },
     destroy() {
       events.abort();

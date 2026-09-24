@@ -14,7 +14,8 @@ interface PreparedFocusCard {
 const number = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 4 });
 const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, letter => letter.toUpperCase());
 
-/** One retained card transports the selected prepared record; no catalogue is imported here. */
+/** One retained card transports the selected prepared record; no catalogue is imported here.
+ * Its visibility belongs to the selection presentation (`selection-presentation.mts`). */
 export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
   if (!root) return { set() {}, adoptBanks() {}, destroy() {} };
   const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
@@ -82,7 +83,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       unavailable.hidden = !missing;
       unavailable.textContent = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
     }
-    if (!record) { root.hidden = true; return; }
+    if (!record) return;
     root.dataset.preparedFocusId = record.id;
     for (const bank of root.querySelectorAll<HTMLElement>('[data-focus-record-bank]')) bank.hidden = bank.dataset.focusRecordBank !== record.id;
     const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);

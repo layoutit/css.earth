@@ -15,10 +15,6 @@
   "dom-cleanliness-browser.mts": {
     "expect": "pass"
   },
-  "explorer-rail-browser.mts": {
-    "expect": "fail",
-    "reason": "a prepared value the rail check requires is missing"
-  },
   "flight-activation-browser.mts": {
     "expect": "fail",
     "reason": "navigation overlays do not fade away during flight"
