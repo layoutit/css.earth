@@ -14,9 +14,12 @@ export type StellarColorRecord = {
   /** A star with no catalogue row of its own (the unresolved second star of a close pair): the temperature its paper publishes. */
   readonly spectrum: 'planck'; readonly published: StellarTemperature & { readonly citation: string };
 } | { readonly spectrum: 'gaia-xp-sampled'; readonly spectrumPath: string; readonly sourceId: string }
-  | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord };
+  | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord; readonly gamut?: 'desaturate' };
 export interface StellarTemperature { readonly kelvin: number; readonly lowerKelvin: number; readonly upperKelvin: number }
-export interface StellarColor { readonly linear: readonly [number, number, number]; readonly srgb: readonly [number, number, number] }
+/** `gamut`, only when a record asks for it: the colour was more saturated than sRGB and was mixed with `whiteFraction` of the white
+ * point to fit; `unmapped` is its linear sRGB before, with the brightest channel 1 and a channel below zero. */
+export interface StellarColor { readonly linear: readonly [number, number, number]; readonly srgb: readonly [number, number, number];
+  readonly gamut?: { readonly whiteFraction: number; readonly unmapped: readonly [number, number, number] } }
 
 export function parseStellarColorRecord(value: unknown): StellarColorRecord {
   const input = requireRecord(value, 'stellar colour record');
@@ -24,7 +27,8 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
   const integer = (id: string) => { if (!/^\d+$/u.test(id)) throw new TypeError('The catalogue source id must be an integer string.'); return id; };
   if (input.spectrum === 'measured') {
     if (input.temperature !== undefined) throw new TypeError('A colour from a measured spectrum takes no temperature.');
-    return { spectrum: 'measured', measured: parseMeasuredSpectrumRecord(input.measuredSpectrum) };
+    if (input.gamut !== undefined && input.gamut !== 'desaturate') throw new TypeError(`A colour record's gamut mapping is 'desaturate', not ${String(input.gamut)}.`);
+    return { spectrum: 'measured', measured: parseMeasuredSpectrumRecord(input.measuredSpectrum), ...(input.gamut === 'desaturate' ? { gamut: 'desaturate' as const } : {}) };
   }
   if (input.spectrum === 'gaia-xp-sampled') {
     if (input.temperature !== undefined) throw new TypeError('A colour from a measured spectrum takes no temperature.');
@@ -89,13 +93,21 @@ export function planckLinearSrgb(kelvin: number, colorMatching: Map<number, read
     const metres = wavelength * 1e-9; return 1 / (metres ** 5 * Math.expm1(PLANCK_H * LIGHT_C / (metres * BOLTZMANN_K * kelvin))); }, colorMatching);
 }
 
-/** Spectral power at each wavelength (nm) through the observer into sRGB, brightest linear channel 1. */
-function spectrumColor(wavelengths: readonly number[], power: (wavelength: number) => number, colorMatching: Map<number, readonly number[]>, label: string): StellarColor {
+/** Spectral power at each wavelength (nm) through the observer into sRGB, brightest linear channel 1. A colour outside the sRGB
+ * gamut fails, unless the record asks to `desaturate` it: then it is mixed with the least white (1, 1, 1 in normalised linear sRGB,
+ * the D65 white point) that brings every channel to zero or above, which keeps its hue, and the report says how much. */
+function spectrumColor(wavelengths: readonly number[], power: (wavelength: number) => number, colorMatching: Map<number, readonly number[]>, label: string,
+  gamut?: 'desaturate'): StellarColor {
   const raw = spectrumLinearSrgb(wavelengths, power, colorMatching);
   const peak = Math.max(...raw);
   const linear = raw.map(value => value / peak) as [number, number, number];
-  if (linear.some(value => value < 0)) throw new TypeError(`${label} falls outside the sRGB gamut: ${linear.join(', ')}.`);
-  return { linear, srgb: linear.map(value => Math.round(255 * linearToSrgb(value))) as [number, number, number] };
+  const srgb = (values: readonly number[]) => values.map(value => Math.round(255 * linearToSrgb(value))) as [number, number, number];
+  if (linear.some(value => value < 0)) {
+    if (gamut !== 'desaturate') throw new TypeError(`${label} falls outside the sRGB gamut: ${linear.join(', ')}.`);
+    const white = -Math.min(...linear), mapped = linear.map(value => (value + white) / (1 + white)) as [number, number, number];
+    return { linear: mapped, srgb: srgb(mapped), gamut: { whiteFraction: white / (1 + white), unmapped: linear } };
+  }
+  return { linear, srgb: srgb(linear) };
 }
 
 export function planckColor(kelvin: number, colorMatching: Map<number, readonly number[]>): StellarColor {
@@ -201,8 +213,10 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
   }
   if (record.spectrum === 'measured') {
     const spectrum = await loadMeasuredSpectrum(read, record.measured);
-    return { temperature: null, spectrum: { samples: spectrum.wavelengthsNm.length }, color: measuredSpectrumColor(spectrum, colorMatching, record.measured.gaps), limbDarkening,
-      range: null };
+    const error = 'error' in spectrum ? spectrum.error : undefined, shifted = (errors: number[], sign: number) => ({ wavelengthsNm: spectrum.wavelengthsNm, flux: spectrum.flux.map((value, i) => Math.max(0, value + sign * errors[i]!)) });
+    return { temperature: null, spectrum: { samples: spectrum.wavelengthsNm.length }, color: measuredSpectrumColor(spectrum, colorMatching, record.measured.gaps, record.gamut), limbDarkening,
+      // With sample errors, as for an XP spectrum: the colours one standard error fainter and brighter at every sample.
+      range: error ? [measuredSpectrumColor(shifted(error, -1), colorMatching, record.measured.gaps, record.gamut), measuredSpectrumColor(shifted(error, 1), colorMatching, record.measured.gaps, record.gamut)] as const : null };
   }
   const temperature = 'published' in record ? record.published : readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
   return { temperature, spectrum: null, color: planckColor(temperature.kelvin, colorMatching), limbDarkening,
@@ -229,11 +243,13 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
 // range must be declared as a gap, with the reason, or the record fails.
 export interface MeasuredSpectrumRecord {
   readonly path: string;
-  readonly format: 'fits-table' | 'fits-table-array' | 'tsv-columns' | 'pulkovo-blocks' | 'burnashev-records' | 'kharitonov-records' | 'gaia-xp-sampled';
+  readonly format: 'fits-table' | 'fits-table-array' | 'tsv-columns' | 'ascii-columns' | 'pulkovo-blocks' | 'burnashev-records' | 'kharitonov-records' | 'gaia-xp-sampled';
   /** FITS: the extension name, or its HDU number when it has none. */
   readonly extension?: string;
   readonly wavelength: { readonly column: string; readonly unit: 'angstrom' | 'nm' | 'um' };
-  readonly flux: { readonly column: string; readonly kind: 'flux' | 'magnitude' | 'log10'; readonly missing?: number };
+  /** `error` (ascii-columns): the column of each sample's one-sigma flux error. With it, a 1 nm bin below zero within its noise reads as
+   * no emission, as an XP sample does, and the report carries the colours one sigma fainter and brighter. */
+  readonly flux: { readonly column: string; readonly kind: 'flux' | 'magnitude' | 'log10'; readonly missing?: number; readonly error?: string };
   /** FITS rows (or array samples) whose quality value differs from `good` are left out. */
   readonly quality?: { readonly column: string; readonly good: number };
   readonly gaps: readonly { readonly fromNm: number; readonly toNm: number; readonly reason: string }[];
@@ -245,7 +261,7 @@ export interface MeasuredSpectrumRecord {
 /** The largest fractional difference between two arms' median flux within 5 nm of their join. */
 export const JOIN_AGREEMENT = 0.05;
 
-const FORMATS = ['fits-table', 'fits-table-array', 'tsv-columns', 'pulkovo-blocks', 'burnashev-records', 'kharitonov-records', 'gaia-xp-sampled'] as const;
+const FORMATS = ['fits-table', 'fits-table-array', 'tsv-columns', 'ascii-columns', 'pulkovo-blocks', 'burnashev-records', 'kharitonov-records', 'gaia-xp-sampled'] as const;
 export function parseMeasuredSpectrumRecord(value: unknown): MeasuredSpectrumRecord {
   const input = requireRecord(value, 'measuredSpectrum');
   const format = requireString(input.format, 'measuredSpectrum.format');
@@ -261,11 +277,13 @@ export function parseMeasuredSpectrumRecord(value: unknown): MeasuredSpectrumRec
   });
   const quality = input.quality === undefined ? undefined : requireRecord(input.quality, 'measuredSpectrum.quality');
   if (format.startsWith('fits') && input.extension === undefined) throw new TypeError('A FITS spectrum names its extension.');
+  if (flux.error !== undefined && format !== 'ascii-columns') throw new TypeError(`A flux error column is read from ascii-columns spectra, not ${format}.`);
   return { path: requireString(input.path, 'measuredSpectrum.path'), format: format as MeasuredSpectrumRecord['format'],
     ...(input.extension === undefined ? {} : { extension: requireString(input.extension, 'measuredSpectrum.extension') }),
     wavelength: { column: requireString(wavelength.column, 'wavelength.column'), unit: unit as MeasuredSpectrumRecord['wavelength']['unit'] },
     flux: { column: requireString(flux.column, 'flux.column'), kind: kind as MeasuredSpectrumRecord['flux']['kind'],
-      ...(flux.missing === undefined ? {} : { missing: requireFiniteNumber(flux.missing, 'flux.missing') }) },
+      ...(flux.missing === undefined ? {} : { missing: requireFiniteNumber(flux.missing, 'flux.missing') }),
+      ...(flux.error === undefined ? {} : { error: requireString(flux.error, 'flux.error') }) },
     ...(quality ? { quality: { column: requireString(quality.column, 'quality.column'), good: requireFiniteNumber(quality.good, 'quality.good') } } : {}), gaps,
     ...(input.join === undefined ? {} : (() => {
       const join = requireRecord(input.join, 'measuredSpectrum.join');
@@ -293,9 +311,9 @@ export async function loadMeasuredSpectrum(read: (path: string) => Promise<Buffe
 const NM_PER_UNIT = { angstrom: 0.1, nm: 1, um: 1000 } as const;
 
 /** Wavelengths (nm, ascending) and flux of the spectrum, in the file's own layout. */
-export function readMeasuredSpectrum(stored: Buffer, record: MeasuredSpectrumRecord): { wavelengthsNm: number[]; flux: number[] } {
+export function readMeasuredSpectrum(stored: Buffer, record: MeasuredSpectrumRecord): { wavelengthsNm: number[]; flux: number[]; error?: number[] } {
   const bytes = stored[0] === 0x1f && stored[1] === 0x8b ? gunzipSync(stored) : stored;
-  const samples: [number, number][] = [];
+  const samples: [number, number][] = [], errors = new Map<number, number>();
   const toFlux = (value: number) => record.flux.kind === 'magnitude' ? 10 ** (-0.4 * value) : record.flux.kind === 'log10' ? 10 ** value : value;
   const add = (wavelength: number, value: number) => {
     if (record.flux.missing !== undefined && value === record.flux.missing) return;
@@ -319,6 +337,17 @@ export function readMeasuredSpectrum(stored: Buffer, record: MeasuredSpectrumRec
       if (cells[w]!.trim() === '' || !Number.isFinite(wavelength)) continue; // unit and dash rows
       if (cells[f]!.trim() === '') continue;
       add(wavelength, requireFiniteNumber(value, record.flux.column));
+    }
+  } else if (record.format === 'ascii-columns') {
+    // Whitespace-separated numbers with '#' comment lines (such as a FITS header written as text); columns are 1-based positions.
+    const position = (name: string) => { const n = Number(name); if (!Number.isInteger(n) || n < 1) throw new TypeError(`An ascii-columns column is a 1-based position, not ${name}.`); return n - 1; };
+    const w = position(record.wavelength.column), f = position(record.flux.column), e = record.flux.error === undefined ? undefined : position(record.flux.error);
+    for (const line of bytes.toString('utf8').split(/\r?\n/u)) {
+      if (!line.trim() || line.trimStart().startsWith('#')) continue;
+      const cells = line.trim().split(/\s+/u).map(Number), wavelength = cells[w], value = cells[f];
+      if (wavelength === undefined || value === undefined || !Number.isFinite(wavelength) || !Number.isFinite(value)) throw new TypeError(`An ascii-columns row is not numbers in columns ${w + 1} and ${f + 1}: ${line.trim().slice(0, 60)}`);
+      add(wavelength, value);
+      if (e !== undefined) errors.set(wavelength * NM_PER_UNIT[record.wavelength.unit], requireFiniteNumber(cells[e], 'flux error'));
     }
   } else if (record.format === 'kharitonov-records') {
     const line = bytes.toString('latin1').split(/\r?\n/u)[Number(record.flux.column) - 1];
@@ -365,7 +394,8 @@ export function readMeasuredSpectrum(stored: Buffer, record: MeasuredSpectrumRec
   }
   const finite = samples.filter(([w, f]) => Number.isFinite(w) && Number.isFinite(f)).sort((a, b) => a[0] - b[0]);
   if (finite.length < 2) throw new TypeError('The spectrum has fewer than two samples.');
-  return { wavelengthsNm: finite.map(sample => sample[0]), flux: finite.map(sample => sample[1]) };
+  return { wavelengthsNm: finite.map(sample => sample[0]), flux: finite.map(sample => sample[1]),
+    ...(errors.size ? { error: finite.map(sample => errors.get(sample[0])!) } : {}) };
 }
 
 /** Samples averaged into 1 nm bins from 380 to 780 nm; a bin without samples is interpolated from its neighbours, which must lie
@@ -390,11 +420,22 @@ export function binMeasuredSpectrum(spectrum: { wavelengthsNm: readonly number[]
   });
 }
 
-export function measuredSpectrumColor(spectrum: { wavelengthsNm: readonly number[]; flux: readonly number[] }, colorMatching: Map<number, readonly number[]>,
-  gaps: MeasuredSpectrumRecord['gaps'] = []): StellarColor {
-  const binned = binMeasuredSpectrum(spectrum, gaps);
+export function measuredSpectrumColor(spectrum: { wavelengthsNm: readonly number[]; flux: readonly number[]; error?: readonly number[] }, colorMatching: Map<number, readonly number[]>,
+  gaps: MeasuredSpectrumRecord['gaps'] = [], gamut?: 'desaturate'): StellarColor {
+  let binned = binMeasuredSpectrum(spectrum, gaps);
+  if (spectrum.error) {
+    // Each 1 nm bin's error is its samples' combined error; a bin below zero within NOISE_FLOOR_SIGMA of it is no emission there.
+    const variance = binMeasuredSpectrum({ wavelengthsNm: spectrum.wavelengthsNm, flux: spectrum.error.map(e => e * e) }, gaps);
+    const counts = Array.from({ length: 401 }, (_, i) => spectrum.wavelengthsNm.filter(w => w >= 379.5 + i && w < 380.5 + i).length);
+    binned = binned.map((value, i) => {
+      const sigma = Math.sqrt(variance[i]! / Math.max(1, counts[i]!));
+      if (value >= 0) return value;
+      if (Math.abs(value) <= NOISE_FLOOR_SIGMA * sigma) return 0;
+      throw new TypeError(`The measured spectrum is below zero beyond its noise at ${380 + i} nm (${value}, one sigma ${sigma}).`);
+    });
+  }
   if (binned.some(value => !(value >= 0)) || !binned.some(value => value > 0)) throw new TypeError('The measured spectrum must be positive across the visible range, or zero where a faint star is not detected.');
-  return spectrumColor(binned.map((_, i) => 380 + i), wavelength => binned[wavelength - 380]!, colorMatching, 'The measured spectrum colour');
+  return spectrumColor(binned.map((_, i) => 380 + i), wavelength => binned[wavelength - 380]!, colorMatching, 'The measured spectrum colour', gamut);
 }
 
 // Limb darkening measured from a transiting planet: the planet crosses the disc and the depth of the transit at each point measures

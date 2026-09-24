@@ -9,6 +9,40 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2017-tess-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/600/A30/tableab",
+        "-out.max": "500",
+        "Teff": "2500..2700",
+        "logg": "3.5..4.0",
+        "Z": "=0",
+        "Type": "q",
+        "Mod": "PC",
+        "-out": "logg,Teff,Z,L/HP,aLSM,bLSM,Type,Mod"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
     }
   ]
 }

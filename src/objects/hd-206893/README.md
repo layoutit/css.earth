@@ -10,7 +10,7 @@ HD 206893 is a young star 41 parsecs away. VLTI/GRAVITY found its inner planet c
 
 **Radial velocity.** Gaia DR3's -11.80 ± 0.14 km/s.
 
-**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar/stellar-photometric-color.mts)). No limb darkening is drawn.
+**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar/stellar-photometric-color.mts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,554 K (the record) and log g 4.28 (from the record's mass and radius (packages/astronomy/data/bodies/hd-206893.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
@@ -21,6 +21,6 @@ Run of 2026-09-23 (this version): see the planet's README for its placement agai
 ## Known problems
 
 - The radius is a model or catalogue value; the disc is not measured.
-- No limb darkening is drawn.
+- The limb darkening is a model: the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,554 K (the record) and log g 4.28 (from the record's mass and radius (packages/astronomy/data/bodies/hd-206893.json)).
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
