@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ganymede-dark-material@2x.webp",
+      "bytes": 89810,
+      "sha256": "e8d441e26b173f0f4583edfa4f27376089ccf6c2bb4c6171cd6e3364b3b09114"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-enhanced@2x.webp",
       "bytes": 4588056,
       "sha256": "ba0d7db23bf758b3b1b08b6611826368d7fc2c5e47287b3bc64850ddafcdc434"
@@ -18,6 +24,12 @@
       "filename": "ganymede-geology@2x.webp",
       "bytes": 519220,
       "sha256": "84ec33a5e16159597629e5340f6a84505d76578d9bd5d429dfafd0fa02a49280"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-ice-fraction@2x.webp",
+      "bytes": 86476,
+      "sha256": "45f9abceb97d0a2ad760b44c38b7ddb69dbe1f6834ee7abbc1d4f731ba2a1f76"
     },
     {
       "location": "public",
@@ -57,6 +69,12 @@
     },
     {
       "location": "public",
+      "filename": "ganymede-poles-dark-material@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-poles-enhanced@2x.webp",
       "bytes": 226008,
       "sha256": "43dd5bbe8377315f24d93938407f564f3ed69b4d8ec02f49aea9302e763cc929"
@@ -66,6 +84,12 @@
       "filename": "ganymede-poles-geology@2x.webp",
       "bytes": 11260,
       "sha256": "d0a72f2188303c037b1db6b635e8e33bfdfd3741d06fa612b3e8c550f2faedba"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-poles-ice-fraction@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
     },
     {
       "location": "public",
@@ -369,15 +393,15 @@
     },
     {
       "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1214,
-      "sha256": "dbe9af5ff29e49976efc8be6603ad8dd7d543eb20be993373690a4d49f2347fa"
-    },
-    {
-      "location": "prepared",
       "filename": "text.json",
       "bytes": 1453,
       "sha256": "34f81c259880ab2188220062fe07f2d0976a4091dddcfaf3e9267567f3086611"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1214,
+      "sha256": "dbe9af5ff29e49976efc8be6603ad8dd7d543eb20be993373690a4d49f2347fa"
     }
   ]
 }
