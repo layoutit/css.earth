@@ -12,6 +12,7 @@ import { pathToFileURL } from 'node:url';
 import { loadStellarPhotometricColor } from '../../observation/stellar/stellar-photometric-color.mts';
 import { MARKER_PATH, starMarker } from '../context-markers.mts';
 import { requireArray, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { isRecord } from '../../../../src/platform/records.mts';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
 /** Stars whose default lens is the measured-spectrum colour: marker, catalogue and surface colours. */
@@ -31,7 +32,6 @@ export async function spectrumColor(id: string) {
   const { color } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), requireRecord(surface.science), requireString(surface.source));
   return hex(color.srgb);
 }
-const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
 
 /** Replace the one quoted colour value that `current` reads from the file, keeping the file's own formatting. */
 async function setColor(path: string, current: (value: Record<string, any>) => string, color: string, check: boolean) {

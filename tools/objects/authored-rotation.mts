@@ -4,6 +4,7 @@ import type { RotationElements } from "@cssearth/astronomy";
 import { requireRecord, requireFiniteNumber } from "../sources/source-values.mts";
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
+import { dot3 as dot } from '../../src/platform/vector3.mts';
 
 // A measured pole is distinct from an IAU prime-meridian solution. For bodies
 // without a phase ephemeris, preserve an explicitly arbitrary display phase.
@@ -85,7 +86,6 @@ export function synchronousRotationElements(positionKm: readonly number[], veloc
   if (eccentricity !== 0) throw new TypeError('Synchronous rotation needs a circular orbit; supply an explicit authored rotation law for an eccentric orbit.');
   const unit = (v: readonly number[]) => { const n = Math.hypot(...v); if (!(n > 0)) throw new RangeError('Direction has no magnitude.'); return v.map(c => c / n); };
 
-  const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
   const pole = unit(cross(positionKm, velocityKmPerDay)), toHost = unit(positionKm.map(c => -c));
   const node = unit([-pole[1]!, pole[0]!, 0]);
   const w = Math.atan2(dot(pole, cross(node, toHost)), dot(node, toHost));
@@ -122,7 +122,6 @@ async function sunFacingElements(id: string, poleDirection: readonly number[], e
   const unit = (x: readonly number[]) => { const n = Math.hypot(...x); return x.map(c => c / n); };
   const pole = unit(poleDirection), sun = unit(toSun);
   const node = unit([-pole[1]!, pole[0]!, 0]), cross = [node[1]! * sun[2]! - node[2]! * sun[1]!, node[2]! * sun[0]! - node[0]! * sun[2]!, node[0]! * sun[1]! - node[1]! * sun[0]!];
-  const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
   return { poleRightAscensionRad: Math.atan2(pole[1]!, pole[0]!), poleDeclinationRad: Math.asin(Math.max(-1, Math.min(1, pole[2]!))),
     primeMeridianRad: (Math.atan2(dot(pole, cross), dot(node, sun)) + 2 * Math.PI) % (2 * Math.PI), spinRateRadPerDay };
 }

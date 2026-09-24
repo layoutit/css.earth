@@ -4,8 +4,7 @@ import { cross3 as cross } from '../../../src/platform/vector3.mts';
  * does not qualify a production mosaic or solve an unknown camera. */
 import { project } from '../../objects/terrestrial-layers/osiris-geo.mts';
 import type { Case } from './cases.mts';
-
-const dot = (a: number[], b: number[]) => a.reduce((s,v,i)=>s+v*b[i],0);
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const norm = (v: number[]) => {
   const length = Math.hypot(...v);

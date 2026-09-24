@@ -4,6 +4,7 @@ const test = sourceTest();
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';
 import { parseObjShape } from './obj-shape.mts';
 import { refineStripEpochs, type EpochOffsets, type RefinableStrip, type StripRefinementPolicy } from './strip-refinement.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 // An ellipsoid with 300, 240 and 180 m semi-axes seen from about 60 km by a spinning strip camera: 40,000 px/rad, strips 640 x 64 pixels
 // taken every 0.4 s while the spin carries the scene 56 rows per strip, and a spacecraft that drifts across the line of sight.
@@ -11,7 +12,6 @@ const axes = [300, 240, 180], { unit, faces } = subdividedOctahedron(5);
 const mesh = parseObjShape([...unit.map(v => `v ${v.map((n, i) => n * axes[i]).join(' ')}`), ...faces.map(f => `f ${f.map(i => i + 1).join(' ')}`)].join('\n'),
   { metersPerUnit: 1, expectedVertices: unit.length, expectedFaces: faces.length });
 const width = 640, height = 64, focal = 4e4, centre = [(width - 1) / 2, (height - 1) / 2], interval = 0.4, spin = 56 / focal / interval, strips = 11;
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const norm = (v: readonly number[]) => { const n = Math.hypot(...v); return v.map(x => x / n); };
 const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 const sun = norm([1, -1, 0.3]), start = [0, -60, 20], velocityKmS = norm(cross([0, 0, 1], start)).map(v => v * 0.03);

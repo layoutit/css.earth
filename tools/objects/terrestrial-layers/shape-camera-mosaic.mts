@@ -14,9 +14,9 @@ import {readFitsImage} from '../../fits/fits.mts';
 import {skyDisplayRaster, skyImageAxes} from '../../fits/fits-sky.mts';
 import { pds3Keyword } from '../pds-labels.mts';
 import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 const rad = Math.PI / 180;
-const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
 
 const unit = (a: Vector) => a.map(v=>v/Math.hypot(...a));
 const vector = (latitude: number, westLongitude: number) => [Math.cos(latitude*rad)*Math.cos(-westLongitude*rad),Math.cos(latitude*rad)*Math.sin(-westLongitude*rad),Math.sin(latitude*rad)];

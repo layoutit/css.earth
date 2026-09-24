@@ -10,6 +10,7 @@ import { validatePreparedNavigationFocus } from './prepared-focus.js';
 import type { PreparedNavigationFocus } from './prepared-focus.js';
 import type { PerspectiveWorldContext } from './perspective-dolly.js';
 import type { Vector3 } from './types.js';
+import { clamp } from '../../../platform/math/scalar.mts';
 
 /** The live camera stays in its prepared local frame for float64 precision.
  * Input, focus changes and restored observers mutate this owner; frame capture is read-only. */
@@ -253,7 +254,6 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     },
   });
 }
-function clamp(value: number, minimum: number, maximum: number) { return Math.max(minimum, Math.min(maximum, value)); }
 function add(a: PositionM, b: PositionM): PositionM { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
 function subtract(a: PositionM, b: PositionM): PositionM { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
 export type PreparedCamera = ReturnType<typeof createPreparedCamera>;

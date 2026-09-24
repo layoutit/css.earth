@@ -2,9 +2,9 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
+import { dot3 as dot } from '../../../platform/vector3.mts';
 
 type Vector = readonly [number, number, number];
-const dot = (a: Vector, b: readonly number[]) => a[0] * b[0]! + a[1] * b[1]! + a[2] * b[2]!;
 
 /** Projected-radius thresholds for prepared content that stands for a whole volume. */
 export interface PreparedPointVisibility {

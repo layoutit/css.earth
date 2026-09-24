@@ -5,6 +5,7 @@ import type { PreparedTriangle, SourceMesh, SourceScalar } from './contracts.mts
 import { removeOppositeFacePairs } from './mesh-face-pairs.mts';
 import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.mts';
 import { validateObservedReduction } from './open-surface.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 export interface RadialSimplification {method?: string; targetFaces: number; maximumErrorMeters: number; regularize?: boolean; prune?: boolean;}
 export interface TerrainMesh extends SourceMesh {
@@ -27,7 +28,6 @@ type UnshadedFace = {vertices: readonly (readonly number[])[]; normal: number[];
 export type RadialFaces = PreparedTriangle[] & {simplification?: Record<string, unknown>};
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
 
 const unit = (a: readonly number[]) => a.map(v => v / Math.hypot(...a));
 

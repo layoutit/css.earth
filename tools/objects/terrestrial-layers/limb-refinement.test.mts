@@ -4,13 +4,13 @@ const test = sourceTest();
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';
 import { parseObjShape } from './obj-shape.mts';
 import { refineCameraByLimb, rotateCamera, rotationOf, limbThreshold, observedLimb } from './limb-refinement.mts';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 // A 300 x 240 x 180 m ellipsoid, seen from 60 km by a 1 m focal length behind 10 µm pixels (100,000 px/rad, 0.6 m/px).
 const axes = [300, 240, 180], { unit, faces } = subdividedOctahedron(5);
 const mesh = parseObjShape([...unit.map(v => `v ${v.map((n, i) => n * axes[i]).join(' ')}`), ...faces.map(f => `f ${f.map(i => i + 1).join(' ')}`)].join('\n'),
   { metersPerUnit: 1, expectedVertices: unit.length, expectedFaces: faces.length });
 const width = 1024, height = 1024, focal = 1e5, centre = [(width - 1) / 2, (height - 1) / 2];
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const norm = (v: readonly number[]) => { const n = Math.hypot(...v); return v.map(x => x / n); };
 /** A pinhole looking from `eye` (km) at the origin with `up` roughly along body +Z; columns follow the camera +X axis, rows -Y. */
 function camera(eye: number[], sun: number[], roll = 0) {

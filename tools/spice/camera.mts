@@ -12,6 +12,7 @@ import { has, number, numbers, string, type KernelPool } from './text-kernel.mts
 import { apply, multiply, transpose, type Matrix3 } from './ck.mts';
 import { stelab, type Ephemeris } from './geometry.mts';
 import { frameDefinition } from './frames.mts';
+import { dot3 as dot } from '../../src/platform/vector3.mts';
 
 /** SPICE aberration corrections: one light-time iteration (LT), converged (CN), each with or without stellar aberration (+S), or none. */
 export type Aberration = 'LT+S' | 'LT' | 'CN+S' | 'CN' | 'NONE';
@@ -47,7 +48,6 @@ export interface SpiceCamera {
 }
 
 const AXES: Record<string, readonly number[]> = { X: [1, 0, 0], '-X': [-1, 0, 0], Y: [0, 1, 0], '-Y': [0, -1, 0], Z: [0, 0, 1], '-Z': [0, 0, -1] };
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const unit = (v: readonly number[]) => { const n = Math.hypot(v[0], v[1], v[2]); return [v[0] / n, v[1] / n, v[2] / n]; };
 
 

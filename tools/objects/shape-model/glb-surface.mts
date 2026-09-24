@@ -9,8 +9,8 @@ const parseGltf=shape({meshes:array(shape({primitives:array(shape({mode:optional
 interface SurfaceTriangle {p:readonly number[];e1:readonly number[];e2:readonly number[];normal:readonly number[];uv:readonly (readonly number[])[];}
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
-const dot = (a:readonly number[], b:readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const sub = (a:readonly number[], b:readonly number[]) => a.map((v, i) => v - b[i]);
 
 

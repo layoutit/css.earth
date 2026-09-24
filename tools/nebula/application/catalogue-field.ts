@@ -6,9 +6,9 @@ import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/obje
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../../../src/renderers/css/navigation/world-camera-math.js';
 import { validatePreparedCataloguePoints, type PreparedCataloguePoint } from '../../../src/renderers/css/stars/prepared-catalogue-points.js';
 import { ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
+import { isRecord } from '../../../src/platform/records.mts';
 
 type Vector = readonly [number, number, number];
-const isRecord = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 function record(v: unknown): Record<string, unknown> {
   if (!isRecord(v)) throw new TypeError('Catalogue field requires an object.');
   return v;

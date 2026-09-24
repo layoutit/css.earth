@@ -1,4 +1,5 @@
 import { readFitsImage, fitsHeaderLiterals } from '../../fits/fits.mts';
+import { clamp } from '../../../src/platform/math/scalar.mts';
 export { scanFitsCards, fitsCardValue, readFitsHeader } from '../../fits/fits.mts';
 /** FITS observation decoding and data-defined latitude/longitude/color mapping (moved from the retired static lane). */
 export type FitsColor = {kind: 'signed-asinh'; palette: readonly (readonly number[])[]; softening: number; maximum: number}
@@ -62,7 +63,6 @@ function nearestValidValue(fits: ReturnType<typeof readFitsPrimary>, x: number, 
   return 0;
 }
 const modulo = (value: number, divisor: number) => ((value % divisor) + divisor) % divisor;
-const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
 
 /** One 1-based primary-array plane; native FITS row order is preserved. */
 export function readFitsPlane(bytes: Buffer, plane = 1) {

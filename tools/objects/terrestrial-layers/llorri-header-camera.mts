@@ -7,8 +7,7 @@ import type { KernelSet } from '../../spice/kernel-set.mts';
 import { pckRotation } from '../../spice/frames.mts';
 import { utcToEt } from '../../spice/lsk.mts';
 import { llorriFieldTargets, requireLlorriTarget } from './llorri-geo.mts';
-
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, v, i) => s + v * b[i], 0);
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const inverse = (a: readonly (readonly number[])[]) => {
   const columns = [cross(a[1], a[2]), cross(a[2], a[0]), cross(a[0], a[1])], determinant = dot(a[0], columns[0]);
