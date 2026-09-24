@@ -25,7 +25,7 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, LENS_VOLUMES, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
@@ -85,6 +85,16 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       }
       return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
         (owner?.frame ?? frames.get(fromId))!.originM);
+    },
+    /** Fit a volume the body shows through its lens, when the view does not already hold it. Null when the view is
+     * already as far out as the fit, or the volume is unknown. */
+    lensVolumeTarget({ objectId, volumeId, mount }: { objectId: string; volumeId: string; mount?: ShellCamera | null }) {
+      const volume = LENS_VOLUMES.get(volumeId), frame = frames.get(objectId), owner = mount?.navigation;
+      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
+      if (!volume || !frame || !from || !optics) return null;
+      const target = volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);
+      const distance = (camera: WorldCamera) => Math.hypot(...camera.pose.positionM.map((value, axis) => value - frame.originM[axis]!));
+      return distance(target.world) > distance(from) ? target : null;
     },
     /** Turn onto a bound pair's centre of mass, keeping the distance: a binary's overview is centred on the pair, not on the
      * star the scene mounts. Null when the system has no companion, or when the camera already looks at that centre. */

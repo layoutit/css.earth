@@ -7,6 +7,7 @@
  * a display raster cannot hold it without resampling. tools/oracles/fits/sky-orientation.py checks this reading against
  * Astropy's world coordinates. */
 import type { FitsHeader } from './fits.mts';
+import { dot3 as dot } from '../../src/platform/vector3.mts';
 
 export interface SkyImageAxes {
   /** Right ascension increases with column, so stored east is on the right. */
@@ -123,7 +124,6 @@ export function skyProjection(header: FitsHeader): SkyProjection {
   if (Math.abs(dec0) >= Math.PI / 2) throw new TypeError('A sky image referenced on a celestial pole has no north.');
   const centre = [Math.cos(dec0) * Math.cos(ra0), Math.cos(dec0) * Math.sin(ra0), Math.sin(dec0)];
   const east = [-Math.sin(ra0), Math.cos(ra0), 0], north = [-Math.sin(dec0) * Math.cos(ra0), -Math.sin(dec0) * Math.sin(ra0), Math.cos(dec0)];
-  const dot = (u: number[], v: number[]) => u[0]! * v[0]! + u[1]! * v[1]! + u[2]! * v[2]!;
   return {
     scaleArcsec: Math.sqrt(Math.abs(det)) * 3600,
     pixelOf(raDeg, decDeg) {

@@ -81,8 +81,8 @@ Neither set supplies IAU feature nomenclature.
 <details>
 <summary>Shape, coordinates and rotation</summary>
 
-The shape archive is `RO-C-MULTI-5-67P-SHAPE-V2.0`. `source/shape/mtp019.lbl` and
-`source/reference/esa-model-info.asc` are the original archive metadata. The OBJ is restored
+The shape archive is `RO-C-MULTI-5-67P-SHAPE-V2.0`. `source/shape/mtp019.lbl` is the original archive label, and
+[ESA_MODEL_INFO.ASC](https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/ESA_MODEL_INFO.ASC) describes the model. The OBJ is restored
 from the direct PSA URL in `source/preparation/acquisition.json` and decoded in **kilometres to
 metres**.
 

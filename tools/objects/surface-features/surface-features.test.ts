@@ -7,6 +7,7 @@ import { parseDbf } from './dbf.js';
 import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from './index.js';
 import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection } from './geometry.js';
 import { parseShpPolylines } from './shp.js';
+import { dot3 as dot } from '../../../src/platform/vector3.mts';
 const test = sourceTest();
 
 const root = process.cwd();
@@ -144,7 +145,6 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     assert.equal(written.length, plan.catalog.bytes);
     for (const feature of catalog.features) {
       assert.ok(Math.abs(Math.hypot(...feature.anchorUnits) - 11500) < 1e-2, feature.name);
-      const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
       if (feature.outline.kind === 'circle') {
         // Rim points lie on the sphere: |center|² + |east|² = R², and the tangents are orthogonal to the centre and each other.
         const { center, east, north } = feature.outline;

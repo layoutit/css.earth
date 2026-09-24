@@ -1,6 +1,7 @@
 import { cross3 as cross } from '../../../platform/vector3.mts';
 import { projectVolumeSphere } from './projected-volume-visibility.js';
 import type { PreparedCssVolume, PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
+import { dot3 as dot } from '../../../platform/vector3.mts';
 
 type View = PreparedVolumeImpostors['views'][number];
 export interface VolumeImpostorProjection {
@@ -60,4 +61,3 @@ function transport(vector: VolumeVector, from: VolumeVector, to: VolumeVector): 
     vector[1] + first[1] + second[1] / divisor, vector[2] + first[2] + second[2] / divisor];
 }
 function smooth(t: number): number { const value = Math.max(0, Math.min(1, t)); return value * value * (3 - 2 * value); }
-function dot(a: VolumeVector, b: VolumeVector): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }

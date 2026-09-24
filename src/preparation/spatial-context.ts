@@ -3,6 +3,7 @@ import { prepareGroupView, prepareSystemView } from './system-view.js';
 import type { PreparedSystemView, SystemViewPolicy } from './system-view.js';
 import { M_PER_AU } from '@cssearth/astronomy';
 import { prepareHyperbolicPath } from '../platform/prepare-hyperbolic-path.mts';
+import { dot3 as dot } from '../platform/vector3.mts';
 
 export type Vector3 = readonly [number, number, number];
 
@@ -489,7 +490,6 @@ function copy(value: Vector3): Vector3 { return Object.freeze([value[0], value[1
 function scale(value: Vector3, scalar: number): Vector3 { return [value[0] * scalar, value[1] * scalar, value[2] * scalar]; }
 function add(a: Vector3, b: Vector3): Vector3 { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
 
-function dot(a: Vector3, b: Vector3): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
 function unit(value: Vector3): Vector3 { const length = Math.hypot(...value); if (!(length > 0)) throw new TypeError('Orbit direction is undefined.'); return scale(value, 1 / length); }
 
 function parseSkyBaseline(value: unknown): SkyBaseline {

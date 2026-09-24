@@ -11,9 +11,8 @@
         "value": "12.4041 hours",
         "source": {
           "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC",
-          "label": "Comet 67P · virtis shap5 info asc",
+          "label": "Rosetta SHAP5 shape model information",
           "checked": "2026-09-16",
-          "path": "source/science/shap5-info.asc",
           "catalogueId": "source-comet-67p-virtis-shap5-info-asc",
           "locator": "Rotation Period: 12.4041 +/- 0.0001 hr (pre-perihelion)"
         }
@@ -580,7 +579,7 @@
       "credit": "ESA/RMOC"
     },
     "physical": {
-      "path": "../reference/esa-model-info.asc",
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/ESA_MODEL_INFO.ASC",
       "credit": "ESA/RMOC; Rosetta"
     }
   }

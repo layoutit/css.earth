@@ -1,5 +1,6 @@
 import { cross3 as cross } from '../platform/vector3.mts';
 import type { OrbitalState, PreparedWorldContext, Vector3 } from './spatial-context.js';
+import { dot3 as dot } from '../platform/vector3.mts';
 
 export interface PreparedSystemView {
   readonly memberIds: readonly string[];
@@ -117,8 +118,6 @@ function bakeView(parent: ViewParent, frames: readonly CandidateFrame[], members
   return Object.freeze({ memberIds: Object.freeze(members.map(member => member.id)),
     memberRadiiM: Object.freeze(members.map(member => member.radiusM)), candidates: Object.freeze(candidates) });
 }
-
-function dot(a: Vector3, b: Vector3): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
 
 function unit(vector: Vector3): Vector3 {
   const length = Math.hypot(...vector);

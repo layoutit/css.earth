@@ -7,6 +7,7 @@ import { prepareVolumeImpostors } from './volume-impostors.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import type { PreparedCssVolume, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '../volume/types.js';
 import type { PreparedVolumeLensBrightness } from '../volume/prepared-volume-lenses.js';
+import { dot3 as dot } from '../../../platform/vector3.mts';
 
 const AXES = ['x', 'y', 'z'] as const;
 const WHITE: PreparedVolumeLensBrightness = { overall: 1, x: 1, y: 1, z: 1 };
@@ -18,7 +19,6 @@ interface Source {
 }
 interface Fixture { volume: PreparedCssVolume; bytes: Map<string, Uint8Array> }
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
-const dot = (a: VolumeVector, b: VolumeVector) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 function point(axis: VolumeAxis, depth: number, u: number, v: number): [number, number, number] {
   return axis === 'x' ? [depth, u, v] : axis === 'y' ? [u, depth, v] : [u, v, depth];
 }

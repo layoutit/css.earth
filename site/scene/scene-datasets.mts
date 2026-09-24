@@ -11,8 +11,10 @@ interface CompanionClouds {
   setVolumeLensEnabled?(objectId: string, enabled: boolean): void;
 }
 
-/** Companion readiness and visibility belong to the same selection as the body material. */
-export function createDatasetEffects(session: SceneSession, getWorld: () => CompanionClouds | null): NonNullable<ObjectMountOptions['datasetEffects']> {
+/** Companion readiness and visibility belong to the same selection as the body material. A cold page mounts its body
+ * before the world, so a lens that shows a volume waits for the world instead of failing without it. */
+export function createDatasetEffects(session: SceneSession, getWorld: () => CompanionClouds | null,
+  ensureWorld: () => Promise<CompanionClouds>): NonNullable<ObjectMountOptions['datasetEffects']> {
   let active: { volume: LensVolume; release(): void } | null = null;
   let prepared: { volume: LensVolume; signal: AbortSignal; release(): void } | null = null;
   session.own(() => {
@@ -22,7 +24,9 @@ export function createDatasetEffects(session: SceneSession, getWorld: () => Comp
   return {
     async prepare(volume, signal) {
       if (!volume || signal.aborted || session.signal.aborted) return;
-      const bank = getWorld()?.focusBank(volume.objectId);
+      const world = getWorld() ?? await ensureWorld();
+      if (signal.aborted || session.signal.aborted) return;
+      const bank = world.focusBank(volume.objectId);
       if (!bank) throw new RangeError(`Dataset cloud “${volume.objectId}” is unavailable.`);
       // Pin through native commitment; cancellation releases the pin while shared loading may continue.
       const unpin = bank.subscribe(() => {});

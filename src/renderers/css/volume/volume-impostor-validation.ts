@@ -1,5 +1,6 @@
 import { cross3 as cross } from '../../../platform/vector3.mts';
 import type { PreparedVolumeImpostors, VolumeVector } from './types.js';
+import { dot3 as dot } from '../../../platform/vector3.mts';
 
 export function validateVolumeImpostors(input: unknown, resources: ReadonlySet<string>): PreparedVolumeImpostors {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Invalid prepared volume impostors.');
@@ -30,4 +31,3 @@ function positive(value: unknown): value is number { return typeof value === 'nu
 function unit(value: unknown): value is VolumeVector {
   return Array.isArray(value) && value.length === 3 && value.every(n => typeof n === 'number' && Number.isFinite(n)) && Math.abs(Math.hypot(...value) - 1) < 1e-6;
 }
-function dot(a: VolumeVector, b: VolumeVector): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }

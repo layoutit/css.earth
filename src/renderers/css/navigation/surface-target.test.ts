@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises';
 import { preparedScenePitch } from '@cssearth/engine';
 import { prepareLocationPoint, prepareLocationCamera } from '../../../../tools/objects/paged-ellipsoid/geographic/prepare-location.mts';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
+import { dotN as dot } from '../../../platform/vector3.mts';
 
 const apply = (matrix: readonly number[], point: readonly number[]) => [0, 1, 2].map(row =>
   matrix[row * 3] * point[0] + matrix[row * 3 + 1] * point[1] + matrix[row * 3 + 2] * point[2]);
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, value, i) => sum + value * b[i], 0);
 const identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 function rotate(point: readonly number[], axis: 'x' | 'y' | 'z', degrees: number) {
   const c = Math.cos(degrees * Math.PI / 180), s = Math.sin(degrees * Math.PI / 180), [x, y, z] = point;

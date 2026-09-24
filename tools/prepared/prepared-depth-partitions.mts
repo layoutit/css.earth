@@ -10,8 +10,8 @@ export type RecompiledPresentation<T extends PreparedPresentationDefinition> = O
 
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 import { visibilityComponents } from './prepared-visibility-order.mts';
+import { dot3 as dot } from '../../src/platform/vector3.mts';
 
-const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const MAXIMUM_DEPTH_LEAVES = 64;
 
 /** Recover the unchanged authoring topology before recompilation. The original

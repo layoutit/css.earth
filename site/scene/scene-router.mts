@@ -198,7 +198,7 @@ export function createSceneRouter({
         cameraMotion,
         onMotionRequest: requestMotion,
         onFeatureSelect: id => { void navigate(objectId, { kind: 'feature', id }).catch(report); },
-        datasetEffects: createDatasetEffects(session, () => world.current),
+        datasetEffects: createDatasetEffects(session, () => world.current, () => world.ensure()),
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
@@ -263,7 +263,7 @@ export function createSceneRouter({
       const selection = registry.createSceneSelection({ objectId,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
         initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
-      const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent });
+      const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, getReducedMotion: () => reducedMotionActive });
       if (windowTarget.location?.href && !destroyed) {
         // Only a settled scene belongs to the entry that history names. An unfinished navigation
         // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.

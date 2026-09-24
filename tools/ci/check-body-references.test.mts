@@ -23,7 +23,7 @@ test('an acquisition step must restore a declared file', () => {
 test('a pinned paper or archive document fails; our own Markdown notes pass', () => {
   const documents = ['reference/vernazza-2021.pdf', 'reference/ReadMe.AcuA.txt', 'reference/bundle_description.txt', 'survey/overview.docx',
     'vega/tvs_proc.doc', 'tex/table2.tex', 'lvdb/lvdb.bib', 'reference/dataset.cat', 'observations/aaReadMe_uranian_MAP_DEM.txt',
-    'surface/WAC_GLOBAL_README.TXT', 'reference/pds-bundle_description.txt', 'ReadMe', 'vims/document/information_file.xml'];
+    'surface/WAC_GLOBAL_README.TXT', 'reference/plate_shape_definition.asc', 'reference/pds-bundle_description.txt', 'ReadMe', 'vims/document/information_file.xml'];
   const manifest = { inputs: documents.map(path => ({ path })), documents: [{ path: 'geology/README.md' }] };
   const acquisition = { operations: [{ kind: 'download', path: 'reference/paper.PDF', url: 'https://example.org/paper.pdf' }] };
   const committed = new Set([...documents, 'geology/README.md']);
@@ -31,17 +31,18 @@ test('a pinned paper or archive document fails; our own Markdown notes pass', ()
     [...documents.map(path => `inputs pins ${path}`), 'downloads reference/paper.PDF']);
 });
 
-test('a body file byte-identical to a shared bank file fails, and a named consumed copy passes', () => {
+test('a committed SPICE kernel fails anywhere, and a body copy of a shared reference table fails', () => {
   const lines = [
     '100644 aaaa 0\tsrc/references/cie-1931-2deg/CIE_xyz_1931_2deg.csv',
     '100644 bbbb 0\tsrc/spice/voyager/lsk/naif0012.tls',
     '100644 cccc 0\tsrc/spice/voyager/manifest.json',
     '100644 aaaa 0\tsrc/objects/vega/source/reference/CIE_xyz_1931_2deg.csv',
     '100644 bbbb 0\tsrc/objects/puck/source/geometry/naif0012.tls',
-    '100644 bbbb 0\tsrc/objects/proteus/source/geometry/naif0012.tls',
+    '100644 eeee 0\tsrc/objects/steins/source/reference/ROS_V33.TF',
     '100644 cccc 0\tsrc/objects/vega/source/manifest.json',
     '100644 dddd 0\tsrc/objects/vega/source/shape/model.obj',
   ];
   assert.deepEqual(sharedCopyFindings(lines).map(finding => finding.file), [
-    'src/objects/vega/source/reference/CIE_xyz_1931_2deg.csv', 'src/objects/puck/source/geometry/naif0012.tls']);
+    'src/spice/voyager/lsk/naif0012.tls', 'src/objects/puck/source/geometry/naif0012.tls', 'src/objects/steins/source/reference/ROS_V33.TF',
+    'src/objects/vega/source/reference/CIE_xyz_1931_2deg.csv']);
 });

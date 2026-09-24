@@ -3,8 +3,8 @@ import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type { ObservationCamera } from './contract.mts';
 import { parseArchivedCamera } from '../terrestrial-layers/source-records.mts';
 import { fitCamera, project } from '../terrestrial-layers/osiris-geo.mts';
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 
-const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
 const unit = (a: readonly number[]) => { const n = Math.hypot(...a); return a.map(v => v / n); };
 
 const median = (values: readonly number[]) => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];

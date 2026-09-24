@@ -1,3 +1,4 @@
+import { dotN as dot } from '../../../src/platform/vector3.mts';
 /** One additive level per region, solved from the median difference of every measured boundary.
  * Montage's mBgModel with constant terms (Berriman et al.): minimise sum n_ij (o_i - o_j - d_ij)^2 with
  * sum o = 0. The WISE atlas mosaic and the photographic plate background share this solver. */
@@ -41,7 +42,6 @@ export function solveConstantOffsets(count: number, pairs: readonly OffsetPair[]
     for (const pair of pairs) { out[pair.i] -= pair.pixels * v[pair.j]!; out[pair.j] -= pair.pixels * v[pair.i]!; }
     return out;
   };
-  const dot = (a: Float64Array, b: Float64Array) => a.reduce((sum, value, i) => sum + value * b[i]!, 0);
   const offsets = new Float64Array(count), residualVector = Float64Array.from(rhs), direction = Float64Array.from(rhs);
   let rr = dot(residualVector, residualVector), sweeps = 0;
   const tolerance = 1e-20 * Math.max(1, dot(rhs, rhs));
