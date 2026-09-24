@@ -1,16 +1,14 @@
-import type {AuthoredObjectDescriptor} from '@cssearth/objects';
-import type {Polygon,Vec3} from '@layoutit/polycss';
-import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import type {ShapeModelConfig} from './source.mts';
-import {parseShapeModelConfig,parseShapeContent} from './source.mts';
-import {requireRecord,requireString} from '../../sources/source-values.mts';
-import {requireObjectRuntimeDefinition} from '../../contract/object-runtime-contract.mts';
-interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
+import type { AuthoredObjectDescriptor } from '@cssearth/objects';
+import type { prepareObjectContentAssets } from '../content/prepare.ts';
+import { parseShapeModelConfig, parseShapeContent } from './source.mts';
+import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireObjectRuntimeDefinition } from '../../contract/object-runtime-contract.mts';
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareRingLeaves } from './rings.mts';
-export { prepareRingLeaves } from './rings.mts';
+interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
+
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { prepareSolidBodySurface } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';

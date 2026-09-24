@@ -1,0 +1,110 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-206893",
+  "displayName": "HD 206893",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.37 solar radii",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-206893",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "40.8 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-206893",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.31 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2511-20091",
+          "url": "https://arxiv.org/abs/2511.20091",
+          "label": "Kral et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,554 K",
+        "source": {
+          "catalogueId": "arxiv-2511-20091",
+          "url": "https://arxiv.org/abs/2511.20091",
+          "label": "Kral et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of Gaia's spectrum of the star. The disc itself is unresolved.",
+        "thumbnail": "hd-206893-lens-color.webp",
+        "surface": "hd-206893-surface-color@2x.webp",
+        "poles": "hd-206893-poles-color@2x.webp",
+        "source": {
+          "id": "hd-206893-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's own spectrum of the star, from 380 to 780 nm. No image of its surface exists, and no darkening toward the edge is drawn."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kral et al. (2026), A&A 705, A217",
+      "href": "https://arxiv.org/abs/2511.20091"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2511.20091",
+      "credit": "Kral et al. (2026), A&A 705, A217"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-206893.json",
+      "credit": "Published or catalogue radius at the Gaia distance; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

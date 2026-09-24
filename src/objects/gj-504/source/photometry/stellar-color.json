@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "gj-504",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 6200,
+      "lowerKelvin": 6150,
+      "upperKelvin": 6250,
+      "citation": "Bonnefoy et al. (2018), A&A 618, A63, Appendix A: 6200 K, the BT-NextGen grid point that fits the star's spectral energy distribution and lies closest to the spectroscopic solution of D'Orazi et al. (2017); the range is one 50 K grid step either side, https://arxiv.org/abs/1807.00657"
+    },
+    "note": "Gaia DR3 publishes no sampled BP/RP spectrum of this bright star, so the colour is a Planck spectrum at the temperature its paper publishes; the range in the prepared report is the colour at the lower and upper bounds."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

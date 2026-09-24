@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-206893-b",
+  "displayName": "HD 206893 B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.79 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "arxiv-2511-20091",
+          "url": "https://arxiv.org/abs/2511.20091",
+          "label": "Kral et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its star",
+        "value": "About 11 au",
+        "source": {
+          "catalogueId": "arxiv-2511-20091",
+          "url": "https://arxiv.org/abs/2511.20091",
+          "label": "Kral et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "19.5 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2511-20091",
+          "url": "https://arxiv.org/abs/2511.20091",
+          "label": "Kral et al. 2026",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-206893-b-lens-shape.webp",
+        "surface": "hd-206893-b-surface-shape@2x.webp",
+        "poles": "hd-206893-b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-206893-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2511.20091"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet's surface exists: it is a point of light 0.2 arcseconds from its star. No paper gives its flux in three bands comparable with HR 8799's planets, so it stays gray. No spin axis is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kral et al. (2026), A&A 705, A217",
+      "href": "https://arxiv.org/abs/2511.20091"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2511.20091",
+      "credit": "Kral et al. (2026), A&A 705, A217"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-206893-b.json",
+      "credit": "Model radius and temperature; one orbit from the orbit paper's own posterior"
+    }
+  }
+}

@@ -2,13 +2,15 @@
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
 import { assessRequest, type RequestSatisfaction, type ProductFacts } from '../request-satisfaction.mts';
-import type { CapabilityRequest } from '../query.mts';
+import type { CapabilityRequest } from '../recipe-request.mts';
 import type { TargetCatalogueEntry } from '../targets.mts';
 import type { QualifiedObservation } from '../qualified-observations.mts';
 import type { QualificationAction } from '../qualification-routes.mts';
-import { jsonValue, parseLimits, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
-import { discover, discoverInstrumentFacets, INSTRUMENT_SAMPLE_LIMIT, normalizeSnapshot, searchCircle, SERVICES,
-  type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
+import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
+import {
+discover, discoverInstrumentFacets, INSTRUMENT_SAMPLE_LIMIT, normalizeSnapshot, searchCircle, SERVICES,
+type DiscoveredObservation, type DiscoveryRequest
+} from './discovery.mts';
 import { nativeQualificationRoute, planAccess, type AcquisitionSpec, type MetadataLoader } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
 

@@ -3,13 +3,13 @@ import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
-import {mkdtemp,readFile,rm} from 'node:fs/promises';
-import {tmpdir} from 'node:os';
-import {join} from 'node:path';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import sharp from 'sharp';
-import {BASE_TILE} from '@layoutit/polycss';
-import {prepareRadialMaterials} from './radial-terrain.mts';
+import { BASE_TILE } from '@layoutit/polycss';
+import { prepareRadialMaterials } from './radial-materials.mts';
+const test = sourceTest();
 
 // The flat source has one real science color and one explicit unknown-cell
 // color on opposite sides of0E. Source-point science is intentionally absent:

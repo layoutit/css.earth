@@ -1,8 +1,8 @@
 /** Human discovery starts from a target and preserves omitted scientific filters as omitted. */
 import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget } from './sky/target.mts';
 import { flagValue } from '../../cli/cli-arguments.mts';
-import { PRODUCT_KINDS, assessSearchCoverage, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue,
-  type ArchiveSelection, type ProductKind, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query.mts';
+import { PRODUCT_KINDS, type ProductKind } from './recipe-request.mts';
+import { assessSearchCoverage, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue, type ArchiveSelection, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query.mts';
 import { canonicalTargetRequest, resolveTarget, type TargetResolution } from './targets.mts';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
@@ -16,6 +16,7 @@ import { searchOpus, type OpusService } from './opus.mts';
 import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService } from './archive-leads.mts';
 import { searchChandraLeads, searchSpitzerLeads } from './other-leads.mts';
 import { loadWwtImagery, type WwtImageryResult } from './wwt/wwt-catalog.mts';
+import { loadWwtFitsLeads, type WwtFitsLeads } from './wwt/wwt-fits-leads.mts';
 
 export const EXPLORATION_SCHEMA = 'cssearth-telescope-exploration@1';
 export interface ExplorationRequest extends DiscoveryRequest {}
@@ -45,7 +46,7 @@ export interface ExplorationIssue {
   readonly code: 'unknown-target' | 'ambiguous-target' | 'provider-unavailable' | 'provider-overflow' | 'provider-target-unknown' | 'unsupported-observation' | 'filter-unresolved' | 'source-unavailable' | 'coverage';
   readonly reason: string; readonly identity?: string;
 }
-export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService; readonly archiveLeads?: readonly ArchiveLeadService[]; readonly curatedImagery?: WwtImageryResult }
+export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService; readonly archiveLeads?: readonly ArchiveLeadService[]; readonly curatedImagery?: WwtImageryResult;readonly wwtFits?:WwtFitsLeads }
 export interface ExplorationOutcome {
   /** A choice is a current route, not a guarantee that retrieval or qualification will succeed. */
   readonly selection: 'available' | 'none';
@@ -60,6 +61,8 @@ export interface ExplorationAnswer {
   readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService | ArchiveLeadService)[]; readonly coverage: readonly TargetCoverage[];
   /** Display metadata from WWT; entries are never numbered retrieval/qualification choices or science search coverage. */
   readonly curatedImagery?: WwtImageryResult;
+  /** Separately numbered WWT-hosted numeric tile leads, never qualified observations. */
+  readonly wwtFits?:WwtFitsLeads;
   /** The pinned SIMBAD answers a target outside the catalogue was resolved from in this run. */
   readonly skyResolution?: SkyResolution['evidence'];
 }
@@ -208,7 +211,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
   if (missingHeaders.length) issues.push({ scope: 'indexed-source', code: 'source-unavailable', identity: 'source manifest',
     reason: `${missingHeaders.length} declared source file header(s) were unavailable locally and were not inspected. This source inventory is incomplete.` });
   const answer: Omit<ExplorationAnswer, 'outcome'> = { schema: EXPLORATION_SCHEMA, request: canonicalRequest, target, targetResolution, choices: choices.map((choice, index) => ({ ...choice, pick: index + 1 })), unresolved, unsupported, issues, services, coverage: indexed.coverage,
-    ...(inputs.curatedImagery ? { curatedImagery: inputs.curatedImagery } : {}) };
+    ...(inputs.curatedImagery ? { curatedImagery: inputs.curatedImagery } : {}),...(inputs.wwtFits?{wwtFits:inputs.wwtFits}:{}) };
   return { ...answer, outcome: explorationOutcome(answer) };
 }
 
@@ -239,12 +242,12 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
   if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection);
   const target = targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
-  const [inputs, opus, curatedImagery] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target)]);
+  const [inputs, opus, curatedImagery, wwtFits] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target),loadWwtFitsLeads(root,target)]);
   const filter: ArchiveLeadFilter = { ...(request.instrument ? { instrument: request.instrument } : {}),
     ...(request.time && 'fromIso' in request.time ? { time: request.time } : {}) };
   const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target, undefined, filter), searchGeminiLeads(root, target, undefined, filter),
     searchChandraLeads(root, target, request.region, undefined, filter), searchSpitzerLeads(root, target, request.region, undefined, filter)]);
-  return { ...inputs, opus, archiveLeads, curatedImagery };
+  return { ...inputs, opus, archiveLeads, curatedImagery, wwtFits };
 }
 
 export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,

@@ -10,7 +10,7 @@ DH Tau is a young T Tauri star, well under ten million years old, 133 parsecs aw
 
 **Temperature and mass.** 3,600 ± 150 K from Xuan et al. ([2024](https://arxiv.org/abs/2405.13128), Table 1). The mass is 0.64 solar masses (Kraus & Hillenbrand 2009), the host mass Bowler et al. (2020) adopt for the orbit of DH Tau b placed here; Herczeg & Hillenbrand give 0.41 from other evolutionary tracks, and Xuan et al. 0.35 to 0.45.
 
-**Colour lens.** A Planck spectrum at 3,600 K through the CIE 1931 2° observer into sRGB with the D65 white. Gaia published no BP/RP spectrum of this star. No limb darkening is drawn.
+**Colour lens.** A Planck spectrum at 3,600 K through the CIE 1931 2° observer into sRGB with the D65 white. Gaia published no BP/RP spectrum of this star. Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 3,600 K (the record) and log g 4.04 (from the record's mass and radius (packages/astronomy/data/bodies/dh-tau.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** None is measured on the sky; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 

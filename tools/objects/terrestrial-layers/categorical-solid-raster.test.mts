@@ -2,14 +2,14 @@ import { required } from '../../contract/test-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
 import { requireRecord, requireString } from '../../sources/source-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import assert from 'node:assert/strict';
-import {mkdtemp, writeFile, readFile, rm} from 'node:fs/promises';
-import {tmpdir} from 'node:os';
-import {join} from 'node:path';
+import { mkdtemp, writeFile, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import sharp from 'sharp';
-import {prepareSolidRasters, prepareSolidMaterial} from './solid-raster.mts';
-import {reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster} from '../../../src/platform/prepare-solid-body-surface.mts';
+import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mts';
+import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
+const test = sourceTest();
 
 const colors=['#ff0000','#00ff00'], rgb=colors.map(c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)));
 function assertPalette(bytes: Uint8Array, message: string) {

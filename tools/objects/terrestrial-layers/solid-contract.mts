@@ -1,8 +1,8 @@
-import type {createRasterEmitter} from './solid-raster.mts';
-import type {loadRadialTerrain} from './radial-terrain.mts';
-import type {loadScienceSurface} from './scientific-raster.mts';
-import type {SurfaceObservation} from '../surface-observations/index.mts';
-import type {SciencePalette} from './contracts.mts';
+import type { createRasterEmitter } from './raster-output.mts';
+import type { loadRadialTerrain } from './radial-terrain.mts';
+import type { loadScienceSurface } from './scientific-raster.mts';
+import type { SurfaceObservation } from '../surface-observations/index.mts';
+import type { SciencePalette } from './contracts.mts';
 
 export type RasterAsset = Awaited<ReturnType<ReturnType<typeof createRasterEmitter>>>;
 export interface SolidSurface extends Record<string, unknown> {

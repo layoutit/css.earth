@@ -5,8 +5,8 @@ import { randomUUID } from 'node:crypto';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { readProductRecord, type ProductRecord } from '../product-record.mts';
-import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection,
-  type ArchiveSelection, type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';
+import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import type { CapabilityRequest } from './recipe-request.mts';
 import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
 import { qualifyObservation, type QualificationRequest } from './qualify.mts';
 import { selectedProductInput } from './selected-product.mts';
@@ -17,6 +17,7 @@ import { EXPLORATION_SCHEMA, exploreTarget, parseExplorationArguments, type Expl
 import { SERVICES } from './vo/discovery.mts';
 import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery-context.mts';
 import { canonical } from './vo/contracts.mts';
+import { sourceQuestionFromRequest } from './source-relevance.mts';
 
 export const SESSION_SCHEMA = 'cssearth-telescope-session@1';
 export interface Choice {
@@ -245,7 +246,7 @@ async function getScientificSession(root: string, directory: string, pick: numbe
       const { files, record } = await exportArtifact(root, dirname(resultPath), artifact, progress, true);
       const product = `files/${relativeFile(root, artifact.file)}`;
       const context: DeliveryContext = { kind: 'scientific-request', request: answer.request, assessment: satisfaction };
-      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
         evidence: record.evidence, files, reused: true };
       const temporary = `${resultPath}.${randomUUID()}.partial`;
@@ -259,7 +260,7 @@ async function getScientificSession(root: string, directory: string, pick: numbe
       const { files, record } = await exportArtifact(root, staging, artifact, progress);
       const product = `files/${relativeFile(root, artifact.file)}`;
       const context: DeliveryContext = { kind: 'scientific-request', request: answer.request, assessment: satisfaction };
-      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
         evidence: record.evidence, files, reused: false };
       await writeFile(resolve(staging, 'result.json'), `${JSON.stringify(result, null, 2)}\n`);
@@ -340,7 +341,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
     const previous = await readFile(resultPath, 'utf8').catch((error: unknown) => hasErrorCode(error, 'ENOENT') ? undefined : Promise.reject(error));
     const write = async (destination: string, reuse: boolean) => {
       const { files, record } = await exportArtifact(root, destination, artifact, progress, reuse), product = `files/${relativeFile(root, artifact.file)}`;
-      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, observation: choice.observation, product,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product,
         outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts, evidence: record.evidence, files, reused: reuse };
       return { result, product };

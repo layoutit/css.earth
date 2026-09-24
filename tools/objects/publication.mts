@@ -1,6 +1,7 @@
+import { parseRuntimeManifest } from './runtime-assets.ts';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
-import type { RuntimeManifest } from './operations.ts';
+import type { RuntimeManifest } from './runtime-assets.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
@@ -66,7 +67,6 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
   id: string; stage: string; objectDirectory: string; publicDirectory: string; outputDirectory: string; projectRoot: string;
 }) {
   const data = resolve(stage, 'prepared'), outputs = [...await readPreparedJsonOutputs(data), ...await readPreparedBinaryOutputs(data)];
-  const { parseRuntimeManifest } = await import('#preparation/operations');
   const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'inventory.json')), id);
   const current = await readInventory(id, objectDirectory);
   const stagedPrepared = await readInventory(id, stage);

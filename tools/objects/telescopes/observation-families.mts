@@ -1,5 +1,5 @@
 /** Evidence carried by archive observations before their bytes are qualified. */
-import type { ProductKind } from './query.mts';
+import type { ProductKind } from './recipe-request.mts';
 import type { FamilyId } from './product-descriptor.mts';
 import { mapIvoaProductType, type ProductTypeMapping } from './product-type.mts';
 

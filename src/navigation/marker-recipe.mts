@@ -80,7 +80,7 @@ export async function readMarkerImage(source: MarkerSource, sourcePath: string) 
   const bytes = await validateMarkerSourceBytes(source, sourcePath);
   if (!source.raster) return sharp(bytes);
   if (typeof source.width !== "number" || typeof source.height !== "number" || !Number.isSafeInteger(source.width) || !Number.isSafeInteger(source.height) || source.width < 1 || source.height < 1) throw new TypeError("Marker source raster dimensions are invalid.");
-  const {readObservation} = await import('../../tools/objects/terrestrial-layers/solid-raster.mts');
+  const {readObservation} = await import('../../tools/objects/terrestrial-layers/observation-raster.mts');
   const {rgb, missing} = await readObservation('/', {...source, path: sourcePath}, source.raster, source.width, source.height);
   const info = {width: source.width, height: source.height, channels: 3 as const};
   return sharp(paintMissingCoverage(rgb, info, missing), {raw: info});

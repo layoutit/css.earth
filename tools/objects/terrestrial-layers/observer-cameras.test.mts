@@ -4,13 +4,13 @@
  * build never runs. The disc centre is part of the derivation, so it is checked too: nothing in the recipe is fitted.
  */
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { deriveObserverCameras, limbSettled, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA } from './observer-cameras.mts';
 import { loadCameraShape } from './shape-camera-mosaic.mts';
-import { radialTerrainForLens } from './radial-models.mts';
+import { radialTerrainForLens } from './alternative-lenses.mts';
+const test = sourceTest();
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
 const bodies = readdirSync(OBJECTS).filter(id => existsSync(resolve(OBJECTS, id, 'source', OBSERVER_CAMERAS_FILE))).sort();

@@ -1,4 +1,4 @@
-import type { Affine as Matrix } from '../registration/stellar.ts';
+import type { Affine as Matrix } from '../registration/affine.ts';
 import type { EvidenceGrid, EvidencePlane } from './model.ts';
 
 function validateRaster(width: number, height: number, values: ArrayLike<number>, channels = 1) {

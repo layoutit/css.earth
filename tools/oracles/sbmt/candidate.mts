@@ -2,7 +2,7 @@
  * projective camera. This module never imports native reference results. It
  * does not qualify a production mosaic or solve an unknown camera. */
 import { project } from '../../objects/terrestrial-layers/osiris-geo.mts';
-import { type Case } from './cases.mts';
+import type { Case } from './cases.mts';
 
 const dot = (a: number[], b: number[]) => a.reduce((s,v,i)=>s+v*b[i],0);
 const cross = (a: number[], b: number[]) => [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];

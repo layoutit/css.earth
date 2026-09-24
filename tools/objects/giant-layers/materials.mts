@@ -1,19 +1,19 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
-import {shape,array,number,optional} from '../terrestrial-layers/source-records.mts';
-import {parse} from '../material-composition/data-schema.mts';
-import {ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial} from './material-contract.mts';
-import type {Vector3, ReadonlyVector3} from '../material-composition/ellipsoid.mts';
-import type {WebpOptions} from 'sharp';
-import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
-import {tmpdir} from 'node:os';
-import {join,resolve} from 'node:path';
+import { shape, array, number, optional } from '../terrestrial-layers/source-records.mts';
+import { parse } from '../material-composition/data-schema.mts';
+import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from './material-contract.mts';
+import type { Vector3, ReadonlyVector3 } from '../material-composition/ellipsoid.mts';
+import type { WebpOptions } from 'sharp';
+import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
 import sharp from 'sharp';
-import {worldPositionToCss} from '@layoutit/polycss';
-import {intersectViewRayWithEllipsoid,normalizeVector,dotVector,rotateSequence} from '../material-composition/ellipsoid.mts';
-import {writeMaterialAtlasTile,sampleRgbaBilinear} from '../material-composition/raster.mts';
-export {writeMaterialAtlasTile} from '../material-composition/raster.mts';
-import {optimizePreparedDisplayLosslessWebp,optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared/prepared-webp.mts';
+import { worldPositionToCss } from '@layoutit/polycss';
+import { intersectViewRayWithEllipsoid, normalizeVector, dotVector, rotateSequence } from '../material-composition/ellipsoid.mts';
+import { writeMaterialAtlasTile, sampleRgbaBilinear } from '../material-composition/raster.mts';
+
+import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
 
 const clamp=(value: number,low=0,high=1)=>Math.max(low,Math.min(high,value));
 const scale=(vector: ReadonlyVector3,value: number): Vector3=>[vector[0]*value,vector[1]*value,vector[2]*value];

@@ -3,13 +3,16 @@ import { fixtureSource } from '../test-source-fixture.mts';
 import { createIndexedShape } from './obj-shape.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs, rasterAtlasLayout, fillUndrawnTexels } from './radial-terrain.mts';
+import { loadRadialTerrain, rasterAtlasLayout } from './radial-terrain.mts';
+import { radialTriangles, simplifyRadialShape, validateClosedMesh } from './radial-mesh.mts';
+import { removeOppositeFacePairs } from './mesh-face-pairs.mts';
+import { fillUndrawnTexels } from './radial-materials.mts';
 import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mts';
+const test = sourceTest();
 
 test('source topology preserves translated inward-facing facets and welds duplicated positions', async () => {
   const vertices = [[1,0,0],[0,1,0],[0,0,1],[0,0,0]];

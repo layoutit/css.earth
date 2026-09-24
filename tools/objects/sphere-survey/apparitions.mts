@@ -24,7 +24,7 @@ import { qualifiedFace, shadingNormal } from '../surface-observations/geometry.m
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import { observerCamera, type BodyOrientation } from '../terrestrial-layers/observer-camera.mts';
 import { horizonsRows, loadOrientation, observerRowValues, parseObserverCameras } from '../terrestrial-layers/observer-cameras.mts';
-import { radialTerrainForLens } from '../terrestrial-layers/radial-models.mts';
+import { radialTerrainForLens } from '../terrestrial-layers/alternative-lenses.mts';
 import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { apparitions } from './frames.mts';
 import { lamText, parseFrameListing, type LamFrame } from './lam.mts';

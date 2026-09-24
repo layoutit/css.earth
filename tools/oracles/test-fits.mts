@@ -5,7 +5,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from './fixture.mts';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
 
 const args = process.argv.slice(2);
 if (args.some(arg => !['--unit', '--restore'].includes(arg)) || args.includes('--unit') && args.includes('--restore'))
@@ -58,7 +58,8 @@ if (missing.length && !args.includes('--restore')) throw new Error(
   `${missing.length} missing FITS test inputs. ` +
   'Run pnpm build:preparation, then pnpm test:fits --restore. For the offline checks only, use pnpm test:fits --unit.\n' + missing.map(i => i.path).join('\n'));
 if (missing.length) {
-  const { executeAcquisition, parseAcquisitionPlan, parseSourceManifest } = await import('#preparation/operations');
+  const { executeAcquisition, parseAcquisitionPlan } = await import('#preparation/operations-acquisition');
+  const { parseSourceManifest } = await import('#preparation/source-files');
   for (const input of missing) {
     if (input.path.startsWith('.local/fits-reference/')) {
       const pin = (await fitsArchiveInputs()).find(pin => pin.path === input.path);

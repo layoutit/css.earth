@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-135344-a",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "No angular diameter is measured: this is the record's radius at the Gaia distance.",
+  "distanceParsecs": 134.942753,
+  "distanceSource": "Gaia DR3 source 6199395656645840384: parallax 7.4105 +/- 0.0403 mas (RUWE 0.95), inverted to 134.9428 pc with no zero-point correction.",
+  "radiusKm": 1043550,
+  "radiusSource": "Temperature 9540 +/- 100 K and radius 1.50 +/- 0.01 solar radii from the fit to the star's spectral energy distribution by Stolker et al. (2025, arXiv:2507.06206), Appendix A: 1,043,550 km at 695,700 km per solar radius; the radius scales the model flux at the Gaia parallax, not a measured disc, and is smaller than the 1.8 solar radii evolutionary tracks predict. GM from the 2.2 solar masses the tracks give for its temperature (their Appendix A), the mass their orbit fit adopts, times the JPL solar GM. HD 135344 B, the star with the spiral disc 21 arcseconds away, is a separate package if ever built. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+  "effectiveTemperatureK": 9540,
+  "effectiveTemperatureSource": "Stolker et al. (2025), Appendix A, https://arxiv.org/abs/2507.06206",
+  "surfaceGravityLogg": 4.43,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-135344-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.428, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+  }
+}

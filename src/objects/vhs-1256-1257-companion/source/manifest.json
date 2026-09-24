@@ -161,6 +161,32 @@
           }
         ]
       }
+    },
+    {
+      "id": "vhs-1256-1257-companion-claret-2017-limb-darkening",
+      "path": "photometry/claret-2017-tess-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret (2017), A&A 600, A30 (VizieR J/A+A/600/A30)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic TESS coefficients of the grid nodes at 2700..2800 K, log g 5.0..5.5, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vhs-1256-1257-companion-claret-2017-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

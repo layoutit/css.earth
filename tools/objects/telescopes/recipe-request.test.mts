@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
 import { inputWavelengths } from './recipe-request.mts';
-import { requestFromArguments, type CapabilityRequest } from './query.mts';
+import { requestFromArguments } from './query.mts';
+import type { CapabilityRequest } from './recipe-request.mts';
 import { qualificationActionsFor } from './qualification-routes.mts';
 import { assessInput } from './request-satisfaction.mts';
 import { matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
+const test = sourceTest();
 const request:CapabilityRequest={target:'test',kind:'cube',wavelengthMicrometres:[2.28,2.32],continuumMicrometres:[[2.1,2.2],[2.35,2.4]]};
 test('continuum windows expand qualification and prevent selection of a band-only artifact',()=>{
  assert.deepEqual(inputWavelengths(request),[2.1,2.4]);

@@ -1,0 +1,31 @@
+{
+ "id": "hd-206893-b",
+ "classification": "exoplanet",
+ "order": 1761,
+ "physical": {
+  "name": "HD 206893 B",
+  "horizonsCode": null,
+  "meanRadiusKm": 127970.7,
+  "gravitationalParameterKm3PerS2": 2470387372.05,
+  "parent": "hd-206893"
+ },
+ "physicalNotes": "Radius 1.79 +0.24/-0.35 Jupiter radii and temperature 1162 +158/-67 K: the Exo-REM fit to the GRAVITY K-band spectrum and earlier photometry of Kral et al. (2026, arXiv:2511.20091); their ATMO fit agrees (1.98 Jupiter radii, 1097 K) and BT-Settl gives 0.93 and 1582 K. 127,970.7 km at 71,492 km per Jupiter radius. A model radius: B is unresolved. GM from their dynamical mass 19.5 +1.4/-1.3 Jupiter masses (Table 2) times Jupiter's GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 11061.9,
+  "semiMajorAxisStellarRadii": 1681.44,
+  "inclinationDegrees": 141.7396,
+  "eccentricity": 0.06437,
+  "argumentOfPeriapsisDegrees": 281.5595,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 60480.9,
+  "ascendingNodePositionAngleDegrees": 63.6595,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 10.726 au and total mass 1.3453 solar masses, 30.3 years of 365.25 d. Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 1). Its Keplerian orbit uses the star's mass plus B's and c's, as orbitize! does; the distributed posterior's masses differ from the paper's Table 2 (its B mass median is 7 Jupiter masses against 19.5), while its orbit elements agree with the table within about one standard deviation. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-b/source/orbits/pick.json): highest stored likelihood (ln L -8.60).",
+   "shape": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 1). Its Keplerian orbit uses the star's mass plus B's and c's, as orbitize! does; the distributed posterior's masses differ from the paper's Table 2 (its B mass median is 7 Jupiter masses against 19.5), while its orbit elements agree with the table within about one standard deviation. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-b/source/orbits/pick.json): highest stored likelihood (ln L -8.60). a 10.726 au at the sample's parallax 24.5453 mas, kept as the angular size 263.3 mas and placed at the Gaia DR3 distance: 1681.44 radii of the host's 954,987 km; inclination 141.7396 degrees.",
+   "eccentricity": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 1). Its Keplerian orbit uses the star's mass plus B's and c's, as orbitize! does; the distributed posterior's masses differ from the paper's Table 2 (its B mass median is 7 Jupiter masses against 19.5), while its orbit elements agree with the table within about one standard deviation. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-b/source/orbits/pick.json): highest stored likelihood (ln L -8.60). e 0.06437.",
+   "argumentOfPeriapsis": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 1). Its Keplerian orbit uses the star's mass plus B's and c's, as orbitize! does; the distributed posterior's masses differ from the paper's Table 2 (its B mass median is 7 Jupiter masses against 19.5), while its orbit elements agree with the table within about one standard deviation. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-b/source/orbits/pick.json): highest stored likelihood (ln L -8.60). omega 101.5595 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 281.5595 degrees.",
+   "phase": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 1). Its Keplerian orbit uses the star's mass plus B's and c's, as orbitize! does; the distributed posterior's masses differ from the paper's Table 2 (its B mass median is 7 Jupiter masses against 19.5), while its orbit elements agree with the table within about one standard deviation. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-b/source/orbits/pick.json): highest stored likelihood (ln L -8.60). tau 0.13388 of a period after MJD 59000; the periastron passage nearest that epoch is MJD 60480.9, taken as BMJD_TDB.",
+   "orientation": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 1). Its Keplerian orbit uses the star's mass plus B's and c's, as orbitize! does; the distributed posterior's masses differ from the paper's Table 2 (its B mass median is 7 Jupiter masses against 19.5), while its orbit elements agree with the table within about one standard deviation. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-b/source/orbits/pick.json): highest stored likelihood (ln L -8.60). Ascending node 63.6595 degrees east of north."
+  }
+ }
+}

@@ -19,7 +19,7 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations, measuredDiameters } from './archive-search.mts';
 import { astroqueryRows } from './astronomy-packages/client.mts';
-export { fetchRetrying } from './archive-search.mts';
+
 
 const SIMBAD = 'https://simbad.cds.unistra.fr/simbad/sim-tap', OIDB = 'https://tap.jmmc.fr/vollt/tap', VIZIER = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap';
 const quote = (text: string) => `'${text.replaceAll("'", "''")}'`;

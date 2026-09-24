@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
 import { detectCompactStars, matchCompactStars } from './compact.ts';
-import type { Point, Star } from './stellar.ts';
+import type { Point } from './affine.ts';
+import type { Star } from './stellar.ts';
 
 test('compact matching preserves reciprocal constellation identities under frame translation', () => {
   const points: Point[] = [[10,10],[25,12],[37,29],[15,40],[49,51],[60,30],[72,64],[83,44]];

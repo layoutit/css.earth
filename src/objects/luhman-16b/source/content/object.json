@@ -49,8 +49,23 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "brightness",
+    "defaultLens": "color",
     "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from its measured optical spectrum. The disc itself is unresolved.",
+        "thumbnail": "luhman-16b-lens-color.webp",
+        "surface": "luhman-16b-surface-color@2x.webp",
+        "poles": "luhman-16b-poles-color@2x.webp",
+        "source": {
+          "id": "luhman-16b-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1406.1518"
+        },
+        "falseColor": false,
+        "notes": "The colour of Luhman 16 B's own optical spectrum (T0.5), measured with MagE in 2013. Sodium and potassium absorb most of its yellow and green light, which leaves red with a little violet: a magenta that shifts between red-pink and lilac within the spectrum's noise."
+      },
       {
         "id": "brightness",
         "label": "Brightness",

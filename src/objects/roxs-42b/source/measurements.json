@@ -9,6 +9,8 @@
   "radiusSource": "Radius 1.51 +/- 0.02 solar radii and temperature 3650 +/- 20 K: the SPHINX model-atmosphere fit to the pair's blended optical spectrum, modelled as the sum of the two stars by Inglis et al. (2024, AJ; doi:10.3847/1538-3881/ad2771; arXiv:2402.09533), Table 1. Their text gives 1.42 and 1.59 solar radii for the two stars instead of the table's 1.51 and 1.39; the table is used. A model radius: the disc is not measured. 1,050,507 km at 695,700 km per solar radius. GM from the photometric mass 0.89 +/- 0.08 solar masses of Kraus et al. (2014, ApJ 781, 20; arXiv:1311.7664) times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
   "effectiveTemperatureK": 3650,
   "effectiveTemperatureSource": "3650 +/- 20 K: the SPHINX model fit of Inglis et al. (2024, AJ), Table 1, https://arxiv.org/abs/2402.09533",
+  "surfaceGravityLogg": 4.03,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/roxs-42b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.030, rounded to two decimals",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published model radius. The star's disc is not resolved; its colour is a blackbody at the published temperature."

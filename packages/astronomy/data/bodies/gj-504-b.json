@@ -1,0 +1,31 @@
+{
+ "id": "gj-504-b",
+ "classification": "exoplanet",
+ "order": 1766,
+ "physical": {
+  "name": "GJ 504 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 65772.6,
+  "gravitationalParameterKm3PerS2": 3192500603.88,
+  "parent": "gj-504"
+ },
+ "physicalNotes": "Radius 0.92 +/- 0.02 Jupiter radii and temperature 564 +/- 4 K from the retrieval on the JWST/NIRSpec spectrum by Baburaj et al. (2026, AJ 172, 28; arXiv:2606.19228), section 5.5: 65,772.6 km at 71,492 km per Jupiter radius. A model radius: the companion is unresolved. GM from their retrieved mass 25.2 +8.4/-6.0 Jupiter masses times Jupiter's GM; its mass has been debated from 1 to 30 Jupiter masses with the system's age (Bonnefoy et al. 2018). A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 134984.0,
+  "semiMajorAxisStellarRadii": 8717.2,
+  "inclinationDegrees": 131.9863,
+  "eccentricity": 0.20586,
+  "argumentOfPeriapsisDegrees": 343.1135,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 52116.5,
+  "ascendingNodePositionAngleDegrees": 146.0247,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 54.711 au and total mass 1.1991 solar masses, 369.6 years of 365.25 d. Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! MCMC fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_gj504b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/gj-504-b/source/orbits/pick.json): highest stored likelihood (ln L -25.49).",
+   "shape": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! MCMC fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_gj504b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/gj-504-b/source/orbits/pick.json): highest stored likelihood (ln L -25.49). a 54.711 au at the sample's parallax 56.8751 mas, kept as the angular size 3111.7 mas and placed at the Gaia DR3 distance: 8717.20 radii of the host's 939,195 km; inclination 131.9863 degrees.",
+   "eccentricity": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! MCMC fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_gj504b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/gj-504-b/source/orbits/pick.json): highest stored likelihood (ln L -25.49). e 0.20586.",
+   "argumentOfPeriapsis": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! MCMC fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_gj504b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/gj-504-b/source/orbits/pick.json): highest stored likelihood (ln L -25.49). omega 163.1135 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 343.1135 degrees.",
+   "phase": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! MCMC fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_gj504b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/gj-504-b/source/orbits/pick.json): highest stored likelihood (ln L -25.49). tau 0.38609 of a period after MJD 0; the periastron passage nearest that epoch is MJD 52116.5, taken as BMJD_TDB.",
+   "orientation": "Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! MCMC fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_gj504b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/gj-504-b/source/orbits/pick.json): highest stored likelihood (ln L -25.49). Ascending node 146.0247 degrees east of north."
+  }
+ }
+}

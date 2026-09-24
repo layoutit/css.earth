@@ -9,6 +9,8 @@
   "radiusSource": "Radius 1.26 solar radii from Herczeg & Hillenbrand (2014, ApJ 786, 97; VizieR J/ApJ/786/97, table14), from the star's luminosity and spectral-type temperature at their adopted 140 pc; a derived radius, not a measured disc. 876,582 km at 695,700 km per solar radius. Temperature 3600 +/- 150 K from Xuan et al. (2024; arXiv:2405.13128), Table 1. GM from 0.64 +/- 0.04 solar masses (Kraus & Hillenbrand 2009), the host mass Bowler et al. (2020) adopt for the orbit of DH Tau b placed here, times the JPL solar GM; Herczeg & Hillenbrand give 0.41 from other evolutionary tracks. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
   "effectiveTemperatureK": 3600,
   "effectiveTemperatureSource": "3600 +/- 150 K: Xuan et al. (2024), Table 1, https://arxiv.org/abs/2405.13128",
+  "surfaceGravityLogg": 4.04,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/dh-tau.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.044, rounded to two decimals",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is a blackbody at the published temperature."

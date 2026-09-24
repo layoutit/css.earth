@@ -17,7 +17,8 @@ Human entry points:
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope ascl SOFTWARE [--json]
-  telescope ascl --product PRODUCT.json [--json]
+  telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
+  telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
   telescope wwt-fits CATALOG.json --set NAME --level N --x X --y Y --out DIRECTORY [--json]
   telescope wwt-image EXPLORE.json --pick N --level 0..3 --out DIRECTORY [--json]
   telescope import SPEC.json --out DIRECTORY

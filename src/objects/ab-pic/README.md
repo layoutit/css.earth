@@ -10,7 +10,7 @@ AB Pic is a young K-type star in the Carina association. Its companion b, found 
 
 **Radial velocity.** Gaia DR3's 22.02 ± 0.19 km/s.
 
-**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar/stellar-photometric-color.mts)). No limb darkening is drawn.
+**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar/stellar-photometric-color.mts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 4,878 K (the record) and log g 4.29 (from the record's mass and radius (packages/astronomy/data/bodies/ab-pic.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
@@ -21,6 +21,6 @@ Run of 2026-09-23 (this version): see the planet's README for its placement agai
 ## Known problems
 
 - The radius is a model or catalogue value; the disc is not measured.
-- No limb darkening is drawn.
+- The limb darkening is a model: the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 4,878 K (the record) and log g 4.29 (from the record's mass and radius (packages/astronomy/data/bodies/ab-pic.json)).
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

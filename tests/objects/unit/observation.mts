@@ -1,6 +1,6 @@
-import {readFile} from 'node:fs/promises';
-import {readObservation} from '../../../tools/objects/terrestrial-layers/solid-raster.mts';
-import {paintMissingCoverage} from '../../../src/platform/prepare-missing-coverage.mts';
+import { readFile } from 'node:fs/promises';
+import { readObservation } from '../../../tools/objects/terrestrial-layers/observation-raster.mts';
+import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 
 // Exercise the source conversion without requiring an intermediate image in
 // the installable runtime. Browser captures cover the delivered packed atlas.

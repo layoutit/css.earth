@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-95086-b",
+  "card": {
+    "text": "Young giant planet about 57 au from its star, between an inner and an outer belt of dust.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2206-00425",
+        "url": "https://arxiv.org/abs/2206.00425",
+        "label": "Desgrange et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "hosting a giant exoplanet orbiting at 57 au from the star between an inner and outer debris belt"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 95086 b is a young giant planet with a very red colour. JWST's mid-infrared images rule out a warm disc around the planet as the cause.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2206-00425",
+        "url": "https://arxiv.org/abs/2206.00425",
+        "label": "Desgrange et al. 2022",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "confirm its very red spectral energy distribution"
+      },
+      {
+        "catalogueId": "arxiv-2408-16843",
+        "url": "https://arxiv.org/abs/2408.16843",
+        "label": "Malin et al. 2024",
+        "checked": "2026-09-23",
+        "locator": "Abstract",
+        "quote": "These observations allow us to refute the hypothesis of a warm circumplanetary disk"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere of the model radius, glowing with its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

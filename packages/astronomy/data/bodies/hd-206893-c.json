@@ -1,0 +1,31 @@
+{
+ "id": "hd-206893-c",
+ "classification": "exoplanet",
+ "order": 1762,
+ "physical": {
+  "name": "HD 206893 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 104378.3,
+  "gravitationalParameterKm3PerS2": 1406220504.09,
+  "parent": "hd-206893"
+ },
+ "physicalNotes": "Radius 1.46 +0.18/-0.06 Jupiter radii and temperature 1182 +21/-54 K from the atmosphere fit of Hinkley et al. (2023; arXiv:2208.04867), Table 3, the discovery paper: 104,378.3 km at 71,492 km per Jupiter radius. A model radius: the planet is unresolved. GM from the dynamical mass 11.1 +0.4/-0.5 Jupiter masses of Kral et al. (2026), Table 2, times Jupiter's GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2315.2,
+  "semiMajorAxisStellarRadii": 588.22,
+  "inclinationDegrees": 142.8985,
+  "eccentricity": 0.26089,
+  "argumentOfPeriapsisDegrees": 201.3051,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 58273.4,
+  "ascendingNodePositionAngleDegrees": 61.8209,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 3.752 au and total mass 1.3149 solar masses, 6.3 years of 365.25 d. Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 2). Its Keplerian orbit uses the star's mass plus c's, as orbitize! does. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-c/source/orbits/pick.json): highest stored likelihood (ln L -8.60).",
+   "shape": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 2). Its Keplerian orbit uses the star's mass plus c's, as orbitize! does. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-c/source/orbits/pick.json): highest stored likelihood (ln L -8.60). a 3.752 au at the sample's parallax 24.5453 mas, kept as the angular size 92.1 mas and placed at the Gaia DR3 distance: 588.22 radii of the host's 954,987 km; inclination 142.8985 degrees.",
+   "eccentricity": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 2). Its Keplerian orbit uses the star's mass plus c's, as orbitize! does. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-c/source/orbits/pick.json): highest stored likelihood (ln L -8.60). e 0.26089.",
+   "argumentOfPeriapsis": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 2). Its Keplerian orbit uses the star's mass plus c's, as orbitize! does. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-c/source/orbits/pick.json): highest stored likelihood (ln L -8.60). omega 21.3051 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 201.3051 degrees.",
+   "phase": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 2). Its Keplerian orbit uses the star's mass plus c's, as orbitize! does. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-c/source/orbits/pick.json): highest stored likelihood (ln L -8.60). tau 0.68616 of a period after MJD 59000; the periastron passage nearest that epoch is MJD 58273.4, taken as BMJD_TDB.",
+   "orientation": "Kral et al. (2026, A&A 705, A217; arXiv:2511.20091): the joint orbitize! MCMC fit of B and c to VLTI/GRAVITY and SPHERE astrometry, distributed as a posterior of 500 samples by whereistheplanet 1.0.1 (post_hd206893.hdf5, companion 2). Its Keplerian orbit uses the star's mass plus c's, as orbitize! does. Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-206893-c/source/orbits/pick.json): highest stored likelihood (ln L -8.60). Ascending node 61.8209 degrees east of north."
+  }
+ }
+}

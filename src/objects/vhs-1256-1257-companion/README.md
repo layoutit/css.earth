@@ -8,7 +8,7 @@ VHS 1256-1257 B is the twin of [VHS 1256-1257 A](../vhs-1256-1257/README.md): tw
 
 **Radius, mass and temperature.** As for A: the Chabrier et al. (2000) model radius 0.12 solar radii that Climent et al. ([2022](https://arxiv.org/abs/2201.12606)) adopt for each component, half the pair's dynamical mass of 0.141 ± 0.008 solar masses, and the 2,700 K BT-Settl model of the pair's combined spectrum (Dupuy et al. 2023).
 
-**Colour lens.** A Planck spectrum at 2,700 K through the CIE 1931 2° observer into sRGB with the D65 white. No limb darkening is drawn.
+**Colour lens.** A Planck spectrum at 2,700 K through the CIE 1931 2° observer into sRGB with the D65 white. Its limb is darkened by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 2,700 K (the record) and log g 5.13 (from the record's mass and radius (packages/astronomy/data/bodies/vhs-1256-1257-companion.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** None is measured. The display axis is the normal of its orbit around A, and nothing turns ([rotation.json](source/preparation/rotation.json)).
 

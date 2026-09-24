@@ -1,8 +1,7 @@
-import { sha256 } from '../../../../src/platform/sha256.mts';
-import {refreshSourceRecord} from '../../../sources/source-authoring-templates.mts';
-import {requireRecord,requireArray,requireString,requireFiniteNumber} from '../../../sources/source-values.mts';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
-import {requireTerrainMesh} from '../../terrestrial-layers/radial-terrain.mts';
+import { refreshSourceRecord } from '../../../sources/source-authoring-templates.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../../sources/source-values.mts';
+import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
+import { requireTerrainMesh } from '../../terrestrial-layers/radial-mesh.mts';
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
 await ensureReportDirectory('output/distant-worlds', {recursive:true});
 // Use the common title and source-mesh snapshot owners; no scene technique lives here.
