@@ -1,12 +1,10 @@
-// Prepare-time access to the vendored astronomy package (packages/astronomy).
+// Prepare-time access to the astronomy package (packages/astronomy).
 //
 // The package is consumed through its own build: `pnpm build:astronomy` runs
 // its tsup config and writes packages/astronomy/dist, which the workspace
 // link resolves as `@cssearth/astronomy` from Node and from Vite alike. The
-// mirrored TypeScript source imports `./x.js` for `./x.ts` files; Node does
-// not resolve that, and neither a loader hook nor a specifier rewrite is
-// used, so the source stays byte-identical to its origin and re-syncs stay
-// clean. Runtime code never imports this module: the astronomy package is a
+// TypeScript source imports `./x.js` for `./x.ts` files, which Node does not
+// resolve, so consumers read the build rather than the source. Runtime code never imports this module: the astronomy package is a
 // preparation dependency only, and its results are checked in.
 
 import { existsSync } from "node:fs";
