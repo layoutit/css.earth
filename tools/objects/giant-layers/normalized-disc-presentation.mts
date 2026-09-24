@@ -8,7 +8,7 @@ import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contract.mts';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform}from'@layoutit/polycss';
-import{multiplyPreparedMatrix4,preparedRotationMatrix4,readPreparedMatrix4,serializePreparedMatrix4}from'../../../src/renderers/css/dist/preparation.js';
+import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '../../../src/platform/math/matrix.mts';
 import{preparedResourcePool}from'../../../src/platform/prepared-object-assets.mts';
 import{PREPARED_PRESENTATION_SCHEMA}from'../../../src/platform/prepared-presentation-contract.mts';
 import{prepareCssomDeclarationReads}from'../../prepared/prepared-cssom.mts';

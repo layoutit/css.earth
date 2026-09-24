@@ -19,7 +19,6 @@ export default {
     index: fileURLToPath(new URL('./index.ts', import.meta.url)),
     universe: fileURLToPath(new URL('./universe/index.ts', import.meta.url)),
     navigation: fileURLToPath(new URL('./navigation/index.ts', import.meta.url)),
-    preparation: fileURLToPath(new URL('./preparation.ts', import.meta.url)),
     testing: fileURLToPath(new URL('./testing.ts', import.meta.url)),
     'scene-native-waits': fileURLToPath(new URL('./runtime/scene-native-waits.ts', import.meta.url)),
     'world-context-planner-worker': fileURLToPath(new URL('./universe/world-context/world-context-planner-worker.ts', import.meta.url)),

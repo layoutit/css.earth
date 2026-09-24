@@ -4,7 +4,7 @@ import type { PreparedWorldCameraFrame } from '../../../src/renderers/css/naviga
 import type { publishPreparedNativeView } from '../../../src/renderers/css/rendering/prepared-native-view.js';
 import { selectedPreparedVariant } from '../../../src/renderers/css/rendering/prepared-presentation.js';
 import { readPreparedTransform } from '../../../src/renderers/css/navigation/prepared-camera-basis.js';
-import { readPreparedMatrix4 } from '../../../src/renderers/css/prepared-data/prepared-ellipsoid-projection.js';
+import { readPreparedMatrix4 } from '../../../src/platform/math/matrix.mts';
 import type { PreparedMaterialRotation } from '../../../src/renderers/css/rendering/prepared-material.js';
 import { CssValues } from './css-values.mts';
 import type { Matrix, Value } from './css-values.mts';

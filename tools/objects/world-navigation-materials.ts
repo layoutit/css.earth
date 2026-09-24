@@ -1,4 +1,4 @@
-import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4 } from '../../src/renderers/css/prepared-data/prepared-ellipsoid-projection.js';
+import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4 } from '../../src/platform/math/matrix.mts';
 import type { AuthoredPresentationBasis } from './world-navigation-sources.js';
 
 type Data = Record<string, any>;

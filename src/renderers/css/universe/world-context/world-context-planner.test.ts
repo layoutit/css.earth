@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
-import { parsePreparedWorldContext } from '../prepared-world-context.js';
-import { createSystemFade, createWorldContextPlanner } from './world-context-planner.js';
+import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
+import { createSystemFade } from './context-scale.js';
+import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
 import { createContextSelectionPolicy } from '../context-presentation-policy.js';

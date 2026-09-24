@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
-import { parsePreparedWorldContext } from '../prepared-world-context.js';
+import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { createWorldContextFrameEncoder, createWorldContextFrameReceiver, contextFrameTransfers } from './world-context-frame.js';

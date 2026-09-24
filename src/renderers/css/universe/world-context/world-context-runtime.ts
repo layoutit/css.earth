@@ -1,7 +1,8 @@
 import { createObjectRuntime } from '../../runtime/object-runtime.js';
 import type { ObjectRuntimeDefinition, ObjectMountOptions } from '../../runtime/object-runtime-types.js';
 import { requireCamera } from '../../validation/camera-controls.js';
-import { parsePreparedWorldCamera, parsePreparedWorldContextPlan, PREPARED_WORLD_CAMERA_SCHEMA } from '../prepared-world-context.js';
+import { parsePreparedWorldCamera, parsePreparedWorldContextPlan } from '../../prepared-data/world-context.js';
+import { PREPARED_WORLD_CAMERA_SCHEMA } from '../../prepared-data/world-context.js';
 import type { PreparedWorldCameraFrame } from '../../navigation/world-camera.js';
 
 /** Adapt the selected detail to the application's physical observer and prepared extent.

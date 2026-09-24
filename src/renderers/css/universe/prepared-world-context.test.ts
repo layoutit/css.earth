@@ -4,16 +4,45 @@ import { required } from '../../../../tools/contract/test-values.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
-import { decodeWorldOrbits, mountPreparedWorldContext, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary, preparedVolumeOpacity } from './prepared-world-context.js';
+import { decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../prepared-data/world-context.js';
+import { mountPreparedWorldContext } from './prepared-world-context.js';
+import { worldContextGeometry } from '../prepared-data/world-context.js';
+import type { WorldContextFrame } from './world-context/world-context-frame.js';
+import type { PlannedWorldContext } from './world-context/world-context-planner.js';
+import { preparedVolumeOpacity } from './world-context/context-scale.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { createWorldContextFrameEncoder } from './world-context/world-context-frame.js';
-import { createWorldContextPlanner, CONTEXT_LINE_WIDTH } from './world-context/world-context-planner.js';
+import { createWorldContextPlanner } from './world-context/world-context-planner.js';
+import { CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { labelImportance } from '../labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, loadSystemViews, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../../objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
+
+// The production publisher only accepts encoded frames. Tests run the actual
+// planner inline and supply that same protocol without starting a browser worker.
+function mountTestContext({ annotationPriorities, annotationLandmarks, ...options }:
+  Parameters<typeof mountPreparedWorldContext>[0] & { annotationPriorities?: Readonly<Record<string, number>>; annotationLandmarks?: readonly string[] }) {
+  let latest: [WorldCameraPose, Parameters<ReturnType<typeof mountPreparedWorldContext>['publish']>[1]] | null = null;
+  let planner: ReturnType<typeof createWorldContextPlanner> | undefined, sequence = 0;
+  const encode = createWorldContextFrameEncoder();
+  const layer = mountPreparedWorldContext({ ...options, requestPublication() {
+    if (options.requestPublication?.()) return true;
+    if (latest && options.plan.schema === 'cssearth-world-context@1') publish(...latest);
+    return true;
+  } });
+  function publish(world: WorldCameraPose, viewport: Parameters<typeof layer.publish>[1], frame?: WorldContextFrame | PlannedWorldContext) {
+    latest = [world, viewport];
+    if (frame && 'updates' in frame) { layer.publish(world, viewport, frame); return; }
+    const snapshot = layer.captureFrame(world, viewport);
+    const planned = frame ?? (planner ??= createWorldContextPlanner(worldContextGeometry(options.plan), annotationPriorities, annotationLandmarks))(snapshot.view);
+    // Explicit complete-frame cases use a fresh baseline; ordinary samples keep their acknowledged delta chain.
+    layer.publish(world, viewport, encode(++sequence, frame ? 0 : snapshot.view.contextCommittedId ?? 0, planned));
+  }
+  return { ...layer, publish };
+}
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
@@ -75,7 +104,7 @@ class FakeDocument {
   createElementNS(_namespace: string, tagName: string): FakeElement { return this.createElement(tagName); }
 }
 
-const mounted = new WeakMap<FakeElement, ReturnType<typeof mountPreparedWorldContext>>();
+const mounted = new WeakMap<FakeElement, ReturnType<typeof mountTestContext>>();
 
 test('approximate orbit cues stay on retained groups through selection and publication', () => {
   const original = plan(1);
@@ -86,7 +115,7 @@ test('approximate orbit cues stay on retained groups through selection and publi
   expect(() => parsePreparedWorldContext({ ...input, bodies: [{ ...input.bodies[0], placement: 'unknown' }] })).toThrow(/placement/);
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: prepared, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement;
   const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } } as const;
@@ -191,7 +220,7 @@ const orbitLeafWeight = (piece: HTMLElement | SVGElement) => Number(piece.getAtt
 function mount(scale: number, requestPublication?: () => boolean) {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication });
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000 * scale], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
   mounted.set(layer.root as unknown as FakeElement, layer);
   return layer.root as unknown as FakeElement;
@@ -368,7 +397,7 @@ test('hover-only trails reveal the full orbit and keep their circle and label be
   const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map(body => ({ ...body,
     orbit: { ...body.orbit, trail: [0, 0, 0, .2, .4, .6, .8, 1], activeChords: [3, 4, 5, 6, 7] },
   })) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   layer.setHiddenOrbits(['mercury', 'venus']);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -412,7 +441,7 @@ test('open trajectories stay hidden until their body circle is hovered', () => {
     bodyVertexIndex: 3, displayExtentAu: 600, trailModel: 'finite-open-trajectory-constant-weight',
     trail: Array(7).fill(1), activeChords: [0, 1, 2, 3, 4, 5, 6], extentChords: [0, 3, 1, 5, 2, 4, 6],
   } }, source.bodies[1]!] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const publish = () => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
@@ -437,7 +466,7 @@ test('open trajectories stay hidden until their body circle is hovered', () => {
 test('an unlabelled minor body cannot leave an anonymous orbit across the stage', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite },
     annotationPriorities: { mercury: 1, venus: 3 } });
   layer.setHiddenLabels(['mercury']);
@@ -658,7 +687,7 @@ test('the Earth reference remains painted when its physical marker has faded at 
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
     annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id,
       labelImportance(object.classification, object.discovery.featured, object.discovery.orientationReference ?? 0)])),
@@ -680,7 +709,7 @@ test('prepared planetary systems retain identified moon paths and retire offscre
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
   for (const [planet, moon] of [['saturn', 'titan'], ['jupiter', 'europa'], ['uranus', 'titania']]) {
     const body = context.bodies.find(body => body.id === planet)!;
@@ -710,7 +739,7 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
       centerBodyId: index ? 'satellite-center' : parent.id, centerPositionM: parent.positionM } }));
   const context = parsePreparedWorldContext({ ...base, bodies: [parent, unrelated, ...moons],
     orbitCenters: { 'satellite-center': { centerBodyId: parent.id, positionM: parent.positionM } } });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])), orbitRenderer });
   layer.selectObject(parent.id); layer.setOverview(true);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -769,7 +798,7 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
   const target = systemViewTarget({ referenceFrame: required(frame).referenceFrame, epochJdTt: required(frame).epochJdTt,
     pose: { positionM: [0, 0, 1e15], orientationXyzw: [0, 0, 0, 1] } },
     required(frame), viewport, required(SYSTEM_VIEWS.get(planet)), systemFramingRect(viewport), 0, false, SYSTEM_RANGES.get(planet));
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
   // The system's prepared members: bodies orbiting the planet, or a centre placed off it (a circumbinary planet).
   const memberIds = new Set(required([context.focus, ...context.bodies].find(body => body.id === planet)!.systemView).memberIds);
@@ -811,7 +840,7 @@ test('initial Jupiter system framing makes the four large moons and their labels
   const target = systemViewTarget({ referenceFrame: required(frame).referenceFrame, epochJdTt: required(frame).epochJdTt,
     pose: { positionM: [0, 0, 1e15], orientationXyzw: [0, 0, 0, 1] } },
     required(frame), viewport, required(SYSTEM_VIEWS.get('jupiter')), systemFramingRect(viewport));
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
     annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, labelImportance(object.classification)])),
   });
@@ -859,7 +888,7 @@ test('satellite markers remain occluded by their parent when another detail obje
   const context = parsePreparedWorldContext({ ...source, bodies: [parent, { ...child, positionM,
     orbit: { ...child.orbit, centerBodyId: parent.id, centerPositionM: parent.positionM,
       verticesM: [positionM, ...orbitVertices(child.orbit!).slice(1)] } }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [100, 0, 20], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
@@ -875,7 +904,7 @@ test('a prepared object outside the navigation menu renders and selects using it
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
   const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map((body, index) => index === 0 ? { ...body, id: 'new-object', name: 'New object' } : body) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, 'new-object': sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
@@ -892,7 +921,7 @@ test('an orbitless prepared object renders and navigates without manufacturing o
   const source = plan(1), { orbit: _orbit, ...point } = source.bodies[0]!;
   const body = { ...point, id: 'future-object', name: 'Future object' };
   const context = parsePreparedWorldContext({ ...source, bodies: [body] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, 'future-object': sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
@@ -971,7 +1000,7 @@ test('distant ordinary bodies stop intercepting navigation while retained bodies
   const source = plan(1);
   const context = parsePreparedWorldContext({ ...source, bodies: [source.bodies[0],
     { ...source.bodies[1], positionM: [0, 100, 0], orbit: orbit([0, 100, 0], 1) }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite },
     distantNavigation: { afterDistanceM: 500, nonNavigableIds: ['mercury'] } });
   const root = layer.root as unknown as FakeElement;
@@ -1085,7 +1114,7 @@ test('overlapping circles retain selection priority and reappear when separated'
   const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map((body, index) => ({
     id: body.id, name: body.name, color: body.color, radiusM: 0.1, positionM: [400 + index * 10, 0, 0],
   })) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   const mercury = find(root, 'contextBody', 'mercury'), venus = find(root, 'contextBody', 'venus');
@@ -1135,7 +1164,7 @@ test.each([
     positionM: [400 + index * 30, 0, 0],
     orbit: { ...source.bodies[0].orbit, verticesM: orbit([100, 0, 0], 1).verticesM.map(([x, y, z]) => [x + 300 + index * 30, y, z]) },
   })) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries(['sun', ...objects.map(object => object.id)].map(id => [id, sprite])),
     annotationPriorities: Object.fromEntries(objects.map(object => [object.id, labelImportance(object.classification)])),
   });
@@ -1188,7 +1217,7 @@ test('the Sun circle and label remain visible after all planetary context fades 
   const source = plan(1);
   const context = parsePreparedWorldContext({ ...source, camera: { ...source.camera, maximumDistanceM: 1e12 },
     system: { fadeOutStartDistanceM: 100, hiddenDistanceM: 1000 } });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   for (const distance of [10000, context.camera.maximumDistanceM]) {
@@ -1306,7 +1335,7 @@ test('dolly motion leaves depth styles untouched while selection and rotation st
 test('selection transfers the detail handoff to the destination while retaining every orbit and marker', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   const camera: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -1339,7 +1368,7 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map((body, index) => ({
     id: body.id, name: body.name, color: body.color, radiusM: 1, positionM: [400 + index * 10, 0, 0],
   })) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   const mercury = find(root, 'contextLabel', 'mercury'), venus = find(root, 'contextLabel', 'venus');
@@ -1380,7 +1409,7 @@ test.each(['pointer', 'keyboard'])('a hidden moon annotation reveals together on
     { ...source.bodies[1], positionM: [460, 0, 0], radiusM: .1,
       orbit: { ...orbit([460, 0, 0], 1), centerBodyId: 'mercury', centerPositionM: [400, 0, 0] } },
   ] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   layer.setHiddenOrbits(['venus']);
   layer.setHiddenLabels(['venus']);
@@ -1409,7 +1438,7 @@ test('an in-frame circle and caption stay visible and constrained at the viewpor
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
   const context = parsePreparedWorldContext({ ...source, bodies: [{ ...source.bodies[0], positionM: [990, 740, 0], orbit: orbit([990, 740, 0], 1) }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite } });
   layer.setHiddenOrbits(['mercury']);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -1465,7 +1494,7 @@ test.each([
     verticesM: [positionM, [-extent, y, 0], [extent, y, 0], [extent, -extent, 0],
       positionM, [-extent, y, 0], [extent, y, 0], [extent, -extent, 0]], trail: Array(8).fill(weight),
   } }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite } });
   layer.setOverview(true);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -1506,7 +1535,7 @@ test.each([true, false])('crowding retires complete annotations and their orbits
       verticesM: [positionM, [0,500,0], [-500,0,0], [0,-500,0], [500,0,0], [0,500,0], [-500,0,0], [0,-500,0]],
       trail: closed ? body.orbit!.trail : body.orbit!.trail.map(() => .75) } };
   }) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite, venus: sprite} });
   layer.setOverview(true);
   const publish = (distance: number) => layer.publish({referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -1540,7 +1569,7 @@ test.each([true, false])('admitted annotations retain physical alpha while orbit
       verticesM: [[500,0,0], [550,50,0], [600,0,0], [550,-50,0], [500,0,0], [550,50,0], [600,0,0], [550,-50,0]],
       trail: Array(8).fill(closed ? 1 : .75) },
   }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite} });
   layer.setOverview(true);
   const nodes = all(layer.root as unknown as FakeElement);
@@ -1572,7 +1601,7 @@ test('an offscreen context body keeps the ring the camera crosses; explicit sele
       verticesM: [[2000,0,0], [100,100,0], [-100,100,0], [-200,0,0], [-100,-100,0], [100,-100,0], [1000,-50,0], [1500,-20,0]],
       trail: Array(8).fill(.75) },
   }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite} });
   layer.setOverview(true);
   layer.publish({referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -1598,7 +1627,7 @@ test('a label cannot cover a neighbouring circle even when the two labels fit', 
   const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map((body, index) => ({
     id: body.id, name: body.name, color: body.color, radiusM: .1, positionM: [100 + index * 80, 0, 0],
   })) });
-  const layer = mountPreparedWorldContext({host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite, venus: sprite}});
   layer.publish({referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: {positionM: [0, 0, 400], orientationXyzw: [0, 0, 0, 1]}}, {focalPixels: 400, principalOffsetPixels: [0, 0]});
@@ -1624,7 +1653,7 @@ test('one retained focus label and locator survive system retirement at their ph
     focus: { ...base.focus, id: 'anchor', name: 'Anchor' },
     bodies: base.bodies.map(body => ({ ...body, orbit: { ...body.orbit, centerBodyId: 'anchor' } })),
     system: { fadeOutStartDistanceM: 1000, hiddenDistanceM: 10000 } });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { anchor: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement;
   const focus = layer.inspect().find(body => body.id === 'anchor')!;
@@ -1689,7 +1718,7 @@ test('the selected moon family shows readable labels, then fades at system dista
   const context = parsePreparedWorldContext({ ...base, system: { fadeOutStartDistanceM: 1e10, hiddenDistanceM: 1e11 },
     bodies: [parent, { ...satellite, positionM, orbit: { ...satellite.orbit, centerBodyId: parent.id,
       centerPositionM: parent.positionM, verticesM: [[250,0,0],[200,100,0],[100,150,0],[0,100,0],[-50,0,0],[0,-100,0],[100,-150,0],[200,-100,0]] } }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const child = layer.inspect().find(body => body.id === satellite.id)!;
   const marker = child.billboard as unknown as FakeElement, label = child.billboard as unknown as FakeElement;
@@ -1725,7 +1754,7 @@ test('resolved body labels remain visible alongside faint close-up orbit lines',
   const base = plan(1), position = [35, 0, -60] as const;
   const context = parsePreparedWorldContext({ ...base, bodies: [{ ...base.bodies[0],
     positionM: position, radiusM: 8, orbit: orbit(position, 1) }] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite } });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 40], orientationXyzw: [0, 0, 0, 1] } },
@@ -1752,7 +1781,7 @@ test('a moon label tries the other side when its first position overlaps the sel
     orbit: { ...base.bodies[1].orbit, centerBodyId: parent.id, centerPositionM: parent.positionM,
       verticesM: [[326,-32,0], [400,-150,0], [550,0,0], [400,150,0], [250,0,0], [400,-150,0], [550,0,0], [400,150,0]] } };
   const context = parsePreparedWorldContext({ ...base, bodies: [parent, moon] });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite, venus: sprite} });
   layer.selectObject(parent.id);
   const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
@@ -1773,7 +1802,7 @@ test('a moon label tries the other side when its first position overlaps the sel
 test.each([1, 1e9, 1e16])('an orbit interior does not exclude background annotations at physical scale %s', scale => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const camera: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000 * scale], orientationXyzw: [0, 0, 0, 1] } };
@@ -1801,7 +1830,7 @@ test.each([1, 1e9, 1e16])('stars returning during a drag regain annotations at p
   const context = parsePreparedWorldContext({ ...base, bodies: base.bodies.map((body, index) => ({
     ...body, orbit: undefined, positionM: [(index ? -250 : 250) * scale, 120 * scale, 0],
   })) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const camera: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000 * scale], orientationXyzw: [0, 0, 0, 1] } };
@@ -1878,7 +1907,7 @@ test('the Sun locator stays visible across galactic observer rotations while res
     // An orbiting occluder: an orbitless body would itself be a placed locator.
     bodies: [{ id: 'uranus', name: 'Uranus', positionM: [3e12, 0, 0], radiusM: 2.5e7, color: '#99bbcc', orbit: orbit([3e12, 0, 0], 1) }],
     system: { fadeOutStartDistanceM: 1e14, hiddenDistanceM: 1e15 } });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, uranus: sprite } });
   layer.selectObject('uranus');
   const focus = layer.inspect().find(body => body.id === 'sun')!, label = focus.billboard as unknown as FakeElement;
@@ -1909,7 +1938,7 @@ test('billboards straddle the selected detail in camera-depth order without repl
   const source = plan(1);
   const context = { ...source, bodies: source.bodies.map((body, index) => ({ ...body,
     positionM: (index === 0 ? [20, 0, 30] : [-20, 0, -30]) as [number, number, number] })) };
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   // The container must not trap foreground children behind the detailed body.
@@ -2156,7 +2185,7 @@ test('transports a non-rendered parent coordinate without creating a body or mar
   expect(parsed.orbitCenters?.patroclus).toEqual(center);
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: parsed, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } },
@@ -2187,7 +2216,7 @@ test('world presentation leaves the detail scope while retaining its input regis
   const document = new FakeDocument(), host = document.createElement('main'), presentationHost = document.createElement('section');
   presentationHost.append(host);
   const request = vi.fn(() => true);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, presentationHost: presentationHost as unknown as HTMLElement,
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, presentationHost: presentationHost as unknown as HTMLElement,
     before: host as unknown as Element, plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication: request });
   const world: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const, widthPixels: 800, heightPixels: 600 };
@@ -2243,7 +2272,7 @@ test('the main thread draws worker frames from the orbit summary exactly as from
   const layers = [full, summary].map(prepared => {
     const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
     host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-    const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
       plan: prepared, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
     return { layer, root: layer.root as unknown as FakeElement };
   });

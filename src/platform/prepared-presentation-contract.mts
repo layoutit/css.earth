@@ -6,7 +6,7 @@ import type { PreparedWrite } from "../renderers/css/rendering/prepared-presenta
 import type { PreparedAssets } from "../renderers/css/rendering/prepared-residency.ts";
 import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.mts";
 import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.mts";
-import type { EllipsoidProjectionPlan } from "../renderers/css/dist/preparation.js";
+import type { EllipsoidProjectionPlan } from '../renderers/css/prepared-data/prepared-ellipsoid-projection.js';
 import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "../renderers/css/dist/testing.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "../renderers/css/dist/testing.js";
 import type { PreparedVariant, PreparedPresentationDefinition, PreparedSelectionNavigation } from "./prepared-presentation.mts";

@@ -14,7 +14,7 @@ import { prepareAtlasRows } from './atlas-rows.mts';
 
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
-import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from "../../../src/renderers/css/dist/preparation.js";
+import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '../../../src/platform/math/matrix.mts';
 import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
 import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 

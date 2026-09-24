@@ -1,5 +1,5 @@
-import type { PreparedWorldContext } from '../prepared-world-context.js';
-import { worldContextGeometry } from '../prepared-world-context.js';
+import type { PreparedWorldContext } from '../../prepared-data/world-context.js';
+import { worldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldContextView } from './world-context-planner.js';
 import type { WorldContextFrame } from './world-context-frame.js';
 import { packWorldBodies } from './world-context-view-transport.js';
