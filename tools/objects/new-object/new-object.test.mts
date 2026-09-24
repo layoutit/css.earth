@@ -77,13 +77,15 @@ test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', 
 });
 
 test('a transiting orbit is one paper\'s archive row, with gaps filled from other rows and a/R* derived when no row has it', () => {
-  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim';
+  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar';
   const anchor = (ref: string, bib: string, label: string) => `"<a refstr=${ref} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
   const csv = [header,
     `"WASP-121 b",${anchor('BOURRIER_ET_AL__2020', '2020A&A...635A.205B', 'Bourrier et al. 2020')},0,1.27492504,3.8131,88.49,0,10,2458119.72074,1.753,1.157,,1.458,1.353,0`,
     `"X b",${anchor('A_ET_AL__2019', '2019AJ....157...1A', 'A et al. 2019')},1,5.0,,87.0,0.2,95.0,2458000.5,1.0,,0.05,1.0,1.0,`,
     `"X b",${anchor('B_ET_AL__2021', '2021AJ....161...2B', 'B et al. 2021')},0,5.0,,,,,,1.1,0.9,,,,0`,
-    `"Y b",${anchor('C_ET_AL__2022', '2022AJ....163...3C', 'C et al. 2022')},1,2.0,8.0,89.0,0,,2459000.5,0.2,0.05,,,,1`].join('\n');
+    `"Y b",${anchor('C_ET_AL__2022', '2022AJ....163...3C', 'C et al. 2022')},1,2.0,8.0,89.0,0,,2459000.5,0.2,0.05,,,,1`,
+    `"Z b",${anchor('E_ET_AL__2023', '2023AJ....165...5E', 'E et al. 2023')},1,4.0,10.0,,0,,2459100.5,0.1,0.01,,,,0,0.5`,
+    `"W b",${anchor('F_ET_AL__2023', '2023AJ....165...6F', 'F et al. 2023')},1,4.0,10.0,,0,,2459100.5,0.1,0.01,,,,0,12`].join('\n');
   const rows = parseArchiveRows(csv), wasp = rows.filter(row => row.name === 'WASP-121 b'), x = rows.filter(row => row.name === 'X b');
   assert.deepEqual([wasp[0]!.bibcode, wasp[0]!.reference, wasp[0]!.isDefault, wasp[0]!.year], ['2020A&A...635A.205B', 'BOURRIER_ET_AL__2020', false, 2020]);
   const { orbit } = assembleArchiveOrbit(wasp, 'BOURRIER_ET_AL__2020', { value: 1.157, provenance: 'Mass', limit: false, label: 'Bourrier et al. 2020' });
@@ -97,6 +99,11 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   assert.match(second.orbit.sources.shape!, /derived from its semi-major axis 0.05 au/u);
   assert.match(second.todo!, /omega 95 degrees is taken as A et al. 2019 gives it/u);
   assert.throws(() => assembleArchiveOrbit(x.slice(1), 'B_ET_AL__2021', adopted), /no archive row gives its inclination, transit time/u);
+  // No row states an inclination: the impact parameter gives it, b = a/R* cos i on a circular orbit (Winn 2010, eq. 7).
+  const small = { value: 0.003, provenance: 'Mass', limit: false, label: 'E et al. 2023' }, z = assembleArchiveOrbit(rows.filter(row => row.name === 'Z b'), undefined, small);
+  assert.equal(z.orbit.inclinationDegrees, Number((Math.acos(0.05) * 180 / Math.PI).toFixed(3)));
+  assert.match(z.orbit.sources.shape!, /inclination derived from its impact parameter 0.5 with its a\/R\* 10 \(Winn 2010, eq. 7\)/u);
+  assert.throws(() => assembleArchiveOrbit(rows.filter(row => row.name === 'W b'), undefined, small), /impact parameter 12 with a\/R\* 10 allows none/u);
   // A flagged upper limit is not a mass: the archive's calculated value serves, or the planet is refused.
   const y = rows.filter(row => row.name === 'Y b');
   assert.equal(y[0]!.massJupiter, undefined); assert.equal(y[0]!.massLimitJupiter, 0.05);
@@ -210,7 +217,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
     `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789,0,1`].join('\n');
   // GJ 436's case: the default row leaves the stellar temperature empty and another paper's row gives it.
   const gapped = stars.replaceAll(',5000,50,', ',,,').replace(',5000,,', ',,,') + `\nHD 1 b,HD 1,0,${ref('Four et al. 2022', '2022AJ....1....4F')},${ref('Four et al. 2022', '2022AJ....1....4F')},0.81,,5010,40,0.86,,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789,0,1`;
-  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim',
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar',
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
   const composite = (name: string, mass: number) => `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"${name}",${mass},0,Mass,${ref('One et al. 2019', '2019AJ....1....1O')}`;
@@ -242,6 +249,22 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.deepEqual([temperature.value, temperature.uncertainty], [5010, 40], 'from the other row, with its own uncertainty');
   assert.match(temperature.source, /Four et al\. 2022.*the default leaves it empty/u);
   assert.equal((filled.spec.radius as { value: number }).value, 0.8, 'the default row still gives the radius');
+  // A host the universe names otherwise is found by the Gaia DR3 source its position cites.
+  const byGaia = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-one']), names: new Map(), stars: [], gaia: new Map([['123456789', 'hd-one']]) });
+  assert.equal(byGaia.spec.host, 'hd-one');
+  // A host with no planet to add is left out, with the reasons, not drafted as a lone star.
+  const rvOnly = { ...archive, async text(url: string) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? stars.split('\n').filter(line => !line.startsWith('HD 1 b') && !line.startsWith('HD 1 c')).join('\n') : archive.text(url); } };
+  await assert.rejects(archiveSpec(rvOnly, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }), /^Error: HD 1: no planet to add; HD 1 d: found by radial velocity, not a transit fit\.$/u);
+  // No archive row gives a temperature: TIC v8.2's for the same Gaia source, cited to it.
+  const noTeff = stars.replaceAll(',5000,50,', ',,,').replace(',5000,,', ',,,');
+  const tic = ['#', 'TIC\tTeff\ts_Teff\tRad\ts_Rad\tMass\ts_Mass', '\t\t\t\t\t\t', '---\t---\t---\t---\t---\t---\t---', '42\t4800\t120\t0.79\t0.04\t0.84\t0.1'].join('\n');
+  const ticArchive = { ...archive, async text(url: string) { if (url.includes('asu-tsv')) return new URL(url).searchParams.get('GAIA') === '123456789' ? tic : ''; const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? noTeff : archive.text(url); } };
+  const fromTic = (await archiveSpec(ticArchive, 'HD 1', { ids: new Set(), names: new Map(), stars: [] })).spec;
+  assert.deepEqual([(fromTic.temperature as { value: number }).value, (fromTic.temperature as { uncertainty: number }).uncertainty], [4800, 120]);
+  assert.match((fromTic.temperature as { source: string }).source, /TIC 42 \(VizieR IV\/39\/tic82\); no NASA Exoplanet Archive row gives one/u);
+  assert.match((fromTic.text as { card: string }).card, /4,800 K/u);
+  const noGaia = { ...ticArchive, async text(url: string) { return url.includes('asu-tsv') ? '' : ticArchive.text(url); } };
+  await assert.rejects(archiveSpec(noGaia, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }), /no archive row gives a stellar temperature, nor does TIC v8.2 for Gaia DR3 123456789/u);
 });
 
 test('ids follow one rule, and a body the universe holds is found whatever its id', async () => {
@@ -249,6 +272,7 @@ test('ids follow one rule, and a body the universe holds is found whatever its i
   assert.equal(hostId({ planetPrefix: planetPrefix('pi Men c', 'c'), hostname: 'HD 39091' }), 'pi-men', 'the name its planets use');
   assert.equal(hostId({ hostname: '55 Cnc', hd: 'HD 75732' }), 'hd-75732', 'a name starting with a digit falls to its HD name');
   assert.equal(hostId({ hostname: 'Kepler-444' }), 'kepler-444');
+  assert.deepEqual([hostId({ hostname: 'K2-32B' }), hostId({ hostname: 'HD 1 B' }), hostId({ hostname: 'Kepler-16AB' })], ['k2-32-b', 'hd-1-b', 'kepler-16ab'], 'a component letter against its number is hyphenated, never read as a planet');
   assert.throws(() => hostId({ hostname: '2MASS J0249' }), /starts with a letter/u);
   assert.deepEqual([planetId('hd-219134', 'b'), planetId('trappist-1', 'e'), planetId('pi-men', 'c'), planetId('kepler-16ab', 'b')], ['hd-219134b', 'trappist-1e', 'pi-men-c', 'kepler-16ab-b']);
   assert.throws(() => planetId('hd-1', '01'), /not one letter/u);
@@ -310,7 +334,7 @@ test('a wide companion is drafted as a placed star of the host\'s system from th
   const { companions, notes } = await wideCompanions(archive, { gaia: '846946621395854848', name: 'HAT-P-22', system: 'HAT-P-22 system' }, () => undefined);
   assert.deepEqual(notes, []);
   const star = companions[0]! as { id: string; name: string; system: string; gaia: string; temperature: { value: number; uncertainty: number; source: string }; radius: { value: number }; mass: { value: number }; text: { card: string } };
-  assert.deepEqual([star.id, star.name, star.system, star.gaia, star.temperature.value, star.temperature.uncertainty, star.radius.value, star.mass.value], ['hd-233731b', 'HD 233731B', 'HAT-P-22 system', '846946625690867328', 3589, 157, 0.599, 0.587]);
+  assert.deepEqual([star.id, star.name, star.system, star.gaia, star.temperature.value, star.temperature.uncertainty, star.radius.value, star.mass.value], ['hd-233731-b', 'HD 233731B', 'HAT-P-22 system', '846946625690867328', 3589, 157, 0.599, 0.587]);
   assert.match(star.temperature.source, /TIC 252479261/u);
   assert.doesNotThrow(() => parseStarSpec(star), 'the draft is a valid star spec');
   const held = await wideCompanions(archive, { gaia: '846946621395854848', name: 'HAT-P-22', system: 's' }, () => 'hd-233731-b');

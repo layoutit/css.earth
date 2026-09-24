@@ -1,12 +1,14 @@
 /** A spec for a planet host and its transiting planets, written from the NASA Exoplanet Archive `ps` table alone: each planet's
  * default parameter set (one paper, `pl_refname`) gives its orbit, radius and mass; the star's radius, temperature and mass come
- * from the same rows (`st_refname`), with Gaia DR3 FLAME where a row leaves them empty. Planets whose default row is not a transit
- * fit, or lacks the elements the orbit needs, are left out and named, so the README can say so. The card and introduction are
+ * from the same rows (`st_refname`), with Gaia DR3 FLAME where every row leaves the radius or mass empty and TIC v8.2 where every
+ * row leaves the temperature empty. Planets whose default row is not a transit fit, or lacks the elements the orbit needs, are left
+ * out and named, so the README can say so; a host left with no planet to add is left out, not drafted as a lone star. A host the
+ * universe holds is found by the Gaia DR3 source its position cites, then by name. The card and introduction are
  * drafted from the row's numbers and cite the row's paper; a person edits them, or keeps them. */
 import { archiveHostQuery, assembleArchiveOrbit, compositeMass, decodeEntities, NASA_TAP, parseArchiveRows } from './orbit.mts';
 import type { Archive } from './archives.mts';
 import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existing } from './identity.mts';
-import { wideCompanions } from './companions.mts';
+import { TIC, ticRow, wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';
 import { thermalFromArchive } from './planet-lenses.mts';
 
@@ -43,7 +45,8 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   if (rows.some(row => row.circumbinary)) throw new Error(`${hostname}: its planets orbit both stars of a pair (circumbinary); the pair's orbit comes from a paper, so build it by hand as Kepler-16 is.`);
   const first = rows[0]!, prefix = planetPrefix(first.planet, first.letter);
   // The host as the universe knows it, by id or name; else its id by the rule (identity.mts).
-  const known = [hostname, prefix].flatMap(name => name ? [duplicateName(universe, name)] : []).find(Boolean);
+  // By the Gaia DR3 source its position cites first: the universe may name it otherwise (eps Indi A for the archive's eps Ind A).
+  const known = (first.gaiaDr3 ? universe.gaia?.get(first.gaiaDr3) : undefined) ?? [hostname, prefix].flatMap(name => name ? [duplicateName(universe, name)] : []).find(Boolean);
   const hostId = known ?? idForHost({ ...(prefix ? { planetPrefix: prefix } : {}), hostname, ...(first.hd ? { hd: first.hd } : {}), ...(first.hip ? { hip: first.hip } : {}), ...(first.gaiaDr3 ? { gaiaDr3: `Gaia DR3 ${first.gaiaDr3}` } : {}) });
   const skipped: string[] = [], notes: string[] = [], existing = (id: string) => universe.ids.has(id);
   // Quotes from the Wikipedia lead (prose.mts): a planet's own article first, then its host's, whose lead names the planet.
@@ -75,28 +78,32 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   }
   // Planets in order of their period, innermost first, however the archive lists them.
   const planets = found.sort((a, b) => a.period - b.period).map(item => item.entry);
+  // A host with no planet to add is not drafted: a star alone is not what an archive draft is for.
+  if (!planets.length) throw new Error(`${hostname}: no planet to add; ${[...skipped, ...notes.filter(note => note.includes('already in the universe'))].join('; ') || 'the archive lists none'}.`);
   const star = rows.find(row => row.planet === planets[0]?.name) ?? rows[0]!;
   // Each stellar value from the star's default row, else from the newest other row that gives it, cited to that row (as orbits are).
   const others = all.filter(row => row !== star).sort((a, b) => b.refYear - a.refYear);
   const pick = (key: 'teff' | 'rad' | 'mass', err: 'teffErr' | 'radErr' | 'massErr') => { const row = star[key] !== undefined ? star : others.find(entry => entry[key] !== undefined); return row ? { value: row[key]!, err: row[err], row } : undefined; };
   const teff = pick('teff', 'teffErr'), rad = pick('rad', 'radErr'), mass = pick('mass', 'massErr');
-  if (!teff) throw new Error(`${hostname}: no archive row gives a stellar temperature; give this host a spec by hand.`);
+  // No archive row gives a temperature: the TESS Input Catalog v8.2's for the same Gaia source, as wide companions take theirs.
+  const tic = teff || !star.gaiaDr3 ? undefined : await ticRow(archive, star.gaiaDr3);
+  if (!teff && !(tic?.TIC && Number(tic.Teff) > 0)) throw new Error(`${hostname}: no archive row gives a stellar temperature${star.gaiaDr3 ? `, nor does TIC v8.2 for Gaia DR3 ${star.gaiaDr3}` : ', and it has no Gaia DR3 source to look up'}; give this host a spec by hand.`);
+  const kelvin = teff?.value ?? Number(tic!.Teff), temperature = teff ? undefined : { value: kelvin, ...(Number(tic!.s_Teff) > 0 ? { uncertainty: Number(tic!.s_Teff) } : {}), source: `${TIC.credit}, the effective temperature of TIC ${tic!.TIC} (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one`, url: TIC.url };
   const from = (row: StarRow) => row === star ? `the default parameter set of ${row.planet}` : `${row.planet}'s parameter set from ${row.label} (the default leaves it empty)`;
   const cited = (picked: ReturnType<typeof pick>, key: string) => picked === undefined ? 'gaia-flame' as const : { value: picked.value, ...(picked.err ? { uncertainty: picked.err } : {}), source: `${picked.row.label}, the stellar ${key} of ${from(picked.row)} in the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
   const n = planets.length, dist = star.dist === undefined ? '' : ` ${short(star.dist, 3)} parsecs away`;
   if (existing(hostId)) notes.push(`${hostname} is already in the universe as ${hostId}`);
   const entry = existing(hostId) ? { host: hostId, planets, notes: skipped } : {
     // The host is named as its planets name it (pi Men for pi Men c), the archive's host name when they match.
-    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+A$/u, '')} system`, description: `Star of ${Math.round(teff.value).toLocaleString('en-US')} K${dist} with ${n} transiting planet${n === 1 ? '' : 's'}.`,
+    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+A$/u, '')} system`, description: `Star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist} with ${n} transiting planet${n === 1 ? '' : 's'}.`,
     target: hostname, ...(star.gaiaDr3 ? { gaia: star.gaiaDr3 } : {}), paper: { url: star.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: star.label },
-    radius: cited(rad, 'radius'), temperature: cited(teff, 'temperature'), mass: cited(mass, 'mass'),
-    text: { card: `${hostname} is a ${Math.round(teff.value).toLocaleString('en-US')} K star${dist} with ${n} known transiting planet${n === 1 ? '' : 's'}.`,
-      introduction: fit(180, `${hostname} is a star of ${Math.round(teff.value).toLocaleString('en-US')} K${dist}. ${n === 1 ? `Its planet ${String((planets[0] as { name: string }).name)} crosses it` : `Its planets ${planets.map(p => String((p as { name: string }).name).replace(`${hostname} `, '')).join(', ')} cross it`}, which is how ${n === 1 ? 'it was' : 'they were'} found and sized.`,
-        `${hostname} is a star of ${Math.round(teff.value).toLocaleString('en-US')} K${dist}. Its ${n} transiting planet${n === 1 ? '' : 's'} were found and sized as ${n === 1 ? 'it crosses' : 'they cross'} it.`),
-      locator: `NASA Exoplanet Archive ps table (st_refname ${[...new Set([teff, rad, mass].flatMap(picked => picked ? [picked.row.reference] : []))].join(', ')}): st_teff ${teff.value}${rad ? `, st_rad ${rad.value}` : ''}${mass ? `, st_mass ${mass.value}` : ''}`,
+    radius: cited(rad, 'radius'), temperature: temperature ?? cited(teff, 'temperature'), mass: cited(mass, 'mass'),
+    text: { card: `${hostname} is a ${Math.round(kelvin).toLocaleString('en-US')} K star${dist} with ${n} known transiting planet${n === 1 ? '' : 's'}.`,
+      introduction: fit(180, `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist}. ${n === 1 ? `Its planet ${String((planets[0] as { name: string }).name)} crosses it` : `Its planets ${planets.map(p => String((p as { name: string }).name).replace(`${hostname} `, '')).join(', ')} cross it`}, which is how ${n === 1 ? 'it was' : 'they were'} found and sized.`,
+        `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist}. Its ${n} transiting planet${n === 1 ? '' : 's'} were found and sized as ${n === 1 ? 'it crosses' : 'they cross'} it.`),
+      locator: `NASA Exoplanet Archive ps table (st_refname ${[...new Set([teff, rad, mass].flatMap(picked => picked ? [picked.row.reference] : []))].join(', ')}): ${teff ? `st_teff ${teff.value}` : `no st_teff; TIC ${tic!.TIC} Teff ${tic!.Teff}`}${rad ? `, st_rad ${rad.value}` : ''}${mass ? `, st_mass ${mass.value}` : ''}`,
       ...await quotesFor([hostname], [hostname]) },
     planets, notes: skipped };
-  if (!n) notes.push(`${hostname}: none of its planets has a transit fit with the elements an orbit needs`);
   // The other stars of a multiple system: the wide ones Gaia separates, from El-Badry et al. (2021); the rest are named as missing.
   let companions: Record<string, unknown>[] = [];
   if (star.stars > 1 && star.gaiaDr3) {
