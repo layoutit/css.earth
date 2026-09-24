@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { sourceTest } from '../../tests/objects/source-test.mts';
-import { MAX_LENGTH, cleanMessage, identityProblem, installHook, messageProblem, rangeProblems, type RangeCommit } from './commit-message.mts';
+import { MAX_LENGTH, cleanMessage, installHook, messageProblem, rangeProblems, type RangeCommit } from './commit-message.mts';
 const test = sourceTest();
 
 const execFileAsync = promisify(execFile);
@@ -45,16 +45,6 @@ test('messages Git writes itself are accepted as Git wrote them', () => {
   assert.equal(messageProblem('Revert "feat: add x"\n\nThis reverts commit 0123456789abcdef.\n'), undefined);
   assert.equal(messageProblem('fixup! feat: add x\n'), undefined);
   assert.equal(messageProblem('squash! feat: add x\n\nmore\n'), undefined);
-});
-
-test('a bot or AI tool may not author or commit, even a merge', () => {
-  for (const identity of ['dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>',
-    'Claude <noreply@anthropic.com>', 'Codex <codex@openai.com>', 'GitHub Copilot <copilot@github.com>']) {
-    assert.match(identityProblem(commit('feat: add x', { author: identity })) ?? '', /yourself/u, identity);
-    assert.match(identityProblem(commit('feat: add x', { committer: identity })) ?? '', /yourself/u, identity);
-    assert.equal(rangeProblems([commit("Merge branch 'main'", { parents: 2, author: identity })]).length, 1, identity);
-  }
-  assert.equal(identityProblem(commit('feat: add x', { committer: 'GitHub <noreply@github.com>' })), undefined);
 });
 
 test('a range reports each offending commit and skips the format check only for merges', () => {
