@@ -153,6 +153,9 @@ importers:
       '@cssearth/engine':
         specifier: workspace:*
         version: link:../../../../packages/engine
+      '@cssearth/fits':
+        specifier: workspace:*
+        version: link:../../../../packages/fits
       '@cssearth/nebula-reconstruction':
         specifier: workspace:*
         version: link:../reconstruction
