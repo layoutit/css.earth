@@ -18,6 +18,32 @@ export interface SourceQuestion {
   readonly family?:string;
   readonly position?:{ readonly raDegrees:number;readonly decDegrees:number;readonly basis:'SIMBAD position'|'requested ICRS circle centre' };
 }
+/** Save only the question that can be tested against native bytes in a portable delivery. */
+export function sourceQuestionFromRequest(request:{readonly target:string;readonly kind?:string;readonly family?:string;readonly wavelengthMicrometres?:readonly [number,number];readonly skyTarget?:{readonly raDegrees:number;readonly decDegrees:number};readonly region?:{readonly raDegrees:number;readonly decDegrees:number}}):SourceQuestion{
+  const point=request.skyTarget??request.region;
+  return {target:request.target,...(request.kind?{kind:request.kind}:{}),...(request.family?{family:request.family}:{}),
+    ...(request.wavelengthMicrometres?{wavelengthMicrometres:request.wavelengthMicrometres}:{}),
+    ...(point?{position:{raDegrees:point.raDegrees,decDegrees:point.decDegrees,basis:request.skyTarget?'SIMBAD position':'requested ICRS circle centre'} as const}:{})};
+}
+export function parseSourceQuestion(value:unknown,target:string):SourceQuestion{
+  const row=requireRecord(value,'delivery source question');
+  for(const key of Object.keys(row))if(!['target','kind','wavelengthMicrometres','family','position'].includes(key))throw new TypeError(`Unknown source question field ${key}`);
+  if(requireString(row.target,'source question target')!==target)throw new TypeError('Source question target differs from delivery');
+  const kind=row.kind===undefined?undefined:requireString(row.kind,'source question kind');
+  if(kind&&!(PRODUCT_KINDS as readonly string[]).includes(kind))throw new TypeError('Unknown source question kind');
+  const wavelengths=row.wavelengthMicrometres===undefined?undefined:requireArray(row.wavelengthMicrometres,'source wavelengths').map(value=>requireFiniteNumber(value,'source wavelength'));
+  if(wavelengths&&(wavelengths.length!==2||wavelengths[0]!<=0||wavelengths[1]!<wavelengths[0]!))throw new TypeError('Invalid source question wavelengths');
+  const position=row.position===undefined?undefined:requireRecord(row.position,'source position');
+  if(position)for(const key of Object.keys(position))if(!['raDegrees','decDegrees','basis'].includes(key))throw new TypeError(`Unknown source position field ${key}`);
+  const basis=position===undefined?undefined:requireString(position.basis,'position basis');
+  if(basis&&basis!=='SIMBAD position'&&basis!=='requested ICRS circle centre')throw new TypeError('Invalid source position basis');
+  const ra=position===undefined?undefined:requireFiniteNumber(position.raDegrees,'source RA'),dec=position===undefined?undefined:requireFiniteNumber(position.decDegrees,'source Dec');
+  if(ra!==undefined&&(ra<0||ra>=360||dec! < -90||dec! > 90))throw new TypeError('Invalid source position');
+  return {target,
+    ...(kind?{kind}:{}),...(row.family===undefined?{}:{family:requireString(row.family,'source family')}),
+    ...(wavelengths?{wavelengthMicrometres:wavelengths as [number,number]}:{}),
+    ...(position?{position:{raDegrees:ra!,decDegrees:dec!,basis:basis as NonNullable<SourceQuestion['position']>['basis']}}:{})};
+}
 export interface SourceRelevance {
   readonly target:string;
   readonly archiveTarget:{readonly status:'named'|'unknown';readonly name?:string;readonly reason:string};
@@ -122,7 +148,7 @@ export function assessSourceRelevance(question:SourceQuestion,metadata:readonly 
     :available.length?`Inspect the available ${[...new Set(available)].join(', ')} operation(s) below and choose explicit selectors; source fitness remains unassessed.`
     :descriptor?.components.length?'Inspect the family operations below; this descriptor does not itself establish target detection or scientific fitness.'
     :'No supported science output route recognizes these pinned bytes; inspect the original archive files or add a qualified native decoder.';
-  return {target:question.target,archiveTarget:question.archiveTargetName?{status:'named',name:question.archiveTargetName,reason:'The archive supplied this name; naming does not establish field coverage or detection.'}:{status:'unknown',reason:'The pinned archive lead supplies no separate target name.'},
+  return {target:question.target,archiveTarget:question.archiveTargetName?{status:'named',name:question.archiveTargetName,reason:'The archive supplied this name; naming does not establish field coverage or detection.'}:{status:'unknown',reason:'No separate source target name was pinned.'},
     field,detection:{status:'unassessed',reason:'Source inspection does not measure or identify the requested target in the data.'},
     requested:{...(question.kind?{kind:question.kind}:{}),...(question.wavelengthMicrometres?{wavelengthMicrometres:question.wavelengthMicrometres}:{}),...(question.family?{family:question.family}:{})},
     fit:{kind,wavelength,family},contents,next};

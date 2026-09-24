@@ -1,0 +1,30 @@
+{
+ "id": "hd-135344-a",
+ "classification": "star",
+ "order": 1767,
+ "physical": {
+  "name": "HD 135344 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 1043550.0,
+  "gravitationalParameterKm3PerS2": 291967368092.27,
+  "parent": null,
+  "effectiveTemperatureK": 9540
+ },
+ "physicalNotes": "Temperature 9540 +/- 100 K and radius 1.50 +/- 0.01 solar radii from the fit to the star's spectral energy distribution by Stolker et al. (2025, arXiv:2507.06206), Appendix A: 1,043,550 km at 695,700 km per solar radius; the radius scales the model flux at the Gaia parallax, not a measured disc, and is smaller than the 1.8 solar radii evolutionary tracks predict. GM from the 2.2 solar masses the tracks give for its temperature (their Appendix A), the mass their orbit fit adopts, times the JPL solar GM. HD 135344 B, the star with the spiral disc 21 arcseconds away, is a separate package if ever built. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 228.9538383003218,
+  "declinationDegrees": -37.14892097020482,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 134.942753,
+  "properMotionRaMasPerYear": -18.737737844165032,
+  "properMotionDecMasPerYear": -24.00776147540073,
+  "radialVelocityKmPerS": 29.306339,
+  "sources": {
+   "position": "Gaia DR3 source 6199395656645840384 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 6199395656645840384: parallax 7.4105 +/- 0.0403 mas (RUWE 0.95), inverted to 134.9428 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 6199395656645840384: pmRA* -18.7377 mas/yr, pmDec -24.0078 mas/yr.",
+   "radialVelocity": "Gaia DR3 source 6199395656645840384: 29.31 +/- 3.29 km/s."
+  },
+  "presentationUp": "display-axis"
+ }
+}

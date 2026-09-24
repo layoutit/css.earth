@@ -13,6 +13,7 @@ import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts'
 import { contextTarget, deliveryContext } from './delivery-context.mts';
 import { openFitsSource } from './fits-source.mts';
 import { openPdsSource, preparePdsSource } from './pds-source.mts';
+import { parseSourceQuestion, sourceQuestionFromRequest } from './source-relevance.mts';
 export interface OutputChoice {
   readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume'|'volume-lens-bank';readonly available:boolean;readonly reason:string;
   readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[];
@@ -50,6 +51,12 @@ export async function delivery(resultPath:string){
   const path=resolve(resultPath),directory=dirname(path),bytes=await readFile(path),record=requireRecord(JSON.parse(bytes.toString('utf8')));
   if (record.schema !== 'cssearth-telescope-delivery@3') throw new Error('This delivery predates content pins. Run telescope get into a new directory.');
   const context=deliveryContext(record);
+  const targetFromContext=context.kind==='scientific-request'?context.request.target:context.target;
+  const sourceQuestion=record.sourceQuestion===undefined
+    ?context.kind==='scientific-request'?sourceQuestionFromRequest(context.request):{target:targetFromContext}
+    :parseSourceQuestion(record.sourceQuestion,targetFromContext);
+  if(context.kind==='scientific-request'&&JSON.stringify(sourceQuestion)!==JSON.stringify(sourceQuestionFromRequest(context.request)))
+    throw new Error('Delivery source question differs from its scientific request');
   // A delivery binds every copied file by path, size and digest; the delivery record itself is hashed below.
   const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw),sha256=requireString(f.sha256,'delivery SHA-256');if(!/^[a-f0-9]{64}$/u.test(sha256))throw new TypeError('Invalid delivery SHA-256');return {path:requireString(f.path),bytes:requireFiniteNumber(f.bytes),sha256};});
   if(!files.length||new Set(files.map(f=>f.path)).size!==files.length)throw new Error('Delivery files must be unique and pinned');
@@ -73,7 +80,7 @@ export async function delivery(resultPath:string){
   if(!outputPins.some(f=>f.path===product.path))throw new Error('Product is not bound by its producing record');
   const facts=requireRecord(record.facts);if(facts.verified!==true)throw new Error('The delivery is not verified');
   const target=requireString(facts.target);if(target!==contextTarget(context))throw new Error('Delivery facts disagree with source context target');
-  return {path,directory,record,context,files,product,producing,telescope:producing.telescope,file:beneath(directory,productPath),target,pin:{sha256:sha256(bytes),bytes:bytes.length}};
+  return {path,directory,record,context,sourceQuestion,files,product,producing,telescope:producing.telescope,file:beneath(directory,productPath),target,pin:{sha256:sha256(bytes),bytes:bytes.length}};
 }
 function choices(structures:readonly NativeMetadata[],sourceOnly=false):OutputChoice[]{
   const result:OutputChoice[]=[];
@@ -119,11 +126,11 @@ export async function listOutputs(resultPath:string,structure?:string,position?:
   const scratch=await mkdtemp(resolve(tmpdir(),'telescope-native-'));
   try{
     const input=await nativeFigureInput(d,scratch,structure);
-    const metadata=await sciencePackage({operation:'fits',path:input.file});
+    const metadata=await sciencePackage({operation:'fits',path:input.file,...(position?{position}:{})});
     const structures=requireArray(metadata.structures).map(s=>parseNativeMetadata(s));
     // A FITS product is exported by --hdu alone; only a decoded native product also takes --structure.
     const outputs=input.native?choices(structures):choices(structures).map(({structure:_structure,...choice})=>choice);
-    return {target:d.target,source:d.path,sourceContext:d.context,outputs,...(input.native?{native:input.native}: {})};
+    return {target:d.target,source:d.path,sourceContext:d.context,outputs,sourceMetadata:structures,...(input.native?{native:input.native}: {})};
   }finally{await rm(scratch,{recursive:true,force:true});}
 }
 export async function exportOutput(resultPath:string,request:OutputRequest,outputDirectory:string){

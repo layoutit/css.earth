@@ -1,0 +1,31 @@
+{
+ "id": "hd-135344-ab",
+ "classification": "exoplanet",
+ "order": 1768,
+ "physical": {
+  "name": "HD 135344 Ab",
+  "horizonsCode": null,
+  "meanRadiusKm": 114387.2,
+  "gravitationalParameterKm3PerS2": 1266865319.0,
+  "parent": "hd-135344-a"
+ },
+ "physicalNotes": "Radius 1.60 +0.07/-0.06 Jupiter radii and temperature 1510 +/- 35 K from the Sonora Diamondback fit to the SPHERE and GRAVITY spectra of Stolker et al. (2025, arXiv:2507.06206), Table 5: 114,387.2 km at 71,492 km per Jupiter radius. Their evolutionary fit gives 1.45 Jupiter radii and 1585 K. A model radius: the planet is unresolved. GM from their evolutionary mass 10.0 +1.4/-1.9 Jupiter masses times Jupiter's GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 27014.8,
+  "semiMajorAxisStellarRadii": 3324.78,
+  "inclinationDegrees": 78.2749,
+  "eccentricity": 0.19819,
+  "argumentOfPeriapsisDegrees": 222.7284,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 45761.2,
+  "ascendingNodePositionAngleDegrees": 92.2806,
+  "sources": {
+   "period": "Derived: Kepler's third law with the sample's semi-major axis 23.012 au and total mass 2.2277 solar masses, 74.0 years of 365.25 d. Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39).",
+   "shape": "Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39). a 23.012 au at the sample's parallax 7.4687 mas, kept as the angular size 171.9 mas and placed at the Gaia DR3 distance: 3324.78 radii of the host's 1,043,550 km; inclination 78.2749 degrees.",
+   "eccentricity": "Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39). e 0.19819.",
+   "argumentOfPeriapsis": "Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39). omega 42.7284 degrees, orbitize!'s argument of periastron of the companion; stored as the star's, 222.7284 degrees.",
+   "phase": "Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39). tau 0.51553 of a period after MJD 58849; the periastron passage nearest that epoch is MJD 45761.2, taken as BMJD_TDB.",
+   "orientation": "Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39). Ascending node 92.2806 degrees east of north."
+  }
+ }
+}

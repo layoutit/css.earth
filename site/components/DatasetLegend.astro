@@ -22,7 +22,7 @@ const noData = lens.noData === true;
   {legend && <div class="object-lens-legend-scale-row">
     {legend?.src
       ? <img class="object-lens-legend-scale" src={legend.src}
-          width={legend.width} height={legend.height} alt={scaleLabel} />
+          width={legend.width} height={legend.height} alt={scaleLabel} loading="lazy" decoding="async" />
       : colors && <span class="object-lens-legend-scale object-lens-legend-segments" role="img" aria-label={scaleLabel}>
           {colors?.map(color => <span class="object-lens-legend-segment"
             style={`--object-lens-legend-color: ${color}`} aria-hidden="true"></span>)}

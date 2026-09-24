@@ -57,8 +57,9 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     }
     return [lens.id,interiorUrls.map((url,i)=>({key:`interior:${lens.id}:${i}`,url:overrides[url]??url,pool:'mounted'}))];
   }));
+  const levelled=new Set(textureLevels?.entries.map(entry=>entry.key));
   const entries=[...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
-    ...lenses.controls.flatMap(lens=>lens.view==="interior"?
+    ...lenses.controls.filter(lens=>!levelled.has(`poles:${lens.id}`)).flatMap(lens=>lens.view==="interior"?
       [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
         {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
       [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(requireString(lens.polesUrl, `Pole texture for ${lens.id}`)),pool:"mounted"}]),
@@ -66,6 +67,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     {key:"shadowless:lighting",url:canonicalPreparedAsset(shadowlessAssets),pool:"mounted"},
     ...materialIds.flatMap(id=>[
       {key:`default:${id}`,url:canonicalPreparedAsset(plan.material[id].defaultAssets),pool:"default-materials"},
+      ...(plan.material[id].floodAssets?[{key:`${id}:flood`,url:canonicalPreparedAsset(plan.material[id].floodAssets),pool:id}]:[]),
       ...plan.material[id].preparedRows.map(row=>({key:`${id}:${row.rowIndex}`,url:canonicalPreparedAsset(row.assets),pool:id}))])];
   const allLeaves=[...plan.body.bands.flatMap(band=>band.leaves),...plan.interior.outerBodyBands.flatMap(band=>band.leaves),
     ...plan.interior.shells.flatMap(shell=>shell.leaves),...plan.interior.sectionLeaves,
@@ -129,9 +131,9 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     const illumination=material.illumination;
     return {id,target:index(materialNodes[id]),frame:{source:illumination?"prepared-light-z":"sun-z",minimum:illumination?.minimumLightViewZ??-1,maximum:illumination?.maximumLightViewZ??1,count:material.frameCount,baseFrame:0,remap:null},
 
-      banks:[{id,frames:material.frames.map(frame=>address(frame,`${id}:${frame.rowIndex}`,frame.frameIndex,frame.rowIndex)),
+      banks:[{id,frames:material.frames.map(frame=>frame.flood?address(frame,`${id}:flood`,frame.frameIndex):address(frame,`${id}:${frame.rowIndex}`,frame.frameIndex,frame.rowIndex)),
         default:null,fixed:id==="lighting"?address(shadowlessPresentation,"shadowless:lighting"):null,
-        rows:material.preparedRows.map((_,row)=>({row,resource:`${id}:${row}`,firstFrame:row*material.framesPerShard,lastFrame:Math.min(material.frameCount-1,(row+1)*material.framesPerShard-1)}))}],
+        rows:material.preparedRows.map((_,row)=>({row,resource:`${id}:${row}`,firstFrame:row*material.framesPerShard,lastFrame:Math.min(material.frameCount-(material.floodAssets?2:1),(row+1)*material.framesPerShard-1)}))}],
       demand:{ capacity:material.transport.maximumRetainedRowCount, defaultFrame:material.defaultFrame },
       rotation:{kind:"planar",source:illumination?"prepared-light":"view-sun",reference:illumination?"prepared":"initial",baseDegrees:illumination?.baseLightAzimuthDegrees??0,
         zeroAtPole:!!illumination,publishWithAddress:true,...(!illumination?{polePolicy:"azimuth"}:{}),width:material.presentationTileSize,height:material.presentationTileSize},
@@ -162,8 +164,10 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2*(textureLevels?.textureLevels.levels.length??1),eviction:"capacity",
         ...(textureLevels?{maximumDecodedBytes:textureLevels.maximumDecodedBytes}: {})}),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
-      startup:[...pageKeys(defaultLens).map(initialResource),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
-        ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
+      // What the default view shows (shadows off): its pages and poles at the first level, the shadowless lighting and
+      // the atmosphere's flood frame. The default-pose materials are only base styles every variant overwrites.
+      startup:[...pageKeys(defaultLens).map(initialResource),initialResource(`poles:${defaultLens.id}`),"shadowless:lighting",
+        ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null}],animations:[],
     motionFrame:[index(system),index(body.surface[0])]};
  return {...prepared, schema:'cssearth-object-runtime@4', id:config.namespace, controls,

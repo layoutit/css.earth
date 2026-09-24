@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2606-19228",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baburaj et al. (2026): JWST-TST High Contrast: First Direct Spectroscopy of GJ 504 b reveals Clouds and Possible Metal Enrichment",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2606.19228"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae6919"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2606.19228",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae6919",
+      "label": "The Astronomical Journal 172, 28"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2606.19228",
+      "checkedOn": "2026-09-23",
+      "locator": "Section 5.5: GJ 504 b, R 0.92 +/- 0.02 Jupiter radii, Teff 564 +/- 4 K; Abstract: mass 25.2 +8.4/-6.0 Jupiter masses, age 2.5 to 4.0 Gyr"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal 172, 28",
+  "creators": [
+    "Aneesh Baburaj",
+    "Jean-Baptiste Ruffio",
+    "Marshall Perrin",
+    "Jerry W. Xuan",
+    "William O. Balmer",
+    "Yayaati Chachan"
+  ]
+}

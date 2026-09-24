@@ -15,7 +15,24 @@ import type { ProductFacts } from './request-satisfaction.mts';
 import { archiveProfileFamilyEvidence, productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
-export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string }
+export interface SourceProcessingSoftware { readonly name: string; readonly version: string; readonly evidence: string }
+export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string; readonly sourceProcessing?: readonly SourceProcessingSoftware[] }
+export function parseSourceProcessing(value: unknown): readonly SourceProcessingSoftware[] | undefined {
+  if (value === undefined) return undefined;
+  return requireArray(value, 'source processing software').map(raw => {
+    const row = requireRecord(raw, 'source processing software'), name = requireString(row.name, 'software name').trim(),
+      version = requireString(row.version, 'software version').trim(), evidence = requireString(row.evidence, 'software evidence');
+    if (!name || !version || !/^https:\/\//u.test(evidence)) throw new TypeError('Source processing software needs a name, version and HTTPS evidence.');
+    return { name, version, evidence };
+  });
+}
+export function recordedSourceProcessing(record: ProductRecord): readonly SourceProcessingSoftware[] {
+  if (record.stage !== 'source-qualification' || record.parameters.observation === undefined) return [];
+  const observation = requireRecord(record.parameters.observation, 'source observation');
+  const items = requireArray(observation.files, 'source observation files').flatMap(file =>
+    parseSourceProcessing(requireRecord(file, 'source file').sourceProcessing) ?? []);
+  return [...new Map(items.map(item => [`${item.name}\0${item.version}\0${item.evidence}`, item])).values()];
+}
 export interface SourceProduct {
   readonly id: string; readonly target: string; readonly telescope: string; readonly mode: string; readonly kind: ProductKind;
   readonly archiveProductId: string; readonly decoder: 'fits-image' | 'pds-image' | 'pds-product' | 'isis3'; readonly labelPath?: string; readonly files: readonly SourceFile[];
@@ -64,7 +81,8 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
       inside('/package', path);
       const origin = requireString(pin.origin, 'input origin');
       if (!/^https?:\/\//u.test(origin)) throw new TypeError(`${inputId} needs a retrievable archive origin.`);
-      return { role: requireString(entry.role, 'input role'), path: `src/objects/${target}/source/${relative('/package', inside('/package', path))}`, origin };
+      return { role: requireString(entry.role, 'input role'), path: `src/objects/${target}/source/${relative('/package', inside('/package', path))}`, origin,
+        ...(pin.sourceProcessing === undefined ? {} : { sourceProcessing: parseSourceProcessing(pin.sourceProcessing) }) };
     });
     if (new Set(files.map(file => file.path)).size !== files.length || files.filter(file => file.role === 'science').length !== 1 || decoder === 'pds-image' && files.filter(file => file.role === 'label').length !== 1)
       throw new TypeError(`${id} needs one science input and, for PDS, one label, without duplicate files.`);

@@ -1,14 +1,17 @@
 /** Live ASCL software discovery. A catalog match is a citation lead, never evidence that code ran. */
+import { readFile } from 'node:fs/promises';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { requireRecord, requireString } from '../../sources/source-values.mts';
 import { verifiedProduct } from './projection.mts';
+import { delivery } from './outputs.mts';
+import { recordedSourceProcessing } from './source-products.mts';
 
 export const ASCL_CATALOG = 'https://ascl.net/code/json';
 const MAX_CATALOG_BYTES = 8 * 1024 * 1024;
 const MAX_RESULTS = 20;
 export interface AsclEntry { readonly id:string;readonly title:string;readonly url:string;readonly description?:string;readonly preferredCitation?:string;readonly codeSites:readonly string[] }
 export interface AsclSoftwareMatch { readonly name:string;readonly version:string;readonly matches:readonly AsclEntry[] }
-export interface AsclLookup { readonly source:string;readonly sourceSha256:string;readonly mode:'query'|'product';readonly query?:string;readonly product?:string;readonly entries?:readonly AsclEntry[];readonly software?:readonly AsclSoftwareMatch[];readonly caveat:string }
+export interface AsclLookup { readonly source:string;readonly sourceSha256:string;readonly mode:'query'|'product';readonly query?:string;readonly product?:string;readonly entries?:readonly AsclEntry[];readonly software?:readonly AsclSoftwareMatch[];readonly sourceProcessing?:readonly (AsclSoftwareMatch & {readonly evidence:string})[];readonly caveat:string }
 
 function entry(value:unknown):AsclEntry|null{
   const row=requireRecord(value,'ASCL catalog entry');
@@ -44,16 +47,23 @@ export async function searchAscl(query:string,request:typeof fetch=fetch):Promis
 }
 
 export async function matchProductSoftware(product:string,request:typeof fetch=fetch):Promise<AsclLookup>{
-  const verified=await verifiedProduct(product),found=await catalog(request);
-  const software=verified.record.software.map(item=>({name:item.name,version:item.version,
-    matches:found.entries.filter(candidate=>normalize(shortTitle(candidate.title))===normalize(item.name)).slice(0,MAX_RESULTS)}));
+  const raw=requireRecord(JSON.parse(await readFile(product,'utf8')),'software product');
+  const record=typeof raw.schema==='string'&&raw.schema.startsWith('cssearth-telescope-delivery@')
+    ?(await delivery(product)).producing:(await verifiedProduct(product)).record;
+  const found=await catalog(request);
+  const matches=(name:string)=>found.entries.filter(candidate=>normalize(shortTitle(candidate.title))===normalize(name)).slice(0,MAX_RESULTS);
+  const software=record.software.map(item=>({name:item.name,version:item.version,
+    matches:matches(item.name)}));
+  const sourceProcessing=recordedSourceProcessing(record);
   return {source:ASCL_CATALOG,sourceSha256:found.sha256,mode:'product',product,software,
-    caveat:'The verified product receipt records which software ran. An exact ASCL title match offers a citation lead; it does not verify the software version, its identity beyond the name, scientific fitness, or target detection. Unmatched names may still exist in ASCL.'};
+    ...(sourceProcessing.length?{sourceProcessing:sourceProcessing.map(item=>({...item,matches:matches(item.name)}))}:{}),
+    caveat:'Verified receipts identify software recorded for the current run. Source-declared earlier processing is a separate authored claim with its own evidence. An exact ASCL title match is only a citation lead; it does not verify the software version, scientific fitness, or target detection. Unmatched names may still exist in ASCL.'};
 }
 
 export function formatAscl(result:AsclLookup):string{
   const lines=[`ASCL software lookup · ${result.mode==='query'?result.query:result.product}`,`Catalog: ${result.source}`,result.caveat];
   if(result.entries){for(const item of result.entries)lines.push(`${item.id} · ${item.title}\n  ${item.url}${item.preferredCitation?`\n  Preferred citation: ${item.preferredCitation}`:''}`);if(!result.entries.length)lines.push('No title matches in this catalog snapshot.');}
   if(result.software){for(const row of result.software)lines.push(`${row.name} (${row.version}): ${row.matches.length?row.matches.map(item=>`${item.id} ${item.url}`).join(', '):'no exact ASCL title match'}`);if(!result.software.length)lines.push('The verified product receipt lists no software.');}
+  if(result.sourceProcessing?.length){lines.push('Source-declared earlier processing (not a current-run software receipt):');for(const row of result.sourceProcessing)lines.push(`${row.name} (${row.version}): ${row.matches.length?row.matches.map(item=>`${item.id} ${item.url}`).join(', '):'no exact ASCL title match'}\n  Evidence: ${row.evidence}`);}
   return `${lines.join('\n')}\n`;
 }
