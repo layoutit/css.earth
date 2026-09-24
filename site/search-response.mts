@@ -4,13 +4,13 @@ import { matchesObjectCategory } from './object-categories.mts';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeaturePin } from './feature-search.mts';
 import { findResults } from './find.mts';
-import { renderDatasetResponse } from './dataset-response.mts';
+import { renderDatasetResponse, UnreadableSavedView } from './dataset-response.mts';
 import { createSelectionPresentation } from './selection-presentation.mts';
 import { selectionTargetFromUrl } from './scene/scene-selection.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
-import { objectIdAtPath } from './root-object.mts';
+import { objectIdAtPath, ROOT_OBJECT_ID } from './root-object.mts';
 import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
 
 export interface SearchPin { url: string; count: number; }
@@ -137,6 +137,13 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
+/** The visitor-facing address of this request without one parameter: the function route maps back to its page. */
+function pageUrlWithout(url: URL, objectId: string, name: string): string {
+  const page = new URL(url.pathname === '/.netlify/functions/search' ? (objectId === ROOT_OBJECT_ID ? '/' : `/${objectId}/`) : url.pathname, url.origin);
+  for (const [key, value] of url.searchParams) if (key !== name && !(key === 'object' && url.pathname === '/.netlify/functions/search')) page.searchParams.append(key, value);
+  return page.href;
+}
+
 /** Netlify's query rewrite and local middleware call this same request handler. */
 export async function handleSearchRequest(request: Request, fetcher: typeof fetch = fetch): Promise<Response> {
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
@@ -152,6 +159,8 @@ export async function handleSearchRequest(request: Request, fetcher: typeof fetc
     html = await renderDatasetResponse(await response.text(), url, objectId, fetcher);
     html = await renderSearchResponse(html, url, fetcher);
   } catch (error) {
+    // An unreadable shared view drops out of the address: the visitor lands on the same page and selection without it.
+    if (error instanceof UnreadableSavedView) return Response.redirect(pageUrlWithout(url, objectId, 'v'), 302);
     if (error instanceof RangeError) return new Response(error.message, { status: 400 });
     throw error;
   }

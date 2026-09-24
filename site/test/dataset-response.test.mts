@@ -49,6 +49,20 @@ test('invalid requests and corrupt prepared bytes cannot publish another dataset
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', corrupt), /hash|sha256|digest|identity/i);
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'earth', read), /identity/);
 });
+test('an unreadable saved view redirects to the same page without it', async () => {
+  const transport: typeof fetch = async () => new Response(html, { headers: { 'content-type': 'text/html' } });
+  for (const [request, location] of [
+    [`${origin}/saturn/?v=681&dataset=normal`, `${origin}/saturn/?dataset=normal`],
+    [`${origin}/.netlify/functions/search?object=saturn&v=not-a-view`, `${origin}/saturn/`],
+    [`${origin}/.netlify/functions/search?object=earth&v=681`, `${origin}/`],
+  ] as const) {
+    const response = await handleSearchRequest(new Request(request), transport);
+    assert.equal(response.status, 302, request);
+    assert.equal(response.headers.get('location'), location, request);
+  }
+  // Two views are a malformed request, not an old link.
+  assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?v=a&v=b`), transport)).status, 400);
+});
 test('a city link is left to the page, which selects the city on arrival', async () => {
   // The native response used to reject every non-numeric feature, so a shared city link answered 400.
   assert.equal(await renderDatasetResponse(html, new URL('/saturn/?feature=city-3435910', origin), 'saturn', read), html);
