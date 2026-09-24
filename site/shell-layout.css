@@ -683,24 +683,29 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     --explorer-header-row-gap: 8px;
     --explorer-header-height: var(--explorer-search-height);
     --explorer-float-shadow: 0 1px 4px rgb(0 0 0 / 55%);
-    /* The open sheet stops below the filters, so they stay in reach while searching. */
+    /* Search rides on top of the sheet: the sheet leaves it this band, and the open sheet stops below the header. */
+    --sheet-lift: calc(var(--explorer-search-height) + 16px);
     /* An on-screen keyboard covers the bottom of the layout viewport without
        shrinking it, so the sheet gives up that much room. */
-    --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-keyboard, 0px));
+    --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-lift) - var(--sheet-keyboard, 0px));
     --sheet-peek: calc(152px + var(--explorer-safe-bottom));
     --sheet-half: 50dvh;
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
-    /* Map chrome rides just above the peeking sheet. */
-    --sheet-chrome-bottom: calc(var(--sheet-peek) + 8px);
+    /* How far the sheet sits below its open position. The sheet and the search above it both move by it;
+       a drag writes it inline on the body (shell-sheet.mts). */
+    --sheet-offset: calc(var(--sheet-height) - var(--sheet-peek));
   }
+  body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
+  body[data-object-shell][data-sheet="full"] { --sheet-offset: 0px; }
+  body[data-object-shell][data-sheet="half"] { --sheet-offset: calc(var(--sheet-height) - var(--sheet-half)); }
 
   .explorer-shell-header {
     position: fixed;
     inset: var(--explorer-header-top) 0 auto;
     display: grid;
     /* Phones carry the wordmark and search only; search takes the rest of the row. */
-    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
     grid-template-rows: var(--explorer-search-height);
     column-gap: 8px;
     gap: var(--explorer-header-row-gap);
@@ -710,7 +715,18 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     padding: 0 var(--explorer-panel-left);
   }
 
-  .object-search-toolbar { grid-row: 1; grid-column: 2; align-self: center; }
+  /* Search sits on the sheet's top edge and moves with it, so the sheet and its search read as one panel. */
+  .object-search-toolbar {
+    position: fixed;
+    z-index: 210;
+    top: calc(100dvh - var(--sheet-keyboard, 0px) - var(--sheet-height) - var(--sheet-lift) + 8px);
+    right: var(--explorer-panel-left);
+    left: var(--explorer-panel-left);
+    width: auto;
+    transform: translate3d(0, var(--sheet-offset), 0);
+    transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
+  }
+  body:has(.object-sidebar.is-dragging) :is(.object-search-toolbar, .object-search-categories) { transition: none; }
   .explorer-shell-header .object-sidebar-search-card {
     /* Settings has its own slot in the brand bar; only Clear sits inside the field. */
     padding-inline-end: 10px;
@@ -720,8 +736,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
   .explorer-shell-header .object-sidebar-search-clear { right: 38px; }
 
-  /* For now phones show no app actions (GitHub, Settings, Machines): the search field gets the room. */
-  .object-header-actions { display: none; }
+  /* With search on the sheet, the header row holds the wordmark and the app actions. */
+  .object-header-actions { display: flex; grid-row: 1; grid-column: 3; }
 
   /* Filters scroll edge to edge; the padding keeps their shadows unclipped. */
   /* Phones carry one header row: search reaches every classification, so the filter pills
@@ -729,7 +745,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   .object-search-categories { display: none; }
 
 
-  /* The wordmark comes first, stacked in two lines, with the search field beside it. */
+  /* The wordmark comes first, on one line. */
   .explorer-brand-row {
     grid-row: 1;
     grid-column: 1;
@@ -738,9 +754,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     height: auto;
     padding: 0;
   }
-  .explorer-shell-header .object-wordmark-one-line { display: none; }
-  .explorer-shell-header .object-wordmark-two-line { display: flex; gap: 2px; }
-  .explorer-shell-header :is(.object-wordmark-two-line-css, .object-wordmark-two-line-earth) { font-size: 22px; }
+  .explorer-shell-header .object-wordmark-one-line { display: inline; }
+  .explorer-shell-header .object-wordmark-two-line { display: none; }
   /* Phones show no version: not in the header, not in the readout at the foot of the view. */
   .explorer-brand-row .explorer-brand-version { display: none; }
 
@@ -759,7 +774,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
     background: var(--explorer-panel-background);
     box-shadow: var(--sheet-shadow);
-    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-peek)), 0);
+    transform: translate3d(0, var(--sheet-offset), 0);
     transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
     /* Vertical drags move the sheet; sideways swipes stay with carousels. */
     touch-action: pan-x;
@@ -767,26 +782,25 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
   .object-sidebar:has(:where(.object-sheet-handle:checked)),
   body[data-sheet="full"] .object-sidebar {
-    transform: none;
     overflow-y: auto;
     touch-action: pan-y;
   }
   body[data-sheet="half"] .object-sidebar {
-    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
     overflow: hidden;
     touch-action: pan-x;
   }
   .object-sidebar.is-dragging { transition: none; }
   .object-sidebar .object-card { border-radius: 0; }
 
-  /* Scale and altitude sit above the sheet, like a map's scale bar. */
-  body[data-object-shell] .object-footer {
-    z-index: 150;
-    inset: auto var(--explorer-panel-left) var(--sheet-chrome-bottom);
-    height: var(--explorer-status-height);
-    background: transparent;
-    pointer-events: none;
-  }
+  /* No readout bar: the sheet carries the sources link (.object-sheet-sources). */
+  body[data-object-shell] .object-footer { display: none; }
+
+  /* The scene fills the room above the peeking sheet and its search, so the body is centred where it can be seen. */
+  body[data-object-shell] .object-viewport { bottom: calc(var(--sheet-peek) + var(--sheet-lift)); }
+
+  /* The result list scrolls itself (the catalogue window reads its scroll), so it takes the open sheet's height
+     instead of the side panel's 420 px. */
+  .object-sidebar #object-category-results { max-height: calc(var(--sheet-height) - 40px); }
 
   /* A phone on its side has little height: the filters join the search row and
      the sheet peeks less, so the scene keeps a usable band. */
@@ -819,27 +833,26 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
 }
 
-/* Portrait tablets keep the phone's bottom sheet but have the width for the desktop's
-   header: the single-line wordmark, search and actions share the first row, with room
-   around search, and the filters take the second. The sheet lays its card out in two
+/* Portrait tablets keep the phone's bottom sheet, search and header, and have the width for
+   the filters, which ride on the sheet below the search. The sheet lays its card out in two
    columns. Landscape tablets already get the desktop side panel. */
 @media (orientation: portrait) and (min-width: 700px) {
+  /* The filters ride on the sheet too, between the search and the sheet's edge. */
   body[data-object-shell] {
-    --explorer-header-height: calc(var(--explorer-search-height) + var(--explorer-header-row-gap) + var(--explorer-category-height));
+    --sheet-lift: calc(var(--explorer-search-height) + var(--explorer-category-height) + 24px);
   }
 
-  .explorer-shell-header {
-    grid-template-columns: max-content minmax(0, 1fr) max-content;
-    grid-template-rows: var(--explorer-search-height) var(--explorer-category-height);
-    column-gap: 20px;
+  .explorer-shell-header { column-gap: 20px; }
+
+  .object-search-categories {
+    position: fixed;
+    z-index: 210;
+    top: calc(100dvh - var(--sheet-keyboard, 0px) - var(--sheet-height) - var(--explorer-category-height) - 8px);
+    right: var(--explorer-panel-left);
+    left: var(--explorer-panel-left);
+    display: flex;
+    transform: translate3d(0, var(--sheet-offset), 0);
+    transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
   }
-
-  /* The desktop's single-line wordmark, at its desktop size. */
-  .explorer-shell-header .object-wordmark-one-line { display: inline; }
-  .explorer-shell-header .object-wordmark-two-line { display: none; }
-
-  .object-search-toolbar { grid-row: 1; grid-column: 2; }
-  .object-header-actions { display: flex; grid-row: 1; grid-column: 3; }
-  .object-search-categories { display: flex; grid-row: 2; grid-column: 1 / -1; }
   :is(.object-search-category, .object-header-link, .object-header-action) { box-shadow: var(--explorer-float-shadow); }
 }
