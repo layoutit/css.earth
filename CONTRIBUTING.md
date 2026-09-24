@@ -177,6 +177,27 @@ gate and the advisory repository audit, skipping the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
 `CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
 
+`pnpm check:architecture` is an optional local check. It shows how your change
+moves the folder graph: which folders import which. CI does not run it yet.
+It resolves every import in the source trees, including `.astro` files, root
+config files and files you have not added to Git yet. It groups the files into
+folders and fails when a change adds:
+
+- an import that closes a folder cycle;
+- an import from `packages/*` into any other tree;
+- an import into `tools/`, `site/` or `labs/` from outside that tree (Netlify
+  functions and root `*.config.*` files are allowed);
+- an import of `tools/` or preparation code from `site/` or `src/renderers/`;
+- an import of a `tools/prepare/` script, including from another prepare script.
+
+Type-only imports count. Existing cases are listed in
+`tools/ci/architecture/baseline.json`, so they do not fail the check. If the
+check reports that something got better, or that a change looks like a rename,
+run `pnpm check:architecture --update-baseline` and commit the baseline. It needs
+a full checkout and the shared packages built (`pnpm install` does both).
+`pnpm arch:map` writes the full folder map, cycles and per-folder counts to
+`output/architecture/`.
+
 Reference implementations live under `tools/oracles/` with their own pinned
 Python environment (`node tools/oracles/setup.mts`); their fixtures under `tests/oracles/`
 are committed evidence, and the comparing tests run without Python. See
