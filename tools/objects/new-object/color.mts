@@ -54,8 +54,10 @@ export interface Candidate {
   readonly acquisition: string; readonly color: StellarColor;
 }
 
-interface Context { readonly spec: StarSpec; readonly row: GaiaRow; readonly ids: Identifiers; readonly archive: Archive; readonly cmf: Map<number, readonly number[]>; readonly cache: Map<string, Buffer> }
-const once = async (context: Context, url: string) => { let bytes = context.cache.get(url); if (!bytes) { bytes = await context.archive.bytes(url); context.cache.set(url, bytes); } return bytes; };
+interface Context { readonly spec: StarSpec; readonly row: GaiaRow; readonly ids: Identifiers; readonly archive: Archive; readonly cmf: Map<number, readonly number[]>; readonly cache: Map<string, Promise<Buffer>> }
+/** The catalogue files every star reads (Pulkovo, Kharitonov, Burnashev) are fetched once per process, however many stars run at once. */
+const shared = new Map<string, Promise<Buffer>>();
+const once = (context: Context, url: string) => { let bytes = shared.get(url); if (!bytes) { bytes = context.archive.bytes(url); shared.set(url, bytes); bytes.catch(() => shared.delete(url)); } return bytes; };
 const download = (url: string) => (path: string) => ({ kind: 'download', groups: ['restore', 'refresh'], path, url });
 
 /** Read a candidate with the lens's reader: its samples, its derived gaps and the colour they give. Throws when it yields none. */
@@ -184,11 +186,14 @@ const channelDifference = (a: StellarColor, b: StellarColor) => Math.max(...a.sr
 /** Try every route in order and write the colour record for the first, with the second as its cross-check. */
 export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers, archive: Archive, cmf: Map<number, readonly number[]>): Promise<ColorChoice> {
   const context: Context = { spec, row, ids, archive, cmf, cache: new Map() }, candidates: Candidate[] = [], tried: string[] = [];
-  for (const route of Object.keys(ROUTES) as ColorRoute[]) {
-    if (candidates.length === 2) break;
-    if (spec.color?.skip.includes(route)) { tried.push(`${route}: skipped (${spec.color.reason})`); continue; }
-    const found = await ROUTES[route](context);
+  // Every route is probed at once; the candidates are then taken in the routes' quality order.
+  const probed = await Promise.all((Object.keys(ROUTES) as ColorRoute[]).map(async route => {
+    if (spec.color?.skip.includes(route)) return { route, found: `skipped (${spec.color.reason})` as const };
+    return { route, found: await ROUTES[route](context) };
+  }));
+  for (const { route, found } of probed) {
     if (typeof found === 'string') { tried.push(`${route}: ${found}`); continue; }
+    if (candidates.length === 2) continue;
     try { candidates.push({ ...found, ...evaluate(found.bytes, found.record(''), cmf) }); }
     catch (error) { tried.push(`${route}: the spectrum was found but gives no colour (${(error as Error).message})`); }
   }

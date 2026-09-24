@@ -8,7 +8,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { parseCieTable } from '../observation/disc-integrated-color.mts';
 import { readIdentifiers, type Archive, type GaiaRow } from './archives.mts';
 import { chooseColor, coverageGaps } from './color.mts';
-import { archiveHostedOrbit, orbitizeHostedOrbit, parseArchiveRows } from './orbit.mts';
+import { assembleArchiveOrbit, orbitizeHostedOrbit, parseArchiveRows } from './orbit.mts';
 import { parseObjectSpecs, parseStarSpec } from './spec.mts';
 
 const test = sourceTest(), root = resolve(import.meta.dirname, '../../..');
@@ -75,15 +75,32 @@ test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', 
   }
 });
 
-test('a transiting orbit is one paper\'s archive row, and an eccentric row states its epoch', () => {
-  const csv = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj\n'
-    + '"WASP-121 b","<a refstr=BOURRIER_ET_AL__2020 href=https://ui.adsabs.harvard.edu/abs/2020A&A...635A.205B/abstract target=ref>Bourrier et al. 2020</a>",0,1.27492504000,3.813100,88.49000,0.000000,10.0000,2458119.72074000,1.75300000,1.15700000\n'
-    + '"X b","<a refstr=A_ET_AL__2019 href=https://ui.adsabs.harvard.edu/abs/2019AJ....157...1A/abstract target=ref>A et al. 2019</a>",1,5.0,12.0,87.0,0.2,95.0,2458000.5,1.0,1.0';
-  const [wasp, eccentric] = parseArchiveRows(csv);
-  assert.deepEqual([wasp!.bibcode, wasp!.reference, wasp!.isDefault], ['2020A&A...635A.205B', 'BOURRIER_ET_AL__2020', false]);
-  const { orbit } = archiveHostedOrbit(wasp!);
+test('a transiting orbit is one paper\'s archive row, with gaps filled from other rows and a/R* derived when no row has it', () => {
+  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim';
+  const anchor = (ref: string, bib: string, label: string) => `"<a refstr=${ref} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
+  const csv = [header,
+    `"WASP-121 b",${anchor('BOURRIER_ET_AL__2020', '2020A&A...635A.205B', 'Bourrier et al. 2020')},0,1.27492504,3.8131,88.49,0,10,2458119.72074,1.753,1.157,,1.458,1.353,0`,
+    `"X b",${anchor('A_ET_AL__2019', '2019AJ....157...1A', 'A et al. 2019')},1,5.0,,87.0,0.2,95.0,2458000.5,1.0,,0.05,1.0,1.0,`,
+    `"X b",${anchor('B_ET_AL__2021', '2021AJ....161...2B', 'B et al. 2021')},0,5.0,,,,,,1.1,0.9,,,,0`,
+    `"Y b",${anchor('C_ET_AL__2022', '2022AJ....163...3C', 'C et al. 2022')},1,2.0,8.0,89.0,0,,2459000.5,0.2,0.05,,,,1`].join('\n');
+  const rows = parseArchiveRows(csv), wasp = rows.filter(row => row.name === 'WASP-121 b'), x = rows.filter(row => row.name === 'X b');
+  assert.deepEqual([wasp[0]!.bibcode, wasp[0]!.reference, wasp[0]!.isDefault, wasp[0]!.year], ['2020A&A...635A.205B', 'BOURRIER_ET_AL__2020', false, 2020]);
+  const { orbit } = assembleArchiveOrbit(wasp, 'BOURRIER_ET_AL__2020', { value: 1.157, provenance: 'Mass', limit: false, label: 'Bourrier et al. 2020' });
   assert.deepEqual([orbit.periodDays, orbit.semiMajorAxisStellarRadii, orbit.inclinationDegrees, orbit.eccentricity, orbit.transitTimeBmjdTdb, orbit.epochDefinition], [1.27492504, 3.8131, 88.49, 0, 58119.22074, undefined]);
-  const second = archiveHostedOrbit(eccentric!);
-  assert.deepEqual([second.orbit.epochDefinition, second.orbit.argumentOfPeriapsisDegrees], ['inferior-conjunction', 95]);
-  assert.match(second.todo!, /convention for omega/u);
+  const adopted = { value: 0.9, provenance: 'Mass', limit: false, label: 'B et al. 2021', bibcode: '2021AJ....161...2B' };
+  const second = assembleArchiveOrbit(x, undefined, adopted);
+  // a/R* from the default row's 0.05 au and 1.0 solar radius; the mass is the one the archive's composite table adopts.
+  assert.equal(second.orbit.semiMajorAxisStellarRadii, Number((0.05 / (695700 / 149597870.7)).toFixed(4)));
+  assert.deepEqual([second.orbit.epochDefinition, second.orbit.argumentOfPeriapsisDegrees, second.mass.value, second.radius.row.label], ['inferior-conjunction', 95, 0.9, 'A et al. 2019']);
+  assert.match(second.mass.row.label, /B et al. 2021, the mass the NASA Exoplanet Archive's composite table adopts/u);
+  assert.match(second.orbit.sources.shape!, /derived from its semi-major axis 0.05 au/u);
+  assert.match(second.todo!, /omega 95 degrees is taken as A et al. 2019 gives it/u);
+  assert.throws(() => assembleArchiveOrbit(x.slice(1), 'B_ET_AL__2021', adopted), /no archive row gives its inclination, transit time/u);
+  // A flagged upper limit is not a mass: the archive's calculated value serves, or the planet is refused.
+  const y = rows.filter(row => row.name === 'Y b');
+  assert.equal(y[0]!.massJupiter, undefined); assert.equal(y[0]!.massLimitJupiter, 0.05);
+  assert.match(assembleArchiveOrbit(y, undefined, { value: 0.002, provenance: 'M-R relationship', limit: false, label: 'Calculated Value' }).mass.row.label, /calculated value/u);
+  assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.05, provenance: 'Mass', limit: true, label: 'C et al. 2022' }), /only an upper limit/u);
+  // A mass that makes an impossible density is refused before the records see it.
+  assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.1, provenance: 'Mass', limit: false, label: 'D et al. 2023' }), /g\/cm\^3, outside what the records accept/u);
 });

@@ -13,7 +13,7 @@ import { type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, CMF, installColorLens, json, type PackageFiles } from './lens.mts';
 import { chooseLimb } from './limb.mts';
-import { archiveHostedOrbit, archiveRow, orbitizeHostedOrbit, type ArchiveRow, type HostedOrbit } from './orbit.mts';
+import { archiveRows, assembleArchiveOrbit, compositeMass, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
 import { TODO } from './scaffold.mts';
 import type { Cited, HostedSpec, StarSpec } from './spec.mts';
 
@@ -29,7 +29,7 @@ export interface HostedRecord {
 /** The orbit and physical values of one hosted body, and the files that record how the orbit was chosen. */
 export async function hostedRecord(spec: HostedSpec, host: { readonly spec: StarSpec; readonly body: Record<string, any> }, order: number, archive: Archive, root: string): Promise<HostedRecord> {
   const hostRadiusKm = Number(host.body.physical.meanRadiusKm), distance = Number(host.body.star.distanceParsecs), documents = new Map<string, string>(), todo: string[] = [];
-  let orbit: HostedOrbit, row: ArchiveRow | undefined, citation: HostedRecord['orbitCitation'];
+  let orbit: HostedOrbit, assembled: AssembledOrbit | undefined, citation: HostedRecord['orbitCitation'];
   if ('whereistheplanet' in spec.orbit) {
     // The paper's posterior, one sample picked with its own measured positions (posterior-pick.py), in a scratch directory first.
     const o = spec.orbit, work = resolve(root, 'output/new-object', spec.id);
@@ -44,9 +44,10 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     for (const [name, text] of [[csvName, measurements], ['pick.json', json(pick)], ['orbit.json', orbitText]] as const) documents.set(`orbits/${name}`, text);
     citation = { text: o.source, url: o.url, label: o.source };
   } else if ('archive' in spec.orbit) {
-    row = await archiveRow(archive, spec.orbit.planetName ?? spec.name, spec.orbit.reference);
-    const converted = archiveHostedOrbit(row);
-    orbit = converted.orbit; if (converted.todo) todo.push(converted.todo);
+    const planetName = spec.orbit.planetName ?? spec.name;
+    assembled = assembleArchiveOrbit(await archiveRows(archive, planetName), spec.orbit.reference, await compositeMass(archive, planetName));
+    orbit = assembled.orbit; if (assembled.todo) todo.push(assembled.todo);
+    const row = assembled.rows.find(entry => spec.orbit && 'reference' in spec.orbit && spec.orbit.reference ? entry.reference === spec.orbit.reference || entry.label === spec.orbit.reference : entry.isDefault) ?? assembled.rows[0]!;
     citation = { text: `${row.label}${row.bibcode ? ` (${row.bibcode})` : ''}, via the NASA Exoplanet Archive`, ...(row.url ? { url: row.url } : {}), ...(row.bibcode ? { bibcode: row.bibcode } : {}), label: row.label };
   } else {
     const e = spec.orbit.elements, cite = `${spec.orbit.source} (${spec.orbit.url})`;
@@ -58,11 +59,11 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
         orientation: e.ascendingNodePositionAngleDegrees === undefined ? 'Display convention: the orbit\'s position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).' : `${cite}: ascending node ${e.ascendingNodePositionAngleDegrees} degrees east of north` } };
     citation = { text: spec.orbit.source, url: spec.orbit.url, label: spec.orbit.source };
   }
-  const fromRow = (value: number | undefined, label: string): Cited => {
-    if (value === undefined || !row) throw new Error(`${spec.id}: give ${label} with its source; ${row ? `${row.label}'s archive row has none` : 'no archive row supplies it'}.`);
-    return { value, source: `${row.label}${row.bibcode ? ` (${row.bibcode})` : ''}, via the NASA Exoplanet Archive`, url: row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
+  const fromRow = (picked: AssembledOrbit['radius'] | undefined, label: string): Cited => {
+    if (!picked) throw new Error(`${spec.id}: give ${label} with its source; no archive row supplies it.`);
+    return { value: picked.value, source: `${picked.row.label}${picked.row.bibcode ? ` (${picked.row.bibcode})` : ''}, via the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
   };
-  const radius = spec.radius ?? fromRow(row?.radiusJupiter, 'radius'), mass = spec.mass ?? fromRow(row?.massJupiter, 'mass');
+  const radius = spec.radius ?? fromRow(assembled?.radius, 'radius'), mass = spec.mass ?? fromRow(assembled?.mass, 'mass');
   const star = spec.kind === 'companion', unit = star ? { r: SOLAR_RADIUS_KM, gm: GM_SUN, rn: 'solar radii', mn: 'solar masses', rper: 'km per solar radius', gmn: 'the JPL solar GM' }
     : { r: JUPITER_RADIUS_KM, gm: JUPITER_GM, rn: 'Jupiter radii', mn: 'Jupiter masses', rper: 'km per Jupiter radius', gmn: "JPL's Jupiter GM" };
   const radiusKm = radius.value * unit.r, t = spec.temperature;
@@ -80,7 +81,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   const scaffold = scaffoldHostedPlanetFiles({ id, name: spec.name, system: record.system, description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order: record.order,
     rotation: record.orbit.eccentricity === 0 && !star ? 'synchronous' : 'unmeasured', ...(t ? { selfLuminous: { temperatureK: t.value, source: `${t.source} (${t.url})` } } : {}) }, record.body, hostBody, epochJdTt);
   const files: PackageFiles = new Map(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
-  const recordOf = (url: string | undefined) => url ? publications.get(url) : undefined, label = (url: string | undefined, fallback: string) => { const p = recordOf(url); return p ? `${p.creators[0]?.split(' ').at(-1)}${p.creators.length > 2 ? ' et al.' : ''} ${p.year}` : fallback; };
+  const recordOf = (url: string | undefined) => url ? publications.get(url) : undefined, label = (url: string | undefined, fallback: string) => { const p = recordOf(url); return p && p.creators.length ? `${p.creators[0]!.split(' ').at(-1)}${p.creators.length > 2 ? ' et al.' : ''} ${p.year}` : fallback; };
   const fact = (url: string | undefined, fallback: string, path: string, locator: string) => { const p = recordOf(url); if (!p) throw new Error(`${id}: no publication record for ${url ?? fallback}; cite it by arXiv, DOI or ADS link.`); return { catalogueId: p.id, url: p.url, label: label(url, fallback), checked: CHECKED, path, locator }; };
 
   let colorHex: string | undefined, limbSentence: string | undefined;
@@ -119,8 +120,8 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   if (!paper) throw new Error(`${id}: no publication record for its paper ${spec.paper.url}.`);
   if (!star) text.datasets = { shape: { title: 'Shape only', detail: 'Published radius', summary: 'A sphere at the published size. No picture of its surface exists.' } };
   for (const key of ['card', 'introduction'] as const) {
-    text[key].text = `${TODO}: ${key === 'card' ? 'one sentence, 110 characters at most' : 'two sentences, 180 characters at most'}.`;
-    text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: label(spec.paper.url, spec.paper.credit), checked: CHECKED, locator: TODO, quote: TODO }];
+    text[key].text = spec.text ? spec.text[key] : `${TODO}: ${key === 'card' ? 'one sentence, 110 characters at most' : 'two sentences, 180 characters at most'}.`;
+    text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: label(spec.paper.url, spec.paper.credit), checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) }];
   }
   files.set(`${o}/text.json`, json(text));
   const manifest = read(`${s}/manifest.json`);
@@ -135,12 +136,12 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     `Orbit: ${record.orbitCitation.text}${'whereistheplanet' in spec.orbit ? '; the posterior distributed by whereistheplanet (Wang et al. 2021)' : ''}.`,
     ...star ? ['Colour: a Planck spectrum at the cited temperature through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).'] : [],
     'Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.'].join('\n\n') + '\n');
-  files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '', `${spec.name} is a ${hosted} of ${record.hostId}. ${TODO}: what it is and why it is here, from ${spec.paper.credit}.`, '',
+  files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '', spec.text ? `${spec.text.introduction} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name} is a ${hosted} of ${record.hostId}. ${TODO}: what it is and why it is here, from ${spec.paper.credit}.`, '',
     `**Size and mass.** ${String(record.body.physicalNotes)}`, '', `**Orbit.** ${Object.values(record.orbit.sources).join(' ')}`, '',
     ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
-    `- ${TODO}: the tests and captures that prove the package.`, '', '## Known problems', '',
-    ...record.todo.map(item => `- ${TODO}: ${item}.`), `- ${TODO}: anything else not shown and why.`, '',
+    ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
+    ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? ['- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.'] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
   bindInputs(files, id);
   // One marker for everything a person still writes.

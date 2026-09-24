@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-88986b",
+  "displayName": "HD 88986 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.5 Earth radii",
+        "source": {
+          "catalogueId": "publication-2024a-a-681a-55h",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H",
+          "label": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "146 days",
+        "source": {
+          "catalogueId": "publication-2024a-a-681a-55h",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H",
+          "label": "Heidari et al. 2024",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.054 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2024a-a-681a-55h",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H",
+          "label": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 88986; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-88986b-lens-shape.webp",
+        "surface": "hd-88986b-surface-shape@2x.webp",
+        "poles": "hd-88986b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-88986b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 88986 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Heidari et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract",
+      "credit": "Heidari et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-88986b.json",
+      "credit": "Radius from Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive; mass from Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive; orbit from Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive"
+    }
+  }
+}

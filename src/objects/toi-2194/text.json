@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2194",
+  "card": {
+    "text": "TOI-2194 is a 4,756 K star 19.6 parsecs away with 1 known transiting planet.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-9m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of TOI-2194 b (st_refname MISTRY_ET_AL_2023): st_teff 4756, st_rad 0.6909, st_mass 0.74"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-2194 is a star of 4,756 K 19.6 parsecs away. Its planet TOI-2194 b crosses it, which is how it was found and sized.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-9m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+        "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set of TOI-2194 b (st_refname MISTRY_ET_AL_2023): st_teff 4756, st_rad 0.6909, st_mass 0.74"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

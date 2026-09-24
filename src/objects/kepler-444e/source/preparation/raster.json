@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/kepler-444e/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "kepler-444e-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csskepler-444e-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "shape",
+      "output": "kepler-444e-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-444e-lens-{id}.webp",
+      "source": "measurements.json",
+      "falseColor": false,
+      "science": {
+        "kind": "neutral-shape",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star."
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "csskepler-444e-prepared-lighting-bank@1",
+    "billboardSchema": "csskepler-444e-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csskepler-444e-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

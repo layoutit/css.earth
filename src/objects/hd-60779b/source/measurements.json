@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-60779b",
+  "radiusKm": 20703.3,
+  "radiusSource": "Radius 0.28958922 Jupiter radii from DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract): 20,703.3 km at 71,492 km per Jupiter radius. GM from the mass 0.04464673 Jupiter masses (DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 29.986175,
+  "orbitalPeriodSource": "DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL_2026): P 29.986175 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 60779 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.04464673 Jupiter masses: DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract)."
+}

@@ -1,0 +1,28 @@
+{
+ "id": "hd-136352d",
+ "classification": "exoplanet",
+ "order": 1782,
+ "physical": {
+  "name": "HD 136352 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 16340.7,
+  "gravitationalParameterKm3PerS2": 3515655.14,
+  "parent": "hd-136352"
+ },
+ "physicalNotes": "Radius 0.22856672 Jupiter radii from Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract): 16,340.7 km at 71,492 km per Jupiter radius. GM from the mass 0.02775082 Jupiter masses (Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 107.245,
+  "semiMajorAxisStellarRadii": 86.46,
+  "inclinationDegrees": 89.73,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59009.2759,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): P 107.245 d",
+   "shape": "Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): a/R* 86.46; Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): inclination 89.73 degrees",
+   "eccentricity": "Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): e 0",
+   "phase": "Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): transit mid-time 2459009.7759 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

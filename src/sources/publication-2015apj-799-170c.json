@@ -1,0 +1,36 @@
+{
+  "id": "publication-2015apj-799-170c",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2015ApJ...799..170C, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...799..170C"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C",
+      "checkedOn": "2026-09-24",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C"
+    }
+  ],
+  "publicationDate": "2015"
+}

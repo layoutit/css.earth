@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-431b",
+  "radiusKm": 8164,
+  "radiusSource": "Radius 0.11419415 Jupiter radii from Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract): 8,164 km at 71,492 km per Jupiter radius. GM from the mass 0.0096593 Jupiter masses (Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.490047,
+  "orbitalPeriodSource": "Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2021): P 0.490047 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-431 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.0096593 Jupiter masses: Osborn et al. 2021 (2021MNRAS.507.2782O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract)."
+}

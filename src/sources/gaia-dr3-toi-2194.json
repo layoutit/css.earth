@@ -1,0 +1,41 @@
+{
+  "id": "gaia-dr3-toi-2194",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 gaia_source row for TOI-2194 (source_id 6748283784056800384)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "6748283784056800384"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "label": "Gaia Collaboration (2023), Gaia DR3 summary"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+s.source_id%2C+s.ref_epoch%2C+s.ra%2C+s.dec%2C+s.parallax%2C+s.parallax_error%2C+s.pmra%2C+s.pmdec%2C+s.radial_velocity%2C+s.radial_velocity_error%2C+s.ruwe%2C+s.phot_g_mean_mag%2C+s.bp_rp%2C+s.has_xp_sampled%2C+a.mass_flame%2C+a.mass_flame_lower%2C+a.mass_flame_upper%2C+a.radius_flame%2C+a.radius_flame_lower%2C+a.radius_flame_upper+FROM+gaiadr3.gaia_source+AS+s+LEFT+JOIN+gaiadr3.astrophysical_parameters+AS+a+ON+a.source_id+%3D+s.source_id+WHERE+s.source_id+%3D+6748283784056800384",
+      "checkedOn": "2026-09-24",
+      "locator": "gaiadr3.gaia_source at epoch 2016.0: parallax 51.15731 +/- 0.02500 mas, pmra 409.219, pmdec 31.538 mas/yr, radial_velocity 52.92 km/s, RUWE 0.99, has_xp_sampled false; mass_flame 0.7238, radius_flame 0.7193"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26",
+      "scope": "citation",
+      "evidence": "https://www.cosmos.esa.int/web/gaia-users/credits"
+    }
+  ],
+  "publisher": "European Space Agency, Gaia Data Processing and Analysis Consortium"
+}

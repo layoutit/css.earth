@@ -47,6 +47,17 @@ export interface StarSpec {
   readonly limb?: { readonly none: string };
   readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string };
   readonly planets: readonly HostedSpec[]; readonly companions: readonly HostedSpec[];
+  /** Drafted reader text, cited to the paper at `locator`; without it the card and introduction stay marked for a person. */
+  readonly text?: DraftText;
+  /** What the generator or a person chose not to show, one sentence each, for the README. */
+  readonly notes: readonly string[];
+}
+export interface DraftText { readonly card: string; readonly introduction: string; readonly locator: string }
+function draftText(value: unknown, label: string): DraftText {
+  const input = requireRecord(value, label), card = requireString(input.card, `${label}.card`), introduction = requireString(input.introduction, `${label}.introduction`);
+  if (card.length > 110) throw new RangeError(`${label}.card is ${card.length} characters; the card budget is 110.`);
+  if (introduction.length > 180) throw new RangeError(`${label}.introduction is ${introduction.length} characters; the budget is 180.`);
+  return { card, introduction, locator: requireString(input.locator, `${label}.locator`) };
 }
 export type OrbitSpec =
   | { readonly whereistheplanet: string; readonly measurements: string; readonly measurementsSource: string; readonly body?: number; readonly source: string; readonly url: string }
@@ -56,7 +67,7 @@ export type OrbitSpec =
 export interface HostedSpec {
   readonly kind: 'planet' | 'companion'; readonly id: string; readonly name: string; readonly description: string; readonly order?: number;
   readonly paper: { readonly url: string; readonly credit: string };
-  readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec;
+  readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec; readonly text?: DraftText;
 }
 const ELEMENT_KEYS = ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'argumentOfPeriapsisDegrees', 'transitTimeBmjdTdb', 'ascendingNodePositionAngleDegrees'];
 function orbitSpec(value: unknown, label: string): OrbitSpec {
@@ -83,14 +94,14 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
 function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): HostedSpec {
   const input = requireRecord(value, label), id = requireString(input.id, `${label}.id`), at = (name: string) => `${id}.${name}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: an id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown fields ${unknown.join(', ')}.`);
   const paper = requireRecord(input.paper, at('paper')), orbit = orbitSpec(input.orbit, at('orbit'));
   const range = kind === 'planet' ? { radius: [0.01, 5] as const, mass: [0.0001, 100] as const } : { radius: [0.005, 3000] as const, mass: [0.01, 300] as const };
   const out: HostedSpec = { kind, id, name: requireString(input.name, at('name')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     ...(input.radius === undefined ? {} : { radius: cited(input.radius, at('radius'), range.radius) }), ...(input.mass === undefined ? {} : { mass: cited(input.mass, at('mass'), range.mass) }),
-    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit };
+    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }) };
   const fromArchive = 'archive' in orbit;
   if (!fromArchive && (!out.radius || !out.mass)) throw new TypeError(`${id}: give radius and mass with their sources; only an archive orbit supplies them.`);
   if (kind === 'companion' && (!out.temperature || !out.radius || !out.mass)) throw new TypeError(`${id}: a companion star needs its cited temperature, radius and mass.`);
@@ -113,7 +124,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'spin', 'limb', 'color', 'planets', 'companions']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -145,16 +156,19 @@ export function parseStarSpec(value: unknown): StarSpec {
     ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),
+    ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }),
+    notes: input.notes === undefined ? [] : requireArray(input.notes, at('notes')).map(note => requireString(note, at('notes'))),
   };
 }
 
 /** New bodies for a star already in the universe: { "host": "<its id>", "planets": [ … ], "companions": [ … ] }. */
-export interface HostAddition { readonly host: string; readonly planets: readonly HostedSpec[]; readonly companions: readonly HostedSpec[] }
+export interface HostAddition { readonly host: string; readonly planets: readonly HostedSpec[]; readonly companions: readonly HostedSpec[]; readonly notes: readonly string[] }
 export function parseHostAddition(value: unknown): HostAddition {
-  const input = requireRecord(value, 'host addition'), host = requireString(input.host, 'host'), unknown = Object.keys(input).filter(key => !['host', 'planets', 'companions'].includes(key));
+  const input = requireRecord(value, 'host addition'), host = requireString(input.host, 'host'), unknown = Object.keys(input).filter(key => !['host', 'planets', 'companions', 'notes'].includes(key));
   if (unknown.length) throw new TypeError(`${host}: a host addition takes only host, planets and companions, not ${unknown.join(', ')}.`);
   return { host, planets: input.planets === undefined ? [] : requireArray(input.planets, `${host}.planets`).map((entry, i) => hostedSpec(entry, 'planet', `${host}.planets[${i}]`)),
-    companions: input.companions === undefined ? [] : requireArray(input.companions, `${host}.companions`).map((entry, i) => hostedSpec(entry, 'companion', `${host}.companions[${i}]`)) };
+    companions: input.companions === undefined ? [] : requireArray(input.companions, `${host}.companions`).map((entry, i) => hostedSpec(entry, 'companion', `${host}.companions[${i}]`)),
+    notes: input.notes === undefined ? [] : requireArray(input.notes, `${host}.notes`).map(note => requireString(note, `${host}.notes`)) };
 }
 
 /** A spec file's entries: new stars with their systems, and additions to stars that exist. */

@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hr-858b",
+  "displayName": "HR 858 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2 Earth radii",
+        "source": {
+          "catalogueId": "publication-2025a-a-693a-90b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
+          "label": "Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.59 days",
+        "source": {
+          "catalogueId": "publication-2025a-a-693a-90b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
+          "label": "Bonfanti et al. 2025",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.011 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2025a-a-693a-90b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
+          "label": "Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HR 858; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hr-858b-lens-shape.webp",
+        "surface": "hr-858b-surface-shape@2x.webp",
+        "poles": "hr-858b-poles-shape@2x.webp",
+        "source": {
+          "id": "hr-858b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HR 858 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bonfanti et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+      "credit": "Bonfanti et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hr-858b.json",
+      "credit": "Radius from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive; mass from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive; orbit from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.object-stage[data-object-id="hd-60779b"] > .hd-60779b-material-composite {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+.object-stage[data-object-id="hd-60779b"] .polycss-scene s,
+.object-stage[data-object-id="hd-60779b"] .hd-60779b-fixed-material {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+.object-stage[data-object-id="hd-60779b"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+}
+.object-stage[data-object-id="hd-60779b"] .polycss-scene s:not(.hd-60779b-polar) {
+  background-image: url("/scenes/hd-60779b/hd-60779b-surface-shape@2x.webp") !important;
+}
+.object-stage[data-object-id="hd-60779b"] .polycss-scene s.hd-60779b-polar {
+  background-image: url("/scenes/hd-60779b/hd-60779b-poles-shape@2x.webp") !important;
+}
+/* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
+.object-stage[data-object-id="hd-60779b"] .hd-60779b-fixed-material {
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(var(--hd-60779b-light-roll, 0deg)) scale(1.0782608695652174);
+}
+.object-stage[data-object-id="hd-60779b"].hd-60779b-hide-shadows .hd-60779b-fixed-material {
+  transform: translate(-50%, -50%) scale(1.0782608695652174);
+}

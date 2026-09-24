@@ -26,15 +26,23 @@ export { neutralDiscMarker, scaffoldStar, scaffoldStarFiles, solarRadii, starSty
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
-  const specPath = option('spec'), handoff = option('hosted');
-  if (handoff) {
+  const specPath = option('spec'), handoff = option('hosted'), fromArchive = args.indexOf('--from-archive');
+  if (fromArchive >= 0) {
+    // A spec for planet hosts from the NASA Exoplanet Archive: `--from-archive HOST... --out spec.json`.
+    const hosts = args.slice(fromArchive + 1).filter((argument, i, list) => !argument.startsWith('--') && !list[i - 1]?.startsWith('--')), out = option('out');
+    if (!hosts.length || !out) throw new TypeError('Usage: new-object --from-archive HOST... --out spec.json');
+    const { specFromArchive } = await import('./new-object/generate.mts'), result = await specFromArchive(hosts, out, { progress: line => process.stderr.write(`${line}\n`) });
+    process.stdout.write(`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`);
+  } else if (handoff) {
     // Phase two of a system run (new-object/generate.mts runNewObject), in a process that loads the rebuilt astronomy package.
     const { runHostedPhase } = await import('./new-object/generate.mts');
     process.stdout.write(JSON.stringify(await runHostedPhase(handoff)));
   } else if (specPath) {
     // The full generator: every star in the spec file, from the archives (new-object/generate.mts); also `telescope new-object`.
-    const { formatNewObject, runNewObject } = await import('./new-object/generate.mts');
-    process.stdout.write(formatNewObject(await runNewObject(specPath, { progress: line => process.stderr.write(`${line}\n`) })));
+    const { checkGenerated, formatNewObject, runNewObject } = await import('./new-object/generate.mts');
+    const results = await runNewObject(specPath, { progress: line => process.stderr.write(`${line}\n`), skipExisting: args.includes('--skip-existing') });
+    process.stdout.write(formatNewObject(results));
+    if (args.includes('--check') && results.length) { await checkGenerated(results.map(result => result.id), process.cwd(), line => process.stderr.write(`${line}\n`)); process.stdout.write(`${results.length} objects passed the bake's first steps (titles, authored preparation, source records, page data).\n`); }
   } else {
     const id = args.find(argument => !argument.startsWith('--') && !args[args.indexOf(argument) - 1]?.startsWith('--'));
     const blackHole = args.includes('--black-hole');

@@ -1,0 +1,35 @@
+{
+  "id": "source-kepler-444-gaia-dr3-source",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Kepler-444 · kepler 444 gaia dr3 source",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kepler-444/source/manifest.json",
+      "locator": "/inputs/11"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26 (FLAME)",
+      "scope": "The kepler 444 gaia dr3 source input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

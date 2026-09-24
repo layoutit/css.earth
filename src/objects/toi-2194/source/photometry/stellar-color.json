@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-2194",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4756,
+      "lowerKelvin": 4706,
+      "upperKelvin": 4806,
+      "citation": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-2194 b in the NASA Exoplanet Archive: 4756 +/- 50 K, https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 188474 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

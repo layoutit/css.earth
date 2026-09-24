@@ -1,0 +1,35 @@
+{
+  "id": "source-hip-56998-cie-1931-2deg-cmf",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HIP 56998 · hip 56998 cie 1931 2deg cmf",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hip-56998/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CIE (2019), CIE 1931 colour-matching functions, 2 degree observer, doi:10.25039/CIE.DS.xvudnb9b",
+      "scope": "The hip 56998 cie 1931 2deg cmf input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY-SA 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-60779b",
+  "displayName": "HD 60779 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3.2 Earth radii",
+        "source": {
+          "catalogueId": "publication-2026aj-172-97d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D",
+          "label": "DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "30 days",
+        "source": {
+          "catalogueId": "publication-2026aj-172-97d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D",
+          "label": "DiTomasso et al. 2026",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.045 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2026aj-172-97d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D",
+          "label": "DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 60779; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-60779b-lens-shape.webp",
+        "surface": "hd-60779b-surface-shape@2x.webp",
+        "poles": "hd-60779b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-60779b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 60779 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "DiTomasso et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract",
+      "credit": "DiTomasso et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-60779b.json",
+      "credit": "Radius from DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive; mass from DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive; orbit from DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive"
+    }
+  }
+}

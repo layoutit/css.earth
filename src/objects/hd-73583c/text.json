@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-73583c",
+  "card": {
+    "text": "HD 73583 c crosses its star every 18.9 days and is 2.4 Earth radii across, found in 2022.",
+    "sources": [
+      {
+        "catalogueId": "publication-2022mnras-514-1606b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+        "label": "Barrag&aacute;n et al. 2022",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARRAGAN_ET_AL_2022): pl_orbper 18.87974, pl_radj 0.21322189, pl_bmassj 0.03051961"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 73583 c transits HD 73583 every 18.9 days and is 2.4 Earth radii across. Orbit and size follow Barrag&aacute;n et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2022mnras-514-1606b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+        "label": "Barrag&aacute;n et al. 2022",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARRAGAN_ET_AL_2022): pl_orbper 18.87974, pl_radj 0.21322189, pl_bmassj 0.03051961"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

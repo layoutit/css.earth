@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hr-858b",
+  "radiusKm": 12781.7,
+  "radiusSource": "Radius 0.17878521 Jupiter radii from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract): 12,781.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01116955 Jupiter masses (Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.585287,
+  "orbitalPeriodSource": "Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): P 3.585287 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HR 858 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01116955 Jupiter masses: Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract)."
+}

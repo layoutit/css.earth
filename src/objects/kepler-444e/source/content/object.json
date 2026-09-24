@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-444e",
+  "displayName": "Kepler-444 e",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.55 Earth radii",
+        "source": {
+          "catalogueId": "publication-2015apj-799-170c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C",
+          "label": "Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "7.74 days",
+        "source": {
+          "catalogueId": "publication-2015apj-799-170c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C",
+          "label": "Campante et al. 2015",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.00031 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2017aj-154-5h",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154....5H",
+          "label": "Hadden & Lithwick 2017 (2017AJ....154....5H), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-444; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-444e-lens-shape.webp",
+        "surface": "kepler-444e-surface-shape@2x.webp",
+        "poles": "kepler-444e-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-444e-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-444 e is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Campante et al. 2015",
+      "href": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+      "credit": "Campante et al. 2015"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-444e.json",
+      "credit": "Radius from Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive; mass from Hadden & Lithwick 2017 (2017AJ....154....5H), via the NASA Exoplanet Archive; orbit from Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive"
+    }
+  }
+}

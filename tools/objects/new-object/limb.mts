@@ -37,8 +37,10 @@ export interface LimbChoice {
 export async function chooseLimb(id: string, teffK: number, logg: number, archive: Archive, decline?: string): Promise<LimbChoice> {
   if (decline) return { sentence: `No limb darkening is drawn: ${decline}` };
   const reasons: string[] = [];
-  for (const grid of GRIDS) {
-    const wide = strip(await archive.text(VIZIER_ASU, grid.form(`${Math.floor(teffK - 1000)}..${Math.ceil(teffK + 1000)}`, `${(logg - 1).toFixed(2)}..${(logg + 1).toFixed(2)}`)));
+  // Both grids' wide windows are requested at once; the first grid that brackets the star is used.
+  const wides = await Promise.all(GRIDS.map(grid => archive.text(VIZIER_ASU, grid.form(`${Math.floor(teffK - 1000)}..${Math.ceil(teffK + 1000)}`, `${(logg - 1).toFixed(2)}..${(logg + 1).toFixed(2)}`)).then(strip)));
+  for (const [g, grid] of GRIDS.entries()) {
+    const wide = wides[g]!;
     const recipe = { law: 'quadratic' as const, source: 'grid' as const, path: grid.file, teffK, logg, models: grid.modelColumns, columns: grid.columns };
     try {
       interpolateQuadraticLimbDarkening(wide, recipe);

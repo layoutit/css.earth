@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-836b",
+  "card": {
+    "text": "TOI-836 b crosses its star every 3.82 days and is 1.7 Earth radii across, found in 2023.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023mnras-520-3649h",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract",
+        "label": "Hawthorn et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HAWTHORN_ET_AL_2023): pl_orbper 3.81673, pl_radj 0.15202096, pl_bmassj 0.01425297"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-836 b transits TOI-836 every 3.82 days and is 1.7 Earth radii across. Orbit and size follow Hawthorn et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023mnras-520-3649h",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract",
+        "label": "Hawthorn et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HAWTHORN_ET_AL_2023): pl_orbper 3.81673, pl_radj 0.15202096, pl_bmassj 0.01425297"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

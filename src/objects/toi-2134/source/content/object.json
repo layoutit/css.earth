@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-2134",
+  "displayName": "TOI-2134",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.71 solar radii",
+        "source": {
+          "catalogueId": "publication-2026mnras-550g1265r",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R",
+          "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "22.7 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-2134",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "toi-2134-lens-color.webp",
+        "surface": "toi-2134-surface-color@2x.webp",
+        "poles": "toi-2134-poles-color@2x.webp",
+        "source": {
+          "id": "toi-2134-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gaia.ari.uni-heidelberg.de/tap/sync"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,580 K and log g 4.61 (u1 0.761, u2 0.032): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Rescigno et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+      "credit": "Rescigno et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-2134.json",
+      "credit": "Rescigno et al. 2026, the stellar radius of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

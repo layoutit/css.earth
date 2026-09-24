@@ -10,28 +10,25 @@ export interface Archive {
   exists(url: string): Promise<boolean>;
 }
 
-/** A dropped connection is retried twice, a second apart; an HTTP error answer is not, so a failed service is reported at once. */
-async function request(url: string, init?: RequestInit): Promise<Response> {
+/** A dropped connection, before or during the transfer, is retried twice, a second apart; an HTTP error answer is not, so a
+ * failed service is reported at once. Every failure names its URL. */
+async function transfer<T>(url: string, read: (response: Response) => Promise<T>, init?: RequestInit): Promise<T> {
   for (let attempt = 1; ; attempt++) {
-    try { return await fetch(url, init); }
-    catch (error) {
-      if (attempt === 3) throw new Error(`${url}: ${(error as Error).message} after 3 attempts.`);
+    try {
+      const response = await fetch(url, init);
+      if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);
+      return await read(response);
+    } catch (error) {
+      if (error instanceof HttpError || attempt === 3) throw error instanceof HttpError ? error : new Error(`${url}: ${(error as Error).message} after ${attempt} attempts.`);
       await new Promise(done => setTimeout(done, 1000 * attempt));
     }
   }
 }
+class HttpError extends Error {}
 export const liveArchive: Archive = {
-  async text(url, form) {
-    const response = await request(url, form ? { method: 'POST', body: new URLSearchParams(form) } : undefined);
-    if (!response.ok) throw new Error(`${url} answered ${response.status} ${response.statusText}${form ? ` for ${JSON.stringify(form).slice(0, 200)}` : ''}.`);
-    return response.text();
-  },
-  async bytes(url) {
-    const response = await request(url);
-    if (!response.ok) throw new Error(`${url} answered ${response.status} ${response.statusText}.`);
-    return Buffer.from(await response.arrayBuffer());
-  },
-  async exists(url) { return (await request(url, { method: 'HEAD' })).status === 200; },
+  text: (url, form) => transfer(url, response => response.text(), form ? { method: 'POST', body: new URLSearchParams(form) } : undefined),
+  bytes: url => transfer(url, async response => Buffer.from(await response.arrayBuffer())),
+  exists: url => transfer(url, async response => response.status === 200, { method: 'HEAD' }).catch(error => { if (error instanceof HttpError) return false; throw error; }),
 };
 
 export const GAIA_TAP = 'https://gea.esac.esa.int/tap-server/tap/sync';
@@ -107,7 +104,7 @@ export async function identify(resolver: Resolver, target: string | undefined, g
   return { ...ids, gaia: source };
 }
 
-export interface Publication { readonly id: string; readonly title: string; readonly creators: readonly string[]; readonly year: string; readonly publisher?: string; readonly doi?: string; readonly arxiv?: string; readonly bibcode?: string; readonly url: string }
+export interface Publication { readonly id: string; readonly title: string; readonly creators: readonly string[]; readonly year: string; readonly publisher?: string; readonly doi?: string; readonly arxiv?: string; readonly bibcode?: string; readonly url: string; readonly page?: true }
 const clean = (value: string) => value.replace(/\s+/gu, ' ').trim();
 /** An arXiv abstract link resolved through the arXiv API. */
 export function parseArxivEntry(xml: string, arxiv: string, url: string): Publication {
@@ -143,5 +140,7 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
   }
   const doi = /doi\.org\/(10\.\S+)$/u.exec(url)?.[1];
   if (doi) return parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, url);
-  return undefined;
+  // Any other page (an archive's documentation, ExoFOP): a reference page named by its address.
+  const { hostname, pathname } = new URL(url), id = `page-${`${hostname}${pathname}`.toLowerCase().replace(/\.(html?|php)$/u, '').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`;
+  return { id, title: `${hostname}${pathname}`, creators: [], year: '', url, page: true };
 }

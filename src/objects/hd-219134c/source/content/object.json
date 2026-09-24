@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-219134c",
+  "displayName": "HD 219134 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Earth radii",
+        "source": {
+          "catalogueId": "publication-2017natas-1e-56g",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G",
+          "label": "Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "6.76 days",
+        "source": {
+          "catalogueId": "publication-2017natas-1e-56g",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G",
+          "label": "Gillon et al. 2017",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.014 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2017natas-1e-56g",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G",
+          "label": "Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 219134; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-219134c-lens-shape.webp",
+        "surface": "hd-219134c-surface-shape@2x.webp",
+        "poles": "hd-219134c-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-219134c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 219134 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gillon et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+      "credit": "Gillon et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-219134c.json",
+      "credit": "Radius from Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive; mass from Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive; orbit from Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive"
+    }
+  }
+}

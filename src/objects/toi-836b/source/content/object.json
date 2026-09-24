@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-836b",
+  "displayName": "TOI-836 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.7 Earth radii",
+        "source": {
+          "catalogueId": "publication-2023mnras-520-3649h",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H",
+          "label": "Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.82 days",
+        "source": {
+          "catalogueId": "publication-2023mnras-520-3649h",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H",
+          "label": "Hawthorn et al. 2023",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.014 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2023mnras-520-3649h",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H",
+          "label": "Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-836; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-836b-lens-shape.webp",
+        "surface": "toi-836b-surface-shape@2x.webp",
+        "poles": "toi-836b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-836b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-836 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hawthorn et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract",
+      "credit": "Hawthorn et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-836b.json",
+      "credit": "Radius from Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive; mass from Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive; orbit from Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive"
+    }
+  }
+}

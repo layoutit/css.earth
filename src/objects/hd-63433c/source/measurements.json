@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-63433c",
+  "radiusKm": 17158.1,
+  "radiusSource": "Radius 0.24 Jupiter radii from Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract): 17,158.1 km at 71,492 km per Jupiter radius. GM from the mass 0.04889116 Jupiter masses (Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 20.5438281,
+  "orbitalPeriodSource": "Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): P 20.5438281 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 63433 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.04889116 Jupiter masses: Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract)."
+}
