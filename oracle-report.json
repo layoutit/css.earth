@@ -1,0 +1,130 @@
+{
+ "schema": "jankmonster-oracle@1",
+ "repo": "/Users/ekrof/Documents/Codex/2026-09-23/im-x20/work/css-earth-report-cleanup",
+ "files": [
+  "src/renderers/css/navigation/prepared-wheel-zoom.ts"
+ ],
+ "before": "origin/main",
+ "after": "working tree",
+ "scenarios": 14,
+ "otherChangedFiles": [],
+ "results": [
+  {
+   "name": "one wheel notch dollies, then glides to rest",
+   "identical": true,
+   "records": 28,
+   "problems": []
+  },
+  {
+   "name": "a notch in lines and in pages",
+   "identical": true,
+   "records": 53,
+   "problems": []
+  },
+  {
+   "name": "notches in a row extend one dolly",
+   "identical": true,
+   "records": 43,
+   "problems": []
+  },
+  {
+   "name": "trackpad swipes keep their measured speed across gestures",
+   "identical": true,
+   "records": 73,
+   "problems": []
+  },
+  {
+   "name": "a wheel notch after a trackpad swipe releases from the travelled speed",
+   "identical": true,
+   "records": 52,
+   "problems": []
+  },
+  {
+   "name": "a pinch is a trackpad gesture with its own gain",
+   "identical": true,
+   "records": 34,
+   "problems": []
+  },
+  {
+   "name": "a reversal mid-dolly starts from the camera",
+   "identical": true,
+   "records": 30,
+   "problems": []
+  },
+  {
+   "name": "a new notch ends a glide where it stands",
+   "identical": true,
+   "records": 45,
+   "problems": []
+  },
+  {
+   "name": "a bound clamps the dolly and stops the glide",
+   "identical": true,
+   "records": 13,
+   "problems": []
+  },
+  {
+   "name": "a glide into the far bound stops",
+   "identical": true,
+   "records": 28,
+   "problems": []
+  },
+  {
+   "name": "frames that straddle the interval hand their leftover to the glide",
+   "identical": true,
+   "records": 15,
+   "problems": []
+  },
+  {
+   "name": "stop, disable and re-enable",
+   "identical": true,
+   "records": 48,
+   "problems": []
+  },
+  {
+   "name": "ignored events",
+   "identical": true,
+   "records": 6,
+   "problems": []
+  },
+  {
+   "name": "destroy mid-dolly",
+   "identical": true,
+   "records": 8,
+   "problems": []
+  }
+ ],
+ "coverage": [
+  {
+   "file": "src/renderers/css/navigation/prepared-wheel-zoom.ts",
+   "side": "after",
+   "mapped": true,
+   "changedLines": 62,
+   "changedCodeLines": 47,
+   "executed": 47,
+   "missed": []
+  },
+  {
+   "file": "src/renderers/css/navigation/prepared-wheel-zoom.ts",
+   "side": "before",
+   "mapped": true,
+   "changedLines": 64,
+   "changedCodeLines": 60,
+   "executed": 60,
+   "missed": []
+  }
+ ],
+ "mutants": {
+  "generated": 12,
+  "killed": 12,
+  "survived": [],
+  "invalid": 0
+ },
+ "verdict": "identical",
+ "limits": [
+  "Equivalence holds for these scenarios only. A match proves the traces the scenarios record are equal, not that every behaviour is.",
+  "Files other than the targets come from the working tree on both sides; otherChangedFiles lists any that also differ.",
+  "Coverage is V8 block coverage mapped through the bundle source map; a line counts as run when any of its generated code ran."
+ ],
+ "changedCodeCoverage": 1
+}
