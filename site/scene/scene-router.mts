@@ -460,11 +460,12 @@ export function createSceneRouter({
     const overview = selection?.context.kind === 'overview';
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(overview);
     shellOwner?.shell?.presentSelection();
-    world.current?.setOverview?.(overview, selection.current.kind === 'overview' ? selection.current.overview.scope : undefined);
+    const subject = selection?.current;
+    world.current?.setOverview?.(overview, subject?.kind === 'overview' ? subject.overview.scope : undefined);
     if (stage.dataset) {
-      const subject = selection?.current ?? { kind: 'object' as const, objectId };
-      stage.dataset.selection = subject.kind === 'overview' ? subject.overview.scope
-        : subject.kind === 'focus' ? subject.id : subject.objectId;
+      const current = subject ?? { kind: 'object' as const, objectId };
+      stage.dataset.selection = current.kind === 'overview' ? current.overview.scope
+        : current.kind === 'focus' ? current.id : current.objectId;
     }
     publication.publish();
   }
