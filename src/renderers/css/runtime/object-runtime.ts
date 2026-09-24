@@ -65,10 +65,14 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
     if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
     const lifetime = environment.createLifetime();
-    let readyPublished = false, settled = false;
-    let resolveReady!: () => void, rejectReady!: (error: unknown) => void, activated = false;
+    // Startup mounts the prepared groups, activates them (connected and painted once), then publishes readiness after a paint.
+    // `ready` settles once: resolved at readiness or by an earlier destroy, rejected by an earlier fatal error.
+    let phase: 'mounting' | 'activated' | 'ready' = 'mounting';
+    let resolveReady!: () => void, rejectReady!: (error: unknown) => void;
     const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
     ready.catch(() => {});
+    /** Camera, datasets and shared views answer only between readiness and disposal. */
+    const live = () => phase === 'ready' && !lifetime.disposed;
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arrivingByFlight;
@@ -81,7 +85,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const datasetListeners = new Set<(id: string) => void>();
     const worldPublication = createWorldNavigationPublicationHub(fatal);
     let latestWorldPublication: OrbitPublication | null = null;
-    const notifyView = () => { if (readyPublished) for (const listener of viewListeners) listener(); };
+    const notifyView = () => { if (phase === 'ready') for (const listener of viewListeners) listener(); };
     lifetime.onDispose(() => { viewListeners.clear(); datasetListeners.clear(); worldPublication.destroy(); });
     const playback = environment.createPlayback();
     lifetime.onDispose(() => playback.destroy());
@@ -120,7 +124,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let restoreVersion = 0;
     const sharedView = Object.freeze({
       capture(motionRequested = false): SharedView | null {
-        if (!readyPublished) return null;
+        if (phase !== 'ready') return null;
         const camera = getOrbit().sharedState();
         return { camera, preparedEpochJdTt,
           playback: { times: playback.captureMotion(), speed: playback.stats().speed, motionRequested } };
@@ -130,7 +134,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         const view = parseSharedView(formatSharedView(saved));
         if (!view) throw new TypeError("A saved object view is required.");
         const version = ++restoreVersion;
-        if (!readyPublished || lifetime.disposed) return false;
+        if (!live()) return false;
         if (view.preparedEpochJdTt !== preparedEpochJdTt) {
           throw new TypeError("This view uses a different prepared astronomical date.");
         }
@@ -159,7 +163,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       preparedFocus() { return getOrbit().preparedFocus(); },
       // Every prepared group is connected and painted once: an arriving flight
       // may resume before the remaining readiness bookkeeping settles.
-      detailActivated() { return activated && !lifetime.disposed; },
+      detailActivated() { return phase !== 'mounting' && !lifetime.disposed; },
       setPreparedFocus(focus: Parameters<ObjectWorldNavigation['setPreparedFocus']>[0]) {
         if (!lifetime.disposed) getOrbit().setPreparedFocus(focus, worldFrame);
       },
@@ -188,7 +192,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       volumeOf: (id: string) => selectedLensVolume(definition.controls, id),
       current: () => lifetime.disposed ? null : selection?.state().committed?.lensId ?? null,
       async select(id: string, options: { signal?: AbortSignal } = {}) {
-        if (!readyPublished || lifetime.disposed || options.signal?.aborted) return false;
+        if (!live() || options.signal?.aborted) return false;
         return getSelection().dispatch({ kind: 'lens', id }, { ...options, frameCamera: false });
       },
       subscribe(listener: (id: string) => void) {
@@ -207,14 +211,14 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }) : undefined;
     const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations } : {}), ...(features ? { features } : {}),
       // Only the native owner knows when these capabilities can use its camera and selection.
-      get navigation() { return readyPublished && !lifetime.disposed ? navigation : undefined; },
-      get datasets() { return readyPublished && !lifetime.disposed ? datasets : undefined; },
+      get navigation() { return live() ? navigation : undefined; },
+      get datasets() { return live() ? datasets : undefined; },
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       refinesWithoutInput: definition.textureLevels !== undefined,
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
       destroy() {
-        if (!settled) { settled = true; resolveReady(); }
+        resolveReady();
         const errors = lifetime.destroy();
         if (errors.length) throw new AggregateError(errors, "Object cleanup failed.");
       },
@@ -230,9 +234,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (!selection) throw new Error("Object selection is not mounted.");
       return selection;
     }
-    function syncPagePlayback() {
-      const running = allowed && (selection?.state().committed?.speed ?? initialSelection.speed ?? 1) !== 0;
-      surfaceFeatures?.setPlaying(running);
+    /** Surface labels follow the scene while playback is allowed at a moving speed. */
+    function syncPagePlayback(speed = selection?.state().committed?.speed ?? initialSelection.speed) {
+      surfaceFeatures?.setPlaying(allowed && (speed ?? 1) !== 0);
     }
     function setAllowed(value: boolean) { allowed = value; playback.setAllowed(value); syncPagePlayback(); }
     function stopMotion() { onMotionRequest(false); setAllowed(false); }
@@ -252,7 +256,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (state.committed && !state.pending) notifyView();
       if (!state.committed || state.pending || !orbit || state.committed.lensId === navigatedLens) return;
       navigatedLens = state.committed.lensId;
-      if (readyPublished && navigatedLens !== null) for (const listener of datasetListeners) listener(navigatedLens);
+      if (phase === 'ready' && navigatedLens !== null) for (const listener of datasetListeners) listener(navigatedLens);
       const navigation = state.plan?.navigation;
       if (!navigation) return;
       maximumZoom = navigation.maximumZoom;
@@ -267,8 +271,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Invalidate the session before any cleanup can trigger a native callback.
       const errors = lifetime.destroy();
       const failure = errors.length ? new AggregateError([error, ...errors], errorMessage(error), { cause: error }) : error;
-      if (!settled) { settled = true; rejectReady(failure); }
-      else if (readyPublished) onError(failure);
+      // Before readiness the failure rejects `ready`; after it, the owner hears it. (A destroyed mount returned above.)
+      if (phase === 'ready') onError(failure); else rejectReady(failure);
     }
     function guarded<T>(callback: () => T): T | undefined {
       if (lifetime.disposed) return;
@@ -321,7 +325,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onCommit: (next, _plan, intent) => {
           if (intent.kind === 'selection') datasetEffects?.commit(selectedLensVolume(definition.controls, next.lensId));
           playback.setSelection(next);
-          surfaceFeatures?.setLens({ id: next.lensId }); surfaceFeatures?.setPlaying(allowed && (next.speed ?? 1) !== 0);
+          surfaceFeatures?.setLens({ id: next.lensId }); syncPagePlayback(next.speed ?? 1);
           // A handoff or saved view supplies the startup camera. Committing its
           // initial lens must not replace that camera or cancel the shared flight.
           frameDatasetCamera = intent.frameCamera && (intent.kind !== 'initial' || !initialWorldCamera);
@@ -370,14 +374,13 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (navigation) onNavigationReady?.(navigation);
       await lifetime.wait(mounted.activate());
       if (lifetime.disposed) return;
-      activated = true;
+      phase = 'activated';
       playback.setReady();
       await lifetime.wait(environment.waitPaint(lifetime, stage.ownerDocument.defaultView ?? window));
       if (lifetime.disposed) return;
       controls.setReady();
-      readyPublished = true;
+      phase = 'ready';
       if ((import.meta.env?.PROD !== true || import.meta.env?.MODE === 'performance') && diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, surfaceFeatures, getCurrentView: () => currentView });
-      settled = true;
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same
       // selection transaction after visibility, including direct URL loads.

@@ -24,7 +24,8 @@ export function readAllowMissingFlag(args: readonly string[] = []) {
 // its 172-second restore fetching 16,143 files at about 100 a second. Timed on 1,200 files, 8 took 33.9s, 32 took
 // 8.4s and 64 took 4.3s; on 3,000 files 256 and 512 returned every request with 200, no 429 and no retry. The
 // assets are served from a custom domain, which R2 does not rate-limit (only r2.dev is), so the limit is the
-// client, and past 256 the gain was inside the noise of one connection.
+// client, and past 256 the gain was inside the noise of one connection. A CI restore on 2026-09-24 still met one 429 in 9,417
+// files, so a 429 is retried like a 5xx, after the Retry-After it names when it names one.
 export const RUNTIME_ASSET_CONCURRENCY = 256;
 export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = RUNTIME_ASSET_CONCURRENCY,
   allowMissing = false, onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
@@ -44,8 +45,8 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
             sha256(existing) === asset.sha256) {
           reused++;
         } else {
-          // A dropped connection is not a missing asset. Across 5,500+ files a single transient
-          // failure would otherwise fail the whole run, so retry the network with backoff, including a
+          // A dropped connection, a 5xx or a 429 is not a missing asset. Across 5,500+ files a single transient
+          // failure would otherwise fail the whole run, so retry them with backoff, including a
           // connection that drops while the body streams. A 404 still fails (or skips) on the first
           // response: "not published" is a fact, not a blip.
           let bytes: Buffer | 'missing' | undefined;
@@ -53,7 +54,10 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
             let response: Awaited<ReturnType<typeof fetcher>> | undefined;
             try {
               response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) });
-              if (response.status >= 500 && attempt < TRANSIENT_RETRIES) { await response.body?.cancel(); await delay(RETRY_BACKOFF_MS * 2 ** attempt); continue; }
+              if ((response.status >= 500 || response.status === 429) && attempt < TRANSIENT_RETRIES) {
+                const after = Number(response.headers.get('retry-after'));
+                await response.body?.cancel(); await delay(after > 0 ? Math.min(after, 30) * 1000 : RETRY_BACKOFF_MS * 2 ** attempt); continue;
+              }
               // A deploy build may tolerate one object's asset genuinely missing from R2 (a 404, not a flaky
               // 5xx/network error) rather than fail the whole build: skip it loudly and let the object's own
               // unavailable-package path report it, instead of installing a fabricated or partial file here.
