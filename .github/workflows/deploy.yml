@@ -46,16 +46,6 @@ jobs:
           test -n "$HOSTING_SITE_ID"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # The same paths and key as the CI jobs (universe.yml), which save this cache on main pushes. setup:assets
-          # then sha-verifies every restored file and fetches only what is missing or changed.
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: inventory-v1-${{ hashFiles('src/objects/*/inventory.json') }}
-          restore-keys: inventory-v1-
       - name: Build the site
         # The deploy build regenerates its ignored source/facility catalogues from committed inputs and the restored
         # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;
@@ -63,6 +53,10 @@ jobs:
         # ASSET_ORIGIN points every texture, scene JSON and startup preload at the published R2
         # bucket instead of bundling public/scenes (1.44 GB) into the deploy; astro.config.mts
         # removes dist/scenes once the build finishes and the assemble step tolerates its absence.
+        # Publication proof: with no restored cache, the build's first setup downloads every inventoried key from that
+        # R2 origin and checks its bytes and sha256 (about 30 s for 19,954 keys); a key R2 does not serve fails the
+        # build. A HEAD sweep of the same keys (check:assets-published) took 8 to 12 minutes here and proved less; the
+        # nightly sweep keeps it.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
           # Default: textures and scene JSON resolve to R2, so the deploy ships no public/scenes copy.
@@ -77,7 +71,6 @@ jobs:
           else
             ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm build:deploy
             pnpm check:deploy-assets
-            pnpm check:assets-published --require-verified
           fi
       - name: Check the build output
         run: |

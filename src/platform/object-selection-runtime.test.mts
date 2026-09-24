@@ -109,9 +109,9 @@ test('initial coarse commit remains successful when its publication immediately 
   } });
   t.after(h.restore); await h.ready();
   const initialCommit = h.commits[0], finalCommit = h.commits.at(-1); assert.ok(initialCommit); assert.ok(finalCommit);
-  // The first pass is the prepared 512 bank the page already shows; Earth's fixed level follows it.
+  // The first pass is the prepared 512 bank the page already shows; a 1000 px globe then takes the 4096 level.
   assert.equal(initialCommit.plan.textureLevel, 0);
-  assert.equal(finalCommit.plan.textureLevel, 2);
+  assert.equal(finalCommit.plan.textureLevel, 3);
   assert.deepEqual(h.fatal, []);
 });
 test('URL restoration admits no default-camera detail before the router releases refinement', async t => {
@@ -124,12 +124,12 @@ test('URL restoration admits no default-camera detail before the router releases
   h.coordinator.setView(h.currentView()); // saved distant view
   h.coordinator.refineTextures(); await h.resolveJobs();
   // Released, the body takes the level its projected size needs: a distant globe keeps the 512 bank, a near one climbs
-  // to Earth's capped top level (2048, `maximumWidth`).
+  // to Earth's full 4096 pages.
   const restoredPlan = h.coordinator.state().plan; assert.ok(restoredPlan); assert.equal(restoredPlan.textureLevel, 0);
   h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'geometry', silhouetteDiameter: 1000, billboardOpacity: 0, markerOpacity: 0 } });
   await h.resolveJobs();
-  const nearPlan = h.coordinator.state().plan; assert.ok(nearPlan); assert.equal(nearPlan.textureLevel, 2);
-  assert(!h.jobs.some(job => /-level-4096\.webp|-page-\d\.webp$/.test(job.url)), 'the canonical 4096 pages are never offered');
+  const nearPlan = h.coordinator.state().plan; assert.ok(nearPlan); assert.equal(nearPlan.textureLevel, 3);
+  assert(h.jobs.some(job => /-page-\d\.webp$/.test(job.url)), 'a near globe loads the canonical 4096 pages');
 });
 
 test("camera movement during startup keeps the pinned atmosphere rows and still settles", async t => {

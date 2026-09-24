@@ -29,7 +29,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "thermal",
               "source": "content",
               "material": "lighting"
             }
@@ -88,7 +88,8 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/body-surfaces.css"
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-209458b-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json"

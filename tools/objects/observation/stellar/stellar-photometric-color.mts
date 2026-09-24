@@ -13,7 +13,7 @@ export type StellarColorRecord = {
   readonly columns: { readonly value: string; readonly lower: string; readonly upper: string };
 } | {
   /** A star with no catalogue row of its own (the unresolved second star of a close pair): the temperature its paper publishes. */
-  readonly spectrum: 'planck'; readonly published: StellarTemperature & { readonly citation: string };
+  readonly spectrum: 'planck'; readonly published: StellarTemperature & { readonly citation: string }; readonly gamut?: 'desaturate';
 } | { readonly spectrum: 'gaia-xp-sampled'; readonly spectrumPath: string; readonly sourceId: string }
   | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord; readonly gamut?: 'desaturate' };
 export interface StellarTemperature { readonly kelvin: number; readonly lowerKelvin: number; readonly upperKelvin: number }
@@ -45,7 +45,8 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
     checkStellarTemperature(bounds, `published temperature ${bounds.kelvin} K (${bounds.lowerKelvin} to ${bounds.upperKelvin})`);
     const citation = requireString(published.citation, 'temperature.published.citation');
     if (!/https?:\/\//u.test(citation)) throw new TypeError(`The published temperature ${bounds.kelvin} K names its paper by URL, not "${citation}".`);
-    return { spectrum: 'planck', published: { ...bounds, citation } };
+    if (input.gamut !== undefined && input.gamut !== 'desaturate') throw new TypeError(`A colour record's gamut mapping is 'desaturate', not ${String(input.gamut)}.`);
+    return { spectrum: 'planck', published: { ...bounds, citation }, ...(input.gamut === 'desaturate' ? { gamut: 'desaturate' as const } : {}) };
   }
   const sourceId = integer(requireString(temperature.sourceId, 'temperature.sourceId'));
   return { spectrum: 'planck', temperaturePath: requireString(temperature.path, 'temperature.path'), sourceId,
@@ -111,10 +112,10 @@ function spectrumColor(wavelengths: readonly number[], power: (wavelength: numbe
   return { linear, srgb: srgb(linear) };
 }
 
-export function planckColor(kelvin: number, colorMatching: Map<number, readonly number[]>): StellarColor {
+export function planckColor(kelvin: number, colorMatching: Map<number, readonly number[]>, gamut?: 'desaturate'): StellarColor {
   const wavelengths = Array.from({ length: 401 }, (_, i) => 380 + i);
   return spectrumColor(wavelengths, wavelength => { const metres = wavelength * 1e-9; return 1 / (metres ** 5 * Math.expm1(PLANCK_H * LIGHT_C / (metres * BOLTZMANN_K * kelvin))); },
-    colorMatching, `A ${kelvin} K Planck colour`);
+    colorMatching, `A ${kelvin} K Planck colour`, gamut);
 }
 
 /** Gaia DR3 XP sampled mean spectra (Gaia Collaboration, De Angeli et al. 2023, A&A 674, A2; Montegriffo et al. 2023, A&A 674, A3)
@@ -226,8 +227,9 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
       range: error ? [measuredSpectrumColor(shifted(error, -1), colorMatching, record.measured.gaps, record.gamut), measuredSpectrumColor(shifted(error, 1), colorMatching, record.measured.gaps, record.gamut)] as const : null };
   }
   const temperature = 'published' in record ? record.published : readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
-  return { temperature, spectrum: null, color: planckColor(temperature.kelvin, colorMatching), limbDarkening,
-    range: [planckColor(temperature.lowerKelvin, colorMatching), planckColor(temperature.upperKelvin, colorMatching)] as const };
+  const gamut = 'gamut' in record ? record.gamut : undefined;
+  return { temperature, spectrum: null, color: planckColor(temperature.kelvin, colorMatching, gamut), limbDarkening,
+    range: [planckColor(temperature.lowerKelvin, colorMatching, gamut), planckColor(temperature.upperKelvin, colorMatching, gamut)] as const };
 }
 
 // A measured, flux-calibrated spectrum from an archive or a published catalogue, read in the file's own layout. Only its shape

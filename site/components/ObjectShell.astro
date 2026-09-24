@@ -386,6 +386,7 @@ const searchCategories = [
       <p class="object-destination-status" role="status"></p>
     </section>
     <ObjectInformationPanel {...Astro.props} />
+    <div class="object-sheet-sources"><SourcesLink objectId={objectId} name={Astro.props.title.label} /></div>
     {!navigation && <template data-object-card-preview>
       <section class="object-selected-panel" data-card-preview>
         <div class="object-title-row">

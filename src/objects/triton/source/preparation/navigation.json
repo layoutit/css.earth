@@ -10,19 +10,9 @@
   },
   "operations": [
     {
-      "type": "extract",
-      "left": 5400,
-      "top": 3600,
-      "width": 2400,
-      "height": 2400
-    },
-    {
-      "type": "resize",
-      "width": "tile",
-      "height": "tile",
-      "fit": "cover",
-      "position": "centre",
-      "kernel": "lanczos3"
+      "type": "orthographic",
+      "centerX": 0.4668,
+      "centerY": 0.679
     },
     {
       "type": "ensure-alpha"
@@ -41,5 +31,8 @@
     {
       "type": "png"
     }
-  ]
+  ],
+  "context": {
+    "pixels": 512
+  }
 }

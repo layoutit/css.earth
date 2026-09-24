@@ -1,3 +1,4 @@
+import type { FindResult } from './find-protocol.mts';
 import { requiredElement } from './browser-types.mts';
 
 /** Keep existing overview destinations reachable as ordinary search rows. */
@@ -15,8 +16,6 @@ export function presentOverviewResults(browser: HTMLElement, value: string) {
 export function presentSearchResults(browser: HTMLElement, searching: boolean) {
   if (searching) browser.setAttribute('data-search-results', '');
   else browser.removeAttribute('data-search-results');
-  // One header per planetary system; the shell marks the current one.
-  for (const heading of browser.querySelectorAll<HTMLElement>('[data-system-results] > .object-selected-panel')) heading.hidden = searching;
   // Typed results are a flat list; the tree stays for browsing, opened from the button beside the field.
   const navigation = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   if (navigation) navigation.hidden = searching;
@@ -24,11 +23,24 @@ export function presentSearchResults(browser: HTMLElement, searching: boolean) {
   results.hidden = !searching;
 }
 
-export function presentFeatureResults(root: HTMLElement, count: number, message = '') {
+/** Native responses and live search publish the same retained result rows. */
+export function presentFeatureResults(root: HTMLElement, results: readonly FindResult[], message = '') {
+  const anchors = [...root.querySelectorAll<HTMLAnchorElement>('.object-destination-result')];
+  const count = Math.min(results.length, anchors.length);
+  for (const [index, anchor] of anchors.entries()) {
+    const result = results[index];
+    anchor.parentElement!.hidden = !result;
+    if (!result) continue;
+    anchor.setAttribute('href', result.href);
+    anchor.setAttribute('aria-label', result.label);
+    requiredElement(anchor, '.object-destination-result-name').textContent = result.name;
+    requiredElement(anchor, '.object-destination-result-context').textContent = result.context;
+  }
   root.hidden = count === 0 && !message;
   const counter = root.querySelector<HTMLElement>('.object-panel-heading-count');
   if (counter) counter.textContent = count ? `(${count})` : '';
   const hint = requiredElement(root, '.object-destination-hint');
   hint.textContent = message;
   hint.hidden = !message;
+  return count;
 }

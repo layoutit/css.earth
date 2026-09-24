@@ -3,6 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../search-response.mts';
+import { createSelectionPresentation } from '../selection-presentation.mts';
 import { objectSearchLabels, searchObjects } from '../object-search.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
 import { createFeatureBrowser } from '../feature-browser.mts';
@@ -21,14 +22,20 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
   <form class="object-sidebar-search-card" data-search-object="saturn"><input class="object-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="object-sheet-handle" type="checkbox">
   <div class="object-drawer-content"><nav class="object-browser" hidden>
-    <div data-galactic-overview hidden>Milky Way</div><div data-system-results><section class="object-selected-panel">Solar System introduction</section>
     <div data-object-navigation-tree></div>
     <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li><li class="object-chunk"><ul class="object-chunk-list">
     ${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}
     </ul></li></ul><p class="object-empty" hidden>No matching results</p>
     <details class="object-feature-results" data-feature-index='${JSON.stringify(pin)}' hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
-      <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div></div>
-  </nav><div class="object-selected-content"><section class="object-information-panel">Saturn</section></div></div><!--search-shell:end-->
+      <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
+  </nav><div class="object-selected-content"><div class="object-context" hidden>
+    <div data-prepared-focus-card hidden><span data-focus-name></span></div>
+    <div data-galactic-overview hidden>Milky Way</div>
+    <div data-large-scale-overview="local-group" data-large-scale-name="Local Group" hidden></div>
+    <div data-large-scale-overview="nearby-universe" data-large-scale-name="Nearby Universe" hidden></div>
+    <div data-system-results hidden><section class="object-selected-panel" data-system-header="sun" data-system-current>Solar System introduction</section>
+      <section class="object-selected-panel" data-system-header="trappist-1">TRAPPIST-1 system</section><div data-solar-system-facts></div></div>
+    </div><section class="object-information-panel">Saturn</section></div></div><!--search-shell:end-->
   <main class="object-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
 // The one shared catalogue fragment (`/catalogue-fragment/`):
 // the same rows a page used to inline, minus the div they lived in.
@@ -135,7 +142,7 @@ test('typed search shows a flat result list without the navigation tree, includi
   for (const query of ['t', 'Milky Way']) {
     const document = parseHTML(await renderSearchResponse(html, new URL(`/saturn/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
     assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
-    assert.equal(document.querySelector<HTMLElement>('[data-system-results] > .object-selected-panel')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
     assert.equal(document.querySelectorAll('[data-object-tab]').length, 0);
     assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
     assert.equal(document.querySelector('.object-browser')?.getAttribute('aria-label'), 'Search results');
@@ -146,15 +153,10 @@ test('typed search shows a flat result list without the navigation tree, includi
   }
 });
 
-// The shipped shell keeps navigation and the selected context in separate panels,
-// so a URL that names both a focus and an overview can show two cards at once.
 const contextHtml = html
   .replace('</form>', '<a class="object-sidebar-search-clear" href="/saturn/">Clear search</a></form>')
-  .replace('</nav>', `</nav><div class="object-context" hidden>
-  <div data-prepared-focus-card data-prepared-focus-id="m42" hidden>Orion Nebula</div>
-  <div data-galactic-overview hidden>Milky Way</div>
-  <div data-system-results hidden><section class="object-selected-panel">Solar System introduction</section></div>
-  </div>`);
+  .replace('<div data-prepared-focus-card hidden><span data-focus-name></span></div>',
+    '<div data-prepared-focus-card data-prepared-focus-id="m42" hidden><span data-focus-name>Orion Nebula</span></div>');
 
 test('a URL that names both a focus and an overview resolves to the focus alone', async () => {
   const card = (query: string) => renderSearchResponse(contextHtml, new URL(`/saturn/${query}`, origin), fetchIndex)
@@ -171,6 +173,36 @@ test('a URL that names both a focus and an overview resolves to the focus alone'
     const clear = new URL(both.querySelector('.object-sidebar-search-clear')?.getAttribute('href') ?? '/', origin);
     assert.equal(clear.searchParams.get('focus'), 'm42', query);
     assert.equal(clear.searchParams.has('overview'), false, query);
+  }
+});
+
+test('native and live selections share card visibility, inertness, labels and system headers', async () => {
+  const state = (document: Document) => [...document.querySelectorAll<HTMLElement>(
+    '.object-context, .object-information-panel, [data-prepared-focus-card], [data-galactic-overview], [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
+    .map(element => ({ hidden: element.hidden, inert: element.hasAttribute('inert'), label: element.getAttribute('aria-label'), current: element.hasAttribute('data-system-current') }));
+  const cases = [
+    ['', 'saturn', { kind: 'object', objectId: 'saturn' }],
+    ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }],
+    ['?overview=milky-way', 'saturn', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }],
+    ['?overview=local-group', 'saturn', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }],
+    ['?overview=nearby-universe', 'saturn', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }],
+    ['?focus=m42&overview=system', 'saturn', { kind: 'focus', id: 'm42' }],
+  ] as const;
+  for (const [query, objectId, subject] of cases) {
+    const source = contextHtml.replace('data-search-object="saturn"', `data-search-object="${objectId}"`);
+    const native = parseHTML(await renderSearchResponse(source, new URL(`/${objectId}/${query}`, origin), fetchIndex)).document;
+    const live = parseHTML(source).document;
+    const present = createSelectionPresentation(live);
+    present.present({ kind: 'overview', overview: { scope: 'system', systemId: 'sun' } });
+    present.present(subject);
+    assert.deepEqual(state(native), state(live), query || 'body');
+    const context = native.querySelector<HTMLElement>('.object-context')!;
+    assert.equal(context.hidden, subject.kind === 'object');
+    assert.equal(context.hasAttribute('inert'), subject.kind === 'object');
+    if (objectId === 'trappist-1') {
+      assert.equal(native.querySelector('[data-system-current]')?.getAttribute('data-system-header'), 'trappist-1');
+      assert.equal(native.querySelector<HTMLElement>('[data-solar-system-facts]')?.hidden, true);
+    }
   }
 });
 
@@ -225,7 +257,7 @@ test('Netlify routing keeps all query parameters, bypasses assets, and never rec
   assert.equal(result?.searchParams.get('category'), 'satellite');
   assert.equal(result?.searchParams.get('v'), 'view');
   assert.equal(searchRoute(new Request(result!)), undefined);
-  for (const query of ['v=view', 'settings=1', 'feature=6152', 'focus=m42', 'focusLens=visible']) {
+  for (const query of ['overview=system', 'v=view', 'settings=1', 'feature=6152', 'focus=m42', 'focusLens=visible']) {
     assert.equal(searchRoute(new Request(`${origin}/saturn/?${query}`))?.pathname, '/.netlify/functions/search');
   }
   for (const path of ['/saturn/', '/scenes/saturn/image.webp?q=text', '/navigation/saturn/?q=text']) assert.equal(searchRoute(new Request(origin + path)), undefined);

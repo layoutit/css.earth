@@ -15,7 +15,7 @@
     ]
   },
   "introduction": {
-    "text": "WASP-39 b is a puffy gas giant 1.28 times as wide as Jupiter, circling a Sun-like star every four days. Here it is a plain gray sphere of that size.",
+    "text": "WASP-39 b is a puffy gas giant 1.28 times as wide as Jupiter, circling a Sun-like star every four days. Here it is a sphere of that size glowing at its measured dayside heat.",
     "sources": [
       {
         "catalogueId": "arxiv-1802-03859",
@@ -28,10 +28,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Shape only",
-      "detail": "Published radius",
-      "summary": "A gray sphere of the measured radius. No colour or surface is observed; its atmosphere is measured in transmission."
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The colour of a black body at the 1,213 K day side measured in eclipse."
     }
   }
 }

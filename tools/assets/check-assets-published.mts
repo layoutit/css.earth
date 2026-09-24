@@ -129,11 +129,11 @@ export const DEFAULT_RETRY_POLICY: Readonly<Record<MissClass, RetryPolicy>> = {
 /** A hung socket fails after this long instead of holding a worker. */
 export const REQUEST_TIMEOUT_MS = 15_000;
 /**
- * Connection cap for the shared keep-alive agent, and the width of the first pass over every key. Timed on 2,000
- * inventoried keys against the asset domain (2026-09-24): 8 took 106.5 s, 64 took 10.5 s, 128 took 6.1 s, every
- * answer 200. At 8 a deploy spent 8.3 of its 15 build minutes here. Retries stay narrow (`DEFAULT_RETRY_POLICY`).
+ * Connection cap for the shared keep-alive agent: bounds new-connection and DNS churn. 128 was 17x faster from a
+ * workstation (2,000 keys in 6.1 s against 106.5 s) but slower from a GitHub runner: a full sweep took 704 s against
+ * 495 s at 8 (deploys of 2026-09-24). The deploy no longer runs this sweep; it proves publication by downloading.
  */
-export const MAX_CONNECTIONS = 128;
+export const MAX_CONNECTIONS = 8;
 const MAX_RETRY_AFTER_MS = 60_000;
 
 interface HeadResponse { readonly ok: boolean; readonly status: number; readonly headers: { get(name: string): string | null }; }
@@ -232,7 +232,7 @@ export interface CheckAssetsPublishedResult {
  * the reason from its last attempt. `gateVerdict` decides what fails.
  */
 export async function checkAssetsPublished(objectIds: readonly string[], { origin = RUNTIME_ASSET_ORIGIN, fetcher,
-  root = defaultRoot, concurrency = MAX_CONNECTIONS, retryPolicy = {},
+  root = defaultRoot, concurrency = DEFAULT_RETRY_POLICY.missing.concurrency, retryPolicy = {},
   timeoutMs = REQUEST_TIMEOUT_MS, sleep = (ms: number) => new Promise<void>(accept => setTimeout(accept, ms)), addedSince,
   findAddedKeys = (ref: string) => addedAssetKeys(ref, { root }) }:
   { origin?: string; fetcher?: HeadFetcher; root?: string; concurrency?: number;
@@ -282,8 +282,8 @@ export async function checkAssetsPublished(objectIds: readonly string[], { origi
 /**
  * What the gate's result means for the job. A PR, a local run and the nightly sweep fail only on a real HTTP 404;
  * any other HTTP answer, a byte-count mismatch and every unverified (network) key only warn. `reportOnly` (a push
- * to main) never fails. A production deploy uses `requireVerified` so it publishes only after every inventoried
- * key answers successfully, including keys unchanged since the last PR gate.
+ * to main) never fails. `requireVerified` fails on anything short of every key answering successfully, for a full
+ * manual check; a production deploy proves publication by downloading every key instead (deploy.yml).
  */
 export function gateVerdict(result: CheckAssetsPublishedResult, { reportOnly = false, requireVerified = false }:
   { reportOnly?: boolean; requireVerified?: boolean } = {}): { exitCode: 0 | 1; report: string } {

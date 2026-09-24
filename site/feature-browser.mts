@@ -1,5 +1,4 @@
 import { nextFrame } from "./next-frame.mts";
-import { requiredElement } from './browser-types.mts';
 import { presentFeatureResults } from './search-results-presentation.mts';
 
 import { parseFeaturePin } from './feature-search.mts';
@@ -23,7 +22,7 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   let matches: FindResult[] = [], query = documentTarget.querySelector<HTMLInputElement>('.object-sidebar-search')?.value.trim().toLocaleLowerCase('en') ?? '', revision = 0, destroyed = false;
   function clearRows() {
     matches = [];
-    for (const button of buttons) button.parentElement!.hidden = true;
+    presentFeatureResults(root, matches);
   }
   async function find(value: string, signal: AbortSignal): Promise<FindResult[]> {
     const url = new URL(FIND_PATH, documentTarget.location?.href ?? 'http://localhost/');
@@ -50,20 +49,11 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
       const results = await find(value, AbortSignal.any([events.signal, controller.signal]));
       if (destroyed || request !== revision) return;
       matches = results.slice(0, buttons.length);
-      for (const [row, button] of buttons.entries()) {
-        const result = matches[row];
-        button.parentElement!.hidden = !result;
-        if (!result) continue;
-        requiredElement(button, '.object-destination-result-name').textContent = result.name;
-        requiredElement(button, '.object-destination-result-context').textContent = result.context;
-        button.ariaLabel = result.label;
-        button.href = result.href;
-      }
-      presentFeatureResults(root, matches.length);
+      presentFeatureResults(root, matches);
       onResults(matches.length);
     } catch {
       if (destroyed || request !== revision) return;
-      presentFeatureResults(root, 0, 'Feature names could not load. Change your search to retry.');
+      presentFeatureResults(root, [], 'Feature names could not load. Change your search to retry.');
       onResults(1);
     }
   }

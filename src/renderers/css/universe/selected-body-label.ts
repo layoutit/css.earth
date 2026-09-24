@@ -57,7 +57,6 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       const gap = Math.min(MAX_MESH_GAP_PX, 4 + radiusPixels * MESH_GAP_RADIUS_RATIO);
       const minimumGap = Math.min(16, gap);
       let left: number, top: number;
-      let overMesh = false;
       if ('labelPlacement' in body && body.labelPlacement === 'centre' && radiusPixels > height) {
         // The package asks for its caption over the body's middle (Sgr A*'s black shadow), once the disc can hold it.
         left = Math.max(-widthPixels / 2 + width / 2 + VIEWPORT_EDGE_PX, Math.min(x, widthPixels / 2 - width / 2 - VIEWPORT_EDGE_PX));
@@ -68,24 +67,12 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
         top = Math.min(meshBottom + gap, maxTop);
         if (top < -heightPixels / 2 + HEADER_CLEARANCE_PX) return hide();
       } else {
-        // When the lower limb is offscreen, keep the caption beside the visible mesh.
-        top = Math.max(-heightPixels / 2 + HEADER_CLEARANCE_PX,
-          Math.min(y - height / 2, maxTop));
-        const right = x + visualRadius + gap + width / 2;
-        const leftward = x - visualRadius - gap - width / 2;
-        if (right + width / 2 <= widthPixels / 2 - VIEWPORT_EDGE_PX) left = right;
-        else if (leftward - width / 2 >= -widthPixels / 2 + VIEWPORT_EDGE_PX) left = leftward;
-        else {
-          // The sphere fills the viewport. Keep this same caption at the edge with a readable backing.
-          left = widthPixels / 2 - width / 2 - VIEWPORT_EDGE_PX;
-          overMesh = true;
-        }
+        // Once the caption cannot sit clear below the body, the body is the view: its name is in the sheet.
+        return hide();
       }
-      const placement = overMesh ? 'overlay' : 'clear';
-      if (label.dataset.placement !== placement) label.dataset.placement = placement;
       const transform = `translate(${Number(left.toFixed(3))}px,${Number(top.toFixed(3))}px) translate(-50%,0)`;
       if (label.style.transform !== transform) label.style.transform = transform;
-      fader.set(label, overMesh ? 1 : DEFAULT_CONTEXT_LABEL_OPACITY);
+      fader.set(label, DEFAULT_CONTEXT_LABEL_OPACITY);
       return { left: left - width / 2, right: left + width / 2, top, bottom: top + height };
     },
     destroy() { fader.destroy(); label.remove(); },

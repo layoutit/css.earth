@@ -292,7 +292,10 @@ companion stars, starts with `node tools/objects/star-candidates.mts "<SIMBAD id
 only the prose marked `TODO(new-object)`; `--check` runs the chain through the page data on what it wrote, `--bake` the whole chain,
 and `telescope new-object --bake <id>...` bakes objects already in the tree. `--from-archive` also quotes each body's English
 Wikipedia lead, verbatim and cited at its revision under CC BY-SA 4.0 (`tools/objects/new-object/prose.mts`): the sentence naming the body for
-the card and the next for the introduction; a body with no article gets no quote and a note. The generator never writes a sentence of its own. Planets for a star that already exists take a `{ "host": "<id>", "planets": [...] }` entry. Before imagery work on
+the card and the next for the introduction; a body with no article gets no quote and a note. The generator never writes a sentence of its own. Planets for a star that already exists take a `{ "host": "<id>", "planets": [...] }` entry. A planet's colour comes from what is measured
+(`tools/objects/new-object/planet-lenses.mts`): a dayside brightness temperature in the archive's emission table gives the "Thermal glow" lens,
+otherwise the neutral gray is lit by the host's measured colour; `telescope new-object --thermal <id>...` and `--host-light <id>...` do the
+same for planets already in the tree, then `prepare-object.mts` bakes them. Before imagery work on
 a moon or small body, `node tools/objects/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships, and
 `--archives <id> ...` searches ALMA, ESO, MAST and DataCite deposits for bodies seen from the ground or Earth orbit; see the
 [implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.

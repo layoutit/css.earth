@@ -26,13 +26,16 @@ test('publishable text covers every dataset, stays within budget and cites catal
   assert.deepEqual(rules(readerTextErrors(document(), { ...context, lenses: [...context.lenses, { id: 'radar', label: 'Radar' }] })), ['coverage']);
   assert.deepEqual(rules(readerTextErrors(document({ card: { text: blocks.card.text, sources: [{ ...source, catalogueId: 'uncatalogued-page' }] } }), context)), ['citation']);
   assert.deepEqual(rules(readerTextErrors(document(), { ...context, evidencedDatasets: new Set() })), ['citation']);
+  // The page refuses a dataset title that repeats its lens label (dataset-content.mts); the text step refuses it first.
+  assert.deepEqual(rules(readerTextErrors(document({ datasets: { normal: { title: 'Visible color', summary: blocks.datasets.normal.summary } } }), context)), ['identity']);
   assert.throws(() => document({ card: { text: blocks.card.text, sources: [] } }), /needs at least one source/u);
 });
 
-test('filler, display words and repeated titles are warnings for a reviewer, not errors', () => {
+test('filler and display words are warnings for a reviewer; a title repeating its lens label is what the page refuses', () => {
   const filler = document({ card: { text: 'Explore Saturn in 3D with cssEarth.', sources: [source] },
     datasets: { normal: { title: 'Visible color', summary: blocks.datasets.normal.summary } } });
-  assert.deepEqual(readerTextErrors(filler, context), []);
+  // A title that repeats the lens label is what the page refuses to render (dataset-content.mts): an error, beside the reviewer's warning.
+  assert.deepEqual(rules(readerTextErrors(filler, context)), ['identity']);
   assert.deepEqual(rules(readerTextWarnings(filler, context)), ['phrasing', 'phrasing', 'phrasing', 'specific-title']);
 });
 

@@ -6,6 +6,7 @@
 import { archiveHostQuery, assembleArchiveOrbit, compositeMass, decodeEntities, NASA_TAP, parseArchiveRows } from './orbit.mts';
 import type { Archive } from './archives.mts';
 import { wikipediaQuotes } from './prose.mts';
+import { thermalFromArchive } from './planet-lenses.mts';
 
 const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag';
 const slug = (name: string) => name.toLowerCase().replace(/\s+([a-z])$/u, '$1').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
@@ -50,7 +51,10 @@ export async function archiveSpec(archive: Archive, hostname: string, existing: 
     const period = assembled.orbit.periodDays, year = row.year ? `, found in ${row.year}` : '', radius = assembled.radius.value, mass = assembled.mass.value;
     const size = radius >= 0.3 ? `${short(radius)} Jupiter radii` : `${short(radius * 71492 / 6371)} Earth radii`;
     const defaultRow = planetRows.find(entry => entry.isDefault)!;
-    found.push({ period, entry: { id, name: row.planet, description: `Transiting planet of ${hostname} with a ${short(period, 3)}-day year${year}.`,
+    // A measured dayside temperature in the archive's emission table gives the planet its thermal colour (planet-lenses.mts).
+    const { thermal } = await thermalFromArchive(archive, row.planet);
+    if (!thermal) notes.push(`${row.planet}: no measured dayside brightness temperature in the archive's emission table; its gray takes the host's light`);
+    found.push({ period, entry: { id, name: row.planet, ...(thermal ? { thermal } : {}), description: `Transiting planet of ${hostname} with a ${short(period, 3)}-day year${year}.`,
       paper: { url: row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: row.label },
       orbit: { archive: 'nasa-ps', reference: defaultRow.reference },
       text: { card: `${row.planet} crosses its star every ${short(period, 3)} days and is ${size} across${year}.`,

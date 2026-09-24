@@ -27,7 +27,12 @@
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star."
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffefe6, the colour lens of hd-136352 (src/objects/hd-136352/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "hostLight": {
+          "host": "hd-136352",
+          "srgb": "#ffefe6",
+          "source": "the colour lens of hd-136352 (src/objects/hd-136352/source/photometry/stellar-color.json)"
+        }
       }
     }
   ],

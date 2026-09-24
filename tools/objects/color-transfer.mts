@@ -133,6 +133,16 @@ export function asinhBandEvidence(display: AsinhBandDisplay) {
 }
 
 /** Apply a linear-light gain to a known sRGB display byte and quantize once. */
+/** A neutral gray (`grayByte` in sRGB) with the chromaticity of `hostHex`: the host's sRGB colour scaled in linear light to the
+ * gray's luminance (Rec. 709 weights), so the surface keeps its brightness and takes the colour of its star's light. */
+export function hostLitGray(hostHex: string, grayByte = 128): readonly [number, number, number] {
+  if (!/^#[0-9a-f]{6}$/u.test(hostHex)) throw new TypeError(`A host light colour is a lowercase #rrggbb value, not ${hostHex}.`);
+  const host = [1, 3, 5].map(at => srgbToLinear(parseInt(hostHex.slice(at, at + 2), 16) / 255));
+  const luminance = 0.2126 * host[0]! + 0.7152 * host[1]! + 0.0722 * host[2]!, gray = srgbToLinear(grayByte / 255);
+  if (!(luminance > 0)) throw new TypeError(`Host light colour ${hostHex} has no luminance.`);
+  return host.map(value => Math.round(255 * linearToSrgb(Math.min(1, value * gray / luminance)))) as unknown as readonly [number, number, number];
+}
+
 export function applyLinearTint(channel: number, factor: number) {
   const srgb = channel / 255;
   const linear = srgb <= 0.04045

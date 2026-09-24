@@ -464,8 +464,6 @@
   cursor: pointer;
 }
 [data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
-[data-search-results] [data-system-results] { padding-top: 8px; }
-[data-search-results] [data-system-results] > .object-selected-panel { display: none; }
 #object-category-results { max-height: min(420px, 55dvh); }
 [data-search-results] #object-category-results .object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
 [data-search-results] #object-category-results .object-distance { color: var(--shell-text-secondary); }

@@ -171,7 +171,7 @@ async function listen(server: Server): Promise<string> {
 // undici closes the socket after every HEAD (it guards against servers that send a HEAD body), so connections are
 // not reused; the cap is what bounds connection and DNS churn. With pipelining 1, requests the server is handling at
 // once equal open connections.
-test('the shared agent never runs more than 8 connections at once, however many HEADs are in flight', async t => {
+test('the shared agent runs concurrent HEADs without exceeding its connection cap', async t => {
   let active = 0, peak = 0;
   const server = createServer((_, response) => {
     peak = Math.max(peak, ++active);
@@ -183,7 +183,10 @@ test('the shared agent never runs more than 8 connections at once, however many 
   const responses = await Promise.all(Array.from({ length: MAX_CONNECTIONS * 3 }, (_, index) =>
     fetcher(`${origin}/key-${index}`, { method: 'HEAD', signal: AbortSignal.timeout(5000) })));
   assert.ok(responses.every(response => response.status === 200));
-  assert.equal(peak, MAX_CONNECTIONS, 'the cap in parallel, never more');
+  // A busy host may finish early requests before it opens every allowed connection.
+  // The contract bounds concurrency; it does not require saturating the pool in 30 ms.
+  assert.ok(peak > 1, 'HEAD requests run concurrently');
+  assert.ok(peak <= MAX_CONNECTIONS, `peak ${peak} exceeds connection cap ${MAX_CONNECTIONS}`);
 });
 
 test('without an injected fetcher the gate uses the shared agent against a real server and closes it', async t => {

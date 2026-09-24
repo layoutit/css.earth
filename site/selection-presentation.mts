@@ -1,6 +1,7 @@
 import { createSystemCardContent } from './system-card-content.mts';
-import type { SceneOverview, SceneSubject } from './scene/scene-selection.mts';
+import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
+import { requiredElement, type BrowserWindow } from './browser-types.mts';
 import type { CatalogueSelection } from './catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
@@ -10,17 +11,19 @@ import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragme
 
 export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
   if (panel.hidden !== hidden) panel.hidden = hidden;
-  const inert = hidden || panel.ariaBusy === 'true';
-  if (panel.inert !== inert) panel.inert = inert;
+  const inert = hidden || panel.getAttribute('aria-busy') === 'true';
+  if (panel.hasAttribute('inert') !== inert) panel.toggleAttribute('inert', inert);
 }
 
 /** Present the selected subject in the retained cards and navigation rows. */
-export function createSelectionPresentation(documentTarget: Document, browser: HTMLElement, information: HTMLElement,
-  selectNavigation: (id: string) => void) {
+export function createSelectionPresentation(documentTarget: Document, {
+  windowTarget, selectNavigation = () => {},
+}: { windowTarget?: BrowserWindow; selectNavigation?(id: string): void } = {}) {
+  const browser = requiredElement<HTMLElement>(documentTarget, '.object-browser');
+  const information = requiredElement<HTMLElement>(documentTarget, '.object-information-panel');
   // Search/navigation and the selection share one sidebar content owner. The
   // selected content stays retained while the browser temporarily replaces it.
-  const context = documentTarget.querySelector<HTMLElement>('.object-context') ?? browser;
-  const sharedLegacyContext = context === browser;
+  const context = requiredElement<HTMLElement>(documentTarget, '.object-context');
   const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
   const largeScaleCards = [...context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')];
   const focusCard = context.querySelector<HTMLElement>('[data-prepared-focus-card]');
@@ -31,12 +34,12 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
   const showSystemHeader = (id: string) => {
     currentSystemHeader = id;
     for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === id);
-    const view = documentTarget.defaultView;
-    if (!system || !view || systemHeadersLoading || systemHeaders.some(header => header.dataset.systemHeader === id)) return;
-    systemHeadersLoading = fetchSystemHeaders(url => view.fetch(url)).then(html => {
-      systemHeaders = spliceSystemHeaders(system, new view.DOMParser().parseFromString(html, 'text/html'));
+    // Native pages already carry their own system header; only live navigation loads others.
+    if (!system || !windowTarget || systemHeadersLoading || systemHeaders.some(header => header.dataset.systemHeader === id)) return;
+    systemHeadersLoading = fetchSystemHeaders(url => windowTarget.fetch(url)).then(html => {
+      systemHeaders = spliceSystemHeaders(system, new windowTarget.DOMParser().parseFromString(html, 'text/html'));
       showSystemHeader(currentSystemHeader);
-    }).catch(error => { systemHeadersLoading = null; view.reportError(error); });
+    }).catch(error => { systemHeadersLoading = null; windowTarget.reportError(error); });
   };
   const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
   let systemContent = createSystemCardContent(documentTarget);
@@ -44,12 +47,8 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
   const overviewName = ({ scope, systemId }: SceneOverview) => scope === 'system'
     ? systemById(SCENE_OBJECTS, systemId)?.name ?? 'Solar System'
     : ({ 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[scope];
-  const publishSource = (subject: SceneSubject, sourceLinks: ReadonlyMap<string, SourceDocumentReference>) => {
-    const sourceFocus = subject.kind === 'focus' ? subject.id : '';
-    if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
+  const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
-  };
-  const render = (subject: SceneSubject) => {
     const focus = subject.kind === 'focus' ? subject : null;
     const overview = subject.kind === 'overview' ? subject.overview : null;
     const galactic = overview?.scope === 'milky-way';
@@ -68,9 +67,9 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     const systemSelected = overview?.scope === 'system';
     if (system) setPanelHidden(system, !systemSelected);
     systemContent.show(systemSelected);
-    const showContext = Boolean(focus) || galactic || Boolean(largeScale) || systemSelected;
+    const showContext = subject.kind !== 'object';
     setPanelHidden(information, showContext);
-    if (!sharedLegacyContext) setPanelHidden(context, !showContext);
+    setPanelHidden(context, !showContext);
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
     showSystemHeader(headerSystemId);
     if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
@@ -78,11 +77,10 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
       : subject.kind === 'overview' ? subject.overview.scope === 'system' ? subject.overview.systemId : subject.overview.scope
       : subject.objectId;
     selectNavigation(navigationSelection);
-    context.ariaLabel = subject.kind === 'focus' ? subject.record?.name ?? 'Selected object'
+    context.setAttribute('aria-label', subject.kind === 'focus'
+      ? (focusCard?.dataset.preparedFocusId === subject.id ? focusCard.querySelector('[data-focus-name]')?.textContent : null) || 'Selected object'
       : subject.kind === 'overview' ? largeScale?.dataset.largeScaleName ?? overviewName(subject.overview)
-      : objectName(subject.objectId) || 'Selected object';
-  };
-  const mark = (subject: SceneSubject): CatalogueSelection => {
+      : objectName(subject.objectId) || 'Selected object');
     documentTarget.documentElement.dataset.selection = subject.kind === 'focus' ? 'prepared-focus'
       : subject.kind === 'overview' ? subject.overview.scope : 'object';
     const selection = subject.kind === 'focus' ? { kind: 'prepared-focus', id: subject.id } as const
@@ -97,7 +95,7 @@ export function createSelectionPresentation(documentTarget: Document, browser: H
     return selection;
   };
   return {
-    render, mark, publishSource,
+    present,
     bindObject() {
       systemContent.restore();
       systemContent = createSystemCardContent(documentTarget);

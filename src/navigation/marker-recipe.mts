@@ -12,16 +12,20 @@ export type MarkerOperation =
   | { type: "extract"; left: number; top: number; width: number; height: number }
   | { type: "resize"; width: string; height: string; kernel: "lanczos3"; fit?: "cover"; position?: "centre" }
   | { type: "missing-coverage"; kind: string; southConnected: boolean; northConnected?: boolean }
-  | { type: "ellipse-mask"; cx: number; cy: number; rx: number; ry: number; shading?: { ambient: number; diffuse: number } };
+  | { type: "ellipse-mask"; cx: number; cy: number; rx: number; ry: number; shading?: { ambient: number; diffuse: number } }
+  /** A 2:1 equirectangular map seen as a globe from far away, centred on the map point at these fractions of its width
+   * (longitude) and height (latitude). Outside the disc is transparent. */
+  | { type: "orthographic"; centerX: number; centerY: number };
 export interface MarkerDescriptor { presentation?: unknown; schema: string; objectId: string; owner: string; source: MarkerSource; operations: readonly MarkerOperation[]; context?: { pixels: number }; }
 import { readFile } from "node:fs/promises";
 
-import sharp from "sharp";
+import sharp, { type Sharp } from "sharp";
 import { blackFillCoverage, paintMissingCoverage } from "../platform/prepare-missing-coverage.mts";
 
 const SHA256 = /^[0-9a-f]{64}$/u;
 const OBJECT_ID = /^[a-z][a-z0-9-]*$/u;
 const OPERATION_TYPES = new Set([
+  "orthographic",
   "linear",
   "rotate",
   "trim",
@@ -86,6 +90,36 @@ export async function readMarkerImage(source: MarkerSource, sourcePath: string) 
   return sharp(paintMissingCoverage(rgb, info, missing), {raw: info});
 }
 
+/** Orthographic view of an equirectangular map: each disc pixel samples the map (bilinear, wrapping in longitude). The
+ * map is first reduced to four texels per output pixel across the disc's width, which the sampling then averages down. */
+async function orthographic(image: Sharp, { centerX, centerY }: { centerX: number; centerY: number }, tileSize: number) {
+  const { width: sourceWidth = 0, height: sourceHeight = 0 } = await image.metadata();
+  if (!sourceWidth || Math.abs(sourceWidth / sourceHeight - 2) > 0.01) throw new TypeError("Navigation marker orthographic source is not a 2:1 map.");
+  const mapWidth = Math.min(sourceWidth, 8 * tileSize), mapHeight = mapWidth / 2;
+  const { data: map } = await image.resize({ width: mapWidth, height: mapHeight, fit: "fill", kernel: sharp.kernel.lanczos3 })
+    .toColourspace("srgb").ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const out = Buffer.alloc(tileSize * tileSize * 4);
+  const lon0 = (centerX - 0.5) * 2 * Math.PI, lat0 = (0.5 - centerY) * Math.PI;
+  const texel = (x: number, y: number, channel: number) =>
+    map[((Math.min(mapHeight - 1, Math.max(0, y)) * mapWidth) + ((x % mapWidth) + mapWidth) % mapWidth) * 4 + channel]!;
+  for (let py = 0; py < tileSize; py++) for (let px = 0; px < tileSize; px++) {
+    const u = (px + 0.5) / tileSize * 2 - 1, v = 1 - (py + 0.5) / tileSize * 2, rho = Math.hypot(u, v);
+    if (rho > 1) continue;
+    const c = Math.asin(rho), sinC = Math.sin(c), cosC = Math.cos(c);
+    const lat = rho === 0 ? lat0 : Math.asin(cosC * Math.sin(lat0) + v * sinC * Math.cos(lat0) / rho);
+    const lon = rho === 0 ? lon0 : lon0 + Math.atan2(u * sinC, rho * cosC * Math.cos(lat0) - v * sinC * Math.sin(lat0));
+    const sx = (lon / (2 * Math.PI) + 0.5) * mapWidth - 0.5, sy = (0.5 - lat / Math.PI) * mapHeight - 0.5;
+    const x0 = Math.floor(sx), y0 = Math.floor(sy), fx = sx - x0, fy = sy - y0, at = (py * tileSize + px) * 4;
+    for (let channel = 0; channel < 3; channel++) {
+      out[at + channel] = Math.round(
+        (texel(x0, y0, channel) * (1 - fx) + texel(x0 + 1, y0, channel) * fx) * (1 - fy) +
+        (texel(x0, y0 + 1, channel) * (1 - fx) + texel(x0 + 1, y0 + 1, channel) * fx) * fy);
+    }
+    out[at + 3] = 255;
+  }
+  return sharp(out, { raw: { width: tileSize, height: tileSize, channels: 4 } });
+}
+
 export async function renderMarker(descriptor: MarkerDescriptor, { sourcePath, tileSize }: { sourcePath: string; tileSize: number }) {
   validateMarkerDescriptor(descriptor);
   if (!Number.isSafeInteger(tileSize) || tileSize <= 0) {
@@ -116,7 +150,8 @@ export async function renderMarker(descriptor: MarkerDescriptor, { sourcePath, t
         ...(operation.position ? { position: operation.position } : {}),
         kernel: sharp.kernel[operation.kernel],
       });
-    } else if (operation.type === "ensure-alpha") image = image.ensureAlpha();
+    } else if (operation.type === "orthographic") image = await orthographic(image, operation, tileSize);
+    else if (operation.type === "ensure-alpha") image = image.ensureAlpha();
     else if (operation.type === "ellipse-mask") {
       if (operation.shading) {
         // Prepare full-phase curvature in the same footprint as the silhouette.
@@ -169,6 +204,10 @@ function validateOperation(operation: MarkerOperation) {
        operation.fit && operation.fit !== "cover" ||
        operation.position && operation.position !== "centre")) {
     throw new TypeError("Navigation marker resize is invalid.");
+  }
+  if (operation.type === "orthographic" &&
+      ![operation.centerX, operation.centerY].every((value) => Number.isFinite(value) && value >= 0 && value <= 1)) {
+    throw new TypeError("Navigation marker orthographic centre is invalid.");
   }
   if (operation.type === "ellipse-mask" &&
       ![operation.cx, operation.cy, operation.rx, operation.ry]
