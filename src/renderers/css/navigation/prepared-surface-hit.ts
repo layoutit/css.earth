@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../platform/vector3.mts';
 export type SurfacePoint = readonly [number, number, number];
 export type SurfaceTriangle = readonly [SurfacePoint, SurfacePoint, SurfacePoint];
 export type SurfaceFrontFace = 'clockwise' | 'counter-clockwise';
@@ -5,8 +6,6 @@ export interface PreparedSurfaceRange { readonly lensId: string; readonly start:
 export interface PreparedSurfaceHit { readonly target: number; readonly triangles: readonly SurfaceTriangle[]; readonly frontFace?: SurfaceFrontFace; readonly lensRanges?: readonly PreparedSurfaceRange[]; }
 const sub = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const dot = (a: SurfacePoint, b: SurfacePoint): number => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-const cross = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-
 /** Intersect source-prepared triangles. Runtime never creates or resamples a mesh. */
 export function rayHitsPreparedTriangles(origin: SurfacePoint, direction: SurfacePoint, triangles: readonly SurfaceTriangle[], frontFace?: SurfaceFrontFace,
   range?: Pick<PreparedSurfaceRange, 'start' | 'count'>): boolean {

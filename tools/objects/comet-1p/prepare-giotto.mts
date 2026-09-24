@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -22,7 +23,7 @@ interface RgbImage {data:Uint8Array; width:number; height:number}
 const radians = Math.PI / 180;
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
 const sub = (a: readonly number[], b: readonly number[]) => a.map((n, i) => n - b[i]);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+
 const unit = (a: readonly number[]) => a.map(n => n / Math.hypot(...a));
 const vector = (longitude: number, latitude: number) => [Math.cos(latitude*radians)*Math.cos(longitude*radians), Math.cos(latitude*radians)*Math.sin(longitude*radians), Math.sin(latitude*radians)];
 

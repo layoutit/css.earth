@@ -1,7 +1,7 @@
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from '@layoutit/polycss';
-import type { ComputeTextureAtlasPlanOptions, PolyTextureLeafGeometry, Polygon } from '@layoutit/polycss';
+import type { ComputeTextureAtlasPlanOptions, Polygon } from '@layoutit/polycss';
 import type { SurfacePatch } from '@cssearth/objects';
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer, polarCapRasterScale } from '../../../../platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer, polarCapRasterScale } from '../../../../platform/projective-surface-raster.mts';
 import type { GeometryProfile } from './profile.js';
 import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.js';
 
@@ -12,18 +12,6 @@ export interface PreparedLeaf {
 }
 export const rendererPolygon = (patch: SurfacePatch): Polygon => ({ ...patch,
   texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' } });
-
-export function fitSourceGeometry(geometry: PolyTextureLeafGeometry, leafWidth: number, leafHeight: number): PolyTextureLeafGeometry {
-  const matrix = String(geometry.matrix).split(',').map(Number);
-  if (matrix.length !== 16 || matrix.some(value => !Number.isFinite(value))) throw new TypeError('Texture matrix is invalid.');
-  const scaleX = geometry.leafWidth / leafWidth, scaleY = geometry.leafHeight / leafHeight;
-  for (const index of [0, 1, 2, 3]) matrix[index] *= scaleX;
-  for (const index of [4, 5, 6, 7]) matrix[index] *= scaleY;
-  const rasterX = leafWidth / geometry.leafWidth, rasterY = leafHeight / geometry.leafHeight;
-  return { ...geometry, matrix: matrix.map(value => Number(value.toFixed(6))).join(','), leafWidth, leafHeight,
-    backgroundPosition: [geometry.backgroundPosition[0] * rasterX, geometry.backgroundPosition[1] * rasterY],
-    backgroundSize: [geometry.backgroundSize[0] * rasterX, geometry.backgroundSize[1] * rasterY] };
-}
 
 export function createLeafProjector(profile: GeometryProfile, direction: [number, number, number]) {
   const p = profile.projection, surface = profile.surface, ns = profile.namespace;
@@ -41,7 +29,7 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
   return {
     surface(patch: SurfacePatch, index: number, sharedEdges?: Set<number>, className?: string): PreparedLeaf {
       const geometry = resolve(patch, index, patch.pole ? 0 : p.seamBleed, sharedEdges);
-      const initial = p.fitToSource ? fitSourceGeometry(geometry, patch.textureImageSource.sourceRect.width, patch.textureImageSource.sourceRect.height) : geometry;
+      const initial = p.fitToSource ? fitTextureGeometry(geometry, patch.textureImageSource.sourceRect.width, patch.textureImageSource.sourceRect.height) : geometry;
       const fitted = patch.pole ? initial : fitProjectiveTextureGeometryToStableLayout(initial);
       const raster = patch.pole ? fitted : createProjectiveSurfaceRasterPresentation({
         sourceWidth: surface.surface.width, sourceHeight: surface.surfaceLatitudeHeight,
@@ -69,7 +57,7 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
     },
     interior(patch: SurfacePatch, index: number, className: string, dimensions?: readonly [number, number]): PreparedLeaf {
       const geometry = resolve(patch, index, dimensions ? 0 : patch.pole ? 0 : p.interiorSeamBleed);
-      const initial = fitSourceGeometry(geometry, dimensions?.[0] ?? patch.textureImageSource.sourceRect.width,
+      const initial = fitTextureGeometry(geometry, dimensions?.[0] ?? patch.textureImageSource.sourceRect.width,
         dimensions?.[1] ?? patch.textureImageSource.sourceRect.height);
       const fitted = patch.pole || dimensions ? initial : fitProjectiveTextureGeometryToStableLayout(initial);
       return { tag: 's', className,

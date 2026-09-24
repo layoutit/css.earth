@@ -15,6 +15,7 @@
  * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is taken from PATH. */
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
+import { runToolchainProcess } from '../toolchain-process.mts';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -33,20 +34,14 @@ export async function spitzerDescriptor() {
   return { entry, lock, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
 
-function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-2000)}`);
-  return result.stdout;
-}
-
 export async function installSpitzer() {
   const { entry, digest } = await spitzerDescriptor(), prefix = resolve(SPITZER_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(SPITZER_ROOT, { recursive: true, force: true });
   await mkdir(SPITZER_ROOT, { recursive: true });
   const env = { MAMBA_ROOT_PREFIX: resolve(SPITZER_ROOT, 'mamba') };
-  run('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], env);
-  run(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(import.meta.dirname, requireString(entry.requirements))]);
+  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(import.meta.dirname, requireString(entry.requirements))]);
   await rm(resolve(SPITZER_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   await writeFile(resolve(SPITZER_ROOT, 'installed.json'), `${JSON.stringify({ id: 'spitzer', pinsSha256: digest }, null, 2)}\n`);
   return SPITZER_ROOT;

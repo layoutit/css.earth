@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type { SimplifierFlags } from 'meshoptimizer/simplifier';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import type { PreparedTriangle, SourceMesh, SourceScalar } from './contracts.mts';
@@ -27,7 +28,7 @@ export type RadialFaces = PreparedTriangle[] & {simplification?: Record<string, 
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 const unit = (a: readonly number[]) => a.map(v => v / Math.hypot(...a));
 
 /** Simplify the released topology before UV sampling. Original positions are
@@ -153,7 +154,7 @@ export function sampleRadialTriangles(sample: RadiusSampler, rows: number, colum
   };
   const faces: UnshadedFace[] = [];
   function triangle(a: number[], b: number[], c: number[]) {
-    let normal = cross(sub(b, a), sub(c, a));
+    let normal: number[] = cross(sub(b, a), sub(c, a));
     if (dot(normal, a) < 0) { [b, c] = [c, b]; normal = normal.map(x => -x); }
     if (!(Math.hypot(...normal) > 1e-8)) throw new Error('Degenerate terrain face.');
     faces.push({ vertices: [a, b, c], normal: unit(normal) });
@@ -168,7 +169,7 @@ export function sampleRadialTriangles(sample: RadiusSampler, rows: number, colum
 
 function surfaceTriangles(triangles: readonly number[][][], preserveSourceWinding = false) {
   const faces = triangles.map(([a, b, c]) => {
-    let normal = cross(sub(b, a), sub(c, a));
+    let normal: number[] = cross(sub(b, a), sub(c, a));
     if (!preserveSourceWinding && dot(normal, a) < 0) { [b, c] = [c, b]; normal = normal.map(x => -x); }
     if (!(Math.hypot(...normal) > 1e-8)) throw new Error('Degenerate terrain face.');
     return { vertices: [a, b, c], normal: unit(normal) };

@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import assert from 'node:assert/strict';
 import { readFitsHeader } from '../../fits/fits.mts';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -23,7 +24,7 @@ type Observation = Registration['observations'][number];
 const radians = Math.PI/180;
 const dot = (a:readonly number[], b:readonly number[]) => a.reduce((sum,n,i) => sum+n*b[i],0);
 const sub = (a:readonly number[], b:readonly number[]) => a.map((n,i) => n-b[i]);
-const cross = (a:readonly number[], b:readonly number[]) => [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+
 
 const median=(values:readonly number[])=>{assert.ok(values.length);const a=[...values].sort((a,b)=>a-b),mid=Math.floor(a.length/2);return a.length%2?a[mid]:(a[mid-1]+a[mid])/2;};
 

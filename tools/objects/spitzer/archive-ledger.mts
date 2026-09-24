@@ -27,6 +27,7 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { firstSkyPosition } from '../archive-sky-position.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, type ShaRow } from './archive.mts';
 import { parseReproduction } from './compare.mts';
@@ -69,14 +70,6 @@ export interface ShippedObject {
 }
 
 const readJson = async (path: string): Promise<unknown> => readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, () => null);
-const firstSkyPosition = (value: unknown): { raDeg: number; decDeg: number } | undefined => {
-  if (Array.isArray(value)) { for (const item of value) { const found = firstSkyPosition(item); if (found) return found; } return undefined; }
-  if (!isRecord(value)) return undefined;
-  if (typeof value.raDeg === 'number' && typeof value.decDeg === 'number') return { raDeg: value.raDeg, decDeg: value.decDeg };
-  for (const item of Object.values(value)) { const found = firstSkyPosition(item); if (found) return found; }
-  return undefined;
-};
-
 /** The NAIF id of a body from the Horizons code its package carries, or null with the reason it has none. A bare integer is
  * already a NAIF id (a planet, a satellite, the Sun). A minor planet's code is its number followed by a semicolon, and the
  * NAIF id of numbered minor planet n is 2000000 + n. Anything else is a designation, not an id. */

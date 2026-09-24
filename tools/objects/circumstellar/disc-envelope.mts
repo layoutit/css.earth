@@ -68,19 +68,13 @@ export async function readSkyPlane(mosaic: string, request: SkyPlaneRequest): Pr
   samples.sort((a, b) => a - b);
   const background = quantile(samples, 0.5);
   const deviations = samples.map(v => Math.abs(v - background)).sort((a, b) => a - b), noise = 1.4826 * quantile(deviations, 0.5);
-  const bilinear = (x: number, y: number) => {
-    const ix = Math.floor(x), iy = Math.floor(y);
-    if (ix < 0 || iy < 0 || ix + 1 >= width || iy + 1 >= height) return NaN;
-    const a = x - ix, b = y - iy, o = iy * width + ix;
-    return (1 - a) * (1 - b) * values[o]! + a * (1 - b) * values[o + 1]! + (1 - a) * b * values[o + width]! + a * b * values[o + width + 1]!;
-  };
   const plane = new Float32Array(size * size), step = 2 * halfUnits / size, cosDec = Math.cos(request.starDecDeg * DEG);
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     // x grows toward increasing image column, which is west; the nebula frame reflects it into east. y grows north.
     const xUnits = -halfUnits + (i + 0.5) * step, yUnits = -halfUnits + (j + 0.5) * step;
     const ra = request.starRaDeg - xUnits * arcsecPerUnit / 3600 / cosDec, dec = request.starDecDeg + yUnits * arcsecPerUnit / 3600;
     const at = projection.pixelOf(ra, dec);
-    plane[j * size + i] = at ? bilinear(at[0], at[1]) - background : NaN;
+    plane[j * size + i] = at ? bilinear(values, width, height, at[0], at[1]) - background : NaN;
   }
   const unit = typeof sci.header.BUNIT === 'string' ? sci.header.BUNIT : '';
   return { size, halfUnits, step, plane, background, noise, backgroundPixels: samples.length, mosaicArcsecPerPixel: arcsecPerPixel, starPixel: [star[0], star[1]], unit };
@@ -115,16 +109,10 @@ export async function readArrayPlane(path: string, request: ArrayPlaneRequest): 
   samples.sort((a, b) => a - b);
   const background = quantile(samples, 0.5);
   const deviations = samples.map(v => Math.abs(v - background)).sort((a, b) => a - b), noise = 1.4826 * quantile(deviations, 0.5);
-  const bilinear = (x: number, y: number) => {
-    const ix = Math.floor(x), iy = Math.floor(y);
-    if (ix < 0 || iy < 0 || ix + 1 >= width || iy + 1 >= height) return NaN;
-    const a = x - ix, b = y - iy, o = iy * width + ix;
-    return (1 - a) * (1 - b) * values[o]! + a * (1 - b) * values[o + 1]! + (1 - a) * b * values[o + width]! + a * b * values[o + width + 1]!;
-  };
   const plane = new Float32Array(size * size), step = 2 * halfUnits / size;
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     const [px, py] = pixelOf((-halfUnits + (i + 0.5) * step) * arcsecPerUnit, (-halfUnits + (j + 0.5) * step) * arcsecPerUnit);
-    plane[j * size + i] = bilinear(px, py) - background;
+    plane[j * size + i] = bilinear(values, width, height, px, py) - background;
   }
   const unit = typeof image.header.BUNIT === 'string' ? image.header.BUNIT : '';
   return { size, halfUnits, step, plane, background, noise, backgroundPixels: samples.length, mosaicArcsecPerPixel: pixelArcsec, starPixel: [star[0], star[1]], unit };
@@ -388,4 +376,11 @@ export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: 
   if (!(ring!.residualRms < shell.residualRms && ring!.residualRms < flat))
     throw new Error(`No inclined ring beats the alternatives (ring ${ring!.residualRms.toExponential(3)}, shell ${shell.residualRms.toExponential(3)}, constant depth ${flat.toExponential(3)}).`);
   return { shape: 'inclined-ring', ring: ring!, shell, constantDepthResidualRms: flat, signalRms, scoredPixels: scored.length, heightResiduals };
+}
+
+function bilinear(values: ArrayLike<number>, width: number, height: number, x: number, y: number) {
+  const ix = Math.floor(x), iy = Math.floor(y);
+  if (ix < 0 || iy < 0 || ix + 1 >= width || iy + 1 >= height) return NaN;
+  const a = x - ix, b = y - iy, o = iy * width + ix;
+  return (1 - a) * (1 - b) * values[o]! + a * (1 - b) * values[o + 1]! + (1 - a) * b * values[o + width]! + a * b * values[o + width + 1]!;
 }

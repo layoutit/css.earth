@@ -7,7 +7,8 @@ import { promoteVolumeLenses, type VolumeLensPromotion } from './volume-lens-pro
 import { parseBakeArgs, readRecipe } from './config.ts';
 import { bakeDensity, bakePreviews, bakeSeparationPreviews } from './assets.ts';
 import { prepareBaseline, prepareEnvironment } from './removal.ts';
-import { hash, json, localPath, pinned, writeAtomic } from './io.ts';
+import { hash, json, localPath, pinned } from './io.ts';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 import { deliveryReady, restoreDelivery } from './delivery.ts';
 import { prepareConfiguredDensityPlacements } from './configured-placement.ts';
 import { bakeReferenceTarget } from './reference-target.ts';

@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import type { Vector3, SurfaceFeatureAxes, SurfaceFeatureOutline } from './catalog.js';
 
 
@@ -12,7 +13,7 @@ export function surfaceDirection(longitudeDeg: number, latitudeDeg: number, axes
 
 export const round = (value: number, digits = 6) => Number(value.toFixed(digits));
 
-const cross = (a: Vector3, b: Vector3): Vector3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 
 export const scaled = (v: Vector3, s: number, digits = 3): Vector3 => [round(v[0] * s, digits), round(v[1] * s, digits), round(v[2] * s, digits)];
 

@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /** The shared surface transfer: from qualified frames to the atlas sampler, the flat preview and the report. */
 import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
@@ -12,7 +13,7 @@ const EDGE_WEIGHTED_AVERAGE = { method: 'Every frame that qualifies at a point c
   after: 'Fétick et al. 2019, A&A 623, A6, section 4.4, https://doi.org/10.1051/0004-6361/201834749: epochs averaged with weights that fall toward the limb, the contour itself excluded.' };
 const PREVIEW_POLICY = 'The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.';
 const sub = (a: readonly number[], b: readonly number[]) => a.map((n, i) => n - b[i]);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 
 type Missing = { reason: string; color: number[]; radiance?: never; maximumEmissionDegrees?: never; maximumIncidenceDegrees?: never };
 type Accepted = Extract<FootprintSample, { reason?: undefined }> & { distanceMeters: number };

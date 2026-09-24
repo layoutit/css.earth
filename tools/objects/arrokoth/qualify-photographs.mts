@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -12,7 +13,7 @@ const profile=shape({mesh:text,frames:array(shape({id:text,image:text,output:tex
 const mesh=await loadObjShape(resolve(root,profile.mesh),{metersPerUnit:1000,expectedVertices:20484,expectedFaces:40960});
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((s,n,i)=>s+n*b[i],0);
 const sub=(a:readonly number[],b:readonly number[])=>a.map((n,i)=>n-b[i]);
-const cross=(a:readonly number[],b:readonly number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+
 const unit=(a:number[])=>{const n=Math.hypot(...a);return a.map(v=>v/n);};
 const normals=mesh.indices.map(face=>{const[a,b,c]=face.map(i=>mesh.positions[i]);return unit(cross(sub(b,a),sub(c,a)));});
 

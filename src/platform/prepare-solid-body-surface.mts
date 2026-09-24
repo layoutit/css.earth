@@ -1,11 +1,11 @@
 import type { Polygon, Vec3, Vec2, ComputeTextureAtlasPlanOptions } from "@layoutit/polycss";
-import type { RasterRect, ProjectiveGeometry } from "./projective-surface-raster.mts";
+import type { RasterRect } from "./projective-surface-raster.mts";
 interface SurfaceRasterOptions { width: number; height: number; latitudeSegments?: number; longitudeSegments?: number; seamOverlap?: number; sampling?: "bilinear" | "nearest"; }
 interface PoleRasterOptions extends SurfaceRasterOptions { tileSize?: number; radius?: number; polarRadius?: number; }
 interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: number; secondaryRadius?: number; mapUrl: string; polesUrl: string; latitudeSegments?: number; longitudeSegments?: number; sourceWidth?: number; sourceHeight?: number; poleTileSize?: number; seamOverlap?: number; gutter?: number; }
 type SurfacePolygon = Polygon & { latitudeIndex: number; longitudeIndex?: number; polar?: string; inner?: boolean; className?: string; textureImageSource: { url: string; width: number; height: number; sourceRect: RasterRect } };
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from "@layoutit/polycss";
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, polarCapRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, polarCapRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
 
 // A latitude trapezoid uses projective UVs: tan(latitude), rather than latitude,
 // varies linearly down its texture. Bake the inverse mapping into each band so
@@ -213,7 +213,7 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
       projection: "projective",
     });
     if (!geometry) throw new Error(`Solid-body texture leaf ${index} did not prepare.`);
-    const sourceFitted = fitGeometry(
+    const sourceFitted = fitTextureGeometry(
       geometry,
       polygon.polar ? poleTileSize : cellWidth,
       polygon.polar ? poleTileSize : cellHeight,
@@ -263,32 +263,4 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
       polar: polygon.polar ?? null,
     });
   }
-
-  function fitGeometry(geometry: ProjectiveGeometry, leafWidth: number, leafHeight: number) {
-    const matrix = String(geometry.matrix).split(",").map(Number);
-    if (matrix.length !== 16 || matrix.some((value) => !Number.isFinite(value))) {
-      throw new Error("Solid-body texture matrix is invalid.");
-    }
-    const matrixScaleX = geometry.leafWidth / leafWidth;
-    const matrixScaleY = geometry.leafHeight / leafHeight;
-    for (const index of [0, 1, 2, 3]) matrix[index] *= matrixScaleX;
-    for (const index of [4, 5, 6, 7]) matrix[index] *= matrixScaleY;
-    const rasterScaleX = leafWidth / geometry.leafWidth;
-    const rasterScaleY = leafHeight / geometry.leafHeight;
-    return {
-      ...geometry,
-      matrix: matrix.map((value) => Number(value.toFixed(6))).join(","),
-      leafWidth,
-      leafHeight,
-      backgroundPosition: [
-        geometry.backgroundPosition[0] * rasterScaleX,
-        geometry.backgroundPosition[1] * rasterScaleY,
-      ],
-      backgroundSize: [
-        geometry.backgroundSize[0] * rasterScaleX,
-        geometry.backgroundSize[1] * rasterScaleY,
-      ],
-    };
-  }
-
 }

@@ -5,7 +5,8 @@ import { dirname, join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import { prepareVolumeSlices, type VolumeSlices } from '@cssearth/volume-bake/slices/density';
-import { acquire, hash, json, pinned, writeAtomic } from './io.ts';
+import { acquire, hash, json, pinned } from './io.ts';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 
 /** Replay the pinned geometry, without changing its scientific descriptor or catalogue reference. */
 export async function bakeDensity(root: string, directory: string) {

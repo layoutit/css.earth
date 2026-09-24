@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 /**
  * Observer-computed cameras for ground-based telescope photographs.
  *
@@ -53,8 +54,7 @@ const unit = (v: Vector): Vector => {
   if (!(m > 0)) throw new Error('Cannot normalise a zero-length direction.');
   return [v[0] / m, v[1] / m, v[2] / m];
 };
-const cross = (a: Vector, b: Vector): Vector =>
-  [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 const dot = (a: Vector, b: Vector) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const wrap360 = (degrees: number) => ((degrees % 360) + 360) % 360;
 

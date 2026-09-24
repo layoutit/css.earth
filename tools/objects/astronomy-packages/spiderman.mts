@@ -4,7 +4,7 @@
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
  * (spiderman-toolchain.json says why). Install: node tools/objects/astronomy-packages/spiderman.mts install */
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { runToolchainProcess } from '../toolchain-process.mts';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -21,22 +21,16 @@ function descriptor() {
   return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
 
-function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}, input?: string) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', input, maxBuffer: 256 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-2000)}`);
-  return result.stdout;
-}
-
 export async function installSpiderman() {
   const { entry, digest } = descriptor(), prefix = resolve(SPIDERMAN_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(SPIDERMAN_ROOT, { recursive: true, force: true });
   await mkdir(SPIDERMAN_ROOT, { recursive: true });
-  run('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
-    ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { MAMBA_ROOT_PREFIX: resolve(SPIDERMAN_ROOT, 'mamba') });
+  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
+    ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(SPIDERMAN_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
   // The lock is hash-pinned; both packages build or install against the environment's NumPy.
-  run(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
-    resolve(import.meta.dirname, requireString(entry.requirements, 'requirements'))], { PYTHONNOUSERSITE: '1' });
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
+    resolve(import.meta.dirname, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(SPIDERMAN_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   await writeFile(resolve(SPIDERMAN_ROOT, 'installed.json'), `${JSON.stringify({ id: 'spiderman', pinsSha256: digest }, null, 2)}\n`);
   verifySpiderman();
@@ -96,7 +90,7 @@ export interface SpidermanSphericalMap { readonly degree: number; readonly la0: 
 export interface SpidermanOrbit { readonly periodDays: number; readonly semiMajorAxisAu: number; readonly semiMajorAxisStellarRadii: number; readonly inclinationDegrees: number; readonly radiusRatio: number }
 
 function call(request: Record<string, unknown>, toolchain = spidermanToolchainSync()) {
-  const answer = requireRecord(JSON.parse(run(toolchain.python, ['-c', PYTHON], toolchain.env, JSON.stringify(request))) as unknown, 'SPIDERMAN answer');
+  const answer = requireRecord(JSON.parse(runToolchainProcess(toolchain.python, ['-c', PYTHON], { env: toolchain.env, maxBuffer: 256 * 1024 * 1024, input: JSON.stringify(request) })) as unknown, 'SPIDERMAN answer');
   if (answer.schema !== 'cssearth-spiderman@1' || answer.spiderman !== toolchain.version) throw new Error(`SPIDERMAN answered as ${String(answer.spiderman)}, expected ${toolchain.version}.`);
   return answer;
 }
@@ -127,7 +121,7 @@ export function spidermanPhaseCurve(map: SpidermanSphericalMap, orbit: Spiderman
 
 export function verifySpiderman() {
   const toolchain = spidermanToolchainSync();
-  const found = run(toolchain.python, ['-c', "import importlib.metadata as m; print(m.version('spiderman-package'), m.version('batman-package'))"], toolchain.env).trim();
+  const found = runToolchainProcess(toolchain.python, ['-c', "import importlib.metadata as m; print(m.version('spiderman-package'), m.version('batman-package'))"], { env: toolchain.env, maxBuffer: 256 * 1024 * 1024 }).trim();
   const { entry } = descriptor();
   if (found !== `${requireString(entry.spiderman)} ${requireString(entry.batman)}`) throw new Error(`Expected SPIDERMAN ${String(entry.spiderman)} and batman ${String(entry.batman)}, found ${found}.`);
   return found;

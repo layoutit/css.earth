@@ -26,7 +26,7 @@ import { sha256File } from '../../../src/platform/sha256.mts';
 import { archiveHeader, type EsoHeader } from '../interferometry/eso-pipeline.mts';
 import { PROGRAMS, readProgram, type NacoProgram } from './archive.mts';
 import { readReduction, type ReductionResult } from './reduce.mts';
-import { statistics, type Statistics } from './compare.mts';
+import { sampleStatistics as statistics, type Statistics } from '../../fits/sample-statistics.mts';
 import { detectSlitAxis, extractSpectrum, measureTrace, readFrame, type TraceMeasurement } from './spectrum.mts';
 
 /** Dispersion samples summed on each side of the trace when a one-dimensional spectrum is extracted. */

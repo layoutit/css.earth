@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {SourceMesh,SourceFace,FaceTree,ClosestSurfacePoint,MeshDimensions} from './contracts.mts';
 import {parseMeshProfile,parseRadiusProfile,parsePlateProfile,parseShapeLens,parseSurfaceLens} from './source-records.mts';
@@ -10,7 +11,7 @@ import { gunzipSync } from 'node:zlib';
 const exec = promisify(execFile);
 const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
-const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+
 
 /** Read the released triangular surface in its body-fixed frame. Units are
  * authored explicitly; no ellipsoid or missing terrain is synthesized. */

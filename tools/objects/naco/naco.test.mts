@@ -1,3 +1,4 @@
+import { sampleStatistics as statistics } from '../../fits/sample-statistics.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -10,7 +11,7 @@ import { parseRawTable } from '../interferometry/eso-pipeline.mts';
 import { evidenceFor, productRecordPath, readProductRecord } from '../product-record.mts';
 import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, templatesOf, treeFiles, type NacoFrame, type NacoProgram } from './archive.mts';
 import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRunner } from './reduce.mts';
-import { addComparisonEvidence, overlapOf, repositoryPath, statistics } from './compare.mts';
+import { addComparisonEvidence, overlapOf, repositoryPath } from './compare.mts';
 import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
 import { bucketOf, ledgerGuide, matchShippedObject, observationsOf, parseTargetName, SCHEMA as LEDGER_SCHEMA } from './archive-ledger.mts';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';

@@ -3,7 +3,8 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { hash, writeAtomic } from '../../server/workflows/density/io.ts';
+import { hash } from '../../server/workflows/density/io.ts';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 import { availableOverlayVariants } from './available-overlay-variants.js';
 import { overlayVariantsPath } from './overlay-variants.js';
 

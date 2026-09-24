@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../platform/vector3.mts';
 import { composeDragRotation } from '@cssearth/engine';
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
@@ -6,7 +7,6 @@ import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js
 
 const unit = (v: PositionM): PositionM => { const length = Math.hypot(...v); return [v[0] / length, v[1] / length, v[2] / length]; };
 const dot = (a: PositionM, b: PositionM) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-const cross = (a: PositionM, b: PositionM): PositionM => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 const unitQuaternion = (q: readonly number[]): OrientationXyzw => { const length = Math.hypot(...q); return [q[0]! / length, q[1]! / length, q[2]! / length, q[3]! / length]; };
 
 /** The rotation that carries the observer from above one surface direction to above another,

@@ -1,3 +1,4 @@
+import { collectArtifacts } from '../workflows/density/io.ts';
 import { implementationPins } from '../services/implementation.ts';
 /** Offline material replacement on the exact pinned Alignment density cloud. Never infer new shape from an image. */
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
@@ -134,10 +135,8 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
     composition:'One immutable Alignment density cloud; candidate images replace material colors only.'});
   await json(resolve(output,'inspection-object.json'),{...resultDescriptor,properties:{...resultDescriptor.properties,
     preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
-  const artifacts:Record<string,{sha256:string;bytes:number}>={};
-  async function collect(directory:string){for(const entry of await readdir(directory,{withFileTypes:true})){
-    const path=resolve(directory,entry.name);if(entry.isDirectory())await collect(path);else{const bytes=await readFile(path);artifacts[relative(output,path)]={sha256:sha256(bytes),bytes:bytes.length};}}}
-  await collect(output);
+
+  const artifacts = await collectArtifacts(output);
   await json(resolve(output,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id:work.id,
     removalResultId:work.original.removalResultId,artifacts,elapsedSeconds:(performance.now()-started)/1000});
   progress('complete',1,1,'Fixed cloud material and original comparison are ready');

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Install one pinned astronomy environment per user; read legacy checkout-local environments when valid. */
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { runToolchainProcess } from '../toolchain-process.mts';
 import { accessSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
@@ -18,12 +18,6 @@ function descriptor() {
   const entry = requireRecord(JSON.parse(text) as unknown, 'toolchain.json');
   const lock = readFileSync(resolve(import.meta.dirname, requireString(entry.requirements)), 'utf8');
   return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
-}
-
-function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-2000)}`);
-  return result.stdout;
 }
 
 export function installedToolchain(root: string, digest: string): boolean {
@@ -67,7 +61,7 @@ function expectedVersions(entry: Record<string, unknown>): string {
 }
 const versionProbe = "import astroquery, astropy_healpix, importlib.metadata, pyvo, scipy, cdflib, pyuvdata, orbitize, whereistheplanet; from astroquery import alma, mast, vizier; print(astroquery.__version__, pyvo.__version__, scipy.__version__, importlib.metadata.version('batman-package'), importlib.metadata.version('orbitize'), importlib.metadata.version('whereistheplanet'), cdflib.__version__, pyuvdata.__version__, astropy_healpix.__version__)";
 function verifyPackages(root: string, entry: Record<string, unknown>): void {
-  const found = run(resolve(root, 'env/bin/python'), ['-c', versionProbe], { PATH: `${resolve(root, 'env/bin')}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' }).trim();
+  const found = runToolchainProcess(resolve(root, 'env/bin/python'), ['-c', versionProbe], { env: { PATH: `${resolve(root, 'env/bin')}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } }).trim();
   if (found !== expectedVersions(entry)) throw new Error(`Expected ${expectedVersions(entry)}, found ${found}.`);
 }
 
@@ -82,13 +76,13 @@ export async function installAstroquery() {
     await rm(root, { recursive: true, force: true });
     await mkdir(root, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
-    run('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], env);
-    run(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '-q', '-r', resolve(import.meta.dirname, requireString(entry.requirements))]);
+    runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '-q', '-r', resolve(import.meta.dirname, requireString(entry.requirements))]);
     for (const value of requireArray(entry.sourcePackages, 'sourcePackages')) {
       const source = requireRecord(value, 'source package');
       if (source.build !== 'installed-numpy') throw new TypeError('A source package must state the installed-numpy build policy.');
       const requirement = `${requireString(source.name)} @ ${requireString(source.url)}`;
-      run(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-build-isolation', '--no-deps', '-q', requirement]);
+      runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-build-isolation', '--no-deps', '-q', requirement]);
     }
     verifyPackages(root, entry);
     await rm(resolve(root, 'mamba/pkgs'), { recursive: true, force: true });

@@ -4,7 +4,7 @@ import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { validatePreparedCssVolume } from '../../../src/renderers/css/volume/validation.js';
 import { hash, localPath, pinned, type Pin } from '@cssearth/volume-bake/compact-inputs/io';
-import { writeAtomic } from './io.ts';
+import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 
 export interface BakeDelivery { directory: string; manifest: Pin; atlasInputs?: Pin; compactInputs?: Pin }
 async function deliveryFiles(root: string, delivery: BakeDelivery) {

@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import {requireRecord,requireFiniteNumber} from '../../sources/source-values.mts';
 import {shape,text,number,array,optional} from '../terrestrial-layers/source-records.mts';
 const parseGltf=shape({meshes:array(shape({primitives:array(shape({mode:optional(number),attributes:shape({POSITION:number,TEXCOORD_0:number}),indices:number,material:number}))})),nodes:array(requireRecord),
@@ -11,7 +12,7 @@ import sharp from 'sharp';
 
 const dot = (a:readonly number[], b:readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const sub = (a:readonly number[], b:readonly number[]) => a.map((v, i) => v - b[i]);
-const cross = (a:readonly number[], b:readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
 
 /** Preserve a model's authored UVs, including its triangular polar islands. */
 export async function prepareGlbSurface(path:string|URL, width:number, height:number) {

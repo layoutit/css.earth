@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../src/platform/vector3.mts';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
@@ -172,9 +173,7 @@ function openedOrientation(orientationXyzw: readonly number[], view: SystemView)
   return [...worldQuaternionFromRotation(turned as unknown as Parameters<typeof worldQuaternionFromRotation>[0])] as [number, number, number, number];
 }
 
-function cross(a: PositionM, b: PositionM): PositionM {
-  return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-}
+
 
 /** Fit the prepared bounds through the current perspective projection. */
 function fitSystemDepth(frame: FramingFrame, optics: Optics, view: FramingCandidate, rect: MapViewport, minimumRangeM: number, referenceToCamera: WorldRotation) {

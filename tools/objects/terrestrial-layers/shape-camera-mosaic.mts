@@ -1,3 +1,4 @@
+import { cross3 as cross } from '../../../src/platform/vector3.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './source-records.mts';
 type Vector = readonly number[] | Float32Array | Float64Array;
@@ -16,7 +17,7 @@ import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts'
 
 const rad = Math.PI / 180;
 const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
-const cross = (a: Vector,b: Vector) => [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+
 const unit = (a: Vector) => a.map(v=>v/Math.hypot(...a));
 const vector = (latitude: number, westLongitude: number) => [Math.cos(latitude*rad)*Math.cos(-westLongitude*rad),Math.cos(latitude*rad)*Math.sin(-westLongitude*rad),Math.sin(latitude*rad)];
 
