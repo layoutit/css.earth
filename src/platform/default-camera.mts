@@ -18,7 +18,7 @@ export interface ObserverPoint { readonly observerWestLongitude: number; readonl
 export function prepareFacingCameraAngles(bodyId: string, target: Vector3): DefaultCameraAngles {
   const length = Math.hypot(...target);
   if (!(length > 0) || !target.every(Number.isFinite)) throw new TypeError(`${bodyId}: a default camera target needs a direction.`);
-  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(target.map(value => value / length) as unknown as Vector3);
+  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(target.map(value => value / length));
   return Object.freeze({ defaultControlYawDegrees: Math.atan2(-x, z) * 180 / Math.PI, initialScenePitchDegrees: Math.atan2(y, Math.hypot(x, z)) * 180 / Math.PI });
 }
 
@@ -27,7 +27,7 @@ export function openingDirection(bodyId: string, { initialScenePitchDegrees, def
   const yaw = defaultControlYawDegrees * Math.PI / 180, pitch = initialScenePitchDegrees * Math.PI / 180;
   const presentation = [-Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch)];
   const [xAxis, yAxis, zAxis] = prepareEclipticPresentationFrame(bodyId).basis;
-  return [0, 1, 2].map(axis => presentation[0]! * xAxis![axis]! + presentation[1]! * yAxis![axis]! + presentation[2]! * zAxis![axis]!) as unknown as Vector3;
+  return [0, 1, 2].map(axis => presentation[0]! * xAxis![axis]! + presentation[1]! * yAxis![axis]! + presentation[2]! * zAxis![axis]!);
 }
 
 /** How lopsided a partial map's data must be before the opening turns toward it. The measure is the length of the area-weighted
@@ -40,7 +40,7 @@ export const LOPSIDED_COVERAGE = 0.1;
 export function observerPointDirection(bodyId: string, { observerWestLongitude, observerLatitude }: ObserverPoint): Vector3 {
   if (!Number.isFinite(observerWestLongitude) || !(Math.abs(observerLatitude) <= 90)) throw new TypeError(`${bodyId}: an observation frame has no sub-observer point.`);
   const longitude = -observerWestLongitude * Math.PI / 180, latitude = observerLatitude * Math.PI / 180;
-  return [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)] as unknown as Vector3;
+  return [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)];
 }
 
 /** The body-fixed direction a set of observation frames looks at together: the mean of their directions toward the observer. */
@@ -53,7 +53,7 @@ export function observationCentroid(bodyId: string, directions: readonly Vector3
     for (let axis = 0; axis < 3; axis++) sum[axis]! += direction[axis]! / length;
   }
   if (!(Math.hypot(...sum) > 1e-9)) throw new TypeError(`${bodyId}: the observation frames look at no common side.`);
-  return sum as unknown as Vector3;
+  return sum;
 }
 
 /** The body-fixed directions toward the observer of a terrestrial recipe's default photograph lens: the frames' own
@@ -64,7 +64,7 @@ export function photographDirections(bodyId: string, recipe: { raster?: { surfac
   const lens = (recipe.raster?.surfaceObservations ?? []).find(entry => entry.id === defaultLens) as { frames?: readonly Record<string, unknown>[] } | undefined;
   if (!lens?.frames?.length) return undefined;
   if (lens.frames.every(frame => Number.isFinite(frame.observerWestLongitude) && Number.isFinite(frame.observerLatitude))) {
-    return lens.frames.map(frame => observerPointDirection(bodyId, frame as unknown as ObserverPoint));
+    return lens.frames.map(frame => observerPointDirection(bodyId, { observerWestLongitude: Number(frame.observerWestLongitude), observerLatitude: Number(frame.observerLatitude) }));
   }
   const record = (value: unknown, label: string) => {
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${bodyId}: ${label} is not a record.`);
@@ -77,7 +77,7 @@ export function photographDirections(bodyId: string, recipe: { raster?: { surfac
   const directions = cameras.map(camera => {
     const position = Array.isArray(camera) ? camera : record(camera, 'a report camera').positionKm;
     if (!Array.isArray(position) || position.length !== 3 || !position.every(Number.isFinite)) throw new TypeError(`${bodyId}: a surface report camera position has three finite components.`);
-    return position as unknown as Vector3;
+    return position;
   });
   if (!directions.length) throw new TypeError(`${bodyId}: the default photograph lens states no observer, in its frames or its prepared report.`);
   return directions;
@@ -94,8 +94,8 @@ export function photographDirections(bodyId: string, recipe: { raster?: { surfac
  * - any other body: the lit design pose. */
 export function prepareDefaultCameraAngles(bodyId: string, { observation, light = 'sun', coverage }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host'; coverage?: Vector3 } = {}): DefaultCameraAngles {
   if (observation?.length) return prepareFacingCameraAngles(bodyId, observationCentroid(bodyId, observation));
-  if (light === 'host') return prepareFacingCameraAngles(bodyId, [1, 0, 0] as unknown as Vector3);
-  if (light === 'self') return prepareFacingCameraAngles(bodyId, requireBodyFixedSunDirection(bodyId) as unknown as Vector3);
+  if (light === 'host') return prepareFacingCameraAngles(bodyId, [1, 0, 0]);
+  if (light === 'self') return prepareFacingCameraAngles(bodyId, requireBodyFixedSunDirection(bodyId));
   if (coverage && Math.hypot(...coverage) >= LOPSIDED_COVERAGE) {
     // The design tilt, taken on the south side of the ecliptic when the data centre lies south of it.
     const facing = prepareFacingCameraAngles(bodyId, coverage), tilt = Math.abs(LIT_DEFAULT_VIEW.initialScenePitchDegrees);
@@ -121,7 +121,7 @@ export function prepareSkyNorthScreenAngleDegrees(bodyId: string, angles: Defaul
   const sight = toIcrf(sun).map(value => -value), along = sight[2]!;
   const north = [0 - along * sight[0]!, 0 - along * sight[1]!, 1 - along * sight[2]!], length = Math.hypot(...north);
   if (!(length > 1e-9)) throw new TypeError(`${bodyId}: celestial north has no direction on a sky seen along the pole.`);
-  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(toBody(north.map(value => value / length)) as unknown as Vector3);
+  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(toBody(north.map(value => value / length)));
   const yaw = angles.defaultControlYawDegrees * Math.PI / 180, pitch = angles.initialScenePitchDegrees * Math.PI / 180;
   // rotateY(yaw), then rotateX(pitch), as the scene matrix applies them.
   const yawedX = Math.cos(yaw) * x! + Math.sin(yaw) * z!, yawedZ = -Math.sin(yaw) * x! + Math.cos(yaw) * z!;
