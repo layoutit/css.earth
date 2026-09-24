@@ -1,0 +1,23 @@
+✔ a page that ships its catalogue empty has it fetched and merged before matching (22.557333ms)
+✔ a catalogue fragment that fails to load degrades to an empty list plus a message, instead of failing the request (2.241833ms)
+✔ a page that already inlines its catalogue never fetches the fragment (1.547042ms)
+✔ native search replaces the selected card, retains every row, and preserves the scene/head bytes (4.416333ms)
+✔ empty submission browses all objects, categories retain the query, pills replace it (2.449125ms)
+✔ native search sorts catalogue rows by their emitted meter distances (0.755792ms)
+✔ features are pinned, rendered into existing rows and have ordinary destination links (2.209208ms)
+✔ typed search shows a flat result list without the navigation tree, including queries that name an overview (2.262833ms)
+✔ a URL that names both a focus and an overview resolves to the focus alone (7.245625ms)
+✔ native and live selections share card visibility, inertness, labels and system headers (6.821208ms)
+✔ named features share the results panel, start collapsed, and disappear when there are no matches (3.652666ms)
+✔ live feature results retain their rows and disclosure until the query changes (8.40475ms)
+✔ queries stay text, are bounded, and cannot become executable attributes or scene markup (1.899917ms)
+✔ Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function (0.409ms)
+✔ function fetches only the static page and pinned indexes; search responses are not shared-cacheable (1.148125ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 420.107833

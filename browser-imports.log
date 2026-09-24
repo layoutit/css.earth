@@ -1,0 +1,11 @@
+✔ no module reachable from the browser entry points has a static node: import (158.199875ms)
+✔ mutation check: a static node: import reachable from an entry is caught (1.673209ms)
+✔ mutation check: a node: import reached only through a dynamic import() is not flagged (0.840792ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 444.447375

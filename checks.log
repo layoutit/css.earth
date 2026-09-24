@@ -1,0 +1,34 @@
+✔ an unavailable volume keeps catalogue facts and a retained explanation, without stale dataset controls (1.236167ms)
+✔ prepared focus lenses retain controls and reflect only the applied runtime selection (0.569125ms)
+✔ departed or unsupported galaxy focus hides its retained lens bank and disables stale actions (0.198084ms)
+✔ a nebula focus keeps classification out of the title and preserves the shared lens controls (0.154875ms)
+✔ a globular-cluster focus keeps its stellar classification and the shared lens controls (0.13925ms)
+✔ focus uses shared dataset tabs only when a prepared presentation is available (0.121042ms)
+✔ banks spliced after a focus is presented are adopted and show the current selection (0.123875ms)
+✔ a page that ships its catalogue empty has it fetched and merged before matching (24.622291ms)
+✔ a catalogue fragment that fails to load degrades to an empty list plus a message, instead of failing the request (2.186791ms)
+✔ a page that already inlines its catalogue never fetches the fragment (1.165917ms)
+✔ native search replaces the selected card, retains every row, and preserves the scene/head bytes (5.46175ms)
+✔ empty submission browses all objects, categories retain the query, pills replace it (2.55075ms)
+✔ native search sorts catalogue rows by their emitted meter distances (0.805417ms)
+✔ features are pinned, rendered into existing rows and have ordinary destination links (3.066625ms)
+✔ typed search shows a flat result list without the navigation tree, including queries that name an overview (2.620458ms)
+✔ a URL that names both a focus and an overview resolves to the focus alone (7.551417ms)
+✔ native and live selections share card visibility, inertness, labels and system headers (7.621959ms)
+✔ named features share the results panel, start collapsed, and disappear when there are no matches (3.732125ms)
+✔ live feature results retain their rows and disclosure until the query changes (8.85925ms)
+✔ queries stay text, are bounded, and cannot become executable attributes or scene markup (2.272292ms)
+✔ Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function (0.45975ms)
+✔ function fetches only the static page and pinned indexes; search responses are not shared-cacheable (1.205042ms)
+✔ one source link follows selection, independent of search, dataset and accordion state (3.375042ms)
+✔ a native body request retains its prepared default link (0.32425ms)
+✔ the fragment is fetched from its one path, and a failed response names it (11.913958ms)
+✔ splicing adds only the headers the card lacks, where the slot was, and keeps its own (3.223875ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 526.6265

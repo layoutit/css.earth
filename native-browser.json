@@ -1,0 +1,20 @@
+[
+  {
+    "label": "before",
+    "status": 200,
+    "contextHidden": true,
+    "header": "sun",
+    "solarFactsHidden": false,
+    "title": "Solar System",
+    "source": "https://github.com/layoutit/cssEarth/blob/ce04971713d51192975ae68824b293034f086f61/src/objects/earth/README.md"
+  },
+  {
+    "label": "after",
+    "status": 200,
+    "contextHidden": false,
+    "header": "sun",
+    "solarFactsHidden": false,
+    "title": "Solar System",
+    "source": "https://github.com/layoutit/cssEarth/blob/ce04971713d51192975ae68824b293034f086f61/src/objects/sun/README.md"
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "baseline": "ce04971713d51192975ae68824b293034f086f61",
+  "candidate": {
+    "site/feature-browser.mts": "0c2d218bdc4f932bb1ce79fd29c361b4e27bf844e069f6179c0752fad6148acf",
+    "site/maps-shell.css": "343017d18be1c8c9b7d55091dce3ce79eb651321fd3b3af782af716ebb6371e4",
+    "site/object-browser.mts": "98677d8c15eef875e30652dd78862c7d3f2b8e085d69a79e593349e2320af1fe",
+    "site/object-catalogue.mts": "86416de27d85f6f9e843cbc69075762cbbb42dc1e98a5ce702a43fd2327edbc6",
+    "site/search-response.mts": "55587273bc788eebe715068d569e835400e8a1eb87fa532b73d89a650e3a61be",
+    "site/search-results-presentation.mts": "83a059ea261523ed4c8fdf2af91df3ba3cce96d4c745df3f2874c96dec2ef208",
+    "site/selection-presentation.mts": "e27325a194116b1fb97844061858684b0e4e0db9b1b4bab0f2ca4a3c90916a53",
+    "site/test/search-response.test.mts": "31f2ac1c0372b26b7af07aa2737f503ebae5490a17b3018313c8cc33785bb6e1"
+  },
+  "browser": "Chrome 153.0.8010.53",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "pixelmatch": "7.2.0",
+  "threshold": 0.1,
+  "includeAA": true,
+  "assetOrigin": "https://earth-assets.lowpoly.cc",
+  "inputs": "Same prepared inputs and inventory-addressed published textures; default surface labels off, motion off. No assets regenerated between captures.",
+  "results": [
+    {
+      "view": "earth",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "c8e0c92777e2528c6fa2a95d88087a9bfa697072124acd2408c6380c2a221a68",
+      "afterSha256": "c8e0c92777e2528c6fa2a95d88087a9bfa697072124acd2408c6380c2a221a68"
+    },
+    {
+      "view": "tree",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "4ab7e387f21877bb28d570fe3017e31aa51c676f3fac1bcba2a86767368157e4",
+      "afterSha256": "4ab7e387f21877bb28d570fe3017e31aa51c676f3fac1bcba2a86767368157e4"
+    },
+    {
+      "view": "search",
+      "pixels": 1296000,
+      "mismatches": 0,
+      "exactMismatches": 0,
+      "identicalBytes": true,
+      "beforeSha256": "26f41d3f9ab64e613cb57b93df6a9a9449f5d34b8331635795aca5dbd512cc31",
+      "afterSha256": "26f41d3f9ab64e613cb57b93df6a9a9449f5d34b8331635795aca5dbd512cc31"
+    }
+  ]
+}

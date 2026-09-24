@@ -1,0 +1,4 @@
+
+> cssearth@0.1.0 typecheck:shell /Users/ekrof/Documents/Codex/2026-09-23/im-x20/work/css-earth-report-cleanup
+> pnpm --filter @cssearth/engine exec tsc -p ../../site/tsconfig.json
+
