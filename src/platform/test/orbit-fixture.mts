@@ -15,6 +15,8 @@ export class Surface {
   readonly dataset: Record<string, string | undefined> = {};
   readonly frames = new Map<number, FrameRequestCallback>();
   nextFrame = 0;
+  time = 0;
+  readonly performance = { now: () => this.time };
   readonly captured = new Set<number>();
   readonly isConnected = true;
   constructor() { this.style = { setProperty(key: string, value: string) { this[key] = value; }, removeProperty(name: string) { delete this[name]; return ''; } }; this.ownerDocument = { defaultView: this, querySelector: () => null }; }
@@ -26,7 +28,7 @@ export class Surface {
   listenerCount(): number { return [...this.listeners.values()].reduce((sum, set) => sum + set.size, 0); }
   dispatch(name: string, partial: Partial<PointerEvent & WheelEvent> = {}): void { const event = { type: name, isPrimary: true, preventDefault() {}, pointerId: 1, button: 0, clientX: 0, clientY: 0, timeStamp: 0, ...partial } as PointerEvent; for (const callback of this.listeners.get(name) ?? []) callback(event); }
   requestAnimationFrame(callback: FrameRequestCallback): number { const id = ++this.nextFrame; this.frames.set(id, callback); return id; }
-  tick(time: number): void { const callbacks = [...this.frames.values()]; this.frames.clear(); callbacks.forEach(callback => callback(time)); }
+  tick(time: number): void { this.time = time; const callbacks = [...this.frames.values()]; this.frames.clear(); callbacks.forEach(callback => callback(time)); }
   cancelAnimationFrame(id: number): void { this.frames.delete(id); }
   setPointerCapture(id: number): void { this.captured.add(id); }
   hasPointerCapture(id: number): boolean { return this.captured.has(id); }
@@ -53,7 +55,7 @@ export function orbitFixture(failure: OrbitFailure, cleanupFailure = false, depe
     createCameraOrientation() { return { scene: () => "matrix3d(1)", sceneMatrix: () => ({ m11: 1, m22: 1, m33: 1, m12: 0, m13: 0, m21: 0, m23: 0, m31: 0, m32: 0 }), sunViewDirection: () => [0, 0, 1], captureCounterRotation: () => () => "matrix3d(1)", setSceneRotation() {}, reset() {}, rotate() {}, rebaseScene() {}, prepareFlight: () => ({ angularDistance: 0, sample() {} }), restore() {}, snapshot: () => ({ schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1)' }) }; },
     HTMLElement: { [Symbol.hasInstance](value: unknown): boolean { return value instanceof Surface; } },
     matchMedia: () => new MediaQuery(),
-    createUnboundedMatrixDragControls(options: DragOptions) { callbacks.drag = options; acquire("drag"); return { flyTo: async () => ({ completed: false }), update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete('drag'); if (cleanupFailure && failure === 'drag') throw new Error('drag cleanup failure'); }, invalidateTrackball() {} }; },
+    createUnboundedMatrixDragControls(options: DragOptions) { callbacks.drag = options; acquire("drag"); return { update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete('drag'); if (cleanupFailure && failure === 'drag') throw new Error('drag cleanup failure'); }, invalidateTrackball() {} }; },
     createPreparedWheelZoomControls(options: WheelOptions) { callbacks.wheel = options; acquire("wheel"); return { update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete('wheel'); if (cleanupFailure) throw new Error('wheel cleanup failure'); } }; },
     bindResponsiveOrbitPolicy(options: PolicyOptions) { callbacks.policy = options; return acquire("policy"); },
     selectPreparedResponsiveZoom() { if (failure === "fit") throw new Error("fit failure"); return { zoom: 1, model: "unit", widthShare: 0.5 }; },

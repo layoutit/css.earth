@@ -32,7 +32,7 @@ function files(directory: string): string[] {
 function policy(path: string): Policy {
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path)) return 'test';
   if (path.startsWith('tools/') || path.startsWith('src/preparation/') || path.startsWith('src/renderers/css/preparation/') ||
-      path === 'site/minimap/prepare.mts' || path === 'src/platform/astronomy-package.mts' || /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
+      path === 'src/platform/astronomy-package.mts' || /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';
 }
 function syntax(file: string): ts.SourceFile {

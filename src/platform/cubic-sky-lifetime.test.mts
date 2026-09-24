@@ -162,12 +162,11 @@ for (const action of ["complete", "wheel", "destroy", "failure"]) {
   test(`destination flight settles and releases its frame on ${action}`, async () => {
     const previous = globalThis.HTMLElement;
     globalThis.HTMLElement = nativeConstructor;
-    const surface = new Surface(), samples = [], errors = [];
-    const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy, inputSurface: nativeSurface(surface),
-      trackballMetrics: trackball,
-      rotate() {}, onError: error => errors.push(error) });
+    const surface = new Surface(), samples: number[] = [], cameraMotion = createCameraMotion(), scope = new AbortController();
+    const controls = createUnboundedMatrixDragControls({ cameraMotion, runtimePolicy, inputSurface: nativeSurface(surface),
+      trackballMetrics: trackball, rotate() {} });
     try {
-      const completion = controls.flyTo({ durationMilliseconds: 100, sample(progress) {
+      const flight = cameraMotion.fly({ windowTarget: surface, signal: scope.signal, inputSpeedUp: runtimePolicy.FLIGHT_WHEEL_SPEEDUP, durationMilliseconds: 100, sample(progress) {
         samples.push(progress);
         if (action === "failure") throw new Error("destination publication");
       } });
@@ -175,19 +174,18 @@ for (const action of ["complete", "wheel", "destroy", "failure"]) {
       if (action === "complete") surface.tick(100);
       if (action === "wheel") {
         surface.dispatch("wheel", { deltaY: 100 });
-        assert.equal(controls.stats().destinationFlyTo.active, true, "wheel accelerates the active destination flight");
+        assert.ok(cameraMotion.signal, "wheel accelerates the active destination flight");
         surface.tick(100 / runtimePolicy.FLIGHT_WHEEL_SPEEDUP);
       }
-      if (action === "destroy") controls.destroy();
-      assert.deepEqual(await completion, { completed: action === "complete" || action === "wheel" });
+      if (action === "destroy") { scope.abort(); controls.destroy(); }
+      if (action === "failure") await assert.rejects(flight.finished, /destination publication/);
+      else assert.deepEqual(await flight.finished, { completed: action === "complete" || action === "wheel" });
       const count = samples.length;
       surface.tick(200);
       assert.equal(samples.length, count);
       assert.equal(surface.frames.size, 0);
-      assert.equal(controls.stats().destinationFlyTo.active, false);
-      assert.equal(errors.length, action === "failure" ? 1 : 0);
+      assert.equal(cameraMotion.signal, undefined);
       controls.destroy();
-      assert.deepEqual(await controls.flyTo({ sample() {} }), { completed: false });
       assert.equal(surface.listenerCount(), 0);
     } finally { controls.destroy(); globalThis.HTMLElement = previous; }
   });

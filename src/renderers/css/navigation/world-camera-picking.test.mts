@@ -133,7 +133,7 @@ function fixture(hitTest: (x: number, y: number) => boolean = () => false,
     trackballMetrics: () => ({ centerX: 500, centerY: 400, radius: 250, surfaceRadius: 250, focalLength: 900,
       viewportWidth: 1000, sceneMatrix: [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
     surfaceFlyToState: () => ({ zoom: 1, minimumZoom: .5, maximumZoom: 4 }), surfaceFlyToHitTest: hitTest,
-    rotate: value => publications.push(value) });
+    rotate: value => { publications.push(value); } });
   let unbind = bindWorldCameraPicking(narrowElement(surface), narrowElement(host), readBounds, detailOccludes), selections = 0, interrupted = 0;
   const target = new FakeSurface(); target.ownerDocument = document;
   target.dataset.objectNavigate = 'venus'; target.style.pointerEvents = 'auto';

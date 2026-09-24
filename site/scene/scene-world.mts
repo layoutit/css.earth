@@ -73,7 +73,6 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
         if (inner) return inner.present(request, signal);
         if (disposed || signal?.aborted || !request.current()) return signal ? Promise.resolve(false) : undefined;
         last = request; request.commit();
-        return signal ? Promise.resolve(true) : undefined;
       },
       attach(world) {
         if (inner || disposed) return;

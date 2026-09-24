@@ -10,6 +10,7 @@ export interface WorldFrameRequest {
 }
 export interface WorldFramePresenter {
   /** Input can replace pending views. Flights await the displayed view before
-   * advancing their checkpoint or releasing the current navigation owner. */
+   * advancing their checkpoint or releasing the current navigation owner.
+   * A synchronous commit returns void; a promise acknowledges a later presentation frame. */
   present(request: WorldFrameRequest, signal?: AbortSignal): void | Promise<boolean>;
 }

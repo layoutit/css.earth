@@ -1,7 +1,6 @@
 import * as T from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { loadVoyager } from './voyager.mts';
 import { inwardDirection, type FacilityPose } from './poses.mts';
 
@@ -16,17 +15,22 @@ export interface RenderRequest {
 
 /** Illustration lights, in camera coordinates. Never mission-specific illumination. */
 export const recipe = {
-  name: 'Neutral inward-facing facility thumbnails v3', renderer: 'Three.js 0.180.0', preparationOnly: true,
+  name: 'Sunlit inward-facing facility thumbnails v4', renderer: 'Three.js 0.180.0', preparationOnly: true,
   masterSize: [1200, 600], outputSize: [592, 296],
   materials: 'Original source materials and textures; no artistic overrides.',
   toneMapping: 'ACESFilmic', exposure: 1,
-  environment: { name: 'RoomEnvironment', blur: 0.04, intensity: 0.2 },
+  environment: {
+    name: 'Space: black sky, a small sun disc behind the key light and a faint blue planet glow below',
+    blur: 0.02, intensity: 1,
+    sun: { position: [-3, 4, 6], radius: 0.9, radiance: 40 },
+    glow: { position: [2, -6, 1], radius: 22, color: '#5f7fa8', radiance: 0.5 },
+  },
   lights: [
-    { role: 'key', intensity: 3.2, position: [-3, 4, 6], shadows: true },
-    { role: 'fill', intensity: 0.25, position: [2, -1, 4], shadows: false },
-    { role: 'rim', intensity: 0.65, position: [4, 2, -4], shadows: false },
+    { role: 'key', intensity: 4.2, position: [-3, 4, 6], shadows: true, color: '#fff6ea' },
+    { role: 'fill', intensity: 0.3, position: [2, -1, 4], shadows: false, color: '#9fb6d8' },
+    { role: 'rim', intensity: 1.2, position: [4, 2, -4], shadows: false, color: '#ffffff' },
   ],
-  lightColor: '#ffffff', shadowMapSize: 2048,
+  shadowMapSize: 2048,
   framing: 'Centered orthographic; fit retained geometry within 88% width / 86% height.',
   camera: { position: [0, 0, 10], up: [0, 1, 0], rollDegrees: 0 },
   orientation: { poses: 'tools/facility-renders/poses.mts', inwardDirection, policy: 'Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude.' },
@@ -61,12 +65,22 @@ export function components(geometry: T.BufferGeometry) {
   return { ids, find, parts };
 }
 
+/** Emissive spheres on black: reflections see the sun and a faint planet, not a lit room. */
+function spaceEnvironment() {
+  const room = new T.Scene(), { sun, glow } = recipe.environment;
+  for (const { position, radius, color, radiance } of [{ ...sun, color: '#ffffff' }, glow]) {
+    const mesh = new T.Mesh(new T.SphereGeometry(radius, 32, 16), new T.MeshBasicMaterial({ color: new T.Color(color).multiplyScalar(radiance) }));
+    mesh.position.fromArray(position).normalize().multiplyScalar(40); room.add(mesh);
+  }
+  return Object.assign(room, { dispose: () => room.traverse(node => { if (node instanceof T.Mesh) { node.geometry.dispose(); node.material.dispose(); } }) });
+}
+
 export async function renderFacility(request: RenderRequest) {
   const renderer = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
   renderer.setPixelRatio(1); renderer.setSize(1200, 600); renderer.setClearColor(0, 0);
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
   renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = recipe.exposure;
-  const scene = new T.Scene(), pmrem = new T.PMREMGenerator(renderer), room = new RoomEnvironment();
+  const scene = new T.Scene(), pmrem = new T.PMREMGenerator(renderer), room = spaceEnvironment();
   const environment = pmrem.fromScene(room, recipe.environment.blur);
   scene.environment = environment.texture; scene.environmentIntensity = recipe.environment.intensity;
   const draco = new DRACOLoader().setDecoderPath('/draco/');
@@ -129,7 +143,7 @@ export async function renderFacility(request: RenderRequest) {
     const cx = (minx + maxx) / 2, cy = (miny + maxy) / 2;
     Object.assign(camera, { left: cx - width / 2, right: cx + width / 2, top: cy + height / 2, bottom: cy - height / 2 }); camera.updateProjectionMatrix();
     for (const spec of recipe.lights) {
-      const light = new T.DirectionalLight(0xffffff, spec.intensity);
+      const light = new T.DirectionalLight(spec.color, spec.intensity);
       light.position.fromArray(spec.position).applyQuaternion(camera.quaternion); light.castShadow = spec.shadows;
       if (spec.shadows) {
         light.shadow.mapSize.set(2048, 2048);
