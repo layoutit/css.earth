@@ -154,8 +154,10 @@ test('adding a small distant moon does not pull the initial camera away from the
     'ariel', 'umbriel', 'titania', 'oberon', 'miranda', 'triton']);
   const mainContext = { ...context, bodies: context.bodies.filter(body =>
     !parents.includes(body.orbit?.centerBodyId ?? "") || mainMoons.has(body.id)) };
-  const mainRadii = systemFramingRadii(mainContext);
-  for (const id of parents) assert.equal(SYSTEM_FRAMING_RADII.get(id), mainRadii.get(id), id);
+  const mainRadii = systemFramingRadii(mainContext), allRadii = systemFramingRadii(context);
+  for (const id of parents) assert.equal(allRadii.get(id), mainRadii.get(id), id);
+  // The app frames from the summary, whose culling spheres are rounded outward by at most 2.8 millionths of their radius.
+  for (const id of parents) assert.ok(Math.abs(SYSTEM_FRAMING_RADII.get(id)! / allRadii.get(id)! - 1) <= 3e-6, id);
 });
 
 test('a body without moons uses its normal close-up target on first selection', () => {

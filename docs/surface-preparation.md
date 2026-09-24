@@ -407,6 +407,17 @@ replaces using pixelmatch at threshold 0.1. The count is pixels flagged.
 Deimos was already lossy WebP. Its few hundred flagged pixels (0.002 %) are
 one lossy encoding against another and do not shrink with quality.
 
+Navigation images go through the lane too, with exact alpha (`alphaQuality: 100`),
+measured the same way on 2026-09-25 against the lossless files they replaced:
+
+| Image | Pixels | Lossless | q80 | Flagged |
+|---|---|---|---|---|
+| Body-marker pages (three) | 8192×32, 8192×32, 6080×32 | 482 KB | 284 KB | 13, 6, 6 |
+| Lens-billboard atlas | 1024×1024 | 247 KB | 98.5 KB | 4 |
+| Star point atlas | 1024×32 | 14.0 KB | 0.7 KB | 0 |
+
+The per-body marker tiles the pages are packed from stay lossless.
+
 These still set their own encoding:
 
 - Earth's full pages keep the qualities its recipe declares; its smaller
@@ -419,6 +430,8 @@ These still set their own encoding:
   Way sky keep their recipe qualities.
 - Volume atlases (density in alpha, seen as stacked slices) and the
   staging-only sphere-photograph refresh tool keep their encodings.
+- Navigation context images (`<id>-context.webp`, a body's large marker) keep
+  quality 85.
 
 To repeat the measurement, run
 [`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)

@@ -15,9 +15,9 @@ const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'as
 const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const defaultFeatures: ReadonlySet<string> = new Set(prepared.defaultFeatureIds);
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id)).map(object => object.id);
-// Only notable asteroids are map targets: mission targets and those with real imagery. The rest are plain dots, with no
-// sprite, caption, hover or click; their pages stay reachable through search.
-const plainDotIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id) && !object.discovery.imagery).map(object => object.id);
+// Only notable asteroids are map targets; preparation marks the rest as plain dots (tools/objects/prepare-spatial-context.ts),
+// with no sprite, caption, hover or click. Their pages stay reachable through search.
+const plainDotIds = applicationContext.bodies.filter(body => body.plainDot).map(body => body.id);
 const minorMoonIds = prepared.moons.minor;
 // Each body's orbit centre, and each named centre's own parent: a circumbinary planet's barycentre leads to its host star.
 const orbitCenters = new Map([...applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),

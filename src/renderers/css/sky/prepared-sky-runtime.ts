@@ -24,14 +24,15 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
     Object.assign(camera.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', transformStyle: 'preserve-3d', transformOrigin: '0 0' });
     scene.className = 'prepared-celestial-sky-scene';
     Object.assign(scene.style, { position: 'absolute', left: '50%', top: '50%', width: '0', height: '0', pointerEvents: 'none', transformStyle: 'preserve-3d', transformOrigin: '0 0' });
-    const boundedFaces: { node: HTMLElement; bounds: PreparedLeafBounds | undefined; shown: boolean }[] = [];
+    // A face starts hidden and sets its image the first time it enters the view: a hidden element still fetches its
+    // background, and the camera sees at most three of a cube's six faces.
+    const boundedFaces: { node: HTMLElement; bounds: PreparedLeafBounds | undefined; shown: boolean; image: string | null }[] = [];
     for (const face of faces) {
       const node = document.createElement('s'); node.dataset.skyFace = face.id;
       Object.assign(node.style, { position: 'absolute', left: '0', top: '0', display: 'block', pointerEvents: 'none', transformOrigin: '0 0',
-        backfaceVisibility: 'visible', backgroundRepeat: 'no-repeat', textDecoration: 'none', ...face.style,
-        backgroundImage: `url("${escapeUrl(resolveResource(face.texturePath))}")` });
+        backfaceVisibility: 'visible', backgroundRepeat: 'no-repeat', textDecoration: 'none', ...face.style, visibility: 'hidden' });
       scene.appendChild(node);
-      boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: true });
+      boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: false, image: `url("${escapeUrl(resolveResource(face.texturePath))}")` });
     }
     camera.appendChild(scene); wrapper.appendChild(camera); root.appendChild(wrapper);
     return { wrapper, camera, scene, boundedFaces, opacity: 1, shown: true };
@@ -72,6 +73,7 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
           const shown = preparedLeafMayContribute(face.bounds, planes);
           if (shown === face.shown) continue;
           face.shown = shown;
+          if (shown && face.image) { face.node.style.backgroundImage = face.image; face.image = null; }
           face.node.style.visibility = shown ? '' : 'hidden';
         }
       }

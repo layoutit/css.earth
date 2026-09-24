@@ -5,7 +5,7 @@ export interface MarkerPresentation {
   ringColorShare?: number; ringOutlineOpacity?: number; ringOutlineOffset?: number;
   scale?: Partial<Omit<MarkerPresentation, "scale">>;
 }
-export interface PreparedNavigationMarker { url: string; url2x: string; url2xPixels?: number; presentation: MarkerPresentation; index: number; count: number; context?: { url: string; pixels?: number }; }
+export interface PreparedNavigationMarker { url2x: string; url2xPixels?: number; presentation: MarkerPresentation; index: number; count: number; context?: { url: string; pixels?: number }; }
 export interface ResolvedMarkerStyle {
   color?: string;
   size: number;

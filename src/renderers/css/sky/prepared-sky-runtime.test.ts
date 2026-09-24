@@ -135,12 +135,25 @@ test('the galaxy overview enables its depth layers and leaving it restores popul
 
 test('retains exactly six prepared images and changes only shared camera presentation during travel and rotation', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
-  const payload = fixture(), resolveResource = vi.fn((path: string) => `/prepared/${path}`);
+  // Face bounds as the prepared sky writes them: the face plane at 50 CSS pixels on its forward axis (CSS [y, x, z] of ICRF).
+  const payload: PreparedCssSky = { ...fixture(), faces: fixture().faces.map(face => {
+    const forward = [face.forwardIcrf[1], face.forwardIcrf[0], face.forwardIcrf[2]];
+    return { ...face, boundsCssPixels: { min: forward.map(value => value ? value * 50 : -50.6) as [number, number, number],
+      max: forward.map(value => value ? value * 50 : 50.6) as [number, number, number] } };
+  }) }, resolveResource = vi.fn((path: string) => `/prepared/${path}`);
+  const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11], widthPixels: 1280, heightPixels: 800 } as const;
   const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources, resolveResource });
   const root = runtime.root as unknown as FakeElement, camera = root.children[0]!.children[0]!, scene = camera.children[0]!, leaves = [...scene.children];
-  const count = document.count, styles = leaves.map(leaf => ({ ...leaf.style }));
+  const count = document.count;
   expect(leaves.map(leaf => leaf.dataset.skyFace)).toEqual(bases.map(([id]) => id));
+  // A face fetches nothing until it enters the view; the camera sees at most three of the six.
+  expect(leaves.map(leaf => [leaf.style.visibility, leaf.style.backgroundImage ?? ''])).toEqual(leaves.map(() => ['hidden', '']));
+  const url = (index: number) => `url("/prepared/${payload.faces[index]!.texturePath}")`;
   runtime.publish(world(), viewport); const initial = scene.style.transform;
+  const firstView = leaves.map(leaf => leaf.style.visibility !== 'hidden');
+  expect(firstView.filter(Boolean).length).toBeGreaterThan(0); expect(firstView.filter(Boolean).length).toBeLessThanOrEqual(3);
+  leaves.forEach((leaf, index) => expect(leaf.style.backgroundImage ?? '').toBe(firstView[index] ? url(index) : ''));
+  const styles = leaves.map(leaf => ({ ...leaf.style }));
   runtime.publish(world([1e25, -2e25, 3e25]), viewport); expect(scene.style.transform).toBe(initial);
   runtime.publish(world([0, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport); expect(scene.style.transform).not.toBe(initial);
   expect(camera.style.perspectiveOrigin).toBe('calc(50% + 17px) calc(50% + -11px)');
@@ -148,9 +161,12 @@ test('retains exactly six prepared images and changes only shared camera present
   for (const node of [camera, scene]) { expect(node.style.transformStyle).toBe('preserve-3d'); expect(node.style.opacity).toBeUndefined(); }
   runtime.publish(world(), viewport, false); expect(root.style.visibility).toBe('hidden');
   runtime.publish(world(), viewport); expect(scene.style.transform).toBe(initial);
-  expect(document.count).toBe(count); expect(scene.children).toEqual(leaves); expect(leaves.map(leaf => leaf.style)).toEqual(styles);
+  expect(document.count).toBe(count); expect(scene.children).toEqual(leaves);
+  // Back at the first view, the faces it shows are exactly as they were; a face the rotation revealed keeps its image.
+  leaves.forEach((leaf, index) => { if (firstView[index]) expect(leaf.style).toEqual(styles[index]); });
   expect(resolveResource).toHaveBeenCalledTimes(6);
-  leaves.forEach((leaf, index) => expect(leaf.style).toMatchObject({ ...payload.faces[index]!.style, backgroundImage: `url("/prepared/${payload.faces[index]!.texturePath}")` }));
+  leaves.forEach((leaf, index) => expect(leaf.style).toMatchObject(payload.faces[index]!.style));
+  expect(leaves.filter(leaf => leaf.style.backgroundImage).length).toBeGreaterThan(firstView.filter(Boolean).length);
   expect(() => runtime.publish({ ...world(), referenceFrame: 'different' }, viewport)).toThrow('reference frames');
   expect(() => runtime.publish({ ...world(), epochJdTt: 124 }, viewport)).toThrow('reference frames');
   runtime.destroy(); runtime.destroy(); runtime.publish(world(), viewport); expect(host.children).toEqual([before]);
@@ -220,7 +236,8 @@ test.each([
   const universe = createPreparedUniverse({ context, volume: data, pointAppearance: stars, resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`, sprites: {} });
   const skyAssets = universe.assets.entries.filter(entry => entry.key.includes(':sky/'));
   expect(skyAssets).toHaveLength(withSky ? 6 : 0);
-  for (const asset of skyAssets) expect(universe.assets.startup).toContain(asset.key);
+  // No sky face decodes at startup: each loads when it first enters the view.
+  expect(universe.assets.startup).toEqual([]);
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
   const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, stellarRoot = root.children.find(node => node.className === 'stellar-direct-points')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
   const volumeImage = volumeRoot.children.find(node => node.className === 'prepared-volume-image')!;
@@ -585,8 +602,8 @@ test("baked stars hand the background to the plain Milky Way beyond the Sun's ne
   const root = runtime.root as unknown as FakeElement;
   const [plain, stars] = root.children as [FakeElement, FakeElement];
   const leaves = (cube: FakeElement) => [...cube.children[0]!.children[0]!.children];
-  expect(leaves(plain).map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky/${id}.webp")`));
-  expect(leaves(stars).map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky-near/${id}.webp")`));
+  // No face of either cube carries an image before it enters the view.
+  expect([...leaves(plain), ...leaves(stars)].map(leaf => leaf.style.backgroundImage ?? '')).toEqual(Array(12).fill(''));
   const count = document.count;
   // Inside the Sun's neighbourhood the plain cube never enters layout, so its images never load.
   for (const distance of [1, 100 * 149597870700, 140.3 * 149597870700, 3.085677581491367e15]) {
@@ -595,6 +612,8 @@ test("baked stars hand the background to the plain Milky Way beyond the Sun's ne
     expect(stars.style.display ?? '').toBe('');
     expect(stars.style.opacity ?? '').toBe('');
     expect(root.style.visibility).toBe('visible');
+    // A star-cube face in view carries its image.
+    leaves(stars).forEach((leaf, index) => { if (leaf.style.visibility !== 'hidden') expect(leaf.style.backgroundImage).toBe(`url("/prepared/sky-near/${bases[index]![0]}.webp")`); });
   }
   runtime.publish(world([0, 0, 1e16]), viewport, true, .25);
   expect([plain.style.display, stars.style.display ?? '', stars.style.opacity]).toEqual(['', '', '0.25']);

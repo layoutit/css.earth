@@ -80,10 +80,17 @@ test('prepared point-field closes every source and image digest and samples the 
   const recipe = parseStarsRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
   const data = await payload();
   const manifest = JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8'));
-  assert.equal(manifest.data.provenance.catalogueMetadata.epoch, 'ICRS/J2000.0 equinox and coordinate epoch');
-  assert.match(manifest.data.provenance.reconciliation.sourceEpochDescription, /J1991.25/);
+  // The baked provenance is published beside the manifest the page loads, not inside it.
+  assert.equal(manifest.data.provenance, undefined);
+  const { provenance } = JSON.parse(await readFile(`${preparedDirectory}/stars-provenance.json`, 'utf8'));
+  assert.equal(provenance.catalogueMetadata.epoch, 'ICRS/J2000.0 equinox and coordinate epoch');
+  assert.match(provenance.reconciliation.sourceEpochDescription, /J1991.25/);
+  // Direct points carry float32 values in at most nine significant digits, not the seventeen of the double they widen to.
+  for (const point of manifest.data.directPoints.points) for (const value of [...point.positionUnits, point.absoluteMagnitude]) {
+    assert.ok(String(value).replace(/^-|e.*$|\./g, '').replace(/^0+/, '').length <= 9, `${value} carries more digits than a float32`);
+  }
   for (const reference of [recipe.catalogue,recipe.provenance,recipe.license,...(recipe.diffuseSky?.faces??[])]) await sourceBytes(sourceDirectory,reference);
-  assert.deepEqual(data.resources.map(resource=>resource.path),['point-atlas.png']); assert.equal(data.diffuseSky,undefined);
+  assert.deepEqual(data.resources.map(resource=>resource.path),['point-atlas.webp']); assert.equal(data.diffuseSky,undefined);
   for (const resource of data.resources) {
     const bytes = await sourceBytes(preparedDirectory,resource); assert.equal(bytes.length,resource.bytes);
     const metadata = await sharp(bytes).metadata(); assert.equal(metadata.width,resource.width); assert.equal(metadata.height,resource.height);

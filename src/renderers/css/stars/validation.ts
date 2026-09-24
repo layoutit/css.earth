@@ -11,8 +11,8 @@ const MAX_LEAF_STARS = 32;
 /** Validates the JSON manifest of one prepared point field; its rows arrive in the pinned bank. */
 export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssPointFieldManifest {
   const input = record(value, 'prepared CSS point field');
-  allowedKeys(input, ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'diffuseSky', 'directPoints', 'resources', 'provenance'], 'prepared CSS point field');
-  for (const key of ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'resources', 'provenance']) if (!(key in input)) {
+  allowedKeys(input, ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'diffuseSky', 'directPoints', 'resources'], 'prepared CSS point field');
+  for (const key of ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'resources']) if (!(key in input)) {
     throw new TypeError(`prepared CSS point field is missing ${key}.`);
   }
   if (input.schema !== 'cssearth-css-point-field-bank@1' || typeof input.id !== 'string' || !IDENTIFIER.test(input.id)) {
@@ -33,16 +33,16 @@ export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssP
   const policy = parsePolicy(input.policy);
   const labels = parseLabels(input.labels);
   return Object.freeze({ schema: 'cssearth-css-point-field-bank@1', id: input.id, frame, bank, atlas,
-    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), ...(directPoints === undefined ? {} : { directPoints }), resources, provenance: input.provenance });
+    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), ...(directPoints === undefined ? {} : { directPoints }), resources });
 }
 
 /** Decodes verified bank bytes into the immutable point field that selection and rendering consume. */
 export function decodePreparedCssPointField(manifest: PreparedCssPointFieldManifest, bytes: ArrayBuffer | Uint8Array): PreparedCssPointField {
   const { stars, nodes } = decodePointFieldBank(bytes, manifest.bank, { frame: manifest.frame, colorCount: manifest.atlas.colors.length });
   validateHierarchy(nodes, stars.length);
-  const { id, frame, atlas, photometry, policy, labels, diffuseSky, directPoints, resources, provenance } = manifest;
+  const { id, frame, atlas, photometry, policy, labels, diffuseSky, directPoints, resources } = manifest;
   return Object.freeze({ schema: 'cssearth-css-point-field@1', id, frame, stars, nodes, atlas,
-    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), ...(directPoints === undefined ? {} : { directPoints }), resources, provenance });
+    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), ...(directPoints === undefined ? {} : { directPoints }), resources });
 }
 
 function parseDirectPoints(value: unknown, bank: PreparedPointFieldBank, colorCount: number): PreparedDirectStarField | undefined {
