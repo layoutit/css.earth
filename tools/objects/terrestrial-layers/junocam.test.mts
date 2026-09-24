@@ -4,10 +4,10 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseTextKernel, numbers } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds, utcToEt } from '../../spice/lsk.mts';
+import { bankKernelPath } from '../../spice/kernel-bank.mts';
 import { FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FILTERS, decodeJunocam, frameEpoch, frameletIndex, junocamPixelMapping, junocamStrip, readJunocamLabel } from './junocam.mts';
 
-const bank = new URL('../../../src/spice/juno/', import.meta.url);
-const kernel = async (path: string) => readFile(new URL(path, bank), 'latin1');
+const kernel = async (path: string) => readFile(await bankKernelPath('juno', path), 'latin1');
 const pool = parseTextKernel(await kernel('ik/juno_junocam_v03.ti'), 'juno_junocam_v03.ti');
 const leapSeconds = parseLeapSeconds(parseTextKernel(await kernel('lsk/naif0012.tls'), 'naif0012.tls'));
 

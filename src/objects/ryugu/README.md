@@ -108,6 +108,6 @@ Included: the JAXA ONC v06 corrected v-band map, the controlled global ONC color
 - [Mapping release](https://doi.org/10.7910/DVN/WW3IH0)
 - [Shape](https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds)
 - [Mission facts](https://global.jaxa.jp/projects/sas/hayabusa2/index.html)
-- Pole and spin: source/reference/ryugu_v10.tpc
+- Pole and spin: [ryugu_v10.tpc](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/hyb2/hyb2_spice/spice_kernels/pck/ryugu_v10.tpc)
 
 </details>

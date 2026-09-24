@@ -86,22 +86,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "science/ro_virtis_map_eaicd.asc",
-      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/document/ro_virtis_map_eaicd.asc"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "science/shap5-info.asc",
-      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "science/cg_spc_shap5_097k_cart.lbl",
       "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_LAM_PSI/SHAP5/CG_SPC_SHAP5_097K_CART.LBL"
     },

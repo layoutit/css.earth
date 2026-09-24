@@ -169,8 +169,9 @@ Keeping every temporary response is unnecessary.
 ### References and retained files
 
 Use citations for papers, catalogue pages, search results and explanatory webpages.
-A body never pins a paper or archive document, and never copies a table a shared bank in `src/references` or
-`src/spice` holds; `pnpm check:body-references` fails either in CI.
+A body never pins a paper or archive document, and never copies a table the shared bank in `src/references` holds.
+SPICE kernels are never committed: a kernel bank in `src/spice` or a body's acquisition step restores each one from
+its origin. `pnpm check:body-references` fails any of these in CI.
 In the body README, record the values that support a claim, their units and
 uncertainty, the source title and authors/year, DOI or versioned URL, and the
 specific table, field or section. Explain any transcription, selection or conversion.

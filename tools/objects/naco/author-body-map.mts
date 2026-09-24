@@ -18,9 +18,10 @@ import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '..
 import { fileSize, productRecordPath, readProductRecord, sameRun, type ProductInput, type ProductSoftware } from '../product-record.mts';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { horizonsTables } from '../sphere-horizons.mts';
-import { horizonsRows, LEAP_SECONDS_KERNEL, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
+import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
 import { esoHeader, type EsoHeader } from '../interferometry/eso-pipeline.mts';
 import { readProgram } from './archive.mts';
+import { bankKernelPath } from '../../spice/kernel-bank.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
 const PCK = 'src/spice/cassini/pck/pck00011.tpc';
@@ -128,7 +129,7 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
 
   const radiusPixels = radiusKm / (rangeAu! * AU_KM) * ARCSEC_PER_RADIAN / registration.arcsecPerPixel,
     crop = cropAroundBrightest(reduced.values, reduced.width, reduced.height, radiusPixels), normalised = relativeIntensity(crop, radiusPixels);
-  const pckBytes = await readFile(resolve(REPOSITORY, PCK)), leapBytes = await readFile(resolve(REPOSITORY, LEAP_SECONDS_KERNEL)),
+  const pckBytes = await readFile(await bankKernelPath('cassini', 'pck/pck00011.tpc')), leapBytes = await readFile(await leapSecondsKernel(REPOSITORY)),
     orientation = await loadOrientation(REPOSITORY, { kind: 'iau-pck', path: PCK, body: bodyCode } as never, REPOSITORY);
   const placed = placeResolvedDisc({ plane: { width: crop.width, height: crop.height, values: normalised.values, uncertainty: normalised.uncertainty, arcsecPerPixel: registration.arcsecPerPixel },
     identity: { id: `${programId}:${template}`, telescope: 'VLT/NACO', instrument: `NAOS+CONICA ${String(productHeader['ESO INS OPTI6 NAME'])}`,

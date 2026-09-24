@@ -6,5 +6,5 @@
   "spinDegreesPerDay": -1864.628007,
   "referenceEpochJdTt": 2451545,
   "coordinateSystem": "Thomas 243 Ida shape frame; planetocentric latitude, east longitude; retrograde rotation",
-  "source": "reference/243ida.xml; reference/pck00007.tpc (prime-meridian sign)"
+  "source": "reference/243ida.xml; https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/pck/pck00007.tpc (prime-meridian sign)"
 }

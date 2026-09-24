@@ -79,7 +79,7 @@ Each color frame is the original 1,000×1,000 signed HALF GEOMED product. FICOR7
 
 Independent sky samples are retained in `source/geometry/color-background.json`: medians −0.0017, −0.0011 and −0.0037 I/F for violet, blue and green, respectively. Subtract each measured offset, use its own three-MAD-sigma sky threshold, and require all three band masks and complete bilinear contributors to be valid. A common display range of 0–0.10 I/F maps floating samples to linear display channels, followed by the [shared IEC sRGB output transfer](../../../docs/color-preparation.md). This display follows bounded lunar-Lambert normalization (weight 0.5, gain at most 2.5, incidence/emission at most 60°). Channel gains remain exactly 1; this does not white-balance, histogram-match or pan-sharpen the observations.
 
-The reproducible source check is `python source/preparation/register-voyager-color.py source` from this package with numpy, spiceypy and Node available. It verifies source hashes and compares the retained registration receipt without changing images. `--write` regenerates only that receipt; the source manifest must then be repinned deliberately.
+The reproducible source check is `python source/preparation/register-voyager-color.py source` from this package, after `node tools/assets/restore-source-inputs.mts --object=proteus` restores its SPICE kernels, with numpy, spiceypy and Node available. It verifies source hashes and compares the retained registration receipt without changing images. `--write` regenerates only that receipt; the source manifest must then be repinned deliberately.
 
 ## Sources and restoration
 
