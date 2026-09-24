@@ -1,4 +1,4 @@
-import { record } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 let sequence = 0;
 
 /** Named User Timing entries for DevTools traces; retain only the latest of each phase. */
@@ -13,7 +13,7 @@ export function createNavigationTiming(windowTarget: Window, from: string, to: s
     if (seen.has(phase) || SETTLED_PHASES.some(settled => seen.has(settled))) return;
     seen.add(phase);
     const name = `cssEarth:navigation:${phase}`, detail: { id: number; from: string; to: string; phase: string; recordingId?: string } = { id, from, to, phase };
-    const recordingId = ('__cssEarthRecorder' in windowTarget && record(windowTarget.__cssEarthRecorder) && typeof windowTarget.__cssEarthRecorder.id === 'string') ? windowTarget.__cssEarthRecorder.id : undefined;
+    const recordingId = ('__cssEarthRecorder' in windowTarget && isRecord(windowTarget.__cssEarthRecorder) && typeof windowTarget.__cssEarthRecorder.id === 'string') ? windowTarget.__cssEarthRecorder.id : undefined;
     if (recordingId) detail.recordingId = recordingId;
     clock.clearMarks(name);
     clock.mark(name, { detail });

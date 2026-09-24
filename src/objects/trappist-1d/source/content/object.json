@@ -78,6 +78,21 @@
         },
         "falseColor": false,
         "notes": "No image or colour of TRAPPIST-1d exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit. The gray takes the colour of trappist-1's light, as its colour lens measures it."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "NASA's artist's concept of TRAPPIST-1d, from Eyes on Exoplanets; not an observation.",
+        "thumbnail": "trappist-1d-lens-illustration.webp",
+        "surface": "trappist-1d-surface-illustration@2x.webp",
+        "poles": "trappist-1d-poles-illustration@2x.webp",
+        "source": {
+          "id": "trappist-1d-nasa-eyes-illustration",
+          "path": "../manifest.json",
+          "url": "https://eyes.nasa.gov/apps/exo/"
+        },
+        "falseColor": false,
+        "notes": "NASA's artist's concept of TRAPPIST-1d: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
       }
     ]
   },

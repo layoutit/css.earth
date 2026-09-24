@@ -1,5 +1,4 @@
-import {array,dictionary,number,nullable,optional,shape,text} from '../../../tools/objects/terrestrial-layers/source-records.mts';
-import {requireRecord} from '../../../tools/sources/source-values.mts';
+import {array,dictionary,number,nullable,optional,shape,text,requireRecord} from '@cssearth/core';
 export const textureLayer=shape({schema:text,rasterScale:number,frameMatrix:text,textureMatrix:text});
 export const preparedLeaf=shape({tag:text,className:optional(text),style:text,projectiveTextureLayer:optional(textureLayer),
   leafWidth:optional(number),leafHeight:optional(number),latitudeIndex:optional(number),longitudeIndex:optional(nullable(number)),

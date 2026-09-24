@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '../../observation/fits.mts';
 import { readDaf } from '../../../spice/daf.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readPinnedFile } from '../../../spice/kernel-bank.mts';
 
 const input = resolve('src/objects/dactyl/evidence/galileo');

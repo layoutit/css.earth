@@ -25,7 +25,8 @@ import { cross3 as cross } from '../../src/platform/vector3.mts';
 // cssEarth builds this combined module locally; it is not committed.
 
 import type { BodyId, SceneSatelliteRecord, RotationElements } from "@cssearth/astronomy";
-import { requireArray, requireRecord, requireString, readJsonSource } from "../sources/source-values.mts";
+import { readJsonSource } from "../sources/source-values.mts";
+import { requireArray, requireRecord, requireString } from "@cssearth/core";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { SCENE_OBJECTS } from "../../site/objects.mts";

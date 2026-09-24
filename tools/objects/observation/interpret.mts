@@ -6,13 +6,15 @@ import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '.
 // RGB(A) pixels at the requested density plus the `nearest` flag the packer needs.
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
+import sharp from 'sharp';
+import { readRgba } from '../../../src/preparation/raster/io.ts';
 import type { ObservationInterpretation, InterpretedSurface } from '../../../src/preparation/raster/index.js';
 import type { RasterRecipe } from '../../../src/preparation/raster/index.js';
 import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-synoptic.mts';
-import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '../material-composition/data-schema.mts';
+import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
 import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-mesh.mts';
 import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
@@ -28,7 +30,6 @@ import { prepareControlledOrthographicMosaic } from '../terrestrial-layers/contr
 import { loadControlledObservationGeometry, matchObservedColorLevels } from '../terrestrial-layers/photometric-observations.mts';
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry } from '../terrestrial-layers/solid-source.mts';
-import { shape, text } from '../terrestrial-layers/source-records.mts';
 import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
@@ -405,6 +406,16 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (model !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.model must equal the surface source.`);
         const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, model), width, height);
         return { data: pixels, channels: 4, nearest: false };
+      }
+      case 'equirectangular-illustration': {
+        // An illustration: a published artist's global map, resized unchanged onto the sphere. Its left edge is the map's own 0°
+        // column, so longitudes are arbitrary. Nothing here is observed; the lens is listed in the object's illustration lenses.
+        await (await manifest).validatePath(surface.source);
+        const path = resolve(sourceDirectory, surface.source), { width: sourceWidth = 0, height: sourceHeight = 0 } = await sharp(path).metadata();
+        if (sourceWidth !== sourceHeight * 2) throw new RangeError(`${objectId}/${surface.id}: ${surface.source} is ${sourceWidth} × ${sourceHeight}, not a 2:1 equirectangular map.`);
+        const data = await readRgba(path, width, height, true);
+        if (recipe.emission) return { data, channels: 4, nearest: false, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) };
+        return { data, channels: 4, nearest: false };
       }
       case 'neutral-shape': {
         // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.

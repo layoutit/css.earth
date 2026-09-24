@@ -24,9 +24,11 @@ function RUNTIME_ASSET_ORIGIN_FIXTURE(): string {
 
 test('the published world summary and system views must describe the same systems', async () => {
   const root = resolve(import.meta.dirname, '../..'), prepared = resolve(root, 'src/objects/sun/prepared');
-  const summary = await readFile(resolve(prepared, 'world-context-summary.json'), 'utf8'), views = JSON.parse(await readFile(resolve(prepared, 'world-system-views.json'), 'utf8'));
-  const read = (viewsText: string) => async (url: string) => url.endsWith('/world-context-summary.json') ? summary : viewsText;
-  assert.ok(await checkPublishedWorldPair(root, read(JSON.stringify(views))) > 0);
-  const [dropped] = Object.keys(views.views); delete views.views[dropped];
-  await assert.rejects(checkPublishedWorldPair(root, read(JSON.stringify(views))), /published world summary and system views disagree/);
+  const summary = await readFile(resolve(prepared, 'world-context-summary.json'), 'utf8');
+  const view = async (url: string) => readFile(resolve(prepared, 'system-views', url.split('/').at(-1)!), 'utf8');
+  const read = (alter?: (id: string, text: string) => string) => async (url: string) => url.endsWith('/world-context-summary.json') ? summary
+    : (alter ?? ((_id, text) => text))(url.split('/').at(-1)!.replace(/\.json$/u, ''), await view(url));
+  assert.ok(await checkPublishedWorldPair(root, read()) > 0);
+  // A view for another system than its file names is caught.
+  await assert.rejects(checkPublishedWorldPair(root, read((id, text) => id === 'trappist-1' ? text.replace('"id":"trappist-1"', '"id":"sun"') : text)), /published world summary and system views disagree/);
 });

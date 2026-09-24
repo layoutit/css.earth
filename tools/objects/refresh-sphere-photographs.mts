@@ -14,7 +14,7 @@ import { applyNativeSurfaceExposure, loadNativeSourcePoleSampler } from '../../s
 import { loadNativeObservationPoleSampler, parseObservationLens } from './observation/raster.mts';
 import { loadNativePhotograph } from './terrestrial-layers/native-photograph-source.mts';
 import { parseSolidObservation } from './terrestrial-layers/solid-source.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 type RecordValue = Record<string, unknown>;
 type Fingerprint = {bytes:number; sha256:string};

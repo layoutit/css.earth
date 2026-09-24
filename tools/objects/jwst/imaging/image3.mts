@@ -23,7 +23,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../../src/platform/sha256.mts';
 import { readFitsFileHdus } from '../../../fits/fits.mts';
-import { requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 import { addProductEvidence, productRecordPath, readProductRecord, sameRun, writeProductRecord,
   type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '../../product-record.mts';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';

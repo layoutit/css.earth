@@ -1,7 +1,7 @@
 /** Live ASCL software discovery. A catalog match is a citation lead, never evidence that code ran. */
 import { readFile } from 'node:fs/promises';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 import { verifiedProduct } from './verified-product.mts';
 import { delivery } from './outputs.mts';
 import { recordedSourceProcessing } from './source-product-contract.mts';

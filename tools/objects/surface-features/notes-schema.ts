@@ -1,4 +1,4 @@
-import { isRecord } from '../../../src/platform/records.mts';
+import { isRecord } from '@cssearth/core';
 const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { if (!isRecord(value)) throw new TypeError(`${label} must be an object.`); return value; };
 const requireArray = (value: unknown, label = 'Source value'): unknown[] => { if (!Array.isArray(value)) throw new TypeError(`${label} must be an array.`); return value; };
 const requireString = (value: unknown, label = 'Source value'): string => { if (typeof value !== 'string') throw new TypeError(`${label} must be a string.`); return value; };

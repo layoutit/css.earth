@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
-import { shape, text, number, array, optional, dictionary, parseTransform } from './source-records.mts';
+import { parseTransform } from './source-records.mts';
+import { shape, text, number, array, optional, dictionary } from '@cssearth/core';
 
 const plane = shape({ extension: number, name: text, units: text });
 const profile = shape({

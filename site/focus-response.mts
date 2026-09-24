@@ -5,7 +5,8 @@ import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSel
 import type { PreparedWorldCameraFrame, SharedView } from '../src/renderers/css/dist/navigation.js';
 import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { initialFocusCatalog, loadFocusCatalogs } from './focus-catalog.mts';
-import { record, requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from './focus-fragment.mts';
 import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
@@ -34,7 +35,7 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   let presentation: PreparedFocusPresentation | undefined;
   if (bank) {
     const input: unknown = JSON.parse(requiredElement(bank, 'script[data-focus-resources]').textContent ?? '');
-    if (!record(input) || !record(input.resources)) throw new TypeError('Prepared focus resources are missing.');
+    if (!isRecord(input) || !isRecord(input.resources)) throw new TypeError('Prepared focus resources are missing.');
     const descriptor = parseObjectDescriptor(input.descriptor), resources = input.resources;
     if (descriptor.id !== objectId) throw new TypeError('Prepared focus resource identity differs.');
     // Image-layer galaxies such as M31 are already drawn by the world context; only volume banks mount focus lenses.

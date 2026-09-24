@@ -2,7 +2,7 @@ import { copyFile, lstat, mkdir, readFile, writeFile, rename, rm } from 'node:fs
 import { constants } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
-import { hasErrorCode } from '../sources/source-values.mts';
+import { hasErrorCode } from '@cssearth/core';
 export type PreparedOutput = { path: string } & ({ text: string | Uint8Array } | { source: string } | { remove: true });
 /** Stage the entire set before replacing files. Callers validate content and own
  * concurrency. Backups live on disk, so large images are not all retained in RAM.

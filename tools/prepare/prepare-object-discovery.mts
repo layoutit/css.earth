@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
-import { hasErrorCode, isRecord } from '../sources/source-values.mts';
+import { hasErrorCode, isRecord } from '@cssearth/core';
 import type { ObjectDiscovery } from '../../site/object-discovery.mts';
 import { parseArrivalView } from '../../site/arrival-view.mts';
 import { preparedDefaultViewRotation } from '../../src/renderers/css/dist/navigation.js';

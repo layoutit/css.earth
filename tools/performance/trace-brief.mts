@@ -6,7 +6,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { SourceMapConsumer } from 'source-map-js';
 import type { RawSourceMap } from 'source-map-js';
 import sharp from 'sharp';
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 import type { CompleteEvent, JsonRecord, OriginalLocation, TimelineFrame, TraceEvent, TraceLocation, TraceSelection, TraceWindow } from './trace-model.mts';
 import { arrayOf, errorCode, errorMessage, hasDuration, isFiniteNumber, isTraceEvent, present, recordOf } from './trace-model.mts';
 import type { CorrelatedEvidence, EvidenceInput, EvidenceTask, LocationSources } from './trace-evidence.mts';

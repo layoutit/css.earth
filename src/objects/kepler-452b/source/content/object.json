@@ -52,6 +52,21 @@
         },
         "falseColor": false,
         "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit. Its reality as a planet is disputed: Mullally et al. (2018) and Burke et al. (2019) find it cannot be statistically validated; Robnik & Seljak (2025) support its validation. The gray takes the colour of kepler-452's light, as its colour lens measures it."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "NASA's artist's concept of Kepler-452 b, from Eyes on Exoplanets; not an observation.",
+        "thumbnail": "kepler-452b-lens-illustration.webp",
+        "surface": "kepler-452b-surface-illustration@2x.webp",
+        "poles": "kepler-452b-poles-illustration@2x.webp",
+        "source": {
+          "id": "kepler-452b-nasa-eyes-illustration",
+          "path": "../manifest.json",
+          "url": "https://eyes.nasa.gov/apps/exo/"
+        },
+        "falseColor": false,
+        "notes": "NASA's artist's concept of Kepler-452 b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
       }
     ]
   },

@@ -4,7 +4,8 @@ import { selectSceneFeature } from './scene-feature.mts';
 import { createScenePublication } from './scene-publication.mts';
 import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
 import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
-import { errorMessage, record } from '../browser-types.mts';
+import { errorMessage } from '../browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
@@ -35,7 +36,8 @@ type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
 interface RouterContext {
   registry: Registry;
-  objects: readonly ObjectEntry[];
+  /** Every body of the world, with its system and frame origin, from the world summary. */
+  objects: Registry['WORLD_OBJECTS'];
   navigation: Navigation;
   selection: ReturnType<typeof createSceneSelection>;
   activation: ReturnType<typeof createSceneActivation>;
@@ -76,6 +78,8 @@ export function createSceneRouter({
   let hasPresented = false;
   const initialScene = retainInitialScene(stage);
   let destroyed = false;
+  // Whether a link flies in place; set once the router's modules have loaded (`ensureContext`).
+  let navigable = (_id: string) => false;
   let shellOwner: { shell: ObjectShell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
   let centeredObjectId: string | null = null;
   // The registry and what the router builds from it (navigation, selection, activation, history and the shell) arrive
@@ -183,7 +187,7 @@ export function createSceneRouter({
         // The body comes first: on a cold page the world's layers (sky, stars, volume, markers) load after the
         // detail mounts and connect to it. Only an arrival the world owns, a focus or overview, waits for them.
         if (replacement || worldOwnsArrival()) {
-          const contextual = await session.wait(Promise.all([world.ensure(), ready.registry.loadSystemViews()]));
+          const contextual = await session.wait(Promise.all([world.ensure(), ready.registry.loadSystemView(objectId)]));
           if (contextual.cancelled || !scenes.isCurrent(session)) return;
         }
       }
@@ -212,9 +216,9 @@ export function createSceneRouter({
         if (!scenes.isCurrent(session)) return;
         publication.publish();
       }
-      const { registry: { loadSystemViews, systemViewsLoaded }, activation } = ready;
-      // The world and system views load once the body is ready, so its textures have the connection to themselves.
-      if (!systemViewsLoaded()) void loadSystemViews().catch(report);
+      const { registry: { loadSystemView, systemViewLoaded }, activation } = ready;
+      // The world and this system's view load once the body is ready, so its textures have the connection to themselves.
+      if (!systemViewLoaded(objectId)) void loadSystemView(objectId).catch(report);
       if (world.current) world.connect(session);
       else void world.ensure().then(() => {
         if (scenes.isCurrent(session)) { world.connect(session); publishSelection(); }
@@ -249,7 +253,7 @@ export function createSceneRouter({
     }
   }
 
-  /** Load the registry once and build what the router reads from it. */
+  /** Load the router's modules and this page's object entry once, and build what the router reads from them. */
   function ensureContext(): Promise<RouterContext> {
     if (!contextTask && documentTarget.head) {
       // Its modules fetch the summary only once they have downloaded; start it alongside them.
@@ -257,9 +261,11 @@ export function createSceneRouter({
       hint.rel = 'preload'; hint.as = 'fetch'; hint.crossOrigin = 'anonymous'; hint.href = worldSummaryUrl;
       documentTarget.head.append(hint);
     }
-    return contextTask ??= import('./scene-registry.mts').then(registry => {
-      const objects = registry.SCENE_OBJECTS;
-      const navigation = registry.createPreparedWorldNavigation({ objects, motion: cameraMotion });
+    return contextTask ??= import('./scene-registry.mts').then(async registry => {
+      // The page's own object enters the live directory the navigation reads; other objects join as the page navigates.
+      if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
+      const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
+      const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion });
       const selection = registry.createSceneSelection({ objectId,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
         initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
@@ -267,14 +273,14 @@ export function createSceneRouter({
       if (windowTarget.location?.href && !destroyed) {
         // Only a settled scene belongs to the entry that history names. An unfinished navigation
         // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
-        historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
-        unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
-          supports: id => navigation.supports(objectId, id), navigate, onError: report });
+        historyOwner = createNavigationHistory({ windowTarget, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
+        // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
+        unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
+      navigable = id => worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       return context = { registry, objects, navigation, selection, activation };
     });
   }
-
   function attachShell(session: Session, { registry, selection: current }: RouterContext, replacement?: SceneReplacement) {
     if (!shellOwner) {
       const owner: { shell: ObjectShell | null } = { shell: null };
@@ -282,6 +288,9 @@ export function createSceneRouter({
       owner.shell = registry.mountObjectShell({ objectId, readSelection: () => current.current, documentTarget, windowTarget,
         preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
         onResetDestination: () => { void navigate(objectId, { kind: 'feature', id: null }).catch(report); },
+        navigable: id => navigable(id),
+        // A failed prefetch is not an error yet: the navigation that needs it asks again and reports.
+        prefetch: id => { void registry.loadObject(id).catch(() => {}); void registry.loadSystemView(id).catch(() => {}); },
       });
     }
     const shell = shellOwner.shell!;
@@ -297,12 +306,13 @@ export function createSceneRouter({
   function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
     if (destroyed) return Promise.resolve(false);
     if (!context) return ensureContext().then(() => navigate(id, intent));
-    const { registry: { loadSystemViews, systemViewsLoaded, resolveNavigation }, navigation: routes, selection: current, objects } = context;
-    // System framing reads its prepared candidates; they load after the first body, so a very early click waits for them.
-    if (intent.kind !== 'feature' && !systemViewsLoaded()) return loadSystemViews().then(() => navigate(id, intent));
+    const { registry: { loadSystemView, systemViewLoaded, resolveNavigation, knownObject, loadObject: loadEntry }, navigation: routes, selection: current, objects } = context;
     if (intent.kind === 'focus' && scenes.current) id = objectId;
+    // The target's entry and, for system framing, its prepared candidates load when a navigation first names them.
+    if (!knownObject(id)) return loadEntry(id).then(loaded => loaded ? navigate(id, intent) : false);
+    if (intent.kind !== 'feature' && !systemViewLoaded(id)) return loadSystemView(id).then(() => navigate(id, intent));
     if (!routes.supports(objectId, id)) return Promise.resolve(false);
-    const object = objects.find(object => object.id === id);
+    const object = context.registry.SCENE_OBJECTS.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
     const source = scenes.current;
     const resolved = resolveNavigation(intent, { object, objects, navigation: routes, current: {
@@ -357,7 +367,7 @@ export function createSceneRouter({
       requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
       return result === true;
     } catch (error) {
-      const interruptedSelection = objectId === object.id && request.origin === 'selection' && record(error) &&
+      const interruptedSelection = objectId === object.id && request.origin === 'selection' && isRecord(error) &&
         error.name === 'AbortError' && error.preserveView === true;
       if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
@@ -385,7 +395,7 @@ export function createSceneRouter({
         }
         await view.arrive(source, { interrupted: true });
         source.viewUrl?.flush(); syncPlayback();
-        if (!record(error) || error.preserveView !== true) report(error);
+        if (!isRecord(error) || error.preserveView !== true) report(error);
       }
       else if (scenes.current) fail(scenes.current, error);
       else report(error);
@@ -393,8 +403,8 @@ export function createSceneRouter({
     }
   }
 
-  function selectFeature({ objects }: RouterContext, session: Session, request: NavigationRequest) {
-    return selectSceneFeature(session, request, objects.find(object => object.id === session.objectId)?.name ?? session.objectId);
+  function selectFeature({ registry }: RouterContext, session: Session, request: NavigationRequest) {
+    return selectSceneFeature(session, request, registry.knownObject(session.objectId)?.name ?? session.objectId);
   }
 
   function finishArrival(ready: RouterContext, session: Session, request?: NavigationRequest, interrupted = false) {
@@ -493,7 +503,7 @@ export function createSceneRouter({
     const owner = session.mount?.navigation;
     if (!owner) return;
     const { selection: current, objects, registry } = ready;
-    session.own(registry.watchOverviewSelection({ navigation: owner, objects, objectId,
+    session.own(registry.watchOverviewSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
       getOverview: () => current.context.kind === 'overview',
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.

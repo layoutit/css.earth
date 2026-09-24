@@ -61,3 +61,5 @@ export function systemById(objects: Parameters<typeof planetarySystems>[0], syst
   return systemsOf(objects).find(system => system.id === systemId) ?? null;
 }
 export const allPlanetarySystems = systemsOf;
+/** The objects systems are built from: the world's bodies (`world-objects.mts`) or the registry. */
+export type SystemObjects = Parameters<typeof planetarySystems>[0];

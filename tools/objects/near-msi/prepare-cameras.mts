@@ -1,7 +1,7 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
+import { array, number, shape, text } from '@cssearth/core';
 import { mathildeImageCamera, decodeNearMsi } from '../terrestrial-layers/near-msi.mts';
 import { pds4Field } from '../pds-labels.mts';
 

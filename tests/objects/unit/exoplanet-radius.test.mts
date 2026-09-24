@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../../site/objects.mts';
-import { readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../tools/sources/source-values.mts';
+import { readJsonSource } from '../../../tools/sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { sourceTest } from '../source-test.mts';
 import { projectRoot } from '../fixtures.mts';
 import { selectedObjectIds } from './anchor-table.mts';

@@ -31,6 +31,11 @@
               "id": "infrared",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
@@ -99,6 +104,9 @@
       }
     },
     "catalog": {
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "GJ 504 b",
       "classification": "exoplanet",
       "color": "#9a9a9a",

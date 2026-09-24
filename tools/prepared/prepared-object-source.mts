@@ -5,7 +5,7 @@ import type { Node, FunctionDeclaration } from 'estree';
 import { parseRuntimeSource } from '../ci/runtime-source-graph.mts';
 import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';
 import { nodeName, propertyKey, staticObjectProperties } from '../ci/runtime-ast.mts';
-import { isRecord, requireRecord, requireArray, requireString } from '../sources/source-values.mts';
+import { isRecord, requireRecord, requireArray, requireString } from '@cssearth/core';
 import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.mts';
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../../src/platform/prepared-schema.mts';
 import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';

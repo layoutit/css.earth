@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 import { Agent, fetch as undiciFetch } from "undici";
 import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN, type RuntimeAssetLocation } from "./runtime-assets.mts";
-import { isRecord } from "../sources/source-values.mts";
+import { isRecord } from "@cssearth/core";
 
 const execFileAsync = promisify(execFile);
 const defaultRoot = resolve(import.meta.dirname, "../..");

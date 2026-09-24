@@ -1,6 +1,7 @@
 import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
-import { csv, descriptor, finite, stable } from './common.mts';
+import { csv, descriptor, stable } from './common.mts';
+import { requireFiniteNumber as finite } from '@cssearth/core';
 import{ plotNumericPreview ,type FigureOptions}from'../../astronomy-packages/plots.mts';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

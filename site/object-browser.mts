@@ -9,7 +9,7 @@ import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, createSearchPresentation } from './search-results-presentation.mts';
 import { createNavigationTreeController } from './navigation/navigation-tree-client.mts';
-import { SCENE_OBJECTS } from './objects.mts';
+import { WORLD_OBJECTS } from './world-objects.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 
 export interface ObjectBrowserOptions {
@@ -333,7 +333,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       // its query and results until the user chooses or dismisses them.
       subjectOverride = null;
       presentation.bindObject();
-      const object = SCENE_OBJECTS.find(object => object.id === id);
+      const object = WORLD_OBJECTS.find(object => object.id === id);
       if (object) {
         searchCard.setAttribute('action', object.route);
         searchCard.dataset.searchObject = object.id;

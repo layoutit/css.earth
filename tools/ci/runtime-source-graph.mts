@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { parseAst } from 'vite';
 import { parseForESLint } from '@typescript-eslint/parser';
 import type { Node, Program } from 'estree';
-import { hasErrorCode, isRecord, requireRecord } from '../sources/source-values.mts';
+import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 export type RuntimeSourceReader = (path: string) => string | Promise<string>;
 

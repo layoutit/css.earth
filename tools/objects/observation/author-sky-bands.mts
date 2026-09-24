@@ -8,7 +8,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { acquireMastProduct, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from './wise-atlas-mosaic.mts';

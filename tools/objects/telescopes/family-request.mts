@@ -4,7 +4,7 @@ import type { ConstraintAnswer, ConstraintVerdict } from './query.mts';
 import type { AxisDescriptor, DepthDescriptor, FamilyId, InferenceDescriptor, ObservabilityDescriptor, ProductComponent, ProductDescriptor, ResolutionDescriptor, SupportClass } from './product-descriptor.mts';
 import { parseProductDescriptor } from './product-descriptor.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
-import { requireArray, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber } from '@cssearth/core';
 
 export type FamilyCriterionName='target'|'family'|'quantity'|'time'|'spectral'|'spatial'|'table'|'polarization'|'visibility'|'support'|'depth'|'observability'|'resolution'|'inference';
 export interface FamilyCriteria {

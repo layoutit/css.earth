@@ -2,7 +2,7 @@
 import { access, mkdir, rm, stat, symlink, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString, hasErrorCode } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
 export { ArchiveTransportError } from './client.mts';
 import { astroquery } from './client.mts';
 

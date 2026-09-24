@@ -1,4 +1,4 @@
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { matchesObjectClassification } from './object-categories.mts';
 import { parseArrivalView, type PreparedArrivalView } from './arrival-view.mts';
 
@@ -9,7 +9,7 @@ export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustra
   sourceColor?: true; }
 
 export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> {
-  if (!record(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival', 'orientationReference', 'hostsImagery', 'sourceColor'].includes(key)) ||
+  if (!isRecord(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival', 'orientationReference', 'hostsImagery', 'sourceColor'].includes(key)) ||
       typeof value.featured !== 'boolean' || typeof value.imagery !== 'boolean' || typeof value.illustration !== 'boolean' ||
       value.illustration && (value.imagery || value.featured)) throw new TypeError('Invalid prepared object discovery.');
   if (value.arrival !== undefined && !value.imagery) throw new TypeError('A photographic arrival requires imagery.');

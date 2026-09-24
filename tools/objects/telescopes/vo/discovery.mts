@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
 import { mastService, type MastServiceRequest, type MastServiceResult } from '../../astronomy-packages/mast.mts';
 import type { ProductKind } from '../recipe-request.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { canonical, digest, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from './contracts.mts';
 import { sha256File } from '../../../../src/platform/sha256.mts';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRecord, requireString } from '../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 
 export async function readToolchainDescriptor(directory: string) {
   const text = await readFile(resolve(directory, 'toolchain.json'), 'utf8');

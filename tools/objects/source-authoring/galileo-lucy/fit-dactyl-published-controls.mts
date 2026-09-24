@@ -4,7 +4,7 @@ import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {controlledShapeCamera, decodeCalibratedCamera} from '../../terrestrial-layers/shape-camera-mosaic.mts';
 import {parseTextKernel, number as kernelNumber, numbers as kernelNumbers} from '../../../spice/text-kernel.mts';
-import {requireRecord, requireArray, requireFiniteNumber, requireString} from '../../../sources/source-values.mts';
+import {requireRecord, requireArray, requireFiniteNumber, requireString} from '@cssearth/core';
 
 type Pixel = [number, number];
 type Vector = [number, number, number];
@@ -150,7 +150,7 @@ for(const px of [-1,1])for(const py of [-1,1])for(const ax of [-1,1])for(const a
   sensitivity.push({polePixel:pp,acmonPixel:ap,fit:improve(baseline.pose,1,pp,ap)});
 }
 const alignmentPoleSpan=Math.max(...alignment.map(a=>a.poleDetectorPixel?Math.hypot(a.poleDetectorPixel[0]-pole[0],a.poleDetectorPixel[1]-pole[1]):0));
-const dependencies=['tools/objects/terrestrial-layers/shape-camera-mosaic.mts','tools/spice/text-kernel.mts','tools/sources/source-values.mts'];
+const dependencies=['tools/objects/terrestrial-layers/shape-camera-mosaic.mts','tools/spice/text-kernel.mts','packages/core/src/validate.ts'];
 const report={schema:'cssearth-dactyl-published-control-result@1',qualifiedSurface:false,date:config.date,dependencies,rangeKm,
   alignment:{parameters:'paper pixels per native pixel, clockwise degrees, paper x/y at native anchor',baseline:baselineAlignment,plainPhoto:plainPhotoAlignment,checks:alignment,maximumPoleDisplacementNativePixels:alignmentPoleSpan},
   geometry:{poseOrder:'observer latitude, observer west longitude, north azimuth clockwise from image up, ideal center sample/line',axesMetres:axes,limbSamples:boundary.length,fits,

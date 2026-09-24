@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { presentPhysicalPoseInVolume } from '../../packages/engine/dist/index.js';
-import { isRecord, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const root = resolve(import.meta.dirname, '../..');

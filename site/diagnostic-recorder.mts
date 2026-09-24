@@ -1,5 +1,5 @@
 import type { BrowserWindow, ShellCamera } from './browser-types.mts';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 interface RecordedEvent { type: string; time: number; name?: string; url?: string; duration?: number; transferSize?: number; decodedBodySize?: number; detail?: unknown; }
 interface Recording {
   schema: string; id: string; metadata: { startedAt: string; performanceTimeOrigin: number; sampleIntervalMs: number; frameClock: string; startTime: number; url: string; userAgent: string; viewport: { width: number; height: number; dpr: number }; loadedResources: string[] };
@@ -7,7 +7,7 @@ interface Recording {
   stoppedAt?: number; stopReason?: string; durationMs?: number; summary?: { samples: number; events: number; maxCaptureMs: number; meanCaptureMs: number };
 }
 interface DiagnosticEntry { entryType?: string; name: string; startTime: number; duration?: number; transferSize?: number; decodedBodySize?: number; detail?: unknown; }
-const property = (value: unknown, key: string): unknown => record(value) ? value[key] : undefined;
+const property = (value: unknown, key: string): unknown => isRecord(value) ? value[key] : undefined;
 const call = (value: unknown, key: string): unknown => { const action = property(value, key); return typeof action === 'function' ? action.call(value) : null; };
 const stack = (error: unknown) => error instanceof Error ? error.stack ?? error.message : String(error);
 const SAMPLE_MS = 125;

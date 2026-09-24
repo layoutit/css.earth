@@ -62,10 +62,10 @@ export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAsset
     if (asset.filename.endsWith('-photometric-phase-curve.svg')) return true;
     const preparedDirectory = resolve(root, 'src/objects', asset.id, 'prepared') + '/';
     if (!asset.file.startsWith(preparedDirectory)) return false;
-    // The shared context is three files that must arrive from one publish: the full context, its summary and the
-    // orbit bank they describe. Restoring the two JSON halves alone pairs a context with whatever bank a runner
-    // happens to hold, which decodes into orbits that belong to another run.
-    if (asset.id === 'sun' && asset.filename === 'world-orbits.bin') return true;
+    // The shared context must arrive from one publish: the full context, its summary and the orbit banks they
+    // describe. Restoring the JSON halves alone pairs a context with whatever banks a runner happens to hold, which
+    // decode into orbits that belong to another run.
+    if (asset.id === 'sun' && asset.filename.startsWith('world-orbits/')) return true;
     return asset.id === 'milky-way' || asset.id === 'heliosphere' ||
       asset.id === 'stellar-neighbourhood' && asset.filename.endsWith('.bin');
   }));

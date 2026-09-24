@@ -1,5 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {readJsonSource, hasErrorCode, requireRecord, requireString} from '../../sources/source-values.mts';
+import {readJsonSource} from '../../sources/source-values.mts';
+import {hasErrorCode, requireRecord, requireString} from '@cssearth/core';
 import {parseMurReceipt} from './source-contract.mts';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, requireUpdateBytes} from './refresh-source.mts';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';

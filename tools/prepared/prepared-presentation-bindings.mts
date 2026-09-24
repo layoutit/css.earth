@@ -1,6 +1,6 @@
 import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.mts';
 import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../../src/platform/prepare-missing-coverage.mts';
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 import type { PreparedInteriorDisc } from '../../src/renderers/css/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '../../src/renderers/css/rendering/prepared-presentation.ts';
 import type { PreparedFacingPlane } from '../../src/renderers/css/rendering/prepared-facing.ts';

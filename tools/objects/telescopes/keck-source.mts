@@ -2,7 +2,7 @@
 import { lstat, mkdir, mkdtemp, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writeProductRecord } from '../product-record.mts';
 import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from '../keck/koa.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';

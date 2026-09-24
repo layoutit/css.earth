@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFitsImage } from '../fits/fits.mts';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { asinhBandDisplay, encodeAsinhBands } from './color-transfer.mts';
 
 const fixture = await readOracleFixture('fits/lupton-asinh.json');

@@ -22,7 +22,7 @@ import { promisify } from 'node:util';
 import pixelmatch from 'pixelmatch';
 import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
-import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readSourceMap } from './trace-brief.mts';
 
 const run = promisify(execFile);

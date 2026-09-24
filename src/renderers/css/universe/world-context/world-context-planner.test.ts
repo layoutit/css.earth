@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
-import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
+import { decodeWorldOrbitBank, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
 import { createSystemFade } from './context-scale.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
@@ -628,4 +628,22 @@ test('inside its authored range a system draws every member orbit, named or not,
   expect(framed.some(body => !body.labelShown), 'some framed captions lose the collision').toBe(true);
   for (const body of framed) expect(body.orbitVisibility, plan.bodies[body.index - 1]!.id).toBeGreaterThan(0);
   for (const body of at(2.5)) expect(body.orbitVisibility, plan.bodies[body.index - 1]!.id).toBe(0);
+});
+
+test('the planner plans from the summary alone, names the paths it lacked, and draws them once their bank arrives', async () => {
+  const prepared = new URL('../../../../objects/sun/prepared/', import.meta.url);
+  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  const bytes = await readFile(new URL('world-orbits/sun.bin', prepared));
+  const planner = createWorldContextPlanner(summary), current = view();
+  const before = planner(current), wanted = planner.takeWantedOrbits();
+  // From 20 au over the Sun the planets' orbits would be drawn; without their bank none is, and each is named once.
+  expect(wanted).toContain('earth');
+  expect(before.projectedBodies.every(body => body.segments.length === 0)).toBe(true);
+  expect(planner.takeWantedOrbits()).toEqual([]);
+  planner.attachOrbits(decodeWorldOrbitBank(summary, 'sun', bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)));
+  const after = planner(current), full = createWorldContextPlanner(plan)(view());
+  // With the bank attached, the Sun's orbits draw exactly as the planner given every path from the start draws them.
+  const earth = (frame: typeof after) => frame.projectedBodies.find(body => [plan.focus, ...plan.bodies][body.index]!.id === 'earth')!.segments;
+  expect(earth(after).length).toBeGreaterThan(0);
+  expect(earth(after)).toEqual(earth(full));
 });

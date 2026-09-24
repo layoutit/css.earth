@@ -163,6 +163,32 @@
         "kind": "local",
         "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
       }
+    },
+    {
+      "id": "trappist-1c-nasa-eyes-illustration",
+      "path": "illustration/TRAPPIST-1_c.jpg",
+      "origin": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_c.jpg",
+      "productId": "TRAPPIST-1_c.jpg",
+      "title": "Eyes on Exoplanets artist's concept map of TRAPPIST-1c",
+      "sourceUrl": "https://eyes.nasa.gov/apps/exo/",
+      "credit": "NASA/JPL-Caltech (Eyes on Exoplanets)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original JPEG from the Eyes on Exoplanets app, unchanged; the app's texture table names it as TRAPPIST-1c's map.",
+      "redistribution": "NASA media; an artist's concept, not an observation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-eyes-on-exoplanets",
+            "role": "material",
+            "evidence": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_c.jpg"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

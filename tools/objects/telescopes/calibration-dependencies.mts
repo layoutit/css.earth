@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { dirname, resolve, relative, basename } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileSize } from '../product-record.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsFileHdus } from '../../fits/fits.mts';
 export interface CalibrationDependency {
   readonly field: string; readonly reference: string; readonly status: 'pinned' | 'unresolved'; readonly reason: string;

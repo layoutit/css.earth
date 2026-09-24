@@ -16,7 +16,11 @@ is uniform: it is one measured mean, not a map. Makemake and Eris use it on the 
 route; Haumea uses the same method through the shape-model route's `surfaces` list.
 All three also carry NASA's illustrative model texture as a second, non-default
 lens (`glb-base-color`); it is listed in the package's illustration lenses and is
-not an observation.
+not an observation. Ten exoplanets (HD 189733 b, GJ 504 b, Kepler-452 b and TRAPPIST-1 b–h)
+carry the artist's concept map NASA's Eyes on Exoplanets wraps around them the same way,
+through the `equirectangular-illustration` kind.
+
+![The Illustration lens of the ten exoplanets, in the app](images/eyes-on-exoplanets-illustrations.webp)
 
 An unresolved body measured only in the infrared has no visible colour to reconstruct. When a paper
 publishes its flux densities in three bands, the raster `disc-integrated-band-color` science kind

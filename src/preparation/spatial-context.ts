@@ -37,7 +37,10 @@ export interface WorldContextPointSource {
     readonly brightnessMultiplier: number;
   };
 }
-type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource };
+/** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
+ * (site/context-colour.mts). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
+type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>> };
+type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 export interface VolumeOpacityProfile {
   readonly model: 'logarithmic-distance';
   readonly nearOpacity: number;
@@ -52,7 +55,7 @@ export interface WorldContextSource {
   readonly focus: WorldContextFocus;
   /** `unpackaged`: drawn from its astronomy record around a packaged host, with no object page (the S-stars around Sgr A*).
    * `orbitsWithinM`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
-  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number; readonly labelPlacement?: 'centre' }[];
+  readonly bodies: readonly ({ readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number; readonly labelPlacement?: 'centre' } & WorldContextPresentation)[];
   /** Preparation resolves catalogue membership before computing the context. */
   readonly bodySelection?: "catalog";
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
@@ -96,6 +99,11 @@ export interface PreparedWorldContext {
     readonly orbitsWithinM?: number;
     /** Caption the body over its middle instead of below it. */
     readonly labelPlacement?: 'centre';
+    readonly contextColor?: string;
+    readonly labelCase?: 'upper';
+    readonly classification?: string;
+    readonly systemName?: string;
+    readonly discovery?: Readonly<Record<string, unknown>>;
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
@@ -116,17 +124,25 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const input = record(value, 'world context'); keys(input, ['schema', 'frame', 'focus', 'bodies', 'orbit', 'camera', 'system', 'volume', 'sky', 'stars'], 'world context');
   if (input.schema !== 'cssearth-world-context-source@1') throw new TypeError('Unsupported world context source schema.');
   const frame = parseFrame(input.frame);
-  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource'], 'world context focus');
+  // The prepared presentation a body carries into the world: its context colour and caption case.
+  const presentation = (value: Record<string, unknown>, label: string) => {
+    if (value.labelCase !== undefined && value.labelCase !== 'upper') throw new TypeError(`${label} label case is ${String(value.labelCase)}, not upper.`);
+    if (value.classification !== undefined && !/^[a-z][a-z-]*$/.test(String(value.classification))) throw new TypeError(`${label} classification is ${String(value.classification)}.`);
+    return { ...(value.contextColor === undefined ? {} : { contextColor: color(value.contextColor) }), ...(value.labelCase === 'upper' ? { labelCase: 'upper' as const } : {}),
+      ...(value.classification === undefined ? {} : { classification: String(value.classification) }), ...(value.systemName === undefined ? {} : { systemName: text(value.systemName, `${label} system name`) }),
+      ...(value.discovery === undefined ? {} : { discovery: freeze({ ...record(value.discovery, `${label} discovery`) }) }) };
+  };
+  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'], 'world context focus');
   const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color),
-    ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }) });
+    ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }), ...presentation(focusInput, 'World context focus') });
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement'], `world context body ${index}`);
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'], `world context body ${index}`);
     if (body.labelPlacement !== undefined && body.labelPlacement !== 'centre') throw new TypeError(`World context body ${index} label placement is ${String(body.labelPlacement)}, not centre.`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (body.unpackaged !== undefined && body.unpackaged !== true) throw new TypeError('World context unpackaged is true or absent.');
-    return freeze({ ...(body.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}), ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
+    return freeze({ ...presentation(body, `World context body ${index}`), ...(body.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}), ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
   });
   if (new Set(bodies.map(body => body.id)).size !== bodies.length || bodies.some(body => body.id === focus.id)) throw new TypeError('World context body ids must be unique and exclude the focus.');
   const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'trail'], 'world context orbit');
@@ -267,10 +283,10 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
 
-/** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as the
- * binary orbit bank (`encodeWorldOrbits`), which this summary pins; each orbit here keeps its parent, bounds and
- * size. Classification views are build-time only. */
-export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank: { readonly byteLength: number }) {
+/** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as binary
+ * orbit banks, one per orbit centre (`worldOrbitBanks`), which this summary pins by byte length; each orbit here keeps
+ * its parent, bounds and size, and names its bank by its centre. Classification views are build-time only. */
+export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>) {
   const { classificationViews: _views, ...rest } = prepared;
   // System views keep their members; their camera candidates are `worldSystemViews`, loaded after the first body mounts.
   const members = <T extends { readonly systemView?: PreparedSystemView }>(body: T): T => {
@@ -278,7 +294,7 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank:
     const { candidates: _candidates, ...view } = body.systemView;
     return freeze({ ...body, systemView: freeze(view) });
   };
-  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBank: freeze({ ...orbitBank }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
+  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
     return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
@@ -286,10 +302,11 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank:
   })) });
 }
 
-/** Each system view's camera candidates by host id: what system framing needs, kept out of the summary the page waits for. */
+/** Each system's camera candidates, one document per host: system framing reads the one it frames, so a page never
+ * downloads the candidates of systems it does not open (all 74 were 635 KB brotli on every page). */
 export function worldSystemViews(prepared: PreparedWorldContext) {
-  return freeze({ schema: 'cssearth-world-system-views@1' as const, views: freeze(Object.fromEntries([prepared.focus, ...prepared.bodies]
-    .flatMap(body => body.systemView ? [[body.id, body.systemView.candidates] as const] : []))) });
+  return freeze([prepared.focus, ...prepared.bodies].flatMap(body => body.systemView
+    ? [freeze({ schema: 'cssearth-world-system-view@1' as const, id: body.id, candidates: body.systemView.candidates })] : []));
 }
 
 /** The orbit bank's layout: `CSWO`, format version, header byte length (little-endian u32s), the UTF-8 JSON
@@ -298,7 +315,7 @@ export function worldSystemViews(prepared: PreparedWorldContext) {
  * Uint32. The planner worker reads them as typed-array views; nothing is parsed into objects. */
 export const WORLD_ORBITS_MAGIC = 0x4f575343; // 'CSWO'
 export const WORLD_ORBITS_VERSION = 1;
-export function encodeWorldOrbits(prepared: PreparedWorldContext): Uint8Array {
+export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
   const sections: (Float64Array | Uint32Array)[] = [];
   let offset = 0;
   const section = (values: Float64Array | Uint32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
@@ -309,7 +326,7 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext): Uint8Array {
   };
   const bodies = prepared.bodies.flatMap(body => {
     const orbit = body.orbit;
-    if (!orbit) return [];
+    if (!orbit || !include(body)) return [];
     return [{ id: body.id, vertices: f64(orbit.verticesM.flat()), trail: f64(orbit.trail), activeChords: u32(orbit.activeChords),
       extentChords: u32(orbit.extentChords),
       ...(orbit.closed === false ? { bodyVertexIndex: orbit.bodyVertexIndex, trailModel: orbit.trailModel } : {}),
@@ -329,6 +346,13 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext): Uint8Array {
     at += values.byteLength; at += (8 - (at - dataStart) % 8) % 8;
   }
   return bytes;
+}
+/** One orbit bank per orbit centre (the Sun, each planet with moons, each other star, Sgr A*): the planner worker reads a
+ * centre's bank when one of its orbits would be drawn, so a page never downloads the paths of systems it does not show
+ * (the single bank was 1.6 MB brotli on every page, 2026-09-24). */
+export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
+  const centres = [...new Set(prepared.bodies.flatMap(body => body.orbit ? [body.orbit.centerBodyId] : []))].sort();
+  return centres.map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.orbit?.centerBodyId === id) }));
 }
 export interface PreparedOrbitLodLevel {
   readonly vertexIndices: readonly number[]; readonly trail: readonly number[];

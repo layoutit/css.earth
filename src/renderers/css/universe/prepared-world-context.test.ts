@@ -4,7 +4,7 @@ import { required } from '../../../../tools/contract/test-values.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
-import { decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../prepared-data/world-context.js';
+import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../prepared-data/world-context.js';
 import { mountPreparedWorldContext } from './prepared-world-context.js';
 import { worldContextGeometry } from '../prepared-data/world-context.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
@@ -17,9 +17,9 @@ import { createWorldContextPlanner } from './world-context/world-context-planner
 import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from './world-context/context-scale.js';
 import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { labelImportance } from '../labels/universe-label-policy.js';
-import { SYSTEM_RANGES, SYSTEM_VIEWS, loadSystemViews, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
+import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await loadSystemViews(async () => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../../objects/sun/prepared/world-system-views.json', import.meta.url), 'utf8')));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../../objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
 
 // The production publisher only accepts encoded frames. Tests run the actual
 // planner inline and supply that same protocol without starting a browser worker.
@@ -163,9 +163,13 @@ function find(root: FakeElement, key: string, value: string): FakeElement {
   if (!found) throw new Error(`Missing ${key}=${value}`); return found;
 }
 // Orbit leaf blocks are built on first use and then retained. Every earlier node
-// survives in order, and only orbit leaf blocks or their leaves may be added.
-function expectRetained(root: FakeElement, nodes: readonly FakeElement[]) {
-  const known = new Set(nodes), now = all(root), kept = now.filter(node => known.has(node));
+// survives in order, and only orbit leaf blocks or their leaves may be added. The one
+// corner locator is the exception by design: a single element that moves into whichever
+// marker is emphasised, so it and its two paths are left out of the order.
+const isLocator = (node: FakeElement) => node.getAttribute('class') === 'context-locator' || node.parentNode?.getAttribute('class') === 'context-locator';
+function expectRetained(root: FakeElement, retained: readonly FakeElement[]) {
+  const nodes = retained.filter(node => !isLocator(node));
+  const known = new Set(nodes), now = all(root).filter(node => !isLocator(node)), kept = now.filter(node => known.has(node));
   expect(kept.length === nodes.length && kept.every((node, index) => node === nodes[index]), 'every retained node survives in order').toBe(true);
   expect(now.every(node => known.has(node) || node.className === 'context-orbit-block' || node.parentNode?.className === 'context-orbit-block'),
     'only orbit leaf blocks are added').toBe(true);
@@ -300,6 +304,34 @@ test('inactive annotations retain emphasis until their reveal publication', () =
   // selected before the bodies were culled must publish 'false' on its reveal.
   for (const body of shown) expect(find(root, 'contextGroup', body.id).dataset.contextSelected).toBe('false');
   expectRetained(root, nodes);
+  layer.destroy();
+});
+
+test('a body carries its prepared colour inline, and the emphasised one wears the one corner locator by inheritance', () => {
+  const base = plan(1), colours: Record<string, string> = { mercury: '#abcdef', venus: '#123456' };
+  const prepared = { ...base, focus: { ...base.focus, contextColor: '#fedcba' },
+    bodies: base.bodies.map(body => ({ ...body, contextColor: colours[body.id]!, labelCase: 'upper' as const })) };
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: prepared,
+    sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement;
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
+  const mercury = find(root, 'contextGroup', 'mercury'), venus = find(root, 'contextGroup', 'venus'), sun = find(root, 'contextGroup', 'sun');
+  // No stylesheet rule per body: the colour and caption case are on the marker and its orbit.
+  expect([mercury.style.color, venus.style.color, find(root, 'contextOrbit', 'mercury').style.color]).toEqual(['#abcdef', '#123456', '#abcdef']);
+  expect(mercury.dataset.contextLabelCase).toBe('upper');
+  const locatorIn = (marker: FakeElement) => marker.children.find(child => child.getAttribute('class') === 'context-locator');
+  layer.selectObject('mercury'); layer.publish(world, viewport);
+  const locator = locatorIn(mercury)!;
+  // It sits under the sprite, as the ring does, and has no colour of its own: its paths fill with currentColor.
+  expect(mercury.children.indexOf(locator)).toBe(mercury.children.findIndex(child => child.tagName === 'i') - 1);
+  expect([locator.style.color ?? '', ...locator.children.map(path => path.getAttribute('fill'))]).toEqual(['', 'currentColor', 'currentColor']);
+  expect([mercury.dataset.contextLocator, venus.dataset.contextLocator]).toEqual(['', undefined]);
+  layer.selectObject('sun'); layer.publish(world, viewport);
+  // The same element moves; the marker it leaves returns to its ring.
+  expect([locatorIn(sun), locatorIn(mercury), mercury.dataset.contextLocator, sun.dataset.contextLocator]).toEqual([locator, undefined, undefined, '']);
   layer.destroy();
 });
 
@@ -1871,6 +1903,20 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   layer.destroy();
 });
 
+test('a plain dot needs no sprite, paints its colour and is never a pick or navigation target', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1),
+    sprites: { sun: sprite, venus: sprite }, plainDots: { ids: ['mercury'], minimumDiameterPixels: 2 } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  const marker = layer.inspect().find(body => body.id === 'mercury')!.billboard, leaf = marker.children[0] as HTMLElement;
+  expect([leaf.style.backgroundImage ?? '', leaf.style.backgroundColor, leaf.style.borderRadius]).toEqual(['', '#9d9388', '50%']);
+  expect(marker.dataset.contextBodyVisible).toBe('true');
+  expect(marker.dataset.objectNavigate).toBeUndefined();
+  expect(screenPicking(host as unknown as HTMLElement).pick(70, -20)).toBeNull();
+  layer.destroy();
+});
+
 test('suppression retires the whole annotation while flight preserves admission and disables picking', () => {
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
   const element = layer.inspect().find(body => body.id === 'mercury')!.billboard;
@@ -2487,21 +2533,23 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
   layer.destroy();
 });
 
-test('the binary orbit bank decodes to exactly the orbits of the full prepared file', async () => {
+test('the orbit banks, one per centre, decode to exactly the orbits of the full prepared file', async () => {
   const prepared = new URL('../../../objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-  const bytes = await readFile(new URL('world-orbits.bin', prepared));
-  const bank = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-  const decoded = decodeWorldOrbits(summary, bank);
+  const bankOf = async (id: string) => { const bytes = await readFile(new URL(`world-orbits/${id}.bin`, prepared)); return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength); };
+  const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
+  const decoded = decodeWorldOrbits(summary, banks);
   expect(decoded.bodies.map(body => body.id)).toEqual(full.bodies.map(body => body.id));
   for (const [index, body] of decoded.bodies.entries()) {
     expect(body.orbit, body.id).toEqual(full.bodies[index]!.orbit);
   }
-  // A bank of another size, or one missing an orbit's path, never decodes.
-  expect(() => decodeWorldOrbits(summary, bank.slice(0, bank.byteLength - 8))).toThrow(/its summary says/);
-  const orbiting = summary.bodies.find(body => body.orbit)!;
-  expect(() => decodeWorldOrbits({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, bank)).toThrow(/lacks its path/);
+  // A bank of another size, one missing an orbit's path, or one for a centre the summary does not pin never decodes.
+  const sun = banks.get('sun')!;
+  expect(() => decodeWorldOrbitBank(summary, 'sun', sun.slice(0, sun.byteLength - 8))).toThrow(/its summary says/);
+  const orbiting = summary.bodies.find(body => body.orbit?.centerBodyId === 'sun')!;
+  expect(() => decodeWorldOrbitBank({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, 'sun', sun)).toThrow(/lacks its path/);
+  expect(() => decodeWorldOrbitBank(summary, 'nowhere', sun)).toThrow(/summary says undefined/);
 });
 
 test('circle dots grow with radius from 1,000 km to the system star, and stop there', () => {
@@ -2521,6 +2569,8 @@ test('a body circle holds a dot in the body colour until its own disc outgrows t
   const scale = 1e6, root = mount(scale), layer = mounted.get(root)!, marker = find(root, 'contextBody', 'mercury'), leaf = marker.children[0]!;
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100 * scale, 0, distance * scale], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  // Until its sprite first shows, a body sets no atlas image, so a page fetches only the atlas pages it draws.
+  expect(leaf.style.backgroundImage).not.toContain('url(');
   // Mercury's 0.8px disc sits inside its circle.
   publish(1000);
   expect(marker.dataset.contextIndicatorVisible).toBe('true');

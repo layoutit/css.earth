@@ -8,7 +8,7 @@ import type { preparePagedEllipsoidScene } from './scene.mts';
 import type { preparePlaces } from './geographic/places.mts';
 import type { CameraPlan } from '../../../src/renderers/css/navigation/types.ts';
 import type { SurfaceBankLenses } from './contracts.mts';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 type PagedPlan = ReturnType<typeof preparePagedEllipsoidScene>['scene'];
 type MaterialId = 'lighting' | 'atmosphere';
 export type PagedLens = SurfaceBankLenses['controls'][number] & { maximumZoom: number; polesUrl?: string;

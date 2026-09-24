@@ -18,7 +18,7 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { horizonsCommand, horizonsTables } from '../sphere-horizons.mts';
 import { qualifiedFace, shadingNormal } from '../surface-observations/geometry.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';

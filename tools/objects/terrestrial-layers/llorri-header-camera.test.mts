@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { loadKernelSet } from '../../spice/kernel-set.mts';
 import { llorriHeaderCamera } from './llorri-header-camera.mts';
 import { bindSipCamera } from './llorri-geo.mts';

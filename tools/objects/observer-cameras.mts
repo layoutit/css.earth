@@ -8,7 +8,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireRecord } from '../sources/source-values.mts';
+import { requireArray, requireRecord } from '@cssearth/core';
 import { deriveObserverCameras, loadObserverCameraInputs, recipeFields } from './terrestrial-layers/observer-cameras.mts';
 import { loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
 import { radialTerrainForLens } from './terrestrial-layers/alternative-lenses.mts';

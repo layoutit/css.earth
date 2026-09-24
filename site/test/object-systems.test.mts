@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
+import { WORLD_OBJECTS } from '../world-objects.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, systemOfObject } from '../object-systems.mts';
 
 test('planetary systems follow prepared orbit chains to their stars', () => {
@@ -17,7 +18,9 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
       ['roxs-42b', 'ROXs 42B system', '/roxs-42b/'], ['wasp-76', 'WASP-76 system', '/wasp-76/'], ['pds-70', 'PDS 70 system', '/pds-70/'], ['wasp-18', 'WASP-18 system', '/wasp-18/'], ['wasp-121', 'WASP-121 system', '/wasp-121/'], ['luhman-16', 'Luhman 16 system', '/luhman-16/'],
       ['hip-65426', 'HIP 65426 system', '/hip-65426/'], ['af-lep', 'AF Lep system', '/af-lep/'], ['ab-pic', 'AB Pic system', '/ab-pic/'], ['yses-1', 'YSES 1 system', '/yses-1/'],
       ['hd-206893', 'HD 206893 system', '/hd-206893/'], ['hd-95086', 'HD 95086 system', '/hd-95086/'], ['gj-504', 'GJ 504 system', '/gj-504/'], ['hd-135344-a', 'HD 135344 A system', '/hd-135344-a/'],
-      ['eps-indi-a', 'Epsilon Indi system', '/eps-indi-a/']]);
+      ['eps-indi-a', 'Epsilon Indi system', '/eps-indi-a/'], ['hd-219134', 'HD 219134 system', '/hd-219134/'], ['hip-56998', 'HIP 56998 system', '/hip-56998/'], ['hd-136352', 'HD 136352 system', '/hd-136352/'], ['gj-143', 'GJ 143 system', '/gj-143/'], ['hd-39091', 'HD 39091 system', '/hd-39091/'], ['toi-2194', 'TOI-2194 system', '/toi-2194/'], ['toi-5789', 'TOI-5789 system', '/toi-5789/'], ['hd-97658', 'HD 97658 system', '/hd-97658/'], ['hd-63433', 'HD 63433 system', '/hd-63433/'], ['toi-2134', 'TOI-2134 system', '/toi-2134/'], ['hd-207496', 'HD 207496 system', '/hd-207496/'], ['toi-836', 'TOI-836 system', '/toi-836/'], ['hd-207897', 'HD 207897 system', '/hd-207897/'], ['hd-73583', 'HD 73583 system', '/hd-73583/'], ['hr-858', 'HR 858 system', '/hr-858/'], ['toi-431', 'TOI-431 system', '/toi-431/'], ['hd-88986', 'HD 88986 system', '/hd-88986/'], ['hd-60779', 'HD 60779 system', '/hd-60779/'], ['kepler-444', 'Kepler-444 system', '/kepler-444/']]);
+  // A page builds its systems from the world summary alone; they match the registry's.
+  assert.deepEqual(allPlanetarySystems(WORLD_OBJECTS), systems);
   // HD 189733 B has no measured orbit; it belongs to the system through the Gaia measurement that binds it to A (boundTo).
   // VHS 1256-1257 B and ROXs 42B B do have one: each circles A on its measured orbit, and the planet circles the pair.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],

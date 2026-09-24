@@ -1,10 +1,10 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { encodeWorldOrbits, parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '../../src/preparation/spatial-context.js';
+import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; readonly centerParentBodyId?: string; }
@@ -71,6 +71,33 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       input.bodies.push({ id, name: record!.name, color: record!.effectiveTemperatureK === undefined ? '#9a9a9a'
         : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
+  }
+  // Each packaged body's world presentation, prepared here so no page carries a stylesheet rule or a registry entry per body:
+  // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
+  // site/context-colour.mts), capitals for a star, black hole or planet's caption, and its classification and system name.
+  {
+    const registry = (await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
+      SCENE_OBJECTS: readonly { id: string; color: string; classification: string; systemName: string }[] }).SCENE_OBJECTS;
+    const { contextColour } = await import(pathToFileURL(resolve(process.cwd(), 'site/context-colour.mts')).href) as typeof import('../../site/context-colour.mts');
+    const { contextAnnotationOpacity } = await import(pathToFileURL(resolve(process.cwd(), 'src/navigation/marker-presentation.mts')).href) as typeof import('../../src/navigation/marker-presentation.mts');
+    const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
+    const byId = new Map(registry.map(object => [object.id, object]));
+    // The catalogue step's discovery records (site/prepared-object-discovery.json): what the world's visibility reads per body.
+    const discoveries = JSON.parse(await readFile(resolve(process.cwd(), 'site/prepared-object-discovery.json'), 'utf8')) as Record<string, unknown>;
+    const present = async (body: Record<string, unknown>) => {
+      const object = byId.get(String(body.id));
+      if (!object) return;
+      const swatch = await readFile(resolve(objectsRoot, object.id, 'swatch.json'), 'utf8').then(text => JSON.parse(text) as { hex: string; display?: { hex: string } },
+        (error: unknown) => { if (isMissingFile(error)) return undefined; throw error; });
+      const hex = contextColour(swatch ? swatch.display?.hex ?? swatch.hex : undefined, object.color, contextAnnotationOpacity(object.classification).label);
+      if (hex) body.contextColor = hex;
+      if (object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet') body.labelCase = 'upper';
+      // The page needs these for every body without loading the registry: which bodies host systems, and what each is called.
+      body.classification = object.classification; body.systemName = object.systemName;
+      if (Object.hasOwn(discoveries, object.id)) body.discovery = discoveries[object.id];
+    };
+    await present(input.focus);
+    for (const body of input.bodies as Record<string, unknown>[]) await present(body);
   }
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
@@ -154,24 +181,29 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
   // Browser payload: compact JSON. Indentation was 60% of the fetched bytes.
   await writeIfChanged(options.outputPath, `${JSON.stringify(prepared)}\n`);
-  // The browser reads the summary; the planner worker adds the binary orbit bank the summary pins.
-  // The full JSON above remains for build-time tools.
-  const orbits = encodeWorldOrbits(prepared);
-  await writeIfChanged(worldOrbitsPath(options.outputPath), orbits);
+  // The browser reads the summary; the planner worker adds each orbit centre's binary bank, which the summary pins by
+  // byte length, when that centre's orbits come into view. The full JSON above remains for build-time tools.
+  const banks = worldOrbitBanks(prepared), bankDirectory = worldOrbitsDirectory(options.outputPath), keptBanks = new Set<string>();
+  for (const bank of banks) { keptBanks.add(`${bank.id}.bin`); await writeIfChanged(resolve(bankDirectory, `${bank.id}.bin`), bank.bytes); }
+  for (const name of await readdir(bankDirectory).catch(() => [] as string[])) if (!keptBanks.has(name)) await rm(resolve(bankDirectory, name));
+  await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
-    { byteLength: orbits.byteLength }))}\n`);
-  // System framing's camera candidates, read after the first body mounts instead of with the summary.
-  await writeIfChanged(worldSystemViewsPath(options.outputPath), `${JSON.stringify(worldSystemViews(prepared))}\n`);
+    Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength]))))}\n`);
+  // System framing's camera candidates, one file per host, read when navigation frames that system.
+  const directory = worldSystemViewsDirectory(options.outputPath), views = worldSystemViews(prepared), kept = new Set<string>();
+  for (const view of views) { kept.add(`${view.id}.json`); await writeIfChanged(resolve(directory, `${view.id}.json`), `${JSON.stringify(view)}\n`); }
+  for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept.has(name)) await rm(resolve(directory, name));
+  await rm(resolve(dirname(options.outputPath), 'world-system-views.json'), { force: true });
 }
 
-/** `world-context.json` → `world-system-views.json`, beside it. */
-export function worldSystemViewsPath(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-system-views.json');
+/** `world-context.json` → `system-views/`, beside it: `<host id>.json` per system. */
+export function worldSystemViewsDirectory(outputPath: string): string {
+  return resolve(dirname(outputPath), 'system-views');
 }
 
-/** `world-context.json` → `world-orbits.bin`, beside it. */
-export function worldOrbitsPath(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-orbits.bin');
+/** `world-context.json` → `world-orbits/`, beside it: `<orbit centre id>.bin` per centre. */
+export function worldOrbitsDirectory(outputPath: string): string {
+  return resolve(dirname(outputPath), 'world-orbits');
 }
 
 /** `world-context.json` → `world-context-summary.json`, beside it. */

@@ -10,7 +10,7 @@
  * wavelengths in one pixel, so it needs no solar spectrum, no distance and no albedo; its error is carried from ERR. */
 import { open } from 'node:fs/promises';
 import { readFitsFileHdus, type FitsFileHdu } from '../../../fits/fits.mts';
-import { requireFiniteNumber } from '../../../sources/source-values.mts';
+import { requireFiniteNumber } from '@cssearth/core';
 
 export type Window = readonly [number, number];
 export interface SpectralCube {

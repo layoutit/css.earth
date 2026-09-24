@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { parseHTML } from "linkedom";
-import { requireRecord } from "../sources/source-values.mts";
+import { requireRecord } from "@cssearth/core";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 

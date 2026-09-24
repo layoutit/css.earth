@@ -1,4 +1,4 @@
-import {parse} from '../material-composition/data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {normalizedPresentationRecipe, type NormalizedPresentationRecipe} from './normalized-presentation-contract.mts';
 import {parsePhotometricDiscRecipe} from './photometric-disc.mts';
 import type {PhotometricRecipe} from './photometric-contract.mts';

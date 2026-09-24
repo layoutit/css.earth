@@ -1,6 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {requireRecord} from '../../sources/source-values.mts';
-import {shape,text,number} from '../terrestrial-layers/source-records.mts';
+import {requireRecord,shape,text,number} from '@cssearth/core';
 const parseRecipe=shape({inputPath:text,member:text,spiceypyVersion:text,cspiceVersion:text,inputBytes:number,targetId:number,frameId:number,surfaceId:number,sourceVertices:number,sourceFaces:number,weldedVertices:number});
 import {readFile, mkdtemp, rm} from 'node:fs/promises';
 import {resolve, isAbsolute, sep} from 'node:path';

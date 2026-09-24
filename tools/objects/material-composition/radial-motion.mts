@@ -1,5 +1,5 @@
 import { applyLinearTint } from '../color-transfer.mts';
-import {parse, object, string, boolean} from './data-schema.mts';
+import {parse, object, string, boolean} from '@cssearth/core/schema';
 import {radialMotionRecipe, type RadialMotionRecipe} from './radial-motion-recipe.mts';
 import type {ReadonlyVector3} from './ellipsoid.mts';
 export const bodyRingShadow = object({model:string,edgeFeather:object({model:string,runtimeWork:boolean}),overlayTextureUrl:string,authority:string});

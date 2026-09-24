@@ -1,7 +1,7 @@
 /** Evidence-backed advice for a fetched source. A name, a field position and a detection are different claims. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { NativeMetadata } from './native-metadata.mts';
 import type { OutputChoice } from './outputs.mts';
 import type { ProductDescriptor } from './product-descriptor.mts';

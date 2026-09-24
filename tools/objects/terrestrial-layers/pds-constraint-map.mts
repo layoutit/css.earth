@@ -1,4 +1,5 @@
-import {shape,number,text,optional,array,dictionary,decodeProfile} from './source-records.mts';
+import {decodeProfile} from './source-records.mts';
+import {shape,number,text,optional,array,dictionary} from '@cssearth/core';
 interface ConstraintMesh {
   coordinates?: readonly number[][]; constraintFlags?: ArrayLike<number>; faceProvenance?: ArrayLike<number>;
   indices?: readonly number[][]; hit?(longitude: number, latitude: number): {faceId: number} | null;

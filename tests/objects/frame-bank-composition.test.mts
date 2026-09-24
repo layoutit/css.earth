@@ -1,5 +1,5 @@
 import {requireObjectRuntimeDefinition} from '../../tools/contract/object-runtime-contract.mts';
-import {shape,array,text,number,optional} from '../../tools/objects/terrestrial-layers/source-records.mts';
+import {shape,array,text,number,optional} from '@cssearth/core';
 import {required} from '../../tools/contract/test-values.mts';
 import { sourceTest } from './source-test.mts';
 const test = sourceTest();

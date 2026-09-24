@@ -1,7 +1,7 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import { recordPreparationEvidence } from '../prepare/preparation-evidence.mts';
-import {hasErrorCode} from '../sources/source-values.mts';
+import {hasErrorCode} from '@cssearth/core';
 import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from './provenance-records.mts';
 import type {ProvenanceRecipeSource, ProductBinding, GeographicProvenance} from './provenance-records.mts';
 type Identity = ReturnType<typeof identity>;

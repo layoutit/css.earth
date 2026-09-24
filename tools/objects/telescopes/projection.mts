@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir, rm, rmdir, rename } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { fileSize, type ProductInput } from '../product-record.mts';
 import { parseBodyMapProduct } from '../body-map-product.mts';
 import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';

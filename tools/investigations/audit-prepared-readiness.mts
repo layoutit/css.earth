@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { Page } from "playwright";
-import { requireRecord, requireArray, isRecord } from "../sources/source-values.mts";
+import { requireRecord, requireArray, isRecord } from "@cssearth/core";
 
 export const AUDIT_PREPARED_READINESS_SCHEMA = "cssearth-prepared-capture-readiness@1";
 

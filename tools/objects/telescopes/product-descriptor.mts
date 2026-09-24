@@ -1,6 +1,6 @@
 /** Versioned semantic description of pinned observational bytes. Data remain in members; this file only describes them. */
 import { spawnSync } from 'node:child_process';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync } from '../astronomy-packages/toolchain.mts';
 
 export const PRODUCT_DESCRIPTOR_SCHEMA='cssearth-telescope-product-descriptor@1' as const;

@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeEncounterFits } from './encounter-fits.mts';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /** astropy as the oracle for the encounter FITS reader, one product per instrument layout: Deep Impact ITS, Stardust NAVCAM and MRI. */
 const fixture = await readOracleFixture('fits/encounter.json');

@@ -6,9 +6,8 @@ import { sha256 } from '../../../../src/platform/sha256.mts';
  */
 import type { CameraKind, LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
 import type { NumericRaster, SpiceCameraDeclaration } from '../../terrestrial-layers/source-records.mts';
-import { array, boolean, decodeProfile, number, optional, shape, text, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement,
-  parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
-import { requireArray, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { decodeProfile, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement, parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
+import { array, boolean, number, optional, shape, text, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadianceFactorScale } from '../../terrestrial-layers/osiris-geo.mts';

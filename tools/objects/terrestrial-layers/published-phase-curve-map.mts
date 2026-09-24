@@ -25,7 +25,7 @@
  * pi I = sum_c counts_c K_c B_c(T) / sum_c counts_c. A cell whose fitted intensity is not positive has no temperature. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
 import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap } from '../astronomy-packages/spiderman.mts';
 import { starryMapGrid, type StarryMap, type StarrySystem } from '../astronomy-packages/starry.mts';

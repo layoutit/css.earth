@@ -1,5 +1,5 @@
 import { refreshSourceRecord } from '../../../sources/source-authoring-templates.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../../sources/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { requireTerrainMesh } from '../../terrestrial-layers/radial-mesh.mts';
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';

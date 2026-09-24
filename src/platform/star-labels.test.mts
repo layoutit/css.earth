@@ -1,4 +1,4 @@
-import {requireRecord} from '../../tools/sources/source-values.mts';
+import {requireRecord} from '@cssearth/core';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();

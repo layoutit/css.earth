@@ -8,7 +8,7 @@ import type { createSourceManifest } from '../../../src/platform/source-manifest
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedVariant } from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 import type { PreparedPresentationDefinition } from '../../../src/renderers/css/rendering/prepared-presentation.ts';
-import { requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireString, requireFiniteNumber } from '@cssearth/core';
 import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
 import { prepareScientificNavigation } from './scientific-focus.mts';
 import { readFile, writeFile } from 'node:fs/promises';

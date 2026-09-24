@@ -1,7 +1,8 @@
 import type {SourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import type {PreparedAtmosphereProfile} from '../../prepared/prepared-atmosphere.mts';
-import {readJsonSource, requireRecord, requireFiniteNumber} from '../../sources/source-values.mts';
+import {readJsonSource} from '../../sources/source-values.mts';
+import {requireRecord, requireFiniteNumber} from '@cssearth/core';
 import {parseAtmosphereResponse} from './source-contract.mts';
 import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
 export interface AtmosphereConfiguration {

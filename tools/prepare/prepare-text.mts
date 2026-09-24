@@ -13,7 +13,7 @@ import { validateObjectProvenance } from '../../src/platform/object-provenance.m
 import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
 import { sourceResolver } from '../../src/platform/source-catalog.mts';
 import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';
 import { refreshPreparedInventory } from './prepare-object-json.mts';
 

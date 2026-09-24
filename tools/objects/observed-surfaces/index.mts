@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
-import {parse} from '../material-composition/data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {observedRecipe, type Region, type ObservationTransform, type BoundaryContinuation, type FalseColor, type PixelPresence, type UniformCoverage, type DiscBaseline, type Calibration, type BrightTail, type PolarProjection, type RasterMap, type Baseline} from './contract.mts';
 import type {SourcePin} from '../giant-layers/radial-contract.mts';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';

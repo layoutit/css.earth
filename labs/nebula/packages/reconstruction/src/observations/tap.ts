@@ -1,4 +1,4 @@
-import { record } from './model.ts';
+import { isRecord as record } from '@cssearth/core';
 
 export interface TapTable { rows: Record<string, unknown>[]; overflow: boolean }
 /** The three services expose different JSON serializations of their VOTable. */

@@ -2,6 +2,7 @@ import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { ObjectEntry } from './object-schema.mts';
+import type { SystemObjects } from './object-systems.mts';
 interface SelectionPublication { world: WorldCameraPose; viewport: WorldCameraViewport; }
 export interface OverviewSelection { overview: boolean; objectId: string; }
 import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
@@ -11,12 +12,13 @@ import { systemOverviewDistance } from './system-framing.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
 /** The Solar System's star; the root of the galactic overviews. */
-export const solarSystemFocus = (objects: readonly ObjectEntry[]) => objects.find(object => object.id === SOLAR_SYSTEM_ID);
+export const solarSystemFocus = (objects: SystemObjects) => objects.find(object => object.id === SOLAR_SYSTEM_ID);
 
-export function selectionAtCamera({ world, viewport, objects, objectId, overview }: SelectionPublication & { objects: readonly ObjectEntry[]; objectId: string; overview: boolean }): OverviewSelection | null {
+/** `objects` are the loaded objects, for the mounted one's frame; `systems` are the world's bodies, for its system and the Sun. */
+export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean }): OverviewSelection | null {
   const selected = objects.find(object => object.id === objectId)?.worldFrame;
   if (!selected) return null;
-  const system = systemOfObject(objects, objectId);
+  const system = systemOfObject(systems, objectId);
   if (!overview) {
     // Leaving an object's planetary system opens that system's overview, whose star the router mounts. A member that already
     // lies outside that framing, such as a wide binary companion hundreds of au out, keeps its own scene until the camera has
@@ -28,7 +30,7 @@ export function selectionAtCamera({ world, viewport, objects, objectId, overview
     }
     // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
     // the Solar System overview then hands the camera to the galactic scopes.
-    const sun = solarSystemFocus(objects)?.worldFrame;
+    const sun = solarSystemFocus(systems)?.worldFrame;
     if (!sun) return null;
     return distance(world.pose.positionM, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM))
       ? { overview: true, objectId: SOLAR_SYSTEM_ID } : null;
@@ -48,21 +50,21 @@ export function selectionAtCamera({ world, viewport, objects, objectId, overview
 }
 
 /** Require a sustained threshold crossing, even while the camera keeps moving. */
-export function watchOverviewSelection({ navigation, objects, objectId, getOverview, isAvailable,
-  onChange, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly ObjectEntry[]; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; windowTarget: Window }) {
+export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
+  onChange, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; windowTarget: Window }) {
   let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
   function inspect() {
     timer = null;
     candidate = null;
     if (disposed || !isAvailable() || !latest) return;
-    const next = selectionAtCamera({ ...latest, objects, objectId, overview: getOverview() });
+    const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview() });
     if (next) onChange(next);
   }
   const unsubscribe = navigation.subscribe((world, viewport) => {
     // Publications use the whole stage; selection uses the content centre
     // beside the sidebar, just like the active object's orbit controls.
     latest = { world, viewport: navigation.optics?.() ?? viewport };
-    const next = isAvailable() ? selectionAtCamera({ ...latest, objects, objectId, overview: getOverview() }) : null;
+    const next = isAvailable() ? selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview() }) : null;
     if (next?.objectId === candidate?.objectId && next?.overview === candidate?.overview) return;
     if (timer !== null) windowTarget.clearTimeout(timer);
     timer = null; candidate = next;

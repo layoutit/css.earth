@@ -38,7 +38,7 @@
  * card and introduction stay marked for a person. `notes` are sentences for the README's "Not shown" list. A planet may carry
  * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" lens) or
  * `photometry` (three-band flux densities for the band-colour lens); planet-lenses.mts. */
-import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '../observation/disc-band-color.mts';
 
 export interface Cited { readonly value: number; readonly source: string; readonly url: string; readonly uncertainty?: number }

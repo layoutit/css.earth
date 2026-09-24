@@ -1,5 +1,5 @@
 import type { Node, Property, ObjectExpression } from 'estree';
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 
 /** Shared accessors for the ESTree shapes emitted by both source parsers. */
 export function nodeName(node: Node | null | undefined): string | undefined {

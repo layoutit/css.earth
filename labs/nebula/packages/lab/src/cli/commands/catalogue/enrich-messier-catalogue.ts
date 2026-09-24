@@ -4,7 +4,8 @@ import { readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { enrichImageMetadata, selectEnrichmentCandidates, type EnrichedArchiveImage } from './enrich-messier.ts';
 import { inventoryStorage } from '../../../features/catalogue/selection.ts';
-import { readArchiveImage, readArchiveQuery, readMessierInventory, record, type ArchiveImage, type MessierInventory } from '../../../features/catalogue/types.ts';
+import { readArchiveImage, readArchiveQuery, readMessierInventory, type ArchiveImage, type MessierInventory } from '../../../features/catalogue/types.ts';
+import { isRecord as record } from '@cssearth/core';
 
 const hash = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const directory = '.local/nebula-lab/catalogue/messier';

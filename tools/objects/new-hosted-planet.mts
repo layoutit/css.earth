@@ -18,7 +18,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { starStylesheet } from './new-object/scaffold.mts';
 import { temperatureCatalogueColor } from './star-catalogue-color.mts';
 
@@ -29,9 +29,17 @@ const GEOMETRY_SCALE = 1.25;
 /** The shared neutral gray of an unresolved surface, as the shape-only bodies use. */
 const NEUTRAL_GRAY = '#9a9a9a';
 
-/** Static presentation for a hosted planet's single lens (`lens`: its surface id) and 460px lighting frames. */
-export function hostedPlanetStylesheet(id: string, lens = 'shape'): string {
+/** Static presentation for a hosted planet's lenses and 460px lighting frames. `lens` is the default lens's surface id; each of
+ * `otherLenses` replaces the images while the stage shows it. */
+export function hostedPlanetStylesheet(id: string, lens = 'shape', otherLenses: readonly string[] = []): string {
   const scope = `.object-stage[data-object-id="${id}"]`;
+  const images = (stage: string, surface: string) => `${stage} .polycss-scene s:not(.${id}-polar) {
+  background-image: url("/scenes/${id}/${id}-surface-${surface}@2x.webp") !important;
+}
+${stage} .polycss-scene s.${id}-polar {
+  background-image: url("/scenes/${id}/${id}-poles-${surface}@2x.webp") !important;
+}
+`;
   const scale = BODY_RADIUS_UNITS * 2 / 460;
   return `${scope} > .${id}-material-composite {
   position: absolute;
@@ -58,13 +66,7 @@ ${scope} .polycss-scene s {
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;
 }
-${scope} .polycss-scene s:not(.${id}-polar) {
-  background-image: url("/scenes/${id}/${id}-surface-${lens}@2x.webp") !important;
-}
-${scope} .polycss-scene s.${id}-polar {
-  background-image: url("/scenes/${id}/${id}-poles-${lens}@2x.webp") !important;
-}
-/* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
+${[images(scope, lens), ...otherLenses.map(other => images(`${scope}[data-lens="${other}"]`, other))].join('')}/* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
 ${scope} .${id}-fixed-material {
   top: 50%;
   left: 50%;

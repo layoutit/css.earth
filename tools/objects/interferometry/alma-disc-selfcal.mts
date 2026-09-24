@@ -25,7 +25,7 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { fileSize, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';

@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { base, hashFile, runtimeLock, verifyFiles } from './runtime.mts';
-import { requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { requireString, requireFiniteNumber } from '@cssearth/core';
 import { restoreInputs } from './restore.mts';
 
 const { lock, files, bridgeFiles } = await runtimeLock();

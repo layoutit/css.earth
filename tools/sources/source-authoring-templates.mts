@@ -1,5 +1,4 @@
-import { requireRecord } from './source-values.mts';
-import { shape, text, number, array, optional, nullable, boolean } from '../objects/terrestrial-layers/source-records.mts';
+import { requireRecord, shape, text, number, array, optional, nullable, boolean } from '@cssearth/core';
 import { parseSourceManifest } from '#preparation/source-files';
 import { parseSolidPreparationSource } from '../objects/terrestrial-layers/profile-source.mts';
 

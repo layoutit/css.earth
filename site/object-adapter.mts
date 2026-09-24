@@ -11,7 +11,9 @@ export const objectAdapter = Object.freeze({
       const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
       mount = await loadPackagedObject(preparedDescriptor, signal);
     } else {
-      const objectRecord = (objects ?? (await import('./objects.mts')).SCENE_OBJECTS).find(({ id }) => id === objectId);
+      const directory = objects ? null : await import('./object-directory.mts');
+      const loaded = directory ? await directory.loadObject(objectId) : objects!.find(({ id }) => id === objectId);
+      const objectRecord = loaded && (!directory || directory.isLoadedScene(loaded)) ? loaded as ObjectEntry : null;
       if (!objectRecord) throw new Error(`Unknown cssEarth object: ${objectId ?? "unknown"}.`);
       mount = await objectRecord.loadScene(signal);
     }

@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { readOracleFixture, readOracleInput, ORACLE_ROOT, verifyOracleBytes } from '../fixture.mts';
 import { parsePdsVertexFacetShape } from '../../objects/terrestrial-layers/obj-shape.mts';
 import { readFitsImage } from '../../fits/fits.mts';

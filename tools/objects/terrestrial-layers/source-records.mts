@@ -1,21 +1,4 @@
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
-export type Decoder<T> = (value: unknown) => T;
-export const text = requireString;
-export const number = requireFiniteNumber;
-export const optional = <T,>(decode: Decoder<T>): Decoder<T | undefined> => value => value === undefined ? undefined : decode(value);
-export const nullable = <T,>(decode: Decoder<T>): Decoder<T | null> => value => value === null ? null : decode(value);
-export const array = <T,>(decode: Decoder<T>): Decoder<T[]> => value => requireArray(value).map(decode);
-export function boolean(value: unknown): boolean { if (typeof value !== 'boolean') throw new TypeError('Expected source boolean'); return value; }
-export function shape<const T extends Record<string, Decoder<unknown>>>(fields: T): Decoder<{ -readonly [K in keyof T]: ReturnType<T[K]> }> {
-  return value => {
-    const source = requireRecord(value), result: Record<string, unknown> = { ...source };
-    for (const [key, decode] of Object.entries(fields)) {
-      try { const field = decode(source[key]); if (field !== undefined || Object.hasOwn(source, key)) result[key] = field; }
-      catch (error) { throw new TypeError(`Terrestrial source ${key}: ${error instanceof Error ? error.message : String(error)}`); }
-    }
-    return result as { -readonly [K in keyof T]: ReturnType<T[K]> };
-  };
-}
+import { array, boolean, choice, dictionary, nullable, number, optional, requireRecord, shape, text, type Decoder } from '@cssearth/core';
 export const dimensions = {width:number,height:number};
 export const parseDimensions = shape(dimensions);
 export const parseTransform = shape({scale:number,offset:number});
@@ -99,7 +82,6 @@ export const parseScalarMapLens = shape({path:text,labelPath:text,datasetId:text
   sourceValidRange:optional(array(number)),surfaceSampling:parseAmbiguitySampling,valueTransform:optional(parseTransform),minimum:number,maximum:number,
   sourceUnits:optional(text),displayUnits:optional(text)});
 export const parseCategory = shape({value:text,label:text,color:text});
-export const dictionary = <T,>(decode: Decoder<T>): Decoder<Record<string,T>> => value => Object.fromEntries(Object.entries(requireRecord(value)).map(([key,value])=>[key,decode(value)]));
 export const parseSymbols = shape({paths:text,locations:text,shapeModel:text,expectedPaths:number,expectedLocations:number,
   lineWidthMeters:number,locationDiameterMeters:number,maximumSegmentMeters:number,maximumRegistrationDistanceMeters:number,colorCategories:dictionary(number)});
 export const parseVtkGrid = shape({...meshDimensions,field:text});
@@ -137,7 +119,6 @@ export function parseEllipsoidParameters(value: unknown) {
  return shape({schema:text,scaleConvention:choice('thermal-radius-as-volume-equivalent'),axisRatioAB:number,axisRatioBC:number,thermalRadiusKm:number,subdivisions:number})(value);
 }
 export const parseContactModel = shape({schema:text,origin:text,lobes:array(shape({semiaxesKm:array(number)})),fluxScale:number,subdivisions:number});
-export function choice<const T extends readonly string[]>(...values: T): Decoder<T[number]> { return value => {const match=values.find(item=>item===value);if(match===undefined)throw new TypeError('Unsupported source choice');return match;}; }
 export const parseEncounterControl = shape({bodyToJ2000:array(array(number)),offsetPixels:array(number),maximumOffsetPixels:number});
 export const parseEncounterRegistration = shape({method:text,maximumRmsMeters:number,maximumResidualMeters:number,
   reference:optional(shape({id:text})),

@@ -2,7 +2,8 @@
 import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
 import{ plotNumericPreview ,type FigureOptions}from'../../astronomy-packages/plots.mts';
-import { descriptor, finite, stable } from './common.mts';
+import { descriptor, stable } from './common.mts';
+import { requireFiniteNumber as finite } from '@cssearth/core';
 export interface RadarImage {readonly width:number;readonly height:number;readonly bitpix:number;readonly dataOffset:number;readonly bytes:Buffer}
 export interface RadarWindow {readonly delay:[number,number];readonly doppler:[number,number]}
 export const GEOGRAPHOS_GE007={labelUrl:'https://sbnarchive.psi.edu/pds3/non_mission/EAR_A_GST_3_RDR_GEOGRAPHOS_RADAR_V1_1/data/ge007.lbl',imageUrl:'https://sbnarchive.psi.edu/pds3/non_mission/EAR_A_GST_3_RDR_GEOGRAPHOS_RADAR_V1_1/data/ge007.fit',labelSha256:'e505b5a1f8d9b38d64a55571d0fa14f14b572ad09cffda5d89b3355e732d2f0c',imageSha256:'e26d04af718cd5f98a2ba0b1f3a9beee509f1ae2168ddec33cab24653a8725a2'} as const;

@@ -7,7 +7,7 @@ import type { PreparedCatalogObject } from '../../packages/catalog/src/clusters.
 import { normalizeDestinationQuery } from '../../site/destination-search.mts';
 import { definePreparedFocus } from '../../site/prepared-focus-object.mts';
 import { parseNavigationDistance } from '../../site/navigation/navigation-distance.mts';
-import { isRecord, hasErrorCode } from '../sources/source-values.mts';
+import { isRecord, hasErrorCode } from '@cssearth/core';
 import { defineObjects } from '../../site/object-schema.mts';
 
 const AU_M = 149597870700, PC_M = 3.085677581491367e16;

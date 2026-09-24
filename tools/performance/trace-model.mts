@@ -1,4 +1,4 @@
-import { isRecord } from '../sources/source-values.mts';
+import { isRecord } from '@cssearth/core';
 
 // Chrome trace JSON is external input. Analysis joins read an event only after
 // its name, timestamp and the optional fields they compare have the JSON types

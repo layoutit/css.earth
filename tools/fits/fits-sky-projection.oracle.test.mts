@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { readFitsFileHdus, readFitsFileRegion, readFitsHdus } from './fits.mts';
 import { skyProjection } from './fits-sky.mts';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/sky-projection.json');
 const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/sky-projection.fits');

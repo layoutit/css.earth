@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../tools/sources/source-values.mts';
+import { readJsonSource } from '../../../tools/sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { validateClosedMesh } from '../../../tools/objects/terrestrial-layers/radial-mesh.mts';
 
 const projectRoot = resolve(import.meta.dirname, '../../..');

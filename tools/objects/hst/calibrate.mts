@@ -34,7 +34,7 @@ import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastFile, type MastFile } from '../astronomy-packages/mast.mts';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
 import { productRecordPath, writeProductRecord, type ProductRun, type ProductSoftware } from '../product-record.mts';

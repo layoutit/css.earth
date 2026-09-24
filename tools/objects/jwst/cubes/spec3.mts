@@ -35,7 +35,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../../src/platform/sha256.mts';
 import { sampleAgreement } from '../sample-agreement.mts';
 import { readFitsFileHdus } from '../../../fits/fits.mts';
-import { requireRecord } from '../../../sources/source-values.mts';
+import { requireRecord } from '@cssearth/core';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../../product-record.mts';
 import { eurekaToolchain } from '../toolchain.mts';
 import { freeMemoryPercent, mastFile, toolchainPython } from '../mast.mts';

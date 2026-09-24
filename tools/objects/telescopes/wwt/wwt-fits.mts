@@ -2,7 +2,7 @@
 import { createHash } from 'node:crypto';
 import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { sciencePackage } from '../../astronomy-packages/science.mts';
 import { plotProduct } from '../../astronomy-packages/plots.mts';
 import { writeProductRecord } from '../../product-record.mts';

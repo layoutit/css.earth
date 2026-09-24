@@ -11,7 +11,7 @@
  * masked wavelengths, the windows, the grid, the rejection rule — arrives as a pinned stack definition, parsed here and
  * used by [line-stack.mts](line-stack.mts). Sources for the recipe are named in that definition and in
  * [docs/hubble.md](../../../docs/hubble.md). */
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 // ---- brightness -------------------------------------------------------------------------------------------------------
 /** Planck's constant times the speed of light, erg Å, from the SI definitions of h and c. */

@@ -1,4 +1,4 @@
-import {parse} from '../material-composition/data-schema.mts';
+import {parse} from '@cssearth/core/schema';
 import {bandedGeometryRecipe, type BandedGeometryRecipe} from './geometry-contract.mts';
 import type {Vector3} from '../material-composition/ellipsoid.mts';
 type SourceRectangle = {x:number;y:number;width:number;height:number};

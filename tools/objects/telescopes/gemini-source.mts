@@ -1,5 +1,5 @@
 /** Selected Gemini raw FITS through the existing CADC archive owner. */
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { CADC_TAP, downloadUrl, query as cadcQuery } from '../gemini/cadc.mts';
 import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from '../gemini/archive.mts';
 import { deliverSource, readSavedSource } from './archive-source.mts';

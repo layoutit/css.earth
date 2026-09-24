@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { defineObjects } from '../../site/object-schema.mts';
 import { catalogEntry } from '../../site/object-catalog.mts';
 import type { CatalogEntry } from '../../site/object-catalog.mts';
-import { hasErrorCode, isRecord } from '../sources/source-values.mts';
+import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance, readPreparedFocusObjects } from './prepare-navigation-destinations.mts';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';

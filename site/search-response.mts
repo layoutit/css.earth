@@ -1,5 +1,6 @@
 import { parseHTML } from 'linkedom';
-import { record, requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { matchesObjectCategory } from './object-categories.mts';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeaturePin } from './feature-search.mts';
@@ -7,7 +8,7 @@ import { findResults } from './find.mts';
 import { renderDatasetResponse, UnreadableSavedView } from './dataset-response.mts';
 import { createSelectionPresentation } from './selection-presentation.mts';
 import { selectionTargetFromUrl } from './scene/scene-selection.mts';
-import { SCENE_OBJECTS } from './objects.mts';
+import { WORLD_OBJECTS } from './world-objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
 import { objectIdAtPath } from './root-object.mts';
@@ -15,7 +16,7 @@ import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation
 
 export interface SearchPin { url: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
-  if (!record(value) || typeof value.url !== 'string' || !/^\/(?:features|scenes)\/[a-zA-Z0-9/_-]+\.json$/u.test(value.url)
+  if (!isRecord(value) || typeof value.url !== 'string' || !/^\/(?:features|scenes)\/[a-zA-Z0-9/_-]+\.json$/u.test(value.url)
     || typeof value.count !== 'number' || !Number.isSafeInteger(value.count) || value.count < 0) throw new TypeError('Invalid prepared search index pin.');
   return { url: value.url, count: value.count };
 }
@@ -133,7 +134,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     }
     presentation.setEmptyHidden(items.some(item => !item.hidden) || detailCount + overviewCount > 0, catalogueLoaded);
   }
-  createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, SCENE_OBJECTS));
+  createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 

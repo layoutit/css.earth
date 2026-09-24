@@ -1,4 +1,4 @@
-import { requireRecord, requireFiniteNumber } from '../../tools/sources/source-values.mts';
+import { requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";

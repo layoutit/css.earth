@@ -12,11 +12,15 @@ GJ 504 b glows at about 560 K. JWST's spectrum points to about 25 Jupiter masses
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared colour lens.** The default lens paints the sphere one false colour from its near-infrared photometry: MKO K red, H green and J blue, from Janson et al. (2013) as compiled in the UltracoolSheet v2.1 ([band-color.json](source/photometry/band-color.json)), on a range from zero to its brightest band. Not a natural colour; nobody has resolved its disc.
 
 **Rotation.** No rotation period or spin axis of GJ 504 b on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
+**Illustration lens.** NASA's artist's concept of GJ 504 b: the map its [Eyes on Exoplanets](https://eyes.nasa.gov/apps/exo/) app wraps around the planet ([`GJ_504_b.jpg`](https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/GJ_504_b.jpg), 2,048 × 1,024, named in the app's texture table), credited NASA/JPL-Caltech. NASA says each planet in the app shows "an artist's concept of what it might look like" ([tutorial](https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/)); the file carries no credit or date of its own, and NASA does not say how it was made. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in the map was observed. Preparation resizes it unchanged onto the sphere with its left edge at 0° longitude ([`equirectangular-illustration`](../../../tools/objects/observation/interpret.mts)), so its longitudes are arbitrary. It is a second lens: Infrared colour stays the default. It is listed in the package's illustration lenses, so it never counts as imagery. The planet is drawn self-luminous, so the map is shown evenly bright, without its star's shading, as the Infrared colour lens is. NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+
 ## Evidence
+
+- Run of 2026-09-24: `node tools/prepare/prepare-object.mts` added the Illustration lens; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../tools/objects/observation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the lens opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
 
 Run of 2026-09-23 (this version):
 
@@ -26,5 +30,7 @@ Run of 2026-09-23 (this version):
 
 - Its mass, and so whether it is a planet or a brown dwarf, depends on the system's age, which is still debated.
 - The radius is a model value; the companion is a point in every image.
+
+- **The Illustration lens is art, not data.** Its colours, clouds and terrain are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -12,7 +12,7 @@
  * longitudes the observation saw, which are the group map's columns, carry no data. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireRecord, requireString } from '@cssearth/core';
 import { npzArray, readNpz } from './npz.mts';
 
 const RADIAN = 180 / Math.PI;

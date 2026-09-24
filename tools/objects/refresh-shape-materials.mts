@@ -7,7 +7,7 @@ import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'n
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
+import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';

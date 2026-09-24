@@ -1,5 +1,5 @@
 import type { ObjectDiscovery } from './object-discovery.mts';
-import { record } from './browser-types.mts';
+import { isRecord } from '@cssearth/core';
 import { defineObject } from './object-schema.mts';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.mts';
 import type { NavigationDistance } from './navigation/navigation-distance.mts';
@@ -34,11 +34,11 @@ function aliases(value: unknown, id: string): readonly string[] {
 
 /** Decode package metadata at both the build and application boundaries. */
 export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['loadScene'], distance: NavigationDistance, discovery?: ObjectDiscovery): CatalogEntry {
-  if (!record(input) || input.schema !== 'cssearth-object@1' || typeof input.id !== 'string' || !record(input.properties)) {
+  if (!isRecord(input) || input.schema !== 'cssearth-object@1' || typeof input.id !== 'string' || !isRecord(input.properties)) {
     throw new TypeError('Invalid catalogue descriptor.');
   }
   const catalog = input.properties.catalog;
-  if (!record(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
+  if (!isRecord(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
   const { name, systemName, color, distanceAu, description } = catalog;
   const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationLenses', 'orientationReference'];
   if (Object.keys(catalog).some(key => !keys.includes(key)) || typeof name !== 'string' || typeof systemName !== 'string' ||
@@ -49,7 +49,7 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
   let context: CatalogContext | undefined;
   if (catalog.context !== undefined) {
     const value = catalog.context;
-    if (!record(value) || Object.keys(value).some(key => !['name', 'color', 'order', 'orbitsWithinAu', 'labelPlacement'].includes(key)) ||
+    if (!isRecord(value) || Object.keys(value).some(key => !['name', 'color', 'order', 'orbitsWithinAu', 'labelPlacement'].includes(key)) ||
         (value.name !== undefined && (typeof value.name !== 'string' || !value.name)) ||
         (value.orbitsWithinAu !== undefined && !(typeof value.orbitsWithinAu === 'number' && Number.isFinite(value.orbitsWithinAu) && value.orbitsWithinAu > 0)) ||
         (value.labelPlacement !== undefined && value.labelPlacement !== 'centre') ||

@@ -23,7 +23,7 @@ import { hostLitGray, linearToSrgb } from '../color-transfer.mts';
 import { loadDiscBandColor } from '../observation/disc-band-color.mts';
 import { loadStellarPhotometricColor, quadraticIntensity } from '../observation/stellar/stellar-photometric-color.mts';
 import { colorForValue, loadScienceSurface } from '../terrestrial-layers/scientific-raster.mts';
-import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const objects = resolve(import.meta.dirname, '../../../src/objects');
 export const MARKER_PATH = 'presentation/context.png';
