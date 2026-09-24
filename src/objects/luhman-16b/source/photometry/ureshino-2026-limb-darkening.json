@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "luhman-16b",
+  "source": "Ureshino et al. (2026), Bayesian Doppler Imaging: Simultaneous Inference of Surface Maps and Geometric Parameters (https://arxiv.org/abs/2605.08544), Table of posterior estimates for Luhman 16B",
+  "band": "VLT/CRIRES, 2.304-2.316 um (the CO band head); not a visible band",
+  "law": "I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2",
+  "published": {
+    "q1": {
+      "value": 0.8124,
+      "cell": "median 0.8124 (16-84 %: 0.5947-0.9403)"
+    },
+    "q2": {
+      "value": 0.5873,
+      "cell": "median 0.5873 (16-84 %: 0.4641-0.7525)"
+    }
+  },
+  "u1": {
+    "value": 1.0587,
+    "uncertainty": 0.3718,
+    "cell": "2 sqrt(q1) q2 (Kipping 2013) of the published medians; uncertainty half its spread over the corners of the 16-84 % ranges"
+  },
+  "u2": {
+    "value": -0.1574,
+    "uncertainty": 0.2797,
+    "cell": "sqrt(q1) (1 - 2 q2) (Kipping 2013) of the published medians; uncertainty half its spread over the corners of the 16-84 % ranges"
+  },
+  "note": "Fitted with the surface map, in Kipping's parametrisation, to the CRIRES spectra of the dwarf itself; the only limb law measured for it. It is an infrared law: the visible limb is not measured, and no model table reaches a 1,261 K dwarf. The edge keeps 1 - u1 - u2 = 0.099 of the centre's brightness."
+}

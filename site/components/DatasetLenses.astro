@@ -75,25 +75,6 @@ const stepOf = (lens: Control) => {
         hidden={lens.id !== lenses.defaultLens}
       >
         <DatasetDescription {lens}>
-          {stepOf(lens) && (() => {
-            const step = stepOf(lens)!;
-            const arrow = (target: Control | undefined, next: boolean) => <button
-              class="object-lens-step"
-              type="submit"
-              form={`${objectId}-datasets`}
-              name={controlName}
-              value={target?.id ?? lens.id}
-              data-dataset-step={target ? target.id : ''}
-              data-focus-lens={focus ? true : undefined}
-              disabled={!target}
-              aria-label={target ? `${next ? 'Next' : 'Previous'}: ${target.step!.label}` : `No ${next ? 'next' : 'previous'} step`}
-            >{next ? '›' : '‹'}</button>;
-            return <div class="object-lens-steps" role="group" aria-label={`${lens.label} steps`}>
-              {arrow(step.previous, false)}
-              <span class="object-lens-step-label">{lens.step!.label} · {step.index + 1} of {step.count}</span>
-              {arrow(step.next, true)}
-            </div>;
-          })()}
           {lens.texture && <div
             class="object-surface-minimap"
             data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}
@@ -120,6 +101,25 @@ const stepOf = (lens: Control) => {
               ></span>)}
             </>}
           </div>}
+          {stepOf(lens) && (() => {
+            const step = stepOf(lens)!;
+            const arrow = (target: Control | undefined, next: boolean) => <button
+              class="object-lens-step"
+              type="submit"
+              form={`${objectId}-datasets`}
+              name={controlName}
+              value={target?.id ?? lens.id}
+              data-dataset-step={target ? target.id : ''}
+              data-focus-lens={focus ? true : undefined}
+              disabled={!target}
+              aria-label={target ? `${next ? 'Next' : 'Previous'}: ${target.step!.label}` : `No ${next ? 'next' : 'previous'} step`}
+            ><span class={`object-lens-step-chevron ${next ? 'is-next' : 'is-previous'}`} aria-hidden="true"></span></button>;
+            return <div class="object-lens-steps" role="group" aria-label={`${lens.label} steps`}>
+              {arrow(step.previous, false)}
+              <span class="object-lens-step-label">{lens.step!.label} · {step.index + 1} of {step.count}</span>
+              {arrow(step.next, true)}
+            </div>;
+          })()}
           {borrowedLegend(lens) && <DatasetLegend {objectId} lens={borrowedLegend(lens)!} owner={lens.id} />}
           <DatasetLegend {objectId} {lens} />
         </DatasetDescription>

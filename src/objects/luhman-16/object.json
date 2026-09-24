@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -105,7 +105,7 @@
     "catalog": {
       "name": "Luhman 16 A",
       "classification": "star",
-      "color": "#ff6100",
+      "color": "#ff2f96",
       "distanceAu": 411832.8,
       "description": "The brighter of the two nearest brown dwarfs, 2 parsecs away: a failed star 35 times the mass of Jupiter.",
       "systemName": "Luhman 16 system",

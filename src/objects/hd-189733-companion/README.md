@@ -57,7 +57,7 @@ Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-1897
 
 **The radial velocities disagree.** Bakos et al. (2006) measured B − A = −0.72 ± 1.02 km/s, which a bound orbit allows; Gaia DR3's rows give +3.99 ± 1.21 km/s, which is faster than A's gravity can hold at this separation. The fit uses neither, only the astrometry both agree with. A fit with the 2006 value gives the same picture: semi-major axis 134 to 1,217 AU, period 1,556 to 42,454 years, and 295 of its 300 orbits within 30° of edge-on.
 
-**No image, diameter, limb darkening or axis.** At 19.8 pc B's disc would be about 0.1 mas across, and no measurement of any of these exists.
+**No image, diameter or axis.** At 19.8 pc B's disc would be about 0.1 mas across, and no measurement of any of these exists. Its limb darkening is a model: the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,213 K (TESS Input Catalog v8.2 (TIC 256364937; Stassun et al. 2019), the row of its radius and mass) and log g 5.02 (the same TIC row (5.024)).
 
 **The size is a catalogue estimate.** The radius comes from a magnitude–radius relation for M dwarfs, not from the star itself.
 

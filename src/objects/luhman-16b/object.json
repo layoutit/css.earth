@@ -29,6 +29,11 @@
           "projection": "equirectangular",
           "lenses": [
             {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
               "id": "brightness",
               "source": "content",
               "material": "emission"
@@ -111,7 +116,7 @@
     "catalog": {
       "name": "Luhman 16 B",
       "classification": "star",
-      "color": "#ff5b00",
+      "color": "#ff5be2",
       "distanceAu": 411836.9,
       "description": "One of the two nearest brown dwarfs, its clouds mapped from the Doppler shifts of its spectrum as it spins.",
       "systemName": "Luhman 16 system",

@@ -10,7 +10,7 @@ ROXs 42B A is the brighter of two young stars 146 parsecs away in Ophiuchus. The
 
 **Mass.** 0.89 ± 0.08 solar masses, the photometric mass of Kraus et al. ([2014](https://arxiv.org/abs/1311.7664)). Inglis et al. (2026) measure the pair's dynamical total, 1.35 ± 0.07, which the two photometric masses match.
 
-**Colour lens.** A Planck spectrum at 3,650 K through the CIE 1931 2° observer into sRGB with the D65 white. Gaia published no BP/RP spectrum of the pair. No limb darkening is drawn.
+**Colour lens.** A Planck spectrum at 3,650 K through the CIE 1931 2° observer into sRGB with the D65 white. Gaia published no BP/RP spectrum of the pair. Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 3,650 K (the record) and log g 4.03 (from the record's mass and radius (packages/astronomy/data/bodies/roxs-42b.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** None is measured on the sky; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
