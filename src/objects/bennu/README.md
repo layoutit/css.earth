@@ -91,7 +91,7 @@ Included: the 6.25 cm zero-phase albedo map on OLA v20, the separate 5 cm global
 - [Mapping release](https://svs.gsfc.nasa.gov/5069)
 - [Shape](https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj)
 - [Mission facts](https://science.nasa.gov/mission/osiris-rex/)
-- Pole and spin: source/reference/bennu_v17.tpc
+- Pole and spin: [bennu_v17.tpc](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/orex/orex_spice/spice_kernels/pck/bennu_v17.tpc)
 
 The [USGS MapCam release](https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm)
 adds the published false-color composite from [DellaGiustina et al. (2020)](https://figshare.com/articles/journal_contribution/Maps_DellaGiustina_et_al_Science_2020_abc3660/12996494).

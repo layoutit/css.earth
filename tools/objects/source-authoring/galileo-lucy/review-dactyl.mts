@@ -5,6 +5,7 @@ import sharp from 'sharp';
 import { readFitsPrimary } from '../../observation/fits.mts';
 import { readDaf } from '../../../spice/daf.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { readPinnedFile } from '../../../spice/kernel-bank.mts';
 
 const input = resolve('src/objects/dactyl/evidence/galileo');
 const output = resolve(process.argv[2] ?? 'output/dactyl-galileo-review');
@@ -14,7 +15,8 @@ const native = new Map<string, Buffer>();
 for (const item of requireArray(record.files)) {
   const file = requireRecord(item), path = requireString(file.path);
   if (!/^native\/[a-z0-9_]+\.(fit|lbl|tab|bc|tpc)$/.test(path)) throw new Error('Invalid native file path.');
-  const bytes = await readFile(resolve(input, path));
+  // Kernels are not committed; a missing one is restored from its pinned origin.
+  const bytes = /\.(bc|tpc)$/.test(path) ? await readPinnedFile(resolve(input, path), requireString(file.origin), requireString(file.expectedSha256)) : await readFile(resolve(input, path));
   native.set(path, bytes);
 }
 const ckBytes = native.get('native/gll_plt_rec_1993_tav_v00.bc');

@@ -2580,26 +2580,24 @@
   background-image: var(--sun-poles-image) !important;
 }
 
-/* Off-limb context: 768 px = raster.json emission.offLimbSize = the plate's logical size at zoom 1, times the sphere's
-   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="sun"] .sun-corona-layer {
   background-image: var(--sun-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(768px * 1.25 * var(--sun-camera-zoom, 1))
-    calc(768px * 1.25 * var(--sun-camera-zoom, 1));
+    calc(768px * var(--sun-camera-zoom, 1))
+    calc(768px * var(--sun-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale (1.25), the size
-   the sphere is drawn at, so the plate's edge is the sphere's outline. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="sun"] .sun-limb-layer {
   background-image: var(--sun-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * 1.25 * var(--sun-camera-zoom, 1))
-    calc(496px * 1.25 * var(--sun-camera-zoom, 1));
+    calc(496px * var(--sun-camera-zoom, 1))
+    calc(496px * var(--sun-camera-zoom, 1));
 }
 
 /* Spin origin carried from the retired sun-surfaces.css (Carrington longitude 0 faces the default yaw). */

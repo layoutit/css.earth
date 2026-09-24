@@ -7,9 +7,10 @@
  *
  * - a declared file that is not committed, has no acquisition step for its path and is not a generated intermediate;
  * - an acquisition step for a path the manifest does not declare;
- * - a pinned paper or archive document (a PDF, Word or TeX file, a BibTeX file, a readme, a PDS catalogue label, a
+ * - a pinned paper or archive document (a PDF, Word or TeX file, a BibTeX file, a readme, a PDS catalogue label or `.asc` document, a
  *   bundle description or anything in an archive `document/` folder; cite it by URL: docs/provenance/CONTRACT.md,
- *   "References and retained files"), or a byte copy of a file that `src/references` or `src/spice` holds.
+ *   "References and retained files"), a byte copy of a file that `src/references` holds, or any committed SPICE
+ *   kernel (kernel banks and bodies restore kernels from their origins).
  *   Our own Markdown notes are not archive documents.
  *
  *   node tools/ci/check-body-references.mts
@@ -23,16 +24,10 @@ import { promisify } from 'node:util';
 const run = promisify(execFile);
 
 /** Documents a body cites instead of keeping. */
-export const CITED_DOCUMENT = /(?:\.(?:pdf|docx?|rtf|odt|tex|bib|ps|cat)|(?:^|\/)[^/]*bundle_description\.txt|\/document\/[^/]+|(?:^|\/)[^/]*read_?me(?![^/]*\.md$)[^/]*)$/iu;
+export const CITED_DOCUMENT = /(?:\.(?:pdf|docx?|rtf|odt|tex|bib|ps|cat|asc)|(?:^|\/)[^/]*bundle_description\.txt|\/document\/[^/]+|(?:^|\/)[^/]*read_?me(?![^/]*\.md$)[^/]*)$/iu;
 
-/** Body copies of bank kernels that a body's own recipe still reads, each with the reason. New copies fail. */
-export const CONSUMED_KERNEL_COPIES: Readonly<Record<string, string>> = Object.freeze(Object.fromEntries([
-  ...['spice/fk/didymos_system_007.tf', 'spice/lsk/naif0012.tls', 'spice/pck/didymos_system_15.tpc', 'spice/pck/pck00010.tpc']
-    .map(path => [`dimorphos/${path}`, "An input of Dimorphos's DRACO SPICE step, which loads the body's own kernels."]),
-  ...['donaldjohanson', 'lutetia', 'steins'].map(id => [`${id}/reference/naif0012.tls`, "Listed in the body's camera recipe, which loads body-local kernels."]),
-  ...['naif0012.tls', 'vg200051.tsc', 'vg2_v02.tf'].map(name => [`proteus/geometry/${name}`, "Read by Proteus's Voyager colour registration script."]),
-  ['proteus/shape/pck00011.tpc', "Read by Proteus's Voyager colour registration script, which requires its kernels in the package manifest."],
-]));
+/** SPICE kernels are restored from their origins and never committed (see .gitignore). */
+export const SPICE_KERNEL = /\.(?:tls|tsc|tf|ti|tpc|bpc|bsp|bc|tm)$/iu;
 
 export interface Finding { readonly file: string; readonly problem: string }
 
@@ -70,18 +65,20 @@ export function bodySourceFindings(objectId: string, manifest: unknown, acquisit
   return findings;
 }
 
-/** Body files byte-identical to a file of a shared bank, from `git ls-files -s` lines (`<mode> <blob> <stage>\t<path>`). */
+/** Committed SPICE kernels, and body files byte-identical to a file of `src/references`, from `git ls-files -s` lines
+ * (`<mode> <blob> <stage>\t<path>`). */
 export function sharedCopyFindings(stagedLines: readonly string[]): Finding[] {
-  const blobs = new Map<string, string>(), bodies: [string, string][] = [];
+  const blobs = new Map<string, string>(), bodies: [string, string][] = [], findings: Finding[] = [];
   for (const line of stagedLines) {
     const match = line.match(/^\d+ ([0-9a-f]+) \d+\t(.+)$/u);
     if (!match) continue;
     const [, blob, path] = match as unknown as [string, string, string];
-    if (/^src\/(?:references|spice)\//u.test(path) && !path.endsWith('/manifest.json')) blobs.set(blob, path);
+    if (SPICE_KERNEL.test(path)) findings.push({ file: path, problem: 'is a committed SPICE kernel; restore it from its origin (a kernel bank or an acquisition step) instead.' });
+    else if (path.startsWith('src/references/') && !path.endsWith('/manifest.json')) blobs.set(blob, path);
     else if (path.startsWith('src/objects/')) bodies.push([blob, path]);
   }
-  return bodies.filter(([blob, path]) => blobs.has(blob) && !Object.hasOwn(CONSUMED_KERNEL_COPIES, path.replace(/^src\/objects\/([^/]+)\/source\//u, '$1/')))
-    .map(([blob, path]) => ({ file: path, problem: `is a copy of ${blobs.get(blob)}; read the shared bank instead.` }));
+  return [...findings, ...bodies.filter(([blob]) => blobs.has(blob))
+    .map(([blob, path]) => ({ file: path, problem: `is a copy of ${blobs.get(blob)}; read the shared bank instead.` }))];
 }
 
 async function git(root: string, args: string[]) {
@@ -89,7 +86,7 @@ async function git(root: string, args: string[]) {
 }
 
 export async function checkBodyReferences(root = process.cwd()): Promise<Finding[]> {
-  const lines = (await git(root, ['ls-files', '-s', '--', 'src/objects', 'src/references', 'src/spice'])).split('\n').filter(Boolean);
+  const lines = (await git(root, ['ls-files', '-s', '--', '.'])).split('\n').filter(Boolean);
   const paths = lines.map(line => line.slice(line.indexOf('\t') + 1));
   const findings = sharedCopyFindings(lines);
   const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
@@ -116,7 +113,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const findings = await checkBodyReferences();
   for (const finding of findings) console.error(`${finding.file}: ${finding.problem}`);
   if (findings.length) {
-    console.error(`\n${findings.length} finding${findings.length === 1 ? '' : 's'}: a body must stay restorable from its declared sources, cite papers by URL, and read shared tables from src/references or src/spice.`);
+    console.error(`\n${findings.length} finding${findings.length === 1 ? '' : 's'}: a body must stay restorable from its declared sources, cite papers by URL, read shared tables from src/references, and restore SPICE kernels instead of committing them.`);
     process.exitCode = 1;
-  } else console.log('Every body is restorable from its declared sources; no pinned papers or shared-reference copies.');
+  } else console.log('Every body is restorable from its declared sources; no pinned papers, shared-reference copies or committed kernels.');
 }

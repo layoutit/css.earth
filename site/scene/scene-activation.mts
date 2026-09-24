@@ -10,8 +10,9 @@ import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
 
 /** Arrival restores prepared state before the session becomes ready; every binding belongs to that session. */
-export function createSceneActivation({ windowTarget, navigation, view, isCurrent }: {
+export function createSceneActivation({ windowTarget, navigation, view, isCurrent, getReducedMotion }: {
   windowTarget: BrowserWindow;
+  getReducedMotion(): boolean;
   navigation: ReturnType<typeof createPreparedWorldNavigation>;
   view: SceneView;
   isCurrent(session: SceneSession): boolean;
@@ -50,6 +51,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       const selected = session.url ? await selectSceneDataset(session, session.url, datasetSignal, { initial: true }) : true;
       if (!isCurrent(session) || datasetSignal.aborted) return false;
       if (!selected) throw new Error('Dataset selection was superseded.');
+      if (!await frameLensVolume(session) || !isCurrent(session)) return false;
     } catch (error) {
       if (!isCurrent(session) || datasetSignal.aborted) return false;
       const datasets = mount.datasets;
@@ -66,6 +68,22 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       }
     }
     return { interrupted, feature: request ? request.feature : initialSelection?.feature ?? null };
+  }
+
+  /** A plain body page whose lens shows a volume opens on the whole volume when the view does not already hold it.
+   * A saved view, a feature, an overview, a focus and a history restore keep their own camera. */
+  async function frameLensVolume(session: SceneSession) {
+    const { objectId, request, mount } = session;
+    if (!mount || !session.url || request?.camera.kind === 'restore') return true;
+    const selection = readNavigationSelection(new URL(session.url), objectId, SCENE_OBJECTS);
+    if (selection.subject.kind !== 'object' || selection.savedView || selection.feature) return true;
+    const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
+    const target = volume ? navigation.lensVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;
+    if (!target) return true;
+    // A cold page frames before it is ready; an arrival pulls back from the flight's endpoint.
+    const framed = await session.wait(navigation.focus({ objectId, mount, signal: request?.signal ?? session.signal,
+      reducedMotion: !request || getReducedMotion(), targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
+    return !framed.cancelled;
   }
 
   function connectControls(session: SceneSession) {

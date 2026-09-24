@@ -6,5 +6,5 @@
   "spinDegreesPerDay": 1131.98280286,
   "referenceEpochJdTt": 2451545,
   "coordinateSystem": "Ryugu mission body-fixed frame; east longitude",
-  "source": "reference/ryugu_v10.tpc"
+  "source": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/hyb2/hyb2_spice/spice_kernels/pck/ryugu_v10.tpc"
 }

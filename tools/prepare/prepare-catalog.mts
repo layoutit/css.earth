@@ -85,6 +85,27 @@ export async function contextObjectAssetUrls(contexts: readonly { id: string }[]
   return Object.fromEntries(entries.sort(([left], [right]) => left.localeCompare(right, 'en')));
 }
 
+/** The frame of every volume a body shows through one of its lenses, so an opening camera can fit it. */
+async function readLensVolumes(entries: readonly CatalogEntry[], projectRoot: string) {
+  const volumes: Record<string, unknown> = {};
+  for (const { id } of entries) {
+    let content: unknown;
+    try { content = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'source/content/object.json'), 'utf8')); }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+    const controls = isRecord(content) && isRecord(content.lenses) && Array.isArray(content.lenses.controls) ? content.lenses.controls : [];
+    for (const control of controls) {
+      const volumeId = isRecord(control) && isRecord(control.volume) ? control.volume.objectId : undefined;
+      if (typeof volumeId !== 'string' || volumes[volumeId]) continue;
+      const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8'));
+      if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
+        throw new TypeError(`src/objects/${volumeId}/object.json: the volume ${id} shows has no properties.frame.`);
+      }
+      volumes[volumeId] = descriptor.properties.frame;
+    }
+  }
+  return volumes;
+}
+
 async function writeGenerated(output: string, text: string) {
   await mkdir(dirname(output), { recursive: true });
   try { if (await readFile(output, 'utf8') === text) return; }
@@ -117,6 +138,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, 'site/prepared-object-discovery.json'), JSON.stringify(Object.fromEntries(discoveries)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-object-distances.json'), JSON.stringify(Object.fromEntries(entries.map(entry => [entry.id, entry.distance]))) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-focus-objects.json'), JSON.stringify(focuses) + '\n');
+  await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,
     await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));

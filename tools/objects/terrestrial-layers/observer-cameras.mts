@@ -12,6 +12,7 @@ import { decodeProfile } from './source-records.mts';
 import { readFitsHdu } from '../../fits/fits.mts';
 import { parseTextKernel } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds } from '../../spice/lsk.mts';
+import { restoredBankFile } from '../../spice/kernel-bank.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
 import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from './observer-camera.mts';
 import { limbCentre } from './registration-sweeps.mts';
@@ -22,6 +23,8 @@ export const OBSERVER_CAMERAS_SCHEMA = 'cssearth-observer-cameras@1';
 export const OBSERVER_CAMERAS_FILE = 'preparation/observer-cameras.json';
 /** The shared leap-second kernel every IAU pole model is evaluated with. */
 export const LEAP_SECONDS_KERNEL = 'src/spice/cassini/lsk/naif0012.tls';
+/** The leap-seconds kernel's local path, restored from the Cassini bank when missing. */
+export const leapSecondsKernel = (repositoryRoot: string) => restoredBankFile(resolve(repositoryRoot, LEAP_SECONDS_KERNEL));
 /** A frame's limb-fitted centre is stated only when the fit settled: enough limb, and a last step under half a pixel. */
 export const SETTLED_LIMB = { minimumBins: 8, maximumLastMovePixels: 0.5 } as const;
 export const limbSettled = (limb: { limbBins: number; movedPixels: number }) => limb.limbBins >= SETTLED_LIMB.minimumBins && limb.movedPixels < SETTLED_LIMB.maximumLastMovePixels;
@@ -71,7 +74,7 @@ export function parseObserverCameras(value: unknown): ObserverCamerasRecord {
 
 /** The orientation the record names, read from the pinned file. */
 export async function loadOrientation(sourceDirectory: string, rotation: ObserverCamerasRecord['rotation'], repositoryRoot: string): Promise<BodyOrientation> {
-  const source = await readFile(resolve(sourceDirectory, rotation.path), 'utf8');
+  const source = await readFile(await restoredBankFile(resolve(sourceDirectory, rotation.path)), 'utf8');
   if (rotation.kind === 'spin-record') {
     // The stated column order must be the one the published pole supports; nothing in the record says which it is.
     const pole = await readingPole(sourceDirectory, rotation.publishedPole);
@@ -82,7 +85,7 @@ export async function loadOrientation(sourceDirectory: string, rotation: Observe
     return spinOrientation(parseSpinState(source, rotation.columnOrder as 'latitude-first' | 'longitude-first'));
   }
   const pool = parseTextKernel(source, rotation.path);
-  const leapSeconds = parseLeapSeconds(parseTextKernel(await readFile(resolve(repositoryRoot, LEAP_SECONDS_KERNEL), 'utf8'), 'naif0012.tls'));
+  const leapSeconds = parseLeapSeconds(parseTextKernel(await readFile(await leapSecondsKernel(repositoryRoot), 'utf8'), 'naif0012.tls'));
   return pckOrientation(pool, requireFiniteNumber(rotation.body, 'body code'), leapSeconds);
 }
 
