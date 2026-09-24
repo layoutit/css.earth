@@ -5,7 +5,6 @@ import type { BrowserWindow } from './browser-types.mts';
 import type { SceneSubject } from './scene/scene-selection.mts';
 import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement } from './browser-types.mts';
-import { objectCategoryCount } from './object-categories.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
@@ -62,7 +61,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     void navigation?.select(current);
   };
   const presentation = createSelectionPresentation(documentTarget, browser, information, selectNavigation);
-  const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const catalogue = createObjectCatalogue({ documentTarget, windowTarget, browser, resultsPanel, lifetime,
     onLoad() {
@@ -81,7 +79,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     const solarSystem = navigationRoot.querySelector<HTMLDetailsElement>('details[data-atlas-depth="0"][data-atlas-key="solar-system"]');
     if (solarSystem) solarSystem.open = true;
   };
-  let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
   let showingSearchResults = false;
   // Scroll events arrive after layout. Retain that state so publishing an
   // unchanged camera or selection never forces layout to rewrite a zero offset.
@@ -94,28 +91,9 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     resultsPanel.scrollTop = 0;
     resultsScrolled = false;
   };
-  const selectTab = (classification: string, { focus = false, resetScroll = true } = {}) => {
-    if (resetScroll) resetResultsScroll();
-    const previousCategory = activeCategory;
-    activeCategory = classification;
-    for (const tab of tabs) {
-      const selected = tab.dataset.objectTab === classification;
-      tab.setAttribute('aria-selected', String(selected));
-      tab.tabIndex = selected ? 0 : -1;
-      if (selected) {
-        resultsPanel.setAttribute('aria-labelledby', tab.id);
-        if (focus) tab.focus();
-      }
-    }
-    visibleObjects = catalogue.showCategory(classification, previousCategory) + visibleOverviews;
-    setEmptyHidden(visibleObjects > 0);
-    presentSearchResults(browser, showingSearchResults, classification);
-  };
-
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let visibleObjects = 0;
-  let visibleOverviews = 0;
   let visibleFeatures = 0;
   const updateEmpty = () => { setEmptyHidden(visibleObjects + visibleFeatures > 0); };
   const destinations = createDestinationBrowser({
@@ -163,8 +141,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     }
     filteredQuery = query;
     showingSearchResults = searching;
-    visibleOverviews = presentOverviewResults(browser, searching ? query : '');
-    presentSearchResults(browser, searching, activeCategory);
+    const visibleOverviews = presentOverviewResults(browser, searching ? query : '');
+    presentSearchResults(browser, searching);
     if (searching) browser.setAttribute('data-navigation-filtered', '');
     else browser.removeAttribute('data-navigation-filtered');
     filteredClassification = null;
@@ -180,17 +158,12 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       void features?.search('');
       return;
     }
-    const result = catalogue.search(query, activeCategory, { illustrations: readIllustrationModels() });
-    const { classification, systemName, showAll } = result;
+    const result = catalogue.search(query, { illustrations: readIllustrationModels() });
+    const { classification, showAll } = result;
     markCategory(classification);
     filteredClassification = classification;
-    visibleObjects = 0;
-    void features?.search(classification || systemName || showAll ? "" : query);
-    const classifications = result.matches.map(match => match.classification);
-    for (const tab of tabs) {
-      requiredElement(tab, '.object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
-    }
-    selectTab(classification ? result.category : 'all', { resetScroll: false });
+    visibleObjects = result.matches.length + visibleOverviews;
+    void features?.search(result.detailQuery);
     // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
     setEmptyHidden(visibleObjects !== 0 || Boolean(features && !classification && !showAll));
   };
@@ -259,18 +232,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       search.focus();
     }, { signal: events.signal });
   }
-  for (const tab of tabs) {
-    tab.addEventListener('click', event => { event.preventDefault(); selectTab(tab.dataset.objectTab ?? 'all'); }, { signal: events.signal });
-    tab.addEventListener('keydown', event => {
-      const index = tabs.indexOf(tab);
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
-        : event.key === 'ArrowRight' ? (index + 1) % tabs.length
-        : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length : null;
-      if (next === null) return;
-      event.preventDefault();
-      selectTab(tabs[next].dataset.objectTab ?? "all", { focus: true });
-    }, { signal: events.signal });
-  }
   search.addEventListener("input", () => {
     if (!open) render(true);
     else filter();
@@ -281,9 +242,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     && (element.classList.contains('object-link') || element.getClientRects().length > 0);
   search.addEventListener("keydown", (event) => {
     if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
-      // Enter opens the first result. The category tabs come first in the browser but are not results.
       const first = [...browser.querySelectorAll<HTMLElement>("summary, a, button")]
-        .find(control => (event.key !== "Enter" || control.getAttribute("role") !== "tab") && visibleControl(control));
+        .find(visibleControl);
       if (first) {
         event.preventDefault();
         if (event.key === "Enter") first.click(); else first.focus();

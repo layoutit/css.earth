@@ -316,7 +316,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   height: var(--explorer-search-height);
 }
 
-.object-sidebar .object-browser[data-navigation-filtered] .object-tabs { display: none; }
 .object-sidebar .object-browser[data-navigation-filtered] #object-category-results {
   padding-block-start: 0;
 }

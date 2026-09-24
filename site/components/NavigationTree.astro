@@ -1,13 +1,13 @@
 ---
 import '../navigation/navigation-tree.css';
 import TreeItem from './NavigationTreeItem.astro';
-import { navigationTree, readObjects } from '../navigation/navigation-tree.mts';
+import { navigationTree } from '../navigation/navigation-tree.mts';
 import { NAVIGATION_TREE_URL } from '../navigation/navigation-tree-data.mts';
 
 interface Props { current: string; eager?: boolean }
 
 const { current, eager = false } = Astro.props;
-const tree = navigationTree(readObjects());
+const tree = navigationTree();
 ---
 <div class="atlas-tree-card" data-object-navigation-tree data-atlas-current={current}
   data-atlas-tree-src={NAVIGATION_TREE_URL}>

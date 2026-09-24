@@ -262,7 +262,7 @@ const searchCategories = [
       aria-label="Celestial objects"
       hidden
     >
-      <ObjectResults activeObjectId={objectId} formId={searchFormId}>
+      <ObjectResults activeObjectId={objectId}>
         <Accordion title="Named features" count={0} class="object-feature-results"
           aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
           <p class="object-feature-hint object-destination-hint" role="status"></p>

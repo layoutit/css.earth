@@ -1,23 +1,11 @@
 ---
-import { SEARCH_OBJECTS } from "../search-objects.mts";
-import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount } from "../object-categories.mts";
 import CatalogueRows from "./CatalogueRows.astro";
 import CatalogueOverviewRows from './CatalogueOverviewRows.astro';
 import NavigationTree from './NavigationTree.astro';
 import { CATALOGUE_FRAGMENT_URL, CATALOGUE_INDEX_URL } from '../catalogue-fragment-loader.mts';
 
-interface Props { activeObjectId?: string; formId?: string; }
-const { activeObjectId, formId } = Astro.props;
-const searchObjects = SEARCH_OBJECTS;
-const defaultCategory = 'planet';
-const types = new Map(OBJECT_CATEGORIES);
-for (const object of searchObjects) if (!types.has(objectCategory(object.classification))) {
-  types.set(object.classification, object.classification.replaceAll('-', ' ') + 's');
-}
-const classifications = searchObjects.map(object => object.classification);
-const groups = [...types].map(([type, label]) => ({ type, label,
-  count: objectCategoryCount(classifications, type),
-}));
+interface Props { activeObjectId?: string; }
+const { activeObjectId } = Astro.props;
 // Overview rows are small and stay inline. The full object catalogue has two
 // shared transports, named by path: compact JSON for the windowed browser runtime,
 // and the rendered rows for server/no-JS search. `astro dev` renders the rows
@@ -31,18 +19,8 @@ const testCatalogueWindow = import.meta.env.DEV && process.env.CSSEARTH_TEST_CAT
   <!-- The homepage exposes the existing tree's destinations in its initial HTML. -->
   <NavigationTree current={activeObjectId ?? ''} eager={Astro.url.pathname === '/'} />
 </div>
-<div class="object-tabs" role="tablist" aria-label="Object categories" hidden>
-  {groups.map((group) => <button type="submit" form={formId} name="category" value={group.type} role="tab"
-    id={`object-tab-${group.type}`} data-object-tab={group.type}
-    aria-controls="object-category-results" aria-selected={group.type === defaultCategory ? 'true' : 'false'}
-    tabindex="0">
-    <span>{group.label}</span>{" "}<span class="object-tab-count">({group.count})</span>
-  </button>)}
-</div>
-<div id="object-category-results" class="object-results-scroll" role="tabpanel"
-  aria-labelledby={`object-tab-${defaultCategory}`} tabindex="0"
-  data-catalogue-src={CATALOGUE_FRAGMENT_URL} data-catalogue-index-src={CATALOGUE_INDEX_URL}
-  style={`--object-category-visible-rows: ${Math.min(8, Number(objectCategoryCount(classifications, 'planet')))}`}>
+<div id="object-category-results" class="object-results-scroll" role="region" aria-label="Search results" tabindex="0" hidden
+  data-catalogue-src={CATALOGUE_FRAGMENT_URL} data-catalogue-index-src={CATALOGUE_INDEX_URL}>
   <ul class="object-list object-overview-list"><CatalogueOverviewRows /></ul>
   {import.meta.env.DEV && !testCatalogueWindow
     ? <CatalogueRows />

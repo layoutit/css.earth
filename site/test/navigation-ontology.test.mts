@@ -9,7 +9,7 @@ import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } fr
 import { normalizeDestinationQuery } from '../destination-search.mts';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { parseNavigationDistance, distanceDescription } from '../navigation/navigation-distance.mts';
-import { navigationTree, readObjects, type TreeNode } from '../navigation/navigation-tree.mts';
+import { navigationTree, type TreeNode } from '../navigation/navigation-tree.mts';
 import { OVERVIEW_TITLES } from '../overview-titles.mts';
 import { resolve } from 'node:path';
 
@@ -85,7 +85,7 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
 test('every row of the application navigation tree opens a route the application serves', () => {
   const rows: TreeNode[] = [];
   const walk = (node: TreeNode) => { if (node.object) rows.push(node); node.children.forEach(walk); };
-  navigationTree(readObjects()).forEach(walk);
+  navigationTree().forEach(walk);
   const pages = new Set(objectAdapter.routes(SCENE_OBJECTS));
   const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => [object.id, object.route]));
   const overviews = new Set(Object.keys(OVERVIEW_TITLES));

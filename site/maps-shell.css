@@ -445,18 +445,7 @@
   /* Inset the scrollport while leaving the row content at the same coordinates. */
   padding: 8px calc(var(--explorer-card-padding-inline-end) - var(--object-results-scrollbar-inset)) 0 var(--explorer-card-padding-inline-start);
 }
-#object-category-results {
-  /* 20px rows + 8px gaps, including the initial 8px padding. */
-  max-height: calc(var(--object-category-visible-rows) * 28px);
-}
-/* Reserve the loaded list's own height while the shared catalogue fragment is
-   still in flight (or failed), so inserting it never shifts the panel around
-   it. The tabbed panel and the search/browse panel target different heights
-   (see the `[data-search-results]` override below), so each reserves its own. */
 #object-category-results:has(> .object-loading:not([hidden]), > .object-error:not([hidden])) {
-  min-height: calc(var(--object-category-visible-rows) * 28px);
-}
-[data-search-results] #object-category-results:has(> .object-loading:not([hidden]), > .object-error:not([hidden])) {
   min-height: min(420px, 55dvh);
 }
 .object-loading, .object-error {
@@ -476,8 +465,8 @@
 }
 [data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
 [data-search-results] [data-system-results] { padding-top: 8px; }
-[data-search-results] [data-system-results] > :is(.object-selected-panel, .object-tabs) { display: none; }
-[data-search-results] #object-category-results { max-height: min(420px, 55dvh); }
+[data-search-results] [data-system-results] > .object-selected-panel { display: none; }
+#object-category-results { max-height: min(420px, 55dvh); }
 [data-search-results] #object-category-results .object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
 [data-search-results] #object-category-results .object-distance { color: var(--shell-text-secondary); }
 /* Search results are big rows: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window

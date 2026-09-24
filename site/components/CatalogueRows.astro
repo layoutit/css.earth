@@ -2,7 +2,6 @@
 import { SEARCH_OBJECTS } from "../search-objects.mts";
 import ObjectResult from "./ObjectResult.astro";
 import PreparedObjectResult from './PreparedObjectResult.astro';
-import { matchesObjectCategory } from "../object-categories.mts";
 
 // This is the one shared, content-addressed catalogue fragment: every object
 // page and this component render the identical rows, with no active marker.
@@ -10,7 +9,6 @@ import { matchesObjectCategory } from "../object-categories.mts";
 // same way in-app navigation already marks it (see markSelection in
 // object-shell-client.mts). Never pass an active object id here.
 const searchObjects = SEARCH_OBJECTS;
-const defaultCategory = 'planet';
 // Retain every source row. Small layout groups let the browser skip offscreen
 // descendants without removing them from search, accessibility or navigation.
 const defaultObjects = [
@@ -23,12 +21,11 @@ const rows = Array.from({ length: Math.ceil(searchObjects.length / 16) },
 
 <ul class="object-list">
   {rows.map(group => <li class="object-chunk" role="presentation"
-    hidden={!group.some(object => matchesObjectCategory(object.classification, defaultCategory))}
-    style={`contain-intrinsic-block-size:${Math.max(0, group.filter(object => matchesObjectCategory(object.classification, defaultCategory)).length * 28 - 8)}px`}>
+    style={`contain-intrinsic-block-size:${Math.max(0, group.length * 28 - 8)}px`}>
     <ul class="object-chunk-list" role="presentation">
       {group.map(object => object.kind === 'prepared-focus'
-        ? <PreparedObjectResult object={object} hidden={!matchesObjectCategory(object.classification, defaultCategory)} />
-        : <ObjectResult object={object} hidden={!matchesObjectCategory(object.classification, defaultCategory)} />)}
+        ? <PreparedObjectResult object={object} />
+        : <ObjectResult object={object} />)}
     </ul>
   </li>)}
 </ul>

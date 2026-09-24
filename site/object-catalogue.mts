@@ -2,7 +2,6 @@ import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
 import { requiredElement } from './browser-types.mts';
-import { matchesObjectCategory } from './object-categories.mts';
 import { sourceDocuments } from './source-link.mts';
 import { objectSearchLabels, searchObjects, type ObjectSearchLabels } from './object-search.mts';
 import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentUrl, readCatalogueIndexUrl } from './catalogue-fragment-loader.mts';
@@ -31,12 +30,12 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
   const catalogueLoading = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
   const catalogueError = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]') : null;
   const catalogueRetry = catalogueError?.querySelector<HTMLButtonElement>('[data-catalogue-retry]') ?? null;
-  type SearchLabel = ObjectSearchLabels & { readonly item?: HTMLElement; readonly entry?: CatalogueIndexEntry };
-  let searchLabels: SearchLabel[] = items.map(item => ({ ...objectSearchLabels(item), item }));
-  let catalogueEntries: readonly CatalogueIndexEntry[] = [];
-  let matchedEntries = new Set<CatalogueIndexEntry>();
-  let distanceEntries: readonly CatalogueIndexEntry[] = [];
-  let objectEntries: readonly CatalogueIndexEntry[] = [];
+  type SearchLabel = ObjectSearchLabels & { readonly distanceMeters: number; readonly item?: HTMLElement; readonly entry?: CatalogueIndexEntry };
+  // Every live result uses planets first, then distance. A classification search
+  // already excludes other classes, so it needs no second category or sort order.
+  const resultOrder = (a: SearchLabel, b: SearchLabel) => Number(b.classification === 'planet') - Number(a.classification === 'planet')
+    || a.distanceMeters - b.distanceMeters;
+  let searchLabels: SearchLabel[] = [];
   const catalogueList = resultsPanel.querySelector<HTMLUListElement>('[data-catalogue-list]');
   const catalogueWindow = catalogueIndexUrl && catalogueList
     ? createCatalogueWindow({ documentTarget, windowTarget, list: catalogueList, scrollTarget: resultsPanel }) : null;
@@ -65,34 +64,24 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
       chunkVisibility = observer;
     }
   };
-  bindChunkVisibility();
   lifetime.onDispose(() => chunkVisibility?.disconnect());
   browser.dataset.retained = '';
-  let distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
-  let objectOrder = [
-    ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
-    ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
-  ];
-  /** Re-reads the catalogue rows after the shared fragment is inserted, so every
-   * derived list (search labels, source links, grouped chunks, sort orders)
-   * reflects the real rows instead of the empty placeholder. The fragment's own
-   * rows already carry the same default-category `hidden` state a page used to
-   * render inline. The browser reapplies its active search after loading. */
   const attachCatalogueRows = () => {
     items = [...browser.querySelectorAll<HTMLElement>(".object-item")]
       .filter((item) => item instanceof windowTarget.HTMLLIElement);
-    searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
+    searchLabels = items.map(item => ({ ...objectSearchLabels(item), distanceMeters: Number(item.dataset.objectDistanceM), item })).sort(resultOrder);
     sourceLinks = sourceDocuments(documentTarget);
     chunks = [...browser.querySelectorAll<HTMLElement>('.object-chunk')]
       .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.object-item')] }));
     bindChunkVisibility();
-    distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
-    objectOrder = [
-      ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
-      ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
-    ];
+    const order = searchLabels.map(label => label.item!);
+    for (const [index, chunk] of chunks.entries()) {
+      chunk.items = order.slice(index * 16, (index + 1) * 16);
+      requiredElement(chunk.node, '.object-chunk-list').append(...chunk.items);
+    }
     refreshChunks();
   };
+  if (items.length) attachCatalogueRows();
   // Fetch once when opened, with retry after a failed transport.
   let catalogueLoad: Promise<void> | null = null;
   // Suppresses "No matching results" until the shared fragment has actually
@@ -110,8 +99,7 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
     const load = catalogueIndexUrl
       ? loadCatalogueIndex(catalogueIndexUrl, { windowTarget }).then(index => {
           if (lifetime.disposed) return;
-          catalogueEntries = index.entries;
-          searchLabels = catalogueEntries.map(entry => ({
+          searchLabels = index.entries.map(entry => ({
             name: entry.name.toLocaleLowerCase('en'),
             names: entry.searchNames,
             classification: entry.classification,
@@ -119,15 +107,11 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
             systemName: entry.systemName,
             illustration: entry.illustration,
             candidate: entry.candidate,
+            distanceMeters: entry.distanceMeters,
             entry,
-          }));
-          distanceEntries = catalogueEntries.toSorted((left, right) => left.distanceMeters - right.distanceMeters);
-          objectEntries = [
-            ...distanceEntries.filter(entry => entry.classification === 'planet'),
-            ...distanceEntries.filter(entry => entry.classification !== 'planet'),
-          ];
+          })).sort(resultOrder);
           sourceLinks = new Map(sourceLinks);
-          for (const entry of catalogueEntries) sourceLinks.set(entry.source.subject, { dataset: {
+          for (const entry of index.entries) sourceLinks.set(entry.source.subject, { dataset: {
             sourceDocument: entry.source.document, sourceLabel: entry.source.label,
           } });
         })
@@ -165,35 +149,16 @@ export function createObjectCatalogue({ documentTarget, windowTarget, browser, r
     focus(index: number) { catalogueWindow?.focus(index); },
     clearWindow() { catalogueWindow?.clear(); },
     showInlineRows() { for (const item of items) item.hidden = false; },
-    search(query: string, category: string, options: { illustrations: boolean }) {
-      const result = searchObjects(searchLabels, query, category, options);
+    search(query: string, options: { illustrations: boolean }) {
+      const result = searchObjects(searchLabels, query, options);
       if (catalogueWindow) {
-        matchedEntries = new Set(result.matches.flatMap(match => match.entry ? [match.entry] : []));
+        catalogueWindow.setEntries(result.matches.flatMap(match => match.entry ? [match.entry] : []));
       } else {
-        const matches = new Set(result.matches.flatMap(match => match.item ? [match.item] : []));
-        for (const item of items) item.dataset.objectMatch = String(matches.has(item));
+        const matches = new Set(result.matches.map(match => match.item));
+        for (const item of items) item.hidden = !matches.has(item);
+        refreshChunks();
       }
       return result;
-    },
-    showCategory(classification: string, previousCategory: string): number {
-      if (catalogueWindow) {
-        const order = classification === 'planet' || classification === 'all' ? objectEntries : distanceEntries;
-        const visible = order.filter(entry => matchedEntries.has(entry)
-          && matchesObjectCategory(entry.classification, classification));
-        catalogueWindow.setEntries(visible);
-        return visible.length;
-      }
-      if (classification !== previousCategory) {
-        const order = classification === 'planet' || classification === 'all' ? objectOrder : distanceOrder;
-        for (const [index, chunk] of chunks.entries()) {
-          chunk.items = order.slice(index * 16, (index + 1) * 16);
-          requiredElement(chunk.node, '.object-chunk-list').append(...chunk.items);
-        }
-      }
-      for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
-        || !matchesObjectCategory(item.dataset.objectClassification, classification);
-      refreshChunks();
-      return items.filter(item => !item.hidden).length;
     },
   };
 }

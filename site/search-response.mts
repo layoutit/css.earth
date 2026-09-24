@@ -1,7 +1,7 @@
 import { createSystemCardContent } from './system-card-content.mts';
 import { parseHTML } from 'linkedom';
 import { record, requiredElement } from './browser-types.mts';
-import { OBJECT_CATEGORIES, matchesObjectCategory, objectCategoryCount } from './object-categories.mts';
+import { matchesObjectCategory } from './object-categories.mts';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeaturePin } from './feature-search.mts';
 import { findResults } from './find.mts';
@@ -141,13 +141,12 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     const items = [...browser.querySelectorAll<HTMLElement>('.object-item')];
     const labels = items.map(item => ({ ...objectSearchLabels(item), item }));
     const requestedCategory = url.searchParams.get('category');
-    const category = OBJECT_CATEGORIES.some(([id]) => id === requestedCategory) ? requestedCategory! : undefined;
-    const result = searchObjects(labels, value || 'all objects', category);
-    const selected = !value && category ? category : result.classification ? result.category : 'all';
+    // Retain old category-only URLs; live search is driven solely by its query.
+    const category = ['all', 'planet', 'satellite', 'nebula', 'galaxy', 'galaxy-cluster', 'asteroid'].includes(requestedCategory ?? '') ? requestedCategory : null;
+    const result = searchObjects(labels, value || 'all objects');
+    const selected = !value && category ? category : result.classification === 'planet' || result.classification === 'dwarf-planet' || result.classification === 'exoplanet' ? 'planet' : 'all';
     const matches = new Set(result.matches.map(match => match.item));
-    const classifications = result.matches.map(match => match.classification);
     for (const item of items) {
-      item.dataset.objectMatch = String(matches.has(item));
       item.hidden = !matches.has(item) || !matchesObjectCategory(item.dataset.objectClassification, selected);
     }
     const order = items.toSorted((a, b) => selected === 'planet' && (a.dataset.objectClassification === 'planet') !== (b.dataset.objectClassification === 'planet')
@@ -159,11 +158,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
       chunk.hidden = visible === 0;
       chunk.style.containIntrinsicBlockSize = `${Math.max(0, visible * 28 - 8)}px`;
     }
-    for (const tab of browser.querySelectorAll<HTMLElement>('[data-object-tab]')) {
-      tab.setAttribute('aria-selected', String(tab.dataset.objectTab === selected));
-      requiredElement(tab, '.object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
-    }
-    presentSearchResults(browser, true, selected);
+    presentSearchResults(browser, true);
     const overviewCount = presentOverviewResults(browser, value);
     for (const pill of document.querySelectorAll<HTMLElement>('.object-search-category')) {
       pill.setAttribute('aria-pressed', String(pill.dataset.searchClassification === result.classification));
