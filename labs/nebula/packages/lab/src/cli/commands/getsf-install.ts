@@ -3,7 +3,8 @@ import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, copyFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { digest } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
-import { decodeFits, encodeFits } from '../../adapters/application/fits.ts';
+import { decodeFits } from '@cssearth/fits';
+import { encodeFits } from '@cssearth/fits/node';
 
 const [destination] = process.argv.slice(2);
 if (!destination) throw new Error('Usage: getsf-install <ignored-local-directory>. Read docs/getsf.md user-agreement restrictions first.');

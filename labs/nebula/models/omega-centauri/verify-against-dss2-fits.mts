@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { decodeFits } from '../../../../tools/nebula/application/fits.ts';
+import { decodeFits } from '@cssearth/fits';
 import { detectStars, matchStars, verifyRegistration, publisherTransform, type SkyRaster, type SkyFrame } from '../../packages/reconstruction/src/registration/stellar.ts';
 
 const root = process.cwd();

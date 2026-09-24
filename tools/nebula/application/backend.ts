@@ -4,7 +4,7 @@ import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.
 import { validatePreparedCssVolume } from '../../../src/renderers/css/volume/validation.ts';
 import type { CompilerBakeBackend } from '@cssearth/volume-bake/compiler/bake';
 import { prepareCompilerStarSprites } from './star-sprites.ts';
-import { decodeFits } from './fits.ts';
+import { decodeFits } from '@cssearth/fits';
 export const nebulaBakeBackend = {
   renderBudget: CSS_COMPILER_RENDER_BUDGET,
   compileVolume: (input: Parameters<CompilerBakeBackend['compileVolume']>[0]) =>

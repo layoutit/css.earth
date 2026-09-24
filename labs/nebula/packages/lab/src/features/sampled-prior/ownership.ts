@@ -2,12 +2,12 @@
 export interface SampledOwnerPin { path: string; sha256: string }
 /** The shared FITS reader a sampled preparation pins. `tools/fits/fits.mts` is where it lived before `@cssearth/fits`: a
  * recorded pin of it is history, still read, but no longer a path that resolves. */
-export const sampledFitsOwners: ReadonlySet<string> = new Set(['packages/fits/src/fits.ts']);
+export const sampledFitsOwners: ReadonlySet<string> = new Set(['packages/fits/src/fits.ts', 'packages/fits/src/transport.ts']);
 export const isSampledFitsOwner = (path: string) => sampledFitsOwners.has(path) || path === 'tools/fits/fits.mts';
 // Exact relocated sampled owners; unrelated package modules are not implementation pins.
 export const sampledImplementationOwners = new Set([
   'labs/nebula/packages/lab/src/server/workflows/sampled-prior/compile.ts',
-  'labs/nebula/packages/lab/src/adapters/application/fits.ts',
+  'labs/nebula/packages/lab/src/server/workflows/float32-little-endian.ts',
   'labs/nebula/packages/reconstruction/src/methods/sampled/material-fit.ts',
   ...sampledFitsOwners,
   'labs/nebula/packages/volume-core/src/contracts/sampled-recipe.ts',

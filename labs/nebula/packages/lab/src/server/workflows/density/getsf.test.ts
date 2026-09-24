@@ -6,7 +6,8 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { prepareGetSfBenchmark } from './getsf.ts';
 import { collectGetSfBenchmark } from './getsf-collect.ts';
-import { decodeFits, encodeFits } from '../../../adapters/application/fits.ts';
+import { decodeFits } from '@cssearth/fits';
+import { encodeFits } from '@cssearth/fits/node';
 import { digest } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
 
 test('getsf input uses shared luminance, native pixel scale and complete official header/config contract', async () => {

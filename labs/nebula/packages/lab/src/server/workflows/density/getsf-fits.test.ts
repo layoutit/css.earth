@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeFits, encodeFits } from '../../../adapters/application/fits.ts';
+import { decodeFits } from '@cssearth/fits';
+import { encodeFits } from '@cssearth/fits/node';
 import { imageFixture, card } from '../../../../../../../../tests/fixtures/fits/helpers.mts';
 
 test('FITS transport reverses DOM rows exactly once and preserves signed samples', () => {
