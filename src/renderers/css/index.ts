@@ -44,6 +44,7 @@ export { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from 
 export { loadPreparedCssPointField } from './stars/loader.js';
 export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldStar, PointFieldRgb, PointFieldVector } from './stars/types.js';
 export { createWorldContextObjectRuntime } from './universe/world-context/world-context-runtime.js';
+export { worldCameraOf } from './universe/world-camera.js';
 export { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
 export type { PointSourcePublication, WorldContextPointAppearance, WorldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
 export { decodeWorldOrbits, orbitVertices, parsePreparedSystemViews, parsePreparedWorldContext, parsePreparedWorldContextSummary } from './universe/prepared-world-context.js';
