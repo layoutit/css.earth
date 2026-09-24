@@ -112,7 +112,7 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
   const requests = createNavigationLifecycle({ onCancel() {}, onError: error => { assert.ok(error instanceof Error); errors.push(error); } });
   let available = false;
   const selection = createSceneSelection({ objectId: 'mercury', initial: { kind: 'object', objectId: 'mercury' }, onChange() {} });
-  executor.connect(owner as unknown as ObjectWorldNavigation, { canPublish: () => available,
+  const disconnect = executor.connect(owner as unknown as ObjectWorldNavigation, { canPublish: () => available,
     readFocus: () => selection.current.kind === 'focus' ? selection.current.id : null,
     onFocusChange: ({ record, sources: references, presentation, url: policy }) => {
       available = true; content.push({ record, references, presentation });
@@ -142,7 +142,7 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
     suspend() { available = false; requests.cancel(); },
     destroy() { available = false; requests.cancel(); executor.destroy(); },
   };
-  return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, presentationFocuses, writes, callbacks, content, flights, flightFocuses, signal: () => signal,
+  return { controller, disconnect, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, presentationFocuses, writes, callbacks, content, flights, flightFocuses, signal: () => signal,
     resolveDeferredVolumeBank() { required(releaseDeferredBank)(); } };
 }
 
@@ -155,6 +155,19 @@ test('a saved lens link to an unavailable package still opens its actual catalog
   assert.equal(last(f.content).presentation, null);
   assert.deepEqual(f.lensWrites, []);
   f.controller.destroy();
+});
+
+test('a disconnected or destroyed focus ignores its old camera owner', () => {
+  for (const release of ['disconnect', 'destroy'] as const) {
+    const f = fixture();
+    f.windowTarget.location.searchParams.delete('v');
+    if (release === 'disconnect') f.disconnect(); else f.controller.destroy();
+    assert.equal(f.callbacks.size, 0, `${release} releases the owner's subscription`);
+    f.controller.restore(f.windowTarget.location.href);
+    assert.deepEqual(f.flights, [], `${release}: a later restore does not fly the old owner`);
+    assert.deepEqual(f.content, [], `${release}: nothing is published`);
+    f.controller.destroy();
+  }
 });
 
 test('a direct focus link without a saved camera frames its target immediately', () => {
