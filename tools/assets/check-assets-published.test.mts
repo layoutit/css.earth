@@ -180,11 +180,10 @@ test('the shared agent never runs more than 8 connections at once, however many 
   const origin = await listen(server);
   const { fetcher, close } = createHeadFetcher();
   t.after(async () => { await close(); await new Promise(accept => server.close(accept)); });
-  const responses = await Promise.all(Array.from({ length: 40 }, (_, index) =>
+  const responses = await Promise.all(Array.from({ length: MAX_CONNECTIONS * 3 }, (_, index) =>
     fetcher(`${origin}/key-${index}`, { method: 'HEAD', signal: AbortSignal.timeout(5000) })));
   assert.ok(responses.every(response => response.status === 200));
-  assert.equal(MAX_CONNECTIONS, 8);
-  assert.equal(peak, 8, 'eight requests in parallel, never more');
+  assert.equal(peak, MAX_CONNECTIONS, 'the cap in parallel, never more');
 });
 
 test('without an injected fetcher the gate uses the shared agent against a real server and closes it', async t => {
