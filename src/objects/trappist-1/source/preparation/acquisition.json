@@ -25,15 +25,6 @@
       ],
       "path": "photometry/gaia-dr3-xp-continuous.csv",
       "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2635476908753563008&format=csv&DATA_STRUCTURE=RAW"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/CIE_xyz_1931_2deg.csv",
-      "url": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv"
     }
   ]
 }

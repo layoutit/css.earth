@@ -198,17 +198,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "science/b2-intake/bundle_description.txt",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/bundle_description.txt",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "science/b2-intake/tethyskernellist.txt",
       "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethyskernellist.txt",
       "headers": {
@@ -222,17 +211,6 @@
       ],
       "path": "science/b2-intake/tethysimagelist.txt",
       "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysimagelist.txt",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "science/b2-intake/tethysshapeassessment.pdf",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysshapeassessment.pdf",
       "headers": {
         "User-Agent": "cssEarth source verification (public PDS data)"
       }

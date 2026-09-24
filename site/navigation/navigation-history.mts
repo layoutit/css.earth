@@ -1,6 +1,7 @@
 import type { ObjectEntry } from '../object-schema.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import { record } from '../browser-types.mts';
+import { objectIdAtPath } from '../root-object.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-request.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; }
@@ -49,12 +50,12 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
     const departure = snapshots.get(entry);
     if (navigating() && departure && previous.get(entry) === targetEntry) {
       const location = new URL(departure, windowTarget.location.href);
-      const object = objects.find(object => object.route === location.pathname);
+      const object = objects.find(object => object.id === objectIdAtPath(location.pathname));
       if (object) { Promise.resolve(navigate(object.id, { kind: 'history', url: location.href, history: { history: 'push' } })).catch(onError); return; }
     }
     const url = snapshots.get(targetEntry) ?? (typeof state.cssEarthView === 'string' ? state.cssEarthView : undefined) ?? windowTarget.location.href;
     const location = new URL(url, windowTarget.location.href);
-    const object = objects.find(object => object.route === location.pathname);
+    const object = objects.find(object => object.id === objectIdAtPath(location.pathname));
     if (!object) return;
     Promise.resolve(navigate(object.id, { kind: 'history', url: location.href, history: { history: 'pop', entry: targetEntry } })).catch(onError);
   };

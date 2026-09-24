@@ -1,14 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/tx300-vilenius-2018.pdf",
-      "url": "https://arxiv.org/pdf/1904.06333"
-    }
-  ]
+  "operations": []
 }

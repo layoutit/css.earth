@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum, darkened by latitude from Ahlers et al. (2020)'s gravity-darkened fit to TESS transits of KELT-9b: the hot poles brighter and bluer, the cooler equator dimmer and redder, on the flattened outline the same fit measures. Dimmed toward the limb by the quadratic law Claret (2017) computes from model atmospheres for the TESS band, the coefficients Ahlers et al. start from. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "gravityDarkening": "photometry/gravity-darkening.json",
         "limbDarkening": {

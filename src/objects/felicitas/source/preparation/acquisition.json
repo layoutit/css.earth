@@ -25,26 +25,8 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/ReadMe.AcuA.txt",
-      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/ReadMe.AcuA.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/3097-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/9812/IAUspin.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/marciniak-2019.pdf",
-      "url": "https://hebe.astro.amu.edu.pl/docs/aa35129-19.pdf"
     }
   ]
 }

@@ -43,29 +43,6 @@
       }
     },
     {
-      "id": "kleopatra-mpcd-research",
-      "path": "reference/marchis-2021.pdf",
-      "origin": "https://arxiv.org/pdf/2108.07207",
-      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.",
-      "license": "CC-BY-4.0",
-      "acquisition": "Original research paper restored through source/preparation/acquisition.json.",
-      "redistribution": "Permitted with attribution under the stated Creative Commons Attribution license.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "arxiv-2108-07207",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "kleopatra-sphere-20170714050059",
       "path": "observations/d216Kleopatra_2017-07-14T05_00_59.538_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-14T05_00_59.538_zpl_science_imaging_cam1.fits",
@@ -1254,29 +1231,6 @@
         "references": [
           {
             "catalogueId": "source-kleopatra-kleopatra-horizons-sphere-heliocentric",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "kleopatra-survey-research",
-      "path": "reference/vernazza-2021.pdf",
-      "origin": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "credit": "P. Vernazza et al. (2021), Astronomy & Astrophysics 654, A56",
-      "license": "CC-BY-4.0 research article; retain the citation.",
-      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-kleopatra-kleopatra-survey-research",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }

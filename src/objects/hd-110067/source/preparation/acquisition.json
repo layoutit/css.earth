@@ -9,15 +9,6 @@
       ],
       "path": "photometry/espresso.fits",
       "url": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/CIE_xyz_1931_2deg.csv",
-      "url": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv"
     }
   ]
 }

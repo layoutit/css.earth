@@ -9,24 +9,6 @@
       ],
       "path": "shape/1950DA_RetrogradeModel.wf",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/1950da-2007.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/29075_1950DA/busch.etal.2007.1950da.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/1950da-2014.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/farnocchia.and.chesley.2014.1950da.pdf"
     }
   ]
 }

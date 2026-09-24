@@ -12,7 +12,7 @@ import { worldRotationCss } from '../navigation/world-camera-math.js';
 import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js';
-import { logarithmicFade } from '../universe/prepared-world-context.js';
+import { logarithmicFade } from '../universe/world-context/context-scale.js';
 import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
 import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 import { parseLensBillboards } from '../universe/lens-billboards.js';
@@ -28,6 +28,7 @@ const lensBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; cont
     banks: banks.map(bank => ({ id: bank.id, payloadSha256: LENS_PIN, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
 });
 
+const spatialFrame = { id: 1, baseId: 0, members: new Uint32Array(), updates: [], emphasizedId: null, opacity: 1, width: 800, height: 600 };
 const spatialPublish = vi.hoisted(() => vi.fn());
 const catalogMount = vi.hoisted(() => vi.fn());
 const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bottom: 114 }]);
@@ -123,7 +124,7 @@ test('the galaxy overview enables its depth layers and leaving it restores popul
       mounted.setOverview(scope !== undefined, scope);
       // Catalogue camera publications must not clear the overview's detail selection.
       mounted.selectGalaxy(null);
-      mounted.publish(camera, viewport);
+      mounted.publish(camera, viewport, spatialFrame);
       const selected = scope === 'milky-way';
       expect(detail.style.display).toBe(selected ? 'block' : 'none');
       expect(distant.style.display).toBe(selected ? 'none' : 'block');
@@ -256,7 +257,7 @@ test.each([
     const gain = nearGain + (brightness.fullOpacity - nearGain) * logarithmicFade(distance, brightness.fadeStartDistanceM, brightness.fullDistanceM);
     const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distance], orientationXyzw: [0, 0, 0, 1] } };
-    mounted.publish(camera, viewport);
+    mounted.publish(camera, viewport, spatialFrame);
     const expectedGain = withBrightness ? gain : 1;
     const expectedSkyContribution = 1 - expected * expectedGain;
     const starHandoff = logarithmicFade(distance, context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
@@ -285,7 +286,7 @@ test.each([
         expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
       }
     } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
-    mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
+    mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport, spatialFrame);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
   }
@@ -343,7 +344,7 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     // Mounting the universe and publishing while far from every bank must not fetch any of them either.
     mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 1e6 * parsecM],
-        orientationXyzw: [0, 0, 0, 1] } }, viewport);
+        orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
     expect(loadVolumeLens).not.toHaveBeenCalled();
     expect(findBank(bank.id)).toBeUndefined();
     expect(findBank('galactic-default')).toBeUndefined();
@@ -352,12 +353,12 @@ test('shared universe draws only resolved nebulae and never prefetches their len
       const camera: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
         pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
           orientationXyzw: [0, 0, 0, 1] } };
-      mounted.publish(camera, viewport);
+      mounted.publish(camera, viewport, spatialFrame);
       // The first crossing into view fetches the independent bank; give its promise a turn to resolve and
       // mount before reading the DOM. The galactic bank's prepared context visibility keeps it unfetched.
       if (visible && !findBank(bank.id)) {
         await vi.waitFor(() => { expect(findBank(bank.id)).toBeDefined(); });
-        mounted.publish(camera, viewport);
+        mounted.publish(camera, viewport, spatialFrame);
       }
       expect(milkyWay.dataset.volumeOpacity).toBe('0');
       expect(milkyWay.style.display).toBe('none');
@@ -384,7 +385,7 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     // URL, even for legacy banks with no distant-image payload or leaf bounds.
     mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1],
-        context.focus.positionM[2] + context.volume.fullDistanceM * 2], orientationXyzw: [0, 0, 0, 1] } }, viewport);
+        context.focus.positionM[2] + context.volume.fullDistanceM * 2], orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
     const skyPaths = new Set([...volume.sky?.faces ?? [], ...volume.sky?.nearFaces ?? []].map(face => face.texturePath));
     const expected = volume.resources.filter(resource => !skyPaths.has(resource.path)).map(resource => `/volume/${resource.path}`);
     await vi.waitFor(() => expect(fetchResource).toHaveBeenCalledTimes(expected.length));
@@ -431,7 +432,7 @@ test('an unloaded independent bank is fetched by proximity while the galactic fa
     // near the Milky Way's own fade-in distance, so the general galactic fade reads zero here.
     const near: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } };
-    mounted.publish(near, viewport);
+    mounted.publish(near, viewport, spatialFrame);
     expect(milkyWay.dataset.volumeOpacity).toBe('0');
     expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
   } finally { mounted.destroy(); }
@@ -442,7 +443,7 @@ test('an unloaded independent bank is fetched by proximity while the galactic fa
     ...lensBanks([{ id: bank.id, frame, contextVisibility: 'galactic' }]), loadVolumeLens: galacticLoad }).mount(document.createElement() as unknown as HTMLElement);
   try {
     galactic.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
-      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } }, viewport);
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
     expect(galacticLoad).not.toHaveBeenCalled();
   } finally { galactic.destroy(); }
 });
@@ -475,7 +476,7 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
   try {
     const far: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2]], orientationXyzw: [0, 0, 0, 1] } };
-    mounted.publish(far, viewport);
+    mounted.publish(far, viewport, spatialFrame);
     expect(loadVolumeLens).not.toHaveBeenCalled();
     expect(mounted.focusBank(bank.id)!.state()).toBeNull();
     expect(mounted.focusBank(bank.id)!.framingRadiusM()).toBe(Math.hypot(1, 1, 1) * frame.metersPerUnit);
@@ -537,10 +538,10 @@ test('hidden lens banks are bounded, active subscriptions pin them, and eviction
     const camera = (distancePc: number): WorldCameraPose => ({ referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
         orientationXyzw: [0, 0, 0, 1] } });
-    mounted.publish(camera(52), viewport);
-    mounted.publish(camera(102), viewport);
+    mounted.publish(camera(52), viewport, spatialFrame);
+    mounted.publish(camera(102), viewport, spatialFrame);
     await vi.waitFor(() => expect(mounted.focusBank('far-bank')!.state()).not.toBeNull());
-    mounted.publish(camera(102), viewport);
+    mounted.publish(camera(102), viewport, spatialFrame);
     expect(mounted.focusBank('near-bank')!.state()).not.toBeNull();
     expect((mounted.root as unknown as FakeElement).dataset).toMatchObject({ volumeLensPinnedBankCount: '1', volumeLensWarmDomNodeBudget: '0' });
 
@@ -653,7 +654,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     await mounted.focusBank('focus-bank')!.load(); await mounted.focusBank('warm-bank')!.load();
     mounted.selectGalaxy('catalogue:focus-bank', focus());
     const near = camera(6.1), savedPose = structuredClone(near);
-    mounted.publish(near, viewport);
+    mounted.publish(near, viewport, spatialFrame);
     expect(loadVolumeLens.mock.calls.map(([id]) => id)).toEqual(['focus-bank', 'warm-bank']);
     expect(loadImageLayer).not.toHaveBeenCalled(); expect(fetchResource).not.toHaveBeenCalled();
     expect(findBank('focus-bank').style.display).toBe('block');
@@ -662,8 +663,8 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
     expect(all(findBank('warm-bank')).some(node => node.style.backgroundImage)).toBe(false);
     for (const [radii, multiplier] of [[6.1, 0], [20, .5], [32, 1]] as const) {
-      mounted.publish(camera(radii), viewport);
-      if (radii > 8) { await mounted.focusBank('cold-bank')!.load(); await mounted.focusBank(image.id)!.load(); mounted.publish(camera(radii), viewport); }
+      mounted.publish(camera(radii), viewport, spatialFrame);
+      if (radii > 8) { await mounted.focusBank('cold-bank')!.load(); await mounted.focusBank(image.id)!.load(); mounted.publish(camera(radii), viewport, spatialFrame); }
       const originalOpacity = Number(mw.dataset.volumeOpacity), alpha = Number(mw.style.opacity);
       expect(originalOpacity).toBeGreaterThan(0); expect(originalOpacity).toBeLessThan(1);
       const completedContribution = originalOpacity * Number(mw.children[0]!.dataset.volumeBrightness);
@@ -679,16 +680,16 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       expect(Number(findBank('warm-bank').style.opacity)).toBeCloseTo(multiplier * selectedOpacity, 12);
     }
     const imageRoot = root.children.find(node => node.dataset.imageLayerObject === image.id)!;
-    mounted.publish(near, viewport);
+    mounted.publish(near, viewport, spatialFrame);
     expect(imageRoot.style.display).toBe('none');
     const before = all(findBank('warm-bank')).map(node => ({ ...node.style }));
-    mounted.publish({ ...near, pose: { ...near.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } }, viewport);
+    mounted.publish({ ...near, pose: { ...near.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } }, viewport, spatialFrame);
     expect(all(findBank('warm-bank')).map(node => ({ ...node.style }))).toEqual(before);
-    mounted.selectGalaxy('catalogue:image-bank', focus('catalogue:image-bank')); mounted.publish(near, viewport);
+    mounted.selectGalaxy('catalogue:image-bank', focus('catalogue:image-bank')); mounted.publish(near, viewport, spatialFrame);
     expect(imageRoot.style.display).toBe(''); expect(findBank('focus-bank').style.display).toBe('none');
-    mounted.selectGalaxy(null); mounted.publish(near, viewport);
+    mounted.selectGalaxy(null); mounted.publish(near, viewport, spatialFrame);
     expect(mw.style.display).toBe(''); expect(findBank('focus-bank').style.display).toBe('block');
-    mounted.selectGalaxy('catalogue-only', focus('catalogue-only')); mounted.publish(near, viewport);
+    mounted.selectGalaxy('catalogue-only', focus('catalogue-only')); mounted.publish(near, viewport, spatialFrame);
     expect(mw.style.display).toBe('');
     expect(() => mounted.selectGalaxy('catalogue:focus-bank', focus('mismatch'))).toThrow('focus');
   } finally { mounted.destroy(); }

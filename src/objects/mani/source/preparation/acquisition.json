@@ -1,14 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/mani-wgsbn-2025-011.pdf",
-      "url": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_011.pdf"
-    }
-  ]
+  "operations": []
 }

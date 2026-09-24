@@ -1,4 +1,4 @@
-import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, serializePreparedMatrix4 } from '../prepared-data/prepared-ellipsoid-projection.js';
+import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, serializePreparedMatrix4 } from '../../../platform/math/matrix.mts';
 import type { Matrix4 } from '../solar-system/types.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 

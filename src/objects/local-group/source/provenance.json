@@ -66,11 +66,9 @@
       "citation": "Author/CDS original catalogue byte-column descriptions; n_Name meanings G/A/L/N."
     },
     {
-      "id": "smc-distance-paper",
-      "path": "papers/Graczyk2020-SMC.pdf",
-      "url": "https://arxiv.org/pdf/2010.08754",
-      "citation": "Graczyk et al. (2020), ApJ904,13; DOI10.3847/1538-4357/abbb2b. Original paper supporting the adopted SMC direct distance and separate statistical/systematic errors.",
-      "bytes": 3328489,
+      "id": "smc-distance-citation",
+      "url": "https://doi.org/10.3847/1538-4357/abbb2b",
+      "citation": "Graczyk et al. (2020), ApJ 904, 13; DOI 10.3847/1538-4357/abbb2b. Cited for the adopted SMC direct distance and its separate statistical and systematic errors.",
       "references": [
         {
           "id": "Graczyk2020ApJ...904...13G",

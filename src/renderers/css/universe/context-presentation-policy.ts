@@ -1,4 +1,4 @@
-import type { PreparedWorldContext } from './prepared-world-context.js';
+import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 import type { OrbitLineFade } from '../navigation/types.js';
 import { orbitLineOpacity } from '../navigation/perspective-dolly.js';
 import type { PositionM } from '@cssearth/engine';

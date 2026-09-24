@@ -15,7 +15,8 @@ export function spatialPublicationId(reference: string): string {
 }
 
 export interface SpatialCatalogSource extends SpatialCitation {
-  readonly bytes: number;
+  /** The pinned file's size; a citation-only source (a paper cited, not kept) has none and names its references. */
+  readonly bytes?: number;
   /** Bibliographic entries transcribed from this pinned source; their URLs are not byte pins. */
   readonly references?: readonly SpatialCitation[];
 }
@@ -84,7 +85,9 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
     const source = record(item, 'source'), id = text(source.id, 'source id');
     unique(sourceIds, id, 'source');
     if (!/^https?:\/\//.test(text(source.url, 'source URL'))) throw new TypeError('Invalid catalogue source URL.');
-    if (!Number.isSafeInteger(positive(source.bytes, 'source byte count'))) throw new TypeError('Invalid source byte count.');
+    // A citation-only source names its references and has no bytes.
+    if (source.bytes !== undefined && !Number.isSafeInteger(positive(source.bytes, 'source byte count'))) throw new TypeError('Invalid source byte count.');
+    if (source.bytes === undefined && !(Array.isArray(source.references) && source.references.length)) throw new TypeError('A catalogue source without bytes must name its references.');
     text(source.citation, 'source citation');
     for (const value of source.references === undefined ? [] : array(source.references, 'source references')) {
       const reference = record(value, 'bibliographic reference');

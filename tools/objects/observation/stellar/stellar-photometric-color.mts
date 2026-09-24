@@ -6,6 +6,7 @@ import { requireFiniteNumber, requireRecord, requireString } from '../../../sour
 import { linearToSrgb } from '../../color-transfer.mts';
 import { gunzipSync } from 'node:zlib';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interferometry/fits-table.mts';
+import { readCie1931ColorMatching } from '../../../references/reference-bank.mts';
 
 export type StellarColorRecord = {
   readonly spectrum: 'planck'; readonly temperaturePath: string; readonly sourceId: string;
@@ -183,7 +184,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
   const result = await loadStellarColorOnly(read, science, record);
   if (!crossRecord) return { ...result, crossCheck: null };
   const { parseCieTable } = await import('../disc-integrated-color.mts');
-  const colorMatching = parseCieTable((await read(requireString(science.colorMatching, 'science.colorMatching'))).toString('utf8'), 3);
+  const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const color = measuredSpectrumColor(await loadMeasuredSpectrum(read, crossRecord.record), colorMatching, crossRecord.record.gaps);
   const difference = Math.max(...color.srgb.map((value, channel) => Math.abs(value - result.color.srgb[channel]!)));
   return { ...result, crossCheck: { source: crossRecord.source, srgb: color.srgb, maxChannelDifference: difference, ...(crossRecord.disagreement ? { disagreement: crossRecord.disagreement } : {}) } };
@@ -191,7 +192,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
 
 async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, record: StellarColorRecord) {
   const { parseCieTable } = await import('../disc-integrated-color.mts');
-  const colorMatching = parseCieTable((await read(requireString(science.colorMatching, 'science.colorMatching'))).toString('utf8'), 3);
+  const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const limbDarkening = science.limbDarkening === undefined ? null : await (async () => {
     const recipe = parseLimbDarkeningRecipe(science.limbDarkening);
     if (recipe.source === 'table') return { recipe, coefficients: readQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };

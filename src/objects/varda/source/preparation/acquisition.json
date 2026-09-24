@@ -1,23 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/varda-proudfoot-2026.pdf",
-      "url": "https://arxiv.org/pdf/2605.28636"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/varda-souami-2020.pdf",
-      "url": "https://arxiv.org/pdf/2008.04818"
-    }
-  ]
+  "operations": []
 }

@@ -9,24 +9,6 @@
       ],
       "path": "shape/ml14.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/ml14.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/warner-2014.pdf",
-      "url": "https://mpbulletin.org/issues/MPB_41-2.pdf"
     }
   ]
 }

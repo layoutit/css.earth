@@ -19,7 +19,7 @@ export function createApplicationWorldFrames({ layer, planner, moonLabels, lifet
     const frame = await planner.plan(snapshot.view);
     return { current: snapshot.current, commit(camera) {
       const { world, viewport } = request;
-      layer.publish(world, viewport, { heliosphere: heliosphereEnabled() }, frame);
+      layer.publish(world, viewport, frame, { heliosphere: heliosphereEnabled() });
       moonLabels.publish(world, viewport, layer.labelBudget());
       // Camera subscribers observe the complete view; they never publish it.
       camera();

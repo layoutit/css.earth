@@ -43,39 +43,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "asteroid-1996-hw1-research-1996hw1",
-      "path": "reference/1996hw1.pdf",
-      "origin": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
-      "credit": "Magri et al. (2011), Icarus 214, 210–227; Arecibo radar, optical lightcurves and NASA/JPL shape archive",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "arecibo-305m",
-            "missionId": "arecibo-planetary-radar",
-            "evidence": "The preserved credit for this input reads: Magri et al. (2011), Icarus 214, 210–227; Arecibo radar, optical lightcurves and NASA/JPL shape archive"
-          }
-        ]
-      },
-      "license": "Original scientific article; source publisher copyright retained.",
-      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
-      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [

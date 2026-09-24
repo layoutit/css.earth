@@ -1,14 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/orcus-brown-butler-2018.pdf",
-      "url": "https://arxiv.org/pdf/1801.07221"
-    }
-  ]
+  "operations": []
 }

@@ -85,9 +85,6 @@
       "path": "reference/6121-IAUspin"
     },
     {
-      "path": "reference/bundle_description.txt"
-    },
-    {
       "path": "reference/calibration.json"
     },
     {
@@ -96,9 +93,6 @@
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6121",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
-    },
-    {
-      "path": "reference/hanus-2021-asassn.pdf"
     },
     {
       "path": "reference/horizons-elements.txt"
@@ -110,9 +104,6 @@
       "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/masiero-2012.pdf"
-    },
-    {
       "path": "reference/model-properties.json"
     },
     {
@@ -120,9 +111,6 @@
     },
     {
       "path": "reference/neowise-diameter-row.csv"
-    },
-    {
-      "path": "reference/pilcher-2017-mpb.pdf"
     },
     {
       "path": "reference/sbdb.json"

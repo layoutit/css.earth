@@ -228,28 +228,6 @@
       "acquisition": "Pinned local source input retained with the body package."
     },
     {
-      "id": "photography-shape-paper",
-      "path": "reference/porteretal2024b.pdf",
-      "consumers": [
-        "photography-reference"
-      ],
-      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/porteretal2024b.pdf",
-      "credit": "Porter et al. (2024)",
-      "license": "Original publication retained for scientific method reference; not relicensed.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-arrokoth-published-shape",
-            "role": "method",
-            "evidence": "Bundled model paper; revised pole and source mesh frame in Table 2."
-          }
-        ]
-      },
-      "redistribution": "Retain the original source attribution and notices with published derivatives.",
-      "acquisition": "Pinned local source input retained with the body package."
-    },
-    {
       "id": "mvic-ca05",
       "path": "observations/ca05_mvic_cube.fit",
       "consumers": [
@@ -289,28 +267,6 @@
           {
             "catalogueId": "source-arrokoth-mvic-ca05",
             "role": "reference",
-            "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
-          }
-        ]
-      }
-    },
-    {
-      "id": "mvic-method",
-      "path": "observations/mvic-overview.pdf",
-      "consumers": [
-        "photography-reference"
-      ],
-      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/overview.pdf",
-      "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
-      "license": "NASA PDS scientific archive; retain original attribution and notices.",
-      "redistribution": "Retain source attribution and enhanced-color qualifications.",
-      "acquisition": "Restored by preparation/acquisition.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-arrokoth-mvic-ca05",
-            "role": "method",
             "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
           }
         ]

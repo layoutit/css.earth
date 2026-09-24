@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import type { PreparedCssPointField } from '../../stars/types.js';
-import { parsePreparedWorldContext } from '../prepared-world-context.js';
+import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
 import { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './world-context-point-source.js';
 
 const parsec = 3.085677581491367e16;

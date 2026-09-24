@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform photosphere colour from the star's ESO VLT/X-shooter wide-slit spectrum, dimmed toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres, interpolated to the star's temperature and gravity: a model, because no image measures this star's limb. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",

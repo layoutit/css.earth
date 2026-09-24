@@ -70,24 +70,6 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/osiris-boresight.pdf",
-      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/osiris-photometry.pdf",
-      "url": "https://arxiv.org/pdf/1710.01356"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "observations/n20100710t154135529id4df22.img",
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154135529id4df22.img",
       "headers": {

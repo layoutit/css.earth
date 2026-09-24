@@ -315,11 +315,6 @@
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.xml"
     },
     {
-      "path": "shape/bundle_description.txt",
-      "purpose": "Original PDS bundle description: global shape coverage and source limitations.",
-      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/document/bundle_description.txt"
-    },
-    {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."

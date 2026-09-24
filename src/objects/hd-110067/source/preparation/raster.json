@@ -27,7 +27,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Colour from the measured ESPRESSO spectrum, with the ESPRESSO-band ATLAS9 limb-darkening model adopted by Zak et al. (2024). No resolved surface or absolute brightness.",
         "limbDarkening": {
           "law": "quadratic",

@@ -39,9 +39,9 @@ export function parseSpatialContextCommand(args: readonly string[], cwd = proces
 
 /** The sRGB hex of a Planck spectrum at a temperature, through a CIE colour-matching table (the route a star without a measured
  * spectrum takes in tools/objects/observation/stellar/stellar-photometric-color.mts). */
-async function planckHex(kelvin: number, colorMatchingPath: string): Promise<string> {
-  const [{ planckColor }, { parseCieTable }] = await Promise.all([import('./observation/stellar/stellar-photometric-color.mts'), import('./observation/disc-integrated-color.mts')]);
-  const color = planckColor(kelvin, parseCieTable(await readFile(colorMatchingPath, 'utf8'), 3));
+async function planckHex(kelvin: number): Promise<string> {
+  const [{ planckColor }, { parseCieTable }, { readCie1931ColorMatching }] = await Promise.all([import('./observation/stellar/stellar-photometric-color.mts'), import('./observation/disc-integrated-color.mts'), import('../references/reference-bank.mts')]);
+  const color = planckColor(kelvin, parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3));
   return `#${color.srgb.map(channel => channel.toString(16).padStart(2, '0')).join('')}`;
 }
 
@@ -69,7 +69,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       const record = records[id], parent = record?.parent;
       if (packaged.has(id) || !parent || !packaged.has(parent)) continue;
       input.bodies.push({ id, name: record!.name, color: record!.effectiveTemperatureK === undefined ? '#9a9a9a'
-        : await planckHex(record!.effectiveTemperatureK, resolve(objectsRoot, parent, 'source/reference/CIE_xyz_1931_2deg.csv')), unpackaged: true });
+        : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
   }
   const source = parseWorldContextSource(input);

@@ -1,14 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/ixion-kilic-2026.pdf",
-      "url": "https://arxiv.org/pdf/2601.09639"
-    }
-  ]
+  "operations": []
 }

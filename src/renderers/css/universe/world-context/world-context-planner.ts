@@ -1,5 +1,6 @@
+import { createSystemFade, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../prepared-world-context.js';
+import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
@@ -12,12 +13,8 @@ import { admitStableLabels, type StableLabelCandidate } from '../../labels/stabl
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
 import { createLabelBudget, labelExtentOpacity, labelLimit, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 
-export const BODY_INDICATOR_DIAMETER = 16;
-export const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
 const ORBIT_LOD_PIXELS = 0.1;
-/** An authored system range fades out over one doubling of camera distance beyond it. */
-const AUTHORED_RANGE_FADE = 2;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
 // camera sample. This uses committed visibility, never worker-local history.
@@ -62,10 +59,6 @@ export function orbitOutsideMarker(segments: readonly OrbitSegment[], x: number,
   }
   return result;
 }
-export function logarithmicFade(distanceM: number, startM: number, endM: number): number {
-  const t = Math.max(0, Math.min(1, (Math.log(distanceM) - Math.log(startM)) / (Math.log(endM) - Math.log(startM))));
-  return t * t * (3 - 2 * t);
-}
 
 /** UI measurements and the last committed annotation state, without DOM handles. */
 export interface WorldBodyPresentation {
@@ -106,7 +99,7 @@ export interface WorldContextView {
 
 /** Project the prepared bank and resolve annotations without reading or writing DOM.
  * Segment buffers are borrowed until the next plan. A transport must copy/send
- * the result before requesting another view; the synchronous renderer consumes it inline. */
+ * the result into its frame packet before requesting another view. */
 /** One body's share of a planned frame: paint and picking state, no planner scratch. */
 export interface PlannedBodyOutput {
   x: number; y: number; diameter: number; markerOpacity: number; visible: boolean; annotationVisible: boolean; hovered: boolean;
@@ -121,53 +114,6 @@ interface ProjectedBody<Entry> {
   /** The body reaches this camera's naming policy, whether or not a caption slot was free for it. */
   nameable: boolean;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
-}
-/** Each planetary system fades with the camera's distance from its own star: the Sun's
- * and every placed star with orbiting bodies. The context retires once all of them have. */
-export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bodies' | 'orbitCenters' | 'system'>) {
-  const points = [plan.focus, ...plan.bodies];
-  const byId = new Map(points.map(point => [point.id, point]));
-  const parentOf = (id: string) => {
-    const point = byId.get(id);
-    return point && 'orbit' in point ? point.orbit?.centerBodyId : plan.orbitCenters?.[id]?.centerBodyId;
-  };
-  const rootOf = (id: string) => {
-    for (let current = id, steps = 0; steps <= points.length + Object.keys(plan.orbitCenters ?? {}).length; steps++) {
-      const parent = parentOf(current);
-      if (parent === undefined) return current;
-      current = parent;
-    }
-    throw new TypeError(`${id} has a cyclic orbit chain.`);
-  };
-  const rootIds = points.map(point => rootOf(point.id));
-  const roots = [...new Set([plan.focus.id, ...rootIds.filter((id, index) => id !== points[index]!.id)])];
-  const positions = roots.map(id => byId.get(id)!.positionM);
-  const rootIndex = rootIds.map(id => roots.indexOf(id));
-  const values = new Float64Array(roots.length);
-  // Every system fades over the authored distances, unless its host authors its own orbit range: that system is drawn
-  // whole to the range and gone one doubling of distance beyond it (a presentation choice, not a measurement).
-  const ranges = roots.map(id => { const point = byId.get(id); return point && 'orbitsWithinM' in point ? point.orbitsWithinM : undefined; });
-  const fadeStarts = ranges.map(range => range ?? plan.system.fadeOutStartDistanceM);
-  const hiddenDistances = ranges.map(range => range === undefined ? plan.system.hiddenDistanceM : range * AUTHORED_RANGE_FADE);
-  return Object.freeze({
-    /** The largest system opacity, after measuring every system from this camera position. */
-    update(positionM: readonly number[]) {
-      let maximum = 0;
-      for (let index = 0; index < roots.length; index++) {
-        const star = positions[index]!;
-        values[index] = 1 - logarithmicFade(Math.hypot(positionM[0]! - star[0], positionM[1]! - star[1], positionM[2]! - star[2]),
-          fadeStarts[index]!, hiddenDistances[index]!);
-        maximum = Math.max(maximum, values[index]!);
-      }
-      return maximum;
-    },
-    /** The opacity of the system the indexed context point belongs to; a star outside every system is never faded. */
-    of(pointIndex: number) { const root = rootIndex[pointIndex]!; return root < 0 ? 1 : values[root]!; },
-    /** A system's star: the focus or a placed star that bodies orbit. */
-    isSystemStar(id: string) { return roots.includes(id); },
-    /** Inside its host's authored range a system draws every member's orbit, named or not. */
-    hasAuthoredRange(pointIndex: number) { const root = rootIndex[pointIndex]!; return root >= 0 && ranges[root] !== undefined; },
-  });
 }
 
 /** `annotationLandmarks`: moons named across their star's system, like the orientation references (a sourced list of

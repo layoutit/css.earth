@@ -44,7 +44,7 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
     { id: 'packages', after: [], command: 'pnpm', args: ['-r', '--filter', './packages/**', 'build'], outputs: packageOutputs(root) },
     node('titles', 'tools/prepare/prepare-shell-titles.mts'),
     { id: 'renderer', after: ['packages'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../src/renderers/css/tsup.config.ts'],
-      outputs: [{ path: 'src/renderers/css/dist', required: ['index.js', 'index.d.ts', 'navigation.js', 'navigation.d.ts', 'preparation.js', 'preparation.d.ts'] }] },
+      outputs: [{ path: 'src/renderers/css/dist', required: ['index.js', 'index.d.ts', 'navigation.js', 'navigation.d.ts'] }] },
     node('catalog', 'tools/prepare/prepare-catalog.mts', ['renderer']),
     node('solar', 'tools/prepare/prepare-solar-geometry.mts', ['catalog']),
     { id: 'preparation', after: ['renderer', 'solar', 'titles'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../tools/objects/tsup.config.ts'],

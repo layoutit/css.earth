@@ -19,11 +19,12 @@
   "evidence": [
     {
       "path": "src/objects/lutetia/source/manifest.json",
-      "locator": "/inputs/9"
+      "locator": "/inputs/7"
     },
     {
-      "path": "src/objects/steins/source/manifest.json",
-      "locator": "/inputs/8"
+      "url": "https://arxiv.org/pdf/1702.00184",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

@@ -45,39 +45,6 @@
       }
     },
     {
-      "id": "psyche-survey-research",
-      "path": "reference/vernazza-2021.pdf",
-      "origin": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "vlt-ut3",
-            "missionId": "eso-sphere-asteroid-survey",
-            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
-          }
-        ]
-      },
-      "license": "CC-BY-4.0",
-      "acquisition": "Restore the original article through source/preparation/acquisition.json.",
-      "redistribution": "CC-BY-4.0 with attribution.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "vernazza-2021-survey",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "psyche-adam-shape",
       "path": "shape/16_Psyche_adam.obj",
       "origin": "https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj",
@@ -2661,13 +2628,6 @@
       "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
       "license": "CC-BY-4.0",
       "purpose": "Altitude above the best-fit ellipsoid of the Shepard et al. (2021) shape on the same grid; the frame test registers it against the ADAM mesh by shape alone."
-    },
-    {
-      "path": "thermal/Readme.pdf",
-      "origin": "https://zenodo.org/api/records/6321315/files/Readme.pdf/content",
-      "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
-      "license": "CC-BY-4.0",
-      "purpose": "The release's description of every array, including the altitude definition."
     },
     {
       "path": "reference/de-kleer-2021-table1.json",

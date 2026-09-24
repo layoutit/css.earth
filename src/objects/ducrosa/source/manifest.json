@@ -98,9 +98,6 @@
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/hanus-2018.pdf"
-    },
-    {
       "path": "reference/horizons-elements.txt"
     },
     {
@@ -111,12 +108,6 @@
     },
     {
       "path": "reference/model-properties.json"
-    },
-    {
-      "path": "reference/ReadMe.AcuA.txt"
-    },
-    {
-      "path": "reference/usui-2011.pdf"
     }
   ]
 }

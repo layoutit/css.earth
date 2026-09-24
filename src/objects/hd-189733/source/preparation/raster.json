@@ -28,7 +28,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Uniform photosphere colour from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by a limb-darkening law fitted here to TESS transits of HD 189733b (600-1000 nm). The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",
@@ -52,7 +51,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Static reconstruction of a 2021 HD 189733b spot-crossing candidate (Haris et al. 2025, Table 3), on the Gaia-colour photosphere with TESS-fitted limb darkening. A minimum 5-degree circular cap has 7.6% TESS-band contrast. Its sky direction, circular shape and achromatic display contrast are assumptions; no global map or rotation.",
         "limbDarkening": {
           "law": "quadratic",
@@ -77,7 +75,6 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "qualification": "Narrett, Rackham & de Wit (2024), Figure 7 left: one hypothetical dense spot-band layout consistent with about 40% modeled coverage and 1.4% TESS variability. The layout is an illustration, not an observed map. Its 0.099 TESS spot/photosphere intensity ratio is applied achromatically over Gaia colour on a fixed limb plate.",
         "limbDarkening": {
           "law": "quadratic",

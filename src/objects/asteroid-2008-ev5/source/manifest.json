@@ -54,50 +54,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "asteroid-2008-ev5-research-2008ev5",
-      "path": "reference/2008ev5.pdf",
-      "origin": "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf",
-      "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "arecibo-305m",
-            "missionId": "arecibo-planetary-radar",
-            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
-          },
-          {
-            "kind": "facility",
-            "facilityId": "goldstone-dss14",
-            "missionId": "goldstone-solar-system-radar",
-            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
-          },
-          {
-            "kind": "facility",
-            "facilityId": "vlba",
-            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
-          }
-        ]
-      },
-      "license": "Original scientific article; source publisher copyright retained.",
-      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
-      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-asteroid-2008-ev5-asteroid-2008-ev5-research-2008ev5",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [

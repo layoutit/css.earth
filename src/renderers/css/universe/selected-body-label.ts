@@ -1,6 +1,6 @@
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
-import type { PreparedContextPoint } from './prepared-world-context.js';
+import type { PreparedContextPoint } from '../prepared-data/world-context.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';

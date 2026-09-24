@@ -15,6 +15,7 @@ import sharp from 'sharp';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { requireArray, requireRecord } from '../sources/source-values.mts';
 import { readPdfImage } from '../fits/pdf-image.mts';
+import { lamBytes } from './sphere-survey/lam.mts';
 import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera } from './terrestrial-layers/observer-cameras.mts';
 import { decodeCalibratedCamera, loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
 import { radialTerrainForLens } from './terrestrial-layers/alternative-lenses.mts';
@@ -37,11 +38,8 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   if (spec.lensId !== record.lensId) throw new TypeError(`The comparison names lens ${spec.lensId}; the observer cameras derive ${record.lensId}.`);
   const mesh = await loadCameraShape(sourceDirectory, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], record.lensId));
 
-  // The paper, by its manifest entry, then the figure, by its object number and pixel digest.
-  const manifest = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'manifest.json'), 'utf8')));
-  const input = requireArray(manifest.inputs).map(value => requireRecord(value)).find(entry => entry.id === spec.document.input);
-  if (!input) throw new TypeError(`The manifest has no input ${spec.document.input}.`);
-  const paper = await readFile(resolve(sourceDirectory, String(input.path)));
+  // The paper, read from its address (a cited paper is not kept in the repository), then the figure, by its object number.
+  const paper = await lamBytes(spec.document.url);
   const image = readPdfImage(paper, spec.document.object), pixels = sha256(image.data);
   if (image.width !== spec.document.width || image.height !== spec.document.height)
     throw new Error(`Object ${spec.document.object} is not the ${image.width}×${image.height} ${spec.figure} the spec records.`);
@@ -95,7 +93,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   }
   const evidence = {
     schema: COMPARISON_EVIDENCE_SCHEMA, objectId, lensId: spec.lensId, source: spec.source, figure: spec.figure,
-    document: { input: spec.document.input, object: spec.document.object, pixels },
+    document: { url: spec.document.url, object: spec.document.object, pixels },
     rotation: { path: record.rotation.path, columnOrder: record.rotation.columnOrder ?? null },
     columns,
     nativeOutline: { frames: atZero.length, residualPixelsAtZero: sweep[0], bestOffsetDegrees: Number(best[0]), sweepDegrees: SWEEP, residualPixels: sweep },

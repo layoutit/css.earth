@@ -11,7 +11,7 @@ import { parseRasterRecipe, prepareRasterAssets } from '../../../../src/preparat
 import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/validation/index.ts';
 import { parseGeometryProfile } from '../../../../src/renderers/css/preparation/scene/profile.ts';
 import { prepareScientificNavigation } from '../../terrestrial-layers/scientific-focus.mts';
-import { parsePreparedWorldContext } from '../../../../src/renderers/css/universe/prepared-world-context.ts';
+import { parsePreparedWorldContext } from '../../../../src/renderers/css/prepared-data/world-context.js';
 
 
 export async function inspectMeasurementSphere(root:string,target:string){
