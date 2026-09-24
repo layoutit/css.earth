@@ -84,19 +84,24 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   const fader = createOpacityFader(windowTarget);
   const controller = new AbortController();
   const labelsEnabled = () => document.body.dataset.surfaceLabels === 'on';
-  let destroyed = false, loadStarted = false, loaded = false, error: string | null = null, playing = false, enabled = false, frames = 0, zoomGate = false, outlinePieces = 0;
+  let destroyed = false, playing = false, enabled = false, frames = 0, zoomGate = false, outlinePieces = 0;
+  /** The default catalogue: requested (or held until a flight lands), fetched, written into the labels in batches, then loaded. */
+  let load: { readonly kind: 'idle' } | { readonly kind: 'held' } | { readonly kind: 'fetching' }
+    | { readonly kind: 'populating'; readonly catalog: PreparedSurfaceFeatureCatalog; frame: number | null }
+    | { readonly kind: 'loaded'; readonly catalog: PreparedSurfaceFeatureCatalog }
+    | { readonly kind: 'failed'; readonly error: string } = { kind: 'idle' };
   let view: Parameters<SurfaceFeatureLayerRuntime['publish']>[0] | null = null;
-  let matrix: Float64Array | null = null, local: DOMMatrix | null = null, catalog: PreparedSurfaceFeatureCatalog | null = null, flight: SurfaceFlightHandle | null = null;
+  let matrix: Float64Array | null = null, local: DOMMatrix | null = null, flight: SurfaceFlightHandle | null = null;
   let resolveLoaded!: (catalog: PreparedSurfaceFeatureCatalog) => void, rejectLoaded!: (error: unknown) => void;
   const loadedCatalog = new Promise<PreparedSurfaceFeatureCatalog>((resolve, reject) => { resolveLoaded = resolve; rejectLoaded = reject; });
   loadedCatalog.catch(() => {});
   const selectionBanks = new Map<string, Promise<PreparedSurfaceFeatureCatalog>>();
-  let pendingFrame: number | null = null, loopFrame: number | null = null, populateFrame: number | null = null;
+  let pendingFrame: number | null = null, loopFrame: number | null = null;
   let visible = new Set<number>(), rects = new Map<string, LabelScreenRect>(), eligible = 0;
   let hoveredIndex: number | null = null, pinnedIndex: number | null = null, shownIndex: number | null = null;
   // A font change invalidates every measured name; each is measured again when it next competes for a place.
   const measure = () => {
-    if (destroyed || !loaded) return;
+    if (destroyed || load.kind !== 'loaded') return;
     for (const entry of entries) entry.measured = false;
     schedule();
   };
@@ -158,23 +163,23 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   // the load is held. It runs when the flight ends with this body on screen (it landed, or the visitor stopped it here);
   // a flight another navigation replaces drops it, so a body the camera only passes never fetches it. Explicit requests
   // (search, selection) load at once.
-  let navigationInFlight = false, loadHeld = false;
+  let navigationInFlight = false;
   function requestLoading() {
-    if (navigationInFlight) { loadHeld = true; return; }
-    startLoading();
+    if (!navigationInFlight) startLoading();
+    else if (load.kind === 'idle') load = { kind: 'held' };
   }
   function startLoading() {
-    if (destroyed || loadStarted) return;
-    loadStarted = true;
-    void loadPreparedSurfaceFeatureCatalog(plan, objectId, controller.signal, transport).then(loadedValue => {
+    if (destroyed || (load.kind !== 'idle' && load.kind !== 'held')) return;
+    load = { kind: 'fetching' };
+    void loadPreparedSurfaceFeatureCatalog(plan, objectId, controller.signal, transport).then(catalog => {
       if (destroyed) return;
       createEntries();
-      catalog = loadedValue;
       catalog.features.forEach((feature, index) => { entries[index]!.feature = feature; });
-      populate(loadedValue, 0);
+      load = { kind: 'populating', catalog, frame: null };
+      populate(0);
     }, failure => {
       if (destroyed || controller.signal.aborted) { rejectLoaded(failure); return; }
-      error = failure instanceof Error ? failure.message : String(failure);
+      load = { kind: 'failed', error: failure instanceof Error ? failure.message : String(failure) };
       rejectLoaded(failure);
       onError(failure);
     });
@@ -183,21 +188,22 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     if (destroyed || pendingFrame !== null) return;
     pendingFrame = windowTarget!.requestAnimationFrame(() => { pendingFrame = null; refresh(); });
   }
-  function populate(loadedValue: PreparedSurfaceFeatureCatalog, start: number) {
-    populateFrame = null;
-    if (destroyed) return;
-    const end = Math.min(loadedValue.features.length, start + LABELS_PER_FRAME);
+  function populate(start: number) {
+    const populating = load;
+    if (destroyed || populating.kind !== 'populating') return;
+    populating.frame = null;
+    const { catalog } = populating, end = Math.min(catalog.features.length, start + LABELS_PER_FRAME);
     for (let index = start; index < end; index++) {
       const entry = entries[index]!, feature = entry.feature!;
       populateEntry(entry, feature);
     }
-    if (end < loadedValue.features.length) {
-      populateFrame = windowTarget!.requestAnimationFrame(() => populate(loadedValue, end));
+    if (end < catalog.features.length) {
+      populating.frame = windowTarget!.requestAnimationFrame(() => populate(end));
       return;
     }
-    loaded = true;
+    load = { kind: 'loaded', catalog };
     schedule();
-    resolveLoaded(loadedValue);
+    resolveLoaded(catalog);
   }
   function populateEntry(entry: Entry, feature: PreparedSurfaceFeature) {
     entry.feature = feature;
@@ -224,12 +230,17 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     }
     return (await pending).features.find(feature => feature.id === id) ?? null;
   }
+  // Labels follow a playing scene every frame. They are off by default; with them off there is nothing to follow.
+  const following = () => !destroyed && playing && labelsEnabled();
   function loop() {
     loopFrame = null;
-    // Labels are off by default; with them off there is nothing to follow, so the loop stops.
-    if (destroyed || !playing || !labelsEnabled()) return;
+    if (!following()) return;
     refresh();
     loopFrame = windowTarget!.requestAnimationFrame(loop);
+  }
+  function syncLoop() {
+    if (following() && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
+    if (!following() && loopFrame !== null) { windowTarget!.cancelAnimationFrame(loopFrame); loopFrame = null; }
   }
   /** The mesh node's current transform chain up to the scene root, spin included. */
   function readLocal(): DOMMatrix {
@@ -246,13 +257,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     presentCaption();
   }
   const onLabelsChange = () => {
-    if (labelsEnabled()) {
-      requestLoading(); schedule();
-      if (playing && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
-    } else {
-      hoveredIndex = null; hideAll();
-      if (loopFrame !== null) { windowTarget!.cancelAnimationFrame(loopFrame); loopFrame = null; }
-    }
+    if (labelsEnabled()) { requestLoading(); schedule(); } else { hoveredIndex = null; hideAll(); }
+    syncLoop();
   };
   document.body.addEventListener('objectsurfacelabelschange', onLabelsChange);
   function refresh() {
@@ -264,7 +270,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     // Each name carries its own discovery tier; names whose tier lies beyond the current zoom share wait for the camera.
     const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
-    if (!labelsEnabled() || !loaded || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view !== null && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
+    if (!labelsEnabled() || load.kind !== 'loaded' || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view !== null && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
     requirePhysicalProjection(projection);
     // Retained mesh ancestors use zero transform origins; their current matrices
     // carry the body spin exactly as painted. Camera transforms are already in
@@ -396,12 +402,12 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   function destroy() {
     if (destroyed) return;
     destroyed = true;
-    if (!loadStarted) rejectLoaded(new DOMException('Surface feature loading was cancelled.', 'AbortError'));
+    if (load.kind === 'idle' || load.kind === 'held') rejectLoaded(new DOMException('Surface feature loading was cancelled.', 'AbortError'));
     controller.abort();
     flight?.cancel(); flight = null;
     if (pendingFrame !== null) windowTarget!.cancelAnimationFrame(pendingFrame);
     if (loopFrame !== null) windowTarget!.cancelAnimationFrame(loopFrame);
-    if (populateFrame !== null) windowTarget!.cancelAnimationFrame(populateFrame);
+    if (load.kind === 'populating' && load.frame !== null) windowTarget!.cancelAnimationFrame(load.frame);
     fonts?.removeEventListener('loadingdone', measure);
     pickingHost.removeEventListener('objecthoverchange', onHover);
     document.body.removeEventListener('objectsurfacelabelschange', onLabelsChange);
@@ -421,24 +427,22 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     setPlaying(value: boolean) {
       if (destroyed || playing === value) return;
       playing = value;
-      if (playing && labelsEnabled() && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
-      if (!playing && loopFrame !== null) { windowTarget!.cancelAnimationFrame(loopFrame); loopFrame = null; }
+      syncLoop();
     },
     stats(): SurfaceFeatureLayerStats {
-      return Object.freeze({ loaded, count: plan.catalog.count + (plan.selection?.count ?? 0), visible: visible.size, eligible, enabled, playing, frames, error, zoomGate, outlinePieces, flying: flight !== null,
+      return Object.freeze({ loaded: load.kind === 'loaded', count: plan.catalog.count + (plan.selection?.count ?? 0), visible: visible.size, eligible, enabled, playing, frames, error: load.kind === 'failed' ? load.error : null, zoomGate, outlinePieces, flying: flight !== null,
         hovered: hoveredIndex === null ? null : entries[hoveredIndex]!.feature?.id ?? null, pinned: pinnedIndex === null ? null : entries[pinnedIndex]!.feature?.id ?? null });
     },
     inspect() {
       return Object.freeze({ labels: Object.freeze(Object.fromEntries(entries.filter(entry => entry.feature).map(entry => [entry.feature!.id, entry.element]))), tooltip, outline: Object.freeze([...outline]), rects });
     },
-    catalog: () => catalog,
+    catalog: () => load.kind === 'populating' || load.kind === 'loaded' ? load.catalog : null,
     loaded: () => { startLoading(); return loadedCatalog; },
     setNavigationInFlight(active: boolean, landed = true) {
       navigationInFlight = active;
-      if (active) return;
-      const held = loadHeld;
-      loadHeld = false;
-      if (held && landed) startLoading();
+      if (active || load.kind !== 'held') return;
+      // A replaced flight only passed this body: its held request is dropped.
+      if (landed) startLoading(); else load = { kind: 'idle' };
     },
     async select(id: string, { signal }: { signal?: AbortSignal } = {}) {
       if (signal?.aborted) return { completed: false };
