@@ -55,7 +55,7 @@ async function universeFixture(t: { after: (cleanup: () => Promise<unknown>) => 
   await result.inventory('mimas', 'runtime', ['surface.webp', 'features.json']);
   await result.inventory('new-body', 'runtime', ['unrelated.webp', 'new-body-photometric-phase-curve.svg', 'unrelated.svg']);
   await result.inventory('heliosphere', 'prepared', ['shell.json', 'atlas.webp']);
-  await result.inventory('stellar-neighbourhood', 'prepared', ['stars.json', 'stars.bin', 'point-atlas.png']);
+  await result.inventory('stellar-neighbourhood', 'prepared', ['stars.json', 'stars.bin', 'point-atlas.webp']);
   await result.inventory('milky-way', 'runtime', ['unused-preview.webp']);
   await result.inventory('m31', 'runtime', ['layers.json', 'image.webp'], 'prepared');
   // Two manifest kinds may name the same prepared JSON; one validated installation suffices.

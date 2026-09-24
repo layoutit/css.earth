@@ -32,9 +32,10 @@ test("prepared marker atlases and presentation follow packages", async () => {
     const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
     const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
     const count = Math.min(BODY_MARKER_ATLAS_PAGE_SIZE, descriptors.length - page * BODY_MARKER_ATLAS_PAGE_SIZE);
-    const url = `/navigation/body-markers-${String(page).padStart(2, '0')}.webp`;
+    // Pages are 2x only: no 1x raster is made or read.
+    const url2x = `/navigation/body-markers-${String(page).padStart(2, '0')}@2x.webp`;
     const { context: _context, ...atlasMarker } = marker;
-    assert.deepEqual(atlasMarker, { url, url2x: url.replace('.webp', '@2x.webp'), url2xPixels: marker.url2xPixels, index, count, presentation: descriptor.presentation });
+    assert.deepEqual(atlasMarker, { url2x, url2xPixels: marker.url2xPixels, index, count, presentation: descriptor.presentation });
     const result = markerStyle(marker, { color: "#ffffff" });
     assert.ok(result.style.includes("color:#ffffff"));
     assert.ok(result.innerStyle.includes(`background-size:${count * 100}% 100%`));
@@ -85,7 +86,7 @@ test("scale overrides must form a complete presentation after inheritance", () =
   }
   const presentation = { size: 8, ringAngle: 0, ringExtra: 12, ringHeight: 4, scale: { ringExtra: 20 } };
   assert.equal(validateMarkerPresentation(presentation), presentation);
-  const result = markerStyle({ url: '/navigation/body-test.webp', url2x: '/navigation/body-test@2x.webp', index: 0, count: 1, presentation }, { color: "#ffffff", view: "scale" });
+  const result = markerStyle({ url2x: '/navigation/body-test@2x.webp', index: 0, count: 1, presentation }, { color: "#ffffff", view: "scale" });
   assert.equal(result.ringed, true);
   assert.match(result.ringStyle, /width:28px/);
   assert.match(result.ringStyle, /height:4px/);

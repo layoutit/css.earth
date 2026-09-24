@@ -87,7 +87,6 @@ export interface PreparedCssPointField {
   readonly diffuseSky?: readonly { readonly id: string; readonly path: string }[];
   readonly directPoints?: PreparedDirectStarField;
   readonly resources: readonly PreparedPointFieldResource[];
-  readonly provenance: unknown;
 }
 
 export type PointFieldBankStorage = 'uint8' | 'int16' | 'uint32' | 'float32' | 'float64';

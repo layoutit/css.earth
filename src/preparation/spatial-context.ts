@@ -38,7 +38,9 @@ export interface WorldContextPointSource {
 }
 /** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
  * (site/context-colour.mts). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
-type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>> };
+/** `plainDot`: an asteroid that is not a map target (not a mission target, no real imagery). The world draws it as a plain
+ * dot, and its orbit path is its own bank, read only when that path can show. */
+type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true };
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 export interface VolumeOpacityProfile {
   readonly model: 'logarithmic-distance';
@@ -103,6 +105,7 @@ export interface PreparedWorldContext {
     readonly classification?: string;
     readonly systemName?: string;
     readonly discovery?: Readonly<Record<string, unknown>>;
+    readonly plainDot?: true;
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
@@ -129,15 +132,16 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
     if (value.classification !== undefined && !/^[a-z][a-z-]*$/.test(String(value.classification))) throw new TypeError(`${label} classification is ${String(value.classification)}.`);
     return { ...(value.contextColor === undefined ? {} : { contextColor: color(value.contextColor) }), ...(value.labelCase === 'upper' ? { labelCase: 'upper' as const } : {}),
       ...(value.classification === undefined ? {} : { classification: String(value.classification) }), ...(value.systemName === undefined ? {} : { systemName: text(value.systemName, `${label} system name`) }),
-      ...(value.discovery === undefined ? {} : { discovery: freeze({ ...record(value.discovery, `${label} discovery`) }) }) };
+      ...(value.discovery === undefined ? {} : { discovery: freeze({ ...record(value.discovery, `${label} discovery`) }) }),
+      ...(value.plainDot === undefined ? {} : value.plainDot === true ? { plainDot: true as const } : (() => { throw new TypeError(`${label} plain dot is true or absent.`); })()) };
   };
-  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'], 'world context focus');
+  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot'], 'world context focus');
   const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color),
     ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }), ...presentation(focusInput, 'World context focus') });
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery'], `world context body ${index}`);
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot'], `world context body ${index}`);
     if (body.labelPlacement !== undefined && body.labelPlacement !== 'centre') throw new TypeError(`World context body ${index} label placement is ${String(body.labelPlacement)}, not centre.`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (body.unpackaged !== undefined && body.unpackaged !== true) throw new TypeError('World context unpackaged is true or absent.');
@@ -283,8 +287,8 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
 }
 
 /** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as binary
- * orbit banks, one per orbit centre (`worldOrbitBanks`), which this summary pins by byte length; each orbit here keeps
- * its parent, bounds and size, and names its bank by its centre. Classification views are build-time only. */
+ * orbit banks (`worldOrbitBanks`), which this summary pins by byte length; each orbit here keeps its parent, bounds and
+ * size, and names its bank when that is not its centre's. Classification views are build-time only. */
 export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>) {
   const { classificationViews: _views, ...rest } = prepared;
   // System views keep their members; their camera candidates are `worldSystemViews`, loaded after the first body mounts.
@@ -296,9 +300,23 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
-    return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
-      bounds, lod: freeze({ bounds: lod.bounds }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
+    const bank = orbitBankId(body);
+    return freeze({ ...body, orbit: freeze({ centerBodyId, ...(bank === centerBodyId ? {} : { bank }), centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
+      bounds: outwardSphere(bounds), lod: freeze({ bounds: outwardSphere(lod.bounds) }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
   })) });
+}
+
+/** A culling sphere written in steps of a millionth of its radius, grown to still hold the sphere it rounds: seventeen
+ * digits of metres were a quarter of the summary's compressed bytes, and a sphere grows by at most 2.8 millionths of its
+ * radius (the rounded centre's shift plus one step). */
+export function outwardSphere(sphere: { readonly centerM: Vector3; readonly radiusM: number }) {
+  const step = 10 ** Math.floor(Math.log10(sphere.radiusM * 1e-6)), digits = Math.max(0, -Math.log10(step));
+  const snap = (value: number) => Number((Math.round(value / step) * step).toFixed(digits));
+  const centerM = sphere.centerM.map(snap) as unknown as Vector3;
+  const needed = sphere.radiusM + Math.hypot(...centerM.map((value, axis) => value - sphere.centerM[axis]!));
+  let radiusM = Number((Math.ceil(needed / step) * step).toFixed(digits));
+  while (radiusM < needed) radiusM = Number((radiusM + step).toFixed(digits));
+  return freeze({ centerM: freeze(centerM), radiusM });
 }
 
 /** Each system's camera candidates, one document per host: system framing reads the one it frames, so a page never
@@ -310,14 +328,35 @@ export function worldSystemViews(prepared: PreparedWorldContext) {
 
 /** The orbit bank's layout: `CSWO`, format version, header byte length (little-endian u32s), the UTF-8 JSON
  * header, then 8-byte-aligned sections. The header names each orbit's sections as [byteOffset, count] from the
- * start of the bank: vertices as Float64 x,y,z triples, trail weights as Float64, chord and vertex indices as
- * Uint32. The planner worker reads them as typed-array views; nothing is parsed into objects. */
+ * start of the bank: vertices as Int32 x,y,z steps from the orbit's `vertexOriginM` in units of its `vertexStepM`,
+ * trail weights as Float64, chord and vertex indices as Uint32. The planner worker reads them as typed-array views.
+ * Version 2 stores vertices as Int32 steps from the vertex that pins the body, which decodes exactly: Float64 metres were
+ * 98% of a bank's compressed bytes and do not compress. A step is the path's largest offset over 2^31 - 1; measured
+ * across all 658 paths (2026-09-25, `orbitVertexError`), the worst error is 5.3e-10 of a path's span: 108 m on Earth's
+ * orbit, 3,554 km on S85's 70,693 AU path around Sgr A*. */
 export const WORLD_ORBITS_MAGIC = 0x4f575343; // 'CSWO'
-export const WORLD_ORBITS_VERSION = 1;
+export const WORLD_ORBITS_VERSION = 2;
+const INT32_STEPS = 0x7fffffff;
+/** A path's vertex origin and step, so every vertex is an Int32 count of steps. The origin is the vertex that pins the body
+ * (the first, or an open trajectory's epoch vertex), so the body's own position decodes exactly. */
+export function orbitVertexQuantum(verticesM: readonly Vector3[], pinnedIndex = 0) {
+  const originM = verticesM[pinnedIndex]!;
+  const reach = Math.max(...verticesM.flatMap(vertex => vertex.map((value, axis) => Math.abs(value - originM[axis]!))));
+  return { originM, stepM: reach > 0 ? reach / INT32_STEPS : 1 };
+}
+/** The largest distance between a path's vertices and their Int32 encoding, in metres. */
+export function orbitVertexError(verticesM: readonly Vector3[], pinnedIndex = 0): number {
+  const { originM, stepM } = orbitVertexQuantum(verticesM, pinnedIndex);
+  return Math.max(...verticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => originM[axis]! + Math.round((value - originM[axis]!) / stepM) * stepM - value))));
+}
+/** The bank that carries a body's orbit path: its own for a plain dot, whose path shows only when it is named, else its centre's. */
+export function orbitBankId(body: { readonly id: string; readonly plainDot?: true; readonly orbit?: { readonly centerBodyId: string } | null }): string {
+  return body.plainDot ? body.id : body.orbit!.centerBodyId;
+}
 export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
-  const sections: (Float64Array | Uint32Array)[] = [];
+  const sections: (Float64Array | Uint32Array | Int32Array)[] = [];
   let offset = 0;
-  const section = (values: Float64Array | Uint32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
+  const section = (values: Float64Array | Uint32Array | Int32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
   const f64 = (values: readonly number[]) => section(Float64Array.from(values));
   const u32 = (values: readonly number[]) => {
     if (values.some(value => !Number.isSafeInteger(value) || value < 0 || value > 0xffffffff)) throw new TypeError('Orbit bank indices must be unsigned 32-bit integers.');
@@ -326,13 +365,15 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
   const bodies = prepared.bodies.flatMap(body => {
     const orbit = body.orbit;
     if (!orbit || !include(body)) return [];
-    return [{ id: body.id, vertices: f64(orbit.verticesM.flat()), trail: f64(orbit.trail), activeChords: u32(orbit.activeChords),
+    const { originM, stepM } = orbitVertexQuantum(orbit.verticesM, orbit.closed === false ? orbit.bodyVertexIndex : 0);
+    const vertices = section(Int32Array.from(orbit.verticesM.flat(), (value, index) => Math.round((value - originM[index % 3]!) / stepM)));
+    return [{ id: body.id, vertexOriginM: originM, vertexStepM: stepM, vertices, trail: f64(orbit.trail), activeChords: u32(orbit.activeChords),
       extentChords: u32(orbit.extentChords),
       ...(orbit.closed === false ? { bodyVertexIndex: orbit.bodyVertexIndex, trailModel: orbit.trailModel } : {}),
       levels: orbit.lod.levels.map(level => ({ vertexIndices: u32(level.vertexIndices), trail: f64(level.trail),
         activeChords: u32(level.activeChords), deviationM: level.deviationM })) }];
   });
-  const header = new TextEncoder().encode(JSON.stringify({ schema: 'cssearth-world-orbits@1', bodies }));
+  const header = new TextEncoder().encode(JSON.stringify({ schema: 'cssearth-world-orbits@2', bodies }));
   const dataStart = 12 + header.byteLength + (8 - (12 + header.byteLength) % 8) % 8;
   const bytes = new Uint8Array(dataStart + offset);
   const view = new DataView(bytes.buffer);
@@ -346,12 +387,13 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
   }
   return bytes;
 }
-/** One orbit bank per orbit centre (the Sun, each planet with moons, each other star, Sgr A*): the planner worker reads a
- * centre's bank when one of its orbits would be drawn, so a page never downloads the paths of systems it does not show
- * (the single bank was 1.6 MB brotli on every page, 2026-09-24). */
+/** One orbit bank per orbit centre (the Sun, each planet with moons, each other star, Sgr A*), and one per plain dot: the
+ * planner worker reads a bank when one of its orbits would be drawn, so a page never downloads the paths of systems it does
+ * not show (the single bank was 1.6 MB brotli on every page, 2026-09-24), nor the paths of the plain dots, which show only
+ * when named (68% of the Sun's bank). */
 export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
-  const centres = [...new Set(prepared.bodies.flatMap(body => body.orbit ? [body.orbit.centerBodyId] : []))].sort();
-  return centres.map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.orbit?.centerBodyId === id) }));
+  const banks = [...new Set(prepared.bodies.flatMap(body => body.orbit ? [orbitBankId(body)] : []))].sort();
+  return banks.map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.orbit !== null && body.orbit !== undefined && orbitBankId(body) === id) }));
 }
 export interface PreparedOrbitLodLevel {
   readonly vertexIndices: readonly number[]; readonly trail: readonly number[];

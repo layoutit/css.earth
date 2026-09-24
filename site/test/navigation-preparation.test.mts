@@ -6,6 +6,7 @@ import { resolve } from "node:path";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from "sharp";
+import pixelmatch from "pixelmatch";
 
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
@@ -54,11 +55,11 @@ test('adding and reordering bodies preserves existing marker bytes', async conte
 test('metadata-only preparation does not replace or remove images', async context => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-metadata-'));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const files = ['body-sun.webp', 'body-sun@2x.webp'];
+  const files = ['body-sun@2x.webp'];
   for (const file of files) await copyFile(resolve(projectRoot, 'public/navigation', file), resolve(root, file));
-  await copyFile(resolve(projectRoot, 'public/navigation/body-sun.webp'), resolve(root, 'body-markers-00.webp'));
   await copyFile(resolve(projectRoot, 'public/navigation/body-sun@2x.webp'), resolve(root, 'body-markers-00@2x.webp'));
-  await writeFile(resolve(root, 'sun-context.webp'), 'unrelated existing context');
+  // The Sun has a context image, which the metadata step reads; it must stay as it was.
+  await copyFile(resolve(projectRoot, 'public/navigation/sun-context.webp'), resolve(root, 'sun-context.webp'));
   const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))] as const)));
   const presentationPath = resolve(root, 'presentation.mjs');
   await prepareNavigation({ projectRoot, outputRoot: root, planets: SCENE_OBJECTS.filter(body => body.id === 'sun'), presentationPath, catalogOnly: true });
@@ -84,28 +85,22 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
     source.origin && source.credit && source.license));
 });
 
-test('body marker atlases preserve every visible prepared tile pixel exactly', async () => {
+test('body marker atlases keep every tile alpha exactly and its colour within the lossy lane', async () => {
   const descriptors = await loadMarkerDescriptors({ projectRoot });
+  // Pages go through the lossy lane with exact alpha. Measured when adopted (2026-09-25): pixelmatch at threshold 0.1 flags
+  // 13, 6 and 6 pixels on the three 262,144-pixel pages; the bound leaves room for encoder rounding, not for a visible change.
+  const differing = new Map<number, number>();
   for (const [descriptorIndex, { objectId }] of descriptors.entries()) {
     const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
-    const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
-    for (const density of [1, 2]) {
-      const tile = 16 * density;
-      const suffix = density === 2 ? '@2x' : '';
-      const accepted = await sharp(resolve(projectRoot, 'public/navigation', `body-${objectId}${suffix}.webp`)).ensureAlpha().raw().toBuffer();
-      const atlas = await sharp(resolve(projectRoot, 'public/navigation', `body-markers-${String(page).padStart(2, '0')}${suffix}.webp`))
-        .extract({ left: index * tile, top: 0, width: tile, height: tile }).ensureAlpha().raw().toBuffer();
-      assert.equal(atlas.length, accepted.length, `${objectId}${suffix}: byte length`);
-      for (let offset = 0; offset < accepted.length; offset += 4) {
-        assert.equal(atlas[offset + 3], accepted[offset + 3], `${objectId}${suffix}: alpha`);
-        // Lossless WebP is allowed to discard RGB under fully transparent
-        // pixels; require exact bytes for every pixel the browser can paint.
-        if (accepted[offset + 3]) {
-          assert.deepEqual(atlas.subarray(offset, offset + 3), accepted.subarray(offset, offset + 3), `${objectId}${suffix}: visible RGB`);
-        }
-      }
-    }
+    const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE, tile = 32;
+    const accepted = await sharp(resolve(projectRoot, 'public/navigation', `body-${objectId}@2x.webp`)).ensureAlpha().raw().toBuffer();
+    const atlas = await sharp(resolve(projectRoot, 'public/navigation', `body-markers-${String(page).padStart(2, '0')}@2x.webp`))
+      .extract({ left: index * tile, top: 0, width: tile, height: tile }).ensureAlpha().raw().toBuffer();
+    assert.equal(atlas.length, accepted.length, `${objectId}: byte length`);
+    for (let offset = 0; offset < accepted.length; offset += 4) assert.equal(atlas[offset + 3], accepted[offset + 3], `${objectId}: alpha`);
+    differing.set(page, (differing.get(page) ?? 0) + pixelmatch(accepted, atlas, undefined, tile, tile, { threshold: 0.1 }));
   }
+  for (const [page, count] of differing) assert.ok(count <= 20, `body-markers-${page}: ${count} pixels differ at threshold 0.1`);
 });
 
 test('every body marker and resolved context image leaves space outside its silhouette transparent', async () => {
@@ -113,7 +108,7 @@ test('every body marker and resolved context image leaves space outside its silh
   const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared-navigation-markers.mjs');
   for (const { objectId } of descriptors) {
     const context = PREPARED_NAVIGATION_MARKERS[objectId]?.context;
-    const images = [`body-${objectId}.webp`, `body-${objectId}@2x.webp`,
+    const images = [`body-${objectId}@2x.webp`,
       ...(context ? [context.url.replace('/navigation/', '')] : [])];
     for (const filename of images) {
       const { data, info } = await sharp(resolve(projectRoot, 'public/navigation', filename)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });

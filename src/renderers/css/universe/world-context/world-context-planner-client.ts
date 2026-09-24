@@ -15,7 +15,7 @@ export interface WorldPlannerWorker {
 export interface WorldPlannerSource {
   /** The same summary the main thread holds. */
   readonly summaryUrl: string;
-  /** Where each orbit centre's binary bank lives, as `<orbitBanksUrl><centre id>.bin`: the only copies of the orbit paths
+  /** Where each orbit bank lives, as `<orbitBanksUrl><bank id>.bin` (a centre's, or a plain dot's own): the only copies of the orbit paths
    * in the browser, read by the worker when a frame first needs a centre's orbits. */
   readonly orbitBanksUrl: string;
 }

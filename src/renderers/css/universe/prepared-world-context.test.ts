@@ -2533,7 +2533,7 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
   layer.destroy();
 });
 
-test('the orbit banks, one per centre, decode to exactly the orbits of the full prepared file', async () => {
+test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', async () => {
   const prepared = new URL('../../../objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
@@ -2542,7 +2542,25 @@ test('the orbit banks, one per centre, decode to exactly the orbits of the full 
   const decoded = decodeWorldOrbits(summary, banks);
   expect(decoded.bodies.map(body => body.id)).toEqual(full.bodies.map(body => body.id));
   for (const [index, body] of decoded.bodies.entries()) {
-    expect(body.orbit, body.id).toEqual(full.bodies[index]!.orbit);
+    const truth = full.bodies[index]!.orbit;
+    if (!truth) { expect(body.orbit, body.id).toBeUndefined(); continue; }
+    const { verticesM, bounds, lod, ...rest } = body.orbit!;
+    const { verticesM: trueVertices, bounds: trueBounds, lod: trueLod, ...trueRest } = truth;
+    expect(rest, body.id).toEqual(trueRest);
+    // The body's own vertex is the Int32 origin and decodes exactly; every other vertex lies within half a step on each axis,
+    // plus the double rounding of adding the step count to a coordinate of order 1e11 m.
+    const pinned = truth.closed === false ? truth.bodyVertexIndex! : 0;
+    expect([...verticesM.subarray(pinned * 3, pinned * 3 + 3)], body.id).toEqual([...trueVertices.subarray(pinned * 3, pinned * 3 + 3)]);
+    let reach = 0;
+    for (let i = 0; i < trueVertices.length; i++) reach = Math.max(reach, Math.abs(trueVertices[i]! - trueVertices[pinned * 3 + i % 3]!));
+    for (let i = 0; i < trueVertices.length; i++) expect(Math.abs(verticesM[i]! - trueVertices[i]!), body.id).toBeLessThanOrEqual(reach / 0x7fffffff / 2 + 4 * Number.EPSILON * Math.abs(trueVertices[i]!));
+    // Culling spheres are rounded outward: each still holds the sphere it rounds.
+    for (const [rounded, exact] of [[bounds, trueBounds], [lod?.bounds, trueLod?.bounds]] as const) {
+      if (!exact) continue;
+      expect(rounded!.radiusM, body.id).toBeGreaterThanOrEqual(exact.radiusM + Math.hypot(...rounded!.centerM.map((value, axis) => value - exact.centerM[axis]!)));
+      expect(rounded!.radiusM, body.id).toBeLessThanOrEqual(exact.radiusM * (1 + 3e-6));
+    }
+    expect(lod?.levels, body.id).toEqual(trueLod?.levels);
   }
   // A bank of another size, one missing an orbit's path, or one for a centre the summary does not pin never decodes.
   const sun = banks.get('sun')!;
