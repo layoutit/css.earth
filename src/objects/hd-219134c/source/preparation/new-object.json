@@ -1,0 +1,24 @@
+{
+  "host": "hd-219134",
+  "planets": [
+    {
+      "id": "hd-219134c",
+      "name": "HD 219134 c",
+      "description": "HD 219134 c crosses its star every 6.76 days and is 1.5 Earth radii across, found in 2015.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+        "credit": "Gillon et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GILLON_ET_AL__2017"
+      },
+      "text": {
+        "card": "HD 219134 c crosses its star every 6.76 days and is 1.5 Earth radii across, found in 2015.",
+        "introduction": "HD 219134 c transits HD 219134 every 6.76 days and is 1.5 Earth radii across. Orbit and size follow Gillon et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2017): pl_orbper 6.76458, pl_radj 0.13480239, pl_bmassj 0.01371803"
+      },
+      "order": 1775
+    }
+  ]
+}

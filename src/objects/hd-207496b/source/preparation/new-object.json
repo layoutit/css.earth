@@ -1,0 +1,24 @@
+{
+  "host": "hd-207496",
+  "planets": [
+    {
+      "id": "hd-207496b",
+      "name": "HD 207496 b",
+      "description": "HD 207496 b crosses its star every 6.44 days and is 2.3 Earth radii across, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract",
+        "credit": "Barros et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARROS_ET_AL__2023"
+      },
+      "text": {
+        "card": "HD 207496 b crosses its star every 6.44 days and is 2.3 Earth radii across, found in 2023.",
+        "introduction": "HD 207496 b transits HD 207496 every 6.44 days and is 2.3 Earth radii across. Orbit and size follow Barros et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL__2023): pl_orbper 6.441008, pl_radj 0.2007319, pl_bmassj 0.01919275"
+      },
+      "order": 1803
+    }
+  ]
+}

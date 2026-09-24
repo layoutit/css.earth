@@ -1,0 +1,24 @@
+{
+  "host": "toi-431",
+  "planets": [
+    {
+      "id": "toi-431b",
+      "name": "TOI-431 b",
+      "description": "TOI-431 b crosses its star every 0.49 days and is 1.3 Earth radii across, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract",
+        "credit": "Osborn et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "OSBORN_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-431 b crosses its star every 0.49 days and is 1.3 Earth radii across, found in 2021.",
+        "introduction": "TOI-431 b transits TOI-431 every 0.49 days and is 1.3 Earth radii across. Orbit and size follow Osborn et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OSBORN_ET_AL__2021): pl_orbper 0.490047, pl_radj 0.11419415, pl_bmassj 0.0096593"
+      },
+      "order": 1818
+    }
+  ]
+}

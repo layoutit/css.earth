@@ -1,0 +1,24 @@
+{
+  "host": "hd-63433",
+  "planets": [
+    {
+      "id": "hd-63433c",
+      "name": "HD 63433 c",
+      "description": "HD 63433 c crosses its star every 20.5 days and is 2.7 Earth radii across, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
+        "credit": "Mallorqu&iacute;n et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MALLORQU_AMP_IACUTE_N_ET_AL__2023"
+      },
+      "text": {
+        "card": "HD 63433 c crosses its star every 20.5 days and is 2.7 Earth radii across, found in 2020.",
+        "introduction": "HD 63433 c transits HD 63433 every 20.5 days and is 2.7 Earth radii across. Orbit and size follow Mallorqu&iacute;n et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): pl_orbper 20.5438281, pl_radj 0.24, pl_bmassj 0.04889116"
+      },
+      "order": 1796
+    }
+  ]
+}

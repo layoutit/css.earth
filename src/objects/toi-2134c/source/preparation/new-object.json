@@ -1,0 +1,24 @@
+{
+  "host": "toi-2134",
+  "planets": [
+    {
+      "id": "toi-2134c",
+      "name": "TOI-2134 c",
+      "description": "TOI-2134 c crosses its star every 95.9 days and is 0.66 Jupiter radii across, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+        "credit": "Rescigno et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "RESCIGNO_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-2134 c crosses its star every 95.9 days and is 0.66 Jupiter radii across, found in 2023.",
+        "introduction": "TOI-2134 c transits TOI-2134 every 95.9 days and is 0.66 Jupiter radii across. Orbit and size follow Rescigno et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RESCIGNO_ET_AL_2026): pl_orbper 95.85284, pl_radj 0.65572421, pl_bmassj 0.18343231"
+      },
+      "order": 1801
+    }
+  ]
+}

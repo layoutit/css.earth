@@ -1,0 +1,38 @@
+{
+  "id": "kepler-444",
+  "name": "Kepler-444",
+  "system": "Kepler-444 system",
+  "description": "Kepler-444 is a 5,046 K star 36.4 parsecs away with 5 known transiting planets.",
+  "target": "Kepler-444",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+    "credit": "Campante et al. 2015"
+  },
+  "radius": {
+    "value": 0.752,
+    "source": "Campante et al. 2015, the stellar radius of the default parameter set of Kepler-444 e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 0.758,
+    "source": "Campante et al. 2015, the stellar mass of the default parameter set of Kepler-444 e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+    "uncertainty": 0.043
+  },
+  "temperature": {
+    "value": 5046,
+    "source": "Campante et al. 2015, the stellar temperature of the default parameter set of Kepler-444 e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+    "uncertainty": 74
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-444 is a 5,046 K star 36.4 parsecs away with 5 known transiting planets.",
+    "introduction": "Kepler-444 is a star of 5,046 K 36.4 parsecs away. Its planets b, c, d, e, f cross it, which is how they were found and sized.",
+    "locator": "NASA Exoplanet Archive ps table, default parameter set of Kepler-444 e (st_refname CAMPANTE_ET_AL__2015): st_teff 5046, st_rad 0.752, st_mass 0.758"
+  },
+  "notes": [],
+  "order": 1825
+}

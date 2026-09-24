@@ -1,0 +1,24 @@
+{
+  "host": "gj-143",
+  "planets": [
+    {
+      "id": "gj-143b",
+      "name": "GJ 143 b",
+      "description": "GJ 143 b crosses its star every 35.6 days and is 2.6 Earth radii across, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+        "credit": "Dragomir et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DRAGOMIR_ET_AL__2019"
+      },
+      "text": {
+        "card": "GJ 143 b crosses its star every 35.6 days and is 2.6 Earth radii across, found in 2019.",
+        "introduction": "GJ 143 b transits GJ 143 every 35.6 days and is 2.6 Earth radii across. Orbit and size follow Dragomir et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRAGOMIR_ET_AL__2019): pl_orbper 35.61253, pl_radj 0.2328486, pl_bmassj 0.07142183"
+      },
+      "order": 1786
+    }
+  ]
+}

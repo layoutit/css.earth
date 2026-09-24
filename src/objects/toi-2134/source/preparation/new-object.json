@@ -1,0 +1,38 @@
+{
+  "id": "toi-2134",
+  "name": "TOI-2134",
+  "system": "TOI-2134 system",
+  "description": "TOI-2134 is a 4,580 K star 22.6 parsecs away with 2 known transiting planets.",
+  "target": "TOI-2134",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+    "credit": "Rescigno et al. 2026"
+  },
+  "radius": {
+    "value": 0.709,
+    "source": "Rescigno et al. 2026, the stellar radius of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.744,
+    "source": "Rescigno et al. 2026, the stellar mass of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+    "uncertainty": 0.027
+  },
+  "temperature": {
+    "value": 4580,
+    "source": "Rescigno et al. 2026, the stellar temperature of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2134 is a 4,580 K star 22.6 parsecs away with 2 known transiting planets.",
+    "introduction": "TOI-2134 is a star of 4,580 K 22.6 parsecs away. Its planets b, c cross it, which is how they were found and sized.",
+    "locator": "NASA Exoplanet Archive ps table, default parameter set of TOI-2134 b (st_refname RESCIGNO_ET_AL_2026): st_teff 4580, st_rad 0.709, st_mass 0.744"
+  },
+  "notes": [],
+  "order": 1799
+}

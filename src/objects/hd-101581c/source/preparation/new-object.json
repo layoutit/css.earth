@@ -1,0 +1,24 @@
+{
+  "host": "hip-56998",
+  "planets": [
+    {
+      "id": "hd-101581c",
+      "name": "HD 101581 c",
+      "description": "HD 101581 c crosses its star every 6.2 days and is 0.99 Earth radii across, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+        "credit": "Kunimoto et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KUNIMOTO_ET_AL__2025"
+      },
+      "text": {
+        "card": "HD 101581 c crosses its star every 6.2 days and is 0.99 Earth radii across, found in 2025.",
+        "introduction": "HD 101581 c transits HIP 56998 every 6.2 days and is 0.99 Earth radii across. Orbit and size follow Kunimoto et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNIMOTO_ET_AL__2025): pl_orbper 6.20401, pl_radj 0.08832204, pl_bmassj 0.00295"
+      },
+      "order": 1779
+    }
+  ]
+}

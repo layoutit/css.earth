@@ -16,6 +16,8 @@ import { fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveAr
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { Cited, StarSpec } from './spec.mts';
+import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
+import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
@@ -89,13 +91,16 @@ export interface Generated {
 }
 
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
-export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order }: { archive?: Archive; root?: string; resolver?: Resolver; order: number }): Promise<Generated> {
+export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean }): Promise<Generated> {
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
   const ids = await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.spin].flatMap(value => value && value !== 'gaia-flame' ? [value.url] : [])])];
   const [{ csv, row }, found] = await Promise.all([fetchGaiaRow(archive, ids.gaia), Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, row);
+  // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.
+  const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: 2016 }, refresh ? id : undefined);
+  if (held) throw new Error(`${id}: Gaia DR3 ${row.sourceId} is ${held}, already in the universe (within ${DUPLICATE_ARCSEC}" of its position); add its bodies with { "host": "${held}" }.`);
   const body = astronomyRecord(spec, row, ids, order);
   const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
@@ -168,6 +173,11 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   plan.operations = [...plan.operations, { kind: 'request-download', groups: ['restore', 'refresh'], path: 'photometry/gaia-dr3-source.csv', url: GAIA_TAP, form: gaiaRowForm(row.sourceId), requiredPrefix: 'source_id,' },
   ];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
+  // The spec this package was made from, so `--refresh` can make it again (refresh.mts).
+  files.set(`${s}/preparation/new-object.json`, storedStarSpec(spec, order));
+  const declared = read(`${s}/manifest.json`);
+  declared.documents = [...declared.documents.filter((entry: { path: string }) => entry.path !== storedSpecDocument.path), storedSpecDocument];
+  files.set(`${s}/manifest.json`, json(declared));
   bindInputs(files, id);
 
   // Credits, README and records.
@@ -233,44 +243,66 @@ export async function reconcileSources(files: Map<string, string | Buffer>, root
   return renames;
 }
 
-/** Write a generated package. A package or astronomy record that exists is never overwritten; shared records that exist are kept. */
-export async function writeGenerated(generated: Generated, root = process.cwd()) {
+/** Write a generated package's files. A package that exists is written over only on a refresh, under refresh.mts's rules; shared
+ * records that exist are kept. Returns the paths written and, on a refresh, what a person wrote that was kept. */
+export async function writePackageFiles(files: Map<string, string | Buffer>, id: string, root: string, refresh = false) {
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
-  for (const path of [`src/objects/${generated.id}`, `packages/astronomy/data/bodies/${generated.id}.json`]) if (await exists(path)) throw new Error(`${path} already exists; the generator never overwrites a package.`);
-  await reconcileSources(generated.files, root);
+  let kept: string[] = [], stale: string[] = [];
+  if (await exists(`src/objects/${id}`)) {
+    if (!refresh) throw new Error(`src/objects/${id} already exists; the generator never overwrites a package (refresh regenerates one it made: --refresh ${id}).`);
+    ({ kept, stale } = await mergeRefresh(files, id, root));
+  } else if (await exists(`packages/astronomy/data/bodies/${id}.json`) && !refresh) throw new Error(`packages/astronomy/data/bodies/${id}.json already exists; the generator never overwrites a record.`);
+  await reconcileSources(files, root);
   const written: string[] = [];
-  for (const [path, value] of generated.files) {
+  for (const [path, value] of files) {
     if (path.startsWith('src/sources/') && await exists(path)) continue;
     await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); written.push(path);
   }
+  await removeStale(root, stale);
+  return { written, kept };
+}
+
+/** Write a generated star's package and its marker. */
+export async function writeGenerated(generated: Generated, root = process.cwd(), refresh = false) {
+  const { written, kept } = await writePackageFiles(generated.files, generated.id, root, refresh);
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
   // The marker needs the package on disk: a placeholder first, then the colour lens as a disc.
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   const { authorContextMarkers } = await import('../source-authoring/context-markers.mts');
   await authorContextMarkers([generated.id]);
-  return written;
+  return { written, kept };
 }
 
-export interface NewObjectResult { readonly id: string; readonly kind: 'star' | 'planet' | 'companion'; readonly files: number; readonly hex?: string; readonly color?: string; readonly crossCheck?: { readonly route: string; readonly difference: number }; readonly limb?: string; readonly orbit?: string; readonly todo: readonly string[] }
+export interface NewObjectResult { readonly id: string; readonly kind: 'star' | 'planet' | 'companion'; readonly files: number; readonly hex?: string; readonly color?: string; readonly crossCheck?: { readonly route: string; readonly difference: number }; readonly limb?: string; readonly orbit?: string; readonly todo: readonly string[];
+  /** On a refresh: what a person wrote that was kept. */
+  readonly kept?: readonly string[];
+  /** Why this body was not written; the rest of the batch still is. */
+  readonly failed?: string }
 const HANDOFF = 'output/new-object/hosted.json';
+const reason = (error: unknown) => (error as Error).message.split('\n')[0]!;
 
 /** Every system of a spec file, generated and written: the one run behind `telescope new-object` and tools/objects/new-object.mts.
  * Stars and every hosted body's astronomy record are written first; the astronomy package is rebuilt; the hosted packages are then
- * written by a fresh process (runHostedPhase), which loads the rebuilt package. */
-export async function runNewObject(specPath: string, { root = process.cwd(), progress = (_line: string) => {}, skipExisting = false }: { root?: string; progress?: (line: string) => void; skipExisting?: boolean } = {}): Promise<NewObjectResult[]> {
+ * written by a fresh process (runHostedPhase), which loads the rebuilt package. A system that fails is reported with its reason and
+ * the rest of the batch goes on; nothing of it is written. `refresh` regenerates bodies the tool made, under refresh.mts's rules. */
+export async function runNewObject(specPath: string, { root = process.cwd(), progress = (_line: string) => {}, skipExisting = false, refresh = false }: { root?: string; progress?: (line: string) => void; skipExisting?: boolean; refresh?: boolean } = {}): Promise<NewObjectResult[]> {
   const { readdir } = await import('node:fs/promises'), { parseObjectSpecs } = await import('./spec.mts'), { hostedRecord } = await import('./hosted.mts');
   const parsed = parseObjectSpecs(JSON.parse(await readFile(resolve(specPath), 'utf8')));
-  const exists0 = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
+  const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   const skipped: string[] = [];
-  const keep = async <T extends { id: string }>(entries: readonly T[]) => { const out: T[] = []; for (const entry of entries) { if (skipExisting && await exists0(`src/objects/${entry.id}`)) skipped.push(entry.id); else out.push(entry); } return out; };
+  const keep = async <T extends { id: string }>(entries: readonly T[]) => { const out: T[] = []; for (const entry of entries) { if (skipExisting && !refresh && await exists(`src/objects/${entry.id}`)) skipped.push(entry.id); else out.push(entry); } return out; };
   const specs: StarSpec[] = [], additions: typeof parsed.additions = [];
   for (const spec of await keep(parsed.stars)) specs.push({ ...spec, planets: await keep(spec.planets), companions: await keep(spec.companions) });
   for (const addition of parsed.additions) { const planets = await keep(addition.planets), companions = await keep(addition.companions); if (planets.length || companions.length) additions.push({ ...addition, planets, companions }); }
   if (skipped.length) progress(`Already in the universe, skipped: ${skipped.join(', ')}`);
-  const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   for (const addition of additions) if (!await exists(`packages/astronomy/data/bodies/${addition.host}.json`)) throw new Error(`${addition.host}: no such star to add bodies to.`);
-  for (const id of [...specs.flatMap(spec => [spec.id, ...spec.planets.map(p => p.id), ...spec.companions.map(c => c.id)]), ...additions.flatMap(entry => [...entry.planets, ...entry.companions].map(body => body.id))]) {
-    for (const path of [`src/objects/${id}`, `packages/astronomy/data/bodies/${id}.json`]) if (await exists(path)) throw new Error(`${path} already exists; the generator never overwrites an object.`);
+  // An id or a name the universe holds is refused before any archive is read; a refresh may only name bodies the tool made.
+  const universe = await existingBodies(root);
+  for (const entry of [...specs, ...specs.flatMap(spec => [...spec.planets, ...spec.companions]), ...additions.flatMap(addition => [...addition.planets, ...addition.companions])]) {
+    if (refresh) { if (!await exists(`src/objects/${entry.id}/${STORED_SPEC}`)) throw new Error(`${entry.id}: no ${STORED_SPEC}; refresh only regenerates what new-object made.`); continue; }
+    for (const path of [`src/objects/${entry.id}`, `packages/astronomy/data/bodies/${entry.id}.json`]) if (await exists(path)) throw new Error(`${path} already exists; the generator never overwrites an object (refresh regenerates one it made: --refresh ${entry.id}).`);
+    const held = duplicateName(universe, entry.name);
+    if (held) throw new Error(`${entry.id}: ${entry.name} is already in the universe as ${held}.`);
   }
   // An object without an order takes the next free one after every body the astronomy package holds.
   const bodies = resolve(root, 'packages/astronomy/data/bodies'), taken: number[] = [];
@@ -283,22 +315,27 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   const orders = new Map<string, number>();
   for (const spec of specs) { orders.set(spec.id, spec.order ?? next++); for (const entry of [...spec.planets, ...spec.companions]) orders.set(entry.id, entry.order ?? next++); }
   for (const addition of additions) for (const entry of [...addition.planets, ...addition.companions]) orders.set(entry.id, entry.order ?? next++);
+  const failed = (id: string, kind: NewObjectResult['kind'], error: unknown) => { results.push({ id, kind, files: 0, todo: [], failed: reason(error) }); progress(`  ${id}: FAILED, not written: ${reason(error)}`); };
   // Three systems at a time: enough to overlap the archives' latency, few enough to stay polite to them.
   const system = async (spec: StarSpec) => {
     progress(`[${++done}/${total}] ${spec.id}: resolving ${spec.target ?? `Gaia DR3 ${spec.gaia}`} and reading the archives (${elapsed()})`);
-    const generated = await generateStar(spec, { root, order: orders.get(spec.id)! }), written = await writeGenerated(generated, root);
-    const result: NewObjectResult = { id: spec.id, kind: 'star', files: written.length, hex: generated.hex, color: generated.color.route, ...(generated.color.crossCheck ? { crossCheck: generated.color.crossCheck } : {}),
-      limb: generated.limb.grid ?? 'none', todo: generated.todo };
+    let generated: Generated, written: { written: string[]; kept: string[] };
+    try { generated = await generateStar(spec, { root, order: orders.get(spec.id)!, universe, refresh }); written = await writeGenerated(generated, root, refresh); }
+    catch (error) { failed(spec.id, 'star', error); for (const entry of [...spec.planets, ...spec.companions]) failed(entry.id, entry.kind, new Error(`its star ${spec.id} failed`)); return; }
+    const result: NewObjectResult = { id: spec.id, kind: 'star', files: written.written.length, hex: generated.hex, color: generated.color.route, ...(generated.color.crossCheck ? { crossCheck: generated.color.crossCheck } : {}),
+      limb: generated.limb.grid ?? 'none', todo: generated.todo, ...(written.kept.length ? { kept: written.kept } : {}) };
     results.push(result);
-    progress(`  ${spec.id}: colour ${result.hex} from ${result.color}${result.crossCheck ? ` (cross-check ${result.crossCheck.route}, ${result.crossCheck.difference} levels)` : ''}, limb ${result.limb}, ${written.length} files (${elapsed()})`);
+    progress(`  ${spec.id}: colour ${result.hex} from ${result.color}${result.crossCheck ? ` (cross-check ${result.crossCheck.route}, ${result.crossCheck.difference} levels)` : ''}, limb ${result.limb}, ${written.written.length} files${written.kept.length ? `; kept ${written.kept.join(', ')}` : ''} (${elapsed()})`);
     const body = JSON.parse(String(generated.files.get(`packages/astronomy/data/bodies/${spec.id}.json`))) as Record<string, any>;
-    const records = await Promise.all([...spec.planets, ...spec.companions].map(entry => hostedRecord(entry, { spec, body }, orders.get(entry.id)!, liveArchive, root)));
-    for (const record of records) {
-      const entry = record.spec;
+    await Promise.all([...spec.planets, ...spec.companions].map(entry => hostedRecordFor(entry, { spec, body })));
+  };
+  const hostedRecordFor = async (entry: StarSpec['planets'][number], host: { spec: StarSpec; body: Record<string, any> }) => {
+    try {
+      const record = await hostedRecord(entry, host, orders.get(entry.id)!, liveArchive, root);
       progress(`  ${entry.id}: orbit from ${'whereistheplanet' in entry.orbit ? `whereistheplanet ${entry.orbit.whereistheplanet}` : 'archive' in entry.orbit ? record.orbitCitation.label : 'the cited elements'} (P ${record.orbit.periodDays} d, a/R* ${record.orbit.semiMajorAxisStellarRadii})${record.todo.length ? `; noted: ${record.todo.join('; ')}` : ''}`);
       await writeFile(resolve(root, `packages/astronomy/data/bodies/${entry.id}.json`), `${JSON.stringify(record.body, null, 1)}\n`);
       hosted.push({ ...record, documents: Object.fromEntries(record.documents) });
-    }
+    } catch (error) { failed(entry.id, entry.kind, error); }
   };
   const queue = [...specs];
   await Promise.all(Array.from({ length: Math.min(3, queue.length) }, async () => { for (let spec = queue.shift(); spec; spec = queue.shift()) await system(spec); }));
@@ -306,23 +343,20 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
     progress(`[${++done}/${total}] ${addition.host}: adding ${[...addition.planets, ...addition.companions].map(body => body.id).join(', ')}`);
     // A star that exists: its astronomy record is the host, its system name the one its package already carries.
     const body = JSON.parse(await readFile(resolve(root, `packages/astronomy/data/bodies/${addition.host}.json`), 'utf8')) as Record<string, any>;
-    if (!body.star) throw new Error(`${addition.host} is not a placed star (its record has no star block).`);
+    if (!body.star) { for (const entry of [...addition.planets, ...addition.companions]) failed(entry.id, entry.kind, new Error(`${addition.host} is not a placed star (its record has no star block)`)); continue; }
     const descriptor = JSON.parse(await readFile(resolve(root, `src/objects/${addition.host}/object.json`), 'utf8')) as Record<string, any>;
     const host = { spec: { id: addition.host, system: String(descriptor.properties.catalog.systemName ?? `${body.physical.name} system`) } as StarSpec, body };
-    for (const entry of [...addition.planets, ...addition.companions]) {
-      const record = await hostedRecord(entry, host, orders.get(entry.id)!, liveArchive, root);
-      progress(`  ${entry.id}: orbit (P ${record.orbit.periodDays} d, a/R* ${record.orbit.semiMajorAxisStellarRadii})${record.todo.length ? `; noted: ${record.todo.join('; ')}` : ''}`);
-      await writeFile(resolve(root, `packages/astronomy/data/bodies/${entry.id}.json`), `${JSON.stringify(record.body, null, 1)}\n`);
-      hosted.push({ ...record, documents: Object.fromEntries(record.documents) });
-    }
+    for (const entry of [...addition.planets, ...addition.companions]) await hostedRecordFor(entry, host);
   }
   if (hosted.length) {
-    progress(`Rebuilding the astronomy package with ${hosted.length} new orbit${hosted.length === 1 ? '' : 's'}, then writing their packages (${elapsed()})`);
+    progress(`Rebuilding the astronomy package with ${hosted.length} orbit${hosted.length === 1 ? '' : 's'}, then writing their packages (${elapsed()})`);
     execFileSync('pnpm', ['-s', 'build:astronomy'], { cwd: root, stdio: ['ignore', 'ignore', 'inherit'] });
-    await mkdir(resolve(root, dirname(HANDOFF)), { recursive: true }); await writeFile(resolve(root, HANDOFF), json(hosted));
+    await mkdir(resolve(root, dirname(HANDOFF)), { recursive: true }); await writeFile(resolve(root, HANDOFF), json({ refresh, records: hosted }));
     const out = execFileSync(process.execPath, [resolve(root, 'tools/objects/new-object.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
-    results.push(...(JSON.parse(out) as NewObjectResult[]));
+    for (const result of JSON.parse(out) as NewObjectResult[]) { results.push(result); if (result.failed) progress(`  ${result.id}: FAILED, not written: ${result.failed}`); }
   }
+  const failures = results.filter(result => result.failed);
+  if (failures.length) progress(`${failures.length} of ${results.length} bodies failed and were not written: ${failures.map(result => result.id).join(', ')}`);
   return results;
 }
 
@@ -330,41 +364,38 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
 export async function runHostedPhase(handoff: string, root = process.cwd()): Promise<NewObjectResult[]> {
   const { hostedPackage } = await import('./hosted.mts'), { neutralDiscMarker } = await import('./scaffold.mts');
   const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href) as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
-  const records = JSON.parse(await readFile(resolve(root, handoff), 'utf8')) as any[], results: NewObjectResult[] = [];
+  const { refresh, records } = JSON.parse(await readFile(resolve(root, handoff), 'utf8')) as { refresh: boolean; records: any[] }, results: NewObjectResult[] = [];
   for (const saved of records) {
-    const record = { ...saved, documents: new Map(Object.entries(saved.documents as Record<string, string>)) };
-    const hostBody = JSON.parse(await readFile(resolve(root, `packages/astronomy/data/bodies/${record.hostId}.json`), 'utf8'));
-    const urls = [record.spec.paper.url, record.spec.text?.quotes?.url, record.radius.url, record.mass.url, record.orbitCitation.url, record.spec.temperature?.url].filter((url): url is string => typeof url === 'string');
-    const publications = new Map<string, Publication>();
-    for (const url of new Set(urls)) { const publication = await fetchPublication(liveArchive, url); if (publication) publications.set(url, publication); }
-    const { files, hex } = await hostedPackage(record, hostBody, publications, liveArchive, root, SOLAR_GEOMETRY_EPOCH_JD_TT);
-    for (const publication of publications.values()) files.set(`src/sources/${publication.id}.json`, json(publicationRecord(publication)));
-    await reconcileSources(files, root);
-    const written: string[] = [];
-    for (const [path, value] of files) {
-      if (path.startsWith('src/sources/') && await stat(resolve(root, path)).then(() => true, () => false)) continue;
-      await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); written.push(path);
-    }
-    const presentation = resolve(root, `src/objects/${record.spec.id}/source/presentation`);
-    await mkdir(presentation, { recursive: true });
-    await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-    if (record.spec.kind === 'companion') { const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]); }
-    results.push({ id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}),
-      orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'cited elements',
-      todo: [...record.todo, 'reader card and introduction with quotes (text.json)', 'the README account of the body and its evidence'] });
+    try {
+      const record = { ...saved, documents: new Map(Object.entries(saved.documents as Record<string, string>)) };
+      const hostBody = JSON.parse(await readFile(resolve(root, `packages/astronomy/data/bodies/${record.hostId}.json`), 'utf8'));
+      const urls = [record.spec.paper.url, record.spec.text?.quotes?.url, record.radius.url, record.mass.url, record.orbitCitation.url, record.spec.temperature?.url].filter((url): url is string => typeof url === 'string');
+      const publications = new Map<string, Publication>();
+      for (const url of new Set(urls)) { const publication = await fetchPublication(liveArchive, url); if (publication) publications.set(url, publication); }
+      const { files, hex } = await hostedPackage(record, hostBody, publications, liveArchive, root, SOLAR_GEOMETRY_EPOCH_JD_TT);
+      for (const publication of publications.values()) files.set(`src/sources/${publication.id}.json`, json(publicationRecord(publication)));
+      const { written, kept } = await writePackageFiles(files, record.spec.id, root, refresh);
+      const presentation = resolve(root, `src/objects/${record.spec.id}/source/presentation`);
+      await mkdir(presentation, { recursive: true });
+      await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
+      if (record.spec.kind === 'companion') { const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]); }
+      results.push({ id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
+        orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'cited elements',
+        todo: [...record.todo, ...record.spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the body and its evidence']] });
+    } catch (error) { results.push({ id: saved.spec.id, kind: saved.spec.kind, files: 0, todo: [], failed: reason(error) }); }
   }
   return results;
 }
-export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => `${result.id} (${result.kind}): ${result.files} files.${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n  Still to write: ${result.todo.join('; ')}.`).join('\n')}\nReplace every ${TODO}, then bake: node tools/prepare/prepare-object.mts <id>\n`;
+export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n  Still to write: ${result.todo.join('; ')}.`).join('\n')}\nReplace every ${TODO}, then bake: node tools/prepare/prepare-object.mts <id>\n`;
 
 /** A spec file for planet hosts, from the NASA Exoplanet Archive (from-archive.mts); hosts already in the universe get their
  * new planets as host additions. */
 export async function specFromArchive(hosts: readonly string[], out: string, { root = process.cwd(), progress = (_line: string) => {} } = {}) {
-  const { archiveSpec } = await import('./from-archive.mts'), { readdir } = await import('node:fs/promises');
-  const ids = new Set(await readdir(resolve(root, 'src/objects'))), stars: unknown[] = [], report: string[] = [];
+  const { archiveSpec } = await import('./from-archive.mts'), { existingBodies } = await import('./identity.mts');
+  const universe = await existingBodies(root), stars: unknown[] = [], report: string[] = [];
   for (const host of hosts) {
     progress(`${host}: reading its default parameter sets`);
-    const { spec, skipped, notes } = await archiveSpec(liveArchive, host, id => ids.has(id));
+    const { spec, skipped, notes } = await archiveSpec(liveArchive, host, universe);
     const planets = (spec.planets as unknown[]).length;
     if (planets || !('host' in spec)) stars.push(spec);
     report.push(`${host}: ${planets} planet${planets === 1 ? '' : 's'}${'host' in spec ? ' added to the existing star' : ''}${skipped.length ? `; left out: ${skipped.join('; ')}` : ''}${notes.length ? `; ${notes.join('; ')}` : ''}`);

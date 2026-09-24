@@ -1,0 +1,38 @@
+{
+  "id": "hd-97658",
+  "name": "HD 97658",
+  "system": "HD 97658 system",
+  "description": "HD 97658 is a 5,212 K star 21.6 parsecs away with 1 known transiting planet.",
+  "target": "HD 97658",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+    "credit": "Ellis et al. 2021"
+  },
+  "radius": {
+    "value": 0.728,
+    "source": "Ellis et al. 2021, the stellar radius of the default parameter set of HD 97658 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+    "uncertainty": 0.008
+  },
+  "mass": {
+    "value": 0.85,
+    "source": "Ellis et al. 2021, the stellar mass of the default parameter set of HD 97658 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+    "uncertainty": 0.08
+  },
+  "temperature": {
+    "value": 5212,
+    "source": "Ellis et al. 2021, the stellar temperature of the default parameter set of HD 97658 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+    "uncertainty": 43
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 97658 is a 5,212 K star 21.6 parsecs away with 1 known transiting planet.",
+    "introduction": "HD 97658 is a star of 5,212 K 21.6 parsecs away. Its planet HD 97658 b crosses it, which is how it was found and sized.",
+    "locator": "NASA Exoplanet Archive ps table, default parameter set of HD 97658 b (st_refname ELLIS_ET_AL__2021): st_teff 5212, st_rad 0.728, st_mass 0.85"
+  },
+  "notes": [],
+  "order": 1793
+}

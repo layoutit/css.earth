@@ -174,7 +174,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
     const spec = parseStarSpec({ ...star, planets: [{ id: 'hd-219134b', name: 'HD 219134 b', description: 'A planet.', paper: star.paper, radius: cited, mass: cited, orbit: { elements: { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000 }, source: 's', url: star.paper.url }, ...extra }] }).planets[0]!;
     const body = { id: spec.id, classification: 'exoplanet', order: 2, physical: { name: spec.name, horizonsCode: null, meanRadiusKm: 71492, gravitationalParameterKm3PerS2: 126686531.9, parent: 'hd-219134' }, physicalNotes: 'n', hostedOrbit: orbit };
     const record = { spec, hostId: 'hd-219134', system: 'HD 219134 system', body, order: 2, orbit, orbitCitation: { text: 's', url: star.paper.url, label: 's' }, radius: cited, mass: cited, documents: new Map<string, string>(), todo: [] };
-    const { files } = await hostedPackage(record, host, new Map([[star.paper.url, paper]]), archive, resolve(root, 'output/none'), 2460000);
+    const { files } = await hostedPackage(record, host, new Map([[star.paper.url, paper]]), archive, root, 2460000);
     const text = JSON.parse(String(files.get('src/objects/hd-219134b/text.json'))), content = JSON.parse(String(files.get('src/objects/hd-219134b/source/content/object.json')));
     return { datasets: Object.keys(text.datasets), notes: String(content.lenses.controls[0].notes), lens: String(content.lenses.controls[0].id) };
   };
@@ -184,6 +184,9 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   const shape = await build({});
   assert.deepEqual([shape.lens, shape.datasets], ['shape', ['shape']]);
   assert.match(shape.notes, /the gray marks an unresolved surface/u);
+  // Host light adds its sentence to the base note; the scaffold's TODO never survives (a regression #691 introduced).
+  assert.doesNotMatch(shape.notes, /TODO/u);
+  assert.match(shape.notes, /takes the colour of hd-219134's light/u);
 });
 
 test('a Planck colour outside sRGB (a cool companion) is shown desaturated and the record says so; one inside keeps its record plain', async () => {
@@ -200,10 +203,10 @@ test('a Planck colour outside sRGB (a cool companion) is shown desaturated and t
 test('the archive draft of a host keeps only its confirmed transiting planets, sorted by period, with the archive temperature where one is measured', async () => {
   const { archiveSpec } = await import('./from-archive.mts');
   const ref = (label: string, bib: string) => `"<a refstr=${label.toUpperCase().replace(/[^A-Z]+/gu, '_')} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
-  const stars = ['pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag',
-    `HD 1 c,HD 1,1,${ref('Two et al. 2020', '2020AJ....1....2T')},${ref('Two et al. 2020', '2020AJ....1....2T')},0.8,0.02,5000,50,0.85,0.03,20.5,2020,Transit,1`,
-    `HD 1 b,HD 1,1,${ref('One et al. 2019', '2019AJ....1....1O')},${ref('One et al. 2019', '2019AJ....1....1O')},0.8,0.02,5000,50,0.85,0.03,20.5,2019,Transit,1`,
-    `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0`].join('\n');
+  const stars = ['pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id',
+    `HD 1 c,HD 1,1,${ref('Two et al. 2020', '2020AJ....1....2T')},${ref('Two et al. 2020', '2020AJ....1....2T')},0.8,0.02,5000,50,0.85,0.03,20.5,2020,Transit,1,c,HD 1,,Gaia DR3 123456789`,
+    `HD 1 b,HD 1,1,${ref('One et al. 2019', '2019AJ....1....1O')},${ref('One et al. 2019', '2019AJ....1....1O')},0.8,0.02,5000,50,0.85,0.03,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789`,
+    `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789`].join('\n');
   const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim',
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
@@ -218,12 +221,69 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
       if (query.includes('from emissionspec')) return emission(/plntname='([^']+)'/u.exec(query)![1]!);
       throw new Error(`unexpected ${url}`);
     }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
-  const { spec, skipped, notes } = await archiveSpec(archive, 'HD 1', () => false);
+  const { spec, skipped, notes } = await archiveSpec(archive, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
   const planets = spec.planets as { id: string; thermal?: unknown; text: { card: string } }[];
   assert.deepEqual(planets.map(planet => planet.id), ['hd-1b', 'hd-1c'], 'innermost first, whatever the archive order');
   assert.deepEqual([planets[0]!.thermal !== undefined, planets[1]!.thermal !== undefined], [true, false]);
   assert.match(skipped.join('; '), /HD 1 d: found by radial velocity, not a transit fit/u);
   assert.match(notes.join('; '), /HD 1 c: no measured dayside brightness temperature/u);
   assert.equal((spec.temperature as { value: number }).value, 5000);
+  assert.equal(spec.gaia, '123456789', 'the archive\'s Gaia DR3 id, which SIMBAD must agree with');
+  // A host the universe holds under another id, found by the name its planets use: its new planets become an addition to it.
+  const held = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-1b-host']), names: new Map([['hd1', 'hd-1b-host']]), stars: [] });
+  assert.equal(held.spec.host, 'hd-1b-host');
+  assert.deepEqual((held.spec.planets as { id: string }[]).map(planet => planet.id), ['hd-1b-host-b', 'hd-1b-host-c']);
   assert.match(planets[0]!.text.card, /^HD 1 b crosses its star every 3 days/u);
+});
+
+test('ids follow one rule, and a body the universe holds is found whatever its id', async () => {
+  const { hostId, planetId, planetPrefix, duplicateName, duplicateStar, existingBodies } = await import('./identity.mts');
+  assert.equal(hostId({ planetPrefix: planetPrefix('pi Men c', 'c'), hostname: 'HD 39091' }), 'pi-men', 'the name its planets use');
+  assert.equal(hostId({ hostname: '55 Cnc', hd: 'HD 75732' }), 'hd-75732', 'a name starting with a digit falls to its HD name');
+  assert.equal(hostId({ hostname: 'Kepler-444' }), 'kepler-444');
+  assert.throws(() => hostId({ hostname: '2MASS J0249' }), /starts with a letter/u);
+  assert.deepEqual([planetId('hd-219134', 'b'), planetId('trappist-1', 'e'), planetId('pi-men', 'c'), planetId('kepler-16ab', 'b')], ['hd-219134b', 'trappist-1e', 'pi-men-c', 'kepler-16ab-b']);
+  assert.throws(() => planetId('hd-1', '01'), /not one letter/u);
+  const universe = await existingBodies(root);
+  assert.equal(duplicateName(universe, 'TRAPPIST-1 e'), 'trappist-1e', 'spaces, case and punctuation ignored');
+  const trappist = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/trappist-1.json'), 'utf8')).star;
+  assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees + 1 / 3600, dec: trappist.declinationDegrees, epoch: 2016 }), 'trappist-1', 'one arcsecond away is the same star');
+  assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees, dec: trappist.declinationDegrees, epoch: 2016 }, 'trappist-1'), undefined, 'a refresh does not find itself');
+  assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees + 0.1, dec: trappist.declinationDegrees, epoch: 2016 }), undefined);
+});
+
+test('a refresh regenerates what the tool wrote and keeps what a person wrote', async () => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises'), { tmpdir } = await import('node:os');
+  const { mergeRefresh, refreshSpec, STORED_SPEC, storedHostedSpec } = await import('./refresh.mts');
+  const drafted = 'X b crosses its star every 3 days. This account was drafted from A et al.\'s values; the sections below are the data\'s own.';
+  const readme = (opening: string, extra = '') => `# X b\n\n## Sources\n\n${opening}\n\n**Orbit.** P 3 d.\n\n## Evidence\n\nGenerated 2026-09-24 by new-object.\n${extra}\n## Known problems\n\n- **Drafted text.** The card was drafted.\n\n[Investigation ledger](investigations.json) · [Credits](NOTICE.md)\n`;
+  const regenerated = readme(drafted.replace('3 days', '3.1 days')).replace('P 3 d', 'P 3.1 d');
+  const dir = await mkdtemp(resolve(tmpdir(), 'cssearth-refresh-'));
+  try {
+    const o = resolve(dir, 'src/objects/x-b'), put = async (path: string, value: unknown) => { await mkdir(resolve(o, path, '..'), { recursive: true }); await writeFile(resolve(o, path), typeof value === 'string' ? value : JSON.stringify(value)); };
+    const spec = { kind: 'planet' as const, id: 'x-b', name: 'X b', description: 'd', paper: { url: 'https://arxiv.org/abs/2110.06729', credit: 'A' }, orbit: { archive: 'nasa-ps' as const }, text: { card: 'X b crosses its star every 3 days.', introduction: drafted.split(' This account')[0]!, locator: 'row' } };
+    await put(STORED_SPEC, storedHostedSpec(spec, 'x', 7));
+    await put('source/content/object.json', { lenses: { controls: [{ id: 'shape' }] } });
+    await put('source/manifest.json', { inputs: [{ path: 'photometry/old.csv' }], documents: [] });
+    await put('text.json', { card: { text: 'A person\'s card.' }, introduction: { text: spec.text.introduction } });
+    await put('README.md', readme(drafted)); await put('investigations.json', { entries: ['a person\'s'] });
+    const files = new Map<string, string>([['src/objects/x-b/source/content/object.json', JSON.stringify({ lenses: { controls: [{ id: 'shape' }] } })],
+      ['src/objects/x-b/source/manifest.json', JSON.stringify({ inputs: [], documents: [] })], ['src/objects/x-b/text.json', JSON.stringify({ card: { text: 'new card' }, introduction: { text: 'new introduction' } })],
+      ['src/objects/x-b/README.md', regenerated], ['src/objects/x-b/investigations.json', '{}']]);
+    const { kept, stale } = await mergeRefresh(files, 'x-b', dir);
+    const text = JSON.parse(files.get('src/objects/x-b/text.json')!);
+    assert.deepEqual([text.card.text, text.introduction.text], ['A person\'s card.', 'new introduction'], 'the edited card stays; the drafted introduction is regenerated');
+    assert.deepEqual([kept, stale], [['text.json card', 'investigations.json'], ['src/objects/x-b/source/photometry/old.csv']]);
+    assert.equal(files.get('src/objects/x-b/README.md'), regenerated, 'the drafted README is regenerated');
+    await put('README.md', '# X b\n\n## Sources\n\nA person\'s account.\n');
+    const again = new Map(files); again.set('src/objects/x-b/README.md', regenerated);
+    assert.ok((await mergeRefresh(again, 'x-b', dir)).kept.includes('README.md (a person wrote it; check its numbers)'));
+    assert.equal(again.has('src/objects/x-b/README.md'), false, "a person's README is not written over");
+    assert.equal(files.has('src/objects/x-b/investigations.json'), false, 'the ledger is not written over');
+    assert.deepEqual(await refreshSpec(dir, ['x-b']), { stars: [{ host: 'x', planets: [{ ...(({ kind, ...rest }) => rest)(spec), order: 7 }], companions: [] }] });
+    // A person's lens is never dropped.
+    await put('source/content/object.json', { lenses: { controls: [{ id: 'shape' }, { id: 'radial-field-2017' }] } });
+    await assert.rejects(mergeRefresh(files, 'x-b', dir), /lenses the tool does not make \(radial-field-2017\)/u);
+    await assert.rejects(refreshSpec(dir, ['hand-made']), /not made by new-object/u);
+  } finally { await rm(dir, { recursive: true, force: true }); }
 });

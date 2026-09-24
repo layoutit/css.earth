@@ -38,3 +38,33 @@
   from { transform: rotateZ(-128deg); }
   to { transform: rotateZ(-488deg); }
 }
+
+/* Lighting overlay: the bank's frames are 1024 px (raster.json lighting.presentationSize); the lit disc is fitted to the sphere's
+   440-unit equatorial diameter (geometry.json radius 220). Without this rule the frame had no size and the planet was
+   drawn unlit. */
+.object-stage[data-object-id="neptune"] > .neptune-material-composite {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+.object-stage[data-object-id="neptune"] .neptune-fixed-material {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 1024px;
+  height: 1024px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(var(--neptune-light-roll, 0deg)) scale(0.429688);
+}
+.object-stage[data-object-id="neptune"].neptune-hide-shadows .neptune-fixed-material {
+  transform: translate(-50%, -50%) scale(0.429688);
+}

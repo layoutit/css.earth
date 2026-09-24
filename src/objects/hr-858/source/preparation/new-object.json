@@ -1,0 +1,40 @@
+{
+  "id": "hr-858",
+  "name": "HR 858",
+  "system": "HR 858 system",
+  "description": "HR 858 is a 6,354 K star 32 parsecs away with 3 known transiting planets.",
+  "target": "HR 858",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+    "credit": "Bonfanti et al. 2025"
+  },
+  "radius": {
+    "value": 1.258,
+    "source": "Bonfanti et al. 2025, the stellar radius of the default parameter set of HR 858 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+    "uncertainty": 0.019
+  },
+  "mass": {
+    "value": 1.204,
+    "source": "Bonfanti et al. 2025, the stellar mass of the default parameter set of HR 858 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+    "uncertainty": 0.052
+  },
+  "temperature": {
+    "value": 6354,
+    "source": "Bonfanti et al. 2025, the stellar temperature of the default parameter set of HR 858 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HR 858 is a 6,354 K star 32 parsecs away with 3 known transiting planets.",
+    "introduction": "HR 858 is a star of 6,354 K 32 parsecs away. Its planets b, d cross it, which is how they were found and sized.",
+    "locator": "NASA Exoplanet Archive ps table, default parameter set of HR 858 c (st_refname BONFANTI_ET_AL__2025): st_teff 6354, st_rad 1.258, st_mass 1.204"
+  },
+  "notes": [
+    "HR 858 c: no archive row measures its mass (only an upper limit), and the archive computes none"
+  ],
+  "order": 1812
+}
