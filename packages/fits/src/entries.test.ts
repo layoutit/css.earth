@@ -19,7 +19,7 @@ it('the main entry stays browser-safe: only node/ imports Node built-ins or uses
   const offenders: string[] = [];
   for (const path of await sources(source)) {
     const name = relative(source, path).replaceAll('\\', '/'), text = await readFile(path, 'utf8');
-    if (name.startsWith('node/')) continue;
+    if (name.startsWith('node/') || name.startsWith('test-support/')) continue;
     const specifiers = [...text.matchAll(/from\s+['"]([^'"]+)['"]/gu)].map(match => match[1]!);
     for (const specifier of specifiers) if (specifier.startsWith('node:') || /(^|\/)node(\/|$)/u.test(specifier)) offenders.push(`${name} -> ${specifier}`);
     if (/\bBuffer\b/u.test(text)) offenders.push(`${name} -> Buffer`);

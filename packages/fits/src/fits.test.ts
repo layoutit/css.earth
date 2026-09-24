@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable, readFitsPrimary, readFitsPlane } from '@cssearth/fits';
-import { card, imageFixture } from '../../tests/fixtures/fits/helpers.mts';
+import { test } from 'vitest';
+import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable, readFitsPrimary, readFitsPlane } from './index.js';
+import { card, imageFixture } from './test-support/fixtures.js';
 
 test('quoted slashes, escaped quotes, undefined metadata and D exponents are preserved', () => {
   assert.equal(fitsCardValue(card('BUNIT', "'W/(m^2*sr*um)' / units")), 'W/(m^2*sr*um)');
@@ -130,4 +129,20 @@ test('degenerate trailing axes are read as the sky image they hold, and a popula
     Buffer.alloc(2880),
   ]);
   assert.throws(() => fitsImageAccessor(cube), /Unsupported FITS image/);
+});
+
+test('a plain Uint8Array, even one at an offset into a larger buffer, reads exactly as the Buffer holding the same bytes', () => {
+  const bytes = imageFixture(-64, [1.5, -0, NaN, 2 ** -1074], [card('OBJECT', "'offset'"), card('BZERO', '0')]);
+  const backing = new Uint8Array(bytes.length + 5); backing.set(bytes, 3);
+  const view = backing.subarray(3, 3 + bytes.length);
+  assert.ok(!(view instanceof Buffer) && view.byteOffset === 3);
+  const [fromBuffer, fromView] = [readFitsImage(bytes), readFitsImage(view)];
+  assert.deepEqual(fromView.header, fromBuffer.header);
+  assert.deepEqual(fromView.cards, fromBuffer.cards);
+  assert.deepEqual(new Uint8Array(fromView.values.buffer), new Uint8Array(fromBuffer.values.buffer));
+  for (const bits of [8, 16, 32, -32]) {
+    const values = bits === 8 ? [0, 128, 255, 1] : [-2, 0, 1, 3], source = imageFixture(bits, values);
+    const shifted = new Uint8Array(source.length + 1); shifted.set(source, 1);
+    assert.deepEqual([...readFitsImage(shifted.subarray(1)).values], values);
+  }
 });
