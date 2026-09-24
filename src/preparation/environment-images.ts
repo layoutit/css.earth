@@ -57,14 +57,8 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
   const data = expected.data ?? expected;
   const resources: Resource[] = (data.resources ?? []).filter((resource: Resource) => raster.test(resource.path));
   const preparedDirectory = dirname(containedPath(objectDirectory, descriptor.prepared.url));
-  if (descriptor.type === 'density-volume') {
-    // The renderer drops empty leaves; the preparation manifest still accounts for their pixels.
-    const slices = JSON.parse(await readFile(join(preparedDirectory, 'volume-slices.json'), 'utf8'));
-    for (const quad of slices.quads) {
-      if (!resources.some(resource => resource.path === quad.texturePath))
-        resources.push({ path: quad.texturePath, sha256: quad.sha256, bytes: quad.bytes });
-    }
-  }
+  // A density volume's bake retires every slice texture no leaf draws (`prepareDensityVolumeObject`), so its prepared
+  // resources are the complete published bank; the slice manifest's quads are bake inputs, not published files.
   if (!resources.length) return;
   let missing = false;
   for (const resource of resources) {
