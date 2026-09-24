@@ -19,7 +19,7 @@ export type MarkerOperation =
 export interface MarkerDescriptor { presentation?: unknown; schema: string; objectId: string; owner: string; source: MarkerSource; operations: readonly MarkerOperation[]; context?: { pixels: number }; }
 import { readFile } from "node:fs/promises";
 
-import sharp from "sharp";
+import sharp, { type Sharp } from "sharp";
 import { blackFillCoverage, paintMissingCoverage } from "../platform/prepare-missing-coverage.mts";
 
 const SHA256 = /^[0-9a-f]{64}$/u;
@@ -92,7 +92,7 @@ export async function readMarkerImage(source: MarkerSource, sourcePath: string) 
 
 /** Orthographic view of an equirectangular map: each disc pixel samples the map (bilinear, wrapping in longitude). The
  * map is first reduced to four texels per output pixel across the disc's width, which the sampling then averages down. */
-async function orthographic(image: sharp.Sharp, { centerX, centerY }: { centerX: number; centerY: number }, tileSize: number) {
+async function orthographic(image: Sharp, { centerX, centerY }: { centerX: number; centerY: number }, tileSize: number) {
   const { width: sourceWidth = 0, height: sourceHeight = 0 } = await image.metadata();
   if (!sourceWidth || Math.abs(sourceWidth / sourceHeight - 2) > 0.01) throw new TypeError("Navigation marker orthographic source is not a 2:1 map.");
   const mapWidth = Math.min(sourceWidth, 8 * tileSize), mapHeight = mapWidth / 2;
