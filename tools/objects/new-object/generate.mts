@@ -19,6 +19,7 @@ import type { Cited, StarSpec } from './spec.mts';
 import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
+import { adql, csv, SIMBAD_TAP } from './companions.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
 const GAIA_LICENSE = { license: 'Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained', licenseEvidence: ['https://www.cosmos.esa.int/web/gaia-users/credits'] };
@@ -40,6 +41,17 @@ export function physicalValues(spec: StarSpec, row: GaiaRow) {
   const gravitySource = spec.gravity ? `${spec.gravity.source} (${spec.gravity.url})`
     : `log g from the mass and radius in packages/astronomy/data/bodies/${spec.id}.json (sources in its physicalNotes), log10(GM/R^2) in cgs: ${exact.toFixed(3)}, rounded to two decimals`;
   return { radiusKm, gm, logg, gravitySource, radiusText: radius.text, massText: mass.text, radiusSolar: radius.value };
+}
+
+/** A star's radial velocity when Gaia DR3 measures none and the spec gives none: SIMBAD's, cited to the paper it names; else zero,
+ * as pi1-gruis records it, with the catalogues checked and what an error of 30 km/s would move the star by per century. */
+export async function fallbackRadialVelocity(archive: Archive, sourceId: string, distanceParsecs: number): Promise<Cited> {
+  const [row] = csv(await archive.text(SIMBAD_TAP, adql(`SELECT b.rvz_radvel, b.rvz_err, b.rvz_type, b.rvz_qual, b.rvz_bibcode FROM basic AS b JOIN ident AS n ON b.oid = n.oidref WHERE n.id = 'Gaia DR3 ${sourceId}'`)));
+  if (row?.rvz_radvel && row.rvz_type === 'v' && row.rvz_bibcode) return { value: Number(row.rvz_radvel), ...(Number(row.rvz_err) > 0 ? { uncertainty: Number(row.rvz_err) } : {}),
+    source: `SIMBAD's radial velocity for Gaia DR3 ${sourceId} (quality ${row.rvz_qual}), from ${row.rvz_bibcode}; Gaia DR3 measures none`, url: `https://ui.adsabs.harvard.edu/abs/${row.rvz_bibcode}/abstract` };
+  const share = 30 * 3.15576e9 / (distanceParsecs * 3.0857e13);
+  return { value: 0, source: `No catalogued radial velocity: Gaia DR3 measures none for source ${sourceId} and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in ${Number((1 / share).toPrecision(1)).toLocaleString('en-US')} of its distance per century`,
+    url: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(`Gaia DR3 ${sourceId}`)}` };
 }
 
 /** The astronomy record: Gaia DR3 astrometry, the spec's physical values, each with its source. */
@@ -101,6 +113,12 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.
   const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: 2016 }, refresh ? id : undefined);
   if (held) throw new Error(`${id}: Gaia DR3 ${row.sourceId} is ${held}, already in the universe (within ${DUPLICATE_ARCSEC}" of its position); add its bodies with { "host": "${held}" }.`);
+  // Gaia DR3 measures no radial velocity for a faint or hot star (a quarter of the archive's transiting hosts): SIMBAD's, else zero.
+  if (row.radialVelocity === undefined && !spec.radialVelocity) {
+    const radialVelocity = await fallbackRadialVelocity(archive, row.sourceId, 1000 / row.parallax);
+    spec = { ...spec, radialVelocity };
+    if (radialVelocity.value !== 0) found.push([radialVelocity.url, await fetchPublication(archive, radialVelocity.url)]);
+  }
   const body = astronomyRecord(spec, row, ids, order);
   const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));

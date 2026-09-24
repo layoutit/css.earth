@@ -16,8 +16,8 @@ export const CHANCE_ALIGNMENT_MAX = 0.1;
 const EL_BADRY = { url: 'https://arxiv.org/abs/2101.05282', credit: 'El-Badry, Rix & Heintz (2021), MNRAS 506, 2269' };
 export const TIC = { url: 'https://doi.org/10.3847/1538-3881/ab3467', credit: 'Stassun et al. (2019), AJ 158, 138 (TIC v8.2)' };
 
-const csv = (text: string) => { const [header, ...lines] = text.trim().split(/\r?\n/u); const keys = header!.split(','); return lines.filter(Boolean).map(line => Object.fromEntries(line.split(',').map((cell, i) => [keys[i]!, cell.replace(/^"|"$/gu, '')]))); };
-const adql = (query: string) => ({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: query });
+export const csv = (text: string) => { const [header, ...lines] = text.trim().split(/\r?\n/u); const keys = header!.split(','); return lines.filter(Boolean).map(line => Object.fromEntries(line.split(',').map((cell, i) => [keys[i]!, cell.replace(/^"|"$/gu, '')]))); };
+export const adql = (query: string) => ({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: query });
 /** An ASU TSV answer's rows: the header is the first line after the comments, the rows follow the dashed separator line (the unit
  * line between them can be blank). */
 const tsv = (text: string) => {

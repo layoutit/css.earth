@@ -96,7 +96,13 @@ export async function compositeMass(archive: Archive, planet: string): Promise<C
   return { value, provenance: cells[3]!, limit: cells[2] !== '' && Number(cells[2]) !== 0, label, ...(url && url.startsWith('http') ? { url } : {}), ...(bibcode ? { bibcode } : {}) };
 }
 
-const GRAVITY_AU_SOLAR = 4 * Math.PI ** 2 / DAYS_PER_YEAR ** 2, SOLAR_RADIUS_AU = 695700 / AU_KM;
+const SOLAR_RADIUS_AU = 695700 / AU_KM;
+/** a/R* by Kepler's third law in solar units: a in au is the cube root of M P^2, P in years. */
+export const keplerRatio = (starMass: number, periodDays: number, starRadius: number) => Math.cbrt(starMass * (periodDays / DAYS_PER_YEAR) ** 2) / (starRadius * SOLAR_RADIUS_AU);
+/** A stated a/R* and Kepler's third law with the same rows' stellar mass and radius agree within this factor. Measured 2026-09-24 on
+ * the 1,567 default transiting rows that give all three: 99% fall between 0.49 and 1.59, and the 23 beyond a factor of 2 include
+ * a/R* stored in solar radii (ZTF J1828+2308 b, 0.838 for 63) and an a/R* paired with another paper's giant-star radius (K2-11 b). */
+export const KEPLER_AGREEMENT = 2;
 export interface AssembledOrbit { readonly orbit: HostedOrbit; readonly radius: { readonly value: number; readonly row: ArchiveRow }; readonly mass: { readonly value: number; readonly row: ArchiveRow; readonly limit?: true }; readonly rows: readonly ArchiveRow[]; readonly todo?: string }
 
 /** A transiting planet's orbit from its archive rows: the chosen row (the default, or the spec's reference) first, and what it
@@ -117,12 +123,20 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   // a/R*: a row's own, else derived from the same row's semi-major axis and stellar radius, else Kepler's third law.
   let ratio: { value: number; row: ArchiveRow; how: string };
   const own = pick('ratioAR');
-  if (own) ratio = { ...own, how: `a/R* ${own.value}` };
+  if (own) {
+    ratio = { ...own, how: `a/R* ${own.value}` };
+    // A stated a/R* must fit the star it is placed around: Kepler's third law with the rows' stellar mass and radius.
+    const starMass = pick('starMass'), starRadius = pick('starRadius');
+    if (starMass && starRadius) {
+      const kepler = keplerRatio(starMass.value, period!.value, starRadius.value), factor = own.value / kepler;
+      if (factor > KEPLER_AGREEMENT || factor < 1 / KEPLER_AGREEMENT) throw new Error(`${name}: ${own.row.label}'s a/R* ${own.value} disagrees with Kepler's third law (${kepler.toFixed(2)} from P ${period!.value} d, ${starMass.row.label}'s stellar mass ${starMass.value} and ${starRadius.row.label}'s radius ${starRadius.value} solar units) by a factor of ${(factor > 1 ? factor : 1 / factor).toFixed(1)}, beyond ${KEPLER_AGREEMENT}.`);
+    }
+  }
   else {
     const byAxis = [chosen, ...others].find(row => row.semiMajorAxisAu !== undefined && row.starRadius !== undefined);
     const byKepler = [chosen, ...others].find(row => row.period !== undefined && row.starMass !== undefined && row.starRadius !== undefined);
     if (byAxis) ratio = { value: byAxis.semiMajorAxisAu! / (byAxis.starRadius! * SOLAR_RADIUS_AU), row: byAxis, how: `a/R* derived from its semi-major axis ${byAxis.semiMajorAxisAu} au and stellar radius ${byAxis.starRadius} solar radii` };
-    else if (byKepler) ratio = { value: Math.cbrt(GRAVITY_AU_SOLAR ** -1 * byKepler.starMass! * byKepler.period! ** 2) / (byKepler.starRadius! * SOLAR_RADIUS_AU), row: byKepler, how: `a/R* derived by Kepler's third law from its period ${byKepler.period} d, stellar mass ${byKepler.starMass} and radius ${byKepler.starRadius} solar units` };
+    else if (byKepler) ratio = { value: keplerRatio(byKepler.starMass!, byKepler.period!, byKepler.starRadius!), row: byKepler, how: `a/R* derived by Kepler's third law from its period ${byKepler.period} d, stellar mass ${byKepler.starMass} and radius ${byKepler.starRadius} solar units` };
     else throw new Error(`${name}: no archive row gives a/R*, nor a semi-major axis with a stellar radius, nor a period with stellar mass and radius.`);
     ratio = { ...ratio, value: Number(ratio.value.toFixed(4)) };
   }
@@ -142,8 +156,10 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   // The mass is the one the archive's composite table adopts, so the choice between papers is the archive's, not ours.
   if (!composite) throw new Error(`${name}: the archive's composite table gives no mass.`);
   // An upper limit is kept as one: the record's GM stays 0, its unpublished value, and the limit is shown as a limit.
-  const calculated = composite.provenance !== 'Mass' && !composite.limit;
-  const mass = { value: composite.value, ...(composite.limit ? { limit: true as const } : {}), row: { ...chosen, label: composite.limit ? composite.label : calculated ? `the NASA Exoplanet Archive's calculated value (${composite.provenance}, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement` : `${composite.label}, the mass the NASA Exoplanet Archive's composite table adopts`,
+  // Only 'M-R relationship' is the archive's own model; 'Msini' (a radial-velocity minimum mass, near the mass for a transiting
+  // orbit) and 'Msin(i)/sin(i)' are a paper's measurements (pl_bmassprov).
+  const calculated = composite.provenance === 'M-R relationship' && !composite.limit, minimum = composite.provenance === 'Msini' && !composite.limit;
+  const mass = { value: composite.value, ...(composite.limit ? { limit: true as const } : {}), row: { ...chosen, label: composite.limit ? composite.label : calculated ? `the NASA Exoplanet Archive's calculated value (${composite.provenance}, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement` : minimum ? `${composite.label}, the minimum mass (M sin i) the NASA Exoplanet Archive's composite table adopts` : `${composite.label}, the mass the NASA Exoplanet Archive's composite table adopts`,
     reference: calculated ? 'CALCULATED_VALUE' : composite.label, url: calculated ? COMPOSITE_CALC : composite.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', bibcode: calculated ? undefined : composite.bibcode } as ArchiveRow };
   // The records' own density rule (packages/astronomy bodies.test.ts): between 0.1 and 8.5 g/cm^3 unless a brown dwarf.
   const density = mass.value * 1.89813e30 / (4 / 3 * Math.PI * (radius.value * 7.1492e9) ** 3);
