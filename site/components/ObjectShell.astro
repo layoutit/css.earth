@@ -11,7 +11,6 @@ import SourcesLink from './SourcesLink.astro';
 import ObjectResults from "./ObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
-import ExplorerRail from "./ExplorerRail.astro";
 import CssEarthWordmark from "./CssEarthWordmark.astro";
 import ExtragalacticOverviews from './ExtragalacticOverviews.astro';
 import ObjectCard from './ObjectCard.astro';
@@ -91,7 +90,6 @@ const searchCategories = [
     <a class="explorer-brand-version" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">v{__CSSEARTH_VERSION__}</a>
   </div>
   <div class="object-search-toolbar">
-    <ExplorerRail objectId={objectId} />
     <div class="object-search-browser-shell">
       <form id={searchFormId} class="object-sidebar-search-card" role="search" aria-label="Object search"
         action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
@@ -231,29 +229,6 @@ const searchCategories = [
 </div>
 <div class="object-sidebar-frame">
 <aside id={`${objectId}-sidebar`} class="object-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Object information">
-  <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
-    <h2 id={`${objectId}-about-title`}>About</h2>
-    <div class="explorer-about-content">
-      <div class="explorer-about-introduction">
-        <p>A 3D CSS planetary explorer. cssEarth renders planets as real HTML and CSS 3D geometry through <a href="https://github.com/LayoutitStudio/polycss">PolyCSS</a>, without a WebGL or canvas scene renderer.</p>
-        <p>It preprocesses planetary data into browser-ready textures, charts, and retained scene plans, then lets you orbit and inspect one planet at a time.</p>
-      </div>
-      <div class="explorer-about-links" aria-label="About details">
-        <div class="explorer-about-row">
-          <span>Version</span>
-          <span class="explorer-about-link-destination">v{__CSSEARTH_VERSION__}</span>
-        </div>
-        <a class="explorer-about-row explorer-about-link" href="https://github.com/layoutit/cssEarth">
-          <span>Source code</span>
-          <span class="explorer-about-link-destination">github.com/layoutit/cssEarth</span>
-        </a>
-        <a class="explorer-about-row explorer-about-link" href="mailto:agustin@lowpoly.gg">
-          <span>Contact</span>
-          <span class="explorer-about-link-destination">agustin@lowpoly.gg</span>
-        </a>
-      </div>
-    </div>
-  </section>
   <div class="object-drawer-content" id={`${objectId}-information`}>
     <input class="object-sheet-handle" type="checkbox" aria-label="Expand information sheet" aria-controls={`${objectId}-information`} />
     {!navigation && <nav

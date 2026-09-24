@@ -13,7 +13,8 @@ import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, re
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 
-/** Select a prepared context bank inside the existing scene and shared card. */
+/** Select a prepared context bank inside the existing scene and shared card. The shared selection
+ * presentation shows the card and dataset-response.mts opens the sheet, as for every other selection. */
 export async function renderNativeFocus(shell: Document, stage: HTMLElement, url: URL, definition: ObjectRuntimeDefinition,
   frame: PreparedWorldCameraFrame, saved: SharedView | null, fetcher: typeof fetch): Promise<SharedView | null> {
   const selection = readPreparedFocusSelection(url.searchParams);
@@ -80,9 +81,8 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
     for (const radio of root.querySelectorAll<HTMLInputElement>(':scope > .object-native-tabs > input')) radio.toggleAttribute('checked', radio.value === id);
   });
   card.set(selected, preparedFocusCitations(selected, catalog.sources), presentation);
-  card.destroy(); root.hidden = false;
+  card.destroy();
   const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;
   initial.textContent = JSON.stringify(initialFocusCatalog(catalog, selected)).replace(/</gu, '\\u003c'); root.append(initial);
-  requiredElement(shell, '.object-sheet-handle').setAttribute('checked', '');
   return saved;
 }
