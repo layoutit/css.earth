@@ -252,20 +252,21 @@ export function createProjectiveSurfaceRasterPresentation({
   }
   assertPositiveInteger(addressSourceWidth, "addressSourceWidth");
   assertPositiveInteger(addressSourceHeight, "addressSourceHeight");
+  // A patch's overlap may start its rect inside the packed gutter, never beyond it.
   for (const [name, value] of Object.entries({
     sourceX: sourceRect.x,
     sourceY: sourceRect.y,
   })) {
-    if (!Number.isFinite(value) || value < 0) {
-      throw new RangeError(`${name} is invalid.`);
+    if (!Number.isFinite(value) || value < -gutter) {
+      throw new RangeError(`${name} is invalid: ${value} is outside the ${gutter}-pixel gutter.`);
     }
   }
   for (const [name, value] of Object.entries({
     addressX: addressSourceRect.x,
     addressY: addressSourceRect.y,
   })) {
-    if (!Number.isFinite(value) || value < 0) {
-      throw new RangeError(`${name} is invalid.`);
+    if (!Number.isFinite(value)) {
+      throw new RangeError(`${name} is invalid: ${value}.`);
     }
   }
   for (const [name, value] of Object.entries({
@@ -294,11 +295,13 @@ export function createProjectiveSurfaceRasterPresentation({
       throw new RangeError(`${name} is invalid.`);
     }
   }
+  // The rect is one band cell, grown by at most its gutter on each side for the patch overlap.
   const sourceBand = layout.bands.find((band) =>
-    Math.abs(band.y - sourceRect.y) <= 0.5 &&
-    Math.abs(band.height - sourceRect.height) <= 1);
+    sourceRect.y >= band.y - gutter && sourceRect.y <= band.y + 0.5 &&
+    sourceRect.y + sourceRect.height >= band.y + band.height - 0.5 &&
+    sourceRect.y + sourceRect.height <= band.y + band.height + gutter);
   if (!sourceBand) {
-    throw new RangeError("sourceRect must identify one complete latitude band cell.");
+    throw new RangeError(`sourceRect (y ${sourceRect.y}, height ${sourceRect.height}) must cover one complete latitude band cell, grown by at most the ${gutter}-pixel gutter.`);
   }
 
   const addressScaleX = backgroundSize[0] / addressSourceWidth;

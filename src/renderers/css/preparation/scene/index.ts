@@ -42,7 +42,7 @@ export interface GeometrySceneOptions {
 export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,worldContext,adapters,outputDirectory}:GeometrySceneOptions) {
  if(profile.surface.radius!==solarSource.bodyRadiusUnits)throw new TypeError('Authored surface radius differs from the physical scene scale.');
  const physical=await adapters.preparePhysicalScene({...solarSource,starfield,sun,...(worldContext!==undefined?{worldContext}:{})});
- const polygons=createSurfacePatches(profile.surface,profile.projection.overlap);
+ const polygons=createSurfacePatches(profile.surface,profile.projection.overlap,profile.projection.rasterScale);
  const topology=createSurfacePatches(profile.surface,0);
  const seamEdges=buildSeamBleedPolygonEdges(topology.map(rendererPolygon),{tileSize:profile.projection.tileSize,layerElevation:profile.projection.layerElevation});
  // An emissive body's leaves are source-lit; the ephemeris light is not consulted (the Sun has no entry there).

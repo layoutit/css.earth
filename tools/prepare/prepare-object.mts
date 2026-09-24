@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /** Prepare authored objects end to end, in the only order that works, and name the step that failed.
  *
- *   node tools/prepare/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--presentation-only]
+ *   node tools/prepare/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--reuse-images]
  *
- * --presentation-only reuses the object's published heavy outputs (imagery, pages, places, texture levels) and prepares the
- * presentation from them, stopping after the prepare step; the lane refuses when its recipe sources or recomputed plan differ
- * from the published run.
+ * --reuse-images keeps the object's published images (and, for Earth, its pages, places and texture levels) and rebuilds
+ * the scene, presentation and content from the tracked recipes, stopping after the prepare step. It needs no raw downloads;
+ * the paged-ellipsoid and raster lanes support it, and it refuses when the published image set would change.
  *
  * Each step is an existing tool. Nothing here decides science: it orders the tools, rebuilds what a step would read stale, and
  * never runs a repository-wide provenance pass (that one upgrades records of unrelated objects whose sources happen to be on
@@ -21,7 +21,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { staleBuilds } from '../ci/check-stale-builds.mts';
 
-export interface PreparationOptions { readonly presentationOnly?: boolean }
+export interface PreparationOptions { readonly reuseImages?: boolean }
 /** `once`: the command does not name an object. `ids`: the tool takes every id in one call. `each`: one command per object,
  * run PREPARATIONS_AT_ONCE at a time when `parallel`. */
 export interface PreparationStep {
@@ -43,8 +43,8 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async ids =>
     (await Promise.all(ids.map(id => exists(resolve('packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('tools/prepare/prepare-solar-geometry.mts')] : [] },
-  { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { presentationOnly = false } = {}) =>
-    [node('tools/objects/dist/prepare-authored.js', id!, '--write', ...(presentationOnly ? ['--presentation-only'] : []))] },
+  { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
+    [node('tools/objects/dist/prepare-authored.js', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
   { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
   { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('tools/sources/author-source-records.mts', id!)] },
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-object-json.mts', ...ids)] },
@@ -60,14 +60,14 @@ export type Progress = (line: string) => void;
 
 /** Prepare `ids` through the chain from `from` to `to` (inclusive; the whole chain by default). Returns false after naming
  * the failed step and the command that resumes. */
-export async function prepareObjects(ids: readonly string[], { from, to, presentationOnly = false, atOnce = PREPARATIONS_AT_ONCE, progress = line => console.log(line) }:
-  { from?: string; to?: string; presentationOnly?: boolean; atOnce?: number; progress?: Progress } = {}) {
+export async function prepareObjects(ids: readonly string[], { from, to, reuseImages = false, atOnce = PREPARATIONS_AT_ONCE, progress = line => console.log(line) }:
+  { from?: string; to?: string; reuseImages?: boolean; atOnce?: number; progress?: Progress } = {}) {
   if (!ids.length || new Set(ids).size !== ids.length) throw new TypeError('prepare-object: name each object once.');
   for (const id of ids) if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve('src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
   const index = (name: string | undefined, fallback: number) => { if (name === undefined) return fallback; const at = PREPARATION_STEPS.findIndex(step => step.name === name); if (at < 0) throw new TypeError(`Unknown step ${name}; steps are ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`); return at; };
-  // A presentation-only run changes nothing the later steps read, and they read raw imagery a checkout may not have;
+  // A reuse-images run changes nothing the later steps read, and they read raw imagery a checkout may not have;
   // its prepare step already pins the page data and publishes the set.
-  const start = index(from, 0), end = presentationOnly ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
+  const start = index(from, 0), end = reuseImages ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
   const steps = PREPARATION_STEPS.slice(start, end + 1), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
   const resume = (step: PreparationStep) => `node tools/prepare/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
   for (const step of steps) {
@@ -78,7 +78,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, present
         for (let next = queue.shift(); next && !failures.length; next = queue.shift()) {
           const [id, at] = next;
           progress(`  [${at + 1}/${ids.length}] ${id} (${elapsed()})`);
-          for (const [command, ...args] of await step.commands([id], { presentationOnly })) {
+          for (const [command, ...args] of await step.commands([id], { reuseImages })) {
             const failure = await new Promise<string | null>(done => execFile(command!, args, { maxBuffer: 64 * 1024 * 1024 }, (error, _stdout, stderr) =>
               done(error ? `${[command, ...args].join(' ')}\n${stderr.toString().split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-6).join('\n')}` : null)));
             if (failure) { failures.push(failure); break; }
@@ -88,7 +88,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, present
       if (failures.length) { console.error(`\nStep "${step.name}" failed running: ${failures[0]}\nFix it, then resume: ${resume(step)}`); return false; }
       continue;
     }
-    const commands = await step.commands(ids, { presentationOnly });
+    const commands = await step.commands(ids, { reuseImages });
     progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);
     for (const [command, ...args] of commands) {
       const run = spawnSync(command!, args, { stdio: 'inherit' });
@@ -100,12 +100,12 @@ export async function prepareObjects(ids: readonly string[], { from, to, present
 }
 
 /** One object, as before. */
-export const prepareObject = (id: string, options: { from?: string; presentationOnly?: boolean } = {}) => prepareObjects([id], options);
+export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean } = {}) => prepareObjects([id], options);
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), option = (name: string) => { const at = args.indexOf(name); return at >= 0 ? args[at + 1] : undefined; };
-  const from = option('--from'), to = option('--to'), presentationOnly = args.includes('--presentation-only');
+  const from = option('--from'), to = option('--to'), reuseImages = args.includes('--reuse-images');
   const ids = args.filter((argument, at) => !argument.startsWith('--') && args[at - 1] !== '--from' && args[at - 1] !== '--to');
-  if (!ids.length) throw new TypeError(`Usage: prepare-object <object-id>... [--from <step>] [--to <step>] [--presentation-only]; steps: ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`);
-  if (!await prepareObjects(ids, { ...(from === undefined ? {} : { from }), ...(to === undefined ? {} : { to }), presentationOnly })) process.exitCode = 1;
+  if (!ids.length) throw new TypeError(`Usage: prepare-object <object-id>... [--from <step>] [--to <step>] [--reuse-images]; steps: ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`);
+  if (!await prepareObjects(ids, { ...(from === undefined ? {} : { from }), ...(to === undefined ? {} : { to }), reuseImages })) process.exitCode = 1;
 }

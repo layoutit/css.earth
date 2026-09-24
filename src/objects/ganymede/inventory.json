@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "ganymede-dark-material@2x.webp",
-      "bytes": 89810,
-      "sha256": "e8d441e26b173f0f4583edfa4f27376089ccf6c2bb4c6171cd6e3364b3b09114"
-    },
-    {
-      "location": "public",
       "filename": "ganymede-enhanced@2x.webp",
       "bytes": 4588056,
       "sha256": "ba0d7db23bf758b3b1b08b6611826368d7fc2c5e47287b3bc64850ddafcdc434"
@@ -24,12 +18,6 @@
       "filename": "ganymede-geology@2x.webp",
       "bytes": 519220,
       "sha256": "84ec33a5e16159597629e5340f6a84505d76578d9bd5d429dfafd0fa02a49280"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-ice-fraction@2x.webp",
-      "bytes": 86476,
-      "sha256": "45f9abceb97d0a2ad760b44c38b7ddb69dbe1f6834ee7abbc1d4f731ba2a1f76"
     },
     {
       "location": "public",
@@ -69,12 +57,6 @@
     },
     {
       "location": "public",
-      "filename": "ganymede-poles-dark-material@2x.webp",
-      "bytes": 9526,
-      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
-    },
-    {
-      "location": "public",
       "filename": "ganymede-poles-enhanced@2x.webp",
       "bytes": 226008,
       "sha256": "43dd5bbe8377315f24d93938407f564f3ed69b4d8ec02f49aea9302e763cc929"
@@ -84,12 +66,6 @@
       "filename": "ganymede-poles-geology@2x.webp",
       "bytes": 11260,
       "sha256": "d0a72f2188303c037b1db6b635e8e33bfdfd3741d06fa612b3e8c550f2faedba"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-poles-ice-fraction@2x.webp",
-      "bytes": 9526,
-      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
     },
     {
       "location": "public",
@@ -311,7 +287,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1423,
-      "sha256": "fcc6d38f6695b5382c34d8c15827eeb825ef577833bcd473602a5c67e24c525f"
+      "sha256": "8dfe9028db1c239d7084eda7c200ac3b48877bb5da77a385c03d295491af17a7"
     },
     {
       "location": "prepared",
@@ -336,6 +312,12 @@
       "filename": "lenses.json",
       "bytes": 5917,
       "sha256": "942f2e2c91210c9d83dccb070f942ed682271d35d98520d34b75992ee322a15c"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 24509,
+      "sha256": "eb863aae3a0faf1e84683b84f1df8125fa45df7f6cdcb19fa6b08ca1d2c3cee0"
     },
     {
       "location": "prepared",
@@ -370,14 +352,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 525727,
-      "sha256": "1c7058616f8f508d8a81d057a2d159125ef0d167a33d4e3dcd9e51a8f18b067d"
+      "bytes": 541889,
+      "sha256": "3a5086857ac058dbdc1ae62f7b4e05265c14f6bbe553b51c82d07b31dfbc6371"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 377140,
-      "sha256": "49c910e942fb592ee9751c4885636809a7042f3bd9637d35556970c26ee4ca71"
+      "bytes": 393878,
+      "sha256": "0e55920e17155ab0f8f252f6bd89a931bde45e3cdd39ccd2f75b5be39c16d441"
     },
     {
       "location": "prepared",
@@ -390,6 +372,12 @@
       "filename": "sun.json",
       "bytes": 619,
       "sha256": "3769e68fa90f31df4f3b741367afe4956e1113c18b4d36c0ebb554b11b432bd2"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 9461,
+      "sha256": "e241c5e347fb71b44e8158e5bb1727891995a50b31fa1640a719dba6c62ac5db"
     },
     {
       "location": "prepared",

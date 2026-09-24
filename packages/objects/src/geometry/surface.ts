@@ -42,18 +42,22 @@ export function createPolarPatch(profile: SurfaceGeometryProfile, pole: Pole, in
   };
 }
 
-export function createSurfacePatches(profile: SurfaceGeometryProfile, overlap = 0): SurfacePatch[] {
+/** `texelsPerUnit`: raster texels per surface unit. The overlap is rounded to whole texels per axis, because the renderer
+ * sizes each patch's texture in whole texels: a fractional growth would rescale it and shift texels across the map. */
+export function createSurfacePatches(profile: SurfaceGeometryProfile, overlap = 0, texelsPerUnit = 1): SurfacePatch[] {
   if (![profile.radius, profile.polarRadius, profile.surface.width, profile.surfaceLatitudeHeight,
     profile.poles.width, profile.poles.height, profile.polarTileSize].every(value => Number.isFinite(value) && value > 0) ||
     !Number.isInteger(profile.latitudeSegments) || profile.latitudeSegments < 3 ||
     !Number.isInteger(profile.longitudeSegments) || profile.longitudeSegments < 3 ||
-    !Number.isFinite(overlap) || overlap < 0 || overlap > .5 ||
+    !Number.isFinite(overlap) || overlap < 0 || overlap > .5 || !(texelsPerUnit > 0) ||
     !Number.isFinite(profile.packedBandGutter) || profile.packedBandGutter < 0) {
     throw new TypeError('Surface patches need finite dimensions, bounded overlap and valid segmentation.');
   }
   const output: SurfacePatch[] = [];
   const cellWidth = profile.surface.width / profile.longitudeSegments;
   const cellHeight = profile.surfaceLatitudeHeight / profile.latitudeSegments;
+  const wholeTexels = (cell: number) => Math.round(overlap * cell * texelsPerUnit) / (cell * texelsPerUnit);
+  const overlapX = wholeTexels(cellWidth), overlapY = wholeTexels(cellHeight);
   for (let latitudeIndex = 0; latitudeIndex < profile.latitudeSegments; latitudeIndex++) {
     if (latitudeIndex === 0 || latitudeIndex === profile.latitudeSegments - 1) {
       output.push(createPolarPatch(profile, latitudeIndex === 0 ? 'south' : 'north')); continue;
@@ -62,13 +66,15 @@ export function createSurfacePatches(profile: SurfaceGeometryProfile, overlap = 
     const latitude0 = -Math.PI / 2 + v0 * Math.PI, latitude1 = -Math.PI / 2 + v1 * Math.PI;
     for (let longitudeIndex = 0; longitudeIndex < profile.longitudeSegments; longitudeIndex++) {
       const u0 = longitudeIndex / profile.longitudeSegments, u1 = (longitudeIndex + 1) / profile.longitudeSegments;
-      const latitudeOverlap = Math.PI / profile.latitudeSegments * overlap;
-      const longitudeOverlap = Math.PI * 2 / profile.longitudeSegments * overlap;
+      const latitudeOverlap = Math.PI / profile.latitudeSegments * overlapY;
+      const longitudeOverlap = Math.PI * 2 / profile.longitudeSegments * overlapX;
       const lowLatitude = latitude0 - latitudeOverlap, highLatitude = latitude1 + latitudeOverlap;
       const lowLongitude = u0 * Math.PI * 2 - longitudeOverlap;
-      const highLongitude = profile.closeSeamAtZero !== false && overlap === 0 && longitudeIndex === profile.longitudeSegments - 1 ? 0 : u1 * Math.PI * 2 + longitudeOverlap;
-      const sourceRect = { x: longitudeIndex * cellWidth, y: (profile.latitudeSegments - 1 - latitudeIndex) * cellHeight,
-        width: cellWidth, height: cellHeight };
+      const highLongitude = profile.closeSeamAtZero !== false && overlapX === 0 && longitudeIndex === profile.longitudeSegments - 1 ? 0 : u1 * Math.PI * 2 + longitudeOverlap;
+      // The overlap enlarges the patch by a fraction of its cell on every side; its texture grows by the same fraction,
+      // read from the packed gutters, so neighbours place every texel where the other does instead of stretching it.
+      const sourceRect = { x: (longitudeIndex - overlapX) * cellWidth, y: (profile.latitudeSegments - 1 - latitudeIndex - overlapY) * cellHeight,
+        width: cellWidth * (1 + 2 * overlapX), height: cellHeight * (1 + 2 * overlapY) };
       output.push({ latitudeIndex, longitudeIndex,
         vertices: [ellipsoidPoint(profile.radius, profile.polarRadius, lowLatitude, lowLongitude),
           ellipsoidPoint(profile.radius, profile.polarRadius, lowLatitude, highLongitude),
@@ -77,7 +83,7 @@ export function createSurfacePatches(profile: SurfaceGeometryProfile, overlap = 
         uvs: profile.uv === 'global' ? [[u0, v0], [u1, v0], [u1, v1], [u0, v1]] : [[0, 0], [1, 0], [1, 1], [0, 1]],
         texture: profile.surface.url, surfaceSourceRect: sourceRect,
         textureImageSource: { ...profile.surface, sourceRect: { ...sourceRect,
-          y: (profile.latitudeSegments - 1 - latitudeIndex) * (cellHeight + 2 * profile.packedBandGutter) + profile.packedBandGutter } },
+          y: (profile.latitudeSegments - 1 - latitudeIndex) * (cellHeight + 2 * profile.packedBandGutter) + profile.packedBandGutter - overlapY * cellHeight } },
         color: profile.color,
       });
     }

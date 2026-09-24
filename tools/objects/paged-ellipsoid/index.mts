@@ -20,7 +20,7 @@ export interface PagedEllipsoidContext {
   prepareContent: typeof prepareObjectContentAssets;
   /** Reuse this object's published raster, overlay, place, page and texture-level outputs from outputDirectory and publicDirectory,
    * and prepare only what the presentation derives from them. Refuses when the recipe sources or the recomputed plan differ. */
-  presentationOnly?: boolean;
+  reuseImages?: boolean;
   /** Recipe sources the author states changed without feeding the reused outputs; each is named in the run's output. */
   acceptChanged?: readonly string[];
 }
@@ -32,18 +32,18 @@ const write = (directory: string, name: string, value: unknown) => writeFile(res
 
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
-export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, presentationOnly = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
+export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
   const { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, raster, scene, surfaceRasterPlan } = await readPagedEllipsoid(objectDirectory);
-  // The raw imagery is read only by the stages a presentation-only run reuses; it may be absent from this checkout.
-  if (!presentationOnly) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
+  // The raw imagery is read only by the stages a reuse-images run reuses; it may be absent from this checkout.
+  if (!reuseImages) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const published = async (name: string) => requireRecord(await json(resolve(outputDirectory, `${name}.json`)), `published ${name}`);
   // Published JSON may order keys differently from a fresh run; compare values, not serializations.
   const canonical = (value: unknown): string => JSON.stringify(value, (_key, item: unknown) => item && typeof item === 'object' && !Array.isArray(item)
     ? Object.fromEntries(Object.entries(item).sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)) : item);
   // Read the published plan before any stage below rewrites a file in this output directory.
-  const publishedPlan = presentationOnly ? { scene: await published('scene'), 'surface-raster-plan': await published('surface-raster-plan'), lenses: await published('lenses') } : null;
-  if (presentationOnly) {
+  const publishedPlan = reuseImages ? { scene: await published('scene'), 'surface-raster-plan': await published('surface-raster-plan'), lenses: await published('lenses') } : null;
+  if (reuseImages) {
     const previous = await published('authored-preparation');
     const publishedSources = new Map(requireArray(previous.sources, 'published sources').map(source => requireRecord(source, 'published source'))
       .map(source => [requireString(source.id, 'source id'), JSON.stringify(source)] as const));
@@ -68,11 +68,11 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     if (canonical(publishedPlan['surface-raster-plan']) !== canonical(surfaceRasterPlan))
       throw new Error(`${descriptor.id}: surface-raster-plan differs from the published preparation; run the full preparation.`);
   }
-  const rasterAssets = presentationOnly ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
+  const rasterAssets = reuseImages ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
     : await preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
   const context = { sourceDirectory, publicDirectory, config, scene };
   // The city catalogue is an authored capability (a search over GeoNames places on the globe), not a requirement of a globe.
-  // It reads only the scene geometry, so a presentation-only run rebuilds it as well.
+  // It reads only the scene geometry, so a reuse-images run rebuilds it as well.
   const catalog = destinations ? await preparePlaces(context) : undefined;
   if (catalog && destinations && catalog.count > destinations.maxEntries) throw new TypeError('Prepared places exceed the authored destination capability.');
   const lenses = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, focus, ...lens }) => {
@@ -82,7 +82,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   }; }) };
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
-  const textureLevels = presentationOnly ? await json(resolve(outputDirectory, 'texture-levels.json')).then(value => value === null ? null : requireRecord(value, 'published texture-levels') as unknown as Awaited<ReturnType<typeof prepareTextureLevels>>,
+  const textureLevels = reuseImages ? await json(resolve(outputDirectory, 'texture-levels.json')).then(value => value === null ? null : requireRecord(value, 'published texture-levels') as unknown as Awaited<ReturnType<typeof prepareTextureLevels>>,
       error => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; })
     : await prepareTextureLevels({ config, plan: scene, lenses, publicDirectory });
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);

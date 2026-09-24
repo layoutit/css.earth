@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "europa-coarse-ice@2x.webp",
-      "bytes": 40214,
-      "sha256": "3445290322e40e6b3f5bf745b69757e140bc89366377d989bf63137491a16e30"
-    },
-    {
-      "location": "public",
       "filename": "europa-elevation@2x.webp",
       "bytes": 46540,
       "sha256": "6b1a48692cdfb54ff8fac2b2def291ca7fdc0974998067eb84958e15652cfdfa"
@@ -27,21 +21,9 @@
     },
     {
       "location": "public",
-      "filename": "europa-fine-ice@2x.webp",
-      "bytes": 37256,
-      "sha256": "8249b8c3fbcc7deec23cf39a11680b84d575abded14da051ca77c7d5670382b0"
-    },
-    {
-      "location": "public",
       "filename": "europa-geology@2x.webp",
       "bytes": 77748,
       "sha256": "a3fd7b9f836f9d4c5e19c5f35da3da1b73fb7cd9974879ca81dae14dc99113a7"
-    },
-    {
-      "location": "public",
-      "filename": "europa-ice-signature@2x.webp",
-      "bytes": 38392,
-      "sha256": "1cb04424881acf1fe3b1bf442ad8fdcb13dedde0320ed372a2a56dba09b2e11e"
     },
     {
       "location": "public",
@@ -87,12 +69,6 @@
     },
     {
       "location": "public",
-      "filename": "europa-poles-coarse-ice@2x.webp",
-      "bytes": 8182,
-      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
-    },
-    {
-      "location": "public",
       "filename": "europa-poles-elevation@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
@@ -105,21 +81,9 @@
     },
     {
       "location": "public",
-      "filename": "europa-poles-fine-ice@2x.webp",
-      "bytes": 8182,
-      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
-    },
-    {
-      "location": "public",
       "filename": "europa-poles-geology@2x.webp",
       "bytes": 12962,
       "sha256": "88cb0181282a36a3cc302af263ce148031dde2b24c824535233995645a64723d"
-    },
-    {
-      "location": "public",
-      "filename": "europa-poles-ice-signature@2x.webp",
-      "bytes": 8182,
-      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
     },
     {
       "location": "public",
@@ -341,7 +305,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1421,
-      "sha256": "b04674f13022b24fcd9546c9e510f4ebb4ad99ba02759a77ca1fe2f5e4a9ea9a"
+      "sha256": "f0b9ec50a19a57e41d8667a492dff79e85362e1771ec430ddd57408792a0bd91"
     },
     {
       "location": "prepared",
@@ -363,9 +327,21 @@
     },
     {
       "location": "prepared",
+      "filename": "image-quality.json",
+      "bytes": 7113,
+      "sha256": "ab0213f69396979ff34ecc00b43b8bb6fdc5624479c301caa475b9a4b7a00325"
+    },
+    {
+      "location": "prepared",
       "filename": "lenses.json",
       "bytes": 5375,
       "sha256": "35a593f9ff18cbaef9a693019d383b6bd1c3f287e7786492fb0ae3a212176845"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 26483,
+      "sha256": "b1edb15d8acf0fa2b2b18c60da03d372be03ad33d545d5d8035d291c73542147"
     },
     {
       "location": "prepared",
@@ -406,14 +382,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 526434,
-      "sha256": "80f5cd82880839cd13194e39239a29ae113010f19d6ae042440be6d02e45b265"
+      "bytes": 540456,
+      "sha256": "828e1bf118ac7ca83d6844fe462df13d882d39e89e4e637ca8bed904c3cf7fe6"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 377131,
-      "sha256": "7db88f94b4cad336d1d418e3cc43ac88d9900deb544435293e8fb18fe5bd3870"
+      "bytes": 391377,
+      "sha256": "c854aba8b15d9dbb71fce0506bce29117704e92f87dbb56b2ea5526300e24567"
     },
     {
       "location": "prepared",
@@ -426,6 +402,12 @@
       "filename": "sun.json",
       "bytes": 616,
       "sha256": "70829da2a8b5ea8ac93e8de449b06a8efd4c71c86b4905afedc435322cc94403"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 11375,
+      "sha256": "f945ff9dfa44140826b694876944fac4950fcee06f85989a5ee868536d3b7d33"
     },
     {
       "location": "prepared",
