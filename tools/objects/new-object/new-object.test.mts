@@ -76,7 +76,7 @@ test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', 
   }
 });
 
-test('a transiting orbit is one paper\'s archive row, with gaps filled from other rows and a/R* derived when no row has it', () => {
+test('a transiting orbit is one paper\'s archive row, with gaps filled from other rows and a/R* derived when no row has it', async () => {
   const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar';
   const anchor = (ref: string, bib: string, label: string) => `"<a refstr=${ref} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
   const csv = [header,
@@ -104,10 +104,19 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   assert.equal(z.orbit.inclinationDegrees, Number((Math.acos(0.05) * 180 / Math.PI).toFixed(3)));
   assert.match(z.orbit.sources.shape!, /inclination derived from its impact parameter 0.5 with its a\/R\* 10 \(Winn 2010, eq. 7\)/u);
   assert.throws(() => assembleArchiveOrbit(rows.filter(row => row.name === 'W b'), undefined, small), /impact parameter 12 with a\/R\* 10 allows none/u);
+  // Kepler's law in solar units: the Earth's year around the Sun is 215 solar radii (it was 766 times too large before 2026-09-24).
+  const { keplerRatio } = await import('./orbit.mts');
+  assert.equal(Number(keplerRatio(1, 365.25, 1).toFixed(1)), 215.0);
+  // A stated a/R* that Kepler's law with the same star cannot give is refused: ZTF J1828+2308 b's 0.838 is its orbit in solar radii.
+  const wd = parseArchiveRows([header, `"ZTF b",${anchor('P_ET_AL__2025', '2025MNRAS.1...1P', 'Parsons et al. 2025')},1,0.1120067,0.838,88.9,0,,2460000.5,0.993,,,0.0131,0.61,0,`].join('\n'));
+  assert.throws(() => assembleArchiveOrbit(wd, undefined, small), /Parsons et al\. 2025's a\/R\* 0\.838 disagrees with Kepler's third law \(63\.3[0-9] from P 0\.1120067 d, .* by a factor of 75\.[0-9], beyond 2/u);
   // A flagged upper limit is not a mass: the archive's calculated value serves, or the planet is refused.
   const y = rows.filter(row => row.name === 'Y b');
   assert.equal(y[0]!.massJupiter, undefined); assert.equal(y[0]!.massLimitJupiter, 0.05);
   assert.match(assembleArchiveOrbit(y, undefined, { value: 0.002, provenance: 'M-R relationship', limit: false, label: 'Calculated Value' }).mass.row.label, /calculated value/u);
+  // A radial-velocity minimum mass is a paper's measurement, cited to the paper, not the archive's model.
+  const minimum = assembleArchiveOrbit(y, undefined, { value: 0.02, provenance: 'Msini', limit: false, label: 'Bonomo et al. 2023', url: 'https://arxiv.org/abs/2304.05773' }).mass.row;
+  assert.deepEqual([minimum.label, minimum.url], ["Bonomo et al. 2023, the minimum mass (M sin i) the NASA Exoplanet Archive's composite table adopts", 'https://arxiv.org/abs/2304.05773']);
   assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.05, provenance: 'Mass', limit: true, label: 'C et al. 2022' }), /only an upper limit/u);
   // A mass that makes an impossible density is refused before the records see it.
   assert.throws(() => assembleArchiveOrbit(y, undefined, { value: 0.1, provenance: 'Mass', limit: false, label: 'D et al. 2023' }), /g\/cm\^3, outside what the records accept/u);
@@ -430,4 +439,19 @@ test('an imaged planet\'s K, H and J magnitudes become the band colour, each cit
   assert.doesNotThrow(() => parsePhotometryEntries(entries), 'the lens\'s own parser accepts the draft');
   assert.deepEqual(notes.map(note => note.split(':')[0]), ['af-lep-b', 'x']);
   assert.match(notes[0]!, /no MKO K magnitude/u);
+});
+
+test('a star Gaia gives no radial velocity takes SIMBAD\'s, cited to its paper, else zero with what that costs', async () => {
+  const { fallbackRadialVelocity } = await import('./generate.mts');
+  const simbad = (answer: string): Archive => ({ async text(url) { if (!url.includes('sim-tap')) throw new Error(`unexpected ${url}`); return answer; }, async bytes() { throw new Error('none'); }, async exists() { return false; } });
+  const header = 'rvz_radvel,rvz_err,rvz_type,rvz_qual,rvz_bibcode';
+  const found = await fallbackRadialVelocity(simbad(`${header}\n-12.3,0.4,v,A,2020AJ....160..120J`), '42', 300);
+  assert.deepEqual([found.value, found.uncertainty, found.url], [-12.3, 0.4, 'https://ui.adsabs.harvard.edu/abs/2020AJ....160..120J/abstract']);
+  assert.match(found.source, /SIMBAD's radial velocity for Gaia DR3 42 \(quality A\), from 2020AJ\.\.\.\.160\.\.120J; Gaia DR3 measures none/u);
+  // A redshift is not a stellar radial velocity; with nothing else, zero is assumed and the note says what that costs.
+  for (const answer of [`${header}\n0.01,,z,C,2019A&A...1..1X`, `${header}\n`]) {
+    const zero = await fallbackRadialVelocity(simbad(answer), '42', 300);
+    assert.equal(zero.value, 0);
+    assert.match(zero.source, /Zero is assumed; a 30 km\/s error moves the star by one part in 100,000 of its distance per century/u);
+  }
 });

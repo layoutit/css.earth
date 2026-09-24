@@ -115,11 +115,16 @@ export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
   if ((orbit.weaklyConstrained === undefined) !== (orbit.sources.constraint === undefined)) {
     throw new TypeError(`A weakly constrained hosted orbit quotes its criterion in sources.constraint, and only then: weaklyConstrained ${String(orbit.weaklyConstrained)}.`);
   }
-  if (!(orbit.periodDays > 0) || !(orbit.semiMajorAxisStellarRadii > 1) || orbit.inclinationDegrees < 0 || orbit.inclinationDegrees > 180 ||
-      orbit.ascendingNodePositionAngleDegrees < 0 || orbit.ascendingNodePositionAngleDegrees >= 360 ||
-      orbit.argumentOfPeriapsisDegrees !== undefined && (orbit.argumentOfPeriapsisDegrees < 0 || orbit.argumentOfPeriapsisDegrees >= 360) ||
-      orbit.semiMajorAxisStellarRadii * (1 - eccentricity) <= 1 || Object.values(orbit.sources).some(text => !text.trim())) {
-    throw new TypeError('Invalid hosted orbit.');
-  }
+  // Each broken rule is named with its value, so a refused record says what to fix.
+  const broken = [
+    !(orbit.periodDays > 0) && `periodDays ${orbit.periodDays} is not positive`,
+    !(orbit.semiMajorAxisStellarRadii > 1) && `semiMajorAxisStellarRadii ${orbit.semiMajorAxisStellarRadii} puts the orbit inside the star`,
+    (orbit.inclinationDegrees < 0 || orbit.inclinationDegrees > 180) && `inclinationDegrees ${orbit.inclinationDegrees} is outside 0 to 180`,
+    (orbit.ascendingNodePositionAngleDegrees < 0 || orbit.ascendingNodePositionAngleDegrees >= 360) && `ascendingNodePositionAngleDegrees ${orbit.ascendingNodePositionAngleDegrees} is outside 0 to 360`,
+    orbit.argumentOfPeriapsisDegrees !== undefined && (orbit.argumentOfPeriapsisDegrees < 0 || orbit.argumentOfPeriapsisDegrees >= 360) && `argumentOfPeriapsisDegrees ${orbit.argumentOfPeriapsisDegrees} is outside 0 to 360`,
+    orbit.semiMajorAxisStellarRadii > 1 && orbit.semiMajorAxisStellarRadii * (1 - eccentricity) <= 1 && `periastron ${orbit.semiMajorAxisStellarRadii} x (1 - ${eccentricity}) stellar radii is inside the star`,
+    Object.entries(orbit.sources).some(([, text]) => !text.trim()) && `sources.${Object.entries(orbit.sources).find(([, text]) => !text.trim())![0]} is empty`,
+  ].filter(Boolean);
+  if (broken.length) throw new TypeError(`Invalid hosted orbit: ${broken.join('; ')}.`);
   return orbit;
 }

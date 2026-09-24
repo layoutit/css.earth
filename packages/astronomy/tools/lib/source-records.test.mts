@@ -26,8 +26,9 @@ describe('astronomy source decoding', () => {
     expect(() => readHostedOrbitRecord({ ...eccentric, sources: circular.sources })).toThrow(/sources/);
     expect(() => readHostedOrbitRecord({ ...eccentric, epochDefinition: 'UTC-midpoint' })).toThrow(/epoch definition/);
     for (const eccentricity of [-0.1, 1, 2, NaN]) expect(() => readHostedOrbitRecord({ ...eccentric, eccentricity })).toThrow();
-    expect(() => readHostedOrbitRecord({ ...eccentric, argumentOfPeriapsisDegrees: 360 })).toThrow(/Invalid hosted orbit/);
-    expect(() => readHostedOrbitRecord({ ...eccentric, semiMajorAxisStellarRadii: 1.1 })).toThrow(/Invalid hosted orbit/);
+    expect(() => readHostedOrbitRecord({ ...eccentric, argumentOfPeriapsisDegrees: 360 })).toThrow(/Invalid hosted orbit: argumentOfPeriapsisDegrees 360 is outside 0 to 360/);
+    expect(() => readHostedOrbitRecord({ ...eccentric, semiMajorAxisStellarRadii: 1.1 })).toThrow(/Invalid hosted orbit: periastron 1\.1 x \(1 - [0-9.]+\) stellar radii is inside the star/);
+    expect(() => readHostedOrbitRecord({ ...eccentric, semiMajorAxisStellarRadii: 0.838 })).toThrow(/semiMajorAxisStellarRadii 0\.838 puts the orbit inside the star/);
   });
   it('retains float64 Horizons components and rejects malformed numeric CSV cells', () => {
     const text = '$$SOE\n2461286.5, date,1.234567890123456,-2,3,4,5,6\n$$EOE';
