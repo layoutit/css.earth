@@ -77,6 +77,9 @@ const script = await readFile(pipelineFiles.get('pipeline')!, 'utf8'), replace =
 if (script.split(replace).length !== 2) throw new Error(`${objectId}: the pipeline change "${replace}" does not occur exactly once.`);
 await writeFile(resolve(run, 'eht-imaging_pipeline.py'), script.replace(replace, replacement));
 await writeFile(resolve(run, 'preimcal.py'), await readFile(pipelineFiles.get('pre-imaging')!));
+// preimcal.py reads the refractive-scattering noise models from its working directory by name.
+for (const file of pipeline.files.filter(entry => entry.role === 'scattering model'))
+  await writeFile(resolve(run, file.path.split('/').at(-1)!), await readFile(resolve(work, 'release', pipeline.repository.split('/').at(-1)!, file.path)));
 const parameters = resolve(run, 'eht-imaging_params.csv');
 await writeFile(parameters, await readFile(pipelineFiles.get('parameters')!));
 
@@ -91,10 +94,9 @@ async function reconstruct(combination: number) {
       { cwd: run, stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, MPLBACKEND: 'Agg', OMP_NUM_THREADS: '1', OPENBLAS_NUM_THREADS: '1', MKL_NUM_THREADS: '1', VECLIB_MAXIMUM_THREADS: '1', NUMEXPR_NUM_THREADS: '1' } });
     const log: Buffer[] = [];
     child.stdout.on('data', chunk => log.push(chunk)); child.stderr.on('data', chunk => log.push(chunk));
-    child.once('exit', code => {
-      void writeFile(resolve(run, 'logs', `combo-${combination}.log`), Buffer.concat(log));
-      code === 0 ? accept() : reject(new Error(`Combination ${combination} failed (${code}); see ${resolve(run, 'logs', `combo-${combination}.log`)}.`));
-    });
+    // The log is written before the run settles, so a failure that stops the tool still leaves it to read.
+    child.once('exit', code => void writeFile(resolve(run, 'logs', `combo-${combination}.log`), Buffer.concat(log)).then(() =>
+      code === 0 ? accept() : reject(new Error(`Combination ${combination} failed (${code}); see ${resolve(run, 'logs', `combo-${combination}.log`)}.`)), reject));
   });
   await rename(partial, out);
 }

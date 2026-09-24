@@ -37,6 +37,16 @@
         "role": "pre-imaging",
         "path": "pre-imaging/preimcal.py",
         "blob": "6509b05824eea57f0aa2d25ec5e419ef022ade86"
+      },
+      {
+        "role": "scattering model",
+        "path": "pre-imaging/obs_scatt_std_gauss_scaled_3599.pickle",
+        "blob": "6e99a3950daf2b45ceaf7304998ab87ef6ba628b"
+      },
+      {
+        "role": "scattering model",
+        "path": "pre-imaging/obs_scatt_std_avg_scaled_3599.pickle",
+        "blob": "7d15b6e1bfdda96687fd1a4d95e6c3c8d731f5d9"
       }
     ],
     "change": {
