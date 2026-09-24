@@ -38,7 +38,7 @@
     "lint:packages": "eslint packages --max-warnings 0",
     "postinstall": "node tools/ci/commit-message.mts --install && pnpm build:tools",
     "prebuild": "node tools/cli/run-script-chain.mts build:prepare",
-    "build:prepare": "pnpm setup:asset-data && pnpm build:tools && pnpm setup:assets && pnpm prepare:object-json && pnpm prepare:lens-billboards && pnpm prepare:search-thumbnails && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:galaxy-field",
+    "build:prepare": "pnpm build:packages && pnpm setup:asset-data && pnpm build:tools && pnpm setup:assets && pnpm prepare:object-json && pnpm prepare:lens-billboards && pnpm prepare:search-thumbnails && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:galaxy-field",
     "predev": "node tools/cli/run-script-chain.mts dev:prepare",
     "dev:prepare": "node tools/ci/check-stale-builds.mts --run && pnpm setup:asset-data && pnpm prepare:catalog && pnpm prepare:titles && node tools/prepare/prepare-solar-geometry.mts && node tools/prepare/prepare-navigation.mts --catalog-only && pnpm prepare:world-context && pnpm prepare:shell-assets && pnpm prepare:object-json && pnpm prepare:lens-billboards && pnpm prepare:search-thumbnails && pnpm prepare:environment-images && pnpm prepare:galaxy-field:data && node tools/prepare/prepare-facilities.mts --catalog-only",
     "prepare:catalog": "node tools/prepare/prepare-catalog.mts",
