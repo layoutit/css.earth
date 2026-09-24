@@ -1,6 +1,6 @@
 # One frame clock per window: evidence
 
-Tested revisions: `main` at `1868931acb` and the change at `1c9a1ef8b4` (refactor/prepared-activation-disposed).
+Tested revisions: `main` at `1868931acb` and the change at `1c9a1ef8b4` (refactor/frame-clock-per-window).
 The owner count was measured on `3baaf4cbfe`, whose clock code is identical to main's.
 
 ## The share count never reached zero (`owner-count.txt`, `owner-count-probe.mjs`)
