@@ -30,9 +30,6 @@ import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
-/** An opening pulls back to a lens's volume only when the volume reaches beyond this many times its distance.
- * Measured on the five lens volumes: 1 and 1.5 for the Sun's corona and Betelgeuse's shell, 4,800 to 12,000 for the discs. */
-const LENS_VOLUME_FRAMING_RATIO = 10;
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;
 
@@ -89,17 +86,15 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
         (owner?.frame ?? frames.get(fromId))!.originM);
     },
-    /** Fit a volume the body shows through its lens when the view sits so deep inside it that none of it shows: the Beta
-     * Pictoris disc reaches 4,800 times the star page's opening distance. Betelgeuse's shell (1.5 times) and the Sun's
-     * corona (1 time) already surround their openings, which stay. Null then, or when the volume is unknown. */
+    /** Fit a volume the body shows through its lens, when the view does not already hold it. Null when the view is
+     * already as far out as the fit, or the volume is unknown. */
     lensVolumeTarget({ objectId, volumeId, mount }: { objectId: string; volumeId: string; mount?: ShellCamera | null }) {
       const volume = LENS_VOLUMES.get(volumeId), frame = frames.get(objectId), owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!volume || !frame || !from || !optics) return null;
-      const radiusM = Math.max(...volume.boundsUnits.max.map((value, axis) => Math.abs(value - volume.boundsUnits.min[axis]!) / 2)) * volume.metersPerUnit;
-      const distanceM = Math.hypot(...from.pose.positionM.map((value, axis) => value - frame.originM[axis]!));
-      if (radiusM <= LENS_VOLUME_FRAMING_RATIO * distanceM) return null;
-      return volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);
+      const target = volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);
+      const distance = (camera: WorldCamera) => Math.hypot(...camera.pose.positionM.map((value, axis) => value - frame.originM[axis]!));
+      return distance(target.world) > distance(from) ? target : null;
     },
     /** Turn onto a bound pair's centre of mass, keeping the distance: a binary's overview is centred on the pair, not on the
      * star the scene mounts. Null when the system has no companion, or when the camera already looks at that centre. */
