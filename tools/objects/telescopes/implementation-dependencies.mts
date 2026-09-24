@@ -3,15 +3,32 @@ import { createHash } from 'node:crypto';
 import { existsSync, realpathSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
-import { build } from 'esbuild';
+import { build, type Plugin } from 'esbuild';
 
 export interface ImplementationFingerprint { readonly sha256: string; readonly files: readonly { readonly path: string; readonly sha256: string }[] }
+
+/** Workspace entries whose TypeScript sources an identity follows as local modules. The FITS reader was a local module
+ * (`tools/fits/`) before it became `@cssearth/fits`; following it keeps every operation that reads FITS identified by the
+ * reader it ran. Other packages stay external, as they always were. */
+const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
+  '@cssearth/fits': 'packages/fits/src/index.ts',
+  '@cssearth/fits/node': 'packages/fits/src/node/index.ts',
+};
+/** An esbuild plugin that bundles the followed workspace entries from their sources under `root`. */
+export function followedWorkspaceSources(root: string): Plugin {
+  return { name: 'followed-workspace-sources', setup(builder) {
+    builder.onResolve({ filter: /^@cssearth\// }, args => {
+      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path];
+      return source ? { path: resolve(root, source) } : undefined;
+    });
+  } };
+}
 
 export async function implementationFingerprint(root: string, entries: readonly string[]): Promise<ImplementationFingerprint> {
   const absolute = entries.map(entry => isAbsolute(entry) ? entry : resolve(root, entry));
   const canonicalRoot = realpathSync(root);
   const result = await build({ absWorkingDir: root, entryPoints: absolute, outdir: resolve(root, '.fingerprint-output'), bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
-    packages: 'external', conditions: ['types'], treeShaking: false, logLevel: 'silent', plugins: [{
+    packages: 'external', conditions: ['types'], treeShaking: false, logLevel: 'silent', plugins: [followedWorkspaceSources(root), {
       name: 'authored-generated-imports',
       setup(builder) {
         builder.onResolve({ filter: /\.js$/ }, args => {

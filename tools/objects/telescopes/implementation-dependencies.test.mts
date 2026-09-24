@@ -49,3 +49,18 @@ test('fingerprints generated-module imports through authored sources without a d
     assert.notEqual(after.sha256, before.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('the FITS reader package is followed into its sources, as when it was a local module; other packages stay external', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-fits-'));
+  try {
+    await writeFile(resolve(root, 'entry.mts'), "import { readFitsHdus } from '@cssearth/fits'; import { readFitsFileHdus } from '@cssearth/fits/node'; import { isRecord } from '@cssearth/core';\nexport const used=[readFitsHdus,readFitsFileHdus,isRecord];\n");
+    await mkdir(resolve(root, 'packages/fits/src/node'), { recursive: true });
+    await writeFile(resolve(root, 'packages/fits/src/fits.ts'), 'export const readFitsHdus=()=>1;\n');
+    await writeFile(resolve(root, 'packages/fits/src/index.ts'), "export { readFitsHdus } from './fits.js';\n");
+    await writeFile(resolve(root, 'packages/fits/src/node/index.ts'), 'export const readFitsFileHdus=()=>2;\n');
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/fits/src/fits.ts', 'packages/fits/src/index.ts', 'packages/fits/src/node/index.ts']);
+    await writeFile(resolve(root, 'packages/fits/src/fits.ts'), 'export const readFitsHdus=()=>3;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
