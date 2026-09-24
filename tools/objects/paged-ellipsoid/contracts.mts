@@ -21,7 +21,7 @@ export interface SurfaceBankPlan {
   body: {assets: {surface: {url: string; urls: readonly string[]}}};
   interior: {outerAssets: {surface: {one: string; two: string; oneUrls: readonly string[]; twoUrls: readonly string[]}; litSurface: {urls: readonly string[]}}};
 }
-export interface SurfaceBankLenses {defaultLens: string; controls: readonly {id: string; surfaceBankId?: string; view?: string; surfaceUrls?: readonly string[]; surfaceUrl?: string}[];}
+export interface SurfaceBankLenses {defaultLens: string; controls: readonly {id: string; surfaceBankId?: string; view?: string; surfaceUrls?: readonly string[]; surfaceUrl?: string; polesUrl?: string}[];}
 export interface MurTile {row: number; col: number; url: string; actualTime: string | null; actualLayer: string | null; empty: boolean; bytes: number;}
 export interface MurInventory {date: string; complete: boolean; grid: {level: number}; tiles: readonly MurTile[];}
 export interface MurMosaic {width: number; height: number; sourceWidth: number; sourceHeight: number; sampling: string; covered: number; missing: number;}

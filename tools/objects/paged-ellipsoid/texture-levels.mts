@@ -45,8 +45,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
   }));
   const urls = new Map<string, TextureLevelAsset[]>();
   await mkdir(publicDirectory, { recursive: true });
-  for (const bank of banks) for (const [page, url] of bank.urls.entries()) {
-    const key = `page:${bank.id}:${page}`;
+  const prepare = async (key: string, url: string, pool: string) => {
     let prepared = urls.get(url);
     if (!prepared) {
       const source = await readFile(resolve(publicDirectory, url.slice(config.publicBase.length)));
@@ -77,9 +76,13 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
     for (const [i, asset] of prepared.entries()) {
       const resource = i === widths.length - 1 ? key : `${key}:level:${widths[i]}`;
       levels[i].resources[key] = resource;
-      entries.push({ key: resource, ...asset, pool: 'pages' });
+      entries.push({ key: resource, ...asset, pool });
     }
-  }
+  };
+  for (const bank of banks) for (const [page, url] of bank.urls.entries()) await prepare(`page:${bank.id}:${page}`, url, 'pages');
+  // A surface lens's pole atlas has its pages' texel density, so each level scales it by the pages' ratio; the first
+  // view then loads its poles at the same level as its pages instead of at full resolution.
+  for (const lens of lenses?.controls ?? []) if (lens.view !== 'interior' && lens.polesUrl) await prepare(`poles:${lens.id}`, lens.polesUrl, 'mounted');
   // Two complete largest banks can coexist during an atomic dataset switch.
   // Smaller completed levels share this same byte budget rather than multiply it.
   const maximumDecodedBytes = 2 * Math.max(...banks.map(bank => entries.filter(entry =>

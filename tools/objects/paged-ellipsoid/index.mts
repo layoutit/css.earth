@@ -1,12 +1,7 @@
-import { prepareEllipsoidAttitude } from './attitude.mts';
-import { readAuthoredSources } from '../authored-sources.ts';
 import {requireObjectControls} from '../../../site/scene/scene-contract.mts';
 import type {AuthoredObjectDescriptor} from '@cssearth/objects';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString} from '../../sources/source-values.mts';
-import {validateSourceManifest} from '../../../src/platform/source-manifest.mts';
-import {parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe} from './profile-source.mts';
-import {parseInteriorSource} from './source-contract.mts';
+import {readJsonSource, requireArray, requireRecord, requireString} from '../../sources/source-values.mts';
 import {parseBodyAttitude} from './geographic/source-records.mts';
 export {isPagedEllipsoidRecipe} from './profile-source.mts';
 export interface PagedEllipsoidContext {
@@ -24,12 +19,10 @@ import { relative, resolve } from 'node:path';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { verifySourceManifest } from '../../../src/platform/source-manifest.mts';
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
-import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
-import { createAtmospherePreparation } from './atmosphere.mts';
-import { createPagedSurfaceRaster } from './surface-raster.mts';
-import { preparePagedEllipsoidScene } from './scene.mts';
-import { preparePagedEllipsoidAssets } from './assets.mts';
+import type { preparePagedEllipsoidAssets } from './assets.mts';
+import { preparePagedEllipsoidAssetsInParallel } from './parallel-assets.mts';
+import { readPagedEllipsoid } from './context.mts';
 import { preparePagedEllipsoidPresentation } from './presentation.mts';
 import { prepareLocationPoint, prepareLocationCamera } from './geographic/prepare-location.mts';
 import { preparePlaces } from './geographic/places.mts';
@@ -43,15 +36,7 @@ const write = (directory: string, name: string, value: unknown) => writeFile(res
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
 export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, presentationOnly = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
-  const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
-  const required = (id: string) => { const source = sources.get(id); if (!source) throw new TypeError(`Paged ellipsoid requires ${id}.`); return source.value; };
-  const config = parsePagedProfile(required('paged-ellipsoid')), bindingSource = parsePagedLensBindings(required('lens-bindings'));
-  if (!isPagedEllipsoidRecipe(config) || config.namespace !== descriptor.id || config.publicBase !== `/scenes/${descriptor.id}/`) throw new TypeError('Paged ellipsoid identity differs.');
-  if (config.geometry.BODY_LATITUDE_SEGMENTS !== 16 || config.geometry.BODY_LONGITUDE_SEGMENTS !== 32) throw new TypeError('Unsupported segmented projective globe topology.');
-  if (descriptor.recipe.shape.radiusKm !== config.equatorialRadiusKm || !descriptor.recipe.cutaway || !descriptor.recipe.atmosphere) throw new TypeError('Authored physical capabilities differ from their prepared operators.');
-  const declared = descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id));
-  if (JSON.stringify(declared) !== JSON.stringify(bindingSource.controls.map(lens => lens.id))) throw new TypeError('Authored lenses differ from presentation bindings.');
-  const sourceDirectory = resolve(objectDirectory, 'source'), sourceManifest = validateSourceManifest(config.namespace, await json(resolve(sourceDirectory, 'manifest.json')));
+  const { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, raster, scene, surfaceRasterPlan } = await readPagedEllipsoid(objectDirectory);
   // The raw imagery is read only by the stages a presentation-only run reuses; it may be absent from this checkout.
   if (!presentationOnly) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
@@ -72,21 +57,8 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     if (unaccepted.length) throw new Error(`${descriptor.id}: recipe sources changed since the published preparation (${unaccepted.join(', ')}); run the full preparation, or pass --accept-changed when a change feeds none of the reused outputs.`);
     if (changed.length) console.log(`${descriptor.id}: reusing published outputs across accepted recipe changes: ${changed.join(', ')}.`);
   }
-  const sun = prepareDirectionalSun();
   const sky = prepareCubicSky({ objectId: descriptor.id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
-  const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
   const destinations = descriptor.recipe.destinations;
-  // The scene needs the declared retained pool capacity, not a previously prepared overlay.
-  const interiorSource = parseInteriorSource(await json(resolve(sourceDirectory, config.interiorPath)));
-  requireFiniteNumber(interiorSource[config.interiorRadiusKey], config.interiorRadiusKey);
-  if (interiorSource.tomographyPath && sources.get('mantle-tomography')?.reference.path !== `source/${interiorSource.tomographyPath}`)
-    throw new Error('Mantle tomography must bind its authored recipe for reproducible provenance.');
-  // The body sits in its ecliptic presentation frame; the surface map the feature labels use says where its longitudes start.
-  const features = sources.get('features')?.value as { surfaceMap?: unknown } | undefined;
-  const surfaceMap = typeof features?.surfaceMap === 'string' ? await json(resolve(sourceDirectory, features.surfaceMap)) as { mapLeftEdgeLongitudeDeg?: unknown } : null;
-  const attitude = prepareEllipsoidAttitude(descriptor.id, { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z,
-    mapLeftEdgeLongitudeDeg: surfaceMap ? requireFiniteNumber(surfaceMap.mapLeftEdgeLongitudeDeg, 'surface map left edge') : 0 });
-  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, atmosphereModel, atmosphere, raster, attitude });
   if (publishedPlan) {
     // The reused outputs read the surface raster plan whole, and from the scene only its surface asset banks (texture
     // levels resolve them); the rest of the scene is presentation, which this lane prepares afresh.
@@ -100,7 +72,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
       throw new Error(`${descriptor.id}: surface-raster-plan differs from the published preparation; run the full preparation.`);
   }
   const rasterAssets = presentationOnly ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
-    : await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude });
+    : await preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
   const context = { sourceDirectory, publicDirectory, config, scene };
   // The city catalogue is an authored capability (a search over GeoNames places on the globe), not a requirement of a globe.
   // It reads only the scene geometry, so a presentation-only run rebuilds it as well.
