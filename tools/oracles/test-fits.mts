@@ -18,7 +18,7 @@ const run = (args: string[], command = process.execPath) => {
 // The reader's own behaviour tests, including the float32 transport image, are the package's.
 run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tools/oracles/fits/core.oracle.test.mts', 'tools/oracles/fits/sky-orientation.oracle.test.mts', 'tools/oracles/fits/sky-projection.oracle.test.mts',
-  'tools/oracles/fits/file-region.oracle.test.mts', 'tools/oracles/fits/rice.oracle.test.mts',
+  'tools/oracles/fits/file-region.oracle.test.mts', 'tools/oracles/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
   'tools/objects/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tools/objects/observation/wise-atlas-mosaic.oracle.test.mts',
   'tools/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'tools/objects/jwst/imaging/imaging.test.mts', 'tools/contract/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
