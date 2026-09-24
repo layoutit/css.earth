@@ -5,10 +5,11 @@ import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facin
 import { createPreparedDepthPartitions, type PreparedDepthPartitions } from './prepared-depth-partitions.js';
 import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
-import type { PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
+import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, type PreparedTextureLevels } from './prepared-texture-levels.js';
+import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
 import type { PreparedAssetOrigin } from './prepared-asset-origin.js';
@@ -49,6 +50,8 @@ export type PreparedViewBinding = { target: number } & (
 );
 export interface PreparedPresentationDefinition {
   textureLevels?: PreparedTextureLevels;
+  /** The resource catalogue; presentation reads only its capability fallbacks. */
+  assets?: PreparedAssets;
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[];
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
@@ -81,7 +84,11 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
   const variant = selectedPreparedVariant(definition, selection);
   const textureLevel = definition.textureLevels ? selectPreparedTextureLevel(definition.textureLevels,
     view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel, initial) : undefined;
-  const textureResources = textureLevel === undefined ? undefined : definition.textureLevels!.levels[textureLevel].resources;
+  // A level names the resource each texture reads; a capability fallback then replaces it where this browser needs one.
+  const fallback = activeResourceFallbacks(definition.assets?.fallbacks);
+  const levelResources = textureLevel === undefined ? undefined : definition.textureLevels!.levels[textureLevel].resources;
+  const textureResources = levelResources === undefined && !Object.keys(fallback).length ? undefined
+    : { ...fallback, ...Object.fromEntries(Object.entries(levelResources ?? {}).map(([key, level]) => [key, fallback[level] ?? level])) };
   const content = variant.required.map(key => textureResources?.[key] ?? key);
   // An opaque proxy stands for a marker-stage body, so its mesh is not drawn
   // (see perspective-dolly.ts). Mounting one there decoded a full surface set
@@ -102,7 +109,7 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
   if (definition.resourceOrder === "materials-first" && !deferredTextures) for (const key of content) required.add(key);
   return { required: [...required], prewarm: [...prewarm].filter(key => !required.has(key)), materials, pressedLenses: [selection.lensId],
     ...(deferredTextures ? { deferredTextures } : {}),
-    ...(textureLevel === undefined ? {} : { textureLevel, textureResources }),
+    ...(textureLevel === undefined ? {} : { textureLevel }), ...(textureResources === undefined ? {} : { textureResources }),
     ...(variant.navigation ? { navigation: variant.navigation } : {}) };
 }
 const datasetKey = (name: string) => name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());

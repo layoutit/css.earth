@@ -205,7 +205,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             background.publishStellarPoints();
           },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
-            return spatial.captureFrame(world, viewport);
+            // The context's labels keep clear of the selected body's caption, placed for the same camera.
+            const caption = selectedLabel.rect(world, viewport, selected, { overview, focused: detailedFocus !== null, preview: selectionPreview });
+            return spatial.captureFrame(world, viewport, caption ? [caption] : []);
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial.previewSelection(id); },
           setOverview(enabled: boolean, scope?: string) {

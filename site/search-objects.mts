@@ -5,6 +5,11 @@ export function objectClassificationLabel(classification: string) {
   return label[0].toUpperCase() + label.slice(1);
 }
 
+/** The body's own label where its catalogue gives one, otherwise its classification's. */
+export function objectTypeLabel(object: { classification: string; classificationLabel?: string }) {
+  return object.classificationLabel ?? objectClassificationLabel(object.classification);
+}
+
 // Classification describes an object; it never disables an interaction gate.
 export function objectNavigation<T extends { distance: { meters: number }; classification: string }>(objects: readonly T[]) {
   const search = Object.freeze([...objects].sort((left, right) =>

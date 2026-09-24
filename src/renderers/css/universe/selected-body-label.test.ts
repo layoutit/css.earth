@@ -26,3 +26,14 @@ test('the caption sits below a body that fits, and leaves once it cannot sit cle
   expect(label.label.dataset.placement).toBeUndefined();
   label.destroy();
 });
+
+test('the caption box offered to the context planner is the box it publishes for the same camera', () => {
+  const label = mountSelectedBodyLabel(host, clock);
+  Object.defineProperties(label.label, { offsetWidth: { value: 50 }, offsetHeight: { value: 18 } });
+  // Before the caption is measured for a body there is no box to offer.
+  expect(label.rect(camera, viewport, body(10), view)).toBeNull();
+  const published = label.publish(camera, viewport, body(10), view);
+  expect(label.rect(camera, viewport, body(10), view)).toEqual(published);
+  expect(label.rect(camera, viewport, body(10), { ...view, overview: true })).toBeNull();
+  label.destroy();
+});

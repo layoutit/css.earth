@@ -26,6 +26,7 @@ import {
   fitProjectiveTextureGeometryToStableLayout,
   prepareProjectiveTextureLayer,
 } from "../../../src/platform/projective-surface-raster.mts";
+import {prepareLeafSeamOutset, prepareSeamOutsetSteps} from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
 
 
 export function preparePagedEllipsoidScene({ config: profile, interiorSource, atmosphereModel, atmosphere, raster, attitude }: {attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
@@ -38,6 +39,10 @@ const { atlas: SURFACE_ATLAS, createSurfaceRasterPlan, surfacePageUrls } = raste
 const ATMOSPHERE_MODEL = atmosphereModel;
 const POLAR_RADIUS = EQUATORIAL_RADIUS * profile.polarRadiusKm / profile.equatorialRadiusKm;
 const SURFACE_RASTER_OVERSCAN = 64 * SURFACE_OVERLAP;
+// Surface leaves overlap by a fixed angle, too little at some zooms for WebKit's antialiased leaf edges; the stepped outset
+// holds the declared screen overlap at every silhouette size, as the geometry profile's does (preparation/scene/seam-outset.ts).
+const SEAM_OUTSET = profile.geometry.seamOutset ? prepareSeamOutsetSteps(profile.geometry.seamOutset) : null;
+const BODY_DIAMETER = 2 * EQUATORIAL_RADIUS * TILE_SIZE;
 const CAMERA_MAXIMUM_ZOOM = profile.camera.maximumZoom;
 const CAMERA_DURATION_MILLISECONDS = CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES * CAMERA_MILLISECONDS_PER_CONTROL_DEGREE;
 const INTERIOR_CUTAWAY = { ...profile.geometry.interiorCutaway, qualification: interiorSource.qualification };
@@ -181,6 +186,7 @@ const scene = Object.freeze({
       rasterGutter: bodyConfig.texture.raster.gutter,
       rasterOverscan: bodyConfig.texture.raster.overscan,
       runtimeEdgeDiscovery: false,
+      ...(SEAM_OUTSET ? { outset: SEAM_OUTSET } : {}),
     }),
     bands: bodyBands,
   }),
@@ -655,7 +661,9 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
         `;background-position:${-cell.x / density}px ${-cell.y / density}px` +
         `;background-size:${SURFACE_ATLAS.pageSize / density}px auto` +
         `;background-image:var(--${profile.namespace}-surface-page-${cell.page})`,
-      projectiveTextureLayer: cell.layer,
+      projectiveTextureLayer: SEAM_OUTSET
+        ? { ...cell.layer, seamOutset: prepareLeafSeamOutset(cell.layer.frameMatrix, size, size, BODY_DIAMETER) }
+        : cell.layer,
       geographicFrameMatrix: fitted.matrix,
       sourceRect: fitted.sourceRect,
       leafWidth: size,

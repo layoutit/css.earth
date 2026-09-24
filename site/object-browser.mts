@@ -208,6 +208,11 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     search.value = "";
     closeKeepingFocus();
   }, { signal: events.signal });
+  // The catalogue loads on intent, before the click: a pointer over, a press on or focus in a category or the search
+  // field starts it, so the list is usually ready when it opens. Visitors who never search never load it.
+  for (const target of [...categoryButtons, search]) for (const type of ['pointerover', 'pointerdown', 'focusin'] as const) {
+    target.addEventListener(type, () => { void catalogue.ensureLoaded(); }, { signal: events.signal, once: true, passive: true });
+  }
   for (const button of categoryButtons) {
     button.addEventListener('click', event => {
       event.preventDefault();

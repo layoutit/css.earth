@@ -301,7 +301,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (!destroyed) refresh();
     });
   };
-  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport): WorldContextView => {
+  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []): WorldContextView => {
       if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt) {
         throw new TypeError('Context and camera reference frames differ.');
       }
@@ -333,15 +333,17 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
         selectedId: selectedEntry.body.id, overview, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
-        preserveCommittedAnnotations: rotationPhase === 'released', labelBlockers, anchorOnly: publishingBodies === anchorOnly,
+        preserveCommittedAnnotations: rotationPhase === 'released',
+        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
           indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
           labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
   };
   const layer = Object.freeze({ root,
-    captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
-      const view = readView(world, viewport), revision = presentationRevision;
+    /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */
+    captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []) {
+      const view = readView(world, viewport, frameBlockers), revision = presentationRevision;
       return { view, current: () => !destroyed && revision === presentationRevision };
     },
     setLabelBlockers(rects: readonly LabelScreenRect[]) {

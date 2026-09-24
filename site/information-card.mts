@@ -2,7 +2,7 @@ import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import { requiredElement } from './browser-types.mts';
-import { objectClassificationLabel } from './search-objects.mts';
+import { objectTypeLabel } from './search-objects.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];
@@ -156,7 +156,7 @@ export function objectCardPreview(documentTarget: Document, object: ObjectEntry)
   const name = requiredElement(preview, '[data-card-preview-name]');
   name.textContent = object.name;
   name.setAttribute('aria-label', object.name);
-  requiredElement(preview, '[data-card-preview-classification]').textContent = objectClassificationLabel(object.classification);
+  requiredElement(preview, '[data-card-preview-classification]').textContent = objectTypeLabel(object);
   requiredElement(preview, '[data-card-preview-description]').textContent = object.description;
   return preview;
 }
