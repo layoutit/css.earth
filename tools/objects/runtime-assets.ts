@@ -42,7 +42,9 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
  * prepared data's (site/asset-origin.mts). A body's stylesheet lenses are part of what it ships. */
 export async function stylesheetTexts():Promise<string[]> {
  const directory=resolve(process.cwd(),'src/renderers/css/styles');
- const names=(await readdir(directory)).filter(name=>name.endsWith('.css')).sort();
+ // A tree without renderer stylesheets (an isolated fixture) has no stylesheet references.
+ const entries=await readdir(directory).catch((error:unknown)=>{if(error instanceof Error&&'code' in error&&error.code==='ENOENT')return [];throw error;});
+ const names=entries.filter(name=>name.endsWith('.css')).sort();
  return Promise.all(names.map(name=>readFile(resolve(directory,name),'utf8')));
 }
 
