@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/hd-29391-b/hd-29391-b-surface-shape@2x.webp",
+      "url": "/scenes/hd-29391-b/hd-29391-b-surface-infrared@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/hd-29391-b/hd-29391-b-poles-shape@2x.webp",
+      "url": "/scenes/hd-29391-b/hd-29391-b-poles-infrared@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#9a9a9a"
+    "color": "#c9daff"
   },
   "projection": {
     "tileSize": 50,

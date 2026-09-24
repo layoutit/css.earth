@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "dh-tau-b",
+  "unit": "µJy",
+  "source": {
+    "citation": "Itoh et al. (2005), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service",
+    "url": "https://ui.adsabs.harvard.edu/abs/2005ApJ...620..984I",
+    "locator": "UltracoolSheet Main.csv, DH Tau B: MKO K 14.19 +/- 0.02 (Itoh05), H 14.96 +/- 0.04 (Itoh05), J 15.71 +/- 0.05 (Itoh05); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy"
+  },
+  "bands": [
+    {
+      "band": "MKO K",
+      "wavelengthMicrometres": 2.184,
+      "value": 1346,
+      "error": 25
+    },
+    {
+      "band": "MKO H",
+      "wavelengthMicrometres": 1.614,
+      "value": 1074,
+      "error": 40
+    },
+    {
+      "band": "MKO J",
+      "wavelengthMicrometres": 1.2417,
+      "value": 802.9,
+      "error": 37
+    }
+  ],
+  "displayRange": [
+    0,
+    1346
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (MKO K), so the colour shows its band ratios; brightness is not compared across planets at different distances."
+}

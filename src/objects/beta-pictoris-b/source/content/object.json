@@ -115,22 +115,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "infrared",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "beta-pictoris-b-lens-shape.webp",
-        "surface": "beta-pictoris-b-surface-shape@2x.webp",
-        "poles": "beta-pictoris-b-poles-shape@2x.webp",
+        "id": "infrared",
+        "label": "Infrared colour",
+        "qualification": "False colour from its measured flux in three infrared bands (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "thumbnail": "beta-pictoris-b-lens-infrared.webp",
+        "surface": "beta-pictoris-b-surface-infrared@2x.webp",
+        "poles": "beta-pictoris-b-poles-infrared@2x.webp",
         "source": {
-          "id": "beta-pictoris-b-observational-measurements",
+          "id": "beta-pictoris-b-band-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/2109.10671"
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...786...32M"
         },
-        "falseColor": false,
-        "notes": "No image of this planet's surface exists: it is an unresolved point in every telescope, seen by its own infrared glow at 1,740 K, some 3 arcseconds' worth of orbit from its star at most. Its size, 1.45 Jupiter radii, comes from its measured luminosity through evolutionary models, not from a measured disc (see the ledger). The sphere turns once every 9.00 hours, the period JWST measured from its brightness changes, about an axis on its orbit normal, where its spin is measured to point. The gray marks an unresolved surface."
+        "falseColor": true,
+        "notes": "Beta Pictoris b's brightness in three infrared bands as one colour: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko k), so the colour shows its band ratios; brightness is not compared across planets at different distances. Not a natural colour; nobody has resolved its disc."
       }
     ]
   },

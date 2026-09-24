@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "beta-pictoris-b",
+  "unit": "µJy",
+  "source": {
+    "citation": "Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...786...32M",
+    "locator": "UltracoolSheet Main.csv, beta Pic b: MKO K 12.43 +/- 0.07 (Male14), H 13.30 +/- 0.11 (Male14), J 14.04 +/- 0.21 (Male14); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy"
+  },
+  "bands": [
+    {
+      "band": "MKO K",
+      "wavelengthMicrometres": 2.184,
+      "value": 6807,
+      "error": 440
+    },
+    {
+      "band": "MKO H",
+      "wavelengthMicrometres": 1.614,
+      "value": 4953,
+      "error": 500
+    },
+    {
+      "band": "MKO J",
+      "wavelengthMicrometres": 1.2417,
+      "value": 3738,
+      "error": 720
+    }
+  ],
+  "displayRange": [
+    0,
+    6807
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (MKO K), so the colour shows its band ratios; brightness is not compared across planets at different distances."
+}
