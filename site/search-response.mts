@@ -1,4 +1,3 @@
-import { createSystemCardContent } from './system-card-content.mts';
 import { parseHTML } from 'linkedom';
 import { record, requiredElement } from './browser-types.mts';
 import { matchesObjectCategory } from './object-categories.mts';
@@ -6,7 +5,9 @@ import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-
 import { parseFeaturePin } from './feature-search.mts';
 import { findResults } from './find.mts';
 import { renderDatasetResponse } from './dataset-response.mts';
-import { renderSourceLink } from './source-link.mts';
+import { createSelectionPresentation, setPanelHidden } from './selection-presentation.mts';
+import { selectionTargetFromUrl } from './scene/scene-selection.mts';
+import { SCENE_OBJECTS } from './objects.mts';
 import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
 import { objectIdAtPath } from './root-object.mts';
@@ -17,21 +18,6 @@ export function parseSearchPin(value: unknown): SearchPin {
   if (!record(value) || typeof value.url !== 'string' || !/^\/(?:features|scenes)\/[a-zA-Z0-9/_-]+\.json$/u.test(value.url)
     || typeof value.count !== 'number' || !Number.isSafeInteger(value.count) || value.count < 0) throw new TypeError('Invalid prepared search index pin.');
   return { url: value.url, count: value.count };
-}
-
-interface Result { name: string; context: string; label: string; href: string; }
-function publishResults(root: HTMLElement, results: readonly Result[], hint: string) {
-  root.hidden = false;
-  requiredElement(root, '.object-destination-hint').textContent = hint;
-  for (const [index, anchor] of [...root.querySelectorAll<HTMLAnchorElement>('.object-destination-result')].entries()) {
-    const result = results[index];
-    anchor.parentElement!.hidden = !result;
-    if (!result) continue;
-    anchor.setAttribute('href', result.href);
-    anchor.setAttribute('aria-label', result.label);
-    requiredElement(anchor, '.object-destination-result-name').textContent = result.name;
-    requiredElement(anchor, '.object-destination-result-context').textContent = result.context;
-  }
 }
 
 /** A no-JS search reads the object rows straight from this document, but a page
@@ -107,35 +93,12 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   withOverviewScope(clear, overviewScopeFromUrl(url));
   document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.object-browser');
-  const information = requiredElement<HTMLElement>(document, '.object-information-panel');
   const selectedContent = requiredElement<HTMLElement>(document, '.object-selected-content');
-  const context = document.querySelector<HTMLElement>('.object-context') ?? browser;
-  const sharedLegacyContext = context === browser;
-  const selectedOverview = overviewScopeFromUrl(url);
-  if (selectedOverview === 'system') createSystemCardContent(document).show(true);
-  const showingContext = Boolean(focusCard || selectedOverview);
-  browser.toggleAttribute('hidden', !searching);
-  selectedContent.toggleAttribute('hidden', searching);
-  selectedContent.toggleAttribute('inert', searching);
-  information.toggleAttribute('hidden', showingContext);
-  if (!sharedLegacyContext) context.toggleAttribute('hidden', !showingContext);
-  if (focusCard) focusCard.removeAttribute('hidden');
+  setPanelHidden(browser, !searching);
+  setPanelHidden(selectedContent, searching);
   if (searching) requiredElement(document, '.object-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
   browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
-  const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
-  const system = context.querySelector<HTMLElement>('[data-system-results]');
-  if (galaxy) galaxy.toggleAttribute('hidden', selectedOverview !== 'milky-way');
-  for (const card of context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) {
-    card.toggleAttribute('hidden', card.dataset.largeScaleOverview !== selectedOverview);
-  }
-  if (system) system.toggleAttribute('hidden', selectedOverview !== 'system');
-  // Legacy/unit fixtures still combine navigation and context in one panel.
-  if (sharedLegacyContext && searching) {
-    if (galaxy) galaxy.setAttribute('hidden', '');
-    for (const card of context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) card.setAttribute('hidden', '');
-    if (system) system.removeAttribute('hidden');
-  }
   if (searching) {
     const catalogueLoaded = await ensureCatalogueRows(document, browser, url.origin, fetcher);
     const items = [...browser.querySelectorAll<HTMLElement>('.object-item')];
@@ -170,22 +133,16 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
         const pin = parseFeaturePin(featureRoot.dataset.featureIndex);
         if (pin) {
           const results = await findResults(pin, url.origin, result.detailQuery, objectId, fetcher);
-          publishResults(featureRoot, results, '');
-          presentFeatureResults(featureRoot, results.length);
-          detailCount = results.length;
+          detailCount = presentFeatureResults(featureRoot, results);
         }
       } catch {
-        publishResults(featureRoot, [], 'Feature names could not load. Submit your search to retry.');
-        presentFeatureResults(featureRoot, 0, 'Feature names could not load. Submit your search to retry.');
+        presentFeatureResults(featureRoot, [], 'Feature names could not load. Submit your search to retry.');
         detailCount = 1;
       }
     }
     requiredElement<HTMLElement>(browser, '.object-empty').hidden = !catalogueLoaded || items.some(item => !item.hidden) || detailCount + overviewCount > 0;
   }
-  browser.dataset.sourceFocus = focusCard?.dataset.preparedFocusId ?? '';
-  const overview = selectedOverview ?? '';
-  // A system overview is hosted by the route's star, so its credits follow that system.
-  renderSourceLink(document, focusCard ? `focus:${focusCard.dataset.preparedFocusId}` : `overview:${overview === 'system' ? `system:${objectId}` : overview}`);
+  createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, SCENE_OBJECTS));
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
