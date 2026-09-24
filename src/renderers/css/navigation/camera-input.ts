@@ -328,7 +328,34 @@ export function createUnboundedMatrixDragControls({
     inertiaFrame = requestFrame(animateInertia);
     return true;
   };
+  // Two fingers pinch: the second touch ends the one-finger orbit, and the pair zooms through the shared wheel zoom as a
+  // pinch wheel at the fingers' midpoint (runtimePolicy.TOUCH_PINCH_WHEEL_DELTA), the way the surface minimap does.
+  const touches = new Map<number, { x: number; y: number }>();
+  let pinchDistance: number | null = null;
+  const touchSpread = () => {
+    const [a, b] = [...touches.values()];
+    return { distance: Math.hypot(a.x - b.x, a.y - b.y), x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+  };
+  const abandonOrbit = () => {
+    if (pointerId === null) return;
+    const wasDragging = pointerDragging;
+    pendingDrag = null;
+    cancelCadence();
+    pointerId = null;
+    pointerDragging = false;
+    syncCursor();
+    if (wasDragging) finishInteraction();
+  };
   const onPointerDown = (event: PointerEvent) => {
+    if (event.pointerType === "touch") touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (touches.size === 2 && wheel && pinchDistance === null) {
+      event.preventDefault();
+      abandonOrbit();
+      if (lifetime.disposed) return;
+      pinchDistance = touchSpread().distance;
+      inputSurface.setPointerCapture(event.pointerId);
+      return;
+    }
     if (!drag || pointerId !== null || !runtimePolicy.isOrbitDragStart(event)) return;
     if (cameraMotion.hurryForInput()) { event.preventDefault(); return; }
     const measuredTrackball = trackballMetrics();
@@ -467,6 +494,18 @@ export function createUnboundedMatrixDragControls({
     return null;
   };
   const onPointerMove = (event: PointerEvent) => {
+    if (touches.has(event.pointerId)) touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pinchDistance !== null && touches.size === 2 && touches.has(event.pointerId)) {
+      event.preventDefault();
+      const spread = touchSpread();
+      if (spread.distance > 0 && pinchDistance > 0 && spread.distance !== pinchDistance) {
+        const deltaY = -Math.log(spread.distance / pinchDistance) * runtimePolicy.TOUCH_PINCH_WHEEL_DELTA;
+        pinchDistance = spread.distance;
+        inputSurface.dispatchEvent(new windowTarget.WheelEvent("wheel", {
+          bubbles: true, cancelable: true, ctrlKey: true, deltaY, deltaMode: 0, clientX: spread.x, clientY: spread.y }));
+      }
+      return;
+    }
     if (event.isPrimary && event.pointerType !== 'touch') {
       pointerPosition = { x: event.clientX, y: event.clientY };
       syncCursor();
@@ -476,6 +515,12 @@ export function createUnboundedMatrixDragControls({
     applyPointerSamples(event);
   };
   const endPointer = (event: PointerEvent) => {
+    if (touches.delete(event.pointerId) && pinchDistance !== null) {
+      // The pinch ends with either finger; the other waits to be lifted before it can orbit again.
+      if (touches.size < 2) pinchDistance = null;
+      if (inputSurface.hasPointerCapture(event.pointerId)) inputSurface.releasePointerCapture(event.pointerId);
+      return;
+    }
     if (event.pointerId !== pointerId) return;
     pointerPosition = { x: event.clientX, y: event.clientY };
     const wasDragging = pointerDragging;

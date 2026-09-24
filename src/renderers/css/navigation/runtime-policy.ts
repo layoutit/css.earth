@@ -26,6 +26,8 @@ export interface RuntimePolicy {
   readonly WHEEL_ZOOM_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER: number;
+  /** A two-finger touch pinch zooms as a pinch wheel of this many delta units per natural-log step of finger distance. */
+  readonly TOUCH_PINCH_WHEEL_DELTA: number;
   readonly WHEEL_ZOOM_INERTIA: WheelZoomInertia | null;
   /** The input kinds whose released gesture is glided. A precision pointer
    * carries the platform's own momentum, so gliding it again compounds two

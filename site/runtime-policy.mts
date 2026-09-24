@@ -43,6 +43,11 @@ export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 // units, under two notches, so zooming took many pinches. This gain makes one
 // full pinch about five notches. Scroll swipes keep the multiplier above.
 export const WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER = 3;
+// Two fingers pinch (MOBILE_TOUCH_ACTION): the globe's input sends the pinch as ctrlKey wheel deltas of this many
+// units per natural-log step of finger distance. A pinch wheel moves the camera by exp(delta x 0.006 x
+// WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER), so 1 / (0.006 x 3) makes the distance follow the fingers: spreading them
+// twice as far brings the camera twice as close (measured on Earth, headless touch, 2026-09-24).
+export const TOUCH_PINCH_WHEEL_DELTA = 56;
 // A released wheel gesture keeps the rate it commanded and decays it, as a
 // thrown drag does. Damping is shorter than the trackball's: the wheel drives
 // distance directly, so a glide outliving its gesture reads as drift.
