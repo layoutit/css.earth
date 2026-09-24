@@ -38,18 +38,29 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap]')];
   const configs = new Map(maps.map(map => [map, parseSurfaceMapConfig(map.dataset.surfaceMinimap)]));
   const events = new AbortController();
-  let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, disposed = false, flying = false;
+  let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, flying = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
   let overviewScope: OverviewScope = 'system';
   let preparedFocus: PreparedFocus | null = null;
   const write = (element: HTMLElement, value: string) => { if (element.textContent !== value) element.textContent = value; };
+  /** Drop a scheduled render: the page hid, a flight began, or the readout retired. */
+  const cancelPending = () => {
+    if (timer !== null) windowTarget.clearTimeout(timer);
+    if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+    timer = frame = null;
+  };
+  /** A reading that no longer describes the view. Without a camera the scene date goes too. */
+  const clearReading = ({ date }: { date: boolean }) => {
+    if (date) dateGroup.hidden = true;
+    coordinates.hidden = true; scale.hidden = true; write(altitude, '—');
+  };
   function render() {
     frame = null;
-    if (disposed || documentTarget.hidden) return;
+    if (events.signal.aborted || documentTarget.hidden) return;
     lastRender = windowTarget.performance.now();
     const navigation = camera?.navigation;
     const scene = documentTarget.querySelector<HTMLElement>('.polycss-scene');
-    if (!navigation || !scene) { dateGroup.hidden = true; coordinates.hidden = true; scale.hidden = true; write(altitude, '—'); return; }
+    if (!navigation || !scene) { clearReading({ date: true }); return; }
     const map = maps.find(map => !map.closest<HTMLElement>('[data-lens-details]')?.hidden) ?? maps[0];
     const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)
       : surfaceMapContext(map ? configs.get(map) : undefined, camera, documentTarget, windowTarget);
@@ -85,7 +96,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   }
   function schedule(immediate = false) {
     // A fly-to holds the readout still; arrival refreshes it once.
-    if (disposed || documentTarget.hidden || flying) return;
+    if (events.signal.aborted || documentTarget.hidden || flying) return;
     if (immediate && timer !== null) { windowTarget.clearTimeout(timer); timer = null; }
     if (frame !== null || timer !== null) return;
     const wait = immediate ? 0 : 100 - (windowTarget.performance.now() - lastRender);
@@ -97,11 +108,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   const refresh = () => schedule(true);
   windowTarget.addEventListener('resize', refresh, { signal: events.signal });
   documentTarget.addEventListener('visibilitychange', () => {
-    if (documentTarget.hidden) {
-      if (timer !== null) windowTarget.clearTimeout(timer);
-      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
-      timer = frame = null;
-    } else refresh();
+    if (documentTarget.hidden) cancelPending();
+    else refresh();
   }, { signal: events.signal });
   return {
     setPreparedFocus(record) { preparedFocus = record; refresh(); },
@@ -116,16 +124,12 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
       if (flying === active) return;
       flying = active;
       if (!active) { refresh(); return; }
-      if (timer !== null) windowTarget.clearTimeout(timer);
-      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
-      timer = frame = null;
-      // The departure's distance and coordinates go stale as soon as the camera moves.
-      coordinates.hidden = true; scale.hidden = true; write(altitude, '—');
+      cancelPending();
+      // The departure's distance and coordinates go stale as soon as the camera moves; its date still holds.
+      clearReading({ date: false });
     },
     destroy() {
-      disposed = true; unsubscribe?.(); events.abort();
-      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
-      if (timer !== null) windowTarget.clearTimeout(timer);
+      events.abort(); unsubscribe?.(); cancelPending();
     },
   };
 }
