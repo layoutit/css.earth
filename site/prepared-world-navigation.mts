@@ -11,7 +11,7 @@ type FlightSample = ReturnType<typeof createSelectionFlightSample>;
 type FlightAnchors = Parameters<typeof advanceSelectionFlightInto>[1];
 interface Timing {mark(name: string): void;}
 interface TargetRequest {objectId: string; fromId: string; mount?: ShellCamera | null; force?: boolean;}
-export interface WorldHandoff {transferTo(signal: AbortSignal): void; mountOptions: Partial<MountOptions>; afterMount(mount: ObjectSceneLifecycle, options: {signal: AbortSignal}): Promise<void>;}
+export interface WorldHandoff {transferTo(signal: AbortSignal): void; mountOptions: Partial<MountOptions>; afterMount(mount: ObjectSceneLifecycle): Promise<void>;}
 interface FocusRequest {objectId: string; mount: ShellCamera; signal: AbortSignal; reducedMotion?: boolean; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; timing?: Timing;}
 interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics, options: { signal: AbortSignal; commit?: () => void }) => Promise<boolean> | void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
 interface WorldFlightRequest {
@@ -200,36 +200,44 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const approachLimitS = departureOwner && !reducedMotion
         ? destinationDetailTime(flight, from, targetFrame, optics) : 0;
       const ownership = createPreparedSceneOwnership(signal);
-      let handedOff = false, bankReady = false, detailReady = false, moved = false, approaching = false;
-      let incomingOwner: ObjectWorldNavigation | null = null;
+      type Publisher =
+        | { kind: 'departure'; held: boolean }
+        | { kind: 'mounting'; owner: ObjectWorldNavigation | null }
+        | { kind: 'destination'; owner: ObjectWorldNavigation };
+      let publisher: Publisher = { kind: 'departure', held: !departureOwner || Boolean(reducedMotion) };
+      let bankReady = false, moved = false, drawnElapsedS = 0;
       // Cancels only a publication superseded by the fully active detail. The
       // flight itself retains its clock, input policy and completion promise.
       const activation = new AbortController();
       let reachHandoff!: () => void;
       const handoffReady = new Promise<void>(resolve => { reachHandoff = resolve; });
-      let departureHeld = !departureOwner || Boolean(reducedMotion);
-      if (departureHeld) reachHandoff();
+      if (publisher.held) reachHandoff();
       let drawn = reducedMotion ? target : from;
-      const running = createWorldFlight({ motion, from, flight, anchors, signal, reducedMotion,
-        paused: departureHeld, windowTarget, documentTarget,
-        limitElapsedS: () => detailReady || incomingOwner?.detailActivated?.() ? flight.durationS : approachLimitS,
-        canFinish: () => detailReady,
-        interruptible: () => !moved || approaching,
+      const running = createWorldFlight({ motion, from, flight, anchors,
+        signal: AbortSignal.any([signal, ownership.signal]), reducedMotion,
+        paused: publisher.held, windowTarget, documentTarget,
+        limitElapsedS: () => publisher.kind === 'destination' ||
+          publisher.kind === 'mounting' && publisher.owner?.detailActivated?.() ? flight.durationS : approachLimitS,
+        canFinish: () => publisher.kind === 'destination',
+        interruptible: () => !moved || drawnElapsedS >= approachLimitS,
         owner: { apply(world) {
-          if (!handedOff) return departureOwner?.apply(world, { signal: running.signal });
-          if (detailReady) return incomingOwner!.apply(world, { signal: running.signal });
+          if (publisher.kind === 'departure') return departureOwner?.apply(world, { signal: running.signal });
+          if (publisher.kind === 'destination') return publisher.owner.apply(world, { signal: running.signal });
           return presentWorld?.(world, optics, { signal: activationSignal,
-            commit: () => { void incomingOwner?.apply(world, { signal: running.signal }); } });
+            commit: () => {
+              if (publisher.kind === 'mounting') void publisher.owner?.apply(world, { signal: running.signal });
+            } });
         } },
         onPaint(world, elapsedS) {
           drawn = lastCamera = world;
-          approaching = elapsedS >= approachLimitS;
+          drawnElapsedS = elapsedS;
           if (!moved && (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
               world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis]))) {
             moved = true; timing.mark('first-motion');
           }
-          if (!departureHeld && (approaching || bankReady && elapsedS >= handoffTimeS)) {
-            departureHeld = true;
+          if (publisher.kind === 'departure' && !publisher.held &&
+              (elapsedS >= approachLimitS || bankReady && elapsedS >= handoffTimeS)) {
+            publisher.held = true;
             running.hold(elapsedS);
             reachHandoff();
           }
@@ -237,10 +245,10 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       });
       const activationSignal = AbortSignal.any([running.signal, activation.signal]);
       const interrupted = running.finished.then(() => {
-        if (!handedOff) ownership.dispose();
+        if (publisher.kind === 'departure') ownership.dispose();
         throw cancellationReason(running.signal);
       }, error => {
-        if (!handedOff) ownership.dispose();
+        if (publisher.kind === 'departure') ownership.dispose();
         throw error;
       });
       void interrupted.catch(() => {});
@@ -261,7 +269,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         // This holds the existing flight; no segment or replacement clock starts.
         await wait(preparedLease.prepareView(() => ({ world: drawn, viewport: optics })));
         timing.mark('assets-ready');
-        handedOff = true;
+        publisher = { kind: 'mounting', owner: null };
         const initialWorldCamera = drawn;
         const progressive = Boolean(presentWorld && !reducedMotion);
         if (progressive) running.resume();
@@ -271,18 +279,16 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
             initialWorldCamera, initialProjection: preparedLease.projection({ world: initialWorldCamera, viewport: optics }),
             arrivingByFlight: true,
             ...(progressive ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
-              if (running.signal.aborted) return;
-              incomingOwner = owner; void owner.apply(drawn, { signal: running.signal });
+              if (running.signal.aborted || publisher.kind !== 'mounting') return;
+              publisher.owner = owner; void owner.apply(drawn, { signal: running.signal });
             } } : {}) },
-          async afterMount(mount: ObjectSceneLifecycle, { signal: mountedSignal }: {signal: AbortSignal}) {
-            const cancelMounted = () => running.cancel(mountedSignal.reason);
-            mountedSignal.addEventListener('abort', cancelMounted, { once: true });
-            if (mountedSignal.aborted) cancelMounted();
+          async afterMount(mount: ObjectSceneLifecycle) {
             try {
               if (running.signal.aborted) throw cancellationReason(running.signal);
               if (!mount.navigation) throw new Error('The destination camera is unavailable.');
               timing.mark('mounted');
-              incomingOwner = mount.navigation; detailReady = true;
+              const incomingOwner = mount.navigation;
+              publisher = { kind: 'destination', owner: incomingOwner };
               activation.abort();
               const publication = incomingOwner.apply(drawn, { signal: running.signal });
               if (reducedMotion) {
@@ -296,7 +302,6 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
               const reason: unknown = running.signal.reason;
               mount.features?.setNavigationInFlight?.(false, !running.signal.aborted ||
                 (reason instanceof Error && 'preserveView' in reason && reason.preserveView === true));
-              mountedSignal.removeEventListener('abort', cancelMounted);
             }
           },
         };
@@ -457,7 +462,7 @@ function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, sample: Flig
 }
 function isFlightInput(event: Event) {
   const target = event.target;
-  return target && 'closest' in target && typeof target.closest === 'function' && Boolean(target.closest('.object-input-surface, .object-surface-minimap')) &&
+  return target && 'closest' in target && typeof target.closest === 'function' && Boolean(target.closest('.object-input-surface')) &&
     (event.type !== 'keydown' || 'key' in event && typeof event.key === 'string' && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '-', '=', 'Escape'].includes(event.key));
 }
 function cancellationReason(signal: AbortSignal): unknown {
