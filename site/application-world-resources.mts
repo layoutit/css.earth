@@ -16,7 +16,9 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 
-const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, compact: phone } = worldVisibilityPolicy;
+// An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
+const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
+const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
 const ASTRONOMICAL_UNIT_M = 149_597_870_700;
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
@@ -74,9 +76,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
         resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
     });
-    const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
+    const plainDots = new Set(plainDotIds);
+    const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS).filter(([id]) => !plainDots.has(id))
       .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),
-        minimumDiameterPixels: asteroidIds.includes(id) ? 2 : 2.4 }]));
+        minimumDiameterPixels: asteroidIds.includes(id) ? ASTEROID_MINIMUM_PIXELS : 2.4 }]));
     // Bank declarations do not fetch payloads. Deduplicate pending loads only; the
     // mounted layer owns residency and can release banks after they leave view.
     const volumeLensDescriptors = parsedDescriptors
@@ -104,6 +107,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
+      plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
       lensVisibility: LENS_VISIBILITY, lensBillboards,
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
       sky: !phone,

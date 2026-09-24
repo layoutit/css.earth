@@ -25,6 +25,8 @@ export interface PreparedUniverseOptions {
   annotationLandmarks?: readonly string[];
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
+  /** Bodies the world draws as plain dots; see `mountPreparedWorldContext`. */
+  plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
   /** Projected size at which any lens bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.
    * It may only raise the prepared thresholds: a small cloud is decoration, not worth its lens payload. */
   lensVisibility?: PreparedPointVisibility;

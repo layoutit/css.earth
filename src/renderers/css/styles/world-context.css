@@ -29,6 +29,10 @@
 .prepared-world-context [data-context-body-visible="false"] > i {
   background: none !important;
 }
+/* A plain asteroid dot at half strength: at 1.5 px the belt then sums to the brightness its 2 px sprites had. */
+.prepared-world-context [data-context-plain-dot] > i {
+  opacity: 0.5;
+}
 .prepared-world-context [data-context-body]::before,
 .prepared-world-context [data-context-body]::after {
   position: absolute;

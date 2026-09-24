@@ -288,6 +288,8 @@ export function createSceneRouter({
         preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
         onResetDestination: () => { void navigate(objectId, { kind: 'feature', id: null }).catch(report); },
         navigable: id => navigable(id),
+        // A failed prefetch is not an error yet: the navigation that needs it asks again and reports.
+        prefetch: id => { void registry.loadObject(id).catch(() => {}); void registry.loadSystemView(id).catch(() => {}); },
       });
     }
     const shell = shellOwner.shell!;

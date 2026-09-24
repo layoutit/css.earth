@@ -123,18 +123,18 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
 
 /**
  * Hover and focus on an object link, or hover on a navigable body in the
- * world, start that object's fragment after a short dwell; a press starts it
- * at once. Only object routes (`/<id>/`) the app can navigate in place are requested (`navigable`), without the
+ * world, prefetch what a flight to that object reads (its fragment, entry and system view) after a short dwell; a
+ * press prefetches at once. Only object routes (`/<id>/`) the app can navigate in place are requested (`navigable`), without the
  * object registry.
  */
-export function bindNavigationIntent({ documentTarget, windowTarget, navigable, fragments, skip = () => false }: {
+export function bindNavigationIntent({ documentTarget, windowTarget, navigable, prefetch, skip = () => false }: {
   documentTarget: Document; windowTarget: BrowserWindow; navigable(id: string): boolean;
-  fragments: NavigationFragments; skip?(id: string): boolean;
+  prefetch(id: string): void; skip?(id: string): boolean;
 }) {
   const events = new AbortController();
   let timer: number | null = null;
   const cancel = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; };
-  const start = (id: string | null | undefined) => { if (id && navigable(id) && !skip(id)) fragments.prefetch(id); };
+  const start = (id: string | null | undefined) => { if (id && navigable(id) && !skip(id)) prefetch(id); };
   const soon = (id: string | null | undefined) => {
     cancel();
     if (id) timer = windowTarget.setTimeout(() => { timer = null; start(id); }, NAVIGATION_INTENT_DWELL_MS);

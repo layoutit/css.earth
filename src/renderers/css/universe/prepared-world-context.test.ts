@@ -1903,6 +1903,20 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   layer.destroy();
 });
 
+test('a plain dot needs no sprite, paints its colour and is never a pick or navigation target', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1),
+    sprites: { sun: sprite, venus: sprite }, plainDots: { ids: ['mercury'], minimumDiameterPixels: 2 } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  const marker = layer.inspect().find(body => body.id === 'mercury')!.billboard, leaf = marker.children[0] as HTMLElement;
+  expect([leaf.style.backgroundImage ?? '', leaf.style.backgroundColor, leaf.style.borderRadius]).toEqual(['', '#9d9388', '50%']);
+  expect(marker.dataset.contextBodyVisible).toBe('true');
+  expect(marker.dataset.objectNavigate).toBeUndefined();
+  expect(screenPicking(host as unknown as HTMLElement).pick(70, -20)).toBeNull();
+  layer.destroy();
+});
+
 test('suppression retires the whole annotation while flight preserves admission and disables picking', () => {
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
   const element = layer.inspect().find(body => body.id === 'mercury')!.billboard;
@@ -2555,6 +2569,8 @@ test('a body circle holds a dot in the body colour until its own disc outgrows t
   const scale = 1e6, root = mount(scale), layer = mounted.get(root)!, marker = find(root, 'contextBody', 'mercury'), leaf = marker.children[0]!;
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100 * scale, 0, distance * scale], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  // Until its sprite first shows, a body sets no atlas image, so a page fetches only the atlas pages it draws.
+  expect(leaf.style.backgroundImage).not.toContain('url(');
   // Mercury's 0.8px disc sits inside its circle.
   publish(1000);
   expect(marker.dataset.contextIndicatorVisible).toBe('true');

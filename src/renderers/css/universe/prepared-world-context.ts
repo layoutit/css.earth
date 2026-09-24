@@ -114,13 +114,16 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, distantNavigation, opacityClock, orbitRenderer = 'bars' }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, distantNavigation, plainDots, opacityClock, orbitRenderer = 'bars' }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
+  /** Bodies drawn as a dot in their colour, at least `minimumDiameterPixels` wide: no sprite, and never a hover or
+   * navigation target. */
+  plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
   opacityClock?: OpacityClock;
   /** Which retained paint owner draws the prepared orbit lines. */
   orbitRenderer?: OrbitRenderer;
@@ -129,6 +132,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     throw new TypeError('Distant navigation requires a positive finite distance.');
   }
   const distantNonNavigableIds = new Set(distantNavigation?.nonNavigableIds ?? []);
+  const plainDotIds = new Set(plainDots?.ids ?? []);
   const root = host.ownerDocument.createElement('div');
   // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
   const locator = createContextLocator(host.ownerDocument);
@@ -150,8 +154,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
     // name and orbit and is never a navigation target.
     const unpackaged = 'unpackaged' in body && body.unpackaged === true;
-    const sprite = sprites[body.id];
-    if (!sprite && !unpackaged) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
+    const plainDot = plainDotIds.has(body.id);
+    const sprite = plainDot ? undefined : sprites[body.id];
+    if (!sprite && !unpackaged && !plainDot) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
     const marker = host.ownerDocument.createElement('s');
     marker.dataset.contextGroup = body.id;
     marker.dataset.contextBody = body.id;
@@ -166,7 +171,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // custom property, which re-resolved the marker and both pseudos for every moving body on every frame.
     const spriteLeaf = host.ownerDocument.createElement('i');
     spriteLeaf.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;background-repeat:no-repeat;transform-origin:50% 50%;pointer-events:none`;
-    if (sprite) applySpriteImage(spriteLeaf, sprite);
+    // The atlas image is set when the sprite first shows (below): a page opens with a handful of sprites on screen, and a
+    // hidden body must not fetch its atlas page. A plain dot is its colour, and fetches none.
+    if (plainDot) { spriteLeaf.style.backgroundColor = body.color; spriteLeaf.style.borderRadius = '50%'; marker.dataset.contextPlainDot = ''; }
     marker.appendChild(spriteLeaf);
     // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
     // body drawn from its record carries its own; without either the world's default applies. Capitals mark a star, black
@@ -213,7 +220,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
-    return { index, body, sprite, unpackaged, marker, spriteLeaf, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
+    return { index, body, sprite, unpackaged, plainDot, marker, spriteLeaf, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
       closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       indicatorHovered: false,
@@ -225,7 +232,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       orbitPickTarget: null as (ScreenPickTarget & { shape: { kind: 'segments'; segments: readonly OrbitSegment[]; bounds: LabelScreenRect | null; halfWidth: number } }) | null,
       labelPickTarget: null as (ScreenPickTarget & { shape: { kind: 'rect'; left: number; top: number; right: number; bottom: number } }) | null,
       labelRectTarget: null as { left: number; top: number; right: number; bottom: number } | null,
-      markerShown: undefined as boolean | undefined, markerDiameter: 0, billboardShown: undefined as boolean | undefined, spriteDetail: false,
+      markerShown: undefined as boolean | undefined, markerDiameter: 0, billboardShown: undefined as boolean | undefined, spriteDetail: false, spriteApplied: false,
       dotDiameter: sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null, flatDot: false,
       center: [0, 0] as [number, number], markerTransform: '', spriteTransform: '', orbitTransform: '', labelOffset: '',
       labelRect: null as LabelScreenRect | null,
@@ -512,7 +519,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
           lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
         const { body, marker } = entry;
-        const navigationSuppressed = entry.unpackaged || (distantNavigationActive && distantNonNavigableIds.has(body.id));
+        const navigationSuppressed = entry.unpackaged || entry.plainDot || (distantNavigationActive && distantNonNavigableIds.has(body.id));
         if (mask === 0) continue;
         const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) *
           (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
@@ -525,7 +532,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         bodyPublications++;
         // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.
-        const flatDot = entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
+        // A plain dot is always its colour; the flat-dot swap is for bodies with a sprite.
+        const flatDot = !entry.plainDot && entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
         // A body without its own circle inside its parent's dot is part of that dot, not a second dot within it.
         const parentDot = entry.orbit ? entriesById.get(entry.orbit.centerBodyId) : undefined;
         const insideParentDot = !entry.indicatorShown && parentDot?.flatDot === true &&
@@ -534,7 +542,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        const markerDiameter = Math.round((flatDot ? entry.dotDiameter! :
+        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? entry.dotDiameter! :
           Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter)) * 20) / 20;
         const wasShown = entry.billboardShown === true;
         const hoverChanged = entry.indicatorHovered !== entry.hovered;
@@ -563,6 +571,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           // A marker wider than its small prepared tile resolves shows the large
           // prepared image; only then is that image loaded and decoded.
           const detail = entry.sprite?.detail;
+          if (!entry.spriteApplied && entry.sprite && !flatDot) { applySpriteImage(entry.spriteLeaf, entry.sprite); entry.spriteApplied = true; }
           if (detail && !flatDot) {
             const spriteDetail = markerDiameter >= detail.fromDiameterPixels ||
               (entry.spriteDetail && markerDiameter >= detail.fromDiameterPixels * SPRITE_DETAIL_RETURN);
@@ -577,6 +586,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = entry.body.color; leaf.borderRadius = '50%'; } else {
               leaf.backgroundColor = leaf.borderRadius = '';
               applySpriteImage(entry.spriteLeaf, entry.spriteDetail && detail ? detail : entry.sprite!);
+              entry.spriteApplied = true;
             }
           }
           if (entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;

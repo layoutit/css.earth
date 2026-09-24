@@ -25,7 +25,7 @@ export function mountObjectShell({
   readSelection,
   documentTarget = document,
   windowTarget = window,
-  preferences, onResetDestination, navigable,
+  preferences, onResetDestination, navigable, prefetch,
 }: ShellOptions): ObjectShell {
   const drawer = requiredElement(documentTarget, ".object-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -94,8 +94,9 @@ export function mountObjectShell({
     lifetime.onDispose(preferences.subscribe(key => {
       if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();
     }));
-    // Hover, focus or press on another body fetches its card before the click.
-    own(bindNavigationIntent({ documentTarget, windowTarget, navigable, fragments, skip: id => id === objectId }));
+    // Hover, focus or press on another body fetches its card, entry and system view before the click.
+    own(bindNavigationIntent({ documentTarget, windowTarget, navigable, skip: id => id === objectId,
+      prefetch: id => { fragments.prefetch(id); prefetch(id); } }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime,
       () => `${objectId}:${selectionKey(objectBrowser.readSubject())}`));
     lifetime.onDispose(() => disposeContent());

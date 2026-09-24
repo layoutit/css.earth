@@ -15,6 +15,9 @@ const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'as
 const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const defaultFeatures: ReadonlySet<string> = new Set(prepared.defaultFeatureIds);
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id)).map(object => object.id);
+// Only notable asteroids are map targets: mission targets and those with real imagery. The rest are plain dots, with no
+// sprite, caption, hover or click; their pages stay reachable through search.
+const plainDotIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id) && !object.discovery.imagery).map(object => object.id);
 const minorMoonIds = prepared.moons.minor;
 // Each body's orbit centre, and each named centre's own parent: a circumbinary planet's barycentre leads to its host star.
 const orbitCenters = new Map([...applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),
@@ -35,7 +38,7 @@ const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
   ...applicationContext.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body => [body.id, labelImportance('planet')])]);
 
 export const worldVisibilityPolicy = {
-  compact: phone, annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, minorMoonIds, hiddenOrbitIds,
+  compact: phone, annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, minorMoonIds, hiddenOrbitIds,
 };
 
 /** Visibility of retained world bodies, labels and highlights. */
@@ -49,7 +52,7 @@ export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, l
     const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures });
     layer.setBodyVisibility({
       bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id)),
-      labelHidden: visibility.hiddenLabels.filter(id => !openSystem.has(id)),
+      labelHidden: [...visibility.hiddenLabels.filter(id => !openSystem.has(id)), ...plainDotIds],
       highlighted: visibility.highlightedBodies,
       // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
       indicatorHidden: ordinaryAsteroidIds,
