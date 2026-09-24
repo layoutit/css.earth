@@ -105,6 +105,13 @@ catalogues restore their baked provenance from the inventory. A recovered record
 is not proof of fresh acquisition. Runtime inventories describe prepared delivery;
 source restoration and runtime installation are separate checks.
 
+A new star, planet or companion starts from `pnpm telescope new-object SPEC.json`
+(`tools/objects/new-object/spec.mts` documents the spec): it writes the whole package
+from Gaia DR3, SIMBAD, the spectrophotometric archives and the NASA Exoplanet Archive,
+leaves only prose marked `TODO(new-object)`, and `--bake` runs the preparation chain.
+`--from-archive HOST...` drafts the spec for transiting systems. See the
+[celestial skill](../../.agents/skills/celestial-skill/SKILL.md) for the full workflow.
+
 Installation and common controls belong in the [root README](../../README.md).
 Read the current `package.json` and runner arguments before using commands:
 

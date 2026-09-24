@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
- *   node tools/objects/new-object.mts --spec <stars.json> [--check | --bake]
+ *   node tools/objects/new-object.mts --from-archive HOST... --out spec.json
+ *   node tools/objects/new-object.mts --spec <stars.json> [--skip-existing] [--check | --bake]
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json
  *

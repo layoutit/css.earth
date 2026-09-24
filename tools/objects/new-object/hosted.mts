@@ -124,9 +124,10 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     { id: 'radius', label: 'Radius', value: radiusValue, source: fact(record.radius.url, record.radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
     { id: 'period', label: 'Year', value: periodValue, source: fact(record.orbitCitation.url, record.orbitCitation.label, 'source/measurements.json', 'orbitalPeriodDays; orbitalPeriodSource') },
     { id: 'mass', label: 'Mass', value: `${Number(record.mass.value.toPrecision(2))} ${star ? 'solar' : 'Jupiter'} masses`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
-  if (!star) {
+  // A planet still on the shape lens: its notes say so; a thermal, band-colour or host-lit lens wrote its own.
+  if (!star && !spec.photometry && !spec.thermal) {
     const control = content.lenses.controls[0];
-    control.notes = `No image or colour of ${spec.name} is published: the sphere has its measured size, and the gray marks an unresolved surface. ${t ? 'It glows with its own heat, so no starlight falls on it.' : "The lighting is its own star's, at the measured orbit."}`;
+    if (!String(control.notes).includes("'s light")) control.notes = `No image or colour of ${spec.name} is published: the sphere has its measured size, and the gray marks an unresolved surface. ${t ? 'It glows with its own heat, so no starlight falls on it.' : "The lighting is its own star's, at the measured orbit."}`;
   }
   content.provenance.physical.credit = `Radius from ${record.radius.source}; mass from ${record.mass.source}; orbit from ${record.orbitCitation.text}`;
   files.set(`${s}/content/object.json`, json(content));
@@ -135,7 +136,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   files.set(`${s}/preparation/rotation.json`, json(rotation));
   const text = read(`${o}/text.json`), paper = recordOf(spec.paper.url);
   if (!paper) throw new Error(`${id}: no publication record for its paper ${spec.paper.url}.`);
-  if (!star) text.datasets = { shape: { title: 'Shape only', detail: 'Published radius', summary: 'A sphere at the published size. No picture of its surface exists.' } };
+  if (!star && !spec.photometry && !spec.thermal) text.datasets = { shape: { title: 'Shape only', detail: 'Published radius', summary: 'A sphere at the published size. No picture of its surface exists.' } };
   for (const key of ['card', 'introduction'] as const) {
     text[key].text = spec.text ? spec.text[key] : `${TODO}: ${key === 'card' ? 'one sentence, 110 characters at most' : 'two sentences, 180 characters at most'}.`;
     text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: label(spec.paper.url, spec.paper.credit), checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) }];

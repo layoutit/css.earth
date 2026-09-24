@@ -94,7 +94,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const body = astronomyRecord(spec, row, ids, order);
   const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
-  const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: ${url} is not an arXiv or DOI link, so no publication record can be written for it; cite the paper by arXiv or DOI.`); return publication; };
+  const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);
 
   // The package the scaffold writes, then every file the data decide.
@@ -364,6 +364,3 @@ export async function specFromArchive(hosts: readonly string[], out: string, { r
   await mkdir(dirname(resolve(root, out)), { recursive: true }); await writeFile(resolve(root, out), json({ stars }));
   return { path: out, entries: stars.length, report };
 }
-
-/** The bake's first steps on generated objects, so a batch proves itself before anyone bakes it: titles, authored preparation,
- * the catalogue, source records and page data. */

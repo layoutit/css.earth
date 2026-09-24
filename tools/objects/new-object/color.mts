@@ -54,7 +54,7 @@ export interface Candidate {
   readonly acquisition: string; readonly color: StellarColor;
 }
 
-interface Context { readonly spec: StarSpec; readonly row: GaiaRow; readonly ids: Identifiers; readonly archive: Archive; readonly cmf: Map<number, readonly number[]>; readonly cache: Map<string, Promise<Buffer>> }
+interface Context { readonly spec: StarSpec; readonly row: GaiaRow; readonly ids: Identifiers; readonly archive: Archive; readonly cmf: Map<number, readonly number[]> }
 /** The catalogue files every star reads (Pulkovo, Kharitonov, Burnashev) are fetched once per process, however many stars run at once. */
 const shared = new Map<string, Promise<Buffer>>();
 const once = (context: Context, url: string) => { let bytes = shared.get(url); if (!bytes) { bytes = context.archive.bytes(url); shared.set(url, bytes); bytes.catch(() => shared.delete(url)); } return bytes; };
@@ -185,7 +185,7 @@ const channelDifference = (a: StellarColor, b: StellarColor) => Math.max(...a.sr
 
 /** Try every route in order and write the colour record for the first, with the second as its cross-check. */
 export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers, archive: Archive, cmf: Map<number, readonly number[]>): Promise<ColorChoice> {
-  const context: Context = { spec, row, ids, archive, cmf, cache: new Map() }, candidates: Candidate[] = [], tried: string[] = [];
+  const context: Context = { spec, row, ids, archive, cmf }, candidates: Candidate[] = [], tried: string[] = [];
   // Every route is probed at once; the candidates are then taken in the routes' quality order.
   const probed = await Promise.all((Object.keys(ROUTES) as ColorRoute[]).map(async route => {
     if (spec.color?.skip.includes(route)) return { route, found: `skipped (${spec.color.reason})` as const };
@@ -193,7 +193,7 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
   }));
   for (const { route, found } of probed) {
     if (typeof found === 'string') { tried.push(`${route}: ${found}`); continue; }
-    if (candidates.length === 2) continue;
+    if (candidates.length === 2) { tried.push(`${route}: found, not needed after the colour and its cross-check`); continue; }
     try { candidates.push({ ...found, ...evaluate(found.bytes, found.record(''), cmf) }); }
     catch (error) { tried.push(`${route}: the spectrum was found but gives no colour (${(error as Error).message})`); }
   }
@@ -245,7 +245,12 @@ export function planckChoice(id: string, t: Cited, why: string, tried: readonly 
   const inputs = [{ id: `${id}-stellar-color`, path: 'photometry/stellar-color.json', origin: t.url, credit: `${t.source}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
     acquisition: 'Authored method record: names the published temperature and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'lenses'],
     sourceBinding: { kind: 'local', reason: 'Project-authored colour recipe naming the cited temperature; repinned when edited.' } }];
-  return { record, files: new Map(), acquisition: [], inputs, catalogue: [], color: planckColor(t.value, cmf, gamut), route: 'planck', tried,
+  // Below about 1,800 K a black body's colour lies outside sRGB (a brown dwarf, a cool companion): it is then shown mixed with the
+  // least white that brings it inside, and the record says so; a colour inside the gamut keeps its record plain.
+  let color: StellarColor, mapped = gamut;
+  try { color = planckColor(t.value, cmf, gamut); } catch (error) { if (gamut || !/sRGB gamut/u.test((error as Error).message)) throw error; mapped = 'desaturate'; color = planckColor(t.value, cmf, mapped); }
+  if (mapped && !gamut) Object.assign(record, { gamut: mapped });
+  return { record, files: new Map(), acquisition: [], inputs, catalogue: [], color, route: 'planck', tried,
     credits: [`Colour: a Planck spectrum at the temperature of ${t.source}, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).`],
     summary: `a Planck spectrum at ${t.value.toLocaleString('en-US')} K, because ${why.charAt(0).toLowerCase()}${why.slice(1)}` };
 }

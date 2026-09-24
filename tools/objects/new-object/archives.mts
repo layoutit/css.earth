@@ -11,11 +11,13 @@ export interface Archive {
 }
 
 /** A dropped connection, before or during the transfer, is retried twice, a second apart; an HTTP error answer is not, so a
- * failed service is reported at once. Every failure names its URL. */
+ * failed service is reported at once. Every failure names its URL. A request that gives nothing for TRANSFER_TIMEOUT_MS is a
+ * dropped connection: the archives answer in seconds, and a hung one would otherwise hold a batch forever. */
+export const TRANSFER_TIMEOUT_MS = 120_000;
 async function transfer<T>(url: string, read: (response: Response) => Promise<T>, init?: RequestInit): Promise<T> {
   for (let attempt = 1; ; attempt++) {
     try {
-      const response = await fetch(url, init);
+      const response = await fetch(url, { ...init, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
       if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);
       return await read(response);
     } catch (error) {
