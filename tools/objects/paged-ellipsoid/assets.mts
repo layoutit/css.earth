@@ -31,7 +31,9 @@ import { readMantleTomography, tomographyLegend } from "./tomography.mts";
 import { applyDisplayGamma } from "./display-tone.mts";
 
 
-export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames, attitude }: {attitude?: EllipsoidAttitude; config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]}) {
+/** `mode` 'extras' prepares the interior, legends and thumbnails without surface maps or materials. `materialSlice` runs
+ * every `count`th material image from `index`, so parallel workers each write a disjoint share (parallel-assets.mts). */
+export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames, attitude, materialSlice = { index: 0, count: 1 } }: {attitude?: EllipsoidAttitude; config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]; materialSlice?: {index: number; count: number}}) {
 const { bakeSurfaceRaster, surfacePageUrls } = raster;
 const requireMaterialPreparation=()=>{
   if(!atmosphere||!atmosphereModel||!attitude)throw new Error('Paged ellipsoid material preparation requires an atmosphere model and the body attitude.');
@@ -86,7 +88,7 @@ if (mode !== 'materials') {
       } else throw new TypeError("Unknown scientific surface source");
     }
     inputs.set(map.name, input);
-    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,deepOceanFill:map.deepOceanFill,kernel:map.scientific?"nearest":undefined,webp:map.webp});
+    if (mode !== 'thumbnails' && mode !== 'extras') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,deepOceanFill:map.deepOceanFill,kernel:map.scientific?"nearest":undefined,webp:map.webp});
   }
   if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
   else if (mode !== 'maps') await prepareInteriorAssets();
@@ -100,7 +102,7 @@ if (mode !== 'materials') {
     await prepareLensThumbnail(input,map.thumbnail,focusByMap.get(map.name)?.longitude ?? null,map.thumbnailRegion);
   }
 }
-if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps') await prepareMaterialBanks();
+if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps' && mode !== 'extras') await prepareMaterialBanks();
 clearDeepOceanFillCache();
 return { assets: [...produced].sort() };
 async function prepareMap(input: string | Buffer, name: string, {
@@ -318,28 +320,33 @@ async function prepareMaterialBanks() {
   }
   const {attitude: bodyAttitude}=requireMaterialPreparation();
   const defaultFrame = Math.round((bodyAttitude.sunView(LIT_DEFAULT_VIEW.initialScenePitchDegrees)[2] + 1) / 2 * (frameCount - 1));
+  let task = -1;
+  const mine = () => ++task % materialSlice.count === materialSlice.index;
   for (const role of ["lighting", "atmosphere"]) {
     for (const density of [1, 2]) {
       const suffix = density === 2 ? "@2x" : "";
       const size = MATERIAL_TILE_SIZE * density;
       const gutter = 2 * density;
       const stride = size + gutter * 2;
-      const defaultRgba = renderMaterialFrame({
-        size,
-        scenePitchDegrees: LIT_DEFAULT_VIEW.initialScenePitchDegrees,
-        role,
-        atmosphereModel,
-        ...(role === "lighting" ? { phaseFrame: defaultFrame } : {}),
-      });
-      await sharp(defaultRgba, {
-        raw: { width: size, height: size, channels: 4 },
-      }).webp({ lossless: true }).toFile(output(
-        `${config.namespace}-${role}-default${suffix}.webp`,
-      ));
-      if (role === "lighting") {
+      if (mine()) {
+        const defaultRgba = renderMaterialFrame({
+          size,
+          scenePitchDegrees: LIT_DEFAULT_VIEW.initialScenePitchDegrees,
+          role,
+          atmosphereModel,
+          ...(role === "lighting" ? { phaseFrame: defaultFrame } : {}),
+        });
+        await sharp(defaultRgba, {
+          raw: { width: size, height: size, channels: 4 },
+        }).webp({ lossless: true }).toFile(output(
+          `${config.namespace}-${role}-default${suffix}.webp`,
+        ));
+      }
+      if (role === "lighting" && mine()) {
         await prepareShadowlessMaterial(size, suffix);
       }
       for (let shardIndex = 0; shardIndex < shardCount; shardIndex += 1) {
+        if (!mine()) continue;
         const shardWidth = stride * columns;
         const shardHeight = stride * rows;
         const shard = Buffer.alloc(shardWidth * shardHeight * 4);
@@ -376,6 +383,14 @@ async function prepareMaterialBanks() {
         // alpha and stay lossless.
         if (role === "atmosphere") await writeLossyWebp(rowImage, rowPath, { alphaQuality: 100, effort: 6 });
         else await rowImage.webp({ lossless: true }).toFile(rowPath);
+      }
+      if (role === "atmosphere" && mine()) {
+        // The flood frame on its own, with its gutter, for the shadows-off view (scene.mts): same lane as its row.
+        const tile = Buffer.alloc(stride * stride * 4);
+        blitRgba(renderMaterialFrame({ size, scenePitchDegrees: 0, phaseFrame: frameCount - 1, role, atmosphereModel }),
+          size, size, tile, stride, stride, { left: gutter, top: gutter });
+        await writeLossyWebp(sharp(tile, { raw: { width: stride, height: stride, channels: 4 } }),
+          output(`${config.namespace}-${role}-flood${suffix}.webp`), { alphaQuality: 100, effort: 6 });
       }
     }
   }

@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2511-20091",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kral et al. (2026): Exomoon search with VLTI/GRAVITY around the substellar companion HD 206893 B",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2511.20091"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202557127"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2511.20091",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202557127",
+      "label": "Astronomy & Astrophysics 705, A217"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2511.20091",
+      "checkedOn": "2026-09-23",
+      "locator": "Table 2: joint orbitize! fit of HD 206893 B and c (a_B 10.75 au, a_c 3.74 au, M_B 19.5 and M_c 11.1 Jupiter masses, M* 1.31 solar masses); the Exo-REM fit of B, 1162 K and 1.79 Jupiter radii; the stellar BT-NextGen fit, 6554 K; the fit whose posterior whereistheplanet distributes as post_hd206893.hdf5"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 705, A217",
+  "creators": [
+    "Q. Kral",
+    "J. Wang",
+    "J. Kammerer",
+    "S. Lacour",
+    "M. Malin",
+    "T. Winterhalder"
+  ]
+}

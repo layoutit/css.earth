@@ -1,0 +1,31 @@
+{
+ "id": "hd-206893",
+ "classification": "star",
+ "order": 1760,
+ "physical": {
+  "name": "HD 206893",
+  "horizonsCode": null,
+  "meanRadiusKm": 954986.56,
+  "gravitationalParameterKm3PerS2": 173853296454.94,
+  "parent": null,
+  "effectiveTemperatureK": 6554
+ },
+ "physicalNotes": "Temperature 6554 +29/-27 K from the BT-NextGen fit to the star's spectral energy distribution by Kral et al. (2026, A&A 705, A217; arXiv:2511.20091) and mass 1.31 +0.03/-0.02 solar masses from their joint orbit fit (Table 2). No paper used here gives a radius, so it is Gaia DR3's FLAME value, 1.3727 solar radii (Creevey et al. 2023), a catalogue model value from Gaia's photometry and parallax, not a measured disc: 954,963 km at 695,700 km per solar radius. GM from 1.31 solar masses times the JPL solar GM. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
+ "star": {
+  "rightAscensionDegrees": 326.3417007918157,
+  "declinationDegrees": -12.783352283336647,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 40.770507,
+  "properMotionRaMasPerYear": 94.11170797027064,
+  "properMotionDecMasPerYear": -0.4633855782241898,
+  "radialVelocityKmPerS": -11.798612,
+  "sources": {
+   "position": "Gaia DR3 source 6843672087120107264 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0.",
+   "distance": "Gaia DR3 source 6843672087120107264: parallax 24.5275 +/- 0.0354 mas (RUWE 1.12), inverted to 40.7705 pc with no zero-point correction.",
+   "properMotion": "Gaia DR3 source 6843672087120107264: pmRA* 94.1117 mas/yr, pmDec -0.4634 mas/yr.",
+   "radialVelocity": "Gaia DR3 source 6843672087120107264: -11.80 +/- 0.14 km/s."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 107412
+ }
+}

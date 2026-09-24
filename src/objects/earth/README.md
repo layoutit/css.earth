@@ -127,7 +127,9 @@ water colour. It is not a measurement of sea surface reflectance and it is not a
 depth scale; for depth numbers use the elevation view.
 
 The prepared page layout remains fixed: seven 4,096-pixel-wide pages per view, their existing
-512/1,024/2,048-pixel texture levels, and one 2,048 × 512 pole atlas. The existing 4,096-pixel
+512/1,024/2,048-pixel texture levels, and one 2,048 × 512 pole atlas per view. The pole atlas has
+the same levels, reduced by the same ratio (256, 512 and 1,024 pixels wide), so the first view
+loads its poles at the pages' level: 2.7 KB instead of 85 KB for Visible color. The existing 4,096-pixel
 page size, density-8 atlas, four-pixel gutter and 450 retained surface leaves are unchanged.
 No source projection, Earth geometry, lighting, atmosphere, scientific palette or runtime
 selection rule changed. The same adjusted base still feeds the clear surface, cloud composite,
@@ -152,6 +154,11 @@ shading alpha. This display adjustment brightens the edge without modifying the
 source imagery. The directional Shadows bank is unchanged. The atmosphere shows its
 full-phase frame, the evenly lit limb, instead of following the Sun, so turning the globe
 keeps one prepared atmosphere image loaded instead of decoding a new one for each phase.
+That frame is its own image (`earth-atmosphere-flood@2x.webp`, 1,016 pixels with its gutter)
+instead of a quarter of the last four-frame row, so the first view downloads 37 KB of
+atmosphere instead of 158 KB, and does not fetch the two neighbouring rows. It goes through the
+lossy lane with exact alpha, like the rows. Before the bake, a patched build that showed this frame
+from its own image matched the unchanged build pixel for pixel, once settled, at 412 × 823 (DPR 2) and 1,280 × 800.
 Other bodies retain their existing lighting.
 
 The [cloud-free comparison](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md) considered

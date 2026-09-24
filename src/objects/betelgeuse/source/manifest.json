@@ -5,6 +5,7 @@
       "id": "betelgeuse-matisse-2020-02-continuum",
       "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "sourceProcessing": [{ "name": "SQUEEZE", "version": "3.0 (4d34e877)", "evidence": "https://github.com/layoutit/css.earth/blob/bea2c50554ee9ceffb182507e605ffd6b7b76602/src/objects/betelgeuse/source/reference/squeeze-command.txt" }],
       "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
       "capture": {
         "attributions": [
@@ -6496,6 +6497,7 @@
       "id": "betelgeuse-matisse-2018-12-continuum",
       "path": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "sourceProcessing": [{ "name": "SQUEEZE", "version": "3.0 (4d34e877)", "evidence": "https://github.com/layoutit/css.earth/blob/bea2c50554ee9ceffb182507e605ffd6b7b76602/src/objects/betelgeuse/README.md" }],
       "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
       "capture": {
         "attributions": [
@@ -6533,6 +6535,7 @@
       "id": "betelgeuse-matisse-2020-12-continuum",
       "path": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "sourceProcessing": [{ "name": "SQUEEZE", "version": "3.0 (4d34e877)", "evidence": "https://github.com/layoutit/css.earth/blob/bea2c50554ee9ceffb182507e605ffd6b7b76602/src/objects/betelgeuse/README.md" }],
       "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
       "capture": {
         "attributions": [

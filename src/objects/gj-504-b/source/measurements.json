@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "gj-504-b",
+  "radiusKm": 65772.6,
+  "radiusSource": "Radius 0.92 +/- 0.02 Jupiter radii and temperature 564 +/- 4 K from the retrieval on the JWST/NIRSpec spectrum by Baburaj et al. (2026, AJ 172, 28; arXiv:2606.19228), section 5.5: 65,772.6 km at 71,492 km per Jupiter radius. A model radius: the companion is unresolved. GM from their retrieved mass 25.2 +8.4/-6.0 Jupiter masses times Jupiter's GM; its mass has been debated from 1 to 30 Jupiter masses with the system's age (Bonnefoy et al. 2018). A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 134984,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 54.711 au and total mass 1.1991 solar masses, 369.6 years of 365.25 d. Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! MCMC fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_gj504b.hdf5). Picked with tools/objects/hosted-orbits/posterior-pick.py (src/objects/gj-504-b/source/orbits/pick.json): highest stored likelihood (ln L -25.49).",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of GJ 504 b is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 564,
+  "effectiveTemperatureSource": "564 +/- 4 K, Baburaj et al. (2026), section 5.5, https://arxiv.org/abs/2606.19228",
+  "semiMajorAxisSource": "Bonnefoy et al. (2018): a projected separation of 43.5 au; the semi-major axis is above 27.8 au (Abstract). The recorded orbit's semi-major axis is 54.7 au (packages/astronomy/data/bodies/gj-504-b.json).",
+  "massSource": "25.2 +8.4/-6.0 Jupiter masses from the retrieved gravity and radius, Baburaj et al. (2026, arXiv:2606.19228), Abstract."
+}

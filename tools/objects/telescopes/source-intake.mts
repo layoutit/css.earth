@@ -9,7 +9,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../sources/source-values.mts';
 import { readFitsHeader } from '../../fits/fits.mts';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
-import { inside, sourceCacheAddress, type SourceFile, type SourceProduct } from './source-products.mts';
+import { inside, parseSourceProcessing, sourceCacheAddress, type SourceFile, type SourceProduct } from './source-products.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }
 const LIMIT = 128 * 1024;
 /** Public search can restrict intake to local bytes or an existing header cache. */
@@ -36,7 +36,7 @@ export async function intakeSources(root:string,target:string,existing:readonly 
  if(!manifest)return [];
  const entries=[...requireArray(manifest.inputs),...requireArray(manifest.documents??[]),...requireArray(manifest.generatedIntermediates??[])];
  // Science products are downloads with an archive origin; files authored here are not products.
- const files=entries.filter(raw=>typeof requireRecord(raw).origin==='string'&&/^https?:\/\//u.test(String(requireRecord(raw).origin))).map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${sha256(path).slice(0,16)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:requireString(p.origin)};});
+ const files=entries.filter(raw=>typeof requireRecord(raw).origin==='string'&&/^https?:\/\//u.test(String(requireRecord(raw).origin))).map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${sha256(path).slice(0,16)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:requireString(p.origin),...(p.sourceProcessing===undefined?{}:{sourceProcessing:parseSourceProcessing(p.sourceProcessing)})};});
  const products:SourceProduct[]=[];const used=new Set(existing.flatMap(p=>p.files.map(f=>f.path)));
  for(const file of files.filter(f=>/\.(?:fits?|img|cub|qub|lbl|xml)$/iu.test(f.path)&&!used.has(f.path)).sort((a,b)=>(/\.xml$/iu.test(a.path)?0:/\.lbl$/iu.test(a.path)?1:2)-(/\.xml$/iu.test(b.path)?0:/\.lbl$/iu.test(b.path)?1:2))) {
   try {

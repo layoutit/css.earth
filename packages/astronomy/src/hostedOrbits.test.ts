@@ -24,9 +24,9 @@ describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
-    expect(EXOPLANET_IDS).toEqual(['ab-pic-b', 'af-lep-b', 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'dh-tau-b', 'eps-indi-ab', 'gq-lup-b', ...hd110067, 'hd-189733b', 'hd-209458b', 'hd-29391-b', 'hip-65426-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-452b', 'pds-70-b', 'pds-70-c', 'roxs-42b-b', ...trappist, 'vhs-1256-1257-b', 'wasp-121b', 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b', 'yses-1-b'])
+    expect(EXOPLANET_IDS).toEqual(['ab-pic-b', 'af-lep-b', 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'dh-tau-b', 'eps-indi-ab', 'gj-504-b', 'gq-lup-b', ...hd110067, 'hd-135344-ab', 'hd-189733b', 'hd-206893-b', 'hd-206893-c', 'hd-209458b', 'hd-29391-b', 'hd-95086-b', 'hip-65426-b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-452b', 'pds-70-b', 'pds-70-c', 'roxs-42b-b', ...trappist, 'vhs-1256-1257-b', 'wasp-121b', 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b', 'yses-1-b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'vhs-1256-1257-b', 'gq-lup-b', 'dh-tau-b', 'roxs-42b-b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c', 'wasp-121b', 'hip-65426-b', 'af-lep-b', 'ab-pic-b', 'yses-1-b', 'eps-indi-ab'])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', ...hd110067, 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'vhs-1256-1257-b', 'gq-lup-b', 'dh-tau-b', 'roxs-42b-b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c', 'wasp-121b', 'hip-65426-b', 'af-lep-b', 'ab-pic-b', 'yses-1-b', 'hd-206893-b', 'hd-206893-c', 'hd-95086-b', 'gj-504-b', 'hd-135344-ab', 'eps-indi-ab'])
     for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
     expect(BODIES['wd-1856-534b' as keyof typeof BODIES].parent).toBe('wd-1856-534')
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
@@ -425,6 +425,39 @@ describe('hosted orbits', () => {
       worst = Math.max(worst, Math.abs(model.separation - separation) / sigmaSeparation, Math.abs(angleMiss(model.angle, angle)) / sigmaAngle)
     }
     // Measured 2026-09-23: 2.2 of its own sigmas at worst, with Ba at Epsilon Indi A's distance rather than the fit's parallax.
+    expect(worst).toBeLessThan(2.5)
+  })
+  it('places HD 206893 B and c, HD 95086 b, GJ 504 b and HD 135344 Ab where their papers measured them', () => {
+    /** Offset of a companion from its star at an MJD, east and north in mas, at the star's Gaia distance. */
+    const skyMas = (id: 'hd-206893-b' | 'hd-206893-c' | 'hd-95086-b' | 'gj-504-b' | 'hd-135344-ab', mjd: number) => {
+      const parent = BODIES[id].parent as Parameters<typeof starAstrometry>[0], star = starAstrometry(parent)
+      const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees), distanceKm = star.distanceParsecs * PARSEC_KM
+      const p = hostedOrbitStateRelativeBmjdTdb(hostedOrbit(id), star, BODIES[parent].meanRadiusKm, mjd).positionKm
+      return [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000) as [number, number]
+    }
+    const worstMiss = (id: Parameters<typeof skyMas>[0], points: readonly (readonly [number, number, number])[]) =>
+      Math.max(...points.map(([mjd, dra, ddec]) => { const [x, y] = skyMas(id, mjd); return Math.hypot(x - dra, y - ddec) }))
+    // VLTI/GRAVITY (MJD, dRA, dDec) in mas, errors 0.03 to 0.3 mas: HD 206893 B and c as stored with the posterior of Kral et al. (2026),
+    // HD 135344 Ab as stored with that of Stolker et al. (2025). B's orbit leaves out the star's motion under c's pull, about half a mas.
+    const measuredMiss = {
+      'hd-206893-b': worstMiss('hd-206893-b', [[58681.392, 130.749, 198.118], [59453.093, 20.058, 205.831], [60127.218, -79.297, 176.072], [60516.263, -132.403, 144.825], [60834.317, -170.498, 112.565]]),
+      'hd-206893-c': worstMiss('hd-206893-c', [[59454.125, -76.544, -82.656], [59485.11, -72.11, -85.323], [59504.061, -69.305, -86.726], [59721.403, -32.352, -93.497]]),
+      'hd-135344-ab': worstMiss('hd-135344-ab', [[59779.06, -138.21, 36.34], [60072.15, -130.41, 37.0], [60126.98, -129.07, 37.36], [60724.31, -112.81, 38.94]]),
+      // Desgrange et al. (2022), Table 3: the SPHERE positions of 2018 January 6 and 2019 April 13 (errors 2 and 3 mas), not in the fit.
+      'hd-95086-b': worstMiss('hd-95086-b', [[58124, 351, -514], [58586, 368, -508]]),
+    }
+    // Measured 2026-09-23: B 1.03, c 0.52, Ab 0.30 and HD 95086 b 5.1 mas at worst.
+    expect(measuredMiss['hd-206893-b']).toBeLessThan(1.1)
+    expect(measuredMiss['hd-206893-c']).toBeLessThan(0.55)
+    expect(measuredMiss['hd-135344-ab']).toBeLessThan(0.35)
+    expect(measuredMiss['hd-95086-b']).toBeLessThan(5.5)
+    // GJ 504 b: Bonnefoy et al. (2018), Table 2, the SPHERE positions (MJD, separation mas, sigma, position angle deg, sigma).
+    let worst = 0
+    for (const [mjd, separation, sigmaSeparation, angle, sigmaAngle] of [[57147, 2491, 3, 323.46, 0.07], [57176, 2496, 3, 323.50, 0.07], [57478, 2495, 2, 322.48, 0.05], [57794, 2493, 3, 321.74, 0.08]] as const) {
+      const [x, y] = skyMas('gj-504-b', mjd), modelAngle = ((Math.atan2(x, y) * 180 / Math.PI) + 360) % 360
+      worst = Math.max(worst, Math.abs(Math.hypot(x, y) - separation) / sigmaSeparation, Math.abs(angleMiss(modelAngle, angle)) / sigmaAngle)
+    }
+    // Measured 2026-09-23: 2.35 of its own sigmas at worst.
     expect(worst).toBeLessThan(2.5)
   })
   it('places YSES 1 b where GRAVITY measured it, moving toward us as CRIRES+ measured', () => {
