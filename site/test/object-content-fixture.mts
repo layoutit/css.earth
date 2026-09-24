@@ -1,9 +1,6 @@
-import type { ObjectContentSource, TitleSource } from '../../tools/objects/content/types.ts';
+import type { ObjectContentSource } from '../../tools/objects/content/types.ts';
 import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '../../tools/objects/material-composition/data-schema.mts';
 
-const title = object({ label: string, viewBox: string, path: string, source: string, sourceUrl: string,
-  xOrigin: string, sourceGenerator: string, width: number, height: number,
-  weight: number, opticalSize: number, fontSize: number, letterSpacing: number, baseline: number });
 const source = object({ id: string, path: optional(string), url: optional(string) });
 const fact = object({ id: string, label: string, value: string, source: optional(object({
   catalogueId: string, url: string, label: string, checked: string, path: optional(string), locator: optional(string),
@@ -23,7 +20,7 @@ const legend = object({
 });
 // Reader text lives in the package's text.json, so the content recipe carries facts, dataset recipes and legends only.
 const content = object({
-  schema: literal('cssearth-object-content@1'), version: literal(1), id: string, displayName: string, title,
+  schema: literal('cssearth-object-content@1'), version: literal(1), id: string, displayName: string,
   panel: object({facts: array(fact), moreFacts: optional(array(fact)), schema: optional(string), objectId: optional(string), sources: optional(json)}),
   lenses: object({titleKey: literal('lenses'), defaultLens: string, labels: optional(dictionary(string)),
     controls: array(object({id: string, label: string, thumbnail: string, shortLabel: optional(string), filter: optional(string),
@@ -50,7 +47,4 @@ const content = object({
 // preparation and tampering tests must observe the actual fixture bytes.
 export function parseObjectContentFixture(value: unknown): ObjectContentSource {
   return parse(value, content, 'object content fixture');
-}
-export function parseTitleFixture(value: unknown): TitleSource {
-  return parse(value, title, 'object title fixture');
 }

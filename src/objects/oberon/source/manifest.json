@@ -62,31 +62,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Prepared title outlines under the font license.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "usgs-gazetteer-oberon-nomenclature-center-pts",
       "path": "features/OBERON_nomenclature_center_pts.zip",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/OBERON_nomenclature_center_pts.zip",
@@ -154,31 +129,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored map frame."
-      }
-    },
-    {
-      "id": "oberon-title-mark",
-      "path": "presentation/title-mark.json",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "deterministically generated Oberon title path from the repository-pinned Inter font",
-      "redistribution": "generated outline under the Inter license",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
       }
     },
     {

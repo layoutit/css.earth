@@ -83,7 +83,7 @@ Reference radius is the geometric mean of the catalogue's fitted ellipsoid semi-
 
 The [Stardust mission archive](https://pdssbn.astro.umd.edu/data_sb/missions/stardust/index.shtml) provides raw and calibrated NAVCAM v3.0 imagery, dust measurements, SPICE and the v2.1 shape model. The photographic lens combines four frames on accepted observed terrain; it is neither global coverage nor an albedo map. The full Cartesian and planetocentric tables are equivalent source products, not separate views. The observed-only Cartesian table remains pinned for direct source-comparison tests.
 
-The original tables and Inter font are restorable from exact URL/hash pins. Context imagery is reproducibly prepared from the same completed, reduced mesh. Source labels and catalogue retain their original bytes.
+The original tables are restorable from exact URL/hash pins. Context imagery is reproducibly prepared from the same completed, reduced mesh. Source labels and catalogue retain their original bytes.
 
 </details>
 

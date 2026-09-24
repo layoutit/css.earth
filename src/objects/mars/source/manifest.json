@@ -21,28 +21,6 @@
       }
     },
     {
-      "id": "inter-mars-title-vector",
-      "path": "presentation/title-mark.json",
-      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Mars outline",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
-      "redistribution": "project-authored SVG outline with Inter attribution",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "artwork",
-            "evidence": "Title outlines extracted from Inter Variable 4.001 at revision 9221beed3."
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-hubble-mars-navigation-marker",
       "path": "presentation/navigation-marker.jpg",
       "origin": "https://science.nasa.gov/wp-content/uploads/2023/04/hs-2016-15-a-full_tif-jpg.webp",

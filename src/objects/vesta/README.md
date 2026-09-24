@@ -160,8 +160,7 @@ DLR's mapping rotation uses pole RA 309.03312°, declination 42.22623°,
 W = 74.66250° + 1617.3331237° × days since J2000. These coefficients belong to
 the body package and are evaluated only during shared preparation.
 
-The pinned Inter title font keeps its original source credits. Required binaries are
-restored through `source/preparation/acquisition.json`.
+Required binaries are restored through `source/preparation/acquisition.json`.
 
 ## Prepared presentation
 

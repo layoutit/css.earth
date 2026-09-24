@@ -8,6 +8,5 @@ under the repository MIT license. No paper graphics are redistributed.
 
 Rotation: NASA/JPL NAIF PCK00011, BODY707. Observational research: NASA/JPL,
 Voyager 2 ISS, NASA Planetary Data System. No image is used as an observed
-surface texture. Discovery and naming: NASA Science. Inter: Rasmus
-Andersson, SIL Open Font License 1.1. Attribution and source pins accompany
+surface texture. Discovery and naming: NASA Science. Attribution and source pins accompany
 the manifest.

@@ -41,6 +41,6 @@ The reported rotation period is a separate observation, not a real-time attitude
 
 Orbital positions use a Horizons-fitted precessing ellipse plus bounded periodic ICRF corrections: five-day samples and ten fitted residual harmonics per axis. No precision tracking, endpoint velocity accuracy or extrapolation is claimed. At the prepared scene epoch the position residual is 4462.67 km and velocity residual 319.26 km/day.
 
-The radius table, neutral no-data material and reviewed context image are checked in. The Inter font is restored by its pinned acquisition plan. Shape assumptions and context-camera parameters live beside those inputs.
+The radius table, neutral no-data material and reviewed context image are checked in. Shape assumptions and context-camera parameters live beside those inputs.
 
 </details>

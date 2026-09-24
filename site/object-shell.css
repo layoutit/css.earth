@@ -527,13 +527,6 @@ details:not([open]) > .object-panel-summary .object-panel-icon {
 
 .object-title-row > .object-title { flex: 0 0 auto; }
 
-.object-title-svg {
-  display: inline-block;
-  vertical-align: calc(-1 * var(--object-title-descent, 0px));
-  overflow: visible;
-  fill: currentColor;
-}
-
 .object-breadcrumbs {
   position: relative;
   margin: 0 0 4px;
@@ -1478,9 +1471,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
     display: contents;
   }
 
-  .object-title,
-  .object-title-svg {
-    width: 74.25px;
+  .object-title {
     height: 31.41px;
   }
 
@@ -1608,8 +1599,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
     box-shadow: none;
   }
 
-  .object-title,
-  .object-title-svg {
+  .object-title {
     width: auto;
     height: 30.13px;
   }

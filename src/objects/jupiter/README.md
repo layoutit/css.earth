@@ -254,9 +254,7 @@ as static SVG assets before runtime.
 ## Presentation sources
 
 The navigation marker is the credited NASA/ESA/STScI/Amy Simon Hubble view from
-5 January 2024. The Jupiter title is an exact outline extracted from the pinned
-Inter Variable 4.001 font at weight 500 and optical size 28. Both sources and
-their preparation recipes are adapter-owned.
+5 January 2024. Its source and preparation recipe are adapter-owned.
 
 ## Authoritative pages
 

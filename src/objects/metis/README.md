@@ -65,7 +65,7 @@ Surface, pole atlas, minimap and navigation portrait use the same interpreted ma
 
 ## Source restoration
 
-The small measured ellipsoid, geometry records and prepared context portrait are checked in. Font: Inter.
+The small measured ellipsoid, geometry records and prepared context portrait are checked in.
 
 Useful source review: Denk et al., *Io and the Minor Jovian Moons – Prospects for JUICE*, Figure 10 and Table 3. Its image identifications guided the survey; no extracted paper artwork is used as a texture.
 

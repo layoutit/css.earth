@@ -73,13 +73,6 @@
       }
     },
     {
-      "kind": "verify-download",
-      "groups": [
-        "refresh"
-      ],
-      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
-    },
-    {
       "kind": "download",
       "groups": [
         "refresh-topography-legend"

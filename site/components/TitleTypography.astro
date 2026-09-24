@@ -1,26 +1,35 @@
 ---
-import fontUrl from '../source/titles/InterVariable.ttf?url';
+import fontUrl from '../source/titles/title-font.woff2?url';
+import { resolve } from 'node:path';
+import * as fontkit from 'fontkit';
 import { OBJECT_TITLE_RECIPE as recipe } from '../../src/platform/object-title-recipe.mts';
 
-// Text titles use the same pinned font, optical size and scale as the prepared
-// title artwork. Existing SVG headings retain their exact desktop appearance.
+// Every object title is text in one prepared instance of the checked font, at the scale Saturn's title set. The line
+// box centres the font's ascent and descent; the offset puts the baseline where the recipe's title artwork had it.
 const scale = recipe.referenceRenderedWidth / recipe.referenceViewBoxWidth;
+const font = fontkit.openSync(resolve(process.cwd(), recipe.checkedFontPath));
+if (!('unitsPerEm' in font)) throw new TypeError(`${recipe.checkedFontPath} must hold one font face.`);
+const fontSize = recipe.fontSize * scale, lineHeight = recipe.viewBoxHeight * scale;
+const ascent = font.ascent / font.unitsPerEm * fontSize, descent = -font.descent / font.unitsPerEm * fontSize;
+const baselineOffset = recipe.baseline * scale - ((lineHeight - ascent - descent) / 2 + ascent);
 const styles = `
 @font-face {
   font-family: "cssEarth title";
-  src: url(${JSON.stringify(fontUrl)}) format("truetype");
+  src: url(${JSON.stringify(fontUrl)}) format("woff2");
   font-style: normal;
   font-weight: ${recipe.weight};
   font-display: swap;
 }
 .object-title-text {
   font-family: "cssEarth title", var(--shell-ui-font);
-  font-size: ${recipe.fontSize * scale}px;
+  position: relative;
+  top: ${baselineOffset.toFixed(3)}px;
+  font-size: ${fontSize}px;
   font-weight: ${recipe.weight};
   font-optical-sizing: none;
-  font-variation-settings: "wght" ${recipe.weight}, "opsz" ${recipe.opticalSize};
   letter-spacing: ${recipe.letterSpacing * scale}px;
-  line-height: ${recipe.viewBoxHeight * scale}px;
+  line-height: ${lineHeight}px;
 }`;
 ---
+<link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin="anonymous" />
 <style is:inline data-title-typography set:html={styles} />

@@ -70,31 +70,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "Pinned shared shell title font.",
-      "redistribution": "Prepared title outlines under the font license.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "callisto-surface-minimap-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
@@ -361,31 +336,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation parameters."
-      }
-    },
-    {
-      "id": "callisto-title-mark",
-      "path": "presentation/title-mark.json",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "deterministically generated Callisto title path from the repository-pinned Inter font",
-      "redistribution": "generated outline under the Inter license",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
       }
     },
     {

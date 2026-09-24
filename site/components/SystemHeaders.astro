@@ -2,7 +2,6 @@
 import ObjectCardHeader from './ObjectCardHeader.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import { SCENE_OBJECTS } from '../objects.mts';
-import { SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
 
 // One header per planetary system; CSS shows only the current one. A page renders the Solar System's and its own
@@ -12,7 +11,7 @@ const { only } = Astro.props;
 const systems = allPlanetarySystems(SCENE_OBJECTS).filter(system => !only || only.includes(system.id))
   .map(system => ({ system, star: SCENE_OBJECTS.find(object => object.id === system.id)! }));
 ---
-{systems.map(({ system, star }) => <ObjectCardHeader heading={false} title={SYSTEM_TITLES[system.id]!}
+{systems.map(({ system, star }) => <ObjectCardHeader heading={false} title={{ label: system.name }}
   data-system-header={system.id} data-system-current={system.id === SOLAR_SYSTEM_ID ? '' : undefined}
   introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
   <ObjectBreadcrumbs scope="system" systemId={system.id} />

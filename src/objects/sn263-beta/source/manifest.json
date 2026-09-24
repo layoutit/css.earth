@@ -2,31 +2,6 @@
   "schema": "cssearth-authoritative-sources@2",
   "inputs": [
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors / Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "presentation/LICENSE.INTER-OFL"
-      ],
-      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
-      "redistribution": "Permitted with the accompanying SIL Open Font License.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "radar-shape",
       "path": "shape/a153591beta.tab",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
@@ -126,12 +101,6 @@
     },
     {
       "path": "preparation/terrestrial.json"
-    },
-    {
-      "path": "presentation/LICENSE.INTER-OFL"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/a153591beta.xml"

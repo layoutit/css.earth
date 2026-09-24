@@ -353,31 +353,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Prepared title outlines under the font license.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "usgs-gazetteer-amalthea-nomenclature-center-pts",
       "path": "features/AMALTHEA_nomenclature_center_pts.zip",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/AMALTHEA_nomenclature_center_pts.zip",
@@ -511,9 +486,6 @@
     },
     {
       "path": "presentation/minimap.json"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "shape/bundle_description.txt"

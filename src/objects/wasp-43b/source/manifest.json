@@ -155,31 +155,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors / Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "presentation/LICENSE.INTER-OFL"
-      ],
-      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
-      "redistribution": "Permitted with the accompanying SIL Open Font License.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-wasp-43b-inter-title-font",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
@@ -302,12 +277,6 @@
     },
     {
       "path": "preparation/rotation.json"
-    },
-    {
-      "path": "presentation/LICENSE.INTER-OFL"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/lens-comparison.png",

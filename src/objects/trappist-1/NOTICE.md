@@ -14,5 +14,3 @@ Colour matching: CIE 1931 2-degree observer, International Commission on Illumin
 
 Modeled I+z limb darkening: Gillon et al. (2016), Nature 533, 221, Extended Data Table 2. The coefficients came from theoretical
 stellar-atmosphere tables and were used as transit priors; no resolved photospheric image is reproduced.
-
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.

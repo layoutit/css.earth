@@ -10,7 +10,7 @@ Planetary measurements, satellite elements, and discovery data are credited
 to NASA/JPL Solar System Dynamics. Ring
 measurements are credited to the NASA Planetary Data System Rings Node.
 Atmosphere charts use a checked NASA GSFC Planetary Spectrum Generator model
-response. The title outline uses Inter under the SIL Open Font License 1.1.
+response.
 
 NASA and JPL imagery is redistributed with source credit under their public
 media-use policies. No endorsement is implied.

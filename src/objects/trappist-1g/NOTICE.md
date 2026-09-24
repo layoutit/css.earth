@@ -6,6 +6,4 @@ Stellar mass from Mann et al. (2019), as that paper adopts.
 
 Placement: the host star's Gaia DR3 astrometry, with this planet's transit-fitted orbit around it.
 
-Title: Inter (Rasmus Andersson and the Inter Project Authors), SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.
-
 The sphere's neutral gray is a display convention of this project, not a measurement.

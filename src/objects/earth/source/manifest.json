@@ -400,31 +400,6 @@
       }
     },
     {
-      "id": "inter-earth-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
-      ],
-      "acquisition": "checked Inter Variable font at pinned commit",
-      "redistribution": "permitted under SIL OFL 1.1",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "noaa-coraltemp-anomaly",
       "path": "science/coraltemp-latest.nc",
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",
@@ -1364,10 +1339,6 @@
       }
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Exact Inter pinned-commit SIL OFL 1.1 redistribution license"
-    },
-    {
       "path": "preparation/paged-ellipsoid.json"
     },
     {
@@ -1382,9 +1353,6 @@
     },
     {
       "path": "content/charts.json"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "editorial/earth.json"

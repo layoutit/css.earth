@@ -9,6 +9,4 @@
   grant or imply a resolved photographic surface.
 - NASA/NAIF text kernels retain their original notices and provenance. Kernel
   URLs are declared in the acquisition plan. NASA credit is not endorsement.
-- Inter font: Rasmus Andersson, SIL Open Font License 1.1,
-  https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt.
 - cssEarth grid, preparation data and presentation code: repository MIT license.

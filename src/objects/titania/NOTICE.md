@@ -11,7 +11,7 @@ The LPI release is public scientific data; it does not state an explicit license
 This package retains author and mission attribution and does not assert a new
 license for the source data. No endorsement is implied.
 
-Title font: Inter by Rasmus Andersson, SIL Open Font License 1.1. Runtime images
+Runtime images
 are prepared visualizations; raw cubes are source inputs and are not part of the
 browser payload.
 

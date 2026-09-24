@@ -18,31 +18,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors / Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "presentation/LICENSE.INTER-OFL"
-      ],
-      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
-      "redistribution": "Permitted with the accompanying SIL Open Font License.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "material",
-            "evidence": "Provider product and attribution on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "hd-110067b-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
@@ -173,20 +148,6 @@
     },
     {
       "path": "preparation/rotation.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored presentation, acquisition or display convention; source attribution retained in the record."
-      }
-    },
-    {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored presentation, acquisition or display convention; source attribution retained in the record."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored presentation, acquisition or display convention; source attribution retained in the record."

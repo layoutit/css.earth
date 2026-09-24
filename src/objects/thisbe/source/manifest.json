@@ -35,31 +35,6 @@
       }
     },
     {
-      "id": "inter-title-font",
-      "path": "presentation/InterVariable.ttf",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "Inter Project Authors / Rasmus Andersson",
-      "license": "SIL Open Font License 1.1",
-      "licenseEvidence": [
-        "presentation/LICENSE.INTER-OFL"
-      ],
-      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
-      "redistribution": "Permitted with the accompanying SIL Open Font License.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "thisbe-sphere-20180708064758",
       "path": "observations/d88Thisbe_2018-07-08T06_47_58.311_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/88Thisbe/Deconv/d88Thisbe_2018-07-08T06_47_58.311_zpl_science_imaging_cam1.fits",
@@ -1322,12 +1297,6 @@
     },
     {
       "path": "preparation/terrestrial.json"
-    },
-    {
-      "path": "presentation/LICENSE.INTER-OFL"
-    },
-    {
-      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/damit-model.json",

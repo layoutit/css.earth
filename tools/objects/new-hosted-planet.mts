@@ -14,7 +14,7 @@
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node tools/prepare/prepare-object.mts <id> */
-import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
@@ -28,7 +28,6 @@ const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
 const GEOMETRY_SCALE = 1.25;
 /** The shared neutral gray of an unresolved surface, as the shape-only bodies use. */
 const NEUTRAL_GRAY = '#9a9a9a';
-const INTER_URL = 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf';
 
 /** Static presentation for the scaffold's single neutral-shape lens and 460px lighting frames. */
 export function hostedPlanetStylesheet(id: string): string {
@@ -124,13 +123,13 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
 
   put(`${o}/object.json`, { schema: 'cssearth-object@1', id, type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name,
-      steps: ['verify-sources', 'title', 'assets', 'panel-content', 'lenses', 'starfield', ...(glow ? [] : ['sky-sun']), 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
+      steps: ['verify-sources', 'assets', 'panel-content', 'lenses', 'starfield', ...(glow ? [] : ['sky-sun']), 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
     recipe: { schema: 'cssearth-authored-object@1',
       surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', lenses: [{ id: 'shape', source: 'content', material }] }],
       shape: { kind: 'sphere', radiusKm }, materials: [{ id: material, source: 'raster', model: glow ? 'emissive' : 'lit' }],
       sources: ['raster', 'geometry', 'celestial', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
-        { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
+        { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       ...(glow ? { emission: { source: 'raster', material: 'emission' } } : {}) },
     page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification, color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
@@ -195,7 +194,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     coordinateSystem: 'ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.',
     qualification: `Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of ${name} is measured.` });
   put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1',
-    operations: [{ kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: INTER_URL }] });
+    operations: [] });
   put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name,
     bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm, defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
   put(`${o}/source/measurements.json`, { schema: 'cssearth-hosted-planet@1', id, radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
@@ -215,7 +214,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     // A lit body's prepared variants bind the shared shadows toggle; a self-luminous one has no shadows.
     settings: { titleKey: 'settings', controls: glow ? [] : [{ kind: 'toggle', name: 'shadows', label: 'Shadows', checked: false }] }, charts: [],
     resources: [{ label: 'Research', role: 'facts', description: spec.paperCredit, href: spec.paper }],
-    provenance: { title: { path: '../presentation/title-mark.json' }, editorial: { url: spec.paper, credit: spec.paperCredit },
+    provenance: { editorial: { url: spec.paper, credit: spec.paperCredit },
       physical: { path: `../../../../../packages/astronomy/data/bodies/${id}.json`, credit: `Published radius, mass and transit-fitted orbit; ${TODO}` } } });
   put(`${o}/text.json`, { schema: 'cssearth-object-text@1', objectId: id,
     card: { text: `${TODO}: one sentence, 110 characters at most.`, sources: [{ catalogueId: `${TODO}-card-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
@@ -223,7 +222,6 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     datasets: { shape: { title: 'Shape only', detail: 'Published radius', summary: `${TODO}: what the sphere is and is not, 125 characters at most.` } } });
   put(`${o}/.gitignore`, '# No observation files: the sphere is the shared neutral gray.\n');
   const local = (reason: string) => ({ kind: 'local', reason });
-  const catalogued = (entryId: string, index: number) => ({ kind: 'catalogued', references: [{ catalogueId: `source-${id}-${entryId}`, role: 'material', evidence: 'Origin and product identifier recorded on this manifest entry.' }] });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, origin,
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',
@@ -233,9 +231,6 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources',
       redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'],
       sourceBinding: local('Measurements transcribed in this package with their sources; repinned when edited.') },
-    { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', origin: INTER_URL, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1', licenseEvidence: ['presentation/LICENSE.INTER-OFL'],
-      acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.', redistribution: 'Permitted with the accompanying SIL Open Font License.',
-      consumers: ['title'], sourceBinding: catalogued('inter-title-font', 1) },
     preparation('preparation-raster', 'preparation/raster.json', glow ? 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, self-luminous with transparent plates' : 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star', ['assets', 'lenses']),
     preparation('preparation-geometry', 'preparation/geometry.json', `Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, ${glow ? 'emissive' : 'lit'} material`, ['scene', 'presentation']),
     preparation('preparation-celestial', 'preparation/celestial.json', glow ? 'Repository-authored celestial recipe: astrometric sky registration for the hosted planet, no directional light' : 'Repository-authored celestial recipe: astrometric sky registration and the host star as the light', glow ? ['starfield'] : ['starfield', 'sky-sun']),
@@ -245,7 +240,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       credit: 'Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts', license: 'Project-authored display derivative.', consumers: ['navigation'],
       recipe: { generator: 'tools/objects/new-hosted-planet.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-hosted-planet.mts',
       sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
-    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json', 'presentation/LICENSE.INTER-OFL', 'presentation/title-mark.json'].map(path => ({ path,
+    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json'].map(path => ({ path,
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
   put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: what is measured, what is not, and where each number comes from.\n\n## Evidence\n\n${TODO}\n\n## Known problems\n\n${TODO}\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
   put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the sources this package redistributes and their terms.\n`);
@@ -261,9 +256,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const root = resolve(import.meta.dirname, '../..');
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   if (await exists(`src/objects/${id}`)) throw new Error(`src/objects/${id} already exists; the scaffold never overwrites a package.`);
-  // Everything the scaffold copies is checked before a file is written, so a missing input never leaves half a package.
-  const font = 'src/objects/themis/source/presentation/InterVariable.ttf', license = 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL';
-  for (const path of [font, license]) if (!await exists(path)) throw new Error(`${path} is missing; restore it (pnpm setup:assets) before scaffolding.`);
   const order = flag('order'), color = flag('color'), rotation = flag('rotation'), glowK = flag('self-luminous'), glowSource = flag('temperature-source');
   if ((glowK === undefined) !== (glowSource === undefined)) throw new TypeError('--self-luminous <K> and --temperature-source <citation> go together.');
   if (rotation !== undefined && rotation !== 'synchronous' && rotation !== 'unmeasured') throw new TypeError(`--rotation takes synchronous or unmeasured, not ${rotation}.`);
@@ -283,8 +275,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
   const { neutralDiscMarker } = await import('./new-star.mts');
   const presentation = resolve(root, 'src/objects', id, 'source/presentation');
-  await copyFile(resolve(root, license), resolve(presentation, 'LICENSE.INTER-OFL'));
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-  await copyFile(resolve(root, font), resolve(presentation, 'InterVariable.ttf'));
-  console.log(`${files.size + 3} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
+  console.log(`${files.size + 1} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
 }

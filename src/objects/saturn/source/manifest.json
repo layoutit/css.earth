@@ -346,22 +346,6 @@
       }
     },
     {
-      "id": "saturn-authored-presentation-title-mark",
-      "path": "presentation/title-mark.json",
-      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored title lettering from the font identified in this record."
-      }
-    },
-    {
       "id": "saturn-authored-editorial-object",
       "path": "editorial/object.json",
       "origin": "https://science.nasa.gov/saturn/facts/",

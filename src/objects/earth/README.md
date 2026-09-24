@@ -453,10 +453,4 @@ or request a Moon representation.
 
 It is not the displayed photograph, and the panorama is not tied to the Earth imagery’s epoch.
 
-#### Heading source
-
-The Earth heading outline is extracted at preparation time from Inter Variable 4.001, commit
-`9221beed3`, weight 500, optical size 28. The checked font and exact outline source are
-declared in the source manifest. Runtime does not load a planet-specific font.
-
 </details>

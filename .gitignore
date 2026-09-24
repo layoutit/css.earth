@@ -266,7 +266,6 @@ src/objects/*/source/**/*.bpc
 /src/objects/*/source/reference/AcuA_V1.txt.gz
 
 # Shared shell outputs, replayed by pnpm prepare:shell from pinned fonts and vectors.
-/site/prepared-overview-titles.mjs
 /site/prepared-shell-icons.mjs
 /site/prepared-shell-titles.mjs
 /site/source/branding/wordmark-rail-segments.mjs
@@ -326,3 +325,4 @@ src/spice/**/*.bc
 
 /site/prepared-world-presentation.json
 /site/source/titles/InterVariable.ttf
+/site/source/titles/title-font.woff2

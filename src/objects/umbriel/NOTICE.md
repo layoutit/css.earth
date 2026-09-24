@@ -4,7 +4,7 @@ Voyager 2 imagery: NASA/JPL. Controlled mosaic and processing: Paul Schenk, Luna
 
 The original source is retained unchanged inside gzip. Prepared imagery is a display visualization with documented contrast, interpolation and missing-coverage treatment, not a calibrated albedo product. Original source caveats apply.
 
-The Inter font retains its accompanying license and attribution. Solar geometry and rotation use the project’s vendored JPL/IAU records.
+Solar geometry and rotation use the project’s vendored JPL/IAU records.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
 

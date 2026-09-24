@@ -10,7 +10,6 @@
       "label": "Mercury",
       "steps": [
         "verify-sources",
-        "title",
         "panel-content",
         "assets",
         "starfield",
@@ -82,10 +81,6 @@
         {
           "id": "charts",
           "path": "source/content/charts.json"
-        },
-        {
-          "id": "title",
-          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "acquisition",

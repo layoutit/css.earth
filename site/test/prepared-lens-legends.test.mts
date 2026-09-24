@@ -1,5 +1,5 @@
 import {requireRecord, requireArray} from '../../tools/sources/source-values.mts';
-import {parseObjectContentFixture, parseTitleFixture} from './object-content-fixture.mts';
+import {parseObjectContentFixture} from './object-content-fixture.mts';
 import assert from "node:assert/strict";
 import { loadObjectContent } from "./load-object-content.mts";
 import { prepareObjectContent } from "#preparation/content/prepare";
@@ -74,13 +74,6 @@ test("every object forwards its object-owned legend through the shared shell", a
   await Promise.all(OBJECTS.map(async ({ id }) => {
     const loaded = await loadObjectContent(id);
     const source = await loaded.source("content");
-    const provenance = source.provenance === undefined ? undefined : requireRecord(source.provenance);
-    const titleReference = provenance?.title === undefined ? undefined : requireRecord(provenance.title);
-    if (typeof titleReference?.path === 'string' && titleReference.path.endsWith('.json')) {
-      const { schema, ...rawTitle } = await loaded.source('title');
-      const title = parseTitleFixture(rawTitle);
-      source.title = title;
-    }
     const controls = prepareObjectContent(parseObjectContentFixture(source));
     const legends = (lenses: unknown) => lenses == null ? [] : requireArray(requireRecord(lenses).controls).map(value => {
       const { id, legend } = requireRecord(value);

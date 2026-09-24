@@ -8,7 +8,6 @@
       "label": "Umbriel",
       "steps": [
         "verify-sources",
-        "title",
         "assets",
         "features",
         "panel-content",
@@ -48,10 +47,6 @@
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json"
-        },
-        {
-          "id": "title",
-          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",

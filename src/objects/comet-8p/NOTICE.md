@@ -1,1 +1,1 @@
-Tuttle's two inferred contact-body models use published scientific parameters. Credit Lamy et al., Groussin et al. (2019), and Harmon et al. (2010). The tessellation and neutral materials are cssEarth work under MIT. Source papers are cited, not relicensed. Title font: Rasmus Andersson, SIL OFL 1.1.
+Tuttle's two inferred contact-body models use published scientific parameters. Credit Lamy et al., Groussin et al. (2019), and Harmon et al. (2010). The tessellation and neutral materials are cssEarth work under MIT. Source papers are cited, not relicensed.

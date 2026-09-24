@@ -331,28 +331,6 @@
       }
     },
     {
-      "id": "inter-mercury-title-vector",
-      "path": "presentation/title-mark.json",
-      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
-      "credit": "The Inter Project Authors",
-      "license": "OFL-1.1",
-      "acquisition": "Generated JSON vector from the pinned Inter Variable font with declared variation axes and metrics.",
-      "redistribution": "Committed vector outlines under the Inter SIL Open Font License.",
-      "consumers": [
-        "title"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "inter-9221beed3",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "mercury-object-content",
       "path": "content/object.json",
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",

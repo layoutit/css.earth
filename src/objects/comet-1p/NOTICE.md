@@ -12,7 +12,6 @@ The gray surface grid and display orientation are cssEarth visualization choices
 under the repository MIT licence. The material is not measured albedo.
 
 Ephemeris: NASA/JPL Horizons; exact queries and raw responses accompany the source.
-Inter font: Rasmus Andersson, SIL Open Font License 1.1.
 
 Giotto photography: © Max Planck Institute for Solar System Research (MPS),
 1986, 1996; Giotto HMC team. The [MPS image page](https://www2.mps.mpg.de/de/projekte/giotto/hmc/)

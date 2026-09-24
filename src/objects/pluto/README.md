@@ -11,7 +11,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | Elevation | [USGS stereo DEM](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m): signed metres above a 1,188.3 km sphere; −32,768 means missing. Data run −4.10 to +6.49 km; false-color scale −8 to +8 km. |
 | Methane, nitrogen and water ice | [Drozdov & Emelyanov (2026), Zenodo 18825240](https://zenodo.org/records/18825240), CC BY 4.0. Modeled surface fractions from five New Horizons LEISA scans on 14 July 2015. All three use the same 0–100% scale; they are infrared spectral fits, not photographs. |
 | Opening view | The side New Horizons approached: its reverse inbound velocity in the IAU body frame at closest approach, 146.5°E, 43.2°N, computed from the [NAIF New Horizons SPICE archive](https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/) (`nh_recon_pluto_od122_v01`, `nh_plu047_od122`, `pck00011`) by [the approach recipe](source/preparation/approach.json) and checked against SpiceyPy ([`tools/spice/approach.test.mts`](../../../tools/spice/approach.test.mts)). |
-| Physical facts | Pinned [JPL](https://ssd.jpl.nasa.gov/planets/phys_par.html) and [NASA](https://science.nasa.gov/dwarf-planets/pluto/facts/) records; Inter title sources. |
+| Physical facts | Pinned [JPL](https://ssd.jpl.nasa.gov/planets/phys_par.html) and [NASA](https://science.nasa.gov/dwarf-planets/pluto/facts/) records. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/PLUTO/target) Pluto centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels depend on their size on screen, and a selected feature stays labelled. Available in all six views. |
 
 ## Evidence
@@ -199,8 +199,6 @@ Terrain shading is derived from that same signed DEM using latitude-corrected sp
   period 247.92065 years. The 39.482 AU solar semimajor axis is the Pluto row of JPL's approximate-positions Table 1 (J2000, a = 39.48211675 AU); JPL's current page has dropped Pluto, so it is checked against the [archived table](https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt).
   <https://ssd.jpl.nasa.gov/planets/phys_par.html>
   <https://science.nasa.gov/dwarf-planets/pluto/facts/>
-- **Title:** pinned Inter outlines (SIL OFL 1.1), prepared with the existing shared
-  title recipe.
 
 Neither mosaic nor DEM covers all of Pluto. Source resolution varies across the
 flyby mosaic. A neutral gray cartographic grid marks identified gaps; it is not
