@@ -245,6 +245,7 @@ function adoptedMass(name: string, chosen: ArchiveRow, composite: CompositeMass 
     : { value: composite.value, ...(composite.limit ? { limit: true as const } : {}), row: { ...chosen, label: composite.limit ? composite.label : calculated ? `the NASA Exoplanet Archive's calculated value (${composite.provenance}, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement` : minimum ? `${composite.label}, the minimum mass (M sin i) the NASA Exoplanet Archive's composite table adopts` : `${composite.label}, the mass the NASA Exoplanet Archive's composite table adopts`,
     reference: calculated ? 'CALCULATED_VALUE' : composite.label, url: calculated ? COMPOSITE_CALC : composite.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', bibcode: calculated ? undefined : composite.bibcode } as ArchiveRow };
   const density = mass.value * 1.89813e30 / (4 / 3 * Math.PI * (radius.value * 7.1492e9) ** 3);
-  if (composite && !composite.limit && (!(density > 0.1) || (density > 8.5 && mass.value < 13))) throw new Error(`${name}: ${mass.row.label.split(',')[0]}'s mass ${mass.value} Jupiter masses in ${radius.value} Jupiter radii is ${density.toFixed(1)} g/cm^3, outside what the records accept.`);
+  // The records' rule (packages/astronomy bodies.test.ts): 0.1 to 8.5 g/cm^3, 20 for a giant of at least half Jupiter's radius, open above 13 Jupiter masses.
+  if (composite && !composite.limit && (!(density > 0.1) || (density > (radius.value >= 0.5 ? 20 : 8.5) && mass.value < 13))) throw new Error(`${name}: ${mass.row.label.split(',')[0]}'s mass ${mass.value} Jupiter masses in ${radius.value} Jupiter radii is ${density.toFixed(1)} g/cm^3, outside what the records accept.`);
   return mass;
 }

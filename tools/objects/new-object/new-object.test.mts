@@ -537,6 +537,10 @@ test('a planet found without a transit is placed only on one paper\'s whole orbi
   assert.deepEqual([placed.mass.value, placed.mass.row.label], [3.2, 'X et al. 2020, the mass the NASA Exoplanet Archive\'s composite table adopts'], 'the paper\'s own true mass goes with its inclination');
   assert.match(placed.radius.row.label, /calculated radius .*: a model, not a measurement, since P b does not transit/u);
   assert.match(placed.orbit.sources.shape!, /X et al\. 2020.*inclination 45\.8 \+1\.1 degrees, measured in the same fit/u);
+  // A massive giant is dense: 12.3 Jupiter masses in 1.08 Jupiter radii is 12.1 g/cm^3, inside the giants' 20, while the same density
+  // in a planet under half Jupiter's radius is refused.
+  assert.equal(assembleMeasuredOrbit(rows.map(row => row.reference === 'X_ET_AL__2020' ? { ...row, massJupiter: 12.3 } : row), undefined, calculated).mass.value, 12.3);
+  assert.throws(() => assembleMeasuredOrbit(rows.map(row => row.reference === 'X_ET_AL__2020' ? { ...row, massJupiter: 0.35 } : row), undefined, { ...calculated, value: 0.3 }), /g\/cm\^3, outside what the records accept/u);
   // An astrometric paper gives the semi-major axis in au and no stellar radius: the host's recorded radius converts it, so the
   // rendered orbit is the paper's 2.294 au (HD 29021 b, Li et al. 2021).
   const li = parse([header, `"R b",${ref('LI_ET_AL__2021', '2021AJ....162..266L', 'Li et al. 2021')},1,1365,,33.7,0.453,180.6,,,4.47,2.294,,0.86,0,,,,2455824.8,6.8,Mass`].join('\n'));
