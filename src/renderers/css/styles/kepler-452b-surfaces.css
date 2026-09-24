@@ -29,6 +29,12 @@
 .object-stage[data-object-id="kepler-452b"] .polycss-scene s.kepler-452b-polar {
   background-image: url("/scenes/kepler-452b/kepler-452b-poles-shape@2x.webp") !important;
 }
+.object-stage[data-object-id="kepler-452b"][data-lens="illustration"] .polycss-scene s:not(.kepler-452b-polar) {
+  background-image: url("/scenes/kepler-452b/kepler-452b-surface-illustration@2x.webp") !important;
+}
+.object-stage[data-object-id="kepler-452b"][data-lens="illustration"] .polycss-scene s.kepler-452b-polar {
+  background-image: url("/scenes/kepler-452b/kepler-452b-poles-illustration@2x.webp") !important;
+}
 /* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
 .object-stage[data-object-id="kepler-452b"] .kepler-452b-fixed-material {
   top: 50%;

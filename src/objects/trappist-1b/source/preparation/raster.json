@@ -131,6 +131,16 @@
         "title": "JWST MIRI · bare rock fitted to our data",
         "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
       }
+    },
+    {
+      "id": "illustration",
+      "output": "trappist-1b-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1b-lens-{id}.webp",
+      "source": "illustration/TRAPPIST-1_b.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "equirectangular-illustration"
+      }
     }
   ],
   "emission": {

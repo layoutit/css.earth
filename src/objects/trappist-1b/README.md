@@ -60,7 +60,11 @@ reach 562 K (Agol's 2566 K star at 20.843 stellar radii): the fit sits at that l
 surface with no atmosphere would. The hot spot is drawn on the point under the star, and that is now measured: left free in
 longitude, the smooth map puts it 1.6° from noon. The 28° west offset an earlier fit found was the timing error above.
 
+**Illustration lens.** NASA's artist's concept of TRAPPIST-1b: the map its [Eyes on Exoplanets](https://eyes.nasa.gov/apps/exo/) app wraps around the planet ([`TRAPPIST-1_b.jpg`](https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_b.jpg), 2,048 × 1,024, named in the app's texture table), credited NASA/JPL-Caltech. NASA says each planet in the app shows "an artist's concept of what it might look like" ([tutorial](https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/)); the file carries no credit or date of its own, and NASA does not say how it was made. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in the map was observed. Preparation resizes it unchanged onto the sphere with its left edge at 0° longitude ([`equirectangular-illustration`](../../../tools/objects/observation/interpret.mts)), so its longitudes are arbitrary. It is a second lens: MIRI 15 µm stays the default. It is listed in the package's illustration lenses, so it never counts as imagery. The planet is drawn self-luminous, so the map is shown evenly bright, without its star's shading, as the MIRI 15 µm lens is. An earlier TRAPPIST-1 set, NASA/JPL-Caltech maps made for NOAA's [Science On a Sphere](https://sos.noaa.gov/catalog/datasets/exoplanet-trappist-1b/) in March 2017, is different artwork and is not used; this package uses the map NASA's app shows today. NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+
 ## Evidence
+
+- Run of 2026-09-24: `node tools/prepare/prepare-object.mts` added the Illustration lens; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../tools/objects/observation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the lens opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
 
 - [`lens-fits.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1b/lens-fits.test.mts) runs the shipped recipe and holds it to the
   temperature and fit it was measured to give, checks the ephemeris against every eclipse in the light curve, and refits the old
@@ -83,5 +87,7 @@ out.
 
 **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations the masses come
 from are not drawn.
+
+**The Illustration lens is art, not data.** Its colours, clouds and terrain are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

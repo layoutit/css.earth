@@ -12,6 +12,22 @@
           "commit": "228bc900512a64a6ddbe420316d4d2c3964cb64c"
         }
       ]
+    },
+    {
+      "id": "nasa-eyes-illustration",
+      "subject": "NASA Eyes on Exoplanets artist's concept map as an illustration lens",
+      "status": "included",
+      "finding": "Shown as the non-default Illustration lens, never as imagery: the map NASA's Eyes on Exoplanets app lists for TRAPPIST-1g (TRAPPIST-1_g.jpg), resized unchanged onto the sphere with its left edge at 0° longitude, so its longitudes are arbitrary. No image resolves this planet; nothing in the map was observed. NASA credits the app NASA/JPL-Caltech and calls each planet's look an artist's concept; the file itself carries no credit or date.",
+      "evidence": [
+        "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_g.jpg",
+        "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "5e05f0df6d52838e06568ddb969662f08fd2cedc"
+        }
+      ]
     }
   ]
 }

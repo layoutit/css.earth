@@ -64,6 +64,16 @@
         "title": "JWST MIRI · eclipse map",
         "sourceUrl": "https://zenodo.org/records/15103479"
       }
+    },
+    {
+      "id": "illustration",
+      "output": "hd-189733b-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-189733b-lens-{id}.webp",
+      "source": "illustration/HD_189733_b.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "equirectangular-illustration"
+      }
     }
   ],
   "emission": {

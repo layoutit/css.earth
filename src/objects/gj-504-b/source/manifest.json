@@ -115,6 +115,32 @@
         "kind": "local",
         "reason": "Project-authored colour recipe transcribing the cited photometry; repinned when edited."
       }
+    },
+    {
+      "id": "gj-504-b-nasa-eyes-illustration",
+      "path": "illustration/GJ_504_b.jpg",
+      "origin": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/GJ_504_b.jpg",
+      "productId": "GJ_504_b.jpg",
+      "title": "Eyes on Exoplanets artist's concept map of GJ 504 b",
+      "sourceUrl": "https://eyes.nasa.gov/apps/exo/",
+      "credit": "NASA/JPL-Caltech (Eyes on Exoplanets)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original JPEG from the Eyes on Exoplanets app, unchanged; the app's texture table names it as GJ 504 b's map.",
+      "redistribution": "NASA media; an artist's concept, not an observation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-eyes-on-exoplanets",
+            "role": "material",
+            "evidence": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/GJ_504_b.jpg"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -34,6 +34,16 @@
           "source": "the colour lens of trappist-1 (src/objects/trappist-1/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "illustration",
+      "output": "trappist-1d-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1d-lens-{id}.webp",
+      "source": "illustration/TRAPPIST-1_d.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "equirectangular-illustration"
+      }
     }
   ],
   "lighting": {

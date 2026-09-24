@@ -123,6 +123,21 @@
           "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
         },
         "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 575 ± 10 K where the star is overhead, the limit for a perfectly dark surface, cooling toward the terminator and cold at night. It fits the ten visits as well as a free smooth map, whose hot spot also sits under the star. The data measure the day-to-night pattern; the shape across the disc comes from the rock model."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "NASA's artist's concept of TRAPPIST-1b, from Eyes on Exoplanets; not an observation.",
+        "thumbnail": "trappist-1b-lens-illustration.webp",
+        "surface": "trappist-1b-surface-illustration@2x.webp",
+        "poles": "trappist-1b-poles-illustration@2x.webp",
+        "source": {
+          "id": "trappist-1b-nasa-eyes-illustration",
+          "path": "../manifest.json",
+          "url": "https://eyes.nasa.gov/apps/exo/"
+        },
+        "falseColor": false,
+        "notes": "NASA's artist's concept of TRAPPIST-1b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
       }
     ]
   },

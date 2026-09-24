@@ -3,3 +3,5 @@
 Temperature map: M. Lally, R. C. Challener, N. K. Lewis, J. Inglis et al., "Eclipse Mapping with MIRI: 2D Map of HD 189733b from 8μm JWST MIRI LRS Observations", arXiv:2503.20895 (2025); data deposit "Data Products for Eclipse Mapping with MIRI: 2D Map of HD 189733b from 8μm JWST MIRI LRS Observations", Zenodo, doi:10.5281/zenodo.15103479, CC BY 4.0, used unchanged except that longitudes the observations never faced are not drawn, as in the authors' own figures. Based on observations made with the NASA/ESA/CSA James Webb Space Telescope, MIRI/LRS program GO 2021 (PI B. Kilpatrick), and with the Spitzer Space Telescope. The colours are false colour chosen here (the plasma palette); the values are the authors'.
 
 Radius and orbit: the deposited ThERESA configuration (Lally et al. 2025, Table 1). Tidal locking is assumed, as in that paper.
+
+Illustration lens: NASA's artist's concept map of HD 189733b from Eyes on Exoplanets, NASA/JPL-Caltech (https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HD_189733_b.jpg), used unchanged under NASA's media guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/). An artist's concept, not an observation.

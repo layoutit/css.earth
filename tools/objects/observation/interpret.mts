@@ -6,6 +6,8 @@ import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '.
 // RGB(A) pixels at the requested density plus the `nearest` flag the packer needs.
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
+import sharp from 'sharp';
+import { readRgba } from '../../../src/preparation/raster/io.ts';
 import type { ObservationInterpretation, InterpretedSurface } from '../../../src/preparation/raster/index.js';
 import type { RasterRecipe } from '../../../src/preparation/raster/index.js';
 import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-synoptic.mts';
@@ -404,6 +406,16 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (model !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.model must equal the surface source.`);
         const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, model), width, height);
         return { data: pixels, channels: 4, nearest: false };
+      }
+      case 'equirectangular-illustration': {
+        // An illustration: a published artist's global map, resized unchanged onto the sphere. Its left edge is the map's own 0°
+        // column, so longitudes are arbitrary. Nothing here is observed; the lens is listed in the object's illustration lenses.
+        await (await manifest).validatePath(surface.source);
+        const path = resolve(sourceDirectory, surface.source), { width: sourceWidth = 0, height: sourceHeight = 0 } = await sharp(path).metadata();
+        if (sourceWidth !== sourceHeight * 2) throw new RangeError(`${objectId}/${surface.id}: ${surface.source} is ${sourceWidth} × ${sourceHeight}, not a 2:1 equirectangular map.`);
+        const data = await readRgba(path, width, height, true);
+        if (recipe.emission) return { data, channels: 4, nearest: false, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) };
+        return { data, channels: 4, nearest: false };
       }
       case 'neutral-shape': {
         // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.
