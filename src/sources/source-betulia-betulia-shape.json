@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/betulia/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

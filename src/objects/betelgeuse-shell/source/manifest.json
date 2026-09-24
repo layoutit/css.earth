@@ -237,14 +237,6 @@
       }
     },
     {
-      "id": "release-description",
-      "path": "src/objects/betelgeuse-shell/source/observations/BETELGEUSE-B-release-description.pdf",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "The ESO Phase 3 release description of the collection, retained beside the products it describes."
-      }
-    },
-    {
       "id": "presentation-json",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
       "sourceBinding": {

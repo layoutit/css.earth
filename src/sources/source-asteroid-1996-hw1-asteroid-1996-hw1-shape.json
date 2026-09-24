@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/asteroid-1996-hw1/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

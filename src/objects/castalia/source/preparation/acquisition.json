@@ -9,24 +9,6 @@
       ],
       "path": "shape/castalia.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/castalia.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/castalia-1997.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/castalia-1994.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2Bostro_1994_castalia.pdf"
     }
   ]
 }

@@ -200,7 +200,7 @@
       "license": "Public NASA PDS scientific data release; cite Thomas, Joseph and Ansty (2018), doi:10.26033/ewy3-jy61.",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/doi/saturnsatshape_1.0.html",
-        "shape/atlas_document.pdf"
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/atlas_document.pdf"
       ],
       "acquisition": "Download the pinned original PDS4 plate model.",
       "redistribution": "Retain the model authors and PDS archive credit.",
@@ -712,9 +712,6 @@
     },
     {
       "path": "shape/atlas_30k_plt.xml"
-    },
-    {
-      "path": "shape/atlas_document.pdf"
     },
     {
       "path": "shape/atlas_document.txt"

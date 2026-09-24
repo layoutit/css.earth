@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/asteroid-1998-wt24/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

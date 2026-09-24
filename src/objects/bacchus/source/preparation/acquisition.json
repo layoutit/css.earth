@@ -9,15 +9,6 @@
       ],
       "path": "shape/bacchus.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/bacchus.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf"
     }
   ]
 }

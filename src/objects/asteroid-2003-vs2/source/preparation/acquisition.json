@@ -1,23 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/vs2-vara-lubiano-2022-publisher.pdf",
-      "url": "https://openaccess.inaf.it/bitstreams/4baff601-4106-46cd-99b6-82bae843593a/download"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/outer-worlds-gomez-limon-2026.pdf",
-      "url": "https://arxiv.org/pdf/2605.22296"
-    }
-  ]
+  "operations": []
 }

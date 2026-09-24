@@ -139,14 +139,6 @@
       "path": "science/leisa/preparation.json",
       "recipePath": "science/leisa/bands.json",
       "product": "report"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh-leisa-ice"
-      ],
-      "path": "science/leisa/grundy-2016-supplement.pdf",
-      "url": "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf"
     }
   ]
 }

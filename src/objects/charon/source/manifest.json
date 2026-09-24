@@ -76,7 +76,7 @@
       "license": "Public NASA scientific mission data; retain archive and author attribution",
       "licenseEvidence": [
         "https://pds.nasa.gov/datastandards/citing/",
-        "observations/nh-plutosystem-composition-overview.pdf"
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf"
       ],
       "acquisition": "Restore the exact pinned binary through source/preparation/acquisition.json.",
       "redistribution": "Retain NASA/JHUAPL/SwRI, Paul Schenk/LPI, New Horizons team and archive LIDVID attribution.",
@@ -829,28 +829,6 @@
       "acquisition": "Checked-in preparation policy."
     },
     {
-      "id": "charon-leisa-method",
-      "path": "science/leisa/grundy-2016-supplement.pdf",
-      "origin": "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf",
-      "credit": "W. M. Grundy and coauthors; Science / AAAS, 2016",
-      "license": "Original publication, retained as a scientific reference; not relicensed.",
-      "redistribution": "The paper is not a runtime asset. Retain original publication notices.",
-      "acquisition": "Pinned author-hosted supplementary material.",
-      "consumers": [
-        "leisa-ice"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "grundy-2016-pluto-charon-compositions",
-            "role": "method",
-            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
-          }
-        ]
-      }
-    },
-    {
       "id": "charon-organa-landmark",
       "path": "features/landmarks.json",
       "origin": "Transcribed from Grundy et al. (2016), supplementary page 3.",
@@ -899,7 +877,7 @@
       "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
       "licenseEvidence": [
         "https://pds.nasa.gov/datastandards/citing/",
-        "observations/nh-plutosystem-composition-overview.pdf"
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf"
       ]
     },
     {
@@ -929,19 +907,7 @@
       "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
       "licenseEvidence": [
         "https://pds.nasa.gov/datastandards/citing/",
-        "observations/nh-plutosystem-composition-overview.pdf"
-      ]
-    },
-    {
-      "path": "observations/nh-plutosystem-composition-overview.pdf",
-      "purpose": "Archive processing, coverage, photometry and calibration-uncertainty references.",
-      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf",
-      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
-      "license": "Public NASA scientific mission data; retain archive and author attribution",
-      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
-      "licenseEvidence": [
-        "https://pds.nasa.gov/datastandards/citing/",
-        "observations/nh-plutosystem-composition-overview.pdf"
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf"
       ]
     },
     {

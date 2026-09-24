@@ -54,7 +54,7 @@ The source-survey dispositions and evidence are recorded in the [investigation l
 
 The analytic 5° radius table has 2,522 vertices and 5,040 triangles. The shared meshoptimizer retains **480 native `u` triangles**, a closed single-component mesh (Euler characteristic 2), with estimated simplification error 705.03 m. This is display tessellation of the measured approximation, not additional observed detail. The minimap and 512-pixel context portrait use the same grid and shape.
 
-All source bytes are pinned by `source/manifest.json`; acquisition operations restore the Inter font and NAIF text kernels by their real source URLs. The authored table and compact evidence are checked in. Runtime scene assets are produced only by the shared object preparer.
+All source bytes are pinned by `source/manifest.json`; acquisition operations restore the NAIF text kernels by their real source URLs. The authored table and compact evidence are checked in. Runtime scene assets are produced only by the shared object preparer.
 
 See [NOTICE.md](NOTICE.md) for credits and reuse.
 

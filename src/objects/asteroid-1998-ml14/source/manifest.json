@@ -49,68 +49,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "asteroid-1998-ml14-research-ml14",
-      "path": "reference/ml14.pdf",
-      "origin": "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf",
-      "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "arecibo-305m",
-            "missionId": "arecibo-planetary-radar",
-            "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL"
-          },
-          {
-            "kind": "facility",
-            "facilityId": "goldstone-dss14",
-            "missionId": "goldstone-solar-system-radar",
-            "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL"
-          }
-        ]
-      },
-      "license": "Original scientific article; source publisher copyright retained.",
-      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
-      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-research-ml14",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "asteroid-1998-ml14-warner-2014",
-      "path": "reference/warner-2014.pdf",
-      "origin": "https://mpbulletin.org/issues/MPB_41-2.pdf",
-      "credit": "Brian D. Warner (2014), Minor Planet Bulletin41,113–124",
-      "license": "Original scientific publication; publisher copyright retained.",
-      "acquisition": "Restore original public PDF unchanged from pinned URL.",
-      "redistribution": "Restoration reference only; no article pages are runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-warner-2014",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [

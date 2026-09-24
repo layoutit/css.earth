@@ -865,31 +865,6 @@
       }
     },
     {
-      "id": "geomap-guide",
-      "path": "geology/product-user-guide.pdf",
-      "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf",
-      "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
-      "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
-      "licenseEvidence": [
-        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
-      ],
-      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
-      "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
-      "consumers": [
-        "surface-geology"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-comet-67p-geomap-guide",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "n20151026-125938-path",
       "path": "observations/n20151026t125938783id50f22.img",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151026t125938783id50f22.img",

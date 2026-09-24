@@ -9,15 +9,6 @@
       ],
       "path": "shape/1994CC_nominal.mod.wf",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/1994CC_nominal.mod.wf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/cc1994.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf"
     }
   ]
 }

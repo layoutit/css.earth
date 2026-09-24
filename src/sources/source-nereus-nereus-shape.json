@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/nereus/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

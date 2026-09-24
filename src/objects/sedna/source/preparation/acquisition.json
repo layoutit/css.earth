@@ -1,23 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/sedna-pal-2012.pdf",
-      "url": "https://arxiv.org/pdf/1204.0899"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/sedna-gaudi-2005.pdf",
-      "url": "https://www.astronomy.ohio-state.edu/gaudi.1/sedna.pdf"
-    }
-  ]
+  "operations": []
 }

@@ -231,17 +231,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "science/b2-intake/tethysshapeassessment.pdf",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysshapeassessment.pdf",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "cassini-ice/native/C1807469104_1_ir.cub",
       "url": "https://vims.univ-nantes.fr/cube/C1807469104_1_ir.cub"
     },

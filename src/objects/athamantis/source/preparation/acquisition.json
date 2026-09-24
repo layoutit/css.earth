@@ -25,18 +25,6 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/vernazza-2021.pdf",
-      "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "headers": {
-        "Cookie": "CesAM_LAM_opens_the_door=1"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/ReadMe.AcuA.txt",
       "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/ReadMe.AcuA.txt"
     },
@@ -48,15 +36,6 @@
       ],
       "path": "reference/185-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/517/IAUspin.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/paper-hanus-keck-2013.pdf",
-      "url": "https://arxiv.org/pdf/1308.0446"
     },
     {
       "kind": "download",

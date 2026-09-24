@@ -43,27 +43,6 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/vernazza-2021-eso.pdf",
-      "url": "https://www.eso.org/public/archives/releases/sciencepapers/eso2114/eso2114a.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/vernazza-2021.pdf",
-      "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
-      "headers": {
-        "Cookie": "CesAM_LAM_opens_the_door=1"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "observations/d187Lamberta_2018-03-15T09_05_28.776_zpl_science_imaging_cam1.fits",
       "url": "https://observations.lam.fr/astero/Data/187Lamberta/Deconv/d187Lamberta_2018-03-15T09_05_28.776_zpl_science_imaging_cam1.fits",
       "headers": {

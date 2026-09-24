@@ -137,7 +137,7 @@ domain. The visible 0.5–1.5 scale saturates above 1.5.
 
 No height conversion or relief shading is applied to this quantity. It is a secondary SPC
 brightness product, less validated than topography. The [producer’s assessment, page
-1](source/science/b2-intake/rheashapeassessment.pdf) documents terrain and shadow effects in
+1](https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/document/rheashapeassessment.pdf) documents terrain and shadow effects in
 its values; it is neither geometric albedo nor calibrated reflectance.
 
 Rhea used calibrated ISS frames. Source sigma is internal maplet agreement, not absolute height

@@ -22,12 +22,14 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
   const sources: GalaxySource[] = [];
   for (const value of provenance.sources) {
     const s = record(value, 'Catalogue source');
-    const path = text(s.path, 'Source path');
-    const bytes = await sourceBytes(sourceDirectory, { path });
-    if (bytes.length !== s.bytes) throw new TypeError(`Source byte-count mismatch: ${path}`);
-    const references = path.endsWith('.bib') ? [...readBibliography(bytes.toString('utf8')).values()] : s.references;
+    // A citation names its references and holds no file.
+    const path = s.path === undefined ? undefined : text(s.path, 'Source path');
+    const bytes = path === undefined ? undefined : await sourceBytes(sourceDirectory, { path });
+    if (bytes !== undefined && bytes.length !== s.bytes) throw new TypeError(`Source byte-count mismatch: ${path}`);
+    const references = path?.endsWith('.bib') ? [...readBibliography(bytes!.toString('utf8')).values()] : s.references;
     if (references !== undefined && !Array.isArray(references)) throw new TypeError('Source references must be an array.');
-    sources.push({ id: text(s.id, 'Source id'), path, bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
+    if (path === undefined && !references?.length) throw new TypeError(`Catalogue source ${text(s.id, 'Source id')} holds no file and names no references.`);
+    sources.push({ id: text(s.id, 'Source id'), ...(path === undefined ? {} : { path, bytes: bytes!.length }), url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
       ...(references ? { references: references.map(value => { const r = record(value, 'Source reference'); return { id: text(r.id, 'Reference id'), catalogueId: spatialPublicationId(text(r.id, 'Reference id')), url: text(r.url, 'Reference URL'), citation: text(r.citation, 'Reference citation') }; }) } : {}) });
   }
   const read = async (pin: { path: string; bytes: number }) => {

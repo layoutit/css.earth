@@ -9,15 +9,6 @@
       ],
       "path": "shape/golevka.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/golevka.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf"
     }
   ]
 }

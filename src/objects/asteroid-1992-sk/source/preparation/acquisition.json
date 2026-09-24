@@ -9,24 +9,6 @@
       ],
       "path": "shape/sk.obj",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/sk.pdf",
-      "url": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/sk-spin-2022.pdf",
-      "url": "https://astro.troja.mff.cuni.cz/davok/papers/yorp_AA2022.pdf"
     }
   ]
 }

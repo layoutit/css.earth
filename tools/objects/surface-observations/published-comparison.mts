@@ -18,13 +18,20 @@ export const COMPARISON_SPEC_FILE = 'preparation/published-comparison.json';
 export interface ComparisonColumn { label: string; frame: string | null; band: number }
 export interface ComparisonSpec {
   schema: string; lensId: string; source: string; figure: string;
-  /** The figure as an image object of a pinned paper: the manifest input, the object number and the decoded pixels' identity. */
-  document: { input: string; object: number; width: number; height: number };
+  /** The figure as an image object of the paper: the paper's address, the object number and the figure's size. The paper is
+   * cited, not retained; the measurement reads it from this address. */
+  document: { url: string; object: number; width: number; height: number };
   /** The rows of photographs and of the model the lens rides, counted from the top of the figure's dark band, how many image rows the
    * band holds, and how many lines of text each photograph panel prints at its top, which the body's outline leaves out. */
   rows: { image: number; model: number; count: number; labelLines: number };
   /** One entry per figure column, band by band and left to right within a band: its printed label and the lens frame it shows, or null for an epoch the lens does not use. A figure with more epochs than fit one band continues them in a second band below. */
   columns: ComparisonColumn[];
+}
+
+function paperUrl(value: unknown) {
+  const url = requireString(value, 'document url');
+  if (!/^https:\/\/\S+\.pdf$/u.test(url)) throw new TypeError(`A published comparison reads its figure from the paper's PDF address, not ${url}.`);
+  return url;
 }
 
 export function parseComparisonSpec(value: unknown): ComparisonSpec {
@@ -36,7 +43,7 @@ export function parseComparisonSpec(value: unknown): ComparisonSpec {
   const integer = (value: unknown, at: string) => { const n = requireFiniteNumber(value, at); if (!Number.isSafeInteger(n) || n < 0) throw new TypeError(`${at} is a whole number.`); return n; };
   const spec: ComparisonSpec = {
     schema: COMPARISON_SPEC_SCHEMA, lensId: requireString(record.lensId, 'lensId'), source, figure: requireString(record.figure, 'figure'),
-    document: { input: requireString(document.input, 'document input'), object: integer(document.object, 'document object'), width: integer(document.width, 'figure width'), height: integer(document.height, 'figure height') },
+    document: { url: paperUrl(document.url), object: integer(document.object, 'document object'), width: integer(document.width, 'figure width'), height: integer(document.height, 'figure height') },
     rows: { image: integer(rows.image, 'image row'), model: integer(rows.model, 'model row'), count: integer(rows.count, 'row count'),
       labelLines: rows.labelLines === undefined ? 0 : integer(rows.labelLines, 'label lines') },
     columns: requireArray(record.columns, 'columns').map((value, index) => {

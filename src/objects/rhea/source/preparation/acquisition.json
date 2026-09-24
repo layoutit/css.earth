@@ -162,25 +162,6 @@
     },
     {
       "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "science/b2-intake/rheashapeassessment.pdf",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/document/rheashapeassessment.pdf",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
-      "path": "vims/document/information_file.pdf",
-      "groups": [
-        "cassini-atlas"
-      ]
-    },
-    {
-      "kind": "download",
       "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
       "path": "vims/document/information_file.xml",
       "groups": [

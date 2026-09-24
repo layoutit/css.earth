@@ -1382,9 +1382,6 @@
       "path": "observations/catalog.json"
     },
     {
-      "path": "observations/productdescription.pdf"
-    },
-    {
       "path": "observations/tethys_eqradius_g.xml"
     },
     {
@@ -1472,11 +1469,6 @@
     {
       "path": "science/b2-intake/tethysimagelist.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysimagelist.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
-    },
-    {
-      "path": "science/b2-intake/tethysshapeassessment.pdf",
-      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysshapeassessment.pdf",
       "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {

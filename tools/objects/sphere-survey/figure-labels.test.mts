@@ -7,7 +7,8 @@ import { readPdfImage } from '../../fits/pdf-image.mts';
 import { figureBands, figureCells, parseComparisonSpec, type Raster } from '../surface-observations/published-comparison.mts';
 import { glyphTemplates, readLabel } from './figure-labels.mts';
 
-const ROOT = resolve(import.meta.dirname, '../../..'), PAPER = resolve(ROOT, 'src/objects/iris/source/reference/vernazza-2021.pdf');
+// The survey paper is cited, not kept; a maintainer points CSSEARTH_SURVEY_PAPER at a downloaded copy to run the figure checks.
+const ROOT = resolve(import.meta.dirname, '../../..'), PAPER = process.env.CSSEARTH_SURVEY_PAPER ?? '';
 
 /** Every label of a figure, band by band, as the setup tool reads them. */
 function labels(pdf: Buffer, object: number, templates: ReturnType<typeof glyphTemplates>) {
@@ -15,7 +16,7 @@ function labels(pdf: Buffer, object: number, templates: ReturnType<typeof glyphT
   return bands.flatMap((band, index) => figureCells(figure, rows, Math.round((band.x1 - band.x0) / 240), index)[0].map(cell => readLabel(figure, cell, templates)));
 }
 
-test('the survey figures\' column times read as printed, where the paper is restored', { skip: !existsSync(PAPER) }, () => {
+test('the survey figures\' column times read as printed, where the paper is restored', { skip: !PAPER || !existsSync(PAPER) }, () => {
   const pdf = readFileSync(PAPER), iris = parseComparisonSpec(JSON.parse(readFileSync(resolve(ROOT, 'src/objects/iris/source/preparation/published-comparison.json'), 'utf8')));
   const reference: Raster = readPdfImage(pdf, iris.document.object);
   const templates = glyphTemplates(reference, figureCells(reference, iris.rows.count, iris.columns.length)[0], iris.columns.map(column => column.label));

@@ -18,7 +18,7 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 
 [False color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). These captures were refreshed on 2026-09-13 after integrating main at `0636327ba`. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry with `8cc1a2fae`.
 
-- The exact frames, archive URLs and byte pins are in [source/manifest.json](source/manifest.json). [source/preparation/terrestrial.json](source/preparation/terrestrial.json) retains each measured camera solution from the shape release's [source/shape/janus_document.pdf](source/shape/janus_document.pdf).
+- The exact frames, archive URLs and byte pins are in [source/manifest.json](source/manifest.json). [source/preparation/terrestrial.json](source/preparation/terrestrial.json) retains each measured camera solution from the shape release's [source/shape/janus_document.pdf](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/janus_document.pdf).
 
 - Dimensions, floating-point encoding and record lengths are checked before reading.
 

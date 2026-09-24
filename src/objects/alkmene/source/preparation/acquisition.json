@@ -18,15 +18,6 @@
       ],
       "path": "reference/AcuA_V1.txt.gz",
       "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/hanus-2018.pdf",
-      "url": "https://arxiv.org/pdf/1803.06116"
     }
   ]
 }

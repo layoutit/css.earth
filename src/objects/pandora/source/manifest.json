@@ -800,7 +800,7 @@
       "license": "Public PDS scientific data release; cite Thomas, Joseph and Ansty (2018), DOI 10.26033/ewy3-jy61.",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
-        "shape/pandora_document.pdf"
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pandora_document.pdf"
       ],
       "acquisition": "Download the original PDS plate table.",
       "redistribution": "Retain source author and PDS archive attribution.",
@@ -1138,9 +1138,6 @@
     },
     {
       "path": "shape/pandora_30k_plt.xml"
-    },
-    {
-      "path": "shape/pandora_document.pdf"
     },
     {
       "path": "editorial/factsheet-review.json",

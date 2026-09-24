@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/apophis/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],

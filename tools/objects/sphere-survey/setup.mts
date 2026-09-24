@@ -38,7 +38,7 @@ import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinReco
 const ROOT = resolve(import.meta.dirname, '../../..');
 export const LENS_ID = 'zimpol';
 export const SETUP_SCHEMA = 'cssearth-sphere-survey-setup@1';
-const PAPER_PATH = 'reference/vernazza-2021.pdf', SPIN_RECORD_PATH = 'reference/release-parameters.txt', ADAM_METERS_PER_UNIT = 1000;
+const SPIN_RECORD_PATH = 'reference/release-parameters.txt', ADAM_METERS_PER_UNIT = 1000;
 const HORIZONS = { observer: 'reference/horizons-sphere-observer.txt', heliocentric: 'reference/horizons-sphere-heliocentric.txt' } as const;
 /** The survey figures print every panel 240 pixels square, and each photograph panel two lines of text at its top: the frame's time and its phase. */
 const PANEL = 240, SURVEY_LABEL_LINES = 2;
@@ -97,16 +97,6 @@ export async function localCopy(objectId: string, path: string): Promise<Buffer 
   return null;
 }
 
-/** The survey paper, from any package or checkout on this machine that holds it, downloaded only when none does. */
-async function surveyPaper(objectId: string) {
-  const own = await localCopy(objectId, PAPER_PATH);
-  if (own) return own;
-  for (const directory of await readdir(resolve(ROOT, 'src/objects'))) {
-    const bytes = await localCopy(directory, PAPER_PATH);
-    if (bytes) return bytes;
-  }
-  return lamBytes(SURVEY_PAPER_URL);
-}
 
 /** A file for the package, from this machine when present, else from its origin, kept in the run's download folder. */
 async function fetchOnce(objectId: string, path: string, url: string, downloads: string) {
@@ -146,7 +136,8 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   const ownPole = properties.source === paperPin.source;
 
   // The figure and its column labels.
-  const paper = await surveyPaper(objectId);
+  // The survey paper is cited, not kept: its figures are read from LAM's copy for this run.
+  const paper = await lamBytes(SURVEY_PAPER_URL);
   const image = readPdfImage(paper, figure.object);
   if (image.width !== figure.width || image.height !== figure.height) throw new Error(`Object ${figure.object} is ${image.width}×${image.height}, not Figure ${figure.figure}.`);
   const bands = figureBands(image);
@@ -206,7 +197,6 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   const spinRecordPath = withheld || await exists(resolve(packageSource, `reference/${recordName}`)) ? `reference/${recordName}` : SPIN_RECORD_PATH;
   const spinRecord = await exists(resolve(packageSource, spinRecordPath)) ? await readFile(resolve(packageSource, spinRecordPath)) : await fetchOnce(objectId, spinRecordPath, spinRecordUrl, downloads);
   await put(spinRecordPath, spinRecord);
-  if (!await exists(resolve(packageSource, PAPER_PATH))) await put(PAPER_PATH, paper);
 
   // The column order the survey's pole supports.
   // Where Table A.1 describes another solution than the survey's released model (Eleonora, Thisbe), the released model's
@@ -262,9 +252,8 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
     ephemeris: HORIZONS, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
   await put(OBSERVER_CAMERAS_FILE, JSON.stringify(record, null, 2) + '\n');
   const manifest = requireRecord(await readJson(resolve(source, 'manifest.json')));
-  const paperInput = requireArray(manifest.inputs).map(value => requireRecord(value)).find(input => input.path === PAPER_PATH);
   const spec = { schema: COMPARISON_SPEC_SCHEMA, lensId: LENS_ID, source: paperPin.source, figure: `Figure ${figure.figure}`,
-    document: { input: paperInput ? requireString(paperInput.id) : `${objectId}-survey-research`, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
+    document: { url: SURVEY_PAPER_URL, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
     rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
   const cameras = await deriveObserverCameras(source, parseObserverCameras(record), frames, mesh, ROOT);
@@ -287,7 +276,6 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   if (adam && !primaryIsAdam) setInput(adamInput(objectId, number, figure.name, adamPath, adam, withheld));
   setInput({ ...tableInput(objectId, 'observer', HORIZONS.observer, Buffer.from(tables.observer)) });
   setInput({ ...tableInput(objectId, 'heliocentric', HORIZONS.heliocentric, Buffer.from(tables.heliocentric)) });
-  if (!paperInput) setInput(paperInputFor(objectId, paper));
   for (const path of [OBSERVER_CAMERAS_FILE, COMPARISON_SPEC_FILE, spinRecordPath, 'preparation/terrestrial.json']) {
     // A record the package already pins as a downloaded input stays an input; a manifest names each path once.
     if (inputs.some(input => input.path === path)) continue;
@@ -381,10 +369,6 @@ function adamInput(objectId: string, number: number, name: string, path: string,
 }
 const damitTerms = { license: 'CC-BY-4.0; DAMIT site license, retained with author and model attribution.', acquisition: 'Restored through source/preparation/acquisition.json.',
   redistribution: 'CC-BY-4.0 with author/model attribution; see NOTICE.md.' };
-function paperInputFor(objectId: string, bytes: Buffer) {
-  return { id: `${objectId}-survey-research`, path: PAPER_PATH, origin: SURVEY_PAPER_URL, credit: 'P. Vernazza et al. (2021), Astronomy & Astrophysics 654, A56', ...surveyTerms,
-    license: 'CC-BY-4.0 research article; retain the citation.', consumers: ['physical', 'rotation'] };
-}
 function readFitsImageSize(bytes: Buffer) {
   const { header } = readFitsHdu(bytes);
   return { width: requireFiniteNumber(header.NAXIS1, 'NAXIS1'), height: requireFiniteNumber(header.NAXIS2, 'NAXIS2') };

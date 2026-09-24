@@ -43,39 +43,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "golevka-research-golevka",
-      "path": "reference/golevka.pdf",
-      "origin": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
-      "credit": "Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "goldstone-dss14",
-            "missionId": "goldstone-solar-system-radar",
-            "evidence": "The preserved credit for this input reads: Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL"
-          }
-        ]
-      },
-      "license": "Original scientific article; source publisher copyright retained.",
-      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
-      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-golevka-golevka-research-golevka",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [

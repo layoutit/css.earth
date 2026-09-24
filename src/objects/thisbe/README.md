@@ -111,7 +111,7 @@ Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 da
 
 GM is G times the measured mass in [Vernazza et al. (2021), Table 1](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A%2BA/654/A56) (11.60 ± 2.20 × 10^18 kg), with G = 6.6743 × 10^-20 km³ kg⁻¹ s⁻²; it is not inferred from an assumed density.
 
-[source/manifest.json](source/manifest.json) pins every consumed file. The original mesh is checked in and also restorable through source/preparation/acquisition.json, along with the Inter font. Original model-record snapshots and supporting documents remain checked in because server-generated HTML contains changing timestamps.
+[source/manifest.json](source/manifest.json) pins every consumed file. The original mesh is checked in and also restorable through source/preparation/acquisition.json. Original model-record snapshots and supporting documents remain checked in because server-generated HTML contains changing timestamps.
 
 The pinned context PNG is reproduced by the existing radial snapshot recipe.
 

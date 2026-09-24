@@ -286,50 +286,6 @@
       }
     },
     {
-      "id": "amica-calibration-paper",
-      "path": "reference/amica-calibration.pdf",
-      "origin": "https://arxiv.org/pdf/0912.4797",
-      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
-      "license": "PDS scientific archive; retain dataset attribution and original notices.",
-      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
-      "consumers": [
-        "reference"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "arxiv-0912-4797",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "amica-photometry-paper",
-      "path": "reference/amica-photometry.pdf",
-      "origin": "https://www.hou.usra.edu/meetings/lpsc2018/eposter/1957.pdf",
-      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
-      "license": "PDS scientific archive; retain dataset attribution and original notices.",
-      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
-      "consumers": [
-        "reference"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-itokawa-amica-photometry-paper",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "usgs-gazetteer-itokawa-nomenclature-center-pts",
       "path": "features/ITOKAWA_nomenclature_center_pts.zip",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip",

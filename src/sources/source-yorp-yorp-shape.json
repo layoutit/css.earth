@@ -13,8 +13,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/yorp/source/manifest.json",
-      "locator": "/inputs/1"
+      "url": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf",
+      "checkedOn": "2026-09-24",
+      "locator": "Cited document; not retained in the repository"
     }
   ],
   "relations": [],
