@@ -3,6 +3,23 @@
 //
 //   node tools/performance/ios-capture.mts --name saturn-flight --steps steps.json [--open <url>] [--dist dist] [--udid <udid>]
 //   node tools/performance/ios-capture.mts --name hand-drag --seconds 15        (record while someone uses the app)
+//   node tools/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
+//
+// --device [udid] records a real iPhone or iPad over USB instead of the simulator: turn on Settings > Apps > Safari >
+// Advanced > Web Inspector, trust this Mac and keep the device unlocked with cssEarth open in Safari. A sound marks the start
+// and the end of a --seconds recording, so whoever holds the device knows when to use it. An --open path starting with /
+// loads from this Mac's network address (--origin, default http://<en0 address>:4210, `pnpm dev`'s port); start the dev
+// server on the network for it: `pnpm exec astro dev --host 0.0.0.0 --port 4210`.
+// On a device, pymobiledevice3 (https://github.com/doronz88/pymobiledevice3; --pymobiledevice3 <path>, default from
+// $PYMOBILEDEVICE3 or PATH) samples what Web Inspector cannot: the frames per second Core Animation delivers and the memory
+// of Safari's web content processes. It needs Developer Mode on the device and uses macOS's own device tunnel (no root).
+// Every recording also logs the pointer input the page received (input.json). --replay <capture dir> plays it back: on a
+// device as real touch (one finger), through device-touch.py and pymobiledevice3's Python, after three calibration taps on
+// a transparent shield map page coordinates to the display; on the simulator as the same pointer events dispatched in the
+// page at their recorded times (every finger; AXe's batch touch steps take about 190 ms each, too slow for a path). Either
+// way the same hand plays both builds.
+// Touch steps (tap, type, drag) need the simulator; on a device, script steps move the camera and screenshots come from
+// Web Inspector (--inspector-screenshots does the same on the simulator: the page alone, without Safari's toolbars).
 //
 // Native side: an Instruments Time Profiler trace (`xcrun xctrace`) of the simulator's web content process holding the page
 // (`--native page`, the default), of every process on the Mac (`--native all`, for compositor and GPU questions) or none
@@ -12,8 +29,11 @@
 // category, sampled after collection before and after the moment; console messages and network requests.
 // Steps drive the simulator with AXe (`brew install cameroncooke/axe/axe`), so input is real touch input.
 // Output: output/performance/ios-captures/<name>-<time>/ with report.json, README.md, native.trace and screenshots.
-// --compare <capture dir> pixelmatches each screenshot against the one of the same name there (a visual change that should
-// not show gives 0 differing pixels) and writes <name>.diff.png. The status-bar clock is pinned so it never differs.
+// --compare <capture dir or name> pixelmatches each screenshot against the one of the same name in the (first) baseline (a
+// visual change that should not show gives 0 differing pixels) and writes <name>.diff.png; the status-bar clock is pinned so
+// it never differs. It also prints the before/after table (frames, work and compositing per frame, slow frames, layer
+// memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
+// this command's --runs <n> repeats, and writes it to comparison.md in the last run.
 import { execFile, spawn, type ChildProcess } from 'node:child_process';
 import { mkdir, readFile, writeFile, readdir, realpath } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
@@ -89,8 +109,17 @@ const PROBE_EXPRESSION = `(() => {
     error: error ? String(error.message ?? error) : null, elements: document.getElementsByTagName('*').length };
 })()`;
 
-async function perform(steps: readonly Step[], udid: string, out: string, marks: { label: string; at: number; value?: unknown }[], started: number,
-  evaluate: (expression: string) => Promise<unknown>, snapshotLayers?: (selector?: string) => Promise<unknown>) {
+export type Target = { readonly kind: 'simulator' | 'device'; readonly udid: string };
+
+/** Touch input comes from AXe, which drives only the simulator; a device is touched by hand or moved through script steps. */
+export function requireStepsFor(target: Target, steps: readonly Step[]) {
+  const touch = steps.find(step => 'tap' in step || 'type' in step || 'drag' in step);
+  if (target.kind === 'device' && touch) throw new TypeError(`Step ${JSON.stringify(touch)} needs the simulator: on a device use --seconds and your hands, or script steps.`);
+}
+
+async function perform(steps: readonly Step[], target: Target, out: string, marks: { label: string; at: number; value?: unknown }[], started: number,
+  evaluate: (expression: string) => Promise<unknown>, snapshotLayers?: (selector?: string) => Promise<unknown>, screenshot?: (file: string) => Promise<void>) {
+  const udid = target.udid;
   for (const step of steps) {
     const label = JSON.stringify(step);
     const mark: { label: string; at: number; value?: unknown } = { label, at: Date.now() - started };
@@ -104,7 +133,7 @@ async function perform(steps: readonly Step[], udid: string, out: string, marks:
     else if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
     else if ('type' in step) await run('axe', ['type', step.type, '--udid', udid]);
     else if ('wait' in step) await wait(step.wait * 1000);
-    else if ('screenshot' in step) await run('axe', ['screenshot', '--output', resolve(out, `${step.screenshot}.png`), '--udid', udid]);
+    else if ('screenshot' in step) await (screenshot ? screenshot(resolve(out, `${step.screenshot}.png`)) : run('axe', ['screenshot', '--output', resolve(out, `${step.screenshot}.png`), '--udid', udid]));
     else await run('axe', ['drag', '--start-x', String(step.drag.from[0]), '--start-y', String(step.drag.from[1]),
       '--end-x', String(step.drag.to[0]), '--end-y', String(step.drag.to[1]), '--duration', String(step.drag.seconds), '--udid', udid]);
   }
@@ -118,6 +147,32 @@ async function bootedUdid() {
   const booted = devices.map(device => requireRecord(device, 'device')).filter(device => device.state === 'Booted');
   if (booted.length !== 1) throw new Error(`Expected one booted simulator, found ${booted.length}; pass --udid.`);
   return requireString(booted[0]!.udid, 'udid');
+}
+
+/** The one iPhone or iPad on USB, unless --device names it. */
+async function connectedDevice(udid: string | null) {
+  const { stdout } = await run('idevice_id', ['-l']).catch(() => ({ stdout: '' }));
+  const devices = stdout.split('\n').map(line => line.trim()).filter(Boolean);
+  if (udid) {
+    if (!devices.includes(udid)) throw new Error(`Device ${udid} is not on USB (connected: ${devices.join(', ') || 'none'}).`);
+    return udid;
+  }
+  if (devices.length !== 1) throw new Error(`Expected one device on USB, found ${devices.length}${devices.length ? ` (${devices.join(', ')})` : ''}; plug it in and trust this Mac, or pass --device <udid>.`);
+  return devices[0]!;
+}
+
+/** What the report says about a device: its name, model and system, read over USB. */
+async function deviceInfo(udid: string) {
+  const key = async (name: string) => (await run('ideviceinfo', ['-u', udid, '-k', name]).catch(() => ({ stdout: '' }))).stdout.trim() || null;
+  return { name: await key('DeviceName'), model: await key('ProductType'), system: await key('ProductVersion') };
+}
+
+/** This Mac's address on the local network, for a device to reach the dev server. */
+async function networkOrigin() {
+  const { stdout } = await run('ipconfig', ['getifaddr', 'en0']).catch(() => ({ stdout: '' }));
+  const address = stdout.trim();
+  if (!address) throw new Error('This Mac has no en0 address; pass --origin http://<address>:<port>.');
+  return `http://${address}:4210`;
 }
 
 /** The simulator's Web Inspector socket moves between boots; the live one is held open by that simulator's launchd_sim,
@@ -156,21 +211,25 @@ async function visiblePage(pages: readonly { url: string; webSocketDebuggerUrl: 
       if (value === 'visible') return page;
     } catch { /* a tab that cannot answer is not the one on screen */ } finally { session.close(); }
   }
-  throw new Error('No visible Safari tab; bring cssEarth to the front in the simulator.');
+  throw new Error('No visible Safari tab; bring cssEarth to the front in Safari.');
 }
 
-/** Reuse a running proxy that lists pages; otherwise start one on the live socket. Attaches to the visible tab. */
-async function connectProxy(port: number, udid: string): Promise<{ page: { url: string; webSocketDebuggerUrl: string }; proxy: ChildProcess | null }> {
+/** Reuse a running proxy that lists pages; otherwise start one on the simulator's live socket, or over USB for a device.
+ * Attaches to the visible tab. */
+async function connectProxy(port: number, target: Target): Promise<{ page: { url: string; webSocketDebuggerUrl: string }; proxy: ChildProcess | null }> {
   const listed = await inspectorPages(port).catch(() => []);
   if (listed.length) return { page: await visiblePage(listed), proxy: null };
-  const proxy = spawn('ios_webkit_debug_proxy', ['-s', `unix:${await inspectorSocket(udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
+  const proxy = spawn('ios_webkit_debug_proxy', target.kind === 'device' ? ['-c', `${target.udid}:${port}`]
+    : ['-s', `unix:${await inspectorSocket(target.udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
   for (let attempt = 0; attempt < 20; attempt++) {
     await wait(500);
     const pages = await inspectorPages(port).catch(() => []);
     if (pages.length) return { page: await visiblePage(pages), proxy };
   }
   proxy.kill();
-  throw new Error('Safari shows no inspectable page; open cssEarth in the simulator first.');
+  throw new Error(target.kind === 'device'
+    ? `Device ${target.udid} shows no inspectable page: unlock it, turn on Web Inspector (Settings > Apps > Safari > Advanced) and open cssEarth in Safari.`
+    : 'Safari shows no inspectable page; open cssEarth in the simulator first.');
 }
 
 // ---- Web Inspector session -----------------------------------------------------------------------------------------
@@ -232,6 +291,17 @@ async function waitForApp(session: ReturnType<typeof inspector>, timeoutMs = 120
     await wait(500);
   }
   throw new Error(`The page did not report ready within ${timeoutMs / 1000} s.`);
+}
+
+/** The page's viewport as a PNG, through Web Inspector: a device has no simulator screenshot. */
+async function snapshotViewport(session: ReturnType<typeof inspector>, file: string) {
+  const size = await session.send('Runtime.evaluate', { expression: '[innerWidth, innerHeight]', returnByValue: true });
+  const value = isRecord(size.result) && isRecord(size.result.result) ? size.result.result.value : null;
+  const [width, height] = requireArray(value, 'viewport size').map(entry => requireFiniteNumber(entry, 'viewport size'));
+  const reply = await session.send('Page.snapshotRect', { x: 0, y: 0, width, height, coordinateSystem: 'Viewport' });
+  const url = isRecord(reply.result) ? reply.result.dataURL : null;
+  if (typeof url !== 'string' || !url.startsWith('data:image/png;base64,')) throw new Error(`Web Inspector returned no viewport snapshot: ${JSON.stringify(reply).slice(0, 200)}.`);
+  await writeFile(file, Buffer.from(url.slice('data:image/png;base64,'.length), 'base64'));
 }
 
 async function memorySample(session: ReturnType<typeof inspector>, events: Message[]) {
@@ -595,30 +665,281 @@ async function exportTimeProfile(native: string): Promise<ReturnType<typeof summ
   } catch (error) { return { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }; }
 }
 
+// ---- Input recording and replay -------------------------------------------------------------------------------------
+
+/** Installed before a recording: every pointer event the page receives, and the camera each frame. */
+const INPUT_LOGGER = `(() => {
+  const t0 = performance.now(), pointers = [], camera = [];
+  const record = event => pointers.push([Math.round((performance.now() - t0) * 10) / 10, event.type, event.pointerId, event.pointerType, event.clientX, event.clientY]);
+  const types = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel'];
+  for (const type of types) addEventListener(type, record, { capture: true, passive: true });
+  let frame = requestAnimationFrame(function tick(now) {
+    try { const id = window.__cssEarth && window.__cssEarth.activeObjectId, state = id && window['__' + id] && window['__' + id].camera.state();
+      if (state) camera.push([Math.round((now - t0) * 10) / 10, state.zoom, state.controlYaw, state.controlPitch]); } catch {}
+    frame = requestAnimationFrame(tick);
+  });
+  window.__captureInput = { stop() { cancelAnimationFrame(frame); for (const type of types) removeEventListener(type, record, { capture: true });
+    return { screen: [screen.width, screen.height], viewport: [innerWidth, innerHeight], dpr: devicePixelRatio, orientation: screen.orientation ? screen.orientation.type : null, pointers, camera }; } };
+  return true;
+})()`;
+
+/** A transparent shield over the page for calibration taps: they land on it, not on the app, and it keeps where they landed. */
+const CALIBRATION_SHIELD = `(() => { const shield = document.createElement('div'), hits = [];
+  shield.style.cssText = 'position:fixed;inset:0;z-index:2147483647;background:transparent;touch-action:none';
+  shield.addEventListener('pointerdown', event => { event.stopPropagation(); event.preventDefault(); hits.push([event.clientX, event.clientY]); });
+  document.body.append(shield); window.__calibration = { hits, remove() { shield.remove(); return hits; } }; return true; })()`;
+
+/** Calibration taps in the HID service's 0..65535 display coordinates: central enough to land on the page in either orientation. */
+export const CALIBRATION_POINTS: readonly (readonly [number, number])[] = [[22938, 29491], [42598, 29491], [32768, 39322]];
+
+export type Affine = readonly [number, number, number, number, number, number];
+/** The affine map from page coordinates to display coordinates that takes each calibration hit to its tap. */
+export function solveAffine(pairs: readonly { page: readonly [number, number]; display: readonly [number, number] }[]): Affine {
+  if (pairs.length !== 3) throw new RangeError(`Calibration needs 3 taps, the page saw ${pairs.length}.`);
+  const [[x1, y1], [x2, y2], [x3, y3]] = pairs.map(pair => pair.page);
+  const det = x1! * (y2! - y3!) - x2! * (y1! - y3!) + x3! * (y1! - y2!);
+  if (Math.abs(det) < 1e-6) throw new RangeError('Calibration taps landed in a line; the page may not have received them.');
+  const solve = (v1: number, v2: number, v3: number) => [
+    (v1 * (y2! - y3!) - v2 * (y1! - y3!) + v3 * (y1! - y2!)) / det,
+    (x1! * (v2 - v3) - x2! * (v1 - v3) + x3! * (v1 - v2)) / det,
+    (x1! * (y2! * v3 - y3! * v2) - x2! * (y1! * v3 - y3! * v1) + x3! * (y1! * v2 - y2! * v1)) / det] as const;
+  const [a, b, c] = solve(...pairs.map(pair => pair.display[0]) as [number, number, number]);
+  const [d, e, f] = solve(...pairs.map(pair => pair.display[1]) as [number, number, number]);
+  return [a, b, c, d, e, f];
+}
+
+/** A recording's touch path as timed contacts for device-touch.py: one finger, the first down at any moment; the times
+ * start at the first touch. Other simultaneous fingers are counted, not played. */
+export function touchPlan(input: unknown, affine: Affine) {
+  const pointers = requireArray(requireRecord(input, 'input recording').pointers, 'pointer events').map(entry => requireArray(entry, 'pointer event'));
+  const events: [number, 'contact' | 'release', number, number][] = [], skipped = new Set<number>();
+  const clamp = (value: number) => Math.max(0, Math.min(65535, Math.round(value)));
+  let active: number | null = null, start: number | null = null;
+  for (const [at, type, id, pointerType, x, y] of pointers) {
+    if (pointerType !== 'touch' || typeof at !== 'number' || typeof id !== 'number' || typeof x !== 'number' || typeof y !== 'number') continue;
+    if (type === 'pointerdown' && active === null) active = id;
+    if (id !== active) { if (type === 'pointerdown') skipped.add(id); continue; }
+    start ??= at;
+    const display: [number, number] = [clamp(affine[0] * x + affine[1] * y + affine[2]), clamp(affine[3] * x + affine[4] * y + affine[5])];
+    const released = type === 'pointerup' || type === 'pointercancel';
+    events.push([Math.round((at - start) * 10) / 10, released ? 'release' : 'contact', ...display]);
+    if (released) active = null;
+  }
+  return { events, skippedFingers: skipped.size };
+}
+
+/** The simulator's replay: the recorded pointer events dispatched at their recorded times to whatever is under each point,
+ * as the browser's hit test would. Pointer capture accepts the replayed ids, which the browser refuses for dispatched events;
+ * the page otherwise handles them as its own input. Coordinates scale if the viewport differs from the recording's. */
+export function pageReplayExpression(input: unknown) {
+  const record = requireRecord(input, 'input recording'), [width, height] = requireArray(record.viewport, 'recorded viewport').map(value => requireFiniteNumber(value, 'viewport'));
+  const pointers = requireArray(record.pointers, 'pointer events');
+  return `new Promise(done => {
+  const pointers = ${JSON.stringify(pointers)}, sx = innerWidth / ${width}, sy = innerHeight / ${height}, replayed = new Set(), targets = new Map();
+  const proto = Element.prototype, set = proto.setPointerCapture, release = proto.releasePointerCapture, has = proto.hasPointerCapture;
+  proto.setPointerCapture = function (id) { if (replayed.has(id)) { targets.set(id, this); return; } return set.call(this, id); };
+  proto.releasePointerCapture = function (id) { if (replayed.has(id)) { targets.delete(id); return; } return release.call(this, id); };
+  proto.hasPointerCapture = function (id) { return replayed.has(id) ? targets.get(id) === this : has.call(this, id); };
+  const start = performance.now(), first = pointers.length ? pointers[0][0] : 0;
+  let index = 0, sent = 0;
+  const step = () => {
+    const now = performance.now() - start;
+    while (index < pointers.length && pointers[index][0] - first <= now) {
+      const [, type, id, pointerType, x, y] = pointers[index++], clientX = x * sx, clientY = y * sy, down = type === 'pointerdown';
+      replayed.add(id);
+      const target = targets.get(id) || document.elementFromPoint(clientX, clientY) || document.body;
+      target.dispatchEvent(new PointerEvent(type, { bubbles: true, cancelable: true, composed: true, pointerId: id, pointerType, isPrimary: true,
+        clientX, clientY, screenX: clientX, screenY: clientY, button: down || type === 'pointerup' ? 0 : -1, buttons: type === 'pointerup' || type === 'pointercancel' ? 0 : 1,
+        pressure: type === 'pointerup' ? 0 : 0.5, width: 1, height: 1 }));
+      if (type === 'pointerup' || type === 'pointercancel') targets.delete(id);
+      sent++;
+    }
+    if (index < pointers.length) requestAnimationFrame(step);
+    else { proto.setPointerCapture = set; proto.releasePointerCapture = release; proto.hasPointerCapture = has; done(sent); }
+  };
+  requestAnimationFrame(step);
+})`;
+}
+
+/** pymobiledevice3's own Python, beside its command. */
+async function bridgePython(binary: string) {
+  const path = binary.includes('/') ? binary : (await run('which', [binary]).catch(() => ({ stdout: '' }))).stdout.trim();
+  if (!path) throw new Error(`${binary} is not installed; pip install pymobiledevice3 or pass --pymobiledevice3 <path>.`);
+  return resolve(await realpath(path).then(real => real, () => path), '..', 'python');
+}
+
+/** Runs a contact plan on the device and waits for it to finish. */
+async function playTouches(binary: string, udid: string, events: readonly unknown[], planFile: string) {
+  await writeFile(planFile, JSON.stringify({ events }) + '\n');
+  const python = await bridgePython(binary);
+  const child = spawn(python, [resolve(import.meta.dirname, 'device-touch.py'), planFile], { env: { ...process.env, PYMOBILEDEVICE3_UDID: udid, PYMOBILEDEVICE3_NATIVE: '1' }, stdio: ['ignore', 'pipe', 'pipe'] });
+  const errors: string[] = []; let sent = 0;
+  child.stdout?.on('data', chunk => { sent += String(chunk).split('\n').filter(Boolean).length; });
+  child.stderr?.on('data', chunk => errors.push(String(chunk)));
+  const code = await new Promise<number | null>(done => { child.on('exit', done); child.on('error', () => done(-1)); });
+  if (code !== 0) throw new Error(`device-touch.py exited ${code}: ${errors.join('').slice(-600)}`);
+  return sent;
+}
+
+// ---- Comparison ----------------------------------------------------------------------------------------------------
+
+/** The captures a --compare names: one capture directory, or every capture whose name is that name plus its timestamp. */
+export async function baselineCaptures(compare: string, capturesRoot = resolve(root, 'output/performance/ios-captures')) {
+  const direct = resolve(compare);
+  if (await readFile(resolve(direct, 'report.json')).then(() => true, () => false)) return [direct];
+  const name = compare.replace(/\/+$/u, '').split('/').pop() ?? compare;
+  const dirs = (await readdir(capturesRoot).catch(() => [] as string[])).filter(entry => new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')}-\\d{4}-\\d{2}-\\d{2}T`, 'u').test(entry)).sort();
+  const complete: string[] = [];
+  for (const entry of dirs) if (await readFile(resolve(capturesRoot, entry, 'report.json')).then(() => true, () => false)) complete.push(resolve(capturesRoot, entry));
+  if (!complete.length) throw new Error(`--compare ${compare}: no capture directory or captures named ${name}-<time> with a report.`);
+  return complete;
+}
+
+const COMPARED = [
+  ['Frames delivered', 'frames', 'more'],
+  ['Work per frame (ms)', 'workPerFrameMs', 'less'],
+  ['Compositing per frame (ms)', 'compositePerFrameMs', 'less'],
+  ['Frames over 16.7 ms', 'over16', 'less'],
+  ['Frames over 50 ms', 'over50', 'less'],
+  ['Longest frame (ms)', 'longestMs', 'less'],
+  ['Style recalculation (ms)', 'styleMs', 'less'],
+  ['Paint (ms)', 'paintMs', 'less'],
+  ['Layer memory (MB)', 'layersMb', 'less'],
+  ['Layers', 'layers', 'less'],
+  ['Device frames per second', 'deviceFps', 'more'],
+  ['Safari web content footprint, peak (MB)', 'webContentMb', 'less'],
+] as const;
+type MetricKey = typeof COMPARED[number][1];
+
+/** The numbers one capture is compared by. Device fields are null on the simulator. */
+export function captureMetrics(report: unknown): Record<MetricKey, number | null> {
+  const r = requireRecord(report, 'capture report'), timeline = requireRecord(r.timeline, 'timeline'), frames = requireRecord(timeline.renderingFrames, 'rendering frames');
+  const count = requireFiniteNumber(frames.count, 'frame count'), byType = requireArray(timeline.byType, 'timeline types').map(entry => requireRecord(entry, 'timeline type'));
+  const type = (name: string) => { const entry = byType.find(item => item.type === name); return entry ? requireFiniteNumber(entry.ms, name) : 0; };
+  const layers = isRecord(r.layers) && typeof r.layers.memoryMb === 'number' ? r.layers : null;
+  const device = isRecord(r.deviceMetrics) ? r.deviceMetrics : null;
+  const graphics = device && isRecord(device.graphics) ? device.graphics : null;
+  const fpsKey = graphics ? Object.keys(graphics).find(key => /FramesPerSecond|fps/iu.test(key)) : undefined;
+  const fps = graphics && fpsKey && isRecord(graphics[fpsKey]) ? graphics[fpsKey].mean : null;
+  const web = device && isRecord(device.webContent) && isRecord(device.webContent.footprintMb) ? device.webContent.footprintMb.max : null;
+  return {
+    frames: count, workPerFrameMs: count ? requireFiniteNumber(frames.totalMs, 'frame work') / count : null, compositePerFrameMs: count ? type('Composite') / count : null,
+    over16: requireFiniteNumber(frames.over16ms, 'frames over 16 ms'), over50: requireFiniteNumber(frames.over50ms, 'frames over 50 ms'), longestMs: requireFiniteNumber(frames.longestMs, 'longest frame'),
+    styleMs: type('RecalculateStyles'), paintMs: type('Paint'),
+    layersMb: layers ? Number(layers.memoryMb) : null, layers: layers && typeof layers.count === 'number' ? layers.count : null,
+    deviceFps: typeof fps === 'number' ? fps : null, webContentMb: typeof web === 'number' ? web : null,
+  };
+}
+
+/** Means of each metric over the baseline runs and the current runs, with the change and which way is better. */
+export function compareCaptures(before: readonly Record<MetricKey, number | null>[], after: readonly Record<MetricKey, number | null>[]) {
+  const mean = (runs: readonly Record<MetricKey, number | null>[], key: MetricKey) => {
+    const values = runs.map(run => run[key]).filter((value): value is number => value !== null);
+    return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
+  };
+  return COMPARED.flatMap(([label, key, better]) => {
+    const a = mean(before, key), b = mean(after, key);
+    if (a === null || b === null) return [];
+    const change = a === 0 ? null : (b - a) / a * 100;
+    const verdict = change === null || Math.abs(change) < 2 ? 'same' : (change < 0) === (better === 'less') ? 'better' : 'worse';
+    return [{ label, before: a, after: b, change, verdict }];
+  });
+}
+
+export function formatComparison(rows: ReturnType<typeof compareCaptures>, runs: { before: number; after: number }, pixels: readonly { name: string; differing: number | null; total: number | null }[] = []) {
+  const number = (value: number) => Math.abs(value) >= 100 ? value.toFixed(0) : value.toFixed(1);
+  return [`| Mean of ${runs.before} before / ${runs.after} after runs | Before | After | Change |`, '|---|---|---|---|',
+    ...rows.map(row => `| ${row.label} | ${number(row.before)} | ${number(row.after)} | ${row.change === null ? '' : `${row.change > 0 ? '+' : ''}${row.change.toFixed(0)}%`} ${row.verdict} |`),
+    ...(pixels.length ? ['', 'Pixelmatch (threshold 0.1) against the first baseline:', ...pixels.map(shot => shot.differing === null ? `- ${shot.name}: no baseline screenshot` : `- ${shot.name}: ${shot.differing} of ${shot.total} pixels differ`)] : []),
+    ''].join('\n');
+}
+
 // ---- Capture -------------------------------------------------------------------------------------------------------
 
-function options(args: readonly string[]) {
+export function options(args: readonly string[]) {
   const value = (flag: string) => { const index = args.indexOf(flag); return index >= 0 ? args[index + 1] ?? null : null; };
+  // --device takes an optional udid: the next argument when it is not another flag.
+  const deviceIndex = args.indexOf('--device'), deviceValue = deviceIndex >= 0 ? args[deviceIndex + 1] : undefined;
+  const device = deviceIndex < 0 ? null : { udid: deviceValue && !deviceValue.startsWith('--') ? deviceValue : null };
   const name = value('--name');
   if (!name || !/^[a-z0-9-]+$/u.test(name)) throw new TypeError('Pass --name <lowercase-words-and-dashes>.');
-  const stepsFile = value('--steps'), seconds = value('--seconds');
-  if (!stepsFile === !seconds) throw new TypeError('Pass either --steps <file.json> or --seconds <n>.');
-  return { name, stepsFile, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
+  const stepsFile = value('--steps'), seconds = value('--seconds'), replay = value('--replay');
+  if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
+  return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare'), native: nativeMode(value('--native') ?? 'page') };
+    open: value('--open'), origin: value('--origin'), inspectorScreenshots: Boolean(device) || args.includes('--inspector-screenshots'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare'), device,
+    // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
+    native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
+
+/** One pymobiledevice3 sampler writing JSON lines beside the capture. A sampler that cannot start reports its error;
+ * the capture goes on without it. */
+function deviceSampler(binary: string, udid: string, args: readonly string[], file: string) {
+  const lines: string[] = [], errors: string[] = [];
+  const child = spawn(binary, args, { env: { ...process.env, PYMOBILEDEVICE3_UDID: udid, PYMOBILEDEVICE3_NATIVE: '1' }, stdio: ['ignore', 'pipe', 'pipe'] });
+  let partial = '';
+  child.stdout?.on('data', chunk => { const text = partial + String(chunk), parts = text.split('\n'); partial = parts.pop() ?? ''; lines.push(...parts.filter(line => line.trim())); });
+  child.stderr?.on('data', chunk => errors.push(String(chunk)));
+  const failed = new Promise<string>(done => child.on('error', error => done(error.message)));
+  return {
+    async stop() {
+      const error = child.exitCode !== null && !lines.length ? errors.join('').slice(-500) || `exited with ${child.exitCode}` : null;
+      child.kill('SIGINT');
+      const spawnError = await Promise.race([failed, wait(200).then(() => null)]);
+      await writeFile(file, lines.join('\n') + (lines.length ? '\n' : ''));
+      const samples = lines.flatMap(line => { try { const value: unknown = JSON.parse(line); return [value]; } catch { return []; } });
+      return { samples, error: spawnError ?? error ?? (samples.length ? null : errors.join('').slice(-500) || 'no samples') };
+    },
+  };
+}
+
+/** Mean, lowest and highest of every numeric field across samples: the graphics sampler's fields are the device's own. */
+export function summariseNumericSamples(samples: readonly unknown[]) {
+  const fields = new Map<string, number[]>();
+  for (const sample of samples) {
+    if (!isRecord(sample)) continue;
+    for (const [key, value] of Object.entries(sample)) if (typeof value === 'number' && Number.isFinite(value)) fields.set(key, [...(fields.get(key) ?? []), value]);
+  }
+  const round = (value: number) => Math.round(value * 10) / 10;
+  return Object.fromEntries([...fields].map(([key, values]) => [key, { mean: round(values.reduce((sum, value) => sum + value, 0) / values.length), min: round(Math.min(...values)), max: round(Math.max(...values)), count: values.length }]));
+}
+
+/** The device-side samplers of one recording: frames per second from the graphics instrument, and each Safari web content
+ * process's memory footprint from sysmon, every half second. */
+function deviceMonitors(binary: string, udid: string, out: string) {
+  const graphics = deviceSampler(binary, udid, ['developer', 'dvt', 'graphics'], resolve(out, 'device-graphics.jsonl'));
+  const memory = deviceSampler(binary, udid, ['developer', 'dvt', 'sysmon', 'process', 'monitor', 'process', '-f', 'name=com.apple.WebKit.WebContent',
+    '--choose', 'last', '--keep-monitoring', '-k', 'pid', '-k', 'name', '-k', 'physFootprint', '-k', 'cpuUsage', '-i', '500'], resolve(out, 'device-webcontent.jsonl'));
+  return {
+    async stop() {
+      const [frames, processes] = await Promise.all([graphics.stop(), memory.stop()]);
+      const footprints = processes.samples.flatMap(sample => isRecord(sample) && typeof sample.physFootprint === 'number' ? [sample.physFootprint / 1048576] : []);
+      return {
+        graphics: frames.error ? { error: frames.error } : summariseNumericSamples(frames.samples),
+        webContent: processes.error ? { error: processes.error } : { samples: footprints.length, footprintMb: summariseNumericSamples(footprints.map(value => ({ mb: value }))).mb ?? null },
+      };
+    },
+  };
+}
+
+/** A sound on the Mac marks when a hand recording starts and ends. */
+const cue = (sound: 'Ping' | 'Glass') => { spawn('afplay', [`/System/Library/Sounds/${sound}.aiff`], { stdio: 'ignore' }).on('error', () => undefined); };
 
 export async function captureIosMoment(args: readonly string[]) {
   const option = options(args);
   const steps = option.stepsFile ? parseSteps(JSON.parse(await readFile(resolve(option.stepsFile), 'utf8'))) : [];
-  const udid = option.udid ?? await bootedUdid();
+  const target: Target = option.device ? { kind: 'device', udid: await connectedDevice(option.device.udid) } : { kind: 'simulator', udid: option.udid ?? await bootedUdid() };
+  const udid = target.udid;
+  requireStepsFor(target, steps);
+  if (target.kind === 'device' && option.native === 'page') throw new TypeError('--native page needs the simulator; on a device pass --native all or off.');
+  const device = target.kind === 'device' ? await deviceInfo(udid) : null;
   const out = resolve(root, 'output/performance/ios-captures', `${option.name}-${new Date().toISOString().replace(/[:.]/gu, '-')}`);
   await mkdir(out, { recursive: true });
-  const { page, proxy } = await connectProxy(option.port, udid);
+  const { page, proxy } = await connectProxy(option.port, target);
   const session = inspector(page.webSocketDebuggerUrl);
   await session.ready;
-  // A fixed status-bar clock keeps screenshots of the same view identical across captures.
-  await run('xcrun', ['simctl', 'status_bar', udid, 'override', '--time', '9:41']);
+  // A fixed status-bar clock keeps simulator screenshots of the same view identical across captures.
+  if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'override', '--time', '9:41']);
   const events: Message[] = [], workers = new Map<string, string>();
   let recording = false;
   session.listen((source, message) => {
@@ -640,35 +961,75 @@ export async function captureIosMoment(args: readonly string[]) {
   if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
   // --open loads the page in this same tab, so each capture starts from a fresh load in the tab on screen.
   // --settle then counts from the moment the app reports its body loaded, not from the navigation.
-  if (option.open) { workers.clear(); await session.send('Page.navigate', { url: option.open }); await waitForApp(session); await wait(option.settle * 1000); }
+  const open = option.open?.startsWith('/') ? `${option.origin ?? await networkOrigin()}${option.open}` : option.open;
+  if (open) { workers.clear(); await session.send('Page.navigate', { url: open }); await waitForApp(session); await wait(option.settle * 1000); }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
   const url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
   await wait(500);
+  // WebKit's Runtime.evaluate cannot wait for a promise; Runtime.awaitPromise can. Every expression is wrapped in one, so a
+  // script that returns a promise (a replay, a scripted camera move) finishes before the capture goes on.
+  const evaluate = async (expression: string) => {
+    const reply = await session.send('Runtime.evaluate', { expression: `Promise.resolve((${expression}))`, returnByValue: false });
+    const promise = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.objectId : null;
+    if (typeof promise !== 'string') return null;
+    const settled = await session.send('Runtime.awaitPromise', { promiseObjectId: promise, returnByValue: true });
+    return isRecord(settled.result) && isRecord(settled.result.result) ? settled.result.result.value : null;
+  };
+  // A device replay first calibrates: three taps on a transparent shield give the map from page to display coordinates.
+  let replay: { plan: ReturnType<typeof touchPlan>; affine: Affine; hits: unknown } | null = null;
+  const replayInput: unknown = option.replay ? JSON.parse(await readFile(resolve(option.replay, 'input.json'), 'utf8')) : null;
+  if (option.replay && target.kind === 'device') {
+    const input = replayInput;
+    await evaluate(CALIBRATION_SHIELD);
+    await playTouches(option.pymobiledevice3, udid, CALIBRATION_POINTS.flatMap(([x, y], index) => [[index * 500, 'contact', x, y], [index * 500 + 80, 'release', x, y]]), resolve(out, 'calibration-plan.json'));
+    await wait(300);
+    const hits = requireArray(await evaluate('window.__calibration.remove()'), 'calibration hits').map(hit => requireArray(hit, 'hit').map(value => requireFiniteNumber(value, 'hit')) as [number, number]);
+    const affine = solveAffine(hits.map((page, index) => ({ page, display: CALIBRATION_POINTS[index]! })));
+    replay = { plan: touchPlan(input, affine), affine, hits };
+    if (!replay.plan.events.length) throw new Error(`${option.replay}/input.json has no touch to replay.`);
+    await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay)), ...replay }, null, 2) + '\n');
+  }
   const memoryBefore = await memorySample(session, events);
   const recordingStart = events.length;
 
   // Instruments first, so the native trace covers the whole moment.
   const native = resolve(out, 'native.trace');
-  const target = option.native === 'all' ? ['--all-processes'] : option.native === 'page' ? ['--attach', String(await pageProcess())] : null;
-  const xctrace = target ? spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, ...target, '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] }) : null;
+  const processes = option.native === 'all' ? ['--all-processes'] : option.native === 'page' ? ['--attach', String(await pageProcess())] : null;
+  const xctrace = processes ? spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, ...processes, '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] }) : null;
   const xctraceLog: string[] = [];
   xctrace?.stdout?.on('data', chunk => xctraceLog.push(String(chunk)));
   xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
   for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
+  const monitors = target.kind === 'device' ? deviceMonitors(option.pymobiledevice3, udid, out) : null;
   await session.send('ScriptProfiler.startTracking', { includeSamples: true });
   for (const worker of workers.keys()) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
   recording = true;
   await session.send('CPUProfiler.startTracking');
   await session.send('Timeline.start', { maxCallStackDepth: 8 });
   const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
-  const evaluate = async (expression: string) => {
-    const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true });
-    return isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
-  };
-  if (steps.length) await perform(steps, udid, out, marks, started, evaluate, selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }));
-  else { marks.push({ label: `manual ${option.seconds} s`, at: 0 }); await wait((option.seconds ?? 0) * 1000); }
+  // A script step that returns a promise (a scripted camera move, say) finishes before the next step.
+  await evaluate(INPUT_LOGGER);
+  // On a device the screenshot is the page's viewport, taken by Web Inspector.
+  const screenshot = option.inspectorScreenshots ? (file: string) => snapshotViewport(session, file) : undefined;
+  if (replay) {
+    marks.push({ label: JSON.stringify({ replay: relative(root, resolve(option.replay!)), contacts: replay.plan.events.length }), at: 0, value: { skippedFingers: replay.plan.skippedFingers } });
+    await playTouches(option.pymobiledevice3, udid, replay.plan.events, resolve(out, 'replay-plan.json'));
+  } else if (option.replay) {
+    const sent = await evaluate(pageReplayExpression(replayInput));
+    marks.push({ label: JSON.stringify({ replay: relative(root, resolve(option.replay)), in: 'page' }), at: 0, value: { sent } });
+    await wait(1000);
+  } else if (steps.length) await perform(steps, target, out, marks, started, evaluate, selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }), screenshot);
+  else {
+    marks.push({ label: `manual ${option.seconds} s`, at: 0 });
+    cue('Ping'); console.error(`Recording ${option.seconds} s${device ? ` on ${device.name ?? udid}` : ''}: use it now.`);
+    await wait((option.seconds ?? 0) * 1000);
+    cue('Glass'); console.error('Recording stopped.');
+  }
   const durationMs = Date.now() - started;
+  const deviceMetrics = monitors ? await monitors.stop() : null;
+  const input = await evaluate('window.__captureInput ? window.__captureInput.stop() : null').catch(() => null);
+  if (input) await writeFile(resolve(out, 'input.json'), JSON.stringify(input) + '\n');
   await session.send('Timeline.stop');
   await session.send('CPUProfiler.stopTracking');
   await session.send('ScriptProfiler.stopTracking');
@@ -724,9 +1085,9 @@ export async function captureIosMoment(args: readonly string[]) {
   // Native side.
   const nativeSummary = await nativeExport;
 
-  const pixels = option.compare ? await compareScreenshots(out, resolve(option.compare), steps) : null;
+  const pixels = option.compare ? await compareScreenshots(out, (await baselineCaptures(option.compare))[0]!, steps) : null;
   const report = {
-    schema: 'cssearth-ios-capture@1', name: option.name, url, udid, durationMs, steps: marks, workers: Object.fromEntries(workers),
+    schema: 'cssearth-ios-capture@1', name: option.name, url, udid, target: target.kind, ...(device ? { device, deviceMetrics } : {}), durationMs, steps: marks, workers: Object.fromEntries(workers),
     sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter },
     javascript, timeline, initiators, layers, cpu, console: consoleMessages,
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
@@ -734,7 +1095,7 @@ export async function captureIosMoment(args: readonly string[]) {
   };
   await writeFile(resolve(out, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   await writeFile(resolve(out, 'README.md'), readme(report));
-  await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
+  if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
   return { out, report };
 }
 
@@ -747,7 +1108,8 @@ function readme(r: ReadmeInput): string {
   const lines = [`# ${r.name}`, '', `${r.url}, ${Math.round(r.durationMs / 100) / 10} s. Source maps for ${r.sourceMaps.mapped} scripts.`, '',
     `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
     ...(r.steps.some(step => 'value' in step) ? ['## Probes', '', ...r.steps.filter(step => 'value' in step)
-      .map(step => `- ${JSON.parse(step.label).probe ?? 'script'} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`), ''] : []),
+      .map(step => { const label: unknown = JSON.parse(step.label), name = isRecord(label) ? label.probe ?? (label.replay ? 'replay' : 'script') : 'script';
+        return `- ${String(name)} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`; }), ''] : []),
     ...(r.pixels ? ['## Pixels against ' + r.pixels.baseline, '', ...r.pixels.screenshots.map(shot => shot.differing === null
       ? `- ${shot.name}: no baseline screenshot` : `- ${shot.name}: ${shot.differing} of ${shot.total} pixels differ`), ''] : []),
     `Rendering frames by work inside them: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',
@@ -772,7 +1134,24 @@ function readme(r: ReadmeInput): string {
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
-  const { out, report } = await captureIosMoment(process.argv.slice(2));
-  console.log(`${relative(root, out)}: ${report.timeline.renderingFrames.count} frames, longest ${report.timeline.renderingFrames.longestMs} ms, ` +
-    `${report.console.filter(message => message.level === 'error').length} console errors.`);
+  const args = process.argv.slice(2), runsIndex = args.indexOf('--runs');
+  const runs = runsIndex >= 0 ? requireFiniteNumber(Number(args[runsIndex + 1]), '--runs') : 1;
+  if (!Number.isInteger(runs) || runs < 1) throw new TypeError('--runs is a whole number of captures.');
+  const captures = [];
+  for (let run = 0; run < runs; run++) {
+    const { out, report } = await captureIosMoment(args);
+    captures.push({ out, report });
+    console.log(`${relative(root, out)}: ${report.timeline.renderingFrames.count} frames, longest ${report.timeline.renderingFrames.longestMs} ms, ` +
+      `${report.console.filter(message => message.level === 'error').length} console errors.`);
+  }
+  const compareIndex = args.indexOf('--compare');
+  if (compareIndex >= 0) {
+    const baselines = await baselineCaptures(args[compareIndex + 1]!);
+    const before = await Promise.all(baselines.map(async dir => captureMetrics(JSON.parse(await readFile(resolve(dir, 'report.json'), 'utf8')))));
+    const last = captures.at(-1)!;
+    const table = formatComparison(compareCaptures(before, captures.map(capture => captureMetrics(capture.report))), { before: before.length, after: captures.length },
+      last.report.pixels?.screenshots ?? []);
+    await writeFile(resolve(last.out, 'comparison.md'), `# ${relative(root, last.out)} against ${baselines.map(dir => relative(root, dir)).join(', ')}\n\n${table}`);
+    console.log(`\n${table}`);
+  }
 }
