@@ -107,3 +107,14 @@ test('a preparation hit still proves its JS entrypoints and nested files', async
     assert.equal(missing.find(result => result.id === 'preparation')?.cached, false, file);
   }
 });
+
+test('an exports-only package lists each compiled output once', t => {
+  const f = fixture(t);
+  f.write('packages/bake/package.json', JSON.stringify({ scripts: { build: 'tsup' }, exports: {
+    './volume': { types: './dist/volume.d.ts', import: './dist/volume.js', default: './dist/volume.js' },
+    './volume/node': { types: './dist/volume/node.d.ts', import: './dist/volume/node.js', default: './dist/volume/node.js' },
+  } }));
+  const packages = ciBuildPlan(f.root, 'lint').find(task => task.id === 'packages');
+  assert.deepEqual(packages?.outputs?.find(output => output.path === 'packages/bake/dist')?.required,
+    ['volume.d.ts', 'volume.js', 'volume/node.d.ts', 'volume/node.js']);
+});

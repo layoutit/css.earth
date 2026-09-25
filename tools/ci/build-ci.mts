@@ -32,7 +32,7 @@ function packageOutputs(root: string): CompiledDirectory[] {
       return value.slice('dist/'.length);
     });
     if (!required.length) throw new TypeError(`No declared compiled package outputs: ${path}`);
-    return [{ path: `${path}/dist`, required }];
+    return [{ path: `${path}/dist`, required: [...new Set(required)] }];
   });
 }
 
