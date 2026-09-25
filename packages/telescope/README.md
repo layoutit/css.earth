@@ -1,6 +1,6 @@
 # @cssearth/telescope
 
-The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. The package interface is a command-line interface: `package.json` exposes a `telescope` binary, not a JavaScript import or HTTP API. Repository code also has internal telescope modules; their exports are not a separate supported package interface.
+The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. Its public interface is the command-line interface: `package.json` exposes a `telescope` binary, not an HTTP API. Inside the workspace the package is also the telescope library the archive and preparation tools share (see [Library](#library)); that library is a workspace interface, not a supported npm one.
 
 This package supplies the command, not the observatory pipelines or catalogue. It uses a **css.earth science checkout** containing the telescope API, source manifests and any required Python environments. It can run from any directory with `--workspace PATH` or `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically. Acquisition and reduction caches stay in that checkout, while deliveries go to your `--out` directory. The package does not download a checkout, install Python, or run pipelines during npm installation.
 
@@ -295,6 +295,26 @@ repository's `setup:prepared --object=ID` command.
 
 Mercury's inactive interior image bindings are removed for the surface export;
 its prepared geometry and camera remain unchanged.
+
+## Library
+
+The same package holds the archive-neutral telescope code the workspace's tools share. It is built by `pnpm build:telescope`
+(`build.mts` bundles the command into `dist/telescope.mjs`, then tsup builds the library beside it) and imported by name.
+
+| entry | what it holds |
+|---|---|
+| `@cssearth/telescope` | product records (`PRODUCT_RECORD_SCHEMA`, `EVIDENCE_KINDS`, `parseProductRecord`, `productRecordPath`, `evidenceFor` and the record types); PDS3 and PDS4 label reading (`pds3Keyword`, `pds3Values`, `pds3TimeIso`, `pds4Elements`, `pds4Blocks`, `pds4Block`, `pds4Field`, `pds4Number`, `pds4ProductIdentity`, limits in [PDS labels](../../docs/pds-labels.md)). No Node built-ins. |
+| `@cssearth/telescope/node` | product records on disk (`writeProductRecord`, `readProductRecord`, `sameRun`, `runDigest`, `addProductEvidence`, `assertInputPins`, `fileSize`); the process boundary into the pinned Python astronomy packages (`astroquery`, `tapRows`, MAST, PDS, pyuvdata, science, plots, projection, transit, starry and SPIDERMAN clients); their installers; the VO metadata contracts; and `PACKAGE_ROOT`, `TOOLCHAINS`, `WORKSPACE`. |
+
+The pinned toolchains are in [`toolchains/`](toolchains/): each descriptor, its hash-locked requirements, the licences and
+notices of what it installs ([NOTICE.md](toolchains/NOTICE.md)), and the [package ownership map](toolchains/ownership.json).
+Install or check one with `node tools/objects/astronomy-toolchains.mts astroquery|pds|starry|spiderman install|verify`.
+A descriptor's or lock's bytes are the identity of an installed environment: changing any of them asks every checkout to
+reinstall.
+
+What stays outside the package: each archive's own clients, programs and ledgers (`tools/objects/<archive>/`, with the
+ledger machinery they share in `tools/objects/archives/`), the telescope command's implementation
+(`tools/objects/telescopes/`), and every object-specific use of a product.
 
 ## Independent output checks
 

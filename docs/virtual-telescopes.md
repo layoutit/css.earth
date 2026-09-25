@@ -640,6 +640,11 @@ problem, never counted as a check.
 The ledgers say how much of each archive these routes have been proved on:
 [JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md),
 [JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md), [Keck](keck-ledger.md) and [IHW Halley](ihw-halley.md).
+The eight archive ledgers (all but IHW Halley's) are written the same way by
+[`tools/objects/archives/ledger.mts`](../tools/objects/archives/ledger.mts): each archive's `archive-ledger.mts` states how
+to survey its archive, read its ledger back and render its page, and the few ways its command differs (which passes write,
+whether it has a `--local` pass, whether receipt problems fail the run, the JSON indent). Its
+[test](../tools/objects/archives/ledger.test.mts) checks that every tracked ledger page is its ledger rendered.
 
 ## Asking which observations might measure something
 
