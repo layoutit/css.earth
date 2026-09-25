@@ -5,7 +5,7 @@ export const responsiveFit = object({model: string, portraitBaseWidthShare: numb
 export const cameraFields = {cameraModel: string, minimumControlPitchDegrees: number, maximumControlPitchDegrees: number,
   defaultControlPitchDegrees: number, defaultControlYawDegrees: number, materialReferenceControlPitchDegrees: optional(number),
   materialReferenceControlYawDegrees: optional(number), initialScenePitchDegrees: number, maximumScenePitchDegrees: number,
-  minimumZoom: number, maximumZoom: number, defaultZoom: number, sceneScale: number, logicalBodyDiameter: number,
+  minimumZoom: number, maximumZoom: number, defaultZoom: number, sceneScale: number, logicalBodyDiameter: number, framingScale: optional(number),
   pitchBounded: boolean, yawBounded: boolean, responsiveFit, style: optional(string),
   projection: optional(object({model: string, cssPerspective: string})),
   dolly: optional(object({model: string, wheelStepPerDelta: number, minimumDistanceRadii: number, maximumDistanceOverOrbitExtent: number})),
