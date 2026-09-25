@@ -24,7 +24,8 @@ function harness(assets: PreparedAssets, options: Partial<PreparedResidencyOptio
     }, ...options,
   });
   async function complete() {
-    for (let wave = 0; wave < 30; wave++) {
+    // Every wave settles at least one decode, so a queue that drains at all drains within one wave per prepared entry.
+    for (let wave = 0; wave < assets.entries.length + 30; wave++) {
       for (const job of jobs) if (!job.done) { job.done = true; job.resolve(); }
       await flush();
       if (jobs.every(job => job.done)) return;

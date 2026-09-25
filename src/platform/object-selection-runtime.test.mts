@@ -74,7 +74,8 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: Ha
   }
   view(0); const initialReady = coordinator.start();
   async function resolveJobs({ exclude = [] }: { exclude?: readonly ImageJob[] } = {}) {
-    for (let wave = 0; wave < 45; wave++) {
+    // Every wave settles at least one decode, so a queue that drains at all drains within one wave per prepared entry.
+    for (let wave = 0; wave < definition.assets.entries.length + 45; wave++) {
       await flush(); const queued = [...timers.values()]; timers.clear(); for (const callback of queued) callback(); await flush();
       const pending = jobs.filter(job => !job.done && !exclude.includes(job));
       if (!pending.length) return;
