@@ -1,5 +1,4 @@
 import { requireRecord } from '@cssearth/core';
-import { refreshSourceScenePins } from '../prepared/prepared-page-metadata.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -20,10 +19,6 @@ export async function prepareInteriorFills(ids: readonly string[], root = proces
     if (shape.kind === 'sphere' || shape.kind === 'ellipsoid') selected.push(id);
     else console.log(JSON.stringify({ id, status: 'excluded-irregular' }));
   }
-  const before = new Map<string, string>();
-  for (const id of selected) for (const suffix of ['object.json', 'prepared/page.json']) {
-    const path = `src/objects/${id}/${suffix}`; before.set(path, await readFile(resolve(root, path), 'utf8'));
-  }
   const browser = await chromium.launch({ headless: true });
   try {
     for (const id of selected) {
@@ -37,7 +32,7 @@ export async function prepareInteriorFills(ids: readonly string[], root = proces
       await repinObjectJson(id, root);
       console.log(JSON.stringify({ id, status: 'prepared', fill }));
     }
-  } finally { await browser.close(); await refreshSourceScenePins(before, root); }
+  } finally { await browser.close(); }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

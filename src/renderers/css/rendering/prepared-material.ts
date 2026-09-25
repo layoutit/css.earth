@@ -1,7 +1,7 @@
 import type { PreparedView } from "./prepared-presentation.js";
 import type { PreparedResources } from "./prepared-residency.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
-export type PreparedMaterialView = Pick<PreparedView, "sunViewDirection" | "sceneMatrix" | "reference"> & Partial<Pick<PreparedView, "levelOfDetail">>;
+export type PreparedMaterialView = Pick<PreparedView, "sunViewDirection" | "sceneMatrix" | "reference"> & Partial<Pick<PreparedView, "levelOfDetail" | "projection" | "viewportWidth" | "viewportHeight" | "motionAtRest">>;
 export interface PreparedMaterialFrameMapping { thresholds: readonly number[]; indices: readonly number[]; }
 export interface PreparedMaterialAddress { resource: string | null; backgroundPosition: string; backgroundSize: string; frame: number | null; row: number | null; prewarm?: readonly string[]; }
 export interface PreparedMaterialBank { id: string; default?: PreparedMaterialAddress | null; fixed?: PreparedMaterialAddress | null; frames: readonly PreparedMaterialAddress[]; }

@@ -29,7 +29,7 @@ import {
 import {prepareLeafSeamOutset, prepareSeamOutsetSteps} from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
 
 
-export function preparePagedEllipsoidScene({ config: profile, interiorSource, atmosphereModel, atmosphere, raster, attitude }: {attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
+export function preparePagedEllipsoidScene({ config: profile, interiorSource, atmosphereModel, atmosphere, raster, attitude, cellSizes }: {cellSizes?: readonly number[]; attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
 const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, POLAR_INNER_OVERLAP, POLAR_INNER_INSET, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
 // The default pose is derived (src/platform/default-camera.mts): the Sun to the left of an ecliptic-up frame at the lit pitch.
 const CAMERA_SCENE_PITCH_DEGREES = LIT_DEFAULT_VIEW.initialScenePitchDegrees;
@@ -95,7 +95,7 @@ const meshTransform = `transform:${buildPolyMeshTransform({
   rotation: [0, 0, MESH_ROTATION_Z],
 })}`;
 const systemTransform = `transform:${attitude.systemTransform}`;
-const surfaceRasterPlan = createSurfaceRasterPlan();
+const surfaceRasterPlan = createSurfaceRasterPlan(cellSizes);
 const bodyBands = prepareSphereBands(bodyConfig, profile.geometry.rotationSeconds);
 const lightingMaterial = prepareMaterialBank({
   id: "lighting",
@@ -659,7 +659,7 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
       style: `transform:matrix3d(${cell.layer.frameMatrix})` +
         preparedAtlasDimensions(size, size) +
         `;background-position:${-cell.x / density}px ${-cell.y / density}px` +
-        `;background-size:${SURFACE_ATLAS.pageSize / density}px auto` +
+        `;background-size:${surfaceRasterPlan.pages[cell.page].width / density}px auto` +
         `;background-image:var(--${profile.namespace}-surface-page-${cell.page})`,
       projectiveTextureLayer: SEAM_OUTSET
         ? { ...cell.layer, seamOutset: prepareLeafSeamOutset(cell.layer.frameMatrix, size, size, BODY_DIAMETER) }

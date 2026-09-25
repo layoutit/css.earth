@@ -1,6 +1,6 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection } from '../src/renderers/css/dist/index.js';
+import { createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection } from '../src/renderers/css/dist/index.js';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { renderNativeFocus } from './focus-response.mts';
 import { serializePreparedScene } from '../tools/prepared/serialize-prepared-scene.mts';
@@ -70,7 +70,15 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
       else if (values.length) settings[control.name] = Number(values[0]);
     }
   }
-  const selected = serializePreparedScene(definition, lensId, settings);
+  // The page embeds only its first view's hashes: read the groups of the textures this view writes before rendering it.
+  const published = createPreparedAssetResolver(definition.assetOrigin, async path => {
+    const response = await fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
+    if (!response.ok) throw new Error(`${objectId}: hash group ${path} answered ${response.status}.`);
+    return response.json();
+  });
+  const written = serializePreparedScene(definition, lensId, settings, (_key, address) => address).textures;
+  await Promise.all(written.map(({ key, address }) => published.ensure(key, address)));
+  const selected = serializePreparedScene(definition, lensId, settings, (_key, address) => published.url(address));
   const activeLens = lensId ?? definition.controls.lenses?.defaultLens;
   const scene = region(html, 'prepared-scene');
   const stage = requiredElement<HTMLElement>(scene.document, '.object-stage');

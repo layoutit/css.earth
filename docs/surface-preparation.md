@@ -37,7 +37,10 @@ only selects a model or terrain entry; it does not import their preparers.
 The [implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
 locates other preparation families. Earth selects among offline atlas levels
 according to projected CSS size, independently of DPR; dataset selection remains
-manual. These texture levels are separate from its retired geographic paging.
+manual. Each surface page takes that level only while its faces may be seen: a
+page off screen or behind the globe keeps the first level, because a browser
+decodes a whole image to draw any of it. Preparation measures where each page's
+faces sit at rest; while the globe spins, every page takes the selected level. These texture levels are separate from its retired geographic paging.
 The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
 current datasets and retained source history. The shared raster lane prepares

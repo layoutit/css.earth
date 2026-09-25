@@ -2,6 +2,11 @@ import { initialObjectSelection, resolvePreparedAssetUrl, rewritePreparedStyleUr
 import type { ObjectRuntimeDefinition } from '../../src/renderers/css/runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; sha256?: string; }
+export interface SerializedPreparedScene extends PreparedSceneMarkup {
+  /** Every resource this view writes as a texture, with its prepared address. */
+  textures: readonly { key: string; address: string }[]; }
+/** Resolves a texture's prepared address; defaults to the definition's embedded hashes. */
+export type PreparedTextureResolver = (key: string, address: string) => string;
 const escape = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const cssName = (name: string) => name.startsWith('--') ? name : name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 
@@ -29,7 +34,8 @@ const styleText = (style: ReadonlyMap<string, string>) => [...style].map(([key, 
 
 /** Serialize the selected package's prepared reference view. No replacement mesh,
  * texture generation, camera inference or source processing belongs here. */
-export function serializePreparedScene(definition: ObjectRuntimeDefinition, lensId?: string, settings?: unknown): PreparedSceneMarkup {
+export function serializePreparedScene(definition: ObjectRuntimeDefinition, lensId?: string, settings?: unknown,
+  resolveTexture: PreparedTextureResolver = (_key, address) => resolvePreparedAssetUrl(address, definition.assetOrigin)): SerializedPreparedScene {
   const selection = initialObjectSelection(definition.controls, lensId, settings);
   const variant = definition.variants.find(entry => Object.entries(entry.when).every(([key, value]) => selection[key] === value));
   if (!variant) throw new TypeError(`${definition.id}: initial presentation is missing.`);
@@ -44,14 +50,15 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
     const style = target(index).style, property = cssName(name);
     if (value) style.set(property, value); else style.delete(property);
   };
-  // This SSR markup reads `definition.assets` directly rather than through
-  // `createPreparedResidency`'s chokepoint, so it resolves the same way here.
-  const assets = new Map(definition.assets.entries.map(entry => [entry.key, resolvePreparedAssetUrl(entry.url, definition.assetOrigin)]));
+  // This SSR markup reads `definition.assets` directly rather than through `createPreparedResidency`'s chokepoint, and
+  // resolves only the textures this view writes: a page embeds just the hashes its first view reads.
+  const assets = new Map(definition.assets.entries.map(entry => [entry.key, entry.url])), textures = new Map<string, string>();
   const texture = (key: string | null) => {
     if (key === null) return 'none';
-    const url = assets.get(key);
-    if (!url) throw new TypeError(`${definition.id}: initial texture ${key} has no prepared URL.`);
-    return `url(${JSON.stringify(url)})`;
+    const address = assets.get(key);
+    if (!address) throw new TypeError(`${definition.id}: initial texture ${key} has no prepared URL.`);
+    textures.set(key, address);
+    return `url(${JSON.stringify(resolveTexture(key, address))})`;
   };
   for (const [index, node] of definition.tree.nodes.entries()) {
     for (const id of node.properties) {
@@ -95,5 +102,5 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
     return `<${node.tag}${Object.entries(attributes).map(([key, value]) => ` ${key}="${escape(value)}"`).join('')}>${hidden.has(index) ? '' : node.children.map(serialize).join('')}</${node.tag}>`;
   };
   return { html: roots.map(serialize).join(''), classes: [...stage.classes], attributes: stage.attributes,
-    style: styleText(stage.style), nodes: elements.length };
+    style: styleText(stage.style), nodes: elements.length, textures: [...textures].map(([key, address]) => ({ key, address })) };
 }

@@ -98,6 +98,8 @@ That approval does not publish assets; use the separate workflow above.
 
 Prepared runtime files are served from an R2 bucket, content-addressed as `runtime-assets/<sha256>/<filename>`. One small inventory per object is tracked in Git instead of the baked bytes: `inventory.json`, listing the public browser textures and everything baked under `prepared/`, each entry with its location, filename, bytes and hash (`object.json` and `page.json` are regenerated, not inventoried; layered-body provenance is regenerated too, while volumes, image layers and catalogues publish their baked `provenance.json`). The inventory owner also excludes audit-only terrain reports and source-index rasters.
 
+A page embeds only the hashes its first view reads: files its prepared markup and styles name, its startup resources and the textures its server markup writes. Each other resource's hash waits in a same-origin group file, `/objects/<id>/asset-hashes/<group>.json`, which the browser reads the first time a zoom level or dataset needs it. Resources whose keys differ only in their first index share a group (one dataset's pages at one level); keys without an index share one. A hash is 64 characters that do not compress, so Earth's page would otherwise carry 1,754 of them ([`site/asset-origin.mts`](site/asset-origin.mts)).
+
 After baking, publish and commit the refreshed inventory:
 
 ```sh

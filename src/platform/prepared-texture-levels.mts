@@ -8,11 +8,26 @@ export function requireTextureLevels(value: unknown, variants: readonly Pick<Pre
     if (!value || typeof value !== 'object' || Array.isArray(value) || fields && Object.keys(value).some(key => !fields.includes(key))) throw new TypeError('Invalid prepared texture levels.');
     return value as Record<string, unknown>;
   };
-  const plan = record(value, ['hysteresis', 'fixedLevel', 'levels']);
+  const plan = record(value, ['hysteresis', 'fixedLevel', 'levels', 'placements']);
   if (typeof plan.hysteresis !== 'number' || !Number.isFinite(plan.hysteresis) || plan.hysteresis < 0 || plan.hysteresis >= 1 ||
       !isArray(plan.levels) || plan.levels.length < 2 || plan.levels.length > 8) throw new TypeError('Invalid prepared texture levels.');
   if (plan.fixedLevel !== undefined && (typeof plan.fixedLevel !== 'number' || !Number.isInteger(plan.fixedLevel) || plan.fixedLevel < 0 || plan.fixedLevel >= plan.levels.length)) fail();
   const textures = new Set(variants.flatMap(variant => variant.writes.filter(write => write.kind === 'texture').map(write => write.resource)));
+  if (plan.placements !== undefined) {
+    const placements = record(plan.placements, ['body', 'writes']), body = record(placements.body, ['center', 'radius']);
+    const point = (value: unknown) => isArray(value) && value.length === 3 && value.every(item => typeof item === 'number' && Number.isFinite(item));
+    const positive = (value: unknown) => typeof value === 'number' && Number.isFinite(value) && value > 0;
+    if (!point(body.center) || !positive(body.radius)) fail();
+    const names = new Set(variants.flatMap(variant => variant.writes.filter(write => write.kind === 'texture').map(write => write.name)));
+    const writes = record(placements.writes);
+    if (!Object.keys(writes).length) fail();
+    for (const [name, input] of Object.entries(writes)) {
+      const write = record(input, ['center', 'radius', 'normal', 'spread']);
+      const normal = write.normal as number[];
+      if (!names.has(name) || !point(write.center) || !positive(write.radius) || !point(normal) || Math.abs(Math.hypot(...normal) - 1) > 1e-3 ||
+          typeof write.spread !== 'number' || !(write.spread >= 0 && write.spread <= Math.PI)) throw new TypeError(`Invalid prepared texture placement ${name}.`);
+    }
+  }
   let previous = -1; let addresses: string[] | undefined;
   for (const [i, input] of plan.levels.entries()) {
     const level = record(input, ['minimumDiameter', 'resources']);

@@ -7,7 +7,7 @@ import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterial
 import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
-import { selectPreparedTextureLevel, type PreparedTextureLevels } from './prepared-texture-levels.js';
+import { selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels } from './prepared-texture-levels.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
@@ -24,6 +24,9 @@ export interface PreparedView {
    * open, so the two differ by that move. */
   principalOffset: readonly number[];
   stageViewport: { readonly principalOffsetPixels: readonly number[] };
+  viewportWidth?: number; viewportHeight?: number;
+  /** Every motion animation is paused at its prepared start, where the prepared texture placements hold. */
+  motionAtRest?: boolean;
 }
 export type PreparedWrite = { target: number; name: string } & (
   { kind: "attribute"; value: string | null } | { kind: "class"; value: boolean } |
@@ -84,7 +87,7 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel, initial) : undefined;
   // A level names the resource each texture reads; a capability fallback then replaces it where this browser needs one.
   const fallback = activeResourceFallbacks(definition.assets?.fallbacks);
-  const levelResources = textureLevel === undefined ? undefined : definition.textureLevels!.levels[textureLevel].resources;
+  const levelResources = textureLevel === undefined ? undefined : textureLevelFor(definition.textureLevels!, textureLevel, variant, view);
   const textureResources = levelResources === undefined && !Object.keys(fallback).length ? undefined
     : { ...fallback, ...Object.fromEntries(Object.entries(levelResources ?? {}).map(([key, level]) => [key, fallback[level] ?? level])) };
   const content = variant.required.map(key => textureResources?.[key] ?? key);
@@ -109,6 +112,19 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     ...(deferredTextures ? { deferredTextures } : {}),
     ...(textureLevel === undefined ? {} : { textureLevel }), ...(textureResources === undefined ? {} : { textureResources }),
     ...(variant.navigation ? { navigation: variant.navigation } : {}) };
+}
+/** The selected level's resources, except that a texture whose faces the camera cannot see keeps the first level. */
+function textureLevelFor(levels: PreparedTextureLevels, level: number, variant: PreparedVariant, view: import('./prepared-material.js').PreparedMaterialView | null) {
+  const resources = levels.levels[level]!.resources;
+  if (!levels.placements || level === 0 || !view?.projection || view.motionAtRest !== true || !(view.viewportWidth! > 0) || !(view.viewportHeight! > 0)) return resources;
+  const unseen = unseenTextureWrites(levels.placements, view.projection, { width: view.viewportWidth!, height: view.viewportHeight! });
+  if (!unseen.size) return resources;
+  const seen = new Set<string>(), hidden = new Set<string>();
+  for (const write of variant.writes) if (write.kind === 'texture' && write.resource !== null && write.resource in resources)
+    (unseen.has(write.name) ? hidden : seen).add(write.resource);
+  const first = levels.levels[0]!.resources, chosen = { ...resources };
+  for (const key of hidden) if (!seen.has(key)) chosen[key] = first[key]!;
+  return chosen;
 }
 const datasetKey = (name: string) => name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 function readAttribute(element: HTMLElement, name: string) {

@@ -52,3 +52,11 @@ test('HTML escaping and ordered CSS writes preserve quoted semicolons and the in
   assert.deepEqual(scene.attributes, { 'data-lens': 'initial' });
   assert.deepEqual(scene.classes, ['prepared']);
 });
+
+test('a view resolves only the textures it writes, and reports them', () => {
+  const resolved: string[] = [];
+  const scene = serializePreparedScene(definition, undefined, undefined, (key, address) => { resolved.push(key); return `https://earth-assets.example${address}`; });
+  assert.deepEqual(resolved, scene.textures.map(texture => texture.key));
+  assert.ok(scene.textures.length > 0 && scene.textures.length < definition.assets.entries.length, 'Saturn writes some, not all, of its resources');
+  for (const { address } of scene.textures) assert.ok(scene.html.includes(`https://earth-assets.example${address}`.replaceAll('"', '&quot;')));
+});

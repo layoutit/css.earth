@@ -60,6 +60,10 @@ export function createPreparedPlayback() {
       if (destroyed) return;
       for (const { animation, mode } of handles.values()) if (mode === "motion") animation.currentTime = 0;
     },
+    /** Whether every motion animation is paused at its prepared start, the pose preparation measured. */
+    motionAtRest() {
+      return [...handles.values()].every(({ animation, mode, running }) => mode !== "motion" || !running && Number(animation.currentTime ?? 0) === 0);
+    },
     captureMotion() {
       return [...handles.values()].filter(entry => entry.mode === "motion")
         .map(({ animation }) => Number(animation.currentTime ?? 0));

@@ -1,7 +1,8 @@
 import { isArray, isRecord } from '@cssearth/core';
 import type {ProjectiveGeometry} from '../../../src/platform/projective-surface-raster.mts';
 import type {RasterInfo} from '../observation/raster.mts';
-export interface PagedRasterConfiguration {publicBase: string; atlas: {density: number; gutter: number; pageSize: number; sourceWidth: number};}
+export interface PagedRasterConfiguration {publicBase: string; geometry: {BODY_LONGITUDE_SEGMENTS: number};
+  atlas: {density: number; gutter: number; pageSize: number; pageCells: number; sourceWidth: number};}
 export interface PagedSurfacePresentation {packedRect: {x: number; y: number; width: number; height: number}; overscan: number;
   layout: {gutter: number; bands: readonly {y: number; height: number; packedY: number}[]};}
 export interface PagedSurfaceRasterCell {
@@ -49,11 +50,51 @@ function surfacePageUrls(name: string, pageCount: number, suffix = "") {
     `${config.publicBase}${name}${page ? `-page-${page}` : ""}${suffix}.webp`);
 }
 
-function createSurfaceRasterPlan() {
+/** Neighbouring cells of one latitude row share a page, `pageCells` of them. Chrome decodes a whole image to draw any
+ * part of it and never draws a face turned away, so a view decodes only the pages it shows. Latitude-band pages each
+ * ran round the globe, so every view decoded all of them: 109 MP at Earth's closest level, decoded again after each
+ * zoom because the set outgrew Chrome's decode cache. A page takes whichever halving of the canonical width gives it
+ * the smallest area; texture levels halve every page exactly. */
+function layoutBlockPages(sizes: readonly number[]) {
+  const { pageSize, gutter, pageCells } = SURFACE_ATLAS, row = config.geometry.BODY_LONGITUDE_SEGMENTS;
+  if (!Number.isInteger(pageCells) || pageCells < 1 || row % pageCells)
+    throw new Error(`${config.publicBase}: atlas.pageCells ${pageCells} must divide ${row} longitude cells.`);
+  const blocks = new Map<number, number[]>();
+  sizes.forEach((_, index) => {
+    const block = Math.floor(index / row) * (row / pageCells) + Math.floor(index % row / pageCells);
+    blocks.set(block, [...blocks.get(block) ?? [], index]);
+  });
+  const positions: {page: number; x: number; y: number}[] = [], pages: {width: number; height: number}[] = [];
+  for (const [block, members] of [...blocks].sort((a, b) => a[0] - b[0])) {
+    let best: {width: number; height: number; placed: {index: number; x: number; y: number}[]} | null = null;
+    for (let width = pageSize; width >= pageSize / 4; width /= 2) {
+      let x = 0, y = 0, shelf = 0;
+      const placed: {index: number; x: number; y: number}[] = [];
+      if (members.some(index => sizes[index] + 2 * gutter > width)) continue;
+      for (const index of members) {
+        const stride = sizes[index] + 2 * gutter;
+        if (x + stride > width) { x = 0; y += shelf; shelf = 0; }
+        placed.push({ index, x: x + gutter, y: y + gutter });
+        x += stride;
+        shelf = Math.max(shelf, stride);
+      }
+      const height = Math.ceil((y + shelf) / 4) * 4;
+      if (height <= pageSize && (!best || width * height < best.width * best.height)) best = { width, height, placed };
+    }
+    if (!best) throw new Error(`${config.publicBase}: raster page block ${block} (cells ${members.join(',')}) does not fit a ${pageSize} px page.`);
+    const page = pages.length;
+    pages.push({ width: best.width, height: best.height });
+    for (const { index, x, y } of best.placed) positions[index] = { page, x, y };
+  }
+  return { positions, pages };
+}
+
+/** Without `sizes` the plan only measures: every cell sits on one provisional page, and the scene that names those
+ * pages is discarded. With the measured sizes it lays out the block pages before any face names its page. */
+function createSurfaceRasterPlan(sizes?: readonly number[]) {
   const cells: PagedSurfaceRasterCell[] = [];
-  const pages: {width: number; height: number}[] = [];
-  let shelfX = 0, shelfY = 0, shelfHeight = 0;
-  let page = 0;
+  const blocks = sizes ? layoutBlockPages(sizes) : null;
+  const pages: {width: number; height: number}[] = blocks ? blocks.pages : [{ width: SURFACE_ATLAS.pageSize, height: SURFACE_ATLAS.pageSize }];
   return {
     cells,
     pages,
@@ -125,25 +166,12 @@ function createSurfaceRasterPlan() {
         return existing;
       }
       if (index !== cells.length) throw new Error("Paged ellipsoid raster cells must be prepared in source order.");
-      const stride = size + 2 * SURFACE_ATLAS.gutter;
-      if (stride > SURFACE_ATLAS.pageSize) throw new Error("Paged ellipsoid raster cell exceeds its page.");
-      if (shelfX + stride > SURFACE_ATLAS.pageSize) {
-        shelfX = 0;
-        shelfY += shelfHeight;
-        shelfHeight = 0;
-      }
-      if (shelfY + stride > SURFACE_ATLAS.pageSize) {
-        page++;
-        shelfX = 0;
-        shelfY = 0;
-        shelfHeight = 0;
-      }
-      const cell = { ...facts, page, x: shelfX + SURFACE_ATLAS.gutter,
-        y: shelfY + SURFACE_ATLAS.gutter };
-      shelfX += stride;
-      shelfHeight = Math.max(shelfHeight, stride);
-      pages[page] = { width: SURFACE_ATLAS.pageSize,
-        height: Math.ceil((shelfY + shelfHeight) / 4) * 4 };
+      if (size + 2 * SURFACE_ATLAS.gutter > SURFACE_ATLAS.pageSize)
+        throw new Error(`${config.publicBase}: raster cell ${index} (${size} px) exceeds the ${SURFACE_ATLAS.pageSize} px page.`);
+      const position = blocks ? blocks.positions[index] : { page: 0, x: SURFACE_ATLAS.gutter, y: SURFACE_ATLAS.gutter };
+      if (!position || (blocks && sizes?.[index] !== size))
+        throw new Error(`${config.publicBase}: raster cell ${index} measured ${sizes?.[index]} px but prepared ${size} px.`);
+      const cell = { ...facts, ...position };
       cells.push(cell);
       return cell;
     },
@@ -153,7 +181,7 @@ function createSurfaceRasterPlan() {
 // Bake the projective texture into RGBA, as in Pluto, so the browser only
 // positions an affine rectangle. Pixels outside the trapezoid stay transparent
 // instead of relying on Chrome to flatten a perspective-warped child.
-function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: RasterInfo, cells: readonly PagedSurfaceRasterBakeCell[], density = 8, page = 0,
+function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: RasterInfo, plan: Pick<PagedSurfaceRasterPlan, 'cells' | 'pages'>, density = 8, page = 0,
   nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1, nativeOcean?: NativeDeepOceanFill) {
   if (channels !== 3 || !(height > 0) || data.length !== width * height * channels ||
       ![2, 4, 8].includes(density) || width !== height * 2 ||
@@ -166,15 +194,17 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
       nativeOcean.data.length !== width * height * 3 || nativeOcean.weight.length !== width * height)) {
     throw new Error("Paged ellipsoid deep ocean fill replacement does not share the plain source grid.");
   }
+  const { cells } = plan, pageWidth = plan.pages[page]?.width;
   if (!isArray(cells)) throw new Error("Paged ellipsoid raster cells are invalid.");
   const pageCells = cells.filter(cell => cell?.page === page);
-  if (!Number.isInteger(page) || page < 0 || pageCells.length === 0) throw new Error("Paged ellipsoid raster page is missing.");
+  if (!Number.isInteger(page) || page < 0 || pageCells.length === 0 || !Number.isInteger(pageWidth) || !(pageWidth > 0))
+    throw new Error(`Paged ellipsoid raster page ${page} is missing (width ${pageWidth}).`);
   if (pageCells.some(cell => !cell ||
       !Number.isInteger(cell.page) || cell.page < 0 ||
       !Number.isInteger(cell.x) || !Number.isInteger(cell.y) ||
       !Number.isInteger(cell.size) || cell.size <= 0 ||
       cell.x < SURFACE_ATLAS.gutter || cell.y < SURFACE_ATLAS.gutter ||
-      cell.x + cell.size + SURFACE_ATLAS.gutter > SURFACE_ATLAS.pageSize ||
+      cell.x + cell.size + SURFACE_ATLAS.gutter > pageWidth ||
       cell.y + cell.size + SURFACE_ATLAS.gutter > SURFACE_ATLAS.pageSize ||
       !Number.isFinite(cell.density) || cell.density <= 0 ||
       !Number.isFinite(cell.perspectiveY) || cell.perspectiveY > 0 ||
@@ -186,7 +216,7 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
     throw new Error("Paged ellipsoid raster cells are invalid.");
   }
   const atlasScale = density / SURFACE_ATLAS.density;
-  const outputWidth = SURFACE_ATLAS.pageSize * atlasScale;
+  const outputWidth = pageWidth * atlasScale;
   const outputHeight = Math.ceil(Math.max(...pageCells.map(cell =>
     cell.y + cell.size + SURFACE_ATLAS.gutter)) / 4) * 4 * atlasScale;
   const output = Buffer.alloc(outputWidth * outputHeight * 4);
@@ -252,7 +282,7 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
   return { data: output, width: outputWidth, height: outputHeight, channels: 4 as const };
 }
 
-return { atlas: SURFACE_ATLAS, surfacePageUrls, createSurfaceRasterPlan, bakeSurfaceRaster };
+return { atlas: SURFACE_ATLAS, surfacePageUrls, layoutBlockPages, createSurfaceRasterPlan, bakeSurfaceRaster };
 }
 
 /** Parse a checked-in raster layout for a selective asset refresh without rebuilding geometry. */

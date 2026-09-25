@@ -12,25 +12,28 @@ export interface PreparedResidencyTicket { readonly required: readonly string[];
 export interface PreparedResidencyOptions {
   assets: PreparedAssets; createImage?: () => PreparedImage; onReady?: (key: string) => void; onWarmError?: (error: unknown) => void; onCleanupError?: (error: unknown) => void;
   schedule?: typeof setTimeout; unschedule?: typeof clearTimeout; assetOrigin?: PreparedAssetOrigin;
+  /** Reads a hash group the page did not embed (`createPreparedAssetResolver`); tests replace the network. */
+  readAssetHashes?: (url: string) => Promise<unknown>;
 }
 interface CacheEntry { key: string; lease: PreparedImageLease; ready: boolean; retired: boolean; timer: ReturnType<typeof setTimeout> | null; order: number;
   promise: Promise<PreparedImage | null>; resolve(value: PreparedImage | null): void; reject(reason: unknown): void; }
 interface TicketState { required: Set<string>; prewarm: string[]; ready: boolean; retired: boolean; resolve(value: PreparedResidencyTicket | null): void; }
 
 import { createPreparedImageStore } from "./prepared-image-store.js";
-import { resolvePreparedAssetUrl } from "./prepared-asset-origin.js";
+import { createPreparedAssetResolver } from "./prepared-asset-origin.js";
 
 // Demands are prepared keys in priority order. This owner knows capacities and
 // leases, not planets, texture rows, lens semantics, or presentation elements.
 export function createPreparedResidency({
   assets, createImage, onReady = () => {}, onWarmError = () => {}, onCleanupError = onWarmError,
-  schedule = setTimeout, unschedule = clearTimeout, assetOrigin,
+  schedule = setTimeout, unschedule = clearTimeout, assetOrigin, readAssetHashes,
 }: PreparedResidencyOptions) {
   // The single chokepoint every image load and material `url()` reads through
-  // (`resources.read`/`resources.url` below): entries keep their prepared `/scenes/`
-  // address unless the build published this object's assets to `assetOrigin`.
-  const catalog = new Map(assets.entries.map(entry => [entry.key,
-    assetOrigin ? { ...entry, url: resolvePreparedAssetUrl(entry.url, assetOrigin) } : entry]));
+  // (`resources.read`/`resources.url` below). Entries keep their prepared `/scenes/` address as their identity; a load
+  // first makes the address's hash present, then reads the published URL when the build published this object's assets.
+  const catalog = new Map(assets.entries.map(entry => [entry.key, entry]));
+  const published = createPreparedAssetResolver(assetOrigin, ...(readAssetHashes ? [readAssetHashes] : []));
+  const publishedUrl = (key: string) => published.url(assetFor(key).url);
   const policies = new Map(assets.pools.map(pool => [pool.id, pool]));
   const images = createPreparedImageStore({ pools: assets.pools, ...(createImage ? { createImage } : {}) });
   const cache = new Map<string, CacheEntry>(), mount = new Set<string>(), warmed = new Set<string>(), tickets = new WeakMap<PreparedResidencyTicket, TicketState>();
@@ -84,7 +87,7 @@ export function createPreparedResidency({
     entry.retired = true;
     if (entry.timer !== null) unschedule(entry.timer);
     entry.resolve(null);
-    if (handoff) entry.lease.handoff(assetFor(key).url);
+    if (handoff) entry.lease.handoff(publishedUrl(key));
     entry.lease.destroy();
   }
   function releaseWarmed(keys: Iterable<string>) {
@@ -107,7 +110,9 @@ export function createPreparedResidency({
     const load = () => {
       entry.timer = null;
       if (entry.retired || destroyed) return;
-      entry.lease.load(asset.url, { pool: asset.pool }).then(image => {
+      // An embedded hash loads at once; a missing one waits for its group.
+      (published.has(asset.url) ? entry.lease.load(publishedUrl(key), { pool: asset.pool })
+        : published.ensure(key, asset.url).then(() => entry.retired || destroyed ? null : entry.lease.load(publishedUrl(key), { pool: asset.pool }))).then(image => {
         if (entry.retired || destroyed) return;
         if (!image) throw new Error(`Prepared resource retired before readiness: ${key}.`);
         if (asset.decodedBytes !== undefined && image.naturalWidth * image.naturalHeight * 4 !== asset.decodedBytes)
@@ -182,13 +187,13 @@ export function createPreparedResidency({
       if (!catalog.has(key)) throw new RangeError(`Undeclared prepared resource: ${key}.`);
       if (!ready(key)) return null;
       frameReads?.add(key);
-      return images.read(assetFor(key).url);
+      return images.read(publishedUrl(key));
     },
     url(key: string) {
       if (!catalog.has(key)) throw new RangeError(`Undeclared prepared resource: ${key}.`);
       if (!ready(key)) return null;
       frameReads?.add(key);
-      return assetFor(key).url;
+      return publishedUrl(key);
     },
     readyKeys: () => Object.freeze([...new Set([...warmed, ...cache.keys()])].filter(ready)),
   });
