@@ -21,7 +21,7 @@ import { execFile, spawnSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { staleBuilds } from '../ci/check-stale-builds.mts';
+import { staleBuilds, staleInstall } from '../ci/check-stale-builds.mts';
 
 export interface PreparationOptions { readonly reuseImages?: boolean }
 /** `once`: the command does not name an object. `ids`: the tool takes every id in one call. `each`: one command per object,
@@ -40,8 +40,13 @@ const exists = (path: string) => access(path).then(() => true, () => false);
 
 /** The chain, in order. A step's purpose says what the next one needs from it. */
 export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<PreparationStep[]>([
-  { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', scope: 'once', commands: async () =>
-    (await staleBuilds()).filter(build => build.name !== 'solar geometry').map(build => build.command.split(' ')) },
+  { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', scope: 'once', commands: async () => {
+    const install = await staleInstall();
+    if (install) throw new Error(install);
+    return (await staleBuilds()).filter(build => build.name !== 'solar geometry').map(build => build.command.split(' '));
+  } },
+  { name: 'inputs', purpose: "check the reader text budgets and restore the Sun's stale files before the long bake", scope: 'ids', commands: async ids =>
+    [node('tools/prepare/check-preparation-inputs.mts', ...ids)] },
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async ids =>
     (await Promise.all(ids.map(id => exists(resolve('packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('tools/prepare/prepare-solar-geometry.mts')] : [] },
@@ -90,7 +95,9 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
       if (failures.length) { console.error(`\nStep "${step.name}" failed running: ${failures[0]}\nFix it, then resume: ${resume(step)}`); return false; }
       continue;
     }
-    const commands = await step.commands(ids, { reuseImages });
+    // A step may refuse while it plans, before running anything (the builds step on a stale install).
+    const commands = await step.commands(ids, { reuseImages }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
+    if (commands instanceof Error) { console.error(`\nStep "${step.name}" refused: ${commands.message}\nFix it, then resume: ${resume(step)}`); return false; }
     progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);
     for (const [command, ...args] of commands) {
       const run = spawnSync(command!, args, { stdio: 'inherit' });

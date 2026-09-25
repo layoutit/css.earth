@@ -31,8 +31,10 @@ const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - 
 const unit = (a: readonly number[]) => a.map(v => v / Math.hypot(...a));
 
 /** Simplify the released topology before UV sampling. Original positions are
- * retained; geometry and the simplifier never enter the browser runtime. */
-export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudget: number; sourceTopology?: string; simplification: RadialSimplification}, scale: number) {
+ * retained; geometry and the simplifier never enter the browser runtime. A source
+ * already within the face target is kept whole. `source` names the object and file
+ * in a refusal. */
+export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudget: number; sourceTopology?: string; simplification: RadialSimplification; source?: string}, scale: number) {
   const { targetFaces, maximumErrorMeters } = profile.simplification;
   if (!mesh.positions || !mesh.indices || !Number.isInteger(targetFaces) || targetFaces < 4 ||
       !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 4000 ||
@@ -69,15 +71,18 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
   // Collapse in the image plane with scaled height as an attribute. This
   // preserves the height-field orientation, unlike unconstrained 3D collapse.
   const extent = imagePlane ? Math.max(...[0, 1].map(axis => mesh.bounds[1][axis] - mesh.bounds[0][axis])) : 0;
-  const [simplified, error] = imagePlane
+  // meshoptimizer refuses a target above the source's own count (a bare "Assertion failed" on Nyx's 512 faces).
+  const targetIndices = Math.min(targetFaces * 3, sourceIndices.length);
+  const reduce = (errorLimit: number) => imagePlane
     ? MeshoptSimplifier.simplifyWithAttributes(sourceIndices,
       Float32Array.from(positions.flatMap(p => [p[0], p[1], 0])), 3,
       Float32Array.from(positions, p => p[2] / extent), 1, [1], null,
-      targetFaces * 3, maximumErrorMeters, flags)
+      targetIndices, errorLimit, flags)
     : locks
     ? MeshoptSimplifier.simplifyWithAttributes(sourceIndices, packedPositions, 3,
-      new Float32Array(), 0, [], locks, targetFaces * 3, maximumErrorMeters, flags)
-    : MeshoptSimplifier.simplify(sourceIndices, packedPositions, 3, targetFaces * 3, maximumErrorMeters, flags);
+      new Float32Array(), 0, [], locks, targetIndices, errorLimit, flags)
+    : MeshoptSimplifier.simplify(sourceIndices, packedPositions, 3, targetIndices, errorLimit, flags);
+  const [simplified, error] = reduce(maximumErrorMeters);
   // Edge collapses can leave exactly coincident, oppositely wound face pairs
   // (zero-volume fins). Cancel only those exact pairs, then require closure.
   // No positions are moved and no source feature is approximated in cleanup.
@@ -85,7 +90,13 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
   if (imagePlane && !mesh.imagePlaneCoordinates) throw new Error('Image DEM lacks its source plane coordinates.');
   const repaired = imagePlane && mesh.imagePlaneCoordinates ? repairImageDemDiagonals(cleaned, mesh.imagePlaneCoordinates) : null;
   const indices = repaired?.indices ?? cleaned;
-  if (!indices.length || indices.length / 3 > targetFaces) throw new Error(`Source mesh reached ${indices.length / 3} faces at ${error} m estimated error; requested ${targetFaces} within ${maximumErrorMeters} m.`);
+  if (!indices.length || indices.length / 3 > targetFaces) {
+    // Name what the target costs, so the author can raise the bound or the target from a number instead of guessing.
+    const [unbounded, needed] = reduce(Infinity);
+    throw new Error(`${profile.source ?? 'Source mesh'}: simplification stopped at ${indices.length / 3} of ${sourceIndices.length / 3} source faces at ${error} m estimated error; ` +
+      `the target is ${targetFaces} faces within maximumErrorMeters ${maximumErrorMeters}. ` +
+      (unbounded.length / 3 <= targetFaces ? `Reaching ${targetFaces} faces needs ${needed} m.` : `Without an error bound it still stops at ${unbounded.length / 3} faces.`));
+  }
   const topology = open ? validateObservedReduction(sourceIndices, indices, positions)
     : preserveSource ? validateClosedMesh(indices, positions) : undefined;
   const imageReduction = repaired ? { diagonalFlips: repaired.flips,
