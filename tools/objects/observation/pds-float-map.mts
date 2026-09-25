@@ -1,7 +1,7 @@
 import { open } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { number, object, parse, string } from '@cssearth/core/schema';
-import { pds3Keyword } from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 
 const profileSchema = object({ productId: string, productVersion: string, wavelengthNanometers: number,
   gain: number, gamma: number, referenceRadiusMeters: number, outputLongitudeOrigin: number });

@@ -8,7 +8,7 @@ import { resolve, dirname, basename } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
 import { readFitsHeader } from '@cssearth/fits';
-import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
+import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope';
 import { inside, sourceCacheAddress } from './source-product-contract.mts';
 import { parseSourceProcessing, type SourceFile, type SourceProduct } from './source-product-contract.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }

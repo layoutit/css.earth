@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '../../terrestrial-layers/shape-camera-mosaic.mts';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
-import { pds3Keyword, pds3Values } from '../../pds-labels.mts';
+import { pds3Keyword, pds3Values } from '@cssearth/telescope';
 import { readFitsPrimary } from '@cssearth/fits';
 import { pds3LabelHasReflectance } from './pds3-reflectance.mts';
 import { castSourceRays } from '../geometry.mts';

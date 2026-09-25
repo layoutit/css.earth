@@ -3,7 +3,7 @@
  * tag spellings without entity expansion; PDS3 uses a scoped label reader.
  * Decoders compare these values with their recipes and never guess a missing value.
  */
-export { pds3Keyword, pds3Values } from './pds3-labels.mts';
+export { pds3Keyword, pds3Values } from './pds3-labels.js';
 const escapeName = (name: string) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /** Every PDS4 element with this name: its opening tag and its content, which may hold nested elements. */

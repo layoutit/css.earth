@@ -52,7 +52,7 @@ test('document labels and acquisition headers belong to the same pinned input se
 });
 
 test('PDS4 identity is scoped to the product and all native files remain pinned',async()=>{
- const {pds4ProductIdentity}=await import('../pds-labels.mts');
+ const {pds4ProductIdentity}=await import('@cssearth/telescope');
  const xml='<Identification_Area><logical_identifier>urn:nasa:pds:test:product</logical_identifier><version_id>2.0</version_id><Modification_History><Modification_Detail><version_id>1.0</version_id></Modification_Detail></Modification_History></Identification_Area>';
  assert.deepEqual(pds4ProductIdentity(xml),{logical_identifier:'urn:nasa:pds:test:product',version_id:'2.0'});
  assert.throws(()=>pds4ProductIdentity(xml.replace('<version_id>2.0</version_id>','<version_id>2.0</version_id><version_id>3.0</version_id>')),/Expected one/);

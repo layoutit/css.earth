@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
-import { pds3Keyword } from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 
 // PDS3 byte images carry their projection and validity in the attached label.

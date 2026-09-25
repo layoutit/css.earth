@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 import { copyFile, mkdir } from 'node:fs/promises';
 import { sha256File } from '@cssearth/core/node';
 import { basename, resolve } from 'node:path';
-import { pds3Values } from '../../../pds3-labels.mts';
+import { pds3Values } from '@cssearth/telescope';
 import { fileSize } from '@cssearth/telescope/node';
 import type { FamilyHandler, FamilyOperation } from '../../family-handlers.mts';
 import type { AxisDescriptor, DescriptorIssue, DescriptorMember, ProductComponent, ProductDescriptor, UncertaintyDescriptor } from '../../product-descriptor.mts';

@@ -5,7 +5,7 @@
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
+import { pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope';
 
 const measurement = (value: string, field: string) => {
   const match = /^([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[Ee][+-]?\d+)?)\s*<([^<>]+)>$/u.exec(value.trim());

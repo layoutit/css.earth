@@ -35,7 +35,7 @@ import { kernelBankPaths } from '../../spice/kernel-bank.mts';
 import { numbers } from '../../spice/text-kernel.mts';
 import { utcToEt } from '../../spice/lsk.mts';
 import { spiceCamera, type PixelModelKeys, type SpiceCamera } from '../../spice/camera.mts';
-import { pds3Keyword } from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dot3 as dot, flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECIPE_SCHEMA = 'cssearth-jiram-mosaic@1';

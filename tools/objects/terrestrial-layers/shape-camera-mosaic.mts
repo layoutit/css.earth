@@ -10,7 +10,7 @@ import {resolve} from 'node:path';
 import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mts';
 import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
 import { readFitsPrimary, readFitsImage, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
-import { pds3Keyword } from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts';
 
 const rad = Math.PI / 180;

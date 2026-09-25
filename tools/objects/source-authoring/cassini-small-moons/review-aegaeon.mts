@@ -4,7 +4,7 @@ import { basename, resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { decodeCalibratedCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
-import { pds3Keyword } from '../../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 
 // A source inspection only. It cannot fit a camera or publish a surface.
 const args = process.argv.slice(2), acquire = args.includes('--acquire');

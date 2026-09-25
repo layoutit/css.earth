@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
+import { it as test } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { pds3Keyword, pds3Values, pds4Block, pds4Blocks, pds4Elements, pds4Field, pds4Number } from './pds-labels.mts';
+import { pds3Keyword, pds3Values, pds4Block, pds4Blocks, pds4Elements, pds4Field, pds4Number } from './pds-labels.js';
 
 test('PDS3 keywords read quoted values and lists without their quotes', () => {
   const label = 'FILTER_NAME = ("CL1","GRN")\nUNITS = \'I/F\'\n  TARGET_NAME = "HYPERION"\nREFLECTANCE_SCALING_FACTOR = 1.000000E-04\n';
@@ -82,7 +81,7 @@ test('PDS3 bounds label size and structural nesting', () => {
 });
 
 test('native Cassini and Voyager labels retain observation identity and distinguish calibration prose from fields', () => {
-  const read = (path: string) => readFileSync(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8');
+  const read = (path: string) => readFileSync(new URL(`../../../src/objects/${path}`, import.meta.url), 'utf8');
   const cassini = read('tethys/source/observations/N1807429484_1_CALIB.LBL');
   assert.equal(pds3Keyword(cassini, 'TARGET_NAME', []), 'TETHYS');
   assert.equal(pds3Keyword(cassini, 'START_TIME', []), '2015-101T06:43:09.680');
