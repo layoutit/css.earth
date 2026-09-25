@@ -52,7 +52,8 @@ export function createDiagnosticRecorder({ windowTarget: w, button, capture, dow
     detail: event instanceof w.ErrorEvent ? stack(event.error ?? event.message) : stack(event.reason) }, 'error');
   function start() {
     if (active) return;
-    active = { schema: 'cssearth-diagnostics@1', id: w.crypto.randomUUID(),
+    // Not randomUUID: it exists only in secure contexts, and a device on the network loads the dev server over plain http.
+    active = { schema: 'cssearth-diagnostics@1', id: Array.from(w.crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join(''),
       metadata: { startedAt: new Date().toISOString(), performanceTimeOrigin: clock.timeOrigin,
         sampleIntervalMs: SAMPLE_MS, frameClock: 'requestAnimationFrame',
         startTime: clock.now(), url: w.location.href, userAgent: w.navigator.userAgent,

@@ -12,7 +12,8 @@
 // server on the network for it: `pnpm exec astro dev --host 0.0.0.0 --port 4210`.
 // On a device, pymobiledevice3 (https://github.com/doronz88/pymobiledevice3; --pymobiledevice3 <path>, default from
 // $PYMOBILEDEVICE3 or PATH) samples what Web Inspector cannot: the frames per second Core Animation delivers and the memory
-// of Safari's web content processes. It needs Developer Mode on the device and uses macOS's own device tunnel (no root).
+// of Safari's web content processes. It needs Developer Mode on the device and the developer disk image mounted
+// (`pymobiledevice3 mounter auto-mount`), and uses macOS's own device tunnel (no root).
 // Every recording also logs the pointer input the page received (input.json). --replay <capture dir> plays it back: on a
 // device as real touch (one finger), through device-touch.py and pymobiledevice3's Python, after three calibration taps on
 // a transparent shield map page coordinates to the display; on the simulator as the same pointer events dispatched in the
@@ -149,16 +150,23 @@ async function bootedUdid() {
   return requireString(booted[0]!.udid, 'udid');
 }
 
-/** The one iPhone or iPad on USB, unless --device names it. */
+/** The one iPhone or iPad on USB, unless --device names it, once it trusts this Mac. */
 async function connectedDevice(udid: string | null) {
-  const { stdout } = await run('idevice_id', ['-l']).catch(() => ({ stdout: '' }));
+  // A failed command still says why; a missing one names its package.
+  const said = (tool: string) => (error: unknown) => {
+    if (isRecord(error) && error.code === 'ENOENT') throw new Error(`${tool} is not installed: brew install libimobiledevice.`);
+    return { stdout: isRecord(error) ? [error.stdout, error.stderr].filter(text => typeof text === 'string').join(' ') : '' };
+  };
+  const { stdout } = await run('idevice_id', ['-l']).catch(said('idevice_id'));
   const devices = stdout.split('\n').map(line => line.trim()).filter(Boolean);
-  if (udid) {
-    if (!devices.includes(udid)) throw new Error(`Device ${udid} is not on USB (connected: ${devices.join(', ') || 'none'}).`);
-    return udid;
-  }
-  if (devices.length !== 1) throw new Error(`Expected one device on USB, found ${devices.length}${devices.length ? ` (${devices.join(', ')})` : ''}; plug it in and trust this Mac, or pass --device <udid>.`);
-  return devices[0]!;
+  if (udid && !devices.includes(udid)) throw new Error(`Device ${udid} is not on USB (connected: ${devices.join(', ') || 'none'}).`);
+  if (!udid && devices.length === 0) throw new Error('No iPhone or iPad on USB: plug it in with a cable and unlock it.');
+  if (!udid && devices.length > 1) throw new Error(`${devices.length} devices on USB (${devices.join(', ')}); pass --device <udid>.`);
+  const chosen = udid ?? devices[0]!;
+  // usbmuxd lists a device before it trusts this Mac; nothing else answers until it does.
+  const pairing = await run('idevicepair', ['-u', chosen, 'validate']).catch(said('idevicepair'));
+  if (!/SUCCESS/u.test(pairing.stdout)) throw new Error(`Device ${chosen} does not trust this Mac yet: unlock it, tap Trust on "Trust This Computer?" and enter its passcode (idevicepair: ${pairing.stdout.trim() || 'no answer'}).`);
+  return chosen;
 }
 
 /** What the report says about a device: its name, model and system, read over USB. */
@@ -218,7 +226,13 @@ async function visiblePage(pages: readonly { url: string; webSocketDebuggerUrl: 
  * Attaches to the visible tab. */
 async function connectProxy(port: number, target: Target): Promise<{ page: { url: string; webSocketDebuggerUrl: string }; proxy: ChildProcess | null }> {
   const listed = await inspectorPages(port).catch(() => []);
-  if (listed.length) return { page: await visiblePage(listed), proxy: null };
+  if (listed.length) {
+    // A proxy left running for a simulator answers on the same port: a device capture reuses only its own device's proxy.
+    const running = target.kind === 'device' ? (await run('ps', ['-Ao', 'args=']).catch(() => ({ stdout: '' }))).stdout.split('\n') : [];
+    if (target.kind === 'device' && !running.some(line => line.includes('ios_webkit_debug_proxy') && line.includes(`${target.udid}:${port}`)))
+      throw new Error(`Port ${port} already serves Web Inspector pages that are not device ${target.udid}'s (a simulator proxy?): stop it with pkill ios_webkit_debug_proxy, or pass --port <n>.`);
+    return { page: await visiblePage(listed), proxy: null };
+  }
   const proxy = spawn('ios_webkit_debug_proxy', target.kind === 'device' ? ['-c', `${target.udid}:${port}`]
     : ['-s', `unix:${await inspectorSocket(target.udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
   for (let attempt = 0; attempt < 20; attempt++) {
@@ -761,6 +775,10 @@ export function pageReplayExpression(input: unknown) {
 })`;
 }
 
+/** What the device samplers and touch replay need, named when one of them fails. */
+const DEVELOPER_SERVICES = 'pymobiledevice3 (--pymobiledevice3 <path> or $PYMOBILEDEVICE3) needs Developer Mode on the device ' +
+  '(Settings > Privacy & Security, then restart) and the developer disk image mounted (pymobiledevice3 mounter auto-mount); it opens macOS\'s device tunnel itself, without root.';
+
 /** pymobiledevice3's own Python, beside its command. */
 async function bridgePython(binary: string) {
   const path = binary.includes('/') ? binary : (await run('which', [binary]).catch(() => ({ stdout: '' }))).stdout.trim();
@@ -777,7 +795,7 @@ async function playTouches(binary: string, udid: string, events: readonly unknow
   child.stdout?.on('data', chunk => { sent += String(chunk).split('\n').filter(Boolean).length; });
   child.stderr?.on('data', chunk => errors.push(String(chunk)));
   const code = await new Promise<number | null>(done => { child.on('exit', done); child.on('error', () => done(-1)); });
-  if (code !== 0) throw new Error(`device-touch.py exited ${code}: ${errors.join('').slice(-600)}`);
+  if (code !== 0) throw new Error(`device-touch.py exited ${code}: ${errors.join('').slice(-600)}\n${DEVELOPER_SERVICES}`);
   return sent;
 }
 
@@ -1028,6 +1046,9 @@ export async function captureIosMoment(args: readonly string[]) {
   }
   const durationMs = Date.now() - started;
   const deviceMetrics = monitors ? await monitors.stop() : null;
+  // The capture goes on without a sampler, but says so here rather than only in the report.
+  for (const [sampler, result] of Object.entries(deviceMetrics ?? {})) if (isRecord(result) && typeof result.error === 'string')
+    console.error(`No device ${sampler} samples (${result.error.trim().split('\n').at(-1)}). ${DEVELOPER_SERVICES}`);
   const input = await evaluate('window.__captureInput ? window.__captureInput.stop() : null').catch(() => null);
   if (input) await writeFile(resolve(out, 'input.json'), JSON.stringify(input) + '\n');
   await session.send('Timeline.stop');
@@ -1133,7 +1154,13 @@ function readme(r: ReadmeInput): string {
   return lines.join('\n');
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
+if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) await main().catch((error: unknown) => {
+  // A refusal names what is missing; a stack trace would bury it.
+  console.error(`ios-capture: ${error instanceof Error ? error.message : String(error)}`);
+  process.exit(1);
+});
+
+async function main() {
   const args = process.argv.slice(2), runsIndex = args.indexOf('--runs');
   const runs = runsIndex >= 0 ? requireFiniteNumber(Number(args[runsIndex + 1]), '--runs') : 1;
   if (!Number.isInteger(runs) || runs < 1) throw new TypeError('--runs is a whole number of captures.');
