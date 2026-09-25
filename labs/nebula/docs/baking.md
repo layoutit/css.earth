@@ -1,6 +1,6 @@
 # Rebuild nebula assets and research results
 
-For the ordinary app bake, use the [compact-input installation](../../../docs/nebulae/README.md#reproduce-from-a-clean-checkout). It enters through `tools/nebula/prepare.mts` and the private volume-bake package. It needs Node/pnpm and no original observations, simulation archives, NOX or Python. The sections below describe the optional full research replay; its native-artifact verifier intentionally expects research caches.
+For the ordinary app bake, use the [compact-input installation](../../../docs/nebulae/README.md#reproduce-from-a-clean-checkout). It enters through `tools/nebula/prepare.mts` and the volume bake in `@cssearth/bake/volume/node`. It needs Node/pnpm and no original observations, simulation archives, NOX or Python. The sections below describe the optional full research replay; its native-artifact verifier intentionally expects research caches.
 
 Requires **Node 22, pnpm 10.33.0 and Python 3.9–3.12** with `venv`/`pip`, plus internet access and free disk space for the native images, Python environment and results. The pinned TensorFlow release needs a wheel for your OS/CPU. The [clean-install verification](clean-install-verification.md) records the platform actually tested; it is not a claim that every platform produces identical bytes.
 
@@ -83,7 +83,7 @@ For the separate production environment assets (outside this nebula-only workflo
 
 ## Code ownership and separate gates
 
-The research runner is `labs/nebula/run.mts`. Density stage orchestration lives in `packages/lab/src/server/workflows/density`; scientific operations use reconstruction, while deterministic replay uses volume-bake and volume-core. Runtime never performs scientific fitting or bakes textures. [Package validation](internal-packages.md) distinguishes the cache-independent CI job, artifact-dependent lab/browser checks and the explicit cold replay gate. A passing unit suite is not a clean-install or visual-acceptance result.
+The research runner is `labs/nebula/run.mts`. Density stage orchestration lives in `packages/lab/src/server/workflows/density`; scientific operations use reconstruction, while deterministic replay uses `@cssearth/bake/volume/node` and `@cssearth/bake/volume`. Runtime never performs scientific fitting or bakes textures. [Package validation](internal-packages.md) distinguishes the cache-independent CI job, artifact-dependent lab/browser checks and the explicit cold replay gate. A passing unit suite is not a clean-install or visual-acceptance result.
 
 ## Files and recovery
 

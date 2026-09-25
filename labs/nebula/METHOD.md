@@ -14,7 +14,7 @@ Use [Nebula Compiler Process Guidelines](docs/nebula-compiler-guidelines.md) bef
 
 **Current density stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
 
-Scientific algorithms live in the private reconstruction package, shared fields/contracts in volume-core, and offline replay in volume-bake. The lab owns recipes, application state and durable jobs; volume-viewer consumes prepared assets through an injected host renderer. Ordinary app installation uses `tools/nebula/prepare.mts` without scientific refitting. See [ownership and verification](docs/internal-packages.md).
+Scientific algorithms live in the private reconstruction package, shared fields/contracts in `@cssearth/bake/volume`, and offline replay in `@cssearth/bake/volume/node`. The lab owns recipes, application state and durable jobs; volume-viewer consumes prepared assets through an injected host renderer. Ordinary app installation uses `tools/nebula/prepare.mts` without scientific refitting. See [ownership and verification](docs/internal-packages.md).
 
 ## Density method: order of operations
 

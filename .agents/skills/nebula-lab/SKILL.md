@@ -52,17 +52,18 @@ remain unchanged and report when over budget. See
 
 ## Packages and boundaries
 
-`labs/nebula/packages/{lab,volume-core,volume-bake,reconstruction,volume-viewer}`.
+`labs/nebula/packages/{lab,reconstruction,volume-viewer}`, with the shared volume code in `packages/bake` (`@cssearth/bake/volume` and `@cssearth/bake/volume/node`).
 
-- **volume-core** — pure contracts, fields, materials, coordinates. No node builtins, no sharp, no React.
-- **volume-bake** — baking and compact-input IO; may read files.
+- **`@cssearth/bake/volume`** — pure contracts, fields, materials, coordinates. No node builtins, no sharp, no React.
+- **`@cssearth/bake/volume/node`** — baking and compact-input IO; may read files.
 - **reconstruction** — fitting and registration algorithms; object-agnostic, ≤600 lines per file.
 - **lab** — React app, processing server, CLI orchestration, recipes, viewer adapters.
 - **volume-viewer** — the retained-DOM scene.
 
 `pnpm check:nebula-boundaries` enforces the graph: a package may import itself, anything may
-import volume-core, and only `lab` may import the rest. **The cssEarth app (`src/`, `site/`,
-`tools/`) may import only volume-core and volume-bake.** Never widen the rule to make code fit;
+import `@cssearth/bake/volume`, and only `lab` may import the rest. **In the cssEarth app only preparation code
+(`tools/`, `src/preparation/`, `src/renderers/css/preparation/`) may import `@cssearth/bake`; the runtime imports
+nothing from it, not even a type.** Never widen the rule to make code fit;
 move the pure part down and keep a lab-side re-export shim. Moving code between packages
 changes the implementation pins recorded in every delivered file, which forces a re-bake —
 plan relocations before a delivery, not after.

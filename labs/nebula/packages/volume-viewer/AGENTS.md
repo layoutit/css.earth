@@ -1,7 +1,7 @@
 # volume-viewer ownership
 
 - Retained volume scenes, camera control and inspection through an injected renderer.
-- Allowed internal dependencies: volume-core; host-provided renderer operations.
+- Allowed internal dependencies: `@cssearth/bake/volume`; host-provided renderer operations.
 - Keep all implementation in strict TypeScript and every authored source file at or below 600 physical lines.
 - Export explicit public subpaths; validate external values at runtime.
 - Preserve accepted hashes, numerical order, frames, spectral distinctions and persisted state during ownership changes. Never change expected outputs to conceal regressions.

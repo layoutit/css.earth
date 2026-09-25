@@ -14,7 +14,7 @@ src/
 browser/           Application interaction checks
 ```
 
-Dependencies: volume-core, volume-bake, reconstruction and volume-viewer. Consume explicit package exports rather than another package’s source paths.
+Dependencies: `@cssearth/bake/volume`, `@cssearth/bake/volume/node`, reconstruction and volume-viewer. Consume explicit package exports rather than another package’s source paths.
 
 Run `pnpm --filter @cssearth/nebula-lab typecheck` from the repository root after installing dependencies. The lab command runner discovers tests beside package owners.
 
