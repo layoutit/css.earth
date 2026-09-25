@@ -133,6 +133,13 @@ preparation stores the angle for exposed, non-modeled `observations` and
 `surfaceObservations` lenses. The shared flight approaches this pose; it does
 not analyze coverage in the browser or create missing imagery.
 
+The opening sizes a body by its volume-equivalent diameter. An elongated shape model reaches past it, so
+preparation records its framing scale, that radius over the mesh's largest vertex radius
+([`meshFramingScale`](../tools/objects/terrestrial-layers/solid-scene.mts)), and the fit shrinks by it: 67P
+opens at 0.62 and Itokawa at 0.53. An authored `framingScale` in a terrestrial recipe (measured on the source
+mesh, or chosen to fit a ring) wins. Phones and portrait tablets, which fill 75% of the scene area their header
+and search leave open, scale that share by it too.
+
 Saved-view links and explicit camera targets keep their requested pose.
 System overviews and non-photographic datasets retain the existing viewing
 direction. Dragging and zooming an already selected body remain unrestricted.

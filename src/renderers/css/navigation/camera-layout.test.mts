@@ -40,3 +40,16 @@ test('physical responsive framing uses the world context framing reference', () 
   const worldReference = responsiveFit(plan, 1440, 900, { framingReferenceZoom: 1 });
   assert.ok(Math.abs(worldReference.zoom / authored.zoom - 1 / plan.defaultZoom) < 1e-12);
 });
+
+test('an elongated body fills a phone\'s open area by its framing scale, so its longest reach fits', () => {
+  const plan = mercury.camera;
+  const open = (framingScale?: number) => selectPreparedResponsiveZoom({
+    viewport: { read: () => ({ bounds: { width: 834, height: 904, x: 0, y: 0, top: 0, left: 0, right: 834, bottom: 904, toJSON() { return {}; } } as DOMRect,
+      focalPixels: 1000, previewTop: null, openArea: { top: 56, bottom: 848 } }), subscribe: () => () => {}, destroy() {} },
+    plan: framingScale === undefined ? plan : { ...plan, framingScale }, mobile: true,
+  });
+  const sphere = open(), elongated = open(0.6231);
+  assert.ok(Math.abs(elongated.zoom / sphere.zoom - 0.6231) < 1e-12);
+  // The sphere spans 75% of the 792 px open height; the elongated body's volume-equivalent disc spans its share of it.
+  assert.ok(Math.abs(sphere.zoom / plan.defaultZoom * plan.logicalBodyDiameter - 792 * 0.75) < 1e-9);
+});

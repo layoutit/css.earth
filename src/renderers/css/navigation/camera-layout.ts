@@ -59,9 +59,11 @@ export function selectPreparedResponsiveZoom({
     : Number.POSITIVE_INFINITY;
   // A phone frames the body in the area its header and drawer leave open, a step larger than the
   // authored portrait share: the open area is what the viewer actually sees.
+  // An elongated body reaches past its volume-equivalent diameter; its framing scale keeps the whole shape in the area.
   const openHeight = mobile && measured.openArea ? measured.openArea.bottom - measured.openArea.top : null;
+  const openShare = MOBILE_OPEN_AREA_SHARE * (plan.framingScale ?? 1);
   const targetDiameter = openHeight !== null
-    ? Math.min(stageBounds.width * Math.max(widthShare, MOBILE_OPEN_AREA_SHARE), openHeight * MOBILE_OPEN_AREA_SHARE)
+    ? Math.min(stageBounds.width * Math.max(widthShare, openShare), openHeight * openShare)
     : Math.min(
       stageBounds.width * widthShare,
       stageBounds.height * fit.maximumHeightShare,
