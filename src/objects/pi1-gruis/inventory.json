@@ -93,9 +93,15 @@
     },
     {
       "location": "prepared",
+      "filename": "runtime-assets.json",
+      "bytes": 1588,
+      "sha256": "942a2692fa25d969bbf37ae4191e607d662db12d7da5c8260fdf3fbcf5439430"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 384941,
-      "sha256": "8dafd2c60f55bada025dcf001fe42b8efa20cda319136b6618b1c016aea6f41f"
+      "bytes": 440629,
+      "sha256": "b39189464d007bc05d4673cb3f2b5460191bd8f064641c012d3848c5702e700e"
     },
     {
       "location": "prepared",
