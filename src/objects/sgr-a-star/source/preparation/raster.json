@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "sgr-a-star-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csssgr-a-star-prepared-assets@1"

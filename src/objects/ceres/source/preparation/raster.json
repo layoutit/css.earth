@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "ceres-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssceres-prepared-assets@1"

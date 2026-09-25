@@ -9,12 +9,10 @@
   "resample": "source-packed",
   "unpackedResizeBeforePack": true,
   "polarProjection": "angular-nearest",
-  "polesCombined": true,
-  "polesOutput": "mercury-poles{suffix}.webp",
+  "polesOutput": "mercury-poles-{id}{suffix}.webp",
   "publicBase": "/scenes/mercury/",
   "surfaceMetadata": {
-    "schema": "cssmercury-prepared-assets@1",
-    "sourcePositionVariable": "--mercury-surface-position"
+    "schema": "cssmercury-prepared-assets@1"
   },
   "thumbnail": {
     "size": 28,

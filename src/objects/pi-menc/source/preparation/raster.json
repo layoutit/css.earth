@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "pi-menc-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csspi-menc-prepared-assets@1"

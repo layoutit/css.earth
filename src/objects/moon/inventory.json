@@ -393,6 +393,12 @@
     },
     {
       "location": "prepared",
+      "filename": "image-quality.json",
+      "bytes": 6740,
+      "sha256": "06ad8261a4c155e53f836293543051267158a734304bd1e62fd425183f6c6ffd"
+    },
+    {
+      "location": "prepared",
       "filename": "lenses.json",
       "bytes": 18872,
       "sha256": "1e5ad397293f39620a55af7120404501bcb4b96cbf6470fd4b428ca02f4c6261"
@@ -460,8 +466,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 488380,
-      "sha256": "472c8ccd394fe900872c45f50d336d86650d27cdb7cdf55e3c92b3f27919c0d2"
+      "bytes": 543877,
+      "sha256": "7a16f6e6d0879c59b6c5b517e509239568c1663317459f73a159872743a12cd4"
     },
     {
       "location": "prepared",

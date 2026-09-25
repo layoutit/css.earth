@@ -1,4 +1,4 @@
-import { requireTextureLevels } from './prepared-texture-levels.mts';
+import { requireTextureLevels, requireTexturePlacements } from './prepared-texture-levels.mts';
 import { isArray } from '@cssearth/core';
 import type { ObjectControls } from "../renderers/css/runtime/object-contract.ts";
 import type { ObjectRuntimeDefinition } from "../renderers/css/runtime/object-runtime-types.ts";
@@ -209,7 +209,9 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     }
     for (const bank of track.banks) {
       record(bank, "bank", ["id", "frames", "default", "fixed", "rows"]); string(bank.id, "bank id");
-      if (array(bank.frames, "frame addresses").length !== track.frame.count) fail("every material frame requires a prepared address");
+      // A fixed-only bank (a lens's one shadowless frame) carries its fixed address and no frames.
+      const frameCount = array(bank.frames, "frame addresses").length;
+      if (frameCount !== track.frame.count && !(frameCount === 0 && bank.fixed !== null && bank.rows === undefined)) fail("every material frame requires a prepared address");
       bank.frames.forEach((value, index) => { address(value); if (value.frame !== index) fail("frame addresses must be ordered"); });
       if (bank.default !== null) address(bank.default);
       if (bank.fixed !== null) address(bank.fixed);
@@ -424,6 +426,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       }
       const bank = track.banks.find(bank => bank.id === selected.bank);
       if (selected.mode === "fixed" && !bank!.fixed) fail("selected mode requires its prepared address");
+      if (selected.mode !== "fixed" && !bank!.frames.length) fail("a fixed-only bank is selected only in fixed mode");
     }
   }
   const toggleNames = [...new Set(variants.flatMap(variant => Object.keys(variant.when).filter(key => key !== "lensId")))];
@@ -433,7 +436,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {
-    record(binding, "view binding", ["kind", "target", "property", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "sceneFromBody", "radii", "inset", "slices"]);
+    record(binding, "view binding", ["kind", "target", "property", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "placements", "groups", "groupSizes", "sceneFromBody", "radii", "inset", "slices"]);
     choice(binding.kind, new Set(["counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property", "interior-disc"]), "view binding");
     // The stage itself may carry a published level-of-detail attribute or
     // property; every other binding names a retained node.
@@ -454,6 +457,28 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       // A prepared value per published silhouette step; thresholds are CSS pixels.
       string(binding.property, "silhouette step property");
       if (!binding.property.startsWith("--")) fail("silhouette step property must be a custom property");
+      if (binding.placements !== undefined) requireTexturePlacements(binding.placements, name => name.startsWith(`${binding.property}-`));
+      // Leaf box groups: each names the property or one of its blocks, and its leaves; no leaf is in two groups.
+      if (binding.groups !== undefined) {
+        const groups = binding.groups as Record<string, unknown>, seen = new Set<number>();
+        record(groups, "leaf box groups", Object.keys(groups));
+        for (const [name, leaves] of Object.entries(groups)) {
+          if (name !== binding.property && !name.startsWith(`${binding.property}-`)) fail(`leaf box group ${name} is not a step of ${binding.property}`);
+          for (const leaf of array(leaves as readonly number[], `leaf box group ${name}`)) {
+            node(leaf);
+            if (seen.has(leaf)) fail(`leaf box node ${leaf} is in two groups`);
+            seen.add(leaf);
+          }
+        }
+        for (const name of Object.keys(binding.placements?.writes ?? {})) if (!(name in groups)) fail(`placed block ${name} has no leaf box group`);
+        // Each group's full box area and density, for the runtime's memory estimate.
+        const sizes = (binding.groupSizes ?? {}) as Record<string, unknown>;
+        record(sizes, "leaf box group sizes", Object.keys(sizes));
+        for (const [name, size] of Object.entries(sizes)) {
+          const [area, density] = array(size as readonly number[], `leaf box group size ${name}`);
+          if (!(name in groups) || !(typeof area === "number" && area > 0 && Number.isFinite(area)) || !(typeof density === "number" && density > 0 && Number.isFinite(density))) fail(`leaf box group size ${name} is invalid`);
+        }
+      }
       finite(binding.hysteresis, "silhouette step hysteresis");
       if (binding.hysteresis < 0 || binding.hysteresis >= 1) fail("silhouette step hysteresis must be in [0, 1)");
       const levels = array(binding.levels, "silhouette steps");

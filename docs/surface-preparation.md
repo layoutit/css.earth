@@ -352,6 +352,47 @@ at half the resolution, so a seam can show as a faint light line ([seam repair](
 
 ![Itokawa on the iPhone 17 simulator at rest and at maximum zoom: one texel per CSS pixel, two, and their Pixelmatch difference at threshold 0.1](images/raster-leaf-2x.webp)
 
+### Leaf boxes follow the body on screen
+
+Two texels per CSS pixel is what a leaf needs at maximum zoom. At rest the same box is several times larger than the
+leaf on screen, and WebKit still backs all of it. So every projective leaf reads a factor, `--leaf-box`: its box,
+background size and position are `calc(<length> * var(--leaf-box, 1))`, and its matrix is followed by
+`scale(calc(1 / var(--leaf-box, 1)))`, so each texel lands where it did at any factor. Without a factor the leaf keeps
+its full box. [leaf-box.mts](../tools/prepared/leaf-box.mts) holds the rule:
+
+- **The factor** is `min(1, step × density)`. A leaf's density is what its box needs per pixel of the body's silhouette:
+  two box pixels per screen pixel (`LEAF_BOX_SCREEN_PIXELS`) at its most magnified edge, from its measured scene frame.
+- **Steps** grow by √2 from 16 silhouette pixels to the first step at which every leaf holds its full box.
+- **Groups.** The presentation bindings measure every leaf in a browser at each `prepare:object-json`, so every generator
+  shares the rule. Surface leaves join blocks of about eight leaves by direction (`LEAF_BOX_GROUP_LEAVES`), each with a
+  placement like a texture page's; other leaves (rings, shells, cutaways) form groups of eight. The bindings also record
+  each group's full box area, for the memory estimate below.
+- **Runtime** ([prepared-leaf-box-blocks.ts](../src/renderers/css/rendering/prepared-leaf-box-blocks.ts)): a block's step
+  is the body's diameter as it would look at the block's nearest depth, the first step when it is behind the body or off
+  screen; the other groups follow the silhouette. A step is written on the group's own leaves, so only they restyle.
+  - **Only at rest.** A step change redraws its leaves, so nothing switches while the camera moves, including inertia and
+    the gaps between notches of a stepped wheel: 750 ms after the last view change the final steps are applied.
+  - **Paced.** The switches are queued, sharpest need first, and the leaves written per frame follow the frame time.
+  - **Kept within a budget.** Detail the view no longer needs stays until it passes 32 MiB, estimated from each
+    group's prepared box; then the groups needed longest ago shrink first. A zoom out within the budget changes nothing.
+    No browser reports its layer memory to the page, so the cap is fixed, as a tile cache's is.
+
+Earth's generator opts out (`leafBox: false`) while its paged surface levels are reworked on their own branch.
+
+Measured in the iPhone 17 simulator (WebKit layer memory from the inspector), zooming 40× in over 3 s and back:
+
+| Body | At rest | Zoomed in | Back at rest |
+|---|---|---|---|
+| Moon, full boxes | 291 MB | 260 MB | 291 MB |
+| Moon, leaf boxes | 187 MB | 162 MB | 191 MB |
+| Saturn, full boxes | 382 MB | 374 MB | 382 MB |
+| Saturn, leaf boxes | 379 MB | 373 MB | 381 MB |
+
+Saturn barely changes because its default phone view already draws the rings larger than their boxes, so they keep
+every texel. While the camera moves, frames match full boxes in Chrome (a recorded wheel zoom: no frames with missing
+content, the same raster work) and in the simulator. The switch after the camera stops costs Chrome seven style passes of
+1–3 ms; in the simulator it costs one frame of 35–104 ms on Saturn.
+
 The recipe's `texelsPerFace` sets the body's budget: its face count times that value.
 The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles

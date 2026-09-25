@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "charon-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csscharon-prepared-assets@1"

@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "ab-pic-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssab-pic-prepared-assets@1"

@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "arcturus-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssarcturus-prepared-assets@1"

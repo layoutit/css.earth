@@ -5,7 +5,7 @@ export interface GeometryProfile {
   schema: 'cssearth-css-geometry-profile@1'; namespace: string; surface: SurfaceGeometryProfile;
   projection: { tileSize: number; layerElevation: number; seamBleed: number; interiorSeamBleed: number;
     overlap: number; fitToSource: boolean; rasterScale: number; rasterGutter: number; rasterOverscan: number;
-    positionVariables: boolean; projectivePoles: boolean; lightColor: string; ambientIntensity: number;
+    projectivePoles: boolean; lightColor: string; ambientIntensity: number;
     /** Exact tiling whose surface leaves hold a silhouette-stepped outset instead of a fixed overlap. */
     seamOutset?: SeamOutsetProfile };
   bodyRotationDegrees: number;
@@ -50,7 +50,9 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
   const projection = object(profile.projection, 'projection');
   numbers(projection, ['tileSize', 'layerElevation', 'seamBleed', 'interiorSeamBleed', 'overlap', 'rasterScale', 'rasterGutter', 'rasterOverscan', 'ambientIntensity'], 'projection');
   if (typeof projection.lightColor !== 'string') throw new TypeError('Projection needs a light colour.');
-  for (const name of ['fitToSource', 'positionVariables', 'projectivePoles']) if (typeof projection[name] !== 'boolean') throw new TypeError(`projection.${name} must be boolean.`);
+  for (const name of ['fitToSource', 'projectivePoles']) if (typeof projection[name] !== 'boolean') throw new TypeError(`projection.${name} must be boolean.`);
+  // Every leaf writes its texture address inline; a lens reaches it through the texture its variant writes on the body.
+  if (projection.positionVariables !== undefined) throw new TypeError('projection.positionVariables is gone: remove it.');
   if (projection.seamOutset !== undefined) {
     numbers(object(projection.seamOutset, 'projection.seamOutset'), ['targetPixels', 'stepRatio', 'hysteresis', 'firstDiameter', 'lastDiameter'], 'projection.seamOutset');
     // The stepped outset replaces a stretched overlap. Leaves either tile exactly or overlap by exactly

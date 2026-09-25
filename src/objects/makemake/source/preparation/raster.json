@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "makemake-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssmakemake-prepared-assets@1"

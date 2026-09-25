@@ -27,9 +27,9 @@
   },
   "datasets": {
     "normal": {
-      "title": "Hubble–Cassini visible mosaic",
+      "title": "Hubble OPAL visible map",
       "detail": "Visible light",
-      "summary": "Hubble OPAL cloud bands from August 2025 with a Cassini 2017 north-pole cap; unobserved OPAL rows are filled."
+      "summary": "Hubble OPAL cloud bands from August 2025; unobserved polar and ring-occluded rows are filled."
     },
     "ultraviolet": {
       "title": "OPAL F225W map",

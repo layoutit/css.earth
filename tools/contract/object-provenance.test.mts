@@ -36,7 +36,7 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
   const source = resolve(root, 'source'), outputDirectory = resolve(root, 'prepared'), publicDirectory = resolve(root, 'public');
   await Promise.all([mkdir(resolve(source, 'preparation'), { recursive: true }), mkdir(outputDirectory), mkdir(publicDirectory)]);
   const input = Buffer.from('original observation bytes'), output = Buffer.from('prepared texture bytes');
-  const recipe = JSON.stringify({ schema: 'cssearth-raster-recipe@1', polesCombined: true, polesOutput: 'poles.webp',
+  const recipe = JSON.stringify({ schema: 'cssearth-raster-recipe@1', polesOutput: 'poles-{id}.webp',
     surfaces: [{ id: 'surface', source: 'observation.dat', output: 'surface{suffix}.webp', thumbnail: 'surface-thumbnail.webp', falseColor: false, science: { coverage: { kind: 'black-fill', southConnected: false } } }] });
   const pin = (id: string, path: string, _bytes: Uint8Array): FixturePin => ({ id, path,
     origin: `https://example.org/${path}`, sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, credit: 'Fixture archive', license: 'CC0', acquisition: 'Exact fixture input', consumers: ['surfaces'] });
@@ -217,7 +217,8 @@ test('Saturn binds its actual base material and all contributing recipe identiti
   for (const id of ['normal', 'ultraviolet', 'methane', 'thermal', 'cross-section']) {
     const sources = productSourceIds(document, id);
     assert.ok(sources.includes('hubble-opal-saturn-2025a-visible'), id);
-    assert.ok(sources.includes('cassini-pia21611-polar-map'), id);
+    // The 2017 Cassini north-pole cap is excluded (investigations.json): both caps project the OPAL map.
+    assert.ok(!sources.includes('cassini-pia21611-polar-map'), id);
     assert.ok(sources.includes('cassini-uvis-alpvir-2006-285-occultation'), id);
     assert.ok(requireValue(document.products.find(product => product.id === id), `Saturn ${id} product`).recipeDependencies.includes('geometry'), id);
   }

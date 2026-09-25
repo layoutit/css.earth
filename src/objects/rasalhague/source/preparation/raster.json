@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "rasalhague-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssrasalhague-prepared-assets@1"

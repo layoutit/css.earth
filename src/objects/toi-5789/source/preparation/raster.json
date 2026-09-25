@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "toi-5789-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csstoi-5789-prepared-assets@1"

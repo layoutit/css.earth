@@ -77,6 +77,11 @@ test('a texture whose faces are behind the body or off screen keeps the first le
   expect(plan(view(true))).toEqual(['front', 'back-small', 'aside']);
   // A small screen, with its quarter-screen margin, leaves the side page (projected 200 px off centre) out of view.
   expect(plan(view(true, 100, 100))).toEqual(['front', 'back-small', 'aside-small']);
+  // The eye transform carries the scene's scale (0.02 here, as a mounted camera's does): the same view, the same pages.
+  const scaled = (width: number, height: number) => ({ ...view(true, width, height), projection: { ...view(true).projection,
+    eyeFromScene: [0.02,0,0,0, 0,0.02,0,0, 0,0,0.02,0, 0,0,-10,1], focalPixels: 1000 } });
+  expect(plan(scaled(800, 600))).toEqual(['front', 'back-small', 'aside']);
+  expect(plan(scaled(100, 100))).toEqual(['front', 'back-small', 'aside-small']);
   // While the body spins, the prepared placements no longer hold: every page takes the selected level.
   expect(plan(view(false))).toEqual(['front', 'back', 'aside']);
   expect(() => requireTextureLevels({ ...placed, placements: { ...placed.placements, writes: { '--unwritten': page([0, 0, 0], [0, 0, 1]) } } },

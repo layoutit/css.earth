@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "dh-tau-b-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssdh-tau-b-prepared-assets@1"

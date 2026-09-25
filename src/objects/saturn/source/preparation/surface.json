@@ -217,7 +217,7 @@
         "ringUrl": "/scenes/saturn/saturn-rings.webp",
         "ring2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
         "materialUrl": "/scenes/saturn/saturn-orbit-material.webp",
-        "qualification": "Composite visible presentation: Hubble OPAL 2025A body, Cassini PIA21611 north pole and Cassini UVIS 2006 ring opacity; unobserved OPAL rows are filled by linear interpolation."
+        "qualification": "Visible presentation: Hubble OPAL 2025A body and Cassini UVIS 2006 ring opacity; unobserved polar and ring-occluded OPAL rows are filled by linear interpolation."
       },
       {
         "id": "cross-section",

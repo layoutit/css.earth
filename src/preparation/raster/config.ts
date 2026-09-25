@@ -129,10 +129,8 @@ export interface RasterRecipe {
     missingCoverage?: 'gray' | 'dark';
     surfaces: SurfaceRasterRecipe[];
     polesOutput: string;
-    polesCombined: boolean;
     surfaceMetadata: {
         schema: string;
-        sourcePositionVariable?: string;
     };
     thumbnail: {
         size: number;

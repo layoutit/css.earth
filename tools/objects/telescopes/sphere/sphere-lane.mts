@@ -71,7 +71,7 @@ export async function measurementSphere(root: string, target: string, texture: s
     rasterSource = resolve(rasterDirectory, 'measurement-source.png');
     await sharp(texture).resize(recipe.sourceWidth, recipe.sourceHeight, { fit: 'fill', kernel: 'nearest' }).png().toFile(rasterSource);
   }
-  const surfaces = (recipe.polesCombined ? recipe.surfaces : [surface]).map(item => ({
+  const surfaces = [surface].map(item => ({
     id: item.id, source: rasterSource, falseColor: true, output: item.output.replace(/\.jpe?g$/, '.webp'),
     thumbnail: item.thumbnail, ...(item.resolutionScale ? { resolutionScale: item.resolutionScale } : {}),
     science: { kind: 'projected-measurement' },

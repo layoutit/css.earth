@@ -87,7 +87,6 @@ export function prepareLenses(
     controls: recipe.controls.map((control) => {
       const surface = assets.surfaces?.[control.id];
       const material = assets.materials?.[control.material ?? control.id];
-      const poles = assets.poles;
       const legend = prepareLegend(objectId, control.legend);
       if (control.facts !== undefined && (!Array.isArray(control.facts) ||
           control.facts.some(fact => !fact || [fact.id, fact.label, fact.value].some(value =>
@@ -114,8 +113,8 @@ export function prepareLenses(
         ...(control.step ? { step: { group: control.step.group, label: control.step.label } } : {}),
         surfaceUrl: surface?.url ?? assetUrl(objectId, control.surface),
         surface2xUrl: surface?.url2x ?? assetUrl(objectId, control.surface?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
-        polesUrl: surface?.polesUrl ?? poles?.url ?? assetUrl(objectId, control.poles),
-        poles2xUrl: surface?.polesUrl2x ?? poles?.url2x ?? assetUrl(objectId, control.poles?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
+        polesUrl: surface?.polesUrl ?? assetUrl(objectId, control.poles),
+        poles2xUrl: surface?.polesUrl2x ?? assetUrl(objectId, control.poles?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
         materialUrl: material?.url ?? assetUrl(objectId, control.material),
         material2xUrl: material?.url2x ?? assetUrl(objectId, control.material?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
         // Emissive bodies: the prepared off-limb context and limb plate keep the lens resource keys corona:/limb:.

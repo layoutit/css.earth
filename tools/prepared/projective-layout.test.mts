@@ -19,29 +19,14 @@ test("scales every prepared pixel address in multi-layer backgrounds", () => {
   );
 });
 
-test("scales variable-backed prepared background addresses", () => {
-  const properties = new Map([
-    ["--mercury-surface-position", "-8px -680px"],
-  ]);
-  const style = {
-    backgroundPosition: "var(--mercury-surface-position)",
-    backgroundSize: "1040px 768px",
-    getPropertyValue(property: string) {
-      return properties.get(property) ?? "";
-    },
-    setProperty(property: string, value: string) {
-      properties.set(property, value);
-    },
-  };
-
+test("scales inline prepared background addresses and refuses variable-backed ones", () => {
+  const style = { backgroundPosition: "-8px -680px", backgroundSize: "1040px 768px",
+    getPropertyValue: () => "", setProperty: () => {} };
   scalePreparedBackgroundAddresses(style, 4);
-
-  assert.equal(
-    properties.get("--mercury-surface-position"),
-    "-32px -2720px",
-  );
-  assert.equal(style.backgroundPosition, "var(--mercury-surface-position)");
+  assert.equal(style.backgroundPosition, "-32px -2720px");
   assert.equal(style.backgroundSize, "4160px 3072px");
+  assert.throws(() => scalePreparedBackgroundAddresses({ ...style, backgroundPosition: "var(--mercury-surface-position)" }, 4),
+    /background-position must be inline lengths, not var\(--mercury-surface-position\)/u);
 });
 
 test("scaled projective leaves reject missing prepared dimensions and texture size", () => {

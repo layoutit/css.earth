@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "pluto-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csspluto-prepared-assets@1"

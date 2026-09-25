@@ -1,3 +1,4 @@
+import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE } from "./leaf-box.mts";
 import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireString,shape,array,text,number,boolean,dictionary,optional} from '@cssearth/core';
 const parseProperty=shape({name:text,value:text,custom:boolean});
@@ -45,10 +46,15 @@ function missingLayoutProperties(style:StyleRecord) {
 // A projective surface leaf may follow its matrix with the prepared seam outset:
 // a scale about the leaf centre driven by the body's silhouette-stepped property.
 const SCALE = String.raw`\d+(?:\.\d+)?(?:e[+-]?\d+)?`;
+const LEAF_BOX_READ = String.raw`var\(${LEAF_BOX_FACTOR}, 1\)`;
+const LEAF_BOX_UNSCALE_SUFFIX = ` ${LEAF_BOX_UNSCALE}`;
 const SEAM_OUTSET = new RegExp(String.raw`^ translate\(50%, 50%\) scale\(calc\(1 \+ var\((--[a-z][a-z0-9-]*), 0\) \* ${SCALE}\), calc\(1 \+ var\(\1, 0\) \* ${SCALE}\)\) translate\(-50%, -50%\)$`);
+// A leaf whose box follows its body on screen reads its factor in its lengths, and scales back by its inverse right after
+// its matrix (tools/prepared/leaf-box.mts). The checks read the full box: the factor's fallback is one.
+const leafBoxLength = (value:string) => value.replace(new RegExp(String.raw`calc\((-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?px) \* ${LEAF_BOX_READ}\)`, "g"), "$1");
 function requireMatrix(value:string, label:string, seamOutset = false) {
   const matrix = /^matrix3d\(([^)]+)\)(.*)$/.exec(value);
-  const values = matrix?.[1].split(",").map(Number), suffix = matrix?.[2] ?? "";
+  const values = matrix?.[1].split(",").map(Number), suffix = (matrix?.[2] ?? "").replace(LEAF_BOX_UNSCALE_SUFFIX, "");
   if (values?.length !== 16 || !values.every(Number.isFinite) || suffix !== "" && !(seamOutset && SEAM_OUTSET.test(suffix))) {
     throw new TypeError(`Prepared projective ${label} transform is missing or invalid.`);
   }
@@ -56,14 +62,15 @@ function requireMatrix(value:string, label:string, seamOutset = false) {
 }
 function requireLeaf(carrier:StyleRecord, nativeRaster = false) {
   for (const name of ["width", "height"] as const) {
-    const value = carrier[name] || carrier.getPropertyValue(`--polycss-atlas-${name}`);
+    const value = leafBoxLength(carrier[name] || carrier.getPropertyValue(`--polycss-atlas-${name}`));
     if (!/^(?:\d+(?:\.\d*)?|\.\d+)px$/.test(value) || Number.parseFloat(value) <= 0) {
       throw new TypeError(`Prepared projective carrier requires explicit positive ${name}.`);
     }
   }
   // One auto dimension is valid for an intrinsic-ratio image. An absent address
   // or an entirely automatic/zero-sized layer cannot supply a prepared layout.
-  if (!carrier.backgroundSize || carrier.backgroundSize.split(",").some(layer =>
+  const backgroundSize = leafBoxLength(carrier.backgroundSize);
+  if (!backgroundSize || backgroundSize.split(",").some(layer =>
       !layer.trim().split(/\s+/).some(value => /^\d+(?:\.\d*)?px$/.test(value) && Number.parseFloat(value) > 0))) {
     throw new TypeError("Prepared projective texture requires an explicit backgroundSize.");
   }
@@ -77,9 +84,9 @@ function requireLeaf(carrier:StyleRecord, nativeRaster = false) {
     if ([3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1) {
       throw new TypeError("Prepared native raster triangle requires an affine transform.");
     }
-    if (carrier.getPropertyValue("--polycss-atlas-leaf-sizing") !== "raster" ||
-        !/^-?\d+(?:\.\d+)?px\s+-?\d+(?:\.\d+)?px$/.test(carrier.backgroundPosition)) {
-      throw new TypeError("Prepared native raster triangle requires its raster sizing and texture address.");
+    // Its raster sizing is the data-polycss-texture-leaf-sizing attribute that made it a raster triangle (rasterTriangle).
+    if (!/^-?\d+(?:\.\d+)?px\s+-?\d+(?:\.\d+)?px$/.test(leafBoxLength(carrier.backgroundPosition))) {
+      throw new TypeError("Prepared native raster triangle requires its texture address.");
     }
   }
 }

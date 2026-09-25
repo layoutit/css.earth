@@ -31,20 +31,23 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         throw new TypeError('Unknown polar projection operator.');
     if (recipe.missingCoverage !== undefined && recipe.missingCoverage !== 'gray' && recipe.missingCoverage !== 'dark')
         throw new TypeError('Unknown missing-coverage fill.');
-    if (typeof recipe.polesCombined !== 'boolean')
-        throw new TypeError('polesCombined must be boolean.');
-    if (recipe.polesCombined !== (recipe.polarProjection === 'angular-nearest'))
-        throw new TypeError('The authored pole storage and projection combination is unsupported.');
+    if (recipe.polesCombined !== undefined)
+        throw new TypeError('Every lens writes its own poles (polesOutput with {id}); remove polesCombined.');
+    // Angular poles sample the whole source map, which only the source-packed lane keeps in memory.
+    if (recipe.polarProjection === 'angular-nearest' && recipe.resample !== 'source-packed')
+        throw new TypeError('Angular-nearest poles need source-packed storage.');
     if (recipe.densities !== undefined)
         throw new TypeError('The raster lane prepares one canonical density; remove densities.');
     text(recipe.publicBase, 'publicBase');
     if (!recipe.publicBase.startsWith('/') || !recipe.publicBase.endsWith('/') || recipe.publicBase.includes('..'))
         throw new TypeError('publicBase must be an absolute asset URL prefix.');
     path(recipe.polesOutput, 'polesOutput');
+    if (!String(recipe.polesOutput).includes('{id}'))
+        throw new TypeError('polesOutput must name each lens ({id}): every lens writes its own poles.');
     const metadata = record(recipe.surfaceMetadata, 'surfaceMetadata');
     text(metadata.schema, 'surfaceMetadata.schema');
     if (metadata.sourcePositionVariable !== undefined)
-        text(metadata.sourcePositionVariable, 'sourcePositionVariable');
+        throw new TypeError('surfaceMetadata.sourcePositionVariable is gone: leaves write their texture address inline.');
     const thumbnail = record(recipe.thumbnail, 'thumbnail');
     fields(thumbnail, ['size'], 'thumbnail', true);
     if ('quality' in thumbnail) throw new TypeError('thumbnail.quality is no longer read; thumbnails are encoded in the lossy lane (src/preparation/raster/lossy-lane.ts). Remove it from raster.json.');
@@ -76,7 +79,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             finite(surface.resolutionScale, 'surface.resolutionScale', true);
             const width = Number(recipe.width) * surface.resolutionScale;
             const height = Number(recipe.height) * surface.resolutionScale;
-            if (![width, height, height / Number(recipe.latitudeBands) / 4].every(n => Number.isSafeInteger(n) && n > 0) || recipe.resample !== 'density-before-pack' || recipe.polesCombined || thumbnail.crop !== undefined || recipe.emission !== undefined)
+            if (![width, height, height / Number(recipe.latitudeBands) / 4].every(n => Number.isSafeInteger(n) && n > 0) || recipe.resample !== 'density-before-pack' || thumbnail.crop !== undefined || recipe.emission !== undefined)
                 throw new TypeError('Surface resolution scaling needs integer density-before-pack output with separate poles and an uncropped thumbnail.');
         }
         if (surface.encoding !== undefined) {

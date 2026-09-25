@@ -43,8 +43,11 @@ export function serializeObjectJson(descriptorValue:unknown, definitionValue:unk
 }
 
 export async function writeObjectJson(id:string, definitionValue:unknown, options?:BindingOptions) {
-  const { definition: _definition, ...pin } = await finalizeObjectJson(id, definitionValue, { projectRoot: root, objectDirectory: resolve(root, 'src/objects', id),
-    preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json') }, options);
+  // A refusal names the body it stopped on: a run over hundreds of bodies otherwise leaves only the failing check.
+  const finalized = await finalizeObjectJson(id, definitionValue, { projectRoot: root, objectDirectory: resolve(root, 'src/objects', id),
+    preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json') }, options)
+    .catch((error: unknown) => { throw new Error(`${id}: ${error instanceof Error ? error.message : String(error)}`, { cause: error }); });
+  const { definition: _definition, ...pin } = finalized;
   return pin;
 }
 

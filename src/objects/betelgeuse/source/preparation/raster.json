@@ -10,7 +10,6 @@
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "missingCoverage": "dark",
-  "polesCombined": false,
   "polesOutput": "betelgeuse-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssbetelgeuse-prepared-assets@1"

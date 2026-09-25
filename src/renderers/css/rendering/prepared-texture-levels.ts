@@ -38,15 +38,17 @@ export function unseenTextureWrites(placements: PreparedTexturePlacements, proje
   const horizon = Math.acos(placements.body.radius / distance);
   const margin = SCREEN_MARGIN * Math.max(viewport.width, viewport.height), halfWidth = viewport.width / 2 + margin, halfHeight = viewport.height / 2 + margin;
   const [px, py] = projection.principalOffsetPixels;
+  // The eye transform carries the scene's scale; placement radii are scene units.
+  const scale = Math.hypot(projection.eyeFromScene[0], projection.eyeFromScene[1], projection.eyeFromScene[2]);
   for (const [name, write] of Object.entries(placements.writes)) {
     const facing = write.normal.reduce((sum, value, axis) => sum + value * toEye[axis]! / distance, 0);
     if (Math.acos(Math.max(-1, Math.min(1, facing))) > horizon + write.spread + HORIZON_MARGIN_RADIANS) { unseen.add(name); continue; }
     const centre = transformPreparedPoint(projection.eyeFromScene, write.center[0], write.center[1], write.center[2], 1);
-    const depth = -centre.z;
+    const depth = -centre.z, radius = write.radius * scale;
     // A sphere reaching the camera plane may cover any part of the screen.
-    if (!(depth > write.radius)) continue;
+    if (!(depth > radius)) continue;
     const x = px + projection.focalPixels * centre.x / depth, y = py + projection.focalPixels * centre.y / depth;
-    const reach = projection.focalPixels * write.radius / (depth - write.radius);
+    const reach = projection.focalPixels * radius / (depth - radius);
     if (x + reach < -halfWidth || x - reach > halfWidth || y + reach < -halfHeight || y - reach > halfHeight) unseen.add(name);
   }
   return unseen;

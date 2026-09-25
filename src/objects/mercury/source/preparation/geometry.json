@@ -14,8 +14,8 @@
     "surfaceLatitudeHeight": 1024,
     "packedBandGutter": 0,
     "poles": {
-      "url": "/scenes/mercury/mercury-poles@2x.webp",
-      "width": 1536,
+      "url": "/scenes/mercury/mercury-poles-normal@2x.webp",
+      "width": 512,
       "height": 256
     },
     "polarTileSize": 256,
@@ -45,7 +45,6 @@
     "rasterScale": 4,
     "rasterGutter": 16.0,
     "rasterOverscan": 0.5,
-    "positionVariables": true,
     "projectivePoles": true,
     "lightColor": "#ffffff",
     "ambientIntensity": 0.05

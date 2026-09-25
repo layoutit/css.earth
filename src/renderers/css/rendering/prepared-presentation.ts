@@ -7,7 +7,8 @@ import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterial
 import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
-import { selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels } from './prepared-texture-levels.js';
+import { selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements } from './prepared-texture-levels.js';
+import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
@@ -47,7 +48,9 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "view-property"; property: string; source: "billboard-opacity" | "marker-opacity"; precision: number | null } |
   { kind: "silhouette-fit"; minimumRadius: number; unitScale: number } |
   ({ kind: "interior-disc" } & PreparedInteriorDisc) |
-  ({ kind: "silhouette-step-property"; property: string } & PreparedSilhouetteSteps) |
+  ({ kind: "silhouette-step-property"; property: string; placements?: PreparedTexturePlacements;
+    /** Leaf boxes (prepared-leaf-box-blocks.ts): the leaves that share each published step, by block or `property`. */
+    groups?: Readonly<Record<string, readonly number[]>>; groupSizes?: Readonly<Record<string, readonly number[]>> } & PreparedSilhouetteSteps) |
   { kind: "counter-rotation"; systemTransform: string | null }
 );
 export interface PreparedPresentationDefinition {
@@ -276,6 +279,11 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   const target = (index: number) => index === -1 ? stage : nodes[index];
   // Hysteresis needs the step each silhouette binding last published.
   const silhouetteSteps = new Map<PreparedViewBinding, number>();
+  // A leaf box group's step is written on its own leaves; until then they inherit the binding target's initial step.
+  const leafBoxBlocks = new Map(definition.viewBindings.flatMap(binding => binding.kind === "silhouette-step-property" && binding.groups
+    ? [[binding as PreparedViewBinding, createLeafBoxBlocks({ ...binding, groups: binding.groups },
+      name => styleValue(nodes[binding.groups![name]![0]!]!, binding.property) || styleValue(target(binding.target), binding.property),
+      (name, value) => { for (const leaf of binding.groups![name]!) { writeStyle(nodes[leaf]!, binding.property, value); styleWrites++; } })] as const] : []));
   const interiorDiscs = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-disc"
     ? [[binding.target, createPreparedInteriorDisc(binding)] as const] : []));
   return {
@@ -323,6 +331,10 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
               `rotate(${formatNumber(-radialAngle)}deg)`;
             if (element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
           }
+        } else if (binding.kind === "silhouette-step-property" && binding.groups) {
+          // Each group of leaf boxes publishes its own step (prepared-leaf-box-blocks.ts).
+          leafBoxBlocks.get(binding)!.publish({ projection: view.projection, silhouetteDiameter: levelOfDetail.silhouetteDiameter,
+            motionAtRest: view.motionAtRest, viewportWidth: view.viewportWidth, viewportHeight: view.viewportHeight });
         } else if (binding.kind === "silhouette-step-property") {
           // A prepared value per published silhouette step, such as the surface seam outset.
           const level = selectPreparedSilhouetteStep(binding, levelOfDetail.silhouetteDiameter, silhouetteSteps.get(binding));

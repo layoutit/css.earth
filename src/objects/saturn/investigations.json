@@ -41,8 +41,9 @@
     {
       "id": "cassini-pia21611-north-pole",
       "subject": "NASA Cassini PIA21611 north-polar projection",
-      "status": "included",
-      "finding": "The north cap replaces the unobserved OPAL pole with the 2017 natural-colour map selected from the pinned 2,048 by 1,024 JPEG, documented as a north-polar stereographic projection at about 25 km per pixel from ISS wide-angle red, green and blue observations; the north disc inversely maps each prepared sample into that declared projection and its outer six percent transitions smoothly to the OPAL map after matching three mean boundary channels.",
+      "status": "excluded",
+      "finding": "The 2017 Cassini north-polar map was removed from the default visible body because it produced a visibly separate, cross-mission cap over the 2025 Hubble OPAL map. Both prepared polar caps now project the same OPAL surface after its declared unobserved rows are filled.",
+      "revisitWhen": "A separate Cassini-era dataset view is requested with a coherent body map and presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L101",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L131",

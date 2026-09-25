@@ -126,7 +126,7 @@
           "id": "messenger-bdr",
           "url": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
         },
-        "poles": "mercury-poles@2x.webp",
+        "poles": "mercury-poles-normal@2x.webp",
         "falseColor": false,
         "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
         "view": "exterior",
@@ -141,7 +141,7 @@
           "id": "messenger-enhanced",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
         },
-        "poles": "mercury-poles@2x.webp",
+        "poles": "mercury-poles-enhanced@2x.webp",
         "falseColor": true,
         "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
         "view": "exterior",
@@ -178,7 +178,7 @@
           "id": "messenger-topography",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m"
         },
-        "poles": "mercury-poles@2x.webp",
+        "poles": "mercury-poles-topography@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Elevation",

@@ -27,6 +27,9 @@ import {
   prepareProjectiveTextureLayer,
 } from "../../../src/platform/projective-surface-raster.mts";
 import {prepareLeafSeamOutset, prepareSeamOutsetSteps} from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
+// Earth keeps full leaf boxes for now: its paged surface levels are being reworked on their own branch, and its leaves
+// join the shared rule (tools/prepared/leaf-box.mts) with that work.
+const FULL_BOXES = { leafBox: false as const };
 
 
 export function preparePagedEllipsoidScene({ config: profile, interiorSource, atmosphereModel, atmosphere, raster, attitude, cellSizes }: {cellSizes?: readonly number[]; attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
@@ -662,8 +665,8 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
         `;background-size:${surfaceRasterPlan.pages[cell.page].width / density}px auto` +
         `;background-image:var(--${profile.namespace}-surface-page-${cell.page})`,
       projectiveTextureLayer: SEAM_OUTSET
-        ? { ...cell.layer, seamOutset: prepareLeafSeamOutset(cell.layer.frameMatrix, size, size, BODY_DIAMETER) }
-        : cell.layer,
+        ? { ...cell.layer, ...FULL_BOXES, seamOutset: prepareLeafSeamOutset(cell.layer.frameMatrix, size, size, BODY_DIAMETER) }
+        : { ...cell.layer, ...FULL_BOXES },
       geographicFrameMatrix: fitted.matrix,
       sourceRect: fitted.sourceRect,
       leafWidth: size,
@@ -684,10 +687,10 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
       `;background-size:${backgroundSize}`,
     // A polar cap samples the 256-pixel poles image, so it is rastered at its own size. At the interior shells' scale
     // WebKit backed each cap with a 1024-pixel layer (36 MB on an iPhone) for no extra detail.
-    projectiveTextureLayer: prepareProjectiveTextureLayer(
+    projectiveTextureLayer: { ...prepareProjectiveTextureLayer(
       fitted.matrix,
       polygon.polarCap ? 1 : INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE,
-    ),
+    ), ...FULL_BOXES },
     sourceRect: fitted.sourceRect,
     leafWidth: fitted.leafWidth,
     leafHeight: fitted.leafHeight,
