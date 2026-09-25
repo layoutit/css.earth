@@ -193,11 +193,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           // The lighting and atmosphere stages are recomputed from their recipes: their images may change, and the lighting
           // stage may add the shadowless frames the published set predates.
           const rasterRecipe = result.sources.get('raster')?.value as { lighting?: Record<string, unknown>; atmosphere?: Record<string, unknown> } | undefined;
-          const recomputed = new Set([...(result.recomputedImages ?? []), ...[rasterRecipe?.lighting, rasterRecipe?.atmosphere].flatMap(block => Object.entries(block ?? {}))
-            .filter(([key, value]) => key.endsWith('Output') && typeof value === 'string').map(([, value]) => outputName(value as string, RASTER_DENSITY))]);
           const billboardName = typeof rasterRecipe?.lighting?.billboardOutput === 'string' ? outputName(rasterRecipe.lighting.billboardOutput, RASTER_DENSITY) : null;
           const shadowless = new Set(billboardName ? ['shadowless', 'shadowless-billboard'].map(name => billboardName.replace('billboard', name)) : []);
-          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(recomputed.has(filename) && existing.has(filename) && staged.has(filename)) && !(shadowless.has(filename) && !existing.has(filename)));
+          // A row template names every row ("lighting-{density}x-row-{row}.webp"), so each output is matched as a pattern.
+          const pattern = (name: string) => new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&').replace('\\{row\\}', '\\d+')}$`, 'u');
+          const recomputed = [...(result.recomputedImages ?? []), ...shadowless, ...[rasterRecipe?.lighting, rasterRecipe?.atmosphere].flatMap(block => Object.entries(block ?? {}))
+            .filter(([key, value]) => key.endsWith('Output') && typeof value === 'string').map(([, value]) => outputName(value as string, RASTER_DENSITY))].map(pattern);
+          const redrawn = (filename: string) => recomputed.some(output => output.test(filename));
+          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(redrawn(filename) && existing.has(filename) && staged.has(filename)) && !(shadowless.has(filename) && !existing.has(filename)));
           if (unexpected.length || !changed.length)
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }
