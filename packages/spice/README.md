@@ -57,6 +57,9 @@ The package replaced the modules under `tools/spice/` at 2254511fde. Its outputs
 on every restored kernel of the six banks and on the DART oracle kernels: DAF summaries, SPK states and CK pointing at
 ten epochs per segment, leap-second and clock conversions, every kernel frame and PCK body, apparent states, the recipe
 cameras of Tethys, Phoebe and Didymos, the Voyager ISS rotations and the Pluto and Charon approaches.
+Dawn's bank was only partly restored (50 of its 119 kernels), so the rest of Dawn was not compared. No restored
+kernel holds an SPK type 9 segment or a CK type 2 or 3 segment without rates; the package's unit tests cover those types
+with synthetic segments.
 
 ESM and declarations are built with tsup. From the repository root:
 
