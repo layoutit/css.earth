@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 146.44303472822685,
+  "declinationDegrees": -71.40006611328555,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 5.710153,
+  "coordinateSystem": "Original DAMIT co-rotating Cartesian frame, +Z spin pole and +X reference meridian; east-positive longitude; arbitrary display phase",
+  "source": "DAMIT model 458, version 2012-09-20: ecliptic J2000 pole (219, -70) degrees; period 5.710153 hours; equatorial conversion with obliquity 23.439291111 degrees. The nonconvex model, fitted to light curves, including ones at phase angles above 75 degrees, resolves large concavities where those data constrain them; craters and fine relief are unresolved."
+}

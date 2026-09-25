@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "carlova",
+  "displayName": "Carlova",
+  "publicBase": "/scenes/carlova/",
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/model-1811.txt",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 1002.3601474625652,
+          "expectedVertices": 402,
+          "expectedFaces": 800,
+          "indexBase": 1
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -68.5
+        },
+        "minimum": -25,
+        "maximum": 50,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 68500,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 1370
+        }
+      }
+    ],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 68.5,
+    "mapUrl": "/scenes/carlova/carlova-shape-surface@2x.webp",
+    "polesUrl": "/scenes/carlova/carlova-shape-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model-1811.txt",
+      "format": "pds-plate-model",
+      "grid": {
+        "metersPerUnit": 1002.3601474625652,
+        "expectedVertices": 402,
+        "expectedFaces": 800,
+        "indexBase": 1
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "texelsPerFace": 16384,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 1370,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+  },
+  "presentation": {
+    "defaultLens": "shape"
+  }
+}

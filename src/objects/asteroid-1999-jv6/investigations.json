@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-1999-jv6",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 4390: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 4390, version 2020-01-28, pole (132°, -86°), period 6.53679 h, taken unchanged from the archive.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "0.448 ± 0.02 km, volume-equivalent diameter of the archived radar and light-curve model. DAMIT marks model 4390 as size-calibrated (D = 0.448 km, σ = 0.02 km); radar delay-Doppler images fix the scale. NEOWISE lists 0.451 ± 0.026 km (JPL SBDB), consistent within the quoted error.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    }
+  ]
+}

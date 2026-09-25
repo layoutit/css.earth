@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "nyx",
+  "displayName": "Nyx",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "0.5 km (size-calibrated model)",
+        "source": {
+          "url": "https://doi.org/10.1006/icar.2002.6869",
+          "label": "Benner et al. (2002), Icarus 158, 379",
+          "checked": "2026-09-25",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "benner-2002-nyx-radar",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "1.928 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273908%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-25",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "2.68 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273908%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-25",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "4.42601 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/278",
+          "label": "DAMIT model 278",
+          "checked": "2026-09-25",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 278; /periodHours"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "thumbnail": "/scenes/nyx/nyx-shape-thumbnail.webp",
+        "surface": "nyx-shape-surface@2x.webp",
+        "poles": "nyx-shape-surface@2x.webp",
+        "source": {
+          "id": "nyx-shape",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "notes": "Radar diameter: 1.0 ± 0.15 km. The nonconvex model shows broad shape and large concavities; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+        "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/nyx/nyx-elevation-thumbnail.webp",
+        "surface": "nyx-elevation-surface@2x.webp",
+        "poles": "nyx-elevation-surface@2x.webp",
+        "source": {
+          "id": "nyx-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-0.2",
+            "0.025",
+            "0.25"
+          ],
+          "meta": "km · 0.5 km reference sphere",
+          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/278",
+          "image": "/scenes/nyx/nyx-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 0.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Model record",
+      "role": "terrain",
+      "description": "DAMIT model 278, version 2007-02-27",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/278"
+    },
+    {
+      "label": "Size calibration",
+      "role": "facts",
+      "description": "Benner et al. (2002), Icarus 158, 379",
+      "href": "https://doi.org/10.1006/icar.2002.6869"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/278"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/278",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Nyx model 278; original model authors identified in its pinned reference records."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/nyx.json",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

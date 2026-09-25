@@ -1,0 +1,124 @@
+{
+  "id": "papagena",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Papagena",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 66.5
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -252124832422.38522,
+        257512268768.0572,
+        194874554070.39728
+      ],
+      "presentationToReference": [
+        -0.6263617689349165,
+        0,
+        0.7795325101730666,
+        0.7152070948835506,
+        0.39777715593191365,
+        0.5746756873637076,
+        0.310080224853108,
+        -0.9174820620691818,
+        0.2491524030314135
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191365,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 289.1304347826087,
+      "bodyRadiusM": 66500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/papagena-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Papagena",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.890757026115369,
+      "description": "Main-belt asteroid found in 1901.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27409%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                409 Aspasia (A895 XC)          2026-Sep-25 15:09:04
+Rec #:     409 (+COV) Soln.date: 2026-Jun-05_03:34:05   # obs: 6166 (1895-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458032.5 ! 2017-Oct-06.00 (TDB)         Residual RMS= .19308
+   EC= .07302768639619416  QR= 2.387810250982551   TP= 2458016.2819063887
+   OM= 242.1519784020549   W=  353.1952511234783   IN= 11.26710584004894
+   A= 2.575924022692135    MA= 3.866377927413649   ADIST= 2.76403779440172
+   PER= 4.13436            N= .238399039           ANGMOM= .02753511
+   DAN= 2.38896            DDN= 2.7625             L= 235.4771827
+   B= -1.3265283           MOID= 1.37781           TP= 2017-Sep-19.7819063887
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 85.506             ROTPER= 9.022
+   H= 7.65                 G= .290                 B-V= .719
+                           ALBEDO= .054            STYP= Xc
+
+ASTEROID comments: 
+1: soln ref.= JPL#137, OCC=0
+2: source=ORB
+*******************************************************************************

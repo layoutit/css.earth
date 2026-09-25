@@ -82,6 +82,11 @@ the surface is invented.
 
 ![Apollo, Koronis, Karin, Datura and Hungaria as gray shape models](images/damit-asteroids.png)
 
+The ten nonconvex DAMIT models added next, in the same material. Seven are ADAM fits to light curves, adaptive-optics
+images and occultations; 1999 JV6 adds radar images, which show its two lobes; Nyx and Eger are fitted to light curves alone.
+
+![Aspasia, Papagena, Ara, Aquitania, Carlova, Siegena, Aurelia, 1999 JV6, Nyx and Eger as gray shape models](images/damit-nonconvex-asteroids.png)
+
 ## Preparation
 
 [shape-material.mts](../tools/objects/terrestrial-layers/shape-material.mts) owns

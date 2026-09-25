@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/model-458.txt",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1787/shape.txt"
+    }
+  ]
+}

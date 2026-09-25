@@ -1,0 +1,124 @@
+{
+  "id": "aspasia",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aspasia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 82
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        193142737233.91452,
+        -310442313740.48376,
+        -65789353033.66372
+      ],
+      "presentationToReference": [
+        0.5275827282339793,
+        -5.551115123125783e-17,
+        -0.8495036579492705,
+        -0.7794043678306096,
+        0.39777715593191365,
+        -0.484047689412196,
+        -0.337913149012818,
+        -0.9174820620691818,
+        -0.20986035715571205
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191365,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 356.5217391304348,
+      "bodyRadiusM": 82000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aspasia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Aspasia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.575670522018648,
+      "description": "Main-belt asteroid found in 1895.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "papagena",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 1798: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 1798, version 2017-06-19, pole (224°, 58°), period 7.11539 h, taken unchanged from the archive.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1798",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "133 ± 4 km, volume-equivalent diameter of the archived ADAM model. DAMIT marks model 1798 as size-calibrated (D = 133 km, σ = 4 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 132 ± 4 km for the publication fit; the archived release is kept as archived. The fit used 13 light curves, 1 adaptive-optics image and 2 occultations (Table 3).",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1798"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1798"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    }
+  ]
+}

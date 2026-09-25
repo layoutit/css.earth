@@ -1,0 +1,124 @@
+{
+  "id": "carlova",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Carlova",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 68.5
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        373101452893.80896,
+        112240663377.78294,
+        -27969910294.757515
+      ],
+      "presentationToReference": [
+        0.9710072397872063,
+        0,
+        0.2390500790228503,
+        0.21932415943968553,
+        0.39777715593191365,
+        -0.8908817246440707,
+        0.09508866055900861,
+        -0.9174820620691819,
+        -0.3862444982318527
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191365,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 297.82608695652175,
+      "bodyRadiusM": 68500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/carlova-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Carlova",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.004095473429738,
+      "description": "Main-belt asteroid found in 1893.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

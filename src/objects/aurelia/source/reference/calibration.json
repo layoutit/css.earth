@@ -1,0 +1,15 @@
+{
+  "method": "adam-volume-equivalent-diameter",
+  "diameterKm": 125,
+  "uncertaintyKm": 3,
+  "quantity": "volume-equivalent diameter of the archived ADAM model",
+  "reference": "DAMIT model 1834 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+  "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1834",
+  "notes": "DAMIT marks model 1834 as size-calibrated (D = 125 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 125 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 47 light curves, 1 adaptive-optics image and 1 occultation (Table 3). Both pole solutions reproduce the adaptive-optics and occultation data; the paper says the second pole (this model) \"might be preferred\" but does not reject the first.",
+  "scaleKmPerSourceUnit": 1.0002683890636552,
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1834",
+  "sourceLabel": "DAMIT model 1834 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+  "diameterSemantics": "volume-equivalent diameter of the archived ADAM model",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 1834 as size-calibrated (D = 125 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 125 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 47 light curves, 1 adaptive-optics image and 1 occultation (Table 3). Both pole solutions reproduce the adaptive-optics and occultation data; the paper says the second pole (this model) \"might be preferred\" but does not reject the first.",
+  "visibleDescription": "ADAM volume-equivalent diameter: 125 ± 3 km."
+}

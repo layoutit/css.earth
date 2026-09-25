@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eger",
+  "card": {
+    "text": "Near-Earth asteroid found in 1982.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3103",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "3103 Eger (1982 BB); Discovered 1982-Jan-20 by Lovas, M. at Piszkesteto; orbit class: Apollo"
+      },
+      {
+        "catalogueId": "damit-shape-1787",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1787/shape.txt",
+        "label": "DAMIT shape 1787 · Eger",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M. Lovas found Eger at Piszkéstető on 20 January 1982.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3103",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "3103 Eger (1982 BB); Discovered 1982-Jan-20 by Lovas, M. at Piszkesteto; orbit class: Apollo"
+      },
+      {
+        "catalogueId": "damit-shape-1787",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1787/shape.txt",
+        "label": "DAMIT shape 1787 · Eger",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 458 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves alone; the main hollow is likely real, finer detail less so. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 0.895 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

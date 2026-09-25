@@ -1,0 +1,124 @@
+{
+  "id": "asteroid-1999-jv6",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "1999 JV6",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.224
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -114462798625.73059,
+        -123233727065.48697,
+        -36413614454.21539
+      ],
+      "presentationToReference": [
+        -0.667895306643111,
+        6.938893903907228e-18,
+        -0.7442552380494911,
+        -0.6828408305114367,
+        0.3977771559319138,
+        0.6127819631852501,
+        -0.29604773187875594,
+        -0.9174820620691819,
+        0.26567349553677017
+      ],
+      "orbitUpReference": [
+        -6.938893903907228e-18,
+        -0.3977771559319138,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 0.9739130434782609,
+      "bodyRadiusM": 224
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1999-jv6-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "1999 JV6",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.0090675270649698,
+      "description": "Near-Earth asteroid found in 1999.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

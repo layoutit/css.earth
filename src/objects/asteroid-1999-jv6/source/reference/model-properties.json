@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+  "modelId": 4390,
+  "modelVersion": "2020-01-28",
+  "diameterKm": 0.448,
+  "diameterInterpretation": "Radar-calibrated volume-equivalent diameter: 0.448 ± 0.02 km.",
+  "calibration": {
+    "method": "radar-volume-equivalent-diameter",
+    "diameterKm": 0.448,
+    "uncertaintyKm": 0.02,
+    "quantity": "volume-equivalent diameter of the archived radar and light-curve model",
+    "reference": "DAMIT model 4390 calibrated size, Rożek et al. (2019), A&A 631, A149",
+    "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+    "notes": "DAMIT marks model 4390 as size-calibrated (D = 0.448 km, σ = 0.02 km); radar delay-Doppler images fix the scale. NEOWISE lists 0.451 ± 0.026 km (JPL SBDB), consistent within the quoted error.",
+    "scaleKmPerSourceUnit": 0.999415279139989,
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+    "sourceLabel": "DAMIT model 4390 calibrated size, Rożek et al. (2019), A&A 631, A149",
+    "diameterSemantics": "volume-equivalent diameter of the archived radar and light-curve model",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 4390 as size-calibrated (D = 0.448 km, σ = 0.02 km); radar delay-Doppler images fix the scale. NEOWISE lists 0.451 ± 0.026 km (JPL SBDB), consistent within the quoted error.",
+    "visibleDescription": "Radar-calibrated volume-equivalent diameter: 0.448 ± 0.02 km."
+  },
+  "periodHours": 6.53679,
+  "poleEclipticJ2000Degrees": [
+    132,
+    -86
+  ],
+  "modelLimitations": "The nonconvex model, fitted to light curves and radar delay-Doppler images, resolves large concavities where those data constrain them; craters and fine relief are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/50447/shape.txt",
+    "vertices": 1948,
+    "faces": 3892,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 999.4152791399889,
+    "firstVertexKm": [
+      -0.28249372338643014,
+      -0.09348930287187113,
+      0.09385408944875723
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      0.7393394398799479,
+      0.36515336229354034,
+      0.34779651714071613
+    ],
+    "volumeCubicKm": 0.04707958915864107,
+    "volumeEquivalentRadiusKm": 0.224,
+    "radialRangeKm": [
+      0.124965261564067,
+      0.37326528794271224
+    ]
+  },
+  "elevation": [
+    -0.1,
+    0.2
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3892,
+    "sourceVertices": 1948,
+    "weldedVertices": 1948,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 6.72,
+    "estimatedErrorMeters": 5.29150390625,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 46980335.66704391
+    }
+  }
+}

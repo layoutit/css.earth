@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/458",
+  "modelId": 458,
+  "modelVersion": "2012-09-20",
+  "diameterKm": 1.79,
+  "diameterInterpretation": "Warm Spitzer thermal diameter: 1.79 ± 0.36 km.",
+  "calibration": {
+    "method": "radiometric-effective-diameter-transfer",
+    "diameterKm": 1.79,
+    "uncertaintyKm": 0.36,
+    "quantity": "thermal-model effective diameter",
+    "reference": "Trilling et al. (2010), AJ 140, 770",
+    "referenceUrl": "https://doi.org/10.1088/0004-6256/140/3/770",
+    "notes": "Trilling et al. (2010) Table 1 lists D = 1.79 km for (3103) Eger from Warm Spitzer; section 4 estimates the total diameter uncertainty at about 20%, taken here as 0.36 km. Ďurech et al. (2012) scaled this mesh to the same diameter (1.78 km in their text).",
+    "scaleKmPerSourceUnit": 1.4427327749264207,
+    "sourceUrl": "https://doi.org/10.1088/0004-6256/140/3/770",
+    "sourceLabel": "Trilling et al. (2010), AJ 140, 770",
+    "diameterSemantics": "thermal-model effective diameter",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. Trilling et al. (2010) Table 1 lists D = 1.79 km for (3103) Eger from Warm Spitzer; section 4 estimates the total diameter uncertainty at about 20%, taken here as 0.36 km. Ďurech et al. (2012) scaled this mesh to the same diameter (1.78 km in their text).",
+    "visibleDescription": "Warm Spitzer thermal diameter: 1.79 ± 0.36 km."
+  },
+  "periodHours": 5.710153,
+  "poleEclipticJ2000Degrees": [
+    219,
+    -70
+  ],
+  "modelLimitations": "The nonconvex model, fitted to light curves, including ones at phase angles above 75 degrees, resolves large concavities where those data constrain them; craters and fine relief are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1787/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 1442.7327749264207,
+    "firstVertexKm": [
+      -0.1641281659411795,
+      0.05059086748556987,
+      0.5735382164131496
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      2.1726790942021186,
+      2.7470151418398023,
+      1.3186188024978254
+    ],
+    "volumeCubicKm": 3.003016478041172,
+    "volumeEquivalentRadiusKm": 0.895,
+    "radialRangeKm": [
+      0.5702115668182356,
+      1.607678831468095
+    ]
+  },
+  "elevation": [
+    -0.5,
+    1
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 17.9,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 3003016478.041168
+    }
+  }
+}

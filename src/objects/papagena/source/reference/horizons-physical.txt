@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27471%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               471 Papagena (A901 LA)          2026-Sep-25 15:11:53
+Rec #:     471 (+COV) Soln.date: 2026-Jun-05_03:38:55   # obs: 9199 (1901-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458002.5 ! 2017-Sep-06.00 (TDB)         Residual RMS= .24895
+   EC= .2311119621827554   QR= 2.222063142560684   TP= 2457368.3201279156
+   OM= 83.96257546950351   W=  314.3413847312553   IN= 14.97483285174273
+   A= 2.88996971375544     MA= 127.2262102267089   ADIST= 3.557876284950196
+   PER= 4.91302            N= .200615339           ANGMOM= .028451713
+   DAN= 2.35517            DDN= 3.26263            L= 39.2936977
+   B= -10.649521           MOID= 1.25812995        TP= 2015-Dec-11.8201279156
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 74.064             ROTPER= 7.113
+   H= 6.34                 G= .370                 B-V= .828
+                           ALBEDO= .164            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#142, OCC=0
+2: source=ORB
+*******************************************************************************

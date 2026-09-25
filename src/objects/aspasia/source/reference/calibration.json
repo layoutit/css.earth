@@ -1,0 +1,15 @@
+{
+  "method": "adam-volume-equivalent-diameter",
+  "diameterKm": 164,
+  "uncertaintyKm": 3,
+  "quantity": "volume-equivalent diameter of the archived ADAM model",
+  "reference": "DAMIT model 715 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+  "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/715",
+  "notes": "DAMIT marks model 715 as size-calibrated (D = 164 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 164 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 22 light curves, 9 adaptive-optics images and 3 occultations (Table 3).",
+  "scaleKmPerSourceUnit": 0.9983489391572896,
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/715",
+  "sourceLabel": "DAMIT model 715 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+  "diameterSemantics": "volume-equivalent diameter of the archived ADAM model",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 715 as size-calibrated (D = 164 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 164 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 22 light curves, 9 adaptive-optics images and 3 occultations (Table 3).",
+  "visibleDescription": "ADAM volume-equivalent diameter: 164 ± 3 km."
+}

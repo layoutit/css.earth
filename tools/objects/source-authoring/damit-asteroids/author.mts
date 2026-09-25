@@ -1,5 +1,6 @@
 /**
- * Author a DAMIT asteroid package from one archived convex model and a separately published physical size.
+ * Author a DAMIT asteroid package from one archived model (convex, or nonconvex with `model.nonconvex` and `model.basis`)
+ * and a separately published physical size.
  *
  *   node tools/objects/source-authoring/damit-asteroids/author.mts [--inputs=<path>] [--object=<id>]
  *
@@ -7,15 +8,15 @@
  * The tool downloads the pinned DAMIT shape and spin files, the JPL records and, for a NEOWISE scale, the IRSA row; it
  * measures the mesh (signed volume, closure, extents, radial range), converts the ecliptic pole to the equatorial one,
  * and writes the package in the layout of the existing DAMIT bodies (Achilles, Ajax). It then renders the marker
- * snapshot and pins the source manifest. The astronomy record is written without elements; run
+ * snapshot and writes the source manifest. The astronomy record is written without elements; run
  * `node packages/astronomy/tools/generate-asteroids.mts --object=<ids>` next, then `node tools/prepare/prepare-object.mts <id>`.
  */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
-import { sha256 } from '@cssearth/core/node';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
-import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mts';
+import { ENTRY_EVIDENCE } from '../../../sources/author-source-records.mts';
+import { shapeMaterialRaster } from '../../terrestrial-layers/shape-material.mts';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadPdsPlateShape } from '../../terrestrial-layers/obj-shape.mts';
@@ -35,10 +36,15 @@ interface Paper { url: string; label: string; locator: string; quote: string; ca
 interface RecordSource { catalogueId: string; kind: string; title: string; credit: string; identifier?: { type: string; value: string } }
 interface Body {
   id: string; name: string; number: number;
-  model: { id: number; version: string; shapeFile: number; spinFile?: number; lambda: number; beta: number; periodHours: number; yorpRadPerDay2?: number; comment?: string; references: Reference[] };
+  model: { id: number; version: string; shapeFile: number; spinFile?: number; lambda: number; beta: number; periodHours: number; yorpRadPerDay2?: number; comment?: string; references: Reference[];
+    /** Nonconvex models name the data they were fitted to, e.g. "light curves, Keck adaptive-optics images and stellar occultations". */
+    nonconvex: boolean; basis?: string; spinFileName?: string; note?: string };
   alternatives: { id: number; lambda: number; beta: number; periodHours: number; diameterKm?: number; uncertaintyKm?: number }[];
   calibration: { method: string; diameterKm: number; uncertaintyKm: number; quantity: string; reference: string; referenceUrl: string; notes: string; visibleDescription: string; neowiseReference?: string; catalogueId: string; record?: RecordSource };
   occultation?: { file: number; name: string };
+  checked?: string;
+  /** Simplification error allowance as a fraction of the radius; 0.02 unless a shape needs more to reach the face budget. */
+  maximumErrorFraction: number;
   text: { card: string; cardSources: string[]; introduction: string; introductionSources: string[]; shapeSummary: string };
   papers: Record<string, Paper>;
 }
@@ -47,7 +53,8 @@ const args = process.argv.slice(2);
 const inputsPath = args.find(arg => arg.startsWith('--inputs='))?.slice(9) ?? 'tools/objects/source-authoring/damit-asteroids/inputs.json';
 const only = args.find(arg => arg.startsWith('--object='))?.slice(9);
 const inputs = requireRecord(JSON.parse(await readFile(inputsPath, 'utf8')));
-const checked = requireString(inputs.checked);
+/** The date the current body's sources were checked: its own `checked`, else the table's. */
+let checked = requireString(inputs.checked);
 const bodies = requireArray(inputs.bodies).map(value => parseBody(requireRecord(value))).filter(body => !only || body.id === only);
 if (only && !bodies.length) throw new Error(`No input for ${only}.`);
 
@@ -63,10 +70,14 @@ function parseBody(raw: Record<string, unknown>): Body {
   const record = calibration.record === undefined ? undefined : requireRecord(calibration.record);
   const optionalNumber = (value: unknown) => value === undefined ? undefined : requireFiniteNumber(value);
   const body: Body = {
-    id, name: requireString(raw.name), number: requireFiniteNumber(raw.number),
+    id, name: requireString(raw.name), number: requireFiniteNumber(raw.number), checked: raw.checked === undefined ? undefined : requireString(raw.checked),
+    maximumErrorFraction: raw.maximumErrorFraction === undefined ? 0.02 : requireFiniteNumber(raw.maximumErrorFraction),
     model: { id: requireFiniteNumber(model.id), version: requireString(model.version), shapeFile: requireFiniteNumber(model.shapeFile), spinFile: optionalNumber(model.spinFile),
       lambda: requireFiniteNumber(model.lambda), beta: requireFiniteNumber(model.beta), periodHours: requireFiniteNumber(model.periodHours), yorpRadPerDay2: optionalNumber(model.yorpRadPerDay2),
       comment: model.comment === undefined ? undefined : requireString(model.comment),
+      nonconvex: model.nonconvex === true, basis: model.basis === undefined ? undefined : requireString(model.basis),
+      spinFileName: model.spinFileName === undefined ? undefined : requireString(model.spinFileName),
+      note: model.note === undefined ? undefined : requireString(model.note),
       references: requireArray(model.references).map(value => { const r = requireRecord(value); return { id: requireFiniteNumber(r.id), label: requireString(r.label), title: requireString(r.title) }; }) },
     alternatives: requireArray(raw.alternatives).map(value => { const a = requireRecord(value); return { id: requireFiniteNumber(a.id), lambda: requireFiniteNumber(a.lambda), beta: requireFiniteNumber(a.beta),
       periodHours: requireFiniteNumber(a.periodHours), diameterKm: optionalNumber(a.diameterKm), uncertaintyKm: optionalNumber(a.uncertaintyKm) }; }),
@@ -80,6 +91,7 @@ function parseBody(raw: Record<string, unknown>): Body {
       introductionSources: requireArray(text.introductionSources).map(v => requireString(v)), shapeSummary: requireString(text.shapeSummary) },
     papers,
   };
+  if (body.model.nonconvex !== (body.model.basis !== undefined)) throw new TypeError(`${id}: a nonconvex model names its basis, and only a nonconvex one.`);
   for (const key of [...body.text.cardSources, ...body.text.introductionSources]) if (key !== 'sbdb' && !papers[key]) throw new TypeError(`${id}: unknown source ${key}.`);
   return body;
 }
@@ -90,15 +102,13 @@ function parseIdentifier(value: unknown) {
   return { type: requireString(identifier.type), value: requireString(identifier.value) };
 }
 
-const PLACEHOLDER_REVISION = '0'.repeat(40);
-/** Write a catalogue record for a cited work that has none yet; its evidence is pinned after the citing file is committed. */
+/** Write a catalogue record for a cited work that has none yet; its evidence names the citing file and locator. */
 async function ensureRecord(source: RecordSource & { url: string; label: string }, citingPath: string, locator: string) {
   const path = resolve('src/sources', `${source.catalogueId}.json`);
   if (await readFile(path).catch(() => null)) return;
-  const citing = await readFile(citingPath);
   await write(path, json({ id: source.catalogueId, kind: source.kind, identityLevel: 'work', title: source.title,
     identifiers: source.identifier ? [source.identifier] : [], links: [{ role: 'landing', url: source.url, label: source.label }],
-    evidence: [{ path: relative(ROOT, citingPath), revision: PLACEHOLDER_REVISION, sha256: sha256(citing), locator }], relations: [],
+    evidence: [{ path: relative(ROOT, citingPath), locator }], relations: [],
     statements: [{ kind: 'credit', text: source.credit, scope: 'citation', evidence: `${relative(ROOT, citingPath)}#${locator}` }] }));
 }
 
@@ -168,7 +178,7 @@ async function authorBody(body: Body) {
   const { id, name, number, model, calibration } = body;
   const pkg = resolve('src/objects', id), src = resolve(pkg, 'source'), template = resolve('src/objects', TEMPLATE);
   const modelUrl = `${DAMIT}/asteroid_models/view/${model.id}`, shapeUrl = `${DAMIT}/stored_files/open/${model.shapeFile}/shape.txt`;
-  const spinUrl = model.spinFile === undefined ? undefined : `${DAMIT}/stored_files/open/${model.spinFile}/IAUspin.txt`;
+  const spinUrl = model.spinFile === undefined ? undefined : `${DAMIT}/stored_files/open/${model.spinFile}/${model.spinFileName ?? 'IAUspin.txt'}`;
   const shapePath = `shape/model-${model.id}.txt`, spinPath = `reference/${model.id}-IAUspin.txt`;
   const credit = `DAMIT, Astronomical Institute of Charles University; ${name} model ${model.id}; original model authors identified in its pinned reference records.`;
   const shapeId = `${id}-shape`;
@@ -218,13 +228,18 @@ async function authorBody(body: Body) {
   const radiusKm = calibration.diameterKm / 2, radiusMeters = radiusKm * 1000;
   const radialRangeKm = [Math.min(...mesh.radii) * kmPerUnit, Math.max(...mesh.radii) * kmPerUnit];
   const elevation = [-niceCeil(radiusKm - radialRangeKm[0]!), niceCeil(radialRangeKm[1]! - radiusKm)];
-  const maximumErrorMeters = Math.round(radiusMeters * 0.02 * 1000) / 1000;
+  // The shared 800-face budget, or the whole source when it is smaller (as Bacchus keeps its 508 faces).
+  const faceBudget = Math.min(800, mesh.faceCount);
+  const maximumErrorMeters = Math.round(radiusMeters * body.maximumErrorFraction * 1000) / 1000;
   const grid = { metersPerUnit, expectedVertices: mesh.vertexCount, expectedFaces: mesh.faceCount, indexBase: 1 };
   const terrain = requireTerrainMesh(await loadPdsPlateShape(resolve(src, shapePath), grid));
-  const simplification = { method: 'source-meshoptimizer', targetFaces: 800, maximumErrorMeters, regularize: true };
-  const simplified = requireRecord((await simplifyRadialShape(terrain, { faceBudget: 800, simplification }, 1)).simplification);
+  const simplification = { method: 'source-meshoptimizer', targetFaces: faceBudget, maximumErrorMeters, regularize: true };
+  const simplified = requireRecord((await simplifyRadialShape(terrain, { faceBudget, simplification }, 1)).simplification);
   const pole = equatorialPole(model.lambda, model.beta);
-  const limitation = 'The convex inversion resolves the broad shape; craters and concavities are unresolved.';
+  const limitation = model.nonconvex
+    ? `The nonconvex model, fitted to ${model.basis}, resolves large concavities where those data constrain them; craters and fine relief are unresolved.`
+    : 'The convex inversion resolves the broad shape; craters and concavities are unresolved.';
+  const kind = model.nonconvex ? `nonconvex model fitted to ${model.basis}` : 'convex light-curve model';
 
   const calibrationRecord = {
     method: calibration.method, diameterKm: calibration.diameterKm, uncertaintyKm: calibration.uncertaintyKm, quantity: calibration.quantity,
@@ -236,7 +251,7 @@ async function authorBody(body: Body) {
   const damitModel = {
     modelId: model.id, modelUrl, shapeUrl, ...(spinUrl ? { spinUrl } : {}), modelVersion: model.version,
     lambda: model.lambda, beta: model.beta, periodHours: model.periodHours, ...(model.yorpRadPerDay2 === undefined ? {} : { yorpRadPerDay2: model.yorpRadPerDay2 }),
-    ...(model.comment ? { archiveComment: model.comment } : {}), nonconvex: false,
+    ...(model.comment ? { archiveComment: model.comment } : {}), nonconvex: model.nonconvex,
     mesh: { vertices: mesh.vertexCount, faces: mesh.faceCount, signedVolumeSourceUnitsCubed: mesh.volume, volumeEquivalentDiameterSourceUnits: equivalentDiameterUnits,
       closedManifold: mesh.closedManifold, extentsSourceUnits: mesh.extents, eulerCharacteristic: mesh.euler, scaledVolumeCubicKm: mesh.volume * kmPerUnit ** 3, physicalRadiusKm: radiusKm },
     alternativeModels: body.alternatives.map(alternative => ({ ...alternative, modelUrl: `${DAMIT}/asteroid_models/view/${alternative.id}` })),
@@ -266,7 +281,7 @@ async function authorBody(body: Body) {
   const terrestrial = { ...templateTerrestrial, namespace: id, displayName: name, publicBase: `/scenes/${id}/`,
     raster: { ...templateRaster, scientific: [scientific] },
     geometry: { ...templateGeometry, radiusKm, mapUrl: `/scenes/${id}/${id}-shape-surface@2x.webp`, polesUrl: `/scenes/${id}/${id}-shape-surface@2x.webp`,
-      radialTerrain: { ...templateRadial, path: shapePath, grid, simplification: { method: 'source-meshoptimizer', targetFaces: 800, maximumErrorMeters, regularize: true } } },
+      radialTerrain: { ...templateRadial, path: shapePath, grid, faceBudget, simplification } },
     celestial: { sunSource: 'Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase.' } };
   await write(resolve(src, 'preparation/terrestrial.json'), json(terrestrial));
   await write(resolve(src, 'preparation/rotation.json'), json({ schema: 'cssearth-observed-pole@1', ...pole, displayMeridianDegrees: 0, phase: 'arbitrary-display-phase', periodHours: model.periodHours,
@@ -306,7 +321,7 @@ async function authorBody(body: Body) {
       controls: [
         { id: 'shape', label: 'Shape', thumbnail: `/scenes/${id}/${id}-shape-thumbnail.webp`, surface: `${id}-shape-surface@2x.webp`, poles: `${id}-shape-surface@2x.webp`,
           source: { id: shapeId, path: '../manifest.json' }, falseColor: false,
-          notes: `${calibration.visibleDescription} The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.`, noData: true },
+          notes: `${calibration.visibleDescription} The ${model.nonconvex ? 'nonconvex model shows broad shape and large concavities' : 'convex model shows broad shape'}; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.`, noData: true },
         { id: 'elevation', label: 'Elevation', thumbnail: `/scenes/${id}/${id}-elevation-thumbnail.webp`, surface: `${id}-elevation-surface@2x.webp`, poles: `${id}-elevation-surface@2x.webp`,
           source: { id: shapeId, path: '../manifest.json' },
           legend: { kind: 'scale', title: 'Elevation', width: 256, height: 16, labels: [fmt(elevation[0]!), fmt(legendMiddle), fmt(elevation[1]!)], meta: `km · ${fmt(radiusKm)} km reference sphere`,
@@ -339,7 +354,7 @@ async function authorBody(body: Body) {
     card: { text: body.text.card, sources: cite(body.text.cardSources) },
     introduction: { text: body.text.introduction, sources: cite(body.text.introductionSources) },
     datasets: {
-      shape: { title: 'Light-curve shape model', detail: 'Published shape', summary: body.text.shapeSummary },
+      shape: { title: model.nonconvex ? `DAMIT ${model.id} shape model` : 'Light-curve shape model', detail: 'Published shape', summary: body.text.shapeSummary },
       elevation: { title: 'Shape-derived elevations', detail: 'Shape-derived radial height',
         summary: `Height above or below a ${fmt(radiusKm)} km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief.` },
     },
@@ -391,8 +406,8 @@ async function authorBody(body: Body) {
         acquisition: 'Restore original uncalibrated counted triangle table through the pinned acquisition recipe.',
         redistribution: 'Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.', consumers: ['terrain', 'shape', 'elevation'], lensId: 'elevation',
         projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'uncalibrated source coordinates', metersPerUnit, referenceRadiusMeters: radiusMeters },
-        coverage: `Published convex light-curve model ${model.id}. ${calibration.visibleDescription} ${limitation}`,
-        sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `damit-shape-${model.shapeFile}`, role: 'material', evidence: `src/objects/${id}/source/manifest.json@${PLACEHOLDER_REVISION}#/inputs/0` }] } },
+        coverage: `Published ${kind} ${model.id}. ${calibration.visibleDescription} ${limitation}`,
+        sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `damit-shape-${model.shapeFile}`, role: 'material', evidence: ENTRY_EVIDENCE }] } },
     ],
     generatedIntermediates: [], documents: [],
   };
@@ -402,7 +417,7 @@ async function authorBody(body: Body) {
   const radial = await loadRadialTerrain({ config: { ...terrestrial, geometry: { ...terrestrial.geometry, radius: geometryRadius, radiusKm } }, sourceDirectory: src, source });
   if (!radial) throw new TypeError(`${id}: the marker snapshot requires a radial terrain.`);
   const recipeRecord = { generator: 'tools/objects/terrestrial-layers/radial-snapshot.mts', inputs: [shapeId], size: 512, longitudeDegrees: 0, latitudeDegrees: 35, ambient: 0.45, diffuse: 0.55, lensId: 'shape' };
-  const context = await renderRadialSnapshot({ ...recipeRecord, faces: radial.faces, map: await missingCoverageMap() });
+  const context = await renderRadialSnapshot({ ...recipeRecord, faces: radial.faces, map: await neutralMap() });
   await write(resolve(src, 'presentation/context.png'), context);
   manifest.generatedIntermediates = [{ id: 'prepared-radial-context', path: 'presentation/context.png', origin: shapeUrl, credit, license: 'CC-BY-4.0', consumers: ['navigation'],
     recipe: recipeRecord, generator: recipeRecord.generator }];
@@ -410,12 +425,11 @@ async function authorBody(body: Body) {
   console.log(JSON.stringify({ id, vertices: mesh.vertexCount, faces: mesh.faceCount, radiusKm, metersPerUnit, elevation, maximumErrorMeters, semiMajorAxisAu, pole, estimatedErrorMeters: simplified.estimatedErrorMeters }));
 }
 
-let coverageMap: Buffer | undefined;
-async function missingCoverageMap() {
-  if (coverageMap) return coverageMap;
+/** The shared neutral shape material, as every shape-only marker shows it. */
+let neutral: Buffer | undefined;
+async function neutralMap() {
   const width = 512, height = 256;
-  const pixels = paintMissingCoverage(Buffer.alloc(width * height * 3, 160), { width, height, channels: 3 }, new Uint8Array(width * height).fill(1));
-  return coverageMap = await sharp(pixels, { raw: { width, height, channels: 3 } }).png().toBuffer();
+  return neutral ??= await sharp(shapeMaterialRaster(width, height), { raw: { width, height, channels: 3 } }).png().toBuffer();
 }
 
 /** Pin every source file that is neither an input nor a generated intermediate as a document. */
@@ -467,7 +481,9 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Shape and spin | [DAMIT ${model.id}](${facts.modelUrl}) |
 | Physical scale | [${calibration.reference}](${calibration.referenceUrl}) ([record](source/reference/calibration.json)) |
 
-[DAMIT model ${model.id}](${facts.modelUrl}), version ${model.version}${model.comment ? ` (archive comment: "${model.comment}")` : ''}, is a convex light-curve inversion mesh from ${references}. The original ${facts.mesh.vertexCount} vertices and ${facts.mesh.faceCount} triangular faces are the source input. Its large-scale shape is inferred from how the asteroid's total brightness changes as it spins; concavities, craters, surface texture and the current rotation phase are not resolved.${alternatives}
+[DAMIT model ${model.id}](${facts.modelUrl}), version ${model.version}${model.comment ? ` (archive comment: "${model.comment}")` : ''}, is a ${model.nonconvex ? `nonconvex mesh fitted to ${model.basis}` : 'convex light-curve inversion mesh'} from ${references}. The original ${facts.mesh.vertexCount} vertices and ${facts.mesh.faceCount} triangular faces are the source input. ${model.nonconvex
+    ? 'Large concavities appear where the data constrain them; craters, surface texture and the current rotation phase are not resolved.'
+    : "Its large-scale shape is inferred from how the asteroid's total brightness changes as it spins; concavities, craters, surface texture and the current rotation phase are not resolved."}${model.note ? ` ${model.note}` : ''}${alternatives}
 
 Adopted diameter: **${calibration.diameterKm} ± ${calibration.uncertaintyKm} km**, meaning ${calibration.quantity}, from [${calibration.reference}](${calibration.referenceUrl}). The reference-sphere radius is ${facts.radiusKm} km. ${calibration.notes}
 
@@ -475,12 +491,13 @@ Adopted diameter: **${calibration.diameterKm} ± ${calibration.uncertaintyKm} km
 
 ## Evidence
 
-Checked ${checked} by \`tools/objects/source-authoring/damit-asteroids/author.mts\` from the pinned [inputs](../../../tools/objects/source-authoring/damit-asteroids/inputs.json). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic ${facts.mesh.euler}. The shape, spin, JPL records${facts.neowise ? ', NEOWISE row' : ''} and every derived record are pinned by bytes and SHA-256 in the [input manifest](source/manifest.json).
+Checked ${checked} by \`tools/objects/source-authoring/damit-asteroids/author.mts\` from the pinned [inputs](../../../tools/objects/source-authoring/damit-asteroids/inputs.json). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic ${facts.mesh.euler}. The shape, spin, JPL records${facts.neowise ? ', NEOWISE row' : ''} and every derived record are declared in the [input manifest](source/manifest.json).
 
 ## Known problems
 
-- The grid marks unmapped coverage: no registered surface imagery exists for this asteroid. Convex inversion leaves concavities and fine relief unresolved.
-- ${calibration.method === 'radiometric-effective-diameter-transfer' ? 'Transferring a thermal sphere diameter to the mesh volume is approximate. The quoted fit error excludes shape, spin and thermal-model systematics.' : 'The scale inherits the quoted uncertainty of its published fit.'}
+- No registered surface imagery exists for this asteroid; the shape shows the shared neutral gray. ${model.nonconvex ? 'The nonconvex model leaves craters and fine relief unresolved.' : 'Convex inversion leaves concavities and fine relief unresolved.'}
+- ${calibration.method === 'radiometric-effective-diameter-transfer' ? 'Transferring a thermal sphere diameter to the mesh volume is approximate. The quoted fit error excludes shape, spin and thermal-model systematics.'
+  : calibration.method === 'radar-diameter-transfer' ? 'Transferring a radar diameter measured independently of this mesh to its volume is approximate.' : 'The scale inherits the quoted uncertainty of its published fit.'}
 - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
 - The displayed rotation phase is arbitrary and not propagated from the model epoch.${model.yorpRadPerDay2 === undefined ? '' : ` The measured YORP spin-up (${model.yorpRadPerDay2} rad/day²) is recorded but not propagated.`} Orbit context is fixed at 2026-09-03 TT.
 
@@ -524,4 +541,5 @@ function ledger(body: Body, modelUrl: string) {
   return { schema: 'cssearth-investigation-ledger@1', objectId: id, entries };
 }
 
-for (const body of bodies) await authorBody(body);
+const tableChecked = checked;
+for (const body of bodies) { checked = body.checked ?? tableChecked; await authorBody(body); }

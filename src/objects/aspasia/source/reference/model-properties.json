@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/715",
+  "modelId": 715,
+  "modelVersion": "2017-06-19",
+  "diameterKm": 164,
+  "diameterInterpretation": "ADAM volume-equivalent diameter: 164 ± 3 km.",
+  "calibration": {
+    "method": "adam-volume-equivalent-diameter",
+    "diameterKm": 164,
+    "uncertaintyKm": 3,
+    "quantity": "volume-equivalent diameter of the archived ADAM model",
+    "reference": "DAMIT model 715 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+    "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/715",
+    "notes": "DAMIT marks model 715 as size-calibrated (D = 164 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 164 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 22 light curves, 9 adaptive-optics images and 3 occultations (Table 3).",
+    "scaleKmPerSourceUnit": 0.9983489391572896,
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/715",
+    "sourceLabel": "DAMIT model 715 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+    "diameterSemantics": "volume-equivalent diameter of the archived ADAM model",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 715 as size-calibrated (D = 164 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 164 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 22 light curves, 9 adaptive-optics images and 3 occultations (Table 3).",
+    "visibleDescription": "ADAM volume-equivalent diameter: 164 ± 3 km."
+  },
+  "periodHours": 9.02145,
+  "poleEclipticJ2000Degrees": [
+    4,
+    29
+  ],
+  "modelLimitations": "The nonconvex model, fitted to light curves, adaptive-optics images and stellar occultations, resolves large concavities where those data constrain them; craters and fine relief are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/661/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 998.3489391572896,
+    "firstVertexKm": [
+      -0.28301794736594343,
+      10.927449278873835,
+      62.966589398933266
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      187.11784612411506,
+      183.28698157478073,
+      144.5891796649537
+    ],
+    "volumeCubicKm": 2309564.877632662,
+    "volumeEquivalentRadiusKm": 82,
+    "radialRangeKm": [
+      58.0465562358298,
+      102.14155587813488
+    ]
+  },
+  "elevation": [
+    -25,
+    25
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1640,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 2309564877632662
+    }
+  }
+}

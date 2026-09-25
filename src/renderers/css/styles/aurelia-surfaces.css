@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.object-stage:where([data-object-id="aurelia"]) > :is(.aurelia-sun-camera, .aurelia-camera, .aurelia-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-sun-camera, :where(.object-stage[data-object-id="aurelia"]) .aurelia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--aurelia-surface-image); background-repeat: no-repeat;
+}
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-body > .aurelia-polar { background-image: var(--aurelia-poles-image); }
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-material-root { z-index: 3; --aurelia-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-material, :where(.object-stage[data-object-id="aurelia"]) .aurelia-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-material { background-repeat: no-repeat; transform: rotate(var(--aurelia-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="aurelia"]) .aurelia-billboard { border-radius: 50%; background-color: var(--aurelia-billboard-color); opacity: var(--aurelia-billboard-opacity); }
+.object-stage:where([data-object-id="aurelia"])[data-lod="billboard"] .aurelia-scene, .object-stage:where([data-object-id="aurelia"])[data-lod="marker"] .aurelia-scene { visibility: hidden; }
+.object-stage:where([data-object-id="aurelia"])[data-lod="marker"] .aurelia-billboard { opacity: 0; }
+

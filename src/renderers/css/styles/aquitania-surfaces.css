@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.object-stage:where([data-object-id="aquitania"]) > :is(.aquitania-sun-camera, .aquitania-camera, .aquitania-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-sun-camera, :where(.object-stage[data-object-id="aquitania"]) .aquitania-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--aquitania-surface-image); background-repeat: no-repeat;
+}
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-body > .aquitania-polar { background-image: var(--aquitania-poles-image); }
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-material-root { z-index: 3; --aquitania-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-material, :where(.object-stage[data-object-id="aquitania"]) .aquitania-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-material { background-repeat: no-repeat; transform: rotate(var(--aquitania-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="aquitania"]) .aquitania-billboard { border-radius: 50%; background-color: var(--aquitania-billboard-color); opacity: var(--aquitania-billboard-opacity); }
+.object-stage:where([data-object-id="aquitania"])[data-lod="billboard"] .aquitania-scene, .object-stage:where([data-object-id="aquitania"])[data-lod="marker"] .aquitania-scene { visibility: hidden; }
+.object-stage:where([data-object-id="aquitania"])[data-lod="marker"] .aquitania-billboard { opacity: 0; }
+

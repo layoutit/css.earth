@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ara",
+  "card": {
+    "text": "Main-belt asteroid found in 1912.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=849",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "849 Ara (A915 UB); Discovered 1912-Feb-09 by Belyavskij, S. at Simeis; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-835",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/835/shape.txt",
+        "label": "DAMIT shape 835 · Ara",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "S. Belyavskij found Ara at Simeis on 9 February 1912.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=849",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "849 Ara (A915 UB); Discovered 1912-Feb-09 by Belyavskij, S. at Simeis; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-835",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/835/shape.txt",
+        "label": "DAMIT shape 835 · Ara",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 1802 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves and stellar occultations, so large hollows can show. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 36.5 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

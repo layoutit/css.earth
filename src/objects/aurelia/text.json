@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aurelia",
+  "card": {
+    "text": "Main-belt asteroid found in 1896.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=419",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "419 Aurelia (A896 RF); Discovered 1896-Sep-07 by Wolf, M. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-4348",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4348/shape.txt",
+        "label": "DAMIT shape 4348 · Aurelia",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M. Wolf found Aurelia at Heidelberg on 7 September 1896.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=419",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "419 Aurelia (A896 RF); Discovered 1896-Sep-07 by Wolf, M. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-4348",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4348/shape.txt",
+        "label": "DAMIT shape 4348 · Aurelia",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 1834 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 62.5 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

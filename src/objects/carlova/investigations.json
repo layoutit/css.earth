@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "carlova",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 1811: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 1811, version 2017-06-16, pole (355°, 55°), period 6.189593 h, taken unchanged from the archive.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1811",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "137 ± 3 km, volume-equivalent diameter of the archived ADAM model. DAMIT marks model 1811 as size-calibrated (D = 137 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 135 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 9 light curves, 2 adaptive-optics images and 1 occultation (Table 3).",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1811"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1811"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    }
+  ]
+}
