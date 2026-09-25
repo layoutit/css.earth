@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27419%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                419 Aurelia (A896 RF)          2026-Sep-25 15:12:24
+Rec #:     419 (+COV) Soln.date: 2026-Jun-05_03:34:47   # obs: 5789 (1899-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457877.5 ! 2017-May-04.00 (TDB)         Residual RMS= .21397
+   EC= .2505876068818969   QR= 1.946104167827288   TP= 2457864.8577987612
+   OM= 229.1263574407559   W=  44.38527694409227   IN= 3.92618509997996
+   A= 2.596840118602887    MA= 2.977549260162969   ADIST= 3.247576069378486
+   PER= 4.18481            N= .23552459            ANGMOM= .026836232
+   DAN= 2.06412            DDN= 2.9647             L= 273.4443386
+   B= 2.7451883            MOID= .93241799         TP= 2017-Apr-21.3577987612
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 74.3505            ROTPER= 16.784
+   H= 8.56                 G= .150                 B-V= .641
+                           ALBEDO= .034            STYP= F
+
+ASTEROID comments: 
+1: soln ref.= JPL#145, OCC=0
+2: source=ORB
+*******************************************************************************

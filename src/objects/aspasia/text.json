@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aspasia",
+  "card": {
+    "text": "Main-belt asteroid found in 1895.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=409",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "409 Aspasia (A895 XC); Discovered 1895-Dec-09 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-661",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/661/shape.txt",
+        "label": "DAMIT shape 661 · Aspasia",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Aspasia at Nice on 9 December 1895.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=409",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "409 Aspasia (A895 XC); Discovered 1895-Dec-09 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-661",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/661/shape.txt",
+        "label": "DAMIT shape 661 · Aspasia",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 715 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 82 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

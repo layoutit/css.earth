@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27387%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               387 Aquitania (A894 EC)         2026-Sep-25 15:12:05
+Rec #:     387 (+COV) Soln.date: 2026-Jun-05_03:32:10   # obs: 6542 (1894-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457856.5 ! 2017-Apr-13.00 (TDB)         Residual RMS= .25005
+   EC= .235359408479434    QR= 2.096401377435718   TP= 2458133.9325617133
+   OM= 128.2607382264912   W=  157.0944867861946   IN= 18.1128614681767
+   A= 2.741682040796199    MA= 299.7668085190566   ADIST= 3.38696270415668
+   PER= 4.53977            N= .217109308           ANGMOM= .027683138
+   DAN= 3.30671            DDN= 2.12838            L= 286.3807446
+   B= 6.949947             MOID= 1.09079003        TP= 2018-Jan-15.4325617133
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 50.255             ROTPER= 24.144
+   H= 7.49                 G= .150                 B-V= .881
+                           ALBEDO= .190            STYP= L
+
+ASTEROID comments: 
+1: soln ref.= JPL#148, OCC=0
+2: source=ORB
+*******************************************************************************

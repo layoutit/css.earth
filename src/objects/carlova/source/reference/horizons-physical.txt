@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27360%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                360 Carlova (A893 EE)          2026-Sep-25 15:12:12
+Rec #:     360 (+COV) Soln.date: 2026-Jun-05_03:30:18   # obs: 6207 (1893-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457732.5 ! 2016-Dec-10.00 (TDB)         Residual RMS= .19107
+   EC= .1779188264946137   QR= 2.468070946064672   TP= 2457650.7786436947
+   OM= 132.5485141592324   W=  287.8600750031559   IN= 11.69690553685053
+   A= 3.002222925919494    MA= 15.48371732830187   ADIST= 3.536374905774315
+   PER= 5.20203            N= .189469657           ANGMOM= .029330397
+   DAN= 2.75676            DDN= 3.07498            L= 60.7625679
+   B= -11.1258283          MOID= 1.51097           TP= 2016-Sep-19.2786436947
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 64.5625            ROTPER= 6.183
+   H= 8.49                 G= .150                 B-V= .692
+                           ALBEDO= .043            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#95, OCC=0
+2: source=ORB
+*******************************************************************************

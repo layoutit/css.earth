@@ -1,0 +1,15 @@
+{
+  "method": "radar-volume-equivalent-diameter",
+  "diameterKm": 0.448,
+  "uncertaintyKm": 0.02,
+  "quantity": "volume-equivalent diameter of the archived radar and light-curve model",
+  "reference": "DAMIT model 4390 calibrated size, Rożek et al. (2019), A&A 631, A149",
+  "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+  "notes": "DAMIT marks model 4390 as size-calibrated (D = 0.448 km, σ = 0.02 km); radar delay-Doppler images fix the scale. NEOWISE lists 0.451 ± 0.026 km (JPL SBDB), consistent within the quoted error.",
+  "scaleKmPerSourceUnit": 0.999415279139989,
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+  "sourceLabel": "DAMIT model 4390 calibrated size, Rożek et al. (2019), A&A 631, A149",
+  "diameterSemantics": "volume-equivalent diameter of the archived radar and light-curve model",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 4390 as size-calibrated (D = 0.448 km, σ = 0.02 km); radar delay-Doppler images fix the scale. NEOWISE lists 0.451 ± 0.026 km (JPL SBDB), consistent within the quoted error.",
+  "visibleDescription": "Radar-calibrated volume-equivalent diameter: 0.448 ± 0.02 km."
+}

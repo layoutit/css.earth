@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.object-stage:where([data-object-id="nyx"]) > :is(.nyx-sun-camera, .nyx-camera, .nyx-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.object-stage[data-object-id="nyx"]) .nyx-sun-camera, :where(.object-stage[data-object-id="nyx"]) .nyx-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="nyx"]) .nyx-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="nyx"]) .nyx-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="nyx"]) .nyx-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--nyx-surface-image); background-repeat: no-repeat;
+}
+:where(.object-stage[data-object-id="nyx"]) .nyx-body > .nyx-polar { background-image: var(--nyx-poles-image); }
+:where(.object-stage[data-object-id="nyx"]) .nyx-material-root { z-index: 3; --nyx-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="nyx"]) .nyx-material, :where(.object-stage[data-object-id="nyx"]) .nyx-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.object-stage[data-object-id="nyx"]) .nyx-material { background-repeat: no-repeat; transform: rotate(var(--nyx-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="nyx"]) .nyx-billboard { border-radius: 50%; background-color: var(--nyx-billboard-color); opacity: var(--nyx-billboard-opacity); }
+.object-stage:where([data-object-id="nyx"])[data-lod="billboard"] .nyx-scene, .object-stage:where([data-object-id="nyx"])[data-lod="marker"] .nyx-scene { visibility: hidden; }
+.object-stage:where([data-object-id="nyx"])[data-lod="marker"] .nyx-billboard { opacity: 0; }
+

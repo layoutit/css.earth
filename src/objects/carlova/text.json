@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "carlova",
+  "card": {
+    "text": "Main-belt asteroid found in 1893.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=360",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "360 Carlova (A893 EE); Discovered 1893-Mar-11 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-615",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/615/shape.txt",
+        "label": "DAMIT shape 615 · Carlova",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Carlova at Nice on 11 March 1893.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=360",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "360 Carlova (A893 EE); Discovered 1893-Mar-11 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-615",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/615/shape.txt",
+        "label": "DAMIT shape 615 · Carlova",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 1811 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 68.5 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

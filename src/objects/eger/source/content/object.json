@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "eger",
+  "displayName": "Eger",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "0.895 km (size-calibrated model)",
+        "source": {
+          "url": "https://doi.org/10.1088/0004-6256/140/3/770",
+          "label": "Trilling et al. (2010), AJ 140, 770",
+          "checked": "2026-09-25",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "trilling-2010-exploreneos-i",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "1.404 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273103%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-25",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "1.66 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273103%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-25",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "5.710153 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/458",
+          "label": "DAMIT model 458",
+          "checked": "2026-09-25",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 458; /periodHours"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "thumbnail": "/scenes/eger/eger-shape-thumbnail.webp",
+        "surface": "eger-shape-surface@2x.webp",
+        "poles": "eger-shape-surface@2x.webp",
+        "source": {
+          "id": "eger-shape",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "notes": "Warm Spitzer thermal diameter: 1.79 ± 0.36 km. The nonconvex model shows broad shape and large concavities; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+        "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/eger/eger-elevation-thumbnail.webp",
+        "surface": "eger-elevation-surface@2x.webp",
+        "poles": "eger-elevation-surface@2x.webp",
+        "source": {
+          "id": "eger-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-0.5",
+            "0.25",
+            "1"
+          ],
+          "meta": "km · 0.895 km reference sphere",
+          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/458",
+          "image": "/scenes/eger/eger-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 0.895 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Model record",
+      "role": "terrain",
+      "description": "DAMIT model 458, version 2012-09-20",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/458"
+    },
+    {
+      "label": "Size calibration",
+      "role": "facts",
+      "description": "Trilling et al. (2010), AJ 140, 770",
+      "href": "https://doi.org/10.1088/0004-6256/140/3/770"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/458"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/458",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Eger model 458; original model authors identified in its pinned reference records."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/eger.json",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

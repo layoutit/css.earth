@@ -372,6 +372,527 @@
           }
         }
       }
+    },
+    {
+      "id": "aspasia",
+      "name": "Aspasia",
+      "number": 409,
+      "model": {
+        "id": 715,
+        "version": "2017-06-19",
+        "shapeFile": 661,
+        "spinFile": 659,
+        "lambda": 4,
+        "beta": 29,
+        "periodHours": 9.02145,
+        "references": [
+          {
+            "id": 169,
+            "label": "Hanuš et al. (2017), A&A 601, A114",
+            "title": "Volumes and bulk densities of forty asteroids from ADAM shape modeling"
+          },
+          {
+            "id": 149,
+            "label": "Hanuš et al. (2013), Icarus 226, 1045",
+            "title": "Sizes of main-belt asteroids by combining shape models and Keck Adaptive Optics observations"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves, adaptive-optics images and stellar occultations"
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "adam-volume-equivalent-diameter",
+        "diameterKm": 164,
+        "uncertaintyKm": 3,
+        "quantity": "volume-equivalent diameter of the archived ADAM model",
+        "reference": "DAMIT model 715 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/715",
+        "notes": "DAMIT marks model 715 as size-calibrated (D = 164 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 164 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 22 light curves, 9 adaptive-optics images and 3 occultations (Table 3).",
+        "visibleDescription": "ADAM volume-equivalent diameter: 164 ± 3 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1895.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Aspasia at Nice on 9 December 1895.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "papagena",
+      "name": "Papagena",
+      "number": 471,
+      "model": {
+        "id": 1798,
+        "version": "2017-06-19",
+        "shapeFile": 1056,
+        "spinFile": 1054,
+        "lambda": 224,
+        "beta": 58,
+        "periodHours": 7.11539,
+        "references": [
+          {
+            "id": 169,
+            "label": "Hanuš et al. (2017), A&A 601, A114",
+            "title": "Volumes and bulk densities of forty asteroids from ADAM shape modeling"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves, adaptive-optics images and stellar occultations"
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "adam-volume-equivalent-diameter",
+        "diameterKm": 133,
+        "uncertaintyKm": 4,
+        "quantity": "volume-equivalent diameter of the archived ADAM model",
+        "reference": "DAMIT model 1798 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1798",
+        "notes": "DAMIT marks model 1798 as size-calibrated (D = 133 km, σ = 4 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 132 ± 4 km for the publication fit; the archived release is kept as archived. The fit used 13 light curves, 1 adaptive-optics image and 2 occultations (Table 3).",
+        "visibleDescription": "ADAM volume-equivalent diameter: 133 ± 4 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1901.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Papagena at Heidelberg on 7 June 1901.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "ara",
+      "name": "Ara",
+      "number": 849,
+      "model": {
+        "id": 1802,
+        "version": "2017-06-19",
+        "shapeFile": 835,
+        "spinFile": 833,
+        "lambda": 223,
+        "beta": -41,
+        "periodHours": 4.116391,
+        "references": [
+          {
+            "id": 169,
+            "label": "Hanuš et al. (2017), A&A 601, A114",
+            "title": "Volumes and bulk densities of forty asteroids from ADAM shape modeling"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves and stellar occultations"
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "adam-volume-equivalent-diameter",
+        "diameterKm": 73,
+        "uncertaintyKm": 3,
+        "quantity": "volume-equivalent diameter of the archived ADAM model",
+        "reference": "DAMIT model 1802 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1802",
+        "notes": "DAMIT marks model 1802 as size-calibrated (D = 73 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 73 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 23 light curves and 2 occultations, with no adaptive-optics image (Table 3).",
+        "visibleDescription": "ADAM volume-equivalent diameter: 73 ± 3 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1912.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "S. Belyavskij found Ara at Simeis on 9 February 1912.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves and stellar occultations, so large hollows can show. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "aquitania",
+      "name": "Aquitania",
+      "number": 387,
+      "model": {
+        "id": 1804,
+        "version": "2017-06-19",
+        "shapeFile": 6115,
+        "spinFile": 6113,
+        "lambda": 123,
+        "beta": 46,
+        "periodHours": 24.14011,
+        "references": [
+          {
+            "id": 169,
+            "label": "Hanuš et al. (2017), A&A 601, A114",
+            "title": "Volumes and bulk densities of forty asteroids from ADAM shape modeling"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves, adaptive-optics images and stellar occultations"
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "adam-volume-equivalent-diameter",
+        "diameterKm": 100,
+        "uncertaintyKm": 4,
+        "quantity": "volume-equivalent diameter of the archived ADAM model",
+        "reference": "DAMIT model 1804 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1804",
+        "notes": "DAMIT marks model 1804 as size-calibrated (D = 100 km, σ = 4 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 97 ± 4 km for the publication fit; the archived release is kept as archived. The fit used 27 light curves, 7 adaptive-optics images and 1 occultation (Table 3).",
+        "visibleDescription": "ADAM volume-equivalent diameter: 100 ± 4 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1894.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "F. Courty found Aquitania at Bordeaux on 5 March 1894.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "carlova",
+      "name": "Carlova",
+      "number": 360,
+      "model": {
+        "id": 1811,
+        "version": "2017-06-16",
+        "shapeFile": 615,
+        "spinFile": 613,
+        "lambda": 355,
+        "beta": 55,
+        "periodHours": 6.189593,
+        "references": [
+          {
+            "id": 169,
+            "label": "Hanuš et al. (2017), A&A 601, A114",
+            "title": "Volumes and bulk densities of forty asteroids from ADAM shape modeling"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves, adaptive-optics images and stellar occultations"
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "adam-volume-equivalent-diameter",
+        "diameterKm": 137,
+        "uncertaintyKm": 3,
+        "quantity": "volume-equivalent diameter of the archived ADAM model",
+        "reference": "DAMIT model 1811 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1811",
+        "notes": "DAMIT marks model 1811 as size-calibrated (D = 137 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 135 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 9 light curves, 2 adaptive-optics images and 1 occultation (Table 3).",
+        "visibleDescription": "ADAM volume-equivalent diameter: 137 ± 3 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1893.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Carlova at Nice on 11 March 1893.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "siegena",
+      "name": "Siegena",
+      "number": 386,
+      "model": {
+        "id": 1815,
+        "version": "2017-06-19",
+        "shapeFile": 1739,
+        "spinFile": 1737,
+        "lambda": 287,
+        "beta": 25,
+        "periodHours": 9.76503,
+        "references": [
+          {
+            "id": 169,
+            "label": "Hanuš et al. (2017), A&A 601, A114",
+            "title": "Volumes and bulk densities of forty asteroids from ADAM shape modeling"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves, adaptive-optics images and stellar occultations"
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "adam-volume-equivalent-diameter",
+        "diameterKm": 168,
+        "uncertaintyKm": 5,
+        "quantity": "volume-equivalent diameter of the archived ADAM model",
+        "reference": "DAMIT model 1815 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1815",
+        "notes": "DAMIT marks model 1815 as size-calibrated (D = 168 km, σ = 5 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 167 ± 5 km for the publication fit; the archived release is kept as archived. The fit used 83 light curves, 1 adaptive-optics image and 2 occultations (Table 3).",
+        "visibleDescription": "ADAM volume-equivalent diameter: 168 ± 5 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1894.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Siegena at Heidelberg on 1 March 1894.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "aurelia",
+      "name": "Aurelia",
+      "number": 419,
+      "model": {
+        "id": 1834,
+        "version": "2017-06-19",
+        "shapeFile": 4348,
+        "spinFile": 4346,
+        "lambda": 174,
+        "beta": 36,
+        "periodHours": 16.7809,
+        "references": [
+          {
+            "id": 169,
+            "label": "Hanuš et al. (2017), A&A 601, A114",
+            "title": "Volumes and bulk densities of forty asteroids from ADAM shape modeling"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves, adaptive-optics images and stellar occultations"
+      },
+      "alternatives": [
+        {
+          "id": 1833,
+          "lambda": 354,
+          "beta": 44,
+          "periodHours": 16.7809,
+          "diameterKm": 121,
+          "uncertaintyKm": 3
+        }
+      ],
+      "calibration": {
+        "method": "adam-volume-equivalent-diameter",
+        "diameterKm": 125,
+        "uncertaintyKm": 3,
+        "quantity": "volume-equivalent diameter of the archived ADAM model",
+        "reference": "DAMIT model 1834 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1834",
+        "notes": "DAMIT marks model 1834 as size-calibrated (D = 125 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 125 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 47 light curves, 1 adaptive-optics image and 1 occultation (Table 3). Both pole solutions reproduce the adaptive-optics and occultation data; the paper says the second pole (this model) \"might be preferred\" but does not reject the first.",
+        "visibleDescription": "ADAM volume-equivalent diameter: 125 ± 3 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1896.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Aurelia at Heidelberg on 7 September 1896.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "asteroid-1999-jv6",
+      "name": "1999 JV6",
+      "number": 85990,
+      "model": {
+        "id": 4390,
+        "version": "2020-01-28",
+        "shapeFile": 50447,
+        "spinFile": 50444,
+        "spinFileName": "IAUspin",
+        "lambda": 132,
+        "beta": -86,
+        "periodHours": 6.53679,
+        "comment": "model reconstructed from lightcurves and radar observations",
+        "references": [
+          {
+            "id": 647,
+            "label": "Rożek et al. (2019), A&A 631, A149",
+            "title": "Shape model and spin-state analysis of PHA contact binary (85990) 1999 JV6 from combined radar and optical observations"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves and radar delay-Doppler images",
+        "note": "DAMIT also holds a convex light-curve model of the same asteroid, [model 4389](https://damit.cuni.cz/projects/damit/asteroid_models/view/4389); the radar-constrained model is the one that resolves its two lobes."
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radar-volume-equivalent-diameter",
+        "diameterKm": 0.448,
+        "uncertaintyKm": 0.02,
+        "quantity": "volume-equivalent diameter of the archived radar and light-curve model",
+        "reference": "DAMIT model 4390 calibrated size, Rożek et al. (2019), A&A 631, A149",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+        "notes": "DAMIT marks model 4390 as size-calibrated (D = 0.448 km, σ = 0.02 km); radar delay-Doppler images fix the scale. NEOWISE lists 0.451 ± 0.026 km (JPL SBDB), consistent within the quoted error.",
+        "visibleDescription": "Radar-calibrated volume-equivalent diameter: 0.448 ± 0.02 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Near-Earth asteroid found in 1999.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "The LINEAR survey found 1999 JV6 at Socorro on 13 May 1999.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves and radar images, which show two lobes. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25",
+      "maximumErrorFraction": 0.03
+    },
+    {
+      "id": "nyx",
+      "name": "Nyx",
+      "number": 3908,
+      "model": {
+        "id": 278,
+        "version": "2007-02-27",
+        "shapeFile": 934,
+        "spinFile": 932,
+        "lambda": 290,
+        "beta": 68,
+        "periodHours": 4.42601,
+        "references": [
+          {
+            "id": 107,
+            "label": "Kaasalainen et al. (2004), Icarus 167, 178",
+            "title": "Photometry and models of eight near-Earth asteroids"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves",
+        "note": "DAMIT also holds a convex model from the same paper, [model 277](https://damit.cuni.cz/projects/damit/asteroid_models/view/277), with pole (292°, 71°)."
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radar-diameter-transfer",
+        "diameterKm": 1.0,
+        "uncertaintyKm": 0.15,
+        "quantity": "radar-derived diameter",
+        "reference": "Benner et al. (2002), Icarus 158, 379",
+        "referenceUrl": "https://doi.org/10.1006/icar.2002.6869",
+        "notes": "JPL SBDB lists the diameter 1.0 ± 0.15 km with the reference Benner et al. (2002), Icarus 158, 379-388, from Arecibo and Goldstone radar. The radar diameter is transferred to the light-curve mesh volume; it is not a fit to this mesh.",
+        "visibleDescription": "Radar diameter: 1.0 ± 0.15 km.",
+        "catalogueId": "benner-2002-nyx-radar",
+        "record": {
+          "catalogueId": "benner-2002-nyx-radar",
+          "kind": "publication",
+          "title": "Radar Observations of Asteroid 3908 Nyx",
+          "credit": "L. A. M. Benner and co-authors",
+          "identifier": {
+            "type": "DOI",
+            "value": "10.1006/icar.2002.6869"
+          }
+        }
+      },
+      "text": {
+        "card": "Near-Earth asteroid found in 1980.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "H.-E. Schuster found Nyx at La Silla on 6 August 1980.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves alone, so its hollows are less certain than on image-fitted models. The spin angle is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "eger",
+      "name": "Eger",
+      "number": 3103,
+      "model": {
+        "id": 458,
+        "version": "2012-09-20",
+        "shapeFile": 1787,
+        "spinFile": 1785,
+        "lambda": 219,
+        "beta": -70,
+        "periodHours": 5.710153,
+        "yorpRadPerDay2": 1.4e-08,
+        "references": [
+          {
+            "id": 144,
+            "label": "Ďurech et al. (2012), A&A 547, A10",
+            "title": "Analysis of the rotation period of asteroids (1865) Cerberus, (2100) Ra-Shalom, and (3103) Eger - search for the YORP effect"
+          }
+        ],
+        "nonconvex": true,
+        "basis": "light curves, including ones at phase angles above 75 degrees",
+        "note": "The authors needed a nonconvex model because no convex one fitted the high-phase light curves, and they call this mesh one of many similar solutions whose main concavity is likely real. DAMIT's later [model 459](https://damit.cuni.cz/projects/damit/asteroid_models/view/459) (Ďurech et al. 2018) is convex."
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 1.79,
+        "uncertaintyKm": 0.36,
+        "quantity": "thermal-model effective diameter",
+        "reference": "Trilling et al. (2010), AJ 140, 770",
+        "referenceUrl": "https://doi.org/10.1088/0004-6256/140/3/770",
+        "notes": "Trilling et al. (2010) Table 1 lists D = 1.79 km for (3103) Eger from Warm Spitzer; section 4 estimates the total diameter uncertainty at about 20%, taken here as 0.36 km. Ďurech et al. (2012) scaled this mesh to the same diameter (1.78 km in their text).",
+        "visibleDescription": "Warm Spitzer thermal diameter: 1.79 ± 0.36 km.",
+        "catalogueId": "trilling-2010-exploreneos-i",
+        "record": {
+          "catalogueId": "trilling-2010-exploreneos-i",
+          "kind": "publication",
+          "title": "ExploreNEOs. I. Description and first results from the Warm Spitzer near-Earth object survey",
+          "credit": "D. E. Trilling, M. Mueller, J. L. Hora, A. W. Harris and co-authors",
+          "identifier": {
+            "type": "DOI",
+            "value": "10.1088/0004-6256/140/3/770"
+          }
+        }
+      },
+      "text": {
+        "card": "Near-Earth asteroid found in 1982.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Lovas found Eger at Piszkéstető on 20 January 1982.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Fitted to light curves alone; the main hollow is likely real, finer detail less so. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-09-25"
     }
   ]
 }

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "siegena",
+  "card": {
+    "text": "Main-belt asteroid found in 1894.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=386",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "386 Siegena (A894 EB); Discovered 1894-Mar-01 by Wolf, M. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-1739",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1739/shape.txt",
+        "label": "DAMIT shape 1739 · Siegena",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M. Wolf found Siegena at Heidelberg on 1 March 1894.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=386",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "386 Siegena (A894 EB); Discovered 1894-Mar-01 by Wolf, M. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-1739",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1739/shape.txt",
+        "label": "DAMIT shape 1739 · Siegena",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 1815 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves, adaptive-optics images and occultations, so large hollows can show. The spin angle is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 84 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

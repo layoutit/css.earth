@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "asteroid-1999-jv6",
+  "card": {
+    "text": "Near-Earth asteroid found in 1999.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=85990",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "85990 (1999 JV6); Discovered 1999-May-13 by LINEAR at Socorro; orbit class: Apollo"
+      },
+      {
+        "catalogueId": "damit-shape-50447",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/50447/shape.txt",
+        "label": "DAMIT shape 50447 · 1999 JV6",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The LINEAR survey found 1999 JV6 at Socorro on 13 May 1999.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=85990",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "85990 (1999 JV6); Discovered 1999-May-13 by LINEAR at Socorro; orbit class: Apollo"
+      },
+      {
+        "catalogueId": "damit-shape-50447",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/50447/shape.txt",
+        "label": "DAMIT shape 50447 · 1999 JV6",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 4390 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves and radar images, which show two lobes. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 0.224 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

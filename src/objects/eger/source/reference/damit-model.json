@@ -1,0 +1,32 @@
+{
+  "modelId": 458,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/458",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1787/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1785/IAUspin.txt",
+  "modelVersion": "2012-09-20",
+  "lambda": 219,
+  "beta": -70,
+  "periodHours": 5.710153,
+  "yorpRadPerDay2": 1.4e-8,
+  "nonconvex": true,
+  "mesh": {
+    "vertices": 402,
+    "faces": 800,
+    "signedVolumeSourceUnitsCubed": 1.0000000497354475,
+    "volumeEquivalentDiameterSourceUnits": 1.2407010023677392,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.505947,
+      1.904036,
+      0.9139729999999999
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 3.003016478041172,
+    "physicalRadiusKm": 0.895
+  },
+  "alternativeModels": [],
+  "selectionReason": "The only archived model for this asteroid.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/144"
+  ]
+}

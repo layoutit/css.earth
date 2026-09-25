@@ -1,0 +1,35 @@
+{
+  "id": "damit-shape-50447",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "1999 JV6 · asteroid 1999 jv6 shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/50447/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/asteroid-1999-jv6/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "DAMIT, Astronomical Institute of Charles University; 1999 JV6 model 4390; original model authors identified in its pinned reference records.",
+      "scope": "The asteroid 1999 jv6 shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

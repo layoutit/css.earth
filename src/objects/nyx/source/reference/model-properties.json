@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/278",
+  "modelId": 278,
+  "modelVersion": "2007-02-27",
+  "diameterKm": 1,
+  "diameterInterpretation": "Radar diameter: 1.0 ± 0.15 km.",
+  "calibration": {
+    "method": "radar-diameter-transfer",
+    "diameterKm": 1,
+    "uncertaintyKm": 0.15,
+    "quantity": "radar-derived diameter",
+    "reference": "Benner et al. (2002), Icarus 158, 379",
+    "referenceUrl": "https://doi.org/10.1006/icar.2002.6869",
+    "notes": "JPL SBDB lists the diameter 1.0 ± 0.15 km with the reference Benner et al. (2002), Icarus 158, 379-388, from Arecibo and Goldstone radar. The radar diameter is transferred to the light-curve mesh volume; it is not a fit to this mesh.",
+    "scaleKmPerSourceUnit": 0.8059959877615409,
+    "sourceUrl": "https://doi.org/10.1006/icar.2002.6869",
+    "sourceLabel": "Benner et al. (2002), Icarus 158, 379",
+    "diameterSemantics": "radar-derived diameter",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL SBDB lists the diameter 1.0 ± 0.15 km with the reference Benner et al. (2002), Icarus 158, 379-388, from Arecibo and Goldstone radar. The radar diameter is transferred to the light-curve mesh volume; it is not a fit to this mesh.",
+    "visibleDescription": "Radar diameter: 1.0 ± 0.15 km."
+  },
+  "periodHours": 4.42601,
+  "poleEclipticJ2000Degrees": [
+    290,
+    68
+  ],
+  "modelLimitations": "The nonconvex model, fitted to light curves, resolves large concavities where those data constrain them; craters and fine relief are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/934/shape.txt",
+    "vertices": 258,
+    "faces": 512,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 805.995987761541,
+    "firstVertexKm": [
+      0.005203510096988508,
+      -0.007838310980980985,
+      0.47762032641168495
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      1.1737679269971932,
+      0.912431787925391,
+      1.003151472323879
+    ],
+    "volumeCubicKm": 0.5235987755982988,
+    "volumeEquivalentRadiusKm": 0.5,
+    "radialRangeKm": [
+      0.37311370372344227,
+      0.703509281760586
+    ]
+  },
+  "elevation": [
+    -0.2,
+    0.25
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 512,
+    "sourceVertices": 258,
+    "weldedVertices": 258,
+    "targetFaces": 512,
+    "outputFaces": 512,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 10,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 258,
+      "edges": 768,
+      "faces": 512,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 523598775.5982994
+    }
+  }
+}

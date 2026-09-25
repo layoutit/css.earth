@@ -1,0 +1,15 @@
+{
+  "method": "adam-volume-equivalent-diameter",
+  "diameterKm": 100,
+  "uncertaintyKm": 4,
+  "quantity": "volume-equivalent diameter of the archived ADAM model",
+  "reference": "DAMIT model 1804 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+  "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1804",
+  "notes": "DAMIT marks model 1804 as size-calibrated (D = 100 km, σ = 4 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 97 ± 4 km for the publication fit; the archived release is kept as archived. The fit used 27 light curves, 7 adaptive-optics images and 1 occultation (Table 3).",
+  "scaleKmPerSourceUnit": 0.9970380655822731,
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1804",
+  "sourceLabel": "DAMIT model 1804 calibrated size, Hanuš et al. (2017), A&A 601, A114",
+  "diameterSemantics": "volume-equivalent diameter of the archived ADAM model",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 1804 as size-calibrated (D = 100 km, σ = 4 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 97 ± 4 km for the publication fit; the archived release is kept as archived. The fit used 27 light curves, 7 adaptive-optics images and 1 occultation (Table 3).",
+  "visibleDescription": "ADAM volume-equivalent diameter: 100 ± 4 km."
+}

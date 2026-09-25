@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "aspasia",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 715: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 715, version 2017-06-19, pole (4°, 29°), period 9.02145 h, taken unchanged from the archive.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/715",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "164 ± 3 km, volume-equivalent diameter of the archived ADAM model. DAMIT marks model 715 as size-calibrated (D = 164 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 164 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 22 light curves, 9 adaptive-optics images and 3 occultations (Table 3).",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/715"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/715"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25"
+        }
+      ]
+    }
+  ]
+}

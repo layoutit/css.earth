@@ -1,0 +1,15 @@
+{
+  "method": "radiometric-effective-diameter-transfer",
+  "diameterKm": 1.79,
+  "uncertaintyKm": 0.36,
+  "quantity": "thermal-model effective diameter",
+  "reference": "Trilling et al. (2010), AJ 140, 770",
+  "referenceUrl": "https://doi.org/10.1088/0004-6256/140/3/770",
+  "notes": "Trilling et al. (2010) Table 1 lists D = 1.79 km for (3103) Eger from Warm Spitzer; section 4 estimates the total diameter uncertainty at about 20%, taken here as 0.36 km. Ďurech et al. (2012) scaled this mesh to the same diameter (1.78 km in their text).",
+  "scaleKmPerSourceUnit": 1.4427327749264207,
+  "sourceUrl": "https://doi.org/10.1088/0004-6256/140/3/770",
+  "sourceLabel": "Trilling et al. (2010), AJ 140, 770",
+  "diameterSemantics": "thermal-model effective diameter",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. Trilling et al. (2010) Table 1 lists D = 1.79 km for (3103) Eger from Warm Spitzer; section 4 estimates the total diameter uncertainty at about 20%, taken here as 0.36 km. Ďurech et al. (2012) scaled this mesh to the same diameter (1.78 km in their text).",
+  "visibleDescription": "Warm Spitzer thermal diameter: 1.79 ± 0.36 km."
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27849%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  849 Ara (A915 UB)            2026-Sep-25 15:11:59
+Rec #:     849 (+COV) Soln.date: 2026-Jun-05_04:07:59   # obs: 6103 (1919-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457297.5 ! 2015-Oct-02.00 (TDB)         Residual RMS= .22588
+   EC= .1995144814183515   QR= 2.520244008956983   TP= 2457169.6992386561
+   OM= 228.3740553884475   W=  63.3590925159851    IN= 19.52535023980966
+   A= 3.14839425630399     MA= 22.54778306628565   ADIST= 3.776544503650997
+   PER= 5.58653            N= .176429176           ANGMOM= .029909247
+   DAN= 2.77483            DDN= 3.32009            L= 290.3492636
+   B= 17.3819876           MOID= 1.57142997        TP= 2015-May-27.1992386561
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 40.378             ROTPER= 4.116
+   H= 8.13                 G= .150                 B-V= .701
+                           ALBEDO= .186            STYP= M
+
+ASTEROID comments: 
+1: soln ref.= JPL#129, OCC=0
+2: source=ORB
+*******************************************************************************

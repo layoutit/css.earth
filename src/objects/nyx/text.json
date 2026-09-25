@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nyx",
+  "card": {
+    "text": "Near-Earth asteroid found in 1980.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3908",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "3908 Nyx (1980 PA); Discovered 1980-Aug-06 by Schuster, H.-E. at La Silla; orbit class: Amor"
+      },
+      {
+        "catalogueId": "damit-shape-934",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/934/shape.txt",
+        "label": "DAMIT shape 934 · Nyx",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "H.-E. Schuster found Nyx at La Silla on 6 August 1980.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3908",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-25",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "3908 Nyx (1980 PA); Discovered 1980-Aug-06 by Schuster, H.-E. at La Silla; orbit class: Amor"
+      },
+      {
+        "catalogueId": "damit-shape-934",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/934/shape.txt",
+        "label": "DAMIT shape 934 · Nyx",
+        "checked": "2026-09-25",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 278 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves alone, so its hollows are less certain than on image-fitted models. The spin angle is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 0.5 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

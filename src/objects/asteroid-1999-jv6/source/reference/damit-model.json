@@ -1,0 +1,32 @@
+{
+  "modelId": 4390,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4390",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/50447/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/50444/IAUspin",
+  "modelVersion": "2020-01-28",
+  "lambda": 132,
+  "beta": -86,
+  "periodHours": 6.53679,
+  "archiveComment": "model reconstructed from lightcurves and radar observations",
+  "nonconvex": true,
+  "mesh": {
+    "vertices": 1948,
+    "faces": 3892,
+    "signedVolumeSourceUnitsCubed": 0.04716227108506935,
+    "volumeEquivalentDiameterSourceUnits": 0.44826210820542023,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      0.739772,
+      0.365367,
+      0.348
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 0.04707958915864107,
+    "physicalRadiusKm": 0.224
+  },
+  "alternativeModels": [],
+  "selectionReason": "The only archived model for this asteroid.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/647"
+  ]
+}

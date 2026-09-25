@@ -682,14 +682,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 445085,
-      "sha256": "0de1ada732ac35c0dce3d44af8bd0557003b460d17e51c6a2d8e7087b582695b"
+      "bytes": 450691,
+      "sha256": "d123654be67bdce2f5ff0e44d7708c44530a2f83b58080ae0c40518fae354b12"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 12421115,
-      "sha256": "1743ad5b278ce8571b1a37811af577114685677d9be127ee489e6c4738e0f86c"
+      "bytes": 12557680,
+      "sha256": "6e9d8281eadfbc548686ba1aacc3dbb45b1f1187d73f9b4ccf906ad5a87c990c"
     },
     {
       "location": "prepared",
@@ -915,6 +915,18 @@
     },
     {
       "location": "prepared",
+      "filename": "world-orbits/aquitania.bin",
+      "bytes": 5136,
+      "sha256": "24a9c1bfd455cd4b88d15796fb3d2c8ca353f87c9a9fc34b1f5250399fad9989"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/ara.bin",
+      "bytes": 5136,
+      "sha256": "707c0c40e822e6707603c189230c99b290e9fbc847bbe7b594f7e68538cdaf3d"
+    },
+    {
+      "location": "prepared",
       "filename": "world-orbits/arethusa.bin",
       "bytes": 5136,
       "sha256": "dacae4db38a4495733485f2c6ee96ac99a2b5517e59300f43b2ae20b0bc6f1e4"
@@ -963,6 +975,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-orbits/aspasia.bin",
+      "bytes": 5136,
+      "sha256": "70607630f6c5ea57f73cb4bee7f4d5ddd2d6151f23b8879807f35ad1ca4e7373"
+    },
+    {
+      "location": "prepared",
       "filename": "world-orbits/asporina.bin",
       "bytes": 5136,
       "sha256": "8d8d490799d7ab551d75a51a8887c38eb2da769b7162e6823190962e869cd04e"
@@ -1008,6 +1026,12 @@
       "filename": "world-orbits/asteroid-1999-fr33.bin",
       "bytes": 5144,
       "sha256": "41f06164dfd3b678d82c802d3f5bb805a08d71707de554bc9049b34b58bc4a6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/asteroid-1999-jv6.bin",
+      "bytes": 5152,
+      "sha256": "8817629299d195d227742b54635a5a8c3e56be956bfc8a4ca2e39fc9164e86ed"
     },
     {
       "location": "prepared",
@@ -1098,6 +1122,12 @@
       "filename": "world-orbits/auravictrix.bin",
       "bytes": 5144,
       "sha256": "d74e2519178f731db2c8719dda6e5ae1184c2a644f95bc6048516820d4c4f357"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/aurelia.bin",
+      "bytes": 5136,
+      "sha256": "b37441be1080ce0f370ca39a3036843588cf02dd5a34c2e3e31469549f175833"
     },
     {
       "location": "prepared",
@@ -1296,6 +1326,12 @@
       "filename": "world-orbits/camilla.bin",
       "bytes": 5136,
       "sha256": "ca0e4af8e8d8e84973cd09442dfe567d97de3a50fa560f684eb638684663e47a"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/carlova.bin",
+      "bytes": 5136,
+      "sha256": "49c417af7d17d306b8c714531dc8cd75864dccdf0a48b6a7be37e334fed5fb5e"
     },
     {
       "location": "prepared",
@@ -1812,6 +1848,12 @@
       "filename": "world-orbits/educatio.bin",
       "bytes": 5136,
       "sha256": "42c9199d65507b5134ee492cc6b567874e1e1a526a64694ac92f263321e470b5"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/eger.bin",
+      "bytes": 5128,
+      "sha256": "f3fd793e951ba03e11a1d9ea9bb02148d63a0cfa8ade084d47cf30d7e1f3dc91"
     },
     {
       "location": "prepared",
@@ -3357,6 +3399,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-orbits/nyx.bin",
+      "bytes": 5128,
+      "sha256": "d5f529e8fdbacbb86352b47c45f48110e22fb1b00ddb6cc1059a72cfc643e54a"
+    },
+    {
+      "location": "prepared",
       "filename": "world-orbits/oberon.bin",
       "bytes": 5136,
       "sha256": "cfd4e34ce2b1cb9f1162fc50d348452faba7c9c96d74fb64b71c950831f277d4"
@@ -3450,6 +3498,12 @@
       "filename": "world-orbits/panopaea.bin",
       "bytes": 5136,
       "sha256": "25fff5019170c151a6f156c7c7782ff12fab2594685ffe9dcfb5d224acb05b52"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/papagena.bin",
+      "bytes": 5136,
+      "sha256": "20bee2465955e25182fd794fc078d4e522f81f58df8ab584641834042343200f"
     },
     {
       "location": "prepared",
@@ -4086,6 +4140,12 @@
       "filename": "world-orbits/sibylla.bin",
       "bytes": 5136,
       "sha256": "03070aceaf760ace1344f9e638a27be7ebdbf3546b5b4a263280fb8a2626cbc5"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/siegena.bin",
+      "bytes": 5136,
+      "sha256": "cae6511e28d0c42971b894df9ce4b9144656ef2767c4b5b9ee86954af0c170f0"
     },
     {
       "location": "prepared",

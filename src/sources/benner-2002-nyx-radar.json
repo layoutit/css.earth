@@ -1,0 +1,34 @@
+{
+  "id": "benner-2002-nyx-radar",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Radar Observations of Asteroid 3908 Nyx",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1006/icar.2002.6869"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1006/icar.2002.6869",
+      "label": "Benner et al. (2002), Icarus 158, 379"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/nyx/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "L. A. M. Benner and co-authors",
+      "scope": "citation",
+      "evidence": "src/objects/nyx/source/content/object.json#/panel/facts/0/source"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "damit-shape-615",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Carlova · carlova shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/615/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/carlova/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "DAMIT, Astronomical Institute of Charles University; Carlova model 1811; original model authors identified in its pinned reference records.",
+      "scope": "The carlova shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

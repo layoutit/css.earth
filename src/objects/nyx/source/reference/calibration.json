@@ -1,0 +1,15 @@
+{
+  "method": "radar-diameter-transfer",
+  "diameterKm": 1,
+  "uncertaintyKm": 0.15,
+  "quantity": "radar-derived diameter",
+  "reference": "Benner et al. (2002), Icarus 158, 379",
+  "referenceUrl": "https://doi.org/10.1006/icar.2002.6869",
+  "notes": "JPL SBDB lists the diameter 1.0 ± 0.15 km with the reference Benner et al. (2002), Icarus 158, 379-388, from Arecibo and Goldstone radar. The radar diameter is transferred to the light-curve mesh volume; it is not a fit to this mesh.",
+  "scaleKmPerSourceUnit": 0.8059959877615409,
+  "sourceUrl": "https://doi.org/10.1006/icar.2002.6869",
+  "sourceLabel": "Benner et al. (2002), Icarus 158, 379",
+  "diameterSemantics": "radar-derived diameter",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL SBDB lists the diameter 1.0 ± 0.15 km with the reference Benner et al. (2002), Icarus 158, 379-388, from Arecibo and Goldstone radar. The radar diameter is transferred to the light-curve mesh volume; it is not a fit to this mesh.",
+  "visibleDescription": "Radar diameter: 1.0 ± 0.15 km."
+}

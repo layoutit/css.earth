@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273103%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 3103 Eger (1982 BB)           2026-Sep-25 15:12:42
+Rec #:    3103 (+COV) Soln.date: 2026-Sep-17_06:54:03   # obs: 8974 (1982-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458035.5 ! 2017-Oct-09.00 (TDB)         Residual RMS= .25857
+   EC= .3542709487778403   QR= .9067508715458948   TP= 2458263.9491417282
+   OM= 129.7716396865621   W=  254.0582282130341   IN= 20.92830940844618
+   A= 1.404228088901535    MA= 224.6877484412745   ADIST= 1.901705306257176
+   PER= 1.66404            N= .592307988           ANGMOM= .019062428
+   DAN= 1.36035            DDN= 1.11909            L= 22.7668813
+   B= -20.0879459          MOID= .0797027          TP= 2018-May-25.4491417282
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .750               ROTPER= 5.7103
+   H= 15.3                 G= .150                 B-V= .732
+                           ALBEDO= .640            STYP= Xe
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -4.913483735436E-15 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#921, OCC=0           radar( 1 delay, 3 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

@@ -1,0 +1,124 @@
+{
+  "id": "ara",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ara",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 36.5
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        190644450733.74194,
+        -325818058330.19354,
+        -8441411816.472065
+      ],
+      "presentationToReference": [
+        0.5334416863630895,
+        0,
+        -0.8458368443441697,
+        -0.7760401321229783,
+        0.3977771559319139,
+        -0.48942317839806915,
+        -0.3364545743256486,
+        -0.9174820620691819,
+        -0.21219091685703378
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319139,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 158.69565217391303,
+      "bodyRadiusM": 36500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ara-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ara",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1468452691822333,
+      "description": "Main-belt asteroid found in 1912.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

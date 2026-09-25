@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.object-stage:where([data-object-id="papagena"]) > :is(.papagena-sun-camera, .papagena-camera, .papagena-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.object-stage[data-object-id="papagena"]) .papagena-sun-camera, :where(.object-stage[data-object-id="papagena"]) .papagena-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="papagena"]) .papagena-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="papagena"]) .papagena-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="papagena"]) .papagena-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--papagena-surface-image); background-repeat: no-repeat;
+}
+:where(.object-stage[data-object-id="papagena"]) .papagena-body > .papagena-polar { background-image: var(--papagena-poles-image); }
+:where(.object-stage[data-object-id="papagena"]) .papagena-material-root { z-index: 3; --papagena-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="papagena"]) .papagena-material, :where(.object-stage[data-object-id="papagena"]) .papagena-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.object-stage[data-object-id="papagena"]) .papagena-material { background-repeat: no-repeat; transform: rotate(var(--papagena-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="papagena"]) .papagena-billboard { border-radius: 50%; background-color: var(--papagena-billboard-color); opacity: var(--papagena-billboard-opacity); }
+.object-stage:where([data-object-id="papagena"])[data-lod="billboard"] .papagena-scene, .object-stage:where([data-object-id="papagena"])[data-lod="marker"] .papagena-scene { visibility: hidden; }
+.object-stage:where([data-object-id="papagena"])[data-lod="marker"] .papagena-billboard { opacity: 0; }
+

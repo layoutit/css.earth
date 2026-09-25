@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273908%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 3908 Nyx (1980 PA)            2026-Sep-25 15:12:37
+Rec #:    3908 (+COV) Soln.date: 2025-Jun-27_17:32:07   # obs: 1985 (1980-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2454833.5 ! 2009-Jan-02.00 (TDB)         Residual RMS= .21523
+   EC= .4587756424872894   QR= 1.042881022449338   TP= 2455262.7845752863
+   OM= 261.524023633534    W=  126.2477817843148   IN= 2.181659390868814
+   A= 1.926892254520984    MA= 201.8157603142256   ADIST= 2.81090348659263
+   PER= 2.67482            N= .3684834             ANGMOM= .021217445
+   DAN= 2.08763            DDN= 1.19671            L= 27.7916185
+   B= 1.7592887            MOID= .0562875          TP= 2010-Mar-07.2845752863
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .500               ROTPER= 4.42601
+   H= 17.45                G= .150                 B-V= n.a.
+                           ALBEDO= .230            STYP= V
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= 1.105625869968E-14  A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#258, OCC=0           radar(15 delay, 1 Dop.)
+2: source=ORB
+*******************************************************************************
