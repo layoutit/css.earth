@@ -86,16 +86,10 @@
   padding: 0;
   transform-origin: 0 0;
   backface-visibility: hidden;
-  background-image: var(--mercury-surface-image);
   background-repeat: no-repeat;
   background-origin: border-box;
   background-clip: border-box;
   pointer-events: none;
-}
-
-.mercury-body > .mercury-polar,
-.mercury-cutaway-body > .mercury-polar {
-  background-image: var(--mercury-poles-image);
 }
 
 .mercury-cutaway,
@@ -109,44 +103,6 @@
 .mercury-cutaway {
   display: none;
   visibility: hidden;
-}
-
-.mercury-cutaway-body > s:not(.mercury-polar) {
-  background-image: var(--mercury-interior-outer-image);
-}
-
-.mercury-cutaway-body > .mercury-polar {
-  background-image: var(--mercury-interior-outer-poles-image);
-}
-
-.mercury-interior-core > s:not(.mercury-interior-pole) {
-  background-image: url("/scenes/mercury/mercury-interior-core@2x.webp");
-}
-
-.mercury-interior-core > .mercury-interior-pole {
-  background-image:
-    url("/scenes/mercury/mercury-interior-core-poles@2x.webp");
-}
-
-.mercury-interior-sections > s {
-  background-image: url("/scenes/mercury/mercury-interior-section@2x.webp");
-}
-
-/* The combined pole atlas is prepared at rasterScale 4: six 1024 px tiles (normal, enhanced, topography; north then south). */
-.object-stage[data-lens="enhanced"] .mercury-polar-north {
-  --mercury-pole-position: -2048px 0px !important;
-}
-
-.object-stage[data-lens="enhanced"] .mercury-polar-south {
-  --mercury-pole-position: -3072px 0px !important;
-}
-
-.object-stage[data-lens="topography"] .mercury-polar-north {
-  --mercury-pole-position: -4096px 0px !important;
-}
-
-.object-stage[data-lens="topography"] .mercury-polar-south {
-  --mercury-pole-position: -5120px 0px !important;
 }
 
 /* The terminator overlay follows the body's silhouette: the runtime writes

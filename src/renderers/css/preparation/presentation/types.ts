@@ -30,7 +30,6 @@ export interface Bank { billboard: Billboard; presentations: AtlasAddress[]; row
   transport: {framesPerRow: number; maximumRetainedRowCount: number; defaultFrame: number; initialWarmRows: number[]}; }
 export interface RasterAssets {
   surfaceDimensions: { width: number; height: number };
-  poles: { url: string; url2x?: string };
   lighting: { banks: Record<string, Bank>; frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number };
   interior: Record<string, string>;
   /** An unlit body's plate sizes; present instead of a lighting bank. */

@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "kelt-9-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csskelt-9-prepared-assets@1"

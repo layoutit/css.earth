@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "chi1-orionis-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csschi1-orionis-prepared-assets@1"

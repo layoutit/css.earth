@@ -21,14 +21,13 @@ const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
 const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 /** The widths the raster lane publishes, from its recipe: surfaces.ts packs each surface, poles are two tiles per surface
- * (per lens when combined), interior.ts writes the outer shell at the map's size and the core, poles and section at theirs. */
+ * per lens, interior.ts writes the outer shell at the map's size and the core, poles and section at theirs. */
 function publishedWidths(raster:RasterRecipe):LeafImagePixels{
  const url=(template:string,id?:string)=>raster.publicBase+outputName(template,RASTER_DENSITY,id),widths=new Map<string,number>();
  for(const surface of raster.surfaces){
   widths.set(url(surface.output,surface.id),packedRasterSize(raster,RASTER_DENSITY,surface.resolutionScale).width);
-  if(!raster.polesCombined)widths.set(url(raster.polesOutput,surface.id),raster.polarTile*RASTER_DENSITY*2);
+  widths.set(url(raster.polesOutput,surface.id),raster.polarTile*RASTER_DENSITY*2);
  }
- if(raster.polesCombined)widths.set(url(raster.polesOutput),raster.polarTile*RASTER_DENSITY*2*raster.surfaces.length);
  const interior=raster.interior;
  if(interior)for(const [template,width] of [[interior.outerOutput,raster.width],[interior.outerUnlitOutput,raster.width],[interior.outerPolesOutput,interior.poleTile*2],
   [interior.outerUnlitPolesOutput,interior.poleTile*2],[interior.coreOutput,interior.width],[interior.corePolesOutput,interior.poleTile*2],[interior.sectionOutput,interior.sectionWidth]] as const)

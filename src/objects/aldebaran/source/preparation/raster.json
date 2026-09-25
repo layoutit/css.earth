@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "aldebaran-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssaldebaran-prepared-assets@1"

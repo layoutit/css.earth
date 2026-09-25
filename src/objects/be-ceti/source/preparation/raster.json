@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "be-ceti-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssbe-ceti-prepared-assets@1"

@@ -6,7 +6,7 @@ import type { GeometryProfile } from './profile.js';
 import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.js';
 
 export interface PreparedLeaf {
-  tag: 's'; className: string; style: string; polar?: string | null; polarCap?: string | null;
+  tag: 's'; className: string; style: string; polarCap?: string | null;
   longitudeIndex?: number | null; latitudeIndex?: number; longitudeDegrees?: number;
   projectiveTextureLayer?: ReturnType<typeof prepareProjectiveTextureLayer> & { seamOutset?: PreparedLeafSeamOutset };
 }
@@ -42,8 +42,8 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
   // scene/index.ts); a plain leaf is never enlarged.
   const rasterScale = (patch: SurfacePatch, backgroundWidth: number, ceiling: number) =>
     leafRasterScale(imagePixels(patch.textureImageSource.url), backgroundWidth, ceiling);
-  if (pages && (p.positionVariables || surface.latitudeSegments !== pages.bandsPerPage * pages.pageCount)) {
-    throw new TypeError(`${ns}: pages of ${pages.bandsPerPage} bands need ${pages.bandsPerPage * pages.pageCount} latitude bands, not ${surface.latitudeSegments}, and inline texture addresses.`);
+  if (pages && surface.latitudeSegments !== pages.bandsPerPage * pages.pageCount) {
+    throw new TypeError(`${ns}: pages of ${pages.bandsPerPage} bands need ${pages.bandsPerPage * pages.pageCount} latitude bands, not ${surface.latitudeSegments}.`);
   }
   const options: ComputeTextureAtlasPlanOptions & { textureLighting: 'baked' } = { tileSize: p.tileSize, layerElevation: p.layerElevation,
     textureLighting: 'baked', seamBleed: 0,
@@ -83,20 +83,17 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       // (composite.ts, emissive.ts): a band draws the lens's surface, or its page of a paged surface, and a cap its poles.
       // Leaves that inlined the profile's image drew it under every lens: Uranus's and Neptune's lenses never changed them.
       const image = `var(--${ns}-${patch.pole ? 'poles-image' : page === null ? 'surface-image' : `surface-page-${page}`})`;
-      const variable = patch.pole ? `--${ns}-pole-position` : `--${ns}-surface-position`;
       // A polar cap closes the top of the band mesh. Its fitted plate can come out with the opposite winding to the
       // bands around it, and a culled cap leaves a hole at the pole through which the body's interior fill shows as a
       // flat disc. A cap is only ever seen from outside the body, so it is drawn from both sides.
       const caps = patch.pole ? ';backface-visibility:visible' : '';
-      const style = p.positionVariables
-        ? `transform:matrix3d(${fitted.matrix});${variable}:${position};background-position:var(${variable});background-size:${size};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${caps}`
-        : `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:${image};background-position:${position};background-size:${size}${caps}`;
+      const style = `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:${image};background-position:${position};background-size:${size}${caps}`;
       return { tag: 's', className: className ?? (patch.pole ? `${ns}-polar ${ns}-polar-${patch.pole}${patch.inner ? ` ${ns}-polar-inner` : ''}` : ''), style,
         ...(projective ? { projectiveTextureLayer: { ...prepareProjectiveTextureLayer(fitted.matrix,
           rasterScale(patch, address.backgroundSize[0]!, p.rasterScale)),
           // Surface leaves tile exactly; the body publishes the outset that closes their antialiased seams.
           ...(p.seamOutset && !patch.pole ? { seamOutset: prepareLeafSeamOutset(fitted.matrix, fitted.leafWidth, fitted.leafHeight, 2 * surface.radius * p.tileSize) } : {}) } } : {}),
-        ...(p.positionVariables ? { polar: patch.pole ?? null } : { polarCap: patch.pole ?? null, longitudeIndex: patch.longitudeIndex ?? null, latitudeIndex: patch.latitudeIndex }) };
+        polarCap: patch.pole ?? null, longitudeIndex: patch.longitudeIndex ?? null, latitudeIndex: patch.latitudeIndex };
     },
     interior(patch: SurfacePatch, index: number, className: string, dimensions?: readonly [number, number]): PreparedLeaf {
       const geometry = resolve(patch, index, dimensions ? 0 : patch.pole ? 0 : p.interiorSeamBleed);
@@ -106,9 +103,9 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       // A section is a plain leaf at its presentation size; core bands and caps are projective.
       const fitted = dimensions ? scalePlainLeafGeometry(stable, rasterScale(patch, stable.backgroundSize[0]!, 1)) : stable;
       return { tag: 's', className,
-        style: `transform:matrix3d(${fitted.matrix});background-position:${fitted.backgroundPosition.map(value => formatCssLength(value)).join(' ')};background-size:${fitted.backgroundSize.map(value => formatCssLength(value)).join(' ')};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${dimensions ? ';backface-visibility:visible' : ''}`,
+        style: `transform:matrix3d(${fitted.matrix});background-image:var(--${ns}-${patch.pole ? 'poles' : 'surface'}-image);background-position:${fitted.backgroundPosition.map(value => formatCssLength(value)).join(' ')};background-size:${fitted.backgroundSize.map(value => formatCssLength(value)).join(' ')};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${dimensions ? ';backface-visibility:visible' : ''}`,
         ...(!dimensions ? { projectiveTextureLayer: prepareProjectiveTextureLayer(fitted.matrix,
-          rasterScale(patch, fitted.backgroundSize[0]!, p.rasterScale)), polar: patch.pole ?? null } : {}) };
+          rasterScale(patch, fitted.backgroundSize[0]!, p.rasterScale)), polarCap: patch.pole ?? null } : {}) };
     },
   };
 }

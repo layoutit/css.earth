@@ -162,7 +162,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512, latitudeBands: 16, polarTile: 256,
-    resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` },
+    resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` },
     thumbnail: { size: 64, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-lens-{id}.webp`, source: 'measurements.json', falseColor: false,
       science: blackHole ? { kind: 'black-shadow', qualification: 'The measured shadow drawn as a black disc that always faces the viewer. A display convention; not an event horizon, a surface or a measured colour. No lighting.' }
@@ -175,7 +175,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id, surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
     surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
     poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
-    projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0, positionVariables: false, projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 1 },
+    projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0, projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 1 },
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-emission@1`, layout: 'body-container', body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: 36525,
       sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere', polarPreparation: 'the same gray on the polar tiles',
       axialTiltNote: "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame" } } });

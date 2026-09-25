@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "kepler-452-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csskepler-452-prepared-assets@1"

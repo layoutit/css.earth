@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "alpha-centauri-a-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssalpha-centauri-a-prepared-assets@1"

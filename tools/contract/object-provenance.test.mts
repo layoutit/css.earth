@@ -36,7 +36,7 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
   const source = resolve(root, 'source'), outputDirectory = resolve(root, 'prepared'), publicDirectory = resolve(root, 'public');
   await Promise.all([mkdir(resolve(source, 'preparation'), { recursive: true }), mkdir(outputDirectory), mkdir(publicDirectory)]);
   const input = Buffer.from('original observation bytes'), output = Buffer.from('prepared texture bytes');
-  const recipe = JSON.stringify({ schema: 'cssearth-raster-recipe@1', polesCombined: true, polesOutput: 'poles.webp',
+  const recipe = JSON.stringify({ schema: 'cssearth-raster-recipe@1', polesOutput: 'poles-{id}.webp',
     surfaces: [{ id: 'surface', source: 'observation.dat', output: 'surface{suffix}.webp', thumbnail: 'surface-thumbnail.webp', falseColor: false, science: { coverage: { kind: 'black-fill', southConnected: false } } }] });
   const pin = (id: string, path: string, _bytes: Uint8Array): FixturePin => ({ id, path,
     origin: `https://example.org/${path}`, sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, credit: 'Fixture archive', license: 'CC0', acquisition: 'Exact fixture input', consumers: ['surfaces'] });

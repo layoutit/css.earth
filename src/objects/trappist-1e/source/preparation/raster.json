@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "trappist-1e-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csstrappist-1e-prepared-assets@1"

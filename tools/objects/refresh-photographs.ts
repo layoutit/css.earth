@@ -19,7 +19,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   const authored = await readAuthoredSources(objectDirectory);
   const sources = new Map([...authored.sources].map(([id, entry]) => [id, entry.value]));
   const config = parseRasterRecipe(sources.get('raster'));
-  if (config.resample !== 'density-before-pack' || config.polesCombined || config.emission)
+  if (config.resample !== 'density-before-pack' || config.emission)
     throw new TypeError('Photographic refresh needs separately packed non-emissive raster surfaces.');
   if (lensIds.some(id => !config.surfaces.some(surface => surface.id === id))) throw new TypeError('Unknown photographic lens.');
   const selected = { ...config, surfaces: config.surfaces.filter(surface => lensIds.includes(surface.id)),

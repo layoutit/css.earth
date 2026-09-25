@@ -170,7 +170,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             await writeRasterPages(image, pages, config.latitudeBands, nearest, (page, levelWidth) =>
                 resolve(publicDirectory, rasterPageOutput(surface.output, density, surface.id, page, levelWidth)));
         }
-        if (!config.polesCombined) {
+        if (config.polarProjection !== 'angular-nearest') {
             const polar = createPolarSprite(pixels, width, height, config.polarTile * density, config.latitudeBands, nativePhotograph
                 ? { sampling: nearest ? 'nearest' : 'bilinear', nativePhotograph, missingColor: missingCoverageColor }
                 : { sampling: nearest ? 'nearest' : 'bilinear' });
@@ -199,19 +199,22 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 assetPath(publicDirectory, surface.thumbnail, 1, surface.id), { alphaQuality: 100, effort: 6 });
         }
     }
-    if (config.polesCombined) {
-        const density = RASTER_DENSITY, tileSize = config.polarTile * density, width = tileSize * preparedSources.length * 2;
-            const atlas = new Uint8Array(width * tileSize * 4);
-            for (const [surfaceIndex, surface] of preparedSources.entries())
-                for (let poleIndex = 0; poleIndex < 2; poleIndex++) {
-                    const dimensions = { width: config.sourceWidth, height: config.sourceHeight, latitudeBands: config.latitudeBands };
-                    let tile = polarTile(surface.rgba, tileSize, poleIndex === 0, dimensions);
-                    if (surface.fallback)
-                        tile = completeEnhancedPolarTile(tile, polarTile(surface.fallback, tileSize, poleIndex === 0, dimensions), tileSize);
-                    for (let y = 0; y < tileSize; y++)
-                        atlas.set(tile.subarray(y * tileSize * 4, (y + 1) * tileSize * 4), (y * width + (surfaceIndex * 2 + poleIndex) * tileSize) * 4);
-                }
-            await writeLossyWebp(raster(atlas, width, tileSize), assetPath(publicDirectory, config.polesOutput, density), { alphaQuality: 100 });
-}
+    // Angular poles are sampled from the whole source map (and an incomplete lens is completed from its fallback), so they
+    // are drawn once every source is loaded. Each lens writes its own north-then-south sprite, as the bilinear poles do.
+    if (config.polarProjection === 'angular-nearest') {
+        const density = RASTER_DENSITY, tileSize = config.polarTile * density, width = tileSize * 2;
+        const dimensions = { width: config.sourceWidth, height: config.sourceHeight, latitudeBands: config.latitudeBands };
+        for (const surface of preparedSources) {
+            const sprite = new Uint8Array(width * tileSize * 4);
+            for (let poleIndex = 0; poleIndex < 2; poleIndex++) {
+                let tile = polarTile(surface.rgba, tileSize, poleIndex === 0, dimensions);
+                if (surface.fallback)
+                    tile = completeEnhancedPolarTile(tile, polarTile(surface.fallback, tileSize, poleIndex === 0, dimensions), tileSize);
+                for (let y = 0; y < tileSize; y++)
+                    sprite.set(tile.subarray(y * tileSize * 4, (y + 1) * tileSize * 4), (y * width + poleIndex * tileSize) * 4);
+            }
+            await writeLossyWebp(raster(sprite, width, tileSize), assetPath(publicDirectory, config.polesOutput, density, surface.id), { alphaQuality: 100 });
+        }
+    }
     return { metadata, decoded, interpretations };
 }

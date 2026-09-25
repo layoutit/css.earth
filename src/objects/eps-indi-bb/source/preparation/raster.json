@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "eps-indi-bb-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "csseps-indi-bb-prepared-assets@1"

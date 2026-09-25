@@ -73,7 +73,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       const controlledDetail=maybeRecord(maybeRecord(plan.science)?.detailMosaic);
       if(controlledDetail?.format==='controlled-geotiff')used.push(...group(text(controlledDetail.consumer)));
       const outputUrls = [name(plan.output, RASTER_DENSITY, plan.id), name(plan.thumbnail, 1, plan.id)];
-      if (!raster.polesCombined) outputUrls.push(name(raster.polesOutput, RASTER_DENSITY, plan.id));
+      outputUrls.push(name(raster.polesOutput, RASTER_DENSITY, plan.id));
       const emission = maybeRecord(raster.emission);
       if (emission) outputUrls.push(name(emission.offLimbOutput, RASTER_DENSITY, plan.id), name(emission.limbOutput, RASTER_DENSITY, plan.id));
       const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
@@ -92,9 +92,6 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
           ...(surfaceObservation ? { surfaceObservation: { format: record(surfaceObservation.lens).format, shape: surfaceObservation.shape, transfer: record(surfaceObservation.lens).transfer,
             photometry: record(surfaceObservation.lens).photometry, display: record(surfaceObservation.lens).display, originalIllumination: true } } : {}) },
       });
-    });
-    if (raster.polesCombined) add('surface-poles', 'raster', '/polesOutput', [], 'Assemble polar tiles from the interpreted surface maps.', {
-      parents: namedRecords(raster.surfaces).map(plan => plan.id), urls: [name(raster.polesOutput, RASTER_DENSITY)], lensIds: [],
     });
     if (raster.interior) {
       const plan = record(raster.interior);

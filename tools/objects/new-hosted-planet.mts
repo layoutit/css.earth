@@ -135,7 +135,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
 
   put(`src/renderers/css/styles/${id}-surfaces.css`, glow ? starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.') : hostedPlanetStylesheet(id));
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
-    latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false,
+    latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear',
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-lens-{id}.webp`, source: 'measurements.json', falseColor: false,
       science: { kind: 'neutral-shape', qualification: glow
@@ -159,7 +159,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
       poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
     projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0,
-      positionVariables: false, projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 0.05 },
+      projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 0.05 },
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-lighting@1`, layout: 'body-container',
       body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: rotation === 'unmeasured' ? 0 : periodDays,
         sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere',

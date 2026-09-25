@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "beta-pictoris-b-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssbeta-pictoris-b-prepared-assets@1"

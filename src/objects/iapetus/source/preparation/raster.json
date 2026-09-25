@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "iapetus-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssiapetus-prepared-assets@1"

@@ -20,7 +20,7 @@ type RecordValue = Record<string, unknown>;
 type Fingerprint = {bytes:number; sha256:string};
 type NativeSampler = {sample(longitudeDegrees:number, latitudeDegrees:number, color:number[]):boolean};
 type Surface = {id:string; source:string; output:string; nativeSourcePoles?:boolean; science?:RecordValue; coverage?:{normal:string;topography:string;references:string[]}; exposure?:number[]; encoding?:RecordValue};
-type Recipe = {sourceWidth:number;sourceHeight:number;width:number;height:number;latitudeBands:number;polarTile:number;densities:number[];resample:string;unpackedResizeBeforePack?:boolean;polesCombined:boolean;polesOutput:string;publicBase:string;surfaces:Surface[]};
+type Recipe = {sourceWidth:number;sourceHeight:number;width:number;height:number;latitudeBands:number;polarTile:number;densities:number[];resample:string;unpackedResizeBeforePack?:boolean;polesOutput:string;publicBase:string;surfaces:Surface[]};
 
 
 const outputName = (template:string, density=1, id='') => template.replaceAll('{density}',String(density)).replaceAll('{suffix}',density===1?'':'@2x').replaceAll('{id}',id);
@@ -58,8 +58,8 @@ function recipe(value:RecordValue):Recipe {
   });
   if(![sourceWidth,sourceHeight,width,height,latitudeBands,polarTile,...densities].every(value=>Number.isSafeInteger(value)&&value>0)||JSON.stringify(densities)!=='[1,2]') throw new TypeError('Unsupported raster dimensions.');
   if(resample!=='source-packed'&&resample!=='density-before-pack') throw new TypeError('Unsupported raster storage.');
-  if(typeof value.polesCombined!=='boolean'||typeof value.unpackedResizeBeforePack!=='undefined'&&value.unpackedResizeBeforePack!==true) throw new TypeError('Invalid raster pole flags.');
-  return {sourceWidth,sourceHeight,width,height,latitudeBands,polarTile,densities,resample,unpackedResizeBeforePack:value.unpackedResizeBeforePack===true,polesCombined:value.polesCombined,polesOutput,publicBase,surfaces};
+  if(value.polesCombined!==undefined||typeof value.unpackedResizeBeforePack!=='undefined'&&value.unpackedResizeBeforePack!==true) throw new TypeError('Invalid raster pole flags.');
+  return {sourceWidth,sourceHeight,width,height,latitudeBands,polarTile,densities,resample,unpackedResizeBeforePack:value.unpackedResizeBeforePack===true,polesOutput,publicBase,surfaces};
 }
 async function readSourceRgba(path:string,width:number,height:number) {
   const decoded=await sharp(path,{limitInputPixels:false}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
@@ -112,7 +112,6 @@ function sourceContributors(surface:Surface, config:Recipe, manifest:RecordValue
 }
 
 async function stagePoles({lens,config,sourceDirectory,manifest,stage,publicDirectory}:{lens:Surface;config:Recipe;sourceDirectory:string;manifest:RecordValue;stage:string;publicDirectory:string}) {
-  if(config.polesCombined) throw new Error('Combined polar atlases are refreshed through the selected source-packed band path.');
   const {sampler}=await nativeSampler(lens,config,sourceDirectory,manifest), assets=[] as {filename:string;url:string;width:number;height:number;bytes:number;sha256:string}[];
   for(const density of config.densities) {
     const tile=config.polarTile*density, filename=outputName(config.polesOutput,density,lens.id), previous=contained(publicDirectory,filename);
@@ -128,7 +127,7 @@ async function stagePoles({lens,config,sourceDirectory,manifest,stage,publicDire
   return assets;
 }
 async function stageMercuryBand({lens,config,sourceDirectory,manifest,stage,publicDirectory}:{lens:Surface;config:Recipe;sourceDirectory:string;manifest:RecordValue;stage:string;publicDirectory:string}) {
-  if(config.resample!=='source-packed'||!config.unpackedResizeBeforePack||!config.polesCombined) throw new Error('Selected source-packed raster has not opted into unpacked resize-before-pack.');
+  if(config.resample!=='source-packed'||!config.unpackedResizeBeforePack) throw new Error('Selected source-packed raster has not opted into unpacked resize-before-pack.');
   const source=sourceRecord(manifest,lens.source),verified=await verifySourcePin(sourceDirectory,source); let pixels=await readSourceRgba(verified.path,config.sourceWidth,config.sourceHeight);
   if(lens.coverage) {
     const normal=sourceRecord(manifest,lens.coverage.normal),topography=sourceRecord(manifest,lens.coverage.topography);

@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "k2-18b-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssk2-18b-prepared-assets@1"

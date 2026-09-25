@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "yses-1-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssyses-1-prepared-assets@1"

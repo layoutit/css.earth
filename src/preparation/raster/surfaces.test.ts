@@ -14,7 +14,7 @@ describe('native source pole sampling', () => {
             await sharp({ create: { width: 128, height: 64, channels: 3, background: '#488ecc' } }).png().toFile(join(directory, 'source.png'));
             const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
                 width: 128, height: 64, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
-                polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
+                polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 thumbnail: {size: 8}, surfaces: [{id: 'science', source: 'source.png', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp', resolutionScale: .5}] });
             const prepared = await prepareRasterAssets({config,sourceDirectory:directory,publicDirectory:directory,outputDirectory:directory});
             expect(prepared.surfaceDimensions).toEqual({width:128,height:64});
@@ -46,7 +46,7 @@ describe('native source pole sampling', () => {
             await sharp(pixels, { raw: { width: 128, height: 64, channels: 3 } }).png().toFile(join(directory, 'source.png'));
             const base = { schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
                 width: 128, height: 64, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
-                polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
+                polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 surfaces: [{ id: 'seam', source: 'source.png', falseColor: false, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp' }] };
             const centre = async (thumbnail: Record<string, unknown>) => {
                 const config = parseRasterRecipe({ ...base, thumbnail });

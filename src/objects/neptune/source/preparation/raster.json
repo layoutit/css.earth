@@ -9,7 +9,6 @@
   "polarTile": 128,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "neptune-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssneptune-prepared-assets@1"

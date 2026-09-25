@@ -9,7 +9,6 @@
   "polarTile": 256,
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
-  "polesCombined": false,
   "polesOutput": "mars-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
     "schema": "cssmars-prepared-assets@1"

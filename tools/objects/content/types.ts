@@ -155,7 +155,6 @@ export interface PreparedObjectContent {
 export interface PreparedRasterAssets {
   surfaces?: Record<string, { url?: string; url2x?: string; polesUrl?: string; polesUrl2x?: string; coronaUrl?: string; coronaUrl2x?: string; limbUrl?: string; limbUrl2x?: string }>;
   materials?: Record<string, { url?: string; url2x?: string }>;
-  poles?: { url?: string; url2x?: string };
   atmosphere?: { materialUrl?: string; observationUrl?: string; lightingUrl?: string };
   interior?: Record<string, unknown>;
 }
