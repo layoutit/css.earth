@@ -12,7 +12,6 @@
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { hostedPlanetStylesheet } from './new-hosted-planet.mts';
 
 const EYES_ASSETS = 'https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/';
 const EYES_APP = 'https://eyes.nasa.gov/apps/exo/';
@@ -108,12 +107,7 @@ lenses.push({ id: LENS, source: 'content', material: lenses[0].material });
 descriptor.properties.catalog = { illustrationLenses: [LENS], ...descriptor.properties.catalog };
 await write(`${o}/object.json`, descriptor);
 
-// A lit planet's own stylesheet names its lens images; an emissive one takes them from per-lens variables.
-if (!raster.emission) {
-  const path = `src/renderers/css/styles/${id}-surfaces.css`, current = await readFile(resolve(root, path), 'utf8');
-  if (current !== hostedPlanetStylesheet(id, first.id)) throw new TypeError(`${id}: ${path} is not the generated one-lens stylesheet; edit it by hand.`);
-  await writeFile(resolve(root, path), hostedPlanetStylesheet(id, first.id, [LENS]));
-}
+// No stylesheet names a lens's images: the new lens's variant writes the textures every leaf reads (scene/projector.ts).
 
 const ledger = await read(`${o}/investigations.json`);
 ledger.entries.push({ id: model ? 'nasa-vtad-illustration' : 'nasa-eyes-illustration', subject: model ? `NASA VTAD ${name} 3D model texture as an illustration lens` : 'NASA Eyes on Exoplanets artist\'s concept map as an illustration lens',

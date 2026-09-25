@@ -55,12 +55,10 @@
    hide their back faces. */
 .object-stage[data-object-id="hd-189733"] .polycss-scene s:not(.hd-189733-polar) {
   backface-visibility: visible;
-  background-image: var(--hd-189733-surface-image) !important;
 }
 
 .object-stage[data-object-id="hd-189733"] .polycss-scene s.hd-189733-polar {
   backface-visibility: hidden;
-  background-image: var(--hd-189733-poles-image) !important;
 }
 
 /* Off-limb context: 600 px = raster.json emission.offLimbSize. The silhouette-fit binding already follows the

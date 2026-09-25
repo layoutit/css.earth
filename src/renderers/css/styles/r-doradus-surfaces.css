@@ -56,12 +56,10 @@
    hide their back faces. */
 .object-stage[data-object-id="r-doradus"] .polycss-scene s:not(.r-doradus-polar) {
   backface-visibility: visible;
-  background-image: var(--r-doradus-surface-image) !important;
 }
 
 .object-stage[data-object-id="r-doradus"] .polycss-scene s.r-doradus-polar {
   backface-visibility: hidden;
-  background-image: var(--r-doradus-poles-image) !important;
 }
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */

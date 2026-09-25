@@ -23,12 +23,6 @@
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;
 }
-.object-stage[data-object-id="hd-97658b"] .polycss-scene s:not(.hd-97658b-polar) {
-  background-image: url("/scenes/hd-97658b/hd-97658b-surface-shape@2x.webp") !important;
-}
-.object-stage[data-object-id="hd-97658b"] .polycss-scene s.hd-97658b-polar {
-  background-image: url("/scenes/hd-97658b/hd-97658b-poles-shape@2x.webp") !important;
-}
 /* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
 .object-stage[data-object-id="hd-97658b"] .hd-97658b-fixed-material {
   top: 50%;

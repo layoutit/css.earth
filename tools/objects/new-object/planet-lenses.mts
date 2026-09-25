@@ -89,7 +89,7 @@ export async function installThermalLens(files: PackageFiles, id: string, name: 
   const descriptor = read(`${o}/object.json`);
   descriptor.properties.recipe.surfaces[0].lenses = [{ id: 'thermal', source: 'content', material: 'lighting' }];
   files.set(`${o}/object.json`, json(descriptor));
-  ensureStylesheet(files, id, 'thermal');
+  ensureStylesheet(files, id);
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.color = colorHex;
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-thermal@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-thermal@2x.webp`;
@@ -137,7 +137,7 @@ export async function installBandColorLens(files: PackageFiles, id: string, name
   descriptor.properties.recipe.surfaces[0].lenses = [{ id: 'infrared', source: 'content', material: emissive ? 'emission' : 'lighting' }];
   files.set(`${o}/object.json`, json(descriptor));
   // A self-luminous planet's stylesheet is the emissive one, which does not name its lens; only a lit planet's names it.
-  if (!emissive) ensureStylesheet(files, id, 'infrared');
+  if (!emissive) ensureStylesheet(files, id);
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.color = colorHex;
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-infrared@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-infrared@2x.webp`;
@@ -160,11 +160,11 @@ export async function installBandColorLens(files: PackageFiles, id: string, name
   return { hex: colorHex, credit: `Colour: infrared false colour from the flux densities of ${photometry.source.citation} (${bands.join(', ')}).` };
 }
 
-/** The planet's own stylesheet, which sizes its lighting frame and names its lens's surface: written for the lens in use and listed
- * on the page. Planets scaffolded before the tool had none, and their lighting frame measured 0×0, a flat unlit disc. */
-export function ensureStylesheet(files: PackageFiles, id: string, lens: string) {
+/** The planet's own stylesheet, which sizes its lighting frame, listed on the page. Planets scaffolded before the tool had none,
+ * and their lighting frame measured 0×0, a flat unlit disc. */
+export function ensureStylesheet(files: PackageFiles, id: string) {
   const path = `src/renderers/css/styles/${id}-surfaces.css`, o = `src/objects/${id}`;
-  files.set(path, hostedPlanetStylesheet(id, lens));
+  files.set(path, hostedPlanetStylesheet(id));
   const descriptor = JSON.parse(String(files.get(`${o}/object.json`))) as { properties: { page: { stylesheets: string[] } } };
   if (!descriptor.properties.page.stylesheets.includes(path)) descriptor.properties.page.stylesheets.push(path);
   files.set(`${o}/object.json`, json(descriptor));
@@ -219,14 +219,14 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
     // A self-luminous body (an imaged young planet, drawn emissive) shines with its own heat; no starlight to tint.
     if (mode === 'host-light' && raster.emission !== undefined) { lines.push(`${id}: self-luminous, no starlight on it`); progress(lines.at(-1)!); continue; }
     // Whatever the mode, a lit shape planet gets its own stylesheet if it never had one (the lighting frame is 0×0 without it).
-    if (kind === 'neutral-shape' && raster.emission === undefined && !(JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { page: { stylesheets: string[] } } }).properties.page.stylesheets.includes(`src/renderers/css/styles/${id}-surfaces.css`)) { ensureStylesheet(files, id, 'shape'); lines.push(`${id}: stylesheet written, its lighting frame had no size`); progress(lines.at(-1)!); }
+    if (kind === 'neutral-shape' && raster.emission === undefined && !(JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { page: { stylesheets: string[] } } }).properties.page.stylesheets.includes(`src/renderers/css/styles/${id}-surfaces.css`)) { ensureStylesheet(files, id); lines.push(`${id}: stylesheet written, its lighting frame had no size`); progress(lines.at(-1)!); }
     if (mode === 'photometry') {
       const spec = photometry.get(id);
       if (!spec) { lines.push(`${id}: no photometry entry in the spec`); progress(lines.at(-1)!); continue; }
       const { hex } = await installBandColorLens(files, id, descriptor.displayName, spec);
       lines.push(`${id}: infrared colour ${hex} from ${spec.source.citation}`);
     } else if (mode === 'thermal') {
-      if (kind === 'dayside-thermal-color') { ensureStylesheet(files, id, 'thermal'); lines.push(`${id}: keeps its thermal lens; stylesheet refreshed`); for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } progress(lines.at(-1)!); continue; }
+      if (kind === 'dayside-thermal-color') { ensureStylesheet(files, id); lines.push(`${id}: keeps its thermal lens; stylesheet refreshed`); for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } progress(lines.at(-1)!); continue; }
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} lens`); continue; }
       const { csv, thermal } = await thermalFromArchive(archive, descriptor.displayName);
       if (!thermal) { lines.push(`${id}: no measured dayside brightness temperature in the archive's emission table`); continue; }

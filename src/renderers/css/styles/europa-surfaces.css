@@ -3,20 +3,11 @@
 .object-stage[data-object-id="europa"][data-lens="ice-signature"] .polycss-scene s:not(.europa-polar) {
   background-image: url("/scenes/europa/europa-ice-signature@2x.webp") !important;
 }
-.object-stage[data-object-id="europa"][data-lens="ice-signature"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-ice-signature@2x.webp") !important;
-}
 
 .object-stage[data-object-id="europa"][data-lens="fine-ice"] .polycss-scene s:not(.europa-polar) {
   background-image: url("/scenes/europa/europa-fine-ice@2x.webp") !important;
 }
-.object-stage[data-object-id="europa"][data-lens="fine-ice"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-fine-ice@2x.webp") !important;
-}
 
 .object-stage[data-object-id="europa"][data-lens="coarse-ice"] .polycss-scene s:not(.europa-polar) {
   background-image: url("/scenes/europa/europa-coarse-ice@2x.webp") !important;
-}
-.object-stage[data-object-id="europa"][data-lens="coarse-ice"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-coarse-ice@2x.webp") !important;
 }
