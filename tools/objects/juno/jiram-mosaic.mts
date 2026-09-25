@@ -32,8 +32,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { loadKernelSet, type KernelSet } from '../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../spice/kernel-bank.mts';
-import { numbers, utcToEt } from '@cssearth/spice';
-import { spiceCamera, type PixelModelKeys, type SpiceCamera } from '../../spice/camera.mts';
+import { numbers, utcToEt, spiceCamera, type PixelModelKeys, type SpiceCamera } from '@cssearth/spice';
 import { pds3Keyword } from '@cssearth/telescope';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dot3 as dot, flagValue, positionalArguments } from '@cssearth/core';
 

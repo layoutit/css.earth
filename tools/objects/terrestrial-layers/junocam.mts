@@ -13,8 +13,7 @@
  */
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';
 import type { KernelSet } from '../../spice/kernel-set.mts';
-import { number as kernelNumber, string as kernelString, utcToEt } from '@cssearth/spice';
-import { spiceCamera, type Aberration, type PixelModel } from '../../spice/camera.mts';
+import { number as kernelNumber, string as kernelString, utcToEt, spiceCamera, type Aberration, type PixelModel } from '@cssearth/spice';
 import { project } from './osiris-geo.mts';
 import type { LimbCamera, LimbPixelMapping } from './limb-refinement.mts';
 import type { EpochOffsets, RefinableStrip } from './strip-refinement.mts';
