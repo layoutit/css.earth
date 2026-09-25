@@ -283,7 +283,8 @@ Keep geometry and lighting fixed, prepare one body at a time, and compare actual
 close-ups and image delivery size before accepting the larger texture.
 
 For authored objects, `node tools/prepare/prepare-object.mts <id>...` runs the whole preparation chain in order for those objects only and
-names the step that failed; resume with `--from <step>`, stop early with `--to <step>`. With several ids each tool runs once (the authored
+names the step that failed; resume with `--from <step>`, stop early with `--to <step>`. Before the bake it refuses an install older
+than `pnpm-lock.yaml` and reader text over its budgets, and restores the Sun's files that differ from its inventory. With several ids each tool runs once (the authored
 preparation three objects at a time), which is minutes for a batch where one call per object and tool was an hour. On the paged-ellipsoid lane (Earth) and the raster
 lane (the Moon, Mercury, stars…) a write redraws only the lighting and atmosphere banks by default and keeps every other
 published image, when no recipe changed since the published preparation except in those banks' keys; it prints which mode

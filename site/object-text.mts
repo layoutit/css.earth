@@ -118,38 +118,55 @@ export interface TextContext {
   readonly evidencedDatasets: ReadonlySet<string>;
 }
 
+type AddFinding = (slot: string, rule: string, detail: string) => void;
+function budget(add: AddFinding, slot: string, kind: TextSlot, value: string) {
+  const limit = TEXT_BUDGETS[kind];
+  if (value.length > limit.characters) add(slot, 'length', `${value.length} characters; the ${kind} budget is ${limit.characters}`);
+  if (limit.sentences === undefined) {
+    if (/[.!?]$/u.test(value)) add(slot, 'punctuation', 'labels end without a full stop');
+    return;
+  }
+  const count = sentences(value).length;
+  if (count > limit.sentences) add(slot, 'sentences', `${count} sentences; the ${kind} budget is ${limit.sentences}`);
+  if (!/[.!?]$/u.test(value)) add(slot, 'punctuation', 'ends without a full stop');
+}
+
+/** The checks that need nothing but the authored text: every block within its characters, sentences and punctuation.
+ * The preparation chain runs them before its long bake, so an over-long summary fails in seconds, not at the text step. */
+export function textBudgetErrors(text: ObjectText): TextFinding[] {
+  const errors: TextFinding[] = [];
+  const add: AddFinding = (slot, rule, detail) => errors.push({ objectId: text.objectId, slot, rule, detail });
+  budget(add, 'card', 'card', text.card.text);
+  budget(add, 'introduction', 'introduction', text.introduction.text);
+  for (const [id, dataset] of Object.entries(text.datasets)) {
+    budget(add, `datasets.${id}.title`, 'title', dataset.title);
+    if (dataset.detail !== undefined) budget(add, `datasets.${id}.detail`, 'detail', dataset.detail);
+    budget(add, `datasets.${id}.summary`, 'summary', dataset.summary);
+  }
+  return errors;
+}
+
 /** What makes text unpublishable: a dataset without text, a block over its budget, or a claim without catalogued sources. */
 export function readerTextErrors(text: ObjectText, context: TextContext): TextFinding[] {
   const errors: TextFinding[] = [];
-  const add = (slot: string, rule: string, detail: string) => errors.push({ objectId: text.objectId, slot, rule, detail });
-  const budget = (slot: string, kind: TextSlot, value: string) => {
-    const limit = TEXT_BUDGETS[kind];
-    if (value.length > limit.characters) add(slot, 'length', `${value.length} characters; the ${kind} budget is ${limit.characters}`);
-    if (limit.sentences === undefined) {
-      if (/[.!?]$/u.test(value)) add(slot, 'punctuation', 'labels end without a full stop');
-      return;
-    }
-    const count = sentences(value).length;
-    if (count > limit.sentences) add(slot, 'sentences', `${count} sentences; the ${kind} budget is ${limit.sentences}`);
-    if (!/[.!?]$/u.test(value)) add(slot, 'punctuation', 'ends without a full stop');
-  };
+  const add: AddFinding = (slot, rule, detail) => errors.push({ objectId: text.objectId, slot, rule, detail });
   const cite = (slot: string, sources: readonly TextCitation[]) => {
     for (const source of sources) if (!context.catalogue.has(source.catalogueId)) add(slot, 'citation', `${source.catalogueId} is not a source catalogue record`);
   };
-  budget('card', 'card', text.card.text);
+  budget(add, 'card', 'card', text.card.text);
   cite('card', text.card.sources);
-  budget('introduction', 'introduction', text.introduction.text);
+  budget(add, 'introduction', 'introduction', text.introduction.text);
   cite('introduction', text.introduction.sources);
   const lensIds = context.lenses.map(lens => lens.id);
   for (const id of lensIds.filter(id => !text.datasets[id])) add(`datasets.${id}`, 'coverage', 'the dataset has no reader text');
   for (const [id, dataset] of Object.entries(text.datasets)) {
     if (!lensIds.includes(id)) add(`datasets.${id}`, 'coverage', 'no dataset has this id');
-    budget(`datasets.${id}.title`, 'title', dataset.title);
+    budget(add, `datasets.${id}.title`, 'title', dataset.title);
     // The page refuses a dataset whose title repeats its lens label or its summary (dataset-content.mts); refuse it here first.
     const lens = context.lenses.find(entry => entry.id === id);
     try { validateDatasetText({ id, title: dataset.title, label: lens?.label, summary: dataset.summary }); } catch (error) { add(`datasets.${id}.title`, 'identity', (error as Error).message.replace(`${id}: `, '')); }
-    if (dataset.detail !== undefined) budget(`datasets.${id}.detail`, 'detail', dataset.detail);
-    budget(`datasets.${id}.summary`, 'summary', dataset.summary);
+    if (dataset.detail !== undefined) budget(add, `datasets.${id}.detail`, 'detail', dataset.detail);
+    budget(add, `datasets.${id}.summary`, 'summary', dataset.summary);
     if (dataset.sources?.length) cite(`datasets.${id}`, dataset.sources);
     else if (!context.evidencedDatasets.has(id)) add(`datasets.${id}`, 'citation', 'cite the sources this summary describes; its prepared product names none');
   }
