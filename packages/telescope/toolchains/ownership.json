@@ -201,7 +201,7 @@
     },
     {
       "mechanic": "SPICE kernel evaluation",
-      "implementation": "tools/spice",
+      "implementation": "packages/spice (@cssearth/spice and its node entry)",
       "reason": "Existing preparation consumers retain their CSPICE-checked evaluator until their pinned kernel and output receipts can migrate together. The tracked LSK/PCK time and frame oracle runs without the larger ignored DART kernel bank; the full DART oracle remains the geometry qualification. PlanetMapper exclusively owns SPICE geometry inside the telescope project route; results are not mixed between evaluators."
     },
     {

@@ -24,7 +24,7 @@ export async function implementationPins(root: string, entries: readonly string[
         manifests.add('packages/telescope/package.json');
         return { path: resolve(root, args.path.endsWith('/node') ? 'packages/telescope/src/node/index.ts' : 'packages/telescope/src/index.ts') };
       });
-      // The SPICE kernel readers were relative modules under tools/spice/ before they became @cssearth/spice; the same.
+      // The SPICE kernel readers were relative modules under tools/ before they became @cssearth/spice; the same.
       builder.onResolve({ filter: /^@cssearth\/spice(?:\/node)?$/ }, args => {
         manifests.add('packages/spice/package.json');
         return { path: resolve(root, args.path.endsWith('/node') ? 'packages/spice/src/node/index.ts' : 'packages/spice/src/index.ts') };

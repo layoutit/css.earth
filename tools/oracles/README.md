@@ -14,8 +14,8 @@ are older standalone audits; the groups below are fixture oracles.
 | NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `eclipse-map/theresa-eigenbasis.py` | `tools/objects/eclipse-map/eigenmap-fit.oracle.test.mts` |
 | NumPy, Astropy, following pinned ThERESA source | Eclipse-map harmonic normalization and signs, weighted linear fit and posterior covariance, Planck radiance and single/band brightness temperatures | `eclipse-map/numerics.py` | `tools/objects/eclipse-map/numerics.oracle.test.mts` |
 | [Native SBMT](sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
-| SpiceyPy (CSPICE N0067) | `tools/spice/`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tools/spice/oracle.test.mts` |
-| SpiceyPy (CSPICE N0067) | `tools/spice/approach.mts`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `spice/new-horizons-approach.py` | `tools/spice/approach.test.mts` |
+| SpiceyPy (CSPICE N0067) | `@cssearth/spice`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tools/oracles/spice/dart-draco.oracle.test.mts`, and `tools/oracles/spice/small-kernel.oracle.test.mts` for the LSK and PCK alone |
+| SpiceyPy (CSPICE N0067) | `@cssearth/spice` `spacecraftApproach`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `spice/new-horizons-approach.py` | `tools/oracles/spice/new-horizons-approach.oracle.test.mts` |
 | pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `pds/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
 | pvl, numpy | `osiris-geo.mts`: the Rosetta OSIRIS level-5 geometry planes and level-4 quality companion (67P) | `pds3/osiris-geo.py` | `osiris-geo.oracle.test.mts` |
 | pvl, numpy | `archived-camera.mts`: the OSIRIS level-4 reflectance, sigma and quality planes (Steins) | `pds3/osiris-reflectance.py` | `archived-camera.oracle.test.mts` |
@@ -40,7 +40,8 @@ Scripts are under `tools/oracles/`, fixtures under `tests/oracles/` with the
 same group and name, and the comparing tests beside the code they check (under
 `tools/objects/terrestrial-layers/` unless a path is given). The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
-their scripts in `tools/oracles/fits/`.
+their scripts in `tools/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
+likewise sit beside their scripts in `tools/oracles/spice/`.
 
 ## Rules
 

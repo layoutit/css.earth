@@ -140,9 +140,9 @@ Establish sample/line order, pixel origin, aspect ratio, flips and units, then
 inspect one native-pixel projection before fitting or baking. Read the product
 with this repository's own readers: [`@cssearth/fits`](../../../packages/fits/README.md)
 for FITS, including `skyImageAxes` and `skyProjection` for which way a sky
-image faces and for resampling a rotated one, and [`tools/spice/`](../../../tools/spice) for kernels. The
-FITS package needs one `pnpm install` and `pnpm build:fits` in a fresh worktree; `tools/spice/` runs under
-plain Node as it is. Neither needs a prepared checkout, so an unbuilt worktree is not a reason to write a scratch
+image faces and for resampling a rotated one, and [`@cssearth/spice`](../../../packages/spice/README.md) for kernels.
+Both packages need one `pnpm install` and `pnpm build:packages` (or `pnpm build:fits` and `pnpm build:spice`) in a
+fresh worktree. Neither needs a prepared checkout, so an unbuilt worktree is not a reason to write a scratch
 decoder in another language. A scratch reader is untested, it can invert an
 axis or a sign without saying so, and it is not the owner that the preparation
 would use, so what it appears to establish has to be established again. Follow the
