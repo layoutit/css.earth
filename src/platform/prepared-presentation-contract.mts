@@ -209,7 +209,9 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     }
     for (const bank of track.banks) {
       record(bank, "bank", ["id", "frames", "default", "fixed", "rows"]); string(bank.id, "bank id");
-      if (array(bank.frames, "frame addresses").length !== track.frame.count) fail("every material frame requires a prepared address");
+      // A fixed-only bank (a lens's one shadowless frame) carries its fixed address and no frames.
+      const frameCount = array(bank.frames, "frame addresses").length;
+      if (frameCount !== track.frame.count && !(frameCount === 0 && bank.fixed !== null && bank.rows === undefined)) fail("every material frame requires a prepared address");
       bank.frames.forEach((value, index) => { address(value); if (value.frame !== index) fail("frame addresses must be ordered"); });
       if (bank.default !== null) address(bank.default);
       if (bank.fixed !== null) address(bank.fixed);
@@ -424,6 +426,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       }
       const bank = track.banks.find(bank => bank.id === selected.bank);
       if (selected.mode === "fixed" && !bank!.fixed) fail("selected mode requires its prepared address");
+      if (selected.mode !== "fixed" && !bank!.frames.length) fail("a fixed-only bank is selected only in fixed mode");
     }
   }
   const toggleNames = [...new Set(variants.flatMap(variant => Object.keys(variant.when).filter(key => key !== "lensId")))];

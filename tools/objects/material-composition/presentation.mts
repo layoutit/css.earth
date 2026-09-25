@@ -10,7 +10,7 @@ import type {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-sour
 import type {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import type {PreparedNode} from '../../prepared/prepared-node-tree.mts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
-import { prepareAtlasRows } from './atlas-rows.mts';
+import { prepareAtlasRows, prepareAtlasStill } from './atlas-rows.mts';
 
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
@@ -46,11 +46,28 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   const interior = [...Object.entries(views.interiorLenses.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: canonicalPreparedAsset(asset), pool: "interior" })),
     { key: "interior:outer-poles", url: canonicalPreparedAsset(views.assets.outerPoles.normal), pool: "interior" }];
   const rowBanks = new Map<string,Awaited<ReturnType<typeof prepareAtlasRows>> & {pool:string}>();
+  const stills = new Map<string,Awaited<ReturnType<typeof prepareAtlasStill>> & {pool:string}>();
+  // A material leaf's box is one tile of its atlas (below); every frame is addressed at the atlas's own pixels, and the
+  // factor the recipe drew a tile at is kept to scale the box back up in its matrix.
+  const tileScales = new Map<string, number>();
+  const tileScale = (pool: string, scale: number) => {
+    if ((tileScales.get(pool) ?? scale) !== scale) throw new Error(`Layered ${pool} atlases draw their tiles at different scales.`);
+    tileScales.set(pool, scale);
+  };
   for (const [pool, atlas, prefix] of [["exterior-material", exteriorAtlas, "exterior"], ["interior-material", interiorAtlas, "interior-material"]] as const) {
     for (const [name, variant] of Object.entries(atlas.variants)) {
       if (pool === "interior-material" && name !== "normal" && !name.startsWith("normal-")) continue;
       const resource = `${prefix}:${name}`;
-      const rows = await prepareAtlasRows({ variant, resource, publicDirectory });
+      // Shadows off lights the body from the viewer (flood lighting), so a shadowless bank shows one frame: its last, full
+      // phase, the frame the default view shows. It ships alone and its rows are never published.
+      if (name.endsWith("-no-shadows")) {
+        const frame = Math.max(...variant.presentations.map(p => p.frameIndex));
+        const still = await prepareAtlasStill({ variant, resource, publicDirectory, frame, native: true });
+        tileScale(pool, still.presentationScale); stills.set(resource, { ...still, pool });
+        continue;
+      }
+      const rows = await prepareAtlasRows({ variant, resource, publicDirectory, native: true });
+      tileScale(pool, rows.presentationScale);
       rowBanks.set(resource, { ...rows, pool });
     }
   }
@@ -60,6 +77,7 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     ...interior,
     ...exteriorLenses.flatMap(lens => lensAssets(lens).map(entry => ({ ...entry, pool: lens.id === lenses.defaultLens ? "warm" : "lenses" }))),
     ...[...rowBanks.values()].flatMap(({ entries, pool }) => entries.map(entry => ({ ...entry, pool }))),
+    ...[...stills.values()].map(({ entry, pool }) => ({ ...entry, pool })),
   ];
   const leaves = [plan.ringPlane, plan.ringShadowPlane, ...plan.ringMotionPlates.map(plate => plate.leaf),
     ...plan.bodyBands.flatMap(band => band.leaves), ...plan.interior.outerBodyBands.flatMap(band => band.leaves),
@@ -114,24 +132,34 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   const materialMesh = b.mesh(`${namespace}-fixed-material`, plan.fixedMaterialPlane.transform);
   const materialCounter = b.mesh(`${namespace}-fixed-material-counter`), materialSystem = b.mesh(`${namespace}-system`, plan.systemTransform);
   const exteriorLeaf = b.leaf(plan.fixedMaterialPlane.leaf), interiorLeaf = b.leaf(plan.interior.atmosphere.leaf);
-  for (const leaf of [exteriorLeaf, interiorLeaf]) {
+  // A browser backs a layer at its box: Saturn's lighting drew a 256 px tile in a 1,024 px box, 36 MB at DPR 3. Each leaf's
+  // box is now its tile and its matrix scales the tile back up, so every texel lands where it did (base · S = the old
+  // placement of the enlarged box) and the runtime fit (prepared-ellipsoid-projection.ts) maps the same ellipse.
+  const tileBox = new Map<PreparedNode, number>();
+  for (const [leaf, pool] of [[exteriorLeaf, "exterior-material"], [interiorLeaf, "interior-material"]] as const) {
     for (const name of ["background-image", "background-position", "background-size"]) leaf.style.removeProperty(name);
+    const scale = tileScales.get(pool) ?? 1, size = plan.fixedMaterialPlane.interactionProjection.textureSize / scale;
+    if (!Number.isFinite(size) || size <= 0) throw new Error(`Layered ${pool} tile box is invalid.`);
+    leaf.style.setProperty("--polycss-atlas-width", `${size}px`); leaf.style.setProperty("--polycss-atlas-height", `${size}px`);
+    leaf.style.transform = `matrix3d(${multiplyPreparedMatrix4(prepareTransform(leaf.style.transform), [scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]).join(",")})`;
+    tileBox.set(leaf, size);
   }
   exteriorLeaf.className = [exteriorLeaf.className, `${namespace}-exterior-material`].filter(Boolean).join(" ");
   interiorLeaf.className = [...new Set([...(interiorLeaf.className ?? "").split(/\s+/).filter(Boolean), `${namespace}-interior-material`])].join(" ");
   interiorLeaf.style.backgroundImage = "none";
   b.append(scene, materialSystem); b.append(materialSystem, materialCounter); b.append(materialCounter, materialMesh); b.append(materialMesh, exteriorLeaf, interiorLeaf);
   const { tree, index } = b.finish({ camera: cameraNode, scene });
-  const shape = plan.fixedMaterialPlane.interactionProjection, width = shape.textureSize, height = width;
-  const projection = { equatorialRadius: shape.equatorialRadius * shape.tileSize, polarRadius: shape.polarRadius * shape.tileSize,
+  const shape = plan.fixedMaterialPlane.interactionProjection;
+  // Each material leaf is fitted in its own box, from its own (tile-scaled) matrix.
+  const projectionFor = (leaf: PreparedNode, size: number) => ({ equatorialRadius: shape.equatorialRadius * shape.tileSize, polarRadius: shape.polarRadius * shape.tileSize,
     // Preserve the original native CSSOM read without a per-frame DOM parse.
     // Chromium ParsePositiveDouble: css_parser_fast_paths.cc at fbbe8214de267f516d9bb96a2b46446e07876218.
     ...config.counterSerialization,
     coverageScale: shape.coverageScale, bodySystemMatrix: prepareTransform(system.style.transform), bodyMeshMatrix: prepareTransform([...carriers.values()][0].style.transform),
     materialSystemMatrix: prepareTransform(materialSystem.style.transform), materialMeshMatrix: prepareTransform(materialMesh.style.transform),
-    baseProjection: prepareTransform(exteriorLeaf.style.transform),
-    centerTranslation: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, width / 2, height / 2, 0, 1],
-    inverseCenterTranslation: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -width / 2, -height / 2, 0, 1] };
+    baseProjection: prepareTransform(leaf.style.transform),
+    centerTranslation: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, size / 2, size / 2, 0, 1],
+    inverseCenterTranslation: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -size / 2, -size / 2, 0, 1] });
   const orbit = plan.preparedLighting.orbitAtlas;
   const defaultFrame = Math.round(Math.max(0, Math.min(orbit.frameCount - 1,
     (orbit.maximumScenePitchDegrees - camera.initialScenePitchDegrees) / (orbit.maximumScenePitchDegrees - orbit.minimumScenePitchDegrees) * (orbit.frameCount - 1))));
@@ -139,6 +167,8 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   const track = (id:string, target:PreparedNode, atlas:ReturnType<typeof parseLayeredAtlas>, interior:boolean):MaterialSourceTrack => ({ id, target: index(target), frame,
     banks: Object.entries(atlas.variants).filter(([name]) => !interior || name === "normal" || name.startsWith("normal-")).map(([name, variant]) => {
       const resource = `${interior ? "interior-material" : "exterior"}:${name}`;
+      const still = stills.get(resource);
+      if (still) return { id: name, frames: [], default: null, fixed: still.fixed };
       const rows = rowBanks.get(resource);
       if (!rows) throw new Error(`Layered material rows are missing: ${resource}`);
       const frames = Array.from({ length: frame.count }, (_, index) => ({ ...rows.frames[interior
@@ -150,7 +180,7 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     }),
     demand: { capacity: 2, defaultFrame },
     rotation: { kind: "ellipsoid", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false, polePolicy: "azimuth",
-      width, height, projection, systemTransform: materialSystem.style.transform, onlyWhenEnabled: true },
+      width: tileBox.get(target)!, height: tileBox.get(target)!, projection: projectionFor(target, tileBox.get(target)!), systemTransform: materialSystem.style.transform, onlyWhenEnabled: true },
     frameAttribute: null, modeAttribute: null, quoted: true });
   const variants = lenses.controls.flatMap(lens => [false, true].flatMap(rings => [false, true].map(shadows => {
     const interiorView = lens.view === "interior", content = interiorView ? normal : lens;
@@ -162,8 +192,8 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
         { kind: "attribute", target: -1, name: "data-lens", value: interiorView || lens.id === lenses.defaultLens ? null : lens.id },
         { kind: "class", target: -1, name: `${namespace}-hide-rings`, value: !rings },
         { kind: "class", target: -1, name: `${namespace}-hide-shadows`, value: !shadows }],
-      materials: [{ track: "exterior", bank: material, mode: "frames", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
-        { track: "interior", bank: interiorView ? material : "normal", mode: "frames", enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] };
+      materials: [{ track: "exterior", bank: material, mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
+        { track: "interior", bank: interiorView ? material : "normal", mode: interiorView && !shadows ? "fixed" : "frames", enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] };
   })));
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: 8, concurrency: 8 }),
