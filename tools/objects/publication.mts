@@ -42,6 +42,14 @@ export async function readPreparedJsonOutputs(directory: string) {
   return outputs.sort((left, right) => left.filename.localeCompare(right.filename));
 }
 
+/** Files in an object's public directory its inventory does not list. Publication refuses them, so a run checks first. */
+export async function unownedPublicFiles(id: string, objectDirectory: string, publicDirectory: string): Promise<string[]> {
+  const current = await readInventory(id, objectDirectory);
+  const known = new Set(current === null ? [] : parseRuntimeManifest(current, id).assets?.map(asset => asset.filename) ?? []);
+  const entries = await readdir(publicDirectory, { withFileTypes: true }).catch(error => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
+  return entries.filter(entry => !entry.isFile() || !known.has(entry.name)).map(entry => entry.name).sort();
+}
+
 /** Preflight images and describe their writes; metadata joins the same set below. */
 export async function preparedAssetWrites({ id, stage, destination, previous, manifest }: { id: string; stage: string; destination: string; previous: RuntimeManifest | null; manifest: RuntimeManifest }): Promise<PreparedOutput[]> {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid publication identity.');

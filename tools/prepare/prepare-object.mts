@@ -3,7 +3,9 @@
  *
  *   node tools/prepare/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--reuse-images]
  *
- * --reuse-images keeps the object's published images (and, for Earth, its pages, places and texture levels) and rebuilds
+ * The prepare step already redraws only the lighting and atmosphere banks when nothing else changed (prepare-authored.ts,
+ * redrawOnlyDecision). --reuse-images forces that: it keeps the object's published images (and, for Earth, its pages, places
+ * and texture levels) and rebuilds
  * the scene, presentation and content from the tracked recipes, stopping after the prepare step. It needs no raw downloads;
  * the paged-ellipsoid and raster lanes support it, and it refuses when the published image set would change.
  *
