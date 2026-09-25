@@ -28,7 +28,9 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
    * asset origin (`ASSET_ORIGIN`); unset reproduces today's same-origin `/scenes/` behavior. */
   readonly assetOrigin?: PreparedAssetOrigin;
 }
-export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
+export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number;
+  /** Every motion animation is paused at its prepared start (`PreparedView.motionAtRest`). */
+  readonly motionAtRest: boolean; }
 export interface PreparedDestination {
   readonly camera: Parameters<RetainedCubicSkyOrbit['flyToState']>[0];
   readonly coverage: string;

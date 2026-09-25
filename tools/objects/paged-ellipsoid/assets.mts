@@ -164,7 +164,7 @@ async function writeSphereAssets({ data, width, height, channels, density,
     for (const [page, url] of urls.entries()) {
       const raster = bakeSurfaceRaster(surfaceData, {
         width: surfaceWidth, height: surfaceHeight, channels,
-      }, surfaceRasterPlan.cells, density * 2, page, nativePhotographicClouds, nativePhotographicDisplayGamma, nativeDeepOceanFill);
+      }, surfaceRasterPlan, density * 2, page, nativePhotographicClouds, nativePhotographicDisplayGamma, nativeDeepOceanFill);
       await sharp(raster.data, { raw: raster })
         .webp({ ...webp, alphaQuality: 100 })
         .toFile(output(basename(url)));

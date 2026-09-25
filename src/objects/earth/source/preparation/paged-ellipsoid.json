@@ -61,6 +61,7 @@
   },
   "atlas": {
     "pageSize": 4096,
+    "pageCells": 8,
     "density": 8,
     "gutter": 4,
     "sourceWidth": 2048,

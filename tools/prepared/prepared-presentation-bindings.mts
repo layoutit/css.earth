@@ -232,10 +232,60 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       }
       // Spherical/ellipsoidal bodies declare their axis ratios. Their axial
       // spin preserves these bounds; irregular surface meshes are excluded.
+      /** Where the faces behind each level-managed texture write sit at rest, in scene coordinates
+       * (`PreparedTexturePlacements`). Spherical and ellipsoidal bodies only: the runtime tests facing against one sphere. */
+      function texturePlacements() {
+        const managed = definition.textureLevels?.levels[0]?.resources;
+        // The exterior body meshes (the surface and its polar caps). The cutaway's outer shell repeats their faces in
+        // place; its section faces cross the centre and say nothing about where a page sits.
+        const bodies = new Set(definition.tree.nodes.flatMap((node, id) =>
+          node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway') ? [id] : []));
+        if (!managed || !closed || !bodies.size) return null;
+        const sceneFromBody = frame([...bodies][0]!);
+        if (!sceneFromBody) return null;
+        const exterior = (target: number) => { for (let cursor = definition.tree.nodes[target].parent; cursor >= 0; cursor = definition.tree.nodes[cursor].parent) if (bodies.has(cursor)) return true; return false; };
+        const origin = sceneFromBody.transformPoint(new DOMPoint(0, 0, 0)), centre = [origin.x, origin.y, origin.z];
+        const names = new Set(definition.variants.flatMap(variant => variant.writes.flatMap(write =>
+          write.kind === 'texture' && write.resource !== null && write.resource in managed ? [write.name] : [])));
+        const corners = new Map<string, number[][]>();
+        for (const [target, record] of definition.tree.nodes.entries()) {
+          const used = [...names].filter(name => record.style.includes(`var(${name})`));
+          if (!used.length || !exterior(target)) continue;
+          const sceneFromLeaf = frame(target), style = getComputedStyle(nodes[target]);
+          const width = parseFloat(style.width), height = parseFloat(style.height);
+          if (!sceneFromLeaf || !(width > 0) || !(height > 0)) return null;
+          const points = [[0, 0], [width, 0], [0, height], [width, height]].map(([x, y]) => {
+            const point = sceneFromLeaf.transformPoint(new DOMPoint(x, y, 0, 1));
+            return [point.x / point.w, point.y / point.w, point.z / point.w];
+          });
+          if (!points.flat().every(Number.isFinite)) return null;
+          for (const name of used) corners.set(name, [...corners.get(name) ?? [], ...points]);
+        }
+        if (!corners.size) return null;
+        const length = (vector: number[]) => Math.hypot(...vector), minus = (a: number[], b: number[]) => a.map((value, axis) => value - b[axis]!);
+        // Rounded outward: a larger bound and spread, and a smaller body, only ever count more faces as seen.
+        const up = (value: number, step: number) => Math.ceil(value / step) * step, fixed = (value: number) => Number(value.toFixed(2));
+        let radius = Infinity;
+        const writes: Record<string, { center: number[]; radius: number; normal: number[]; spread: number }> = {};
+        for (const [name, points] of corners) {
+          const center = [0, 1, 2].map(axis => points.reduce((sum, point) => sum + point[axis]!, 0) / points.length);
+          const out = minus(center, centre), normal = out.map(value => value / length(out));
+          let bound = 0, spread = 0;
+          for (const point of points) {
+            bound = Math.max(bound, length(minus(point, center)));
+            const direction = minus(point, centre);
+            radius = Math.min(radius, length(direction));
+            spread = Math.max(spread, Math.acos(Math.max(-1, Math.min(1, direction.reduce((sum, value, axis) => sum + value * normal[axis]!, 0) / length(direction)))));
+          }
+          writes[name] = { center: center.map(fixed), radius: fixed(up(bound, 0.01)), normal: normal.map(value => Number(value.toFixed(4))), spread: Number(up(spread, 1e-4).toFixed(4)) };
+        }
+        return { body: { center: centre.map(fixed), radius: Math.floor(radius * 100) / 100 }, writes };
+      }
       for (const animation of stage.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = 0; }
+      const placements = texturePlacements();
       const interior = interiorGeometry();
       const bodyNode = definition.tree.nodes.findIndex(node => node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway'));
-      if (interiorOnly) return { interior, surface: null, depthReason: null, motion: [] };
+      if (interiorOnly) return { interior, placements, surface: null, depthReason: null, motion: [] };
       // Preserve the default CSS animation order for existing saved playback
       // times. Hidden variants may expose additional prepared motion handles.
       const selections = [null, ...definition.variants];
@@ -288,11 +338,13 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       }
       // Recheck after every variant has declared its motion targets.
       const finalSurface = variableSurface ? null : depthSurface();
-      return { interior, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()] };
+      return { interior, placements, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()] };
     }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly });
-    const { interior, surface, depthReason, ...bindings } = prepared;
-    if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, assetRoot, gapExclusion);
-    const source = { ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } };
+    const { interior, placements, surface, depthReason, ...bindings } = prepared;
+    const placed = <D extends { textureLevels?: unknown }>(value: D): D => placements && isRecord(value.textureLevels)
+      ? { ...value, textureLevels: { ...value.textureLevels, placements } } : value;
+    if (interiorOnly) return withPreparedInteriorFill(placed(withoutPreparedInteriorFill(input)), interior, assetRoot, gapExclusion);
+    const source = placed({ ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
     let compiled = prepareDepthPartitions(source, surface);
     let reason = depthReason;
     if (!await verifyDepthStyles(page, source, compiled, surface)) { compiled = source; reason = 'changed CSS cascade'; }

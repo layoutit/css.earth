@@ -79,7 +79,7 @@ test('native photographic maps retain their source grids and defer cloud composi
 });
 
 test('the fixed atlas accepts a larger native photographic grid without changing page dimensions', () => {
-  const raster = createPagedSurfaceRaster({publicBase:'/',atlas:{density:2,gutter:0,pageSize:16,sourceWidth:2}});
+  const raster = createPagedSurfaceRaster({publicBase:'/',geometry:{BODY_LONGITUDE_SEGMENTS:1},atlas:{density:2,gutter:0,pageSize:16,pageCells:1,sourceWidth:2}});
   const layer = prepareProjectiveTextureLayer('1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1');
   const cells = [{index:0,size:2,density:1,reversed:false,perspectiveY:0,page:0,x:0,y:0,
     source:{x:0,southY:2,width:2,height:2},layer}];
@@ -87,14 +87,30 @@ test('the fixed atlas accepts a larger native photographic grid without changing
     0,1,2, 20,21,22, 40,41,42, 60,61,62,
     80,81,82, 100,101,102, 120,121,122, 140,141,142,
   ]);
-  const baked = raster.bakeSurfaceRaster(source,{width:4,height:2,channels:3},cells,2);
+  const plan = {cells,pages:[{width:16,height:4}]};
+  const baked = raster.bakeSurfaceRaster(source,{width:4,height:2,channels:3},plan,2);
   assert.deepEqual([baked.width,baked.height,baked.channels],[16,4,4]);
   assert.deepEqual([...baked.data.subarray(0,4)],[106,107,108,255]);
-  const clouded = raster.bakeSurfaceRaster(source,{width:4,height:2,channels:3},cells,2,0,{
+  const clouded = raster.bakeSurfaceRaster(source,{width:4,height:2,channels:3},plan,2,0,{
     data:Buffer.alloc(2*1*3,255),width:2,height:1,channels:3,
     maximumAlpha:.5,threshold:0,scale:1,color:[200,200,200],
   });
   assert.deepEqual([...clouded.data.subarray(0,4)],[153,154,154,255]);
+});
+
+test('surface pages hold neighbouring cells of one row, each at the smallest-area halving of the page', () => {
+  const raster = createPagedSurfaceRaster({publicBase:'/earth/',geometry:{BODY_LONGITUDE_SEGMENTS:4},atlas:{density:8,gutter:2,pageSize:64,pageCells:2,sourceWidth:2}});
+  // Two rows of four cells: the first row's cells are larger, as near a pole.
+  const {positions,pages} = raster.layoutBlockPages([24,24,24,24, 10,10,10,10]);
+  assert.deepEqual(positions.map(cell => cell.page), [0,0,1,1, 2,2,3,3]);
+  // A tie in area keeps the wider page; the small cells stack two high in a quarter-width page.
+  assert.deepEqual(pages, [{width:64,height:28},{width:64,height:28},{width:16,height:28},{width:16,height:28}]);
+  for (const [index,cell] of positions.entries()) {
+    const size = index < 4 ? 24 : 10;
+    assert.ok(cell.x >= 2 && cell.x + size + 2 <= pages[cell.page].width && cell.y + size + 2 <= pages[cell.page].height);
+  }
+  assert.throws(() => createPagedSurfaceRaster({publicBase:'/earth/',geometry:{BODY_LONGITUDE_SEGMENTS:4},atlas:{density:8,gutter:2,pageSize:64,pageCells:3,sourceWidth:2}})
+    .layoutBlockPages([1,1,1,1]), /\/earth\/: atlas.pageCells 3 must divide 4 longitude cells/);
 });
 
 test('missing surface previews fail preparation while explicit non-surface views remain valid', () => {

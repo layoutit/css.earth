@@ -128,11 +128,26 @@ Deep ocean colour in the clear and cloud views is therefore shaded from depth, n
 water colour. It is not a measurement of sea surface reflectance and it is not a calibrated
 depth scale; for depth numbers use the elevation view.
 
-The prepared page layout remains fixed: seven 4,096-pixel-wide pages per view, their existing
-512/1,024/2,048-pixel texture levels, and one 2,048 × 512 pole atlas per view. The pole atlas has
+Each view's surface is 56 pages. A page holds eight neighbouring cells of one latitude row, a
+90° block, at 1,024, 2,048 or 4,096 pixels wide, whichever gives it the smallest area. A browser
+decodes a whole image to draw any part of it and never draws a face turned away, so a view decodes
+only the blocks it shows. The seven latitude-band pages used before each ran round the globe, so
+every view decoded all of them: 109 megapixels at the closest level, which zooming decoded again
+because the set outgrew Chrome's decode cache. Modelled on the baked cell layout for a 1,280 × 800
+view, the closest level now decodes 41, 23, 14 and 8 megapixels for globes 1,100, 1,500, 1,900
+and 3,000 px wide, against 63, 44, 32 and 28 before. On 2026-09-25 the rebake left every cell's
+alpha identical to the band pages; colour moved by 1.5 levels in 255 on average from lossy
+re-encoding at the new positions, with edge contrast 1.15% higher, not softer. The first view's
+smallest level is 271 KB in 56 files, against 247 KB in seven. A page also takes the sharper
+level only while its faces may be seen; one off screen or behind the globe keeps the smallest.
+Measured on 2026-09-25 in headless Chrome at 1,280 × 800 CSS px and DPR 2, a zoomed-in view drew
+24 of 56 pages at the sharpest level and decoded 40.8 megapixels of surface, against 94.7 for
+the seven band pages; the default view decoded 17.3 against 23.7. The zoomed-in frame differed
+from the band pages in 29 of 4.1 million pixels (pixelmatch, threshold 0.1). Each page keeps its texture levels,
+halved exactly, and each view keeps one 2,048 × 512 pole atlas. The pole atlas has
 the same levels, reduced by the same ratio (256, 512 and 1,024 pixels wide), so the first view
-loads its poles at the pages' level: 2.7 KB instead of 85 KB for Visible color. The existing 4,096-pixel
-page size, density-8 atlas, four-pixel gutter and 450 retained surface leaves are unchanged.
+loads its poles at the pages' level: 2.7 KB instead of 85 KB for Visible color. The density-8 atlas,
+four-pixel gutter and 450 retained surface leaves are unchanged.
 No source projection, Earth geometry, lighting, atmosphere, scientific palette or runtime
 selection rule changed. The same adjusted base still feeds the clear surface, cloud composite,
 cutaway exterior, thumbnails, minimaps, the pole atlas and every texture level; the original

@@ -37,6 +37,8 @@ export async function readPagedEllipsoid(objectDirectory: string) {
   const surfaceMap = typeof features?.surfaceMap === 'string' ? await json(resolve(sourceDirectory, features.surfaceMap)) as { mapLeftEdgeLongitudeDeg?: unknown } : null;
   const attitude = prepareEllipsoidAttitude(descriptor.id, { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z,
     mapLeftEdgeLongitudeDeg: surfaceMap ? requireFiniteNumber(surfaceMap.mapLeftEdgeLongitudeDeg, 'surface map left edge') : 0 });
-  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, atmosphereModel, atmosphere, raster, attitude });
+  // Block pages need every cell's size before a face names its page: one pass measures the cells, the next lays them out.
+  const cellSizes = preparePagedEllipsoidScene({ config, interiorSource, atmosphereModel, atmosphere, raster, attitude }).surfaceRasterPlan.cells.map(cell => cell.size);
+  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, atmosphereModel, atmosphere, raster, attitude, cellSizes });
   return { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, atmosphere, atmosphereModel, raster, interiorSource, attitude, scene, surfaceRasterPlan };
 }

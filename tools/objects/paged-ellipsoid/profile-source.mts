@@ -35,7 +35,7 @@ const scientific = union(
     display: object({missing: tuple(number, number, number), softening: number, maximum: number}), legend: object({image: string})}));
 const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfiguration, 'camera'> & {camera: Infer<typeof recipeCamera>}> = object({namespace: string, publicBase: string, sceneBodyKey: string,
   interiorRadiusKey: string, interiorSchema: string, interiorPath: string, equatorialRadiusKm: number, polarRadiusKm: number, geometry, camera: recipeCamera,
-  atlas: object({pageSize: number, density: number, gutter: number, sourceWidth: number}),
+  atlas: object({pageSize: number, pageCells: number, density: number, gutter: number, sourceWidth: number}),
   material: object({tileSize: number, presentationSize: number, framesPerShard: number, frameCount: number, discRadius: number, solarTint: string,
     shadowlessOverlay: optional(object({color: tuple(colorByte, colorByte, colorByte), opacity})),
     illumination: object({frameCount: number, minimumLightViewZ: number, maximumLightViewZ: number, baseLightAzimuthDegrees: number})}),

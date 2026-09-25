@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { parsePreparedAssetOrigin, resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
+import { createPreparedAssetResolver, parsePreparedAssetOrigin, preparedAssetGroup, preparedAssetGroupFile, resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
 
 const sha = 'a'.repeat(64), other = 'b'.repeat(64);
 
@@ -71,4 +71,43 @@ test('parsePreparedAssetOrigin validates shape and rejects malformed input', () 
   expect(() => parsePreparedAssetOrigin({ origin: 'https://earth-assets.lowpoly.cc/path' })).toThrow();
   expect(() => parsePreparedAssetOrigin({ origin: 'https://earth-assets.lowpoly.cc', assets: { 'a.webp': 'not-a-hash' } })).toThrow();
   expect(() => parsePreparedAssetOrigin({ origin: 'https://earth-assets.lowpoly.cc', extra: true })).toThrow();
+});
+
+test('keys that differ only in their first index share a hash group; unindexed keys share one', () => {
+  expect(preparedAssetGroup('page:normal:12:level:2048')).toBe('page:normal:level:2048');
+  expect(preparedAssetGroup('page:normal:0')).toBe('page:normal');
+  expect(preparedAssetGroup('lighting:31')).toBe('lighting');
+  expect(preparedAssetGroup('surface:radial-field-01')).toBe('');
+  expect(preparedAssetGroupFile('page:normal:level:2048')).toBe('page.normal.level.2048.json');
+  expect(preparedAssetGroupFile('')).toBe('unindexed.json');
+  expect(() => preparedAssetGroupFile('../x')).toThrow('is not a key path');
+});
+
+test('an origin names its hash groups only as an object hash directory', () => {
+  expect(parsePreparedAssetOrigin({ origin: 'https://earth-assets.lowpoly.cc', assets: {}, groups: '/objects/earth/asset-hashes/' })?.groups)
+    .toBe('/objects/earth/asset-hashes/');
+  expect(() => parsePreparedAssetOrigin({ origin: 'https://earth-assets.lowpoly.cc', groups: 'https://elsewhere.example/' }))
+    .toThrow('/objects/<id>/asset-hashes/');
+});
+
+test('a hash the page did not embed arrives with its group, read once for every key in it', async () => {
+  const reads: string[] = [];
+  const resolver = createPreparedAssetResolver({ origin: 'https://earth-assets.lowpoly.cc', assets: { 'first.webp': sha }, groups: '/objects/earth/asset-hashes/' },
+    async url => { reads.push(url); return { 'page-1.webp': other, 'page-2.webp': sha }; });
+  expect(resolver.has('/scenes/earth/first.webp')).toBe(true);
+  expect(resolver.has('/scenes/earth/page-1.webp')).toBe(false);
+  expect(() => resolver.url('/scenes/earth/page-1.webp')).toThrow('No published asset hash');
+  await Promise.all([resolver.ensure('page:normal:1:level:2048', '/scenes/earth/page-1.webp'), resolver.ensure('page:normal:2:level:2048', '/scenes/earth/page-2.webp')]);
+  expect(reads).toEqual(['/objects/earth/asset-hashes/page.normal.level.2048.json']);
+  expect(resolver.url('/scenes/earth/page-1.webp')).toBe(`https://earth-assets.lowpoly.cc/runtime-assets/${other}/page-1.webp`);
+  await expect(resolver.ensure('page:normal:3:level:2048', '/scenes/earth/page-3.webp')).rejects.toThrow('does not list page-3.webp (page:normal:3:level:2048)');
+});
+
+test('a failed hash group read is retried by the next demand', async () => {
+  let attempts = 0;
+  const resolver = createPreparedAssetResolver({ origin: 'https://earth-assets.lowpoly.cc', groups: '/objects/earth/asset-hashes/' },
+    async () => { attempts++; if (attempts === 1) throw new Error('offline'); return { 'page-1.webp': sha }; });
+  await expect(resolver.ensure('page:clouds:1', '/scenes/earth/page-1.webp')).rejects.toThrow('offline');
+  await resolver.ensure('page:clouds:1', '/scenes/earth/page-1.webp');
+  expect(attempts).toBe(2);
 });

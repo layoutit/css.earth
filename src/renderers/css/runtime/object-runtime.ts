@@ -238,7 +238,14 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     function syncPagePlayback(speed = selection?.state().committed?.speed ?? initialSelection.speed) {
       surfaceFeatures?.setPlaying(allowed && (speed ?? 1) !== 0);
     }
-    function setAllowed(value: boolean) { allowed = value; playback.setAllowed(value); syncPagePlayback(); }
+    function setAllowed(value: boolean) { allowed = value; playback.setAllowed(value); syncPagePlayback(); republishMotion(); }
+    /** Texture placements hold only at rest: a spin starting or stopping re-plans which faces may stay coarse. */
+    function republishMotion() {
+      const atRest = playback.motionAtRest();
+      if (!currentView || currentView.motionAtRest === atRest) return;
+      currentView = Object.freeze({ ...currentView, motionAtRest: atRest, revision: ++revision });
+      selection?.setView(currentView);
+    }
     function stopMotion() { onMotionRequest(false); setAllowed(false); }
     function alignMotionFrame() {
       const elements = mounted?.motionFrame;
@@ -283,7 +290,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     function publish(publication: OrbitPublication) {
       if (lifetime.disposed) return;
       reference ??= publication;
-      currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision });
+      currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision, motionAtRest: playback.motionAtRest() });
       previousPublication = publication;
       selection?.setView(currentView);
       surfaceFeatures?.publish(currentView);
@@ -327,7 +334,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onCommit: (next, _plan, intent) => {
           if (intent.kind === 'selection') datasetEffects?.commit(selectedLensVolume(definition.controls, next.lensId));
           playback.setSelection(next);
-          surfaceFeatures?.setLens({ id: next.lensId }); syncPagePlayback(next.speed ?? 1);
+          surfaceFeatures?.setLens({ id: next.lensId }); syncPagePlayback(next.speed ?? 1); republishMotion();
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });

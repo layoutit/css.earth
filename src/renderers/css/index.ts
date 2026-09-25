@@ -13,7 +13,7 @@ export { formatSharedView, parseSharedView } from './navigation/view-url.js';
 export type { SharedView, SharedPlayback } from './navigation/view-url.js';
 export type { PreparedPresentationDefinition, PreparedView, PreparedPresentationPlan } from './rendering/prepared-presentation.js';
 export type { PreparedAssets } from './rendering/prepared-residency.js';
-export { resolvePreparedAssetUrl, rewritePreparedStyleUrls, parsePreparedAssetOrigin } from './rendering/prepared-asset-origin.js';
+export { resolvePreparedAssetUrl, rewritePreparedStyleUrls, parsePreparedAssetOrigin, preparedAssetGroup, preparedAssetGroupFile, createPreparedAssetResolver } from './rendering/prepared-asset-origin.js';
 export type { PreparedAssetOrigin } from './rendering/prepared-asset-origin.js';
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from './rendering/prepared-object-assets.js';
 export { loadPreparedCssObject, PREPARED_CSS_OBJECT_FORMAT } from './loader.js';
