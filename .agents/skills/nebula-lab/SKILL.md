@@ -65,8 +65,9 @@ import `@cssearth/bake/volume`, and only `lab` may import the rest. **In the css
 (`tools/`, `src/preparation/`, `src/renderers/css/preparation/`) may import `@cssearth/bake`; the runtime imports
 nothing from it, not even a type.** Never widen the rule to make code fit;
 move the pure part down and keep a lab-side re-export shim. Moving code between packages
-changes the implementation pins recorded in every delivered file, which forces a re-bake —
-plan relocations before a delivery, not after.
+changes the `implementationSha256` recorded in each delivery receipt, because the pins name the owning package.
+Nothing re-bakes because of that: `--if-missing` checks only the recipe identity. A fresh bake then differs from the
+published receipt in that field, so refresh inventories and republish only in a deliberate re-bake.
 
 ## Routes and commands
 
