@@ -101,10 +101,18 @@ export async function prepareText({ ids = [] as readonly string[], check = false
   return { objects: selected.length, warnings, composition };
 }
 
+/** The warnings a run shows its reviewer: each once, and in a run for named objects only theirs. A ten-asteroid run printed
+ * 203, 25 of them twice, and the two about its own objects (Aquitania and Siegena sharing one card line) were lost among them. */
+export function reviewWarnings(warnings: readonly TextFinding[], ids: readonly string[]) {
+  const own = ids.length ? warnings.filter(warning => ids.includes(warning.objectId)) : warnings;
+  return [...new Map(own.map(warning => [JSON.stringify(warning), warning])).values()];
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const check = process.argv.includes('--check');
   const ids = process.argv.slice(2).filter(argument => !['--', '--check'].includes(argument));
   const { objects, warnings, composition } = await prepareText({ ids, check });
-  if (warnings.length) console.warn(`Review ${warnings.length} reader-text warnings:\n${describe(warnings)}`);
+  const review = reviewWarnings(warnings, ids);
+  if (review.length) console.warn(`Review ${review.length} reader-text warnings${ids.length ? ` about ${ids.join(', ')}` : ''}:\n${describe(review)}`);
   console.log(JSON.stringify({ check, objects, warnings: warnings.length, composition }));
 }
