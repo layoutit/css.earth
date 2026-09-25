@@ -17,9 +17,13 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   const sheet = documentTarget.querySelector(".object-sidebar");
   const handle = documentTarget.querySelector(".object-sheet-handle");
   const search = documentTarget.querySelector(".object-sidebar-search");
+  const toolbar = documentTarget.querySelector(".object-search-toolbar");
+  const categories = documentTarget.querySelector(".object-search-categories");
   if (!(sheet instanceof windowTarget.HTMLElement) ||
       !(handle instanceof windowTarget.HTMLInputElement) ||
-      !(search instanceof windowTarget.HTMLInputElement)) {
+      !(search instanceof windowTarget.HTMLInputElement) ||
+      !(toolbar instanceof windowTarget.HTMLElement) ||
+      !(categories instanceof windowTarget.HTMLElement)) {
     throw new Error("Object shell sheet is incomplete.");
   }
   const { body } = documentTarget;
@@ -61,10 +65,25 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     const transform = windowTarget.getComputedStyle(sheet).transform;
     return points[state] + (transform === "none" ? 0 : new windowTarget.DOMMatrixReadOnly(transform).m42);
   };
+  // Search rides on the sheet's top edge, and on portrait tablets the filters beside it (hidden on phones) ride too.
+  // A drag or a snap writes its offset, and a snap its duration, on these elements themselves. Written on the body, the
+  // offset restyled the whole page on every move: 72 ms of style per move in headless WebKit on Europa's page (14,092
+  // elements), against 0.2 ms here.
+  const riders = [toolbar, categories];
+  const readers = [sheet, ...riders];
+  // The sheet's transform is taken from its rest (shell-layout.css), so a snap that moves the rest keeps it in place.
+  const writeOffset = (offset: number) => {
+    for (const rider of riders) rider.style.transform = `translate3d(0, ${offset}px, 0)`;
+    sheet.style.transform = `translate(0, calc(${offset}px - var(--sheet-rest)))`;
+  };
+  const clearOffset = () => {
+    for (const reader of readers) reader.style.removeProperty("transform");
+  };
   const endSettle = () => {
     if (settleTimer) windowTarget.clearTimeout(settleTimer);
     settleTimer = 0;
     sheet.classList.remove("is-settling");
+    for (const reader of readers) reader.style.removeProperty("--sheet-snap-duration");
   };
   const nearest = (offset: number, points: SheetStops, candidates: readonly SheetState[] = states) =>
     candidates.reduce((best, next) =>
@@ -74,7 +93,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     const distance = Math.min(1, Math.abs(points[next] - from) / Math.max(1, points.peek));
     const velocity = Math.min(1, Math.abs(speed) / 1.2);
     const duration = Math.round(Math.max(180, Math.min(340, 220 + 120 * distance - 60 * velocity)));
-    body.style.setProperty("--sheet-snap-duration", `${duration}ms`);
     if (state === 'full' && next !== 'full') readingPosition = { key: readingKey(), top: handleReadingPosition ?? sheet.scrollTop };
     handleReadingPosition = null;
     const restoreScroll = next === 'full' && state !== 'full' && readingPosition?.key === readingKey() ? readingPosition.top : null;
@@ -82,7 +100,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     // The rest moves to the new state at once; the sheet is held where it is, untransitioned, then the transition carries
     // it to that rest and the transform clears.
     endSettle();
-    body.style.setProperty("--sheet-offset", `${from}px`);
+    for (const reader of readers) reader.style.setProperty("--sheet-snap-duration", `${duration}ms`);
+    writeOffset(from);
     sheet.classList.add("is-dragging");
     state = next;
     body.dataset.sheet = next;
@@ -96,7 +115,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     snapFrame = windowTarget.requestAnimationFrame(() => {
       snapFrame = 0;
       if (lifetime.disposed) return;
-      body.style.removeProperty("--sheet-offset");
+      clearOffset();
       if (restoreScroll !== null) sheet.scrollTop = restoreScroll;
       if (Math.abs(from - points[next]) < 0.5) { endSettle(); return; }
       // Transitions inside the sheet bubble here too; only its own transform ends the settle.
@@ -160,8 +179,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     if (elapsed > 0) drag.velocity = 0.8 * (event.clientY - drag.lastY) / elapsed + 0.2 * drag.velocity;
     drag.lastY = event.clientY;
     drag.lastTime = event.timeStamp;
-    // The sheet and the search riding on it both read this offset (shell-layout.css).
-    body.style.setProperty("--sheet-offset", `${drag.offset}px`);
+    writeOffset(drag.offset);
   }, { signal });
 
   const release = (event: PointerEvent) => {
@@ -231,7 +249,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     gesture = null;
     endSettle();
     sheet.classList.remove("is-dragging");
-    documentTarget.body.style.removeProperty("--sheet-offset");
+    clearOffset();
   }, { signal });
   // Typing in search opens a keyboard over the sheet it just opened. The layout
   // viewport keeps its height, so the visual viewport reports the lost room.
@@ -284,8 +302,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       gesture = null;
       endSettle();
       sheet.classList.remove("is-dragging");
-      body.style.removeProperty("--sheet-offset");
-      body.style.removeProperty("--sheet-snap-duration");
+      clearOffset();
       delete body.dataset.sheet;
     },
   });
