@@ -61,6 +61,18 @@
     {
       "path": "src/objects/trappist-1h/source/manifest.json",
       "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/kepler-22b/source/manifest.json",
+      "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/hat-p-11b/source/manifest.json",
+      "locator": "/inputs/6"
+    },
+    {
+      "path": "src/objects/kepler-7b/source/manifest.json",
+      "locator": "/inputs/6"
     }
   ],
   "relations": [],

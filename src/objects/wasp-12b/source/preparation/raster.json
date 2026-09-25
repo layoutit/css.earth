@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/wasp-12b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "wasp-12b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswasp-12b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "thermal",
+      "output": "wasp-12b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-12b-lens-{id}.webp",
+      "source": "photometry/thermal-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "dayside-thermal-color",
+        "qualification": "Colour of a black body at the dayside brightness temperature 3,028 K measured in secondary eclipse at 0.9 \u00b5m (L\u00f3pez-Morales et al. 2010, dayside brightness temperature at 0.9 \u00b5m (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "bankSchema": "csswasp-12b-prepared-lighting-bank@1",
+    "billboardSchema": "csswasp-12b-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csswasp-12b-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

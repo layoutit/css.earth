@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad90b4",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "An et al. (2025): Significant Mutual Inclinations Between the Stellar Spin and the Orbits of Both Planets in the HAT-P-11 System",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2405.19510"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad90b4"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....169...22A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad90b4",
+      "label": "The Astronomical Journal 169 22"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A",
+      "checkedOn": "2026-09-24",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "An et al. (2025), The Astronomical Journal 169 22",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A"
+    }
+  ],
+  "publisher": "The Astronomical Journal 169 22",
+  "creators": [
+    "Qier An",
+    "Tiger Lu",
+    "G. Mirek Brandt",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

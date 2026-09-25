@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-7b",
+  "displayName": "Kepler-7 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.6 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+          "label": "Esteves et al. 2015",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.89 days",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+          "label": "Esteves et al. 2015",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.44 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+          "label": "Esteves et al. 2015",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-7; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-7b-lens-shape.webp",
+        "surface": "kepler-7b-surface-shape@2x.webp",
+        "poles": "kepler-7b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-7b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-7 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-7's light, as its colour lens measures it."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "NASA's artist's concept of Kepler-7 b, from Eyes on Exoplanets; not an observation.",
+        "thumbnail": "kepler-7b-lens-illustration.webp",
+        "surface": "kepler-7b-surface-illustration@2x.webp",
+        "poles": "kepler-7b-poles-illustration@2x.webp",
+        "source": {
+          "id": "kepler-7b-nasa-eyes-illustration",
+          "path": "../manifest.json",
+          "url": "https://eyes.nasa.gov/apps/exo/"
+        },
+        "falseColor": false,
+        "notes": "NASA's artist's concept of Kepler-7 b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Esteves et al. 2015",
+      "href": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+      "credit": "Esteves et al. 2015"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-7b.json",
+      "credit": "Radius from Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive; mass from Esteves et al. 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015ApJ...804..150E), via the NASA Exoplanet Archive; orbit from Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive"
+    }
+  }
+}

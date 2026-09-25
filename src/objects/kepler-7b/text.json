@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-7b",
+  "card": {
+    "text": "Kepler-7 b crosses its star every 4.89 days and is 1.6 Jupiter radii across, found in 2009.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): pl_orbper 4.8854892, pl_radj 1.622, pl_bmassj 0.441"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-7b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-7b",
+        "label": "Wikipedia, \"Kepler-7b\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374220514",
+        "quote": "Kepler-7b is one of the first five exoplanets to be confirmed by NASA's Kepler spacecraft, and was confirmed during the first 34 days of Kepler's science operations."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-7 b transits Kepler-7 every 4.89 days and is 1.6 Jupiter radii across. Orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): pl_orbper 4.8854892, pl_radj 1.622, pl_bmassj 0.441"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-7b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-7b",
+        "label": "Wikipedia, \"Kepler-7b\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374220514",
+        "quote": "It orbits a star slightly hotter and significantly larger than the Sun that is expected to soon reach the end of the main sequence."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "illustration": {
+      "title": "NASA artist's concept",
+      "detail": "Illustration, not observed",
+      "summary": "The map NASA's Eyes on Exoplanets wraps around this planet. None of it was observed, and its longitudes are arbitrary."
+    }
+  }
+}

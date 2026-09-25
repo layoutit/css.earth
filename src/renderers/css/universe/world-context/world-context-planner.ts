@@ -517,9 +517,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           !projected.hovered && entry.highlighted !== true && entry.body.id !== emphasizedId;
         // An on-screen context path belongs to the annotation that identifies its body
         // when that annotation lost ordinary decluttering. The selected object's own
-        // path remains available.
+        // path remains available, and so does every planet's path in a selected placed
+        // star's system: a planet passing behind its star loses its caption, not its orbit.
+        const selectedSystemPlanet = entry.orbit.centerBodyId === selectedId && entry.orbit.centerBodyId !== plan.focus.id &&
+          systemFade.isSystemStar(entry.orbit.centerBodyId);
         if (anonymousMinor || projected.inFrame && !entry.labelShown && !systemFade.hasAuthoredRange(entry.index) &&
-            (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
+            !selectedSystemPlanet && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;

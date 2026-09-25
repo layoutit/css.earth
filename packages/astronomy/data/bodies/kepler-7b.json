@@ -1,0 +1,28 @@
+{
+ "id": "kepler-7b",
+ "classification": "exoplanet",
+ "order": 1840,
+ "physical": {
+  "name": "Kepler-7 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 115960,
+  "gravitationalParameterKm3PerS2": 55868760.57,
+  "parent": "kepler-7"
+ },
+ "physicalNotes": "Radius 1.622 Jupiter radii from Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract): 115,960 km at 71,492 km per Jupiter radius. GM from the mass 0.441 Jupiter masses (Esteves et al. 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015ApJ...804..150E), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.8854892,
+  "semiMajorAxisStellarRadii": 6.637,
+  "inclinationDegrees": 85.161,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54966.77687,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): P 4.8854892 d",
+   "shape": "Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): a/R* 6.637; Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): inclination 85.161 degrees",
+   "eccentricity": "Latham et al. 2010 (2010ApJ...713L.140L), via the NASA Exoplanet Archive ps table (pl_refname LATHAM_ET_AL__2010): e 0",
+   "phase": "Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): transit mid-time 2454967.27687 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

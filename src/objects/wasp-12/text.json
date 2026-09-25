@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-12",
+  "card": {
+    "text": "WASP-12 is a 6,265 K star 427 parsecs away with 1 known transiting planet.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348363",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract",
+        "label": "Leonardi et al. (2024), Astronomy & Astrophysics 686 A84",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LEONARDI_ET_AL__2024): st_teff 6265, st_rad 1.69, st_mass 1.325"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-12",
+        "url": "https://en.wikipedia.org/wiki/WASP-12",
+        "label": "Wikipedia, \"WASP-12\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374404285",
+        "quote": "WASP-12 is a magnitude 11 yellow dwarf star located approximately 1347 light-years away in the constellation Auriga."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WASP-12 is a star of 6,265 K 427 parsecs away. Its planet WASP-12 b crosses it, which is how it was found and sized.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348363",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract",
+        "label": "Leonardi et al. (2024), Astronomy & Astrophysics 686 A84",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LEONARDI_ET_AL__2024): st_teff 6265, st_rad 1.69, st_mass 1.325"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-12",
+        "url": "https://en.wikipedia.org/wiki/WASP-12",
+        "label": "Wikipedia, \"WASP-12\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374404285",
+        "quote": "WASP-12 has a mass and radius similar to the Sun and is known for being orbited by a planet that is extremely hot and has a retrograde orbit around WASP-12."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

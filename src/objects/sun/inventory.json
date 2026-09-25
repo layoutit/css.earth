@@ -297,6 +297,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/hat-p-11.json",
+      "bytes": 30178,
+      "sha256": "80753af187ae419a492c6dcfdab8f984bd0c759be55a0fb3fe6135a3626c6fc3"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/haumea.json",
       "bytes": 34512,
       "sha256": "5844827516be80a28768f0ed0c0f4aa53944c4371a51acae4278569734d67f0c"
@@ -387,6 +393,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/hd-75732.json",
+      "bytes": 30468,
+      "sha256": "5a51e3594a9c6e1ea2ad741b278d8200e526b3563d8d61f5fbc784ca011e3ff3"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/hd-88986.json",
       "bytes": 30206,
       "sha256": "a1837c8b3c376eb3aeacdd229455cfe856d4aca660471a4fd34d6c4e0a5c4658"
@@ -465,6 +477,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/kepler-22.json",
+      "bytes": 30415,
+      "sha256": "a3827c89da5812cc6f3530b543289eb4761053ad78badc8917741cc57f39a1da"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/kepler-444.json",
       "bytes": 47185,
       "sha256": "ae940290f9e0c5a31bad277c826ab68bf6983028499b7870475e69d8c394ab34"
@@ -474,6 +492,12 @@
       "filename": "system-views/kepler-452.json",
       "bytes": 30375,
       "sha256": "916cfaab1d33e17a9eee8a571b08d4ab44a6d2092c46c7855cafca543353115d"
+    },
+    {
+      "location": "prepared",
+      "filename": "system-views/kepler-7.json",
+      "bytes": 30045,
+      "sha256": "8bf6d7d3ebc0eeb3eac0c3574668cb337fbe8af55a3fe7679c00410a35bd5b44"
     },
     {
       "location": "prepared",
@@ -609,6 +633,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/wasp-12.json",
+      "bytes": 30421,
+      "sha256": "335402e54e20f1bbb9c2cc8f77a8dbc8118b05b4de9394fd4685a233b52d4132"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/wasp-121.json",
       "bytes": 30483,
       "sha256": "eb2a9b556d9282bbf41a9fd4a4868f94f563cf608e5be8a09d4551c7e2886478"
@@ -658,14 +688,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 439719,
-      "sha256": "16d06b7f7303903b29dd5569395504c567034c1009b6dac45ae9107dbeaa9b5e"
+      "bytes": 445082,
+      "sha256": "4f5687c01769db5f4e0d4df3360023918a27f7567c42d10d3f31ec1ba760cba8"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 12176547,
-      "sha256": "c238477d628f30297b1b15fa2a3721848387e82ca0c5ee20377afb549cb10753"
+      "bytes": 12421115,
+      "sha256": "1743ad5b278ce8571b1a37811af577114685677d9be127ee489e6c4738e0f86c"
     },
     {
       "location": "prepared",
@@ -1467,6 +1497,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-orbits/hat-p-11.bin",
+      "bytes": 5648,
+      "sha256": "67e11a801fa1609f2ed15417561f61b839e3ba08c2fdfcc83372dd54c4e8a9fa"
+    },
+    {
+      "location": "prepared",
       "filename": "world-orbits/haumea.bin",
       "bytes": 10216,
       "sha256": "d8c3c9566fcb1379ac419ae88e8c41850722505c649e02848bece2a973127abb"
@@ -1554,6 +1590,12 @@
       "filename": "world-orbits/hd-73583.bin",
       "bytes": 11240,
       "sha256": "25bb8cf4800910cf6f8f321440b77547672c58cb331da797bc1bd14a4ba64acb"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/hd-75732.bin",
+      "bytes": 5648,
+      "sha256": "d65f3deaa4667a9392fe138b0480ed79f7c029e5ec54ac15529e56582730d8d7"
     },
     {
       "location": "prepared",
@@ -1851,6 +1893,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-orbits/kepler-22.bin",
+      "bytes": 5648,
+      "sha256": "55f2c46318dc85e5612f19c4372248603021c68c44dfd6a123c4a95e10c6132d"
+    },
+    {
+      "location": "prepared",
       "filename": "world-orbits/kepler-444.bin",
       "bytes": 28048,
       "sha256": "01eff1df2a1a9d559057f0d80d4b07f858a193cedd402a03c83431296a647d63"
@@ -1860,6 +1908,12 @@
       "filename": "world-orbits/kepler-452.bin",
       "bytes": 5656,
       "sha256": "82543d0cfeb60b2fb545c3d6a72acf056cd117a36865fc6b7bde680d5e1b873f"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/kepler-7.bin",
+      "bytes": 5648,
+      "sha256": "d6273fb9907fbd67f1379d5776836a21587aaf7ceb72d6d99e39a6c7f293c319"
     },
     {
       "location": "prepared",
@@ -2688,6 +2742,12 @@
       "filename": "world-orbits/virtanen.bin",
       "bytes": 5136,
       "sha256": "e824d12e5f958fab1b4808280446d42dcd5ef8dc16bfe00c4b6ff9d2281322d4"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/wasp-12.bin",
+      "bytes": 5648,
+      "sha256": "43a143f0119b1b3615bc0adc6283bbbf1158e202491627a9addf46e98eaec458"
     },
     {
       "location": "prepared",

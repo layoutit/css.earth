@@ -1,0 +1,31 @@
+{
+  "host": "kepler-7",
+  "planets": [
+    {
+      "id": "kepler-7b",
+      "name": "Kepler-7 b",
+      "description": "Transiting planet of Kepler-7 with a 4.89-day year, found in 2009.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "credit": "Esteves et al. 2015"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ESTEVES_ET_AL__2015"
+      },
+      "text": {
+        "card": "Kepler-7 b crosses its star every 4.89 days and is 1.6 Jupiter radii across, found in 2009.",
+        "introduction": "Kepler-7 b transits Kepler-7 every 4.89 days and is 1.6 Jupiter radii across. Orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): pl_orbper 4.8854892, pl_radj 1.622, pl_bmassj 0.441",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-7b",
+          "title": "Kepler-7b",
+          "revision": "1374220514",
+          "card": "Kepler-7b is one of the first five exoplanets to be confirmed by NASA's Kepler spacecraft, and was confirmed during the first 34 days of Kepler's science operations.",
+          "introduction": "It orbits a star slightly hotter and significantly larger than the Sun that is expected to soon reach the end of the main sequence."
+        }
+      },
+      "order": 1840
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hat-p-11b",
+  "entries": [
+    {
+      "id": "nasa-eyes-illustration",
+      "subject": "NASA Eyes on Exoplanets artist's concept map as an illustration lens",
+      "status": "included",
+      "finding": "Shown as the non-default Illustration lens, never as imagery: the map NASA's Eyes on Exoplanets app lists for HAT-P-11 b (HAT-P-11_b.jpg), resized unchanged onto the sphere with its left edge at 0° longitude, so its longitudes are arbitrary. No image resolves this planet; nothing in the map was observed. NASA credits the app NASA/JPL-Caltech and calls each planet's look an artist's concept; the file itself carries no credit or date.",
+      "evidence": [
+        "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HAT-P-11_b.jpg",
+        "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "2b1e80f8c6d71cd160a8a6d493d16a6374e1d5cf"
+        }
+      ]
+    }
+  ]
+}

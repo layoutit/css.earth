@@ -1,0 +1,51 @@
+{
+  "id": "hd-75732",
+  "name": "55 Cnc",
+  "system": "55 Cnc system",
+  "description": "Star of 5,172 K 12.6 parsecs away with 1 transiting planet.",
+  "target": "55 Cnc",
+  "gaia": "704967037090946688",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+    "credit": "Bourrier et al. 2018"
+  },
+  "radius": {
+    "value": 0.943,
+    "source": "Bourrier et al. 2018, the stellar radius of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.905,
+    "source": "Bourrier et al. 2018, the stellar mass of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+    "uncertainty": 0.015
+  },
+  "temperature": {
+    "value": 5172,
+    "source": "Bourrier et al. 2018, the stellar temperature of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+    "uncertainty": 18
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "55 Cnc is a 5,172 K star 12.6 parsecs away with 1 known transiting planet.",
+    "introduction": "55 Cnc is a star of 5,172 K 12.6 parsecs away. Its planet 55 Cnc e crosses it, which is how it was found and sized.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BOURRIER_ET_AL__2018): st_teff 5172, st_rad 0.943, st_mass 0.905",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/55_Cancri",
+      "title": "55 Cancri",
+      "revision": "1374922684",
+      "card": "55 Cancri is a binary star system located 41 light-years away from the Sun in the zodiac constellation of Cancer.",
+      "introduction": "It has the Bayer designation Rho1 Cancri (ρ1 Cancri); 55 Cancri is the Flamsteed designation."
+    }
+  },
+  "notes": [
+    "55 Cnc b: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "55 Cnc c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "55 Cnc d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "55 Cnc f: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 1833
+}

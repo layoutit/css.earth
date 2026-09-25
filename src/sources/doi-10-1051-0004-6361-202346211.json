@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202346211",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bonomo et al. (2023): Cold Jupiters and improved masses in 38 Kepler and K2 small planet systems from 3661 HARPS-N radial velocities",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2304.05773"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346211"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...677A..33B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202346211",
+      "label": "Astronomy & Astrophysics 677 A33"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+      "checkedOn": "2026-09-24",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 677 A33",
+  "creators": [
+    "A. S. Bonomo",
+    "X. Dumusque",
+    "A. Massa",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

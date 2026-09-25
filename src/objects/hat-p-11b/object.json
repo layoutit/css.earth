@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hat-p-11b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-11 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 31928.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-11b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "illustration"
+      ],
+      "name": "HAT-P-11 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 7804819.4,
+      "description": "HAT-P-11 b crosses its star every 4.89 days and is 0.45 Jupiter radii across, found in 2010.",
+      "systemName": "HAT-P-11 system",
+      "order": 1838,
+      "context": {
+        "order": 1838
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        362713459829910400,
+        -690552146695319700,
+        868809480878248300
+      ],
+      "presentationToReference": [
+        0.3256359980412144,
+        -0.8799079404574499,
+        -0.34601042339737553,
+        -0.5834581001258579,
+        -0.47497616173505225,
+        0.6587672511448655,
+        0.7440012380213,
+        0.01263574704424919,
+        0.6680587516973392
+      ],
+      "orbitUpReference": [
+        0.8799079404574499,
+        0.47497616173505225,
+        -0.01263574704424919
+      ],
+      "metersPerUnit": 102994.51612903226,
+      "bodyRadiusM": 31928300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

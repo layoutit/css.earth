@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-7b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-7 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 115960
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-7b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "illustration"
+      ],
+      "name": "Kepler-7 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 199889445.4,
+      "description": "Kepler-7 b crosses its star every 4.89 days and is 1.6 Jupiter radii across, found in 2009.",
+      "systemName": "Kepler-7 system",
+      "order": 1840,
+      "context": {
+        "order": 1840
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        7181601805156457000,
+        -21362536517217700000,
+        19653451491053785000
+      ],
+      "presentationToReference": [
+        0.3192658436389955,
+        -0.9242336570305416,
+        -0.20943129732070076,
+        -0.6849668613810301,
+        -0.3777807653022046,
+        0.6229784042625406,
+        0.6548967246026669,
+        0.05544222740503749,
+        0.7536819219837152
+      ],
+      "orbitUpReference": [
+        0.9242336570305416,
+        0.3777807653022046,
+        -0.05544222740503749
+      ],
+      "metersPerUnit": 374064.51612903224,
+      "bodyRadiusM": 115960000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

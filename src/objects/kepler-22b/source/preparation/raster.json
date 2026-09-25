@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/kepler-22b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "kepler-22b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csskepler-22b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "shape",
+      "output": "kepler-22b-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-22b-lens-{id}.webp",
+      "source": "measurements.json",
+      "falseColor": false,
+      "science": {
+        "kind": "neutral-shape",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#fff1eb, the colour lens of kepler-22 (src/objects/kepler-22/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "hostLight": {
+          "host": "kepler-22",
+          "srgb": "#fff1eb",
+          "source": "the colour lens of kepler-22 (src/objects/kepler-22/source/photometry/stellar-color.json)"
+        }
+      }
+    },
+    {
+      "id": "illustration",
+      "output": "kepler-22b-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-22b-lens-{id}.webp",
+      "source": "illustration/Kepler-22_b.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "equirectangular-illustration"
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "bankSchema": "csskepler-22b-prepared-lighting-bank@1",
+    "billboardSchema": "csskepler-22b-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csskepler-22b-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

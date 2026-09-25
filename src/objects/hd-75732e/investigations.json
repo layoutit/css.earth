@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-75732e",
+  "entries": [
+    {
+      "id": "nasa-vtad-illustration",
+      "subject": "NASA VTAD 55 Cnc e 3D model texture as an illustration lens",
+      "status": "included",
+      "finding": "Shown as the non-default Illustration lens, never as imagery: the base-colour texture of NASA's 55 Cnc e 3D Model (55_Cancri_e_1_24364.glb), carried through the model's own UVs onto the sphere, unrepainted, with arbitrary longitudes. No image resolves this planet; nothing in the texture was observed. The resource page gives the credit and a one-line description; it does not say how the texture was made.",
+      "evidence": [
+        "https://science.nasa.gov/resource/55-cancri-e-3d-model/",
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "2b1e80f8c6d71cd160a8a6d493d16a6374e1d5cf"
+        }
+      ]
+    }
+  ]
+}

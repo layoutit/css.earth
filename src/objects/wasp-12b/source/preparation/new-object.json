@@ -1,0 +1,40 @@
+{
+  "host": "wasp-12",
+  "planets": [
+    {
+      "id": "wasp-12b",
+      "name": "WASP-12 b",
+      "description": "Transiting planet of WASP-12 with a 1.09-day year, found in 2008.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract",
+        "credit": "Leonardi et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LEONARDI_ET_AL__2024"
+      },
+      "text": {
+        "card": "WASP-12 b crosses its star every 1.09 days and is 2 Jupiter radii across, found in 2008.",
+        "introduction": "WASP-12 b transits WASP-12 every 1.09 days and is 2 Jupiter radii across. Orbit and size follow Leonardi et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LEONARDI_ET_AL__2024): pl_orbper 1.091418901, pl_radj 1.965, pl_bmassj 1.47",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-12b",
+          "title": "WASP-12b",
+          "revision": "1374242282",
+          "card": "WASP-12b is a hot Jupiter orbiting the star WASP-12, discovered in April of 2008, by the SuperWASP planetary transit survey.",
+          "introduction": "The planet takes only a little over one Earth day to orbit its star, in contrast to about 365.25 days for the Earth to orbit the Sun."
+        }
+      },
+      "thermal": {
+        "temperatureK": 3028,
+        "uncertaintyK": 110,
+        "wavelengthMicrometres": 0.9,
+        "facility": "Astrophysical Research Consortium (ARC) 3.5m Telescope At Apache Point Observatory (APO) Seaver Prototype Imaging camera (SPICam)",
+        "source": "López-Morales et al. 2010, dayside brightness temperature at 0.9 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...716L..36L/abstract",
+        "chosen": "1 measured of 42 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 1832
+    }
+  ]
+}

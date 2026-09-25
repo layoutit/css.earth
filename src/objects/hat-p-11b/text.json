@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-11b",
+  "card": {
+    "text": "HAT-P-11 b crosses its star every 4.89 days and is 0.45 Jupiter radii across, found in 2010.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad90b4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+        "label": "An et al. 2025",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AN_ET_AL__2025): pl_orbper 4.888, pl_radj 0.4466, pl_bmassj 0.0787"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-11b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-11b",
+        "label": "Wikipedia, \"HAT-P-11b\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374246338",
+        "quote": "HAT-P-11b is an extrasolar planet orbiting the star HAT-P-11."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HAT-P-11 b transits HAT-P-11 every 4.89 days and is 0.45 Jupiter radii across. Orbit and size follow An et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad90b4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+        "label": "An et al. 2025",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AN_ET_AL__2025): pl_orbper 4.888, pl_radj 0.4466, pl_bmassj 0.0787"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-11b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-11b",
+        "label": "Wikipedia, \"HAT-P-11b\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374246338",
+        "quote": "It was discovered by the HATNet Project team in 2009 using the transit method, and submitted for publication on 2 January 2009."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "illustration": {
+      "title": "NASA artist's concept",
+      "detail": "Illustration, not observed",
+      "summary": "The map NASA's Eyes on Exoplanets wraps around this planet. None of it was observed, and its longitudes are arbitrary."
+    }
+  }
+}
