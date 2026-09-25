@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "roxs-42b-companion-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "roxs-42b-companion-lens-color.webp",
       "bytes": 44,
       "sha256": "d0f87134d0c5295ca8031d5357b37ca4025edd147e23d55ec555eeb68d1760d6"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2760,
-      "sha256": "3e1f6d0ab10964391801b2b4765f24f9f1834262b4ed0a85c42bea4814c774ce"
+      "bytes": 2461,
+      "sha256": "f02e07481e93ea4a41c7a9a24c9c510838b9e92b4e9cc5101d8cfc9dbfd97ea3"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1237,
-      "sha256": "2fde624c7ca0cf02af224e89acf6bdb394f58ef530523207ea15768ce434ca78"
+      "bytes": 1071,
+      "sha256": "d2e7dc81f31ccbec2edb38c9a3fea103c8a17338b9e9271150c219f863e5f7e8"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 386790,
-      "sha256": "f739f51f36b70a0ab27be4c3a0ed2072290e8adee08cd7672d955c630de7c49d"
+      "bytes": 386633,
+      "sha256": "65a2a6ed8a744b969915d19f9966fe4d82597467cc74c14bbcc3e1a60b377400"
     },
     {
       "location": "prepared",

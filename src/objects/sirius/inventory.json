@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "sirius-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "sirius-lens-color.webp",
       "bytes": 44,
       "sha256": "58ee77cfff2db716403679f5f60043ec0a40eb50e3a02c38e963b591879c67ed"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2378,
-      "sha256": "3fee47c60715fbadc99a13fcbd8b7ea5a1a0bac60b53faf756fcfede9bedb72b"
+      "bytes": 2139,
+      "sha256": "02835134b0efc86452af3c79b3fe2be468196cdb4ae6a2d8bc0ca057ad1d8ca5"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1125,
-      "sha256": "bef47eb1de821bfe049604634bf814ce635e77dc325618f45611012cf3b2a53c"
+      "bytes": 1007,
+      "sha256": "a44250bb2f737f4db0f1da7bfc812b0c3b0d922d7fa1bfe1b47b95965d50110d"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 381104,
-      "sha256": "f7d4f53e45767d47f5b5c233fc71836a7ed786b3fb3299583a42f87da568478c"
+      "bytes": 380971,
+      "sha256": "ee0c05d73837cd8d8e62c9b9b857c9dc0599960a19ffe377a966c811aba3809a"
     },
     {
       "location": "prepared",

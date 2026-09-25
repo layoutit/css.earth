@@ -3,60 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "v1358-orionis-context-azimuthal-field-2013@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-azimuthal-field-2017@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-brightness-2013@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-brightness-2017@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-meridional-field-2013@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-meridional-field-2017@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-radial-field-2013@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-context-radial-field-2017@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "v1358-orionis-lens-azimuthal-field-2013.webp",
       "bytes": 348,
       "sha256": "44cfc165a3dc420b17abd030c433c311557f5c56c2d1f97cb059bd35ff7da9e9"
@@ -111,57 +57,9 @@
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-limb-azimuthal-field-2013@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-limb-azimuthal-field-2017@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-limb-brightness-2013@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-limb-brightness-2017@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
       "filename": "v1358-orionis-limb-color@2x.webp",
       "bytes": 97488,
       "sha256": "0508b27d677d27d72db5e4bbbd793512a301b1747e699eed3a697cb25b1cef42"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-limb-meridional-field-2013@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-limb-meridional-field-2017@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-limb-radial-field-2013@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "v1358-orionis-limb-radial-field-2017@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -274,8 +172,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 12539,
-      "sha256": "98eb6436eeae76ee958d19030ec5e042983f783e92fba0427d8ef7fcf175179f"
+      "bytes": 7357,
+      "sha256": "bd458943a2ea1e89c62a9514de35ff5e01ec1e7482c7e60a4bd0da130f2f5bf4"
     },
     {
       "location": "prepared",
@@ -298,8 +196,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 22007,
-      "sha256": "64675f0c682207af2d74c6059503e1ea4f124d45eb16ddac740fb3f5fe8db5fb"
+      "bytes": 19181,
+      "sha256": "d7c39fad52067e7ffbb320b8ff65180d39dfb77a9d4ae6d334589eda090901db"
     },
     {
       "location": "prepared",
@@ -364,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 409633,
-      "sha256": "178fc7be01efe72b91e08271284b010d4230c91c809ec23da7466e925536f583"
+      "bytes": 406598,
+      "sha256": "23f356926111debeccac75c77120bc54cdc831deee73725b84c5eb2c1571e703"
     },
     {
       "location": "prepared",

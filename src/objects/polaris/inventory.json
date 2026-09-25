@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "polaris-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "polaris-lens-color.webp",
       "bytes": 44,
       "sha256": "fb2fd3d3d023c702e42ca878a6f699691cbd995bae4302228ed9e605c4b59810"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2366,
-      "sha256": "c3f8adcfce54355bc3e18585c695f251179e8163d0363593b941361737f59324"
+      "bytes": 2122,
+      "sha256": "60fbb32e85b5e7d1e9d9abbafd5f0e088f5f38038cecd4361a5e0806aa4237b3"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1088,
-      "sha256": "b7fe0752246c16321747f8879ffb2ef30a52cebe86f607bcbd344251714940f8"
+      "bytes": 966,
+      "sha256": "41535bdf186f6abe1e915b92013914c601c2c74a2f40d28d1f2d9b5f209706aa"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 381592,
-      "sha256": "c55325f7ec144b4420b0c5995f4b4774251282142887e5e2bdb97716c51c6c10"
+      "bytes": 381457,
+      "sha256": "700be71c9e5dd7fc8e7a7e32223f15609af48e25bf66b25618cd0efaf8dc4523"
     },
     {
       "location": "prepared",

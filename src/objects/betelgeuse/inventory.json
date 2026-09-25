@@ -3,30 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "betelgeuse-context-color@2x.webp",
-      "bytes": 270,
-      "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8"
-    },
-    {
-      "location": "public",
-      "filename": "betelgeuse-context-matisse-2018-12@2x.webp",
-      "bytes": 270,
-      "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8"
-    },
-    {
-      "location": "public",
-      "filename": "betelgeuse-context-matisse-2020-12@2x.webp",
-      "bytes": 270,
-      "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8"
-    },
-    {
-      "location": "public",
-      "filename": "betelgeuse-context-matisse@2x.webp",
-      "bytes": 270,
-      "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8"
-    },
-    {
-      "location": "public",
       "filename": "betelgeuse-lens-color.webp",
       "bytes": 44,
       "sha256": "17430313f949072e8dfbdf575297839d80b4eeed87054219e2901cbc2b14aece"
@@ -48,30 +24,6 @@
       "filename": "betelgeuse-lens-matisse.webp",
       "bytes": 470,
       "sha256": "9526c77a77e3183ad375bc1a4ddb1691fc6ee07504bad3046ea950af64a3b62a"
-    },
-    {
-      "location": "public",
-      "filename": "betelgeuse-limb-color@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "betelgeuse-limb-matisse-2018-12@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "betelgeuse-limb-matisse-2020-12@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "betelgeuse-limb-matisse@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -124,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 20664,
-      "sha256": "558b0d803828e645c759c81ed71bac73fb111202fd0903a1e0d386045952e668"
+      "bytes": 18516,
+      "sha256": "d476d29f709a9bc1e717c61c1dc25f22d41a156ccba6a06473bd319fd700cd40"
     },
     {
       "location": "prepared",
@@ -148,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 11206,
-      "sha256": "aee097738c96b1bd27238f04ce301ea356a0994f0521e415bec2dd2c06ec12ef"
+      "bytes": 10086,
+      "sha256": "60823493a42e813ea7bdfc5a8aea47d9403509f2be8eda2f6ecdb40814edae44"
     },
     {
       "location": "prepared",
@@ -184,8 +136,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 397528,
-      "sha256": "16da84e9897b4d4978e2ce48c40a4e92877ce135a46a7e0a5c18ffca86f02f08"
+      "bytes": 396186,
+      "sha256": "142c7c23ad9623ac3e053d533978bb65e6833cb19317759768bbeaa336dac0c4"
     },
     {
       "location": "prepared",

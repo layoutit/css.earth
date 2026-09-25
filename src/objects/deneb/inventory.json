@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "deneb-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "deneb-lens-color.webp",
       "bytes": 44,
       "sha256": "47617d3f045247caad225b39c8b6872b668f0cbe1b012ba3903eb766eb9bd015"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2323,
-      "sha256": "69ff43647b6d0e88dbb63b6c008c82d2740c690ac014b903fe1fb4b024854193"
+      "bytes": 2089,
+      "sha256": "19dcddf21a5f9c6366aeb229ab03ea7568b47404ec13e7059062f5d58217d702"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1064,
-      "sha256": "5e3a66d3f45b827a7fb311598e1d11745c0e91a11386cfb9498aae09370221f0"
+      "bytes": 950,
+      "sha256": "5e5ecc66c0ba7acbba4ae2d960a61f8fc43b18671817a2a20f7c9b27a1a0aa3b"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 380622,
-      "sha256": "8cc2c0f65259a8a2900d52478bf56d30966e6acd2249759ccfe6ddbf3590d2d6"
+      "bytes": 380491,
+      "sha256": "1c217849aa1b82e2e1b39b1168476340c49bd75f6ad965ca6de0b9da460f3145"
     },
     {
       "location": "prepared",

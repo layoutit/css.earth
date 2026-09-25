@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "fomalhaut-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "fomalhaut-lens-color.webp",
       "bytes": 44,
       "sha256": "e5ed762d929ff45ae5b4854bff9b4d5fb13f54382b89a53c758cff412173c042"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2288,
-      "sha256": "5a49d2e7e07f4df2fc8933e9a57f94e3b503961f05092957950ac8c2796f8917"
+      "bytes": 2034,
+      "sha256": "de42fd1a753f8eead134b0907232caaa21823c65262e9da4f47949e251a0ca64"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1144,
-      "sha256": "b63145dbe0aeb5eb47bff3c4a59486155ac2796d4fb9f14e5dedf0d38778103f"
+      "bytes": 1014,
+      "sha256": "00b9de59b475f34faa67267b09dffe112dbd4307f29ea3fba0bd94cbd6db21ae"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 382543,
-      "sha256": "e068d0ea059278e559332b873480644047bdb4541eebbc118d35aefcdf357c5d"
+      "bytes": 382404,
+      "sha256": "e9a7a24c7c43c74fc1d096a9632eb10ee58411a833ebd90cdacc45579d7bdd9f"
     },
     {
       "location": "prepared",

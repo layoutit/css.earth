@@ -3,24 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "luhman-16b-context-brightness@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "luhman-16b-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "luhman-16b-context-uncertainty@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "luhman-16b-lens-brightness.webp",
       "bytes": 376,
       "sha256": "7ebb88aed3b44607548c860a01e7223e656accd7ae9e27aee000834dec3bf5f9"
@@ -39,21 +21,9 @@
     },
     {
       "location": "public",
-      "filename": "luhman-16b-limb-brightness@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
       "filename": "luhman-16b-limb-color@2x.webp",
       "bytes": 106538,
       "sha256": "9e425715f08a7e1c31db359450e71c6c2877fc567f93d45d5a8aca9ed97c9dd2"
-    },
-    {
-      "location": "public",
-      "filename": "luhman-16b-limb-uncertainty@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -94,8 +64,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 4670,
-      "sha256": "4b0a1bb8d086a087dda23ddcbdf555ff646ac89a97b8714827d93457aa290ae0"
+      "bytes": 3337,
+      "sha256": "6bd59f4a46983e955a08e9abeb52e605153b1790cb9201557bfee418a7db90c9"
     },
     {
       "location": "prepared",
@@ -118,8 +88,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 5647,
-      "sha256": "adff35699c504614334c710228a5f641a92d9d9aebc588e3c561f276c2d3b132"
+      "bytes": 4953,
+      "sha256": "7cd62b6cb7776a35ec1ce3d13953a538693d9174b24839406949e085227739a7"
     },
     {
       "location": "prepared",
@@ -148,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 388602,
-      "sha256": "71a087ad1ba389d731e7e3d37258bb01b93a9bdf196be099f65d5e9f2dc797ef"
+      "bytes": 387887,
+      "sha256": "3f43e2d5262a8b4265e5b83e413b77736d7cfd6e1ff2cabd1eedbb347ba56053"
     },
     {
       "location": "prepared",

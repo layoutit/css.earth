@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "vega-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "vega-lens-color.webp",
       "bytes": 162,
       "sha256": "1965309f57089dfcb20d526b3888e949d1c901108e0046a26088279679392317"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2518,
-      "sha256": "c60b443ab0ffda7b184e1c13df4e5424453dacb8ef13b610b2120701c991e77a"
+      "bytes": 2289,
+      "sha256": "2cbbe680a843a7bb5ae3214f9863b86b736b30b8fd23771e9a4c9ef323dda03a"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1189,
-      "sha256": "4fb234cecee70bbdb22218d075adfc5bfe9971aa42be2fc9a738acfd589553b4"
+      "bytes": 1079,
+      "sha256": "9b2cde45ff7922fcc5cbb426ec5cd05da4cca3da8ec7db85fe41e92ac884c17a"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 379747,
-      "sha256": "255f950c545b5290d93d535f35221a980a44c3de2d95b8b97960a46718127c5e"
+      "bytes": 379618,
+      "sha256": "73902110f262c6e5ef174e56d7c07aa693a86edbe0bd1c74f23034fc1ef09bcb"
     },
     {
       "location": "prepared",

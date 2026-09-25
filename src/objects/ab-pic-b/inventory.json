@@ -3,21 +3,9 @@
   "assets": [
     {
       "location": "public",
-      "filename": "ab-pic-b-context-infrared@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "ab-pic-b-lens-infrared.webp",
       "bytes": 44,
       "sha256": "57c00f5c537b69ea482be423528d745dec6b564a09d470cd31d74001dccd76d4"
-    },
-    {
-      "location": "public",
-      "filename": "ab-pic-b-limb-infrared@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -34,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 3212,
-      "sha256": "7a96152aaa3f37fc340ff73880498ae5c2b804ecfa53d24f5e4dccbe4981dac2"
+      "bytes": 2710,
+      "sha256": "f7cee47ef60ab15219af783b6a2f6043f6c736291f369f865a1d96e16d46e2dc"
     },
     {
       "location": "prepared",
@@ -58,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1280,
-      "sha256": "ad5bb996b29fc52b65448fc7bc91da465160c7ca158352eaa3a6c261787e6c65"
+      "bytes": 1026,
+      "sha256": "05f85a2cc9b696d0910442998ec1a3181f84d49563511e6c7f190b573f482f2a"
     },
     {
       "location": "prepared",
@@ -76,8 +64,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 382108,
-      "sha256": "ed6ca30ccf488d3934ad09e3760e66f68e5415661a7c5456723fd305de2bc40e"
+      "bytes": 381815,
+      "sha256": "e39e57afa5eab34b2e781e4eee6f7d5f10be847e452eb618a13671432c86d5fb"
     },
     {
       "location": "prepared",

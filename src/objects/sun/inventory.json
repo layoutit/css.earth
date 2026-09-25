@@ -15,18 +15,6 @@
     },
     {
       "location": "public",
-      "filename": "sun-corona-magnetic@2x.webp",
-      "bytes": 140,
-      "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc"
-    },
-    {
-      "location": "public",
-      "filename": "sun-corona-photosphere@2x.webp",
-      "bytes": 140,
-      "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc"
-    },
-    {
-      "location": "public",
       "filename": "sun-lens-chromosphere.webp",
       "bytes": 1552,
       "sha256": "5e69f1ca20c1ad172ffe5a6843d2697aecae302050ba29deac122cb646c94050"
@@ -124,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 4908,
-      "sha256": "14fdcc64a36ba1936746a8046c528e5fb72b4c84feaaae9859e3580e268bfde9"
+      "bytes": 4439,
+      "sha256": "22f01836c3206d8b1742bddc66cabe7f5c456ee5a3834d02b546b80b3e037d55"
     },
     {
       "location": "prepared",
@@ -148,8 +136,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 10349,
-      "sha256": "08a67cf972ed3ddabfbc10436c90496d68bd4e7bf0a56ce8e58f051a1a8a3353"
+      "bytes": 10123,
+      "sha256": "9154cd5be488a9534e7ad26464f3107883d5cfd15138750f28947a9a579e29f9"
     },
     {
       "location": "prepared",
@@ -190,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 390790,
-      "sha256": "60a245760345536a8319f25c86dd3ebbe277537d3e34ee692ae75109e0d56f58"
+      "bytes": 390474,
+      "sha256": "51a08ec9adabcb1a9f09b573f5b7000f7636a076c1f27fb8c3caa6dbe9d352c9"
     },
     {
       "location": "prepared",

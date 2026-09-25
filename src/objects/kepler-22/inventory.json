@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "kepler-22-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "kepler-22-lens-color.webp",
       "bytes": 44,
       "sha256": "84ad3b2fe6d9d56cbfed5f16ee191680eeea912319a4808b0a3d3704704d7742"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2365,
-      "sha256": "df9c1502a47d6e27583af64e5732248b5d7161142b9a0fd5bf5b7965c07d38d6"
+      "bytes": 2111,
+      "sha256": "8baabc0969b6d994adb345b20bf4c17f2392040b21d1711da7f7605d75c013b6"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1101,
-      "sha256": "44b505515cda1592970485e959dcb08b18a5191f9fdb26bdc240cd2cfd8b8b65"
+      "bytes": 971,
+      "sha256": "7ae141b6d23580be9462b5f3cb943dabe4929dee6ef7ba5543eaf3222eda5357"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 382547,
-      "sha256": "899ac7fb8c6cabd048ae3a43944ec181b4263d5fb4b12d8b799c24f19a306fbd"
+      "bytes": 382408,
+      "sha256": "6522133c53ad61a8d4fe66fac6b340a91984a330e078d282d0a2f26c19af953d"
     },
     {
       "location": "prepared",

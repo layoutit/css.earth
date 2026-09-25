@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "dh-tau-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "dh-tau-lens-color.webp",
       "bytes": 44,
       "sha256": "eb8feb07617529288dfc26f212914ca802b9197670f3dfde39a0cc784cd4ae89"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2447,
-      "sha256": "a8cf976ac27bd34d4b3ca80c302f92a667654d206bed395cea79bffc91f338e7"
+      "bytes": 2208,
+      "sha256": "72cc1cc121ea60863f1e11d39d7b77a3c22dfabcdf88424518ca61b5b7573e08"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 997,
-      "sha256": "3a846344d46ecdb8b81509be46416b556a28522650f391e4feb83869e299129c"
+      "bytes": 879,
+      "sha256": "5ff35756a77adaa63ed8cc3639875557b34ccf731b55b772cead9ea34fb8fbb6"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 381103,
-      "sha256": "c3dfaeaaa5da59734b19861a4d09fc116d1ff89214c6d39c5f4bb53efc51e17f"
+      "bytes": 380970,
+      "sha256": "d16437f31e7b11dccadf40fee36d2fb16dd67643e1f02638897060a1207d31f7"
     },
     {
       "location": "prepared",

@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "pi1-gruis-context-color@2x.webp",
-      "bytes": 368,
-      "sha256": "92b8cf08fcfc520aea7e34f9d92cad2bc8fc9eedddf84a7628ce637d8e1ee43d"
-    },
-    {
-      "location": "public",
       "filename": "pi1-gruis-context-pionier@2x.webp",
       "bytes": 98684,
       "sha256": "4eaa2158f82166c805861659569e58c97f6b06d93acd060a919aca88ed7b2243"
@@ -24,18 +18,6 @@
       "filename": "pi1-gruis-lens-pionier.webp",
       "bytes": 402,
       "sha256": "7a439e0e13fcc900407867ff0b11a2af6e11debc1bfc7a86bc0f8d62fccc82ae"
-    },
-    {
-      "location": "public",
-      "filename": "pi1-gruis-limb-color@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "pi1-gruis-limb-pionier@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -64,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 8846,
-      "sha256": "1072e5264141913a8678aceffdba79b0dbf615c5c26007902b44ef0f987bac30"
+      "bytes": 8106,
+      "sha256": "8364e045ab7fdb2b4dbd85dda39cd8466b8acd338908ad208ba4c8e8c7b7fe1f"
     },
     {
       "location": "prepared",
@@ -88,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 3201,
-      "sha256": "46ff764367d4bec60273b7f0c1064bd4c02373b65ee2b3dc7f5fe4621e6d18f3"
+      "bytes": 2827,
+      "sha256": "7ce4273f7412a8d2c85878ae89ba26c0923199d98213d47c650dee956c14225e"
     },
     {
       "location": "prepared",
@@ -112,8 +94,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 385318,
-      "sha256": "b3b00fd609b0a8e8e63401fd94b615678cc4d7c67dca3cb14547c7a63432b89c"
+      "bytes": 384941,
+      "sha256": "8dafd2c60f55bada025dcf001fe42b8efa20cda319136b6618b1c016aea6f41f"
     },
     {
       "location": "prepared",

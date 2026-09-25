@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "regulus-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "regulus-lens-color.webp",
       "bytes": 194,
       "sha256": "b3fcf716d052f859024e1a96f8cc639b6c1a087ca9cd273c5a0c91d4481ed8b2"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2536,
-      "sha256": "d53eb39396cfdf592c567ed989c1aa8a857ea01e92e555d9fa5f3b99e1874392"
+      "bytes": 2292,
+      "sha256": "0beff96a0781ced88ca00bb31c20125f6effc832838d2b8fa3a5c819ac909bda"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1189,
-      "sha256": "66a9af795b52034852d6280ecb49b8c0a3edd9a7ee80e060285186fb9135c839"
+      "bytes": 1067,
+      "sha256": "3664f72de439bead98485cdc03b273b3e730d4cdb73366604f7fdc507388c132"
     },
     {
       "location": "prepared",
@@ -76,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 380271,
-      "sha256": "d5604e4922e1722729e7a153592c41b2bc2a9161443f0010d7e2d9e6683897ef"
+      "bytes": 380136,
+      "sha256": "b54c4c37e0fc798d2a295402b0d18a568f5d1eeb1511e90c374c94f9626cd2fb"
     },
     {
       "location": "prepared",

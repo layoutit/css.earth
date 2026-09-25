@@ -3,18 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "wasp-43b-context-miri@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
-      "filename": "wasp-43b-context-temperature@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "wasp-43b-lens-miri.webp",
       "bytes": 244,
       "sha256": "7481a76d2860017380c9aca7e5858a09b2fa7129781bab7c7d885cd4ec678a9f"
@@ -24,18 +12,6 @@
       "filename": "wasp-43b-lens-temperature.webp",
       "bytes": 238,
       "sha256": "929de53ce357c609edaefd951ca16aab151422a0d8cfcf671f8a1527e733036c"
-    },
-    {
-      "location": "public",
-      "filename": "wasp-43b-limb-miri@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "wasp-43b-limb-temperature@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -64,8 +40,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2924,
-      "sha256": "b46aaa725091fff1167d16f44ba71c3d13012ea3871aa0f0a1860e9072cdc9ae"
+      "bytes": 1926,
+      "sha256": "385f9de7dbabdc019671dc07a97654758c0d299676b8dcbf23a8fc00f6426f6c"
     },
     {
       "location": "prepared",
@@ -88,8 +64,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 4529,
-      "sha256": "f4ff1d89e081e2a8d2e97461bbb79535cec8558f594f1424f454dfb2d8310681"
+      "bytes": 4025,
+      "sha256": "de6209b69a0a7dbb40de46b5288c1df5dd710e9c3b7d72c1732a94ae1f2d0391"
     },
     {
       "location": "prepared",
@@ -112,8 +88,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 386044,
-      "sha256": "5bba91ec522e63cec321d18c45e431621a265f03c47efad65900bcc2ec1cccad"
+      "bytes": 385494,
+      "sha256": "af5074948163335a610de2d309f5d18d6e0c33017afbfa3b2561ad076cdc9619"
     },
     {
       "location": "prepared",
