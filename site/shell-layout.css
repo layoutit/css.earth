@@ -839,6 +839,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
   .object-search-toolbar { right: auto; width: var(--tablet-search-width); }
   .object-search-categories {
+    /* The pills share the search row, so they take the search's height, as on the desktop. */
+    --explorer-category-height: var(--explorer-search-height);
     position: fixed;
     z-index: 210;
     top: calc(100dvh - var(--sheet-keyboard, 0px) - var(--sheet-height) - var(--sheet-lift) + 8px);
