@@ -343,6 +343,38 @@
       }
     },
     {
+      "id": "earth-atmosphere-model",
+      "path": "atmosphere/model.json",
+      "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
+      "license": "Repository-authored record; adapted values credited inside the file",
+      "acquisition": "authored in the repository",
+      "redistribution": "permitted with the credit stated in the record",
+      "consumers": [
+        "scene"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Repository-authored atmosphere parameter record; its values and their citations are stated inside the file."
+      }
+    },
+    {
+      "id": "google-earth-pro-atmosphere-presentation-response",
+      "path": "atmosphere/google-earth-pro-presentation-response.json",
+      "origin": "Google Earth Pro 7.3.7.1327 linked shader and headless isolated-layer captures recorded locally on 2026-09-02",
+      "credit": "Google Earth Pro presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; no Google pixels or shader bytes redistributed",
+      "acquisition": "Headless native layer isolation with the active linked shader and Sun-direction uniform bound to the same capture run.",
+      "redistribution": "Factual response measurements and a clean-room prepared approximation only.",
+      "consumers": [
+        "atmosphere"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project measurements from a patched Google Earth Pro 7.3.7.1327 atmosphere reference, used to choose a display response."
+      }
+    },
+    {
       "id": "noaa-coraltemp-anomaly",
       "path": "science/coraltemp-latest.nc",
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",

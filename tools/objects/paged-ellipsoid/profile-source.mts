@@ -37,7 +37,7 @@ const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfig
   atlas: object({pageSize: number, pageCells: number, density: number, gutter: number, sourceWidth: number}),
   material: object({tileSize: number, presentationSize: number, framesPerShard: number, frameCount: number, discRadius: number,
     illumination: object({frameCount: number, minimumLightViewZ: number, maximumLightViewZ: number, baseLightAzimuthDegrees: number})}),
-  atmosphere: optional(object({halo: string})),
+  atmosphere: object({sourcePath: string, responsePath: string, sourceId: string, maximumOpacityKey: string}),
   limb: object({models: tuple(string, string, string), reference: string, referenceDisplayGamma: number}),
   surface: object({width: number, height: number, quality: number, clouds: object({path: string, maximumAlpha: number, threshold: number, scale: number, color: tuple(number, number, number)}),
     maps: array(object({path: string, name: string, thumbnail: string, scientific: optional(scientific), compositeClouds: optional(boolean), displayGamma: optional(number), nativePhotographicSampling: optional(boolean), maximumTextureWidth: optional(number),

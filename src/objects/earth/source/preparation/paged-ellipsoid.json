@@ -81,6 +81,12 @@
       "baseLightAzimuthDegrees": 0
     }
   },
+  "atmosphere": {
+    "sourcePath": "atmosphere/model.json",
+    "sourceId": "earth-atmosphere-model",
+    "responsePath": "atmosphere/google-earth-pro-presentation-response.json",
+    "maximumOpacityKey": "earthMaximumOpacity"
+  },
   "limb": {
     "models": [
       "photometry/epic-minnaert-680nm.json",

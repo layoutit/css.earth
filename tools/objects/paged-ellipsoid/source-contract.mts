@@ -7,6 +7,14 @@ const tomography = object({schema: literal('cssearth-mantle-tomography@1'), dept
   schematicColors: optional(dictionary(string))});
 export type TomographyRecipe = Infer<typeof tomography>;
 export const parseTomographyRecipe = (value: unknown) => parse(value, tomography, 'mantle tomography recipe');
+const response = object({schema: string, observedResponse: object({exposure: number, exposureRole: string, skyAlphaLuminanceScale: number}),
+  cleanRoomTransfer: object({bodySunIntensitySource: string, mieContribution: number}),
+  transferPolicy: object({googlePixelsRedistributed: literal(false), googleShaderBytesRedistributed: literal(false)})});
+export function parseAtmosphereResponse(value: unknown) {
+  // Preserve provenance and response fields beyond those consumed by this operator.
+  parse(value, json, 'atmosphere response data');
+  return parse(value, response, 'atmosphere response');
+}
 const murTile = object({row: number, col: number, url: string, actualTime: union(string, nil), actualLayer: union(string, nil), empty: boolean, bytes: number});
 const murReceipt = object({schema: literal('cssearth-mur-gibs@1'), date: string, complete: boolean, grid: object({level: number}), tiles: array(murTile),
   checked: string, baseline: string, sourceBytes: number, archiveBytes: number,

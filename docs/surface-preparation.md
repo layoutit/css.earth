@@ -588,8 +588,10 @@ same published law, so the limb in the app is the limb the instrument saw.
   measured at bake, and for every pixel in the channel that sets its alpha. A
   pixel far from the mean colour is off by (mean − pixel) × (spread of the
   channel factors), which is largest near the limb.
-- **Halo.** No planet draws a halo yet: Venus, Mars and Earth end at their
-  lit disc. The lanes draw one when the recipe names a NASA
+- **Halo.** Venus and Mars draw no halo yet and end at their lit disc. Earth
+  keeps the model atmosphere it had before, drawn over its lit disc in the same
+  image (the [Earth README](../src/objects/earth/README.md) lists its sources).
+  The lanes draw a PSG halo when the recipe names a NASA
   [PSG](https://psg.gsfc.nasa.gov/) limb profile at full phase, with the Sun behind
   the viewer. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
   computes it once, against PSG's own disc centre, and

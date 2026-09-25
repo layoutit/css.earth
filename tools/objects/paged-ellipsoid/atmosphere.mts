@@ -4,23 +4,29 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {viewSunDirectionToPreparedLightDirection} from '../../../src/platform/directional-sun-coordinate.mts';
-import {limbFactors, limbOverlay, loadLimbLaw, linearToSrgb, parseLimbBlock, scatteringAngles, silhouetteColourWeight, srgbToLinear, type Channels, type LimbBlock} from '../../photometry/limb.mts';
-import {haloRatio, loadLimbProfile} from '../../photometry/halo.mts';
+import {requireFiniteNumber, requireRecord} from '@cssearth/core';
+import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
+import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '../../photometry/limb.mts';
+import {compositePreparedAtmosphere, prepareAtmosphereFrame, type PreparedAtmosphereProfile} from '../../prepared/prepared-atmosphere.mts';
+import {readJsonSource} from '../../sources/source-values.mts';
 import {applyDisplayGamma} from './display-tone.mts';
+import {parseAtmosphereResponse} from './source-contract.mts';
 
 export interface AtmosphereConfiguration {
   material: {tileSize: number; presentationSize: number; framesPerShard: number; discRadius: number;
     illumination: {frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number}};
-  /** The PSG limb profile the halo is read from (tools/photometry/halo.mts); absent, the image holds the disc alone. */
-  atmosphere?: {halo: string};
+  /** The atmosphere drawn over the lit disc and around it: the model record (Rayleigh and Mie, adapted from OpenSpace) and
+   * the Google Earth Pro response that sets its display transfer, as on main before the limb laws. */
+  atmosphere: {sourcePath: string; responsePath: string; sourceId: string; maximumOpacityKey: string};
   /** The published models the disc is lit with; `reference` names the default map, shown through `referenceDisplayGamma`. */
   limb: LimbBlock & {referenceDisplayGamma: number};
 }
 
 /**
- * Earth's lighting and halo inputs: the published limb law with the overlay's reference colour and, when the recipe names
- * one, the PSG limb profile. The atmosphere bank's image holds both, the lit disc and the halo around it, so one image shows the planet;
- * the lighting bank (assets.mts) holds the disc alone and shows only with the atmosphere turned off.
+ * Earth's lighting and atmosphere inputs: the measured limb law with the overlay's reference colour, and the atmosphere
+ * model with its display response. The atmosphere bank's image holds both, the lit disc with the atmosphere over and
+ * around it, so one image shows the planet; the lighting bank (assets.mts) holds the disc alone and shows only with the
+ * atmosphere turned off.
  */
 export function createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun, polarToEquatorial }: {config: AtmosphereConfiguration; sourceDirectory: string; sourceManifest: SourceManifest; sun: Pick<PreparedDirectionalSunPlan, "referenceViewDirection">; polarToEquatorial: number}) {
 const MATERIAL_TILE_SIZE = config.material.tileSize;
@@ -29,20 +35,39 @@ const MATERIAL_FRAMES_PER_SHARD = config.material.framesPerShard;
 
 async function readAtmosphereModel() {
   const limb = parseLimbBlock({ models: config.limb.models, reference: config.limb.reference }, 'paged ellipsoid limb');
-  const halo = config.atmosphere?.halo ?? null;
-  for (const path of [...(halo ? [halo] : []), ...limb.models, limb.reference!])
+  for (const path of [config.atmosphere.sourcePath, config.atmosphere.responsePath, ...limb.models, limb.reference!])
     if (!sourceManifest.inputs.some(input => input.path === path) && !sourceManifest.documents?.some(document => document.path === path))
       throw new Error(`Earth atmosphere: ${path} is not declared in source/manifest.json.`);
-  const [law, profile, reference] = await Promise.all([
+  if (!sourceManifest.inputs.some(({ id }) => id === config.atmosphere.sourceId))
+    throw new Error(`Earth atmosphere: source id ${config.atmosphere.sourceId} is not declared in source/manifest.json.`);
+  const [law, reference, text, response] = await Promise.all([
     loadLimbLaw(sourceDirectory, limb.models),
-    halo ? loadLimbProfile(sourceDirectory, halo) : null,
     displayedMeanColour(resolve(sourceDirectory, limb.reference!), config.limb.referenceDisplayGamma),
+    readFile(resolve(sourceDirectory, config.atmosphere.sourcePath), 'utf8'),
+    readJsonSource(resolve(sourceDirectory, config.atmosphere.responsePath)).then(parseAtmosphereResponse),
   ]);
-  const topAltitudeKm = profile ? profile.altitudesKm[profile.altitudesKm.length - 1] : 0;
+  if (response.schema !== 'cssearth-google-earth-pro-atmosphere-presentation-response@1' || response.observedResponse.exposure !== 0.2 ||
+      response.observedResponse.exposureRole !== 'camera-response-not-body-irradiance' || response.cleanRoomTransfer.bodySunIntensitySource !== 'body-atmosphere-model')
+    throw new Error(`Earth atmosphere: ${config.atmosphere.responsePath} is incompatible (schema ${response.schema}, exposure ${response.observedResponse.exposure}).`);
+  const record = parseAtmosphereModelRecord(JSON.parse(text));
+  const profile: PreparedAtmosphereProfile = {
+    radiusKm: record.planetRadiusKm, heightKm: record.atmosphereHeightKm,
+    layers: [
+      { phase: 'rayleigh', weight: 1, scatteringPerKm: channels(record.rayleigh.scatteringPerKm), scaleHeightKm: record.rayleigh.scaleHeightKm },
+      { phase: 'mie', weight: response.cleanRoomTransfer.mieContribution, scatteringPerKm: channels(record.mie.scatteringPerKm), scaleHeightKm: record.mie.scaleHeightKm, anisotropy: record.mie.phaseG },
+    ],
+    transfer: { mode: 'scattering-rgb', intensity: record.sunIntensity, exposure: response.observedResponse.exposure, alphaScale: response.observedResponse.skyAlphaLuminanceScale,
+      maximumAlpha: requireFiniteNumber(requireRecord(response.cleanRoomTransfer)[config.atmosphere.maximumOpacityKey], 'Earth atmosphere opacity'), limbConcentration: true },
+  };
   return Object.freeze({
-    schema: 'cssearth-limb-and-halo@1', halo, profile, law, reference, referenceSource: `${limb.reference} (display gamma ${config.limb.referenceDisplayGamma})`,
-    atmosphereHeightKm: topAltitudeKm, outerRadiusRatio: profile ? (profile.radiusKm + topAltitudeKm) / profile.radiusKm : 1,
+    schema: 'cssearth-limb-law-under-model-atmosphere@1', law, reference, referenceSource: `${limb.reference} (display gamma ${config.limb.referenceDisplayGamma})`,
+    atmosphereSource: config.atmosphere.sourceId, profile, outerRadiusRatio: (record.planetRadiusKm + record.atmosphereHeightKm) / record.planetRadiusKm,
   });
+}
+
+function channels(values: readonly number[]): [number, number, number] {
+  if (values.length !== 3 || values.some(value => !Number.isFinite(value))) throw new Error(`Earth atmosphere: RGB coefficients ${JSON.stringify(values)} are invalid.`);
+  return [values[0], values[1], values[2]];
 }
 
 /** Mean colour of the default map as displayed: the lane's display gamma applied, archive black left out. */
@@ -63,40 +88,29 @@ const ATMOSPHERE_DEFAULT_FRAME = Math.round(
   (1 + viewSunDirectionToPreparedLightDirection(sun.referenceViewDirection)[2]) / 2 *
     (ATMOSPHERE_ILLUMINATION.frameCount - 1));
 
-/** What the scene records about the disc law and the halo; nothing here is read at runtime. */
+/** What the scene records about the disc law and the atmosphere; nothing here is read at runtime. */
 function atmosphereProfile(model: Awaited<ReturnType<typeof readAtmosphereModel>>) {
-  return { limb: { models: model.law.paths, referenceColor: model.reference, referenceSource: model.referenceSource },
-    halo: model.profile ? { model: 'nasa-psg-full-phase-limb-profile-single-scattering-day-side', table: model.halo, radiusKm: model.profile.radiusKm,
-      topAltitudeKm: model.atmosphereHeightKm } : null };
+  return { ...model.profile, source: model.atmosphereSource, limb: { models: model.law.paths, referenceColor: model.reference, referenceSource: model.referenceSource } };
 }
 
 /**
- * One atmosphere frame: the disc lit by the published law and, outside it when there is a halo, the PSG profile at the
- * tangent altitude scaled by the disc's reference colour where the tangent point faces the Sun. The plane spans the
- * profile's top altitude; at a flattening of 0.3% the disc is drawn as a sphere, and its colour fades out where the mesh
- * may not reach.
+ * One atmosphere frame: the disc lit by the measured law, with the model atmosphere composited over and around it (the
+ * frame main drew). The plane spans the atmosphere's top; at a flattening of 0.3% the disc is drawn as a sphere, and its
+ * colour fades out where the mesh may not reach.
  */
 function prepareAtmosphereMaterialFrame({ size, frame = ATMOSPHERE_DEFAULT_FRAME, model }: {size: number; frame?: number; model: Awaited<ReturnType<typeof readAtmosphereModel>>}) {
   const z = -1 + 2 * frame / (ATMOSPHERE_ILLUMINATION.frameCount - 1);
   if (!Number.isInteger(frame) || Math.abs(z) > 1) throw new RangeError(`Invalid Earth atmosphere frame ${frame}.`);
   const light = [Math.sqrt(Math.max(0, 1 - z * z)), 0, z], view = [0, 0, 1], radius = size * config.material.discRadius / model.outerRadiusRatio;
-  const data = Buffer.alloc(size * size * 4), centre = size / 2, samples = 2, referenceLinear = model.reference.map(srgbToLinear), floor = 0.5 / radius;
+  const data = Buffer.alloc(size * size * 4), centre = size / 2, samples = 2, floor = 0.5 / radius;
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const sum = [0, 0, 0, 0];
     for (let sy = 0; sy < samples; sy++) for (let sx = 0; sx < samples; sx++) {
       const dx = (x + (sx + 0.5) / samples - centre) / radius, dy = (y + (sy + 0.5) / samples - centre) / radius, r = Math.hypot(dx, dy);
-      let colour: number[], alpha: number;
-      if (r <= 1) {
-        const { incidence, emission, phase } = scatteringAngles([dx, dy, Math.sqrt(Math.max(0, 1 - r * r))], light, view, floor);
-        const [red, green, blue, a] = limbOverlay(limbFactors(model.law, incidence, emission, phase), model.reference), keep = silhouetteColourWeight(r, polarToEquatorial);
-        colour = [red * keep, green * keep, blue * keep]; alpha = a;
-      } else {
-        if (!model.profile || (dx * light[0] + dy * light[1]) / r < 0) continue;
-        const desired = haloRatio(model.profile, (r - 1) * model.profile.radiusKm).map((value, channel) => Math.min(255, linearToSrgb(Math.min(1, referenceLinear[channel] * value))));
-        alpha = Math.max(...desired) / 255;
-        if (alpha <= 0) continue;
-        colour = desired.map(value => value / alpha);
-      }
+      if (r > 1) continue;
+      const { incidence, emission, phase } = scatteringAngles([dx, dy, Math.sqrt(Math.max(0, 1 - r * r))], light, view, floor);
+      const [red, green, blue, alpha] = limbOverlay(limbFactors(model.law, incidence, emission, phase), model.reference), keep = silhouetteColourWeight(r, polarToEquatorial);
+      const colour = [red * keep, green * keep, blue * keep];
       for (let channel = 0; channel < 3; channel++) sum[channel] += colour[channel] * alpha;
       sum[3] += alpha;
     }
@@ -105,6 +119,9 @@ function prepareAtmosphereMaterialFrame({ size, frame = ATMOSPHERE_DEFAULT_FRAME
     for (let channel = 0; channel < 3; channel++) data[offset + channel] = Math.round(sum[channel] / sum[3]);
     data[offset + 3] = Math.round(sum[3] / (samples * samples) * 255);
   }
+  const atmosphere = prepareAtmosphereFrame({ width: size, disc: { centerX: centre, centerY: centre, radiusX: radius, radiusY: radius },
+    profile: model.profile, lightDirection: [light[0], light[1], light[2]] });
+  compositePreparedAtmosphere(data, atmosphere.data);
   return { data, width: size, height: size };
 }
 
