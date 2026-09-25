@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-telescope-node.tsbuildinfo"
+  },
+  "include": [
+    "src/node"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ]
+}

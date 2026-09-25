@@ -19,6 +19,7 @@ export interface BuildRule { readonly name: string; readonly command: string; re
 export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
   { name: '@cssearth/core', command: 'pnpm build:core', sources: ['packages/core/src'], output: 'packages/core/dist/index.js' },
   { name: '@cssearth/fits', command: 'pnpm build:fits', sources: ['packages/fits/src'], output: 'packages/fits/dist/index.js' },
+  { name: '@cssearth/telescope', command: 'pnpm build:telescope', sources: ['packages/telescope/src'], output: 'packages/telescope/dist/node/index.js' },
   { name: '@cssearth/objects', command: 'pnpm build:objects', sources: ['packages/objects/src'], output: 'packages/objects/dist/index.js' },
   { name: '@cssearth/astronomy', command: 'pnpm build:astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/tools'], output: 'packages/astronomy/dist/index.js' },
   { name: '@cssearth/engine', command: 'pnpm --filter @cssearth/engine build', sources: ['packages/engine/src'], output: 'packages/engine/dist/index.js' },
