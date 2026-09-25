@@ -16,7 +16,7 @@ import { observedLimb, limbThreshold, type LimbEdgePoint } from '../terrestrial-
 import { loadStlShape } from '../terrestrial-layers/obj-shape.mts';
 import { pckRotation } from '../../spice/frames.mts';
 import { parseTextKernel } from '../../spice/text-kernel.mts';
-import { transpose } from '../../spice/ck.mts';
+import { transpose } from '@cssearth/spice';
 import { comparePhotographicInteriors } from './compare-photographic-interiors.mts';
 import { writeInteriorComparison } from './render-interior-comparison.mts';
 

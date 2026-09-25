@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { Ephemeris, stelab, SPEED_OF_LIGHT_KM_S } from './geometry.mts';
-import type { SpkSegment } from './spk.mts';
+import type { SpkSegment } from '@cssearth/spice';
 
 const segment = (target: number, center: number, at: (et: number) => number[], start = -1e9, stop = 1e9): SpkSegment =>
   ({ name: `${target}`, target, center, frame: 1, type: 0, start, stop, state: et => { const p = at(et); return { position: [p[0], p[1], p[2]], velocity: [p[3], p[4], p[5]] }; } });

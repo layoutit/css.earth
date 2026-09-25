@@ -3,7 +3,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
-import { readDaf } from '../../../spice/daf.mts';
+import { readDaf } from '@cssearth/spice';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readPinnedFile } from '../../../spice/kernel-bank.mts';
 

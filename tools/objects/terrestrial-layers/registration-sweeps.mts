@@ -15,7 +15,7 @@
  */
 import { requireFiniteNumber } from '@cssearth/core';
 import { rotate } from '../../spice/frames.mts';
-import { multiply } from '../../spice/ck.mts';
+import { multiply } from '@cssearth/spice';
 import { createIndexedShape } from './obj-shape.mts';
 import type { SourceMesh } from './contracts.mts';
 import type { CameraImage } from './shape-camera-mosaic.mts';

@@ -6,7 +6,7 @@ import { loadKernelSet } from './kernel-set.mts';
 import { utcToEt, etToUtc } from './lsk.mts';
 import { encodeClock, clockToEt, etToClock } from './sclk.mts';
 import { spiceCamera } from './camera.mts';
-import { apply, transpose } from './ck.mts';
+import { apply, transpose } from '@cssearth/spice';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../oracles/fixture.mts';
 

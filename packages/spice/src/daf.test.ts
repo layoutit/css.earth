@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { readDaf } from './daf.mts';
+import { test } from 'vitest';
+import { readDaf } from './daf.js';
 
 /** Build a minimal two-segment DAF with the SPK summary shape (ND=2, NI=6). */
 export function syntheticDaf({ littleEndian = true, nd = 2, ni = 6, segments = [

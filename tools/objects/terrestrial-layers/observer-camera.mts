@@ -20,7 +20,7 @@ import { cross3 as cross, requireFiniteNumber, dot3 as dot } from '@cssearth/cor
  * lies 90 degrees away in the pole's meridian plane; the +x axis is the prime meridian by construction, and no
  * constant offset separates it from the parameter file's zero phase.
  */
-import type { Matrix3 } from '../../spice/ck.mts';
+import type { Matrix3 } from '@cssearth/spice';
 import { pckAngles, pckRotation } from '../../spice/frames.mts';
 import { utcSecondsToEt, type LeapSeconds } from '../../spice/lsk.mts';
 import type { KernelPool } from '../../spice/text-kernel.mts';

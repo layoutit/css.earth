@@ -8,7 +8,7 @@
  * whichever providers the caller supplies.
  */
 import { has, number, numbers, string, strings, type KernelPool } from './text-kernel.mts';
-import { multiply, transpose, quaternionToMatrix, type Matrix3 } from './ck.mts';
+import { multiply, transpose, quaternionToMatrix, type Matrix3 } from '@cssearth/spice';
 import { ECLIPTIC_OBLIQUITY_RAD } from './geometry.mts';
 
 const RAD = Math.PI / 180;

@@ -9,7 +9,7 @@ import { cross3 as cross, dot3 as dot } from '@cssearth/core';
  * because that is a property of the archived array, not of the kernels.
  */
 import { has, number, numbers, string, type KernelPool } from './text-kernel.mts';
-import { apply, multiply, transpose, type Matrix3 } from './ck.mts';
+import { apply, multiply, transpose, type Matrix3 } from '@cssearth/spice';
 import { stelab, type Ephemeris } from './geometry.mts';
 import { frameDefinition } from './frames.mts';
 

@@ -5,7 +5,7 @@ import { parseTextKernel } from './text-kernel.mts';
 import { Ephemeris } from './geometry.mts';
 import { rotation, pckRotation } from './frames.mts';
 import { spiceCamera, invert, aberrationRotation, pixelModel, type PixelModelKeys } from './camera.mts';
-import type { SpkSegment } from './spk.mts';
+import type { SpkSegment } from '@cssearth/spice';
 
 // A body whose fixed frame coincides with J2000 (pole at +Z, prime meridian along +X), a camera frame that is J2000
 // itself, looking along -Z, and a 100 x 100 detector of 10 µm pixels behind a 1 m focal length: 100,000 px per radian.

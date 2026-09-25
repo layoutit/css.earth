@@ -9,9 +9,7 @@ import { basename } from 'node:path';
 import { parseTextKernel, type KernelPool } from './text-kernel.mts';
 import { parseLeapSeconds, type LeapSeconds } from './lsk.mts';
 import { parseSpacecraftClock, etToClock, type SpacecraftClock } from './sclk.mts';
-import { readDaf } from './daf.mts';
-import { spkSegments } from './spk.mts';
-import { ckSegments, type CkSegment, type Matrix3 } from './ck.mts';
+import { readDaf, spkSegments, ckSegments, type CkSegment, type Matrix3 } from '@cssearth/spice';
 import { Ephemeris } from './geometry.mts';
 import { frameDefinition, pckRotation, rotation, type FrameProviders } from './frames.mts';
 

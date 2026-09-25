@@ -6,8 +6,8 @@
  * and kilometres per second in the segment's reference frame; ephemeris time
  * is TDB seconds past J2000. Other types are refused by number.
  */
-import type { Daf, DafSummary } from './daf.mts';
-import { propagateTwoBody } from './two-body.mts';
+import type { Daf, DafSummary } from './daf.js';
+import { propagateTwoBody } from './two-body.js';
 
 export interface State { readonly position: readonly [number, number, number]; readonly velocity: readonly [number, number, number] }
 export interface SpkSegment {

@@ -3,7 +3,7 @@
  * prop2b): advance a state under a point-mass GM by dt seconds. Used by SPK
  * type 5 segments, which store discrete states and propagate between them.
  */
-import type { State } from './spk.mts';
+import type { State } from './spk.js';
 import { dot3 as dot } from '@cssearth/core';
 
 /** Stumpff functions c2 and c3 of the universal anomaly parameter psi. */

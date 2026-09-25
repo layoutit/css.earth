@@ -4,8 +4,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
 import { controlledShapeCamera, decodeCalibratedCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
-import { readDaf } from '../../../spice/daf.mts';
-import { ckSegments } from '../../../spice/ck.mts';
+import { readDaf, ckSegments } from '@cssearth/spice';
 import { parseTextKernel, number as kernelNumber, numbers as kernelNumbers } from '../../../spice/text-kernel.mts';
 import { parseSpacecraftClock, encodeClock, clockToEt, etToClock } from '../../../spice/sclk.mts';
 import { parseLeapSeconds, utcToEt, etToUtc } from '../../../spice/lsk.mts';
@@ -235,7 +234,7 @@ await sharp({ create: { width: 800, height: 490, channels: 3, background: '#1519
   { input: await sharp(overlay(inspectedAlternative, 'Alternative after inspecting Celmis', 'Celmis is no longer an independent holdout')).png().toBuffer(), left: 400, top: 0 },
 ]).png().toFile(resolve(output, 'orientation-candidates.png'));
 
-const dependencies = ['tools/objects/terrestrial-layers/shape-camera-mosaic.mts', 'packages/fits/src/fits.ts', 'tools/spice/ck.mts', 'tools/spice/daf.mts', 'tools/spice/sclk.mts', 'tools/spice/lsk.mts', 'tools/spice/text-kernel.mts'];
+const dependencies = ['tools/objects/terrestrial-layers/shape-camera-mosaic.mts', 'packages/fits/src/fits.ts', 'packages/spice/src/ck.ts', 'packages/spice/src/daf.ts', 'tools/spice/sclk.mts', 'tools/spice/lsk.mts', 'tools/spice/text-kernel.mts'];
 const report = { schema: 'cssearth-dactyl-registration-result@1', qualifiedSurface: false,
   baseCommit: input.baseCommit, dependencies,
   runtime: { node: process.version, sharp: sharp.versions.sharp },
