@@ -60,15 +60,15 @@ export interface LightingRecipe extends Omit<LambertRasterConfig, AuthoredSphere
     billboardSchema: string;
 }
 /**
- * A body with an atmosphere: its disc lit by its published photometric models and a halo read from one NASA PSG limb
- * profile (tools/photometry/halo.mts). Frames only evaluate both.
+ * A body with an atmosphere: its disc lit by its published photometric models and, when the body has one, a halo read
+ * from one NASA PSG limb profile (tools/photometry/halo.mts). Frames only evaluate both.
  */
 export interface AtmosphereRecipe {
     limb: LimbBlock;
-    /** Source-relative PSG limb profile: radiance by tangent altitude at full phase (tools/photometry/halo.mts). */
-    halo: string;
-    /** Altitude of the disc's visible edge above the table's reference radius, in km (0 for a surface). */
-    haloEdgeAltitudeKm: number;
+    /** Source-relative PSG limb profile: radiance by tangent altitude at full phase (tools/photometry/halo.mts). Absent: the disc alone. */
+    halo?: string;
+    /** Altitude of the disc's visible edge above the table's reference radius, in km (0 for a surface); given with `halo`. */
+    haloEdgeAltitudeKm?: number;
     logicalSize: number;
     bodyRadius: number;
     supersampling: number;

@@ -168,10 +168,13 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
     }
     if (recipe.atmosphere !== undefined) {
         const atmosphere = record(recipe.atmosphere, 'atmosphere');
-        for (const key of ['halo', 'materialOutput', 'observationOutput', 'lightingOutput'])
+        for (const key of ['materialOutput', 'observationOutput', 'lightingOutput'])
             path(atmosphere[key], `atmosphere.${key}`);
         fields(atmosphere, ['tileSize', 'logicalSize', 'bodyRadius', 'supersampling', 'coverageScale', 'contentScale', 'frameCount', 'directionalFrameCount', 'columns', 'rows'], 'atmosphere', true);
-        fields(atmosphere, ['minimumLightViewZ', 'maximumLightViewZ', 'haloEdgeAltitudeKm'], 'atmosphere');
+        fields(atmosphere, ['minimumLightViewZ', 'maximumLightViewZ'], 'atmosphere');
+        if ((atmosphere.halo === undefined) !== (atmosphere.haloEdgeAltitudeKm === undefined))
+            throw new TypeError(`atmosphere.halo and atmosphere.haloEdgeAltitudeKm come together; got halo ${JSON.stringify(atmosphere.halo)}, haloEdgeAltitudeKm ${JSON.stringify(atmosphere.haloEdgeAltitudeKm)}.`);
+        if (atmosphere.halo !== undefined) { path(atmosphere.halo, 'atmosphere.halo'); fields(atmosphere, ['haloEdgeAltitudeKm'], 'atmosphere'); }
         parseLimbBlock(atmosphere.limb, 'atmosphere.limb');
         const retired = ['source', 'directionalShadowRelease', 'floodShadowRelease', 'sunwardShadowRelease', 'terminator'].filter(key => atmosphere[key] !== undefined);
         if (retired.length) throw new TypeError(`atmosphere takes its disc from atmosphere.limb and its halo from atmosphere.halo; remove the authored atmosphere.${retired.join(', atmosphere.')}.`);

@@ -15,7 +15,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Elevation | [GEBCO_2026](https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa) | Sampled modeled height relative to sea level. Relief shading is exaggerated; globe geometry is unchanged. |
 | Night lights | [NASA VJ146A4.002](https://doi.org/10.5067/VIIRS/VJ146A4.002), 2025, via Jurij Stare | Annual radiance in logarithmic false color. Gaps and aurora remain; this is not ground-level sky darkness. |
 | Limb | [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames, Minnaert law fitted here | Measured: Earth's brightness toward the edge in 680, 551 and 443 nm |
-| Halo and charts | NASA Planetary Spectrum Generator (PSG) | Simulated limb halo, spectrum and temperature profile |
+| Charts | NASA Planetary Spectrum Generator (PSG) | Simulated spectrum and temperature profile |
 | Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
 | ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04), 7 September 2026, via GIBS | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
 
@@ -95,8 +95,8 @@ Named features run of 2026-09-15 (this version): `node tools/objects/dist/prepar
 - Navigation marker: NASA image-library Earth globe `GSFC_20171208_Archive_e001016`, checked as `source/earth-navigation.jpg`.
 
 The globe is lit with Earth's own measured limb law ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)): Minnaert coefficients fitted to DSCOVR EPIC,
-the one camera that sees the whole sunlit Earth at nearly full phase, as the default view does. The halo comes from one
-NASA PSG limb profile of its Earth template, in `source/atmosphere/psg-limb.json`.
+the one camera that sees the whole sunlit Earth at nearly full phase, as the default view does. There is no halo yet:
+the globe ends at its lit disc (see the `limb-halo` ledger entry).
 
 The July mosaic uses a display-only midtone lift: each sampled RGB code value becomes
 `round(255 * (value / 255) ** (1 / 1.25))`. Black and white endpoints are unchanged.
@@ -187,7 +187,7 @@ observations or live weather.
 One retained surface displays the selected image bank.
 
 With the atmosphere on, one image shows the planet: the atmosphere bank's frame holds the disc lit by the EPIC law
-and the PSG halo around it, and the disc-only lighting bank stays hidden (it shows only with the atmosphere turned
+(and will hold the halo around it once one exists), and the disc-only lighting bank stays hidden (it shows only with the atmosphere turned
 off). The white limb overlay at a quarter of the shading alpha, the 0.05 ambient term and the terminator ramp are
 gone. With Shadows off the atmosphere shows its full-phase frame, so turning the globe
 keeps one prepared image loaded instead of decoding a new one for each phase.
@@ -320,12 +320,9 @@ record the qualified snapshot. The earlier CoralTemp comparison used a different
 <details>
 <summary>Atmosphere parameters and normalized PSG responses</summary>
 
-The halo profile `source/atmosphere/psg-limb.json` is NASA PSG's limb radiance of its Earth template at each
-tangent altitude with the Sun behind the viewer, divided by PSG's own nadir radiance under an overhead Sun; its limb
-and nadir configurations sit beside it. Frames draw it where the tangent point faces the Sun, scaled by the default
-map's displayed mean colour. PSG computes limb paths with single scattering, and the brighter halo of a backlit Earth
-is not in the profile. The earlier OpenSpace RenderableAtmosphere record and the Google Earth Pro presentation response
-are removed.
+The atmosphere bank draws the disc alone. A halo would come from a NASA PSG limb profile of the Earth template
+(`atmosphere.halo` in the recipe, read by [halo.mts](../../../tools/photometry/halo.mts)); none is valid yet. The earlier
+OpenSpace RenderableAtmosphere record and the Google Earth Pro presentation response are removed.
 
 #### Chart inputs
 

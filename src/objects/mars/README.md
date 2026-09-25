@@ -14,7 +14,6 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Elevation display | MOLA color shaded relief from [NASA Trek WMTS tiles](source/manifest.json) |
 | Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [USGS Astrogeology WMS](source/manifest.json) |
 | Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
-| Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) limb profile of its Mars template |
 | Dimensions, placement and charts | USGS, JPL and NASA PSG records below |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -40,7 +39,7 @@ Feature notes: 644 of the labelled names carry a caption note, the lead summary 
 
 - THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic (sha256 `1e9123a6…`) has fully black rows 0–28 (north of about 87.5° N) and rows 2034–2047 (south of about 88.8° S), and 2.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
 - The MOLA lens mosaic is stitched from NASA Trek zoom-3 WMTS tiles and the THEMIS lens is a USGS Astrogeology WMS GetMap of the global day-IR mosaic (2026-09-16); the source manifest pins those bytesed mosaics.
-- The disc law is Vincendon's mean surface law with the atmosphere removed, like the Viking map; dust haze over the disc is not drawn, only the halo beyond the limb. The halo is PSG's single-scattering limb profile at full phase for its Mars Climate Database template, not an epoch-specific observation, and a backlit Mars shows a brighter ring than is drawn. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
+- The disc law is Vincendon's mean surface law with the atmosphere removed, like the Viking map; dust haze is not drawn, over the disc or beyond the limb: there is no halo yet (see the `limb-halo` ledger entry). The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
 - The first column of the Viking MDIM 2.1 color source map is nearly black (mean brightness 4 against about 100). A thin dark line can show along 180° E at close zoom.
 - Phobos and Deimos are standalone bodies with their own packages.
@@ -138,11 +137,9 @@ law lights all three channels. Relative to the flood-lit disc centre the limb
 keeps three quarters of the centre's brightness ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The authored OpenSpace
 Rayleigh and Mie tuning, its ambient term and the terminator ramp are removed.
 
-The halo comes from one NASA PSG limb profile of PSG's Mars template (Mars Climate
-Database profiles with dust and water ice), in `source/atmosphere/psg-limb.json`
-with the configurations beside it: radiance by tangent altitude with the Sun
-behind the viewer, divided by PSG's own disc-centre radiance. Frames draw it where
-the tangent point faces the Sun. PSG computes limb paths with single scattering.
+There is no halo yet: the disc ends at its limb. The lane draws one when the
+recipe names a NASA PSG limb profile of the Mars template, and no valid profile
+exists yet (see the `limb-halo` ledger entry).
 
 The reflectance spectrum and temperature-pressure profile are prepared from a
 pinned NASA GSFC Planetary Spectrum Generator configuration and raw I/F

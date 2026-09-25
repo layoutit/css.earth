@@ -11,15 +11,15 @@ import {applyDisplayGamma} from './display-tone.mts';
 export interface AtmosphereConfiguration {
   material: {tileSize: number; presentationSize: number; framesPerShard: number; discRadius: number;
     illumination: {frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number}};
-  /** The PSG limb profile the halo is read from (tools/photometry/halo.mts). */
-  atmosphere: {halo: string};
+  /** The PSG limb profile the halo is read from (tools/photometry/halo.mts); absent, the image holds the disc alone. */
+  atmosphere?: {halo: string};
   /** The published models the disc is lit with; `reference` names the default map, shown through `referenceDisplayGamma`. */
   limb: LimbBlock & {referenceDisplayGamma: number};
 }
 
 /**
- * Earth's lighting and halo inputs: the published limb law with the overlay's reference colour, and the PSG limb
- * profile. The atmosphere bank's image holds both, the lit disc and the halo around it, so one image shows the planet;
+ * Earth's lighting and halo inputs: the published limb law with the overlay's reference colour and, when the recipe names
+ * one, the PSG limb profile. The atmosphere bank's image holds both, the lit disc and the halo around it, so one image shows the planet;
  * the lighting bank (assets.mts) holds the disc alone and shows only with the atmosphere turned off.
  */
 export function createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun, polarToEquatorial }: {config: AtmosphereConfiguration; sourceDirectory: string; sourceManifest: SourceManifest; sun: Pick<PreparedDirectionalSunPlan, "referenceViewDirection">; polarToEquatorial: number}) {
@@ -29,18 +29,19 @@ const MATERIAL_FRAMES_PER_SHARD = config.material.framesPerShard;
 
 async function readAtmosphereModel() {
   const limb = parseLimbBlock({ models: config.limb.models, reference: config.limb.reference }, 'paged ellipsoid limb');
-  for (const path of [config.atmosphere.halo, ...limb.models, limb.reference!])
+  const halo = config.atmosphere?.halo ?? null;
+  for (const path of [...(halo ? [halo] : []), ...limb.models, limb.reference!])
     if (!sourceManifest.inputs.some(input => input.path === path) && !sourceManifest.documents?.some(document => document.path === path))
       throw new Error(`Earth atmosphere: ${path} is not declared in source/manifest.json.`);
   const [law, profile, reference] = await Promise.all([
     loadLimbLaw(sourceDirectory, limb.models),
-    loadLimbProfile(sourceDirectory, config.atmosphere.halo),
+    halo ? loadLimbProfile(sourceDirectory, halo) : null,
     displayedMeanColour(resolve(sourceDirectory, limb.reference!), config.limb.referenceDisplayGamma),
   ]);
-  const topAltitudeKm = profile.altitudesKm[profile.altitudesKm.length - 1];
+  const topAltitudeKm = profile ? profile.altitudesKm[profile.altitudesKm.length - 1] : 0;
   return Object.freeze({
-    schema: 'cssearth-limb-and-halo@1', halo: config.atmosphere.halo, profile, law, reference, referenceSource: `${limb.reference} (display gamma ${config.limb.referenceDisplayGamma})`,
-    planetRadiusKm: profile.radiusKm, atmosphereHeightKm: topAltitudeKm, outerRadiusRatio: (profile.radiusKm + topAltitudeKm) / profile.radiusKm,
+    schema: 'cssearth-limb-and-halo@1', halo, profile, law, reference, referenceSource: `${limb.reference} (display gamma ${config.limb.referenceDisplayGamma})`,
+    atmosphereHeightKm: topAltitudeKm, outerRadiusRatio: profile ? (profile.radiusKm + topAltitudeKm) / profile.radiusKm : 1,
   });
 }
 
@@ -62,16 +63,18 @@ const ATMOSPHERE_DEFAULT_FRAME = Math.round(
   (1 + viewSunDirectionToPreparedLightDirection(sun.referenceViewDirection)[2]) / 2 *
     (ATMOSPHERE_ILLUMINATION.frameCount - 1));
 
-/** What the scene records about the halo; nothing here is read at runtime. */
+/** What the scene records about the disc law and the halo; nothing here is read at runtime. */
 function atmosphereProfile(model: Awaited<ReturnType<typeof readAtmosphereModel>>) {
-  return { model: 'nasa-psg-full-phase-limb-profile-single-scattering-day-side', table: model.halo, radiusKm: model.planetRadiusKm,
-    topAltitudeKm: model.atmosphereHeightKm, referenceColor: model.reference };
+  return { limb: { models: model.law.paths, referenceColor: model.reference, referenceSource: model.referenceSource },
+    halo: model.profile ? { model: 'nasa-psg-full-phase-limb-profile-single-scattering-day-side', table: model.halo, radiusKm: model.profile.radiusKm,
+      topAltitudeKm: model.atmosphereHeightKm } : null };
 }
 
 /**
- * One atmosphere frame: the disc lit by the published law and, outside it, the PSG profile at the tangent altitude
- * scaled by the disc's reference colour where the tangent point faces the Sun. The plane spans the profile's top
- * altitude; at a flattening of 0.3% the disc is drawn as a sphere, and its colour fades out where the mesh may not reach.
+ * One atmosphere frame: the disc lit by the published law and, outside it when there is a halo, the PSG profile at the
+ * tangent altitude scaled by the disc's reference colour where the tangent point faces the Sun. The plane spans the
+ * profile's top altitude; at a flattening of 0.3% the disc is drawn as a sphere, and its colour fades out where the mesh
+ * may not reach.
  */
 function prepareAtmosphereMaterialFrame({ size, frame = ATMOSPHERE_DEFAULT_FRAME, model }: {size: number; frame?: number; model: Awaited<ReturnType<typeof readAtmosphereModel>>}) {
   const z = -1 + 2 * frame / (ATMOSPHERE_ILLUMINATION.frameCount - 1);
@@ -88,8 +91,8 @@ function prepareAtmosphereMaterialFrame({ size, frame = ATMOSPHERE_DEFAULT_FRAME
         const [red, green, blue, a] = limbOverlay(limbFactors(model.law, incidence, emission, phase), model.reference), keep = silhouetteColourWeight(r, polarToEquatorial);
         colour = [red * keep, green * keep, blue * keep]; alpha = a;
       } else {
-        if ((dx * light[0] + dy * light[1]) / r < 0) continue;
-        const desired = haloRatio(model.profile, (r - 1) * model.planetRadiusKm).map((value, channel) => Math.min(255, linearToSrgb(Math.min(1, referenceLinear[channel] * value))));
+        if (!model.profile || (dx * light[0] + dy * light[1]) / r < 0) continue;
+        const desired = haloRatio(model.profile, (r - 1) * model.profile.radiusKm).map((value, channel) => Math.min(255, linearToSrgb(Math.min(1, referenceLinear[channel] * value))));
         alpha = Math.max(...desired) / 255;
         if (alpha <= 0) continue;
         colour = desired.map(value => value / alpha);

@@ -10,7 +10,6 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | --- | --- |
 | Clouds | Pinned cloud texture described below |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
-| Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) limb profile of its Venus atmosphere template |
 | Radar and elevation | [USGS Magellan radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) and [colorized topography](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m) |
 | Surface photographs | [PDS Venera collection](https://pds-geosciences.wustl.edu/missions/venera/) |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
@@ -37,7 +36,7 @@ Landing sites: 13 spacecraft landing, touchdown or impact sites are labelled bes
 Feature notes: 112 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - Magellan colors are synthetic; they are not natural-color views.
-- The halo is PSG's single-scattering limb profile at full phase. A backlit Venus shows a brighter ring than is drawn. Rotation is accelerated.
+- There is no halo yet: the cloud deck ends at its limb (see the `limb-halo` ledger entry). Rotation is accelerated.
 - The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation lenses, which share it.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
 - The Magellan color source map has a darker one-pixel column at both its left and right edges (mean brightness 108 against about 124 beside them). A thin dark line can show along 180° E at close zoom.
@@ -196,8 +195,7 @@ bilinear sampling, exact spherical latitude projection, center averaging, and
 antialiased coverage. The source is listed with its exact hash in `source/manifest.json`.
 
 The fixed Venus material is a 32-frame prepared camera-pitch bank. Every frame
-holds the cloud-top law on the disc and the halo outside it in one retained
-alpha material; the false-colour lenses use a copy of it, and a lighting-only bank
+holds the cloud-top law on the disc in one retained alpha material; the false-colour lenses use a copy of it, and a lighting-only bank
 keeps the disc law when the user turns the atmosphere off. Runtime selects the nearest prepared frame and changes the
 retained material address; it performs no lighting, scattering, geometry or
 raster math.
@@ -212,14 +210,10 @@ at the centre and falls to a third of it where the clouds are seen at 60°
 ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The authored 0.30 flood shadow release, 0.78 sunward release and
 terminator ramp are gone.
 
-The halo comes from one NASA PSG limb profile of PSG's Venus atmosphere template
-(VIRA-45 profiles and the template's one aerosol), in `source/atmosphere/psg-limb.json` with the
-configurations beside it: radiance by tangent altitude with the Sun behind the
-viewer, divided by PSG's own disc-centre radiance. The disc edge is the cloud top,
-75 km above the surface, where Pérez-Hoyos et al. place it. Frames draw the
-profile where the tangent point faces the Sun. PSG computes limb paths with single
-scattering. The OpenSpace RenderableAtmosphere tuning it replaces is removed with
-its record.
+There is no halo yet: the lane draws one when the recipe names a NASA PSG limb
+profile of the Venus template, and no valid profile exists yet (see the
+`limb-halo` ledger entry). The OpenSpace RenderableAtmosphere tuning is removed
+with its record.
 
 </details>
 

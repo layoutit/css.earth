@@ -81,9 +81,6 @@
       "baseLightAzimuthDegrees": 0
     }
   },
-  "atmosphere": {
-    "halo": "atmosphere/psg-limb.json"
-  },
   "limb": {
     "models": [
       "photometry/epic-minnaert-680nm.json",

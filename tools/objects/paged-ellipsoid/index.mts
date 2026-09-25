@@ -69,6 +69,10 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     if (canonical(publishedPlan['surface-raster-plan']) !== canonical(surfaceRasterPlan))
       throw new Error(`${descriptor.id}: surface-raster-plan differs from the published preparation; run the full preparation.`);
   }
+  // The lighting and atmosphere banks read only the recipe and the body's photometry, so a reuse run redraws them; their file
+  // names are the published ones.
+  const recomputedImages = reuseImages ? (await preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets
+    .map(asset => { if (!asset.startsWith(config.publicBase)) throw new Error(`${descriptor.id}: material asset ${asset} is outside ${config.publicBase}.`); return asset.slice(config.publicBase.length); }) : [];
   const rasterAssets = reuseImages ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
     : await preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
   const context = { sourceDirectory, publicDirectory, config, scene };
@@ -93,5 +97,5 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const definition = withFocusedCamera(rawDefinition, sky);
   for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(catalog ? { places: catalog } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
   await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true} });
-  return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content };
+  return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content, recomputedImages };
 }

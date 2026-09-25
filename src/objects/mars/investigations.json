@@ -313,8 +313,8 @@
     {
       "id": "limb-halo",
       "subject": "Limb halo outside the disc",
-      "status": "included",
-      "finding": "One NASA PSG limb profile of the Mars template (Mars Climate Database, dust and water ice) at full phase, single scattering, scaled by PSG's own disc centre and drawn where the tangent point faces the Sun.",
+      "status": "unresolved",
+      "finding": "No halo is drawn. The lane draws one from a NASA PSG limb profile at full phase when the recipe names it. On 2026-09-25 the local nasapsg/psg container's limb geometry returned the same radiance at every tangent altitude, and the public API refused further calls for a day, so no valid profile exists.",
       "evidence": [
         "https://psg.gsfc.nasa.gov/helpapi.php"
       ],
@@ -323,13 +323,14 @@
           "date": "2026-09-25",
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
         }
-      ]
+      ],
+      "revisitWhen": "The public PSG API accepts calls again, or the local container returns a limb radiance that changes with altitude."
     },
     {
       "id": "authored-limb-lighting",
       "subject": "OpenSpace RenderableAtmosphere tuning (Rayleigh and Mie coefficients, ambient term, terminator ramp)",
       "status": "excluded",
-      "finding": "Removed with atmosphere/model.json; the disc takes Vincendon's law and the halo the PSG profile.",
+      "finding": "Removed with atmosphere/model.json; the disc takes Vincendon's law.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
       ],

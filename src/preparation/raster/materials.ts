@@ -6,8 +6,8 @@ import type { PreparedLimb } from '../../renderers/css/preparation/materials/lig
 
 /**
  * A body with an atmosphere, frame by frame: the disc lit by the body's published photometric models and, outside it,
- * the halo from its PSG limb profile, lit where the tangent point faces the Sun (tools/photometry). Three atlases
- * share the frames:
+ * the halo from its PSG limb profile when the recipe names one, lit where the tangent point faces the Sun
+ * (tools/photometry). Three atlases share the frames:
  * - material: disc law and halo, drawn over the visible map;
  * - observation: the same, drawn over the false-colour lenses. The disc law of Venus and Mars is grey or nearly so
  *   (tools/photometry/limb.mts), so it does not tint their false colours;
@@ -15,10 +15,10 @@ import type { PreparedLimb } from '../../renderers/css/preparation/materials/lig
  * The last frame is the shadowless flood frame (light along the view).
  */
 export async function prepareAtmosphere(recipe: AtmosphereRecipe, sourceDirectory: string, publicDirectory: string, limb: PreparedLimb) {
-    const table = await loadLimbProfile(sourceDirectory, recipe.halo);
+    const table = recipe.halo === undefined ? null : await loadLimbProfile(sourceDirectory, recipe.halo);
     const density = RASTER_DENSITY, tileSize = recipe.tileSize * density, width = tileSize * recipe.columns, height = tileSize * recipe.rows;
     const material = new Uint8Array(width * height * 4), observation = new Uint8Array(width * height * 4), lighting = new Uint8Array(width * height * 4);
-    const edgeRadiusKm = table.radiusKm + recipe.haloEdgeAltitudeKm;
+    const edgeRadiusKm = table ? table.radiusKm + recipe.haloEdgeAltitudeKm! : 0;
     let outermost = 1;
     for (let frame = 0; frame < recipe.frameCount; frame++) {
         const flood = frame === recipe.frameCount - 1;
@@ -32,13 +32,13 @@ export async function prepareAtmosphere(recipe: AtmosphereRecipe, sourceDirector
     await raster(lighting, width, height).resize(width / 2, height / 2, { fit: 'fill', kernel: 'lanczos3' }).webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, recipe.lightingOutput, density));
     return {
         limb: { model: 'published-photometric-models-relative-to-the-flood-lit-disc-centre', models: limb.law.paths, referenceColor: limb.reference, referenceSource: limb.referenceSource },
-        halo: { model: 'nasa-psg-full-phase-limb-profile-single-scattering-day-side', table: recipe.halo, radiusKm: table.radiusKm, edgeAltitudeKm: recipe.haloEdgeAltitudeKm, topAltitudeKm: table.altitudesKm[table.altitudesKm.length - 1], outerRadiusScale: Math.round(outermost * 1e6) / 1e6 },
+        halo: table ? { model: 'nasa-psg-full-phase-limb-profile-single-scattering-day-side', table: recipe.halo!, radiusKm: table.radiusKm, edgeAltitudeKm: recipe.haloEdgeAltitudeKm!, topAltitudeKm: table.altitudesKm[table.altitudesKm.length - 1], outerRadiusScale: Math.round(outermost * 1e6) / 1e6 } : null,
     };
 }
 
 interface FrameOptions {
     material: Uint8Array; observation: Uint8Array; lighting: Uint8Array; width: number; tileSize: number; frameX: number; frameY: number;
-    light: readonly number[]; recipe: AtmosphereRecipe; limb: PreparedLimb; table: LimbProfile; edgeRadiusKm: number;
+    light: readonly number[]; recipe: AtmosphereRecipe; limb: PreparedLimb; table: LimbProfile | null; edgeRadiusKm: number;
 }
 
 /** Writes one frame of the three atlases; returns the largest display radius, in body radii, that received halo light. */
@@ -65,8 +65,8 @@ function writeFrame({ material, observation, lighting, width, tileSize, frameX, 
                 continue;
             }
             // The tangent point's outward direction lies in the image plane; it is sunlit when that direction faces the light.
-            if ((screenX * light[0] + screenY * light[1]) / radius < 0) continue;
-            const ratio = haloRatio(table, recipe.haloEdgeAltitudeKm + (radius - 1) * edgeRadiusKm);
+            if (!table || (screenX * light[0] + screenY * light[1]) / radius < 0) continue;
+            const ratio = haloRatio(table, recipe.haloEdgeAltitudeKm! + (radius - 1) * edgeRadiusKm);
             const desired = ratio.map((value, channel) => Math.max(0, Math.min(255, linearToSrgb(Math.min(1, referenceLinear[channel] * value)))));
             const alpha = Math.max(...desired) / 255;
             if (alpha <= 0) continue;

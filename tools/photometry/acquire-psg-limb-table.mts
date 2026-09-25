@@ -37,12 +37,26 @@ const tag = (config: string, key: string) => config.match(new RegExp(`^<${key}>(
 const set = (config: string, key: string, value: string | number) => new RegExp(`^<${key}>`, 'm').test(config)
   ? config.replace(new RegExp(`^<${key}>.*$`, 'm'), `<${key}>${value}`) : `${config}<${key}>${value}\n`;
 
+/**
+ * Each band is its own call: a local PSG's scattering arrays are sized for about one band at a time (a 0.38-0.70 um limb
+ * run stops with "would exceed the memory restrictions" and returns zeros), and the public service answers the same way.
+ */
+async function bandRadiance(config: string, where: string): Promise<Record<Band, number>> {
+  const result = {} as Record<Band, number>;
+  for (const [band, [low, high]] of Object.entries(BANDS) as [Band, readonly [number, number]][]) {
+    const spectrum = await call('rad', set(set(config, 'GENERATOR-RANGE1', low), 'GENERATOR-RANGE2', high));
+    if (/would exceed the memory restrictions/u.test(spectrum)) throw new Error(`${where}, ${band}: PSG refused the run for memory: ${spectrum.split('\n').find(line => /ERROR/u.test(line))}`);
+    result[band] = bands(spectrum, `${where}, ${band}`)[band];
+  }
+  return result;
+}
+
 function bands(spectrum: string, where: string): Record<Band, number> {
   const rows = spectrum.split('\n').filter(line => line && !line.startsWith('#')).map(line => line.trim().split(/\s+/u).slice(0, 2).map(Number));
   if (!rows.length || rows.some(row => row.some(value => !Number.isFinite(value)))) throw new Error(`${where}: PSG returned no spectrum: ${spectrum.slice(0, 200)}`);
   return Object.fromEntries(Object.entries(BANDS).map(([band, [low, high]]) => {
     const inside = rows.filter(([wavelength]) => wavelength >= low && wavelength <= high).map(([, value]) => value);
-    if (!inside.length) throw new Error(`${where}: no PSG sample in the ${band} band ${low}-${high} um.`);
+    if (!inside.length) return [band, NaN];
     return [band, inside.reduce((sum, value) => sum + value, 0) / inside.length];
   })) as Record<Band, number>;
 }
@@ -68,7 +82,7 @@ for (const [key, value] of Object.entries({ 'OBJECT-SOLAR-LATITUDE': latitude ??
   'GENERATOR-RESOLUTION': 100, 'GENERATOR-RESOLUTIONUNIT': 'RP', 'GENERATOR-RADUNITS': 'Wsrm2um', 'GENERATOR-TRANS-APPLY': 'N', 'GEOMETRY-OBS-ALTITUDE': 1000, 'GEOMETRY-ALTITUDE-UNIT': 'km' })) base = set(base, key, value);
 const nadirConfig = set(set(set(base, 'GEOMETRY', 'Nadir'), 'GEOMETRY-USER-PARAM', 0), 'OBJECT-SOLAR-LONGITUDE', longitude);
 const limbConfig = set(base, 'GEOMETRY', 'Limb');
-const nadir = await cached('nadir', async () => bands(await call('rad', nadirConfig), 'nadir'));
+const nadir = await cached('nadir', async () => bandRadiance(nadirConfig, `${body} nadir`));
 // Full phase: the Sun on the tangent point's horizon behind the observer (azimuth 0). The sub-solar longitude that puts
 // it there is searched with PSG's own geometry module, since its tangent point need not sit at the sub-observer point.
 // PSG's geometry module holds the solar angle fixed for a tangent path below an opaque layer (Venus at 60 km reports 81.2
@@ -87,10 +101,7 @@ const flood = set(set(limbConfig, 'OBJECT-SOLAR-LONGITUDE', longitude + offset),
 const radiance: Record<Band, number[]> = { red: [], green: [], blue: [] };
 const warnings = new Set<string>();
 for (const altitude of altitudes) {
-  const cell = await cached(`limb:${altitude}`, async () => {
-    const spectrum = await call('rad', set(flood, 'GEOMETRY-USER-PARAM', altitude));
-    return { ...bands(spectrum, `${body} ${altitude} km`), warnings: spectrum.split('\n').filter(line => /WARNING|ERROR/u.test(line)) };
-  });
+  const cell = await cached(`limb:${altitude}`, async () => ({ ...await bandRadiance(set(flood, 'GEOMETRY-USER-PARAM', altitude), `${body} ${altitude} km`), warnings: [] as string[] }));
   for (const band of Object.keys(BANDS) as Band[]) radiance[band].push(cell[band]);
   cell.warnings.forEach(line => warnings.add(line.replace(/^#\s*/u, '')));
   console.log(`${body}: ${altitude} km`);

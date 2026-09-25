@@ -5,8 +5,7 @@ The Venus cloud texture is pinned from the OpenSpace project at commit
 included in `LICENSE.OPENSPACE-MIT`; no source-backed global ultraviolet cloud
 mosaic has been qualified yet (the investigation ledger records the Akatsuki
 route). The cloud-top limb law is transcribed from Pérez-Hoyos et al. (2018),
-doi:10.1002/2017JE005406, and the limb halo is NASA GSFC Planetary Spectrum
-Generator output; both are cited in `source/manifest.json`.
+doi:10.1002/2017JE005406, cited in `source/manifest.json`.
 
 The Magellan synthetic-color C3-MDIR mosaic and colorized topographic C3-MDIR
 mosaic are credited to the USGS Astrogeology Science Center and NASA. They are

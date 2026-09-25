@@ -580,25 +580,25 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Mars | Hapke, surface only | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), OMEGA and CRISM |
   | Jupiter | Minnaert per channel | [Simon et al. 2015](https://doi.org/10.1088/0004-637X/812/1/55), OPAL |
   | Saturn, Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
-
-  Earth's lanes belong to another branch and keep their own lighting.
+  | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../tools/photometry/fit-epic-limb.mts)) |
 - **One overlay per pixel.** A CSS overlay has one colour and one alpha, and
   blend modes are not used. The overlay is exact for the map's mean colour,
   measured at bake, and for every pixel in the channel that sets its alpha. A
   pixel far from the mean colour is off by (mean − pixel) × (spread of the
   channel factors), which is largest near the limb.
-- **Halo.** Venus and Mars draw a halo outside the disc from one NASA
+- **Halo.** No planet draws a halo yet: Venus, Mars and Earth end at their
+  lit disc. The lanes draw one when the recipe names a NASA
   [PSG](https://psg.gsfc.nasa.gov/) limb profile at full phase, with the Sun behind
   the viewer. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
   computes it once, against PSG's own disc centre, and
-  [halo.mts](../tools/photometry/halo.mts) reads it. Every frame draws it where the
-  tangent point faces the Sun. PSG computes limb paths with single scattering,
-  and the brighter halo of a backlit planet is not in the profile.
+  [halo.mts](../tools/photometry/halo.mts) reads it. The local PSG container's
+  limb mode returned the same radiance at every altitude, and the public service
+  refused further calls for a day, so no valid profile exists yet.
 - **Why not one model for every disc.** PSG's default atmospheres were checked
   against Hubble's measured coefficients and missed them. In red, PSG gives
   Uranus k 1.16 where OPAL measured 0.57. In blue, it gives Saturn 0.73 where
   OPAL measured 0.40. For Venus it gives about 1.05 where MASCS measured 1.35.
-  Each disc therefore uses its measured law. PSG supplies only what nothing
+  Each disc therefore uses its measured law. PSG is kept for what nothing
   measured: the halo.
 
 ## Run and check a change
