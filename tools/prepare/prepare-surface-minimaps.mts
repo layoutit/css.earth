@@ -1,5 +1,5 @@
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
-import type {ResizeOptions,WebpOptions} from 'sharp';
+import type {ResizeOptions,Sharp,WebpOptions} from 'sharp';
 import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.mts';
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
@@ -32,8 +32,18 @@ const nearestDisplay = (...records:unknown[]) => records.some(record => isRecord
   (isArray(record.categories) && record.categories.length > 0) ||
   record.format === 'facet-scalars' || isRecord(record.scalarMap) && record.scalarMap.sourceFormat === 'facet-scalars'
 ));
-const minimapEncoding = (nearest:boolean):WebpOptions => nearest ? { lossless: true, effort: 4 }
-  : { quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true };
+/** The sidebar map is decoration: the body carries the data. Quality 40, measured 2026-09-25 over the 1,327 published
+ * maps with pixelmatch (threshold 0.1) against the maps it replaced: 15.8 MB became 4.8 MB with 0.074 % of pixels
+ * flagged, and no flagged pixel in half the maps; quality 30 flags 0.119 % for 4.2 MB. A nearest-sampled map keeps
+ * the smaller of this and lossless: noisy category maps (the Moon's and Titan's geology) grow as lossy WebP. */
+export const MINIMAP_WEBP: Readonly<WebpOptions> = Object.freeze({ quality: 40, alphaQuality: 80, smartSubsample: true, effort: 4 });
+async function writeMinimap(pipeline:Sharp, nearest:boolean, file:string) {
+  const lossy = await pipeline.clone().webp(MINIMAP_WEBP).toBuffer({ resolveWithObject: true });
+  const lossless = nearest ? await pipeline.clone().webp({ lossless: true, effort: 4 }).toBuffer({ resolveWithObject: true }) : null;
+  const chosen = lossless && lossless.data.length < lossy.data.length ? lossless : lossy;
+  await writeFile(file, chosen.data);
+  return chosen.info;
+}
 const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutEnlargement: true,
   ...(nearest ? { kernel: 'nearest' } : {}) });
 
@@ -106,8 +116,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       }
       pipeline = sharp(shifted, { raw: info });
     }
-    const result = await pipeline.webp(minimapEncoding(nearest))
-      .toFile(resolve(outputDirectory, path));
+    const result = await writeMinimap(pipeline, nearest, resolve(outputDirectory, path));
     images.push({ id: surface.id, path, width: result.width, height: result.height,
       ...(surface.attribution ? { attribution: surface.attribution } : {}) });
   }
@@ -115,10 +124,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     if (images.some(image => image.id === preview.id)) continue;
     const path = `minimaps/${preview.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-    const result = await sharp(preview.raster.data, { raw: preview.raster.info })
-      .resize({ width: 640, withoutEnlargement: true })
-      .webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
-      .toFile(resolve(outputDirectory, path));
+    const result = await writeMinimap(sharp(preview.raster.data, { raw: preview.raster.info })
+      .resize({ width: 640, withoutEnlargement: true }), false, resolve(outputDirectory, path));
     images.push({ id: preview.id, path, width: result.width, height: result.height });
   }
   const [controls, lenses, bindings] = await Promise.all([

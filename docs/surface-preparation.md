@@ -472,6 +472,12 @@ These still set their own encoding:
   staging-only sphere-photograph refresh tool keep their encodings.
 - Navigation context images (`<id>-context.webp`, a body's large marker) keep
   quality 85.
+- Sidebar dataset maps (`prepared/minimaps/`) are decoration, not data, and use
+  quality 40 ([`MINIMAP_WEBP`](../tools/prepare/prepare-surface-minimaps.mts)).
+  Measured on 2026-09-25 over all 1,327 against the quality 90 maps they
+  replaced: 15.8 MB became 4.8 MB with 0.074 % of pixels flagged; quality 30
+  flagged 0.119 %. A nearest-sampled category map keeps lossless when that is
+  smaller, as it is for 11 noisy geology and region maps.
 
 To repeat the measurement, run
 [`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)
