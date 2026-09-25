@@ -15,6 +15,14 @@ import { dirname } from 'node:path';
 
 export const LOSSY_WEBP = Object.freeze({ quality: 80, smartSubsample: true });
 
+/**
+ * Decorative images (sidebar dataset maps and volume dataset previews): the body carries the data, so these take quality
+ * 40. Measured 2026-09-25 over the 1,327 published sidebar maps with pixelmatch (threshold 0.1) against the quality 90
+ * maps they replaced: 15.8 MB became 4.8 MB with 0.074 % of pixels flagged and no flagged pixel in half the maps;
+ * quality 30 flagged 0.119 %. The 42 volume previews at 600 px flag 0.104 % against a lossless resize.
+ */
+export const DECORATIVE_WEBP = Object.freeze({ quality: 40, alphaQuality: 80, smartSubsample: true, effort: 4 });
+
 /** Settings a caller may add: effort, and exact alpha for shading or coverage carried in alpha. */
 export type LossyWebpBase = Omit<WebpOptions, 'quality' | 'lossless' | 'nearLossless' | 'smartSubsample'>;
 

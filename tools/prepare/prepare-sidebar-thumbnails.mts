@@ -24,21 +24,17 @@ const output = async (path: string, bytes: Uint8Array | string) => {
   } else await writeFile(resolve(root, path), data);
 };
 
-interface Thumbnail { url: string; url2x: string; inputs: string[]; credit: string; sourceUrl: string; }
+interface Thumbnail { url2x: string; inputs: string[]; credit: string; sourceUrl: string; }
 const images: Record<string, Thumbnail> = {}, defaults: Record<string, string> = {};
+// 2x only: every screen reads the 32 px tile for its 16 CSS px slot (no 1x rasters).
 const makeThumbnail = async (id: string, lens: string, bytes: Buffer, evidence: Pick<Thumbnail, 'inputs' | 'credit' | 'sourceUrl'>) => {
-  const generated = [];
-  for (const density of [1, 2]) {
-    const size = 16 * density;
-    // Preserve the complete prepared image and its display color. Only resample;
-    // transparent padding keeps rectangular photographs at their native aspect.
-    const tile = await sharp(bytes).resize(size, size, { fit: 'contain', background: '#00000000', kernel: 'lanczos3' })
-      .webp({ lossless: true, effort: 6 }).toBuffer();
-    const url = `/navigation/focus-${id}-${lens}${density === 2 ? '@2x' : ''}.webp`;
-    await output(`public${url}`, tile);
-    generated.push({ url });
-  }
-  images[`${id}/${lens}`] = { url: generated[0].url, url2x: generated[1].url, ...evidence };
+  // Preserve the complete prepared image and its display color. Only resample;
+  // transparent padding keeps rectangular photographs at their native aspect.
+  const tile = await sharp(bytes).resize(32, 32, { fit: 'contain', background: '#00000000', kernel: 'lanczos3' })
+    .webp({ lossless: true, effort: 6 }).toBuffer();
+  const url2x = `/navigation/focus-${id}-${lens}@2x.webp`;
+  await output(`public${url2x}`, tile);
+  images[`${id}/${lens}`] = { url2x, ...evidence };
 };
 
 if (!check) await mkdir(resolve(root, 'public/navigation'), { recursive: true });
@@ -101,7 +97,7 @@ for (const object of sourceArray(catalogue.objects, sourceObject)) {
   if (typeof object.detailedObjectId === 'string' && defaults[object.detailedObjectId])
     defaults[sourceText(object.id)] = defaults[object.detailedObjectId];
 }
-const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 16/32 px; Milky Way is a face-on composite of prepared z slabs.',
+const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 32 px for 16 CSS px; Milky Way is a face-on composite of prepared z slabs.',
   inputs: [...inputs.values()], images, defaults };
 await output('public/navigation/sidebar-thumbnails.json', JSON.stringify(manifest, null, 2) + '\n');
-console.log(`${check ? 'Verified' : 'Prepared'} ${Object.keys(images).length} sidebar images at 16 and 32 px.`);
+console.log(`${check ? 'Verified' : 'Prepared'} ${Object.keys(images).length} sidebar images at 32 px.`);

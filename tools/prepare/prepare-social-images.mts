@@ -7,6 +7,7 @@ import sharp from "sharp";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { previewSite } from "../cli/preview.mts";
 import { inventoriedObjectIds } from "../assets/runtime-assets.mts";
+import { writeLossyWebp } from "../../src/preparation/raster/lossy-lane.ts";
 
 // Plain captures of the built CSS scenes: no added artwork, text, or branding.
 // Card captures use the shared sidebar background and omit the surrounding sky.
@@ -17,6 +18,7 @@ const { values } = parseArgs({ options: {
 } });
 const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`));
 const outputDirectory = values.card ? "public/overview" : "public/social";
+export const PORTRAIT_WIDTH = 600, PORTRAIT_HEIGHT = 315;
 await mkdir(outputDirectory, { recursive: true });
 const server = values["base-url"] ? null : await previewSite({ port: 4266 });
 const baseUrl = values["base-url"] ?? "http://127.0.0.1:4266";
@@ -96,12 +98,14 @@ try {
       }
       assert.ok(fitted, `${object.id}: portrait still exceeds the card crop`);
       assert.ok(capture, "Portrait capture is missing");
-      await sharp(capture).webp({ lossless: true }).toFile(resolve(outputDirectory, `${object.id}.webp`));
+      // The card shows the portrait 300 CSS px wide: keep 2x of that, in the lossy lane. Measured 2026-09-25 on the 16
+      // portraits against a lossless 600 x 315: 1,666 KB (lossless 1200 x 630) became 67 KB with no pixel flagged.
+      await writeLossyWebp(sharp(capture).resize(PORTRAIT_WIDTH, PORTRAIT_HEIGHT), resolve(outputDirectory, `${object.id}.webp`));
     } else {
       await page.screenshot({ path: resolve(outputDirectory, `${object.id}.jpg`),
         type: "jpeg", quality: 90, animations: "disabled" });
     }
-    console.log(`Captured ${object.id}: 1200 × 630${values.card ? ` on ${cardBackground}` : ""}`);
+    console.log(`Captured ${object.id}: ${values.card ? `${PORTRAIT_WIDTH} × ${PORTRAIT_HEIGHT} on ${cardBackground}` : "1200 × 630"}`);
     await page.close();
   }
 } finally {

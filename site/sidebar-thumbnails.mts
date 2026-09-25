@@ -5,10 +5,9 @@ const data = sourceObject(manifest);
 if (data.schema !== 'cssearth-sidebar-thumbnails@1') throw new TypeError('Invalid sidebar thumbnail bank');
 const defaults = sourceObject(data.defaults);
 const images = new Map(Object.entries(sourceObject(data.images)).map(([id, raw]) => {
-  const image = sourceObject(raw), url = sourceText(image.url), url2x = sourceText(image.url2x);
-  if (![url, url2x].every(path => /^\/navigation\/focus-[a-z0-9-]+(?:@2x)?\.webp$/u.test(path)))
-    throw new TypeError(`Invalid sidebar thumbnail URL: ${id}`);
-  return [id, { url, url2x }];
+  const url2x = sourceText(sourceObject(raw).url2x);
+  if (!/^\/navigation\/focus-[a-z0-9-]+@2x\.webp$/u.test(url2x)) throw new TypeError(`Invalid sidebar thumbnail URL: ${id}`);
+  return [id, { url2x }];
 }));
 
 /** Prepared image metadata only; the catalogue continues to own object identity. */

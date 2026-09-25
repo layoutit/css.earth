@@ -1,5 +1,6 @@
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
-import type {ResizeOptions,Sharp,WebpOptions} from 'sharp';
+import type {ResizeOptions,Sharp} from 'sharp';
+import {DECORATIVE_WEBP} from '../../src/preparation/raster/lossy-lane.ts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.mts';
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
@@ -32,13 +33,10 @@ const nearestDisplay = (...records:unknown[]) => records.some(record => isRecord
   (isArray(record.categories) && record.categories.length > 0) ||
   record.format === 'facet-scalars' || isRecord(record.scalarMap) && record.scalarMap.sourceFormat === 'facet-scalars'
 ));
-/** The sidebar map is decoration: the body carries the data. Quality 40, measured 2026-09-25 over the 1,327 published
- * maps with pixelmatch (threshold 0.1) against the maps it replaced: 15.8 MB became 4.8 MB with 0.074 % of pixels
- * flagged, and no flagged pixel in half the maps; quality 30 flags 0.119 % for 4.2 MB. A nearest-sampled map keeps
- * the smaller of this and lossless: noisy category maps (the Moon's and Titan's geology) grow as lossy WebP. */
-export const MINIMAP_WEBP: Readonly<WebpOptions> = Object.freeze({ quality: 40, alphaQuality: 80, smartSubsample: true, effort: 4 });
+/** The sidebar map is decoration: the body carries the data. A nearest-sampled map keeps the smaller of the decorative
+ * encoding and lossless: noisy category maps (the Moon's and Titan's geology) grow as lossy WebP. */
 async function writeMinimap(pipeline:Sharp, nearest:boolean, file:string) {
-  const lossy = await pipeline.clone().webp(MINIMAP_WEBP).toBuffer({ resolveWithObject: true });
+  const lossy = await pipeline.clone().webp(DECORATIVE_WEBP).toBuffer({ resolveWithObject: true });
   const lossless = nearest ? await pipeline.clone().webp({ lossless: true, effort: 4 }).toBuffer({ resolveWithObject: true }) : null;
   const chosen = lossless && lossless.data.length < lossy.data.length ? lossless : lossy;
   await writeFile(file, chosen.data);

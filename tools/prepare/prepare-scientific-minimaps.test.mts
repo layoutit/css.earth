@@ -6,7 +6,8 @@ import {mkdtemp, mkdir, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import sharp, { type OutputInfo } from 'sharp';
-import {MINIMAP_WEBP,prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
+import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
+import {DECORATIVE_WEBP} from '../../src/preparation/raster/lossy-lane.ts';
 
 const colors=[[231,21,41],[13,211,31],[82,84,82]];
 async function directories(t: TestContext) {
@@ -50,7 +51,7 @@ test('nearest, categorical and facet minimaps keep the smaller of lossless and l
     const nearest=entry.id!=='image';
     const resized=await sharp(original).resize({width:640,withoutEnlargement:true,...(nearest?{kernel:'nearest'}:{})}).raw().toBuffer({resolveWithObject:true});
     const shifted=shiftHalf(resized.data,resized.info);
-    const lossy=await sharp(shifted,{raw:resized.info}).webp(MINIMAP_WEBP).toBuffer();
+    const lossy=await sharp(shifted,{raw:resized.info}).webp(DECORATIVE_WEBP).toBuffer();
     const lossless=await sharp(shifted,{raw:resized.info}).webp({lossless:true,effort:4}).toBuffer();
     assert.deepEqual(actual,nearest&&lossless.length<lossy.length?lossless:lossy,entry.id);
   }

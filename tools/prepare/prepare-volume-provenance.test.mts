@@ -29,7 +29,7 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
-    ['betelgeuse-shell', 4], ['hd-181327-disc', 1], ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['omega-centauri', 2], ['pds-70-disc', 1], ['smc', 5], ['sun-cor1-density', 1],
+    ['beta-pictoris-disc', 3], ['betelgeuse-shell', 4], ['hd-181327-disc', 1], ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['omega-centauri', 2], ['pds-70-disc', 1], ['smc', 5], ['sun-cor1-density', 1],
   ]);
   assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));
@@ -152,7 +152,7 @@ test('image-layer deliveries retain authored documents and every layer in matchi
   try {
     await mkdir(resolve(fixture, 'src/objects'), { recursive: true });
     for (const id of ['m31', 'm33']) await mkdir(resolve(fixture, 'src/objects', id));
-    for (const path of ['tools', 'site', 'packages', ...['m31', 'm33'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
+    for (const path of ['tools', 'site', 'packages', 'src/preparation', ...['m31', 'm33'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
       await symlink(resolve(root, path), resolve(fixture, path));
     }
     const entries = await prepareVolumeProvenance({ root: fixture });
