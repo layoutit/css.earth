@@ -625,6 +625,10 @@
   display: var(--information-panel-display, block);
   padding: 8px var(--explorer-card-padding-inline-end) 20px var(--explorer-card-padding-inline-start);
 }
+/* Dataset images are prepared for the desktop card's content width at 2x; a wider phone sheet must not stretch them. */
+.object-card-tabpanel :is(.object-surface-minimap, .object-lens-legend-panel, .object-facility-preview) {
+  max-width: calc(var(--explorer-panel-width) - var(--explorer-card-padding-inline-start) - var(--explorer-card-padding-inline-end));
+}
 .object-card-tabpanel .object-surface-minimap {
   aspect-ratio: 2 / 1;
   background: #000;
