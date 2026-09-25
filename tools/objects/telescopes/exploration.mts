@@ -6,7 +6,7 @@ import { assessSearchCoverage, indexedTargetObservations, loadQueryInputs, loadT
 import { canonicalTargetRequest, resolveTarget, type TargetResolution } from './targets.mts';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
-import { parseLimits, parseRegion, type TransferLimits } from './vo/contracts.mts';
+import { parseLimits, parseRegion, type TransferLimits } from '@cssearth/telescope/node';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';
 import { nativeQualificationRoute } from './vo/access.mts';

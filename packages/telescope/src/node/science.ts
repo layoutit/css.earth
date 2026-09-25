@@ -1,8 +1,8 @@
 /** Astropy owns FITS units/WCS; css.earth owns association, conservative masks and claims. */
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain } from './toolchain.mts';
+import { astroqueryToolchain } from './toolchain.js';
 import { requireRecord, requireString } from '@cssearth/core';
-import { CUBE_OUTPUT_PYTHON } from './cube-outputs.mts';
+import { CUBE_OUTPUT_PYTHON } from './cube-outputs.js';
 export const SCIENCE_PYTHON = String.raw`
 import json, sys, warnings
 from contextlib import ExitStack
@@ -319,7 +319,7 @@ elif request['operation']=='spectral-convert':
 else: raise ValueError('Unknown science operation')
 json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 `;
-export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle; position?: { readonly raDegrees:number;readonly decDegrees:number }; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent'; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
+export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('./vo-contracts.js').IcrsCircle; position?: { readonly raDegrees:number;readonly decDegrees:number }; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent'; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
     const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });

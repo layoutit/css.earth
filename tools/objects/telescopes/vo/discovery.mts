@@ -1,10 +1,10 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { astroquery } from '../../astronomy-packages/client.mts';
-import { mastService, type MastServiceRequest, type MastServiceResult } from '../../astronomy-packages/mast.mts';
+import { astroquery } from '@cssearth/telescope/node';
+import { mastService, type MastServiceRequest, type MastServiceResult } from '@cssearth/telescope/node';
 import type { ProductKind } from '../recipe-request.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { canonical, digest, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from './contracts.mts';
+import { canonical, digest, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from '@cssearth/telescope/node';
 import { sha256File } from '@cssearth/core/node';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
 import type { FamilyId } from '../product-descriptor.mts';
@@ -34,10 +34,10 @@ export interface DiscoveryRequest {
   readonly family?:FamilyId;
   /** Archive instrument name (ObsCore and EPN-TAP `instrument_name`), matched exactly by the service. */
   readonly instrument?: string;
-  readonly region?: import('./contracts.mts').IcrsCircle;
+  readonly region?: import('@cssearth/telescope/node').IcrsCircle;
   /** A circle to search by footprint only, never a cutout (`region` is the cutout). A SIMBAD target supplies SIMBAD's
    * position and position error here. */
-  readonly footprint?: import('./contracts.mts').IcrsCircle;
+  readonly footprint?: import('@cssearth/telescope/node').IcrsCircle;
   /** A target outside the application catalogue, named and placed by SIMBAD (sky/target.mts). */
   readonly skyTarget?: import('../sky/target.mts').SkyTarget;
   readonly spectralFrame?: 'barycentric';

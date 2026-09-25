@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { parseAstroqueryAnswer, parsePyuvdataUvfitsAnswer } from './client.mts';
+import { it as test } from 'vitest';
+import { parseAstroqueryAnswer } from './astroquery.js';
+import { parsePyuvdataUvfitsAnswer } from './pyuvdata.js';
 
 test('the boundary rejects a response from another operation', async () => {
   assert.throws(() => parseAstroqueryAnswer({ schema: 'cssearth-astroquery-answer@2', astroquery: '0.4.11', pyvo: '1.9.1', operation: 'tap-query', tap: { queryStatus: 'OK', complete: true }, rows: [] },

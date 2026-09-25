@@ -2,8 +2,8 @@
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
-import{ plotNumericPreview ,type FigureOptions}from'../../astronomy-packages/plots.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
+import { plotNumericPreview, type FigureOptions } from '@cssearth/telescope/node';
 import { resolve } from 'node:path';
 import { fileSize } from '@cssearth/telescope/node';
 import { readFitsImage } from '@cssearth/fits';

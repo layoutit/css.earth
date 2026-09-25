@@ -11,10 +11,10 @@ how an archive's ledger is written) stays in `tools/objects/<archive>/`, and obj
 the bake. Nothing here names a body.
 
 Keep the main entry (`src/index.ts`) host-neutral: no Node built-ins, DOM globals or file I/O. `src/node/` is
-`@cssearth/telescope/node`; it may import `node:*`, and nothing outside `src/node/` may import it. The Node entry is
-built unsplit into `dist/node/`, so `src/node/paths.ts` sits as deep under the package in its sources as in its build:
-keep every `import.meta.dirname` use in that one file. The library imports only packages and Node built-ins; it never
-reaches `tools/`, `src/`, `site/` or `labs/`.
+`@cssearth/telescope/node`; it may import `node:*`, and nothing outside `src/node/` may import it. Code finds the
+package's own files (`toolchains/`) and the workspace only through `src/node/paths.ts`, which locates the package by its
+name, so the same code works from its sources, its build and a bundle. The library imports only packages and Node
+built-ins; it never reaches `tools/`, `src/`, `site/` or `labs/`.
 
 ## Behaviour is part of the contract
 

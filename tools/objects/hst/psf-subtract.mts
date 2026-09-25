@@ -219,7 +219,7 @@ export async function runPsfSubtraction(id: string, work: string, options: { sou
       const entry = program.observations.find(other => other.observation === roll.long)!;
       const drz = entry.products.find(product => product.name.endsWith('_drz.fits'));
       if (!drz) throw new Error(`${roll.long}: the archive made no drizzled product to take settings from.`);
-      const { mastFile } = await import('../astronomy-packages/mast.mts');
+      const { mastFile } = await import('@cssearth/telescope/node');
       const theirs = (await readHstFileHdus(await mastFile(drz, resolve(work, 'mast'))))[0]!.header;
       const drizzle = { kernel: requireString(theirs.D001KERN, 'D001KERN'), pixfrac: requireFiniteNumber(theirs.D001PIXF, 'D001PIXF'), scale: requireFiniteNumber(theirs.D001SCAL, 'D001SCAL') };
       const name = `${record.id}-${band.band.toLowerCase()}-roll${roll.roll}`;

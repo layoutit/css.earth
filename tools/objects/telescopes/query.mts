@@ -1,7 +1,7 @@
 import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest } from './recipe-request.mts';
 import { inputWavelengths } from './recipe-request.mts';
 import { skyCatalogueEntry } from './sky/target.mts';
-import { parseLimits, parseRegion } from './vo/contracts.mts';
+import { parseLimits, parseRegion } from '@cssearth/telescope/node';
 import { loadVoInputs, voCandidates, type VoInputs, type VoProductCandidate } from './vo/bridge.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import { loadQualifiedObservations, matchingProduct, type QualifiedObservation } from './qualified-observations.mts';

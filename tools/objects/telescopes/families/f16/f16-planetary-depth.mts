@@ -2,7 +2,7 @@
 import {spawn} from 'node:child_process';
 import {copyFile} from 'node:fs/promises';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '@cssearth/core';
-import {astroqueryToolchain} from '../../../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { fileSize } from '@cssearth/telescope/node';
 import type {FamilyHandler,FamilyOperation} from '../../family-handlers.mts';
 import {

@@ -1,6 +1,6 @@
 /** F07: cdflib owns CDF decoding; cssEarth pins bytes and preserves native TT2000/frequency coordinates. */
 import {createHash} from 'node:crypto';import {spawn} from 'node:child_process';import {readFile} from 'node:fs/promises';
-import {astroqueryToolchain} from '../../astronomy-packages/toolchain.mts';import type {FamilyHandler,FamilyOperation} from '../family-handlers.mts';import type {DescriptorMember,ProductDescriptor} from '../product-descriptor.mts';import {descriptor,stable} from './common.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';import type {FamilyHandler,FamilyOperation} from '../family-handlers.mts';import type {DescriptorMember,ProductDescriptor} from '../product-descriptor.mts';import {descriptor,stable} from './common.mts';
 export const WIND_RAD1_FIXTURE={url:'https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf',variable:'PSD_V2_S'} as const;
 export interface CdfPin{readonly path:string} export interface DynamicSpectrum{readonly epochsTt2000:readonly string[];readonly frequencyHz:readonly number[];readonly psd:readonly (readonly (number|null)[])[];readonly unit:string;readonly cdflib:string}
 const python=String.raw`import cdflib,json,sys,numpy as np

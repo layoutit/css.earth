@@ -1,7 +1,7 @@
 /** The only process boundary into Peppi and pdr. Exact discovery cannot truncate; decoding loads every advertised data object. */
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pdsToolchain } from './pds-toolchain.mts';
+import { pdsToolchain } from './pds-toolchain.js';
 
 export type PdsPackageRequest =
   | { readonly operation: 'resolve-target'; readonly names: readonly string[] }

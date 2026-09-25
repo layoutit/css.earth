@@ -6,7 +6,7 @@ import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import {astroqueryToolchain} from '../../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import {describeMixedNd,extractMixedNd,inspectMixedNd} from './f02-mixed-nd.mts';import{member}from'./common.mts';import{executeFamilyOperation}from'../family-operation.mts';
 import { readProductRecord } from '@cssearth/telescope/node';
 const root=resolve(import.meta.dirname,'../../../..');

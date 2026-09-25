@@ -32,11 +32,11 @@ import { exportSpatialObject, inspectSpatialObject } from './spatial-handoff.mts
 import { extractMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
 import { inspectHealpix, selectHealpix } from './families/f14-healpix.mts';
 import { previewUvfitsSelection } from './families/f11-measurement-set.mts';
-import { pyuvdataUvfits, type PyuvdataUvfitsRequest } from '../astronomy-packages/client.mts';
+import { pyuvdataUvfits, type PyuvdataUvfitsRequest } from '@cssearth/telescope/node';
 import { implementationFingerprint } from './implementation-dependencies.mts';
 import { verifiedProduct } from './verified-product.mts';
 
-import { figureBackground, type FigureBackground, type FigureOptions } from '../astronomy-packages/plots.mts';
+import { figureBackground, type FigureBackground, type FigureOptions } from '@cssearth/telescope/node';
 export const FAMILY_OPERATION_STAGE='telescope-family-operation' as const;
 type FamilyOperationArguments=
   |{readonly operationId:'spectrum-export'|'spectrum-chart-data'|'photometry-export'|'sed-table'|'sed-plot-data'|'time-series-export'|'time-series-plot-data'|'astrometry-inspect'|'astrometry-export'|'astrometry-track-data'|'slit-profile-table'|'radar-coordinate-view'}
@@ -179,7 +179,7 @@ async function loadDescriptor(path:string){
   const files=new Map<string,string>();for(const member of descriptor.members){const location=memberPath(file,member.path);await fileSize(location);files.set(member.id,location);}
   return{file,bytes,descriptor,files};
 }
-async function familyImplementation(operation:FamilyOperation){const root=resolve(import.meta.dirname,'../../..'),owner=isAbsolute(operation.owner.module)?operation.owner.module:resolve(root,operation.owner.module),graph=await implementationFingerprint(root,[fileURLToPath(new URL('family-operation.mts',import.meta.url)),owner]),toolchain=await readFile(resolve(root,'tools/objects/astronomy-packages/requirements.lock'));return{software:{name:`cssEarth family operation ${operation.handlerId}`,version:graph.sha256},toolchainDigest:sha256(toolchain)};}
+async function familyImplementation(operation:FamilyOperation){const root=resolve(import.meta.dirname,'../../..'),owner=isAbsolute(operation.owner.module)?operation.owner.module:resolve(root,operation.owner.module),graph=await implementationFingerprint(root,[fileURLToPath(new URL('family-operation.mts',import.meta.url)),owner]),toolchain=await readFile(resolve(root,'packages/telescope/toolchains/requirements.lock'));return{software:{name:`cssEarth family operation ${operation.handlerId}`,version:graph.sha256},toolchainDigest:sha256(toolchain)};}
 const componentMember=(descriptor:ProductDescriptor,files:ReadonlyMap<string,string>,operation:FamilyOperation)=>{const component=descriptor.components.find(item=>item.id===operation.componentId);if(!component)throw new TypeError(`Operation component ${operation.componentId} is absent.`);const location=component.locations[0];if(!location)throw new TypeError(`Operation component ${operation.componentId} has no member.`);const file=files.get(location.memberId);if(!file)throw new TypeError(`Operation member ${location.memberId} is absent.`);return{component,location,file};};
 const json=(value:unknown)=>`${JSON.stringify(value,null,2)}\n`;
 const object=(value:unknown,label:string)=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError(`${label} must be an object.`);return value as Record<string,unknown>;};

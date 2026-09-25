@@ -2,7 +2,7 @@
  * parameter policy and interpretation of the result. This synchronous boundary keeps existing preparation consumers synchronous. */
 import { spawnSync } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchainSync } from './toolchain.mts';
+import { astroqueryToolchainSync } from './toolchain.js';
 
 const TRANSIT_PYTHON = String.raw`
 import importlib.metadata

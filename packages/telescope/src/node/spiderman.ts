@@ -1,23 +1,21 @@
-#!/usr/bin/env node
 /** SPIDERMAN owns spherical-harmonic brightness maps and the phase curves they make (Louden & Kreidberg 2018). cssEarth passes a
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
- * (spiderman-toolchain.json says why). Install: node tools/objects/astronomy-packages/spiderman.mts install */
+ * (spiderman-toolchain.json says why). Install: node tools/objects/astronomy-toolchains.mts spiderman install */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from '../toolchain-process.mts';
+import { runToolchainProcess } from './toolchain-process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { TOOLCHAINS, WORKSPACE } from './paths.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-const repository = resolve(import.meta.dirname, '../../..');
-export const SPIDERMAN_ROOT = resolve(repository, 'output/toolchains/spiderman');
+export const SPIDERMAN_ROOT = resolve(WORKSPACE, 'output/toolchains/spiderman');
 
 function descriptor() {
-  const text = readFileSync(resolve(import.meta.dirname, 'spiderman-toolchain.json'), 'utf8');
+  const text = readFileSync(resolve(TOOLCHAINS, 'spiderman-toolchain.json'), 'utf8');
   const entry = requireRecord(JSON.parse(text) as unknown, 'spiderman-toolchain.json');
-  const lock = readFileSync(resolve(import.meta.dirname, requireString(entry.requirements, 'requirements')), 'utf8');
+  const lock = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8');
   return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
 
@@ -30,7 +28,7 @@ export async function installSpiderman() {
     ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(SPIDERMAN_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
   // The lock is hash-pinned; both packages build or install against the environment's NumPy.
   runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
-    resolve(import.meta.dirname, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
+    resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(SPIDERMAN_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   await writeFile(resolve(SPIDERMAN_ROOT, 'installed.json'), `${JSON.stringify({ id: 'spiderman', pinsSha256: digest }, null, 2)}\n`);
   verifySpiderman();
@@ -43,8 +41,8 @@ export function spidermanToolchainSync(): SpidermanToolchain {
   const { entry, digest } = descriptor(), bin = resolve(SPIDERMAN_ROOT, 'env/bin'), python = resolve(bin, 'python');
   let marker: Record<string, unknown>;
   try { marker = requireRecord(JSON.parse(readFileSync(resolve(SPIDERMAN_ROOT, 'installed.json'), 'utf8')) as unknown); }
-  catch { throw new Error('The SPIDERMAN toolchain is not installed: node tools/objects/astronomy-packages/spiderman.mts install'); }
-  if (marker.pinsSha256 !== digest) throw new Error('The SPIDERMAN toolchain was installed from other pins; reinstall it: node tools/objects/astronomy-packages/spiderman.mts install');
+  catch { throw new Error('The SPIDERMAN toolchain is not installed: node tools/objects/astronomy-toolchains.mts spiderman install'); }
+  if (marker.pinsSha256 !== digest) throw new Error('The SPIDERMAN toolchain was installed from other pins; reinstall it: node tools/objects/astronomy-toolchains.mts spiderman install');
   try { accessSync(python); } catch { throw new Error(`The SPIDERMAN toolchain has no python at ${python}.`); }
   // SPIDERMAN reads ~/.spidermanrc when present; an empty home keeps a user's file out of the result.
   const home = resolve(SPIDERMAN_ROOT, 'home'); mkdirSync(home, { recursive: true });
@@ -125,11 +123,4 @@ export function verifySpiderman() {
   const { entry } = descriptor();
   if (found !== `${requireString(entry.spiderman)} ${requireString(entry.batman)}`) throw new Error(`Expected SPIDERMAN ${String(entry.spiderman)} and batman ${String(entry.batman)}, found ${found}.`);
   return found;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [mode] = process.argv.slice(2);
-  if (mode === 'install') console.log(`SPIDERMAN is installed at ${await installSpiderman()}`);
-  else if (mode === 'verify') console.log(`SPIDERMAN and batman ${verifySpiderman()} ready`);
-  else throw new TypeError('Usage: spiderman <install|verify>');
 }

@@ -5,7 +5,7 @@ import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { readProductScience } from './product-science.mts';
 import { calibrationDependencies, verifyCalibrationDependencies, calibrationOrigin } from './calibration-dependencies.mts';
 import { qualifySourceProduct } from './qualify-source.mts';

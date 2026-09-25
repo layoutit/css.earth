@@ -457,7 +457,7 @@ Native source selection does not establish that a scientifically registered body
 ## Archive acquisition
 
 The virtual-telescope routes use one pinned archive client where Astroquery has the required public operation. Install it with
-`node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install` and check it with the same command's `verify` mode. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure once under `~/.cache/css-earth/astroquery/<pin digest>` (or `CSS_EARTH_ASTROQUERY_CACHE/<pin digest>`). Checkouts with the same pins reuse it without copying the environment. A valid older `output/toolchains/astroquery` install still works; a dangling link there no longer hides a valid shared cache. Installation holds a per-pin lock, verifies the packages, and writes the completion marker last. A query never starts an installation itself.
+`node tools/objects/astronomy-toolchains.mts astroquery install` and check it with the same command's `verify` mode. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure once under `~/.cache/css-earth/astroquery/<pin digest>` (or `CSS_EARTH_ASTROQUERY_CACHE/<pin digest>`). Checkouts with the same pins reuse it without copying the environment. A valid older `output/toolchains/astroquery` install still works; a dangling link there no longer hides a valid shared cache. Installation holds a per-pin lock, verifies the packages, and writes the completion marker last. A query never starts an installation itself.
 
 Astroquery is the archive client for MAST catalogue queries and complete-file downloads, ALMA TAP and DataLink, and the VizieR
 JMDC cone query. cssEarth does not implement those protocols beside it. cssEarth still checks catalogue fields, observation
@@ -472,7 +472,7 @@ non-overlapping exceptions rather than fallbacks for the same operation.
 
 Astroquery stays an external dependency: no upstream source is copied into cssEarth. Its BSD 3-Clause license, attribution,
 citation and the separate status of archive-data rights are recorded in
-[`tools/objects/astronomy-packages/NOTICE.md`](../tools/objects/astronomy-packages/NOTICE.md). Acquisition alone supplies no scientific evidence.
+[`packages/telescope/toolchains/NOTICE.md`](../packages/telescope/toolchains/NOTICE.md). Acquisition alone supplies no scientific evidence.
 
 ## The product record
 

@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import { access } from 'node:fs/promises';
-import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 
 export type VoPackageMember = { path: string; bytes: number; sha256: string };
 /** `science` is retained for legacy one-raster packages. `fitsMembers` is the complete non-arbitrary FITS candidate set. */

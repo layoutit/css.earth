@@ -9,7 +9,7 @@ import { readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { CapabilityRequest } from './recipe-request.mts';
 import { parseResolutionEvidence } from '../resolution-evidence.mts';
-import { parseRegion } from './vo/contracts.mts';
+import { parseRegion } from '@cssearth/telescope/node';
 
 export interface QualifiedObservation {
   readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
@@ -54,7 +54,7 @@ export function parseProductFacts(raw: unknown): ProductFacts {
   if(value.calibrationDependencies !== undefined) facts.calibrationDependencies = parseCalibrationDependencies(value.calibrationDependencies);
   return facts;
 }
-const implementation = async () => sha256(Buffer.concat(await Promise.all(['./vo/package.mts', './vo/contracts.mts', './vo/discovery.mts', './vo/access.mts', './vo/bridge.mts', './vo/qualify.mts', '../astronomy-packages/client.mts', './qualify.mts', './product-science.mts', './native-metadata.mts', './calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', '../jwst/cubes/resolution.mts', '../jwst/cubes/spec3.mts', '../jwst/sample-agreement.mts', '../jwst/requirements.lock']
+const implementation = async () => sha256(Buffer.concat(await Promise.all(['./vo/package.mts', '../../../packages/telescope/src/node/vo-contracts.ts', './vo/discovery.mts', './vo/access.mts', './vo/bridge.mts', './vo/qualify.mts', '../../../packages/telescope/src/node/astroquery.ts', './qualify.mts', './product-science.mts', './native-metadata.mts', './calibration-dependencies.mts', '../../../packages/telescope/src/node/science.ts', '../../../packages/telescope/toolchains/requirements.lock', '../jwst/cubes/resolution.mts', '../jwst/cubes/spec3.mts', '../jwst/sample-agreement.mts', '../jwst/requirements.lock']
   .map(path => readFile(new URL(path, import.meta.url))))));
 export async function rememberQualification(root: string, result: QualifiedObservation): Promise<void> {
   const locations = Object.fromEntries((['product', 'receipt', 'productRecord', 'outputRoot'] as const).map(key => [key, relative(root, resolve(root, result[key]))]));

@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
-import { findInstalledRoot, installedToolchain, toolchainRootIssue } from './toolchain.mts';
+import { it as test } from 'vitest';
+import { findInstalledRoot, installedToolchain, toolchainRootIssue } from './toolchain.js';
 
 test('a dangling shared astronomy toolchain link names the missing target', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'astroquery-link-'));

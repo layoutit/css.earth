@@ -7,7 +7,7 @@ import { writeProductRecord } from '@cssearth/telescope/node';
 import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from '../keck/koa.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
-import { parseLimits } from './vo/contracts.mts';
+import { parseLimits } from '@cssearth/telescope/node';
 import type { KeckSourceLead } from './archive-leads.mts';
 
 const limitations = [

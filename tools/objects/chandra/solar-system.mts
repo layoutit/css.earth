@@ -30,7 +30,7 @@ import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { addProductEvidence, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRun } from '@cssearth/telescope';
-import { astroqueryRows } from '../astronomy-packages/client.mts';
+import { astroqueryRows } from '@cssearth/telescope/node';
 import type { FitsHeader } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainPython } from '../jwst/mast.mts';

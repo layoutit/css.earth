@@ -10,7 +10,7 @@ import { writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
-import { parseLimits } from './vo/contracts.mts';
+import { parseLimits } from '@cssearth/telescope/node';
 
 export interface SourceFile { readonly url: string; readonly name: string; readonly path?: string; readonly bytes?: number; readonly md5?: string; readonly archiveEncoding?: 'gzip' }
 export interface SourceSelection {

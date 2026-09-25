@@ -5,7 +5,7 @@ import { observationRecords, shippedObjects as spitzerObjects } from '../spitzer
 import { SEARCH as SPITZER_SEARCH, shaSearch } from '../spitzer/archive.mts';
 import { leadTime, saveArchiveLeadEvidence, type ArchiveLeadFilter, type ArchiveLeadService, type ChandraSourceLead, type SpitzerSourceLead } from './archive-leads.mts';
 import type { TargetCatalogueEntry } from './targets.mts';
-import type { IcrsCircle } from './vo/contracts.mts';
+import type { IcrsCircle } from '@cssearth/telescope/node';
 
 const errorText = (error: unknown) => error instanceof Error ? error.message : String(error);
 const LIMIT = 100;

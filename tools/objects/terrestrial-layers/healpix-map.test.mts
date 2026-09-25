@@ -5,7 +5,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { loadHealpixNpyMap } from './healpix-map.mts';
 
 const test = sourceTest();

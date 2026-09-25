@@ -1,12 +1,12 @@
 /** Shared MAST boundary. Astroquery owns the service protocol and downloads; cssEarth validates returned identities and bytes. */
 import { access, mkdir, rm, stat, symlink, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { WORKSPACE } from './paths.js';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
-export { ArchiveTransportError } from './client.mts';
-import { astroquery } from './client.mts';
+import { astroquery } from './astroquery.js';
 
-export const MAST_CACHE = resolve(import.meta.dirname, '../../../output/archive-cache/mast');
+export const MAST_CACHE = resolve(WORKSPACE, 'output/archive-cache/mast');
 export const mastDownloadUrl = (uri: string) => `https://mast.stsci.edu/api/v0.1/Download/file?uri=${uri}`;
 export interface MastFile { readonly name: string; readonly uri: string; readonly bytes: number; readonly sha256?: string }
 

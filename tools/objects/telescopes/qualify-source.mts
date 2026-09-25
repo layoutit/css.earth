@@ -13,7 +13,7 @@ import { withIdleTimeout, sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../ass
 import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor, readRiceCompressedImage } from '@cssearth/fits';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements } from '@cssearth/telescope';
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';
-import { pdsPackages } from '../astronomy-packages/pds-client.mts';
+import { pdsPackages } from '@cssearth/telescope/node';
 import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { inside, sourceCacheAddress } from './source-product-contract.mts';
 import { assertPinnedLabel, sourceReceipt, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-product-contract.mts';

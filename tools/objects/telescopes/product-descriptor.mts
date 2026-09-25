@@ -1,7 +1,7 @@
 /** Versioned semantic description of pinned observational bytes. Data remain in members; this file only describes them. */
 import { spawnSync } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchainSync } from '../astronomy-packages/toolchain.mts';
+import { astroqueryToolchainSync } from '@cssearth/telescope/node';
 
 export const PRODUCT_DESCRIPTOR_SCHEMA='cssearth-telescope-product-descriptor@1' as const;
 export const FAMILY_IDS=['F01','F02','F03','F04','F05','F06','F07','F08','F09','F10','F11','F12','F13','F14','F15','F16','F17','F18'] as const;

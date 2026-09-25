@@ -41,7 +41,7 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     const measurements = await readFile(resolve(o.measurements), 'utf8'), csvName = o.measurements.split('/').at(-1)!;
     const pick = { whereistheplanetKey: o.whereistheplanet, ...(o.body ? { body: o.body } : {}), measurements: csvName, measurementsSource: o.measurementsSource };
     await writeFile(resolve(work, csvName), measurements); await writeFile(resolve(work, 'pick.json'), json(pick));
-    const { astroqueryToolchainSync } = await import('../astronomy-packages/toolchain.mts'), toolchain = astroqueryToolchainSync();
+    const { astroqueryToolchainSync } = await import('@cssearth/telescope/node'), toolchain = astroqueryToolchainSync();
     execFileSync(toolchain.python, [resolve(root, 'tools/objects/hosted-orbits/posterior-pick.py'), resolve(work, 'pick.json'), resolve(work, 'orbit.json')], { env: { ...process.env, ...toolchain.env }, stdio: ['ignore', 'ignore', 'inherit'] });
     const orbitText = await readFile(resolve(work, 'orbit.json'), 'utf8');
     orbit = orbitizeHostedOrbit(JSON.parse(orbitText), hostRadiusKm, distance, `${o.source} (${o.url})`, `src/objects/${spec.id}/source/orbits/pick.json`);

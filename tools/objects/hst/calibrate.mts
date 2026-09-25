@@ -35,7 +35,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastFile, type MastFile } from '../astronomy-packages/mast.mts';
+import { mastFile, type MastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
 import { productRecordPath, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { writeProductRecord } from '@cssearth/telescope/node';

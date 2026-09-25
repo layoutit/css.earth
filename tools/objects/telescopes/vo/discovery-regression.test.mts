@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { loadVoInputs } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
-import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
+import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/telescope/node';
 import { associateTarget, instrumentFacetQuery, mastConeSelection, normalizeSnapshot, SERVICES, targetQuery, verifySnapshot } from './discovery.mts';
 import { sha256File } from '@cssearth/core/node';
 

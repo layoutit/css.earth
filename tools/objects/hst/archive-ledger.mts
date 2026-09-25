@@ -30,7 +30,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { firstSkyPosition } from '../archive-sky-position.mts';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastRequest } from '../astronomy-packages/mast.mts';
+import { mastRequest } from '@cssearth/telescope/node';
 import { evidenceFor, parseProductRecord, type ProductRecord } from '@cssearth/telescope';
 import { runDigest } from '@cssearth/telescope/node';
 import { parseHstProgram, PROGRAMS } from './archive.mts';

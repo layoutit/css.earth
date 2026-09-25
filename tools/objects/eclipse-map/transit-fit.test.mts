@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { hostSkyFrame, hostedOrbitStateRelativeBmjdTdb, type HostedOrbit } from '@cssearth/astronomy';
-import { fitTransit } from './transit.mts';
+import { fitTransit } from '@cssearth/telescope/node';
 
 function ringFlux(distance: number, radius: number, u1: number, u2: number, steps = 2500) {
   if (distance >= 1 + radius) return 1;

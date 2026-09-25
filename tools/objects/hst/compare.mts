@@ -24,7 +24,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '../interferometry/fits-table.mts';
-import { mastFile } from '../astronomy-packages/mast.mts';
+import { mastFile } from '@cssearth/telescope/node';
 import { addProductEvidence } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductRecord } from '@cssearth/telescope';
 import { PROGRAMS, suffixOf } from './archive.mts';

@@ -6,7 +6,7 @@ import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
 import { readProductScience } from './product-science.mts';
-import { pdsPackages } from '../astronomy-packages/pds-client.mts';
+import { pdsPackages } from '@cssearth/telescope/node';
 import { measureCubeResolution } from '../jwst/cubes/resolution.mts';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';

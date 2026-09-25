@@ -8,7 +8,7 @@ import { readProductScience } from '../product-science.mts';
 import { rememberQualification, type QualifiedObservation } from '../qualified-observations.mts';
 import { readProductRecord, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductRun } from '@cssearth/telescope';
-import { digest } from './contracts.mts';
+import { digest } from '@cssearth/telescope/node';
 import { acquireVoProduct, nativeQualificationRoute, type AcquisitionSpec } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
 import { qualifyEsoSpectrum } from './qualify-spectrum.mts';
@@ -89,7 +89,7 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec, poli
     inputs: [...acquisition.outputs.map(p => ({ role: 'acquired product and metadata', identity: p.path, bytes: p.bytes })),
       { role: 'acquisition record', identity: 'acquisition.json', ...await fileSize(acquired.record) }],
     parameters: { acquisition: spec.key, observation: { decoder: spec.decoder, kind: spec.kind, target: spec.request.target }, operation: spec.operation },
-    software: [...acquisition.software, { name: 'cssEarth native product qualification', version: digest(await Promise.all(['./qualify.mts', '../product-science.mts', '../native-metadata.mts', '../calibration-dependencies.mts', '../../astronomy-packages/science.mts', '../../astronomy-packages/requirements.lock'].map(path => readFile(new URL(path, import.meta.url), 'utf8')))) }] };
+    software: [...acquisition.software, { name: 'cssEarth native product qualification', version: digest(await Promise.all(['./qualify.mts', '../product-science.mts', '../native-metadata.mts', '../calibration-dependencies.mts', '../../../../packages/telescope/src/node/science.ts', '../../../../packages/telescope/toolchains/requirements.lock'].map(path => readFile(new URL(path, import.meta.url), 'utf8')))) }] };
   await writeProductRecord(productRecord, run, [...acquisition.outputs.map(p => ({ path: p.path, file: resolve(outputRoot, p.path) })),
     { path: 'acquisition.json', file: acquired.record }, { path: 'qualification.json', file: receipt },
     ...(facts.calibrationDependencies ?? []).flatMap(d => d.file ? [{ path: d.file, file: resolve(root, d.file) }] : [])],

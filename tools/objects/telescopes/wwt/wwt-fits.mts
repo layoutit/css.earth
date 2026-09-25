@@ -3,8 +3,8 @@ import { createHash } from 'node:crypto';
 import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { sciencePackage } from '../../astronomy-packages/science.mts';
-import { plotProduct } from '../../astronomy-packages/plots.mts';
+import { sciencePackage } from '@cssearth/telescope/node';
+import { plotProduct } from '@cssearth/telescope/node';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { FITS_SOURCE_SCHEMA } from '../fits-source.mts';
 
@@ -108,8 +108,8 @@ export async function acquireWwtFits(catalogPath: string, setName: string, level
     if (outputNames.length !== 4 || ['figure.png', 'figure.svg', 'values.csv', 'image.fits'].some(name => !outputNames.includes(name)))
       throw new Error('Astropy plotting returned an unexpected science product list.');
     const implementation = digest(Buffer.concat(await Promise.all([
-      new URL('wwt-fits.mts', import.meta.url), new URL('../../astronomy-packages/science.mts', import.meta.url),
-      new URL('../../astronomy-packages/plots.mts', import.meta.url),
+      new URL('wwt-fits.mts', import.meta.url), new URL('../../../../packages/telescope/src/node/science.ts', import.meta.url),
+      new URL('../../../../packages/telescope/src/node/plots.ts', import.meta.url),
     ].map(path => readFile(path)))));
     await writeProductRecord(resolve(staging, 'output.product.json'), {
       telescope: 'WorldWideTelescope hosted FITS collection', stage: 'telescope-wwt-fits',

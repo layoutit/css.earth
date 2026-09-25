@@ -27,7 +27,7 @@ import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrestrial-layers/junocam.mts';
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
 import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
-import { astroqueryRows } from '../astronomy-packages/client.mts';
+import { astroqueryRows } from '@cssearth/telescope/node';
 import { flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';

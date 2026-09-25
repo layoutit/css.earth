@@ -8,8 +8,8 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { parseProductRecord } from '@cssearth/telescope';
 import { sha256, sha256File } from '@cssearth/core/node';
-import { sciencePackage } from '../astronomy-packages/science.mts';
-import { plotProduct } from '../astronomy-packages/plots.mts';
+import { sciencePackage } from '@cssearth/telescope/node';
+import { plotProduct } from '@cssearth/telescope/node';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
 import { contextTarget, deliveryContext } from './delivery-context.mts';
 import { openFitsSource } from './fits-source.mts';
@@ -153,7 +153,7 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     const data=requireRecord(found[0].extraction);
     const plotted=await plotProduct(staging,d.target,data,input.file,{...request});
     const fresh=await delivery(resultPath);if(fresh.pin.sha256!==d.pin.sha256)throw new Error('Delivery changed while producing output');
-    const softwareFiles=['outputs.mts','native-figure.mts','native-metadata.mts','../astronomy-packages/pds-client.mts','../terrestrial-layers/isis3-raster.mts','../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
+    const softwareFiles=['outputs.mts','native-figure.mts','native-metadata.mts','../../../packages/telescope/src/node/pds-client.ts','../terrestrial-layers/isis3-raster.mts','../../../packages/telescope/src/node/science.ts','../../../packages/telescope/src/node/plots.ts','../../../packages/telescope/src/node/cube-outputs.ts','../../../packages/telescope/toolchains/requirements.lock'];
     const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
     const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,bytes:d.pin.bytes},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
     const names=requireArray(plotted.files).map(v=>requireString(v));
@@ -183,7 +183,7 @@ async function exportSourceOutput(source:NonNullable<Awaited<ReturnType<typeof o
     const plotted=await plotProduct(staging,label,data,file,{...request});
     const fresh=pds?await openPdsSource(source.path):await openFitsSource(source.path);
     if(!fresh||fresh.source.pin.sha256!==source.source.pin.sha256)throw new Error('Source changed while producing output');
-    const softwareFiles=['outputs.mts',pds?'pds-source.mts':'fits-source.mts',...(pds?['native-figure.mts','../astronomy-packages/pds-client.mts']:[]),'../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
+    const softwareFiles=['outputs.mts',pds?'pds-source.mts':'fits-source.mts',...(pds?['native-figure.mts','../../../packages/telescope/src/node/pds-client.ts']:[]),'../../../packages/telescope/src/node/science.ts','../../../packages/telescope/src/node/plots.ts','../../../packages/telescope/src/node/cube-outputs.ts','../../../packages/telescope/toolchains/requirements.lock'];
     const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),{

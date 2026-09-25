@@ -4,7 +4,7 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { OPUS_SERVICE, fetchOpus, type OpusFetch } from './opus.mts';
 import { deliverSource, type SavedSource, type SourceFile } from './archive-source.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
-import { parseLimits } from './vo/contracts.mts';
+import { parseLimits } from '@cssearth/telescope/node';
 
 const OPUS_ID = /^[a-z0-9][a-z0-9_-]{2,100}$/u;
 const FILE_ROOT = 'https://opus.pds-rings.seti.org/holdings/';

@@ -2,7 +2,7 @@
  * transit on the source-backed orbit; SciPy fits its time, radius ratio, limb darkening and quadratic baseline. The eclipse-map fit's
  * longitudes trade against eclipse timing, so the timing a map assumes has to be checked against the data. */
 import type { HostedOrbit } from '@cssearth/astronomy';
-import { fitTransit } from '../astronomy-packages/transit.mts';
+import { fitTransit } from '@cssearth/telescope/node';
 
 /** Mid-transit time in a light curve relative to the orbit's prediction, in seconds. The reported standard error is the local
  * Jacobian covariance scaled by reduced chi-squared, under the fixed orbit and quadratic baseline. Only samples within

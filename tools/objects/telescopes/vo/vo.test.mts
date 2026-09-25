@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 test.before(async () => { await astroqueryToolchain(); });
 import { mkdtemp, readFile, writeFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createServer } from 'node:http';
-import { astroquery, VoAccessError } from '../../astronomy-packages/client.mts';
-import { canonical, digest, parseMetadata, parseLimits, parseRegion, recordKey, acquisitionKey, type DiscoverySnapshot, type MetadataResponse, type Resource } from './contracts.mts';
+import { astroquery, VoAccessError } from '@cssearth/telescope/node';
+import { canonical, digest, parseMetadata, parseLimits, parseRegion, recordKey, acquisitionKey, type DiscoverySnapshot, type MetadataResponse, type Resource } from '@cssearth/telescope/node';
 import { associateTarget, fieldAssociation, normalizeSnapshot, SERVICES, targetQuery } from './discovery.mts';
 import { mediaType, planAccess, sodaParameters } from './access.mts';
 import { voUrl } from './network-policy.mts';

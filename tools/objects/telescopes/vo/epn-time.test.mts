@@ -4,9 +4,9 @@ const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '../../astronomy-packages/client.mts';
+import { astroquery } from '@cssearth/telescope/node';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
-import type { DiscoverySnapshot } from './contracts.mts';
+import type { DiscoverySnapshot } from '@cssearth/telescope/node';
 
 const field = (name: string, attributes = '') => `<FIELD name="${name}" ID="${name}" datatype="${name === 'time_scale' || name === 'time_refposition' ? 'char' : 'double'}"${name === 'time_scale' || name === 'time_refposition' ? ' arraysize="*"' : ' unit="d"'}${attributes}/>`;
 const xml = (fields: string, values: string, systems = '') => `<VOTABLE version="1.4" xmlns="http://www.ivoa.net/xml/VOTable/v1.3">${systems}<RESOURCE type="results"><INFO name="QUERY_STATUS" value="OK"/><TABLE>${fields}<DATA><TABLEDATA><TR>${values}</TR></TABLEDATA></DATA></TABLE></RESOURCE></VOTABLE>`;

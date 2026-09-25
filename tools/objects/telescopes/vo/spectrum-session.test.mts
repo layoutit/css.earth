@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '../../astronomy-packages/client.mts';
+import { astroquery } from '@cssearth/telescope/node';
 import { saveExploration, getSession, type SessionServices } from '../session.mts';
 import { loadQualifiedObservations } from '../qualified-observations.mts';
 import { listArtifactOutputs } from '../artifact-outputs.mts';

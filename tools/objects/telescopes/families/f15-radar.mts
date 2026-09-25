@@ -1,7 +1,7 @@
 /** F15 native delay-Doppler FITS raster: retain radar axes and never promote it to sky geometry. */
 import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
-import{ plotNumericPreview ,type FigureOptions}from'../../astronomy-packages/plots.mts';
+import { plotNumericPreview, type FigureOptions } from '@cssearth/telescope/node';
 import { descriptor, stable } from './common.mts';
 import { requireFiniteNumber as finite } from '@cssearth/core';
 export interface RadarImage {readonly width:number;readonly height:number;readonly bitpix:number;readonly dataOffset:number;readonly bytes:Buffer}

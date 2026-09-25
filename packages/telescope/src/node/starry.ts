@@ -1,23 +1,21 @@
-#!/usr/bin/env node
 /** starry owns spherical-harmonic brightness maps, their intensities and the star-planet light curves they make (Luger et al. 2019).
  * cssEarth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
- * (starry-toolchain.json says why). Install: node tools/objects/astronomy-packages/starry.mts install */
+ * (starry-toolchain.json says why). Install: node tools/objects/astronomy-toolchains.mts starry install */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from '../toolchain-process.mts';
+import { runToolchainProcess } from './toolchain-process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { TOOLCHAINS, WORKSPACE } from './paths.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-const repository = resolve(import.meta.dirname, '../../..');
-export const STARRY_ROOT = resolve(repository, 'output/toolchains/starry');
+export const STARRY_ROOT = resolve(WORKSPACE, 'output/toolchains/starry');
 
 function descriptor() {
-  const text = readFileSync(resolve(import.meta.dirname, 'starry-toolchain.json'), 'utf8');
+  const text = readFileSync(resolve(TOOLCHAINS, 'starry-toolchain.json'), 'utf8');
   const entry = requireRecord(JSON.parse(text) as unknown, 'starry-toolchain.json');
-  const lock = readFileSync(resolve(import.meta.dirname, requireString(entry.requirements, 'requirements')), 'utf8');
+  const lock = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8');
   return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
 
@@ -30,7 +28,7 @@ export async function installStarry() {
     ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
   // The lock is hash-pinned and complete; Theano-PyMC builds against the environment's NumPy.
   runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
-    resolve(import.meta.dirname, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
+    resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(STARRY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   await writeFile(resolve(STARRY_ROOT, 'installed.json'), `${JSON.stringify({ id: 'starry', pinsSha256: digest }, null, 2)}\n`);
   verifyStarry();
@@ -43,8 +41,8 @@ export function starryToolchainSync(): StarryToolchain {
   const { entry, digest } = descriptor(), bin = resolve(STARRY_ROOT, 'env/bin'), python = resolve(bin, 'python');
   let marker: Record<string, unknown>;
   try { marker = requireRecord(JSON.parse(readFileSync(resolve(STARRY_ROOT, 'installed.json'), 'utf8')) as unknown); }
-  catch { throw new Error('The starry toolchain is not installed: node tools/objects/astronomy-packages/starry.mts install'); }
-  if (marker.pinsSha256 !== digest) throw new Error('The starry toolchain was installed from other pins; reinstall it: node tools/objects/astronomy-packages/starry.mts install');
+  catch { throw new Error('The starry toolchain is not installed: node tools/objects/astronomy-toolchains.mts starry install'); }
+  if (marker.pinsSha256 !== digest) throw new Error('The starry toolchain was installed from other pins; reinstall it: node tools/objects/astronomy-toolchains.mts starry install');
   try { accessSync(python); } catch { throw new Error(`The starry toolchain has no python at ${python}.`); }
   // Theano writes its compiled operators under the toolchain, and an empty home keeps a user's ~/.theanorc out of the result.
   const home = resolve(STARRY_ROOT, 'home'); mkdirSync(home, { recursive: true });
@@ -133,11 +131,4 @@ export function verifyStarry() {
   const { entry } = descriptor();
   if (found !== requireString(entry.starry)) throw new Error(`Expected starry ${String(entry.starry)}, found ${found}.`);
   return found;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [mode] = process.argv.slice(2);
-  if (mode === 'install') console.log(`starry is installed at ${await installStarry()}`);
-  else if (mode === 'verify') console.log(`starry ${verifyStarry()} ready`);
-  else throw new TypeError('Usage: starry <install|verify>');
 }

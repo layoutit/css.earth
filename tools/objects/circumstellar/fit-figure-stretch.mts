@@ -16,7 +16,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { mastFile } from '../astronomy-packages/mast.mts';
+import { mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '../jwst/imaging/image3.mts';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { readSkyPlane } from './disc-envelope.mts';

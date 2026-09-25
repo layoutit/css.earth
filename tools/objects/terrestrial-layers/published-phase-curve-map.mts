@@ -6,9 +6,9 @@
  *   curve for an edge-on orbit: each map sinusoid of order j makes a light-curve sinusoid of the same order and phase, scaled by
  *   2 (j = 0), pi/2 (j = 1) and 2/3 (j = 2). The map carries no latitude information and is drawn the same at every latitude.
  * - `spiderman-spherical`: the fit's SPIDERMAN spherical-harmonic coefficients, evaluated by SPIDERMAN itself
- *   (`astronomy-packages/spiderman.mts`).
+ *   (`@cssearth/telescope/node`, spiderman.ts).
  * - `starry`: the fit's starry map (amplitude, spherical-harmonic coefficients and phase offset), evaluated by starry itself
- *   (`astronomy-packages/starry.mts`). The offset turns the map east: starry's own frame puts the brightest point of a Y(1,0)
+ *   (`@cssearth/telescope/node`, starry.ts). The offset turns the map east: starry's own frame puts the brightest point of a Y(1,0)
  *   dipole at its longitude 0, so the map here is starry's intensity at longitude - offset.
  *
  * Both give the planet's intensity relative to the star's disc-averaged intensity, r. A uniform planet of intensity ratio r shows the
@@ -27,8 +27,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
-import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap } from '../astronomy-packages/spiderman.mts';
-import { starryMapGrid, type StarryMap, type StarrySystem } from '../astronomy-packages/starry.mts';
+import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap } from '@cssearth/telescope/node';
+import { starryMapGrid, type StarryMap, type StarrySystem } from '@cssearth/telescope/node';
 
 const cell = (value: unknown, label: string) => requireFiniteNumber(requireRecord(value, label).value, `${label}.value`);
 

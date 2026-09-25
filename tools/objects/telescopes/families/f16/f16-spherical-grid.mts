@@ -2,7 +2,7 @@
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { astroqueryToolchain } from '../../../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { sha256 } from '@cssearth/core/node';
 import { encodeDensityKtx2 } from '../../../../../src/preparation/volume/acquisition.ts';
 import type { FamilyHandler, FamilyOperation } from '../../family-handlers.mts';

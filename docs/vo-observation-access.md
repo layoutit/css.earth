@@ -1,6 +1,6 @@
 # VO observation access
 
-The Telescope CLI uses the same saved query, numbered choice, qualification and delivery flow for VO archive products. PyVO 1.9.1 owns TAP, VOTable, DataLink and synchronous SODA protocol operations in `astronomy-packages/client.mts`. The `telescopes/vo/` modules own archive identity, target association, access choices and receipts. Existing native-product qualification and figure exporters read the acquired FITS file.
+The Telescope CLI uses the same saved query, numbered choice, qualification and delivery flow for VO archive products. PyVO 1.9.1 owns TAP, VOTable, DataLink and synchronous SODA protocol operations in `@cssearth/telescope/node` (`packages/telescope/src/node/astroquery.ts`). The `telescopes/vo/` modules own archive identity, target association, access choices and receipts. Existing native-product qualification and figure exporters read the acquired FITS file.
 
 ```sh
 telescope query betelgeuse --wavelength 0.78,0.85 --kind image \

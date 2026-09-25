@@ -13,7 +13,7 @@ import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
  * Reference files are not part of the environment: CRDS fetches the ones a pinned context selects into the cache under this
  * root the first time a calibration runs (calibrate.mts). */
 import { spawnSync } from 'node:child_process';
-import { runToolchainProcess } from '../toolchain-process.mts';
+import { runToolchainProcess } from '@cssearth/telescope/node';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

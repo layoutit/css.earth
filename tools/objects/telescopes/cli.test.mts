@@ -188,7 +188,7 @@ test('query continuation quotes shell metacharacters without command substitutio
 });
 
 test('query puts failed providers before bounded candidate blockers and preserves full verbose evidence',()=>{
-  const reason='The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install';
+  const reason='The astronomy packages are not installed: node tools/objects/astronomy-toolchains.mts astroquery install';
   const candidates=Array.from({length:30},(_,index)=>({telescope:`Facility ${index}`,mode:`Mode ${index}`,selectionAssessment:{blockers:[{reason:index===29?'A final recorded reason.':`An unrelated historical note ${index}. ${'Long detail '.repeat(40)}`}]}}));
   const session={target:'fixture',choices:[],answer:{request:{kind:'spectrum',wavelengthMicrometres:[0.3,0.8]},targetResolution:{status:'resolved'},endpoint:{status:'no-selectable-candidate',coverage:'incomplete'},candidates,
     targetCoverage:[],sourceIntakeIssues:[],archiveAccess:{services:['ESO','ALMA','PSA'].map(service=>({service,state:'unavailable',reason})),records:[]}}} as unknown as Session;
@@ -314,7 +314,7 @@ test('no-choice exploration distinguishes incomplete, unsupported, bounded-empty
 });
 
 test('terminal groups a shared provider failure but keeps every provider in verbose and saved data',()=>{
-  const initial=exploration('/tmp/provider-failure'),reason='Target-name query. The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install';
+  const initial=exploration('/tmp/provider-failure'),reason='Target-name query. The astronomy packages are not installed: node tools/objects/astronomy-toolchains.mts astroquery install';
   const issues=['ESO','ALMA','PSA'].map(identity=>({scope:'provider' as const,code:'provider-unavailable' as const,identity,reason}));
   const session={...initial,arguments:['HD 189733','--kind','spectrum'],choices:[],answer:{...initial.answer,choices:[],issues,unresolved:[],unsupported:[],outcome:{selection:'none' as const,coverage:'incomplete' as const}}};
   const screen=formatExploration(session);

@@ -23,7 +23,7 @@ import { pipeline } from 'node:stream/promises';
 import { Transform } from 'node:stream';
 import { sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { tapRows } from '../astronomy-packages/client.mts';
+import { tapRows } from '@cssearth/telescope/node';
 
 export const KOA = 'https://koa.ipac.caltech.edu';
 export const TAP_SYNC = `${KOA}/TAP`;

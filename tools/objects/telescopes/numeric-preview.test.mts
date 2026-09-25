@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { PNG } from 'pngjs';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { plotNumericPreview } from './plots.mts';
+import { plotNumericPreview } from '@cssearth/telescope/node';
 
 const root=resolve(import.meta.dirname,'../../..');
 

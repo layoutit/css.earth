@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroqueryToolchain } from '../../../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { fileSize, readProductRecord } from '@cssearth/telescope/node';
 import { executeFamilyOperation } from '../../family-operation.mts';
 import { executableFamilyOperations } from '../../family-operation.mts';

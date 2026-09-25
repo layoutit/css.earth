@@ -26,7 +26,7 @@ import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastFile } from '../astronomy-packages/mast.mts';
+import { mastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
