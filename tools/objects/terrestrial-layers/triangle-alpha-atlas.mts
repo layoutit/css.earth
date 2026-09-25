@@ -13,7 +13,7 @@ interface Write { kind: string; target?: number; name?: string; resource?: strin
 interface Definition { tree: { nodes: { parent: number; tag: string; className?: string; style: string | null }[] }; variants: { writes: Write[] }[];
   assets: { entries: Entry[]; fallbacks?: { unsupported: string; resources: Record<string, string> }[] } }
 
-/** The mask ends at the triangle's edges, antialiased over one atlas pixel. Raster-sized leaves are scaled about 30×
+/** The mask ends at the triangle's edges, antialiased over one atlas pixel. Raster-sized leaves are scaled about 60×
  * onto their faces, so growing the triangle by even one pixel pushed spikes out of every narrow apex. */
 const EDGE_BLEED = 0;
 

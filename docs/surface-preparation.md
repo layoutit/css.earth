@@ -320,9 +320,19 @@ historical processing examples, not new browser checks.
 
 For mesh surfaces, preparation samples each retained triangle into its own
 raster rectangle and emits a native PolyCSS `u` triangle with prepared CSS addresses.
-As in PolyCSS raster sizing, the rectangle is sized by the triangle: one leaf pixel
-is one atlas texel, and every triangle of a body has the same texel density. The
-recipe's `texelsPerFace` sets the body's budget: its face count times that value.
+As in PolyCSS raster sizing, the rectangle is sized by the triangle, so every
+triangle of a body has the same texel density. The leaf shows its rectangle like
+any `@2x` image, at two atlas texels per CSS pixel, and its matrix scales it back
+onto the face. WebKit backs each composited leaf at its box size times the device
+pixel ratio and ignores the transform: at one texel per CSS pixel, Itokawa's 794
+faces held 486 MB of layer memory on a DPR 3 iPhone, and 173 MB at two
+([radial-terrain.mts](../tools/objects/terrestrial-layers/radial-terrain.mts)). At
+rest, 739 of 3.16 million screen pixels change; at maximum zoom each face is drawn
+at half the resolution, so a seam can show as a faint light line ([seam repair](#seam-repair-and-the-globe-interior-disc)).
+
+![Itokawa on the iPhone 17 simulator at rest and at maximum zoom: one texel per CSS pixel, two, and their Pixelmatch difference at threshold 0.1](images/raster-leaf-2x.webp)
+
+The recipe's `texelsPerFace` sets the body's budget: its face count times that value.
 The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles
 several times fewer texels per metre than small ones, at the same bytes.
@@ -334,7 +344,7 @@ ellipse and each face shows an oval of its slice. For every atlas a `u` face rea
 therefore writes a second copy, `<name>-alpha@2x.webp`, whose slices are transparent
 outside their triangle. The mask is the union of the faces that read that atlas in
 some variant, antialiased over one texel and never grown: at the raster sizing's
-roughly 30× leaf scale, even a one-texel margin showed as spikes past narrow apexes.
+roughly 60× leaf scale, even a one-texel margin showed as spikes past narrow apexes.
 The runtime declares the copies as `corner-shape` resource fallbacks and swaps them in
 once per page when `CSS.supports` reports the capability missing
 ([prepared-resource-fallbacks.ts](../src/renderers/css/rendering/prepared-resource-fallbacks.ts)),
@@ -578,7 +588,12 @@ hidden, so any crack is a thin non-white line inside the body):
 
 Surface detail is unchanged: Itokawa's mean surface detail (absolute Laplacian
 over pixels that are neither crack nor sky) is 1.572 without overlap and 1.669
-with it; Ida's is 0.912 and 0.918. Pixelmatch between two overlap sizes differs
+with it; Ida's is 0.912 and 0.918. These counts were measured with leaves at
+one texel per CSS pixel. At two, Safari draws each face at half the
+resolution: at Itokawa's maximum zoom on a DPR 3 iPhone, a seam that was barely
+visible shows as a faint light line across a dark patch. The crack census has not been repeated at two texels per pixel.
+
+Pixelmatch between two overlap sizes differs
 across the whole surface, because the atlas is packed again and every texel moves
 by a fraction of a pixel; only same-layout comparisons measure a change in what is
 drawn.
