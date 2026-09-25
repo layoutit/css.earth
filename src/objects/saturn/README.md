@@ -1,7 +1,8 @@
 # Saturn sources
 
-Saturn combines Hubble OPAL and Cassini visible imagery, Hubble spectral maps,
-a Cassini UVIS ring opacity profile, schematic thermal and interior views, and modeled atmosphere charts.
+Saturn combines a Hubble OPAL visible body map, Hubble spectral maps, a Cassini
+UVIS ring opacity profile, schematic thermal and interior views, and modeled
+atmosphere charts.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -9,7 +10,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 | View or quantity | Source |
 | --- | --- |
-| Visible body | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32) rotation-A F395N/F502N/F631N global map, 2025-08-29, and [Cassini PIA21611](https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/) for the north polar cap |
+| Visible body | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32) rotation-A F395N/F502N/F631N global map, 2025-08-29; unobserved polar and ring-occluded rows are filled during preparation |
 | Ring opacity profile | [Cassini UVIS HSP alpha Virginis occultation, 2006 day 285](https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL), 1 km bins, PDS CO-SR-UVIS-HSP-2/4-OCC-V3.0 |
 | Ultraviolet and methane bands | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32), 2025 |
 | Ring boundaries and motion | [PDS ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html) and JPL SAT441 |
@@ -142,19 +143,11 @@ is not a source of runtime pixels.
 - UVIS occultation profile `UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB`:
   `65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341`
 
-The OPAL map does not observe the pole itself. The north-polar surface
-therefore uses NASA Cassini product
-[`PIA21611`](https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/),
-credited to NASA/JPL-Caltech/Space Science Institute/Hampton University. The
-downloaded 2,048 x 1,024 JPEG contains the 2013 and 2017 natural-color maps side
-by side; preparation selects the 1,024 x 1,024 2017 map. NASA documents the
-product as a north-polar stereographic projection at approximately 25 km per
-pixel, assembled from Cassini ISS wide-angle red, green, and blue observations.
-The pinned input is `source/cassini-pia21611.jpg`, SHA-256
-`2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177`.
-It is retained with the source's full credit under the
-[NASA media usage guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/)
-and [JPL image use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/).
+The OPAL map does not observe the pole itself. The declared unobserved rows are
+filled by latitude interpolation before both polar caps are projected. The
+default body therefore remains one Hubble epoch and color treatment instead of
+pasting a 2017 Cassini polar image over the 2025 Hubble map. This fill supplies
+no measured cloud detail inside the missing rows.
 
 </details>
 
@@ -318,13 +311,10 @@ raster leaf, giving the textured bands a 2,048 x 896 prepared paint density.
 
 The polar regions are projected offline into the lossless 4,096 x 512
 `saturn-poles.webp` atlas instead of being represented by solid triangle fans.
-The north disc inversely maps each prepared sample into PIA21611's declared
-25 km-per-pixel stereographic projection using the 60,268 km
-equatorial radius. The outer six percent of the disc uses a smooth prepared
-transition to the OPAL map after matching the three mean boundary
-channels; this removes the source-product edge without hiding the hexagon or
-adding a runtime blend. The south disc remains sourced from the OPAL
-equirectangular map, whose southernmost observed row is at 87.4 degrees. The atlas contains separate 512 x 512 north/south albedo
+Both discs inversely map each prepared sample into the filled OPAL
+equirectangular map. The north pole uses the repeated nearest observed row
+north of 82.8 degrees; the south pole uses the repeated nearest observed row
+south of 87.4 degrees. The atlas contains separate 512 x 512 north/south albedo
 and fixed-world material tiles for both visible polar discs and two larger caps
 inset behind their boundaries. The inset tiles clamp their outer samples to the
 visible caps' exact source and material boundary, so they close subpixel raster
@@ -365,9 +355,10 @@ stores the pearl-blue, view- and
 light-dependent limb response from prepared oblate normal samples over the solar
 attenuation. CSS therefore paints one material background over the surface
 instead of separate atmosphere and shadow layers. The earlier project-authored
-three-storm texture is no longer rendered: the visible dataset now contains only
-the declared Hubble body, Cassini polar cap, Cassini UVIS rings and prepared
-lighting presentation.
+three-storm texture and the cross-mission Cassini polar cap are no longer
+rendered: the visible body now contains only the declared Hubble map and its
+explicit row fills, alongside the separately declared Cassini UVIS rings and
+prepared lighting presentation.
 
 The 32 x 16 globe topology uses 448 textured body faces between two prepared
 polar regions. The continuous prepared material field and the 0.8% presentation

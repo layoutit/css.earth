@@ -217,7 +217,8 @@ test('Saturn binds its actual base material and all contributing recipe identiti
   for (const id of ['normal', 'ultraviolet', 'methane', 'thermal', 'cross-section']) {
     const sources = productSourceIds(document, id);
     assert.ok(sources.includes('hubble-opal-saturn-2025a-visible'), id);
-    assert.ok(sources.includes('cassini-pia21611-polar-map'), id);
+    // The 2017 Cassini north-pole cap is excluded (investigations.json): both caps project the OPAL map.
+    assert.ok(!sources.includes('cassini-pia21611-polar-map'), id);
     assert.ok(sources.includes('cassini-uvis-alpvir-2006-285-occultation'), id);
     assert.ok(requireValue(document.products.find(product => product.id === id), `Saturn ${id} product`).recipeDependencies.includes('geometry'), id);
   }

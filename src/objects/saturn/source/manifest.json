@@ -35,43 +35,6 @@
       }
     },
     {
-      "id": "cassini-pia21611-polar-map",
-      "path": "cassini-pia21611.jpg",
-      "origin": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
-      "credit": "NASA/JPL-Caltech/Space Science Institute/Hampton University",
-      "license": "NASA and JPL public media reuse policies; the source page carries no separate copyright restriction",
-      "licenseEvidence": [
-        "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
-        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-      ],
-      "acquisition": "checked PIA21611 product snapshot",
-      "redistribution": "checked source image and prepared derivative with the full source credit and no endorsement claim",
-      "consumers": [
-        "scene"
-      ],
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-cassini-pia21611-polar-map",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "saturn-approved-fixed-material",
       "path": "approved/saturn-fixed-material.webp",
       "origin": "accepted cssEarth Saturn fixed-camera material prepared from the declared Saturn surface, rings, camera, lighting, and atmosphere model",

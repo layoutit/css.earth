@@ -134,13 +134,6 @@ const RING_SHADOW_DIRECT_TRANSMISSION =
 const RING_SHADOW_FOOTPRINT_BLUR_SIGMA = config.parameters.ringShadowFootprintBlurSigma;
 const PLANET_SOURCE_TEXTURE_WIDTH = config.parameters.planetSourceTextureWidth;
 const PLANET_SOURCE_TEXTURE_HEIGHT = config.parameters.planetSourceTextureHeight;
-const POLAR_OBSERVATION_POLAR_SOURCE_WIDTH = config.parameters.polarObservationPolarSourceWidth;
-const POLAR_OBSERVATION_POLAR_SOURCE_HEIGHT = config.parameters.polarObservationPolarSourceHeight;
-const POLAR_OBSERVATION_POLAR_TILE_SIZE = config.parameters.polarObservationPolarTileSize;
-const POLAR_OBSERVATION_2017_TILE_LEFT = config.parameters.polarObservation_2017TileLeft;
-const POLAR_OBSERVATION_POLAR_CENTER = POLAR_OBSERVATION_POLAR_TILE_SIZE / 2;
-const POLAR_OBSERVATION_POLAR_KM_PER_PIXEL = config.parameters.polarObservationPolarKmPerPixel;
-const POLAR_OBSERVATION_POLAR_BLEND_START = config.parameters.polarObservationPolarBlendStart;
 const PLANET_FRAME_WIDTH = config.parameters.planetFrameWidth;
 const PLANET_FRAME_HEIGHT = config.parameters.planetFrameHeight;
 const PLANET_ROTATION_SECONDS = config.parameters.planetRotationSeconds;
@@ -309,7 +302,6 @@ const PLAN_OPTIONS = Object.freeze({
 });
 
 const PLANET_SOURCE_TEXTURE_PATH = resolve(sourceDirectory, config.sources.surface);
-const POLAR_OBSERVATION_POLAR_SOURCE_PATH = resolve(sourceDirectory, config.sources.polarObservation);
 const PLANET_SURFACE_TEXTURE_PATH = resolve(stagingDirectory, config.files.surface);
 const PLANET_BODY_SURFACE_TEXTURE_PATH = resolve(publicDirectory, config.files.bodySurface);
 const PLANET_POLAR_TEXTURE_PATH = resolve(publicDirectory, config.files.poles);
@@ -1834,10 +1826,8 @@ async function prepareNormalMaterialMasters() {
     maximumLightingFactor,
   );
   await prepareSolarTintedSurface(surfaceChannelFactors);
-  const [metadata, polarObservationMetadata, preparedSurface] =
-    await Promise.all([
+  const [metadata, preparedSurface] = await Promise.all([
     sharp(PLANET_SOURCE_TEXTURE_PATH).metadata(),
-    sharp(POLAR_OBSERVATION_POLAR_SOURCE_PATH).metadata(),
     sharp(PLANET_SURFACE_TEXTURE_PATH)
       .ensureAlpha()
       .raw()
@@ -1849,12 +1839,6 @@ async function prepareNormalMaterialMasters() {
     || metadata.height !== expectedSourceHeight
   ) {
     throw new Error("Ellipsoid source texture dimensions changed.");
-  }
-  if (
-    polarObservationMetadata.width !== POLAR_OBSERVATION_POLAR_SOURCE_WIDTH
-    || polarObservationMetadata.height !== POLAR_OBSERVATION_POLAR_SOURCE_HEIGHT
-  ) {
-    throw new Error("Polar observation polar source dimensions changed.");
   }
   if (!Number.isInteger(PLANET_SOURCE_CELL_WIDTH)
     || !Number.isInteger(PLANET_SOURCE_CELL_HEIGHT)) {
@@ -1910,7 +1894,6 @@ async function prepareNormalMaterialMasters() {
     maximumLightingFactor,
     objectLight: initialObjectLight,
     objectView: initialObjectView,
-    surfaceChannelFactors,
   });
   const defaultFixedMaterial = prepareFixedMaterialPlane({
     ringData: filteredRingShadowData,
@@ -2371,21 +2354,14 @@ async function composePlanetTextures({
         innerBoundarySampling: "outer-cap-boundary-clamped",
         fixedWorldMaterial: true,
         runtimeMath: false,
+        // The north cap is the OPAL map's own projection: its unobserved rows are filled as the body's are.
         northSource: Object.freeze({
-          product: config.labels.label008,
-          sourcePath: config.labels.label009,
-          sourceTile: Object.freeze({
-            x: POLAR_OBSERVATION_2017_TILE_LEFT,
-            y: 0,
-            width: POLAR_OBSERVATION_POLAR_TILE_SIZE,
-            height: POLAR_OBSERVATION_POLAR_TILE_SIZE,
-          }),
-          projection: "north-polar-stereographic",
-          sourceKmPerPixel: POLAR_OBSERVATION_POLAR_KM_PER_PIXEL,
-          boundaryBlendStart: POLAR_OBSERVATION_POLAR_BLEND_START,
-          boundaryAuthority: config.labels.label010,
-          authority:
-            config.labels.label011,
+          product: config.labels.label010,
+          sourcePath: config.labels.label006,
+          projection: "prepared-equirectangular-to-polar",
+          unobservedRows: config.surfaceUnobservedRows ?? [],
+          unobservedRowFill: "linear-latitude-interpolation",
+          authority: config.labels.label011,
         }),
       }),
       atlasWidth: PLANET_SOURCE_TEXTURE_WIDTH,
@@ -2784,31 +2760,12 @@ async function preparePolarTextureAtlas({
   maximumLightingFactor,
   objectLight,
   objectView,
-  surfaceChannelFactors,
-}:Omit<RingRaster,'foregroundRingData'|'ringData'> & {ringData:Uint8Array;objectLight:ReadonlyVector3;objectView:ReadonlyVector3;surfaceChannelFactors:readonly number[]}) {
-  const [surface, polarObservationNorthPolar] = await Promise.all([
-    sharp(PLANET_SURFACE_TEXTURE_PATH)
-      .ensureAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true }),
-    sharp(POLAR_OBSERVATION_POLAR_SOURCE_PATH)
-      .extract({
-        left: POLAR_OBSERVATION_2017_TILE_LEFT,
-        top: 0,
-        width: POLAR_OBSERVATION_POLAR_TILE_SIZE,
-        height: POLAR_OBSERVATION_POLAR_TILE_SIZE,
-      })
-      .removeAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true }),
-  ]);
+}:Omit<RingRaster,'foregroundRingData'|'ringData'> & {ringData:Uint8Array;objectLight:ReadonlyVector3;objectView:ReadonlyVector3}) {
+  const surface = await sharp(PLANET_SURFACE_TEXTURE_PATH)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
   const { data: surfaceData, info: surfaceInfo } = surface;
-  const polarObservationBoundaryGains = preparePolarObservationBoundaryGains({
-    surfaceData,
-    surfaceInfo,
-    polarObservationNorthPolar,
-    surfaceChannelFactors,
-  });
   const output = Buffer.alloc(
     PLANET_POLAR_TEXTURE_WIDTH * PLANET_POLAR_TEXTURE_HEIGHT * 4,
   );
@@ -2855,16 +2812,7 @@ async function preparePolarTextureAtlas({
                 sample,
                 projectedRadius,
               );
-              const surface = pole === "north"
-                ? samplePolarObservationNorthPolarRgba({
-                  sourceSurface,
-                  polarObservationNorthPolar,
-                  sample,
-                  radius: projectedRadius,
-                  surfaceChannelFactors,
-                  boundaryGains: polarObservationBoundaryGains,
-                })
-                : sourceSurface;
+              const surface = sourceSurface;
               for (let channel = 0; channel < 3; channel += 1) {
                 surfaceChannels[channel] += surface[channel];
               }
@@ -2937,120 +2885,6 @@ function preparePolarSample(pole:"north"|"south", unitX:number, unitY:number, ra
     sourceX: longitude / (Math.PI * 2) * PLANET_SOURCE_TEXTURE_WIDTH - 0.5,
     sourceY: (Math.PI / 2 - latitude) / Math.PI * PLANET_SOURCE_TEXTURE_HEIGHT - 0.5,
   };
-}
-
-function preparePolarObservationBoundaryGains({
-  surfaceData,
-  surfaceInfo,
-  polarObservationNorthPolar,
-  surfaceChannelFactors,
-}: {surfaceData:Uint8Array;surfaceInfo:PixelImage['info'];polarObservationNorthPolar:PixelImage;surfaceChannelFactors:readonly number[]}) {
-  const sourceTotals = [0, 0, 0];
-  const polarObservationTotals = [0, 0, 0];
-  const sampleCount = 720;
-  const boundaryRadius = 0.965;
-  for (let index = 0; index < sampleCount; index += 1) {
-    const angle = index / sampleCount * Math.PI * 2;
-    const unitX = Math.cos(angle) * boundaryRadius;
-    const unitY = Math.sin(angle) * boundaryRadius;
-    const sample = preparePolarSample("north", unitX, unitY, boundaryRadius);
-    const sourceSample = samplePolarSurfaceRgba(
-      surfaceData,
-      surfaceInfo,
-      sample,
-      boundaryRadius,
-    );
-    const polarObservation = samplePolarObservationSourceRgba(
-      polarObservationNorthPolar,
-      sample,
-      surfaceChannelFactors,
-    );
-    for (let channel = 0; channel < 3; channel += 1) {
-      sourceTotals[channel] += sourceSample[channel];
-      polarObservationTotals[channel] += polarObservation[channel];
-    }
-  }
-  return sourceTotals.map((total, channel) => Math.max(
-    0.65,
-    Math.min(1.45, total / polarObservationTotals[channel]),
-  ));
-}
-
-function samplePolarObservationNorthPolarRgba({
-  sourceSurface,
-  polarObservationNorthPolar,
-  sample,
-  radius,
-  surfaceChannelFactors,
-  boundaryGains,
-}: {sourceSurface:readonly number[];polarObservationNorthPolar:PixelImage;sample:ReturnType<typeof preparePolarSample>;radius:number;surfaceChannelFactors:readonly number[];boundaryGains:readonly number[]}) {
-  const polarObservation = samplePolarObservationSourceRgba(
-    polarObservationNorthPolar,
-    sample,
-    surfaceChannelFactors,
-  );
-  const boundaryAmount = smootherStep(
-    POLAR_OBSERVATION_POLAR_BLEND_START,
-    1,
-    radius,
-  );
-  return [0, 1, 2].map((channel) => mix(
-    Math.max(0, Math.min(255, polarObservation[channel] * boundaryGains[channel])),
-    sourceSurface[channel],
-    boundaryAmount,
-  )).concat(sourceSurface[3]);
-}
-
-function samplePolarObservationSourceRgba(
-  polarObservationNorthPolar:PixelImage,
-  sample:ReturnType<typeof preparePolarSample>,
-  surfaceChannelFactors:readonly number[],
-) {
-  const projectedRadiusKm = 2 * OBJECT_EQUATORIAL_RADIUS_KM * Math.tan(
-    (Math.PI / 2 - sample.latitude) / 2,
-  );
-  const pixelRadius = projectedRadiusKm / POLAR_OBSERVATION_POLAR_KM_PER_PIXEL;
-  const sourceX = POLAR_OBSERVATION_POLAR_CENTER + Math.cos(sample.longitude) * pixelRadius;
-  const sourceY = POLAR_OBSERVATION_POLAR_CENTER - Math.sin(sample.longitude) * pixelRadius;
-  const sampled = sampleClampedBilinearRgb(
-    polarObservationNorthPolar.data,
-    polarObservationNorthPolar.info,
-    sourceX,
-    sourceY,
-  );
-  return sampled.map((channel, index) => applyLinearTint(
-    channel,
-    surfaceChannelFactors[index],
-  )).concat(255);
-}
-
-function sampleClampedBilinearRgb(data:Uint8Array, info:PixelImage['info'], sourceX:number, sourceY:number) {
-  const x = Math.max(0, Math.min(info.width - 1, sourceX));
-  const y = Math.max(0, Math.min(info.height - 1, sourceY));
-  const x0 = Math.floor(x);
-  const y0 = Math.floor(y);
-  const x1 = Math.min(info.width - 1, x0 + 1);
-  const y1 = Math.min(info.height - 1, y0 + 1);
-  const xAmount = x - x0;
-  const yAmount = y - y0;
-  return [0, 1, 2].map((channel) => {
-    const top = mix(
-      data[(y0 * info.width + x0) * info.channels + channel],
-      data[(y0 * info.width + x1) * info.channels + channel],
-      xAmount,
-    );
-    const bottom = mix(
-      data[(y1 * info.width + x0) * info.channels + channel],
-      data[(y1 * info.width + x1) * info.channels + channel],
-      xAmount,
-    );
-    return mix(top, bottom, yAmount);
-  });
-}
-
-function smootherStep(edge0:number, edge1:number, value:number) {
-  const amount = Math.max(0, Math.min(1, (value - edge0) / (edge1 - edge0)));
-  return amount * amount * amount * (amount * (amount * 6 - 15) + 10);
 }
 
 function samplePolarSurfaceRgba(data:Uint8Array, info:PixelImage['info'], sample:ReturnType<typeof preparePolarSample>, radius:number) {

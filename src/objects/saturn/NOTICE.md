@@ -17,12 +17,9 @@ The interior section textures are project-authored schematic rasters derived
 from cited measurements and terminology; no pixels from the NASA/JPL interior
 illustration are redistributed.
 
-The checked PIA21611 source image and prepared north-polar albedo retain the
-full credit NASA/JPL-Caltech/Space Science Institute/Hampton University. Their
-reuse is recorded against NASA's media guidelines and JPL's image use policy
-in `source/manifest.json`. NASA, JPL, and the NASA PDS Ring-Moon Systems Node
-are also measurement and reference authorities for the prepared radii,
+NASA, JPL, and the NASA PDS Ring-Moon Systems Node are measurement and reference
+authorities for the prepared radii,
 rotation values, ring boundaries, and shadow phenomena. NASA does not endorse
 this presentation. The accelerated time scale, fixed camera, static light
-direction, prepared dust selection, visual scale, polar boundary match, and
+direction, prepared dust selection, visual scale, polar row fill, and
 PolyCSS topology are presentation choices documented in `README.md`.
