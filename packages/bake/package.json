@@ -11,11 +11,13 @@
   "exports": {
     "./volume": {
       "types": "./dist/volume.d.ts",
-      "import": "./dist/volume.js"
+      "import": "./dist/volume.js",
+      "default": "./dist/volume.js"
     },
     "./volume/node": {
       "types": "./dist/volume/node.d.ts",
-      "import": "./dist/volume/node.js"
+      "import": "./dist/volume/node.js",
+      "default": "./dist/volume/node.js"
     },
     "./package.json": "./package.json"
   },
