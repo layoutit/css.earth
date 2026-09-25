@@ -67,7 +67,7 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     ? await simplifyRadialTerrain(grid.sample, {...radialSampling(profile),simplification:profile.simplification}, scale)
     : null;
   const faces: RadialFaces = simplified?.faces ?? (profile.simplification
-    ? await simplifyRadialShape(requireTerrainMesh(grid), {...profile,simplification:profile.simplification}, scale)
+    ? await simplifyRadialShape(requireTerrainMesh(grid), {...profile,simplification:profile.simplification,source:`${config.namespace}: ${profile.path}`}, scale)
     : radialTriangles(grid.sample, radialSampling(profile), scale));
   let completion;
   if (profile.completion) {

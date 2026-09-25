@@ -222,7 +222,7 @@ async function authorBody(body: Body) {
   const grid = { metersPerUnit, expectedVertices: mesh.vertexCount, expectedFaces: mesh.faceCount, indexBase: 1 };
   const terrain = requireTerrainMesh(await loadPdsPlateShape(resolve(src, shapePath), grid));
   const simplification = { method: 'source-meshoptimizer', targetFaces: 800, maximumErrorMeters, regularize: true };
-  const simplified = requireRecord((await simplifyRadialShape(terrain, { faceBudget: 800, simplification }, 1)).simplification);
+  const simplified = requireRecord((await simplifyRadialShape(terrain, { faceBudget: 800, simplification, source: `${id}: ${relative(ROOT, resolve(src, shapePath))}` }, 1)).simplification);
   const pole = equatorialPole(model.lambda, model.beta);
   const limitation = 'The convex inversion resolves the broad shape; craters and concavities are unresolved.';
 
