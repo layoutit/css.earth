@@ -90,7 +90,8 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
   if (!plan.focus.pointSource) return null;
   const element = host.ownerDocument.createElement('s');
   element.dataset.worldContextPointSource = plan.focus.id;
-  element.style.cssText = `position:absolute;left:50%;top:50%;width:${field.atlas.tileSize}px;height:${field.atlas.tileSize}px;background-repeat:no-repeat;text-decoration:none;transform-origin:0 0;pointer-events:none;visibility:hidden`;
+  // Its own 32 px layer: it moves and scales every camera frame and must not repaint the layer beneath it.
+  element.style.cssText = `position:absolute;left:50%;top:50%;width:${field.atlas.tileSize}px;height:${field.atlas.tileSize}px;background-repeat:no-repeat;text-decoration:none;transform-origin:0 0;pointer-events:none;visibility:hidden;will-change:transform`;
   element.style.backgroundImage = `url(${JSON.stringify(resolveResource(field.atlas.path))})`;
   host.insertBefore(element, before);
   const navigation = bindObjectNavigationTarget(element, host);

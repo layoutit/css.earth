@@ -2519,6 +2519,13 @@
   line-height: 0;
 }
 
+/* A star's corona and limb plates are screen-sized boxes the camera scales to its disc. At marker detail the disc is a
+   few pixels and the point source draws the star, so the plates are hidden: re-scaled on every camera frame, they
+   repainted the whole stage layer. Every emissive body's plates carry these class suffixes (emissive.ts). */
+.object-stage[data-lod="marker"] > :is([class*="-corona-layer "], [class*="-limb-layer "]) {
+  visibility: hidden;
+}
+
 /* SUN */
 .object-stage[data-object-id="sun"] > :is(.polycss-camera, .sun-corona-layer, .sun-limb-layer) {
   --sun-scene-side-padding: 16px;

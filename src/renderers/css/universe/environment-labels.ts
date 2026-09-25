@@ -174,19 +174,25 @@ function humanizeId(id: string): string {
 }
 function fadeTo(entry: Entry, opacity: number, fader: ReturnType<typeof createOpacityFader>): void {
   if (entry.element.dataset.environmentNavigate) { entry.element.style.pointerEvents = opacity > .1 ? 'auto' : 'none'; entry.element.tabIndex = opacity > .1 ? 0 : -1; }
-  if (entry.targetOpacity === opacity) { if (opacity > 0) entry.element.style.visibility = ''; fader.set(entry.element, opacity, LABEL_FADE_MS); return; }
+  if (entry.targetOpacity === opacity) { if (opacity > 0) show(entry); fader.set(entry.element, opacity, LABEL_FADE_MS); return; }
   if (entry.hideTimer !== null) { clearTimeout(entry.hideTimer); entry.hideTimer = null; }
   entry.targetOpacity = opacity;
-  if (opacity > 0) entry.element.style.visibility = '';
+  if (opacity > 0) show(entry);
   fader.set(entry.element, opacity, LABEL_FADE_MS);
   if (opacity === 0 && entry.element.style.visibility !== 'hidden') entry.hideTimer = setTimeout(() => {
     entry.hideTimer = null;
-    if (entry.targetOpacity === 0) entry.element.style.visibility = 'hidden';
+    if (entry.targetOpacity === 0) { entry.element.style.visibility = 'hidden'; entry.element.style.willChange = ''; }
   }, LABEL_FADE_MS);
+}
+/** A shown label moves on the compositor as its own small layer instead of repainting the layer it would paint into;
+ * a hidden one has no layer, so hundreds of labels cost nothing until shown. */
+function show(entry: Entry): void {
+  entry.element.style.visibility = '';
+  entry.element.style.willChange = 'transform';
 }
 function hideNow(entry: Entry, fader: ReturnType<typeof createOpacityFader>): void {
   if (entry.hideTimer !== null) clearTimeout(entry.hideTimer);
-  entry.hideTimer = null; entry.element.style.pointerEvents = 'none'; entry.element.tabIndex = -1; entry.targetOpacity = 0; fader.set(entry.element, 0); entry.element.style.visibility = 'hidden';
+  entry.hideTimer = null; entry.element.style.pointerEvents = 'none'; entry.element.tabIndex = -1; entry.targetOpacity = 0; fader.set(entry.element, 0); entry.element.style.visibility = 'hidden'; entry.element.style.willChange = '';
 }
 function hideAll(entries: readonly Entry[], fader: ReturnType<typeof createOpacityFader>): readonly LabelScreenRect[] {
   for (const entry of entries) hideNow(entry, fader);

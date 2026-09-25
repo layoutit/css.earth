@@ -98,7 +98,8 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
       previous = new Set(admitted.keys());
       for (const [index, label] of labels.entries()) {
         const placement = admitted.get(index);
-        if (last[index].shown !== Boolean(placement)) { last[index].shown = Boolean(placement); label.ariaHidden = String(!placement); }
+        // A shown caption moves as its own small layer; a hidden one has none.
+        if (last[index].shown !== Boolean(placement)) { last[index].shown = Boolean(placement); label.ariaHidden = String(!placement); label.style.willChange = placement ? 'transform' : ''; }
         fader.set(label, placement?.opacity ?? 0, 200);
         const point = placement ?? (fader.current(label) > 0 ? points.get(index) : undefined);
         if (!point) continue;
