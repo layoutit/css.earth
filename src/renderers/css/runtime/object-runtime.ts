@@ -152,6 +152,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       subscribe(listener: () => void) { viewListeners.add(listener); return () => viewListeners.delete(listener); },
     });
     const navigation: ObjectWorldNavigation = Object.freeze({ frame: worldFrame, motion: cameraMotion,
+      ...(definition.camera.framingScale === undefined ? {} : { framingScale: definition.camera.framingScale }),
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal }) {

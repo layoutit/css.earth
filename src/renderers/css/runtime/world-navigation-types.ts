@@ -6,6 +6,8 @@ export type ObjectWorldNavigationListener = (world: WorldCameraPose, viewport: W
 export interface ObjectWorldNavigation {
   readonly motion: import('../navigation/camera-motion.js').CameraMotion;
   readonly frame: PreparedWorldCameraFrame;
+  /** The body's volume-equivalent radius over its longest reach when below 1 (an elongated shape model). */
+  readonly framingScale?: number;
   /** The retained surface may differ from the current overview focus. */
   readonly detailFrame?: PreparedWorldCameraFrame;
   capture(): WorldCameraPose;

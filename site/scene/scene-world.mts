@@ -102,7 +102,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     const world = mounted(), navigation = session.mount?.navigation;
     if (!world || !navigation || typeof navigation.subscribe !== 'function') return;
     session.framePresenter?.attach?.(world);
-    world.selectObject?.(session.objectId, navigation.frame);
+    world.selectObject?.(session.objectId, navigation.frame, navigation.framingScale);
     const disconnectFocus = world.connectNavigation?.(navigation, {
       readFocus,
       onFocusChange(publication) { if (isCurrent(session)) onFocusChange(session, publication); },

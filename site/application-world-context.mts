@@ -86,10 +86,10 @@ export function createApplicationWorldContext() {
           previewSelection(id?: string | null) {
             if (!lifetime.disposed) layer.previewSelection(id);
           },
-          selectObject(id: string, frame: PreparedWorldCameraFrame) {
+          selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale?: number) {
             if (lifetime.disposed) return;
             visibility.selectObject(id);
-            layer.selectObject(id, frame);
+            layer.selectObject(id, frame, framingScale);
             moonLabels.selectObject(id);
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,

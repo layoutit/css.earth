@@ -148,6 +148,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
         const mountedShells = [...shells];
         let selected = plan.focus;
+        // The caption sits below the selected body's longest reach, which an elongated shape model extends past its radius.
+        let captionBody: typeof selected = selected;
         let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
         let publishedScale = '';
         background.mount();
@@ -204,7 +206,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             // The context's labels keep clear of the selected body's caption, placed for the same camera.
-            const caption = selectedLabel.rect(world, viewport, selected, { overview, focused: detailedFocus !== null, preview: selectionPreview });
+            const caption = selectedLabel.rect(world, viewport, captionBody, { overview, focused: detailedFocus !== null, preview: selectionPreview });
             return spatial.captureFrame(world, viewport, caption ? [caption] : []);
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial.previewSelection(id); },
@@ -225,13 +227,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             return Object.freeze({ opacity: spatial.opacityStats(), publication: spatial.publicationStats(), bodies: spatial.inspect(), environmentLabels: environmentLabels.inspect(), galaxies: catalogBanks.catalog?.inspect(),
               foregroundLabelExclusions: [...spatial.backgroundExclusionRects(), ...environmentLabels.labelExclusionRects()] });
           },
-          selectObject(id: string, frame: PreparedWorldCameraFrame) {
+          /** `framingScale` (below 1 for an elongated shape model) sets the caption below the body's longest reach. */
+          selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale = 1) {
             const body = [plan.focus, ...plan.bodies].find(body => body.id === id);
             if (!body || frame.referenceFrame !== plan.frame.referenceFrame || frame.epochJdTt !== plan.frame.epochJdTt ||
                 frame.bodyRadiusM !== body.radiusM || !body.positionM.every((value, axis) => Math.abs(value - frame.originM[axis]) < .001)) {
               throw new TypeError('Selected detail does not match its prepared world context.');
             }
+            if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
             selected = body;
+            captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
             spatial.selectObject(id);
             publishSuppressedLabels();
             root.dataset.selectedObject = id;
@@ -251,7 +256,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
               }
               spatial.publish(world, viewport, frame);
-              const selectedRect = selectedLabel.publish(world, viewport, selected, {
+              const selectedRect = selectedLabel.publish(world, viewport, captionBody, {
                 overview, focused: detailedFocus !== null, preview: selectionPreview,
               });
               const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
