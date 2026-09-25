@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1f-lens-illustration.webp",
       "bytes": 504,
       "sha256": "130a4ac73f2bd9bc8b6cd60ded8ba4be9a7f74e8e9be6891530730d4612f1a55"
@@ -238,8 +244,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91323,
-      "sha256": "dc3c9508f74798564b41c62f319f7675eed6b30f243c796b1bf59bf1a15d0fb2"
+      "bytes": 91617,
+      "sha256": "5dd3e2ce1d6f5d2a5fe48376fcc62a96815b86ff0e75934cabeecf0ff17b5c47"
     },
     {
       "location": "prepared",
@@ -286,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 470342,
-      "sha256": "70167a9b40cfd1055f68a964ac1b6fa7a6e991718abb64b0af242e44a5827ed8"
+      "bytes": 470301,
+      "sha256": "989f2bdff4c7c576c8539339a4f2fec95dc50124d2384a70bdbb3254bde39756"
     },
     {
       "location": "prepared",

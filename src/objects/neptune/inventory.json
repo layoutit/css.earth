@@ -105,6 +105,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 20534,
+      "sha256": "864fe6e0deafc4d323355f7ac0f331838fb9c1770c12c12c2e6520518b4a9972"
+    },
+    {
+      "location": "public",
       "filename": "neptune-atmosphere-spectrum.svg",
       "bytes": 5801,
       "sha256": "b73b947c43c7ad7324a90691b7d74bac69b4a46e2b51e6e5c2ee5d2f9122d9be"
@@ -220,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 83089,
-      "sha256": "9a8b0ba5b08d7438d04e638d18c7cad16060b157bb56a3c94afc8cee31eadb5a"
+      "bytes": 83379,
+      "sha256": "0cc764066fb3041644fd34c86ce898077515040f4c8691a04eec24f103d208b9"
     },
     {
       "location": "prepared",
@@ -274,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 713220,
-      "sha256": "3a5f8ef6a166c35a374a26d92dec8478b73b257ac8792a62815b442dd02f690d"
+      "bytes": 713181,
+      "sha256": "a247f0685963ca27b9d5d042ae7655a398439027a70d8728b1063fce8b177f53"
     },
     {
       "location": "prepared",

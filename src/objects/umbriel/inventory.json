@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "umbriel-features.json",
       "bytes": 10388,
       "sha256": "a06a2315e00d7edc663bc1af56e5e4e063a3f26e271879cdf84184018d8c800c"
@@ -244,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 90485,
-      "sha256": "7b98e3ad8cd7805eda7f84d8a0880cce55400c8b7c252003637628bf1c1ef111"
+      "bytes": 90775,
+      "sha256": "e29cac96b6da6573d8ba32757a9b5d316031456cfe62c63ec58ba579c18466c9"
     },
     {
       "location": "prepared",
@@ -298,8 +304,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 519518,
-      "sha256": "0611c4d31091a4a606c89627b7fc9a6ad749f245d834f0cf2c99ee535daf298f"
+      "bytes": 519477,
+      "sha256": "3dbc841234f06eeb4aca76de590d7db6150ff9974a5f9aa0594187a4a8215d46"
     },
     {
       "location": "prepared",

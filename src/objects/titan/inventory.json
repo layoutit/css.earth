@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "titan-coverage-distance@2x.webp",
       "bytes": 2539954,
       "sha256": "d9e495cbeb2daab159675e1d7da0e9e11068bd05e6b5cbd1ccf61f0e0dff5232"
@@ -316,8 +322,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 89768,
-      "sha256": "6df0fca19e4fc473c3d27ff3b70bc08d7097892461dcfa04a78503aa843ca9e6"
+      "bytes": 90056,
+      "sha256": "a2ada4764e6dea5c3f8b95b0892872e6c391ebd90675a7d442af353590bbed34"
     },
     {
       "location": "prepared",
@@ -394,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 478854,
-      "sha256": "c6da46235c2be88fe1f556aedc95b145904028ce533f4369eefb9b35721b1f92"
+      "bytes": 478813,
+      "sha256": "b9500298affec4250de45b300af42877ef9203e50d9445755d663f75827b5ec6"
     },
     {
       "location": "prepared",

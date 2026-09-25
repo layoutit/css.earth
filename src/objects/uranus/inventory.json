@@ -105,6 +105,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 19932,
+      "sha256": "45c48bebef154048f8888ad917bdac043a2971146803c3f2dbba3105a7c2a89a"
+    },
+    {
+      "location": "public",
       "filename": "uranus-atmosphere-spectrum.svg",
       "bytes": 5663,
       "sha256": "255f496796ffa420914e3438c12d0b2341dac965fc0bcaf1733afe69fa1189e5"
@@ -220,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 81100,
-      "sha256": "048f69ce6d981b3f41077fb85f995cea72e242db048d48044e8befdadc475f2f"
+      "bytes": 81387,
+      "sha256": "35af27eb2e482eeb4304ab24f807a5ac9c46327d8dedca31079f19c6e534d30e"
     },
     {
       "location": "prepared",
@@ -274,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1008697,
-      "sha256": "63789e4ecc996d84434456288ce1670d4a1e234a4fcf5a07db94220b6bd91417"
+      "bytes": 1008659,
+      "sha256": "4040cb79db23acac7374875553fe21c34d9b0977166323be5c80824e9ee3a737"
     },
     {
       "location": "prepared",

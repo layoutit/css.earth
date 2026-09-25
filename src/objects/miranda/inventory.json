@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "miranda-elevation@2x.webp",
       "bytes": 1152836,
       "sha256": "d790d4f4429ba77feb4c18e5e55b197c852e37f2529499c8cb9cb8c0106841d1"
@@ -280,8 +286,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91513,
-      "sha256": "484b7cbf2f7002e171eeb4ddd45a23355ef90e1c12d4e732b6e7739183410b83"
+      "bytes": 91803,
+      "sha256": "783dcef25bbef6936f8f6e44f673c6a4c4d150c5dd62200d3caaf1add121e0ef"
     },
     {
       "location": "prepared",
@@ -346,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 541180,
-      "sha256": "39c8a209652766e946fc79434cc11dae1e71151a80eb5005cc1b8b03293f146c"
+      "bytes": 541139,
+      "sha256": "c3791f9f6238ecdc13e240f5fbdb3bea5f59693ee936a29b656238f6f6035c22"
     },
     {
       "location": "prepared",

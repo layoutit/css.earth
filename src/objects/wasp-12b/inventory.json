@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "wasp-12b-lens-thermal.webp",
       "bytes": 44,
       "sha256": "1e4e0a58397af8baa64bf8294c5949b1ac76b78d2105b12e0b179fcc847df604"
@@ -220,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 89635,
-      "sha256": "7986608015b1e72cbaa1714a756264998d2cdfea455470a4c928e19ab4329db7"
+      "bytes": 89926,
+      "sha256": "5e999e04d6c486beeec7ae8f63c94c4066fb0f5d17c07e2337cfc82d7341e2e7"
     },
     {
       "location": "prepared",
@@ -262,8 +268,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 466251,
-      "sha256": "7a2f6cfc4b2616fa11161b5475887540f370f6bbfb6ca82d0148cb963ec02fce"
+      "bytes": 466210,
+      "sha256": "9d59e087450aacd8698b6ccf43cc58ae84daff8b15ec7570cc3ab124d721408f"
     },
     {
       "location": "prepared",
