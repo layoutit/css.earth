@@ -8,12 +8,15 @@ import { build, type Plugin } from 'esbuild';
 export interface ImplementationFingerprint { readonly sha256: string; readonly files: readonly { readonly path: string; readonly sha256: string }[] }
 
 /** Workspace entries whose TypeScript sources an identity follows as local modules. The FITS reader was a local module
- * (`tools/fits/`) before it became `@cssearth/fits`, and the telescope library's product records, label readers and
- * astronomy-package clients were local modules under `tools/objects/` before they became `@cssearth/telescope`; following
- * them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
+ * (`tools/fits/`) before it became `@cssearth/fits`, the SPICE kernel readers were local modules (`tools/spice/`) before
+ * they became `@cssearth/spice`, and the telescope library's product records, label readers and astronomy-package clients
+ * were local modules under `tools/objects/` before they became `@cssearth/telescope`; following them keeps every operation
+ * identified by the code it ran. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
   '@cssearth/fits/node': 'packages/fits/src/node/index.ts',
+  '@cssearth/spice': 'packages/spice/src/index.ts',
+  '@cssearth/spice/node': 'packages/spice/src/node/index.ts',
   '@cssearth/telescope': 'packages/telescope/src/index.ts',
   '@cssearth/telescope/node': 'packages/telescope/src/node/index.ts',
 };
