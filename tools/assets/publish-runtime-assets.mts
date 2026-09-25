@@ -1,7 +1,8 @@
 import { sha256 } from '@cssearth/core/node';
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { spawn } from "node:child_process";
+import { execFile, spawn } from "node:child_process";
+import { promisify } from "node:util";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from "./runtime-assets.mts";
@@ -103,10 +104,23 @@ async function findMisses<T extends PublishAsset>(assets: readonly T[], fetcher:
 // own retry path uses a per-key `wrangler r2 object put` for whatever it still finds missing — see
 // tools/publish-verification.mts. `wrangler r2 bulk put` has silently dropped a subset of a batch before, which
 // is exactly what that verification pass catches.
-export async function publishRuntimeAssets(objectIds: readonly string[]): Promise<void> {
+export async function publishRuntimeAssets(objectIds: readonly string[], { since }: { since?: string } = {}): Promise<void> {
   const root = resolve(import.meta.dirname, "../..");
-  const assets = await inventoryAssets(root, inventoriedObjectIds(objectIds, root));
-  await publishAssets(assets);
+  const ids = inventoriedObjectIds(objectIds, root);
+  const assets = await inventoryAssets(root, ids);
+  if (since === undefined) return publishAssets(assets);
+  // Every key a base revision's inventories list is already live: that revision's own CI restored it from R2. Only the
+  // entries this checkout adds need a HEAD and an upload; checking the whole catalogue asks R2 what it already said.
+  const published = new Set<string>();
+  for (const id of ids) {
+    const text = await promisify(execFile)("git", ["show", `${since}:src/objects/${id}/inventory.json`], { cwd: root, maxBuffer: 1 << 26 })
+      .then(({ stdout }) => stdout, () => null);
+    if (text === null) continue;
+    for (const asset of (JSON.parse(text) as { assets: { sha256: string; filename: string }[] }).assets) published.add(`runtime-assets/${asset.sha256}/${asset.filename}`);
+  }
+  const added = assets.filter(asset => !published.has(asset.key));
+  console.log(`${assets.length - added.length} of ${assets.length} inventoried file(s) are listed on ${since}; publishing the other ${added.length}.`);
+  if (added.length) await publishAssets(added);
 }
 
 export async function publishAssets(assets: readonly PublishAsset[], options: PublishOptions = {}): Promise<void> {
@@ -137,5 +151,6 @@ export async function publishAssets(assets: readonly PublishAsset[], options: Pu
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await publishRuntimeAssets(process.argv.slice(2));
+  const args = process.argv.slice(2), since = args.find(arg => arg.startsWith("--since="))?.slice("--since=".length);
+  await publishRuntimeAssets(args.filter(arg => !arg.startsWith("--since=")), since === undefined ? {} : { since });
 }
