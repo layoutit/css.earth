@@ -4,6 +4,17 @@ import type { PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import type { WorldCameraViewport, WorldCameraPose } from '../navigation/world-camera.js';
 import type { PreparedCssSky } from '../sky/types.js';
 
+/** The retained-DOM cost of one volume topology, measured by the renderer's conformance tests. The renderer declares it;
+ * the bake's element budget (`@cssearth/bake/volume`) validates it and allocates slabs within it. */
+export interface RenderElementProfile {
+  schema: 'cssearth-render-element-profile@1';
+  id: string;
+  maximumElements: number;
+  elementsPerSlab: number;
+  elementsPerStar: number;
+  reservedElements: number;
+}
+
 export type VolumeAxis = 'x' | 'y' | 'z';
 export type VolumeVector = readonly [number, number, number];
 
