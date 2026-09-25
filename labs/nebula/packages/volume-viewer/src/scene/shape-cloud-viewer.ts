@@ -1,4 +1,4 @@
-import type { PreparedShapeScene } from '@cssearth/volume-core/contracts/shape-scene';
+import type { PreparedShapeScene } from '@cssearth/bake/volume';
 import type { ViewFraming as ShapeCloudFraming } from '../camera/framing.ts';
 import type { VolumeViewerBackend } from './backend.ts';
 import { loadImageBank, requiredImageTexture as requiredTexture, type ImageBank } from './image-assets.ts';

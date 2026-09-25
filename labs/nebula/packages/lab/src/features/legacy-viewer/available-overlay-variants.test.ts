@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { hash } from '../../server/workflows/density/io.ts';
-import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
+import { writeAtomic } from '@cssearth/bake/volume/node';
 import { availableOverlayVariants } from './available-overlay-variants.js';
 import { overlayVariantsPath } from './overlay-variants.js';
 

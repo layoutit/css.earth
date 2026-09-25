@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { prepareStarPhotometry } from '@cssearth/volume-core/materials/star-photometry';
+import { prepareStarPhotometry } from '@cssearth/bake/volume';
 
 // Independent display-light accounting; do not reproduce the preparer's split into size/opacity.
 const light = (magnitude: number, color: string) => {

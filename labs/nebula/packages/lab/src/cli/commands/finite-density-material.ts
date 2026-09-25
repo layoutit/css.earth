@@ -9,13 +9,9 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { implementationPins } from '../../server/services/implementation.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { fitFiniteRegionMaterial, type MaterialTransportSample } from '@cssearth/nebula-reconstruction/methods/sampled/finite-region-material';
-import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
-import { recolorCloudSlices } from '@cssearth/volume-bake/slices/material';
-import { loadVolumeSource, sampleEncoded, sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { compilerSlabMaterial, parseVolumeRecipe, type Vector3, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/bake/volume';
+import { recolorCloudSlices, loadVolumeSource, sampleEncoded, sourceBytes, containedPath, channelDensity } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
-import { channelDensity } from '@cssearth/volume-bake/slices/density';
-import { parseVolumeRecipe, type Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 const json=async(path:string,value:unknown)=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,bytes);return sha256(bytes);};
 interface DecodedSlice { quad:VolumeSliceQuad; alpha:Uint8Array }
 function sampleAlpha(slice:DecodedSlice,x:number,y:number):number {

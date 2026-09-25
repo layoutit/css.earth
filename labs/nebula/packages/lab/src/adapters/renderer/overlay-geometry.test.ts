@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import { prepareOverlayGeometry } from './overlay-geometry.js';
-import { overlayCorners, rayToOverlayPlane, type OverlayFrame } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { overlayCorners, rayToOverlayPlane, type OverlayFrame } from '@cssearth/bake/volume';
 
 const project = (matrix: string, x: number, y: number) => {
   const m = matrix.split(',').map(Number), w = m[3] * x + m[7] * y + m[15];

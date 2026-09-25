@@ -1,11 +1,6 @@
-import { diffuseAtomEmission, diffuseAtomProjection, gridDiffuse, type DiffuseAtom } from '@cssearth/volume-core/fields/diffuse-atoms';
-export { diffuseAtomEmission, diffuseAtomProjection, gridDiffuse, type DiffuseAtom } from '@cssearth/volume-core/fields/diffuse-atoms';
+import { diffuseAtomEmission, diffuseAtomProjection, gridDiffuse, type DiffuseAtom, type EmissionVector3, type SkyBounds, type MaterialImage as CompilerImage, type ComponentWeights, type PreparedSampledField, type SpatialField, type SampledEmissionFit } from '@cssearth/bake/volume';
+export { diffuseAtomEmission, diffuseAtomProjection, gridDiffuse, type DiffuseAtom } from '@cssearth/bake/volume';
 /** Offline nonnegative image fit. Spatial atoms and measured XYZ are never optimized. */
-import type { EmissionVector3, SkyBounds } from '@cssearth/volume-core/contracts/emission';
-import type { MaterialImage as CompilerImage } from '@cssearth/volume-core/materials/component-material';
-import type { ComponentWeights } from '@cssearth/volume-core/contracts/sampled-recipe';
-import type { PreparedSampledField, SpatialField } from '@cssearth/volume-core/fields/sampled';
-import type { SampledEmissionFit } from '@cssearth/volume-core/contracts/sampled-emission-fit';
 import { finiteDetailAtoms } from './emission-detail.ts';
 
 interface Column { indices: Uint32Array; values: Float32Array }

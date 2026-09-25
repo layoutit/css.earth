@@ -3,15 +3,12 @@ import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
-import { restoreCompactFiniteEmission } from '@cssearth/volume-bake/compact-inputs/finite-emission';
-import { hash, localPath, pinned, type Pin } from '@cssearth/volume-bake/compact-inputs/io';
-import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/volume-core/fields/cloud-density';
-import { parsePreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
+import { restoreCompactFiniteEmission, hash, localPath, pinned, type Pin, writeAtomic } from '@cssearth/bake/volume/node';
+import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, parsePreparedLmcStars } from '@cssearth/bake/volume';
 import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
 import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
 import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
-import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
 
 const record = (value: unknown, at: string): Record<string, unknown> => {
   assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Expected an object: ${at}`);

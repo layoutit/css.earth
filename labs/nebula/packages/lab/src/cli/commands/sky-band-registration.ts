@@ -7,7 +7,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { verifyFixedCatalogue } from '@cssearth/nebula-reconstruction/registration/fixed-catalogue';
-import { validateImageWcs, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { validateImageWcs, type ImageWcs } from '@cssearth/bake/volume';
 import { verifySkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 
 type Pin = { path: string; sha256: string };

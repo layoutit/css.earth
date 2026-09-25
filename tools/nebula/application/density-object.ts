@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { Pin } from '@cssearth/volume-bake/compact-inputs/io';
+import type { Pin } from '@cssearth/bake/volume/node';
 import { prepareFiniteEmissionObject } from './finite-emission-object.ts';
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 function pin(value: unknown): Pin {

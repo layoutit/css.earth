@@ -5,11 +5,7 @@ import { jointPath, jointRecord } from '../../../features/joint-fit/model.ts';
 import { readPhotometricMgeRecipe as readScientificRecipe, createPhotometricMgePrior, type PhotometricMgeRecipe } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
 import { fitSimulationGuidedEmission, type SimulationDepthSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-guided';
 import { fitSimulationEnvelope } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
-import { createPhotometricEmission, type EnvelopeColors } from '@cssearth/volume-core/fields/photometric-emission';
-import { envelopeChromaticity, envelopeChromaSettings, pixelCenter } from '@cssearth/volume-core/fields/simulation-envelope';
-import type { MaterialImage } from '@cssearth/volume-core/materials/component-material';
-import type { EmissionFieldModel } from '@cssearth/volume-core/contracts/emission';
-import type { EmissionFitInput } from '@cssearth/volume-core/contracts/emission';
+import { createPhotometricEmission, type EnvelopeColors, envelopeChromaticity, envelopeChromaSettings, pixelCenter, type MaterialImage, type EmissionFieldModel, type EmissionFitInput } from '@cssearth/bake/volume';
 export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
   const recipe = readScientificRecipe(value);
   if (!recipe.evidence.path.startsWith('labs/nebula/models/')) throw new TypeError('Photometric evidence must be object-owned.');

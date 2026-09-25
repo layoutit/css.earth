@@ -7,12 +7,12 @@ import { dirname } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { loadVolumeSource } from '@cssearth/bake/volume/node';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
 import { rectifyObservation } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { decomposeFilledComponents } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
 import { createFilledVolumeSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-volume';
-import { createIntegratedSignalSampler } from '@cssearth/volume-core/fields/cloud-density';
+import { createIntegratedSignalSampler } from '@cssearth/bake/volume';
 
 const sha256 = (b: Buffer) => createHash('sha256').update(b).digest('hex');
 type Pin = { path: string; sha256: string; url?: string };

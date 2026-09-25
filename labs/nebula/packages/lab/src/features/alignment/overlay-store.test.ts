@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement, type SavedOverlay } from './overlay-store.js';
-import { defaultOverlayPlacement, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { defaultOverlayPlacement, type OverlayPlacement } from '@cssearth/bake/volume';
 
 const KEY = 'cssearth-nebula-overlay-state-v1';
 class MemoryStorage {

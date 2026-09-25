@@ -14,8 +14,7 @@ import { COMPILER_VERSION, readCompilerRecipe, compilerSourceWeights, type Compi
 import { restoreCompilerInputs, type CompilerProgress } from './prerequisites.ts';
 import { compilerTarget, loadCompilerImages, compilerImagePanel } from './images.ts';
 import { fitEmissionField } from './fit.ts';
-import { createPhotometricEmission } from '@cssearth/volume-core/fields/photometric-emission';
-import { createEmissionMaterial } from '@cssearth/volume-core/materials/component-material';
+import { createPhotometricEmission, createEmissionMaterial, type CompilerPin, readEmissionWindow } from '@cssearth/bake/volume';
 import { loadDepthModel } from './depth-model.ts';
 import { bakeCompiler } from './bake.ts';
 import { compilerStars } from '@cssearth/nebula-reconstruction/stars/compiler';
@@ -23,9 +22,7 @@ import { prepareCatalogueStars } from './catalogue-stars.ts';
 import { COMPILER_STAR_PROFILE_PATH } from '../../../adapters/application/star-sprites.ts';
 import { compilerUnionStars } from '@cssearth/nebula-reconstruction/stars/union';
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
-import type { CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 import { compileSampledNebula } from '../sampled-prior/compile.ts';
-import { readEmissionWindow } from '@cssearth/volume-core/fields/emission-window';
 import { loadPhotometricPrior, fitPhotometricEmission, photometricEnvelopeColors } from './photometric-prior.ts';
 /** Explicit automatic full pipeline. Source owners retain native registration/separation and their caches. */
 export async function compileNebula(root: string, request: CompilerRequest, signal: AbortSignal, progress: CompilerProgress): Promise<CompilerResult> {

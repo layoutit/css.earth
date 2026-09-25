@@ -2,8 +2,8 @@
 import {gunzipSync} from 'node:zlib';
 import {median} from '@cssearth/core';
 import {parseDensityVolumeObjectDescriptor} from '@cssearth/objects';
-import {cataloguePosition} from '@cssearth/volume-core/coordinates/catalogue-position';
-import {sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { cataloguePosition } from '@cssearth/bake/volume';
+import { sourceBytes } from '@cssearth/bake/volume/node';
 import {observableForwardPoint,type WeightedPoint,type ForwardConfig,type ForwardObservations,type HistogramAxis} from '@cssearth/nebula-reconstruction/registration/forward-density-fit';
 export function record(value:unknown):Record<string,unknown>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected object');return value as Record<string,unknown>;}
 export function finite(value:unknown):number{if(typeof value!=='number'||!Number.isFinite(value))throw new TypeError('Expected finite number');return value;}

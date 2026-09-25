@@ -1,7 +1,5 @@
-import {prepareDensityProjection as project} from '@cssearth/volume-core/fields/density-projection';
-import {sampleEncoded,type VolumeSource} from '@cssearth/volume-bake/compact-inputs/density-grid';
-import {channelDensity} from '@cssearth/volume-bake/slices/density';
-import { densityPlacementTransform, type DensityPlacement } from '@cssearth/volume-core/coordinates/density-placement';
+import { prepareDensityProjection as project, densityPlacementTransform, type DensityPlacement } from '@cssearth/bake/volume';
+import { sampleEncoded, type VolumeSource, channelDensity } from '@cssearth/bake/volume/node';
 export function prepareDensityProjection(source: VolumeSource, distance: number, width = 256, placement?: DensityPlacement) {
   const encoded: [number, number, number, number] = [0, 0, 0, 0];
   const transform = placement ? densityPlacementTransform(placement) : undefined;

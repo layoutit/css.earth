@@ -4,7 +4,7 @@ import { gzipSync } from 'node:zlib';
 import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { hash, localPath, pinned } from '../../../server/workflows/density/io.ts';
-import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
+import { writeAtomic } from '@cssearth/bake/volume/node';
 import { readCompactCompiler } from './compact-compiler.ts';
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 export async function exportCompactCompiler(root: string, objectId: string) {

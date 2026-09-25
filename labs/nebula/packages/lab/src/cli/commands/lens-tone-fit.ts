@@ -35,7 +35,7 @@ import { lensLevels, loadLensLevelGrid } from '../../server/services/lens-levels
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { ceilingShare, composeToneCurve, coreDisc, fitCorrection, highlightExposureBound, identityToneCurve, pairedPixels, pinnedShare,
   predictToneCurve, reexposeProjection, solveExposure, splitFootprint, toneScore, TOLERANCE, type CoreDisc } from './lens-tone-fitting.ts';
-import type { LensToneCurve } from '@cssearth/volume-core/materials/slab-material';
+import type { LensToneCurve } from '@cssearth/bake/volume';
 
 export { TOLERANCE };
 /** Score is in tolerance units, so EPSILON is a twentieth of a tolerance band. */

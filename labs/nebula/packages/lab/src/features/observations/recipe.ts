@@ -1,7 +1,7 @@
 import type { Affine } from '@cssearth/nebula-reconstruction/registration/affine';
 import type { SkyFrame, SkyRaster } from '@cssearth/nebula-reconstruction/registration/stellar';
 import type { NativeRemoval } from '../../server/workflows/emission-inference/native-source.ts';
-import { validateImageWcs, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { validateImageWcs, type ImageWcs } from '@cssearth/bake/volume';
 import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
 export interface ObservationSource extends SkyRaster {
   id: string; label: string; url: string; page: string; credit: string; bands: string; termsUrl: string;

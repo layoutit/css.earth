@@ -23,6 +23,7 @@
     "build:fits": "pnpm --filter @cssearth/fits build",
     "build:telescope": "pnpm --filter @cssearth/telescope build",
     "build:spice": "pnpm --filter @cssearth/spice build",
+    "build:bake": "pnpm --filter @cssearth/bake build",
     "build:objects": "pnpm --filter @cssearth/objects build",
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
     "build:preparation:bundle": "pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
@@ -105,6 +106,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@cssearth/astronomy": "workspace:*",
+    "@cssearth/bake": "workspace:*",
     "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*",
     "@cssearth/engine": "workspace:*",
@@ -142,8 +144,6 @@
     "undici": "7.29.1",
     "vite": "7.3.1",
     "yaml": "^2.9.0",
-    "@cssearth/volume-core": "workspace:*",
-    "@cssearth/volume-bake": "workspace:*",
     "@cssearth/nebula-lab": "workspace:*",
     "@cssearth/nebula-reconstruction": "workspace:*",
     "@cssearth/volume-viewer": "workspace:*"

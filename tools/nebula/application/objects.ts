@@ -2,14 +2,9 @@ import { packageImplementationPins } from './package-identity.ts';
 import { installedDeliveryMatchesRecipe } from './delivery-identity.ts';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
-import type { CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
+import { type CompilerBakeResult, type DensityVolumeFrame, parseVolumeRecipe } from '@cssearth/bake/volume';
 /** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
-import { replayCompactCompiler } from '@cssearth/volume-bake/compact-inputs/compiler';
-import { replayCompactSymmetry } from '@cssearth/volume-bake/compact-inputs/symmetry';
-import { replayCompactSampled } from '@cssearth/volume-bake/compact-inputs/sampled';
-import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
-import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
@@ -137,7 +132,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   const owners = [...implementationFiles, ...(recipe.fieldStars ? ['tools/nebula/application/catalogue-field.ts',
     'src/renderers/css/navigation/world-camera-math.ts', 'src/renderers/css/stars/prepared-catalogue-points.ts'] : [])];
   // Package inventories define numerical owners without exposing their installation layout.
-  const packagePins = await packageImplementationPins(root, ['@cssearth/volume-core', '@cssearth/volume-bake']);
+  const packagePins = await packageImplementationPins(root, ['@cssearth/bake']);
   const implementationSha256 = sha256(json([...await Promise.all(owners.map(async path => ({path,sha256:sha256(await readFile(local(root,path)))}))), ...packagePins]));
   if (ifMissing && await installed(directory,sha256(recipeBytes))) return { id:recipe.id,status:'verified' };
   // Deploy builds may tolerate a package missing from R2 instead of baking one from scratch here (no source

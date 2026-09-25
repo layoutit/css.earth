@@ -1,4 +1,4 @@
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
+import type { DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { ViewFraming } from './framing.ts';
 import type { SceneImage, SceneViewport } from '../scene/backend.ts';
 

@@ -5,9 +5,9 @@ import { join } from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeSliceQuad, VolumeSlices } from '@cssearth/volume-bake/slices/density';
+import type { VolumeSliceQuad, VolumeSlices } from '@cssearth/bake/volume/node';
 import { bakeCompiler, compilerAlphaDigest, compilerFrame, compilerSliceCounts, verifyCompilerAlphaIdentity } from './bake.ts';
-import { compilerPreparedPoint, compilerPreparedSlices, COMPILER_PHYSICAL_REFERENCE } from '@cssearth/volume-core/coordinates/compiler-frame';
+import { compilerPreparedPoint, compilerPreparedSlices, COMPILER_PHYSICAL_REFERENCE } from '@cssearth/bake/volume';
 
 function slices(path: string, bytes: Buffer): VolumeSlices {
   const quad: VolumeSliceQuad = { id: 'z-0', axis: 'z', sliceIndex: 0, texturePath: path, widthPx: 2, heightPx: 1,

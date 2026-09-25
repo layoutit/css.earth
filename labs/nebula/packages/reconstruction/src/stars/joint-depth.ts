@@ -1,6 +1,5 @@
 import {createHash} from 'node:crypto';
-import type {ObservationMapping} from '@cssearth/volume-core/contracts/observation-mapping';
-import type {Bounds3,Vector3} from '@cssearth/volume-core/contracts/volume-recipe';
+import type { ObservationMapping, Bounds3, Vector3 } from '@cssearth/bake/volume';
 export interface JointDepthSource {mapping:ObservationMapping;supportBounds:Bounds3;densityAt(x:number,y:number,z:number):number;sampleEmission(x:number,y:number,z:number,out:Vector3):void}
 export function sampleJointDepth(model:JointDepthSource,x0:number,y0:number,id:string):number{
   const {mapping}=model;

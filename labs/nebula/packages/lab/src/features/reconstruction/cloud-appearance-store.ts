@@ -1,4 +1,4 @@
-import { parseCloudAppearance, type CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
+import { parseCloudAppearance, type CloudAppearance } from '@cssearth/bake/volume';
 
 const key = (subjectId: string, imageId: string) => `cssearth-nebula-cloud-appearance@1:${subjectId}:${imageId}`;
 export function readCloudAppearance(subjectId: string, imageId: string, fallback?: CloudAppearance): CloudAppearance {

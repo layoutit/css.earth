@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { prepareReconstructionStars, type ReconstructionStarsInput } from './reconstruction-stars.ts';
 import { mountPreparedLmcStars, type PreparedLmcStars } from '@cssearth/nebula-lab/adapters/viewer/catalogue-stars';
-import { loadVolumeSource, sampleEncoded } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { loadVolumeSource, sampleEncoded } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { prepareDensityProjection } from './density-projection.ts';
 

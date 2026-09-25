@@ -3,12 +3,11 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type MasterVolumeOptions } from '@cssearth/volume-bake/slices/emission';
+import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type MasterVolumeOptions, type VolumeSliceQuad } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import type { VolumeSliceQuad } from '@cssearth/volume-bake/slices/density';
+import type { VolumeRecipe } from '@cssearth/bake/volume';
 
 async function temporary(t: { after(fn: () => Promise<void>): void }) {
   await mkdir(resolve('.local/nebula-lab'), { recursive: true });

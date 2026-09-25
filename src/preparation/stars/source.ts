@@ -2,7 +2,7 @@ import { STAR_IDS, starAstrometry, starStateKm, PARSEC_KM } from '@cssearth/astr
 import { readCatalog } from '@cssearth/catalog';
 import type { Catalog } from '@cssearth/catalog';
 import type { PreparedStar, Rgb, StarsRecipe } from './types.js';
-import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/bake/volume/node';
 import { catalogueColor, nearestColor } from './color.js';
 function column(catalogue: Catalog, name: string): Float32Array {
   const value = catalogue.numeric(name);

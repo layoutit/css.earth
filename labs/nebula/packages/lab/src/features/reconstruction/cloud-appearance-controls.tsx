@@ -1,4 +1,4 @@
-import type { CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
+import type { CloudAppearance } from '@cssearth/bake/volume';
 
 const controls = [
   { key: 'brightness', label: 'Brightness', max: 200, min: 0, step: 5, factor: 100, suffix: '%',

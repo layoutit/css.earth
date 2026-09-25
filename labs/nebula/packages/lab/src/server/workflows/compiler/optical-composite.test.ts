@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createOpticalComposite, type OpticalImageSampler } from '@cssearth/nebula-reconstruction/observations/optical-composite';
-import type { SkyBounds } from '@cssearth/volume-core/contracts/emission';
+import type { SkyBounds } from '@cssearth/bake/volume';
 
 type Rgb = [number, number, number];
 type Matrix = [number, number, number, number, number, number];

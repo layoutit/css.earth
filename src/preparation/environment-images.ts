@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { parseImageLayerRecipe } from './image-layers/config.js';
 import { prepareImageLayers } from './image-layers/prepare.js';
-import { containedPath, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath, sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { prepareSurfaceShellObject } from './shell/prepare.js';
 import { prepareDensityVolumeObject } from './volume/prepare.js';

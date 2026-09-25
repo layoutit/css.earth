@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createMaterialSlots, resyncCloudSupport, unfilteredCloud } from './material-slots.ts';
-import type { CloudDensityFilter } from '@cssearth/volume-core/fields/cloud-density';
+import type { CloudDensityFilter } from '@cssearth/bake/volume';
 
 test('material toggles, lens swaps and density cutoffs share one texture-slot generation', () => {
   const slots = createMaterialSlots();

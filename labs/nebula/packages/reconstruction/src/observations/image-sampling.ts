@@ -1,5 +1,5 @@
 import sharp from 'sharp';
-import type {SkyBounds} from '@cssearth/volume-core/contracts/emission';
+import type { SkyBounds } from '@cssearth/bake/volume';
 import type {CompilerRaster,CompilerImage} from './compiler-image.ts';
 export function sampleRaster(layer: CompilerRaster, x: number, y: number, out: [number, number, number]): boolean {
   if (x < 0 || y < 0 || x >= layer.width || y >= layer.height) return false;

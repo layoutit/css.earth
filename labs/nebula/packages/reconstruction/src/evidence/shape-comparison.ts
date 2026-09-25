@@ -1,7 +1,6 @@
 /** Relative display-signal comparison. Geometry and material are never fitted per image ray. */
-import type { Bounds3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import { type Bounds3, shapePixelToUnits } from '@cssearth/bake/volume';
 import { blur, displayLuminance } from '@cssearth/nebula-reconstruction/evidence/geometry/ridges';
-import { shapePixelToUnits } from '@cssearth/volume-core/fields/authored-shapes';
 
 export interface NeutralProjection { alpha: Float32Array; width: number; height: number; bounds: Bounds3 }
 function dimensions(width: number, height: number) {

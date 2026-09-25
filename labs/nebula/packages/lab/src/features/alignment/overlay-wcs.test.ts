@@ -2,8 +2,7 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { overlayCorners, rayToOverlayPlane, wcsPixelRay, type ImageWcs, type OverlayFrame } from '@cssearth/volume-core/coordinates/overlay-wcs';
-import { registeredOverlayCorners, type ImageRegistration } from '@cssearth/volume-core/coordinates/overlay-registration';
+import { overlayCorners, rayToOverlayPlane, wcsPixelRay, type ImageWcs, type OverlayFrame, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
 
 test('TAN and ordinary SIN rays match independent Astropy WCS fixtures', async () => {
   const oracle = parseLabModelJson(await readFile('labs/nebula/packages/lab/src/features/alignment/fixtures/astropy-wcs.json', 'utf8'));

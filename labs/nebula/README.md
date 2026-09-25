@@ -34,8 +34,6 @@ Keep the shared density, star catalogue and calibration inputs: they reproduce t
 labs/nebula/
 ├── packages/
 │   ├── lab/              # React shell, pages, state, server, CLI and host adapters
-│   ├── volume-core/      # Validated contracts, coordinates and numerical fields
-│   ├── volume-bake/      # Deterministic compact replay and offline image encoding
 │   ├── reconstruction/   # Acquisition, registration, separation and scientific fitting
 │   └── volume-viewer/    # Retained scene and camera through an injected renderer
 ├── run.mts               # Research commands and test discovery
@@ -44,6 +42,8 @@ labs/nebula/
 ├── docs/                 # Current workflow and archived research
 └── nebula_lab_refactor.md # Verified progress and remaining migration work
 ```
+
+The volume contracts, fields and materials the packages share, and the deterministic compact replay and offline image encoding, are `@cssearth/bake/volume` and `@cssearth/bake/volume/node` in [`packages/bake`](../../packages/bake/README.md).
 
 Reprocess the saved LMC research recipe with **`node --experimental-strip-types labs/nebula/run.mts bake-nebula --research`**, then check its native artifacts with **`node --experimental-strip-types labs/nebula/run.mts verify-nebula`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
 

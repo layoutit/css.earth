@@ -1,6 +1,6 @@
 # Nebula reconstruction
 
-Private scientific methods for registering observations, detecting projected structures and fitting conditional three-dimensional emission hypotheses. Accepted reconstruction inputs are replayed by `volume-bake`; this package does not render or bake delivery assets.
+Private scientific methods for registering observations, detecting projected structures and fitting conditional three-dimensional emission hypotheses. Accepted reconstruction inputs are replayed by `@cssearth/bake/volume/node`; this package does not render or bake delivery assets.
 
 ```text
 src/

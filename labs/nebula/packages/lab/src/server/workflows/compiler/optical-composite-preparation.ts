@@ -7,14 +7,11 @@ import { jointRecord, jointPath } from '../../../features/joint-fit/model.ts';
 import { readCompilerRecipe, readCompilerRequest } from '../../../features/compiler/model.ts';
 import { validateCompilerResult } from './bank-validation.ts';
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
-import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
-import { createEmissionField } from '@cssearth/volume-core/fields/emission';
-import { createEmissionMaterial } from '@cssearth/volume-core/materials/component-material';
+import { readRetainedEmissionField, createEmissionField, createEmissionMaterial, type CompilerPin } from '@cssearth/bake/volume';
 import { loadCompilerImages, compilerImagePanel } from './images.ts';
 import { createOpticalComposite } from '@cssearth/nebula-reconstruction/observations/optical-composite';
 import { prepareRetainedMaterialBank } from './retained-material-bank.ts';
 import { restoreOpticalCompositeSources } from './optical-composite-inputs.ts';
-import type { CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 
 function sourcePin(v: unknown): CompilerPin {
   if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/')) throw new TypeError('Invalid composite source path.');

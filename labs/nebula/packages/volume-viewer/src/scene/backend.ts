@@ -1,5 +1,4 @@
-import type { CompilerBakeResult, CompilerLensVolume } from '@cssearth/volume-core/contracts/compiler-bake';
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
+import type { CompilerBakeResult, CompilerLensVolume, DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { ViewFraming } from '../camera/framing.ts';
 
 export interface BankResource { readonly path: string; readonly sha256: string; readonly bytes: number; readonly width: number; readonly height: number }

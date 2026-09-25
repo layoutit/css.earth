@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "erasableSyntaxOnly": true,
+    "noUncheckedIndexedAccess": false,
+    "lib": [
+      "ES2023"
+    ],
+    "rootDir": "src",
+    "outDir": "dist",
+    "allowJs": false,
+    "types": [],
+    "incremental": true,
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-bake.tsbuildinfo"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/volume/node"
+  ]
+}

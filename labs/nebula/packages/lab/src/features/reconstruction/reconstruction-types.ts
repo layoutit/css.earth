@@ -1,9 +1,8 @@
 import type { ReconstructionProcessingCapability } from './reconstruction-capabilities.ts';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { ReconstructionStarsInput } from '../../server/workflows/density/reconstruction-stars.ts';
-import type { OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import type { OverlayPlacement, CloudAppearance } from '@cssearth/bake/volume';
 import type { LabSubjectRecord } from '@cssearth/nebula-lab/viewer/legacy';
-import type { CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
 
 export interface ReconstructionRequest {
   action: 'apply'; subjectId: string; imageId: string;

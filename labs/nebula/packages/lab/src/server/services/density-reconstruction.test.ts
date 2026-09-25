@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { parseReconstructionRequest, reconstructionCatalogue } from './density-reconstruction.ts';
-import { defaultOverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { defaultOverlayPlacement } from '@cssearth/bake/volume';
 import { createStarRemovalJobs } from '../jobs/operation-jobs.ts';
 
 const request = { action: 'apply', subjectId: 'lmc-clouds', imageId: 'horalek-widefield',

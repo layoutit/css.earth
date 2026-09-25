@@ -19,7 +19,7 @@ Assessed **12 September 2026**, against implementation **`68932f3e7044a4e8403bd5
 
 ## What the current code actually does
 
-The [compiler](../packages/lab/src/server/workflows/compiler/compile.ts), [projected fitter](../packages/reconstruction/src/methods/inference/fit.ts), [field](../packages/volume-core/src/fields/emission.ts), [image target](../packages/lab/src/server/workflows/compiler/images.ts) and [joint scaffold fitter](../packages/reconstruction/src/methods/joint/fitter.ts) establish these boundaries:
+The [compiler](../packages/lab/src/server/workflows/compiler/compile.ts), [projected fitter](../packages/reconstruction/src/methods/inference/fit.ts), [field](../../../packages/bake/src/volume/fields/emission.ts), [image target](../packages/lab/src/server/workflows/compiler/images.ts) and [joint scaffold fitter](../packages/reconstruction/src/methods/joint/fitter.ts) establish these boundaries:
 
 | Stage | Implemented behavior | What it does not establish |
 | --- | --- | --- |

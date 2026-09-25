@@ -7,7 +7,7 @@
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { validateImageWcs, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { validateImageWcs, type ImageWcs } from '@cssearth/bake/volume';
 type Point = [number, number];
 const radians = Math.PI / 180;
 const hash = (data: Buffer) => createHash('sha256').update(data).digest('hex');

@@ -1,6 +1,5 @@
-import { readCompactPin as pinned } from '@cssearth/volume-bake/compact-inputs/io';
+import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
 import { CSS_COMPILER_RENDER_BUDGET } from '../../../../../../../../src/renderers/css/volume/compiler-render-budget.ts';
-import { replayCompactSampled as replay } from '@cssearth/volume-bake/compact-inputs/sampled';
 import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
 import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
 /** Retained measured particles and per-emitter materials; never stores rendered slices. */
@@ -12,18 +11,9 @@ import { jointRecord } from "../../../features/joint-fit/model.ts";
 import { readSampledRecipe } from "../../../features/sampled-prior/model.ts";
 import { readCompilerResult } from "../../../features/compiler/result.ts";
 import { readCompilerRequest } from "../../../features/compiler/model.ts";
-import {
-  readCompilerBakeResult,
-  type CompilerPin,
-} from "@cssearth/volume-core/contracts/compiler-bake";
+import { readCompilerBakeResult, type CompilerPin, sampledPointColors, prepareSampledMaterial, type SampledColor, prepareSampledField } from "@cssearth/bake/volume";
 import { loadCompilerImages } from "../../../server/workflows/compiler/images.ts";
 import { decodeFits } from "@cssearth/fits";
-import {
-  sampledPointColors,
-  prepareSampledMaterial,
-  type SampledColor,
-} from "@cssearth/volume-core/materials/sampled";
-import { prepareSampledField } from "@cssearth/volume-core/fields/sampled";
 import {
   gridDiffuse,
   type DiffuseAtom,

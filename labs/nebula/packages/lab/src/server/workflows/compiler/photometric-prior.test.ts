@@ -13,8 +13,7 @@ test('photometric evidence validation rejects cross-subject or repinned source s
 
 import { fitPhotometricEmission } from './photometric-prior.ts';
 import { createPhotometricMgePrior } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
-import { createPhotometricEmission } from '@cssearth/volume-core/fields/photometric-emission';
-import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
+import { createPhotometricEmission, readRetainedEmissionField, type EmissionFieldModel } from '@cssearth/bake/volume';
 import { geometrySha } from '../geometry/registered-source.ts';
 
 test('two-scale fit retains smooth light and finite residuals, including after JSON replay', async () => {
@@ -68,7 +67,6 @@ test('authored residual budget bounds the fit and omitted budgets preserve histo
   assert.throws(() => readPhotometricMgeRecipe({ ...recipe, residualMaximumComponents: 1.5 }), /budget/);
 });
 
-import type { EmissionFieldModel } from '@cssearth/volume-core/contracts/emission';
 test('validated envelope chroma bounds the exact round2 green-channel roundoff without accepting nonfinite colors', async () => {
   // Real x-49 texel: [-1362.6885062830177,-664.6052184385982,1306.7023521967885] arcsec.
   // Its finite light (1.276095724233293e-23) is below one ULP of the envelope light;

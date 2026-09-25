@@ -2,7 +2,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import {fitForwardModel,evaluateForwardModel,transformForwardPoint,FORWARD_PARAMETER_KEYS,
  type ForwardParameters,type ParameterBounds,type FitOptions,type ForwardFit,type ForwardEvaluation} from '@cssearth/nebula-reconstruction/registration/forward-density-fit';

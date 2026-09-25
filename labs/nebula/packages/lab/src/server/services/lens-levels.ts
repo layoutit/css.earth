@@ -25,7 +25,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
-import { lensToneRender, validateChannelGain, validateLensToneCurve, type ChannelGain, type LensToneCurve } from '@cssearth/volume-core/materials/slab-material';
+import { lensToneRender, validateChannelGain, validateLensToneCurve, type ChannelGain, type LensToneCurve } from '@cssearth/bake/volume';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
 
 export const LEVEL_BINS = 64;

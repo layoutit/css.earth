@@ -1,4 +1,4 @@
-import { compilerStarAppearance, type CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
+import { compilerStarAppearance, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { CompilerViewerBackend } from './backend.ts';
 
 export function mountStars<Bank, Publication>(backend: CompilerViewerBackend<Bank, Publication>, host: HTMLElement, result: CompilerBakeResult, atlasUrl?: string) {

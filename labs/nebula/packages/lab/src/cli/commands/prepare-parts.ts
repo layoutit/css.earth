@@ -1,20 +1,16 @@
-import {observationEnvelope as envelope} from '@cssearth/volume-core/coordinates/observation-envelope';
+import { observationEnvelope as envelope, type VolumeRecipe, type ImageWcs } from '@cssearth/bake/volume';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of frozen cloud-component inspection banks. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import { loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { loadVolumeSource, type VolumeSlices, bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume, type PreparedCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { decomposeFilledComponents, type FilledComponentOptions } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
 import { createFilledPartsSampler, type FilledVolumePart } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-parts';
 import { rectifyObservation } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
-import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
 import { createObservationMapping, reprojectObservationPrior } from '../../adapters/preparation/observation-prior.ts';
-import type { ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
 
 type Vec3 = [number, number, number];
 type Bounds3 = { min: Vec3; max: Vec3 };

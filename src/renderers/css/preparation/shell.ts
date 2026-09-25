@@ -2,7 +2,7 @@
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, resolveProjectiveQuadGuards, type Polygon } from '@layoutit/polycss';
 import type { ShellRecipe } from '../../../preparation/shell/config.js';
 import { unitVector, type ShellMesh } from '../../../preparation/shell/mesh.js';
-import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { Vector3 } from '@cssearth/bake/volume';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { SHELL_CORNER_PERMUTATIONS } from '../shell/material-address.js';
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../../../platform/projective-surface-raster.mts';

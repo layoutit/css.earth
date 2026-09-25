@@ -7,7 +7,7 @@ import { gunzipSync, gzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { replayCompactSampled } from "./compact-sampled.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
-import { maximumPlanningEmission, prepareCompactSampledInputs } from '@cssearth/volume-bake/compact-inputs/sampled';
+import { maximumPlanningEmission, prepareCompactSampledInputs } from '@cssearth/bake/volume/node';
 test("compact sampled replay rejects changed measured particles before any reconstruction", async () => {
   const root = await mkdtemp(join(tmpdir(), "nebula-sampled-"));
   try {

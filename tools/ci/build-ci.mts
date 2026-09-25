@@ -23,13 +23,16 @@ function packageOutputs(root: string): CompiledDirectory[] {
     const path = `packages/${entry.name}`, manifest: unknown = JSON.parse(readFileSync(resolve(root, path, 'package.json'), 'utf8'));
     if (!record(manifest) || !record(manifest.scripts)) throw new TypeError(`Invalid package manifest: ${path}`);
     if (typeof manifest.scripts.build !== 'string') return [];
-    const declared = [manifest.main, manifest.module, manifest.types, ...Object.values(record(manifest.bin) ? manifest.bin : {})];
+    const entries = [manifest.main, manifest.module, manifest.types, ...Object.values(record(manifest.bin) ? manifest.bin : {})].filter(value => value !== undefined);
+    // A package with only subpath entries (`@cssearth/bake/volume`) declares its compiled outputs in `exports`.
+    const exported = (value: unknown): unknown[] => typeof value === 'string' ? [value] : record(value) ? Object.values(value).flatMap(exported) : [];
+    const declared = entries.length ? entries : exported(manifest.exports).filter(value => typeof value === 'string' && value.startsWith('./dist/'));
     const required = declared.filter((value): value is string => typeof value === 'string').map(value => value.replace(/^\.\//u, '')).map(value => {
       if (!value.startsWith('dist/') || !safePath(value)) throw new TypeError(`Unsupported compiled package output: ${path}/${value}`);
       return value.slice('dist/'.length);
     });
     if (!required.length) throw new TypeError(`No declared compiled package outputs: ${path}`);
-    return [{ path: `${path}/dist`, required }];
+    return [{ path: `${path}/dist`, required: [...new Set(required)] }];
   });
 }
 

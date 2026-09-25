@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import {copyDensityWindow} from '@cssearth/volume-bake/compact-inputs/density-window';
+import { copyDensityWindow } from '@cssearth/bake/volume/node';
 
 type Vec3 = [number, number, number];
 interface WindowRecipe {

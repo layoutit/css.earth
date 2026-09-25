@@ -8,7 +8,7 @@ import { palette } from './color.js';
 import { loadStarSource } from './source.js';
 import { prepareStarHierarchy } from './hierarchy.js';
 import { preparePointAtlas, preparePointPhotometry } from '../../renderers/css/preparation/stars/material.js';
-import { containedPath, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath, sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssPointFieldManifest } from './types.js';
 import { prepareDiffuseSky } from '../../renderers/css/preparation/stars/diffuse-sky.js';

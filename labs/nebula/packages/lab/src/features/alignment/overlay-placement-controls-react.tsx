@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ControlPortals } from '../../ui/control-portals';
-import type { OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import type { OverlayPlacement } from '@cssearth/bake/volume';
 
 interface Props { id: string; label: string; placement: OverlayPlacement; defaults: OverlayPlacement; original?: OverlayPlacement;
   savedLocally: boolean; onChange(partial: Partial<OverlayPlacement>): void; onCopy(): Promise<void>; }

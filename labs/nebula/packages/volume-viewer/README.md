@@ -8,7 +8,7 @@ src/
   camera/          Shared framing, rotation and projected points
 ```
 
-Dependencies: volume-core; host-provided renderer operations. Consume explicit package exports rather than another package’s source paths.
+Dependencies: `@cssearth/bake/volume`; host-provided renderer operations. Consume explicit package exports rather than another package’s source paths.
 
 Run `pnpm --filter @cssearth/volume-viewer typecheck` from the repository root after installing dependencies. The lab command runner discovers tests beside package owners.
 

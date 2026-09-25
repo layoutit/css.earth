@@ -5,8 +5,7 @@ import { worldRotationFromQuaternion } from '../../../../../../../../src/rendere
 import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
 import type { PreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/types.ts';
 import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
-import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices } from '@cssearth/volume-core/coordinates/compiler-frame';
-import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
+import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, type VolumeSlices } from '@cssearth/bake/volume';
 const frame = { referenceFrame:'lab',epochJdTt:0,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,
   metersPerUnit:1,boundsUnits:{min:[-3,-2,-1] as const,max:[4,2,1] as const} };
 const sky = { centerIcrsDegrees:[0,0] as [number,number],distancePc:100,imageRotationDegrees:0,arcsecPerUnit:1 };

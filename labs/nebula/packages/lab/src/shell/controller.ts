@@ -4,7 +4,7 @@ import { createNebulaLabViewer, subjects, registerReconstructionSubject } from '
 import { createReconstructionControls } from '../features/reconstruction/reconstruction-controls';
 import { labView, labViewUrl } from '../features/legacy-viewer/lab-routing';
 import type { PreparedReconstruction } from '../features/reconstruction/reconstruction-types.ts';
-import { defaultOverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { defaultOverlayPlacement } from '@cssearth/bake/volume';
 import { createOverlayPlacementControls } from '../features/alignment/overlay-placement-controls';
 import { createToneControls } from '../features/tone/tone-controls';
 import { createCloudControls } from '../features/cloud-controls/cloud-controls';

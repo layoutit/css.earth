@@ -4,14 +4,9 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { bakeMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
-import { compilerAlphaDigest } from '@cssearth/volume-bake/compiler/bake';
-import { compilerFrame, compilerPreparedSlices } from '@cssearth/volume-core/coordinates/compiler-frame';
-import { readCompilerBakeResult, type CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
-import { validateVolumeLayerSlices, type VolumeLayerPlan } from '@cssearth/volume-core/contracts/volume-slices';
-import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { bakeMasterVolumeSlices, compilerAlphaDigest, sourceBytes, registerComponentBanks } from '@cssearth/bake/volume/node';
+import { compilerFrame, compilerPreparedSlices, readCompilerBakeResult, type CompilerPin, validateVolumeLayerSlices, type VolumeLayerPlan } from '@cssearth/bake/volume';
 import { sha256 } from '@cssearth/core/node';
-import { registerComponentBanks } from '@cssearth/volume-bake/compiler/component-layout';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 

@@ -1,6 +1,6 @@
 /** Shared wire contract for the lab's explicitly authored, automatically initialized shape cloud. */
-import type {ShapeCloudSettings} from '@cssearth/volume-core/contracts/authored-shapes';
-export type {ShapeCloudComponent,ShapeCloudSettings} from '@cssearth/volume-core/contracts/authored-shapes';
+import type { ShapeCloudSettings } from '@cssearth/bake/volume';
+export type {ShapeCloudComponent,ShapeCloudSettings} from '@cssearth/bake/volume';
 export type ShapeCloudQuality = 'draft' | 'detailed';
 export interface ShapeCloudRequest {
   action: 'apply'; imageId: string; cataloguePath: string; geometrySha256: string;

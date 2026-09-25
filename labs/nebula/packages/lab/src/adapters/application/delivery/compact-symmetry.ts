@@ -3,11 +3,11 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
-import { replayCompactSymmetry as replay } from '@cssearth/volume-bake/compact-inputs/symmetry';
+import { replayCompactSymmetry as replay } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from "../../../../../../../../src/renderers/css/preparation/volume.ts";
 import { validatePreparedCssVolume } from "../../../../../../../../src/renderers/css/volume/validation.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
-import type { CompilerPin } from "@cssearth/volume-core/contracts/compiler-bake";
+import type { CompilerPin } from "@cssearth/bake/volume";
 const sha = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
 function objectVolume(value: unknown) {
   if (!jointRecord(value)) throw new Error("Invalid volume envelope");

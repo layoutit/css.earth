@@ -1,8 +1,7 @@
-import type { ObservationPhoto } from '@cssearth/volume-core/contracts/observation-photo';
-export type { ObservationPhoto } from '@cssearth/volume-core/contracts/observation-photo';
+import type { ObservationPhoto, ObservationMapping } from '@cssearth/bake/volume';
+export type { ObservationPhoto } from '@cssearth/bake/volume';
 /** Offline photographic targets and independent projection checks for the filled-volume experiment. */
 import sharp from 'sharp';
-import type { ObservationMapping } from '@cssearth/volume-core/contracts/observation-mapping';
 import type { FilledComponentsResult } from './filled-components.ts';
 
 type Vec3 = [number, number, number];

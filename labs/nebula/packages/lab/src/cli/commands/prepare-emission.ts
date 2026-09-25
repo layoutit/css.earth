@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { inferEmission, projectEmission, type InferenceGrid, type SymmetryPrior } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
-import { bakeMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
+import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../adapters/renderer/volume-validation.ts';
 import { geometricDepth, conditionEmission, type ShapePrior } from '@cssearth/nebula-reconstruction/methods/symmetry/shape-prior';

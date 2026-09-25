@@ -1,24 +1,24 @@
 # Internal packages and validation
 
-The lab and its scientific libraries are five private pnpm workspace packages inside this repository. They use source TypeScript exports and are not published. Recipes, historical receipts and scientific distinctions remain source-owned; moving code does not qualify a new physical model or visual result.
+The lab and its scientific libraries are three private pnpm workspace packages inside this repository. They use source TypeScript exports and are not published. The volume contracts and the deterministic volume bake they share are the `@cssearth/bake/volume` and `@cssearth/bake/volume/node` entries of [`packages/bake`](../../../packages/bake/README.md), the repository's build-time preparation package; until 2026-09 they were the lab's `volume-core` and `volume-bake` packages. Recipes, historical receipts and scientific distinctions remain source-owned; moving code does not qualify a new physical model or visual result.
 
 ## Ownership
 
 ```text
 lab
-├── reconstruction ── volume-core
-├── volume-bake ───── volume-core
-├── volume-viewer ─── volume-core
-└── volume-core
+├── reconstruction ── @cssearth/bake/volume
+├── volume-viewer ─── @cssearth/bake/volume
+├── @cssearth/bake/volume/node ── @cssearth/bake/volume
+└── @cssearth/bake/volume
 ```
 
-Each branch means an allowed import. Reconstruction, baking and viewing do not import one another. The lab coordinates them through explicit package APIs.
+Each branch means an allowed import. Reconstruction, baking and viewing do not import one another: only the lab imports the Node-only `@cssearth/bake/volume/node`. The lab coordinates them through explicit package APIs.
 
 | Package | Responsibility |
 | --- | --- |
 | `@cssearth/nebula-lab` | One React application tree, pages and control portals; saved sessions; jobs, routes, workers, research commands and host adapters |
-| `@cssearth/volume-core` | Validated contracts, units/frames, coordinates, fields, sampling and material operations without filesystem or browser dependencies |
-| `@cssearth/volume-bake` | Replay accepted compact inputs; deterministically sample, encode and verify prepared images through explicit host backends |
+| `@cssearth/bake/volume` | Validated contracts, units/frames, coordinates, fields, sampling and material operations without filesystem or browser dependencies |
+| `@cssearth/bake/volume/node` | Replay accepted compact inputs; deterministically sample, encode and verify prepared images through explicit host backends |
 | `@cssearth/nebula-reconstruction` | Configured acquisition, registration, separation, image evidence and scientific fitting |
 | `@cssearth/volume-viewer` | Retained scene lifecycle, camera and inspection through an injected renderer; prepared assets only |
 
@@ -43,20 +43,20 @@ The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration 
 
 | Consumer | Allowed nebula dependencies |
 | --- | --- |
-| Browser/runtime | Explicitly erased public `volume-core` types only; no package runtime implementation |
-| Application preparation | Public `volume-core` and `volume-bake` exports |
-| Research workspace | The five private packages, through their declared public exports |
+| Browser/runtime | None, not even an erased type: a type the renderer needs belongs to the renderer's own contracts |
+| Application preparation | The public `@cssearth/bake/volume` and `@cssearth/bake/volume/node` entries |
+| Research workspace | The three private packages and the bake's volume entries, through their declared public exports |
 | Tests | Public package APIs; tests cannot act as wrappers that bypass production restrictions |
 
-The inbound guard traces imports through local wrappers, resolves static imports, re-exports, module loaders and TypeScript aliases, and rejects direct lab source paths. It also rejects statically resolvable filesystem reads into the lab. Computed module loading is rejected in compact application preparation and nebula-bearing loaders. It is not a general proof about arbitrary opaque plugin loaders.
+The inbound guard traces imports through local wrappers, resolves static imports, re-exports, module loaders and TypeScript aliases, and rejects direct lab and `packages/bake` source paths. It also rejects statically resolvable filesystem reads into the lab. Computed module loading is rejected in compact application preparation and nebula-bearing loaders. It is not a general proof about arbitrary opaque plugin loaders.
 
-Application bake fingerprints resolve package-owned implementation inventories through public package manifests. Moving those packages does not change identity; changing their implementation does. The host does not assume their location under this lab.
+Application bake fingerprints resolve package-owned implementation inventories through public package manifests (`nebulaImplementation` in `packages/bake/package.json`). Moving a package within the checkout does not change identity; changing its implementation or its package name does. Deliveries baked after the volume code became `@cssearth/bake` record new implementation identities for unchanged prepared bytes. The host does not assume the package's location.
 
 Current manifests and presentation recipes use object-owned source evidence. Historical receipts retain their original paths, revisions and hashes; source catalogue statements link to those pinned revisions. Historical metadata does not require the current lab files to exist.
 
 ### Isolated application delivery proof
 
-This bounded gate bundles the actual application preparation entrypoint, copies declared object inputs, relocates only core/bake, and provides no lab tree. A filesystem guard blocks lab reads and `fetch` is disabled. It bakes M42 (compiler), M2–9 (symmetry) and LMC (density), verifies resource hashes, then repeats each with `--if-missing`. LMC retains its manifest-pinned lens metadata; no prepared images are supplied. Each invocation has a three-minute deadline. This proves these three delivery paths, not every scientific reconstruction.
+This bounded gate bundles the actual application preparation entrypoint, copies declared object inputs, relocates only `@cssearth/bake`, and provides no lab tree. A filesystem guard blocks lab reads and `fetch` is disabled. It bakes M42 (compiler), M2–9 (symmetry) and LMC (density), verifies resource hashes, then repeats each with `--if-missing`. LMC retains its manifest-pinned lens metadata; no prepared images are supplied. Each invocation has a three-minute deadline. This proves these three delivery paths, not every scientific reconstruction.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -68,7 +68,7 @@ Logs and the resolved implementation closure are written under ignored `output/n
 
 ## Routine CI
 
-The `nebula` job in [the maintained workflow](../../../.github/workflows/universe.yml) installs dependencies with lifecycle scripts disabled, builds shared TypeScript dependencies, typechecks all five packages and test roots, checks dependency boundaries, and runs an explicit small test selection. It installs Chromium because the portal and browser-helper tests open real isolated browser contexts.
+The `nebula` job in [the maintained workflow](../../../.github/workflows/universe.yml) installs dependencies with lifecycle scripts disabled, builds shared TypeScript dependencies (including `@cssearth/bake`), runs the package tests (the bake's volume tests among them), typechecks the three lab packages and test roots, checks dependency boundaries, and runs an explicit small lab test selection. It installs Chromium because the portal and browser-helper tests open real isolated browser contexts.
 
 The selected tests exercise numerical fields/materials, stellar registration, archive metadata rules, durable jobs and interruption/cancellation, plugin construction, latest-only scheduling, React context/state retention, retained-node probes and blocked writes. Their data is checked-in small metadata or generated temporary fixtures; they do not require a running lab, native originals, a NOX model or generated nebula textures. The boundary checker also has mutation tests for forbidden imports and platform dependencies.
 

@@ -2,8 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
-import type { VolumeRecipe, Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { VolumeSlices, VolumeSliceQuad, VolumeRecipe, Vector3 } from '@cssearth/bake/volume';
 import { compileCssVolume } from '../../renderers/css/preparation/volume.js';
 import type { PreparedCssVolume } from '../../renderers/css/volume/types.js';
 

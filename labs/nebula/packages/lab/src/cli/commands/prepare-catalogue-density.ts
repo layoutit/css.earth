@@ -3,12 +3,10 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { cataloguePosition, METERS_PER_KPC } from '@cssearth/volume-core/coordinates/catalogue-position';
-import type { Vector3, VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { cataloguePosition, METERS_PER_KPC, type Vector3, type VolumeRecipe } from '@cssearth/bake/volume';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
-import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
-import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 type Pin = {

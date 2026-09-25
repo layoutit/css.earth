@@ -1,11 +1,8 @@
 /** Bounded positive multiscale fit, followed by explicitly conditional 3D depth assignment. */
 import { createHash } from 'node:crypto';
 import { jointRayDepths } from '../joint/geometry.ts';
-import { readJointParameters } from '@cssearth/volume-core/contracts/joint-parameters';
-import { createEmissionField, emissionKernel, projectEmissionComponent } from '@cssearth/volume-core/fields/emission';
-import { defaultCompilerControls, readCompilerControls, type CompilerControls, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput, type EmissionFitResult } from '@cssearth/volume-core/contracts/emission';
+import { readJointParameters, createEmissionField, emissionKernel, projectEmissionComponent, defaultCompilerControls, readCompilerControls, type CompilerControls, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput, type EmissionFitResult, createEmissionWindowSampler, readEmissionWindow } from '@cssearth/bake/volume';
 import { conditionDepthComponents, readDepthRecipe, type DepthRecipe } from './depth-model.ts';
-import { createEmissionWindowSampler, readEmissionWindow } from '@cssearth/volume-core/fields/emission-window';
 
 interface Basis {
   x: number; y: number; sigma: number; weight: number; pixels: Uint32Array; values: Float32Array; norm: number;

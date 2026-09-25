@@ -1,5 +1,5 @@
-import { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/volume-core/contracts/compiler-controls';
-export { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/volume-core/contracts/compiler-controls';
+import { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/bake/volume';
+export { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/bake/volume';
 import { readCompilerTargetControls, type CompilerTargetControls } from '@cssearth/nebula-reconstruction/methods/inference/target';
 import type { Matrix } from '../observations/models/model.ts';
 import { jointPath, jointRecord } from '../joint-fit/model.ts';

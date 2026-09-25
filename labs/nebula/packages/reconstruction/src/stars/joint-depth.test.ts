@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {sampleJointDepth} from './joint-depth.ts';
-import type {ObservationMapping} from '@cssearth/volume-core/contracts/observation-mapping';
+import type { ObservationMapping } from '@cssearth/bake/volume';
 test('joint depth keeps its fixed identifier quantile in a uniform neutral source',()=>{
  const distance=1e12;
  const mapping:ObservationMapping={distanceUnits:distance,boundsUnits:{min:[-1,-1],max:[1,1]},tangentAtUv:(x,y)=>[x,y],uvAtTangent:(x,y)=>[x,y],pointAtDepth:(x,y,z)=>[x*(1+z/distance),y*(1+z/distance),z],tangentAtPoint:(x,y)=>[x,y],rayPathPerDepth:()=>1};

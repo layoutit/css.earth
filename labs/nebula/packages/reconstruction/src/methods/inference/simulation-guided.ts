@@ -1,9 +1,7 @@
 /** Image-fitted finite emission, conditionally placed inside a sampled simulation depth prior. */
 import { createHash } from 'node:crypto';
 import { fitEmissionField } from './fit.ts';
-import { createEmissionField } from '@cssearth/volume-core/fields/emission';
-import { createEmissionMaterial, type MaterialImage } from '@cssearth/volume-core/materials/component-material';
-import { readCompilerControls, type EmissionFitInput, type EmissionComponent, type EmissionFieldModel, type EmissionBounds } from '@cssearth/volume-core/contracts/emission';
+import { createEmissionField, createEmissionMaterial, type MaterialImage, readCompilerControls, type EmissionFitInput, type EmissionComponent, type EmissionFieldModel, type EmissionBounds } from '@cssearth/bake/volume';
 export interface SimulationDepthPrior {
   /** SHA-256 identity of the pinned source and its sampling transform. */
   identity: string;

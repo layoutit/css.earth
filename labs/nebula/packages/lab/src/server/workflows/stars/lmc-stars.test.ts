@@ -7,7 +7,7 @@ import { worldCameraFromCenteredPresentation } from '../../../../../../../../src
 import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '../../../../../../../../src/renderers/css/navigation/world-camera-math.ts';
 import { preparedVolumeCameraTransform } from '../../../../../../../../src/renderers/css/volume/prepared-volume-runtime.ts';
 import { prepareCatalogue, sampleJointDepth } from '../../../cli/commands/prepare-lmc-stars.ts';
-import { sampleEncoded } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sampleEncoded } from '@cssearth/bake/volume/node';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
 import { loadStarCloudModel } from './lmc-star-cloud-model.ts';
 import sharp from 'sharp';

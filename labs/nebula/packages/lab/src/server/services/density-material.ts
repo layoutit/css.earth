@@ -10,7 +10,7 @@ import sharp from 'sharp';
 import type { OutputInfo } from 'sharp';
 import type { Plugin } from 'vite';
 import { createObservationMapping } from '../../adapters/preparation/observation-prior.ts';
-import { createIntegratedSignalSampler, filterCloudDensityRgba, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/volume-core/fields/cloud-density';
+import { createIntegratedSignalSampler, filterCloudDensityRgba, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/bake/volume';
 
 type Vec3 = [number, number, number];
 interface Subject { id: string; directory: string; cloudParts?: { descriptor: string; catalogue: string } }

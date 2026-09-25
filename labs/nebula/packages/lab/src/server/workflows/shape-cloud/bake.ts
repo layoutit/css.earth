@@ -1,14 +1,13 @@
-import {bakePaintedField} from '@cssearth/volume-bake/slices/painted-field';
+import { bakePaintedField, sourceBytes } from '@cssearth/bake/volume/node';
 /** Explicit offline preview: one neutral shape field, then RGB-only painting of its exact slabs. */
 import { isAbsolute } from 'node:path';
 import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import type { GeometryMap } from '../../../features/observations/models/geometry-model.ts';
 import type { StructureImage } from '../../../features/observations/models/structures-model.ts';
-import { createShapeCloudField, createShapeImageSampler } from '@cssearth/volume-core/fields/authored-shapes';
+import { createShapeCloudField, createShapeImageSampler } from '@cssearth/bake/volume';
 import { readShapeCloudSettings } from '../../../features/shape-cloud/model.ts';
 import { readShapeCloudQuality, shapeCloudSampling, SHAPE_CLOUD_PREPARATION_VERSION } from '../../../features/shape-cloud/quality.ts';
 import { writeShapeComparison } from './comparison-artifacts.ts';

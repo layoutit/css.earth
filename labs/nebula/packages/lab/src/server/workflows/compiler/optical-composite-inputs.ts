@@ -7,7 +7,7 @@ import { readObservations } from '../../../features/observations/models/model.ts
 import { geometrySha } from '../geometry/registered-source.ts';
 import { jointPath, jointRecord } from '../../../features/joint-fit/model.ts';
 import { compilerLayersReady, runCompilerSourceCommand, type CompilerProgress } from './prerequisites.ts';
-import type { CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
+import type { CompilerPin } from '@cssearth/bake/volume';
 
 const missing = (error: unknown) => error instanceof Error && 'code' in error && error.code === 'ENOENT';
 function pin(path: unknown): CompilerPin {

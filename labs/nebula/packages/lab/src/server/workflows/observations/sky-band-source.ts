@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { composeSkyBandPng, skyBandGridWcs, verifySkyBandRecipe } from '../../../adapters/sources/sky-bands.ts';
-import type { ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import type { ImageWcs } from '@cssearth/bake/volume';
 
 export interface SkyBandSource { id: string; width: number; height: number; wcs: ImageWcs; skyBands: { path: string } }
 

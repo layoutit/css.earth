@@ -5,8 +5,8 @@ import { cssViewFromOrientation } from '../../../../../../../src/renderers/css/n
 import type { WorldCameraPose, WorldCameraViewport } from '../../../../../../../src/renderers/css/navigation/world-camera';
 import { mountCatalogueStars } from '@cssearth/volume-viewer/scene/catalogue-stars';
 
-import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
-export { parsePreparedLmcStars, type PreparedLmcStars, type PreparedLmcStar } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
+import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/bake/volume';
+export { parsePreparedLmcStars, type PreparedLmcStars, type PreparedLmcStar } from '@cssearth/bake/volume';
 
 export function mountPreparedLmcStars({ host, payload, before = null }: {
   host: HTMLElement; payload: PreparedLmcStars; before?: Node | null;

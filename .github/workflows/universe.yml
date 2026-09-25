@@ -590,9 +590,10 @@ jobs:
         run: pnpm -r --filter "./packages/**" build
       - name: Restore repository volume inputs used by provenance closure
         run: node tools/assets/restore-source-inputs.mts --repository-volumes
-      - name: Test the object registry and adapter packages
+      - name: Test the object registry, adapter and bake packages
         # 802 tests, ~6 s local; never ran in CI before (output/TEST_AUDIT.md section 1.5). Needs only the build
-        # above, so it runs here rather than adding another checkout+install in Contract lint.
+        # above, so it runs here rather than adding another checkout+install in Contract lint. It includes the
+        # @cssearth/bake volume tests that were lab tests; one replays m42's compact inputs, restored above.
         run: pnpm test:packages
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps --only-shell chromium
@@ -608,10 +609,9 @@ jobs:
         # Browser helpers use fresh contexts and synthetic local pages, not a lab server.
         run: >-
           node labs/nebula/run.mts test
-          overlay-placement overlay-registration overlay-alignment
-          field-tilt emission-window component-material material
+          material
           point-projection cloud-inspection compact shape-cloud-camera
-          nebula-frame bake compiler-sampling render-element-budget retained-material-bank optical-composite-preparation
+          nebula-frame bake retained-material-bank optical-composite-preparation
           detect-shapes structure-wavelets structure-map ridge-graph
           material-solver shape-prior solver
           acquisition footprint image-links image-ranking

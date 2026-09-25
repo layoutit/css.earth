@@ -1,8 +1,7 @@
 import { createCompilerStarPhotometer, compilerStarLensPoints, detectCompilerStarCandidates } from '@cssearth/nebula-reconstruction/stars/compiler';
 import type { CompilerImage } from '../compiler/images.ts';
 import type { CompilerStarInput } from '../compiler/bake.ts';
-import type { CompilerStarMaterial } from '@cssearth/volume-core/contracts/compiler-bake';
-import type { SpatialField } from '@cssearth/volume-core/fields/sampled';
+import type { CompilerStarMaterial, SpatialField } from '@cssearth/bake/volume';
 import type { SampledRecipe } from '../../../features/sampled-prior/model.ts';
 
 export async function sampledStars(reference: CompilerImage, images: CompilerImage[], field: SpatialField, maximum: number,

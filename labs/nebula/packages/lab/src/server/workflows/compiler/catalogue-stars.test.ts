@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { prepareCatalogueStars } from './catalogue-stars.ts';
-import type { EmissionFieldModel } from '@cssearth/volume-core/contracts/emission';
+import type { EmissionFieldModel } from '@cssearth/bake/volume';
 import type { CompilerStarInput } from './bake.ts';
 
 function star(id: string, magnitudeV: number, colorIndexBV: number | null = null, raDegrees = 56.75, decDegrees = 24.12) {

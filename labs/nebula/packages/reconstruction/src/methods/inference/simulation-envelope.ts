@@ -2,17 +2,14 @@
  * Fitting the low-frequency envelope that keeps the simulation's own 3D density shape.
  *
  * The settings contract, the weighted blur, the pixel-centre mapping and the bake-time samplers now belong
- * to volume-core, so replay can use them without the fitting methods. They are re-exported here unchanged
+ * to `@cssearth/bake/volume`, so replay can use them without the fitting methods. They are re-exported here unchanged
  * for existing consumers; the arithmetic and coordinate conventions are identical.
  */
-import type { SkyBounds } from '@cssearth/volume-core/contracts/emission';
-import type { SimulationDepthPrior } from '@cssearth/volume-core/contracts/simulation-prior';
-import { blurWeighted, pixelCenter, validateEnvelopeSettings, type SimulationEnvelopeGrid, type SimulationEnvelopeSettings }
-  from '@cssearth/volume-core/fields/simulation-envelope';
+import { type SkyBounds, type SimulationDepthPrior, blurWeighted, pixelCenter, validateEnvelopeSettings, type SimulationEnvelopeGrid, type SimulationEnvelopeSettings } from '@cssearth/bake/volume';
 
 export { blurWeighted, createEnvelopeSampler, DEFAULT_CHROMA_COVERAGE_TAPER, DEFAULT_CHROMA_HALF_SATURATION_QUANTILE,
-  DEFAULT_CHROMA_SKY_QUANTILE, envelopeChromaSettings, envelopeChromaticity, pixelCenter, validateEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
-export type { SimulationEnvelopeGrid, SimulationEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
+  DEFAULT_CHROMA_SKY_QUANTILE, envelopeChromaSettings, envelopeChromaticity, pixelCenter, validateEnvelopeSettings } from '@cssearth/bake/volume';
+export type { SimulationEnvelopeGrid, SimulationEnvelopeSettings } from '@cssearth/bake/volume';
 
 export interface SimulationEnvelopeFit {
   grid: SimulationEnvelopeGrid;

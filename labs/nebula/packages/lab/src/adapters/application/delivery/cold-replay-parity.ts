@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
-import type { CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
+import type { CompilerBakeResult } from '@cssearth/bake/volume';
 
 export const replaySha = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 

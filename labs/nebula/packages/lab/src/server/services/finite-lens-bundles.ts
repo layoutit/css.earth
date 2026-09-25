@@ -2,8 +2,7 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { parsePreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
+import { parsePreparedLmcStars, type DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
 
 export const finiteLensDirectory = '.local/nebula-lab';

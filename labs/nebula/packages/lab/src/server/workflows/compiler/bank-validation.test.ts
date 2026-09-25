@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { PreparedCssVolume, PreparedVolumeLeaf } from '../../../adapters/renderer/volume-types.ts';
-import type { CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
+import type { CompilerBakeResult } from '@cssearth/bake/volume';
 import { assertCompilerBankIdentity, assertCompilerLensGeometry } from './bank-validation.ts';
 
 const neutralAlpha = 'a'.repeat(64), spectralAlpha = 'b'.repeat(64);

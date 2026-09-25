@@ -3,7 +3,7 @@ import { createMaterialSlots, resyncCloudSupport } from './material-slots';
 import { mountOverlayLeaves } from '@cssearth/volume-viewer/scene/image-plane';
 import type { AppliedStarLayers } from '../star-removal/star-removal-types.ts';
 import { parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
-import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/bake/volume';
 import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement } from '../alignment/overlay-store';
 import { createToneResourceController, type ToneResource } from '../../adapters/viewer/tone-runtime';
 import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
@@ -11,7 +11,6 @@ import type { CloudBrightness, CloudStarOptions, CloudStarContext } from '@cssea
 import { mountPreparedLmcStars, parsePreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
 import { loadRegisteredOverlay, mountReconstructionOverlay } from '../../adapters/viewer/reconstruction-overlay';
 import { createDifferencePlane, lensResultOf, type DifferenceOverlayState } from './difference-plane';
-import { validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/volume-core/fields/cloud-density';
 import { loadPreparedCssImageLayers, loadPreparedCssVolume, type PreparedCssImageLayers, type PreparedCssVolume, type VolumeCameraPublication } from '../../adapters/viewer/prepared-loaders';
 
 import { createInspectionCamera, type InspectionPose as CameraPose } from '@cssearth/volume-viewer/camera/inspection-camera';

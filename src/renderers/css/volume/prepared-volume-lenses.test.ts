@@ -11,7 +11,7 @@ import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import { CSS_COMPILER_RENDER_BUDGET } from './compiler-render-budget.js';
-import { createRenderElementBudget } from '@cssearth/volume-core/contracts/render-element-budget';
+import { createRenderElementBudget } from '@cssearth/bake/volume';
 
 class FakeElement {
   readonly nodeType = 1;
