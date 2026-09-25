@@ -1515,6 +1515,12 @@
     },
     {
       "location": "prepared",
+      "filename": "material.json",
+      "bytes": 23843,
+      "sha256": "fc41f7231b2a79dac4fc954d4e6b3f65158030d578ae3439d6766119fe762c0f"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps.json",
       "bytes": 469,
       "sha256": "4d128e45393418e18c555259d215ed21e48ddd1b0f9bdca749dafa08e6881d6f"
@@ -1558,8 +1564,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 555954,
-      "sha256": "a50ab39b61805cc6b5d5be8bc961566168611f34e7ea6ee8f6da44c66b3c55a2"
+      "bytes": 555944,
+      "sha256": "71309323d93662d7856d1dc6a102a12bb5d273e4639fe5072361a9f49af01b52"
     },
     {
       "location": "prepared",

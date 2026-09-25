@@ -286,8 +286,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1008895,
-      "sha256": "9716fb247c724966112c64f093749e841700b8c7285b389de6511d6db9e6cebd"
+      "bytes": 1008885,
+      "sha256": "99a2c6d38f20cc6117dc0d0fc322e818f4b0859bd2eeb13db744ea94a4760362"
     },
     {
       "location": "prepared",
@@ -306,6 +306,12 @@
       "filename": "sun.json",
       "bytes": 617,
       "sha256": "8c72b7150f2e7e81270ed45ffa2570f5ce13fe957ad185ca28fad1e6ed0b11e7"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1106,
+      "sha256": "75cfdb504b1a31816c928dddfeea75d0a1466e9a295114291bec462a19854a99"
     },
     {
       "location": "prepared",

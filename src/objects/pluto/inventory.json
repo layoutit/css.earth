@@ -405,9 +405,15 @@
     },
     {
       "location": "prepared",
+      "filename": "panel.json",
+      "bytes": 2686,
+      "sha256": "9acb9de5a27da957751c3bcc07b522903b3958466858cf0a5dd4c38855995c81"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 531801,
-      "sha256": "e580195df1ed6d32c5a6e5dc3d04dd237845d65ab26e523772305f5270d15439"
+      "bytes": 531791,
+      "sha256": "f462af4580231ab691e88181268a9b9c81a87bc494cdd27c48f1091a2b579094"
     },
     {
       "location": "prepared",
@@ -429,9 +435,21 @@
     },
     {
       "location": "prepared",
+      "filename": "surface-raster-plan.json",
+      "bytes": 293640,
+      "sha256": "38363c64ed19762127822b1f46bda0373079a66dcfc912f5464c04c064084bb4"
+    },
+    {
+      "location": "prepared",
       "filename": "text.json",
       "bytes": 1717,
       "sha256": "5b3db49a55ccf7c5ea9b13ceee1fafd06a0360914e3c3d48f47561532015569e"
+    },
+    {
+      "location": "prepared",
+      "filename": "title.json",
+      "bytes": 2337,
+      "sha256": "e62356b2368a633b214455fa16026bb15d8e86af35ef41c849bd5eabd6e39aaa"
     },
     {
       "location": "prepared",

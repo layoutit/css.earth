@@ -453,9 +453,15 @@
     },
     {
       "location": "prepared",
+      "filename": "panel.json",
+      "bytes": 2659,
+      "sha256": "e558d186276240a5a13d79e3a186dc2286bf4614f8a62ac117668f7220eb62db"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 490868,
-      "sha256": "055ae5a450dce6ad3dd9e3c4593fc706aa74141f8706b5e021115bd121c60526"
+      "bytes": 490858,
+      "sha256": "fd53ff4590d645a2a67c916a7cf59cebaf73aab57c4b6d445d9fea6f22ed2e40"
     },
     {
       "location": "prepared",
@@ -480,6 +486,12 @@
       "filename": "text.json",
       "bytes": 2225,
       "sha256": "ab42396fd13ed7c00537e12b723932589b28b3ee37b62113af1cc7d914a7ca68"
+    },
+    {
+      "location": "prepared",
+      "filename": "title.json",
+      "bytes": 2987,
+      "sha256": "91c0f39efe6fc3aead9323945e98809377f1869b670d4cfa613c80f2cd8c8956"
     },
     {
       "location": "prepared",
