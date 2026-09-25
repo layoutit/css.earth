@@ -14,8 +14,10 @@ import type {Polygon,Vec3,Vec2,PolyTextureImageSource,ComputeTextureAtlasPlanOpt
 import type {SilhouetteOptions,Vector3} from './ellipsoid.mts';
 type Pole='north'|'south';
 interface LayeredPolygon extends Polygon {textureImageSource:PolyTextureImageSource;latitudeIndex?:number;longitudeIndex?:number;lightingFaceIndex?:number;polarCap?:Pole;polarRole?:string;}
-interface SurfaceAsset {url:string;url2x:string;width:number;height:number;}
+interface SurfaceAsset {url:string;url2x:string;width:number;height:number;asset2x:{width:number};}
 interface ShellOptions {radiusScale:number;surface:SurfaceAsset;poles:SurfaceAsset;cutaway:boolean;}
+/** The pixel widths of the widest images the lens-swapped leaf families can show, over every lens. */
+interface LeafImagePixels {surface:number;poles:number;rings:number;}
 interface RingRaster {ringData:Uint8Array|null;foregroundRingData:Uint8Array|null;ringTextureWidth:number;maximumLightingFactor:number;}
 interface FixedMaterialOptions extends RingRaster {objectLight:ReadonlyVector3;objectView:ReadonlyVector3;scenePitchDegrees:number;systemObliquityDegrees:number;
   textureUrl?:string;outputSize?:number;preparedMeshSilhouette?:boolean;materialMode?:string;}
@@ -38,7 +40,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
-import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, polarCapRasterScale, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout, leafRasterScale, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
 import { polarQuad } from './texture-geometry.mts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
@@ -46,6 +48,18 @@ import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
+
+/** The pixel width of the widest of these published images, read from each file's header. */
+export async function widestPublishedImage(paths:readonly string[], owner:string) {
+  if (!paths.length) throw new TypeError(`${owner}: no published image to measure.`);
+  return Math.max(...await Promise.all(paths.map(async (path) => {
+    const { width } = await sharp(path).metadata().catch((error:unknown) => {
+      throw new Error(`${owner}: ${path} is not a readable image (${error instanceof Error ? error.message : String(error)}).`);
+    });
+    if (!width) throw new Error(`${owner}: ${path} has no pixel width.`);
+    return width;
+  })));
+}
 
 /** Source-configured oblate surface, projected material banks and retained cutaway. */
 export async function createLayeredOblatePreparation({ sourceDirectory, publicDirectory, stagingDirectory, config:input, preparedInputs }: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown;preparedInputs:LayeredInputs}) {
@@ -508,7 +522,9 @@ function preparedAtlasDimensions(width:number, height:number) {
       `;--polycss-atlas-height:${formatCssLength(height)}`);
 }
 
-function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTextureAtlasPlanOptions['seamEdges']|null, seamBleed = SEAM_BLEED) {
+/** `imagePixels`: the pixel width of the widest image the leaf can show over every lens, across the polygon's whole texture
+ * (a cropped plate ships part of it at the same density, so it counts at its uncropped width). */
+function textureStyle(polygon:LayeredPolygon, index:number, imagePixels:number, seamEdges?:ComputeTextureAtlasPlanOptions['seamEdges']|null, seamBleed = SEAM_BLEED) {
   const plan = computeTextureAtlasPlanPublic(polygon, index, {
     ...PLAN_OPTIONS,
     seamBleed,
@@ -576,11 +592,12 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
     `;background-size:${surfaceBackgroundSize}`;
   return {
     style,
+    // Every leaf holds its widest image at TEXELS_PER_CSS_PIXEL, the recipe's scale as the ceiling. The ring plane, motion
+    // plates and caps held theirs at one texel per CSS pixel and the shadow at a half: by the backing formula an estimated
+    // 583 MB of the 734 MB of layers Saturn's page held at rest on the iPhone 17 simulator (DPR 3), 254 MB at the rule.
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fittedGeometry.matrix,
-      polygon.polarCap && polygon.textureImageSource.sourceRect
-        ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fittedGeometry.leafWidth)
-        : PROJECTIVE_TEXTURE_RASTER_SCALE,
+      leafRasterScale(imagePixels, surfacePresentation.backgroundSize[0], PROJECTIVE_TEXTURE_RASTER_SCALE),
     ),
     sourceRect: fittedGeometry.sourceRect,
     leafWidth: fittedGeometry.leafWidth,
@@ -591,8 +608,8 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
   };
 }
 
-function canonicalRingTextureStyle() {
-  const leaf = textureStyle(createRingPlane(), 0);
+function canonicalRingTextureStyle(ringPixels:number) {
+  const leaf = textureStyle(createRingPlane(), 0, ringPixels);
   const source = `background-image:url(${RING_TEXTURE_URL})`;
   const canonical = `background-image:url(\"${RING_TEXTURE_2X_URL}\")`;
   if (!leaf.style.includes(source)) {
@@ -607,11 +624,12 @@ function canonicalRingTextureStyle() {
 function croppedRingShadowTextureStyle() {
   const sourceSize = PREPARED_RING_SOURCE.shadowTextureSourceSize;
   const bounds = PREPARED_RING_SOURCE.shadowTextureBounds;
+  // The shadow ships at 1x only: the crop is the source's own pixels.
   const leaf = textureStyle(createRingPlane(
     RING_SHADOW_TEXTURE_URL,
     0.04,
     sourceSize,
-  ), 1);
+  ), 1, sourceSize);
   const fullPosition = "background-position:0px 0px";
   const fullSize = `background-size:${formatCssLength(sourceSize)} ` +
     formatCssLength(sourceSize);
@@ -671,7 +689,7 @@ function canonicalRingMotionPlateStyle(plate:RadialPreparation['ringPlates'][num
     plate.elevation,
     plate.textureSize,
     plate.displayRadius,
-  ), index + 2), plate);
+  ), index + 2, plate.texture2xSize), plate);
   const source = `background-image:url(${plate.textureUrl})`;
   const canonical = `background-image:url(\"${plate.texture2xUrl}\")`;
   if (!leaf.style.includes(source)) {
@@ -701,7 +719,8 @@ function preparedCanonicalTextureStyle(
     presentationHeight,
     backfaceVisible = false,
     sharedTexture = false,
-  }: {url2x:string;presentationWidth:number;presentationHeight:number;backfaceVisible?:boolean;sharedTexture?:boolean},
+    imagePixels,
+  }: {url2x:string;presentationWidth:number;presentationHeight:number;backfaceVisible?:boolean;sharedTexture?:boolean;imagePixels:number},
 ) {
   const plan = computeTextureAtlasPlanPublic(polygon, index, {
     ...PLAN_OPTIONS,
@@ -735,11 +754,13 @@ function preparedCanonicalTextureStyle(
       `;background-position:${backgroundPosition}` +
       (sharedTexture ? "" : `;background-size:${backgroundSize}`) +
       (backfaceVisible ? ";backface-visibility:visible" : ""),
+    // The widest image at TEXELS_PER_CSS_PIXEL, the recipe's scale as the ceiling. A shared-texture shell face takes its
+    // background from the stylesheet, which matches this fitted address (1024 × 512 px for Saturn's 64 px faces). At scale 2
+    // the 162 shell faces held their @2x images at one texel per CSS pixel: an estimated 91 MB of layers in the interior view
+    // at DPR 3 by the backing formula, 23 MB at the rule.
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fitted.matrix,
-      polygon.polarCap && polygon.textureImageSource.sourceRect
-        ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fitted.leafWidth)
-        : PROJECTIVE_TEXTURE_RASTER_SCALE,
+      leafRasterScale(imagePixels, fitted.backgroundSize[0], PROJECTIVE_TEXTURE_RASTER_SCALE),
     ),
     sourceRect: fitted.sourceRect,
     leafWidth: fitted.leafWidth,
@@ -875,6 +896,7 @@ function prepareInteriorShell(options:ShellOptions) {
         presentationWidth: polygon.polarCap ? 256 : 64,
         presentationHeight: polygon.polarCap ? 256 : 64,
         sharedTexture: !polygon.polarCap,
+        imagePixels: (polygon.polarCap ? options.poles : options.surface).asset2x.width,
       }),
     }),
   ));
@@ -930,6 +952,7 @@ function prepareInteriorSectionLeaves() {
         presentationWidth: 256,
         presentationHeight: 512,
         backfaceVisible: true,
+        imagePixels: requireViews().assets.section.asset2x.width,
       }),
     });
   }));
@@ -956,6 +979,8 @@ function createCutawayOuterPolarCapPolygon(pole:Pole, asset:SurfaceAsset) {
 
 function prepareCutawayOuterPolarLeaves() {
   const asset = requireViews().assets.outerPoles.normal;
+  // Each lens swaps in its own outer-pole atlas.
+  const imagePixels = Math.max(...Object.values(requireViews().assets.outerPoles).map(poles => poles.asset2x.width));
   return Object.freeze((["south", "north"] as const).map((pole, index) => ({
     latitudeIndex: pole === "north" ? LATITUDE_SEGMENTS - 1 : 0,
     leaf: Object.freeze({
@@ -968,6 +993,7 @@ function prepareCutawayOuterPolarLeaves() {
           url2x: asset.url2x,
           presentationWidth: 256,
           presentationHeight: 256,
+          imagePixels,
         },
       ),
     }),
@@ -1764,6 +1790,20 @@ function publicTexturePath(textureUrl:string) {
   const filename = textureUrl.startsWith(prefix) ? textureUrl.slice(prefix.length) : '';
   if(!/^[a-z0-9@.-]+$/u.test(filename)) throw new TypeError('Invalid prepared texture URL: '+textureUrl);
   return resolve(publicDirectory, filename);
+}
+
+/** The widest image each lens-swapped leaf family can show, read from the files this preparation published: the default
+ * body surface, poles and @2x rings, and each false-colour lens's own. */
+async function publishedLeafImagePixels():Promise<LeafImagePixels> {
+  const lenses = requireLenses().controls
+    .filter((lens): lens is Extract<typeof lens,{falseColor:boolean}> => 'falseColor' in lens && lens.falseColor);
+  const widest = (family:string, urls:readonly string[]) =>
+    widestPublishedImage(urls.map(publicTexturePath), `${config.namespace} ${family} leaves`);
+  return {
+    surface: await widest("surface", [PLANET_BODY_SURFACE_TEXTURE_URL, ...lenses.map((lens) => lens.surface2xUrl)]),
+    poles: await widest("polar cap", [PLANET_POLAR_TEXTURE_URL, ...lenses.map((lens) => lens.polesUrl)]),
+    rings: await widest("ring plane", [RING_TEXTURE_2X_URL, ...lenses.map((lens) => lens.ring2xUrl)]),
+  };
 }
 
 async function prepareNormalMaterialMasters() {
@@ -3245,7 +3285,7 @@ function prepareInitialObjectViewDirection() {
   );
 }
 
-function prepareBody() {
+function prepareBody(images:LeafImagePixels) {
   const polygons = createUvSpherePolygons();
   // Detect shared edges from the unexpanded source topology. The tiny
   // presentation overlap intentionally moves neighboring vertices apart and
@@ -3270,6 +3310,7 @@ function prepareBody() {
           ...textureStyle(
             polygon,
             index,
+            polygon.polarCap ? images.poles : images.surface,
             sharedEdges,
             polygon.polarCap ? 0 : PLANET_SEAM_BLEED,
           ),
@@ -3293,13 +3334,13 @@ function prepareBody() {
   });
 }
 
-function preparePolarInnerLeaves() {
+function preparePolarInnerLeaves(polesPixels:number) {
   return (["south", "north"] as const).map((pole, index) => ({
     latitudeIndex: pole === "north" ? LATITUDE_SEGMENTS - 1 : 0,
     leaf: {
       tag: "s",
       className: `${config.namespace}-polar-inner ${config.namespace}-polar-inner-${pole}`,
-      ...textureStyle(createPolarCapPolygon(pole, "inner"), index, null, 0),
+      ...textureStyle(createPolarCapPolygon(pole, "inner"), index, polesPixels, null, 0),
     },
   }));
 }
@@ -3425,8 +3466,9 @@ const {
   surface: preparedSurface,
   lighting: preparedLighting,
 } = preparedMaterial;
-const polarInnerLeaves = preparePolarInnerLeaves();
-const preparedBodyLeaves = prepareBody();
+const leafImages = await publishedLeafImagePixels();
+const polarInnerLeaves = preparePolarInnerLeaves(leafImages.poles);
+const preparedBodyLeaves = prepareBody(leafImages);
 const bodyLeaves = [...polarInnerLeaves, ...preparedBodyLeaves];
 const bodyBands = prepareBodyBands(bodyLeaves);
 const cutawayOuterBodyLeaves = [
@@ -3567,7 +3609,7 @@ const scene = {
     },
   },
   preparedRingSource: PREPARED_RING_SOURCE,
-  ringPlane: canonicalRingTextureStyle(),
+  ringPlane: canonicalRingTextureStyle(leafImages.rings),
   ringMotionPlates: preparedRingMotionPlates,
   ringMotionExpansionPlates: preparedRingMotionExpansionPlates,
   ringShadowPlane: croppedRingShadowTextureStyle(),

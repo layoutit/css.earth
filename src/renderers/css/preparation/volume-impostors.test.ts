@@ -232,6 +232,33 @@ test('leaves that share one delivered atlas render the same views as leaves that
   }
 });
 
+test('slices drawn at TEXELS_PER_CSS_PIXEL bake the same views as their one-texel-per-pixel boxes', async () => {
+  // The views read each slice's plane and texture mapping, not its box: redrawing a delivered bank's boxes needs no re-bake.
+  const { compileVolumeLeaf } = await import('./volume.js');
+  const { TEXELS_PER_CSS_PIXEL } = await import('../../../platform/projective-surface-raster.mts');
+  const quadrants = (a: Rgba, b: Rgba) => ({ width: 5, height: 3,
+    data: Uint8Array.from(Array.from({ length: 15 }, (_, index) => (index % 5 < 2) !== (index < 5) ? a : b).flat()) });
+  const sparse = await fixture([
+    { axis: 'x', depth: -.4, color: [0, 0, 0, 0], bounds: [-1.5, 1.2, -.8, .9], raster: quadrants([200, 40, 30, 255], [20, 60, 200, 128]) },
+    { axis: 'y', depth: .7, color: [0, 0, 0, 0], bounds: [-.6, 1.9, -.9, .3], raster: quadrants([30, 210, 60, 200], [240, 240, 20, 90]) },
+    { axis: 'z', depth: .2, color: [0, 0, 0, 0], bounds: [-1.7, .9, -1.3, 1.4], raster: quadrants([250, 120, 10, 255], [90, 10, 160, 60]) },
+  ]);
+  const lengths = (value: string) => value.split(' ').map(Number.parseFloat);
+  const dense = { ...sparse.volume, stacks: sparse.volume.stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => {
+    const [leafWidth] = lengths(leaf.style.width), [leafHeight] = lengths(leaf.style.height);
+    const { style } = compileVolumeLeaf({ matrix: leaf.style.transform.slice('matrix3d('.length, -1), leafWidth: leafWidth!, leafHeight: leafHeight!,
+      backgroundSize: lengths(leaf.style.backgroundSize), backgroundPosition: lengths(leaf.style.backgroundPosition) }, leaf.widthPx);
+    assert.equal(leaf.widthPx / lengths(style.width)[0]!, TEXELS_PER_CSS_PIXEL);
+    return { ...leaf, style };
+  }) })) };
+  const one = await bake(sparse), two = await bake(sparse, WHITE, dense);
+  for (const direction of [[0, 0, 1], [1, 0, 0], [0, -1, 0], [1, 1, 1], [-1, 1, -1]] as VolumeVector[]) {
+    const expected = await one.image(direction), actual = await two.image(direction);
+    assert(expected.data.some((value, index) => index % 4 === 3 && value > 0), `View ${expected.view.id} must show the fixture.`);
+    assert.deepEqual([...actual.data], [...expected.data], `Dense view ${actual.view.id} differs.`);
+  }
+});
+
 test('an atlased leaf whose background does not cover its texture is refused', async () => {
   const white = { width: 4, height: 4, data: Uint8Array.from(Array.from({ length: 16 }, () => [255, 255, 255, 255]).flat()) };
   const input = await fixture([{ axis: 'x', depth: 0, color: [255, 255, 255, 255], raster: white },

@@ -328,9 +328,13 @@ triangle of a body has the same texel density. The leaf shows its rectangle like
 any `@2x` image, at two atlas texels per CSS pixel, and its matrix scales it back
 onto the face. WebKit backs each composited leaf at its box size times the device
 pixel ratio and ignores the transform: at one texel per CSS pixel, Itokawa's 794
-faces held 486 MB of layer memory on a DPR 3 iPhone, and 173 MB at two
-([radial-terrain.mts](../tools/objects/terrestrial-layers/radial-terrain.mts)). At
-rest, 739 of 3.16 million screen pixels change; at maximum zoom each face is drawn
+faces held 486 MB of layer memory on a DPR 3 iPhone, and 173 MB at two. Every
+textured leaf follows the same rule, `TEXELS_PER_CSS_PIXEL` and `leafRasterScale`
+in [projective-surface-raster.mts](../src/platform/projective-surface-raster.mts):
+faces, polar caps, band leaves, ring tiles, volume slices and image layers hold
+their widest image, over every lens, level and page, at two texels per CSS
+pixel, with the recipe's raster scale as a ceiling. At rest on Itokawa, 739 of
+3.16 million screen pixels change; at maximum zoom each face is drawn
 at half the resolution, so a seam can show as a faint light line ([seam repair](#seam-repair-and-the-globe-interior-disc)).
 
 ![Itokawa on the iPhone 17 simulator at rest and at maximum zoom: one texel per CSS pixel, two, and their Pixelmatch difference at threshold 0.1](images/raster-leaf-2x.webp)

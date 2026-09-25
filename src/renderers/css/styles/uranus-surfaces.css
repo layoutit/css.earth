@@ -67,14 +67,6 @@
   animation-play-state: paused;
 }
 
-:where(.object-stage[data-object-id="uranus"]) .uranus-body:not(.uranus-body-polar) > .uranus-surface-face {
-  background-image: var(--uranus-surface-image);
-}
-
-:where(.object-stage[data-object-id="uranus"]) .uranus-body-polar > :is(.uranus-polar-surface, .uranus-polar-inner) {
-  background-image: var(--uranus-poles-image);
-}
-
 :where(.object-stage[data-object-id="uranus"]) .uranus-ring-orbit > s,
 :where(.object-stage[data-object-id="uranus"]) .uranus-ring-shadow > s,
 :where(.object-stage[data-object-id="uranus"]) .uranus-fixed-material > s {

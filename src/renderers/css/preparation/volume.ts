@@ -5,8 +5,25 @@ import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Pol
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Axis, Vector3, VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
-import type { PreparedCssVolume } from '../volume/types.js';
+import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../../../platform/projective-surface-raster.mts';
+import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import type { PreparedCssVolume, PreparedVolumeLeafStyle } from '../volume/types.js';
 export type { PreparedCssVolume } from '../volume/types.js';
+
+/** A PolyCSS image leaf drawn at TEXELS_PER_CSS_PIXEL. PolyCSS gives the leaf one CSS pixel per texel of the image its
+ * background spans, `imagePixels` wide, and WebKit backs every composited leaf at that box times the device pixel ratio,
+ * whatever its matrix: on a DPR 3 iPhone each of M42's 370×475 slices took 6.2 MB (275 MB of layers on its focus page)
+ * and the Milky Way's 1024 px outer disc 36.9 MB. The box shrinks by leafRasterScale and the matrix scales it back, so
+ * the leaf covers the same plane and samples the same texels. */
+export function compileVolumeLeaf(geometry: Pick<ProjectiveGeometry, 'matrix' | 'leafWidth' | 'leafHeight' | 'backgroundPosition' | 'backgroundSize'>,
+  imagePixels: number): { boundsCssPixels: PreparedLeafBounds | undefined; style: PreparedVolumeLeafStyle } {
+  const scale = leafRasterScale(imagePixels, geometry.backgroundSize[0]!, 1);
+  const leaf = fitTextureGeometry(geometry, geometry.leafWidth * scale, geometry.leafHeight * scale);
+  const px = (values: readonly number[]) => values.map(value => `${value}px`).join(' ');
+  return { boundsCssPixels: compileLeafBounds(leaf.matrix, leaf.leafWidth, leaf.leafHeight),
+    style: { width: `${leaf.leafWidth}px`, height: `${leaf.leafHeight}px`, transform: `matrix3d(${leaf.matrix})`,
+      backgroundSize: px(leaf.backgroundSize), backgroundPosition: px(leaf.backgroundPosition) } };
+}
 
 function referencePositionToUnits(position: Vector3, frame: DensityVolumeFrame): Vector3 {
   const x = (position[0] - frame.originM[0]) / frame.metersPerUnit;
@@ -37,12 +54,7 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
     const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
     if (!geometry) throw new TypeError(`PolyCSS could not prepare volume leaf ${quad.id}.`);
     return [{ axis: quad.axis, id: quad.id, centerUnits: quad.center, texturePath: quad.texturePath,
-      widthPx: quad.widthPx, heightPx: quad.heightPx,
-      boundsCssPixels: compileLeafBounds(geometry.matrix, geometry.leafWidth, geometry.leafHeight),
-      style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`,
-        transform: `matrix3d(${geometry.matrix})`,
-        backgroundSize: geometry.backgroundSize.map(value => `${value}px`).join(' '),
-        backgroundPosition: geometry.backgroundPosition.map(value => `${value}px`).join(' ') } }];
+      widthPx: quad.widthPx, heightPx: quad.heightPx, ...compileVolumeLeaf(geometry, quad.widthPx) }];
   });
   const axes: Axis[] = ['x', 'y', 'z'];
   return { schema: 'cssearth-css-volume@1' as const, id, frame,

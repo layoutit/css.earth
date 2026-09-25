@@ -25,13 +25,6 @@
 :where(.object-stage[data-object-id="neptune"]) .polycss-scene :is(b, i, s) { position: absolute; display: block; transform-origin: 0 0; margin: 0; padding: 0; line-height: 0; text-decoration: none; backface-visibility: hidden; background-repeat: no-repeat; pointer-events: none; }
 :where(.object-stage[data-object-id="neptune"]) .polycss-scene s { width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px); background-origin: border-box; background-clip: border-box; }
 
-:where(.object-stage[data-object-id="neptune"]) .neptune-body:not(.neptune-body-polar) > .neptune-surface-face {
-  background-image: var(--neptune-surface-image) !important;
-}
-:where(.object-stage[data-object-id="neptune"]) .neptune-body-polar > s {
-  background-image: var(--neptune-poles-image) !important;
-}
-
 :where(.object-stage[data-object-id="neptune"]) .neptune-ring-plane > s { backface-visibility: visible; }
 .object-stage:where([data-object-id="neptune"]).neptune-hide-rings .neptune-ring-plane { visibility: hidden; }
 @keyframes neptune-body-spin {
@@ -39,9 +32,11 @@
   to { transform: rotateZ(-488deg); }
 }
 
-/* Lighting overlay: the bank's frames are 1024 px (raster.json lighting.presentationSize); the lit disc is fitted to the sphere's
-   440-unit equatorial diameter (geometry.json radius 220). Without this rule the frame had no size and the planet was
-   drawn unlit. */
+/* Lighting overlay: the bank's frames are 256 px (raster.json lighting.presentationSize), two texels per CSS pixel of their
+   512 px frames, and scale(1.71875) = 440 / 256 fits the lit disc to the sphere's 440-unit equatorial diameter (geometry.json
+   radius 220). A 1024 px box scaled by 0.4296875 drew the same disc, but WebKit backs a layer at its box times the device
+   pixel ratio: an estimated 36 MB at DPR 3 against 2.3 MB at 256 px. Without this rule the frame had no size and the planet
+   was drawn unlit. */
 .object-stage[data-object-id="neptune"] > .neptune-material-composite {
   position: absolute;
   inset: 0;
@@ -54,8 +49,8 @@
   display: block;
   top: 50%;
   left: 50%;
-  width: 1024px;
-  height: 1024px;
+  width: 256px;
+  height: 256px;
   margin: 0;
   padding: 0;
   line-height: 0;
@@ -63,8 +58,8 @@
   background-repeat: no-repeat;
   pointer-events: none;
   transform-origin: 50% 50%;
-  transform: translate(-50%, -50%) rotate(var(--neptune-light-roll, 0deg)) scale(0.429688);
+  transform: translate(-50%, -50%) rotate(var(--neptune-light-roll, 0deg)) scale(1.71875);
 }
 .object-stage[data-object-id="neptune"].neptune-hide-shadows .neptune-fixed-material {
-  transform: translate(-50%, -50%) scale(0.429688);
+  transform: translate(-50%, -50%) scale(1.71875);
 }

@@ -4,7 +4,8 @@ export type TerrestrialRings = ReturnType<typeof parseRingProfile>;
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareRingLeaves } from '../shape-model/rings.mts';
-import { prepareCoplanarColorRaster } from '../material-composition/coplanar-raster.mts';
+import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/coplanar-raster.mts';
+import { publishedImageSize } from '../shape-model/raster.mts';
 
 /** Ring geometry and display assumptions are authored by the body. */
 export function validateTerrestrialRings(input: unknown, referenceRadiusKm: number): asserts input is TerrestrialRings | undefined {
@@ -25,6 +26,14 @@ export function validateTerrestrialRings(input: unknown, referenceRadiusKm: numb
       throw new TypeError('Invalid annulus dimensions or display interpretation.');
     }
   }
+}
+
+/** An annular ring tile's CSS, from the box and address coplanarTileLayout sized. */
+export function annularRingStyle(tile: ReturnType<typeof coplanarTileLayout>) {
+  return `position:absolute;display:block;width:${tile.width};height:${tile.height};margin:0;padding:0;transform-origin:0 0;` +
+    `transform:matrix3d(${tile.matrix.join(',')});backface-visibility:visible;--polycss-atlas-width:${tile.width};` +
+    `--polycss-atlas-height:${tile.height};background-position:${tile.backgroundPosition};` +
+    `background-size:${tile.backgroundSize};background-repeat:no-repeat`;
 }
 
 /** Reuse Haumea's annular geometry and its existing coplanar raster compiler.
@@ -51,11 +60,8 @@ export async function prepareTerrestrialRings({ config, publicDirectory }: {conf
   const extent = Math.max(...faces.flatMap(face => face.vertices.flatMap(v => [Math.abs(v[0]), Math.abs(v[1])])));
   const raster = await prepareCoplanarColorRaster({ faces, pixelsPerUnit: profile.textureSize / (2 * extent) });
   await writeFile(resolve(publicDirectory, `${config.namespace}-rings.webp`), raster.bytes);
-  const leaves = raster.tiles.map(tile => ({ tag: 's', className: 'prepared-annular-ring',
-    style: `position:absolute;display:block;width:${tile.width}px;height:${tile.height}px;margin:0;padding:0;transform-origin:0 0;` +
-      `transform:matrix3d(${tile.matrix.join(',')});backface-visibility:visible;--polycss-atlas-width:${tile.width}px;` +
-      `--polycss-atlas-height:${tile.height}px;background-position:${-tile.x}px ${-tile.y}px;` +
-      `background-size:${raster.width}px ${raster.height}px;background-repeat:no-repeat` }));
+  const { width: imagePixels } = await publishedImageSize({ publicDirectory, publicBase: config.publicBase }, url, config.namespace);
+  const leaves = raster.tiles.map(tile => ({ tag: 's', className: 'prepared-annular-ring', style: annularRingStyle(coplanarTileLayout(tile, raster, imagePixels)) }));
   return { leaves, resource: { key: 'rings', url, pool: 'mounted' },
     coverage: { sourceFaceCount: faces.length, preparedTileCount: leaves.length, width: raster.width, height: raster.height, sourceFaces: faces },
     qualification: profile.bands.map(({ id, qualification }) => ({ id, qualification })) };

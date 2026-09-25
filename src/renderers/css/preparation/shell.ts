@@ -5,6 +5,31 @@ import { unitVector, type ShellMesh } from '../../../preparation/shell/mesh.js';
 import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { SHELL_CORNER_PERMUTATIONS } from '../shell/material-address.js';
+import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../../../platform/projective-surface-raster.mts';
+
+/** A face drawn at TEXELS_PER_CSS_PIXEL. PolyCSS sizes the face's box at one CSS pixel per texel of its atlas tile, and
+ * WebKit backs every composited face at that box times the device pixel ratio whatever its matrix: the heliosphere's 960
+ * front faces, 32 px tiles, come to 35.4 MB of layers at DPR 3 by their boxes. The box shrinks by leafRasterScale and the
+ * matrix scales it back, so a face covers its triangle and samples its tile exactly as before. */
+export function shellFacePresentation(geometries: readonly Pick<ProjectiveGeometry, 'matrix' | 'leafWidth' | 'leafHeight' | 'backgroundPosition' | 'backgroundSize'>[],
+  atlas: Pick<ShellRecipe['atlas'], 'tileSize' | 'columns' | 'frames'>, index: number) {
+  const layouts = geometries.map(g => {
+    const scale = leafRasterScale(atlas.tileSize, g.backgroundSize[0]!, 1);
+    return fitTextureGeometry(g, g.leafWidth * scale, g.leafHeight * scale);
+  }), geometry = layouts[0];
+  if (!geometry || layouts.some(g => g.leafWidth !== geometry.leafWidth || g.leafHeight !== geometry.leafHeight ||
+    String(g.backgroundSize) !== String(geometry.backgroundSize) || String(g.backgroundPosition) !== String(geometry.backgroundPosition))) {
+    throw new TypeError(`Prepared corner permutations of surface triangle ${index} must share one retained image layout.`);
+  }
+  const rows = Math.ceil(atlas.frames / atlas.columns);
+  return {
+    style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`, transform: `matrix3d(${geometry.matrix})`,
+      backgroundSize: `${geometry.backgroundSize[0]! * atlas.columns}px ${geometry.backgroundSize[1]! * rows}px` },
+    atlasStepPixels: [geometry.backgroundSize[0]!, geometry.backgroundSize[1]!] as const,
+    atlasOriginPixels: [geometry.backgroundPosition[0]!, geometry.backgroundPosition[1]!] as const,
+    materialTransforms: layouts.map(g => `matrix3d(${g.matrix})`),
+  };
+}
 
 export function compileCssSurfaceShell(options: { id: string; recipe: ShellRecipe; mesh: ShellMesh;
   atlasResource: PreparedCssSurfaceShell['resources'][number]; provenance: Readonly<Record<string, unknown>> }): PreparedCssSurfaceShell {
@@ -44,18 +69,9 @@ export function compileCssSurfaceShell(options: { id: string; recipe: ShellRecip
       if (!geometry) throw new TypeError(`PolyCSS could not prepare surface triangle ${index}.`);
       return geometry;
     });
-    const geometry = geometries[0]!;
-    if (geometries.some(g => g.leafWidth !== geometry.leafWidth || g.leafHeight !== geometry.leafHeight ||
-      String(g.backgroundSize) !== String(geometry.backgroundSize) || String(g.backgroundPosition) !== String(geometry.backgroundPosition))) {
-      throw new TypeError('Prepared corner permutations must share one retained image layout.');
-    }
-    const rows = Math.ceil(recipe.atlas.frames / recipe.atlas.columns);
-    return { id: `face-${index}`, centerUnits, radialNormal: unitVector(centerUnits), faceNormal,
-      style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`, transform: `matrix3d(${geometry.matrix})`,
-        backgroundSize: `${geometry.backgroundSize[0] * recipe.atlas.columns}px ${geometry.backgroundSize[1] * rows}px` },
-      atlasStepPixels: geometry.backgroundSize, atlasOriginPixels: geometry.backgroundPosition,
-      ...(recipe.atlas.facingLevels ? { vertexIndices: indices,
-        materialTransforms: geometries.map(g => `matrix3d(${g.matrix})`) } : {}) };
+    const { style, atlasStepPixels, atlasOriginPixels, materialTransforms } = shellFacePresentation(geometries, recipe.atlas, index);
+    return { id: `face-${index}`, centerUnits, radialNormal: unitVector(centerUnits), faceNormal, style, atlasStepPixels, atlasOriginPixels,
+      ...(recipe.atlas.facingLevels ? { vertexIndices: indices, materialTransforms } : {}) };
   });
   const units = recipe.frame.metersPerUnit;
   return { schema: 'cssearth-css-surface-shell@1', id, frame: recipe.frame, unitScale: recipe.unitScale,

@@ -88,8 +88,10 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     const focus=input.lensFocus?.[lens.id];
     variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),shadows,...(rings===null?{}:{rings})},required:required(lens.id),writes:[
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},{kind:"attribute",target:-1,name:"data-view",value:null},
-      ...(paged?[...paged.keys(lens.id).map((resource,page)=>({kind:"texture",target:index(body),name:`--${ns}-surface-page-${page}`,resource,quoted:true} as PreparedWrite)),
-        {kind:"texture",target:index(body),name:`--${ns}-poles-image`,resource:`poles:${lens.id}`,quoted:true} as PreparedWrite]:[]),
+      // Each lens's own images reach the leaves through these textures (scene/projector.ts binds every leaf to them).
+      ...(paged?paged.keys(lens.id).map((resource,page)=>({kind:"texture",target:index(body),name:`--${ns}-surface-page-${page}`,resource,quoted:true} as PreparedWrite))
+        :[{kind:"texture",target:index(body),name:`--${ns}-surface-image`,resource:`surface:${lens.id}`,quoted:true} as PreparedWrite]),
+      {kind:"texture",target:index(body),name:`--${ns}-poles-image`,resource:`poles:${lens.id}`,quoted:true} as PreparedWrite,
       ...(atmosphere===null?[]:[{kind:"class",target:-1,name:`${ns}-hide-atmosphere`,value:!atmosphere} as PreparedWrite]),
       ...(atmospheric?[]:[{kind:"class",target:-1,name:`${ns}-hide-shadows`,value:!shadows} as PreparedWrite]),
       ...(ringNode && rings!==null?[{kind:"style",target:index(ringNode),name:"display",value:rings?"block":"none"} as PreparedWrite]:[]),

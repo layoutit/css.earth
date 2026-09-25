@@ -9,6 +9,7 @@ import { prepareImageLayers } from './prepare.js';
 import { sha256 } from '@cssearth/core/node';
 import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment-images.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
+import { TEXELS_PER_CSS_PIXEL } from '../../platform/projective-surface-raster.mts';
 
 test('environment restoration leaves dedicated preparation owners to restore their missing banks', async () => {
   const { writeFile } = await import('node:fs/promises');
@@ -33,6 +34,10 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   const recipe:ImageLayerRecipe={schema:'cssearth-image-layer-recipe@1',id:'fixture',source:{path:'source.png',dimensions:[7,7],originalDimensions:[7,7],publisherUrl:'https://example.test',downloadUrl:'https://example.test/a',credit:'Fixture',license:'CC-BY-4.0'},observation:{centerRaDeg:1,centerDecDeg:2,fieldOfViewDeg:[2,1],northClockwiseDeg:0},target:{centerRaDeg:1,centerDecDeg:2,distancePc:1000},geometry:{kind:'inclined-disk',inclinationDeg:40,lineOfNodesPaDeg:25,thicknessKpc:.2,supportRadiusKpc:1,supportTaperFraction:.9,depthWeights:[.25,.5,.25],depthScales:[1,1,1]},bake:{maxFacePixels:7,diffuseFacePixels:7,crossAxisSlices:3,crossAxisAlongPixels:7,crossAxisDepthPixels:9,backgroundFloor:0,edgeTaperFraction:.1,diffuseFraction:.6,diffuseSigmaPixels:1,encoding:{format:'webp',quality:100}},provenance:{path:'provenance.json'}};
   const parsed=parseImageLayerRecipe(recipe),bank=await prepareImageLayers({sourceDirectory:source,outputDirectory:output,recipe:parsed});
   assert.deepEqual(bank.banks.map(b=>[b.axis,b.leaves.length]),[['x',3],['y',3],['z',4]]);
+  // Every layer holds its whole image at the shared texel density: WebKit backs a leaf at its box, not its projection.
+  for(const b of bank.banks)for(const l of b.leaves){const [width,height]=[l.style.width,l.style.height].map(Number.parseFloat);
+    assert.equal(l.widthPx/width!,TEXELS_PER_CSS_PIXEL,`${l.id}: ${l.widthPx} texels across ${l.style.width}`);assert.equal(l.heightPx/height!,TEXELS_PER_CSS_PIXEL,`${l.id}: ${l.heightPx} texels down ${l.style.height}`);
+    assert.equal(l.style.backgroundSize,`${l.style.width} ${l.style.height}`);assert.equal(l.style.backgroundPosition,'0px 0px');}
   for(const b of bank.banks){assert(b.leaves.every(l=>l.style.transform.startsWith('matrix3d(')));assert(b.leaves.some(l=>l.verticesUnits.some(v=>Math.abs(v[2])>0)));const leaf=b.leaves[Math.floor(b.leaves.length/2)],edgeA=leaf.verticesUnits[1].map((v,i)=>v-leaf.verticesUnits[0][i]) as [number,number,number],edgeB=leaf.verticesUnits[2].map((v,i)=>v-leaf.verticesUnits[1][i]) as [number,number,number],cross=[edgeA[1]*edgeB[2]-edgeA[2]*edgeB[1],edgeA[2]*edgeB[0]-edgeA[0]*edgeB[2],edgeA[0]*edgeB[1]-edgeA[1]*edgeB[0]],length=Math.hypot(...cross);assert(Math.abs(cross.reduce((sum,v,i)=>sum+v*b.normalUnits[i],0)/length)>.999,'bank normal follows its prepared central plane');}
   const layers=await Promise.all(bank.banks[2].leaves.map(async l=>await sharp(join(output,l.texturePath)).raw().ensureAlpha().toBuffer({resolveWithObject:true})));
   const pixels=layers[0].info.width*layers[0].info.height,alphas=Array.from({length:pixels},(_,p)=>layers.reduce((a,l)=>1-(1-a)*(1-l.data[4*p+3]/255),0));assert(Math.abs(Math.max(...alphas)-240/255)<.02,'optical split recomposes the strongest nonuniform source alpha');

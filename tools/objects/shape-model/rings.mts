@@ -1,6 +1,7 @@
 import type { Polygon, Vec3 } from '@layoutit/polycss';
 export interface RingGeometry {segments:number;innerRadiusKm:number;outerRadiusKm:number}
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry } from '@layoutit/polycss';
+import type { coplanarTileLayout } from '../material-composition/coplanar-raster.mts';
 
 export function prepareRingLeaves(config: {ring?:RingGeometry;displayRadius:number}, texture: {url:string;width:number;height:number}, majorRadiusKm: number, onGeometry?: (geometry: NonNullable<ReturnType<typeof resolvePolyTextureLeafGeometry>>) => void) {
   if (!config.ring) throw new TypeError("Ring leaves require an authored ring.");
@@ -19,4 +20,12 @@ export function prepareRingLeaves(config: {ring?:RingGeometry;displayRadius:numb
     onGeometry?.(g);
     return { tag: 's', className: 'shape-model-ring-quad', style: `transform:matrix3d(${g.matrix});backface-visibility:visible;--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;background-image:url("${texture.url}");background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};background-repeat:no-repeat` };
   });
+}
+
+/** A coplanar ring tile's CSS, from the box and address coplanarTileLayout sized; shape-model.css sizes the box from the
+ * atlas variables. */
+export function ringQuadStyle(tile: ReturnType<typeof coplanarTileLayout>) {
+  return `transform:matrix3d(${tile.matrix.join(',')});backface-visibility:visible;--polycss-atlas-width:${tile.width};` +
+    `--polycss-atlas-height:${tile.height};background-position:${tile.backgroundPosition};` +
+    `background-size:${tile.backgroundSize};background-repeat:no-repeat`;
 }

@@ -7,7 +7,7 @@ import type { RasterRecipe } from '../../../../preparation/raster/config.js';
 import { RASTER_DENSITY } from '../../../../preparation/raster/config.js';
 import { rasterPagePlan } from '../../../../preparation/raster/pages.js';
 import type { GeometryProfile } from './profile.js';
-import { createLeafProjector, rendererPolygon } from './projector.js';
+import { createLeafProjector, rendererPolygon, type LeafImagePixels } from './projector.js';
 import { prepareCutaway } from './cutaway.js';
 import { prepareSeamOutsetSteps } from './seam-outset.js';
 import { ringWedgeLayout, wedgeMatrix } from './ring-wedges.js';
@@ -15,6 +15,8 @@ import type { InteriorAssets } from './cutaway.js';
 import { prepareAtmosphericMaterial } from './atmosphere.js';
 export { parseGeometryProfile } from './profile.js';
 export type { GeometryProfile } from './profile.js';
+export type { LeafImagePixels } from './projector.js';
+export { leafImageCandidates, widestLeafImages } from './leaf-images.js';
 export interface PhysicalScene {
  camera:unknown;systemTransform:unknown;presentationFrame:unknown;worldFrame:unknown;starfield:unknown;
 }
@@ -39,9 +41,11 @@ export interface GeometrySceneOptions {
  /** The authored world context (prepared spatial context) of a body the ephemeris tables do not place, such as the Sun. */
  worldContext?:unknown;
  adapters:ScenePreparationAdapters;outputDirectory:string;
+ /** Pixel width of the widest published image each leaf texture can show (leaf-images.ts measures the run's own files). */
+ imagePixels:LeafImagePixels;
 }
 
-export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,worldContext,adapters,outputDirectory}:GeometrySceneOptions) {
+export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,worldContext,adapters,outputDirectory,imagePixels}:GeometrySceneOptions) {
  if(profile.surface.radius!==solarSource.bodyRadiusUnits)throw new TypeError('Authored surface radius differs from the physical scene scale.');
  const physical=await adapters.preparePhysicalScene({...solarSource,starfield,sun,...(worldContext!==undefined?{worldContext}:{})});
  const polygons=createSurfacePatches(profile.surface,profile.projection.overlap,profile.projection.rasterScale,profile.projection.rasterOverscan);
@@ -50,7 +54,7 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  // An emissive body's leaves are source-lit; the ephemeris light is not consulted (the Sun has no entry there).
  const pages=rasterPagePlan(raster,RASTER_DENSITY);
  if(pages&&(profile.output.layout==='retained'||profile.cutaway))throw new TypeError(`${profile.namespace}: a paged surface needs the composite layout without a cutaway.`);
- const projector=createLeafProjector(profile,assets.emission?[0,0,1]:adapters.bodyFixedSunDirection(solarSource.bodyId),pages);
+ const projector=createLeafProjector(profile,assets.emission?[0,0,1]:adapters.bodyFixedSunDirection(solarSource.bodyId),pages,imagePixels);
  const leaves=polygons.map((patch,index)=>projector.surface(patch,index,seamEdges.get(index)));
  const innerPolarLeaves=profile.surface.innerPoles?(['north','south'] as Pole[]).map((pole,index)=>projector.surface(createPolarPatch(profile.surface,pole,true),polygons.length+index)):[];
  const bodyLeaves=[...leaves,...innerPolarLeaves];

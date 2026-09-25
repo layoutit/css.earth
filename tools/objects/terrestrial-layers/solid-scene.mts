@@ -8,7 +8,7 @@ import type { createSourceManifest } from '../../../src/platform/source-manifest
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedVariant } from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 import type { PreparedPresentationDefinition } from '../../../src/renderers/css/rendering/prepared-presentation.ts';
-import { requireString, requireFiniteNumber } from '@cssearth/core';
+import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
 import { prepareScientificNavigation } from './scientific-focus.mts';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -31,6 +31,7 @@ import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
 import { restoreDepthSource } from '../../prepared/prepared-depth-partitions.mts';
 import { prepareTerrestrialRings } from './rings.mts';
+import { publishedImageSize } from '../shape-model/raster.mts';
 export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;
   geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera?:{framingScale?:number}};
@@ -77,6 +78,17 @@ async function prepareSolidEpochFrame({ config, celestial, surfacesReport, frami
     systemTransform: frame.cssTransform };
 }
 
+/** The widest surface and pole images any lens binds to the banded leaves: the lane's assets.json names them, and their
+ * files give the widths, so each leaf holds the widest at two texels per CSS pixel. */
+async function publishedLensImageWidths({ config, outputDirectory, publicDirectory }:{config:SolidSceneConfig;outputDirectory:string;publicDirectory:string}) {
+  const path = resolve(outputDirectory, 'assets.json');
+  const surfaces = Object.entries(requireRecord(requireRecord(JSON.parse(await readFile(path, 'utf8')), path).surfaces, `${path} surfaces`));
+  if (!surfaces.length) throw new TypeError(`${config.namespace}: ${path} lists no lens surfaces.`);
+  const widest = async (fields: readonly string[]) => Math.max(...await Promise.all(surfaces.flatMap(([lens, value]) => fields.map(async field =>
+    (await publishedImageSize({ publicDirectory, publicBase: config.publicBase }, requireString(requireRecord(value, `${path} ${lens}`)[field], `${path} ${lens}.${field}`), config.namespace)).width))));
+  return { mapPixelWidth: await widest(['url', 'url2x']), polesPixelWidth: await widest(['polesUrl', 'polesUrl2x']) };
+}
+
 export async function prepareSolidScene({ config, celestial, outputDirectory, publicDirectory, radial = null }:{config:SolidSceneConfig;celestial:SolidCelestial;outputDirectory:string;publicDirectory:string;radial?:ReturnType<typeof combineRadialModels>}) {
   const { namespace: id, geometry } = config;
   const framingScale = meshFramingScale(geometry.radius, (radial?.faces ?? []).flatMap(face => face.vertices), geometry.camera?.framingScale);
@@ -84,7 +96,7 @@ export async function prepareSolidScene({ config, celestial, outputDirectory, pu
   const bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[]=radial?.leaves ?? prepareSolidBodySurface({ id, radius: geometry.radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
       sourceWidth: config.raster.width, sourceHeight: config.raster.height,
       latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
-      poleTileSize: config.raster.poleSize });
+      poleTileSize: config.raster.poleSize, ...await publishedLensImageWidths({ config, outputDirectory, publicDirectory }) });
   const rings = await prepareTerrestrialRings({ config, publicDirectory });
   const scene = { camera: epoch.camera, sky: epoch.sky, sun: epoch.sun,
     ...(rings ? { rings } : {}),

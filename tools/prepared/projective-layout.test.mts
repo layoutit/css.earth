@@ -68,5 +68,7 @@ test("unscaled CSS leaves retain their existing layout contract", () => {
 
 test("projective raster transport scales prepared pixel addresses without changing other units", () => {
   assert.equal(scalePreparedPixelLengths("calc(-1.25px + 50%) 1e2px var(--atlas)", 2), "calc(-2.5px + 50%) 200px var(--atlas)");
-  assert.throws(() => scalePreparedPixelLengths("4px", 0.5), /at least one/);
+  // A 1x image shrinks its leaf below scale one; zero or a negative scale is refused.
+  assert.equal(scalePreparedPixelLengths("4px 10px", 0.5), "2px 5px");
+  assert.throws(() => scalePreparedPixelLengths("4px", 0), /must be positive, not 0/);
 });

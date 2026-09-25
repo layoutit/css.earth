@@ -74,6 +74,15 @@ export async function prepareRingRaster({ config, publicDirectory, publicBase }:
   return { url: publicBase + 'ring.webp', width, height };
 }
 
+/** The pixel size of an image this run published at `url`, read from the file: leaf boxes are sized from what shipped. */
+export async function publishedImageSize({ publicDirectory, publicBase }:OutputDirectories, url:string, objectId:string) {
+  if (!url.startsWith(publicBase)) throw new TypeError(`${objectId}: image ${url} is not published under ${publicBase}.`);
+  const path = resolve(publicDirectory, url.slice(publicBase.length));
+  const { width, height } = await sharp(path).metadata();
+  if (!width || !height) throw new TypeError(`${objectId}: published image ${path} has no pixel size (width ${width}, height ${height}).`);
+  return { width, height };
+}
+
 // A tiny schematic marker, generated from the same axes, not borrowed imagery.
 export async function prepareSphereLighting({ publicDirectory, publicBase }:OutputDirectories) {
   const size = 512;

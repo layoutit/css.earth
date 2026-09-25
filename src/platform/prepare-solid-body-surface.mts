@@ -2,10 +2,13 @@ import type { Polygon, Vec3, Vec2, ComputeTextureAtlasPlanOptions } from "@layou
 import type { RasterRect } from "./projective-surface-raster.mts";
 interface SurfaceRasterOptions { width: number; height: number; latitudeSegments?: number; longitudeSegments?: number; seamOverlap?: number; sampling?: "bilinear" | "nearest"; }
 interface PoleRasterOptions extends SurfaceRasterOptions { tileSize?: number; radius?: number; polarRadius?: number; }
-interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: number; secondaryRadius?: number; mapUrl: string; polesUrl: string; latitudeSegments?: number; longitudeSegments?: number; sourceWidth?: number; sourceHeight?: number; poleTileSize?: number; seamOverlap?: number; gutter?: number; }
+interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: number; secondaryRadius?: number; mapUrl: string; polesUrl: string; latitudeSegments?: number; longitudeSegments?: number; sourceWidth?: number; sourceHeight?: number; poleTileSize?: number; seamOverlap?: number; gutter?: number;
+  /** Pixel widths of the widest surface and pole images any lens binds to these leaves, measured from the published files:
+   * each leaf holds its image at TEXELS_PER_CSS_PIXEL (leafRasterScale). */
+  mapPixelWidth: number; polesPixelWidth: number; }
 type SurfacePolygon = Polygon & { latitudeIndex: number; longitudeIndex?: number; polar?: string; inner?: boolean; className?: string; textureImageSource: { url: string; width: number; height: number; sourceRect: RasterRect } };
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from "@layoutit/polycss";
-import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, polarCapRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
 
 // A latitude trapezoid uses projective UVs: tan(latitude), rather than latitude,
 // varies linearly down its texture. Bake the inverse mapping into each band so
@@ -78,12 +81,19 @@ function sampleMap(source: Buffer, width: number, height: number, longitude: num
   }
 }
 
+/** The largest raster scale a solid-body leaf takes: the scale every band leaf had before the texel rule. A leaf whose image
+ * holds more than two texels per CSS pixel at this scale keeps it. */
+const SOLID_SURFACE_RASTER_CEILING = 4;
+
 // Mercury's projective latitude-band geometry, parameterized for solid bodies.
 // All mesh construction runs during preparation; the runtime receives leaves.
 export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius, secondaryRadius = radius,
   mapUrl, polesUrl, latitudeSegments = 16, longitudeSegments = 32,
   sourceWidth = 2048, sourceHeight = 1024, poleTileSize = 256, seamOverlap = 0.005,
-  gutter = sourceHeight / latitudeSegments / 4 }: SolidSurfaceOptions) {
+  gutter = sourceHeight / latitudeSegments / 4, mapPixelWidth, polesPixelWidth }: SolidSurfaceOptions) {
+  if (![mapPixelWidth, polesPixelWidth].every(width => Number.isFinite(width) && width > 0)) {
+    throw new TypeError(`${id}: solid-body leaves need the measured pixel widths of their widest map and pole images, not mapPixelWidth=${mapPixelWidth}, polesPixelWidth=${polesPixelWidth}.`);
+  }
   const cellWidth = sourceWidth / longitudeSegments, cellHeight = sourceHeight / latitudeSegments;
   const planOptions: ComputeTextureAtlasPlanOptions & { textureLighting: "baked" } = { tileSize: 50, layerElevation: 50, textureLighting: "baked", seamBleed: 0 };
   const polygons = createSpherePolygons(seamOverlap);
@@ -256,9 +266,11 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
         `background-size:${backgroundSize};` +
         `--polycss-atlas-width:${fitted.leafWidth}px;` +
         `--polycss-atlas-height:${fitted.leafHeight}px`,
+      // Each leaf holds its widest image at two texels per CSS pixel (leafRasterScale), capped at the lane's former fixed scale.
+      // Haumea's 3096-px maps on a 1548-px band background keep the 32 × 24 layout box where scale 4 drew 128 × 96.
       projectiveTextureLayer: prepareProjectiveTextureLayer(
         fitted.matrix,
-        polygon.polar ? polarCapRasterScale(4, polygon.textureImageSource.sourceRect.width, fitted.leafWidth) : 4,
+        leafRasterScale(polygon.polar ? polesPixelWidth : mapPixelWidth, rasterPresentation.backgroundSize[0]!, SOLID_SURFACE_RASTER_CEILING),
       ),
       polar: polygon.polar ?? null,
     });

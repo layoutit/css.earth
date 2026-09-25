@@ -2,13 +2,14 @@ import './thread-pool.js';
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { prepareLighting } from '../../src/renderers/css/preparation/materials/lighting.js';
 import { outputName } from '../../src/preparation/raster/io.js';
 import { RASTER_DENSITY } from '../../src/preparation/raster/config.js';
-import { parseGeometryProfile, prepareGeometryScene, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
+import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '../../src/renderers/css/preparation/presentation/index.js';
 import { prepareCelestialAssets } from './celestial/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
@@ -322,10 +323,19 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   }
   // Rings the radial lane drew as wedges tell the scene where each ring begins, by the atlas the geometry names.
   const ringWedges = Object.fromEntries((radial?.assets ?? []).flatMap(asset => 'wedges' in asset && asset.wedges ? [[asset.filename, asset.wedges] as const] : []));
-  const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig,
-    assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory });
+  // The lenses name every image a leaf can show, so content is prepared before the scene sizes its leaves.
   const contentReference = required(sources, 'content');
   const content = await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: relative(sourceDirectory, contentReference.path) } });
+  // Each leaf holds the widest image it can show at two texels per CSS pixel, measured from the files this run published.
+  const imagePixels = await widestLeafImages(descriptor.id, leafImageCandidates({ objectId: descriptor.id, profile: geometryConfig, raster: rasterConfig,
+    lenses: content.lenses, interior: raster.interior }), async url => {
+    if (!url.startsWith(rasterConfig.publicBase)) throw new TypeError(`${descriptor.id}: leaf image ${url} is not under ${rasterConfig.publicBase}.`);
+    const path = resolve(publicDirectory, url.slice(rasterConfig.publicBase.length));
+    const { width } = await sharp(path).metadata().catch((error: unknown) => { throw new Error(`${descriptor.id}: leaf image ${url} (${path}) cannot be measured.`, { cause: error }); });
+    return width ?? Number.NaN;
+  });
+  const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig,
+    assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory, imagePixels });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
   const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] });

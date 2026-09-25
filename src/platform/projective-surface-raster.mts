@@ -15,14 +15,21 @@ export const MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE = 32;
 export const PREPARED_PROJECTIVE_TEXTURE_LAYER_SCHEMA =
   "polycss-prepared-projective-texture-layer@1";
 
-/** The raster scale for a polar cap: only as fine as its texture. A cap's leaf samples `texturePixels` logical texture
- * pixels across `leafCssPixels`; the site ships 2x textures and every screen it serves shows at least 2 device pixels
- * per CSS px, so a scale of ceil(texturePixels / leafCssPixels) keeps every texture pixel. A higher configured scale only
- * enlarges the layer: on an iPhone each of Earth's caps took 36 MB at scale 4 against 2.3 MB at scale 1, with the
- * same pixels drawn. */
-export function polarCapRasterScale(configured: number, texturePixels: number, leafCssPixels: number): number {
-  if (!(texturePixels > 0) || !(leafCssPixels > 0)) throw new RangeError('A polar cap needs its texture and leaf size.');
-  return Math.min(configured, Math.max(1, Math.ceil(texturePixels / leafCssPixels)));
+/** Image texels per CSS pixel of every raster leaf: the @2x convention, one backing pixel per texel at DPR 2. WebKit backs a
+ * composited leaf at its box size times the device pixel ratio and ignores its transform, so a larger box costs memory and
+ * adds no detail: Itokawa's 794 faces held 486 MB of layers on a DPR 3 iPhone at one texel per CSS pixel and 173 MB at two
+ * (739 of 3.16 million screen pixels changed at rest), and each of Earth's caps 36 MB at raster scale 4 and 2.3 MB at 1. */
+export const TEXELS_PER_CSS_PIXEL = 2;
+
+/** The raster scale that shows a leaf's widest image at TEXELS_PER_CSS_PIXEL. `imagePixels` is the pixel width of the widest
+ * image the leaf can show, over every lens, texture level and page; `backgroundWidth` is its background-size width in CSS
+ * pixels at scale 1. The ceiling keeps a leaf that already holds more texels than that at its box: the recipe's raster
+ * scale for a projective leaf, 1 for a plain leaf whose box only ever shrinks. */
+export function leafRasterScale(imagePixels: number, backgroundWidth: number, ceiling: number): number {
+  if (!(imagePixels > 0) || !(backgroundWidth > 0) || !(ceiling > 0)) {
+    throw new RangeError(`Raster leaf scale needs a positive image width (${imagePixels} px), background width (${backgroundWidth} px) and ceiling (${ceiling}).`);
+  }
+  return Math.min(ceiling, imagePixels / backgroundWidth / TEXELS_PER_CSS_PIXEL);
 }
 
 export function prepareProjectiveTextureLayer(matrixValue: string | readonly number[], rasterScale = 1) {
@@ -31,8 +38,8 @@ export function prepareProjectiveTextureLayer(matrixValue: string | readonly num
       matrix[15] === 0) {
     throw new TypeError("Projective texture matrix is invalid.");
   }
-  if (!Number.isFinite(rasterScale) || rasterScale < 1) {
-    throw new RangeError("Projective texture raster scale must be at least one.");
+  if (!Number.isFinite(rasterScale) || rasterScale <= 0) {
+    throw new RangeError(`Projective texture raster scale must be positive, not ${rasterScale}.`);
   }
   const perspectiveX = matrix[3];
   const perspectiveY = matrix[7];

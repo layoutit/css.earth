@@ -58,7 +58,7 @@ class FakeElement {
   parentNode: FakeElement | null = null; className = ''; textContent = ''; clientWidth = 800; clientHeight = 600;
   readonly ownerDocument: FakeDocument;
   readonly localName: string;
-  constructor(ownerDocument: FakeDocument, localName = 'div') { this.ownerDocument = ownerDocument; this.localName = localName; Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
+  constructor(ownerDocument: FakeDocument, localName = 'div') { this.ownerDocument = ownerDocument; this.localName = localName; Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); Object.defineProperty(this.style, 'removeProperty', { value: (name: string) => { const value = this.style[name] ?? ''; delete this.style[name]; return value; } }); }
   get firstChild(): FakeElement | null { return this.children[0] ?? null; }
   get offsetWidth(): number { return this.textContent.length * 7; }
   get offsetHeight(): number { return 14; }

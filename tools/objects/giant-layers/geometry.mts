@@ -6,9 +6,16 @@ interface GeometryPolygon extends Omit<Parameters<typeof computeTextureAtlasPlan
   latitudeIndex?: number; longitudeIndex?: number; polarCap?: string; polarRole?: string;
   textureImageSource: {url:string;width:number;height:number;sourceRect:SourceRectangle};
 }
-type TextureLeafOptions = {seamEdges?: Set<number>; seamBleed?:number; fitSurface?:boolean; leafSize?:number};
+type TextureLeafOptions = {seamEdges?: Set<number>; seamBleed?:number; fitSurface?:boolean; leafSize?:number; imagePixels?:number};
+/** Pixel widths of the published images the leaves show, measured from what the preparation run wrote. */
+export interface BandedImagePixels {
+  /** The widest image a surface face can show, over every lens. */
+  surface: number;
+  /** The width of the image at a URL; a tiled plane shows its own. */
+  image: (url: string) => number;
+}
 import {buildSeamBleedPolygonEdges,computeTextureAtlasPlanPublic,resolvePolyTextureLeafGeometry,formatCssLength} from '@layoutit/polycss';
-import {createProjectiveSurfaceRasterPresentation,fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout,polarCapRasterScale,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
+import {createProjectiveSurfaceRasterPresentation,fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout,leafRasterScale,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
 import {ellipsoidPoint} from '../material-composition/ellipsoid.mts';
 
 const presentation={backend:'image',lighting:'source',projection:'projective'} as const;
@@ -43,28 +50,33 @@ function polarPolygon(config:BandedGeometryRecipe,pole:'north'|'south',role:stri
   return{latitudeIndex:north?latitudeSegments-1:0,vertices:north?[[-radius,-radius,z],[radius,-radius,z],[radius,radius,z],[-radius,radius,z]]:[[-radius,radius,z],[radius,radius,z],[radius,-radius,z],[-radius,-radius,z]],uvs:north?[[0,0],[1,0],[1,1],[0,1]]:[[0,1],[1,1],[1,0],[0,0]],texture:polar.url,textureImageSource:source(polar.url,polar.tileSize*(polar.separateInnerTiles?4:2),polar.tileSize,{x:tile*polar.tileSize,y:0,width:polar.tileSize,height:polar.tileSize}),texturePresentation:presentation,color:config.surface.color,polarCap:pole,polarRole:role};
 }
 
-function textureLeaf(config:BandedGeometryRecipe,polygon:GeometryPolygon,index:number,{seamEdges,seamBleed=0,fitSurface=false,leafSize}:TextureLeafOptions){
+function textureLeaf(config:BandedGeometryRecipe,polygon:GeometryPolygon,index:number,{seamEdges,seamBleed=0,fitSurface=false,leafSize,imagePixels}:TextureLeafOptions){
   const plan=computeTextureAtlasPlanPublic(polygon,index,{...config.planOptions,seamBleed,...(seamEdges?{seamEdges}:{})}),geometry=plan&&resolvePolyTextureLeafGeometry(plan,presentation);
   if(!geometry)throw new Error(`Retained texture leaf ${index} did not prepare.`);
   let fitted=leafSize?fitTextureGeometry(geometry,leafSize,leafSize):geometry;if(fitSurface)fitted=fitProjectiveTextureGeometryToStableLayout(fitted);
-  const rasterScale=polygon.polarCap?polarCapRasterScale(config.surface.rasterScale,polygon.textureImageSource.sourceRect.width,fitted.leafWidth):config.surface.rasterScale;
   const address=fitSurface?createProjectiveSurfaceRasterPresentation({sourceWidth:config.surface.width,sourceHeight:config.surface.height,sourceRect:polygon.textureImageSource.sourceRect,addressSourceWidth:polygon.textureImageSource.width,addressSourceHeight:polygon.textureImageSource.height,addressSourceRect:polygon.textureImageSource.sourceRect,backgroundPosition:fitted.backgroundPosition,backgroundSize:fitted.backgroundSize,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,...(config.latitudeBoundsDegrees?{bands:latitudeRasterBands(config.latitudeBoundsDegrees,config.surface.height)}:{bandCount:config.latitudeSegments}),gutter:config.surface.gutter,overscan:config.surface.overscan}):fitted;
+  // Only a surface face is a raster layer. It holds its widest image at TEXELS_PER_CSS_PIXEL, the recipe's scale as the ceiling:
+  // at scale 4 Jupiter's 4,160 px lenses sat at one texel per CSS pixel, 768 faces estimated at 257 MB of layers at DPR 3, 64 at two.
+  const projectiveLayer=()=>{
+    if(imagePixels===undefined)throw new TypeError(`Surface leaf ${index} (${polygon.texture}): the width of the widest image it shows is missing.`);
+    return{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,leafRasterScale(imagePixels,address.backgroundSize[0],config.surface.rasterScale))};
+  };
   if(config.leafRecord==='explicit'){
     const length=(value:number)=>value===0?'0px':formatCssLength(value);
-    return{style:`transform:matrix3d(${fitted.matrix});width:${length(fitted.leafWidth)};height:${length(fitted.leafHeight)};background-position:${address.backgroundPosition.map(length).join(' ')};background-size:${address.backgroundSize.map(length).join(' ')}`,...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,rasterScale)}:{})};
+    return{style:`transform:matrix3d(${fitted.matrix});width:${length(fitted.leafWidth)};height:${length(fitted.leafHeight)};background-position:${address.backgroundPosition.map(length).join(' ')};background-size:${address.backgroundSize.map(length).join(' ')}`,...(fitSurface?projectiveLayer():{})};
   }
   const compact=config.leafRecord==='compact';
   const position=address.backgroundPosition.map(value=>!compact&&value===0?'0px':formatCssLength(value)).join(' '),size=address.backgroundSize.map(value=>formatCssLength(value)).join(' ');
   const dimensions=compact?(fitted.leafWidth===64?'':`;--polycss-atlas-width:${formatCssLength(fitted.leafWidth)}`)+(fitted.leafHeight===64?'':`;--polycss-atlas-height:${formatCssLength(fitted.leafHeight)}`):(fitted.leafWidth===64&&fitted.leafHeight===64?'':`;--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px`);
   return{...(compact?{tag:'s'}:{}),style:`transform:matrix3d(${fitted.matrix})${dimensions}${compact&&polygon.polarCap?`;background-image:url(${fitted.url})`:''};background-position:${position};background-size:${size}`,
-    ...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,rasterScale)}:{}),...(!compact?{sourceRect:fitted.sourceRect,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,projection:fitted.projection,lighting:'source',lightingOverlay:false}:{})};
+    ...(fitSurface?projectiveLayer():{}),...(!compact?{sourceRect:fitted.sourceRect,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,projection:fitted.projection,lighting:'source',lightingOverlay:false}:{})};
 }
 
-export function prepareBandedEllipsoid(input:unknown){
+export function prepareBandedEllipsoid(input:unknown,images:BandedImagePixels){
   const config = parse(input, bandedGeometryRecipe, 'banded ellipsoid recipe');
   if(config?.schema!=='cssearth-banded-ellipsoid@1'||!['fraction','step','bounds'].includes(config.coordinateArithmetic)||!['compact','annotated','explicit'].includes(config.leafRecord))throw new TypeError('Invalid banded ellipsoid recipe.');
   if(!Number.isInteger(config.latitudeSegments)||config.latitudeSegments<3||!Number.isInteger(config.longitudeSegments)||config.longitudeSegments<3||config.latitudeSegments*config.longitudeSegments>100000)throw new TypeError('Invalid ellipsoid tessellation.');
-  if(config.coordinateArithmetic==='bounds')return prepareLatitudeBoundGeometry(config);
+  if(config.coordinateArithmetic==='bounds')return prepareLatitudeBoundGeometry(config,images);
   const topology=[];for(let lat=1;lat<config.latitudeSegments-1;lat++)for(let lon=0;lon<config.longitudeSegments;lon++)topology.push(bodyPolygon(config,lat,lon,0));
   const seams=buildSeamBleedPolygonEdges(topology,{tileSize:config.planOptions.tileSize,layerElevation:config.planOptions.layerElevation});
   if(config.verifyWrapSeams)for(const[index,polygon]of topology.entries())if(polygon.longitudeIndex===0&&!seams.get(index)?.has(3)||polygon.longitudeIndex===config.longitudeSegments-1&&!seams.get(index)?.has(1))throw new Error('Ellipsoid longitude wrap edge is not shared.');
@@ -74,7 +86,7 @@ export function prepareBandedEllipsoid(input:unknown){
     const leaf=textureLeaf(config,polygon,prepared.length,{leafSize:config.polar.fitToTile?config.polar.tileSize:undefined});prepared.push({latitudeIndex:polygon.latitudeIndex,leaf:{tag:'s',className,...leaf}});
   }
   let index=0;for(let lat=1;lat<config.latitudeSegments-1;lat++)for(let lon=0;lon<config.longitudeSegments;lon++){
-    const polygon=bodyPolygon(config,lat,lon,config.surface.overlap);prepared.push({latitudeIndex:lat,leaf:{tag:'s',className:config.classes.surface,...textureLeaf(config,polygon,index,{seamEdges:seams.get(index),seamBleed:config.surface.seamBleed,fitSurface:true,leafSize:config.surface.leafSize})}});index++;
+    const polygon=bodyPolygon(config,lat,lon,config.surface.overlap);prepared.push({latitudeIndex:lat,leaf:{tag:'s',className:config.classes.surface,...textureLeaf(config,polygon,index,{seamEdges:seams.get(index),seamBleed:config.surface.seamBleed,fitSurface:true,leafSize:config.surface.leafSize,imagePixels:images.surface})}});index++;
   }
   const bodyBands=Array.from({length:config.latitudeSegments},(_,latitudeIndex)=>({latitudeIndex,...(config.rotationSeconds?{latitudeDegrees:Number((-90+(latitudeIndex+0.5)*180/config.latitudeSegments).toFixed(3)),visualRotationSeconds:config.rotationSeconds}:{}),leaves:prepared.filter(item=>item.latitudeIndex===latitudeIndex).map(item=>item.leaf)}));
   const planes:Record<string,ReturnType<typeof textureLeaf>&{className?:string}>={};for(const plane of config.planes??[]){
@@ -89,7 +101,7 @@ export function latitudeRasterBands(bounds:number[],height:number){
   return Array.from({length:bounds.length-1},(_,index)=>{const y=Math.round((90-bounds[index+1])/180*height),bottom=Math.round((90-bounds[index])/180*height);return{y,height:bottom-y};});
 }
 
-function prepareLatitudeBoundGeometry(config:BandedGeometryRecipe){
+function prepareLatitudeBoundGeometry(config:BandedGeometryRecipe,images:BandedImagePixels){
   if(!config.latitudeBoundsDegrees)throw new TypeError('Latitude bounds are missing.');
   latitudeRasterBands(config.latitudeBoundsDegrees,config.surface.height);
   const overlap=config.surface.overlap;
@@ -98,12 +110,17 @@ function prepareLatitudeBoundGeometry(config:BandedGeometryRecipe){
   const topology=[];for(let latitude=1;latitude<=config.latitudeSegments;latitude++)for(let longitude=0;longitude<config.longitudeSegments;longitude++)topology.push(bodyPolygon(config,latitude,longitude,0));
   const seams=buildSeamBleedPolygonEdges(topology,{tileSize:config.planOptions.tileSize,layerElevation:config.planOptions.layerElevation});
   if(config.verifyWrapSeams)for(const[index,polygon]of topology.entries())if(polygon.longitudeIndex===0&&!seams.get(index)?.has(3)||polygon.longitudeIndex===config.longitudeSegments-1&&!seams.get(index)?.has(1))throw new Error('Ellipsoid longitude wrap edge is not shared.');
-  const body=topology.map((entry,index)=>({latitudeIndex:entry.latitudeIndex,longitudeIndex:entry.longitudeIndex,tag:'s',...textureLeaf(config,bodyPolygon(config,entry.latitudeIndex,entry.longitudeIndex,overlap),index,{seamEdges:seams.get(index),fitSurface:true})}));
+  const body=topology.map((entry,index)=>({latitudeIndex:entry.latitudeIndex,longitudeIndex:entry.longitudeIndex,tag:'s',...textureLeaf(config,bodyPolygon(config,entry.latitudeIndex,entry.longitudeIndex,overlap),index,{seamEdges:seams.get(index),fitSurface:true,imagePixels:images.surface})}));
   const poles=['inner','outer'].flatMap(role=>(['south','north'] as const).map((pole,index)=>({latitudeIndex:pole==='north'?config.latitudeSegments-1:0,pole,tag:'s',className:replace(config.classes[role==='inner'?'polarInner':'polarSurface'],{pole}),...textureLeaf(config,polarPolygon(config,pole,role),index,{})})));
   const ringLeaves=[];for(const tile of config.tiledPlanes??[]){
     const radius=tile.radius*tile.worldScale,diameter=radius*2,size=diameter/tile.grid;
+    // WebKit backs a tile at its box times the device pixel ratio, whatever its transform. Jupiter's page held 2,650 MB of
+    // layers on the iPhone 17 simulator (DPR 3), about 147 MB for each of 16 tiles of 6,894 CSS px showing a 2,048 px image at
+    // one texel per 13 CSS px. The box now holds the image at TEXELS_PER_CSS_PIXEL (a 258 px tile, an estimated 2.3 MB) and
+    // the matrix scales it back onto the plane.
+    const k=leafRasterScale(images.image(tile.url),diameter,1),box=(value:number)=>(value*k).toFixed(6),scale=Number((1/k).toFixed(9));
     for(let index=0;index<tile.grid**2;index++){const column=index%tile.grid,row=Math.floor(index/tile.grid),overlapX=column===tile.grid-1?0:tile.overlap,overlapY=row===tile.grid-1?0:tile.overlap;
-      ringLeaves.push({component:tile.id,tileIndex:index,tileColumn:column,tileRow:row,className:tile.className,style:`width:${(size+overlapX).toFixed(6)}px;height:${(size+overlapY).toFixed(6)}px;transform:translate3d(${(-radius+column*size).toFixed(6)}px,${(-radius+row*size).toFixed(6)}px,0px);background-image:url("${tile.url}");background-position:${(-column*size).toFixed(6)}px ${(-row*size).toFixed(6)}px;background-size:${diameter.toFixed(6)}px ${diameter.toFixed(6)}px`});
+      ringLeaves.push({component:tile.id,tileIndex:index,tileColumn:column,tileRow:row,className:tile.className,style:`width:${box(size+overlapX)}px;height:${box(size+overlapY)}px;transform:matrix3d(${scale},0,0,0,0,${scale},0,0,0,0,1,0,${(-radius+column*size).toFixed(6)},${(-radius+row*size).toFixed(6)},0,1);background-image:url("${tile.url}");background-position:${box(-column*size)}px ${box(-row*size)}px;background-size:${box(diameter)}px ${box(diameter)}px`});
     }
   }
   return{leaves:[...body,...poles],ringLeaves};

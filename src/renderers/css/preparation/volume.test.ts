@@ -42,7 +42,7 @@ function compile(q: Quad, vertices: Quad['vertices'] = q.vertices) {
   assert(geometry, `Missing image/projective geometry for ${q.id}`);
   return geometry;
 }
-function imageWorld(g: ReturnType<typeof compile>, u: number, v: number): Vector3 {
+function imageWorld(g: Pick<ReturnType<typeof compile>, 'matrix' | 'leafWidth' | 'leafHeight'>, u: number, v: number): Vector3 {
   const m = g.matrix.split(',').map(Number);
   assert(m.length === 16 && m.every(Number.isFinite));
   const coefficient = (index: number): number => { const value = m[index]; assert(value !== undefined); return value; };
@@ -168,6 +168,38 @@ test('volume compilation omits only lossless-alpha empty slabs, preserving every
   assert.deepEqual(sparse.resources, complete.resources.filter(resource => !omittedPaths.has(resource.path)));
   const faint = compileCssVolume({ ...options, slices: { ...slices, quads: slices.quads.map(quad => ({ ...quad, alphaCoverage: Number.MIN_VALUE })) } });
   assert.deepEqual(faint, complete, 'no nonzero coverage threshold may remove a faint slab');
+});
+
+test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the plane PolyCSS gave them', async () => {
+  const { compileCssVolume } = await import('./volume.js');
+  const { TEXELS_PER_CSS_PIXEL } = await import('../../../platform/projective-surface-raster.mts');
+  const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
+  const { parseVolumeRecipe } = await import('@cssearth/volume-core/contracts/volume-recipe');
+  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/volume-bake/slices/density').VolumeSlices;
+  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
+  const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
+  const volume = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, recipe, slices });
+  const quads = new Map(slices.quads.map(quad => [quad.id, quad]));
+  let leaves = 0, maximumError = 0;
+  for (const leaf of volume.stacks.flatMap(stack => stack.leaves)) {
+    const quad = quads.get(leaf.id);
+    assert(quad, `${leaf.id} has no source quad`);
+    const polycss = compile(parseQuad(quad)), width = Number.parseFloat(leaf.style.width), height = Number.parseFloat(leaf.style.height);
+    // The one-texel-per-pixel box WebKit backed at nine device pixels per texel on a DPR 3 phone.
+    assert.equal(polycss.leafWidth, leaf.widthPx, `${leaf.id}: PolyCSS no longer sizes an image leaf by its texture`);
+    assert.equal(leaf.widthPx / width, TEXELS_PER_CSS_PIXEL, `${leaf.id}: ${leaf.widthPx} texels across ${leaf.style.width}`);
+    assert.equal(leaf.heightPx / height, TEXELS_PER_CSS_PIXEL, `${leaf.id}: ${leaf.heightPx} texels down ${leaf.style.height}`);
+    assert.equal(leaf.style.backgroundSize, `${leaf.style.width} ${leaf.style.height}`);
+    assert.equal(leaf.style.backgroundPosition, '0px 0px');
+    const dense = { matrix: leaf.style.transform.slice('matrix3d('.length, -1), leafWidth: width, leafHeight: height };
+    for (const [u, v] of [[0, 0], [1, 0], [1, 1], [0, 1], [0.37, 0.61]] as const) {
+      const a = imageWorld(polycss, u, v), b = imageWorld(dense, u, v);
+      maximumError = Math.max(maximumError, Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]));
+    }
+    leaves++;
+  }
+  assert(leaves > 0, 'The real prepared bank must compile slices');
+  assert(maximumError < 1e-9, `A dense slice moved by ${maximumError} units`);
 });
 
 test('prepared volume plane order bounds first-pivot depth without changing coplanar order', async () => {
