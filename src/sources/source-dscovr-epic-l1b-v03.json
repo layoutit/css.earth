@@ -8,13 +8,13 @@
   "links": [
     {
       "role": "landing",
-      "url": "https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/",
-      "label": "Source"
-    },
-    {
-      "role": "documentation",
       "url": "https://epic.gsfc.nasa.gov/about",
       "label": "EPIC"
+    },
+    {
+      "role": "archive",
+      "url": "https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/",
+      "label": "AVDC Level 1B v03"
     }
   ],
   "evidence": [
